@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "transvaalia-billboard.webp",
-      "bytes": 5812,
-      "sha256": "859f7886f3ca37d073270063eb978b2b48c27d02e3f12719bd37e314e676c1b6"
-    },
-    {
-      "location": "public",
       "filename": "transvaalia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -22,26 +16,26 @@
     {
       "location": "public",
       "filename": "transvaalia-elevation-shadow-alpha@2x.webp",
-      "bytes": 539196,
-      "sha256": "7a05fbeec9846d66ad6daacd29f8a1d52738c059e00306391bef89b277491117"
+      "bytes": 382692,
+      "sha256": "2e2ff115cf554eb5b98e8adb0c74a0a995b8a430ae0c45687eb846ddad767b37"
     },
     {
       "location": "public",
       "filename": "transvaalia-elevation-shadow@2x.webp",
-      "bytes": 146514,
-      "sha256": "ee235b684e2485314ba97ddda11a3b9783ac847d2bc02dd95f8cde313da6f098"
+      "bytes": 120536,
+      "sha256": "113f23551ab776d881902c61d21263791ab6f54d327315245336112901052070"
     },
     {
       "location": "public",
       "filename": "transvaalia-elevation-surface-alpha@2x.webp",
-      "bytes": 596748,
-      "sha256": "fed7ac1e313fb01657d4a1f58fdd752f3c29311f6e502c2f9e8f08ec63c88102"
+      "bytes": 427068,
+      "sha256": "3e568ea715dc9f4dd1e936fd6961238b0ad5eec759019a9c68551c8f90afe7c1"
     },
     {
       "location": "public",
       "filename": "transvaalia-elevation-surface@2x.webp",
-      "bytes": 209916,
-      "sha256": "7b111c86d821dac93aa312470a0b67f07bb30a3a1976b6100fc84720946e0ccd"
+      "bytes": 166852,
+      "sha256": "2a27f45599f0fe329a696a040eaeab3069d63e0033f1da375c55ff112aa9c50f"
     },
     {
       "location": "public",
@@ -52,26 +46,26 @@
     {
       "location": "public",
       "filename": "transvaalia-shape-shadow-alpha@2x.webp",
-      "bytes": 447676,
-      "sha256": "c5a4e6aa10be0fd6c83c045bca39e893bc82a3a52105f3b37ef2311d2f33d5ac"
+      "bytes": 305136,
+      "sha256": "94547ffd80bbe0e8a24b89af6051427ed581b9532389f0a5f4a0d5244593d2b2"
     },
     {
       "location": "public",
       "filename": "transvaalia-shape-shadow@2x.webp",
-      "bytes": 60858,
-      "sha256": "bbc7977999e35fba702200fe97db73922fcac7b167074b530f935dea8701963a"
+      "bytes": 49586,
+      "sha256": "c7aba2b650b3f705b325c93e0a0e4646850c890f1894f376ee611930c5277a9c"
     },
     {
       "location": "public",
       "filename": "transvaalia-shape-surface-alpha@2x.webp",
-      "bytes": 438402,
-      "sha256": "7a1ff2e797a4c1dc9b7d7ded58f47df4bcf9bd4139c719fd022607da14b3fb24"
+      "bytes": 301912,
+      "sha256": "8b1c2ecb44e9541f2b8a323a24af8c4639a7f13058fc7c6d265052221e1ca220"
     },
     {
       "location": "public",
       "filename": "transvaalia-shape-surface@2x.webp",
-      "bytes": 54006,
-      "sha256": "ed96f475cca1aafa352ad623ac1bebd040aeff92dff69f5645d2772180d843d7"
+      "bytes": 44052,
+      "sha256": "7839a985c611df0a957cdb668f7179ba8ea043e6fa8e1b0cb19a53e4751c33b4"
     },
     {
       "location": "public",
@@ -107,25 +101,25 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1477,
-      "sha256": "6ad4b5abef826849cb071727243de1996365f12171ec07f2b878c2a6ff34a9ac"
+      "sha256": "9373be10b8f96126f8a8d8caa66e4b16aaea9141cfd251752092fe19c205b3cb"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 2965,
-      "sha256": "2da5892743c58a45494dd76cb33bec7349f71b7be03762c2bcabac1a1175997f"
+      "bytes": 2968,
+      "sha256": "43f6235cdd02ab43544b2f2f9f709e67593f032de9742958b77e4fd4e813f13b"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 4508,
-      "sha256": "21ea486a07b02c9349b29bac6d408682b29289a04bc7320bf3de1e60ef5ef781"
+      "bytes": 4588,
+      "sha256": "69bc86f055329a63dff131ca2f9919081764ac02958aa4bae7ba52294ad5551c"
     },
     {
       "location": "prepared",
@@ -136,14 +130,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 500868,
-      "sha256": "cff813c486ccc6ced3c8a3ed997ed3e6c16b87fb1af3256792e48996e69536b6"
+      "bytes": 195787,
+      "sha256": "50f7e5a2219bfdd8d3a23ae4d384216079b60f3d3c1d4b8da387cf3ccef2b6bf"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 600347,
-      "sha256": "909e733ff254011283f9ac158843baaf54e4b390a8e123eddcfe34e3447ef274"
+      "bytes": 218443,
+      "sha256": "b49d51c4928534ef32f4c996eafcbc54901e688708980a471dc3e1c8d8502d04"
     },
     {
       "location": "prepared",
@@ -160,8 +154,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2974,
-      "sha256": "c9bb5b8b41cba8292dad6a1f91365fb3840d2233ed34238b645586cccf7a67ac"
+      "bytes": 2977,
+      "sha256": "436dd63f7855c8c0139b3e6e4e58c0665138f85961efdaef08552c93df68b718"
     },
     {
       "location": "prepared",

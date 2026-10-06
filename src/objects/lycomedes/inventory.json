@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "lycomedes-billboard.webp",
-      "bytes": 4564,
-      "sha256": "179c6f3fe231f7489c8e791610ee9f4b063e57a4630ac06c4b17c8ffaaa811b9"
-    },
-    {
-      "location": "public",
       "filename": "lycomedes-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -22,26 +16,26 @@
     {
       "location": "public",
       "filename": "lycomedes-elevation-shadow-alpha@2x.webp",
-      "bytes": 517954,
-      "sha256": "ea9ec29f941eccc4361882849a19ddf5d2d49f68bc81f138e6d4aa44d444de36"
+      "bytes": 378998,
+      "sha256": "5da86af8b6fff085f279194ee08aa0dd65cbce37ded8089ee77559d2799234d9"
     },
     {
       "location": "public",
       "filename": "lycomedes-elevation-shadow@2x.webp",
-      "bytes": 138192,
-      "sha256": "a74edd667d00470e9133fce90841022944e1cffcc43f3bedd27a11d8058cbe79"
+      "bytes": 115136,
+      "sha256": "da00ce94a0de64b4ef72182b777609cdfd390e7285c8000eda91976637e56f2f"
     },
     {
       "location": "public",
       "filename": "lycomedes-elevation-surface-alpha@2x.webp",
-      "bytes": 570002,
-      "sha256": "bc60a668b40abc3119626c95ad90ed90b10d6476d32fdf2028284496c4e93155"
+      "bytes": 424072,
+      "sha256": "4eefcd5c0b1f1e0fd81bae7bef72ef8c24388289dda40ff7d6d945a47db9e2bb"
     },
     {
       "location": "public",
       "filename": "lycomedes-elevation-surface@2x.webp",
-      "bytes": 196744,
-      "sha256": "664ed271d3a4d5a1701c53a8b8a5dd56e0a022a107264a436b139e6ab630050b"
+      "bytes": 164128,
+      "sha256": "5af274726c4c9742a5b2a7f92e0bb39daeba624d7ac32261a90911257664c1ac"
     },
     {
       "location": "public",
@@ -52,26 +46,26 @@
     {
       "location": "public",
       "filename": "lycomedes-shape-shadow-alpha@2x.webp",
-      "bytes": 429804,
-      "sha256": "971036e720386e95296220a8c3c2535bf8451b5f40bfcc8c3406f4ad447233a7"
+      "bytes": 303958,
+      "sha256": "82fd9128e3768dce3532302aedbf795bd8741e78fbbaa19dd560c3209e2e47cb"
     },
     {
       "location": "public",
       "filename": "lycomedes-shape-shadow@2x.webp",
-      "bytes": 59568,
-      "sha256": "64459116db6210af59cf3196a4fd5230fc6b36971c89b9dc7762bc79d3142d10"
+      "bytes": 49418,
+      "sha256": "6894811932711992df13005ae17e42d75eab9a6f72aead7f0f6a444601c76b78"
     },
     {
       "location": "public",
       "filename": "lycomedes-shape-surface-alpha@2x.webp",
-      "bytes": 421872,
-      "sha256": "f3d56c9609fa8a1b58dd972502243c1c6843e934cdd69e404bb23dc4c3257933"
+      "bytes": 302548,
+      "sha256": "f79c9ece600f474bf5af8a2160d3385a836cfc49dc279265f17d8e384c1830de"
     },
     {
       "location": "public",
       "filename": "lycomedes-shape-surface@2x.webp",
-      "bytes": 52870,
-      "sha256": "d4e1a071228435e49afb58e1e09da49130b8d259bb1120be3d1c7d0102362e11"
+      "bytes": 44714,
+      "sha256": "f4c18a79bdd7bc3544c6e374b9b66abf400b08af6649d240f502485ad25b3a19"
     },
     {
       "location": "public",
@@ -107,25 +101,25 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1427,
-      "sha256": "dc3d73e950cab9ecfa8a291b4582ffa2ac1f814c8ac9a1d2a6192c4e6b735d34"
+      "sha256": "9033a1ba7bb3cc4111f5fc607e8d6d773ca2cd9968cc0170dc50af8eda65c147"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 3213,
-      "sha256": "356e93678b3bacf87fc8e9d9c8905abe454e4ca2ebb30b52e32177953433b178"
+      "bytes": 3219,
+      "sha256": "ed8f788509d1f16c906bd15aca270bea80bc246ddd70df974998f2ee9205b599"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 4566,
-      "sha256": "5320e1552d28ccbb4c90693f230506083fe4befab90f42e174803450aab0c462"
+      "bytes": 4508,
+      "sha256": "2a6e27f91d3f996e2884acac1c4a87514c6c6d0e6a5beb120102228b709d97a8"
     },
     {
       "location": "prepared",
@@ -136,14 +130,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 501422,
-      "sha256": "0ac588e317061c41e486f2a56178753f3c9272204a4c7671c4f5a0e8d721e616"
+      "bytes": 202948,
+      "sha256": "61c8b488da1c79a5aa15ecdb37e9f859fc104bd9c48704f2106de2b699cc171c"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 600994,
-      "sha256": "2b7bf13e8180a1b0cb23b3aff30f94c2da4fdec4c0037edcbae09bb1c7082c95"
+      "bytes": 225354,
+      "sha256": "234ac69f76cdef157a85a764443a1cef21da432b9ade19142280dcfc2f355070"
     },
     {
       "location": "prepared",
@@ -160,8 +154,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3220,
-      "sha256": "faba2d07b1d5dcc4ce3e89aff9a90dadf8ebfe14325997f7cda43ba6b9effe11"
+      "bytes": 3226,
+      "sha256": "470eecdee1f399d459e07df25652dda95a5436a4448baaa9e2f49d01071daeb9"
     },
     {
       "location": "prepared",

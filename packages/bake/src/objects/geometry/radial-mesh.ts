@@ -7,7 +7,7 @@ import { repairImageDemDiagonals, measureImageDemReduction } from './image-dem-r
 import { validateObservedReduction } from './open-surface.ts';
 
 /** `targetFaces` is an authored face count. Without one the error bound decides: the shape is reduced to the fewest
- * faces within `maximumErrorMeters`, and the profile's face budget is the most it may keep. */
+ * faces whose surface stays within `maximumErrorMeters` of the source, and the profile's face budget is the most it may keep. */
 export interface RadialSimplification {method?: string; targetFaces?: number; maximumErrorMeters: number; regularize?: boolean; prune?: boolean;}
 export interface TerrainMesh extends SourceMesh {
   coverage?: Record<string, unknown>; lockedPositions?: readonly number[][]; imagePlaneCoordinates?: number[][];
@@ -87,7 +87,23 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
     ? MeshoptSimplifier.simplifyWithAttributes(sourceIndices, packedPositions, 3,
       new Float32Array(), 0, [], locks, targetIndices, errorLimit, flags)
     : MeshoptSimplifier.simplify(sourceIndices, packedPositions, 3, targetIndices, errorLimit, flags);
-  const [simplified, error] = reduce(maximumErrorMeters);
+  let [simplified, error] = reduce(maximumErrorMeters);
+  // The simplifier stops on its own estimate, which is not a distance: Ino's shape, reduced to its 2,300 m bound by that
+  // estimate, left 1.9% of its elevation texels farther from the source than the same bound lets the map sample
+  // (2026-10-06). Where the bound decides the face count it is therefore held on the sampled distance to the source,
+  // by the coarsest stopping error whose surface stays within it.
+  let sampled: number | null | undefined;
+  if (targetFaces === undefined && preserveSource && !open && !imagePlane) {
+    sampled = sampledSourceDistance(mesh, positions, simplified, maximumErrorMeters);
+    if (sampled === null) {
+      let low = 0, high = maximumErrorMeters, kept: [Uint32Array, number, number] = [...reduce(0), 0];
+      for (let step = 0; step < 10; step++) {
+        const middle = (low + high) / 2, [candidate, estimate] = reduce(middle), distance = sampledSourceDistance(mesh, positions, candidate, maximumErrorMeters);
+        if (distance === null) high = middle; else { low = middle; kept = [candidate, estimate, distance]; }
+      }
+      [simplified, error, sampled] = kept;
+    }
+  }
   // Edge collapses can leave exactly coincident, oppositely wound face pairs
   // (zero-volume fins). Cancel only those exact pairs, then require closure.
   // No positions are moved and no source feature is approximated in cleanup.
@@ -115,10 +131,30 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
     ...(targetFaces === undefined ? {} : { targetFaces }), outputFaces: faces.length, removedOppositeFaces: (simplified.length - indices.length) / 3,
     maximumErrorMeters, ...(imagePlane ? { imageReduction, optimizerError: error,
       optimizerErrorUnits: 'Combined planar and normalized height metric; physical metre deviations measured separately.' }
-      : { estimatedErrorMeters: error }), topology,
+      : { estimatedErrorMeters: error, ...(sampled == null ? {} : { sampledErrorMeters: sampled }) }), topology,
     ...(locks ? { lockedVertices: locks.reduce((sum, n) => sum + n, 0) } : {}),
     ...(open ? { sourceTopology: 'open', sourceOrientation: mesh.sourceOrientation } : {}) };
   return faces;
+}
+
+/** Points a reduced triangle is sampled at, along each edge: 45 a triangle with its corners, which are source vertices. */
+const SOURCE_DISTANCE_STEPS = 8;
+/** The largest distance from a reduced surface to its source over a grid of points on every triangle, or null when one
+ * of them has no source surface within `bound`. Sampled, so not a continuous Hausdorff distance. */
+function sampledSourceDistance(source: TerrainMesh, positions: readonly (readonly number[])[], indices: Uint32Array, bound: number): number | null {
+  let maximum = 0;
+  const steps = SOURCE_DISTANCE_STEPS;
+  for (let i = 0; i < indices.length; i += 3) {
+    const a = positions[indices[i]], b = positions[indices[i + 1]], c = positions[indices[i + 2]];
+    for (let u = 0; u <= steps; u++) for (let v = 0; v <= steps - u; v++) {
+      const w = steps - u - v;
+      if (u === steps || v === steps || w === steps) continue;
+      const hit = source.closestPoint([0, 1, 2].map(axis => (a[axis] * w + b[axis] * u + c[axis] * v) / steps), bound, false);
+      if (!hit) return null;
+      maximum = Math.max(maximum, hit.distanceMeters);
+    }
+  }
+  return maximum;
 }
 
 /** Edge incidents establish orientation without assuming a radial surface or

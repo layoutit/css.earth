@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "tethys-billboard.webp",
-      "bytes": 18716,
-      "sha256": "68e2947e1b9c1139a6e784c4059d3cff34a3874e28136affc67f2047e63cdbcd"
-    },
-    {
-      "location": "public",
       "filename": "tethys-elevation-legend.webp",
       "bytes": 240,
       "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
@@ -22,26 +16,26 @@
     {
       "location": "public",
       "filename": "tethys-elevation-shadow-alpha@2x.webp",
-      "bytes": 319560,
-      "sha256": "0f76e221c5c6db6247d0778af66a2245be784907f41b5922ca0bbb7c5f5239d9"
+      "bytes": 255028,
+      "sha256": "8cb441ea289a696bcab6fed8ac808efe214bd59a827cdcd959e6d1321118be7d"
     },
     {
       "location": "public",
       "filename": "tethys-elevation-shadow@2x.webp",
-      "bytes": 136666,
-      "sha256": "50369a63c66a4bd44be3ac87a81eafbec013c10c1dfe1b8f50e93e4dad2b021d"
+      "bytes": 115318,
+      "sha256": "872ae657129df2426eaa4a349f7f928f8b29364531715180d9ecbc43e5c6ce45"
     },
     {
       "location": "public",
       "filename": "tethys-elevation-surface-alpha@2x.webp",
-      "bytes": 464904,
-      "sha256": "90fc9f15935ece4d8ea9f2755865801923b14de601c812365c943deadf93ac3f"
+      "bytes": 393650,
+      "sha256": "2492cb31d395d486a145c0d971f7a1cd4b2cccf46b7620589cc9f056d9747322"
     },
     {
       "location": "public",
       "filename": "tethys-elevation-surface@2x.webp",
-      "bytes": 331530,
-      "sha256": "f90551601f7852c0a8105e0969296d3f2139eeb07b785b66d2e7519de72c3998"
+      "bytes": 298932,
+      "sha256": "627f88c909daee41ec7d9d05c425f3c78c657de29d16f1d9d703615d037c7b71"
     },
     {
       "location": "public",
@@ -52,26 +46,26 @@
     {
       "location": "public",
       "filename": "tethys-enhanced-shadow-alpha@2x.webp",
-      "bytes": 365488,
-      "sha256": "effd7176a1f1300d8f44202b935a7066100eff706c60143b374a86bb2779ee13"
+      "bytes": 311882,
+      "sha256": "67a492768299ffe51ee88b0f9c9939445e5c7bef55f2e0b5f6ce4e00617c8d3f"
     },
     {
       "location": "public",
       "filename": "tethys-enhanced-shadow@2x.webp",
-      "bytes": 272550,
-      "sha256": "eb41cafe8c9b3f7f7047ac97b8f9d3600cd6e809c58f03f226fb8120c2c2eaf7"
+      "bytes": 260598,
+      "sha256": "a375e07c272e8a9250e724981da5bf9f3fa97e60360e225f5a09dd0bec31982a"
     },
     {
       "location": "public",
       "filename": "tethys-enhanced-surface-alpha@2x.webp",
-      "bytes": 669944,
-      "sha256": "672e61395e101543781175151eb031b716af8385b023f7c99adac02065c96e8b"
+      "bytes": 591716,
+      "sha256": "355963c55542aaefe82eb1db472b23db2196e309e1265f83da5c07bbc3313b6d"
     },
     {
       "location": "public",
       "filename": "tethys-enhanced-surface@2x.webp",
-      "bytes": 708074,
-      "sha256": "6d49fb151d0023ef8814fbaa51ac2bcf058d1cea734d41ce9491036b3648026a"
+      "bytes": 692714,
+      "sha256": "7dd18a801ea781e33cffd3a70ade6c6a182bc5b627a9a7d7fc0420fb30fa08c2"
     },
     {
       "location": "public",
@@ -82,8 +76,8 @@
     {
       "location": "public",
       "filename": "tethys-features.json",
-      "bytes": 59179,
-      "sha256": "7734cb2d2bfbb2760310667b70a0ea802476490b6c9420f26612bf031b12c375"
+      "bytes": 59142,
+      "sha256": "e93bcab5461ca05a96e4bfb75586114268f9c76f280ef00fa60d7d71227fe696"
     },
     {
       "location": "public",
@@ -94,26 +88,26 @@
     {
       "location": "public",
       "filename": "tethys-ice-absorption-shadow-alpha@2x.webp",
-      "bytes": 613004,
-      "sha256": "1cdfd8b6e353b8de7bdcdbc258f1bd1b1b12a5650e8e80819a42990631db8562"
+      "bytes": 494526,
+      "sha256": "0bc9f2b7a2be072c4f6df6dbe36d292e89d0c6872159ad97e980d241c109ebb7"
     },
     {
       "location": "public",
       "filename": "tethys-ice-absorption-shadow@2x.webp",
-      "bytes": 300292,
-      "sha256": "921b46f56b59b13d480f8806937cec40b6f89c1d5a7f4456757908dcdfaa79ad"
+      "bytes": 261020,
+      "sha256": "d0a0df55429fbd6ae4b7a6ff6756aa1e2de24e70c2458ad69824997bc26ef80c"
     },
     {
       "location": "public",
       "filename": "tethys-ice-absorption-surface-alpha@2x.webp",
-      "bytes": 396922,
-      "sha256": "ef782f1c9e9e8213e1e7bbeadf015f745a5d07cd030ba961ef957d9eb0ce0c1d"
+      "bytes": 312180,
+      "sha256": "c0b7a6d6d464df278a5c2fec2f9504998eacc9d86957aa8a1c4961f73528ce0f"
     },
     {
       "location": "public",
       "filename": "tethys-ice-absorption-surface@2x.webp",
-      "bytes": 99794,
-      "sha256": "da688440a856a0c3862f90bfee2bf9b64514dd5a035325e9bdacb665f9957f3e"
+      "bytes": 90578,
+      "sha256": "b6b5ddfb3755272ea55f8374e8ce75c1c3d4a5e06df79fbf82ee5deb2cb5088d"
     },
     {
       "location": "public",
@@ -124,26 +118,26 @@
     {
       "location": "public",
       "filename": "tethys-infrared-shadow-alpha@2x.webp",
-      "bytes": 268308,
-      "sha256": "4e66c05b4fd653025557251780d836ddaaa338e7b189f142a79cbd59f6c56ce4"
+      "bytes": 214658,
+      "sha256": "32fdf016617030b13cdb743d01a909a7666c4d610b6b9405d7ad5cc6c3f01277"
     },
     {
       "location": "public",
       "filename": "tethys-infrared-shadow@2x.webp",
-      "bytes": 70336,
-      "sha256": "abdafec4ef307517551ecf1729ada3fe9db19133e724d02047df50ce0f2a5603"
+      "bytes": 58868,
+      "sha256": "5fa1700676e55da7f3d81d95f5d7df44004c31cae2c2ee912dc94eda760974e4"
     },
     {
       "location": "public",
       "filename": "tethys-infrared-surface-alpha@2x.webp",
-      "bytes": 304422,
-      "sha256": "5f5609d08603dda12f5f5c9da8da01169a5bf0e15b690653952ff1f089c268c9"
+      "bytes": 247518,
+      "sha256": "31f67374a706dbfc1390f543a902e317138b45e3dbc32f51dc8a0a67e64899f6"
     },
     {
       "location": "public",
       "filename": "tethys-infrared-surface@2x.webp",
-      "bytes": 117380,
-      "sha256": "93270ff0ddccdccfbbfad1b06cc8edd693438fcdb4ca70e6e83daa52a23ffa21"
+      "bytes": 101416,
+      "sha256": "9e0d068b16bc85e7495e617cfb63718557feea642cedcfed103dbe37f8df1bb7"
     },
     {
       "location": "public",
@@ -154,56 +148,56 @@
     {
       "location": "public",
       "filename": "tethys-iss-shadow-alpha@2x.webp",
-      "bytes": 289198,
-      "sha256": "0db05541fbe48606a9f9f2b281196edc722945c98c4541840eaded27ec328f06"
+      "bytes": 236964,
+      "sha256": "65188a267f26d5949ccedbde314021959d6f5a46517fd4608898338532727dea"
     },
     {
       "location": "public",
       "filename": "tethys-iss-shadow@2x.webp",
-      "bytes": 106494,
-      "sha256": "bd9dbf723235812516c88c079970e09611c302653885c57a849cf8256703c470"
+      "bytes": 97626,
+      "sha256": "30a8f66e5710b2c2cd5ec908ed446687b1da40eaec81af637bfaade04de5657f"
     },
     {
       "location": "public",
       "filename": "tethys-iss-surface-alpha@2x.webp",
-      "bytes": 337462,
-      "sha256": "601bca0f4ec964c5a536e6253ad0f8c135fbe6957cde792ce5146565c57c8e41"
+      "bytes": 281696,
+      "sha256": "da53527494f0b9976eb06268d4dadb27ba4707907871738db9e009a56b3d2ab6"
     },
     {
       "location": "public",
       "filename": "tethys-iss-surface@2x.webp",
-      "bytes": 154798,
-      "sha256": "f268254f09e3644c7cd93d1e7a7a0c4c91c2da072c2ab30385c78980e3536d88"
+      "bytes": 142588,
+      "sha256": "a2a1928cf598d833d3ab97bc847edb63a26461ba82455ad717619260a971764a"
     },
     {
       "location": "public",
       "filename": "tethys-iss-thumbnail.webp",
-      "bytes": 2324,
-      "sha256": "751494ac33d44b086ec3974c23b55f7ca17143e1d3c32a519603793cf4ab5d5c"
+      "bytes": 2316,
+      "sha256": "59fad77c1d64461293712a49fb375d3bd262eb594cc1f25c734d4cfd02a25ae9"
     },
     {
       "location": "public",
       "filename": "tethys-normal-shadow-alpha@2x.webp",
-      "bytes": 376538,
-      "sha256": "acb16884e43c8ef9f3a5ee2370ea48e83a617b02b7cabb37f373dcf0627ff6ef"
+      "bytes": 320984,
+      "sha256": "4aae67e8200887c86acd0032f9bf5c80d98b76f3dd6130f7c8041a379727e5e0"
     },
     {
       "location": "public",
       "filename": "tethys-normal-shadow@2x.webp",
-      "bytes": 296790,
-      "sha256": "7180b3801dee9b6a74817e43ccc60874b00623373a2c93e1b12cb0f953ccacff"
+      "bytes": 284758,
+      "sha256": "7ef8ae5ca3af68e32ac772f9229446acd50e75752d39a0abb8c1d5212b672467"
     },
     {
       "location": "public",
       "filename": "tethys-normal-surface-alpha@2x.webp",
-      "bytes": 643894,
-      "sha256": "142a3a237dd002091f4e709c2210436c462ddc86213dfa23bae1414eb07d6e3b"
+      "bytes": 564776,
+      "sha256": "31206ffc645918b65a55658558106e3595a84559aa4d24770fe44d71a0e29ce7"
     },
     {
       "location": "public",
       "filename": "tethys-normal-surface@2x.webp",
-      "bytes": 673766,
-      "sha256": "1d04efdbf50861ff519d2599bef67ba1bac08b0b2efe7109ece1d2d86df29236"
+      "bytes": 656478,
+      "sha256": "072e8112fc515403c143a98fce183c4d050cfb523de9ac69619cdd8ca5afae4f"
     },
     {
       "location": "public",
@@ -220,26 +214,26 @@
     {
       "location": "public",
       "filename": "tethys-relative-albedo-shadow-alpha@2x.webp",
-      "bytes": 1213620,
-      "sha256": "9384d3e073f526f4acb34b4f44f04e4b6a5a045501a626ed7339a339deef0c1e"
+      "bytes": 1081998,
+      "sha256": "f895fa1bfdb800c69c5c00c33f62c5d5feeb3d2da14579baef292f7065748e86"
     },
     {
       "location": "public",
       "filename": "tethys-relative-albedo-shadow@2x.webp",
-      "bytes": 943150,
-      "sha256": "df2bdfae3b1727b3d7aa6d9405f1e6403a0b74f6a1558b74e645dc2bb56b16cf"
+      "bytes": 859604,
+      "sha256": "0d47d322c90ad1154cd9f254d4aee681cc3a98bd1c172db5c7ae816ec15e800b"
     },
     {
       "location": "public",
       "filename": "tethys-relative-albedo-surface-alpha@2x.webp",
-      "bytes": 926544,
-      "sha256": "9a68469e07d207e7745f443d06fc63eadcc66b003b293b5987a9ed11df6c2dd6"
+      "bytes": 806382,
+      "sha256": "6412476539c4594cfc7d5e4efa241299e3e6ea1645811f306191939ec0f4b58d"
     },
     {
       "location": "public",
       "filename": "tethys-relative-albedo-surface@2x.webp",
-      "bytes": 736540,
-      "sha256": "a41138f813eeae8a86e99ba57ae2587c69a2c7f3ba3ad5daeb3c74539d4c241a"
+      "bytes": 671354,
+      "sha256": "9cf81dc15d58226a140a3519eb6688bcc2612b07e0bb914647f22bf4858e812a"
     },
     {
       "location": "public",
@@ -250,26 +244,26 @@
     {
       "location": "public",
       "filename": "tethys-shape-shadow-alpha@2x.webp",
-      "bytes": 241804,
-      "sha256": "ed6334e69b5d0c1b551a2c25a1b420514d737f3193ad1e1efb2f61850cbc37d6"
+      "bytes": 189734,
+      "sha256": "95cac00dbfad8af377cfa89f4d9ec53f3d543633dc25f3242fe0e2a54c44e8db"
     },
     {
       "location": "public",
       "filename": "tethys-shape-shadow@2x.webp",
-      "bytes": 30722,
-      "sha256": "ed42bbee1d2780fe08e8a6b38d29e39b2d7d911202cdb94380ab90c31867749f"
+      "bytes": 24322,
+      "sha256": "629c71224cc03169a83de6ef663bc44a0e2721efc86f5132299e526510e7ab62"
     },
     {
       "location": "public",
       "filename": "tethys-shape-surface-alpha@2x.webp",
-      "bytes": 230012,
-      "sha256": "27f0abf59b85c0b05362e8978d85ae84559de87c69ae6e5f0311ca08148eb47a"
+      "bytes": 182826,
+      "sha256": "69fb601dcdd1d2535cd6d8587cbb4923c8d4021aa5509f8455efb66418c63b42"
     },
     {
       "location": "public",
       "filename": "tethys-shape-surface@2x.webp",
-      "bytes": 25124,
-      "sha256": "754a326263ed69197e4e4b9860a9ed2bca5822a77cc5b45ae2da7777fb6c1e39"
+      "bytes": 19990,
+      "sha256": "dfe9ac8409bc150c1c13758a6c2fa139b6f60b7045e72e47e8606331ac843d92"
     },
     {
       "location": "public",
@@ -305,25 +299,25 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 5162,
-      "sha256": "04e82ddfdd5fbff2fd8276ce9acfb21052405e0b17692bea176c59ddb67f0463"
+      "sha256": "97c78a7e46c87c277c9fc5e8c1b54c05ec28281f17f1e3ae9c8ec5220b5f2c21"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 582,
-      "sha256": "a3dbdcf79612db826ab82a1b662b0b61a00a9dbd771ca211b8c6d3ad42e94840"
+      "sha256": "b8784128af754b2c7514b1da2abc97164d18abb60461ab28e50f53343faad8d1"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 18746,
-      "sha256": "06c64a017d1e1b1beb441c7c18e4839f8069d82645e9474881974a8f9efb69b3"
+      "bytes": 18738,
+      "sha256": "ce71ee1d1750f77f14d9c412b8b91fde5208a37335c40265eeb9a57f3f911dea"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 856,
-      "sha256": "97133c9a93e100178d37e4c5da06cf55a7cfe45361aec8a377452154e4a55db8"
+      "bytes": 857,
+      "sha256": "f3f92220ef1521dfdb65f8ed943d4cf201ac2cd5df6d62e8708b5c73a6ecc893"
     },
     {
       "location": "prepared",
@@ -352,8 +346,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/iss.webp",
-      "bytes": 6702,
-      "sha256": "de1f8467f6d76962c16ee7780f8b25e8d2d1e59255c78150c66c72ca0cd31ead"
+      "bytes": 6986,
+      "sha256": "7a37b5b2781e5e4e7ba54ccc356ff534ca5526ac7c89dc0bca432533d033b963"
     },
     {
       "location": "prepared",
@@ -376,14 +370,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1310316,
-      "sha256": "f52c29c1605b4a85250f87914eef54a7eedc0f914895a6469d99cb7534157de2"
+      "bytes": 671663,
+      "sha256": "f2956ed2ddb628840b096cd4b479486e734cb09a2671fa80b72ecb1cff2d851a"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1465850,
-      "sha256": "e44f4120e5a7d516f7f335849593e71da4a9e3bd751b4d2ab0c5c16884e0347d"
+      "bytes": 709710,
+      "sha256": "6e7fc1413a8bcd8e2516966dcc95d0fb3843b37287cc85c8e5a9c51adb816d63"
     },
     {
       "location": "prepared",
@@ -400,8 +394,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 18750,
-      "sha256": "3af977767e89a2188bc8afd3c938c3b5fe95c4c647b203cce0bf431d09463c07"
+      "bytes": 18742,
+      "sha256": "6bde03eb705472710657573ba4139e1fbf338ccb7b74a9524f898cf7321a101e"
     },
     {
       "location": "prepared",

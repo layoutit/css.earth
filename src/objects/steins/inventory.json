@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "steins-billboard.webp",
-      "bytes": 6440,
-      "sha256": "c57e1df5359a65fb6242123879e9a42d294467c2f7d8f7ab62a36684de72676c"
-    },
-    {
-      "location": "public",
       "filename": "steins-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -22,26 +16,26 @@
     {
       "location": "public",
       "filename": "steins-elevation-shadow-alpha@2x.webp",
-      "bytes": 610718,
-      "sha256": "2e591a3b91fb4a744abfeb26107e7b5694bbf2404a3e23d160fe4d427afc2f1a"
+      "bytes": 384104,
+      "sha256": "1b6a20501d5fe7a37e3dbdb803f59add24844d62c09e3bc07919e353497de623"
     },
     {
       "location": "public",
       "filename": "steins-elevation-shadow@2x.webp",
-      "bytes": 134546,
-      "sha256": "3f83b6e997d9938577d0c18d35bf2c58bebafc23aa76c6d53b27064adf10d04e"
+      "bytes": 103928,
+      "sha256": "4b4c0946ba0ebd647546c0764c7b12a110265cd5c3717ccadfd7f5d31baea42c"
     },
     {
       "location": "public",
       "filename": "steins-elevation-surface-alpha@2x.webp",
-      "bytes": 686320,
-      "sha256": "81ebc9b0dcd223489121c58ed7a262766321bf96d1a2e7373fabd7c2d3a08136"
+      "bytes": 442516,
+      "sha256": "6a4c582102ec3ea13cf38f8b063d221121e6723ac9f505355ec60a29883af2b6"
     },
     {
       "location": "public",
       "filename": "steins-elevation-surface@2x.webp",
-      "bytes": 222058,
-      "sha256": "d650a8ede04b811a1de48eadfa7905da0d87e186b30326dfba448b5c1bb30b2b"
+      "bytes": 167152,
+      "sha256": "baa8b10c76dae57a13843d243b1630285d7bca98bf0cbcc91ec7fd9840015115"
     },
     {
       "location": "public",
@@ -52,32 +46,32 @@
     {
       "location": "public",
       "filename": "steins-features.json",
-      "bytes": 17067,
-      "sha256": "55da6b09e2ece924b9acbad3608143bf84010df77d4a2606ef149422a0e6f541"
+      "bytes": 17073,
+      "sha256": "c454558b3d4b7a9c3d0c730bfc3b50225f577859c6f8511c3f9aa36ddf8b6ad2"
     },
     {
       "location": "public",
       "filename": "steins-normal-shadow-alpha@2x.webp",
-      "bytes": 553752,
-      "sha256": "349bb993b63cd259968f592d41a8fe08577c014c5d0b1602a6bf67c306e01f41"
+      "bytes": 349296,
+      "sha256": "0a3c6ecb2b4af790f126922e30604f6d6abb38915cf82992698757ccadeb29b8"
     },
     {
       "location": "public",
       "filename": "steins-normal-shadow@2x.webp",
-      "bytes": 119738,
-      "sha256": "579ef1dd0689b1c9d12607f40003c74621f84329e8540ef301641d5e91924712"
+      "bytes": 103828,
+      "sha256": "27f503359169016954d4e9d5a27d212bc920df6bab92b96e45d04ef769d79619"
     },
     {
       "location": "public",
       "filename": "steins-normal-surface-alpha@2x.webp",
-      "bytes": 639708,
-      "sha256": "39f014df867c9ca33447675109ee18f33b1518b67200feee45b6a8f40349e090"
+      "bytes": 424000,
+      "sha256": "6c0fead4bd37e5af2fee7d50a58c17949e2f2fca5501923294c093a04afa6cad"
     },
     {
       "location": "public",
       "filename": "steins-normal-surface@2x.webp",
-      "bytes": 261506,
-      "sha256": "31f1b376c2e14b868536c6fce80dfc9d2b232f6b4708042f7e57b40be775fefe"
+      "bytes": 235540,
+      "sha256": "0f0811ef77af9cdc7aa0261910a0160bfb1c5e64e658f76c1900aa25c6e1ede0"
     },
     {
       "location": "public",
@@ -88,20 +82,20 @@
     {
       "location": "public",
       "filename": "steins-osiris-surface-alpha@2x.webp",
-      "bytes": 610588,
-      "sha256": "edc77c864f89d264f16a279805c22a4290d87cc8bf1a9baf1d97e1fd11ed3d24"
+      "bytes": 396432,
+      "sha256": "099a3570d131c4be33e21226f6b110ad2022e1a0020bd6662942468489b3783f"
     },
     {
       "location": "public",
       "filename": "steins-osiris-surface@2x.webp",
-      "bytes": 168414,
-      "sha256": "ff2214d323d1b9da16ec16cb21792c554921ddfa4b2cad1c636c4da0f3b0d8a1"
+      "bytes": 135766,
+      "sha256": "7a544fcb2aa68e8c549bcbc090c638e530fdec68b28c735e6fcaf99315fa5da2"
     },
     {
       "location": "public",
       "filename": "steins-osiris-thumbnail.webp",
-      "bytes": 1662,
-      "sha256": "2845713b3b2bbfd64607b16a33a5f00a6f94d9a52f26d62f10b6a1d0090d49f1"
+      "bytes": 1658,
+      "sha256": "6eccd6828388ef0d9bc789316a3edeec7861a000560a8c4c2f432b2000426c2b"
     },
     {
       "location": "prepared",
@@ -131,25 +125,25 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 2002,
-      "sha256": "4c40ab04a0ead6084b8678a5f7a096c714cf0f3945e916ce3ef3cf9397ce19ba"
+      "sha256": "2bd201072652a74010afc4e88d324dbc722822361457cb5cdc6c6ce0340e8825"
     },
     {
       "location": "prepared",
       "filename": "features.json",
       "bytes": 583,
-      "sha256": "b684d81c8fba3ebaf5a82117fe70d59820d9d56460c710da2b10c2c202728791"
+      "sha256": "8ca1154c97b513887304cee144a46bbd4bbf276dde16bbb7791579a5e47edd44"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 14357,
-      "sha256": "8d579ce40bf50001e60969ee2dd9457c96e52cecb5ae3c830dc34600bc64eed1"
+      "bytes": 14358,
+      "sha256": "57c01e3d2ab9b202036cddee95cfbf98530762009dc472368def38a8c5925090"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 318,
-      "sha256": "30183a788758dac26612be4ce808dcd5466ddbeab10c9463dc7e67372b2fe632"
+      "bytes": 316,
+      "sha256": "87fdca133c88edf7384afa563a22e5dfc69e0b61d08b5ad5bf2a0e8da1089c84"
     },
     {
       "location": "prepared",
@@ -166,20 +160,20 @@
     {
       "location": "prepared",
       "filename": "minimaps/osiris.webp",
-      "bytes": 3896,
-      "sha256": "e9a0fb4d661f3bfc065c7136a5cef4bc2984e406f7190fea8eb7bc646379e7e2"
+      "bytes": 3934,
+      "sha256": "9ab35eca6d458fcdfd97abce2dbf1f0a32bbe153edc82f00c8db6eb7dac57a2b"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 498926,
-      "sha256": "a7d698aa5be2a3373147ca19fc0f3b4e648ab5c9bd8d3ceb6e5e4ccb8a1d0287"
+      "bytes": 179673,
+      "sha256": "bb9a5c6b6d6780ee22456b619b81ccbf3e2331ce7423de8776a7bc794005876b"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 595898,
-      "sha256": "c0a7783af395ddea5e7738dc15d9b1d4900fd1d6bedf8fc720479d1f31bc183e"
+      "bytes": 196706,
+      "sha256": "65e044c9322c194237e09143a5f80e824a72db706c4c5915483e9489bc13bc08"
     },
     {
       "location": "prepared",
@@ -196,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 14361,
-      "sha256": "a8bde557a6c809208e1820a6669d9f099043f4e9dc2cf76583f8fb7147e14371"
+      "bytes": 14362,
+      "sha256": "f91d55ed08a6b9c33c386f666065e07ab365ea5ad6756f046b9a93d726457cad"
     },
     {
       "location": "prepared",

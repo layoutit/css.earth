@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "athamantis-billboard.webp",
-      "bytes": 5722,
-      "sha256": "965f0051243ec1020879da92003609a35e344af0ab1899fafa5bc7c310a6ceb7"
-    },
-    {
-      "location": "public",
       "filename": "athamantis-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -22,26 +16,26 @@
     {
       "location": "public",
       "filename": "athamantis-elevation-shadow-alpha@2x.webp",
-      "bytes": 535188,
-      "sha256": "0ef0e8608bc2761ffa7bbcdb5d0113c4e04e57694944b8042d522cc81ddd97f7"
+      "bytes": 399906,
+      "sha256": "fdb14d2147a65585d4cf4e17287e449e185be8cea90c588e822d81bf26ee6336"
     },
     {
       "location": "public",
       "filename": "athamantis-elevation-shadow@2x.webp",
-      "bytes": 129884,
-      "sha256": "725d74e841564b4470575f40fc06846ac331bc098eebc12f0253b52d89dc5eba"
+      "bytes": 112060,
+      "sha256": "de3bea65aee868e83315c28cea1e149a87d365bc7399b189853e91a2fe155f40"
     },
     {
       "location": "public",
       "filename": "athamantis-elevation-surface-alpha@2x.webp",
-      "bytes": 579754,
-      "sha256": "232c7221741ff095a57dcecfbd7a54ac8ec3d4f610841ec6f25c703fa8211820"
+      "bytes": 440562,
+      "sha256": "1d2a30899c4ef37fafa49ae9fc91724c5c773bb0a86cf3655f78704f4559d534"
     },
     {
       "location": "public",
       "filename": "athamantis-elevation-surface@2x.webp",
-      "bytes": 183694,
-      "sha256": "b9db1a2dff00097d2b5bb8891d7a1b18ef76ab8c6da43a665d57c059b9681f02"
+      "bytes": 158216,
+      "sha256": "2373775311b87d729e8cabf71f357ee577a73ce174694376e46721a775585a3c"
     },
     {
       "location": "public",
@@ -52,26 +46,26 @@
     {
       "location": "public",
       "filename": "athamantis-shape-shadow-alpha@2x.webp",
-      "bytes": 451710,
-      "sha256": "494c3fef2322a813dbd52498745dc412c3122695013ddbba8992c0623e5f5de0"
+      "bytes": 326692,
+      "sha256": "346d6878d9887cf8a72aa66e287c3e448cac54d4df6e1f6633c4f3912238288c"
     },
     {
       "location": "public",
       "filename": "athamantis-shape-shadow@2x.webp",
-      "bytes": 57100,
-      "sha256": "dec7535784a2a82010b86c2963cd9ab71a1e643ce57503a5023f660be3f1b72c"
+      "bytes": 50052,
+      "sha256": "7414266f1565c919ad8de36039bb4b1b2a19fe9e0d3f5fecdbcf4810c3d94cb3"
     },
     {
       "location": "public",
       "filename": "athamantis-shape-surface-alpha@2x.webp",
-      "bytes": 444860,
-      "sha256": "affdc9624dfe76baa0415873343130a60485f55c1c5fe8bf41986b29abbe6b27"
+      "bytes": 322912,
+      "sha256": "4608bba733c49760a36344c3a9e421f6bb92845edaa793e7f326064206d37491"
     },
     {
       "location": "public",
       "filename": "athamantis-shape-surface@2x.webp",
-      "bytes": 52742,
-      "sha256": "9f2e9c86daa765ff63ad942064c3bda35d6fa0bf87cd64f91a892a727931e3da"
+      "bytes": 45412,
+      "sha256": "0ca52aaecff0570a67d16fb89254fa865a570b2f5d10ad34ac10c68c36e9fa17"
     },
     {
       "location": "public",
@@ -82,20 +76,20 @@
     {
       "location": "public",
       "filename": "athamantis-zimpol-surface-alpha@2x.webp",
-      "bytes": 602468,
-      "sha256": "48220fd3020ffcee6c07f76eadedff96967c44ad3524798c9f51593a4d5f87e8"
+      "bytes": 572134,
+      "sha256": "a02043a36845079d0a5bda6a1c91061b5d72528b6bb216d7f59e72078efbfa46"
     },
     {
       "location": "public",
       "filename": "athamantis-zimpol-surface@2x.webp",
-      "bytes": 136272,
-      "sha256": "882dd638339e9f5a5d8d95b18b7ad91a09188c2f38df41b74502a0e7e2fa4f73"
+      "bytes": 131052,
+      "sha256": "de9c7b69ac866bc0a379e9708bee2588cb6b09363b1a722c8f9bae1ddade4997"
     },
     {
       "location": "public",
       "filename": "athamantis-zimpol-thumbnail.webp",
       "bytes": 1548,
-      "sha256": "3ac69c7dca718a21c854aa09b98638b8d853acd02eb98ca2711c130d1a71fbdb"
+      "sha256": "1eca573632e47d91242fe053978b79a266b2afdc42fa764ebb848e0ee6845b3b"
     },
     {
       "location": "prepared",
@@ -125,19 +119,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1963,
-      "sha256": "467f41d5161147fb681af22f8752b8f86985e29b6ee470187caf63991ea84088"
+      "sha256": "687efc82bdee4c426c43433ede5348227b235886a02acc624f3cfded35cdfd24"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 54211,
-      "sha256": "c5e46e1732dfce257aff0b4a0c66d5ff4442941bd7500ce6c67dfab5b27ada60"
+      "bytes": 54159,
+      "sha256": "6144bb4e8beef0e7f4aa0e6a1c1b65e2dbe6902a88ebc8fe0b805544672ca7e3"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
       "bytes": 304,
-      "sha256": "bc91e4a9d7222bb482feb532e93014b19d0393aa6a80354e0729b28df710f0d2"
+      "sha256": "33ce2bc05eb0c062781c399c50c8b332883b0831e708a7bc65e5090197e1f057"
     },
     {
       "location": "prepared",
@@ -154,20 +148,20 @@
     {
       "location": "prepared",
       "filename": "minimaps/zimpol.webp",
-      "bytes": 2902,
-      "sha256": "d76abd332f50b5a0645b58611b3d2fb64af62f7467aba529c8e6d875317c3abf"
+      "bytes": 2884,
+      "sha256": "a104e8afb0cb9873386c12188b51bb8f611e39ec370fd8857d4ad026669c8e32"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 984014,
-      "sha256": "5d7980db16e545e1b94f85afd600ba23d25c43d521dce352e4a928594bb34370"
+      "bytes": 633492,
+      "sha256": "7786b89ea120f0089e8e8b6243d9e1b5ecef8851a147ead0e2fe0b8d75a51afd"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1261069,
-      "sha256": "90fc9b20cdf3e5ab0ee6bac740463bcabfb55d6874eeeb0484d69c4a5ece1ff5"
+      "bytes": 812153,
+      "sha256": "9749901d68ffbbc6738c2df34140718af5dcdee164b1731368315d11093eb0bd"
     },
     {
       "location": "prepared",
@@ -184,8 +178,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 54219,
-      "sha256": "abfa4cda64b29586d9c37de0cbe200de69059e82aed7fa45edea33e890a37313"
+      "bytes": 54167,
+      "sha256": "4766ff3990f95da069ace75bda9e50ad956d38b0346d3d5b02de2435b1f49aaa"
     },
     {
       "location": "prepared",

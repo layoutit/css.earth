@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "ino-billboard.webp",
-      "bytes": 5504,
-      "sha256": "9ec8ee738c7f6c46a1da00c94585ea29c9272d8b7d610083d4119219f4e4aa01"
-    },
-    {
-      "location": "public",
       "filename": "ino-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -22,26 +16,26 @@
     {
       "location": "public",
       "filename": "ino-elevation-shadow-alpha@2x.webp",
-      "bytes": 607154,
-      "sha256": "28c0614c60a54d85386b9bd0f2fa415d7ff839f931feafe0dac5440636d79446"
+      "bytes": 408780,
+      "sha256": "e03558e8e37c844e0b76063b64f01f4b2c9a2396fb59eb6cc3b2dbe9f7043f2b"
     },
     {
       "location": "public",
       "filename": "ino-elevation-shadow@2x.webp",
-      "bytes": 169862,
-      "sha256": "8df1637972fa25c0e048a2e6c55aa87be95b81cdc8ba1cb9dcb49466dcec07ee"
+      "bytes": 146224,
+      "sha256": "ed1368a7dc146ae6cfa1a023c0e00e7675293560862b5d2a6e238586e908a87f"
     },
     {
       "location": "public",
       "filename": "ino-elevation-surface-alpha@2x.webp",
-      "bytes": 641574,
-      "sha256": "51f160fa45ad5a7203b3084f8bd17cb9f706b8bd2913abe6090efe0d268865d7"
+      "bytes": 456130,
+      "sha256": "0ba626c69c2aca3792aa884c8775307acb308e7fbdec73234c9c9f98bc3aeb7c"
     },
     {
       "location": "public",
       "filename": "ino-elevation-surface@2x.webp",
-      "bytes": 210052,
-      "sha256": "e2cb643b39702956bb40f31ff335184429289e43ff2977906f89a67fcbbde9c9"
+      "bytes": 191950,
+      "sha256": "8fd28dfdd4acc7c8ff72eca6ac164833f7339ca41b0524a98db17352398de5df"
     },
     {
       "location": "public",
@@ -52,26 +46,26 @@
     {
       "location": "public",
       "filename": "ino-shape-shadow-alpha@2x.webp",
-      "bytes": 492002,
-      "sha256": "5c00088d4d9ac8810c99d0bedb33202b455944258b4a4ed688873a78dd29d34a"
+      "bytes": 312762,
+      "sha256": "a12e3747c6c67674ab061c035f1fcc37b69893d9730dab90a2361bda9cd44db2"
     },
     {
       "location": "public",
       "filename": "ino-shape-shadow@2x.webp",
-      "bytes": 60940,
-      "sha256": "e09fbf6cab8ce78944040b86a105098307a5d3fc7d2e437a3cc1c522dc9f254d"
+      "bytes": 50400,
+      "sha256": "4f8d9b6de18a2f1feb048cb315460e6090c497d2223cbee2a5901dc0b702bd57"
     },
     {
       "location": "public",
       "filename": "ino-shape-surface-alpha@2x.webp",
-      "bytes": 484160,
-      "sha256": "a31f0b8c027880dafedb99be8a54582076277c4c5cac90aa492e499d0f7b5f0a"
+      "bytes": 309260,
+      "sha256": "f612e0547f4864e6e95eafbb42f7f59c488bb7cd7a85190bfe05ad36fe6b003d"
     },
     {
       "location": "public",
       "filename": "ino-shape-surface@2x.webp",
-      "bytes": 54054,
-      "sha256": "690d64fb5151000108618a4d8e2d922da6553efe7e5d022784690ba0079f4aaa"
+      "bytes": 45276,
+      "sha256": "e54c2e7b6c07d549e23cae6c24eb9b9fa6b1d1b44ca7efcbcd1975711e669c09"
     },
     {
       "location": "public",
@@ -82,20 +76,20 @@
     {
       "location": "public",
       "filename": "ino-zimpol-surface-alpha@2x.webp",
-      "bytes": 592540,
-      "sha256": "bd48879c122347b0cd4230858cc979998d46eb0d0fe02dd211d238ddb5201201"
+      "bytes": 392044,
+      "sha256": "54fe80864b0e04b0b4fef05ea4b191358f62690d827bd584aecc33194222951c"
     },
     {
       "location": "public",
       "filename": "ino-zimpol-surface@2x.webp",
-      "bytes": 142820,
-      "sha256": "e039f9b15cc4921ac7a6552497a9c5146f473b59996e637120398aa95a1c7f5b"
+      "bytes": 118134,
+      "sha256": "eb4291f340a5277b6f4886733f520f194ca232fd6cbd16b26e6eca11eb81703d"
     },
     {
       "location": "public",
       "filename": "ino-zimpol-thumbnail.webp",
-      "bytes": 1718,
-      "sha256": "1987227c40cda0c674336e858f6d269a068feb5f741e793b2bab7ca0f2a7a131"
+      "bytes": 1774,
+      "sha256": "199d629c3850b8c704ad16f8d1575e7755d92a4a747de31b57d40e71963c5f2b"
     },
     {
       "location": "prepared",
@@ -125,19 +119,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1710,
-      "sha256": "c7985a0e1ee1d98bdc0d627f8b90e268fb10e47327f5248757b20668ea418027"
+      "sha256": "3d8806bf7bd97bc3c7d33e0f4be54d5c26436aae25e0151f4a4c2d1b55bd6ccd"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 117366,
-      "sha256": "b607b3c7b54e7fbdea4e8e9898b522cb33249748670113b62fa56efa96af1512"
+      "bytes": 117329,
+      "sha256": "07584a4703fa70f8f9f95a5768e26dcec91df81211af8391622f382eb6d190ad"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 304,
-      "sha256": "2928b65a5347b8dba2b37f4fbe27c85d0d52254fa12424b5e31531c91f477772"
+      "bytes": 303,
+      "sha256": "3326d2f969283207a2412524774d97da29d2f2c2958d6d48e19543c3aecdd95d"
     },
     {
       "location": "prepared",
@@ -154,20 +148,20 @@
     {
       "location": "prepared",
       "filename": "minimaps/zimpol.webp",
-      "bytes": 2374,
-      "sha256": "b416227b1f513e251deea67af9540140c997981b1d8b4491bf14fdfb8164da6b"
+      "bytes": 2362,
+      "sha256": "b6ccb5a0ba2044e7968d49c0c53d79fabc25bc4d340b7588c0fe89652fbde5e1"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1014074,
-      "sha256": "4cc5e32581304449c281ed85aae89f82ef09e16e86a27a3832f5e1c847faa0b8"
+      "bytes": 411493,
+      "sha256": "67d3f3025a01aff4df8155a5e24d010e6f3b2ecbcad2edf14f09948ac28e708b"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1280446,
-      "sha256": "fa3cd1e8b28bcdf88dc3d5da2ccab6e471824e30bc9725ac61a2a63199158afc"
+      "bytes": 513995,
+      "sha256": "947f7f038d2d487f0f678e324c27eed29e15c6eeb3ee550e3d067748948a2bbe"
     },
     {
       "location": "prepared",
@@ -184,8 +178,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 117367,
-      "sha256": "8647d8a172ab95e609ab0d5929fdc882eff3956670a03d05f6f5d8779a917d64"
+      "bytes": 117330,
+      "sha256": "e02fa8ce0cf39781baa05c9fe1d1adc2604584e6cb0b9223a451c5d407d50283"
     },
     {
       "location": "prepared",

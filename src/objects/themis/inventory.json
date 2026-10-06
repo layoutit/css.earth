@@ -9,12 +9,6 @@
     },
     {
       "location": "public",
-      "filename": "themis-billboard.webp",
-      "bytes": 5090,
-      "sha256": "06fea4faa924fcff9098d71799fae12629d4011f0190de13040f7270553f20c5"
-    },
-    {
-      "location": "public",
       "filename": "themis-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -22,26 +16,26 @@
     {
       "location": "public",
       "filename": "themis-elevation-shadow-alpha@2x.webp",
-      "bytes": 624380,
-      "sha256": "5d696e9c0fe81963b12b2479ade90489e415ad19eff62bb4c1831cee057e24fb"
+      "bytes": 574204,
+      "sha256": "2c3e034001f8e066c6732f6ebdf822c2e2dbca887d372d860854a9cb29182fe0"
     },
     {
       "location": "public",
       "filename": "themis-elevation-shadow@2x.webp",
-      "bytes": 134832,
-      "sha256": "b317b1620b04b959f10a3fd10a658f15b266f04e41a8fc04c108f229f4736cf4"
+      "bytes": 126900,
+      "sha256": "d9bf05a3b06e83527c25773a3267052e416c1d9a8f8a567d3e903231d743eb85"
     },
     {
       "location": "public",
       "filename": "themis-elevation-surface-alpha@2x.webp",
-      "bytes": 678494,
-      "sha256": "fac60765d07ef2351c8571f8bd98fad86f3a89866a1bfea79628b074501e4d02"
+      "bytes": 633786,
+      "sha256": "a182b1c31844dea7f8e49d6c93672e1e483aa20d61d7651a24a86355494beafd"
     },
     {
       "location": "public",
       "filename": "themis-elevation-surface@2x.webp",
-      "bytes": 202046,
-      "sha256": "6039698b39a2774791c51096406854b4c7ada3c7f7651c0b1bfb1b84604040be"
+      "bytes": 197992,
+      "sha256": "7864a4743bdbf3667663ff5db41b0abc061d26184ab8f3b0789709c9b75f4e9a"
     },
     {
       "location": "public",
@@ -52,26 +46,26 @@
     {
       "location": "public",
       "filename": "themis-shape-shadow-alpha@2x.webp",
-      "bytes": 533866,
-      "sha256": "bbcbac143672a0c0c79a37a9006403cf7671adb4a50acfea02a1257d1d811083"
+      "bytes": 490236,
+      "sha256": "eb72995d66318d4f9e46a97deafae43e065ecb85eb1cc121c189b00be0eaaec0"
     },
     {
       "location": "public",
       "filename": "themis-shape-shadow@2x.webp",
-      "bytes": 61456,
-      "sha256": "ff2b6e8b356272879d8c48738f1b5810e1084df7fa51e01772b0371f50cd0ff0"
+      "bytes": 59418,
+      "sha256": "369069a032712216a3959ecd7212a3b22640b87b65b61a800d06f1833008b5ed"
     },
     {
       "location": "public",
       "filename": "themis-shape-surface-alpha@2x.webp",
-      "bytes": 525282,
-      "sha256": "7b85aacc1abab42b75a32cc9cc6d638a086f868e9e8e26219633bced55651f05"
+      "bytes": 485586,
+      "sha256": "33c38a0b2295ba0d844a24dccd70793d1cc1be825d7f8f1db32ea7f7a42fd880"
     },
     {
       "location": "public",
       "filename": "themis-shape-surface@2x.webp",
-      "bytes": 53778,
-      "sha256": "9c46ee6a1f33e6d3d0a8082eea49cfd655a791d2f15028d146e55a0ddb20f4d3"
+      "bytes": 52062,
+      "sha256": "fb79616fa703fde1db1fa904da0fd098def89dd97f74f0002d061904da5bab17"
     },
     {
       "location": "public",
@@ -82,20 +76,20 @@
     {
       "location": "public",
       "filename": "themis-zimpol-surface-alpha@2x.webp",
-      "bytes": 588020,
-      "sha256": "4a5b76f3959a52228f52f23ca91b4d844294344b0caf2e59053001bf94307f28"
+      "bytes": 542062,
+      "sha256": "2d330e912d98c2821aa66bec0c625f03e746dd4ff176939d83ede346608f6d8a"
     },
     {
       "location": "public",
       "filename": "themis-zimpol-surface@2x.webp",
-      "bytes": 121270,
-      "sha256": "c1b231fdec6468e71bb1891bb0a5ff8444faa09999a246fa843a4198f12ae1d7"
+      "bytes": 117512,
+      "sha256": "e3c9683794616c9d64e87ae026ce52f0bef1a1429a116f6416ae2aad43f3eb16"
     },
     {
       "location": "public",
       "filename": "themis-zimpol-thumbnail.webp",
-      "bytes": 1652,
-      "sha256": "924a90ac510fad044302bb629a0f40eedc665d2b84e0ef215fc92510e8397e81"
+      "bytes": 1678,
+      "sha256": "a8c8bd46501aade1119eaa272706203143cf5d65b70a651d55521bfb5971b0b2"
     },
     {
       "location": "prepared",
@@ -125,19 +119,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1814,
-      "sha256": "b9f5152465b5c56903381b7c5e2ec8cf3d4e6b1efc28155aee570e5932bc3448"
+      "sha256": "ed3c5f23608841bcc1f6277ccaf2c68587ec1f1f237f6d2ec4f2f6c1c840a295"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 136849,
-      "sha256": "cb642861c7f7e21558fb8d1d9ee61d6f83b6d50d6a71c1dfc3e109b5dbddc0e7"
+      "bytes": 136730,
+      "sha256": "ba4dc3aad7007eeaaceb7270bdd8fe409bbcaca40d3018819427df7a8ed3677e"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 304,
-      "sha256": "a7b82991e82e9fbc7af18795d13bdc780ec54a1ad0eec18c29c318ac78fd8d92"
+      "bytes": 303,
+      "sha256": "506b00ceeada712e115cb31b529fb37dbc8d1a7d7aa34f40b71e2978d20cf04f"
     },
     {
       "location": "prepared",
@@ -154,20 +148,20 @@
     {
       "location": "prepared",
       "filename": "minimaps/zimpol.webp",
-      "bytes": 2896,
-      "sha256": "2a88c3dc6e09c37b52599e8acb04900fcaab41670ef7b589e2fbcb31f6a594f5"
+      "bytes": 2834,
+      "sha256": "90fafd45568b1db58ee9bf3a7a0c98c61efb814d337d778cd90c01ea8f416c48"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 522352,
-      "sha256": "dcbedd4578fcb70a0e2988db3861b8df2baf1fa0745368e6ecc07839981b2ad1"
+      "bytes": 455169,
+      "sha256": "d115ae12ffc9815261853ee5b9d5392e0524f6d81c57f65fdca1efc5cb0bb6f2"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 594029,
-      "sha256": "30f511967e36e41612c4607634706d8a8c9bfa775e9e404cb6849568416b732a"
+      "bytes": 520378,
+      "sha256": "4a2bed14c10e48339bac21dbee86e89371d209593f72e4e8335afd401989eda0"
     },
     {
       "location": "prepared",
@@ -184,8 +178,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 136853,
-      "sha256": "2d5bad96af16350a8675140c8158f2a0eca9e2c2eaba66cea0e26e2736868799"
+      "bytes": 136734,
+      "sha256": "2a1861522ff1da633fe41fe6a5909f6f991a35c48eac34ffaf88ab36bd5edf34"
     },
     {
       "location": "prepared",
