@@ -4,7 +4,7 @@ import { objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
 import { sidebarThumbnail } from '../content/sidebar-thumbnails.mts';
 import { PREPARED_NAVIGATION_MARKERS } from '../prepared/prepared-navigation-markers.mjs';
 import { markerStyle } from '@cssearth/renderer/navigation/marker-presentation.ts';
-import { sourceDocumentation } from '../source-documentation.mts';
+import { sourceDocumentation } from '../content/source-documentation.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
 import { listDistance } from './list-distance.mts';
 import { systemCard } from '../system-card.mts';

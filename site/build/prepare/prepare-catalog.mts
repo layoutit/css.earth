@@ -111,7 +111,7 @@ export async function readHostedContextBanks(contexts: readonly { id: string; ty
   return hosted;
 }
 
-/** The build-only record of the hosted banks (`site/prepared/prepared-hosted-banks.json`, read by `site/hosted-banks.mts`): each
+/** The build-only record of the hosted banks (`site/prepared/prepared-hosted-banks.json`, read by `site/world/hosted-banks.mts`): each
  * bank's carriers and descriptor, and the files of a bank that has no list of its own (`/world/context-assets/<id>.json`). */
 export function hostedBankRecords(hosted: Readonly<Record<string, readonly string[]>>, descriptors: ReadonlyMap<string, unknown>,
   inline: Readonly<Record<string, string>>) {
@@ -284,7 +284,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   const world = contexts.filter(({ id }) => hosted[id] === undefined), worldIds = new Set(world.map(({ id }) => id));
   await writeGenerated(resolve(projectRoot, 'site/prepared/prepared-context-objects.mts'), contextObjectModule(world,
     Object.fromEntries(Object.entries(inline).filter(([path]) => worldIds.has(assetObjectId(path) ?? '')))));
-  // Read by the build only (site/hosted-banks.mts).
+  // Read by the build only (site/world/hosted-banks.mts).
   await writeGenerated(resolve(projectRoot, 'site/prepared/prepared-hosted-banks.json'), JSON.stringify(hostedBankRecords(hosted, descriptors, inline)) + '\n');
   // Read by the build only (site/pages/world/context-assets/[id].json.ts).
   await writeGenerated(resolve(projectRoot, 'site/prepared/prepared-context-bank-assets.json'), JSON.stringify(banks) + '\n');

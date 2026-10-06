@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { worldPlaceFiles } from '../../../world-places.mts';
+import { worldPlaceFiles } from '../../../server/world-places.mts';
 
 // One object's places, copied at build from its own package (`src/objects/<id>/prepared/places.json`): where each of its
 // children's systems is and the range its orbits are authored to, read after a page's first view so the camera reads a

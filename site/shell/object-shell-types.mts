@@ -4,7 +4,7 @@ import type { NavigationContent } from '../navigation/navigation-content.mts';
 import type { ObjectEntry } from '../objects.mts';
 import type { SceneSubject, SceneView, SelectionTarget } from '../scene/scene-selection.mts';
 import type { WorldCameraPose } from '@cssearth/engine';
-import type { DestinationPresentation } from '../destination-browser.mts';
+import type { DestinationPresentation } from './destination-browser.mts';
 
 export interface ShellOptions {
   objectId: string;

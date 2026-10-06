@@ -129,7 +129,7 @@ mission targets and aliases are not association rules.
 
 [`prepare-facilities.mts`](../../site/build/prepare/prepare-facilities.mts) compiles the Sources
 and Missions catalogues with their validated records and graphs. The common
-[site entry point](../../site/exploration-catalog.mts) parses the prepared records
+[site entry point](../../site/content/exploration-catalog.mts) parses the prepared records
 against the Sources catalogue; it no longer verifies a dependency-hash closure.
 Regenerate the catalogues after changing their inputs. Astro
 renders the current body's cards and relevant vehicle details; the browser does
