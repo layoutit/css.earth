@@ -16,26 +16,26 @@
     {
       "location": "public",
       "filename": "veritas-elevation-shadow-alpha@2x.webp",
-      "bytes": 407888,
-      "sha256": "83f7db69ada3a6b2d7158b3cdbeea29770852787a674448d023c5da362b57c1c"
+      "bytes": 445202,
+      "sha256": "e6d9f11c92420d44689377d7ef977cd9852ef2323769911279a77f41ee6ea852"
     },
     {
       "location": "public",
       "filename": "veritas-elevation-shadow@2x.webp",
-      "bytes": 121912,
-      "sha256": "dc1021c2d7a189aead40df947a6c68a5c401e8f00524d9b0cbb2c66ec95cdc52"
+      "bytes": 127678,
+      "sha256": "93a5467fbc7ada9d76b0cb9446fd39ae41aecf0dfba98d1e9c0b2c3da8a3615a"
     },
     {
       "location": "public",
       "filename": "veritas-elevation-surface-alpha@2x.webp",
-      "bytes": 462640,
-      "sha256": "00e75426f3a3ecca25f1b6a25db31d55da691601a1ccbd37c6cd3521f7f681b5"
+      "bytes": 500542,
+      "sha256": "7f68c2896cc4f96edd0b160dc9aed345425d65cfb55a0f8cc87b36a2163dd2ea"
     },
     {
       "location": "public",
       "filename": "veritas-elevation-surface@2x.webp",
-      "bytes": 185614,
-      "sha256": "bb05fbb3a069bbe02ca556745f3c29f1546cbaaf096bb76c98064275b857ffec"
+      "bytes": 192104,
+      "sha256": "cddb18a130cdbc32178a18ebb0c0f9832abff5d297e723a7d0fdaa0dc37b91af"
     },
     {
       "location": "public",
@@ -46,26 +46,26 @@
     {
       "location": "public",
       "filename": "veritas-shape-shadow-alpha@2x.webp",
-      "bytes": 327918,
-      "sha256": "a7e57c633450eeb0b0ca1161dfa6bbe5ebebc64196dcfd7222e07b4d5ea1b89e"
+      "bytes": 357996,
+      "sha256": "b51bb01a992e87a49a1a11104ce03678b8769cd655bbc8eddc38b447c8a585be"
     },
     {
       "location": "public",
       "filename": "veritas-shape-shadow@2x.webp",
-      "bytes": 50300,
-      "sha256": "4a5bf6eb04b38c11823eef3b358fd77a87349619279d952f9514f597133cc70b"
+      "bytes": 52596,
+      "sha256": "94576bd3bf35f2d3363ed2f45981b053fd6925c793d526d721c2c522226c7a74"
     },
     {
       "location": "public",
       "filename": "veritas-shape-surface-alpha@2x.webp",
-      "bytes": 325094,
-      "sha256": "68a0d2bad3b7a5d4195bd4d936d23361da68b1b54a137d20a0353104e23bfa06"
+      "bytes": 354712,
+      "sha256": "efe469c9e1e7035d3c0ad184810dbbed92056bfcf26770592262eb79dc3f5a3f"
     },
     {
       "location": "public",
       "filename": "veritas-shape-surface@2x.webp",
-      "bytes": 45992,
-      "sha256": "d987e7e4e44d7f2a1d2c2ec9de281287d9743c614c54c1b385a7f6d25942480f"
+      "bytes": 47202,
+      "sha256": "80ebd66c6157690ca4e5549b6e83534bd6ed6a51e12330ca80072a6aa209efc6"
     },
     {
       "location": "public",
@@ -101,13 +101,13 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1378,
-      "sha256": "acb5c59fcc9d33bf04af380b39f2fa79fd5d9f8736d5afbe500c57b42b062a6e"
+      "sha256": "ac5780c5925af1daf253cf96d690780f6264caab75aab88008c8fb2a4505c137"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 2880,
-      "sha256": "36421a352f26ba35c557c1f5c89c28f8c7d93dc27b3aca0f9469fe958ca0da25"
+      "bytes": 2872,
+      "sha256": "e02b1ba8cbe5f382a36fb16c783ac7b9615a723e03f37aa3e606545c8121c2f1"
     },
     {
       "location": "prepared",
@@ -130,14 +130,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 224617,
-      "sha256": "8cd4bd607ac99c3167500cae58cdfd9f2d314cdc7763b2d84c1b1bd25cd73af7"
+      "bytes": 270211,
+      "sha256": "3c0105b6c79f7e94da89c54d1c21d89cc000d1d50972c8c65f68bae31a90577a"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 252071,
-      "sha256": "19401f5cb6ac21e9d4d48056214fe9c70528e535772fb5b54de4dc1115df64c9"
+      "bytes": 305326,
+      "sha256": "61592ca543c98e9c4a5f78dbdf7531dfb625046ced4932393954fef4313e7d8c"
     },
     {
       "location": "prepared",
@@ -154,8 +154,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2885,
-      "sha256": "bc6e85f90e44e28ddd92511060e4482f1c66e18814a276c4cfdbab870867aa94"
+      "bytes": 2877,
+      "sha256": "bbd143cbdfcc27b1efe38333903df256739b267ece4dea17c103dbb63b07a312"
     },
     {
       "location": "prepared",

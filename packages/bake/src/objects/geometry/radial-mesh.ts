@@ -137,13 +137,19 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
   return faces;
 }
 
-/** Points a reduced triangle is sampled at, along each edge: 45 a triangle with its corners, which are source vertices. */
-const SOURCE_DISTANCE_STEPS = 8;
+/** Steps along each edge of a reduced triangle between the points it is sampled at: a quick pass of 45 points a
+ * triangle, then 325. A map samples the source at every texel within the same bound; 45 points alone let the farthest
+ * spot of a triangle slip through, a few hundred texels of 13 million on one body in four (2026-10-06). */
+const SOURCE_DISTANCE_STEPS = [8, 24] as const;
 /** The largest distance from a reduced surface to its source over a grid of points on every triangle, or null when one
  * of them has no source surface within `bound`. Sampled, so not a continuous Hausdorff distance. */
 function sampledSourceDistance(source: TerrainMesh, positions: readonly (readonly number[])[], indices: Uint32Array, bound: number): number | null {
+  let maximum: number | null = 0;
+  for (const steps of SOURCE_DISTANCE_STEPS) if ((maximum = sampledAt(source, positions, indices, bound, steps)) === null) break;
+  return maximum;
+}
+function sampledAt(source: TerrainMesh, positions: readonly (readonly number[])[], indices: Uint32Array, bound: number, steps: number): number | null {
   let maximum = 0;
-  const steps = SOURCE_DISTANCE_STEPS;
   for (let i = 0; i < indices.length; i += 3) {
     const a = positions[indices[i]], b = positions[indices[i + 1]], c = positions[indices[i + 2]];
     for (let u = 0; u <= steps; u++) for (let v = 0; v <= steps - u; v++) {
