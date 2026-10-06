@@ -98,8 +98,9 @@ export async function reduceStar(id: string, keepPixels = false, light?: StarLig
   const keep = async (window: number, curve: NonNullable<Awaited<ReturnType<typeof sectorLightCurve>>>) => { seen = { window, time: curve.time, flux: curve.flux }; await writeFile(resolve(run, `${windowStem(id, mission, window)}.curve.json`), `${JSON.stringify({ mission, window, binDays: BIN_DAYS, time: curve.time, flux: curve.flux })}\n`); };
   const measured = (curve: Awaited<ReturnType<typeof sectorLightCurve>>, window: number) => curve ? { frames: curve.frames, aperturePixels: curve.aperturePixels, saturated: curve.saturated, strongest: curve.whole, [LIMITS[mission].pieces]: curve.halves, lightCurve: `${windowStem(id, mission, window)}.curve.json` } : {};
   let sectors: ImagedSector[] = [];
-  if (file) { const held = await fetchPixelFile(file, pixels), curve = await sectorLightCurve(held.file, mission); rotation = judged(curve);
-    tried.push({ mission, window: file.window, cadenceMinutes: 30, pixels: { url: held.url, bytes: held.bytes }, ...measured(curve, file.window), verdict: rotation }); if (curve) await keep(file.window, curve); }
+  // The campaign or quarter is the one the file's own header names; the archive's name for it stands when no light was measured.
+  if (file) { const held = await fetchPixelFile(file, pixels), curve = await sectorLightCurve(held.file, mission), window = curve?.window ?? file.window; rotation = judged(curve);
+    tried.push({ mission, window, cadenceMinutes: 30, pixels: { url: held.url, bytes: held.bytes }, ...measured(curve, window), verdict: rotation }); if (curve) await keep(window, curve); }
   else if (!refusal) { sectors = await sectorsAt(...Object.values(placeAt(star, MISSION_YEAR)) as [number, number]); const picked = pickSector(sectors), newest = sectors.at(-1);
     // A sector in which no pixel stands above the sky at the star (the star at a detector's edge, a frame full of scattered
     // light) holds no light curve to judge: the newest sector is read in its place.
@@ -107,7 +108,7 @@ export async function reduceStar(id: string, keepPixels = false, light?: StarLig
       tried.push({ mission, window: sector, sector, cadenceMinutes: Number(cadenceMinutes(sector).toFixed(2)), pixels: { url: cutout.url, bytes: cutout.bytes }, ...measured(curve, sector), verdict: rotation });
       if (curve) { await keep(sector, curve); break; } } }
   if (!keepPixels) await rm(pixels, { recursive: true, force: true });
-  const receipt: Record<string, unknown> = { schema: ROTATION_SCHEMA, star, ...(own ? { light: own } : {}), pixelFiles: files.map(one => ({ mission: one.mission, window: one.window, bytes: one.bytes })), sectorsImaged: sectors.map(sector => sector.sector), tried, rotation, toolchain: { id: pins.id, requirements: pins.entry.requirements } };
+  const receipt: Record<string, unknown> = { schema: ROTATION_SCHEMA, star, ...(own ? { light: own } : {}), pixelFiles: files.map(one => ({ mission: one.mission, window: one.window, ...(one.days === undefined ? {} : { days: one.days }) })), sectorsImaged: sectors.map(sector => sector.sector), tried, rotation, toolchain: { id: pins.id, requirements: pins.entry.requirements } };
   const read = seen as { window: number; time: readonly number[]; flux: readonly number[] } | undefined;
   if (rotation.detected && read) { const tilt = star.tiltDegrees ?? ASSUMED_TILT_DEGREES, map = await brightnessMap(read, rotation.periodDays!, Math.min(tilt, 90)), table = `${windowStem(id, mission, read.window)}.dat`, flat = map.values.flat();
     await writeFile(resolve(run, table), brightnessTable(`Brightness map of ${star.name} from its light in ${mission} ${LIMITS[mission].window} ${read.window} (period ${rotation.periodDays} d)`, map));

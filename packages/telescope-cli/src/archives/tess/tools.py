@@ -21,6 +21,7 @@ def light_curve(job):
     from astropy.timeseries import LombScargle
 
     mission = job.get('mission', 'TESS')
+    window = None
     if mission == 'TESS':
         tpf = lk.TessTargetPixelFile(job['cutout'])
         tpf = tpf[tpf.quality == 0]
@@ -34,6 +35,8 @@ def light_curve(job):
         # A Kepler or K2 target pixel file: the mission's own aperture where it gives one. K2 rolled about its boresight,
         # and lightkurve's self-flat-fielding corrector (Vanderburg & Johnson 2014) takes that motion out and keeps the star's own trend.
         tpf = lk.read(job['cutout'])
+        # The campaign or the quarter, as the file's own header has it.
+        window = tpf.campaign if mission == 'K2' else tpf.quarter
         mask = tpf.pipeline_mask if tpf.pipeline_mask.sum() else tpf.create_threshold_mask(threshold=job['threshold'])
         if mask.sum() == 0:
             return {'frames': int(len(tpf.time)), 'aperturePixels': 0}
@@ -64,7 +67,7 @@ def light_curve(job):
     halves = [(time[:gap + 1], level(time[:gap + 1], raw_flux[:gap + 1])), (time[gap + 1:], level(time[gap + 1:], raw_flux[gap + 1:]))] if len(time) > 20 else []
     span = float(time.max() - time.min())
     longest = span / job.get('longestShare', 2)
-    return {'frames': int(len(curve.time)), 'aperturePixels': int(mask.sum()), 'saturated': bool(mission == 'TESS' and np.nanmax(tpf.flux.value) > job['saturationElectronsPerSecond']),
+    return {'frames': int(len(curve.time)), 'aperturePixels': int(mask.sum()), **({} if window is None else {'window': int(window)}), 'saturated': bool(mission == 'TESS' and np.nanmax(tpf.flux.value) > job['saturationElectronsPerSecond']),
             'spanDays': span, 'scatter': float(np.std(flux)), 'whole': peak(time, flux, longest),
             'halves': [peak(t, f, min(longest, float(t.max() - t.min()))) if len(t) > 10 else None for t, f in halves],
             'time': [round(float(value), 5) for value in time], 'flux': [round(float(value), 6) for value in flux]}

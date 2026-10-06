@@ -1,16 +1,28 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { parseObservations, parseProducts, pickFile } from './pixels.mts';
+import { campaignFile, parseObservations, pickFile, quarterFiles, quarterFolder } from './pixels.mts';
 
-test('MAST\'s answers are read as the long-cadence pixel files of Kepler and K2', () => {
+test('MAST\'s answer for a place is read as the long-cadence pixel files of Kepler and K2', () => {
   // Kepler-93 has a 30-minute and a one-minute observation; only the first is kept.
-  const observations = parseObservations({ status: 'COMPLETE', data: [{ obsid: 526507, obs_collection: 'Kepler', target_name: 'kplr003544595', t_exptime: 1800, s_ra: 290.1, s_dec: 38.6 }, { obsid: 600965, obs_collection: 'Kepler', target_name: 'kplr003544595', t_exptime: 60 },
-    { obsid: 7, obs_collection: 'TESS', target_name: 'x', t_exptime: 1800 }] });
-  assert.deepEqual(observations, [{ obsid: 526507, mission: 'Kepler', target: 'kplr003544595', raDegrees: 290.1, decDegrees: 38.6 }]);
-  const k2 = { obsid: 735180, mission: 'K2' as const, target: 'ktwo247589423', raDegrees: 73.6, decDegrees: 18.9 };
-  const files = parseProducts({ status: 'COMPLETE', data: [{ productFilename: 'ktwo247589423-c13_llc.fits', dataURI: 'mast:K2/url/x_llc.fits', size: 423360, productSubGroupDescription: 'LLC', description: 'Lightcurve Long Cadence (KLC) - C13' },
-    { productFilename: 'ktwo247589423-c13_lpd-targ.fits.gz', dataURI: 'mast:K2/url/missions/k2/target_pixel_files/c13/247500000/89000/ktwo247589423-c13_lpd-targ.fits.gz', size: 8877975, productSubGroupDescription: 'LPD-TARG', description: 'Target Pixel Long Cadence (KTL) - C13' },
-    { productFilename: 'ktwo247589423-c05_lpd-targ.fits.gz', dataURI: 'mast:K2/url/c05', size: 6000000, productSubGroupDescription: 'LPD-TARG', description: 'Target Pixel Long Cadence (KTL) - C5' }] }, k2);
-  assert.deepEqual(files.map(file => [file.window, file.bytes]), [[5, 6000000], [13, 8877975]]); assert.equal(pickFile(files)!.window, 13); assert.equal(pickFile([]), undefined);
+  const observations = parseObservations({ status: 'COMPLETE', data: [
+    { obs_id: 'kplr005772710_lc_Q111100111011101110', obs_collection: 'Kepler', target_name: 'kplr005772710', t_exptime: 1800, t_min: 54953.0375, t_max: 56390.4597, s_ra: 285.1429, s_dec: 41.06201 },
+    { obs_id: 'kplr005772710_sc_Q000000000000000010', obs_collection: 'Kepler', target_name: 'kplr005772710', t_exptime: 60, t_min: 1, t_max: 2, s_ra: 285.1429, s_dec: 41.06201 },
+    { obs_id: 'ktwo247589423-c13_lc', obs_collection: 'K2', target_name: 'ktwo247589423', t_exptime: 1800, t_min: 57820.066, t_max: 57900.656, s_ra: 67.41246, s_dec: 22.882721 },
+    { obs_id: 'x', obs_collection: 'TESS', target_name: 'x', t_exptime: 1800, s_ra: 1, s_dec: 1 }] });
+  assert.deepEqual(observations.map(one => [one.mission, one.id, one.days]), [['Kepler', 'kplr005772710_lc_Q111100111011101110', 1437.4], ['K2', 'ktwo247589423-c13_lc', 80.6]]);
+  // A K2 campaign's file is at the address the mission files it under.
+  assert.deepEqual(campaignFile(observations[1]!), { mission: 'K2', target: 'ktwo247589423', window: 13, filename: 'ktwo247589423-c13_lpd-targ.fits.gz', days: 80.6, uri: 'mast:K2/url/missions/k2/target_pixel_files/c13/247500000/89000/ktwo247589423-c13_lpd-targ.fits.gz' });
+  assert.equal(campaignFile(observations[0]!), undefined);
+  // A Kepler target's folder lists one file for each quarter its observation flags, in the order of time.
+  assert.equal(quarterFolder('005772710'), 'https://archive.stsci.edu/missions/kepler/target_pixel_files/0057/005772710/');
+  const stamps = ['2009131105131', '2009166043257', '2009259160929', '2009350155506', '2010265121752', '2010355172524', '2011073133259', '2011271113734', '2012004120508', '2012088054726', '2012277125453', '2013011073258', '2013098041711'];
+  const listing = stamps.map(stamp => `<li><a href="kplr005772710-${stamp}_lpd-targ.fits.gz"> kplr005772710-${stamp}_lpd-targ.fits.gz</a></li>`).join('\n');
+  const quarters = quarterFiles(observations[0]!, listing);
+  assert.deepEqual(quarters.map(file => file.window), [0, 1, 2, 3, 6, 7, 8, 10, 11, 12, 14, 15, 16]); assert.equal(quarters[4]!.uri, 'mast:Kepler/url/missions/kepler/target_pixel_files/0057/005772710/kplr005772710-2010265121752_lpd-targ.fits.gz');
+  // The full-length quarter nearest the middle of the mission is read; a folder that does not match the flags gives none.
+  assert.equal(pickFile(quarters)!.window, 8); assert.deepEqual(quarterFiles(observations[0]!, listing.split('\n').slice(1).join('\n')), []);
+  // Of two K2 campaigns the longer is read, and of equals the newer.
+  const campaigns = [{ ...campaignFile(observations[1]!)!, window: 5, days: 74.8 }, campaignFile(observations[1]!)!, { ...campaignFile(observations[1]!)!, window: 18, days: 80.6 }];
+  assert.equal(pickFile(campaigns)!.window, 18); assert.equal(pickFile([]), undefined);
   assert.throws(() => parseObservations({ status: 'ERROR' }), /did not answer with a list of observations/u);
 });

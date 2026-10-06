@@ -25,7 +25,7 @@ export const SHORTEST_DAYS = 0.1, FREQUENCIES = 20000;
 export const SATURATION_ELECTRONS_PER_SECOND = 1.5e5;
 
 export interface Peak { readonly periodDays: number; readonly power: number; /** Peak to peak, as a share of the star's mean light. */ readonly amplitude: number }
-export interface SectorLightCurve { readonly frames: number; readonly aperturePixels: number; readonly saturated: boolean; readonly spanDays: number; readonly scatter: number;
+export interface SectorLightCurve { readonly frames: number; readonly aperturePixels: number; /** The campaign or quarter a Kepler or K2 file's header names. */ readonly window?: number; readonly saturated: boolean; readonly spanDays: number; readonly scatter: number;
   readonly whole: Peak; /** The same search in each of the sector's two orbits, where an orbit holds enough of the curve. */ readonly halves: readonly (Peak | null)[];
   readonly time: readonly number[]; readonly flux: readonly number[] }
 
@@ -104,7 +104,7 @@ export function parseLightCurve(value: unknown): SectorLightCurve | undefined {
   if (requireFiniteNumber(record.aperturePixels, 'aperture pixels') === 0) return undefined;
   const numbers = (key: string) => requireArray(record[key], key).map((entry, index) => requireFiniteNumber(entry, `${key}[${index}]`)), time = numbers('time'), flux = numbers('flux');
   if (time.length !== flux.length || !time.length) throw new TypeError('The light curve has times and fluxes of different lengths.');
-  return { frames: requireFiniteNumber(record.frames, 'frames'), aperturePixels: requireFiniteNumber(record.aperturePixels, 'aperture pixels'), saturated: record.saturated === true, spanDays: requireFiniteNumber(record.spanDays, 'span'),
+  return { frames: requireFiniteNumber(record.frames, 'frames'), aperturePixels: requireFiniteNumber(record.aperturePixels, 'aperture pixels'), ...(typeof record.window === 'number' ? { window: record.window } : {}), saturated: record.saturated === true, spanDays: requireFiniteNumber(record.spanDays, 'span'),
     scatter: requireFiniteNumber(record.scatter, 'scatter'), whole: peak(record.whole, 'whole sector'), halves: requireArray(record.halves, 'halves').map((half, index) => isRecord(half) ? peak(half, `orbit ${index + 1}`) : null), time, flux };
 }
 
