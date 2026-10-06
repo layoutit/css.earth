@@ -63,6 +63,8 @@ export async function cataloguedPeriods(stars: readonly { readonly id: string; r
   const answers = new Map<string, string>();
   for (const column of columns) { if (!answers.has(column.table)) answers.set(column.table, await match(column, csv));
     for (const { id, period } of parseMatches(answers.get(column.table)!, column)) { add(id, period); lines.push(JSON.stringify({ id, period })); } }
-  await mkdir(dirname(kept), { recursive: true }); await writeFile(kept, lines.length ? `${lines.join('\n')}\n` : '');
+  // The stars asked anew replace their own kept lines; every other star's stay.
+  const asked = new Set(stars.map(star => star.id)), others = (await readFile(kept, 'utf8').catch(() => '')).split('\n').filter(line => { if (!line) return false; const row = JSON.parse(line) as unknown; return isRecord(row) && typeof row.id === 'string' && !asked.has(row.id); });
+  await mkdir(dirname(kept), { recursive: true }); await writeFile(kept, [...others, ...lines].map(line => `${line}\n`).join(''));
   return found;
 }
