@@ -14,6 +14,11 @@
       -0.385595,
       0.264864
     ],
+    "sunPositionBodyEquatorKm": [
+      956905303.3785112,
+      1061386978.532605,
+      -42784596.65030493
+    ],
     "bodyObliquityDegrees": 26.73,
     "staticSystemTiltAxis": "source-x",
     "staticSystemNodeDegrees": -60,
@@ -53,6 +58,16 @@
     "ringsOnSaturn": {
       "model": "ray-to-prepared-ring-alpha-profile",
       "authority": "https://science.nasa.gov/photojournal/rings-and-shadows/"
+    },
+    "sunPosition": {
+      "model": "geometric-sun-position-from-the-body-center-in-the-body-equator-frame-at-the-surface-map-date",
+      "epoch": "2025-08-29T12:00:00 TDB",
+      "frame": "IAU_SATURN body equator and node of date",
+      "authority": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='10'&OBJ_DATA='NO'&MAKE_EPHEM='YES'&EPHEM_TYPE='VECTORS'&CENTER='500@699'&REF_PLANE='B'&VEC_TABLE='1'&TLIST='2025-08-29%2012:00'"
+    },
+    "ringsOnSurfaceMap": {
+      "model": "noon-ray-to-slant-path-normal-optical-depth-profile",
+      "authority": "https://doi.org/10.1088/0004-6256/140/6/1569"
     }
   }
 }
