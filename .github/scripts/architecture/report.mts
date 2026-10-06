@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { hasErrorCode } from '@cssearth/core';
 import { resolve } from 'node:path';
 import { BASELINE_PATH, compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, measure, type Baseline, type Delta } from './baseline.mts';
+import { checkFileCycles, FILE_CYCLE_ROOTS } from './file-cycles.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, folderStats, layerOrder } from './folders.mts';
 import { buildImportGraph, repositoryFiles } from './graph.mts';
 import { isBroken, REPOSITORY_RULES, repositoryFindings } from './repository-rules.mts';
@@ -55,6 +56,14 @@ export function formatDelta(delta: Delta): string {
   return lines.join('\n');
 }
 
+/** File-level import cycles: their count, then each cycle by a path through it. */
+export function formatFileCycles(cycles: readonly string[]): string {
+  const lines = [`file-cycles: ${cycles.length} findings in ${FILE_CYCLE_ROOTS.join(', ')} (no baseline; any finding fails)`];
+  if (cycles.length) lines.push('', 'File import cycles (type-only and dynamic imports count; move the shared type or piece to a module both can import):');
+  for (const cycle of cycles) lines.push(`  ${cycle}`);
+  return lines.join('\n');
+}
+
 /** The repository rules' counts, then each broken rule with its findings. */
 export function formatFindings(findings: ReadonlyMap<string, readonly string[]>): string {
   const lines = [...findings].map(([rule, items]) => `${rule}: ${items.length} findings (no baseline; any finding fails)`);
@@ -82,6 +91,7 @@ export async function check(root: string, update: boolean): Promise<boolean> {
     throw error;
   });
   const measurement = measure(graph);
+  const cycles = checkFileCycles(graph);
   const { checkSiteArchitecture } = await import('./site-architecture.mts');
   await checkSiteArchitecture(root, { graph });
   // Only an update may start from a missing baseline; a check without one is a broken checkout.
@@ -93,8 +103,9 @@ export async function check(root: string, update: boolean): Promise<boolean> {
   const seconds = ((performance.now() - started) / 1000).toFixed(1);
   if (delta) console.log(formatDelta(delta));
   console.log(formatFindings(findings));
+  console.log(formatFileCycles(cycles));
   if (update) {
-    if (broken || (delta && isWorse(delta)) || [...measurement.noBaselineRules].some(rule => (measurement.rules.get(rule)?.length ?? 0) > 0)) {
+    if (broken || cycles.length > 0 || (delta && isWorse(delta)) || [...measurement.noBaselineRules].some(rule => (measurement.rules.get(rule)?.length ?? 0) > 0)) {
       console.log('Baseline update refused: fix new violations first; no-baseline findings are never recorded.');
       return false;
     }
@@ -103,7 +114,7 @@ export async function check(root: string, update: boolean): Promise<boolean> {
     console.log(`\nWrote ${BASELINE_PATH}: largest cycle ${next.cycles.largestCycle} folders, ${next.cycles.cycleClosingEdges.length} cycle-closing edges (${seconds} s).`);
     return true;
   }
-  const worse = (delta !== undefined && isWorse(delta)) || broken;
+  const worse = (delta !== undefined && isWorse(delta)) || broken || cycles.length > 0;
   console.log(`\n${worse ? 'ARCHITECTURE_WORSE' : 'ARCHITECTURE_OK'}: compared with ${BASELINE_PATH} in ${seconds} s.`);
   return !worse;
 }
