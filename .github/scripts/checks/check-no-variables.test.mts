@@ -19,5 +19,5 @@ test('a renderer source that names a custom property in a string is refused; a c
     ["packages/renderer/src/volume/a.ts:1: host.style.setProperty('--native-volume-mix', fade);"]);
   assert.equal(sourceVariables('packages/renderer/src/volume/a.ts', 'const length = `calc(var(--prepared-view-focal) * 2)`;').length, 1);
   assert.deepEqual(sourceVariables('packages/renderer/src/rendering/a.ts', "// the bake names it `--silhouette-step`\nif (name.startsWith('--')) throw new TypeError('no');"), []);
-  assert.deepEqual(sourceVariables('packages/renderer/src/rendering/object-control-binding.ts', "player.style.setProperty('--sequence-hold', hold);"), []);
+  assert.deepEqual(sourceVariables('packages/renderer/src/rendering/view/object-control-binding.ts', "player.style.setProperty('--sequence-hold', hold);"), []);
 });

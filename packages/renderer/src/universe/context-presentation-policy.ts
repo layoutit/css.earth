@@ -1,5 +1,5 @@
 import type { OrbitLineFade } from '@cssearth/objects';
-import { orbitLineOpacity } from '../navigation/perspective-dolly.js';
+import { orbitLineOpacity } from '../navigation/camera/perspective-dolly.js';
 
 // Every dimming of the world context is one of these four, and the planner applies each in one place.
 /** Context paths while the focused body fills the view. */

@@ -2,11 +2,11 @@ import { OBJECT_RUNTIME_SCHEMA, parsePreparedObjectRuntime } from '@cssearth/obj
 
 import { presentationAdapters, type PresentationHostAdapters } from './adapters.ts';
 import { requirePreparedPresentation } from './prepared-presentation-contract.ts';
-import { prepareRowBankCutaway } from './row-bank-cutaway.ts';
-import { prepareComposite } from './composite.ts';
-import { prepareEmissive } from './emissive.ts';
+import { prepareRowBankCutaway } from './lighting/row-bank-cutaway.ts';
+import { prepareComposite } from './lighting/composite.ts';
+import { prepareEmissive } from './lighting/emissive.ts';
 import type { PresentationInputs } from './types.ts';
-import { prepareActivationGroups } from './prepared-activation-groups.ts';
+import { prepareActivationGroups } from './layout/prepared-activation-groups.ts';
 export type { PresentationInputs } from './types.ts';
 
 /** Compile capabilities into a retained CSS tree; the runtime accepts only validated data. */

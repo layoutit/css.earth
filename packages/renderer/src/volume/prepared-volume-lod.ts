@@ -1,9 +1,9 @@
 import { samePreparedVolumeTopology, validatePreparedCssVolume } from '@cssearth/objects';
-import { writeData, writeStyle } from '../rendering/retained-write.js';
+import { writeData, writeStyle } from '../rendering/dom/retained-write.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
-import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '../rendering/native-projection.js';
-import { revealLayer } from '../rendering/layer-reveal.js';
+import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '../rendering/view/native-projection.js';
+import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import { LARGE_IMAGE_PIXELS, mountPreparedCssVolume } from './prepared-volume-runtime.js';
 
 const AXES = ['x', 'y', 'z'] as const;

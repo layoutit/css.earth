@@ -1,8 +1,8 @@
 import { validatePreparedCataloguePoints, type PreparedCataloguePoints, samePreparedCatalogueGeometry } from '@cssearth/objects';
-import { writeStyle } from '../rendering/retained-write.js';
+import { writeStyle } from '../rendering/dom/retained-write.js';
 import { presentPhysicalPoseInVolume, cssViewFromOrientation } from '@cssearth/engine';
 import type { VolumeCameraPublication } from '../volume/types.js';
-import { nativeProjectedLength } from '../rendering/native-projection.js';
+import { nativeProjectedLength } from '../rendering/view/native-projection.js';
 
 /** Retained catalogue geometry. Only camera projection and prepared point presentation enter runtime. */
 export function mountPreparedCataloguePoints({ host, before, payload, createElement, nativeFocalCss }: {

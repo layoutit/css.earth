@@ -1,6 +1,6 @@
 import { presentPhysicalPoseInVolume, worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
 import { preparedVolumeCameraTransform, STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
-import { createSettlePacer } from '../rendering/settle-pacer.js';
+import { createSettlePacer } from '../rendering/loading/settle-pacer.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from '@cssearth/objects';
 

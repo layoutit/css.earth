@@ -1,6 +1,6 @@
 import { dollyPoseAboutFocus } from '@cssearth/engine';
 import { opacityClockFor } from '@cssearth/renderer';
-import { worldCameraViewport, type presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { worldCameraViewport, type presentWorldCamera } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 
 type WorldCamera = Parameters<typeof presentWorldCamera>[0];

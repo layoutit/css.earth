@@ -13,14 +13,14 @@ import { galaxyOutsideFade, logarithmicFade } from './world-context/context-scal
 import { mountPreparedWorldContext, type BodyVisibility, type WorldBodyAnnotations } from './prepared-world-context.js';
 
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 
 import { mountWorldContextPointSource } from './world-context/world-context-point-source.js';
 
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
 
-import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
+import type { PreparedLabelEdge } from '../navigation/camera/prepared-label-edge.js';
 import { createContextFocusBank } from './prepared-focus-bank.js';
 import { createDetailStandIn, detailedFocusContextOpacity, samePlaceM, selectedBodyContextOpacity } from './detailed-focus-context.js';
 import type { SelectedBank } from './detailed-focus-context.js';

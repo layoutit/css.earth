@@ -1,11 +1,11 @@
-import { parseSharedView } from '@cssearth/renderer/navigation/view-url.ts';
+import { parseSharedView } from '@cssearth/renderer/navigation/camera/view-url.ts';
 import { savedWorldCamera } from '@cssearth/renderer/navigation';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { loadPreparedCssObject } from '@cssearth/renderer';
 import { createPreparedObjectNavigation } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
-import { selectPreparedTextureLevel } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
-import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { selectPreparedTextureLevel } from '@cssearth/renderer/rendering/textures/prepared-texture-levels.ts';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import { readPreparedObjectBytes } from '../server/object-page-data.mts';
 import { requireObject } from '../directory/objects.mts';
 import { usesDefaultStartupView, readStartupSavedView } from './startup-billboard.mts';

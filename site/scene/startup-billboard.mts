@@ -1,12 +1,12 @@
-import { parseSharedView } from '@cssearth/renderer/navigation/view-url.ts';
+import { parseSharedView } from '@cssearth/renderer/navigation/camera/view-url.ts';
 import { parseObjectDiscovery } from '@cssearth/objects';
 import type { SceneFactory } from '../browser/browser-types.mts';
-import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';
+import type { CameraViewport } from '@cssearth/renderer/navigation/camera/camera-viewport.ts';
 import { prepareArrivalBillboard } from '../navigation/arrival-billboard.mts';
 import { createPreparedArrival } from '../navigation/prepared-arrival.mts';
 import { namesSystem } from '../world/systems/navigation-scope.mts';
 import { MOBILE_VIEWPORT_QUERY } from '../browser/runtime-policy.mts';
-import { releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
+import { releaseStartup } from '@cssearth/renderer/rendering/loading/startup-gate.ts';
 
 /** A custom view never borrows the default arrival photograph, and neither does a system's page: it shows its host out
  * to its members, not the host's own opening view. */

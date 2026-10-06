@@ -4,7 +4,7 @@ import type { VolumeCameraPublication } from '../volume/types.js';
 
 import { DOT_SLOTS, SPLIT_POINTS, mountPointPaths, type PointPaintSlots } from './point-paths.js';
 import { cameraRest, pointLayerSlot, sameRest, type PointLayerMember, type PointLayerRepaint, type PointLayerSlot } from './point-layer.js';
-import { createSettlePacer } from '../rendering/settle-pacer.js';
+import { createSettlePacer } from '../rendering/loading/settle-pacer.js';
 
 export interface BatchedSpatialPoint { readonly positionUnits: VolumeVector }
 export interface BatchedSpatialPointStyle { readonly colorCss: string; readonly opacity: number; readonly radiusPx: number }

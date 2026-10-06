@@ -106,7 +106,7 @@ export interface PreparedTextureLevels {
   /** A write whose faces are off screen or behind the body keeps the first level: sharper texels there are never seen,
    * and a browser decodes a whole image to draw any of it. */
   placements?: PreparedTexturePlacements;
-  /** The leaves that draw each tiled page, as records (packages/bake/src/presentation/texture-tile-records.ts). */
+  /** The leaves that draw each tiled page, as records (packages/bake/src/presentation/records/texture-tile-records.ts). */
   tileLeaves?: readonly PreparedTextureTileLeaves[];
 }
 

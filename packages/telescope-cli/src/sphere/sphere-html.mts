@@ -1,15 +1,15 @@
 /** Serialize the standard prepared sphere and its CSS camera at export time. */
 import { parseHTML } from 'linkedom';
-import { serializePreparedScene } from '@cssearth/renderer/rendering/prepared-scene-serialization.ts';
+import { serializePreparedScene } from '@cssearth/renderer/rendering/view/prepared-scene-serialization.ts';
 import { initialObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
-import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
+import { publishPreparedNativeView } from '@cssearth/renderer/rendering/view/prepared-native-view.ts';
 import { preparedSceneMatrix, distanceForSilhouetteRadius } from '@cssearth/engine';
 import { serializePreparedMatrix4 } from '@cssearth/core';
 import { CAMERA_POSE_SCHEMA, parsePreparedWorldCameraFrame, type ObjectRuntimeDefinition } from '@cssearth/objects';
 import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
 import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
 import { carryViewportValues } from '@cssearth/telescope-cli/sphere/native-scroll/carry-values';
-import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
+import type { SharedView } from '@cssearth/renderer/navigation/camera/view-url.ts';
 
 const escape=(s:string)=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 /** What the page reads of a prepared measurement sphere (`measurementSphere`): its one-dataset runtime, frame, world context,

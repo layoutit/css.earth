@@ -3,24 +3,24 @@ import type { WorldRotation } from '@cssearth/core';
 import { worldCameraFromCenteredPresentation, type WorldCameraPose, viewSunDirectionToPhysicalLightDirection } from '@cssearth/engine';
 
 import { initialStageSelection } from './initial-stage-selection.js';
-import { savedWorldCamera } from '../navigation/saved-world-camera.js';
-import type { SharedView } from '../navigation/view-url.js';
-import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
+import { savedWorldCamera } from '../navigation/camera/saved-world-camera.js';
+import type { SharedView } from '../navigation/camera/view-url.js';
+import { preparedLabelEdge } from '../navigation/camera/prepared-label-edge.js';
 
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 
-import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from '../navigation/world-camera.js';
-import { createCameraOrientation } from '../navigation/camera-orientation.js';
-import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
+import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from '../navigation/camera/world-camera.js';
+import { createCameraOrientation } from '../navigation/camera/camera-orientation.js';
+import { levelOfDetailFor } from '../navigation/camera/perspective-dolly.js';
 import { initialObjectSelection } from './object-contract.js';
-import { resolvePreparedPresentation } from '../rendering/prepared-presentation.js';
+import { resolvePreparedPresentation } from '../rendering/view/prepared-presentation.js';
 import { prepareObjectResources } from './prepared-resource-lease.js';
 import { loadPreparedDataset } from '../loader.js';
-import { preparePresentationTree, type PreparedTreeLease } from '../rendering/prepared-tree.js';
-import type { CameraViewport } from '../navigation/camera-viewport.js';
-import { selectPreparedResponsiveZoom } from '../navigation/camera-layout.js';
+import { preparePresentationTree, type PreparedTreeLease } from '../rendering/dom/prepared-tree.js';
+import type { CameraViewport } from '../navigation/camera/camera-viewport.js';
+import { selectPreparedResponsiveZoom } from '../navigation/camera/camera-layout.js';
 
 export interface ObjectPreparationView { world: WorldCameraPose; viewport: WorldCameraViewport; }
 

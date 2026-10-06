@@ -1,8 +1,8 @@
 import { createSystemFade, extendedRetirement, logarithmicFade, starFieldFade, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './context-scale.js';
 import { eyeAnchor, eyeDistanceM, type PositionM, type WorldCameraPose, cssViewFromOrientation, rayHitsSphereBefore } from '@cssearth/engine';
 import { isExtendedClassification, type PreparedContextOrbit, type PreparedContextOrbitGeometry, type PreparedWorldContext, type PreparedWorldContextGeometry } from '@cssearth/objects';
-import type { WorldCameraViewport } from '../../navigation/world-camera.js';
-import { levelOfDetailFor } from '../../navigation/perspective-dolly.js';
+import type { WorldCameraViewport } from '../../navigation/camera/world-camera.js';
+import { levelOfDetailFor } from '../../navigation/camera/perspective-dolly.js';
 import { closeOrbitFades, contextEmphasis, contextSubject, namedBesideSubject, otherSystemsOpacity, outsideFamilyOrbitOpacity, pathOpacity, selectedOrbitDepthFade, inSubjectFamily } from '../context-presentation-policy.js';
 import { billboardImageScale } from '../../navigation/prepared-body-billboards.js';
 import { createPreparedRingProjector, createRetainedRingProjection, orbitBoundsMayContribute, projectedSphereDiameter, orbitProjectionCapacity } from '../../solar-system/prepared-ring-projection.js';

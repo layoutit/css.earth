@@ -5,10 +5,10 @@ import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { loadPreparedCssObject, loadPreparedDataset } from '../loader.js';
-import { selectedPreparedVariant } from '../rendering/prepared-presentation.js';
-import { serializePreparedScene } from '../rendering/prepared-scene-serialization.js';
+import { selectedPreparedVariant } from '../rendering/view/prepared-presentation.js';
+import { serializePreparedScene } from '../rendering/view/prepared-scene-serialization.js';
 import { initialObjectSelection } from '../runtime/object-contract.js';
-import { createObjectControlBinding } from '../rendering/object-control-binding.js';
+import { createObjectControlBinding } from '../rendering/view/object-control-binding.js';
 import { parseHTML } from 'linkedom';
 
 import { adoptPreparedDatasetTables } from './dataset-tables.js';

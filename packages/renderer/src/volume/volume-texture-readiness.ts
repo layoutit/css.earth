@@ -1,4 +1,4 @@
-import { createPreparedImageStore, type PreparedImage } from '../rendering/prepared-image-store.js';
+import { createPreparedImageStore, type PreparedImage } from '../rendering/loading/prepared-image-store.js';
 
 /** A view owns only its demanded images. Decodes finish before CSS can take over from its billboard. */
 export function createVolumeTextureReadiness(publish: () => void, createImage?: () => PreparedImage) {

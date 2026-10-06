@@ -1,0 +1,136 @@
+import { textureTileLeafStyles, type ObjectRuntimeDefinition } from '@cssearth/objects';
+
+import { initialObjectSelection } from '../../runtime/object-contract.js';
+import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from '../loading/prepared-asset-origin.js';
+import { preparedTextureSizes, textureTileGroups } from '../textures/prepared-texture-levels.js';
+import { createExactKeeper, leafBoxBindings, leafBoxStyles } from '../culling/prepared-leaf-box-direct.js';
+import { omittedPreparedNodes } from '../dom/prepared-omitted-nodes.js';
+import { preparedDatasetPending } from '../../prepared-data/dataset-tables.js';
+
+export interface PreparedSceneMarkup { html: string; classes: string[]; attributes: Record<string, string>; style: string; nodes: number; }
+export interface SerializedPreparedScene extends PreparedSceneMarkup {
+  /** Every resource this view writes as a texture, with its prepared address. */
+  textures: readonly { key: string; address: string }[]; }
+/** Resolves a texture's prepared address; defaults to the definition's embedded hashes. */
+export type PreparedTextureResolver = (key: string, address: string) => string;
+const escape = (value: string) => value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const cssName = (name: string) => name.startsWith('--') ? name : name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
+
+/** CSS declarations can contain semicolons inside quoted URLs and functions. */
+function declarations(text: string): Map<string, string> {
+  const result = new Map<string, string>();
+  let start = 0, depth = 0, quote = '', escaped = false;
+  for (let i = 0; i <= text.length; i++) {
+    const char = text[i];
+    if (escaped) { escaped = false; continue; }
+    if (char === '\\') { escaped = true; continue; }
+    if (quote) { if (char === quote) quote = ''; continue; }
+    if (char === '"' || char === "'") { quote = char; continue; }
+    if (char === '(') depth++;
+    if (char === ')') depth--;
+    if (i === text.length || char === ';' && depth === 0) {
+      const part = text.slice(start, i), colon = part.indexOf(':');
+      if (colon >= 0) result.set(part.slice(0, colon).trim(), part.slice(colon + 1).trim());
+      start = i + 1;
+    }
+  }
+  return result;
+}
+const styleText = (style: ReadonlyMap<string, string>) => [...style].map(([key, value]) => `${key}:${value}`).join(';');
+
+/** Serialize the selected package's prepared reference view. No replacement mesh,
+ * texture generation, camera inference or source processing belongs here. */
+export function serializePreparedScene(definition: ObjectRuntimeDefinition, datasetId?: string, settings?: unknown,
+  resolveTexture: PreparedTextureResolver = (_key, address) => resolvePreparedAssetUrl(address, definition.assetOrigin)): SerializedPreparedScene {
+  const selection = initialObjectSelection(definition.controls, datasetId, settings);
+  if (preparedDatasetPending(definition, selection)) throw new TypeError(`${definition.id}: dataset ${String(selection.datasetId)} needs its tables (adoptPreparedDatasetTables).`);
+  const variant = definition.variants.find(entry => Object.entries(entry.when).every(([key, value]) => selection[key] === value));
+  if (!variant) throw new TypeError(`${definition.id}: initial presentation is missing.`);
+  const elements = definition.tree.nodes.map(node => ({
+    tag: node.tag, classes: new Set(node.className?.split(/\s+/).filter(Boolean)),
+    attributes: { ...node.attributes }, style: declarations(rewritePreparedStyleUrls(node.style, definition.assetOrigin)), children: [] as number[],
+  }));
+  const stage = { classes: new Set(definition.tree.stageClasses), attributes: {} as Record<string, string>, style: new Map<string, string>() };
+  const roots: number[] = [];
+  const target = (index: number) => index === -1 ? stage : elements[index];
+  const write = (index: number, name: string, value: string) => {
+    const style = target(index).style, property = cssName(name);
+    if (value) style.set(property, value); else style.delete(property);
+  };
+  // This SSR markup reads `definition.assets` directly rather than through `createPreparedResidency`'s chokepoint, and
+  // resolves only the textures this view writes: a page embeds just the hashes its first view reads.
+  const assets = new Map(definition.assets.entries.map(entry => [entry.key, entry.url])), textures = new Map<string, string>();
+  const texture = (key: string | null) => {
+    if (key === null) return 'none';
+    const address = assets.get(key);
+    if (!address) throw new TypeError(`${definition.id}: initial texture ${key} has no prepared URL.`);
+    textures.set(key, address);
+    return `url(${JSON.stringify(resolveTexture(key, address))})`;
+  };
+  for (const [index, node] of definition.tree.nodes.entries()) {
+    for (const id of node.properties) {
+      const property = definition.tree.properties[id];
+      write(index, property.name, rewritePreparedStyleUrls(property.value, definition.assetOrigin));
+    }
+    if (node.parent === -1) roots.push(index); else elements[node.parent].children.push(index);
+  }
+  // The base view uses the same initial prepared texture level as an interactive mount.
+  const textureResources = definition.textureLevels?.levels[0]?.resources, tileGroups = textureTileGroups(definition.textureLevels);
+  // Leaf boxes ship their final values at the prepared initial step and for the image each leaf shows here, from their
+  // records (prepared-leaf-box-direct.ts); the mounted writer continues from the same values.
+  const sizes = preparedTextureSizes(definition), shown = new Map<number, readonly [number, number] | undefined>();
+  const slots = new Map((definition.tree.textureBindings ?? []).map(slot => [`${slot.target}:${slot.name}`, slot.leaves] as const));
+  for (const binding of variant.writes) if (binding.kind === 'texture' && binding.resource !== null) {
+    const image = sizes(textureResources?.[binding.resource] ?? binding.resource);
+    for (const leaf of slots.get(`${binding.target}:${binding.name}`) ?? []) shown.set(leaf, image);
+  }
+  const leafBoxes = leafBoxBindings(definition.viewBindings), keep = createExactKeeper();
+  for (const leaf of leafBoxes.boxes) for (const [name, value] of leafBoxStyles(leaf, leafBoxes.step, leafBoxes.outset, false, keep(leaf, leafBoxes.step, shown.get(leaf.node)))) write(leaf.node, name, value);
+  for (const binding of variant.writes) {
+    const element = target(binding.target);
+    if (binding.kind === 'attribute') {
+      if (binding.value === null) delete element.attributes[binding.name]; else element.attributes[binding.name] = binding.value;
+    } else if (binding.kind === 'class') {
+      if (binding.value) element.classes.add(binding.name); else element.classes.delete(binding.name);
+    } else if (binding.kind === 'texture') {
+      // Each element a slot lists takes the image as its own background, as the mounted page writes it
+      // (prepared-presentation.ts); an image its target draws itself is that target's.
+      const image = texture(binding.resource === null ? null : textureResources?.[binding.resource] ?? binding.resource);
+      const leaves = slots.get(`${binding.target}:${binding.name}`);
+      if (leaves) for (const leaf of leaves) write(leaf, 'backgroundImage', image); else write(binding.target, binding.name, image);
+      // A page the first level draws from a sheet places its leaves on its tile, as literal values (prepared-presentation.ts
+      // commits the same through its tile writer).
+      const group = tileGroups.get(`${binding.target}:${binding.name}`);
+      if (group && binding.resource !== null) {
+        const tile = definition.textureLevels?.levels[0]?.tiles?.[binding.resource];
+        for (const [node, x, y] of group.leaves) for (const [name, value] of textureTileLeafStyles(group, x, y, tile)) write(node, name, value);
+      }
+    } else write(binding.target, binding.name, binding.value);
+  }
+  for (const selected of variant.materials) {
+    const track = definition.materials.find(track => track.id === selected.track);
+    const bank = track?.banks.find(bank => bank.id === selected.bank);
+    if (!track || !bank) throw new TypeError(`${definition.id}: initial material is missing.`);
+    if (!selected.enabled && selected.clearWhenHidden) { write(track.target, 'backgroundImage', 'none'); continue; }
+    const address = selected.mode === 'fixed' ? bank.fixed : bank.default ?? bank.frames[selected.frameOverride ?? track.defaultFrame + (selected.frameOffset ?? 0)];
+    if (address) {
+      if (address.resource !== null) write(track.target, 'backgroundImage', texture(address.resource));
+      write(track.target, 'backgroundPosition', address.backgroundPosition);
+      write(track.target, 'backgroundSize', address.backgroundSize);
+    }
+  }
+  // The exact prepared orientation holds while the application clock is absent: delivered scene CSS carries no motion
+  // (site/build/prepared-motion-css.mts), so a motion target needs no declaration of its own.
+  // What this selection hides stays out of the markup (a hidden subtree's descendants, an unused mesh's leaves); the
+  // runtime builds those nodes when it adopts the tree (prepared-omitted-nodes.ts).
+  const omitted = omittedPreparedNodes(definition.tree, variant);
+  const serialize = (index: number): string => {
+    const node = elements[index];
+    const attributes = { ...node.attributes, 'data-prepared-node': String(index),
+      ...(node.classes.size ? { class: [...node.classes].join(' ') } : {}),
+      ...(node.style.size ? { style: styleText(node.style) } : {}) };
+    return `<${node.tag}${Object.entries(attributes).map(([key, value]) => ` ${key}="${escape(value)}"`).join('')}>${node.children.filter(child => !omitted.has(child)).map(serialize).join('')}</${node.tag}>`;
+  };
+  return { html: roots.map(serialize).join(''), classes: [...stage.classes], attributes: stage.attributes,
+    style: styleText(stage.style), nodes: elements.length, textures: [...textures].map(([key, address]) => ({ key, address })) };
+}

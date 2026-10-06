@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createSceneLifetime } from '@cssearth/engine';
 import { createApplicationWorldFrames } from './application-world-frames.mts';
-import type { WorldFrameRequest } from '@cssearth/renderer/navigation/world-frame-presenter.ts';
+import type { WorldFrameRequest } from '@cssearth/renderer/navigation/camera/world-frame-presenter.ts';
 
 function fixture() {
   const lifetime = createSceneLifetime(), effects: unknown[] = [], callbacks = new Map<number, FrameRequestCallback>();

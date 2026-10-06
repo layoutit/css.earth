@@ -1,7 +1,7 @@
 import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { screenPicking } from '../navigation/screen-picking.js';
+import { screenPicking } from '../navigation/picking/screen-picking.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
 import { type PreparedCssSurfaceShell, type PreparedCssVolume } from '@cssearth/objects';
 

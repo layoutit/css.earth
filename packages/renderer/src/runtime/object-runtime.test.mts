@@ -9,7 +9,7 @@ import { createObjectRuntime } from '@cssearth/renderer';
 
 import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 
-import type { PreparedImage } from "@cssearth/renderer/rendering/prepared-image-store.ts";
+import type { PreparedImage } from "@cssearth/renderer/rendering/loading/prepared-image-store.ts";
 import type { RuntimePolicy } from "@cssearth/renderer/navigation/runtime-policy.ts";
 import type { OrbitPublication } from "@cssearth/renderer/navigation/object-orbit.ts";
 import { createPreparedResidency, createPreparedPlayback, createObjectSelectionRuntime } from '@cssearth/renderer/testing';

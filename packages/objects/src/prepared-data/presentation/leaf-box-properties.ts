@@ -1,11 +1,11 @@
 /** The bake's working form names the two silhouette steps as CSS custom properties and measures them in a browser
- * (packages/bake/src/presentation/leaf-box.ts). No page reads them. */
+ * (packages/bake/src/presentation/layout/leaf-box.ts). No page reads them. */
 export const LEAF_BOX_PROPERTY = '--silhouette-step';
 export const LEAF_BOX_FACTOR = '--leaf-box';
 export const SURFACE_SEAM_OUTSET_PROPERTY = '--surface-seam-outset';
 /** What a shipped runtime calls the same two steps, on their bindings and as the prefix of their leaf-box groups: plain
  * names, since the page writes each leaf's final values from its record and no custom property exists there
- * (packages/bake/src/presentation/step-name-records.ts renames them last). */
+ * (packages/bake/src/presentation/records/step-name-records.ts renames them last). */
 export const LEAF_BOX_STEP = 'silhouette-step';
 export const SURFACE_SEAM_OUTSET_STEP = 'surface-seam-outset';
 /** Image texels per CSS pixel of every raster leaf: the @2x convention, one backing pixel per texel at DPR 2. WebKit backs a

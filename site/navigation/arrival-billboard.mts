@@ -1,7 +1,7 @@
 import { type PreparedWorldCameraFrame, type PreparedArrivalView } from '@cssearth/objects';
 import { worldCameraFromCenteredPresentation, type WorldCameraPose } from '@cssearth/engine';
-import { presentWorldCamera, worldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
-import type { WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
+import { presentWorldCamera, worldCameraViewport } from '@cssearth/renderer/navigation/camera/world-camera.ts';
+import type { WorldCameraViewport } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import { billboardBodyRadiusPixels } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import type { VisibleRect } from '@cssearth/engine';
 

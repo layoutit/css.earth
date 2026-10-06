@@ -10,7 +10,7 @@ import type { RuntimePolicy } from "../navigation/runtime-policy.js";
 
 
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
-import type { PerspectiveWorldContext } from '../navigation/prepared-camera.js';
+import type { PerspectiveWorldContext } from '../navigation/camera/prepared-camera.js';
 
 import type { SurfaceFeatureLayerRuntime, SurfaceFeatureNavigationRuntime } from '../labels/surface-feature-types.js';
 
@@ -51,11 +51,11 @@ export interface ObjectMountOptions {
   inputSurface: HTMLElement; runtimePolicy: RuntimePolicy;
   diagnostics?: boolean; capabilities?: ObjectRuntimeCapabilities;
   preparedResources?: PreparedResourceLease;
-  preparedTree?: import('../rendering/prepared-tree.js').PreparedTreeLease;
+  preparedTree?: import('../rendering/dom/prepared-tree.js').PreparedTreeLease;
   worldContext: PerspectiveWorldContext;
-  cameraMotion: import('../navigation/camera-motion.js').CameraMotion;
-  framePresenter: import('../navigation/world-frame-presenter.js').WorldFramePresenter;
-  viewport: import('../navigation/camera-viewport.js').CameraViewport;
+  cameraMotion: import('../navigation/motion/camera-motion.js').CameraMotion;
+  framePresenter: import('../navigation/camera/world-frame-presenter.js').WorldFramePresenter;
+  viewport: import('../navigation/camera/camera-viewport.js').CameraViewport;
   initialWorldCamera?: WorldCameraPose;
   /** The camera can accept the live application pose before surface activation completes. */
   onNavigationReady?(navigation: import('./world-navigation-types.js').ObjectWorldNavigation): void;

@@ -11,10 +11,10 @@ import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/ob
 import { readRasterRecipe, outputName, packedRasterSize, rasterPageName, rasterPagePlan, LIGHTING_SHEET } from '../raster/index.ts';
 import type { RasterRecipe } from '@cssearth/objects';
 import { TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
-import { prepareComposite } from '../presentation/composite.ts';
+import { prepareComposite } from '../presentation/lighting/composite.ts';
 import { presentationAdapters } from '../presentation/adapters.ts';
-import { createPreparedNodeTree } from '../presentation/prepared-node-tree.ts';
-import { LEAF_BOX_FACTOR, LEAF_BOX_UNSCALE } from '../presentation/leaf-box.ts';
+import { createPreparedNodeTree } from '../presentation/layout/prepared-node-tree.ts';
+import { LEAF_BOX_FACTOR, LEAF_BOX_UNSCALE } from '../presentation/layout/leaf-box.ts';
 import { presentationHostAdapters } from '../objects/host-adapters/index.ts';
 import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 import type { PresentationInputs } from '../presentation/types.ts';

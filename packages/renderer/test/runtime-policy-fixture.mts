@@ -1,5 +1,5 @@
 import type { RuntimePolicy } from '../src/navigation/runtime-policy.ts';
-import { isSharedInputSurface } from '../src/navigation/shared-input-surface.ts';
+import { isSharedInputSurface } from '../src/navigation/input/shared-input-surface.ts';
 
 const bindResponsiveOrbitPolicy: RuntimePolicy["bindResponsiveOrbitPolicy"] = ({
   controls, inputSurface, mediaQuery, onError = null,

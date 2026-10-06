@@ -4,7 +4,7 @@ import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { prepareObjectResources } from './prepared-resource-lease.js';
-import { createPreparedResidency } from '../rendering/prepared-residency.js';
+import { createPreparedResidency } from '../rendering/loading/prepared-residency.js';
 
 import { waitFor } from '@cssearth/objects/node/contract';
 

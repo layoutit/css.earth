@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { Surface } from '@cssearth/renderer/test/orbit-fixture.mts';
-import { createUnboundedMatrixDragControls } from '@cssearth/renderer/navigation/camera-input.ts';
-import { POLE_COAST, poleHoldFor, turnPoleHeld } from '@cssearth/renderer/navigation/pole-held-drag.ts';
+import { createUnboundedMatrixDragControls } from '@cssearth/renderer/navigation/input/camera-input.ts';
+import { POLE_COAST, poleHoldFor, turnPoleHeld } from '@cssearth/renderer/navigation/input/pole-held-drag.ts';
 import type { CameraDelta, Quaternion, TrackballMetrics } from '@cssearth/renderer/navigation/types.ts';
 import { runtimePolicy } from '../../test/runtime-policy-fixture.mts';
 

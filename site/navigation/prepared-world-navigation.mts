@@ -39,7 +39,7 @@ import { bodyViewAtCamera, zoomFrameDistanceM } from '../world/systems/zoom-scop
 import { knownObject } from '../directory/object-directory.mts';
 import { systemHostId } from '../model/system-address.mts';
 import { createCameraMotion, createWorldSelectionTarget, savedWorldCamera, parseSharedView } from '@cssearth/renderer/navigation';
-import { worldCameraViewport, presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { worldCameraViewport, presentWorldCamera } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 
 /** A camera within this many pixels of a pair's centre already looks at it; no turn is needed. */
 const AIMED_AT_CENTER_PIXELS = 2;

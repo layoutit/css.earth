@@ -8,8 +8,8 @@ import { createObjectControlBinding, initialObjectSelection, reduceObjectSelecti
 
 import type { ObjectAction, ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
 
-import type { ObjectSelectionState } from '@cssearth/renderer/rendering/object-selection-runtime.ts';
-import type { ObjectControlBindingOptions } from '@cssearth/renderer/rendering/object-control-binding.ts';
+import type { ObjectSelectionState } from '@cssearth/renderer/rendering/view/object-selection-runtime.ts';
+import type { ObjectControlBindingOptions } from '@cssearth/renderer/rendering/view/object-control-binding.ts';
 
 const moonControls = parsePreparedObjectRuntime(await loadObjectTestDefinition('moon')).controls;
 const saturnControls = parsePreparedObjectRuntime(await loadObjectTestDefinition('saturn')).controls;
