@@ -12,7 +12,7 @@ Shape uses the shared missing-imagery grid. Elevation shows original model radiu
 
 ## Evidence
 
-Independent 8,192 area-stratified samples in each direction measured nearest-triangle distances: source-to-display p95 1.606296 m and maximum 3.503535 m; display-to-source p95 1.615574 m and maximum 3.538426 m. These are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties.
+Independent 8,192 area-stratified samples in each direction measured nearest-triangle distances: source-to-display p95 1.606296 m and maximum 3.503535 m; display-to-source p95 1.615574 m and maximum 3.538426 m. These are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties. Re-prepared 2026-10-06: the error allowance now decides the face count, 736 faces at 3.371 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 Source test definitions.
 
@@ -39,7 +39,7 @@ Apophis is a short-axis-mode non-principal-axis rotator. The archive records an 
 
 **Reduction and delivery**
 
-Meshoptimizer 1.2.0, with ErrorAbsolute and RegularizeLight, reduces the original connectivity to 800 triangles at the authored 4 m stopping threshold. Its error estimate is 3.195057 m; that estimate is not a geometric bound. Source and display remain one closed, outward-wound component with Euler characteristic 2; no opposite faces are removed. Native PolyCSS u raster leaves use 128 × 128 px cells in a 2048 × 6400 atlas. Geometry, texels and lighting are prepared ahead of runtime.
+Meshoptimizer 1.2.0, with ErrorAbsolute and RegularizeLight, reduces the original connectivity to 736 triangles, the fewest within the authored 4 m stopping threshold. Its error estimate is 3.371 m; that estimate is not a geometric bound. Source and display remain one closed, outward-wound component with Euler characteristic 2; no opposite faces are removed. Native PolyCSS u raster leaves share a 3520 × 3714 atlas. Geometry, texels and lighting are prepared ahead of runtime.
 
 Pinned JPL Horizons elements and independent vectors at JD 2461286.5 and ±30 days supply heliocentric ICRF context. The fixed-epoch conic is a display approximation, not a long-term perturbation ephemeris; TDB is approximated as TT within 2 ms. GM is the pinned Horizons physical value, or zero when unavailable, without an assumed density.
 

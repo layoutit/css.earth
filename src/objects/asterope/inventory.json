@@ -4,14 +4,14 @@
     {
       "location": "public",
       "filename": "asterope-arrival.webp",
-      "bytes": 33944,
-      "sha256": "8fef48d55e0f4001e486838b4e98bf38efb91643d03b90501c6a32c06291d677"
+      "bytes": 32576,
+      "sha256": "5dc1e65c920e9530fd2cb6c8167ffdb7153e1b279c23fa647ce636d5c74f5d07"
     },
     {
       "location": "public",
       "filename": "asterope-billboard.webp",
-      "bytes": 3752,
-      "sha256": "c9f0d20712f415d106578565a1424182d11a072eeedd78fdfd8bd8a4b99907a9"
+      "bytes": 3708,
+      "sha256": "12a1ac6a8bbbba32778d8668bc570e863f06ddd224d557ba3d57e4bfa724e9a7"
     },
     {
       "location": "public",
@@ -22,26 +22,26 @@
     {
       "location": "public",
       "filename": "asterope-elevation-shadow-alpha@2x.webp",
-      "bytes": 612376,
-      "sha256": "ca0833ac585f49dde7cc67034933b73ab09881a7ba369f5066f8202ccba5a71c"
+      "bytes": 556130,
+      "sha256": "119a10d071f8dd5740874c99362a046d1ddf96583437dd4e1c6e188f70469f49"
     },
     {
       "location": "public",
       "filename": "asterope-elevation-shadow@2x.webp",
-      "bytes": 118832,
-      "sha256": "0bd4a540ec500bf7d328352322da96ea939de73fd7cc433967e0f917eac407bd"
+      "bytes": 116518,
+      "sha256": "014181a17d973bde0c15cdd34f961ce79b16851b317d127250798bf3362b4878"
     },
     {
       "location": "public",
       "filename": "asterope-elevation-surface-alpha@2x.webp",
-      "bytes": 662128,
-      "sha256": "b3d95755609bba4d7438b7966fc01f388f37a2369dc5bb5cff92bd550fa33a7f"
+      "bytes": 602940,
+      "sha256": "b20ebacbd815f622e588dfdbaf3390ac419083d903dac39e7daec94880cd8d58"
     },
     {
       "location": "public",
       "filename": "asterope-elevation-surface@2x.webp",
-      "bytes": 175548,
-      "sha256": "8566d4379cb542962b92a1df8451cc8a53ba9060697bf2158184c9165a65d03f"
+      "bytes": 172682,
+      "sha256": "0428380996ad569e3067595483d2f1d1b76a8975600a6b12438f5ac2ec10eeef"
     },
     {
       "location": "public",
@@ -52,26 +52,26 @@
     {
       "location": "public",
       "filename": "asterope-shape-shadow-alpha@2x.webp",
-      "bytes": 534748,
-      "sha256": "a6234095709cfb6ab7304ff0b3b9f4e257380cfc9abdd63828be72a6fd175825"
+      "bytes": 477310,
+      "sha256": "de5aa772c6d0371190f8f72bb8ee5f33b4bb783b14d055f31b0744cbaddd4108"
     },
     {
       "location": "public",
       "filename": "asterope-shape-shadow@2x.webp",
-      "bytes": 59108,
-      "sha256": "29e24f848053d14e4c0149e9472d4e4965f1e8f2e36bec2aa792ba07d43b70c3"
+      "bytes": 54728,
+      "sha256": "54f0d88856e849f82bfc17733944bcf2232f8582a931df6c7a3c0963484ca5ad"
     },
     {
       "location": "public",
       "filename": "asterope-shape-surface-alpha@2x.webp",
-      "bytes": 528962,
-      "sha256": "56031fa49feeb4f07edb06278c81905a9b7d7cee5ea8799c717fa90509888e9c"
+      "bytes": 474504,
+      "sha256": "bd4ae185c1fb5b5f8a41c4b250cfa294a9d0b2c1f331a4c66d22548e4d653226"
     },
     {
       "location": "public",
       "filename": "asterope-shape-surface@2x.webp",
-      "bytes": 51640,
-      "sha256": "ddcb9243848f93aafe3ca9d9bca172504ee87d540da003ff95bbac2ccf486b94"
+      "bytes": 49034,
+      "sha256": "90a011e977dafb396244b00f2a729588facbf264a91a70d34e6af4a25c1d604d"
     },
     {
       "location": "public",
@@ -107,25 +107,25 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1402,
-      "sha256": "b28a052f21f4a790c653a5e26b27d86112d8c45461dfd4d00a7a36ccfe5461df"
+      "sha256": "fec60983b1d99d58127053e674eb6539f710efd5f2a016f2bb2377891128ac6c"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 3382,
-      "sha256": "ea8e4c2c60dd9843b5e1faadf8b45e8eba2cb6dc76bb0eec41aabf7d8a4a4433"
+      "bytes": 3379,
+      "sha256": "a5d1d56b89249bea4bef0e2f84860da4ffc488010cb15846a1ca17bd8cca9360"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3436,
-      "sha256": "ea3da0926f39712e75fa2b518e303f3c3c8791a6dae09d490e85164e86960d0a"
+      "bytes": 3504,
+      "sha256": "018cbbdbd662f42aaad6a50bb6b17f361812beb93a3f2479e00f7d50952cfe9f"
     },
     {
       "location": "prepared",
@@ -136,14 +136,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 512070,
-      "sha256": "84f8ad407da0fc679bc2bf93238f67734a0ee7682222f73b8ae54e58c73a60cb"
+      "bytes": 392597,
+      "sha256": "a6dc6c8ec0d2f6d6618dc2e36f61d0dadb74842ceab739fed98bbfc9752622b1"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 598619,
-      "sha256": "50db0962e5108bc1a5bb0248587873772a372616ff1396dc7652ba5373cdcd76"
+      "bytes": 456322,
+      "sha256": "d20cc8752923a0e63ce155419a7a8824f3ee6a56c774592d619dd852bb1bcd9e"
     },
     {
       "location": "prepared",
@@ -160,8 +160,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3388,
-      "sha256": "fb21bf6c6d1c443d9995bc571184889a22841fa14053a2230a7e0d74fbcd1b19"
+      "bytes": 3385,
+      "sha256": "7b12e2e3e2ebff4c95696a020a5097466440897e7ce9fdc5c8328cab4a7d693e"
     },
     {
       "location": "prepared",

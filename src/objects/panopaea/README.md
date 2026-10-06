@@ -20,7 +20,7 @@ The saved HTML is evidence only; its viewer scripts are never evaluated or inclu
 
 The asteroid validation report records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
-Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 181.161 m, maximum 485.789 m. These are sampled distances, not exhaustive error bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found.
+Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 181.161 m, maximum 485.789 m. These are sampled distances, not exhaustive error bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found. Re-prepared 2026-10-06: the error allowance now decides the face count, 714 faces at 598.3 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 Source/reduced snapshots cover front, back and both poles, each normalized to its own maximum radius; they are geometry inspection, not browser pixel parity.
 
@@ -60,7 +60,7 @@ The record gives diameter 128 km, period 15.8044 h and ecliptic J2000 pole (42°
 <details>
 <summary>Appearance and preparation</summary>
 
-The existing source-meshoptimizer recipe reduces the original connected surface to 800 triangles. Meshoptimizer 1.2.0 reports 550.0 m estimated error, below the authored 600 m stopping threshold; this estimate is not a Hausdorff bound. All models use 800 native PolyCSS u raster leaves, 128 × 128 px per leaf in a 2048 × 6400 atlas, with lighting and texels prepared ahead of runtime.
+The existing source-meshoptimizer recipe reduces the original connected surface to the fewest triangles within the authored 600 m stopping threshold, 714. Meshoptimizer 1.2.0 reports 598.3 m estimated error; this estimate is not a Hausdorff bound. The model uses 714 native PolyCSS u raster leaves in a 3467 × 3764 atlas, with lighting and texels prepared ahead of runtime.
 
 The surface remains one closed component with Euler characteristic 2.
 

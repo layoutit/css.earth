@@ -18,7 +18,7 @@
 
 ## Shape and photographs
 
-The shape model marks each vertex as stereo control (7431 vertices), limb silhouette (4745) or not well constrained (3846). The Source constraints view shows these as solid gray, blue and the shared gray grid. Meshoptimizer reduces the mesh to 1000 triangles while keeping original source vertices; original-mesh normals and cast shadows are baked into fixed atlases. The published equivalent-volume radius, 0.58 km, supplies scale only. JPL Horizons elements supply heliocentric placement. No dust, tails, jets or tumble simulation is included.
+The shape model marks each vertex as stereo control (7431 vertices), limb silhouette (4745) or not well constrained (3846). The Source constraints view shows these as solid gray, blue and the shared gray grid. Meshoptimizer reduces the mesh to 600 triangles while keeping original source vertices; original-mesh normals and cast shadows are baked into fixed atlases. The published equivalent-volume radius, 0.58 km, supplies scale only. JPL Horizons elements supply heliocentric placement. No dust, tails, jets or tumble simulation is included.
 
 In the photographic view, which is the default, the finest accepted detector sampling supplies each patch, and MRI fills regions outside the HRI footprints.
 

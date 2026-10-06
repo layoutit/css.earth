@@ -46,7 +46,7 @@ Published alternate pole solutions remain plausible: model 6122: λ=325°, β=36
 
 Model publication: [V-band photometry of asteroids from ASAS-SN. Finding asteroids with slow spin](https://damit.cuni.cz/projects/damit/references/view/662).
 
-The refreshed DAMIT search on 2026-09-08 found no size-calibrated same-body mesh. A published physical size is therefore applied through the existing `metersPerUnit` source conversion, before the established 800-face meshoptimizer/PolyCSS raster preparation.
+The refreshed DAMIT search on 2026-09-08 found no size-calibrated same-body mesh. A published physical size is therefore applied through the existing `metersPerUnit` source conversion, before the established meshoptimizer/PolyCSS raster preparation, which keeps the fewest faces its error allowance permits, 406 of at most 800.
 
 </details>
 

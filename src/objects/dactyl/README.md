@@ -76,4 +76,4 @@ The [map review](evidence/registration/published-map-review.json) tests Figure 1
 
 ## Preparation
 
-[Reproduction instructions](../../../packages/bake/authoring/galileo-lucy/README.md). The canonical prepared mesh contains 512 triangles, independent of device DPR.
+[Reproduction instructions](../../../packages/bake/authoring/galileo-lucy/README.md). The canonical prepared mesh contains 484 triangles, independent of device DPR.

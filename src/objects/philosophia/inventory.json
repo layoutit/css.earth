@@ -4,14 +4,14 @@
     {
       "location": "public",
       "filename": "philosophia-arrival.webp",
-      "bytes": 24168,
-      "sha256": "5f3823649b60f8fdf044455ce1cd47db89eb78b119db908da4789374ef758e2c"
+      "bytes": 21654,
+      "sha256": "50fc3942ea25efca30164e8bafb688d3c1f75558e77039d85beb50fbd913ecd3"
     },
     {
       "location": "public",
       "filename": "philosophia-billboard.webp",
-      "bytes": 4588,
-      "sha256": "ad2f9ee944f697800154152719bdda7c2887a4cee11dd58ec1d2ca4c0cbb38ca"
+      "bytes": 4110,
+      "sha256": "ce0f4d184ef4db7a3e3fe94efb30a012f1a39997bdff047797b0eac6fa3ea374"
     },
     {
       "location": "public",
@@ -22,26 +22,26 @@
     {
       "location": "public",
       "filename": "philosophia-elevation-shadow-alpha@2x.webp",
-      "bytes": 556914,
-      "sha256": "50ff8d2fb6b6b8144cdccd6f812b69d47c2ea92e7b65a1e81385675a63b4ba4f"
+      "bytes": 442808,
+      "sha256": "b4b547d4caa67cbe516c114b4b510199b939367125fc2ebc113728071c200ef8"
     },
     {
       "location": "public",
       "filename": "philosophia-elevation-shadow@2x.webp",
-      "bytes": 137198,
-      "sha256": "ac25d00df5146ffbb3f86fb8cd6a5be62a8739e8b0c34163843003127ca52cbf"
+      "bytes": 120086,
+      "sha256": "f3148577995ca665b117726b378fbed700686855643cee332db6d50938136150"
     },
     {
       "location": "public",
       "filename": "philosophia-elevation-surface-alpha@2x.webp",
-      "bytes": 592612,
-      "sha256": "15a7c6a82137290bd771d2563b6a2be17710fb5c8ee82bb83d6825399ce717c8"
+      "bytes": 476802,
+      "sha256": "7aace67562429de316f5bc3f863935ecc689b0330f335f9d215c91407d4a62e6"
     },
     {
       "location": "public",
       "filename": "philosophia-elevation-surface@2x.webp",
-      "bytes": 178194,
-      "sha256": "9d869e9c7742edd25d4a78a8f23a6bcaf8efb1e88e7673ee5d00377046cfd5a5"
+      "bytes": 161374,
+      "sha256": "e578356e6190d44b9ee22878a0f46661e6e6feb96767e77d3a04bace63bcd327"
     },
     {
       "location": "public",
@@ -52,26 +52,26 @@
     {
       "location": "public",
       "filename": "philosophia-shape-shadow-alpha@2x.webp",
-      "bytes": 467658,
-      "sha256": "942ac819bf92ccfe10f84d9c754a4047591e5d292e82535b518829314fac6402"
+      "bytes": 366152,
+      "sha256": "34abe6417ad03dbcdfe0e73722a8bace8fc41d72de2b67c37340f53deedbd61e"
     },
     {
       "location": "public",
       "filename": "philosophia-shape-shadow@2x.webp",
-      "bytes": 59880,
-      "sha256": "693760567cd8ce3784bbfa266cdcd9ac4fc89025260300b4008d989b92352bbd"
+      "bytes": 51762,
+      "sha256": "7267fd7e17ecc1e5e33b95c51055614f1b70e260d8676e1771e5066e9c75942a"
     },
     {
       "location": "public",
       "filename": "philosophia-shape-surface-alpha@2x.webp",
-      "bytes": 462800,
-      "sha256": "dc55d1890c9f20d35c67772a80423bc3791495db1392b1c842fd849d1aa49964"
+      "bytes": 361280,
+      "sha256": "f0f8fa376043bbe73b67638abdb0b537cf800f42344bf8e7d79851e70c8b537f"
     },
     {
       "location": "public",
       "filename": "philosophia-shape-surface@2x.webp",
-      "bytes": 53408,
-      "sha256": "f89cdaf38cb1c3e2767d1a117fc448df7dfb27a537b7f2f8cf310c6fbcc9f242"
+      "bytes": 46828,
+      "sha256": "7bfa06b0ea3ff21c28fc786e70225930751cc3858caa664c3d09e63f0467b3d9"
     },
     {
       "location": "public",
@@ -107,25 +107,25 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1477,
-      "sha256": "8f2cb3e8a09c97edad4c801213c829e21383b7b638f223ebc8240a64836a5832"
+      "sha256": "47f8a77d3c32e444b4b3ffced4b16cef8b05b0e43b47efcb3341c956ac96e3e8"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 3524,
-      "sha256": "e8ca55586f6d95fb12cda272c8ccd4531026930e71c2920f0dfd0c770a80346c"
+      "bytes": 3523,
+      "sha256": "09de54792e703671e0de8c26b2a32a8050bb9d399c13a9ed113100bca573ee8f"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3716,
-      "sha256": "8292c32a4669f58e9169b7756d46dd5757ba0bce537e7f92bfcdf17f8532242d"
+      "bytes": 3746,
+      "sha256": "2f9190c37a6dcf250eb207c43f82b9ac72990da6a4ed2b3a961feb83a138b9e3"
     },
     {
       "location": "prepared",
@@ -136,14 +136,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 498937,
-      "sha256": "f3a3d40cb014e83fc61f12bd9983d0fa13f04a4e54c2d059554baf93673ce6a8"
+      "bytes": 279827,
+      "sha256": "d5ab0a092e2250af64cf948ac0818908fb4766da5509daf4a0e0657884482fcd"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 598457,
-      "sha256": "1141174b4d3d47d6fd9a456daaa12799c82c63d498dbb7a3f17c963624151c98"
+      "bytes": 315987,
+      "sha256": "3c74213a1b5c6379a6741f34ef659c92f27e8093acee437914bbe508f4c00c77"
     },
     {
       "location": "prepared",
@@ -160,8 +160,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3533,
-      "sha256": "02fdbe7c578f8a2a7636ce2d499e5c3c33d9043d7167bd9d6e691b05b4542d98"
+      "bytes": 3532,
+      "sha256": "a77edc98acf0d11229c17dcf93fd15c5dcb8bedf093d2488741e5fa98fbbd105"
     },
     {
       "location": "prepared",
