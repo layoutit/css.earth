@@ -26,10 +26,11 @@ Each step of the science is run by the code its authors publish, pinned in
 | Light curve | [lightkurve](https://lightkurve.github.io/lightkurve/) 2.6.0 | Adds up the pixels that stand above the sky, and removes what the sky pixels have in common with them (scattered light and pointing drift) |
 | Light curve, K2 | lightkurve's self-flat-fielding corrector (Vanderburg & Johnson 2014, PASP 126, 948) | Takes out the dimming and brightening K2's slow roll about its axis leaves in the light, and keeps the star's own changes |
 | Period | [astropy](https://www.astropy.org/) Lomb-Scargle periodogram (VanderPlas 2018, ApJS 236, 16) | The period that best fits the light curve, over the whole sector and in each of its two orbits |
+| Period, Kepler and K2 | astropy's generalized Lomb-Scargle, and [star-privateer](https://gitlab.com/sybreton/star_privateer) 1.3.1 (Breton et al. 2024, A&A 689, A229) for the wavelet and the autocorrelation | The three periods that Reinhold & Hekker (2020) compare |
 | The map | [starry](https://starry.readthedocs.io/) 1.2.0 (Luger et al. 2019, AJ 157, 64) | The brightness over the surface, as spherical harmonics up to degree 5, that reproduces the light curve as the star turns |
 
 What this repository writes is what lies between them: the reader of TESScut's answers, the files each code reads, the rule
-that decides whether a rotation is seen, and the conversion of starry's map to the table the star pages draw.
+that decides whether a TESS sector shows a rotation, the published criteria as a table of methods, and the conversion of starry's map to the table the star pages draw.
 [`tools.py`](../packages/telescope-cli/src/archives/tess/tools.py) holds calls to those codes and nothing else.
 
 ## Whose light the pixels hold
@@ -49,6 +50,10 @@ The pixels are cut where the star was in the sector's year. A nearby star crosse
 moves 10 arcseconds a year.
 
 ## When a rotation is believed
+
+This section is the rule for a TESS sector, and it is this repository's own: its numbers were set on our labelled stars,
+not taken from a paper. A Kepler or K2 star is judged by a published method instead
+([below](#a-published-method-for-each-kind-of-star)), and a published method for a TESS sector is to replace this rule.
 
 One sector is read: the newest imaged every ten minutes (sectors 27 to 55) when the star has one, else the newest of all.
 A ten-minute sector's pixels arrive in about 5 seconds; a 200-second sector's take 85 (60 MB for one star). Its period is
@@ -105,52 +110,67 @@ surveys of about the year 2000 had them, so a star that moves is looked for at i
 and at its place in 2000. One file is read: the longest K2 campaign, or the full-length Kepler quarter nearest the middle
 of the mission. A star neither mission watched is read from TESS as before.
 
-Three things differ from a TESS sector:
+Two things differ in how the light is measured:
 
 - **Whose light.** Gaia's sources are counted within 16 arcseconds of the star, four of these pixels, and a star as faint
   as magnitude 16 is read. A bright star is not refused: the missions kept the columns a saturated star bleeds along.
 - **The spacecraft's roll.** K2 held its pointing with two wheels and the pressure of sunlight, and rolled slowly between
   thruster firings every six hours. lightkurve's self-flat-fielding corrector takes the roll's mark out of the light and
   is told to keep the star's own slow changes.
-- **The drift.** What is left still drifts over a campaign, by more than most stars' spots dim them. A curve of second
-  degree in time is taken out of the campaign, and out of each half when the halves are searched, before a period is
-  looked for.
 
-The rule is the TESS one with the window's own lengths: a periodogram power of at least 0.3, each half of the campaign
-or quarter giving the same period within 20%, and a period no longer than a third of the window (27 days for a campaign,
-30 for a quarter), so that the star is seen turning three times. No floor on the light's swing is set: the accepted periods' swings ran from 0.2% to 3%, and the
-smallest was right.
+### A published method for each kind of star
 
-It was measured on our 120 Kepler and K2 stars with a catalogued rotation period, 72 of them not giants and 48 giants by
-SIMBAD's type. A light curve was measured for every one.
+Whether a light curve shows a star turning is not this repository's judgement. A method is taken from the paper that
+made it, for the kind of star and of data the paper applies it to, with its criteria as printed
+([`methods.mts`](../packages/telescope-cli/src/archives/tess/methods.mts)). A star no method covers is given no verdict,
+and its pixels are not fetched.
 
-| Stars | Rule | Read | Periods accepted | The catalogue's within 20% | Half of it | Another |
-| --- | --- | --- | --- | --- | --- | --- |
-| Not giants | As above | 72 | 18 | 16 | 1 | 1 |
-| Not giants | The drift left in | 72 | 10 | 8 | 1 | 1 |
-| Not giants | Any period up to half the window | 72 | 20 | 18 | 1 | 1 |
-| Not giants | A power of 0.2 | 72 | 19 | 17 | 1 | 1 |
-| Giants | As above | 48 | 0 | 0 | 0 | 0 |
-| Giants | Any period up to half the window | 48 | 2 | 0 | 0 | 2 |
+| Kind of star and data | Method | State |
+| --- | --- | --- |
+| Between 3250 and 6250 K with log g over 4.2, one K2 campaign | Reinhold & Hekker (2020, A&A 635, A43) | Wired |
+| The same stars, one Kepler quarter | Reinhold, Reiners & Basri (2013, A&A 560, A4), on the mission's corrected light | Read, not wired |
+| Giants and subgiants (log g 4.2 or less) | None for rotation in one campaign; their light shows oscillations | Not built |
+| Any star, one TESS sector | None yet: the rule above is this repository's own | To replace |
 
-Taking the drift out nearly doubles the periods accepted, from 10 to 18. Asking for three turns costs two right periods
-among the stars that are not giants and refuses the only two a giant's light passed, both wrong (28 and 29 days in
-campaigns of 71 days). Of the 50 stars that are not giants and whose catalogued period is 27 days or less, 17 are accepted.
+Reinhold & Hekker divide each light curve by a third-order polynomial, drop points more than six median absolute
+deviations from the median, and bin it to three hours. They take the period of the highest peak of the generalized
+Lomb-Scargle periodogram, of the wavelet power spectrum summed over time and of the autocorrelation, and accept a rotation
+when:
 
-The period at half the catalogue's is K2-141: its light repeats every 7.01 days and the NASA Exoplanet Archive prints
-15.17. The other is K2-275, whose K2 light gives 9.34 days: one catalogue prints 9.35 days from the same mission's light
-and two print 6.02 from TESS's, and the star's record adopts 6.02.
+- the periodogram's peak is higher than 0.3;
+- the three periods differ by at most one day under 10 days, two days from 10 to 20, and five days beyond;
+- their mean, which is the rotation period, is longer than a day and shorter than half the time span;
+- the light's variability range (its 95th less its 5th percentile) is not over 10%.
+
+The periodogram is astropy's; the wavelet and the autocorrelation are [star-privateer](https://gitlab.com/sybreton/star_privateer)'s
+(Breton et al. 2024, A&A 689, A229), pinned with the other codes. The paper measured its own reliability on stars observed
+in two campaigns: 75.7% gave periods within 20% of each other.
+
+Our 120 Kepler and K2 stars with a catalogued rotation period show what the method does on our own light curves. This is
+a comparison, not a setting: no number above was chosen from it.
+
+| Stars, one K2 campaign | Read | Accepted | The catalogue's period within 20% | Half of it | Another |
+| --- | --- | --- | --- | --- | --- |
+| In the paper's range | 40 | 29 | 21 | 4 | 4 |
+| The same, peaks over 0.5 | 40 | 20 | 17 | 1 | 2 |
+| Outside the paper's range | 51 | 16 | 1 | 0 | 15 |
+
+The last row is why the paper leaves evolved stars out: applied to them, its criteria pass periods of 27 to 39 days that
+no catalogue prints. Of our 1,090 Kepler and K2 stars, 94 are in the paper's range (67 from K2, 27 from Kepler) and 991
+have a log g of 4.2 or less.
 
 A period is then set beside the catalogued one, as for TESS: the same within 20% is kept, half of it is doubled, and any
-other is refused.
+other is refused. K2-141's light repeats every 7.03 days where the NASA Exoplanet Archive prints 15.17. K2-275's gives
+9.30 days: one catalogue prints 9.35 days from the same mission's light and two print 6.02 from TESS's, and the star's
+record adopts 6.02.
 
-K2-136, a star of the Hyades, is the first page made this way. In K2's campaign 13 (March to May 2017) its light swings by
-0.45% every 15.12 days, where the catalogues print 15, and each half of the campaign shows the same period.
+A star's receipt names the method, what it measured and the paper's sentence of refusal when there is one. Its light
+curve is kept as measured, so `reduce.mts --judge` judges it again, under a method wired later, with nothing fetched.
+
+K2-136, a star of the Hyades, is the first page made this way. In K2's campaign 13 (March to May 2017) the three methods
+give 15.00, 14.63 and 13.88 days, where the catalogues print 15, and the periodogram's peak has a height of 0.56.
 
 ![K2-136 in the app: Color + brightness above, Brightness map below](images/stellar-brightness-maps-k2.webp)
-
-SIMBAD files 804 of our 1,090 Kepler and K2 stars as giants. A giant turns in months, so one campaign seldom shows
-its spots turning; what its light shows is its oscillations, which this route does not read.
 
 ## What the map is and is not
 

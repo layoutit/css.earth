@@ -30,6 +30,10 @@ export const MISSIONS = {
     acknowledgment: 'This work includes data collected by the Kepler mission, funded by the NASA Science Mission Directorate, obtained from the Mikulski Archive for Space Telescopes (MAST).' },
 } as const;
 const METHOD_RECORD = 'arxiv-1810-06559', METHOD_URL = 'https://arxiv.org/abs/1810.06559';
+/** The papers of the published methods that judge a light curve a rotation (archives/tess/methods.mts), by the method's id. */
+const PERIOD_METHODS: Readonly<Record<string, { readonly record: string; readonly title: string; readonly arxiv: string; readonly doi: string; readonly creators: readonly string[]; readonly year: string; readonly locator: string }>> = {
+  'reinhold-hekker-2020': { record: 'arxiv-2001-08214', title: 'Reinhold & Hekker (2020): Stellar rotation periods from K2 Campaigns 0-18', arxiv: '2001.08214', doi: '10.1051/0004-6361/201936887', creators: ['T. Reinhold', 'S. Hekker'], year: '2020',
+    locator: 'arXiv listing: title, authors, DOI, A&A 635, A43. Sects. 2 and 3 print how a light curve is prepared and the criteria a rotation period must meet.' } };
 /** Gaia DR3, which says whose light the star's pixels hold: a record the source catalogue already has. */
 const GAIA_RECORD = 'gaia-2023-dr3', GAIA_URL = 'https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355';
 /** Dark where the surface is dim, white where it is bright. */
@@ -38,8 +42,12 @@ const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 
 /** The records of the source catalogue (`src/sources`) a star's brightness maps are bound to: the pixels of each mission read,
  * and the paper of the code that makes the map. */
-export function brightnessSourceRecords(checkedOn: string, maps: readonly Pick<BrightnessSurfaceMap, 'mission'>[] = [{ mission: 'TESS' }]): Map<string, string> {
+export function brightnessSourceRecords(checkedOn: string, maps: readonly Pick<BrightnessSurfaceMap, 'mission' | 'method'>[] = [{ mission: 'TESS' }]): Map<string, string> {
   const records = new Map<string, string>();
+  for (const id of new Set(maps.flatMap(map => map.method ? [map.method.id] : []))) { const paper = PERIOD_METHODS[id]; if (!paper) throw new TypeError(`No source record is written for the period method ${id}.`); const url = `https://arxiv.org/abs/${paper.arxiv}`;
+    records.set(`src/sources/${paper.record}.json`, json({ id: paper.record, kind: 'publication', identityLevel: 'work', title: paper.title, identifiers: [{ type: 'arXiv', value: paper.arxiv }, { type: 'DOI', value: paper.doi }],
+      links: [{ role: 'archive', url, label: 'arXiv preprint' }, { role: 'landing', url: `https://doi.org/${paper.doi}`, label: 'Journal version' }], evidence: [{ url, checkedOn, locator: paper.locator }], relations: [],
+      statements: [{ kind: 'credit', text: paper.title.split(':')[0]!, scope: 'citation', evidence: url }], creators: paper.creators, publicationDate: paper.year })); }
   for (const mission of new Set(maps.map(map => map.mission))) { const from = MISSIONS[mission];
     records.set(`src/sources/${from.record}.json`, json({ id: from.record, kind: 'data-product', identityLevel: 'work', title: from.title, identifiers: [{ type: 'DOI', value: from.doi }],
       links: [{ role: 'archive', url: from.archive, label: `${from.name} at MAST` }, { role: 'landing', url: from.landing, label: from.title }], evidence: [{ url: mission === 'TESS' ? from.archive : `https://api.datacite.org/dois/${from.doi}`, checkedOn, locator: from.locator }],
@@ -57,7 +65,9 @@ export interface BrightnessSurfaceMap extends SurfaceMap { /** The mission whose
   /** When the window's light was measured: its first and last days, UTC. */ readonly fromUtc: string; readonly toUtc: string;
   /** The light's own strongest period, when it is half the catalogued rotation and the star is taken to turn once in two of them. */ readonly lightPeriodDays?: number;
   /** The share of the light in the star's pixels that Gaia's other stars give, and how many they are. */ readonly neighbourShare: number; readonly neighbours: number;
-  /** Where the map's tilt comes from: the measured axis the page draws, the tilt the star's record works out, or none. */ readonly tiltFrom: 'page' | 'record' | 'assumed'; readonly codes: readonly string[] }
+  /** Where the map's tilt comes from: the measured axis the page draws, the tilt the star's record works out, or none. */ readonly tiltFrom: 'page' | 'record' | 'assumed'; readonly codes: readonly string[];
+  /** The published method that judged the light a rotation, with what it measured: the height of the periodogram's peak and the periods of its three methods. */
+  readonly method?: { readonly id: string; readonly citation: string; readonly url: string; readonly reliability: string; readonly peakHeight: number; readonly periodsDays: readonly [number, number, number] } }
 
 /** "TESS sector 95", "K2 campaign 13", "Kepler quarter 9". */
 export const windowName = (mission: LightMission, window: number) => `${MISSIONS[mission].name} ${MISSIONS[mission].window} ${window}`;
@@ -92,12 +102,18 @@ export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, ta
   // A receipt from before Kepler and K2 were read names a TESS sector alone.
   const mission: LightMission = map.mission === 'Kepler' || map.mission === 'K2' ? map.mission : 'TESS', window = requireFiniteNumber(map.window ?? map.sector, 'map window');
   const light = requireRecord(record.light, `${choice.program}: the receipt does not say whose light the pixels hold; reduce the star again`);
+  // A Kepler or K2 map's receipt names the published method that judged it and what the method measured.
+  const by = isRecord(record.method) ? record.method : undefined, measured = by && Array.isArray(record.tried) ? record.tried.filter(isRecord).at(-1)?.analysis : undefined;
+  if (mission !== 'TESS' && !(by && isRecord(measured))) throw new TypeError(`${choice.program}: its receipt names no published method; reduce the star again.`);
+  const method = by && isRecord(measured) ? { id: requireString(by.id, 'method id'), citation: requireString(by.citation, 'method citation'), url: requireString(by.url, 'method url'), reliability: requireString(by.reliability, 'method reliability'), peakHeight: requireFiniteNumber(measured.peakHeight, 'peak height'),
+    periodsDays: [requireFiniteNumber(measured.lombScargleDays, 'periodogram period'), requireFiniteNumber(measured.waveletDays, 'wavelet period'), requireFiniteNumber(measured.autocorrelationDays, 'autocorrelation period')] as const } : undefined;
+  const privateer = toolchain.find(pin => pin.startsWith('star-privateer'));
   const tiltFrom = map.inclinationFrom; if (tiltFrom !== 'page' && tiltFrom !== 'record' && tiltFrom !== 'assumed') throw new TypeError(`${choice.program}: its receipt does not say where the map's tilt comes from; reduce the star again.`);
   if (map.table !== `${choice.program}.dat` || !table.includes('ZONE I=')) throw new TypeError(`${choice.program}: the receipt and the table do not describe one map.`);
   return { choice, table, targetName: requireString(star.name, 'receipt star name'), inclinationDegrees: requireFiniteNumber(map.inclinationDegrees, 'map inclination'), inclinationSource: source, periodDays: period,
     periodSource: `measured here from the star's light in ${windowName(mission, window)} (${BRIGHTNESS_GENERATOR})`, mission, window, fromUtc: missionDay(times[0] as number, mission), toUtc: missionDay(times.at(-1) as number, mission), amplitude: requireFiniteNumber(rotation.amplitude, 'rotation amplitude'), darkestPercent: requireFiniteNumber(map.darkestPercent, 'darkestPercent'),
     brightestPercent: requireFiniteNumber(map.brightestPercent, 'brightestPercent'), residual: requireFiniteNumber(map.residual, 'residual'), noise: requireFiniteNumber(map.noise, 'noise'), ...(typeof rotation.lightPeriodDays === 'number' ? { lightPeriodDays: rotation.lightPeriodDays } : {}), neighbourShare: requireFiniteNumber(light.neighbourShare, 'neighbourShare'), neighbours: requireFiniteNumber(light.neighbours, 'neighbours'), tiltFrom,
-    codes: [lightkurve.replace('==', ' '), `starry ${requireString(map.starry, 'starry version')}`] };
+    codes: [lightkurve.replace('==', ' '), ...(method && privateer ? [privateer.replace('==', ' ')] : []), `starry ${requireString(map.starry, 'starry version')}`], ...(method ? { method } : {}) };
 }
 
 export const percent = (share: number) => { const value = 100 * share; return value >= 10 ? value.toFixed(0) : value >= 1 ? value.toFixed(1) : value.toFixed(2); };
@@ -107,7 +123,7 @@ const days = (period: number) => period >= 1 ? `${Number(period.toPrecision(3))}
 export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
   consumer: BRIGHTNESS_CONSUMER, consumers: Object.values(MISSIONS).map(mission => mission.consumer), consumerOf: map => MISSIONS[map.mission].consumer, inputTag: MISSIONS.TESS.inputTag, inputTagOf: map => MISSIONS[map.mission].inputTag,
   directory: MISSIONS.TESS.directory, directoryOf: map => MISSIONS[map.mission].directory, archiveOf: map => MISSIONS[map.mission].archive, generator: BRIGHTNESS_GENERATOR, stepGroup: 'brightness', variable: 'Brightness [%]', units: '%', controlLabel: 'Brightness map', legendTitle: 'Surface brightness',
-  archiveUrl: MISSIONS.TESS.archive, references: [], referencesOf: map => [{ catalogueId: MISSIONS[map.mission].record, role: 'material', evidence: MISSIONS[map.mission].archive }, { catalogueId: METHOD_RECORD, role: 'method', evidence: METHOD_URL }, { catalogueId: GAIA_RECORD, role: 'reference', evidence: GAIA_URL }], colors: COLORS, palette: PALETTE,
+  archiveUrl: MISSIONS.TESS.archive, references: [], referencesOf: map => [{ catalogueId: MISSIONS[map.mission].record, role: 'material', evidence: MISSIONS[map.mission].archive }, ...(map.method ? [{ catalogueId: PERIOD_METHODS[map.method.id]!.record, role: 'method', evidence: map.method.url }] : []), { catalogueId: METHOD_RECORD, role: 'method', evidence: METHOD_URL }, { catalogueId: GAIA_RECORD, role: 'reference', evidence: GAIA_URL }], colors: COLORS, palette: PALETTE,
   scale: brightnessScale,
   words(map, { count, tilt, outlined }) { const { choice } = map, swing = `${percent(map.amplitude)}%`, turn = days(map.periodDays), from = MISSIONS[map.mission], where = windowName(map.mission, map.window);
     const tilted = map.tiltFrom === 'assumed' ? `No tilt of this star's axis is known: the map is made at ${tilt}°, the middle tilt of axes that point at random.`
@@ -115,13 +131,15 @@ export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
     const outline = outlined ? ` Black line: ${tilt}° S; the star never shows us what lies below it.` : '';
     const halved = map.lightPeriodDays === undefined ? '' : ` The light repeats every ${days(map.lightPeriodDays)}, half the rotation period the catalogues print for the star: two groups of spots on opposite sides do that.`;
     const others = map.neighbours === 0 ? `Gaia DR3 lists no other star within ${from.radiusArcsec} arcseconds of it.` : `Gaia DR3 lists ${map.neighbours} other ${map.neighbours === 1 ? 'star' : 'stars'} within ${from.radiusArcsec} arcseconds, giving ${map.neighbourShare < 0.001 ? 'under 0.1' : percent(map.neighbourShare)}% of the light in the star's pixels.`;
+    // The published method that judged the light a rotation, with its three periods and the peak it asks to be over 0.3.
+    const judged = map.method ? ` The period is the mean of three methods' periods (periodogram ${map.method.periodsDays[0].toFixed(2)} d, wavelet ${map.method.periodsDays[1].toFixed(2)} d, autocorrelation ${map.method.periodsDays[2].toFixed(2)} d; periodogram peak ${map.method.peakHeight.toFixed(2)}), accepted by the criteria of ${map.method.citation}.` : '';
     return { productId: `Brightness map of ${map.targetName} from its light in ${where}`,
       inputTitle: `Brightness map of ${map.targetName} from its light curve in ${where}, measured from the ${from.pixels}: brightness on a longitude-latitude grid`,
-      credit: `NASA ${from.name} ${from.pixels}, ${from.window} ${map.window}, from MAST; photometry and map made in this project with ${map.codes.join(' and ')}. ${from.acknowledgment}`, displayCredit: `NASA ${from.name} · mapped here`,
+      credit: `NASA ${from.name} ${from.pixels}, ${from.window} ${map.window}, from MAST; photometry and map made in this project with ${map.codes.join(', ').replace(/, ([^,]*)$/u, ' and $1')}${map.method ? `, the rotation judged by the criteria of ${map.method.citation}` : ''}. ${from.acknowledgment}`, displayCredit: `NASA ${from.name} · mapped here`,
       license: 'Public NASA mission data (MAST); reduction by this project', licenseEvidence: [DATA_USE],
       acquisition: `Built by the generator for this star, from the pixels of the ${from.window} ${from.served}. Restored from the source cache; not tracked. The receipt (the ${from.window}'s request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.`,
       redistribution: `Public ${from.name} data, reduced here.`,
-      description: `Brightness of the star's surface that reproduces its light as it turns once in ${turn}, fitted with starry to the light curve this project measured from the ${from.name} ${from.pixels} of ${from.window} ${map.window} (the light swings by ${swing}; the map's curve leaves a scatter of ${percent(map.residual)}%, the light's own noise being ${percent(map.noise)}%). A light curve fixes how bright each longitude is, not the latitude of what darkens it.${halved} ${tilted} ${others} A reduction made in this project, not a published map.`,
+      description: `Brightness of the star's surface that reproduces its light as it turns once in ${turn}, fitted with starry to the light curve this project measured from the ${from.name} ${from.pixels} of ${from.window} ${map.window} (the light swings by ${swing}; the map's curve leaves a scatter of ${percent(map.residual)}%, the light's own noise being ${percent(map.noise)}%). A light curve fixes how bright each longitude is, not the latitude of what darkens it.${judged}${halved} ${tilted} ${others} A reduction made in this project, not a published map.`,
       surfaceTitle: `${from.name} · brightness map made here · ${choice.label}`, qualification: `Mapped in this project · ${from.name} ${from.pixels}, ${choice.label.toLowerCase()}`,
       notes: `Where the star's surface was darker and brighter in ${from.name} ${choice.label.toLowerCase()}, worked out in this project from how its light rose and fell by ${swing} as it turned once in ${turn}. The light curve is measured from the mission's images with lightkurve, and starry finds the map that reproduces it. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not.${halved} ${tilted}${count > 1 ? ` Step through the ${count} maps to see the spots change.` : ''}`,
       legendNote: `Darker: dimmer than the star's mean surface; white: brighter.${outline}`,

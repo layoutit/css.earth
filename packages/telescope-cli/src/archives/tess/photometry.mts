@@ -27,7 +27,7 @@ export const SATURATION_ELECTRONS_PER_SECOND = 1.5e5;
 export interface Peak { readonly periodDays: number; readonly power: number; /** Peak to peak, as a share of the star's mean light. */ readonly amplitude: number }
 export interface SectorLightCurve { readonly frames: number; readonly aperturePixels: number; /** The campaign or quarter a Kepler or K2 file's header names. */ readonly window?: number; readonly saturated: boolean; readonly spanDays: number; readonly scatter: number;
   readonly whole: Peak; /** The same search in each of the sector's two orbits, where an orbit holds enough of the curve. */ readonly halves: readonly (Peak | null)[];
-  readonly time: readonly number[]; readonly flux: readonly number[]; /** The light as measured, where a drift was taken out of `flux`. */ readonly measured?: readonly number[] }
+  readonly time: readonly number[]; readonly flux: readonly number[] }
 
 /** When one sector's light curve is believed to show the star turning. Settled on our own stars whose rotation the
  * catalogues print and whose light the mission also measured (76 of them measured from pixels): with these values every
@@ -36,13 +36,6 @@ export interface SectorLightCurve { readonly frames: number; readonly aperturePi
  * holding too few turns and the spacecraft's own 13.7-day orbit leaving its mark in the light. In each star's newest
  * ten-minute sector the rule accepted 20, 19 at the right period and one at half of it (besideCatalogued). */
 export const ROTATION_POWER = 0.3, ORBIT_AGREEMENT = 0.2, ONE_SECTOR_DAYS = 9, ROTATION_SWING = 0.007;
-/** The same for a K2 campaign and a Kepler quarter: the power and the agreement of the two halves are TESS's, a curve of
- * second degree in time is taken out of the light first (a campaign's drift, larger than most stars' swing), and the
- * window must hold three turns of the star. No floor on the swing is set: the smallest accepted, 0.2%, was right.
- * Measured on our 120 Kepler and K2 stars with a catalogued period (72 not giants, 48 giants by SIMBAD's type): of the 72 the
- * rule accepts 18, 16 at the catalogue's period, one at half of it and one at a period another catalogue prints; with the
- * drift left in it accepts 10. Of the 48 giants it accepts none; without the three turns it accepts two, both wrong. */
-export const KEPLER_LONGEST_DAYS = { K2: 27, Kepler: 30 } as const, KEPLER_SEARCH = { trendDegree: 2, turns: 3 } as const;
 export interface RotationVerdict { readonly detected: boolean; readonly periodDays?: number; /** The light's own strongest period, when the rotation is taken as twice it. */ readonly lightPeriodDays?: number; /** Peak to peak, as a share of the mean light. */ readonly amplitude?: number; readonly reason?: string }
 
 /** How closely the light's period and a catalogued rotation period must agree to be one period: the metadata pass's own measure. */
@@ -77,27 +70,19 @@ export function withinBreakup(verdict: RotationVerdict, fastestTurnDays: number 
   return { detected: false, reason: `The light's period, ${shortest} d, is shorter than the ${fastestTurnDays.toFixed(2)} d of an orbit at the star's surface (its recorded radius and mass): the star cannot turn that fast, so the light changes for another reason.` };
 }
 
-/** What each mission's one window can vouch for. `longestDays` is the longest period believed without a catalogue beside
- * it; `swing` the smallest swing of the light. `pieces` names the two parts of a window that must agree. */
-export interface RotationLimits { readonly power: number; readonly agreement: number; readonly longestDays: number; readonly swing: number; readonly window: string; readonly pieces: string;
-  /** The drift taken out of the light before a period is looked for, as the degree of a polynomial in time (none under 0), and
-   * how many turns of the star the window must hold for its period to be believed (no such test at 0). */ readonly trendDegree: number; readonly turns: number }
-export const LIMITS: Readonly<Record<Mission, RotationLimits>> = {
-  TESS: { power: ROTATION_POWER, agreement: ORBIT_AGREEMENT, longestDays: ONE_SECTOR_DAYS, swing: ROTATION_SWING, window: 'sector', pieces: 'orbits', trendDegree: -1, turns: 0 },
-  // A K2 campaign lasts some 80 days and a Kepler quarter some 90: three turns of a star fit in 27 and 30 days.
-  K2: { power: ROTATION_POWER, agreement: ORBIT_AGREEMENT, longestDays: KEPLER_LONGEST_DAYS.K2, swing: 0, window: 'campaign', pieces: 'halves', ...KEPLER_SEARCH },
-  Kepler: { power: ROTATION_POWER, agreement: ORBIT_AGREEMENT, longestDays: KEPLER_LONGEST_DAYS.Kepler, swing: 0, window: 'quarter', pieces: 'halves', ...KEPLER_SEARCH },
-};
+/** What one TESS sector can vouch for. `longestDays` is the longest period believed without a catalogue beside it and
+ * `swing` the smallest swing of the light. This rule is this repository's own, measured on our labelled stars; a Kepler
+ * or K2 star is judged by a published method instead (methods.mts), and a published method for a TESS sector is to
+ * replace it. */
+export const TESS_LIMITS = { power: ROTATION_POWER, agreement: ORBIT_AGREEMENT, longestDays: ONE_SECTOR_DAYS, swing: ROTATION_SWING } as const;
 
-/** Whether a window's light curve shows the star's rotation, and why not when it does not. */
-export function rotationVerdict(curve: SectorLightCurve, mission: Mission = 'TESS'): RotationVerdict {
-  const { whole, halves } = curve, days = Number(whole.periodDays.toFixed(2)), limits = LIMITS[mission];
+/** Whether a TESS sector's light curve shows the star's rotation, and why not when it does not. */
+export function rotationVerdict(curve: SectorLightCurve): RotationVerdict {
+  const { whole, halves } = curve, days = Number(whole.periodDays.toFixed(2)), limits = TESS_LIMITS;
   if (curve.saturated) return { detected: false, reason: 'The star saturates the detector: its light has bled out of the aperture.' };
   if (whole.power < limits.power) return { detected: false, reason: `No period stands out: the strongest, ${days} d, has a periodogram power of ${whole.power.toFixed(2)}, under the ${limits.power} a rotation asks for.` };
-  if (!halves.every(half => half !== null && Math.abs(half.periodDays - whole.periodDays) <= limits.agreement * whole.periodDays)) return { detected: false, reason: `The ${limits.window}'s two ${limits.pieces} do not show the same period (${halves.map(half => half === null ? 'none' : `${half.periodDays.toFixed(2)} d`).join(' and ')} against ${days} d over both).` };
-  // A campaign cut short holds fewer days than a whole one: the longest period believed is the one it holds enough turns of.
-  const longest = limits.turns ? Math.min(limits.longestDays, Number((curve.spanDays / limits.turns).toFixed(1))) : limits.longestDays;
-  if (whole.periodDays > longest) return { detected: false, reason: `A period of ${days} d is longer than the ${longest} d a ${limits.window} ${limits.turns ? `of ${Math.round(curve.spanDays)} days ` : ''}can vouch for.` };
+  if (!halves.every(half => half !== null && Math.abs(half.periodDays - whole.periodDays) <= limits.agreement * whole.periodDays)) return { detected: false, reason: `The sector's two orbits do not show the same period (${halves.map(half => half === null ? 'none' : `${half.periodDays.toFixed(2)} d`).join(' and ')} against ${days} d over both).` };
+  if (whole.periodDays > limits.longestDays) return { detected: false, reason: `A period of ${days} d is longer than the ${limits.longestDays} d a sector can vouch for.` };
   if (whole.amplitude < limits.swing) return { detected: false, reason: `The light swings by ${(100 * whole.amplitude).toFixed(2)}% at ${days} d, under the ${Number((100 * limits.swing).toPrecision(2))}% at which a period from these pixels can be trusted.` };
   return { detected: true, periodDays: days, amplitude: whole.amplitude };
 }
@@ -111,8 +96,7 @@ export function parseLightCurve(value: unknown): SectorLightCurve | undefined {
   const numbers = (key: string) => requireArray(record[key], key).map((entry, index) => requireFiniteNumber(entry, `${key}[${index}]`)), time = numbers('time'), flux = numbers('flux');
   if (time.length !== flux.length || !time.length) throw new TypeError('The light curve has times and fluxes of different lengths.');
   return { frames: requireFiniteNumber(record.frames, 'frames'), aperturePixels: requireFiniteNumber(record.aperturePixels, 'aperture pixels'), ...(typeof record.window === 'number' ? { window: record.window } : {}), saturated: record.saturated === true, spanDays: requireFiniteNumber(record.spanDays, 'span'),
-    scatter: requireFiniteNumber(record.scatter, 'scatter'), whole: peak(record.whole, 'whole sector'), halves: requireArray(record.halves, 'halves').map((half, index) => isRecord(half) ? peak(half, `orbit ${index + 1}`) : null), time, flux,
-    ...(Array.isArray(record.measured) && record.measured.length === time.length ? { measured: numbers('measured') } : {}) };
+    scatter: requireFiniteNumber(record.scatter, 'scatter'), whole: peak(record.whole, 'whole sector'), halves: requireArray(record.halves, 'halves').map((half, index) => isRecord(half) ? peak(half, `orbit ${index + 1}`) : null), time, flux };
 }
 
 /** One sector's light curve of a star, from the cutout file of its pixels. */
@@ -122,7 +106,7 @@ export type Mission = 'TESS' | 'Kepler' | 'K2';
 export const SFF_WINDOWS = 20, OUTLIER_SIGMA = 5;
 export async function sectorLightCurve(cutoutFile: string, mission: Mission = 'TESS'): Promise<SectorLightCurve | undefined> {
   const { python } = await toolchainPaths(), directory = await mkdtemp(join(tmpdir(), 'tess-')), job = join(directory, 'job.json');
-  try { await writeFile(job, JSON.stringify({ cutout: cutoutFile, mission, trendDegree: LIMITS[mission].trendDegree, sffWindows: SFF_WINDOWS, outlierSigma: OUTLIER_SIGMA, threshold: APERTURE_THRESHOLD, skyTerms: SKY_TERMS, binDays: BIN_DAYS, shortestDays: SHORTEST_DAYS, frequencies: FREQUENCIES, saturationElectronsPerSecond: SATURATION_ELECTRONS_PER_SECOND }));
+  try { await writeFile(job, JSON.stringify({ cutout: cutoutFile, mission, sffWindows: SFF_WINDOWS, outlierSigma: OUTLIER_SIGMA, threshold: APERTURE_THRESHOLD, skyTerms: SKY_TERMS, binDays: BIN_DAYS, shortestDays: SHORTEST_DAYS, frequencies: FREQUENCIES, saturationElectronsPerSecond: SATURATION_ELECTRONS_PER_SECOND }));
     return parseLightCurve(runTool(python, ['light-curve', job])); }
   finally { await rm(directory, { recursive: true, force: true }); }
 }

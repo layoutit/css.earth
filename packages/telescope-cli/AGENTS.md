@@ -91,12 +91,19 @@ A star's rotation and brightness map from its light in a space telescope's pixel
 pixels, a quarter or a campaign of some 80 days in one file); `tess/pixels.mts` reads a star's pixels through MAST's TESScut
 (one request at a time, where the star was in the sector's year). `reduce.mts` reads a star's Kepler or K2 file when the
 mission watched it and one TESS sector otherwise; `neighbours.mts` asks Gaia DR3 whose light the star's pixels hold, at each
-mission's own radius (`PIXELS`), and refuses a star that shares them; `photometry.mts` has lightkurve and astropy measure the
-light curve and its period and holds the rule that believes a rotation, with each mission's limits (`LIMITS`); `map.mts` has
-starry fit the map. `reduce.mts` runs a star, or every star with `--all`, and writes its receipt and light curve under ignored
-`output/tess/<star id>/`. The science is the pinned codes' (`toolchain.json`, and the telescope's starry toolchain);
-`tools.py` holds calls and nothing else. The rule's constants carry their measurement on our own labelled stars; change one
-only with that table measured again ([method note](../../docs/stellar-brightness-maps-from-tess.md)).
+mission's own radius (`PIXELS`), and refuses a star that shares them; `photometry.mts` has lightkurve measure the light
+curve; `map.mts` has starry fit the map. `reduce.mts` runs a star, or every star with `--all`, and writes its receipt and
+light curve under ignored `output/tess/<star id>/`; `--judge` judges kept Kepler and K2 light curves again with nothing fetched.
+The science is the pinned codes' (`toolchain.json`, and the telescope's starry toolchain); `tools.py` holds calls and nothing else.
+
+Whether a light curve shows a star turning is decided by a published method, never by a threshold written here.
+`methods.mts` is the table: each entry is one paper's method for the kind of star and of data that paper applies it to,
+with how it prepares a light curve and its criteria as printed (the first is Reinhold & Hekker 2020, for main-sequence
+stars in one K2 campaign). A star no entry covers gets the paper's reason and no verdict, and is not fetched. To cover
+another kind of star or of data, read the paper that treats it and add its entry; do not widen an entry beyond its paper,
+and do not tune a number on our own stars: a comparison with the catalogues is evidence for the note, not a setting. The
+one rule still our own is the TESS sector's (`photometry.mts` `rotationVerdict`, measured on our labelled stars); it is
+to be replaced by a published one ([method note](../../docs/stellar-brightness-maps-from-tess.md)).
 
 Every kind of surface map this repository reduces reaches a star's page through `src/new-object/maps/`: `surface-maps.mts`
 writes the records any map needs (table, manifest input, raster surface, dataset, control, text) from a `MapKind`, and
