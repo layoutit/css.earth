@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Yalçinkaya et al. 2025, the stellar temperature of the default parameter set of TOI-5799 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract)",
   "surfaceGravityLogg": 4.94,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5799.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.937, rounded to two decimals",
+  "spectralType": "M2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5799 (pscomppars): spectral type M2 V, from Yalçinkaya et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract)",
+  "metallicityDex": 0.01,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5799 (pscomppars): [Fe/H] 0.01 dex, from Yalçinkaya et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract)",
+  "luminosityLogSolar": -1.83,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5799 (pscomppars): log10 of the luminosity in solar units -1.82974, from Mistry et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
+  "ageGyr": 9.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5799 (pscomppars): age 9.6 Gyr, from Yalçinkaya et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

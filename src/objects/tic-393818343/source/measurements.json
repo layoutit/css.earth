@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Sgro et al. 2024, the stellar temperature of the default parameter set of TIC 393818343 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...26S/abstract)",
   "surfaceGravityLogg": 4.4,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-393818343.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.401, rounded to two decimals",
+  "spectralType": "G0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TIC 393818343 (pscomppars): spectral type G0, from Conzo & Moriconi 2024 (https://ui.adsabs.harvard.edu/abs/2024RNAAS...8...53C/abstract)",
+  "metallicityDex": 0.318,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TIC 393818343 (pscomppars): [Fe/H] 0.318 dex, from Sgro et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...26S/abstract)",
+  "luminosityLogSolar": 0.067,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TIC 393818343 (pscomppars): log10 of the luminosity in solar units 0.06744, from Sgro et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...26S/abstract)",
+  "ageGyr": 3.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TIC 393818343 (pscomppars): age 3.8 Gyr, from Sgro et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...26S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

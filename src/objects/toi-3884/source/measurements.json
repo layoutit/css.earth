@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Libby-Roberts et al. 2023, the stellar temperature of the default parameter set of TOI-3884 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract)",
   "surfaceGravityLogg": 4.95,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-3884.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.952, rounded to two decimals",
+  "spectralType": "M4",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-3884 (pscomppars): spectral type M4, from Almenara et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...667L..11A/abstract)",
+  "metallicityDex": 0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-3884 (pscomppars): [Fe/H] 0.04 dex, from Libby-Roberts et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract)",
+  "luminosityLogSolar": -2.032,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-3884 (pscomppars): log10 of the luminosity in solar units -2.03152, from Almenara et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...667L..11A/abstract)",
+  "projectedRotationSpeedKmS": 3.59,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-3884 (pscomppars): projected rotation speed 3.59 km/s, from Libby-Roberts et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

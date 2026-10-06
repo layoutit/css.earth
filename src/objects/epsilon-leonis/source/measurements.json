@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Baines et al. (2018), AJ 155, 30, HD 84441: effective temperature 5623 +/- 75 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b)",
   "surfaceGravityLogg": 2.36,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epsilon-leonis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.362, rounded to two decimals",
+  "spectralType": "G1IIIa",
+  "spectralTypeSource": "SIMBAD, * eps Leo: spectral type G1IIIa (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 8.1,
+  "projectedRotationSpeedSource": "SIMBAD, * eps Leo: projected rotation speed 8.1 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

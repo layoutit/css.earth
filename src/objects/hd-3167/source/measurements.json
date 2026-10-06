@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Coy et al. 2026, the stellar temperature of the default parameter set of HD 3167 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract)",
   "surfaceGravityLogg": 4.49,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-3167.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.495, rounded to two decimals",
+  "spectralType": "K0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 3167 (pscomppars): spectral type K0 V, from Christiansen et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....154..122C/abstract)",
+  "metallicityDex": 0.037,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 3167 (pscomppars): [Fe/H] 0.037 dex, from Coy et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract)",
+  "luminosityLogSolar": -0.257,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 3167 (pscomppars): log10 of the luminosity in solar units -0.25727, from Coy et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract)",
+  "ageGyr": 8.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 3167 (pscomppars): age 8.4 Gyr, from Coy et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract)",
+  "rotationPeriodDays": 23.52,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 3167 (pscomppars): rotation period 23.52 d, from Gandolfi et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....154..123G/abstract)",
+  "projectedRotationSpeedKmS": 2.41,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 3167 (pscomppars): projected rotation speed 2.41 km/s, from Bourrier et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...654A.152B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

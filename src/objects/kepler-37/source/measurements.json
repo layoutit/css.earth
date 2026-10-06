@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-37 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
   "surfaceGravityLogg": 4.54,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-37.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.542, rounded to two decimals",
+  "spectralType": "G8V",
+  "spectralTypeSource": "SIMBAD, BD+44 3020: spectral type G8V (2018MNRAS.481.3244G)",
+  "metallicityDex": -0.25,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-37 (pscomppars): [Fe/H] -0.25 dex, from Fulton & Petigura 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..264F/abstract)",
+  "luminosityLogSolar": -0.322,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-37 (pscomppars): log10 of the luminosity in solar units -0.32187, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 3.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-37 (pscomppars): age 3.8 Gyr, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "projectedRotationSpeedKmS": 1.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-37 (pscomppars): projected rotation speed 1.1 km/s, from Barclay et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013Natur.494..452B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

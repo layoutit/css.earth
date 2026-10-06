@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 187, Name='TZ Mon', columns Teff, e_Teff (K): Teff 5375 +/- 204 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 1.2,
   "surfaceGravitySource": "log g 1.2 from 2023A&A...678A.195D; the 7 published values span log g 1.2 to 3.158, across which the limb law changes by at most 1.7% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.195D)",
+  "spectralType": "G5",
+  "spectralTypeSource": "SIMBAD, V* TZ Mon: spectral type G5 (2023ApJS..264...17Z)",
+  "luminosityLogSolar": 3.334,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3112475495616980992, flags_flame 10: lum_flame 2159.1912 solar luminosities (16th to 84th percentiles 1967.1198 to 2374.471); its log10 is recorded",
+  "projectedRotationSpeedKmS": 13.7,
+  "projectedRotationSpeedSource": "SIMBAD, V* TZ Mon: projected rotation speed 13.7 km/s, the measurement SIMBAD prefers (2020AJ....160..120J)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

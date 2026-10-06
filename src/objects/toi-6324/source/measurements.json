@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Lee et al. 2025, the stellar temperature of the default parameter set of TOI-6324 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..36L/abstract)",
   "surfaceGravityLogg": 4.93,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-6324.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.934, rounded to two decimals",
+  "spectralType": "dM4.0",
+  "spectralTypeSource": "SIMBAD, G 264-17: spectral type dM4.0 (2022ApJ...927..122H)",
+  "metallicityDex": -0.32,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-6324 (pscomppars): [Fe/H] -0.32 dex, from Lee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..36L/abstract)",
+  "luminosityLogSolar": -1.998,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6324 (pscomppars): log10 of the luminosity in solar units -1.99802, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6324 (pscomppars): projected rotation speed 2 km/s, from Lee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..36L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

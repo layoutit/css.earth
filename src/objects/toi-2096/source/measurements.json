@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Pozuelos et al. 2023, the stellar temperature of the default parameter set of TOI-2096 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract)",
   "surfaceGravityLogg": 5.06,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2096.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.060, rounded to two decimals",
+  "spectralType": "M4",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2096 (pscomppars): spectral type M4, from Pozuelos et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract)",
+  "metallicityDex": -0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2096 (pscomppars): [Fe/H] -0.03 dex, from Pozuelos et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract)",
+  "luminosityLogSolar": -2.228,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2096 (pscomppars): log10 of the luminosity in solar units -2.22768, from Pozuelos et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract)",
+  "ageGyr": 4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2096 (pscomppars): age 4 Gyr, from Pozuelos et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..70P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

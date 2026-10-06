@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Barber et al. 2024, the stellar temperature of the default parameter set of HIP 67522 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract)",
   "surfaceGravityLogg": 4.24,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hip-67522.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.245, rounded to two decimals",
+  "spectralType": "G1 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HIP 67522 (pscomppars): spectral type G1 V, from Michigan Catalog, Vol. 2 (https://ui.adsabs.harvard.edu/abs/1978MSS...C02....0H/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HIP 67522 (pscomppars): [Fe/H] 0 dex, from Heitzmann et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021ApJ...922L...1H/abstract)",
+  "luminosityLogSolar": 0.243,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HIP 67522 (pscomppars): log10 of the luminosity in solar units 0.24304, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract)",
+  "ageGyr": 0.017,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HIP 67522 (pscomppars): age 0.017 Gyr, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract)",
+  "rotationPeriodDays": 1.418,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HIP 67522 (pscomppars): rotation period 1.418 d, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract)",
+  "projectedRotationSpeedKmS": 54.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HIP 67522 (pscomppars): projected rotation speed 54.2 km/s, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

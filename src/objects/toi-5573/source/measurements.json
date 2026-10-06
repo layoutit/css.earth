@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Fernandes et al. 2025, the stellar temperature of the default parameter set of TOI-5573 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract)",
   "surfaceGravityLogg": 4.68,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5573.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.682, rounded to two decimals",
+  "metallicityDex": 0.42,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5573 (pscomppars): [Fe/H] 0.42 dex, from Fernandes et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract)",
+  "luminosityLogSolar": -1.159,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5573 (pscomppars): log10 of the luminosity in solar units -1.15927, from Fernandes et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract)",
+  "ageGyr": 9.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5573 (pscomppars): age 9.7 Gyr, from Fernandes et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5573 (pscomppars): projected rotation speed 2 km/s, from Fernandes et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170...55F/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

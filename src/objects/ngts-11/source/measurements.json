@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Gill et al. 2020, the stellar temperature of the default parameter set of NGTS-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract)",
   "surfaceGravityLogg": 4.53,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ngts-11.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.533, rounded to two decimals",
+  "spectralType": "K",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of NGTS-11 (pscomppars): spectral type K, from Gill et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract)",
+  "metallicityDex": 0.22,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of NGTS-11 (pscomppars): [Fe/H] 0.22 dex, from Gill et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract)",
+  "luminosityLogSolar": -0.395,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of NGTS-11 (pscomppars): log10 of the luminosity in solar units -0.39518, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 3.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of NGTS-11 (pscomppars): age 3.9 Gyr, from Gill et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract)",
+  "projectedRotationSpeedKmS": 1.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of NGTS-11 (pscomppars): projected rotation speed 1.1 km/s, from Gill et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..11G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

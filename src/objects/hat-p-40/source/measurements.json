@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-40 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 3.88,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-40.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.875, rounded to two decimals",
+  "metallicityDex": 0.22,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-40 (pscomppars): [Fe/H] 0.22 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.778,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-40 (pscomppars): log10 of the luminosity in solar units 0.778, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 2.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-40 (pscomppars): age 2.7 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 6.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-40 (pscomppars): projected rotation speed 6.9 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

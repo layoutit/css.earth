@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Effective temperature 8590 ± 73 K from Mamajek 2012 (ApJL 754, L20; https://doi.org/10.1088/2041-8205/754/2/L20), Section 2 and Table 2: the Absil et al. 2009 VLTI diameter with the Davis et al. 2005 bolometric flux.",
   "surfaceGravityLogg": 4.19,
   "surfaceGravitySource": "log g from the mass 1.92 +/- 0.02 solar masses of Mamajek 2012 (ApJL 754, L20; https://arxiv.org/abs/1206.6353), Table 2, and the package radius, log10(GM/R^2) in cgs",
+  "spectralType": "A4V",
+  "spectralTypeSource": "SIMBAD, * alf PsA: spectral type A4V (2006AJ....132..161G)",
+  "projectedRotationSpeedKmS": 97,
+  "projectedRotationSpeedSource": "SIMBAD, * alf PsA: projected rotation speed 97 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

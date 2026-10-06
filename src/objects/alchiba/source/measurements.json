@@ -9,6 +9,14 @@
   "radiusSource": "Radius 1.37 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 59199: radius 1.37 solar radii, implied by the fitted luminosity 4.137 solar luminosities (fractional uncertainty 0.063) and temperature (https://doi.org/10.1093/mnras/stx1433): 953,109 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 7039 +/- 248 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 59199: effective temperature 7039 +/- 248 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.066) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
   "effectiveTemperatureK": 7039,
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 59199: effective temperature 7039 +/- 248 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.066) (https://doi.org/10.1093/mnras/stx1433)",
+  "spectralType": "F1V",
+  "spectralTypeSource": "SIMBAD, * alf Crv: spectral type F1V (2006AJ....132..161G)",
+  "luminosityLogSolar": 0.649,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3489338019475637760, flags_flame 00: lum_flame 4.453157 solar luminosities (16th to 84th percentiles 4.4213085 to 4.4826007); its log10 is recorded",
+  "ageGyr": 1.034,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3489338019475637760, flags_flame 00: age_flame 1.0341513 Gyr (16th to 84th percentiles 0.67237085 to 1.3933048)",
+  "projectedRotationSpeedKmS": 25,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Crv: projected rotation speed 25 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 105452) (photometry/stellar-color.json); no image of the photosphere exists."

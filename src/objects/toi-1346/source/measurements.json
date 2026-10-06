@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Gomez Barrientos et al. 2025, the stellar temperature of the default parameter set of TOI-1346 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1346.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.568, rounded to two decimals",
+  "metallicityDex": -0.01,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1346 (pscomppars): [m/H] -0.01 dex, from Gomez Barrientos et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..148G/abstract)",
+  "luminosityLogSolar": -0.473,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1346 (pscomppars): log10 of the luminosity in solar units -0.47288, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 4.727,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1636979235288735744, flags_flame 00: age_flame 4.7265396 Gyr (16th to 84th percentiles 2.876769 to 6.578622)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

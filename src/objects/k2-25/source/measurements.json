@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Stefansson et al. 2020, the stellar temperature of the default parameter set of K2-25 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract)",
   "surfaceGravityLogg": 4.92,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-25.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.924, rounded to two decimals",
+  "spectralType": "M4.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-25 (pscomppars): spectral type M4.5 V, from Stefansson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract)",
+  "metallicityDex": 0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-25 (pscomppars): [Fe/H] 0.15 dex, from Stefansson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract)",
+  "luminosityLogSolar": -2.088,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-25 (pscomppars): log10 of the luminosity in solar units -2.08831, from Stefansson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract)",
+  "ageGyr": 0.73,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-25 (pscomppars): age 0.73 Gyr, from Stefansson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract)",
+  "rotationPeriodDays": 1.878,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-25 (pscomppars): rotation period 1.878 d, from Stefansson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract)",
+  "projectedRotationSpeedKmS": 8.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-25 (pscomppars): projected rotation speed 8.8 km/s, from Stefansson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

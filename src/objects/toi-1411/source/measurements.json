@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1411 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.64,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1411.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.643, rounded to two decimals",
+  "spectralType": "K6V",
+  "spectralTypeSource": "SIMBAD, V* FN Boo: spectral type K6V (1986AJ.....92..139S)",
+  "metallicityDex": 0.012,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1411 (pscomppars): [Fe/H] 0.012 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": -1.013,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1411 (pscomppars): log10 of the luminosity in solar units -1.01323, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 9.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1411 (pscomppars): age 9.6 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "SIMBAD, V* FN Boo: projected rotation speed 2 km/s, the measurement SIMBAD prefers (2022AJ....163...99G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

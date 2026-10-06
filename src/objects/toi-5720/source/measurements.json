@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Barkaoui et al. 2024, the stellar temperature of the default parameter set of TOI-5720 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
   "surfaceGravityLogg": 4.85,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5720.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.855, rounded to two decimals",
+  "spectralType": "M3.5 +/- 1.0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5720 (pscomppars): spectral type M3.5 +/- 1.0, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
+  "metallicityDex": 0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5720 (pscomppars): [Fe/H] 0.03 dex, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
+  "luminosityLogSolar": -1.792,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5720 (pscomppars): log10 of the luminosity in solar units -1.79183, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
+  "ageGyr": 5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5720 (pscomppars): age 5 Gyr, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
+  "projectedRotationSpeedKmS": 3.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5720 (pscomppars): projected rotation speed 3.4 km/s, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

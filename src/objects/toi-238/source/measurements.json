@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Egger et al. 2025, the stellar temperature of the default parameter set of TOI-238 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...696A..28E/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-238.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.574, rounded to two decimals",
+  "spectralType": "K2V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-238 (pscomppars): spectral type K2V, from Suárez Mascareño et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract)",
+  "metallicityDex": -0.114,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-238 (pscomppars): [Fe/H] -0.114 dex, from Suárez Mascareño et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract)",
+  "luminosityLogSolar": -0.471,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-238 (pscomppars): log10 of the luminosity in solar units -0.47083, from Suárez Mascareño et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract)",
+  "ageGyr": 4.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-238 (pscomppars): age 4.3 Gyr, from Suárez Mascareño et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract)",
+  "rotationPeriodDays": 26,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-238 (pscomppars): rotation period 26 d, from Suárez Mascareño et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract)",
+  "projectedRotationSpeedKmS": 1.84,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-238 (pscomppars): projected rotation speed 1.84 km/s, from Suárez Mascareño et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

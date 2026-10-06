@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Reller et al. 2026, the stellar temperature of the default parameter set of TOI-4409 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract)",
   "surfaceGravityLogg": 4.61,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4409.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.606, rounded to two decimals",
+  "spectralType": "K",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4409 (pscomppars): spectral type K, from Reller et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4409 (pscomppars): [Fe/H] 0 dex, from Reller et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract)",
+  "luminosityLogSolar": -0.57,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4409 (pscomppars): log10 of the luminosity in solar units -0.56976, from Reller et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract)",
+  "ageGyr": 7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4409 (pscomppars): age 7 Gyr, from Reller et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

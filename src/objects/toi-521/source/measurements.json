@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Lacedelli et al. 2026, the stellar temperature of the default parameter set of TOI-521 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
   "surfaceGravityLogg": 4.81,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-521.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.813, rounded to two decimals",
+  "spectralType": "M3",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-521 (pscomppars): spectral type M3, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
+  "metallicityDex": -0.12,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-521 (pscomppars): [Fe/H] -0.12 dex, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
+  "luminosityLogSolar": -1.599,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-521 (pscomppars): log10 of the luminosity in solar units -1.5986, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
+  "ageGyr": 0.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-521 (pscomppars): age 0.8 Gyr, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Groenewegen & Lub (2023), A&A 676, A136, VizieR J/A+A/676/A136/table1, Name=LMC4689, columns Teffp, e_Teffp: Teff 4625 +/- 144 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2307.07559)",
   "surfaceGravityLogg": 1.65,
   "surfaceGravitySource": "log g 1.65 from 2022AJ....163..152S (APOGEE Net, a survey pipeline: no analysis of this star's own spectra is published); the 1 published value span log g 1.65 to 1.65, across which the limb law changes by at most 0.0% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2022AJ....163..152S)",
+  "spectralType": "M",
+  "spectralTypeSource": "SIMBAD, SV* HV 2827: spectral type M",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

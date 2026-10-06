@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Hobson et al. 2024, the stellar temperature of the default parameter set of L 168-9 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
   "surfaceGravityLogg": 4.66,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/l-168-9.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.664, rounded to two decimals",
+  "spectralType": "M0.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of L 168-9 (pscomppars): spectral type M0.5 V, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "metallicityDex": -0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of L 168-9 (pscomppars): [Fe/H] -0.03 dex, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "luminosityLogSolar": -1.141,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of L 168-9 (pscomppars): log10 of the luminosity in solar units -1.14086, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "rotationPeriodDays": 29,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of L 168-9 (pscomppars): rotation period 29 d, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "projectedRotationSpeedKmS": 2.59,
+  "projectedRotationSpeedSource": "SIMBAD, CD-60 8051: projected rotation speed 2.59 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

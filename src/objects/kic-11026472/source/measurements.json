@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 11026472 (Gold): APOGEE effective temperature (K) 4817.2974 +/- 44.9582 (https://arxiv.org/abs/2410.00102)",
   "surfaceGravityLogg": 2.8734,
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 11026472 (Gold): Asteroseismic log g 2.8734 +/- 0.0039 (https://arxiv.org/abs/2410.00102)",
+  "spectralType": "K0III",
+  "spectralTypeSource": "SIMBAD, TYC 3547-1293-1: spectral type K0III (2022A&A...664A..78F)",
+  "luminosityLogSolar": 1.438,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2129569687305931264, flags_flame 10: lum_flame 27.422733 solar luminosities (16th to 84th percentiles 27.026 to 27.857658); its log10 is recorded",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

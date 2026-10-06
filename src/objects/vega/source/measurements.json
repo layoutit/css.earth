@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Effective temperature 9360 ± 90 K, the surface-averaged value of the concordance model in Monnier et al. 2012 (ApJL 761, L3; https://doi.org/10.1088/2041-8205/761/1/L3), Table 2, the same model as the radius. The star is gravity-darkened: the same table gives 10070 K at the pole and 8910 K at the equator.",
   "surfaceGravityLogg": 3.93,
   "surfaceGravitySource": "log g from the model mass 2.15 (+0.10/-0.15) solar masses of Monnier et al. 2012 (ApJL 761, L3; https://arxiv.org/abs/1211.6055), abstract and Table 2, and the package radius, log10(GM/R^2) in cgs; a mean over the gravity-darkened surface",
+  "spectralType": "A0V",
+  "spectralTypeSource": "SIMBAD, * alf Lyr: spectral type A0V (2024A&A...690A.176N)",
+  "projectedRotationSpeedKmS": 24,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Lyr: projected rotation speed 24 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

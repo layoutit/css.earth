@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Lillo-Box et al. 2026, the stellar temperature of the default parameter set of TOI-4492 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract)",
   "surfaceGravityLogg": 4.29,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4492.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.292, rounded to two decimals",
+  "spectralType": "G2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4492 (pscomppars): spectral type G2 V, from Lillo-Box et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract)",
+  "metallicityDex": 0.219,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4492 (pscomppars): [Fe/H] 0.219 dex, from Lillo-Box et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract)",
+  "luminosityLogSolar": 0.155,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4492 (pscomppars): log10 of the luminosity in solar units 0.15546, from Lillo-Box et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract)",
+  "ageGyr": 13.199,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1857593254122163712, flags_flame 00: age_flame 13.199232 Gyr (16th to 84th percentiles 11.786222 to 13.5)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4492 (pscomppars): projected rotation speed 3 km/s, from Lillo-Box et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

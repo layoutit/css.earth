@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 338B: effective temperature in K, 3867 +/- 37, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.71,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-338-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.709, rounded to two decimals",
+  "spectralType": "M0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 338 B (pscomppars): spectral type M0 V, from DiTomasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...38D/abstract)",
+  "metallicityDex": -0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 338 B (pscomppars): [Fe/H] -0.03 dex, from DiTomasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...38D/abstract)",
+  "luminosityLogSolar": -1.101,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 338 B (pscomppars): log10 of the luminosity in solar units -1.10127, from DiTomasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...38D/abstract)",
+  "ageGyr": 4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 338 B (pscomppars): age 4 Gyr, from DiTomasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...38D/abstract)",
+  "rotationPeriodDays": 16.61,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 338 B (pscomppars): rotation period 16.61 d, from DiTomasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...38D/abstract)",
+  "projectedRotationSpeedKmS": 2.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 338 B (pscomppars): projected rotation speed 2.3 km/s, from DiTomasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...38D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

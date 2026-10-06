@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Lam et al. 2023, the stellar temperature of the default parameter set of TOI-1260 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract)",
   "surfaceGravityLogg": 4.62,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1260.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.615, rounded to two decimals",
+  "spectralType": "K6 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1260 (pscomppars): spectral type K6 V, from Georgieva et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.505.4684G/abstract)",
+  "metallicityDex": -0.1,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1260 (pscomppars): [Fe/H] -0.1 dex, from Lam et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract)",
+  "luminosityLogSolar": -0.889,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1260 (pscomppars): log10 of the luminosity in solar units -0.88941, from Lam et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract)",
+  "ageGyr": 6.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1260 (pscomppars): age 6.7 Gyr, from Lam et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract)",
+  "rotationPeriodDays": 30.63,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1260 (pscomppars): rotation period 30.63 d, from Lam et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1260 (pscomppars): projected rotation speed 1.5 km/s, from Lam et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

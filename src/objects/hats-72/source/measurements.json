@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Hartman et al. 2020, the stellar temperature of the default parameter set of HATS-72 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract)",
   "surfaceGravityLogg": 4.59,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hats-72.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.586, rounded to two decimals",
+  "metallicityDex": 0.099,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HATS-72 (pscomppars): [Fe/H] 0.099 dex, from Hartman et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract)",
+  "luminosityLogSolar": -0.659,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HATS-72 (pscomppars): log10 of the luminosity in solar units -0.65896, from Hartman et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract)",
+  "ageGyr": 12.17,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HATS-72 (pscomppars): age 12.17 Gyr, from Hartman et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract)",
+  "rotationPeriodDays": 48.725,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HATS-72 (pscomppars): rotation period 48.725 d, from Hartman et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract)",
+  "projectedRotationSpeedKmS": 0.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HATS-72 (pscomppars): projected rotation speed 0.8 km/s, from Hartman et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

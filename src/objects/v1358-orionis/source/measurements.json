@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "McDonald et al. (2012), MNRAS 427, 343, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729)",
   "surfaceGravityLogg": 4.42,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/v1358-orionis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.421, rounded to two decimals",
+  "spectralType": "G0V",
+  "spectralTypeSource": "SIMBAD, V* V1358 Ori: spectral type G0V (1999MSS...C05....0H)",
+  "luminosityLogSolar": 0.21,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3116883781327753216, flags_flame 00: lum_flame 1.6199714 solar luminosities (16th to 84th percentiles 1.6135772 to 1.6264321); its log10 is recorded",
+  "ageGyr": 5.722,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3116883781327753216, flags_flame 00: age_flame 5.722326 Gyr (16th to 84th percentiles 4.879643 to 6.5648975)",
+  "projectedRotationSpeedKmS": 35.6,
+  "projectedRotationSpeedSource": "SIMBAD, V* V1358 Ori: projected rotation speed 35.6 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

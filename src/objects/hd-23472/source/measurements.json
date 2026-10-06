@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Barros et al. 2022, the stellar temperature of the default parameter set of HD 23472 d in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract)",
   "surfaceGravityLogg": 4.56,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-23472.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.562, rounded to two decimals",
+  "spectralType": "K4 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 23472 (pscomppars): spectral type K4 V, from Barros et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract)",
+  "metallicityDex": -0.2,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 23472 (pscomppars): [Fe/H] -0.2 dex, from Barros et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract)",
+  "luminosityLogSolar": -0.625,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 23472 (pscomppars): log10 of the luminosity in solar units -0.62525, from Barros et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract)",
+  "rotationPeriodDays": 40.1,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 23472 (pscomppars): rotation period 40.1 d, from Barros et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract)",
+  "projectedRotationSpeedKmS": 1.45,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 23472 (pscomppars): projected rotation speed 1.45 km/s, from Barros et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

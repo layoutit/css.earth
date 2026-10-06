@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Davis et al. 2020, the stellar temperature of the default parameter set of TOI-564 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract)",
   "surfaceGravityLogg": 4.36,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-564.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.364, rounded to two decimals",
+  "metallicityDex": 0.143,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-564 (pscomppars): [Fe/H] 0.143 dex, from Davis et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract)",
+  "luminosityLogSolar": 0.033,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-564 (pscomppars): log10 of the luminosity in solar units 0.03262, from Davis et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract)",
+  "ageGyr": 7.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-564 (pscomppars): age 7.3 Gyr, from Davis et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract)",
+  "projectedRotationSpeedKmS": 3.54,
+  "projectedRotationSpeedSource": "SIMBAD, TOI-564: projected rotation speed 3.54 km/s, the measurement SIMBAD prefers (2020AJ....160..229D)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

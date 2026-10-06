@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "4573 +/- 10 K, as Zhang et al. (2024) tabulate from Bohn et al. (2020), https://arxiv.org/abs/2409.16660",
   "surfaceGravityLogg": 4.43,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/yses-1.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.429, rounded to two decimals",
+  "spectralType": "K3 IV",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TYC 8998-760-1 (pscomppars): spectral type K3 IV, from Roberts et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..273R/abstract)",
+  "luminosityLogSolar": -0.34,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TYC 8998-760-1 (pscomppars): log10 of the luminosity in solar units -0.34, from Darcis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260526805D/abstract)",
+  "ageGyr": 0.017,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TYC 8998-760-1 (pscomppars): age 0.0167 Gyr, from Bohn et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020ApJ...898L..16B/abstract)",
+  "projectedRotationSpeedKmS": 11.1,
+  "projectedRotationSpeedSource": "SIMBAD, TYC 8998-760-1: projected rotation speed 11.1 km/s, the measurement SIMBAD prefers (2024AJ....168..246Z)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

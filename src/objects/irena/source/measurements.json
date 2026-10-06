@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 4453211899986180352: teff_gspphot 6046.362 K (16th-84th percentiles 6042.4-6053.373), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.15,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/irena.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.153, rounded to two decimals",
+  "spectralType": "F8 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-38 (pscomppars): spectral type F8 V, from Salz et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...576A..42S/abstract)",
+  "metallicityDex": -0.02,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-38 (pscomppars): [Fe/H] -0.02 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.453,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-38 (pscomppars): log10 of the luminosity in solar units 0.45294, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 3.29,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-38 (pscomppars): age 3.29 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 7.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-38 (pscomppars): projected rotation speed 7.5 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

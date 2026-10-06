@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "TICv8, the stellar temperature of the default parameter set of HAT-P-27 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "surfaceGravityLogg": 4.53,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-27.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.526, rounded to two decimals",
+  "spectralType": "G8",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HAT-P-27 (pscomppars): spectral type G8, from Béky et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011arXiv1101.3511B/abstract)",
+  "metallicityDex": 0.3,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-27 (pscomppars): [M/H] 0.3 dex, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "luminosityLogSolar": -0.269,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-27 (pscomppars): log10 of the luminosity in solar units -0.26926, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 4.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-27 (pscomppars): age 4.4 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 0.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-27 (pscomppars): projected rotation speed 0.4 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

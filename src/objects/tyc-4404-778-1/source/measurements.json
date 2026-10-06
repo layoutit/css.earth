@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 232965935 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467)",
   "surfaceGravityLogg": 4.51,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tyc-4404-778-1.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.507, rounded to two decimals",
+  "spectralType": "G7V",
+  "spectralTypeSource": "SIMBAD, TYC 4404-778-1: spectral type G7V (2010JDSO....6...30B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

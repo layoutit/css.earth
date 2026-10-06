@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 702A: effective temperature in K, 5407 +/- 52, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.53,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-702-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.526, rounded to two decimals",
+  "spectralType": "K0V",
+  "spectralTypeSource": "SIMBAD, * 70 Oph A: spectral type K0V (1967AJ.....72.1334C)",
+  "luminosityLogSolar": -0.289,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4468557611984384512, flags_flame 00: lum_flame 0.5142145 solar luminosities (16th to 84th percentiles 0.5090856 to 0.51936704); its log10 is recorded",
+  "ageGyr": 13.452,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4468557611984384512, flags_flame 00: age_flame 13.452476 Gyr (16th to 84th percentiles 9.140482 to 13.5)",
+  "projectedRotationSpeedKmS": 4.3,
+  "projectedRotationSpeedSource": "SIMBAD, * 70 Oph A: projected rotation speed 4.3 km/s, the measurement SIMBAD prefers (2017AJ....153...21L)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

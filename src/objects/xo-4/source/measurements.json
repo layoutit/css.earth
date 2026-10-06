@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of XO-4 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.16,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/xo-4.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.157, rounded to two decimals",
+  "spectralType": "F5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of XO-4 (pscomppars): spectral type F5 V, from McCullough et al. 2008 (https://ui.adsabs.harvard.edu/abs/2008arXiv0805.2921M/abstract)",
+  "metallicityDex": -0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of XO-4 (pscomppars): [Fe/H] -0.04 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.536,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of XO-4 (pscomppars): log10 of the luminosity in solar units 0.53558, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 2.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of XO-4 (pscomppars): age 2.1 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 8.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of XO-4 (pscomppars): projected rotation speed 8.8 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

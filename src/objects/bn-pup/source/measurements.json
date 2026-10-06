@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 43, Name='BN Pup', columns Teff, e_Teff (K): Teff 5250 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 0.21,
   "surfaceGravitySource": "log g 0.21 from 2024A&A...690A.246T, the median of its 2 spectra; the 8 published values span log g 0.14 to 1.88, across which the limb law changes by at most 2.7% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2024A%26A...690A.246T)",
+  "spectralType": "G4",
+  "spectralTypeSource": "SIMBAD, V* BN Pup: spectral type G4",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Barros et al. 2017, the stellar temperature of the default parameter set of HD 106315 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract)",
   "surfaceGravityLogg": 4.25,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-106315.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.251, rounded to two decimals",
+  "spectralType": "F5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 106315 (pscomppars): spectral type F5 V, from Barros et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract)",
+  "metallicityDex": -0.311,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 106315 (pscomppars): [Fe/H] -0.311 dex, from Barros et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract)",
+  "luminosityLogSolar": 0.395,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 106315 (pscomppars): log10 of the luminosity in solar units 0.39454, from Lendl et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...603L...5L/abstract)",
+  "ageGyr": 4.48,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 106315 (pscomppars): age 4.48 Gyr, from Barros et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract)",
+  "projectedRotationSpeedKmS": 12.71,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 106315 (pscomppars): projected rotation speed 12.71 km/s, from Barros et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...608A..25B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

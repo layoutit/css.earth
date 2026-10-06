@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 457134361 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467)",
   "surfaceGravityLogg": 4.41,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-80607.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.411, rounded to two decimals",
+  "spectralType": "G5",
+  "spectralTypeSource": "SIMBAD, HD 80607: spectral type G5 (1998A&AS..129..237F)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "SIMBAD, HD 80607: projected rotation speed 2 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 80607) (photometry/stellar-color.json); no image of the photosphere exists."

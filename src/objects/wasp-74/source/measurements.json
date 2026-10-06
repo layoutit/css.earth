@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-74 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.12,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-74.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.125, rounded to two decimals",
+  "spectralType": "F9",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-74 (pscomppars): spectral type F9, from Luque et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...642A..50L/abstract)",
+  "metallicityDex": 0.39,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-74 (pscomppars): [Fe/H] 0.39 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.4,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-74 (pscomppars): log10 of the luminosity in solar units 0.39971, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 3.49,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-74 (pscomppars): age 3.49 Gyr, from Luque et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...642A..50L/abstract)",
+  "projectedRotationSpeedKmS": 6.03,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-74 (pscomppars): projected rotation speed 6.03 km/s, from Mancini et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5168M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

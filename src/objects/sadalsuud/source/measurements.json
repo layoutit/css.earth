@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Baines et al. (2018), AJ 155, 30, HD 204867: effective temperature 5608 +/- 71 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b)",
   "surfaceGravityLogg": 1.77,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/sadalsuud.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.774, rounded to two decimals",
+  "spectralType": "G0Ib",
+  "spectralTypeSource": "SIMBAD, * bet Aqr: spectral type G0Ib (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 8.74,
+  "projectedRotationSpeedSource": "SIMBAD, * bet Aqr: projected rotation speed 8.74 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 204867) (photometry/stellar-color.json); no image of the photosphere exists."

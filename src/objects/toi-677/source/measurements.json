@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Jordán et al. 2020, the stellar temperature of the default parameter set of TOI-677 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract)",
   "surfaceGravityLogg": 4.3,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-677.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.296, rounded to two decimals",
+  "spectralType": "F8",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-677 (pscomppars): spectral type F8, from Jordán et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-677 (pscomppars): [Fe/H] 0 dex, from Jordán et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract)",
+  "luminosityLogSolar": 0.312,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-677 (pscomppars): log10 of the luminosity in solar units 0.31172, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 2.92,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-677 (pscomppars): age 2.92 Gyr, from Jordán et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract)",
+  "projectedRotationSpeedKmS": 7.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-677 (pscomppars): projected rotation speed 7.8 km/s, from Jordán et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..145J/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

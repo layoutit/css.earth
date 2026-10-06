@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 166A: effective temperature in K, 5147 +/- 14, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.54,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/keid.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.538, rounded to two decimals",
+  "spectralType": "K0V",
+  "spectralTypeSource": "SIMBAD, * omi02 Eri: spectral type K0V (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 9.21,
+  "projectedRotationSpeedSource": "SIMBAD, * omi02 Eri: projected rotation speed 9.21 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

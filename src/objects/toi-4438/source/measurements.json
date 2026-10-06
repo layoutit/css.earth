@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Serrano Bell et al. 2026, the stellar temperature of the default parameter set of TOI-4438 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
   "surfaceGravityLogg": 4.85,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4438.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.851, rounded to two decimals",
+  "spectralType": "M3.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4438 (pscomppars): spectral type M3.5 V, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "metallicityDex": 0.07,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4438 (pscomppars): [M/H] 0.07 dex, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "luminosityLogSolar": -1.768,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4438 (pscomppars): log10 of the luminosity in solar units -1.76802, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "ageGyr": 4.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4438 (pscomppars): age 4.8 Gyr, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "rotationPeriodDays": 77.6,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-4438 (pscomppars): rotation period 77.6 d, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4438 (pscomppars): projected rotation speed 2 km/s, from Goffo et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A.147G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

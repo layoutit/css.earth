@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Weiner Mansfield et al. 2024, the stellar temperature of the default parameter set of GJ 486 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract)",
   "surfaceGravityLogg": 4.91,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-486.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.910, rounded to two decimals",
+  "spectralType": "M3.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 486 (pscomppars): spectral type M3.5 V, from Caballero et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.120C/abstract)",
+  "metallicityDex": -0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 486 (pscomppars): [Fe/H] -0.15 dex, from Weiner Mansfield et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract)",
+  "luminosityLogSolar": -1.939,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 486 (pscomppars): log10 of the luminosity in solar units -1.93892, from Weiner Mansfield et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W/abstract)",
+  "ageGyr": 4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 486 (pscomppars): age 4 Gyr, from Caballero et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.120C/abstract)",
+  "rotationPeriodDays": 130.1,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 486 (pscomppars): rotation period 130.1 d, from Trifonov et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021Sci...371.1038T/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 486 (pscomppars): projected rotation speed 2 km/s, from Caballero et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.120C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

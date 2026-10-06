@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Dumusque et al. 2014, the stellar temperature of the default parameter set of Kepler-10 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract)",
   "surfaceGravityLogg": 4.34,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-10.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.342, rounded to two decimals",
+  "spectralType": "G2V",
+  "spectralTypeSource": "SIMBAD, Kepler-10: spectral type G2V (2018MNRAS.481.3244G)",
+  "metallicityDex": -0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-10 (pscomppars): [Fe/H] -0.15 dex, from Dumusque et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract)",
+  "luminosityLogSolar": 0.055,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-10 (pscomppars): log10 of the luminosity in solar units 0.05467, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 10.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-10 (pscomppars): age 10.6 Gyr, from Dumusque et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract)",
+  "projectedRotationSpeedKmS": 2.04,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-10 (pscomppars): projected rotation speed 2.04 km/s, from Dumusque et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

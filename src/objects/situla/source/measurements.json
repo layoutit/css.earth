@@ -9,6 +9,10 @@
   "radiusSource": "Radius 10.134 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 111710: radius 10.134 solar radii, implied by the fitted luminosity 43.36 solar luminosities (fractional uncertainty 0.055) and temperature (https://doi.org/10.1093/mnras/stx1433): 7,050,224 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4656 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 111710: effective temperature 4656 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.099) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
   "effectiveTemperatureK": 4656,
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 111710: effective temperature 4656 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.099) (https://doi.org/10.1093/mnras/stx1433)",
+  "spectralType": "K1.5IIIbCN0.5",
+  "spectralTypeSource": "SIMBAD, * kap Aqr: spectral type K1.5IIIbCN0.5 (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 3.8,
+  "projectedRotationSpeedSource": "SIMBAD, * kap Aqr: projected rotation speed 3.8 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

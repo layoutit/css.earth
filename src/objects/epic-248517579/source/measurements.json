@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 248517579: GALAH DR3 effective temperature 4644.9517 +/- 107 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.4,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-248517579.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.405, rounded to two decimals",
+  "luminosityLogSolar": 1.755,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3857158159710368384, flags_flame 10: lum_flame 56.92947 solar luminosities (16th to 84th percentiles 53.467804 to 61.44488); its log10 is recorded",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

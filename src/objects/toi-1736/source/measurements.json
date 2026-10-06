@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1736 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.14,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1736.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.144, rounded to two decimals",
+  "spectralType": "G5",
+  "spectralTypeSource": "SIMBAD, BD+68 202: spectral type G5",
+  "metallicityDex": 0.148,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1736 (pscomppars): [Fe/H] 0.148 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": 0.271,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1736 (pscomppars): log10 of the luminosity in solar units 0.27068, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 9.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1736 (pscomppars): age 9.2 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "rotationPeriodDays": 28,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1736 (pscomppars): rotation period 28 d, from Martioli et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..84M/abstract)",
+  "projectedRotationSpeedKmS": 4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1736 (pscomppars): projected rotation speed 4 km/s, from Martioli et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..84M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

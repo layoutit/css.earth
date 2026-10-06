@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Kossakowski et al. 2021, the stellar temperature of the default parameter set of TOI-1201 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...656A.124K/abstract)",
   "surfaceGravityLogg": 4.74,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1201.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.736, rounded to two decimals",
+  "spectralType": "M2.0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1201 (pscomppars): spectral type M2.0 V, from Kossakowski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...656A.124K/abstract)",
+  "metallicityDex": 0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1201 (pscomppars): [Fe/H] 0.05 dex, from Kossakowski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...656A.124K/abstract)",
+  "luminosityLogSolar": -1.469,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1201 (pscomppars): log10 of the luminosity in solar units -1.46852, from Kossakowski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...656A.124K/abstract)",
+  "rotationPeriodDays": 21,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1201 (pscomppars): rotation period 21 d, from Kossakowski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...656A.124K/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1201 (pscomppars): projected rotation speed 2 km/s, from Kossakowski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...656A.124K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

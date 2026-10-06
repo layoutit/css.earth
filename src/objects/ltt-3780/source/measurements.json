@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Bonfanti et al. 2024, the stellar temperature of the default parameter set of LTT 3780 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract)",
   "surfaceGravityLogg": 4.86,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ltt-3780.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.859, rounded to two decimals",
+  "spectralType": "M3.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LTT 3780 (pscomppars): spectral type M3.5 V, from Weisserman et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.165W/abstract)",
+  "metallicityDex": 0.06,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of LTT 3780 (pscomppars): [Fe/H] 0.06 dex, from Bonfanti et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract)",
+  "luminosityLogSolar": -1.783,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LTT 3780 (pscomppars): log10 of the luminosity in solar units -1.78252, from Bonfanti et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract)",
+  "ageGyr": 3.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of LTT 3780 (pscomppars): age 3.1 Gyr, from Bonfanti et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A..66B/abstract)",
+  "rotationPeriodDays": 104,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LTT 3780 (pscomppars): rotation period 104 d, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 1.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of LTT 3780 (pscomppars): projected rotation speed 1.3 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

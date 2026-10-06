@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bonomo et al. 2017, the stellar temperature of the default parameter set of HAT-P-34 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "surfaceGravityLogg": 4.21,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-34.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.212, rounded to two decimals",
+  "spectralType": "F8",
+  "spectralTypeSource": "SIMBAD, HD 351766: spectral type F8 (1995A&AS..110..367N)",
+  "metallicityDex": 0.22,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-34 (pscomppars): [Fe/H] 0.22 dex, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "luminosityLogSolar": 0.6,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-34 (pscomppars): log10 of the luminosity in solar units 0.6003, from Mallonn et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...622A..81M/abstract)",
+  "ageGyr": 1.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-34 (pscomppars): age 1.7 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 24,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-34 (pscomppars): projected rotation speed 24 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Dressing et al. 2017, the stellar temperature of the default parameter set of K2-72 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract)",
   "surfaceGravityLogg": 4.83,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-72.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.832, rounded to two decimals",
+  "spectralType": "M2V",
+  "spectralTypeSource": "SIMBAD, LP 759-72: spectral type M2V (2017ApJ...836..167D)",
+  "luminosityLogSolar": -1.837,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-72 (pscomppars): log10 of the luminosity in solar units -1.83673, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "projectedRotationSpeedKmS": 2.87,
+  "projectedRotationSpeedSource": "SIMBAD, LP 759-72: projected rotation speed 2.87 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of HD 63935 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.45,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-63935.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.447, rounded to two decimals",
+  "spectralType": "G5",
+  "spectralTypeSource": "SIMBAD, HD 63935: spectral type G5 (1993yCat.3135....0C)",
+  "metallicityDex": 0.107,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 63935 (pscomppars): [Fe/H] 0.107 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": -0.115,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 63935 (pscomppars): log10 of the luminosity in solar units -0.11464, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 6.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 63935 (pscomppars): age 6.6 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "projectedRotationSpeedKmS": 1.8,
+  "projectedRotationSpeedSource": "SIMBAD, HD 63935: projected rotation speed 1.8 km/s, the measurement SIMBAD prefers (2025A&A...697A.102T)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

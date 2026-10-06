@@ -8,6 +8,7 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation entries.json | --rock-eclipse entries.json | --published-map entries.json
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --metadata --all | <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb <id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-lit <id>...
@@ -77,6 +78,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     const { renameStars } = await import('./rename.mts'), { liveArchive } = await import('./archives/archives.mts');
     const { lines, refresh } = await renameStars(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), liveArchive);
     process.stdout.write(`${lines.join('\n')}\n${refresh.length ? `Regenerate: node packages/telescope-cli/src/new-object/new-object-cli.mts --refresh ${refresh.join(' ')} --bake\n` : ''}`);
+  } else if (args.includes('--metadata') && !specPath) {
+    // What the catalogues print of stars already in the tree, into their measurements records: `--metadata --all | STAR_ID...` (new-object/metadata/metadata.mts).
+    const { writeStarMetadata } = await import('./metadata/metadata.mts'), { liveArchive } = await import('./archives/archives.mts'), ids = args.filter(argument => !argument.startsWith('--'));
+    if (!ids.length && !args.includes('--all')) throw new TypeError('Usage: --metadata --all | <star id>...');
+    const lines = await writeStarMetadata(checkoutProjectRoot(import.meta.url), ids, liveArchive, line => process.stdout.write(`${line}\n`));
+    process.stdout.write(`${lines.at(-1)}\n${lines.length - 1} record(s) changed.\n`);
   } else if (args.includes('--retext') && !specPath) {
     // Drafted text and size facts of archive hosts and their planets, after a template change: `--retext HOST_ID...` (new-object/retext.mts).
     const { retextHosts } = await import('./retext.mts'), { liveArchive } = await import('./archives/archives.mts');

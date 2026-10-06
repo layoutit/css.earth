@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Kervella et al. (2022), A&A 667, A111, Table 4: Teff of A 15539 +/- 438 K (https://doi.org/10.1051/0004-6361/202244009)",
   "surfaceGravityLogg": 3.38,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/achernar.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.379, rounded to two decimals",
+  "spectralType": "B6Vpe",
+  "spectralTypeSource": "SIMBAD, * alf Eri: spectral type B6Vpe (2006MNRAS.371..252L)",
+  "projectedRotationSpeedKmS": 235,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Eri: projected rotation speed 235 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A Roche surface flattened by rotation, 9.16 solar radii at the equator and 6.78 at the poles, its pole 60.6 degrees from the line of sight at position angle 216.9 degrees, and gravity darkened with exponent 0.166 from a 17,124 K pole: Domiciano de Souza et al. (2014), A&A 569, A10 (https://doi.org/10.1051/0004-6361/201424144). The disc color is the star's measured one; only the pole-to-equator contrast is the model's."

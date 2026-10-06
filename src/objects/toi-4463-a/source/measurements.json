@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Yee et al. 2023, the stellar temperature of the default parameter set of TOI-4463 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract)",
   "surfaceGravityLogg": 4.41,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4463-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.409, rounded to two decimals",
+  "spectralType": "F5",
+  "spectralTypeSource": "SIMBAD, HD 349013: spectral type F5 (1995A&AS..110..367N)",
+  "metallicityDex": 0.25,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4463 A (pscomppars): [Fe/H] 0.25 dex, from Yee et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract)",
+  "luminosityLogSolar": 0.011,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4463 A (pscomppars): log10 of the luminosity in solar units 0.01115, from Yee et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract)",
+  "ageGyr": 4.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4463 A (pscomppars): age 4.1 Gyr, from Yee et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....1Y/abstract)",
+  "projectedRotationSpeedKmS": 3.4,
+  "projectedRotationSpeedSource": "SIMBAD, HD 349013: projected rotation speed 3.4 km/s, the measurement SIMBAD prefers (2023ApJS..265....1Y)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

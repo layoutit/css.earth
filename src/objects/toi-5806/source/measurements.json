@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Lillo-Box et al. 2026, the stellar temperature of the default parameter set of TOI-5806 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract)",
   "surfaceGravityLogg": 4.28,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5806.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.279, rounded to two decimals",
+  "spectralType": "F3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5806 (pscomppars): spectral type F3 V, from Lillo-Box et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract)",
+  "metallicityDex": -0.019,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5806 (pscomppars): [Fe/H] -0.019 dex, from Lillo-Box et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract)",
+  "luminosityLogSolar": 0.55,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5806 (pscomppars): log10 of the luminosity in solar units 0.54986, from Lillo-Box et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract)",
+  "ageGyr": 2.341,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1780750207505594496, flags_flame 00: age_flame 2.3407795 Gyr (16th to 84th percentiles 1.8742478 to 2.7919466)",
+  "projectedRotationSpeedKmS": 19.07,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5806 (pscomppars): projected rotation speed 19.072 km/s, from Lillo-Box et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719756L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

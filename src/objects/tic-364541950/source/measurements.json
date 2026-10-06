@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, tess_apo, TIC 364541950: APOGEE DR17 effective temperature 4344.1304 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.03,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-364541950.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.033, rounded to two decimals",
+  "spectralType": "K0",
+  "spectralTypeSource": "SIMBAD, HD 271518: spectral type K0 (1993yCat.3135....0C)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

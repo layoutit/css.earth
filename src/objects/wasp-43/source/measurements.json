@@ -7,6 +7,18 @@
   "distanceSource": "Gaia EDR3 parallax 11.474 +/- 0.016 mas via SIMBAD (2020yCat.1350....0G): 1000/11.474 = 87.15 pc, no zero-point correction",
   "radiusKm": 462640.5,
   "radiusSource": "0.665 solar radii (462,640.5 km at 695,700 km per solar radius), the stellar radius Challener et al. (2024, ApJL 969, L32; arXiv:2406.10207, Table 1) assume for their WASP-43b eclipse map, matching Hammond et al. (2024). A model-dependent value, not an interferometric measurement.",
+  "spectralType": "K7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-43 (pscomppars): spectral type K7 V, from Salz et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...576A..42S/abstract)",
+  "metallicityDex": -0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-43 (pscomppars): [Fe/H] -0.05 dex, from Hellier et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011arXiv1104.2823H/abstract)",
+  "luminosityLogSolar": -0.825,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-43 (pscomppars): log10 of the luminosity in solar units -0.82509, from Hoyer et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....151..137H/abstract)",
+  "ageGyr": 7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-43 (pscomppars): age 7 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodDays": 15.6,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-43 (pscomppars): rotation period 15.6 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-43 (pscomppars): projected rotation speed 4 km/s, from Hellier et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011arXiv1104.2823H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the Gaia DR3 photometric temperature (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."

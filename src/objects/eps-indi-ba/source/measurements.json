@@ -9,6 +9,8 @@
   "radiusSource": "A brown dwarf of spectral type T1 to T1.5. Mass 66.92 +/- 0.36 Jupiter masses, the dynamical mass of Chen et al. (2022, arXiv:2205.08077), Table 4. Temperature 1312 +/- 13 K from the SM08 hybrid evolutionary models at that mass and its luminosity (Chen et al. 2022, in their test of model atmospheres). Radius 0.080 to 0.081 solar radii from the COND03 models constrained by the dynamical system mass, King et al. (2010, A&A 510, A99; arXiv:0911.3143), in their COND03 predictions for the dynamical age range; the lower bound is drawn: 55,656 km at 695,700 km per solar radius. Model values, not a measured disc. presentationUp: no axis is measured, so the display axis is celestial north at the star.",
   "effectiveTemperatureK": 1312,
   "effectiveTemperatureSource": "1312 +/- 13 K, SM08 hybrid models, Chen et al. (2022), https://arxiv.org/abs/2205.08077",
+  "spectralType": "T1V+T6V",
+  "spectralTypeSource": "SIMBAD, * eps Ind B: spectral type T1V+T6V (2005AJ....129.2849B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a star is not a solid surface and its limb is not sharp."

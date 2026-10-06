@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Artigau et al. 2021, the stellar temperature of the default parameter set of TOI-1278 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..144A/abstract)",
   "surfaceGravityLogg": 4.65,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1278.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.654, rounded to two decimals",
+  "spectralType": "M0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1278 (pscomppars): spectral type M0 V, from Artigau et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..144A/abstract)",
+  "metallicityDex": -0.01,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1278 (pscomppars): [Fe/H] -0.01 dex, from Artigau et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..144A/abstract)",
+  "luminosityLogSolar": -1.212,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1278 (pscomppars): log10 of the luminosity in solar units -1.21183, from Artigau et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..144A/abstract)",
+  "ageGyr": 11.219,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1867491607542113536, flags_flame 00: age_flame 11.218545 Gyr (16th to 84th percentiles 6.549838 to 13.5)",
+  "projectedRotationSpeedKmS": 1.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1278 (pscomppars): projected rotation speed 1.1 km/s, from Artigau et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..144A/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

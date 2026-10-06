@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 161045582 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract)",
   "surfaceGravityLogg": 4.35,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-161045582.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.348, rounded to two decimals",
+  "spectralType": "F9",
+  "spectralTypeSource": "SIMBAD, TYC 3477-926-1: spectral type F9 (2023ApJS..264...17Z)",
+  "metallicityDex": 0.188,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TIC 161045582 (pscomppars): [M/H] 0.188 dex, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "luminosityLogSolar": 0.077,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TIC 161045582 (pscomppars): log10 of the luminosity in solar units 0.07687, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 9.836,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1590822939745962240, flags_flame 00: age_flame 9.835635 Gyr (16th to 84th percentiles 8.661765 to 11.00918)",
+  "projectedRotationSpeedKmS": 2.31,
+  "projectedRotationSpeedSource": "SIMBAD, TYC 3477-926-1: projected rotation speed 2.31 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

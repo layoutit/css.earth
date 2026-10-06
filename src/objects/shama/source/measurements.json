@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3796826582305099520: teff_gspphot 5212.654 K (16th-84th percentiles 5210.7085-5216.805), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.38,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/shama.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.382, rounded to two decimals",
+  "spectralType": "G8/K0 IV",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 99109 (pscomppars): spectral type G8/K0 IV, from Michigan Catalog, Vol. 5 (https://ui.adsabs.harvard.edu/abs/1999mctd.book.....H/abstract)",
+  "metallicityDex": 0.35,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 99109 (pscomppars): [Fe/H] 0.35 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": -0.172,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 99109 (pscomppars): log10 of the luminosity in solar units -0.17178, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 99109 (pscomppars): age 1 Gyr, from Ghezzi et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010ApJ...720.1290G/abstract)",
+  "projectedRotationSpeedKmS": 1.86,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 99109 (pscomppars): projected rotation speed 1.86 km/s, from Butler et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

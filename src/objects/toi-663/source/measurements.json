@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Cointepas et al. 2024, the stellar temperature of the default parameter set of TOI-663 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract)",
   "surfaceGravityLogg": 4.73,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-663.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.730, rounded to two decimals",
+  "spectralType": "M1 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-663 (pscomppars): spectral type M1 V, from Cointepas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract)",
+  "metallicityDex": 0.07,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-663 (pscomppars): [Fe/H] 0.07 dex, from Cointepas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract)",
+  "luminosityLogSolar": -1.37,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-663 (pscomppars): log10 of the luminosity in solar units -1.37033, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 30,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-663 (pscomppars): rotation period 30 d, from Cointepas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..19C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

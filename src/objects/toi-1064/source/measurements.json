@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Wilson et al. 2022, the stellar temperature of the default parameter set of TOI-1064 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract)",
   "surfaceGravityLogg": 4.59,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1064.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.590, rounded to two decimals",
+  "metallicityDex": 0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1064 (pscomppars): [Fe/H] 0.05 dex, from Wilson et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract)",
+  "luminosityLogSolar": -0.623,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1064 (pscomppars): log10 of the luminosity in solar units -0.62342, from Wilson et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract)",
+  "ageGyr": 9.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1064 (pscomppars): age 9.4 Gyr, from Wilson et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract)",
+  "projectedRotationSpeedKmS": 2.7,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1064 (pscomppars): projected rotation speed 2.7 km/s, from Wilson et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.1043W/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

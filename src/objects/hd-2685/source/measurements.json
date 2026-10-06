@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Jones et al. 2019, the stellar temperature of the default parameter set of HD 2685 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract)",
   "surfaceGravityLogg": 4.21,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-2685.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.207, rounded to two decimals",
+  "spectralType": "F2III/IV",
+  "spectralTypeSource": "SIMBAD, HD 2685: spectral type F2III/IV (1975MSS...C01....0H)",
+  "metallicityDex": 0.02,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 2685 (pscomppars): [Fe/H] 0.02 dex, from Jones et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract)",
+  "luminosityLogSolar": 0.668,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 2685 (pscomppars): log10 of the luminosity in solar units 0.66839, from Jones et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract)",
+  "ageGyr": 1.31,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 2685 (pscomppars): age 1.31 Gyr, from Jones et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract)",
+  "projectedRotationSpeedKmS": 15.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 2685 (pscomppars): projected rotation speed 15.4 km/s, from Jones et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...625A..16J/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 4246124829130366848: teff_gspphot 5085.218 K (16th-84th percentiles 5053.567-5094.9756), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 3.3,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/chechia.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.305, rounded to two decimals",
+  "spectralType": "G8 IV",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 192699 (pscomppars): spectral type G8 IV, from Johnson et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...665..785J/abstract)",
+  "metallicityDex": -0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 192699 (pscomppars): [Fe/H] -0.15 dex, from Johnson et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...665..785J/abstract)",
+  "luminosityLogSolar": 1.009,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 192699 (pscomppars): log10 of the luminosity in solar units 1.009, from Johnson et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...665..785J/abstract)",
+  "ageGyr": 1.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 192699 (pscomppars): age 1.8 Gyr, from Johnson et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...665..785J/abstract)",
+  "projectedRotationSpeedKmS": 1.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 192699 (pscomppars): projected rotation speed 1.9 km/s, from Johnson et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...665..785J/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

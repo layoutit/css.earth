@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 410214984 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467)",
   "surfaceGravityLogg": 4.45,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-222259-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.451, rounded to two decimals",
+  "spectralType": "K3Ve",
+  "spectralTypeSource": "SIMBAD, HD 222259B: spectral type K3Ve (2006A&A...460..695T)",
+  "projectedRotationSpeedKmS": 17.03,
+  "projectedRotationSpeedSource": "SIMBAD, HD 222259B: projected rotation speed 17.03 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Hedges et al. 2019, the stellar temperature of the default parameter set of K2-198 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L...5H/abstract)",
   "surfaceGravityLogg": 4.58,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-198.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.582, rounded to two decimals",
+  "spectralType": "G9",
+  "spectralTypeSource": "SIMBAD, K2-198: spectral type G9 (2022ApJS..261...26S)",
+  "metallicityDex": 0.094,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-198 (pscomppars): [M/H] 0.094 dex, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "luminosityLogSolar": -0.401,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-198 (pscomppars): log10 of the luminosity in solar units -0.40084, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "ageGyr": 1.13,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3628687065162340224, flags_flame 00: age_flame 1.1300575 Gyr (16th to 84th percentiles 0.2 to 2.676356)",
+  "projectedRotationSpeedKmS": 5.4,
+  "projectedRotationSpeedSource": "SIMBAD, K2-198: projected rotation speed 5.4 km/s, the measurement SIMBAD prefers (2025A&A...697A.102T)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

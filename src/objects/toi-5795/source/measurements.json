@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Manni et al. 2025, the stellar temperature of the default parameter set of TOI-5795 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract)",
   "surfaceGravityLogg": 4.32,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5795.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.324, rounded to two decimals",
+  "spectralType": "G3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5795 (pscomppars): spectral type G3 V, from Manni et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract)",
+  "metallicityDex": -0.27,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5795 (pscomppars): [Fe/H] -0.27 dex, from Manni et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract)",
+  "luminosityLogSolar": 0.053,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5795 (pscomppars): log10 of the luminosity in solar units 0.05308, from Manni et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract)",
+  "ageGyr": 10.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5795 (pscomppars): age 10.2 Gyr, from Manni et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract)",
+  "projectedRotationSpeedKmS": 1.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5795 (pscomppars): projected rotation speed 1.9 km/s, from Manni et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.230M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

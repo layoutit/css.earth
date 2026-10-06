@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Turner et al. 2019, the stellar temperature of the default parameter set of WASP-177 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5790T/abstract)",
   "surfaceGravityLogg": 4.49,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-177.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.487, rounded to two decimals",
+  "spectralType": "K2",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-177 (pscomppars): spectral type K2, from Turner et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5790T/abstract)",
+  "metallicityDex": 0.25,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-177 (pscomppars): [Fe/H] 0.25 dex, from Turner et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5790T/abstract)",
+  "luminosityLogSolar": -0.412,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-177 (pscomppars): log10 of the luminosity in solar units -0.41167, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 9.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-177 (pscomppars): age 9.7 Gyr, from Turner et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5790T/abstract)",
+  "projectedRotationSpeedKmS": 1.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-177 (pscomppars): projected rotation speed 1.8 km/s, from Turner et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.485.5790T/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

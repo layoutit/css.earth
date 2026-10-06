@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 173667: effective temperature in K, from the angular diameter and the bolometric flux, 6376 +/- 39 (https://doi.org/10.1088/0004-637X/746/1/101)",
   "surfaceGravityLogg": 3.96,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-173667.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.962, rounded to two decimals",
+  "spectralType": "F5.5IV-V",
+  "spectralTypeSource": "SIMBAD, * 110 Her: spectral type F5.5IV-V (2001AJ....121.2148G)",
+  "luminosityLogSolar": 0.815,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4530744134231683840, flags_flame 00: lum_flame 6.523844 solar luminosities (16th to 84th percentiles 6.4928474 to 6.55621); its log10 is recorded",
+  "ageGyr": 2.482,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4530744134231683840, flags_flame 00: age_flame 2.4821277 Gyr (16th to 84th percentiles 2.1618 to 2.8024423)",
+  "projectedRotationSpeedKmS": 14.08,
+  "projectedRotationSpeedSource": "SIMBAD, * 110 Her: projected rotation speed 14.08 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

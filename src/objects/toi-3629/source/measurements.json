@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Cañas et al. 2022, the stellar temperature of the default parameter set of TOI-3629 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
   "surfaceGravityLogg": 4.68,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-3629.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.681, rounded to two decimals",
+  "spectralType": "M1",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-3629 (pscomppars): spectral type M1, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
+  "metallicityDex": 0.4,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-3629 (pscomppars): [Fe/H] 0.4 dex, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
+  "luminosityLogSolar": -1.125,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-3629 (pscomppars): log10 of the luminosity in solar units -1.12494, from Hartman et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract)",
+  "ageGyr": 7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-3629 (pscomppars): age 7 Gyr, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-3629 (pscomppars): projected rotation speed 2 km/s, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

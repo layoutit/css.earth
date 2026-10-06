@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Stolker et al. (2025), Appendix A, https://arxiv.org/abs/2507.06206",
   "surfaceGravityLogg": 4.43,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-135344-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.428, rounded to two decimals",
+  "spectralType": "A0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 135344 A (pscomppars): spectral type A0 V, from Stolker et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A..21S/abstract)",
+  "metallicityDex": 0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 135344 A (pscomppars): [M/H] 0.05 dex, from Stolker et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A..21S/abstract)",
+  "luminosityLogSolar": 1.22,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 135344 A (pscomppars): log10 of the luminosity in solar units 1.22, from Stolker et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A..21S/abstract)",
+  "projectedRotationSpeedKmS": 69,
+  "projectedRotationSpeedSource": "SIMBAD, HD 135344: projected rotation speed 69 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

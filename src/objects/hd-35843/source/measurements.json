@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Hesse et al. 2025, the stellar temperature of the default parameter set of HD 35843 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..108H/abstract)",
   "surfaceGravityLogg": 4.51,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-35843.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.506, rounded to two decimals",
+  "spectralType": "G5V",
+  "spectralTypeSource": "SIMBAD, HD 35843: spectral type G5V (1978MSS...C02....0H)",
+  "metallicityDex": -0.27,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 35843 (pscomppars): [Fe/H] -0.27 dex, from Hesse et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..108H/abstract)",
+  "luminosityLogSolar": -0.125,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 35843 (pscomppars): log10 of the luminosity in solar units -0.12494, from Hesse et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..108H/abstract)",
+  "ageGyr": 2.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 35843 (pscomppars): age 2.5 Gyr, from Hesse et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..108H/abstract)",
+  "rotationPeriodDays": 25.49,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 35843 (pscomppars): rotation period 25.49 d, from Hesse et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..108H/abstract)",
+  "projectedRotationSpeedKmS": 2.09,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 35843 (pscomppars): projected rotation speed 2.09 km/s, from Hesse et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..108H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

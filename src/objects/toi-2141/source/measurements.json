@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Luque et al. 2025, the stellar temperature of the default parameter set of TOI-2141 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...704A.174L/abstract)",
   "surfaceGravityLogg": 4.43,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2141.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.435, rounded to two decimals",
+  "spectralType": "G5",
+  "spectralTypeSource": "SIMBAD, BD+18 3330: spectral type G5",
+  "metallicityDex": -0.14,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2141 (pscomppars): [Fe/H] -0.14 dex, from Luque et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...704A.174L/abstract)",
+  "luminosityLogSolar": -0.05,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2141 (pscomppars): log10 of the luminosity in solar units -0.05, from Martioli et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..84M/abstract)",
+  "ageGyr": 9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2141 (pscomppars): age 9 Gyr, from Luque et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...704A.174L/abstract)",
+  "rotationPeriodDays": 21,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2141 (pscomppars): rotation period 21 d, from Martioli et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..84M/abstract)",
+  "projectedRotationSpeedKmS": 2.7,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2141 (pscomppars): projected rotation speed 2.7 km/s, from Martioli et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..84M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

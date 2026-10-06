@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 266, Name='WZ Sgr', columns Teff, e_Teff (K): Teff 4875 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 1.22,
   "surfaceGravitySource": "log g 1.22 from 2024A&A...690A.246T, the median of its 2 spectra; the 13 published values span log g 0.4 to 1.85, across which the limb law changes by at most 1.3% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2024A%26A...690A.246T)",
+  "spectralType": "F7(III)",
+  "spectralTypeSource": "SIMBAD, V* WZ Sgr: spectral type F7(III) (1988MSS...C04....0H)",
+  "projectedRotationSpeedKmS": 25,
+  "projectedRotationSpeedSource": "SIMBAD, V* WZ Sgr: projected rotation speed 25 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1739 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract)",
   "surfaceGravityLogg": 4.54,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1739.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.545, rounded to two decimals",
+  "metallicityDex": 0.07,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1739 (pscomppars): [Fe/H] 0.07 dex, from Mistry et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
+  "luminosityLogSolar": -0.524,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1739 (pscomppars): log10 of the luminosity in solar units -0.52433, from Mistry et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
+  "ageGyr": 6.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1739 (pscomppars): age 6.3 Gyr, from Mistry et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

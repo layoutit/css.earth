@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Di Maio et al. 2026, the stellar temperature of the default parameter set of TOI-4602.01 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract)",
   "surfaceGravityLogg": 4.33,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4602.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.325, rounded to two decimals",
+  "spectralType": "G5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4602 (pscomppars): spectral type G5, from Di Maio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract)",
+  "metallicityDex": -0.26,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4602 (pscomppars): [Fe/H] -0.26 dex, from Di Maio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract)",
+  "luminosityLogSolar": 0.114,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4602 (pscomppars): log10 of the luminosity in solar units 0.11394, from Di Maio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract)",
+  "ageGyr": 7.395,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 169256041140206848, flags_flame 00: age_flame 7.3954277 Gyr (16th to 84th percentiles 6.481053 to 8.309793)",
+  "projectedRotationSpeedKmS": 2.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4602 (pscomppars): projected rotation speed 2.2 km/s, from Di Maio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Addison et al. 2021, the stellar temperature of the default parameter set of TOI-257 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract)",
   "surfaceGravityLogg": 4.04,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-257.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.044, rounded to two decimals",
+  "spectralType": "F8/G0V",
+  "spectralTypeSource": "SIMBAD, HD 19916: spectral type F8/G0V (1978MSS...C02....0H)",
+  "metallicityDex": 0.175,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-257 (pscomppars): [Fe/H] 0.175 dex, from Addison et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract)",
+  "luminosityLogSolar": 0.636,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-257 (pscomppars): log10 of the luminosity in solar units 0.63649, from Addison et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract)",
+  "ageGyr": 4.811,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4747624104168195072, flags_flame 00: age_flame 4.8106437 Gyr (16th to 84th percentiles 4.278926 to 5.342395)",
+  "projectedRotationSpeedKmS": 9.4,
+  "projectedRotationSpeedSource": "SIMBAD, HD 19916: projected rotation speed 9.4 km/s, the measurement SIMBAD prefers (2025A&A...697A.102T)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

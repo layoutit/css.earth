@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Hirano et al. 2023, the stellar temperature of the default parameter set of K2-415 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract)",
   "surfaceGravityLogg": 5.06,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-415.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.065, rounded to two decimals",
+  "spectralType": "M5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-415 (pscomppars): spectral type M5 V, from Hirano et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract)",
+  "metallicityDex": -0.13,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-415 (pscomppars): [Fe/H] -0.13 dex, from Hirano et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract)",
+  "luminosityLogSolar": -2.455,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-415 (pscomppars): log10 of the luminosity in solar units -2.45469, from Hirano et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract)",
+  "rotationPeriodDays": 4.298,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-415 (pscomppars): rotation period 4.298 d, from Hirano et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

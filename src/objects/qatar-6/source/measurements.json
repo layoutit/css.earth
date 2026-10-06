@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Alsubai et al. 2018, the stellar temperature of the default parameter set of Qatar-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)",
   "surfaceGravityLogg": 4.64,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/qatar-6.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.636, rounded to two decimals",
+  "spectralType": "K2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Qatar-6 (pscomppars): spectral type K2 V, from Alsubai et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)",
+  "metallicityDex": -0.025,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Qatar-6 (pscomppars): [Fe/H] -0.025 dex, from Alsubai et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)",
+  "luminosityLogSolar": -0.514,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Qatar-6 (pscomppars): log10 of the luminosity in solar units -0.51428, from Alsubai et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)",
+  "ageGyr": 1.02,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Qatar-6 (pscomppars): age 1.02 Gyr, from Alsubai et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)",
+  "rotationPeriodDays": 12.75,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Qatar-6 (pscomppars): rotation period 12.75 d, from Alsubai et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)",
+  "projectedRotationSpeedKmS": 2.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Qatar-6 (pscomppars): projected rotation speed 2.9 km/s, from Alsubai et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

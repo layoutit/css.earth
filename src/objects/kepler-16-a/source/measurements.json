@@ -9,6 +9,14 @@
   "radiusSource": "Radius 0.6489 +/- 0.0013 solar radii, mass 0.6897 (+0.0035/-0.0034) solar masses and effective temperature 4450 +/- 150 K from Doyle et al. (2011, Science 333, 1602; arXiv:1109.3432), Table 1, the photometric-dynamical model of the Kepler light curve and the radial velocities of star A: 451,439.73 km at 695,700 km per solar radius; GM is the mass times the JPL solar GM 132712440041.93938 km^3/s^2. Sebastian et al. (2025, MNRAS; arXiv:2505.19718) measure dynamical masses 2-7% higher with SOPHIE; they are not mixed into this record because Doyle's orbits were fitted with Doyle's masses. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up.",
   "effectiveTemperatureK": 4450,
   "effectiveTemperatureSource": "Doyle et al. (2011, Science 333, 1602; arXiv:1109.3432), Table 1: effective temperature 4450 +/- 150 K from spectroscopy of star A, https://arxiv.org/abs/1109.3432",
+  "spectralType": "K7V",
+  "spectralTypeSource": "SIMBAD, Kepler-16: spectral type K7V (2016A&A...594A..39F)",
+  "metallicityDex": -0.3,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-16 (pscomppars): [M/H] -0.3 dex, from Doyle et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011Sci...333.1602D/abstract)",
+  "luminosityLogSolar": -0.903,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-16 (pscomppars): log10 of the luminosity in solar units -0.90301, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 3.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-16 (pscomppars): age 3.8 Gyr, from Q1-Q8 KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a star is not a solid surface and its limb is not sharp."

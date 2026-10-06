@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Rodriguez et al. 2021, the stellar temperature of the default parameter set of TOI-628 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract)",
   "surfaceGravityLogg": 4.3,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-628.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.298, rounded to two decimals",
+  "spectralType": "G0",
+  "spectralTypeSource": "SIMBAD, HD 288842: spectral type G0 (1995A&AS..110..367N)",
+  "metallicityDex": 0.258,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-628 (pscomppars): [Fe/H] 0.258 dex, from Rodriguez et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract)",
+  "luminosityLogSolar": 0.394,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-628 (pscomppars): log10 of the luminosity in solar units 0.39445, from Rodriguez et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract)",
+  "ageGyr": 1.28,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-628 (pscomppars): age 1.28 Gyr, from Rodriguez et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract)",
+  "projectedRotationSpeedKmS": 6.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-628 (pscomppars): projected rotation speed 6.9 km/s, from Rodriguez et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

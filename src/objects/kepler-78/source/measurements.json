@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-78 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
   "surfaceGravityLogg": 4.58,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-78.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.582, rounded to two decimals",
+  "spectralType": "G",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Kepler-78 (pscomppars): spectral type G, from Sanchis-Ojeda et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...774...54S/abstract)",
+  "metallicityDex": -0.18,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-78 (pscomppars): [Fe/H] -0.18 dex, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "luminosityLogSolar": -0.498,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-78 (pscomppars): log10 of the luminosity in solar units -0.49785, from Iglesias-Marzoa et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015PASP..127..567I/abstract)",
+  "ageGyr": 0.625,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-78 (pscomppars): age 0.625 Gyr, from Grunblatt et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...808..127G/abstract)",
+  "rotationPeriodDays": 12.92,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Kepler-78 (pscomppars): rotation period 12.92 d, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "projectedRotationSpeedKmS": 2.6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-78 (pscomppars): projected rotation speed 2.6 km/s, from Grunblatt et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...808..127G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

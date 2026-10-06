@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Nielsen et al. 2019, the stellar temperature of the default parameter set of HD 1397 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract)",
   "surfaceGravityLogg": 3.82,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-1397.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.823, rounded to two decimals",
+  "spectralType": "G5 III/IV",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 1397 (pscomppars): spectral type G5 III/IV, from Michigan Catalog, Vol. 1 (https://ui.adsabs.harvard.edu/abs/1975MSS...C01....0H/abstract)",
+  "metallicityDex": 0.29,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 1397 (pscomppars): [Fe/H] 0.29 dex, from Nielsen et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract)",
+  "luminosityLogSolar": 0.66,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 1397 (pscomppars): log10 of the luminosity in solar units 0.65992, from Nielsen et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract)",
+  "ageGyr": 4.51,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 1397 (pscomppars): age 4.51 Gyr, from Nielsen et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 1397 (pscomppars): projected rotation speed 2 km/s, from Nielsen et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...623A.100N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

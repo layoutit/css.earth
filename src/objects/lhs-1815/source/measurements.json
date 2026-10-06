@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Gan et al. 2020, the stellar temperature of the default parameter set of LHS 1815 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G/abstract)",
   "surfaceGravityLogg": 4.74,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lhs-1815.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.739, rounded to two decimals",
+  "spectralType": "M1",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LHS 1815 (pscomppars): spectral type M1, from Gan et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G/abstract)",
+  "metallicityDex": -0.12,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of LHS 1815 (pscomppars): [Fe/H] -0.12 dex, from Gan et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G/abstract)",
+  "luminosityLogSolar": -1.387,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LHS 1815 (pscomppars): log10 of the luminosity in solar units -1.38722, from Gan et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G/abstract)",
+  "rotationPeriodDays": 47.8,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LHS 1815 (pscomppars): rotation period 47.8 d, from Gan et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G/abstract)",
+  "projectedRotationSpeedKmS": 1.65,
+  "projectedRotationSpeedSource": "SIMBAD, L 181-1: projected rotation speed 1.65 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Cañas et al. 2022, the stellar temperature of the default parameter set of TOI-3714 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
   "surfaceGravityLogg": 4.75,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-3714.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.747, rounded to two decimals",
+  "spectralType": "M2",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-3714 (pscomppars): spectral type M2, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
+  "metallicityDex": 0.1,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-3714 (pscomppars): [Fe/H] 0.1 dex, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
+  "luminosityLogSolar": -1.407,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-3714 (pscomppars): log10 of the luminosity in solar units -1.40671, from Hartman et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract)",
+  "ageGyr": 2.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-3714 (pscomppars): age 2.9 Gyr, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
+  "rotationPeriodDays": 23.3,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-3714 (pscomppars): rotation period 23.3 d, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-3714 (pscomppars): projected rotation speed 2 km/s, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

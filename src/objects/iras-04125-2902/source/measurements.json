@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Barber et al. 2024, the stellar temperature of the default parameter set of IRAS 04125+2902 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract)",
   "surfaceGravityLogg": 3.96,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/iras-04125-2902.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.960, rounded to two decimals",
+  "spectralType": "M0",
+  "spectralTypeSource": "SIMBAD, IRAS 04125+2902: spectral type M0 (2012ApJS..202....7X)",
+  "luminosityLogSolar": -0.332,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of IRAS 04125+2902 (pscomppars): log10 of the luminosity in solar units -0.33161, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract)",
+  "ageGyr": 0.003,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of IRAS 04125+2902 (pscomppars): age 0.0033 Gyr, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract)",
+  "rotationPeriodDays": 11.31,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of IRAS 04125+2902 (pscomppars): rotation period 11.31 d, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract)",
+  "projectedRotationSpeedKmS": 7.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of IRAS 04125+2902 (pscomppars): projected rotation speed 7.1 km/s, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

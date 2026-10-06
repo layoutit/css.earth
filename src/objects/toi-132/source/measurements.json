@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Díaz et al. 2020, the stellar temperature of the default parameter set of TOI-132 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract)",
   "surfaceGravityLogg": 4.52,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-132.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.516, rounded to two decimals",
+  "spectralType": "G8 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-132 (pscomppars): spectral type G8 V, from Díaz et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract)",
+  "metallicityDex": 0.16,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-132 (pscomppars): [Fe/H] 0.16 dex, from Díaz et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract)",
+  "luminosityLogSolar": -0.222,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-132 (pscomppars): log10 of the luminosity in solar units -0.22185, from Díaz et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract)",
+  "ageGyr": 6.34,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-132 (pscomppars): age 6.34 Gyr, from Díaz et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-132 (pscomppars): projected rotation speed 3 km/s, from Díaz et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.493..973D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-182 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
   "surfaceGravityLogg": 4.56,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-182.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.559, rounded to two decimals",
+  "spectralType": "G9",
+  "spectralTypeSource": "SIMBAD, K2-182: spectral type G9 (2022ApJS..261...26S)",
+  "metallicityDex": 0.022,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-182 (pscomppars): [Fe/H] 0.022 dex, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "luminosityLogSolar": -0.411,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-182 (pscomppars): log10 of the luminosity in solar units -0.41117, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "ageGyr": 6.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-182 (pscomppars): age 6.2 Gyr, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "projectedRotationSpeedKmS": 2.13,
+  "projectedRotationSpeedSource": "SIMBAD, K2-182: projected rotation speed 2.13 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Esteves et al. 2015, the stellar temperature of the default parameter set of Kepler-7 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract)",
   "surfaceGravityLogg": 3.98,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-7.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.984, rounded to two decimals",
+  "spectralType": "G0",
+  "spectralTypeSource": "SIMBAD, Kepler-7: spectral type G0 (2011A&A...529A.136E)",
+  "metallicityDex": 0.11,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-7 (pscomppars): [Fe/H] 0.11 dex, from Esteves et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..150E/abstract)",
+  "luminosityLogSolar": 0.696,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-7 (pscomppars): log10 of the luminosity in solar units 0.69639, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 2.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-7 (pscomppars): age 2.9 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 4.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-7 (pscomppars): projected rotation speed 4.2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Waalkes et al. 2021, the stellar temperature of the default parameter set of TOI-122 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....161...13W/abstract)",
   "surfaceGravityLogg": 4.88,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-122.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.885, rounded to two decimals",
+  "spectralType": "M3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-122 (pscomppars): spectral type M3 V, from Waalkes et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...13W/abstract)",
+  "luminosityLogSolar": -1.854,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-122 (pscomppars): log10 of the luminosity in solar units -1.85387, from Waalkes et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...13W/abstract)",
+  "ageGyr": 2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-122 (pscomppars): age 2 Gyr, from Waalkes et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...13W/abstract)",
+  "rotationPeriodDays": 72,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-122 (pscomppars): rotation period 72 d, from Waalkes et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...13W/abstract)",
+  "projectedRotationSpeedKmS": 7.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-122 (pscomppars): projected rotation speed 7.2 km/s, from Waalkes et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...13W/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

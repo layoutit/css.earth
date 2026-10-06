@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Heidari et al. 2025, the stellar temperature of the default parameter set of TOI-2295 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "surfaceGravityLogg": 4.18,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2295.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.177, rounded to two decimals",
+  "metallicityDex": 0.316,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2295 (pscomppars): [Fe/H] 0.316 dex, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "luminosityLogSolar": 0.314,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2295 (pscomppars): log10 of the luminosity in solar units 0.31387, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "ageGyr": 10.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2295 (pscomppars): age 10.5 Gyr, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "rotationPeriodDays": 78,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2295 (pscomppars): rotation period 78 d, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "projectedRotationSpeedKmS": 3.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2295 (pscomppars): projected rotation speed 3.9 km/s, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Hobson et al. 2024, the stellar temperature of the default parameter set of TOI-286 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-286.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.574, rounded to two decimals",
+  "spectralType": "K3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-286 (pscomppars): spectral type K3 V, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "metallicityDex": -0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-286 (pscomppars): [Fe/H] -0.05 dex, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "luminosityLogSolar": -0.414,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-286 (pscomppars): log10 of the luminosity in solar units -0.41364, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "ageGyr": 8.417,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5482316880495405056, flags_flame 00: age_flame 8.417157 Gyr (16th to 84th percentiles 6.356648 to 10.371697)",
+  "rotationPeriodDays": 36,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-286 (pscomppars): rotation period 36 d, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "SIMBAD, CD-60 1348: projected rotation speed 1.5 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

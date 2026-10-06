@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-67 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.51,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-67.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.508, rounded to two decimals",
+  "spectralType": "K0V",
+  "spectralTypeSource": "SIMBAD, WASP-67: spectral type K0V",
+  "metallicityDex": -0.07,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-67 (pscomppars): [Fe/H] -0.07 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": -0.294,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-67 (pscomppars): log10 of the luminosity in solar units -0.29441, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 12.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-67 (pscomppars): age 12.6 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 2.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-67 (pscomppars): projected rotation speed 2.1 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

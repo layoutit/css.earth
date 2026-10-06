@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Poultourtzidis et al. 2026, the stellar temperature of the default parameter set of TOI-4529 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
   "surfaceGravityLogg": 4.76,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4529.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.759, rounded to two decimals",
+  "spectralType": "M1.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4529 (pscomppars): spectral type M1.5 V, from Poultourtzidis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
+  "metallicityDex": -0.24,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4529 (pscomppars): [Fe/H] -0.24 dex, from Poultourtzidis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
+  "luminosityLogSolar": -1.413,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4529 (pscomppars): log10 of the luminosity in solar units -1.41263, from Poultourtzidis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
+  "rotationPeriodDays": 20.7,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-4529 (pscomppars): rotation period 20.7 d, from Poultourtzidis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4529 (pscomppars): projected rotation speed 2 km/s, from Poultourtzidis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1236429004715336576: teff_gspphot 4762.2856 K (16th-84th percentiles 4755.686-4768.151), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 3.01,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/arcalis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.007, rounded to two decimals",
+  "spectralType": "K0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 131496 (pscomppars): spectral type K0, from Cannon & Pickering 1918 (https://ui.adsabs.harvard.edu/abs/1918AnHar..91....1C/abstract)",
+  "metallicityDex": 0.25,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 131496 (pscomppars): [Fe/H] 0.25 dex, from Johnson et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011ApJS..197...26J/abstract)",
+  "luminosityLogSolar": 0.991,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 131496 (pscomppars): log10 of the luminosity in solar units 0.99123, from Johnson et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011ApJS..197...26J/abstract)",
+  "ageGyr": 2.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 131496 (pscomppars): age 2.7 Gyr, from Johnson et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011ApJS..197...26J/abstract)",
+  "projectedRotationSpeedKmS": 0.48,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 131496 (pscomppars): projected rotation speed 0.48 km/s, from Johnson et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011ApJS..197...26J/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

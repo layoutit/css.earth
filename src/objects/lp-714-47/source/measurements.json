@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Serrano Bell et al. 2026, the stellar temperature of the default parameter set of LP 714-47 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
   "surfaceGravityLogg": 4.71,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lp-714-47.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.714, rounded to two decimals",
+  "spectralType": "M1 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LP 714-47 (pscomppars): spectral type M1 V, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "metallicityDex": 0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of LP 714-47 (pscomppars): [M/H] 0.05 dex, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "luminosityLogSolar": -1.125,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LP 714-47 (pscomppars): log10 of the luminosity in solar units -1.12494, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "ageGyr": 2.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of LP 714-47 (pscomppars): age 2.9 Gyr, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "rotationPeriodDays": 28.6,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LP 714-47 (pscomppars): rotation period 28.6 d, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of LP 714-47 (pscomppars): projected rotation speed 2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

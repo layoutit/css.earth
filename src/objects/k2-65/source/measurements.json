@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-65 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract)",
   "surfaceGravityLogg": 4.53,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-65.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.529, rounded to two decimals",
+  "spectralType": "K2V",
+  "spectralTypeSource": "SIMBAD, BD-11 5779: spectral type K2V (2017ApJ...836..167D)",
+  "metallicityDex": -0.34,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-65 (pscomppars): [Fe/H] -0.34 dex, from Mayo et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract)",
+  "luminosityLogSolar": -0.328,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-65 (pscomppars): log10 of the luminosity in solar units -0.328, from Calculated Value (/docs/pscp_calc.html)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

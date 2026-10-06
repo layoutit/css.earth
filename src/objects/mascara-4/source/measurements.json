@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Zhang et al. 2022, the stellar temperature of the default parameter set of MASCARA-4 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract)",
   "surfaceGravityLogg": 4.18,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/mascara-4.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.175, rounded to two decimals",
+  "spectralType": "A7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of MASCARA-4 (pscomppars): spectral type A7 V, from Dorval et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...635A..60D/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of MASCARA-4 (pscomppars): [Fe/H] 0 dex, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "luminosityLogSolar": 1.087,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of MASCARA-4 (pscomppars): log10 of the luminosity in solar units 1.08743, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 0.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of MASCARA-4 (pscomppars): age 0.8 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 43,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of MASCARA-4 (pscomppars): projected rotation speed 43 km/s, from Zhang et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

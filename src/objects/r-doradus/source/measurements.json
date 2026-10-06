@@ -9,6 +9,8 @@
   "radiusSource": "The 59.8 +/- 0.4 mas disc above, at the 54.615 pc Hipparcos distance: 351 solar radii at 695700 km per solar radius, against the 353 +/- 19 Vlemmings et al. (2024) give at their rounded 55 pc. The same ALMA image is this object's dataset, so the sphere and its texture are the same star.",
   "effectiveTemperatureK": 2710,
   "effectiveTemperatureSource": "Effective temperature 2710 ± 70 K from Ohnaka, Weigelt & Hofmann 2019 (ApJ 883, 89; https://doi.org/10.3847/1538-4357/ab3d2a), Table 1 and Section 3: the AMBER limb-darkened diameter 51.18 mas with the bolometric flux compiled over several epochs. The radius source, Vlemmings et al. 2024, adopts this value.",
+  "spectralType": "M8III:e",
+  "spectralTypeSource": "SIMBAD, V* R Dor: spectral type M8III:e (1989ApJS...71..245K)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "path": "shape/uniform-disc.tab",

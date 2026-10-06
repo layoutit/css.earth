@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Lamontagne et al. 2026, the stellar temperature of the default parameter set of GJ 3090 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract)",
   "surfaceGravityLogg": 4.73,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-3090.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.728, rounded to two decimals",
+  "spectralType": "M2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 3090 (pscomppars): spectral type M2 V, from Lamontagne et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract)",
+  "metallicityDex": 0.12,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 3090 (pscomppars): [Fe/H] 0.12 dex, from Lamontagne et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract)",
+  "luminosityLogSolar": -1.342,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 3090 (pscomppars): log10 of the luminosity in solar units -1.34199, from Lamontagne et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract)",
+  "rotationPeriodDays": 17.95,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 3090 (pscomppars): rotation period 17.95 d, from Lamontagne et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract)",
+  "projectedRotationSpeedKmS": 1.47,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 3090 (pscomppars): projected rotation speed 1.468 km/s, from Almenara et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A..91A/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 3121983 (Gold): APOGEE effective temperature (K) 4214.313 +/- 41.6227 (https://arxiv.org/abs/2410.00102)",
   "surfaceGravityLogg": 1.7495,
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 3121983 (Gold): Asteroseismic log g 1.7495 +/- 0.004 (https://arxiv.org/abs/2410.00102)",
+  "spectralType": "K5III",
+  "spectralTypeSource": "SIMBAD, 2MASS J19304436+3817058: spectral type K5III (2016A&A...594A..39F)",
+  "projectedRotationSpeedKmS": 129,
+  "projectedRotationSpeedSource": "SIMBAD, 2MASS J19304436+3817058: projected rotation speed 129 km/s, the measurement SIMBAD prefers (2016A&A...594A..39F)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Mantovan et al. 2026, the stellar temperature of the default parameter set of TOI-1533 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract)",
   "surfaceGravityLogg": 4.52,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1533.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.525, rounded to two decimals",
+  "metallicityDex": 0.24,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1533 (pscomppars): [Fe/H] 0.24 dex, from Mantovan et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract)",
+  "luminosityLogSolar": -0.347,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1533 (pscomppars): log10 of the luminosity in solar units -0.34679, from Mantovan et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract)",
+  "ageGyr": 6.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1533 (pscomppars): age 6.9 Gyr, from Mantovan et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract)",
+  "rotationPeriodDays": 20.02,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1533 (pscomppars): rotation period 20.02 d, from Mantovan et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract)",
+  "projectedRotationSpeedKmS": 2.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1533 (pscomppars): projected rotation speed 2.5 km/s, from Mantovan et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260630799M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

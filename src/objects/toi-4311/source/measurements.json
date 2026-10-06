@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Eschen et al. 2026, the stellar temperature of the default parameter set of TOI-4311 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract)",
   "surfaceGravityLogg": 4.5,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4311.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.497, rounded to two decimals",
+  "spectralType": "K",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4311 (pscomppars): spectral type K, from Eschen et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract)",
+  "metallicityDex": -0.065,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4311 (pscomppars): [Fe/H] -0.065 dex, from Eschen et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract)",
+  "luminosityLogSolar": -0.375,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4311 (pscomppars): log10 of the luminosity in solar units -0.37469, from Eschen et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract)",
+  "ageGyr": 6.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4311 (pscomppars): age 6.6 Gyr, from Eschen et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract)",
+  "projectedRotationSpeedKmS": 1.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4311 (pscomppars): projected rotation speed 1.1 km/s, from Eschen et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag952E/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

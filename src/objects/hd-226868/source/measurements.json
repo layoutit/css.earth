@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: Teff = 31,138 K (median; 5th-95th percentile 30,398-31,840 K), fitted (https://arxiv.org/abs/2102.09091)",
   "surfaceGravityLogg": 3.348,
   "surfaceGravitySource": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: log g1 = 3.348 (median; 5th-95th percentile 3.335-3.360), derived (https://arxiv.org/abs/2102.09091)",
+  "spectralType": "O9.7Iabpvar",
+  "spectralTypeSource": "SIMBAD, HD 226868: spectral type O9.7Iabpvar (2011ApJS..193...24S)",
+  "projectedRotationSpeedKmS": 94,
+  "projectedRotationSpeedSource": "SIMBAD, HD 226868: projected rotation speed 94 km/s, the measurement SIMBAD prefers (2024A&A...687A.228D)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

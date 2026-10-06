@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Peterson et al. 2023, the stellar temperature of the default parameter set of LP 791-18 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract)",
   "surfaceGravityLogg": 5.06,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lp-791-18.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.061, rounded to two decimals",
+  "spectralType": "M(6.1 +/- 0.7) V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LP 791-18 (pscomppars): spectral type M(6.1 +/- 0.7) V, from Peterson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract)",
+  "metallicityDex": -0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of LP 791-18 (pscomppars): [Fe/H] -0.09 dex, from Peterson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract)",
+  "luminosityLogSolar": -2.638,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LP 791-18 (pscomppars): log10 of the luminosity in solar units -2.63827, from Peterson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract)",
+  "ageGyr": 0.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of LP 791-18 (pscomppars): age 0.5 Gyr, from Peterson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of LP 791-18 (pscomppars): projected rotation speed 2 km/s, from Peterson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023Natur.617..701P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

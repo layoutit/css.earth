@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bonomo et al. 2023, the stellar temperature of the default parameter set of K2-110 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
   "surfaceGravityLogg": 4.6,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-110.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.600, rounded to two decimals",
+  "spectralType": "K3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-110 (pscomppars): spectral type K3 V, from Osborn et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...604A..19O/abstract)",
+  "metallicityDex": -0.34,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-110 (pscomppars): [Fe/H] -0.34 dex, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "luminosityLogSolar": -0.567,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-110 (pscomppars): log10 of the luminosity in solar units -0.56708, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "ageGyr": 8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-110 (pscomppars): age 8 Gyr, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "projectedRotationSpeedKmS": 0.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-110 (pscomppars): projected rotation speed 0.1 km/s, from Howard et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Gan et al. 2022, the stellar temperature of the default parameter set of TOI-2136 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract)",
   "surfaceGravityLogg": 4.91,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2136.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.907, rounded to two decimals",
+  "spectralType": "M4.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2136 (pscomppars): spectral type M4.5 V, from Gan et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract)",
+  "metallicityDex": 0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2136 (pscomppars): [Fe/H] 0.03 dex, from Gan et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract)",
+  "luminosityLogSolar": -1.886,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2136 (pscomppars): log10 of the luminosity in solar units -1.88606, from Gan et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract)",
+  "ageGyr": 4.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2136 (pscomppars): age 4.6 Gyr, from Gan et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract)",
+  "rotationPeriodDays": 75,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2136 (pscomppars): rotation period 75 d, from Gan et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2136 (pscomppars): projected rotation speed 2 km/s, from Beard et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..286B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

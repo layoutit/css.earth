@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 161687209 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467)",
   "surfaceGravityLogg": 4.51,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-7137.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.506, rounded to two decimals",
+  "luminosityLogSolar": -0.732,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1602132344550079232, flags_flame 00: lum_flame 0.18529388 solar luminosities (16th to 84th percentiles 0.18017799 to 0.19045345); its log10 is recorded",
+  "ageGyr": 12.25,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1602132344550079232, flags_flame 00: age_flame 12.250314 Gyr (16th to 84th percentiles 9.390485 to 13.5)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

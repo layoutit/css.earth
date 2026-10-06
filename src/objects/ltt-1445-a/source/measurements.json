@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Winters et al. 2022, the stellar temperature of the default parameter set of LTT 1445 A c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..168W/abstract)",
   "surfaceGravityLogg": 5,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ltt-1445-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.002, rounded to two decimals",
+  "spectralType": "M3.0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LTT 1445 A (pscomppars): spectral type M3.0, from Oddo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
+  "metallicityDex": -0.34,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of LTT 1445 A (pscomppars): [Fe/H] -0.34 dex, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "luminosityLogSolar": -2.046,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LTT 1445 A (pscomppars): log10 of the luminosity in solar units -2.04591, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "projectedRotationSpeedKmS": 3.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of LTT 1445 A (pscomppars): projected rotation speed 3.4 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "TICv8, the stellar temperature of Kepler-1656 b's parameter set from TICv8 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "surfaceGravityLogg": 4.37,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-1656.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.368, rounded to two decimals",
+  "spectralType": "G6V",
+  "spectralTypeSource": "SIMBAD, Kepler-1656: spectral type G6V (2022A&A...664A..78F)",
+  "metallicityDex": 0.19,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-1656 (pscomppars): [Fe/H] 0.19 dex, from Fulton & Petigura 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..264F/abstract)",
+  "luminosityLogSolar": 0.021,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1656 (pscomppars): log10 of the luminosity in solar units 0.02083, from Q1-Q17 DR25 Supplemental KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
+  "ageGyr": 6.31,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-1656 (pscomppars): age 6.31 Gyr, from Angelo et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract)",
+  "projectedRotationSpeedKmS": 2.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-1656 (pscomppars): projected rotation speed 2.8 km/s, from Angelo et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

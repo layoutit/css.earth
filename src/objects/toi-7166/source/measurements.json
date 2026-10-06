@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Barkaoui et al. 2025, the stellar temperature of the default parameter set of TOI-7166 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2637B/abstract)",
   "surfaceGravityLogg": 5.02,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-7166.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.024, rounded to two decimals",
+  "spectralType": "M4.5+/-0.5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-7166 (pscomppars): spectral type M4.5+/-0.5, from Barkaoui et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2637B/abstract)",
+  "metallicityDex": -0.2,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-7166 (pscomppars): [Fe/H] -0.2 dex, from Barkaoui et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2637B/abstract)",
+  "luminosityLogSolar": -2.387,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-7166 (pscomppars): log10 of the luminosity in solar units -2.3869, from Barkaoui et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2637B/abstract)",
+  "ageGyr": 4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-7166 (pscomppars): age 4 Gyr, from Barkaoui et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2637B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Gilbert et al. 2023, the stellar temperature of TOI-700 b's parameter set from Gilbert et al. 2023 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..35G/abstract)",
   "surfaceGravityLogg": 4.83,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-700.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.832, rounded to two decimals",
+  "spectralType": "M2.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-700 (pscomppars): spectral type M2.5 V, from Gilbert et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..35G/abstract)",
+  "metallicityDex": -0.07,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-700 (pscomppars): [Fe/H] -0.07 dex, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "luminosityLogSolar": -1.633,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-700 (pscomppars): log10 of the luminosity in solar units -1.63264, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 1.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-700 (pscomppars): age 1.5 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodDays": 54,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-700 (pscomppars): rotation period 54 d, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 1.51,
+  "projectedRotationSpeedSource": "SIMBAD, TOI-700: projected rotation speed 1.51 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

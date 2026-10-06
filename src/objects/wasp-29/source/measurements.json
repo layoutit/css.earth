@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-29 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.53,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-29.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.529, rounded to two decimals",
+  "spectralType": "K4V",
+  "spectralTypeSource": "SIMBAD, CD-40 15273: spectral type K4V (2011A&A...529A.136E)",
+  "metallicityDex": 0.11,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-29 (pscomppars): [Fe/H] 0.11 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": -0.525,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-29 (pscomppars): log10 of the luminosity in solar units -0.52509, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 14,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-29 (pscomppars): age 14 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-29 (pscomppars): projected rotation speed 1.5 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

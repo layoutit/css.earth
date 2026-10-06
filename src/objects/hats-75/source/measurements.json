@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Jordán et al. 2022, the stellar temperature of the default parameter set of HATS-75 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract)",
   "surfaceGravityLogg": 4.68,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hats-75.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.683, rounded to two decimals",
+  "spectralType": "M0.5V",
+  "spectralTypeSource": "SIMBAD, HATS-75: spectral type M0.5V (2025ApJS..276...47G)",
+  "metallicityDex": 0.522,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HATS-75 (pscomppars): [Fe/H] 0.522 dex, from Jordán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract)",
+  "luminosityLogSolar": -1.197,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HATS-75 (pscomppars): log10 of the luminosity in solar units -1.19661, from Jordán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract)",
+  "ageGyr": 14.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HATS-75 (pscomppars): age 14.9 Gyr, from Jordán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract)",
+  "rotationPeriodDays": 35.0435,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HATS-75 (pscomppars): rotation period 35.0435 d, from Jordán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

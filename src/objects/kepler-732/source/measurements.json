@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-732 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
   "surfaceGravityLogg": 4.8,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-732.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.803, rounded to two decimals",
+  "spectralType": "M2V",
+  "spectralTypeSource": "SIMBAD, Kepler-732: spectral type M2V (2012ApJ...750L..37M)",
+  "metallicityDex": -0.01,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-732 (pscomppars): [Fe/H] -0.01 dex, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "luminosityLogSolar": -1.375,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-732 (pscomppars): log10 of the luminosity in solar units -1.375, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 4.47,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-732 (pscomppars): age 4.47 Gyr, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "SIMBAD, Kepler-732: projected rotation speed 1.5 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

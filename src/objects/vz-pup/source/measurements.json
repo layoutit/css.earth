@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 258, Name='VZ Pup', columns Teff, e_Teff (K): Teff 5125 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 0.24,
   "surfaceGravitySource": "log g 0.24 from 2024A&A...690A.246T, the median of its 2 spectra; the 7 published values span log g 0.06 to 2.2, across which the limb law changes by at most 2.7% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2024A%26A...690A.246T)",
+  "spectralType": "F7.5",
+  "spectralTypeSource": "SIMBAD, V* VZ Pup: spectral type F7.5",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Castro-González et al. 2022, the stellar temperature of the default parameter set of K2-95 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract)",
   "surfaceGravityLogg": 4.85,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-95.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.847, rounded to two decimals",
+  "spectralType": "M3.0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-95 (pscomppars): spectral type M3.0, from Obermeier et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....152..223O/abstract)",
+  "metallicityDex": 0.1,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-95 (pscomppars): [Fe/H] 0.1 dex, from Castro-González et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract)",
+  "luminosityLogSolar": -1.635,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-95 (pscomppars): log10 of the luminosity in solar units -1.63451, from Mann et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...64M/abstract)",
+  "ageGyr": 0.79,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-95 (pscomppars): age 0.79 Gyr, from Mann et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...64M/abstract)",
+  "rotationPeriodDays": 23.9,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-95 (pscomppars): rotation period 23.9 d, from Mann et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...64M/abstract)",
+  "projectedRotationSpeedKmS": 2.6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-95 (pscomppars): projected rotation speed 2.6 km/s, from Mann et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...64M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

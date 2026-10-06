@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Gómez Maqueo Chew et al. 2026, the stellar temperature of the default parameter set of TOI-1080 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag438G/abstract)",
   "surfaceGravityLogg": 5.05,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1080.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.050, rounded to two decimals",
+  "spectralType": "M4.0&plusmn;1.0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1080 (pscomppars): spectral type M4.0&plusmn;1.0 V, from Gómez Maqueo Chew et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag438G/abstract)",
+  "metallicityDex": -0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1080 (pscomppars): [Fe/H] -0.09 dex, from Gómez Maqueo Chew et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag438G/abstract)",
+  "luminosityLogSolar": -2.489,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1080 (pscomppars): log10 of the luminosity in solar units -2.48945, from Gómez Maqueo Chew et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag438G/abstract)",
+  "ageGyr": 6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1080 (pscomppars): age 6 Gyr, from Gómez Maqueo Chew et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag438G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

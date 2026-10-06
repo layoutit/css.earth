@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Crossfield et al. 2025, the stellar temperature of the default parameter set of TOI-1174 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract)",
   "surfaceGravityLogg": 4.61,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1174.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.606, rounded to two decimals",
+  "metallicityDex": -0.002,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1174 (pscomppars): [Fe/H] -0.002 dex, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "luminosityLogSolar": -0.403,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1174 (pscomppars): log10 of the luminosity in solar units -0.4034, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "ageGyr": 2.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1174 (pscomppars): age 2.7 Gyr, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

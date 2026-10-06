@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Hord et al. 2024, the stellar temperature of the default parameter set of TOI-4527.01 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract)",
   "surfaceGravityLogg": 4.75,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4527.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.750, rounded to two decimals",
+  "spectralType": "M2V:",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4527 (pscomppars): spectral type M2V:, from Turnbull 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract)",
+  "luminosityLogSolar": -1.398,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4527 (pscomppars): log10 of the luminosity in solar units -1.39838, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "projectedRotationSpeedKmS": 3.16,
+  "projectedRotationSpeedSource": "SIMBAD, G 2-33: projected rotation speed 3.16 km/s, the measurement SIMBAD prefers (2010MNRAS.407.1657H)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

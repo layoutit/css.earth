@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-83 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract)",
   "surfaceGravityLogg": 4.87,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-83.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.868, rounded to two decimals",
+  "spectralType": "M1V",
+  "spectralTypeSource": "SIMBAD, K2-83: spectral type M1V (2017ApJ...836..167D)",
+  "luminosityLogSolar": -1.204,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-83 (pscomppars): log10 of the luminosity in solar units -1.20362, from Barros et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "SIMBAD, K2-83: projected rotation speed 1.5 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

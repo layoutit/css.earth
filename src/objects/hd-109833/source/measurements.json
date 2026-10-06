@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Wood et al. 2023, the stellar temperature of the default parameter set of HD 109833 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-109833.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.471, rounded to two decimals",
+  "spectralType": "G3V",
+  "spectralTypeSource": "SIMBAD, HD 109833: spectral type G3V (1975MSS...C01....0H)",
+  "metallicityDex": -0.07,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 109833 (pscomppars): [M/H] -0.07 dex, from Wood et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract)",
+  "luminosityLogSolar": 0.072,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 109833 (pscomppars): log10 of the luminosity in solar units 0.07188, from Wood et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract)",
+  "ageGyr": 0.027,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 109833 (pscomppars): age 0.027 Gyr, from Wood et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract)",
+  "rotationPeriodDays": 5.111,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 109833 (pscomppars): rotation period 5.111 d, from Wood et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract)",
+  "projectedRotationSpeedKmS": 10.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 109833 (pscomppars): projected rotation speed 10.5 km/s, from Wood et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

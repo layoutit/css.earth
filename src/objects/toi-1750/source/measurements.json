@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-1750 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract)",
   "surfaceGravityLogg": 4.55,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1750.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.551, rounded to two decimals",
+  "luminosityLogSolar": -0.562,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1750 (pscomppars): log10 of the luminosity in solar units -0.56157, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

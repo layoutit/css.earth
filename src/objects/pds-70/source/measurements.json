@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Keppler et al. (2018, A&A 617, A44), Table 1: 3972 +/- 36 K from the optical spectrum of Pecaut & Mamajek (2016), https://arxiv.org/abs/1806.11568",
   "surfaceGravityLogg": 4.22,
   "surfaceGravitySource": "log g from the dynamical mass 0.952 solar masses of Trevascus et al. (2025, Table 3) and the radius 1.26 solar radii of Keppler et al. (2018, Table 1), log10(GM/R^2) in cgs: 4.22.",
+  "spectralType": "K7",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of PDS 70 (pscomppars): spectral type K7, from Keppler et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...617A..44K/abstract)",
+  "metallicityDex": -0.11,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of PDS 70 (pscomppars): [Fe/H] -0.11 dex, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
+  "luminosityLogSolar": -0.456,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of PDS 70 (pscomppars): log10 of the luminosity in solar units -0.45593, from Keppler et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...617A..44K/abstract)",
+  "ageGyr": 0.008,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of PDS 70 (pscomppars): age 0.008 Gyr, from Wang et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..148W/abstract)",
+  "projectedRotationSpeedKmS": 17.27,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of PDS 70 (pscomppars): projected rotation speed 17.27 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."

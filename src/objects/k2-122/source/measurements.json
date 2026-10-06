@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Castro-González et al. 2022, the stellar temperature of the default parameter set of K2-122 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract)",
   "surfaceGravityLogg": 4.7,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-122.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.696, rounded to two decimals",
+  "spectralType": "M0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-122 (pscomppars): spectral type M0, from Luo et al. 2018 (http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=V/153/stellar4)",
+  "metallicityDex": 0.32,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-122 (pscomppars): [Fe/H] 0.32 dex, from Castro-González et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract)",
+  "luminosityLogSolar": -1.102,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-122 (pscomppars): log10 of the luminosity in solar units -1.10237, from Hirano et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

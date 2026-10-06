@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 297045096447719040: teff_gspphot 5960.836 K (16th-84th percentiles 5959.5176-5962.296), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.16,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/belenos.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.157, rounded to two decimals",
+  "spectralType": "F8",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 8574 (pscomppars): spectral type F8, from Wittenmyer et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJS..182...97W/abstract)",
+  "metallicityDex": 0.01,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 8574 (pscomppars): [Fe/H] 0.01 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.376,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 8574 (pscomppars): log10 of the luminosity in solar units 0.37649, from Perrier et al. 2003 (https://ui.adsabs.harvard.edu/abs/2003A&A...410.1039P/abstract)",
+  "ageGyr": 5.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 8574 (pscomppars): age 5.6 Gyr, from Takeda et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJS..168..297T/abstract)",
+  "projectedRotationSpeedKmS": 4.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 8574 (pscomppars): projected rotation speed 4.5 km/s, from Wittenmyer et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJS..182...97W/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

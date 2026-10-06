@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Mann et al. 2017, the stellar temperature of the default parameter set of Kepler-1651 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract)",
   "surfaceGravityLogg": 4.75,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-1651.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.753, rounded to two decimals",
+  "spectralType": "M2V",
+  "spectralTypeSource": "SIMBAD, Kepler-1651: spectral type M2V (2014ApJS..213....5M)",
+  "metallicityDex": -0.16,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-1651 (pscomppars): [Fe/H] -0.16 dex, from Mann et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract)",
+  "luminosityLogSolar": -1.368,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1651 (pscomppars): log10 of the luminosity in solar units -1.368, from Mann et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract)",
+  "ageGyr": 13.121,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2131725447350716032, flags_flame 00: age_flame 13.121169 Gyr (16th to 84th percentiles 6.7446666 to 13.5)",
+  "projectedRotationSpeedKmS": 1.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-1651 (pscomppars): projected rotation speed 1.1 km/s, from Fischer et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012MNRAS.419.2900F/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

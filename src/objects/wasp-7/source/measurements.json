@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Southworth et al. 2011, the stellar temperature of the default parameter set of WASP-7 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2011A&A...527A...8S/abstract)",
   "surfaceGravityLogg": 4.23,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-7.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.232, rounded to two decimals",
+  "spectralType": "F5V",
+  "spectralTypeSource": "SIMBAD, HD 197286: spectral type F5V (1982MSS...C03....0H)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-7 (pscomppars): [Fe/H] 0 dex, from Southworth et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...527A...8S/abstract)",
+  "luminosityLogSolar": 0.537,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-7 (pscomppars): log10 of the luminosity in solar units 0.53682, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 2.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-7 (pscomppars): age 2.4 Gyr, from Southworth et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...527A...8S/abstract)",
+  "projectedRotationSpeedKmS": 17,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-7 (pscomppars): projected rotation speed 17 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

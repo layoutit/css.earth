@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Gill et al. 2024, the stellar temperature of the default parameter set of TOI-2447 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract)",
   "surfaceGravityLogg": 4.45,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2447.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.447, rounded to two decimals",
+  "metallicityDex": 0.18,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2447 (pscomppars): [Fe/H] 0.18 dex, from Gill et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract)",
+  "luminosityLogSolar": 0.049,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2447 (pscomppars): log10 of the luminosity in solar units 0.04891, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 2.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2447 (pscomppars): age 2.1 Gyr, from Gill et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract)",
+  "rotationPeriodDays": 13,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2447 (pscomppars): rotation period 13 d, from Gill et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract)",
+  "projectedRotationSpeedKmS": 3.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2447 (pscomppars): projected rotation speed 3.5 km/s, from Gill et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.533..109G/abstract)",
+  "spinInclinationDegrees": 63.4,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.006 solar radii): sin i = v sin i × P / (2πR) = 0.894. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

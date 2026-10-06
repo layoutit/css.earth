@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Brinkman et al. 2025, the stellar temperature of the default parameter set of TOI-1011 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..109B/abstract)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1011.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.470, rounded to two decimals",
+  "spectralType": "G8V",
+  "spectralTypeSource": "SIMBAD, HD 61051: spectral type G8V (1982MSS...C03....0H)",
+  "metallicityDex": 0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1011 (pscomppars): [Fe/H] 0.03 dex, from Brinkman et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..109B/abstract)",
+  "luminosityLogSolar": -0.155,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1011 (pscomppars): log10 of the luminosity in solar units -0.1549, from Brinkman et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..109B/abstract)",
+  "ageGyr": 9.072,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5592015297342611968, flags_flame 00: age_flame 9.071643 Gyr (16th to 84th percentiles 3.4155555 to 13.233097)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "SIMBAD, HD 61051: projected rotation speed 3 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

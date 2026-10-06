@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Barkaoui et al. 2023, the stellar temperature of the default parameter set of TOI-2084 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
   "surfaceGravityLogg": 4.74,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2084.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.741, rounded to two decimals",
+  "spectralType": "M2+/-0.5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2084 (pscomppars): spectral type M2+/-0.5, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
+  "metallicityDex": -0.13,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2084 (pscomppars): [Fe/H] -0.13 dex, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
+  "luminosityLogSolar": -1.492,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2084 (pscomppars): log10 of the luminosity in solar units -1.49214, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
+  "ageGyr": 7.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2084 (pscomppars): age 7.5 Gyr, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

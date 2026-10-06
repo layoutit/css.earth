@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Osborne et al. 2024, the stellar temperature of the default parameter set of TOI-544 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract)",
   "surfaceGravityLogg": 4.65,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-544.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.649, rounded to two decimals",
+  "spectralType": "K7V",
+  "spectralTypeSource": "SIMBAD, HD 290498: spectral type K7V (2024ApJS..271...48G)",
+  "metallicityDex": -0.17,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-544 (pscomppars): [Fe/H] -0.17 dex, from Osborne et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract)",
+  "luminosityLogSolar": -0.9,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-544 (pscomppars): log10 of the luminosity in solar units -0.90049, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-544 (pscomppars): age 9 Gyr, from Osborne et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract)",
+  "rotationPeriodDays": 19.343,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-544 (pscomppars): rotation period 19.343 d, from Osborne et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52711138O/abstract)",
+  "projectedRotationSpeedKmS": 1.8,
+  "projectedRotationSpeedSource": "SIMBAD, HD 290498: projected rotation speed 1.8 km/s, the measurement SIMBAD prefers (2022AJ....163...99G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

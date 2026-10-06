@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6745589980571162752: teff_gspphot 5782.9453 K (16th-84th percentiles 5772.2915-5792.9004), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.09,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/sika.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.088, rounded to two decimals",
+  "spectralType": "G1 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 181720 (pscomppars): spectral type G1 V, from Santos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...512A..47S/abstract)",
+  "metallicityDex": -0.62,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 181720 (pscomppars): [Fe/H] -0.62 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.288,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 181720 (pscomppars): log10 of the luminosity in solar units 0.288, from Santos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...512A..47S/abstract)",
+  "ageGyr": 8.819,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6745589980571162752, flags_flame 00: age_flame 8.819128 Gyr (16th to 84th percentiles 7.942175 to 9.698877)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 181720 (pscomppars): projected rotation speed 1.5 km/s, from Santos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...512A..47S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

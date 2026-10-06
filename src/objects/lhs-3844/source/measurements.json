@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Nagel et al. 2026, the stellar temperature of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract)",
   "surfaceGravityLogg": 5.06,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lhs-3844.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.064, rounded to two decimals",
+  "spectralType": "M4.5-M5.0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LHS 3844 (pscomppars): spectral type M4.5-M5.0, from Nagel et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract)",
+  "metallicityDex": 0.22,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of LHS 3844 (pscomppars): [Fe/H] 0.22 dex, from Nagel et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract)",
+  "luminosityLogSolar": -2.565,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LHS 3844 (pscomppars): log10 of the luminosity in solar units -2.56543, from Nagel et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract)",
+  "ageGyr": 7.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of LHS 3844 (pscomppars): age 7.8 Gyr, from Nagel et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract)",
+  "rotationPeriodDays": 130,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LHS 3844 (pscomppars): rotation period 130 d, from Nagel et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

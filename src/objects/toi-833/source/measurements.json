@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Giacalone et al. 2022, the stellar temperature of the default parameter set of TOI-833 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract)",
   "surfaceGravityLogg": 4.67,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-833.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.667, rounded to two decimals",
+  "spectralType": "M0V",
+  "spectralTypeSource": "SIMBAD, BPM 5856: spectral type M0V (2006A&A...460..695T)",
+  "luminosityLogSolar": -1.111,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-833 (pscomppars): log10 of the luminosity in solar units -1.11104, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "projectedRotationSpeedKmS": 3.7,
+  "projectedRotationSpeedSource": "SIMBAD, BPM 5856: projected rotation speed 3.7 km/s, the measurement SIMBAD prefers (2006A&A...460..695T)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

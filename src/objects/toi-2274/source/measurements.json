@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Peláez-Torres et al. 2024, the stellar temperature of the default parameter set of TOI-2274 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract)",
   "surfaceGravityLogg": 4.62,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2274.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.625, rounded to two decimals",
+  "spectralType": "M",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2274 (pscomppars): spectral type M, from Peláez-Torres et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract)",
+  "luminosityLogSolar": -1.062,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2274 (pscomppars): log10 of the luminosity in solar units -1.06233, from Peláez-Torres et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract)",
+  "ageGyr": 13.166,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2110345512468201344, flags_flame 00: age_flame 13.166146 Gyr (16th to 84th percentiles 9.528773 to 13.5)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

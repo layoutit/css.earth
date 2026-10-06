@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 159, Name='S Vul', columns Teff, e_Teff (K): Teff 4625 +/- 189 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 0.93,
   "surfaceGravitySource": "Luck (2018), AJ 156, 171, VizieR J/AJ/156/171/table11, recno 52, Name='S Vul', column Gavg ('Average gravity over cycle'; log g in dex, ReadMe unit label cm/s2): log g 0.93 averaged over the pulsation cycle (https://ui.adsabs.harvard.edu/abs/2018AJ....156..171L)",
+  "spectralType": "K0",
+  "spectralTypeSource": "SIMBAD, V* S Vul: spectral type K0 (1995A&AS..110..367N)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

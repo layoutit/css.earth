@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Sandoval et al. 2026, the stellar temperature of the default parameter set of TOI-5349 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract)",
   "surfaceGravityLogg": 4.7,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5349.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.697, rounded to two decimals",
+  "spectralType": "M1+/-0.5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5349 (pscomppars): spectral type M1+/-0.5, from Sandoval et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract)",
+  "metallicityDex": 0.5,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5349 (pscomppars): [Fe/H] 0.5 dex, from Sandoval et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract)",
+  "luminosityLogSolar": -1.201,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5349 (pscomppars): log10 of the luminosity in solar units -1.20066, from Sandoval et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract)",
+  "ageGyr": 9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5349 (pscomppars): age 9 Gyr, from Sandoval et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5349 (pscomppars): projected rotation speed 2 km/s, from Sandoval et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....171...43S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

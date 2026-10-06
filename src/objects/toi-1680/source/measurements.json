@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Ghachoui et al. 2023, the stellar temperature of the default parameter set of TOI-1680 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G/abstract)",
   "surfaceGravityLogg": 5.05,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1680.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.046, rounded to two decimals",
+  "spectralType": "M4.5+/-0.5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1680 (pscomppars): spectral type M4.5+/-0.5, from Ghachoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G/abstract)",
+  "metallicityDex": 0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1680 (pscomppars): [Fe/H] 0.04 dex, from Ghachoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G/abstract)",
+  "luminosityLogSolar": -2.363,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1680 (pscomppars): log10 of the luminosity in solar units -2.36251, from Ghachoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..31G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

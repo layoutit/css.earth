@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Lee et al. 2026, the stellar temperature of the default parameter set of GJ 367 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract)",
   "surfaceGravityLogg": 4.77,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-367.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.772, rounded to two decimals",
+  "spectralType": "M V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 367 (pscomppars): spectral type M V, from Lee et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract)",
+  "metallicityDex": -0.01,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 367 (pscomppars): [Fe/H] -0.01 dex, from Goffo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...955L...3G/abstract)",
+  "luminosityLogSolar": -1.541,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 367 (pscomppars): log10 of the luminosity in solar units -1.54061, from Lam et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021Sci...374.1271L/abstract)",
+  "rotationPeriodDays": 51.3,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 367 (pscomppars): rotation period 51.3 d, from Goffo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...955L...3G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

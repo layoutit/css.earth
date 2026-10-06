@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Radzom et al. 2025, the stellar temperature of the default parameter set of TOI-5143 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract)",
   "surfaceGravityLogg": 4.51,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5143.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.514, rounded to two decimals",
+  "spectralType": "K V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5143 (pscomppars): spectral type K V, from Radzom et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract)",
+  "metallicityDex": 0.107,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5143 (pscomppars): [Fe/H] 0.107 dex, from Radzom et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract)",
+  "luminosityLogSolar": -0.286,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5143 (pscomppars): log10 of the luminosity in solar units -0.28635, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 7.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5143 (pscomppars): age 7.4 Gyr, from Radzom et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract)",
+  "projectedRotationSpeedKmS": 2.53,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5143 (pscomppars): projected rotation speed 2.53 km/s, from Radzom et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

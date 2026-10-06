@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Peláez-Torres et al. 2026, the stellar temperature of the default parameter set of TOI-1752 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract)",
   "surfaceGravityLogg": 4.71,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1752.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.709, rounded to two decimals",
+  "spectralType": "M1.0&plusmn0.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1752 (pscomppars): spectral type M1.0&plusmn0.5 V, from Peláez-Torres et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract)",
+  "metallicityDex": -0.11,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1752 (pscomppars): [Fe/H] -0.11 dex, from Peláez-Torres et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract)",
+  "luminosityLogSolar": -1.297,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1752 (pscomppars): log10 of the luminosity in solar units -1.29671, from Peláez-Torres et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag713P/abstract)",
+  "ageGyr": 13.149,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1438168463332034816, flags_flame 00: age_flame 13.148961 Gyr (16th to 84th percentiles 7.2674665 to 13.5)",
+  "projectedRotationSpeedKmS": 2.94,
+  "projectedRotationSpeedSource": "SIMBAD, LSPM J1653+6042: projected rotation speed 2.94 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 215648: effective temperature in K, from the angular diameter and the bolometric flux, 6167 +/- 36 (https://doi.org/10.1088/0004-637X/746/1/101)",
   "surfaceGravityLogg": 3.95,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/xi-pegasi.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.951, rounded to two decimals",
+  "spectralType": "F6V",
+  "spectralTypeSource": "SIMBAD, * ksi Peg: spectral type F6V (2001AJ....121.2148G)",
+  "projectedRotationSpeedKmS": 12.67,
+  "projectedRotationSpeedSource": "SIMBAD, * ksi Peg: projected rotation speed 12.67 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

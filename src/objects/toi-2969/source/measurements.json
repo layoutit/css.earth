@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Frensch et al. 2025, the stellar temperature of the default parameter set of TOI-2969 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract)",
   "surfaceGravityLogg": 4.6,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2969.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.599, rounded to two decimals",
+  "spectralType": "K3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2969 (pscomppars): spectral type K3 V, from Frensch et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract)",
+  "metallicityDex": 0.08,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2969 (pscomppars): [Fe/H] 0.08 dex, from Frensch et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract)",
+  "luminosityLogSolar": -0.585,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2969 (pscomppars): log10 of the luminosity in solar units -0.58503, from Frensch et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract)",
+  "rotationPeriodDays": 26.8,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2969 (pscomppars): rotation period 26.8 d, from Frensch et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2969 (pscomppars): projected rotation speed 2 km/s, from Frensch et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.118F/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

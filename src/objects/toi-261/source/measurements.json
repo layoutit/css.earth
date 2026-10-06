@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Hord et al. 2024, the stellar temperature of the default parameter set of TOI-261.01 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract)",
   "surfaceGravityLogg": 3.92,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-261.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.920, rounded to two decimals",
+  "spectralType": "F8/G0V",
+  "spectralTypeSource": "SIMBAD, HD 5976: spectral type F8/G0V (1988MSS...C04....0H)",
+  "metallicityDex": -0.35,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-261 (pscomppars): [M/H] -0.35 dex, from Giacalone et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...24G/abstract)",
+  "luminosityLogSolar": 0.25,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-261 (pscomppars): log10 of the luminosity in solar units 0.24978, from Giacalone et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...24G/abstract)",
+  "ageGyr": 5.623,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2345033662373296768, flags_flame 00: age_flame 5.6233187 Gyr (16th to 84th percentiles 4.779829 to 6.466542)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

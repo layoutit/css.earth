@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Serrano et al. 2022, the stellar temperature of the default parameter set of TOI-500 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract)",
   "surfaceGravityLogg": 4.64,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-500.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.645, rounded to two decimals",
+  "spectralType": "K6 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-500 (pscomppars): spectral type K6 V, from Serrano et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract)",
+  "metallicityDex": 0.12,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-500 (pscomppars): [Fe/H] 0.12 dex, from Serrano et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract)",
+  "luminosityLogSolar": -0.7,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-500 (pscomppars): log10 of the luminosity in solar units -0.70002, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-500 (pscomppars): age 5 Gyr, from Serrano et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract)",
+  "projectedRotationSpeedKmS": 1.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-500 (pscomppars): projected rotation speed 1.1 km/s, from Serrano et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

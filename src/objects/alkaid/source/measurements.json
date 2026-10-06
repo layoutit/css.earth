@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Baines et al. (2018), AJ 155, 30, HD 120315: effective temperature 15540 +/- 1157 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b)",
   "surfaceGravityLogg": 3.78,
   "surfaceGravitySource": "Baines et al. (2018), AJ 155, 30, HD 120315: log g 3.78, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 4) (https://doi.org/10.3847/1538-3881/aa9d8b)",
+  "spectralType": "B3V",
+  "spectralTypeSource": "SIMBAD, * eta UMa: spectral type B3V (1973ARA&A..11...29M)",
+  "projectedRotationSpeedKmS": 150,
+  "projectedRotationSpeedSource": "SIMBAD, * eta UMa: projected rotation speed 150 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

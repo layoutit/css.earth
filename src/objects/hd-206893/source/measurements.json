@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Kral et al. (2026), https://arxiv.org/abs/2511.20091",
   "surfaceGravityLogg": 4.28,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-206893.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.280, rounded to two decimals",
+  "spectralType": "F5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 206893 (pscomppars): spectral type F5 V, from Hinkley et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671L...5H/abstract)",
+  "luminosityLogSolar": 0.456,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 206893 (pscomppars): log10 of the luminosity in solar units 0.4561, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 0.155,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 206893 (pscomppars): age 0.155 Gyr, from Hinkley et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671L...5H/abstract)",
+  "projectedRotationSpeedKmS": 29,
+  "projectedRotationSpeedSource": "SIMBAD, HD 206893: projected rotation speed 29 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

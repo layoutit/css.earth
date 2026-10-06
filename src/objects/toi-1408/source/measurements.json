@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Korth et al. 2024, the stellar temperature of the default parameter set of TOI-1408 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract)",
   "surfaceGravityLogg": 4.19,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1408.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.187, rounded to two decimals",
+  "spectralType": "F8 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1408 (pscomppars): spectral type F8 V, from Korth et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract)",
+  "metallicityDex": 0.25,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1408 (pscomppars): [Fe/H] 0.25 dex, from Korth et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract)",
+  "luminosityLogSolar": 0.471,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1408 (pscomppars): log10 of the luminosity in solar units 0.47129, from Korth et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract)",
+  "ageGyr": 2.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1408 (pscomppars): age 2.7 Gyr, from Korth et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract)",
+  "rotationPeriodDays": 7.91,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1408 (pscomppars): rotation period 7.91 d, from Korth et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract)",
+  "projectedRotationSpeedKmS": 9.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1408 (pscomppars): projected rotation speed 9.8 km/s, from Korth et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...971L..28K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

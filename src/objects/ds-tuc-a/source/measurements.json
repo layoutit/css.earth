@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Newton et al. 2019, the stellar temperature of the default parameter set of DS Tuc A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ds-tuc-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.474, rounded to two decimals",
+  "spectralType": "G6 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of DS Tuc A (pscomppars): spectral type G6 V, from Newton et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of DS Tuc A (pscomppars): [Fe/H] 0 dex, from Newton et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
+  "luminosityLogSolar": -0.14,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of DS Tuc A (pscomppars): log10 of the luminosity in solar units -0.13966, from Newton et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
+  "ageGyr": 0.045,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of DS Tuc A (pscomppars): age 0.045 Gyr, from Newton et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
+  "rotationPeriodDays": 2.85,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of DS Tuc A (pscomppars): rotation period 2.85 d, from Newton et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
+  "projectedRotationSpeedKmS": 17.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of DS Tuc A (pscomppars): projected rotation speed 17.8 km/s, from Newton et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

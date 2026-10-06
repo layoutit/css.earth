@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Cadieux et al. 2025, the stellar temperature of the default parameter set of L 98-59 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract)",
   "surfaceGravityLogg": 4.91,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/l-98-59.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.906, rounded to two decimals",
+  "spectralType": "M3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of L 98-59 (pscomppars): spectral type M3 V, from Cadieux et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract)",
+  "metallicityDex": -0.46,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of L 98-59 (pscomppars): [Fe/H] -0.46 dex, from Cadieux et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract)",
+  "luminosityLogSolar": -1.914,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of L 98-59 (pscomppars): log10 of the luminosity in solar units -1.91364, from Cadieux et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract)",
+  "ageGyr": 4.94,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of L 98-59 (pscomppars): age 4.94 Gyr, from Cadieux et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract)",
+  "rotationPeriodDays": 77.5,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of L 98-59 (pscomppars): rotation period 77.5 d, from Cadieux et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..154C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

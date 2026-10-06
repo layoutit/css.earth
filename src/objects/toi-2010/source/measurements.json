@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Mann et al. 2023, the stellar temperature of the default parameter set of TOI-2010 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract)",
   "surfaceGravityLogg": 4.42,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2010.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.418, rounded to two decimals",
+  "spectralType": "F0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2010 (pscomppars): spectral type F0, from Mann et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract)",
+  "metallicityDex": 0.168,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2010 (pscomppars): [Fe/H] 0.168 dex, from Mann et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract)",
+  "luminosityLogSolar": 0.114,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2010 (pscomppars): log10 of the luminosity in solar units 0.11361, from Mann et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract)",
+  "ageGyr": 1.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2010 (pscomppars): age 1.9 Gyr, from Mann et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..239M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

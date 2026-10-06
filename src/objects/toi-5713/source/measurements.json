@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Ghachoui et al. 2024, the stellar temperature of the default parameter set of TOI-5713 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract)",
   "surfaceGravityLogg": 4.91,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5713.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.910, rounded to two decimals",
+  "spectralType": "M3.5+/-0.5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5713 (pscomppars): spectral type M3.5+/-0.5, from Ghachoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract)",
+  "metallicityDex": -0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5713 (pscomppars): [Fe/H] -0.03 dex, from Ghachoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract)",
+  "luminosityLogSolar": -2.058,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5713 (pscomppars): log10 of the luminosity in solar units -2.05849, from Ghachoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract)",
+  "ageGyr": 4.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5713 (pscomppars): age 4.5 Gyr, from Ghachoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract)",
+  "projectedRotationSpeedKmS": 3.96,
+  "projectedRotationSpeedSource": "SIMBAD, TOI-5713: projected rotation speed 3.96 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

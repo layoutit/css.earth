@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Giacalone et al. 2022, the stellar temperature of the default parameter set of TOI-206 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract)",
   "surfaceGravityLogg": 4.89,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-206.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.894, rounded to two decimals",
+  "luminosityLogSolar": -1.836,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-206 (pscomppars): log10 of the luminosity in solar units -1.83581, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "projectedRotationSpeedKmS": 4.09,
+  "projectedRotationSpeedSource": "SIMBAD, TOI-206: projected rotation speed 4.09 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

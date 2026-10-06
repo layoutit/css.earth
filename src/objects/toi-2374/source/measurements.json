@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Yee et al. 2025, the stellar temperature of the default parameter set of TOI-2374 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract)",
   "surfaceGravityLogg": 4.64,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2374.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.639, rounded to two decimals",
+  "metallicityDex": 0.128,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2374 (pscomppars): [Fe/H] 0.128 dex, from Yee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract)",
+  "luminosityLogSolar": -0.545,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2374 (pscomppars): log10 of the luminosity in solar units -0.54516, from Yee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract)",
+  "ageGyr": 4.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2374 (pscomppars): age 4.5 Gyr, from Yee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract)",
+  "rotationPeriodDays": 26.4,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2374 (pscomppars): rotation period 26.4 d, from Yee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract)",
+  "projectedRotationSpeedKmS": 0.42,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2374 (pscomppars): projected rotation speed 0.42 km/s, from Yee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..275Y/abstract)",
+  "spinInclinationDegrees": 18,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.711 solar radii): sin i = v sin i × P / (2πR) = 0.308. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

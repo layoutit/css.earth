@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bakos et al. 2015, the stellar temperature of the default parameter set of HAT-P-54 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract)",
   "surfaceGravityLogg": 4.67,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-54.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.667, rounded to two decimals",
+  "spectralType": "K7",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HAT-P-54 (pscomppars): spectral type K7, from Luo et al. 2018 (http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=V/153/stellar4)",
+  "metallicityDex": -0.127,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-54 (pscomppars): [Fe/H] -0.127 dex, from Bakos et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract)",
+  "luminosityLogSolar": -0.902,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-54 (pscomppars): log10 of the luminosity in solar units -0.9017, from Bakos et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract)",
+  "ageGyr": 3.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-54 (pscomppars): age 3.9 Gyr, from Bakos et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract)",
+  "projectedRotationSpeedKmS": 2.35,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-54 (pscomppars): projected rotation speed 2.35 km/s, from Bakos et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

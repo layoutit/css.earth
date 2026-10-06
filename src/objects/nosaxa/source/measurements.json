@@ -9,6 +9,18 @@
   "radiusSource": "Radius 2.143 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 31895: radius 2.143 solar radii, implied by the fitted luminosity 4.032 solar luminosities (fractional uncertainty 0.049) and temperature (https://doi.org/10.1093/mnras/stx1433): 1,490,885 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5591 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 31895: effective temperature 5591 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.037) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
   "effectiveTemperatureK": 5591,
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 31895: effective temperature 5591 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.037) (https://doi.org/10.1093/mnras/stx1433)",
+  "spectralType": "G5 IV/V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 48265 (pscomppars): spectral type G5 IV/V, from Wu et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....171..189W/abstract)",
+  "metallicityDex": 0.39,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 48265 (pscomppars): [Fe/H] 0.39 dex, from Wu et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....171..189W/abstract)",
+  "luminosityLogSolar": 0.584,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 48265 (pscomppars): log10 of the luminosity in solar units 0.58433, from Jenkins et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017MNRAS.466..443J/abstract)",
+  "ageGyr": 4.201,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 48265 (pscomppars): age 4.201 Gyr, from Barbato et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...615A.175B/abstract)",
+  "rotationPeriodDays": 45,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 48265 (pscomppars): rotation period 45 d, from Barbato et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...615A.175B/abstract)",
+  "projectedRotationSpeedKmS": 3.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 48265 (pscomppars): projected rotation speed 3.1 km/s, from Jenkins et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017MNRAS.466..443J/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

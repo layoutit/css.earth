@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "de Leon et al. 2021, the stellar temperature of the default parameter set of K2-352 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-352.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.474, rounded to two decimals",
+  "metallicityDex": -0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-352 (pscomppars): [Fe/H] -0.05 dex, from de Leon et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)",
+  "luminosityLogSolar": -0.063,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-352 (pscomppars): log10 of the luminosity in solar units -0.06326, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 1.745,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 632634358985725184, flags_flame 00: age_flame 1.7445558 Gyr (16th to 84th percentiles 0.20838761 to 3.3658462)",
+  "rotationPeriodDays": 17.59,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-352 (pscomppars): rotation period 17.59 d, from de Leon et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

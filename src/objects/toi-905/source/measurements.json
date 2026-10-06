@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Davis et al. 2020, the stellar temperature of the default parameter set of TOI-905 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract)",
   "surfaceGravityLogg": 4.5,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-905.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.498, rounded to two decimals",
+  "metallicityDex": 0.14,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-905 (pscomppars): [Fe/H] 0.14 dex, from Davis et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract)",
+  "luminosityLogSolar": -0.137,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-905 (pscomppars): log10 of the luminosity in solar units -0.13668, from Davis et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract)",
+  "ageGyr": 3.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-905 (pscomppars): age 3.4 Gyr, from Davis et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..229D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

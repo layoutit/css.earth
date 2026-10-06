@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Mounzer et al. 2022, the stellar temperature of the default parameter set of KELT-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract)",
   "surfaceGravityLogg": 3.74,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kelt-11.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.737, rounded to two decimals",
+  "spectralType": "G8/K0 IV",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of KELT-11 (pscomppars): spectral type G8/K0 IV, from Michigan Catalog, Vol. 5 (https://ui.adsabs.harvard.edu/abs/1999mctd.book.....H/abstract)",
+  "metallicityDex": 0.17,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of KELT-11 (pscomppars): [Fe/H] 0.17 dex, from Mounzer et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract)",
+  "luminosityLogSolar": 0.744,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of KELT-11 (pscomppars): log10 of the luminosity in solar units 0.74429, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 1.99,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KELT-11 (pscomppars): projected rotation speed 1.99 km/s, from Mounzer et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...668A...1M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

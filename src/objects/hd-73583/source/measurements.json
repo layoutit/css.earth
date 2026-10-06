@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Barrag&aacute;n et al. 2022, the stellar temperature of the default parameter set of HD 73583 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract)",
   "surfaceGravityLogg": 4.68,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-73583.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.676, rounded to two decimals",
+  "spectralType": "K4 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 73583 (pscomppars): spectral type K4 V, from Barragán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 73583 (pscomppars): [Fe/H] 0 dex, from Barragán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract)",
+  "luminosityLogSolar": -0.744,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 73583 (pscomppars): log10 of the luminosity in solar units -0.74425, from El Mufti et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...10E/abstract)",
+  "ageGyr": 0.48,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 73583 (pscomppars): age 0.48 Gyr, from Barragán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract)",
+  "rotationPeriodDays": 12.2,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 73583 (pscomppars): rotation period 12.2 d, from Barragán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract)",
+  "projectedRotationSpeedKmS": 3.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 73583 (pscomppars): projected rotation speed 3.5 km/s, from Barragán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

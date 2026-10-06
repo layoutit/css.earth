@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Fukuda et al. 2026, the stellar temperature of the default parameter set of TOI-1883 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026PASJ...78.1602F/abstract)",
   "surfaceGravityLogg": 4.72,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1883.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.724, rounded to two decimals",
+  "spectralType": "M",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1883 (pscomppars): spectral type M, from Peláez-Torres et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract)",
+  "metallicityDex": 0.32,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1883 (pscomppars): [Fe/H] 0.32 dex, from Fukuda et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026PASJ...78.1602F/abstract)",
+  "luminosityLogSolar": -1.431,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1883 (pscomppars): log10 of the luminosity in solar units -1.43063, from Fukuda et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026PASJ...78.1602F/abstract)",
+  "ageGyr": 12.268,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5735744144510573696, flags_flame 00: age_flame 12.267841 Gyr (16th to 84th percentiles 5.223159 to 13.5)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1883 (pscomppars): projected rotation speed 3 km/s, from Fukuda et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026PASJ...78.1602F/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

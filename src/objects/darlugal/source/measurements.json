@@ -9,6 +9,14 @@
   "radiusSource": "Radius 2.017 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 27288: radius 2.017 solar radii, implied by the fitted luminosity 13.093 solar luminosities (fractional uncertainty 0.681) and temperature (https://doi.org/10.1093/mnras/stx1433): 1,403,227 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 7737 +/- 2877 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 27288: effective temperature 7737 +/- 2877 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.211) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
   "effectiveTemperatureK": 7737,
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 27288: effective temperature 7737 +/- 2877 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.211) (https://doi.org/10.1093/mnras/stx1433)",
+  "spectralType": "A2IV-V(n)",
+  "spectralTypeSource": "SIMBAD, * zet Lep: spectral type A2IV-V(n) (2006AJ....132..161G)",
+  "luminosityLogSolar": 1.186,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2996171698248699904, flags_flame 00: lum_flame 15.351226 solar luminosities (16th to 84th percentiles 15.078875 to 15.560351); its log10 is recorded",
+  "ageGyr": 0.625,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2996171698248699904, flags_flame 00: age_flame 0.62519914 Gyr (16th to 84th percentiles 0.47302964 to 0.7784309)",
+  "projectedRotationSpeedKmS": 258.7,
+  "projectedRotationSpeedSource": "SIMBAD, * zet Lep: projected rotation speed 258.7 km/s, the measurement SIMBAD prefers (2011A&A...531A.143D)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 393) (photometry/stellar-color.json); no image of the photosphere exists."

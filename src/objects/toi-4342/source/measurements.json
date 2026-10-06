@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Parc et al. 2026, the stellar temperature of the default parameter set of TOI-4342 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract)",
   "surfaceGravityLogg": 4.65,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4342.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.653, rounded to two decimals",
+  "spectralType": "M0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4342 (pscomppars): spectral type M0 V, from Parc et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract)",
+  "metallicityDex": 0.26,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4342 (pscomppars): [Fe/H] 0.26 dex, from Parc et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract)",
+  "luminosityLogSolar": -1.125,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4342 (pscomppars): log10 of the luminosity in solar units -1.12494, from Parc et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract)",
+  "rotationPeriodDays": 14.691,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-4342 (pscomppars): rotation period 14.691 d, from Parc et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

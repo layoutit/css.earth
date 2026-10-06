@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Grieves et al. 2025, the stellar temperature of the default parameter set of WASP-132 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract)",
   "surfaceGravityLogg": 4.58,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-132.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.576, rounded to two decimals",
+  "spectralType": "K4 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-132 (pscomppars): spectral type K4 V, from Grieves et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract)",
+  "metallicityDex": 0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-132 (pscomppars): [Fe/H] 0.15 dex, from Grieves et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract)",
+  "luminosityLogSolar": -0.575,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-132 (pscomppars): log10 of the luminosity in solar units -0.57512, from Grieves et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract)",
+  "ageGyr": 7.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-132 (pscomppars): age 7.2 Gyr, from Grieves et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract)",
+  "rotationPeriodDays": 33,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-132 (pscomppars): rotation period 33 d, from Hord et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...13H/abstract)",
+  "projectedRotationSpeedKmS": 3.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-132 (pscomppars): projected rotation speed 3.3 km/s, from Grieves et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.144G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

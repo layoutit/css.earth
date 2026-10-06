@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-277 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
   "surfaceGravityLogg": 4.45,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-277.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.450, rounded to two decimals",
+  "metallicityDex": 0.078,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-277 (pscomppars): [Fe/H] 0.078 dex, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "luminosityLogSolar": -0.051,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-277 (pscomppars): log10 of the luminosity in solar units -0.05061, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "ageGyr": 4.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-277 (pscomppars): age 4.9 Gyr, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "projectedRotationSpeedKmS": 2.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-277 (pscomppars): projected rotation speed 2.3 km/s, from Howard et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

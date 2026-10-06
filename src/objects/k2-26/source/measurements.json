@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Schlieder et al. 2016, the stellar temperature of the default parameter set of K2-26 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract)",
   "surfaceGravityLogg": 4.75,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-26.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.754, rounded to two decimals",
+  "spectralType": "M1.0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-26 (pscomppars): spectral type M1.0 V, from Schlieder et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract)",
+  "metallicityDex": -0.13,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-26 (pscomppars): [Fe/H] -0.13 dex, from Schlieder et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract)",
+  "luminosityLogSolar": -1.31,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-26 (pscomppars): log10 of the luminosity in solar units -1.3098, from Schlieder et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract)",
+  "ageGyr": 1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-26 (pscomppars): age 1 Gyr, from Schlieder et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

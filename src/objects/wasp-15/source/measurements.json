@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-15 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.17,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-15.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.169, rounded to two decimals",
+  "spectralType": "F7",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-15 (pscomppars): spectral type F7, from Triaud et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A&A...524A..25T/abstract)",
+  "metallicityDex": -0.17,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-15 (pscomppars): [Fe/H] -0.17 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.49,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-15 (pscomppars): log10 of the luminosity in solar units 0.49, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 2.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-15 (pscomppars): age 2.4 Gyr, from Southworth et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013MNRAS.434.1300S/abstract)",
+  "projectedRotationSpeedKmS": 4.27,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-15 (pscomppars): projected rotation speed 4.27 km/s, from Triaud et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A&A...524A..25T/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

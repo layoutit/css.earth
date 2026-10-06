@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "3650 +/- 20 K: the SPHINX model fit of Inglis et al. (2024, AJ), Table 1, https://arxiv.org/abs/2402.09533",
   "surfaceGravityLogg": 4.03,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/roxs-42b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.030, rounded to two decimals",
+  "spectralType": "M0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of ROXs 42 B (pscomppars): spectral type M0, from Currie et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...780L..30C/abstract)",
+  "luminosityLogSolar": -0.792,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of ROXs 42 B (pscomppars): log10 of the luminosity in solar units -0.79156, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 0.003,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of ROXs 42 B (pscomppars): age 0.0027 Gyr, from Currie et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...780L..30C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published model radius. The star's disc is not resolved; its color is a blackbody at the published temperature."

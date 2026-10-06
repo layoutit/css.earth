@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Tran et al. 2022, the stellar temperature of the default parameter set of TOI-1670 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract)",
   "surfaceGravityLogg": 4.28,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1670.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.282, rounded to two decimals",
+  "spectralType": "F7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1670 (pscomppars): spectral type F7 V, from Tran et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract)",
+  "metallicityDex": 0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1670 (pscomppars): [Fe/H] 0.09 dex, from Tran et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract)",
+  "luminosityLogSolar": 0.4,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1670 (pscomppars): log10 of the luminosity in solar units 0.40046, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 2.53,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1670 (pscomppars): age 2.53 Gyr, from Tran et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract)",
+  "projectedRotationSpeedKmS": 9.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1670 (pscomppars): projected rotation speed 9.2 km/s, from Tran et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..225T/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

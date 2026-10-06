@@ -9,6 +9,10 @@
   "radiusSource": "Radius 3.334 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 39757: radius 3.334 solar radii, implied by the fitted luminosity 21.339 solar luminosities (fractional uncertainty 0.233) and temperature (https://doi.org/10.1093/mnras/stx1433): 2,319,464 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 6799 +/- 895 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 39757: effective temperature 6799 +/- 895 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.075) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
   "effectiveTemperatureK": 6799,
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 39757: effective temperature 6799 +/- 895 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.075) (https://doi.org/10.1093/mnras/stx1433)",
+  "spectralType": "F5IIkF2IImF5II",
+  "spectralTypeSource": "SIMBAD, * rho Pup: spectral type F5IIkF2IImF5II (2003AJ....126.2048G)",
+  "projectedRotationSpeedKmS": 8,
+  "projectedRotationSpeedSource": "SIMBAD, * rho Pup: projected rotation speed 8 km/s, the measurement SIMBAD prefers (2012A&A...542A.116A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes) (photometry/stellar-color.json); no image of the photosphere exists."

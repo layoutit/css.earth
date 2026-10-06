@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Bonfanti et al. 2023, the stellar temperature of the default parameter set of HD 183579 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...671L...8B/abstract)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-183579.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.472, rounded to two decimals",
+  "spectralType": "G2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 183579 (pscomppars): spectral type G2 V, from Gan et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2220G/abstract)",
+  "metallicityDex": -0.038,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 183579 (pscomppars): [Fe/H] -0.038 dex, from Bonfanti et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671L...8B/abstract)",
+  "luminosityLogSolar": -0.034,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 183579 (pscomppars): log10 of the luminosity in solar units -0.03386, from Bonfanti et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671L...8B/abstract)",
+  "ageGyr": 3.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 183579 (pscomppars): age 3.1 Gyr, from Bonfanti et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671L...8B/abstract)",
+  "rotationPeriodDays": 24.8,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 183579 (pscomppars): rotation period 24.8 d, from Bonfanti et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671L...8B/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 183579 (pscomppars): projected rotation speed 2 km/s, from Nordstrom et al. 2004 (https://ui.adsabs.harvard.edu/abs/2004A&A...418..989N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Hawthorn et al. 2023, the stellar temperature of the default parameter set of TOI-836 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract)",
   "surfaceGravityLogg": 4.62,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-836.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.624, rounded to two decimals",
+  "spectralType": "K V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-836 (pscomppars): spectral type K V, from Hawthorn et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract)",
+  "metallicityDex": -0.284,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-836 (pscomppars): [Fe/H] -0.284 dex, from Hawthorn et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract)",
+  "luminosityLogSolar": -0.853,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-836 (pscomppars): log10 of the luminosity in solar units -0.85276, from Giacalone et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...24G/abstract)",
+  "ageGyr": 5.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-836 (pscomppars): age 5.4 Gyr, from Hawthorn et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract)",
+  "rotationPeriodDays": 21.987,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-836 (pscomppars): rotation period 21.987 d, from Hawthorn et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract)",
+  "projectedRotationSpeedKmS": 1.86,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-836 (pscomppars): projected rotation speed 1.86 km/s, from Hawthorn et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.520.3649H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

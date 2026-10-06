@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Baines et al. (2018), AJ 155, 30, HD 209750: effective temperature 5383 +/- 74 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b)",
   "surfaceGravityLogg": 1.7,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/sadalmelik.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.701, rounded to two decimals",
+  "spectralType": "G2Ib",
+  "spectralTypeSource": "SIMBAD, * alf Aqr: spectral type G2Ib (1989ApJS...71..245K)",
+  "luminosityLogSolar": 3.472,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2680356911816018048, flags_flame 10: lum_flame 2964.1848 solar luminosities (16th to 84th percentiles 2443.5852 to 3799.4128); its log10 is recorded",
+  "projectedRotationSpeedKmS": 10.65,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Aqr: projected rotation speed 10.65 km/s, the measurement SIMBAD prefers (2024A&A...692A.189R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

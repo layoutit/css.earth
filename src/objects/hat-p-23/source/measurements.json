@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bakos et al. 2010, the stellar temperature of the default parameter set of HAT-P-23 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
   "surfaceGravityLogg": 4.33,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-23.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.331, rounded to two decimals",
+  "spectralType": "G0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HAT-P-23 (pscomppars): spectral type G0, from Bakos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
+  "metallicityDex": 0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-23 (pscomppars): [Fe/H] 0.15 dex, from Bakos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
+  "luminosityLogSolar": 0.199,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-23 (pscomppars): log10 of the luminosity in solar units 0.199, from Bakos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
+  "ageGyr": 4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-23 (pscomppars): age 4 Gyr, from Bakos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
+  "projectedRotationSpeedKmS": 8.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-23 (pscomppars): projected rotation speed 8.1 km/s, from Bakos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

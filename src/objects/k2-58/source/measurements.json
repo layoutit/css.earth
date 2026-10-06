@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Crossfield et al. 2016, the stellar temperature of the default parameter set of K2-58 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJS..226....7C/abstract)",
   "surfaceGravityLogg": 4.52,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-58.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.518, rounded to two decimals",
+  "metallicityDex": 0.11,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-58 (pscomppars): [Fe/H] 0.11 dex, from Mayo et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract)",
+  "luminosityLogSolar": -0.398,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-58 (pscomppars): log10 of the luminosity in solar units -0.39764, from Barros et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract)",
+  "ageGyr": 12.125,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2599975224481836672, flags_flame 00: age_flame 12.124887 Gyr (16th to 84th percentiles 10.183866 to 13.5)",
+  "projectedRotationSpeedKmS": 2.25,
+  "projectedRotationSpeedSource": "SIMBAD, K2-58: projected rotation speed 2.25 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

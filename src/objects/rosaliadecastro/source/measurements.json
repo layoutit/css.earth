@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 4432401099808805888: teff_gspphot 5744.5547 K (16th-84th percentiles 5742.1235-5750.878), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 3.98,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/rosaliadecastro.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.983, rounded to two decimals",
+  "spectralType": "G0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 149143 (pscomppars): spectral type G0, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
+  "metallicityDex": 0.29,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 149143 (pscomppars): [Fe/H] 0.29 dex, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
+  "luminosityLogSolar": 0.35,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 149143 (pscomppars): log10 of the luminosity in solar units 0.35, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
+  "ageGyr": 4.28,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 149143 (pscomppars): age 4.28 Gyr, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
+  "projectedRotationSpeedKmS": 3.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 149143 (pscomppars): projected rotation speed 3.9 km/s, from da Silva et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006A&A...446..717D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

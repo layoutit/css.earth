@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Yee et al. 2025, the stellar temperature of the default parameter set of TOI-3486 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJS..280...30Y/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-3486.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.568, rounded to two decimals",
+  "metallicityDex": 0.283,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-3486 (pscomppars): [Fe/H] 0.283 dex, from Yee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..280...30Y/abstract)",
+  "luminosityLogSolar": -0.483,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-3486 (pscomppars): log10 of the luminosity in solar units -0.4828, from Yee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..280...30Y/abstract)",
+  "ageGyr": 5.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-3486 (pscomppars): age 5.8 Gyr, from Yee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..280...30Y/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

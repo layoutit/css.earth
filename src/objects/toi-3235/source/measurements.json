@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Hobson et al. 2023, the stellar temperature of the default parameter set of TOI-3235 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract)",
   "surfaceGravityLogg": 4.9,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-3235.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.898, rounded to two decimals",
+  "spectralType": "M V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-3235 (pscomppars): spectral type M V, from Hobson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract)",
+  "metallicityDex": 0.264,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-3235 (pscomppars): [Fe/H] 0.264 dex, from Hobson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract)",
+  "luminosityLogSolar": -1.79,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-3235 (pscomppars): log10 of the luminosity in solar units -1.78968, from Hobson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...946L...4H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

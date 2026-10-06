@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Gan et al. 2026, the stellar temperature of the default parameter set of TOI-5628 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract)",
   "surfaceGravityLogg": 4.91,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5628-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.906, rounded to two decimals",
+  "spectralType": "M3.0&plusmn1.0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5628 A (pscomppars): spectral type M3.0&plusmn1.0, from Gan et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract)",
+  "metallicityDex": -0.1,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5628 A (pscomppars): [Fe/H] -0.1 dex, from Gan et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract)",
+  "luminosityLogSolar": -1.88,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5628 A (pscomppars): log10 of the luminosity in solar units -1.88, from Calculated Value (/docs/pscp_calc.html)",
+  "rotationPeriodDays": 27.9,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-5628 A (pscomppars): rotation period 27.9 d, from Gan et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ..1006L..63G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

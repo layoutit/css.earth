@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Zapatero Osorio et al. 2026, the stellar temperature of the default parameter set of TOI-198 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract)",
   "surfaceGravityLogg": 4.82,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-198.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.816, rounded to two decimals",
+  "spectralType": "M0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-198 (pscomppars): spectral type M0 V, from Oddo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
+  "metallicityDex": -0.66,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-198 (pscomppars): [Fe/H] -0.66 dex, from Zapatero Osorio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract)",
+  "luminosityLogSolar": -1.484,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-198 (pscomppars): log10 of the luminosity in solar units -1.484, from Zapatero Osorio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract)",
+  "ageGyr": 1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-198 (pscomppars): age 1 Gyr, from Zapatero Osorio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract)",
+  "rotationPeriodDays": 48.5,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-198 (pscomppars): rotation period 48.5 d, from Zapatero Osorio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

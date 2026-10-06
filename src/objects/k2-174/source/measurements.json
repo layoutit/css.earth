@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Livingston et al. 2019, the stellar temperature of the default parameter set of K2-174 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract)",
   "surfaceGravityLogg": 4.62,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-174.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.623, rounded to two decimals",
+  "spectralType": "K7V",
+  "spectralTypeSource": "SIMBAD, K2-174: spectral type K7V (2017ApJ...836..167D)",
+  "metallicityDex": 0.113,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-174 (pscomppars): [Fe/H] 0.113 dex, from Livingston et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract)",
+  "luminosityLogSolar": -0.773,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-174 (pscomppars): log10 of the luminosity in solar units -0.77269, from Dressing et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract)",
+  "ageGyr": 3.257,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 46217666333148416, flags_flame 00: age_flame 3.2574408 Gyr (16th to 84th percentiles 0.6256809 to 6.76099)",
+  "projectedRotationSpeedKmS": 1.78,
+  "projectedRotationSpeedSource": "SIMBAD, K2-174: projected rotation speed 1.78 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

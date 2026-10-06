@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Howard et al. 2025, the stellar temperature of the default parameter set of K2-85 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
   "surfaceGravityLogg": 4.58,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-85.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.581, rounded to two decimals",
+  "spectralType": "K5V",
+  "spectralTypeSource": "SIMBAD, K2-85: spectral type K5V (2017ApJ...836..167D)",
+  "metallicityDex": 0.14,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-85 (pscomppars): [Fe/H] 0.14 dex, from Howard et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
+  "luminosityLogSolar": -0.812,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-85 (pscomppars): log10 of the luminosity in solar units -0.81171, from Barros et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract)",
+  "ageGyr": 4.845,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 49784688211974144, flags_flame 00: age_flame 4.844691 Gyr (16th to 84th percentiles 1.9292114 to 7.6007357)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-85 (pscomppars): projected rotation speed 3 km/s, from Howard et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

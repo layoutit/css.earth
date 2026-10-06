@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Murgas et al. 2025, the stellar temperature of the default parameter set of TOI-283 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract)",
   "surfaceGravityLogg": 4.48,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-283.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.482, rounded to two decimals",
+  "spectralType": "K",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-283 (pscomppars): spectral type K, from Murgas et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract)",
+  "metallicityDex": -0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-283 (pscomppars): [Fe/H] -0.09 dex, from Murgas et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract)",
+  "luminosityLogSolar": -0.337,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-283 (pscomppars): log10 of the luminosity in solar units -0.33724, from Murgas et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract)",
+  "ageGyr": 10.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-283 (pscomppars): age 10.4 Gyr, from Murgas et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract)",
+  "rotationPeriodDays": 30,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-283 (pscomppars): rotation period 30 d, from Murgas et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...703A.201M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

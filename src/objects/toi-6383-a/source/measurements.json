@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Bernab&ograve; et al. 2024, the stellar temperature of the default parameter set of TOI-6383 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract)",
   "surfaceGravityLogg": 4.78,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-6383-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.779, rounded to two decimals",
+  "spectralType": "M3",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-6383 A (pscomppars): spectral type M3, from Bernab&ograve; et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract)",
+  "luminosityLogSolar": -1.487,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6383 A (pscomppars): log10 of the luminosity in solar units -1.48678, from Bernab&ograve; et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6383 A (pscomppars): projected rotation speed 2 km/s, from Bernab&ograve; et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..273B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

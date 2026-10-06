@@ -50,6 +50,14 @@ records and the star's dataset steps; `corona.mts` reads the star's own records 
 never a published result: every sentence these modules write says it is derived here and which of its numbers are measured. A
 star whose gas, at its X-ray temperature, would not be held by its gravity is refused, not drawn.
 
+What the catalogues print of every star is `src/new-object/metadata/`: `--metadata --all | STAR_ID...` writes spectral type,
+metallicity, luminosity, age, rotation period, projected rotation speed and the tilt those give into each star's
+`source/measurements.json`, each beside its source. `star-metadata.mts` owns the fields and which catalogue stands before
+which; `metadata.mts` asks the NASA Exoplanet Archive once, and SIMBAD and the Gaia Archive in groups of stars. The pass never
+replaces a value the record holds from its own source, computes a tilt only for a page that draws no measured axis, and bakes
+nothing. A tool that needs a star's rotation or type reads the record, not a catalogue; a new star gets its values by running
+the pass on it.
+
 The star survey behind `telescope stars GALAXY` is `src/stars/`. It and the generator's `--from-table` route
 (`src/new-object/archives/tables/table-stars.mts`) read VizieR's table metadata and SIMBAD through the same two modules,
 `vizier-tables.mts` and `simbad-tap.mts` beside it; a star class is a branch of SIMBAD's own type tree, never a

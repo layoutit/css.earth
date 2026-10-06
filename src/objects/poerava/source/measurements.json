@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6489603813690967808: teff_gspphot 6162.0986 K (16th-84th percentiles 6161.1514-6162.958), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.32,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/poerava.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.324, rounded to two decimals",
+  "spectralType": "F7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 221287 (pscomppars): spectral type F7 V, from Michigan Catalog, Vol. 1 (https://ui.adsabs.harvard.edu/abs/1975MSS...C01....0H/abstract)",
+  "metallicityDex": -0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 221287 (pscomppars): [Fe/H] -0.03 dex, from Naef et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007A&A...470..721N/abstract)",
+  "luminosityLogSolar": 0.22,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 221287 (pscomppars): log10 of the luminosity in solar units 0.22011, from Naef et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007A&A...470..721N/abstract)",
+  "ageGyr": 1.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 221287 (pscomppars): age 1.3 Gyr, from Naef et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007A&A...470..721N/abstract)",
+  "projectedRotationSpeedKmS": 3.92,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 221287 (pscomppars): projected rotation speed 3.92 km/s, from Tsantaki et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...570A..80T/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

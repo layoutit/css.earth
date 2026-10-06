@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Fukui et al. 2022, the stellar temperature of the default parameter set of TOI-2285 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract)",
   "surfaceGravityLogg": 4.76,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2285.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.762, rounded to two decimals",
+  "spectralType": "M2V",
+  "spectralTypeSource": "SIMBAD, TOI-2285: spectral type M2V (2024ApJS..271...48G)",
+  "metallicityDex": -0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2285 (pscomppars): [Fe/H] -0.05 dex, from Fukui et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract)",
+  "luminosityLogSolar": -1.542,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2285 (pscomppars): log10 of the luminosity in solar units -1.54212, from Fukui et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

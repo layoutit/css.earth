@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1898 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.12,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1898.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.119, rounded to two decimals",
+  "spectralType": "F5",
+  "spectralTypeSource": "SIMBAD, HD 83342: spectral type F5 (1993yCat.3135....0C)",
+  "metallicityDex": -0.095,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1898 (pscomppars): [Fe/H] -0.095 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": 0.551,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1898 (pscomppars): log10 of the luminosity in solar units 0.55121, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 3.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1898 (pscomppars): age 3.1 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "projectedRotationSpeedKmS": 7.44,
+  "projectedRotationSpeedSource": "SIMBAD, HD 83342: projected rotation speed 7.44 km/s, the measurement SIMBAD prefers (2024ApJ...968L...2L)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

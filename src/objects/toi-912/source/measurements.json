@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Lacedelli et al. 2026, the stellar temperature of the default parameter set of TOI-912 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
   "surfaceGravityLogg": 4.81,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-912.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.815, rounded to two decimals",
+  "spectralType": "M3",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-912 (pscomppars): spectral type M3, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
+  "metallicityDex": -0.19,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-912 (pscomppars): [Fe/H] -0.19 dex, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
+  "luminosityLogSolar": -1.59,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-912 (pscomppars): log10 of the luminosity in solar units -1.59007, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
+  "ageGyr": 0.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-912 (pscomppars): age 0.8 Gyr, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
+  "rotationPeriodDays": 45.9,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-912 (pscomppars): rotation period 45.9 d, from Lacedelli et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...705A.260L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

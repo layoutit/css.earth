@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-41 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.51,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-41.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.508, rounded to two decimals",
+  "spectralType": "G8V",
+  "spectralTypeSource": "SIMBAD, CD-29 9873: spectral type G8V (2011PASP..123..547M)",
+  "metallicityDex": 0.06,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-41 (pscomppars): [Fe/H] 0.06 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": -0.195,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-41 (pscomppars): log10 of the luminosity in solar units -0.19512, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 1.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-41 (pscomppars): age 1.2 Gyr, from Southworth et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract)",
+  "rotationPeriodDays": 18.41,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-41 (pscomppars): rotation period 18.41 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 2.64,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-41 (pscomppars): projected rotation speed 2.64 km/s, from Neveu-VanMalle et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv150907750N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

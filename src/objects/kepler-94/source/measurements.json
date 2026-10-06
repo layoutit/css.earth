@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Marcy et al. 2014, the stellar temperature of the default parameter set of Kepler-94 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
   "surfaceGravityLogg": 4.58,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-94.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.585, rounded to two decimals",
+  "spectralType": "M0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): spectral type M0 V, from Muirhead et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012ApJ...750L..37M/abstract)",
+  "metallicityDex": 0.34,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): [Fe/H] 0.34 dex, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
+  "luminosityLogSolar": -0.613,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): log10 of the luminosity in solar units -0.61348, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 1.41,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): age 1.41 Gyr, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
+  "projectedRotationSpeedKmS": 0.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): projected rotation speed 0.5 km/s, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

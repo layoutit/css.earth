@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-480 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.2,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-480.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.200, rounded to two decimals",
+  "spectralType": "F8/G0V",
+  "spectralTypeSource": "SIMBAD, HD 39688: spectral type F8/G0V (1988MSS...C04....0H)",
+  "metallicityDex": 0.164,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-480 (pscomppars): [Fe/H] 0.164 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": 0.462,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-480 (pscomppars): log10 of the luminosity in solar units 0.46195, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 2.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-480 (pscomppars): age 2.7 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "projectedRotationSpeedKmS": 9,
+  "projectedRotationSpeedSource": "SIMBAD, HD 39688: projected rotation speed 9 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

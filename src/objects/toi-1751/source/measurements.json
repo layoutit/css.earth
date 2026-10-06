@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1751 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.17,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1751.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.173, rounded to two decimals",
+  "spectralType": "G0",
+  "spectralTypeSource": "SIMBAD, HD 146757: spectral type G0 (1993yCat.3135....0C)",
+  "metallicityDex": -0.373,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1751 (pscomppars): [Fe/H] -0.373 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": 0.297,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1751 (pscomppars): log10 of the luminosity in solar units 0.29732, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1751 (pscomppars): age 9 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "projectedRotationSpeedKmS": 1.27,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1751 (pscomppars): projected rotation speed 1.27 km/s, from Desai et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..194D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

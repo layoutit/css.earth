@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Palle et al. 2023, the stellar temperature of the default parameter set of GJ 806 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
   "surfaceGravityLogg": 4.82,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-806.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.819, rounded to two decimals",
+  "spectralType": "M1.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 806 (pscomppars): spectral type M1.5 V, from Palle et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
+  "metallicityDex": -0.28,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 806 (pscomppars): [Fe/H] -0.28 dex, from Palle et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
+  "luminosityLogSolar": -1.585,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 806 (pscomppars): log10 of the luminosity in solar units -1.58528, from Palle et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
+  "ageGyr": 5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 806 (pscomppars): age 5 Gyr, from Palle et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
+  "rotationPeriodDays": 41.4,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 806 (pscomppars): rotation period 41.4 d, from Palle et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 806 (pscomppars): projected rotation speed 2 km/s, from Palle et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

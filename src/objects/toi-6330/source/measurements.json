@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Hotnisky et al. 2025, the stellar temperature of the default parameter set of TOI-6330 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract)",
   "surfaceGravityLogg": 4.78,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-6330.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.783, rounded to two decimals",
+  "metallicityDex": 0.08,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-6330 (pscomppars): [Fe/H] 0.08 dex, from Hotnisky et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract)",
+  "luminosityLogSolar": -1.432,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6330 (pscomppars): log10 of the luminosity in solar units -1.43168, from Hotnisky et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract)",
+  "ageGyr": 7.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-6330 (pscomppars): age 7.6 Gyr, from Hotnisky et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract)",
+  "rotationPeriodDays": 36,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-6330 (pscomppars): rotation period 36 d, from Hotnisky et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6330 (pscomppars): projected rotation speed 2 km/s, from Hotnisky et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170....1H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

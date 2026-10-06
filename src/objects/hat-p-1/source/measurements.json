@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Nikolov et al. 2014, the stellar temperature of the default parameter set of HAT-P-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract)",
   "surfaceGravityLogg": 4.36,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-1.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.360, rounded to two decimals",
+  "spectralType": "G0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HAT-P-1 (pscomppars): spectral type G0 V, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
+  "metallicityDex": 0.13,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-1 (pscomppars): [Fe/H] 0.13 dex, from Nikolov et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014MNRAS.437...46N/abstract)",
+  "luminosityLogSolar": 0.225,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-1 (pscomppars): log10 of the luminosity in solar units 0.22463, from Barstow et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017ApJ...834...50B/abstract)",
+  "ageGyr": 3.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-1 (pscomppars): age 3.6 Gyr, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
+  "projectedRotationSpeedKmS": 2.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-1 (pscomppars): projected rotation speed 2.2 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

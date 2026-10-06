@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Murgas et al. 2024, the stellar temperature of the default parameter set of Wolf 327 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)",
   "surfaceGravityLogg": 4.83,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wolf-327.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.828, rounded to two decimals",
+  "spectralType": "M2.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Wolf 327 (pscomppars): spectral type M2.5 V, from Murgas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)",
+  "metallicityDex": -0.17,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Wolf 327 (pscomppars): [Fe/H] -0.17 dex, from Murgas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)",
+  "luminosityLogSolar": -1.63,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Wolf 327 (pscomppars): log10 of the luminosity in solar units -1.62986, from Murgas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)",
+  "ageGyr": 4.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Wolf 327 (pscomppars): age 4.1 Gyr, from Murgas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)",
+  "rotationPeriodDays": 44.4,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Wolf 327 (pscomppars): rotation period 44.4 d, from Murgas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Wolf 327 (pscomppars): projected rotation speed 2 km/s, from Murgas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

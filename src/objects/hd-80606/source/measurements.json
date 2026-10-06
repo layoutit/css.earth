@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Pearson et al. 2022, the stellar temperature of the default parameter set of HD 80606 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract)",
   "surfaceGravityLogg": 4.42,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-80606.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.417, rounded to two decimals",
+  "spectralType": "G5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 80606 (pscomppars): spectral type G5, from Wittenmyer et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJS..182...97W/abstract)",
+  "metallicityDex": 0.35,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 80606 (pscomppars): [Fe/H] 0.35 dex, from Pearson et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164..178P/abstract)",
+  "luminosityLogSolar": -0.002,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 80606 (pscomppars): log10 of the luminosity in solar units -0.00237, from Wittenmyer et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007AJ....134.1276W/abstract)",
+  "ageGyr": 5.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 80606 (pscomppars): age 5.9 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 1.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 80606 (pscomppars): projected rotation speed 1.8 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

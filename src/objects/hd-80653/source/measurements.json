@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Naponiello et al. 2026, the stellar temperature of the default parameter set of HD 80653 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract)",
   "surfaceGravityLogg": 4.34,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-80653.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.341, rounded to two decimals",
+  "spectralType": "G0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 80653 (pscomppars): spectral type G0 V, from Naponiello et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract)",
+  "metallicityDex": 0.255,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 80653 (pscomppars): [Fe/H] 0.255 dex, from Naponiello et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract)",
+  "luminosityLogSolar": 0.212,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 80653 (pscomppars): log10 of the luminosity in solar units 0.21165, from Naponiello et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract)",
+  "ageGyr": 3.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 80653 (pscomppars): age 3.3 Gyr, from Naponiello et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract)",
+  "rotationPeriodDays": 19.8,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 80653 (pscomppars): rotation period 19.8 d, from Frustagli et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...633A.133F/abstract)",
+  "projectedRotationSpeedKmS": 3.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 80653 (pscomppars): projected rotation speed 3.5 km/s, from Naponiello et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

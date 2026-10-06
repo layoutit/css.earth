@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Lacedelli et al. 2025, the stellar temperature of the default parameter set of TOI-771 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract)",
   "surfaceGravityLogg": 5.05,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-771.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.050, rounded to two decimals",
+  "spectralType": "M3",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-771 (pscomppars): spectral type M3, from Lacedelli et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract)",
+  "metallicityDex": -0.13,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-771 (pscomppars): [Fe/H] -0.13 dex, from Lacedelli et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract)",
+  "luminosityLogSolar": -2.203,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-771 (pscomppars): log10 of the luminosity in solar units -2.20343, from Lacedelli et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract)",
+  "ageGyr": 6.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-771 (pscomppars): age 6.7 Gyr, from Mistry et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
+  "rotationPeriodDays": 98,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-771 (pscomppars): rotation period 98 d, from Lacedelli et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...698A.223L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

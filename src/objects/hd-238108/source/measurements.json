@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Gaia DR3 astrophysical parameters (CDS I/355/paramp), source 1575047731026006528: Teff 6095.4 K from the BP/RP spectra (GSP-Phot) (https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355)",
   "surfaceGravityLogg": 4.4,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-238108.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.400, rounded to two decimals",
+  "spectralType": "F8",
+  "spectralTypeSource": "SIMBAD, HD 238108: spectral type F8 (1993yCat.3135....0C)",
+  "luminosityLogSolar": 0.183,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1575047731026006528, flags_flame 00: lum_flame 1.5254772 solar luminosities (16th to 84th percentiles 1.5174458 to 1.5336862); its log10 is recorded",
+  "ageGyr": 1.955,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1575047731026006528, flags_flame 00: age_flame 1.954561 Gyr (16th to 84th percentiles 1.2459764 to 2.6636896)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

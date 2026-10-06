@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Hartman et al. 2024, the stellar temperature of the default parameter set of TOI-762 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract)",
   "surfaceGravityLogg": 4.83,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-762-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.827, rounded to two decimals",
+  "metallicityDex": 0.357,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-762 A (pscomppars): [Fe/H] 0.357 dex, from Hartman et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract)",
+  "luminosityLogSolar": -1.733,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-762 A (pscomppars): log10 of the luminosity in solar units -1.73283, from Hartman et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract)",
+  "ageGyr": 9.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-762 A (pscomppars): age 9.3 Gyr, from Hartman et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..202H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

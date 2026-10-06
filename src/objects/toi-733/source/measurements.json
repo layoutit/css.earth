@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Georgieva et al. 2023, the stellar temperature of the default parameter set of TOI-733 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract)",
   "surfaceGravityLogg": 4.46,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-733.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.464, rounded to two decimals",
+  "spectralType": "G",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-733 (pscomppars): spectral type G, from Georgieva et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract)",
+  "metallicityDex": -0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-733 (pscomppars): [Fe/H] -0.04 dex, from Georgieva et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract)",
+  "luminosityLogSolar": -0.086,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-733 (pscomppars): log10 of the luminosity in solar units -0.08619, from Georgieva et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract)",
+  "ageGyr": 4.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-733 (pscomppars): age 4.4 Gyr, from Georgieva et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract)",
+  "projectedRotationSpeedKmS": 2.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-733 (pscomppars): projected rotation speed 2.2 km/s, from Georgieva et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A.117G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

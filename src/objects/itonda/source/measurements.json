@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6586580842340695040: teff_gspphot 5985.9814 K (16th-84th percentiles 5984.9956-5987.033), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.3,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/itonda.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.298, rounded to two decimals",
+  "spectralType": "G2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 208487 (pscomppars): spectral type G2 V, from Rubenstein et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.139R/abstract)",
+  "metallicityDex": 0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 208487 (pscomppars): [Fe/H] 0.09 dex, from Rubenstein et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.139R/abstract)",
+  "luminosityLogSolar": 0.233,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 208487 (pscomppars): log10 of the luminosity in solar units 0.233, from Rubenstein et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.139R/abstract)",
+  "ageGyr": 1.95,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 208487 (pscomppars): age 1.95 Gyr, from Rubenstein et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.139R/abstract)",
+  "projectedRotationSpeedKmS": 5.58,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 208487 (pscomppars): projected rotation speed 5.58 km/s, from Rubenstein et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.139R/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

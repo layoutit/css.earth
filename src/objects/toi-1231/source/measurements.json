@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Burt et al. 2021, the stellar temperature of the default parameter set of TOI-1231 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162...87B/abstract)",
   "surfaceGravityLogg": 4.77,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1231.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.769, rounded to two decimals",
+  "spectralType": "M3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1231 (pscomppars): spectral type M3 V, from Burt et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162...87B/abstract)",
+  "metallicityDex": 0.041,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1231 (pscomppars): [Fe/H] 0.041 dex, from Burt et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162...87B/abstract)",
+  "luminosityLogSolar": -1.487,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1231 (pscomppars): log10 of the luminosity in solar units -1.48678, from Burt et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162...87B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Barkaoui et al. 2023, the stellar temperature of the default parameter set of TOI-4184 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
   "surfaceGravityLogg": 5.02,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4184.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.021, rounded to two decimals",
+  "spectralType": "M5.5+/-0.5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4184 (pscomppars): spectral type M5.5+/-0.5, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
+  "metallicityDex": -0.27,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4184 (pscomppars): [Fe/H] -0.27 dex, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
+  "luminosityLogSolar": -2.264,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4184 (pscomppars): log10 of the luminosity in solar units -2.2644, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
+  "ageGyr": 6.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4184 (pscomppars): age 6.7 Gyr, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

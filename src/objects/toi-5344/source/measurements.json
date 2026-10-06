@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Hartman et al. 2023, the stellar temperature of the default parameter set of TOI-5344 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract)",
   "surfaceGravityLogg": 4.69,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5344.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.686, rounded to two decimals",
+  "metallicityDex": 0.425,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5344 (pscomppars): [Fe/H] 0.425 dex, from Hartman et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract)",
+  "luminosityLogSolar": -1.213,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5344 (pscomppars): log10 of the luminosity in solar units -1.21254, from Hartman et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract)",
+  "ageGyr": 10.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5344 (pscomppars): age 10.9 Gyr, from Hartman et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..163H/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5344 (pscomppars): projected rotation speed 2 km/s, from Han et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167....4H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

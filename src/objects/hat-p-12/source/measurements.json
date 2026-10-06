@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Hartman et al. 2009, the stellar temperature of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract)",
   "surfaceGravityLogg": 4.61,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-12.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.612, rounded to two decimals",
+  "spectralType": "K4",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HAT-P-12 (pscomppars): spectral type K4, from Hartman et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract)",
+  "metallicityDex": -0.29,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-12 (pscomppars): [Fe/H] -0.29 dex, from Hartman et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract)",
+  "luminosityLogSolar": -0.678,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-12 (pscomppars): log10 of the luminosity in solar units -0.678, from Hartman et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract)",
+  "ageGyr": 2.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-12 (pscomppars): age 2.5 Gyr, from Hartman et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract)",
+  "projectedRotationSpeedKmS": 0.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-12 (pscomppars): projected rotation speed 0.5 km/s, from Hartman et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

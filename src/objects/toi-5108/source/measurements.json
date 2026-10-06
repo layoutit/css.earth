@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Thomas et al. 2025, the stellar temperature of the default parameter set of TOI-5108 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract)",
   "surfaceGravityLogg": 4.26,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5108.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.258, rounded to two decimals",
+  "spectralType": "G5",
+  "spectralTypeSource": "SIMBAD, BD+12 2298: spectral type G5",
+  "metallicityDex": 0.2,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5108 (pscomppars): [Fe/H] 0.2 dex, from Thomas et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract)",
+  "luminosityLogSolar": 0.275,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5108 (pscomppars): log10 of the luminosity in solar units 0.27505, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 5.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5108 (pscomppars): age 5.8 Gyr, from Thomas et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract)",
+  "projectedRotationSpeedKmS": 3.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5108 (pscomppars): projected rotation speed 3.3 km/s, from Thomas et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A.143T/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

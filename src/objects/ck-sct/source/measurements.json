@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 420, Name='CK Sct', columns Teff, e_Teff (K): Teff 5250 +/- 168 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 2.3,
   "surfaceGravitySource": "log g 2.3 from 2011AJ....142..136L; the 1 published value span log g 2.3 to 2.3, across which the limb law changes by at most 0.0% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2011AJ....142..136L)",
+  "spectralType": "G",
+  "spectralTypeSource": "SIMBAD, V* CK Sct: spectral type G",
+  "luminosityLogSolar": 3.396,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4253442933709196288, flags_flame 10: lum_flame 2490.774 solar luminosities (16th to 84th percentiles 2318.4597 to 2691.128); its log10 is recorded",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

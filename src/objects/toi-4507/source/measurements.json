@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Espinoza-Retamal et al. 2026, the stellar temperature of the default parameter set of TOI-4507 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract)",
   "surfaceGravityLogg": 4.45,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4507.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.449, rounded to two decimals",
+  "spectralType": "F",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4507 (pscomppars): spectral type F, from Espinoza-Retamal et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract)",
+  "metallicityDex": -0.06,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4507 (pscomppars): [Fe/H] -0.06 dex, from Espinoza-Retamal et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract)",
+  "luminosityLogSolar": 0.149,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4507 (pscomppars): log10 of the luminosity in solar units 0.14922, from Espinoza-Retamal et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract)",
+  "ageGyr": 0.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4507 (pscomppars): age 0.7 Gyr, from Espinoza-Retamal et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract)",
+  "projectedRotationSpeedKmS": 7.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4507 (pscomppars): projected rotation speed 7.3 km/s, from Espinoza-Retamal et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

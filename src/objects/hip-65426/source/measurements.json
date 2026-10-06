@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "8840 +/- 200 K, Chauvin et al. (2017), A&A 605, L9, Table 1, https://arxiv.org/abs/1707.01413",
   "surfaceGravityLogg": 4.23,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hip-65426.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.234, rounded to two decimals",
+  "spectralType": "A2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HIP 65426 (pscomppars): spectral type A2 V, from Chauvin et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...605L...9C/abstract)",
+  "luminosityLogSolar": 1.269,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HIP 65426 (pscomppars): log10 of the luminosity in solar units 1.26895, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 0.014,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HIP 65426 (pscomppars): age 0.014 Gyr, from Chauvin et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...605L...9C/abstract)",
+  "projectedRotationSpeedKmS": 299,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HIP 65426 (pscomppars): projected rotation speed 299 km/s, from Chauvin et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...605L...9C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."
