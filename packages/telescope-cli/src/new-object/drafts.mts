@@ -44,7 +44,7 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   magnetic: { names: 'HOST', draft: async (names, context) => (await import('./corona/corona.mts')).draftsFromMagneticMaps(names, context) },
   // A star's magnetic maps, reduced by this repository from archived polarised spectra, as datasets of its page (magnetic/maps.mts).
   spectra: { names: 'HOST', draft: async (names, context) => (await import('./magnetic/maps.mts')).draftsFromReducedPrograms(names, context) },
-  // A star's brightness map, made by this repository from its light in the TESS full-frame images, as a dataset of its page (brightness/brightness.mts).
+  // A star's brightness map, made by this repository from a mission's light curves of it, as a dataset of its page (brightness/brightness.mts).
   pixels: { names: 'all | HOST', draft: async (names, context) => (await import('./brightness/brightness.mts')).draftsFromReducedPixels(names, context) },
 };
 
