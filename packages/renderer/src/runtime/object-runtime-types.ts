@@ -51,7 +51,7 @@ export interface ObjectMountOptions {
   inputSurface: HTMLElement; runtimePolicy: RuntimePolicy;
   diagnostics?: boolean; capabilities?: ObjectRuntimeCapabilities;
   preparedResources?: PreparedResourceLease;
-  preparedTree?: import('../rendering/prepared-tree.js').PreparedTreeLease;
+  preparedTree?: import('../rendering/dom/prepared-tree.js').PreparedTreeLease;
   worldContext: PerspectiveWorldContext;
   cameraMotion: import('../navigation/camera-motion.js').CameraMotion;
   framePresenter: import('../navigation/world-frame-presenter.js').WorldFramePresenter;

@@ -37,11 +37,6 @@
       "tests": 23,
       "reason": "The retained world camera and input policy form one navigation owner; its decomposition requires a dedicated interaction change."
     },
-    "packages/renderer/src/rendering": {
-      "implementations": 34,
-      "tests": 31,
-      "reason": "Prepared scene activation and retained DOM writes form one rendering lifecycle owner; the additional modules and colocated tests do not establish an independent rendering area."
-    },
     "packages/renderer/src/universe": {
       "implementations": 29,
       "tests": 17,

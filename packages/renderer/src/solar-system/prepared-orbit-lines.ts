@@ -1,4 +1,4 @@
-import { createRetainedLeafPool, registerRetainedPaintMembership } from '../rendering/retained-leaf-pool.js';
+import { createRetainedLeafPool, registerRetainedPaintMembership } from '../rendering/dom/retained-leaf-pool.js';
 import { formatLineNumber, orbitSegmentTransform } from './orbit-segment-presentation.js';
 import type { OrbitSegment } from '@cssearth/engine';
 import type { FadeTarget } from '../stars/opacity-fader.js';

@@ -14,7 +14,7 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 // - a write whose elements a depth partition moved to its carriers keeps its slot, which lists none: the bindings
 //   restore the source branch from that write (prepared-depth-partitions.ts).
 // The page writes `background-image` on each listed element, and its served markup does the same
-// (packages/renderer/src/rendering/prepared-presentation.ts, prepared-scene-serialization.ts). A later bindings run
+// (packages/renderer/src/rendering/view/prepared-presentation.ts, prepared-scene-serialization.ts). A later bindings run
 // expands the records back to the variable form first.
 
 interface Property { name: string; value: string; custom: boolean }

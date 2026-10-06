@@ -35,7 +35,7 @@ mock.module('@cssearth/renderer/universe', { namedExports: { ...universe,
   prepareObjectResources: () => ({ ready: resourceReady, destroy: () => effects.push(['resources-destroy']) }) } });
 mock.module('@cssearth/renderer', { namedExports: { ...renderer,
   labelOcclusionFor: () => ({ read: () => ['sidebar'], subscribe: () => () => effects.push(['occlusion-unsubscribe']) }) } });
-mock.module('@cssearth/renderer/rendering/startup-gate.ts', { namedExports: { afterStartup: (_target: unknown, callback: () => void) => { startup = callback; } } });
+mock.module('@cssearth/renderer/rendering/loading/startup-gate.ts', { namedExports: { afterStartup: (_target: unknown, callback: () => void) => { startup = callback; } } });
 mock.module(new URL('../world/application/world-approach.mts', import.meta.url).href, { namedExports: { createWorldApproach: () => ({ start: () => effects.push(['approach-start']), observe(position: unknown) { effects.push(['observe', position]); } }) } });
 mock.module(new URL('../world/application/moon-orbit-policy.mts', import.meta.url).href, { namedExports: { suppressMinorMoonOrbitPaint: () => () => effects.push(['orbit-paint-destroy']) } });
 mock.module(new URL('../world/application/catalogue-moon-labels.mts', import.meta.url).href, { namedExports: { mountCatalogueMoonLabels: (_host: unknown, bodies: () => unknown, _focus: unknown, _clock: unknown, refresh: () => boolean) => { assert.ok(Array.isArray(bodies())); effects.push(['initial-label-refresh', refresh()]); return ({ selectObject: (id: string) => effects.push(['moon-select', id]), destroy: () => effects.push(['labels-destroy']) }); } } });

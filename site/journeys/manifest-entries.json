@@ -35,7 +35,7 @@
     {
       "id": "capability:DPR",
       "kind": "capability",
-      "source": "packages/renderer/src/rendering/prepared-leaf-box-blocks.ts:104"
+      "source": "packages/renderer/src/rendering/culling/prepared-leaf-box-blocks.ts:104"
     },
     {
       "id": "capability:historyDeepLinks",
@@ -120,7 +120,7 @@
     {
       "id": "capability:serverAdoption",
       "kind": "capability",
-      "source": "packages/renderer/src/rendering/prepared-omitted-nodes.ts:23"
+      "source": "packages/renderer/src/rendering/dom/prepared-omitted-nodes.ts:23"
     },
     {
       "id": "capability:tabFocus",
@@ -1348,7 +1348,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:296",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:296",
       "eventTypes": [
         "click"
       ],
@@ -1357,7 +1357,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:2",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:310",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:310",
       "eventTypes": [
         "click"
       ],
@@ -1366,7 +1366,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:3",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:320",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:320",
       "eventTypes": [
         "click"
       ],
@@ -1375,7 +1375,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:dynamic-event:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:304",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:304",
       "eventTypes": [
         "focus",
         "pointerenter",
@@ -1386,7 +1386,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:dynamic-event:2",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:332",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:332",
       "eventTypes": [
         "change",
         "click",
@@ -1399,7 +1399,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:visibilitychange:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:328",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:328",
       "eventTypes": [
         "visibilitychange"
       ],
@@ -1408,14 +1408,14 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:listen:dynamic-event:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:213",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:213",
       "eventTypes": [],
       "mechanism": "addEventListener"
     },
     {
       "id": "handler:packages:renderer:src:rendering:object-selection-runtime:run:abort:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-selection-runtime.ts:146",
+      "source": "packages/renderer/src/rendering/view/object-selection-runtime.ts:146",
       "eventTypes": [
         "abort"
       ],
@@ -1424,7 +1424,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:prepared-image-store:startDownload:error:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/prepared-image-store.ts:142",
+      "source": "packages/renderer/src/rendering/loading/prepared-image-store.ts:142",
       "eventTypes": [
         "error"
       ],
@@ -1433,7 +1433,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:prepared-image-store:startDownload:load:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/prepared-image-store.ts:141",
+      "source": "packages/renderer/src/rendering/loading/prepared-image-store.ts:141",
       "eventTypes": [
         "load"
       ],
@@ -1442,7 +1442,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:prepared-tree:preparePresentationTree:abort:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/prepared-tree.ts:134",
+      "source": "packages/renderer/src/rendering/dom/prepared-tree.ts:134",
       "eventTypes": [
         "abort"
       ],
@@ -2677,14 +2677,14 @@
       "source": "packages/renderer/src/navigation/shared-input-surface.ts:40"
     },
     {
-      "file": "packages/renderer/src/rendering/object-control-binding.ts",
+      "file": "packages/renderer/src/rendering/view/object-control-binding.ts",
       "name": "listen",
       "eventIndex": 1,
       "targetIndex": 0,
       "callbackIndex": 2,
       "optionsIndex": 3,
       "target": "input",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:213"
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:213"
     }
   ]
 }

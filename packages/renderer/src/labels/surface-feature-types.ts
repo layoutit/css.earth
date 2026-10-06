@@ -20,7 +20,7 @@ export interface SurfaceFeatureNavigationRuntime {
 }
 export interface SurfaceFeatureLayerRuntime extends SurfaceFeatureNavigationRuntime {
   readonly root: HTMLElement;
-  publish(view: Pick<import('../rendering/prepared-view.js').PreparedView, 'projection' | 'levelOfDetail' | 'zoom'>): void;
+  publish(view: Pick<import('../rendering/view/prepared-view.js').PreparedView, 'projection' | 'levelOfDetail' | 'zoom'>): void;
   setDataset(selection: { readonly id: string | null }): void;
   setPlaying(value: boolean): void;
   stats(): SurfaceFeatureLayerStats;

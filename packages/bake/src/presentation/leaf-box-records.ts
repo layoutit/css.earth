@@ -10,7 +10,7 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 // the body's `--surface-seam-outset`. Measuring, depth partitions and the cascade check run on that form in a browser.
 // What ships is this record instead: per leaf, its full box, its background size and position, its matrix, its seam
 // coefficients and its density, with the steps' initial values on their bindings. The runtime writes a leaf's final
-// values from it (packages/renderer/src/rendering/prepared-leaf-box-direct.ts); no variable, `calc()` or parse reaches
+// values from it (packages/renderer/src/rendering/culling/prepared-leaf-box-direct.ts); no variable, `calc()` or parse reaches
 // the page. A later bindings run expands the records back to the variable form first, so it measures what it always did.
 import { LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY, leafBoxLengths } from './leaf-box.ts';
 import { SURFACE_SEAM_OUTSET_PROPERTY } from '../scene/index.ts';

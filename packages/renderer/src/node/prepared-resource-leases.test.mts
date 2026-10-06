@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createPreparedImageStore } from '@cssearth/renderer/testing';
-import type { PreparedImage } from '@cssearth/renderer/rendering/prepared-image-store.ts';
+import type { PreparedImage } from '@cssearth/renderer/rendering/loading/prepared-image-store.ts';
 type ImageLease = ReturnType<ReturnType<typeof createPreparedImageStore>["createLease"]>;
 interface DecodeJob { image: PreparedImage; url: string; resolve(): void; reject(reason: unknown): void; }
 

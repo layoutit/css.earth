@@ -4,7 +4,7 @@ import sharp from 'sharp';
  * Every image a prepared runtime names states its pixel width and height on its entry.
  *
  * The renderer draws a leaf's image at its own size, one texel per device pixel, and sizes the leaf's box to it
- * (packages/renderer/src/rendering/prepared-leaf-box-direct.ts). It reads the size here: it never measures an image
+ * (packages/renderer/src/rendering/culling/prepared-leaf-box-direct.ts). It reads the size here: it never measures an image
  * or works one out from a byte count. This is the last step of every bake (`finalizeObjectJson`), so each generator's
  * entries are stated the same way, from the file the bake published.
  */

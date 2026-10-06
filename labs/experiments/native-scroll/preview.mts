@@ -6,7 +6,7 @@ import { parseSharedView, formatSharedView } from '@cssearth/renderer/navigation
 import { preparedSceneMatrix, distanceForSilhouetteRadius } from '@cssearth/engine';
 import { serializePreparedMatrix4 } from '@cssearth/core';
 import { addNativeSolarContext, solarMaximumDistanceM } from './context.mts';
-import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
+import { publishPreparedNativeView } from '@cssearth/renderer/rendering/view/prepared-native-view.ts';
 import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
 import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
 import { carryViewportValues } from '@cssearth/telescope-cli/sphere/native-scroll/carry-values';

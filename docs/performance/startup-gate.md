@@ -27,7 +27,7 @@ What the first view needs does not wait:
 
 ## How it works
 
-`packages/renderer/src/rendering/startup-gate.ts` holds one gate per document. It keeps the gate on the window, so the
+`packages/renderer/src/rendering/loading/startup-gate.ts` holds one gate per document. It keeps the gate on the window, so the
 site's import and the renderer's built bundle share it.
 
 1. The scene router holds the gate when a cold page's first view is a body. A focus or overview arrival shows the world

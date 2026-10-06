@@ -1,8 +1,8 @@
 /** Serialize the standard prepared sphere and its CSS camera at export time. */
 import { parseHTML } from 'linkedom';
-import { serializePreparedScene } from '@cssearth/renderer/rendering/prepared-scene-serialization.ts';
+import { serializePreparedScene } from '@cssearth/renderer/rendering/view/prepared-scene-serialization.ts';
 import { initialObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
-import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
+import { publishPreparedNativeView } from '@cssearth/renderer/rendering/view/prepared-native-view.ts';
 import { preparedSceneMatrix, distanceForSilhouetteRadius } from '@cssearth/engine';
 import { serializePreparedMatrix4 } from '@cssearth/core';
 import { CAMERA_POSE_SCHEMA, parsePreparedWorldCameraFrame, type ObjectRuntimeDefinition } from '@cssearth/objects';

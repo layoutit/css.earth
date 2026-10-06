@@ -11,7 +11,7 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 // image (paged-ellipsoid presentation.ts). The bindings measure and partition that form in a browser. What ships instead
 // is one record per texture write: the unit, the page width, the initial tile, and each leaf's own offset. Every leaf's
 // prepared values are literal, resolved at the initial tile; the runtime writes a leaf's final values on each level
-// switch (packages/renderer/src/rendering/prepared-texture-levels.ts, createTextureTileWriter), so no variable or
+// switch (packages/renderer/src/rendering/textures/prepared-texture-levels.ts, createTextureTileWriter), so no variable or
 // `calc()` reaches the page. A later bindings run expands the records back to the variable form first.
 
 interface Property { name: string; value: string; custom: boolean }

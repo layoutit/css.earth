@@ -3,15 +3,15 @@ import { samePreparedCatalogueGeometry, validatePreparedVolumeDatasets, PREPARED
 import { readPrepared } from '../prepared-data-worker-client.js';
 import { readPreparedHere } from '../prepared-data/readers.js';
 import { cssVolumeReader, volumeStarsReader } from './prepared-volume-readers.js';
-import { writeData, writeStyle } from '../rendering/retained-write.js';
+import { writeData, writeStyle } from '../rendering/dom/retained-write.js';
 import { preparedVolumeTexturePaths } from './prepared-volume-runtime.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
-import { preparedDomAdoption } from '../rendering/prepared-dom-adoption.js';
+import { preparedDomAdoption } from '../rendering/dom/prepared-dom-adoption.js';
 import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
 import type { PreparedCssTransport } from '../loader.js';
 import type { VolumeCameraPublication } from './types.js';
 import { projectedVolumeOpacity, projectedVolumeRadiusPixels } from './projected-volume-visibility.js';
-import { nativeProjectedFade } from '../rendering/native-projection.js';
+import { nativeProjectedFade } from '../rendering/view/native-projection.js';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { mountPreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
 

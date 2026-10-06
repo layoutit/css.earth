@@ -1,4 +1,4 @@
-import { writeStyle } from '../rendering/retained-write.js';
+import { writeStyle } from '../rendering/dom/retained-write.js';
 import { screenPicking } from '../navigation/screen-picking.js';
 import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
 import { presentPhysicalPoseInVolume, type WorldCameraPose, cssCameraAxesFromOrientation } from '@cssearth/engine';

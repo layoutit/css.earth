@@ -1,4 +1,4 @@
-import { writeStyle } from '../rendering/retained-write.js';
+import { writeStyle } from '../rendering/dom/retained-write.js';
 import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
 import type { PreparedFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';

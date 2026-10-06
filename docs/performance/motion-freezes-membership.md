@@ -15,14 +15,14 @@ While a hand or the app drives the camera (a drag, an active zoom or pinch, a fl
 can see where you are heading. Crossings between levels of detail are staged ahead: the next level is made resident at
 opacity 0, paced, so the crossing itself is a crossfade.
 
-A body's faces keep their surfaces while they are off screen (`rendering/kept-layers.ts`). Safari gives up the surface
+A body's faces keep their surfaces while they are off screen (`rendering/dom/kept-layers.ts`). Safari gives up the surface
 of a layer that leaves the screen and makes it again when it returns, which the page cannot pace: after a zoom in, a
 zoom out on Earth made its off-screen faces again in frames of 124 to 253 ms on the iPad. A transform animation on the
 body's camera element, paused two frames after it starts, makes Safari keep them; the same zoom out then had no frame
 over 47 ms. The price is paid at rest: the sharper pages a zoom in asks for are painted on the faces off screen too
 (about ten frames of 33 to 49 ms where there were two), and those faces hold 58 MB more in the page's process
 (2026-10-05). Those pages land a slice a frame, and what is left of them waits whenever the camera moves again
-(`rendering/prepared-presentation.ts`): a drag begun a third of a second after a zoom in had seven or eight frames of
+(`rendering/view/prepared-presentation.ts`): a drag begun a third of a second after a zoom in had seven or eight frames of
 29 to 54 ms in its first half second, and none once the rest waited for the next pause. Each page is decoded again, off
 the page's thread, just before its first slice lands, one page at a time: the decode that made the level ready can be
 a zoom old, and WebKit keeps no decoded pixels of an image nothing draws. The Moon's pages were decoded inside their
@@ -111,7 +111,7 @@ gesture.
 - **Signal:** `src/renderers/css/navigation/camera-motion-signal.ts` tells whether the camera moves and whether it
   coasts. It is announced as `objectmotionchange` `{ active, coasting }` on the input surface. The drag controls report
   `drag`, `inertia` and `fly-to`; the wheel zoom reports `zoom` and `glide`.
-- **Pacer:** a document has one pacer (`packages/renderer/src/rendering/settle-pacer.ts`), on its one frame clock
+- **Pacer:** a document has one pacer (`packages/renderer/src/rendering/loading/settle-pacer.ts`), on its one frame clock
   (`packages/renderer/src/stars/opacity-clock.ts`), and one budget a frame that every owner shares in turn. A frame
   starts at 16 units and can grow to 64; after a frame over 25 ms the pacer waits a frame and halves it. Each owner says
   what holds its work: any motion (leaf-box steps and the seam outset, because a resized leaf repaints), only a coast,
@@ -148,7 +148,7 @@ These change paint every frame on purpose, and each has a budget:
 | --- | --- | --- | --- |
 | Orbit strokes (`solar-system/prepared-orbit-lines.ts`) | SVG `points`, `stroke-opacity` | the visible runs | Static 3D chords cost 14 ms against 3.0 ms for the shared SVG ([prepared orbit strokes](prepared-orbit-strokes.md)) |
 | Batched star points (`universe/batched-spatial-points.ts`, `universe/point-layer.ts`) | SVG paths of round-capped dots (`M x y h.01` in pixels: a zero-length cap is painted twice by WebKit, and under a group scaled down Chrome on a GPU draws the caps eight times as wide while a turn warps the layer), one per prepared paint color with its alpha byte, all in the world's one svg layer, over the galaxies' pictures and under the markers and labels (on the iPad at the Milky Way a layer per bank left 37 and 77 frames over 20 ms in 690 and 202 MB of layers, three shared layers 25 and 25 and 130 MB, 2026-10-03; zooming out of Earth three layers held 60.5 MB and one holds 40 MB, 2026-10-04); a bank dims by its strokes' opacity, since a group's opacity is an offscreen pass on each repaint; a turn or a zoom warps the layer's last paint, and dots a zoom adds arrive through the pacer; a bank that arrives during a zoom is read, styled and resolved in the pacer's slices and drawn once it is whole (the nearby galaxies' 39,916 points were one frame of 172 to 218 ms on the iPad and are frames of at most 33 ms, 2026-10-03); a camera whose travel moves the dots repaints them as it goes, without the margin a turn warps in, a third of the dots written, which the pause paints back; every repaint (the travelling one, the dots a zoom adds, the pause's exact one) writes the share of the dots the frame can afford: the dots are dealt into eight slots, a paint writes whole slots in turn and leaves the rest as they were, a few frames old, without projecting their points; the share is the field's part of the pacer's budget and starts at one slot after a rest (zooming in from the observable universe, the first frame set 162 KB of dot text and ran the frame loop 26 to 28 ms; it sets 22 KB and the frame is 23 to 24 ms where it was 32 to 39, and the longest frame loop of two zooms out of Earth is 13 to 14 ms where it was 18 to 27, iPad timed by the page, 2026-10-04) | One retained path per color; a color with over 2,000 points has one per slot, and its overlapping dots add up across them | Camera motion changes paint, never DOM shape |
-| Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
+| Earth's lighting frame (`rendering/textures/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
 | Sheets drawn around a body (`image-layers/prepared-image-layer-runtime.ts` `order`) | `z-index` of one sheet as the camera passes its plane | one write a passing, on a sheet that is left out at that moment | Around a body the sheets are out of the browser's depth sort, which did not draw the sheet beside the camera at some camera places; their paint order follows the side of the camera each is on |
 

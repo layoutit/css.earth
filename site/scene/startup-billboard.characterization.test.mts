@@ -20,7 +20,7 @@ mock.module(new URL('../navigation/prepared-arrival.mts', import.meta.url).href,
     };
   },
 } });
-mock.module('@cssearth/renderer/rendering/startup-gate.ts', { namedExports: { releaseStartup(window: unknown) { calls.push(['release', window]); } } });
+mock.module('@cssearth/renderer/rendering/loading/startup-gate.ts', { namedExports: { releaseStartup(window: unknown) { calls.push(['release', window]); } } });
 const { prepareStartupBillboard } = await import('./startup-billboard.mts');
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1];
 const discovery = { featured: true, imagery: true, illustration: false,

@@ -1,6 +1,6 @@
 import { createSceneLifetime } from '@cssearth/engine';
 import { labelOcclusionFor } from '@cssearth/renderer';
-import { afterStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
+import { afterStartup } from '@cssearth/renderer/rendering/loading/startup-gate.ts';
 import { prepareObjectResources, createRetainedGeometrySnapshot } from '@cssearth/renderer/universe';
 import { createCameraViewport } from '@cssearth/renderer/navigation';
 import type { PreparedLabelEdge } from '@cssearth/renderer/navigation/prepared-label-edge.ts';

@@ -5,7 +5,7 @@ import { initialStageSelection } from './initial-stage-selection.js';
 import { preparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import type { ObjectMountOptions, ObjectRuntimeView } from './object-runtime-types.js';
 
-import type { ObjectSelectionState } from "../rendering/object-selection-runtime.js";
+import type { ObjectSelectionState } from "../rendering/view/object-selection-runtime.js";
 import type { ObjectSelection } from "./object-contract.js";
 import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { SharedView } from "../navigation/view-url.js";
@@ -20,16 +20,16 @@ export type ObjectRuntimeServices = typeof nativeServices;
 
 import { createSceneLifetime } from "@cssearth/engine";
 import { waitForSceneDocument, waitForScenePaint } from "./scene-native-waits.js";
-import { createPreparedResidency } from "../rendering/prepared-residency.js";
-import { resolvePreparedAssetUrl } from "../rendering/prepared-asset-origin.js";
-import { createObjectSelectionRuntime } from "../rendering/object-selection-runtime.js";
+import { createPreparedResidency } from "../rendering/loading/prepared-residency.js";
+import { resolvePreparedAssetUrl } from "../rendering/loading/prepared-asset-origin.js";
+import { createObjectSelectionRuntime } from "../rendering/view/object-selection-runtime.js";
 import { loadPreparedDataset } from "../loader.js";
 import { cameraMotionSignalFor } from "../navigation/camera-motion-signal.js";
-import { createObjectControlBinding } from "../rendering/object-control-binding.js";
-import { createPreparedPlayback } from "../rendering/prepared-playback.js";
+import { createObjectControlBinding } from "../rendering/view/object-control-binding.js";
+import { createPreparedPlayback } from "../rendering/loading/prepared-playback.js";
 import { createRetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
-import { mountPreparedPresentation, preparedTextureLevelKeys } from "../rendering/prepared-presentation.js";
-import { afterStartup } from "../rendering/startup-gate.js";
+import { mountPreparedPresentation, preparedTextureLevelKeys } from "../rendering/view/prepared-presentation.js";
+import { afterStartup } from "../rendering/loading/startup-gate.js";
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
 import { selectedDatasetVolume } from './object-contract.js';
 

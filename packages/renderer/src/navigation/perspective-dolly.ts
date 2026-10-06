@@ -1,8 +1,8 @@
 import { type CameraPlan, type PerspectiveCameraPlan, type LevelOfDetailPlan, type OrbitLineFade } from '@cssearth/objects';
 
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
-import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
-import { showSection } from '../rendering/detached-sections.js';
+import { createSettlePacer, framePacerFor } from '../rendering/loading/settle-pacer.js';
+import { showSection } from '../rendering/dom/detached-sections.js';
 import type { Vector3 } from './types.js';
 
 import type { BodyProjection, VisibleRect } from '@cssearth/engine';
