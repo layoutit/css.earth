@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 1252 (pscomppars): age 3.9 Gyr, from Crossfield et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022ApJ...937L..17C/abstract)",
   "rotationPeriodDays": 64,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 1252 (pscomppars): rotation period 64 d, from Shporer et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020ApJ...890L...7S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 72,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 72 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.518,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 0.518 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 64,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 64 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

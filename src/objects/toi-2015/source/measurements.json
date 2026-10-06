@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2015 (pscomppars): age 5.5 Gyr, from Barkaoui et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B/abstract)",
   "rotationPeriodDays": 8.7,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2015 (pscomppars): rotation period 8.7 d, from Jones et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...93J/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 5.91057,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 5.91057 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2015 (pscomppars): projected rotation speed 2 km/s, from Barkaoui et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.281B/abstract)",
   "shape": {

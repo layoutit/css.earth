@@ -21,6 +21,24 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1860 (pscomppars): age 0.133 Gyr, from Giacalone et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract)",
   "rotationPeriodDays": 4.43,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1860 (pscomppars): rotation period 4.43 d, from Giacalone et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.448,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 4.448 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.43,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 4.43 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.43,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 4.43 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 10,
   "projectedRotationSpeedSource": "SIMBAD, HD 134319: projected rotation speed 10 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "spinInclinationDegrees": 68.7,

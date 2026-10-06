@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-6569-corona",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1302773444594819300,
+        388614693635568100,
+        -346459399197455740
+      ],
+      "localToReferenceXyzw": [
+        0.4718336701534801,
+        0.6331256878578334,
+        0.4920136860512584,
+        0.3666706748872835
+      ],
+      "metersPerUnit": 528732000.00000006,
+      "boundsUnits": {
+        "min": [
+          -4,
+          -4,
+          -4
+        ],
+        "max": [
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "hd-6569"
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}

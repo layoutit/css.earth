@@ -13,6 +13,54 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-526.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.784, rounded to two decimals",
   "spectralType": "M2V",
   "spectralTypeSource": "SIMBAD, HD 119850: spectral type M2V (1989ApJS...71..245K)",
+  "rotationPeriodDays": 52.3,
+  "rotationPeriodSource": "VizieR J/A+A/672/A37/table1 (Activity indicators in M dwarfs), column Prot: 52.3 d, the row 0.0 arcsec from the star's J2000 place. The middle of 11 catalogued periods, 9 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 8.6,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 8.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 50,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 50 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 52,
+      "source": "VizieR J/A+A/652/A28/tablea1 (Activity indicators across the M dwarf domain), column Prot: 52 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 78.778,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 78.778 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 52.3,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 52.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 52.3,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 52.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 52.3,
+      "source": "VizieR J/A+A/672/A37/table1 (Activity indicators in M dwarfs), column Prot: 52.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 52.3,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 52.3 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 52.3,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 52.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 52.3,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 52.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 52.3,
+      "source": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 52.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.48,
   "projectedRotationSpeedSource": "SIMBAD, HD 119850: projected rotation speed 1.48 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {

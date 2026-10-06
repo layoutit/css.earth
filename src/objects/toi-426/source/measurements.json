@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-426 (pscomppars): age 1.57 Gyr, from Castro-González et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract)",
   "rotationPeriodDays": 12.37,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-426 (pscomppars): rotation period 12.37 d, from Castro-González et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.459,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 6.459 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-426 (pscomppars): projected rotation speed 3.5 km/s, from Castro-González et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260905413C/abstract)",
   "spinInclinationDegrees": 59.8,

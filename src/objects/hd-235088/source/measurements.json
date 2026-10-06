@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 235088 (pscomppars): age 0.7 Gyr, from Nardiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N/abstract)",
   "rotationPeriodDays": 12.17,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 235088 (pscomppars): rotation period 12.17 d, from Nardiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 11.7178,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 11.7178 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.368,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 5.368 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.9,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 235088 (pscomppars): projected rotation speed 1.9 km/s, from Nardiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..32N/abstract)",
   "spinInclinationDegrees": 36.3,

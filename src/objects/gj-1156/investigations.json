@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gj-1156",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3907283967108054528: position at J2016.0. Distance: Gaia DR3 parallax 154.6999 +/- 0.0445 mas (same row, RUWE 1.40): 6.46 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): -1269.771, 203.444 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 3907283967108054528 (quality A), from 2018MNRAS.475.1960F; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://ui.adsabs.harvard.edu/abs/2018MNRAS.475.1960F/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.16 solar radii from Morin et al., arXiv:1005.5552, Table 1: radius 0.16 solar radii (theoretical radius) (https://arxiv.org/abs/1005.5552). Mass 0.14 solar masses from Morin et al., arXiv:1005.5552, Table 1: mass 0.14 solar masses (https://arxiv.org/abs/1005.5552). Temperature 3110 K from Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4.5V, for SIMBAD's spectral type M4.5Ve: Teff.",
+      "evidence": [
+        "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt",
+        "https://arxiv.org/abs/1005.5552"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 3907283967108054528, through the CIE 1931 2-degree observer: #ffca74. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3907283967108054528&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,110 K and log g 5.18 (u1 0.163, u2 0.501): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/600/A30"
+      ]
+    },
+    {
+      "id": "spin",
+      "subject": "Spin",
+      "status": "included",
+      "finding": "Inclination 60 degrees from the line of sight, period 0.491 d, from Morin et al., arXiv:1005.5552, Table 1: rotation period 0.491 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with; the axis's direction on the sky is a convention.",
+      "evidence": [
+        "https://arxiv.org/abs/1005.5552"
+      ]
+    }
+  ]
+}

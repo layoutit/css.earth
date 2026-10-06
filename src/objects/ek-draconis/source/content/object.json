@@ -1,0 +1,155 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ek-draconis",
+  "displayName": "EK Draconis",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.94 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1611-07751",
+          "url": "https://arxiv.org/abs/1611.07751",
+          "label": "Waite et al. (2016)",
+          "checked": "2026-10-06",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "34.4 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-ek-draconis",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-06",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "2.8 days",
+        "source": {
+          "catalogueId": "arxiv-1611-07751",
+          "url": "https://arxiv.org/abs/1611.07751",
+          "label": "Waite et al., arXiv:1611.07751, Table 1: rotation period 2.766 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with",
+          "checked": "2026-10-06",
+          "path": "source/preparation/rotation.json",
+          "locator": "source"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "ek-draconis-dataset-color.webp",
+        "surface": "ek-draconis-surface-color@2x.webp",
+        "poles": "ek-draconis-poles-color@2x.webp",
+        "source": {
+          "id": "ek-draconis-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,647 K and log g 4.47 (u1 0.488, u2 0.242): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "radial-field-2006-12",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Dec 2006",
+        "thumbnail": "ek-draconis-dataset-radial-field-2006-12.webp",
+        "surface": "ek-draconis-surface-radial-field-2006-12@2x.webp",
+        "poles": "ek-draconis-poles-radial-field-2006-12@2x.webp",
+        "source": {
+          "id": "ek-draconis-espadons-map-radial-field-2006-12",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-150",
+            "0",
+            "+150"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-150",
+              "0",
+              "+150"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Dec 2006, reconstructed in this project from 9 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Waite, Ian et al., arXiv:1611.07751 map the same run with a mean field of 90 G; this map has 93 G.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Waite et al., arXiv:1611.07751",
+      "href": "https://arxiv.org/abs/1611.07751"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1611.07751",
+      "credit": "Waite et al., arXiv:1611.07751"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ek-draconis.json",
+      "credit": "Waite et al., arXiv:1611.07751, Table 1: radius 0.94 solar radii radius; Gaia DR3 astrometry; measured spin tilt, axis direction a display convention"
+    }
+  }
+}

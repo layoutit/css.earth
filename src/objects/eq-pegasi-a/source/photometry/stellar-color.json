@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "eq-pegasi-a",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3345,
+      "lowerKelvin": 3345,
+      "upperKelvin": 3345,
+      "citation": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 247985094: Teff: 3345 K; the source gives no uncertainty, so the range is the value itself, https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+    },
+    "note": "The Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 23317+1956 WIR 1 AB: 5.2 arcsec apart, magnitudes 10.52 and 12.4: the companion gives 15.0% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

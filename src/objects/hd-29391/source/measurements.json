@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of 51 Eri (pscomppars): log10 of the luminosity in solar units 0.7574, from Elliott et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...43E/abstract)",
   "ageGyr": 0.023,
   "ageSource": "NASA Exoplanet Archive, composite parameters of 51 Eri (pscomppars): age 0.0232 Gyr, from Elliott et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...43E/abstract)",
+  "rotationPeriodDays": 0.9,
+  "rotationPeriodSource": "VizieR J/AJ/165/164/table2 (Tull RVels, rotation periods and Inclinations), column Prot: 0.9 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.9,
+      "source": "VizieR J/AJ/165/164/table2 (Tull RVels, rotation periods and Inclinations), column Prot: 0.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 65.19,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of 51 Eri (pscomppars): projected rotation speed 65.19 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
+  "spinInclinationDegrees": 53.3,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.447 solar radii): sin i = v sin i × P / (2πR) = 0.801. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."

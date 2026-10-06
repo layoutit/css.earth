@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HR 858 (pscomppars): age 2 Gyr, from Bonfanti et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract)",
   "rotationPeriodDays": 6.7,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HR 858 (pscomppars): rotation period 6.7 d, from Bonfanti et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.487,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 7.487 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 7.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HR 858 (pscomppars): projected rotation speed 7.5 km/s, from Bonfanti et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A..90B/abstract)",
   "spinInclinationDegrees": 52.1,

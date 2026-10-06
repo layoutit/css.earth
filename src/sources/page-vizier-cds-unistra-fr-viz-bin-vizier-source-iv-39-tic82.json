@@ -1,0 +1,35 @@
+{
+  "id": "page-vizier-cds-unistra-fr-viz-bin-vizier-source-iv-39-tic82",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Web page vizier.cds.unistra.fr/viz-bin/VizieR",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82",
+      "label": "vizier.cds.unistra.fr/viz-bin/VizieR"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82",
+      "checkedOn": "2026-10-06",
+      "locator": "The page as cited by a NASA Exoplanet Archive parameter set or by a spec"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "vizier.cds.unistra.fr/viz-bin/VizieR",
+      "scope": "citation",
+      "evidence": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+    }
+  ]
+}

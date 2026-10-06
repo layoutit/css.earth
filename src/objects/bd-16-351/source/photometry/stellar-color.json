@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "bd-16-351",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5291,
+      "lowerKelvin": 5291,
+      "upperKelvin": 5291,
+      "citation": "SIMBAD, measurements of BD-16 351 (table mesFe_h), row of 2024A&A...690A..97C: Teff: 5291 K; the source gives no uncertainty, so the range is the value itself, https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt"
+    },
+    "note": "The Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 02016-1610 ELP 3: 0.5 arcsec apart, magnitudes 8.43 and 9.09: the companion gives 35.3% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

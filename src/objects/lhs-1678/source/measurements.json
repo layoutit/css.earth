@@ -19,6 +19,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of LHS 1678 (pscomppars): age 7 Gyr, from Silverstein et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract)",
   "rotationPeriodDays": 64,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LHS 1678 (pscomppars): rotation period 64 d, from Silverstein et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.573,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 0.573 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.53,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of LHS 1678 (pscomppars): projected rotation speed 0.53 km/s, from Silverstein et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract)",
   "shape": {

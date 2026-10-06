@@ -19,6 +19,20 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 3473 (pscomppars): log10 of the luminosity in solar units -1.82391, from Kemmer et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract)",
   "rotationPeriodDays": 168.3,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 3473 (pscomppars): rotation period 168.3 d, from Kemmer et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.198,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 1.198 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 296.2,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 296.2 d, the row 1.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 168.3,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 168.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 3473 (pscomppars): projected rotation speed 2 km/s, from Kemmer et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract)",
   "shape": {

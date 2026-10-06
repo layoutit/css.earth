@@ -19,6 +19,106 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1313 (pscomppars): log10 of the luminosity in solar units -0.3248, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
   "ageGyr": 2.69,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-1313 (pscomppars): age 2.69 Gyr, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "rotationPeriodDays": 6.14,
+  "rotationPeriodSource": "VizieR J/ApJ/807/170/table2 (Prograde vs retrogade motions. II. KOIs), column Prot: 6.14 d, the row 0.1 arcsec from the star's J2000 place. The middle of 24 catalogued periods, 24 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.168,
+      "source": "VizieR J/A+A/557/L10/table1 (Rotation periods of 12000 Kepler stars), column Prot: 6.168 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.0754,
+      "source": "VizieR J/A+A/560/A4/table (Rotation periods of active Kepler stars), column P1: 6.0754 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.473,
+      "source": "VizieR J/A+A/560/A4/table (Rotation periods of active Kepler stars), column P2: 6.473 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.19,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 6.19 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.19,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 6.19 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.09,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 6.09 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.13,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 6.13 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.13,
+      "source": "VizieR J/A+A/679/L12/table1 (Close-in planets around fast-rotating stars), column Prot: 6.13 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.13,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 6.13 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.21,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column A18Per: 6.21 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.14,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column D21Per: 6.14 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.14,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M13Per: 6.14 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.18,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M15Per: 6.18 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.21,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column Prot: 6.21 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.16,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column W13Per: 6.16 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.138,
+      "source": "VizieR J/ApJ/775/L11/table1 (Stellar rotation periods for KOIs), column Prot: 6.138 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.18,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 6.18 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.14,
+      "source": "VizieR J/ApJ/807/170/table2 (Prograde vs retrogade motions. II. KOIs), column Prot: 6.14 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.15,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Prot: 6.15 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.21,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Protph: 6.21 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.13,
+      "source": "VizieR J/ApJS/255/17/table1 (Surface rotation & activity for Kepler stars. II.), column Prot: 6.13 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.20623,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 6.2062305216835 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.13,
+      "source": "VizieR J/MNRAS/533/1290/table1 (Properties of late-type stars in Kelper field), column Per: 6.13 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.122,
+      "source": "VizieR J/other/RMxAA/56.139/keplerd (On the evolution of angular momentum), column Per: 6.122 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 7.87,
   "projectedRotationSpeedSource": "SIMBAD, Kepler-1313: projected rotation speed 7.87 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

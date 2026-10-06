@@ -1,0 +1,30 @@
+{
+ "id": "v374-pegasi",
+ "classification": "star",
+ "order": 5803,
+ "physical": {
+  "name": "V374 Pegasi",
+  "horizonsCode": null,
+  "meanRadiusKm": 236538,
+  "gravitationalParameterKm3PerS2": 37159483211.74303,
+  "parent": null,
+  "effectiveTemperatureK": 3240
+ },
+ "physicalNotes": "Radius 0.34 solar radii from Morin et al., arXiv:0711.1418, Sect. 7: radius 0.34 solar radii (R sin i = 0.32 +/- 0.01, R ~ 0.34 for i ~ 70 deg (Sect. 7)) (https://arxiv.org/abs/0711.1418): 236,538 km at 695,700 km per solar radius. Mass 0.28 solar masses from Morin et al., arXiv:0711.1418, Sect. 7: mass 0.28 solar masses (0.28 +/- 0.05 from M_K (Sect. 7)) (https://arxiv.org/abs/0711.1418); GM is that mass times the JPL solar GM. Temperature 3240 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 283410775: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82). Spin inclination 70 degrees and rotation period 0.4456 d from Morin et al., arXiv:0711.1418, Sect. 7: rotation period 0.4456 d and an axis 70 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/0711.1418). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 330.306566078579,
+  "declinationDegrees": 28.30710892040449,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 9.102927897031304,
+  "properMotionRaMasPerYear": 372.7973047423048,
+  "properMotionDecMasPerYear": 42.797146417459096,
+  "radialVelocityKmPerS": -6.4375324,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1893189736896880640 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/v374-pegasi/source/photometry/gaia-dr3-source.csv; cross-identification HIP 108706: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+1893189736896880640",
+   "distance": "Gaia DR3 parallax 109.8548 +/- 0.0259 mas (same row, RUWE 1.17): 9.10 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 372.797, 42.797 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -6.44 +/- 1.20 km/s"
+  }
+ }
+}

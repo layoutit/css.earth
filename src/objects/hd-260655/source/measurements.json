@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 260655 (pscomppars): age 5 Gyr, from Luque et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...664A.199L/abstract)",
   "rotationPeriodDays": 37.5,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 260655 (pscomppars): rotation period 37.5 d, from Luque et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...664A.199L/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 37.5,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 37.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 37.5,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 37.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 260655 (pscomppars): projected rotation speed 2 km/s, from Luque et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...664A.199L/abstract)",
   "shape": {

@@ -17,8 +17,22 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3649422995468596480, flags_flame 00: lum_flame 14.596703 solar luminosities (16th to 84th percentiles 14.477324 to 14.732461); its log10 is recorded",
   "ageGyr": 1.466,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3649422995468596480, flags_flame 00: age_flame 1.4657379 Gyr (16th to 84th percentiles 1.3059146 to 1.6643856)",
+  "rotationPeriodDays": 6.667,
+  "rotationPeriodSource": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 6.667 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.667,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 6.667 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 8,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 15.85,
   "projectedRotationSpeedSource": "SIMBAD, * phi Vir: projected rotation speed 15.85 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "spinInclinationDegrees": 29.5,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (4.243 solar radii): sin i = v sin i × P / (2πR) = 0.492. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

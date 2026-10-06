@@ -1,0 +1,30 @@
+{
+ "id": "tyc-6349-200-1",
+ "classification": "star",
+ "order": 5796,
+ "physical": {
+  "name": "TYC 6349-200-1",
+  "horizonsCode": null,
+  "meanRadiusKm": 667872,
+  "gravitationalParameterKm3PerS2": 112805574035.64847,
+  "parent": null,
+  "effectiveTemperatureK": 4144
+ },
+ "physicalNotes": "Radius 0.96 solar radii from Folsom et al., arXiv:1601.00684, Table 2: radius 0.96 solar radii (https://arxiv.org/abs/1601.00684): 667,872 km at 695,700 km per solar radius. Mass 0.85 solar masses from Folsom et al., arXiv:1601.00684, Table 2: mass 0.85 solar masses (https://arxiv.org/abs/1601.00684); GM is that mass times the JPL solar GM. Temperature 4144 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 206190624: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82). Spin inclination 52 degrees and rotation period 3.41 d from Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.41 d and an axis 52 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1601.00684). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 314.0116622464877,
+  "declinationDegrees": -17.181889317164853,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 46.08504719367456,
+  "properMotionRaMasPerYear": 57.31734482802342,
+  "properMotionDecMasPerYear": -62.20301309641886,
+  "radialVelocityKmPerS": -8.06,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 6882838031333427456 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/tyc-6349-200-1/source/photometry/gaia-dr3-source.csv; cross-identification HD 358623: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+6882838031333427456",
+   "distance": "Gaia DR3 parallax 21.6990 +/- 0.0213 mas (same row, RUWE 0.97): 46.09 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 57.317, -62.203 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 6882838031333427456 (quality A), from 2018yCat.1345....0G; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2018yCat.1345....0G/abstract)"
+  }
+ }
+}

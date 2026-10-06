@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "v374-pegasi",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3240,
+      "lowerKelvin": 3240,
+      "upperKelvin": 3240,
+      "citation": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 283410775: Teff: 3240 K; the source gives no uncertainty, so the range is the value itself, https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+    },
+    "note": "The Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 22012+2818 RAO 691: 0.3 arcsec apart, magnitudes 10 and 11.9: the companion gives 14.8% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

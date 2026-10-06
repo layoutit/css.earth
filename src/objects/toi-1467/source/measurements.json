@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1467 (pscomppars): log10 of the luminosity in solar units -1.42022, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
   "ageGyr": 7.2,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1467 (pscomppars): age 7.2 Gyr, from Mistry et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
+  "rotationPeriodDays": 7.345,
+  "rotationPeriodSource": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 7.345 d, the row 0.6 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.345,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 7.345 d, the row 0.6 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

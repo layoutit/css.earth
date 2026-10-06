@@ -19,6 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 85390 (pscomppars): log10 of the luminosity in solar units -0.36653, from Mordasini et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...526A.111M/abstract)",
   "ageGyr": 7.2,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 85390 (pscomppars): age 7.2 Gyr, from Mordasini et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...526A.111M/abstract)",
+  "rotationPeriodDays": 40,
+  "rotationPeriodSource": "VizieR J/ApJ/734/70/table1 (Chromospheric activity of Southern stars), column Prot: 40 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 44.9,
+      "source": "VizieR J/A+A/654/A168/tablee2 (Convective blueshifts for solar-type stars), column Prot: 44.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 40,
+      "source": "VizieR J/ApJ/734/70/table1 (Chromospheric activity of Southern stars), column Prot: 40 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 85390 (pscomppars): projected rotation speed 4 km/s, from Nordstrom et al. 2004 (https://ui.adsabs.harvard.edu/abs/2004A&A...418..989N/abstract)",
   "shape": {

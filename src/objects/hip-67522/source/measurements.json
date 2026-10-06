@@ -21,6 +21,28 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HIP 67522 (pscomppars): age 0.017 Gyr, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract)",
   "rotationPeriodDays": 1.418,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HIP 67522 (pscomppars): rotation period 1.418 d, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.42,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 1.42 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.43033,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.43033 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.71,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 0.71 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.4,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 1.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.43,
+      "source": "VizieR J/ApJ/952/63/table3 (Gaia-Chandra members of 7-25Myr clusters with ZTF), column PRot: 1.43 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 54.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HIP 67522 (pscomppars): projected rotation speed 54.2 km/s, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract)",
   "shape": {

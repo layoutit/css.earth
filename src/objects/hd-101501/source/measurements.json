@@ -17,6 +17,42 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4025850731201819392, flags_flame 00: lum_flame 0.6305987 solar luminosities (16th to 84th percentiles 0.62544936 to 0.6357354); its log10 is recorded",
   "ageGyr": 10.402,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4025850731201819392, flags_flame 00: age_flame 10.401634 Gyr (16th to 84th percentiles 8.886345 to 11.916627)",
+  "rotationPeriodDays": 16.68,
+  "rotationPeriodSource": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 16.68 d, the row 0.0 arcsec from the star's J2000 place. The middle of 8 catalogued periods, 6 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 17.1,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 17.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.521,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 16.521 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.84,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protlit: 16.84 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.1,
+      "source": "VizieR J/AJ/163/171/table1 (The EXPRES Stellar Signals Project. II. RVel), column Prot: 17.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 11 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.68,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 16.68 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.6,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 17.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10.1,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 10.1 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.26,
   "projectedRotationSpeedSource": "SIMBAD, * 61 UMa: projected rotation speed 3.26 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {

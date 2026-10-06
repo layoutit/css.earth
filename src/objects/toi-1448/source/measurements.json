@@ -19,6 +19,12 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1448 (pscomppars): log10 of the luminosity in solar units -1.75498, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
   "rotationPeriodDays": 42.28,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1448 (pscomppars): rotation period 42.28 d, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 42.3553,
+      "source": "VizieR J/other/NatAs/8.223/tables1 (Stellar spin-down law), column Prot: 42.3553073126276 d, the row 1.1 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -17,6 +17,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 100777 (pscomppars): log10 of the luminosity in solar units 0.02119, from Naef et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007A&A...470..721N/abstract)",
   "ageGyr": 5.7,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 100777 (pscomppars): age 5.7 Gyr, from Philipot et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A.107P/abstract)",
+  "rotationPeriodDays": 39,
+  "rotationPeriodSource": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 39 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 39,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 39 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 100777 (pscomppars): projected rotation speed 1.8 km/s, from Philipot et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A.107P/abstract)",
   "shape": {

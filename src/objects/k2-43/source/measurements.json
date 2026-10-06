@@ -15,6 +15,22 @@
   "spectralTypeSource": "SIMBAD, K2-43: spectral type K7V (2017ApJ...836..167D)",
   "luminosityLogSolar": -1.212,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-43 (pscomppars): log10 of the luminosity in solar units -1.21241, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "rotationPeriodDays": 9.89,
+  "rotationPeriodSource": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 9.89 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 9.89,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 9.89 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.50908,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 7.50908 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.89,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 9.89 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

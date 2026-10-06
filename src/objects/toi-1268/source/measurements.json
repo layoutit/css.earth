@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1268 (pscomppars): age 0.245 Gyr, from &Scaron;ubjak et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract)",
   "rotationPeriodDays": 10.9,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1268 (pscomppars): rotation period 10.9 d, from &Scaron;ubjak et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 10.84,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 10.84 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.21,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot1: 6.21 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.42,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot2: 9.42 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.12,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1268 (pscomppars): projected rotation speed 4.12 km/s, from &Scaron;ubjak et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...662A.107S/abstract)",
   "spinInclinationDegrees": 74.8,

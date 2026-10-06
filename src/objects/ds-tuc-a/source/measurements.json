@@ -21,6 +21,28 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of DS Tuc A (pscomppars): age 0.045 Gyr, from Newton et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
   "rotationPeriodDays": 2.85,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of DS Tuc A (pscomppars): rotation period 2.85 d, from Newton et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.85,
+      "source": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 2.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.85,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 2.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.6,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 3.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.798,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 2.798 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.849,
+      "source": "VizieR J/MNRAS/496/1197/table4 (Young exoplanets in TESS sectors 1-5), column Prot: 2.849003 d, the row 1.5 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 17.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of DS Tuc A (pscomppars): projected rotation speed 17.8 km/s, from Newton et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
   "shape": {

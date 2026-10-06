@@ -19,6 +19,68 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Barnard's star (pscomppars): log10 of the luminosity in solar units -2.44977, from González Hernández et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..79G/abstract)",
   "rotationPeriodDays": 142,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Barnard's star (pscomppars): rotation period 142 d, from González Hernández et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..79G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.09,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 2.09 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 121,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 121 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 130.4,
+      "source": "VizieR J/A+A/638/A20/tableb1 (M dwarfs X-ray activity and rotation relations), column Prot: 130.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 150,
+      "source": "VizieR J/A+A/652/A28/tablea1 (Activity indicators across the M dwarf domain), column Prot: 150 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 148.6,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 148.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 145,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 145 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 145,
+      "source": "VizieR J/A+A/672/A37/table1 (Activity indicators in M dwarfs), column Prot: 145 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 148.6,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 148.6 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 145,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 145 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 145,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 145 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.004,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 1.004 d, the row 0.6 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 149.5,
+      "source": "VizieR J/ApJ/960/62/table3 (Red dwarfs, Xray, UV, and CaII), column Prot: 149.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 149.5,
+      "source": "VizieR J/ApJ/960/62/table5 (Red dwarfs, Xray, UV, and CaII), column Prot: 149.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 149.5,
+      "source": "VizieR J/ApJ/960/62/table7 (Red dwarfs, Xray, UV, and CaII), column Prot: 149.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 145,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 145 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.08,
   "projectedRotationSpeedSource": "SIMBAD, NAME Barnard's star: projected rotation speed 3.08 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {

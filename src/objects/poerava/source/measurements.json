@@ -19,6 +19,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 221287 (pscomppars): log10 of the luminosity in solar units 0.22011, from Naef et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007A&A...470..721N/abstract)",
   "ageGyr": 1.3,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 221287 (pscomppars): age 1.3 Gyr, from Naef et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007A&A...470..721N/abstract)",
+  "rotationPeriodDays": 32.3729,
+  "rotationPeriodSource": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 32.372898 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 32.3729,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 32.372898 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 32.3729,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 32.372898 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.86,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 5.86 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.92,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 221287 (pscomppars): projected rotation speed 3.92 km/s, from Tsantaki et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...570A..80T/abstract)",
   "shape": {

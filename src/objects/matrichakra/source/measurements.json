@@ -13,8 +13,18 @@
   "spectralTypeSource": "SIMBAD, * del CrB: spectral type G5III-IVFe-1 (1989ApJS...71..245K)",
   "luminosityLogSolar": 1.562,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1222932018450870144, flags_flame 10: lum_flame 36.488945 solar luminosities (16th to 84th percentiles 36.1849 to 36.77904); its log10 is recorded",
+  "rotationPeriodDays": 24,
+  "rotationPeriodSource": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 24 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 24,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 24 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 7.2,
   "projectedRotationSpeedSource": "SIMBAD, * del CrB: projected rotation speed 7.2 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
+  "spinInclinationDegrees": 28.5,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (7.167 solar radii): sin i = v sin i × P / (2πR) = 0.477. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

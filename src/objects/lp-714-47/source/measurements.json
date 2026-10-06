@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of LP 714-47 (pscomppars): age 2.9 Gyr, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
   "rotationPeriodDays": 28.6,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LP 714-47 (pscomppars): rotation period 28.6 d, from Serrano Bell et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260713333S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 33,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 33 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 33 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 33 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of LP 714-47 (pscomppars): projected rotation speed 2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {

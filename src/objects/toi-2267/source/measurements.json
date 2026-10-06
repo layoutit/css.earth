@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2267 A (pscomppars): age 1 Gyr, from Zúñiga-Fernández et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
   "rotationPeriodDays": 0.6958,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2267 A (pscomppars): rotation period 0.6958 d, from Zúñiga-Fernández et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.695,
+      "source": "VizieR J/AJ/155/225/table1 (M dwarf stars rotational broadening measurements), column Prot: 0.695 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.65076,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 0.65076 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.695,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 0.695 d, the row 0.2 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 17.6,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2267 A (pscomppars): projected rotation speed 17.6 km/s, from Zúñiga-Fernández et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
   "shape": {

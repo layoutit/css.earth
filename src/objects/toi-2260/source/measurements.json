@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2260 (pscomppars): age 0.321 Gyr, from Giacalone et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract)",
   "rotationPeriodDays": 8.45,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2260 (pscomppars): rotation period 8.45 d, from Giacalone et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163...99G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 8.58,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 8.58 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.05,
   "projectedRotationSpeedSource": "SIMBAD, TOI-2260: projected rotation speed 5.05 km/s, the measurement SIMBAD prefers (2022AJ....163...99G)",
   "spinInclinationDegrees": 63.8,

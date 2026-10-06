@@ -21,6 +21,48 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 63433 (pscomppars): age 0.414 Gyr, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract)",
   "rotationPeriodDays": 6.4,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 63433 (pscomppars): rotation period 6.4 d, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.2506,
+      "source": "VizieR I/358/vrm (Gaia DR3 Part 4. Variability), column Prot: 4.2506048642677134 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.108,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 7.108 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.226,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 5.226 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.46,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protlit: 6.46 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.4,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 6.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.36,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 6.36 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.508,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 6.508 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.09772,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 6.09772 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.6,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 7.6 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 7.26,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 63433 (pscomppars): projected rotation speed 7.26 km/s, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.163M/abstract)",
   "spinInclinationDegrees": 79.5,

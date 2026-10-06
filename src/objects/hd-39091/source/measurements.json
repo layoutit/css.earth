@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 39091 (pscomppars): age 3.92 Gyr, from Hatzes et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..223H/abstract)",
   "rotationPeriodDays": 18.3,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 39091 (pscomppars): rotation period 18.3 d, from Kunovac Hod&#x17E;ić et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.268,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 6.268 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.3,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 18.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.9,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 33.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.34,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 39091 (pscomppars): projected rotation speed 3.34 km/s, from Hatzes et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..223H/abstract)",
   "shape": {

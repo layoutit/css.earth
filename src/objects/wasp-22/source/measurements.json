@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-22 (pscomppars): age 3 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "rotationPeriodDays": 16,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-22 (pscomppars): rotation period 16 d, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 14 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-22 (pscomppars): projected rotation speed 4.5 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {

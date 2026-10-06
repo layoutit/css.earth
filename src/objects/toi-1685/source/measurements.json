@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1685 (pscomppars): age 1.4 Gyr, from Egger et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...696A..28E/abstract)",
   "rotationPeriodDays": 18.66,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1685 (pscomppars): rotation period 18.66 d, from Luque & Pallé 2022 (https://ui.adsabs.harvard.edu/abs/2022Sci...377.1211L/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.669,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 0.669 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 19 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1685 (pscomppars): projected rotation speed 2 km/s, from Egger et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...696A..28E/abstract)",
   "shape": {

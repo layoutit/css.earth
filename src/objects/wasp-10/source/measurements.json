@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-10 (pscomppars): age 7 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "rotationPeriodDays": 11.91,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-10 (pscomppars): rotation period 11.91 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.09176,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.09176 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.09788,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 3.09788 d, the row 0.5 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-10 (pscomppars): projected rotation speed 3 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {

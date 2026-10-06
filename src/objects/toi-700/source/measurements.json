@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-700 (pscomppars): age 1.5 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "rotationPeriodDays": 54,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-700 (pscomppars): rotation period 54 d, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 37.425,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 37.425 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 54,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 54 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.51,
   "projectedRotationSpeedSource": "SIMBAD, TOI-700: projected rotation speed 1.51 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

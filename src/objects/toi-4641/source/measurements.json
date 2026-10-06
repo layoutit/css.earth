@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4641 (pscomppars): log10 of the luminosity in solar units 0.69461, from Bieryla et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract)",
   "ageGyr": 2.69,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4641 (pscomppars): age 2.69 Gyr, from Bieryla et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract)",
+  "rotationPeriodDays": 1.06,
+  "rotationPeriodSource": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 1.06 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.06,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 1.06 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 86.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4641 (pscomppars): projected rotation speed 86.3 km/s, from Bieryla et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract)",
   "shape": {

@@ -17,6 +17,22 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2536443724641751680, flags_flame 00: lum_flame 0.091816045 solar luminosities (16th to 84th percentiles 0.08678085 to 0.09698797); its log10 is recorded",
   "ageGyr": 11.349,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2536443724641751680, flags_flame 00: age_flame 11.349029 Gyr (16th to 84th percentiles 5.448491 to 13.5)",
+  "rotationPeriodDays": 16.28,
+  "rotationPeriodSource": "VizieR J/A+A/675/A180/tablec1 (Rotation of wide binaries), column ProtRH20: 16.28 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 16.28,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 16.28 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.3,
+      "source": "VizieR J/A+A/675/A180/tablec1 (Rotation of wide binaries), column Prot: 16.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.28,
+      "source": "VizieR J/A+A/675/A180/tablec1 (Rotation of wide binaries), column ProtRH20: 16.28 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

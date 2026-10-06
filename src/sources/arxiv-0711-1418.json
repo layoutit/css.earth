@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-0711-1418",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Morin et al. (2007): The stable magnetic field of the fullly-convective star V374 Peg",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0711.1418"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1365-2966.2007.12709.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/0711.1418",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/j.1365-2966.2007.12709.x",
+      "label": "Mon.Not.Roy.Astron.Soc.384:77-86,2008"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0711.1418",
+      "checkedOn": "2026-10-06",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Morin et al. (2007), Mon.Not.Roy.Astron.Soc.384:77-86,2008",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/0711.1418"
+    }
+  ],
+  "publisher": "Mon.Not.Roy.Astron.Soc.384:77-86,2008",
+  "creators": [
+    "J. Morin",
+    "J. -F. Donati",
+    "T. Forveille",
+    "et al."
+  ],
+  "publicationDate": "2007"
+}

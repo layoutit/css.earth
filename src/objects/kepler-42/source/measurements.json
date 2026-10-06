@@ -19,6 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-42 (pscomppars): log10 of the luminosity in solar units -2.62, from Muirhead et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract)",
   "ageGyr": 4.5,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-42 (pscomppars): age 4.5 Gyr, from Muirhead et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract)",
+  "rotationPeriodDays": 68.23,
+  "rotationPeriodSource": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 68.23 d, the row 0.1 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 68.23,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 68.23 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 68.23,
+      "source": "VizieR J/ApJ/849/36/table1 (Flaring activity of M dwarfs in the Kepler field), column Per: 68.23 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-42 (pscomppars): projected rotation speed 3.3 km/s, from Muirhead et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract)",
   "shape": {

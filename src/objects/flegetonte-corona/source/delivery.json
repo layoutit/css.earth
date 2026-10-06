@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "flegetonte-corona",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/flegetonte-corona/source/volume-jan-2008.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/flegetonte-corona/source/provenance.json"
+    },
+    {
+      "path": "src/objects/flegetonte-corona/source/density-jan-2008.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      176.42481973958206,
+      2.820639771490236
+    ],
+    "distancePc": 29.357055706167532,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.00013404544764424495
+  },
+  "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+  "description": "Flegetonte’s corona, derived here from an observed map of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
+  "defaultDataset": "jan-2008",
+  "framingRadiusUnits": 4,
+  "attachedTo": "flegetonte",
+  "acceptedLabResult": "flegetonte-corona-density-grids",
+  "compactInputs": {
+    "path": "src/objects/flegetonte-corona/source/volume-jan-2008.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "jan-2008",
+      "label": "Derived corona · Jan 2008",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/flegetonte-corona/source/volume-jan-2008.json"
+      }
+    }
+  ]
+}

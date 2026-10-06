@@ -19,6 +19,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2295 (pscomppars): age 10.5 Gyr, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "rotationPeriodDays": 78,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2295 (pscomppars): rotation period 78 d, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 78,
+      "source": "VizieR J/A+A/694/A36/stars (Velocity curves of 7 transiting systems), column Prot: 78 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.9,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2295 (pscomppars): projected rotation speed 3.9 km/s, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "shape": {

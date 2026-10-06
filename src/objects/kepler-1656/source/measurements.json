@@ -19,6 +19,100 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1656 (pscomppars): log10 of the luminosity in solar units 0.02083, from Q1-Q17 DR25 Supplemental KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
   "ageGyr": 6.31,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-1656 (pscomppars): age 6.31 Gyr, from Angelo et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 13.59,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 13.59 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.5,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 20.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.5,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 20.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.62,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 18.62 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.21,
+      "source": "VizieR J/A+A/679/L12/table1 (Close-in planets around fast-rotating stars), column Prot: 23.21 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 31.5787,
+      "source": "VizieR J/A+A/694/A157/tablea1 (Earth 2.0 candidates stellar magnetic activity), column Prot: 31.57866 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.62,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 18.62 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.62,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 18.62 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.28,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column A18Per: 16.28 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.82,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column D21Per: 11.82 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.37,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M13Per: 23.37 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.49,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M15Per: 23.49 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.82,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column Prot: 11.82 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.373,
+      "source": "VizieR J/ApJ/775/L11/table1 (Stellar rotation periods for KOIs), column Prot: 23.373 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.49,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 23.49 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.37,
+      "source": "VizieR J/ApJ/807/170/table2 (Prograde vs retrogade motions. II. KOIs), column Prot: 23.37 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.35,
+      "source": "VizieR J/ApJ/898/173/table2 (Solar analog rotations from Kepler & Gaia), column Per: 12.35 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 30.401,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Prot: 30.401 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.82,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Protph: 11.82 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.62,
+      "source": "VizieR J/ApJS/255/17/table1 (Surface rotation & activity for Kepler stars. II.), column Prot: 18.62 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.2838,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 16.2837718754418 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 13.7843,
+      "source": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 13.78426 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.62,
+      "source": "VizieR J/MNRAS/533/1290/table1 (Properties of late-type stars in Kelper field), column Per: 18.62 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-1656 (pscomppars): projected rotation speed 2.8 km/s, from Angelo et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..227A/abstract)",
   "shape": {

@@ -17,8 +17,18 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 15906 (pscomppars): [Fe/H] 0.02 dex, from Tuson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract)",
   "luminosityLogSolar": -0.569,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 15906 (pscomppars): log10 of the luminosity in solar units -0.56864, from Tuson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract)",
+  "rotationPeriodDays": 11.31,
+  "rotationPeriodSource": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 11.31 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 11.31,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 11.31 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 15906 (pscomppars): projected rotation speed 2.7 km/s, from Tuson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract)",
+  "spinInclinationDegrees": 52.4,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.762 solar radii): sin i = v sin i × P / (2πR) = 0.792. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

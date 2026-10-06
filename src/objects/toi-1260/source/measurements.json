@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1260 (pscomppars): age 6.7 Gyr, from Lam et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract)",
   "rotationPeriodDays": 30.63,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1260 (pscomppars): rotation period 30.63 d, from Lam et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.127,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 3.127 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1260 (pscomppars): projected rotation speed 1.5 km/s, from Lam et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1437L/abstract)",
   "shape": {

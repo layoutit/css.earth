@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "v374-pegasi",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 1893189736896880640: position at J2016.0. Distance: Gaia DR3 parallax 109.8548 +/- 0.0259 mas (same row, RUWE 1.17): 9.10 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): 372.797, 42.797 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.34 solar radii from Morin et al., arXiv:0711.1418, Sect. 7: radius 0.34 solar radii (R sin i = 0.32 +/- 0.01, R ~ 0.34 for i ~ 70 deg (Sect. 7)) (https://arxiv.org/abs/0711.1418). Mass 0.28 solar masses from Morin et al., arXiv:0711.1418, Sect. 7: mass 0.28 solar masses (0.28 +/- 0.05 from M_K (Sect. 7)) (https://arxiv.org/abs/0711.1418). Temperature 3240 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 283410775: Teff.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82",
+        "https://arxiv.org/abs/0711.1418"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 3,240 K, because the Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 22012+2818 RAO 691: 0.3 arcsec apart, magnitudes 10 and 11.9: the companion gives 14.8% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature, through the CIE 1931 2-degree observer: #ffbf7c. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,240 K and log g 4.82 (u1 0.158, u2 0.468): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/600/A30"
+      ]
+    },
+    {
+      "id": "spin",
+      "subject": "Spin",
+      "status": "included",
+      "finding": "Inclination 70 degrees from the line of sight, period 0.4456 d, from Morin et al., arXiv:0711.1418, Sect. 7: rotation period 0.4456 d and an axis 70 degrees from the line of sight, the values its magnetic maps were made with; the axis's direction on the sky is a convention.",
+      "evidence": [
+        "https://arxiv.org/abs/0711.1418"
+      ]
+    }
+  ]
+}

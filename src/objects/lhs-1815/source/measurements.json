@@ -19,6 +19,24 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of LHS 1815 (pscomppars): log10 of the luminosity in solar units -1.38722, from Gan et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G/abstract)",
   "rotationPeriodDays": 47.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LHS 1815 (pscomppars): rotation period 47.8 d, from Gan et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..160G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 51,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 51 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.814,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 3.814 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 51,
+      "source": "VizieR J/AJ/163/257/table1 (Properties of 125 M-dwarfs in the southern CVZ), column Prot: 51 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 47.8,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 47.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.65,
   "projectedRotationSpeedSource": "SIMBAD, L 181-1: projected rotation speed 1.65 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

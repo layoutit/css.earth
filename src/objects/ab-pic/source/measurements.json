@@ -19,8 +19,50 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): log10 of the luminosity in solar units -0.22631, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 0.03,
   "ageSource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): age 0.03 Gyr, from Chauvin et al. 2005 (https://ui.adsabs.harvard.edu/abs/2005A&A...438L..29C/abstract)",
+  "rotationPeriodDays": 3.87,
+  "rotationPeriodSource": "VizieR J/AJ/164/213/table1 (Power-law for cumulative flare frequency distributions), column Prot: 3.87 d, the row 0.0 arcsec from the star's J2000 place. The middle of 9 catalogued periods, 9 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.85,
+      "source": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 3.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.87329,
+      "source": "VizieR J/AJ/159/60/table2 (8695 flares from 1228 stars in TESS sectors 1 & 2), column Prot: 3.873286 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.87,
+      "source": "VizieR J/AJ/164/213/table1 (Power-law for cumulative flare frequency distributions), column Prot: 3.87 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.9,
+      "source": "VizieR J/AJ/165/164/table2 (Tull RVels, rotation periods and Inclinations), column Prot: 3.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.85,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 3.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.9,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 3.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.81494,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 3.81494 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.87276,
+      "source": "VizieR J/MNRAS/494/3596/table1 (Superflares in solar-type stars with TESS), column Prot: 3.87276 d, the row 0.9 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.861,
+      "source": "VizieR J/MNRAS/496/1197/table4 (Young exoplanets in TESS sectors 1-5), column Prot: 3.861004 d, the row 0.8 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 10.35,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): projected rotation speed 10.35 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
+  "spinInclinationDegrees": 46.4,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.093 solar radii): sin i = v sin i × P / (2πR) = 0.724. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

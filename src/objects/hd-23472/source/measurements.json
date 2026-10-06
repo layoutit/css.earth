@@ -19,6 +19,12 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 23472 (pscomppars): log10 of the luminosity in solar units -0.62525, from Barros et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract)",
   "rotationPeriodDays": 40.1,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 23472 (pscomppars): rotation period 40.1 d, from Barros et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 29.652,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 29.652 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.45,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 23472 (pscomppars): projected rotation speed 1.45 km/s, from Barros et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.154B/abstract)",
   "shape": {

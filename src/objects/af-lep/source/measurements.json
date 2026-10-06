@@ -21,10 +21,54 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of AF Lep (pscomppars): age 0.024 Gyr, from Franson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...950L..19F/abstract)",
   "rotationPeriodDays": 0.966,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of AF Lep (pscomppars): rotation period 0.966 d, from De Rosa et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..94D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.03384,
+      "source": "VizieR I/358/vrm (Gaia DR3 Part 4. Variability), column Prot: 1.0338385696929877 d, the row 0.8 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.91,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 0.91 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.966,
+      "source": "VizieR J/A+A/600/A83/sample (Photometry of beta Pic members), column Prot: 0.966 d, the row 0.9 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.704,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 0.704 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.985,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protlit: 0.985 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.01,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 1.01 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.00929,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 1.00929 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.97,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 0.97 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.8,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 0.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 54.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of AF Lep (pscomppars): projected rotation speed 54.7 km/s, from Mesa et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..93M/abstract)",
-  "spinInclinationDegrees": 56.7,
-  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.25 solar radii): sin i = v sin i × P / (2πR) = 0.836. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

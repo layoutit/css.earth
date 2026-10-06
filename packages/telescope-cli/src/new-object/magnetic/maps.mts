@@ -53,17 +53,24 @@ export async function runMagneticMaps(specPath: string, context: Context): Promi
   return results;
 }
 
+/** Whether a reduced run is a star's: a program that names its star belongs to that star alone (two stars a few arcseconds
+ * apart each have their own runs); any other belongs to the star at its place. */
+export const isRunOf = (run: { readonly object?: string; readonly ra: number; readonly dec: number }, host: string, raDegrees: number, decDegrees: number) =>
+  run.object ? run.object === host : Math.hypot((run.ra - raDegrees) * Math.cos(decDegrees * Math.PI / 180), run.dec - decDegrees) < 0.02;
+
 /** `--from-spectra HOST...`: one entry a star, with every reduced program whose target lies at the star's place, oldest
  * first; a map's label is the month and year of the middle of its run. */
 export async function draftsFromReducedPrograms(names: readonly string[], context: Context): Promise<{ readonly stars: readonly unknown[]; readonly magneticMaps: readonly unknown[]; readonly report: readonly string[] }> {
-  const magneticMaps: unknown[] = [], report: string[] = [], receipts: { program: string; ra: number; dec: number; mjd: number; tilt: number; refused?: string }[] = [];
+  const magneticMaps: unknown[] = [], report: string[] = [], receipts: { program: string; object?: string; ra: number; dec: number; mjd: number; tilt: number; refused?: string }[] = [];
   for (const name of (await readdir(PROGRAMS)).filter(file => file.endsWith('.json')).sort()) { const receipt: unknown = await readFile(receiptPath(name.slice(0, -'.json'.length)), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
     if (!isRecord(receipt) || receipt.schema !== MAP_SCHEMA || !isRecord(receipt.target) || !isRecord(receipt.map)) continue;
-    receipts.push({ program: requireString(receipt.program, 'program'), ra: requireFiniteNumber(receipt.target.raDegrees, 'raDegrees'), dec: requireFiniteNumber(receipt.target.decDegrees, 'decDegrees'), mjd: requireFiniteNumber(receipt.map.middleMjd, 'middleMjd'), tilt: requireFiniteNumber(requireRecord(requireRecord(receipt.map.star, 'map star').inclinationDegrees, 'inclination').value, 'inclination'),
+    // A program that names its star belongs to that star alone: two stars a few arcseconds apart each have their own runs.
+    const program = await readJson(resolve(PROGRAMS, name), name), object = isRecord(program) && isRecord(program.target) && typeof program.target.object === 'string' ? program.target.object : undefined;
+    receipts.push({ program: requireString(receipt.program, 'program'), ...(object ? { object } : {}), ra: requireFiniteNumber(receipt.target.raDegrees, 'raDegrees'), dec: requireFiniteNumber(receipt.target.decDegrees, 'decDegrees'), mjd: requireFiniteNumber(receipt.map.middleMjd, 'middleMjd'), tilt: requireFiniteNumber(requireRecord(requireRecord(receipt.map.star, 'map star').inclinationDegrees, 'inclination').value, 'inclination'),
       ...(isRecord(receipt.map.verdict) && receipt.map.verdict.mapped === true ? {} : { refused: isRecord(receipt.map.verdict) ? requireString(receipt.map.verdict.reason, 'verdict reason') : 'reduced before maps carried a verdict; reduce it again' }) }); }
   for (const host of names) {
     try { const { star } = await readStar(context.root, host), distance = Math.hypot(...star.originM), ra = (Math.atan2(star.originM[1], star.originM[0]) * 180 / Math.PI + 360) % 360, dec = Math.asin(star.originM[2] / distance) * 180 / Math.PI;
-      const near = receipts.filter(receipt => Math.hypot((receipt.ra - ra) * Math.cos(dec * Math.PI / 180), receipt.dec - dec) < 0.02).sort((a, b) => a.mjd - b.mjd), left: string[] = [];
+      const near = receipts.filter(receipt => isRunOf(receipt, host, ra, dec)).sort((a, b) => a.mjd - b.mjd), left: string[] = [];
       const convention = isConventionOnly(requireRecord(await readJson(resolve(context.root, star.rotationRecord), `${host}: no rotation record`), star.rotationRecord));
       const mapped = near.filter(receipt => { const why = !convention && Math.abs(receipt.tilt - star.inclinationDegrees) > TILT_TOLERANCE_DEGREES ? `mapped for a tilt of ${receipt.tilt}°, the page draws ${star.inclinationDegrees.toFixed(1)}°` : receipt.refused ?? '';
         if (why) left.push(`${receipt.program}: ${why}`); return !why; });

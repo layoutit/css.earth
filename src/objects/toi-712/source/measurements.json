@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-712 (pscomppars): age 0.83 Gyr, from Vach et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...71V/abstract)",
   "rotationPeriodDays": 12.454,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-712 (pscomppars): rotation period 12.454 d, from Vach et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...71V/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 5.83,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot1: 5.83 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10.89,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot2: 10.89 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.55,
   "projectedRotationSpeedSource": "SIMBAD, TOI-712: projected rotation speed 1.55 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "spinInclinationDegrees": 34.5,

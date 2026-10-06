@@ -21,6 +21,76 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 436 (pscomppars): age 6 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "rotationPeriodDays": 44.09,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 436 (pscomppars): rotation period 44.09 d, from Bourrier et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018Natur.553..477B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 84,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 84 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.9,
+      "source": "VizieR J/A+A/609/A117/table1 (CARMENES radial velocity curves of 7 M-dwarf), column Prot: 39.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.6,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 44.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.6,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 44.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.6,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 44.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.6,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 44.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.09,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 44.09 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.52077,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.52077 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.6,
+      "source": "VizieR J/AJ/159/52/table1 (M dwarfs at high spectral-resolution in Y band), column Prot: 44.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.09,
+      "source": "VizieR J/ApJ/907/91/fig3 (HAZMAT VII. Early M-dwarfs FUV em. line, Age and Prot), column Prot: 44.09 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.9,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 39.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 71.4,
+      "source": "VizieR J/ApJ/960/62/table3 (Red dwarfs, Xray, UV, and CaII), column Prot: 71.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 71.4,
+      "source": "VizieR J/ApJ/960/62/table5 (Red dwarfs, Xray, UV, and CaII), column Prot: 71.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 71.4,
+      "source": "VizieR J/ApJ/960/62/table7 (Red dwarfs, Xray, UV, and CaII), column Prot: 71.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.9,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 39.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 48,
+      "source": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 48 d, the row 2.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.1,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 44.1 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.33,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 436 (pscomppars): projected rotation speed 0.33 km/s, from Bourrier et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018Natur.553..477B/abstract)",
   "spinInclinationDegrees": 39.2,

@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "bd-16-351",
+  "angularDiameterMas": 0.11,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 612,216 km at 72.45 pc = 0.11 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 72.44857268015767,
+  "distanceSource": "Gaia DR3 parallax 13.8029 +/- 0.0584 mas (same row, RUWE 2.84): 72.45 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+  "radiusKm": 612216,
+  "radiusSource": "Radius 0.88 solar radii from Folsom et al., arXiv:1601.00684, Table 2: radius 0.88 solar radii (https://arxiv.org/abs/1601.00684): 612,216 km at 695,700 km per solar radius. Mass 0.9 solar masses from Folsom et al., arXiv:1601.00684, Table 2: mass 0.9 solar masses (https://arxiv.org/abs/1601.00684); GM is that mass times the JPL solar GM. Temperature 5291 K from SIMBAD, measurements of BD-16 351 (table mesFe_h), row of 2024A&A...690A..97C: Teff (https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt). Spin inclination 42 degrees and rotation period 3.21 d from Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.21 d and an axis 42 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1601.00684). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5291,
+  "effectiveTemperatureSource": "SIMBAD, measurements of BD-16 351 (table mesFe_h), row of 2024A&A...690A..97C: Teff (https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt)",
+  "surfaceGravityLogg": 4.5,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/bd-16-351.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.503, rounded to two decimals",
+  "rotationPeriodDays": 3.2458,
+  "rotationPeriodSource": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 3.24583 d, the row 0.2 arcsec from the star's J2000 place. The middle of 5 catalogued periods, 5 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.21,
+      "source": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 3.21 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.21,
+      "source": "VizieR J/A+A/591/A43/sample (Differential rotation in solar-like stars), column <P>: 3.21 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.25,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 3.25 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.24583,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 3.24583 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.39,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 3.39 d, the row 0.7 arcsec from the star's J2000 place"
+    }
+  ],
+  "projectedRotationSpeedKmS": 12.77,
+  "projectedRotationSpeedSource": "SIMBAD, BD-16 351: projected rotation speed 12.77 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

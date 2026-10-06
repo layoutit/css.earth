@@ -17,8 +17,34 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of LTT 1445 A (pscomppars): [Fe/H] -0.34 dex, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "luminosityLogSolar": -2.046,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of LTT 1445 A (pscomppars): log10 of the luminosity in solar units -2.04591, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 1.3972,
+  "rotationPeriodSource": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 1.39717 d, the row 0.0 arcsec from the star's J2000 place. The middle of 5 catalogued periods, 4 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.573,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 3.573 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.398,
+      "source": "VizieR J/AJ/165/265/table1 (Properties of 363 M-dwarfs from TESS), column PRot: 1.398 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.39717,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 1.39717 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.393,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 1.393 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.39,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 1.39 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of LTT 1445 A (pscomppars): projected rotation speed 3.4 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "spinInclinationDegrees": 20.8,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.265 solar radii): sin i = v sin i × P / (2πR) = 0.354. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

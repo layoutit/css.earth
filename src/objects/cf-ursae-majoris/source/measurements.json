@@ -13,6 +13,30 @@
   "surfaceGravitySource": "log g 4.72 from 2025A&A...698A..93J; the 115 published values span log g 3.77 to 5, across which the limb law changes by at most 0.6% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2025A%26A...698A..93J)",
   "spectralType": "K1V_Fe-1.5",
   "spectralTypeSource": "SIMBAD, HD 103095: spectral type K1V_Fe-1.5 (2003AJ....126.2048G)",
+  "rotationPeriodDays": 31,
+  "rotationPeriodSource": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 31 d, the row 0.0 arcsec from the star's J2000 place. The middle of 5 catalogued periods, 4 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 31,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 31 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 31,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 31 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 31,
+      "source": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 31 d, the row 1.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 32.2,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 32.2 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.1,
   "projectedRotationSpeedSource": "SIMBAD, HD 103095: projected rotation speed 3.1 km/s, the measurement SIMBAD prefers (2025A&A...698A..93J)",
   "shape": {

@@ -21,6 +21,72 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-538 (pscomppars): age 5.3 Gyr, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
   "rotationPeriodDays": 25.2,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Kepler-538 (pscomppars): rotation period 25.2 d, from Mayo et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..165M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 44.69,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 44.69 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.84,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 22.84 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.84,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 22.84 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24.1,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 24.1 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24.1,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 24.1 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.06,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column A18Per: 16.06 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 47.11,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column D21Per: 47.11 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M15Per: 33 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.06,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column Prot: 16.06 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 33 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.578,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Prot: 34.578 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.06,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Protph: 16.06 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24.1,
+      "source": "VizieR J/ApJS/255/17/table1 (Surface rotation & activity for Kepler stars. II.), column Prot: 24.1 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24.1,
+      "source": "VizieR J/ApJS/271/19/table3 (FGK dwarfs from LAMOST DR7 and Gaia DR3 and Kepler), column Prot: 24.1 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.0616,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 16.0616489387678 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24.1,
+      "source": "VizieR J/MNRAS/533/1290/table1 (Properties of late-type stars in Kelper field), column Per: 24.1 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-538 (pscomppars): projected rotation speed 1.1 km/s, from Mayo et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..165M/abstract)",
   "spinInclinationDegrees": 38.9,

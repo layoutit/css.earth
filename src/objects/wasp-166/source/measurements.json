@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-166 (pscomppars): age 2.1 Gyr, from Hellier et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract)",
   "rotationPeriodDays": 12.1,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-166 (pscomppars): rotation period 12.1 d, from Hellier et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 12.1,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 12.1 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-166 (pscomppars): projected rotation speed 5.1 km/s, from Hellier et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract)",
   "spinInclinationDegrees": 88.8,

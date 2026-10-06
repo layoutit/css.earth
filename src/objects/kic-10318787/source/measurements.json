@@ -13,6 +13,14 @@
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 10318787 (Gold): Asteroseismic log g 2.5499 +/- 0.0051 (https://arxiv.org/abs/2410.00102)",
   "spectralType": "G6V",
   "spectralTypeSource": "SIMBAD, 2MASS J18443142+4727585: spectral type G6V (2016A&A...594A..39F)",
+  "rotationPeriodDays": 0.255,
+  "rotationPeriodSource": "VizieR J/ApJS/211/24/table2 (Rotation periods of Kepler MS stars), column Prot: 0.255 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.255,
+      "source": "VizieR J/ApJS/211/24/table2 (Rotation periods of Kepler MS stars), column Prot: 0.255 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

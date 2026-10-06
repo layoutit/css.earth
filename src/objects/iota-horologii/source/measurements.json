@@ -19,6 +19,28 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HR 810 (pscomppars): age 2.72 Gyr, from Turnbull 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract)",
   "rotationPeriodDays": 7.9,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HR 810 (pscomppars): rotation period 7.9 d, from Pizzolato et al. 2003 (https://ui.adsabs.harvard.edu/abs/2003A&A...397..147P/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.9,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 7.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 8.5,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 8.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 27.1518,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 27.1518 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 27.1518,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 27.1518 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.7,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 7.7 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 6.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HR 810 (pscomppars): projected rotation speed 6.5 km/s, from Valenti & Fischer 2005 (https://ui.adsabs.harvard.edu/abs/2005ApJS..159..141V/abstract)",
   "shape": {

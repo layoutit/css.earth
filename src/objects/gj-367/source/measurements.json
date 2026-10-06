@@ -19,6 +19,20 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 367 (pscomppars): log10 of the luminosity in solar units -1.54061, from Lam et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021Sci...374.1271L/abstract)",
   "rotationPeriodDays": 51.3,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 367 (pscomppars): rotation period 51.3 d, from Goffo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...955L...3G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 53,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 53 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.322,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 0.322 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 48,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 48 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

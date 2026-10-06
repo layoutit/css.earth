@@ -21,6 +21,44 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of tau Boo (pscomppars): age 2 Gyr, from Butler et al. 1997 (https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B/abstract)",
   "rotationPeriodDays": 4,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of tau Boo (pscomppars): rotation period 4 d, from Butler et al. 1997 (https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.7,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 3.7 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 4 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.31,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 3.31 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.032,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 9.032 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.6,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protlit: 3.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.2,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 3.2 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 3 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 8.2,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 8.2 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 14.98,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of tau Boo (pscomppars): projected rotation speed 14.98 km/s, from Butler et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B/abstract)",
   "shape": {

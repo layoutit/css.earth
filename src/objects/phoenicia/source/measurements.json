@@ -17,8 +17,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 192263 (pscomppars): log10 of the luminosity in solar units -0.47, from Santos et al. 2003 (https://ui.adsabs.harvard.edu/abs/2003A&A...406..373S/abstract)",
   "ageGyr": 2.09,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 192263 (pscomppars): age 2.09 Gyr, from Dragomir et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012ApJ...754...37D/abstract)",
+  "rotationPeriodDays": 9.5,
+  "rotationPeriodSource": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 9.5 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 9.5,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 9.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 192263 (pscomppars): projected rotation speed 1.8 km/s, from Santos et al. 2000 (https://ui.adsabs.harvard.edu/abs/2000A&A...356..599S/abstract)",
+  "spinInclinationDegrees": 26.7,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.752 solar radii): sin i = v sin i × P / (2πR) = 0.449. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

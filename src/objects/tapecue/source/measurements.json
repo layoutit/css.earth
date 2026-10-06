@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 63765 (pscomppars): age 4.77 Gyr, from Ségransan et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...535A..54S/abstract)",
   "rotationPeriodDays": 23,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 63765 (pscomppars): rotation period 23 d, from Ségransan et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...535A..54S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 26.2,
+      "source": "VizieR J/A+A/654/A168/tablee2 (Convective blueshifts for solar-type stars), column Prot: 26.2 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.5,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 29.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.63,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 63765 (pscomppars): projected rotation speed 1.63 km/s, from Ségransan et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...535A..54S/abstract)",
   "spinInclinationDegrees": 60.6,

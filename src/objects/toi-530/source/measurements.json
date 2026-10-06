@@ -17,6 +17,14 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-530 (pscomppars): [Fe/H] 0.376 dex, from Gan et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G/abstract)",
   "luminosityLogSolar": -1.31,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-530 (pscomppars): log10 of the luminosity in solar units -1.3098, from Gan et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511...83G/abstract)",
+  "rotationPeriodDays": 0.4269,
+  "rotationPeriodSource": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 0.4269 d, the row 0.1 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.4269,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 0.4269 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

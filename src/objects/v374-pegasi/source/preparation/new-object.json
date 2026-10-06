@@ -1,0 +1,54 @@
+{
+  "id": "v374-pegasi",
+  "name": "V374 Pegasi",
+  "system": "V374 Pegasi system",
+  "description": "A star 0.34 solar radii and 0.28 solar masses that turns once in 10.7 hours; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 1893189736896880640",
+  "gaia": "1893189736896880640",
+  "paper": {
+    "url": "https://arxiv.org/abs/0711.1418",
+    "credit": "Morin et al., arXiv:0711.1418"
+  },
+  "radius": {
+    "value": 0.34,
+    "source": "Morin et al., arXiv:0711.1418, Sect. 7: radius 0.34 solar radii (R sin i = 0.32 +/- 0.01, R ~ 0.34 for i ~ 70 deg (Sect. 7))",
+    "url": "https://arxiv.org/abs/0711.1418"
+  },
+  "mass": {
+    "value": 0.28,
+    "source": "Morin et al., arXiv:0711.1418, Sect. 7: mass 0.28 solar masses (0.28 +/- 0.05 from M_K (Sect. 7))",
+    "url": "https://arxiv.org/abs/0711.1418"
+  },
+  "temperature": {
+    "value": 3240,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 283410775: Teff",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+  },
+  "spin": {
+    "inclinationDegrees": 70,
+    "periodDays": 0.4456,
+    "source": "Morin et al., arXiv:0711.1418, Sect. 7: rotation period 0.4456 d and an axis 70 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/0711.1418"
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "The Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 22012+2818 RAO 691: 0.3 arcsec apart, magnitudes 10 and 11.9: the companion gives 14.8% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 34% of the Sun's width that turns once in 10.7 hours, with a mapped magnetic field.",
+    "introduction": "Morin et al. give it 0.34 solar radii, 0.28 solar masses, a rotation period of 10.7 hours and an axis tilted 70° from the line of sight.",
+    "locator": "Morin et al., arXiv:0711.1418, Sect. 7"
+  },
+  "notes": [],
+  "order": 5803
+}

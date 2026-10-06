@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-778 (pscomppars): age 1.95 Gyr, from Clark et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract)",
   "rotationPeriodDays": 2.584,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-778 (pscomppars): rotation period 2.584 d, from Clark et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.58,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 2.58 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.531,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 2.531 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 39.9,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-778 (pscomppars): projected rotation speed 39.9 km/s, from Clark et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract)",
   "shape": {

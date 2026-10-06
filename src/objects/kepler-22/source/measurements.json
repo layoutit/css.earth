@@ -19,8 +19,66 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-22 (pscomppars): log10 of the luminosity in solar units -0.19024, from Q1-Q17 DR25 Supplemental KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
   "ageGyr": 7,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-22 (pscomppars): age 7 Gyr, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "rotationPeriodDays": 22.35,
+  "rotationPeriodSource": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 22.35 d, the row 0.1 arcsec from the star's J2000 place. The middle of 13 catalogued periods, 11 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 24.37,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 24.37 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.35,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 22.35 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.35,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 22.35 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.25,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 19.25 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.26,
+      "source": "VizieR J/A+A/679/L12/table1 (Close-in planets around fast-rotating stars), column Prot: 26.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 289.862,
+      "source": "VizieR J/A+A/694/A157/tablea1 (Earth 2.0 candidates stellar magnetic activity), column Prot: 289.8623 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.25,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 19.25 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 25.6,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 25.6 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.29,
+      "source": "VizieR J/ApJ/803/69/table1 (Kepler planetary host stars rotation periods), column Prot: 12.29 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 25.6,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 25.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.25,
+      "source": "VizieR J/ApJS/255/17/table1 (Surface rotation & activity for Kepler stars. II.), column Prot: 19.25 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.25,
+      "source": "VizieR J/ApJS/271/19/table3 (FGK dwarfs from LAMOST DR7 and Gaia DR3 and Kepler), column Prot: 19.25 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 25.2154,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 25.2153636956317 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.6,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-22 (pscomppars): projected rotation speed 0.6 km/s, from Borucki et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012ApJ...745..120B/abstract)",
+  "spinInclinationDegrees": 17.8,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.869 solar radii): sin i = v sin i × P / (2πR) = 0.305. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

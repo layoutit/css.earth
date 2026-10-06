@@ -98,6 +98,9 @@ here; the tomography smooths it, and on the test above a 20° sheet fitted ε Er
 - The method is refused for a star whose corona, at its X-ray temperature, would not be held by the star's gravity: the wind
   would pass the speed of sound inside the star. Of the six stars with maps in the repository in October 2026 this leaves out
   HD 29615 and V1358 Orionis, the two brightest in X-rays.
+- A star with a companion within 10 arcseconds that gives more of the pair's light than the color check allows is not
+  drafted: the ROSAT survey does not separate the two, so its flux is both stars' (EQ Pegasi A and B, GJ 1245 B). Its own
+  X-ray flux has to be cited by hand.
 - A magnetic map resolves only the large-scale field and misses the part of the star that never turns toward us.
 - The star's spin is left out of the gas balance, and so are flares and eruptions.
 - The direction of the rotation axis on the sky and the star's rotation phase today are not measured; the corona is drawn in

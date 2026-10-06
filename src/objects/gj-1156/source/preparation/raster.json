@@ -1,0 +1,198 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/gj-1156/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "gj-1156-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssgj-1156-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "gj-1156-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-1156-dataset-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2017-tess-quadratic.tsv",
+          "grid": {
+            "teffK": 3110,
+            "logg": 5.18,
+            "models": {
+              "Type": "q",
+              "Mod": "PC"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "aLSM",
+            "u2": "bLSM"
+          }
+        },
+        "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,110 K and log g 5.18 (u1 0.163, u2 0.501): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    },
+    {
+      "id": "radial-field-2007-03",
+      "output": "gj-1156-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-1156-dataset-{id}.webp",
+      "source": "science/espadons/gj-1156-2007-03.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2007-03",
+        "label": "Mar 2007",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/gj-1156-2007-03.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -600,
+        "maximum": 600,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-600",
+          "0",
+          "+600"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 6 ESPaDOnS spectra of 2 March 2007 to 7 March 2007 (reduced chi-square 1.25, against 1.5 with no field); mean field 119 G. A reduction made in this project, not a published map. Black line: 60 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Mar 2007",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
+    },
+    {
+      "id": "radial-field-2008-01",
+      "output": "gj-1156-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-1156-dataset-{id}.webp",
+      "source": "science/espadons/gj-1156-2008-01.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2008-01",
+        "label": "Jan 2008",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/gj-1156-2008-01.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -600,
+        "maximum": 600,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-600",
+          "0",
+          "+600"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 6 ESPaDOnS spectra of 19 January 2008 to 22 January 2008 (reduced chi-square 1.40, against 1.6 with no field); mean field 105 G. A reduction made in this project, not a published map. Black line: 60 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Jan 2008",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
+    },
+    {
+      "id": "radial-field-2009-01",
+      "output": "gj-1156-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-1156-dataset-{id}.webp",
+      "source": "science/espadons/gj-1156-2009-01.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2009-01",
+        "label": "Jan 2009",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/gj-1156-2009-01.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -600,
+        "maximum": 600,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-600",
+          "0",
+          "+600"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 9 ESPaDOnS spectra of 8 January 2009 to 10 January 2009 (reduced chi-square 1.15, against 1.3 with no field); mean field 67 G. A reduction made in this project, not a published map. Black line: 60 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Jan 2009",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "gj-1156-context-{id}{suffix}.webp",
+    "limbOutput": "gj-1156-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssgj-1156-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

@@ -21,6 +21,28 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-451 (pscomppars): age 0.125 Gyr, from Barragán et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract)",
   "rotationPeriodDays": 5.1,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-451 (pscomppars): rotation period 5.1 d, from Barragán et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.859,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 1.859 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.02,
+      "source": "VizieR J/AJ/158/77/table2 (Candidates and members of the Pisces-Eridanus stream), column Prot: 5.02 d, the row 0.6 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.3,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 5.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.85,
+      "source": "VizieR J/ApJ/890/46/table1 (Superflares on solar-type stars from TESS first year), column Per: 4.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.747,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 4.747 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 8.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-451 (pscomppars): projected rotation speed 8.7 km/s, from Barragán et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract)",
   "shape": {

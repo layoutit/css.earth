@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ek-draconis",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "EK Draconis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2006-12",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 653958
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ek-draconis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "EK Draconis",
+      "classification": "star",
+      "color": "#ffefe6",
+      "distanceAu": 7096366.9,
+      "description": "A star 94% of the Sun's width that turns once in 2.77 days, with a mapped magnetic field.",
+      "systemName": "EK Draconis system",
+      "order": 5799,
+      "context": {
+        "order": 5796
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -354072057229261600,
+        -294463549503686000,
+        956515383946240400
+      ],
+      "presentationToReference": [
+        0.057528235063784364,
+        -0.7666919144248341,
+        -0.6394325691783528,
+        0.0478554021377249,
+        -0.6376392954309347,
+        0.7688471820905491,
+        0.9971962508236193,
+        0.074830724157422,
+        -0.000008086607085954002
+      ],
+      "orbitUpReference": [
+        0.7666919144248341,
+        0.6376392954309347,
+        -0.074830724157422
+      ],
+      "metersPerUnit": 2109541.935483871,
+      "bodyRadiusM": 653958000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

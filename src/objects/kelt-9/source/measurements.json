@@ -17,6 +17,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of KELT-9 (pscomppars): log10 of the luminosity in solar units 1.58995, from Borsa et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...631A..34B/abstract)",
   "ageGyr": 0.45,
   "ageSource": "NASA Exoplanet Archive, composite parameters of KELT-9 (pscomppars): age 0.45 Gyr, from Borsa et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...631A..34B/abstract)",
+  "rotationPeriodDays": 0.5889,
+  "rotationPeriodSource": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 0.588911 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.588911,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 0.588911 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 111.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KELT-9 (pscomppars): projected rotation speed 111.8 km/s, from Borsa et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...631A..34B/abstract)",
   "shape": {

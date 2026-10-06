@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-238 (pscomppars): age 4.3 Gyr, from Suárez Mascareño et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract)",
   "rotationPeriodDays": 26,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-238 (pscomppars): rotation period 26 d, from Suárez Mascareño et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.05,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot1: 7.05 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.96,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot2: 9.96 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.84,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-238 (pscomppars): projected rotation speed 1.84 km/s, from Suárez Mascareño et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...685A..56S/abstract)",
   "shape": {

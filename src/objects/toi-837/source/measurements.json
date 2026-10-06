@@ -21,6 +21,24 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-837 (pscomppars): age 0.035 Gyr, from Barragán et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract)",
   "rotationPeriodDays": 2.973,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-837 (pscomppars): rotation period 2.973 d, from Damasso et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A..15D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.98,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 2.98 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.99,
+      "source": "VizieR J/ApJ/962/16/table4 (TESS LC analysis of 5 open cluster members), column Prot1: 2.99 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.957,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 2.957 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 16.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-837 (pscomppars): projected rotation speed 16.8 km/s, from Barragán et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract)",
   "spinInclinationDegrees": 69.8,

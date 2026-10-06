@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hip-76768",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 6254299662396908288: position at J2016.0. Distance: Gaia DR3 parallax 25.9557 +/- 0.0401 mas (same row, RUWE 1.81): 38.53 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published. Proper motion: Gaia DR3 (same row): -59.260, -150.492 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 6254299662396908288 (quality A), from 2021A&A...645A..30Z; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://ui.adsabs.harvard.edu/abs/2021A&A...645A..30Z/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.85 solar radii from Folsom et al., arXiv:1601.00684, Table 2: radius 0.85 solar radii (https://arxiv.org/abs/1601.00684). Mass 0.8 solar masses from Folsom et al., arXiv:1601.00684, Table 2: mass 0.8 solar masses (https://arxiv.org/abs/1601.00684). Temperature 4440 K from Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row K5V, for SIMBAD's spectral type K5V: Teff.",
+      "evidence": [
+        "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt",
+        "https://arxiv.org/abs/1601.00684"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 4,440 K, because no archive holds a spectrum of this star (stis-ngsl: HD 139751 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #ffdcb9. Routes tried in order: stis-ngsl: HD 139751 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,440 K and log g 4.48 (u1 0.787, u2 0.010): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "spin",
+      "subject": "Spin",
+      "status": "included",
+      "finding": "Inclination 60 degrees from the line of sight, period 3.7 d, from Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.7 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with; the axis's direction on the sky is a convention.",
+      "evidence": [
+        "https://arxiv.org/abs/1601.00684"
+      ]
+    }
+  ]
+}

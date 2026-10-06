@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 168746 (pscomppars): log10 of the luminosity in solar units 0.04139, from Pepe et al. 2002 (https://ui.adsabs.harvard.edu/abs/2002A&A...388..632P/abstract)",
   "ageGyr": 8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 168746 (pscomppars): age 8 Gyr, from Ghezzi et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010ApJ...720.1290G/abstract)",
+  "rotationPeriodDays": 9.3,
+  "rotationPeriodSource": "VizieR J/AJ/170/32/table3 (TI-DYE. III. TOI-2076 light curves & comoving stars), column Prot: 9.3 d, the row 1.2 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 9.3,
+      "source": "VizieR J/AJ/170/32/table3 (TI-DYE. III. TOI-2076 light curves & comoving stars), column Prot: 9.3 d, the row 1.2 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 168746 (pscomppars): projected rotation speed 1 km/s, from Pepe et al. 2002 (https://ui.adsabs.harvard.edu/abs/2002A&A...388..632P/abstract)",
+  "spinInclinationDegrees": 9.9,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.072 solar radii): sin i = v sin i × P / (2πR) = 0.171. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -17,8 +17,26 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3796442680948579328, flags_flame 00: lum_flame 3.5893736 solar luminosities (16th to 84th percentiles 3.5720963 to 3.609939); its log10 is recorded",
   "ageGyr": 5.564,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3796442680948579328, flags_flame 00: age_flame 5.5639296 Gyr (16th to 84th percentiles 4.945841 to 6.182081)",
+  "rotationPeriodDays": 14,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 14 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 14 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.091,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 17.091 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 12 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.41,
   "projectedRotationSpeedSource": "SIMBAD, * bet Vir: projected rotation speed 3.41 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
+  "spinInclinationDegrees": 34.1,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.681 solar radii): sin i = v sin i × P / (2πR) = 0.561. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

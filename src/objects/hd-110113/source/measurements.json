@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 110113 (pscomppars): age 4 Gyr, from Osborn et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.4842O/abstract)",
   "rotationPeriodDays": 20.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 110113 (pscomppars): rotation period 20.8 d, from Osborn et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.4842O/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.541,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 2.541 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.74,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 110113 (pscomppars): projected rotation speed 1.74 km/s, from Osborn et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.4842O/abstract)",
   "spinInclinationDegrees": 47.6,

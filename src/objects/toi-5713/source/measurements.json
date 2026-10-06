@@ -19,6 +19,16 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5713 (pscomppars): log10 of the luminosity in solar units -2.05849, from Ghachoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract)",
   "ageGyr": 4.5,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5713 (pscomppars): age 4.5 Gyr, from Ghachoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.263G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 5.59282,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 5.59282 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.51228,
+      "source": "VizieR J/other/NatAs/8.223/tables1 (Stellar spin-down law), column Prot: 9.51228365265671 d, the row 1.8 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.96,
   "projectedRotationSpeedSource": "SIMBAD, TOI-5713: projected rotation speed 3.96 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

@@ -15,6 +15,20 @@
   "spectralTypeSource": "SIMBAD, K2-83: spectral type M1V (2017ApJ...836..167D)",
   "luminosityLogSolar": -1.204,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-83 (pscomppars): log10 of the luminosity in solar units -1.20362, from Barros et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 15.7554,
+      "source": "VizieR J/ApJS/243/28/table6 (M-type star magnetic activities from LAMOST & Kepler), column Per: 15.75541 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.0054,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 0.0054 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 31.32,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 31.32 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.5,
   "projectedRotationSpeedSource": "SIMBAD, K2-83: projected rotation speed 1.5 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 6434 (pscomppars): log10 of the luminosity in solar units 0.05, from Mayor et al. 2004 (https://ui.adsabs.harvard.edu/abs/2004A&A...415..391M/abstract)",
   "ageGyr": 11.27,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 6434 (pscomppars): age 11.27 Gyr, from Hinkel et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....150..169H/abstract)",
+  "rotationPeriodDays": 21.998,
+  "rotationPeriodSource": "VizieR J/A+A/415/391/stars (The CORALIE survey for extrasolar planets. XII), column Per: 21.998 d, the row 0.7 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 21.998,
+      "source": "VizieR J/A+A/415/391/stars (The CORALIE survey for extrasolar planets. XII), column Per: 21.998 d, the row 0.7 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 6434 (pscomppars): projected rotation speed 2.2 km/s, from Hinkel et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....150..169H/abstract)",
+  "spinInclinationDegrees": 57.6,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.133 solar radii): sin i = v sin i × P / (2πR) = 0.844. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

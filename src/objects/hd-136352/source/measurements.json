@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 136352 (pscomppars): age 12.3 Gyr, from Delrez et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract)",
   "rotationPeriodDays": 23.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 136352 (pscomppars): rotation period 23.8 d, from Delrez et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021NatAs...5..775D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 25,
+      "source": "VizieR J/A+A/654/A168/tablee2 (Convective blueshifts for solar-type stars), column Prot: 25 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 23 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 23 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 136352 (pscomppars): projected rotation speed 1 km/s, from Ehrenreich et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671A.154E/abstract)",
   "spinInclinationDegrees": 26.4,

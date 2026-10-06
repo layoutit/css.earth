@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-6109 (pscomppars): age 0.075 Gyr, from Dattilo et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract)",
   "rotationPeriodDays": 3.02,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-6109 (pscomppars): rotation period 3.02 d, from Dattilo et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.232,
+      "source": "VizieR J/A+A/699/A251/tabler2 (Rotation-activity relationship and gyrochronology), column Prot: 3.232 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.99554,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 2.99554 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.2,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 3.2 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 18.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6109 (pscomppars): projected rotation speed 18.2 km/s, from Dattilo et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract)",
   "shape": {

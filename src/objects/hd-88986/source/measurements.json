@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 88986 (pscomppars): age 7.9 Gyr, from Heidari et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract)",
   "rotationPeriodDays": 25,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 88986 (pscomppars): rotation period 25 d, from Heidari et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 24.3,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 24.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 88986 (pscomppars): projected rotation speed 3.3 km/s, from Heidari et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...681A..55H/abstract)",
   "shape": {

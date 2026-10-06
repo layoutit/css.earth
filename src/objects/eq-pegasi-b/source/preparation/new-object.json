@@ -1,0 +1,49 @@
+{
+  "id": "eq-pegasi-b",
+  "name": "EQ Pegasi B",
+  "system": "EQ Pegasi B system",
+  "description": "A star 0.25 solar radii and 0.25 solar masses that turns once in 9.72 hours; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 2824770686019004032",
+  "gaia": "2824770686019004032",
+  "paper": {
+    "url": "https://arxiv.org/abs/0808.1423",
+    "credit": "Morin et al., arXiv:0808.1423"
+  },
+  "radius": {
+    "value": 0.25,
+    "source": "Morin et al., arXiv:0808.1423, Table 1: radius 0.25 solar radii (theoretical radius; R sin i = 0.23(1))",
+    "url": "https://arxiv.org/abs/0808.1423"
+  },
+  "mass": {
+    "value": 0.25,
+    "source": "Morin et al., arXiv:0808.1423, Table 1: mass 0.25 solar masses",
+    "url": "https://arxiv.org/abs/0808.1423"
+  },
+  "temperature": {
+    "value": 3210,
+    "source": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4V, for SIMBAD's spectral type M4.0Ve: Teff",
+    "url": "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt"
+  },
+  "spin": {
+    "inclinationDegrees": 60,
+    "periodDays": 0.405,
+    "source": "Morin et al., arXiv:0808.1423, Table 1: rotation period 0.405 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/0808.1423"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 25% of the Sun's width that turns once in 9.72 hours, with a mapped magnetic field.",
+    "introduction": "Morin et al. give it 0.25 solar radii, 0.25 solar masses, a rotation period of 9.72 hours and an axis tilted 60° from the line of sight.",
+    "locator": "Morin et al., arXiv:0808.1423, Table 1"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 3.41,
+    "uncertainty": 0.0055,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2824770686019004032 (quality A), from 2018MNRAS.475.1960F; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.475.1960F/abstract"
+  },
+  "order": 5787
+}

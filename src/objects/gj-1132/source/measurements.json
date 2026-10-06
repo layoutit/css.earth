@@ -21,6 +21,36 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 1132 (pscomppars): age 5 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "rotationPeriodDays": 122.3,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 1132 (pscomppars): rotation period 122.3 d, from Bonfils et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...618A.142B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 129.15,
+      "source": "VizieR J/AJ/156/217/table1 (Stellar properties for M dwarfs in MEarth-South), column Per: 129.15 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 129.15,
+      "source": "VizieR J/ApJ/905/107/table1 (Spectroscopic activity indicators of TIC stars), column Prot: 129.15 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 129.15,
+      "source": "VizieR J/ApJ/916/77/table3 (K2 rotation periods for SDSS & Gaia M dwarfs), column Per: 129.14999 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.0023,
+      "source": "VizieR J/ApJ/935/104/table1 (Catalog of Stellar Flares in 219 M-dwarfs), column Prot: 0.0023 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 129.15,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 129.15 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 129.15,
+      "source": "VizieR J/ApJ/960/62/table5 (Red dwarfs, Xray, UV, and CaII), column Prot: 129.15 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 122.3,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 122.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 1132 (pscomppars): projected rotation speed 2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {

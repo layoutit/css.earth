@@ -19,6 +19,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-121 (pscomppars): age 1.11 Gyr, from Sing et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..231S/abstract)",
   "rotationPeriodDays": 1.13,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-121 (pscomppars): rotation period 1.13 d, from Bourrier et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...635A.205B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.38,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 3.38 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 13.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-121 (pscomppars): projected rotation speed 13.5 km/s, from Pelletier et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A...2P/abstract)",
   "shape": {

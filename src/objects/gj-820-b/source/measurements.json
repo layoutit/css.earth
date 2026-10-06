@@ -13,6 +13,22 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-820-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.679, rounded to two decimals",
   "spectralType": "K7V",
   "spectralTypeSource": "SIMBAD, * 61 Cyg B: spectral type K7V (1989ApJS...71..245K)",
+  "rotationPeriodDays": 37.84,
+  "rotationPeriodSource": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 37.84 d, the row 0.1 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 48,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 48 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 37.84,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 37.84 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 37.84,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 37.84 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.21,
   "projectedRotationSpeedSource": "SIMBAD, * 61 Cyg B: projected rotation speed 3.21 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {

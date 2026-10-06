@@ -13,8 +13,18 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/xi-geminorum.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.804, rounded to two decimals",
   "spectralType": "F5IV-V",
   "spectralTypeSource": "SIMBAD, * ksi Gem: spectral type F5IV-V (2003AJ....126.2048G)",
+  "rotationPeriodDays": 1.5,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 1.5 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.5,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 1.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 66.1,
   "projectedRotationSpeedSource": "SIMBAD, * ksi Gem: projected rotation speed 66.1 km/s, the measurement SIMBAD prefers (2009A&A...493.1099S)",
+  "spinInclinationDegrees": 46.3,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (2.71 solar radii): sin i = v sin i × P / (2πR) = 0.723. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 448) (photometry/stellar-color.json); no image of the photosphere exists."

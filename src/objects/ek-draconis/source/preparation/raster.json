@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/ek-draconis/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "ek-draconis-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssek-draconis-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "ek-draconis-surface-{id}{suffix}.webp",
+      "thumbnail": "ek-draconis-dataset-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2011-v-quadratic.tsv",
+          "grid": {
+            "teffK": 5647,
+            "logg": 4.47,
+            "models": {
+              "Filt": "V",
+              "Met": "L",
+              "Mod": "A"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        },
+        "qualification": "Photosphere color from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,647 K and log g 4.47 (u1 0.488, u2 0.242): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    },
+    {
+      "id": "radial-field-2006-12",
+      "output": "ek-draconis-surface-{id}{suffix}.webp",
+      "thumbnail": "ek-draconis-dataset-{id}.webp",
+      "source": "science/espadons/ek-dra-2006-11.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2006-12",
+        "label": "Dec 2006",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/ek-dra-2006-11.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -150,
+        "maximum": 150,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-150",
+          "0",
+          "+150"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 9 ESPaDOnS spectra of 30 November 2006 to 11 December 2006 (reduced chi-square 1.25, against 8.5 with no field); mean field 93 G. A reduction made in this project, not a published map. Black line: 60 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Dec 2006",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "ek-draconis-context-{id}{suffix}.webp",
+    "limbOutput": "ek-draconis-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssek-draconis-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

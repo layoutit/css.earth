@@ -17,6 +17,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-34 (pscomppars): log10 of the luminosity in solar units 0.0393, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 7.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-34 (pscomppars): age 7.8 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodDays": 34,
+  "rotationPeriodSource": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 34 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 34,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 34 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-34 (pscomppars): projected rotation speed 1.4 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {

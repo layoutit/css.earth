@@ -17,6 +17,34 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4358031335898505472, flags_flame 00: lum_flame 0.46337712 solar luminosities (16th to 84th percentiles 0.4583488 to 0.46840614); its log10 is recorded",
   "ageGyr": 12.081,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4358031335898505472, flags_flame 00: age_flame 12.081424 Gyr (16th to 84th percentiles 4.2856083 to 13.5)",
+  "rotationPeriodDays": 18,
+  "rotationPeriodSource": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 18 d, the row 0.0 arcsec from the star's J2000 place. The middle of 6 catalogued periods, 4 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 21.3,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 21.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 11 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.33533,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 9.33533 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 18 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 21.07,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 21.07 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.4,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 19.4 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.08,
   "projectedRotationSpeedSource": "SIMBAD, * 12 Oph: projected rotation speed 3.08 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

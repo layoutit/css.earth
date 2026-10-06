@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202037830",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Zúñiga-Fernández et al. (2021): Search for associations containing young stars (SACY)",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2010.08575"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202037830"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2021A&A...645A..30Z"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...645A..30Z",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202037830",
+      "label": "Astronomy & Astrophysics 645 A30"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...645A..30Z",
+      "checkedOn": "2026-10-06",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Zúñiga-Fernández et al. (2021), Astronomy & Astrophysics 645 A30",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2021A&A...645A..30Z"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 645 A30",
+  "creators": [
+    "S. Zúñiga-Fernández",
+    "A. Bayo",
+    "P. Elliott",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

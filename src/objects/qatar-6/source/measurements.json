@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of Qatar-6 (pscomppars): age 1.02 Gyr, from Alsubai et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)",
   "rotationPeriodDays": 12.75,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Qatar-6 (pscomppars): rotation period 12.75 d, from Alsubai et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 9.48672,
+      "source": "VizieR I/358/vrm (Gaia DR3 Part 4. Variability), column Prot: 9.48671811260276 d, the row 0.9 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.96,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 12.96 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.9,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Qatar-6 (pscomppars): projected rotation speed 2.9 km/s, from Alsubai et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155...52A/abstract)",
   "shape": {

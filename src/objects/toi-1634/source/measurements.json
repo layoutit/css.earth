@@ -19,6 +19,16 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1634 (pscomppars): log10 of the luminosity in solar units -1.5784, from Hirano et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..161H/abstract)",
   "rotationPeriodDays": 77,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1634 (pscomppars): rotation period 77 d, from Palethorpe et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag520P/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.989,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 0.989 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24.8,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 24.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1634 (pscomppars): projected rotation speed 1.3 km/s, from Palethorpe et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag520P/abstract)",
   "shape": {

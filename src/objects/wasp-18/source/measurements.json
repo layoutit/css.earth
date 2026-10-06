@@ -17,6 +17,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-18 (pscomppars): log10 of the luminosity in solar units 0.42813, from Cortés-Zuleta et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract)",
   "ageGyr": 1.57,
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-18 (pscomppars): age 1.57 Gyr, from Cortés-Zuleta et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract)",
+  "rotationPeriodDays": 0.8914,
+  "rotationPeriodSource": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 0.891369 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.891369,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 0.891369 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.891369,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 0.891369 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 11.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-18 (pscomppars): projected rotation speed 11.2 km/s, from Deline et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...699A.150D/abstract)",
   "shape": {

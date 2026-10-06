@@ -1,0 +1,30 @@
+{
+ "id": "tyc-1987-509-1",
+ "classification": "star",
+ "order": 5794,
+ "physical": {
+  "name": "TYC 1987-509-1",
+  "horizonsCode": null,
+  "meanRadiusKm": 577431,
+  "gravitationalParameterKm3PerS2": 119441196037.74544,
+  "parent": null,
+  "effectiveTemperatureK": 5340
+ },
+ "physicalNotes": "Radius 0.83 solar radii from Folsom et al., arXiv:1711.08636, Table 2: radius 0.83 solar radii (https://arxiv.org/abs/1711.08636): 577,431 km at 695,700 km per solar radius. Mass 0.9 solar masses from Folsom et al., arXiv:1711.08636, Table 2: mass 0.9 solar masses (https://arxiv.org/abs/1711.08636); GM is that mass times the JPL solar GM. Temperature 5340 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 307751624: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82). Spin inclination 67 degrees and rotation period 9.43 d from Folsom et al., arXiv:1711.08636, Table 2: rotation period 9.43 d and an axis 67 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1711.08636). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 177.15702196601578,
+  "declinationDegrees": 28.27510761309732,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 88.73449284835849,
+  "properMotionRaMasPerYear": -11.88460322182378,
+  "properMotionDecMasPerYear": -9.162783796477065,
+  "radialVelocityKmPerS": 0.6075931,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4019588600164776448 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/tyc-1987-509-1/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 11.2696 +/- 0.0191 mas (same row, RUWE 1.32): 88.73 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -11.885, -9.163 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 0.61 +/- 0.25 km/s"
+  }
+ }
+}

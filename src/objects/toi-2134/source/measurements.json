@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2134 (pscomppars): age 3.8 Gyr, from Rescigno et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)",
   "rotationPeriodDays": 48.94,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2134 (pscomppars): rotation period 48.94 d, from Rescigno et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.0232,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.0232 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2134 (pscomppars): projected rotation speed 2 km/s, from Rescigno et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)",
   "shape": {

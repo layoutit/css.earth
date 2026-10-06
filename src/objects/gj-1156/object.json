@@ -1,0 +1,156 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-1156",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "GJ 1156",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2007-03",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2008-01",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2009-01",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 111312
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gj-1156-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "GJ 1156",
+      "classification": "star",
+      "color": "#ffca74",
+      "distanceAu": 1333335.4,
+      "description": "A star 16% of the Sun's width that turns once in 11.8 hours, with a mapped magnetic field.",
+      "systemName": "GJ 1156 system",
+      "order": 5788,
+      "context": {
+        "order": 5785
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -195045432734205500,
+        -16165590888049452,
+        38495356445574390
+      ],
+      "presentationToReference": [
+        -0.7506822699109977,
+        -0.6554785223438524,
+        -0.08260772595339672,
+        -0.06219190492235422,
+        -0.05437100181387605,
+        0.9965821396773495,
+        0.6577296531276361,
+        -0.7532540746040974,
+        -0.00004988911872135281
+      ],
+      "orbitUpReference": [
+        0.6554785223438524,
+        0.05437100181387605,
+        0.7532540746040974
+      ],
+      "metersPerUnit": 359070.96774193546,
+      "bodyRadiusM": 111312000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,44 @@
+# EK Draconis
+
+## Sources
+
+Waite et al. give it 0.94 solar radii, 0.95 solar masses, a rotation period of 2.77 days and an axis tilted 60° from the line of sight. It is also HD 129333, HIP 71631. The introduction is generated from Waite et al., arXiv:1611.07751's published values; the sections below are the data's own.
+
+**Star.** Placement: Gaia DR3 source 1668690628102524672, parallax 29.066 ± 0.022 mas (34.40 pc); its RUWE is 1.4, so the single-star astrometry fits poorly, and the parallax is used as published. Radius 0.94 solar radii from Waite et al., arXiv:1611.07751, Table 1: radius 0.94 solar radii (https://arxiv.org/abs/1611.07751). Mass 0.95 solar masses from Waite et al., arXiv:1611.07751, Table 1: mass 0.95 solar masses (https://arxiv.org/abs/1611.07751). Temperature 5,647 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: Teff. log g 4.47 from the mass and radius.
+
+**Color.** A Planck spectrum at 5,647 K, because the Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 14390+6417 KON 1: 0.8 arcsec apart, magnitudes 6 and 8.9: the companion gives 6.5% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature, through the CIE 1931 2° observer: #ffefe6. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,647 K and log g 4.47 (u1 0.488, u2 0.242): a model, because no fit of this star's limb is used.
+
+**Spin.** 60° from the line of sight, period 2.766 d (Waite et al., arXiv:1611.07751, Table 1: rotation period 2.766 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with). The axis's direction on the sky is unmeasured and set toward celestial north.
+- **Magnetic maps.** 9 polarised spectra from CFHT's ESPaDOnS spectropolarimeter, in the
+  [Canadian Astronomy Data Centre](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/) archive (CC BY 4.0): 9 of 30 November 2006 to 11 December 2006 (programs 06BC10, 06BF08, 06BF42).
+  The programs `ek-dra-2006-11` in
+  [the telescope's ESPaDOnS archive](../../../packages/telescope-cli/src/archives/espadons/programs/) pin every spectrum by
+  its size. A run's receipt, with what every step measured, is a result that `reduce.mts` writes under ignored `output/espadons`. The maps are the tables in
+  `source/science/espadons/`.
+
+**Magnetic maps.** The maps of these runs are made here, with the codes the method's authors publish and nothing of our
+own in between ([A star's magnetic map from archived spectra](../../../docs/stellar-magnetic-maps-from-spectra.md)): Korg
+computes the depth of 6,541 atomic lines in a 5,647 K, log g 4.45 model atmosphere, LSDpy averages them into one
+polarised profile for each spectrum, and ZDIpy fits the field to each run's profiles. The fit uses a tilt of
+60°, an equatorial period of 2.766 days, the poles turning 0.27 rad/day slower and a projected rotation speed of 16.4 km/s
+(Waite); the page draws the star with the same tilt
+([rotation.json](source/preparation/rotation.json)). Longitude 0 faces us at the middle of each run. One color scale, ±150 G, serves
+the map.
+
+## Evidence
+
+Generated 2026-10-06 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+- Dec 2006: the map reaches a reduced chi-square of 1.25, against 8.51 with no field; mean field 92.8 G, 80% of its energy toroidal. Waite, Ian et al., arXiv:1611.07751 give 90 G and 83% for this run (instruments ESPaDOnS; poloidalPct: 17).
+
+## Known problems
+
+- **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
+
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+- **The magnetic maps are this project's reduction, not published maps.** How tightly a map is fitted is a choice the
+  mapping code leaves open; it is set on 22 published maps, whose mean fields the same recipe reproduces with a scatter of a
+  factor 1.4. The direction of the axis on the sky is not measured, only its tilt toward us.
+

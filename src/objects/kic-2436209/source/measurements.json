@@ -13,6 +13,14 @@
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 2436209 (Gold): Asteroseismic log g 2.6528 +/- 0.0045 (https://arxiv.org/abs/2410.00102)",
   "luminosityLogSolar": 1.494,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2051286795872609920, flags_flame 10: lum_flame 31.201447 solar luminosities (16th to 84th percentiles 26.2028 to 36.912037); its log10 is recorded",
+  "rotationPeriodDays": 0.215,
+  "rotationPeriodSource": "VizieR J/ApJS/211/24/table2 (Rotation periods of Kepler MS stars), column Prot: 0.215 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.215,
+      "source": "VizieR J/ApJS/211/24/table2 (Rotation periods of Kepler MS stars), column Prot: 0.215 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of KELT-8 (pscomppars): log10 of the luminosity in solar units 0.26483, from Mallonn et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...622A..81M/abstract)",
   "ageGyr": 5.4,
   "ageSource": "NASA Exoplanet Archive, composite parameters of KELT-8 (pscomppars): age 5.4 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodDays": 23,
+  "rotationPeriodSource": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 23 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 23,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 23 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KELT-8 (pscomppars): projected rotation speed 3.7 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {

@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 95086 (pscomppars): log10 of the luminosity in solar units 0.82124, from Galicher et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...565L...4G/abstract)",
   "ageGyr": 0.017,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 95086 (pscomppars): age 0.017 Gyr, from Rameau et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...779L..26R/abstract)",
+  "rotationPeriodDays": 3.36,
+  "rotationPeriodSource": "VizieR J/AJ/165/85/table5 (THYME. IX. MELANGE-4 association members), column PRot: 3.36 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.36,
+      "source": "VizieR J/AJ/165/85/table5 (THYME. IX. MELANGE-4 association members), column PRot: 3.36 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 17.14,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 95086 (pscomppars): projected rotation speed 17.14 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
+  "spinInclinationDegrees": 48.4,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.521 solar radii): sin i = v sin i × P / (2πR) = 0.748. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

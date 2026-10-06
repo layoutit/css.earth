@@ -15,6 +15,16 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6643589352010758400, flags_flame 00: lum_flame 2.8009448 solar luminosities (16th to 84th percentiles 2.7858472 to 2.812915); its log10 is recorded",
   "ageGyr": 2.628,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6643589352010758400, flags_flame 00: age_flame 2.628121 Gyr (16th to 84th percentiles 2.0913787 to 3.1641011)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.3,
+      "source": "VizieR J/A+A/639/A35/tablec1 (RV jitter and photometric var. correlation), column Prot: 2.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.5,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 1.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 21.88,
   "projectedRotationSpeedSource": "SIMBAD, HD 181327: projected rotation speed 21.88 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

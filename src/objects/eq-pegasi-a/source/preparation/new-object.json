@@ -1,0 +1,54 @@
+{
+  "id": "eq-pegasi-a",
+  "name": "EQ Pegasi A",
+  "system": "EQ Pegasi A system",
+  "description": "A star 0.35 solar radii and 0.39 solar masses that turns once in 1.06 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 2824770686019003904",
+  "gaia": "2824770686019003904",
+  "paper": {
+    "url": "https://arxiv.org/abs/0808.1423",
+    "credit": "Morin et al., arXiv:0808.1423"
+  },
+  "radius": {
+    "value": 0.35,
+    "source": "Morin et al., arXiv:0808.1423, Table 1: radius 0.35 solar radii (theoretical radius; R sin i = 0.37(2))",
+    "url": "https://arxiv.org/abs/0808.1423"
+  },
+  "mass": {
+    "value": 0.39,
+    "source": "Morin et al., arXiv:0808.1423, Table 1: mass 0.39 solar masses",
+    "url": "https://arxiv.org/abs/0808.1423"
+  },
+  "temperature": {
+    "value": 3345,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 247985094: Teff",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+  },
+  "spin": {
+    "inclinationDegrees": 60,
+    "periodDays": 1.06,
+    "source": "Morin et al., arXiv:0808.1423, Table 1: rotation period 1.06 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/0808.1423"
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "The Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 23317+1956 WIR 1 AB: 5.2 arcsec apart, magnitudes 10.52 and 12.4: the companion gives 15.0% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 35% of the Sun's width that turns once in 1.06 days, with a mapped magnetic field.",
+    "introduction": "Morin et al. give it 0.35 solar radii, 0.39 solar masses, a rotation period of 1.06 days and an axis tilted 60° from the line of sight.",
+    "locator": "Morin et al., arXiv:0808.1423, Table 1"
+  },
+  "notes": [],
+  "order": 5800
+}

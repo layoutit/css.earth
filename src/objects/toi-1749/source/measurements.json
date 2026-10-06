@@ -19,6 +19,16 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1749 (pscomppars): log10 of the luminosity in solar units -1.15649, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 0.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1749 (pscomppars): age 0.8 Gyr, from Fukui et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..167F/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.493,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 4.493 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.051,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 9.051 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.5,
   "projectedRotationSpeedSource": "SIMBAD, TOI-1749: projected rotation speed 1.5 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

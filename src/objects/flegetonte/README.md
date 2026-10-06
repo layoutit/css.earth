@@ -9,11 +9,26 @@ Gaia's parallax, brightness and spectrum give it 0.8 solar radii and 0.84 solar 
 **Color.** A Planck spectrum at 5,209 K, because gSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature, through the CIE 1931 2° observer: #ffe9d7. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,209 K and log g 4.51 (u1 0.597, u2 0.166): a model, because no fit of this star's limb is used.
+- **Magnetic maps.** 10 polarised spectra from CFHT's ESPaDOnS spectropolarimeter, in the
+  [Canadian Astronomy Data Centre](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/) archive (CC BY 4.0): 10 of 19 January 2008 to 30 January 2008 (programs 07BC17, 07BF10).
+  The programs `flegetonte-2008-01` in
+  [the telescope's ESPaDOnS archive](../../../packages/telescope-cli/src/archives/espadons/programs/) pin every spectrum by
+  its size. A run's receipt, with what every step measured, is a result that `reduce.mts` writes under ignored `output/espadons`. The maps are the tables in
+  `source/science/espadons/`.
+
+**Magnetic maps.** The maps of these runs are made here, with the codes the method's authors publish and nothing of our
+own in between ([A star's magnetic map from archived spectra](../../../docs/stellar-magnetic-maps-from-spectra.md)): Korg
+computes the depth of 8,081 atomic lines in a 5,276 K, log g 4.55 model atmosphere, LSDpy averages them into one
+polarised profile for each spectrum, and ZDIpy fits the field to each run's profiles. The fit uses a tilt of
+68.1°, an equatorial period of 12.3 days and a projected rotation speed of 3.23 km/s
+(src/objects/flegetonte/source/measurements.json); the page draws the star with the same tilt
+([rotation.json](source/preparation/rotation.json)). Longitude 0 faces us at the middle of each run. One color scale, ±40 G, serves
+the map.
 
 ## Evidence
 
 Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
-
+- Jan 2008: the map reaches a reduced chi-square of 1.00, against 7.00 with no field; mean field 16.4 G, 43% of its energy toroidal.
 
 ## Known problems
 
@@ -22,3 +37,7 @@ Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Quoted text.** The introduction quotes sentences of the Wikipedia article "HD 102195" (revision 1374437366) verbatim, CC BY-SA 4.0.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+- **The magnetic maps are this project's reduction, not published maps.** How tightly a map is fitted is a choice the
+  mapping code leaves open; it is set on 22 published maps, whose mean fields the same recipe reproduces with a scatter of a
+  factor 1.4. The direction of the axis on the sky is not measured, only its tilt toward us.
+

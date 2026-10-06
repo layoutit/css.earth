@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "v374-pegasi",
+  "card": {
+    "text": "A star 34% of the Sun's width that turns once in 10.7 hours, with a mapped magnetic field.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0711-1418",
+        "url": "https://arxiv.org/abs/0711.1418",
+        "label": "Morin et al. (2007), Mon.Not.Roy.Astron.Soc.384:77-86,2008",
+        "checked": "2026-10-06",
+        "locator": "Morin et al., arXiv:0711.1418, Sect. 7"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Morin et al. give it 0.34 solar radii, 0.28 solar masses, a rotation period of 10.7 hours and an axis tilted 70° from the line of sight.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0711-1418",
+        "url": "https://arxiv.org/abs/0711.1418",
+        "label": "Morin et al. (2007), Mon.Not.Roy.Astron.Soc.384:77-86,2008",
+        "checked": "2026-10-06",
+        "locator": "Morin et al., arXiv:0711.1418, Sect. 7"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "radial-field-2005-08": {
+      "title": "Radial field, Aug 2005",
+      "detail": "2 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "radial-field-2006-08": {
+      "title": "Radial field, Aug 2006",
+      "detail": "2 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    }
+  }
+}

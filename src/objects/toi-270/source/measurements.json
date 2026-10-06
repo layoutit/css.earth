@@ -17,6 +17,16 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-270 (pscomppars): [Fe/H] -0.17 dex, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "luminosityLogSolar": -1.712,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-270 (pscomppars): log10 of the luminosity in solar units -1.7122, from Van Eylen et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2154V/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.36,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 3.36 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 58,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 58 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1694 (pscomppars): log10 of the luminosity in solar units -0.41908, from Mancini et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract)",
   "ageGyr": 7.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1694 (pscomppars): age 7.8 Gyr, from Mancini et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract)",
+  "rotationPeriodDays": 38,
+  "rotationPeriodSource": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 38 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 38,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 38 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1694 (pscomppars): projected rotation speed 1.2 km/s, from Mancini et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.147M/abstract)",
   "shape": {

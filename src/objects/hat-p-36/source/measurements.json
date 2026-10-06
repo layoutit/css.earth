@@ -19,6 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-36 (pscomppars): log10 of the luminosity in solar units 0.02243, from Wang et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract)",
   "ageGyr": 6.6,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-36 (pscomppars): age 6.6 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodDays": 15.3,
+  "rotationPeriodSource": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 15.3 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 15.3,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 15.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.3,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 15.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.58,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-36 (pscomppars): projected rotation speed 3.58 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {

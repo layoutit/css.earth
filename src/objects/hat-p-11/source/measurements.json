@@ -21,6 +21,68 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-11 (pscomppars): age 2.69 Gyr, from Bourrier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract)",
   "rotationPeriodDays": 30.5,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HAT-P-11 (pscomppars): rotation period 30.5 d, from Bourrier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 29.21,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 29.21 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 28.99,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 28.99 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 28.99,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 28.99 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.38,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 29.38 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 30.5,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 30.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.38,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 29.38 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.472,
+      "source": "VizieR J/AJ/155/177/table1 (Obliquities of planetary & eclipsing binary systems), column Pphot: 29.472 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.8104,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 14.8104 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.472,
+      "source": "VizieR J/ApJ/775/L11/table1 (Stellar rotation periods for KOIs), column Prot: 29.472 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.31,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 29.31 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.47,
+      "source": "VizieR J/ApJ/807/170/table2 (Prograde vs retrogade motions. II. KOIs), column Prot: 29.47 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 30.5,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 30.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.38,
+      "source": "VizieR J/ApJS/244/21/table3 (Surface rotation & activity of Kepler stars. I.), column Prot: 29.38 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10.189,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 10.189 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 28.1596,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 28.1595823212099 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.67,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-11 (pscomppars): projected rotation speed 0.67 km/s, from Bourrier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract)",
   "spinInclinationDegrees": 32.1,

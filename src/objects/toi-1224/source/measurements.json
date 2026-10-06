@@ -17,6 +17,28 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1224 (pscomppars): age 0.21 Gyr, from Thao et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract)",
   "rotationPeriodDays": 1.23,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1224 (pscomppars): rotation period 1.23 d, from Thao et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.23003,
+      "source": "VizieR J/AJ/159/60/table2 (8695 flares from 1228 stars in TESS sectors 1 & 2), column Prot: 1.23003 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.23,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 1.23 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.15263,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 1.15263 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.23,
+      "source": "VizieR J/AJ/168/41/table3 (THYME. X. MELANGE-5 association cand. members), column Prot: 1.23 d, the row 2.6 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.166,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 1.166 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 22.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1224 (pscomppars): projected rotation speed 22.1 km/s, from Thao et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract)",
   "shape": {

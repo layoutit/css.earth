@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "tyc-5164-567-1",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5151,
+      "lowerKelvin": 5151,
+      "upperKelvin": 5151,
+      "citation": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 243635796: Teff: 5151 K; the source gives no uncertainty, so the range is the value itself, https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+    },
+    "note": "The Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 20048-0239 ELP 45 AB: 2.7 arcsec apart, magnitudes 8.05 and 10.31: the companion gives 11.1% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

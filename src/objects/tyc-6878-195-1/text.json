@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tyc-6878-195-1",
+  "card": {
+    "text": "A star 1.4 times the Sun's width that turns once in 5.7 days, with a mapped magnetic field.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1601-00684",
+        "url": "https://arxiv.org/abs/1601.00684",
+        "label": "Folsom et al. (2016)",
+        "checked": "2026-10-06",
+        "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Folsom et al. give it 1.37 solar radii, 1.17 solar masses, a rotation period of 5.7 days and an axis tilted 68° from the line of sight.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1601-00684",
+        "url": "https://arxiv.org/abs/1601.00684",
+        "label": "Folsom et al. (2016)",
+        "checked": "2026-10-06",
+        "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "radial-field-2013-06": {
+      "title": "Radial field, Jun 2013",
+      "detail": "1 epoch, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    }
+  }
+}

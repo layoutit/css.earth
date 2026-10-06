@@ -21,6 +21,60 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-25 (pscomppars): age 0.73 Gyr, from Stefansson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract)",
   "rotationPeriodDays": 1.878,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-25 (pscomppars): rotation period 1.878 d, from Stefansson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.89,
+      "source": "VizieR J/A+A/640/A66/hyades (Updated X-ray view of the Hyades cluster), column Per: 1.89 d, the row 1.9 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.88,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 1.88 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.8884,
+      "source": "VizieR J/AJ/154/224/table2 (Transiting planets in young clusters from K2), column Prot: 1.8884 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.88,
+      "source": "VizieR J/AJ/154/224/Transit (Transiting planets in young clusters from K2), column Prot: 1.88 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.72,
+      "source": "VizieR J/AJ/155/23/table2 (Low-mass fast rotators in the solar neighborhood), column Prot: 1.72 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.88262,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 1.88262 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.888,
+      "source": "VizieR J/ApJ/931/45/table2 (The factory & the beehive. IV. Praesepe & Hyades), column Prot: 1.888 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.89,
+      "source": "VizieR J/ApJ/962/12/table1 (The Factory and the Beehive. V.), column Prot: 1.89 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.87813,
+      "source": "VizieR J/ApJS/243/28/table6 (M-type star magnetic activities from LAMOST & Kepler), column Per: 1.878132 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.875,
+      "source": "VizieR J/ApJS/268/30/table5 (Open clusters in K2-Gaia DR3. I. Membership & rot.), column PRot: 1.875 d, the row 2.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.73096,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 3.73096 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.8884,
+      "source": "VizieR J/MNRAS/495/2949/table3 (Stellar activity with LAMOST. III.), column Period: 1.8884 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.888,
+      "source": "VizieR J/other/RMxAA/56.139/hyadesd (On the evolution of angular momentum), column Per: 1.888 d, the row 0.2 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 8.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-25 (pscomppars): projected rotation speed 8.8 km/s, from Stefansson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..192S/abstract)",
   "shape": {

@@ -21,6 +21,32 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 806 (pscomppars): age 5 Gyr, from Palle et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
   "rotationPeriodDays": 41.4,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 806 (pscomppars): rotation period 41.4 d, from Palle et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 19.9,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 19.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.9,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 19.9 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.12,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 39.12 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.12,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 39.12 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 50,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 50 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.9,
+      "source": "VizieR J/ApJ/916/77/table3 (K2 rotation periods for SDSS & Gaia M dwarfs), column Per: 19.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 806 (pscomppars): projected rotation speed 2 km/s, from Palle et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract)",
   "shape": {

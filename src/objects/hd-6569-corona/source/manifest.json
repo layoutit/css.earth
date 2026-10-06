@@ -1,0 +1,121 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "map-sep-2015",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cadc-cfht-espadons",
+            "role": "material",
+            "evidence": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+          },
+          {
+            "catalogueId": "arxiv-1711-08636",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1711.08636"
+          }
+        ]
+      },
+      "path": "src/objects/hd-6569/source/science/espadons/hd-6569-2015-09.dat",
+      "origin": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "title": "Magnetic map of HD 6569 from 12 polarised spectra of 19 September 2015 to 30 September 2015: radial, azimuthal and meridional field on a longitude-latitude grid",
+      "credit": "CFHT ESPaDOnS, CFHT program 15BP19, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+      "displayCredit": "CFHT ESPaDOnS · mapped here",
+      "acquisition": "The file the hd-6569 package holds for its own dataset radial-field-2015-09; Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program hd-6569-2015-09, which pins every archived spectrum by its size. The run's receipt (the line list, the codes and each step's result) is written again by that command under output/espadons and is not kept in git.",
+      "license": "CC BY 4.0 for the archived spectra (Canadian Astronomy Data Centre); reduction by this project",
+      "datasetId": "sep-2015"
+    },
+    {
+      "id": "corona-parameters",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-664-a105",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105"
+          },
+          {
+            "catalogueId": "arxiv-1505-00643",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1505.00643"
+          },
+          {
+            "catalogueId": "arxiv-2105-00019",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/2105.00019"
+          }
+        ]
+      },
+      "path": "src/objects/hd-6569-corona/source/corona-parameters.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "title": "HD 6569 · X-ray flux, coronal temperature and mass loss",
+      "credit": "Freund et al. (2022), A&A 664, A105; Johnstone & Güdel (2015), A&A 578, A129; Wood et al. (2021), ApJ 915, 37",
+      "displayCredit": "Freund et al. (2022), A&A 664, A105",
+      "acquisition": "Published numbers transcribed from their sources, and the quantities this package computes from them. This record identifies the transcription; the sources are the origin.",
+      "license": "Published numbers cited under normal scholarly citation; the sources are not redistributed here."
+    }
+  ],
+  "documents": [
+    {
+      "id": "delivery-json",
+      "path": "src/objects/hd-6569-corona/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/hd-6569-corona/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/hd-6569-corona/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-sep-2015-ktx2",
+      "path": "src/objects/hd-6569-corona/source/density-sep-2015.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-sep-2015-json",
+      "path": "src/objects/hd-6569-corona/source/volume-sep-2015.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-sep-2015-png",
+      "path": "src/objects/hd-6569-corona/source/previews/sep-2015.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    }
+  ]
+}

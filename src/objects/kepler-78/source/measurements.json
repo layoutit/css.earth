@@ -21,6 +21,80 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-78 (pscomppars): age 0.625 Gyr, from Grunblatt et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...808..127G/abstract)",
   "rotationPeriodDays": 12.92,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Kepler-78 (pscomppars): rotation period 12.92 d, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.4263,
+      "source": "VizieR J/A+A/560/A4/table (Rotation periods of active Kepler stars), column P1: 6.4263 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.65,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 12.65 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.18,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 11.18 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.18,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 11.18 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.59,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtMcQ14: 12.59 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.53,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 12.53 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.42,
+      "source": "VizieR J/A+A/679/L12/table1 (Close-in planets around fast-rotating stars), column Prot: 12.42 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.588,
+      "source": "VizieR J/A+A/694/A157/tablea1 (Earth 2.0 candidates stellar magnetic activity), column Prot: 12.588 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.53,
+      "source": "VizieR J/A+A/699/A251/tabler2 (Rotation-activity relationship and gyrochronology), column Prot: 12.53 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.53,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 12.53 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.588,
+      "source": "VizieR J/AJ/160/90/tableb1 (Stellar parameters for 13196 Kepler dwarfs), column Prot: 12.588 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.588,
+      "source": "VizieR J/AJ/161/189/table1 (Catalog of gyro-kinematic ages for ~30000 Kepler stars), column Prot: 12.588 d, the row 1.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.28,
+      "source": "VizieR J/ApJ/803/69/table1 (Kepler planetary host stars rotation periods), column Prot: 12.28 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.588,
+      "source": "VizieR J/ApJS/211/24/table1 (Rotation periods of Kepler MS stars), column Prot: 12.588 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.53,
+      "source": "VizieR J/ApJS/244/21/table3 (Surface rotation & activity of Kepler stars. I.), column Prot: 12.53 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.53,
+      "source": "VizieR J/ApJS/271/19/table3 (FGK dwarfs from LAMOST DR7 and Gaia DR3 and Kepler), column Prot: 12.53 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.588,
+      "source": "VizieR J/MNRAS/499/3481/catalog (Metallicity and rotation in the Kepler field), column Prot: 12.588 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.507,
+      "source": "VizieR J/other/RMxAA/56.139/keplerd (On the evolution of angular momentum), column Per: 9.507 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.6,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-78 (pscomppars): projected rotation speed 2.6 km/s, from Grunblatt et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...808..127G/abstract)",
   "shape": {

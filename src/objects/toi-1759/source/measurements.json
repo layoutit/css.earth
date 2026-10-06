@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1759 (pscomppars): age 5 Gyr, from Espinoza et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..133E/abstract)",
   "rotationPeriodDays": 35.65,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1759 (pscomppars): rotation period 35.65 d, from Martioli et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...660A..86M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 31.9,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 31.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35.65,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 35.65 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1759 (pscomppars): projected rotation speed 2 km/s, from Espinoza et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..133E/abstract)",
   "shape": {

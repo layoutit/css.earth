@@ -15,8 +15,18 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of gam Psc (pscomppars): [Fe/H] -0.62 dex, from Teng et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022PASJ...74...92T/abstract)",
   "luminosityLogSolar": 1.766,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of gam Psc (pscomppars): log10 of the luminosity in solar units 1.76649, from Teng et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022PASJ...74...92T/abstract)",
+  "rotationPeriodDays": 47,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 47 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 47,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 47 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.67,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of gam Psc (pscomppars): projected rotation speed 1.67 km/s, from Teng et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022PASJ...74...92T/abstract)",
+  "spinInclinationDegrees": 8.1,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (11.028 solar radii): sin i = v sin i × P / (2πR) = 0.141. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

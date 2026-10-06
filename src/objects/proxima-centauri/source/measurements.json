@@ -11,6 +11,70 @@
   "effectiveTemperatureSource": "Effective temperature 3098 ± 56 K from Demory et al. 2009 (A&A 505, 205; https://doi.org/10.1051/0004-6361/200911976), Table 4, GJ 551, derived Teff: the VLTI/AMBER diameter with surface-brightness relations.",
   "spectralType": "M5.5Ve",
   "spectralTypeSource": "SIMBAD, NAME Proxima Centauri: spectral type M5.5Ve (1991AJ....101..662B)",
+  "rotationPeriodDays": 83.5,
+  "rotationPeriodSource": "VizieR J/A+A/638/A20/tableb1 (M dwarfs X-ray activity and rotation relations), column Prot: 83.5 d, the row 0.0 arcsec from the star's J2000 place. The middle of 15 catalogued periods, 11 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 42,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 42 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 83.5,
+      "source": "VizieR J/A+A/638/A20/tableb1 (M dwarfs X-ray activity and rotation relations), column Prot: 83.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 89.8,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 89.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 82.9,
+      "source": "VizieR J/A+A/672/A37/table1 (Activity indicators in M dwarfs), column Prot: 82.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 88.977,
+      "source": "VizieR J/AJ/156/217/table1 (Stellar properties for M dwarfs in MEarth-South), column Per: 88.977 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 88.977,
+      "source": "VizieR J/AJ/166/16/table1 (Radial velocities of 123 active stars), column Per: 88.977 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.82537,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 4.82537 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 42,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 42 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 83,
+      "source": "VizieR J/ApJ/902/115/table1 (EvryFlare. III. Superflares from Evryscope & TESS), column Prot: 83 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 89,
+      "source": "VizieR J/ApJ/905/107/table1 (Spectroscopic activity indicators of TIC stars), column Prot: 89 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.0067,
+      "source": "VizieR J/ApJ/935/104/table1 (Catalog of Stellar Flares in 219 M-dwarfs), column Prot: 0.0067 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 88.98,
+      "source": "VizieR J/ApJ/960/62/table3 (Red dwarfs, Xray, UV, and CaII), column Prot: 88.98 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 88.98,
+      "source": "VizieR J/ApJ/960/62/table5 (Red dwarfs, Xray, UV, and CaII), column Prot: 88.98 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 88.98,
+      "source": "VizieR J/ApJ/960/62/table7 (Red dwarfs, Xray, UV, and CaII), column Prot: 88.98 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 82.53,
+      "source": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 82.53 d, the row 0.4 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

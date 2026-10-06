@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1411 (pscomppars): log10 of the luminosity in solar units -1.01323, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "ageGyr": 9.6,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1411 (pscomppars): age 9.6 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "rotationPeriodDays": 79.819,
+  "rotationPeriodSource": "VizieR J/other/RMxAA/56.139/hatnetd (On the evolution of angular momentum), column Per: 79.819 d, the row 0.7 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 79.819,
+      "source": "VizieR J/other/RMxAA/56.139/hatnetd (On the evolution of angular momentum), column Per: 79.819 d, the row 0.7 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "SIMBAD, V* FN Boo: projected rotation speed 2 km/s, the measurement SIMBAD prefers (2022AJ....163...99G)",
   "shape": {

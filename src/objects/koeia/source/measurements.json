@@ -15,6 +15,22 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of HIP 12961 (pscomppars): [Fe/H] -0.14 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "luminosityLogSolar": -1.003,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HIP 12961 (pscomppars): log10 of the luminosity in solar units -1.00302, from Forveille et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...526A.141F/abstract)",
+  "rotationPeriodDays": 19,
+  "rotationPeriodSource": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 19 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 19,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 19 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 19 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.6,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 16.6 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 108236 (pscomppars): log10 of the luminosity in solar units -0.14997, from Bonfanti et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract)",
   "ageGyr": 6.7,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 108236 (pscomppars): age 6.7 Gyr, from Bonfanti et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract)",
+  "rotationPeriodDays": 3.796,
+  "rotationPeriodSource": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 3.796 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.796,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 3.796 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 108236 (pscomppars): projected rotation speed 4.7 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "spinInclinationDegrees": 23.7,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.877 solar radii): sin i = v sin i × P / (2πR) = 0.402. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

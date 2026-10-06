@@ -17,8 +17,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of DH Tau (pscomppars): log10 of the luminosity in solar units -0.21153, from Zhou et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...783L..17Z/abstract)",
   "ageGyr": 0.001,
   "ageSource": "NASA Exoplanet Archive, composite parameters of DH Tau (pscomppars): age 0.001 Gyr, from Patience et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012A%26A...540A..85P/abstract)",
+  "rotationPeriodDays": 4.6717,
+  "rotationPeriodSource": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 4.67167 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.67167,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 4.67167 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 7.1,
   "projectedRotationSpeedSource": "SIMBAD, V* DH Tau: projected rotation speed 7.1 km/s, the measurement SIMBAD prefers (2025ApJ...978...42H)",
+  "spinInclinationDegrees": 31.4,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.26 solar radii): sin i = v sin i × P / (2πR) = 0.520. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is a blackbody at the published temperature."

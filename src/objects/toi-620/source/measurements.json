@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-620 (pscomppars): age 7.2 Gyr, from Reefe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..269R/abstract)",
   "rotationPeriodDays": 8.99,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-620 (pscomppars): rotation period 8.99 d, from Reefe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..269R/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 8.9,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 8.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-620 (pscomppars): projected rotation speed 3 km/s, from Reefe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..269R/abstract)",
   "spinInclinationDegrees": 75.8,

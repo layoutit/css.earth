@@ -1,0 +1,30 @@
+{
+ "id": "gj-1156",
+ "classification": "star",
+ "order": 5788,
+ "physical": {
+  "name": "GJ 1156",
+  "horizonsCode": null,
+  "meanRadiusKm": 111312,
+  "gravitationalParameterKm3PerS2": 18579741605.87151,
+  "parent": null,
+  "effectiveTemperatureK": 3110
+ },
+ "physicalNotes": "Radius 0.16 solar radii from Morin et al., arXiv:1005.5552, Table 1: radius 0.16 solar radii (theoretical radius) (https://arxiv.org/abs/1005.5552): 111,312 km at 695,700 km per solar radius. Mass 0.14 solar masses from Morin et al., arXiv:1005.5552, Table 1: mass 0.14 solar masses (https://arxiv.org/abs/1005.5552); GM is that mass times the JPL solar GM. Temperature 3110 K from Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4.5V, for SIMBAD's spectral type M4.5Ve: Teff (https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt). Spin inclination 60 degrees and rotation period 0.491 d from Morin et al., arXiv:1005.5552, Table 1: rotation period 0.491 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1005.5552). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 184.74174734459442,
+  "declinationDegrees": 11.126952372027485,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 6.464126760044794,
+  "properMotionRaMasPerYear": -1269.7707366268774,
+  "properMotionDecMasPerYear": 203.44413820016848,
+  "radialVelocityKmPerS": 6,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3907283967108054528 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gj-1156/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 154.6999 +/- 0.0445 mas (same row, RUWE 1.40): 6.46 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -1269.771, 203.444 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 3907283967108054528 (quality A), from 2018MNRAS.475.1960F; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2018MNRAS.475.1960F/abstract)"
+  }
+ }
+}

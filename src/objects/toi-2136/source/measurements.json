@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2136 (pscomppars): age 4.6 Gyr, from Gan et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract)",
   "rotationPeriodDays": 75,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2136 (pscomppars): rotation period 75 d, from Gan et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.4120G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 82.97,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 82.97 d, the row 1.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 85.6,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 85.6 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2136 (pscomppars): projected rotation speed 2 km/s, from Beard et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..286B/abstract)",
   "shape": {

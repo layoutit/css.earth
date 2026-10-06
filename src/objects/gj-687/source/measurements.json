@@ -17,6 +17,14 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 687 (pscomppars): [Fe/H] 0.0631 dex, from Rosenthal et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021ApJS..255....8R/abstract)",
   "luminosityLogSolar": -1.672,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 687 (pscomppars): log10 of the luminosity in solar units -1.672, from Burt et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...789..114B/abstract)",
+  "rotationPeriodDays": 61.8,
+  "rotationPeriodSource": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 61.8 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 61.8,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 61.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.02,
   "projectedRotationSpeedSource": "SIMBAD, BD+68 946: projected rotation speed 2.02 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {

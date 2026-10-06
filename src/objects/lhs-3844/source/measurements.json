@@ -21,6 +21,32 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of LHS 3844 (pscomppars): age 7.8 Gyr, from Nagel et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract)",
   "rotationPeriodDays": 130,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LHS 3844 (pscomppars): rotation period 130 d, from Nagel et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.463,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 0.463 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.462555,
+      "source": "VizieR J/AJ/159/60/table2 (8695 flares from 1228 stars in TESS sectors 1 & 2), column Prot: 0.462555 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.46362,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 0.46362 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 126.1,
+      "source": "VizieR J/ApJ/905/107/table1 (Spectroscopic activity indicators of TIC stars), column Prot: 126.1 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.00013,
+      "source": "VizieR J/ApJ/935/104/table1 (Catalog of Stellar Flares in 219 M-dwarfs), column Prot: 0.00013 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 128,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 128 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

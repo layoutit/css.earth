@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-12 (pscomppars): log10 of the luminosity in solar units 0.59711, from Barstow et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017ApJ...834...50B/abstract)",
   "ageGyr": 3.05,
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-12 (pscomppars): age 3.05 Gyr, from Leonardi et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract)",
+  "rotationPeriodDays": 6.77,
+  "rotationPeriodSource": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 6.77 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.77,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 6.77 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.9,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-12 (pscomppars): projected rotation speed 1.9 km/s, from Leonardi et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...686A..84L/abstract)",
+  "spinInclinationDegrees": 8.7,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.69 solar radii): sin i = v sin i × P / (2πR) = 0.150. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

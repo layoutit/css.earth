@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-84 (pscomppars): age 2.1 Gyr, from Anderson et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800L...9A/abstract)",
   "rotationPeriodDays": 14.36,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-84 (pscomppars): rotation period 14.36 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14.36,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 14.36 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.56,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-84 (pscomppars): projected rotation speed 2.558 km/s, from Anderson et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800L...9A/abstract)",
   "spinInclinationDegrees": 71.1,

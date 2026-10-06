@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1836 (pscomppars): age 6.6 Gyr, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "rotationPeriodDays": 20,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1836 (pscomppars): rotation period 20 d, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 20,
+      "source": "VizieR J/A+A/694/A36/stars (Velocity curves of 7 transiting systems), column Prot: 20 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1836 (pscomppars): projected rotation speed 4 km/s, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "spinInclinationDegrees": 73.9,

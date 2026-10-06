@@ -21,6 +21,24 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 86226 (pscomppars): age 4.6 Gyr, from Teske et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160...96T/abstract)",
   "rotationPeriodDays": 22.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 86226 (pscomppars): rotation period 22.8 d, from Delisle et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...703A..78D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.984,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 3.984 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 25,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 25 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 25,
+      "source": "VizieR J/ApJ/734/70/table1 (Chromospheric activity of Southern stars), column Prot: 25 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 23 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 86226 (pscomppars): projected rotation speed 2.4 km/s, from Marmier et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...551A..90M/abstract)",
   "shape": {

@@ -13,6 +13,26 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-105-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.522, rounded to two decimals",
   "spectralType": "K3V",
   "spectralTypeSource": "SIMBAD, HD 16160: spectral type K3V (1989ApJS...71..245K)",
+  "rotationPeriodDays": 45,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 45 d, the row 0.4 arcsec from the star's J2000 place. The middle of 4 catalogued periods, 4 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 45,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 45 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 48,
+      "source": "VizieR J/A+A/511/A54/table1 (Magnetic cycles and radial-velocity for 8 stars), column Prot: 48 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 48,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 48 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.7,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 39.7 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.39,
   "projectedRotationSpeedSource": "SIMBAD, HD 16160: projected rotation speed 2.39 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

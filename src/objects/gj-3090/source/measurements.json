@@ -19,6 +19,20 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 3090 (pscomppars): log10 of the luminosity in solar units -1.34199, from Lamontagne et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract)",
   "rotationPeriodDays": 17.95,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 3090 (pscomppars): rotation period 17.95 d, from Lamontagne et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.278L/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 18,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 18 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.21,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot1: 5.21 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.17,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot2: 11.17 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.47,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 3090 (pscomppars): projected rotation speed 1.468 km/s, from Almenara et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A..91A/abstract)",
   "shape": {

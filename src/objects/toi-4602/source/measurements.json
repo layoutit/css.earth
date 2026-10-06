@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4602 (pscomppars): log10 of the luminosity in solar units 0.11394, from Di Maio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract)",
   "ageGyr": 7.395,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 169256041140206848, flags_flame 00: age_flame 7.3954277 Gyr (16th to 84th percentiles 6.481053 to 8.309793)",
+  "rotationPeriodDays": 8.923,
+  "rotationPeriodSource": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 8.92299 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 8.92299,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 8.92299 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4602 (pscomppars): projected rotation speed 2.2 km/s, from Di Maio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.270D/abstract)",
+  "spinInclinationDegrees": 21.1,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.08 solar radii): sin i = v sin i × P / (2πR) = 0.359. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

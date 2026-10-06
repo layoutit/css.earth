@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 73344 (pscomppars): age 1.15 Gyr, from Sulis et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A..14S/abstract)",
   "rotationPeriodDays": 9.03,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 73344 (pscomppars): rotation period 9.03 d, from Zhang et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..200Z/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 8.65,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 8.65 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.9,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 7.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.67,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 73344 (pscomppars): projected rotation speed 5.67 km/s, from Zhang et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..200Z/abstract)",
   "spinInclinationDegrees": 56,

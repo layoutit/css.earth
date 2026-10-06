@@ -21,6 +21,40 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 338 B (pscomppars): age 4 Gyr, from DiTomasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...38D/abstract)",
   "rotationPeriodDays": 16.61,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 338 B (pscomppars): rotation period 16.61 d, from DiTomasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...38D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 10.17,
+      "source": "VizieR J/A+A/638/A20/tableb1 (M dwarfs X-ray activity and rotation relations), column Prot: 10.17 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.61,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 16.61 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.88,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 16.88 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.88,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 16.88 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10.17,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 10.17 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.61,
+      "source": "VizieR J/ApJ/960/62/table2 (Red dwarfs, Xray, UV, and CaII), column Prot: 16.61 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.61,
+      "source": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 16.61 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10.17,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 10.17 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 338 B (pscomppars): projected rotation speed 2.3 km/s, from DiTomasso et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...38D/abstract)",
   "shape": {

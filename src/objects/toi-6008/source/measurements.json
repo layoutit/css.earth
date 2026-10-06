@@ -19,6 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6008 (pscomppars): log10 of the luminosity in solar units -2.32873, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
   "ageGyr": 3,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-6008 (pscomppars): age 3 Gyr, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
+  "rotationPeriodDays": 104.5,
+  "rotationPeriodSource": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 104.5 d, the row 0.7 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 104.5,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 104.5 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 104.5,
+      "source": "VizieR J/ApJ/916/77/table3 (K2 rotation periods for SDSS & Gaia M dwarfs), column Per: 104.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

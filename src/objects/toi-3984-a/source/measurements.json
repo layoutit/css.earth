@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-3984 A (pscomppars): age 2.9 Gyr, from Cañas et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract)",
   "rotationPeriodDays": 50,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-3984 A (pscomppars): rotation period 50 d, from Cañas et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 5.2476,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 5.2476 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 52.0179,
+      "source": "VizieR J/other/NatAs/8.223/tables1 (Stellar spin-down law), column Prot: 52.0178795697455 d, the row 1.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-3984 A (pscomppars): projected rotation speed 2 km/s, from Cañas et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract)",
   "shape": {

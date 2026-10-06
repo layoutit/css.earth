@@ -21,6 +21,24 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 15337 (pscomppars): age 9.6 Gyr, from Rosário et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...686A.282R/abstract)",
   "rotationPeriodDays": 36.528,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 15337 (pscomppars): rotation period 36.528 d, from Gandolfi et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...876L..24G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 41.8,
+      "source": "VizieR J/A+A/654/A168/tablee2 (Convective blueshifts for solar-type stars), column Prot: 41.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.756,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 4.756 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.178,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 17.178 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 20 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 15337 (pscomppars): projected rotation speed 1 km/s, from Gandolfi et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...876L..24G/abstract)",
   "spinInclinationDegrees": 57.6,

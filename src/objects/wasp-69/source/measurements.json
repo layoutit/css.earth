@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-69 (pscomppars): age 1.8 Gyr, from Allart et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A...7A/abstract)",
   "rotationPeriodDays": 23.07,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-69 (pscomppars): rotation period 23.07 d, from Allart et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A...7A/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 23.07,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 23.07 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.07,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 23.07 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.54,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-69 (pscomppars): projected rotation speed 1.54 km/s, from Allart et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A...7A/abstract)",
   "spinInclinationDegrees": 61.2,

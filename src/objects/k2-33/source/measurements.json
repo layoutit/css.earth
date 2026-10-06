@@ -19,6 +19,60 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-33 (pscomppars): age 0.0093 Gyr, from Mann et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract)",
   "rotationPeriodDays": 6.29,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-33 (pscomppars): rotation period 6.29 d, from Mann et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.25,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 6.25 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.26,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 6.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.26,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 6.26 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.26,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 6.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.26,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 6.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.29,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 6.29 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.292,
+      "source": "VizieR J/AJ/154/224/table2 (Transiting planets in young clusters from K2), column Prot: 6.292 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.29,
+      "source": "VizieR J/AJ/154/224/Transit (Transiting planets in young clusters from K2), column Prot: 6.29 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.2895,
+      "source": "VizieR J/AJ/155/196/table1 (Analysis of K2 LCs for members of USco & {rho} Oph), column Per1: 6.2895 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.263,
+      "source": "VizieR J/ApJ/916/77/table3 (K2 rotation periods for SDSS & Gaia M dwarfs), column Per: 6.263 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.29,
+      "source": "VizieR J/ApJ/952/63/table3 (Gaia-Chandra members of 7-25Myr clusters with ZTF), column PRot: 6.29 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.286,
+      "source": "VizieR J/ApJS/268/30/table5 (Open clusters in K2-Gaia DR3. I. Membership & rot.), column PRot: 6.286 d, the row 1.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.25,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 6.25 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 8.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-33 (pscomppars): projected rotation speed 8.2 km/s, from Mann et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract)",
   "spinInclinationDegrees": 76.2,

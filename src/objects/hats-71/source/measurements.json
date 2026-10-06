@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HATS-71 (pscomppars): age 3.2 Gyr, from Bakos et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract)",
   "rotationPeriodDays": 41.72,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HATS-71 (pscomppars): rotation period 41.72 d, from Bakos et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 41.72,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 41.72 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

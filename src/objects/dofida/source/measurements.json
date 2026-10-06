@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 117618 (pscomppars): log10 of the luminosity in solar units 0.21304, from Butler et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B/abstract)",
   "ageGyr": 5.6,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 117618 (pscomppars): age 5.6 Gyr, from Tinney et al. 2005 (https://ui.adsabs.harvard.edu/abs/2005ApJ...623.1171T/abstract)",
+  "rotationPeriodDays": 18.9,
+  "rotationPeriodSource": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 18.9 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 18.9,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 18.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 117618 (pscomppars): projected rotation speed 3.2 km/s, from Valenti & Fischer 2005 (https://ui.adsabs.harvard.edu/abs/2005ApJS..159..141V/abstract)",
+  "spinInclinationDegrees": 75.7,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.234 solar radii): sin i = v sin i × P / (2πR) = 0.969. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

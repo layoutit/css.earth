@@ -45,6 +45,12 @@
     },
     {
       "location": "public",
+      "filename": "hd-189733-dataset-radial-field-2023-07.webp",
+      "bytes": 184,
+      "sha256": "07a8f11b62cc71036652e641978ddeadb0bafa4cea0d632fa1c70dee77863c1a"
+    },
+    {
+      "location": "public",
       "filename": "hd-189733-dataset-spot-2021.webp",
       "bytes": 1174,
       "sha256": "f8ae093882f12400d8a4bb259152346a90c56b0cc6f3d737b6710f9eed6da728"
@@ -99,6 +105,12 @@
     },
     {
       "location": "public",
+      "filename": "hd-189733-poles-radial-field-2023-07@2x.webp",
+      "bytes": 12372,
+      "sha256": "828e172b1288016c2da616163890a3a3052395ada8473b5062a18ff90860b235"
+    },
+    {
+      "location": "public",
       "filename": "hd-189733-poles-spot-2021@2x.webp",
       "bytes": 1340,
       "sha256": "8977ac32b7e5b92dd721a0dc929c3584faa600a3dc79697cb245db5a1c5c5cf5"
@@ -135,6 +147,12 @@
     },
     {
       "location": "public",
+      "filename": "hd-189733-surface-radial-field-2023-07@2x.webp",
+      "bytes": 23766,
+      "sha256": "4dd60c62d2c8d06a7144fada398ff35c04360a3aa71694d23daeebdc3accc104"
+    },
+    {
+      "location": "public",
       "filename": "hd-189733-surface-spot-2021@2x.webp",
       "bytes": 38,
       "sha256": "50d8bff1590f3e15eab097cbb9f0599d2749b92cb3397a350c04c531d80f9b2d"
@@ -148,8 +166,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 9855,
-      "sha256": "69fb7146989ef376f86ef16bd0e74230c3e5d5737280ea3832e8f12931f1a1ff"
+      "bytes": 10074,
+      "sha256": "d27d5f65ffbbba6412531c0d2edb9ccdc5b19f907d618e3b82e29d3f2a79cda0"
     },
     {
       "location": "prepared",
@@ -166,20 +184,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 6299,
-      "sha256": "062887304c5d2dc0fa4203314492efd331e4a384afcc8df1b39182ecefd13845"
+      "bytes": 8198,
+      "sha256": "cc52b4c5873ac76af66732fd9e08a82adaafb2dd6ca935f295bab77402ef91ed"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 10537,
-      "sha256": "6eb34f4cbf3d47751a1915d18c3eca53344b9871c34ee9d8efbfa703c2d855dd"
+      "bytes": 13023,
+      "sha256": "5cb1c0fbdce95270e6a46094678ccd89f161e2ea53e5c7b52f946377eef1a879"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 657,
-      "sha256": "d4da7ab3e5f8a9c806ac41c554cec64cd0225197772d02e79101b9acfb751f58"
+      "bytes": 775,
+      "sha256": "385c307133821c5d20b9f79065fa84e8d38be6474603577aa2e5a03dd906712c"
     },
     {
       "location": "prepared",
@@ -213,6 +231,12 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/radial-field-2023-07.webp",
+      "bytes": 1874,
+      "sha256": "3b4159cbe6d1b05ba7f723a06638685a8b56bf688d953ecfefb852f4f5e9acb3"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/spot-2021.webp",
       "bytes": 5626,
       "sha256": "a85ef4d9e075f946824ba2e7d1989f800416ab1a8f9b44d307ce79b15c2aecc6"
@@ -220,8 +244,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 263958,
-      "sha256": "1756e37b3ec5e7928f06d82f3939bd55f73a4852feec8727ee826f71febc67f4"
+      "bytes": 267895,
+      "sha256": "aad970a2cd2f6114f4c298a8db6394b3dfc38079a945b6be98ef48d7e303b43e"
     },
     {
       "location": "prepared",
@@ -244,8 +268,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 4993,
-      "sha256": "d24343bfa4166056360133f3af7a43b862073237861cd3aad280012c273344b8"
+      "bytes": 6048,
+      "sha256": "4bfc2dac21a5450a458edfc931d958b3540d1f4c035a3448bdc13c60b05a37b9"
     },
     {
       "location": "prepared",

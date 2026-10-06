@@ -19,6 +19,12 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2018 (pscomppars): log10 of the luminosity in solar units -1, from Dai et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract)",
   "rotationPeriodDays": 23.5,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2018 (pscomppars): rotation period 23.5 d, from Dai et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 22.3464,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 22.346399 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2018 (pscomppars): projected rotation speed 2 km/s, from Dai et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract)",
   "shape": {

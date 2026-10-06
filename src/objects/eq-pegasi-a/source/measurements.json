@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "eq-pegasi-a",
+  "angularDiameterMas": 0.52,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 243,495 km at 6.26 pc = 0.52 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 6.263176469198987,
+  "distanceSource": "Gaia DR3 parallax 159.6634 +/- 0.0341 mas (same row, RUWE 1.32): 6.26 pc, no zero-point correction",
+  "radiusKm": 243495,
+  "radiusSource": "Radius 0.35 solar radii from Morin et al., arXiv:0808.1423, Table 1: radius 0.35 solar radii (theoretical radius; R sin i = 0.37(2)) (https://arxiv.org/abs/0808.1423): 243,495 km at 695,700 km per solar radius. Mass 0.39 solar masses from Morin et al., arXiv:0808.1423, Table 1: mass 0.39 solar masses (https://arxiv.org/abs/0808.1423); GM is that mass times the JPL solar GM. Temperature 3345 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 247985094: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82). Spin inclination 60 degrees and rotation period 1.06 d from Morin et al., arXiv:0808.1423, Table 1: rotation period 1.06 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/0808.1423). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3345,
+  "effectiveTemperatureSource": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 247985094: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82)",
+  "surfaceGravityLogg": 4.94,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/eq-pegasi-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.941, rounded to two decimals",
+  "spectralType": "M3.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 896 A (pscomppars): spectral type M3.5 V, from Curiel et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...93C/abstract)",
+  "luminosityLogSolar": -1.755,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 896 A (pscomppars): log10 of the luminosity in solar units -1.75523, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 1.061,
+  "rotationPeriodSource": "VizieR J/MNRAS/390/567/table1 (Magnetic field and velocity of mid M dwarfs), column Prot: 1.061 d, the row 0.1 arcsec from the star's J2000 place. The middle of 5 catalogued periods, 5 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.06,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 1.06 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.1,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 1.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.0669,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 1.0669 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.061,
+      "source": "VizieR J/MNRAS/390/567/table1 (Magnetic field and velocity of mid M dwarfs), column Prot: 1.061 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.06,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 1.06 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
+  "projectedRotationSpeedKmS": 16.54,
+  "projectedRotationSpeedSource": "SIMBAD, BD+19 5116A: projected rotation speed 16.54 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

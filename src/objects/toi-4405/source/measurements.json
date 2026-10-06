@@ -15,6 +15,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4405 (pscomppars): log10 of the luminosity in solar units -0.81302, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 5.958,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5261102085950186240, flags_flame 00: age_flame 5.9583898 Gyr (16th to 84th percentiles 3.1518657 to 8.808793)",
+  "rotationPeriodDays": 47.1,
+  "rotationPeriodSource": "VizieR J/ApJ/962/47/table5 (TESS stellar rotation in the Southern CVZ), column Prot: 47.1 d, the row 0.9 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 47.1,
+      "source": "VizieR J/ApJ/962/47/table5 (TESS stellar rotation in the Southern CVZ), column Prot: 47.1 d, the row 0.9 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.5,
   "projectedRotationSpeedSource": "SIMBAD, TOI-4405: projected rotation speed 1.5 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

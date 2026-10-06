@@ -47,6 +47,46 @@
         },
         "qualification": "Photosphere color from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,209 K and log g 4.51 (u1 0.597, u2 0.166): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "radial-field-2008-01",
+      "output": "flegetonte-surface-{id}{suffix}.webp",
+      "thumbnail": "flegetonte-dataset-{id}.webp",
+      "source": "science/espadons/flegetonte-2008-01.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2008-01",
+        "label": "Jan 2008",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/flegetonte-2008-01.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -68
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -40,
+        "maximum": 40,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-40",
+          "0",
+          "+40"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 10 ESPaDOnS spectra of 19 January 2008 to 30 January 2008 (reduced chi-square 1.00, against 7.0 with no field); mean field 16 G. A reduction made in this project, not a published map. Black line: 68 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Jan 2008",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
     }
   ],
   "emission": {

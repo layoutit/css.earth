@@ -1,0 +1,49 @@
+{
+  "id": "hip-76768",
+  "name": "HIP 76768",
+  "system": "HIP 76768 system",
+  "description": "A star 0.85 solar radii and 0.8 solar masses that turns once in 3.7 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 6254299662396908288",
+  "gaia": "6254299662396908288",
+  "paper": {
+    "url": "https://arxiv.org/abs/1601.00684",
+    "credit": "Folsom et al., arXiv:1601.00684"
+  },
+  "radius": {
+    "value": 0.85,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: radius 0.85 solar radii",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "mass": {
+    "value": 0.8,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: mass 0.8 solar masses",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "temperature": {
+    "value": 4440,
+    "source": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row K5V, for SIMBAD's spectral type K5V: Teff",
+    "url": "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt"
+  },
+  "spin": {
+    "inclinationDegrees": 60,
+    "periodDays": 3.7,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.7 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 85% of the Sun's width that turns once in 3.7 days, with a mapped magnetic field.",
+    "introduction": "Folsom et al. give it 0.85 solar radii, 0.8 solar masses, a rotation period of 3.7 days and an axis tilted 60° from the line of sight.",
+    "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -7.3,
+    "uncertainty": 0.5586,
+    "source": "SIMBAD's radial velocity for Gaia DR3 6254299662396908288 (quality A), from 2021A&A...645A..30Z; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021A&A...645A..30Z/abstract"
+  },
+  "order": 5792
+}

@@ -19,8 +19,30 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-68 (pscomppars): log10 of the luminosity in solar units 0.23106, from Mills et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....157..145M/abstract)",
   "ageGyr": 6.84,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-68 (pscomppars): age 6.84 Gyr, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "rotationPeriodDays": 16.3844,
+  "rotationPeriodSource": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 16.384384636395 d, the row 0.0 arcsec from the star's J2000 place. The middle of 4 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 16.38,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column A18Per: 16.38 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.23,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column D21Per: 17.23 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 30.865,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Prot: 30.865 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.3844,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 16.384384636395 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-68 (pscomppars): projected rotation speed 0.5 km/s, from Gilliland et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...766...40G/abstract)",
+  "spinInclinationDegrees": 7.4,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.256 solar radii): sin i = v sin i × P / (2πR) = 0.129. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

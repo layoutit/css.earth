@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-59 (pscomppars): log10 of the luminosity in solar units -0.79407, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 0.5,
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-59 (pscomppars): age 0.5 Gyr, from Hebrard et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract)",
+  "rotationPeriodDays": 15.9,
+  "rotationPeriodSource": "VizieR J/A+A/549/A134/stars (Four new WASP transiting close-in giant planets), column Per: 15.9 d, the row 0.1 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 15.9,
+      "source": "VizieR J/A+A/549/A134/stars (Four new WASP transiting close-in giant planets), column Per: 15.9 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-59 (pscomppars): projected rotation speed 2.3 km/s, from Hebrard et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract)",
   "shape": {

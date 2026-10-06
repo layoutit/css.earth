@@ -21,6 +21,24 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1235 (pscomppars): age 5.3 Gyr, from Bluhm et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract)",
   "rotationPeriodDays": 44.7,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1235 (pscomppars): rotation period 44.7 d, from Patel & Espinoza 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..228P/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.445,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 3.445 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 41.2,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 41.2 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 41.2,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 41.2 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 41.2,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 41.2 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1235 (pscomppars): projected rotation speed 2 km/s, from Bluhm et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...639A.132B/abstract)",
   "shape": {

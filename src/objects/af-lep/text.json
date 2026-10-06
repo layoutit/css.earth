@@ -32,6 +32,11 @@
       "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
       "summary": "The color of Gaia's spectrum of the star. No surface picture exists."
+    },
+    "radial-field-2007-12": {
+      "title": "Radial field, Dec 2007",
+      "detail": "1 epoch, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
     }
   }
 }

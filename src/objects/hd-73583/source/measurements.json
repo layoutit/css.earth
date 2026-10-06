@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 73583 (pscomppars): age 0.48 Gyr, from Barragán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract)",
   "rotationPeriodDays": 12.2,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 73583 (pscomppars): rotation period 12.2 d, from Barragán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.17,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot1: 7.17 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 73583 (pscomppars): projected rotation speed 3.5 km/s, from Barragán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.514.1606B/abstract)",
   "shape": {

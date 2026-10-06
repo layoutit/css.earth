@@ -21,6 +21,72 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-102 (pscomppars): age 1.1 Gyr, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
   "rotationPeriodDays": 27.95,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Kepler-102 (pscomppars): rotation period 27.95 d, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 26.52,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 26.52 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.85,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 23.85 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.85,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 23.85 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.5065,
+      "source": "VizieR J/A+A/694/A157/tablea1 (Earth 2.0 candidates stellar magnetic activity), column Prot: 9.5065 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.55,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column A18Per: 26.55 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 27.02,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column D21Per: 27.02 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.57,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M13Per: 26.57 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.4,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M15Per: 26.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.55,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column Prot: 26.55 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.74,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column W13Per: 26.74 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.572,
+      "source": "VizieR J/ApJ/775/L11/table1 (Stellar rotation periods for KOIs), column Prot: 26.572 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.4,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 26.4 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.57,
+      "source": "VizieR J/ApJ/807/170/table2 (Prograde vs retrogade motions. II. KOIs), column Prot: 26.57 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 21.303,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Prot: 21.303 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.55,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Protph: 26.55 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.5528,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 26.5528342882881 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-102 (pscomppars): projected rotation speed 0.5 km/s, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
   "spinInclinationDegrees": 22.4,

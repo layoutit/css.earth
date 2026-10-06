@@ -78,6 +78,67 @@
         },
         "falseColor": false,
         "notes": "The color of Gaia DR3's own spectrum of the star, from 380 to 780 nm. No image of its surface exists, and no darkening toward the edge is drawn."
+      },
+      {
+        "id": "radial-field-2007-12",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Dec 2007",
+        "thumbnail": "af-lep-dataset-radial-field-2007-12.webp",
+        "surface": "af-lep-surface-radial-field-2007-12@2x.webp",
+        "poles": "af-lep-poles-radial-field-2007-12@2x.webp",
+        "source": {
+          "id": "af-lep-espadons-map-radial-field-2007-12",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-150",
+            "0",
+            "+150"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-150",
+              "0",
+              "+150"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Dec 2007, reconstructed in this project from 19 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 57° S; the star never shows us what lies below it."
       }
     ]
   },

@@ -19,8 +19,70 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): log10 of the luminosity in solar units -0.61348, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
   "ageGyr": 1.41,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): age 1.41 Gyr, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
+  "rotationPeriodDays": 44.31,
+  "rotationPeriodSource": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M15Per: 44.31 d, the row 0.0 arcsec from the star's J2000 place. The middle of 14 catalogued periods, 9 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14.92,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 14.92 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.01,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 33.01 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.01,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 33.01 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 50.11,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 50.11 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.50806,
+      "source": "VizieR J/A+A/694/A157/tablea1 (Earth 2.0 candidates stellar magnetic activity), column Prot: 2.50806 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 50.11,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 50.11 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.39,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column D21Per: 44.39 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.31,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M15Per: 44.31 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.31,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column Prot: 44.31 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.31,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 44.31 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 28.673,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Prot: 28.673 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.31,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Protph: 44.31 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 50.11,
+      "source": "VizieR J/ApJS/244/21/table3 (Surface rotation & activity of Kepler stars. I.), column Prot: 50.11 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 50.11,
+      "source": "VizieR J/MNRAS/533/1290/table1 (Properties of late-type stars in Kelper field), column Per: 50.11 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): projected rotation speed 0.5 km/s, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
+  "spinInclinationDegrees": 35.2,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.76 solar radii): sin i = v sin i × P / (2πR) = 0.576. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

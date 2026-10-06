@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HATS-6 (pscomppars): log10 of the luminosity in solar units -1.09983, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 8.1,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HATS-6 (pscomppars): age 8.1 Gyr, from Hartman et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....149..166H/abstract)",
+  "rotationPeriodDays": 35.1,
+  "rotationPeriodSource": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 35.1 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 35.1,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 35.1 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

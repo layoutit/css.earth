@@ -57,6 +57,9 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
     text=options.json?`${JSON.stringify(results)}\n`:formatPictures(results,options.spec!,baked&&options.bake&&good.length>0);code=baked&&good.length===results.length?0:1;
   }else{
     const results=await runNewObject(options.spec!,{root,progress:line=>stderr(`${line}\n`),skipExisting:options.skipExisting,solarEpoch:await loadSolarEpoch(root)});
+    // A star just written gets what the catalogues print of it in its measurements record (metadata/metadata.mts), before anything is baked.
+    const stars=results.filter(result=>result.kind==='star'&&!result.failed).map(result=>result.id);
+    if(stars.length){const{writeStarMetadata}=await import('./metadata/metadata.mts'),{liveArchive}=await import('./archives/archives.mts');await writeStarMetadata(root,stars,liveArchive);}
     const good=results.filter(result=>!result.failed).map(result=>result.id),baked=(options.check||options.bake)&&good.length?await prepareObjects(good,{root,progress,...(options.bake?{}:{to:'page'})}):true;
     text=options.json?`${JSON.stringify(results)}\n`:formatNewObject(results)+(results.length&&baked&&options.bake?`${results.length} objects baked.\n`:results.length&&baked&&options.check?`${results.length} objects passed the bake's first steps.\n`:'');code=baked&&!results.some(result=>result.failed)?0:1;
   }

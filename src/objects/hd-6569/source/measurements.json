@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-6569",
+  "angularDiameterMas": 0.16,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 528,732 km at 45.47 pc = 0.16 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 45.46649000586786,
+  "distanceSource": "Gaia DR3 parallax 21.9942 +/- 0.0179 mas (same row, RUWE 0.96): 45.47 pc, no zero-point correction",
+  "radiusKm": 528732,
+  "radiusSource": "Radius 0.76 solar radii from Folsom et al., arXiv:1711.08636, Table 2: radius 0.76 solar radii (https://arxiv.org/abs/1711.08636): 528,732 km at 695,700 km per solar radius. Mass 0.85 solar masses from Folsom et al., arXiv:1711.08636, Table 2: mass 0.85 solar masses (https://arxiv.org/abs/1711.08636); GM is that mass times the JPL solar GM. Temperature 5024 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 66534229: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82). Spin inclination 77 degrees and rotation period 7.13 d from Folsom et al., arXiv:1711.08636, Table 2: rotation period 7.13 d and an axis 77 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1711.08636). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5024,
+  "effectiveTemperatureSource": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 66534229: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82)",
+  "surfaceGravityLogg": 4.61,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-6569.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.606, rounded to two decimals",
+  "spectralType": "K1V",
+  "spectralTypeSource": "SIMBAD, HD 6569: spectral type K1V (2006A&A...460..695T)",
+  "luminosityLogSolar": -0.466,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2371914419569515136, flags_flame 00: lum_flame 0.3423153 solar luminosities (16th to 84th percentiles 0.3372853 to 0.3473433); its log10 is recorded",
+  "rotationPeriodDays": 7.13,
+  "rotationPeriodSource": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 7.13 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.13,
+      "source": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 7.13 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.48,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 7.48 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
+  "projectedRotationSpeedKmS": 4.33,
+  "projectedRotationSpeedSource": "SIMBAD, HD 6569: projected rotation speed 4.33 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

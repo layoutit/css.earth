@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 207897 (pscomppars): age 4.7 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "rotationPeriodDays": 37,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 207897 (pscomppars): rotation period 37 d, from Heidari et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...658A.176H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 16.202,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 16.202 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 38,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 38 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 207897 (pscomppars): projected rotation speed 2 km/s, from Heidari et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...658A.176H/abstract)",
   "shape": {

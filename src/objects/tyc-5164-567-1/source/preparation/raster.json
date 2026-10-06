@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/tyc-5164-567-1/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "tyc-5164-567-1-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csstyc-5164-567-1-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "tyc-5164-567-1-surface-{id}{suffix}.webp",
+      "thumbnail": "tyc-5164-567-1-dataset-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2011-v-quadratic.tsv",
+          "grid": {
+            "teffK": 5151,
+            "logg": 4.49,
+            "models": {
+              "Filt": "V",
+              "Met": "L",
+              "Mod": "A"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        },
+        "qualification": "Photosphere color from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,151 K and log g 4.49 (u1 0.614, u2 0.153): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    },
+    {
+      "id": "radial-field-2013-06",
+      "output": "tyc-5164-567-1-surface-{id}{suffix}.webp",
+      "thumbnail": "tyc-5164-567-1-dataset-{id}.webp",
+      "source": "science/espadons/tyc-5164-567-1-2013-06.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2013-06",
+        "label": "Jun 2013",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/tyc-5164-567-1-2013-06.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -65
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -200,
+        "maximum": 200,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-200",
+          "0",
+          "+200"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 19 ESPaDOnS spectra of 15 June 2013 to 1 July 2013 (reduced chi-square 1.20, against 4.1 with no field); mean field 74 G. A reduction made in this project, not a published map. Black line: 65 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Jun 2013",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "tyc-5164-567-1-context-{id}{suffix}.webp",
+    "limbOutput": "tyc-5164-567-1-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csstyc-5164-567-1-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

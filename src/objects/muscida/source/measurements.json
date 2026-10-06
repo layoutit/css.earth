@@ -17,8 +17,18 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of omi UMa (pscomppars): [Fe/H] -0.16 dex, from Teng et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T/abstract)",
   "luminosityLogSolar": 2.063,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of omi UMa (pscomppars): log10 of the luminosity in solar units 2.06266, from Teng et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T/abstract)",
+  "rotationPeriodDays": 53,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 53 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 53,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 53 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.83,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of omi UMa (pscomppars): projected rotation speed 3.83 km/s, from Sato et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012PASJ...64..135S/abstract)",
+  "spinInclinationDegrees": 15.6,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (14.884 solar radii): sin i = v sin i × P / (2πR) = 0.270. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

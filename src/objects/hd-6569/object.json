@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-6569",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HD 6569",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2015-09",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 528732
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hd-6569-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HD 6569",
+      "classification": "star",
+      "color": "#ffe2ce",
+      "distanceAu": 9378154.5,
+      "description": "A star 76% of the Sun's width that turns once in 7.13 days, with a mapped magnetic field.",
+      "systemName": "HD 6569 system",
+      "order": 5790,
+      "context": {
+        "order": 5787
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1302773444594819000,
+        388614693635568260,
+        -346459399197455740
+      ],
+      "presentationToReference": [
+        0.9580285697260373,
+        -0.02168786220361548,
+        0.28585117845081603,
+        0.28577796298106456,
+        -0.006469319603171367,
+        -0.9582740233243647,
+        -0.02263217760350453,
+        -0.9997438594644675,
+        -1.2007543637473258e-7
+      ],
+      "orbitUpReference": [
+        0.02168786220361548,
+        0.006469319603171367,
+        0.9997438594644675
+      ],
+      "metersPerUnit": 1705587.0967741935,
+      "bodyRadiusM": 528732000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

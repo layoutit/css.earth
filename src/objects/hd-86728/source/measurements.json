@@ -19,6 +19,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 86728 (pscomppars): log10 of the luminosity in solar units 0.13513, from Gupta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169....1G/abstract)",
   "ageGyr": 9.52,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 86728 (pscomppars): age 9.52 Gyr, from Takeda et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJS..168..297T/abstract)",
+  "rotationPeriodDays": 26.637,
+  "rotationPeriodSource": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 26.637 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 21,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 21 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.637,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 26.637 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.5,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 29.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 86728 (pscomppars): projected rotation speed 2.4 km/s, from Gupta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169....1G/abstract)",
   "shape": {

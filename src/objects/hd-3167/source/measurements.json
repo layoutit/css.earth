@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 3167 (pscomppars): age 8.4 Gyr, from Coy et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ..1005L..77C/abstract)",
   "rotationPeriodDays": 23.52,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 3167 (pscomppars): rotation period 23.52 d, from Gandolfi et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....154..123G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 16.2,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 16.2 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.41,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 3167 (pscomppars): projected rotation speed 2.41 km/s, from Bourrier et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...654A.152B/abstract)",
   "shape": {

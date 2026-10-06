@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4515 (pscomppars): age 1.2 Gyr, from Carleo et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract)",
   "rotationPeriodDays": 15.5,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-4515 (pscomppars): rotation period 15.5 d, from Carleo et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 15.3,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 15.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4515 (pscomppars): projected rotation speed 3.4 km/s, from Carleo et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract)",
   "shape": {

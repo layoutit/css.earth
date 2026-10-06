@@ -21,6 +21,40 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of V1298 Tau (pscomppars): age 0.02 Gyr, from Livingston et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract)",
   "rotationPeriodDays": 2.91,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of V1298 Tau (pscomppars): rotation period 2.91 d, from Finociety et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.526.4627F/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.87,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 2.87 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.93426,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 2.93426 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.859,
+      "source": "VizieR J/ApJS/268/30/table5 (Open clusters in K2-Gaia DR3. I. Membership & rot.), column PRot: 2.859 d, the row 1.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.0314,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 3.0314 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.86,
+      "source": "VizieR J/MNRAS/444/1157/table2 (Members of ONC and Tau-Aur), column Per: 2.86 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.83598,
+      "source": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 2.835977 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.83598,
+      "source": "VizieR J/MNRAS/495/1252/table5 (Magnetic activity based on LAMOST and Kepler), column Prot: 2.835977 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 24.77,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of V1298 Tau (pscomppars): projected rotation speed 24.77 km/s, from Johnson et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..247J/abstract)",
   "shape": {

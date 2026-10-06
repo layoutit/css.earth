@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1062 (pscomppars): age 2.5 Gyr, from Otegi et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract)",
   "rotationPeriodDays": 21.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1062 (pscomppars): rotation period 21.8 d, from Otegi et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.113,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 4.113 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.13,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1062 (pscomppars): projected rotation speed 2.13 km/s, from Otegi et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...653A.105O/abstract)",
   "shape": {

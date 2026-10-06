@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "gj-1156-corona",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/gj-1156-corona/source/volume-jan-2009.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/gj-1156-corona/source/provenance.json"
+    },
+    {
+      "path": "src/objects/gj-1156-corona/source/density-mar-2007.ktx2"
+    },
+    {
+      "path": "src/objects/gj-1156-corona/source/density-jan-2008.ktx2"
+    },
+    {
+      "path": "src/objects/gj-1156-corona/source/density-jan-2009.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      184.73791153721248,
+      11.12755537113451
+    ],
+    "distancePc": 6.464192253128253,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.00011510715223450555
+  },
+  "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+  "description": "GJ 1156’s corona, derived here from 3 observed maps of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
+  "defaultDataset": "jan-2009",
+  "framingRadiusUnits": 4,
+  "attachedTo": "gj-1156",
+  "acceptedLabResult": "gj-1156-corona-density-grids",
+  "compactInputs": {
+    "path": "src/objects/gj-1156-corona/source/volume-jan-2009.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "mar-2007",
+      "label": "Derived corona · Mar 2007",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/gj-1156-corona/source/volume-mar-2007.json"
+      }
+    },
+    {
+      "id": "jan-2008",
+      "label": "Derived corona · Jan 2008",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/gj-1156-corona/source/volume-jan-2008.json"
+      }
+    },
+    {
+      "id": "jan-2009",
+      "label": "Derived corona · Jan 2009",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/gj-1156-corona/source/volume-jan-2009.json"
+      }
+    }
+  ]
+}

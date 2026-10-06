@@ -13,8 +13,22 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1301.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.596, rounded to two decimals",
   "luminosityLogSolar": -0.599,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1301 (pscomppars): log10 of the luminosity in solar units -0.59857, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 11.21,
+  "rotationPeriodSource": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 11.21 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 11.21,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 11.21 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.587,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 12.587 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.3,
   "projectedRotationSpeedSource": "SIMBAD, TOI-1301: projected rotation speed 3.3 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "spinInclinationDegrees": 87.3,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.732 solar radii): sin i = v sin i × P / (2πR) = 0.999. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

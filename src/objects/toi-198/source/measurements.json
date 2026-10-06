@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-198 (pscomppars): age 1 Gyr, from Zapatero Osorio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract)",
   "rotationPeriodDays": 48.5,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-198 (pscomppars): rotation period 48.5 d, from Zapatero Osorio et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...706A.166Z/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 46,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 46 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

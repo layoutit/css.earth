@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Baines et al. (2018), AJ 155, 30, HD 62509: effective temperature 4586 +/- 57 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b)",
   "surfaceGravityLogg": 2.8,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/pollux.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.805, rounded to two decimals",
+  "rotationPeriodDays": 227,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 227 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 227,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 227 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

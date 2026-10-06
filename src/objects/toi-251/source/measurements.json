@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-251 (pscomppars): age 0.18 Gyr, from Zhou et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161....2Z/abstract)",
   "rotationPeriodDays": 3.84,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-251 (pscomppars): rotation period 3.84 d, from Zhou et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161....2Z/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.84,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 3.84 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.84,
+      "source": "VizieR J/ApJ/952/68/table1 (A search for stellar siblings of TOI-251b syst.), column Prot: 3.84 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.773,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 3.773 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 11.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-251 (pscomppars): projected rotation speed 11.5 km/s, from Zhou et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161....2Z/abstract)",
   "spinInclinationDegrees": 82.2,

@@ -21,6 +21,64 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-100 (pscomppars): age 0.75 Gyr, from Barragán et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract)",
   "rotationPeriodDays": 4.3,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-100 (pscomppars): rotation period 4.3 d, from Mann et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...64M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.2996,
+      "source": "VizieR J/A+A/612/L2/table1-1 (Compilation of stellar rotation data), column Prot: 4.2996 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.26,
+      "source": "VizieR J/AJ/154/224/table2 (Transiting planets in young clusters from K2), column Prot: 4.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.26,
+      "source": "VizieR J/AJ/154/224/Transit (Transiting planets in young clusters from K2), column Prot: 4.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.27643,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 4.27643 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.2552,
+      "source": "VizieR J/ApJ/839/92/table1 (Praesepe members with K2 light curve data), column PPer: 4.2552 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.26,
+      "source": "VizieR J/ApJ/842/83/table3 (Praesepe members rotational periods from K2 LCs), column Prot1: 4.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.3,
+      "source": "VizieR J/ApJ/879/100/table4 (K2 rotation periods for Hyades & Praesepe members), column Prot-D17: 4.3 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.3,
+      "source": "VizieR J/ApJ/879/100/table4 (K2 rotation periods for Hyades & Praesepe members), column Prot: 4.3 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.26,
+      "source": "VizieR J/ApJ/916/77/table3 (K2 rotation periods for SDSS & Gaia M dwarfs), column Per: 4.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.27,
+      "source": "VizieR J/ApJ/921/167/table3 (Rotators in Praesepe with K2 LCs and Gaia EDR3), column Prot: 4.27 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.27,
+      "source": "VizieR J/ApJ/921/167/table4 (Rotators in Praesepe with K2 LCs and Gaia EDR3), column Prot: 4.27 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.3,
+      "source": "VizieR J/ApJ/931/45/table2 (The factory & the beehive. IV. Praesepe & Hyades), column Prot: 4.3 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.3,
+      "source": "VizieR J/ApJ/962/12/table1 (The Factory and the Beehive. V.), column Prot: 4.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.261,
+      "source": "VizieR J/ApJS/268/30/table5 (Open clusters in K2-Gaia DR3. I. Membership & rot.), column PRot: 4.261 d, the row 0.9 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 14,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-100 (pscomppars): projected rotation speed 14 km/s, from Barragán et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.490..698B/abstract)",
   "spinInclinationDegrees": 73.7,

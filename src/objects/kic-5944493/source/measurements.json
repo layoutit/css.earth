@@ -15,6 +15,14 @@
   "spectralTypeSource": "SIMBAD, 2MASS J19040639+4117492: spectral type G2.5IIIb (2022A&A...664A..78F)",
   "luminosityLogSolar": 1.842,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2103903134544813568, flags_flame 10: lum_flame 69.53923 solar luminosities (16th to 84th percentiles 65.612434 to 74.34565); its log10 is recorded",
+  "rotationPeriodDays": 6.675,
+  "rotationPeriodSource": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 6.67502 d, the row 0.1 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.67502,
+      "source": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 6.67502 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5799 (pscomppars): log10 of the luminosity in solar units -1.82974, from Mistry et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
   "ageGyr": 9.6,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5799 (pscomppars): age 9.6 Gyr, from Yalçinkaya et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract)",
+  "rotationPeriodDays": 151.9,
+  "rotationPeriodSource": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 151.9 d, the row 1.3 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 151.9,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 151.9 d, the row 1.3 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

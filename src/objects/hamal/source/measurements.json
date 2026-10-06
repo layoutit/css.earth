@@ -15,8 +15,18 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of alf Ari (pscomppars): [Fe/H] -0.09 dex, from Lee et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...529A.134L/abstract)",
   "luminosityLogSolar": 1.934,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of alf Ari (pscomppars): log10 of the luminosity in solar units 1.934, from Turnbull 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract)",
+  "rotationPeriodDays": 230,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 230 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 230,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 230 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of alf Ari (pscomppars): projected rotation speed 3.1 km/s, from Lee et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...529A.134L/abstract)",
+  "spinInclinationDegrees": 62.5,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (15.891 solar radii): sin i = v sin i × P / (2πR) = 0.887. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

@@ -17,6 +17,14 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2285 (pscomppars): [Fe/H] -0.05 dex, from Fukui et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract)",
   "luminosityLogSolar": -1.542,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2285 (pscomppars): log10 of the luminosity in solar units -1.54212, from Fukui et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022PASJ...74L...1F/abstract)",
+  "rotationPeriodDays": 18.18,
+  "rotationPeriodSource": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 18.18 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 18.18,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 18.18 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

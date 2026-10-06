@@ -19,8 +19,54 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1651 (pscomppars): log10 of the luminosity in solar units -1.368, from Mann et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..267M/abstract)",
   "ageGyr": 13.121,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2131725447350716032, flags_flame 00: age_flame 13.121169 Gyr (16th to 84th percentiles 6.7446666 to 13.5)",
+  "rotationPeriodDays": 18.211,
+  "rotationPeriodSource": "VizieR J/ApJ/849/36/table1 (Flaring activity of M dwarfs in the Kepler field), column Per: 18.211 d, the row 1.2 arcsec from the star's J2000 place. The middle of 10 catalogued periods, 7 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 18.184,
+      "source": "VizieR J/A+A/594/A39/tablea4 (LAMOST-Kepler parameters and activity indicators), column Prot: 18.184 d, the row 1.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.5,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 18.5 d, the row 1.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 38.42,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 38.42 d, the row 1.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 38.42,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 38.42 d, the row 1.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.184,
+      "source": "VizieR J/ApJ/775/L11/table1 (Stellar rotation periods for KOIs), column Prot: 18.184 d, the row 1.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.211,
+      "source": "VizieR J/ApJ/849/36/table1 (Flaring activity of M dwarfs in the Kepler field), column Per: 18.211 d, the row 1.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.2,
+      "source": "VizieR J/ApJS/218/26/table5 (Parameters of planets orbiting coolest dwarfs), column Prot: 18.2 d, the row 1.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.78,
+      "source": "VizieR J/ApJS/241/29/table1 (Flare catalog through LC data of Kepler DR25), column Prot: 17.78 d, the row 1.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.22,
+      "source": "VizieR J/ApJS/244/21/table5 (Surface rotation & activity of Kepler stars. I.), column Prot1: 18.22 d, the row 1.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3283.5,
+      "source": "VizieR J/ApJS/244/21/table5 (Surface rotation & activity of Kepler stars. I.), column Prot3: 3283.5 d, the row 1.2 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-1651 (pscomppars): projected rotation speed 1.1 km/s, from Fischer et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012MNRAS.419.2900F/abstract)",
+  "spinInclinationDegrees": 51.9,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.503 solar radii): sin i = v sin i × P / (2πR) = 0.787. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

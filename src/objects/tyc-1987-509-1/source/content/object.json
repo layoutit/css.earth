@@ -1,0 +1,155 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "tyc-1987-509-1",
+  "displayName": "TYC 1987-509-1",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.83 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1711-08636",
+          "url": "https://arxiv.org/abs/1711.08636",
+          "label": "Folsom et al. (2017)",
+          "checked": "2026-10-06",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "88.7 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-tyc-1987-509-1",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-06",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "9.4 days",
+        "source": {
+          "catalogueId": "arxiv-1711-08636",
+          "url": "https://arxiv.org/abs/1711.08636",
+          "label": "Folsom et al., arXiv:1711.08636, Table 2: rotation period 9.43 d and an axis 67 degrees from the line of sight, the values its magnetic maps were made with",
+          "checked": "2026-10-06",
+          "path": "source/preparation/rotation.json",
+          "locator": "source"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "tyc-1987-509-1-dataset-color.webp",
+        "surface": "tyc-1987-509-1-surface-color@2x.webp",
+        "poles": "tyc-1987-509-1-poles-color@2x.webp",
+        "source": {
+          "id": "tyc-1987-509-1-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4019588600164776448&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,340 K and log g 4.55 (u1 0.563, u2 0.191): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "radial-field-2015-04",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Apr 2015",
+        "thumbnail": "tyc-1987-509-1-dataset-radial-field-2015-04.webp",
+        "surface": "tyc-1987-509-1-surface-radial-field-2015-04@2x.webp",
+        "poles": "tyc-1987-509-1-poles-radial-field-2015-04@2x.webp",
+        "source": {
+          "id": "tyc-1987-509-1-espadons-map-radial-field-2015-04",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-50",
+            "0",
+            "+50"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-50",
+              "0",
+              "+50"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Apr 2015, reconstructed in this project from 15 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Folsom, C. P. et al., arXiv:1711.08636 map the same run with a mean field of 25 G; this map has 22 G.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 67° S; the star never shows us what lies below it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Folsom et al., arXiv:1711.08636",
+      "href": "https://arxiv.org/abs/1711.08636"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1711.08636",
+      "credit": "Folsom et al., arXiv:1711.08636"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/tyc-1987-509-1.json",
+      "credit": "Folsom et al., arXiv:1711.08636, Table 2: radius 0.83 solar radii radius; Gaia DR3 astrometry; measured spin tilt, axis direction a display convention"
+    }
+  }
+}

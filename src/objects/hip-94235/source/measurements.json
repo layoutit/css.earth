@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HIP 94235 (pscomppars): age 0.118 Gyr, from Zhou et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract)",
   "rotationPeriodDays": 2.24,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HIP 94235 (pscomppars): rotation period 2.24 d, from Zhou et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.24,
+      "source": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 2.24 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.24,
+      "source": "VizieR J/A+A/573/A126/sample (VLT/NaCo Large program I. Sample), column Prot: 2.24 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.2,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 2.2 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 24.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HIP 94235 (pscomppars): projected rotation speed 24.4 km/s, from Zhou et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract)",
   "shape": {

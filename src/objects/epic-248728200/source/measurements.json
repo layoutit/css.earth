@@ -15,6 +15,14 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3867548196700000256, flags_flame 00: lum_flame 72.86481 solar luminosities (16th to 84th percentiles 70.02894 to 77.15144); its log10 is recorded",
   "ageGyr": 0.455,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3867548196700000256, flags_flame 00: age_flame 0.45537105 Gyr (16th to 84th percentiles 0.40863967 to 0.5021024)",
+  "rotationPeriodDays": 28.9767,
+  "rotationPeriodSource": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 28.976717 d, the row 0.1 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 28.9767,
+      "source": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 28.976717 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-1245-b",
+  "card": {
+    "text": "A star 14% of the Sun's width that turns once in 17 hours, with a mapped magnetic field.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1005-5552",
+        "url": "https://arxiv.org/abs/1005.5552",
+        "label": "Morin et al. (2010)",
+        "checked": "2026-10-06",
+        "locator": "Morin et al., arXiv:1005.5552, Table 1"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Morin et al. give it 0.14 solar radii, 0.12 solar masses, a rotation period of 17 hours and an axis tilted 40° from the line of sight.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1005-5552",
+        "url": "https://arxiv.org/abs/1005.5552",
+        "label": "Morin et al. (2010)",
+        "checked": "2026-10-06",
+        "locator": "Morin et al., arXiv:1005.5552, Table 1"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "radial-field-2006-08": {
+      "title": "Radial field, Aug 2006",
+      "detail": "2 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "radial-field-2007-10": {
+      "title": "Radial field, Oct 2007",
+      "detail": "2 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    }
+  }
+}

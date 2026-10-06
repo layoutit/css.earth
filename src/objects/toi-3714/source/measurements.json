@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-3714 (pscomppars): age 2.9 Gyr, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
   "rotationPeriodDays": 23.3,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-3714 (pscomppars): rotation period 23.3 d, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 23.3,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 23.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.3,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 23.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-3714 (pscomppars): projected rotation speed 2 km/s, from Cañas et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...50C/abstract)",
   "shape": {

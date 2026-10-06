@@ -13,6 +13,26 @@
   "surfaceGravitySource": "log g 4.5431 +/- 0.0015 from Kervella et al. 2017 (A&A 597, A137; https://arxiv.org/abs/1610.06185), Table 5, from the dynamical mass of Kervella et al. 2016",
   "spectralType": "K1V",
   "spectralTypeSource": "SIMBAD, * alf Cen B: spectral type K1V (2006A&A...460..695T)",
+  "rotationPeriodDays": 36.2,
+  "rotationPeriodSource": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 36.2 d, the row 0.0 arcsec from the star's J2000 place. The middle of 4 catalogued periods, 4 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 42,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 42 d, the row 1.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 38.7,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 38.7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 36.2,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 36.2 d, the row 1.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 36.2,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 36.2 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.98,
   "projectedRotationSpeedSource": "SIMBAD, * alf Cen B: projected rotation speed 4.98 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

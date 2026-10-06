@@ -19,6 +19,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-60 (pscomppars): log10 of the luminosity in solar units 0.34748, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 1.7,
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-60 (pscomppars): age 1.7 Gyr, from Mancini et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...613A..41M/abstract)",
+  "rotationPeriodDays": 20.6,
+  "rotationPeriodSource": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 20.6 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 20.6,
+      "source": "VizieR J/A+A/549/A134/stars (Four new WASP transiting close-in giant planets), column Per: 20.6 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.3,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 33.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.6,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 20.6 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-60 (pscomppars): projected rotation speed 3.8 km/s, from Mancini et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...613A..41M/abstract)",
   "shape": {

@@ -19,8 +19,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 219134 (pscomppars): log10 of the luminosity in solar units -0.57741, from Gillon et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract)",
   "ageGyr": 11,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 219134 (pscomppars): age 11 Gyr, from Gillon et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017NatAs...1E..56G/abstract)",
+  "rotationPeriodDays": 43,
+  "rotationPeriodSource": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 43 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 43,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 43 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.3,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 44.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 219134 (pscomppars): projected rotation speed 0.4 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "spinInclinationDegrees": 25.9,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.778 solar radii): sin i = v sin i × P / (2πR) = 0.437. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

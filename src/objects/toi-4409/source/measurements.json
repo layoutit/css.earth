@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4409 (pscomppars): log10 of the luminosity in solar units -0.56976, from Reller et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract)",
   "ageGyr": 7,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4409 (pscomppars): age 7 Gyr, from Reller et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...712A.142R/abstract)",
+  "rotationPeriodDays": 74.5,
+  "rotationPeriodSource": "VizieR J/ApJ/962/47/table5 (TESS stellar rotation in the Southern CVZ), column Prot: 74.5 d, the row 0.3 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 74.5,
+      "source": "VizieR J/ApJ/962/47/table5 (TESS stellar rotation in the Southern CVZ), column Prot: 74.5 d, the row 0.3 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

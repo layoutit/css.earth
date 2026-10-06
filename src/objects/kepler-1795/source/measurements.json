@@ -17,6 +17,62 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1795 (pscomppars): log10 of the luminosity in solar units -0.757, from Calculated Value (/docs/pscp_calc.html)",
   "ageGyr": 5.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-1795 (pscomppars): age 5.8 Gyr, from Q1-Q8 KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
+  "rotationPeriodDays": 19.23,
+  "rotationPeriodSource": "VizieR J/A+A/679/L12/table1 (Close-in planets around fast-rotating stars), column Prot: 19.23 d, the row 0.0 arcsec from the star's J2000 place. The middle of 13 catalogued periods, 12 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 18.9371,
+      "source": "VizieR J/A+A/560/A4/table (Rotation periods of active Kepler stars), column P1: 18.9371 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.9587,
+      "source": "VizieR J/A+A/560/A4/table (Rotation periods of active Kepler stars), column P2: 14.9587 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.38,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 19.38 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.38,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 19.38 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.63,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 19.63 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.12,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 19.12 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.23,
+      "source": "VizieR J/A+A/679/L12/table1 (Close-in planets around fast-rotating stars), column Prot: 19.23 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.12,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 19.12 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.31,
+      "source": "VizieR J/ApJ/775/L11/table1 (Stellar rotation periods for KOIs), column Prot: 19.31 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.35,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 19.35 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.31,
+      "source": "VizieR J/ApJ/807/170/table2 (Prograde vs retrogade motions. II. KOIs), column Prot: 19.31 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.12,
+      "source": "VizieR J/ApJS/244/21/table3 (Surface rotation & activity of Kepler stars. I.), column Prot: 19.12 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.937,
+      "source": "VizieR J/other/RMxAA/56.139/keplerd (On the evolution of angular momentum), column Per: 18.937 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.27,
   "projectedRotationSpeedSource": "SIMBAD, Kepler-1795: projected rotation speed 3.27 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

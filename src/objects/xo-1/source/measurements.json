@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of XO-1 (pscomppars): log10 of the luminosity in solar units -0.08628, from Raetz et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009AN....330..475R/abstract)",
   "ageGyr": 0.9,
   "ageSource": "NASA Exoplanet Archive, composite parameters of XO-1 (pscomppars): age 0.9 Gyr, from Southworth 2010 (https://ui.adsabs.harvard.edu/abs/2010MNRAS.408.1689S/abstract)",
+  "rotationPeriodDays": 1.9662,
+  "rotationPeriodSource": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 1.96624 d, the row 0.4 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.96624,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 1.96624 d, the row 0.4 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.11,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of XO-1 (pscomppars): projected rotation speed 1.11 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "spinInclinationDegrees": 2.8,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.88 solar radii): sin i = v sin i × P / (2πR) = 0.049. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

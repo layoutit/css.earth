@@ -19,8 +19,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 156411 (pscomppars): log10 of the luminosity in solar units 0.731, from Naef et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...523A..15N/abstract)",
   "ageGyr": 4.28,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 156411 (pscomppars): age 4.28 Gyr, from Jofré et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...574A..50J/abstract)",
+  "rotationPeriodDays": 27.1518,
+  "rotationPeriodSource": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 27.1518 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 27.1518,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 27.1518 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 27.1518,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 27.1518 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 156411 (pscomppars): projected rotation speed 3.3 km/s, from Naef et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...523A..15N/abstract)",
+  "spinInclinationDegrees": 48.2,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (2.376 solar radii): sin i = v sin i × P / (2πR) = 0.746. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

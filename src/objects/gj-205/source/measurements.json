@@ -13,6 +13,70 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-205.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.710, rounded to two decimals",
   "spectralType": "M1.5Ve",
   "spectralTypeSource": "SIMBAD, HD 36395: spectral type M1.5Ve (1989ApJS...71..245K)",
+  "rotationPeriodDays": 33.8,
+  "rotationPeriodSource": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 33.8 d, the row 0.0 arcsec from the star's J2000 place. The middle of 15 catalogued periods, 12 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.85,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 7.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 23 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34,
+      "source": "VizieR J/A+A/652/A28/tablea1 (Activity indicators across the M dwarf domain), column Prot: 34 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 13.119,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 13.119 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.61,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protlit: 33.61 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.8,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 33.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.8,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 33.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34,
+      "source": "VizieR J/A+A/672/A37/table1 (Activity indicators in M dwarfs), column Prot: 34 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.8,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 33.8 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.8,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 33.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.8,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 33.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.61,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 33.61 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.72,
+      "source": "VizieR J/ApJ/960/62/table4 (Red dwarfs, Xray, UV, and CaII), column Prot: 33.72 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.72,
+      "source": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 33.72 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 35 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.2,
   "projectedRotationSpeedSource": "SIMBAD, HD 36395: projected rotation speed 4.2 km/s, the measurement SIMBAD prefers (2025A&A...698A..93J)",
   "shape": {

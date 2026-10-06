@@ -1,0 +1,49 @@
+{
+  "id": "tyc-6349-200-1",
+  "name": "TYC 6349-200-1",
+  "system": "TYC 6349-200-1 system",
+  "description": "A star 0.96 solar radii and 0.85 solar masses that turns once in 3.41 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 6882838031333427456",
+  "gaia": "6882838031333427456",
+  "paper": {
+    "url": "https://arxiv.org/abs/1601.00684",
+    "credit": "Folsom et al., arXiv:1601.00684"
+  },
+  "radius": {
+    "value": 0.96,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: radius 0.96 solar radii",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "mass": {
+    "value": 0.85,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: mass 0.85 solar masses",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "temperature": {
+    "value": 4144,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 206190624: Teff",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+  },
+  "spin": {
+    "inclinationDegrees": 52,
+    "periodDays": 3.41,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.41 d and an axis 52 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star the Sun's width that turns once in 3.41 days, with a mapped magnetic field.",
+    "introduction": "Folsom et al. give it 0.96 solar radii, 0.85 solar masses, a rotation period of 3.41 days and an axis tilted 52° from the line of sight.",
+    "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -8.06,
+    "uncertainty": 0.54,
+    "source": "SIMBAD's radial velocity for Gaia DR3 6882838031333427456 (quality A), from 2018yCat.1345....0G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018yCat.1345....0G/abstract"
+  },
+  "order": 5796
+}

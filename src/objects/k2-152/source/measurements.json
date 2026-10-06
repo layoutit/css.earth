@@ -17,6 +17,22 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-152 (pscomppars): [Fe/H] 0.12 dex, from Livingston et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract)",
   "luminosityLogSolar": -1.06,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-152 (pscomppars): log10 of the luminosity in solar units -1.06048, from Hirano et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract)",
+  "rotationPeriodDays": 15.47,
+  "rotationPeriodSource": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 15.47 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 15.47,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 15.47 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.3676,
+      "source": "VizieR J/ApJS/243/28/table6 (M-type star magnetic activities from LAMOST & Kepler), column Per: 15.36759 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.47,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 15.47 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

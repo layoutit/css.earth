@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1135 (pscomppars): age 3.3 Gyr, from Dugan et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract)",
   "rotationPeriodDays": 4.34,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1135 (pscomppars): rotation period 4.34 d, from Dugan et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 5.57,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 5.57 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.20189,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 5.20189 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.081,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 5.081 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 10.9,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1135 (pscomppars): projected rotation speed 10.9 km/s, from Dugan et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract)",
   "spinInclinationDegrees": 51.1,
