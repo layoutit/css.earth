@@ -10,6 +10,7 @@ export { imageLayerShapeWalls } from './shape-walls.ts';
 export { densityGrid, imageLayerDensityModel } from './density-grid.ts';
 export { imageLayerBodyModel } from './body.ts';
 export { imageLayerCollision, imageLayerCollisionLeaves } from './collision.ts';
+export { removeCompactSources } from './compact-sources.ts';
 export { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles } from './surface.ts';
 export { imageLayerRingsCover, imageLayerRingsModel, imageLayerRingsSheet, RINGS_OPACITY_REACH_PIXELS } from './rings.ts';
 export { imageLayerRingsCells, imageLayerRingsCurtains, imageLayerRingsGlow, imageLayerRingsSheets } from './rings-volume.ts';

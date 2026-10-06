@@ -38,6 +38,8 @@ src/objects/m1-67-layers/source/shell-grid.dat
 src/objects/m1-layers/source/filament-speeds.dat
 # The Homunculus's published surface (855 kB); restored from its NASA 3D Resources origin (src/objects/homunculus-nebula-layers/source/manifest.json).
 src/objects/homunculus-nebula-layers/source/homunculus.stl
+# The Little Dumbbell's ring and lobes as a surface (912 kB); built by packages/bake/authoring/m76/lobe-surface.mts, restored from the source mirror.
+src/objects/m76-layers/source/lobes.stl
 # Earth's dated NASA MUR tile archives (45 MB a day); restored from the source mirror (src/objects/earth/source/manifest.json).
 src/objects/earth/source/science/mur/*/tiles.tar.gz
 src/objects/*/source/**/*.fits

@@ -34,7 +34,7 @@
     "kind": "inclined-disk",
     "inclinationDeg": 0.001,
     "lineOfNodesPaDeg": 218.08,
-    "thicknessKpc": 9.89e-07,
+    "thicknessKpc": 9.89e-7,
     "depthWeights": [
       0.25,
       0.5,
@@ -47,10 +47,28 @@
       1,
       1
     ],
-    "unit": "pc"
+    "unit": "pc",
+    "surface": {
+      "source": "publication-bryce-1996-ngc-650-kinematics",
+      "basis": "Bryce et al. (1996) took long-slit echelle spectra across the nebula and found a bright ring with a lobe attached to each of its open ends, \"a bipolar wind-driven bubble\". Sect. 1: the bright core is a rectangle of about 95 by 42 arcsec at position angle about 35 deg, the inner lobes extend about 85 arcsec from the central star, and the nebula's major axis is at position angle -55 deg. Sect. 4.1: the core is a ring seen nearly edge-on, 93 arcsec in diameter, expanding at 44 km/s; the lengths of its two sides on the sky give an inclination of 73 to 80 degrees, 76 adopted; its approaching side is toward the south-east, so the north-west lobe points toward the observer. Ramos-Larios et al. (2018) fit the same structure with a SHAPE model: a ring at 75 degrees and lobes at 85. No file of the structure is published. packages/bake/authoring/m76/lobe-surface.mts writes it as one closed surface of revolution about the bipolar axis: each lobe half an ellipse that reaches 85 arcsec and is as wide as the ring, 46.5 arcsec, where the two lobes meet at the star. Where a lobe's middle lies is not printed: it is measured on this picture (packages/bake/authoring/m76/lobe-outline.mts), 35.0 arcsec from the star for the north-west lobe and 36.5 for the south-east one, which makes them 65.1 and 70.6 arcsec in half-width. A check on that width: the paper finds the inner lobes' two sides up to 120 km/s apart along the sight line, and at the ring's rate, 44 km/s at 46.5 arcsec, a wall 65 arcsec from the axis moves at 62 km/s, 123 km/s between its two sides. The file's x axis is the bipolar axis, its +x end the receding, south-east lobe. The pole given here is not that axis: it is the direction across it that lies nearest the sight line, 14 degrees from it toward position angle 305, and the file is turned a quarter about it. The bipolar axis then stands 76 degrees from the sight line at position angle 125, and the plane the bake parts the surface by holds that axis: the two parts are the half toward the Sun and the half away from it, which meet at the surface's outline and not across the bright ring.",
+      "path": "lobes.stl",
+      "arcsecPerUnit": 1,
+      "originUnits": [
+        0,
+        0,
+        0
+      ],
+      "pole": {
+        "tiltDeg": 14,
+        "paDeg": 305,
+        "rollDeg": 90,
+        "receding": "+z"
+      },
+      "fitArcsec": 1
+    }
   },
   "bake": {
-    "maxFacePixels": 1024,
+    "maxFacePixels": 1500,
     "crossAxisSlices": 32,
     "crossAxisDepthPixels": 97,
     "backgroundFloor": 0.0549,

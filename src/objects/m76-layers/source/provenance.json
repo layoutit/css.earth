@@ -43,7 +43,7 @@
     "pixelArcsec": 0.07508,
     "northClockwiseDeg": 19.1
   },
-  "displayModel": "The picture lies on one flat plane facing the Sun at the nebula's distance. Nothing in the picture has depth: seen from the side it is a line.",
+  "displayModel": "Inside the outline of the nebula's ring and inner lobes the picture lies on their surface: a ring 93 arcsec across, seen 14 degrees from edge-on, with a lobe reaching 85 arcsec from the star at each open end (Bryce et al. 1996); the lobes' half-widths, 65.1 and 70.6 arcsec, are measured on the picture. The half of the surface toward the Sun shows the photograph; the half away from it repeats it. Outside that outline, the fainter outer lobes among it, the picture stays on its flat plane.",
   "coverage": "The published frame inside a circle: the picture fades out between 70% and 98% of half its long side: the nebula stands on dark sky, so the frame's long edges show no straight line and the whole nebula is kept. Its stars are removed before the bake by NOX, which predicts the light under a star and does not measure it.",
   "acquisition": {
     "url": "https://cdn.esahubble.org/archives/images/publicationjpg/heic2408a.jpg",

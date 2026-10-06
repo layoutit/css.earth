@@ -1,0 +1,43 @@
+{
+  "id": "publication-ng-2015-el-gordo-return",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The return of the merging galaxy subclusters of El Gordo?",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1412.1826"
+    },
+    {
+      "type": "doi",
+      "value": "10.1093/mnras/stv1713"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1412.1826",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1412.1826",
+      "checkedOn": "2026-10-05",
+      "locator": "Abstract and Sect. 3: from the polarisation fraction of the radio relic, the angle between the plane of the sky and the merger axis is 21 (+9, -11) degrees. Sect. 4: the scenario in which the subclusters are returning after apocentre is preferred over the outgoing one (probability ratios of about 2.1 and 460 from the two relics), while the cool core may still be moving outward."
+    }
+  ],
+  "creators": [
+    "Ng, K. Y.",
+    "Dawson, W. A.",
+    "Wittman, D.",
+    "Jee, M. J.",
+    "Hughes, J. P.",
+    "Menanteau, F.",
+    "Sifón, C."
+  ],
+  "publisher": "MNRAS 453, 1531",
+  "publicationDate": "2015",
+  "relations": [],
+  "statements": []
+}

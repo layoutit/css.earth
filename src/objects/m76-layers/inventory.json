@@ -10,20 +10,26 @@
     {
       "location": "prepared",
       "filename": "image-layers.json",
-      "bytes": 9532,
-      "sha256": "de4f0478efb03d3e4954b214c71428e18914aa592b1b77ce93d9ab76f4872bb7"
+      "bytes": 2232864,
+      "sha256": "358a7d24a38562fb6e7469304f5ceee292d5ff94080f34547e71c31ceac618a8"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-0.webp",
+      "bytes": 780608,
+      "sha256": "a6db7f21ecfd0b49e5d88481180cc279f7ebe30cc7b297b5032ada89a51d6257"
     },
     {
       "location": "prepared",
       "filename": "layers/z-detail.webp",
-      "bytes": 243196,
-      "sha256": "4c7fcfe71a9c4591da862eccc924410ea8f69ceec632a08cd1629d2acd8f5d55"
+      "bytes": 352674,
+      "sha256": "001d9f28ee10d04a34ea800aa0d8e4f35db1d57b835e024230c1c5bac9491790"
     },
     {
       "location": "prepared",
       "filename": "presentation.json",
-      "bytes": 1458,
-      "sha256": "35466c9b098844de5d04da1064d0fb39e820099058244bf5a98400c4d1d97b20"
+      "bytes": 1850,
+      "sha256": "a3d8d1a20cfcf1009f0171863e67128d6da26620f5ab354459aa573987c0b241"
     }
   ]
 }
