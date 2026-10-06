@@ -67,8 +67,8 @@ export async function runSurfaceMaps<M extends SurfaceMap>(route: MapRoute<M>, s
 
 /** How many stars one bake command takes: a command line stays short, and a failure costs one group. */
 export const BAKE_GROUP = 40;
-/** Bake the stars whose maps were written: their source downloads restored, then each star's chain through its page text,
- * since a map is a new surface image.
+/** Bake the stars whose maps were written: their baked files and source downloads restored, then each star's chain through
+ * its page text, since a map is a new surface image.
  * A star whose default view is unchanged is then pinned: the steps between (markers, arrival billboard, world context,
  * systems, catalogues) show that view. A star whose axis was tilted has a new default view, so its stored arrival picture
  * is removed before the bake (the catalogue step refuses a picture of another view) and the rest of its chain is left to
@@ -77,8 +77,9 @@ export async function bakeSurfaceMaps(results: readonly SurfaceMapResult[], { ro
   const hosts = [...new Set(results.map(result => result.host))], tilted = [...new Set(results.filter(result => result.tilted).map(result => result.host))], kept = hosts.filter(host => !tilted.includes(host));
   for (const host of tilted) await rm(resolve(root, 'src/objects', host, 'prepared/arrival-billboard.json'), { force: true });
   const groups = (ids: readonly string[]) => Array.from({ length: Math.ceil(ids.length / BAKE_GROUP) }, (_, i) => ids.slice(i * BAKE_GROUP, (i + 1) * BAKE_GROUP));
-  // A star's bake reads every input its manifest declares: the downloads a checkout does not hold are restored first.
-  for (const args of [...groups(hosts).map(group => ['packages/bake/cli/restore-source-inputs.mts', ...group.map(host => `--object=${host}`)]), ...groups(hosts).map(group => ['packages/bake/cli/prepare-object.mts', ...group, '--to', 'text']), ...groups(kept).map(group => ['packages/bake/cli/prepare-object.mts', ...group, '--from', 'pins'])]) {
+  // A star's bake reads every input its manifest declares, and its inventory keeps only the baked files the checkout holds:
+  // the star's baked files and the downloads a checkout lacks are restored first.
+  for (const args of [...groups(hosts).flatMap(group => [['packages/bake/cli/setup-assets.mts', ...group.map(host => `--object=${host}`)], ['packages/bake/cli/restore-source-inputs.mts', ...group.map(host => `--object=${host}`)]]), ...groups(hosts).map(group => ['packages/bake/cli/prepare-object.mts', ...group, '--to', 'text']), ...groups(kept).map(group => ['packages/bake/cli/prepare-object.mts', ...group, '--from', 'pins'])]) {
     progress(`== ${args.join(' ')}`);
     const code = await new Promise<number | null>(done => { spawn('node', args, { cwd: root, stdio: ['ignore', 2, 2] }).on('error', () => done(null)).on('close', done); });
     if (code !== 0) { progress(`FAILED: node ${args.join(' ')}`); return false; }
