@@ -1,29 +1,9 @@
 import { STAR_ASTROMETRY } from './data/starAstrometry.data.js'
 import { RAD_PER_DEG } from './angles.js'
 import type { Vec3 } from './vec3.js'
+import type { StarAstrometry } from './data/records.js'
+export type { StarAstrometry } from './data/records.js'
 
-/** Catalogue astrometry of a star beyond the Solar System: an ICRS direction and epoch, a distance, a proper
- * motion and a radial velocity. Each value names the publication it was read from. */
-export interface StarAstrometry {
-  /** Stable cross-identification for a HYG/Hipparcos row, when one exists. */
-  readonly hipparcosId?: number
-  readonly rightAscensionDegrees: number
-  readonly declinationDegrees: number
-  /** Epoch of the catalogue position, Julian years (ICRS positions are quoted at J2000.0). */
-  readonly positionEpochJulianYear: number
-  readonly distanceParsecs: number
-  /** Proper motion in right ascension, already multiplied by cos(declination). */
-  readonly properMotionRaMasPerYear: number
-  readonly properMotionDecMasPerYear: number
-  readonly radialVelocityKmPerS: number
-  /** Which direction the prepared presentation frame puts up: the J2000 ecliptic north pole by default, or the star's own
-   * display axis (its rotation record's +z) so the camera orbit lies in the star's equator and reaches its sub-Earth point. */
-  readonly presentationUp?: 'display-axis'
-  /** A star measured to be gravitationally bound to another, with no measured orbit: a wide binary companion. The pair is one
-   * system centred on its centre of mass; `sources.binary` states the measurement that binds them. */
-  readonly boundTo?: string
-  readonly sources: { readonly position: string; readonly distance: string; readonly properMotion: string; readonly radialVelocity: string; readonly binary?: string }
-}
 export type StarId = keyof typeof STAR_ASTROMETRY
 export const STAR_IDS: readonly StarId[] = Object.keys(STAR_ASTROMETRY) as StarId[]
 

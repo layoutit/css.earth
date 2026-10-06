@@ -12,9 +12,8 @@ import { blackFillCoverage, sampleCoverage, paintMissingCoverage } from '../../.
 import { object, string, number, boolean, optional, array, union, parse } from '@cssearth/core/schema';
 import { decodeElevationGrid, elevationRaster } from './elevation.ts';
 import type { ElevationRecipe } from './elevation.ts';
+import type { RasterImage } from './raster-image.ts';
 
-export interface RasterInfo {width: number; height: number; channels: 1 | 2 | 3 | 4;}
-export interface RasterImage {data: Buffer; info: RasterInfo;}
 export interface TonalPresentation {saturation: number; linearGain: number; linearOffset: number; sharpenSigma: number;}
 export interface ObservationDataset {
   id: string; input: string; output?: string; rasterScale?: number;

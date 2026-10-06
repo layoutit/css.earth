@@ -7,9 +7,9 @@
  * is TDB seconds past J2000. Other types are refused by number.
  */
 import type { Daf, DafSummary } from './daf.js';
+import type { State } from './state.js';
 import { propagateTwoBody } from './two-body.js';
 
-export interface State { readonly position: readonly [number, number, number]; readonly velocity: readonly [number, number, number] }
 export interface SpkSegment {
   readonly name: string; readonly target: number; readonly center: number; readonly frame: number; readonly type: number;
   readonly start: number; readonly stop: number;

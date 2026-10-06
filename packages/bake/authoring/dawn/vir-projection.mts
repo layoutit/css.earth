@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import type { VirRecipe, Continuum, Reduced } from './vir-mosaic.mts';
+import type { VirRecipe, Continuum, Reduced } from './vir-recipe.mts';
 
 
 /** Frigeri et al. (2019): the continuum joins the reflectance at the left anchor (the maximum within `left`) and the right

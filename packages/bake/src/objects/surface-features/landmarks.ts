@@ -5,7 +5,7 @@ import { createIndexedShape } from '../geometry/index.ts';
 import { normalizeSearchText } from './catalog.ts';
 import { projectRadial, surfaceDirection } from './geometry.ts';
 import type { PreparedSurfaceFeature, SurfaceFeatureAxes } from '@cssearth/objects';
-import type { SurfaceFeaturePreparationContext } from './surface-features.ts';
+import type { SurfaceFeaturePreparationContext } from './preparation-context.ts';
 import { dot3 as dot } from '@cssearth/core';
 
 type Vec = readonly [number, number, number];

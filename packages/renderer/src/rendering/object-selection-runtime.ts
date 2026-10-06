@@ -4,7 +4,8 @@ import type { CameraMotionSignal } from '../navigation/camera-motion-signal.js';
 import type { ObjectSelection, ObjectAction } from '../runtime/object-contract.js';
 
 import type { SceneLifetime } from "@cssearth/engine";
-import type { PreparedPresentationPlan, PreparedView, mountPreparedPresentation } from './prepared-presentation.js';
+import type { PreparedPresentationPlan, mountPreparedPresentation } from './prepared-presentation.js';
+import type { PreparedView } from './prepared-view.js';
 
 import type { createPreparedResidency, PreparedResidencyTicket } from "./prepared-residency.js";
 /** How a committed selection was requested: its kind, and whether it may move the camera. */

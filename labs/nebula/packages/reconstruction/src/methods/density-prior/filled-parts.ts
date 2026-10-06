@@ -1,23 +1,7 @@
 /** Offline contribution-bank API for a frozen filled-volume reconstruction. */
 import { createFilledVolumeSampler, type FilledVolumeOptions, type FilledVolumeSampler } from './filled-volume.ts';
-
-type Vec3 = [number, number, number];
-type Bounds3 = { min: Vec3; max: Vec3 };
-
-export interface FilledVolumePart {
-  id: string;
-  kind: 'extended' | 'compact' | 'diffuse';
-  componentId?: string;
-  scale?: number;
-  radius?: number;
-  integratedIntensity: number;
-  supportBoundsKpc: Bounds3;
-  /** Allocation-free optical RGB emissivity using the reference reconstruction's frozen geometry. */
-  sample(xKpc: number, yKpc: number, zKpc: number, out: Vec3): void;
-  /** Optical column for this independently baked contribution. */
-  integratedTargetAtPixel(pixel: number, out: Vec3): void;
-  interpretation: string;
-}
+import type { FilledVolumePart } from './filled-contracts.ts';
+export type { FilledVolumePart } from './filled-contracts.ts';
 
 export interface FilledPartsSampler {
   /** Unchanged selected-channel reference used for the exact default leaves. */

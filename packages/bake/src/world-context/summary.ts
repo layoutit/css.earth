@@ -1,7 +1,7 @@
 import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA, systemHostId, systemObjectId, worldHolders } from '@cssearth/objects';
 import type { PreparedWorldContextData, PreparedSystemView } from '@cssearth/objects';
 import { outwardSphere } from './spatial-context.ts';
-import type { Vector3 } from './spatial-context.ts';
+import type { Vector3 } from './orbital-state.ts';
 
 export type Billboard = { readonly url: string; readonly size: number; readonly focalPixels: number; readonly distanceM: number };
 type Facts = Readonly<Record<string, unknown>>;

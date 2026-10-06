@@ -1,6 +1,6 @@
 import { type PreparedMaterialFrameMapping, type PreparedMaterialTrack, type PreparedMaterialSelection } from '@cssearth/objects';
 
-import type { PreparedView } from "./prepared-presentation.js";
+import type { PreparedView } from "./prepared-view.js";
 import type { PreparedResources } from "./prepared-residency.js";
 import { readPreparedStyle, writePreparedStyle } from "./style-access.js";
 export type PreparedMaterialView = Pick<PreparedView, "sunViewDirection" | "sceneMatrix" | "reference"> & Partial<Pick<PreparedView, "levelOfDetail" | "projection" | "viewportWidth" | "viewportHeight" | "motionAtRest">>;

@@ -2,7 +2,7 @@
  * and each parameter's values there as transferable typed arrays. */
 import { parentPort, workerData } from 'node:worker_threads';
 import { projectReducedFile } from './vir-projection.mts';
-import type { VirRecipe } from './vir-mosaic.mts';
+import type { VirRecipe } from './vir-recipe.mts';
 
 const { recipe, gain, work, ppd, fillMaximumStepKm } = workerData as { recipe: VirRecipe; gain: number[][]; work: string; ppd: number; fillMaximumStepKm: number };
 parentPort!.on('message', async (name: string) => {

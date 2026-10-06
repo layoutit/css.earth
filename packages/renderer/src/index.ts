@@ -6,12 +6,13 @@ export type { ObjectRuntimeServices } from './runtime/object-runtime.js';
 export { initialObjectSelection, requireObjectAction, reduceObjectSelection } from './runtime/object-contract.js';
 export type { ObjectAction, ObjectSelection } from './runtime/object-contract.js';
 export type { RuntimePolicy } from './navigation/runtime-policy.js';
-export type { PerspectiveWorldContext } from './navigation/perspective-dolly.js';
+export type { PerspectiveWorldContext } from './navigation/prepared-camera.js';
 export { formatSharedView, parseSharedView } from './navigation/view-url.js';
 /** The document's one frame clock: every frame callback of the application goes through it. */
 export { opacityClockFor } from './stars/opacity-clock.js';
 export type { SharedView, SharedPlayback } from './navigation/view-url.js';
-export type { PreparedView, PreparedPresentationPlan } from './rendering/prepared-presentation.js';
+export type { PreparedPresentationPlan } from './rendering/prepared-presentation.js';
+export type { PreparedView } from './rendering/prepared-view.js';
 
 export { resolvePreparedAssetUrl, rewritePreparedStyleUrls, parsePreparedAssetOrigin, preparedAssetGroup, preparedAssetGroupFile, createPreparedAssetResolver } from './rendering/prepared-asset-origin.js';
 

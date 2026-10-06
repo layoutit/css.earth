@@ -5,7 +5,7 @@ export type { SharedView, SharedPlayback } from './view-url.js';
 export { createWorldSelectionTarget } from './selection-target.js';
 
 export { savedWorldCamera } from './saved-world-camera.js';
-export type { PerspectiveWorldContext } from './perspective-dolly.js';
+export type { PerspectiveWorldContext } from './prepared-camera.js';
 export { bindObjectNavigationTarget, supportsObjectNavigation } from '../solar-system/heliocentric-navigation.js';
 export { createCameraViewport } from './camera-viewport.js';
 export type { CameraViewport, CameraViewportSnapshot } from './camera-viewport.js';

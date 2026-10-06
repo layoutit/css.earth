@@ -9,7 +9,6 @@ import { traceCauses, causeTraceEvents } from './webkit-trace-causes.mts';
 import { traceClues } from './webkit-trace-clues.mts';
 import { inspectBuild } from './trace-sources.mts';
 import { compositorClues, compositorTraceEvents } from './webkit-compositor-clues.mts';
-import { analysisHtml } from './webkit-trace-report.mts';
 
 type Trace = { traceEvents: Record<string, unknown>[]; metadata: Record<string, unknown> };
 type Bounds = { startTs: number; endTs: number };
@@ -124,7 +123,8 @@ export function navigationAnalysis(value: unknown, receipt: unknown) {
     }) };
 }
 
-export async function writeNavigationAnalysis(trace: unknown, directory: string, receipt: unknown, raw: unknown = null) {
+/** Writes the slices and `analysis.json`; `writeNavigationAnalysis` (webkit-trace-report.mts) adds the page. */
+export async function writeNavigationManifest(trace: unknown, directory: string, receipt: unknown, raw: unknown = null) {
   const analysis = navigationAnalysis(trace, receipt);
   const styleWrites: unknown = await readFile(resolve(directory, 'style-writes.json'), 'utf8').then(JSON.parse, () => null);
   const causeData: unknown = await readFile(resolve(directory, 'causes.json'), 'utf8').then(JSON.parse, () => null);
@@ -179,6 +179,5 @@ export async function writeNavigationAnalysis(trace: unknown, directory: string,
   const pending = resolve(directory, `analysis.${process.pid}.tmp`);
   await writeFile(pending, JSON.stringify(manifest, null, 2) + '\n');
   await rename(pending, resolve(directory, 'analysis.json'));
-  await writeFile(resolve(directory, 'analysis.html'), analysisHtml(manifest));
   return manifest;
 }
