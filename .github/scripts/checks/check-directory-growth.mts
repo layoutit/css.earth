@@ -80,9 +80,8 @@ export interface Growth { directory: string; kind: 'implementations' | 'tests'; 
 /** A directory fails only when it grows past whichever is larger: its recorded baseline, or the
  * free allowance. A directory absent from the baseline may grow to the allowance and no further.
  *
- * Only implementations gate. A flat test directory is a real smell — `site/test` holds 172 files —
- * but refusing a new test is worse than the smell it prevents, so test growth is reported and never
- * fails. Decomposing a test directory is its own change, not a toll on the next person to add a case. */
+ * Only implementations gate. A flat test directory is a real smell, but refusing a new test is worse
+ * than the smell it prevents, so test growth is reported and never fails. Decomposing a test directory is its own change, not a toll on the next person to add a case. */
 export function growth(counts: ReadonlyMap<string, { implementations: number; tests: number }>, baseline: Baseline,
   kinds: readonly ('implementations' | 'tests')[] = ['implementations']): Growth[] {
   const failures: Growth[] = [];
