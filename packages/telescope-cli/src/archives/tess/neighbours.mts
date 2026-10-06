@@ -7,8 +7,8 @@
  * flux over everyone's. No point-spread function is fitted: a neighbour counts whole wherever it lies in the circle, so the
  * share is an upper bound.
  *
- * A star is not reduced when Gaia has no source at its place (the share is then unknown), when it is fainter than
- * FAINTEST_MAGNITUDE, or when its neighbours give more than NEIGHBOUR_LIGHT_LIMIT of the light. */
+ * A star is not reduced when Gaia has no source at its place (the share is then unknown), when it is brighter than
+ * BRIGHTEST_MAGNITUDE or fainter than FAINTEST_MAGNITUDE, or when its neighbours give more than NEIGHBOUR_LIGHT_LIMIT of the light. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { USER_AGENT } from './pixels.mts';
@@ -22,6 +22,9 @@ export const OWN_ARCSEC = 3;
 export const NEIGHBOUR_LIGHT_LIMIT = 0.1;
 /** Fainter than this a star's light is lost in the noise of these pixels; it is not fetched. */
 export const FAINTEST_MAGNITUDE = 13.5;
+/** Brighter than this a star saturates the detector and its light bleeds along the columns, beyond the pixels added up for it:
+ * the seven of the first 70 stars read whose pixels showed nothing above the sky were all of magnitude 2.3 to 3.7. It is not fetched. */
+export const BRIGHTEST_MAGNITUDE = 5;
 
 export interface PixelLight { /** The star's own Gaia DR3 source and its magnitude (red band, or G where Gaia gives no red one). */ readonly gaiaDr3: string; readonly magnitude: number;
   readonly neighbours: number; /** The neighbours' share of all the light in the circle, 0 to 1. */ readonly neighbourShare: number;
@@ -46,6 +49,7 @@ export function parseNeighbours(csv: string): Map<string, PixelLight> {
 /** Why a star's pixels are not fetched, when they are not. */
 export function lightRefusal(light: PixelLight | undefined): string | undefined {
   if (!light) return `Gaia DR3 has no source within ${OWN_ARCSEC} arcseconds of the star's place, so how much of the light in its pixels is its own is not known.`;
+  if (light.magnitude < BRIGHTEST_MAGNITUDE) return `At magnitude ${light.magnitude.toFixed(1)} the star saturates TESS's detector: its light bleeds beyond the pixels added up for it.`;
   if (light.magnitude > FAINTEST_MAGNITUDE) return `At magnitude ${light.magnitude.toFixed(1)} the star is fainter than the ${FAINTEST_MAGNITUDE} these pixels can follow.`;
   if (light.neighbourShare > NEIGHBOUR_LIGHT_LIMIT) return `Other stars give ${(100 * light.neighbourShare).toFixed(0)}% of the light within ${NEIGHBOUR_ARCSEC} arcseconds of the star (Gaia DR3${light.brightest ? `; the brightest, ${light.brightest.arcsec} arcseconds away, has magnitude ${light.brightest.magnitude.toFixed(1)} against the star's ${light.magnitude.toFixed(1)}` : ''}): a period in these pixels would not be known to be the star's.`;
   return undefined;

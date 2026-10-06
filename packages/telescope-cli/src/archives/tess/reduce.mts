@@ -77,12 +77,14 @@ export async function reduceStar(id: string, keepPixels = false, light?: PixelLi
   const star = await starPlace(id); if (!star) throw new Error(`${id} is not a star with a place on the sky.`);
   const run = resolve(WORKSPACE, 'output/tess', id), pixels = resolve(run, 'pixels'), pins = await toolchainPins(); await mkdir(run, { recursive: true });
   const own = light === undefined ? (await lightOf([star])).get(id) : light ?? undefined, refusal = lightRefusal(own), tried: Record<string, unknown>[] = [], stem = (sector: number) => `${id}-s${String(sector).padStart(4, '0')}`;
-  const sectors = refusal ? [] : await sectorsAt(...Object.values(placeAt(star, MISSION_YEAR)) as [number, number]), newest = pickSector(sectors);
+  const sectors = refusal ? [] : await sectorsAt(...Object.values(placeAt(star, MISSION_YEAR)) as [number, number]), picked = pickSector(sectors), newest = sectors.at(-1);
   let rotation: RotationVerdict = { detected: false, reason: refusal ?? 'TESS has not imaged this place.' }, seen: { sector: number; time: readonly number[]; flux: readonly number[] } | undefined;
-  if (newest) { const { sector } = newest, place = placeAt(star, sectorYear(sector)), cutout = await fetchCutout(place.raDegrees, place.decDegrees, sector, pixels), curve = await sectorLightCurve(cutout.file);
+  // A sector in which no pixel stands above the sky at the star (the star at a detector's edge, a frame full of scattered
+  // light) holds no light curve to judge: the newest sector is read in its place.
+  for (const { sector } of [...new Set([picked, newest].filter((one): one is ImagedSector => one !== undefined))]) { const place = placeAt(star, sectorYear(sector)), cutout = await fetchCutout(place.raDegrees, place.decDegrees, sector, pixels), curve = await sectorLightCurve(cutout.file);
     rotation = curve ? besideCatalogued(rotationVerdict(curve), star.cataloguedPeriodDays) : { detected: false, reason: 'No pixel stands above the sky at the star.' };
     tried.push({ sector, cadenceMinutes: Number(cadenceMinutes(sector).toFixed(2)), pixels: { url: cutout.url, bytes: cutout.bytes }, ...(curve ? { frames: curve.frames, aperturePixels: curve.aperturePixels, saturated: curve.saturated, strongest: curve.whole, orbits: curve.halves, lightCurve: `${stem(sector)}.curve.json` } : {}), verdict: rotation });
-    if (curve) { seen = { sector, time: curve.time, flux: curve.flux }; await writeFile(resolve(run, `${stem(sector)}.curve.json`), `${JSON.stringify({ sector, binDays: BIN_DAYS, time: curve.time, flux: curve.flux })}\n`); } }
+    if (curve) { seen = { sector, time: curve.time, flux: curve.flux }; await writeFile(resolve(run, `${stem(sector)}.curve.json`), `${JSON.stringify({ sector, binDays: BIN_DAYS, time: curve.time, flux: curve.flux })}\n`); break; } }
   if (!keepPixels) await rm(pixels, { recursive: true, force: true });
   const receipt: Record<string, unknown> = { schema: ROTATION_SCHEMA, star, ...(own ? { light: own } : {}), sectorsImaged: sectors.map(sector => sector.sector), tried, rotation, toolchain: { id: pins.id, requirements: pins.entry.requirements } };
   if (rotation.detected && seen) { const tilt = star.tiltDegrees ?? ASSUMED_TILT_DEGREES, map = await brightnessMap(seen, rotation.periodDays!, Math.min(tilt, 90)), table = `${stem(seen.sector)}.dat`, flat = map.values.flat();

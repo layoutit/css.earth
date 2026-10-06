@@ -12,6 +12,7 @@ test('a star\'s pixels are its own when Gaia\'s neighbours give little of the li
   assert.equal(light.get('paired')!.neighbourShare, 0.4793); assert.match(lightRefusal(light.get('paired'))!, /Other stars give 48% of the light within 63 arcseconds.*49\.2 arcseconds away, has magnitude 9\.5 against the star's 9\.4/u);
   assert.equal(light.has('absent'), false); assert.match(lightRefusal(undefined)!, /Gaia DR3 has no source within 3 arcseconds/u);
   assert.match(lightRefusal({ gaiaDr3: '1', magnitude: 14.1, neighbours: 0, neighbourShare: 0 })!, /fainter than the 13\.5/u);
+  assert.match(lightRefusal({ gaiaDr3: '1', magnitude: 2.4, neighbours: 0, neighbourShare: 0 })!, /At magnitude 2\.4 the star saturates/u);
   assert.throws(() => parseNeighbours('angDist,id\n'), /did not answer with Gaia DR3 sources/u);
 });
 
