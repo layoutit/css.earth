@@ -14,6 +14,7 @@ from the pictures themselves.
 | [Clowe et al. (2006)](https://arxiv.org/abs/astro-ph/0608407) | [Record](../../sources/publication-clowe-2006-bullet-cluster-dark-matter.json). The places of the two gas clouds (Table 2) and of the two mass peaks (Sect. III): the two lines the bodies are turned about. |
 | [Markevitch et al. (2002)](https://arxiv.org/abs/astro-ph/0110468), [Springel & Farrar (2007)](https://arxiv.org/abs/astro-ph/0703232) | [Record](../../sources/publication-markevitch-2002-bullet-cluster-bow-shock.json), [record](../../sources/publication-springel-farrar-2007-bullet-cluster-speed.json). The symmetry: the gas about the bullet is fitted as round about the line it moves along, the cones of its bow shock and cold front are round about that line, and the mass is fitted with two round halos. |
 | [Barrena et al. (2002)](https://arxiv.org/abs/astro-ph/0202323), [Lage & Farrar (2014)](https://arxiv.org/abs/1312.0959) | [Record](../../sources/publication-barrena-2002-bullet-cluster-dynamics.json), [record](../../sources/publication-lage-farrar-2014-bullet-cluster-simulation.json). The tilt: the collision line is 5 to 15° from the plane of the sky (the subcluster's galaxies recede at 616 km/s); a simulation fitted to the maps gives about 10°, the subcluster receding. The recipe uses 10°. |
+| [Mahdavi & Chang (2011)](https://arxiv.org/abs/1105.3210) | [Record](../../sources/publication-mahdavi-chang-2011-line-of-sight-depth.json). A measured limit on depth: from X-ray and Sunyaev-Zel'dovich data, with no assumption on shape, half the pressure on the sight line through the main component lies within at least 400 ± 56 kpc, and at least 0.92 of its width on the sky. A check on the drawn body, below. |
 | [MCXC-II, Sadibekova et al. (2024)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/688/A187) | [Record](../../sources/mcxc-ii-2024.json). Row MCXC J0658.5-5556: position 104.6296°, -55.9469° and redshift 0.2965, from [2004A&A...425..367B](https://ui.adsabs.harvard.edu/abs/2004A&A...425..367B). |
 | [Planck Collaboration (2020)](https://arxiv.org/abs/1807.06209) | [Record](../../sources/planck-2018-cosmology.json). The redshift's comoving distance in the Planck 2018 cosmology, 1,219 Mpc (Astropy 8.0.1, `Planck18`): the distance the picture stands at. |
 | [Gaia DR3](https://doi.org/10.1051/0004-6361/202243940) | [Record](../../sources/gaia-2023-dr3.json). The 172 sources in the frame (CDS `I/355/gaiadr3`, a cone query on the picture's centre), used only to measure where the picture lies on the sky. |
@@ -71,11 +72,23 @@ from the pictures themselves.
   needs a screen, so the slabs are built from the back: each texel holds its own light and what it hides.
 - **Bytes:** 110 images, 0.97 MB: the photograph 0.07 MB (WebP quality 70), slabs 0.28 MB, curtains 0.61 MB.
 
+## Against a measured limit
+
+`node packages/bake/authoring/bullet-cluster/depth-limit.mts` reads the drawn gas body where Mahdavi & Chang (2011)
+measured, within 41.5″ of the main cloud's middle.
+
+- **Ratio:** a body of revolution about a line in the plane of the sky is as deep as it is wide across that line: 1,
+  where the measured limit is at least 0.92. The symmetry is inside the limit.
+- **Depth:** half the drawn body's pressure (the root of its emission, at one temperature) lies within 302 kpc of sight
+  line; half its X-ray emission within 158 kpc. The measured limit is at least 400 ± 56 kpc. The drawn body is the
+  shallower: it is drawn from a display picture of X-ray light, which falls off faster than pressure and is not
+  calibrated emission.
+
 ## Evidence
 
-![Bullet Cluster in the app](evidence/2026-10-05/views.jpg)
+![Bullet Cluster in the app](evidence/2026-10-06/views.jpg)
 
-The Bullet Cluster page in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on 2026-10-05: the default
+The Bullet Cluster page in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on 2026-10-06: the default
 arrival and the camera turned in steps toward the side.
 
 `packages/bake/src/image-layers/collision.test.ts` builds a picture from balls of even gas on a line and checks that the
@@ -93,7 +106,7 @@ the Sun are the pictures screened, to within 3 of 255.
 | Screen blend of the layers; the lifted gas and mass pictures | Measured on the publisher's files |
 | Round about the collision line | Assumed, as the X-ray and lensing papers assume it; how far the pictures depart from it is measured above |
 | Tilt of 10° | Published range of 5 to 15°; 10° is one fitted simulation's value |
-| Depth of any pixel | Inferred from the symmetry. Nothing measures it |
+| Depth of any pixel | Inferred from the symmetry. Nothing measures it; one limit on the main cloud's depth is measured, above |
 | Sky floor, edge fade, grid and slab counts, framing radius | Presentation |
 
 ## Known problems
@@ -106,8 +119,8 @@ the Sun are the pictures screened, to within 3 of 255.
   the visible light stays on one plane.
 - A slab can only hide what is behind it, so where bright gas and mass share a sight line the slabs in front carry some
   of the light of those behind. From the Sun the sum is right; seen from an angle that light is a little out of place.
-- From the sides the curtains are separate layers and each hides what is behind it: where pink and blue overlap, the
-  side views are dimmer than a true sum of light would be.
+- From straight beside, the curtains add up as a screen does: each texel is as much whiter than its own light as all the
+  light on its sight line through the curtains is. At other angles their sum is not exact.
 - The page opens with ecliptic north up, as every page does, so the picture arrives turned from the publisher's orientation.
 - The size is a comoving size. The cluster is bound and does not expand with the universe; its proper size at its redshift is
   smaller by 1 + z.

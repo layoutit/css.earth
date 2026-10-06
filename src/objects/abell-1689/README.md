@@ -1,6 +1,6 @@
 # Abell 1689
 
-Abell 1689 as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [Abell 1689 picture](../abell-1689-layers/README.md) bank, whose README holds the picture's source, registration, evidence and known problems.
+Abell 1689 as an object of the world: its place, its card and its list marker. It has no surface. Its second dataset is the [gas and mass](../abell-1689-chandra-layers/README.md) bank, the 2008 Chandra picture in its layers with a measured depth. Its first dataset shows the [Abell 1689 picture](../abell-1689-layers/README.md) bank, whose README holds the picture's source, registration, evidence and known problems.
 
 ## Sources
 

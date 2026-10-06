@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-heic1014a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Mass map of Abell 1689",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "heic1014a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/heic1014a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://esahubble.org/media/archives/images/original/heic1014a.tif",
+      "label": "Fullsize original, TIFF, 3853 x 3902 px, 17.2 MB"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/heic1014a/",
+      "checkedOn": "2026-10-06",
+      "locator": "Released 19 August 2010 with heic1014: Abell 1689 with the mass distribution of the gravitational lens laid over a Hubble ACS picture (475, 775 and 850 nm); 3853 x 3902 px, a field of 3.21 x 3.25 arcmin, north 115.1 deg right of vertical. It was released with Jullo et al. (2010, Science), a parametric model of the cluster's mass from its lensed galaxies. Measured here: the frame is the 2008 Chandra album's Hubble frame less 45 rows at the top and 53 at the bottom, 1 px to the side (85.8% of its bright compact light falls on that layer's); its rendering of the Hubble light is not that layer's, and shows it only from about 48 of 255 up."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, E. Jullo (JPL/LAM), P. Natarajan (Yale) and J-P. Kneib (LAM)",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/heic1014a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}

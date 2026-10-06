@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Galaxy cluster Abell 1689: the 2008 Chandra composite in its layers, with the 2010 lensing mass map",
+  "publisher": "Chandra X-ray Center",
+  "sourceId": "chandra-2008-a1689",
+  "sourcePage": "https://chandra.harvard.edu/photo/2008/a1689/",
+  "download": "https://chandra.harvard.edu/photo/2008/a1689/a1689_opt.tif",
+  "credit": "X-ray: NASA/CXC/MIT/E.-H Peng et al; Optical: NASA/STScI. Mass map: NASA, ESA, E. Jullo (JPL/LAM), P. Natarajan (Yale) and J-P. Kneib (LAM)",
+  "license": "NASA-SAO",
+  "original": {
+    "dimensions": [
+      3853,
+      4000
+    ],
+    "bands": [
+      "Hubble ACS",
+      "Chandra ACIS X-ray",
+      "lensing mass map"
+    ],
+    "fieldOfViewDeg": [
+      0.0535153,
+      0.0555571
+    ]
+  },
+  "checkedSource": {
+    "kind": "TIFFs on one frame: Hubble alone; the X-ray gas lifted from the album's composite, the same frame less 7 columns and 4 rows; the mass map lifted from ESA/Hubble heic1014a, the same frame less 98 rows",
+    "dimensions": [
+      3853,
+      4000
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.003118,
+    "lineOfNodesPaDeg": 264.083,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 11.2 arcsec from the published position, which is the whole of the recipe's inclination. Not a measured orientation of the cluster."
+  },
+  "registration": {
+    "catalogue": "Gaia DR3 (CDS I/355/gaiadr3)",
+    "sourcesInFrame": 71,
+    "matched": 67,
+    "rmsArcsec": 0.176,
+    "maxArcsec": 0.463,
+    "pixelArcsec": 0.05,
+    "northClockwiseDeg": 115.217,
+    "embeddedTags": "The TIFFs' embedded scale is half the measured one; the tags are not used."
+  },
+  "displayModel": "The hot gas and the mass are each spread along the sight line through ellipsoidal shells of a published shape: ellipses on the sky, 1.22 (gas) and 1.19 (mass) times as long along the sight line as their long axis on the sky, with that axis drawn on the sight line. The shells' length is measured; the depth of a pixel's light within them is not. The Hubble picture's galaxies, the Milky Way's stars removed, each stand at a depth drawn from the mass's shells, and its diffuse light is spread through them; nothing of it is left on a plane.",
+  "coverage": "The whole published frame. Purple and blue are the publishers' renderings of an X-ray image and a mass map, not light the eye would see.",
+  "acquisition": {
+    "url": "https://chandra.harvard.edu/photo/2008/a1689/a1689_opt.tif",
+    "dimensions": [
+      3853,
+      4000
+    ],
+    "operation": "Download the publishers' TIFFs; no crop or resample. The gas and the mass map are lifted from the publishers' composites by packages/bake/authoring/abell-1689/layers.mts."
+  }
+}

@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
 import { parseImageLayerRecipe } from './config.ts';
-import { imageLayerCollision, imageLayerCollisionLeaves } from './collision.ts';
+import { imageLayerCollision, imageLayerCollisionAccount, imageLayerCollisionLeaves } from './collision.ts';
 
 // A sky of one arcsecond a pixel, east to the left: a place is its arcseconds east and north of the frame's middle.
 const W = 240, H = 160;
@@ -82,4 +82,81 @@ test('the mass has its own line and its own body, and from the Sun adds to the g
 test('a collision is refused on a bank that is not flat, and tipped past 45 degrees', () => {
   assert.throws(() => recipe(10, { flat: false }), /geometry\.collision is for a flat bank/u);
   assert.throws(() => recipe(60), /geometry\.collision\.tiltDeg is the lines' angle from the plane of the sky, from 0 to 45; got 60/u);
+});
+
+/** An ellipsoid of even gas about the frame's middle: 40 arcsec along its long axis on the sky, at position angle 30
+ * degrees, 0.8 times that across, and 1.5 times that along the sight line. */
+const SHELLS = { long: 40, axisRatio: .8, majorAxisPaDeg: 30, elongation: 1.5, emits: .012 };
+const shell = (east: number, north: number) => { const pa = SHELLS.majorAxisPaDeg * Math.PI / 180; return Math.hypot(east * Math.sin(pa) + north * Math.cos(pa), (north * Math.sin(pa) - east * Math.cos(pa)) / SHELLS.axisRatio); };
+const ellipsoidRecipe = (body: Record<string, unknown> = {}, more: Record<string, unknown> = {}) => { const { geometry, ...rest } = recipe(0), { collision: _line, ...flat } = geometry;
+  return parseImageLayerRecipe({ ...rest, geometry: { ...flat, ...more, ellipsoid: { source: 'fixture', basis: 'fixture', gas: { source: 'fixture', path: 'gas.png', centre: { raDeg: 0, decDeg: 0 }, axisRatio: SHELLS.axisRatio, majorAxisPaDeg: SHELLS.majorAxisPaDeg, elongation: SHELLS.elongation, ...body } } } }); };
+const shelled = async () => { const directory = await mkdtemp(join(tmpdir(), 'ellipsoid-')), rgb = Buffer.alloc(3 * W * H);
+  for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) { const [east, north] = sky(px, py), chord = 2 * SHELLS.elongation * Math.sqrt(Math.max(0, SHELLS.long ** 2 - shell(east, north) ** 2)); for (let c = 0; c < 3; c++) rgb[3 * (py * W + px) + c] = Math.round(255 * (1 - Math.exp(-SHELLS.emits * chord * HUE[c]!))); }
+  await sharp(rgb, { raw: { width: W, height: H, channels: 3 } }).png().toFile(join(directory, 'gas.png'));
+  try { return await imageLayerCollision({ recipe: ellipsoidRecipe(), sourceDirectory: directory, width: W, height: H, sky, pixel }); } finally { await rm(directory, { recursive: true }); } };
+
+test('an ellipsoid\'s shells are found again from its picture, as long along the sight line as published', async () => {
+  const model = await shelled(), gas = model.bodies[0]!, pa = SHELLS.majorAxisPaDeg * Math.PI / 180, deep = SHELLS.elongation * SHELLS.long;
+  assert.ok(gas.differs < .03, `the light differs from its shell's mean by ${gas.differs}`); assert.ok(gas.refused < .03, `even shells asked for ${gas.refused} of their light below nothing`);
+  // The frame holds the ellipsoid whole, with the fade outside it; the body reaches the ellipsoid's length along the sight line.
+  assert.ok(gas.wholeArcsec * .75 > SHELLS.long, `the largest whole shell is ${gas.wholeArcsec}`); assert.ok(Math.abs(model.reachArcsec - deep) < 3, `the body reaches ${model.reachArcsec}`);
+  const through = (east: number, north: number) => alongLine((_along, _across, depth) => gas.emission(east, north, depth), 0, 0);
+  const middle = through(0, 0); assert.ok(Math.abs(middle.mean) < 1 && Math.abs(middle.near + deep) < 3 && Math.abs(middle.far - deep) < 3, JSON.stringify(middle));
+  // Half way out along the long axis and half way out along the short one are the same shell: the same reach along the sight line.
+  const half = deep * Math.sqrt(.75), along = through(20 * Math.sin(pa), 20 * Math.cos(pa)), across = through(16 * Math.cos(pa), -16 * Math.sin(pa));
+  for (const line of [along, across]) assert.ok(Math.abs(line.mean) < 1 && Math.abs(line.near + half) < 3 && Math.abs(line.far - half) < 3, JSON.stringify(line));
+});
+
+test('from the Sun an ellipsoid\'s slabs add up to its picture, and its account names the shells', async () => {
+  const model = await shelled(), leaves = imageLayerCollisionLeaves(model, ellipsoidRecipe().bake), slabs = leaves.filter(leaf => leaf.axis === 'z').sort((a, b) => a.corners[0][2] - b.corners[0][2]);
+  assert.ok(slabs.length > 8 && leaves.some(leaf => leaf.axis === 'x') && leaves.some(leaf => leaf.axis === 'y'));
+  for (const [east, north] of [[0, 0], [10, 17], [14, -8], [-20, -20]] as const) { const t = cellAt(model, east, north), seen = [0, 0, 0]; let clear = 1; assert.ok(model.cells[t]!.lights[0]![0]! > .05);
+    for (const slab of slabs) { const alpha = slab.rgba[4 * t + 3]! / 255; for (let c = 0; c < 3; c++) seen[c]! += clear * Math.floor(slab.rgba[4 * t + c]! * slab.rgba[4 * t + 3]! / 255) / 255; clear *= 1 - alpha; }
+    for (let c = 0; c < 3; c++) assert.ok(Math.abs(seen[c]! - model.cells[t]!.lights[0]![c]!) < .012, `at ${east}, ${north} channel ${c}: the slabs show ${seen[c]}, the picture ${model.cells[t]!.lights[0]![c]}`); }
+  const account = imageLayerCollisionAccount(model); assert.match(account.model, /ellipsoidal shells of a published shape/u);
+  assert.match(account.limitations[0]!, /ellipses 0\.8 as wide as long, the long axis at position angle 30 degrees, and 1\.5 times as long along the sight line/u);
+});
+
+test('from the side the curtains add up toward white as a screen does, from either side alike', async () => {
+  const model = await shelled(), curtains = imageLayerCollisionLeaves(model, ellipsoidRecipe().bake).filter(leaf => leaf.axis === 'x'), { width, height } = curtains[0]!, p = (height >> 1) * width + (width >> 1);
+  // The sight line through the ellipsoid's middle, across the curtains: each over those behind it, color times opacity in whole numbers.
+  const seen = (stack: typeof curtains) => { const sum = [0, 0, 0]; for (const curtain of stack) { const alpha = curtain.rgba[4 * p + 3]! / 255; for (let c = 0; c < 3; c++) sum[c] = Math.floor(curtain.rgba[4 * p + c]! * curtain.rgba[4 * p + 3]! / 255) / 255 + sum[c]! * (1 - alpha); } return sum; };
+  const one = seen(curtains), other = seen([...curtains].reverse());
+  // The gas's red is the strongest channel: its optical depth on this line gives what green (0.3 of it) and blue (0.5) add up to.
+  const red = -Math.log(1 - one[0]! / (240 / 255)) * (240 / 255); assert.ok(red > .5, `the line through the middle holds ${red} of red`);
+  for (const [c, share] of [[1, HUE[1]!], [2, HUE[2]!]] as const) { const screen = (1 - Math.exp(-share * red)) / (1 - Math.exp(-red)) * one[0]!, thin = share * one[0]!;
+    assert.ok(Math.abs(one[c]! - screen) < .02, `channel ${c} shows ${one[c]}; a screen gives ${screen}, the light spread thin ${thin}`); assert.ok(screen - thin > .03); assert.ok(Math.abs(other[c]! - one[c]!) < .02, `from the other side channel ${c} shows ${other[c]}, not ${one[c]}`); }
+});
+
+test('an ellipsoid is refused beside a collision, and with shells wider than they are long', () => {
+  assert.throws(() => ellipsoidRecipe({}, { collision: recipe(0).geometry.collision }), /geometry\.ellipsoid is for a flat bank without .* a collision/u);
+  assert.throws(() => ellipsoidRecipe({ axisRatio: 1.2 }), /axisRatio is the shells' short axis on the sky over their long one, at most 1; got 1\.2/u);
+});
+
+test('a photograph\'s galaxies leave its plane, each whole on a sheet at a drawn depth inside the shells', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'galaxies-')), rgb = Buffer.alloc(3 * W * H), photograph = Buffer.alloc(4 * W * H);
+  for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) { const [east, north] = sky(px, py), chord = 2 * SHELLS.elongation * Math.sqrt(Math.max(0, SHELLS.long ** 2 - shell(east, north) ** 2)); for (let c = 0; c < 3; c++) rgb[3 * (py * W + px) + c] = Math.round(255 * (1 - Math.exp(-SHELLS.emits * chord * HUE[c]!))); }
+  await sharp(rgb, { raw: { width: W, height: H, channels: 3 } }).png().toFile(join(directory, 'gas.png'));
+  // Three golden galaxies, brightest at their middles and 4 arcsec in radius: at the shells' centre and 14 arcsec either way along the long axis; faint even light under them.
+  const pa = SHELLS.majorAxisPaDeg * Math.PI / 180, places: [number, number][] = [[0, 0], [14 * Math.sin(pa), 14 * Math.cos(pa)], [-14 * Math.sin(pa), -14 * Math.cos(pa)]];
+  for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) { const [east, north] = sky(px, py), near = Math.min(...places.map(place => Math.hypot(east - place[0], north - place[1]))); photograph.set([255, 200, 110, Math.round(20 + 220 * Math.max(0, 1 - near / 4))], 4 * (py * W + px)); }
+  const galaxies = { source: 'fixture', basis: 'fixture', widthArcsec: 12 }, { geometry, ...rest } = ellipsoidRecipe(), recipe = parseImageLayerRecipe({ ...rest, geometry: { ...geometry, ellipsoid: { ...geometry.ellipsoid, galaxies } } });
+  const run = async () => { const plane = Buffer.from(photograph); return { plane, model: await imageLayerCollision({ recipe, sourceDirectory: directory, width: W, height: H, sky, pixel, photograph: plane }) }; };
+  try { const { plane, model } = await run(), lifted = model.lifted!, again = (await run()).model;
+    assert.deepEqual([lifted.galaxies, lifted.islands], [3, 0]); assert.deepEqual(model.bodies.map(body => body.name), ['gas', 'galaxies', 'starlight']);
+    // Nothing is left on the plane.
+    for (let p = 0; p < W * H; p++) assert.equal(plane[4 * p + 3], 0);
+    // From the side: the galaxy at the shells' centre is at their middle, the others inside the shells, each 4 arcsec deep; the same picture gives the same depths.
+    const ball = model.bodies[1]!, through = (body: typeof ball, place: [number, number]) => alongLine((_along, _across, depth) => body.emission(place[0], place[1], depth), 0, 0), deep = SHELLS.elongation * Math.sqrt(SHELLS.long ** 2 - 14 ** 2);
+    assert.ok(Math.abs(through(ball, places[0]!).mean) < .6, JSON.stringify(through(ball, places[0]!)));
+    for (const place of places) { const line = through(ball, place); assert.ok(Math.abs(line.far - line.near - 4) < 1.5 && Math.abs(line.mean) < deep, JSON.stringify(line)); assert.equal(line.mean, through(again.bodies[1]!, place).mean); }
+    assert.match(imageLayerCollisionAccount(model).limitations.at(-1)!, /on the nearest of 16 sheets, and seen from the side a blob at its depth\. 3 galaxies were placed, and 0 patches/u);
+    // From the Sun the slabs add up to the gas and the diffuse light screened, and a galaxy is on one sheet, with its compact light, at its depth.
+    const leaves = imageLayerCollisionLeaves(model, recipe.bake), slabs = leaves.filter(leaf => leaf.id.startsWith('shape-z')).sort((a, b) => a.corners[0][2] - b.corners[0][2]), t = cellAt(model, ...places[1]!), cell = model.cells[t]!, seen = [0, 0, 0]; let clear = 1;
+    for (const slab of slabs) { const alpha = slab.rgba[4 * t + 3]! / 255; for (let c = 0; c < 3; c++) seen[c]! += clear * Math.floor(slab.rgba[4 * t + c]! * slab.rgba[4 * t + 3]! / 255) / 255; clear *= 1 - alpha; }
+    for (let c = 0; c < 3; c++) assert.ok(Math.abs(seen[c]! - (1 - (1 - cell.lights[0]![c]!) * (1 - cell.lights[2]![c]!))) < .012, `channel ${c}: the slabs show ${seen[c]}`);
+    const sheets = leaves.filter(leaf => leaf.id.startsWith('galaxies-')), alphaOn = (sheet: typeof sheets[number], place: [number, number]) => { const [px, py] = pixel(...place), x = Math.round(((px + .5) / W * 2 - 1 - sheet.corners[0][0]) / (sheet.corners[1][0] - sheet.corners[0][0]) * sheet.width - .5), y = Math.round((sheet.corners[0][1] - (1 - (py + .5) / H * 2)) / (sheet.corners[0][1] - sheet.corners[2][1]) * sheet.height - .5); return x >= 0 && y >= 0 && x < sheet.width && y < sheet.height ? sheet.rgba[4 * (y * sheet.width + x) + 3]! : 0; };
+    for (const place of places) { const holds = sheets.filter(sheet => alphaOn(sheet, place) > 0); assert.equal(holds.length, 1); assert.ok(alphaOn(holds[0]!, place) > 180); assert.ok(Math.abs(holds[0]!.corners[0][2] - through(ball, place).mean) <= model.reachArcsec / 16 + .5, `the sheet stands at ${holds[0]!.corners[0][2]}, the galaxy at ${through(ball, place).mean}`); }
+    assert.ok(sheets.every(sheet => sheet.axis === 'z'));
+  } finally { await rm(directory, { recursive: true }); }
 });
