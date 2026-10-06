@@ -4,14 +4,14 @@
     "id": "root",
     "files": [
       "site/application-world-context.mts",
-      "site/application-world-frames.mts",
+      "site/world/application-world-frames.mts",
       "site/application-world-resources.mts",
-      "site/application-world-types.mts",
+      "site/world/application-world-types.mts",
       "site/application-world-visibility.mts",
       "site/navigation/arrival-billboard.mts",
       "site/server-assets/asset-origin.mts",
       "site/server/built-pages.mts",
-      "site/catalogue-moon-labels.mts",
+      "site/world/catalogue-moon-labels.mts",
       "site/shell/chart-pixel-alignment.mts",
       "site/world/context-availability.mts",
       "site/world/context-datasets.mts",
@@ -21,16 +21,16 @@
       "site/server/dataset-response.mts",
       "site/model/dataset-url.mts",
       "site/world/default-width-share.mts",
-      "site/destination-browser.mts",
+      "site/shell/destination-browser.mts",
       "site/diagnostic-recorder.mts",
       "site/browser/diagnostics-policy.mts",
       "site/dot-catalogue-data.mts",
       "site/world/dot-catalogues.mts",
       "site/startup/error-report.mts",
-      "site/exploration-catalog.mts",
-      "site/feature-browser.mts",
+      "site/content/exploration-catalog.mts",
+      "site/shell/feature-browser.mts",
       "site/server/first-view-transport.mts",
-      "site/hosted-banks.mts",
+      "site/world/hosted-banks.mts",
       "site/import-queue.mts",
       "site/browser/in-flight-loader.mts",
       "site/shell/information-card.mts",
@@ -45,12 +45,12 @@
       "site/shell/native-view-forms.mts",
       "site/browser/next-frame.mts",
       "site/object-adapter.mts",
-      "site/object-browser.mts",
+      "site/shell/object-browser.mts",
       "site/object-children.mts",
       "site/model/object-classification-label.mts",
       "site/object-directory.mts",
       "site/directory/object-entries.mts",
-      "site/object-entry.mts",
+      "site/server/object-entry.mts",
       "site/contracts/object-page-contract.mts",
       "site/server/object-page-data.mts",
       "site/contracts/object-shell-types.ts",
@@ -61,39 +61,39 @@
       "site/overview-selection.mts",
       "site/packaged-object-runtime.mts",
       "site/model/planetary-system-members.mts",
-      "site/prepare-body-moons.mts",
+      "site/build/prepare/prepare-body-moons.mts",
       "site/navigation/prepared-arrival.mts",
       "site/navigation/prepared-descriptor.mts",
       "site/prepared/prepared-object-path.mts",
       "site/content/prepared-panel-content.mts",
       "site/navigation/prepared-scene-ownership.mts",
-      "site/prepared-world-navigation.mts",
-      "site/prepared-world-presentation.mts",
+      "site/navigation/prepared-world-navigation.mts",
+      "site/world/prepared-world-presentation.mts",
       "site/model/root-object.mts",
       "site/browser/runtime-policy.mts",
       "site/satellite-selection.mts",
       "site/satellite-systems.mts",
-      "site/selection-presentation.mts",
+      "site/shell/selection-presentation.mts",
       "site/seo-trail.mts",
       "site/seo.mts",
       "site/shared-imports.mts",
       "site/showcase.mts",
       "site/content/sidebar-thumbnails.mts",
-      "site/social-images.mts",
-      "site/source-documentation.mts",
+      "site/server/social-images.mts",
+      "site/content/source-documentation.mts",
       "site/content/source-icons.mts",
       "site/browser/source-link.mts",
-      "site/startup-billboard.mts",
-      "site/startup-boot.mts",
+      "site/scene/startup-billboard.mts",
+      "site/startup/startup-boot.mts",
       "site/startup/startup-cover.mts",
       "site/directory/startup-requests.mts",
       "site/startup-world.mts",
-      "site/stellar-extents.mts",
+      "site/world/stellar-extents.mts",
       "site/system-card.mts",
       "site/world/system-framing-radii.mts",
       "site/system-framing.mts",
       "site/shell/tab-panels.mts",
-      "site/view-readout.mts",
+      "site/shell/view-readout.mts",
       "site/navigation/view-url-runtime.mts",
       "site/content/volume-presentation.mts",
       "site/startup/web-analytics.mts",
@@ -101,7 +101,7 @@
       "site/world/world-camera.mts",
       "site/world-context-plan.mts",
       "site/world-objects.mts",
-      "site/world-places.mts",
+      "site/server/world-places.mts",
       "site/world/world-preferences.mts",
       "site/world-system-views.mts",
       "site/world/world-viewport.mts",
@@ -120,7 +120,7 @@
       "branches": 88.6,
       "functions": 93.5
     },
-    "site/application-world-frames.mts": {
+    "site/world/application-world-frames.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 88.8
@@ -130,7 +130,7 @@
       "branches": 94.9,
       "functions": 98.4
     },
-    "site/application-world-types.mts": {
+    "site/world/application-world-types.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -155,7 +155,7 @@
       "branches": 93.7,
       "functions": 100
     },
-    "site/catalogue-moon-labels.mts": {
+    "site/world/catalogue-moon-labels.mts": {
       "lines": 100,
       "branches": 90.4,
       "functions": 96.4
@@ -205,7 +205,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/destination-browser.mts": {
+    "site/shell/destination-browser.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -235,12 +235,12 @@
       "branches": 100,
       "functions": 100
     },
-    "site/exploration-catalog.mts": {
+    "site/content/exploration-catalog.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/feature-browser.mts": {
+    "site/shell/feature-browser.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -250,7 +250,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/hosted-banks.mts": {
+    "site/world/hosted-banks.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -325,7 +325,7 @@
       "branches": 90.9,
       "functions": 100
     },
-    "site/object-browser.mts": {
+    "site/shell/object-browser.mts": {
       "lines": 100,
       "branches": 96.4,
       "functions": 87.5
@@ -350,7 +350,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/object-entry.mts": {
+    "site/server/object-entry.mts": {
       "lines": 100,
       "branches": 60,
       "functions": 100
@@ -405,7 +405,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/prepare-body-moons.mts": {
+    "site/build/prepare/prepare-body-moons.mts": {
       "lines": 100,
       "branches": 87.5,
       "functions": 91.6
@@ -435,12 +435,12 @@
       "branches": 77.7,
       "functions": 100
     },
-    "site/prepared-world-navigation.mts": {
+    "site/navigation/prepared-world-navigation.mts": {
       "lines": 100,
       "branches": 85.7,
       "functions": 98.6
     },
-    "site/prepared-world-presentation.mts": {
+    "site/world/prepared-world-presentation.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -465,7 +465,7 @@
       "branches": 93.7,
       "functions": 100
     },
-    "site/selection-presentation.mts": {
+    "site/shell/selection-presentation.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -495,12 +495,12 @@
       "branches": 100,
       "functions": 100
     },
-    "site/social-images.mts": {
+    "site/server/social-images.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/source-documentation.mts": {
+    "site/content/source-documentation.mts": {
       "lines": 96.2,
       "branches": 69.7,
       "functions": 70
@@ -515,12 +515,12 @@
       "branches": 100,
       "functions": 100
     },
-    "site/startup-billboard.mts": {
+    "site/scene/startup-billboard.mts": {
       "lines": 100,
       "branches": 94.2,
       "functions": 87.5
     },
-    "site/startup-boot.mts": {
+    "site/startup/startup-boot.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -540,7 +540,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/stellar-extents.mts": {
+    "site/world/stellar-extents.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -565,7 +565,7 @@
       "branches": 87.5,
       "functions": 100
     },
-    "site/view-readout.mts": {
+    "site/shell/view-readout.mts": {
       "lines": 100,
       "branches": 97.1,
       "functions": 100
@@ -605,7 +605,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/world-places.mts": {
+    "site/server/world-places.mts": {
       "lines": 100,
       "branches": 90,
       "functions": 100

@@ -139,7 +139,7 @@ export async function checkSiteArchitecture(root: string, options: { readonly gr
   const validateInputs = () => {
     // Ignored generated inputs may be absent before preparation; their proposed relocations require the documented generator edits.
     for (const file of [...Object.keys(record(moves)), ...list(tierData.testFiles ?? []), ...list(tierData.assets ?? [])].map(text)) {
-      if (!known.has(file) && !/^site\/(?:prepared-[^/]+|moon-labels\.prepared\.json)$/u.test(file)) throw new Error(`Unknown plan input: ${file}`);
+      if (!known.has(file) && !/^site\/prepared\/[^/]+$/u.test(file)) throw new Error(`Unknown plan input: ${file}`);
     }
   };
   const input = { declarations, moves, tiers, edits };

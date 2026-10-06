@@ -19,7 +19,7 @@ export { systemFramingRadii } from './world/system-framing-radii.mts';
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/engine';
 import { APPLICATION_WORLD_CONTEXT as context, loadWorldSystemOf, onWorldSystems, worldSystemHeld } from './world-context-plan.mts';
 import { readApplicationSystemView } from './world-system-views.mts';
-import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
+import { PREPARED_WORLD_PRESENTATION } from './world/prepared-world-presentation.mts';
 
 /** Each bound pair's centre of mass and the separation of its stars: what the camera aims at once it is far enough out to
  * see both. A star with several bound to it aims at its nearest companion's pair. A system with planets keeps its star's

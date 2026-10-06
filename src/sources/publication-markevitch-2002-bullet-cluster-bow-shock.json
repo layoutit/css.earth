@@ -1,0 +1,44 @@
+{
+  "id": "publication-markevitch-2002-bullet-cluster-bow-shock",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A Textbook Example of a Bow Shock in the Merging Galaxy Cluster 1E 0657-56",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0110468"
+    },
+    {
+      "type": "doi",
+      "value": "10.1086/339619"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0110468",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0110468",
+      "checkedOn": "2026-10-05",
+      "locator": "Sect. 4.1: the X-ray brightness profile in a sector centred on the bullet's centre of curvature, along its apparent motion, is fitted with gas components that are spherically symmetric around their centres; the density jump at the shock is 3.2 +/- 0.8. A large inclination of the velocity from the sky plane would smear the sharp brightness edges; with the subcluster's line-of-sight velocity (Barrena et al.) the deviation from the sky plane is 10 to 15 degrees."
+    }
+  ],
+  "creators": [
+    "Markevitch, M.",
+    "Gonzalez, A. H.",
+    "David, L.",
+    "Vikhlinin, A.",
+    "Murray, S.",
+    "Forman, W.",
+    "Jones, C.",
+    "Tucker, W."
+  ],
+  "publisher": "ApJ 567, L27",
+  "publicationDate": "2002",
+  "relations": [],
+  "statements": []
+}

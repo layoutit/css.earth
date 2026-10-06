@@ -5,7 +5,7 @@ import { gzipSync, gunzipSync } from 'node:zlib';
 import catalogue from '../../source/moon-catalogues.json' with { type: 'json' };
 import worldInput from '../../../src/objects/observable-universe/prepared/world-context.json' with { type: 'json' };
 import { parsePreparedWorldContext } from '@cssearth/objects';
-import { hasProperMoonName, prepareBodyMoons } from '../../prepare-body-moons.mts';
+import { hasProperMoonName, prepareBodyMoons } from './prepare-body-moons.mts';
 import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
 
 

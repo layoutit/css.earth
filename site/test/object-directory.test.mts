@@ -4,7 +4,7 @@ const test = sourceTest();
 import { OBJECTS, SCENE_OBJECTS as REGISTERED_SCENE_OBJECTS, ancestorsOf } from '../objects.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
-import { OBJECT_ENTRY_IDS, objectEntry } from '../object-entry.mts';
+import { OBJECT_ENTRY_IDS, objectEntry } from '../server/object-entry.mts';
 import { ancestorIds, knownObject, loadAncestors, loadHolder, loadObject, objectFromEntry, NAVIGABLE_OBJECTS, SCENE_OBJECTS } from '../object-directory.mts';
 
 // Loaders are functions; compare everything else an object carries.

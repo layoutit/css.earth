@@ -1,10 +1,10 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { OBJECT_ENTRY_IDS, objectEntry } from '../../../object-entry.mts';
+import { OBJECT_ENTRY_IDS, objectEntry } from '../../../server/object-entry.mts';
 import { resolveSceneAddressesDeep } from '../../../server-assets/asset-origin.mts';
-import { worldPlaceOf } from '../../../world-places.mts';
+import { worldPlaceOf } from '../../../server/world-places.mts';
 import { OBJECTS, ancestorsOf } from '../../../objects.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../../world-context-plan.mts';
-import { hostedBanksOf } from '../../../hosted-banks.mts';
+import { hostedBanksOf } from '../../../world/hosted-banks.mts';
 import { surroundedBody, surroundingHosts } from '../../../world/surrounded-body.mts';
 import bankAssets from '../../../prepared/prepared-context-bank-assets.json' with { type: 'json' };
 import { readFile } from 'node:fs/promises';
@@ -31,7 +31,7 @@ export const GET: APIRoute = async ({ params }) => {
   // The objects it is inside, nearest first: a page reads from this list which ones it needs (object-directory.mts
   // `ancestorIds`, `loadHolder`), and reads a zoom centre's together (`loadAncestors`).
   const ancestors = ancestorsOf(params.id!).map(object => object.id);
-  // The banks the world draws only for this object (site/hosted-banks.mts): a page learns them with the object, never in its code.
+  // The banks the world draws only for this object (site/world/hosted-banks.mts): a page learns them with the object, never in its code.
   centres ??= new Map(APPLICATION_WORLD_CONTEXT.bodies.flatMap(body => body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []));
   const banks = hostedBanksOf(params.id!, centres.get(params.id!));
   // The body its walls surround, when its picture lies on walls: a zoom in on it leads to that body (object-directory.mts `loadInner`).

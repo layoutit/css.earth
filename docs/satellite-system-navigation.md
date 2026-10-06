@@ -19,7 +19,7 @@ object scene is mounted at a time.
 
 ## Selection identity
 
-[`systemTarget`](../site/prepared-world-navigation.mts) already frames the main
+[`systemTarget`](../site/navigation/prepared-world-navigation.mts) already frames the main
 moons on first selection. [`bodyViewAtCamera`](../site/zoom-scope.mts)
 sets the camera threshold between the host family and the selected body.
 [`SceneSubject`](../site/scene/scene-subject.mts) selects the family as its own
@@ -101,7 +101,7 @@ restores both camera and card.
 
 The [navigation request](../site/navigation/navigation-request.mts) resolves
 the selection and camera target together before starting the flight.
-[Selection presentation](../site/selection-presentation.mts) shows a retained
+[Selection presentation](../site/shell/selection-presentation.mts) shows a retained
 system card without transferring system facts into a body's
 dataset card. The prepared orbit graph supplies membership; the existing
 [framing candidates](../site/system-framing.mts) supply the view. Runtime does

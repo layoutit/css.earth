@@ -1,0 +1,43 @@
+{
+  "id": "publication-clowe-2006-bullet-cluster-dark-matter",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A Direct Empirical Proof of the Existence of Dark Matter",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0608407"
+    },
+    {
+      "type": "doi",
+      "value": "10.1086/508162"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0608407",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0608407",
+      "checkedOn": "2026-10-05",
+      "locator": "Table 2, J2000: main cluster BCG 06:58:35.3, -55:56:56.3; main cluster plasma 06:58:30.2, -55:56:35.9; subcluster BCG 06:58:16.0, -55:56:35.1; subcluster plasma 06:58:21.2, -55:56:30.0. Sect. III: the weak-lensing reconstruction has two major peaks, one centred 7.1 arcsec east and 6.5 arcsec north of the subcluster's BCG (8 sigma), and one 2.5 arcsec east and 11.5 arcsec south of the northern BCG of the main cluster, which is 21.2 arcsec west and 17.7 arcsec north of the southern BCG (12 sigma). The gas clouds are offset from the mass peaks."
+    }
+  ],
+  "creators": [
+    "Clowe, D.",
+    "Bradač, M.",
+    "Gonzalez, A. H.",
+    "Markevitch, M.",
+    "Randall, S. W.",
+    "Jones, C.",
+    "Zaritsky, D."
+  ],
+  "publisher": "ApJ 648, L109",
+  "publicationDate": "2006",
+  "relations": [],
+  "statements": []
+}

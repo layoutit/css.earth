@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import ts from 'typescript';
 import type { WorldHandoff, NavigationHistory, NavigationIntent, SceneView, SelectionTarget } from './navigation-types.mts';
-import type { WorldHandoff as OldWorldHandoff } from '../prepared-world-navigation.mts';
+import type { WorldHandoff as OldWorldHandoff } from './prepared-world-navigation.mts';
 import type { NavigationHistory as OldNavigationHistory, NavigationIntent as OldNavigationIntent } from './navigation-request.mts';
 import type { SceneView as OldSceneView, SelectionTarget as OldSelectionTarget } from '../scene/scene-selection.mts';
 
@@ -39,7 +39,7 @@ test('production history transport depends on navigation contracts, never reques
 
 test('old contract exports remain compatible and type-only', () => {
   assert.deepEqual(compatibility, [true, true, true, true, true]);
-  typeReexport('../prepared-world-navigation.mts', './navigation/navigation-types.mts', ['WorldHandoff']);
+  typeReexport('./prepared-world-navigation.mts', './navigation-types.mts', ['WorldHandoff']);
   typeReexport('./navigation-request.mts', './navigation-types.mts', ['NavigationHistory', 'NavigationIntent']);
 });
 
