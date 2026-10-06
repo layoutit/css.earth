@@ -164,8 +164,6 @@ src/objects/*/source/**/*.bpc
 /src/objects/comet-67p/source/science/*.wrl
 
 # Pinned thermophysical paper originals are restored through the body acquisition plans.
-/src/objects/klytia/source/reference/hanus-2018.pdf
-/src/objects/alkmene/source/reference/hanus-2018.pdf
 
 # New reference-paper originals are reacquired from their manifest-pinned URLs.
 /src/objects/*/source/reference/*.pdf
@@ -486,7 +484,6 @@ src/objects/wasp-43b/source/science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0
 !src/objects/haumea/source/alma/haumea-band7-continuum-cutout.fits
 !src/objects/pi1-gruis/source/observations/pi1-gruis-pionier-2014-09-squeeze.fits
 !src/objects/pi1-gruis/source/observations/pi1-gruis-pionier-2014-09-2.1mas.fits
-!src/objects/piazzia/source/reference/*.tab
 !src/objects/r-doradus/source/observations/r-doradus-alma-338ghz-0p625mas.fits
 !src/objects/ra-shalom/source/reference/pds-a2100_spin_state.csv
 !src/objects/rhea/source/vims/rhea-infrared.tif
@@ -495,7 +492,6 @@ src/objects/wasp-43b/source/science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0
 !src/objects/sn263-beta/source/reference/*.tab
 !src/objects/sn263-gamma/source/shape/*.tab
 !src/objects/sn263-gamma/source/reference/*.tab
-!src/objects/susi/source/reference/*.tab
 !src/objects/titan/source/geology/titan-geologic-units.tif
 # Catalogue tables of the flat galaxy banks' dots; restored from their CDS origin (each bank's source/<catalogue>/points.json).
 src/objects/*/source/feldmeier-pne/tab2-4.dat

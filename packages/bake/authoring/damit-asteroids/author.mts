@@ -1,6 +1,7 @@
 /**
  * Author a DAMIT asteroid package from one archived model (convex, or nonconvex with `model.nonconvex` and `model.basis`)
- * and a separately published physical size.
+ * and a separately published physical size. A convex light-curve shape earns a page only under the scene rule
+ * (.agents/skills/celestial-skill/references/scientific-faithfulness.md, "A light-curve shape alone is not a page").
  *
  *   node packages/bake/authoring/damit-asteroids/author.mts [--inputs=<path>] [--object=<id>]
  *
