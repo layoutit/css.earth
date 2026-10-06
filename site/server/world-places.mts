@@ -52,7 +52,9 @@ export function worldStartupFiles(id: string): readonly string[] {
 }
 
 /** The files a page does not read at startup that have bodies of `ids` (a category's marked members): read when that
- * category is highlighted. */
+ * category is highlighted. A plain-dot star with nothing round it is its own holder of one row, which its object entry
+ * carries: it has no `members.json` (the index's `files` name exactly the objects that publish one), so no file to read. */
 export function worldFilesOf(ids: Iterable<string>): readonly string[] {
-  return [...new Set([...ids].flatMap(id => { const file = APPLICATION_WORLD_FILE_OF.get(id); return file === undefined || flagsOf(file).anywhere ? [] : [file]; }))].sort();
+  const files = new Set(worldFiles());
+  return [...new Set([...ids].flatMap(id => { const file = APPLICATION_WORLD_FILE_OF.get(id); return file === undefined || !files.has(file) || flagsOf(file).anywhere ? [] : [file]; }))].sort();
 }

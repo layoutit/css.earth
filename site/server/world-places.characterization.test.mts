@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
-test('world places keep root-first file order, optional rows and sorted unique category holders', t => {
+test('world places keep root-first file order, optional rows and sorted unique category holders, with no file for a row', t => {
   const directory = mkdtempSync(join(tmpdir(), 'cssearth-world-places-'));
   t.after(() => rmSync(directory, { recursive: true, force: true }));
   for (const [id, value] of [['root', { anywhere: true, places: true }], ['earth', { anywhere: false }], ['holder', { places: true }]] as const) {
@@ -36,6 +36,8 @@ const { worldFiles, worldPlaceFiles, worldAnywhereFiles, worldPlaceOf, worldStar
   assert.equal(worldPlaceOf('unknown'), null);
   assert.deepEqual(worldStartupFiles('moon'), ['earth']);
   assert.deepEqual(worldFilesOf(['remote', 'moon', 'remote', 'unknown', 'root-body']), ['earth', 'holder']);
+  // A plain-dot star that is its own holder of one row publishes no members.json: it names no file and reads none.
+  assert.deepEqual(worldFilesOf(['plain', 'moon']), ['earth']);
   assert.deepEqual(worldFilesOf([]), []);
   assert.deepEqual(worldPlaceFiles(), ['root', 'holder']);
 
