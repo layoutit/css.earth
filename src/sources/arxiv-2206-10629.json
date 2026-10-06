@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-2206-10629",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Holcomb et al. (2022): SpinSpotter: An Automated Algorithm for Identifying Stellar Rotation Periods with Autocorrelation Analysis",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2206.10629"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ac8990"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2206.10629",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ac8990",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2206.10629",
+      "checkedOn": "2026-10-06",
+      "locator": "arXiv listing: title, authors, DOI (ApJ 936, 138). Sects. II and III print the algorithm, the stars it is applied to and the criteria a rotation period must meet."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Holcomb et al. (2022)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2206.10629"
+    }
+  ],
+  "creators": [
+    "R. J. Holcomb",
+    "P. Robertson",
+    "P. Hartigan",
+    "R. J. Oelkers",
+    "C. Robinson"
+  ],
+  "publicationDate": "2022"
+}

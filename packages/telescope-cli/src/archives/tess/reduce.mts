@@ -75,8 +75,10 @@ export const lightOf = (stars: readonly StarPlace[], keep = false, radiusArcsec:
 /** The Gaia sources around a star, counted within TESS's radius and within K2's; `null` where Gaia has no source at its place. */
 export interface StarLight { readonly wide: PixelLight | null; readonly near: PixelLight | null }
 /** The years a mission's target is looked for at, beside the star's recorded place. K2's target list took its places
- * from surveys of about 2000 and its campaigns ran from 2014 to 2018; TESS has watched since 2018. */
-export const TARGET_YEARS = { K2: [2016, 2000], TESS: [2019, 2025] } as const;
+ * from surveys of about 2000 and its campaigns ran from 2014 to 2018. TESS has watched since 2018, and MAST lists its
+ * targets where its input catalogue has them, in 2000: Barnard's Star's sector 80 light curve is listed 166 arcseconds
+ * from the star's place in 2016. */
+export const TARGET_YEARS = { K2: [2016, 2000], TESS: [2000, 2019, 2025] } as const;
 /** The places a star's target may be listed at by a mission. */
 export const targetPlaces = (star: StarPlace, mission: Mission = 'K2') => [star, ...TARGET_YEARS[mission].map(year => placeAt(star, year))];
 /** A window's name in a file: a TESS sector, a K2 campaign. */

@@ -34,9 +34,10 @@ published criteria as a table of methods, and the conversion of starry's map to 
 
 ## Finding a star's light curves
 
-For every star, MAST is asked which K2 light curves lie at its place
-([`kepler/light-curves.mts`](../packages/telescope-cli/src/archives/kepler/light-curves.mts)) and, when K2 did not watch
-it, which TESS 2-minute light curves do ([`tess/light-curves.mts`](../packages/telescope-cli/src/archives/tess/light-curves.mts)).
+A mission's archive is asked only about a star whose kind that mission's method covers (the next section). MAST is asked
+which K2 light curves lie at the star's place
+([`kepler/light-curves.mts`](../packages/telescope-cli/src/archives/kepler/light-curves.mts)) and, when K2 has none,
+which TESS 2-minute light curves do ([`tess/light-curves.mts`](../packages/telescope-cli/src/archives/tess/light-curves.mts)).
 K2 listed its targets where surveys of about the year 2000 had them, so a star that moves is looked for at its recorded
 place and at its places in 2016 and 2000; for TESS, at its places in 2019 and 2025. Each file is read as the mission
 publishes it.
@@ -135,7 +136,19 @@ published duration its transit chart is drawn with.
 One reading of the paper is ours and is not printed in it: its sample is sectors 1 to 26, its criteria are stated for
 "the TESS 2-minute cadence data", and they are applied here to any sector's 2-minute light curve.
 
-@@TESS@@
+The five stars drawn before this method was wired keep their maps under it. Each valid sector becomes one Brightness
+map, all at the period of the stitched light curve: 53 maps.
+
+| Star | Sectors | Valid | Period, days | Catalogued, days | Maps |
+| --- | --- | --- | --- | --- | --- |
+| AU Mic | 3 | 2 | 4.84 | 4.856 | 2 |
+| AB Pic | 41 | 35 | 3.92 | 3.87 | 35 |
+| AF Lep | 4 | 4 | 1.01 | 0.966 | 4 |
+| BD-16 351 | 3 | 3 | 3.26 | 3.23 | 3 |
+| EK Draconis | 12 | 9 | 2.68 | 2.64 | 9 |
+
+AU Mic's sectors 1, 27 and 95 give 4.97, 4.89 and 5.00 days. Sector 27 is not valid, because its peaks' width is 0.38
+where the paper asks for more than 0.4, so it has no map. All three together give 4.84 days.
 
 ## What the map is and is not
 
@@ -194,8 +207,8 @@ pnpm telescope new-object --metadata <star id>...
 node packages/telescope-cli/src/new-object/new-object-cli.mts --pixel-light --all
 ```
 
-`reduce.mts` asks MAST for the star's K2 light curves and, when K2 did not watch it, its TESS 2-minute ones, and has the
-published method for its kind of star judge them. It writes a receipt for each star under ignored
+`reduce.mts` asks MAST for the star's K2 light curves and, when K2 has none, its TESS 2-minute ones, each only when a
+method covers the star's kind, and has that method judge them. It writes a receipt for each star under ignored
 `output/tess/<star id>/`: the mission, each sector or campaign with the request that fetched it and the pipeline version
 that made it, the method, what it measured, the verdict with its reason, and the codes' versions. Each light curve is kept
 beside it as the method prepared it. Requests to MAST go one at a time. Gaia's answer for all stars is one request of
