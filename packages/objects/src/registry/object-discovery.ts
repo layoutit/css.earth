@@ -1,4 +1,4 @@
-import { isPlacedClassification } from './object-schema.js';
+import { isPlacedClassification } from './object-classification.js';
 import { isRecord } from '@cssearth/core';
 import { matchesObjectClassification } from './object-categories.js';
 import { parseArrivalView, type PreparedArrivalView } from './arrival-view.js';

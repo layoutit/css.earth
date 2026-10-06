@@ -1,7 +1,7 @@
-import { INPUT_ROLES, productInputRoles } from './product-input-evidence.js';
+import { INPUT_ROLES } from './product-input-evidence.js';
 import type { InputRole } from './product-input-evidence.js';
 import { sourceEnum } from '../sources/catalog.js';
-import { checkLineage } from './object-lineage.js';
+import { checkLineage, productInputRoles } from './object-lineage.js';
 import type { ObjectLineage } from './object-lineage.js';
 import { explorationArray, explorationId, explorationRecord, explorationText, parseCapture, parseCaptureObservation, validateCapture } from './exploration-catalog.js';
 import type { CaptureAttribution, CaptureObservation, ExplorationCatalog } from './exploration-catalog.js';

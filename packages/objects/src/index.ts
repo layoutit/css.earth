@@ -45,8 +45,9 @@ export type { ObservationMapping } from './volume/nebula/observation-mapping.js'
 export type { SimulationDepthPrior } from './volume/nebula/simulation-prior.js';
 export { parsePreparedWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldContextPlan, worldContextGeometry, orbitVertices, parsePreparedWorldSystem, extendWorldContext } from './prepared-data/world/world-context.js';
 export { parseCompleteWorldContext, parsePreparedWorldIndex } from './prepared-data/world/world-index.js';
-export type { PreparedContextPoint, PreparedContextPointSource, PreparedContextBody, PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedContextCameraPresentation, PreparedVolumeOpacityProfile, PreparedWorldContext, PreparedWorldIndex, PreparedWorldSystem, PreparedWorldContextGeometry } from './prepared-data/world/world-context.js';
+export type { PreparedContextPoint, PreparedContextPointSource, PreparedContextBody, PreparedContextOrbit, PreparedContextOrbitGeometry, PreparedVolumeOpacityProfile, PreparedWorldContext, PreparedWorldIndex, PreparedWorldSystem, PreparedWorldContextGeometry } from './prepared-data/world/world-context.js';
 export { worldCameraOf, parsePreparedWorldCamera } from './prepared-data/camera/world-camera.js';
+export type { PreparedContextCameraPresentation } from './prepared-data/camera/world-camera.js';
 export { parsePreparedWorldCameraFrame } from './prepared-data/world/world-frame.js';
 export type { PreparedWorldCameraFrame } from './prepared-data/world/world-frame.js';
 export { decodeWorldOrbitBank, decodeWorldOrbits } from './prepared-data/orbit/world-orbit-bank.js';
@@ -97,7 +98,7 @@ export { PREPARED_CUBIC_SKY_SCHEMA, CUBIC_SKY_STANDARD_SCHEMA, PREPARED_DIRECTIO
 
 export { PREPARED_PRESENTATION_SCHEMA } from './prepared-data/presentation/prepared-presentation-schema.js';
 export { validatePreparedLeafBounds } from './prepared-data/presentation/prepared-leaf-bounds.js';
-export type { PreparedLeafBounds } from './prepared-data/presentation/prepared-leaf-bounds.js';
+export type { PreparedLeafBounds, PreparedVolumeLeafStyle } from './prepared-data/presentation/prepared-leaf-bounds.js';
 export type { PreparedContractRotation, PreparedContractBank, PreparedContractTrack, PreparedContractVariant } from './prepared-data/presentation/prepared-presentation-contract-types.js';
 
 export { PREPARED_CSS_SKY_SCHEMA } from './prepared-data/sky/css-sky-types.js';
@@ -107,7 +108,7 @@ export type { PreparedCubicSkyPlan, PreparedDirectionalSunPlan } from './prepare
 export { DIRECTIONAL_SUN_PRESENTATION_STANDARD_SCHEMA } from './prepared-data/camera/runtime-camera-types.js';
 export { validatePreparedCubicSky, validateDirectionalSunPlan } from './prepared-data/sky/sky-contract.js';
 
-export type { VolumeAxis, PreparedVolumeLeafStyle, PreparedVolumeLeaf, PreparedVolumeStack, PreparedVolumeImpostors, PreparedCssVolume } from './volume/delivery/css-volume-types.js';
+export type { VolumeAxis, PreparedVolumeLeaf, PreparedVolumeStack, PreparedVolumeImpostors, PreparedCssVolume } from './volume/delivery/css-volume-types.js';
 export { validatePreparedCssVolume, trustPreparedCssVolume } from './volume/delivery/css-volume-validation.js';
 export { validateVolumeImpostors } from './volume/delivery/volume-impostor-validation.js';
 export { validatePreparedCataloguePoints, trustPreparedCataloguePoints } from './volume/catalogue/prepared-catalogue-points.js';

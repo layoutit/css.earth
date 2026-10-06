@@ -2,7 +2,6 @@ import { PREPARED_WORLD_SYSTEM_VIEW_SCHEMA } from './world-schemas.js';
 import type { WorldPosition as PositionM } from './world-frame.js';
 import { array, numbers, positive, record, text, unique } from './world-guards.js';
 import { validateWorldRotation } from '@cssearth/core';
-import type { PreparedContextBody, PreparedWorldContext } from './world-context.js';
 
 function vector(value: unknown, label: string): PositionM {
   const values = numbers(value, label, 3);
@@ -10,6 +9,10 @@ function vector(value: unknown, label: string): PositionM {
 }
 export interface PreparedSystemViewCandidate { readonly cameraToReference: readonly number[];
   readonly minimumM: PositionM; readonly maximumM: PositionM; readonly memberPositionsM: readonly PositionM[] }
+/** A body's system view: the members it frames and, in the full context only, its camera candidates. */
+export interface PreparedContextSystemView { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
+  readonly candidates?: readonly PreparedSystemViewCandidate[] }
+interface SystemViewHost { readonly id: string; readonly systemView?: PreparedContextSystemView }
 function parseSystemViewCandidates(value: unknown, memberCount: number, id: string): readonly PreparedSystemViewCandidate[] {
   const candidates = array(value, `system view ${id} candidates`).map(value => {
     const candidate = record(value, 'system view candidate', ['cameraToReference', 'minimumM', 'maximumM', 'memberPositionsM']);
@@ -25,7 +28,7 @@ function parseSystemViewCandidates(value: unknown, memberCount: number, id: stri
   return Object.freeze(candidates);
 }
 /** The full context's views carry their camera candidates; the summary's name their members only. */
-export function parseSystemView(value: unknown, withCandidates = true): PreparedContextBody['systemView'] {
+export function parseSystemView(value: unknown, withCandidates = true): PreparedContextSystemView | undefined {
   if (value === undefined) return undefined;
   const view = record(value, 'system view', withCandidates ? ['memberIds', 'memberRadiiM', 'candidates'] : ['memberIds', 'memberRadiiM']);
   const memberIds = array(view.memberIds, 'system members').map(id => text(id, 'system member id'));
@@ -38,7 +41,7 @@ export function parseSystemView(value: unknown, withCandidates = true): Prepared
   return Object.freeze(withCandidates ? { ...members, candidates: parseSystemViewCandidates(view.candidates, memberIds.length, memberIds.join(',')) } : members);
 }
 /** `system-views/<host id>.json`: one system's camera candidates, checked against that host's system view in the summary. */
-export function parsePreparedSystemView(value: unknown, plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>, id: string): { readonly candidates: readonly PreparedSystemViewCandidate[] } {
+export function parsePreparedSystemView(value: unknown, plan: { readonly focus: SystemViewHost; readonly bodies: readonly SystemViewHost[] }, id: string): { readonly candidates: readonly PreparedSystemViewCandidate[] } {
   const input = record(value, 'system view', ['schema', 'id', 'candidates']);
   if (input.schema !== PREPARED_WORLD_SYSTEM_VIEW_SCHEMA) throw new TypeError(`Unsupported prepared system view for ${id}: ${String(input.schema)}.`);
   if (input.id !== id) throw new TypeError(`Prepared system view for ${id} names ${String(input.id)}.`);
@@ -47,7 +50,7 @@ export function parsePreparedSystemView(value: unknown, plan: Pick<PreparedWorld
   return Object.freeze({ candidates: parseSystemViewCandidates(input.candidates, host.systemView.memberIds.length, id) });
 }
 /** Classification views frame prepared bodies by position; members must match those bodies. */
-export function parseClassificationViews(value: unknown, bodies: readonly PreparedContextBody[]) {
+export function parseClassificationViews(value: unknown, bodies: readonly { readonly id: string; readonly radiusM: number }[]) {
   if (value === undefined) return undefined;
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Classification views must be a record.');
   const byId = new Map(bodies.map(body => [body.id, body]));
