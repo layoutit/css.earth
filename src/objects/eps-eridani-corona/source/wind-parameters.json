@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-published-model-parameters@2",
+  "objectId": "eps-eridani-corona",
+  "datasetId": "wind",
+  "citation": "Wood, B. E., Müller, H.-R., Zank, G. P., Linsky, J. L. 2002, \"Measured mass-loss rates of solar-like stars as a function of age and activity\", ApJ 574, 412",
+  "doi": "10.1086/340797",
+  "preprint": "https://arxiv.org/abs/astro-ph/0203437",
+  "locator": "Table 1, row ε Eri",
+  "star": {
+    "massSolar": 0.82,
+    "massSource": "NASA Exoplanet Archive ps default row (THOMPSON_ET_AL_2025), st_mass; the star package cites it",
+    "radiusSolar": 0.74,
+    "radiusSource": "Baines & Armstrong (2012), ApJ 744, 138, section 3: 0.74 ± 0.01 solar radii; the star package cites it",
+    "coronalTemperatureKeV": 0.35,
+    "temperatureSource": "Bennedik et al. (2026), arXiv:2607.27832, Table 5, row ε Eri: kT 0.35 keV",
+    "radiusArcsec": 0.0010687445324970945,
+    "sceneOriginRaDecDeg": [
+      53.225364475322294,
+      -9.458106329436308
+    ],
+    "distancePc": 3.219989125999438
+  },
+  "massLossSolar": 30,
+  "solarMassLossSolarMassesPerYear": 2e-14,
+  "source": "Wood, Müller, Zank & Linsky (2002), ApJ 574, 412, Table 1: 30 times the solar mass-loss rate of 2e-14 solar masses a year",
+  "kelvin": 4061581.3419999992,
+  "massLossGramsPerSecond": 37805346414175.984,
+  "soundKmS": 236.31608034939225,
+  "criticalRadii": 1.8925843592635239,
+  "speedAtSurfaceKmS": 93.07990836611565,
+  "speedAt4RadiiKmS": 407.729590435189,
+  "electronsPerCm3": {
+    "1": 62280697.0345767,
+    "2": 5811996.457300361,
+    "3": 1874062.380840248,
+    "4": 888622.2800828472,
+    "1.5": 14182766.066706095
+  },
+  "notes": "The temperature is the X-ray temperature of Bennedik et al. (2026), arXiv:2607.27832, Table 5. The density follows from Parker (1958) and mass conservation; packages/bake/authoring/eps-eridani-corona/corona-models.mts computes it."
+}
