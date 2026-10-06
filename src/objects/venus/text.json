@@ -27,14 +27,14 @@
   },
   "datasets": {
     "clouds": {
-      "title": "Cloud illustration",
+      "title": "Venus’s clouds",
       "detail": "OpenSpace",
-      "summary": "An OpenSpace cloud texture of unknown camera, wavelength and processing."
+      "summary": "Thick clouds hide Venus’s ground. This is an illustration, not a photograph."
     },
     "radar": {
-      "title": "Radar brightness of the ground",
+      "title": "Radar map of the ground",
       "detail": "Magellan",
-      "summary": "Magellan’s radar mapped the ground beneath the clouds; brighter means a stronger radar echo."
+      "summary": "Magellan’s radar mapped the ground beneath the clouds. The orange color is added, not measured."
     },
     "elevation": {
       "title": "Height of the solid surface",
