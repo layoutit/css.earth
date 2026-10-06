@@ -101,23 +101,27 @@ export async function reduceStar(id: string, light?: StarLight): Promise<Record<
   const star = await starPlace(id); if (!star) throw new Error(`${id} is not a star with a place on the sky.`);
   const run = resolve(WORKSPACE, 'output/tess', id), files = resolve(run, 'light-curves'), pins = await toolchainPins(); await mkdir(run, { recursive: true });
   const tried: Record<string, unknown>[] = [], accepted: { window: number; time: readonly number[]; flux: readonly number[] }[] = [];
-  const campaigns: Listed[] = star.otherLight ? [] : (await lightCurvesAt(targetPlaces(star, 'K2'))).map(one => ({ window: one.campaign, filename: one.filename, uri: one.uri }));
-  const sectors: Listed[] = star.otherLight || campaigns.length ? [] : (await sectorLightCurvesAt(targetPlaces(star, 'TESS'))).map(one => ({ window: one.sector, filename: one.filename, uri: one.uri }));
+  const kind = { ...star, transits: await transitsOf(id) }, applies = (one: Mission) => methodFor(one, kind);
+  // A mission's archive is asked only about a star whose light from that mission a method here reads.
+  const reads = (one: Mission) => { const found = applies(one); return star.otherLight || 'reason' in found ? undefined : found.method; };
+  const campaigns: Listed[] = reads('K2') ? (await lightCurvesAt(targetPlaces(star, 'K2'))).map(one => ({ window: one.campaign, filename: one.filename, uri: one.uri })) : [];
+  const sectors: Listed[] = !campaigns.length && reads('TESS') ? (await sectorLightCurvesAt(targetPlaces(star, 'TESS'))).map(one => ({ window: one.sector, filename: one.filename, uri: one.uri })) : [];
   const mission: Mission = campaigns.length ? 'K2' : 'TESS', listed = campaigns.length ? campaigns : sectors, stem = (window: number) => windowStem(id, mission, window);
   const own = light === undefined ? (await lightOf([star], false, PIXELS[mission].radiusArcsec)).get(id) : (mission === 'K2' ? light.near : light.wide) ?? undefined;
-  let rotation: RotationVerdict = { detected: false, reason: star.otherLight ?? 'Neither K2 nor TESS publishes a light curve of this star, and no published method is wired for anything else.' }, method: PeriodMethod | undefined, whole: Record<string, unknown> | undefined;
-  if (listed.length) { const applies = methodFor(mission, { ...star, transits: await transitsOf(id) });
-    if ('reason' in applies) rotation = { detected: false, reason: applies.reason };
-    else { method = applies.method; const covered: (Listed & { file: string; url: string; bytes: number })[] = [];
+  // Why each mission gave nothing to judge: its method leaves the star out, or it publishes no light curve of it.
+  const unread = (one: Mission) => { const found = applies(one); return 'reason' in found ? found.reason : `${one} publishes no ${one === 'TESS' ? '2-minute ' : ''}light curve of this star.`; };
+  let rotation: RotationVerdict = { detected: false, reason: star.otherLight ?? `${unread('K2')} ${unread('TESS')}` }, whole: Record<string, unknown> | undefined;
+  const method: PeriodMethod | undefined = listed.length ? reads(mission) : undefined;
+  if (method) { const covered: (Listed & { file: string; url: string; bytes: number })[] = [];
       for (const one of listed) { const left = method.covers(one.window);
         if (left) tried.push({ mission, window: one.window, verdict: { detected: false, reason: left } }); else covered.push({ ...one, ...await fetchLightCurve(one, files) }); }
-      const judged = await method.judge(covered.map(one => one.file), { ...star, transits: await transitsOf(id) });
+      const judged = await method.judge(covered.map(one => one.file), kind);
       for (const window of judged.windows) { const file = covered.find(one => one.window === window.window);
         await writeFile(resolve(run, `${stem(window.window)}.curve.json`), `${JSON.stringify({ mission, window: window.window, product: 'pdcsap', time: window.time, flux: window.flux })}\n`);
         tried.push({ mission, window: window.window, method: method.id, lightCurveFile: { url: file?.url, bytes: file?.bytes, pipeline: window.pipeline }, frames: window.frames, lightCurve: `${stem(window.window)}.curve.json`, analysis: window.measures, says: window.says, verdict: window.verdict }); }
       if (judged.whole) whole = { analysis: judged.whole.measures, says: judged.whole.says, verdict: judged.whole.verdict };
       rotation = withinBreakup(besideCatalogued(judged.verdict, star.cataloguedPeriodDays), star.fastestTurnDays);
-      if (rotation.detected) accepted.push(...judged.windows.filter(window => window.verdict.detected).map(window => ({ window: window.window, time: window.time, flux: window.flux }))); } }
+      if (rotation.detected) accepted.push(...judged.windows.filter(window => window.verdict.detected).map(window => ({ window: window.window, time: window.time, flux: window.flux }))); }
   await rm(files, { recursive: true, force: true });
   const receipt: Record<string, unknown> = { schema: ROTATION_SCHEMA, star, ...(own ? { light: own } : {}), mission, lightCurves: listed.map(one => ({ window: one.window, file: one.filename })), tried, ...(whole ? { whole } : {}),
     ...(method ? { method: { id: method.id, citation: method.citation, url: method.url, where: method.where, lightCurve: method.lightCurve, asks: method.asks, reliability: method.reliability } } : {}), rotation, toolchain: { id: pins.id, requirements: pins.entry.requirements } };
