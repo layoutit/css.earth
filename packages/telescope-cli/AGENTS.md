@@ -52,7 +52,7 @@ never a published result: every sentence these modules write says it is derived 
 star whose gas, at its X-ray temperature, would not be held by its gravity is refused, not drawn.
 
 What the catalogues print of every star is `src/new-object/metadata/`: `--metadata --all | STAR_ID...` writes spectral type,
-metallicity, luminosity, age, rotation period, projected rotation speed and the tilt those give into each star's
+SIMBAD's object type with its place in SIMBAD's tree of types, metallicity, luminosity, age, rotation period, projected rotation speed and the tilt those give into each star's
 `source/measurements.json`, each beside its source. `star-metadata.mts` owns the fields and which catalogue stands before
 which; `metadata.mts` asks the NASA Exoplanet Archive once, and SIMBAD and the Gaia Archive in groups of stars. The pass never
 replaces a value the record holds from its own source, computes a tilt only for a page that draws no measured axis, and bakes
