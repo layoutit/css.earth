@@ -38,6 +38,9 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-29 (pscomppars): projected rotation speed 3.7 km/s, from Santerne et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract)",
   "spinInclinationDegrees": 66.6,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.86 solar radii): sin i = v sin i × P / (2πR) = 0.918. Not a measurement of the axis: the three numbers come from different papers.",
+  "rotationPeriodMeasuredDays": 10.68,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 4 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 10.68 d, the light swinging by 1.5% as the star turns (the light repeats every 5.34 d, half the catalogued rotation period, and the star is taken to turn once in two of them)",
+  "rotationLightSwingPercent": 1.53,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

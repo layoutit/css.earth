@@ -36,8 +36,84 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "color",
+    "defaultDataset": "color-brightness",
     "controls": [
+      {
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "qualification": "The star's color, darker where K2 saw it dimmer (contrast drawn stronger) · March to May 2017, mapped in this project",
+        "thumbnail": "k2-133-dataset-color-brightness.webp",
+        "surface": "k2-133-surface-color-brightness@2x.webp",
+        "poles": "k2-133-poles-color-brightness@2x.webp",
+        "source": {
+          "id": "k2-133-k2-map-brightness-campaign-13",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/k2"
+        },
+        "falseColor": false,
+        "notes": "K2-133 in its own color, darker where its light in K2's images of March to May 2017 says it was darker. As the star turned once in 34.4 days its light rose and fell by 0.21%. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 0.8% less light than the brightest, and is drawn as dark as on the Brightness map, whose scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's."
+      },
+      {
+        "id": "brightness-campaign-13",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · K2 mission light curve, campaign 13",
+        "thumbnail": "k2-133-dataset-brightness-campaign-13.webp",
+        "surface": "k2-133-surface-brightness-campaign-13@2x.webp",
+        "poles": "k2-133-poles-brightness-campaign-13@2x.webp",
+        "source": {
+          "id": "k2-133-k2-map-brightness-campaign-13",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/k2"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.6%",
+            "100%",
+            "100.4%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.6%",
+              "100%",
+              "100.4%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+        },
+        "notes": "Where the star's surface was darker and brighter in K2 campaign 13, worked out in this project from how its light rose and fell by 0.21% as it turned once in 34.4 days. The light curve is the mission's own; the criteria of Reinhold & Hekker (2020, A&A 635, A43) decide that it shows the star turning, and starry finds the map that reproduces it. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
       {
         "id": "color",
         "label": "Color",

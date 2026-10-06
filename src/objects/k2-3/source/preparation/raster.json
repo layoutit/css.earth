@@ -47,6 +47,80 @@
         },
         "qualification": "Photosphere color from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,844 K and log g 4.7 (u1 0.451, u2 0.304): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "brightness-campaign-1",
+      "output": "k2-3-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-3-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/k2-3-c01.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-campaign-1",
+        "label": "Campaign 1",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/k2-3-c01.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99.2,
+        "maximum": 100.8,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "99.2%",
+          "100%",
+          "100.8%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 39.6 days, fitted with starry to the K2 mission's own light curve of campaign 1 (its PDC-MAP flux) (the light varies by 0.20%; the map's curve leaves a scatter of 0.04%, the light's own noise being 0.03%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. The period is the mean of three methods' periods (periodogram 20.32 d, wavelet 19.73 d, autocorrelation 19.38 d; periodogram peak 0.54), accepted by the criteria of Reinhold & Hekker (2020, A&A 635, A43). The light repeats every 19.8 days, half the rotation period the catalogues print for the star: two groups of spots on opposite sides do that. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists no other star within 16 arcseconds of it. A reduction made in this project, not a published map.",
+        "title": "K2 · brightness map made here · Campaign 1",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "k2-3-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-3-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/k2-3-c01.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/k2-3-c01.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99.2,
+        "maximum": 100.8,
+        "colors": [
+          "#1a1510",
+          "#5c4b39",
+          "#9c7f61",
+          "#d6af85",
+          "#ffd09e"
+        ],
+        "labels": [
+          "99.2%",
+          "100.8%"
+        ],
+        "limbOf": "color",
+        "description": "The star's color (#ffd09e, its Color dataset) over the brightness map this project made from the star's light in K2 campaign 1 (June to August 2014): the map's scale, 99.2% to 100.8% of the mean surface, runs from a dark tone of the color to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 1.4% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "K2 · the star in its color over its brightness map · June to August 2014",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
     }
   ],
   "emission": {

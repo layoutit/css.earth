@@ -174,7 +174,7 @@ K2-136, a star of the Hyades, is one of them. In campaign 13 (March to May 2017)
 13.75 days, so 14.46, where the catalogues print 15, and the periodogram's peak has a height of 0.56. K2-102 was observed
 in three campaigns, which give 11.54, 11.70 and 11.25 days: its period is their mean, 11.5 days, and it has three maps.
 
-![K2-136 in the app: Color + brightness above, Brightness map below](images/stellar-brightness-maps-k2.webp)
+![Six of the K2 stars in the app (K2-100, K2-102, K2-136, K2-141, K2-198, K2-233): Color + brightness above, Brightness map below](images/stellar-brightness-maps-k2.webp)
 
 ## What the map is and is not
 

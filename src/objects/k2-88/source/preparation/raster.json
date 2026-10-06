@@ -46,6 +46,80 @@
         },
         "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,537 K and log g 5.03 (u1 0.161, u2 0.429): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "brightness-campaign-4",
+      "output": "k2-88-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-88-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/k2-88-c04.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-campaign-4",
+        "label": "Campaign 4",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/k2-88-c04.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 98,
+        "maximum": 102,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "98%",
+          "100%",
+          "102%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 31.6 days, fitted with starry to the K2 mission's own light curve of campaign 4 (its PDC-MAP flux) (the light varies by 0.74%; the map's curve leaves a scatter of 0.14%, the light's own noise being 0.09%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. The period is the mean of three methods' periods (periodogram 31.77 d, wavelet 30.94 d, autocorrelation 32.25 d; periodogram peak 0.58), accepted by the criteria of Reinhold & Hekker (2020, A&A 635, A43). No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists no other star within 16 arcseconds of it. A reduction made in this project, not a published map.",
+        "title": "K2 · brightness map made here · Campaign 4",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "k2-88-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-88-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/k2-88-c04.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/k2-88-c04.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 98,
+        "maximum": 102,
+        "colors": [
+          "#1a140e",
+          "#5c4731",
+          "#9c7853",
+          "#d6a471",
+          "#ffc487"
+        ],
+        "labels": [
+          "98%",
+          "102%"
+        ],
+        "limbOf": "color",
+        "description": "The star's color (#ffc487, its Color dataset) over the brightness map this project made from the star's light in K2 campaign 4 (February to April 2015): the map's scale, 98% to 102% of the mean surface, runs from a dark tone of the color to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 3.2% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "K2 · the star in its color over its brightness map · February to April 2015",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
     }
   ],
   "emission": {

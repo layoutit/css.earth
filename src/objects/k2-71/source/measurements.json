@@ -20,6 +20,9 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-71 (pscomppars): log10 of the luminosity in solar units -1.51871, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "projectedRotationSpeedKmS": 4.19,
   "projectedRotationSpeedSource": "SIMBAD, K2-71: projected rotation speed 4.19 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "rotationPeriodMeasuredDays": 21.8,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 3 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 21.8 d, the light swinging by 0.85% as the star turns",
+  "rotationLightSwingPercent": 0.85,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

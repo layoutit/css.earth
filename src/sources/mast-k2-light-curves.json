@@ -1,0 +1,41 @@
+{
+  "id": "mast-k2-light-curves",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "K2 light curves (all campaigns) at MAST",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17909/T9WS3R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://archive.stsci.edu/missions-and-data/k2",
+      "label": "K2 at MAST"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17909/T9WS3R",
+      "label": "K2 light curves (all campaigns) at MAST"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://api.datacite.org/dois/10.17909/T9WS3R",
+      "checkedOn": "2026-10-06",
+      "locator": "DataCite record of the DOI: K2 Light Curves (all), STScI/MAST, 2016. A file holds one target's long-cadence light curve of a campaign, with the flux the mission's pipeline corrected (PDC-MAP)."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This work includes data collected by the K2 mission, funded by the NASA Science Mission Directorate, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/missions-and-data/k2"
+    }
+  ],
+  "publisher": "Mikulski Archive for Space Telescopes (STScI)"
+}

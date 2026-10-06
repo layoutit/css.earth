@@ -34,6 +34,9 @@
       "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 9.89 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "rotationPeriodMeasuredDays": 9.78,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 1 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 9.78 d, the light swinging by 2.6% as the star turns",
+  "rotationLightSwingPercent": 2.57,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

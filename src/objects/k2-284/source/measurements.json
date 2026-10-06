@@ -36,6 +36,9 @@
   ],
   "projectedRotationSpeedKmS": 3.54,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-284 (pscomppars): projected rotation speed 3.54 km/s, from David et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..302D/abstract)",
+  "rotationPeriodMeasuredDays": 8.82,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 13 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 8.82 d, the light swinging by 2.9% as the star turns",
+  "rotationLightSwingPercent": 2.93,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
