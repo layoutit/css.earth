@@ -1,0 +1,72 @@
+{
+  "id": "nasa-2014-el-gordo-layers",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Galaxy cluster 'El Gordo': the 2014 Hubble release in its layers",
+  "identifiers": [
+    {
+      "type": "STScI news release",
+      "value": "2014-22"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKRXF86FHKE6A9J3W0HVFC.tif",
+      "label": "Hubble ACS/WFC alone, TIFF, 6184 x 3748 px, 52 MB"
+    },
+    {
+      "role": "original",
+      "url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKQXPBYZ6W08GY800C1NCV.tif",
+      "label": "Mass map alone, TIFF, 6184 x 3748 px, 11 MB"
+    },
+    {
+      "role": "original",
+      "url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKSAYXQBA9MVN9PM5KX4EM.tif",
+      "label": "Chandra X-ray alone, TIFF, 6184 x 3748 px, 10 MB"
+    },
+    {
+      "role": "original",
+      "url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKR5JKJSQP98DV5V2PKM45.tif",
+      "label": "Hubble with the mass map and the X-ray, TIFF, 6184 x 3748 px, 58 MB"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.stsci.edu/copyright",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+      "checkedOn": "2026-10-05",
+      "locator": "The release lists five pictures on one frame: Galaxy Cluster 'El Gordo' with Mass Map; with Mass Map and X-ray; 'El Gordo' (Hubble ACS/WFC); 'El Gordo' (Mass Map); 'El Gordo' (Chandra X-ray). The files carry no sky tags. Measured here: the Hubble layer against Gaia DR3 gives 0.05000 arcsec per pixel, north 50.62 degrees right of vertical, 16 of 16 stars in the frame at 0.17 arcsec rms."
+    },
+    {
+      "url": "https://www.stsci.edu/copyright",
+      "checkedOn": "2026-10-05",
+      "locator": "Unless otherwise stated, material on the site was produced by NASA and STScI and may be freely used as in the public domain; acknowledgement of NASA and STScI is requested. Material from other institutions may be theirs."
+    }
+  ],
+  "publisher": "NASA/STScI",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, and J. Jee (University of California, Davis)",
+      "scope": "Published source",
+      "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
+    },
+    {
+      "kind": "rights",
+      "text": "May be freely used as in the public domain; acknowledgement of NASA and STScI is requested.",
+      "scope": "Published source",
+      "evidence": "https://www.stsci.edu/copyright"
+    }
+  ]
+}

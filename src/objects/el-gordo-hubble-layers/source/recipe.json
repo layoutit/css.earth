@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "el-gordo-hubble-layers",
+  "source": {
+    "path": "starless.jpg",
+    "dimensions": [
+      6184,
+      3748
+    ],
+    "originalDimensions": [
+      6184,
+      3748
+    ],
+    "publisherUrl": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+    "downloadUrl": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKRXF86FHKE6A9J3W0HVFC.tif",
+    "credit": "NASA, ESA, and J. Jee (University of California, Davis)",
+    "license": "NASA-STScI"
+  },
+  "observation": {
+    "centerRaDeg": 15.7306268,
+    "centerDecDeg": -49.2553823,
+    "fieldOfViewDeg": [
+      0.0858953,
+      0.0520595
+    ],
+    "northClockwiseDeg": 50.621
+  },
+  "target": {
+    "centerRaDeg": 15.71875,
+    "centerDecDeg": -49.24944444,
+    "distancePc": 3060018921.6384254
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.009765,
+    "lineOfNodesPaDeg": 217.45,
+    "thicknessKpc": 0.984,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 2700,
+    "supportTaperFraction": 0.995,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "collision": {
+      "source": "publication-menanteau-2012-el-gordo",
+      "basis": "Gas: Menanteau et al. (2012, Sect. III.2.2) take the X-ray gas apart as round about a symmetry axis through the peak X-ray emission at the bullet and the surface-brightness depression to the north-west, centred on 01:02:54.9, -49:15:52.5 (J2000) at position angle 136 degrees; the line's second place here is 60 arcsec along that angle. Mass: Jee et al. (2014, Sect. IV.2) give the two weak-lensing peaks, the north-western at 01:02:50.601, -49:15:04.48 and the south-eastern at 01:02:56.312, -49:16:23.15, and fit two round halos. Tilt: the papers put the merger near the plane of the sky (Menanteau et al.; Jee et al.: a line-of-sight velocity difference of 586 km/s, double radio relics); Ng et al. (2015) estimate 21 (+9, -11) degrees from the relic's polarisation, and prefer the subclusters returning where Menanteau et al. have the bullet moving outward, so no paper settles which end is the farther. The lines are drawn in the plane of the sky.",
+      "tiltDeg": 0,
+      "gas": {
+        "source": "nasa-2014-el-gordo-layers",
+        "path": "xray.tif",
+        "from": {
+          "raDeg": 15.72875,
+          "decDeg": -49.2645833
+        },
+        "to": {
+          "raDeg": 15.746493,
+          "decDeg": -49.276572
+        },
+        "pointSourceArcsec": 3
+      },
+      "mass": {
+        "source": "nasa-2014-el-gordo-layers",
+        "path": "mass.tif",
+        "from": {
+          "raDeg": 15.7108375,
+          "decDeg": -49.2512444
+        },
+        "to": {
+          "raDeg": 15.7346333,
+          "decDeg": -49.2730972
+        }
+      }
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.19,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 32,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 40
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}
