@@ -1,0 +1,28 @@
+{
+  "id": "macs-j0025",
+  "classification": "galaxy-cluster",
+  "order": 5783,
+  "physical": {
+    "name": "MACS J0025",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of MACS J0025 is recorded here: its package frames it at 1,041,069 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 6.372420833,
+    "declinationDegrees": -12.37696111,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 2221586199.256822,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 175078.8,
+    "sources": {
+      "position": "NASA/IPAC Extragalactic Database (NED), MACS J0025.4-1222: position from 2011MNRAS.410.1939Z, redshift from 2024A&A...690A.322K (https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222); NED preferred values of MACS J0025.4-1222: RA 6.372420833°, Dec -12.37696111° (2011MNRAS.410.1939Z); redshift 0.584 (2024A&A...690A.322K)",
+      "distance": "Comoving distance of the redshift z = 0.584 (NED, 2024A&A...690A.322K) in the Planck 2018 cosmology: 2221586199.256822 pc, the Planck18 parameters as Astropy defines them, integrated in this repository's work and checked against two distances Astropy gave (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift.",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 0.584: the redshift written as a velocity, not a motion through space. NASA/IPAC Extragalactic Database (NED), MACS J0025.4-1222: position from 2011MNRAS.410.1939Z, redshift from 2024A&A...690A.322K (https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222)."
+    }
+  }
+}

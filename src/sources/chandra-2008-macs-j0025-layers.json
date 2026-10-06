@@ -1,0 +1,72 @@
+{
+  "id": "chandra-2008-macs-j0025-layers",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MACS J0025.4-1222: the 2008 composite in its layers",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://chandra.harvard.edu/photo/2008/macs/more.html"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://chandra.harvard.edu/photo/2008/macs/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://chandra.harvard.edu/photo/2008/macs/macs_optical.tif",
+      "label": "Optical alone, TIFF, 4200 x 4143 px"
+    },
+    {
+      "role": "original",
+      "url": "https://chandra.harvard.edu/photo/2008/macs/macs_xray.tif",
+      "label": "X-ray alone, TIFF, 4200 x 4143 px"
+    },
+    {
+      "role": "original",
+      "url": "https://chandra.harvard.edu/photo/2008/macs/macs_lens.tif",
+      "label": "Lensing mass map alone, TIFF, 4200 x 4143 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://chandra.harvard.edu/photo/image_use.html",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://chandra.harvard.edu/photo/2008/macs/",
+      "checkedOn": "2026-10-05",
+      "locator": "Caption: MACS J0025 formed after an incredibly energetic collision between two large clusters in almost the plane of the sky; the image shows a clear separation between dark and ordinary matter. Color code: X-ray (purple), lensing (blue), optical (yellow and cyan). The image is 3.2 arcmin across."
+    },
+    {
+      "url": "https://chandra.harvard.edu/photo/2008/macs/more.html",
+      "checkedOn": "2026-10-05",
+      "locator": "The composite in layers as JPEG and TIFF: optical, X-ray and lensing each alone, each 4200 x 4143 px. Measured here against Gaia DR3: 0.04666 arcsec per pixel, where the files' embedded tags say 0.02331."
+    },
+    {
+      "url": "https://chandra.harvard.edu/photo/image_use.html",
+      "checkedOn": "2026-10-05",
+      "locator": "For Chandra content no claim to copyright is asserted and the material may be used in accordance with NASA guidelines; acknowledgement of NASA/SAO is requested. Material provided by other institutions may be theirs."
+    }
+  ],
+  "publisher": "Chandra X-ray Center",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+      "scope": "Published source",
+      "evidence": "https://chandra.harvard.edu/photo/2008/macs/"
+    },
+    {
+      "kind": "rights",
+      "text": "No claim to copyright is asserted for Chandra content; acknowledgement is requested. Material other institutions provided may be theirs.",
+      "scope": "Published source",
+      "evidence": "https://chandra.harvard.edu/photo/image_use.html"
+    }
+  ]
+}

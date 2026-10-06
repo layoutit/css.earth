@@ -1,0 +1,104 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "macs-j0025-layers",
+  "source": {
+    "path": "starless.jpg",
+    "dimensions": [
+      4200,
+      4143
+    ],
+    "originalDimensions": [
+      4200,
+      4143
+    ],
+    "publisherUrl": "https://chandra.harvard.edu/photo/2008/macs/",
+    "downloadUrl": "https://chandra.harvard.edu/photo/2008/macs/macs_optical.tif",
+    "credit": "X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+    "license": "NASA-SAO"
+  },
+  "observation": {
+    "centerRaDeg": 6.3743194,
+    "centerDecDeg": -12.3810422,
+    "fieldOfViewDeg": [
+      0.0544382,
+      0.0536994
+    ],
+    "northClockwiseDeg": 31.973
+  },
+  "target": {
+    "centerRaDeg": 6.372420833,
+    "centerDecDeg": -12.37696111,
+    "distancePc": 2221586199.256822
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.004483,
+    "lineOfNodesPaDeg": 245.563,
+    "thicknessKpc": 1.06,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 1490,
+    "supportTaperFraction": 0.995,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "collision": {
+      "source": "publication-bradac-2008-macs-j0025",
+      "basis": "Bradač et al. (2008, Table 2) give the gas peak, 00:25:29.5, -12:22:36.6 (J2000, within 5 arcsec), and the two total-mass peaks as offsets from it in arcminutes, in a figure with north up and east left: the south-eastern at (-0.70 +/- 0.25, -0.43 +/- 0.06) and the north-western at (0.46 +/- 0.13, 0.20 +/- 0.04). The line through the two mass peaks runs at position angle 298.5 degrees and passes 3 arcsec from the gas peak; the gas and the mass are both turned about it. Tilt: the two subclusters differ by 100 +/- 80 km/s along the sight line and the paper takes the collision as head-on in the plane of the sky, so the line is drawn in the plane of the sky.",
+      "tiltDeg": 0,
+      "gas": {
+        "source": "chandra-2008-macs-j0025-layers",
+        "path": "macs_xray.tif",
+        "from": {
+          "raDeg": 6.3848609,
+          "decDeg": -12.384
+        },
+        "to": {
+          "raDeg": 6.3650676,
+          "decDeg": -12.3735
+        },
+        "pointSourceArcsec": 3
+      },
+      "mass": {
+        "source": "chandra-2008-macs-j0025-layers",
+        "path": "macs_lens.tif",
+        "from": {
+          "raDeg": 6.3848609,
+          "decDeg": -12.384
+        },
+        "to": {
+          "raDeg": 6.3650676,
+          "decDeg": -12.3735
+        }
+      }
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.38,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 32,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 40
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

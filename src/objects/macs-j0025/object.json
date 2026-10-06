@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "macs-j0025",
+  "parent": "observable-universe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "MACS J0025",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 32124044220578540000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "MACS J0025",
+      "systemName": "Galaxy clusters",
+      "classification": "galaxy-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 458235046950932,
+      "description": "Two clusters that collided head-on, leaving their hot gas between two clumps of mass.",
+      "aliases": [
+        "MACS J0025.4-1222",
+        "Baby Bullet",
+        "Baby Bullet Cluster"
+      ],
+      "order": 5783,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6.654406152689062e+25,
+        7.43168038096159e+24,
+        -1.4693395889761524e+25
+      ],
+      "presentationToReference": [
+        0.9998929555141789,
+        0,
+        0.014631387942364585,
+        0.013424035980294827,
+        0.3977771559319137,
+        -0.9173838506735975,
+        0.005820031883050266,
+        -0.9174820620691818,
+        -0.3977345760807856
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 103625949098640460000,
+      "bodyRadiusM": 3.2124044220578543e+22
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
