@@ -53,6 +53,11 @@ held differently while coasting:
   images are decoded off the page's thread, then shows whole: decoded inside the paint, NGC 2392's 57 layers made a
   frame of 235 ms on a turn and 270 ms on a dataset switch, against 34 and 31 ms decoded first (iPad, 2026-10-05).
   Joining such a stack a share a frame was measured and rejected: each joining frame painted the layers already shown.
+  What such a stack or bank replaces stays until it is decoded: the stacks already drawn share the whole picture, the
+  one that drew most stays when the camera has turned fully away from it, a bank's billboard gives way only to a bank
+  that draws, and the bank a host showed before a dataset pick stands in for the picked one. Without that the Ring had
+  nothing drawn for a recorded grab at a turn and at each dataset pick, 0.5 s of a 10.5 s visit on the iPad, the
+  Southern Ring 0.8 s and Cassiopeia A 0.7 s; with it none, 0.2 and 0.4 s (2026-10-06).
   A dataset picked on a slice volume that is on screen waits the same way (`universe/universe-dataset-banks.ts`): the
   volume keeps the dataset it shows until every atlas of the next is decoded, then takes them in one frame, and not
   while the camera coasts. Written at once, each atlas painted as it landed: on M42 frames of 99, 77 and 75 ms at the
