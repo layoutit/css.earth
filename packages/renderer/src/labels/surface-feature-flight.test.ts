@@ -1,4 +1,4 @@
-import { createCameraMotion } from '../navigation/camera-motion.js';
+import { createCameraMotion } from '../navigation/motion/camera-motion.js';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';

@@ -4,7 +4,7 @@ import { writeStyle as writeRetainedStyle } from '../dom/retained-write.js';
 import { createPreparedInteriorDisc } from '../culling/prepared-interior-disc.js';
 
 import { buildPreparedTree, type PreparedTreeLease } from '../dom/prepared-tree.js';
-import { bindPreparedSurfaceHit } from '../../navigation/prepared-surface-hit.js';
+import { bindPreparedSurfaceHit } from '../../navigation/picking/prepared-surface-hit.js';
 
 import { createPreparedDepthPartitions } from '../culling/prepared-depth-partitions.js';
 
@@ -23,7 +23,7 @@ import { createLeafBoxWriter, SEAM_OUTSET } from '../culling/prepared-leaf-box-d
 import { hiddenSubtreeRoots, omittedPreparedNodes } from '../dom/prepared-omitted-nodes.js';
 import { createSettlePacer } from '../loading/settle-pacer.js';
 import { keepLayers } from '../dom/kept-layers.js';
-import type { CameraMotionSignal } from '../../navigation/camera-motion-signal.js';
+import type { CameraMotionSignal } from '../../navigation/motion/camera-motion-signal.js';
 import { activeResourceFallbacks } from '../loading/prepared-resource-fallbacks.js';
 import { preparedDatasetPending } from '../../prepared-data/dataset-tables.js';
 import { selectPreparedSilhouetteStep } from '../textures/prepared-silhouette-steps.js';

@@ -1,15 +1,15 @@
 import { type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 
 export type ObjectWorldNavigationListener = (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
 
 export interface ObjectWorldNavigation {
-  readonly motion: import('../navigation/camera-motion.js').CameraMotion;
+  readonly motion: import('../navigation/motion/camera-motion.js').CameraMotion;
   readonly frame: PreparedWorldCameraFrame;
   /** The body's volume-equivalent radius over its longest reach when below 1 (an elongated shape model). */
   readonly framingScale?: number;
-  readonly labelEdge?: import('../navigation/prepared-label-edge.js').PreparedLabelEdge;
+  readonly labelEdge?: import('../navigation/camera/prepared-label-edge.js').PreparedLabelEdge;
   /** The retained surface may differ from the current overview focus. */
   readonly detailFrame?: PreparedWorldCameraFrame;
   /** Retain the departing surface until navigation is cancelled or its scene is disposed. */

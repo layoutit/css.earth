@@ -5,8 +5,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 
-import { selectPreparedResponsiveZoom } from '@cssearth/renderer/navigation/camera-layout.ts';
-import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';
+import { selectPreparedResponsiveZoom } from '@cssearth/renderer/navigation/camera/camera-layout.ts';
+import type { CameraViewport } from '@cssearth/renderer/navigation/camera/camera-viewport.ts';
 import type { SceneFactory } from '../browser/browser-types.mts';
 import { SCENE_OBJECTS } from '../directory/objects.mts';
 import { allSatelliteSystems } from '../world/systems/satellite-systems.mts';

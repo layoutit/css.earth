@@ -3,7 +3,7 @@ import test, { mock } from 'node:test';
 import { parseHTML } from 'linkedom';
 import { parseSharedView } from '@cssearth/renderer/navigation';
 import type { SceneFactory } from '../browser/browser-types.mts';
-import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';
+import type { CameraViewport } from '@cssearth/renderer/navigation/camera/camera-viewport.ts';
 
 const calls: unknown[][] = [];
 let coverAvailable = true, prepareFails = false, initialFails = false;

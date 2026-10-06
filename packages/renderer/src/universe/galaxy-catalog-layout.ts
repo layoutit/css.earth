@@ -1,6 +1,6 @@
 import { fromEyeM, cssCameraAxesFromOrientation } from '@cssearth/engine';
 import type { WorldCameraPose } from '@cssearth/engine';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 
 /** Only the observer projection is runtime work; every astronomical position is prepared. */
 export function projectCatalogPosition(positionM: readonly number[], world: WorldCameraPose, viewport: WorldCameraViewport) {

@@ -4,7 +4,7 @@ const test = sourceTest();
 import preparedContext from '../../../src/objects/observable-universe/prepared/world-context.json' with { type: 'json' };
 import { bodyViewAtCamera, zoomFrameDistanceM, zoomScopeAtCamera, viewDistance, type ZoomStep } from './zoom-scope.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
-import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import { parsePreparedWorldContext, type ObjectZoom, type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import { systemOverviewDistance, SYSTEM_FRAMING_RADII } from './system-framing.mts';

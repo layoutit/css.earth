@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { createSelectionFlight, sampleSelectionFlight, worldCameraFromCenteredPresentation } from '@cssearth/engine';
 import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { projectRoot } from '@cssearth/core/node';
 import { createWorldSelectionTarget } from './selection-target.js';
 import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
 import { presentWorldCamera } from './world-camera.js';
@@ -11,7 +13,7 @@ const viewport = { focalPixels: 1247.08, principalOffsetPixels: [-170, 0] as con
 for (const [fromId, toId] of [['mercury', 'venus'], ['venus', 'mercury']]) {
   test(`${fromId} to ${toId} arrives at the authored physical size without resetting the viewing angle`, async () => {
     const frames = await Promise.all([fromId, toId].map(async id => {
-      const descriptor = JSON.parse(await readFile(new URL(`../../../../src/objects/${id}/object.json`, import.meta.url), 'utf8'));
+      const descriptor = JSON.parse(await readFile(resolve(projectRoot(import.meta.url), `src/objects/${id}/object.json`), 'utf8'));
       return parsePreparedWorldCameraFrame(descriptor.properties.worldFrame)!;
     }));
     const [source, target] = frames;

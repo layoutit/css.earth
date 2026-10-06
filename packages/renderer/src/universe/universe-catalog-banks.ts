@@ -3,7 +3,7 @@ import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import { type PreparedCatalogObject, type DensityVolumeFrame } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
 import { outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';

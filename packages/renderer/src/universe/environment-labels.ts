@@ -1,11 +1,11 @@
 import { writeStyle } from '../rendering/dom/retained-write.js';
-import { screenPicking } from '../navigation/screen-picking.js';
+import { screenPicking } from '../navigation/picking/screen-picking.js';
 import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
 import { presentPhysicalPoseInVolume, type WorldCameraPose, cssCameraAxesFromOrientation } from '@cssearth/engine';
 import { type DensityVolumeFrame, type PreparedCssSurfaceShell, type PreparedCssVolume } from '@cssearth/objects';
 import { labelRectsOverlap } from '../labels/screen-label-layout.js';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import type { OpacityClock } from '../stars/opacity-clock.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import type { PreparedSurfaceShellStats } from '../shell/prepared-shell-runtime.js';

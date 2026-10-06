@@ -13,7 +13,7 @@ import type { WorldContextFrame } from '../../packages/renderer/src/universe/wor
 import type { PlannedWorldContext } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';
 import { preparedVolumeOpacity, CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from '../../packages/renderer/src/universe/world-context/context-scale.js';
 import { labelRectsOverlap } from '../../packages/renderer/src/labels/screen-label-layout.js';
-import { screenPicking } from '../../packages/renderer/src/navigation/screen-picking.js';
+import { screenPicking } from '../../packages/renderer/src/navigation/picking/screen-picking.js';
 import { createWorldContextFrameEncoder } from '../../packages/renderer/src/universe/world-context/world-context-frame.js';
 import { type PackedWorldContextView, unpackWorldBodies } from '../../packages/renderer/src/universe/world-context/world-context-view-transport.js';
 import { createWorldContextPlanner } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';

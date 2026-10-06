@@ -2,11 +2,11 @@ import { surfaceFeatureBankIndex, type PreparedSurfaceFeaturePlan, type ParsedSu
 
 import { writeData, writeStyle } from '../rendering/dom/retained-write.js';
 import { eyeDistanceM, rotateWorldPosition } from '@cssearth/engine';
-import { bindInputEvent } from '../navigation/shared-input-surface.js';
+import { bindInputEvent } from '../navigation/input/shared-input-surface.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import { requirePhysicalProjection } from '../prepared-data/physical-projection.js';
-import { screenPicking } from '../navigation/screen-picking.js';
-import type { ScreenPickTarget } from '../navigation/screen-picking.js';
+import { screenPicking } from '../navigation/picking/screen-picking.js';
+import type { ScreenPickTarget } from '../navigation/picking/screen-picking.js';
 import { orbitSegmentTransform } from '../solar-system/orbit-segment-presentation.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';

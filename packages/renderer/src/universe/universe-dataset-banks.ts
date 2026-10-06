@@ -4,7 +4,7 @@ import type { PreparedFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import { type DensityVolumeFrame, type PreparedPointVisibility, type DatasetBankBillboard, type DatasetBillboards } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { createPreparedVolumeDatasets, type PreparedVolumeDatasetSource } from '../volume/prepared-volume-datasets.js';
 import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';

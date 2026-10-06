@@ -2,7 +2,7 @@
 import { presentPhysicalPoseInVolume, cssViewFromOrientation } from '@cssearth/engine';
 import { projectPreparedPoint } from '@cssearth/volume-viewer/camera/point-projection';
 import type { WorldCameraPose } from '@cssearth/engine';
-import type { WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraViewport } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import { mountCatalogueStars } from '@cssearth/volume-viewer/scene/catalogue-stars';
 
 import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/objects';

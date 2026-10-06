@@ -4,7 +4,7 @@
 // pointer stream on Cesium and compares.
 import { polePanTurn, poleViewportTurn, poleTurnRotation, rotateVector } from "@cssearth/engine";
 import type { Vector3 } from "@cssearth/engine";
-import type { TrackballMetrics, Quaternion } from './types.js';
+import type { TrackballMetrics, Quaternion } from '../types.js';
 
 /** The pointer's movement within one frame. */
 export interface FrameMovement { startX: number; startY: number; endX: number; endY: number; }

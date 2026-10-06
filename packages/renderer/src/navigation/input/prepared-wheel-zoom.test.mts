@@ -1,12 +1,12 @@
 import { afterEach, test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { runtimePolicy } from '../../test/runtime-policy-fixture.mts';
-import { Surface } from '../../test/orbit-fixture.mts';
+import { runtimePolicy } from '../../../test/runtime-policy-fixture.mts';
+import { Surface } from '../../../test/orbit-fixture.mts';
 import { createPreparedWheelZoomControls, pinchTargetDistance } from './prepared-wheel-zoom.js';
-import { cameraMotionSignalFor } from './camera-motion-signal.js';
-import type { NavigationCamera, CameraDelta } from './types.ts';
-import type { WheelZoomInertia } from './runtime-policy.ts';
+import { cameraMotionSignalFor } from '../motion/camera-motion-signal.js';
+import type { NavigationCamera, CameraDelta } from '../types.ts';
+import type { WheelZoomInertia } from '../runtime-policy.ts';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
 afterEach(() => unstubAllGlobals());

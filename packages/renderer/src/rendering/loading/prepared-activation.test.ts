@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { readFileSync } from 'node:fs';
-import { bindPreparedSurfaceHit } from '../../navigation/prepared-surface-hit.js';
+import { bindPreparedSurfaceHit } from '../../navigation/picking/prepared-surface-hit.js';
 import { prepareConnectedActivation } from './prepared-activation.js';
 import { createFramePacer, SETTLE_PACING } from './settle-pacer.js';
 

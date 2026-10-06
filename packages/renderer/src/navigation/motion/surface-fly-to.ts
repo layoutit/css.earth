@@ -1,6 +1,6 @@
 import { SURFACE_FLY_TO, projectTrackballDelta } from '@cssearth/engine';
 import { cross3 } from '@cssearth/core';
-import type { TrackballMetrics, Vector3, Quaternion, Matrix3 } from './types.js';
+import type { TrackballMetrics, Vector3, Quaternion, Matrix3 } from '../types.js';
 export interface SurfaceFlyToInput { clientX: number; clientY: number; trackball: TrackballMetrics; currentZoom: number; minimumZoom: number; maximumZoom: number; }
 export type SurfaceFlyToPlan = NonNullable<ReturnType<typeof planSurfaceFlyTo>>;
 

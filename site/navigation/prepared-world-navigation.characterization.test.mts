@@ -4,7 +4,7 @@ import { setImmediate as nextTurn } from 'node:timers/promises';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
 import { CATEGORY_FRAMES, DATASET_VOLUMES, volumeZoomTarget } from '../world/systems/system-framing.mts';
 import { navigationFixture, unusedSharedView, required } from './navigation-test-values.test-support.mts';
-import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import { formatSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
 import type { WorldCameraPose } from '@cssearth/engine';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';

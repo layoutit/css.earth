@@ -2,10 +2,10 @@ import { type ObjectRuntimeDefinition, type PreparedWorldCameraFrame } from '@cs
 
 import type { ObjectSelection } from '../../runtime/object-contract.js';
 
-import type { SharedView } from '../../navigation/view-url.js';
-import { savedWorldCamera } from '../../navigation/saved-world-camera.js';
-import { presentWorldCamera } from '../../navigation/world-camera.js';
-import { preparedCameraBasis } from '../../navigation/prepared-camera-basis.js';
+import type { SharedView } from '../../navigation/camera/view-url.js';
+import { savedWorldCamera } from '../../navigation/camera/saved-world-camera.js';
+import { presentWorldCamera } from '../../navigation/camera/world-camera.js';
+import { preparedCameraBasis } from '../../navigation/camera/prepared-camera-basis.js';
 import { physicalProjectionFromCamera } from '../../prepared-data/physical-projection.js';
 import { createPreparedFramePublisher } from './prepared-presentation.js';
 import { omittedPreparedNodes } from '../dom/prepared-omitted-nodes.js';

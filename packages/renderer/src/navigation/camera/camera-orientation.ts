@@ -1,7 +1,7 @@
 import { CAMERA_POSE_SCHEMA, parseRestoredCameraPose, type CameraPose, type CameraPlan } from '@cssearth/objects';
 import { validateWorldRotation } from '@cssearth/core';
 
-import type { CameraAngles, Quaternion, Vector3 } from './types.js';
+import type { CameraAngles, Quaternion, Vector3 } from '../types.js';
 
 export interface CameraOrientationOptions extends CameraAngles { cameraPlan: CameraPlan; sunDirection?: Vector3 | null; }
 export type CameraOrientation = ReturnType<typeof createCameraOrientation>;

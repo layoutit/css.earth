@@ -3,7 +3,7 @@ import { type WorldCameraPose } from '@cssearth/engine';
 
 import { writeStyle } from '../rendering/dom/retained-write.js';
 
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 
 import { projectVolumeImpostors } from '../volume/volume-impostor-projection.js';
 

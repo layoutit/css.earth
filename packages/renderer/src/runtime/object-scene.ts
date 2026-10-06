@@ -1,6 +1,6 @@
 import { type DatasetVolume } from '@cssearth/objects';
 
-import type { SharedView } from '../navigation/view-url.js';
+import type { SharedView } from '../navigation/camera/view-url.js';
 import type { SurfaceFeatureNavigationRuntime } from '../labels/surface-feature-types.js';
 import type { PreparedDestinationRuntime } from './object-runtime-types.js';
 import type { ObjectWorldNavigation } from './world-navigation-types.js';

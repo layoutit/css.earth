@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import scene from '../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
+import scene from '../../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
 import { createPreparedCamera } from './prepared-camera.js';
 
 test('a scene with a wider one to hand the camera to lets the zoom go past its own far limit', () => {

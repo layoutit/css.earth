@@ -1,6 +1,6 @@
 import { type ObjectControls, type PreparedPresentationDefinition } from '@cssearth/objects';
 
-import type { CameraMotionSignal } from '../../navigation/camera-motion-signal.js';
+import type { CameraMotionSignal } from '../../navigation/motion/camera-motion-signal.js';
 import type { ObjectSelection, ObjectAction } from '../../runtime/object-contract.js';
 
 import type { SceneLifetime } from "@cssearth/engine";

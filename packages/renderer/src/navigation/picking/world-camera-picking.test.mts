@@ -1,17 +1,17 @@
-import { createCameraMotion } from './camera-motion.js';
+import { createCameraMotion } from '../motion/camera-motion.js';
 import assert from 'node:assert/strict';
 import { afterEach, test, mock } from 'node:test';
 import { getEventListeners } from 'node:events';
-import { runtimePolicy } from '../../test/runtime-policy-fixture.mts';
-import runtimeDefinition from '../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
+import { runtimePolicy } from '../../../test/runtime-policy-fixture.mts';
+import runtimeDefinition from '../../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
 import { type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { worldCameraFromPresentation } from '@cssearth/engine';
-import { presentWorldCamera } from './world-camera.js';
-import type { CameraDelta } from './types.ts';
+import { presentWorldCamera } from '../camera/world-camera.js';
+import type { CameraDelta } from '../types.ts';
 import { hitsProjectedBody } from './world-camera-hit.ts';
 import { bindWorldCameraPicking } from './world-camera-picking.ts';
 import { screenPicking } from './screen-picking.ts';
-import { createUnboundedMatrixDragControls } from './camera-input.ts';
+import { createUnboundedMatrixDragControls } from '../input/camera-input.ts';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
 afterEach(() => unstubAllGlobals());

@@ -1,5 +1,5 @@
 import { createCameraFlight } from './camera-flight.js';
-import { opacityClockFor } from '../stars/opacity-clock.js';
+import { opacityClockFor } from '../../stars/opacity-clock.js';
 
 type FlightOptions = Parameters<typeof createCameraFlight>[0];
 interface MotionOptions extends FlightOptions { inputSpeedUp?: number; }

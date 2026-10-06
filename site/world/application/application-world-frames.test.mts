@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createApplicationWorldFrames } from './application-world-frames.mts';
-import type { WorldFrameRequest } from '@cssearth/renderer/navigation/world-frame-presenter.ts';
+import type { WorldFrameRequest } from '@cssearth/renderer/navigation/camera/world-frame-presenter.ts';
 
 test('mounting detail cannot replace the public world camera through an asset refresh', async () => {
   const planned: number[] = [], published: number[] = [], callbacks: FrameRequestCallback[] = [];

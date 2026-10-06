@@ -1,6 +1,6 @@
 import { type DensityVolumeFrame } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { projectVolumeSphere } from '../volume/projected-volume-visibility.js';
 
 /** The least a caption hangs below its galaxy's centre: the radius of every other context marker. */

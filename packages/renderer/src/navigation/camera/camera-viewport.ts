@@ -1,4 +1,4 @@
-import { opacityClockFor } from '../stars/opacity-clock.js';
+import { opacityClockFor } from '../../stars/opacity-clock.js';
 export interface CameraViewportSnapshot {
   readonly bounds: { readonly x: number; readonly y: number; readonly left: number; readonly top: number; readonly width: number; readonly height: number };
   readonly focalPixels: number;

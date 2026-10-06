@@ -1,7 +1,7 @@
 import { type PreparedCssVolume } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import type { PhysicalCameraPose, PositionM } from '@cssearth/engine';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 
 export interface VolumeCameraPublication {
   readonly world: WorldCameraPose;

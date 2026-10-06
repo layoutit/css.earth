@@ -2,11 +2,12 @@ import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import { readdirSync, readFileSync } from 'node:fs';
 import { join, relative, resolve } from 'node:path';
+import { projectRoot } from '@cssearth/core/node';
 
 /** Nothing subtracts the camera's absolute position by hand. A double holds a kilometre at 157 parsecs, so a body 23 km wide
  * jumped by up to 13 px a frame while dragged (PSR J0437-4715, 2026-10-01). Readers go through the engine's fromEyeM,
  * eyeDistanceM or eyeAnchor, which keep the eye's exact offset from the body it is near. */
-const root = resolve(import.meta.dirname, '../../../..');
+const root = projectRoot(import.meta.url);
 const SUBTRACTIONS = [/pose\.positionM\[[^\]]+\]!? - /u, / - [\w.]*pose\.positionM\[/u, /pose\.positionM\.map\(\(\w+, \w+\) => \(?\w+ - /u];
 // A world point made from the eye and a camera-space offset: not a difference of two world positions.
 const ALLOWED = new Set(['site/world/systems/system-framing.mts: const focusPositionM = tuple(axis => from.pose.positionM[axis] - offset[axis]);']);

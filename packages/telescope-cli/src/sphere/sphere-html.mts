@@ -9,7 +9,7 @@ import { CAMERA_POSE_SCHEMA, parsePreparedWorldCameraFrame, type ObjectRuntimeDe
 import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
 import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
 import { carryViewportValues } from '@cssearth/telescope-cli/sphere/native-scroll/carry-values';
-import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
+import type { SharedView } from '@cssearth/renderer/navigation/camera/view-url.ts';
 
 const escape=(s:string)=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
 /** What the page reads of a prepared measurement sphere (`measurementSphere`): its one-dataset runtime, frame, world context,

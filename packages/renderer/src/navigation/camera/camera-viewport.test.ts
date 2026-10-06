@@ -1,10 +1,10 @@
-import { fixedCameraOrientation } from '../../test/camera-orientation-fixture.mts';
+import { fixedCameraOrientation } from '../../../test/camera-orientation-fixture.mts';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { createCameraViewport } from './camera-viewport.js';
 import { createPerspectiveDolly } from './perspective-dolly.js';
-import scene from '../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
+import scene from '../../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
 
 test('prepared FOVs retain independent measurements across switches and resize together', () => {
   let width = 1000, reads = 0, resize!: () => void, refresh!: FrameRequestCallback;
