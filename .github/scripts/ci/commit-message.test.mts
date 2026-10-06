@@ -117,6 +117,26 @@ test('the installer keeps a hook of your own and any core.hooksPath already set'
   }
 });
 
+test('the installer carries an opt-in to the former .githooks directory over to .github/hooks', async () => {
+  const { root, git, accepted } = await hookClone();
+  try {
+    await chmod(resolve(root, '.github/hooks/commit-msg'), 0o755);
+    await git('config', 'core.hooksPath', '.githooks');
+    assert.equal(await accepted('Bad message'), true, 'Git runs no hook from a directory that no longer exists');
+    assert.match(await installHook(root), /core\.hooksPath was "\.githooks", which no longer exists; it is now "\.github\/hooks"/u);
+    assert.equal((await git('config', '--get', 'core.hooksPath')).stdout.trim(), '.github/hooks');
+    assert.equal(await accepted('Bad message'), false);
+    assert.equal(await accepted('chore: a good message'), true);
+    // A branch that still has .githooks keeps it: the setting is right there.
+    await git('config', 'core.hooksPath', '.githooks');
+    await mkdir(resolve(root, '.githooks'), { recursive: true });
+    assert.match(await installHook(root), /core\.hooksPath is "\.githooks"; left unchanged/u);
+    assert.equal((await git('config', '--get', 'core.hooksPath')).stdout.trim(), '.githooks');
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test('the installer overwrites only its own dispatcher, and the dispatcher fails loudly', async () => {
   const { root, git, accepted } = await hookClone();
   try {

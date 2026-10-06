@@ -8,6 +8,7 @@
 //   node .github/scripts/ci/commit-message.mts --range <a>..<b>    check every commit in a range (CI)
 //   node .github/scripts/ci/commit-message.mts --install           install the commit-msg hook into this clone (pnpm install)
 import { execFile } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { chmod, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -22,6 +23,8 @@ const ATTRIBUTION = /co-authored-by|generated (with|by)|🤖/iu;
 const HOOK_SOURCE = '.github/hooks/commit-msg';
 /** Where branches from before the hooks moved under `.github/` keep it; the shared dispatcher still runs theirs. */
 const EARLIER_HOOK_SOURCE = '.githooks/commit-msg';
+/** The opt-in hooks directory (`git config core.hooksPath .github/hooks`) and the one it replaced. */
+const OPT_IN_HOOKS_PATH = '.github/hooks', EARLIER_HOOKS_PATH = '.githooks';
 const HOOK_MARKER = 'cssearth-commit-message-hook';
 
 /** The message as Git stores it: comment lines and trailing blank lines removed (the default `strip` cleanup). */
@@ -107,6 +110,13 @@ export async function installHook(root: string): Promise<string> {
   }
   // Not `git rev-parse --git-path hooks`: that answers core.hooksPath once it is set.
   const legacy = resolve(common, 'hooks'), directory = resolve(common, HOOKS_DIRECTORY), target = resolve(directory, 'commit-msg');
+  // The opt-in from before the hooks moved under `.github/` names a directory this layout no longer has, so Git would run
+  // no hook at all. Carry the opt-in over to the directory that replaced it.
+  if (configured !== undefined && resolve(root, configured) === resolve(root, EARLIER_HOOKS_PATH)
+    && !existsSync(resolve(root, EARLIER_HOOKS_PATH)) && existsSync(resolve(root, OPT_IN_HOOKS_PATH))) {
+    await git(root, 'config', 'core.hooksPath', OPT_IN_HOOKS_PATH);
+    return `core.hooksPath was ${JSON.stringify(configured)}, which no longer exists; it is now ${JSON.stringify(OPT_IN_HOOKS_PATH)}.`;
+  }
   if (configured !== undefined && (!configured || resolve(root, configured) !== directory)) return `core.hooksPath is ${JSON.stringify(configured)}; left unchanged (${HOOK_SOURCE} applies when that path is .github/hooks).`;
   if (configured === undefined) {
     const own: string[] = [];
