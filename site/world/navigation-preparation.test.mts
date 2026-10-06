@@ -91,7 +91,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
   test(`failed ${failure} preserves accepted files or recoverable backups outside public`, async (context) => {
     const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-failure-"));
     context.after(() => rm(root, { recursive: true, force: true }));
-    for (const path of ["src/objects/new-body/source/preparation", "src/objects/sun", "src/navigation/source", "site", "site/public/navigation"]) {
+    for (const path of ["src/objects/new-body/source/preparation", "src/objects/sun", "site/source/navigation", "site", "site/public/navigation"]) {
       await mkdir(resolve(root, path), { recursive: true });
     }
     await copyFile(resolve(projectRoot, "src/objects/sun/swatch.json"), resolve(root, "src/objects/sun/swatch.json"));
@@ -104,11 +104,11 @@ for (const failure of ["object source", "late utility source", "publication", "r
     const sourcePath = resolve(root, "src/objects/new-body/source/source.jpg");
     await copyFile(resolve(projectRoot, "src/objects", original.objectId, "source", original.source.path), sourcePath);
     if (failure === "object source") await writeFile(sourcePath, "corrupt object source");
-    for (const filename of await readdir(resolve(projectRoot, "src/navigation/source"))) {
+    for (const filename of await readdir(resolve(projectRoot, "site/source/navigation"))) {
       if (failure === "late utility source" && filename === "share-mark.svg") {
-        await writeFile(resolve(root, "src/navigation/source", filename), "corrupt final utility source");
+        await writeFile(resolve(root, "site/source/navigation", filename), "corrupt final utility source");
       } else {
-        await symlink(resolve(projectRoot, "src/navigation/source", filename), resolve(root, "src/navigation/source", filename));
+        await symlink(resolve(projectRoot, "site/source/navigation", filename), resolve(root, "site/source/navigation", filename));
       }
     }
     const outputRoot = resolve(root, "site/public/navigation");

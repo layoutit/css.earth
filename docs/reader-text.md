@@ -40,7 +40,7 @@ that source label; dates and other differences belong in the arrow selector.
 
 ## Satellite-system introductions
 
-Satellite families keep their short introductions in `src/navigation/system-text.json`,
+Satellite families keep their short introductions in `site/source/navigation/system-text.json`,
 using the same cited text format and introduction limits as bodies.
 [`system-packages.mts`](../site/build/prepare/system-packages.mts) checks every
 satellite host and citation, then writes each introduction as its system object's

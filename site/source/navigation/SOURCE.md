@@ -20,7 +20,7 @@ object-specific branch. No cssEarth scene capture is used by the markers.
 
 The sidebar collapse control uses Jeremy Schnittman's NASA Goddard scientific
 visualization of a black-hole accretion disk. The exact 1024px source is kept at
-`src/navigation/source/black-hole-accretion-disk-nasa.jpg`, where Git records its bytes.
+`site/source/navigation/black-hole-accretion-disk-nasa.jpg`, where Git records its bytes.
 Preparation crops the source, maps its luminance to the approved restrained
 violet treatment and alpha, and writes fixed transparent PNG markers at 1x and
 2x. Credit:
@@ -28,12 +28,12 @@ NASA's Goddard Space Flight Center/Jeremy Schnittman. Source:
 https://svs.gsfc.nasa.gov/13326.
 
 The sidebar expand control uses the NASA, ESA, and CSA Webb MIRI view of
-Cassiopeia A at `src/navigation/source/cassiopeia-a-miri.png`. Preparation
+Cassiopeia A at `site/source/navigation/cassiopeia-a-miri.png`. Preparation
 rotates, crops, and masks the source into fixed transparent PNG markers at 1x
 and 2x.
 
 The Settings action uses the project-authored planet silhouette with a cog
-cutout at `src/navigation/source/settings-mark.svg`. It passes through the same
+cutout at `site/source/navigation/settings-mark.svg`. It passes through the same
 prepared monochrome shading treatment and 48px transparent tile as the GitHub
 action marker.
 

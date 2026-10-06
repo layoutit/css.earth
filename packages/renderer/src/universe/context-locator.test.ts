@@ -1,7 +1,6 @@
+import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { sourceTest } from '@cssearth/objects/node/source-test';
-const test = sourceTest();
-import { locatorCornerPath } from '@cssearth/renderer/universe/context-locator.ts';
+import { locatorCornerPath } from './context-locator.js';
 
 /** Bounding box of one `M`/`h`/`v`/`H`/`V` rectangle path. */
 function box(rect: string) {

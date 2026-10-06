@@ -45,7 +45,6 @@ test('folders follow the prototype zones', () => {
     'labs/experiments/native-scroll/run.mts': 'labs/experiments',
     'src/renderers/css/navigation/x.ts': 'src/renderers/css/navigation',
     'src/renderers/css/index.ts': 'src/renderers/css(root)',
-    'src/preparation/stars/x.ts': 'src/preparation/stars',
     'site/components/X.astro': 'site/components',
     'site/env.d.ts': 'site(root)',
     '.github/scripts/ci/x.mts': '.github/scripts/ci',
