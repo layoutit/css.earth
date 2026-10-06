@@ -22,7 +22,8 @@
  * 4. The scaled, shifted reference is subtracted. The occulter and every flagged pixel are left blank.
  * 5. The result is written into a copy of the science frame and put on the sky: stwcs writes the distortion model into its
  *    WCS and AstroDrizzle resamples it, north up, at the scale and kernel of the archive's own drizzled product of that
- *    observation. The star's sky position is its centroid through the same distorted WCS.
+ *    observation. The star's sky position is its centroid through the same distorted WCS. The drizzled header names its
+ *    input, mask, log and header rules by file name, not by this checkout's path, so the product is the same size anywhere.
  *
  * Beside each drizzled result the stage writes its product record: the calibrated frames at their sizes, the fit (shift,
  * scale, the residual over the fit region before and after), the star's position, and the software versions the run reported. */
@@ -183,6 +184,11 @@ settings = job['drizzle']
 astrodrizzle.AstroDrizzle(image, output=name, build=True, in_memory=False, clean=True, runfile='', context=False,
                           driz_separate=False, median=False, blot=False, driz_cr=False, skysub=False, final_wcs=True, final_rot=0.0,
                           final_kernel=settings['kernel'], final_pixfrac=settings['pixfrac'], final_scale=settings['scale'], final_fillval='NaN', final_units='cps')
+# AstroDrizzle names its input, mask, log and header rules by absolute path. Keep their file names, so the product's header,
+# and with it the size a recipe names it by, does not depend on where this checkout is.
+with fits.open(os.path.join(out_dir, name + '_drz.fits'), mode='update') as f:
+    header = f[0].header
+    for key in [k for k in header if isinstance(header[k], str) and os.path.isabs(header[k])]: header[key] = os.path.basename(header[key])
 stop.set()
 if stopped: raise SystemExit('The subtraction passed its memory ceiling at %d bytes and was stopped.' % stopped[0])
 import stwcs, drizzlepac, scipy, astropy
