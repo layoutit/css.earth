@@ -14,11 +14,11 @@ const picture = (red: number, green: number, blue: number) => sharp({ create: {
 test('featured-star previews reuse arrival pixels, including an older restored arrival, while other markers stay unchanged', async () => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-search-preview-'));
   try {
-    await Promise.all(['site/prepared', 'public/navigation', 'public/scenes/star'].map(path => mkdir(join(root, path), { recursive: true })));
-    const context = await picture(240, 80, 40), arrival = join(root, 'public/scenes/star/arrival.webp');
+    await Promise.all(['site/prepared', 'site/public/navigation', 'site/public/scenes/star'].map(path => mkdir(join(root, path), { recursive: true })));
+    const context = await picture(240, 80, 40), arrival = join(root, 'site/public/scenes/star/arrival.webp');
     await Promise.all([
-      writeFile(join(root, 'public/navigation/star-context.webp'), context),
-      writeFile(join(root, 'public/navigation/other-context.webp'), context),
+      writeFile(join(root, 'site/public/navigation/star-context.webp'), context),
+      writeFile(join(root, 'site/public/navigation/other-context.webp'), context),
       writeFile(arrival, await picture(120, 120, 120)),
       writeFile(join(root, 'site/prepared/prepared-navigation-markers.mjs'), `export const PREPARED_NAVIGATION_MARKERS = ${JSON.stringify({
         star: { context: { url: '/navigation/star-context.webp' } }, other: { context: { url: '/navigation/other-context.webp' } },
@@ -31,7 +31,7 @@ test('featured-star previews reuse arrival pixels, including an older restored a
       ])};`),
     ]);
     assert.equal((await prepareSearchThumbnails(root)).written, 2);
-    const starPath = join(root, 'public/navigation/search/star@2x.webp'), otherPath = join(root, 'public/navigation/search/other@2x.webp');
+    const starPath = join(root, 'site/public/navigation/search/star@2x.webp'), otherPath = join(root, 'site/public/navigation/search/other@2x.webp');
     const star = await sharp(starPath).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     assert.equal(star.info.width, 80);
     assert.equal(star.info.height, 80);
@@ -51,20 +51,20 @@ test('featured-star previews reuse arrival pixels, including an older restored a
 test('an opaque sprite previews its complete marker picture, faded out before the frame', async () => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-search-preview-'));
   try {
-    await Promise.all(['site/prepared', 'public/navigation', 'src/objects/galaxy/source/preparation', 'src/objects/galaxy/source/presentation']
+    await Promise.all(['site/prepared', 'site/public/navigation', 'src/objects/galaxy/source/preparation', 'src/objects/galaxy/source/presentation']
       .map(path => mkdir(join(root, path), { recursive: true })));
     // A wide photograph that fills its frame, and the square sprite the marker cuts from its middle.
     const photograph = (width: number, height: number) => sharp({ create: { width, height, channels: 3, background: { r: 200, g: 180, b: 160 } } });
     await Promise.all([
       photograph(600, 200).png().toFile(join(root, 'src/objects/galaxy/source/presentation/context.png')),
-      photograph(200, 200).webp({ lossless: true }).toFile(join(root, 'public/navigation/galaxy-context.webp')),
+      photograph(200, 200).webp({ lossless: true }).toFile(join(root, 'site/public/navigation/galaxy-context.webp')),
       writeFile(join(root, 'src/objects/galaxy/source/preparation/navigation.json'), JSON.stringify({ source: { path: 'presentation/context.png' } })),
       writeFile(join(root, 'site/prepared/prepared-navigation-markers.mjs'), `export const PREPARED_NAVIGATION_MARKERS = ${JSON.stringify({
         galaxy: { context: { url: '/navigation/galaxy-context.webp' } } })};`),
       writeFile(join(root, 'site/prepared/prepared-catalogue.mjs'), 'export const CATALOGUE_ENTRIES = [];'),
     ]);
     assert.equal((await prepareSearchThumbnails(root)).written, 1);
-    const { data } = await sharp(join(root, 'public/navigation/search/galaxy@2x.webp')).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+    const { data } = await sharp(join(root, 'site/public/navigation/search/galaxy@2x.webp')).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     const alpha = (x: number, y: number) => data[4 * (y * 80 + x) + 3]!;
     assert.ok(alpha(40, 40) > 250, 'the centre is drawn');
     assert.ok(alpha(20, 40) > 100 && alpha(40, 20) === 0, 'the preview keeps the wide picture, not the square sprite');

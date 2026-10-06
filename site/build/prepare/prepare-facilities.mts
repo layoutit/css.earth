@@ -98,7 +98,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
         ...(image.subject === undefined ? {} : { subject: image.subject }) });
     });
     for (const image of entries) {
-      const bytes = await input(`public${image.src}`);
+      const bytes = await input(`site/public${image.src}`);
       if (bytes.length !== image.bytes) throw new Error(`Approved artwork identity changed: ${image.id}.`);
       const metadata = await sharp(bytes).metadata();
       if (metadata.format !== (emblem ? 'png' : 'webp') || metadata.width !== image.width || metadata.height !== image.height || (emblem && !metadata.hasAlpha)) throw new Error(`Approved artwork format/dimensions changed: ${image.id}.`);
@@ -108,7 +108,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   const images: readonly ExplorationImage[] = await artwork('site/source/facilities/render-library.json', false);
   const emblems: readonly ExplorationImage[] = await artwork('site/source/facilities/emblem-library.json', true);
   for (const agency of Object.values(agencies)) if (agency.src) {
-    const bytes = await input(`public${agency.src}`);
+    const bytes = await input(`site/public${agency.src}`);
     if (bytes.length !== agency.bytes) throw new Error(`Agency logo identity changed: ${agency.name}.`);
   }
   const objects: SourceUsageObject[] = [];
@@ -174,7 +174,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
       const path = sourcePath(output.path.slice(resolve(root).length + 1));
       if (resolve(root, path) !== output.path) throw new TypeError('Volume output escapes its package.');
       if (path.startsWith(`${volume.base}/prepared/`) || path === `${volume.base}/inventory.json`) closure.add(path);
-      else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-z0-9][a-z0-9-]*\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
+      else if (!new RegExp(`^site/public/scenes/${volume.id}/datasets/[a-z0-9][a-z0-9-]*\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
     }
   }
   metadata.push(...await spatialSourceCitations(root, sources, input));

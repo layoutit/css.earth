@@ -197,7 +197,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     try {
       const stagedPublic = resolve(stage, 'public'), stagedData = resolve(stage, 'prepared');
       // The stage starts from the published set; publication verifies every carried image against the new manifest.
-      // Only inventoried files are carried: a local leftover in prepared/ or public/ must not be published with them.
+      // Only inventoried files are carried: a local leftover in prepared/ or site/public/ must not be published with them.
       if (reuseImages) {
         const inventoried = new Map<string, Set<string>>();
         for (const asset of requireInventory(id, JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8'))).assets)
@@ -536,7 +536,7 @@ if (direct) {
     if (decision.redraw) { reuseImages = true; acceptChanged = decision.acceptChanged; }
     console.log(decision.redraw ? `${id}: redrawing only the lighting and atmosphere banks (${decision.reason}); --full bakes everything.` : `${id}: full preparation (${decision.reason}).`);
   }
-  const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write, reuseImages, acceptChanged });
+  const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'site/public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write, reuseImages, acceptChanged });
   if (!write) {
     // A check run refuses labels its own report contradicts; write mode rewrites them.
     const legend = await stagedLegendLabelChanges(resolve(root, 'src/objects', id), resolve(root, '.local/full-json-migration/staged', id));

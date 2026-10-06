@@ -221,6 +221,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const galaxyImages = document.createElement('span'); galaxyImages.hidden = true; root.insertBefore(galaxyImages, end);
         const dots = document.createElement('span'); dots.hidden = true; root.insertBefore(dots, end);
         reservePointLayer(root, dots);
+        // A picture with no dots of its own mounts here, just over that layer (universe-catalog-banks.ts).
+        const pictures = document.createElement('span'); pictures.hidden = true; root.insertBefore(pictures, end);
         // Our galaxy's disc, as its volume frames it: the centre, the frame's z axis and its reach in the plane.
         const [gx, gy, gz, gw] = payload.frame.localToReferenceXyzw;
         const galaxyDisc = { centreM: payload.frame.originM, normal: [2 * (gx * gz + gw * gy), 2 * (gy * gz - gw * gx), 1 - 2 * (gx * gx + gy * gy)],
@@ -233,7 +235,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           runtime: own(mountImageMesh({ host: root, before: end, interiorBefore: meshInterior, labelHost: frontRoot, url: mesh.url,
             fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource, cutaway: mesh.cutaway?.() ?? true,
             hidden: mesh.hidden?.() ?? false, hiddenCaption: mesh.hiddenCaption })) }));
-        const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime, imagesBefore: galaxyImages,
+        const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime, imagesBefore: galaxyImages, picturesBefore: pictures,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: [...declaredVolumes],
           pointBanks: [...declaredPoints],
           initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardImage });

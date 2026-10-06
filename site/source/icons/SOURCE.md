@@ -21,4 +21,4 @@ the same license. The sine-wave source is licensed under CC BY-SA 3.0.
 Authors and license links are recorded in `manifest.mjs`.
 
 `site/build/prepare/prepare-shell-icons.mts` verifies each adapted source hash and copies the
-prepared SVGs to `public/shell/`.
+prepared SVGs to `site/public/shell/`.

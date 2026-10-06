@@ -25,11 +25,11 @@ export type ObjectPageStyles = (descriptor: unknown) => readonly string[];
 /** Resolve authored motion offline. Runtime receives explicit animation
  * handles, never a live style discovery pass; the browser culls back faces. */
 export async function preparePresentationBindings<T extends PresentationSource>(input: T, root: string, { pageStyles, onDepthResult, interiorOnly = false, browser: suppliedBrowser, publicDirectory }: {pageStyles: ObjectPageStyles; onDepthResult?: (result: DepthResult) => void; interiorOnly?: boolean; browser?: Browser; publicDirectory?: string}) {
-  // A staged scene directory holds this object's assets flat; published assets live under public/scenes/<id>/.
+  // A staged scene directory holds this object's assets flat; published assets live under site/public/scenes/<id>/.
   const assetRoot = publicDirectory ? (url: string) => {
     if (!url.startsWith(`/scenes/${input.id}/`)) throw new Error(`Interior fill asset ${url} is not this object's scene asset.`);
     return resolve(publicDirectory, basename(url));
-  } : resolve(root, 'public');
+  } : resolve(root, 'site/public');
   // A body that declares how it fills a data gap keeps that convention out of its interior color: the disc stands in
   // for the surface behind the leaves, and a map that is mostly gap would otherwise give it a color nobody sees.
   const declaredFill: unknown = await readFile(resolve(root, 'src/objects', input.id, 'source/preparation/raster.json'), 'utf8')

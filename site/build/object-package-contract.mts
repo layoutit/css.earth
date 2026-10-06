@@ -25,7 +25,7 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
     inventory: resolve(root, "inventory.json"),
     sourceManifest: resolve(root, "source", "manifest.json"),
     sourceRoot: resolve(root, "source"),
-    publicAssets: resolve(projectRoot, "public", "scenes", objectRecord.id),
+    publicAssets: resolve(projectRoot, "site/public", "scenes", objectRecord.id),
   });
 }
 

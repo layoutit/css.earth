@@ -45,7 +45,7 @@ source already owned by the Saturn adapter.
 
 Prepared output: `node packages/bake/cli/prepare-navigation.mts` writes the 1× and 2× planet-marker
 atlas, Sun marker, black-hole marker, supernova marker, and action markers to
-`public/navigation/`.
+`site/public/navigation/`.
 
 
 Resolved world-context parents use independent prepared images from the same
@@ -61,7 +61,7 @@ context proxies; they do not claim a newly rendered observation geometry.
 
 The Sun's scene indicator is a project-authored rounded heptagonal outline.
 `prepareSunIndicator` in `packages/bake/src/navigation/prepare-navigation.ts` rasterizes the numerical
-path to `public/navigation/sun-indicator-heptagon.png` at a fixed 80px resolution for a
+path to `site/public/navigation/sun-indicator-heptagon.png` at a fixed 80px resolution for a
 20px UI box. Its stroke uses the authored soft-yellow `display.hex` accent in
 `src/objects/sun/swatch.json`, matching the navigation label. The independent
 spectral swatch remains recorded there with its ASTM E490-00, CIE 1931, and sRGB

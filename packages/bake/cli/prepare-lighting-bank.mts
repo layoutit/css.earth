@@ -1,4 +1,4 @@
-/** Bake the shared lighting banks into `public/lighting/<bank>/`, or check the tracked files against a fresh bake. The
+/** Bake the shared lighting banks into `site/public/lighting/<bank>/`, or check the tracked files against a fresh bake. The
  * bake and the check are `bakeLightingBank` and `checkLightingBank` in `@cssearth/bake/raster`.
  *
  *   node packages/bake/cli/prepare-lighting-bank.mts [--check] [<bank>...]

@@ -27,7 +27,7 @@ src/objects/<id>/
   prepared/                           generated runtime/content/controls JSON
   inventory.json                      generated inventory of every baked file and its hash
 
-public/scenes/<id>/                    prepared assets
+site/public/scenes/<id>/                    prepared assets
 site/pages/[id].astro                  one shared route for all body ids
 packages/bake/authoring/<id>/               focused hand-written body tests
 packages/bake/authoring/<id>/browser-profile.mts
@@ -85,7 +85,7 @@ the shared world camera.
 Navigation marker appearance comes from each authored package's
 `source/preparation/navigation.json`, which names its source image by path;
 the pins and attribution are the source manifest's record. `packages/bake/src/navigation/prepare-navigation.ts` generates
-individual `public/navigation/body-<id>.webp` images and their 2x counterparts.
+individual `site/public/navigation/body-<id>.webp` images and their 2x counterparts.
 Builds assemble the ignored `site/prepared/prepared-navigation-markers.mjs` from those
 images and recipes; `ObjectNavigationMarker.astro` consumes it. Follow the
 [registration steps](../../../../src/objects/README.md#register-a-body-without-editing-shared-lists)

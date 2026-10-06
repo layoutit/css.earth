@@ -29,13 +29,13 @@ test('objects are discovered by their inventory; each entry is located by its lo
   assert.throws(() => inventoriedObjectIds(['--object=no-inventory'], root), /inventory\.json/);
   const assets = await inventoryAssets(root, ['context-fixture']);
   assert.deepEqual(assets.map(asset => [asset.location, asset.file, asset.key]), [
-    ['public', resolve(root, 'public/scenes/context-fixture/datasets/preview.webp'), `runtime-assets/${sha256}/datasets/preview.webp`],
+    ['public', resolve(root, 'site/public/scenes/context-fixture/datasets/preview.webp'), `runtime-assets/${sha256}/datasets/preview.webp`],
     ['prepared', resolve(base, 'prepared/levels/catalogue.json'), `runtime-assets/${sha256}/levels/catalogue.json`]]);
   assert.deepEqual((await inventoryAssets(root, ['context-fixture'], { location: 'prepared' })).map(asset => asset.filename), ['levels/catalogue.json']);
   assert.deepEqual((await inventoryAssets(root, ['context-fixture'], { filenames: ['datasets/preview.webp'] })).map(asset => asset.filename), ['datasets/preview.webp']);
   // Restore downloads what is missing, reuses what matches, and restores under the entry's location.
   assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async url => { assert.ok(assets.some(asset => asset.url === String(url))); return new Response(bytes); } }), { installed: 1, reused: 1, skipped: 0 });
-  assert.deepEqual(await readFile(resolve(root, 'public/scenes/context-fixture/datasets/preview.webp')), bytes);
+  assert.deepEqual(await readFile(resolve(root, 'site/public/scenes/context-fixture/datasets/preview.webp')), bytes);
   assert.deepEqual(await installRuntimeAssets(assets, { fetcher: async () => { throw new Error('Expected reuse'); } }), { installed: 0, reused: 2, skipped: 0 });
   // A same-size file older than its inventory predates a checkout that may have changed the pin: it is hashed and replaced.
   // Once written after the inventory it is trusted by size alone.

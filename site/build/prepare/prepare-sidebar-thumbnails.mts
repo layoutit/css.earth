@@ -33,7 +33,7 @@ const makeThumbnail = async (id: string, dataset: string, bytes: Buffer, evidenc
   const tile = await sharp(bytes).resize(80, 80, { fit: 'contain', background: '#00000000', kernel: 'lanczos3' })
     .webp({ lossless: true, effort: 6 }).toBuffer();
   const url2x = `/navigation/focus-${id}-${dataset}@2x.webp`;
-  await output(`public${url2x}`, tile);
+  await output(`site/public${url2x}`, tile);
   images[`${id}/${dataset}`] = { url2x, ...evidence };
 };
 // An object's own row shows its default dataset's image under the shared framing rule (`@cssearth/bake/site-assets`): the whole
@@ -41,12 +41,12 @@ const makeThumbnail = async (id: string, dataset: string, bytes: Buffer, evidenc
 const makeObjectThumbnail = async (id: string, dataset: string, bytes: Buffer) => {
   const { inputs, credit, sourceUrl } = images[`${id}/${dataset}`]!;
   const url2x = `/navigation/focus-object-${id}@2x.webp`;
-  await output(`public${url2x}`, await objectThumbnail(bytes));
+  await output(`site/public${url2x}`, await objectThumbnail(bytes));
   images[id] = { url2x, inputs, credit, sourceUrl };
   defaults[id] = id;
 };
 
-if (!check) await mkdir(resolve(root, 'public/navigation'), { recursive: true });
+if (!check) await mkdir(resolve(root, 'site/public/navigation'), { recursive: true });
 for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
   const path = `src/objects/${folder.name}/prepared/presentation.json`;
   let raw: unknown;
@@ -62,7 +62,7 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
     const expected = `/scenes/${id}/datasets/${dataset.id}.webp`;
     if (!dataset.texture || dataset.texture.url !== expected)
       throw new Error(`${path}: dataset ${dataset.id} texture.url is ${JSON.stringify(dataset.texture?.url ?? null)}; expected ${expected}.`);
-    const previewPath = `public${dataset.texture.url}`, bytes = await read(previewPath);
+    const previewPath = `site/public${dataset.texture.url}`, bytes = await read(previewPath);
     if (dataset.id === defaultDataset) defaultBytes = bytes;
     await makeThumbnail(id, dataset.id, bytes, { inputs: [path, previewPath],
       credit: dataset.texture.attribution?.label ?? '', sourceUrl: dataset.texture.attribution?.url ?? '' });
@@ -104,5 +104,5 @@ for (const id of galaxyCatalogues) {
 }
 const manifest = { schema: 'cssearth-sidebar-thumbnails@1', method: 'Complete prepared dataset previews at 80 px for 40 CSS px; Galaxy volumes use their published face-on backing, preserving existing source qualifications. Each object row shows its default image inside a margin, faded out before the image frame.',
   inputs: [...inputs.values()], images, defaults };
-await output('public/navigation/sidebar-thumbnails.json', JSON.stringify(manifest, null, 2) + '\n');
+await output('site/public/navigation/sidebar-thumbnails.json', JSON.stringify(manifest, null, 2) + '\n');
 console.log(`${check ? 'Verified' : 'Prepared'} ${Object.keys(images).length} sidebar images at 80 px.`);

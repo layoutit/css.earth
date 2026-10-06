@@ -17,8 +17,11 @@ const KEPT_MILLISECONDS = 100_000_000;
  */
 export function keepLayers(element: HTMLElement, view: Pick<Window, 'requestAnimationFrame' | 'cancelAnimationFrame'> | null): () => void {
   if (typeof element.animate !== 'function' || !view || typeof view.requestAnimationFrame !== 'function') return () => {};
-  // `translate` leaves the element's own transform, which the camera writes every frame, alone.
-  const animation = element.animate([{ translate: '0px 0px' }, { translate: '0.01px 0px' }], { duration: KEPT_MILLISECONDS, iterations: Infinity });
+  // An animation's value replaces the element's own for that property, so it animates the one transform property the
+  // camera root does not write. The root's `translate` lifts the body over the shell's sheet and its `scale` fits it
+  // (perspective-dolly.ts): animating `translate` here drew every body the sheet's lift too low, 28 px under its limb
+  // layer on an iPad held upright, from 2026-10-05 to 2026-10-06.
+  const animation = element.animate([{ rotate: '0deg' }, { rotate: '0.01deg' }], { duration: KEPT_MILLISECONDS, iterations: Infinity });
   animation.id = 'kept-layers';
   // Paused once the browser has taken the animation to its compositor: one paused from the start never gets there.
   let frames = 2, request = view.requestAnimationFrame(function wait() {

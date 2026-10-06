@@ -19,7 +19,7 @@ const { values } = parseArgs({ options: {
   object: { type: "string", multiple: true, default: [] },
 } });
 const ids = inventoriedObjectIds((values.object ?? []).map(id => `--object=${id}`), resolve(import.meta.dirname, "../../.."));
-const outputDirectory = values.card ? "public/overview" : "public/social";
+const outputDirectory = values.card ? "site/public/overview" : "site/public/social";
 export const PORTRAIT_WIDTH = 600, PORTRAIT_HEIGHT = 315;
 await mkdir(outputDirectory, { recursive: true });
 const server = values["base-url"] ? null : await previewSite({ port: 4266 });

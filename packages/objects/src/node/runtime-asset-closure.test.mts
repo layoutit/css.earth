@@ -23,7 +23,7 @@ test("normalizes only explicit safe local runtime URLs", () => {
 test('repreparing detail textures preserves the navigation arrival image', async context => {
   const root = await mkdtemp(resolve(tmpdir(), 'inventory-arrival-'));
   context.after(() => rm(root, { recursive: true, force: true }));
-  const objectDirectory = resolve(root, 'src/objects/fixture'), publicRoot = resolve(root, 'public/scenes/fixture');
+  const objectDirectory = resolve(root, 'src/objects/fixture'), publicRoot = resolve(root, 'site/public/scenes/fixture');
   await mkdir(resolve(objectDirectory, 'prepared'), { recursive: true });
   await mkdir(publicRoot, { recursive: true });
   await writeFile(resolve(publicRoot, 'surface.webp'), 'surface');
@@ -46,7 +46,7 @@ test('repreparing detail textures preserves the navigation arrival image', async
 test("one inventory per object: each location is written by its own stage and keeps the other's entries", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "inventory-"));
   context.after(() => rm(root, { force: true, recursive: true }));
-  const objectDirectory = resolve(root, "src/objects/fixture"), publicRoot = resolve(root, "public/scenes/fixture"), preparedRoot = resolve(objectDirectory, "prepared");
+  const objectDirectory = resolve(root, "src/objects/fixture"), publicRoot = resolve(root, "site/public/scenes/fixture"), preparedRoot = resolve(objectDirectory, "prepared");
   await mkdir(publicRoot, { recursive: true }); await mkdir(resolve(preparedRoot, "atlases"), { recursive: true });
   await writeFile(resolve(publicRoot, "a.webp"), "asset-a");
   await writeFile(resolve(preparedRoot, "runtime.json"), "runtime-bytes");
@@ -74,7 +74,7 @@ test("one inventory per object: each location is written by its own stage and ke
 test("verification catches drift and closure gaps per location; the validator rejects unsafe or repeated entries", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "inventory-verify-"));
   context.after(() => rm(root, { force: true, recursive: true }));
-  const objectDirectory = resolve(root, "src/objects/fixture"), publicRoot = resolve(root, "public/scenes/fixture"), preparedRoot = resolve(objectDirectory, "prepared");
+  const objectDirectory = resolve(root, "src/objects/fixture"), publicRoot = resolve(root, "site/public/scenes/fixture"), preparedRoot = resolve(objectDirectory, "prepared");
   await mkdir(publicRoot, { recursive: true }); await mkdir(preparedRoot, { recursive: true });
   await writeFile(resolve(publicRoot, "a.webp"), "asset-a"); await writeFile(resolve(preparedRoot, "scene.json"), "scene");
   await inventoryPublicAssets({ objectId: "fixture", objectDirectory, urls: ["/scenes/fixture/a.webp"], publicRoot });
@@ -101,7 +101,7 @@ test("verification catches drift and closure gaps per location; the validator re
 test("public inventory rejects undeclared textures; assembly removes only undeclared production files", async (context) => {
   const root = await mkdtemp(resolve(tmpdir(), "inventory-assemble-"));
   context.after(() => rm(root, { force: true, recursive: true }));
-  const objectDirectory = resolve(root, "src/objects/fixture"), publicRoot = resolve(root, "public/scenes/fixture");
+  const objectDirectory = resolve(root, "src/objects/fixture"), publicRoot = resolve(root, "site/public/scenes/fixture");
   await mkdir(objectDirectory, { recursive: true }); await mkdir(publicRoot, { recursive: true });
   await writeFile(resolve(publicRoot, "a.webp"), "asset-a"); await writeFile(resolve(publicRoot, "extra.webp"), "extra");
   await assert.rejects(inventoryPublicAssets({ objectId: "fixture", objectDirectory, urls: ["/scenes/fixture/a.webp"], publicRoot }), /Undeclared: extra\.webp/);

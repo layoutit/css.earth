@@ -117,7 +117,7 @@ export async function typecheckFeatureAssets(root = projectRoot, ids = SCENE_OBJ
       if (!url.startsWith(prefix) || !/^[a-zA-Z0-9._-]+\.json$/u.test(url.slice(prefix.length))) throw new TypeError(`Invalid feature catalogue URL: ${url}`);
       const matches = await inventoryAssets(root, [id], { location: 'public', filenames: [url.slice(prefix.length)] });
       const asset = matches[0];
-      if (matches.length !== 1 || !asset || asset.file !== resolve(root, `public${url}`) || asset.bytes !== pin.bytes)
+      if (matches.length !== 1 || !asset || asset.file !== resolve(root, `site/public${url}`) || asset.bytes !== pin.bytes)
         throw new TypeError(`${id}: prepared/features.json names ${url} (bytes ${String(pin.bytes)}), which inventory.json does not publish as one public asset with those bytes.`);
       assets.push(asset);
       if (index === 0) catalogues.push(asset);

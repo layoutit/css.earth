@@ -129,7 +129,7 @@ test('a native search-only Earth selection fetches the base catalogue and exactl
     requests.push(url.pathname);
     if (url.pathname === '/objects/earth/object.json') return new Response(earthPrepared.bytes);
     if (url.pathname.startsWith('/scenes/earth/earth-features')) {
-      return new Response(await readFile(new URL(`../../public${url.pathname}`, import.meta.url)));
+      return new Response(await readFile(new URL(`../public${url.pathname}`, import.meta.url)));
     }
     return new Response(null, { status: 404 });
   };
@@ -165,7 +165,7 @@ test('a feature link reads its catalogue from the published assets, not from the
     if (url.origin === origin && url.pathname === '/objects/earth/object.json') return new Response(earthPrepared.bytes);
     const address = /^\/runtime-assets\/([a-f0-9]{64})\/(earth-features[a-z0-9-]*\.json)$/u.exec(url.pathname);
     if (url.origin === published && address && assets[address[2]!] === address[1]) {
-      return new Response(await readFile(new URL(`../../public/scenes/earth/${address[2]}`, import.meta.url)));
+      return new Response(await readFile(new URL(`../public/scenes/earth/${address[2]}`, import.meta.url)));
     }
     return new Response(null, { status: 404 });
   };

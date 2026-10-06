@@ -70,14 +70,14 @@ try {
         const assets = inventory?.assets.filter(asset => asset.location === 'public' && asset.filename === filename ||
           asset.location === 'prepared' && asset.filename === 'arrival-billboard.json') ?? [];
         const intact = assets.length === 2 && (await Promise.all(assets.map(async asset => {
-          const path = resolve(asset.location === 'public' ? resolve(root, 'public/scenes', object.id) : prepared, asset.filename);
+          const path = resolve(asset.location === 'public' ? resolve(root, 'site/public/scenes', object.id) : prepared, asset.filename);
           const bytes = await readFile(path).catch(() => null);
           return bytes !== null && bytes.length === asset.bytes && sha256(bytes) === asset.sha256;
         }))).every(Boolean);
         if (intact) {
           const billboard = parseArrivalBillboard(JSON.parse(await readFile(resolve(prepared, 'arrival-billboard.json'), 'utf8')));
           const look = await lookOf(object.id, runtime, objectDirectory);
-          if (!photographed.has(look)) photographed.set(look, { id: object.id, bytes: await readFile(resolve(root, 'public/scenes', object.id, filename)),
+          if (!photographed.has(look)) photographed.set(look, { id: object.id, bytes: await readFile(resolve(root, 'site/public/scenes', object.id, filename)),
             distanceRadii: billboard.distanceM / object.worldFrame.bodyRadiusM, focalPixels: billboard.focalPixels });
           reports.push(previous); console.log(`[${index + 1}/${objects.length}] ${object.id}: already prepared`); continue;
         }
@@ -104,8 +104,8 @@ try {
     };
     if (same) {
       // The same look as a body already photographed: its photograph, byte for byte, from the same pose in this body's radii.
-      await mkdir(resolve(root, 'public/scenes', object.id), { recursive: true });
-      await writeFile(resolve(root, 'public/scenes', object.id, filename), same.bytes);
+      await mkdir(resolve(root, 'site/public/scenes', object.id), { recursive: true });
+      await writeFile(resolve(root, 'site/public/scenes', object.id, filename), same.bytes);
       publish(parseArrivalBillboard({ url: `/scenes/${object.id}/${filename}`, size, distanceM: object.worldFrame.bodyRadiusM * same.distanceRadii,
         focalPixels: same.focalPixels, dataset, rotation }), same.bytes, same.id, []);
       shared++; console.log(`[${index + 1}/${objects.length}] ${object.id}: the photograph of ${same.id} (${same.bytes.length} bytes)`);
@@ -224,7 +224,7 @@ try {
         const billboard = parseArrivalBillboard({ url: `/scenes/${object.id}/${filename}`, size, distanceM,
           focalPixels: focal * resize, dataset, rotation });
         if (errors.length) throw new Error(errors.join('\n'));
-        const bytes = await writeLossyWebp(sharp(image), resolve(root, 'public/scenes', object.id, filename));
+        const bytes = await writeLossyWebp(sharp(image), resolve(root, 'site/public/scenes', object.id, filename));
         publish(billboard, bytes, undefined, errors);
         photographed.set(look, { id: object.id, bytes, distanceRadii: distanceM / object.worldFrame.bodyRadiusM, focalPixels: billboard.focalPixels });
         console.log(`[${index + 1}/${objects.length}] ${object.id}: ${bytes.length} bytes`);

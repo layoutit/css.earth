@@ -80,7 +80,7 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   }
   // Every image states its size, from the file the bake published (a staged scene directory holds them flat), and a pool
   // that keeps its images states its byte budget from those sizes.
-  definition = requireObjectRuntimeDefinition(withKeptPoolBudgets(await withImageSizes(definition, url => options?.publicDirectory ? resolve(options.publicDirectory, basename(url)) : resolve(projectRoot, 'public', url.replace(/^\//u, '')))));
+  definition = requireObjectRuntimeDefinition(withKeptPoolBudgets(await withImageSizes(definition, url => options?.publicDirectory ? resolve(options.publicDirectory, basename(url)) : resolve(projectRoot, 'site/public', url.replace(/^\//u, '')))));
   const scene:unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8'));
   await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, requireRecord(scene));
   descriptor = parseObjectDescriptor({ ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } });

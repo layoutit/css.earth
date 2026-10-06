@@ -17,8 +17,8 @@ test('authorPath keeps output paths in the real checkout from another cwd and a 
       import { resolve, relative } from 'node:path';
       const root = ${JSON.stringify(root)}, alias = ${JSON.stringify(alias)};
       const module = await import(${JSON.stringify(pathToFileURL(resolve(alias, 'packages/bake/authoring/distant-worlds/paths.mts')).href)});
-      const values = ['src/objects/example/source', 'output/example', 'public/scenes/example', 'src/sources/example.json'].map(path => module.authorPath(path));
-      assert.deepEqual(values, ['src/objects/example/source', 'output/example', 'public/scenes/example', 'src/sources/example.json'].map(path => resolve(root, path)));
+      const values = ['src/objects/example/source', 'output/example', 'site/public/scenes/example', 'src/sources/example.json'].map(path => module.authorPath(path));
+      assert.deepEqual(values, ['src/objects/example/source', 'output/example', 'site/public/scenes/example', 'src/sources/example.json'].map(path => resolve(root, path)));
       assert.ok(values.every(path => !relative(root, path).startsWith('../')));
       console.log('OWNER_PATHS_OK');
     `;

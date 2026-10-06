@@ -75,7 +75,7 @@ test('preparation selection retains all prepared packages and real fixture textu
     'new-body/runtime.json', 'new-body/scene.json',
   ]);
   assert.equal(new Set(assets.map(asset => asset.file)).size, assets.length, 'Metadata shared with a prepared inventory installs once.');
-  assert.deepEqual(assets.filter(asset => asset.file.startsWith(resolve(root, 'public') + '/')).map(asset => asset.id), ['mimas']);
+  assert.deepEqual(assets.filter(asset => asset.file.startsWith(resolve(root, 'site/public') + '/')).map(asset => asset.id), ['mimas']);
 });
 
 test('selected inputs install, reuse offline, and reject corrupted bytes through the existing SHA verifier', async t => {
@@ -126,7 +126,7 @@ test('universe selection keeps registry JSON and actual renderer banks without u
     'stellar-neighbourhood/point-atlas.webp', 'stellar-neighbourhood/stars.bin', 'stellar-neighbourhood/stars.json',
   ]);
   assert.equal(new Set(assets.map(asset => asset.file)).size, assets.length);
-  assert.deepEqual(assets.filter(asset => asset.file.startsWith(resolve(root, 'public') + '/')).map(asset => asset.filename).sort(),
+  assert.deepEqual(assets.filter(asset => asset.file.startsWith(resolve(root, 'site/public') + '/')).map(asset => asset.filename).sort(),
     ['features.json', 'new-body-photometric-phase-curve.svg']);
   assert.deepEqual(assets.filter(asset => !asset.filename.endsWith('.json')).map(asset => `${asset.id}/${asset.filename}`).sort(), [
     'heliosphere/atlas.webp', 'milky-way-volume/slices/z/one.webp', 'new-body/new-body-photometric-phase-curve.svg', 'stellar-neighbourhood/point-atlas.webp', 'stellar-neighbourhood/stars.bin',

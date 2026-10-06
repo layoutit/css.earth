@@ -1,4 +1,8 @@
 /** Resolve native sample addresses only against binaries with the recorded UUID and load address. */
+// Two things the export does that lost names until 2026-10-06. A backtrace names a frame it has already defined with a
+// self-closing `<frame ref="…"/>`; read as an opening tag, each one swallowed the next frame's definition, which is the
+// leaf of the next sample: 11,111 of 19,484 definitions in a zoom at M42. And an arm64e return address may still carry
+// its pointer signature in the bits above the address (0x17770b81aae46034 for 0x1aae46034), which `atos` cannot place.
 import { execFile } from 'node:child_process';
 import { readdir, stat, writeFile } from 'node:fs/promises';
 import { homedir } from 'node:os';
@@ -10,13 +14,21 @@ const escape = (value: string) => value.replace(/&/g,'&amp;').replace(/"/g,'&quo
 export function nativeFrameDefinitions(xml: string) {
   const attrs = (value: string) => Object.fromEntries([...value.matchAll(/([\w-]+)="([^"]*)"/g)].map(m => [m[1],unescape(m[2]!)]));
   const binaries = new Map([...xml.matchAll(/<binary\s+([^>]+)\/>/g)].map(m => attrs(m[1]!)).filter(b => b.id).map(b => [b.id,b]));
-  return [...xml.matchAll(/<frame\s+([^>]+)>([\s\S]*?)<\/frame>/g)].flatMap(m => {
+  return [...xml.matchAll(/<frame\s+([^>]+)(?<!\/)>([\s\S]*?)<\/frame>/g)].flatMap(m => {
     const frame = attrs(m[1]!), match = /<binary\s+([^>]+)\/>/.exec(m[2]!);
     if (!frame.id || !/^0x[0-9a-f]+$/i.test(frame.name ?? '') || !/^0x[0-9a-f]+$/i.test(frame.addr ?? '') || !match) return [];
     const ref = attrs(match[1]!), binary = binaries.get(ref.ref ?? ref.id ?? '');
     if (!binary?.path || !binary.UUID || !/^[\w-]+$/.test(binary.arch ?? '') || !/^0x[0-9a-f]+$/i.test(binary['load-addr'] ?? '')) return [];
-    return [{id:frame.id,name:frame.name!,address:frame.addr!,binary}];
+    return [{id:frame.id,name:frame.name!,address:unsignedAddress(frame.addr!,binary['load-addr']!),binary}];
   });
+}
+/** An address without its pointer signature. A user address is under 2^47; a signed one keeps the bits of the address
+ * space its binary is loaded in: 39 on an iPhone or iPad, 47 on a Mac. */
+export function unsignedAddress(address: string, loadAddress: string): string {
+  const value = BigInt(address), load = BigInt(loadAddress);
+  if (value < 1n << 47n) return address;
+  const narrow = value & ((1n << 39n) - 1n);
+  return `0x${(narrow >= load && narrow - load < 1n << 32n ? narrow : value & ((1n << 47n) - 1n)).toString(16)}`;
 }
 export async function symbolicateNativeXml(xml: string, nativePath: string) {
   const frames = nativeFrameDefinitions(xml), groups = new Map<string, typeof frames>();

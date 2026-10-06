@@ -75,7 +75,7 @@ test('projective leaf layout is derived from the scoped CSS it reads',()=>{
 test('full entry rejects canonical comparison output before any raster writes',async()=>{
  const geometry=JSON.parse(await readFile(new URL('src/objects/saturn/source/preparation/geometry.json', pathToFileURL(findProjectRoot(import.meta.url) + '/')),'utf8'));
  assert.equal(isLayeredOblateRecipe(geometry),true);assert.equal(isLayeredOblateRecipe({schema:'unknown'}),false);
- await assert.rejects(prepareLayeredOblateObject({objectDirectory,publicDirectory:new URL('public/scenes/saturn/', pathToFileURL(findProjectRoot(import.meta.url) + '/')).pathname,outputDirectory:'/unused',prepareContent:async()=>{throw Error('must not execute');}}),/canonical public/);
+ await assert.rejects(prepareLayeredOblateObject({objectDirectory,publicDirectory:new URL('site/public/scenes/saturn/', pathToFileURL(findProjectRoot(import.meta.url) + '/')).pathname,outputDirectory:'/unused',prepareContent:async()=>{throw Error('must not execute');}}),/canonical public/);
 });
 
 test('planetographic map rows move to the parametric latitude of the mesh',()=>{

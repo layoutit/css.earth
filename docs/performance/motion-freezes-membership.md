@@ -49,7 +49,12 @@ held differently while coasting:
   the iPad, and for none with the root displayed with its first slices, 2026-10-06). On the iPad leaving costs by the
   slices still there (all at once 42 to 50 ms, 16 a frame eight frames of 34 to 93 ms, 2026-10-04). A stack's opacity
   in the mix stops at 0.999: Safari painted every slice under a stack again each time its opacity left or reached 1
-  (54 ms for 88 slices with the camera still, nothing for 0.99 to 0.98).
+  (54 ms for 88 slices with the camera still, nothing for 0.99 to 0.98). The slice bank's own root stops there too
+  (`universe/universe-dataset-banks.ts`), and a bank that left layout decodes its images again, off the page's
+  thread, before it comes back (`volume/volume-texture-readiness.ts`): keeping an image's handle does not keep its
+  decoded pixels. A zoom out of the Crab and back had three frames over 33 ms on the iPad (48 to 56 ms as its 171
+  slices began to fade, 56 to 57 ms as they came back, 51 to 57 ms as the root reached 1) and has one of 46 to 50 ms;
+  under the ceiling alone the return decoded the atlas inside its paint, a frame of 110 to 115 ms (2026-10-06).
   A galaxy's or nebula's picture layers follow the same two rules (`image-layers/prepared-image-layer-runtime.ts`,
   `universe/universe-catalog-banks.ts`): the bank's own opacity stops at 0.999 too, for sheets and for patches
   (Cassiopeia A's 1,397 patches repainted in one frame of 291 ms each time the bank crossed 1 on a zoom out, 51 ms
@@ -57,6 +62,12 @@ held differently while coasting:
   images are decoded off the page's thread, then shows whole: decoded inside the paint, NGC 2392's 57 layers made a
   frame of 235 ms on a turn and 270 ms on a dataset switch, against 34 and 31 ms decoded first (iPad, 2026-10-05).
   Joining such a stack a share a frame was measured and rejected: each joining frame painted the layers already shown.
+  A stack cut into runs of patches, each run a scene of its own, does join a share a frame: its runs, unseen, one in
+  the first frame and two in each one after, and the stack is shown when it is whole. Safari makes and keeps the
+  surfaces of layers that join under an opacity of 0. Cassiopeia A's 1,397 patches in 78 runs shown whole made a frame
+  of 275 to 276 ms with the camera still; joined that way, one of 45 to 48 ms and one of 18 to 39 ms when shown, and a
+  first dataset pick on the Crab went from frames of 120 and 192 ms to one of 60 ms (iPad, 2026-10-06). What the
+  rejected measurement joined was sheets of one shared scene, which a stack of one run still is.
   What such a stack or bank replaces stays until it is decoded: the stacks already drawn share the whole picture, the
   one that drew most stays when the camera has turned fully away from it, a bank's billboard gives way only to a bank
   that draws, and the bank a host showed before a dataset pick stands in for the picked one. Without that the Ring had

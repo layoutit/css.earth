@@ -17,8 +17,8 @@ test('newObjectPath keeps output paths in the real checkout from another cwd and
       import { resolve, relative } from 'node:path';
       const root = ${JSON.stringify(root)}, alias = ${JSON.stringify(alias)};
       const module = await import(${JSON.stringify(pathToFileURL(resolve(alias, 'packages/telescope-cli/src/new-object/new-object-cli.mts')).href)});
-      const values = ['src/objects/example/source', 'output/example', 'public/scenes/example', 'src/sources/example.json'].map(path => module.newObjectPath(path));
-      assert.deepEqual(values, ['src/objects/example/source', 'output/example', 'public/scenes/example', 'src/sources/example.json'].map(path => resolve(root, path)));
+      const values = ['src/objects/example/source', 'output/example', 'site/public/scenes/example', 'src/sources/example.json'].map(path => module.newObjectPath(path));
+      assert.deepEqual(values, ['src/objects/example/source', 'output/example', 'site/public/scenes/example', 'src/sources/example.json'].map(path => resolve(root, path)));
       assert.ok(values.every(path => !relative(root, path).startsWith('../')));
       console.log('OWNER_PATHS_OK');
     `;

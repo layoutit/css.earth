@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { committedSocialImages, billboardSocialImages, availableSocialImages } from './social-images.mts';
 test('captures require Earth, recognize lowercase jpg only, and override arrival billboards', async t => {
   const root = await mkdtemp(join(tmpdir(), 'social-characterization-')); t.after(() => rm(root, { recursive: true, force: true }));
-  const dir = join(root, 'public/social'); await mkdir(dir, { recursive: true });
+  const dir = join(root, 'site/public/social'); await mkdir(dir, { recursive: true });
   assert.throws(() => committedSocialImages(root), /must contain the earth capture/);
   for (const name of ['earth.jpg', 'mars.jpg', 'a.jpg.png', 'ignored.JPG', 'other.webp']) await writeFile(join(dir, name), 'fixture');
   assert.deepEqual([...committedSocialImages(root)].sort(), ['earth', 'mars']);

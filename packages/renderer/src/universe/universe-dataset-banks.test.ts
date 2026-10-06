@@ -5,10 +5,10 @@ import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
 import type { PreparedVolumeDatasets } from '@cssearth/objects';
 
-const decode = { ready: true, pending: new Set<string>() };
+const decode = { ready: true, pending: new Set<string>(), undrawn: 0 };
 mock.module('../volume/volume-texture-readiness.js', { namedExports: {
   createVolumeTextureReadiness: () => ({ ready: (urls: readonly string[]) => decode.ready && urls.every(url => !decode.pending.has(url)),
-    decoded: (url: string) => decode.ready && !decode.pending.has(url), destroy() {} }),
+    decoded: (url: string) => decode.ready && !decode.pending.has(url), undrawn() { decode.undrawn++; }, destroy() {} }),
 } });
 mock.module('../volume/prepared-volume-datasets.js', { namedExports: {
   createPreparedVolumeDatasets: ({ payload }: { payload: PreparedVolumeDatasets }) => ({ payload,
@@ -25,7 +25,7 @@ mock.module('../volume/prepared-volume-datasets.js', { namedExports: {
 } });
 // The modules under test import the mocked ones, so they load after the mocks.
 const { createUniverseDatasetBanks } = await import('./universe-dataset-banks.js');
-afterEach(() => { decode.ready = true; decode.pending.clear(); });
+afterEach(() => { decode.ready = true; decode.pending.clear(); decode.undrawn = 0; });
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const,
   localToReferenceXyzw: [0, 0, 0, 1] as const, metersPerUnit: 1,
   boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };
@@ -53,11 +53,11 @@ async function fixture(attached = false) {
 for (const stillCoasting of [true, false]) test(`a resident bank recovers after a decode gap; still coasting=${stillCoasting}`, async () => {
   const f = await fixture();
   f.publish();
-  for (const root of f.targets) assert.equal(root.style.opacity, '1');
+  for (const root of f.targets) assert.equal(root.style.opacity, '0.999', 'in full view a bank stays just under opaque: its root never crosses opacity 1');
   f.banks.setCoasting(true); decode.ready = false; f.publish();
   for (const root of f.targets) { assert.equal(root.style.opacity, '0'); assert.equal(root.style.display, 'block'); }
   f.banks.setCoasting(stillCoasting); decode.ready = true; f.publish();
-  for (const root of f.targets) { assert.equal(root.style.opacity, '1'); assert.equal(root.style.display, 'block'); }
+  for (const root of f.targets) { assert.equal(root.style.opacity, '0.999'); assert.equal(root.style.display, 'block'); }
   f.lifetime.destroy();
 });
 
@@ -67,16 +67,29 @@ test('a dataset picked on a bank on screen replaces the one shown once its image
   decode.pending.add('/dust.webp');
   f.banks.select('fixture', 'dust'); f.publish();
   assert.equal(shown(), 'optical', 'the bank keeps its dataset while the next one decodes');
-  for (const root of f.targets) { assert.equal(root.style.opacity, '1'); assert.equal(root.style.display, 'block'); }
+  for (const root of f.targets) { assert.equal(root.style.opacity, '0.999'); assert.equal(root.style.display, 'block'); }
   decode.pending.clear(); f.banks.setCoasting(true); f.publish();
   assert.equal(shown(), 'optical', 'a change of images waits for the coast to stop');
   f.banks.setCoasting(false); f.publish();
   assert.equal(shown(), 'dust');
-  for (const root of f.targets) { assert.equal(root.style.opacity, '1'); assert.equal(root.style.display, 'block'); }
+  for (const root of f.targets) { assert.equal(root.style.opacity, '0.999'); assert.equal(root.style.display, 'block'); }
   // With nothing of the shown dataset on screen there is nothing to keep.
   decode.ready = false; f.publish();
   f.banks.select('fixture', 'optical'); f.publish();
   assert.equal(shown(), 'optical');
+  f.lifetime.destroy();
+});
+
+test('a bank that leaves layout says its images are no longer drawn, so that they are decoded again before it shows', async () => {
+  const f = await fixture();
+  f.publish();
+  assert.equal(decode.undrawn, 0);
+  f.banks.setCoasting(true); f.publish(0);
+  for (const root of f.targets) assert.equal(root.style.display, 'block', 'a coast keeps it in layout, at opacity 0');
+  assert.equal(decode.undrawn, 0);
+  f.banks.setCoasting(false); f.publish(0);
+  for (const root of f.targets) assert.equal(root.style.display, 'none');
+  assert.ok(decode.undrawn > 0);
   f.lifetime.destroy();
 });
 
@@ -86,7 +99,7 @@ test('hidden banks wait for coast to stop; steady publication writes no styles',
   f.banks.setCoasting(true); decode.ready = true; f.publish();
   for (const root of f.targets) assert.equal(root.style.display, 'none');
   f.banks.setCoasting(false); f.publish();
-  for (const root of f.targets) { assert.equal(root.style.opacity, '1'); assert.equal(root.style.display, 'block'); }
+  for (const root of f.targets) { assert.equal(root.style.opacity, '0.999'); assert.equal(root.style.display, 'block'); }
   const writes = f.targets.map(root => {
     const opacity = mock.fn(() => {}), display = mock.fn(() => {});
     Object.defineProperty(root.style, 'opacity', { get: () => '1', set: opacity });
@@ -105,11 +118,11 @@ test('close-ups suppress distant banks while attached shells and the selected ne
   distant.publish(.5);
   for (const node of distant.targets) assert.equal(node.style.opacity, '0.5');
   distant.publish(0, 'fixture');
-  for (const node of distant.targets) assert.equal(node.style.opacity, '1');
+  for (const node of distant.targets) assert.equal(node.style.opacity, '0.999');
   distant.lifetime.destroy();
   const attached = await fixture(true);
   attached.publish(0);
-  for (const node of attached.targets) assert.equal(node.style.opacity, '1');
+  for (const node of attached.targets) assert.equal(node.style.opacity, '0.999');
   attached.lifetime.destroy();
 });
 
@@ -173,7 +186,7 @@ test('a bank that stands in for the detailed one is drawn as the detailed one is
   for (const root of f.targets) assert.equal(root.style.display, 'none');
   assert.equal(f.banks.drawing('fixture'), false);
   publish('fixture');
-  for (const root of f.targets) assert.deepEqual([root.style.display, root.style.opacity], ['block', '1']);
+  for (const root of f.targets) assert.deepEqual([root.style.display, root.style.opacity], ['block', '0.999']);
   assert.equal(f.banks.drawing('fixture'), true);
   decode.ready = false; publish('fixture');
   assert.equal(f.banks.drawing('fixture'), false, 'its own images gone, it draws nothing');

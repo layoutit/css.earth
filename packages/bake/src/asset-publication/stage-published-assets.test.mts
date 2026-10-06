@@ -50,9 +50,9 @@ test('stages runtime public assets as well as prepared bytes', async t => {
   const options = await fixture(t);
   const runtime = { schema: 'cssearth-inventory@1', assets: [manifest.assets[0], { ...manifest.assets[0], location: 'public', filename: 'surface.webp' }] };
   for (const root of [options.artifactRoot, options.sourceRoot]) await put(root, `${base}/inventory.json`, JSON.stringify(runtime));
-  await put(options.artifactRoot, 'public/scenes/fixture/surface.webp', bytes);
+  await put(options.artifactRoot, 'site/public/scenes/fixture/surface.webp', bytes);
   assert.equal(await stagePublishedAssets(options), 2);
-  assert.deepEqual(await readFile(resolve(options.root, 'public/scenes/fixture/surface.webp')), bytes);
+  assert.deepEqual(await readFile(resolve(options.root, 'site/public/scenes/fixture/surface.webp')), bytes);
 });
 
 test('rejects a bake runner replacing the frozen inventory, even with matching new hashes', async t => {

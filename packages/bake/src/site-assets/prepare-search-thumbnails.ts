@@ -3,8 +3,8 @@
  * before this adapter is reused outside the site build. */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // `pnpm prepare:search-thumbnails`: small previews for search result rows, at
-// `public/navigation/search/<id>@2x.webp`: 40 CSS px at the one prepared density. Every scene object whose navigation
-// marker has a context sprite (`public/navigation/<id>-context.webp`, up to about 1400 px) previews from that sprite. An
+// `site/public/navigation/search/<id>@2x.webp`: 40 CSS px at the one prepared density. Every scene object whose navigation
+// marker has a context sprite (`site/public/navigation/<id>-context.webp`, up to about 1400 px) previews from that sprite. An
 // opaque sprite is a photograph of a galaxy, cluster or nebula on its sky: it has no outline to cut along, so its preview
 // takes the object-row framing (`object-thumbnail.ts`). A search list decodes dozens of these; the full
 // images would cost megabytes each. Featured stars reuse their published arrival images, including prepared limb shading.
@@ -65,7 +65,7 @@ export async function prepareSearchThumbnails(projectRoot = root) {
   const stellarPreviews = await featuredStarPreviews(projectRoot);
   const { PREPARED_NAVIGATION_MARKERS } = await import(pathToFileURL(resolve(projectRoot, 'site/prepared/prepared-navigation-markers.mjs')).href) as
     { PREPARED_NAVIGATION_MARKERS: Record<string, { context?: { url: string } }> };
-  const output = resolve(projectRoot, 'public/navigation/search');
+  const output = resolve(projectRoot, 'site/public/navigation/search');
   await mkdir(output, { recursive: true });
   let written = 0, unchanged = 0, current = 0, next = 0;
   // Each preview reads only its own sprite, so they are made in parallel.
@@ -75,7 +75,7 @@ export async function prepareSearchThumbnails(projectRoot = root) {
     if (!marker.context) continue;
     if (!/^\/navigation\/[a-z0-9-]+-context\.webp$/u.test(marker.context.url)) throw new TypeError(`${id}: unexpected context sprite ${marker.context.url}`);
     const stellarPreview = stellarPreviews.get(id);
-    const spritePath = resolve(projectRoot, 'public', (stellarPreview ?? marker.context.url).slice(1)), path = resolve(output, `${id}@2x.webp`);
+    const spritePath = resolve(projectRoot, 'site/public', (stellarPreview ?? marker.context.url).slice(1)), path = resolve(output, `${id}@2x.webp`);
     // Context previews newer than their sprite are current. The small featured-star set compares arrival-derived bytes
     // each time, so an older restored arrival can replace a newer flat-disc preview without a stale cache hit.
     const [spriteStat, previewStat] = await Promise.all([stat(spritePath), stat(path).catch(() => null)]);

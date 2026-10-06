@@ -116,8 +116,8 @@ sequence, including metadata preparation, share images, assembly and both bundle
 missing inputs fail with network disabled. Environment image restoration is offline and remains in the sequence.
 `prepare:typecheck` is unnecessary here: deployment regenerates the feature and facility catalogues it supplies.
 
-`public/scenes` is a read-only shared symlink, not a copied tree. Metadata preparation, share images, feature
-bundling and the published-origin adapter read it. It is detached while Astro copies `public/`, then restored for
+`site/public/scenes` is a read-only shared symlink, not a copied tree. Metadata preparation, share images, feature
+bundling and the published-origin adapter read it. It is detached while Astro copies `site/public/`, then restored for
 bundling/recording; a production-shaped Astro build uses the manifest and emits no scene copy. Declared Netlify
 place files are copied into each isolated function package. Build subprocesses reject writes into shared scenes.
 Each clone is deleted immediately after its recording/checks; only one clone exists at a time.
@@ -223,7 +223,7 @@ measured.
 These disk/time estimates are capacity planning, not Linux qualification. Each subprocess stage has a 15-minute
 termination limit. Keep recording and timing evidence outside disposable clones. Built-page `static.*` differences
 are labelled **built output** in the summary: they may reflect inline styles/scripts as well as server changes.
-Deleting `public/features/index.json` does not affect the Cloudflare target: the Worker reads its bundled files from `dist`.
+Deleting `site/public/features/index.json` does not affect the Cloudflare target: the Worker reads its bundled files from `dist`.
 
 L2 cannot see:
 

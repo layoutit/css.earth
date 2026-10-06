@@ -71,7 +71,7 @@ inventory; R2 holds the bytes.
    checkout, restore that object's sources with
    `node packages/bake/cli/restore-source-inputs.mts --object=<id>` first.
    An older checkout can hold files a later change moved or stopped writing.
-   The bake names any under `prepared/` or `public/scenes/<id>/` that the
+   The bake names any under `prepared/` or `site/public/scenes/<id>/` that the
    inventory does not list and stops; delete them and run again.
 2. Publish the bytes: `node packages/bake/cli/publish-runtime-assets.mts --object=<id>`.
    Safe to repeat — keys are content-addressed, so it uploads only what is
@@ -84,7 +84,7 @@ inventory; R2 holds the bytes.
    publishing; the nightly sweep checks them again.
 
 Skipping publication can leave a PR green but block the later deployment.
-The default deploy serves textures from R2 without a `public/scenes` copy,
+The default deploy serves textures from R2 without a `site/public/scenes` copy,
 downloads and sha-verifies every inventoried key from R2 while it builds, and
 checks build references with `pnpm check:deploy-assets`. A key R2 does not
 serve stops that deployment. Merging does not deploy: production requires manual

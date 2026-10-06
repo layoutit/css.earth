@@ -23,7 +23,7 @@ export function assetOrigin(env: NodeJS.ProcessEnv = process.env): string | null
 
 const manifestCache = new Map<string, Promise<Readonly<Record<string, string>>>>();
 
-/** The `filename -> sha256` map published for one object's `public/scenes/<id>/*`
+/** The `filename -> sha256` map published for one object's `site/public/scenes/<id>/*`
  * assets (the public entries of its tracked `inventory.json`), cached per build process. */
 export function assetShaMap(id: string, root = process.cwd()): Promise<Readonly<Record<string, string>>> {
   const key = `${resolve(root)}\0${id}`;
@@ -152,7 +152,7 @@ export async function resolveBuildSceneAddress(address: string, root = process.c
 export async function inlineSceneImage(objectId: string, address: string, root = process.cwd()): Promise<string | null> {
   const file = /\/([^/?#]+\.webp)$/u.exec(address)?.[1];
   if (!file || !/^[a-z][a-z0-9-]*$/u.test(objectId)) return null;
-  const bytes = await readFile(resolve(root, 'public/scenes', objectId, file)).catch(() => null);
+  const bytes = await readFile(resolve(root, 'site/public/scenes', objectId, file)).catch(() => null);
   return bytes && `data:image/webp;base64,${bytes.toString('base64')}`;
 }
 

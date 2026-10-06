@@ -141,7 +141,7 @@ independently mounted scenes.
 Their root `inventory.json` lists every baked file with its location. A
 `prepared` entry's filename may contain safe relative subdirectories and
 resolves below the object's `prepared/` directory; a `public` entry resolves
-below `public/scenes/<id>/`, for shared dataset previews. Absolute paths,
+below `site/public/scenes/<id>/`, for shared dataset previews. Absolute paths,
 parent traversal and symlink installation paths are rejected. Inventories list
 byte counts and R2 content addresses for both locations; restored bytes must
 match the root inventory. Prepared-directory verification preserves the root metadata receipts and

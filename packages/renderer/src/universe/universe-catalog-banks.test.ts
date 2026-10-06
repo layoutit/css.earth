@@ -128,6 +128,24 @@ test('the bank last drawn for the selected body stays in layout at opacity 0, an
   lifetime.destroy();
 });
 
+test('a picture with dots of its own mounts under the dot layer, one with none just over it', async () => {
+  const { document } = parseHTML('<div id="root"><span id="under"></span><b id="dots"></b><span id="over"></span><span id="end"></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: document.getElementById('end')!, stage: root, lifetime,
+    imagesBefore: document.getElementById('under')!, picturesBefore: document.getElementById('over')!,
+    declarations: [{ id: 'photograph', frame, host: 'galaxy' }, { id: 'walls', frame, host: 'nebula' }],
+    pointBanks: [{ id: 'galaxy/plain-stars', url: '/dots.bin', host: 'galaxy', stars: true }],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async id => ({ payload: { id, frame } }) as never });
+  const publish = (detailed: string) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 3], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, detailed);
+  publish('photograph'); publish('walls');
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '2'));
+  assert.deepEqual([...root.children].map(node => (node as HTMLElement).dataset.imageLayerObject ?? node.id), ['photograph', 'under', 'dots', 'walls', 'over', 'end'],
+    'the galaxy with stars of its own lies under the dots, the nebula over them');
+  lifetime.destroy();
+});
+
 test('a bank whose light lies on walls draws around a body inside its host, the first declared for that host; a photograph never does', async () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();

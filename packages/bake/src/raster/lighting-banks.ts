@@ -3,7 +3,7 @@ import type { AuthoredSphereLaw, LightingRecipe } from '@cssearth/objects';
 /**
  * Shared lighting banks: an authored sphere law that many bodies draw the same. A body's raster recipe names a bank
  * (`"lighting": { "bank": "sphere", ... }`); its bake copies the bank's sheet and flood-lit frame from
- * `public/lighting/<bank>/` instead of encoding them, and its prepared output is what encoding them would give. Identical
+ * `site/public/lighting/<bank>/` instead of encoding them, and its prepared output is what encoding them would give. Identical
  * files publish under one content address, so every body on a bank asks a browser for the same two URLs.
  * `packages/bake/cli/prepare-lighting-bank.mts` bakes the banks and checks the tracked files against a fresh bake, so the
  * copy is never a stale cache.
@@ -20,7 +20,7 @@ export const LIGHTING_BANKS: Readonly<Record<string, AuthoredSphereLaw>> = Objec
 export const LIGHTING_BANK_PRESENTATION_SIZE = 460;
 
 /** Where a bank's baked sheet and flood-lit frame live, tracked in git beside the navigation atlases (relative to the repository). */
-export const LIGHTING_BANK_ROOT = 'public/lighting';
+export const LIGHTING_BANK_ROOT = 'site/public/lighting';
 
 /** A bank recipe with the bank's law filled in; a recipe that names published models unchanged. */
 export function resolveLightingRecipe(recipe: LightingRecipe): LightingRecipe {

@@ -2,6 +2,7 @@ import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { imageLayerAxisWeights, mountPreparedCssImageLayers } from './prepared-image-layer-runtime.js';
+import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from '@cssearth/objects';
 
 const views: readonly PreparedImageLayerView[] = [
@@ -263,4 +264,57 @@ test('a stack mounts a camera for each of its scenes, and a stack without leaves
   assert.equal(named('css-volume-projection')[0]!.style.opacity, '0.999');
   assert.equal(named('css-volume-projection')[0]!.style.visibility, 'visible');
   assert.deepEqual(imageLayerAxisWeights([Math.SQRT1_2, 0, 0, Math.SQRT1_2], views.filter(view => view.axis === 'z')), { z: 1 });
+});
+
+test('a decoded stack joins its runs unseen, one and then two a frame, and takes the picture when it is whole', async t => {
+  // The document's frames, run by the test.
+  const frames: ((time: number) => void)[] = [];
+  let now = 0;
+  const frame = () => { now += 16; frames.shift()!(now); };
+  stubGlobal('requestAnimationFrame', (callback: (time: number) => void) => frames.push(callback));
+  stubGlobal('cancelAnimationFrame', () => {});
+  stubGlobal('performance', { now: () => now });
+  t.after(() => unstubAllGlobals());
+  const waiting: (() => void)[] = [];
+  class HeldImage { src = ''; decode() { return new Promise<void>(settle => { waiting.push(settle); }); } }
+  const document = Object.assign(new ImageDocument(), { defaultView: { Image: HeldImage } }), host = document.createElement(), before = document.createElement();
+  host.appendChild(before);
+  const style = { width: '1px', height: '1px', transform: 'translate3d(0,0,0)', backgroundSize: '1px 1px', backgroundPosition: '0px 0px' };
+  const payload: PreparedCssImageLayers = {
+    schema: 'cssearth-css-volume@1', id: 'fixture',
+    frame: { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
+      metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } },
+    anchors: [], bankViews: views.map(view => view.axis === 'z' ? { ...view, sceneSizes: [1, 1, 1, 1, 1] } : view),
+    stacks: views.map(({ axis }) => ({ axis, leaves: (axis === 'z' ? ['a', 'b', 'c', 'd', 'e'] : ['only']).map(id => ({ id: `${axis}-${id}`, centerUnits: [0, 0, 0] as [number, number, number],
+      texturePath: `${axis}.png`, widthPx: 1, heightPx: 1, style })) })),
+    resources: views.map(({ axis }) => ({ path: `${axis}.png`, bytes: 1, width: 1, height: 1 })),
+    provenance: {}, approximation: {},
+  };
+  const drawn = mock.fn();
+  const runtime = mountPreparedCssImageLayers({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resolveResource: path => `/prepared/${path}`, onDrawn: drawn });
+  const stack = document.elements.find(element => element.dataset.imageLayerAxis === 'z')!;
+  const joined = () => stack.children.filter(camera => camera.style.display === '').length;
+  const publish = (orientationXyzw: readonly [number, number, number, number]) => runtime.publish({
+    world: { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM: [0, 0, 10], orientationXyzw } },
+    viewport: { focalPixels: 600, principalOffsetPixels: [0, 0] },
+  });
+  publish([0, 0, 0, 1]);
+  assert.deepEqual([stack.children.length, joined(), stack.style.visibility], [5, 0, 'hidden'], 'decoding: no run is in layout');
+  for (const settle of waiting.splice(0)) settle();
+  await new Promise(done => setTimeout(done, 0));
+  assert.deepEqual([joined(), stack.style.visibility, stack.style.opacity, runtime.drawing()], [0, 'visible', '0', false], 'decoded: its runs join from the next frame, unseen');
+  frame();
+  assert.deepEqual([joined(), stack.style.opacity], [1, '0'], 'the first frame makes one run');
+  frame();
+  assert.deepEqual([joined(), stack.style.opacity, drawn.mock.callCount()], [3, '0', 0]);
+  frame();
+  assert.deepEqual([joined(), stack.style.opacity, runtime.drawing(), drawn.mock.callCount()], [5, '0.999', true, 1], 'whole: it is shown, and who waits for it is told once');
+  // Turned away to a stack of one run: that one is whole in its first frame, and the stack left takes its runs out of layout.
+  publish([Math.SQRT1_2, 0, 0, Math.SQRT1_2]);
+  for (const settle of waiting.splice(0)) settle();
+  await new Promise(done => setTimeout(done, 0));
+  frame();
+  publish([Math.SQRT1_2, 0, 0, Math.SQRT1_2]);
+  assert.deepEqual([joined(), stack.style.display, document.elements.find(element => element.dataset.imageLayerAxis === 'y')!.style.opacity], [0, 'none', '0.999']);
+  runtime.destroy();
 });
