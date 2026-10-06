@@ -113,21 +113,20 @@ the flat **Color** the star had.
 | Drawn | From |
 | --- | --- |
 | Which longitudes are darker | The light curve |
-| How much darker | The map, with its depth stretched: the darkest part is drawn the cube root of its share of light lost dimmer (21% less light is drawn 59% dimmer), and the parts in between in proportion |
-| The color | The star's Color dataset. The brightest part is drawn at that color, which is already as bright as a display color goes, and the rest darker |
+| How much darker | The Brightness map's own scale and grays, tinted with the star's color: far stronger than the real contrast |
+| The color | The star's Color dataset: the scale's bright end is drawn at that color |
 | The darkening toward the edge | The Color dataset's limb law, the same plate |
 | The latitude and shape of each patch | Not measured: the smoothest map that reproduces the light |
 | Any change of color inside a spot | Not drawn: none is measured |
 
-The stretch is there because the measured contrast cannot be seen. AU Microscopii is among the most spotted stars here: its
-darkest longitude gives 21% less light than its brightest, which is one tenth on a display, and most stars swing by 1 or
-2%. A root applied to every part alone darkened the whole surface alike and hid the pattern, so the map keeps its own
-shape and only its depth is stretched; the cube root was chosen by eye. A more spotted star still looks more spotted. Each dataset's text states the stretch with the star's own two numbers, and the Brightness map carries the
-measured values.
+The contrast is drawn stronger because the measured one cannot be seen. AU Microscopii is among the most spotted stars
+here: its darkest longitude gives 21% less light than its brightest, which is one tenth on a display, and most stars swing by
+1 or 2%. Two weaker stretches were tried on the page and were still faint, so the color view takes the Brightness map's full
+contrast, chosen by eye. Each dataset's text says so with the star's own number, and the Brightness map carries the measured
+values on its scale. Every star's scale is its own, so a faintly spotted star is drawn as strongly as a heavily spotted one;
+the scale's ends and the text tell them apart.
 
-A dimming is a share of light, and a display value is not linear in light: the palette's stops are computed in linear light
-and encoded for the display, so half the light is drawn at 188 of 255, not 128. The dataset's text gives the month the
-sector was observed, because spots come and go within weeks or months.
+The dataset's text gives the month the sector was observed, because spots come and go within weeks or months.
 
 ## Running it
 

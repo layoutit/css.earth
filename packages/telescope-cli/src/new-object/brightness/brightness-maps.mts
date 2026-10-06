@@ -7,7 +7,6 @@
  *
  * Every sentence says what the map is: made here, from a light curve, which fixes how bright each longitude is and not
  * where on it the spots lie in latitude. A map made at an assumed tilt says so. */
-import { linearToSrgb, srgbToLinear } from '@cssearth/bake/photometry';
 import { isRecord, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { scaleEnd, type MapKind, type SurfaceMap, type SurfaceMapChoice } from '../maps/surface-maps.mts';
 
@@ -53,21 +52,13 @@ export function monthsOf(fromUtc: string, toUtc: string): string { const [a, b] 
 /** The same in the few characters a dataset's detail line has: "Aug 2025", "Aug to Sep 2025", "Dec 2025 to Jan 2026". */
 export function shortMonthsOf(fromUtc: string, toUtc: string): string { const [a, b] = [fromUtc, toUtc].map(day => ({ year: day.slice(0, 4), month: MONTHS[Number(day.slice(5, 7)) - 1]!.slice(0, 3) }));
   return a!.year === b!.year && a!.month === b!.month ? `${a!.month} ${a!.year}` : a!.year === b!.year ? `${a!.month} to ${b!.month} ${a!.year}` : `${a!.month} ${a!.year} to ${b!.month} ${b!.year}`; }
-/** How many stops the star's color is dimmed through: a brightness is a share of light, and a display value is not linear in it. */
-const COLOR_STOPS = 9;
-/** The stretch the star's own color is drawn with. The darkest part of a map gives a share less light than the brightest;
- * it is drawn the cube root of that share dimmer, and every part in between in proportion, so the map keeps its own shape.
- * At its measured contrast the most spotted star here (AU Mic: 21% less light at its darkest longitude, one tenth on a
- * display) was hard to see at all. A root applied to every part alone darkened the whole surface alike and hid the
- * pattern; a square root of the depth was still faint on the page, and the owner of the project chose a stronger one by
- * eye (2026-10-06). A root of the depth keeps a more spotted star looking more spotted, and the text of the dataset states
- * it with the star's own two numbers. */
-export const STRETCH_ROOT = 3, STRETCH_NAME = 'cube root';
-export const stretched = (dimming: number) => Math.max(0, Math.min(1, dimming)) ** (1 / STRETCH_ROOT);
-
-/** A color dimmed to a share of its light, as a display color. */
-export function dimmed(colorHex: string, share: number): string {
-  return `#${[1, 3, 5].map(at => Math.round(Math.max(0, Math.min(255, linearToSrgb(srgbToLinear(Number.parseInt(colorHex.slice(at, at + 2), 16)) * share)))).toString(16).padStart(2, '0')).join('')}`; }
+/** The star's own color over the gray scale of its Brightness map: each gray, as a share of white, times the color. The map's
+ * measured contrast cannot be seen on a page (AU Mic, among the most spotted stars here, gives 21% less light at its darkest
+ * longitude, one tenth on a display), and two weaker stretches were still faint; the owner of the project chose the map's full
+ * contrast by eye (2026-10-06). The dataset's text says the contrast is drawn stronger than it is, with the star's own numbers. */
+export const tinted = (colorHex: string) => PALETTE.map(([gray]) => `#${[1, 3, 5].map(at => Math.round(Number.parseInt(colorHex.slice(at, at + 2), 16) * gray! / 255).toString(16).padStart(2, '0')).join('')}`);
+/** The scale all of a star's brightness maps share: the same reach either side of the mean surface. */
+const brightnessScale = (maps: readonly BrightnessSurfaceMap[]) => { const reach = scaleEnd(Math.max(...maps.flatMap(map => [100 - map.darkestPercent, map.brightestPercent - 100]))); return { minimum: 100 - reach, maximum: 100 + reach, labels: [`${100 - reach}%`, '100%', `${100 + reach}%`] }; };
 
 /** `curve` is the sector's light curve as the reduction kept it: its times date the map. */
 export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, table: string, curve: unknown): BrightnessSurfaceMap {
@@ -92,7 +83,7 @@ const days = (period: number) => period >= 1 ? `${Number(period.toPrecision(3))}
 export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
   consumer: BRIGHTNESS_CONSUMER, directory: BRIGHTNESS_DIRECTORY, generator: BRIGHTNESS_GENERATOR, inputTag: 'tess-map', stepGroup: 'brightness', variable: 'Brightness [%]', units: '%', controlLabel: 'Brightness map', legendTitle: 'Surface brightness',
   archiveUrl: TESS_ARCHIVE.pixels, references: [{ catalogueId: PIXELS_RECORD, role: 'material', evidence: TESS_ARCHIVE.pixels }, { catalogueId: METHOD_RECORD, role: 'method', evidence: METHOD_URL }, { catalogueId: GAIA_RECORD, role: 'reference', evidence: GAIA_URL }], colors: COLORS, palette: PALETTE,
-  scale(maps) { const reach = scaleEnd(Math.max(...maps.flatMap(map => [100 - map.darkestPercent, map.brightestPercent - 100]))); return { minimum: 100 - reach, maximum: 100 + reach, labels: [`${100 - reach}%`, '100%', `${100 + reach}%`] }; },
+  scale: brightnessScale,
   words(map, { count, tilt, outlined }) { const { choice } = map, swing = `${percent(map.amplitude)}%`, turn = days(map.periodDays);
     const tilted = map.tiltFrom === 'assumed' ? `No tilt of this star's axis is known: the map is made at ${tilt}°, the middle tilt of axes that point at random.`
       : map.tiltFrom === 'record' ? `The map is made at a tilt of ${tilt}°, worked out from the star's rotation speed, period and radius.` : `The map is made at the tilt the page draws the star with, ${tilt}°.`;
@@ -112,15 +103,13 @@ export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
       text: { title: `Brightness map, ${choice.label}`, detail: `${choice.label}, mapped here`, summary: 'Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns.' } }; },
   // Only a page that measures the star's axis draws the star at the map's tilt.
   outlines: map => map.tiltFrom === 'page',
-  // The star as TESS's light says it looked: its own color, each longitude as bright as the map says, at the measured contrast.
-  // The brightest part is drawn at the star's color, which is already as bright as a display color goes.
-  natural(map, star) { const when = monthsOf(map.fromUtc, map.toUtc), measured = 1 - map.darkestPercent / map.brightestPercent, darkest = Number((100 * measured).toFixed(1)), drawn = Number((100 * stretched(measured)).toFixed(0));
-    const depth = stretched(measured), colors = Array.from({ length: COLOR_STOPS }, (_, i) => dimmed(star.colorHex, 1 - depth * (1 - i / (COLOR_STOPS - 1))));
+  // The star in its own color, as dark and as bright as its Brightness map draws it: the map's scale, tinted.
+  natural(map, star) { const when = monthsOf(map.fromUtc, map.toUtc), darkest = Number((100 * (1 - map.darkestPercent / map.brightestPercent)).toFixed(1)), scale = brightnessScale([map]);
     const halved = map.lightPeriodDays === undefined ? '' : ` The light repeats every ${days(map.lightPeriodDays)}, half the catalogued rotation period, and the star is taken to turn once in two of them.`;
-    return { id: 'color-brightness', label: 'Color + brightness', minimum: map.darkestPercent, maximum: map.brightestPercent, colors,
-      description: `The star's color (${star.colorHex}, its Color dataset), each part of the surface dimmed by its share of light in the brightness map this project made from the star's light in TESS sector ${map.sector} (${when}), with the contrast stretched so the parts can be told apart: the darkest gives ${darkest}% less light than the brightest and is drawn ${drawn}% dimmer (the ${STRETCH_NAME} of that share), the parts in between in proportion. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.`,
-      surfaceTitle: `TESS · the star in its color, contrast stretched · ${when}`, qualification: `The star's color, dimmed where TESS saw it dimmer (contrast stretched) · ${when}, mapped in this project`,
-      notes: `${map.targetName} in its own color, darker where its light in TESS's images of ${when} says it was darker. As the star turned once in ${days(map.periodDays)} its light rose and fell by ${percent(map.amplitude)}%.${halved} The contrast is stretched so the eye can see it: the darkest part gives ${darkest}% less light than the brightest and is drawn ${drawn}% dimmer (the ${STRETCH_NAME} of that share), and the parts in between in proportion. The Brightness map dataset has the measured values on a scale. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's.`,
-      text: { title: `Color + brightness, ${shortMonthsOf(map.fromUtc, map.toUtc)}`, detail: `TESS sector ${map.sector}`, summary: 'The star in its own color, darker where its light shows it darker; the contrast is stretched to be seen.' } }; },
+    return { id: 'color-brightness', label: 'Color + brightness', minimum: scale.minimum, maximum: scale.maximum, colors: tinted(star.colorHex),
+      description: `The star's color (${star.colorHex}, its Color dataset) over the brightness map this project made from the star's light in TESS sector ${map.sector} (${when}): the map's scale, ${scale.minimum}% to ${scale.maximum}% of the mean surface, runs from a dark tone of the color to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives ${darkest}% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.`,
+      surfaceTitle: `TESS · the star in its color over its brightness map · ${when}`, qualification: `The star's color, darker where TESS saw it dimmer (contrast drawn stronger) · ${when}, mapped in this project`,
+      notes: `${map.targetName} in its own color, darker where its light in TESS's images of ${when} says it was darker. As the star turned once in ${days(map.periodDays)} its light rose and fell by ${percent(map.amplitude)}%.${halved} The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives ${darkest}% less light than the brightest, and is drawn as dark as on the Brightness map, whose scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's.`,
+      text: { title: `Color + brightness, ${shortMonthsOf(map.fromUtc, map.toUtc)}`, detail: `TESS sector ${map.sector}`, summary: 'The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen.' } }; },
   report(maps, scale) { const count = maps.length; return `${count} brightness ${count === 1 ? 'map' : 'maps'} on one scale of ${scale.minimum}% to ${scale.maximum}% (${maps.map(map => `${map.choice.label}: turns in ${days(map.periodDays)}, light swings ${percent(map.amplitude)}%`).join('; ')})`; },
 };

@@ -104,9 +104,9 @@ maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a conven
 changed, and the measured period goes into the star's measurements record; `new-object-cli.mts --tess-light` writes the
 reduction's verdict, sector and light scatter into the record of every star it looked at, mapped or not). A kind whose maps are how the star looks
 supplies `natural`: the newest map in the star's own color, which becomes the dataset the page opens on
-(`Color + brightness`). Its contrast is stretched by a cube root (`stretched`, chosen by eye), because the measured contrast cannot be
-seen; its sentences state the stretch with the star's numbers, and say what is measured (longitudes) and what is not
-(latitudes, shapes, any color change). A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
+(`Color + brightness`). It is the Brightness map's scale and grays tinted with the color (`tinted`), far stronger than the
+real contrast, which cannot be seen; its sentences say so with the star's number, and say what is measured (longitudes) and
+what is not (latitudes, shapes, any color change). A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
 
 The papers API behind `telescope papers` is `src/papers.mts` and `src/papers/`. There is one search path: `findWorks`
 (`papers/works.mts`) asks OpenAlex, then arXiv when OpenAlex refuses, and the command and the star survey both call it; a
