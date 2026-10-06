@@ -57,17 +57,19 @@ from the pictures themselves.
   mass's from the main peak to the subcluster's (274.3°, 134″ apart). Each is tipped 10° from the plane of the sky about
   its main end, which lies on the photograph's plane; the subcluster's end is the farther.
 - **Body:** at each station along its line, the two sides' mean light by distance from the line is taken apart ring by
-  ring from the outside in, in steps of 1.74″. That gives how much the body emits at each distance from the line. Each
+  ring from the outside in, in steps of 1.74″. Where a picture fades out at the frame, that side is left out. That gives how much the body emits at each distance from the line. Each
   pixel then keeps its own light; the body only says where along the sight line it lies.
-- **How well the symmetry holds:** for the gas, 19.3% of the light differs between the two sides of its line, and 0.40% of
+- **Point sources:** 7 compact sources in the gas picture, narrower than 3″, were taken down to the gas around them.
+  They are active galaxies and stars, not gas, and a body of revolution would turn each into a ring.
+- **How well the symmetry holds:** for the gas, 19.2% of the light differs between the two sides of its line, and 0.30% of
   it asked for less than no gas and was set to none. The gas picture's own most symmetric line, found by a scan of ±14°
-  and ±36″, is 2° and 2.4″ from the published one. For the mass, 43.7% differs between the sides and 1.08% was set to
+  and ±36″, is 2° and 2.4″ from the published one. For the mass, 43.5% differs between the sides and 1.05% was set to
   none: the mass map is far less round about its line than the gas, and its depth is the weaker of the two.
-- **Reach:** 178″ (gas) and 179″ (mass) either side of the plane along the sight line, 1,028 kpc at the comoving distance.
-- **Leaves:** one grid of 256 × 185 cells. Face-on, 32 slabs parallel to the photograph; from the sides, 36 and 40
-  curtains of 185 × 206 and 256 × 206 texels. A browser lays each slab over those behind it, where light of two colors
+- **Reach:** 164″ (gas) and 162″ (mass) either side of the plane along the sight line, 968 kpc at the comoving distance.
+- **Leaves:** one grid of 256 × 185 cells. Face-on, 32 slabs parallel to the photograph; from the sides, 37 and 40
+  curtains of 185 × 188 and 256 × 188 texels. A browser lays each slab over those behind it, where light of two colors
   needs a screen, so the slabs are built from the back: each texel holds its own light and what it hides.
-- **Bytes:** 109 images, 0.97 MB: the photograph 0.07 MB (WebP quality 70), slabs 0.27 MB, curtains 0.62 MB.
+- **Bytes:** 110 images, 0.97 MB: the photograph 0.07 MB (WebP quality 70), slabs 0.28 MB, curtains 0.61 MB.
 
 ## Evidence
 

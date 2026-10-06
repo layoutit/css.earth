@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Galaxy cluster 'El Gordo': the 2014 Hubble release in its layers",
+  "publisher": "NASA/STScI",
+  "sourceId": "STScI-2014-22",
+  "sourcePage": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+  "download": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKRXF86FHKE6A9J3W0HVFC.tif",
+  "credit": "NASA, ESA, and J. Jee (University of California, Davis)",
+  "license": "NASA-STScI",
+  "original": {
+    "dimensions": [
+      6184,
+      3748
+    ],
+    "bands": [
+      "Hubble ACS/WFC",
+      "weak-lensing mass map",
+      "Chandra ACIS X-ray"
+    ],
+    "fieldOfViewDeg": [
+      0.0858953,
+      0.0520595
+    ]
+  },
+  "checkedSource": {
+    "kind": "TIFF layers on one frame: Hubble alone, the mass map alone, the X-ray gas alone, and the three together",
+    "dimensions": [
+      6184,
+      3748
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.009765,
+    "lineOfNodesPaDeg": 217.45,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 35.2 arcsec from the published position, which is the whole of the recipe's inclination. Not a measured orientation of the cluster."
+  },
+  "registration": {
+    "catalogue": "Gaia DR3 (CDS I/355/gaiadr3)",
+    "sourcesInFrame": 16,
+    "matched": 16,
+    "rmsArcsec": 0.167,
+    "maxArcsec": 0.345,
+    "pixelArcsec": 0.05,
+    "northClockwiseDeg": 50.621,
+    "embeddedTags": null
+  },
+  "displayModel": "The Hubble picture, its stars removed, lies on one flat plane facing the Sun at the cluster's comoving distance. The hot gas and the mass, the publisher's own layers, are each spread along the sight line through a body of revolution about a published line in the plane of the sky. No depth is measured.",
+  "coverage": "The whole published frame. The red and blue are the publisher's renderings of an X-ray image and a mass map, not light the eye would see.",
+  "acquisition": {
+    "url": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKRXF86FHKE6A9J3W0HVFC.tif",
+    "dimensions": [
+      6184,
+      3748
+    ],
+    "operation": "Download the publisher's TIFF layers; no crop or resample."
+  }
+}

@@ -82,6 +82,22 @@
           "url": "https://esawebb.org/images/elgordo1/"
         },
         "falseColor": true
+      },
+      {
+        "id": "gas-and-mass",
+        "label": "Hubble · Chandra · composite",
+        "thumbnail": "el-gordo-dataset-gas-and-mass.webp",
+        "volume": {
+          "objectId": "el-gordo-hubble-layers",
+          "datasetId": "optical",
+          "surface": "gas-and-mass"
+        },
+        "source": {
+          "id": "el-gordo-hubble-layers-optical",
+          "path": "../../el-gordo-hubble-layers/source/manifest.json",
+          "url": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
+        },
+        "falseColor": true
       }
     ]
   },
