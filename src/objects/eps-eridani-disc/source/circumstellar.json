@@ -38,6 +38,9 @@
         "title": "ALMA project 2019.1.00696.S, member OUS uid://A001/X1465/X27ff, pipeline continuum image eps_eri_sci.spw19_21_23_25.cont.I.pbcor",
         "credit": "ALMA (ESO/NAOJ/NRAO), project 2019.1.00696.S (PI M. Booth); imaged by the ALMA pipeline (CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2019.1.00696.S.",
         "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+        "facility": {
+          "facilityId": "alma"
+        },
         "license": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
         "acquisition": "Downloaded unchanged from the ALMA Science Archive data portal on 2026-09-26 and again on 2026-09-27, byte for byte the same (the product listed by DataLink for member OUS uid://A001/X1465/X27ff); restored from that origin or the R2 source cache when missing.",
         "primaryBeam": {
