@@ -4,7 +4,7 @@ import { keepLayers } from './kept-layers.js';
 
 function fixture() {
   const frames: (() => void)[] = [], cancelled: number[] = [], calls: string[] = [];
-  const animation = { id: '', pause() { calls.push('pause'); }, cancel() { calls.push('cancel'); } };
+  const animation = { id: '', effect: {} as object | null, timeline: {} as object | null, pause() { calls.push('pause'); }, cancel() { calls.push('cancel'); } };
   const animated: { keyframes: unknown; options: unknown }[] = [];
   const view = { requestAnimationFrame(callback: FrameRequestCallback) { frames.push(() => { callback(0); }); return frames.length; }, cancelAnimationFrame(id: number) { cancelled.push(id); } };
   const element = { animate(keyframes: unknown, options: unknown) { animated.push({ keyframes, options }); return animation; } } as unknown as HTMLElement;
@@ -23,6 +23,7 @@ test('the keeping animation starts on the element, is paused two frames later an
   assert.equal(f.frames.length, 0, 'it asks for no further frame');
   release();
   assert.deepEqual(f.calls, ['pause', 'cancel']);
+  assert.deepEqual([f.animation.effect, f.animation.timeline], [null, null], 'released, it names no element and no timeline');
   assert.deepEqual(f.cancelled, [], 'no frame was pending');
 });
 
