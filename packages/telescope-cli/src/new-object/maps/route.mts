@@ -51,7 +51,8 @@ async function writeMaps<M extends SurfaceMap>(route: MapRoute<M>, entry: Surfac
   const { files, report, opensOn } = surfaceMapFiles(route.kind, entry, star, maps, { content, text, manifest, raster, descriptor });
   // A natural view is the page's default dataset: a new one, or the same one over another map, is a new arrival view.
   const shownBefore = requireRecord(content.datasets, `${entry.host} content datasets`).defaultDataset, shownNow = requireRecord((JSON.parse(files.get(`src/objects/${entry.host}/source/content/object.json`)!) as Json).datasets, 'datasets').defaultDataset;
-  let redrawn = opensOn !== undefined;
+  const surfaceOf = (recipe: Json) => JSON.stringify((Array.isArray(recipe.surfaces) ? recipe.surfaces : []).find(surface => isRecord(surface) && surface.id === shownNow));
+  let redrawn = opensOn !== undefined || (route.kind.natural !== undefined && surfaceOf(raster) !== surfaceOf(JSON.parse(files.get(`src/objects/${entry.host}/source/preparation/raster.json`)!) as Json));
   if (!redrawn && route.kind.natural && shownNow === shownBefore) for (const [path, value] of files) if (path.endsWith('.dat') && await readFile(resolve(root, path), 'utf8').catch(() => '') !== value) redrawn = true;
   if (tilts) files.set(star.rotationRecord, `${JSON.stringify(route.tiltedRotation!(rotation, place, maps[0]!), null, 2)}\n`);
   // The catalogue records the maps are bound to are written once and then kept, with the day they were checked.
