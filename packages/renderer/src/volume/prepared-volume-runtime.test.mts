@@ -241,8 +241,10 @@ test('a stack the camera turns to joins a share a frame, every eighth slice firs
     const { runtime, roots, meshes } = mount(payload(100));
     const slices = meshes[2]!.children.filter((_, index) => index % 3 === 0), shown = () => slices.filter(node => node.style.display === '').length;
     runtime.publish(publication([0, 0, 1]));
-    assert.equal(roots[2]!.style.display, 'block'); assert.equal(shown(), 0);
+    assert.equal(roots[2]!.style.display, 'none', 'a stack is never displayed empty: Safari would not draw the slices that join it');
+    assert.equal(shown(), 0);
     frame();
+    assert.equal(roots[2]!.style.display, 'block', 'its root is displayed in the frame its first slices are');
     assert.equal(shown(), 8);
     for (const index of [0, 8, 56]) assert.equal(slices[index]!.style.display, '');
     for (const index of [1, 4, 64]) assert.equal(slices[index]!.style.display, 'none');

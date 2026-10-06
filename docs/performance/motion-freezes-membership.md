@@ -42,8 +42,11 @@ held differently while coasting:
   optical copy whose alpha did and a slice that left the view stay as they are until the camera stops. Hiding them as
   the camera turned flipped `display` on 2,016 slices in one throw of a drag at the Milky Way (2026-10-03). A stack
   the camera turns to joins a paced share of its slices a frame, every eighth slice first, and a stack that leaves at
-  rest leaves whole: on the iPad joining costs by the slices in the frame (8 a frame none over 21 ms, all 628 at once
-  182 ms), and leaving by the slices still there (all at once 42 to 50 ms, 16 a frame eight frames of 34 to 93 ms,
+  rest leaves whole. A stack's root is displayed in the frame its first slices are, never before: Safari draws nothing
+  of a stack whose root was first displayed empty, however many slices join it afterwards (M42 turned a quarter of
+  the way round was gone for 8.5 of 9.9 s of a recorded visit on the iPad, and for none with the root displayed with
+  its first slices, 2026-10-06). On the iPad joining costs by the slices in the frame (8 a frame none over 21 ms, all
+  628 at once 182 ms), and leaving by the slices still there (all at once 42 to 50 ms, 16 a frame eight frames of 34 to 93 ms,
   2026-10-04). A stack's opacity in the mix stops at 0.999: Safari painted every slice under a stack again each time its
   opacity left or reached 1 (54 ms for 88 slices with the camera still, nothing for 0.99 to 0.98).
   A galaxy's or nebula's picture layers follow the same two rules (`image-layers/prepared-image-layer-runtime.ts`,

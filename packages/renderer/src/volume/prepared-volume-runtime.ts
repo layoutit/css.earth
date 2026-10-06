@@ -147,22 +147,34 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   // The share doubles from a frame's first units to its most (8, 16, then 32 slices) whatever the pacer's budget has
   // fallen to: the budget halves after any slow frame, and where every frame is slow a stack would join a slice a
   // frame, thin for seconds (headless Chromium showed 84 of a copy's 88 slices five seconds after a turn).
+  // A stack's root is displayed in the frame its first slices are, never before: Safari does not draw a stack whose
+  // camera was first displayed with no slice under it, however many join afterwards. M42's stack along x, shown empty
+  // and then joined 16 slices a frame with the camera still, drew nothing on the iPad (its 628 slices displayed, in
+  // view, their image decoded) until its camera was hidden and shown again; displayed together with its first 16
+  // slices and joined at the same pace, it drew (2026-10-06). A reader who turned a nebula a quarter of the way round
+  // lost it: in a recorded visit to M42 it was gone from the third turn to the end, 7 s, and the Crab for 11 s.
   let joinFrames = 0;
   const join = createSettlePacer(() => {
     if (destroyed) return 0;
     const allowed = Math.min(SETTLE_PACING.maximumUnits, SETTLE_PACING.startUnits * 2 ** joinFrames);
     let written = 0;
-    for (const copies of opticalCopies) for (let copy = 0; copy < 3; copy++) {
+    for (const [index, copies] of opticalCopies.entries()) for (let copy = 0; copy < 3; copy++) {
       if (!copies.wanted[copy]) continue;
       const nodes = copies.nodes[copy]!;
       while (copies.shown[copy]! < nodes.length) {
         if (written >= allowed) { joinFrames++; return written; }
         nodes[copies.shown[copy]!++]!.style.display = ''; written += JOIN_UNITS;
+        if (!rootDisplayed[index]) displayRoot(index);
       }
     }
     joinFrames = 0;
     return written;
   }, { holdWhile: 'never' });
+  function displayRoot(index: number) {
+    const root = roots[index]!;
+    root.style.visibility = 'visible'; root.style.display = 'block'; rootDisplayed[index] = true;
+    for (const leaf of boundedLeaves) if (leaf.axis === index && leaf.large && leaf.shown !== false) for (const node of leaf.nodes) revealLayer(node, leaf.large);
+  }
   const publish = ({ world, viewport }: VolumeCameraPublication) => {
     if (destroyed) return;
     if (world.referenceFrame !== payload.frame.referenceFrame || world.epochJdTt !== payload.frame.epochJdTt) {
@@ -228,13 +240,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       const { weight, opticalGain } = strengths[index]!;
       total += weight;
       const visible = weight > 0, opacity = total > 0 ? String(Math.min(STACK_OPACITY_CEILING, weight / total)) : '0';
-      if (rootVisible[index] !== visible) {
-        rootVisible[index] = visible;
-        if (visible && !rootDisplayed[index]) {
-          root.style.visibility = 'visible'; root.style.display = 'block'; rootDisplayed[index] = true;
-          for (const leaf of boundedLeaves) if (leaf.axis === index && leaf.large && leaf.shown !== false) for (const node of leaf.nodes) revealLayer(node, leaf.large);
-        }
-      }
+      // A stack turned to is displayed by the join, with its first slices.
+      if (rootVisible[index] !== visible) rootVisible[index] = visible;
       if (rootOpacity[index] !== opacity) { root.style.opacity = opacity; rootOpacity[index] = opacity; }
       // Opacity belongs to atomic images, never the mesh (which flattens 3D).
       // n full copies plus a fraction f give T=(1-alpha)^n*(1-f*alpha).
