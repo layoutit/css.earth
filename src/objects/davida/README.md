@@ -68,7 +68,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Independent nearest-triangle sampling (8192 area-stratified samples each way)
+Independent nearest-triangle sampling (8192 area-stratified samples each way) Re-prepared 2026-10-06: the error allowance now decides the face count, 748 faces at 2579 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 measured p95 1407.4 m and maximum 2765.2 m between the source and the display
 mesh. Checks found no repeated radial intersection, which supports the
 radial-height dataset.

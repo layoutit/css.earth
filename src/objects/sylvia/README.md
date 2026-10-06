@@ -23,11 +23,11 @@ Shape-only views use the shared neutral gray (#808080 sRGB), a display conventio
 
 ## Processing
 
-The original surface is simplified with meshoptimizer 1.2.0 to 800 triangles. Elevation samples 721 × 361 source directions with a cartographic hillshade. The published ecliptic pole is converted to equatorial J2000. The photograph uses computed cameras and matched relative frame levels, averaged where frames overlap and fading out toward each disc edge. The heliocentric vector's position, velocity and solar GM define the same conic in every prepared view; the [epoch record](../romulus/source/validation/epoch-state.json) binds it.
+The original surface is simplified with meshoptimizer 1.2.0 to 720 triangles. Elevation samples 721 × 361 source directions with a cartographic hillshade. The published ecliptic pole is converted to equatorial J2000. The photograph uses computed cameras and matched relative frame levels, averaged where frames overlap and fading out toward each disc edge. The heliocentric vector's position, velocity and solar GM define the same conic in every prepared view; the [epoch record](../romulus/source/validation/epoch-state.json) binds it.
 
 ## Evidence
 
-Source and output are each one closed component. Nearest-triangle sampling between them measured p95 1342.9 m and maximum 2452.8 m. No repeated radial intersection was found, which supports the radial-height dataset.
+Source and output are each one closed component. Nearest-triangle sampling between them measured p95 1342.9 m and maximum 2452.8 m. No repeated radial intersection was found, which supports the radial-height dataset. Re-prepared 2026-10-06: the error allowance now decides the face count, 720 faces at 2486 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 ### SPHERE photograph
 

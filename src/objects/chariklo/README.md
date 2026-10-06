@@ -40,7 +40,7 @@ Preparation uses the existing annular geometry helper and coplanar raster compil
 
 ### Orbit
 
-This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Horizons command `10199;` supplies osculating ICRF elements. The existing astronomy generator approximates TDB as TT at the scene epoch, a difference below 2 ms. Independent vector comparisons sample the epoch and ±30 days; their finite residuals do not establish accuracy at every date.
+This fixed-date orbit is not a real-time trajectory or surface attitude. JPL Horizons command `10199;` supplies osculating ICRF elements. The existing astronomy generator approximates TDB as TT at the scene epoch, a difference below 2 ms. Independent vector comparisons sample the epoch and ±30 days; their finite residuals do not establish accuracy at every date. Re-prepared 2026-10-06: the error allowance now decides the face count, 326 faces at 3110 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 480-face mesh.
 
 ### Reproduction
 
@@ -48,6 +48,6 @@ The [table tool](../../../packages/telescope-cli/src/source-authoring/README.md)
 pinned radii from [measurements](source/measurements.json). The
 [navigation recipe](source/preparation/navigation.json) records the context image.
 
-The [terrestrial recipe](source/preparation/terrestrial.json) prepares geometry, texture and lighting for retained native PolyCSS raster triangles: 5,040 authored faces simplify to 480 body triangles. Use the [shared preparation commands](../../../.agents/skills/celestial-skill/references/implementation-map.md#commands-and-test-routing) to rebuild the scene.
+The [terrestrial recipe](source/preparation/terrestrial.json) prepares geometry, texture and lighting for retained native PolyCSS raster triangles: 5,040 authored faces simplify to 326 body triangles. Use the [shared preparation commands](../../../.agents/skills/celestial-skill/references/implementation-map.md#commands-and-test-routing) to rebuild the scene.
 
 </details>

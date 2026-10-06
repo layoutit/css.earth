@@ -49,7 +49,7 @@ The shared closest-source-point transfer withholds correspondence beyond 26 m. T
 
 **Preparation and independent checks**
 
-Existing meshoptimizer 1.2.0 source-connectivity simplification retains 800 native PolyCSS u raster faces in 128 px cells. It preserves a single closed component and Euler characteristic 2. The authored error threshold is 26 m; the simplifier estimate is 25.000891 m. This estimate is not a geometric bound.
+Existing meshoptimizer 1.2.0 source-connectivity simplification retains 706 native PolyCSS u raster faces. It preserves a single closed component and Euler characteristic 2. The authored error threshold is 26 m; the simplifier estimate is 25.913309 m. This estimate is not a geometric bound.
 
 JPL Horizons heliocentric geometric elements at JD 2461286.5 and independent ICRF vectors at that epoch and ±30 days are pinned in reference/. Shared astronomy integration owns the conic approximation and vector regression bounds.
 

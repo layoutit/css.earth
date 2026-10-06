@@ -16,7 +16,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Processing
 
-The archived 5° grid uses planetocentric latitude, west-positive longitude, and radii in kilometres. Shared preparation simplifies its 5,040 source triangles to 700 PolyCSS raster triangles, with a 1.2 km error allowance. Hillshade is derived from the same radius grid.
+The archived 5° grid uses planetocentric latitude, west-positive longitude, and radii in kilometres. Shared preparation simplifies its 5,040 source triangles to 268 PolyCSS raster triangles, with a 1.2 km error allowance. Hillshade is derived from the same radius grid.
 
 `source/geometry/registration.json` records the OPUS observer and Sun geometry for each frame. Earlier original labels have stale Sun longitude/range values inconsistent with their phase angles, so these quantities come from the recalculated OPUS geometry. Only a two-dimensional camera-centre translation is fitted to the observed illuminated outline ([SSI archive specification](https://pds.nasa.gov/data/go-j_jsa-ssi-2-redr-v1.0/go_0018/document/cdvolsis.pdf)).
 

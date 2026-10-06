@@ -58,7 +58,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Meshoptimizer estimates 1734.1 m error against an authored 1800 m threshold. Independent nearest-triangle sampling measured p95 612.5 m and maximum 1499.4 m. No sampled direction met the surface twice, which supports the radial-height elevation view.
+Meshoptimizer estimates 1793.7 m error against an authored 1800 m threshold. Independent nearest-triangle sampling measured p95 612.5 m and maximum 1499.4 m. No sampled direction met the surface twice, which supports the radial-height elevation view. Re-prepared 2026-10-06: the error allowance now decides the face count, 722 faces at 1794 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 ## Known problems
 

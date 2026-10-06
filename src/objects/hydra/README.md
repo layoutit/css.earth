@@ -14,7 +14,7 @@ Source selections and alternative products are recorded in the [investigation le
 
 ## Processing
 
-The mesh is simplified to 800 triangles. The camera keeps the PDS FITS WCS/TAN-SIP model, the PCK pose at target emission time (with light time 0.764856 s), the source range and the original STL axes. The only fitted values were two detector translations, [−12.875, −1.5] pixels. A global 1st–99.8th-percentile stretch makes the recorded DN/sec legible without photometric normalization. Only contributions within 1.5 source footprints are accepted, and incidence and emission are each limited to 70°. Gray marks unobserved or rejected coverage, not dark terrain.
+The mesh is simplified to 282 triangles. The camera keeps the PDS FITS WCS/TAN-SIP model, the PCK pose at target emission time (with light time 0.764856 s), the source range and the original STL axes. The only fitted values were two detector translations, [−12.875, −1.5] pixels. A global 1st–99.8th-percentile stretch makes the recorded DN/sec legible without photometric normalization. Only contributions within 1.5 source footprints are accepted, and incidence and emission are each limited to 70°. Gray marks unobserved or rejected coverage, not dark terrain.
 
 ## Evidence
 

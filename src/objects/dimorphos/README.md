@@ -22,7 +22,7 @@ photographic and scientific datasets retain the missing-data grid.
 ## Processing
 
 The 0.972 m OBJ release has 98,306 vertices and 196,608 triangular plates. It is
-simplified with Meshoptimizer 1.2.0 to 800 faces within a 2 m error limit. On
+simplified with Meshoptimizer 1.2.0 to 578 faces within a 2 m error limit. On
 8,192 equal-area directions, source-to-prepared radial differences average
 0.500 m, p95 1.090 m, maximum 2.788 m. No boulders or unobserved terrain are
 synthesized.
@@ -54,7 +54,7 @@ mosaic, shape and scientific fields, and the deferred local models and imagery.
 
 - **DRACO camera:** a pinhole camera fitted to 716 archived pixel-to-surface pairs projects the other 127,575 on-body pixels with an RMS of 0.00003 px. Its range, 70.39 km, agrees with the header's 70.41 km.
 - **Model transfer:** for 2,419 sampled on-body pixels the closest OBJ point is 0.057 m away on average and 0.41 m at most, within the 2 m bound.
-- **Mosaic coverage:** the mosaic covers 18.08% of the 800-face mesh area. The closer frames mainly improve detail; they do not reveal the far side. The last complete image's native footprint is about 0.056 m per pixel, against 0.348 m in the 11 s frame.
+- **Mosaic coverage:** the mosaic covers 18.08% of the 578-face mesh area. The closer frames mainly improve detail; they do not reveal the far side. The last complete image's native footprint is about 0.056 m per pixel, against 0.348 m in the 11 s frame.
 - **Kernel cross-check:** the same frame with a camera derived from the pinned kernels lands the archived intercepts 0.509 px RMS from their pixels, a constant offset of (−0.41, +0.30) px. The kernel Sun direction agrees with JPL Horizons to 10⁻⁶°.
 - **Oracles:** SpiceyPy 8.2.0 over the same kernels agrees on states to a millimetre and places archived intercepts within 0.03 px of the kernel camera. NASA's pds4_tools 1.4 reads every cube plane and matches the decoder exactly for I/F and intercepts.
 - **Slope registration:** all rows match uniquely within 0.001 m. That residual measures source registration, not scientific accuracy.
@@ -75,7 +75,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 ## Known problems
 
 - **Archived illumination angles:** the cube's phase and incidence planes carry a constant 0.87° offset from the kernel geometry. The DRACO dataset normalizes brightness with the archived angles as published; at the frame's typical 60° incidence the offset moves the Lommel-Seeliger gain by about 1%, more near the terminator. The cause is not identified in the archive documentation.
-- **DRACO mosaic:** four closely spaced approach views. The far side and the terminator region beyond 80° incidence keep the grid, high-emission views stretch surface detail, and boulder shadows remain dark. Display brightness is not albedo. The 800-face display mesh cannot reproduce every photographed boulder.
+- **DRACO mosaic:** four closely spaced approach views. The far side and the terminator region beyond 80° incidence keep the grid, high-emission views stretch surface detail, and boulder shadows remain dark. Display brightness is not albedo. The 578-face display mesh cannot reproduce every photographed boulder.
 - Model precision varies with DRACO/LICIACube coverage and SPC constraints. A closed model does not mean every facet was photographed with the same precision.
 - **Relative albedo:** this is the SPC model's relative brightness field, not a photograph, absolute albedo, or a measurement of the post-impact surface. The accepted triangles cover 31.2138% of the mesh area; unqualified facets use the common neutral gray.
 - **Named features:** outlines are not published nomenclature boundaries.

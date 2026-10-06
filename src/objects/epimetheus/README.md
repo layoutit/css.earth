@@ -20,7 +20,7 @@ Every examined source, with its decision and what would reopen it, is in the [in
 
 ## Processing
 
-The shape's plate topology is simplified to 720 PolyCSS raster triangles before texture baking. The source frame is in kilometres, +X approximately Saturn-facing, +Z north.
+The shape's plate topology is simplified to 440 PolyCSS raster triangles before texture baking. The source frame is in kilometres, +X approximately Saturn-facing, +Z north.
 
 The shared source-shape camera preparer maps each calibrated photograph using the measured perspective, source shape and image geometry. The NAC pixel scale, 12 µm / 2003.44 mm, comes from the [Cassini instrument kernel](https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti). No camera alignment is fitted by eye. The [recipe](source/preparation/terrestrial.json) keeps each camera solution. Camera rays and occlusion are evaluated on the original shape.
 

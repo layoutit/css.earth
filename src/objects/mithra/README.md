@@ -12,7 +12,7 @@ Shape uses the shared missing-imagery grid. Elevation shows original model radiu
 
 ## Evidence
 
-Independent 8,192 area-stratified samples in each direction measured nearest-triangle distances: source-to-display p95 11.469335 m and maximum 25.485827 m; display-to-source p95 11.392943 m and maximum 25.525712 m. These are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties.
+Independent 8,192 area-stratified samples in each direction measured nearest-triangle distances: source-to-display p95 11.469335 m and maximum 25.485827 m; display-to-source p95 11.392943 m and maximum 25.525712 m. These are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties. Re-prepared 2026-10-06: the error allowance now decides the face count, 748 faces at 20.99 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 The recorded source-scalar and decoded-atlas checks are detailed below; their sampled results do not establish browser pixel parity.
 

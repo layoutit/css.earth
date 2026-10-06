@@ -9,39 +9,33 @@
     },
     {
       "location": "public",
-      "filename": "comet-109p-billboard.webp",
-      "bytes": 5108,
-      "sha256": "44e17f13fc39920fda2d834314ec2d7fa4bdba5e986d47838194c109703496b4"
-    },
-    {
-      "location": "public",
       "filename": "comet-109p-model-shadow-alpha@2x.webp",
-      "bytes": 101614,
-      "sha256": "ebaa2b5768586fa140836c7802ca1d4f51770bfc525e308cd70dd2f4cb6b0f2d"
+      "bytes": 120522,
+      "sha256": "998a4de9e718cd82aed35018ea434f658f85700ad0c1c5d70a4a99ea8ee6d387"
     },
     {
       "location": "public",
       "filename": "comet-109p-model-shadow@2x.webp",
-      "bytes": 26086,
-      "sha256": "599223f891a687cbfcb365b1d903ef8bfff0b5aee14dcf4ea1743b83c3f4cf04"
+      "bytes": 30264,
+      "sha256": "4e7d910b637941b47597eb216f4bafa0d9ad5914470878a1e0a0178452ded2c2"
     },
     {
       "location": "public",
       "filename": "comet-109p-model-surface-alpha@2x.webp",
-      "bytes": 97194,
-      "sha256": "43f3863b8126f0cc8f115f88af578d3635070b00bc996cb59c22dddeea5e9f34"
+      "bytes": 107894,
+      "sha256": "0ce535cac5f46bfc5f5d9e337bd9e25f6a45bf503a06238541e53a6b976c1992"
     },
     {
       "location": "public",
       "filename": "comet-109p-model-surface@2x.webp",
-      "bytes": 22192,
-      "sha256": "3e330ff1d22eb10a71dc230df0ef177b8cb2cd125086011d0676e6b2cbe7bd4f"
+      "bytes": 15722,
+      "sha256": "6461d1e9de3e4b9bc227069f75f7bb427b3d927ba1bde03bc5179820945d42fb"
     },
     {
       "location": "public",
       "filename": "comet-109p-model-thumbnail.webp",
-      "bytes": 976,
-      "sha256": "0c4618a908e87372cd608c817086a77e4ddf6bd8301816fded2558fe2591e4d0"
+      "bytes": 984,
+      "sha256": "d8d7676dca7c54f44f7d4157d49eb1659fca61461f1cb5c0b9f3995d6f874f6b"
     },
     {
       "location": "prepared",
@@ -71,13 +65,13 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 879,
-      "sha256": "564f74b62147f01bb1ab785f1c5ba8ac90f92e7ab2764237f6db7436882703b4"
+      "sha256": "defef8690f86aa1d9799fea3a55dac0f8ad62ba3b2d4bb0f50d33027b8d59f87"
     },
     {
       "location": "prepared",
       "filename": "material.json",
       "bytes": 923,
-      "sha256": "6b731791f1af21324ffaf39828d9a49e46055f8e71d5e3c93a028832c9773ff7"
+      "sha256": "572d2ad24c9261880cb932c7043b2b9a4aed6e45ebcd7291545c349e270fc811"
     },
     {
       "location": "prepared",
@@ -88,14 +82,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 500122,
-      "sha256": "b6f37a10941608c8d8ab62ea0626fc7b442da9548665c403b7cf93c312b5424f"
+      "bytes": 133258,
+      "sha256": "f0efabd90af71592ee7a8a7c6d76abe845f2e0970c24c8389db4485cdf0d81db"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 584031,
-      "sha256": "442e4c6a04f0802b10513ca0ad97c6547714ded6a78f69ed61a29dba838c12ce"
+      "bytes": 150441,
+      "sha256": "cbd713e469208332154a33b41caaf0a7bd6ca74bd57b0a888ae84e442015ec04"
     },
     {
       "location": "prepared",
@@ -106,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "source-lighting.json",
-      "bytes": 422,
-      "sha256": "9644b7f5c46e245f4fdfdb0d5538eb66297dc8a03200b7103439c56e4510ad9b"
+      "bytes": 429,
+      "sha256": "49d3b9a9944344300379fed1668ce4ccfce1797659e250cbfd71fbb2912fcdec"
     },
     {
       "location": "prepared",
@@ -119,7 +113,7 @@
       "location": "prepared",
       "filename": "surfaces.json",
       "bytes": 931,
-      "sha256": "c3d255bd0d74a440fbff4c01d0f8625917d9446b2ed4cda958240816bc4e153e"
+      "sha256": "17669c0a4df7a6dae88a2b2b2182f1593c3a11caa13e9ef47728013ae9696ea6"
     },
     {
       "location": "prepared",

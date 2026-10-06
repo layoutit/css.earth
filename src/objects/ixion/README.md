@@ -21,7 +21,7 @@ The normal grid marks unmapped terrain. Shadows defaults off. The radius used fo
 
 ![Ixion with the unmapped grid and Shadows off](evidence/default.webp)
 
-The shared browser record checks this body at DPR 1 and 2: one scene, 480 native raster triangles, retained leaves during drag, Shadows and Orbit off by default, and working opt-in controls. The captures use the development server; run context and byte pins identify the served data and omitted production/reproduction checks. Inspect DPR 2 and Shadows on after rotation.
+The shared browser record checks this body at DPR 1 and 2: one scene, 480 native raster triangles, retained leaves during drag, Shadows and Orbit off by default, and working opt-in controls. The captures use the development server; run context and byte pins identify the served data and omitted production/reproduction checks. Inspect DPR 2 and Shadows on after rotation. Re-prepared 2026-10-06: the error allowance now decides the face count, 322 faces at 8633 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 480-face mesh.
 
 Source and runtime closures passed, including a fresh installation of all 186 scene files across the six added bodies. The closed, connected mesh has Euler characteristic 2. Its maximum sampled radial deviation is 2.77% of the adopted model radius; finite samples are neither a Hausdorff bound nor measurement uncertainty. See the shared checks and limits.
 

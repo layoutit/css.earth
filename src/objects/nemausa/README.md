@@ -22,7 +22,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB), a display conventio
 
 ## Processing
 
-The original surface is simplified with meshoptimizer 1.2.0 to 800 triangles. Elevation samples the original mesh radius minus a 75 km reference sphere, with a -20 to 20 km legend and a cartographic hillshade. The published ecliptic pole is converted to equatorial J2000. The photograph uses matched relative frame levels, averaged where frames overlap and fading out toward each disc edge.
+The original surface is simplified with meshoptimizer 1.2.0 to 796 triangles. Elevation samples the original mesh radius minus a 75 km reference sphere, with a -20 to 20 km legend and a cartographic hillshade. The published ecliptic pole is converted to equatorial J2000. The photograph uses matched relative frame levels, averaged where frames overlap and fading out toward each disc edge.
 
 ## Evidence
 
@@ -59,7 +59,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Source and output are each one closed component. Nearest-triangle sampling between them measured p95 701.3 m and maximum 1472.2 m. No repeated radial intersection was found, which supports the radial-height dataset.
+Source and output are each one closed component. Nearest-triangle sampling between them measured p95 701.3 m and maximum 1472.2 m. No repeated radial intersection was found, which supports the radial-height dataset. Re-prepared 2026-10-06: the error allowance now decides the face count, 796 faces at 1196 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 ## Known problems
 

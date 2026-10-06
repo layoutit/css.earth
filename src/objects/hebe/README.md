@@ -59,7 +59,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1845.8 m error against a 1900 m threshold; this is not a Hausdorff bound. Nearest-triangle sampling (8192 samples each way) measured p95 946.4 m and maximum 3115.8 m. No repeated radial intersection was found, which supports the radial-height dataset.
+Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1896.6 m error against a 1900 m threshold; this is not a Hausdorff bound. Nearest-triangle sampling (8192 samples each way) measured p95 946.4 m and maximum 3115.8 m. No repeated radial intersection was found, which supports the radial-height dataset. Re-prepared 2026-10-06: the error allowance now decides the face count, 688 faces at 1897 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 ## Known problems
 

@@ -45,7 +45,7 @@ The candidate dispositions and their source evidence are recorded in the [invest
 
 Only compact numeric measurements, our summary, PCK rotation data and archival image metadata are versioned. Copyrighted paper PDFs stay in ignored research; preparation does not depend on fetching papers.
 
-Flood and Shadows use the same mesh and shared lighting. Preparation targets 480 native `u` leaves and introduces no body-specific controller or preparer.
+Flood and Shadows use the same mesh and shared lighting. Preparation keeps the fewest its error allowance permits, 386 native `u` leaves and introduces no body-specific controller or preparer.
 
 The analytic radius table, no-data sentinel and context portrait are versioned inputs; the font has a pinned download recipe.
 

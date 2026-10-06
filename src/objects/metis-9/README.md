@@ -30,7 +30,7 @@ The published ecliptic pole is converted to equatorial J2000. Horizons elements 
 
 ## Evidence
 
-Source and output are each one closed component with Euler characteristic 2. Independent nearest-triangle sampling (8192 samples each way) measured p95 880.4 m and maximum 1824.4 m. No repeated radial intersection was found, which supports the radial-height dataset.
+Source and output are each one closed component with Euler characteristic 2. Independent nearest-triangle sampling (8192 samples each way) measured p95 880.4 m and maximum 1824.4 m. No repeated radial intersection was found, which supports the radial-height dataset. Re-prepared 2026-10-06: the error allowance now decides the face count, 670 faces at 1651 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 ### SPHERE photograph
 

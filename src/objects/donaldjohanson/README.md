@@ -15,7 +15,7 @@ The [Lucy mission data survey](https://pds-smallbodies.astro.umd.edu/data_sb/mis
 
 ## Processing
 
-The DSK holds 274000 vertices and 547996 triangular plates. CSPICE exports them without resampling (`packages/bake/src/objects/acquisition/export-dsk.py`, `spiceypy==7.0.0`), and meshoptimizer reduces them to one closed 800-face component with a 56 m tolerance. The model spans 8.821632 by 4.411234 by 3.096368 km, consistent with the paper's approximate 8.8 by 4.4 by 3.1 km.
+The DSK holds 274000 vertices and 547996 triangular plates. CSPICE exports them without resampling (`packages/bake/src/objects/acquisition/export-dsk.py`, `spiceypy==7.0.0`), and meshoptimizer reduces them to one closed 734-face component with a 56 m tolerance. The model spans 8.821632 by 4.411234 by 3.096368 km, consistent with the paper's approximate 8.8 by 4.4 by 3.1 km.
 
 Elevation samples the closest source point on the full mesh. Display points farther than 56 m from the source stay a grid. At source facet 487421 the correct height is **942.724 m**; taking the first ray intersection would understate it by **400.124 m**. The [regression fixtures](../../../packages/bake/src/objects/geometry/fixtures/source-surface-cases.json) keep those coordinates.
 
@@ -31,7 +31,7 @@ Reproduce the approach camera with `node packages/bake/cli/prepare-llorri-overla
 
 - The close-up camera's maximum coordinate residual is 1.31 px, below the 3 px limit (roughly 19 m at this range).
 - The approach camera's withheld controls give **0.5165 px** RMS and **1.6163 px** maximum, against 1 px and 3 px limits.
-- Accepted coverage on the 800-face display mesh rises from **25.42% to 31.06%** with the approach image. This estimates support on the display mesh, not the observed area of the asteroid.
+- Accepted coverage on the 734-face display mesh rises from **25.42% to 31.06%** with the approach image. This estimates support on the display mesh, not the observed area of the asteroid.
 - The 56 m transfer limit withholds 0.239% of triangle-interior texels.
 - The full-body candidate `lor_0798443161_04591_00001_1x1_sci_03.fit` was withheld at 1.2434 px RMS, above the 1 px limit.
 - The L’LORRI reader is checked against astropy by [`llorri-geo.oracle.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/missions/llorri-geo.oracle.test.mts), using [`llorri.py`](../../../packages/bake/src/objects/layers/terrestrial/missions/llorri.py).

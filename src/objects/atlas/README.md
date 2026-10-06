@@ -16,7 +16,7 @@ Facts are sourced from [NASA's Atlas overview](https://science.nasa.gov/saturn/m
 
 In false color the northern face and ridge retain broad color coverage, with small fringes along some relief edges.
 
-Geometry is simplified from the source connectivity with the shared meshoptimizer preparer before texture baking. The prepared mesh has 800 native PolyCSS triangle leaves with a 200 m simplifier error setting. That setting is an algorithmic allowance, not a bound on source scientific uncertainty. No ellipsoid is substituted for the equatorial ridge. A 2,592-direction radial sample (5° grid offset from poles and seam) compared the prepared mesh with the source: mean error 61 m, 95th percentile 157 m, maximum sampled error 392 m. These samples are not an exhaustive maximum error bound.
+Geometry is simplified from the source connectivity with the shared meshoptimizer preparer before texture baking. The prepared mesh has 498 native PolyCSS triangle leaves with a 200 m simplifier error setting. That setting is an algorithmic allowance, not a bound on source scientific uncertainty. No ellipsoid is substituted for the equatorial ridge. A 2,592-direction radial sample (5° grid offset from poles and seam) compared the prepared mesh with the source: mean error 61 m, 95th percentile 157 m, maximum sampled error 392 m. These samples are not an exhaustive maximum error bound.
 
 ### Registration
 

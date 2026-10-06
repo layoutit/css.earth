@@ -12,7 +12,7 @@ Shape uses the shared missing-imagery grid. Elevation shows source radius minus 
 
 ## Evidence
 
-Independent 8,192 area-stratified surface samples in each direction give source-to-display p95 3.540989 m / max 9.020970 m, and display-to-source p95 3.548837 m / max 8.252325 m. These are sampled distances, not exhaustive bounds or observational errors. All source face centroids and 8,192 sphere directions showed no repeated radial crossing. Front, back and both-pole source/reduced snapshots preserve the gross form; they are preparation comparisons normalized to each mesh’s maximum radius, not browser pixel-parity evidence.
+Independent 8,192 area-stratified surface samples in each direction give source-to-display p95 3.540989 m / max 9.020970 m, and display-to-source p95 3.548837 m / max 8.252325 m. These are sampled distances, not exhaustive bounds or observational errors. All source face centroids and 8,192 sphere directions showed no repeated radial crossing. Front, back and both-pole source/reduced snapshots preserve the gross form; they are preparation comparisons normalized to each mesh’s maximum radius, not browser pixel-parity evidence. Re-prepared 2026-10-06: the error allowance now decides the face count, 420 faces at 9.986 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 Source-scalar and decoded-atlas measurements are retained below. They are sampled preparation checks, not browser pixel-parity evidence.
 
@@ -44,7 +44,7 @@ The original mesh has 2048 vertices and 4092 triangles, closed volume 0.07794652
 
 **Geometry, scalar transfer and delivery**
 
-The existing meshoptimizer 1.2.0 source-connectivity path uses ErrorAbsolute and RegularizeLight to reduce 4092 faces to 800, with a 10 m authored stopping allowance. The library’s estimated error is 6.660273 m, not a geometric bound. Independent sampled nearest-surface distances justified a 10 m closest-source-point scalar-transfer allowance; changing the stopping allowance from the exploratory 7 m to 10 m retained the same 800 faces.
+The existing meshoptimizer 1.2.0 source-connectivity path uses ErrorAbsolute and RegularizeLight to reduce 4092 faces to 420, with a 10 m authored stopping allowance. The library’s estimated error is 9.986031 m, not a geometric bound. Independent sampled nearest-surface distances justified a 10 m closest-source-point scalar-transfer allowance; changing the stopping allowance from the exploratory 7 m to 10 m retained the 800 faces of the face target then in use.
 
 Both input and output are one closed outward-wound component, Euler characteristic 2; no opposite faces are removed. Native PolyCSS u raster cells are 128 px; the triangle atlas is 2048 × 6400 px. All geometry, normals, imagery, lighting and targeting state are prepared before runtime.
 

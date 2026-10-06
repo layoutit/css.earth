@@ -68,7 +68,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Meshoptimizer estimates 2439.6 m error; this is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1403.5 m and maximum 2576.3 m. Face-centroid checks and 8192 sphere directions found no repeated radial intersection, which supports the radial-height dataset. Reduction softens small features.
+Meshoptimizer estimates 2495.3 m error; this is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1403.5 m and maximum 2576.3 m. Face-centroid checks and 8192 sphere directions found no repeated radial intersection, which supports the radial-height dataset. Reduction softens small features. Re-prepared 2026-10-06: the error allowance now decides the face count, 692 faces at 2495 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 ## Known problems
 

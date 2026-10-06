@@ -71,6 +71,6 @@ A bounded Lunar-Lambert display normalization reduces photographed disk shading.
 
 Cassini frame `N1860792100_1` is not used: its published camera places 99.9% of the lit source shape on the photograph's sky while the photographed body lies elsewhere in the frame, so preparation refuses it. No camera correction is invented.
 
-The released plate connectivity is simplified with meshoptimizer to 640 native PolyCSS triangle leaves with 128px raster cells. The simplified surface is closed with Euler characteristic two. The model's documented Archinal et al. (2011) pole and linear prime-meridian rotation are used at the shared fixed display epoch.
+The released plate connectivity is simplified with meshoptimizer to 344 native PolyCSS triangle leaves. The simplified surface is closed with Euler characteristic two. The model's documented Archinal et al. (2011) pole and linear prime-meridian rotation are used at the shared fixed display epoch.
 
 </details>

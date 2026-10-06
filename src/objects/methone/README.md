@@ -47,7 +47,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 <a id="methone-sources-and-interpretation"></a>
 
-Current [NAIF PCK00011](https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc) uses the same BODY632_RADII. The analytic radius table preserves these axes; the reference radius sets world scale without renormalizing the shape. The 5-degree source table is reduced to 480 native `u` leaves. No local relief is inferred from image brightness.
+Current [NAIF PCK00011](https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc) uses the same BODY632_RADII. The analytic radius table preserves these axes; the reference radius sets world scale without renormalizing the shape. The 5-degree source table is reduced to 320 native `u` leaves. No local relief is inferred from image brightness.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json), including what would reopen each decision.
 

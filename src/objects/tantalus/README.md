@@ -22,7 +22,7 @@ Recorded four-body results retain their original build identities.
 ## Known problems
 
 - The alternative retrograde pole remains unresolved.
-- Sampled geometry distance reaches 16.79 m; the 14.5 m transfer cutoff withholds 0.0321% of interior Elevation texels.
+- Sampled geometry distance reaches 16.79 m; the 14.5 m transfer cutoff withholds 0.0321% of interior Elevation texels. Re-prepared 2026-10-06: the error allowance now decides the face count, 790 faces at 14.48 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 - No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology. Rotation phase is arbitrary.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Credits](NOTICE.md)

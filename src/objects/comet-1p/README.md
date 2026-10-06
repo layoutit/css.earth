@@ -31,7 +31,7 @@ The [investigation ledger](investigations.json) records source choices, failed t
 ## Processing
 
 Preparation converts the rows to XYZ, welds poles and seams into 2,522 vertices and 5,040 triangles, and reduces them
-to 1,000 triangles with Meshoptimizer 1.2.0 (estimated error 59.14 m). The equivalent-volume radius,
+to 1,000 triangles with Meshoptimizer 1.2.0 (estimated error 99.48 m). The equivalent-volume radius,
 4.57906433330178 km, sets display scale only. Extents are about 7.53 × 7.58 × 15.14 km. No mass is claimed.
 
 The long axis is placed along ICRF +Z and held fixed. This is a presentation choice, not Halley's spin.

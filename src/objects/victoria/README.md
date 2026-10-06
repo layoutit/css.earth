@@ -21,7 +21,7 @@ Victoria is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publ
 
 The asteroid validation report records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
-Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1040.3 m error; the authored stopping threshold is 1100 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 483.3 m and maximum 1037.9 m.
+Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1098.3 m error; the authored stopping threshold is 1100 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 483.3 m and maximum 1037.9 m. Re-prepared 2026-10-06: the error allowance now decides the face count, 710 faces at 1098 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
 

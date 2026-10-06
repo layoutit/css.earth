@@ -17,7 +17,7 @@ The imagery uses detector pixels, not enlarged press crops. The closest image is
 
 Some archived labels have inconsistent Sun geometry, and OPUS centre and pole angles disagree with the raw raster. Camera roll therefore uses the PDS label NORTH_AZIMUTH+90°, following the [documented clockwise-from-image-right convention](https://pds.nasa.gov/datastandards/documents/dd/all/current/ch33s02.html). Only centre translation is fitted to illuminated shape boundaries.
 
-Meshoptimizer simplifies the 5040-triangle source to 800 native raster triangles with a 1500 m error setting. Elevation is radial distance minus 83.5 km, displayed from −35 to +50 km. Named features are cast onto the shape model; rim circles and extent boxes are not published boundaries.
+Meshoptimizer simplifies the 5040-triangle source to 672 native raster triangles with a 1500 m error setting. Elevation is radial distance minus 83.5 km, displayed from −35 to +50 km. Named features are cast onto the shape model; rim circles and extent boxes are not published boundaries.
 
 ## Evidence
 

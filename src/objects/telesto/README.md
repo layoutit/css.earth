@@ -26,7 +26,7 @@ Incidence and emission are limited to 70°: samples beyond that put dark spikes
 along frame seams and stepped bands at the south. Monochrome is displayed
 linearly over 0–1.2 I/F. False color colors a point only where all three bands
 qualify, uses one range for all channels, then applies one sRGB display transfer.
-The shape is simplified to 600 native PolyCSS leaves (maximum estimated
+The shape is simplified to 260 native PolyCSS leaves (maximum estimated
 simplifier error 350 m).
 
 ## Evidence

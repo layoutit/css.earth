@@ -17,7 +17,7 @@ The shared controlled-shape camera preparer uses the release's perspective, sub-
 
 Preparation applies bounded lunar-Lambert illumination correction (maximum gain 2.5), visibility and cast-shadow rejection, and overlap level matching where both frames see the surface within 70° of incidence and emission. Monochrome is displayed linearly over 0–1.26 I/F, the 99.5th percentile. Color keeps the finest set whose three bands all qualify, on one common 0–1.05 range with the sRGB transfer applied once and no per-channel stretch or white balance.
 
-The shape is simplified to 800 PolyCSS leaves (maximum estimated simplifier error 300 m). Textures use 2,048 × 1,024 intermediate maps in WebP quality 94. Elevation uses the shared shaded-relief palette, which shows model slopes. The initial view looks toward 177.68°E, -3.98°N.
+The shape is simplified to 518 PolyCSS leaves (maximum estimated simplifier error 300 m). Textures use 2,048 × 1,024 intermediate maps in WebP quality 94. Elevation uses the shared shaded-relief palette, which shows model slopes. The initial view looks toward 177.68°E, -3.98°N.
 
 ## Evidence
 

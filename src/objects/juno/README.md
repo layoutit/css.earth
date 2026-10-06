@@ -26,7 +26,7 @@ The mesh keeps +Z north and east-positive longitude. The ecliptic pole is conver
 
 ## Evidence
 
-Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 2298.1 m error against a 2400 m threshold; this is not a Hausdorff bound. Nearest-triangle sampling (8192 samples each way) measured p95 1208.7 m and maximum 3217.3 m. No repeated radial intersection was found, which supports the radial-height dataset.
+Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 2385.0 m error against a 2400 m threshold; this is not a Hausdorff bound. Nearest-triangle sampling (8192 samples each way) measured p95 1208.7 m and maximum 3217.3 m. No repeated radial intersection was found, which supports the radial-height dataset. Re-prepared 2026-10-06: the error allowance now decides the face count, 736 faces at 2385 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 ### SPHERE photograph
 

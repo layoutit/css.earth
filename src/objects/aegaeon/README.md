@@ -71,7 +71,7 @@ texture or a complete camera solution.
 
 The table attributes the source shapes to Cassini measurements, including Thomas et al. and Thomas & Helfenstein.
 
-Physical scale uses the volume-equivalent radius 0.327106631018859 km. The 5° radius table and formula are checked in. Meshoptimizer prepares 480 native triangle leaves; its 8.177665775471475 m error allowance is a simplifier parameter, not a physical measurement uncertainty.
+Physical scale uses the volume-equivalent radius 0.327106631018859 km. The 5° radius table and formula are checked in. Meshoptimizer prepares 272 native triangle leaves; its 8.177665775471475 m error allowance is a simplifier parameter, not a physical measurement uncertainty.
 
 The UI says Measured shape; this does not imply mapped terrain.
 

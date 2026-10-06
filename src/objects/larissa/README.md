@@ -51,7 +51,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - Close zoom is necessarily soft; no procedural crater detail is added.
 
-- The displayed shape uses 600 triangles with a 1.8 km simplification-error ceiling, below the 2,000-leaf budget.
+- The displayed shape uses 410 triangles with a 1.8 km simplification-error ceiling, below the 2,000-leaf budget.
 
 The candidate dispositions and their source evidence are recorded in the [investigation ledger](investigations.json).
 

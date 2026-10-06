@@ -20,7 +20,7 @@ Credit: DAMIT, Astronomical Institute of Charles University; Vernazza et al. (20
 
 ## Processing
 
-The unmodified source has 902 vertices and 1800 triangles. One uniform scale of 0.99933532370243183 km per source unit gives a volume-equivalent diameter of 141 km. The source pole is ecliptic J2000 (115°, -80°), with sidereal period 10.667 h, converted to equatorial J2000. Meshoptimizer reduces the mesh to 800 closed faces. Elevation is radius above a 70.5 km sphere, a shape-derived scalar, not gravitational height. The photograph uses matched relative frame levels, averaged where frames overlap and fading out toward each disc edge.
+The unmodified source has 902 vertices and 1800 triangles. One uniform scale of 0.99933532370243183 km per source unit gives a volume-equivalent diameter of 141 km. The source pole is ecliptic J2000 (115°, -80°), with sidereal period 10.667 h, converted to equatorial J2000. Meshoptimizer reduces the mesh to 306 closed faces. Elevation is radius above a 70.5 km sphere, a shape-derived scalar, not gravitational height. The photograph uses matched relative frame levels, averaged where frames overlap and fading out toward each disc edge.
 
 ## Evidence
 

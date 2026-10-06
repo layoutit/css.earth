@@ -20,7 +20,7 @@ The saved HTML is evidence only; its viewer scripts are never evaluated or inclu
 
 The asteroid validation report records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
-Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 7.933 m, maximum 17.725 m. These are sampled distances, not exhaustive error bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found.
+Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 7.933 m, maximum 17.725 m. These are sampled distances, not exhaustive error bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found. Re-prepared 2026-10-06: the error allowance now decides the face count, 192 faces at 98.74 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 Source/reduced snapshots cover front, back and both poles, each normalized to its own maximum radius; they are geometry inspection, not browser pixel parity.
 

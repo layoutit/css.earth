@@ -22,7 +22,7 @@ loses. Two labelled names carry a caption note from their English Wikipedia arti
 ## Processing
 
 **Shape.** `243ida.tab` gives 16,471 latitude/longitude/radius records on a 2° grid from Galileo stereogrammetry and
-limb matching. Radii span 3.2963–31.0466 km. Meshoptimizer 1.2.0 simplifies it to 800 triangles, one closed
+limb matching. Radii span 3.2963–31.0466 km. Meshoptimizer 1.2.0 simplifies it to 358 triangles, one closed
 component. Against 3,200 equal-area samples the mean and maximum deviations are 130.984 and 829.461 m.
 
 **Monochrome.** `243idam.fit` is a 2520×1260 simple-cylindrical mosaic: high-pass detailed Galileo frames over a

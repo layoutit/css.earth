@@ -18,7 +18,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - This is a reference orientation, not a recovered local landmark registration.
 
-- Existing meshoptimizer preparation reduces it to **480 native raster triangles**, with an 800 m error allowance and an estimated simplification error of about 474 m. This is a numerical preparation error, not measurement accuracy.
+- Existing meshoptimizer preparation reduces it to **342 native raster triangles**, with an 800 m error allowance and an estimated simplification error of about 800 m. This is a numerical preparation error, not measurement accuracy.
 
 [Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 

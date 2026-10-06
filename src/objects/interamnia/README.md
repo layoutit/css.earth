@@ -70,7 +70,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Meshoptimizer estimates 2866.5 m error against a 2900 m stopping threshold. Independent nearest-triangle sampling
+Meshoptimizer estimates 2898.5 m error against a 2900 m stopping threshold. Independent nearest-triangle sampling Re-prepared 2026-10-06: the error allowance now decides the face count, 722 faces at 2899 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 (8192 samples each way) measured p95 1623.3 m and maximum 3141.6 m. No repeated radial intersection was found, which
 supports the radial-height dataset. Reduction softens small features.
 

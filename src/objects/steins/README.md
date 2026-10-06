@@ -18,7 +18,7 @@ The pinned IAU PCK00011 pole is RA 91°, DEC −62°, W 321.76 + 1428.09917d at 
 
 ## Processing
 
-The shape is simplified with meshoptimizer 1.2.0 to 800 faces, one closed
+The shape is simplified with meshoptimizer 1.2.0 to 260 faces, one closed
 component. A 3,200 equal-area ray comparison against the source gives mean
 11.6846 m and maximum 53.8148 m.
 

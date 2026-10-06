@@ -17,7 +17,7 @@ The pinned Horizons physical block supplies the 49 km reference radius and GM 0.
 
 ## Processing
 
-The shared `vrml-mesh` reader reads the original mesh, and meshoptimizer 1.2.0 simplifies it from 24,526 faces to 800, with an authored 1,200 m allowance. Every displayed face is a PolyCSS raster triangle with a 128 px cell.
+The shared `vrml-mesh` reader reads the original mesh, and meshoptimizer 1.2.0 simplifies it from 24,526 faces to 578, with an authored 1,200 m allowance. Every displayed face is a PolyCSS raster triangle with a 128 px cell.
 
 Each photograph gets a camera from its original kernels. Preparation then registers it to the shape by image/model correlation, fitting a translation on two relief windows and checking two held-out windows against a 12-pixel limit. Photometry carries each pixel to 35° incidence, 0° emission and 35° phase. Incidence and emission are limited to 70°, phase to 25–55°, and gain to 0.4–2.5; pixels outside these limits are withheld. Lowest emission selects the source where photographs overlap.
 

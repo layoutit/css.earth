@@ -12,7 +12,7 @@ Every examined source, with its decision and what would reopen it, is in the [in
 
 The archive gives kilometers, the center of mass as origin, and principal axes. For Toutatis, +Z is the long axis, not a spin pole. The 20,000 vertices and 39,996 facets span 2.281652 × 1.914287 × 4.581037 km, with a volume-equivalent radius of 1.223992275 km.
 
-Meshoptimizer 1.2.0 simplifies the original connectivity to 800 closed, consistently wound triangles, with a 50 m error setting and no radial geometry replacement. Native PolyCSS `u` triangles use 128 px raster cells and the prepared lighting path.
+Meshoptimizer 1.2.0 simplifies the original connectivity to 298 closed, consistently wound triangles, with a 50 m error setting and no radial geometry replacement. Native PolyCSS `u` triangles use 128 px raster cells and the prepared lighting path.
 
 Shape has no photographic texture, albedo claim, invented craters or compositional colors. Shadows starts off; optional directional lighting conveys the geometry.
 
@@ -26,7 +26,7 @@ Two-way area-stratified samples (8,192 per direction) give source-to-display mea
 
 ## Known problems
 
-- The source is based on radar observations in 1992 and 1996, with nominal average model resolution around 34 m. Later radar and Chang’e-2 images show mismatches, particularly at the large lobe; it is not a complete spacecraft reconstruction. The [2013 rotation study](https://echo.jpl.nasa.gov/asteroids/takahashi.etal.toutatis.2013.pdf) discusses the differences. Fine triangle boundaries show at close zoom, and the 800-face silhouette is faceted.
+- The source is based on radar observations in 1992 and 1996, with nominal average model resolution around 34 m. Later radar and Chang’e-2 images show mismatches, particularly at the large lobe; it is not a complete spacecraft reconstruction. The [2013 rotation study](https://echo.jpl.nasa.gov/asteroids/takahashi.etal.toutatis.2013.pdf) discusses the differences. Fine triangle boundaries show at close zoom, and the 298-face silhouette is faceted.
 - Toutatis tumbles, with rotation and precession periods around 5.4 and 7.4 days. The display uses a fixed arbitrary frame, zero spin and illustrative lighting, and claims no present-day attitude. The [2015 rotational analysis](https://arxiv.org/html/1511.04357) gives a flyby attitude; no attitude is propagated from it here.
 - There is no photographic dataset. [Huang et al. (2013)](https://doi.org/10.1038/srep03411) give no per-frame camera registration for this mesh, and its CC BY-NC-ND terms exclude a modified texture. [Jiang et al. (2015)](https://doi.org/10.1038/srep16029) provides photographs under CC BY 4.0, but not a registered raster. A trial projection of their Figure 1c was placed by hand, with no measured camera or control points, so it does not register the photograph.
 

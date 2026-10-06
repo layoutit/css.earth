@@ -61,7 +61,7 @@ The dataset ships on its published comparison, under the rule in the [surface-ob
 
 ### Shape
 
-Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1167.0 m and maximum 2456.1 m between source and display mesh. No repeated radial intersection was found, which supports the radial-height dataset. Reduction softens small features.
+Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1167.0 m and maximum 2456.1 m between source and display mesh. No repeated radial intersection was found, which supports the radial-height dataset. Reduction softens small features. Re-prepared 2026-10-06: the error allowance now decides the face count, 722 faces at 2198 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 ## Known problems
 

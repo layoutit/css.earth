@@ -33,7 +33,7 @@ whose correspondence with the MPCD release has not been established.
 
 ## Processing
 
-The MPCD mesh is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS
+The MPCD mesh is simplified with meshoptimizer 1.2.0 to 672 native PolyCSS
 triangles. Its original coordinates are not rescaled to the survey's diameter.
 Elevation samples the original mesh radius minus a 111.5 km reference sphere,
 with a -40 to 40 km legend.

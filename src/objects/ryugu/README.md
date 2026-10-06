@@ -23,7 +23,7 @@ scientific-data reuse to the ISAS Open Data Policy. See [credits and modificatio
 ## Processing
 
 **Shape.** The source shape is scaled to the independently sourced 0.448 km radius and simplified by meshoptimizer
-1.2.0 to 790 native PolyCSS faces (estimated error 12.922 m), one closed component. Regenerate the source OBJ with
+1.2.0 to 790 native PolyCSS faces (estimated error 15.945 m), one closed component. Regenerate the source OBJ with
 `python packages/bake/src/objects/acquisition/export-dsk.py src/objects/ryugu/source/shape/ryugu_shape_spc_200k_v20200323.bds src/objects/ryugu/source/shape/ryugu_shape_spc_200k_v20200323.obj.gz`
 using spiceypy==7.0.0.
 

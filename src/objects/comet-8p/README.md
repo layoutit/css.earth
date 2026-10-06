@@ -59,7 +59,7 @@ Heliocentric placement uses JPL Horizons `DES=8P;CAP;`, centre `500@10`, ICRF, a
 
 The shared `contact-ellipsoids` loader tessellates the two lobes into 4,096 triangles in metres. It preserves separate surface normals at the contact. The two lobes are not resampled as a single radial globe or joined by an invented neck.
 
-Meshoptimizer 1.2.0 reduces this to 1,000 native PolyCSS triangles with a 50 m error allowance. The source contact position is locked. The estimated error is 31.30 m; this is a simplifier estimate, not a Hausdorff bound or measurement uncertainty. The final topology has 503 vertices, 1,500 edges and Euler characteristic three: two closed lobes sharing one point.
+Meshoptimizer 1.2.0 reduces this to 1,000 native PolyCSS triangles with a 50 m error allowance. The source contact position is locked. The estimated error is 49.38 m; this is a simplifier estimate, not a Hausdorff bound or measurement uncertainty. The final topology has 503 vertices, 1,500 edges and Euler characteristic three: two closed lobes sharing one point.
 
 The Arecibo model follows the same source-mesh route with a 75 m error allowance and its own geometry, lighting banks and thumbnail. Both sets of 1,000 leaves are prepared in one scene; only the selected set is displayed. A dataset change does not generate geometry, mount another object or move the shared camera.
 
