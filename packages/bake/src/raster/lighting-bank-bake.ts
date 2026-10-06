@@ -2,22 +2,19 @@
  * fresh bake; `packages/bake/cli/prepare-lighting-bank.mts` is the command.
  *
  * A body whose raster recipe names a bank copies these files at its own bake instead of encoding them, so this check is what
- * makes the copy honest: the tracked bytes are the bytes the recipe encodes today. Every bank by default. */
+ * makes the copy honest: the tracked bytes are the bytes the bank's law encodes today. Every bank by default. */
 import { mkdir, mkdtemp, readdir, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import type { RasterRecipe } from '@cssearth/objects';
-import { LIGHTING_BANKS, LIGHTING_BANK_ROOT } from './lighting-banks.ts';
+import { LIGHTING_BANKS, LIGHTING_BANK_PRESENTATION_SIZE, LIGHTING_BANK_ROOT } from './lighting-banks.ts';
 import { prepareLighting } from './lighting.ts';
 
-/** Encode bank `id` into `directory`: its rows and billboard. The presentation fields only shape the returned JSON, which a
- * bank has no use for; the bytes come from the bank's own fields. */
+/** Encode bank `id` into `directory`: its sheet and its flood-lit frame, from the bank's law and the sheet's layout. */
 export async function bakeLightingBank(id: string, directory: string) {
   const bank = LIGHTING_BANKS[id];
   if (!bank) throw new TypeError(`Unknown lighting bank ${id}; banks are ${Object.keys(LIGHTING_BANKS).join(', ')}.`);
   await mkdir(directory, { recursive: true });
-  await prepareLighting({ publicBase: `/lighting/${id}/` } as RasterRecipe,
-    { ...bank, presentationSize: bank.frameSize, defaultFrame: 0, bankSchema: `cssearth-lighting-bank-${id}@1`, billboardSchema: `cssearth-lighting-bank-${id}-billboard@1`, metadata: {} }, directory);
+  await prepareLighting({ publicBase: `/lighting/${id}/` }, { ...bank, presentationSize: LIGHTING_BANK_PRESENTATION_SIZE }, directory);
   return (await readdir(directory)).filter(name => name.endsWith('.webp')).sort();
 }
 

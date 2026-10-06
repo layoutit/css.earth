@@ -16,6 +16,7 @@ export * from './prepared-cssom.ts';
 export * from './prepared-activation-groups.ts';
 export * from './types.ts';
 export * from './adapters.ts';
+export * from './lighting-track.ts';
 export * from './row-bank-cutaway.ts';
 export * from './composite.ts';
 export * from './emissive.ts';

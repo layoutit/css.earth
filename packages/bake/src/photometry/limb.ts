@@ -143,11 +143,12 @@ export function silhouetteColorWeight(radius: number, polarToEquatorial: number)
 
 /**
  * One view-aligned lighting frame of a sphere: the overlay for a light direction in view space (view is +z). The
- * geometry is the retained sphere silhouette of the raster lane: pixel centres, the frame's centre at (size - 1)/2, the
- * fitted silhouette at half the frame and the lit disc at size × radiusScale. Emission is floored at half a pixel from
- * the silhouette, where the law's own value is taken.
+ * geometry is the retained sphere silhouette of the raster lane: pixel centres, the frame's centre at (size - 1)/2 and
+ * the lit disc at size × radiusScale. The fitted silhouette is at `silhouette` pixels, half the frame unless the frame
+ * keeps a margin around it. Emission is floored at half a pixel from the silhouette, where the law's own value is taken.
  */
-export function limbSphereFrame(size: number, radiusScale: number, light: readonly number[], law: LimbLaw, reference: Channels<number>, polarToEquatorial: number): Uint8Array {
+export function limbSphereFrame(size: number, radiusScale: number, light: readonly number[], law: LimbLaw, reference: Channels<number>, polarToEquatorial: number,
+  silhouette = size / 2): Uint8Array {
   const pixels = new Uint8Array(size * size * 4), center = (size - 1) / 2, radius = size * radiusScale, view = [0, 0, 1], floor = 0.5 / radius;
   for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
     const nx = (x - center) / radius, ny = (y - center) / radius, radial = nx * nx + ny * ny;
@@ -155,7 +156,7 @@ export function limbSphereFrame(size: number, radiusScale: number, light: readon
     const normal = [nx, ny, Math.sqrt(1 - radial)];
     const { incidence, emission, phase } = scatteringAngles(normal, light, view, floor);
     const [r0, g0, b0, a] = limbOverlay(limbFactors(law, incidence, emission, phase), reference);
-    const keep = silhouetteColorWeight(Math.sqrt(radial) * radiusScale / 0.5, polarToEquatorial), r = r0 * keep, g = g0 * keep, b = b0 * keep;
+    const keep = silhouetteColorWeight(Math.sqrt(radial) * radiusScale / (silhouette / size), polarToEquatorial), r = r0 * keep, g = g0 * keep, b = b0 * keep;
     const offset = (y * size + x) * 4;
     pixels[offset] = Math.round(r); pixels[offset + 1] = Math.round(g); pixels[offset + 2] = Math.round(b); pixels[offset + 3] = Math.round(a * 255);
   }

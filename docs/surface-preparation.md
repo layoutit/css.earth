@@ -721,7 +721,7 @@ These still set their own encoding:
 
 - Earth's full pages keep the qualities its recipe declares; its smaller
   texture levels follow their page, lossy ones through the lane.
-- Lighting rows and their billboards carry shading in alpha and stay lossless.
+- Lighting sheets and flood-lit frames carry shading in alpha and stay lossless.
 - Saturn's layered and spectral materials keep their encodings. Its ultraviolet and methane surface maps and their
   pole atlases joined the lane on 2026-10-05: the maps, 5.92 and 3.77 MB lossless, became 0.23 and 0.14 MB with 0 and 3
   of 12.8 million pixels flagged; the atlases, 0.39 and 0.35 MB, became 0.04 MB each with none flagged and alpha exact.
@@ -754,24 +754,67 @@ use lossless output, as do nearest-sampled layers and image-plane DEMs.
 Check decoded pixels after encoding. Rebuild affected atlases and CSS addresses
 together when their layout changes.
 
-### Shared lighting banks
+### The lighting sheet and its shared banks
 
-The phase-lighting rows and billboard of an opaque sphere lit by the Sun with no
-atmosphere do not depend on the body: 61 bodies carried the same lighting block
-and encoded the same 7 MB one by one. Such a block is now a bank named once in
+A sphere's lighting is one image, the sheet: 128 frames of 256 px, one for each
+phase of the Sun, from behind the body to behind the camera.
+[lighting-sheet.ts](../packages/bake/src/raster/lighting-sheet.ts) owns the
+count, the size and the file names. A frame depends on one number, the angle
+between the Sun and the camera, and the frames are spaced evenly in it; the page
+turns the frame about the view axis for the rest. The flood-lit frame a body
+shows with shadows off is a file of its own and the only lighting a page loads
+until shadows are turned on. Then the sheet loads once and serves every phase
+at every distance, so turning the camera asks for nothing more.
+
+Until 6 October 2026 the bank was 256 frames of 1024 px, spaced evenly in the
+light's view z, in 32 files of 8 frames, with a small copy of every frame for the
+far view. Measured that day:
+
+| | 32-file bank | Sheet |
+| --- | --- | --- |
+| Files a body publishes for lighting | 35 | 2 |
+| Shared sphere bank | 7.36 MB | 0.63 MB (sheet 574 KB, flood-lit frame 56 KB) |
+| Images its pool keeps with shadows on, decoded size by pixel count | 3 of 8192×1024 (100 MB) | 1 of 4224×2112 (36 MB) |
+| Error against the exact frame at 920 px, alpha levels of 255: largest, rms | 24, 1.38 | 9, 0.90 |
+| Titan on css.earth, three drags with shadows on: lighting fetched | 30 requests, 6,759 KB | none after the sheet |
+
+The error row is over the body's disc for 60 phases
+(even steps in z leave the crescent and gibbous ends coarse, which is where the
+old bank's 24 came from). 96 frames gave 12 and 1.17, 64 frames 16 and 1.73;
+below 256 px the disc's edge reaches into the body. The flood-lit frame keeps
+its size and its bytes, so a page with shadows off draws the same pixels as
+before. With shadows on and the Sun within 5° of the camera's axis the old bank
+showed that flood-lit frame; the sheet shows the law's own full-phase frame there,
+as the old bank did from 5° outward.
+
+![Titan and Pluto with shadows on, each drawn from the 32-file bank and from the sheet](images/lighting-sheet/before-after.webp)
+
+Titan and Pluto on css.earth with shadows on, each drawn in one page from the
+32-file bank (left of its pair) and from the sheet (right), 6 October 2026. Over
+the body, 0.002% of Titan's pixels and 0.2% of Pluto's differ by more than 8 of
+255 levels. Uranus had the most of the nine bodies checked: 0.7%. With shadows
+off none of the nine differed in any pixel. These and the sheet's figure in the
+table's last row were read in a headless browser on the deployed app, with each
+body's new prepared data served in place of the published one.
+
+The sheet and the flood-lit frame of an opaque sphere lit by the Sun with no
+atmosphere do not depend on the body. Such a law is a bank named once in
 [lighting-banks.ts](../packages/bake/src/raster/lighting-banks.ts) and baked once
 into `public/lighting/<bank>/` (tracked, like the navigation atlases) by
 `node packages/bake/cli/prepare-lighting-bank.mts`. A body's raster recipe names
-it, `"lighting": { "bank": "sphere", ... }`, keeping only its presentation
-fields and metadata; the parser fills the bank's fields in, and the bake copies
-the bank's files into the body's scene directory instead of encoding them, so
-the body's prepared output, inventory and published files are what encoding
-would give. [`prepare-lighting-bank.mts --check`](../packages/bake/cli/prepare-lighting-bank.mts) bakes each bank afresh
+it, `"lighting": { "bank": "sphere", "presentationSize": 460 }`; the parser fills
+the bank's law in, and the bake copies the bank's two files into the body's scene
+directory instead of encoding them, so the body's prepared output, inventory and
+published files are what encoding would give. Identical files publish under one
+content address: every body on a bank asks a browser for the same two URLs, and a
+restore fetches them once.
+[`prepare-lighting-bank.mts --check`](../packages/bake/cli/prepare-lighting-bank.mts) bakes each bank afresh
 and compares it with the tracked files byte for byte, so the copy is never stale.
-A body whose lighting differs (Neptune, Uranus, the HD 110067 planets) keeps its
-inline block and its own encode. The `sphere` bank's law is authored: a 0.35
-limb floor with shadows off, a 0.05 ambient term and a terminator ramp. A body
-with a published law leaves the bank, as the planets below do.
+The `sphere` bank's law is authored: a 0.35 limb floor with shadows off, a 0.05
+ambient term and a terminator ramp. A body with a published law names its models
+instead, `"lighting": { "presentationSize": 460, "limb": { "models": [...] } }`,
+and encodes its own sheet, as the planets below do. A recipe states nothing else:
+the parser refuses a frame layout or an authored law in a recipe.
 
 ### Planet limbs from published laws
 

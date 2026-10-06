@@ -135,7 +135,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   const tracks = array(plan.materials, "materials"); unique(tracks.map(track => track.id), "material tracks");
   const trackMap = new Map(tracks.map(track => [track.id, track]));
   for (const track of tracks) {
-    record(track, "material", ["id", "target", "frame", "defaultFrame", "banks", "rotation", "frameAttribute", "modeAttribute", "quoted", "farBank"]);
+    record(track, "material", ["id", "target", "frame", "defaultFrame", "banks", "rotation", "frameAttribute", "modeAttribute", "quoted"]);
     string(track.id, "track id"); node(track.target);
     if ([tree.camera, tree.scene].includes(track.target)) fail("material target cannot own camera transforms");
     frameMapping(track.frame);
@@ -143,16 +143,6 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     if (track.defaultFrame >= track.frame.count) fail("default frame is outside prepared addresses");
     array(track.banks, "material banks"); unique(track.banks.map(bank => bank.id), "material banks");
     if (!track.banks.length) fail("material banks are empty");
-    // A far bank (optional) replaces the selected bank while the camera's
-    // published level of detail is past the geometry stage: the same frames
-    // from one small atlas, so the row shards stop streaming.
-    if (track.farBank !== undefined) {
-      string(track.farBank, "far bank");
-      const far = track.banks.find(bank => bank.id === track.farBank);
-      if (!far) fail("undeclared far bank");
-      if (!far.rows?.length) fail("far bank requires prepared rows");
-      if (!far.fixed) fail("far bank requires a fixed address");
-    }
     for (const bank of track.banks) {
       record(bank, "bank", ["id", "frames", "default", "fixed", "rows"]); string(bank.id, "bank id");
       // A fixed-only bank (a dataset's one shadowless frame) carries its fixed address and no frames.

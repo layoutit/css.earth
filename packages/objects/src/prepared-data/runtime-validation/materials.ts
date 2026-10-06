@@ -6,7 +6,7 @@ import type { PreparedTree } from '../presentation/runtime-presentation-types.js
 export function requireMaterials(value: unknown, tree: PreparedTree, resources: ReadonlySet<string>): asserts value is readonly PreparedMaterialTrack[] {
   const tracks = array(value, 'materials'); unique(tracks.map(input => record(input, 'material').id), 'material tracks');
   for (const input of tracks) {
-    const track = record(input, 'material', ['id', 'target', 'frame', 'defaultFrame', 'banks', 'rotation', 'frameAttribute', 'modeAttribute', 'quoted', 'farBank']);
+    const track = record(input, 'material', ['id', 'target', 'frame', 'defaultFrame', 'banks', 'rotation', 'frameAttribute', 'modeAttribute', 'quoted']);
     text(track.id, 'track id'); const target = nodeReference(track.target, tree);
     if ([tree.camera, tree.scene].includes(target)) fail('material target cannot own camera transforms');
     const mapping = record(track.frame, 'frame mapping', ['count', 'thresholds', 'indices']);
@@ -33,10 +33,6 @@ export function requireMaterials(value: unknown, tree: PreparedTree, resources: 
           const item = record(frames[frame], 'frame'); if (item.row !== index || item.resource !== row.resource) fail('row and frame addresses disagree');
         }
       });
-    }
-    if (track.farBank !== undefined) {
-      text(track.farBank, 'far bank'); const far = banks.find(bank => bank.id === track.farBank);
-      if (!far || !array(far.rows, 'far rows').length || !far.fixed) fail('far bank needs rows and fixed address');
     }
     if (track.rotation !== null && track.rotation !== undefined) rotation(track.rotation);
     if (track.frameAttribute !== null && track.frameAttribute !== undefined) attribute(track.frameAttribute);

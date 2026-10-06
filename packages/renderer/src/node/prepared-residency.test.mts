@@ -10,7 +10,7 @@ import type { PreparedImage } from '@cssearth/renderer/platform/prepared-image-s
 import { createPreparedResidency } from '@cssearth/renderer/testing';
 import { requireRecord, requireArray } from '@cssearth/core';
 import {loadObjectTestDefinition} from '@cssearth/objects/node/contract';
-const definitions=Object.fromEntries(await Promise.all(['mercury','mars','jupiter','earth','uranus','saturn'].map(async id=>[id,parsePreparedObjectRuntime(await loadObjectTestDefinition(id))] as const)));
+const definitions=Object.fromEntries(await Promise.all(['mercury','mars','jupiter','earth','saturn'].map(async id=>[id,parsePreparedObjectRuntime(await loadObjectTestDefinition(id))] as const)));
 const assetUrl=(definition: ObjectRuntimeDefinition,key: string | null)=>{assert.ok(key); const asset=definition.assets.entries.find(entry=>entry.key===key);assert.ok(asset,`Actual prepared resource ${key} is missing`);return asset.url;};
 
 const flush = async () => { for (let index = 0; index < 12; index++) await Promise.resolve(); };
@@ -114,7 +114,8 @@ test('decoded byte budget evicts completed pages before admitting an atomic repl
 });
 // Mars's lighting track is the atmospheric single-sheet bank (authored atmosphere, predating the
 // #294/#297 frame refactors): it carries no rows, so it gets its own residency case below instead.
-const rowPlans={mercury:rowPlan(definitions.mercury),jupiter:rowPlan(definitions.jupiter),earthAtmosphere:rowPlan(definitions.earth,'atmosphere')};
+// Mercury's is the sphere lane's one sheet (below): it carries no rows either.
+const rowPlans={jupiter:rowPlan(definitions.jupiter),earthAtmosphere:rowPlan(definitions.earth,'atmosphere')};
 for (const [name, plan] of Object.entries(rowPlans)) test(`${name} prepared row policy preserves its bound and protected published row`, async () => {
   const { maximumRetainedRowCount: capacity, initialWarmRows } = plan.transport;
   const rowUrls = plan.rows.map(row => row.url);
@@ -134,6 +135,28 @@ for (const [name, plan] of Object.entries(rowPlans)) test(`${name} prepared row 
   manager.destroy();
 });
 
+test('mercury lighting is one sheet in its own pool, asked for only while shadows are on', async () => {
+  const definition = definitions.mercury, track = definition.materials.find(track => track.id === 'lighting');
+  assert.ok(track);
+  assert.deepEqual(track.banks.map(bank => bank.id), ['sheet']);
+  const bank = track.banks[0];
+  assert.ok(bank.frames.length === track.frame.indices.length && bank.frames.every(frame => frame.resource === 'lighting' && frame.row === null && frame.prewarm?.length === 0),
+    'Every phase is an address in the one sheet, with no neighbour to warm.');
+  assert.equal(bank.fixed?.resource, 'shadowless');
+  // The flood-lit frame loads with the page; the sheet does not.
+  assert.ok(definition.assets.startup.includes('shadowless') && !definition.assets.startup.includes('lighting'));
+  for (const variant of definition.variants) {
+    assert.ok(variant.required.includes('shadowless') && !variant.required.includes('lighting'));
+    assert.deepEqual(variant.materials.map(selected => [selected.bank, selected.mode]), [['sheet', variant.when.shadows ? 'frames' : 'fixed']]);
+  }
+  const pool = definition.assets.pools.find(pool => pool.id === 'lighting');
+  assert.deepEqual(pool, { id: 'lighting', capacity: 1, concurrency: 1, retention: 'selection', reuse: false, decoding: 'sync' });
+  const { manager, commit } = harness(catalog([assetUrl(definition, 'lighting')], { capacity: pool.capacity, concurrency: pool.concurrency, retention: pool.retention, reuse: pool.reuse }));
+  await commit(['0']);
+  assert.equal(manager.resources.has('0'), true, 'The sheet is resident once shadows ask for it.');
+  manager.destroy();
+});
+
 test('mars atmospheric lighting bank is a single warm-pool sheet, not a row bank', async () => {
   const track = definitions.mars.materials.find(track => track.id === 'lighting');
   assert.ok(track);
@@ -149,11 +172,11 @@ test('mars atmospheric lighting bank is a single warm-pool sheet, not a row bank
   manager.destroy();
 });
 
-test("Uranus retains only active plus latest pending prepared neighborhoods", async () => {
-  const rows=definitions.uranus.materials[0].banks.flatMap(bank=>preparedRows(bank).map(row=>assetUrl(definitions.uranus,row.resource)));
-  // Neighborhoods are read from Uranus's actual prepared banks, so the lane it is baked on
-  // (its own, or the shared giant sphere lane) changes how many there are, never the test.
-  assert.ok(rows.length >= 9, "Use the actual prepared Uranus neighborhoods");
+test("Jupiter retains only active plus latest pending prepared neighborhoods", async () => {
+  const rows=definitions.jupiter.materials[0].banks.flatMap(bank=>preparedRows(bank).map(row=>assetUrl(definitions.jupiter,row.resource)));
+  // Neighborhoods are read from Jupiter's actual prepared rows: a sphere on the lighting sheet (Uranus, which this
+  // case used to read) has one image and no neighborhood to retain.
+  assert.ok(rows.length >= 9, "Use the actual prepared Jupiter neighborhoods");
   const band = (start: number) => [String(start), String(start + 1), String(start + 2)];
   const first = band(0), abandonedBand = band(Math.floor((rows.length - 3) / 2)), lastBand = band(rows.length - 3);
   assert.equal(new Set([...first, ...abandonedBand, ...lastBand]).size, 9, "Use three disjoint neighborhoods");
