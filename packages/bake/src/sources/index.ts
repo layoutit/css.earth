@@ -8,7 +8,8 @@
 // lineage, read from their manifests and source presentations, at the application route passed in; the facility artwork refresh, which
 // swaps model-render bytes under unchanged attribution; and the investigation ledgers beside each object and facility,
 // the shared investigation surveys they quote (`src/sources/investigations/`) and the report over them
-// (`packages/bake/cli/report-investigations.mts`). The astronomy data audit ledger (`astronomy-data/`, documented at
+// (`packages/bake/cli/report-investigations.mts`); and the source-manifest lookup (`packages/bake/cli/lookup/index.mts manifest`).
+// The astronomy data audit ledger (`astronomy-data/`, documented at
 // `src/sources/astronomy-data/README.md`) is its own bundle, `@cssearth/bake/sources/astronomy-data`: its `model.ts`
 // loads `node:sqlite`, which prints an experimental-feature warning on import, and this barrel must stay silent for
 // every caller that only needs the exports below. It imports `runtime-source`, `objects/content` and `delivery`.
@@ -22,6 +23,7 @@ export * from './factsheet-sources.ts';
 export * from './investigation-ledger.ts';
 export * from './investigation-report.ts';
 export * from './investigation-survey.ts';
+export * from './manifest-lookup.ts';
 export * from './object-information-sources.ts';
 export * from './pdf-image.ts';
 export * from './prepare-object-information.ts';
