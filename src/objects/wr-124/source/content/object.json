@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wr-124",
+  "displayName": "WR 124",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "12 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1904-04687",
+          "url": "https://arxiv.org/abs/1904.04687",
+          "label": "Hamann et al. (2019), A&A 625, A57 (2019)",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "6,400 parsecs",
+        "source": {
+          "catalogueId": "publication-zavala-2022-m1-67-shape-model",
+          "url": "https://arxiv.org/abs/2204.07778",
+          "label": "Zavala et al. (2022), MNRAS 513, 3317, Sect. 1: an estimated distance of 6.4 (+2.5, −0.8) kpc, from Jiménez-Hernández et al. (2020), the distance its nebula's page stands at",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature. The disc itself is unresolved.",
+        "thumbnail": "wr-124-dataset-color.webp",
+        "surface": "wr-124-surface-color@2x.webp",
+        "poles": "wr-124-poles-color@2x.webp",
+        "source": {
+          "id": "wr-124-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1904.04687"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. No limb darkening is drawn: No limb-darkening grid describes a Wolf-Rayet star: its light leaves an expanding wind, not a still atmosphere.. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hamann et al. (2019), A&A 625, A57",
+      "href": "https://arxiv.org/abs/1904.04687"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1904.04687",
+      "credit": "Hamann et al. (2019), A&A 625, A57"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wr-124.json",
+      "credit": "Hamann et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

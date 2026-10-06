@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wr-124",
+  "card": {
+    "text": "WR 124 is the Wolf-Rayet star inside the nebula M1-67, about 6,400 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1904-04687",
+        "url": "https://arxiv.org/abs/1904.04687",
+        "label": "Hamann et al. (2019), A&A 625, A57 (2019)",
+        "checked": "2026-10-05",
+        "locator": "Table 1: WR 124, WN8h, T* = 44.7 kK, terminal wind velocity 710 km/s, R* = 11.93 Rsun, log(L/Lsun) = 5.75"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A star of 44,700 K with about 560,000 times the Sun's light, losing its mass in a wind of 710 km/s. The sphere drawn is the star under that wind.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1904-04687",
+        "url": "https://arxiv.org/abs/1904.04687",
+        "label": "Hamann et al. (2019), A&A 625, A57 (2019)",
+        "checked": "2026-10-05",
+        "locator": "Table 1: WR 124, WN8h, T* = 44.7 kK, terminal wind velocity 710 km/s, R* = 11.93 Rsun, log(L/Lsun) = 5.75"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

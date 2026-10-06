@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-1904-04687",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hamann et al. (2019): The Galactic WN stars revisited. Impact of Gaia distances on fundamental stellar parameters",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1904.04687"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201834850"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1904.04687",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201834850",
+      "label": "A&A 625, A57 (2019)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1904.04687",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hamann et al. (2019), A&A 625, A57 (2019)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1904.04687"
+    }
+  ],
+  "publisher": "A&A 625, A57 (2019)",
+  "creators": [
+    "W. -R. Hamann",
+    "G. Gräfener",
+    "A. Liermann",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

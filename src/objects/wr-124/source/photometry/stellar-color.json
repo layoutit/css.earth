@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "wr-124",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 44700,
+      "lowerKelvin": 44700,
+      "upperKelvin": 44700,
+      "citation": "Hamann et al. (2019), A&A 625, A57, Table 1, WR 124: T* = 44.7 kK, the temperature at that radius; spectral subtype WN8h: 44700 K; the source gives no uncertainty, so the range is the value itself, https://arxiv.org/abs/1904.04687"
+    },
+    "note": "The star's measured light is reddened by dust between it and the Sun, a color excess E(b−v) of 1.08 mag (Hamann et al. 2019, Table 1): Gaia's spectrum shows that dust, not the star; and no other archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

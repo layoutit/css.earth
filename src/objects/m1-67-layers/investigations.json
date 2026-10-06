@@ -91,12 +91,11 @@
     {
       "id": "wr-124",
       "subject": "The star as an object",
-      "status": "deferred",
-      "finding": "WR 124 itself has no page: the nebula stands at the star's place, and a zoom in ends at the nebula's nearest view.",
+      "status": "included",
+      "finding": "WR 124 is an object inside the nebula (src/objects/wr-124): a zoom in on the nebula goes on into the star, whose page keeps these walls drawn around it.",
       "evidence": [
         "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WR+124"
-      ],
-      "revisitWhen": "The star is added as an object inside the nebula."
+      ]
     }
   ]
 }
