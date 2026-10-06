@@ -1,21 +1,21 @@
 import { eyeDistanceM } from '@cssearth/engine';
 import type { PositionM, WorldCameraPose } from '@cssearth/engine';
-import type { WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraViewport } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectEntry } from '../directory/objects.mts';
-import type { SystemObjects } from '../world/object-systems.mts';
+import type { SystemObjects } from '../world/systems/object-systems.mts';
 interface SelectionPublication { world: WorldCameraPose; viewport: WorldCameraViewport; }
 export interface OverviewSelection { overview: boolean; objectId: string; }
 /** The object a body is inside, when that object has a scene of its own: another galaxy, a cluster of galaxies. Its scene
  * shows it from outside, so `radiusM` is its body's (`worldFrame.bodyRadiusM`). */
 export interface InsideBody { readonly id: string; readonly originM: PositionM; readonly radiusM: number }
-import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import { OVERVIEW_SELECTION_POLICY as policy } from '../browser/runtime-policy.mts';
-import { SOLAR_SYSTEM_ID, systemOfObject } from '../world/object-systems.mts';
-import { systemOverviewDistance } from '../world/system-framing.mts';
-import { leaveDistanceM, zoomStepOf } from '../world/inside-view.mts';
+import { SOLAR_SYSTEM_ID, systemOfObject } from '../world/systems/object-systems.mts';
+import { systemOverviewDistance } from '../world/systems/system-framing.mts';
+import { leaveDistanceM, zoomStepOf } from '../world/systems/inside-view.mts';
 import { satelliteSelectionAtCamera } from './satellite-selection.mts';
-import { subjectOf, type SceneSubject } from '../world/scene-subject.mts';
+import { subjectOf, type SceneSubject } from '../world/systems/scene-subject.mts';
 
 const distance = (a: PositionM, b: PositionM) => Math.hypot(...a.map((value, axis) => value - b[axis]));
 /** The Solar System's star; the root of the galactic overviews. */

@@ -6,7 +6,7 @@
  * to its host (`boundTo`) and so inside the host's system: at these separations the measured positions are the stars' places, so no
  * orbit is involved. A pair too close for Gaia to separate is not in the catalogue and is not added. */
 import type { Archive } from './archives/archives.mts';
-import { hostId as idFor } from './identity.mts';
+import { hostId as idFor } from './names/identity.mts';
 
 // VizieR's ASU service, as the color routes use it: its TAP mirror (tapvizier) sends an incomplete certificate chain that Node refuses.
 export const VIZIER_ASU = 'https://vizier.cds.unistra.fr/viz-bin/asu-tsv';

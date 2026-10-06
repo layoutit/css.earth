@@ -1,31 +1,31 @@
 import { type CameraPose, type CameraPlan, type DirectionalSunPlan, type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { type WorldCameraPose, createSceneLifetime, sampleDestinationFlight, viewSunDirectionToPhysicalLightDirection, clamp } from '@cssearth/engine';
 
-import { cameraMotionSignalFor } from './camera-motion-signal.js';
-import type { WorldFramePresenter } from './world-frame-presenter.js';
-import { createObjectInteractionControls } from './object-interaction-controls.js';
-import type { InteractionServices } from './object-interaction-controls.js';
-export { createObjectInteractionControls } from './object-interaction-controls.js';
-export type { ObjectInteractionOptions, InteractionServices } from './object-interaction-controls.js';
+import { cameraMotionSignalFor } from './motion/camera-motion-signal.js';
+import type { WorldFramePresenter } from './camera/world-frame-presenter.js';
+import { createObjectInteractionControls } from './input/object-interaction-controls.js';
+import type { InteractionServices } from './input/object-interaction-controls.js';
+export { createObjectInteractionControls } from './input/object-interaction-controls.js';
+export type { ObjectInteractionOptions, InteractionServices } from './input/object-interaction-controls.js';
 import { errorMessage } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
 import type { CameraDelta, CameraAngles, Vector3 } from './types.js';
 
-import type { PerspectiveWorldContext } from './prepared-camera.js';
-import type { PerspectiveDolly, PerspectivePublication } from './perspective-dolly.js';
-import type { PhysicalSharedCamera } from './view-url.js';
+import type { PerspectiveWorldContext } from './camera/prepared-camera.js';
+import type { PerspectiveDolly, PerspectivePublication } from './camera/perspective-dolly.js';
+import type { PhysicalSharedCamera } from './camera/view-url.js';
 
-import type { WorldCameraViewport } from './world-camera.js';
+import type { WorldCameraViewport } from './camera/world-camera.js';
 
 import type { PositionM } from '@cssearth/engine';
-import { bindWorldCameraPicking } from './world-camera-picking.js';
-import { hitsProjectedBody } from './world-camera-hit.js';
-import { prepareSurfaceTargetRotation } from './surface-target.js';
+import { bindWorldCameraPicking } from './picking/world-camera-picking.js';
+import { hitsProjectedBody } from './picking/world-camera-hit.js';
+import { prepareSurfaceTargetRotation } from './picking/surface-target.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; projectionScale?: number; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & ReturnType<PerspectiveDolly['state']>;
 export interface OrbitPublication extends CameraAngles { worldCamera: WorldCameraPose; sceneMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection: PhysicalProjection; distance: number; focal: number; viewportWidth: number; viewportHeight: number; stageViewport: WorldCameraViewport; principalOffset: readonly number[]; body: PerspectivePublication['body']; levelOfDetail: ReturnType<PerspectiveDolly['levelOfDetail']>; }
-export interface RetainedOrbitOptions { framePresenter: WorldFramePresenter; preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; cameraMotion: import('./camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; directionalSunPlan?: DirectionalSunPlan | null; worldContext: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport: import('./camera-viewport.js').CameraViewport; objectId: string; onPublish?: (publication: OrbitPublication, departing?: boolean) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; revealGroups?: readonly (readonly HTMLElement[])[];
+export interface RetainedOrbitOptions { framePresenter: WorldFramePresenter; preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; cameraMotion: import('./motion/camera-motion.js').CameraMotion; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; directionalSunPlan?: DirectionalSunPlan | null; worldContext: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport: import('./camera/camera-viewport.js').CameraViewport; objectId: string; onPublish?: (publication: OrbitPublication, departing?: boolean) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; revealGroups?: readonly (readonly HTMLElement[])[];
   /** False while the mesh has no committed material; it stays hidden until then. */
   canReveal?: () => boolean;
   canStageReveal?: () => boolean; }
@@ -33,12 +33,12 @@ export interface OrbitServices extends InteractionServices { createCameraOrienta
 export type RetainedCubicSkyOrbit = ReturnType<typeof createRetainedCubicSkyOrbit>;
 
 import { multiplyPreparedMatrix4, readPreparedMatrix4 } from "@cssearth/core";
-import { readPreparedTransform } from "./prepared-camera-basis.js";
-import { createPerspectiveDolly, validatePerspectiveCameraPlan } from "./perspective-dolly.js";
-import { createPreparedWheelZoomControls } from "./prepared-wheel-zoom.js";
-import { createCameraOrientation } from "./camera-orientation.js";
-import { selectPreparedResponsiveZoom } from "./camera-layout.js";
-import { createUnboundedMatrixDragControls } from "./camera-input.js";
+import { readPreparedTransform } from "./camera/prepared-camera-basis.js";
+import { createPerspectiveDolly, validatePerspectiveCameraPlan } from "./camera/perspective-dolly.js";
+import { createPreparedWheelZoomControls } from "./input/prepared-wheel-zoom.js";
+import { createCameraOrientation } from "./camera/camera-orientation.js";
+import { selectPreparedResponsiveZoom } from "./camera/camera-layout.js";
+import { createUnboundedMatrixDragControls } from "./input/camera-input.js";
 
 const nativeServices = { createCameraOrientation, selectPreparedResponsiveZoom, createUnboundedMatrixDragControls, createPreparedWheelZoomControls, createPerspectiveDolly };
 

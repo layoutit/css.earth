@@ -1,4 +1,4 @@
-import { writeStyle } from '../rendering/retained-write.js';
+import { writeStyle } from '../rendering/dom/retained-write.js';
 import { eyeAnchor, type WorldCameraPose, cssViewFromOrientation } from '@cssearth/engine';
 import { isExtendedClassification, type PreparedWorldContext, type PreparedContextBody } from '@cssearth/objects';
 import { createContextLocator } from './context-locator.js';
@@ -10,7 +10,7 @@ import { createCaptionMeasurer } from './world-context/world-context-caption-mea
 import type { PlannedWorldContext } from './world-context/world-context-planner.js';
 import { bindWorldBodyColumns, createWorldBodyColumns, type PackedWorldContextView } from './world-context/world-context-view-transport.js';
 import { createSystemFade, indicatorDotDiameter, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../solar-system/heliocentric-sprites.js';
 import type { OrientationXyzw } from '@cssearth/engine';
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';

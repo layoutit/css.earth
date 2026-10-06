@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-94.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.585, rounded to two decimals",
   "spectralType": "M0 V",
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): spectral type M0 V, from Muirhead et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012ApJ...750L..37M/abstract)",
+  "objectType": "Eruptive Variable",
+  "objectTypePath": "* > V* > Er*",
+  "objectTypeSource": "SIMBAD, Kepler-94: main object type Er*, Eruptive Variable",
   "metallicityDex": 0.34,
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): [Fe/H] 0.34 dex, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
   "luminosityLogSolar": -0.613,
@@ -20,7 +23,7 @@
   "ageGyr": 1.41,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-94 (pscomppars): age 1.41 Gyr, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
   "rotationPeriodDays": 44.31,
-  "rotationPeriodSource": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M15Per: 44.31 d, the row 0.0 arcsec from the star's J2000 place. The middle of 14 catalogued periods, 9 of them within 20% of it",
+  "rotationPeriodSource": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column Prot: 44.31 d, the row 0.0 arcsec from the star's J2000 place. The middle of 14 catalogued periods, 9 of them within 20% of it",
   "rotationPeriodsCatalogued": [
     {
       "days": 14.92,

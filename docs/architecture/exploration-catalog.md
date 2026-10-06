@@ -130,7 +130,7 @@ existing exclusions for schematic interiors, illustrative models, modeled noise
 and schematic morphology. Empty attribution stays empty; names, publishers,
 mission targets and aliases are not association rules.
 
-[`prepare-facilities.mts`](../../site/build/prepare/prepare-facilities.mts) compiles the Sources
+[`prepare-facilities.mts`](../../site/build/prepare/catalog/prepare-facilities.mts) compiles the Sources
 and Missions catalogues with their validated records and graphs. The common
 [site entry point](../../site/content/exploration-catalog.mts) parses the prepared records
 against the Sources catalogue; it no longer verifies a dependency-hash closure.
@@ -206,13 +206,13 @@ provenance, Sources and Missions together without acquiring or rendering images.
 Run `pnpm test:site` for metadata, bindings and catalogue compilation. It covers
 malformed records, source conservation, reverse links and deterministic output.
 For changes to dataset selection or routing, also run the affected
-[selection](../../packages/renderer/src/rendering/object-selection-runtime.test.mts) and
+[selection](../../packages/renderer/src/rendering/view/object-selection-runtime.test.mts) and
 router tests for cancellation and history.
 
 For dataset navigation or card presentation changes, run the affected
-[dataset response](../../site/server/dataset-response.test.mts),
+[dataset response](../../site/server/search/dataset-response.test.mts),
 [URL](../../site/model/dataset-url.test.mts) and
-[scene session](../../site/scene/scene-session.test.mts) tests. After a build,
+[scene session](../../site/scene/session/scene-session.test.mts) tests. After a build,
 [`rendered-page.test.mts`](../../site/journeys/rendered-page.test.mts) parses the
 built HTML to check that the information-tab rules live in the scene head, not in
 the replaceable card. It does not exercise navigation or inspect browser screenshots.

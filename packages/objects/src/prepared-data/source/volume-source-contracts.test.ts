@@ -41,14 +41,14 @@ test('context product parser preserves optional interpretation and admitted unkn
 
 test('volume consumers retain one shared parser call and cannot redeclare moved parsing', () => {
   const source = (path: string) => readFileSync(new URL(`../../../../../${path}`, import.meta.url), 'utf8');
-  const preview = source('site/build/prepare/prepare-volume-presentation.mts');
+  const preview = source('site/build/prepare/catalog/prepare-volume-presentation.mts');
   assert.match(preview, /parseVolumePresentationSource\(raw\)/u);
   assert.match(source('packages/objects/src/prepared-data/source/volume-presentation-source.ts'), /preview: parseVolumeSourcePreview\(dataset\.preview\)/u);
   assert.doesNotMatch(preview, /function preview\(|\['path', 'url', 'skyBands', 'authoredFrom', 'crop'\]/u);
   const context = source('packages/bake/src/sources/context-source-records.ts');
   assert.match(context, /const products = parseVolumeContextProducts\(presentation\.products\)/u);
   assert.doesNotMatch(context, /sourceArray\(presentation\.products/u);
-  for (const path of ['site/build/prepare/prepare-volume-presentation.mts', 'packages/bake/src/sources/context-source-records.ts', 'packages/bake/src/asset-publication/restore-source-inputs.ts']) {
+  for (const path of ['site/build/prepare/catalog/prepare-volume-presentation.mts', 'packages/bake/src/sources/context-source-records.ts', 'packages/bake/src/asset-publication/restore-source-inputs.ts']) {
     const text = source(path);
     assert.match(text, /parseVolumeSourceManifest\([^;]+reader:/u);
     assert.doesNotMatch(text, /manifest\.pathBase/u);

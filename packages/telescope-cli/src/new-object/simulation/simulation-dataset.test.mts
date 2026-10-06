@@ -11,7 +11,7 @@ import test from 'node:test';
 import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import type { Archive } from '../archives/archives.mts';
-import { rebuildExistingDatasets } from '../planet-datasets.mts';
+import { rebuildExistingDatasets } from '../planets/planet-datasets.mts';
 import { installSimulationDataset, parseSimulationEntries, restoreSimulationField, restoreSimulationMember, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey, surveyQuestions } from './simulation-dataset.mts';
 
 const id = 'trappist-1f', o = `src/objects/${id}`;

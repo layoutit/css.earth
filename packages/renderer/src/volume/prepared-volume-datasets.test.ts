@@ -12,7 +12,7 @@ import type { VolumeCameraPublication } from './types.js';
 import { mountPreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
 
 import { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
-import { createPreparedResidency } from '../rendering/prepared-residency.js';
+import { createPreparedResidency } from '../rendering/loading/prepared-residency.js';
 import { cloudCompositeOpacity } from '@cssearth/volume-viewer/scene/cloud-inspection';
 
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';

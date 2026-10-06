@@ -83,7 +83,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   as installed, and the facility artwork refresh; and the investigation ledgers beside each object and facility with the
   shared surveys they quote (`src/sources/investigations/`) and the report over them (`packages/bake/cli/report-investigations.mts`
   is its command), and the lookup of what a source manifest declares (`manifest-lookup.ts`; `packages/bake/cli/lookup/index.mts manifest`
-  is its command). The application passes in the route its context objects show at
+  is its command) and of a value wherever an object's JSON records or its restored bake keep it (`record-lookup.ts`; `records` and `prepared` are its commands, for one object or `--every` one, listing the entries or counting them `--by` a key). The application passes in the route its context objects show at
   (`CONTEXT_ROUTE`) and its dataset routes. It imports `runtime-source`, `objects/content` and `delivery`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned
   JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `src/sources/`.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
@@ -95,7 +95,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   run for each object by the `audit` step of `prepare-object`. `prepared-object-pin.ts` pins a prepared object to its
   transport (the descriptor's `prepared` pin and page reference, and the inventory; the transports themselves are built from
   the runtime when read); the world-navigation
-  finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
+  finalization before it stays in `site/build/prepare/authored/prepare-object-json.mts`, site-owned preparation.
   Its tests are in `src/contract/`.
 - `src/asset-publication/` is published as `@cssearth/bake/asset-publication` (Node only): the commands around the runtime
   asset host. Staging a pull request's baked bytes against its frozen inventories, publishing the inventoried files, the
@@ -254,7 +254,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     the generated solar geometry takes it as a parameter (`SolarGeometry`), as the scene topic does: the terrestrial pipeline
     entry (`terrestrial-layers.ts`) and solid scene (`solid-scene.ts`, which also reads each body's retained position source,
     `SolidSceneSolarGeometry`), the shape-model entry (`shape-model.ts`) and the paged-ellipsoid object (`object.ts`) take it
-    from `site/build/prepare/prepare-authored.ts`, which loads the generated module. The paged-ellipsoid object also takes its
+    from `site/build/prepare/authored/prepare-authored.ts`, which loads the generated module. The paged-ellipsoid object also takes its
     asset worker, `packages/bake/cli/paged-ellipsoid-asset-worker.mts`, which loads the solar geometry itself. They reach the astronomy package through `astronomy`, the object runtime contract through
     `contract`, the depth-source restore through `prepared-presentation` and the content preparer's types through
     `objects/content`, as lower topics. Earth's MUR acquisition commands stay in `packages/bake/authoring/earth/`

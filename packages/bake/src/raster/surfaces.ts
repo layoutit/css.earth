@@ -79,6 +79,7 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
     // Only surfaces another dataset draws over are kept, finished (after exposure), for that dataset to fill its empty cells from.
     const underlaid = new Set(config.surfaces.flatMap(surface => surface.underlay ? [surface.underlay.surface] : []));
     const underlays = new Map<string, Uint8Array>();
+    const limbPlates = new Map<string, InterpretedPlate>();
     const load = async (path: string) => { let data = decoded.get(path); if (!data) {
         data = await readRgba(resolve(sourceDirectory, path), config.sourceWidth, config.sourceHeight);
         decoded.set(path, data);
@@ -126,13 +127,19 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
             if (config.emission) {
                 const plates = interpreted.plates;
                 if (!plates) throw new TypeError(`Surface ${surface.id} declares emission but its interpretation returned no plates.`);
-                if (surface.thumbnailFromLimbPlate) thumbnailLimb = plates.limb;
+                // A surface may be dimmed toward the limb as another surface of the body is (a star's brightness map as its color):
+                // `science.limbOf` names that surface, prepared before this one, and its plate is written for this one too.
+                const limbOf = typeof surface.science.limbOf === 'string' ? surface.science.limbOf : undefined;
+                const limb = limbOf === undefined ? plates.limb : limbPlates.get(limbOf);
+                if (!limb) throw new TypeError(`Surface ${surface.id}: limbOf names ${limbOf}, which is not prepared before it with a limb plate.`);
+                limbPlates.set(surface.id, limb);
+                if (surface.thumbnailFromLimbPlate) thumbnailLimb = limb;
                 // A lossless plate keeps its values; a lossy one is encoded in the lossy lane (lossy-lane.ts).
                 const write = (plate: InterpretedPlate, path: string) => plate.lossless
                     ? raster(plate.data, plate.size, plate.size).webp({ lossless: true, effort: 6 }).toFile(path)
                     : writeLossyWebp(raster(plate.data, plate.size, plate.size), path, { alphaQuality: 100, effort: 6 });
                 await write(plates.offLimb, assetPath(publicDirectory, config.emission.offLimbOutput, density, surface.id));
-                await write(plates.limb, assetPath(publicDirectory, config.emission.limbOutput, density, surface.id));
+                await write(limb, assetPath(publicDirectory, config.emission.limbOutput, density, surface.id));
             }
         } else {
             pixels = source ?? await readRgba(resolve(sourceDirectory, surface.source), width, height, true, surface.sharpen);

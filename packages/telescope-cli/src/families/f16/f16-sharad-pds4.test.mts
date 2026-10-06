@@ -9,7 +9,7 @@ readSharadDelayFrame, readSharadPlane, sharadExpectedBytes, sharadFileSource, sh
 sharadPlaneCost, sharadSliceWindow, F16_SHARAD_PDS4_HANDLER, SHARAD_PDS4_PROFILE,
 type SharadByteSource, type SharadPds4Label,
 } from './f16-sharad-pds4.mts';
-import { parseSourceProducts } from '../../source-product-contract.mts';
+import { parseSourceProducts } from '../../products/source-product-contract.mts';
 import { familyProfile } from '../../family-handlers.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 const test = sourceTest();

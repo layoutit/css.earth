@@ -1,7 +1,7 @@
 import { type PreparedAssets, type PreparedAssetOrigin } from '@cssearth/objects';
 
-import { createPreparedResidency } from '../rendering/prepared-residency.js';
-import type { PreparedResourceDemand, PreparedResidencyOptions, PreparedResidencyTicket } from '../rendering/prepared-residency.js';
+import { createPreparedResidency } from '../rendering/loading/prepared-residency.js';
+import type { PreparedResourceDemand, PreparedResidencyOptions, PreparedResidencyTicket } from '../rendering/loading/prepared-residency.js';
 
 type Residency = ReturnType<typeof createPreparedResidency>;
 type Callbacks = Pick<PreparedResidencyOptions, 'onReady' | 'onWarmError' | 'onCleanupError'>;

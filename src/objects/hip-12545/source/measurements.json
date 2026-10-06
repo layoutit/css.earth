@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hip-12545.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.357, rounded to two decimals",
   "spectralType": "K6Ve",
   "spectralTypeSource": "SIMBAD, BD+05 378: spectral type K6Ve (2006A&A...460..695T)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, BD+05 378: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 4.83,
   "rotationPeriodSource": "VizieR J/A+A/600/A83/sample (Photometry of beta Pic members), column Prot: 4.83 d, the row 0.4 arcsec from the star's J2000 place. The middle of 6 catalogued periods, 5 of them within 20% of it",
   "rotationPeriodsCatalogued": [

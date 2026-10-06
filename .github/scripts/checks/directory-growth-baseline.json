@@ -2,11 +2,6 @@
   "schema": "cssearth-directory-growth@1",
   "allowance": 20,
   "directories": {
-    ".github/scripts/architecture": {
-      "implementations": 22,
-      "tests": 16,
-      "reason": "Architecture graph, resolver and rule checks form one repository-boundary checker; moving individual rules would fragment its shared policy owner."
-    },
     "labs/nebula/packages/lab/browser": {
       "implementations": 43,
       "tests": 2,
@@ -37,25 +32,10 @@
       "tests": 22,
       "reason": "Measured-map preparation modules and colocated science tests form one raster-object owner; the extra module does not create an independent format area."
     },
-    "packages/renderer/src/navigation": {
-      "implementations": 36,
-      "tests": 23,
-      "reason": "The retained world camera and input policy form one navigation owner; its decomposition requires a dedicated interaction change."
-    },
-    "packages/renderer/src/rendering": {
-      "implementations": 34,
-      "tests": 31,
-      "reason": "Prepared scene activation and retained DOM writes form one rendering lifecycle owner; the additional modules and colocated tests do not establish an independent rendering area."
-    },
     "packages/renderer/src/universe": {
       "implementations": 29,
       "tests": 17,
       "reason": "Universe context projection and prepared catalogue display form one renderer owner; retain the existing ceiling pending dedicated decomposition."
-    },
-    "packages/telescope-cli/src": {
-      "implementations": 60,
-      "tests": 42,
-      "reason": "The telescope CLI root holds its public command and shared ingestion entry surface; isolating the additional module would not establish a separate command owner."
     },
     "packages/telescope-cli/src/archives/interferometry": {
       "implementations": 27,
@@ -63,18 +43,13 @@
       "reason": "Archive calibration and reconstruction modules share the interferometry acquisition owner and its colocated tests."
     },
     "packages/telescope-cli/src/new-object": {
-      "implementations": 33,
-      "tests": 14,
+      "implementations": 22,
+      "tests": 10,
       "reason": "Object drafting orchestration remains one command owner; archive-specific provider readers and their tests now live in archives/."
     },
     "site": {
       "implementations": 102,
       "tests": 4,
-      "reason": "plan 7: site architecture"
-    },
-    "site/build/prepare": {
-      "implementations": 38,
-      "tests": 0,
       "reason": "plan 7: site architecture"
     },
     "site/components": {

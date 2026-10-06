@@ -9,7 +9,7 @@ import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProje
 import type { SphereConfiguration, SpherePolygon, RasterPolygon } from '../scene-contract.ts';
 import type { PagedSceneContext } from './scene-context.ts';
 // Earth keeps full leaf boxes for now: its paged surface levels are being reworked on their own branch, and its leaves
-// join the shared rule (packages/bake/src/presentation/leaf-box.ts) with that work.
+// join the shared rule (packages/bake/src/presentation/layout/leaf-box.ts) with that work.
 const FULL_BOXES = { leafBox: false as const };
 
 export function prepareSphereBands(ctx: PagedSceneContext, config: SphereConfiguration, visualRotationSeconds: number) {
@@ -245,7 +245,7 @@ export function textureStyle(ctx: PagedSceneContext, polygon: RasterPolygon, ind
     const size = cell.size / density, page = `--${profile.namespace}-surface-page-${cell.page}`;
     // At a small level the page is a tile of one sheet (texture-levels.mts); the body then publishes the tile's offset and
     // the sheet's scale beside the image, and the fallbacks are the page's own. They are unitless multipliers of inline
-    // lengths, so preparation's raster and leaf-box scaling (bake/presentation/projective-layout.ts) scales them with the address.
+    // lengths, so preparation's raster and leaf-box scaling (bake/presentation/layout/projective-layout.ts) scales them with the address.
     return {
       style: `transform:matrix3d(${cell.layer.frameMatrix})` +
         preparedAtlasDimensions(size, size) +

@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 7543102 (Gold): APOGEE effective temperature (K) 4854.7993 +/- 46.7627 (https://arxiv.org/abs/2410.00102)",
   "surfaceGravityLogg": 2.8415,
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 7543102 (Gold): Asteroseismic log g 2.8415 +/- 0.0039 (https://arxiv.org/abs/2410.00102)",
+  "objectType": "Red Giant Branch star",
+  "objectTypePath": "* > Ev* > RG*",
+  "objectTypeSource": "SIMBAD, TYC 3148-2384-1: main object type RG*, Red Giant Branch star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

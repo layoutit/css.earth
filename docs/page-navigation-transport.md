@@ -55,7 +55,7 @@ ownership, stylesheet nodes and world camera stay retained.
 
 ## One scene before and after JavaScript
 
-`serializePreparedScene` in the renderer (`packages/renderer/src/rendering/prepared-scene-serialization.ts`) publishes the package's prepared reference pose,
+`serializePreparedScene` in the renderer (`packages/renderer/src/rendering/view/prepared-scene-serialization.ts`) publishes the package's prepared reference pose,
 initial variant and texture addresses. It does not generate another mesh or
 process source images. The page remains the same shell at the same URL.
 Information tabs use native radio selection, including body overview, prepared
@@ -133,7 +133,7 @@ a compatible dataset and publishes the same feature caption used by live labels;
 JavaScript adds the camera flight after that body is ready.
 
 [The Worker](../deploy/cloudflare/worker.ts) (its routing is `site/server/search-route.mts`) routes requests containing
-`q`, `dataset`, `settings`, `feature`, `v` or `overview` to the page handler in `site/server/search-response.mts`. It
+`q`, `dataset`, `settings`, `feature`, `v` or `overview` to the page handler in `site/server/search/search-response.mts`. It
 keeps the view parameters, and leaves ordinary pages and assets to its static assets. The application continues to
 build static pages; it does not need an Astro server adapter.
 
@@ -150,7 +150,7 @@ warm Worker instances cache only index data that passed that check. Query respon
 are not cached and carry `noindex, follow`. An index failure leaves object
 search usable and displays a retry message in the existing feature section.
 
-Live search asks the Worker's find endpoint, answered by `site/server/find.mts`, instead of downloading anything.
+Live search asks the Worker's find endpoint, answered by `site/server/search/find.mts`, instead of downloading anything.
 One request per query, `?q=<query>&object=<body>`, answers the first 40 matching
 objects, their total and the named-feature rows together; `&offset=<row>` answers
 a later page of objects as the list scrolls (the Stars category lists about
@@ -167,7 +167,7 @@ one request for the newest text; a newer request cancels the older one.
 
 Both handlers read the object catalogue the build writes to
 `dist/catalogue/index.json`, the feature index and each body's places catalogue
-from `site/public/` (`site/server/search-data.mts`). The Worker's bundler stages
+from `site/public/` (`site/server/search/search-data.mts`). The Worker's bundler stages
 them beside the built pages, and the Worker reads them through its assets
 binding (`deploy/cloudflare/search-data.ts`). Fetching them over HTTP made a new
 instance's first search take 3 to 4.5 s; from local files it takes about
@@ -185,7 +185,7 @@ native submits; a small form binding refreshes that context after interactive
 camera movement. Feature flights and continuous camera input require JavaScript
 in the normal site.
 
-`site/server/search-server.mts` calls the same routing and request handlers in Astro
+`site/server/search/search-server.mts` calls the same routing and request handlers in Astro
 dev. `astro preview` does not run Vite's preview hooks, so neither search works
 there; use dev, or the Cloudflare preview (`pnpm deploy:cloudflare-preview`).
 [The wrangler configuration](../deploy/cloudflare/wrangler.jsonc) declares the Worker and its static assets.
@@ -199,11 +199,11 @@ After building the packages and renderer, check page metadata with:
 
 ```sh
 node --test site/server/object-page-data.test.mts
-pnpm test:packages   # includes rendering/prepared-scene-serialization.test.ts
+pnpm test:packages   # includes rendering/view/prepared-scene-serialization.test.ts
 node --test site/journeys/rendered-page.test.mts
-node --test site/server/search-response.test.mts
-node --test site/server/dataset-response.test.mts site/model/dataset-url.test.mts
-node --test site/scene/scene-session.test.mts
+node --test site/server/search/search-response.test.mts
+node --test site/server/search/dataset-response.test.mts site/model/dataset-url.test.mts
+node --test site/scene/session/scene-session.test.mts
 ```
 
 Worker reuse, cancellation and disposal are covered by

@@ -4,28 +4,28 @@
     "id": "root",
     "files": [
       "site/scene/application-world-context.mts",
-      "site/world/application-world-frames.mts",
-      "site/world/application-world-resources.mts",
-      "site/world/application-world-types.mts",
-      "site/world/application-world-visibility.mts",
+      "site/world/application/application-world-frames.mts",
+      "site/world/application/application-world-resources.mts",
+      "site/world/application/application-world-types.mts",
+      "site/world/application/application-world-visibility.mts",
       "site/navigation/arrival-billboard.mts",
       "site/server-assets/asset-origin.mts",
       "site/server/built-pages.mts",
-      "site/world/catalogue-moon-labels.mts",
+      "site/world/application/catalogue-moon-labels.mts",
       "site/shell/chart-pixel-alignment.mts",
-      "site/world/context-availability.mts",
-      "site/world/context-datasets.mts",
+      "site/world/application/context-availability.mts",
+      "site/world/application/context-datasets.mts",
       "site/content/dataset-content.mts",
       "site/content/dataset-context.mts",
       "site/shell/dataset-picker.mts",
-      "site/server/dataset-response.mts",
+      "site/server/search/dataset-response.mts",
       "site/model/dataset-url.mts",
       "site/world/default-width-share.mts",
       "site/shell/destination-browser.mts",
       "site/shell/diagnostic-recorder.mts",
       "site/browser/diagnostics-policy.mts",
       "site/server/dot-catalogue-data.mts",
-      "site/world/dot-catalogues.mts",
+      "site/world/application/dot-catalogues.mts",
       "site/startup/error-report.mts",
       "site/content/exploration-catalog.mts",
       "site/shell/feature-browser.mts",
@@ -36,10 +36,10 @@
       "site/shell/information-card.mts",
       "site/scene/initial-scene.mts",
       "site/startup/initial-shell-context.mts",
-      "site/world/inside-view.mts",
+      "site/world/systems/inside-view.mts",
       "site/shell/layout-sections.mts",
       "site/content/learn-more.mts",
-      "site/world/moon-orbit-policy.mts",
+      "site/world/application/moon-orbit-policy.mts",
       "site/browser/narrow-layout.mts",
       "site/browser/native-input.mts",
       "site/shell/native-view-forms.mts",
@@ -54,14 +54,14 @@
       "site/contracts/object-page-contract.mts",
       "site/server/object-page-data.mts",
       "site/contracts/object-shell-types.ts",
-      "site/world/object-systems.mts",
+      "site/world/systems/object-systems.mts",
       "site/content/object-text.mts",
       "site/directory/objects.mts",
       "site/model/orbit-root.mts",
       "site/selection/overview-selection.mts",
       "site/scene/packaged-object-runtime.mts",
       "site/model/planetary-system-members.mts",
-      "site/build/prepare/prepare-body-moons.mts",
+      "site/build/prepare/world/prepare-body-moons.mts",
       "site/navigation/prepared-arrival.mts",
       "site/navigation/prepared-descriptor.mts",
       "site/prepared/prepared-object-path.mts",
@@ -72,7 +72,7 @@
       "site/model/root-object.mts",
       "site/browser/runtime-policy.mts",
       "site/selection/satellite-selection.mts",
-      "site/world/satellite-systems.mts",
+      "site/world/systems/satellite-systems.mts",
       "site/shell/selection-presentation.mts",
       "site/content/seo-trail.mts",
       "site/content/seo.mts",
@@ -88,25 +88,25 @@
       "site/startup/startup-cover.mts",
       "site/directory/startup-requests.mts",
       "site/directory/startup-world.mts",
-      "site/world/stellar-extents.mts",
+      "site/world/application/stellar-extents.mts",
       "site/content/system-card.mts",
-      "site/world/system-framing-radii.mts",
-      "site/world/system-framing.mts",
+      "site/world/systems/system-framing-radii.mts",
+      "site/world/systems/system-framing.mts",
       "site/shell/tab-panels.mts",
       "site/shell/view-readout.mts",
       "site/navigation/view-url-runtime.mts",
       "site/content/volume-presentation.mts",
       "site/startup/web-analytics.mts",
-      "site/world/world-approach.mts",
+      "site/world/application/world-approach.mts",
       "site/world/world-camera.mts",
       "site/directory/world-context-plan.mts",
-      "site/world/world-objects.mts",
+      "site/world/systems/world-objects.mts",
       "site/server/world-places.mts",
       "site/world/world-preferences.mts",
-      "site/world/world-system-views.mts",
+      "site/world/systems/world-system-views.mts",
       "site/world/world-viewport.mts",
       "site/world/zoom-carry.mts",
-      "site/world/zoom-scope.mts"
+      "site/world/systems/zoom-scope.mts"
     ]
   },
   "aggregate": {
@@ -120,22 +120,22 @@
       "branches": 88.6,
       "functions": 93.5
     },
-    "site/world/application-world-frames.mts": {
+    "site/world/application/application-world-frames.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 88.8
     },
-    "site/world/application-world-resources.mts": {
+    "site/world/application/application-world-resources.mts": {
       "lines": 100,
       "branches": 94.9,
       "functions": 98.4
     },
-    "site/world/application-world-types.mts": {
+    "site/world/application/application-world-types.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/world/application-world-visibility.mts": {
+    "site/world/application/application-world-visibility.mts": {
       "lines": 97.6,
       "branches": 90.9,
       "functions": 97.3
@@ -155,7 +155,7 @@
       "branches": 93.7,
       "functions": 100
     },
-    "site/world/catalogue-moon-labels.mts": {
+    "site/world/application/catalogue-moon-labels.mts": {
       "lines": 100,
       "branches": 90.4,
       "functions": 96.4
@@ -165,12 +165,12 @@
       "branches": 87.5,
       "functions": 100
     },
-    "site/world/context-availability.mts": {
+    "site/world/application/context-availability.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/world/context-datasets.mts": {
+    "site/world/application/context-datasets.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -190,7 +190,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/server/dataset-response.mts": {
+    "site/server/search/dataset-response.mts": {
       "lines": 95.9,
       "branches": 84,
       "functions": 94.4
@@ -225,7 +225,7 @@
       "branches": 0,
       "functions": 0
     },
-    "site/world/dot-catalogues.mts": {
+    "site/world/application/dot-catalogues.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -280,7 +280,7 @@
       "branches": 75,
       "functions": 100
     },
-    "site/world/inside-view.mts": {
+    "site/world/systems/inside-view.mts": {
       "lines": 97.7,
       "branches": 92.6,
       "functions": 84.6
@@ -295,7 +295,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/world/moon-orbit-policy.mts": {
+    "site/world/application/moon-orbit-policy.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -370,7 +370,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/world/object-systems.mts": {
+    "site/world/systems/object-systems.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -405,7 +405,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/build/prepare/prepare-body-moons.mts": {
+    "site/build/prepare/world/prepare-body-moons.mts": {
       "lines": 100,
       "branches": 87.5,
       "functions": 91.6
@@ -460,7 +460,7 @@
       "branches": 90.9,
       "functions": 100
     },
-    "site/world/satellite-systems.mts": {
+    "site/world/systems/satellite-systems.mts": {
       "lines": 100,
       "branches": 93.7,
       "functions": 100
@@ -540,7 +540,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/world/stellar-extents.mts": {
+    "site/world/application/stellar-extents.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -550,12 +550,12 @@
       "branches": 87.5,
       "functions": 100
     },
-    "site/world/system-framing-radii.mts": {
+    "site/world/systems/system-framing-radii.mts": {
       "lines": 100,
       "branches": 89.2,
       "functions": 100
     },
-    "site/world/system-framing.mts": {
+    "site/world/systems/system-framing.mts": {
       "lines": 100,
       "branches": 90.4,
       "functions": 100
@@ -585,7 +585,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/world/world-approach.mts": {
+    "site/world/application/world-approach.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -600,7 +600,7 @@
       "branches": 85.1,
       "functions": 96.1
     },
-    "site/world/world-objects.mts": {
+    "site/world/systems/world-objects.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -615,7 +615,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/world/world-system-views.mts": {
+    "site/world/systems/world-system-views.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -630,7 +630,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/world/zoom-scope.mts": {
+    "site/world/systems/zoom-scope.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100

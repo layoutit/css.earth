@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 4287715299577853696: teff_gspphot 5217.246 K (16th-84th percentiles 5201.1543-5234.086), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 1.71,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gaia-dr3-4287715299577853696.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.707, rounded to two decimals",
+  "objectType": "Long-Period Variable",
+  "objectTypePath": "* > Ev* > LP*",
+  "objectTypeSource": "SIMBAD, 2MASS J19270446+0047346: main object type LP*, Long-Period Variable",
   "luminosityLogSolar": 3.131,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4287715299577853696, flags_flame 10: lum_flame 1351.7725 solar luminosities (16th to 84th percentiles 1135.6272 to 1605.914); its log10 is recorded",
   "shape": {

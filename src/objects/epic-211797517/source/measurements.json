@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 211797517: GALAH DR3 effective temperature 4921.879 +/- 226 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.32,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-211797517.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.324, rounded to two decimals",
+  "objectType": "Chemically Peculiar Star",
+  "objectTypePath": "* > Pe*",
+  "objectTypeSource": "SIMBAD, UCAC4 537-046700: main object type Pe*, Chemically Peculiar Star",
   "rotationPeriodDays": 5.4416,
   "rotationPeriodSource": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 5.441625 d, the row 0.1 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

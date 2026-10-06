@@ -11,8 +11,11 @@
   "effectiveTemperatureSource": "SIMBAD, measurements of BD-16 351 (table mesFe_h), row of 2024A&A...690A..97C: Teff (https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt)",
   "surfaceGravityLogg": 4.5,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/bd-16-351.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.503, rounded to two decimals",
-  "rotationPeriodDays": 3.2458,
-  "rotationPeriodSource": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 3.24583 d, the row 0.2 arcsec from the star's J2000 place. The middle of 5 catalogued periods, 5 of them within 20% of it",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, BD-16 351: main object type PM*, High Proper Motion Star",
+  "rotationPeriodDays": 3.23,
+  "rotationPeriodSource": "Measured in this project from the star's light in the TESS full-frame images of sector 30 (packages/telescope-cli/src/archives/tess/reduce.mts): 3.23 d, the light swinging by 4.9% as the star turns. The middle of 6 periods, catalogued and measured here, 6 of them within 20% of it",
   "rotationPeriodsCatalogued": [
     {
       "days": 3.21,
@@ -37,6 +40,13 @@
   ],
   "projectedRotationSpeedKmS": 12.77,
   "projectedRotationSpeedSource": "SIMBAD, BD-16 351: projected rotation speed 12.77 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "rotationPeriodMeasuredDays": 3.23,
+  "rotationPeriodMeasuredSource": "Measured in this project from the star's light in the TESS full-frame images of sector 30 (packages/telescope-cli/src/archives/tess/reduce.mts): 3.23 d, the light swinging by 4.9% as the star turns",
+  "rotationLightSwingPercent": 4.89,
+  "tessLight": "The star's rotation is seen: 3.23 d, the light swinging by 4.9%.",
+  "tessLightSector": 30,
+  "tessLightScatterPercent": 1.76,
+  "tessLightSource": "Read in this project from the TESS full-frame images of sector 30 (packages/telescope-cli/src/archives/tess/reduce.mts); the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -33,7 +33,7 @@ prepared background size and position; the runtime needs no special path.
 | Reduce global byte GeoTIFF photographs, keeping source gaps and the publisher stretch | [Native image acquisition](../packages/bake/src/objects/acquisition/geotiff-image.ts); [Mercury source and qualification](../src/objects/mercury/README.md#native-photographic-maps) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../packages/telescope-cli/src/source-authoring/README.md) |
-| Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../site/build/prepare/prepare-authored.ts) |
+| Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../site/build/prepare/authored/prepare-authored.ts) |
 | Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../packages/bake/src/objects/layers/terrestrial/terrestrial-layers.ts) |
 | Compare retrieved atmospheric profiles with credible intervals | [Retrieved profile chart recipe](retrieved-profile-charts.md) |
 | Sample a pressure level from a numeric longitude/latitude table | [CSV slice reader](../packages/bake/src/objects/raster/lonlat-slice-table.ts): `lonlat-slice-table`, one-based `columns`, an exact `slice`, and a coordinate rounding tolerance. It validates periodic longitude and complete cells; latitude coverage ends at the released samples. [WASP-103 b](../src/objects/wasp-103b/README.md) is the climate-model example. |
@@ -124,7 +124,7 @@ A dataset shown before is decoded again before it is drawn again. WebKit drops t
 nothing draws, even one the page still holds, and the paint that shows it again decodes it on the main thread: the Moon
 going back to its surface map spent 117 of 219 main-thread samples of its long frames decoding WebP. A demand for
 images that stayed resident undrawn waits for a second `decode()`, off that thread, before it is ready
-([prepared-residency.ts](../packages/renderer/src/rendering/prepared-residency.ts)).
+([prepared-residency.ts](../packages/renderer/src/rendering/loading/prepared-residency.ts)).
 
 A small body keeps the images of the dataset it has just left. Its dataset pool is marked to keep images until it is
 full, and the last bake step states the pool's byte budget from the image sizes: two selections, the one on screen and
@@ -412,7 +412,7 @@ other even when it is wrong; only the imagery disagrees. It must equal the edge 
 photograph decoders (GeoTIFF, image and ISIS3 sources) write their maps from 0° E, whatever the source's centre longitude.
 
 The authored preparation measures it for every dataset with native photographic sampling
-(`assertMapsStartAtSurfaceMapEdge` in `site/build/prepare/prepare-authored.ts`). It reads the dataset's pinned source through
+(`assertMapsStartAtSurfaceMapEdge` in `site/build/prepare/authored/prepare-authored.ts`). It reads the dataset's pinned source through
 its georeferenced sampler at true east longitudes, correlates that with the prepared minimap read from every candidate
 edge in 2° steps (`measureAtlasLeftEdge`), and refuses the preparation when the best edge is more than 4° from the
 declared one and correlates at least 0.2 better. A minimap with framing (`source/presentation/minimap.json`) starts at
@@ -502,7 +502,7 @@ pixel, with the recipe's raster scale as a ceiling. On the iPhone 17 simulator
 Jupiter's page went from 2,823 to 133 MB of layers and Saturn's from 703 to 374 MB,
 with at most 4 of 3.16 million pixels changed at rest. A leaf names no image of its
 own: each dataset's variant writes the surface and pole textures every leaf reads
-(`scene/projector.ts`, `presentation/composite.ts`), which is what made Uranus's
+(`scene/projector.ts`, `presentation/lighting/composite.ts`), which is what made Uranus's
 and Neptune's datasets draw their own maps. On a body with a dense map the texture
 is drawn at half the resolution at maximum zoom and softens there (Ceres, Mars,
 Mercury).
@@ -520,14 +520,14 @@ Two texels per CSS pixel is what a leaf needs at maximum zoom. At rest the same 
 leaf on screen, and WebKit still backs all of it. So every projective leaf reads a factor, `--leaf-box`: its box,
 background size and position are `calc(<length> * var(--leaf-box, 1))`, and its matrix is followed by
 `scale(calc(1 / var(--leaf-box, 1)))`, so each texel lands where it did at any factor. Without a factor the leaf keeps
-its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds the rule:
+its full box. [leaf-box.ts](../packages/bake/src/presentation/layout/leaf-box.ts) holds the rule:
 
 - **The factor** is `min(1, step × density)`. A leaf's density is what its box needs per pixel of the body's silhouette:
   two box pixels per screen pixel (`LEAF_BOX_SCREEN_PIXELS`) at its most magnified edge, from its measured scene frame.
 - **The exact box.** A leaf whose image states its decoded size does not take the factor as it is: only the image
   drawn at its own size is copied, not resampled ([what a dataset switch costs](#find-the-processing-step)). Its exact
   factor is the image's width over the device pixels across the full background (`leafBoxExact` in
-  [prepared-leaf-box-direct.ts](../packages/renderer/src/rendering/prepared-leaf-box-direct.ts)): on an iPad, two
+  [prepared-leaf-box-direct.ts](../packages/renderer/src/rendering/culling/prepared-leaf-box-direct.ts)): on an iPad, two
   device pixels a CSS pixel, Io's level 4,160 texels wide gives 65 px of its 128 px box and its widest image 130 px.
   The leaf takes that box with its image, in one write, once its step needs the whole image.
   - **Stated by the bake.** An image's width and height are on its prepared entry, written from the published file by
@@ -549,9 +549,9 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
     The silhouette steps: their bindings and leaf-box groups have plain names, and the page writes each leaf's final
     values from its record.
     The bake still measures images, meshes and steps in a headless browser through custom properties, then ships
-    records that name none ([texture-image-records.ts](../packages/bake/src/presentation/texture-image-records.ts),
-    [mesh-records.ts](../packages/bake/src/presentation/mesh-records.ts),
-    [step-name-records.ts](../packages/bake/src/presentation/step-name-records.ts)). The shipped-form check
+    records that name none ([texture-image-records.ts](../packages/bake/src/presentation/records/texture-image-records.ts),
+    [mesh-records.ts](../packages/bake/src/presentation/records/mesh-records.ts),
+    [step-name-records.ts](../packages/bake/src/presentation/records/step-name-records.ts)). The shipped-form check
     ([shipped-runtime.ts](../packages/objects/src/prepared-data/runtime-validation/shipped-runtime.ts)) refuses to pin
     or mount a runtime that names or reads one, and `node .github/scripts/checks/check-no-variables.mts` refuses one
     in a body stylesheet, a stage stylesheet or the renderer's source.
@@ -579,7 +579,7 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
   72 ms once measured. Surface leaves join blocks of about eight leaves by direction (`LEAF_BOX_GROUP_LEAVES`), each with a
   placement like a texture page's; other leaves (rings, shells, cutaways) form groups of eight. The bindings also record
   each group's full box area, for the memory estimate below.
-- **Runtime** ([prepared-leaf-box-blocks.ts](../packages/renderer/src/rendering/prepared-leaf-box-blocks.ts)): a block's step
+- **Runtime** ([prepared-leaf-box-blocks.ts](../packages/renderer/src/rendering/culling/prepared-leaf-box-blocks.ts)): a block's step
   is the body's diameter as it would look at the block's nearest depth, the first step when it is behind the body or off
   screen; the other groups follow the silhouette. A step is written on the group's own leaves, so only they restyle.
   - **Only at rest.** A step change redraws its leaves, so nothing switches while the camera moves, including inertia and
@@ -633,7 +633,7 @@ some variant, antialiased over one texel and never grown: at the raster sizing's
 roughly 60× leaf scale, even a one-texel margin showed as spikes past narrow apexes.
 The runtime declares the copies as `corner-shape` resource fallbacks and swaps them in
 once per page when `CSS.supports` reports the capability missing
-([prepared-resource-fallbacks.ts](../packages/renderer/src/rendering/prepared-resource-fallbacks.ts)),
+([prepared-resource-fallbacks.ts](../packages/renderer/src/rendering/loading/prepared-resource-fallbacks.ts)),
 and `triangle-faces.css` then drops the leaf's rounded corners. A browser with
 `corner-shape` never requests the copies.
 
@@ -988,7 +988,7 @@ after building the tools and restoring Arrokoth's inputs:
 
 ```sh
 node packages/bake/cli/object-operations.mts acquire arrokoth --verify-only
-node site/build/prepare/prepare-authored.ts arrokoth --write
+node site/build/prepare/authored/prepare-authored.ts arrokoth --write
 node --test packages/bake/src/objects/raster/obj-uv-fits.test.mts
 ```
 
@@ -1091,9 +1091,9 @@ After updating the changed recipe and content, use the shared preparer:
 
 ```sh
 pnpm build:preparation
-node site/build/prepare/refresh-photographs.ts moon surface
-node site/build/prepare/refresh-photographs.ts europa normal enhanced
-node site/build/prepare/refresh-photographs.ts io normal enhanced
+node site/build/prepare/authored/refresh-photographs.ts moon surface
+node site/build/prepare/authored/refresh-photographs.ts europa normal enhanced
+node site/build/prepare/authored/refresh-photographs.ts io normal enhanced
 ```
 
 Run one body at a time. The command verifies the selected source closure, prepares
@@ -1193,7 +1193,7 @@ surface geometry.
 
 The common compiler prepares this during normal object finalization. To refresh
 only this metadata from existing local assets, run
-`node site/build/prepare/prepare-interior-fills.mts --all` (or supply object ids). The command
+`node site/build/prepare/authored/prepare-interior-fills.mts --all` (or supply object ids). The command
 preserves surface assets, motion, lighting and depth partitions, and regenerates
 scene and page metadata. Source graphs are retained only after checking that
 their inputs changed solely in those scene references.

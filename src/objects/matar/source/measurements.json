@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/matar.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.205, rounded to two decimals",
   "spectralType": "G8II+F0V",
   "spectralTypeSource": "SIMBAD, * eta Peg: spectral type G8II+F0V (1969PhDT.........5M)",
+  "objectType": "Spectroscopic Binary",
+  "objectTypePath": "* > ** > SB*",
+  "objectTypeSource": "SIMBAD, * eta Peg: main object type SB*, Spectroscopic Binary",
   "projectedRotationSpeedKmS": 1.8,
   "projectedRotationSpeedSource": "SIMBAD, * eta Peg: projected rotation speed 1.8 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {

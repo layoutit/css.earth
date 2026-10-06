@@ -12,8 +12,8 @@ import { parseObjectDescriptor, parsePreparedWorldCameraFrame } from '@cssearth/
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
-import { isJplMissionTarget } from './jpl-mission-targets.mts';
-import { plainDotBank } from './plain-dot-bank.mts';
+import { isJplMissionTarget } from './world/jpl-mission-targets.mts';
+import { plainDotBank } from './world/plain-dot-bank.mts';
 
 const objects = resolve(import.meta.dirname, '../../../src/objects');
 const sun = parseObjectDescriptor(JSON.parse(await readFile(resolve(objects, 'sun/object.json'), 'utf8')));

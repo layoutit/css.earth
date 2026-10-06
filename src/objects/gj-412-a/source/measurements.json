@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-412-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.843, rounded to two decimals",
   "spectralType": "M1.0V",
   "spectralTypeSource": "SIMBAD, BD+44 2051: spectral type M1.0V (2013AJ....145..102L)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, BD+44 2051: main object type PM*, High Proper Motion Star",
   "rotationPeriodsCatalogued": [
     {
       "days": 100,

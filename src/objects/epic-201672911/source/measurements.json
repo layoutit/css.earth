@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 201672911: APOGEE DR17 effective temperature 4764.999 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.56,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-201672911.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.557, rounded to two decimals",
+  "objectType": "Red Giant Branch star",
+  "objectTypePath": "* > Ev* > RG*",
+  "objectTypeSource": "SIMBAD, TYC 276-85-1: main object type RG*, Red Giant Branch star",
   "rotationPeriodDays": 6.0372,
   "rotationPeriodSource": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 6.037189 d, the row 0.1 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

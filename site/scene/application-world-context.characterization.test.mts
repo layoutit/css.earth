@@ -30,24 +30,24 @@ const prepared = { assets: {}, mount: (_stage: unknown, options: { requestPublic
   createFramePlanner: () => planner,
   loadShells: () => shellResult,
 };
-mock.module(new URL('../world/application-world-resources.mts', import.meta.url).href, { namedExports: { loadApplicationUniverse: () => loaded } });
+mock.module(new URL('../world/application/application-world-resources.mts', import.meta.url).href, { namedExports: { loadApplicationUniverse: () => loaded } });
 mock.module('@cssearth/renderer/universe', { namedExports: { ...universe,
   prepareObjectResources: () => ({ ready: resourceReady, destroy: () => effects.push(['resources-destroy']) }) } });
 mock.module('@cssearth/renderer', { namedExports: { ...renderer,
   labelOcclusionFor: () => ({ read: () => ['sidebar'], subscribe: () => () => effects.push(['occlusion-unsubscribe']) }) } });
-mock.module('@cssearth/renderer/rendering/startup-gate.ts', { namedExports: { afterStartup: (_target: unknown, callback: () => void) => { startup = callback; } } });
-mock.module(new URL('../world/world-approach.mts', import.meta.url).href, { namedExports: { createWorldApproach: () => ({ start: () => effects.push(['approach-start']), observe(position: unknown) { effects.push(['observe', position]); } }) } });
-mock.module(new URL('../world/moon-orbit-policy.mts', import.meta.url).href, { namedExports: { suppressMinorMoonOrbitPaint: () => () => effects.push(['orbit-paint-destroy']) } });
-mock.module(new URL('../world/catalogue-moon-labels.mts', import.meta.url).href, { namedExports: { mountCatalogueMoonLabels: (_host: unknown, bodies: () => unknown, _focus: unknown, _clock: unknown, refresh: () => boolean) => { assert.ok(Array.isArray(bodies())); effects.push(['initial-label-refresh', refresh()]); return ({ selectObject: (id: string) => effects.push(['moon-select', id]), destroy: () => effects.push(['labels-destroy']) }); } } });
-mock.module(new URL('../world/application-world-frames.mts', import.meta.url).href, { namedExports: { createApplicationWorldFrames: (options: typeof frameOptions) => { frameOptions = options; return ({ refresh: () => { effects.push(['refresh']); return true; },
+mock.module('@cssearth/renderer/rendering/loading/startup-gate.ts', { namedExports: { afterStartup: (_target: unknown, callback: () => void) => { startup = callback; } } });
+mock.module(new URL('../world/application/world-approach.mts', import.meta.url).href, { namedExports: { createWorldApproach: () => ({ start: () => effects.push(['approach-start']), observe(position: unknown) { effects.push(['observe', position]); } }) } });
+mock.module(new URL('../world/application/moon-orbit-policy.mts', import.meta.url).href, { namedExports: { suppressMinorMoonOrbitPaint: () => () => effects.push(['orbit-paint-destroy']) } });
+mock.module(new URL('../world/application/catalogue-moon-labels.mts', import.meta.url).href, { namedExports: { mountCatalogueMoonLabels: (_host: unknown, bodies: () => unknown, _focus: unknown, _clock: unknown, refresh: () => boolean) => { assert.ok(Array.isArray(bodies())); effects.push(['initial-label-refresh', refresh()]); return ({ selectObject: (id: string) => effects.push(['moon-select', id]), destroy: () => effects.push(['labels-destroy']) }); } } });
+mock.module(new URL('../world/application/application-world-frames.mts', import.meta.url).href, { namedExports: { createApplicationWorldFrames: (options: typeof frameOptions) => { frameOptions = options; return ({ refresh: () => { effects.push(['refresh']); return true; },
   stats: {}, present() {}, createFramePresenter() {}, setNavigationInFlight() {},
   setRotationActive: (active: boolean) => effects.push(['rotation', active]), setCoasting: (active: boolean) => effects.push(['coasting', active]), destroy: () => effects.push(['frames-destroy']) }); } } });
-mock.module(new URL('../world/application-world-visibility.mts', import.meta.url).href, { namedExports: { worldVisibilityPolicy: { minorMoonIds: [] },
+mock.module(new URL('../world/application/application-world-visibility.mts', import.meta.url).href, { namedExports: { worldVisibilityPolicy: { minorMoonIds: [] },
   createApplicationWorldVisibility: () => ({ selectObject: (id: string) => effects.push(['visibility-select', id]), setSurrounding: (ids: readonly string[]) => effects.push(['surrounding', ids]), setIllustrationModelsEnabled() {}, setHighlightedClassification() {} }) } });
 // One holder's picture lies on walls: the bank of 'known' says so.
 mock.module(new URL('../prepared/prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: { 'known-layers': { properties: { surrounds: true, host: 'known' } }, 'outer-layers': { properties: { host: 'mars-parent' } } } } });
 mock.module(new URL('../directory/object-directory.mts', import.meta.url).href, { namedExports: { knownAncestors: (...args: unknown[]) => { effects.push(['known-ancestors', ...args]); return [{ id: 'known' }]; }, ancestorIds: (...args: unknown[]) => { effects.push(['ancestor-ids', ...args]); return ancestorResult; } } });
-mock.module(new URL('../world/context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: {} } });
+mock.module(new URL('../world/application/context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: {} } });
 mock.module(new URL('../browser/diagnostics-policy.mts', import.meta.url).href, { namedExports: { DIAGNOSTICS_ENABLED: true } });
 const { createApplicationWorldContext } = await import('./application-world-context.mts');
 const viewport = { read() {}, subscribe() {}, destroy() {} } as unknown as ReturnType<typeof createCameraViewport>;

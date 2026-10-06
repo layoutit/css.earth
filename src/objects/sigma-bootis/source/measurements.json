@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/sigma-bootis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.204, rounded to two decimals",
   "spectralType": "F4VkF2mF1",
   "spectralTypeSource": "SIMBAD, * sig Boo: spectral type F4VkF2mF1 (2001AJ....121.2148G)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * sig Boo: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 7.32,
   "projectedRotationSpeedSource": "SIMBAD, * sig Boo: projected rotation speed 7.32 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {

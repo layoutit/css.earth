@@ -13,6 +13,9 @@
   "limbDisplayGravitySource": "no gravity of this star is published (none in SIMBAD); Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra) gives the class's range, log g -1.33 to 2.86. Across log g 0 to 2.85, the part the grid covers, the limb laws differ by at most 3.0% of the centre brightness from the one drawn, at log g 1.1, the gravity closest to all of them; log g 1.1 is a display choice, not a measurement (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3)",
   "spectralType": "F6",
   "spectralTypeSource": "SIMBAD, V* RZ CMa: spectral type F6",
+  "objectType": "Classical Cepheid Variable",
+  "objectTypePath": "* > Ev* > Ce* > cC*",
+  "objectTypeSource": "SIMBAD, V* RZ CMa: main object type cC*, Classical Cepheid Variable",
   "luminosityLogSolar": 3.135,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3027940437469882880, flags_flame 10: lum_flame 1364.6375 solar luminosities (16th to 84th percentiles 1268.4982 to 1477.1177); its log10 is recorded",
   "shape": {

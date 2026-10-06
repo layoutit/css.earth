@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hip-76768.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.482, rounded to two decimals",
   "spectralType": "K5V",
   "spectralTypeSource": "SIMBAD, HD 139751: spectral type K5V (1986AJ.....92..139S)",
+  "objectType": "Double or Multiple Star",
+  "objectTypePath": "* > **",
+  "objectTypeSource": "SIMBAD, HD 139751: main object type **, Double or Multiple Star",
   "rotationPeriodDays": 3.64,
   "rotationPeriodSource": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 3.64 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
   "rotationPeriodsCatalogued": [

@@ -15,7 +15,7 @@
   ],
   "substitutions": [
     {
-      "file": "site/scene/scene-publication.mts",
+      "file": "site/scene/session/scene-publication.mts",
       "before": "    const root = documentTarget.documentElement;",
       "after": "    const root = documentTarget.documentElement;\n    const journeyParent = stage.parentNode, journeyNext = stage.nextSibling;\n    if (journeyParent) { stage.remove(); journeyParent.insertBefore(stage, journeyNext); }",
       "occurrences": 1

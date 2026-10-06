@@ -74,7 +74,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);
   const pages=plan.body.assets.surface.urls.length;
   // A page the first level draws from a sheet also carries its tile in the variable form the bindings measure; the
-  // bindings' last step turns it into records (presentation/texture-tile-records.ts).
+  // bindings' last step turns it into records (presentation/records/texture-tile-records.ts).
   const tiledKeys=tiledTextureKeys(textureLevels?.textureLevels),initialTiles=textureLevels?.textureLevels.levels[0]?.tiles??{};
   const writePages=(node: PreparedNode,urls: readonly string[])=>{for(let i=0;i<pages;i++){
     const name=`--${config.namespace}-surface-page-${i}`,key=pageKeys(defaultDataset)[i]!;

@@ -1,13 +1,13 @@
-import { createCameraMotion } from './camera-motion.js';
+import { createCameraMotion } from './motion/camera-motion.js';
 import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { getEventListeners } from 'node:events';
 import scene from '../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
 import { createRetainedCubicSkyOrbit } from './object-orbit.js';
-import { createPerspectiveDolly } from './perspective-dolly.js';
-import { presentWorldCamera } from './world-camera.js';
-import { poleHoldFor, turnPoleHeld } from './pole-held-drag.js';
+import { createPerspectiveDolly } from './camera/perspective-dolly.js';
+import { presentWorldCamera } from './camera/world-camera.js';
+import { poleHoldFor, turnPoleHeld } from './input/pole-held-drag.js';
 import { worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
 
 const frame = Object.freeze({ referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [3e7, 4e7, 5e7] as const,

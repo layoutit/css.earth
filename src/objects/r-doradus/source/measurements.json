@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Effective temperature 2710 ± 70 K from Ohnaka, Weigelt & Hofmann 2019 (ApJ 883, 89; https://doi.org/10.3847/1538-4357/ab3d2a), Table 1 and Section 3: the AMBER limb-darkened diameter 51.18 mas with the bolometric flux compiled over several epochs. The radius source, Vlemmings et al. 2024, adopts this value.",
   "spectralType": "M8III:e",
   "spectralTypeSource": "SIMBAD, V* R Dor: spectral type M8III:e (1989ApJS...71..245K)",
+  "objectType": "Asymptotic Giant Branch Star",
+  "objectTypePath": "* > Ev* > AB*",
+  "objectTypeSource": "SIMBAD, V* R Dor: main object type AB*, Asymptotic Giant Branch Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "path": "shape/uniform-disc.tab",

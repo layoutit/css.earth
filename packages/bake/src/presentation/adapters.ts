@@ -1,9 +1,9 @@
 import { type PreparedMaterialTrack, type PreparedSelectionNavigation } from '@cssearth/objects';
 
-import { createPreparedNodeTree } from './prepared-node-tree.ts';
-import { prepareCssomDeclarationReads } from './prepared-cssom.ts';
+import { createPreparedNodeTree } from './layout/prepared-node-tree.ts';
+import { prepareCssomDeclarationReads } from './css/prepared-cssom.ts';
 import type { PresentationDraft } from './types.ts';
-export type { PreparedNode } from './prepared-node-tree.ts';
+export type { PreparedNode } from './layout/prepared-node-tree.ts';
 export type NodeBuilder = ReturnType<typeof createPreparedNodeTree>;
 
 /** What the caller supplies: the material tracks and the dataset navigation are owned by the preparation tools, which pass

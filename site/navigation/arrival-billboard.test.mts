@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
 import { type PreparedArrivalView } from '@cssearth/objects';
 import { worldCameraFromCenteredPresentation } from '@cssearth/engine';
-import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import { prepareArrivalBillboard, canUseArrivalBillboard, frameArrivalBillboard } from './arrival-billboard.mts';
 
 test('arrival fits every viewport at the exact prepared perspective', () => {

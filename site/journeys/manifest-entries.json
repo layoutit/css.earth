@@ -10,7 +10,7 @@
     {
       "id": "capability:directLoad",
       "kind": "capability",
-      "source": "packages/renderer/src/navigation/camera-layout.ts:3"
+      "source": "packages/renderer/src/navigation/camera/camera-layout.ts:3"
     },
     {
       "id": "capability:docs:performance:motion-freezes-membership:coast-exception:batched-star-points:1",
@@ -35,7 +35,7 @@
     {
       "id": "capability:DPR",
       "kind": "capability",
-      "source": "packages/renderer/src/rendering/prepared-leaf-box-blocks.ts:104"
+      "source": "packages/renderer/src/rendering/culling/prepared-leaf-box-blocks.ts:104"
     },
     {
       "id": "capability:historyDeepLinks",
@@ -95,7 +95,7 @@
     {
       "id": "capability:mouse",
       "kind": "capability",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:20"
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:20"
     },
     {
       "id": "capability:penPointer",
@@ -120,7 +120,7 @@
     {
       "id": "capability:serverAdoption",
       "kind": "capability",
-      "source": "packages/renderer/src/rendering/prepared-omitted-nodes.ts:23"
+      "source": "packages/renderer/src/rendering/dom/prepared-omitted-nodes.ts:23"
     },
     {
       "id": "capability:tabFocus",
@@ -130,12 +130,12 @@
     {
       "id": "capability:touch",
       "kind": "capability",
-      "source": "packages/renderer/src/navigation/camera-input.ts:357"
+      "source": "packages/renderer/src/navigation/input/camera-input.ts:357"
     },
     {
       "id": "capability:visibility",
       "kind": "capability",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:24"
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:24"
     },
     {
       "id": "capability:wheelTrackpad",
@@ -162,7 +162,7 @@
     {
       "id": "control:site:build:prepare:prepare-world-navigation:input:markup:1",
       "kind": "control",
-      "source": "site/build/prepare/prepare-world-navigation.ts:244",
+      "source": "site/build/prepare/authored/prepare-world-navigation.ts:244",
       "tag": "input",
       "selector": "input",
       "markup": "<Input | undefined>"
@@ -941,7 +941,7 @@
     {
       "id": "control:site:server:search-response:input:input:1",
       "kind": "control",
-      "source": "site/server/search-response.mts:41",
+      "source": "site/server/search/search-response.mts:41",
       "tag": "input",
       "selector": "input"
     },
@@ -1020,7 +1020,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-flight:createCameraFlight:abort:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-flight.ts:66",
+      "source": "packages/renderer/src/navigation/motion/camera-flight.ts:66",
       "eventTypes": [
         "abort"
       ],
@@ -1029,7 +1029,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-flight:schedule:animation-frame:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-flight.ts:42",
+      "source": "packages/renderer/src/navigation/motion/camera-flight.ts:42",
       "eventTypes": [
         "animation-frame"
       ],
@@ -1038,7 +1038,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:dblclick:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:21",
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:21",
       "eventTypes": [
         "dblclick"
       ],
@@ -1047,7 +1047,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:dynamic-type:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:26",
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:26",
       "eventTypes": [
         "keydown",
         "visibilitychange"
@@ -1057,7 +1057,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:lostpointercapture:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:19",
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:19",
       "eventTypes": [
         "lostpointercapture"
       ],
@@ -1066,7 +1066,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:mousedown:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:20",
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:20",
       "eventTypes": [
         "mousedown"
       ],
@@ -1075,7 +1075,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:pointercancel:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:18",
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:18",
       "eventTypes": [
         "pointercancel"
       ],
@@ -1084,7 +1084,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:pointerdown:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:15",
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:15",
       "eventTypes": [
         "pointerdown"
       ],
@@ -1093,7 +1093,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:pointermove:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:16",
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:16",
       "eventTypes": [
         "pointermove"
       ],
@@ -1102,7 +1102,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:pointerup:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:17",
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:17",
       "eventTypes": [
         "pointerup"
       ],
@@ -1111,7 +1111,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:wheel:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:22",
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:22",
       "eventTypes": [
         "wheel"
       ],
@@ -1120,14 +1120,14 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-input-listeners:listen:dynamic-name:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:13",
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:13",
       "eventTypes": [],
       "mechanism": "wrapper-call"
     },
     {
       "id": "handler:packages:renderer:src:navigation:camera-viewport:createCameraViewport:resize:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-viewport.ts:88",
+      "source": "packages/renderer/src/navigation/camera/camera-viewport.ts:88",
       "eventTypes": [
         "resize"
       ],
@@ -1136,7 +1136,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:camera-viewport:createCameraViewport:scroll:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/camera-viewport.ts:89",
+      "source": "packages/renderer/src/navigation/camera/camera-viewport.ts:89",
       "eventTypes": [
         "scroll"
       ],
@@ -1145,7 +1145,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:prepared-wheel-zoom:releaseWheel:wheel:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/prepared-wheel-zoom.ts:255",
+      "source": "packages/renderer/src/navigation/input/prepared-wheel-zoom.ts:255",
       "eventTypes": [
         "wheel"
       ],
@@ -1154,21 +1154,21 @@
     {
       "id": "handler:packages:renderer:src:navigation:shared-input-surface:bindInputEvent:dynamic-type:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/shared-input-surface.ts:28",
+      "source": "packages/renderer/src/navigation/input/shared-input-surface.ts:28",
       "eventTypes": [],
       "mechanism": "addEventListener"
     },
     {
       "id": "handler:packages:renderer:src:navigation:shared-input-surface:bindInputEvent:dynamic-type:2",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/shared-input-surface.ts:40",
+      "source": "packages/renderer/src/navigation/input/shared-input-surface.ts:40",
       "eventTypes": [],
       "mechanism": "addEventListener"
     },
     {
       "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:blur:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-camera-picking.ts:174",
+      "source": "packages/renderer/src/navigation/picking/world-camera-picking.ts:174",
       "eventTypes": [
         "blur"
       ],
@@ -1177,7 +1177,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:click:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-camera-picking.ts:172",
+      "source": "packages/renderer/src/navigation/picking/world-camera-picking.ts:172",
       "eventTypes": [
         "click"
       ],
@@ -1186,7 +1186,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:dblclick:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-camera-picking.ts:173",
+      "source": "packages/renderer/src/navigation/picking/world-camera-picking.ts:173",
       "eventTypes": [
         "dblclick"
       ],
@@ -1195,7 +1195,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:mousedown:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-camera-picking.ts:171",
+      "source": "packages/renderer/src/navigation/picking/world-camera-picking.ts:171",
       "eventTypes": [
         "mousedown"
       ],
@@ -1204,7 +1204,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:pointercancel:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-camera-picking.ts:170",
+      "source": "packages/renderer/src/navigation/picking/world-camera-picking.ts:170",
       "eventTypes": [
         "pointercancel"
       ],
@@ -1213,7 +1213,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:pointerdown:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-camera-picking.ts:167",
+      "source": "packages/renderer/src/navigation/picking/world-camera-picking.ts:167",
       "eventTypes": [
         "pointerdown"
       ],
@@ -1222,7 +1222,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:pointerleave:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-camera-picking.ts:176",
+      "source": "packages/renderer/src/navigation/picking/world-camera-picking.ts:176",
       "eventTypes": [
         "pointerleave"
       ],
@@ -1231,7 +1231,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:pointermove:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-camera-picking.ts:168",
+      "source": "packages/renderer/src/navigation/picking/world-camera-picking.ts:168",
       "eventTypes": [
         "pointermove"
       ],
@@ -1240,7 +1240,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:pointerup:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-camera-picking.ts:169",
+      "source": "packages/renderer/src/navigation/picking/world-camera-picking.ts:169",
       "eventTypes": [
         "pointerup"
       ],
@@ -1249,7 +1249,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:wheel:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-camera-picking.ts:175",
+      "source": "packages/renderer/src/navigation/picking/world-camera-picking.ts:175",
       "eventTypes": [
         "wheel"
       ],
@@ -1258,7 +1258,7 @@
     {
       "id": "handler:packages:renderer:src:navigation:world-frame-queue:createWorldFrameQueue:abort:1",
       "kind": "handler",
-      "source": "packages/renderer/src/navigation/world-frame-queue.ts:157",
+      "source": "packages/renderer/src/navigation/camera/world-frame-queue.ts:157",
       "eventTypes": [
         "abort"
       ],
@@ -1348,7 +1348,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:296",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:296",
       "eventTypes": [
         "click"
       ],
@@ -1357,7 +1357,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:2",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:310",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:310",
       "eventTypes": [
         "click"
       ],
@@ -1366,7 +1366,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:3",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:320",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:320",
       "eventTypes": [
         "click"
       ],
@@ -1375,7 +1375,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:dynamic-event:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:304",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:304",
       "eventTypes": [
         "focus",
         "pointerenter",
@@ -1386,7 +1386,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:dynamic-event:2",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:332",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:332",
       "eventTypes": [
         "change",
         "click",
@@ -1399,7 +1399,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:visibilitychange:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:328",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:328",
       "eventTypes": [
         "visibilitychange"
       ],
@@ -1408,14 +1408,14 @@
     {
       "id": "handler:packages:renderer:src:rendering:object-control-binding:listen:dynamic-event:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:213",
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:213",
       "eventTypes": [],
       "mechanism": "addEventListener"
     },
     {
       "id": "handler:packages:renderer:src:rendering:object-selection-runtime:run:abort:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/object-selection-runtime.ts:146",
+      "source": "packages/renderer/src/rendering/view/object-selection-runtime.ts:146",
       "eventTypes": [
         "abort"
       ],
@@ -1424,7 +1424,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:prepared-image-store:startDownload:error:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/prepared-image-store.ts:142",
+      "source": "packages/renderer/src/rendering/loading/prepared-image-store.ts:142",
       "eventTypes": [
         "error"
       ],
@@ -1433,7 +1433,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:prepared-image-store:startDownload:load:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/prepared-image-store.ts:141",
+      "source": "packages/renderer/src/rendering/loading/prepared-image-store.ts:141",
       "eventTypes": [
         "load"
       ],
@@ -1442,7 +1442,7 @@
     {
       "id": "handler:packages:renderer:src:rendering:prepared-tree:preparePresentationTree:abort:1",
       "kind": "handler",
-      "source": "packages/renderer/src/rendering/prepared-tree.ts:134",
+      "source": "packages/renderer/src/rendering/dom/prepared-tree.ts:134",
       "eventTypes": [
         "abort"
       ],
@@ -1722,7 +1722,7 @@
     {
       "id": "handler:site:catalogue-moon-labels:observer:ResizeObserver:1",
       "kind": "handler",
-      "source": "site/world/catalogue-moon-labels.mts:101",
+      "source": "site/world/application/catalogue-moon-labels.mts:101",
       "eventTypes": [
         "ResizeObserver"
       ],
@@ -2294,7 +2294,7 @@
     {
       "id": "handler:site:scene:scene-datasets:createDatasetEffects:abort:1",
       "kind": "handler",
-      "source": "site/scene/scene-datasets.mts:43",
+      "source": "site/scene/session/scene-datasets.mts:43",
       "eventTypes": [
         "abort"
       ],
@@ -2303,7 +2303,7 @@
     {
       "id": "handler:site:scene:scene-feature:selectSceneFeature:abort:1",
       "kind": "handler",
-      "source": "site/scene/scene-feature.mts:54",
+      "source": "site/scene/session/scene-feature.mts:54",
       "eventTypes": [
         "abort"
       ],
@@ -2647,44 +2647,44 @@
   ],
   "wrappers": [
     {
-      "file": "packages/renderer/src/navigation/camera-input-listeners.ts",
+      "file": "packages/renderer/src/navigation/input/camera-input-listeners.ts",
       "name": "listen",
       "eventIndex": 0,
       "targetIndex": -1,
       "callbackIndex": 1,
       "optionsIndex": 2,
       "target": "inputSurface",
-      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:13"
+      "source": "packages/renderer/src/navigation/input/camera-input-listeners.ts:13"
     },
     {
-      "file": "packages/renderer/src/navigation/shared-input-surface.ts",
+      "file": "packages/renderer/src/navigation/input/shared-input-surface.ts",
       "name": "bindInputEvent",
       "eventIndex": 3,
       "targetIndex": 2,
       "callbackIndex": -1,
       "optionsIndex": 5,
       "target": "target",
-      "source": "packages/renderer/src/navigation/shared-input-surface.ts:28"
+      "source": "packages/renderer/src/navigation/input/shared-input-surface.ts:28"
     },
     {
-      "file": "packages/renderer/src/navigation/shared-input-surface.ts",
+      "file": "packages/renderer/src/navigation/input/shared-input-surface.ts",
       "name": "bindInputEvent",
       "eventIndex": 3,
       "targetIndex": 2,
       "callbackIndex": -1,
       "optionsIndex": 5,
       "target": "target",
-      "source": "packages/renderer/src/navigation/shared-input-surface.ts:40"
+      "source": "packages/renderer/src/navigation/input/shared-input-surface.ts:40"
     },
     {
-      "file": "packages/renderer/src/rendering/object-control-binding.ts",
+      "file": "packages/renderer/src/rendering/view/object-control-binding.ts",
       "name": "listen",
       "eventIndex": 1,
       "targetIndex": 0,
       "callbackIndex": 2,
       "optionsIndex": 3,
       "target": "input",
-      "source": "packages/renderer/src/rendering/object-control-binding.ts:213"
+      "source": "packages/renderer/src/rendering/view/object-control-binding.ts:213"
     }
   ]
 }

@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Primary log Teff 3.705 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G): 5070 K (https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G)",
   "surfaceGravityLogg": 2.179,
   "surfaceGravitySource": "Primary log g 2.179 +/- 0.01, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Graczyk et al. (2018ApJ...860....1G) (https://ui.adsabs.harvard.edu/abs/2018ApJ...860....1G)",
+  "objectType": "Eclipsing Binary",
+  "objectTypePath": "* > ** > EB*",
+  "objectTypeSource": "SIMBAD, Gaia DR3 4658354927055221632: main object type EB*, Eclipsing Binary",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

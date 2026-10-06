@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-4308 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract)",
   "surfaceGravityLogg": 4.59,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4308.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.593, rounded to two decimals",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, TYC 7994-571-1: main object type PM*, High Proper Motion Star",
   "luminosityLogSolar": -0.368,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4308 (pscomppars): log10 of the luminosity in solar units -0.36795, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {

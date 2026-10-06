@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kappa-ceti.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.527, rounded to two decimals",
   "spectralType": "G5V",
   "spectralTypeSource": "SIMBAD, * kap01 Cet: spectral type G5V (1989ApJS...71..245K)",
+  "objectType": "BY Dra Variable",
+  "objectTypePath": "* > ** > BY*",
+  "objectTypeSource": "SIMBAD, * kap01 Cet: main object type BY*, BY Dra Variable",
   "rotationPeriodDays": 9.24,
   "rotationPeriodSource": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 9.24 d, the row 0.0 arcsec from the star's J2000 place. The middle of 11 catalogued periods, 10 of them within 20% of it",
   "rotationPeriodsCatalogued": [

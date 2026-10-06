@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 9942816 (Gold): Asteroseismic log g 2.5233 +/- 0.0039 (https://arxiv.org/abs/2410.00102)",
   "spectralType": "G9.5IV",
   "spectralTypeSource": "SIMBAD, TYC 3542-46-1: spectral type G9.5IV (2022A&A...664A..78F)",
+  "objectType": "Horizontal Branch Star",
+  "objectTypePath": "* > Ev* > HB*",
+  "objectTypeSource": "SIMBAD, TYC 3542-46-1: main object type HB*, Horizontal Branch Star",
   "luminosityLogSolar": 1.794,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2130456782730953472, flags_flame 10: lum_flame 62.22625 solar luminosities (16th to 84th percentiles 59.093216 to 65.598335); its log10 is recorded",
   "shape": {

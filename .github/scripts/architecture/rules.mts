@@ -1,6 +1,6 @@
 /** Layer rules over the file-level import graph. Each rule names the imports it forbids; the committed
  * baseline lists existing debt for ratcheted rules; no-baseline rules fail on every finding. */
-import type { ImportEdge, ImportGraph } from './graph.mts';
+import type { ImportEdge, ImportGraph } from './import-graph/graph.mts';
 import { byText, isTestPath } from './zones.mts';
 
 export interface LayerRule {

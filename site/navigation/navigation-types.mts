@@ -1,8 +1,8 @@
 import type { MountOptions } from '../browser/browser-types.mts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import type { SceneSubject } from '../world/scene-subject.mts';
-import type { PageView } from '../world/navigation-scope.mts';
+import type { SceneSubject } from '../world/systems/scene-subject.mts';
+import type { PageView } from '../world/systems/navigation-scope.mts';
 
 /** How far out an object's scene is seen: on the body, or out to its system. */
 export type SceneView = PageView;

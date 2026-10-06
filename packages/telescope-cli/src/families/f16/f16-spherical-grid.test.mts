@@ -9,7 +9,7 @@ import { astroqueryToolchain, fileSize, readProductRecord } from '@cssearth/tele
 import { executeFamilyOperation, executableFamilyOperations } from '../../family-operation.mts';
 import { member } from '../common.mts';
 import { describePhysicalSphericalGrid, inspectPhysicalSphericalGrid, type SphericalGridContext } from './f16-spherical-grid.mts';
-import { STEREO_COR1_F16_PROFILE } from '../../observation-families.mts';
+import { STEREO_COR1_F16_PROFILE } from '../../products/observation-families.mts';
 
 const context: SphericalGridContext = { profileId: STEREO_COR1_F16_PROFILE, frame: 'sun-carrington-cr2053', frameBasis: 'fixture Carrington axes', sourceUrl: 'https://example.test/cor1.fits', citation: 'fixture', license: 'fixture', quantity: 'electron number density', unit: 'cm^-3', hdu: 0 };
 

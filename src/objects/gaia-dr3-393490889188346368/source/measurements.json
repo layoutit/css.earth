@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gaia-dr3-393490889188346368.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.807, rounded to two decimals",
   "spectralType": "M0.0III",
   "spectralTypeSource": "SIMBAD, 2MASS J00001041+4922394: spectral type M0.0III (2023ApJS..266....4L)",
+  "objectType": "Asymptotic Giant Branch Star Candidate",
+  "objectTypePath": "* > Ev* > AB*",
+  "objectTypeSource": "SIMBAD, 2MASS J00001041+4922394: main object type AB?, Asymptotic Giant Branch Star Candidate",
   "luminosityLogSolar": 2.883,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 393490889188346368, flags_flame 10: lum_flame 763.4254 solar luminosities (16th to 84th percentiles 660.8835 to 921.43805); its log10 is recorded",
   "shape": {

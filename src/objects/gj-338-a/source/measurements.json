@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-338-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.709, rounded to two decimals",
   "spectralType": "K7V",
   "spectralTypeSource": "SIMBAD, HD 79210: spectral type K7V (1991ApJS...77..417K)",
+  "objectType": "Spectroscopic Binary",
+  "objectTypePath": "* > ** > SB*",
+  "objectTypeSource": "SIMBAD, HD 79210: main object type SB*, Spectroscopic Binary",
   "rotationPeriodDays": 16.3,
   "rotationPeriodSource": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 16.3 d, the row 0.0 arcsec from the star's J2000 place. The middle of 6 catalogued periods, 6 of them within 20% of it",
   "rotationPeriodsCatalogued": [

@@ -1,0 +1,41 @@
+{
+  "id": "mast-tess-full-frame-images",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TESS calibrated full-frame images, read as cutouts through MAST's TESScut service",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17909/0cp4-2j79"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://mast.stsci.edu/tesscut/",
+      "label": "TESScut at MAST"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17909/0cp4-2j79",
+      "label": "TESS calibrated full-frame images: all sectors"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mast.stsci.edu/tesscut/",
+      "checkedOn": "2026-10-06",
+      "locator": "TESScut: the same pixels cut out of every full-frame image of a sector at one place on the sky, as a FITS cube."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+    }
+  ],
+  "publisher": "Mikulski Archive for Space Telescopes (STScI)"
+}

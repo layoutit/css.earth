@@ -9,6 +9,7 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --metadata --all | <star id>... [--periods [fresh]]
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --tess-light --all | <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb <id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-lit <id>...
@@ -64,20 +65,25 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     await writeFile(out, `${JSON.stringify(entries, null, 2)}\n`);
     process.stdout.write(`${entries.map(entry => `${entry.id}: ${entry.photometry.bands.map(band => `${band.band} ${band.value} µJy`).join(', ')}`).join('\n')}\n${notes.join('\n')}\n${entries.length} of ${ids.length} planets drafted to ${out}; apply with --photometry ${out}\n`);
   } else if (args.includes('--charts') && !specPath) {
-    // Charts for the archive planets of hosts already in the tree: `--charts HOST_ID...` (new-object/planet-charts.mts).
-    const { chartHosts } = await import('./planet-charts.mts'), { liveArchive } = await import('./archives/archives.mts');
+    // Charts for the archive planets of hosts already in the tree: `--charts HOST_ID...` (new-object/planets/planet-charts.mts).
+    const { chartHosts } = await import('./planets/planet-charts.mts'), { liveArchive } = await import('./archives/archives.mts');
     const lines = await chartHosts(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) charted. Bake them from the prepare step: node packages/bake/cli/prepare-object.mts <id>... --from prepare\n`);
   } else if (args.includes('--retime') && !specPath) {
-    // Orbit timing of archive planets after the ephemeris rule changes: `--retime HOST_ID...` (new-object/retime.mts).
-    const { retimeHosts } = await import('./retime.mts'), { liveArchive } = await import('./archives/archives.mts');
+    // Orbit timing of archive planets after the ephemeris rule changes: `--retime HOST_ID...` (new-object/revise/retime.mts).
+    const { retimeHosts } = await import('./revise/retime.mts'), { liveArchive } = await import('./archives/archives.mts');
     const lines = await retimeHosts(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Rebuild the astronomy package, then bake the changed ones.\n`);
   } else if (args.includes('--rename') && !specPath) {
-    // Names by the order of preference, for stars the tool made: `--rename STAR_ID...` (new-object/rename.mts), then `--refresh`.
-    const { renameStars } = await import('./rename.mts'), { liveArchive } = await import('./archives/archives.mts');
+    // Names by the order of preference, for stars the tool made: `--rename STAR_ID...` (new-object/revise/rename.mts), then `--refresh`.
+    const { renameStars } = await import('./revise/rename.mts'), { liveArchive } = await import('./archives/archives.mts');
     const { lines, refresh } = await renameStars(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), liveArchive);
     process.stdout.write(`${lines.join('\n')}\n${refresh.length ? `Regenerate: node packages/telescope-cli/src/new-object/new-object-cli.mts --refresh ${refresh.join(' ')} --bake\n` : ''}`);
+  } else if (args.includes('--tess-light')) {
+    // What the TESS reduction found of each star it looked at, into its measurements record: `--tess-light --all | STAR_ID...` (new-object/brightness/brightness.mts).
+    const { writeTessLight } = await import('./brightness/brightness.mts'), ids = args.filter(argument => !argument.startsWith('--'));
+    if (!ids.length && !args.includes('--all')) throw new TypeError('Usage: --tess-light --all | <star id>...');
+    await writeTessLight(checkoutProjectRoot(import.meta.url), ids.length ? ids : 'all', line => process.stdout.write(`${line}\n`));
   } else if (args.includes('--metadata') && !specPath) {
     // What the catalogues print of stars already in the tree, into their measurements records: `--metadata --all | STAR_ID...` (new-object/metadata/metadata.mts).
     const { writeStarMetadata } = await import('./metadata/metadata.mts'), { liveArchive } = await import('./archives/archives.mts'), ids = args.filter(argument => !argument.startsWith('--'));
@@ -85,19 +91,19 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     const lines = await writeStarMetadata(checkoutProjectRoot(import.meta.url), ids.filter(id => id !== 'fresh'), liveArchive, line => process.stdout.write(`${line}\n`), args.includes('--periods') ? ids.includes('fresh') ? 'fresh' : 'kept' : undefined);
     process.stdout.write(`${lines.at(-1)}\n${lines.length - 1} record(s) changed.\n`);
   } else if (args.includes('--retext') && !specPath) {
-    // Drafted text and size facts of archive hosts and their planets, after a template change: `--retext HOST_ID...` (new-object/retext.mts).
-    const { retextHosts } = await import('./retext.mts'), { liveArchive } = await import('./archives/archives.mts');
+    // Drafted text and size facts of archive hosts and their planets, after a template change: `--retext HOST_ID...` (new-object/revise/retext.mts).
+    const { retextHosts } = await import('./revise/retext.mts'), { liveArchive } = await import('./archives/archives.mts');
     const lines = await retextHosts(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} package(s) considered. Bake the changed ones from the text step: node packages/bake/cli/prepare-object.mts <id>... --from catalogue\n`);
   } else if (option('phase-curve') !== undefined && !specPath) {
-    // Heat maps from published phase-curve fits for planets already in the tree: `--phase-curve entries.json` (new-object/phase-curve-dataset.mts).
-    const { readFile } = await import('node:fs/promises'), { parsePhaseCurveEntries } = await import('./phase-curve-dataset.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
+    // Heat maps from published phase-curve fits for planets already in the tree: `--phase-curve entries.json` (new-object/planets/phase-curve-dataset.mts).
+    const { readFile } = await import('node:fs/promises'), { parsePhaseCurveEntries } = await import('./planets/phase-curve-dataset.mts'), { rebuildExistingDatasets } = await import('./planets/planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const entries = parsePhaseCurveEntries(JSON.parse(await readFile(option('phase-curve')!, 'utf8')));
     const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), [...entries.keys()], 'phase-curve', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), entries);
     process.stdout.write(`${lines.length} dataset(es) added. Bake the changed planets: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (option('simulation') !== undefined && !specPath) {
     // Published simulations for bodies already in the tree, each from an entry written after reading its paper: `--simulation entries.json` (new-object/simulation/simulation-dataset.mts).
-    const { readFile } = await import('node:fs/promises'), { parseSimulationEntries } = await import('./simulation/simulation-dataset.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
+    const { readFile } = await import('node:fs/promises'), { parseSimulationEntries } = await import('./simulation/simulation-dataset.mts'), { rebuildExistingDatasets } = await import('./planets/planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const entries = parseSimulationEntries(JSON.parse(await readFile(option('simulation')!, 'utf8')));
     const lines = await rebuildExistingDatasets(newObjectPath(), [...entries.keys()], 'simulation', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), new Map(), entries);
     process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
@@ -109,7 +115,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
   } else if (option('thermal-entries') !== undefined && !specPath) {
     // Measured day sides read from their papers, for planets the archives' tables lack: `--thermal-entries entries.json` (spec.mts parseThermalEntries).
-    const { readFile } = await import('node:fs/promises'), { parseThermalEntries } = await import('./spec.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
+    const { readFile } = await import('node:fs/promises'), { parseThermalEntries } = await import('./spec.mts'), { rebuildExistingDatasets } = await import('./planets/planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const entries = parseThermalEntries(JSON.parse(await readFile(option('thermal-entries')!, 'utf8')));
     const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), [...entries.keys()], 'thermal', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), new Map(), new Map(), fetch, entries);
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
@@ -121,13 +127,13 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
   } else if (option('photometry') !== undefined && !specPath) {
     // Band photometry for imaged planets already in the tree: `--photometry entries.json`, a list of { id, photometry } (spec.mts PhotometrySpec).
-    const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./spec.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
+    const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./spec.mts'), { rebuildExistingDatasets } = await import('./planets/planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const entries = parsePhotometryEntries(JSON.parse(await readFile(option('photometry')!, 'utf8')));
     const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), [...entries.keys()], 'photometry', liveArchive, line => process.stdout.write(`${line}\n`), entries);
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if ((args.includes('--thermal') || args.includes('--expected-glow') || args.includes('--host-light')) && !specPath) {
-    // Color for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-datasets.mts).
-    const mode = args.includes('--thermal') ? 'thermal' : args.includes('--expected-glow') ? 'expected-glow' : 'host-light', { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
+    // Color for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planets/planet-datasets.mts).
+    const mode = args.includes('--thermal') ? 'thermal' : args.includes('--expected-glow') ? 'expected-glow' : 'host-light', { rebuildExistingDatasets } = await import('./planets/planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (args.includes('--star-lit') && !specPath) {
@@ -141,8 +147,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     const lines = await addImagedLimbs(checkoutProjectRoot(import.meta.url), ids, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (args.includes('--star-limb') && !specPath) {
-    // Limb darkening for stars already in the tree, hand-made packages included: `--star-limb ID... [--bake]` (new-object/star-limb.mts).
-    const { starLimb } = await import('./star-limb.mts'), { prepareObjects } = await import('@cssearth/bake/prepare-object');
+    // Limb darkening for stars already in the tree, hand-made packages included: `--star-limb ID... [--bake]` (new-object/darkening/star-limb.mts).
+    const { starLimb } = await import('./darkening/star-limb.mts'), { prepareObjects } = await import('@cssearth/bake/prepare-object');
     const ids = args.filter(argument => !argument.startsWith('--'));
     const results = await starLimb(checkoutProjectRoot(import.meta.url), ids, { progress: line => process.stderr.write(`${line}\n`) });
     process.stdout.write(`${results.map(result => `${result.id}: ${result.limb}${result.gravity ? `, log g ${result.gravity}` : ''}${result.color ? `, color ${result.color}` : ''}`).join('\n')}\n`);

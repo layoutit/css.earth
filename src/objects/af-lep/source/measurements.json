@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/af-lep.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.323, rounded to two decimals",
   "spectralType": "F8",
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of AF Lep (pscomppars): spectral type F8, from Denis et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...696A...6D/abstract)",
+  "objectType": "RS CVn Variable",
+  "objectTypePath": "* > ** > RS*",
+  "objectTypeSource": "SIMBAD, V* AF Lep: main object type RS*, RS CVn Variable",
   "metallicityDex": 0.19,
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of AF Lep (pscomppars): [Fe/H] 0.19 dex, from Franson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...950L..19F/abstract)",
   "luminosityLogSolar": 0.29,
@@ -69,6 +72,13 @@
   ],
   "projectedRotationSpeedKmS": 54.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of AF Lep (pscomppars): projected rotation speed 54.7 km/s, from Mesa et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..93M/abstract)",
+  "rotationPeriodMeasuredDays": 1.01,
+  "rotationPeriodMeasuredSource": "Measured in this project from the star's light in the TESS full-frame images of sector 32 (packages/telescope-cli/src/archives/tess/reduce.mts): 1.01 d, the light swinging by 1.7% as the star turns",
+  "rotationLightSwingPercent": 1.71,
+  "tessLight": "The star's rotation is seen: 1.01 d, the light swinging by 1.7%.",
+  "tessLightSector": 32,
+  "tessLightScatterPercent": 0.75,
+  "tessLightSource": "Read in this project from the TESS full-frame images of sector 32 (packages/telescope-cli/src/archives/tess/reduce.mts); the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

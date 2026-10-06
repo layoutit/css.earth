@@ -307,5 +307,39 @@ export async function loadObservedProfile(layer: ObservedRadialLayer, inputs: Re
     const transmission = Math.round(255 * Math.exp(-depth[i]));
     for (let channel = 0; channel < 3; channel += 1) { color[i * 3 + channel] = layer.color[channel]; transparency[i * 3 + channel] = transmission; }
   }
-  return { color, transparency, width };
+  return { color, transparency, width, opticalDepth: depth };
+}
+
+/**
+ * The share of direct sunlight each row of a map keeps under a ring at local noon. Rows are evenly spaced in the mesh's own
+ * latitude (x = a cos beta, z = b sin beta), north pole first. `sineElevation` is the sine of the Sun's elevation over the ring
+ * plane, negative for a Sun south of it; the shadow falls on the other hemisphere. A normal optical depth tau is the slant depth
+ * times that sine (Colwell et al. 2010, https://doi.org/10.1088/0004-6256/140/6/1569), so a bin passes exp(-tau / sine) of the
+ * direct beam. A row holds the mean over the radial bins its sunward rays cross; no diffuse light is added inside the shadow.
+ */
+export function noonRingShadowRows(rows: number, body: { equatorialRadius: number; polarRadius: number }, sineElevation: number,
+  sourceBounds: readonly [number, number], opticalDepth: Float64Array) {
+  const sine = Math.abs(sineElevation), side = -Math.sign(sineElevation);
+  if (!(sine > 0 && sine <= 1)) throw new RangeError(`Ring shadow: the sine of the Sun's elevation is ${sineElevation}, outside [-1, 1] or zero.`);
+  if (!Number.isInteger(rows) || rows < 1 || opticalDepth.length < 2) throw new RangeError('Ring shadow needs map rows and an optical depth profile.');
+  const [inner, outer] = sourceBounds, binWidth = (outer - inner) / (opticalDepth.length - 1), cotangent = Math.sqrt(1 - sine * sine) / sine;
+  // opaque[i] is the summed slant opacity of bins 0..i-1, each centered on its radius, so any radial span averages in two lookups.
+  const opaque = new Float64Array(opticalDepth.length + 1);
+  for (let i = 0; i < opticalDepth.length; i += 1) opaque[i + 1] = opaque[i]! + 1 - Math.exp(-opticalDepth[i]! / sine);
+  const summed = (radius: number) => {
+    const bin = Math.max(0, Math.min(opticalDepth.length, (radius - inner) / binWidth + 0.5)), whole = Math.floor(bin);
+    return opaque[whole]! + (whole < opticalDepth.length ? (bin - whole) * (opaque[whole + 1]! - opaque[whole]!) : 0);
+  };
+  // Where the ray from the noon meridian's surface point at mesh latitude beta toward the Sun crosses the ring plane.
+  const crossing = (beta: number) => body.equatorialRadius * Math.cos(beta) + side * body.polarRadius * Math.sin(beta) * cotangent;
+  const direct = new Float64Array(rows).fill(1);
+  for (let y = 0; y < rows; y += 1) {
+    const north = Math.PI / 2 - y / rows * Math.PI, south = Math.PI / 2 - (y + 1) / rows * Math.PI;
+    // The row's edge nearer the equator and its far edge, on the shadowed hemisphere; a row that straddles the equator starts there.
+    const near = side > 0 ? Math.max(0, south) : Math.min(0, north), far = side > 0 ? north : south;
+    if (side * far <= 0) continue;
+    const from = crossing(near), to = crossing(far);
+    if (to > from) direct[y] = 1 - (summed(to) - summed(from)) * binWidth / (to - from);
+  }
+  return direct;
 }

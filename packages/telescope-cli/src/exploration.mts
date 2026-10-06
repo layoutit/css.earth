@@ -1,22 +1,22 @@
 /** Human discovery starts from a target and preserves omitted scientific filters as omitted. */
 import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget, parseLimits, type TransferLimits } from '@cssearth/telescope/node';
 import { flagValue } from '@cssearth/core';
-import { PRODUCT_KINDS, type ProductKind } from './recipe-request.mts';
-import { assessSearchCoverage, type QueryInputs, type SearchCoverage, type TargetCoverage } from './query-contract.mts';
-import { indexedTargetObservations } from './query-modes.mts';
-import { loadQueryInputs, loadTargetCatalogue, type ArchiveSelection } from './query.mts';
+import { PRODUCT_KINDS, type ProductKind } from './requests/recipe-request.mts';
+import { assessSearchCoverage, type QueryInputs, type SearchCoverage, type TargetCoverage } from './observation-query/query-contract.mts';
+import { indexedTargetObservations } from './observation-query/query-modes.mts';
+import { loadQueryInputs, loadTargetCatalogue, type ArchiveSelection } from './observation-query/query.mts';
 import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetResolution } from '@cssearth/telescope';
-import { explorationQualificationFor, type QualificationConfiguration } from './qualification-routes.mts';
-import type { QualifiedObservation } from './qualified-observations.mts';
+import { explorationQualificationFor, type QualificationConfiguration } from './qualification/qualification-routes.mts';
+import type { QualifiedObservation } from './qualification/qualified-observations.mts';
 import { parseRegion } from '@cssearth/objects';
 import type { DiscoveryRequest } from './vo/discovery.mts';
 import type { VoInputs } from './vo/bridge.mts';
 import { nativeQualificationRoute } from './vo/access.mts';
-import { FAMILY_IDS, type FamilyId } from './product-descriptor.mts';
-import type { ObservationFamilyEvidence } from './observation-families.mts';
-import { searchOpus, type OpusService } from './opus.mts';
-import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadFilter, type ArchiveLeadService } from './archive-leads.mts';
-import { searchChandraLeads, searchSpitzerLeads } from './other-leads.mts';
+import { FAMILY_IDS, type FamilyId } from './products/product-descriptor.mts';
+import type { ObservationFamilyEvidence } from './products/observation-families.mts';
+import { searchOpus, type OpusService } from './archive-adapters/opus.mts';
+import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadFilter, type ArchiveLeadService } from './archive-adapters/archive-leads.mts';
+import { searchChandraLeads, searchSpitzerLeads } from './archive-adapters/other-leads.mts';
 import { loadWwtImagery, type WwtImageryResult } from './wwt/wwt-catalog.mts';
 import { loadWwtFitsLeads, type WwtFitsLeads } from './wwt/wwt-fits-leads.mts';
 

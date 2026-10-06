@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 205960219: APOGEE DR17 effective temperature 4600.085999999998 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 1.7,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-205960219.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.698, rounded to two decimals",
+  "objectType": "Chemically Peculiar Star",
+  "objectTypePath": "* > Pe*",
+  "objectTypeSource": "SIMBAD, UCAC4 370-187410: main object type Pe*, Chemically Peculiar Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

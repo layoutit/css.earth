@@ -3,9 +3,9 @@ import { execFileSync, spawn } from 'node:child_process';
 import { mkdir, readFile, writeFile, appendFile, rm } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { comparisonPreparation, requireUnchangedTracked } from './ci.mts';
-import { serverStage } from './server-stage.mts';
+import { serverStage } from './server/server-stage.mts';
 import { runNode } from './performance-stage.mts';
-import { sealCache, packCache } from './base-cache.mts';
+import { sealCache, packCache } from './cache/base-cache.mts';
 import { args, isMain } from './records.mts';
 export async function produceBase(checkout: string, out: string, archive: string): Promise<void> {
   const git = (values: string[]) => execFileSync('git', values, { cwd: checkout, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }).trim();

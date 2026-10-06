@@ -8,9 +8,9 @@ test('only an unshared source in a named sibling can be patched', async () => {
   await mkdir('output/journeys', { recursive: true });
   const root = await mkdtemp(resolve('output/journeys/apply-'));
   const cwd = process.cwd(), source = resolve(root, 'checkout'), copy = source + '-proof';
-  const file = resolve(copy, 'site/scene/scene-publication.mts');
+  const file = resolve(copy, 'site/scene/session/scene-publication.mts');
   try {
-    await mkdir(source); await mkdir(resolve(copy, 'site/scene'), { recursive: true });
+    await mkdir(source); await mkdir(resolve(copy, 'site/scene/session'), { recursive: true });
     const original = '    const root = documentTarget.documentElement;';
     await writeFile(file, original); process.chdir(source);
     await assert.rejects(apply(source, 'changed-transform'), /named throwaway sibling/u);

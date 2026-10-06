@@ -1,6 +1,6 @@
 import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
-import { createCameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';
-import { selectPreparedResponsiveZoom, type ResponsiveZoomPlan } from '@cssearth/renderer/navigation/camera-layout.ts';
+import { createCameraViewport } from '@cssearth/renderer/navigation/camera/camera-viewport.ts';
+import { selectPreparedResponsiveZoom, type ResponsiveZoomPlan } from '@cssearth/renderer/navigation/camera/camera-layout.ts';
 import { billboardBodyRadiusPixels } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 
 /** What the page bakes for its cover (`ObjectLayout.astro`): the body's camera plan, the mobile layout query and the

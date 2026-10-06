@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g 1.22 from 2024A&A...690A.246T, the median of its 2 spectra; the 13 published values span log g 0.4 to 1.85, across which the limb law changes by at most 1.3% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2024A%26A...690A.246T)",
   "spectralType": "F7(III)",
   "spectralTypeSource": "SIMBAD, V* WZ Sgr: spectral type F7(III) (1988MSS...C04....0H)",
+  "objectType": "Classical Cepheid Variable",
+  "objectTypePath": "* > Ev* > Ce* > cC*",
+  "objectTypeSource": "SIMBAD, V* WZ Sgr: main object type cC*, Classical Cepheid Variable",
   "projectedRotationSpeedKmS": 25,
   "projectedRotationSpeedSource": "SIMBAD, V* WZ Sgr: projected rotation speed 25 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

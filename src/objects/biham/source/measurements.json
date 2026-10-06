@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/biham.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.870, rounded to two decimals",
   "spectralType": "A1Va",
   "spectralTypeSource": "SIMBAD, * tet Peg: spectral type A1Va (2006AJ....132..161G)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * tet Peg: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 144,
   "projectedRotationSpeedSource": "SIMBAD, * tet Peg: projected rotation speed 144 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {

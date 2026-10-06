@@ -20,9 +20,9 @@ object scene is mounted at a time.
 ## Selection identity
 
 [`systemTarget`](../site/navigation/prepared-world-navigation.mts) already frames the main
-moons on first selection. [`bodyViewAtCamera`](../site/world/zoom-scope.mts)
+moons on first selection. [`bodyViewAtCamera`](../site/world/systems/zoom-scope.mts)
 sets the camera threshold between the host family and the selected body.
-[`SceneSubject`](../site/world/scene-subject.mts) selects the family as its own
+[`SceneSubject`](../site/world/systems/scene-subject.mts) selects the family as its own
 object, `<host-id>-system`, so its heading, source link, URL and card agree on
 the subject.
 
@@ -35,7 +35,7 @@ are the next scale inside it, derived from a host's prepared orbit children.
 Preparation supplies the relationship: a registered satellite's prepared
 `orbit.centerBodyId` points to its host. Every nonstellar host with at least one
 such child must have a prepared `systemView` and become a satellite-system
-destination. The [system reader](../site/world/satellite-systems.mts) rejects a host
+destination. The [system reader](../site/world/systems/satellite-systems.mts) rejects a host
 without framing rather than silently omitting its card. A future satellite with its own
 prepared satellite follows the same rule recursively.
 
@@ -104,12 +104,12 @@ the selection and camera target together before starting the flight.
 [Selection presentation](../site/shell/selection-presentation.mts) shows a retained
 system card without transferring system facts into a body's
 dataset card. The prepared orbit graph supplies membership; the existing
-[framing candidates](../site/world/system-framing.mts) supply the view. Runtime does
+[framing candidates](../site/world/systems/system-framing.mts) supply the view. Runtime does
 not derive orbits, geometry, imagery or scientific facts.
 
 ## Checks
 
-[`satellite-systems.test.mts`](../site/world/satellite-systems.test.mts) checks
+[`satellite-systems.test.mts`](../site/world/systems/satellite-systems.test.mts) checks
 derived membership, required framing, URL identity and camera boundaries.
 The browser check covers Earth and Moon navigation, browser history, Moon
 zoom-out, Jupiter and Didymos system cards, and the Earth card at phone width.

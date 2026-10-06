@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Baines et al. (2021), AJ 162, 198, HD 20902: log g 1.31, from Prugniel et al. (2011), as the paper lists it beside the diameter (Table 4) (https://doi.org/10.3847/1538-3881/ac2431)",
   "spectralType": "F5Ib",
   "spectralTypeSource": "SIMBAD, * alf Per: spectral type F5Ib (2014yCat....1.2023S)",
+  "objectType": "Variable Star",
+  "objectTypePath": "* > V*",
+  "objectTypeSource": "SIMBAD, * alf Per: main object type V*, Variable Star",
   "rotationPeriodDays": 87.7,
   "rotationPeriodSource": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 87.7 d, the row 0.2 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

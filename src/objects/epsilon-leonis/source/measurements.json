@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epsilon-leonis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.362, rounded to two decimals",
   "spectralType": "G1IIIa",
   "spectralTypeSource": "SIMBAD, * eps Leo: spectral type G1IIIa (1989ApJS...71..245K)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, * eps Leo: main object type *, Star",
   "projectedRotationSpeedKmS": 8.1,
   "projectedRotationSpeedSource": "SIMBAD, * eps Leo: projected rotation speed 8.1 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {

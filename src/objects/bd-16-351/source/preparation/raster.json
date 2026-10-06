@@ -87,6 +87,83 @@
         "title": "ESPaDOnS · magnetic map made here · Sep 2012",
         "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
       }
+    },
+    {
+      "id": "brightness-sector-30",
+      "output": "bd-16-351-surface-{id}{suffix}.webp",
+      "thumbnail": "bd-16-351-dataset-{id}.webp",
+      "source": "science/tess/bd-16-351-s0030.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-30",
+        "label": "Sector 30",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/bd-16-351-s0030.dat",
+        "variable": "Brightness [%]",
+        "outlineLatitudes": [
+          -42
+        ],
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 88,
+        "maximum": 112,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "88%",
+          "100%",
+          "112%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 3.23 days, fitted with starry to the light curve this project measured from the TESS full-frame images of sector 30 (the light swings by 4.9%; the map's curve leaves a scatter of 0.35%, the light's own noise being 0.10%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. The map is made at the tilt the page draws the star with, 42°. Gaia DR3 lists 3 other stars within 63 arcseconds, giving 0.57% of the light in the star's pixels. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 30",
+        "sourceUrl": "https://mast.stsci.edu/tesscut/"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "bd-16-351-surface-{id}{suffix}.webp",
+      "thumbnail": "bd-16-351-dataset-{id}.webp",
+      "source": "science/tess/bd-16-351-s0030.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/bd-16-351-s0030.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 88,
+        "maximum": 112,
+        "colors": [
+          "#1a1816",
+          "#5c544f",
+          "#9c8f85",
+          "#d6c4b7",
+          "#ffeada"
+        ],
+        "labels": [
+          "88%",
+          "112%"
+        ],
+        "limbOf": "color",
+        "description": "The star's color (#ffeada, its Color dataset) over the brightness map this project made from the star's light in TESS sector 30 (September and October 2020): the map's scale, 88% to 112% of the mean surface, runs from a dark tone of the color to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 20.2% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "TESS · the star in its color over its brightness map · September and October 2020",
+        "sourceUrl": "https://mast.stsci.edu/tesscut/"
+      }
     }
   ],
   "emission": {

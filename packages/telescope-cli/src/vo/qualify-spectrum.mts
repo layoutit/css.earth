@@ -4,7 +4,7 @@ import { readFitsHdus } from '@cssearth/bake/objects/raster';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
 import type { ProductRun, ProductRecord } from '@cssearth/objects';
 import { describeEsoSpectrum, readEsoSpectrum } from '../families/f03-eso-spectrum.mts';
-import { rememberQualification, type QualifiedObservation } from '../qualified-observations.mts';
+import { rememberQualification, type QualifiedObservation } from '../qualification/qualified-observations.mts';
 import { VERSION } from '../help.mts';
 import type { AcquisitionSpec } from './access.mts';
 

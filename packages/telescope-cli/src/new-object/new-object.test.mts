@@ -9,7 +9,7 @@ import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { readIdentifiers, type Archive, type GaiaRow } from './archives/archives.mts';
 import { chooseColor, coverageGaps } from './color.mts';
-import { assembleArchiveOrbit, orbitizeHostedOrbit, parseArchiveRows } from './orbit.mts';
+import { assembleArchiveOrbit, orbitizeHostedOrbit, parseArchiveRows } from './planets/orbit.mts';
 import { parseObjectSpecs, parseStarSpec } from './spec.mts';
 import { loadSolarEpoch } from './solar-epoch.mts';
 
@@ -161,7 +161,7 @@ test('a transiting orbit is one paper\'s archive row, with gaps filled from othe
   assert.equal(timed.orbit.semiMajorAxisStellarRadii, 15.58, 'the shape stays the default row\'s');
   assert.match(timed.orbit.sources.phase!, /Huber et al\. 2017.*predicts 2026-01-01 best \(1 sigma 1 min\)/u);
   // Kepler's law in solar units: the Earth's year around the Sun is 215 solar radii (it was 766 times too large before 2026-09-24).
-  const { keplerRatio } = await import('./orbit.mts');
+  const { keplerRatio } = await import('./planets/orbit.mts');
   assert.equal(Number(keplerRatio(1, 365.25, 1).toFixed(1)), 215.0);
   // Neither an inclination nor an impact parameter: the duration and depth give it. K2-148 b's second row: T 1.776 h, Rp/R* 0.0173,
   // a/R* 16.4, P 4.38 d; the geometry gives b = a/R* cos i, checked against the same equation solved for T.
@@ -228,7 +228,7 @@ test('reader quotes come verbatim from the Wikipedia lead: the sentence naming t
 });
 
 test('a planet takes its color from what is measured: the emission row with the smallest relative uncertainty, else its host\'s light on the gray', async () => {
-  const { EMISSION_COLUMNS, parseEmissionRows, pickThermalRow } = await import('./planet-datasets.mts');
+  const { EMISSION_COLUMNS, parseEmissionRows, pickThermalRow } = await import('./planets/planet-datasets.mts');
   const { hostLitGray } = await import('@cssearth/bake/objects/color');
   const csv = [EMISSION_COLUMNS,
     'WASP-39 b,0.8,0.4,,,,,,,,,TESS,,"<a refstr=X href=https://ui.adsabs.harvard.edu/abs/2021AJ....162..127W/abstract target=ref>Wong et al. 2021</a>"',
@@ -262,10 +262,10 @@ test('band photometry in a spec is checked by the dataset\'s own parser: three b
 
 test('a generated planet with a measured dayside temperature keeps its thermal dataset text; the shape-only text is only for a shape planet', async () => {
   const { hostedPackage } = await import('./hosted.mts');
-  const { EMISSION_COLUMNS } = await import('./planet-datasets.mts');
+  const { EMISSION_COLUMNS } = await import('./planets/planet-datasets.mts');
   const emission = [EMISSION_COLUMNS, 'HD 219134 b,4.5,1.0,300,45,-45,0,1400,80,-80,0,Spitzer,IRAC,"<a refstr=Y href=https://ui.adsabs.harvard.edu/abs/2018AJ....155...29K/abstract target=ref>Kammer et al. 2018</a>"'].join('\n');
   // The Charts tab's archive spectra (planet-charts.mts): three measured transmission bins and a limit that is left out; no emission bins.
-  const { spectrumColumns } = await import('./planet-charts.mts'), cite = '"<a refstr=A href=https://arxiv.org/abs/2110.06729 target=ref>A et al. 2022</a>"';
+  const { spectrumColumns } = await import('./planets/planet-charts.mts'), cite = '"<a refstr=A href=https://arxiv.org/abs/2110.06729 target=ref>A et al. 2022</a>"';
   const transit = [spectrumColumns('transmission'), `0.60,0.20,1.20,0.02,-0.03,0,Kepler,CCD,${cite}`, `1.40,0.20,1.25,0.02,-0.02,0,HST,WFC3,${cite}`, `4.50,1.00,1.31,0.04,-0.04,0,Spitzer,IRAC,${cite}`, `3.60,0.70,1.50,,,1,Spitzer,IRAC,${cite}`].join('\n');
   const archive: Archive = { async text(url) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? '');
     if (query.includes('from transitspec')) return transit;
@@ -356,7 +356,7 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
     `"HD 1 c",${ref('Two et al. 2020', '2020AJ....1....2T')},1,10.0,20.0,89.0,0,,2459000.5,0.2,0.02,,0.8,0.85,0`,
     `"HD 1 b",${ref('One et al. 2019', '2019AJ....1....1O')},1,3.0,9.0,88.0,0,,2458000.5,0.1,0.01,,0.8,0.85,0`].join('\n');
   const composite = (name: string, mass: number) => `pl_name,pl_bmassj,pl_bmassjlim,pl_bmassprov,pl_bmassj_reflink\n"${name}",${mass},0,Mass,${ref('One et al. 2019', '2019AJ....1....1O')}`;
-  const { EMISSION_COLUMNS } = await import('./planet-datasets.mts');
+  const { EMISSION_COLUMNS } = await import('./planets/planet-datasets.mts');
   const emission = (name: string) => name === 'HD 1 b' ? `${EMISSION_COLUMNS}\nHD 1 b,4.5,1.0,300,45,-45,0,1400,80,-80,0,Spitzer,IRAC,${ref('Four et al. 2022', '2022AJ....1....4F')}` : `${EMISSION_COLUMNS}\n`;
   const archive: Archive = {
     async text(url) {
@@ -449,7 +449,7 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
 });
 
 test('ids follow one rule, and a body the universe holds is found whatever its id', async () => {
-  const { hostId, planetId, planetPrefix, duplicateName, duplicateStar, existingBodies } = await import('./identity.mts');
+  const { hostId, planetId, planetPrefix, duplicateName, duplicateStar, existingBodies } = await import('./names/identity.mts');
   assert.equal(hostId({ planetPrefix: planetPrefix('pi Men c', 'c'), hostname: 'HD 39091' }), 'pi-men', 'the name its planets use');
   assert.equal(hostId({ hostname: '55 Cnc', hd: 'HD 75732' }), 'hd-75732', 'a name starting with a digit falls to its HD name');
   assert.equal(hostId({ hostname: 'Kepler-444' }), 'kepler-444');
@@ -736,7 +736,7 @@ test('an archive answering a server error or a rate limit is asked again; a 404 
 });
 
 test('a planet found without a transit is placed only on one paper\'s whole orbit, tilt measured, and its model size says so', async () => {
-  const { assembleMeasuredOrbit, parseArchiveRows: parse } = await import('./orbit.mts');
+  const { assembleMeasuredOrbit, parseArchiveRows: parse } = await import('./planets/orbit.mts');
   const header = 'pl_name,pl_refname,default_flag,pl_orbper,pl_ratdor,pl_orbincl,pl_orbeccen,pl_orblper,pl_tranmid,pl_radj,pl_bmassj,pl_orbsmax,st_rad,st_mass,pl_bmassjlim,pl_imppar,pl_trandur,pl_ratror,pl_orbtper,pl_orbinclerr1,pl_bmassprov,pl_orbpererr1,pl_tranmiderr1';
   const ref = (key: string, bib: string, label: string) => `"<a refstr=${key} href=https://ui.adsabs.harvard.edu/abs/${bib}/abstract target=ref>${label}</a>"`;
   // pi Men b's case: the default paper gives no inclination; an astrometric paper fits the whole orbit and a true mass with it.
@@ -808,7 +808,7 @@ test('an ADS reference whose publisher address ends in the DOI is read as that p
 });
 
 test('a B star at a gravity ATLAS does not reach takes its limb law from the same paper\'s B-star grid', async () => {
-  const { chooseLimb } = await import('./limb.mts');
+  const { chooseLimb } = await import('./darkening/limb.mts');
   // Reeve & Howarth (2016) summary1 rows of the solar B-star grid at 2 km/s around 18,000 K and log g 2.2, as VizieR serves them, 2026-10-04.
   const bstar = ['#RESOURCE=yCat_J_MNRAS_456_1294', '', 'FileName\tquad2.2\tquad2.3', ' \t \t', '--------------\t------------\t------------',
     'BG17000g200v02\t 3.07558e-01\t 2.63332e-01', 'BG17000g225v02\t 2.44385e-01\t 2.90790e-01', 'BG18000g200v02\t 3.48114e-01\t 2.41694e-01', 'BG18000g225v02\t 2.51191e-01\t 2.89943e-01', 'BG18000g250v02\t 2.10603e-01\t 2.97430e-01', ''].join('\n');
@@ -827,7 +827,7 @@ test('a B star at a gravity ATLAS does not reach takes its limb law from the sam
 });
 
 test('a hot star beyond the ATLAS gravities takes its limb law from the TLUSTY grid, and its restore rewrites the download the same way', async () => {
-  const { chooseLimb } = await import('./limb.mts');
+  const { chooseLimb } = await import('./darkening/limb.mts');
   // The four Reeve & Howarth (2016) summary1 rows around HD 226868 (31,138 K, log g 3.348) as VizieR serves them, 2026-09-27.
   const tlusty = ['#RESOURCE=yCat_J_MNRAS_456_1294', '', 'FileName\tquad2.2\tquad2.3', ' \t \t', '--------------\t------------\t------------',
     'OG30000g325v10\t 1.31065e-01\t 3.33968e-01', 'OG30000g350v10\t 1.19605e-01\t 3.02762e-01', 'OG32500g325v10\t 1.37878e-01\t 3.47654e-01', 'OG32500g350v10\t 9.45336e-02\t 3.28943e-01', ''].join('\n');
@@ -872,7 +872,7 @@ test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one r
   const { physicalValues } = await import('./generate.mts'), values = physicalValues(measured, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false });
   assert.deepEqual([values.gm, values.logg], [0, 1.2]);
   assert.match(values.massText, /No mass is measured, so GM is 0/u);
-  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'hipparcos', 'iau', 'chara', 'npoi', 'sh0es', 'm31cepheids', 'm33cepheids', 'table', 'esa', 'magnetic', 'spectra']);
+  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'hipparcos', 'iau', 'chara', 'npoi', 'sh0es', 'm31cepheids', 'm33cepheids', 'table', 'esa', 'magnetic', 'spectra', 'pixels']);
   await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids, --from-k2, --from-tess, --from-gaia/u);
 });
 

@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 2019258 (Gold): APOGEE effective temperature (K) 4402.593 +/- 39.5238 (https://arxiv.org/abs/2410.00102)",
   "surfaceGravityLogg": 2.1222,
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 2019258 (Gold): Asteroseismic log g 2.1222 +/- 0.0041 (https://arxiv.org/abs/2410.00102)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, UCAC4 638-070501: main object type *, Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

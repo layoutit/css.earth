@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 383400718 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467)",
   "surfaceGravityLogg": 4.96,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-110082-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.963, rounded to two decimals",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, HD 110082B: main object type *, Star",
   "rotationPeriodDays": 0.8,
   "rotationPeriodSource": "VizieR J/AJ/161/171/table7 (THYME. V. Discovering a new stellar association), column Prot: 0.8 d, the row 0.3 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-702-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.630, rounded to two decimals",
   "spectralType": "K4V",
   "spectralTypeSource": "SIMBAD, * 70 Oph B: spectral type K4V (1967AJ.....72.1334C)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * 70 Oph B: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 6.26,
   "projectedRotationSpeedSource": "SIMBAD, * 70 Oph B: projected rotation speed 6.26 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

@@ -4,14 +4,26 @@
     {
       "location": "public",
       "filename": "bd-16-351-arrival.webp",
-      "bytes": 27970,
-      "sha256": "46485332f7f48e1bd6da69d6c58b7f42566e5a073784dac0475bfe8cbd8db272"
+      "bytes": 27050,
+      "sha256": "870b190810dcb57ee2238f4cc6ee6b0e4c650dff64dbd6944cf3ae8f7169549f"
     },
     {
       "location": "public",
       "filename": "bd-16-351-billboard.webp",
-      "bytes": 5000,
-      "sha256": "17882e24689524d07087bd658a02a35f4717348316545c68736a4398948b7fa5"
+      "bytes": 4742,
+      "sha256": "c238942fa9f9d7a5cdeeb76855df81afbb6d75e921dd7086b938d5d6adcc7a08"
+    },
+    {
+      "location": "public",
+      "filename": "bd-16-351-dataset-brightness-sector-30.webp",
+      "bytes": 218,
+      "sha256": "8fdba61c71570d644a95f6be63ef6c7479f3ce7fa253f442a6e7124dc96c163e"
+    },
+    {
+      "location": "public",
+      "filename": "bd-16-351-dataset-color-brightness.webp",
+      "bytes": 222,
+      "sha256": "cc0e6b82a89695e275c80306f9800fda22bd53d7696404ba62ad765f891abb03"
     },
     {
       "location": "public",
@@ -27,9 +39,27 @@
     },
     {
       "location": "public",
+      "filename": "bd-16-351-limb-color-brightness@2x.webp",
+      "bytes": 99874,
+      "sha256": "b3eef02c70e2b263db7d93020c68d00a52a728a3a3aab2f4e3bfb43d19b0d72c"
+    },
+    {
+      "location": "public",
       "filename": "bd-16-351-limb-color@2x.webp",
       "bytes": 99874,
       "sha256": "b3eef02c70e2b263db7d93020c68d00a52a728a3a3aab2f4e3bfb43d19b0d72c"
+    },
+    {
+      "location": "public",
+      "filename": "bd-16-351-poles-brightness-sector-30@2x.webp",
+      "bytes": 10966,
+      "sha256": "9d4c03017b33cb46f3b6ee9502d42858419c260e24a9bae578aeac08510a63c3"
+    },
+    {
+      "location": "public",
+      "filename": "bd-16-351-poles-color-brightness@2x.webp",
+      "bytes": 20238,
+      "sha256": "2bf8389a70bcb47a08104d1753100be0eea6bd46cad07496303ed6b55a92ca96"
     },
     {
       "location": "public",
@@ -42,6 +72,18 @@
       "filename": "bd-16-351-poles-radial-field-2012-09@2x.webp",
       "bytes": 37822,
       "sha256": "79dff0b122945e79c04a246f34ef3c3d6375684d950918f5849442a8c22f3b22"
+    },
+    {
+      "location": "public",
+      "filename": "bd-16-351-surface-brightness-sector-30@2x.webp",
+      "bytes": 16208,
+      "sha256": "83f6642a1a53a89d0f93ed1783085685da4087cdf91c45300181e00c3d7bce9d"
+    },
+    {
+      "location": "public",
+      "filename": "bd-16-351-surface-color-brightness@2x.webp",
+      "bytes": 18794,
+      "sha256": "8ad13019772d340c7cec07c372a38ab1aa2dc5e8acb5fbaff8ba736c35139f73"
     },
     {
       "location": "public",
@@ -58,14 +100,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 372,
-      "sha256": "3c0c7068f59637d386eaf126a700dfb1d2a84dd894d49460a9371a4d5698d786"
+      "bytes": 383,
+      "sha256": "3f784a92983c219bd701be5ea83d465e71c4c698e6646fa34bea28631fb7b6fc"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2206,
-      "sha256": "9a5fac5bccb0aee221c53e278bd0101569f41167036d9dd8f05ddea6c7aeed2f"
+      "bytes": 2771,
+      "sha256": "8c9528c91740f279e4e302dbfc7cf5927952b914e2a7feecbad9ad921c4172c3"
     },
     {
       "location": "prepared",
@@ -82,20 +124,32 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1923,
-      "sha256": "866c04c2406b38362da93c24d3515ed80f176b3b1bd97dee1d485872d581a3df"
+      "bytes": 3655,
+      "sha256": "49a736bfbebff850ebddaeee5f52bcb6c643ae0d310f4b4afa872f843da1bfbe"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 3164,
-      "sha256": "970d7966f9a78f78f124613fa775bdd1d044fde43cc1bac442a3a8fb29554c7a"
+      "bytes": 6219,
+      "sha256": "1a321bbdb9546d536f26cd197b38b5e254b7fac9cc94b8493ddf811711780b6d"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 219,
-      "sha256": "0ca9b0bc8fa5114372707be9185d0ea4fca289bb645c8d27b680e62671c57c8e"
+      "bytes": 447,
+      "sha256": "5fc1a5849044f5af9f23455938fbccf7963ac8e873d1559df088795b721c9728"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-30.webp",
+      "bytes": 1494,
+      "sha256": "f2ef5cc8cab9fb0e16183fee63776e0a33be981dccd9428f4d7e0b1a69ab49a1"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1628,
+      "sha256": "2b02450eec3929d5fa96b4899e1a7c020a9f65dd242dbe166072ca7cbbc2a458"
     },
     {
       "location": "prepared",
@@ -112,8 +166,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 252215,
-      "sha256": "f3ef83df1e05a39269713f3bc6da92e2e5e1bc752650abd3127210988e2781b3"
+      "bytes": 256468,
+      "sha256": "ea13923471da24d05933e25ff1198a0b30f8397828f3a5a4178f2256e5ab18b6"
     },
     {
       "location": "prepared",
@@ -136,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1099,
-      "sha256": "aff53808a35f5bf8e09835380a3e37f754832b924dbb24f0da1fc6fc912830f8"
+      "bytes": 1532,
+      "sha256": "bc697e065987d6fc72567784bdaa22e37f5c99b63c5756810b5d9856ea8f4b47"
     },
     {
       "location": "prepared",

@@ -6,6 +6,7 @@ import { after, test } from 'node:test';
 
 import {
 assertRangeResponse,
+createSourceManifest,
 rangeRequestHeader,
 validateSourceManifest,
 verifySourceManifest,
@@ -23,6 +24,18 @@ test('document descriptions are optional without weakening generator identity', 
   assert.deepEqual(parse(manifest).documents[0], document);
   assert.throws(() => parse({ ...manifest, documents: [{ ...document, purpose: '' }] }), /empty purpose/);
   assert.throws(() => parse({ ...manifest, generatedIntermediates: [{ ...base.generatedIntermediates[0], generator: '' }] }), /generator/);
+});
+
+test('a consumer is given the files built for it as well as its acquired inputs', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-source-manifest-')); temporary.push(root);
+  await mkdir(join(root, 'input')); await mkdir(join(root, 'generated')); await mkdir(join(root, 'docs'));
+  const files = { 'input/source.txt': Buffer.from('input'), 'generated/output.txt': Buffer.from('generated'), 'docs/NOTICE.md': Buffer.from('notice') };
+  for (const [path, bytes] of Object.entries(files)) await writeFile(join(root, path), bytes);
+  const base = sourceManifest(files), built = { ...base.inputs[0], ...base.generatedIntermediates[0], id: 'built-table', consumers: ['map'] };
+  await writeFile(join(root, 'manifest.json'), JSON.stringify({ ...base, generatedIntermediates: [built] }));
+  const source = await createSourceManifest({ objectId: 'fixture', objectName: 'Fixture', sourceRoot: root });
+  assert.deepEqual((await source.validateGroup('map')).map(entry => entry.path), ['generated/output.txt']);
+  assert.throws(() => source.inputsFor('other'), /no inputs for other/);
 });
 
 test('only a manifest whose owner prepares nothing from input files may list no inputs', () => {

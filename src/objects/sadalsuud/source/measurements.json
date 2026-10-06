@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/sadalsuud.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.774, rounded to two decimals",
   "spectralType": "G0Ib",
   "spectralTypeSource": "SIMBAD, * bet Aqr: spectral type G0Ib (1989ApJS...71..245K)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, * bet Aqr: main object type *, Star",
   "projectedRotationSpeedKmS": 8.74,
   "projectedRotationSpeedSource": "SIMBAD, * bet Aqr: projected rotation speed 8.74 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

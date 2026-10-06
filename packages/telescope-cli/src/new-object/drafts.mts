@@ -5,7 +5,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import type { Archive } from './archives/archives.mts';
 
-export interface Drafts { readonly stars: readonly unknown[]; readonly pictures?: readonly unknown[]; readonly coronae?: readonly unknown[]; readonly magneticMaps?: readonly unknown[]; readonly report: readonly string[] }
+export interface Drafts { readonly stars: readonly unknown[]; readonly pictures?: readonly unknown[]; readonly coronae?: readonly unknown[]; readonly magneticMaps?: readonly unknown[]; readonly brightnessMaps?: readonly unknown[]; readonly report: readonly string[] }
 interface Context { readonly root: string; readonly progress: (line: string) => void; readonly archive: Archive }
 export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; readonly draft: (names: readonly string[], context: Context) => Promise<Drafts> }>> = {
   // Transiting planet hosts from the NASA Exoplanet Archive's default parameter sets (from-archive.mts).
@@ -44,6 +44,8 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   magnetic: { names: 'HOST', draft: async (names, context) => (await import('./corona/corona.mts')).draftsFromMagneticMaps(names, context) },
   // A star's magnetic maps, reduced by this repository from archived polarised spectra, as datasets of its page (magnetic/maps.mts).
   spectra: { names: 'HOST', draft: async (names, context) => (await import('./magnetic/maps.mts')).draftsFromReducedPrograms(names, context) },
+  // A star's brightness map, made by this repository from its light in the TESS full-frame images, as a dataset of its page (brightness/brightness.mts).
+  pixels: { names: 'all | HOST', draft: async (names, context) => (await import('./brightness/brightness.mts')).draftsFromReducedPixels(names, context) },
 };
 
 /** Draft `names` through `route` and write the spec file at `out`. */
@@ -51,7 +53,7 @@ export async function writeDrafts(route: string, names: readonly string[], out: 
   const source = DRAFT_ROUTES[route];
   if (!source) throw new TypeError(`No draft route ${route}; the routes are ${Object.keys(DRAFT_ROUTES).map(key => `--from-${key}`).join(', ')}.`);
   if (!names.length) throw new TypeError(`Usage: new-object --from-${route} ${source.names}... --out spec.json`);
-  const { stars, pictures, coronae, magneticMaps, report } = await source.draft(names, context), path = resolve(context.root, out);
-  await mkdir(dirname(path), { recursive: true }); await writeFile(path, `${JSON.stringify(magneticMaps ? { magneticMaps } : coronae ? { coronae } : pictures ? { pictures } : { stars }, null, 2)}\n`);
-  return { path, entries: (magneticMaps ?? coronae ?? pictures ?? stars).length, report };
+  const { stars, pictures, coronae, magneticMaps, brightnessMaps, report } = await source.draft(names, context), path = resolve(context.root, out);
+  await mkdir(dirname(path), { recursive: true }); await writeFile(path, `${JSON.stringify(brightnessMaps ? { brightnessMaps } : magneticMaps ? { magneticMaps } : coronae ? { coronae } : pictures ? { pictures } : { stars }, null, 2)}\n`);
+  return { path, entries: (brightnessMaps ?? magneticMaps ?? coronae ?? pictures ?? stars).length, report };
 }

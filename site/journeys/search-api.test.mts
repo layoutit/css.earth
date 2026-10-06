@@ -6,11 +6,11 @@ import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { CatalogueIndexEntry } from '../search/catalogue-index.mts';
 import { createDestinationBrowser } from '../shell/destination-browser.mts';
 import { createFeatureBrowser } from '../shell/feature-browser.mts';
-import { selectSceneFeature } from '../scene/scene-feature.mts';
-import type { SceneSession } from '../scene/scene-session.mts';
+import { selectSceneFeature } from '../scene/session/scene-feature.mts';
+import type { SceneSession } from '../scene/session/scene-session.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
-import { handleFindRequest } from '../server/find.mts';
-import type { SearchData } from '../server/search-data.mts';
+import { handleFindRequest } from '../server/search/find.mts';
+import type { SearchData } from '../server/search/search-data.mts';
 import { FIND_PAGE_ROWS, parseFindResponse } from '../search/find-protocol.mts';
 import { createSearchClient, type SearchOutcome } from '../search/search-client.mts';
 

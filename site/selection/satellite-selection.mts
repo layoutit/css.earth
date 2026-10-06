@@ -1,10 +1,10 @@
 import type { WorldCameraPose } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectEntry } from '../directory/objects.mts';
-import { bodyViewAtCamera } from '../world/zoom-scope.mts';
-import { satelliteSystemByHost, satelliteSystemOfMember } from '../world/satellite-systems.mts';
+import { bodyViewAtCamera } from '../world/systems/zoom-scope.mts';
+import { satelliteSystemByHost, satelliteSystemOfMember } from '../world/systems/satellite-systems.mts';
 import type { SceneContext } from './scene-selection.mts';
-import { moonSystem, starSystem, subjectHost, subjectOf } from '../world/scene-subject.mts';
+import { moonSystem, starSystem, subjectHost, subjectOf } from '../world/systems/scene-subject.mts';
 
 /** The selected body's own close-up leads into its nearest prepared satellite family. */
 export function satelliteSelectionAtCamera(world: WorldCameraPose, optics: ReturnType<ObjectWorldNavigation['optics']>,

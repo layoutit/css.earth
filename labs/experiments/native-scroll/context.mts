@@ -6,10 +6,10 @@ import { mountPreparedWorldContext } from '@cssearth/renderer/universe/prepared-
 import { mountPreparedOrbitLines } from '@cssearth/renderer/solar-system/prepared-orbit-lines.ts';
 import { mountPreparedCssSky, preparedSkyCameraTransform } from '@cssearth/renderer/sky/prepared-sky-runtime.ts';
 import { loadPreparedCssVolume } from '@cssearth/renderer/volume/loader.ts';
-import { savedWorldCamera } from '@cssearth/renderer/navigation/saved-world-camera.ts';
+import { savedWorldCamera } from '@cssearth/renderer/navigation/camera/saved-world-camera.ts';
 import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/engine';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
-import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
+import type { SharedView } from '@cssearth/renderer/navigation/camera/view-url.ts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import type { OrbitSegment } from '@cssearth/engine';
 import type { NativeCameraRotation } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';

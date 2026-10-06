@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Effective temperature 3801 ± 134 K from Montargès et al. 2018 (A&A 614, A12; https://doi.org/10.1051/0004-6361/201731471), Section 4.1: the PIONIER limb-darkened diameter of December 2016, the epoch of the package's diameter, with the bolometric flux. The paper gives 3820 ± 135 K for November 2016.",
   "spectralType": "M2Iab-Ib",
   "spectralTypeSource": "SIMBAD, * 119 Tau: spectral type M2Iab-Ib (1989ApJS...71..245K)",
+  "objectType": "Red Supergiant",
+  "objectTypePath": "* > Ma* > sg* > s*r",
+  "objectTypeSource": "SIMBAD, * 119 Tau: main object type s*r, Red Supergiant",
   "shape": {
     "kind": "uniform-disc-sphere",
     "path": "shape/uniform-disc.tab",

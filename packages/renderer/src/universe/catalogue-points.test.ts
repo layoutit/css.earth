@@ -4,7 +4,7 @@ import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountCataloguePoints } from './catalogue-points.js';
 import { readCataloguePointBank } from '@cssearth/objects';
-import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
+import { holdStartup, releaseStartup } from '../rendering/loading/startup-gate.js';
 
 /** Prepared fixture: one declared box per level, with no bake algorithm in the runtime owner. */
 const baked = (points: readonly (readonly number[])[], levels: readonly number[] = [points.length]) => ({

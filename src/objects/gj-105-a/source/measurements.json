@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-105-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.522, rounded to two decimals",
   "spectralType": "K3V",
   "spectralTypeSource": "SIMBAD, HD 16160: spectral type K3V (1989ApJS...71..245K)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, HD 16160: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 45,
   "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 45 d, the row 0.4 arcsec from the star's J2000 place. The middle of 4 catalogued periods, 4 of them within 20% of it",
   "rotationPeriodsCatalogued": [

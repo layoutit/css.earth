@@ -3,13 +3,13 @@ import { createSelectionPresentation } from './selection-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { SceneSubject } from '../selection/scene-selection.mts';
-import { subjectView } from '../world/scene-subject.mts';
+import { subjectView } from '../world/systems/scene-subject.mts';
 import type { DestinationPresentation } from './destination-browser.mts';
 import { requiredElement, sectionElement } from '../browser/browser-types.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { createSearchPresentation } from '../search/search-results-presentation.mts';
-import { WORLD_OBJECTS } from '../world/world-objects.mts';
+import { WORLD_OBJECTS } from '../world/systems/world-objects.mts';
 import { SEARCH_SUGGESTION_MIN_CHARACTERS } from '../browser/runtime-policy.mts';
 
 export interface ObjectBrowserOptions {

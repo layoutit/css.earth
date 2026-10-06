@@ -2,8 +2,8 @@
 export { createPreparedUniverse } from './prepared-universe-runtime.js';
 export { prestartWorldContextPlanner } from './world-context/world-context-planner-client.js';
 export { imageFocusDatasets } from './prepared-focus-bank.js';
-export { createWorldFrameQueue } from '../navigation/world-frame-queue.js';
-export type { QueuedRequest } from '../navigation/world-frame-queue.js';
+export { createWorldFrameQueue } from '../navigation/camera/world-frame-queue.js';
+export type { QueuedRequest } from '../navigation/camera/world-frame-queue.js';
 export { loadPreparedCssVolume } from '../volume/loader.js';
 export { loadPreparedPointAppearance } from '../stars/loader.js';
 export { loadPreparedCssSurfaceShell } from '../shell/loader.js';
@@ -13,6 +13,6 @@ export type { PreparedVolumeDatasetState } from '../volume/prepared-volume-datas
 export { mountPreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
 
 export { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
-export { createRetainedGeometrySnapshot } from '../rendering/retained-leaf-pool.js';
+export { createRetainedGeometrySnapshot } from '../rendering/dom/retained-leaf-pool.js';
 
 export type { WorldContextView, WorldBodyPresentation } from './world-context/world-context-planner.js';

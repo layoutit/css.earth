@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lambda-geminorum.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.875, rounded to two decimals",
   "spectralType": "A4IV",
   "spectralTypeSource": "SIMBAD, * lam Gem: spectral type A4IV (1989ApJS...70..623G)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * lam Gem: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 154,
   "projectedRotationSpeedSource": "SIMBAD, * lam Gem: projected rotation speed 154 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {

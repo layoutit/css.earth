@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Baines et al. (2018), AJ 155, 30, HD 120315: log g 3.78, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 4) (https://doi.org/10.3847/1538-3881/aa9d8b)",
   "spectralType": "B3V",
   "spectralTypeSource": "SIMBAD, * eta UMa: spectral type B3V (1973ARA&A..11...29M)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * eta UMa: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 150,
   "projectedRotationSpeedSource": "SIMBAD, * eta UMa: projected rotation speed 150 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

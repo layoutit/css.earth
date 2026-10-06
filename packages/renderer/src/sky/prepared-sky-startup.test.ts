@@ -4,9 +4,9 @@ import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
 import { type PreparedCssVolume } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { mountPreparedCssSky } from './prepared-sky-runtime.js';
-import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
+import { holdStartup, releaseStartup } from '../rendering/loading/startup-gate.js';
 
 // The Milky Way's prepared sky, as the app mounts it.
 const volume = JSON.parse(readFileSync(new URL('../../../../src/objects/milky-way-volume/prepared/volume.json', import.meta.url), 'utf8')).data as PreparedCssVolume;

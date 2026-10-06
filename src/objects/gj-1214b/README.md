@@ -20,7 +20,7 @@ It is the only planet known around Orkaria. Its orbit and size follow Mahajan et
 
 The pages open facing the day side, so the cooler night side shows only at the limb; on GJ 1214 b the gray sliver is the longitudes where the fit has no emission. WASP-19 b, the eighth planet of this run, opened on one thermal color before and is not in the strip.
 
-- Run of 2026-10-04: [`new-object --phase-curve`](../../../packages/telescope-cli/src/new-object/phase-curve-dataset.mts) wrote the dataset from the record. The paper's night side was not an input: the map gives 421 K at mid-transit against the printed 437 +/- 19 K, and its maximum falls 28.6° before eclipse. [`published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts) holds this paper's terms to its own equation 7 map and deposited night side.
+- Run of 2026-10-04: [`new-object --phase-curve`](../../../packages/telescope-cli/src/new-object/planets/phase-curve-dataset.mts) wrote the dataset from the record. The paper's night side was not an input: the map gives 421 K at mid-transit against the printed 437 +/- 19 K, and its maximum falls 28.6° before eclipse. [`published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts) holds this paper's terms to its own equation 7 map and deposited night side.
 
 Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-1214b.json).
 

@@ -1,17 +1,17 @@
 import { type ObjectRuntimeDefinition } from '@cssearth/objects';
 
-import { createRetainedGeometrySnapshot } from '../rendering/retained-leaf-pool.js';
+import { createRetainedGeometrySnapshot } from '../rendering/dom/retained-leaf-pool.js';
 import type { ObjectRuntimeView } from './object-runtime-types.js';
 
 import type { SurfaceFeatureLayerRuntime } from "../labels/surface-feature-types.js";
 import type { ObjectSelection } from "./object-contract.js";
 import type { SceneLifetime } from "@cssearth/engine";
 import type { RetainedCubicSkyOrbit, OrbitStateUpdate } from "../navigation/object-orbit.js";
-import type { createPreparedResidency } from "../rendering/prepared-residency.js";
-import type { createPreparedPlayback } from "../rendering/prepared-playback.js";
-import type { createObjectSelectionRuntime } from "../rendering/object-selection-runtime.js";
-import type { createObjectControlBinding } from "../rendering/object-control-binding.js";
-import type { mountPreparedPresentation } from "../rendering/prepared-presentation.js";
+import type { createPreparedResidency } from "../rendering/loading/prepared-residency.js";
+import type { createPreparedPlayback } from "../rendering/loading/prepared-playback.js";
+import type { createObjectSelectionRuntime } from "../rendering/view/object-selection-runtime.js";
+import type { createObjectControlBinding } from "../rendering/view/object-control-binding.js";
+import type { mountPreparedPresentation } from "../rendering/view/prepared-presentation.js";
 export interface ObjectDiagnosticsOptions {
   stage: HTMLElement; definition: ObjectRuntimeDefinition; mounted: ReturnType<typeof mountPreparedPresentation>;
   orbit: RetainedCubicSkyOrbit;

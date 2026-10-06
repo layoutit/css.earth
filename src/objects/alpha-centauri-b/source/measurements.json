@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g 4.5431 +/- 0.0015 from Kervella et al. 2017 (A&A 597, A137; https://arxiv.org/abs/1610.06185), Table 5, from the dynamical mass of Kervella et al. 2016",
   "spectralType": "K1V",
   "spectralTypeSource": "SIMBAD, * alf Cen B: spectral type K1V (2006A&A...460..695T)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * alf Cen B: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 36.2,
   "rotationPeriodSource": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 36.2 d, the row 0.0 arcsec from the star's J2000 place. The middle of 4 catalogued periods, 4 of them within 20% of it",
   "rotationPeriodsCatalogued": [

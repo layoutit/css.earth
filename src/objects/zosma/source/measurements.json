@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/zosma.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.937, rounded to two decimals",
   "spectralType": "A5IV(n)",
   "spectralTypeSource": "SIMBAD, * del Leo: spectral type A5IV(n) (2003AJ....126.2048G)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * del Leo: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 180,
   "projectedRotationSpeedSource": "SIMBAD, * del Leo: projected rotation speed 180 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

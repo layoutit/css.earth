@@ -53,7 +53,7 @@ export async function requireAuthoredWorldFrame({ scene: sceneInput, runtime: ru
   const camera = requireRecord(runtime.camera, 'Authored runtime camera');
   const shape = requireRecord(recipe.shape, 'Authored shape');
   // A scene with no surface stands in the ecliptic presentation frame at the radius its solar-system source authors
-  // (site/build/prepare/prepare-world-navigation.ts): its receipt records that rendered radius, with no surface tiles to scale.
+  // (site/build/prepare/authored/prepare-world-navigation.ts): its receipt records that rendered radius, with no surface tiles to scale.
   const surfaceless = receipt.model === 'ecliptic-presentation-frame';
   const renderedRadius = surfaceless ? requireFiniteNumber(receipt.renderedRadiusUnits, 'Rendered radius')
     : requireFiniteNumber(receipt.sourceRadiusUnits, 'Source radius') * requireFiniteNumber(receipt.tilePixels, 'Tile pixels') * requireFiniteNumber(camera.sceneScale, 'Scene scale');

@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 246144695: APOGEE DR17 effective temperature 4586.0117 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.15,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-246144695.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.153, rounded to two decimals",
+  "objectType": "Red Giant Branch star",
+  "objectTypePath": "* > Ev* > RG*",
+  "objectTypeSource": "SIMBAD, UCAC2 29759070: main object type RG*, Red Giant Branch star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

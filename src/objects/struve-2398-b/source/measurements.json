@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/struve-2398-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.790, rounded to two decimals",
   "spectralType": "M3.5V",
   "spectralTypeSource": "SIMBAD, HD 173740: spectral type M3.5V (1991ApJS...77..417K)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, HD 173740: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 135,
   "rotationPeriodSource": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 135 d, the row 0.0 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Baines et al. (2021), AJ 162, 198, HD 164058: log g 1.64, from Prugniel et al. (2011), as the paper lists it beside the diameter (Table 4) (https://doi.org/10.3847/1538-3881/ac2431)",
   "spectralType": "K5III",
   "spectralTypeSource": "SIMBAD, * gam Dra: spectral type K5III (1989ApJS...71..245K)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, * gam Dra: main object type *, Star",
   "rotationPeriodDays": 567,
   "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 567 d, the row 0.0 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

@@ -36,6 +36,16 @@
               "id": "radial-field-2006-12",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "brightness-sector-50",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "color-brightness",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }

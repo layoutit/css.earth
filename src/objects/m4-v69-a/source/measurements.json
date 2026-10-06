@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Primary log Teff 3.784 +/- 0.009, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K): 6081 K (https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K)",
   "surfaceGravityLogg": 4.444,
   "surfaceGravitySource": "Primary log g 4.444 +/- 0.132, as DEBCat (Southworth 2015, ASPC 496, 164) lists it from Kaluzny et al. (2013AJ....145...43K) (https://ui.adsabs.harvard.edu/abs/2013AJ....145...43K)",
+  "objectType": "Eclipsing Binary",
+  "objectTypePath": "* > ** > EB*",
+  "objectTypeSource": "SIMBAD, UGCS J162358.09-263719.0: main object type EB*, Eclipsing Binary",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

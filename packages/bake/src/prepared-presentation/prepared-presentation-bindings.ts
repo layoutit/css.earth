@@ -296,7 +296,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
         }
         return { body: { center: centre.map(fixed), radius: Math.floor(radius * 100) / 100 }, writes };
       }
-      /** Every leaf whose box follows the body on screen (packages/bake/src/presentation/leaf-box.ts), measured at its full box (no factor
+      /** Every leaf whose box follows the body on screen (packages/bake/src/presentation/layout/leaf-box.ts), measured at its full box (no factor
        * is written yet), and the body's centre, in scene coordinates. A leaf under the exterior body mesh is surface. A leaf
        * the default presentation does not render (Sgr A*'s sphere under display: none) backs no layer and has no measurable
        * frame: it is left out, and keeps its full box through the factor's fallback. */
@@ -388,7 +388,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     // CSS compiles transform motion only; a light curve the presentation prepared (opacity keyframes) is kept beside it.
     const lightCurves = (definition.motion ?? []).filter(track => track.keyframes.every(frame => 'opacity' in frame));
     const bound = placed({ ...definition, ...bindings, motion: [...bindings.motion, ...lightCurves], tree: { ...definition.tree, activationGroups: prepareActivationGroups(definition) } });
-    // Leaf boxes: each leaf's factor, the body's steps and their binding (bake/presentation/leaf-box.ts).
+    // Leaf boxes: each leaf's factor, the body's steps and their binding (bake/presentation/layout/leaf-box.ts).
     // The steps start at the body's logical diameter, which only an object runtime's camera carries.
     const logicalBodyDiameter: unknown = isRecord(definition.camera) ? definition.camera.logicalBodyDiameter : undefined;
     if (leafBoxes && !(typeof logicalBodyDiameter === 'number' && logicalBodyDiameter > 0)) {

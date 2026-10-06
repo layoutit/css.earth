@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { isConventionOnly, magneticMapFiles, MAP_CONSUMER, parseMagneticMaps, reducedMap, scaleEnd, tiltedRotation } from './map-datasets.mts';
+import { isConventionOnly, scaleEnd } from '../maps/surface-maps.mts';
+import { magneticMapFiles, MAP_CONSUMER, parseMagneticMaps, reducedMap, tiltedRotation } from './map-datasets.mts';
 
 const TABLE = 'TITLE     = "test"\nVARIABLES = "Longitude [Deg]" "Latitude [Deg]" "B<sub>R</sub> [G]" "B<sub>A</sub> [G]" "B<sub>M</sub> [G]"\nZONE I=2, J=2, K=1, ZONETYPE=Ordered\n';
 const receipt = (program: string, mean: number, radial: [number, number]) => ({ schema: 'cssearth-espadons-map@2', program, target: { name: 'HD 1' }, inputs: { toolchain: { requirements: ['numpy==2.5.3', 'LSDpy==1.0.0', 'specpolFlow==1.1.0'] } }, mask: { korg: '1.3.1' },

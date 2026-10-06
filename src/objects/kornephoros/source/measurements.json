@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kornephoros.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.498, rounded to two decimals",
   "spectralType": "G7IIIaFe-0.5",
   "spectralTypeSource": "SIMBAD, * bet Her: spectral type G7IIIaFe-0.5 (1989ApJS...71..245K)",
+  "objectType": "Spectroscopic Binary",
+  "objectTypePath": "* > ** > SB*",
+  "objectTypeSource": "SIMBAD, * bet Her: main object type SB*, Spectroscopic Binary",
   "rotationPeriodsCatalogued": [
     {
       "days": 176,

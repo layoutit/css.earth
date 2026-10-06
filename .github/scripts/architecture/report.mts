@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { BASELINE_PATH, compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, measure, type Baseline, type Delta } from './baseline.mts';
 import { checkFileCycles, FILE_CYCLE_ROOTS } from './file-cycles.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, folderStats, layerOrder } from './folders.mts';
-import { buildImportGraph, repositoryFiles, type ImportGraph } from './graph.mts';
+import { buildImportGraph, repositoryFiles, type ImportGraph } from './import-graph/graph.mts';
 import { isBroken, REPOSITORY_RULES, repositoryFindings } from './repository-rules.mts';
 import { LAYER_RULES } from './rules.mts';
 

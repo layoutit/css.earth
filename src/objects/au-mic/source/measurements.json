@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/au-mic.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.370, rounded to two decimals",
   "spectralType": "M1 V",
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of AU Mic (pscomppars): spectral type M1 V, from Mallorquín et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...689A.132M/abstract)",
+  "objectType": "BY Dra Variable",
+  "objectTypePath": "* > ** > BY*",
+  "objectTypeSource": "SIMBAD, HD 197481: main object type BY*, BY Dra Variable",
   "metallicityDex": 0.12,
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of AU Mic (pscomppars): [M/H] 0.12 dex, from Donati et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.525..455D/abstract)",
   "luminosityLogSolar": -0.99,
@@ -119,6 +122,13 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of AU Mic (pscomppars): projected rotation speed 8.5 km/s, from Donati et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.525..455D/abstract)",
   "spinInclinationDegrees": 71.2,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.862 solar radii): sin i = v sin i × P / (2πR) = 0.946. Not a measurement of the axis: the three numbers come from different papers.",
+  "rotationPeriodMeasuredDays": 4.85,
+  "rotationPeriodMeasuredSource": "Measured in this project from the star's light in the TESS full-frame images of sector 95 (packages/telescope-cli/src/archives/tess/reduce.mts): 4.85 d, the light swinging by 8.5% as the star turns",
+  "rotationLightSwingPercent": 8.47,
+  "tessLight": "The star's rotation is seen: 4.85 d, the light swinging by 8.5%.",
+  "tessLightSector": 95,
+  "tessLightScatterPercent": 3.1,
+  "tessLightSource": "Read in this project from the TESS full-frame images of sector 95 (packages/telescope-cli/src/archives/tess/reduce.mts); the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

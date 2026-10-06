@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2: log g from a fit of the star's spectrum (https://arxiv.org/abs/astro-ph/9908181)",
   "spectralType": "DA(O?)",
   "spectralTypeSource": "SIMBAD, M 57: spectral type DA(O?) (1995A&A...301..545N)",
+  "objectType": "Planetary Nebula",
+  "objectTypePath": "* > Ev* > PN",
+  "objectTypeSource": "SIMBAD, M 57: main object type PN, Planetary Nebula",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

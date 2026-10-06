@@ -5,7 +5,7 @@ import type { TextureContainer } from '../presentation/index.ts';
 
 /** Resolve image consumers against the actual scene CSS, after depth partitioning: the childless elements that draw each
  * texture write (its slot), and the containers that draw one themselves. Both ship as records that name no custom
- * property (presentation/texture-image-records.ts). Sentinels are CSS values only: the preparation page blocks every request. */
+ * property (presentation/records/texture-image-records.ts). Sentinels are CSS values only: the preparation page blocks every request. */
 export async function prepareTextureBindings(page: Page, definition: PreparedPresentationDefinition & { id: string }): Promise<{ slots: NonNullable<PreparedTree['textureBindings']>; containers: TextureContainer[] }> {
   return page.evaluate(definition => {
     document.querySelectorAll('main').forEach(node => node.remove());

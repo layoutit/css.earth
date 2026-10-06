@@ -1,5 +1,5 @@
-import { namesSystem } from '../world/navigation-scope.mts';
-import { satelliteSystemByHost } from '../world/satellite-systems.mts';
+import { namesSystem } from '../world/systems/navigation-scope.mts';
+import { satelliteSystemByHost } from '../world/systems/satellite-systems.mts';
 import { eyeDistanceM, sameEyePlace, createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto, worldCameraFromCenteredPresentation } from '@cssearth/engine';
 import { createZoomCarry } from '../world/zoom-carry.mts';
 import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
@@ -34,12 +34,12 @@ interface WorldFlightRequest {
 }
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from '../browser/runtime-policy.mts';
-import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, DATASET_VOLUMES, categoryZoomTarget, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from '../world/system-framing.mts';
-import { bodyViewAtCamera, zoomFrameDistanceM } from '../world/zoom-scope.mts';
+import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, DATASET_VOLUMES, categoryZoomTarget, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from '../world/systems/system-framing.mts';
+import { bodyViewAtCamera, zoomFrameDistanceM } from '../world/systems/zoom-scope.mts';
 import { knownObject } from '../directory/object-directory.mts';
 import { systemHostId } from '../model/system-address.mts';
 import { createCameraMotion, createWorldSelectionTarget, savedWorldCamera, parseSharedView } from '@cssearth/renderer/navigation';
-import { worldCameraViewport, presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { worldCameraViewport, presentWorldCamera } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 
 /** A camera within this many pixels of a pair's centre already looks at it; no turn is needed. */
 const AIMED_AT_CENTER_PIXELS = 2;

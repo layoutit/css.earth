@@ -11,7 +11,7 @@ import { availableMemoryBytes, defaultPreparationConcurrency, preparationPeakByt
 /** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
 const ROOT = checkoutProjectRoot(import.meta.url);
 
-const sharedSteps = ["site/build/prepare/prepare-shell-titles.mts", "packages/bake/cli/prepare-scientific-charts.mts"];
+const sharedSteps = ["site/build/prepare/shell/prepare-shell-titles.mts", "packages/bake/cli/prepare-scientific-charts.mts"];
 
 async function runStep(root: string, argumentsList: readonly string[], label: string) {
   const result = await runObjectCommand({ command: process.execPath, argumentsList, cwd: root });
