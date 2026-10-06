@@ -44,7 +44,9 @@ moves 10 arcseconds a year.
 
 ## When a rotation is believed
 
-One sector, the newest that imaged the star, is read. Its period is accepted only when all of these hold
+One sector is read: the newest imaged every ten minutes (sectors 27 to 55) when the star has one, else the newest of all.
+A ten-minute sector's pixels arrive in about 5 seconds; a 200-second sector's take 85 (60 MB for one star). Its period is
+accepted only when all of these hold
 ([`photometry.mts`](../packages/telescope-cli/src/archives/tess/photometry.mts)):
 
 - the star does not saturate the detector;
@@ -53,8 +55,8 @@ One sector, the newest that imaged the star, is read. Its period is accepted onl
 - the period is 9 days or less;
 - the light swings by at least 0.7% of its mean.
 
-The rule was settled on 87 of our stars whose rotation the catalogues print and whose light the mission also measured.
-TESScut answered for 78, and a light curve was measured for 76.
+The rule was settled on 87 of our stars whose rotation the catalogues print and whose light the mission also measured,
+in the sector the mission's light curve is of. TESScut answered for 78, and a light curve was measured for 76.
 
 | Rule | Periods accepted | Equal to the catalogue's or the mission's within 10% |
 | --- | --- | --- |
@@ -62,12 +64,19 @@ TESScut answered for 78, and a light curve was measured for 76.
 | As above, on the 20 that also pass the neighbour guard | 20 | 20 |
 | Without the 0.7% floor | 33 | 30 |
 | Periods over 9 days that pass the other tests | 2 | 0 |
+| As above, in each star's newest ten-minute sector (67 measured) | 20 | 19; the other is half the catalogued period |
 
 The rule is strict on purpose, and it leaves out real rotations. For 33 of the 76 stars the catalogue prints a period of
 9 days or less and the mission's own light curve shows the same one. The rule accepts 19 of them, all with the right period,
 and refuses 14: 6 whose two orbits disagree, 6 that swing by less than 0.7% and 2 with a weak peak. No star of the set
 saturates the detector, so that test is a guard this table does not measure. A sector lasts 27 days and the spacecraft
 circles the Earth every 13.7 days, which leaves its own mark in the light; that is why long periods are not accepted.
+
+Two groups of spots on opposite sides of a star make its light repeat twice a turn, and no rule can tell that from the
+light alone. So a period is set beside the rotation period the star's record already holds from the catalogues: the same
+within 20% is kept; half of it means the star turns once in two of the light's periods, and the map is made that way; any
+other period is not believed, because one of the two is wrong and these pixels cannot say which. A star with no catalogued
+period keeps what its light shows.
 
 ## What the map is and is not
 
@@ -116,4 +125,5 @@ counts the measured period among the star's catalogued ones when it adopts a rot
   more than ten times the light's own swing would still pass as the star.
 - These are the mission's calibrated images. The frames before calibration are public too, with a published calibrator
   (TICA, Fausnaugh et al. 2020), but that route works on whole detectors.
-- One sector is read for a star. A star whose newest sector is refused may show its rotation in another.
+- One sector is read for a star. A star whose sector is refused may show its rotation in another.
+- A star with no catalogued period whose light repeats twice a turn is given half its true period.

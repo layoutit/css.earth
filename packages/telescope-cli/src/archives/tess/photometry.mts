@@ -33,7 +33,8 @@ export interface SectorLightCurve { readonly frames: number; readonly aperturePi
  * catalogues print and whose light the mission also measured (76 of them measured from pixels): with these values every
  * period the rule accepted was the catalogue's or the mission's, 24 of 24. Without the floor on the light's swing 3 of 33
  * were wrong, all swinging under 0.7%; and both periods over 9 days that passed the other tests were wrong, a sector
- * holding too few turns and the spacecraft's own 13.7-day orbit leaving its mark in the light. */
+ * holding too few turns and the spacecraft's own 13.7-day orbit leaving its mark in the light. In each star's newest
+ * ten-minute sector the rule accepted 20, 19 at the right period and one at half of it (besideCatalogued). */
 export const ROTATION_POWER = 0.3, ORBIT_AGREEMENT = 0.2, ONE_SECTOR_DAYS = 9, ROTATION_SWING = 0.007;
 export interface RotationVerdict { readonly detected: boolean; readonly periodDays?: number; /** The light's own strongest period, when the rotation is taken as twice it. */ readonly lightPeriodDays?: number; /** Peak to peak, as a share of the mean light. */ readonly amplitude?: number; readonly reason?: string }
 
