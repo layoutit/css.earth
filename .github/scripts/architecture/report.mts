@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { BASELINE_PATH, compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, measure, type Baseline, type Delta } from './baseline.mts';
 import { checkFileCycles, FILE_CYCLE_ROOTS } from './file-cycles.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, folderStats, layerOrder } from './folders.mts';
-import { buildImportGraph, repositoryFiles } from './graph.mts';
+import { buildImportGraph, repositoryFiles, type ImportGraph } from './graph.mts';
 import { isBroken, REPOSITORY_RULES, repositoryFindings } from './repository-rules.mts';
 import { LAYER_RULES } from './rules.mts';
 
@@ -80,6 +80,12 @@ async function readBaseline(root: string): Promise<Baseline> {
   return decodeBaseline(JSON.parse(await readFile(resolve(root, BASELINE_PATH), 'utf8')));
 }
 
+/** The gate's verdict: a worse baseline delta, a broken repository rule or any file import cycle in packages/ fails. */
+export function gateVerdict(graph: ImportGraph, delta: Delta | undefined, broken: boolean): { cycles: string[]; worse: boolean } {
+  const cycles = checkFileCycles(graph);
+  return { cycles, worse: (delta !== undefined && isWorse(delta)) || broken || cycles.length > 0 };
+}
+
 export async function check(root: string, update: boolean): Promise<boolean> {
   const started = performance.now();
   // The repository rules read the checkout, not the graph: report their findings even when the graph stops as incomplete.
@@ -91,7 +97,6 @@ export async function check(root: string, update: boolean): Promise<boolean> {
     throw error;
   });
   const measurement = measure(graph);
-  const cycles = checkFileCycles(graph);
   const { checkSiteArchitecture } = await import('./site-architecture.mts');
   await checkSiteArchitecture(root, { graph });
   // Only an update may start from a missing baseline; a check without one is a broken checkout.
@@ -100,12 +105,13 @@ export async function check(root: string, update: boolean): Promise<boolean> {
     throw error;
   });
   const delta = baseline && compare(baseline, measurement);
+  const { cycles, worse } = gateVerdict(graph, delta, broken);
   const seconds = ((performance.now() - started) / 1000).toFixed(1);
   if (delta) console.log(formatDelta(delta));
   console.log(formatFindings(findings));
   console.log(formatFileCycles(cycles));
   if (update) {
-    if (broken || cycles.length > 0 || (delta && isWorse(delta)) || [...measurement.noBaselineRules].some(rule => (measurement.rules.get(rule)?.length ?? 0) > 0)) {
+    if (worse || [...measurement.noBaselineRules].some(rule => (measurement.rules.get(rule)?.length ?? 0) > 0)) {
       console.log('Baseline update refused: fix new violations first; no-baseline findings are never recorded.');
       return false;
     }
@@ -114,7 +120,6 @@ export async function check(root: string, update: boolean): Promise<boolean> {
     console.log(`\nWrote ${BASELINE_PATH}: largest cycle ${next.cycles.largestCycle} folders, ${next.cycles.cycleClosingEdges.length} cycle-closing edges (${seconds} s).`);
     return true;
   }
-  const worse = (delta !== undefined && isWorse(delta)) || broken || cycles.length > 0;
   console.log(`\n${worse ? 'ARCHITECTURE_WORSE' : 'ARCHITECTURE_OK'}: compared with ${BASELINE_PATH} in ${seconds} s.`);
   return !worse;
 }

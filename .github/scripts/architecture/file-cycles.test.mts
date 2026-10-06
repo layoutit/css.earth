@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { checkFileCycles, fileCycles } from './file-cycles.mts';
 import type { ImportGraph } from './graph.mts';
+import { gateVerdict } from './report.mts';
 
 function graph(...pairs: readonly (readonly [string, string] | readonly [string, string, 'type'])[]): ImportGraph {
   const files = new Map<string, { test: boolean; script: boolean; entryHint: boolean; loc: number }>();
@@ -28,4 +29,10 @@ test('a loop across packages, a file importing itself and a test import all coun
 
 test('only packages/ is held to it', () => {
   assert.deepEqual(fileCycles(graph(['site/a.mts', 'site/b.mts'], ['site/b.mts', 'site/a.mts'], ['labs/a.mts', 'labs/b.mts'], ['labs/b.mts', 'labs/a.mts'])), []);
+});
+
+test('the architecture gate fails on a file cycle with nothing else wrong', () => {
+  const loop = graph(['packages/a/src/a.ts', 'packages/a/src/b.ts', 'type'], ['packages/a/src/b.ts', 'packages/a/src/a.ts']);
+  assert.deepEqual(gateVerdict(loop, undefined, false), { cycles: ['2 files: packages/a/src/a.ts -> packages/a/src/b.ts -> packages/a/src/a.ts'], worse: true });
+  assert.deepEqual(gateVerdict(graph(['packages/a/src/a.ts', 'packages/a/src/b.ts']), undefined, false), { cycles: [], worse: false });
 });

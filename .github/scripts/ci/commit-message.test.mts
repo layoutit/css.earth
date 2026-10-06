@@ -117,6 +117,27 @@ test('the installer keeps a hook of your own and any core.hooksPath already set'
   }
 });
 
+test('the installer carries an opt-in to the former .githooks directory over to .github/hooks', async () => {
+  const { root, git } = await hookClone();
+  // The opt-in runs the tracked pre-push hook; a stub stands in for it.
+  await writeFile(resolve(root, '.github/hooks/pre-push'), '#!/bin/sh\necho opted-in pre-push\n', { mode: 0o755 });
+  const prePush = async () => { const run = await git('hook', 'run', '--ignore-missing', 'pre-push'); return run.stdout + run.stderr; };
+  try {
+    await git('config', 'core.hooksPath', '.githooks');
+    assert.equal(await prePush(), '', 'Git runs no hook from a directory that no longer exists');
+    assert.match(await installHook(root), /core\.hooksPath was "\.githooks", which no longer exists; it is now "\.github\/hooks"/u);
+    assert.equal((await git('config', '--get', 'core.hooksPath')).stdout.trim(), '.github/hooks');
+    assert.match(await prePush(), /opted-in pre-push/u);
+    // A checkout that still has .githooks keeps the setting: it names a directory that is there.
+    await git('config', 'core.hooksPath', '.githooks');
+    await mkdir(resolve(root, '.githooks'), { recursive: true });
+    assert.match(await installHook(root), /core\.hooksPath is "\.githooks"; left unchanged/u);
+    assert.equal((await git('config', '--get', 'core.hooksPath')).stdout.trim(), '.githooks');
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test('the installer overwrites only its own dispatcher, and the dispatcher fails loudly', async () => {
   const { root, git, accepted } = await hookClone();
   try {

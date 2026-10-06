@@ -34,6 +34,10 @@ export function restoreInput(path: string): boolean {
     /^src\/objects\/[^/]+\/prepared(?:\/|$)/u.test(path) ||
     /^(?:site\/)?public\/(?!features(?:\/|$)|shell(?:\/|$)|scenes(?:\/|$))/u.test(path);
 }
+/** A source path under the source's public directory, at the same place under the revision's. */
+export function inLayout(path: string, sourcePublic: string, revisionPublic: string): string {
+  return path === sourcePublic || path.startsWith(`${sourcePublic}/`) ? revisionPublic + path.slice(sourcePublic.length) : path;
+}
 export async function cloneRestore(source: string, destination: string, revision = 'HEAD'): Promise<{ revision: string; restored: number }> {
   const root = await realpath(source), target = resolve(destination);
   if (dirname(target) !== dirname(root) || !target.startsWith(`${root}-`)) throw new Error('Destination must be a new sibling named after the source with a suffix.');
@@ -44,19 +48,22 @@ export async function cloneRestore(source: string, destination: string, revision
     await command('git', ['clone', '--quiet', '--no-hardlinks', '--no-checkout', '--local', root, target], root);
     await command('git', ['checkout', '--quiet', '--detach', commit], target);
     const ignored = (await command('git', ['ls-files', '--others', '--ignored', '--exclude-standard', '--directory', '-z'], root)).split('\0').filter(Boolean);
+    // Read both layouts before copying: a restored public input would otherwise create the source's public directory in
+    // a revision from the other layout, and that revision would then be read in the wrong one.
+    const sourcePublic = publicRoot(root), revisionPublic = publicRoot(target);
     let restored = 0;
     for (const path of ignored) {
       if (!restoreInput(path)) continue;
-      const from = resolve(root, path), to = resolve(target, path);
+      const from = resolve(root, path), to = resolve(target, inLayout(path, sourcePublic, revisionPublic));
       if (!from.startsWith(root + sep) || relative(target, to).startsWith('..')) throw new Error(`Invalid restored path: ${path}`);
       // COPYFILE_FICLONE attempts a reflink and falls back to an ordinary file copy.
       await cp(from, to, { recursive: true, verbatimSymlinks: true, mode: constants.COPYFILE_FICLONE });
       restored++;
     }
     // Shared downloaded public inputs are read only by the comparison. Never copied into a clone.
-    const targetPublic = resolve(target, publicRoot(target));
+    const targetPublic = resolve(target, revisionPublic);
     await mkdir(targetPublic, { recursive: true });
-    await symlink(resolve(root, publicRoot(root), 'scenes'), resolve(targetPublic, 'scenes'));
+    await symlink(resolve(root, sourcePublic, 'scenes'), resolve(targetPublic, 'scenes'));
     return { revision: commit, restored };
   } catch (error) {
     await rm(target, { recursive: true, force: true });
