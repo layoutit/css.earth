@@ -25,9 +25,9 @@ const BRIGHT = 140;
 const WIDTHS = [3, 8, 20, 50], ENOUGH = 96 / 255;
 
 const source = resolve(import.meta.dirname, '../../../../src/objects', process.argv[2] ?? 'bullet-cluster-layers', 'source');
-const read = async (name: string) => { const { data, info } = await sharp(resolve(source, name)).toColourspace('srgb').removeAlpha().raw().toBuffer({ resolveWithObject: true }); return { data, width: info.width, height: info.height }; };
+const read = async (name: string) => { const { data, info } = await sharp(resolve(source, name)).toColorspace('srgb').removeAlpha().raw().toBuffer({ resolveWithObject: true }); return { data, width: info.width, height: info.height }; };
 const visible = await read('1e0657_opt.tif'), { width, height } = visible, count = width * height;
-const blurred = async (values: Uint8Array, sigma: number) => { const { data, info } = await sharp(Buffer.from(values.buffer), { raw: { width, height, channels: 1 } }).blur(sigma).toColourspace('b-w').raw().toBuffer({ resolveWithObject: true });
+const blurred = async (values: Uint8Array, sigma: number) => { const { data, info } = await sharp(Buffer.from(values.buffer), { raw: { width, height, channels: 1 } }).blur(sigma).toColorspace('b-w').raw().toBuffer({ resolveWithObject: true });
   if (info.channels !== 1) throw new TypeError('The blur must stay one channel.'); return data; };
 const valid = new Uint8Array(count); let bright = 0;
 for (let p = 0; p < count; p++) { valid[p] = Math.max(visible.data[3 * p]!, visible.data[3 * p + 1]!, visible.data[3 * p + 2]!) < BRIGHT ? 255 : 0; if (!valid[p]) bright++; }

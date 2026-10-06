@@ -65,7 +65,7 @@ from the pictures themselves.
   none: the mass map is far less round about its line than the gas, and its depth is the weaker of the two.
 - **Reach:** 178″ (gas) and 179″ (mass) either side of the plane along the sight line, 1,028 kpc at the comoving distance.
 - **Leaves:** one grid of 256 × 185 cells. Face-on, 32 slabs parallel to the photograph; from the sides, 36 and 40
-  curtains of 185 × 206 and 256 × 206 texels. A browser lays each slab over those behind it, where light of two colours
+  curtains of 185 × 206 and 256 × 206 texels. A browser lays each slab over those behind it, where light of two colors
   needs a screen, so the slabs are built from the back: each texel holds its own light and what it hides.
 - **Bytes:** 109 images, 0.97 MB: the photograph 0.07 MB (WebP quality 70), slabs 0.27 MB, curtains 0.62 MB.
 

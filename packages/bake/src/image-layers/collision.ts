@@ -44,7 +44,7 @@ export async function imageLayerCollision(options: { recipe: ImageLayerRecipe; s
   // Light under the pictures' background is none, and a picture ends at the frame as the photograph does.
   const read = async (name: 'gas' | 'mass') => { const medium = collision[name]!, picture = sharp(resolve(options.sourceDirectory, medium.path)), metadata = await picture.metadata();
     if (metadata.width !== recipe.source.dimensions[0] || metadata.height !== recipe.source.dimensions[1]) throw new TypeError(`${recipe.id}: ${medium.path} is ${metadata.width} by ${metadata.height} px; the ${name} picture (geometry.collision.${name}.path) is on the photograph's frame, ${recipe.source.dimensions.join(' by ')} px.`);
-    const rgb = await picture.resize({ width: W, height: H, fit: 'fill' }).removeAlpha().toColourspace('srgb').raw().toBuffer(), tau = [0, 1, 2].map(() => new Float32Array(count)), light = new Float32Array(count); let pixels = 0;
+    const rgb = await picture.resize({ width: W, height: H, fit: 'fill' }).removeAlpha().toColorspace('srgb').raw().toBuffer(), tau = [0, 1, 2].map(() => new Float32Array(count)), light = new Float32Array(count); let pixels = 0;
     for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) { const p = py * W + px, edge = Math.min(px / Math.max(1, W - 1), (W - 1 - px) / Math.max(1, W - 1), py / Math.max(1, H - 1), (H - 1 - py) / Math.max(1, H - 1)), t = Math.min(1, edge / recipe.bake.edgeTaperFraction), fade = t * t * (3 - 2 * t);
       for (let c = 0; c < 3; c++) { const value = Math.max(0, rgb[3 * p + c]! - PICTURE_FLOOR) / (255 - PICTURE_FLOOR) * fade; tau[c]![p] = -Math.log(1 - Math.min(value, .998)); light[p] += tau[c]![p]!; }
       if (light[p]! > 0) pixels++; }
