@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 import { chmod, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { join, resolve } from 'node:path';
-import { finalizeMetadata } from './finalize-metadata.mts';
+import { finalizeMetadata } from './observation/finalize-metadata.mts';
 import { args, files, isMain, record, string } from './records.mts';
 
 const quote = (value: string): string => `'${value.replaceAll("'", "'\\''")}'`;

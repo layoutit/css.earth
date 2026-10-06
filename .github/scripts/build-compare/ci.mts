@@ -4,12 +4,12 @@ import { cp, mkdir, readFile, writeFile, appendFile, rm, stat } from 'node:fs/pr
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import { serverVerdict } from './server-policy.mts';
+import { serverVerdict } from './server/server-policy.mts';
 import { performanceStage, performanceSummary, performanceVerdict } from './performance-stage.mts';
 import { sourceDiff } from './source-diff.mts';
-import { useCache, unpackCache } from './base-cache.mts';
+import { useCache, unpackCache } from './cache/base-cache.mts';
 import { toolchainMatches } from './build.mts';
-import { waitForFile } from './wait-file.mts';
+import { waitForFile } from './cache/wait-file.mts';
 import { parseMoves, record, strings } from './records.mts';
 
 const execute = promisify(execFile);
@@ -86,7 +86,7 @@ export function comparisonPreparation(raw: unknown): string {
   if (steps.filter(step => step === 'pnpm setup:asset-data').length !== 1) throw new Error('Preparation recipe must contain exactly one standalone pnpm setup:asset-data; renamed or substituted asset restore is unsafe');
   if (steps.some(step => step.includes('prepare-nebulae.mts') && step !== 'node packages/bake/cli/prepare-nebulae.mts --if-missing')) throw new Error('Unknown nebula authoring step in comparison preparation');
   // Restore already supplies the pinned bank. The authoring CLI re-inventories even a reused bank.
-  return steps.filter(step => step !== 'node packages/bake/cli/prepare-nebulae.mts --if-missing').map(step => step === 'pnpm setup:asset-data' ? 'node .github/scripts/build-compare/restore-preparation.mts --checkout .' : step).join(' && ');
+  return steps.filter(step => step !== 'node packages/bake/cli/prepare-nebulae.mts --if-missing').map(step => step === 'pnpm setup:asset-data' ? 'node .github/scripts/build-compare/preparation/restore-preparation.mts --checkout .' : step).join(' && ');
 }
 /** Compare against the pre-preparation state, including intentional tool-copy edits. */
 export function requireUnchangedTracked(before: string, after: string): void {
@@ -289,7 +289,7 @@ async function main(): Promise<number> {
         await rm(destination, { recursive: true, force: true });
         await cp(answerRoot, destination, { recursive: true });
       }
-      const { serverStage, serverSummary } = await import('./server-stage.mts');
+      const { serverStage, serverSummary } = await import('./server/server-stage.mts');
       const answers = await serverStage(base, head, out, declaration.mode, 'https://earth-assets.lowpoly.cc', undefined, { cachedBase });
       timings.push(...answers.timings);
       answerExit = answers.exitCode;

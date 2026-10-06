@@ -2,11 +2,6 @@
   "schema": "cssearth-directory-growth@1",
   "allowance": 20,
   "directories": {
-    ".github/scripts/architecture": {
-      "implementations": 22,
-      "tests": 16,
-      "reason": "Architecture graph, resolver and rule checks form one repository-boundary checker; moving individual rules would fragment its shared policy owner."
-    },
     "labs/nebula/packages/lab/browser": {
       "implementations": 43,
       "tests": 2,

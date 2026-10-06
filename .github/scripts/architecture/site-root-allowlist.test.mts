@@ -6,7 +6,7 @@ import { dirname, join } from 'node:path';
 import { test } from 'node:test';
 import { checkSiteRootAllowlist, SITE_ROOT_ALLOWLIST_FILE } from './site-root-allowlist.mts';
 import { REPOSITORY_RULES, isBroken, repositoryFindings } from './repository-rules.mts';
-import { repositoryFiles } from './graph.mts';
+import { repositoryFiles } from './import-graph/graph.mts';
 
 test('a loose file in site/ fails the repository check; an allowlisted one, or a file in a folder, passes', () => {
   const rule = REPOSITORY_RULES.find(item => item.id === 'site-root-allowlist');

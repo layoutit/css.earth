@@ -4,16 +4,16 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { test } from 'node:test';
-import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './astro-imports.mts';
+import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './import-graph/astro-imports.mts';
 import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, measure } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
-import { decodeCruiseResult, missingSources, repositoryFiles, type ImportGraph } from './graph.mts';
+import { decodeCruiseResult, missingSources, repositoryFiles, type ImportGraph } from './import-graph/graph.mts';
 import { formatDelta, formatFindings } from './report.mts';
-import { declaredPackage, undeclaredImports } from './declared-dependencies.mts';
+import { declaredPackage, undeclaredImports } from './dependencies/declared-dependencies.mts';
 import { isBroken, OBJECT_FORMAT_FOLDERS, objectCodeFiles, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
-import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
-import { packageCycles, packageCycleText } from './package-cycles.mts';
+import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './import-graph/workspaces.mts';
+import { packageCycles, packageCycleText } from './dependencies/package-cycles.mts';
 import { isTestPath, zoneOf } from './zones.mts';
 
 /** A small graph from `from -> to` pairs; every named path becomes a file. */

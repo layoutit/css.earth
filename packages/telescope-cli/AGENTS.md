@@ -113,7 +113,7 @@ The workspace's tools import it only through the subpaths `package.json` exports
 
 Sphere framing reads numeric silhouette geometry from `@cssearth/engine`. Its runtime publication, scene serialization and prepared loaders remain renderer consumers.
 
-Renderer runtime exceptions are file-scoped in [the architecture rule](../../.github/scripts/architecture/preparation-without-renderer.mts):
+Renderer runtime exceptions are file-scoped in [the architecture rule](../../.github/scripts/architecture/dependencies/preparation-without-renderer.mts):
 `src/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
 The package keeps its renderer dependency for these four consumers and the declared build metadata reader. F16 validation uses objects contracts.

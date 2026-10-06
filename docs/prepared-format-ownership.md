@@ -22,7 +22,7 @@ Contract lint enforces three hard rules with mutation tests:
   before admission. Computed paths and cross-module transport remain static-analysis limits.
 
 The [rule guide](../.github/scripts/architecture/README.md) links the implementation.
-The [exception list](../.github/scripts/architecture/format-schema-exceptions.json)
+The [exception list](../.github/scripts/architecture/formats/format-schema-exceptions.json)
 contains only shared-schema debt, with the schema, exact owner set and a specific
 reason. Stale exceptions, changed owner sets, duplicates and empty reasons fail.
 It is not an inventory of owner-internal formats or individual paths.

@@ -132,7 +132,7 @@ Commands from a clean checkout:
 ```sh
 export PATH=$HOME/.nvm/versions/node/v22.23.2/bin:$PATH
 pnpm install --frozen-lockfile
-node --test .github/scripts/architecture/*.test.mts .github/scripts/audits/check-documentation-links.test.mts
+node --test .github/scripts/architecture/*.test.mts .github/scripts/architecture/*/*.test.mts .github/scripts/audits/check-documentation-links.test.mts
 node .github/scripts/architecture/site-architecture.mts --accept
 node .github/scripts/architecture/site-architecture.mts --identity
 node .github/scripts/architecture/site-architecture.mts --sequence

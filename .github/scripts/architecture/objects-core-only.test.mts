@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
-import type { ImportGraph } from './graph.mts';
+import type { ImportGraph } from './import-graph/graph.mts';
 
 function graph(...pairs: readonly (readonly [string, string] | readonly [string, string, 'type'])[]): ImportGraph {
   return { files: new Map(), edges: pairs.map(([from, to, kind]) => ({ from, to, test: from.includes('.test.'), symbols: [], typeOnly: kind === 'type' })) };

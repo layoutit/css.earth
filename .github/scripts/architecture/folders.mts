@@ -1,6 +1,6 @@
 /** The folder graph: per-folder statistics, strongly connected components, a layer order and the
  * cycle-closing ("feedback-arc") edges that point against it. */
-import type { ImportEdge, ImportGraph } from './graph.mts';
+import type { ImportEdge, ImportGraph } from './import-graph/graph.mts';
 import { areaOf, byText, zoneOf } from './zones.mts';
 
 export interface FolderEdge { readonly from: string; readonly to: string; readonly imports: number; readonly symbols: readonly string[] }

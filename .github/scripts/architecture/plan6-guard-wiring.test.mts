@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { LAYER_RULES, evaluateRules } from './rules.mts';
 import { REPOSITORY_RULES } from './repository-rules.mts';
-import { checkSiteBuildFormatReaders } from './site-build-format-readers.mts';
-import { checkPreparationWithoutRenderer } from './preparation-without-renderer.mts';
-import type { ImportGraph } from './graph.mts';
+import { checkSiteBuildFormatReaders } from './formats/site-build-format-readers.mts';
+import { checkPreparationWithoutRenderer } from './dependencies/preparation-without-renderer.mts';
+import type { ImportGraph } from './import-graph/graph.mts';
 
 test('Plan 6 format reader and preparation renderer checks remain mandatory repository gates', () => {
   for (const [id, check] of [
