@@ -16,10 +16,10 @@ const WIDTH = 1200, HEIGHT = 630;
 const JPEG = { quality: 40, mozjpeg: true } as const;
 
 async function billboardBytes(id: string, address: string): Promise<Buffer> {
-  const local = resolve(root, 'public', address.replace(/^\//u, ''));
+  const local = resolve(root, 'site/public', address.replace(/^\//u, ''));
   if (existsSync(local)) return readFile(local);
   const url = await resolveBuildSceneAddress(address, root);
-  if (!/^https?:\/\//u.test(url)) throw new Error(`${id}: billboard ${address} is not in public/ and ASSET_ORIGIN is unset.`);
+  if (!/^https?:\/\//u.test(url)) throw new Error(`${id}: billboard ${address} is not in site/public/ and ASSET_ORIGIN is unset.`);
   for (let attempt = 1; ; attempt++) {
     const response = await fetch(url).catch((error: unknown) => error);
     if (response instanceof Response && response.ok) return Buffer.from(await response.arrayBuffer());

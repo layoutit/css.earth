@@ -165,7 +165,7 @@ jobs:
             [ -f "$path" ] && { mkdir -p "upload/$(dirname "$path")"; cp "$path" "upload/$path"; }
           done
           for directory in "src/objects/$OBJECT/prepared" \
-                           "public/scenes/$OBJECT" ; do
+                           "site/public/scenes/$OBJECT" ; do
             [ -d "$directory" ] && { mkdir -p "upload/$directory"; cp -R "$directory/." "upload/$directory/"; }
           done
           du -sh upload

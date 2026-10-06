@@ -120,7 +120,7 @@ try {
     for (let y = 0; y < info.height; y++) for (let x = 0; x < info.width; x++) if (data[(y * info.width + x) * 4 + 3] > 0) { left = Math.min(left, x); right = Math.max(right, x); top = Math.min(top, y); bottom = Math.max(bottom, y); coverage++; }
     if (coverage < 300 || left < 4 || top < 4 || right > 587 || bottom > 291) throw new Error(`Empty or clipped thumbnail: ${id}`);
     left = Math.max(0, left - 6); top = Math.max(0, top - 6); right = Math.min(591, right + 6); bottom = Math.min(295, bottom + 6);
-    const destination = resolve(root, 'public' + requireString(entry.url));
+    const destination = resolve(root, 'site/public' + requireString(entry.url));
     try { await copyFile(destination, resolve(output, `before/${id}.webp`), 1); } catch (error) { if (!(error instanceof Error) || !('code' in error) || error.code !== 'EEXIST') throw error; }
     await writeFile(resolve(output, `rendered/${id}.webp`), webp);
     entry.bytes = webp.length; entry.subject = { left, top, width: right - left + 1, height: bottom - top + 1 };
@@ -137,9 +137,9 @@ try {
     if (write) {
       if (!(await readFile(libraryPath)).equals(libraryBefore)) throw new Error('Artwork library changed during rendering; review before retrying');
       const next = Buffer.from(JSON.stringify(library, null, 2) + '\n');
-      const images = new Map(await Promise.all(selected.map(async entry => ['public' + requireString(entry.url), await readFile(resolve(output, `rendered/${requireString(entry.id)}.webp`))] satisfies [string, Buffer])));
+      const images = new Map(await Promise.all(selected.map(async entry => ['site/public' + requireString(entry.url), await readFile(resolve(output, `rendered/${requireString(entry.id)}.webp`))] satisfies [string, Buffer])));
       const graphs = await prepareArtworkRefresh(root, libraryBefore, next, images, DATASET_ROUTES);
-      await writePreparedSet([...selected.map(entry => ({ path: resolve(root, 'public' + requireString(entry.url)), source: resolve(output, `rendered/${requireString(entry.id)}.webp`) })),
+      await writePreparedSet([...selected.map(entry => ({ path: resolve(root, 'site/public' + requireString(entry.url)), source: resolve(output, `rendered/${requireString(entry.id)}.webp`) })),
         { path: libraryPath, text: next }, ...graphs]);
     }
   }

@@ -29,7 +29,7 @@ export default defineConfig({
   site: SITE_ORIGIN,
   trailingSlash: "always",
   srcDir: "./site",
-  publicDir: "./public",
+  publicDir: "./site/public",
   outDir: "./dist",
   output: "static",
   devToolbar: { enabled: false },
@@ -39,7 +39,7 @@ export default defineConfig({
       // context package that setup:assets deliberately left missing after a 404 from R2, instead of failing the
       // whole build over one object. CI and local builds never set this flag and stay strict.
       const allowMissing = process.env.CSSEARTH_ALLOW_MISSING_ASSETS === '1';
-      // An asset-origin build deliberately leaves public/scenes absent. Its tracked manifest is the local,
+      // An asset-origin build deliberately leaves site/public/scenes absent. Its tracked manifest is the local,
       // content-addressed contract for previews already published to R2; all prepared package bytes stay strict.
       const { availability, failures } = await prepareContextAvailability({ strict: command === 'build' && !allowMissing,
         publicAssets: assetOrigin() ? 'manifest' : 'local' });
@@ -47,7 +47,7 @@ export default defineConfig({
       if (failures.length) logger.warn(`Some 3D views are unavailable in this installation:\n${failures.join('\n')}\nPrepare their packages and restart the server to enable them.`);
     },
   } }, { name: 'asset-origin-scenes', hooks: {
-    // `public/scenes` (1.44 GB) is copied into `dist/scenes` by Astro's publicDir copy regardless
+    // `site/public/scenes` (1.44 GB) is copied into `dist/scenes` by Astro's publicDir copy regardless
     // of ASSET_ORIGIN; when textures and scene JSON resolve to the published bucket instead, that
     // copy is dead weight the deploy should not ship. the assemble step (`run-implemented-objects.mts assemble`) tolerates its absence.
     'astro:build:done': async ({ dir, logger }) => {

@@ -21,7 +21,7 @@ export async function refreshSurfaceObservations(id: string, datasetIds: readonl
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !datasetIds.length || new Set(datasetIds).size !== datasetIds.length)
     throw new TypeError('Choose a body and distinct existing observation datasets.');
   const started = performance.now(), objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
-  const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
+  const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('site/public/scenes', id);
   const stage = resolve('output/surface-observation-refresh', id), recipePath = resolve(sourceDirectory, 'preparation/terrestrial.json');
   const recipeBytes = await readFile(recipePath), descriptor = await json(resolve(objectDirectory, 'object.json'));
   const references = records(requireRecord(requireRecord(descriptor.properties).recipe).sources);
@@ -99,7 +99,7 @@ export async function refreshSurfaceObservations(id: string, datasetIds: readonl
 /** Refresh the refreshed datasets' no-data flags and billboard colors without rebaking any images. Reader text publishes separately with prepare:text. */
 export async function refreshObservationControls(id: string, datasetIds: readonly string[], surfaceColors: ReadonlyMap<string, string> = new Map(), root = projectRoot(import.meta.url)) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Invalid object id.');
-  const objectDirectory = resolve(root, 'src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve(root, 'public/scenes', id);
+  const objectDirectory = resolve(root, 'src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve(root, 'site/public/scenes', id);
   const descriptor = await json(resolve(objectDirectory, 'object.json'));
   const references = records(requireRecord(requireRecord(descriptor.properties).recipe).sources);
   // Keep the existing prepared controls, feature catalogue and all other shell content; a refreshed control takes only its

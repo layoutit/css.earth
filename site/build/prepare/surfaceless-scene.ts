@@ -108,6 +108,6 @@ export async function companionThumbnails({ objectDirectory, publicDirectory, co
     if (!picture?.startsWith(prefix)) throw new TypeError(`${bankDirectory}/prepared/presentation.json: dataset ${control.volume.datasetId} names no picture under ${prefix}.`);
     await mkdir(dirname(output), { recursive: true });
     // The bank's public files are the checkout's, whatever directory this run stages the object's own into.
-    await copyFile(resolve(objectDirectory, '../../../public/scenes', control.volume.objectId, picture.slice(prefix.length)), output);
+    await copyFile(resolve(objectDirectory, '../../../site/public/scenes', control.volume.objectId, picture.slice(prefix.length)), output);
   }
 }

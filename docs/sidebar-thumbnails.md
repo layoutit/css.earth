@@ -18,10 +18,10 @@ ESA artist's impression used by the map. It is artwork, not an observation;
 its [source recipe](../src/objects/milky-way-volume/source/backing/recipe.json) retains that qualification.
 The former slab-derived icon no longer matched the delivered galaxy view.
 
-The [prepared receipt](../public/navigation/sidebar-thumbnails.json) records every
+The [prepared receipt](../site/public/navigation/sidebar-thumbnails.json) records every
 input path and byte count, source credit and image URL. Original datasets and repaired
 runtime assets are read-only inputs. The preparer writes only its sidebar images
-and receipt under `public/navigation/`.
+and receipt under `site/public/navigation/`.
 
 An object's own row (a galaxy, cluster or nebula in an overview list or in search) shows
 its default dataset's image under one framing rule, `packages/bake/src/site-assets/object-thumbnail.ts`,

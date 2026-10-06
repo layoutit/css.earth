@@ -23,7 +23,7 @@ for (const id of (await readdir(bodies)).sort()) {
     const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(new URL(`${id}/prepared/runtime.json`, bodies), "utf8")));
     const plan = definition.features;
     assert.ok(plan);
-    const catalog = parsePreparedSurfaceFeatureCatalog(JSON.parse(await readFile(new URL(`public${plan.catalog.url}`, root), "utf8")), plan, id);
+    const catalog = parsePreparedSurfaceFeatureCatalog(JSON.parse(await readFile(new URL(`site/public${plan.catalog.url}`, root), "utf8")), plan, id);
     const camera = definition.camera;
     const framingZoom = 400 / camera.logicalBodyDiameter * camera.defaultZoom;
     const share = Math.log(framingZoom / camera.minimumZoom) / Math.log(camera.maximumZoom / camera.minimumZoom);

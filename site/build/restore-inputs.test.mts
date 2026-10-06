@@ -20,7 +20,7 @@ const json = (path: string, value: unknown): Promise<void> => writeFile(path, JS
 async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-restore-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  for (const dir of ['packages/bake/cli', 'site/directory', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `public/scenes/${id}`]) {
+  for (const dir of ['packages/bake/cli', 'site/directory', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `site/public/scenes/${id}`]) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await writeRestore(root);
@@ -270,7 +270,7 @@ test('manifest refresh keeps runtime and shell images but excludes preparation m
   const root = await fixture(t), prepared = resolve(root, 'src/objects/titan/prepared');
   const url = (name: string): string => `/scenes/titan/${name}.webp`;
   for (const name of ['surface', 'thumbnail', 'chart', 'source-map']) {
-    await writeFile(resolve(root, `public/scenes/titan/${name}.webp`), name);
+    await writeFile(resolve(root, `site/public/scenes/titan/${name}.webp`), name);
   }
   await json(resolve(prepared, 'runtime.json'), { scene: { image: url('surface') } });
   await json(resolve(prepared, 'controls.json'), { datasets: [{ thumbnailUrl: url('thumbnail') }] });
@@ -280,5 +280,5 @@ test('manifest refresh keeps runtime and shell images but excludes preparation m
   const manifestInput: unknown = JSON.parse(await readFile(resolve(root, 'src/objects/titan/inventory.json'), 'utf8'));
   const manifest = requireRecord(manifestInput);
   assert.deepEqual(requireArray(manifest.assets).map(asset => requireString(requireRecord(asset).filename)), ['chart.webp', 'surface.webp', 'thumbnail.webp']);
-  assert.equal(await readFile(resolve(root, 'public/scenes/titan/source-map.webp'), 'utf8'), 'source-map');
+  assert.equal(await readFile(resolve(root, 'site/public/scenes/titan/source-map.webp'), 'utf8'), 'source-map');
 });

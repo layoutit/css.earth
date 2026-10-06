@@ -21,7 +21,7 @@ test('a missing bank isolates one object; restoring it admits the complete packa
   assert.deepEqual((await prepareContextAvailability({ projectRoot: root, strict: true })).availability, { helix: { available: true }, lmc: { available: true } });
 });
 
-for (const path of ['prepared/slice.webp', 'prepared/presentation.json', 'source/manifest.json', '../../../public/scenes/helix/preview.webp']) {
+for (const path of ['prepared/slice.webp', 'prepared/presentation.json', 'source/manifest.json', '../../../site/public/scenes/helix/preview.webp']) {
   test(`partial package is unavailable when ${path} is missing`, async t => {
     const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
     const f = await writeContextPackage(root, 'helix'); await writeContextPackage(root, 'lmc');
@@ -56,7 +56,7 @@ test('an invalid presentation or unbound dataset source cannot become available 
 test('an asset-origin build accepts a missing local preview that its inventory publishes', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-availability-')); t.after(() => rm(root, { recursive: true, force: true }));
   const f = await writeContextPackage(root, 'helix');
-  await rm(resolve(root, 'public/scenes/helix/preview.webp'));
+  await rm(resolve(root, 'site/public/scenes/helix/preview.webp'));
   assert.equal((await inspectContextAvailability(root)).helix.available, false);
   assert.deepEqual(await inspectContextAvailability(root, { publicAssets: 'manifest' }), { helix: { available: true } });
   const manifestPath = resolve(f.directory, 'inventory.json');

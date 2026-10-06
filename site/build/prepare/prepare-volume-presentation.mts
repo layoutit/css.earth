@@ -194,13 +194,13 @@ export async function prepareVolumePresentations({ root = process.cwd(), objectI
       const own = inputs.get(dataset.input)!;
       const image = await preparePreview(root, dataset.preview, input, { mirrorOrigin });
       const previewUrl = `/scenes/${record.objectId}/datasets/${dataset.id}.webp`;
-      outputs.push({ path: resolve(root, `public${previewUrl}`), text: image.bytes });
+      outputs.push({ path: resolve(root, `site/public${previewUrl}`), text: image.bytes });
       controls.push({ id: dataset.id, label: dataset.label, title: dataset.title, thumbnailUrl: previewUrl,
         texture: { url: previewUrl, width: image.width, height: image.height, attribution: { label: sourceText(own.displayCredit ?? own.credit), url: sourceUrl(own.sourceUrl) } },
         description: dataset.description, summary: dataset.summary, detail: dataset.detail, facts: dataset.facts });
     }
     outputs.push({ path: resolve(root, `${base}/prepared/presentation.json`), text: stringify({ schema: PREPARED_VOLUME_PRESENTATION_SCHEMA, objectId: record.objectId, controls, defaultDataset: record.defaultDataset }) });
-    const publicPrefix = resolve(root, `public/scenes/${record.objectId}`) + '/';
+    const publicPrefix = resolve(root, `site/public/scenes/${record.objectId}`) + '/';
     const publicAssets = outputs.filter(output => output.path.startsWith(publicPrefix)).map(output => {
       const bytes = Buffer.from(output.text);
       return { filename: output.path.slice(publicPrefix.length), location: 'public' as const, bytes: bytes.length, sha256: sha256(bytes) };

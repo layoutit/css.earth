@@ -1,7 +1,7 @@
 /** Rebake only a sphere's lighting from its recipe, without the object's surfaces, geometry or scene: the path for a change
  * in `lighting` of source/preparation/terrestrial.json, such as naming the body's published photometric models.
  * `node packages/bake/cli/refresh-sphere-lighting.mts <body-id>...` rewrites the sheet and the flood-lit frame under
- * public/scenes/<id>/, the lighting record of prepared/material.json and their inventory rows; the raw source maps are not
+ * site/public/scenes/<id>/, the lighting record of prepared/material.json and their inventory rows; the raw source maps are not
  * read. It refuses a shape-model body, whose lighting is baked into its mesh atlases, and a recipe whose frame addresses
  * differ from the prepared material, which needs the full preparation. */
 import { readFile, writeFile } from 'node:fs/promises';
@@ -19,7 +19,7 @@ if (!ids.length || ids.some(id => id.startsWith('-'))) throw new TypeError('Usag
 const addresses = (value: unknown) => { const lighting = requireRecord(value), shadowless = requireRecord(lighting.shadowless);
   return JSON.stringify([requireRecord(lighting.sheet).presentations, shadowless.backgroundPosition, shadowless.backgroundSize]); };
 for (const id of ids) {
-  const objectDirectory = resolve(root, 'src/objects', id), publicDirectory = resolve(root, 'public/scenes', id), recipePath = resolve(objectDirectory, 'source/preparation/terrestrial.json');
+  const objectDirectory = resolve(root, 'src/objects', id), publicDirectory = resolve(root, 'site/public/scenes', id), recipePath = resolve(objectDirectory, 'source/preparation/terrestrial.json');
   const config = parseSolidPreparationSource(JSON.parse(await readFile(recipePath, 'utf8')));
   if (config.geometry.radialTerrain) throw new TypeError(`${id}: ${recipePath} has geometry.radialTerrain; a shape-model body bakes its lighting into its mesh atlases and has no lighting to refresh.`);
   const materialPath = resolve(objectDirectory, 'prepared/material.json'), material = requireRecord(JSON.parse(await readFile(materialPath, 'utf8')));

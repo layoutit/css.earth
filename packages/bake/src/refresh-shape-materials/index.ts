@@ -69,7 +69,7 @@ export async function refreshShapeMaterialDescriptions(id: string) {
 export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeometry, sourceRoot?: string) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError('Invalid object id.');
   const started = performance.now(), objectDirectory = shapeMaterialPath('src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared');
-  const publicDirectory = shapeMaterialPath('public/scenes', id), stage = shapeMaterialPath('output/shape-material-refresh', id);
+  const publicDirectory = shapeMaterialPath('site/public/scenes', id), stage = shapeMaterialPath('output/shape-material-refresh', id);
   const recipePath = resolve(objectDirectory, 'source/preparation/terrestrial.json'), recipeBytes = await readFile(recipePath);
   const config = parseSolidPreparationSource(JSON.parse(recipeBytes.toString('utf8'))), views = neutralShapeViews(config.raster.shapeViews);
   if (!views.length) throw new Error(`${id} has no shape-only dataset.`);
@@ -168,7 +168,7 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
       await sharp(png).webp({ quality: 85, alphaQuality: 100, effort: 6 }).toFile(resolve(markerStage, `${id}-context.webp`));
     }
 
-    for (const filename of await readdir(markerStage)) await replaceAsset(resolve(markerStage, filename), shapeMaterialPath('public/navigation', filename));
+    for (const filename of await readdir(markerStage)) await replaceAsset(resolve(markerStage, filename), shapeMaterialPath('site/public/navigation', filename));
     // The committed search preview follows its context image.
     await prepareSearchThumbnails(shapeMaterialPath());
   }

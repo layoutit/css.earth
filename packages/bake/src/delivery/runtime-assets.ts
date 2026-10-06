@@ -47,7 +47,7 @@ export function selectedObjectIds(args: readonly string[], root: string): string
 
 /** Where an inventoried file lives in this checkout. */
 export function assetRoot(root: string, id: string, location: AssetLocation): string {
-  return location === 'public' ? resolve(root, `public/scenes/${id}`) : resolve(root, `src/objects/${id}/prepared`);
+  return location === 'public' ? resolve(root, `site/public/scenes/${id}`) : resolve(root, `src/objects/${id}/prepared`);
 }
 
 /**

@@ -124,7 +124,7 @@ jobs:
           # The same paths and key as universe.yml/deploy.yml. setup:assets sha-verifies every restored file and
           # downloads only what is missing or changed.
           path: |
-            public/scenes
+            site/public/scenes
             src/objects/*/prepared/runtime.json
             src/objects/*/prepared/scene.json
           key: inventory-v1-${{ hashFiles('src/objects/*/inventory.json') }}

@@ -24,8 +24,8 @@ import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readInventory, readVolumeDatasetBank } from '@cssearth/objects/node';
 
-/** The images are served from the site's own `public/` tree, beside the other generated navigation images. */
-const OUTPUT = { metadata: 'site/prepared/prepared-dataset-billboards.json', images: 'public/navigation/dataset-billboards' };
+/** The images are served from the site's own `site/public/` tree, beside the other generated navigation images. */
+const OUTPUT = { metadata: 'site/prepared/prepared-dataset-billboards.json', images: 'site/public/navigation/dataset-billboards' };
 /** Prepared impostor views are 256 px squares; billboards keep them at their prepared size. */
 const CELL_PX = 256;
 

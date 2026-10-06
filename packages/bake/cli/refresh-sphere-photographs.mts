@@ -143,7 +143,7 @@ async function stageMercuryBand({dataset,config,sourceDirectory,manifest,stage,p
 export async function refreshSpherePhotographs(id:string,datasetId:string) {
   if(!/^[a-z][a-z0-9-]*$/.test(id)||!/^[a-z][a-z0-9-]*$/.test(datasetId)) throw new TypeError('Use one body id and one dataset id.');
   sharp.cache(false);sharp.concurrency(1);
-  const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),publicDirectory=resolve('public/scenes',id),stage=resolve('output/sphere-photographs',id,datasetId);
+  const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),publicDirectory=resolve('site/public/scenes',id),stage=resolve('output/sphere-photographs',id,datasetId);
   const [sourceManifest,rasterRecipe,descriptor]=await Promise.all([json(resolve(sourceDirectory,'manifest.json')),json(resolve(sourceDirectory,'preparation/raster.json')),json(resolve(objectDirectory,'object.json'))]);
   const config=recipe(rasterRecipe),dataset=config.surfaces.filter(surface=>surface.id===datasetId);
   if(dataset.length!==1) throw new Error(`Unknown raster dataset: ${id}/${datasetId}.`);

@@ -54,7 +54,7 @@ test("the Sun's stale and missing files are restored by hash, and the world step
     assert.deepEqual(requested.sort(), ['minimaps/corona.webp', 'sun-surface@2x.webp', 'title.json']);
     assert.equal(await readFile(join(prepared, 'minimaps/corona.webp'), 'utf8'), 'corona');
     assert.equal(await readFile(join(prepared, 'title.json'), 'utf8'), '{"title":"Sun"}\n');
-    assert.equal(await readFile(join(root, 'public/scenes/sun/sun-surface@2x.webp'), 'utf8'), 'surface');
+    assert.equal(await readFile(join(root, 'site/public/scenes/sun/sun-surface@2x.webp'), 'utf8'), 'surface');
     assert.equal(await readFile(join(prepared, 'world-context.json'), 'utf8'), '{"bodies":["new"]}\n');
     assert.deepEqual(await restoreDriftedFiles('sun', { projectRoot: root, keep: worldStepOutput, fetcher }), [], 'a current checkout downloads nothing');
   } finally { await rm(root, { recursive: true, force: true }); }

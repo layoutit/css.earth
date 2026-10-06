@@ -8,12 +8,12 @@ export const DEFAULT_SOCIAL_IMAGE_ID = 'earth';
 
 /** Committed social captures, read once at build time. `pnpm prepare:social` adds more. */
 export function committedSocialImages(root = process.cwd()): ReadonlySet<string> {
-  const directory = resolve(root, 'public/social');
+  const directory = resolve(root, 'site/public/social');
   const names = readdirSync(directory)
     .filter(name => name.endsWith('.jpg'))
     .map(name => name.slice(0, -'.jpg'.length));
   if (!names.includes(DEFAULT_SOCIAL_IMAGE_ID)) {
-    throw new Error(`public/social must contain the ${DEFAULT_SOCIAL_IMAGE_ID} capture every uncaptured object falls back to.`);
+    throw new Error(`site/public/social must contain the ${DEFAULT_SOCIAL_IMAGE_ID} capture every uncaptured object falls back to.`);
   }
   return new Set(names);
 }

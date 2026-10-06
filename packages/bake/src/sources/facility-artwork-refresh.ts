@@ -24,7 +24,7 @@ export async function prepareArtworkRefresh(root: string, before: Buffer, after:
     if (source.kind !== 'model-render') assert.deepEqual(entry, old, `${id}: only model renders may change`);
     const image = parseExplorationImage({ id, src: entry.url, width: entry.width, height: entry.height, bytes: entry.bytes,
       kind: source.kind, sourceUrl: source.sourcePage, credit: source.credit, ...(entry.subject === undefined ? {} : { subject: entry.subject }) });
-    const path = 'public' + image.src;
+    const path = 'site/public' + image.src;
     const bytes = images.get(path) ?? await readFile(resolve(root, path));
     assert.equal(bytes.length, image.bytes, `${id}: artwork size`);
     const metadata = await sharp(bytes).metadata();

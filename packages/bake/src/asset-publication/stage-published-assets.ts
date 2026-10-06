@@ -46,7 +46,7 @@ export async function stagePublishedAssets({ artifactRoot, sourceRoot, root, obj
     const manifest = requireInventory(objectId, value);
     inventories.push({ path, bytes });
     for (const asset of manifest.assets) {
-      const directory = asset.location === 'prepared' ? `${base}/prepared` : `public/scenes/${objectId}`;
+      const directory = asset.location === 'prepared' ? `${base}/prepared` : `site/public/scenes/${objectId}`;
       const assetPath = `${directory}/${asset.filename}`;
       await regularPath(artifactRoot, assetPath);
       const content = await readFile(resolve(artifactRoot, assetPath));

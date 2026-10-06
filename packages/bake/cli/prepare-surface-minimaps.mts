@@ -16,6 +16,6 @@ for (const { id } of SCENE_OBJECTS) {
   if (requested.length && !requested.includes(id)) continue;
   const objectDirectory = resolve(projectRoot, 'src/objects', id);
   const images = await prepareSurfaceMinimaps({ objectDirectory, solarGeometry,
-    publicDirectory: resolve(projectRoot, 'public/scenes', id), outputDirectory: resolve(objectDirectory, 'prepared') });
+    publicDirectory: resolve(projectRoot, 'site/public/scenes', id), outputDirectory: resolve(objectDirectory, 'prepared') });
   console.log(`${id}: ${images.length} prepared minimaps`);
 }

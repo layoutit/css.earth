@@ -17,10 +17,10 @@ import {
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 // Sidebar thumbnails share the directory but belong to prepare-sidebar-thumbnails, whose manifest lists them.
-const sidebarThumbnails = JSON.parse(await readFile(resolve(projectRoot, "public/navigation/sidebar-thumbnails.json"), "utf8")) as { images: Record<string, { url2x: string }> };
+const sidebarThumbnails = JSON.parse(await readFile(resolve(projectRoot, "site/public/navigation/sidebar-thumbnails.json"), "utf8")) as { images: Record<string, { url2x: string }> };
 const sidebarFiles = new Set(["sidebar-thumbnails.json", ...Object.values(sidebarThumbnails.images).map(({ url2x }) => url2x.replace("/navigation/", ""))]);
 // Subfolders such as search/ belong to their own preparers; this one writes files at the top level only.
-const expectedOutputFiles = (await readdir(resolve(projectRoot, "public/navigation"), { withFileTypes: true }))
+const expectedOutputFiles = (await readdir(resolve(projectRoot, "site/public/navigation"), { withFileTypes: true }))
   .filter((entry) => entry.isFile() && !sidebarFiles.has(entry.name)).map((entry) => entry.name).sort();
 
 // Marker code is the same for every body: these tests load named bodies, nearest first, not all ~3,600.
@@ -37,7 +37,7 @@ test('adding and reordering bodies preserves existing marker bytes', async conte
   await prepareBodyMarkers({ projectRoot, outputRoot: after, descriptors: [...descriptors].reverse() });
   for (const file of await readdir(before)) {
     assert.deepEqual(await readFile(resolve(after, file)), await readFile(resolve(before, file)), file);
-    const accepted = await sharp(resolve(projectRoot, 'public/navigation', file)).ensureAlpha().raw().toBuffer();
+    const accepted = await sharp(resolve(projectRoot, 'site/public/navigation', file)).ensureAlpha().raw().toBuffer();
     const reproduced = await sharp(resolve(after, file)).ensureAlpha().raw().toBuffer();
     assert.equal(reproduced.length, accepted.length);
     for (let i = 0; i < accepted.length; i += 4) {
@@ -51,10 +51,10 @@ test('metadata-only preparation does not replace or remove images', async contex
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-marker-metadata-'));
   context.after(() => rm(root, { recursive: true, force: true }));
   const files = ['body-sun@2x.webp'];
-  for (const file of files) await copyFile(resolve(projectRoot, 'public/navigation', file), resolve(root, file));
-  await copyFile(resolve(projectRoot, 'public/navigation/body-sun@2x.webp'), resolve(root, 'body-markers-00@2x.webp'));
+  for (const file of files) await copyFile(resolve(projectRoot, 'site/public/navigation', file), resolve(root, file));
+  await copyFile(resolve(projectRoot, 'site/public/navigation/body-sun@2x.webp'), resolve(root, 'body-markers-00@2x.webp'));
   // The Sun has a context image, which the metadata step reads; it must stay as it was.
-  await copyFile(resolve(projectRoot, 'public/navigation/sun-context.webp'), resolve(root, 'sun-context.webp'));
+  await copyFile(resolve(projectRoot, 'site/public/navigation/sun-context.webp'), resolve(root, 'sun-context.webp'));
   const before = new Map(await Promise.all((await readdir(root)).map(async file => [file, await readFile(resolve(root, file))] as const)));
   const presentationPath = resolve(root, 'presentation.mjs');
   await prepareNavigation({ projectRoot, outputRoot: root, planets: SCENE_OBJECTS.filter(body => body.id === 'sun'), presentationPath, catalogOnly: true });
@@ -72,7 +72,7 @@ test('body markers and resolved context images leave space outside their silhoue
     const images = [`body-${objectId}@2x.webp`,
       ...(context ? [context.url.replace('/navigation/', '')] : [])];
     for (const filename of images) {
-      const { data, info } = await sharp(resolve(projectRoot, 'public/navigation', filename)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+      const { data, info } = await sharp(resolve(projectRoot, 'site/public/navigation', filename)).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
       const corners = [0, info.width - 1, (info.height - 1) * info.width, info.width * info.height - 1];
       for (const pixel of corners) assert.equal(data[pixel * 4 + 3], 0, `${filename}: opaque tile corner`);
       assert(data.some((value, index) => index % 4 === 3 && value > 0), `${filename}: empty marker`);
@@ -83,7 +83,7 @@ test('body markers and resolved context images leave space outside their silhoue
 test('every context image has its committed search preview, and no preview outlives its image', async () => {
   const { PREPARED_NAVIGATION_MARKERS } = await import('../prepared/prepared-navigation-markers.mjs');
   const expected = Object.entries(PREPARED_NAVIGATION_MARKERS).filter(([, marker]) => marker.context).map(([id]) => `${id}@2x.webp`).sort();
-  assert.deepEqual((await readdir(resolve(projectRoot, 'public/navigation/search'))).sort(), expected,
+  assert.deepEqual((await readdir(resolve(projectRoot, 'site/public/navigation/search'))).sort(), expected,
     'run node packages/bake/cli/prepare-navigation.mts <id> after drawing a context image');
 });
 
@@ -91,7 +91,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
   test(`failed ${failure} preserves accepted files or recoverable backups outside public`, async (context) => {
     const root = await mkdtemp(resolve(tmpdir(), "cssearth-navigation-failure-"));
     context.after(() => rm(root, { recursive: true, force: true }));
-    for (const path of ["src/objects/new-body/source/preparation", "src/objects/sun", "src/navigation/source", "site", "public/navigation"]) {
+    for (const path of ["src/objects/new-body/source/preparation", "src/objects/sun", "src/navigation/source", "site", "site/public/navigation"]) {
       await mkdir(resolve(root, path), { recursive: true });
     }
     await copyFile(resolve(projectRoot, "src/objects/sun/swatch.json"), resolve(root, "src/objects/sun/swatch.json"));
@@ -111,7 +111,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
         await symlink(resolve(projectRoot, "src/navigation/source", filename), resolve(root, "src/navigation/source", filename));
       }
     }
-    const outputRoot = resolve(root, "public/navigation");
+    const outputRoot = resolve(root, "site/public/navigation");
     const previous = new Map<string, string>([
       ...expectedOutputFiles.filter((filename) => filename !== "body-download@2x.webp").map((filename) => [resolve(outputRoot, filename), `accepted ${filename}`] as const),
       [resolve(outputRoot, "new-body.webp"), "accepted legacy marker"],
@@ -135,7 +135,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
       assert.equal(await readFile(resolve(cache, recovery, "backup-0"), "utf8"), "accepted blackhole-marker.png");
       // Vite copies all of public, including dot directories. Neither staged
       // assets nor the preserved recovery directory can enter that tree.
-      assert.deepEqual(await readdir(resolve(root, "public")), ["navigation"]);
+      assert.deepEqual(await readdir(resolve(root, "site/public")), ["navigation"]);
       for (const [path, bytes] of previous) {
         if (path === resolve(outputRoot, "blackhole-marker.png")) continue;
         assert.equal(await readFile(path, "utf8"), bytes, path);
@@ -145,7 +145,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
     await assert.rejects(prepareNavigation(options), failure === "publication" ? /ENOENT/ : /./);
     for (const [path, bytes] of previous) assert.equal(await readFile(path, "utf8"), bytes, path);
     assert.deepEqual((await readdir(outputRoot)).sort(), filenames);
-    assert.deepEqual(await readdir(resolve(root, "public")), ["navigation"]);
+    assert.deepEqual(await readdir(resolve(root, "site/public")), ["navigation"]);
     assert.deepEqual(await readdir(resolve(root, "node_modules/.cache")), []);
   });
 }

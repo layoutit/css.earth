@@ -18,7 +18,7 @@ export async function refreshPhotographs(id: string, datasetIds: readonly string
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !datasetIds.length || new Set(datasetIds).size !== datasetIds.length)
     throw new TypeError('Choose an object and distinct photographic dataset IDs.');
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
-  const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
+  const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('site/public/scenes', id);
   const authored = await readAuthoredSources(objectDirectory);
   const sources = new Map([...authored.sources].map(([id, entry]) => [id, entry.value]));
   const config = readRasterRecipe(sources.get('raster'));
@@ -70,7 +70,7 @@ export async function refreshSurfaceContent(id: string, datasetIds: readonly str
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !datasetIds.length || new Set(datasetIds).size !== datasetIds.length)
     throw new TypeError('Choose an object and distinct surface dataset IDs.');
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
-  const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
+  const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('site/public/scenes', id);
   const content = (await readAuthoredSources(objectDirectory)).sources.get('content')?.reference;
   if (!content?.path.startsWith('source/')) throw new TypeError('Photographic refresh needs authored content.');
   const previousDatasets = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'datasets.json'), 'utf8')));

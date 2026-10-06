@@ -12,7 +12,7 @@ import { encodeLossyWebp, LOSSY_WEBP } from '@cssearth/bake/raster';
  */
 const root = path.resolve(import.meta.dirname, '../../..');
 const records = path.join(root, 'site/source/facilities/photograph-records.json');
-const output = path.join(root, 'public/shell/facility-renders');
+const output = path.join(root, 'site/public/shell/facility-renders');
 const cache = process.env.CSSEARTH_PHOTO_CACHE ?? path.join(root, 'output/facility-photos');
 const only = (process.argv.find(arg => arg.startsWith('--only='))?.slice('--only='.length) ?? '').split(',').filter(Boolean);
 const WIDTH = 592, HEIGHT = 296, BACKGROUND = '#0d0d0d';

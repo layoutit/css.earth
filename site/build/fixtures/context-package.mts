@@ -45,7 +45,7 @@ export async function writeContextPackage(root: string, id: string) {
       name: `${id} fixture`, defaultDataset: 'optical', bank: { path: `${directory}/prepared/datasets.json` }, sharedInputs: [],
       datasets: [{ id: 'optical', label: 'Optical', title: 'Fixture optical image', description: 'Structural test fixture', summary: 'Structural test fixture',
         detail: '1 × 1 px', facts: [], input: 'image', preview: { path: '.local/fixture/preview.jpg', url: 'https://example.test/preview.jpg' } }] })],
-    [`${directory}/prepared/slice.webp`, image], [`public${preview}`, image],
+    [`${directory}/prepared/slice.webp`, image], [`site/public${preview}`, image],
   ];
   for (const [path, bytes] of files) { const file = resolve(root, path); await mkdir(dirname(file), { recursive: true }); await writeFile(file, bytes); }
   return { directory: resolve(root, directory), files, bank, descriptor, manifest, presentation };

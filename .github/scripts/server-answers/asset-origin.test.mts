@@ -30,8 +30,8 @@ test('real child host resolves both origins from inventory and preserves static 
     const root = await mkdtemp(resolve(tmpdir(), 'answer-origin-host-'));
     let child: ReturnType<typeof spawn> | undefined;
     try {
-      for (const dir of ['dist', 'src/objects/earth', 'public/scenes/earth']) await mkdir(resolve(root, dir), { recursive: true });
-      await writeFile(resolve(root, 'public/scenes/earth/probe.json'), '{"offline":true}');
+      for (const dir of ['dist', 'src/objects/earth', 'site/public/scenes/earth']) await mkdir(resolve(root, dir), { recursive: true });
+      await writeFile(resolve(root, 'site/public/scenes/earth/probe.json'), '{"offline":true}');
       await writeFile(resolve(root, 'src/objects/earth/inventory.json'), JSON.stringify({ assets: [{ location: 'public', filename: 'probe.json', sha256: 'a'.repeat(64) }] }));
       await writeFile(resolve(root, 'netlify.toml'), '[functions]\ndirectory = "functions"\n');
       await writeFile(resolve(root, 'wrangler.jsonc'), '{"main":"worker.mjs","assets":{"run_worker_first":true}}');

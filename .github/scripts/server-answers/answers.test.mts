@@ -34,13 +34,13 @@ test('every status/header/body/closure difference and missing request is reporte
   assert.equal(dimensions('gone.json', {}, undefined)[0]?.dimension, 'presence');
 });
 test('included_files glob matches complete path segments', () => {
-  assert.ok(covered('public/scenes/earth/earth-places.json', ['public/scenes/*/*-places.json']));
-  assert.ok(!covered('public/scenes/earth/deeper/earth-places.json', ['public/scenes/*/*-places.json']));
+  assert.ok(covered('site/public/scenes/earth/earth-places.json', ['site/public/scenes/*/*-places.json']));
+  assert.ok(!covered('site/public/scenes/earth/deeper/earth-places.json', ['site/public/scenes/*/*-places.json']));
   assert.ok(!covered('dist/catalogue/index.json', ['dist/catalogue/other.json']));
 });
 async function fixture(dir: string, status = 200, files: string[] = []) {
   await writeFile(resolve(dir, 'index.json'), serialise({ target: 'preview', requests: ['probe-navigation'], catalogue: [{ id: 'probe-navigation', expected: 200 }] }));
-  await writeFile(resolve(dir, 'closure.json'), serialise({ functions: { find: files }, included: ['public/*.json'] }));
+  await writeFile(resolve(dir, 'closure.json'), serialise({ functions: { find: files }, included: ['site/public/*.json'] }));
   await writeFile(resolve(dir, 'probe-navigation.json'), serialise({ id: 'probe-navigation', status, headers: { 'content-type': 'text/html' }, body: { kind: 'text', value: 'ok' } }));
 }
 test('real directory checker rejects broken baselines, missing records and uncovered closure', async () => {
