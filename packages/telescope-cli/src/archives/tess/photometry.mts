@@ -1,12 +1,15 @@
-/** A star's light curve from its TESS pixels, and the period of its light.
+/** A star's light curve from its pixels (a TESS sector's cutout, a Kepler quarter's or a K2 campaign's file), and the
+ * rule that judges a TESS sector.
  *
- * The science is not this module's: lightkurve measures the star's light from the pixels and regresses the sky's own
- * variation out of it, and astropy's Lomb-Scargle periodogram finds the period (tools.py holds the calls, toolchain.json
- * pins the codes). What is written here is the job those calls read and the reading of what they print.
+ * The science is not this module's: lightkurve measures the star's light from the pixels and takes the sky's variation
+ * (TESS) or the spacecraft's roll (K2) out of it, and astropy's Lomb-Scargle periodogram finds the period (tools.py holds
+ * the calls, toolchain.json pins the codes). What is written here is the job those calls read and the reading of what
+ * they print.
  *
- * The choices the codes leave open are the constants below. Each is to be settled against the mission's own light curves
- * of the same stars and sectors (benchmark), not by taste; the values here are the ones the first comparison supports:
- * two sky terms reproduce AB Pictoris's 3.89-day rotation with a correlation of 0.997, and five remove it. */
+ * Whether a Kepler or K2 light curve shows a rotation is a published method's to say (methods.mts). The rule for a TESS
+ * sector below is still this repository's own, set on our labelled stars; it is to be replaced by a published one.
+ * The choices lightkurve leaves open for a TESS cutout are the constants below; two sky terms reproduce AB Pictoris's
+ * 3.89-day rotation with a correlation of 0.997 against the mission's own light curve, and five remove it. */
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -38,7 +41,8 @@ export interface SectorLightCurve { readonly frames: number; readonly aperturePi
 export const ROTATION_POWER = 0.3, ORBIT_AGREEMENT = 0.2, ONE_SECTOR_DAYS = 9, ROTATION_SWING = 0.007;
 export interface RotationVerdict { readonly detected: boolean; readonly periodDays?: number; /** The light's own strongest period, when the rotation is taken as twice it. */ readonly lightPeriodDays?: number; /** Peak to peak, as a share of the mean light. */ readonly amplitude?: number; readonly reason?: string }
 
-/** How closely the light's period and a catalogued rotation period must agree to be one period: the metadata pass's own measure. */
+/** How closely the light's period and a catalogued rotation period must agree to be one period: the metadata pass's own
+ * measure, and the one Reinhold & Hekker (2020, Sect. 3.1) use for two campaigns of one star (periods within 20% are consistent). */
 export const CATALOGUE_AGREEMENT = 0.2;
 /** A verdict set beside the rotation period the star's record already holds. Two spot groups on opposite sides of a star
  * make its light repeat twice a turn, so the light's strongest period may be half the rotation: when it is half the
