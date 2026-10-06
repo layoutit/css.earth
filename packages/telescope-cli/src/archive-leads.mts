@@ -1,10 +1,11 @@
 /** Bounded live archive leads. These are observations to investigate, never acquisition or science qualifications. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
+import { hasErrorCode, isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { astroqueryToolchainSync, plainName } from '@cssearth/telescope/node';
 import { INSTRUMENT_TABLES, koaQuery, TAP_SYNC } from './archives/keck/koa.mts';
 import { CADC_TAP, query as cadcQuery } from './archives/gemini/cadc.mts';
+import { recall } from './archives/memory.mts';
 import { cadcFrame, FRAME_COLUMNS, FRAME_JOIN } from './archives/gemini/archive.mts';
 import type { TargetCatalogueEntry } from '@cssearth/telescope';
 
@@ -67,6 +68,22 @@ export async function saveArchiveLeadEvidence(root: string, source: string, requ
   }
 }
 const save = saveArchiveLeadEvidence;
+/** The rows of a saved answer to the same question of the same archive, and the saved file's name (archives/memory.mts). */
+const recalled = (root: string, source: string, request: string, same: (text: string) => string) => recall(resolve(root, 'output/telescopes/archive-leads'), '.json', (value, name) => {
+  if (!isRecord(value) || value.source !== source || typeof value.request !== 'string' || same(value.request) !== same(request) || !Array.isArray(value.rows)) return undefined;
+  const rows = value.rows.filter((row): row is Record<string, string> => isRecord(row) && Object.values(row).every(cell => typeof cell === 'string'));
+  return rows.length === value.rows.length ? { rows, pin: name.slice(0, -'.json'.length) } : undefined;
+});
+/** One question to an archive: the saved answer when there is a recent one, else the archive's, saved. `same` leaves out the
+ * part of a question that changes with the clock, when it has one. */
+async function answered(root: string, source: string, adql: string, query: (adql: string) => Promise<Record<string, string>[]>,
+  same: (text: string) => string = text => text): Promise<{ rows: Record<string, string>[]; pin: string; recalled: boolean }> {
+  const kept = await recalled(root, source, adql, same);
+  if (kept) return { ...kept, recalled: true };
+  const rows = await query(adql);
+  return { rows, pin: await save(root, source, adql, rows), recalled: false };
+}
+const fromMemory = (count: number) => count ? ` ${count} answer(s) are saved ones from the last day; --fresh asks again.` : '';
 
 /** KOA publishes one TAP table per instrument. They are asked a few at a time: one after another the 14 took 92 s for one star
  * (2026-10-06), and each table's own queries still run in order. */
@@ -85,12 +102,13 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
   const names = namesOf(target), literals = names.map(name => `'${name.replaceAll("'", "''")}'`).join(',');
   const named = `targname IN (${literals})`, known = (name: string) => names.some(candidate => key(candidate) === key(name));
   const placed = position ? `CONTAINS(POINT('ICRS', ra, dec), CIRCLE('ICRS', ${position.raDeg}, ${position.decDeg}, ${position.radiusDeg})) = 1` : undefined;
-  type Found = { instruments: ArchiveLeadService['instruments'][number][]; sources: KeckSourceLead[]; failures: string[]; evidence: string[] };
-  const sample = async (table: (typeof INSTRUMENT_TABLES)[number], { sources, evidence }: Found, where: string) => {
+  type Found = { instruments: ArchiveLeadService['instruments'][number][]; sources: KeckSourceLead[]; failures: string[]; evidence: string[]; recalled: number };
+  const sample = async (table: (typeof INSTRUMENT_TABLES)[number], found: Found, where: string) => {
+    const { sources, evidence } = found;
     const instrument = table.slice(4).toUpperCase();
     const exact = `SELECT TOP ${KECK_SOURCE_SAMPLE_LIMIT} koaid,targname,koaimtyp,filehand,date_obs FROM ${table} WHERE koaimtyp='object' AND ${where} AND filehand IS NOT NULL${date} ORDER BY koaid`;
-    const frames = await query(exact);
-    const pin = await save(root, TAP_SYNC, exact, frames);
+    const { rows: frames, pin, recalled: kept } = await answered(root, TAP_SYNC, exact, query);
+    if (kept) found.recalled++;
     const sampled: KeckSourceLead[] = [];
     for (const frame of frames) {
       const targetName = where === named ? requireString(column(frame, 'targname'), 'KOA frame target') : column(frame, 'targname') ?? '';
@@ -104,10 +122,11 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
     evidence.push(pin); sources.push(...sampled);
   };
   const search = async (table: (typeof INSTRUMENT_TABLES)[number]): Promise<Found> => {
-    const found: Found = { instruments: [], sources: [], failures: [], evidence: [] }, { instruments, failures, evidence } = found;
+    const found: Found = { instruments: [], sources: [], failures: [], evidence: [], recalled: 0 }, { instruments, failures, evidence } = found;
     const counted = async (where: string) => {
-      const adql = `SELECT targname, COUNT(*) AS frames FROM ${table} WHERE koaimtyp='object' AND ${where}${date} GROUP BY targname`, rows = await query(adql);
-      evidence.push(await save(root, TAP_SYNC, adql, rows));
+      const adql = `SELECT targname, COUNT(*) AS frames FROM ${table} WHERE koaimtyp='object' AND ${where}${date} GROUP BY targname`;
+      const { rows, pin, recalled: kept } = await answered(root, TAP_SYNC, adql, query);
+      evidence.push(pin); if (kept) found.recalled++;
       return rows.map(row => {
         const name = where === named ? requireString(column(row, 'targname'), 'KOA target name') : column(row, 'targname') ?? '', count = Number(column(row, 'frames'));
         if (!Number.isSafeInteger(count) || count < 0) throw new TypeError(`KOA ${table} has an invalid frame count.`);
@@ -136,7 +155,7 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
   const instruments = all.flatMap(found => found.instruments), sources = all.flatMap(found => found.sources), failures = all.flatMap(found => found.failures), evidence = all.flatMap(found => found.evidence);
   const attempted = tables.length;
   return { service: TAP_SYNC, state: failures.length ? evidence.length ? 'overflow' : 'unavailable' : instruments.length ? 'sampled' : 'empty-in-scope', scope,
-    reason: failures.length ? `${attempted - failures.length}/${attempted} attempted tables answered; ${failures.join('; ')}` : `${instruments.reduce((n, item) => n + item.records, 0)} matching public object frames; ${sources.length} exact FITS leads sampled. Archive names${position ? ' and a place on the sky' : ''} are not science qualifications.`,
+    reason: failures.length ? `${attempted - failures.length}/${attempted} attempted tables answered; ${failures.join('; ')}` : `${instruments.reduce((n, item) => n + item.records, 0)} matching public object frames; ${sources.length} exact FITS leads sampled. Archive names${position ? ' and a place on the sky' : ''} are not science qualifications.${fromMemory(all.reduce((n, found) => n + found.recalled, 0))}`,
     instruments, sources: sources.sort((a,b)=>a.instrument.localeCompare(b.instrument)||a.koaid.localeCompare(b.koaid)), evidence };
 }
 
@@ -156,7 +175,8 @@ export async function searchGeminiLeads(root: string, target: TargetCatalogueEnt
     `AND p.dataRelease < '${new Date().toISOString()}' AND a.uri LIKE 'gemini:GEMINI/%.fits' ORDER BY p.time_bounds_lower DESC`;
   try {
     // By name, then by place, each bounded on its own; a frame both find is counted once.
-    const answers = await Promise.all([named, ...placed ? [placed] : []].map(async where => { const adql = asked(where), rows = await query(adql); return { where, rows, pin: await save(root, CADC_TAP, adql, rows) }; }));
+    // The release-date bound is the moment of asking; two askings a minute apart are the same question.
+    const answers = await Promise.all([named, ...placed ? [placed] : []].map(async where => ({ where, ...await answered(root, CADC_TAP, asked(where), query, text => text.replace(/p\.dataRelease < '[^']*'/u, '')) })));
     const groups = new Map<string, { telescope: string; instrument: string; records: number; sample: string }>();
     const sources: GeminiSourceLead[] = [], seen = new Set<string>();
     for (const { where, rows, pin } of answers) for (const row of rows) {
@@ -174,7 +194,7 @@ export async function searchGeminiLeads(root: string, target: TargetCatalogueEnt
     }
     const instruments = [...groups.values()].sort((a, b) => b.records - a.records || a.instrument.localeCompare(b.instrument));
     return { service: CADC_TAP, state: answers.some(answer => answer.rows.length >= limit) || names.length > searched.length ? 'overflow' : instruments.length ? 'sampled' : 'empty-in-scope',
-      scope, reason: `${seen.size} distinct public raw FITS artifact(s) in this bounded search. Archive names do not confirm target detection or calibration.`,
+      scope, reason: `${seen.size} distinct public raw FITS artifact(s) in this bounded search. Archive names do not confirm target detection or calibration.${fromMemory(answers.filter(answer => answer.recalled).length)}`,
       instruments, sources, evidence: answers.map(answer => answer.pin) };
   } catch (error) { return { service: CADC_TAP, state: 'unavailable', scope, reason: message(error), instruments: [] }; }
 }

@@ -13,7 +13,7 @@ Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/RE
 export const HELP = `Telescope — explore observations or continue from an existing artifact.
 
 Human entry points:
-  telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
+  telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY] [--fresh]
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
   telescope papers TARGET... [--about PHRASE,PHRASE] [--fulltext] [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope simulations TARGET [--json] [--out DIRECTORY]
@@ -161,6 +161,7 @@ Explore filters and query options use micrometres, arcseconds and kilometres:
   --icrs-circle RA,DEC,RADIUS          Explicit ICRS cutout, in degrees. Explore also lists archive records
                                       whose footprint intersects it as in the field, never as the target
   --instrument NAME                   Archive instrument name, e.g. ERIS (explore)
+  --fresh                             Ask every archive again; without it an answer saved in the last day stands (explore)
   --spectral-frame barycentric        Permit advertised SODA BAND subsetting
   --max-science-bytes N               Science transfer bound (default 1 GiB)
   --max-metadata-bytes N              Metadata response bound (default 32 MiB)

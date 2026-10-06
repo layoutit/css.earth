@@ -35,6 +35,7 @@ import { NEW_OBJECT_COMMAND } from './workspace-commands/new-object.mts';
 import { type CliOptions, parseCli } from './cli-arguments.mts';
 import { type ArtifactInspection, type InspectedArtifact, artifactScreen, contextText, displayPath, formatArtifact, formatExploration, formatSession, shellWord } from './cli-format.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
+import { FRESH_VARIABLE } from './archives/memory.mts';
 
 export { HELP, SHORT_HELP };
 
@@ -275,6 +276,8 @@ export async function main(args: readonly string[], root = WORKSPACE, output: (t
         text=options.json?`${JSON.stringify(result)}\n`:`Imported: ${result.manifest}\n${result.descriptor?`Descriptor: ${result.descriptor}\n`:''}Evidence: ${result.receipt}\nProfiles proposed: ${result.value.proposedProfiles.length}\n`;
         code=0;
       }else if(options.command==='explore'){
+        // --fresh: every archive is asked again; without it an answer saved in the last day stands (archives/memory.mts).
+        if(options.fresh)process.env[FRESH_VARIABLE]='1';
         const progress=startProgress(io,'Resolving target');
         let session:ExplorationSession&{readonly directory:string};
         try{session=await api.saveExploration(root,options.requestArgs,options.directory,undefined,progress.update);progress.stop('done');}
