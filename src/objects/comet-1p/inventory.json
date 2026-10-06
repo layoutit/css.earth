@@ -4,14 +4,14 @@
     {
       "location": "public",
       "filename": "comet-1p-arrival.webp",
-      "bytes": 39602,
-      "sha256": "8e371eece624a77a414d5089948a9b0434dec94fc8fd9bf85295fc27059c3ae1"
+      "bytes": 40088,
+      "sha256": "e0029504f6bba248b44b5c4ab68f916a84ad6fab0b2fb874a26a43460b4338d8"
     },
     {
       "location": "public",
       "filename": "comet-1p-billboard.webp",
-      "bytes": 5102,
-      "sha256": "d00c828996d956dc5ea09cd27d600149fe79f4c65b81fe0af27b9243fc6d6317"
+      "bytes": 5094,
+      "sha256": "a84ea8fdb87f05918f5461e9e420c00e0cbb4ebd9dcd6dd5dc886191873047a4"
     },
     {
       "location": "public",
@@ -76,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 315,
-      "sha256": "23cf85e1fb252de7bfd4386cbf798f89b2080f71098e48938c44b80d0b6ae02f"
+      "bytes": 383,
+      "sha256": "4bc5becc6af99e06296ce693ce97c80ed79166731bbc668a8d36c602bb4aefea"
     },
     {
       "location": "prepared",
@@ -94,14 +94,14 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 580,
-      "sha256": "6b3f68dafde5e3ef96c0249d828990cf85d968e148c2d79cee3a0ccc8a22d037"
+      "bytes": 581,
+      "sha256": "151f39f3e9a75882a74824938f3c2fc75ffaf1332c926be12522f6be1d7262d3"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1293,
-      "sha256": "329fff92093bec0d8255b90240112a72011ab3c60146283212df74cd063809ea"
+      "bytes": 1294,
+      "sha256": "09ef7e3432d36c29f43b02b985ee8aea7c7fb1b0b282a81fa7f9cd1c2e673872"
     },
     {
       "location": "prepared",
@@ -124,14 +124,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 615662,
-      "sha256": "8c9dccf25fa963ae9fc2707dd8162d67c6e4c4ba0c26171a76ddb03da10ba434"
+      "bytes": 615713,
+      "sha256": "d7344cca8f4ff9d2593efd63e38c57e907f64806b9e0c6c480a281cd44221c91"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 741789,
-      "sha256": "cd41a6c22e51b2a85857460f72f37ad97d282c6ee89db48172a06b1408fec62d"
+      "bytes": 741837,
+      "sha256": "6ff291a507201679a4f9c42bc717f682a1304d2322c6bbda3c854b95bb211258"
     },
     {
       "location": "prepared",
@@ -148,8 +148,8 @@
     {
       "location": "prepared",
       "filename": "sun.json",
-      "bytes": 988,
-      "sha256": "03691cf0e7f794fe54f2576accd3a43e512167e77cb170bcd6767086c96328c6"
+      "bytes": 987,
+      "sha256": "a26a063791ae844a8bea422d2fc5f5d7e6fa6683fb61bdf51690a4191613a0cf"
     },
     {
       "location": "prepared",
@@ -166,8 +166,8 @@
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 1187,
-      "sha256": "1913f59a854ef32a92523f626877e2631ffb0c60f34800ce003da634d77eca26"
+      "bytes": 1203,
+      "sha256": "6d157ae130ed6eb2e9f0e8a5487112dcec8bd42a576d1428567d11c241044635"
     }
   ]
 }
