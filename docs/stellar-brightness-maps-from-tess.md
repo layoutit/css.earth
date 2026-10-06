@@ -118,18 +118,33 @@ Three things differ from a TESS sector:
 
 The rule is the TESS one with the window's own lengths: a periodogram power of at least 0.3, each half of the campaign
 or quarter giving the same period within 20%, and a period no longer than a third of the window (27 days for a campaign,
-30 for a quarter), so that the star is seen turning three times. No floor on the light's swing is set: @@SWING@@
+30 for a quarter), so that the star is seen turning three times. No floor on the light's swing is set: the accepted periods' swings ran from 0.2% to 3%, and the
+smallest was right.
 
-It was measured on our @@LABELLED@@ Kepler and K2 stars with a catalogued rotation period.
+It was measured on our 120 Kepler and K2 stars with a catalogued rotation period, 72 of them not giants and 48 giants by
+SIMBAD's type. A light curve was measured for every one.
 
-@@TABLE@@
+| Stars | Rule | Read | Periods accepted | The catalogue's within 20% | Half of it | Another |
+| --- | --- | --- | --- | --- | --- | --- |
+| Not giants | As above | 72 | 18 | 16 | 1 | 1 |
+| Not giants | The drift left in | 72 | 10 | 8 | 1 | 1 |
+| Not giants | Any period up to half the window | 72 | 20 | 18 | 1 | 1 |
+| Not giants | A power of 0.2 | 72 | 19 | 17 | 1 | 1 |
+| Giants | As above | 48 | 0 | 0 | 0 | 0 |
+| Giants | Any period up to half the window | 48 | 2 | 0 | 0 | 2 |
 
-@@READING@@
+Taking the drift out nearly doubles the periods accepted, from 10 to 18. Asking for three turns costs two right periods
+among the stars that are not giants and refuses the only two a giant's light passed, both wrong (28 and 29 days in
+campaigns of 71 days). Of the 50 stars that are not giants and whose catalogued period is 27 days or less, 17 are accepted.
+
+The period at half the catalogue's is K2-141: its light repeats every 7.01 days and the NASA Exoplanet Archive prints
+15.17. The other is K2-275, whose K2 light gives 9.34 days: one catalogue prints 9.35 days from the same mission's light
+and two print 6.02 from TESS's, and the star's record adopts 6.02.
 
 A period is then set beside the catalogued one, as for TESS: the same within 20% is kept, half of it is doubled, and any
 other is refused.
 
-SIMBAD files @@GIANTS@@ of our 1,090 Kepler and K2 stars as giants. A giant turns in months, so one campaign seldom shows
+SIMBAD files 804 of our 1,090 Kepler and K2 stars as giants. A giant turns in months, so one campaign seldom shows
 its spots turning; what its light shows is its oscillations, which this route does not read.
 
 ## What the map is and is not
