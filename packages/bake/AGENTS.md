@@ -109,7 +109,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   the catalogue and search destinations are built with, and the marker recipes whose source bytes are checked and drawn
   into navigation marker sprites, and the navigation preparation (`prepare-navigation.ts`, with the Sun, black-hole,
   supernova and action marker sources in `marker-descriptors.ts`) that writes the marker atlases, action markers and
-  `site/prepared-navigation-markers.mjs`, and the flat neutral disc (`neutral-disc-marker.ts`) that marks an unresolved,
+  `site/prepared/prepared-navigation-markers.mjs`, and the flat neutral disc (`neutral-disc-marker.ts`) that marks an unresolved,
   self-luminous surface in generated and authored packages. It reads the registry on first use, not at import, and validates marker
   presentation with the shared rules in `@cssearth/objects` (`marker-presentation.ts`, which the shell also uses to
   draw them). It imports `raster`, `delivery`, `sources`, `astronomy`, and `objects/raster` (loaded only when a marker is

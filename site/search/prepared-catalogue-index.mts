@@ -2,7 +2,7 @@ import { designationNames } from './object-search.mts';
 import { distanceDescription } from '@cssearth/objects';
 import { objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
 import { sidebarThumbnail } from '../content/sidebar-thumbnails.mts';
-import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
+import { PREPARED_NAVIGATION_MARKERS } from '../prepared/prepared-navigation-markers.mjs';
 import { markerStyle } from '@cssearth/renderer/navigation/marker-presentation.ts';
 import { sourceDocumentation } from '../source-documentation.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
@@ -13,7 +13,7 @@ import { systemCard } from '../system-card.mts';
 const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS).map(({ presentation }) => presentation.size));
 /** A result row shows an object by its marker: its prepared search thumbnail when it has a context sprite (`preview`),
  * else its sprite of the marker sheet, as the styles the row writes. The row carries them, so a page holds no table of
- * every object's marker (site/prepared-navigation-markers.mjs was 820 KB of every page's code, 2026-10-02). */
+ * every object's marker (site/prepared/prepared-navigation-markers.mjs was 820 KB of every page's code, 2026-10-02). */
 export function objectResultMarker(object: { readonly id: string; readonly color: string }) {
   const prepared = PREPARED_NAVIGATION_MARKERS[object.id];
   if (!prepared) return Object.freeze({ id: object.id, color: object.color });

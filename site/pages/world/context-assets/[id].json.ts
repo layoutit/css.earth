@@ -1,5 +1,5 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import bankAssets from '../../../prepared-context-bank-assets.json';
+import bankAssets from '../../../prepared/prepared-context-bank-assets.json';
 
 // One bank's prepared files by path (prepare-catalog.mts `splitContextObjectAssets`): the world reads a bank's list when a
 // body's dataset first shows it (application-world-resources.mts), so no page carries the lists of banks it does not show.

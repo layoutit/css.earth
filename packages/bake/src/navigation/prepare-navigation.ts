@@ -77,7 +77,7 @@ export async function prepareNavigation({
   projectRoot = ROOT,
   outputRoot = resolve(projectRoot, "public/navigation"),
   planets = PLANET_MARKER_PLANETS(),
-  presentationPath = resolve(projectRoot, "site/prepared-navigation-markers.mjs"),
+  presentationPath = resolve(projectRoot, "site/prepared/prepared-navigation-markers.mjs"),
   moveFile = moveNavigationFile,
   objectIds,
   catalogOnly = false,

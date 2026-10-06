@@ -5,7 +5,7 @@ import { readChartAssetRecipe } from '@cssearth/objects';
 import { PREPARED_CONTENT_SCHEMA, validateObjectContentEnvelope, type ObjectContentSource, type PreparedObjectContent, type PreparedObjectContentDocument, type GalleryRecipe } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
-import { PREPARED_SHELL_TITLES } from "../../prepared-shell-titles.mjs";
+import { PREPARED_SHELL_TITLES } from "../../prepared/prepared-shell-titles.mjs";
 import { datasetBillboardColors, prepareDatasetLabels, prepareDatasets } from "@cssearth/bake/objects/content";
 import { parseFactsheet, verifyFactsheetSources } from '@cssearth/bake/sources';
 import type { ContentPreparationContext, PreparedObjectContentAssets, PreparedRasterAssets } from '@cssearth/bake/objects/content';

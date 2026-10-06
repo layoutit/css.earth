@@ -1,5 +1,5 @@
 import { checkObjectTree, defineObjects } from '@cssearth/objects';
-import { CATALOGUE_ENTRIES } from './prepared-catalogue.mjs';
+import { CATALOGUE_ENTRIES } from './prepared/prepared-catalogue.mjs';
 import { objectFromEntry } from './object-directory.mts';
 import type { NavigableObject } from './directory/object-entry-types.mts';
 export type { ObjectEntry, CatalogEntry, NavigableObject } from './directory/object-entry-types.mts';

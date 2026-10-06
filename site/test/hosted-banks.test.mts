@@ -52,7 +52,7 @@ test('an object entry carries the banks it holds and the dots of the body it orb
   const { objectFromEntry } = await import('../object-directory.mts');
   const { OBJECT_ENTRY_IDS } = await import('../object-entry.mts');
   const records: Record<string, { carriers: string[]; descriptor: { id: string; type: string; properties: { host?: string } } }> =
-    (await import('../prepared-hosted-banks.json', { with: { type: 'json' } })).default as never;
+    (await import('../prepared/prepared-hosted-banks.json', { with: { type: 'json' } })).default as never;
   const entryOf = async (id: string) => (await GET({ params: { id } } as never)).json() as Promise<Record<string, unknown>>;
   const carried = (entry: Record<string, unknown>) => ((entry.banks ?? []) as { descriptor: { id: string } }[]).map(bank => bank.descriptor.id);
   const navigable = new Set(OBJECT_ENTRY_IDS);

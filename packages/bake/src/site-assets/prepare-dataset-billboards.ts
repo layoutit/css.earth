@@ -25,7 +25,7 @@ import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/
 import { readInventory, readVolumeDatasetBank } from '@cssearth/objects/node';
 
 /** The images are served from the site's own `public/` tree, beside the other generated navigation images. */
-const OUTPUT = { metadata: 'site/prepared-dataset-billboards.json', images: 'public/navigation/dataset-billboards' };
+const OUTPUT = { metadata: 'site/prepared/prepared-dataset-billboards.json', images: 'public/navigation/dataset-billboards' };
 /** Prepared impostor views are 256 px squares; billboards keep them at their prepared size. */
 const CELL_PX = 256;
 
@@ -214,6 +214,6 @@ export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot
         datasets: bank.datasets.map(dataset => ({ id: dataset.id, radiusUnits: dataset.radiusUnits, ...dataset.view })) } : {}) })) };
   await writeIfChanged(resolve(projectRoot, OUTPUT.metadata), `${JSON.stringify(metadata)}\n`);
   // The atlas an earlier checkout wrote here is no longer read.
-  await rm(resolve(projectRoot, 'site/prepared-dataset-billboards.webp'), { force: true });
+  await rm(resolve(projectRoot, 'site/prepared/prepared-dataset-billboards.webp'), { force: true });
   return { banks: banks.length, billboards: drawn.length, imageBytes };
 }

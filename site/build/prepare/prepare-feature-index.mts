@@ -98,7 +98,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
   await mkdir(resolve(root, 'public/features'), { recursive: true });
   await writeFile(resolve(root, 'public/features/index.json'), encoded);
   const pin = { schema: FEATURE_INDEX_SCHEMA, url: FEATURE_INDEX_URL, count: features.length, objects: objects.map(object => object.id) };
-  await writeFile(resolve(root, 'site/prepared-feature-index.json'), `${JSON.stringify(pin, null, 2)}\n`);
+  await writeFile(resolve(root, 'site/prepared/prepared-feature-index.json'), `${JSON.stringify(pin, null, 2)}\n`);
   return pin;
 }
 

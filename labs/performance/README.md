@@ -113,7 +113,7 @@ untracked files. Before these changes it spent about 9 s of every capture on sle
 
 A cold dev load of Venus used to take 7.3 s on the iPad. Every page imported all 2,071 prepared files of the 29 context
 objects as one `?url` module each. Safari needed about 4 s to resolve them, and no frame rendered until it had.
-`site/prepared-context-objects.mts` now lists those files from each object's inventory, as the asset-origin build
+`site/prepared/prepared-context-objects.mts` now lists those files from each object's inventory, as the asset-origin build
 always did. The load takes 3.3 s with 263 requests instead of 2,335.
 
 ### Counting late frames: the page times itself

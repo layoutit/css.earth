@@ -205,7 +205,9 @@ const sized = { textureLevels, variants, assets: { entries: [
   { key: 'b', url: '/b.webp', pool: 'pages', width: 4160, height: 768 }, { key: 'b-small', url: '/b-small.webp', pool: 'pages', width: 2080, height: 384 },
 ], pools: [], startup: [] } } as unknown as PreparedPresentationDefinition;
 
-test('a level switch lands a page a slice of its leaves a frame, not the page whole', () => {
+/** Commits a small level and then the full one on a page of 100 leaves; returns the leaves landed by each frame, and
+ * by the frames that ran while the camera was `moving`. */
+function levelLanding(moving: boolean) {
   const frames: ((time: number) => void)[] = [];
   let now = 0;
   const frame = () => { now += 16; frames.shift()!(now); };
@@ -235,16 +237,38 @@ test('a level switch lands a page a slice of its leaves a frame, not the page wh
     assert.equal(leaves.every(leaf => leaf.style.backgroundImage === 'url("/a-small.webp")'), true);
     // The small level is 4,160 texels wide across a 4,096 px background: 65 px of box hold it at two texels a pixel.
     assert.equal(leaves.every(leaf => leaf.style.getPropertyValue('width') === '65px'), true);
-    presentation.commitSelection({ selection: { datasetId: 'a' }, resources, plan: resolvePreparedPresentation(paged, { selection: { datasetId: 'a' }, view: view(900), previousPlan: small }) });
+    const listeners = new Set<(state: { active: boolean; coasting: boolean }) => void>();
+    const motion = { active: moving, coasting: false, begin() {}, end() {}, subscribe(listener: (state: { active: boolean; coasting: boolean }) => void) { listeners.add(listener); return () => { listeners.delete(listener); }; } };
+    presentation.commitSelection({ selection: { datasetId: 'a' }, resources, motion, plan: resolvePreparedPresentation(paged, { selection: { datasetId: 'a' }, view: view(900), previousPlan: small }) });
     assert.equal(sharp(), 0);
+    let whileMoving = 0;
+    if (moving) {
+      for (let waited = 0; waited < 3 && frames.length; waited++) frame();
+      whileMoving = sharp();
+      motion.active = false;
+      for (const listener of listeners) listener(motion);
+    }
     const shares: number[] = [];
     while (frames.length && sharp() < 100) { const before = sharp(); frame(); shares.push(sharp() - before);
       // A leaf takes its box with its image: none shows the full level in the small one's box, or the small one in the full one's.
       assert.equal(leaves.every(leaf => (leaf.style.backgroundImage === 'url("/a.webp")') === (leaf.style.getPropertyValue('width') === '130px')), true); }
     assert.equal(sharp(), 100);
-    assert.ok(shares.length >= 4 && Math.max(...shares) <= 32, `shares ${shares.join(' ')}`);
-    assert.equal(shares[0], 8);
+    // The document's pacer is shared: leave it with no frame pending.
+    while (frames.length) frame();
+    return { shares, whileMoving };
   } finally { unstubAllGlobals(); }
+}
+
+test('a level switch lands a page a slice of its leaves a frame, not the page whole', () => {
+  const { shares } = levelLanding(false);
+  assert.ok(shares.length >= 4 && Math.max(...shares) <= 32, `shares ${shares.join(' ')}`);
+  assert.equal(shares[0], 8);
+});
+
+test('what is left of a level waits while the camera moves and lands once it is still', () => {
+  const { shares, whileMoving } = levelLanding(true);
+  assert.equal(whileMoving, 0);
+  assert.ok(shares.length >= 4 && Math.max(...shares) <= 32, `shares ${shares.join(' ')}`);
 });
 
 test('tile leaf records name one texture write each, with finite placements and each leaf once', () => {

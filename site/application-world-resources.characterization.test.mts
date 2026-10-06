@@ -42,7 +42,7 @@ const requests: string[] = [];
 let bankResponse: Response | null = null;
 let catalogLoads = 0, plannerCount = 0;
 let loadFailure: Error | null = new Error('initial volume decode');
-mock.module(new URL('./prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: declarations, CONTEXT_OBJECT_ASSET_URLS: assets, CONTEXT_GALAXY_SAMPLE: {} } });
+mock.module(new URL('./prepared/prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: declarations, CONTEXT_OBJECT_ASSET_URLS: assets, CONTEXT_GALAXY_SAMPLE: {} } });
 mock.module(new URL('./world/context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: availability } });
 mock.module(new URL('./world-context-plan.mts', import.meta.url).href, { namedExports: { ...world,
   WORLD_DOT_BANKS: ['inside'], onWorldSystems: (callback: typeof onSystems) => { onSystems = callback; return () => {}; } } });

@@ -8,7 +8,7 @@ mock.module('@cssearth/renderer/labels/stable-label-layout.ts', { namedExports: 
   admitStableLabels: (...args: Parameters<typeof admit>) => { candidates = args[0]; return admit(...args); },
 } });
 import type { WorldCameraPose } from '@cssearth/engine';
-mock.module(new URL('./moon-labels.prepared.json', import.meta.url).href, { defaultExport: {
+mock.module(new URL('./prepared/moon-labels.prepared.json', import.meta.url).href, { defaultExport: {
   schema: 'cssearth-moon-labels@1', referenceFrame: 'world', epochJdTt: 1,
   moons: [{ id: 'moon-a', name: 'Moon A', parentId: 'planet', positionM: [100, 0, 0], parentDistanceM: 100 }],
 } });

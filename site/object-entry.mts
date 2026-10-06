@@ -1,6 +1,6 @@
 import { isRecord } from '@cssearth/core';
 import { OBJECTS } from './objects.mts';
-import { CATALOGUE_ENTRIES } from './prepared-catalogue.mjs';
+import { CATALOGUE_ENTRIES } from './prepared/prepared-catalogue.mjs';
 
 const entryId = (entry: unknown) => !isRecord(entry) ? undefined : isRecord(entry.descriptor) ? entry.descriptor.id : entry.id;
 const ENTRIES = new Map<unknown, unknown>(CATALOGUE_ENTRIES.map(entry => [entryId(entry), entry]));

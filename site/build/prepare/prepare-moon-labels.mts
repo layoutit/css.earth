@@ -36,7 +36,7 @@ export function parseMoonVector(input: unknown, code: string, center: string, ep
   return { positionKm: position, ephemeris };
 }
 
-/** Write site/moon-labels.prepared.json from the saved Horizons replies; `refresh` first re-requests them from JPL. */
+/** Write site/prepared/moon-labels.prepared.json from the saved Horizons replies; `refresh` first re-requests them from JPL. */
 export async function prepareMoonLabels({ refresh = false }: { refresh?: boolean } = {}) {
   const path = 'site/source/moon-horizons.json.gz';
   if (refresh) {
@@ -89,7 +89,7 @@ export async function prepareMoonLabels({ refresh = false }: { refresh?: boolean
         parentDistanceM: state ? Math.hypot(...state.positionKm) * 1000 : null };
     });
   });
-  await writeFile('site/moon-labels.prepared.json', `${JSON.stringify({ schema: 'cssearth-moon-labels@1',
+  await writeFile('site/prepared/moon-labels.prepared.json', `${JSON.stringify({ schema: 'cssearth-moon-labels@1',
     referenceFrame: world.frame.referenceFrame, epochJdTt: epoch,
     qualification: 'Properly named catalogue moons only; provisional designations stay in the full sidebar catalogue. Horizons geometric ICRF vectors at the prepared world epoch, relative to each planet. No fabricated positions: moons without Horizons states remain in the sidebar only.', moons }, null, 2)}\n`);
   console.log(`${moons.filter(moon => moon.positionM).length} positioned labels; ${moons.filter(moon => !moon.positionM).length} without positions.`);
