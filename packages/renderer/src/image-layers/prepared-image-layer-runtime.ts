@@ -1,5 +1,6 @@
 import { presentPhysicalPoseInVolume, worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
 import { preparedVolumeCameraTransform, STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
+import { createSettlePacer } from '../rendering/settle-pacer.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from '@cssearth/objects';
 
@@ -30,6 +31,9 @@ function withinReach(sheet: Sheet, p: readonly number[], reach: number): boolean
 }
 
 /** Transparent prepared layer banks. No opaque viewport matte is allowed here. */
+/** How many runs of a stack join the layer tree in its first frame, and in each frame after (`join`). */
+const JOIN_FIRST_RUNS = 1, JOIN_RUNS = 2;
+
 export function mountPreparedCssImageLayers({ host, before, payload, resolveResource, onDrawn }: {
   host: HTMLElement; before: Element; payload: PreparedCssImageLayers; resolveResource(path: string): string;
   /** Told when a stack's images are decoded and it joins the drawing with the camera still: who hands the picture
@@ -69,6 +73,8 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     for (const size of view?.sceneSizes ?? [stack.leaves.length]) {
       const camera = document.createElement('div'), scene = document.createElement('div'), mesh = document.createElement('div'), leaves: HTMLElement[] = [];
       camera.className = 'css-volume-camera'; scene.className = 'css-volume-scene'; mesh.className = 'css-volume-mesh';
+      // A run is out of layout until its stack is drawn and it joins (`join`).
+      camera.style.display = 'none';
       for (const leaf of stack.leaves.slice(next, next + size)) {
         const element = document.createElement('s');
         element.dataset.imageLayerLeaf = leaf.id;
@@ -85,6 +91,8 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     [...textures].sort((a, b) => a.along - b.along).forEach((texture, rank) => { texture.rank = rank; });
     root.appendChild(projection);
     return { axis: stack.axis, projection, runs, textures, normal: view?.normalUnits ?? null, images: null as string[] | null, drawn: false, ready: !decodes, turn: 0, handles: [] as unknown[],
+      /** How many of its runs have joined the layer tree: its first ones. */
+      joined: 0,
       perspective: '', perspectiveOrigin: '', transform: '', reach: view?.samplingStepUnits ?? 0,
       patches: view?.sceneSizes !== undefined, apart: null as HTMLElement | null, spare: null as HTMLElement | null };
   });
@@ -111,7 +119,9 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
       bank.projection.appendChild(flat); bank.apart = bank.spare = flat;
       return;
     }
-    for (const run of bank.runs) { for (const leaf of run.leaves) run.mesh.appendChild(leaf); bank.projection.appendChild(run.camera); }
+    // Back in its runs, a stack that was drawn apart is whole at once: its leaves were on screen a frame ago.
+    for (const run of bank.runs) { for (const leaf of run.leaves) run.mesh.appendChild(leaf); run.camera.style.display = bank.drawn ? '' : 'none'; bank.projection.appendChild(run.camera); }
+    bank.joined = bank.drawn ? bank.runs.length : 0;
     for (const texture of bank.textures) { texture.element.style.transform = texture.own; if (texture.over !== '') { texture.over = ''; texture.element.style.zIndex = ''; } }
     bank.apart?.remove(); bank.apart = null;
   };
@@ -138,8 +148,36 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
    * stack wanted still hidden (2026-10-06). The stacks whose images are decoded share the whole picture; the one that
    * drew most (`lead`) stays, whole, when the camera has turned fully away from it before the next is decoded. */
   let lead: (typeof banks)[number] | null = null, mixed: Record<'x' | 'y' | 'z', number> | null = null;
-  const drawable = (weights: Record<'x' | 'y' | 'z', number>) => banks.filter(bank => weights[bank.axis] > 0 && bank.drawn && bank.ready);
-  const heldOf = (weights: Record<'x' | 'y' | 'z', number>) => drawable(weights).length || !lead?.drawn || !lead.ready ? null : lead;
+  /** Whether every leaf of a decoded stack is in the layer tree: all its runs have joined, or it is drawn apart. */
+  const whole = (bank: (typeof banks)[number]) => bank.apart !== null || bank.joined >= bank.runs.length;
+  const draws = (bank: (typeof banks)[number]) => bank.drawn && bank.ready && whole(bank);
+  const drawable = (weights: Record<'x' | 'y' | 'z', number>) => banks.filter(bank => weights[bank.axis] > 0 && draws(bank));
+  /** A stack's runs leave layout with it, so that it joins them a few a frame when it is drawn again. */
+  const leave = (bank: (typeof banks)[number]) => {
+    if (bank.apart === null) for (let run = 0; run < bank.joined; run++) bank.runs[run]!.camera.style.display = 'none';
+    bank.joined = 0;
+  };
+  /** A decoded stack joins the layer tree a few runs a frame, unseen, and takes its share of the picture when it is
+   * whole. Shown whole in one frame, every leaf's layer and surface was made in that frame: Cassiopeia A's 1,397 patches
+   * in 78 runs made a frame of 275 to 276 ms on an iPad with the camera still, and the Crab's bank one of 192 ms at a
+   * dataset pick. Its runs joined at opacity 0, one in the first frame and two in each one after, made one frame of 45
+   * to 48 ms, and the stack shown after them one of 18 to 39 ms; three a frame, 60 to 62 ms; four runs a frame in view
+   * as they joined, 47 to 77 ms (2026-10-06). Safari makes the surfaces of layers that join under an opacity of 0 and
+   * keeps them; what the stack replaces stays on screen meanwhile (`mix`). A stack of one run joins in one frame, as
+   * before. */
+  const join = createSettlePacer(() => {
+    if (destroyed) return 0;
+    for (const bank of banks) {
+      if (!bank.drawn || !bank.ready || whole(bank)) continue;
+      const share = bank.joined === 0 ? JOIN_FIRST_RUNS : JOIN_RUNS;
+      let written = 0;
+      while (written < share && bank.joined < bank.runs.length) { bank.runs[bank.joined++]!.camera.style.display = ''; written++; }
+      if (whole(bank) && mixed) { mix(mixed); onDrawn?.(); }
+      return written;
+    }
+    return 0;
+  }, { holdWhile: 'never' });
+  const heldOf = (weights: Record<'x' | 'y' | 'z', number>) => drawable(weights).length || !lead || !draws(lead) ? null : lead;
   const mix = (weights: Record<'x' | 'y' | 'z', number>) => {
     mixed = weights;
     const drawn = drawable(weights), share = drawn.reduce((sum, bank) => sum + weights[bank.axis], 0), held = heldOf(weights);
@@ -153,7 +191,8 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
       // the picture under the ceiling matched the picture at 1 at every step: 580 steps in Chrome on a GPU, 90 in the
       // software-rendered shell, 11 on an iPad. And at 1 the bank crossed 1 on every zoom out: Cassiopeia A's 1,397
       // patches repainted in one frame of 291 ms on the iPad, 51 ms under the ceiling (2026-10-05).
-      set(bank.projection, 'opacity', String(Math.min(STACK_OPACITY_CEILING, bank === held ? 1 : bank.ready && share > 0 ? weight / share : weight)));
+      // A stack that is decoding or joining is unseen: at 0 its layers are made and kept (`join`).
+      set(bank.projection, 'opacity', String(Math.min(STACK_OPACITY_CEILING, bank === held ? 1 : !draws(bank) ? 0 : share > 0 ? weight / share : weight)));
       set(bank.projection, 'visibility', wanted && bank.ready ? 'visible' : 'hidden');
       // A zero-weight axis contributes nothing; its 3D leaves leave compositing.
       set(bank.projection, 'display', wanted ? '' : 'none');
@@ -161,9 +200,9 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
   };
   return Object.freeze({ root,
     /** Whether any of the bank is on screen once its root is shown: a stack with its images decoded. */
-    drawing: () => banks.some(bank => bank.drawn && bank.ready),
+    drawing: () => banks.some(draws),
     /** The bank root is shown again: each stack it draws waits for its images' decode, as one the camera turns to does. */
-    resume() { lead = null; for (const bank of banks) { bank.drawn = false; bank.turn++; } },
+    resume() { lead = null; for (const bank of banks) { bank.drawn = false; bank.turn++; leave(bank); } },
     /** `around`: the bank is drawn around a body that stands inside it, at that place (reference metres). The sheets the
      * camera stands on are left out, and so are the sheets through the body: they hold the picture's own image of it, a
      * saturated glare many times its size, and the body is drawn in their place (Eta Carinae inside the Homunculus was a
@@ -216,11 +255,13 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
             void Promise.all((bank.handles as { decode(): Promise<void> }[]).map(handle => handle.decode().catch(() => {}))).then(() => {
               if (destroyed || bank.turn !== turn) return;
               bank.ready = true;
-              // It takes its share from the stacks drawn so far in the same write, and a stack held for it leaves.
-              if (bank.drawn && mixed) { mix(mixed); onDrawn?.(); }
+              // Whole, it takes its share from the stacks drawn so far in the same write, and a stack held for it leaves.
+              if (!bank.drawn || !mixed) return;
+              mix(mixed);
+              if (whole(bank)) onDrawn?.(); else join.request(true);
             });
-          }
-        } else if (!wanted && bank.drawn) { bank.drawn = false; bank.turn++; bank.handles = []; bank.ready = !decodes; }
+          } else if (!whole(bank)) join.request(true);
+        } else if (!wanted && bank.drawn) { bank.drawn = false; bank.turn++; bank.handles = []; bank.ready = !decodes; leave(bank); }
         // Around a body, the sheets within one sampling step of the camera or of the body are left out (Sheet): an opacity
         // write on change only, and every sheet back when the bank is its page's subject again.
         if (weight > 0 && bank.reach > 0) for (const texture of bank.textures) {
@@ -230,7 +271,7 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
       }
       mix(weights);
     },
-    destroy() { if (destroyed) return; destroyed = true; root.remove(); },
+    destroy() { if (destroyed) return; destroyed = true; join.destroy(); root.remove(); },
   });
 }
 

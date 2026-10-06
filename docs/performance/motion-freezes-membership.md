@@ -62,6 +62,12 @@ held differently while coasting:
   images are decoded off the page's thread, then shows whole: decoded inside the paint, NGC 2392's 57 layers made a
   frame of 235 ms on a turn and 270 ms on a dataset switch, against 34 and 31 ms decoded first (iPad, 2026-10-05).
   Joining such a stack a share a frame was measured and rejected: each joining frame painted the layers already shown.
+  A stack cut into runs of patches, each run a scene of its own, does join a share a frame: its runs, unseen, one in
+  the first frame and two in each one after, and the stack is shown when it is whole. Safari makes and keeps the
+  surfaces of layers that join under an opacity of 0. Cassiopeia A's 1,397 patches in 78 runs shown whole made a frame
+  of 275 to 276 ms with the camera still; joined that way, one of 45 to 48 ms and one of 18 to 39 ms when shown, and a
+  first dataset pick on the Crab went from frames of 120 and 192 ms to one of 60 ms (iPad, 2026-10-06). What the
+  rejected measurement joined was sheets of one shared scene, which a stack of one run still is.
   What such a stack or bank replaces stays until it is decoded: the stacks already drawn share the whole picture, the
   one that drew most stays when the camera has turned fully away from it, a bank's billboard gives way only to a bank
   that draws, and the bank a host showed before a dataset pick stands in for the picked one. Without that the Ring had
