@@ -3,7 +3,7 @@
  * (`src/objects/<host>-system/object.json`; the Sun's is `solar-system`). This writes each one from what the repository
  * already holds: a star's planetary system from the prepared world's orbit graph (site/world/object-systems.mts), a star system
  * from the stars the records say are bound to a star nothing orbits, a planet's or small body's satellite system from its
- * prepared moons (site/world/satellite-systems.mts) and its cited introduction (src/navigation/system-text.json). A system
+ * prepared moons (site/world/satellite-systems.mts) and its cited introduction (site/source/navigation/system-text.json). A system
  * places nothing and draws nothing of its own: it shows its host's scene out to its members, and takes its host's place,
  * color and distance. It sits in the object tree where its host sat, and its host sits inside it, with the stars bound to
  * the host: this writes those parents.
@@ -33,7 +33,7 @@ const descriptorOf = async (id: string): Promise<Descriptor> => {
 };
 const existing = async (id: string) => descriptorOf(id).catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
 // Each moon system's cited introduction, checked: its length, and its sources against the source catalogue (system-text.mts).
-const introductions = prepareSystemIntroductions({ schema: SYSTEM_TEXT_SCHEMA, satellites: readSystemText(JSON.parse(await readFile(resolve(objectsRoot, '../navigation/system-text.json'), 'utf8'))) },
+const introductions = prepareSystemIntroductions({ schema: SYSTEM_TEXT_SCHEMA, satellites: readSystemText(JSON.parse(await readFile(resolve(objectsRoot, '../../site/source/navigation/system-text.json'), 'utf8'))) },
   allSatelliteSystems().map(system => system.hostId), new Set((await readSourceCatalog(resolve(objectsRoot, '../..'))).records.map(record => record.id)));
 /** The Solar System's card sentence. */
 const SOLAR_SYSTEM_DESCRIPTION = 'The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets.';
