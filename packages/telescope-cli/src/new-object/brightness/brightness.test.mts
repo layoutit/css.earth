@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { surfaceMapFiles } from '../maps/surface-maps.mts';
 import { adoptPeriod, measuredPeriod, starMetadata } from '../metadata/star-metadata.mts';
-import { BRIGHTNESS_CONSUMER, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, dimmed, monthsOf, reducedBrightness, tessDay } from './brightness-maps.mts';
+import { BRIGHTNESS_CONSUMER, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, dimmed, monthsOf, reducedBrightness, shortMonthsOf, tessDay } from './brightness-maps.mts';
 import { withMeasuredRotation } from './brightness.mts';
 
 const TABLE = 'TITLE     = "test"\nVARIABLES = "Longitude [Deg]" "Latitude [Deg]" "Brightness [%]"\nZONE I=2, J=2, K=1, ZONETYPE=Ordered\n';
@@ -40,8 +40,8 @@ test('a brightness map becomes the star page\'s records, saying it is made here 
   // 93.4 / 104.2 of the light is 0.896 of it: the display color is dimmed less than that, as a display value is not linear in light.
   assert.equal(own.colors[0], dimmed('#ffc08b', 93.4 / 104.2)); assert.equal(dimmed('#ffffff', 0.5), '#bcbcbc'); assert.equal(dimmed('#ffc08b', 1), '#ffc08b');
   assert.match(shown('source/content/object.json').datasets.controls[0].notes, /in TESS's images of August 2025.*the darkest part 10\.4% dimmer than the brightest, which is drawn at the star's color.*Their latitudes and shapes are not.*no change of color is drawn/u);
-  assert.deepEqual(shown('text.json').datasets['color-brightness'], { title: 'Color + brightness', detail: 'As TESS saw it, August 2025', summary: 'The star in its own color, with the darker and brighter longitudes its light shows, at their measured contrast.' });
-  assert.equal(shown('text.json').datasets['brightness-sector-95'].detail, 'August 2025, mapped here'); assert.equal(monthsOf('2025-08-29', '2025-09-22'), 'August and September 2025'); assert.equal(tessDay(3890.5), '2025-08-03');
+  assert.deepEqual(shown('text.json').datasets['color-brightness'], { title: 'Color + brightness, Aug 2025', detail: 'TESS sector 95', summary: 'The star in its own color, with the darker and brighter longitudes its light shows, at their measured contrast.' });
+  assert.equal(shown('text.json').datasets['brightness-sector-95'].detail, 'Sector 95, mapped here'); assert.equal(shortMonthsOf('2025-12-20', '2026-01-15'), 'Dec 2025 to Jan 2026'); assert.equal(monthsOf('2025-08-29', '2025-09-22'), 'August and September 2025'); assert.equal(tessDay(3890.5), '2025-08-03');
   // Written again over its own records, nothing moves and the page is not said to open elsewhere.
   const again = surfaceMapFiles(BRIGHTNESS_MAPS, { host: 'hd-1', maps: [choice] }, { id: 'hd-1', name: 'HD 1', colorHex: '#ffc08b' }, [map], { content: shown('source/content/object.json'), text: shown('text.json'), manifest: shown('source/manifest.json'), raster: shown('source/preparation/raster.json'), descriptor: shown('object.json') });
   assert.equal(again.opensOn, undefined); assert.equal(again.files.get('src/objects/hd-1/source/content/object.json'), colored.files.get('src/objects/hd-1/source/content/object.json')); assert.equal(again.files.get('src/objects/hd-1/source/preparation/raster.json'), colored.files.get('src/objects/hd-1/source/preparation/raster.json'));
