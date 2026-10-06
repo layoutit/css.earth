@@ -217,6 +217,12 @@ ellipsoid of assumed depth and orientation. Saturn's irregular moons follow this
 and Siarnaq have published light-curve shape models and keep their pages; twenty with
 only an elongation limit, and Anthe, are dots ([moon lists](../../../../docs/moon-catalogues.md)).
 
+A nebula's photograph follows the same rule. A page turns the camera around its subject, so
+the picture needs a depth someone measured: walls from spectra, a published surface or density
+grid, or measured points. A photograph standing as one flat picture at the nebula's distance
+is a line from the side, not a scene. Six Messier nebulae had only that and have no page
+([Messier guide](../../../../docs/messier/README.md#left-out)).
+
 ## Estimates
 
 An estimate is a number nobody measured for this object: an equilibrium temperature
