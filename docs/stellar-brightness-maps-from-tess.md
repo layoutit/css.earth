@@ -208,7 +208,7 @@ the flat **Color** the star had.
 | Which longitudes are darker | The light curve |
 | How much darker | The Brightness map's own scale, drawn from a darker, richer tone of the star's hue up to its color: far stronger than the real contrast |
 | The color | The star's Color dataset: the scale's bright end is drawn at that color |
-| The darkening toward the edge | The Color dataset's limb law, the same plate |
+| The darkening toward the edge | The Color dataset's limb law, drawn 1.5 times as strong (its light raised to the power 1.5), still toward black: chosen by eye |
 | The latitude and shape of each patch | Not measured: the smoothest map that reproduces the light |
 | Any change of hue inside a spot | Not drawn: none is measured. The darker tone keeps the star's hue |
 

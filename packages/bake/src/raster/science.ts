@@ -2,6 +2,12 @@
  * palette, photographs get their tonal presentation and missing coverage its grid. The interpretation lives with the
  * source decoders in tools; the raster lane only receives finished pixels and whether they must stay nearest-sampled. */
 export interface InterpretedPlate { readonly data: Uint8Array; readonly size: number; readonly lossless: boolean; }
+/** A limb plate drawn `strength` times as strong: the light its alpha lets through, raised to that power. The plate's
+ * color is kept (a limb plate is black); only how much it darkens changes. */
+export function strongerLimb(plate: InterpretedPlate, strength: number): InterpretedPlate {
+    if (!(strength > 0)) throw new RangeError('A limb plate\'s strength must be over 0.');
+    return strength === 1 ? plate : { ...plate, data: plate.data.map((value, index) => index % 4 === 3 ? Math.round(255 * (1 - (1 - value / 255) ** strength)) : value) };
+}
 export interface InterpretedSurface {
     readonly data: Uint8Array; readonly channels: 1 | 2 | 3 | 4; readonly nearest: boolean;
     /** One byte per pixel, set where the interpretation painted the missing-coverage grid (no value in the source). */

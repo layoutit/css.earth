@@ -25,6 +25,7 @@ export interface MapWords { readonly productId: string; readonly inputTitle: str
 /** A map drawn again in the star's own color, as the dataset the page opens on: the same table, a palette that runs from the
  * color dimmed to the color itself, the limb of the star's first dataset, and no legend. */
 export interface NaturalView { readonly id: string; readonly label: string; readonly minimum: number; readonly maximum: number; readonly colors: readonly string[];
+  /** How many times as strong as on the first dataset the darkening toward the edge is drawn, when not as it is there. */ readonly limbStrength?: number;
   readonly description: string; readonly surfaceTitle: string; readonly qualification: string; readonly notes: string; readonly text: { readonly title: string; readonly detail: string; readonly summary: string } }
 export interface MapKind<M extends SurfaceMap> {
   /** The name the kind's surfaces and inputs carry, by which a later run finds and replaces them. */ readonly consumer: string;
@@ -111,7 +112,7 @@ export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: S
     ids.add(natural.id);
     newSurfaces.push({ id: natural.id, output: first.output, thumbnail: first.thumbnail, source: path, falseColor: false, science: { kind: 'terrestrial-scientific', id: natural.id, label: natural.label, format: 'tecplot-lonlat-map', path, variable: kind.variable,
       consumer: consumerOf(newest), sampling: 'bilinear', displaySampling: 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: natural.minimum, maximum: natural.maximum, colors: [...natural.colors], labels: [`${natural.minimum}${kind.units}`, `${natural.maximum}${kind.units}`],
-      limbOf: first.id, description: natural.description, title: natural.surfaceTitle, sourceUrl: archive } });
+      limbOf: first.id, ...(natural.limbStrength === undefined ? {} : { limbStrength: natural.limbStrength }), description: natural.description, title: natural.surfaceTitle, sourceUrl: archive } });
     newControls.unshift({ id: natural.id, label: natural.label, qualification: natural.qualification, thumbnail: `${star.id}-dataset-${natural.id}.webp`, surface: `${star.id}-surface-${natural.id}@2x.webp`, poles: `${star.id}-poles-${natural.id}@2x.webp`,
       source: { id: inputId, path: '../manifest.json', url: archive }, falseColor: false, notes: natural.notes });
     texts[natural.id] = { ...natural.text }; }
