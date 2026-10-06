@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.base.json",
-  "compilerOptions": {
-    "incremental": true,
-    "tsBuildInfoFile": "output/tsbuildinfo/configs.tsbuildinfo"
-  },
-  "include": ["./astro.config.mts", "./eslint.config.mts"]
-}

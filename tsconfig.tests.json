@@ -50,7 +50,7 @@
       "path": "./packages/engine/tsconfig.tests.json"
     },
     {
-      "path": "./tsconfig.integration-tests.json"
+      "path": "./integration/tsconfig.tests.json"
     }
   ]
 }
