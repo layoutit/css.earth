@@ -1,5 +1,5 @@
 import { isRecord } from '@cssearth/core';
-import { OBJECTS } from '../objects.mts';
+import { OBJECTS } from '../directory/objects.mts';
 import { CATALOGUE_ENTRIES } from '../prepared/prepared-catalogue.mjs';
 
 const entryId = (entry: unknown) => !isRecord(entry) ? undefined : isRecord(entry.descriptor) ? entry.descriptor.id : entry.id;

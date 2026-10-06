@@ -3,8 +3,8 @@ import 'vite/client';
 import type { publishObjectDiagnostics } from '@cssearth/renderer/runtime/object-diagnostics.ts';
 export type ObjectRuntimeDiagnostics = ReturnType<typeof publishObjectDiagnostics>;
 import type { SceneDiagnostics } from './scene/scene-router.mts';
-import type { WorldContextDiagnostics } from './application-world-context.mts';
-import type { createDiagnosticRecorder } from './diagnostic-recorder.mts';
+import type { WorldContextDiagnostics } from './scene/application-world-context.mts';
+import type { createDiagnosticRecorder } from './shell/diagnostic-recorder.mts';
 
 // Development publishers install these only while their owning scene is mounted.
 declare global {

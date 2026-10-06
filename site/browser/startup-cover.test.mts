@@ -5,7 +5,7 @@ import { createPreparedObjectNavigation } from '@cssearth/renderer/runtime/prepa
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { billboardBodyRadiusPixels } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import { readPreparedObjectBytes } from '../server/object-page-data.mts';
-import { requireObject } from '../objects.mts';
+import { requireObject } from '../directory/objects.mts';
 import { parseStartupCover, startupCoverPlacement } from '../startup/startup-cover.mts';
 import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
 

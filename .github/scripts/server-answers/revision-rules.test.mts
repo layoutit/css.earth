@@ -64,7 +64,7 @@ test('fixture revision resolves moved preview, edge, deployment and Worker build
   try {
     await mkdir(resolve(root, 'moved')); await mkdir(resolve(root, 'dist'));
     await writeFile(resolve(root, 'package.json'), JSON.stringify({ scripts: { preview: 'pnpm preview:entry', 'preview:entry': 'node moved/preview.mts' } }));
-    await writeFile(resolve(root, 'netlify.toml'), '[functions]\ndirectory = "moved/functions"\n[edge_functions]\ndirectory = "moved"\n[[edge_functions]]\npath = "/*"\nfunction = "route"\n');
+    await writeFile(resolve(root, 'netlify.toml'), '[build]\nedge_functions = "moved"\n[functions]\ndirectory = "moved/functions"\n[[edge_functions]]\npath = "/*"\nfunction = "route"\n');
     await writeFile(resolve(root, 'wrangler.jsonc'), '{"main":"moved/worker.mjs","assets":{}}');
     await writeFile(resolve(root, 'moved/route.ts'), 'export default () => new URL("https://fixture.invalid/moved");');
     assert.equal(await previewEntry(root), resolve(root, 'moved/preview.mts'));

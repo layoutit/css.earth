@@ -3,9 +3,9 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { framedMembers, notableBodies, prepareCategoryFrame, CATEGORY_FRAMED_SHARE } from './prepare-world-presentation.mts';
-import { WORLD_OBJECTS } from '../../world-objects.mts';
+import { WORLD_OBJECTS } from '../../world/world-objects.mts';
 import { PREPARED_WORLD_PRESENTATION } from '../../world/prepared-world-presentation.mts';
-import { CATEGORY_FRAMES, categoryZoomTarget } from '../../system-framing.mts';
+import { CATEGORY_FRAMES, categoryZoomTarget } from '../../world/system-framing.mts';
 const test = sourceTest();
 
 test('a category frames the nearest members around their own centre, leaving the far outliers out', () => {

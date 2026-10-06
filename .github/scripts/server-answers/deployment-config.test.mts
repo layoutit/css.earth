@@ -40,3 +40,20 @@ test('configuration facts and function-specific file closure come from deployed 
     await assert.rejects(packagedFunction(root, 'find', config), /escapes project root: data\/escape\.json$/u, 'the linked directory is refused itself, not walked');
   } finally { if (pack) await rm(pack.root, { recursive: true, force: true }); await rm(root, { recursive: true, force: true }); }
 });
+test('the Worker configuration is the one the deploy script names, its paths read from its own folder', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'server-answers-wrangler-'));
+  try {
+    await mkdir(resolve(root, 'dist')); await mkdir(resolve(root, 'hosts/worker'), { recursive: true });
+    await writeFile(resolve(root, 'package.json'), JSON.stringify({ scripts: { 'deploy:cloudflare-preview': 'node hosts/worker/bundle.mts --noindex && npx --yes wrangler@4 deploy --config hosts/worker/wrangler.jsonc --env=""' } }));
+    await writeFile(resolve(root, 'netlify.toml'), '[build]\n  edge_functions = "hosts/edge"\n[functions]\ndirectory = "hosts/functions"\n');
+    // A root wrangler.jsonc the script does not name is not read.
+    await writeFile(resolve(root, 'wrangler.jsonc'), '{"main":"elsewhere.mjs","assets":{"directory":"elsewhere"}}');
+    await writeFile(resolve(root, 'hosts/worker/wrangler.jsonc'), '{ // comment\n "main": "bundled/worker.mjs", "assets": {"directory": "../../dist", "html_handling": "auto-trailing-slash"}}');
+    const config = await readDeploymentConfig(root);
+    assert.equal(config.workerMain, 'hosts/worker/bundled/worker.mjs');
+    assert.equal(config.edgeDirectory, 'hosts/edge');
+    assert.deepEqual(config.facts.assets, { directory: 'dist', html_handling: 'auto-trailing-slash' });
+    // Facts hold what a host serves, never where the checkout keeps its files.
+    for (const layout of ['functionsDirectory', 'edgeDirectory', 'workerMain']) assert.equal(layout in config.facts, false, layout);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

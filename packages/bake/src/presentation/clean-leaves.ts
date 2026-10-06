@@ -10,7 +10,7 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 // static style keeps the declarations its later properties replace. What ships is this clean form instead:
 // - every declaration once, in its final value: a static declaration, or an earlier property, that a later property of
 //   the same name replaces is dropped (a later declaration of one name sets every longhand the earlier one set);
-// - a projective leaf carries the class PREPARED_LEAF_CLASS; the shell stylesheet (site/object-shell.css) gives that class
+// - a projective leaf carries the class PREPARED_LEAF_CLASS; the shell stylesheet (site/layouts/object-shell.css) gives that class
 //   PREPARED_LEAF_RULE, and background-origin and -clip go, since a leaf has no border or padding for them to change;
 // - the constant raster triangle attributes go: nothing at runtime reads them.
 // A declaration stays inline wherever another inline declaration also sets its longhand (a `background` shorthand), since
@@ -19,7 +19,7 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 
 export const PREPARED_LEAF_CLASS = 'prepared-leaf';
 const PROJECTION = ['data-prepared-projection', 'single-leaf'] as const;
-/** The shell stylesheet's rule for PREPARED_LEAF_CLASS (site/object-shell.css), as the builder wrote it on each leaf. */
+/** The shell stylesheet's rule for PREPARED_LEAF_CLASS (site/layouts/object-shell.css), as the builder wrote it on each leaf. */
 export const PREPARED_LEAF_RULE: Readonly<Record<string, string>> = { transformStyle: 'preserve-3d', backgroundRepeat: 'no-repeat', pointerEvents: 'none' };
 /** Initial or no-op on a leaf without border or padding: the builder wrote them; nothing replaces them. */
 const LEAF_NO_OPS: Readonly<Record<string, string>> = { backgroundOrigin: 'border-box', backgroundClip: 'border-box' };

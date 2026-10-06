@@ -41,7 +41,7 @@ function bakeZone(parts: readonly string[]): string {
   return 'packages/bake(root)';
 }
 
-/** The top-level area of a zone: `packages`, `src`, `site`, `labs`, `tests`, `netlify`… */
+/** The top-level area of a zone: `packages`, `src`, `site`, `labs`, `tests`, `deploy`… */
 export function areaOf(zone: string): string {
   if (zone.startsWith('labs')) return 'labs';
   return zone.split(/[/(]/u)[0] || zone;

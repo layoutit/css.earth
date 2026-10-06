@@ -1,4 +1,3 @@
-import { readPackagedPointsFrame } from '@cssearth/objects';
 /**
  * The stars that have a page and no map marker, each at its own prepared position, for the dots of the galaxy they are in.
  *
@@ -14,11 +13,11 @@ import { readPackagedPointsFrame } from '@cssearth/objects';
  *
  * Usage: node site/build/prepare/paged-star-dot-positions.mts
  */
+import { readPackagedPointsFrame, OBJECT_TREE_ROOT, systemHostId, parsePreparedWorldContextPlan } from '@cssearth/objects';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { OBJECT_TREE_ROOT, systemHostId, parsePreparedWorldContextPlan } from '@cssearth/objects';
 import { readObjectDescriptors } from '@cssearth/objects/node';
 
 const KPC_M = 3.0856775814913673e19;

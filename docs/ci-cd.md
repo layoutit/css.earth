@@ -39,12 +39,17 @@ check and the base-ref check.
 
 ## Serving the site from Cloudflare
 
-Production is on Netlify, which meters bandwidth. The same build can be served by Cloudflare, which does not meter
-bandwidth or static file requests. The built pages become a Worker's static assets. [The Worker](../cloudflare/worker.ts)
-answers the find and report endpoints and page addresses that carry a query, with the handlers the Netlify functions
-call. The [Deploy workflow](../.github/workflows/deploy.yml) publishes it with the repository secrets
-`CLOUDFLARE_API_TOKEN` (from the "Edit Cloudflare Workers" token template) and `CLOUDFLARE_ACCOUNT_ID`. From a checkout
-with a wrangler login, these commands do the same:
+Cloudflare serves css.earth. It does not meter bandwidth or static file requests. Netlify, which meters bandwidth, is the
+standby host: the Deploy workflow's `host` input publishes the same build there instead. Everything either host runs is in
+[deploy/](../deploy): `cloudflare/` and `netlify/` hold each host's entry code and bundler, and `handlers/` what both share.
+Netlify's configuration stays at the root as [netlify.toml](../netlify.toml), because `netlify deploy` reads it only from
+the directory it runs in and resolves its paths from there.
+
+The built pages become a Worker's static assets. [The Worker](../deploy/cloudflare/worker.ts) answers the find and report
+endpoints and page addresses that carry a query, with the handlers the Netlify functions call. The
+[Deploy workflow](../.github/workflows/deploy.yml) publishes it with the repository secrets `CLOUDFLARE_API_TOKEN` (from
+the "Edit Cloudflare Workers" token template) and `CLOUDFLARE_ACCOUNT_ID`. From a checkout with a wrangler login, these
+commands do the same:
 
 ```bash
 ASSET_ORIGIN=https://earth-assets.lowpoly.cc pnpm build:deploy
@@ -52,10 +57,10 @@ pnpm deploy:cloudflare-preview   # https://cssearth-preview.cssearth.workers.dev
 pnpm deploy:cloudflare           # css.earth
 ```
 
-Each deploy command [bundles the Worker](../site/build/bundle-cloudflare-worker.mts), stages the search catalogues and
+Each deploy command [bundles the Worker](../deploy/cloudflare/bundle-worker.mts), stages the search catalogues and
 the `_headers` file into `dist`, answers one search and one page from the bundle, and uploads with wrangler. The preview
-asks search engines not to index it. [The wrangler configuration](../wrangler.jsonc) names both targets; the site's own
-address is the `production` environment, which attaches `css.earth` and `www.css.earth` to the Worker.
+asks search engines not to index it. [The wrangler configuration](../deploy/cloudflare/wrangler.jsonc), passed to wrangler
+with `--config`, names both targets; the site's own address is the `production` environment, which attaches `css.earth` and `www.css.earth` to the Worker.
 
 Tested on 2026-10-04 from Buenos Aires, against the Netlify site the same day:
 

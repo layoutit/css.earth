@@ -1,6 +1,6 @@
 import { readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
-import type { ObjectEntry } from '../objects.mts';
+import type { ObjectEntry } from '../directory/objects.mts';
 
 /** The body whose capture stands in for a page with neither a capture nor an arrival image.
  * The site's root alias already resolves to Earth. */

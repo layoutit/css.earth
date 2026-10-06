@@ -6,10 +6,7 @@ import {
   requireBodyFixedEclipticNorth,
   requireBodyFixedSunDirection,
 } from "./solar-geometry.mts";
-import { prepareEclipticPresentationFrame } from
-  "@cssearth/bake/objects/scene";
-import { prepareSunReferenceViewDirection } from
-  "@cssearth/bake/objects/scene";
+import { prepareEclipticPresentationFrame, prepareSunReferenceViewDirection } from "@cssearth/bake/objects/scene";
 import { cssDirectionToViewDirection } from '@cssearth/engine';
 import * as solarGeometry from './solar-geometry.mts';
 

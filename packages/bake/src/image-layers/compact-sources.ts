@@ -3,6 +3,18 @@
  * and a half they are its point sources (20 and 7), which hold all but a hundredth of the light the lower mark took. */
 const STANDS = 16, STANDS_SHARE = .5;
 
+/** A picture's light opened over `radius` pixels: the least value within that reach, along rows and then columns, then
+ * the greatest of those. Nothing narrower than twice the radius survives it: it is the light around a compact source. */
+export function openedLight(light: Uint8Array, width: number, height: number, radius: number): Uint8Array {
+  const count = width * height, reach = (values: Uint8Array, least: boolean) => { const pick = least ? Math.min : Math.max, rows = new Uint8Array(count), out = new Uint8Array(count);
+    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) { let value = values[y * width + x]!; for (let i = Math.max(0, x - radius); i <= Math.min(width - 1, x + radius); i++) value = pick(value, values[y * width + i]!); rows[y * width + x] = value; }
+    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) { let value = rows[y * width + x]!; for (let j = Math.max(0, y - radius); j <= Math.min(height - 1, y + radius); j++) value = pick(value, rows[j * width + x]!); out[y * width + x] = value; }
+    return out; };
+  return reach(reach(light, true), false);
+}
+/** Whether a pixel's light stands over the light around it by the mark of a compact source. */
+export const standsOver = (light: number, around: number): boolean => light - around >= Math.max(STANDS, STANDS_SHARE * around);
+
 /** Compact sources in a picture of diffuse light, taken down to the light around them, in place: an X-ray picture of a
  * cluster's gas also holds point sources (active galaxies, stars), which are not gas. The light around a place is the
  * picture opened over `radius` pixels (the least value within that reach, then the greatest of those): nothing narrower
@@ -10,12 +22,7 @@ const STANDS = 16, STANDS_SHARE = .5;
  * source; a wider one is the gas's own structure and stays. Returns how many sources were taken down. */
 export function removeCompactSources(rgb: Buffer, width: number, height: number, radius: number): number {
   const count = width * height, light = new Uint8Array(count); for (let p = 0; p < count; p++) light[p] = Math.max(rgb[3 * p]!, rgb[3 * p + 1]!, rgb[3 * p + 2]!);
-  // The least (or greatest) value within `radius` along rows, then along columns.
-  const reach = (values: Uint8Array, least: boolean) => { const pick = least ? Math.min : Math.max, rows = new Uint8Array(count), out = new Uint8Array(count);
-    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) { let value = values[y * width + x]!; for (let i = Math.max(0, x - radius); i <= Math.min(width - 1, x + radius); i++) value = pick(value, values[y * width + i]!); rows[y * width + x] = value; }
-    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) { let value = rows[y * width + x]!; for (let j = Math.max(0, y - radius); j <= Math.min(height - 1, y + radius); j++) value = pick(value, rows[j * width + x]!); out[y * width + x] = value; }
-    return out; };
-  const around = reach(reach(light, true), false), stands = (p: number) => light[p]! - around[p]! >= Math.max(STANDS, STANDS_SHARE * around[p]!), seen = new Uint8Array(count); let sources = 0;
+  const around = openedLight(light, width, height, radius), stands = (p: number) => standsOver(light[p]!, around[p]!), seen = new Uint8Array(count); let sources = 0;
   for (let start = 0; start < count; start++) { if (seen[start] || !stands(start)) continue;
     // The patch of standing pixels this one belongs to, and the box it fits in.
     const patch = [start]; seen[start] = 1; let left = width, right = -1, top = height, bottom = -1;

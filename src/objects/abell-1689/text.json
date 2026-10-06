@@ -28,7 +28,7 @@
     ]
   },
   "introduction": {
-    "text": "Hubble's view in visible and near-infrared light. The blue streaks are galaxies far behind the cluster, distorted by its gravity; the picture is flat and has no depth.",
+    "text": "Hubble's view in visible and near-infrared light. The blue streaks are galaxies far behind the cluster, distorted by its gravity.",
     "sources": [
       {
         "catalogueId": "esahubble-heic1317a",
@@ -51,6 +51,34 @@
           "label": "ESA/Hubble heic1317a: NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Blakeslee (NRC Herzberg Astrophysics Program, Dominion Astrophysical Observatory), and H. Ford (JHU)",
           "checked": "2026-10-02",
           "locator": "New Hubble view of galaxy cluster Abell 1689"
+        }
+      ]
+    },
+    "gas-and-mass": {
+      "title": "Gas and mass of Abell 1689",
+      "detail": "3853 × 4000 px",
+      "summary": "Purple is X-ray gas and blue is lensing mass, on shells as long along the sight line as the cluster was measured to be.",
+      "sources": [
+        {
+          "catalogueId": "chandra-2008-abell-1689-layers",
+          "url": "https://chandra.harvard.edu/photo/2008/a1689/",
+          "label": "Chandra X-ray Center, Abell 1689 (2008): X-ray: NASA/CXC/MIT/E.-H Peng et al; Optical: NASA/STScI",
+          "checked": "2026-10-06",
+          "locator": "Chandra X-ray Image of Abell 1689 and Hubble Optical Image of Abell 1689, two pictures on one frame"
+        },
+        {
+          "catalogueId": "esahubble-heic1014a",
+          "url": "https://esahubble.org/images/heic1014a/",
+          "label": "ESA/Hubble heic1014a: NASA, ESA, E. Jullo (JPL/LAM), P. Natarajan (Yale) and J-P. Kneib (LAM)",
+          "checked": "2026-10-06",
+          "locator": "Mass map of Abell 1689"
+        },
+        {
+          "catalogueId": "publication-umetsu-2015-abell-1689-triaxial",
+          "url": "https://arxiv.org/abs/1503.01482",
+          "label": "Umetsu et al. (2015), ApJ 806, 207",
+          "checked": "2026-10-06",
+          "locator": "Sect. VII.2, Table 5 and Sect. VIII.2: the ellipses on the sky and the elongation along the sight line of the gas and the mass"
         }
       ]
     }

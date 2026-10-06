@@ -94,7 +94,7 @@ test('image textures are demanded once when their retained axis first contribute
   assert.equal(resolveResource.mock.callCount(), 2);
 });
 
-test('a stack coming into the drawing stays hidden until its images are decoded, and one that left first never shows', async () => {
+test('a stack coming into the drawing stays hidden until its images are decoded, and what it replaces stays until then', async () => {
   // Each decode is held until the test settles it: the document's Image is what the runtime asks.
   const waiting: { src: string; settle(): void }[] = [];
   class HeldImage { src = ''; decode() { return new Promise<void>(settle => { waiting.push({ src: this.src, settle }); }); } }
@@ -124,15 +124,30 @@ test('a stack coming into the drawing stays hidden until its images are decoded,
   assert.equal(bank('z').style.visibility, 'hidden', 'a later frame does not show it early');
   await settle();
   assert.equal(bank('z').style.visibility, 'visible');
-  // Turned to another stack and away again before its images are ready: its late decode shows nothing.
-  publish([Math.SQRT1_2, 0, 0, Math.SQRT1_2]);
-  assert.deepEqual([bank('y').style.visibility, waiting.map(each => each.src)], ['hidden', ['/prepared/y.png']]);
+  // Turned part of the way to another stack: the one drawn keeps the whole picture until the other's images are decoded.
+  const between = [Math.sin(Math.PI * 43 / 360), 0, 0, Math.cos(Math.PI * 43 / 360)] as const, shares = imageLayerAxisWeights(between, views);
+  assert.ok(shares.z > 0 && shares.y > 0 && shares.z < 1, 'both stacks are in the mix at this turn');
+  publish(between);
+  assert.deepEqual([bank('y').style.visibility, bank('z').style.visibility, bank('z').style.opacity], ['hidden', 'visible', '0.999'], 'the picture is not dimmed for a stack that does not draw yet');
+  await settle();
+  assert.deepEqual([bank('y').style.visibility, bank('y').style.opacity, bank('z').style.opacity], ['visible', String(shares.y), String(shares.z)], 'decoded, it takes its share in the same write');
+  assert.equal(runtime.drawing(), true);
+  // Turned fully to a third stack before its images are ready: the stack that drew most stays, whole, until they are.
+  publish([0, Math.SQRT1_2, 0, Math.SQRT1_2]);
+  assert.deepEqual(imageLayerAxisWeights([0, Math.SQRT1_2, 0, Math.SQRT1_2], views), { x: 1, y: 0, z: 0 });
+  assert.deepEqual([bank('x').style.visibility, bank('z').style.display, bank('z').style.visibility, bank('z').style.opacity, bank('y').style.display],
+    ['hidden', '', 'visible', '0.999', 'none'], 'nothing replaces it yet, so it is not taken away');
+  // Turned back before that decode: the stack held is drawn at once, and the late decode of the other shows nothing.
   publish([0, 0, 0, 1]);
-  assert.deepEqual([bank('y').style.display, bank('z').style.visibility], ['none', 'hidden'], 'the stack turned back to waits for its own decode again');
-  const late = waiting.splice(0, 1);
-  for (const each of late) each.settle();
-  await new Promise(done => setTimeout(done, 0));
-  assert.equal(bank('y').style.visibility, 'hidden');
+  assert.deepEqual([bank('x').style.display, bank('z').style.visibility, waiting.map(each => each.src)], ['none', 'visible', ['/prepared/x.png']], 'it asks for no decode of its own again');
+  await settle();
+  assert.equal(bank('x').style.visibility, 'hidden');
+  // Turned to it and decoded: the stack that was held leaves in that write.
+  publish([0, Math.SQRT1_2, 0, Math.SQRT1_2]);
+  assert.deepEqual([bank('x').style.visibility, bank('z').style.visibility], ['hidden', 'visible']);
+  await settle();
+  assert.deepEqual([bank('x').style.visibility, bank('z').style.display], ['visible', 'none']);
+  publish([0, 0, 0, 1]);
   await settle();
   assert.equal(bank('z').style.visibility, 'visible');
   // The bank root shown again: the stack it draws waits once more.

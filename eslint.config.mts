@@ -9,9 +9,6 @@ const noCanvas = 'The CSS runtime uses no canvas or WebGL (AGENTS.md).';
 export default [
   {
     files: ['**/*.{js,mjs,cjs,ts,tsx,mts,cts,jsx}'],
-    // `site/` and the root `src/` stay out of the module-style gate until plan 7 (site architecture): a mass reformat there
-    // would collide with the site maintainers' open work.
-    ignores: ['site/**', 'src/**'],
     languageOptions: { parser: typescriptParser },
     plugins: { module: { rules: { 'header-comment-first': headerCommentFirst } } },
     rules: {
@@ -25,12 +22,14 @@ export default [
     // Generated output and the open-ended registries. `src/platform/solar-geometry.mts` alone is
     // 26,968 generated lines; `src/objects` is 586 authored body packages, not modules.
     '**/prepared/**', '**/generated/**', 'src/objects/**/*', '!src/objects/**/', '!src/objects/**/*.test.mts', 'src/sources/**/*', '!src/sources/**/*.test.mts',
-    'src/platform/solar-geometry.mts', 'site/prepared/prepared-context-objects.mts'] },
+    'src/platform/solar-geometry.mts', 'site/prepared/prepared-context-objects.mts',
+    // The hosts' bundles, written by deploy/*/bundle-*.mts.
+    'deploy/cloudflare/bundled/**', 'deploy/netlify/functions-bundled/**'] },
   {
     // `src` and `site` (and once `tools`) — roughly 232,000 authored lines — had no ESLint at all, so the
     // size and boundary rules below governed only the two smallest trees. Warnings, not errors:
     // the debt is pre-existing and this is meant to make it visible, not to block work on it.
-    files: ['.github/scripts/**/*.{ts,mts}', 'labs/experiments/**/*.{ts,mts}', 'labs/investigations/**/*.{ts,mts}', 'labs/performance/**/*.{ts,mts}', 'labs/nebula/application-isolation*.ts', 'integration/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}'],
+    files: ['.github/scripts/**/*.{ts,mts}', 'labs/experiments/**/*.{ts,mts}', 'labs/investigations/**/*.{ts,mts}', 'labs/performance/**/*.{ts,mts}', 'labs/nebula/application-isolation*.ts', 'integration/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}', 'deploy/**/*.{ts,mts}'],
     languageOptions: { parser: typescriptParser },
     rules: {
       'max-lines': ['warn', { max: packageLineLimit, skipBlankLines: false, skipComments: false }],
@@ -164,7 +163,7 @@ export default [
   {
     // The site's browser runtime (not its build steps or tests) and the renderer draw with retained DOM and CSS only.
     files: ['site/**/*.{ts,mts}', 'packages/renderer/src/**/*.ts'],
-    ignores: ['site/build/**', 'site/test/**', '**/*.test.{ts,mts}'],
+    ignores: ['site/build/**', '**/*.test.{ts,mts}'],
     rules: {
       'no-restricted-globals': ['error', ...['OffscreenCanvas', 'WebGLRenderingContext', 'WebGL2RenderingContext'].map(name => ({ name, message: noCanvas }))],
       'no-restricted-properties': ['error', { property: 'getContext', message: noCanvas }],
@@ -172,7 +171,7 @@ export default [
   },
   {
     files: ['site/**/*.{ts,mts}'],
-    ignores: ['site/build/**', 'site/test/**', '**/*.test.{ts,mts}'],
+    ignores: ['site/build/**', '**/*.test.{ts,mts}'],
     rules: { 'no-restricted-imports': ['error', { patterns: [{ group: ['@wwtelescope/*'], message: noCanvas }] }] },
   },
   {

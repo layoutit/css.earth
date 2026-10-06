@@ -74,7 +74,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   if (root.dataset.surfaceFeatures && root.dataset.surfaceFeatures !== objectId) throw new TypeError('Prepared feature caption belongs to another object.');
   root.className = 'prepared-surface-features';
   root.dataset.surfaceFeatures = objectId;
-  // A zero-size root at the stage centre, children placed from it (site/object-shell.css): the root composites above the
+  // A zero-size root at the stage centre, children placed from it (site/layouts/object-shell.css): the root composites above the
   // globe, and a full-screen box made that layer the whole stage (9 MB at 3x) for a few captions. A server-rendered
   // selected caption's full-stage root (dataset-response.mts) becomes this one.
   delete root.dataset.featureCaptionOnly;
@@ -406,7 +406,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     if (flight === handle) flight = null;
     return result;
   }
-  /** The selected name is marked: the shell keeps it visible while the names setting is off (site/object-shell.css). */
+  /** The selected name is marked: the shell keeps it visible while the names setting is off (site/layouts/object-shell.css). */
   function pin(index: number | null): void {
     if (pinnedIndex !== null) delete entries[pinnedIndex]!.element.dataset.featureSelected;
     pinnedIndex = index;

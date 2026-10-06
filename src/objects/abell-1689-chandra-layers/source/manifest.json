@@ -1,0 +1,243 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/abell-1689-chandra-layers/source/a1689_opt.tif",
+      "origin": "https://chandra.harvard.edu/photo/2008/a1689/a1689_opt.tif",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2008/a1689/",
+      "title": "Hubble Optical Image of Abell 1689",
+      "credit": "X-ray: NASA/CXC/MIT/E.-H Peng et al; Optical: NASA/STScI",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's TIFF (3853 x 4000 px), restored from its origin; not tracked. The bank's photograph: the bake removes the Milky Way's stars from it and places its galaxies in depth. The frame's place on the sky was measured on it against Gaia DR3 (recipe observation), and the gas and the mass map are lifted against it. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2008-abell-1689-layers",
+            "role": "material",
+            "evidence": "src/objects/abell-1689-chandra-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Hubble ACS",
+            "evidence": "https://chandra.harvard.edu/photo/2008/a1689/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gas-over-visible",
+      "path": "src/objects/abell-1689-chandra-layers/source/a1689.tif",
+      "origin": "https://chandra.harvard.edu/photo/2008/a1689/a1689.tif",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2008/a1689/",
+      "title": "Abell 1689: A Galaxy Cluster Makes Its Mark",
+      "credit": "X-ray: NASA/CXC/MIT/E.-H Peng et al; Optical: NASA/STScI",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's TIFF (3846 x 3996 px) of the X-ray gas over the Hubble picture, restored from its origin; not tracked. The gas picture is lifted from it. A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2008-abell-1689-layers",
+            "role": "material",
+            "evidence": "src/objects/abell-1689-chandra-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Chandra ACIS X-ray Hubble ACS",
+            "evidence": "https://chandra.harvard.edu/photo/2008/a1689/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gas",
+      "path": "src/objects/abell-1689-chandra-layers/source/gas.png",
+      "generator": "packages/bake/authoring/abell-1689/layers.mts",
+      "title": "Abell 1689: the X-ray gas alone",
+      "credit": "X-ray: NASA/CXC/MIT/E.-H Peng et al; Optical: NASA/STScI",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "Written by `node packages/bake/authoring/abell-1689/layers.mts` from the publisher's composite and its Hubble layer: what undoing their screen leaves, with the 5.1% of pixels too bright in the Hubble layer filled from around them. Not tracked.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2008-abell-1689-layers",
+            "role": "material",
+            "evidence": "src/objects/abell-1689-chandra-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "optical",
+        "gas-over-visible"
+      ],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit."
+    },
+    {
+      "id": "mass-over-visible",
+      "path": "src/objects/abell-1689-chandra-layers/source/heic1014a.tif",
+      "origin": "https://esahubble.org/media/archives/images/original/heic1014a.tif",
+      "sourceUrl": "https://esahubble.org/images/heic1014a/",
+      "title": "Mass map of Abell 1689",
+      "credit": "NASA, ESA, E. Jullo (JPL/LAM), P. Natarajan (Yale) and J-P. Kneib (LAM)",
+      "displayCredit": "ESA/Hubble",
+      "acquisition": "The publisher's fullsize original (3853 x 3902 px): the lensing mass map released with Jullo et al. (2010), laid over a Hubble picture. Restored from its origin; not tracked. The mass picture is lifted from it. A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esahubble-heic1014a",
+            "role": "material",
+            "evidence": "src/objects/abell-1689-chandra-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "lensing mass map Hubble ACS F475W F775W F850LP",
+            "evidence": "https://esahubble.org/images/heic1014a/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mass",
+      "path": "src/objects/abell-1689-chandra-layers/source/mass.png",
+      "generator": "packages/bake/authoring/abell-1689/layers.mts",
+      "title": "Abell 1689: the lensing mass map alone",
+      "credit": "NASA, ESA, E. Jullo (JPL/LAM), P. Natarajan (Yale) and J-P. Kneib (LAM)",
+      "displayCredit": "ESA/Hubble",
+      "acquisition": "Written by `node packages/bake/authoring/abell-1689/layers.mts` from ESA/Hubble's composite and the 2008 Hubble layer: the mass map read in the blue channel where the Hubble light leaves room, filled from around elsewhere, and opened by a disc of 4 arcsec, which takes the compact blue light at the bright galaxies down to the mass around it. Not tracked.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esahubble-heic1014a",
+            "role": "material",
+            "evidence": "src/objects/abell-1689-chandra-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "optical",
+        "mass-over-visible"
+      ],
+      "license": "CC-BY-4.0; retain the complete recorded credit."
+    },
+    {
+      "id": "gaia-field-stars",
+      "path": "src/objects/abell-1689-chandra-layers/source/gaia-dr3-stars.csv",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+source_id%2C+ra%2C+dec%2C+parallax%2C+parallax_error%2C+pmra%2C+pmdec%2C+pmra_error%2C+pmdec_error%2C+phot_g_mean_mag+FROM+gaiadr3.gaia_source+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2C+ra%2C+dec%29%2C+CIRCLE%28%27ICRS%27%2C+197.8753215%2C+-1.3385011%2C+0.04%29%29+AND+phot_g_mean_mag+IS+NOT+NULL+AND+%28parallax_over_error+%3E+3+OR+pm+%3E+3%2ASQRT%28pmra_error%2Apmra_error+%2B+pmdec_error%2Apmdec_error%29%29+ORDER+BY+source_id",
+      "title": "Gaia DR3 stars in the picture's field, gaia-dr3-stars.csv",
+      "credit": "Gaia Collaboration, Vallenari et al. (2023), A&A 674, A1",
+      "acquisition": "Query result downloaded unchanged from the ESA Gaia archive: the sources within 0.04 degrees of the frame's centre whose parallax or proper motion is three of its errors or more from none. Read by the image-layer bake to remove the Milky Way's stars from the photograph.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "material",
+            "evidence": "https://gea.esac.esa.int/tap-server/tap/sync"
+          }
+        ]
+      }
+    },
+    {
+      "id": "composite",
+      "path": "src/objects/abell-1689-chandra-layers/source/composite.jpg",
+      "origin": "https://chandra.harvard.edu/photo/2008/a1689/a1689.jpg",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2008/a1689/",
+      "title": "Abell 1689: A Galaxy Cluster Makes Its Mark",
+      "credit": "X-ray: NASA/CXC/MIT/E.-H Peng et al; Optical: NASA/STScI",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's 864 x 897 px rendition of the X-ray gas over the Hubble picture, restored from its origin; not tracked. The dataset's preview. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2008-abell-1689-layers",
+            "role": "material",
+            "evidence": "src/objects/abell-1689-chandra-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Chandra ACIS X-ray Hubble ACS",
+            "evidence": "https://chandra.harvard.edu/photo/2008/a1689/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/abell-1689-chandra-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/abell-1689-chandra-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/abell-1689-chandra-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

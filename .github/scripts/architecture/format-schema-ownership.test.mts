@@ -34,7 +34,7 @@ test('objects definition plus raw duplicate fails; objects definition alone pass
 });
 
 test('test, fixture, data, prepared and compiled files do not add owners', () => {
-  for (const ignored of ['site/probe.test.mts', 'site/test/probe.ts', 'site/tests/probe.ts', 'site/fixtures/probe.ts',
+  for (const ignored of ['site/probe.test.mts', 'packages/renderer/test/probe.ts', 'site/tests/probe.ts', 'site/fixtures/probe.ts',
     'site/data/probe.ts', 'site/prepared/probe.ts', 'site/dist/probe.ts', 'site/probe.json', 'site/probe.md'])
     fixture([bake, ignored], root => assert.deepEqual(checkFormatSchemaOwnership(root, [bake, ignored], []), [], ignored));
 });

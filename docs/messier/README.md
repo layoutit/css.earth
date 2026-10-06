@@ -1,8 +1,8 @@
 # The Messier catalogue
 
-109 of Charles Messier's 110 objects are places in the world. Each has its own page (`/m13/`, `/m51/`, `/m57/`), found by its Messier number, its NGC number or its common name. M24 is left out; the reason is under [Left out](#left-out).
+103 of Charles Messier's 110 objects are places in the world. Each has its own page (`/m13/`, `/m51/`, `/m57/`), found by its Messier number, its NGC number or its common name. M24 is left out, and six nebulae have no page because nothing measures their depth; the reasons are under [Left out](#left-out).
 
-Twelve were built one at a time, with their own guides: the nebulae M1, M8, M42 and M45 ([nebulae](../nebulae/README.md)) and the galaxies M31, M33, M49, M81, M83, M87, M95 and M101 ([galaxies](../galaxies/README.md)). The other 97 share the routes below. Each package's README names its own sources, numbers and known problems.
+Twelve were built one at a time, with their own guides: the nebulae M1, M8, M42 and M45 ([nebulae](../nebulae/README.md)) and the galaxies M31, M33, M49, M81, M83, M87, M95 and M101 ([galaxies](../galaxies/README.md)). The other 91 share the routes below. Each package's README names its own sources, numbers and known problems.
 
 ## What is drawn
 
@@ -13,7 +13,7 @@ Twelve were built one at a time, with their own guides: the nebulae M1, M8, M42 
 | Disc galaxies seen from above (15) | M51, M58, M61, M63, M64, M66, M74, M77, M88, M91, M94, M96, M99, M100, M109 | A Sloan Digital Sky Survey picture, its stars removed, laid flat on the measured disc. M51, M61, M64, M66, M74, M94, M96, M99 and M100 also draw catalogued objects as dots: star clusters, globular clusters, Cepheids, HII regions, planetary nebulae and supernova remnants, from the tables each bank's README lists. M58, M64, M66, M88, M91, M94 and M100 also draw their bulge as a small volume through the disc, from [S4G's published fit](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4) | Tilt: [PHANGS](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43) where it lists the galaxy, else [HyperLEDA](http://atlas.obs-hp.fr/hyperleda/). Distance: [Cosmicflows-4](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94), else PHANGS or Cosmicflows-3 |
 | Ellipticals with a published profile (6) | M59, M60, M84, M85, M86, M89 | A volume of starlight: the Sloan picture, cleaned of stars and neighbours, spread in depth through the galaxy's measured profile, with its globular clusters as dots | Profile and shape: [Kormendy et al. (2009)](https://arxiv.org/abs/0810.1681). Clusters: [Jordán et al. (2009)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/180/54). Same distances |
 | Other ellipticals, lenticulars and steep discs (11) | M32, M65, M82, M90, M98, M102, M104, M105, M106, M108, M110 | A Sloan picture, its stars removed, standing flat, facing the Sun. M65, M90, M98 and M104 draw their bulge as a volume through it, from [S4G's fit](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4). M32, M82, M102, M104, M105, M106 and M110 draw catalogued objects as dots: globular clusters, star clusters, planetary nebulae, Cepheids and HII regions | Same distances. The disc's tilt, where a bulge needs it: HyperLEDA, PHANGS, or S4G's own edge-on disc |
-| Nebulae (9) | M16, M17, M20, M27, M43, M57, M76, M78, M97 | An ESO, Hubble or NOIRLab photograph, its stars removed, standing flat, facing the Sun (M97: a Sloan picture); M16 and M78 also draw their cluster's stars; M57 lies on the walls its spectra give ([O'Dell et al. 2013](https://arxiv.org/abs/1301.6636), [Kastner et al. 2025](https://arxiv.org/abs/2501.12223)); M97 fills its published body ([García-Díaz et al. 2018](https://arxiv.org/abs/1806.04676), [Guerrero et al. 2003](https://arxiv.org/abs/astro-ph/0303056)) | Distance: Hunt & Reffert (M16, M78), [Kuhn et al. (2019)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/870/32) (M17, M20), Menten et al. (2007) (M43), [Chornay & Walton (2021)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110) (the four planetary nebulae) |
+| Nebulae (3) | M57, M76, M97 | A Hubble photograph, its stars removed, on the nebula's published shape (M97: a Sloan picture): M57 lies on the walls its spectra give ([O'Dell et al. 2013](https://arxiv.org/abs/1301.6636), [Kastner et al. 2025](https://arxiv.org/abs/2501.12223)); M76 lies on its ring and two lobes ([Bryce et al. 1996](https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract)); M97 fills its published body ([García-Díaz et al. 2018](https://arxiv.org/abs/1806.04676), [Guerrero et al. 2003](https://arxiv.org/abs/astro-ph/0303056)) | Distance: [Chornay & Walton (2021)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110) |
 | Stars (2 entries) | M40: HD 238107 and HD 238108. M73: BD-13 5809, HD 358033 and BD-13 5808 | Each star as a body, with its Gaia color and limb | Gaia DR3; the two entries are chance alignments, so neither has a package of its own |
 
 ![The 54 star clusters as the app draws them: 29 globular clusters, then 25 open clusters](../images/messier/clusters.webp)
@@ -23,8 +23,6 @@ Twelve were built one at a time, with their own guides: the nebulae M1, M8, M42 
 ![The six ellipticals drawn as volumes: as each page opens, from the side and from above](../images/messier/volumes.webp)
 
 ![Seven discs with their bulge as a volume: as each page opens, from the side and from above](../images/messier/bulges.webp)
-
-![The nine nebulae](../images/messier/nebulae.webp)
 
 ![The Ring Nebula on its published walls: as its page opens, obliquely, from the side and from above](../images/messier/shapes.webp)
 
@@ -52,7 +50,7 @@ Each tile is the object's own page in headless Chromium at 1440 × 900, device p
 
 - A parsec bank's leaves are drawn on their quads exactly ([prepare.ts](../../packages/bake/src/image-layers/prepare.ts)). The leaf compiler draws a leaf 0.6 CSS px beyond its quad on every side: 12 pc on a kiloparsec bank, but 0.012 pc on a parsec bank, which drew the nine nebula pictures 0.2 to 5% too large.
 
-- `remove-stars` in the Nebula Lab ([star removal](../../labs/nebula/docs/star-removal.md)): the star-free copy of a bank's picture. NOX removes the stars of the 26 flat galaxy pictures and the nine nebula photographs before the bake. On a galaxy the glow it leaves around a bright star is measured and filled from the ring around it. On M16, M20, M76 and M97 a second pass over a quarter-size copy takes the saturated stars the first pass leaves. Before, only stars Gaia certifies as Milky Way stars were removed, and the brightest stayed.
+- `remove-stars` in the Nebula Lab ([star removal](../../labs/nebula/docs/star-removal.md)): the star-free copy of a bank's picture. NOX removes the stars of the 26 flat galaxy pictures and the nebula photographs before the bake. On a galaxy the glow it leaves around a bright star is measured and filled from the ring around it. On M76 and M97 a second pass over a quarter-size copy takes the saturated stars the first pass leaves. Before, only stars Gaia certifies as Milky Way stars were removed, and the brightest stayed.
 
 The six volumes use the Nebula Lab route of [M49](../../src/objects/m49-volume/README.md#method) unchanged; their recipes are `labs/nebula/models/m59` to `m89`.
 
@@ -89,12 +87,23 @@ Member tables, survey cutouts and photographs are not tracked: each manifest nam
 ## Left out
 
 - **M24**, the Small Sagittarius Star Cloud, is a stretch of the Milky Way seen through a gap in the dust, not an object at one distance. No catalogue used here prints a distance for it, and NGC 6603, the cluster inside it, is not M24.
+- **Six nebulae: M16, M17, M20, M27, M43 and M78.** Each had a page that showed one photograph standing flat at the nebula's distance. A page turns the camera around its subject, and seen from the side a flat picture is a line, so the six were retired on 2026-10-06 ([the rule](../../.agents/skills/celestial-skill/references/scientific-faithfulness.md#a-scene-needs-a-measured-shape)). What was read for each, and what would bring it back:
+
+  | Nebula | What a paper gives | Missing |
+  | --- | --- | --- |
+  | Eagle, M16 | [Karim et al. (2025)](https://arxiv.org/abs/2511.03978): a cavity about 40 pc wide, drawn "not to scale". [McLeod et al. (2015)](https://arxiv.org/abs/1504.03323): the Pillars' four parts, one behind the cluster's stars and three in front | The depth of the bright gas |
+  | Omega, M17 | [Faerber et al. (2025)](https://arxiv.org/abs/2506.16700): an expanding shell around the cluster, 2.50 ± 0.28 pc in radius, 8.7 arcmin across in a picture of 35 arcmin | The depth of the gas outside the shell |
+  | Trifid, M20 | Nothing found on 2026-10-03 | Any measured depth |
+  | Dumbbell, M27 | [Meaburn et al. (2005)](https://arxiv.org/abs/astro-ph/0501569): a barrel-shaped shell expanding at 35 km/s | The tilt of its axis |
+  | M43 | Faerber et al. (2025): an expanding shell, 0.13 ± 0.06 pc in radius; not read further | A reading of that shell against the picture |
+  | M78 | Nothing read | Any measured depth |
+
 - **The fourth star of M73** (Gaia DR3 6888762676722910720): Gaia DR3 publishes no temperature or radius for it.
 
 ## Known problems
 
 - Gaia misses stars where they crowd, so the core of a globular cluster holds fewer dots than stars.
-- A flat picture seen from the side is a line. M32, M105 and M110 are not in Kormendy et al.'s Virgo sample and stay flat pictures; M57 lies on published walls and M97 fills a published body; M27 and M76 have no usable published shape yet ([ledgers](../../src/objects/m27-layers/investigations.json)).
+- A flat picture seen from the side is a line. M32, M105 and M110 are not in Kormendy et al.'s Virgo sample and stay flat pictures; M57 lies on published walls, M76 on its published ring and lobes, and M97 fills a published body.
 - A volume's page frames the whole measured profile, so the galaxy arrives smaller on the screen than a flat picture does.
 - A bulge is drawn only where S4G fits one and the fitted bulge can be a flattened spheroid in the disc plane at the disc's tilt: M58, M64, M66, M88, M91, M94 and M100. M51, M61, M74, M77, M99 and M109 fail that test; M63 has no bulge in its fit and M96 is not in the table. M65, M90, M98 and M104 stand facing the Sun: only their bulge has depth, so from the side each is a round glow crossed by the line of its picture.
 - A bulge is 80-odd small images. Its brightness is the paper's fitted profile, scaled to the photograph, out to 8 half-light radii; the photograph's own structure stays on the flat disc. Where that profile is as bright as the photograph the disc is empty under it, so from the side M58 and M88 show a dark spot at the nucleus. The faint outer glow shows steps at close zoom.

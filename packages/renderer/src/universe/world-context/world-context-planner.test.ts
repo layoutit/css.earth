@@ -630,7 +630,7 @@ test('inside its authored range a system draws every member orbit, named or not,
   for (const body of at(2.5)) assert.equal(body.orbitVisibility, 0, plan.bodies[body.index - 1]!.id);
 });
 
-/** The summary with every object's file read, as Node reads it (site/world-context-plan.mts): `prepared` is the root object's. */
+/** The summary with every object's file read, as Node reads it (site/directory/world-context-plan.mts): `prepared` is the root object's. */
 const readWholeSummary = async (prepared: URL) => parseCompleteWorldContext(JSON.parse(await readFile(new URL('world.json', prepared), 'utf8')),
   async id => JSON.parse(await readFile(new URL(`../../${id}/prepared/members.json`, prepared), 'utf8')),
   JSON.parse(await readFile(new URL('world-index.json', prepared), 'utf8')));

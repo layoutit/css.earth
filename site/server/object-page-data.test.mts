@@ -5,7 +5,7 @@ import {mkdtemp,mkdir,readFile,writeFile,rm,access} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import {loadObjectPageData,readPreparedObjectBytes} from './object-page-data.mts';
-import {objectPageStyles} from '../contracts/object-page-contract.mts';
+import {objectPageStyles,SHELL_STYLE_FILE,SHELL_STYLE_ID} from '../contracts/object-page-contract.mts';
 
 test('page data and the object transport are read from the restored runtime, with no copy on disk',async t=>{
  const root=await mkdtemp(resolve(tmpdir(),'cssearth-page-data-'));
@@ -32,7 +32,8 @@ test('objects own ordered CSS and scene-bound page metadata',async()=>{
   const descriptor=JSON.parse(await readFile(new URL(`../../src/objects/${id}/object.json`,import.meta.url),'utf8'));
   const page=await loadObjectPageData(id);
   const styles=objectPageStyles(descriptor);
-  assert.equal(styles.at(-1),'site/object-shell.css');
+  assert.equal(styles.at(-1),SHELL_STYLE_FILE);
+  assert.equal(SHELL_STYLE_ID,'site/object-shell.css','the serialized data-object-style identity stays as published');
   assert.deepEqual(objectPageStyles(descriptor, { navigation: true }), styles.slice(0, -1),
     `${id}: navigation never resends the shared shell CSS`);
   for(const path of styles) await access(new URL(`../../${path}`,import.meta.url));

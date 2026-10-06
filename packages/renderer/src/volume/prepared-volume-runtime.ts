@@ -4,7 +4,7 @@ import { presentPhysicalPoseInVolume, cssViewFromOrientation, worldRotationFromQ
 import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, VolumeCameraPublication, VolumeLocalCamera, PreparedVolumeCameraTransform } from './types.js';
 
 import { revealLayer } from '../rendering/layer-reveal.js';
-import { createSettlePacer, SETTLE_PACING } from '../rendering/settle-pacer.js';
+import { createSettlePacer } from '../rendering/settle-pacer.js';
 
 /** A leaf image this large decodes off the main thread before it shows again (layer-reveal.ts). */
 export const LARGE_IMAGE_PIXELS = 1 << 20;
@@ -20,11 +20,8 @@ const AXES = ['x', 'y', 'z'] as const;
 export const STACK_OPACITY_CEILING = 0.999;
 /** A stack joins every JOIN_STRIDE-th slice first, so one part of the way in is the whole cloud thinner, not a part of it. */
 const JOIN_STRIDE = 8;
-/** What a slice joining the layer tree costs the pacer, in its units: a frame's first 16 are then 8 slices. On the iPad
- * (M42, 2026-10-04, the camera still) a stack of 628 small slices joining 8 a frame had no frame over 21 ms, 32 a frame
- * one of 33 ms, its first, 64 a frame 45 ms then 23, and all at once one of 182 ms; a stack of 88 slices fourteen times
- * their area joined 32 a frame the same way. The count is the cost, not the pixels. */
-const JOIN_UNITS = 2;
+/** What a slice joining the layer tree costs the pacer, in its units, and how many slices join in a frame. */
+const JOIN_UNITS = 2, JOIN_SLICES = 8;
 
 /** Mounts fixed projective slice geometry. It owns DOM transforms only; all geometry and pixels are prepared. */
 export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): PreparedMaterialVolumeRuntime {
@@ -144,25 +141,41 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   // page's own thread waited (2026-10-04). Paced, a change of axis still has a frame of 30 to 45 ms: the first change
   // to a stack's slices after half a second's pause (one slice shown, one slice's opacity) made a frame of 36 to 42 ms
   // with the camera still, the ones after it none.
-  // The share doubles from a frame's first units to its most (8, 16, then 32 slices) whatever the pacer's budget has
-  // fallen to: the budget halves after any slow frame, and where every frame is slow a stack would join a slice a
-  // frame, thin for seconds (headless Chromium showed 84 of a copy's 88 slices five seconds after a turn).
-  let joinFrames = 0;
+  // Eight slices join a frame, whatever the pacer's budget is. The share used to double to 32: through three turns on
+  // the iPad that cost the Crab (513 to 570 slices a stack) 726 ms beyond 17 ms a frame with 16 frames over 33 ms,
+  // against 321 ms and 6 at eight a frame, and M42 (264 to 1,317 smaller slices) 430 ms and 11 frames against 218 and
+  // 5 (six runs each, 2026-10-06). A share that followed the pacer's budget between 8 and 32 did no better than 32 on
+  // the Crab (610 against 643 ms, four runs each), and a budget alone would join a slice a frame where every frame is
+  // slow (headless Chromium showed 84 of a copy's 88 slices five seconds after a turn). The price is the time to
+  // fill: a stack of 570 slices is whole at an eighth of its density after 9 frames and full after 71, where it was
+  // full after 19. The numbers this replaced (2026-10-04: 8 a frame none over 21 ms, 32 a frame one of 33 ms) were
+  // taken while Safari drew nothing of a stack that joined, so a join cost it nothing.
+  // A stack's root is displayed in the frame its first slices are, never before: Safari does not draw a stack whose
+  // camera was first displayed with no slice under it, however many join afterwards. M42's stack along x, shown empty
+  // and then joined 16 slices a frame with the camera still, drew nothing on the iPad (its 628 slices displayed, in
+  // view, their image decoded) until its camera was hidden and shown again; displayed together with its first 16
+  // slices and joined at the same pace, it drew (2026-10-06). A reader who turned a nebula a quarter of the way round
+  // lost it: in a recorded visit to M42 it was gone from the third turn to the end, 7 s, and the Crab for 11 s.
   const join = createSettlePacer(() => {
     if (destroyed) return 0;
-    const allowed = Math.min(SETTLE_PACING.maximumUnits, SETTLE_PACING.startUnits * 2 ** joinFrames);
+    const allowed = JOIN_SLICES * JOIN_UNITS;
     let written = 0;
-    for (const copies of opticalCopies) for (let copy = 0; copy < 3; copy++) {
+    for (const [index, copies] of opticalCopies.entries()) for (let copy = 0; copy < 3; copy++) {
       if (!copies.wanted[copy]) continue;
       const nodes = copies.nodes[copy]!;
       while (copies.shown[copy]! < nodes.length) {
-        if (written >= allowed) { joinFrames++; return written; }
+        if (written >= allowed) return written;
         nodes[copies.shown[copy]!++]!.style.display = ''; written += JOIN_UNITS;
+        if (!rootDisplayed[index]) displayRoot(index);
       }
     }
-    joinFrames = 0;
     return written;
   }, { holdWhile: 'never' });
+  function displayRoot(index: number) {
+    const root = roots[index]!;
+    root.style.visibility = 'visible'; root.style.display = 'block'; rootDisplayed[index] = true;
+    for (const leaf of boundedLeaves) if (leaf.axis === index && leaf.large && leaf.shown !== false) for (const node of leaf.nodes) revealLayer(node, leaf.large);
+  }
   const publish = ({ world, viewport }: VolumeCameraPublication) => {
     if (destroyed) return;
     if (world.referenceFrame !== payload.frame.referenceFrame || world.epochJdTt !== payload.frame.epochJdTt) {
@@ -228,13 +241,8 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       const { weight, opticalGain } = strengths[index]!;
       total += weight;
       const visible = weight > 0, opacity = total > 0 ? String(Math.min(STACK_OPACITY_CEILING, weight / total)) : '0';
-      if (rootVisible[index] !== visible) {
-        rootVisible[index] = visible;
-        if (visible && !rootDisplayed[index]) {
-          root.style.visibility = 'visible'; root.style.display = 'block'; rootDisplayed[index] = true;
-          for (const leaf of boundedLeaves) if (leaf.axis === index && leaf.large && leaf.shown !== false) for (const node of leaf.nodes) revealLayer(node, leaf.large);
-        }
-      }
+      // A stack turned to is displayed by the join, with its first slices.
+      if (rootVisible[index] !== visible) rootVisible[index] = visible;
       if (rootOpacity[index] !== opacity) { root.style.opacity = opacity; rootOpacity[index] = opacity; }
       // Opacity belongs to atomic images, never the mesh (which flattens 3D).
       // n full copies plus a fraction f give T=(1-alpha)^n*(1-f*alpha).

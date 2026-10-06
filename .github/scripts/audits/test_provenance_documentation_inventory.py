@@ -15,7 +15,7 @@ class ProvenanceInventory(unittest.TestCase):
         self.addCleanup(temporary.cleanup)
         self.root = Path(temporary.name).resolve()
         self.git('init', '--quiet')
-        self.write('site/objects.mts', "import body from '../src/objects/example/object.json';\n")
+        self.write('site/directory/objects.mts', "import body from '../src/objects/example/object.json';\n")
         self.write('src/objects/example/object.json', {'id': 'example', 'properties': {}})
         self.write('src/objects/example/source/manifest.json', {'inputs': [], 'documents': []})
         self.write('src/objects/example/README.md', '# Example\n')
@@ -51,7 +51,7 @@ class ProvenanceInventory(unittest.TestCase):
         self.assertEqual(snapshot['missingRequiredFilesByRegisteredBody']['NOTICE.md'], ['example'])
 
     def test_catalogue_reads_selected_snapshot_and_excludes_unregistered_folders(self):
-        self.write('site/objects.mts', "import { OBJECT_DESCRIPTORS } from './prepared-object-catalog.mts';\nthrow Error('Never execute');\n")
+        self.write('site/directory/objects.mts', "import { OBJECT_DESCRIPTORS } from './prepared-object-catalog.mts';\nthrow Error('Never execute');\n")
         self.write('src/objects/example/object.json', {'id': 'example', 'properties': {'catalog': {}}})
         self.write('src/objects/unregistered/object.json', {'id': 'unregistered', 'properties': {}})
         self.commit()
@@ -70,7 +70,7 @@ class ProvenanceInventory(unittest.TestCase):
         self.assertTrue(report['indexUnchangedDuringRead'])
 
     def test_empty_or_mismatched_catalogue_cannot_report_success(self):
-        self.write('site/objects.mts', "import { OBJECT_DESCRIPTORS } from './prepared-object-catalog.mts';\n")
+        self.write('site/directory/objects.mts', "import { OBJECT_DESCRIPTORS } from './prepared-object-catalog.mts';\n")
         self.commit()
         result, _ = self.run_inventory()
         self.assertNotEqual(result.returncode, 0)

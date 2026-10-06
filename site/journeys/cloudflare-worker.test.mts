@@ -1,13 +1,13 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import worker from '../../cloudflare/worker.ts';
-import { readAssetJson, siteFetcher, useAssets, type Assets } from '../../cloudflare/assets.ts';
-import { readBuiltCatalogue, readPublicFile } from '../../cloudflare/search-data.ts';
-import { answerOrFallback } from '../../cloudflare/fallback.ts';
+import worker from '../../deploy/cloudflare/worker.ts';
+import { readAssetJson, siteFetcher, useAssets, type Assets } from '../../deploy/cloudflare/assets.ts';
+import { readBuiltCatalogue, readPublicFile } from '../../deploy/cloudflare/search-data.ts';
+import { answerOrFallback } from '../../deploy/cloudflare/fallback.ts';
 
 // The Worker's own parts: its routing of what needs no handler, and the modules that stand in for a disk. The handlers
 // it calls are Netlify's, with their own tests (search-response.test.mts, search-api.test.mts); the bundle step answers a
-// search and a page from the bundled script (site/build/bundle-cloudflare-worker.mts).
+// search and a page from the bundled script (deploy/cloudflare/bundle-worker.mts).
 const built = (files: Readonly<Record<string, unknown>>): Assets & { readonly asked: string[] } => {
   const asked: string[] = [];
   return { asked, async fetch(input, init) {
@@ -40,7 +40,7 @@ test('a page report is logged and answered with no content', async t => {
 });
 
 test('a Worker deployed without its assets binding says which setting names it', async () => {
-  await assert.rejects(worker.fetch(new Request('https://css.test/earth/'), {}, context), /no ASSETS binding; wrangler\.jsonc `assets\.binding`/u);
+  await assert.rejects(worker.fetch(new Request('https://css.test/earth/'), {}, context), /no ASSETS binding; deploy\/cloudflare\/wrangler\.jsonc `assets\.binding`/u);
 });
 
 test('the search data is read from the built site by its site path', async () => {
@@ -49,7 +49,7 @@ test('the search data is read from the built site by its site path', async () =>
   await assert.rejects(readPublicFile('/features/../secret.json'), /path is invalid/u);
   await assert.rejects(readPublicFile('https://elsewhere.test/a.json'), /path is invalid/u);
   // A file the bundle step did not stage is named, with the step that stages it.
-  await assert.rejects(readAssetJson('/scenes/earth/earth-places.json'), /hold no \/scenes\/earth\/earth-places\.json \(HTTP 404\); site\/build\/bundle-cloudflare-worker\.mts/u);
+  await assert.rejects(readAssetJson('/scenes/earth/earth-places.json'), /hold no \/scenes\/earth\/earth-places\.json \(HTTP 404\); deploy\/cloudflare\/bundle-worker\.mts/u);
   // A catalogue that could not be read is asked for again, not kept as a failure.
   await assert.rejects(readBuiltCatalogue(), /hold no \/catalogue\/index\.json/u);
   await assert.rejects(readBuiltCatalogue(), /hold no \/catalogue\/index\.json/u);
@@ -58,9 +58,9 @@ test('the search data is read from the built site by its site path', async () =>
 
 test('a project file the bundle does not carry is named', async () => {
   Object.assign(globalThis, { CSSEARTH_PROJECT_FILES: { 'src/objects/observable-universe/prepared/world.json': '{"schema":"world"}' } });
-  const { readProjectJson, nodeProjectFileUrl } = await import('../../cloudflare/project-files.ts');
+  const { readProjectJson, nodeProjectFileUrl } = await import('../../deploy/cloudflare/project-files.ts');
   assert.deepEqual(await readProjectJson('file:///anywhere', 'src/objects/observable-universe/prepared/world.json'), { schema: 'world' });
-  await assert.rejects(readProjectJson('file:///anywhere', 'src/objects/earth/prepared/members.json'), /holds no src\/objects\/earth\/prepared\/members\.json; FUNCTION_PROJECT_FILES \(site\/build\/function-project-files\.mts\)/u);
+  await assert.rejects(readProjectJson('file:///anywhere', 'src/objects/earth/prepared/members.json'), /holds no src\/objects\/earth\/prepared\/members\.json; FUNCTION_PROJECT_FILES \(deploy\/handlers\/function-project-files\.mts\)/u);
   await assert.rejects(readProjectJson('file:///anywhere', 'toString'), /holds no toString/u);
   assert.throws(() => nodeProjectFileUrl('file:///anywhere', 'src/objects/earth/prepared/members.json'), /no project directory/u);
 });

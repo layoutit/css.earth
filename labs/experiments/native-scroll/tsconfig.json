@@ -2,8 +2,6 @@
   "extends": "../../../tsconfig.base.json",
   "include": [
     "*.mts",
-    "../../../site/test/native-scroll-browser.mts",
-    "../../../site/test/native-scroll-touch-browser.mts",
     "./*.mts"
   ],
   "exclude": []

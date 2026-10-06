@@ -4,7 +4,7 @@ import type { PositionM } from '@cssearth/engine';
 import { type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import type { ObjectEntry } from '../objects.mts';
+import type { ObjectEntry } from '../directory/objects.mts';
 
 export function required<T>(value: T | null | undefined): T {
   assert.ok(value !== null && value !== undefined, 'The test requires this prepared value.');

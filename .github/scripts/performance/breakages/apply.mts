@@ -10,7 +10,7 @@ const patch = record(JSON.parse(await readFile(options.get('--patch')!, 'utf8'))
 const edits = array(patch.edits).map(raw => { const edit = record(raw); return { file: string(edit.file), before: string(edit.before), after: string(edit.after) }; });
 const writes: { file: string; content: string }[] = [];
 for (const edit of edits) {
-  if (!['site/layouts/ObjectLayout.astro', 'site/import-queue.mts', 'site/directory/startup-requests.mts', 'astro.config.mts', 'index.html'].includes(edit.file)) throw new Error('Unexpected patch target');
+  if (!['site/layouts/ObjectLayout.astro', 'site/browser/import-queue.mts', 'site/directory/startup-requests.mts', 'astro.config.mts', 'index.html'].includes(edit.file)) throw new Error('Unexpected patch target');
   const file = resolve(root, edit.file), real = await realpath(file);
   if (!real.startsWith(root + sep) || (await lstat(file)).isSymbolicLink()) throw new Error('Refusing symlink/outside copy');
   const content = await readFile(file, 'utf8');

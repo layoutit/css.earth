@@ -120,3 +120,8 @@ test('deleting the planned warn-only rule turns the same finding assertion red',
   const failing = probe(mutant); assert.equal(failing.status, 1, failing.stderr);
   assert.match(failing.stderr, /AssertionError.*|Got unwanted exception/u);
 });
+
+test('the committed site plan is enforced, so any site folder cycle, layer violation or unassigned root file fails the check', () => {
+  const tiers = JSON.parse(readFileSync(new URL('../../../docs/site-architecture/tiers.json', import.meta.url), 'utf8')) as { status?: unknown };
+  assert.equal(tiers.status, 'enforced');
+});

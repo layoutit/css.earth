@@ -45,7 +45,7 @@ export async function inspectMeasurementSphere(root:string,target:string){
   if (!required.some(key => key.startsWith('surface:'))) throw new Error('Sphere surface binding is unavailable');
   const descriptor = requireRecord(await json(resolve(object, 'object.json'))),properties = requireRecord(descriptor.properties),worldFrame = properties.worldFrame;
   // The shared body rules and the shell, then the page's own stylesheets (a lane template names the object as __object__).
-  const shared = ['src/renderers/css/styles/body-surfaces.css', 'site/object-shell.css'];
+  const shared = ['src/renderers/css/styles/body-surfaces.css', 'site/layouts/object-shell.css'];
   const own = requireArray(requireRecord(properties.page).stylesheets).map(path => requireString(path)).filter(path => !shared.includes(path));
   const styles = await Promise.all([...shared, ...own].map(async file => Buffer.from(objectPageCss((await pinned(resolve(root, file))).toString(), id))));
   if (!worldFrame) throw new Error('Standard sphere has no prepared physical frame');

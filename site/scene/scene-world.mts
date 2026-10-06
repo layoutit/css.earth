@@ -1,4 +1,4 @@
-import { worldSubject, worldSubjectFrame } from '../inside-view.mts';
+import { worldSubject, worldSubjectFrame } from '../world/inside-view.mts';
 import type { SceneFramePresenter, WorldContextOwner, WorldContextMount } from './scene-frame-presenter.mts';
 export type { SceneFramePresenter, WorldContextOwner, WorldContextMount } from './scene-frame-presenter.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';

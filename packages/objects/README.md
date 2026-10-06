@@ -8,7 +8,7 @@ shape, surfaces and datasets, materials, frame banks, optional layers and motion
 plus bounded paging or destination plans. Preparation adapters consume those
 capabilities; this package does not choose a renderer or execute object tools.
 
-The registry contracts (`src/registry/`) are what the application's one `OBJECTS` registry (`site/objects.mts`) and the
+The registry contracts (`src/registry/`) are what the application's one `OBJECTS` registry (`site/directory/objects.mts`) and the
 preparation tools share: `defineObjects()`, `catalogEntry()` and `catalogueObject()` assemble and decode entries (`catalogueObject()` decodes one
 entry of the prepared catalogue, as the registry and a page's object directory both read it), `parseObjectDiscovery()`,
 `parseNavigationDistance()`, `parseArrivalView()` and `definePreparedFocus()` validate the prepared registry data,
