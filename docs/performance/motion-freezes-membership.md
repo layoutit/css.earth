@@ -228,6 +228,14 @@ view must all match before a replacement can be skipped. A new camera pose or st
 explicit pushes remain distinct entries even when they name the same URL. Back restoration still remembers the
 departed view before adopting the incoming entry.
 
+A flight that replaces the scene writes its history entry at the hand-over, when the camera has arrived and neither
+body is mounted (`site/navigation/navigation-history.mts`, `commit(…, true)`). Safari takes a picture of the page for
+every entry pushed, and the display server draws it at a cost by the layers on screen. Written once the body was
+shown, the push made a frame of 239 to 317 ms on comet 67P's arrival, 159 to 175 ms on Psyche's and 77 to 95 ms on
+Mars's on the iPad; written at the hand-over, none of 60 ms at 67P or Mars, and at Psyche one frame of 205 to 268 ms
+(the comet's scene leaving and Psyche's mounting) where there were two (2026-10-06). With comet 67P at rest on
+screen, a push alone froze the page for 1.9 to 2.0 s: an entry is never pushed over a mounted body.
+
 ### Optional controls and scene retirement
 
 Disabled surface labels do not attach their feature root or allocate outline segments. The first catalogue request
