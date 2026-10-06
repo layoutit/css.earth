@@ -1,6 +1,8 @@
 import { importPackagedObjectRuntime } from './scene-imports.mts';
 import { parseObjectDescriptor, type ObjectDescriptor } from '@cssearth/objects';
 import type { ObjectEntry } from '../directory/objects.mts';
+// The router that holds this adapter imports the directory statically, so a dynamic import here only added a facade chunk.
+import { loadObject } from '../directory/object-directory.mts';
 
 export const objectAdapter = Object.freeze({
   /** A page's own prepared descriptor mounts without the registry, so the first body loads before it. */
@@ -12,8 +14,7 @@ export const objectAdapter = Object.freeze({
       const { loadPackagedObject } = await importPackagedObjectRuntime();
       mount = await loadPackagedObject(preparedDescriptor, signal);
     } else {
-      const directory = objects ? null : await import('../directory/object-directory.mts');
-      const loaded = directory ? await directory.loadObject(objectId) : objects!.find(({ id }) => id === objectId);
+      const loaded = objects ? objects.find(({ id }) => id === objectId) : await loadObject(objectId);
       const objectRecord = loaded ?? null;
       if (!objectRecord) throw new Error(`Unknown cssEarth object: ${objectId ?? "unknown"}.`);
       mount = await objectRecord.loadScene(signal);
