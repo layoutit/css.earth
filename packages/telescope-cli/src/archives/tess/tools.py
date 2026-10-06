@@ -70,7 +70,9 @@ def light_curve(job):
     return {'frames': int(len(curve.time)), 'aperturePixels': int(mask.sum()), **({} if window is None else {'window': int(window)}), 'saturated': bool(mission == 'TESS' and np.nanmax(tpf.flux.value) > job['saturationElectronsPerSecond']),
             'spanDays': span, 'scatter': float(np.std(flux)), 'whole': peak(time, flux, longest),
             'halves': [peak(t, f, min(longest, float(t.max() - t.min()))) if len(t) > 10 else None for t, f in halves],
-            'time': [round(float(value), 5) for value in time], 'flux': [round(float(value), 6) for value in flux]}
+            'time': [round(float(value), 5) for value in time], 'flux': [round(float(value), 6) for value in flux],
+            # The light as measured, before any drift is taken out of it: what another code is given to judge.
+            **({} if degree < 0 else {'measured': [round(float(value), 6) for value in raw_flux]})}
 
 
 def brightness_map(job):

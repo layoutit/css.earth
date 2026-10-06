@@ -27,7 +27,7 @@ export const SATURATION_ELECTRONS_PER_SECOND = 1.5e5;
 export interface Peak { readonly periodDays: number; readonly power: number; /** Peak to peak, as a share of the star's mean light. */ readonly amplitude: number }
 export interface SectorLightCurve { readonly frames: number; readonly aperturePixels: number; /** The campaign or quarter a Kepler or K2 file's header names. */ readonly window?: number; readonly saturated: boolean; readonly spanDays: number; readonly scatter: number;
   readonly whole: Peak; /** The same search in each of the sector's two orbits, where an orbit holds enough of the curve. */ readonly halves: readonly (Peak | null)[];
-  readonly time: readonly number[]; readonly flux: readonly number[] }
+  readonly time: readonly number[]; readonly flux: readonly number[]; /** The light as measured, where a drift was taken out of `flux`. */ readonly measured?: readonly number[] }
 
 /** When one sector's light curve is believed to show the star turning. Settled on our own stars whose rotation the
  * catalogues print and whose light the mission also measured (76 of them measured from pixels): with these values every
@@ -111,7 +111,8 @@ export function parseLightCurve(value: unknown): SectorLightCurve | undefined {
   const numbers = (key: string) => requireArray(record[key], key).map((entry, index) => requireFiniteNumber(entry, `${key}[${index}]`)), time = numbers('time'), flux = numbers('flux');
   if (time.length !== flux.length || !time.length) throw new TypeError('The light curve has times and fluxes of different lengths.');
   return { frames: requireFiniteNumber(record.frames, 'frames'), aperturePixels: requireFiniteNumber(record.aperturePixels, 'aperture pixels'), ...(typeof record.window === 'number' ? { window: record.window } : {}), saturated: record.saturated === true, spanDays: requireFiniteNumber(record.spanDays, 'span'),
-    scatter: requireFiniteNumber(record.scatter, 'scatter'), whole: peak(record.whole, 'whole sector'), halves: requireArray(record.halves, 'halves').map((half, index) => isRecord(half) ? peak(half, `orbit ${index + 1}`) : null), time, flux };
+    scatter: requireFiniteNumber(record.scatter, 'scatter'), whole: peak(record.whole, 'whole sector'), halves: requireArray(record.halves, 'halves').map((half, index) => isRecord(half) ? peak(half, `orbit ${index + 1}`) : null), time, flux,
+    ...(Array.isArray(record.measured) && record.measured.length === time.length ? { measured: numbers('measured') } : {}) };
 }
 
 /** One sector's light curve of a star, from the cutout file of its pixels. */
