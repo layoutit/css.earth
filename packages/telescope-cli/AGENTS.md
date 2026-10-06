@@ -20,7 +20,7 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   it. Per-body authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps, the circumstellar
   discs) is `authoring/<archive>/` (exported by no subpath: it imports this package through its own name, never the
   other way), a leaf the architecture check enforces; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. Receipts and ledgers record program paths
-  where `src/archives/programs.mts` puts them. No archive module names a body (`archives/archive-scope.test.mts`).
+  where `src/archives/programs.mts` puts them. No archive module names a body.
   The Juno archive tests are beside the archive in `src/archives/juno/`;
   `test:packages` runs every test in this package;
 - the entry scripts it runs by path as processes and the built sphere package entry (`src/workspace-commands/`, the sphere
