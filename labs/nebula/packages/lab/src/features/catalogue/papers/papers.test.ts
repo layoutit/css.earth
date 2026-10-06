@@ -14,10 +14,11 @@ function page(){return {schema:paperSchema,objectId:'m42',simbadId:'M  42',retri
 function index():PaperIndex{return {schema:'cssearth-messier-paper-index@1',catalogue,generatedAt:now,countQuery:'query',countSource:`${paperRoot}/counts.json.gz`,
   objects:Array.from({length:110},(_,i)=>({objectId:`m${i+1}`,simbadId:`M ${i+1}`,expectedCount:0,count:0,status:'pending'}))};}
 test('canonical padded SIMBAD IDs are retained; duplicate/missing Messier identities fail',()=>{
-  const metadata=[{name:'messier_id'},{name:'ref_count'}],data=Array.from({length:110},(_,i)=>[`M ${String(i+1).padStart(3)}`,i]);
-  const counts=readPaperCounts({metadata,data});assert.equal(counts[41]!.objectId,'m42');assert.equal(counts[41]!.simbadId,'M  42');
-  assert.throws(()=>readPaperCounts({metadata,data:data.slice(1)}));
-  assert.throws(()=>readPaperCounts({metadata,data:[...data.slice(1),data[1]]}));
+  const rows=Array.from({length:110},(_,i)=>({messier_id:`M ${String(i+1).padStart(3)}`,ref_count:i}));
+  const counts=readPaperCounts({rows,overflow:false});assert.equal(counts[41]!.objectId,'m42');assert.equal(counts[41]!.simbadId,'M  42');
+  assert.throws(()=>readPaperCounts({rows:rows.slice(1),overflow:false}));
+  assert.throws(()=>readPaperCounts({rows:[...rows.slice(1),rows[1]!],overflow:false}));
+  assert.throws(()=>readPaperCounts({rows,overflow:true}));
   assert.match(papersQuery('M  42',5),/i.id='M  42'/);assert.throws(()=>papersQuery("M 42' OR 1=1",5));
 });
 test('source metadata remains intact and missing abstracts stay missing',()=>{

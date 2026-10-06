@@ -1,9 +1,8 @@
-import { readTapTable } from '../tap';
+import type { TapTable } from '../tap';
 import { readPaper, type Paper } from './types';
 
 export const countQuery = "SELECT i.id AS messier_id,COUNT(*) AS ref_count FROM ident AS i JOIN has_ref AS h ON i.oidref=h.oidref WHERE i.id LIKE 'M %' GROUP BY i.id";
-export function readPaperCounts(value: unknown) {
-  const table = readTapTable(value);
+export function readPaperCounts(table: TapTable) {
   if (table.overflow || table.rows.length !== 110) throw new TypeError('Expected all 110 Messier bibliography counts.');
   const rows = table.rows.map(row => {
     if (typeof row.messier_id !== 'string' || !/^M\s+\d+$/.test(row.messier_id) || typeof row.ref_count !== 'number' || !Number.isSafeInteger(row.ref_count) || row.ref_count < 0) throw new TypeError('Invalid bibliography count.');

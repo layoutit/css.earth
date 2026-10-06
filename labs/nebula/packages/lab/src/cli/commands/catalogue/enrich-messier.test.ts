@@ -3,6 +3,7 @@ import test from 'node:test';
 import { enrichImageMetadata, readDataLink, selectEnrichmentCandidates } from './enrich-messier.ts';
 import { applyEnrichments, originalAccessKey } from './enrich-messier-catalogue.ts';
 import type { ArchiveImage, MessierInventory } from '../../../features/catalogue/types.ts';
+import type { AskLinks, DataLinkAnswer } from '../../../adapters/sources/archive-tables.ts';
 
 const published = 'ivo://irsa.ipac/example?m42';
 function image(overrides: Partial<ArchiveImage> = {}): ArchiveImage {
@@ -13,55 +14,53 @@ function image(overrides: Partial<ArchiveImage> = {}): ArchiveImage {
     accessUrl: 'https://irsa.ipac.caltech.edu/datalink/links?ID=example',
     accessFormat: 'application/x-votable+xml;content=datalink', sourceUrl: 'https://irsa.ipac.caltech.edu/', previewUrl: null, ...overrides };
 }
+// A DataLink answer as the adapter returns it from PyVO: text columns arrive as strings, an absent one empty.
 const row = (id: string, url: string, semantics: string, mime = 'image/fits', error = '') =>
-  `<TR><TD>${id}</TD><TD>${url}</TD><TD>${semantics}</TD><TD>${mime}</TD><TD>1234</TD><TD>${error}</TD></TR>`;
-function table(rows: string) {
-  return `<VOTABLE><RESOURCE type="results"><INFO name="QUERY_STATUS" value="OK"/><TABLE>
-    <FIELD name="ID"/><FIELD name="access_url"/><FIELD name="semantics"/>
-    <FIELD name="content_type"/><FIELD name="content_length" unit="byte"/><FIELD name="error_message"/>
-    <DATA><TABLEDATA>${rows}</TABLEDATA></DATA></TABLE></RESOURCE></VOTABLE>`;
+  ({ ID: id, access_url: url, semantics, content_type: mime, content_length: 1234, error_message: error });
+function table(...rows: Record<string, unknown>[]): DataLinkAnswer {
+  return { queryStatus: 'OK', fields: [{ name: 'ID', unit: null }, { name: 'access_url', unit: null }, { name: 'semantics', unit: null },
+    { name: 'content_type', unit: null }, { name: 'content_length', unit: 'byte' }, { name: 'error_message', unit: null }], rows,
+    resolvedUrl: 'https://irsa.ipac.caltech.edu/datalink/links?ID=example', httpStatus: 200, responseBytes: 2048 };
 }
+const answering = (answer: DataLinkAnswer, asked: string[] = []): AskLinks => async url => { asked.push(url); return answer; };
 
 test('DataLink preserves matching identity, units and compound science links', () => {
-  const xml = table(row(published, 'https://example.org/a.fits?a=1&amp;b=2', '#this') +
-    row('ivo://unrelated', 'https://example.org/other.fits', '#this') + row(published, 'https://example.org/p.jpg', '#preview', 'image/jpeg'));
-  const links = readDataLink(xml, published);
+  const answer = table(row(published, 'https://example.org/a.fits?a=1&b=2', '#this'),
+    row('ivo://unrelated', 'https://example.org/other.fits', '#this'), row(published, 'https://example.org/p.jpg', '#preview', 'image/jpeg'));
+  const links = readDataLink(answer, published);
   assert.equal(links.length, 2); assert.equal(links[0]!.url, 'https://example.org/a.fits?a=1&b=2');
   assert.equal(links[0]!.contentLength, 1234);
-  assert.throws(() => readDataLink(xml.replace('unit="byte"', 'unit="kbyte"'), published));
-  assert.throws(() => readDataLink(xml.replace('value="OK"', 'value="OVERFLOW"'), published));
-  assert.throws(() => readDataLink(`<!DOCTYPE VOTABLE [<!ENTITY bad SYSTEM "file:///etc/passwd">]>${xml}`, published));
+  assert.throws(() => readDataLink({ ...answer, fields: answer.fields.map(field => field.unit ? { ...field, unit: 'kbyte' } : field) }, published));
+  assert.throws(() => readDataLink({ ...answer, queryStatus: 'OVERFLOW' }, published));
+  assert.throws(() => readDataLink({ ...answer, fields: answer.fields.slice(1) }, published), /No DataLink result table/);
+  assert.equal(readDataLink(table({ ...row(published, 'https://example.org/a.fits', '#this'), link_authorized: false }, { ...row(published, '', '#cutout'), service_def: 'soda' }), published).length, 0);
   assert.throws(() => readDataLink(table(row(published, '', '#this', '', 'Internal error')), published), /Internal error/);
 });
 
 test('enrichment never GETs science pixels; validates preview and records original discovery', async () => {
-  const calls: { url: string; method: string }[] = [], original = image();
+  const calls: { url: string; method: string }[] = [], asked: string[] = [], original = image();
   const fetcher: typeof fetch = async (input, init) => {
     const url = String(input), method = init?.method ?? 'GET'; calls.push({ url, method });
-    if (url.includes('/datalink/')) return new Response(table(row(published, 'https://example.org/a.fits', '#this') + row(published, 'https://example.org/p.jpg', '#preview', 'image/jpeg')),
-      { headers: { 'content-type': 'application/x-votable+xml' } });
     assert.equal(method, 'HEAD');
     return new Response(null, { headers: { 'content-type': url.endsWith('.fits') ? 'application/fits' : 'image/jpeg', 'content-length': '5678' } });
   };
-  const result = await enrichImageMetadata(original, undefined, fetcher);
+  const result = await enrichImageMetadata(original, answering(table(row(published, 'https://example.org/a.fits', '#this'), row(published, 'https://example.org/p.jpg', '#preview', 'image/jpeg')), asked), undefined, fetcher);
   assert.equal(result.id, original.id); assert.equal(result.sourceUrl, original.sourceUrl);
   assert.equal(result.metadataOriginal.accessUrl, original.accessUrl);
   assert.equal(result.accessUrl, 'https://example.org/a.fits'); assert.equal(result.estimatedBytes, 5678);
   assert.equal(result.previewUrl, 'https://example.org/p.jpg'); assert.equal(result.metadataEvidence.length, 3);
   assert.ok((result.metadataEvidence[0]!.responseBytes ?? 0) > 0);
-  assert.equal(calls.filter(call => call.method === 'GET').length, 1);
+  assert.deepEqual(asked, [original.accessUrl]); assert.equal(calls.filter(call => call.method === 'GET').length, 0);
   assert.equal(original.previewUrl, null);
 });
 
 test('compound datasets and unverified previews remain unresolved rather than selecting arbitrary files', async () => {
   const original = image(), fetcher: typeof fetch = async (input, init) => {
-    if ((init?.method ?? 'GET') === 'GET') return new Response(table(row(published, 'https://example.org/a.fits', '#this') +
-      row(published, 'https://example.org/b.fits', '#this') + row(published, 'https://example.org/p.jpg', '#preview', 'image/jpeg')),
-      { headers: { 'content-type': 'application/xml' } });
-    assert.equal(String(input), 'https://example.org/p.jpg');
+    assert.equal(init?.method, 'HEAD'); assert.equal(String(input), 'https://example.org/p.jpg');
     return new Response(null, { headers: { 'content-type': 'text/html', 'content-length': '500' } });
   };
-  const result = await enrichImageMetadata(original, undefined, fetcher);
+  const result = await enrichImageMetadata(original, answering(table(row(published, 'https://example.org/a.fits', '#this'),
+    row(published, 'https://example.org/b.fits', '#this'), row(published, 'https://example.org/p.jpg', '#preview', 'image/jpeg'))), undefined, fetcher);
   assert.equal(result.accessUrl, original.accessUrl); assert.equal(result.previewUrl, null);
   assert.equal(result.metadataEvidence[0]!.status, 'unavailable');
 });
@@ -78,16 +77,17 @@ test('MAST uses returned jpegURI, keeps file identity and measures this file wit
     return new Response(null, { headers: { 'content-type': url.includes('.fits') ? 'text/plain' : 'image/jpeg', 'content-length': '10604160',
       'accept-ranges': 'bytes', etag: '"file-version"' } });
   };
-  const result = await enrichImageMetadata(original, undefined, fetcher);
+  const result = await enrichImageMetadata(original, async () => { throw new Error('MAST records carry no DataLink here.'); }, undefined, fetcher);
   assert.equal(result.accessUrl, original.accessUrl); assert.equal(result.estimatedBytes, 10604160);
   assert.ok(result.previewUrl?.includes('provider-selected_mos.jpg'));
   assert.equal(result.metadataEvidence[0]!.previewScope, 'observation');
   assert.ok(result.metadataEvidence.find(evidence => evidence.stage === 'science-head')?.note?.includes('text/plain'));
 });
 
-test('metadata MIME/length limits cannot fall through to a science download', async () => {
-  const fetcher: typeof fetch = async () => new Response(null, { headers: { 'content-type': 'image/fits', 'content-length': '999999999' } });
-  const result = await enrichImageMetadata(image(), undefined, fetcher);
+test('a DataLink answer the reader refuses cannot fall through to a science download', async () => {
+  const fetcher: typeof fetch = async () => { throw new Error('No request may follow a refused DataLink answer.'); };
+  const result = await enrichImageMetadata(image(), async () => { throw new Error('VO metadata byte limit exceeded'); }, undefined, fetcher);
+  assert.equal(result.metadataEvidence.length, 1); assert.match(result.metadataEvidence[0]!.error ?? '', /byte limit/);
   assert.equal(result.metadataEvidence[0]!.status, 'error'); assert.equal(result.estimatedBytes, null);
 });
 

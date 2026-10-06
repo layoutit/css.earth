@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import { archiveProviders, readArchiveQuery, readMessierCatalogue, readMessierInventory, type ArchiveProvider, type MessierInventory } from '../../../features/catalogue/types.ts';
 import { inventoryPolicy, inventoryQuery, pendingQuery } from '../../../features/catalogue/archives.ts';
 import { inventoryStorage } from '../../../features/catalogue/selection.ts';
+import { archiveTable } from '../../../adapters/sources/archive-tables.ts';
 
 const root = process.cwd(), args = process.argv.slice(2);
 const allowed = /^(--refresh|--retry-errors|--object=m(?:[1-9]|[1-9][0-9]|10[0-9]|110)|--provider=(?:mast|irsa|eso)|--max-records=\d+)$/;
@@ -68,7 +69,7 @@ await Promise.all(archiveProviders.filter(p => !providers.length || providers.in
     if (!args.includes('--refresh') && previous.status !== 'pending' && !(args.includes('--retry-errors') && previous.status === 'error')) continue;
     const started = Date.now();
     console.log(`QUERY ${object.id} ${provider}`);
-    const result = await inventoryQuery(provider, object, maxRecords, controller.signal);
+    const result = await inventoryQuery(provider, object, maxRecords, archiveTable, controller.signal);
     target.queries[index] = readArchiveQuery(result);
     await save();
     console.log(`RESULT ${object.id} ${provider} ${result.status} ${result.images.length} images ${((Date.now() - started) / 1000).toFixed(1)}s${result.error ? ` ${result.error}` : ''}`);
