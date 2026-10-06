@@ -67,9 +67,10 @@ export const brightnessChoice = (star: string, mission: LightMission, window: nu
 /** A mission's time (a barycentric Julian date less the mission's zero) as a UTC day. */
 export const missionDay = (time: number, mission: LightMission = 'TESS') => new Date((time + MISSIONS[mission].timeZero - 2440587.5) * 86400000).toISOString().slice(0, 10);
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as const;
-/** The month, or the two months, a window's light spans. */
-export function monthsOf(fromUtc: string, toUtc: string): string { const [a, b] = [fromUtc, toUtc].map(day => ({ year: day.slice(0, 4), month: MONTHS[Number(day.slice(5, 7)) - 1]! }));
-  return a!.year === b!.year && a!.month === b!.month ? `${a!.month} ${a!.year}` : a!.year === b!.year ? `${a!.month} and ${b!.month} ${a!.year}` : `${a!.month} ${a!.year} and ${b!.month} ${b!.year}`; }
+/** The months a window's light spans: one, two next to each other ("August and September 2025"), or the first to the last ("March to May 2017"). */
+export function monthsOf(fromUtc: string, toUtc: string): string { const [a, b] = [fromUtc, toUtc].map(day => ({ year: day.slice(0, 4), index: Number(day.slice(5, 7)) - 1, month: MONTHS[Number(day.slice(5, 7)) - 1]! }));
+  const joined = (12 * Number(b!.year) + b!.index) - (12 * Number(a!.year) + a!.index) > 1 ? 'to' : 'and';
+  return a!.year === b!.year && a!.month === b!.month ? `${a!.month} ${a!.year}` : a!.year === b!.year ? `${a!.month} ${joined} ${b!.month} ${a!.year}` : `${a!.month} ${a!.year} ${joined} ${b!.month} ${b!.year}`; }
 /** The same in the few characters a dataset's detail line has: "Aug 2025", "Aug to Sep 2025", "Dec 2025 to Jan 2026". */
 export function shortMonthsOf(fromUtc: string, toUtc: string): string { const [a, b] = [fromUtc, toUtc].map(day => ({ year: day.slice(0, 4), month: MONTHS[Number(day.slice(5, 7)) - 1]!.slice(0, 3) }));
   return a!.year === b!.year && a!.month === b!.month ? `${a!.month} ${a!.year}` : a!.year === b!.year ? `${a!.month} to ${b!.month} ${a!.year}` : `${a!.month} ${a!.year} to ${b!.month} ${b!.year}`; }

@@ -86,23 +86,27 @@ typed here. A run's receipt is a result: `reduce.mts` writes it under ignored `o
 ledger records each run's verdict. The one choice the codes leave open, how tightly a map is fitted, is `KNEE` in `reduce.mts`, and it is settled by `benchmark.mts`
 on the published runs.
 
-A star's rotation and brightness map from its light in the TESS full-frame images are `src/archives/tess/`: `neighbours.mts`
-asks Gaia DR3 whose light the star's pixels hold and refuses a star that shares them, `pixels.mts` reads
-the star's pixels through MAST's TESScut (one request at a time, where the star was in the sector's year), `photometry.mts` has lightkurve and astropy measure the light
-curve and its period and holds the rule that believes a rotation, `map.mts` has starry fit the map, and `reduce.mts` runs a
-star, or every star with `--all`, and writes its receipt and light curve under ignored `output/tess/<star id>/`. The science is
-the pinned codes' (`toolchain.json`, and the telescope's starry toolchain); `tools.py` holds calls and nothing else. The
-rule's constants carry their measurement on our own labelled stars; change one only with that table measured again
-([method note](../../docs/stellar-brightness-maps-from-tess.md)).
+A star's rotation and brightness map from its light in a space telescope's pixels are `src/archives/tess/` and
+`src/archives/kepler/`. `kepler/pixels.mts` asks MAST for the Kepler and K2 target pixel files at a star's place (4-arcsecond
+pixels, a quarter or a campaign of some 80 days in one file); `tess/pixels.mts` reads a star's pixels through MAST's TESScut
+(one request at a time, where the star was in the sector's year). `reduce.mts` reads a star's Kepler or K2 file when the
+mission watched it and one TESS sector otherwise; `neighbours.mts` asks Gaia DR3 whose light the star's pixels hold, at each
+mission's own radius (`PIXELS`), and refuses a star that shares them; `photometry.mts` has lightkurve and astropy measure the
+light curve and its period and holds the rule that believes a rotation, with each mission's limits (`LIMITS`); `map.mts` has
+starry fit the map. `reduce.mts` runs a star, or every star with `--all`, and writes its receipt and light curve under ignored
+`output/tess/<star id>/`. The science is the pinned codes' (`toolchain.json`, and the telescope's starry toolchain);
+`tools.py` holds calls and nothing else. The rule's constants carry their measurement on our own labelled stars; change one
+only with that table measured again ([method note](../../docs/stellar-brightness-maps-from-tess.md)).
 
 Every kind of surface map this repository reduces reaches a star's page through `src/new-object/maps/`: `surface-maps.mts`
 writes the records any map needs (table, manifest input, raster surface, dataset, control, text) from a `MapKind`, and
 `route.mts` reads a spec, writes each star and bakes from a `MapRoute`; `routes.mts` lists the kinds (`MAP_ROUTES`). A kind supplies only what is its own: its column,
 units, colors, sentences, how its reduction is read and the catalogue records it is bound to. `magnetic/` is the kind for
 maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a convention page takes the maps' tilt) and
-`brightness/` the kind for maps from TESS light (`--from-pixels`, a spec's `brightnessMaps`; the page's axis is never
-changed, and the measured period goes into the star's measurements record; `new-object-cli.mts --tess-light` writes the
-reduction's verdict, sector and light scatter into the record of every star it looked at, mapped or not). A kind whose maps are how the star looks
+`brightness/` the kind for maps from a star's light in TESS, K2 or Kepler pixels (`--from-pixels`, a spec's `brightnessMaps`; what differs by
+mission is one table, `MISSIONS`; the page's axis is never
+changed, and the measured period goes into the star's measurements record; `new-object-cli.mts --pixel-light` writes the
+reduction's verdict, mission, window and light scatter into the record of every star it looked at, mapped or not). A kind whose maps are how the star looks
 supplies `natural`: the newest map in the star's own color, which becomes the dataset the page opens on
 (`Color + brightness`). It is the Brightness map's scale and grays tinted with the color (`tinted`), far stronger than the
 real contrast, which cannot be seen; its sentences say so with the star's number, and say what is measured (longitudes) and
