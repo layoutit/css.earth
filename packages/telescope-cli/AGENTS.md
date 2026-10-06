@@ -86,32 +86,34 @@ typed here. A run's receipt is a result: `reduce.mts` writes it under ignored `o
 ledger records each run's verdict. The one choice the codes leave open, how tightly a map is fitted, is `KNEE` in `reduce.mts`, and it is settled by `benchmark.mts`
 on the published runs.
 
-A star's rotation and brightness map from its light in a space telescope's pixels are `src/archives/tess/` and
-`src/archives/kepler/`. `kepler/pixels.mts` asks MAST for the Kepler and K2 target pixel files at a star's place (4-arcsecond
-pixels, a quarter or a campaign of some 80 days in one file); `tess/pixels.mts` reads a star's pixels through MAST's TESScut
-(one request at a time, where the star was in the sector's year). `reduce.mts` reads a star's Kepler or K2 file when the
-mission watched it and one TESS sector otherwise; `neighbours.mts` asks Gaia DR3 whose light the star's pixels hold, at each
-mission's own radius (`PIXELS`), and refuses a star that shares them; `photometry.mts` has lightkurve measure the light
-curve; `map.mts` has starry fit the map. `reduce.mts` runs a star, or every star with `--all`, and writes its receipt and
-light curve under ignored `output/tess/<star id>/`; `--judge` judges kept Kepler and K2 light curves again with nothing fetched.
-The science is the pinned codes' (`toolchain.json`, and the telescope's starry toolchain); `tools.py` holds calls and nothing else.
+A star's rotation and brightness map from its light are `src/archives/tess/` and `src/archives/kepler/`. Whether a light
+curve shows a star turning is decided by a published method, never by a threshold or a choice made here, by you or by the
+person asking. `tess/methods.mts` is the table: each entry is one paper's method for the kind of star and the light curves
+that paper applies it to, with how it prepares a light curve, its criteria and its rule for a star observed more than once,
+as printed. The first is Reinhold & Hekker (2020) for main-sequence stars in the K2 mission's own PDC-MAP light curves:
+`kepler/light-curves.mts` finds and fetches those files at MAST, `tools.py` has lightkurve read one as it is and astropy and
+star-privateer compute the paper's three periods, and nothing is measured from a K2 star's pixels. A star or a light curve no
+entry covers gets the paper's reason and no verdict, and is not fetched. To cover another kind of star or of data, read the
+paper that treats it and add its entry, with the light curve that paper uses; do not widen an entry beyond its paper, and do
+not tune a number on our own stars: a comparison with the catalogues is evidence for the note, not a setting.
 
-Whether a light curve shows a star turning is decided by a published method, never by a threshold written here.
-`methods.mts` is the table: each entry is one paper's method for the kind of star and of data that paper applies it to,
-with how it prepares a light curve and its criteria as printed (the first is Reinhold & Hekker 2020, for main-sequence
-stars in one K2 campaign). A star no entry covers gets the paper's reason and no verdict, and is not fetched. To cover
-another kind of star or of data, read the paper that treats it and add its entry; do not widen an entry beyond its paper,
-and do not tune a number on our own stars: a comparison with the catalogues is evidence for the note, not a setting. The
-one rule still our own is the TESS sector's (`photometry.mts` `rotationVerdict`, measured on our labelled stars); it is
-to be replaced by a published one ([method note](../../docs/stellar-brightness-maps-from-tess.md)).
+A star K2 did not watch is read from one TESS sector's full-frame pixels: `neighbours.mts` asks Gaia DR3 whose light the
+star's pixels hold and refuses a star that shares them, `pixels.mts` reads the pixels through MAST's TESScut (one request at a
+time, where the star was in the sector's year), and `photometry.mts` has lightkurve measure the light curve. That path's
+photometry settings, its neighbour limits and its rule for believing a rotation (`rotationVerdict`) are still this
+repository's own, set on our labelled stars; they are to be replaced by a published method for the light curves it covers,
+and no star is added under them. `map.mts` has starry fit the map of each accepted light curve. `reduce.mts` runs a star,
+or every star with `--all`, and writes its receipt and light curves under ignored `output/tess/<star id>/`. The science is
+the pinned codes' (`toolchain.json`, and the telescope's starry toolchain); `tools.py` holds calls and nothing else
+([method note](../../docs/stellar-brightness-maps-from-tess.md)).
 
 Every kind of surface map this repository reduces reaches a star's page through `src/new-object/maps/`: `surface-maps.mts`
 writes the records any map needs (table, manifest input, raster surface, dataset, control, text) from a `MapKind`, and
 `route.mts` reads a spec, writes each star and bakes from a `MapRoute`; `routes.mts` lists the kinds (`MAP_ROUTES`). A kind supplies only what is its own: its column,
 units, colors, sentences, how its reduction is read and the catalogue records it is bound to. `magnetic/` is the kind for
 maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a convention page takes the maps' tilt) and
-`brightness/` the kind for maps from a star's light in TESS, K2 or Kepler pixels (`--from-pixels`, a spec's `brightnessMaps`; what differs by
-mission is one table, `MISSIONS`; the page's axis is never
+`brightness/` the kind for maps from a star's light in TESS pixels or K2 light curves (`--from-pixels`, a spec's `brightnessMaps`; what differs by
+mission is one table, `MISSIONS`; a K2 map's records name the published method that judged it and the paper's own light curve; the page's axis is never
 changed, and the measured period goes into the star's measurements record; `new-object-cli.mts --pixel-light` writes the
 reduction's verdict, mission, window and light scatter into the record of every star it looked at, mapped or not). A kind whose maps are how the star looks
 supplies `natural`: the newest map in the star's own color, which becomes the dataset the page opens on
