@@ -21,7 +21,7 @@ function fixture(t: TestContext) {
   t.after(() => rmSync(root, { recursive: true, force: true }));
   execFileSync('git', ['init', '-q'], { cwd: root });
   put(root, 'package.json', JSON.stringify({ packageManager: 'pnpm@10.30.3', devDependencies: { typescript: '5.9.3' } }));
-  put(root, 'tsconfig.base.json', '{"compilerOptions":{"target":"es2022"}}');
+  put(root, '.github/tsconfig.base.json', '{"compilerOptions":{"target":"es2022"}}');
   put(root, 'site/unrelated.mts', 'export const value = 1;');
   put(root, 'docs/unrelated.md', '# Guide');
   for (const [name, dependencies] of [['a', []], ['b', ['a']], ['c', ['b']], ['d', []]] as const) {
@@ -59,7 +59,7 @@ test('package source edits change only that package and its transitive dependent
 });
 test('root config input changes every package digest', async t => {
   const root = fixture(t), before = digests(await compiledCiCacheKeys({ root, runtime }));
-  put(root, 'tsconfig.base.json', '{"compilerOptions":{"target":"esnext"}}');
+  put(root, '.github/tsconfig.base.json', '{"compilerOptions":{"target":"esnext"}}');
   const after = digests(await compiledCiCacheKeys({ root, runtime }));
   for (const name of ['a', 'b', 'c', 'd']) assert.notEqual(after[name], before[name], name);
 });

@@ -99,7 +99,7 @@
     "typecheck:pr:astro": "pnpm typecheck:astro",
     "typecheck:renderer": "pnpm --filter @cssearth/renderer typecheck",
     "typecheck:shell": "pnpm --filter @cssearth/engine exec tsc -p ../../site/tsconfig.json",
-    "typecheck:tests": "tsc -b tsconfig.tests.json --pretty false",
+    "typecheck:tests": "tsc -b .github/tsconfig.tests.json --pretty false",
     "typecheck:scripts": "tsc -p .github/scripts/tsconfig.json && tsc -p labs/tsconfig.json",
     "telescope": "node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/cli.mts",
     "test:lab": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && node --experimental-strip-types labs/nebula/run.mts test",

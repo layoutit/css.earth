@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../.github/tsconfig.base.json",
   "include": [
     "**/*.test.mts",
     "../../packages/bake/src/delivery/fixtures/external-modules.d.mts",

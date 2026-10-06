@@ -30,6 +30,9 @@ export function trackedCacheEntries(root: string): TrackedEntry[] {
   return entries.sort((left, right) => left.path < right.path ? -1 : left.path > right.path ? 1 : 0);
 }
 
+/** The repository-wide TypeScript base and test entry, kept in `.github/` rather than at the root. */
+const ROOT_TYPESCRIPT_CONFIGS = ['.github/tsconfig.base.json', '.github/tsconfig.tests.json'];
+
 /** Incremental compiler state remains verified by tsc. Its reusable configuration family includes every
  * tracked tsconfig spelling (including astro.tsconfig.json), package manifest, lockfile and workspace policy. */
 export function isTypecheckCacheInput(path: string): boolean {
@@ -197,7 +200,7 @@ export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, 
   const lock: unknown = parse(readFileSync(resolve(root, 'pnpm-lock.yaml'), 'utf8'));
   const identity = canonical(['compiled-inputs@3', toolchain(root, runtime)]);
   const shared = entries.filter(({ path }) => !path.includes('/') && path !== 'pnpm-lock.yaml' && isTypecheckCacheInput(path) ||
-    ['.github/scripts/ci/build-ci.mts', '.github/scripts/ci/ci-cache-key.mts'].includes(path)).map(entry => entry.path);
+    [...ROOT_TYPESCRIPT_CONFIGS, '.github/scripts/ci/build-ci.mts', '.github/scripts/ci/ci-cache-key.mts'].includes(path)).map(entry => entry.path);
   const packages = entries.filter(({ path }) => /^packages\/[^/]+\/package\.json$/u.test(path)).map(({ path }) => {
     const manifest: unknown = JSON.parse(readFileSync(resolve(root, path), 'utf8'));
     if (!isRecord(manifest) || typeof manifest.name !== 'string' || !isRecord(manifest.scripts) || typeof manifest.scripts.build !== 'string')
