@@ -32,7 +32,7 @@
     },
     {
       "id": "radar",
-      "source": "surface/venus-magellan-fmap-left-look-z4.png",
+      "source": "surface/venus-magellan-color-4641m.tif",
       "falseColor": true,
       "output": "venus-{id}{suffix}.webp",
       "thumbnail": "venus-dataset-{id}.webp",

@@ -1,0 +1,19 @@
+{
+  "id": "usgs-magellan-color",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Venus Magellan Global C3-MDIR Synthetic Color Mosaic 4641m",
+  "identifiers": [
+    {"type": "Archive resource", "value": "https://planetarymaps.usgs.gov/mosaic/Venus_Magellan_C3-MDIR_Colorized_Global_Mosaic_4641m.tif"},
+    {"type": "USGS WMS layer", "value": "MAGELLAN_color"}
+  ],
+  "links": [
+    {"role": "landing", "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m", "label": "Source"}
+  ],
+  "evidence": [
+    {"path": "src/objects/venus/source/manifest.json", "locator": "/inputs/3"}
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "USGS Astrogeology"
+}

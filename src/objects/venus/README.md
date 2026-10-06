@@ -9,7 +9,7 @@ Venus shows a cloud map, one Akatsuki ultraviolet exposure, Magellan radar, elev
 | Clouds | Venus cloud texture from the OpenSpace project, pinned at commit `56e29b54b8592084ff1fef47c2e08de0b22ce516` |
 | Ultraviolet | Akatsuki UVI Level 3b, [vco_uvi_l3 v1.1](https://doi.org/10.17597/isas.darts/vco-00016), CC BY 4.0 under the [ISAS/JAXA data policy](https://www.isas.jaxa.jp/en/researchers/data-policy/) |
 | Cloud-top limb | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), Minnaert fit to MESSENGER MASCS spectra |
-| Radar | [USGS Magellan SAR FMAP left-look global mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m), read through NASA Trek zoom-4 tiles |
+| Radar | [USGS Magellan C3-MDIR synthetic color mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m), the 4,641 m GeoTIFF as published |
 | Elevation, emissivity, reflectivity, roughness | [USGS numeric Magellan products](source/science/usgs/), at about 4.64 km grid spacing |
 | Gravity, Bouguer anomaly, geoid | PDS Geosciences volume [MGN-V-RSS-5-GRAVITY-L2-V1.0](https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/) |
 | Atmosphere charts and limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model, the halo run locally ([profile](source/atmosphere/psg-limb.json)) |
@@ -37,7 +37,7 @@ The Venera surface photographs from the [NASA PDS Geosciences Node](https://pds-
 
 **Ultraviolet.** Product `uvi_20230830_100446_365_l3b_v21` is one 365 nm exposure from orbit 257 at 2023-08-30T10:04:46.033 UTC. JAXA's Level 3b fits the limb to correct pointing and projects radiance onto a longitude-latitude grid for a 70 km cloud top ([Ogohara et al. 2017](https://doi.org/10.1186/s40623-017-0749-5)). Of 34 exposures measured it lights the most of the globe: 48.54 %, at 3.65° phase, where one look can show at most 49.18 %. `packages/bake/src/objects/interpretation/akatsuki-uvi-l3b.ts` reads it with h5wasm and box-integrates it to 2048 × 1024. Brightness is `(radiance × 5 × 10⁻⁹) ^ (1 / 2.2)`, with nothing clipped and no contrast enhancement or sharpening. 48.62 % of cells carry an observation; the rest use the shared gray graticule, and nothing is filled.
 
-**Radar.** The FMAP mosaic combines Magellan's 75 m strips from mapping cycles 1 and 3 ([label](source/radar/fmap-left-look-75m-pds3.lbl)). The 117 GB native file has no reduced copies, so preparation reads NASA Trek's layer ([capabilities](https://trek.nasa.gov/tiles/Venus/EQ/Venus_Magellan_LeftLook_mosaic_global_75m/1.0.0/WMTSCapabilities.xml)) at zoom 4: 8192 × 4096 pixels at 4.64 km. Gray is the product's DN, `DN = 5 × (RV + 20) + 1`, with RV the cross-section relative to the Muhleman law in dB; the legend runs from −20 to +30 dB. There is no exposure curve, sharpening or color. USGS's colorised C3-MDIR mosaic is not kept: its color follows brightness alone.
+**Radar.** USGS's C3-MDIR synthetic color mosaic is read from its published GeoTIFF ([label](source/radar/c3-mdir-colorized-4641m-pds3.lbl)): 8,192 × 4,096 pixels at 4,641 m, three 8-bit bands, from pole to pole. It is packed as published, with no exposure curve, sharpening or resampling. USGS made the color to simulate the surface; it follows radar brightness and is not a measurement, so the panel shows no scale. The gray FMAP left-look mosaic held this dataset from 27 September to 6 October 2026; the [ledger](investigations.json) keeps its route and measurements.
 
 **Elevation and microwave maps.** Elevation is the numeric GTDR v2 in metres above a 6,051 km sphere, on a −3,000 to 12,000 m scale.
 
@@ -63,12 +63,12 @@ The roughness label's 0.005 multiplier conflicts with the [PDS GSDR specificatio
 ## Evidence
 
 - The Sun direction fitted from the ultraviolet file's incidence grid puts the sub-solar point at 206.1913° E, 2.4897° N; JPL Horizons gives 206.179102° E, 2.490460° N.
-- Radar: the median is +0.4 dB, so the average surface matches the Muhleman law, and brightness correlates with the old C3-MDIR map at r = 0.81.
+- Radar: the published map has no empty cell. Its most common color (183, 78, 39) covers 0.38% of the globe and 31% of the band south of 80° S, a flat tone where the mosaic holds no radar image.
 - Gravity: a sum of the model's coefficients reproduces the free-air grid to 0.004 mGal with this cell placement (ledger entry `magellan-gravity-maps`).
 
 ## Known problems
 
-- Radar brightness is not visible color. About 7.7% of the area between 80° S and 84° N and both poles are missing. A pixel is a mean of decibels, not of power.
+- The radar map's orange is synthetic: it follows radar brightness and is not surface color. The product states no brightness scale. A flat tone near the south pole stands in for ground the mosaic does not show.
 - The ultraviolet image is one instant of clouds that move with a four-day super-rotation. It already carries the Sun, so illumination is counted twice near the limb.
 - The halo is a PSG single-scattering model ([handbook](https://psg.gsfc.nasa.gov/images/help/handbook.pdf), p. 96) with the Sun one degree above the horizon, so the real halo may be brighter. Its one color per pixel is approximate for the radar and elevation datasets.
 - The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.
