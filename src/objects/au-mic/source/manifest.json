@@ -176,6 +176,32 @@
           }
         ]
       }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "limb-darkened-disc-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6794047652729201024&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+        "inputs": [
+          "au-mic-stellar-color",
+          "au-mic-gaia-xp",
+          "au-mic-claret-2011-limb-darkening",
+          "au-mic-preparation-raster"
+        ]
+      },
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+      }
     },
     {
       "id": "au-mic-tess-map-brightness-sector-95",
@@ -215,32 +241,6 @@
             "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
           }
         ]
-      }
-    }
-  ],
-  "generatedIntermediates": [
-    {
-      "id": "limb-darkened-disc-context-marker",
-      "path": "presentation/context.png",
-      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6794047652729201024&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
-      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
-      "license": "Project-authored display derivative.",
-      "consumers": [
-        "navigation"
-      ],
-      "recipe": {
-        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
-        "inputs": [
-          "au-mic-stellar-color",
-          "au-mic-gaia-xp",
-          "au-mic-claret-2011-limb-darkening",
-          "au-mic-preparation-raster"
-        ]
-      },
-      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

@@ -185,6 +185,31 @@
           }
         ]
       }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "limb-darkened-disc-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+        "inputs": [
+          "ek-draconis-stellar-color",
+          "ek-draconis-claret-2011-limb-darkening",
+          "ek-draconis-preparation-raster"
+        ]
+      },
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+      }
     },
     {
       "id": "ek-draconis-tess-map-brightness-sector-50",
@@ -224,31 +249,6 @@
             "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
           }
         ]
-      }
-    }
-  ],
-  "generatedIntermediates": [
-    {
-      "id": "limb-darkened-disc-context-marker",
-      "path": "presentation/context.png",
-      "origin": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82",
-      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
-      "license": "Project-authored display derivative.",
-      "consumers": [
-        "navigation"
-      ],
-      "recipe": {
-        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
-        "inputs": [
-          "ek-draconis-stellar-color",
-          "ek-draconis-claret-2011-limb-darkening",
-          "ek-draconis-preparation-raster"
-        ]
-      },
-      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],
