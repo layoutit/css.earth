@@ -16,7 +16,8 @@ import { isConventionOnly, parseSurfaceMaps, surfaceMapFiles, type MapKind, type
 
 type Json = Record<string, unknown>;
 export interface RouteContext { readonly root: string; readonly progress: (line: string) => void }
-export interface SurfaceMapResult { readonly host: string; readonly maps: number; readonly files: number; /** The page's axis was a convention and now carries the maps' tilt. */ readonly tilted?: boolean; readonly report?: string; readonly failed?: string }
+export interface SurfaceMapResult { readonly host: string; readonly maps: number; readonly files: number; /** The page's axis was a convention and now carries the maps' tilt. */ readonly tilted?: boolean;
+  /** The page opens on another dataset, or on another map in its default dataset: its arrival photograph is of the old one. */ readonly redrawn?: boolean; readonly report?: string; readonly failed?: string }
 export interface SkyPlace { readonly rightAscensionDegrees: number; readonly declinationDegrees: number }
 export interface MapRoute<M extends SurfaceMap> {
   readonly kind: MapKind<M>;
@@ -47,13 +48,17 @@ async function writeMaps<M extends SurfaceMap>(route: MapRoute<M>, entry: Surfac
       : `${map.choice.program} was mapped for a tilt of ${map.inclinationDegrees}°, and the page draws ${star.name} tilted ${star.inclinationDegrees.toFixed(1)}° (${star.rotationRecord}): reduce a program whose star block holds the page's tilt.`); }
   const distance = Math.hypot(...star.originM), place = { rightAscensionDegrees: (Math.atan2(star.originM[1], star.originM[0]) * 180 / Math.PI + 360) % 360, declinationDegrees: Math.asin(star.originM[2] / distance) * 180 / Math.PI };
   const descriptor = requireRecord(await readJson(resolve(root, `src/objects/${entry.host}/object.json`), `${entry.host}: no descriptor`), `${entry.host} descriptor`);
-  const { files, report } = surfaceMapFiles(route.kind, entry, star, maps, { content, text, manifest, raster, descriptor });
+  const { files, report, opensOn } = surfaceMapFiles(route.kind, entry, star, maps, { content, text, manifest, raster, descriptor });
+  // A natural view is the page's default dataset: a new one, or the same one over another map, is a new arrival view.
+  const shownBefore = requireRecord(content.datasets, `${entry.host} content datasets`).defaultDataset, shownNow = requireRecord((JSON.parse(files.get(`src/objects/${entry.host}/source/content/object.json`)!) as Json).datasets, 'datasets').defaultDataset;
+  let redrawn = opensOn !== undefined;
+  if (!redrawn && route.kind.natural && shownNow === shownBefore) for (const [path, value] of files) if (path.endsWith('.dat') && await readFile(resolve(root, path), 'utf8').catch(() => '') !== value) redrawn = true;
   if (tilts) files.set(star.rotationRecord, `${JSON.stringify(route.tiltedRotation!(rotation, place, maps[0]!), null, 2)}\n`);
   // The catalogue records the maps are bound to are written once and then kept, with the day they were checked.
   for (const [path, value] of route.sourceRecords(new Date().toISOString().slice(0, 10))) if (!await stat(resolve(root, path)).then(() => true, () => false)) files.set(path, value);
   for (const [path, value] of await route.starRecords?.(root, entry.host, maps) ?? []) files.set(path, value);
   for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
-  return { host: entry.host, maps: maps.length, files: files.size, ...(tilts ? { tilted: true } : {}), report: tilts ? `${report}; the page's axis is now tilted ${maps[0]!.inclinationDegrees}° as the maps are` : report };
+  return { host: entry.host, maps: maps.length, files: files.size, ...(tilts ? { tilted: true } : {}), ...(redrawn ? { redrawn: true } : {}), report: tilts ? `${report}; the page's axis is now tilted ${maps[0]!.inclinationDegrees}° as the maps are` : redrawn ? `${report}; the page now opens on ${String(shownNow)}` : report };
 }
 
 /** Every star of a spec file, written. One that fails is reported with its reason and the rest go on. */
@@ -69,26 +74,28 @@ export async function runSurfaceMaps<M extends SurfaceMap>(route: MapRoute<M>, s
 /** How many stars one bake command takes: a command line stays short, and a failure costs one group. */
 export const BAKE_GROUP = 40;
 /** Bake the stars whose maps were written: their baked files and source downloads restored, then each star's chain through
- * its page text, since a map is a new surface image.
- * A star whose default view is unchanged is then pinned: the steps between (markers, arrival billboard, world context,
- * systems, catalogues) show that view. A star whose axis was tilted has a new default view, so its stored arrival picture
- * is removed before the bake (the catalogue step refuses a picture of another view) and the rest of its chain is left to
- * run once the site is restarted: the running site holds the reader text it started with. */
+ * its page text, since a map is a new surface image. A star whose default view is unchanged is then pinned: the steps
+ * between (markers, arrival billboard, world context, systems, catalogues) show that view. A star whose axis was tilted, or
+ * whose page opens on a new picture, has a new default view: its stored arrival picture is removed before the bake and the
+ * rest of its chain is left to run once the site is restarted, because the running site holds the reader text it started with. */
 export async function bakeSurfaceMaps(results: readonly SurfaceMapResult[], { root, progress }: RouteContext): Promise<boolean> {
-  const hosts = [...new Set(results.map(result => result.host))], tilted = [...new Set(results.filter(result => result.tilted).map(result => result.host))], kept = hosts.filter(host => !tilted.includes(host));
-  for (const host of tilted) await rm(resolve(root, 'src/objects', host, 'prepared/arrival-billboard.json'), { force: true });
+  const hosts = [...new Set(results.map(result => result.host))], changed = [...new Set(results.filter(result => result.tilted || result.redrawn).map(result => result.host))], kept = hosts.filter(host => !changed.includes(host));
   const groups = (ids: readonly string[]) => Array.from({ length: Math.ceil(ids.length / BAKE_GROUP) }, (_, i) => ids.slice(i * BAKE_GROUP, (i + 1) * BAKE_GROUP));
   const run = async (args: readonly string[]) => { progress(`== ${args.join(' ')}`);
     const code = await new Promise<number | null>(done => { spawn('node', args, { cwd: root, stdio: ['ignore', 2, 2] }).on('error', () => done(null)).on('close', done); });
     if (code !== 0) progress(`FAILED: node ${args.join(' ')}`); return code === 0; };
   // A star's bake reads every input its manifest declares, and its inventory keeps only the baked files the checkout holds:
   // the star's baked files and the downloads a checkout lacks are restored first.
-  for (const group of groups(hosts)) for (const args of [['packages/bake/cli/setup-assets.mts', ...group.map(host => `--object=${host}`)], ['packages/bake/cli/restore-source-inputs.mts', ...group.map(host => `--object=${host}`)], ['packages/bake/cli/prepare-object.mts', ...group, '--to', 'text']]) if (!await run(args)) return false;
+  for (const group of groups(hosts)) for (const args of [['packages/bake/cli/setup-assets.mts', ...group.map(host => `--object=${host}`)], ['packages/bake/cli/restore-source-inputs.mts', ...group.map(host => `--object=${host}`)]]) if (!await run(args)) return false;
+  // A star with a new default view: its arrival record and world billboard are of the old one, and the restore above put them
+  // back. They go before the bake (the catalogue step refuses a picture of another view) and are taken again from the running site.
+  for (const host of changed) { await rm(resolve(root, 'src/objects', host, 'prepared/arrival-billboard.json'), { force: true }); await rm(resolve(root, 'site/public/scenes', host, `${host}-billboard.webp`), { force: true }); }
+  for (const group of groups(hosts)) if (!await run(['packages/bake/cli/prepare-object.mts', ...group, '--to', 'text'])) return false;
   // The prepare step clears a star's world billboard and the skipped billboard step would write it again: it is made here
   // from the arrival photograph the star keeps.
   for (const host of kept) await writeWorldBillboard(root, host);
   for (const group of groups(kept)) if (!await run(['packages/bake/cli/prepare-object.mts', ...group, '--from', 'pins'])) return false;
-  if (tilted.length) progress(`The axis of ${tilted.join(', ')} changed. Restart the running site, then: node packages/bake/cli/prepare-object.mts ${tilted.join(' ')} --from billboard`);
+  if (changed.length) progress(`The default view of ${changed.length} star(s) changed. Restart the running site, then: node packages/bake/cli/prepare-object.mts ${changed.join(' ')} --from billboard`);
   return true;
 }
 

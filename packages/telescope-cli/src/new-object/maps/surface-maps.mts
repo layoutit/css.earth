@@ -22,6 +22,10 @@ export interface MapScale { readonly minimum: number; readonly maximum: number; 
 /** Every sentence of one map's records. */
 export interface MapWords { readonly productId: string; readonly inputTitle: string; readonly credit: string; readonly displayCredit: string; readonly license: string; readonly licenseEvidence: readonly string[]; readonly acquisition: string; readonly redistribution: string;
   readonly description: string; readonly surfaceTitle: string; readonly qualification: string; readonly notes: string; readonly legendNote: string; readonly text: { readonly title: string; readonly detail: string; readonly summary: string } }
+/** A map drawn again in the star's own color, as the dataset the page opens on: the same table, a palette that runs from the
+ * color dimmed to the color itself, the limb of the star's first dataset, and no legend. */
+export interface NaturalView { readonly id: string; readonly label: string; readonly minimum: number; readonly maximum: number; readonly colors: readonly string[];
+  readonly description: string; readonly surfaceTitle: string; readonly qualification: string; readonly notes: string; readonly text: { readonly title: string; readonly detail: string; readonly summary: string } }
 export interface MapKind<M extends SurfaceMap> {
   /** The name the kind's surfaces and inputs carry, by which a later run finds and replaces them. */ readonly consumer: string;
   /** Where its tables go under the star's `source/`, and the middle of its manifest input ids. */ readonly directory: string; readonly inputTag: string; readonly stepGroup: string;
@@ -34,6 +38,8 @@ export interface MapKind<M extends SurfaceMap> {
   report(maps: readonly M[], scale: MapScale): string;
   /** Whether a map's page draws the star at the map's tilt, so the latitude the star never shows may be outlined. Left out: it does. */
   outlines?(map: M): boolean;
+  /** The newest map in the star's own color, when the kind's maps are how the star looks: the page then opens on it. */
+  natural?(map: M, star: { readonly id: string; readonly name: string; readonly colorHex: string }): NaturalView;
 }
 
 /** True for a rotation record that draws a star's axis by convention alone, with no measured tilt. */
@@ -55,9 +61,9 @@ export function parseSurfaceMaps(value: unknown, key: string, what: string): Sur
   return entries;
 }
 
-export interface MapDatasetFiles { readonly files: Map<string, string>; readonly report: string }
+export interface MapDatasetFiles { readonly files: Map<string, string>; readonly report: string; /** The dataset the page now opens on, when the maps changed it. */ readonly opensOn?: string }
 /** The records of one star's maps. `host` holds the star's records as they are; maps written by an earlier run are replaced. */
-export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: SurfaceMapEntry, star: { readonly id: string; readonly name: string }, maps: readonly M[], host: { readonly content: Json; readonly text: Json; readonly manifest: Json; readonly raster: Json; readonly descriptor: Json }): MapDatasetFiles {
+export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: SurfaceMapEntry, star: { readonly id: string; readonly name: string; readonly colorHex?: string }, maps: readonly M[], host: { readonly content: Json; readonly text: Json; readonly manifest: Json; readonly raster: Json; readonly descriptor: Json }): MapDatasetFiles {
   if (maps.length !== entry.maps.length) throw new RangeError(`${star.id}: ${maps.length} reduced maps for ${entry.maps.length} entries.`);
   const at = `src/objects/${star.id}`, files = new Map<string, string>(), ids = new Set(entry.maps.map(map => map.id)), scale = kind.scale(maps), labels = [...scale.labels];
   const raster = structuredClone(host.raster), surfaces = requireArray(raster.surfaces, `${star.id} raster surfaces`).map(surface => requireRecord(surface, `${star.id} raster surface`)), first = surfaces[0];
@@ -89,18 +95,34 @@ export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: S
       legendNote: words.legendNote });
     texts[choice.id] = { ...words.text };
   }
+  // The newest map again, in the star's color: one more surface of the same table, first in the list and the page's default.
+  const newest = maps.at(-1), natural = newest && kind.natural && star.colorHex ? kind.natural(newest, { id: star.id, name: star.name, colorHex: star.colorHex }) : undefined;
+  if (natural && newest) { const path = `${kind.directory}/${newest.choice.program}.dat`, inputId = `${star.id}-${kind.inputTag}-${newest.choice.id}`;
+    if (ids.has(natural.id)) throw new Error(`${star.id}: a map is listed under the id ${natural.id}, which is the id of the star drawn in its own color.`);
+    if (surfaces.some(surface => surface.id === natural.id && !(isRecord(surface.science) && surface.science.consumer === kind.consumer))) throw new Error(`${star.id}: dataset ${natural.id} already exists and is not one of these maps.`);
+    ids.add(natural.id);
+    newSurfaces.push({ id: natural.id, output: first.output, thumbnail: first.thumbnail, source: path, falseColor: false, science: { kind: 'terrestrial-scientific', id: natural.id, label: natural.label, format: 'tecplot-lonlat-map', path, variable: kind.variable,
+      consumer: kind.consumer, sampling: 'bilinear', displaySampling: 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: natural.minimum, maximum: natural.maximum, colors: [...natural.colors], labels: [`${natural.minimum}${kind.units}`, `${natural.maximum}${kind.units}`],
+      limbOf: first.id, description: natural.description, title: natural.surfaceTitle, sourceUrl: kind.archiveUrl } });
+    newControls.unshift({ id: natural.id, label: natural.label, qualification: natural.qualification, thumbnail: `${star.id}-dataset-${natural.id}.webp`, surface: `${star.id}-surface-${natural.id}@2x.webp`, poles: `${star.id}-poles-${natural.id}@2x.webp`,
+      source: { id: inputId, path: '../manifest.json', url: kind.archiveUrl }, falseColor: false, notes: natural.notes });
+    texts[natural.id] = { ...natural.text }; }
   const ours = (record: Json) => isRecord(record.science) && record.science.consumer === kind.consumer, oursInput = (input: Json) => Array.isArray(input.consumers) && input.consumers.includes(kind.consumer);
   const dropped = new Set(surfaces.filter(ours).map(surface => requireString(surface.id, 'surface id')).filter(id => !ids.has(id)));
   // The descriptor declares each surface dataset the page prepares, the way it declares the star's first one.
   const descriptor = structuredClone(host.descriptor), declared = requireArray(requireRecord(requireRecord(descriptor.properties, `${star.id} descriptor properties`).recipe, `${star.id} descriptor recipe`).surfaces, `${star.id} descriptor surfaces`).map(surface => requireRecord(surface, `${star.id} descriptor surface`));
   const body = declared.find(surface => Array.isArray(surface.datasets) && surface.datasets.some(dataset => isRecord(dataset) && dataset.id === first.id)), listed = body && requireArray(body.datasets, `${star.id} descriptor datasets`).map(dataset => requireRecord(dataset, `${star.id} descriptor dataset`)), like = listed?.find(dataset => dataset.id === first.id);
   if (!body || !listed || !like) throw new Error(`${star.id}: its descriptor does not declare the dataset ${String(first.id)} to take a new dataset's declaration from.`);
-  body.datasets = [...listed.filter(dataset => !ids.has(requireString(dataset.id, 'declared dataset id')) && !dropped.has(requireString(dataset.id, 'declared dataset id'))), ...entry.maps.map(map => ({ ...like, id: map.id }))];
+  body.datasets = [...listed.filter(dataset => !ids.has(requireString(dataset.id, 'declared dataset id')) && !dropped.has(requireString(dataset.id, 'declared dataset id'))), ...entry.maps.map(map => ({ ...like, id: map.id })), ...(natural ? [{ ...like, id: natural.id }] : [])];
   files.set(`${at}/object.json`, json(descriptor));
   raster.surfaces = [...surfaces.filter(surface => !ours(surface)), ...newSurfaces];
   manifest.inputs = [...inputs.filter(input => !oursInput(input)), ...newInputs];
-  shown.controls = [...controls.filter(control => !ids.has(requireString(control.id, 'control id')) && !dropped.has(requireString(control.id, 'control id'))), ...newControls];
+  // A kind with a natural view puts it and its maps before the star's other datasets; any other kind's maps follow them.
+  const others = controls.filter(control => !ids.has(requireString(control.id, 'control id')) && !dropped.has(requireString(control.id, 'control id')));
+  shown.controls = natural ? [...newControls, ...others] : [...others, ...newControls];
+  const opened = shown.defaultDataset, opensOn = natural ? natural.id : typeof opened === 'string' && dropped.has(opened) ? requireString(first.id, 'surface id') : undefined;
+  if (opensOn !== undefined) shown.defaultDataset = opensOn;
   for (const id of dropped) delete texts[id];
   files.set(`${at}/source/preparation/raster.json`, json(raster)); files.set(`${at}/source/manifest.json`, json(manifest)); files.set(`${at}/source/content/object.json`, json(content)); files.set(`${at}/text.json`, json(text));
-  return { files, report: kind.report(maps, scale) };
+  return { files, report: kind.report(maps, scale), ...(opensOn !== undefined && opensOn !== opened ? { opensOn } : {}) };
 }

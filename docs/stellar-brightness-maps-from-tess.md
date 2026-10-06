@@ -97,6 +97,24 @@ For AU Microscopii in sector 95 the pixels give a period of 4.85 days (the NASA 
 of 8.5%. The map's curve leaves a scatter of 0.51% about the light, where the light's own noise is 0.17%: spots that change
 during the sector, and flares, are not in a map of one fixed surface.
 
+## What the page opens on
+
+A star with a brightness map opens on **Color + brightness**: the star's own color, each part of the surface dimmed to
+its share of the brightest part's light in the map. The page then lists the **Brightness map** itself, on a gray scale
+with its legend, and the flat **Color** the star had.
+
+| Drawn | From |
+| --- | --- |
+| Which longitudes are darker, and by how much | The light curve. The contrast is the map's own, with nothing added: a star whose light swings by 1% looks almost uniform |
+| The color | The star's Color dataset. The brightest part is drawn at that color, which is already as bright as a display color goes, and the rest darker |
+| The darkening toward the edge | The Color dataset's limb law, the same plate |
+| The latitude and shape of each patch | Not measured: the smoothest map that reproduces the light |
+| Any change of color inside a spot | Not drawn: none is measured. Spots are cooler and redder, and TESS sees red light, where they contrast less than in blue |
+
+A dimming is a share of light, and a display value is not linear in light: the palette's stops are computed in linear light
+and encoded for the display, so half the light is drawn at 188 of 255, not 128. The dataset's text gives the month the
+sector was observed, because spots come and go within weeks or months.
+
 ## Running it
 
 ```sh

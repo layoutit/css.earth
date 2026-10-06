@@ -7,6 +7,7 @@
  *
  * Every sentence says what the map is: made here, from a light curve, which fixes how bright each longitude is and not
  * where on it the spots lie in latitude. A map made at an assumed tilt says so. */
+import { linearToSrgb, srgbToLinear } from '@cssearth/bake/photometry';
 import { isRecord, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { scaleEnd, type MapKind, type SurfaceMap, type SurfaceMapChoice } from '../maps/surface-maps.mts';
 
@@ -36,13 +37,28 @@ export function brightnessSourceRecords(checkedOn: string): Map<string, string> 
 /** What a map's receipt says of it, read once and checked. */
 export interface BrightnessSurfaceMap extends SurfaceMap { readonly sector: number; /** The light's swing as the star turns, peak to peak, as a share of its mean. */ readonly amplitude: number;
   /** The map's own range, percent of its mean. */ readonly darkestPercent: number; readonly brightestPercent: number; /** Scatter of the light about the map's curve, and the light's noise. */ readonly residual: number; readonly noise: number;
+  /** When the sector's light was measured: its first and last days, UTC. */ readonly fromUtc: string; readonly toUtc: string;
   /** The light's own strongest period, when it is half the catalogued rotation and the star is taken to turn once in two of them. */ readonly lightPeriodDays?: number;
   /** The share of the light in the star's pixels that Gaia's other stars give, and how many they are. */ readonly neighbourShare: number; readonly neighbours: number;
   /** Where the map's tilt comes from: the measured axis the page draws, the tilt the star's record works out, or none. */ readonly tiltFrom: 'page' | 'record' | 'assumed'; readonly codes: readonly string[] }
 
 export const brightnessChoice = (star: string, sector: number): SurfaceMapChoice => ({ program: `${star}-s${String(sector).padStart(4, '0')}`, id: `brightness-sector-${sector}`, label: `Sector ${sector}` });
 
-export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, table: string): BrightnessSurfaceMap {
+/** A TESS time (barycentric Julian date less 2,457,000) as a UTC day. */
+export const tessDay = (btjd: number) => new Date((btjd + 2457000 - 2440587.5) * 86400000).toISOString().slice(0, 10);
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] as const;
+/** The month, or the two months, a sector's light spans. */
+export function monthsOf(fromUtc: string, toUtc: string): string { const [a, b] = [fromUtc, toUtc].map(day => ({ year: day.slice(0, 4), month: MONTHS[Number(day.slice(5, 7)) - 1]! }));
+  return a!.year === b!.year && a!.month === b!.month ? `${a!.month} ${a!.year}` : a!.year === b!.year ? `${a!.month} and ${b!.month} ${a!.year}` : `${a!.month} ${a!.year} and ${b!.month} ${b!.year}`; }
+/** How many stops the star's color is dimmed through: a brightness is a share of light, and a display value is not linear in it. */
+const COLOR_STOPS = 5;
+/** A color dimmed to a share of its light, as a display color. */
+export function dimmed(colorHex: string, share: number): string {
+  return `#${[1, 3, 5].map(at => Math.round(Math.max(0, Math.min(255, linearToSrgb(srgbToLinear(Number.parseInt(colorHex.slice(at, at + 2), 16)) * share)))).toString(16).padStart(2, '0')).join('')}`; }
+
+/** `curve` is the sector's light curve as the reduction kept it: its times date the map. */
+export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, table: string, curve: unknown): BrightnessSurfaceMap {
+  const times = requireRecord(curve, `${choice.program} light curve`).time; if (!Array.isArray(times) || times.length < 2 || !times.every(time => typeof time === 'number')) throw new TypeError(`${choice.program}: its light curve holds no times; reduce the star again.`);
   const record = requireRecord(receipt, `${choice.program} receipt`), star = requireRecord(record.star, 'receipt star'), rotation = requireRecord(record.rotation, 'receipt rotation'), map = requireRecord(record.map, `${choice.program}: the receipt holds no map`);
   if (rotation.detected !== true) throw new Error(`${choice.program}: the star's rotation is not seen (${String(rotation.reason ?? 'no reason given')}).`);
   const toolchain = isRecord(record.toolchain) && Array.isArray(record.toolchain.requirements) ? record.toolchain.requirements.map(String) : [], lightkurve = toolchain.find(pin => pin.startsWith('lightkurve')) ?? 'lightkurve';
@@ -51,7 +67,7 @@ export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, ta
   const tiltFrom = map.inclinationFrom; if (tiltFrom !== 'page' && tiltFrom !== 'record' && tiltFrom !== 'assumed') throw new TypeError(`${choice.program}: its receipt does not say where the map's tilt comes from; reduce the star again.`);
   if (map.table !== `${choice.program}.dat` || !table.includes('ZONE I=')) throw new TypeError(`${choice.program}: the receipt and the table do not describe one map.`);
   return { choice, table, targetName: requireString(star.name, 'receipt star name'), inclinationDegrees: requireFiniteNumber(map.inclinationDegrees, 'map inclination'), inclinationSource: source, periodDays: period,
-    periodSource: `measured here from the star's light in TESS sector ${sector} (${BRIGHTNESS_GENERATOR})`, sector, amplitude: requireFiniteNumber(rotation.amplitude, 'rotation amplitude'), darkestPercent: requireFiniteNumber(map.darkestPercent, 'darkestPercent'),
+    periodSource: `measured here from the star's light in TESS sector ${sector} (${BRIGHTNESS_GENERATOR})`, sector, fromUtc: tessDay(times[0] as number), toUtc: tessDay(times.at(-1) as number), amplitude: requireFiniteNumber(rotation.amplitude, 'rotation amplitude'), darkestPercent: requireFiniteNumber(map.darkestPercent, 'darkestPercent'),
     brightestPercent: requireFiniteNumber(map.brightestPercent, 'brightestPercent'), residual: requireFiniteNumber(map.residual, 'residual'), noise: requireFiniteNumber(map.noise, 'noise'), ...(typeof rotation.lightPeriodDays === 'number' ? { lightPeriodDays: rotation.lightPeriodDays } : {}), neighbourShare: requireFiniteNumber(light.neighbourShare, 'neighbourShare'), neighbours: requireFiniteNumber(light.neighbours, 'neighbours'), tiltFrom,
     codes: [lightkurve.replace('==', ' '), `starry ${requireString(map.starry, 'starry version')}`] };
 }
@@ -64,7 +80,7 @@ export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
   consumer: BRIGHTNESS_CONSUMER, directory: BRIGHTNESS_DIRECTORY, generator: BRIGHTNESS_GENERATOR, inputTag: 'tess-map', stepGroup: 'brightness', variable: 'Brightness [%]', units: '%', controlLabel: 'Brightness map', legendTitle: 'Surface brightness',
   archiveUrl: TESS_ARCHIVE.pixels, references: [{ catalogueId: PIXELS_RECORD, role: 'material', evidence: TESS_ARCHIVE.pixels }, { catalogueId: METHOD_RECORD, role: 'method', evidence: METHOD_URL }, { catalogueId: GAIA_RECORD, role: 'reference', evidence: GAIA_URL }], colors: COLORS, palette: PALETTE,
   scale(maps) { const reach = scaleEnd(Math.max(...maps.flatMap(map => [100 - map.darkestPercent, map.brightestPercent - 100]))); return { minimum: 100 - reach, maximum: 100 + reach, labels: [`${100 - reach}%`, '100%', `${100 + reach}%`] }; },
-  words(map, { count, epochs, tilt, outlined }) { const { choice } = map, swing = `${percent(map.amplitude)}%`, turn = days(map.periodDays);
+  words(map, { count, tilt, outlined }) { const { choice } = map, swing = `${percent(map.amplitude)}%`, turn = days(map.periodDays);
     const tilted = map.tiltFrom === 'assumed' ? `No tilt of this star's axis is known: the map is made at ${tilt}°, the middle tilt of axes that point at random.`
       : map.tiltFrom === 'record' ? `The map is made at a tilt of ${tilt}°, worked out from the star's rotation speed, period and radius.` : `The map is made at the tilt the page draws the star with, ${tilt}°.`;
     const outline = outlined ? ` Black line: ${tilt}° S; the star never shows us what lies below it.` : '';
@@ -80,8 +96,18 @@ export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
       surfaceTitle: `TESS · brightness map made here · ${choice.label}`, qualification: `Mapped in this project · TESS full-frame images, ${choice.label.toLowerCase()}`,
       notes: `Where the star's surface was darker and brighter in TESS ${choice.label.toLowerCase()}, worked out in this project from how its light rose and fell by ${swing} as it turned once in ${turn}. The light curve is measured from the mission's images with lightkurve, and starry finds the map that reproduces it. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not.${halved} ${tilted}${count > 1 ? ` Step through the ${count} maps to see the spots change.` : ''}`,
       legendNote: `Darker: dimmer than the star's mean surface; white: brighter.${outline}`,
-      text: { title: `Brightness map, ${choice.label}`, detail: `${epochs}, mapped here`, summary: 'Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns.' } }; },
+      text: { title: `Brightness map, ${choice.label}`, detail: `${monthsOf(map.fromUtc, map.toUtc)}, mapped here`, summary: 'Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns.' } }; },
   // Only a page that measures the star's axis draws the star at the map's tilt.
   outlines: map => map.tiltFrom === 'page',
+  // The star as TESS's light says it looked: its own color, each longitude as bright as the map says, at the measured contrast.
+  // The brightest part is drawn at the star's color, which is already as bright as a display color goes.
+  natural(map, star) { const when = monthsOf(map.fromUtc, map.toUtc), darkest = Number((100 * (1 - map.darkestPercent / map.brightestPercent)).toFixed(1));
+    const colors = Array.from({ length: COLOR_STOPS }, (_, i) => dimmed(star.colorHex, (map.darkestPercent + (map.brightestPercent - map.darkestPercent) * i / (COLOR_STOPS - 1)) / map.brightestPercent));
+    const halved = map.lightPeriodDays === undefined ? '' : ` The light repeats every ${days(map.lightPeriodDays)}, half the catalogued rotation period, and the star is taken to turn once in two of them.`;
+    return { id: 'color-brightness', label: 'Color + brightness', minimum: map.darkestPercent, maximum: map.brightestPercent, colors,
+      description: `The star's color (${star.colorHex}, its Color dataset), each part of the surface dimmed to its share of the brightest part's light in the brightness map this project made from the star's light in TESS sector ${map.sector} (${when}): ${darkest}% dimmer at the darkest, the map's own contrast. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.`,
+      surfaceTitle: `TESS · the star in its color, as bright as its light says · ${when}`, qualification: `The star's color, dimmed where TESS saw it dimmer · ${when}, mapped in this project`,
+      notes: `${map.targetName} in its own color, with each longitude as bright as its light in TESS's images of ${when} says. As the star turned once in ${days(map.periodDays)} its light rose and fell by ${percent(map.amplitude)}%; the map that reproduces it is drawn at its own contrast, the darkest part ${darkest}% dimmer than the brightest, which is drawn at the star's color.${halved} The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. Spots are cooler and redder than the rest of a star, and TESS sees red light, where they contrast less than in blue; no change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's.`,
+      text: { title: 'Color + brightness', detail: `As TESS saw it, ${when}`, summary: 'The star in its own color, with the darker and brighter longitudes its light shows, at their measured contrast.' } }; },
   report(maps, scale) { const count = maps.length; return `${count} brightness ${count === 1 ? 'map' : 'maps'} on one scale of ${scale.minimum}% to ${scale.maximum}% (${maps.map(map => `${map.choice.label}: turns in ${days(map.periodDays)}, light swings ${percent(map.amplitude)}%`).join('; ')})`; },
 };
