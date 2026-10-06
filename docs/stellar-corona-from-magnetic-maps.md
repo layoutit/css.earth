@@ -21,7 +21,7 @@ Wood et al. print the slope of their relation and no starting value. The generat
 median of the paper's own Table 3: the 11 single main-sequence stars whose wind was detected through their astrosphere. That
 line gives the Sun's mass loss per unit surface at F_X = 10^4.53 erg s⁻¹ cm⁻². The 11 stars lie about it with an rms of 0.69
 dex, a factor of 5; the farthest below, π¹ UMa, is 38 times under it
-([`models.test.mts`](../packages/bake/src/objects/stellar/corona/models.test.mts) holds the rows and recomputes these numbers).
+([`corona.test.mts`](../packages/bake/src/objects/stellar/corona/corona.test.mts) holds the rows and recomputes these numbers).
 
 ## What is computed
 
