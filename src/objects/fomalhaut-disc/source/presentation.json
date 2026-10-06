@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "fomalhaut-disc",
+  "name": "Fomalhaut dust ring",
+  "defaultDataset": "dust",
+  "bank": {
+    "path": "src/objects/fomalhaut-disc/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "dust",
+      "path": "src/objects/fomalhaut-disc/source/volume-dust.json"
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "datasets": [
+    {
+      "id": "dust",
+      "label": "ALMA · dust ring, 1.3 mm",
+      "title": "The dust ring around Fomalhaut in its own glow at 1.3 millimetres, from ALMA",
+      "description": "ALMA observed Fomalhaut seven times, four on 29 and 30 December 2015 and three on 14 January 2016, at 1.3 millimetres, in seven pointings because the belt is wider than one antenna's field of view. What it sees is the dust's own faint heat, not starlight. This is the image the ARI-L project made from those observations for the public archive, brought to the resolution of the image MacGregor et al. (2017) made from them and shown in the color map and scale of their Figure 1. ARI-L images are meant to show what the data hold, not as final science images; at that resolution this one's ring peaks within 8% of the brightness cuts MacGregor et al. plot. The star's own glow at the centre and the background galaxy MacGregor et al. find south-east of the star are removed with the fluxes they fit, so neither is drawn as dust. The belt is eccentric: MacGregor et al. fit an eccentricity of 0.12, and on this image its centre lies 14 au north of the star. The image has no third axis, so the depth is inferred: a tilted ring of the geometry measured on the image projects to it better than a spherical shell or a constant depth, and each line of sight is placed on that ring. The ring's plane is drawn through the star, which puts its centre 12 au nearer than the star. Its thickness is the opening angle of about 1° that MacGregor et al. cite from Boley et al. (2012), and its east side is drawn nearer, as Kalas et al. (2013) read the starlight the dust scatters. The star itself is the sphere at the centre.",
+      "summary": "The narrow belt of dust around the star, 136 au along its long half-axis, in its own glow at 1.3 mm, as ALMA imaged it. Its centre lies 14 au off the star.",
+      "detail": "2015-12-29T22:53:51.840000, 190.0 mas pixels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "ALMA 12-m array, a seven-pointing mosaic in a compact configuration, 29 and 30 December 2015 and 14 January 2016: b6-cont"
+        },
+        {
+          "id": "color",
+          "label": "Color",
+          "value": "Brightness in µJy/beam, from 0 to 800, in the publisher's color map"
+        },
+        {
+          "id": "ring",
+          "label": "Ring measured here",
+          "value": "136 au, tilted 67°, nodes at position angle 157°; published 136.3 au, 65.6°, 337.9°"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "0 to 230 au; the light reaches the noise at 178 au"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; the inclined ring that best projects to the images, with its east side nearer by convention"
+        }
+      ],
+      "input": "dust-b6-cont",
+      "preview": {
+        "path": "src/objects/fomalhaut-disc/source/previews/dust.png",
+        "authoredFrom": "dust-b6-cont"
+      }
+    }
+  ]
+}
