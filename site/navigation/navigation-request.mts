@@ -100,3 +100,15 @@ export function resolveNavigation(intent: NavigationIntent, { object, objects, n
     scene: current.reuseScene ? 'reuse' : 'replace', origin: linked ? 'link' : 'selection', feature: selection.feature },
   centeredObjectId: center && (view !== 'system' || ofMoons) ? object.id : null };
 }
+
+/** How a flight that failed is tried again as an ordinary page load of its address, or null when it is not. A tab opened
+ * before a deploy still runs that build's scripts: they reject the new build's object files, and the script files they
+ * have not loaded yet are gone from the server. A page load brings the current build. Only a flight to another object
+ * reads those files. A cancelled flight did not fail, and an offline reader keeps the scene they have. The load writes
+ * history as the flight would have: a new entry, or the current one for Back and for a flight that replaces its entry. */
+export function failedFlightPageLoad(request: Pick<ResolvedNavigation, 'id' | 'scene' | 'history'>, error: unknown,
+  fromId: string | undefined, online: boolean): 'assign' | 'replace' | null {
+  if (request.scene !== 'replace' || request.id === fromId || !online) return null;
+  if (error instanceof Error && error.name === 'AbortError') return null;
+  return request.history.history === 'push' ? 'assign' : 'replace';
+}

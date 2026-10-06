@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { requireObject } from '../objects.mts';
 import { subjectView } from '../scene/scene-subject.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
-import { resolveNavigation } from './navigation-request.mts';
+import { failedFlightPageLoad, resolveNavigation } from './navigation-request.mts';
 
 test('a body without a hosted system opens detail on the first click', () => {
   for (const id of ['venus', 'mercury']) {
@@ -82,4 +82,19 @@ test('a showcase hop frames the body itself; its first hop is a history entry an
   }
   assert.deepEqual(first.destination.history, { history: 'push' });
   assert.deepEqual(next.destination.history, { history: 'replace' });
+});
+
+test('a failed flight to another object is tried again as a page load, written to history as the flight would have been', () => {
+  const stale = new TypeError('Invalid prepared leaf texture binding.');
+  const flight = (history: Parameters<typeof failedFlightPageLoad>[0]['history'], error: unknown = stale,
+    { id = 'vhk-45', scene = 'replace' as 'replace' | 'reuse', online = true } = {}) =>
+    failedFlightPageLoad({ id, scene, history }, error, 'm33', online);
+  assert.equal(flight({ history: 'push' }), 'assign');
+  assert.equal(flight({ history: 'replace' }), 'replace');
+  assert.equal(flight({ history: 'pop', entry: 'entry-1' }), 'replace');
+  // A cancelled flight did not fail; an offline reader keeps the scene; the mounted object's own selections read no other object's files.
+  assert.equal(flight({ history: 'push' }, new DOMException('Object flight was cancelled.', 'AbortError')), null);
+  assert.equal(flight({ history: 'push' }, stale, { online: false }), null);
+  assert.equal(flight({ history: 'push' }, stale, { scene: 'reuse' }), null);
+  assert.equal(flight({ history: 'push' }, stale, { id: 'm33' }), null);
 });
