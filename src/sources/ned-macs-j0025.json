@@ -1,0 +1,36 @@
+{
+  "id": "ned-macs-j0025",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "NASA/IPAC Extragalactic Database: MACS J0025.4-1222",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222",
+      "label": "NED, MACS J0025.4-1222"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222",
+      "checkedOn": "2026-10-05",
+      "locator": "NED preferred values of MACS J0025.4-1222: RA 6.372420833°, Dec -12.37696111° (2011MNRAS.410.1939Z); redshift 0.584 (2024A&A...690A.322K)"
+    }
+  ],
+  "publisher": "NASA/IPAC Extragalactic Database",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "limitation",
+      "text": "Position and redshift are NED's preferred values with the reference codes it gives (2011MNRAS.410.1939Z, 2024A&A...690A.322K); this record does not claim independent review of those papers.",
+      "scope": "citation",
+      "evidence": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "macs-j0025-layers",
+  "name": "MACS J0025",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/macs-j0025-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/macs-j0025-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/macs-j0025-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Chandra · Hubble · composite",
+      "title": "Gas and mass of MACS J0025",
+      "description": "The 2008 composite of MACS J0025.4-1222 in its layers: Chandra's X-ray image of the hot gas in pink and the mass map from gravitational lensing in blue. Each is drawn as a body round the line through the two mass peaks of Bradač et al. (2008): a symmetry the paper's head-on collision implies, not a measured depth. The Hubble picture, with its stars and galaxies removed, stands flat at the cluster's distance.",
+      "summary": "Pink is X-ray gas and blue is the lensing mass map, each drawn round the line of the collision. Their depth is not measured.",
+      "detail": "4200 × 4143 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Pink: hot gas in X-rays (Chandra). Blue: mass from gravitational lensing (Hubble)"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4200 × 4143"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "3.27 × 3.22 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "No copyright asserted (Chandra X-ray Center); credit requested"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/macs-j0025-layers/source/macs.jpg",
+        "url": "https://chandra.harvard.edu/photo/2008/macs/macs.jpg"
+      }
+    }
+  ]
+}

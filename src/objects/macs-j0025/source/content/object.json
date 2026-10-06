@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "macs-j0025",
+  "displayName": "MACS J0025",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance (comoving)",
+        "value": "2,222 Mpc, 7.2 billion light years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; the Planck18 parameters as Astropy defines them",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "redshift",
+        "label": "Redshift",
+        "value": "0.584",
+        "source": {
+          "catalogueId": "ned-macs-j0025",
+          "url": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222",
+          "label": "NASA/IPAC Extragalactic Database (NED), MACS J0025.4-1222: position from 2011MNRAS.410.1939Z, redshift from 2024A&A...690A.322K",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "light-travel",
+        "label": "Light travel time",
+        "value": "5.78 billion years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; the Planck18 parameters as Astropy defines them",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 6.3724°, Dec -12.3770°",
+        "source": {
+          "catalogueId": "ned-macs-j0025",
+          "url": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222",
+          "label": "NASA/IPAC Extragalactic Database (NED), MACS J0025.4-1222: position from 2011MNRAS.410.1939Z, redshift from 2024A&A...690A.322K",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "3.27 arcmin, 2.11 Mpc comoving at its distance",
+        "source": {
+          "catalogueId": "chandra-2008-macs-j0025-layers",
+          "url": "https://chandra.harvard.edu/photo/2008/macs/",
+          "label": "Chandra X-ray Center, MACS J0025.4-1222: X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+          "checked": "2026-10-05"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Chandra · Hubble · composite",
+        "thumbnail": "macs-j0025-dataset-optical.webp",
+        "volume": {
+          "objectId": "macs-j0025-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "macs-j0025-layers-optical",
+          "path": "../../macs-j0025-layers/source/manifest.json",
+          "url": "https://chandra.harvard.edu/photo/2008/macs/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; the Planck18 parameters as Astropy defines them",
+      "href": "https://arxiv.org/abs/1807.06209"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "NASA/IPAC Extragalactic Database (NED), MACS J0025.4-1222: position from 2011MNRAS.410.1939Z, redshift from 2024A&A...690A.322K",
+      "href": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chandra X-ray Center, MACS J0025.4-1222: X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+      "href": "https://chandra.harvard.edu/photo/2008/macs/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222",
+      "credit": "NASA/IPAC Extragalactic Database (NED), MACS J0025.4-1222: position from 2011MNRAS.410.1939Z, redshift from 2024A&A...690A.322K"
+    }
+  }
+}
