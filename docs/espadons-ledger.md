@@ -6,8 +6,8 @@ The counts are the archive's own, from one grouped query. Every state is worked 
 not reduced on this machine keeps the result recorded here. [A star's magnetic map from archived
 spectra](stellar-magnetic-maps-from-spectra.md) describes what a map is made with and what it cannot do.
 
-The archive holds 22,652 polarised spectra under 3,005 typed target names. 164 of the 3,108 stars this project ships have some: 4,831 spectra.
-81 stars have 6 or more and are listed. Mapped: 6. Reduced without a map: 0. Pinned: 0. Held: 158.
+The archive holds 22,652 polarised spectra under 3,005 typed target names. 161 of the 3,102 stars this project ships have some: 4,773 spectra.
+79 stars have 6 or more and are listed. Mapped: 6. Reduced without a map: 0. Pinned: 0. Held: 155.
 
 Spectra alone do not make a map. A star also needs its rotation period, the tilt of its axis and its projected rotation
 speed from papers, a field strong enough to detect, and spectra spread through a rotation. "Axis" says whether the star's
@@ -45,11 +45,9 @@ page already draws a measured tilt or only a display convention.
 | [helvetios](../src/objects/helvetios/README.md) | 39 | 2005 to 2014 | 51 Peg, 51Peg, 51peg | display convention | held |
 | [hd-75732](../src/objects/hd-75732/README.md) | 34 | 2012 to 2018 | 55 Cnc | display convention | held |
 | [gumala](../src/objects/gumala/README.md) | 31 | 2007 to 2009 | HD 179949, HD179949 | measured | mapped: `hd-179949-2009-09` (3.1 G) |
-| [m43](../src/objects/m43/README.md) | 31 | 2006 to 2012 | HD 37061, NU Ori, NUOri, and 1 more | none | held |
 | [aldebaran](../src/objects/aldebaran/README.md) | 30 | 2007 to 2022 | * alf Tau, HD 29139, aldebaran, and 1 more | display convention | held |
 | [sadalsuud](../src/objects/sadalsuud/README.md) | 29 | 2007 to 2011 | Beta Aqr, HD 204867 | display convention | held |
 | [cebalrai](../src/objects/cebalrai/README.md) | 26 | 2011 | HR 6603 | display convention | held |
-| [m20](../src/objects/m20/README.md) | 26 | 2011 to 2015 | HD 164492, HD 164492 C | none | held |
 | [sadalmelik](../src/objects/sadalmelik/README.md) | 26 | 2007 to 2011 | HD 209750, alpha aqr | display convention | held |
 | [yed-prior](../src/objects/yed-prior/README.md) | 25 | 2011 | HR 6056 | display convention | held |
 | [m25](../src/objects/m25/README.md) | 24 | 2008 to 2016 | BD-19 5044L | none | held |

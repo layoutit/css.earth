@@ -5,7 +5,7 @@
   "targetNames": 3005,
   "spectra": 22652
  },
- "shippedStars": 3108,
+ "shippedStars": 3102,
  "stars": [
   {
    "id": "polaris",
@@ -585,23 +585,6 @@
    ]
   },
   {
-   "id": "m43",
-   "spectra": 31,
-   "typedNames": [
-    "HD 37061",
-    "NU Ori",
-    "NUOri",
-    "hd 37061"
-   ],
-   "firstYear": 2006,
-   "lastYear": 2012,
-   "axis": "none",
-   "state": "held",
-   "programs": [],
-   "maps": [],
-   "reasons": []
-  },
-  {
    "id": "aldebaran",
    "spectra": 30,
    "typedNames": [
@@ -642,21 +625,6 @@
    "firstYear": 2011,
    "lastYear": 2011,
    "axis": "display convention",
-   "state": "held",
-   "programs": [],
-   "maps": [],
-   "reasons": []
-  },
-  {
-   "id": "m20",
-   "spectra": 26,
-   "typedNames": [
-    "HD 164492",
-    "HD 164492 C"
-   ],
-   "firstYear": 2011,
-   "lastYear": 2015,
-   "axis": "none",
    "state": "held",
    "programs": [],
    "maps": [],
@@ -2340,20 +2308,6 @@
    ],
    "firstYear": 2017,
    "lastYear": 2017,
-   "axis": "none",
-   "state": "held",
-   "programs": [],
-   "maps": [],
-   "reasons": []
-  },
-  {
-   "id": "m16",
-   "spectra": 1,
-   "typedNames": [
-    "ngc6611_W254"
-   ],
-   "firstYear": 2007,
-   "lastYear": 2007,
    "axis": "none",
    "state": "held",
    "programs": [],
