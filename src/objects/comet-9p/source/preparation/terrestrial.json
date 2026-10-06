@@ -337,6 +337,6 @@
     "qualification": "Published PDS shape model, including poorly constrained source estimates. Both views use the gray grid for source-flagged poorly constrained regions. Source constraints keeps solid gray for stereo control and blue for limb silhouettes. Grid regions lack those constraints; they are not necessarily wholly unobserved. These are evidence categories, not surface colors. The combined model pole is retained at RA 255°, Dec +64.5°. Rotational phase is arbitrary and held fixed; no encounter or current rotation reconstruction is claimed."
   },
   "presentation": {
-    "defaultDataset": "constraints"
+    "defaultDataset": "deep-impact"
   }
 }
