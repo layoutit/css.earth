@@ -16,7 +16,7 @@
  * their names state. Those come from the level-1 and level-2 event headers, read over a range request rather than downloaded,
  * and are checked against what the archive's own catalogue says about the observation.
  *
- * The catalogue is queried through PyVO at https://cda.cfa.harvard.edu/cxctap. ivoa.ObsCore is not served there; cxc.observation
+ * The catalogue is queried through PyVO at https://cda.harvard.edu/cxctap. ivoa.ObsCore is not served there; cxc.observation
  * is, and is what this route reads.
  *
  * The program is written to packages/telescope-cli/src/archives/chandra/programs/<program id>.json. */
@@ -31,7 +31,7 @@ import { tapRows, WORKSPACE } from '@cssearth/telescope/node';
 
 /** The pinned programs and their receipts sit beside this code, found through the checkout. */
 export const PROGRAMS = resolve(WORKSPACE, 'packages/telescope-cli/src/archives/chandra/programs');
-export const TAP = 'https://cda.cfa.harvard.edu/cxctap';
+export const TAP = 'https://cda.harvard.edu/cxctap';
 export const ARCHIVE = 'https://cxc.cfa.harvard.edu/cdaftp/byobsid';
 const NAME = /^[A-Za-z0-9._-]+$/u;
 /** Where the archive keeps an observation's files. Nothing outside these directories is pinned. */
