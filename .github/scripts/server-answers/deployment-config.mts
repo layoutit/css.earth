@@ -3,6 +3,7 @@ import { cp, mkdir, mkdtemp, readFile, readdir, realpath, rm, stat } from 'node:
 import { dirname, isAbsolute, posix, relative, resolve, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 import { object } from './model.mts';
+import { publicRoot } from './public-root.mts';
 export interface DeploymentConfig {
   facts: Record<string, unknown>;
   headerRules: { netlify: HeaderRule[]; assets: HeaderRule[] };
@@ -106,6 +107,7 @@ async function wranglerConfigPath(root: string): Promise<string> {
 /** Expand only the included files into a fresh directory; bundled code receives no access to the source checkout. */
 export async function packagedFunction(root: string, name: string, config: DeploymentConfig): Promise<{ root: string; bundle: string }> {
   const sourceRoot = await realpath(root), destination = await realpath(await mkdtemp(resolve(tmpdir(), `server-answers-${name}-`)));
+  const scenesPath = `${publicRoot(sourceRoot)}/scenes`;
   const patterns = config.includedByFunction[name] ?? config.included;
   const visit = (path: string) => patterns.filter(pattern => !pattern.startsWith('!')).some(pattern => {
     const parts = pattern.split('/'), directories = path.split('/');
@@ -122,16 +124,16 @@ export async function packagedFunction(root: string, name: string, config: Deplo
       const absolute = resolve(directory, entry.name), path = relative(sourceRoot, absolute).split(sep).join('/');
       if (entry.isSymbolicLink() && visit(path) && (await stat(absolute)).isDirectory()) {
         // A linked directory is followed only while it stays inside the project: one that leads out is refused at once, never walked.
-        const target = await realpath(absolute), shared = resolve(sourceRoot, 'public/scenes');
+        const target = await realpath(absolute), shared = resolve(sourceRoot, scenesPath);
         const sharedRoot = await realpath(shared).catch(() => shared);
-        if (!target.startsWith(sourceRoot + sep) && !(path.startsWith('public/scenes/') && target.startsWith(sharedRoot + sep))) throw new Error(`Included file escapes project root: ${path}`);
+        if (!target.startsWith(sourceRoot + sep) && !(path.startsWith(`${scenesPath}/`) && target.startsWith(sharedRoot + sep))) throw new Error(`Included file escapes project root: ${path}`);
         await walk(absolute);
       } else if (entry.isDirectory()) { if (visit(path)) await walk(absolute); }
       else if (matchesPatterns(path, patterns)) {
         const actual = await realpath(absolute);
-        const shared = resolve(sourceRoot, 'public/scenes');
+        const shared = resolve(sourceRoot, scenesPath);
         const sharedRoot = await realpath(shared).catch(() => shared);
-        if (!actual.startsWith(sourceRoot + sep) && !(path.startsWith('public/scenes/') && actual.startsWith(sharedRoot + sep))) throw new Error(`Included file escapes project root: ${path}`);
+        if (!actual.startsWith(sourceRoot + sep) && !(path.startsWith(`${scenesPath}/`) && actual.startsWith(sharedRoot + sep))) throw new Error(`Included file escapes project root: ${path}`);
         const to = resolve(destination, path); await mkdir(dirname(to), { recursive: true }); await cp(actual, to);
       }
     }

@@ -5,6 +5,7 @@ import { delimiter, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { terminate } from './clone-restore.mts';
 import { readDeploymentConfig } from './deployment-config.mts';
+import { publicRoot } from './public-root.mts';
 import { scriptsAt, expandScript, offlineDeploySteps } from './revision-entries.mts';
 
 export async function buildRevision(root: string, run: (step: string, index: number, env: NodeJS.ProcessEnv) => Promise<void>): Promise<void> {
@@ -15,7 +16,7 @@ export async function buildRevision(root: string, run: (step: string, index: num
   const workerBuild = expandScript(scripts, 'deploy:cloudflare-preview').find(step => step.startsWith('node '));
   if (!workerBuild) throw new Error('Missing Cloudflare bundler');
   steps.push(workerBuild.replace(/\s+--noindex\b/u, ''));
-  const scenes = resolve(root, 'public/scenes'), held = resolve(root, '.server-answers-scenes');
+  const scenes = resolve(root, publicRoot(root), 'scenes'), held = resolve(root, '.server-answers-scenes');
   if (!(await lstat(scenes)).isSymbolicLink()) throw new Error('Offline build requires a restored clone with shared scenes symlink');
   for (const [index, step] of steps.entries()) {
     const astro = /^(?:pnpm exec )?astro build$/u.test(step);

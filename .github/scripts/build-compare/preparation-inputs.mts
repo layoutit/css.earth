@@ -1,4 +1,5 @@
 /** Selected public inputs for preparation and prerender, never the full scenes bank. */
+import {existsSync} from 'node:fs';
 import {readFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {readPreparedFeaturePins,parseArrivalBillboard} from '@cssearth/objects';
@@ -34,7 +35,7 @@ export async function preparationUrls(root: string): Promise<string[]> {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined;
     throw error;
   });
-  const sidebar = await read(join(root, 'public/navigation/sidebar-thumbnails.json'));
+  const sidebar = await read(join(root, existsSync(join(root, 'site/public')) ? 'site/public' : 'public', 'navigation/sidebar-thumbnails.json'));
   if (sidebar === undefined) throw new Error('Missing tracked sidebar thumbnail manifest');
   const urls = new Set<string>();
   // Match the feature-index scene registry; sprite generation additionally scans every object folder.
