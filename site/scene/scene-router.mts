@@ -528,6 +528,9 @@ export function createSceneRouter({
       const departing = scenes.current?.mount?.navigation;
       if (departing) handoff.beforeRetire?.(departing);
       if (scenes.current) retire(scenes.current, null, { preserveShell: true, flush: false, publish: false });
+      // The camera has arrived and neither body is mounted: the flight's history entry is written now, while the
+      // picture Safari takes of the page for it is cheap to draw (navigation-history.mts).
+      view.commitAhead(request);
       objectId = object.id;
       handover.clear();
       if (stage.dataset) stage.dataset.objectId = object.id;
@@ -568,7 +571,8 @@ export function createSceneRouter({
       }
       else if (scenes.current) fail(scenes.current, error);
       else report(error);
-      if (pageLoad) windowTarget.location[pageLoad](request.url);
+      // Its entry already written, the page load takes that entry's place.
+      if (pageLoad) windowTarget.location[view.wroteAhead(request) ? 'replace' : pageLoad](request.url);
       return false;
     }
   }
