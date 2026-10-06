@@ -1,5 +1,4 @@
-import type { PreparedVolumeLeafStyle } from '../../volume/delivery/css-volume-types.js';
-import type { PreparedLeafBounds } from '../presentation/prepared-leaf-bounds.js';
+import type { PreparedLeafBounds, PreparedVolumeLeafStyle } from '../presentation/prepared-leaf-bounds.js';
 export type PreparedSkyVector = readonly [number, number, number];
 
 export const PREPARED_CSS_SKY_SCHEMA = 'cssearth-css-sky@1';

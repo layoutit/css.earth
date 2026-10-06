@@ -1,17 +1,9 @@
 import { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA } from './volume-schemas.js';
-import type { PreparedLeafBounds } from '../../prepared-data/presentation/prepared-leaf-bounds.js';
+import type { PreparedLeafBounds, PreparedVolumeLeafStyle } from '../../prepared-data/presentation/prepared-leaf-bounds.js';
 import type { DensityVolumeFrame, VolumeVector } from '../../density-volume.js';
 import type { PreparedCssSky } from '../../prepared-data/sky/css-sky-types.js';
 
 export type VolumeAxis = 'x' | 'y' | 'z';
-
-export interface PreparedVolumeLeafStyle {
-  readonly width: string;
-  readonly height: string;
-  readonly transform: string;
-  readonly backgroundSize: string;
-  readonly backgroundPosition: string;
-}
 
 export interface PreparedVolumeLeaf {
   readonly id: string;

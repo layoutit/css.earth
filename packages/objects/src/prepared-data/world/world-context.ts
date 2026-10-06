@@ -1,17 +1,16 @@
 import { PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA } from './world-schemas.js';
-import { parsePresentation } from '../camera/world-camera.js';
+import { parsePresentation, type PreparedWorldCameraLimits } from '../camera/world-camera.js';
 import type { WorldPosition as PositionM, PreparedWorldCameraFrame } from './world-frame.js';
 import { parsePreparedOrbitCenters } from '../orbit/prepared-orbit-centers.js';
 import type { PreparedOrbitCenter } from '../orbit/prepared-orbit-centers.js';
 import { parsePreparedWorldCameraFrame } from './world-frame.js';
 import { array, finite, numbers, positive, record, text, unique } from './world-guards.js';
 import { validateWorldRotation } from '@cssearth/core';
-import type { LevelOfDetailPlan, OrbitLineFade } from '../presentation/world-presentation.js';
 import type { PreparedOrbitStrokes } from '../orbit/prepared-orbit-strokes.js';
 import { expandWorldContextSummary, expandWorldSystem } from './world-context-summary.js';
 import { systemObjectId } from '../../registry/system-address.js';
 import { parseClassificationViews, parseSystemView } from './world-system-view.js';
-import type { PreparedSystemViewCandidate } from './world-system-view.js';
+import type { PreparedContextSystemView } from './world-system-view.js';
 
 export interface PreparedContextPoint {
   readonly id: string;
@@ -66,8 +65,7 @@ export interface PreparedContextBody extends PreparedContextPoint {
   readonly inside?: string;
   /** The members a system overview frames. The full context also carries its camera candidates; the browser's summary
    * does not, and reads a system's from `system-views/<id>.json` (`parsePreparedSystemView`) when navigation frames it. */
-  readonly systemView?: { readonly memberIds: readonly string[]; readonly memberRadiiM: readonly number[];
-    readonly candidates?: readonly PreparedSystemViewCandidate[] };
+  readonly systemView?: PreparedContextSystemView;
   readonly orbit?: PreparedContextOrbit;
 }
 /** What the main thread knows about an orbit: its parent, extent and size. The
@@ -99,13 +97,6 @@ export interface PreparedOrbitLod {
   readonly levels: readonly { readonly vertexIndices: Uint32Array; readonly trail: Float64Array;
     readonly activeChords: Uint32Array; readonly deviationM: number }[];
 }
-export interface PreparedContextCameraPresentation {
-  readonly projection: { readonly model: 'css-perspective-shared-with-sky'; readonly cssPerspective: string };
-  readonly dolly: { readonly model: 'multiplicative-wheel-distance'; readonly wheelStepPerDelta: number; readonly minimumDistanceRadii: number; readonly maximumDistanceOverOrbitExtent: number };
-  readonly levelOfDetail: LevelOfDetailPlan;
-  readonly orbitLineFade: OrbitLineFade;
-  readonly drag: { readonly model: 'screen-axis-tumble' };
-}
 export interface PreparedVolumeOpacityProfile {
   readonly model: 'logarithmic-distance';
   readonly nearOpacity: number;
@@ -124,8 +115,7 @@ export interface PreparedWorldContext {
   /** The summary pins each orbit centre's binary orbit bank by byte length (`decodeWorldOrbitBank`); an orbit's bank is its
    * `centerBodyId`. */
   readonly orbitBanks?: Readonly<Record<string, number>>;
-  readonly camera: { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
-    readonly presentation: PreparedContextCameraPresentation };
+  readonly camera: PreparedWorldCameraLimits;
   readonly volume: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number;
     /** The galaxy disc's half-height: how far from the body it looks at the camera is still inside it (galaxyOutsideFade). */
     readonly discHalfHeightM?: number;

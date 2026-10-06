@@ -3,8 +3,9 @@ import { parseDistanceSubject } from '../prepared-data/catalogue/spatial-relatio
 import type { ObjectDiscovery } from './object-discovery.js';
 import { parseObjectDiscovery } from './object-discovery.js';
 import { isRecord } from '@cssearth/core';
-import { defineObject, isSystemClassification, OBJECT_CLASSIFICATIONS, SYSTEM_CLASSIFICATIONS } from './object-schema.js';
-import type { ObjectClassification, ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
+import { isSystemClassification, OBJECT_CLASSIFICATIONS, SYSTEM_CLASSIFICATIONS, type ObjectClassification } from './object-classification.js';
+import { defineObject } from './object-schema.js';
+import type { ObjectDefinitionInput, ObjectEntry } from './object-schema.js';
 import type { NavigationDistance } from './navigation-distance.js';
 import { parseNavigationDistance } from './navigation-distance.js';
 import { destinationSearchNames, objectSystem } from './navigable-object.js';

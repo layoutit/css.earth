@@ -1,5 +1,6 @@
 import type { NavigationDistance } from './navigation-distance.js';
-import type { ObjectClassification, ObjectEntry, ObjectWorldFrame } from './object-schema.js';
+import type { ObjectClassification } from './object-classification.js';
+import type { ObjectEntry, ObjectWorldFrame } from './object-schema.js';
 import type { ObjectDiscovery } from './object-discovery.js';
 import { normalizeDestinationQuery } from './destination-search.js';
 import type { ObjectZoom } from './object-zoom.js';
