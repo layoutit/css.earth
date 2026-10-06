@@ -17,7 +17,7 @@
     {
       "id": "alma-continuum",
       "subject": "ALMA's 3 mm continuum image",
-      "status": "rejected",
+      "status": "excluded",
       "finding": "The archive's image of project 2013.1.01242.S (member uid://A001/X197/X27, ARI-L product, 0.5 arcsec, 2592 × 2744 px) was fetched and looked at: Sgr A* peaks at 3.21 Jy a beam and its residual sidelobes cover the streams; no arm can be made out. The ARI-L readme says its images show what the data hold and are not meant for science.",
       "evidence": [
         "https://almascience.eso.org/dataPortal/member.uid___A001_X197_X27.ari_l.Circumnuclear_Ring_sci.spw0_1_2_3_92126MHz.12m.cont.I.tt0.pbcor.fits",
@@ -27,7 +27,7 @@
     {
       "id": "nrao-legacy",
       "subject": "NRAO's 3.6 cm picture of the streams",
-      "status": "rejected",
+      "status": "excluded",
       "finding": "The NRAO/AUI archive's \"Sagittarius A West\" (Roberts, Yusef-Zadeh & Goss, VLA, 1993) states that NRAO/AUI/NSF does not hold full copyright for the image.",
       "evidence": [
         "https://www.nrao.edu/archives/items/show/33442"
