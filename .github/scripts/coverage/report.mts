@@ -10,12 +10,22 @@ import { readHitSummary } from './hit-summary.mts';
 import { convert, movedPath } from './convert.mts';
 import { merge } from './merge.mts';
 import type { Summary } from './merge.mts';
-import { parseMap as parseMoveMap } from './ratchet.mts';
+import { parseFloors, parseMap as parseMoveMap } from './ratchet.mts';
 import { list, repoPath } from './raw.mts';
 
+/** The floors file whose stored scope is the `root` cohort. */
+export const FLOORS_FILE = '.github/coverage-ratchet.json';
+
+/** `root` is the cohort of former site root sources, wherever they now live: the file list the floors store,
+ * so moves keep their identity. Every listed file must still be tracked. */
 export function scopeFiles(root:string,scope:string):string[] {
   if(scope!=='root' && scope!=='site') return list(JSON.parse(readFileSync(resolve(root,scope),'utf8'))).map(repoPath);
-  return execFileSync('git',['ls-files','site'],{cwd:root,encoding:'utf8'}).split('\n').filter(f=>/\.(mts|ts)$/u.test(f) && !/\.d\.m?ts$/u.test(f) && !/\.test\./u.test(f) && !f.includes('/evidence/') && (scope==='site' || f.split('/').length===2)).sort();
+  if(scope==='site') return execFileSync('git',['ls-files','site'],{cwd:root,encoding:'utf8'}).split('\n').filter(f=>/\.(mts|ts)$/u.test(f) && !/\.d\.m?ts$/u.test(f) && !/\.test\./u.test(f) && !f.includes('/evidence/')).sort();
+  const floors=parseFloors(JSON.parse(readFileSync(resolve(root,FLOORS_FILE),'utf8')));
+  if(floors.scope.id!=='root') throw new Error(`${FLOORS_FILE} stores scope ${floors.scope.id}, not root`);
+  const known=new Set(execFileSync('git',['--literal-pathspecs','ls-files','--',...floors.scope.files],{cwd:root,encoding:'utf8'}).split('\n')), missing=floors.scope.files.filter(f=>!known.has(f));
+  if(missing.length) throw new Error(`Root coverage scope names untracked files; record their moves in ${FLOORS_FILE}: ${missing.join(', ')}`);
+  return [...floors.scope.files].sort();
 }
 export function table(summary:Summary):string {
   const row=(name:string,v:Summary['aggregate'])=>`${name.padEnd(22)} ${v.lines.pct.toFixed(2).padStart(7)} ${v.branches.pct.toFixed(2).padStart(8)} ${v.functions.pct.toFixed(2).padStart(9)}`;
