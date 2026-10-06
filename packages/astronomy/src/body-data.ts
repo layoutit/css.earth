@@ -17,4 +17,4 @@
  * "how wide is it at the equator". A renderer that needs the ellipsoid needs
  * three numbers and should not get them from here.
  */
-export { BODIES } from './data/generated/bodies.js'
+export { BODIES } from './data/generated/bodyData.js'
