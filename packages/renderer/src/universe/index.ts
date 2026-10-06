@@ -13,6 +13,6 @@ export type { PreparedVolumeDatasetState } from '../volume/prepared-volume-datas
 export { mountPreparedCataloguePoints } from '../stars/prepared-catalogue-points.js';
 
 export { prepareObjectResources } from '../runtime/prepared-resource-lease.js';
-export { createRetainedGeometrySnapshot } from '../rendering/retained-leaf-pool.js';
+export { createRetainedGeometrySnapshot } from '../rendering/dom/retained-leaf-pool.js';
 
 export type { WorldContextView, WorldBodyPresentation } from './world-context/world-context-planner.js';

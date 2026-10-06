@@ -9,7 +9,7 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 // property:
 // - the tree lists each mesh's leaves as runs of node indices (`tree.meshes`), and a leaf carries no display of its own;
 // - a selection names the mesh it mounts (`variant.mesh`) and writes no display.
-// The page mounts the named mesh's leaves and no other (packages/renderer/src/rendering/prepared-omitted-nodes.ts). A
+// The page mounts the named mesh's leaves and no other (packages/renderer/src/rendering/dom/prepared-omitted-nodes.ts). A
 // later bindings run expands the records back to the variable form first.
 
 interface TreeNode { parent: number; style: string }

@@ -2,8 +2,8 @@ import { type ObjectRuntimeDefinition, type PreparedWorldCameraFrame, type Prepa
 
 import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
 
-import type { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
-import { selectedPreparedVariant } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+import type { publishPreparedNativeView } from '@cssearth/renderer/rendering/view/prepared-native-view.ts';
+import { selectedPreparedVariant } from '@cssearth/renderer/rendering/view/prepared-presentation.ts';
 import { readPreparedTransform } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';
 import { readPreparedMatrix4 } from '@cssearth/core';
 

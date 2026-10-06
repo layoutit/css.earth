@@ -15,10 +15,10 @@ import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport 
 import { createCameraOrientation } from '../navigation/camera-orientation.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
 import { initialObjectSelection } from './object-contract.js';
-import { resolvePreparedPresentation } from '../rendering/prepared-presentation.js';
+import { resolvePreparedPresentation } from '../rendering/view/prepared-presentation.js';
 import { prepareObjectResources } from './prepared-resource-lease.js';
 import { loadPreparedDataset } from '../loader.js';
-import { preparePresentationTree, type PreparedTreeLease } from '../rendering/prepared-tree.js';
+import { preparePresentationTree, type PreparedTreeLease } from '../rendering/dom/prepared-tree.js';
 import type { CameraViewport } from '../navigation/camera-viewport.js';
 import { selectPreparedResponsiveZoom } from '../navigation/camera-layout.js';
 

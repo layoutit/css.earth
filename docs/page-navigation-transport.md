@@ -55,7 +55,7 @@ ownership, stylesheet nodes and world camera stay retained.
 
 ## One scene before and after JavaScript
 
-`serializePreparedScene` in the renderer (`packages/renderer/src/rendering/prepared-scene-serialization.ts`) publishes the package's prepared reference pose,
+`serializePreparedScene` in the renderer (`packages/renderer/src/rendering/view/prepared-scene-serialization.ts`) publishes the package's prepared reference pose,
 initial variant and texture addresses. It does not generate another mesh or
 process source images. The page remains the same shell at the same URL.
 Information tabs use native radio selection, including body overview, prepared
@@ -199,7 +199,7 @@ After building the packages and renderer, check page metadata with:
 
 ```sh
 node --test site/server/object-page-data.test.mts
-pnpm test:packages   # includes rendering/prepared-scene-serialization.test.ts
+pnpm test:packages   # includes rendering/view/prepared-scene-serialization.test.ts
 node --test site/journeys/rendered-page.test.mts
 node --test site/server/search/search-response.test.mts
 node --test site/server/search/dataset-response.test.mts site/model/dataset-url.test.mts

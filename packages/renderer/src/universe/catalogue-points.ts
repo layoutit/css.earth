@@ -1,4 +1,4 @@
-import { writeStyle } from '../rendering/retained-write.js';
+import { writeStyle } from '../rendering/dom/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
 import { cataloguePointColumns, readCataloguePointBank, type CataloguePointLevel, type CataloguePointSpread, type PreparedCataloguePointColumns, type VolumeVector } from '@cssearth/objects';
 
@@ -7,9 +7,9 @@ import type { VolumeCameraPublication } from '../volume/types.js';
 
 import { mountBatchedSpatialPoints, pointPaint, type BatchedSpatialPointStyle } from './batched-spatial-points.js';
 import { pointLayerSlot } from './point-layer.js';
-import { revealLayer } from '../rendering/layer-reveal.js';
-import { afterStartup } from '../rendering/startup-gate.js';
-import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
+import { revealLayer } from '../rendering/dom/layer-reveal.js';
+import { afterStartup } from '../rendering/loading/startup-gate.js';
+import { createSettlePacer, framePacerFor } from '../rendering/loading/settle-pacer.js';
 import type { OpacityWindow } from '../stars/opacity-clock.js';
 
 /** Dot layers switching on show one a frame (layer-reveal.ts). */

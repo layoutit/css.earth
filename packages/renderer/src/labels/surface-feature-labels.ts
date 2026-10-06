@@ -1,6 +1,6 @@
 import { surfaceFeatureBankIndex, type PreparedSurfaceFeaturePlan, type ParsedSurfaceFeature, type ParsedSurfaceFeatureCatalog } from '@cssearth/objects';
 
-import { writeData, writeStyle } from '../rendering/retained-write.js';
+import { writeData, writeStyle } from '../rendering/dom/retained-write.js';
 import { eyeDistanceM, rotateWorldPosition } from '@cssearth/engine';
 import { bindInputEvent } from '../navigation/shared-input-surface.js';
 import type { SceneLifetime } from '@cssearth/engine';
@@ -10,7 +10,7 @@ import type { ScreenPickTarget } from '../navigation/screen-picking.js';
 import { orbitSegmentTransform } from '../solar-system/orbit-segment-presentation.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import { opacityClockFor } from '../stars/opacity-clock.js';
-import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
+import { createSettlePacer, framePacerFor } from '../rendering/loading/settle-pacer.js';
 import type { LabelScreenRect } from './screen-label-layout.js';
 import { labelOcclusionFor } from './label-occlusion.js';
 import { admitSurfaceFeatureLabels, passesZoomGate, projectSurfaceFeature, projectSurfaceOutline, surfaceLabelScope, zoomShare, POINT_LABEL_GAP_PX } from './surface-feature-layout.js';

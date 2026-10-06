@@ -17,7 +17,7 @@ Camera projection, star loading and navigation remain here.
 - Keep runtime DOM retained and stable. Decode and transport prepared state; never derive source data, geometry,
   charts, atlases or scene assets at runtime.
 - A publication of an unchanged view writes nothing and asks for no frame. Guard a write with the value last written
-  (`src/rendering/retained-write.ts`), never with a value read back from the page: the browser normalizes transforms,
+  (`src/rendering/dom/retained-write.ts`), never with a value read back from the page: the browser normalizes transforms,
   opacities and lengths, so a read-back compare rewrites them every frame. Statistics belong in `stats()` or
   `inspect()`, not in attributes written on each publication.
 - No runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas or WebGL. Detailed bodies are PolyCSS.

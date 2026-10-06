@@ -1,4 +1,4 @@
-import { writeStyle } from '../rendering/retained-write.js';
+import { writeStyle } from '../rendering/dom/retained-write.js';
 import { fromEyeM, type WorldCameraPose, cssViewFromOrientation } from '@cssearth/engine';
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import { type PreparedContextPoint } from '@cssearth/objects';

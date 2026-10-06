@@ -1,4 +1,4 @@
-import { writeStyle } from '../rendering/retained-write.js';
+import { writeStyle } from '../rendering/dom/retained-write.js';
 import { eyeAnchor, type WorldCameraPose, cssViewFromOrientation } from '@cssearth/engine';
 import { isExtendedClassification, type PreparedWorldContext, type PreparedContextBody } from '@cssearth/objects';
 import { createContextLocator } from './context-locator.js';

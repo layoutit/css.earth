@@ -5,9 +5,9 @@ import { test } from 'node:test';
 import { createPreparedEllipsoidProjection } from '../prepared-data/prepared-ellipsoid-projection.js';
 import { invertPreparedAffineMatrix4, multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from '@cssearth/core';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
-import { createPreparedMaterialPublisher } from '../rendering/prepared-material.js';
+import { createPreparedMaterialPublisher } from '../rendering/textures/prepared-material.js';
 
-import type { PreparedResources } from '../rendering/prepared-residency.js';
+import type { PreparedResources } from '../rendering/loading/prepared-residency.js';
 
 const identity = [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1];
 const translation = (x:number,y:number,z=0) => [...identity.slice(0,12),x,y,z,1];

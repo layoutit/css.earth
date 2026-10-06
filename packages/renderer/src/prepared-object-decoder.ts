@@ -1,7 +1,7 @@
 import { checks, failure } from '@cssearth/core';
 import { parseObjectDescriptor, readPreparedObject, parsePreparedObjectRuntime, requireShippedRuntime, type ObjectRuntimeDefinition, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 
-import { parsePreparedAssetOrigin } from './rendering/prepared-asset-origin.js';
+import { parsePreparedAssetOrigin } from './rendering/loading/prepared-asset-origin.js';
 
 const { record } = checks(failure('Prepared data: '));
 

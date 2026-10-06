@@ -21,7 +21,7 @@ const RENDERER = /^packages\/renderer\/src\/(?!.*\.test\.m?ts$).*\.ts$/u;
  * stylesheet animates with. Each is named once, in the file listed. */
 const KEPT: Readonly<Record<string, RegExp>> = {
   'packages/renderer/src/styles/world-context.css': /var\(--shell-font-label,/gu,
-  'packages/renderer/src/rendering/object-control-binding.ts': /'--sequence-hold'/gu,
+  'packages/renderer/src/rendering/view/object-control-binding.ts': /'--sequence-hold'/gu,
 };
 
 const withoutComments = (text: string) => text.replace(/\/\*[\s\S]*?\*\//gu, comment => comment.replace(/[^\n]/gu, ' '));

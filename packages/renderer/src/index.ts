@@ -11,10 +11,10 @@ export { formatSharedView, parseSharedView } from './navigation/view-url.js';
 /** The document's one frame clock: every frame callback of the application goes through it. */
 export { opacityClockFor } from './stars/opacity-clock.js';
 export type { SharedView, SharedPlayback } from './navigation/view-url.js';
-export type { PreparedPresentationPlan } from './rendering/prepared-presentation.js';
-export type { PreparedView } from './rendering/prepared-view.js';
+export type { PreparedPresentationPlan } from './rendering/view/prepared-presentation.js';
+export type { PreparedView } from './rendering/view/prepared-view.js';
 
-export { resolvePreparedAssetUrl, rewritePreparedStyleUrls, parsePreparedAssetOrigin, preparedAssetGroup, preparedAssetGroupFile, createPreparedAssetResolver } from './rendering/prepared-asset-origin.js';
+export { resolvePreparedAssetUrl, rewritePreparedStyleUrls, parsePreparedAssetOrigin, preparedAssetGroup, preparedAssetGroupFile, createPreparedAssetResolver } from './rendering/loading/prepared-asset-origin.js';
 
 export { loadPreparedCssObject, loadPreparedDataset } from './loader.js';
 export { adoptPreparedDatasetTables } from './prepared-data/dataset-tables.js';
@@ -34,12 +34,12 @@ export { labelOcclusionFor } from './labels/label-occlusion.js';
 export { createOpacityFader } from './stars/opacity-fader.js';
 export { loadPreparedSurfaceFeatureCatalog, loadPreparedSurfaceFeatureBank, loadPreparedSurfaceFeature } from './labels/surface-feature-catalog.js';
 export { surfaceFeatureCaption } from './labels/surface-feature-caption.js';
-export { serializePreparedScene } from './rendering/prepared-scene-serialization.js';
-export { omittedPreparedNodes } from './rendering/prepared-omitted-nodes.js';
-export { selectedPreparedVariant } from './rendering/prepared-presentation.js';
-export { sectionElements, sectionPlaceholder, showSection } from './rendering/detached-sections.js';
-export type { PreparedSceneMarkup, SerializedPreparedScene, PreparedTextureResolver } from './rendering/prepared-scene-serialization.js';
-export { publishPreparedNativeView } from './rendering/prepared-native-view.js';
+export { serializePreparedScene } from './rendering/view/prepared-scene-serialization.js';
+export { omittedPreparedNodes } from './rendering/dom/prepared-omitted-nodes.js';
+export { selectedPreparedVariant } from './rendering/view/prepared-presentation.js';
+export { sectionElements, sectionPlaceholder, showSection } from './rendering/dom/detached-sections.js';
+export type { PreparedSceneMarkup, SerializedPreparedScene, PreparedTextureResolver } from './rendering/view/prepared-scene-serialization.js';
+export { publishPreparedNativeView } from './rendering/view/prepared-native-view.js';
 export type { SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats, SurfaceFeatureNavigationRuntime } from './labels/surface-feature-types.js';
 export { savedWorldCamera } from './navigation/saved-world-camera.js';
 export { mountPreparedCssVolume } from './volume/prepared-volume-runtime.js';
@@ -58,6 +58,6 @@ export { prepareObjectResources } from './runtime/prepared-resource-lease.js';
 export { createPreparedObjectNavigation } from './runtime/prepared-object-navigation.js';
 export { createPreparedUniverse } from './universe/prepared-universe-runtime.js';
 
-export { publishDatasetSelection, publishDatasetPreview } from './rendering/object-control-binding.js';
+export { publishDatasetSelection, publishDatasetPreview } from './rendering/view/object-control-binding.js';
 
 export { retainInputSurface, isSharedInputSurface, bindInputEvent } from './navigation/shared-input-surface.js';
