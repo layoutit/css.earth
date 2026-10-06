@@ -1,4 +1,4 @@
-# A star's rotation and brightness map from TESS pixels
+# A star's rotation and brightness map from TESS, K2 and Kepler pixels
 
 A star with dark spots dims each time the spots turn to face us. The rise and fall of its light gives the time it takes to
 turn once, and the shape of that curve says which longitudes of the star are darker or brighter.
@@ -6,6 +6,10 @@ turn once, and the shape of that curve says which longitudes of the star are dar
 TESS has imaged almost the whole sky every 30 minutes or faster since 2018. The mission publishes light curves only for the
 stars it was asked to watch. Its full-frame images hold every other star too. This note describes how the telescope's TESS
 tools measure a star's light from those images, decide whether its rotation is seen, and make a brightness map from it.
+
+Kepler (2009 to 2013) and K2 (2014 to 2018) watched far fewer stars, but each for months at a time and with pixels five
+times finer. For a star they watched, the mission's own pixels are read instead: see
+[Kepler and K2 pixels](#kepler-and-k2-pixels).
 
 A map made this way is **this project's reduction**. It is not a published map, and every dataset made from one says so.
 
@@ -18,7 +22,9 @@ Each step of the science is run by the code its authors publish, pinned in
 | --- | --- | --- |
 | Whose light | [Gaia DR3](https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355) through [CDS X-Match](http://cdsxmatch.u-strasbg.fr/) | Every Gaia source within 63 arcseconds of the star, with its magnitude in Gaia's red band |
 | Pixels | MAST's [TESScut](https://mast.stsci.edu/tesscut/) | Cuts the same 11 × 11 pixels out of every calibrated full-frame image of a sector at the star's place |
+| Pixels, Kepler and K2 | [MAST](https://archive.stsci.edu/missions-and-data/k2)'s target pixel files | The pixels the mission kept around a star it watched, one file a K2 campaign or a Kepler quarter |
 | Light curve | [lightkurve](https://lightkurve.github.io/lightkurve/) 2.6.0 | Adds up the pixels that stand above the sky, and removes what the sky pixels have in common with them (scattered light and pointing drift) |
+| Light curve, K2 | lightkurve's self-flat-fielding corrector (Vanderburg & Johnson 2014, PASP 126, 948) | Takes out the dimming and brightening K2's slow roll about its axis leaves in the light, and keeps the star's own changes |
 | Period | [astropy](https://www.astropy.org/) Lomb-Scargle periodogram (VanderPlas 2018, ApJS 236, 16) | The period that best fits the light curve, over the whole sector and in each of its two orbits |
 | The map | [starry](https://starry.readthedocs.io/) 1.2.0 (Luger et al. 2019, AJ 157, 64) | The brightness over the surface, as spherical harmonics up to degree 5, that reproduces the light curve as the star turns |
 
@@ -85,6 +91,47 @@ of EPIC 205979159, a giant of 7 solar radii, show 0.16 days, where nothing could
 A star's record holds SIMBAD's main type of it. A star SIMBAD files as an eclipsing or ellipsoidal binary, a cataclysmic,
 X-ray or symbiotic pair, or a pulsating variable of any kind is not read at all: its light changes for that reason.
 
+## Kepler and K2 pixels
+
+Kepler stared at one field for four years and K2 at one field after another along the ecliptic, for some 80 days each. Both took
+an image every 30 minutes through pixels 4 arcseconds wide, and kept only the pixels around the stars they were asked to
+watch: one file a star for each Kepler quarter (some 90 days) or K2 campaign. Against one TESS sector, such a file holds
+three times the days, so a star that turns in two or three weeks is seen turning several times, and its pixels are a
+fifth the width, so a neighbour seldom shares them.
+
+For every star, MAST is asked once which Kepler and K2 time series lie at its place
+([`pixels.mts`](../packages/telescope-cli/src/archives/kepler/pixels.mts)). The missions listed their targets where
+surveys of about the year 2000 had them, so a star that moves is looked for at its recorded place, at its place in 2014
+and at its place in 2000. One file is read: the longest K2 campaign, or the full-length Kepler quarter nearest the middle
+of the mission. A star neither mission watched is read from TESS as before.
+
+Three things differ from a TESS sector:
+
+- **Whose light.** Gaia's sources are counted within 16 arcseconds of the star, four of these pixels, and a star as faint
+  as magnitude 16 is read. A bright star is not refused: the missions kept the columns a saturated star bleeds along.
+- **The spacecraft's roll.** K2 held its pointing with two wheels and the pressure of sunlight, and rolled slowly between
+  thruster firings every six hours. lightkurve's self-flat-fielding corrector takes the roll's mark out of the light and
+  is told to keep the star's own slow changes.
+- **The drift.** What is left still drifts over a campaign, by more than most stars' spots dim them. A curve of second
+  degree in time is taken out of the campaign, and out of each half when the halves are searched, before a period is
+  looked for.
+
+The rule is the TESS one with the window's own lengths: a periodogram power of at least 0.3, each half of the campaign
+or quarter giving the same period within 20%, and a period no longer than a third of the window (27 days for a campaign,
+30 for a quarter), so that the star is seen turning three times. No floor on the light's swing is set: @@SWING@@
+
+It was measured on our @@LABELLED@@ Kepler and K2 stars with a catalogued rotation period.
+
+@@TABLE@@
+
+@@READING@@
+
+A period is then set beside the catalogued one, as for TESS: the same within 20% is kept, half of it is doubled, and any
+other is refused.
+
+SIMBAD files @@GIANTS@@ of our 1,090 Kepler and K2 stars as giants. A giant turns in months, so one campaign seldom shows
+its spots turning; what its light shows is its oscillations, which this route does not read.
+
 ## What the map is and is not
 
 A light curve is one number at each moment: the star's whole disc added up. It fixes how bright each longitude is. It does
@@ -138,20 +185,21 @@ node packages/telescope-cli/src/archives/tess/reduce.mts <star id>...     # or -
 pnpm telescope new-object --from-pixels all --out output/tess/specs/all.json
 pnpm telescope new-object output/tess/specs/all.json --bake
 pnpm telescope new-object --metadata <star id>...
-node packages/telescope-cli/src/new-object/new-object-cli.mts --tess-light --all
+node packages/telescope-cli/src/new-object/new-object-cli.mts --pixel-light --all
 ```
 
-`reduce.mts` writes a receipt for each star under ignored `output/tess/<star id>/`: the sector, the request that cut its
-pixels, what was measured, the verdict with its reason, and the codes' versions. The light curve is kept beside it and the
+`reduce.mts` asks MAST whether Kepler or K2 watched the star and reads that file when one did; any other star is read from
+one TESS sector. It writes a receipt for each star under ignored `output/tess/<star id>/`: the mission and its sector,
+campaign or quarter, the request that fetched its pixels, what was measured, the verdict with its reason, and the codes' versions. The light curve is kept beside it and the
 pixels are deleted. Requests to TESScut go one at a time; the service refuses requests sent side by side. Gaia's answer
 for all stars is one request of some ten minutes, kept under `output/tess/` so a star is asked once.
 
 The map's table (108 KB a star) is not tracked: its manifest input names `reduce.mts` as its generator, and it is published
 to and restored from the source cache (`node packages/bake/cli/publish-source-cache.mts --object=<star id>`).
 
-`--tess-light` writes what the reduction found into the record of every star it looked at, mapped or not: the verdict in
-the reduction's own sentence (a rotation, or why none is accepted, or why the star was not read), the sector, and the scatter
-of the star's light over it.
+`--pixel-light` writes what the reduction found into the record of every star it looked at, mapped or not: the verdict in
+the reduction's own sentence (a rotation, or why none is accepted, or why the star was not read), the mission and its sector,
+campaign or quarter, and the scatter of the star's light over it.
 
 The spec lists each star whose receipt holds a map. Writing it adds a "Brightness map" dataset to the star's page and three
 values to its measurements record: the measured period, where it was measured, and the light's swing. The metadata pass then
@@ -165,5 +213,5 @@ counts the measured period among the star's catalogued ones when it adopts a rot
   (TICA, Fausnaugh et al. 2020), but that route works on whole detectors.
 - A periodic light is taken as rotation. A pulsating star or a close pair that SIMBAD does not file as one, with a period
   longer than the surface orbit's, would pass as a turning, spotted star.
-- One sector is read for a star. A star whose sector is refused may show its rotation in another.
+- One sector, campaign or quarter is read for a star. A star whose window is refused may show its rotation in another.
 - A star with no catalogued period whose light repeats twice a turn is given half its true period.

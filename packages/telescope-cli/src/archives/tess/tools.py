@@ -66,7 +66,7 @@ def light_curve(job):
     gap = int(np.argmax(np.diff(time))) if mission == 'TESS' else int(np.searchsorted(time, (time.min() + time.max()) / 2)) - 1
     halves = [(time[:gap + 1], level(time[:gap + 1], raw_flux[:gap + 1])), (time[gap + 1:], level(time[gap + 1:], raw_flux[gap + 1:]))] if len(time) > 20 else []
     span = float(time.max() - time.min())
-    longest = span / job.get('longestShare', 2)
+    longest = span / 2
     return {'frames': int(len(curve.time)), 'aperturePixels': int(mask.sum()), **({} if window is None else {'window': int(window)}), 'saturated': bool(mission == 'TESS' and np.nanmax(tpf.flux.value) > job['saturationElectronsPerSecond']),
             'spanDays': span, 'scatter': float(np.std(flux)), 'whole': peak(time, flux, longest),
             'halves': [peak(t, f, min(longest, float(t.max() - t.min()))) if len(t) > 10 else None for t, f in halves],
