@@ -92,7 +92,9 @@ export async function loadRadialTerrain({config,sourceDirectory,source}: {
     if (topology.components !== 1 || topology.eulerCharacteristic !== 2) throw new Error('Estimated completion must close one nucleus.');
     completion = { ...completed.report, sourceFit, topology };
   }
-  const layout = rasterAtlasLayout(faces, profile.texelsPerFace, textureQuantum(config));
+  // A mesh whose face count the error bound decides states its atlas budget itself, so its texel density does not follow that count.
+  if ((profile.texelsPerFace === undefined) === (profile.atlasTexels === undefined)) throw new TypeError('A radial source states texelsPerFace or atlasTexels, one of the two.');
+  const layout = rasterAtlasLayout(faces, profile.atlasTexels ?? profile.texelsPerFace! * faces.length, textureQuantum(config));
   const leaves = layout.plans.map(({ geometry, matrix }) => ({ tag: 'u', className: `${config.namespace}-terrain-face`, polar: null,
     attributes: { 'data-polycss-texture-leaf-sizing': 'raster', 'data-polycss-texture-backend': 'atlas', 'data-polycss-texture-lighting': 'baked' },
     style: `${rasterLeafStyle({ ...geometry, matrix })}${profile.backfaceVisible ? ';backface-visibility:visible' : ''}` }));
@@ -115,7 +117,7 @@ function textureQuantum(config: {raster?: unknown}) {
  * texel density; its geometry counts atlas texels, which rasterLeafStyle draws at TEXELS_PER_CSS_PIXEL. The u leaf draws its triangle with the base along the bottom edge and the apex at
  * the top centre. Sizing the height by the apex's distance from the base midpoint keeps each texel within the square root of two of the
  * nominal density even for a thin, sheared face; the base is the edge that needs the fewest texels. The packed atlas, gaps included,
- * holds at most the body's budget of texels per face. */
+ * holds at most the mesh's budget of texels. */
 /** Seam repair as PolyCSS prepares a solid mesh: an edge shared with a neighbouring face overlaps it by the default seam bleed, and a
  * face with no shared edge by the solid-triangle bleed, both in CSS pixels. */
 /** Measured on Alphonsina, Ida, Itokawa, Mathilde, Achlys, Amalthea and comet 1P (DPR 2, five poses, both zooms): twelve CSS pixels
@@ -153,8 +155,8 @@ function coverSourceFace(corners: number[][], source: readonly number[][], face:
   return corners.map(point => point.map((value, axis) => center[axis] + (value - center[axis]) * scale));
 }
 
-export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerFace: number, quantum: number) {
-  if (!Number.isSafeInteger(texelsPerFace) || texelsPerFace < 16 || !Number.isSafeInteger(quantum) || quantum < 1) throw new TypeError('Invalid radial texel budget.');
+export function rasterAtlasLayout(faces: readonly PreparedTriangle[], budget: number, quantum: number) {
+  if (!Number.isSafeInteger(budget) || budget < 16 * faces.length || !Number.isSafeInteger(quantum) || quantum < 1) throw new TypeError('Invalid radial texel budget.');
   const polygons = faces.map(face => ({ vertices: face.vertices.map(p => {if(p.length!==3)throw new Error('Invalid triangle point.');return [p[0],p[1],p[2]] as [number,number,number];}), color: '#888888' }));
   const seamEdges = buildSeamBleedPolygonEdges(polygons, { tileSize: BASE_TILE, layerElevation: BASE_TILE });
   const triangles = faces.map((face, index) => {
@@ -178,7 +180,7 @@ export function rasterAtlasLayout(faces: readonly PreparedTriangle[], texelsPerF
     }
     return { face, corners, normal: [m[8], m[9], m[10]], ...best! };
   });
-  const budget = texelsPerFace * faces.length, step = (n: number) => Math.max(2, Math.ceil(n / quantum)) * quantum;
+  const step = (n: number) => Math.max(2, Math.ceil(n / quantum)) * quantum;
   // Shelf packing, tallest rows first, on a near-square page.
   const pack = (density: number) => {
     const sizes = triangles.map(t => [step(t.length / density), step(t.rise / density)]);

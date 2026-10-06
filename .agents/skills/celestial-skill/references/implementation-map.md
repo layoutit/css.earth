@@ -114,7 +114,8 @@ instead of editing a shared list or atlas position.
   draws its atlas at the layout's size. A dataset with `textureScale` below 1 is
   drawn enlarged, which Safari does with a cropped copy for each face: comet
   67P's 1,992 faces took 731 to 842 ms to switch to a half-size atlas and 202 to
-  236 ms to a full-size one on an iPad (2026-10-05). Set `texelsPerFace` to what
+  236 ms to a full-size one on an iPad (2026-10-05). Set the atlas budget
+  (`atlasTexels`, or `texelsPerFace` beside an authored face target) to what
   the datasets need and leave `textureScale` out. A banded sphere follows the
   same rule with one `textureScale` for its maps: Enceladus's elevation atlas
   at full size, 8,320 pixels wide among 2,080 pixel ones, took 568 to 613 ms to

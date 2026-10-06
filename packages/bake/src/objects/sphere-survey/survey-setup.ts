@@ -313,13 +313,15 @@ export function leaveOutArguments(args: readonly string[]): { leaveOut: string[]
 }
 
 /**
- * The ADAM mesh is simplified to the primary mesh's face target. Its error bound is the primary's wherever that reaches
- * the target, as it does for Iris and Hebe; otherwise it is the next hundred metres above the error the ADAM mesh
- * reaches there, the rule the primary bounds were authored by.
+ * The ADAM mesh is simplified as the primary mesh is. Where the primary authors a face target, the error bound is the
+ * primary's wherever that reaches the target, as it does for Iris and Hebe; otherwise it is the next hundred metres
+ * above the error the ADAM mesh reaches there, the rule those primary bounds were authored by. Where the primary's
+ * bound decides the face count, the ADAM mesh takes that bound unchanged.
  */
 export async function adamSimplification(primary: Record<string, unknown>, path: string, grid: Record<string, unknown>, counts: { vertices: number; faces: number }, faceBudget: number, scale: number) {
   const simplification = { ...primary } as unknown as RadialSimplification;
-  if (primary.method !== 'source-meshoptimizer') return simplification;
+  // A primary whose error bound decides its face count has no target to reach: the ADAM mesh is reduced within the same bound.
+  if (primary.method !== 'source-meshoptimizer' || simplification.targetFaces === undefined) return simplification;
   const mesh = requireTerrainMesh(await loadObjShape(path, { ...grid, expectedVertices: counts.vertices, expectedFaces: counts.faces }));
   const probe = await simplifyRadialShape(mesh, { faceBudget, simplification: { ...simplification, maximumErrorMeters: 1e9 } }, scale);
   const reached = requireFiniteNumber(requireRecord(probe.simplification).estimatedErrorMeters, 'estimated error');
