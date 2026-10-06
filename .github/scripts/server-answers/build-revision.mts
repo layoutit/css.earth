@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { terminate } from './clone-restore.mts';
 import { readDeploymentConfig } from './deployment-config.mts';
 import { publicRoot } from './public-root.mts';
-import { scriptsAt, expandScript, offlineDeploySteps } from './revision-entries.mts';
+import { scriptsAt, expandScript, isAstroBuild, offlineDeploySteps } from './revision-entries.mts';
 
 export async function buildRevision(root: string, run: (step: string, index: number, env: NodeJS.ProcessEnv) => Promise<void>): Promise<void> {
   const scripts = await scriptsAt(root);
@@ -19,7 +19,7 @@ export async function buildRevision(root: string, run: (step: string, index: num
   const scenes = resolve(root, publicRoot(root), 'scenes'), held = resolve(root, '.server-answers-scenes');
   if (!(await lstat(scenes)).isSymbolicLink()) throw new Error('Offline build requires a restored clone with shared scenes symlink');
   for (const [index, step] of steps.entries()) {
-    const astro = /^(?:pnpm exec )?astro build$/u.test(step);
+    const astro = isAstroBuild(step);
     if (astro) await rename(scenes, held);
     try { await run(step, index, env); }
     finally { if (astro) await rename(held, scenes); }
