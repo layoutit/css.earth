@@ -15,10 +15,10 @@
     "spinspotter": "BSD-3-Clause (Holcomb et al. 2022, ApJ 936, 138)"
   },
   "notes": [
-    "lightkurve measures a star's light from its pixels: the aperture, the light curve and the regression of the sky's own variation out of it (RegressionCorrector).",
-    "astropy's LombScargle finds the period of a light curve.",
-    "lightkurve warns that its pixel-response model needs oktopus; that part is not used.",
+    "lightkurve reads a mission's own light curve file as it is: the PDC-MAP flux of a K2 campaign or of a TESS 2-minute sector.",
+    "astropy's LombScargle is the generalized periodogram of Reinhold & Hekker (2020).",
     "star-privateer computes the wavelet power spectrum and the autocorrelation of a light curve: two of the three period methods of Reinhold & Hekker (2020), whose criteria methods.mts applies.",
-    "SpinSpotter measures a rotation period from a light curve's autocorrelation and describes its peaks: the method of Holcomb et al. (2022) for TESS 2-minute light curves, whose criteria methods.mts applies."
+    "SpinSpotter measures a rotation period from a light curve's autocorrelation and describes its peaks: the method of Holcomb et al. (2022) for TESS 2-minute light curves, whose criteria methods.mts applies.",
+    "lightkurve warns that its pixel-response model needs oktopus; that part is not used."
   ]
 }
