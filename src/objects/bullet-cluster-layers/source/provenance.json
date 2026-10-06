@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-image-layer-provenance@1",
-  "title": "Visible-light and x-ray composite image of galaxy cluster 1E 0657-556",
-  "publisher": "ESA/Hubble",
-  "sourceId": "opo0639a",
-  "sourcePage": "https://esahubble.org/images/opo0639a/",
-  "download": "https://cdn.esahubble.org/archives/images/large/opo0639a.jpg",
-  "credit": "X-ray: NASA/CXC/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
-  "license": "CC-BY-4.0",
+  "title": "1E 0657-56 (the Bullet Cluster): the 2006 composite in its layers",
+  "publisher": "Chandra X-ray Center",
+  "sourceId": "1e0657",
+  "sourcePage": "https://chandra.harvard.edu/photo/2006/1e0657/",
+  "download": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_opt.tif",
+  "credit": "Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. X-ray: NASA/CXC/CfA/M.Markevitch et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+  "license": "NASA-SAO",
   "original": {
     "dimensions": [
       3000,
@@ -24,7 +24,7 @@
     ]
   },
   "checkedSource": {
-    "kind": "Large JPEG",
+    "kind": "TIFF layers on one frame: visible light alone, visible light with the X-ray gas, visible light with the lensing mass map",
     "dimensions": [
       3000,
       2168
@@ -46,16 +46,17 @@
       "pixelArcsec": 0.14869,
       "northClockwiseDeg": -0.02
     },
-    "centreShiftFromTagsArcsec": 0.42
+    "centreShiftFromTagsArcsec": 0.42,
+    "frame": "Measured on ESA/Hubble opo0639a, the same composite on the same 3000 x 2168 px frame."
   },
-  "displayModel": "The picture lies on one flat plane facing the Sun at the cluster's comoving distance. Nothing in the picture has depth: seen from the side it is a line.",
-  "coverage": "The whole published frame. The pink and blue layers are the publisher's overlays of an X-ray image and a mass map, not light the eye would see; foreground Milky Way stars remain.",
+  "displayModel": "The visible-light picture lies on one flat plane facing the Sun at the cluster's comoving distance. The hot gas and the mass, lifted from the publisher's layers as pictures of their own, are each spread along the sight line through a body of revolution about the line through its two published concentrations, tipped 10 degrees from the plane of the sky. No depth is measured.",
+  "coverage": "The whole published frame. The pink and blue are the publisher's renderings of an X-ray image and a mass map, not light the eye would see; foreground Milky Way stars remain on the plane.",
   "acquisition": {
-    "url": "https://cdn.esahubble.org/archives/images/large/opo0639a.jpg",
+    "url": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_opt.tif",
     "dimensions": [
       3000,
       2168
     ],
-    "operation": "Download the publisher's Large JPEG; no crop or resample."
+    "operation": "Download the publisher's three TIFF layers; no crop or resample. The gas and mass pictures are what undoing the publisher's screen blend against the visible-light layer leaves (packages/bake/authoring/bullet-cluster/layers.mts)."
   }
 }

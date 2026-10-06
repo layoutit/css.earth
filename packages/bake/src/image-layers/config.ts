@@ -2,14 +2,17 @@ import { requireNonemptyString as text } from '@cssearth/core';
 import type { PreparedImageLayerBank } from '@cssearth/objects';
 export type Vec3 = [number, number, number];
 export type LayerAxis = 'x' | 'y' | 'z';
+/** A body of a cluster collision: its picture and the two places on the sky its line runs between. */
+export interface CollisionBody { source: string; path: string; from: { raDeg: number; decDeg: number }; to: { raDeg: number; decDeg: number } }
 
 export interface ImageLayerRecipe {
   schema: 'cssearth-image-layer-recipe@1';
   id: string;
   source: { path: string; dimensions: [number, number]; originalDimensions: [number, number];
     parentPixelWindow?: [number, number, number, number]; publisherUrl: string; downloadUrl: string; credit: string;
-    /** `CC-BY` is an attribution licence stated without a version, as the Sloan Digital Sky Survey states its images'. */
-    license: 'CC-BY-4.0' | 'CC-BY';
+    /** `CC-BY` is an attribution licence stated without a version, as the Sloan Digital Sky Survey states its images'.
+     * `NASA-SAO` is the Chandra X-ray Center's terms: no copyright asserted on Chandra content, acknowledgement requested. */
+    license: 'CC-BY-4.0' | 'CC-BY' | 'NASA-SAO';
     /** Milky Way stars in front of the galaxy, removed from the photograph before its layers are cut (./foreground.ts). */
     foregroundStars?: { path: string; raDegColumn: string; decDegColumn: string; gMagColumn: string; source: string; basis: string };
     /** Companion galaxies removed the same way, by their rows (key column) in a repository catalogue with the Local Volume
@@ -75,6 +78,13 @@ export interface ImageLayerRecipe {
      * how far the central star's own light reaches in the picture: that light stays at the star. */
     densityGrid?: { source: string; basis: string; path: string; cells: number; cellArcsec: number; toward: 'high' | 'low'; secondAxisPaDeg: number; thirdAxisPaDeg: number;
       centreArcsec?: [number, number]; smoothPixels: number; starRadiusArcsec?: number };
+    /** A cluster merger's hot gas and mass (./collision.ts). The X-ray papers take the gas as round about the line the
+     * subcluster moves along; the lensing papers fit the mass with two round halos, round together about the line through
+     * them. `gas` and `mass` each have a picture of their own on the photograph's frame (`path`), added to it by a screen,
+     * and a line on the sky: the published places of their two concentrations, `from` the main cluster's and `to` the
+     * subcluster's. `tiltDeg` is the lines' angle from the plane of the sky, the `to` end the farther. The photograph stays
+     * on its plane; each picture's light is spread along each sight line through the body of revolution that adds up to it. */
+    collision?: { source: string; basis: string; tiltDeg: number; gas: CollisionBody; mass?: CollisionBody };
     body?: { source: string; basis: string; semiPolarArcsec: number; semiEquatorialArcsec: number; polarTiltDeg: number; polarLeansToPaDeg: number;
       envelope?: { source: string; radiusArcsec: number };
       cavities?: { source: string; emission: number; sizeArcsec: number; farBetweenPaDeg: [number, number] } };
@@ -202,6 +212,13 @@ const bodyOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['body']> =
     ...(envelope === undefined ? {} : { envelope: { source: text(envelope.source, 'geometry.body.envelope.source'), radiusArcsec: positive(envelope.radiusArcsec, 'geometry.body.envelope.radiusArcsec') } }),
     ...(cavities === undefined ? {} : { cavities: { source: text(cavities.source, 'geometry.body.cavities.source'), emission: fraction(cavities.emission, 'geometry.body.cavities.emission'), sizeArcsec: positive(cavities.sizeArcsec, 'geometry.body.cavities.sizeArcsec'), farBetweenPaDeg: angles(cavities.farBetweenPaDeg, 'geometry.body.cavities.farBetweenPaDeg') } }) };
 };
+const collisionOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['collision']> => {
+  const c = object(v, 'geometry.collision'), tilt = finite(c.tiltDeg, 'geometry.collision.tiltDeg');
+  if (!(tilt >= 0 && tilt <= 45)) throw new TypeError(`geometry.collision.tiltDeg is the lines' angle from the plane of the sky, from 0 to 45; got ${tilt}.`);
+  const place = (value: unknown, name: string) => { const p = object(value, name); return { raDeg: finite(p.raDeg, `${name}.raDeg`), decDeg: finite(p.decDeg, `${name}.decDeg`) }; };
+  const body = (value: unknown, name: string): CollisionBody => { const b = object(value, name); return { source: text(b.source, `${name}.source`), path: path(b.path), from: place(b.from, `${name}.from`), to: place(b.to, `${name}.to`) }; };
+  return { source: text(c.source, 'geometry.collision.source'), basis: text(c.basis, 'geometry.collision.basis'), tiltDeg: tilt, gas: body(c.gas, 'geometry.collision.gas'), ...(c.mass === undefined ? {} : { mass: body(c.mass, 'geometry.collision.mass') }) };
+};
 const parsecUnit = (v: unknown, unsupported: boolean): 'pc' => {
   if (v !== 'pc' || unsupported) throw new TypeError(`geometry.unit is "pc", on a flat bank without a bulge; got ${JSON.stringify(v)}${unsupported ? ' on a bank that is not flat or has a bulge' : ''}.`);
   return v;
@@ -251,7 +268,7 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
   const kind = g.kind;
   if (kind !== 'inclined-disk' && kind !== 'line-of-sight-envelope') throw new TypeError('Unsupported image-layer geometry.');
   if (e.format !== 'webp') throw new TypeError('Image layers require WebP.');
-  if (s.license !== 'CC-BY-4.0' && s.license !== 'CC-BY') throw new TypeError(`Unsupported source license declaration: ${JSON.stringify(s.license)}; expected CC-BY-4.0 or CC-BY.`);
+  if (s.license !== 'CC-BY-4.0' && s.license !== 'CC-BY' && s.license !== 'NASA-SAO') throw new TypeError(`Unsupported source license declaration: ${JSON.stringify(s.license)}; expected CC-BY-4.0, CC-BY or NASA-SAO.`);
   if (!Array.isArray(g.depthWeights) || g.depthWeights.length < 3 || g.depthWeights.length > 64) throw new TypeError('depthWeights must contain 3-64 values.');
   const weights = g.depthWeights.map((v, i) => positive(v, `depthWeights[${i}]`));
   if(!Array.isArray(g.depthScales)||g.depthScales.length!==weights.length)throw new TypeError('depthScales must align with depthWeights.');
@@ -284,11 +301,12 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       ...(g.rings===undefined?{}:{rings:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||b.flat!==true)throw new TypeError('geometry.rings is for a flat bank without a bulge, walls or a body.');return ringsOf(g.rings);})()}),
       ...(g.surface===undefined?{}:{surface:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||b.flat!==true)throw new TypeError('geometry.surface is for a flat bank without a bulge, walls, a body or rings.');return surfaceOf(g.surface);})()}),
       ...(g.densityGrid===undefined?{}:{densityGrid:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||g.surface!==undefined||b.flat!==true)throw new TypeError('geometry.densityGrid is for a flat bank without a bulge, walls, a body, rings or a surface.');return densityOf(g.densityGrid);})()}),
+      ...(g.collision===undefined?{}:{collision:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||g.surface!==undefined||g.densityGrid!==undefined||b.flat!==true)throw new TypeError('geometry.collision is for a flat bank without a bulge, walls, a body, rings, a surface or a density grid.');return collisionOf(g.collision);})()}),
       ...(g.unit===undefined?{}:{unit:parsecUnit(g.unit,g.bulge!==undefined||b.flat!==true)}) },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),
       ...(b.colorTie===undefined?{}:{colorTie:colorTieOf(b.colorTie)}),
-      ...(g.bulge===undefined&&g.shape===undefined&&g.densityGrid===undefined&&g.body===undefined&&(g.rings as {lineOfSightThicknessArcsec?:unknown}|undefined)?.lineOfSightThicknessArcsec===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
+      ...(g.bulge===undefined&&g.shape===undefined&&g.densityGrid===undefined&&g.body===undefined&&g.collision===undefined&&(g.rings as {lineOfSightThicknessArcsec?:unknown}|undefined)?.lineOfSightThicknessArcsec===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
       ...(b.flat===undefined?{}:{flat:flatOf(b.flat)}),
       encoding: { format: 'webp', quality, ...(e.alphaQuality===undefined?{}:{alphaQuality:alphaQualityOf(e.alphaQuality)}) } }, provenance: { path: path(p.path) } };

@@ -1,0 +1,38 @@
+{
+  "id": "publication-springel-farrar-2007-bullet-cluster-speed",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The speed of the 'bullet' in the merging galaxy cluster 1E0657-56",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0703232"
+    },
+    {
+      "type": "doi",
+      "value": "10.1111/j.1365-2966.2007.12159.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0703232",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0703232",
+      "checkedOn": "2026-10-05",
+      "locator": "Sect. I: the lensing data are fitted with two spherically symmetric NFW halos. Sect. V.1: an offset from a central collision introduces more axial asymmetry than is observed in the cones of the bow shock and the cold front; the system should be close to a central merger in the plane of the sky, and the paper's simulations are exactly central, the merger axis in the plane of the sky."
+    }
+  ],
+  "creators": [
+    "Springel, V.",
+    "Farrar, G. R."
+  ],
+  "publisher": "MNRAS 380, 911",
+  "publicationDate": "2007",
+  "relations": [],
+  "statements": []
+}

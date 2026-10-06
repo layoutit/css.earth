@@ -1,0 +1,41 @@
+{
+  "id": "publication-barrena-2002-bullet-cluster-dynamics",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Dynamical Status of the Cluster of Galaxies 1E0657-56",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0202323"
+    },
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361:20020244"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0202323",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0202323",
+      "checkedOn": "2026-10-05",
+      "locator": "Sect. 3.1: the subcluster's seven galaxies have a mean velocity of 89479 +/- 41 km/s, the main system 88681 +/- 69 km/s. Sect. 3.4 and 4: a radial velocity difference of 616 km/s in the cluster rest frame at a projected distance of 0.7 Mpc; with the X-ray speed of the subcluster, the line connecting the two systems is 5 to 15 degrees from the plane of the sky."
+    }
+  ],
+  "creators": [
+    "Barrena, R.",
+    "Biviano, A.",
+    "Ramella, M.",
+    "Falco, E. E.",
+    "Seitz, S."
+  ],
+  "publisher": "A&A 386, 816",
+  "publicationDate": "2002",
+  "relations": [],
+  "statements": []
+}
