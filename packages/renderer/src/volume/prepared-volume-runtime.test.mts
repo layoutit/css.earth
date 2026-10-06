@@ -229,7 +229,7 @@ for (const bounds of ['leaf', 'frame']) test(`prepared ${bounds} bounds defer of
   assert.equal(resolver.mock.callCount(), 9);
 });
 
-test('a stack the camera turns to joins a share a frame, every eighth slice first, and leaves whole at rest', () => {
+test('a stack the camera turns to joins eight slices a frame, every eighth slice first, and leaves whole at rest', () => {
   const frames: ((time: number) => void)[] = [];
   let now = 0;
   const frame = () => { now += 16; frames.shift()!(now); };
@@ -248,9 +248,11 @@ test('a stack the camera turns to joins a share a frame, every eighth slice firs
     assert.equal(shown(), 8);
     for (const index of [0, 8, 56]) assert.equal(slices[index]!.style.display, '');
     for (const index of [1, 4, 64]) assert.equal(slices[index]!.style.display, 'none');
-    let joining = 1;
+    frame();
+    assert.equal(shown(), 16, 'eight a frame, never more');
+    let joining = 2;
     while (shown() < 100) { frame(); joining++; }
-    assert.ok(joining > 3 && joining < 8, `${joining} frames`);
+    assert.equal(joining, 13, 'a hundred slices, eight a frame');
     // Turned away, the stack stays while the camera moves, then leaves in one frame.
     runtime.publish(publication([1, 0, 0]));
     while (frames.length) frame();
