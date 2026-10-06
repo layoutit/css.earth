@@ -2245,6 +2245,16 @@
           }
         ]
       },
+      "launch": {
+        "value": "2003",
+        "citations": [
+          {
+            "catalogueId": "reference-spitzer-mission",
+            "checkedOn": "2026-10-05",
+            "locator": "Launch Date and Time: Aug. 25, 2003"
+          }
+        ]
+      },
       "imageId": "spitzer"
     },
     {
@@ -2740,6 +2750,16 @@
             "catalogueId": "reference-webb-observatory",
             "checkedOn": "2026-09-14",
             "locator": "The Largest Telescope Ever Sent into Space: infrared telescope"
+          }
+        ]
+      },
+      "launch": {
+        "value": "2021",
+        "citations": [
+          {
+            "catalogueId": "reference-webb-mission",
+            "checkedOn": "2026-10-05",
+            "locator": "Launch: Dec 25, 2021"
           }
         ]
       },
@@ -3963,6 +3983,51 @@
         ]
       },
       "imageId": "sloan-2-5m"
+    },
+    {
+      "id": "mayall-4m",
+      "name": {
+        "value": "Nicholas U. Mayall 4-metre telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-mayall-4m",
+            "checkedOn": "2026-10-05",
+            "locator": "Title: NSF Nicholas U. Mayall 4-meter Telescope"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "A 4-metre telescope just below the summit of Kitt Peak in Arizona. It was the second largest in the world when it first observed in 1973.",
+        "citations": [
+          {
+            "catalogueId": "reference-mayall-4m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescope overview: the second-largest telescope by aperture at the time of its first light in 1973, located just below the summit of Kitt Peak"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-mayall-4m",
+            "checkedOn": "2026-10-05",
+            "locator": "Kitt Peak National Observatory: over twenty optical and two radio telescopes"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-mayall-4m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescope overview: the second-largest telescope by aperture at the time of its first light in 1973, located just below the summit of Kitt Peak"
+          }
+        ]
+      },
+      "imageId": "mayall-4m"
     }
   ],
   "missions": [
