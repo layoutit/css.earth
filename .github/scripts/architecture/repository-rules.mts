@@ -15,6 +15,7 @@ import { checkNebulaBoundaries } from './nebula-packages.mts';
 import { checkPackageCycles } from './package-cycles.mts';
 import { checkPreparationWithoutRenderer } from './preparation-without-renderer.mts';
 import { checkPreInstallImports } from './pre-install-imports.mts';
+import { checkSiteRootAllowlist } from './site-root-allowlist.mts';
 
 export interface RepositoryRule {
   readonly id: string;
@@ -90,6 +91,11 @@ export const REPOSITORY_RULES: readonly RepositoryRule[] = [
     id: 'pre-install-imports',
     description: 'a script a workflow job runs before its install imports only node: built-ins and files the job\'s checkout keeps, transitively (pre-install-imports.mts)',
     check: checkPreInstallImports,
+  },
+  {
+    id: 'site-root-allowlist',
+    description: 'site/ holds directly only the files listed in site-root-allowlist.json; every other file lives in the folder that owns it (site-root-allowlist.mts)',
+    check: checkSiteRootAllowlist,
   },
 ];
 
