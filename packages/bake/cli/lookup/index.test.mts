@@ -23,6 +23,9 @@ test('the command reads a tracked body: its inventory against a revision, its ma
   // Every object at once: one list of rows, each led by its object id.
   assert.match((await run('records', '--every', '--file=object.json', '--search=bodyRadiusM: 1737400')).stdout,
     /^\d+ of [\d,]+ objects hold \d+ entries \(in files named "object\.json", matching "bodyRadiusM: 1737400"\); [\d,]+ JSON files read\n(?:.*\n)*moon {2}object\.json {2}\.properties\.worldFrame {2}bodyRadiusM: 1737400, /u);
+  // A key counts every object's entries by its value.
+  assert.match((await run('records', '--every', '--file=object.json', '--by=classification')).stdout,
+    /^[\d,]+ of [\d,]+ objects hold [\d,]+ entries with classification \(in files named "object\.json"\); [\d,]+ JSON files read\n *[\d,]+ {2}"[a-z-]+"\n/u);
   await assert.rejects(run('files', 'moon'), /Usage: pnpm lookup <inventory\|manifest\|records\|prepared>/u);
 });
 

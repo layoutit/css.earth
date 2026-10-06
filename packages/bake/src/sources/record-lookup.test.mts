@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { formatRecordLookup, formatRecordSweep, recordLookup, recordLookupOptions, type RecordFile } from '@cssearth/bake/sources';
+import { formatRecordLookup, formatRecordSweep, recordLookup, recordLookupOptions, recordTally, type RecordFile } from '@cssearth/bake/sources';
 
 const records: RecordFile[] = [
   { file: 'object.json', value: { id: 'fixture', parent: 'fixture-system', properties: { worldFrame: { referenceFrame: 'sun-icrf', originM: [1, 2, 3], bodyRadiusM: 1737400 } } } },
@@ -53,12 +53,14 @@ test('without a search or a file the lookup says where the records are; with one
 
 test('options take object ids, a search and a file, and refuse a flag the lookup does not have', () => {
   assert.deepEqual(recordLookupOptions(['moon', 'mars', '--search=radius', '--file=object.json', '--full']),
-    { ids: ['moon', 'mars'], every: false, search: 'radius', file: 'object.json', full: true, all: false, json: false });
+    { ids: ['moon', 'mars'], every: false, search: 'radius', file: 'object.json', by: undefined, full: true, all: false, json: false });
   assert.throws(() => recordLookupOptions(['--search=radius']), /Name at least one object id/u);
   assert.throws(() => recordLookupOptions(['moon', '--kind=input']), /Unknown option '--kind'/u);
   // Every object is asked something: a search or a file, and no ids beside it.
   assert.deepEqual([recordLookupOptions(['--every', '--file=object.json']).ids, recordLookupOptions(['--every', '--search=radius']).every], [[], true]);
-  assert.throws(() => recordLookupOptions(['--every']), /--every needs --search or --file/u);
+  assert.throws(() => recordLookupOptions(['--every']), /--every needs --search, --file or --by/u);
+  assert.deepEqual([recordLookupOptions(['--every', '--by=kind']).by, recordLookupOptions(['moon', '--by=kind']).ids], ['kind', ['moon']]);
+  assert.throws(() => recordLookupOptions(['moon', '--by=']), /--by takes a key/u);
   assert.throws(() => recordLookupOptions(['moon', '--every', '--search=radius']), /Name object ids or pass --every, not both/u);
 });
 
@@ -71,4 +73,19 @@ test('a lookup of the one file asked for still says how many the package holds, 
     'moon  source/content/object.json  .panel.facts[1]  id: "radius", label: "Mean radius", value: "1,737.4 km"',
     'mars  source/content/object.json  .panel.facts[1]  id: "radius", label: "Mean radius", value: "1,737.4 km"',
     'not JSON, so not read: mars/source/content/orbit.json', ''].join('\n'));
+});
+
+test('a key counts the entries that hold it by its value, for one object or over every object', () => {
+  const ledger = (statuses: readonly string[]): RecordFile[] => [{ file: 'investigations.json', value: { schema: 'ledger', entries: statuses.map((status, index) => ({ id: `entry-${index}`, status })) } }];
+  const options = { by: 'status', full: false, all: false };
+  const moon = recordLookup('moon', ledger(['included', 'deferred', 'included']), options), mars = recordLookup('mars', ledger(['included', 'excluded']), options);
+  // Only the entries that hold the key are selected: the ledger's own entry, which has a schema and no status, is not.
+  assert.deepEqual([moon.entries.length, moon.total], [3, 4]);
+  assert.deepEqual(recordTally(moon.entries, 'status'), [{ value: 'included', entries: 2 }, { value: 'deferred', entries: 1 }]);
+  assert.equal(formatRecordLookup(moon, options), 'moon: 3 of 4 entries hold status in 1 of 1 JSON files\n2  "included"\n1  "deferred"\n');
+  assert.equal(formatRecordSweep([moon, mars, recordLookup('ceres', [], options)], options),
+    '2 of 3 objects hold 5 entries with status; 2 JSON files read\n3  "included"\n1  "deferred"\n1  "excluded"\n');
+  // A search narrows what is counted.
+  assert.equal(formatRecordLookup(recordLookup('moon', ledger(['included', 'deferred']), { ...options, search: 'entry-1' }), { ...options, search: 'entry-1' }),
+    'moon: 1 of 3 entries hold status (matching "entry-1") in 1 of 1 JSON files\n1  "deferred"\n');
 });

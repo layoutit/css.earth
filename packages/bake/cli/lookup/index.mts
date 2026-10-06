@@ -2,8 +2,8 @@
  * or one value wherever its JSON records, or the bake restored under `prepared/`, keep it.
  * Usage: node packages/bake/cli/lookup/index.mts inventory <id>... [--search=<text>] [--location=public|prepared] [--since=<revision>] [--urls] [--all] [--json]
  *        node packages/bake/cli/lookup/index.mts manifest <id>... [--search=<text>] [--kind=input|generated|document] [--consumer=<name>] [--full] [--all] [--json]
- *        node packages/bake/cli/lookup/index.mts records <id>...|--every [--search=<text>] [--file=<text>] [--full] [--all] [--json]
- *        node packages/bake/cli/lookup/index.mts prepared <id>...|--every [--search=<text>] [--file=<text>] [--full] [--all] [--json]
+ *        node packages/bake/cli/lookup/index.mts records <id>...|--every [--search=<text>] [--file=<text>] [--by=<key>] [--full] [--all] [--json]
+ *        node packages/bake/cli/lookup/index.mts prepared <id>...|--every [--search=<text>] [--file=<text>] [--by=<key>] [--full] [--all] [--json]
  *
  * `inventory` prints each file's location, byte count and name, 40 rows unless `--all`; `--urls` adds where each is
  * published, and `--since` compares with the inventory a git revision held (added, removed, changed). `manifest` prints
@@ -11,7 +11,8 @@
  * `records` reads every JSON file of the package outside `prepared/`: alone it lists the files, and `--search` prints each
  * entry whose path, keys or values contain the text, with the file, the jq path and the entry's values. `prepared` asks
  * the same of the JSON files under `prepared/`. `--file` reads only the files whose path contains its text, and `--every`
- * asks every object package, printing one list of rows led by their object id.
+ * asks every object package, printing one list of rows led by their object id. `--by` counts the selected entries by the
+ * value that key holds, in place of listing them.
  */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { execFileSync } from 'node:child_process';
@@ -20,7 +21,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { formatInventoryLookup, inventoryAssets, inventoryLookup, inventoryLookupOptions } from '@cssearth/bake/delivery';
-import { formatManifestLookup, formatRecordLookup, formatRecordSweep, manifestLookup, manifestLookupOptions, recordFileNamed, recordLookup, recordLookupOptions, type RecordFile, type RecordLookup, type RecordLookupOptions } from '@cssearth/bake/sources';
+import { formatManifestLookup, formatRecordLookup, formatRecordSweep, manifestLookup, manifestLookupOptions, recordFileNamed, recordLookup, recordLookupOptions, recordTally, type RecordFile, type RecordLookup, type RecordLookupOptions } from '@cssearth/bake/sources';
 import { INVENTORY_FILE, requireInventory, validateSourceManifest } from '@cssearth/objects/node';
 
 /** Object packages `--every` reads at once. A search of every record (5,549 objects, 74,576 files) took 17.5 s one object at a time and 7.1 s with sixteen. */
@@ -87,7 +88,10 @@ async function lookup(root: string, view: string | undefined, args: readonly str
     const options = recordLookupOptions(args), prepared = view === 'prepared', lookups: RecordLookup[] = [];
     const ids = options.every ? (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort() : options.ids;
     for (let at = 0; at < ids.length; at += READ_TOGETHER) lookups.push(...await Promise.all(ids.slice(at, at + READ_TOGETHER).map(id => recordsOf(id, directory(id), prepared, options))));
+    const { by } = options;
+    if (options.every && options.json && by !== undefined) return JSON.stringify({ by, tally: recordTally(lookups.flatMap(found => found.entries), by) }, null, 2);
     if (options.every) return options.json ? JSON.stringify(lookups.filter(found => found.entries.length), null, 2) : formatRecordSweep(lookups, options).trimEnd();
+    if (options.json && by !== undefined) return JSON.stringify(lookups.map(found => ({ id: found.id, by, tally: recordTally(found.entries, by) })), null, 2);
     const text = (found: RecordLookup) => prepared && !found.listed ? `${found.id}: nothing is restored under prepared/; pnpm setup:assets --object=${found.id} restores it\n` : formatRecordLookup(found, options);
     return options.json ? JSON.stringify(lookups, null, 2) : lookups.map(text).join('\n').trimEnd();
   }
