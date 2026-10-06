@@ -23,8 +23,8 @@ JPL Horizons elements and independent vectors are pinned at JD 2461286.5
 
 ## Processing
 
-The MPCD mesh is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS
-triangles. Its original coordinates are not rescaled to the survey's diameter,
+The MPCD mesh is simplified with meshoptimizer 1.2.0 to 792 native PolyCSS
+triangles, the fewest within its 2600 m error allowance. Its original coordinates are not rescaled to the survey's diameter,
 which averages ADAM and MPCD. Elevation samples the original mesh radius minus a
 149 km reference sphere, with a -30 to 50 km legend. The published ecliptic pole
 is converted to equatorial J2000.
@@ -68,7 +68,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Independent nearest-triangle sampling (8192 area-stratified samples each way)
+Independent nearest-triangle sampling (8192 area-stratified samples each way) Re-prepared 2026-10-06: the error allowance now decides the face count, 792 faces at 2528 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 measured p95 1407.4 m and maximum 2765.2 m between the source and the display
 mesh. Checks found no repeated radial intersection, which supports the
 radial-height dataset.

@@ -39,11 +39,10 @@
         "expectedFaces": 2292
       },
       "faceBudget": 800,
-      "texelsPerFace": 4096,
+      "atlasTexels": 3276800,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",
-        "targetFaces": 800,
         "maximumErrorMeters": 12,
         "regularize": false
       }

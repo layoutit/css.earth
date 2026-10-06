@@ -789,10 +789,9 @@
       "latitudeSegments": 24,
       "longitudeSegments": 40,
       "faceBudget": 2000,
-      "texelsPerFace": 4096,
+      "atlasTexels": 4915200,
       "simplification": {
         "method": "source-meshoptimizer",
-        "targetFaces": 1200,
         "maximumErrorMeters": 3000
       }
     }
