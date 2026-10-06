@@ -1,0 +1,68 @@
+{
+  "id": "wr-124",
+  "name": "WR 124",
+  "system": "M1-67",
+  "description": "WR 124 is the Wolf-Rayet star inside the nebula M1-67, about 6,400 parsecs away.",
+  "aliases": [
+    "Merrill's Star",
+    "QR Sagittae",
+    "Wolf-Rayet 124",
+    "Hen 2-427",
+    "HIP 94289"
+  ],
+  "parent": "m1-67",
+  "featured": true,
+  "target": "WR 124",
+  "gaia": "4513494205567536512",
+  "paper": {
+    "url": "https://arxiv.org/abs/1904.04687",
+    "credit": "Hamann et al. (2019), A&A 625, A57"
+  },
+  "radius": {
+    "value": 11.93,
+    "source": "Hamann et al. (2019), A&A 625, A57, Table 1, WR 124: R* = 11.93 solar radii, the radius where the continuum's Rosseland optical depth is 20 (Sect. 2), under the wind",
+    "url": "https://arxiv.org/abs/1904.04687"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 44700,
+    "source": "Hamann et al. (2019), A&A 625, A57, Table 1, WR 124: T* = 44.7 kK, the temperature at that radius; spectral subtype WN8h",
+    "url": "https://arxiv.org/abs/1904.04687"
+  },
+  "distance": {
+    "value": 6400,
+    "source": "Zavala et al. (2022), MNRAS 513, 3317, Sect. 1: an estimated distance of 6.4 (+2.5, −0.8) kpc, from Jiménez-Hernández et al. (2020), the distance its nebula's page stands at",
+    "url": "https://arxiv.org/abs/2204.07778"
+  },
+  "limb": {
+    "none": "no limb-darkening grid describes a Wolf-Rayet star, whose light leaves an expanding wind, not a still atmosphere"
+  },
+  "color": {
+    "skip": [
+      "gaia-xp"
+    ],
+    "reason": "The star's measured light is reddened by dust between it and the Sun, a color excess E(b−v) of 1.08 mag (Hamann et al. 2019, Table 1): Gaia's spectrum shows that dust, not the star"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WR 124 is the Wolf-Rayet star inside the nebula M1-67, about 6,400 parsecs away.",
+    "introduction": "A star of 44,700 K with about 560,000 times the Sun's light, losing its mass in a wind of 710 km/s. The sphere drawn is the star under that wind.",
+    "locator": "Table 1: WR 124, WN8h, T* = 44.7 kK, terminal wind velocity 710 km/s, R* = 11.93 Rsun, log(L/Lsun) = 5.75"
+  },
+  "notes": [
+    "What is drawn is the star under its wind: the radius where the continuum's optical depth is 20 (Hamann et al. (2019), A&A 625, A57, Sect. 2, https://arxiv.org/abs/1904.04687). The wind above it is still opaque, and the paper prints no radius for where it turns clear.",
+    "The star's mass is not measured. Table 1 of the same paper gives 22 solar masses from a mass-luminosity relation for helium-burning stars and 20 from one built on evolutionary tracks (https://arxiv.org/abs/1904.04687).",
+    "Its wind: 710 km/s, carrying off 10^-4.3 solar masses a year (Table 1, https://arxiv.org/abs/1904.04687). The wind is not drawn.",
+    "The radius and luminosity are for the paper's own distance, a modulus of 14.0 (+0.5, −0.4) from Gaia DR2, 6.3 kpc (Table 1, https://arxiv.org/abs/1904.04687); the star stands here at its nebula's 6.4 kpc.",
+    "A compact companion hidden deep in the wind has been proposed; the paper keeps the star as single (Hamann et al. (2019), A&A 625, A57, comments on WR 124, https://arxiv.org/abs/1904.04687). It is drawn as one star.",
+    "Its light reaches us reddened by dust: a color excess E(b−v) of 1.08 mag (Table 1, https://arxiv.org/abs/1904.04687)."
+  ],
+  "radialVelocity": {
+    "value": 190,
+    "uncertainty": 7.4,
+    "source": "SIMBAD's radial velocity for Gaia DR3 4513494205567536512 (quality D), from 2007AN....328..889K; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2007AN....328..889K/abstract"
+  },
+  "order": 5782
+}

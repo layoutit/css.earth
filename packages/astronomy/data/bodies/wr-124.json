@@ -1,0 +1,30 @@
+{
+ "id": "wr-124",
+ "classification": "star",
+ "order": 5782,
+ "physical": {
+  "name": "WR 124",
+  "horizonsCode": null,
+  "meanRadiusKm": 8299701,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 44700
+ },
+ "physicalNotes": "Radius 11.93 solar radii from Hamann et al. (2019), A&A 625, A57, Table 1, WR 124: R* = 11.93 solar radii, the radius where the continuum's Rosseland optical depth is 20 (Sect. 2), under the wind (https://arxiv.org/abs/1904.04687): 8,299,701 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 44700 K from Hamann et al. (2019), A&A 625, A57, Table 1, WR 124: T* = 44.7 kK, the temperature at that radius; spectral subtype WN8h (https://arxiv.org/abs/1904.04687). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 287.878633796116,
+  "declinationDegrees": 16.860586165421775,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 6400,
+  "properMotionRaMasPerYear": -2.5172822625630715,
+  "properMotionDecMasPerYear": -5.6714226235088745,
+  "radialVelocityKmPerS": 190,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4513494205567536512 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wr-124/source/photometry/gaia-dr3-source.csv; cross-identification HIP 94289: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+4513494205567536512",
+   "distance": "Zavala et al. (2022), MNRAS 513, 3317, Sect. 1: an estimated distance of 6.4 (+2.5, −0.8) kpc, from Jiménez-Hernández et al. (2020), the distance its nebula's page stands at (https://arxiv.org/abs/2204.07778): 6400 pc; Gaia DR3 parallax 0.1568 +/- 0.0140 mas (same row, RUWE 1.03), 11.2 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -2.517, -5.671 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 4513494205567536512 (quality D), from 2007AN....328..889K; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2007AN....328..889K/abstract)"
+  }
+ }
+}
