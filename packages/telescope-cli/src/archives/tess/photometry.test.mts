@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { parseLightCurve, SKY_TERMS } from './photometry.mts';
+import { parseLightCurve, rotationVerdict, SKY_TERMS } from './photometry.mts';
 
 const peak = { periodDays: 3.88, power: 0.85, amplitude: 0.031 };
 const printed = { frames: 3600, aperturePixels: 21, saturated: false, spanDays: 26.6, scatter: 0.011, whole: peak, halves: [{ ...peak, periodDays: 3.76 }, null], time: [1, 2, 3], flux: [1.01, 0.99, 1] };
@@ -16,4 +16,15 @@ test('a star no pixel shows gives no light curve, and a broken answer is refused
   assert.equal(parseLightCurve({ frames: 3600, aperturePixels: 0 }), undefined);
   assert.throws(() => parseLightCurve({ ...printed, flux: [1, 2] }), /different lengths/u);
   assert.throws(() => parseLightCurve({ ...printed, whole: { periodDays: 'x' } }), /whole sector period/u);
+});
+
+test('a rotation is believed from one sector only when the peak is strong, both orbits show it and it is short enough', () => {
+  const curve = parseLightCurve({ ...printed, halves: [{ ...peak, periodDays: 3.76 }, { ...peak, periodDays: 3.88 }] })!;
+  assert.deepEqual(rotationVerdict(curve), { detected: true, periodDays: 3.88, amplitude: 0.031 });
+  assert.match(rotationVerdict({ ...curve, whole: { ...peak, power: 0.21 } }).reason!, /No period stands out/u);
+  assert.match(rotationVerdict({ ...curve, halves: [{ ...peak, periodDays: 3.19 }, { ...peak, periodDays: 5.64 }] }).reason!, /two orbits do not show the same period \(3\.19 d and 5\.64 d/u);
+  assert.match(rotationVerdict({ ...curve, halves: [curve.halves[0]!, null] }).reason!, /two orbits/u);
+  const slow = { ...peak, periodDays: 12.72 }, long = rotationVerdict({ ...curve, whole: slow, halves: [slow, slow] });
+  assert.deepEqual([long.detected, long.periodDays], [false, 12.72]); assert.match(long.reason!, /second sector/u);
+  assert.match(rotationVerdict({ ...curve, saturated: true }).reason!, /saturates/u);
 });

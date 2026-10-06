@@ -29,6 +29,23 @@ export interface SectorLightCurve { readonly frames: number; readonly aperturePi
   readonly whole: Peak; /** The same search in each of the sector's two orbits, where an orbit holds enough of the curve. */ readonly halves: readonly (Peak | null)[];
   readonly time: readonly number[]; readonly flux: readonly number[] }
 
+/** When one sector's light curve is believed to show the star turning. Settled on our own stars whose rotation the
+ * catalogues print and whose light the mission also measured: with these values every period the rule accepted was the
+ * mission's or the catalogue's (17 of 17 on the first 37 stars); without the limit on the period, 2 of 19 were wrong, both
+ * longer than 9 days, where a sector holds too few turns. */
+export const ROTATION_POWER = 0.3, ORBIT_AGREEMENT = 0.2, ONE_SECTOR_DAYS = 9;
+export interface RotationVerdict { readonly detected: boolean; readonly periodDays?: number; /** Peak to peak, as a share of the mean light. */ readonly amplitude?: number; readonly reason?: string }
+
+/** Whether a sector's light curve shows the star's rotation, and why not when it does not. */
+export function rotationVerdict(curve: SectorLightCurve): RotationVerdict {
+  const { whole, halves } = curve, days = Number(whole.periodDays.toFixed(2));
+  if (curve.saturated) return { detected: false, reason: 'The star saturates the detector: its light has bled out of the aperture.' };
+  if (whole.power < ROTATION_POWER) return { detected: false, reason: `No period stands out: the strongest, ${days} d, has a periodogram power of ${whole.power.toFixed(2)}, under the ${ROTATION_POWER} a rotation asks for.` };
+  if (!halves.every(half => half !== null && Math.abs(half.periodDays - whole.periodDays) <= ORBIT_AGREEMENT * whole.periodDays)) return { detected: false, reason: `The sector's two orbits do not show the same period (${halves.map(half => half === null ? 'none' : `${half.periodDays.toFixed(2)} d`).join(' and ')} against ${days} d over both).` };
+  if (whole.periodDays > ONE_SECTOR_DAYS) return { detected: false, periodDays: days, reason: `A period of ${days} d is longer than the ${ONE_SECTOR_DAYS} d one sector can vouch for: a second sector has to show it too.` };
+  return { detected: true, periodDays: days, amplitude: whole.amplitude };
+}
+
 const peak = (value: unknown, what: string): Peak => { const record = requireRecord(value, what); return { periodDays: requireFiniteNumber(record.periodDays, `${what} period`), power: requireFiniteNumber(record.power, `${what} power`), amplitude: requireFiniteNumber(record.amplitude, `${what} amplitude`) }; };
 
 /** What tools.py printed for one cutout; undefined when no pixel stood above the sky at the star. */
