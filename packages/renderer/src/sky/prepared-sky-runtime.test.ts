@@ -409,9 +409,10 @@ test('shared universe draws only resolved nebulae and never prefetches their dat
       assert.notEqual(independent, undefined);
       if (visible) await waitFor(() => {
         mounted.publish(camera, viewport, spatialFrame);
-        assert.equal(independent!.style.opacity, '1');
+        assert.equal(independent!.style.opacity, '0.999');
       });
-      assert.equal(independent!.style.opacity, visible ? '1' : '0');
+      // Never 1: a bank's root stops under opaque (STACK_OPACITY_CEILING).
+      assert.equal(independent!.style.opacity, visible ? '0.999' : '0');
       assert.equal(independent!.style.display, visible ? 'block' : 'none');
       // The galactic bank has the same silhouette but fades with the galaxy, which is zero here: its datasets are
       // neither drawn nor fetched.
@@ -704,9 +705,10 @@ test('authoritative detailed close-up gates background fetch, painting and publi
         mounted.publish(camera(radii), viewport, spatialFrame);
         assert.ok(Number(findBank('warm-bank').style.opacity) > 0);
       });
-      const selectedOpacity = Number(findBank('focus-bank').style.opacity);
+      // A bank's root stops at 0.999 (STACK_OPACITY_CEILING): the selected one reads that when it is in full view.
+      const written = Number(findBank('focus-bank').style.opacity), selectedOpacity = written === .999 ? 1 : written;
       assert.ok(selectedOpacity > 0);
-      assert.ok(Math.abs(Number(findBank('warm-bank').style.opacity) - (multiplier * selectedOpacity)) < 10 ** -12 / 2, `${Number(findBank('warm-bank').style.opacity)} is not close to ${multiplier * selectedOpacity}`);
+      assert.ok(Math.abs(Number(findBank('warm-bank').style.opacity) - Math.min(.999, multiplier * selectedOpacity)) < 10 ** -12 / 2, `${Number(findBank('warm-bank').style.opacity)} is not close to ${Math.min(.999, multiplier * selectedOpacity)}`);
     }
     const imageRoot = root.children.find(node => node.dataset.imageLayerObject === image.id)!;
     mounted.publish(near, viewport, spatialFrame);
