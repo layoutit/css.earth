@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { starryToolchainSync } from '@cssearth/telescope/node';
-import type { SectorLightCurve } from './photometry.mts';
+
 import { runTool } from './toolchain.mts';
 
 /** The finest detail fitted (spherical-harmonic degree) and the width of starry's prior on each coefficient. */
@@ -23,7 +23,7 @@ export interface BrightnessMap { readonly longitudes: readonly number[]; readonl
 
 const range = (from: number, to: number, step: number) => Array.from({ length: Math.round((to - from) / step) + 1 }, (_, index) => from + index * step);
 
-export async function brightnessMap(curve: Pick<SectorLightCurve, 'time' | 'flux'>, periodDays: number, inclinationDegrees: number): Promise<BrightnessMap> {
+export async function brightnessMap(curve: { readonly time: readonly number[]; readonly flux: readonly number[] }, periodDays: number, inclinationDegrees: number): Promise<BrightnessMap> {
   if (!(periodDays > 0) || !(inclinationDegrees > 0 && inclinationDegrees <= 90)) throw new RangeError('A map needs a rotation period and a tilt between 0 and 90 degrees.');
   const longitudes = range(-180, 180, GRID_STEP_DEGREES), latitudes = range(-90, 90, GRID_STEP_DEGREES), directory = await mkdtemp(join(tmpdir(), 'tess-map-')), job = join(directory, 'job.json');
   try { await writeFile(job, JSON.stringify({ time: curve.time, flux: curve.flux, periodDays, inclinationDegrees, degree: MAP_DEGREE, priorWidth: PRIOR_WIDTH, longitudesDegrees: longitudes, latitudesDegrees: latitudes }));

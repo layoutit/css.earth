@@ -8,7 +8,7 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireRecord } from '@cssearth/core';
-import { notTurning } from '../../archives/tess/photometry.mts';
+import { notTurning } from '../../archives/tess/verdict.mts';
 import { receiptPath, ROTATION_SCHEMA } from '../../archives/tess/reduce.mts';
 import { readJson, type MapRoute, type RouteContext } from '../maps/route.mts';
 import type { SurfaceMapChoice } from '../maps/surface-maps.mts';

@@ -5,10 +5,10 @@
  * published method for a TESS sector is made for (methods.mts), so it is read as it is: nothing is measured here from
  * the pixels of such a star.
  *
- * One call to MAST's archive, public and anonymous, through the pace pixels.mts keeps for the same host:
+ * One call to MAST's archive, public and anonymous, through the pace mast.mts keeps for the host:
  * `Mast.Caom.Filtered.Position`, the TESS time series at a place. Each row names its sector and its file. */
 import { isRecord } from '@cssearth/core';
-import { paced } from './pixels.mts';
+import { paced } from './mast.mts';
 
 export const MAST_INVOKE = 'https://mast.stsci.edu/api/v0/invoke';
 /** How far from a star's place the mission's own target may lie, degrees (21 arcseconds: one of its pixels). */

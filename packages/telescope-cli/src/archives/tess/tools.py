@@ -1,9 +1,5 @@
-"""The calls into the published codes that photometry.mts and methods.mts make (toolchain.json pins them). Nothing is
+"""The calls into the published codes that methods.mts and map.mts make (toolchain.json pins them). Nothing is
 computed here.
-
-  tools.py light-curve <job.json>          a star's light from its pixels in one TESS sector (lightkurve), with the
-                                           sky's own variation regressed out, and the period of what is left
-                                           (astropy's Lomb-Scargle)
 
   tools.py mission-light-curve <job.json>  a K2 campaign's light curve as the mission publishes it: the PDC-MAP flux
                                            of its long-cadence file, read by lightkurve
@@ -26,41 +22,6 @@ import sys
 import warnings
 
 
-def light_curve(job):
-    warnings.filterwarnings('ignore')
-    import numpy as np
-    import lightkurve as lk
-    from astropy.timeseries import LombScargle
-
-    tpf = lk.TessTargetPixelFile(job['cutout'])
-    tpf = tpf[tpf.quality == 0]
-    mask = tpf.create_threshold_mask(threshold=job['threshold'], reference_pixel='center')
-    if mask.sum() == 0:
-        return {'frames': int(len(tpf.time)), 'aperturePixels': 0}
-    raw = tpf.to_lightcurve(aperture_mask=mask)
-    sky = lk.DesignMatrix(tpf.flux[:, ~mask].value, name='sky').pca(job['skyTerms']).append_constant()
-    curve = lk.RegressionCorrector(raw).correct(sky).remove_nans().normalize()
-    binned = curve.bin(time_bin_size=job['binDays']).remove_nans()
-    time, flux = np.asarray(binned.time.value, dtype=float), np.asarray(binned.flux.value, dtype=float)
-
-    def peak(t, f, longest):
-        frequency = np.linspace(1 / longest, 1 / job['shortestDays'], job['frequencies'])
-        periodogram = LombScargle(t, f - np.mean(f))
-        power = periodogram.power(frequency)
-        best = int(np.argmax(power))
-        model = periodogram.model(t, frequency[best])
-        return {'periodDays': float(1 / frequency[best]), 'power': float(power[best]), 'amplitude': float(model.max() - model.min())}
-
-    # The two orbits of a sector, apart: the gap between them is the longest in the times.
-    gap = int(np.argmax(np.diff(time)))
-    halves = [(time[:gap + 1], flux[:gap + 1]), (time[gap + 1:], flux[gap + 1:])]
-    span = float(time.max() - time.min())
-    return {'frames': int(len(curve.time)), 'aperturePixels': int(mask.sum()), 'saturated': bool(np.nanmax(tpf.flux.value) > job['saturationElectronsPerSecond']),
-            'spanDays': span, 'scatter': float(np.std(flux)), 'whole': peak(time, flux, span / 2),
-            'halves': [peak(t, f, float(t.max() - t.min())) if len(t) > 10 else None for t, f in halves],
-            'time': [round(float(value), 5) for value in time], 'flux': [round(float(value), 6) for value in flux]}
-
-
 def mission_light_curve(job):
     """The light curve a mission's pipeline publishes for a star, as it is: lightkurve reads the long-cadence file's
     PDC-MAP flux with its default quality mask, and the campaign from the file's header."""
@@ -79,7 +40,7 @@ def rotation(job):
     six median absolute deviations from the median are dropped, and it is binned to three hours; then the highest peak of
     the generalized Lomb-Scargle periodogram between the time span and the Nyquist frequency, the highest peak of the
     wavelet power spectrum summed over time, and the autocorrelation's period. The variability range is the 95th less the
-    5th percentile of the light. Deciding what these numbers allow is photometry.mts's."""
+    5th percentile of the light. Deciding what these numbers allow is methods.mts's."""
     warnings.filterwarnings('ignore')
     import numpy as np
     import star_privateer as sp
@@ -178,10 +139,7 @@ def brightness_map(job):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) == 3 and sys.argv[1] == 'light-curve':
-        with open(sys.argv[2]) as handle:
-            result = light_curve(json.load(handle))
-    elif len(sys.argv) == 3 and sys.argv[1] == 'mission-light-curve':
+    if len(sys.argv) == 3 and sys.argv[1] == 'mission-light-curve':
         with open(sys.argv[2]) as handle:
             result = mission_light_curve(json.load(handle))
     elif len(sys.argv) == 3 and sys.argv[1] == 'rotation':
