@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
-import { mock } from 'node:test';
+import { test, mock } from 'node:test';
 mock.module(new URL('../scene/scene-router.mts', import.meta.url).href, { namedExports: { marker: 'router' } });
 mock.module(new URL('../scene/scene-registry.mts', import.meta.url).href, { namedExports: { marker: 'registry' } });
 mock.module(new URL('../scene/packaged-object-runtime.mts', import.meta.url).href, { namedExports: { marker: 'runtime' } });

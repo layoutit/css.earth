@@ -29,4 +29,3 @@ export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'b
   }
   return radii;
 }
-

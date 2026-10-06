@@ -1,10 +1,10 @@
+/** Every page is `/<id>/`, an object: a body, a star, a galaxy, a nebula, a cluster, an object seen from inside, or a
+ * system (a host with the bodies that orbit it). A system's page mounts its host's scene, seen out to its moons or to its
+ * planetary system; this module owns how an address names it. */
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 import { pageIdAtPath } from '../model/root-object.mts';
 import { systemHostId, systemRoute } from '../model/system-address.mts';
 
-/** Every page is `/<id>/`, an object: a body, a star, a galaxy, a nebula, a cluster, an object seen from inside, or a
- * system (a host with the bodies that orbit it). A system's page mounts its host's scene, seen out to its moons or to its
- * planetary system; this module owns how an address names it. */
 
 /** The star an object seen from inside opens centred on when its page is opened cold: the world's host. */
 export const WORLD_HOST_ID = SOLAR_SYSTEM_ID;

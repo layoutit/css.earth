@@ -9,9 +9,6 @@ const noCanvas = 'The CSS runtime uses no canvas or WebGL (AGENTS.md).';
 export default [
   {
     files: ['**/*.{js,mjs,cjs,ts,tsx,mts,cts,jsx}'],
-    // `site/` and the root `src/` stay out of the module-style gate until plan 7 (site architecture): a mass reformat there
-    // would collide with the site maintainers' open work.
-    ignores: ['site/**', 'src/**'],
     languageOptions: { parser: typescriptParser },
     plugins: { module: { rules: { 'header-comment-first': headerCommentFirst } } },
     rules: {

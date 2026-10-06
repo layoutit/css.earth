@@ -1,20 +1,16 @@
-import { readStellarExtent } from '@cssearth/objects';
-import { readVolumeAttachment } from '@cssearth/objects';
-import { readObjectContentDatasets, parseObjectDescriptor } from '@cssearth/objects';
+import { readStellarExtent, readVolumeAttachment, readObjectContentDatasets, parseObjectDescriptor, checkBankHosts, checkBoundStars, parseDensityVolumeFrame } from '@cssearth/objects';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { checkBankHosts, checkBoundStars, parseDensityVolumeFrame } from '@cssearth/objects';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/engine';
 import type { CatalogEntry } from '@cssearth/objects';
-import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors } from '@cssearth/objects/node';
+import { PREPARED_CATALOGUE, preparedCatalogueModule, readCatalog, readContextObjects, readObjectDescriptors, readInventory } from '@cssearth/objects/node';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
 import { BODIES, M_PER_PC, STAR_IDS, starAstrometry } from '@cssearth/astronomy';
 import { assetOrigin } from '../../server-assets/asset-origin.mts';
-import { readInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../../..');
 

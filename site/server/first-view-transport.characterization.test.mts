@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
-import { mock } from 'node:test';
+import { test, mock } from 'node:test';
 let bytes: Uint8Array;
 const tree = { nodes: [
   { tag: 'div', parent: null, className: 'shown', style: 'color:red', properties: [2] },

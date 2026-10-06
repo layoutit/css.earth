@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
-import { mock } from 'node:test';
+import { test, mock } from 'node:test';
 let placed: string[] = ['root']; const read = new Set<string>(); const loads: string[] = []; let changed = () => {};
 mock.module(new URL('../directory/world-context-plan.mts', import.meta.url).href, { namedExports: {
   APPLICATION_WORLD_CONTEXT: { system: { fadeOutStartDistanceM: 10, hiddenDistanceM: 20 } },

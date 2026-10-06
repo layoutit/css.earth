@@ -5,11 +5,7 @@ import { resolve } from "node:path";
 import type { ObjectEntry } from '@cssearth/objects';
 import { authoredObject } from '@cssearth/bake/sources';
 
-import { validateInventory, requireInventory, verifyInventory } from '@cssearth/objects/node';
-import {
-  validateSourceManifest,
-  verifySourceManifest,
-} from "@cssearth/objects/node";
+import { validateInventory, requireInventory, verifyInventory, validateSourceManifest, verifySourceManifest } from '@cssearth/objects/node';
 
 export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name">, projectRoot = process.cwd()) {
   const root = resolve(projectRoot, "src", "objects", objectRecord.id);

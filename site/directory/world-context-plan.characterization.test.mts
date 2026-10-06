@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import { mock, test } from 'node:test';
-import { after } from 'node:test';
+import { mock, test, after } from 'node:test';
 import { worldContextFixture } from './fixtures/world-context-characterization.mts';
 const fixture = worldContextFixture();
 after(() => fixture.remove());
