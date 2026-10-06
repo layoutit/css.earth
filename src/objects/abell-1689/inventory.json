@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "abell-1689-dataset-gas-and-mass.webp",
+      "bytes": 26166,
+      "sha256": "8affa38419b4d1baf730137fe849ea5c53317a073d0c74314cc8d2c935f80920"
+    },
+    {
+      "location": "public",
       "filename": "abell-1689-dataset-optical.webp",
       "bytes": 16042,
       "sha256": "8af4aa7482446969670f2f268e732d95ae1889c44a8831280f5cc548ef2c7ef5"
@@ -16,20 +22,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 472,
-      "sha256": "187c7040fb12b624c4950eedeb3a78f1dcc8462faf136cce750bdd8353fd8c8a"
+      "bytes": 705,
+      "sha256": "0026738f4f0d2ca8df3d386f96c8d218637d97c92ea573b09f65c33979a678bc"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 572,
-      "sha256": "0b625c53773478545697cbfe7613d787e066388c5273d07038ebb6db1444cd2c"
+      "bytes": 991,
+      "sha256": "611c6e1a24c222badf2ac51d86e2479d2a25ad36b814182c0fc05e9e38266a89"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 4677,
-      "sha256": "f675ef23a8584affa55996ec24148a41616036b0c6abe12873bfc784f2d5c083"
+      "bytes": 4989,
+      "sha256": "8a19af1a790bc8ab3430b52d768f1cd407b9408833f3e45f2c19c69a2ea8e26e"
     },
     {
       "location": "prepared",
@@ -40,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2373,
-      "sha256": "190c087b77a681d15dcf4316aaca209737bc959f3e9d13936679ab92d6f962b6"
+      "bytes": 3502,
+      "sha256": "22cb4e7f6e4d55b9c8887e32ddb09212fd1df7ad802ab3d4b92856a3f79be3b4"
     },
     {
       "location": "prepared",

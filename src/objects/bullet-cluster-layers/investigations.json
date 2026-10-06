@@ -75,6 +75,16 @@
         "https://chandra.harvard.edu/photo/2006/1e0657/more.html"
       ],
       "revisitWhen": "The cluster's galaxies are to come back: as dots at catalogued places, or by removing only the Gaia stars the frame was registered with."
+    },
+    {
+      "id": "depth-limit",
+      "subject": "A measured limit on the main cloud's depth",
+      "status": "included",
+      "finding": "Mahdavi & Chang (2011) bound the depth from Chandra and APEX-SZ data with no assumption on shape: half the pressure on the sight line through the main component lies within at least 400 +/- 56 kpc, at least 0.92 of its width on the sky. A body of revolution has a ratio of 1, inside the limit. In kiloparsecs the drawn body is shallower (half its root-emission within 302 kpc, half its emission within 158 kpc; packages/bake/authoring/bullet-cluster/depth-limit.mts): it is drawn from a display picture of X-ray light, not from pressure. The body is left as it is.",
+      "evidence": [
+        "https://arxiv.org/abs/1105.3210"
+      ],
+      "revisitWhen": "A calibrated X-ray or pressure map replaces the display picture."
     }
   ]
 }

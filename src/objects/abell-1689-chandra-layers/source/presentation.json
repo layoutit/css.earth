@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "abell-1689-chandra-layers",
+  "name": "Abell 1689",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/abell-1689-chandra-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/abell-1689-chandra-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/abell-1689-chandra-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · Chandra · composite",
+      "title": "Gas and mass of Abell 1689",
+      "description": "The Chandra X-ray Center's 2008 picture of Abell 1689 in its layers, with ESA/Hubble's lensing mass map: the hot gas in purple and the mass in blue. Each is drawn on ellipsoidal shells of the shape Umetsu et al. (2015) fitted to lensing, X-ray and Sunyaev-Zel'dovich measurements together: ellipses on the sky, 1.22 (gas) and 1.19 (mass) times as long along the sight line as their long axis. That length is measured for the cluster as a whole; where a pixel's light lies within the shells is not. The Hubble picture, with its stars removed, stands flat at the cluster's distance.",
+      "summary": "Purple is X-ray gas and blue is lensing mass, on shells as long along the sight line as the cluster was measured to be.",
+      "detail": "3853 × 4000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Purple: hot gas in X-rays (Chandra). Blue: mass from gravitational lensing (Hubble)"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3853 × 4000"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "3.21 × 3.33 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "No copyright asserted (Chandra); CC BY 4.0 (ESA/Hubble mass map); credit requested"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/abell-1689-chandra-layers/source/composite.jpg",
+        "url": "https://chandra.harvard.edu/photo/2008/a1689/a1689.jpg"
+      }
+    }
+  ]
+}

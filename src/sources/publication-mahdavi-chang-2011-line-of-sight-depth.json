@@ -1,0 +1,38 @@
+{
+  "id": "publication-mahdavi-chang-2011-line-of-sight-depth",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Model-Independent Limits on the Line-of-Sight Depth of Clusters of Galaxies Using X-ray and Sunyaev-Zel'dovich Data",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1105.3210"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/2041-8205/735/1/L4"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1105.3210",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1105.3210",
+      "checkedOn": "2026-10-06",
+      "locator": "Sect. II: the half-pressure depth is the length of sight line that holds half the integrated pressure; X-ray surface brightness and the Compton parameter bound it from below with no assumption on geometry or equilibrium. Sect. IV, the Bullet Cluster: a region of radius 182 kpc (0.691 arcmin; H0 71, matter 0.23, redshift 0.296) on the main component's X-ray centre, Chandra ObsID 5356 and APEX-SZ; Eq. 19: the half-pressure depth is at least 400 +/- 56 kpc; Eq. 21: at least 0.92 of the half-pressure width on the sky, about 435 kpc. The main component is at least spherical, if not longer along the sight line."
+    }
+  ],
+  "creators": [
+    "Mahdavi, A.",
+    "Chang, W."
+  ],
+  "publisher": "ApJ 735, L4",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": []
+}

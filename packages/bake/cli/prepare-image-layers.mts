@@ -19,7 +19,7 @@ export async function prepareImageLayerObject(objectDirectory: string) {
   const prepared=await prepareImageLayers({sourceDirectory,outputDirectory,recipe});
   const preparedPath=resolve(outputDirectory,'image-layers.json'),preparedBytes=await readFile(preparedPath);
   // A recipe that lays the picture on walls, a body, rings, a surface or a measured grid, or spreads a cluster's gas through its body, makes a bank that surrounds what is inside it.
-  const {surrounds:_was,...kept}=descriptor.properties??{},geometry=recipe.geometry,surrounds=Boolean(geometry.shape||geometry.body||geometry.rings||geometry.surface||geometry.densityGrid||geometry.collision);
+  const {surrounds:_was,...kept}=descriptor.properties??{},geometry=recipe.geometry,surrounds=Boolean(geometry.shape||geometry.body||geometry.rings||geometry.surface||geometry.densityGrid||geometry.collision||geometry.ellipsoid);
   const nextDescriptor={schema:OBJECT_SCHEMA,id:recipe.id,type:'image-layer-bank',properties:{...kept,...(surrounds?{surrounds:true}:{}),frame:prepared.frame,preparation:ref},
     prepared:{format:PREPARED_IMAGE_LAYER_BANK_SCHEMA,url:'prepared/image-layers.json'}};
   await writeFile(resolve(root,'object.json'),JSON.stringify(nextDescriptor,null,2)+'\n');

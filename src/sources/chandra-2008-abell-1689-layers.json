@@ -1,0 +1,67 @@
+{
+  "id": "chandra-2008-abell-1689-layers",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Abell 1689: the 2008 composite in its layers",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://chandra.harvard.edu/photo/2008/a1689/more.html"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://chandra.harvard.edu/photo/2008/a1689/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://chandra.harvard.edu/photo/2008/a1689/a1689_opt.tif",
+      "label": "Hubble visible light, TIFF, 3853 x 4000 px, 51.4 MB"
+    },
+    {
+      "role": "original",
+      "url": "https://chandra.harvard.edu/photo/2008/a1689/a1689_xray.tif",
+      "label": "Chandra X-ray gas, TIFF, 3853 x 4000 px, 8.4 MB"
+    },
+    {
+      "role": "original",
+      "url": "https://chandra.harvard.edu/photo/2008/a1689/a1689.jpg",
+      "label": "X-ray and visible light together, JPEG, 864 x 897 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://chandra.harvard.edu/photo/image_use.html",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://chandra.harvard.edu/photo/2008/a1689/more.html",
+      "checkedOn": "2026-10-06",
+      "locator": "The page lists the Chandra X-ray image alone (a1689_xray) and the Hubble image alone (a1689_opt) as JPEG and TIFF, each 3853 x 4000 px on one frame, and wide-field versions of both. Chandra ACIS, 53 hours in five pointings from 2004 to 2006 (Obs. ID 540, 1663, 5004, 6930, 7289); X-ray in purple. The TIFFs' embedded scale is half the true one. Measured on the Hubble layer against Gaia DR3: 67 of the 71 catalogued sources in the frame have a peak at their place, rms 0.18 arcsec, giving 0.0500 arcsec per pixel, north 115.22 deg right of vertical, centre 197.875322, -1.338501, a field of 3.21 x 3.33 arcmin."
+    },
+    {
+      "url": "https://chandra.harvard.edu/photo/image_use.html",
+      "checkedOn": "2026-10-06",
+      "locator": "For Chandra content no claim to copyright is asserted and the material may be used in accordance with NASA guidelines; acknowledgement of NASA/SAO is requested. Material provided by other institutions may be theirs."
+    }
+  ],
+  "publisher": "Chandra X-ray Center",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "X-ray: NASA/CXC/MIT/E.-H Peng et al; Optical: NASA/STScI",
+      "scope": "Published source",
+      "evidence": "https://chandra.harvard.edu/photo/2008/a1689/"
+    },
+    {
+      "kind": "rights",
+      "text": "No claim to copyright is asserted for Chandra content; acknowledgement is requested. Material other institutions provided may be theirs.",
+      "scope": "Published source",
+      "evidence": "https://chandra.harvard.edu/photo/image_use.html"
+    }
+  ]
+}

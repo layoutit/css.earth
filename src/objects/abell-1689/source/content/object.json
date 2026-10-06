@@ -93,6 +93,22 @@
           "url": "https://esahubble.org/images/heic1317a/"
         },
         "falseColor": false
+      },
+      {
+        "id": "gas-and-mass",
+        "label": "Hubble · Chandra · composite",
+        "thumbnail": "abell-1689-dataset-gas-and-mass.webp",
+        "volume": {
+          "objectId": "abell-1689-chandra-layers",
+          "datasetId": "optical",
+          "surface": "gas-and-mass"
+        },
+        "source": {
+          "id": "abell-1689-chandra-layers-optical",
+          "path": "../../abell-1689-chandra-layers/source/manifest.json",
+          "url": "https://chandra.harvard.edu/photo/2008/a1689/"
+        },
+        "falseColor": true
       }
     ]
   },

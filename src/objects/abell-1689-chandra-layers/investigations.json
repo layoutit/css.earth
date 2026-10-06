@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "abell-1689-chandra-layers",
+  "entries": [
+    {
+      "id": "chandra-2008-layers",
+      "subject": "Chandra X-ray Center: Abell 1689 (2008) in layers",
+      "status": "included",
+      "finding": "The Hubble picture and the X-ray gas each alone, TIFFs of 3853 x 4000 px on one frame. Their embedded scale is half the true one: the Hubble layer was registered against Gaia DR3 (67 of 71 sources in the frame, 0.18 arcsec rms; 0.05000 arcsec per pixel, north 115.22 degrees right of vertical).",
+      "evidence": [
+        "https://chandra.harvard.edu/photo/2008/a1689/more.html",
+        "https://chandra.harvard.edu/photo/image_use.html"
+      ]
+    },
+    {
+      "id": "wide-field-layers",
+      "subject": "The album's wide-field X-ray picture",
+      "status": "excluded",
+      "finding": "The album also has the X-ray gas on a wider frame, where it is whole and not cut by the Hubble field. The Hubble picture and the mass map exist only on the 3.2 arcmin frame, so the layers on that frame are used and the gas is drawn out to the largest shell it holds whole.",
+      "evidence": [
+        "https://chandra.harvard.edu/photo/2008/a1689/more.html"
+      ],
+      "revisitWhen": "A mass map on a wider frame is in hand."
+    },
+    {
+      "id": "mass-map",
+      "subject": "ESA/Hubble heic1014a: the lensing mass map",
+      "status": "included",
+      "finding": "The mass distribution of the lens, released with Jullo et al. (2010), laid over a Hubble picture on the 2008 frame less 98 rows. No release has the map alone: it is lifted from the composite in the blue channel (packages/bake/authoring/abell-1689/layers.mts). Screened back over the composite's rendering of the Hubble light, the lifted map is 6.6 of 255 from the composite on average. Compact blue light stands at the bright galaxies, the map's own small halos or galaxy light the measured rendering leaves over; it is taken down to the mass around it.",
+      "evidence": [
+        "https://esahubble.org/images/heic1014a/",
+        "https://arxiv.org/abs/1008.4802",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "measured-shape",
+      "subject": "Depth of the gas and the mass",
+      "status": "included",
+      "finding": "Umetsu et al. (2015) fit lensing, X-ray and Sunyaev-Zel'dovich measurements together with ellipsoidal shells. A shell's half length along the sight line over its long half axis on the sky is 1.22 +/- 0.24 for the gas and 1.19 +/- 0.37 for the mass; on the sky the gas has ellipticity 0.15 at position angle 12 degrees and the mass 0.29 at 11.4 degrees. Each picture is taken apart on those shells.",
+      "evidence": [
+        "https://arxiv.org/abs/1503.01482"
+      ]
+    },
+    {
+      "id": "gas-alone",
+      "subject": "The gas elongation from X-ray and Sunyaev-Zel'dovich data alone",
+      "status": "excluded",
+      "finding": "Without the lensing data the same paper gives the gas 1.70 +/- 0.29. The joint fit, which ties the gas to the mass, gives 1.22 +/- 0.24; the joint value is drawn, so that both bodies come from one fit.",
+      "evidence": [
+        "https://arxiv.org/abs/1503.01482"
+      ]
+    },
+    {
+      "id": "orientation",
+      "subject": "Which way the long axis leans",
+      "status": "unresolved",
+      "finding": "The fit puts the long axis 22 +/- 10 degrees from the sight line. Lensing, X-ray and Sunyaev-Zel'dovich maps are all the same for a cluster and its mirror image along the sight line, so no measurement tells the near end from the far one. The long axis is drawn on the sight line.",
+      "evidence": [
+        "https://arxiv.org/abs/1503.01482"
+      ],
+      "revisitWhen": "A measurement that tells front from back, such as galaxy distances within the cluster, is published."
+    },
+    {
+      "id": "star-removal",
+      "subject": "NOX star removal on the Hubble layer",
+      "status": "included",
+      "finding": "NOX over a1689_opt.tif, then again over a copy a quarter of the size for the saturated stars (25.86% of the picture took that pass). NOX takes compact light whatever it is: the smaller galaxies went with the Milky Way's stars and the larger ones stay, on the photograph's plane.",
+      "evidence": [
+        "https://chandra.harvard.edu/photo/2008/a1689/"
+      ],
+      "revisitWhen": "The cluster's galaxies are to come back: the page's first dataset has them."
+    }
+  ]
+}
