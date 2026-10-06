@@ -4,38 +4,38 @@
     {
       "location": "public",
       "filename": "kleopatra-arrival.webp",
-      "bytes": 17148,
-      "sha256": "f3946dea1ff7f4a0769b413eb026e67aa4f3a64cc8035ba36aad0ab8e524ed18"
+      "bytes": 16758,
+      "sha256": "c0272ebce2187372c674bf694895bda81bbac3680e27130f7928504e90e0fedf"
     },
     {
       "location": "public",
       "filename": "kleopatra-billboard.webp",
-      "bytes": 2840,
-      "sha256": "488523b0b2cc5989cf19476eb7d7cc065c972146d49c24f50b83aafe588ad6db"
+      "bytes": 2820,
+      "sha256": "3754e0fbf603ec7a9792cbae1480aa22bb84f05d54a103449fa8a563c8ad9a84"
     },
     {
       "location": "public",
       "filename": "kleopatra-shape-shadow-alpha@2x.webp",
-      "bytes": 537696,
-      "sha256": "4e33fc22cee0a1fcc96b84dc665304dd44d781adb753c3455ba57eb8358dac60"
+      "bytes": 517182,
+      "sha256": "84e5f5ebb9c47f5253d7661d250e41149b8ccb25a99416235ba6ad152fb19f35"
     },
     {
       "location": "public",
       "filename": "kleopatra-shape-shadow@2x.webp",
-      "bytes": 65944,
-      "sha256": "31cba3f51edf79e5a13e82aef5113cdbeef2462f596b926c881b6f51930115de"
+      "bytes": 65366,
+      "sha256": "355c0456d564e0b9ccf559a88bf67efd2922a4fc2ffe2d0aa93951dd09469fa6"
     },
     {
       "location": "public",
       "filename": "kleopatra-shape-surface-alpha@2x.webp",
-      "bytes": 530784,
-      "sha256": "4896539194bc05f890e7420b50ae18ee3624497b8c0b0c8e77e9303f620d3d0b"
+      "bytes": 511834,
+      "sha256": "b2a7319b8c6cea0afc5a619eb0325cd893e9748572dcf8f9977f92ef53b6f7f9"
     },
     {
       "location": "public",
       "filename": "kleopatra-shape-surface@2x.webp",
-      "bytes": 58110,
-      "sha256": "07226b21b9190e8458db517992cdb4a21ef752f098bc9254e137f33f7c711a1c"
+      "bytes": 57382,
+      "sha256": "6f8330871409b699c16ba10e11fec53e05f13debd6d75ca862435bcbc8fdead3"
     },
     {
       "location": "public",
@@ -46,20 +46,20 @@
     {
       "location": "public",
       "filename": "kleopatra-zimpol-surface-alpha@2x.webp",
-      "bytes": 568342,
-      "sha256": "87ac9badfe3af86282960e0e605d9f69b1bd14d15b764437d041a51025584e36"
+      "bytes": 514638,
+      "sha256": "65854de3385976ea93f05ba1caae1c45c3b6e87f65fa0d5151ae3e529c2e9a7a"
     },
     {
       "location": "public",
       "filename": "kleopatra-zimpol-surface@2x.webp",
-      "bytes": 121240,
-      "sha256": "f6deec82bedc8f36282dff98e4e78d4bf4f7435ef39583ef215f26998ae2f20f"
+      "bytes": 106044,
+      "sha256": "d1d1e03a7a3cbdf8afa10d4e5e2d8156c7e75119181febc2e0a56216b91b781c"
     },
     {
       "location": "public",
       "filename": "kleopatra-zimpol-thumbnail.webp",
       "bytes": 874,
-      "sha256": "10ca59afcfdd11c223d146ddd0c332d8da1812a1cc5e558e0556b2b5e5814e15"
+      "sha256": "235ae98cdbdac03a3952f78467d71a622dfd587e11f8d4d0fc04126bbdb8c206"
     },
     {
       "location": "prepared",
@@ -89,19 +89,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1185,
-      "sha256": "ff7b43a8d9cd9d54f3b255316367ddcb7c549fa431e66a81fff0ec150efef4e6"
+      "sha256": "b17d54fecd87f5e5592e73907a226dc697ec515513d099ae956055956d19ed52"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 346973,
-      "sha256": "b74b3122ae6c938d3910e9fc2284d37989b8a6b02cf5aca41dca1f59e3df6751"
+      "bytes": 342841,
+      "sha256": "72bdebdd725295f9b8376d50bc57dcb8ead9bd60ec21b1617f7fd94cd2e32415"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 153,
-      "sha256": "8cd664522dfd4a6c6851953dc9880bbde7c9e9c91a24b93d05ff7e50d4b2ea8b"
+      "bytes": 191,
+      "sha256": "9db205ce1777041aefb3ddfe96cbf6330185f1f2a1921bf047b73c219bc5f9fc"
     },
     {
       "location": "prepared",
@@ -112,20 +112,20 @@
     {
       "location": "prepared",
       "filename": "minimaps/zimpol.webp",
-      "bytes": 1510,
-      "sha256": "14779425993e1dbce9ff039087cfce6801cda57f3b50fd7fa23519b4bb15bc4e"
+      "bytes": 1432,
+      "sha256": "73e3ad0ccdccbbe135f11efa1a6067abe57bf4dd89c3e809df3d80c5c1d8d98f"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 1027678,
-      "sha256": "6ce43f094db5469fc9d038a76daadba22aac6d044f9c805d92f92728f89e7b54"
+      "bytes": 887558,
+      "sha256": "a8b7dd00c4f282d095507cb4a61df2e8bcd6e570054225edb576d0ff4a71244f"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1305705,
-      "sha256": "257d8036863231ea19ed2beecb9b5461581c5f005a2d48d7f7b9ed669d59b27d"
+      "bytes": 1126169,
+      "sha256": "f321d36af457fc298088cd66297c057e8c274a02ebaa417539e66d1455daf33f"
     },
     {
       "location": "prepared",
@@ -142,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 346980,
-      "sha256": "cef874092ca3c1b160e7b088c58a5760b0c901f84055cdbb514884d3b797b1c7"
+      "bytes": 342848,
+      "sha256": "de06b8a02f801a3041e772a3244fac58312c751366273b2c2677d4082e1e620f"
     },
     {
       "location": "prepared",

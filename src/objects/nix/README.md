@@ -23,7 +23,7 @@ range. The only fitted values were two detector translations, [+16.875, +0.5]
 pixels; no shape vertex, pole, phase or range was fitted. Only contributions
 within 1.5 source footprints are accepted, and incidence and emission are each
 limited to 70°. Gray marks unobserved or rejected coverage; it is not dark
-terrain, color, or albedo. The mesh is reduced to 800 PolyCSS triangles with a
+terrain, color, or albedo. The mesh is reduced to 476 PolyCSS triangles, the fewest within its 500 m error allowance with a
 181.121 m 95th-percentile sampled radial error. See the
 [source-bound recipe](source/preparation/photography.json).
 

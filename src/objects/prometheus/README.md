@@ -28,7 +28,7 @@ Monochrome applies a bounded Lunar-Lambert normalization to reduce photographed 
 
 False color colors only samples all three filters see, within 75° incidence and emission. One common range, 0–0.8 I/F, maps them to linear display channels, followed by the [shared IEC sRGB output transfer](../../../docs/color-preparation.md). No per-band equalization or colorimetric transform is applied.
 
-The released plate connectivity is simplified by meshoptimizer to 720 native PolyCSS triangle leaves with 128px raster cells. The surface is closed, with Euler characteristic two. The model's Archinal et al. (2011) pole and linear prime-meridian rotation are used at the shared display epoch. The final atlas is WebP quality 94. No runtime source processing is performed.
+The released plate connectivity is simplified by meshoptimizer to 598 native PolyCSS triangle leaves. The surface is closed, with Euler characteristic two. The model's Archinal et al. (2011) pole and linear prime-meridian rotation are used at the shared display epoch. The final atlas is WebP quality 94. No runtime source processing is performed.
 
 ## Evidence
 

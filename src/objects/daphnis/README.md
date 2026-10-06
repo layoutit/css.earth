@@ -21,7 +21,7 @@ The exact observations, source URLs and restoration pins are in [source/manifest
 
 ## Processing
 
-The shared controlled-shape camera preparer uses the release's camera records, not a fit by eye, with the NAC pixel angle from the [instrument kernel](https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti). The shape is simplified to 400 triangles.
+The shared controlled-shape camera preparer uses the release's camera records, not a fit by eye, with the NAC pixel angle from the [instrument kernel](https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti). The shape is simplified to 154 triangles.
 
 Monochrome applies bounded Lunar-Lambert illumination correction (maximum gain 2.5), cast-shadow rejection and overlap level matching (widest gain 1.02). Corrected values are displayed linearly over 0–0.528 I/F, the 99.5th percentile of displayed samples.
 

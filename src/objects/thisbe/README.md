@@ -17,7 +17,7 @@ GM is G times the measured mass in [Vernazza et al. (2021), Table 1](https://viz
 
 ## Processing
 
-The existing PDS plate-table reader reads the DAMIT table unchanged, and meshoptimizer 1.2.0 reduces it to 800 PolyCSS triangles, each a 128 × 128 px raster leaf. Elevation shows the radius of the original model minus a 109 km sphere, on a -20 to 20 km legend. The SPHERE photograph combines the deconvolved frames with matched relative levels, averages overlapping frames and fades each toward its disc edge. The ecliptic pole is converted to equatorial J2000; orbital context uses JPL Horizons elements at JD 2461286.5.
+The existing PDS plate-table reader reads the DAMIT table unchanged, and meshoptimizer 1.2.0 reduces it to 694 PolyCSS triangles, the fewest within its 2100 m error allowance. Elevation shows the radius of the original model minus a 109 km sphere, on a -20 to 20 km legend. The SPHERE photograph combines the deconvolved frames with matched relative levels, averages overlapping frames and fades each toward its disc edge. The ecliptic pole is converted to equatorial J2000; orbital context uses JPL Horizons elements at JD 2461286.5.
 
 ## Evidence
 
@@ -54,7 +54,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Meshoptimizer reports 2008.8 m estimated error, below the authored 2100 m threshold. Independent nearest-triangle sampling measured p95 863.932 m and maximum 1920.115 m. No second radial intersection was found.
+Meshoptimizer reports 2096.8 m estimated error, below the authored 2100 m threshold. Independent nearest-triangle sampling measured p95 863.932 m and maximum 1920.115 m. No second radial intersection was found. Re-prepared 2026-10-06: the error allowance now decides the face count, 694 faces at 2097 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 ## Known problems
 

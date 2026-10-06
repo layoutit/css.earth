@@ -4,14 +4,14 @@
     {
       "location": "public",
       "filename": "kressmannia-arrival.webp",
-      "bytes": 35860,
-      "sha256": "aa2626b447e90054c9337c7c4c9c7361d23382a64e8c3681c90523f98abcd71f"
+      "bytes": 28504,
+      "sha256": "b215f1a0751b460b4f4af887774e5cb6cb601824e3f319cbb68d50d406311455"
     },
     {
       "location": "public",
       "filename": "kressmannia-billboard.webp",
-      "bytes": 5246,
-      "sha256": "6a3b3f0d67fcc5ce998f26f710614d62be339cbd0ef666a7849cbfba4af7fa43"
+      "bytes": 4366,
+      "sha256": "e8f2193ad7dcb02831e97c61164a5f64996057c2ae68c56d3663dc56bbd5717c"
     },
     {
       "location": "public",
@@ -22,26 +22,26 @@
     {
       "location": "public",
       "filename": "kressmannia-elevation-shadow-alpha@2x.webp",
-      "bytes": 525670,
-      "sha256": "49414e20043141372f7786870212050f6f1005acf45a3d342b77b855f3215597"
+      "bytes": 395450,
+      "sha256": "0734e4cb3560067faabcd56d5aff938d8bed2363fb655950c9cac5f82d4a3036"
     },
     {
       "location": "public",
       "filename": "kressmannia-elevation-shadow@2x.webp",
-      "bytes": 139110,
-      "sha256": "71d974c039b6d2736b1c76a585db3d831aa8e4cbd3a4998c42702a7fda7e91b0"
+      "bytes": 117322,
+      "sha256": "3291ec787eb0a7d3a4c3af7a1eb52aa4c56bd84e246354066b7f5e07e4ddf62c"
     },
     {
       "location": "public",
       "filename": "kressmannia-elevation-surface-alpha@2x.webp",
-      "bytes": 576196,
-      "sha256": "378469c32edd6ab109fff9e569cc3d9f42d0358c25b6b1ef9cb2c0043f108430"
+      "bytes": 438776,
+      "sha256": "0c7303a2af28f2432c01fa73522311ee24f3d4d397c588c889365b1181f2398f"
     },
     {
       "location": "public",
       "filename": "kressmannia-elevation-surface@2x.webp",
-      "bytes": 198666,
-      "sha256": "a9873c9ea990eaf89820bf4ec93a1f49136f7e28dc6790cea7369399eb798eb9"
+      "bytes": 165368,
+      "sha256": "09a4988766f49783ba411c8873317cf9909e5a4a48695413b6cfa8256d007f92"
     },
     {
       "location": "public",
@@ -52,26 +52,26 @@
     {
       "location": "public",
       "filename": "kressmannia-shape-shadow-alpha@2x.webp",
-      "bytes": 435438,
-      "sha256": "98315e86f1b94bd1044b41d77d3a7ff5d1d142c1e900e8a8798f422892e349a5"
+      "bytes": 318044,
+      "sha256": "768f8472ac3c5e76ac7512466859edce9526156651cf4a99994a314c4b3bba5d"
     },
     {
       "location": "public",
       "filename": "kressmannia-shape-shadow@2x.webp",
-      "bytes": 59564,
-      "sha256": "c0235a8793ff6621df08d5ebf342cb53acec8138290d92a906fa054a7c0b5410"
+      "bytes": 50404,
+      "sha256": "a6a64e35f23f59ed9dca695f1bd015711d4cae4282f44411d4c249775b000136"
     },
     {
       "location": "public",
       "filename": "kressmannia-shape-surface-alpha@2x.webp",
-      "bytes": 425366,
-      "sha256": "6a17d157d208c4e059fd93681d4174bef68d73e868cf6e61cd2cad6a2be7b480"
+      "bytes": 313982,
+      "sha256": "b88755f4095198e8a143164585a53a7b179c5f3b8f9c23f26d009a9fc3dc73a4"
     },
     {
       "location": "public",
       "filename": "kressmannia-shape-surface@2x.webp",
-      "bytes": 52526,
-      "sha256": "d8f04d543426461dd4d81df91884dca3c0e7f992bb1ba25301068a20cb59994d"
+      "bytes": 44906,
+      "sha256": "491bb10edda4cf241a64cd22609ca96b3af872c6c0993af749d449793c89a07a"
     },
     {
       "location": "public",
@@ -107,25 +107,25 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1478,
-      "sha256": "8e93a0f581eaab22b5c4d38d3662f952e7470135c9d08d30037e4d347c616c41"
+      "sha256": "45d87d02400ab2b5389eb1af7a620a106b7c2c96e15853ec9f18dc7fa25dd5ca"
     },
     {
       "location": "prepared",
       "filename": "material.json",
       "bytes": 2967,
-      "sha256": "b6db9c7802360a2a1463831a6d444e63a2e032801189b89f276f8112da04d0c8"
+      "sha256": "8c8b773383bd5a7610a767cd1360690f9dbf8b0ee18bd853d83f1a14f520b48c"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 4086,
-      "sha256": "cf3751736a8649a5ff2c1a4b6d3ec44ccfc43047995971b9a3fcbe335e722708"
+      "bytes": 4114,
+      "sha256": "a10bf5d17b59dba12250567ac6d4959f84d1f482ab1f3da8174bde712c83cff7"
     },
     {
       "location": "prepared",
@@ -136,14 +136,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 500151,
-      "sha256": "31be73cd820126e240797152fff6dc1cfd9634fc61564db78b92a70c271b16be"
+      "bytes": 231345,
+      "sha256": "7737d21d0aeb0189cafb3c8de4ceafe1928d30d9afe9ada1a5e91afe6ae6ca33"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 599632,
-      "sha256": "2c1e4283967185d58cf05d459bcf8e8522b063af614be2bcc137b863b59fef3c"
+      "bytes": 261376,
+      "sha256": "9c5ecb9127e2d275670692ce11e870d7f4548d4c38280a6430942afc3703d16c"
     },
     {
       "location": "prepared",
@@ -161,7 +161,7 @@
       "location": "prepared",
       "filename": "surfaces.json",
       "bytes": 2976,
-      "sha256": "1532f8f9cbbd60fc34b83ba872854ed1c5573fd3088de86ba7b6f28f59f39a2f"
+      "sha256": "27e1e735f5bfb9cc7c1b3c716660bb5ade2dd3b10d84bf88db7ba21b5ef19791"
     },
     {
       "location": "prepared",
