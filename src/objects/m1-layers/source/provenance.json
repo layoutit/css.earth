@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Most detailed image of the Crab Nebula",
+  "publisher": "ESA/Hubble",
+  "sourceId": "heic0515a",
+  "sourcePage": "https://esahubble.org/images/heic0515a/",
+  "download": "https://cdn.esahubble.org/archives/images/large/heic0515a.jpg",
+  "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      3864,
+      3864
+    ],
+    "bands": [
+      "Hubble",
+      "WFPC2",
+      "[O I] 631 nm",
+      "[S II] 673 nm",
+      "[O III] 502 nm"
+    ],
+    "fieldOfViewDeg": [
+      0.1068595,
+      0.1068595
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      3864,
+      3864
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001948,
+    "lineOfNodesPaDeg": 176.95,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 7.0 arcsec from the page's place, which is the whole of the recipe's inclination. Not the orientation of the nebula."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags: 0.0996 arcsec per pixel, north up, the frame's centre at 83.6355492°, 22.0152273°. The page's place is pixel 2001.8, 1935.2. The tags are checked against the measured points: laid on the picture at its own date, the points' flux correlates 0.413 with the picture's fine detail, and no shift within 4 arcsec does better at steps of 0.5 arcsec.",
+    "pixelArcsec": 0.09956,
+    "northClockwiseDeg": 0
+  },
+  "displayModel": "Where a velocity component of Martin, Milisavljevic & Drissen (2021) was measured within about 1 arcsec, the picture's fine detail stands at that component's depth under the paper's expansion factor: in front of the page's plane at the depth of the approaching speeds there, behind it at the depth of the receding ones, in the shares of the two. The picture's smooth light lies on the walls of the ellipsoid that holds 99 % of the measured points, half in front and half behind. Detail that no speed places stays on the picture's plane.",
+  "coverage": "The published frame inside a circle about the page's place: the picture fades out between 177.8 and 185.2 arcsec, the largest circle the frame holds, so no straight edge shows.",
+  "acquisition": {
+    "url": "https://cdn.esahubble.org/archives/images/large/heic0515a.jpg",
+    "dimensions": [
+      3864,
+      3864
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

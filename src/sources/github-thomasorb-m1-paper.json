@@ -1,0 +1,47 @@
+{
+  "id": "github-thomasorb-m1-paper",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "M1_paper: the points of the 3D map of the Crab Nebula (Martin, Milisavljevic & Drissen 2021)",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://github.com/thomasorb/M1_paper",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
+      "label": "The files at the commit used"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://github.com/thomasorb/M1_paper",
+      "checkedOn": "2026-10-05",
+      "locator": "Commit af491d4a13d408464ffb3ea75e6a424f6ef5d140 (7 September 2020): 3dmap_XYZflux.fits and 3dmap_XYZvel.fits, each 416,573 rows of four 32-bit floats (two sky coordinates, the sight line, and the line flux or the Doppler speed in km/s, as the notebook \"3d maps.ipynb\" reads them); m1.deep_frame.fits, 2048 x 2064 px with world coordinates, observed 2016-11-22. Licence file: GNU General Public License 3.0."
+    }
+  ],
+  "publisher": "T. Martin (GitHub)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Martin, Milisavljevic & Drissen (2021), MNRAS 502, 1864",
+      "scope": "Published source",
+      "evidence": "https://github.com/thomasorb/M1_paper"
+    },
+    {
+      "kind": "rights",
+      "text": "GNU General Public License 3.0 (the repository's licence file).",
+      "scope": "Published source",
+      "evidence": "https://github.com/thomasorb/M1_paper"
+    }
+  ]
+}

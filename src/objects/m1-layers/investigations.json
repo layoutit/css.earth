@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m1-layers",
+  "entries": [
+    {
+      "id": "heic0515a",
+      "subject": "ESA/Hubble heic0515a",
+      "status": "included",
+      "finding": "Most detailed image of the Crab Nebula: WFPC2, [O I] 631 nm in blue, [S II] 673 nm in green, [O III] 502 nm in red; 3864 × 3864 px over 6.41 × 6.41 arcmin, released 1 December 2005, from exposures of October 1999, January 2000 and December 2000 (release heic0515). The file's embedded sky tags: 0.0996 arcsec per pixel, north up, the frame's centre at 83.6355492°, 22.0152273°. The page's place is pixel 2001.8, 1935.2. The tags are checked against the measured points: laid on the picture at its own date, the points' flux correlates 0.413 with the picture's fine detail, and no shift within 4 arcsec does better at steps of 0.5 arcsec.",
+      "evidence": [
+        "https://esahubble.org/images/heic0515a/",
+        "https://esahubble.org/news/heic0515/",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "measured-depths",
+      "subject": "Each filament's own depth",
+      "status": "included",
+      "finding": "Martin, Milisavljevic & Drissen (2021) observed the Crab with the imaging Fourier transform spectrometer SITELLE on the nights of 22, 25 and 26 November 2016 and fitted H-alpha, [N II] and [S II] at every pixel: 310,000 spectra at a resolution of 9,600. Their repository holds the result as 416,573 points. With one expansion factor about one centre (Sect. 3.4) a Doppler speed is a distance along the sight line, and the bank stands each filament's light at the depth of the speeds measured there.",
+      "evidence": [
+        "https://arxiv.org/pdf/2101.02709v1",
+        "https://github.com/thomasorb/M1_paper"
+      ]
+    },
+    {
+      "id": "file-frame",
+      "subject": "What the files' numbers are",
+      "status": "included",
+      "finding": "The point files are rows of four numbers with no description. The authors' notebook reads them as two sky coordinates, the sight line and a value. Measured here: the third is the Doppler speed over −1,116 km/s per unit for every row, so it adds nothing; the first two step by 0.002579 per pixel of the deep frame, which is not the paper's 9.696e-3 pc per arcsec (a pixel would be 0.00311), so the file's sky scale is not used; their zero is the frame pixel 1091, 1032, on the pulsar; the first grows to the west and the second to the north. With one step a pixel the points' flux correlates 0.68 with the frame's fine detail (packages/bake/authoring/m1/filament-speeds.mts --frame).",
+      "evidence": [
+        "https://github.com/thomasorb/M1_paper"
+      ]
+    },
+    {
+      "id": "frame-on-the-sky",
+      "subject": "The deep frame on the sky",
+      "status": "included",
+      "finding": "The frame's header names a distorted tangent projection and carries only a matrix, 0.32035 arcsec a pixel. Placed by it, the points fitted Hubble's picture best as if at 2014 and Webb's as if at 2036, both about 1.6 % too small. packages/bake/authoring/m1/frame-fit.mts ties the frame to Gaia DR3 instead: 317 stars brighter than G 19, moved to the cube's date, give the sky as a cubic in the pixel with 0.051 arcsec rms; a pixel is 0.3261 arcsec at the reference pixel and 0.3247 to 0.3252 arcsec 300 pixels from it. Placed by the fit, the points fit Hubble's picture best at its own date (0.413 at 2000.3, against 0.402 at 1998, 0.397 at 2003 and 0.227 at 2012) and Webb's at its own (0.333 at 2022.83, against 0.326 at 2019 and 0.312 at 2026).",
+      "evidence": [
+        "https://github.com/thomasorb/M1_paper",
+        "https://doi.org/10.1051/0004-6361/202243940"
+      ]
+    },
+    {
+      "id": "smooth-light",
+      "subject": "Where the smooth light lies",
+      "status": "included",
+      "finding": "The blue light of the pulsar's wind has no Doppler speed and so no measured depth. It lies on the ellipsoid that holds 99 % of the measured points (packages/bake/authoring/m1/filament-envelope.mts): the cloud's long axis is at position angle 128°, 10° out of the sky's plane, and reaches −179 to 160 arcsec; the other two reach −142 to 119 and −129 to 112. The paper finds the outer boundary is not an ellipsoid but heart-shaped (Sect. 4.1.1); the ellipsoid is a presentation choice, as is drawing its long axis in the sky's plane.",
+      "evidence": [
+        "https://arxiv.org/pdf/2101.02709v1"
+      ]
+    },
+    {
+      "id": "flux-shares",
+      "subject": "Which component holds a sight line's light",
+      "status": "deferred",
+      "finding": "Where a sight line holds components in front of the centre and behind it, the picture's detail is shared between the two depths by how many components are near, each weighed by its closeness, not by their measured flux. The table carries each component's flux in its fourth column, unused.",
+      "evidence": [
+        "https://github.com/thomasorb/M1_paper"
+      ],
+      "revisitWhen": "The bake's speeds table takes a weight."
+    },
+    {
+      "id": "stars",
+      "subject": "The picture's stars",
+      "status": "excluded",
+      "finding": "The stars in the field are not removed. A star near a measured filament stands at that filament's depth with the rest of the detail there; elsewhere it stays on the picture's plane.",
+      "evidence": [
+        "https://esahubble.org/images/heic0515a/"
+      ]
+    },
+    {
+      "id": "weic2326a",
+      "subject": "Webb's picture",
+      "status": "deferred",
+      "finding": "ESA/Webb weic2326a (NIRCam and MIRI, 10,509 × 9,151 px) would lie on the same measured depths at its own date, 2022.83; the points fit it best there (0.333). Its frame cuts the nebula, so a round rim keeps only the inner 137 arcsec.",
+      "evidence": [
+        "https://esawebb.org/images/weic2326a/"
+      ],
+      "revisitWhen": "A second measured-depth dataset is wanted."
+    },
+    {
+      "id": "licence",
+      "subject": "The points' licence",
+      "status": "included",
+      "finding": "The authors' repository carries the GNU General Public License 3.0; the paper says its data are shared on reasonable request. The table built from the repository's files is a derived copy: it is kept in the source cache under the same licence, with the paper credited, and is not tracked here. The Crab volume's model reads the same files at the same commit (labs/nebula/models/m1/README.md).",
+      "evidence": [
+        "https://github.com/thomasorb/M1_paper",
+        "https://arxiv.org/pdf/2101.02709v1"
+      ]
+    }
+  ]
+}
