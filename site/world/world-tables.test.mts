@@ -63,9 +63,9 @@ test('the visibility policy built over an extended plan holds the added bodies, 
 });
 
 test('a selected star opens its whole system: the bodies that orbit it and the stars bound to it', async () => {
-  // 61 Cygni's file is read by every page; GJ 338's and TOI-421's (planets and a bound companion) arrive later.
+  // A system's file arrives when the camera nears it: 61 Cygni's (two stars), GJ 338's and TOI-421's (planets and a bound companion).
   let plan = summary;
-  for (const id of ['gj-338-a-system', 'toi-421-system']) plan = extendWorldContext(plan, [parsePreparedWorldSystem(await json(`../../${id}/prepared/members.json`), plan, id)]);
+  for (const id of ['gj-820-a-system', 'gj-338-a-system', 'toi-421-system']) plan = extendWorldContext(plan, [parsePreparedWorldSystem(await json(`../../${id}/prepared/members.json`), plan, id)]);
   const policy = createWorldVisibilityPolicy(worldObjects(plan), plan);
   assert.deepEqual([...policy.placedSystemOf('gj-820-a')].sort(), ['gj-820-a', 'gj-820-b']);
   assert.deepEqual([...policy.placedSystemOf('gj-338-b')].sort(), ['gj-338-a', 'gj-338-b'], 'a companion opens the system it is bound into');
