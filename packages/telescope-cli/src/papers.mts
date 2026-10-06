@@ -13,7 +13,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
-import { loadTargetCatalogue } from './query.mts';
+import { loadTargetCatalogue } from './observation-query/query.mts';
 import { resolveTarget } from '@cssearth/telescope';
 import { LATER_NAMED, laterWorks, sameTitleQuery, sameTitleWorks, type LaterWork, type SameTitleWork } from './papers/follow-ups.mts';
 import { forms, spellings } from './papers/names.mts';

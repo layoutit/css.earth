@@ -2,7 +2,7 @@
 // descriptor (`object.json`, when it names a recipe), the independent records of the source catalogue (`src/sources/`),
 // the authored physical world frame checked against a prepared scene and runtime, and the images embedded in a
 // published PDF figure; binding an object's manifest inputs to catalogue records (`author-source-records.ts`, whose command
-// `site/build/prepare/author-source-records.mts` also rewrites volume presentations); the factsheet source checks, the object-information source records and their snapshots (`prepare-object-information.ts`) and the pinned-fact
+// `site/build/prepare/catalog/author-source-records.mts` also rewrites volume presentations); the factsheet source checks, the object-information source records and their snapshots (`prepare-object-information.ts`) and the pinned-fact
 // citations; the source records a context manifest lists, the factsheet citations and source inventory the source
 // catalogue compiles, and the bibliography citations of the prepared galaxy and cluster catalogues; the context packages'
 // lineage, read from their manifests and source presentations, at the application route passed in; the facility artwork refresh, which

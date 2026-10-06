@@ -5,7 +5,7 @@ import type { SourcePin } from '@cssearth/bake/objects/geometry';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
-import { mapRadius, ringRayOccluded, rasterAnnularField, parseRadialLayerRecipe } from '@cssearth/bake/objects/layers/giant';
+import { mapRadius, ringRayOccluded, rasterAnnularField, parseRadialLayerRecipe, noonRingShadowRows } from '@cssearth/bake/objects/layers/giant';
 const test = sourceTest();
 
 const recipe = () => ({schema:'cssearth-radial-layer-recipe@1',units:'kilometers',sources:[] as SourcePin[],layers:[{
@@ -46,6 +46,22 @@ test('ring shadow uses the authored oblate body and a forward ray', () => {
   assert.equal(ringRayOccluded(-4,0,shadow),true);
   assert.equal(ringRayOccluded(4,0,shadow),false);
   assert.equal(ringRayOccluded(-4,3,shadow),false);
+});
+
+test('the noon ring shadow on a map follows the slant path through the measured optical depth', () => {
+  // A 1,000 km sphere under a ring of normal optical depth 0.05 in 1 km bins from 2,000 to 3,000 km; the Sun's elevation has sine 0.1, north.
+  const sine = 0.1, cotangent = Math.sqrt(1 - sine * sine) / sine, body = {equatorialRadius:1000,polarRadius:1000};
+  const direct = noonRingShadowRows(180, body, sine, [2000,3000], new Float64Array(1001).fill(0.05));
+  const slant = Math.exp(-0.05 / sine), crossing = (degrees: number) => 1000 * (Math.cos(degrees * Math.PI / 180) + Math.sin(degrees * Math.PI / 180) * cotangent);
+  // Row 90 + s spans s to s + 1 degrees south. Rays from 6 to 11 degrees south cross the ring plane at 2,035 to 2,880 km, inside the ring.
+  for (let row = 96; row <= 100; row += 1) assert.ok(Math.abs(direct[row]! - slant) < 1e-9);
+  // The 5 to 6 degree row is under the ring only past its first bin's inner edge, 1,999.5 km.
+  assert.ok(Math.abs(direct[95]! - (1 - (crossing(6) - 1999.5) / (crossing(6) - crossing(5)) * (1 - slant))) < 1e-9);
+  // The northern hemisphere faces the Sun, and rays from past 12 degrees south clear the ring's outer edge.
+  for (const row of [0, 45, 89, 90, 94, 102, 135, 179]) assert.equal(direct[row], 1);
+  // A Sun south of the ring plane puts the same shadow in the north.
+  assert.deepEqual([...noonRingShadowRows(180, body, -sine, [2000,3000], new Float64Array(1001).fill(0.05))], [...direct].reverse());
+  assert.throws(() => noonRingShadowRows(180, body, 0, [2000,3000], new Float64Array(1001)), RangeError);
 });
 
 test('invalid recipes fail before raster output', () => {

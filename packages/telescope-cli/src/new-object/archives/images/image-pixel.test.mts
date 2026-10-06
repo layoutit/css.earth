@@ -7,7 +7,7 @@ import { card } from '@cssearth/fits/test-support';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import type { Archive } from '../archives.mts';
 import { draftFromHoffmann, parseHoffmannRows } from '../sh0es.mts';
-import { citedRow, duplicateStar } from '../../identity.mts';
+import { citedRow, duplicateStar } from '../../names/identity.mts';
 import { loadSolarEpoch } from '../../solar-epoch.mts';
 import { parseStarSpec } from '../../spec.mts';
 import { draftsFromTable, parseTableRequest } from '../tables/table-stars.mts';

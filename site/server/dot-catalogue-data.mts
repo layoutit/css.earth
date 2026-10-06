@@ -1,7 +1,7 @@
 import { PREPARED_NEBULA_CATALOG_SCHEMA, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/objects';
 import { nodeProjectFileUrl } from '../prepared/prepared-world-context-node-source.mts';
 // Build-owned catalogues: their contents are not application JavaScript, and no page fetches one whole.
-// Each dot layer's catalogue is the one context object of its type (site/build/prepare/prepare-catalog.mts dotCatalogueIds).
+// Each dot layer's catalogue is the one context object of its type (site/build/prepare/catalog/prepare-catalog.mts dotCatalogueIds).
 import catalogueIds from '../prepared/prepared-dot-catalogues.json' with { type: 'json' };
 
 async function catalogue(layer: 'galaxies' | 'clusters'): Promise<unknown> {

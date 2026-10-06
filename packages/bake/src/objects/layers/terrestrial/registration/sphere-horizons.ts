@@ -38,7 +38,7 @@ const TABLES = {
   observer: { suffix: 'horizons-sphere-observer', coverage: 'observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure' },
   heliocentric: { suffix: 'horizons-sphere-heliocentric', coverage: 'heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun' },
 } as const;
-/** A manifest input for a table this tool wrote; `node site/build/prepare/author-source-records.mts` adds its source binding. */
+/** A manifest input for a table this tool wrote; `node site/build/prepare/catalog/author-source-records.mts` adds its source binding. */
 export function tableInput(objectId: string, kind: keyof typeof TABLES, path: string, bytes: Uint8Array) {
   return { id: `${objectId}-${TABLES[kind].suffix}`, path, origin: HORIZONS_API, credit: 'NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons',
     license: 'Public ephemeris service output; cite JPL Horizons.',

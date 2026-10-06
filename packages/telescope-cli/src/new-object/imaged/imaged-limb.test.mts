@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { diamondbackGrid, diamondbackNodes, picasoInstalled, picasoLimbNodes, picasoPassband, picasoToolchainSync, WORKSPACE } from '@cssearth/telescope/node';
 import type { PackageFiles } from '../dataset.mts';
-import { exoRem } from '../picaso-limb.mts';
+import { exoRem } from '../darkening/picaso-limb.mts';
 import { ATMOSPHERE_FIT, CLARET_2012, claret2012Grid, claretBand, documentImagedColor, fittedImagedLimb, imagedLimb, installImagedLimb, parseAtmosphereFit, type ImagedLimb } from './imaged-limb.mts';
 
 // The four H-band nodes around 1,727 K and log g 3.59, with a flux-conservation row and a K-band row the reader must pass over.

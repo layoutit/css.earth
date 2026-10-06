@@ -17,10 +17,10 @@
         "path": "artifacts/F01.csv"
       },
       "productRecordReadback": {
-        "test": "packages/telescope-cli/src/product-science.test.mts",
+        "test": "packages/telescope-cli/src/qualification/product-science.test.mts",
         "assertion": "The owner writes output.product.json and the focused public-path test reopens and verifies every recorded output pin."
       },
-      "owner": "packages/telescope-cli/src/artifact-outputs.mts#exportOutput",
+      "owner": "packages/telescope-cli/src/delivery/artifact-outputs.mts#exportOutput",
       "independentCheck": "packages/bake/src/objects/layers/observation/fixtures/fits/sky-orientation.json",
       "limit": "Native image values only; no wavelength coverage, uncertainty array, or achieved angular resolution is claimed."
     },
@@ -375,8 +375,8 @@
         "test": "packages/telescope-cli/src/family-operation.test.mts",
         "assertion": "The owner writes output.product.json and the focused public-path test reopens and verifies every recorded output pin."
       },
-      "owner": "packages/telescope-cli/src/spatial-handoff.mts#inspectSpatialObject",
-      "independentCheck": "packages/telescope-cli/src/output-handoffs.test.mts",
+      "owner": "packages/telescope-cli/src/delivery/spatial-handoff.mts#inspectSpatialObject",
+      "independentCheck": "packages/telescope-cli/src/delivery/output-handoffs.test.mts",
       "limit": "Existing HYG-derived physical point field; no distance is inferred from angular telescope pixels."
     },
     {

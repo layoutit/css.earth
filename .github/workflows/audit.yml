@@ -169,9 +169,9 @@ jobs:
           else
             node .github/scripts/ci/prepare-ci-inputs.mts universe
           fi
-          node site/build/prepare/prepare-feature-index.mts
+          node site/build/prepare/catalog/prepare-feature-index.mts
           # The source catalogue the facility tests reconcile is a generated, ignored file.
-          node site/build/prepare/prepare-facilities.mts --catalog-only
+          node site/build/prepare/catalog/prepare-facilities.mts --catalog-only
           # Keep the original lane: the retired tests/ surface-observations glob matched no files.
           # Those owner-local suites remain in the shared bake lane.
           if [ "${GITHUB_EVENT_NAME:-}" != pull_request ]; then

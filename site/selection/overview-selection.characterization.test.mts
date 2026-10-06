@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { selectionAtCamera, watchCameraSelection } from './overview-selection.mts';
-import { systemById } from '../world/object-systems.mts';
+import { systemById } from '../world/systems/object-systems.mts';
 import { worldCameraFromCenteredPresentation } from '@cssearth/engine';
 import { objectFixture, navigationFixture, required } from '../navigation/navigation-test-values.test-support.mts';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';

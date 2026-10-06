@@ -3,10 +3,10 @@ import { readFile } from 'node:fs/promises';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex, parsePreparedWorldSystem } from '@cssearth/objects';
 import type { PreparedWorldContext } from '@cssearth/objects';
-import { systemFramingTables } from './system-framing.mts';
-import { satelliteSystemIndex } from './satellite-systems.mts';
-import { annotationsForBodies, createWorldVisibilityPolicy } from './application-world-visibility.mts';
-import { worldObjects } from './world-objects.mts';
+import { systemFramingTables } from './systems/system-framing.mts';
+import { satelliteSystemIndex } from './systems/satellite-systems.mts';
+import { annotationsForBodies, createWorldVisibilityPolicy } from './application/application-world-visibility.mts';
+import { worldObjects } from './systems/world-objects.mts';
 const test = sourceTest();
 
 // What every page reads (the summary and the files drawn from anywhere), the Earth system's file, and one file a page reads

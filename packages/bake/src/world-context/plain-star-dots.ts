@@ -9,7 +9,7 @@ export const PLAIN_STAR_DOT_BANK = 'plain-stars';
 /** The bank the world wrote for the farthest stars while every plain star was a dot of the world's own two banks; a bake
  * removes it where it finds it. */
 export const RETIRED_PLAIN_STAR_DOT_BANK = 'plain-stars-far';
-/** A plain dot's diameter as a body's marker drew it (site/world/application-world-resources.mts PLAIN_DOT_MINIMUM_PIXELS). */
+/** A plain dot's diameter as a body's marker drew it (site/world/application/application-world-resources.mts PLAIN_DOT_MINIMUM_PIXELS). */
 const DOT_RADIUS_PX = 0.75;
 
 export interface PlainStar { readonly id: string; readonly positionM: readonly [number, number, number]; readonly color: string }

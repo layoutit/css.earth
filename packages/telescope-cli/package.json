@@ -70,24 +70,24 @@
       "default": "./src/archives/toolchain-descriptor.mts"
     },
     "./body-map-publication": {
-      "types": "./src/body-map-publication.mts",
-      "default": "./src/body-map-publication.mts"
+      "types": "./src/delivery/body-map-publication.mts",
+      "default": "./src/delivery/body-map-publication.mts"
     },
     "./query": {
-      "types": "./src/query.mts",
-      "default": "./src/query.mts"
+      "types": "./src/observation-query/query.mts",
+      "default": "./src/observation-query/query.mts"
     },
     "./query-contract": {
-      "types": "./src/query-contract.mts",
-      "default": "./src/query-contract.mts"
+      "types": "./src/observation-query/query-contract.mts",
+      "default": "./src/observation-query/query-contract.mts"
     },
     "./request-satisfaction": {
-      "types": "./src/request-satisfaction.mts",
-      "default": "./src/request-satisfaction.mts"
+      "types": "./src/requests/request-satisfaction.mts",
+      "default": "./src/requests/request-satisfaction.mts"
     },
     "./selected-product": {
-      "types": "./src/selected-product.mts",
-      "default": "./src/selected-product.mts"
+      "types": "./src/observation-query/selected-product.mts",
+      "default": "./src/observation-query/selected-product.mts"
     },
     "./sky/author-sky-bands": {
       "types": "./src/sky/author-sky-bands.mts",

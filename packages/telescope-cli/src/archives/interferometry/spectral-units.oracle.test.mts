@@ -1,4 +1,4 @@
-import { setupTelescopeOracleInputs } from '../../oracle-inputs.mts';
+import { setupTelescopeOracleInputs } from '../../delivery/oracle-inputs.mts';
 setupTelescopeOracleInputs();
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';

@@ -26,7 +26,7 @@ import {
   type ResolutionDescriptor,
   type SupportDescriptor,
   type UncertaintyDescriptor,
-} from '../../product-descriptor.mts';
+} from '../../products/product-descriptor.mts';
 import {assertPlanetaryProductSemantics,planetaryOutputPolicy} from '../../planetary-depth-policy.mts';
 import {descriptor,stable} from '../common.mts';
 

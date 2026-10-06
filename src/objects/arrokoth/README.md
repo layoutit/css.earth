@@ -33,7 +33,7 @@ Photographs intersect the full original mesh before transfer. Incidence and emis
 node packages/bake/cli/object-operations.mts acquire arrokoth
 node packages/bake/authoring/arrokoth/prepare-photographic-cameras.mts
 node packages/bake/authoring/arrokoth/qualify-photographs.mts
-node site/build/prepare/prepare-authored.ts arrokoth --write
+node site/build/prepare/authored/prepare-authored.ts arrokoth --write
 node --test packages/bake/src/objects/layers/terrestrial/missions/new-horizons-geo.test.mts
 ```
 

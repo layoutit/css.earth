@@ -109,7 +109,7 @@ To update only the default lighting in an already-neutral checkout:
 ```sh
 node packages/bake/cli/refresh-shape-lighting.mts stage --all
 node packages/bake/cli/refresh-shape-lighting.mts publish --all
-node site/build/prepare/prepare-facilities.mts
+node site/build/prepare/catalog/prepare-facilities.mts
 ```
 
 Staging prepares replacement atlases without changing the served assets.
@@ -124,7 +124,7 @@ For a complete material refresh, run:
 
 ```sh
 node packages/bake/cli/refresh-shape-materials.mts --all --resume
-node site/build/prepare/prepare-facilities.mts
+node site/build/prepare/catalog/prepare-facilities.mts
 ```
 
 The refresh retains each dataset's triangles, atlas addresses, camera, and other

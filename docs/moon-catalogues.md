@@ -74,18 +74,18 @@ ellipsoid from a light-curve elongation limit and a size from an assumed albedo,
 as a nominal sphere (Anthe). Those pages were retired; each is now a dot with its name
 ([when a body gets a scene](../.agents/skills/celestial-skill/references/scientific-faithfulness.md#a-scene-needs-a-measured-shape)).
 
-Run `node site/build/prepare/prepare-moon-labels.mts` to reproduce the ignored
+Run `node site/build/prepare/world/prepare-moon-labels.mts` to reproduce the ignored
 `site/prepared/moon-labels.prepared.json` from the pinned source archive and current world
 context. `pnpm prepare:world-context` runs this step after preparing the world.
 The browser only projects these fixed positions; it performs no ephemeris work.
 
 To refresh the sources, run `node packages/bake/cli/acquire-moon-catalogues.mts --refresh`
-then `node site/build/prepare/prepare-moon-labels.mts --refresh`. Horizons requests are
+then `node site/build/prepare/world/prepare-moon-labels.mts --refresh`. Horizons requests are
 sequential and cached in `output/moon-horizons/`. Review changes in totals,
 identity and ephemeris coverage before accepting refreshed inputs. Do not reuse
 cached replies for a different epoch or reference frame.
 
-Focused checks: `node --test site/build/prepare/body-moons.test.mts
-site/world/moon-labels.test.mts site/browser/source-link.test.mts`. They verify full
+Focused checks: `node --test site/build/prepare/world/body-moons.test.mts
+site/world/application/moon-labels.test.mts site/browser/source-link.test.mts`. They verify full
 catalogue membership, available destinations, major/minor orbit policy, planet
 occlusion, caption collision and overview hiding.

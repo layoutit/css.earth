@@ -104,7 +104,7 @@ test('repository-root ancestor prefix is a warning rather than a moved-folder pr
   });
 });
 test('unrelated opaque imports are UNRESOLVED warnings with file, line, and expression', () => {
-  for (const expression of ['resolvePath()', 'pathToFileURL(resolve(output, \'worker.mjs\')).href', '`/output/${name}.mjs`', '`package/${name}`', "pathToFileURL(resolve(process.cwd(), 'site/build/prepare/prepare-object-json.mts')).href"]) {
+  for (const expression of ['resolvePath()', 'pathToFileURL(resolve(output, \'worker.mjs\')).href', '`/output/${name}.mjs`', '`package/${name}`', "pathToFileURL(resolve(process.cwd(), 'site/build/prepare/authored/prepare-object-json.mts')).href"]) {
     fixture({ 'site/a.mts': '', 'site/check.mts': `// heading\nimport(${expression});` }, root => {
       assert.doesNotThrow(() => applyMoves(root, { 'site/a.mts': 'site/world/a.mts' }, { dryRun: true }));
       const plan = applyMoves(root, { 'site/a.mts': 'site/world/a.mts' }, { dryRun: true });

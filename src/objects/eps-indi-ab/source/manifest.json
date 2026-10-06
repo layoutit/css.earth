@@ -128,7 +128,7 @@
       "origin": "https://doi.org/10.5281/zenodo.10381250",
       "credit": "PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) on Sonora Elf Owl cloud-free (Mukherjee et al. 2024, ApJ 963, 73; [M/H] +0.7, C/O 2.5 times solar, log Kzz 4) profiles",
       "license": "Project-computed model values; the Sonora profiles and PICASO correlated-k tables are CC BY 4.0, PICASO is GPL-3.0",
-      "acquisition": "Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb eps-indi-ab (packages/telescope-cli/src/new-object/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the nodes spectra_logzz_4.0_teff_275.0_grav_100.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_275.0_grav_178.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_300.0_grav_100.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_300.0_grav_178.0_mh_0.7_co_2.5.",
+      "acquisition": "Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb eps-indi-ab (packages/telescope-cli/src/new-object/darkening/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the nodes spectra_logzz_4.0_teff_275.0_grav_100.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_275.0_grav_178.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_300.0_grav_100.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_300.0_grav_178.0_mh_0.7_co_2.5.",
       "redistribution": "Model coefficients and the intensities they are fitted to, with the model and tool cited.",
       "consumers": [
         "assets",

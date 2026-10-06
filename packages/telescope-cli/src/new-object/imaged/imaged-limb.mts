@@ -31,7 +31,7 @@ import { WORKSPACE } from '@cssearth/telescope/node';
 import { authorContextMarkers, MARKER_PATH } from '../../source-authoring/context-markers.mts';
 import type { Archive } from '../archives/archives.mts';
 import { bindInputs, json, type PackageFiles } from '../dataset.mts';
-import { diamondback, DIAMONDBACK, ELF_OWL, elfOwl, EXO_REM, exoRem, fromPicaso, PICASO } from '../picaso-limb.mts';
+import { diamondback, DIAMONDBACK, ELF_OWL, elfOwl, EXO_REM, exoRem, fromPicaso, PICASO } from '../darkening/picaso-limb.mts';
 
 export const CLARET_2012 = { table: 'https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat', cite: 'Claret, Hauschildt & Witte (2012), A&A 546, A14', catalogue: 'J/A+A/546/A14',
   band: 'H', file: 'photometry/claret-2012-h-quadratic.tsv', input: 'claret-2012-limb-darkening' } as const;

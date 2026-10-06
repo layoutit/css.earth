@@ -43,7 +43,7 @@ async function projectFiles(): Promise<Record<string, string>> {
 
 const files = await projectFiles();
 const swapped = new Map([
-  [resolve(root, 'site/server/search-data.mts'), resolve(root, 'deploy/cloudflare/search-data.ts')],
+  [resolve(root, 'site/server/search/search-data.mts'), resolve(root, 'deploy/cloudflare/search-data.ts')],
   [resolve(root, 'site/prepared/prepared-world-context-node-source.mts'), resolve(root, 'deploy/cloudflare/project-files.ts')],
 ]);
 await rm(output, { recursive: true, force: true });

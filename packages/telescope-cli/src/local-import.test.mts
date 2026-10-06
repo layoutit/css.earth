@@ -7,9 +7,9 @@ import { copyFile, mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { importLocalArtifact, parseLocalImportSpec } from './local-import.mts';
-import { listArtifactOutputs } from './artifact-outputs.mts';
+import { listArtifactOutputs } from './delivery/artifact-outputs.mts';
 import { executeFamilyOperation } from './family-operation.mts';
-import { exportOutput } from './outputs.mts';
+import { exportOutput } from './delivery/outputs.mts';
 import { main, type CliIo } from './cli.mts';
 
 const spec=(path:string,limits={maxMembers:4,maxBytes:4096,maxFileBytes:2048})=>({schema:'cssearth-telescope-local-import-spec@1',datasetId:'local-fixture',sources:[{path,role:'science',name:'observation'}],declarations:{target:'eris',units:'counts',calibrationState:'unknown'},limits});

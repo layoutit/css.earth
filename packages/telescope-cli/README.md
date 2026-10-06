@@ -115,7 +115,7 @@ pnpm --silent telescope get output/ceres-telescope --pick N --json
 pnpm --silent telescope outputs output/ceres-telescope/pick-N/result.json --json
 ```
 
-`export --output body-map` projects a verified 2D image but is not a published layer: [`body-map-publication.mts`](src/body-map-publication.mts) checks an author-produced map separately. `export --output sphere` makes standalone HTML, not a site dataset. To add a site dataset, use the body's [package guide](../../src/objects/README.md) and the [surface preparation owner](../../docs/surface-preparation.md); [Ceres's clay-band recipe](../../src/objects/ceres/source/preparation/raster.json) is an example. No command promotes an arbitrary delivery into a body's renderer.
+`export --output body-map` projects a verified 2D image but is not a published layer: [`body-map-publication.mts`](src/delivery/body-map-publication.mts) checks an author-produced map separately. `export --output sphere` makes standalone HTML, not a site dataset. To add a site dataset, use the body's [package guide](../../src/objects/README.md) and the [surface preparation owner](../../docs/surface-preparation.md); [Ceres's clay-band recipe](../../src/objects/ceres/source/preparation/raster.json) is an example. No command promotes an arbitrary delivery into a body's renderer.
 
 ## Outputs
 
@@ -150,21 +150,21 @@ The navigation file pins SPICE kernels. The sphere is a standalone HTML file wit
 
 ## Independent output checks
 
-The [output oracle](src/output-oracle.mts) reads the pinned FITS data independently of the production reducer, using Specutils 2.4.0 and Photutils 3.0.0 as optional test dependencies:
+The [output oracle](src/delivery/output-oracle.mts) reads the pinned FITS data independently of the production reducer, using Specutils 2.4.0 and Photutils 3.0.0 as optional test dependencies:
 
 ```sh
 output/toolchains/astroquery/env/bin/python -m venv --system-site-packages work/telescope-oracles/env
 work/telescope-oracles/env/bin/python -m pip install -c packages/telescope/toolchains/requirements.lock -r packages/telescope/toolchains/oracle-requirements.txt
-node packages/telescope-cli/src/output-oracle.mts figures/eris-band work/telescope-oracles/env/bin/python output/oracles/eris-band
-CSSEARTH_ORACLE_PYTHON="$PWD/work/telescope-oracles/env/bin/python" node --test packages/telescope-cli/src/cube-outputs.test.mts
+node packages/telescope-cli/src/delivery/output-oracle.mts figures/eris-band work/telescope-oracles/env/bin/python output/oracles/eris-band
+CSSEARTH_ORACLE_PYTHON="$PWD/work/telescope-oracles/env/bin/python" node --test packages/telescope-cli/src/delivery/cube-outputs.test.mts
 ```
 
 It fails above 1e-10 of the reference peak. It verifies numerical extraction only, not archive calibration, covariance, aperture corrections or detection significance.
 
 Sphere silhouette framing uses `@cssearth/engine`; prepared loader and retained renderer consumers remain separate from this numeric contract.
 
-Renderer runtime exceptions are file-scoped in [the architecture rule](../../.github/scripts/architecture/preparation-without-renderer.mts):
-`src/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
+Renderer runtime exceptions are file-scoped in [the architecture rule](../../.github/scripts/architecture/dependencies/preparation-without-renderer.mts):
+`src/delivery/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
 The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
 

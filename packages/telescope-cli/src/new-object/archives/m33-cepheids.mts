@@ -6,7 +6,7 @@
  * The table's ID is the star's name in the M33 Synoptic Stellar Survey (Pellerin & Macri 2011), whose light curves gave the periods:
  * "01334390+3032452" is "M33SSS J013343.90+303245.2", as SIMBAD lists it. The longest-period Cepheid of the Gold sample is featured. */
 import { VIZIER_ASU, type Archive } from './archives.mts';
-import { preferredName, simbadIdentifiers } from '../display-name.mts';
+import { preferredName, simbadIdentifiers } from '../names/display-name.mts';
 import { draftGalaxyCepheid, galaxyDisc, vizierRows, type CepheidGalaxy } from './m31-cepheids.mts';
 import { galaxyVelocity } from './sh0es.mts';
 

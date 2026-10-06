@@ -35,4 +35,5 @@ const observed = obj({...common, kind: s.literal('observed-radial-profile'), bou
 export type ObservedRadialLayer = s.Infer<typeof observed>;
 export const radialRecipe = obj({schema: s.literal('cssearth-radial-layer-recipe@1'), units: s.literal('kilometers'), sources: arr(sourcePin), layers: arr(s.union(annular, observed))});
 export type RadialLayerRecipe = s.Infer<typeof radialRecipe>;
-export interface RadialProfile {color: Uint8Array; transparency: Uint8Array; width: number}
+/** `opticalDepth` is each bin's normal optical depth, present when the layer names an occultation table. */
+export interface RadialProfile {color: Uint8Array; transparency: Uint8Array; width: number; opticalDepth?: Float64Array}
