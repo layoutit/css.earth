@@ -37,8 +37,11 @@ export async function createSourceManifest({ objectId, objectName, sourceRoot, i
   return Object.freeze({
     manifest,
     inputsFor(consumer: string) {
-      const entries = manifest.inputs.filter(({ consumers }) =>
-        consumers.includes(consumer));
+      // A consumer's files are its acquired inputs and the files this repository builds for it and declares as an input is
+      // declared, with its consumers (a star's map table, built here and restored from the source cache).
+      const built = (manifest.generatedIntermediates as readonly Partial<SourceInput>[]).filter((entry): entry is SourceInput =>
+        typeof entry.id === 'string' && isArray(entry.consumers) && entry.consumers.includes(consumer));
+      const entries = [...manifest.inputs.filter(({ consumers }) => consumers.includes(consumer)), ...built];
       if (entries.length === 0) {
         throw new Error(`${objectName} source manifest has no inputs for ${consumer}.`);
       }
