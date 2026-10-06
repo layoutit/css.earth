@@ -42,6 +42,6 @@ The original +Z spin axis and +X reference meridian are retained. The source pol
 
 ## Preparation and qualification
 
-The established source-meshoptimizer path retains source connectivity, reduces to at most 800 faces, and emits native PolyCSS `u` triangles with 128 px raster cells. The error allowance is 271.2 m; sampled source-fit error is qualified separately from source accuracy. Elevation uses closest-source-surface sampling with the same physical scale. Shadows are off by default.
+The established source-meshoptimizer path retains source connectivity, reduces to the fewest faces the error allowance permits, 250 of at most 800, and emits native PolyCSS `u` triangles from an atlas of 13,107,200 texels. The error allowance is 271.2 m; sampled source-fit error is qualified separately from source accuracy. Elevation uses closest-source-surface sampling with the same physical scale. Shadows are off by default.
 
 </details>

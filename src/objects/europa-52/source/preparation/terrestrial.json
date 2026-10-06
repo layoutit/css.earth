@@ -1162,11 +1162,10 @@
       "latitudeSegments": 90,
       "longitudeSegments": 180,
       "faceBudget": 800,
-      "texelsPerFace": 16384,
+      "atlasTexels": 13107200,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",
-        "targetFaces": 800,
         "maximumErrorMeters": 2700,
         "regularize": true
       }
@@ -1184,11 +1183,10 @@
         "latitudeSegments": 90,
         "longitudeSegments": 180,
         "faceBudget": 800,
-        "texelsPerFace": 16384,
+        "atlasTexels": 13107200,
         "primitive": "u",
         "simplification": {
           "method": "source-meshoptimizer",
-          "targetFaces": 800,
           "maximumErrorMeters": 3100,
           "regularize": true
         }

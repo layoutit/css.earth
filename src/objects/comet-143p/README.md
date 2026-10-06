@@ -29,6 +29,6 @@ Original thesis bytes are linked and hashed, not redistributed.
 
 X is the longest axis; Z follows the nominal spin pole. The J2000 ecliptic pole is converted with the Horizons-compatible obliquity of 84381.448 arcseconds.
 
-The shared preparer reduces 2,048 input triangles to 800 native PolyCSS triangles and bakes missing-imagery grid, smooth normals and both lighting states. Shadows default off. All work happens before runtime.
+The shared preparer reduces 2,048 input triangles to 256 native PolyCSS triangles, the fewest within its 150 m error allowance and bakes missing-imagery grid, smooth normals and both lighting states. Shadows default off. All work happens before runtime.
 
 </details>

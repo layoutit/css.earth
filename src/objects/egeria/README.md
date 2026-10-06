@@ -20,7 +20,7 @@ Egeria is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publis
 
 ## Processing
 
-The MPCD surface is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS u triangles, each a 128 × 128 px leaf in a 2048 × 6400 atlas, with an 1800 m stopping threshold. Geometry and lighting are prepared ahead of runtime.
+The MPCD surface is simplified with meshoptimizer 1.2.0 to 768 native PolyCSS u triangles, the fewest within its 1800 m error allowance in a 3504 × 3740 atlas, with an 1800 m stopping threshold. Geometry and lighting are prepared ahead of runtime.
 
 Elevation samples the original mesh radius minus a 101 km reference sphere, with a -30 to 40 km legend, from 721 × 361 source directions with a cartographic hillshade.
 

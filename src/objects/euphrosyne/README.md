@@ -20,7 +20,7 @@ Euphrosyne is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its pu
 
 ## Processing
 
-The MPCD surface is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS u triangles, each a 128 × 128 px leaf in a 2048 × 6400 atlas, with a 2400 m stopping threshold. Geometry and lighting are prepared ahead of runtime.
+The MPCD surface is simplified with meshoptimizer 1.2.0 to 686 native PolyCSS u triangles, the fewest within its 2400 m error allowance in a 3501 × 3743 atlas, with a 2400 m stopping threshold. Geometry and lighting are prepared ahead of runtime.
 
 Elevation samples the original mesh radius minus a 134 km reference sphere, with a -20 to 20 km legend, from 721 × 361 source directions with a cartographic hillshade.
 

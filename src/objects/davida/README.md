@@ -23,8 +23,8 @@ JPL Horizons elements and independent vectors are pinned at JD 2461286.5
 
 ## Processing
 
-The MPCD mesh is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS
-triangles. Its original coordinates are not rescaled to the survey's diameter,
+The MPCD mesh is simplified with meshoptimizer 1.2.0 to 748 native PolyCSS
+triangles, the fewest within its 2600 m error allowance. Its original coordinates are not rescaled to the survey's diameter,
 which averages ADAM and MPCD. Elevation samples the original mesh radius minus a
 149 km reference sphere, with a -30 to 50 km legend. The published ecliptic pole
 is converted to equatorial J2000.

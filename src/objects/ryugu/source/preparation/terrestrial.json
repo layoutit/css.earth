@@ -225,11 +225,10 @@
         "compression": "gzip"
       },
       "faceBudget": 850,
-      "texelsPerFace": 16384,
+      "atlasTexels": 12943360,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",
-        "targetFaces": 800,
         "maximumErrorMeters": 16,
         "regularize": true
       }

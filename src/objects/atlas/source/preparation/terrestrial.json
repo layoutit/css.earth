@@ -312,10 +312,9 @@
         "indexBase": 0
       },
       "faceBudget": 2000,
-      "texelsPerFace": 16384,
+      "atlasTexels": 13107200,
       "simplification": {
         "method": "source-meshoptimizer",
-        "targetFaces": 800,
         "maximumErrorMeters": 200
       }
     }

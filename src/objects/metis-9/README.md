@@ -22,7 +22,7 @@
 
 ## Processing
 
-The MPCD surface is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS u triangles, each a 128 × 128 px leaf, with a 1700 m stopping threshold. Elevation samples the original mesh radius minus an 86.5 km reference sphere, with a -30 to 30 km legend.
+The MPCD surface is simplified with meshoptimizer 1.2.0 to 670 native PolyCSS u triangles, the fewest within its 1700 m error allowance, with a 1700 m stopping threshold. Elevation samples the original mesh radius minus an 86.5 km reference sphere, with a -30 to 30 km legend.
 
 The SPHERE photograph rides the ADAM mesh, because the rotation record describes that reconstruction; Shape and Elevation keep the MPCD refinement. The frames are combined with matched relative levels, averaged where they overlap, each fading toward its disc edge. The photograph takes its absolute phase from the parameter record, while the other views use an arbitrary display meridian.
 

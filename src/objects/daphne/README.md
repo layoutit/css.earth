@@ -18,7 +18,7 @@ Vernazza et al. (2021) give a volume-equivalent diameter of 187 km, ecliptic J20
 
 ## Processing
 
-The mesh is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS triangles, each a 128 × 128 px raster leaf. Geometry and lighting are prepared ahead of runtime. The original frame is kept with +Z north and east-positive longitude. Rotation has an arbitrary display meridian, not an absolute rotational phase.
+The mesh is simplified with meshoptimizer 1.2.0 to 700 native PolyCSS triangles, the fewest within its 1700 m error allowance. Geometry and lighting are prepared ahead of runtime. The original frame is kept with +Z north and east-positive longitude. Rotation has an arbitrary display meridian, not an absolute rotational phase.
 
 Elevation samples the original mesh radius minus a 93.5 km reference sphere, with a -20 to 50 km legend. It includes global shape, not height above a gravitational equipotential.
 

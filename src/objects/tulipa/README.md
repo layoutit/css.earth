@@ -48,7 +48,7 @@ The displayed phase is not propagated from the historical source epoch and does 
 
 Model publication: [Shape models of asteroids based on lightcurve observations with BlueEye600 robotic observatory](https://damit.cuni.cz/projects/damit/references/view/168).
 
-The refreshed DAMIT search on 2026-09-08 found no size-calibrated same-body mesh. A published physical size is therefore applied through the existing `metersPerUnit` source conversion, before the established 800-face meshoptimizer/PolyCSS raster preparation.
+The refreshed DAMIT search on 2026-09-08 found no size-calibrated same-body mesh. A published physical size is therefore applied through the existing `metersPerUnit` source conversion, before the established meshoptimizer/PolyCSS raster preparation, which keeps the fewest faces its error allowance permits, 362 of at most 800.
 
 </details>
 

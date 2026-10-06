@@ -56,7 +56,7 @@ The record gives diameter 85 km, period 3.747455 h and ecliptic J2000 pole (84°
 <details>
 <summary>Appearance and preparation</summary>
 
-The existing source-meshoptimizer recipe reduces the original connected surface to 800 triangles. Meshoptimizer 1.2.0 reports 388.3 m estimated error, below the authored 400 m stopping threshold; this estimate is not a Hausdorff bound. All models use 800 native PolyCSS u raster leaves, 128 × 128 px per leaf in a 2048 × 6400 atlas, with lighting and texels prepared ahead of runtime.
+The existing source-meshoptimizer recipe reduces the original connected surface to the fewest triangles within the authored 400 m stopping threshold, 770. Meshoptimizer 1.2.0 reports 399.9 m estimated error; this estimate is not a Hausdorff bound. The model uses 770 native PolyCSS u raster leaves in a 3426 × 3816 atlas, with lighting and texels prepared ahead of runtime.
 
 The surface remains one closed component with Euler characteristic 2.
 

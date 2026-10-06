@@ -57,7 +57,7 @@ The camera reference radius is the cube root of the semiaxis product: 2.42223669
 
 Original JPL Horizons elements and independent geometric vectors are checked in under `source/reference/`, including exact request URLs. They use heliocentric ICRF kilometres at JD 2461286.5 (3 September 2026 TT; the queried TDB difference is below 2 ms). The scene holds this epoch. The nearby ±30-day vectors test the existing conic approximation; it is not a long-term propagation or outgassing model.
 
-A subdivided octahedron gives 2,048 source triangles. The shared meshoptimizer recipe reduces it to 800 within a 100 m preparation tolerance. Closed topology and sampled distance to the analytic ellipsoid are checked independently. This geometric approximation tolerance is not observational accuracy. All grid textures, normals, lighting banks, thumbnails, navigation images and bindings are prepared before runtime.
+A subdivided octahedron gives 2,048 source triangles. The shared meshoptimizer recipe reduces it to the fewest faces a 100 m preparation tolerance permits, 158. Closed topology and sampled distance to the analytic ellipsoid are checked independently. This geometric approximation tolerance is not observational accuracy. All grid textures, normals, lighting banks, thumbnails, navigation images and bindings are prepared before runtime.
 
 </details>
 

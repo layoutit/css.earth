@@ -53,7 +53,7 @@ Rotation has an explicitly arbitrary display meridian, not an absolute rotationa
 <details>
 <summary>Shape, elevation and lighting</summary>
 
-The original connected surface is simplified with meshoptimizer 1.2.0, ErrorAbsolute and RegularizeLight, to 800 native PolyCSS u triangles. Each raster leaf is 128 × 128 px in a 2048 × 6400 atlas. Geometry and per-texel flood/directional lighting are prepared ahead of runtime.
+The original connected surface is simplified with meshoptimizer 1.2.0, ErrorAbsolute and RegularizeLight, to 718 native PolyCSS u triangles, the fewest within its 1500 m error allowance. Each raster leaf is 128 × 128 px in a 2048 × 6400 atlas. Geometry and per-texel flood/directional lighting are prepared ahead of runtime.
 
 No radial substitute, runtime triangulation, fabricated texture or additional renderer is used.
 

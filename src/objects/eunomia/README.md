@@ -22,7 +22,7 @@ Eunomia is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. It is sho
 
 ## Processing
 
-The original surface is simplified with meshoptimizer 1.2.0 to 800 PolyCSS triangles, with geometry and lighting prepared ahead of runtime. Elevation samples the original mesh radius minus a 135 km reference sphere, with a -30 to 40 km legend. The published ecliptic pole is converted to equatorial J2000; JPL Horizons elements place the orbit.
+The original surface is simplified with meshoptimizer 1.2.0 to 692 PolyCSS triangles, the fewest within its 2500 m error allowance, with geometry and lighting prepared ahead of runtime. Elevation samples the original mesh radius minus a 135 km reference sphere, with a -30 to 40 km legend. The published ecliptic pole is converted to equatorial J2000; JPL Horizons elements place the orbit.
 
 ## Evidence
 

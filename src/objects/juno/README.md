@@ -18,7 +18,7 @@ The survey gives a volume-equivalent diameter of 254 km, an ecliptic J2000 pole 
 
 ## Processing
 
-The MPCD surface is simplified with meshoptimizer 1.2.0 to 800 PolyCSS triangles, each a 128 × 128 px leaf in a 2048 × 6400 atlas, with lighting prepared ahead of runtime. Elevation is the mesh radius minus a 127 km reference sphere, sampled at 721 × 361 directions, on a -40 to 40 km legend with cartographic hillshade.
+The MPCD surface is simplified with meshoptimizer 1.2.0 to 736 PolyCSS triangles, the fewest within its 2400 m error allowance in a 3513 × 3731 atlas, with lighting prepared ahead of runtime. Elevation is the mesh radius minus a 127 km reference sphere, sampled at 721 × 361 directions, on a -40 to 40 km legend with cartographic hillshade.
 
 The SPHERE photograph matches relative frame levels, averages where frames overlap and fades each frame toward its disc edge. The reduced `Red/` products are not used.
 

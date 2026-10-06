@@ -46,7 +46,7 @@ Source pole: ecliptic J2000 (36°,30°). Reference sidereal period: 2.39006 h. E
 
 ## Preparation
 
-Existing source-meshoptimizer preparation retains source connectivity, reduces within an 800-native-u-face budget, and uses 128 px raster cells. The source-fit allowance is 14.5 m; source-model accuracy and simplification error remain separate. Shadows starts off.
+Existing source-meshoptimizer preparation retains source connectivity, reduces to the fewest native u faces its allowance permits, 790 of at most 800, in an atlas of 13,107,200 texels. The source-fit allowance is 14.5 m; source-model accuracy and simplification error remain separate. Shadows starts off.
 
 The recorded transfer withheld 1,842 of 5,738,316 interior Elevation texels (0.0321%). The 14.5 m meshoptimizer estimate budget and 14.5 m source-transfer cutoff are distinct from the 16.79 m maximum sampled geometry distance. No cutoff was relaxed or missing value extrapolated.
 

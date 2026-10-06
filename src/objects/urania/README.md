@@ -20,7 +20,7 @@ Urania is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publis
 
 ## Processing
 
-The MPCD surface is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS u triangles, each a 128 × 128 px leaf in a 2048 × 6400 atlas, with a 900 m stopping threshold. Geometry and lighting are prepared ahead of runtime.
+The MPCD surface is simplified with meshoptimizer 1.2.0 to 628 native PolyCSS u triangles, the fewest within its 900 m error allowance in a 3497 × 3714 atlas, with a 900 m stopping threshold. Geometry and lighting are prepared ahead of runtime.
 
 Elevation samples the original mesh radius minus a 44 km reference sphere, with a -20 to 30 km legend, from 721 × 361 source directions with a cartographic hillshade.
 

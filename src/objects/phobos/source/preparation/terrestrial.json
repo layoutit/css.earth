@@ -226,11 +226,10 @@
       "latitudeSegments": 20,
       "longitudeSegments": 32,
       "faceBudget": 1600,
-      "texelsPerFace": 9216,
+      "atlasTexels": 14745600,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",
-        "targetFaces": 1600,
         "maximumErrorMeters": 250,
         "regularize": true
       }

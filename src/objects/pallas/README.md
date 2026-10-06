@@ -20,7 +20,7 @@ Pallas is a large, heavily cratered main-belt asteroid. Its reconstructed shape 
 
 ## Processing
 
-The MPCD surface is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS u triangles, each a 128 × 128 px leaf in a 2048 × 6400 atlas, with a 4500 m stopping threshold. Geometry and flood/directional lighting are prepared ahead of runtime.
+The MPCD surface is simplified with meshoptimizer 1.2.0 to 766 native PolyCSS u triangles, the fewest within its 4500 m error allowance in a 3515 × 3728 atlas, with a 4500 m stopping threshold. Geometry and flood/directional lighting are prepared ahead of runtime.
 
 Elevation samples the original mesh radius minus a 255.5 km reference sphere, with a -60 to 40 km legend, from 721 × 361 source directions with a cartographic hillshade.
 

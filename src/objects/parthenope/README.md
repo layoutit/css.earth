@@ -22,7 +22,7 @@ Parthenope is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. It is 
 
 ## Processing
 
-The original surface is simplified with meshoptimizer 1.2.0 to 800 PolyCSS triangles, with geometry and lighting prepared ahead of runtime. Elevation samples the original mesh radius minus a 74.5 km reference sphere, with a -20 to 20 km legend. The published ecliptic pole is converted to equatorial J2000; JPL Horizons elements place the orbit.
+The original surface is simplified with meshoptimizer 1.2.0 to 740 PolyCSS triangles, the fewest within its 1300 m error allowance, with geometry and lighting prepared ahead of runtime. Elevation samples the original mesh radius minus a 74.5 km reference sphere, with a -20 to 20 km legend. The published ecliptic pole is converted to equatorial J2000; JPL Horizons elements place the orbit.
 
 ## Evidence
 

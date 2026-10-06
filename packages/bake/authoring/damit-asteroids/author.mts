@@ -228,12 +228,13 @@ async function authorBody(body: Body) {
   const radiusKm = calibration.diameterKm / 2, radiusMeters = radiusKm * 1000;
   const radialRangeKm = [Math.min(...mesh.radii) * kmPerUnit, Math.max(...mesh.radii) * kmPerUnit];
   const elevation = [-niceCeil(radiusKm - radialRangeKm[0]!), niceCeil(radialRangeKm[1]! - radiusKm)];
-  // The shared 800-face budget, or the whole source when it is smaller (as Bacchus keeps its 508 faces).
-  const faceBudget = Math.min(800, mesh.faceCount);
+  // The most faces a body may keep: the shared 800, or the whole source when it is smaller (Bacchus has 508). Within
+  // it the error bound decides the count, so the atlas budget is stated for the body: 128 x 128 texels a budgeted face.
+  const faceBudget = Math.min(800, mesh.faceCount), atlasTexels = faceBudget * 128 * 128;
   const maximumErrorMeters = Math.round(radiusMeters * body.maximumErrorFraction * 1000) / 1000;
   const grid = { metersPerUnit, expectedVertices: mesh.vertexCount, expectedFaces: mesh.faceCount, indexBase: 1 };
   const terrain = requireTerrainMesh(await loadPdsPlateShape(resolve(src, shapePath), grid));
-  const simplification = { method: 'source-meshoptimizer', targetFaces: faceBudget, maximumErrorMeters, regularize: true };
+  const simplification = { method: 'source-meshoptimizer', maximumErrorMeters, regularize: true };
   const simplified = requireRecord((await simplifyRadialShape(terrain, { faceBudget, simplification, source: `${id}: ${relative(ROOT, resolve(src, shapePath))}` }, 1)).simplification);
   const pole = equatorialPole(model.lambda, model.beta);
   const limitation = model.nonconvex
@@ -277,11 +278,13 @@ async function authorBody(body: Body) {
   const templateRaster = requireRecord(templateTerrestrial.raster), templateScience = requireRecord(requireArray(templateRaster.scientific)[0]);
   const scientific = { ...templateScience, path: shapePath, format: 'pds-plate-model', grid, valueTransform: { scale: 0.001, offset: -radiusKm }, minimum: elevation[0], maximum: elevation[1], colors: PALETTE,
     relief: { ...requireRecord(templateScience.relief), referenceRadiusMeters: radiusMeters }, surfaceSampling: { method: 'closest-source-point', maximumDistanceMeters: maximumErrorMeters } };
-  const templateGeometry = requireRecord(templateTerrestrial.geometry), templateRadial = requireRecord(templateGeometry.radialTerrain);
+  // The template's own atlas budget is replaced below; a budget by the face must not ride along beside it.
+  const templateGeometry = requireRecord(templateTerrestrial.geometry);
+  const templateRadial = Object.fromEntries(Object.entries(requireRecord(templateGeometry.radialTerrain)).filter(([key]) => key !== 'texelsPerFace'));
   const terrestrial = { ...templateTerrestrial, namespace: id, displayName: name, publicBase: `/scenes/${id}/`,
     raster: { ...templateRaster, scientific: [scientific] },
     geometry: { ...templateGeometry, radiusKm, mapUrl: `/scenes/${id}/${id}-shape-surface@2x.webp`, polesUrl: `/scenes/${id}/${id}-shape-surface@2x.webp`,
-      radialTerrain: { ...templateRadial, path: shapePath, grid, faceBudget, simplification } },
+      radialTerrain: { ...templateRadial, path: shapePath, grid, faceBudget, atlasTexels, simplification } },
     celestial: { sunSource: 'Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase.' } };
   await write(resolve(src, 'preparation/terrestrial.json'), json(terrestrial));
   await write(resolve(src, 'preparation/rotation.json'), json({ schema: 'cssearth-observed-pole@1', ...pole, displayMeridianDegrees: 0, phase: 'arbitrary-display-phase', periodHours: model.periodHours,
@@ -452,7 +455,7 @@ function notice(body: Body, modelUrl: string) {
 
 The selected geometry and spin originate from [DAMIT model ${model.id}](${modelUrl}), version ${model.version}, credited to ${model.references.map(r => r.label).join('; ')} and the contributing observers cited by that record. DAMIT distributes its database under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) as stated in the archived model page. Preserve attribution, source links and notice of changes.
 
-Changes for cssEarth: apply the separately documented physical scale; simplify for an 800-face retained raster presentation through the existing preparer; add the shared coordinate grid and a false-color, shape-derived radial-relief view. The original source mesh and spin bytes remain intact. These outputs are derived visualizations; they are not photographs or newly measured terrain.
+Changes for cssEarth: apply the separately documented physical scale; simplify within the stated error allowance, to at most 800 faces, for a retained raster presentation through the existing preparer; add the shared coordinate grid and a false-color, shape-derived radial-relief view. The original source mesh and spin bytes remain intact. These outputs are derived visualizations; they are not photographs or newly measured terrain.
 
 Physical-size credit: [${calibration.reference}](${calibration.referenceUrl}).${calibration.neowiseReference ? ' For PDS NEOWISE, credit Mainzer, Bauer, Cutri, Grav, Kramer, Masiero, Sonnett and Wright (eds.), NEOWISE Diameters and Albedos V2.0 (2019), plus the original Masiero publication.' : ''} JPL Small-Body Database and Horizons records are credited to NASA/JPL. Article PDFs and reference documents retain their own publication notices; the DAMIT CC BY license does not override those notices.
 

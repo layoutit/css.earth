@@ -23,7 +23,7 @@ model and image comparisons.
 
 The MPCD mesh has 8834 vertices and 17664 triangles in unmodified kilometre coordinates, volume-equivalent radius
 215.372911 km. It is not rescaled to the survey's averaged diameter. Maximum extents are 424.926 × 450.190 ×
-418.133 km, not best-fit ellipsoid axes. Meshoptimizer 1.2.0 simplifies it to 800 native PolyCSS triangles, and
+418.133 km, not best-fit ellipsoid axes. Meshoptimizer 1.2.0 simplifies it to 742 native PolyCSS triangles, the fewest within its 3700 m error allowance, and
 lighting is prepared ahead of runtime.
 
 Elevation samples the original mesh radius minus a 216.5 km reference sphere, with a -20 to 20 km legend, from

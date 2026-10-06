@@ -16,7 +16,7 @@ The survey gives a volume-equivalent diameter of 165 km, an ecliptic J2000 pole 
 
 ## Processing
 
-Meshoptimizer 1.2.0 simplifies the mesh to 800 PolyCSS triangles, each a 128 × 128 px raster leaf. Elevation samples the original mesh radius minus a 82.5 km reference sphere, with a -20 to 20 km legend. The SPHERE photograph combines the deconvolved frames with matched relative levels, averages overlapping frames and fades each toward its disc edge. The published ecliptic pole is converted to equatorial J2000; orbital context uses JPL Horizons elements pinned at JD 2461286.5 (2026-09-03).
+Meshoptimizer 1.2.0 simplifies the mesh to 676 PolyCSS triangles, the fewest within its 1500 m error allowance. Elevation samples the original mesh radius minus a 82.5 km reference sphere, with a -20 to 20 km legend. The SPHERE photograph combines the deconvolved frames with matched relative levels, averages overlapping frames and fades each toward its disc edge. The published ecliptic pole is converted to equatorial J2000; orbital context uses JPL Horizons elements pinned at JD 2461286.5 (2026-09-03).
 
 ## Evidence
 
