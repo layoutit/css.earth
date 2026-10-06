@@ -1,10 +1,10 @@
 /** The IAU star-name bank (iau-names.mts), the name chooser's IAU step (display-name.mts) and the IAU draft's renaming (iau.mts), offline. */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { preferredName } from '../display-name.mts';
+import { preferredName } from '../names/display-name.mts';
 import { named } from './iau.mts';
 import { iauLookup, parseIauNames, readIauNames, rowsFromPage } from './iau-names.mts';
-import { renamed } from '../rename.mts';
+import { renamed } from '../revise/rename.mts';
 
 const HEADER = 'name\tdesignation\thip\tbayer\tsimbad\tconstellation\tadopted\tra\tdec';
 const BANK = [HEADER,

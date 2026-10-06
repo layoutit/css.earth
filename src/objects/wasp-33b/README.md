@@ -18,7 +18,7 @@ It is the only planet known around WASP-33. Its orbit and size follow Chakrabart
 
 ![WASP-33 b and HD 149026 b as their pages open: before, on one thermal color, and after, on the measured heat map, 4 October 2026](evidence/2026-10-04/heat-maps.jpg)
 
-- Run of 2026-10-04: [`new-object --phase-curve`](../../../packages/telescope-cli/src/new-object/phase-curve-dataset.mts) wrote the dataset from the record. The paper's night side was not an input: the map gives 1,436 K at mid-transit against the printed 1498 +114/-118 K, and its maximum falls 19.8° before eclipse, as printed. [`published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts) holds the printed amplitude-and-offset form to the eclipse-normalised one term for term.
+- Run of 2026-10-04: [`new-object --phase-curve`](../../../packages/telescope-cli/src/new-object/planets/phase-curve-dataset.mts) wrote the dataset from the record. The paper's night side was not an input: the map gives 1,436 K at mid-transit against the printed 1498 +114/-118 K, and its maximum falls 19.8° before eclipse, as printed. [`published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts) holds the printed amplitude-and-offset form to the eclipse-normalised one term for term.
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-33b.json).
 

@@ -8,7 +8,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import { catalogueRowForm, catalogueRowUrl, parseCatalogueRow, rowArchive, sexagesimal, SIMBAD_TAP, VIZIER_ASU, type Archive } from '../archives.mts';
 import { relationCepheidDraft } from '../sh0es.mts';
 import { loadSolarEpoch } from '../../solar-epoch.mts';
-import { citedRow } from '../../identity.mts';
+import { citedRow } from '../../names/identity.mts';
 import { parseStarSpec } from '../../spec.mts';
 import { bibcodeReference, draftsFromTable, paperCredit, parseTableRequest, pickRows, placeInGalaxy, readGalaxy, TABLE_CLASSES } from './table-stars.mts';
 import { catalogueOf, parseVizierMeta, parseVizierReadMe, starColumns, vizierDataRows, vizierReadMeUrl } from './vizier-tables.mts';

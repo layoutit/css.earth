@@ -132,7 +132,7 @@
       "origin": "https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/",
       "credit": "PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) on Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.70) profiles",
       "license": "Project-computed model values; the Exo-REM grid is public and its README asks that its papers be cited, Exo-REM with its cloud optical constants is under the MIT license, PICASO is GPL-3.0",
-      "acquisition": "Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb gj-504-b (packages/telescope-cli/src/new-object/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the nodes YGP_500K_logg3.0_met3.16_CO0.70, YGP_500K_logg4.0_met3.16_CO0.70, YGP_550K_logg3.0_met3.16_CO0.70, YGP_550K_logg4.0_met3.16_CO0.70.",
+      "acquisition": "Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb gj-504-b (packages/telescope-cli/src/new-object/darkening/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the nodes YGP_500K_logg3.0_met3.16_CO0.70, YGP_500K_logg4.0_met3.16_CO0.70, YGP_550K_logg3.0_met3.16_CO0.70, YGP_550K_logg4.0_met3.16_CO0.70.",
       "redistribution": "Model coefficients and the intensities they are fitted to, with the model and tool cited.",
       "consumers": [
         "assets",

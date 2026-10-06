@@ -17,7 +17,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { displayName } from '../papers.mts';
-import { loadTargetCatalogue } from '../query.mts';
+import { loadTargetCatalogue } from '../observation-query/query.mts';
 import { nameForms, namesObject } from './simulations.mts';
 
 export const LEADS_SCHEMA = 'cssearth-telescope-leads@1';

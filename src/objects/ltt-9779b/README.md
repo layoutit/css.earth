@@ -16,7 +16,7 @@ It is the only planet known around Uúba. Its orbit and size follow Jenkins et a
 
 ## Evidence
 
-- Run of 2026-10-04: [`new-object --phase-curve`](../../../packages/telescope-cli/src/new-object/phase-curve-dataset.mts) wrote the dataset from the record. The paper's night side was not an input: the map gives 724 K at mid-transit against the printed 700 +/- 430 K (below 1350 K at 2 sigma), and its maximum falls 10.0° after eclipse, as printed.
+- Run of 2026-10-04: [`new-object --phase-curve`](../../../packages/telescope-cli/src/new-object/planets/phase-curve-dataset.mts) wrote the dataset from the record. The paper's night side was not an input: the map gives 724 K at mid-transit against the printed 700 +/- 430 K (below 1350 K at 2 sigma), and its maximum falls 10.0° after eclipse, as printed.
 
 Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ltt-9779b.json).
 

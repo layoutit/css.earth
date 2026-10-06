@@ -75,7 +75,7 @@ test('all toolchain-importing files are discovered; only named source exclusions
   const imported = execFileSync('git', ['grep', '-l', '-w', 'astroqueryToolchain', '--', 'packages/**/*.test.*'], { cwd: root, encoding: 'utf8' }).trim().split('\n').sort();
   assert.deepEqual(all, imported);
   assert.ok(all.length > 2);
-  assert.match(ASTROQUERY_EXCLUSIONS['packages/telescope-cli/src/output-handoffs.test.mts'] ?? '', /PDS.*stellar-neighbourhood.*stars\.json\/stars\.bin/u);
+  assert.match(ASTROQUERY_EXCLUSIONS['packages/telescope-cli/src/delivery/output-handoffs.test.mts'] ?? '', /PDS.*stellar-neighbourhood.*stars\.json\/stars\.bin/u);
   assert.equal(files.length, all.length - Object.keys(ASTROQUERY_EXCLUSIONS).length);
   assert.deepEqual(all.filter(file => !files.includes(file)), Object.keys(ASTROQUERY_EXCLUSIONS).sort());
   const triggers = astroqueryTriggerPaths(root);

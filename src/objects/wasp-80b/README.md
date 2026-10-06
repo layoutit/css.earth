@@ -18,7 +18,7 @@ It is the only planet known around Petra. Its orbit and size follow Triaud et al
 
 Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-80b.json).
 
-- Run of 2026-10-04: [`new-object --thermal`](../../../packages/telescope-cli/src/new-object/planet-datasets.mts) wrote the measured day side as a dataset of its own, as it did for ten other planets too cool to glow or on an eccentric orbit. Six planets of that run as their pages open, before and after:
+- Run of 2026-10-04: [`new-object --thermal`](../../../packages/telescope-cli/src/new-object/planets/planet-datasets.mts) wrote the measured day side as a dataset of its own, as it did for ten other planets too cool to glow or on an eccentric orbit. Six planets of that run as their pages open, before and after:
 
 ![Six planets before and after: HIP 65426 b and YSES 1 b in their measured infrared colors, WASP-80 b and HAT-P-2 b with their measured day side in false color, HAT-P-26 b at its measured glow, GJ 806 b at a bare-rock estimate](evidence/2026-10-04/day-sides.jpg)
 

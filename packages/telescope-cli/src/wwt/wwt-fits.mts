@@ -3,7 +3,7 @@ import { lstat, mkdir, mkdtemp, readFile, rename, rm, writeFile } from 'node:fs/
 import { basename, dirname, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { sciencePackage, plotProduct, writeProductRecord } from '@cssearth/telescope/node';
-import { FITS_SOURCE_SCHEMA } from '../fits-source.mts';
+import { FITS_SOURCE_SCHEMA } from '../archive-adapters/fits-source.mts';
 import { VERSION } from '../help.mts';
 
 const MAX_TILE_BYTES = 8 * 1024 * 1024;

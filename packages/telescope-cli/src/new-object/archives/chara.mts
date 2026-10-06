@@ -11,7 +11,7 @@
  *
  * The star is shown by the name SIMBAD prefers for it (display-name.mts); one with a proper name is a map target. */
 import { VIZIER_ASU, type Archive } from './archives.mts';
-import { preferredName, simbadIdentifiers } from '../display-name.mts';
+import { preferredName, simbadIdentifiers } from '../names/display-name.mts';
 
 export const CHARA = { source: 'J/ApJ/746/101/targets', paper: 'https://doi.org/10.1088/0004-637X/746/1/101', credit: 'Boyajian et al. (2012), ApJ 746, 101' };
 const COLUMNS = ['HD', 'SpT', 'Plx', 'e_Plx', 'D(LD)', 'e_D(LD)', 'R', 'e_R', 'Teff', 'e_Teff', 'M', 'e_M'] as const;

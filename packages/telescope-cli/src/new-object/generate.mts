@@ -15,11 +15,11 @@ import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
 import { fetchGaiaEclipsingPeriod, fetchCatalogueRow, rowArchive, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, readIdentifiers, telescopeResolver, type Archive, type CatalogueRow, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives/archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
-import { chooseLimb } from './limb.mts';
-import type { LimbChoice } from './limb-choice.mts';
+import { chooseLimb } from './darkening/limb.mts';
+import type { LimbChoice } from './darkening/limb-choice.mts';
 import { chooseGravity } from './archives/gravity.mts';
 import type { Cited, StarSpec } from './spec-types.mts';
-import { citedRow, DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
+import { citedRow, DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './names/identity.mts';
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
 import { quoteSource } from './prose.mts';
 import { publicationRecord } from './publication-record.mts';
@@ -550,13 +550,13 @@ export const formatNewObject = (results: readonly NewObjectResult[]) => `${resul
 export const DRAFT_CONCURRENCY = 8;
 /** The `archive` draft route (drafts.mts): specs for planet hosts from the NASA Exoplanet Archive's default parameter sets. */
 export async function draftsFromArchive(hosts: readonly string[], { root = checkoutProjectRoot(import.meta.url), progress = (_line: string) => {} } = {}) {
-  const { archiveSpec } = await import('./from-archive.mts'), { existingBodies } = await import('./identity.mts');
+  const { archiveSpec } = await import('./from-archive.mts'), { existingBodies } = await import('./names/identity.mts');
   const universe = await existingBodies(root), stars: unknown[] = [], report: string[] = [], failed: string[] = [];
   // DRAFT_CONCURRENCY hosts are read at once; the spec and the report keep the order the hosts were given in.
   const results: ({ drafted: Awaited<ReturnType<typeof archiveSpec>> } | { failure: string })[] = [];
   let next = 0;
   // The draft chooses the planets: each is added for what was measured of it (from-archive.mts measuredEvidence).
-  const { measuredEvidence } = await import('./from-archive.mts'), { liveTessArchive } = await import('./transit-chart.mts');
+  const { measuredEvidence } = await import('./from-archive.mts'), { liveTessArchive } = await import('./planets/transit-chart.mts');
   const evidence = measuredEvidence(liveArchive, await liveTessArchive());
   await Promise.all(Array.from({ length: Math.min(DRAFT_CONCURRENCY, hosts.length) }, async () => {
     for (let i = next++; i < hosts.length; i = next++) {

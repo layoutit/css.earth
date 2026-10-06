@@ -5,7 +5,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parseCatalogueRow, type Archive } from './archives.mts';
 import { cepheidRelations, draftFromHoffmann, GROENEWEGEN_2020, hostName, parseHoffmannRows } from './sh0es.mts';
 import { parseStarSpec } from '../spec.mts';
-import { citedRow, duplicateStar } from '../identity.mts';
+import { citedRow, duplicateStar } from '../names/identity.mts';
 import { loadSolarEpoch } from '../solar-epoch.mts';
 
 const test = sourceTest(), root = resolve(import.meta.dirname, '../../../../..');

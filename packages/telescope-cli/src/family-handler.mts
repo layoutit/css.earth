@@ -1,5 +1,5 @@
 /** The contract each observational-family handler implements: its format profiles, recognition and operations. */
-import type { FamilyId, ProductDescriptor } from './product-descriptor.mts';
+import type { FamilyId, ProductDescriptor } from './products/product-descriptor.mts';
 
 export interface HandlerEvidenceReference {readonly path:string;readonly establishes:string;readonly status:'partial'|'complete'}
 export interface FormatProfile {readonly id:string;readonly format:string;readonly version:string;readonly families:readonly FamilyId[];readonly evidence:readonly HandlerEvidenceReference[];readonly publicBaseline?:boolean}
