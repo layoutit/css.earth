@@ -1,0 +1,231 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "map-dec-2014",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cadc-cfht-espadons",
+            "role": "material",
+            "evidence": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+          },
+          {
+            "catalogueId": "arxiv-1711-08636",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1711.08636"
+          }
+        ]
+      },
+      "path": "src/objects/chi1-orionis/source/science/espadons/chi1-ori-2014-12.dat",
+      "origin": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "title": "Magnetic map of chi1 Ori from 16 polarised spectra of 20 December 2014 to 30 December 2014: radial, azimuthal and meridional field on a longitude-latitude grid",
+      "credit": "CFHT ESPaDOnS, CFHT program 14BF09, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+      "displayCredit": "CFHT ESPaDOnS · mapped here",
+      "acquisition": "The file the chi1-orionis package holds for its own dataset radial-field-2014-12; Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program chi1-ori-2014-12, which pins every archived spectrum by its size. The run's receipt (the line list, the codes and each step's result) is written again by that command under output/espadons and is not kept in git.",
+      "license": "CC BY 4.0 for the archived spectra (Canadian Astronomy Data Centre); reduction by this project",
+      "datasetId": "dec-2014"
+    },
+    {
+      "id": "map-jan-2015",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cadc-cfht-espadons",
+            "role": "material",
+            "evidence": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+          },
+          {
+            "catalogueId": "arxiv-1711-08636",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1711.08636"
+          }
+        ]
+      },
+      "path": "src/objects/chi1-orionis/source/science/espadons/chi1-ori-2015-01.dat",
+      "origin": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "title": "Magnetic map of chi1 Ori from 28 polarised spectra of 7 January 2015 to 14 January 2015: radial, azimuthal and meridional field on a longitude-latitude grid",
+      "credit": "CFHT ESPaDOnS, CFHT program 14BF09, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+      "displayCredit": "CFHT ESPaDOnS · mapped here",
+      "acquisition": "The file the chi1-orionis package holds for its own dataset radial-field-2015-01; Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program chi1-ori-2015-01, which pins every archived spectrum by its size. The run's receipt (the line list, the codes and each step's result) is written again by that command under output/espadons and is not kept in git.",
+      "license": "CC BY 4.0 for the archived spectra (Canadian Astronomy Data Centre); reduction by this project",
+      "datasetId": "jan-2015"
+    },
+    {
+      "id": "map-dec-2017",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-659-a71",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+          },
+          {
+            "catalogueId": "arxiv-2110-06729",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2110.06729"
+          }
+        ]
+      },
+      "path": "src/objects/chi1-orionis/source/science/willamo-2022/chi1ori.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/659/A71/chi1ori.dat",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+      "title": "ZDI map of χ¹ Orionis (Dec 2017): radial, meridional and azimuthal field (kG) and normalised brightness on 1876 equal-area cells",
+      "credit": "Willamo et al. (2022), A&A 659, A71; ESO 3.6 m HARPSpol; VizieR (CDS)",
+      "displayCredit": "Willamo et al. · HARPSpol",
+      "acquisition": "The file the chi1-orionis package holds for its own dataset radial-field; Download of chi1ori.dat from the VizieR FTP area in source/preparation/acquisition.json.",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "datasetId": "dec-2017"
+    },
+    {
+      "id": "corona-parameters",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-664-a105",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105"
+          },
+          {
+            "catalogueId": "arxiv-1505-00643",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1505.00643"
+          },
+          {
+            "catalogueId": "arxiv-2105-00019",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/2105.00019"
+          }
+        ]
+      },
+      "path": "src/objects/chi1-orionis-corona/source/corona-parameters.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "title": "χ¹ Orionis · X-ray flux, coronal temperature and mass loss",
+      "credit": "Freund et al. (2022), A&A 664, A105; Johnstone & Güdel (2015), A&A 578, A129; Wood et al. (2021), ApJ 915, 37",
+      "displayCredit": "Freund et al. (2022), A&A 664, A105",
+      "acquisition": "Published numbers transcribed from their sources, and the quantities this package computes from them. This record identifies the transcription; the sources are the origin.",
+      "license": "Published numbers cited under normal scholarly citation; the sources are not redistributed here."
+    }
+  ],
+  "documents": [
+    {
+      "id": "delivery-json",
+      "path": "src/objects/chi1-orionis-corona/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/chi1-orionis-corona/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/chi1-orionis-corona/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-dec-2014-ktx2",
+      "path": "src/objects/chi1-orionis-corona/source/density-dec-2014.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-dec-2014-json",
+      "path": "src/objects/chi1-orionis-corona/source/volume-dec-2014.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-dec-2014-png",
+      "path": "src/objects/chi1-orionis-corona/source/previews/dec-2014.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-jan-2015-ktx2",
+      "path": "src/objects/chi1-orionis-corona/source/density-jan-2015.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-jan-2015-json",
+      "path": "src/objects/chi1-orionis-corona/source/volume-jan-2015.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-jan-2015-png",
+      "path": "src/objects/chi1-orionis-corona/source/previews/jan-2015.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-dec-2017-ktx2",
+      "path": "src/objects/chi1-orionis-corona/source/density-dec-2017.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-dec-2017-json",
+      "path": "src/objects/chi1-orionis-corona/source/volume-dec-2017.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-dec-2017-png",
+      "path": "src/objects/chi1-orionis-corona/source/previews/dec-2017.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    }
+  ]
+}

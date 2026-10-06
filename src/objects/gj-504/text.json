@@ -40,6 +40,42 @@
       "title": "Photosphere color",
       "detail": "Blackbody at its temperature",
       "summary": "The color of a blackbody at the star's temperature. No surface picture exists."
+    },
+    "radial-field-2025-04": {
+      "title": "Radial field, Apr 2025",
+      "detail": "1 epoch, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "corona-apr-2025": {
+      "title": "Derived corona, Apr 2025",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Apr 2025. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "cadc-cfht-espadons",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+          "label": "CFHT ESPaDOnS · mapped here: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
     }
   }
 }

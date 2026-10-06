@@ -65,6 +65,78 @@
         },
         "falseColor": false,
         "notes": "The color of a 6,200 K blackbody, the star's published temperature; Gaia DR3 has no sampled spectrum of a star this bright. No image of its surface exists, and no darkening toward the edge is drawn."
+      },
+      {
+        "id": "radial-field-2025-04",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Apr 2025",
+        "thumbnail": "gj-504-dataset-radial-field-2025-04.webp",
+        "surface": "gj-504-surface-radial-field-2025-04@2x.webp",
+        "poles": "gj-504-poles-radial-field-2025-04@2x.webp",
+        "source": {
+          "id": "gj-504-espadons-map-radial-field-2025-04",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-15",
+            "0",
+            "+15"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-15",
+              "0",
+              "+15"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Apr 2025, reconstructed in this project from 19 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 19° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "corona-apr-2025",
+        "label": "Derived corona",
+        "thumbnail": "gj-504-dataset-color.webp",
+        "volume": {
+          "objectId": "gj-504-corona",
+          "datasetId": "apr-2025",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Apr 2025 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 5.5 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 63 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density."
       }
     ]
   },

@@ -245,7 +245,7 @@ export { NEBULA_DELIVERY_SCHEMA, readNebulaDelivery, type NebulaDelivery, type N
 export { CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type CircumstellarOpacity, type EdgeOnReconstruction } from './volume/nebula/circumstellar-reconstruction.js';
 // E2-rest: P4
 export { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsRequest, parsePyuvdataUvfitsAnswer, type PyuvdataUvfitsRequest, type PyuvdataUvfitsAnswer } from './prepared-data/source/pyuvdata-uvfits.js';
-export { VOLUME_SOURCE_MANIFEST_SCHEMA, parseVolumeSourceManifest, parseVolumeContextProducts, type VolumeManifestReader, type VolumeContextProduct } from './prepared-data/source/volume-source-manifest.js';
+export { VOLUME_SOURCE_MANIFEST_SCHEMA, PUBLISHED_MODEL_PARAMETERS_SCHEMA, parseVolumeSourceManifest, parseVolumeContextProducts, type VolumeManifestReader, type VolumeContextProduct } from './prepared-data/source/volume-source-manifest.js';
 export { VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourcePreview, isTrackedVolumeSourcePreview, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/source/volume-presentation-source.js';
 export { parseGeometryProfile, type GeometryProfile, type SeamOutsetProfile, type SurfaceGeometryProfile } from './prepared-data/presentation/css-geometry-profile.js';
 export { parseDepthRecipe, readPublishedDepthRecipe } from './volume/nebula/nebula-depth-model.js';

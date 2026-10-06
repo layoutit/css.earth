@@ -108,6 +108,252 @@
         },
         "falseColor": false,
         "notes": "Haris et al. (2025), Table 3, transit 2165 at BJD-2450000 9435.46: event midpoint +1890 s, minimum angular radius 5.0°, contrast 0.076. This is a single candidate dark region along the planet’s path, shown on a fixed camera-facing limb plate. It is not a resolved surface image, global map or time-varying rotation. TESS-band darkness is displayed achromatically over the Gaia-color photosphere."
+      },
+      {
+        "id": "corona-aug-2006",
+        "label": "Derived corona",
+        "thumbnail": "hd-189733-dataset-activity-model.webp",
+        "volume": {
+          "objectId": "hd-189733-corona",
+          "datasetId": "aug-2006",
+          "surface": "activity-model"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Aug 2006 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 3.8 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 6.9 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Aug 2006",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-jun-2007",
+        "label": "Derived corona",
+        "thumbnail": "hd-189733-dataset-activity-model.webp",
+        "volume": {
+          "objectId": "hd-189733-corona",
+          "datasetId": "jun-2007",
+          "surface": "activity-model"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Jun 2007 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 3.8 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 6.9 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Jun 2007",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-sep-2013",
+        "label": "Derived corona",
+        "thumbnail": "hd-189733-dataset-activity-model.webp",
+        "volume": {
+          "objectId": "hd-189733-corona",
+          "datasetId": "sep-2013",
+          "surface": "activity-model"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Sep 2013 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 3.8 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 6.9 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Sep 2013",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "radial-field-2006-08",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Aug 2006",
+        "thumbnail": "hd-189733-dataset-radial-field-2006-08.webp",
+        "surface": "hd-189733-surface-radial-field-2006-08@2x.webp",
+        "poles": "hd-189733-poles-radial-field-2006-08@2x.webp",
+        "source": {
+          "id": "hd-189733-espadons-map-radial-field-2006-08",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Aug 2006"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-150",
+            "0",
+            "+150"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-150",
+              "0",
+              "+150"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Aug 2006, reconstructed in this project from 9 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Step through the 3 maps to see the field change.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 72° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-2007-06",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Jun 2007",
+        "thumbnail": "hd-189733-dataset-radial-field-2007-06.webp",
+        "surface": "hd-189733-surface-radial-field-2007-06@2x.webp",
+        "poles": "hd-189733-poles-radial-field-2007-06@2x.webp",
+        "source": {
+          "id": "hd-189733-espadons-map-radial-field-2007-06",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Jun 2007"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-150",
+            "0",
+            "+150"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-150",
+              "0",
+              "+150"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Jun 2007, reconstructed in this project from 15 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Fares et al. (2010), MNRAS 406, 409, arXiv:1003.6027 map the same run with a mean field of 22 G; this map has 24 G. Step through the 3 maps to see the field change.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 72° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-2013-09",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Sep 2013",
+        "thumbnail": "hd-189733-dataset-radial-field-2013-09.webp",
+        "surface": "hd-189733-surface-radial-field-2013-09@2x.webp",
+        "poles": "hd-189733-poles-radial-field-2013-09@2x.webp",
+        "source": {
+          "id": "hd-189733-espadons-map-radial-field-2013-09",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Sep 2013"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-150",
+            "0",
+            "+150"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-150",
+              "0",
+              "+150"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Sep 2013, reconstructed in this project from 7 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Fares et al. (2017, MNRAS, doi:10.1093/mnras/stx1581; arXiv:1706.07262) map the same run with a mean field of 42 G; this map has 55 G. Step through the 3 maps to see the field change.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 72° S; the star never shows us what lies below it."
       }
     ]
   },

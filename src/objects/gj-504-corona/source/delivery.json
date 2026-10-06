@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "gj-504-corona",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/gj-504-corona/source/volume-apr-2025.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/gj-504-corona/source/provenance.json"
+    },
+    {
+      "path": "src/objects/gj-504-corona/source/density-apr-2025.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      199.1912925227921,
+      9.425570917943816
+    ],
+    "distancePc": 17.58745761305937,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.00035696636435030596
+  },
+  "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+  "description": "GJ 504’s corona, derived here from an observed map of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
+  "defaultDataset": "apr-2025",
+  "framingRadiusUnits": 4,
+  "attachedTo": "gj-504",
+  "acceptedLabResult": "gj-504-corona-density-grids",
+  "compactInputs": {
+    "path": "src/objects/gj-504-corona/source/volume-apr-2025.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "apr-2025",
+      "label": "Derived corona · Apr 2025",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/gj-504-corona/source/volume-apr-2025.json"
+      }
+    }
+  ]
+}

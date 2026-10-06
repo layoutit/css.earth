@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "chi1-orionis-corona",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/chi1-orionis-corona/source/volume-dec-2017.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/chi1-orionis-corona/source/provenance.json"
+    },
+    {
+      "path": "src/objects/chi1-orionis-corona/source/density-dec-2014.ktx2"
+    },
+    {
+      "path": "src/objects/chi1-orionis-corona/source/density-jan-2015.ktx2"
+    },
+    {
+      "path": "src/objects/chi1-orionis-corona/source/density-dec-2017.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      88.59425851858157,
+      20.275583208967447
+    ],
+    "distancePc": 8.699291877905603,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.0005613089769308751
+  },
+  "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+  "description": "χ¹ Orionis’s corona, derived here from 3 observed maps of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
+  "defaultDataset": "dec-2017",
+  "framingRadiusUnits": 4,
+  "attachedTo": "chi1-orionis",
+  "acceptedLabResult": "chi1-orionis-corona-density-grids",
+  "compactInputs": {
+    "path": "src/objects/chi1-orionis-corona/source/volume-dec-2017.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "dec-2014",
+      "label": "Derived corona · Dec 2014",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/chi1-orionis-corona/source/volume-dec-2014.json"
+      }
+    },
+    {
+      "id": "jan-2015",
+      "label": "Derived corona · Jan 2015",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/chi1-orionis-corona/source/volume-jan-2015.json"
+      }
+    },
+    {
+      "id": "dec-2017",
+      "label": "Derived corona · Dec 2017",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+      "recipe": {
+        "path": "src/objects/chi1-orionis-corona/source/volume-dec-2017.json"
+      }
+    }
+  ]
+}

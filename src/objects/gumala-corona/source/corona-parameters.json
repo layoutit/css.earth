@@ -1,0 +1,130 @@
+{
+  "schema": "cssearth-published-model-parameters@2",
+  "objectId": "gumala-corona",
+  "citation": "Freund et al. (2022), A&A 664, A105: 2RXS J191534.4-241058, 22.05 arcsec from the star's Gaia position, stellar probability 0.9914; Johnstone & Güdel (2015), A&A 578, A129: Equation 4: T = 0.11 F_X^0.26 million kelvin; Wood et al. (2021), ApJ 915, 37: Section 5.1 and Table 3: mass loss per unit surface rises as F_X^0.77",
+  "star": {
+    "id": "gumala",
+    "massSolar": 1.111342,
+    "radiusSolar": 1.274489003880983,
+    "radiusArcsec": 0.00021521946531733065,
+    "distancePc": 27.539188326974777,
+    "sceneOriginRaDecDeg": [
+      288.8894215086234,
+      -24.180111541977382
+    ],
+    "inclinationDegrees": 60.00000000000006
+  },
+  "xray": {
+    "fluxErgCm2S": 5.43e-13,
+    "band": "0.1 to 2.4 keV (ROSAT)",
+    "luminosityErgS": 4.927345958702282e+28,
+    "surfaceFluxErgCm2S": 498754.6981998991
+  },
+  "temperature": {
+    "kelvin": 3333061.3308588634,
+    "measured": false
+  },
+  "massLoss": {
+    "solar": 12.880869353658994,
+    "measured": false,
+    "solarMassLossSolarMassesPerYear": 2e-14
+  },
+  "wind": {
+    "soundKmS": 214.07568851316253,
+    "criticalRadii": 1.8148327133918103,
+    "speedAtSurfaceKmS": 91.91054770475913,
+    "speedAt4RadiiKmS": 377.58559799190715
+  },
+  "atRest": {
+    "scaleHeightRadii": 0.2755074868942223,
+    "basePerCm3": 383473697.82254714,
+    "emissionMeasureCm3": 5.675899650537934e+50
+  },
+  "method": {
+    "sourceRadii": 2.5,
+    "nearRadii": 1.2,
+    "nearWidthDegrees": 15,
+    "farRadii": 2,
+    "farWidthDegrees": 8,
+    "decayPower": 3,
+    "harmonicDegree": 15,
+    "mapCells": [
+      180,
+      90
+    ]
+  },
+  "maps": {
+    "oct-2009": {
+      "label": "Oct 2009",
+      "surface": "radial-field-2009-10",
+      "meanAbsGauss": 2.44615944229532,
+      "harmonicsResidual": 0.002482371570898072,
+      "neutralLineCells": 536,
+      "skyWithin10DegreesOfLine": 0.20471454718193172,
+      "openShare": [
+        {
+          "radii": 1.05,
+          "share": 0.2562554746330049
+        },
+        {
+          "radii": 1.2,
+          "share": 0.3417691454536764
+        },
+        {
+          "radii": 1.5,
+          "share": 0.4941899094296339
+        },
+        {
+          "radii": 2,
+          "share": 0.7530697160098437
+        },
+        {
+          "radii": 2.4,
+          "share": 0.9438997639382068
+        }
+      ],
+      "electronsPerCm3OffSheet": [
+        {
+          "radii": 1.2,
+          "density": 13410096.86738675
+        },
+        {
+          "radii": 2,
+          "density": 1186105.4230857529
+        },
+        {
+          "radii": 3,
+          "density": 291383.5513265132
+        },
+        {
+          "radii": 4,
+          "density": 138895.86927550661
+        }
+      ],
+      "sheetOverOffSheetAt2Radii": 52.655101804973135
+    }
+  },
+  "display": {
+    "densityRangePerCm3": [
+      100000,
+      1000000000
+    ],
+    "innerFadeRadii": [
+      1,
+      1.16
+    ],
+    "outerFadeRadii": [
+      2.6,
+      4
+    ],
+    "fullScaleColumnRadii": 4.76,
+    "topAlpha": 0.9,
+    "color": [
+      1,
+      0.957,
+      0.949
+    ],
+    "exposureGain": 0.4837363640743794
+  },
+  "notes": "The published numbers this corona's amount of gas follows from, and what packages/telescope-cli/src/new-object/corona/corona-bank.mts computes from them and from the star's magnetic maps."
+}

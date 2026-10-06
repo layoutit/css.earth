@@ -1,0 +1,305 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "chi1-ori-2015-01",
+ "target": {
+  "name": "chi1 Ori",
+  "object": "chi1-orionis",
+  "raDegrees": 88.5948,
+  "decDegrees": 20.2759,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 57029,
+  "toMjd": 57037
+ },
+ "observations": [
+  {
+   "product": "1772393p",
+   "uri": "cadc:CFHT/1772393p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57029.552,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772397p",
+   "uri": "cadc:CFHT/1772397p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57029.558,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772401p",
+   "uri": "cadc:CFHT/1772401p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57029.563,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772405p",
+   "uri": "cadc:CFHT/1772405p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57029.569,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772742p",
+   "uri": "cadc:CFHT/1772742p.fits",
+   "bytes": 20592000,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57030.555,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772746p",
+   "uri": "cadc:CFHT/1772746p.fits",
+   "bytes": 20592000,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57030.561,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772750p",
+   "uri": "cadc:CFHT/1772750p.fits",
+   "bytes": 20592000,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57030.566,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772754p",
+   "uri": "cadc:CFHT/1772754p.fits",
+   "bytes": 20592000,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57030.572,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772943p",
+   "uri": "cadc:CFHT/1772943p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57031.552,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772947p",
+   "uri": "cadc:CFHT/1772947p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57031.558,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772951p",
+   "uri": "cadc:CFHT/1772951p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57031.563,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1772955p",
+   "uri": "cadc:CFHT/1772955p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57031.569,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773184p",
+   "uri": "cadc:CFHT/1773184p.fits",
+   "bytes": 20592000,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57032.549,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773188p",
+   "uri": "cadc:CFHT/1773188p.fits",
+   "bytes": 20592000,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57032.554,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773192p",
+   "uri": "cadc:CFHT/1773192p.fits",
+   "bytes": 20592000,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57032.56,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773196p",
+   "uri": "cadc:CFHT/1773196p.fits",
+   "bytes": 20592000,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57032.565,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773372p",
+   "uri": "cadc:CFHT/1773372p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57033.542,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773376p",
+   "uri": "cadc:CFHT/1773376p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57033.548,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773380p",
+   "uri": "cadc:CFHT/1773380p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57033.553,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773384p",
+   "uri": "cadc:CFHT/1773384p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57033.559,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773662p",
+   "uri": "cadc:CFHT/1773662p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57034.463,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773666p",
+   "uri": "cadc:CFHT/1773666p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57034.469,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773670p",
+   "uri": "cadc:CFHT/1773670p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57034.474,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1773674p",
+   "uri": "cadc:CFHT/1773674p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57034.48,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1774093p",
+   "uri": "cadc:CFHT/1774093p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57036.519,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1774097p",
+   "uri": "cadc:CFHT/1774097p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57036.525,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1774101p",
+   "uri": "cadc:CFHT/1774101p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57036.53,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1774105p",
+   "uri": "cadc:CFHT/1774105p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57036.536,
+   "exposureSeconds": 324
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 5988,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 114776214: Teff"
+  },
+  "logGravity": {
+   "value": 4.49,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 114776214: logg"
+  },
+  "metallicity": {
+   "value": 0.04,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 114776214: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": 5.7,
+  "source": "SIMBAD, radial velocity of * chi01 Ori (2023MNRAS.519.5472M)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 9.8,
+   "source": "Willamo et al. (2022), A&A, arXiv:2110.06729, Table 3: v sin i 9.8 km/s, from Valenti & Fischer (2005)"
+  },
+  "inclinationDegrees": {
+   "value": 65,
+   "source": "Willamo et al. (2022), A&A, arXiv:2110.06729, Table 3: inclination 65 degrees, from Rosén et al. (2016); the tilt the star's page draws"
+  },
+  "periodDays": {
+   "value": 5.022,
+   "source": "Willamo et al. (2022), A&A, arXiv:2110.06729, Table 3: rotation period 5.022 d, from Lehtinen et al. (2020)"
+  },
+  "maximumDegree": {
+   "value": 10,
+   "source": "Willamo et al. (2022), Sect. 3: the solution is limited to degree 10 for all their stars"
+  }
+ }
+}

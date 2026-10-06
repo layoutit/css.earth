@@ -22,7 +22,7 @@ export function parseNewObjectOptions(value:unknown):NewObjectOptions{
   return {...string('spec'),...strings('ids'),...string('from'),...strings('names'),...string('out'),check:flag('check'),bake:flag('bake'),refresh:flag('refresh'),skipExisting:flag('skipExisting'),json:flag('json')};
 }
 
-const holdsPictures=async(spec:string)=>{const {readFile}=await import('node:fs/promises'),value:unknown=JSON.parse(await readFile(spec,'utf8'));return typeof value==='object'&&value!==null&&'pictures' in value;};
+const holds=async(spec:string,key:'pictures'|'coronae'|'magneticMaps')=>{const {readFile}=await import('node:fs/promises'),value:unknown=JSON.parse(await readFile(spec,'utf8'));return typeof value==='object'&&value!==null&&key in value;};
 
 /** The result text and exit code for one parsed `new-object` command. */
 export async function newObjectCommand(options:NewObjectOptions,root:string,stderr:(text:string)=>void):Promise<{readonly text:string;readonly code:number}>{
@@ -40,7 +40,17 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
   }else if(options.from){
     const result=await writeDrafts(options.from,options.names??[],options.out!,{root,archive:liveArchive,progress:line=>stderr(`${line}\n`)});
     text=options.json?`${JSON.stringify(result)}\n`:`${result.report.join('\n')}\n${result.entries} entries written to ${result.path}\n`;code=result.entries?0:3;
-  }else if(await holdsPictures(options.spec!)){
+  }else if(await holds(options.spec!,'coronae')){
+    // A spec of coronae: each one a volume bank derived from the magnetic maps a star's page shows (corona/corona.mts).
+    const {runCoronae,bakeCoronae,formatCoronae}=await import('./corona/corona.mts'),results=await runCoronae(options.spec!,{root,archive:liveArchive,progress}),good=results.filter(result=>!result.failed);
+    const baked=options.bake&&good.length?await bakeCoronae(good,{root,progress}):true;
+    text=options.json?`${JSON.stringify(results)}\n`:formatCoronae(results,options.spec!,baked&&options.bake&&good.length>0);code=baked&&good.length===results.length?0:1;
+  }else if(await holds(options.spec!,'magneticMaps')){
+    // A spec of magnetic maps this repository reduced from archived spectra: each one a dataset of its star's page (magnetic/maps.mts).
+    const {runMagneticMaps,bakeMagneticMaps,formatMagneticMaps}=await import('./magnetic/maps.mts'),results=await runMagneticMaps(options.spec!,{root,progress}),good=results.filter(result=>!result.failed);
+    const baked=options.bake&&good.length?await bakeMagneticMaps(good,{root,progress}):true;
+    text=options.json?`${JSON.stringify(results)}\n`:formatMagneticMaps(results,options.spec!,baked&&options.bake&&good.length>0);code=baked&&good.length===results.length?0:1;
+  }else if(await holds(options.spec!,'pictures')){
     // A spec of published pictures: each one a dataset on a page that shows a shaped layer bank (pictures/pictures.mts).
     const {runPictures,bakePictures,formatPictures}=await import('./pictures/pictures.mts'),results=await runPictures(options.spec!,{root,archive:liveArchive,progress}),good=results.filter(result=>!result.failed);
     const baked=options.bake&&good.length?await bakePictures(good,{root,progress}):true;

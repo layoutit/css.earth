@@ -1,0 +1,228 @@
+{
+  "schema": "cssearth-published-model-parameters@2",
+  "objectId": "hd-189733-corona",
+  "citation": "Freund et al. (2022), A&A 664, A105: 2RXS J200043.2+224238, 6.46 arcsec from the star's Gaia position, stellar probability 0.9997; Johnstone & Güdel (2015), A&A 578, A129: Equation 4: T = 0.11 F_X^0.26 million kelvin; Wood et al. (2021), ApJ 915, 37: Section 5.1 and Table 3: mass loss per unit surface rises as F_X^0.77",
+  "star": {
+    "id": "hd-189733",
+    "massSolar": 0.8070777248865484,
+    "radiusSolar": 0.752,
+    "radiusArcsec": 0.0001768401742724881,
+    "distancePc": 19.775774337650674,
+    "sceneOriginRaDecDeg": [
+      300.18211149719184,
+      22.70899911981162
+    ],
+    "inclinationDegrees": 71.87000344258654
+  },
+  "xray": {
+    "fluxErgCm2S": 6.38e-13,
+    "band": "0.1 to 2.4 keV (ROSAT)",
+    "luminosityErgS": 2.9853731914480416e+28,
+    "surfaceFluxErgCm2S": 867978.7176063884
+  },
+  "temperature": {
+    "kelvin": 3849506.3918408924,
+    "measured": false
+  },
+  "massLoss": {
+    "solar": 6.870489341140134,
+    "measured": false,
+    "solarMassLossSolarMassesPerYear": 2e-14
+  },
+  "wind": {
+    "soundKmS": 230.06376326496266,
+    "criticalRadii": 1.9340190375727686,
+    "speedAtSurfaceKmS": 86.50564153552187,
+    "speedAt4RadiiKmS": 392.3513313328927
+  },
+  "atRest": {
+    "scaleHeightRadii": 0.2585289959852255,
+    "basePerCm3": 741552644.9421352,
+    "emissionMeasureCm3": 3.695737792873042e+50
+  },
+  "method": {
+    "sourceRadii": 2.5,
+    "nearRadii": 1.2,
+    "nearWidthDegrees": 15,
+    "farRadii": 2,
+    "farWidthDegrees": 8,
+    "decayPower": 3,
+    "harmonicDegree": 15,
+    "mapCells": [
+      180,
+      90
+    ]
+  },
+  "maps": {
+    "aug-2006": {
+      "label": "Aug 2006",
+      "surface": "radial-field-2006-08",
+      "meanAbsGauss": 12.37476513017481,
+      "harmonicsResidual": 0.003844876144858172,
+      "neutralLineCells": 429,
+      "skyWithin10DegreesOfLine": 0.18636447364854458,
+      "openShare": [
+        {
+          "radii": 1.05,
+          "share": 0.19560943094819966
+        },
+        {
+          "radii": 1.2,
+          "share": 0.2809889323323272
+        },
+        {
+          "radii": 1.5,
+          "share": 0.49731216991014754
+        },
+        {
+          "radii": 2,
+          "share": 0.7886001998329046
+        },
+        {
+          "radii": 2.4,
+          "share": 0.9602499740260073
+        }
+      ],
+      "electronsPerCm3OffSheet": [
+        {
+          "radii": 1.2,
+          "density": 25821169.215302024
+        },
+        {
+          "radii": 2,
+          "density": 1713996.0980601434
+        },
+        {
+          "radii": 3,
+          "density": 433115.5073498901
+        },
+        {
+          "radii": 4,
+          "density": 204789.945587416
+        }
+      ],
+      "sheetOverOffSheetAt2Radii": 62.54583048148374
+    },
+    "jun-2007": {
+      "label": "Jun 2007",
+      "surface": "radial-field-2007-06",
+      "meanAbsGauss": 10.709229775819843,
+      "harmonicsResidual": 0.003943518894622806,
+      "neutralLineCells": 810,
+      "skyWithin10DegreesOfLine": 0.24907683109245962,
+      "openShare": [
+        {
+          "radii": 1.05,
+          "share": 0.14436534210706922
+        },
+        {
+          "radii": 1.2,
+          "share": 0.2078404906299956
+        },
+        {
+          "radii": 1.5,
+          "share": 0.38873350281521024
+        },
+        {
+          "radii": 2,
+          "share": 0.709048332148328
+        },
+        {
+          "radii": 2.4,
+          "share": 0.936096398444307
+        }
+      ],
+      "electronsPerCm3OffSheet": [
+        {
+          "radii": 1.2,
+          "density": 34908803.12776244
+        },
+        {
+          "radii": 2,
+          "density": 1906298.3497157292
+        },
+        {
+          "radii": 3,
+          "density": 433115.5073498901
+        },
+        {
+          "radii": 4,
+          "density": 204789.945587416
+        }
+      ],
+      "sheetOverOffSheetAt2Radii": 56.23637528258924
+    },
+    "sep-2013": {
+      "label": "Sep 2013",
+      "surface": "radial-field-2013-09",
+      "meanAbsGauss": 32.697829565934136,
+      "harmonicsResidual": 0.003352490438437161,
+      "neutralLineCells": 448,
+      "skyWithin10DegreesOfLine": 0.19802118990101655,
+      "openShare": [
+        {
+          "radii": 1.05,
+          "share": 0.3397373844020549
+        },
+        {
+          "radii": 1.2,
+          "share": 0.400548354119416
+        },
+        {
+          "radii": 1.5,
+          "share": 0.5375307937263043
+        },
+        {
+          "radii": 2,
+          "share": 0.7755905213015134
+        },
+        {
+          "radii": 2.4,
+          "share": 0.9657130089164606
+        }
+      ],
+      "electronsPerCm3OffSheet": [
+        {
+          "radii": 1.2,
+          "density": 18113824.94712983
+        },
+        {
+          "radii": 2,
+          "density": 1742746.4987256934
+        },
+        {
+          "radii": 3,
+          "density": 433115.5073498901
+        },
+        {
+          "radii": 4,
+          "density": 204789.945587416
+        }
+      ],
+      "sheetOverOffSheetAt2Radii": 61.51400073021636
+    }
+  },
+  "display": {
+    "densityRangePerCm3": [
+      100000,
+      1000000000
+    ],
+    "innerFadeRadii": [
+      1,
+      1.16
+    ],
+    "outerFadeRadii": [
+      2.6,
+      4
+    ],
+    "fullScaleColumnRadii": 4.76,
+    "topAlpha": 0.9,
+    "color": [
+      1,
+      0.886,
+      0.812
+    ],
+    "exposureGain": 0.4837363640743794
+  },
+  "notes": "The published numbers this corona's amount of gas follows from, and what packages/telescope-cli/src/new-object/corona/corona-bank.mts computes from them and from the star's magnetic maps."
+}

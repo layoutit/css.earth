@@ -44,6 +44,12 @@ ESA's picture pages and the sky tags in a JPEG, `registration.mts` owns the arit
 observation, plane and rim, `picture-bank.mts` writes one entry's records from the bank it is like, and `pictures.mts` drafts, writes
 and bakes. It never writes a sentence a reader sees and never picks a value for a color: those are the spec's, written by a person.
 
+A star's corona derived from the magnetic maps its page already shows is `src/new-object/corona/`: `--from-magnetic` and a spec's
+`coronae`. `corona-bank.mts` parses an entry, computes the grids through `@cssearth/bake/objects/stellar` and writes the bank's
+records and the star's dataset steps; `corona.mts` reads the star's own records and maps, drafts, writes and bakes. A corona is
+never a published result: every sentence these modules write says it is derived here and which of its numbers are measured. A
+star whose gas, at its X-ray temperature, would not be held by its gravity is refused, not drawn.
+
 The star survey behind `telescope stars GALAXY` is `src/stars/`. It and the generator's `--from-table` route
 (`src/new-object/archives/tables/table-stars.mts`) read VizieR's table metadata and SIMBAD through the same two modules,
 `vizier-tables.mts` and `simbad-tap.mts` beside it; a star class is a branch of SIMBAD's own type tree, never a
@@ -52,6 +58,19 @@ header records of the archived exposure by byte range, keeps the one extension h
 and takes the sky position from `@cssearth/fits` `skyProjection`, which owns the projection and its SIP distortion.
 The survey ends by asking the papers API for works that name the galaxy and a kind of star: a literature claim about a
 galaxy's stars is checked there before it is made, never from SIMBAD and VizieR alone.
+
+Magnetic maps of stars from archived polarised spectra are `src/archives/espadons/`: `archive.mts` pins one star's run at the
+Canadian Astronomy Data Centre, `reduce.mts` reduces it, and `compare.mts` and `benchmark.mts` set the result beside what papers
+print for the same run. The science is not this package's: Korg computes each line's depth in the star's model atmosphere, LSDpy
+averages the lines, SpecpolFlow measures the longitudinal field and ZDIpy fits the map. `toolchain.json` pins them and
+`toolchain.mts install` puts them under `output/toolchains/zdi`; the GPL codes are run as tools and never copied here. What is
+written here is the archive reader (`cadc.mts`, `product.mts`), the Kurucz line list with its Landé factors (`kurucz.mts`), the
+files those codes read and the conversion of what they write (`mask.mts`, `lsd.mts`, `zdi.mts`); `tools.py` and `korg/depths.jl`
+hold calls and nothing else. Do not add a step of physics to these modules: when a step is missing, find the published code that
+does it and pin it. A program's `atmosphere`, `radialVelocity`, `star` and `published` values each carry where they are printed.
+A run's receipt is a result: `reduce.mts` writes it under ignored `output/espadons/<program id>/` and it is never committed; the
+ledger records each run's verdict. The one choice the codes leave open, how tightly a map is fitted, is `KNEE` in `reduce.mts`, and it is settled by `benchmark.mts`
+on the published runs.
 
 The papers API behind `telescope papers` is `src/papers.mts` and `src/papers/`. There is one search path: `findWorks`
 (`papers/works.mts`) asks OpenAlex, then arXiv when OpenAlex refuses, and the command and the star survey both call it; a

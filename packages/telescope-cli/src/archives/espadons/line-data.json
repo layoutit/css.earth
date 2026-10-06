@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-espadons-line-data@1",
+  "purpose": "The published atomic line list a star's line mask is made from (kurucz.mts, mask.mts). It is fetched once under .local/espadons/line-data and must be its pinned size.",
+  "files": {
+    "lines": {
+      "name": "gfall08oct17.dat",
+      "url": "http://kurucz.harvard.edu/linelists/gfnew/gfall08oct17.dat",
+      "bytes": 371660460,
+      "credit": "R. L. Kurucz, atomic line list gfall, version of 8 October 2017",
+      "format": "http://kurucz.harvard.edu/linelists.html",
+      "use": "Wavelength in air, log gf, the two levels with their J and labels, the three damping constants, the log shares of hyperfine and isotopic components, and the Lande g of the even and of the odd level."
+    }
+  }
+}

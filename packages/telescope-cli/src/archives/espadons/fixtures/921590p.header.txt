@@ -1,0 +1,23 @@
+SIMPLE  =                    T / Written by IDL:  Sun Mar 25 14:21:52 2012
+BITPIX  =                  -32 / IEEE single precision floating point
+NAXIS   =                    2 / Number of axes
+NAXIS1  =               213794 /Number of positions along axis 1
+NAXIS2  =                   24 /Number of positions along axis 2
+REDUCTIO= 'Polar   '           / Type of reduction
+COL1    = 'Wavelength'         / Normalized
+COL2    = 'Intensity'          / Normalized
+COL3    = 'Stokes  '           / Normalized
+COL4    = 'CheckN1 '           / Normalized
+COL5    = 'CheckN2 '           / Normalized
+COL6    = 'ErrorBar'           / Normalized
+OBJECT  = 'HD 189733'
+RUNID   = '07AC27  '
+DATE1   = '2007-06-23T11:44:35' / UTC Date of file acquisition
+DATE2   = '2007-06-23T12:00:17' / UTC Date of file acquisition
+DATE3   = '2007-06-23T12:16:00' / UTC Date of file acquisition
+DATE4   = '2007-06-23T12:31:42' / UTC Date of file acquisition
+INSTMODE= 'Polarimetry, R=65,000' / Instrument Mode
+EXPTIME1= '900.000 '           / Integration time (seconds)
+EXPTIME2= '900.000 '           / Integration time (seconds)
+EXPTIME3= '900.000 '           / Integration time (seconds)
+EXPTIME4= '900.000 '           / Integration time (seconds)

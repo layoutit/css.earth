@@ -8,6 +8,7 @@
 
 - **Radial field**, 18 steps, October 2015 to September 2018: red where the field points out of the star, blue where it points in.
 - **Azimuthal field**, 18 steps: the field running one way or the other around the spin axis.
+- **Derived corona**, one step for each of the 18 maps: the gas around the star, placed by the field of the radial map. It is derived here, not observed and not published; its own package says how ([iota-horologii-corona](../iota-horologii-corona/README.md)).
 
 Both use the paper's color bar: linear from −12 G (blue) through white at 0 to +12 G (red). Stronger fields saturate, as in the paper (the strongest, 16.4 G, is azimuthal). A thin black line marks 60° S: at the adopted tilt the star never shows us what lies further south, and the paper marks the same limit with a dashed line. [tecplot-lonlat-map.ts](../../../packages/bake/src/objects/raster/tecplot-lonlat-map.ts) reads the tables and interpolates bilinearly between grid nodes, so every node keeps its deposited value.
 

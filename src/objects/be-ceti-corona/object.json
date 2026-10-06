@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "be-ceti-corona",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        640197128240384100,
+        64112045279036650,
+        -139213478487001280
+      ],
+      "localToReferenceXyzw": [
+        0.5221971282035265,
+        0.5771041448998216,
+        0.4655896348972136,
+        0.4212923653612949
+      ],
+      "metersPerUnit": 695700000,
+      "boundsUnits": {
+        "min": [
+          -4,
+          -4,
+          -4
+        ],
+        "max": [
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "be-ceti"
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}

@@ -1,0 +1,197 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "chi1-ori-2014-12",
+ "target": {
+  "name": "chi1 Ori",
+  "object": "chi1-orionis",
+  "raDegrees": 88.5948,
+  "decDegrees": 20.2759,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 57011,
+  "toMjd": 57022
+ },
+ "observations": [
+  {
+   "product": "1769735p",
+   "uri": "cadc:CFHT/1769735p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57011.541,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1769739p",
+   "uri": "cadc:CFHT/1769739p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57011.547,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1769743p",
+   "uri": "cadc:CFHT/1769743p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57011.552,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1769747p",
+   "uri": "cadc:CFHT/1769747p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57011.558,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1770356p",
+   "uri": "cadc:CFHT/1770356p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57013.593,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1770360p",
+   "uri": "cadc:CFHT/1770360p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57013.599,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1770364p",
+   "uri": "cadc:CFHT/1770364p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57013.604,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1770368p",
+   "uri": "cadc:CFHT/1770368p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57013.61,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1771301p",
+   "uri": "cadc:CFHT/1771301p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57020.563,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1771305p",
+   "uri": "cadc:CFHT/1771305p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57020.569,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1771309p",
+   "uri": "cadc:CFHT/1771309p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57020.574,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1771313p",
+   "uri": "cadc:CFHT/1771313p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57020.58,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1771746p",
+   "uri": "cadc:CFHT/1771746p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57021.537,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1771750p",
+   "uri": "cadc:CFHT/1771750p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57021.543,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1771754p",
+   "uri": "cadc:CFHT/1771754p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57021.548,
+   "exposureSeconds": 324
+  },
+  {
+   "product": "1771758p",
+   "uri": "cadc:CFHT/1771758p.fits",
+   "bytes": 20589120,
+   "targetName": "HD39587",
+   "proposal": "14BF09",
+   "mjdStart": 57021.554,
+   "exposureSeconds": 324
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 5988,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 114776214: Teff"
+  },
+  "logGravity": {
+   "value": 4.49,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 114776214: logg"
+  },
+  "metallicity": {
+   "value": 0.04,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 114776214: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": 5.7,
+  "source": "SIMBAD, radial velocity of * chi01 Ori (2023MNRAS.519.5472M)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 9.8,
+   "source": "Willamo et al. (2022), A&A, arXiv:2110.06729, Table 3: v sin i 9.8 km/s, from Valenti & Fischer (2005)"
+  },
+  "inclinationDegrees": {
+   "value": 65,
+   "source": "Willamo et al. (2022), A&A, arXiv:2110.06729, Table 3: inclination 65 degrees, from Rosén et al. (2016); the tilt the star's page draws"
+  },
+  "periodDays": {
+   "value": 5.022,
+   "source": "Willamo et al. (2022), A&A, arXiv:2110.06729, Table 3: rotation period 5.022 d, from Lehtinen et al. (2020)"
+  },
+  "maximumDegree": {
+   "value": 10,
+   "source": "Willamo et al. (2022), Sect. 3: the solution is limited to degree 10 for all their stars"
+  }
+ }
+}

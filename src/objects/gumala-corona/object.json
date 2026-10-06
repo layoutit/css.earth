@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gumala-corona",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        250969802448888220,
+        -733464672091821600,
+        -348071455675148400
+      ],
+      "localToReferenceXyzw": [
+        0.8281453141088198,
+        0.1377626079518499,
+        0.08915654851471912,
+        0.5359551403119964
+      ],
+      "metersPerUnit": 886662000,
+      "boundsUnits": {
+        "min": [
+          -4,
+          -4,
+          -4
+        ],
+        "max": [
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "gumala"
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}

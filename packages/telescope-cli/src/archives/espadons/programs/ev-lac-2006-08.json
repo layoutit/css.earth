@@ -1,0 +1,128 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "ev-lac-2006-08",
+ "target": {
+  "name": "EV Lac",
+  "raDegrees": 341.70721359,
+  "decDegrees": 44.33399288,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 53951,
+  "toMjd": 53961
+ },
+ "observations": [
+  {
+   "product": "861107p",
+   "uri": "cadc:CFHT/861107p.fits",
+   "bytes": 20592000,
+   "targetName": "evLac",
+   "proposal": "06bf10",
+   "mjdStart": 53952.56,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861277p",
+   "uri": "cadc:CFHT/861277p.fits",
+   "bytes": 20592000,
+   "targetName": "evlac",
+   "proposal": "06bf10",
+   "mjdStart": 53954.553,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861421p",
+   "uri": "cadc:CFHT/861421p.fits",
+   "bytes": 20592000,
+   "targetName": "evLac",
+   "proposal": "06bf10",
+   "mjdStart": 53955.545,
+   "exposureSeconds": 1600
+  },
+  {
+   "product": "861590p",
+   "uri": "cadc:CFHT/861590p.fits",
+   "bytes": 20597760,
+   "targetName": "evlac",
+   "proposal": "06bf10",
+   "mjdStart": 53956.548,
+   "exposureSeconds": 920
+  },
+  {
+   "product": "861750p",
+   "uri": "cadc:CFHT/861750p.fits",
+   "bytes": 20592000,
+   "targetName": "ev lac",
+   "proposal": "06bf10",
+   "mjdStart": 53957.56,
+   "exposureSeconds": 1000
+  },
+  {
+   "product": "861875p",
+   "uri": "cadc:CFHT/861875p.fits",
+   "bytes": 20592000,
+   "targetName": "evlac",
+   "proposal": "06bf10",
+   "mjdStart": 53958.561,
+   "exposureSeconds": 1000
+  },
+  {
+   "product": "861997p",
+   "uri": "cadc:CFHT/861997p.fits",
+   "bytes": 20592000,
+   "targetName": "evlac",
+   "proposal": "06bf10",
+   "mjdStart": 53959.564,
+   "exposureSeconds": 1000
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 3311,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 154101678: Teff"
+  },
+  "logGravity": {
+   "value": 4.89,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 154101678: logg"
+  }
+ },
+ "radialVelocity": {
+  "value": 0.287,
+  "source": "SIMBAD, radial velocity of V* EV Lac (2018A&A...616A...7S)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 4,
+   "source": "Morin, J. et al., arXiv:0808.1423 (Mon.Not.Roy.Astron.Soc.390:567-581,2010): fits hold for 3.0 <= v sin i <= 5.0 km/s"
+  },
+  "inclinationDegrees": {
+   "value": 60,
+   "source": "Morin, J. et al., arXiv:0808.1423 (Mon.Not.Roy.Astron.Soc.390:567-581,2010): Table 1; Sect. 6"
+  },
+  "periodDays": {
+   "value": 4.378,
+   "source": "Morin, J. et al., arXiv:0808.1423 (Mon.Not.Roy.Astron.Soc.390:567-581,2010): P_ZDI = 4.378 d; P_rot = 4.3715(6) d"
+  },
+  "maximumDegree": {
+   "value": 8,
+   "source": "Morin, J. et al., arXiv:0808.1423 (Mon.Not.Roy.Astron.Soc.390:567-581,2010): Table 1; Sect. 6"
+  }
+ },
+ "published": {
+  "paper": "Morin, J. et al., arXiv:0808.1423 (Mon.Not.Roy.Astron.Soc.390:567-581,2010)",
+  "url": "https://arxiv.org/abs/0808.1423",
+  "meanGauss": {
+   "value": 570,
+   "source": "Table 7 (tab:syn); journal table; star section: mean field strength, epoch 2006"
+  },
+  "toroidalPercent": {
+   "value": 13,
+   "source": "Table 7 (tab:syn); journal table; star section: toroidal share of the energy, epoch 2006"
+  },
+  "spectra": {
+   "value": 7,
+   "source": "Table 7 (tab:syn); journal table; star section: spectra used"
+  },
+  "note": "instruments ESPaDOnS; poloidalPct: 87; axisymmetricPct: 33; axisymmetricOf: total energy; first value m = 0, second m < l/2; visiblePolePolarity: two spots at opposite longitudes; maximum flux above 2 kG; toroidal field not negligible"
+ }
+}

@@ -1,0 +1,121 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "map-oct-2009",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cadc-cfht-espadons",
+            "role": "material",
+            "evidence": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+          },
+          {
+            "catalogueId": "arxiv-1711-08636",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1711.08636"
+          }
+        ]
+      },
+      "path": "src/objects/gumala/source/science/espadons/hd-179949-2009-09.dat",
+      "origin": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "title": "Magnetic map of HD 179949 from 18 polarised spectra of 25 September 2009 to 10 October 2009: radial, azimuthal and meridional field on a longitude-latitude grid",
+      "credit": "CFHT ESPaDOnS, CFHT programs 09BC19, 09BF05, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+      "displayCredit": "CFHT ESPaDOnS · mapped here",
+      "acquisition": "The file the gumala package holds for its own dataset radial-field-2009-10; Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program hd-179949-2009-09, which pins every archived spectrum by its size. The run's receipt (the line list, the codes and each step's result) is written again by that command under output/espadons and is not kept in git.",
+      "license": "CC BY 4.0 for the archived spectra (Canadian Astronomy Data Centre); reduction by this project",
+      "datasetId": "oct-2009"
+    },
+    {
+      "id": "corona-parameters",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-664-a105",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105"
+          },
+          {
+            "catalogueId": "arxiv-1505-00643",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1505.00643"
+          },
+          {
+            "catalogueId": "arxiv-2105-00019",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/2105.00019"
+          }
+        ]
+      },
+      "path": "src/objects/gumala-corona/source/corona-parameters.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "title": "Gumala · X-ray flux, coronal temperature and mass loss",
+      "credit": "Freund et al. (2022), A&A 664, A105; Johnstone & Güdel (2015), A&A 578, A129; Wood et al. (2021), ApJ 915, 37",
+      "displayCredit": "Freund et al. (2022), A&A 664, A105",
+      "acquisition": "Published numbers transcribed from their sources, and the quantities this package computes from them. This record identifies the transcription; the sources are the origin.",
+      "license": "Published numbers cited under normal scholarly citation; the sources are not redistributed here."
+    }
+  ],
+  "documents": [
+    {
+      "id": "delivery-json",
+      "path": "src/objects/gumala-corona/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/gumala-corona/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/gumala-corona/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-oct-2009-ktx2",
+      "path": "src/objects/gumala-corona/source/density-oct-2009.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-oct-2009-json",
+      "path": "src/objects/gumala-corona/source/volume-oct-2009.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-oct-2009-png",
+      "path": "src/objects/gumala-corona/source/previews/oct-2009.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    }
+  ]
+}

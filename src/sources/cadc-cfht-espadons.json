@@ -1,0 +1,31 @@
+{
+  "id": "cadc-cfht-espadons",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "CFHT ESPaDOnS spectra in the Canadian Astronomy Data Centre archive",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "label": "CFHT archive at the CADC"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/about.html",
+      "checkedOn": "2026-10-06",
+      "locator": "Repository Licensing and Compliance: data held in the archive are made available under CC BY 4.0. Acknowledgements: the sentence a user of the archive includes."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Based on observations obtained at the Canada-France-Hawaii Telescope (CFHT). This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+      "scope": "citation",
+      "evidence": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/about.html"
+    }
+  ],
+  "publisher": "Canadian Astronomy Data Centre"
+}

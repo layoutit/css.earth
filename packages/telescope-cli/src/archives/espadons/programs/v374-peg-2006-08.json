@@ -1,0 +1,267 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "v374-peg-2006-08",
+ "target": {
+  "name": "V374 Peg",
+  "raDegrees": 330.3046842,
+  "decDegrees": 28.3069187,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 53952,
+  "toMjd": 53960
+ },
+ "observations": [
+  {
+   "product": "861079p",
+   "uri": "cadc:CFHT/861079p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bd01",
+   "mjdStart": 53952.408,
+   "exposureSeconds": 1100
+  },
+  {
+   "product": "861083p",
+   "uri": "cadc:CFHT/861083p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bd01",
+   "mjdStart": 53952.425,
+   "exposureSeconds": 1100
+  },
+  {
+   "product": "861099p",
+   "uri": "cadc:CFHT/861099p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53952.522,
+   "exposureSeconds": 1100
+  },
+  {
+   "product": "861103p",
+   "uri": "cadc:CFHT/861103p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53952.539,
+   "exposureSeconds": 1100
+  },
+  {
+   "product": "861269p",
+   "uri": "cadc:CFHT/861269p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53954.514,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861273p",
+   "uri": "cadc:CFHT/861273p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53954.533,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861387p",
+   "uri": "cadc:CFHT/861387p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bd01",
+   "mjdStart": 53955.346,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861391p",
+   "uri": "cadc:CFHT/861391p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bd01",
+   "mjdStart": 53955.364,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861413p",
+   "uri": "cadc:CFHT/861413p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53955.508,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861417p",
+   "uri": "cadc:CFHT/861417p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53955.525,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861553p",
+   "uri": "cadc:CFHT/861553p.fits",
+   "bytes": 20597760,
+   "targetName": "v374Peg",
+   "proposal": "06bd01",
+   "mjdStart": 53956.309,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861557p",
+   "uri": "cadc:CFHT/861557p.fits",
+   "bytes": 20597760,
+   "targetName": "v374Peg",
+   "proposal": "06bd01",
+   "mjdStart": 53956.328,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861582p",
+   "uri": "cadc:CFHT/861582p.fits",
+   "bytes": 20597760,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53956.514,
+   "exposureSeconds": 1040
+  },
+  {
+   "product": "861586p",
+   "uri": "cadc:CFHT/861586p.fits",
+   "bytes": 20597760,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53956.53,
+   "exposureSeconds": 1040
+  },
+  {
+   "product": "861715p",
+   "uri": "cadc:CFHT/861715p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bd01",
+   "mjdStart": 53957.33,
+   "exposureSeconds": 1440
+  },
+  {
+   "product": "861719p",
+   "uri": "cadc:CFHT/861719p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bd01",
+   "mjdStart": 53957.35,
+   "exposureSeconds": 1440
+  },
+  {
+   "product": "861742p",
+   "uri": "cadc:CFHT/861742p.fits",
+   "bytes": 20592000,
+   "targetName": "v374 peg",
+   "proposal": "06bf10",
+   "mjdStart": 53957.515,
+   "exposureSeconds": 1440
+  },
+  {
+   "product": "861746p",
+   "uri": "cadc:CFHT/861746p.fits",
+   "bytes": 20592000,
+   "targetName": "v374 peg",
+   "proposal": "06bf10",
+   "mjdStart": 53957.535,
+   "exposureSeconds": 1440
+  },
+  {
+   "product": "861867p",
+   "uri": "cadc:CFHT/861867p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53958.516,
+   "exposureSeconds": 1440
+  },
+  {
+   "product": "861871p",
+   "uri": "cadc:CFHT/861871p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53958.537,
+   "exposureSeconds": 1440
+  },
+  {
+   "product": "861989p",
+   "uri": "cadc:CFHT/861989p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53959.52,
+   "exposureSeconds": 1440
+  },
+  {
+   "product": "861993p",
+   "uri": "cadc:CFHT/861993p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bf10",
+   "mjdStart": 53959.541,
+   "exposureSeconds": 1440
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 3240,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 283410775: Teff"
+  },
+  "logGravity": {
+   "value": 4.91,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 283410775: logg"
+  }
+ },
+ "radialVelocity": {
+  "value": -4.79,
+  "source": "SIMBAD, radial velocity of V* V374 Peg (2018MNRAS.475.1960F)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 36.5,
+   "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 36.5 +/- 0.4 (Aug05) and 36.7 +/- 0.4 (Aug06) from brightness imaging; 36.5 adopted; absolute accuracy about 1 km/s"
+  },
+  "inclinationDegrees": {
+   "value": 70,
+   "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 'assuming i ~ 70 deg'"
+  },
+  "periodDays": {
+   "value": 0.4456,
+   "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 0.4456 d in the phase ephemeris; differential-rotation fit gives 0.445654 +/- 0.000002 d"
+  },
+  "maximumDegree": {
+   "value": 10,
+   "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 'All results presented below are obtained assuming l <= 10'"
+  },
+  "shearRadPerDay": {
+   "value": 0.0063,
+   "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): differential rotation, complete Stokes V data set (Aug05 + Sep05 + Aug06, 87 spectra), reduced chi-square 1.15; solid-body rotation does not get below 1.5"
+  }
+ },
+ "published": {
+  "paper": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008)",
+  "url": "https://arxiv.org/abs/0711.1418",
+  "meanGauss": {
+   "value": 700,
+   "source": "Table 1; Sect. 4.2: mean field strength, epoch 2006 August (Aug06)"
+  },
+  "toroidalPercent": {
+   "value": 4,
+   "source": "Table 1; Sect. 4.2: toroidal share of the energy, epoch 2006 August (Aug06)"
+  },
+  "spectra": {
+   "value": 21,
+   "source": "Table 1; Sect. 4.2: spectra used"
+  },
+  "note": "maxG: 1200; poloidalPct: 96; axisymmetricPct: 80; axisymmetricOf: total reconstructed energy (m = 0 modes); visiblePolePolarity: as Aug05 (positive); dipoleNote: mode l=1, m=0 has amplitude 1.9 kG and holds 60% of the energy"
+ }
+}

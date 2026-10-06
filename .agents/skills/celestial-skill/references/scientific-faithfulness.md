@@ -235,3 +235,7 @@ computed from an orbit, not a brightness seen in an eclipse.
 - Call it an estimate in its name, its legend and its description, never "measured"
   or "observed". The number itself is still one a paper prints.
 - It ranks below every measurement, and a measurement replaces it.
+- A structure this repository derives from a measured map by a published method is an estimate too: a star's corona
+  from its magnetic map ([the method and its two tests](../../../../docs/stellar-corona-from-magnetic-maps.md)). Its name
+  says "derived", its description says it is neither observed nor published and names which of its inputs are measured,
+  and it is refused for a star the method does not hold for. A published simulation of the same star ranks above it.

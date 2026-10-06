@@ -1,0 +1,36 @@
+{
+  "id": "vizier-j-a-a-664-a105",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Freund et al. (2022), A&A 664, A105, VizieR J/A+A/664/A105",
+  "identifiers": [
+    {
+      "type": "VizieR catalogue",
+      "value": "J/A+A/664/A105"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "label": "VizieR J/A+A/664/A105"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "checkedOn": "2026-10-06",
+      "locator": "The catalogue as VizieR serves it; each package that cites it names its own row."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Freund et al. (2022), A&A 664, A105; VizieR (CDS)",
+      "scope": "citation",
+      "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105"
+    }
+  ],
+  "publisher": "CDS, Strasbourg"
+}

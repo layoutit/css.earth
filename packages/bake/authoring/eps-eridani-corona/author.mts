@@ -18,7 +18,7 @@
  * --check needs the nine simulation files under .local/eps-eridani-corona; without them it reports a SKIP. */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
-import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
+import { PUBLISHED_MODEL_PARAMETERS_SCHEMA, VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
 import { access, mkdir, readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { resolve } from 'node:path';
@@ -300,7 +300,7 @@ export async function author() {
   outputs.push(['delivery.json', Buffer.from(JSON.stringify(delivery, null, 2) + '\n')]);
 
   outputs.push(['wind-parameters.json', Buffer.from(JSON.stringify({
-    schema: 'cssearth-published-model-parameters@2', objectId: OBJECT_ID, datasetId: 'wind',
+    schema: PUBLISHED_MODEL_PARAMETERS_SCHEMA, objectId: OBJECT_ID, datasetId: 'wind',
     citation: 'Wood, B. E., Müller, H.-R., Zank, G. P., Linsky, J. L. 2002, "Measured mass-loss rates of solar-like stars as a function of age and activity", ApJ 574, 412',
     doi: '10.1086/340797', preprint: 'https://arxiv.org/abs/astro-ph/0203437', locator: 'Table 1, row ε Eri',
     star: measured.star, ...windRecord,

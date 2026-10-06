@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-189733-corona",
+  "entries": [
+    {
+      "id": "derived-corona",
+      "subject": "HD 189733 A: a corona derived from its 3 magnetic maps",
+      "status": "included",
+      "finding": "The potential field of each map to degree 15, with its source surface at 2.5 radii, reproduces the map with an rms residual of 0% to 0%. X-ray luminosity 3.0 × 10^28 erg/s (2RXS J200043.2+224238, 6.46 arcsec from the star's Gaia position, stellar probability 0.9997); temperature 3.8 million kelvin, not measured: the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129); mass loss 6.9 times the Sun's, not measured: what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37), uncertain by a factor of 5 or more. The wind passes the speed of sound 1.93 radii out.",
+      "evidence": [
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+        "https://arxiv.org/abs/1505.00643",
+        "https://arxiv.org/abs/2105.00019"
+      ]
+    }
+  ]
+}

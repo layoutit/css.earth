@@ -1,0 +1,147 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "gj-1156-2008-01",
+ "target": {
+  "name": "GJ 1156",
+  "raDegrees": 184.74749887,
+  "decDegrees": 11.12604812,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 54466,
+  "toMjd": 54831
+ },
+ "observations": [
+  {
+   "product": "965914p",
+   "uri": "cadc:CFHT/965914p.fits",
+   "bytes": 20589120,
+   "targetName": "gj1156",
+   "proposal": "07Bf29b",
+   "mjdStart": 54484.47,
+   "exposureSeconds": 2160
+  },
+  {
+   "product": "966018p",
+   "uri": "cadc:CFHT/966018p.fits",
+   "bytes": 20589120,
+   "targetName": "GJ 1156",
+   "proposal": "07Bf28B",
+   "mjdStart": 54485.472,
+   "exposureSeconds": 2160
+  },
+  {
+   "product": "966046p",
+   "uri": "cadc:CFHT/966046p.fits",
+   "bytes": 20589120,
+   "targetName": "GJ1156",
+   "proposal": "07Bf28b",
+   "mjdStart": 54485.627,
+   "exposureSeconds": 2160
+  },
+  {
+   "product": "966150p",
+   "uri": "cadc:CFHT/966150p.fits",
+   "bytes": 20592000,
+   "targetName": "gj1156",
+   "proposal": "07Bf29b",
+   "mjdStart": 54486.466,
+   "exposureSeconds": 2160
+  },
+  {
+   "product": "966178p",
+   "uri": "cadc:CFHT/966178p.fits",
+   "bytes": 20592000,
+   "targetName": "gj1156",
+   "proposal": "07Bf29b",
+   "mjdStart": 54486.628,
+   "exposureSeconds": 2160
+  },
+  {
+   "product": "966309p",
+   "uri": "cadc:CFHT/966309p.fits",
+   "bytes": 20592000,
+   "targetName": "GJ 1156",
+   "proposal": "07Bf29b",
+   "mjdStart": 54487.574,
+   "exposureSeconds": 2440
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 3110,
+   "source": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4.5V, for SIMBAD's spectral type M4.5Ve: Teff"
+  },
+  "logGravity": {
+   "value": 5.03,
+   "source": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4.5V, for SIMBAD's spectral type M4.5Ve: from the row's mass and radius"
+  }
+ },
+ "radialVelocity": {
+  "value": 6,
+  "source": "SIMBAD, radial velocity of V* GL Vir (2018MNRAS.475.1960F)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 17,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "inclinationDegrees": {
+   "value": 60,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "periodDays": {
+   "value": 0.491,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "maximumDegree": {
+   "value": 6,
+   "source": "Morin, J. et al., arXiv:1005.5552: l_ZDI column of the fit table"
+  }
+ },
+ "published": {
+  "paper": "Morin, J. et al., arXiv:1005.5552",
+  "url": "https://arxiv.org/abs/1005.5552",
+  "meanGauss": {
+   "value": 100,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): mean field strength, epoch 2008"
+  },
+  "toroidalPercent": {
+   "value": 17,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): toroidal share of the energy, epoch 2008"
+  },
+  "spectra": {
+   "value": 5,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): spectra used"
+  },
+  "note": "instruments ESPaDOnS; maxG: 360; poloidalPct: 83; axisymmetricPct: 20; axisymmetricOf: total energy; two definitions printed as x/y",
+  "longitudinalFields": [
+   {
+    "utc": "2008-01-20T11:39:04",
+    "gauss": -264.0,
+    "error": 63.0
+   },
+   {
+    "utc": "2008-01-20T15:23:14",
+    "gauss": 148.0,
+    "error": 61.0
+   },
+   {
+    "utc": "2008-01-21T11:30:41",
+    "gauss": -224.0,
+    "error": 74.0
+   },
+   {
+    "utc": "2008-01-21T15:23:59",
+    "gauss": 26.0,
+    "error": 65.0
+   },
+   {
+    "utc": "2008-01-22T14:08:30",
+    "gauss": 80.0,
+    "error": 65.0
+   }
+  ],
+  "longitudinalSource": "arXiv:1005.5552, journal of observations of GJ 1156: UT at mid-exposure and longitudinal field of each spectrum"
+ }
+}

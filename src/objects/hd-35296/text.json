@@ -52,6 +52,37 @@
       "title": "Brightness, Dec 2017",
       "detail": "ESO HARPSpol",
       "summary": "Starspots: darker, cooler patches mapped from how they distort the spectrum as the star turns."
+    },
+    "corona-dec-2017": {
+      "title": "Derived corona, Dec 2017",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Dec 2017. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "vizier-j-a-a-659-a71",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+          "label": "Willamo et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
     }
   }
 }

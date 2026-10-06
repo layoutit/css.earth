@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tepiamenit-corona",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -410178014554818000,
+        -207303069825221060,
+        144531419203600450
+      ],
+      "localToReferenceXyzw": [
+        0.5039221770789492,
+        -0.30994265390574166,
+        -0.42237877443584076,
+        0.6867271376929522
+      ],
+      "metersPerUnit": 1035648599.9999999,
+      "boundsUnits": {
+        "min": [
+          -4,
+          -4,
+          -4
+        ],
+        "max": [
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "tepiamenit"
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}

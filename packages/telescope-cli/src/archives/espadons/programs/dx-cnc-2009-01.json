@@ -1,0 +1,230 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "dx-cnc-2009-01",
+ "target": {
+  "name": "DX Cnc",
+  "raDegrees": 127.45563663,
+  "decDegrees": 26.77600671,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 54832,
+  "toMjd": 58848
+ },
+ "observations": [
+  {
+   "product": "1049999p",
+   "uri": "cadc:CFHT/1049999p.fits",
+   "bytes": 20592000,
+   "targetName": "gj1111",
+   "proposal": "08BF10",
+   "mjdStart": 54838.369,
+   "exposureSeconds": 3260
+  },
+  {
+   "product": "1050043p",
+   "uri": "cadc:CFHT/1050043p.fits",
+   "bytes": 20592000,
+   "targetName": "gj1111",
+   "proposal": "08BF10",
+   "mjdStart": 54838.544,
+   "exposureSeconds": 3260
+  },
+  {
+   "product": "1050061p",
+   "uri": "cadc:CFHT/1050061p.fits",
+   "bytes": 20592000,
+   "targetName": "gj1111",
+   "proposal": "08BF10",
+   "mjdStart": 54838.643,
+   "exposureSeconds": 3260
+  },
+  {
+   "product": "1058987p",
+   "uri": "cadc:CFHT/1058987p.fits",
+   "bytes": 20592000,
+   "targetName": "GJ 1111",
+   "proposal": "09AF11",
+   "mjdStart": 54875.361,
+   "exposureSeconds": 3200
+  },
+  {
+   "product": "1059124p",
+   "uri": "cadc:CFHT/1059124p.fits",
+   "bytes": 20589120,
+   "targetName": "GJ 1111",
+   "proposal": "09AF11",
+   "mjdStart": 54876.228,
+   "exposureSeconds": 3200
+  },
+  {
+   "product": "1059140p",
+   "uri": "cadc:CFHT/1059140p.fits",
+   "bytes": 20589120,
+   "targetName": "GJ 1111",
+   "proposal": "09AF11",
+   "mjdStart": 54876.354,
+   "exposureSeconds": 3200
+  },
+  {
+   "product": "1059164p",
+   "uri": "cadc:CFHT/1059164p.fits",
+   "bytes": 20589120,
+   "targetName": "GJ 1111",
+   "proposal": "09AF11",
+   "mjdStart": 54876.477,
+   "exposureSeconds": 3200
+  },
+  {
+   "product": "1059400p",
+   "uri": "cadc:CFHT/1059400p.fits",
+   "bytes": 20592000,
+   "targetName": "GJ 1111",
+   "proposal": "09AF11",
+   "mjdStart": 54877.228,
+   "exposureSeconds": 3200
+  },
+  {
+   "product": "1059416p",
+   "uri": "cadc:CFHT/1059416p.fits",
+   "bytes": 20592000,
+   "targetName": "GJ 1111",
+   "proposal": "09AF11",
+   "mjdStart": 54877.354,
+   "exposureSeconds": 3200
+  },
+  {
+   "product": "1059460p",
+   "uri": "cadc:CFHT/1059460p.fits",
+   "bytes": 20592000,
+   "targetName": "GJ 1111",
+   "proposal": "09AF11",
+   "mjdStart": 54877.491,
+   "exposureSeconds": 3200
+  },
+  {
+   "product": "1059887p",
+   "uri": "cadc:CFHT/1059887p.fits",
+   "bytes": 20589120,
+   "targetName": "GJ 1111",
+   "proposal": "09AF11",
+   "mjdStart": 54878.239,
+   "exposureSeconds": 3200
+  },
+  {
+   "product": "1059903p",
+   "uri": "cadc:CFHT/1059903p.fits",
+   "bytes": 20589120,
+   "targetName": "GJ 1111",
+   "proposal": "09AF11",
+   "mjdStart": 54878.362,
+   "exposureSeconds": 3200
+  },
+  {
+   "product": "1059939p",
+   "uri": "cadc:CFHT/1059939p.fits",
+   "bytes": 20589120,
+   "targetName": "GJ 1111",
+   "proposal": "09AF11",
+   "mjdStart": 54878.483,
+   "exposureSeconds": 3200
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 2814,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 3664898: Teff"
+  },
+  "logGravity": {
+   "value": 5.25,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 3664898: logg"
+  }
+ },
+ "radialVelocity": {
+  "value": 10.62,
+  "source": "SIMBAD, radial velocity of G 51-15 (2018MNRAS.475.1960F)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 13,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "inclinationDegrees": {
+   "value": 60,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "periodDays": {
+   "value": 0.46,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "maximumDegree": {
+   "value": 6,
+   "source": "Morin, J. et al., arXiv:1005.5552: l_ZDI column of the fit table"
+  }
+ },
+ "published": {
+  "paper": "Morin, J. et al., arXiv:1005.5552",
+  "url": "https://arxiv.org/abs/1005.5552",
+  "meanGauss": {
+   "value": 80,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): mean field strength, epoch 2009"
+  },
+  "toroidalPercent": {
+   "value": 38,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): toroidal share of the energy, epoch 2009"
+  },
+  "spectra": {
+   "value": 9,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): spectra used"
+  },
+  "note": "instruments ESPaDOnS; maxG: 180; poloidalPct: 62; axisymmetricPct: 70; axisymmetricOf: total energy; two definitions printed as x/y",
+  "longitudinalFields": [
+   {
+    "utc": "2009-02-13T09:08:28",
+    "gauss": 86.0,
+    "error": 56.0
+   },
+   {
+    "utc": "2009-02-14T08:57:56",
+    "gauss": 149.0,
+    "error": 52.0
+   },
+   {
+    "utc": "2009-02-14T11:55:19",
+    "gauss": -4.0,
+    "error": 65.0
+   },
+   {
+    "utc": "2009-02-15T05:57:12",
+    "gauss": 48.0,
+    "error": 43.0
+   },
+   {
+    "utc": "2009-02-15T08:58:44",
+    "gauss": 13.0,
+    "error": 40.0
+   },
+   {
+    "utc": "2009-02-15T12:15:05",
+    "gauss": 110.0,
+    "error": 44.0
+   },
+   {
+    "utc": "2009-02-16T06:12:40",
+    "gauss": 54.0,
+    "error": 37.0
+   },
+   {
+    "utc": "2009-02-16T09:09:50",
+    "gauss": 78.0,
+    "error": 36.0
+   },
+   {
+    "utc": "2009-02-16T12:03:37",
+    "gauss": 71.0,
+    "error": 38.0
+   }
+  ],
+  "longitudinalSource": "arXiv:1005.5552, journal of observations of DX Cnc: UT at mid-exposure and longitudinal field of each spectrum"
+ }
+}

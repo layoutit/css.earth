@@ -230,6 +230,17 @@
           "group": "field-components",
           "label": "Around the star"
         }
+      },
+      {
+        "id": "corona-dec-2017",
+        "label": "Derived corona",
+        "thumbnail": "be-ceti-dataset-color.webp",
+        "volume": {
+          "objectId": "be-ceti-corona",
+          "datasetId": "dec-2017",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Dec 2017 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.7 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 22 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density."
       }
     ]
   },

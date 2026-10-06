@@ -1,0 +1,579 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "tau-boo-2005-03",
+ "target": {
+  "name": "tau Boo",
+  "object": "tepiamenit",
+  "raDegrees": 206.8134,
+  "decDegrees": 17.4572,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 53452,
+  "toMjd": 53455
+ },
+ "observations": [
+  {
+   "product": "785775p",
+   "uri": "cadc:CFHT/785775p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.369,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "785779p",
+   "uri": "cadc:CFHT/785779p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.381,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785783p",
+   "uri": "cadc:CFHT/785783p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.397,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785787p",
+   "uri": "cadc:CFHT/785787p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.413,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785791p",
+   "uri": "cadc:CFHT/785791p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.429,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785795p",
+   "uri": "cadc:CFHT/785795p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.445,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785799p",
+   "uri": "cadc:CFHT/785799p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.46,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785803p",
+   "uri": "cadc:CFHT/785803p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.476,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785807p",
+   "uri": "cadc:CFHT/785807p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.492,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785811p",
+   "uri": "cadc:CFHT/785811p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.508,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785815p",
+   "uri": "cadc:CFHT/785815p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.524,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785819p",
+   "uri": "cadc:CFHT/785819p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.54,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785823p",
+   "uri": "cadc:CFHT/785823p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.556,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785827p",
+   "uri": "cadc:CFHT/785827p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.572,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785831p",
+   "uri": "cadc:CFHT/785831p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.588,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785835p",
+   "uri": "cadc:CFHT/785835p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.604,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785839p",
+   "uri": "cadc:CFHT/785839p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.62,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "785843p",
+   "uri": "cadc:CFHT/785843p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.636,
+   "exposureSeconds": 1000
+  },
+  {
+   "product": "785847p",
+   "uri": "cadc:CFHT/785847p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53452.65,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786203p",
+   "uri": "cadc:CFHT/786203p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.358,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786207p",
+   "uri": "cadc:CFHT/786207p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.374,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786211p",
+   "uri": "cadc:CFHT/786211p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.391,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786215p",
+   "uri": "cadc:CFHT/786215p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.406,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786219p",
+   "uri": "cadc:CFHT/786219p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.422,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786223p",
+   "uri": "cadc:CFHT/786223p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.438,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786227p",
+   "uri": "cadc:CFHT/786227p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.454,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786231p",
+   "uri": "cadc:CFHT/786231p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.469,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786235p",
+   "uri": "cadc:CFHT/786235p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.486,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786239p",
+   "uri": "cadc:CFHT/786239p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.501,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786243p",
+   "uri": "cadc:CFHT/786243p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.517,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786247p",
+   "uri": "cadc:CFHT/786247p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.533,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786251p",
+   "uri": "cadc:CFHT/786251p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.551,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786255p",
+   "uri": "cadc:CFHT/786255p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.567,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786259p",
+   "uri": "cadc:CFHT/786259p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.583,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786263p",
+   "uri": "cadc:CFHT/786263p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.598,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786267p",
+   "uri": "cadc:CFHT/786267p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.615,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786271p",
+   "uri": "cadc:CFHT/786271p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.63,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786275p",
+   "uri": "cadc:CFHT/786275p.fits",
+   "bytes": 20600640,
+   "targetName": "tau Boo",
+   "proposal": "05Af15",
+   "mjdStart": 53453.647,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786648p",
+   "uri": "cadc:CFHT/786648p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.353,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786652p",
+   "uri": "cadc:CFHT/786652p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.369,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786656p",
+   "uri": "cadc:CFHT/786656p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.385,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786660p",
+   "uri": "cadc:CFHT/786660p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.401,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786664p",
+   "uri": "cadc:CFHT/786664p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.417,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786668p",
+   "uri": "cadc:CFHT/786668p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.433,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786672p",
+   "uri": "cadc:CFHT/786672p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.449,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786676p",
+   "uri": "cadc:CFHT/786676p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.465,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786680p",
+   "uri": "cadc:CFHT/786680p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.481,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786684p",
+   "uri": "cadc:CFHT/786684p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.496,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786688p",
+   "uri": "cadc:CFHT/786688p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.513,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786692p",
+   "uri": "cadc:CFHT/786692p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.528,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786696p",
+   "uri": "cadc:CFHT/786696p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.544,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786700p",
+   "uri": "cadc:CFHT/786700p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.56,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786704p",
+   "uri": "cadc:CFHT/786704p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.576,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786708p",
+   "uri": "cadc:CFHT/786708p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.592,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786712p",
+   "uri": "cadc:CFHT/786712p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.608,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786716p",
+   "uri": "cadc:CFHT/786716p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.624,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "786720p",
+   "uri": "cadc:CFHT/786720p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.641,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "786724p",
+   "uri": "cadc:CFHT/786724p.fits",
+   "bytes": 20589120,
+   "targetName": "tau Boo",
+   "proposal": "05AF15",
+   "mjdStart": 53454.652,
+   "exposureSeconds": 800
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 6466,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: Teff"
+  },
+  "logGravity": {
+   "value": 4.25,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: logg"
+  },
+  "metallicity": {
+   "value": 0.26,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": -16.03,
+  "source": "SIMBAD, radial velocity of * tau Boo (2002ApJS..141..503N)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 14.27,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501), Table 1: v sin i 14.27 ± 0.06 km/s"
+  },
+  "inclinationDegrees": {
+   "value": 45,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the tilt their maps are made with, 45 degrees, beside the derived 44.5 ± 1.5 degrees their Table 1 quotes"
+  },
+  "periodDays": {
+   "value": 3.142,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the equatorial rate of 2.00 rad/d their Fourier-transform measurement of the differential rotation assumes, which is 3.142 d"
+  },
+  "shearRadPerDay": {
+   "value": 0.35,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): differential rotation 0.35 ± 0.14 rad/d from the Fourier transform of the line profile"
+  },
+  "maximumDegree": {
+   "value": 8,
+   "source": "Donati et al. (2008), MNRAS, doi:10.1111/j.1365-2966.2008.12946.x (arXiv:0802.1584), Sect. 3: the expansion is limited to degree 8"
+  }
+ }
+}

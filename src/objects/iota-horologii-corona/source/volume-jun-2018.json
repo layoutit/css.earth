@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-volume-recipe@1",
+  "grid": {
+    "path": "density-jun-2018.ktx2",
+    "dimensions": [
+      96,
+      96,
+      96
+    ],
+    "encoding": "sqrt-density-unorm8",
+    "bounds": {
+      "min": [
+        -4,
+        -4,
+        -4
+      ],
+      "max": [
+        4,
+        4,
+        4
+      ]
+    }
+  },
+  "material": {
+    "intensityScale": 1,
+    "stepScale": 1,
+    "stepMetric": "source",
+    "emission": [
+      {
+        "channel": 0,
+        "color": [
+          0.988,
+          0.965,
+          1
+        ],
+        "strength": 1
+      }
+    ],
+    "absorption": [],
+    "emissionTransfer": "shared-opacity",
+    "exposureGain": 0.4837363640743794
+  },
+  "bake": {
+    "sliceCounts": {
+      "x": 32,
+      "y": 32,
+      "z": 32
+    },
+    "unitsPerSourceUnit": 1,
+    "imageWidth": 320,
+    "samplesPerSlab": 4,
+    "cropTransparent": true,
+    "opticalWeight": 1,
+    "imageEncoding": {
+      "format": "webp",
+      "quality": 90
+    }
+  },
+  "anchors": [
+    {
+      "id": "iota-horologii",
+      "referencePositionM": [
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

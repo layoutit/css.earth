@@ -2,6 +2,8 @@ import { requireArray, requireRecord } from '@cssearth/core';
 import { sourceArray, sourceObject, sourceText } from '../../sources/catalog.js';
 
 export const VOLUME_SOURCE_MANIFEST_SCHEMA = 'cssearth-volume-source-manifest@2';
+/** The record beside a volume's source that lists the published or derived numbers a model grid was computed from. */
+export const PUBLISHED_MODEL_PARAMETERS_SCHEMA = 'cssearth-published-model-parameters@2';
 
 export type VolumeManifestReader = 'restoration' | 'context' | 'presentation';
 type VolumeManifestOptions = { reader: VolumeManifestReader; objectId: string; policy?: 'presentation-source' };

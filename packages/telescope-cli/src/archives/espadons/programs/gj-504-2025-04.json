@@ -1,0 +1,233 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "gj-504-2025-04",
+ "target": {
+  "name": "GJ 504",
+  "object": "gj-504",
+  "raDegrees": 199.1923,
+  "decDegrees": 9.425,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 60770,
+  "toMjd": 60775
+ },
+ "observations": [
+  {
+   "product": "3168578p",
+   "uri": "cadc:CFHT/3168578p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60770.374,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3168582p",
+   "uri": "cadc:CFHT/3168582p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60770.378,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3168594p",
+   "uri": "cadc:CFHT/3168594p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60770.446,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3168713p",
+   "uri": "cadc:CFHT/3168713p.fits",
+   "bytes": 20692800,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60771.331,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3168741p",
+   "uri": "cadc:CFHT/3168741p.fits",
+   "bytes": 20692800,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60771.397,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3168773p",
+   "uri": "cadc:CFHT/3168773p.fits",
+   "bytes": 20692800,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60771.474,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3168793p",
+   "uri": "cadc:CFHT/3168793p.fits",
+   "bytes": 20692800,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60771.539,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3168809p",
+   "uri": "cadc:CFHT/3168809p.fits",
+   "bytes": 20692800,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60771.584,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3168952p",
+   "uri": "cadc:CFHT/3168952p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60772.328,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3168980p",
+   "uri": "cadc:CFHT/3168980p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60772.402,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3168992p",
+   "uri": "cadc:CFHT/3168992p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60772.464,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3169016p",
+   "uri": "cadc:CFHT/3169016p.fits",
+   "bytes": 20692800,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60772.535,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3169040p",
+   "uri": "cadc:CFHT/3169040p.fits",
+   "bytes": 20692800,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60772.606,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3169191p",
+   "uri": "cadc:CFHT/3169191p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60773.34,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3169207p",
+   "uri": "cadc:CFHT/3169207p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60773.419,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3169219p",
+   "uri": "cadc:CFHT/3169219p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60773.513,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3169381p",
+   "uri": "cadc:CFHT/3169381p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60774.278,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3169401p",
+   "uri": "cadc:CFHT/3169401p.fits",
+   "bytes": 20692800,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60774.335,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3169413p",
+   "uri": "cadc:CFHT/3169413p.fits",
+   "bytes": 20689920,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60774.401,
+   "exposureSeconds": 120
+  },
+  {
+   "product": "3169421p",
+   "uri": "cadc:CFHT/3169421p.fits",
+   "bytes": 20692800,
+   "targetName": "* e Vir",
+   "proposal": "25AF14",
+   "mjdStart": 60774.461,
+   "exposureSeconds": 120
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 6029,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 397587084: Teff"
+  },
+  "logGravity": {
+   "value": 4.23,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 397587084: logg"
+  },
+  "metallicity": {
+   "value": 0.21,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 397587084: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": -27,
+  "source": "SIMBAD, radial velocity of * e Vir (2002ApJS..141..503N)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 6.5,
+   "source": "Bonnefoy et al. (2018), A&A, arXiv:1807.00657, Sect. 3: projected rotation speed 6.5 ± 1.0 km/s from SOPHIE spectra"
+  },
+  "inclinationDegrees": {
+   "value": 18.6,
+   "source": "Bonnefoy et al. (2018), A&A, arXiv:1807.00657, abstract: the rotation axis is 18.6 +4.3/-3.8 degrees (or 162.4) from the line of sight"
+  },
+  "periodDays": {
+   "value": 3.33,
+   "source": "Bonnefoy et al. (2018), A&A, arXiv:1807.00657, Sect. 3: rotation period 3.33 +0.08/-0.10 d, from Donahue et al. (1996)"
+  },
+  "maximumDegree": {
+   "value": 15,
+   "source": "ZDIpy's own example input (inzdi.dat), which fits to degree 15 and leaves its entropy to remove what the spectra do not ask for; no paper maps this star"
+  }
+ }
+}

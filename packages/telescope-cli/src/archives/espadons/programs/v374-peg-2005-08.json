@@ -1,0 +1,659 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "v374-peg-2005-08",
+ "target": {
+  "name": "V374 Peg",
+  "raDegrees": 330.30468416,
+  "decDegrees": 28.3069187,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 53600,
+  "toMjd": 53607
+ },
+ "observations": [
+  {
+   "product": "808305p",
+   "uri": "cadc:CFHT/808305p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.272,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808309p",
+   "uri": "cadc:CFHT/808309p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.289,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808313p",
+   "uri": "cadc:CFHT/808313p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.306,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808317p",
+   "uri": "cadc:CFHT/808317p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.323,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808322p",
+   "uri": "cadc:CFHT/808322p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.346,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808326p",
+   "uri": "cadc:CFHT/808326p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.362,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808336p",
+   "uri": "cadc:CFHT/808336p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.39,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808340p",
+   "uri": "cadc:CFHT/808340p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.407,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808345p",
+   "uri": "cadc:CFHT/808345p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.43,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808349p",
+   "uri": "cadc:CFHT/808349p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.447,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808353p",
+   "uri": "cadc:CFHT/808353p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.464,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808357p",
+   "uri": "cadc:CFHT/808357p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.481,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808361p",
+   "uri": "cadc:CFHT/808361p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.498,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808365p",
+   "uri": "cadc:CFHT/808365p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.515,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808369p",
+   "uri": "cadc:CFHT/808369p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.532,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808373p",
+   "uri": "cadc:CFHT/808373p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.55,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808377p",
+   "uri": "cadc:CFHT/808377p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.571,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808381p",
+   "uri": "cadc:CFHT/808381p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.588,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808385p",
+   "uri": "cadc:CFHT/808385p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.605,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808389p",
+   "uri": "cadc:CFHT/808389p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53601.624,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808573p",
+   "uri": "cadc:CFHT/808573p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.236,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808577p",
+   "uri": "cadc:CFHT/808577p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.255,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808581p",
+   "uri": "cadc:CFHT/808581p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.272,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808585p",
+   "uri": "cadc:CFHT/808585p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.289,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808589p",
+   "uri": "cadc:CFHT/808589p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.307,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808593p",
+   "uri": "cadc:CFHT/808593p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.325,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808597p",
+   "uri": "cadc:CFHT/808597p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.342,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808601p",
+   "uri": "cadc:CFHT/808601p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.359,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808605p",
+   "uri": "cadc:CFHT/808605p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.377,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808609p",
+   "uri": "cadc:CFHT/808609p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.401,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808613p",
+   "uri": "cadc:CFHT/808613p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.418,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808617p",
+   "uri": "cadc:CFHT/808617p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.435,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808621p",
+   "uri": "cadc:CFHT/808621p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.453,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808625p",
+   "uri": "cadc:CFHT/808625p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.471,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808629p",
+   "uri": "cadc:CFHT/808629p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.488,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808633p",
+   "uri": "cadc:CFHT/808633p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.505,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808637p",
+   "uri": "cadc:CFHT/808637p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.522,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808641p",
+   "uri": "cadc:CFHT/808641p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.541,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808645p",
+   "uri": "cadc:CFHT/808645p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.558,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808649p",
+   "uri": "cadc:CFHT/808649p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.575,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808653p",
+   "uri": "cadc:CFHT/808653p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.593,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808657p",
+   "uri": "cadc:CFHT/808657p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.61,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808661p",
+   "uri": "cadc:CFHT/808661p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53603.628,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808897p",
+   "uri": "cadc:CFHT/808897p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.225,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808901p",
+   "uri": "cadc:CFHT/808901p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.244,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808905p",
+   "uri": "cadc:CFHT/808905p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.262,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808909p",
+   "uri": "cadc:CFHT/808909p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.279,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808913p",
+   "uri": "cadc:CFHT/808913p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.296,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808917p",
+   "uri": "cadc:CFHT/808917p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.315,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808921p",
+   "uri": "cadc:CFHT/808921p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.333,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808925p",
+   "uri": "cadc:CFHT/808925p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.35,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808929p",
+   "uri": "cadc:CFHT/808929p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.367,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808933p",
+   "uri": "cadc:CFHT/808933p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.386,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808937p",
+   "uri": "cadc:CFHT/808937p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.403,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808941p",
+   "uri": "cadc:CFHT/808941p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.421,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808945p",
+   "uri": "cadc:CFHT/808945p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.438,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808949p",
+   "uri": "cadc:CFHT/808949p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.457,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808953p",
+   "uri": "cadc:CFHT/808953p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.474,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808957p",
+   "uri": "cadc:CFHT/808957p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.491,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808961p",
+   "uri": "cadc:CFHT/808961p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.509,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808965p",
+   "uri": "cadc:CFHT/808965p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.529,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808969p",
+   "uri": "cadc:CFHT/808969p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.547,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808973p",
+   "uri": "cadc:CFHT/808973p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.564,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808977p",
+   "uri": "cadc:CFHT/808977p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.581,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808981p",
+   "uri": "cadc:CFHT/808981p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.599,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "808985p",
+   "uri": "cadc:CFHT/808985p.fits",
+   "bytes": 20589120,
+   "targetName": "V374Peg",
+   "proposal": "05BF15",
+   "mjdStart": 53605.616,
+   "exposureSeconds": 1200
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 3240,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 283410775: Teff"
+  },
+  "logGravity": {
+   "value": 4.91,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 283410775: logg"
+  }
+ },
+ "radialVelocity": {
+  "value": -4.79,
+  "source": "SIMBAD, radial velocity of V* V374 Peg (2018MNRAS.475.1960F)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 36.5,
+   "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 36.5 +/- 0.4 (Aug05) and 36.7 +/- 0.4 (Aug06) from brightness imaging; 36.5 adopted; absolute accuracy about 1 km/s"
+  },
+  "inclinationDegrees": {
+   "value": 70,
+   "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 'assuming i ~ 70 deg'"
+  },
+  "periodDays": {
+   "value": 0.4456,
+   "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 0.4456 d in the phase ephemeris; differential-rotation fit gives 0.445654 +/- 0.000002 d"
+  },
+  "maximumDegree": {
+   "value": 10,
+   "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 'All results presented below are obtained assuming l <= 10'"
+  },
+  "shearRadPerDay": {
+   "value": 0.0063,
+   "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): differential rotation, complete Stokes V data set (Aug05 + Sep05 + Aug06, 87 spectra), reduced chi-square 1.15; solid-body rotation does not get below 1.5"
+  }
+ },
+ "published": {
+  "paper": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008)",
+  "url": "https://arxiv.org/abs/0711.1418",
+  "meanGauss": {
+   "value": 800,
+   "source": "Table 1; Sect. 4.2: mean field strength, epoch 2005 August (Aug05)"
+  },
+  "spectra": {
+   "value": 60,
+   "source": "Table 1; Sect. 4.2: 64 collected (6+12+23+23 in Table 1), 4 discarded for flaring"
+  },
+  "note": "instruments ESPaDOnS; maxG: 1300; visiblePolePolarity: visible hemisphere mostly covered with positive radial field"
+ }
+}

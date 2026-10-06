@@ -1,0 +1,121 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "map-dec-2017",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-659-a71",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
+          },
+          {
+            "catalogueId": "arxiv-2110-06729",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2110.06729"
+          }
+        ]
+      },
+      "path": "src/objects/be-ceti/source/science/willamo-2022/becet.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/659/A71/becet.dat",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+      "title": "ZDI map of BE Ceti (Dec 2017): radial, meridional and azimuthal field (kG) and normalised brightness on 1876 equal-area cells",
+      "credit": "Willamo et al. (2022), A&A 659, A71; ESO 3.6 m HARPSpol; VizieR (CDS)",
+      "displayCredit": "Willamo et al. · HARPSpol",
+      "acquisition": "The file the be-ceti package holds for its own dataset radial-field; Download of becet.dat from the VizieR FTP area in source/preparation/acquisition.json.",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "datasetId": "dec-2017"
+    },
+    {
+      "id": "corona-parameters",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-664-a105",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105"
+          },
+          {
+            "catalogueId": "arxiv-1505-00643",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1505.00643"
+          },
+          {
+            "catalogueId": "arxiv-2105-00019",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/2105.00019"
+          }
+        ]
+      },
+      "path": "src/objects/be-ceti-corona/source/corona-parameters.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "title": "BE Ceti · X-ray flux, coronal temperature and mass loss",
+      "credit": "Freund et al. (2022), A&A 664, A105; Johnstone & Güdel (2015), A&A 578, A129; Wood et al. (2021), ApJ 915, 37",
+      "displayCredit": "Freund et al. (2022), A&A 664, A105",
+      "acquisition": "Published numbers transcribed from their sources, and the quantities this package computes from them. This record identifies the transcription; the sources are the origin.",
+      "license": "Published numbers cited under normal scholarly citation; the sources are not redistributed here."
+    }
+  ],
+  "documents": [
+    {
+      "id": "delivery-json",
+      "path": "src/objects/be-ceti-corona/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/be-ceti-corona/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/be-ceti-corona/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-dec-2017-ktx2",
+      "path": "src/objects/be-ceti-corona/source/density-dec-2017.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-dec-2017-json",
+      "path": "src/objects/be-ceti-corona/source/volume-dec-2017.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-dec-2017-png",
+      "path": "src/objects/be-ceti-corona/source/previews/dec-2017.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    }
+  ]
+}

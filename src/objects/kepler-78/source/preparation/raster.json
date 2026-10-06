@@ -47,6 +47,46 @@
         },
         "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,058 K and log g 4.58 (u1 0.641, u2 0.132): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "radial-field-2015-08",
+      "output": "kepler-78-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-78-dataset-{id}.webp",
+      "source": "science/espadons/kepler-78-2015-08.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2015-08",
+        "label": "Aug 2015",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/kepler-78-2015-08.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -80
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -20,
+        "maximum": 20,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-20",
+          "0",
+          "+20"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 13 ESPaDOnS spectra of 23 July 2015 to 29 August 2015 (reduced chi-square 1.20, against 2.0 with no field); mean field 12 G. A reduction made in this project, not a published map. Black line: 80 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Aug 2015",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
     }
   ],
   "emission": {

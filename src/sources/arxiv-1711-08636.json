@@ -1,0 +1,50 @@
+{
+  "id": "arxiv-1711-08636",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Folsom et al. (2018): The evolution of surface magnetic fields in young solar-type stars II: The early main sequence (250-650 Myr)",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1711.08636"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stx3021"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1711.08636",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stx3021",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1711.08636",
+      "checkedOn": "2026-10-06",
+      "locator": "arXiv listing: title, authors, DOI. The paper describes ZDIpy, the code that fits the map."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Folsom et al. (2018)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1711.08636"
+    }
+  ],
+  "creators": [
+    "C. P. Folsom",
+    "J. Bouvier",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

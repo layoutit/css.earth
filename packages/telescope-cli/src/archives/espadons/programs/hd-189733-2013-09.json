@@ -1,0 +1,132 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "hd-189733-2013-09",
+ "target": {
+  "name": "HD 189733",
+  "raDegrees": 300.18213726,
+  "decDegrees": 22.71085365,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 56535,
+  "toMjd": 56598
+ },
+ "observations": [
+  {
+   "product": "1653336p",
+   "uri": "cadc:CFHT/1653336p.fits",
+   "bytes": 20589120,
+   "targetName": "HD189733",
+   "proposal": "13BE92",
+   "mjdStart": 56548.338,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "1654465p",
+   "uri": "cadc:CFHT/1654465p.fits",
+   "bytes": 20589120,
+   "targetName": "HD189733",
+   "proposal": "13BE92",
+   "mjdStart": 56552.371,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "1655257p",
+   "uri": "cadc:CFHT/1655257p.fits",
+   "bytes": 20589120,
+   "targetName": "HD189733",
+   "proposal": "13BE92",
+   "mjdStart": 56555.207,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "1655656p",
+   "uri": "cadc:CFHT/1655656p.fits",
+   "bytes": 20589120,
+   "targetName": "HD189733",
+   "proposal": "13BE92",
+   "mjdStart": 56557.356,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "1656034p",
+   "uri": "cadc:CFHT/1656034p.fits",
+   "bytes": 20589120,
+   "targetName": "HD189733",
+   "proposal": "13BE92",
+   "mjdStart": 56559.369,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "1656304p",
+   "uri": "cadc:CFHT/1656304p.fits",
+   "bytes": 20589120,
+   "targetName": "HD189733",
+   "proposal": "13BE92",
+   "mjdStart": 56560.282,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "1656684p",
+   "uri": "cadc:CFHT/1656684p.fits",
+   "bytes": 20589120,
+   "targetName": "HD189733",
+   "proposal": "13BE92",
+   "mjdStart": 56562.368,
+   "exposureSeconds": 3600
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 5023,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 256364928: Teff"
+  },
+  "logGravity": {
+   "value": 4.58,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 256364928: logg"
+  },
+  "metallicity": {
+   "value": 0.02,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 256364928: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": -2.317,
+  "source": "SIMBAD, radial velocity of HD 189733 (2018A&A...616A...7S)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 2.97,
+   "source": "Fares, R. et al., arXiv:1706.07262: Table 1 (tab.stellar_properties)"
+  },
+  "inclinationDegrees": {
+   "value": 85,
+   "source": "Fares, R. et al., arXiv:1706.07262: '~85'"
+  },
+  "periodDays": {
+   "value": 11.94,
+   "source": "Fares, R. et al., arXiv:1706.07262: 11.94 +/- 0.16 d (Table 1); 12 d in the phase ephemeris"
+  },
+  "maximumDegree": {
+   "value": 5,
+   "source": "Fares, R. et al., arXiv:1706.07262: printed as 'l <= 5'"
+  },
+  "shearRadPerDay": {
+   "value": 0.146,
+   "source": "Fares, R. et al., arXiv:1706.07262: differential rotation, Table 1 value from Fares et al. 2010 (the table header prints rad s^-1); August 2013 gives Omega_eq = 0.535 +/- 0.004 and dOmega = 0.11 +/- 0.05 rad/d"
+  }
+ },
+ "published": {
+  "paper": "Fares, R. et al., arXiv:1706.07262",
+  "url": "https://arxiv.org/abs/1706.07262",
+  "meanGauss": {
+   "value": 42,
+   "source": "Table 4; Table 2; Sect. 2: mean field strength, epoch 9/2013"
+  },
+  "toroidalPercent": {
+   "value": 59,
+   "source": "Table 4; Table 2; Sect. 2: toroidal share of the energy, epoch 9/2013"
+  },
+  "note": "instruments NARVAL and ESPaDOnS; poloidalPct: 41; axisymmetricPct: 2; axisymmetricOf: poloidal energy"
+ }
+}

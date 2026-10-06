@@ -47,6 +47,46 @@
           }
         }
       }
+    },
+    {
+      "id": "radial-field-2025-04",
+      "output": "gj-504-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-504-dataset-{id}.webp",
+      "source": "science/espadons/gj-504-2025-04.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2025-04",
+        "label": "Apr 2025",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/gj-504-2025-04.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -19
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -15,
+        "maximum": 15,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-15",
+          "0",
+          "+15"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 19 ESPaDOnS spectra of 5 April 2025 to 9 April 2025 (reduced chi-square 1.30, against 2.1 with no field); mean field 4.6 G. A reduction made in this project, not a published map. Black line: 19 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Apr 2025",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
     }
   ],
   "emission": {

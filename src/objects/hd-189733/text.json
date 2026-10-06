@@ -60,6 +60,114 @@
           "locator": "Table 3, HD 189733b transit 2165"
         }
       ]
+    },
+    "radial-field-2006-08": {
+      "title": "Radial field, Aug 2006",
+      "detail": "3 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "radial-field-2007-06": {
+      "title": "Radial field, Jun 2007",
+      "detail": "3 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "radial-field-2013-09": {
+      "title": "Radial field, Sep 2013",
+      "detail": "3 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "corona-aug-2006": {
+      "title": "Derived corona, Aug 2006",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Aug 2006. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "cadc-cfht-espadons",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+          "label": "CFHT ESPaDOnS · mapped here: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-jun-2007": {
+      "title": "Derived corona, Jun 2007",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Jun 2007. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "cadc-cfht-espadons",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+          "label": "CFHT ESPaDOnS · mapped here: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-sep-2013": {
+      "title": "Derived corona, Sep 2013",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Sep 2013. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "cadc-cfht-espadons",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+          "label": "CFHT ESPaDOnS · mapped here: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
     }
   }
 }

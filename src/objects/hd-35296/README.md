@@ -12,6 +12,7 @@ HD 35296 is a young Sun-like star that turns in 3.5 days. Unlike the other fast 
 - **Meridional field**: the field running north or south along the surface.
 - **Azimuthal field**: the field running one way or the other around the spin axis.
 - **Brightness**: the photosphere's brightness relative to its unspotted surface; dark is spotted.
+- **Derived corona**: the gas around the star, placed by the field of the radial map. It is derived here, not observed and not published; its own package says how ([hd-35296-corona](../hd-35296-corona/README.md)).
 
 Each map uses its paper figure's color bar: the field linear from minus to plus the strongest value of any component in that map, through white at 0; the brightness from the map's darkest to its brightest point, in the figure's black-red-orange-white colors. A thin black line marks 65° S, below which the star never faces us, as the paper's horizontal line does. [latitude-belt-map.ts](../../../packages/bake/src/objects/raster/latitude-belt-map.ts) reads the tables and interpolates around each belt and between belts, so every cell keeps its deposited value.
 

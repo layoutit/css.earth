@@ -52,6 +52,78 @@
         },
         "falseColor": false,
         "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,068 K and log g 4.27 (u1 0.403, u2 0.292): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "corona-oct-2009",
+        "label": "Derived corona",
+        "thumbnail": "gumala-dataset-color.webp",
+        "volume": {
+          "objectId": "gumala-corona",
+          "datasetId": "oct-2009",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Oct 2009 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 3.3 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 13 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density."
+      },
+      {
+        "id": "radial-field-2009-10",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Oct 2009",
+        "thumbnail": "gumala-dataset-radial-field-2009-10.webp",
+        "surface": "gumala-surface-radial-field-2009-10@2x.webp",
+        "poles": "gumala-poles-radial-field-2009-10@2x.webp",
+        "source": {
+          "id": "gumala-espadons-map-radial-field-2009-10",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-10",
+            "0",
+            "+10"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-10",
+              "0",
+              "+10"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Oct 2009, reconstructed in this project from 18 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
       }
     ]
   },

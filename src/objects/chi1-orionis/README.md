@@ -11,6 +11,7 @@
 - **Radial field**: red where the field points out of the star, blue where it points in.
 - **Meridional field**: the field running north or south along the surface.
 - **Azimuthal field**: the field running one way or the other around the spin axis.
+- **Derived corona**: the gas around the star, placed by the field of the radial map. It is derived here, not observed and not published; its own package says how ([chi1-orionis-corona](../chi1-orionis-corona/README.md)).
 
 Each map uses its paper figure's color bar: the field linear from minus to plus the strongest value of any component in that map, through white at 0; the brightness from the map's darkest to its brightest point, in the figure's black-red-orange-white colors. A thin black line marks 65° S, below which the star never faces us, as the paper's horizontal line does. [latitude-belt-map.ts](../../../packages/bake/src/objects/raster/latitude-belt-map.ts) reads the tables and interpolates around each belt and between belts, so every cell keeps its deposited value. The star turns too slowly for a brightness map: the deposited brightness is 1.0 everywhere, so none is shown.
 
@@ -23,6 +24,21 @@ Each map uses its paper figure's color bar: the field linear from minus to plus 
 **Color.** HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 39587: 168-1020 nm, cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 400: HR 2047; VizieR III/202 (2 levels apart at most, the threshold is 12), through the CIE 1931 2° observer: #fff8f9. Routes tried in order: gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 2047 is not in the catalogue; kiehling: HR 2047 is not among its 60 stars; stis-ngsl: used.
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,882 K and log g 4.4 (u1 0.438, u2 0.273): a model, because no fit of this star's limb is used.
+- **Magnetic maps.** 44 polarised spectra from CFHT's ESPaDOnS spectropolarimeter, in the
+  [Canadian Astronomy Data Centre](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/) archive (CC BY 4.0): 16 of 20 December 2014 to 30 December 2014 (program 14BF09); 28 of 7 January 2015 to 14 January 2015 (program 14BF09).
+  The programs `chi1-ori-2014-12`, `chi1-ori-2015-01` in
+  [the telescope's ESPaDOnS archive](../../../packages/telescope-cli/src/archives/espadons/programs/) pin every spectrum by
+  its size. A run's receipt, with what every step measured, is a result that `reduce.mts` writes under ignored `output/espadons`. The maps are the tables in
+  `source/science/espadons/`.
+
+**Magnetic maps.** The maps of these runs are made here, with the codes the method's authors publish and nothing of our
+own in between ([A star's magnetic map from archived spectra](../../../docs/stellar-magnetic-maps-from-spectra.md)): Korg
+computes the depth of 6,155 atomic lines in a 5,988 K, log g 4.49 model atmosphere, LSDpy averages them into one
+polarised profile for each spectrum, and ZDIpy fits the field to each run's profiles. The fit uses a tilt of
+65°, an equatorial period of 5.022 days and a projected rotation speed of 9.8 km/s
+(Willamo et al. (2022)); the page draws the star with the same tilt
+([rotation.json](source/preparation/rotation.json)). Longitude 0 faces us at the middle of each run. One color scale, ±50 G, serves
+the 2 maps. Not mapped: 44 spectra of 20 December 2014 to 14 January 2015: the map does not describe the spectra.
 
 ## Evidence
 
@@ -32,6 +48,8 @@ Run of 2026-09-23 (this version):
 
 - [`latitude-belt-map.test.mts`](../../../packages/bake/src/objects/raster/latitude-belt-map.test.mts) reads every deposited map and recomputes the largest and the mean total field over the equal-area cells. They match the paper's Table 3 to the gauss: chi1ori.dat: paper 41 G and 13 G, read 41.1 G and 13.1 G. So the files are the maps the paper measured.
 - The reader's own tests check that a cell centre keeps its value, that the interpolation wraps at longitude 0, and that a table with a misplaced cell or belts out of order is refused.
+- Dec 2014: the map reaches a reduced chi-square of 1.20, against 26.46 with no field; mean field 20.1 G, 64% of its energy toroidal.
+- Jan 2015: the map reaches a reduced chi-square of 1.25, against 14.13 with no field; mean field 17.3 G, 71% of its energy toroidal.
 
 ## Known problems
 
@@ -41,3 +59,7 @@ Run of 2026-09-23 (this version):
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+- **The magnetic maps are this project's reduction, not published maps.** How tightly a map is fitted is a choice the
+  mapping code leaves open; it is set on 21 published maps, whose mean fields the same recipe reproduces with a scatter of a
+  factor 1.4. The direction of the axis on the sky is not measured, only its tilt toward us.
+

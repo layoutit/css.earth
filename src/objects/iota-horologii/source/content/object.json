@@ -2405,6 +2405,312 @@
         },
         "notes": "The large-scale magnetic field in Sep 2018, one of 18 maps over three years. Step through them to watch the field change with the star's magnetic cycle.",
         "legendNote": "Red and blue: the field running one way or the other around the spin axis, as in the paper. Black line: 60° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "corona-oct-2015",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "oct-2015",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Oct 2015 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Oct 2015",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-dec-2015",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "dec-2015",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Dec 2015 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Dec 2015",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-feb-2016",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "feb-2016",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Feb 2016 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Feb 2016",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-jun-2016",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "jun-2016",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Jun 2016 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Jun 2016",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-aug-2016",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "aug-2016",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Aug 2016 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Aug 2016",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-sep-2016",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "sep-2016",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Sep 2016 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Sep 2016",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-oct-2016",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "oct-2016",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Oct 2016 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Oct 2016",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-dec-2016",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "dec-2016",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Dec 2016 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Dec 2016",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-feb-2017",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "feb-2017",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Feb 2017 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Feb 2017",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-jul-2017",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "jul-2017",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Jul 2017 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Jul 2017",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-aug-2017",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "aug-2017",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Aug 2017 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Aug 2017",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-sep-2017",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "sep-2017",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Sep 2017 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Sep 2017",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-nov-2017",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "nov-2017",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Nov 2017 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Nov 2017",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-dec-2017",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "dec-2017",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Dec 2017 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Dec 2017",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-feb-2018",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "feb-2018",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Feb 2018 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Feb 2018",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-jun-2018",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "jun-2018",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Jun 2018 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Jun 2018",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-aug-2018",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "aug-2018",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Aug 2018 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Aug 2018",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-sep-2018",
+        "label": "Derived corona",
+        "thumbnail": "iota-horologii-dataset-color.webp",
+        "volume": {
+          "objectId": "iota-horologii-corona",
+          "datasetId": "sep-2018",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Sep 2018 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.4 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 25 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Sep 2018",
+          "autoplay": false,
+          "opens": "last"
+        }
       }
     ]
   },
