@@ -72,6 +72,11 @@ test('without a face target the error bound decides the face count, up to the fa
   assert.ok(Number(fixtureRecord(loose.simplification).estimatedErrorMeters) <= 0.4);
   assert.equal(fixtureRecord(loose.simplification).outputFaces, loose.length);
   assert.equal('targetFaces' in fixtureRecord(loose.simplification), false, 'the report names no target when none was authored');
+  // The simplifier's own estimate admits six faces within 0.7 (0.63 by its measure); their surface is farther than that
+  // from the source, so the bound, held on the sampled distance, keeps the eight.
+  const sampled = await within(0.7), report = fixtureRecord(sampled.simplification);
+  assert.equal(sampled.length, 8);
+  assert.ok(Number(report.sampledErrorMeters) <= 0.7 && Number(report.sampledErrorMeters) > 0, `sampled distance ${report.sampledErrorMeters}`);
   await assert.rejects(within(0.001, 8),
     /^Error: sphere: source\/shape\/sphere\.txt: simplification stopped at 32 of 32 source faces at 0 m estimated error; the face budget is 8 faces within maximumErrorMeters 0\.001\. Reaching 8 faces needs 0\.\d+ m\.$/u);
 });

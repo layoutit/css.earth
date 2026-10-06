@@ -607,7 +607,9 @@ content, the same raster work) and in the simulator. The switch after the camera
 
 The recipe sets the atlas budget of each mesh: `atlasTexels` for the whole atlas, or `texelsPerFace` times the face
 count where the recipe authors that count with `simplification.targetFaces`. A mesh without a face target is reduced to
-the fewest faces within `simplification.maximumErrorMeters`, never more than its `faceBudget`. It states `atlasTexels`,
+the fewest faces whose surface stays within `simplification.maximumErrorMeters` of the source, never more than its
+`faceBudget`. The bound is held on distances sampled from the reduced surface to the source, not on the simplifier's own
+estimate, so a map that samples the source within the same bound stays complete. It states `atlasTexels`,
 so its texel density does not follow the count the error bound leaves.
 The triangle's base is the edge that least shears the `u` leaf's bottom-edge and
 top-centre shape. A fixed square per triangle would give large and thin triangles

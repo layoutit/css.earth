@@ -77,18 +77,18 @@
     "sourceFaces": 2040,
     "sourceVertices": 1022,
     "weldedVertices": 1022,
-    "targetFaces": 800,
-    "outputFaces": 800,
+    "outputFaces": 370,
     "removedOppositeFaces": 0,
     "maximumErrorMeters": 977,
-    "estimatedErrorMeters": 408.7212219238281,
+    "estimatedErrorMeters": 911.2149658203125,
+    "sampledErrorMeters": 886.4943776288922,
     "topology": {
-      "vertices": 402,
-      "edges": 1200,
-      "faces": 800,
+      "vertices": 187,
+      "edges": 555,
+      "faces": 370,
       "components": 1,
       "eulerCharacteristic": 2,
-      "signedVolumeCubicMeters": 487339099570483.6
+      "signedVolumeCubicMeters": 483396715598768.75
     }
   }
 }

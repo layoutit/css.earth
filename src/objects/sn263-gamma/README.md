@@ -33,7 +33,7 @@ Orbital placement is approximate context extrapolated from the 2008 mutual-orbit
 <details>
 <summary>Preparation and source choices</summary>
 
-The original PDS file is retained byte for byte. The existing source-mesh simplifier prepares 800 triangles and native PolyCSS raster leaves. The same mesh supplies the navigation image. All geometry, surface pixels, lighting and context assets are prepared offline. The displayed Shape view has no synthetic craters or albedo.
+The original PDS file is retained byte for byte. The existing source-mesh simplifier prepares 254 triangles and native PolyCSS raster leaves. The same mesh supplies the navigation image. All geometry, surface pixels, lighting and context assets are prepared offline. The displayed Shape view has no synthetic craters or albedo.
 
 The PDS catalog landing page says 2003 observations, while the native product labels and paper identify January–March 2008; the latter control this package. The archive's rotation uncertainty columns also differ from the paper, so no uncertainty is silently taken from those columns. JPL's unnamed satellite API rows pair physical values with inconsistent inner/outer orbits; component identity follows the native mesh labels and papers.
 

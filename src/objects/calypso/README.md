@@ -28,7 +28,7 @@ Edge-connected sky below 0.003 I/F is excluded; isolated dark features are kept.
 0–1.13 I/F, the 99.5th percentile. False color colors a point only where all three bands qualify, uses the same range
 for all channels, then applies one final sRGB transfer.
 
-The shape is simplified to 600 native PolyCSS leaves (maximum estimated simplifier error 400 m). The shaded-relief
+The shape is simplified to 304 native PolyCSS leaves (maximum estimated simplifier error 400 m). The shaded-relief
 palette shows model slopes, not invented small craters. The initial view looks toward 305.55°E, -8.67°N.
 
 ## Evidence

@@ -41,7 +41,7 @@ The candidate dispositions and their source evidence are recorded in the [invest
 
 The original Voyager paper's full table is paywalled; the 2024 primary study explicitly reproduces it. The accessible HST paper independently lists the adopted axes. A compact measured-data transcription is checked in; preparation does not depend on downloading papers or the Northwestern mirror's invalid TLS certificate.
 
-Preparation targets 480 native `u` leaves; input, lighting, preparation and rendering use the existing owners.
+Preparation keeps the fewest its error allowance permits, 400 native `u` leaves; input, lighting, preparation and rendering use the existing owners.
 
 The compact analytic radius table, no-data sentinel and context portrait are versioned inputs; the font has a pinned download recipe.
 

@@ -23,7 +23,7 @@ caption note from its English Wikipedia article (CC BY-SA 4.0), recorded in `sou
 
 **Shape.** The shape has 16,471 rows at 2° spacing, radius 4.1442–10.7966 km, with no ellipsoid substitution. Its
 west-positive longitude is converted once to the renderer's east-positive frame. Meshoptimizer 1.2.0 simplifies the
-32,040-triangle source grid to 800 faces, one closed component. The pole is RA 9.47°, Dec 26.70°, with
+32,040-triangle source grid to 532 faces, one closed component. The pole is RA 9.47°, Dec 26.70°, with
 W = 83.67° + 1226.9114850° × d. Horizons confirms the 6.1 km radius and about 7.042 hour rotation; GM is unavailable,
 so no mass is invented.
 

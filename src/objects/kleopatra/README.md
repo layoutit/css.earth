@@ -19,7 +19,7 @@ The geometry is the original `216_Kleopatra_mpcd.obj` from the [LAM VLT/SPHERE a
 
 **Shape** applies the shared neutral-gray material to the released geometry. It conveys the two lobes, their neck, and the model's broad relief. It is not a photograph, measured albedo, natural color or a map of metal abundance. The source was reconstructed with multiresolution photoclinometry by deformation (MPCD), starting with an ADAM model constrained by lightcurves, adaptive-optics images, occultations and radar. These ground-based observations do not measure small-scale terrain.
 
-`source-meshoptimizer` simplifies the original 3,168-face mesh to 800 faces without sampling replacement radial geometry. The 800-face result has volume 855,483.71 km³, 1.12% below the original. The physical reference radius is 59.1 km, from the MPCD volume-equivalent diameter of 118.2 ±0.8 km. The pole is λ=74.1°, β=+21.6° with a 5.385282 h period; the display phase is arbitrary.
+`source-meshoptimizer` simplifies the original 3,168-face mesh to 734 faces without sampling replacement radial geometry. The 734-face result has volume 855,483.71 km³, 1.12% below the original. The physical reference radius is 59.1 km, from the MPCD volume-equivalent diameter of 118.2 ±0.8 km. The pole is λ=74.1°, β=+21.6° with a 5.385282 h period; the display phase is arbitrary.
 
 Restore with `node packages/bake/cli/object-operations.mts acquire kleopatra`; verify with `acquire kleopatra --verify-only`; prepare with `node site/build/prepare/authored/prepare-authored.ts kleopatra --write`.
 
@@ -63,7 +63,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-A nearest-surface comparison of 8,192 area-stratified samples on each mesh gives source-to-result mean/p95/p99/maximum distances of 231.562/662.354/926.825/1272.402 m, and result-to-source values of 233.714/660.592/934.525/1307.387 m. This is sampled evidence, not an exhaustive Hausdorff bound. Fine features become more angular at the 800-face budget.
+A nearest-surface comparison of 8,192 area-stratified samples on each mesh gives source-to-result mean/p95/p99/maximum distances of 231.562/662.354/926.825/1272.402 m, and result-to-source values of 233.714/660.592/934.525/1307.387 m. This is sampled evidence, not an exhaustive Hausdorff bound. Fine features become more angular at the 734-face budget.
 
 ## Known problems
 
