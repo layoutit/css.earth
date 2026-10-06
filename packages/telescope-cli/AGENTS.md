@@ -103,7 +103,7 @@ maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a conven
 `brightness/` the kind for maps from TESS light (`--from-pixels`, a spec's `brightnessMaps`; the page's axis is never
 changed, and the measured period goes into the star's measurements record). A kind whose maps are how the star looks
 supplies `natural`: the newest map in the star's own color, which becomes the dataset the page opens on
-(`Color + brightness`). Its contrast is stretched by a square root (`stretched`), because the measured contrast cannot be
+(`Color + brightness`). Its contrast is stretched by a cube root (`stretched`, chosen by eye), because the measured contrast cannot be
 seen; its sentences state the stretch with the star's numbers, and say what is measured (longitudes) and what is not
 (latitudes, shapes, any color change). A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
 

@@ -106,7 +106,7 @@ the flat **Color** the star had.
 | Drawn | From |
 | --- | --- |
 | Which longitudes are darker | The light curve |
-| How much darker | The map, with the contrast stretched by a square root: a part that gives 4% less light than the brightest part is drawn 20% dimmer |
+| How much darker | The map, with the contrast stretched by a cube root: a part that gives 4% less light than the brightest part is drawn 34% dimmer |
 | The color | The star's Color dataset. The brightest part is drawn at that color, which is already as bright as a display color goes, and the rest darker |
 | The darkening toward the edge | The Color dataset's limb law, the same plate |
 | The latitude and shape of each patch | Not measured: the smoothest map that reproduces the light |
@@ -114,8 +114,8 @@ the flat **Color** the star had.
 
 The stretch is there because the measured contrast cannot be seen. AU Microscopii is among the most spotted stars here: its
 darkest longitude gives 21% less light than its brightest, which is one tenth on a display, and most stars swing by 1 or
-2%. The square root is the stretch astronomical pictures are commonly shown with; it keeps a more spotted star looking
-more spotted. Each dataset's text states the stretch with the star's own two numbers, and the Brightness map carries the
+2%. A square root was still faint on the page, so the stretch is a cube root, chosen by eye. A root keeps a more spotted
+star looking more spotted. Each dataset's text states the stretch with the star's own two numbers, and the Brightness map carries the
 measured values.
 
 A dimming is a share of light, and a display value is not linear in light: the palette's stops are computed in linear light

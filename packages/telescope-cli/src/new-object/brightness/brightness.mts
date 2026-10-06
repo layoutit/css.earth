@@ -11,7 +11,7 @@ import { receiptPath, ROTATION_SCHEMA } from '../../archives/tess/reduce.mts';
 import { readJson, type MapRoute, type RouteContext } from '../maps/route.mts';
 import type { SurfaceMapChoice } from '../maps/surface-maps.mts';
 import { MEASURED_PERIOD } from '../metadata/star-metadata.mts';
-import { BRIGHTNESS_GENERATOR, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, monthsOf, percent, reducedBrightness, TESS_ARCHIVE, type BrightnessSurfaceMap } from './brightness-maps.mts';
+import { BRIGHTNESS_GENERATOR, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, monthsOf, percent, reducedBrightness, STRETCH_NAME, TESS_ARCHIVE, type BrightnessSurfaceMap } from './brightness-maps.mts';
 
 const reduce = (host: string) => `node ${BRIGHTNESS_GENERATOR} ${host}`;
 /** The light's swing as the star turns, percent of its mean, beside the measured period in the star's record. */
@@ -52,7 +52,7 @@ export function withBrightnessReadme(readme: string, map: BrightnessSurfaceMap, 
   const paragraphs: readonly (readonly [string, string])[] = [
     ['Sources', `${README_LEAD} The Color + brightness and Brightness map datasets are made in this project from the star's light in TESS's full-frame images of sector ${map.sector} (${when}), cut at the star's place by MAST's [TESScut](${TESS_ARCHIVE.pixels}) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](${NOTE})). The map's table is built by \`${BRIGHTNESS_GENERATOR}\` and restored from the source cache.`],
     ['Evidence', `${README_LEAD} In sector ${map.sector} the light swings by ${percent(map.amplitude)}% with a period of ${map.periodDays} d, and each of the sector's two orbits alone shows the same period within 20%. ${beside} The map's light curve leaves a scatter of ${percent(map.residual)}% about the light, whose own noise is ${percent(map.noise)}%. ${others}`],
-    ['Known problems', `- ${README_LEAD} Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast stretched by a square root so it can be seen; Brightness map has the measured values. ${tilt} The map is of ${when}: spots come and go within weeks or months.`]];
+    ['Known problems', `- ${README_LEAD} Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast stretched by a ${STRETCH_NAME} so it can be seen; Brightness map has the measured values. ${tilt} The map is of ${when}: spots come and go within weeks or months.`]];
   return paragraphs.reduce((text, [section, paragraph]) => atEndOf(text, section, paragraph), kept);
 }
 
