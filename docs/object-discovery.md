@@ -50,6 +50,20 @@ hidden tab, or the pill again ends the tour. Its first hop adds a history entry
 and the rest replace it, so Back returns to the page the tour left. With reduced
 motion the camera does not turn.
 
+## Sourced famous stars
+
+The famous stars are a published list: the 57 navigational stars, and Polaris, that the Nautical Almanac and the Air
+Almanac print, as the US Naval Observatory's [Celestial Navigation Data](https://aa.usno.navy.mil/data/celnav) service
+returns them. [`site/source/usno-navigational-stars.json`](../site/source/usno-navigational-stars.json) preserves the names
+and numbers as the service printed them, with the date and the requests.
+[`navigational-stars.mts`](../site/build/prepare/world/navigational-stars.mts) binds each name to its cssEarth object; a
+star of the list without a binding has no page yet. It adds no score and no brightness threshold.
+
+A listed star is featured whatever its page shows, and the Stars pill frames the listed stars and nothing else: Deneb, 433
+parsecs away, is the farthest. A package's `featured` mark remains for two uses: to promote a star the list leaves out
+(Barnard's Star), and to hold a star another page needs as a target (a nebula's central star, a galaxy's Cepheid, the host
+of a featured planet).
+
 ## Sourced asteroid context
 
 The default asteroid context is the intersection of registered cssEarth objects
@@ -123,9 +137,10 @@ interpretation remain the dataset panel's responsibility. Removing the prepared
 imagery restores the approximation gate when only that stand-in remains.
 
 A star is the exception, because many stars can gain a map. A surface reconstructed from a star's spectra or its light (a
-magnetic, a spot or a brightness map) is something to see but not a picture of it. A star is featured when its package
-marks it or when it has a picture of its own: the famous stars. Any other mapped star, however many maps its page holds,
-stays on the map as a dot that names itself on hover and opens on a click, and it ranks as any star does.
+magnetic, a spot or a brightness map) is something to see but not a picture of it. A star is featured when it is one of
+the navigational stars (below), when it has a picture of its own, or when its package marks it. Any other mapped star,
+however many maps its page holds, stays on the map as a dot that names itself on hover and opens on a click, and it ranks
+as any star does.
 
 [Itokawa](../src/objects/itokawa/README.md),
 [Ryugu](../src/objects/ryugu/README.md) and

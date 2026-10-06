@@ -1,0 +1,244 @@
+{
+  "schema": "cssearth-usno-navigational-stars@1",
+  "source": {
+    "url": "https://aa.usno.navy.mil/data/celnav",
+    "label": "US Naval Observatory, Astronomical Applications: Celestial Navigation Data, the navigational stars of the Nautical and Air Almanacs",
+    "service": "https://aa.usno.navy.mil/api/celnav",
+    "version": "4.0.1",
+    "checked": "2026-10-06",
+    "locator": "Every star the service returns for 40 N and 40 S at 75 W, at 0, 6, 12 and 18 h UT on 2026-10-06: its name as printed and its nav_star_number. Polaris is returned without a number."
+  },
+  "stars": [
+    {
+      "number": 1,
+      "name": "Alpheratz"
+    },
+    {
+      "number": 2,
+      "name": "Ankaa"
+    },
+    {
+      "number": 3,
+      "name": "Schedar"
+    },
+    {
+      "number": 4,
+      "name": "Diphda"
+    },
+    {
+      "number": 5,
+      "name": "ACHERNAR"
+    },
+    {
+      "number": 6,
+      "name": "Hamal"
+    },
+    {
+      "number": 7,
+      "name": "Acamar"
+    },
+    {
+      "number": 8,
+      "name": "Menkar"
+    },
+    {
+      "number": 9,
+      "name": "Mirfak"
+    },
+    {
+      "number": 10,
+      "name": "ALDEBARAN"
+    },
+    {
+      "number": 11,
+      "name": "RIGEL"
+    },
+    {
+      "number": 12,
+      "name": "CAPELLA"
+    },
+    {
+      "number": 13,
+      "name": "Bellatrix"
+    },
+    {
+      "number": 14,
+      "name": "Elnath"
+    },
+    {
+      "number": 15,
+      "name": "Alnilam"
+    },
+    {
+      "number": 16,
+      "name": "BETELGEUSE"
+    },
+    {
+      "number": 17,
+      "name": "CANOPUS"
+    },
+    {
+      "number": 18,
+      "name": "SIRIUS"
+    },
+    {
+      "number": 19,
+      "name": "Adhara"
+    },
+    {
+      "number": 20,
+      "name": "PROCYON"
+    },
+    {
+      "number": 21,
+      "name": "POLLUX"
+    },
+    {
+      "number": 22,
+      "name": "Avior"
+    },
+    {
+      "number": 23,
+      "name": "Suhail"
+    },
+    {
+      "number": 24,
+      "name": "Miaplacidus"
+    },
+    {
+      "number": 25,
+      "name": "Alphard"
+    },
+    {
+      "number": 26,
+      "name": "REGULUS"
+    },
+    {
+      "number": 27,
+      "name": "Dubhe"
+    },
+    {
+      "number": 28,
+      "name": "Denebola"
+    },
+    {
+      "number": 29,
+      "name": "Gienah"
+    },
+    {
+      "number": 30,
+      "name": "ACRUX"
+    },
+    {
+      "number": 31,
+      "name": "Gacrux"
+    },
+    {
+      "number": 32,
+      "name": "Alioth"
+    },
+    {
+      "number": 33,
+      "name": "SPICA"
+    },
+    {
+      "number": 34,
+      "name": "Alkaid"
+    },
+    {
+      "number": 35,
+      "name": "HADAR"
+    },
+    {
+      "number": 36,
+      "name": "Menkent"
+    },
+    {
+      "number": 37,
+      "name": "ARCTURUS"
+    },
+    {
+      "number": 38,
+      "name": "RIGIL KENTAURUS"
+    },
+    {
+      "number": 39,
+      "name": "Zubenelgenubi"
+    },
+    {
+      "number": 40,
+      "name": "Kochab"
+    },
+    {
+      "number": 41,
+      "name": "Alphecca"
+    },
+    {
+      "number": 42,
+      "name": "ANTARES"
+    },
+    {
+      "number": 43,
+      "name": "Atria"
+    },
+    {
+      "number": 44,
+      "name": "Sabik"
+    },
+    {
+      "number": 45,
+      "name": "Shaula"
+    },
+    {
+      "number": 46,
+      "name": "Rasalhague"
+    },
+    {
+      "number": 47,
+      "name": "Eltanin"
+    },
+    {
+      "number": 48,
+      "name": "Kaus Australis"
+    },
+    {
+      "number": 49,
+      "name": "VEGA"
+    },
+    {
+      "number": 50,
+      "name": "Nunki"
+    },
+    {
+      "number": 51,
+      "name": "ALTAIR"
+    },
+    {
+      "number": 52,
+      "name": "Peacock"
+    },
+    {
+      "number": 53,
+      "name": "DENEB"
+    },
+    {
+      "number": 54,
+      "name": "Enif"
+    },
+    {
+      "number": 55,
+      "name": "Alnair"
+    },
+    {
+      "number": 56,
+      "name": "FOMALHAUT"
+    },
+    {
+      "number": 57,
+      "name": "Markab"
+    },
+    {
+      "name": "POLARIS"
+    }
+  ]
+}

@@ -16,6 +16,7 @@ import { APPLICATION_WORLD_CONTEXT } from '../../../directory/world-context-plan
 import { worldFilesOf } from '../../../server/world-places.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
+import { isNavigationalStar } from './navigational-stars.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { isExtremeTransNeptunian } from '@cssearth/astronomy';
 
@@ -75,10 +76,10 @@ export const CATEGORY_FRAMED_SHARE = .9;
 type Position = readonly number[];
 export interface CategoryFrame { readonly centreM: Position; readonly minimumM: Position; readonly maximumM: Position }
 
-/** The reference-axis box around the nearest CATEGORY_FRAMED_SHARE of one category's members, centred on itself. Fewer than two
- * members, or members at one point, give no box: there is nothing to fit, and the pill only highlights. */
-export function prepareCategoryFrame(positionsM: readonly Position[]): CategoryFrame | null {
-  const framed = [...positionsM].sort((a, b) => Math.hypot(...a) - Math.hypot(...b)).slice(0, Math.ceil(positionsM.length * CATEGORY_FRAMED_SHARE));
+/** The reference-axis box around the nearest `share` of one category's members, centred on itself. Fewer than two members,
+ * or members at one point, give no box: there is nothing to fit, and the pill only highlights. */
+export function prepareCategoryFrame(positionsM: readonly Position[], share: number = CATEGORY_FRAMED_SHARE): CategoryFrame | null {
+  const framed = [...positionsM].sort((a, b) => Math.hypot(...a) - Math.hypot(...b)).slice(0, Math.ceil(positionsM.length * share));
   if (framed.length < 2) return null;
   const minimum = [0, 1, 2].map(axis => Math.min(...framed.map(position => position[axis]!)));
   const maximum = [0, 1, 2].map(axis => Math.max(...framed.map(position => position[axis]!)));
@@ -139,11 +140,17 @@ export function prepareCategoryFrames(worldObjects: typeof WORLD_OBJECTS,
     const bodies = worldObjects.filter(object => marked.has(object.id)), notables = bodies.filter(object => notable.has(object.id));
     const narrowed = notables.length >= 2 && notables.length < bodies.length;
     const markedBodies = narrowed ? notables : bodies;
-    const frame = prepareCategoryFrame(framedMembers(markedBodies, regionsOf).map(object => {
+    const placeOf = (object: typeof markedBodies[number]) => {
       // Preparation reads every system's file (site/directory/world-context-plan.mts), so every body is placed.
       if (!object.worldFrame) throw new TypeError(`${object.id} has no world position; the world context read here lacks its system.`);
       return object.worldFrame.originM;
-    }));
+    };
+    // A category with listed landmarks is framed by all of them and by nothing else: the navigational stars are the Stars
+    // pill's box. The share is for a category without a list. Left to the share, the Stars box followed whichever stars
+    // were marked for another page's use: with the central stars of seven nebulae and five Cepheids of the Magellanic
+    // Clouds among 69 members it was 2,700 parsecs wide, and Deneb fell in or out of it with every star added or dropped.
+    const framed = framedMembers(markedBodies, regionsOf), landmarks = framed.filter(isNavigationalStar);
+    const frame = landmarks.length >= 2 ? prepareCategoryFrame(landmarks.map(placeOf), 1) : prepareCategoryFrame(framed.map(placeOf));
     const hostIds = [...new Set(markedBodies.flatMap(object => hostOf(object.id) ?? []))];
     // The holder files that have marked members the summary does not: a page reads them when the pill is highlighted.
     const holderIds = holderFilesOf(markedBodies.map(object => object.id));
