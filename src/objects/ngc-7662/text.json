@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-7662",
+  "card": {
+    "text": "The Blue Snowball Nebula is a planetary nebula about 1,740 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "chornay-walton-2021-pn-central-stars",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+        "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G106.5-17.6: distance 1,740 pc (1,648 to 1,842) from the Gaia EDR3 parallax of its central star",
+        "checked": "2026-10-05",
+        "locator": "distance: 1,740 pc (1,648 to 1,842)"
+      },
+      {
+        "catalogueId": "wikipedia-ngc-7662",
+        "url": "https://en.wikipedia.org/wiki/NGC_7662",
+        "label": "Wikipedia, \"NGC 7662\"",
+        "checked": "2026-10-05",
+        "locator": "Lead section, revision 1375039733",
+        "quote": "NGC 7662 is a planetary nebula located in the northern constellation Andromeda."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It has two shells, one inside the other, both stretched along an axis that points partly toward us; the outer one expands faster.",
+    "sources": [
+      {
+        "catalogueId": "publication-guerrero-2004-ngc-7662-structure",
+        "url": "https://arxiv.org/abs/astro-ph/0407029",
+        "label": "Guerrero, Jaxon & Chu (2004), AJ 128, 1705: physical structure of planetary nebulae. II. NGC 7662",
+        "checked": "2026-10-05",
+        "locator": "Sect. 3.2 and Table 1: two ellipsoidal shells, the major axis tilted 50° against the line of sight with its north-east end toward us; 35 to 53 km/s and 50 to 60 km/s"
+      },
+      {
+        "catalogueId": "wikipedia-ngc-7662",
+        "url": "https://en.wikipedia.org/wiki/NGC_7662",
+        "label": "Wikipedia, \"NGC 7662\"",
+        "checked": "2026-10-05",
+        "locator": "Lead section, revision 1375039733",
+        "quote": "It is known as the Blue Snowball Nebula, Snowball Nebula, and Caldwell 22."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "The Blue Snowball in visible light",
+      "detail": "737 × 737 px",
+      "summary": "Hubble's picture on the walls of the nebula's two shells, with the shape, tilt and speed its spectra give them.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-opo9738c20",
+          "url": "https://esahubble.org/images/opo9738c20/",
+          "label": "ESA/Hubble opo9738c20: Bruce Balick and Jason Alexander (University of Washington), Arsen Hajian (S. Naval Observatory), Yervant Terzian (Cornell University), Mario Perinotto (University of Florence), Patrizio Patriarchi (Arcetri Observatory) and NASA/ESA",
+          "checked": "2026-10-05",
+          "locator": "NGC 7662"
+        },
+        {
+          "catalogueId": "publication-guerrero-2004-ngc-7662-structure",
+          "url": "https://arxiv.org/abs/astro-ph/0407029",
+          "label": "Guerrero, Jaxon & Chu (2004), AJ 128, 1705: physical structure of planetary nebulae. II. NGC 7662",
+          "checked": "2026-10-05",
+          "locator": "Table 1: the two shells' sizes, speeds and tilt"
+        }
+      ]
+    }
+  }
+}

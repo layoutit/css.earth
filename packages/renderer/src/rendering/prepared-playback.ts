@@ -6,6 +6,24 @@ export type PreparedAnimation = Pick<Animation, "play" | "pause" | "cancel" | "p
 export interface PreparedAnimationOptions { mode?: PreparedAnimationMode; rate?: number; enabledWhen?: Readonly<Record<string, unknown>>; initialTime?: number; lightCurve?: boolean; }
 interface PlaybackEntry { animation: PreparedAnimation; mode: PreparedAnimationMode; rate: number; enabledWhen: Readonly<Record<string, unknown>>; lightCurve: boolean; running: boolean | null; appliedRate: number | null; }
 
+/** What ending an animation needs of it. A stand-in without an effect or a timeline is only cancelled. */
+export type ReleasableAnimation = Pick<Animation, "cancel"> & Partial<Pick<Animation, "effect" | "timeline">>;
+
+/**
+ * Ends an animation for good: cancels it, then takes its effect and its timeline away.
+ *
+ * A cancelled animation still belongs to the document's timeline. Safari keeps every animation that has a timeline for
+ * the life of the page, and the animation keeps its effect's target. A scene's animations target its camera and its
+ * moving parts: on the iPad every round trip between Earth and Mars left 5 more animations alive and the page's
+ * process about 4 MB larger (2026-10-06). Without its effect it names no element, and without its timeline nothing
+ * keeps it.
+ */
+export function releaseAnimation(animation: ReleasableAnimation): void {
+  animation.cancel();
+  if ("effect" in animation) animation.effect = null;
+  if ("timeline" in animation) animation.timeline = null;
+}
+
 // The router grants permission. This owner applies it to retained native
 // animations; it creates no timer, frame loop, visibility or media observer.
 export function createPreparedPlayback() {
@@ -43,7 +61,7 @@ export function createPreparedPlayback() {
           !enabledWhen || typeof enabledWhen !== "object" || Array.isArray(enabledWhen)) {
         throw new TypeError("Prepared playback requires a native animation and valid prepared role.");
       }
-      if (destroyed) { animation.cancel(); return animation; }
+      if (destroyed) { releaseAnimation(animation); return animation; }
       if (handles.has(animation)) return animation;
       const entry: PlaybackEntry = { animation, mode, rate, enabledWhen: Object.freeze({ ...enabledWhen }), lightCurve, running: null, appliedRate: null };
       handles.set(animation, entry);
@@ -102,7 +120,7 @@ export function createPreparedPlayback() {
       destroyed = true; allowed = false; ready = false;
       const owned = [...handles.keys()]; handles.clear();
       const errors = [];
-      for (const animation of owned) { try { animation.cancel(); } catch (error) { errors.push(error); } }
+      for (const animation of owned) { try { releaseAnimation(animation); } catch (error) { errors.push(error); } }
       if (errors.length) throw new AggregateError(errors, "Prepared native animation cleanup failed.");
     },
   });

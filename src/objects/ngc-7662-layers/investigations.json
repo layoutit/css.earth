@@ -1,0 +1,82 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-7662-layers",
+  "entries": [
+    {
+      "id": "opo9738c20",
+      "subject": "ESA/Hubble opo9738c20",
+      "status": "included",
+      "finding": "NGC 7662: WFPC2: H-alpha 656 nm in green, [N II] 658 nm in red and [O I] 631 nm in magenta, as ESA's page lists them; 737 × 737 px over 33.3 × 33.3 arcsec, released 17 December 1997. The file's embedded sky tags for scale and direction, 0.0452 arcsec per pixel and north 106.92° right of vertical, and the central star for place: its peak, pixel 361.0, 350.6, is set at the star's Gaia EDR3 place, so the frame's centre is 351.4740504°, 42.53509°. The tags alone put the star 0.32 arcsec from there.",
+      "evidence": [
+        "https://esahubble.org/images/opo9738c20/",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "shells",
+      "subject": "The two shells' shape, tilt and speed",
+      "status": "included",
+      "finding": "Guerrero, Jaxon & Chu (2004) observed the [O III] lines with the echelle spectrograph on the 4 m telescope at Kitt Peak on 21 to 23 October 1986 and fit each shell's position-velocity ellipse with an ellipsoidal shell in homologous expansion. Table 1: inner shell 13 × 19.7 arcsec, 35 and 53 km/s; outer shell 28 × 33.6 arcsec, 50 and 60 km/s; both tilted 50° against the line of sight along position angle 45°, the north-east end toward us; kinematic ages of 700 and 1,050 years at 800 pc. The picture lies on those two ellipsoids' walls.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0407029"
+      ]
+    },
+    {
+      "id": "outer-tilt",
+      "subject": "The outer shell's tilt",
+      "status": "included",
+      "finding": "The outer shell's position-velocity ellipse shows no clear tilt: it is either nearly round or seen along its pole. The paper assumes its axis is the inner shell's and derives its speeds from that; the bank does the same.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0407029"
+      ]
+    },
+    {
+      "id": "distance",
+      "subject": "Which distance",
+      "status": "included",
+      "finding": "The paper's sizes in parsecs and its ages assume 800 pc (Hajian & Terzian 1996). The page stands at 1,740 pc (1,648 to 1,842), from the Gaia EDR3 parallax of the central star (Chornay & Walton 2021). The shells' sizes are used in arcseconds, which no distance changes; at the Gaia distance the paper's ages would be 2.2 times longer.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0407029",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+      ]
+    },
+    {
+      "id": "fliers",
+      "subject": "The red knots",
+      "status": "deferred",
+      "finding": "The picture's red knots are the nebula's fast low-ionisation emission regions. The paper leaves them out of its fit, which uses the sectors free of them, and prints no speed for any knot. Their light lies on the walls with the rest.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0407029"
+      ],
+      "revisitWhen": "A table of the knots' velocities is read."
+    },
+    {
+      "id": "halo",
+      "subject": "The halo",
+      "status": "excluded",
+      "finding": "The paper describes a faint round halo 134 arcsec across (from Chu, Jacoby & Arendt 1987). The picture is 33 arcsec wide and does not hold it.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0407029"
+      ]
+    },
+    {
+      "id": "star",
+      "subject": "The central star's light",
+      "status": "included",
+      "finding": "The star's light ends 1.5 arcsec from it in this picture (packages/bake/authoring/m1-67/star-light.mts: rings of 0.1 arcsec about the star, the first no brighter than the ten past it). All of it within half that, and less and less out to it, stays at the star and on no wall.",
+      "evidence": [
+        "https://esahubble.org/images/opo9738c20/"
+      ]
+    },
+    {
+      "id": "frame",
+      "subject": "The frame against the nebula",
+      "status": "included",
+      "finding": "The picture is 33.3 × 33.3 arcsec and the outer shell is 30.8 by 27.2 arcsec on the sky: the frame cuts the knots at one edge, and the round rim the picture fades out in passes through the outer shell's two ends.",
+      "evidence": [
+        "https://esahubble.org/images/opo9738c20/",
+        "https://arxiv.org/abs/astro-ph/0407029"
+      ]
+    }
+  ]
+}
