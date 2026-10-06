@@ -37,7 +37,7 @@ export async function textBudgetFindings(ids: readonly string[], projectRoot = r
   return findings;
 }
 
-/** The files the world step rewrites before pins reads them (site/build/prepare/prepare-spatial-context.ts): the Sun's
+/** The files the world step rewrites before pins reads them (site/build/prepare/world/prepare-spatial-context.ts): the Sun's
  * full context, the root object's summary and index, and each object's members, places, system views, orbit banks and
  * the dots of the plain stars inside it. */
 export const worldStepOutput = ({ location, filename }: InventoryAsset) =>

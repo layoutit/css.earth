@@ -27,7 +27,7 @@ The one firm result is the inclination: 293 of the 300 orbits lie within 30° of
 
 **On the map.** B has no surface image, but its color comes from its own spectrum, so preparation marks it `sourceColor` ([prepare-object-discovery.mts](../../../site/build/prepare/prepare-object-discovery.mts)) and it stays visible.
 
-**In the system.** The pair is bound: El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list it in their Gaia EDR3 wide-binary catalogue with a chance-alignment probability of 1.3e-4. Preparation carries the pair's centre of mass into the world context, 19.3% of the way from A to B for masses 0.807 and 0.193 solar, 44 au from A ([object-systems.mts](../../../site/world/object-systems.mts)). Once the camera is farther out than the stars are from each other, the view turns onto the pair's centre of mass ([prepared-world-navigation.mts](../../../site/navigation/prepared-world-navigation.mts)), so A and B sit either side of it as the view widens.
+**In the system.** The pair is bound: El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list it in their Gaia EDR3 wide-binary catalogue with a chance-alignment probability of 1.3e-4. Preparation carries the pair's centre of mass into the world context, 19.3% of the way from A to B for masses 0.807 and 0.193 solar, 44 au from A ([object-systems.mts](../../../site/world/systems/object-systems.mts)). Once the camera is farther out than the stars are from each other, the view turns onto the pair's centre of mass ([prepared-world-navigation.mts](../../../site/navigation/prepared-world-navigation.mts)), so A and B sit either side of it as the view widens.
 
 ## Evidence
 

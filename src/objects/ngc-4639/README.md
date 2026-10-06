@@ -21,7 +21,7 @@ The card's facts cite their catalogues in [source/content/object.json](source/co
 ## Processing
 
 1. The [astronomy record](../../../packages/astronomy/data/bodies/ngc-4639.json) places it at the position and distance of the sources above, with SIMBAD's radial velocity.
-2. `node packages/bake/cli/prepare-image-layers.mts src/objects/ngc-4639-layers` bakes the image bank from its [recipe](../ngc-4639-layers/source/recipe.json), and `node site/build/prepare/prepare-volume-presentation.mts --object=ngc-4639-layers` prepares its dataset card.
+2. `node packages/bake/cli/prepare-image-layers.mts src/objects/ngc-4639-layers` bakes the image bank from its [recipe](../ngc-4639-layers/source/recipe.json), and `node site/build/prepare/catalog/prepare-volume-presentation.mts --object=ngc-4639-layers` prepares its dataset card.
 3. `node packages/bake/cli/prepare-object.mts ngc-4639` prepares its scene through the standard authored lane. The [recipe](object.json) declares no surface, so the scene is the camera, sky and world frame. The page frames it at 8,100 pc, RC3's isophotal radius (half of D25, log D25 = 1.44 in 0.1′) at the Cepheid distance ([solar-system.json](source/presentation/solar-system.json)).
 4. `node site/build/prepare/companion-context.mts ngc-4639` saves the list marker from the default dataset's picture.
 

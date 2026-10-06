@@ -21,7 +21,7 @@ The shared `vrml-mesh` reader reads the original mesh, and meshoptimizer 1.2.0 s
 
 Each photograph gets a camera from its original kernels. Preparation then registers it to the shape by image/model correlation, fitting a translation on two relief windows and checking two held-out windows against a 12-pixel limit. Photometry carries each pixel to 35° incidence, 0° emission and 35° phase. Incidence and emission are limited to 70°, phase to 25–55°, and gain to 0.4–2.5; pixels outside these limits are withheld. Lowest emission selects the source where photographs overlap.
 
-Reproduce a camera with `python packages/bake/cli/prepare-archived-camera.py src/objects/lutetia/source` after `node packages/bake/cli/restore-source-inputs.mts --object=lutetia`, then run `node site/build/prepare/prepare-authored.ts lutetia --write`. Nothing is fitted or corrected in the application.
+Reproduce a camera with `python packages/bake/cli/prepare-archived-camera.py src/objects/lutetia/source` after `node packages/bake/cli/restore-source-inputs.mts --object=lutetia`, then run `node site/build/prepare/authored/prepare-authored.ts lutetia --write`. Nothing is fitted or corrected in the application.
 
 ## Evidence
 

@@ -79,7 +79,7 @@ How the Worker behaves:
 
 - An instance keeps the search catalogues and the world it loaded for later requests, and Cloudflare can stop a request in
   the middle of such a load. The Worker holds a load open when its reader disconnects. A search that has waited 10 s on
-  another request's load reads the data itself ([kept load](../site/server/kept-load.mts)).
+  another request's load reads the data itself ([kept load](../site/server/search/kept-load.mts)).
 - A page address with a query gets the static page when its handler fails or has no answer in 10 s, and the Worker logs
   `page-handler-fallback` with the reason. The page's scripts read a view, dataset or feature from the address; a
   submitted search (`q`) and everything a reader without scripts would get are not rendered.

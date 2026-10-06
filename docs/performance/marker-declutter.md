@@ -22,7 +22,7 @@ frame, though almost all lay under others.
   582 AU swapped the order of 13,679 overlapping pairs.
 - **Past the system scope, a system is its star** (`setSystemRetired` in `prepared-world-context.ts`). The universe nests
   one inside another: the Solar System in the Milky Way, the Milky Way in the Local Group. The application already
-  crosses those levels (its overview scope, `site/world/zoom-scope.mts`, with a lower edge on the way back), and passes
+  crosses those levels (its overview scope, `site/world/systems/zoom-scope.mts`, with a lower edge on the way back), and passes
   the scope to the universe with each crossing. Once it leaves the system for the Milky Way's (about 6,500 AU from the
   Sun on the way out, 670 AU on the way back), every system retires through the path a system faded past already took,
   and its star stands for it. Inside the system the existing fades still apply. Before, the Solar System's bodies faded
@@ -34,7 +34,7 @@ frame, though almost all lay under others.
   (`PreparedOrbitLines.detach`), and so do the placed stars past the galaxy's scope. A return attaches each again as it
   shows. Before, a marker group stayed mounted, hidden, from its first showing until the page closed: zoomed out from the
   Sun to the Local Group, 435 marker groups were mounted and none drawn.
-- **An overview page frames its camera before the world plans** (`frameInitialView` in `site/scene/scene-activation.mts`).
+- **An overview page frames its camera before the world plans** (`frameInitialView` in `site/scene/session/scene-activation.mts`).
   An overview or satellite-system page opened without a saved view mounts its body's scene, then moves the camera to the
   overview. The world context planned one frame between the two, from the Sun's default view, and its planner fetched
   the 40 Solar System orbit banks that view would draw, on the Nearby Universe page among others. The page now frames

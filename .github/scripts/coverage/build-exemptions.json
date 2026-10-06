@@ -1,15 +1,15 @@
 [
-  "site/build/prepare/prepare-charts.mts",
-  "site/build/prepare/prepare-context-availability.mts",
-  "site/build/prepare/prepare-facilities.mts",
-  "site/build/prepare/prepare-interior-fills.mts",
-  "site/build/prepare/prepare-moon-labels.mts",
+  "site/build/prepare/authored/prepare-charts.mts",
+  "site/build/prepare/catalog/prepare-context-availability.mts",
+  "site/build/prepare/catalog/prepare-facilities.mts",
+  "site/build/prepare/authored/prepare-interior-fills.mts",
+  "site/build/prepare/world/prepare-moon-labels.mts",
   "site/build/prepare/prepare-object-discovery.mts",
-  "site/build/prepare/prepare-object-json.mts",
-  "site/build/prepare/prepare-sidebar-thumbnails.mts",
-  "site/build/prepare/prepare-social-images.mts",
-  "site/build/prepare/prepare-spatial-context.ts",
-  "site/build/prepare/prepare-volume-presentation.mts",
-  "site/build/prepare/prepare-world-navigation.ts",
-  "site/build/prepare/prepare-world-presentation.mts"
+  "site/build/prepare/authored/prepare-object-json.mts",
+  "site/build/prepare/shell/prepare-sidebar-thumbnails.mts",
+  "site/build/prepare/shell/prepare-social-images.mts",
+  "site/build/prepare/world/prepare-spatial-context.ts",
+  "site/build/prepare/catalog/prepare-volume-presentation.mts",
+  "site/build/prepare/authored/prepare-world-navigation.ts",
+  "site/build/prepare/world/prepare-world-presentation.mts"
 ]

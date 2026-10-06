@@ -3,7 +3,7 @@ import { orbitRoot } from './orbit-root.mts';
 import type { PreparedWorldContext } from '@cssearth/objects';
 
 /** What a system's members are read from: the bodies a plan holds, each naming the object it is inside. This module reads
- * no prepared presentation file, so the preparation step (site/build/prepare/prepare-world-presentation.mts) can run it
+ * no prepared presentation file, so the preparation step (site/build/prepare/world/prepare-world-presentation.mts) can run it
  * before that file exists. */
 export type PlanetarySystemPlan = Pick<PreparedWorldContext, 'focus' | 'bodies'>;
 export interface PlanetarySystemMembers { readonly id: string; readonly memberIds: readonly string[] }
@@ -21,7 +21,7 @@ export function planetarySystemParents(plan: PlanetarySystemPlan): ReadonlyMap<s
 /** Every candidate system host with the prepared bodies inside its system at any depth, in plan order. Candidates are the
  * focus and every body with a system view, wherever it is in the tree: a star inside another's system hosts its own inside
  * it (Epsilon Indi Ba, with Bb around it, hosts Epsilon Indi B inside Epsilon Indi A's system), and its members are
- * members of both. Whether a candidate is a star is the registry's to say (site/world/object-systems.mts): a planet with moons
+ * members of both. Whether a candidate is a star is the registry's to say (site/world/systems/object-systems.mts): a planet with moons
  * is a candidate too, and no planetary system. A cyclic chain anywhere in the plan is rejected. */
 export function planetarySystemMembers(plan: PlanetarySystemPlan): readonly PlanetarySystemMembers[] {
   const parents = planetarySystemParents(plan);

@@ -1,7 +1,7 @@
 import { isRecord } from '@cssearth/core';
 
 /** A site the Sources tab links to, and the address of its favicon when the site serves one
- * (`site/build/prepare/refresh-source-icons.mts`). The page loads the icon from that address; no copy is kept. */
+ * (`site/build/prepare/shell/refresh-source-icons.mts`). The page loads the icon from that address; no copy is kept. */
 export interface SourceIcon { readonly sourceUrl: string; readonly assetUrl?: string }
 
 const url = (value: unknown): value is string => typeof value === 'string' && /^https?:\/\/[^\s]+$/u.test(value);

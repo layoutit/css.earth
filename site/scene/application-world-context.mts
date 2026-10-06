@@ -7,12 +7,12 @@ import type { PreparedLabelEdge } from '@cssearth/renderer/navigation/prepared-l
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import { PREPARED_WORLD_PRESENTATION } from '../world/prepared-world-presentation.mts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from '../directory/world-context-plan.mts';
-import { createWorldApproach } from '../world/world-approach.mts';
+import { createWorldApproach } from '../world/application/world-approach.mts';
 import { DIAGNOSTICS_ENABLED } from '../browser/diagnostics-policy.mts';
-import { CONTEXT_AVAILABILITY } from '../world/context-availability.mts';
-import { suppressMinorMoonOrbitPaint } from '../world/moon-orbit-policy.mts';
-import { mountCatalogueMoonLabels } from '../world/catalogue-moon-labels.mts';
-import { loadApplicationUniverse } from '../world/application-world-resources.mts';
+import { CONTEXT_AVAILABILITY } from '../world/application/context-availability.mts';
+import { suppressMinorMoonOrbitPaint } from '../world/application/moon-orbit-policy.mts';
+import { mountCatalogueMoonLabels } from '../world/application/catalogue-moon-labels.mts';
+import { loadApplicationUniverse } from '../world/application/application-world-resources.mts';
 import { ancestorIds, knownAncestors } from '../directory/object-directory.mts';
 import { CONTEXT_OBJECT_DESCRIPTORS } from '../prepared/prepared-context-objects.mts';
 import { surroundingHosts } from '../world/surrounded-body.mts';
@@ -20,9 +20,9 @@ import { surroundingHosts } from '../world/surrounded-body.mts';
 /** The world's prepared data and planner worker, which `startup-boot.mts` starts while the first body still loads. */
 export { loadApplicationUniverse };
 export { prestartWorldContextPlanner as prestartWorldPlanner } from '@cssearth/renderer/universe';
-import { createApplicationWorldFrames } from '../world/application-world-frames.mts';
-import { createApplicationWorldVisibility, worldVisibilityPolicy } from '../world/application-world-visibility.mts';
-import type { ApplicationWorldLayer } from '../world/application-world-types.mts';
+import { createApplicationWorldFrames } from '../world/application/application-world-frames.mts';
+import { createApplicationWorldVisibility, worldVisibilityPolicy } from '../world/application/application-world-visibility.mts';
+import type { ApplicationWorldLayer } from '../world/application/application-world-types.mts';
 
 /** The objects whose picture lies on walls around their middle (surrounded-body.mts). */
 const WALLED = surroundingHosts(CONTEXT_OBJECT_DESCRIPTORS);

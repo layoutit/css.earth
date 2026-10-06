@@ -6,7 +6,7 @@ import { readObjectContentDatasets } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { companionThumbnails } from './surfaceless-scene.ts';
+import { companionThumbnails } from './authored/surfaceless-scene.ts';
 
 const root = resolve(import.meta.dirname, '../../..'), [id, option] = process.argv.slice(2);
 if (!id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: companion-context.mts <object id> [--picture=<path from the object folder>]');

@@ -194,7 +194,7 @@ Do not commit downloaded webpages as evidence.
 Follow [Sources authoring](../../../docs/sources-catalogue.md#add-or-update-a-source)
 when adding or changing inputs: reuse the published identity, preserve each local
 file and bind its actual role. Refreshing sources must preserve existing bindings.
-Run `node site/build/prepare/prepare-facilities.mts --catalog-only` when source records, bindings or generated attribution
+Run `node site/build/prepare/catalog/prepare-facilities.mts --catalog-only` when source records, bindings or generated attribution
 change. A README-only spelling correction does not trigger source preparation.
 For factsheets, put citations on the individual facts using the existing
 [factsheet fields](../../../docs/factsheets.md#editing-and-reproduction).
@@ -202,7 +202,7 @@ Preserve each fact's evidence when editing content. A general page credit does
 not supply a citation for every number on that page.
 Write the card line, introduction and dataset text in the body's `text.json`,
 cite the source records a reviewer checks them against, and run
-`node site/build/prepare/prepare-text.mts`; see [reader text](../../../docs/reader-text.md).
+`node site/build/prepare/authored/prepare-text.mts`; see [reader text](../../../docs/reader-text.md).
 
 Record the following for selected inputs in the existing source record and
 manifest:

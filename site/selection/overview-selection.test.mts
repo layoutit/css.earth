@@ -1,16 +1,16 @@
 import { testDistance, required, objectFixture, navigationFixture } from '../navigation/navigation-test-values.test-support.mts';
-import { readSystemViewFile } from '../world/system-view-file.test-support.mts';
+import { readSystemViewFile } from '../world/systems/system-view-file.test-support.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { selectionAtCamera, watchCameraSelection } from './overview-selection.mts';
-import { subjectOf, type SceneSubject } from '../world/scene-subject.mts';
-import { systemById } from '../world/object-systems.mts';
+import { subjectOf, type SceneSubject } from '../world/systems/scene-subject.mts';
+import { systemById } from '../world/systems/object-systems.mts';
 import { type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { worldCameraFromCenteredPresentation, type WorldCameraPose } from '@cssearth/engine';
 
 import type { ObjectWorldNavigationListener } from '@cssearth/renderer/runtime/world-navigation-types.ts';
-import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../world/system-framing.mts';
+import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../world/systems/system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));
 const rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1] as const;
