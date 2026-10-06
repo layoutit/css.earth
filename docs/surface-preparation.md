@@ -773,8 +773,8 @@ far view. Measured that day:
 | | 32-file bank | Sheet |
 | --- | --- | --- |
 | Files a body publishes for lighting | 35 | 2 |
-| Shared sphere bank | 7.36 MB | 0.63 MB (sheet 574 KB, flood-lit frame 56 KB) |
-| Images its pool keeps with shadows on, decoded size by pixel count | 3 of 8192×1024 (100 MB) | 1 of 4224×2112 (36 MB) |
+| Shared sphere bank | 7.0 MB | 0.6 MB (sheet 560 KB, flood-lit frame 55 KB) |
+| Images its pool keeps with shadows on, decoded size by pixel count | 3 of 8192×1024 (96 MB) | 1 of 4224×2112 (34 MB) |
 | Error against the exact frame at 920 px, alpha levels of 255: largest, rms | 24, 1.38 | 9, 0.90 |
 | Titan on css.earth, three drags with shadows on: lighting fetched | 30 requests, 6,759 KB | none after the sheet |
 

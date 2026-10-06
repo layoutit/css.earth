@@ -7,8 +7,8 @@
  * for the rest. The frames are spaced evenly in that angle, where an even step in the light's view z spends most frames
  * near quarter phase and leaves the crescent and gibbous ends coarse. Measured for the shared sphere law against the exact
  * frame at 920 px across, over 60 phases, in alpha levels of 255 over the body (2026-10-06, the PR that introduced this
- * sheet): the 256 frames of 1024 px this replaced, even in z and delivered as 32 files of 7.0 MB, were off by at most 24
- * and 1.38 rms; these 128 frames of 256 px are off by at most 9 and 0.90 rms in one file of 0.6 MB. 96 frames gave 12 and
+ * sheet): the 256 frames of 1024 px this replaced, even in z and delivered as 32 files of 6.9 MB, were off by at most 24
+ * and 1.38 rms; these 128 frames of 256 px are off by at most 9 and 0.90 rms in one file of 560 KB. 96 frames gave 12 and
  * 1.17, 64 frames 16 and 1.73. Below 256 px the disc's edge reaches into the body: 192 px gave 27 at most, 128 px 96.
  */
 export const LIGHTING_SHEET = Object.freeze({
