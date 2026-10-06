@@ -3,10 +3,10 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 
 import { viewSunDirectionToPhysicalLightDirection, viewSunDirectionToPreparedLightDirection, cssDirectionToViewDirection } from '@cssearth/engine';
-import { requireBodyFixedSunDirection } from "./solar-geometry.mts";
+import { requireBodyFixedSunDirection } from "../../../../../src/platform/solar-geometry.mts";
 import { prepareSunReferenceViewDirection } from
   "@cssearth/bake/objects/scene";
-import * as solarGeometry from './solar-geometry.mts';
+import * as solarGeometry from '../../../../../src/platform/solar-geometry.mts';
 
 // A view direction lies in front of the camera when `forward = -z` is positive.
 function forward(viewDirection: readonly number[]) {

@@ -5,10 +5,10 @@ const test = sourceTest();
 import {
   requireBodyFixedEclipticNorth,
   requireBodyFixedSunDirection,
-} from "./solar-geometry.mts";
+} from "../../../../../src/platform/solar-geometry.mts";
 import { prepareEclipticPresentationFrame, prepareSunReferenceViewDirection } from "@cssearth/bake/objects/scene";
 import { cssDirectionToViewDirection } from '@cssearth/engine';
-import * as solarGeometry from './solar-geometry.mts';
+import * as solarGeometry from '../../../../../src/platform/solar-geometry.mts';
 
 const BODIES = [
   "mercury",

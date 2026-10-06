@@ -14,7 +14,7 @@ Hubble tracked its white dwarf companion for two decades; the orbit weighs Procy
 
 Generated 2026-10-02 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from VizieR V/137D/XHIP and the archives named above; each choice was read with the dataset's own reader.
 
-- The color's cross-check differs by 6 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.
+- The color's cross-check differs by 6 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) recomputes it after preparation.
 
 ![Procyon, Procyon B, Sirius B, Barnard's Star, Lalande 21185 and Merak as their pages open, 1 October 2026](evidence/2026-10-01/pages.jpg)
 

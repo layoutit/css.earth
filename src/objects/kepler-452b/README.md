@@ -16,7 +16,7 @@ Not measured and not shown: mass, color, albedo, surface, atmosphere, rotation. 
 
 ## Evidence
 
-- Run of 2026-09-24: [`node packages/bake/src/prepare-object/index.ts`](../../../packages/bake/cli/prepare-object.mts) added the Illustration dataset; every image this package already delivered is byte-identical to main's. [`equirectangular-illustration.test.mts`](../../../src/platform/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0° and that an emissive body gets transparent plates. In headless Chrome the dataset opens on the map with no console errors ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
+- Run of 2026-09-24: [`node packages/bake/src/prepare-object/index.ts`](../../../packages/bake/cli/prepare-object.mts) added the Illustration dataset; every image this package already delivered is byte-identical to main's. [`equirectangular-illustration.test.mts`](../../../packages/bake/src/objects/interpretation/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0° and that an emissive body gets transparent plates. In headless Chrome the dataset opens on the map with no console errors ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
 
 2026-09-22 exoplanet radius and route check: the 10,396.4 km source radius agrees with the scene and world frame. The pinned prepared package restored from the runtime inventory and passed its runtime contract; Chrome opened this route, showed the 1.63 Earth-radii fact and reported no console errors after the view settled. No assets were rebaked for this body.
 

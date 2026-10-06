@@ -5,9 +5,9 @@ import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../../packages/astronomy/cli/scene-ephemeris.mts';
+import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../../astronomy/cli/scene-ephemeris.mts';
 import { loadAstronomyPackage } from '@cssearth/bake/astronomy';
-import * as geometry from './solar-geometry.mts';
+import * as geometry from '../../../src/platform/solar-geometry.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseSolidPreparationSource, parseSolidReplayScene } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
@@ -43,7 +43,7 @@ const heliocentricKm = (id: string): number[] => {
 
 test('primary-specific companion sources define one global parent origin and conic at the scene epoch', async () => {
   for (const id of ['hiiaka', 'menoetius', 'romulus'] as const) {
-    const source = requireEpochState(JSON.parse(await readFile(new URL(`../../src/objects/${id}/source/validation/epoch-state.json`, import.meta.url), 'utf8')), `${id} epoch state`);
+    const source = requireEpochState(JSON.parse(await readFile(new URL(`../../../src/objects/${id}/source/validation/epoch-state.json`, import.meta.url), 'utf8')), `${id} epoch state`);
     const parent = source.centerBodyId, primary = source.parentHeliocentricState;
     assert.deepEqual(requireSnapshot(geometry.BODY_HELIOCENTRIC_STATES[parent], `${parent} heliocentric state`).positionKm, primary.positionKm);
     assert.deepEqual(requireSnapshot(geometry.BODY_HELIOCENTRIC_STATES[parent], `${parent} heliocentric state`).velocityKmPerDay, primary.velocityKmPerDay);
@@ -86,7 +86,7 @@ test('all retained body centers are composed with their named parent at the fixe
 test('regeneration retains every current registry orbit, including moons and comets', async () => {
   // Every body of the world: the scenes, and the galaxies, clusters and nebulae the host draws. The Sun is one of them, placed
   // at distance zero by its astronomy record.
-  const registry = readPreparedObjects(resolve(import.meta.dirname, '../..')).worldObjects.map(body => body.id);
+  const registry = readPreparedObjects(resolve(import.meta.dirname, '../../..')).worldObjects.map(body => body.id);
   // Then every star or planet on a hosted orbit around a packaged host, drawn from its astronomy record alone.
   const { BODIES, HOSTED_PLANET_IDS } = await import('@cssearth/astronomy');
   const records = BODIES as Readonly<Record<string, { readonly parent: string | null }>>;
@@ -131,7 +131,7 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
   const { refreshSolidSceneEpoch } = await import('@cssearth/bake/objects/layers/terrestrial');
   const { restoreDepthSource } = await import('@cssearth/bake/prepared-presentation');
   const { prepareEclipticPresentationFrame } = await import('@cssearth/bake/objects/scene');
-  const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
+  const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json'));
   const scene = parseSolidReplayScene(await read('prepared/scene.json')),
     definition = restoreDepthSource(requireObjectRuntimeDefinition(await read('prepared/runtime.json')));
@@ -159,7 +159,7 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
 test('epoch refresh restores a compiled surface before updating its physical frame', async () => {
   const { refreshSolidSceneEpoch } = await import('@cssearth/bake/objects/layers/terrestrial');
   const { restoreDepthSource } = await import('@cssearth/bake/prepared-presentation');
-  const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
+  const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json')),
     scene = parseSolidReplayScene(await read('prepared/scene.json'));
   const definition = requireObjectRuntimeDefinition(await read('prepared/runtime.json'));
@@ -177,7 +177,7 @@ test('epoch refresh restores a compiled surface before updating its physical fra
 test('published scene and standalone sky/light documents follow the runtime after a position refresh', async () => {
   let embeddedSkyCopies = 0, embeddedSunCopies = 0;
   for (const id of ['jupiter', 'saturn', 'moon', 'pluto', 'triton', 'mimas', 'phobos']) {
-    const base = new URL(`../../src/objects/${id}/prepared/`, import.meta.url);
+    const base = new URL(`../../../src/objects/${id}/prepared/`, import.meta.url);
     const read = async (name: string) => requireRecord(JSON.parse(await readFile(new URL(name, base), 'utf8')));
     const runtime = await read('runtime.json'), scene = await read('scene.json');
     const sky = requireRecord(runtime.sky), sun = requireRecord(runtime.sun);

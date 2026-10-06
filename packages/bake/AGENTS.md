@@ -104,7 +104,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
 - `src/astronomy/` is published as `@cssearth/bake/astronomy` (Node only): preparation's access to the built astronomy
   package (`loadAstronomyPackage`), which finds the build through this package's own name so the path holds from `dist/`.
   It imports no topic. `packages/bake/cli/prepare-solar-geometry.mts` generates `src/platform/solar-geometry.mts` from it;
-  its test is `src/platform/solar-geometry.test.mts`.
+  its test is `packages/bake/cli/prepare-solar-geometry.test.mts`.
 - `src/navigation/` is published as `@cssearth/bake/navigation` (Node only): the navigation distances
   the catalogue and search destinations are built with, and the marker recipes whose source bytes are checked and drawn
   into navigation marker sprites, and the navigation preparation (`prepare-navigation.ts`, with the Sun, black-hole,

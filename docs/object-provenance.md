@@ -128,7 +128,7 @@ pnpm test:site
 ```
 This is the broad native suite. For a focused change, select the relevant tests
 under `packages/objects/src/provenance/`, `packages/bake/src/objects/lineage/body-lineage.test.mts`,
-`site/journeys/context-lineage.test.mts`, `src/sources/factsheet-sources.test.mts` and the affected preparer.
+`site/journeys/context-lineage.test.mts`, `packages/bake/src/sources/factsheet-sources.test.mts` and the affected preparer.
 Report source-dependent skips separately. A pass does not replace independent
 scientific qualification.
 

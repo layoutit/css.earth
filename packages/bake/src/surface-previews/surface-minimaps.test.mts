@@ -6,7 +6,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { prepareSurfaceMinimaps } from '@cssearth/bake/surface-previews';
 import sharp from 'sharp';
-import * as solarGeometry from './solar-geometry.mts';
+import * as solarGeometry from '../../../../src/platform/solar-geometry.mts';
 
 test('prepared surface provenance does not replace its map image path', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'prepared-minimap-test-'));
