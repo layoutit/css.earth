@@ -48,8 +48,9 @@ async function stars(root: string, ids: readonly string[]): Promise<Star[]> { co
     out.push({ id, path, record, raDegrees: place.rightAscensionDegrees, decDegrees: place.declinationDegrees, j2000: { raDegrees: place.rightAscensionDegrees - motion('properMotionRaMasPerYear') / Math.cos(dec2000 * Math.PI / 180), decDegrees: dec2000 }, ...(gaiaDr3 ? { identifier: `Gaia DR3 ${gaiaDr3}`, gaiaDr3 } : hipparcos ? { identifier: `HIP ${hipparcos}` } : {}), measuredAxis: isRecord(rotation) && !isConventionOnly(rotation) }); }
   return out; }
 
-const SIMBAD_COLUMNS = 'b.main_id, b.ra, b.dec, b.sp_type, b.sp_bibcode, r.vsini, r.bibcode AS vsini_bibcode', ROTATION = 'LEFT JOIN mesRot AS r ON r.oidref = b.oid AND r.mespos = 1';
+const SIMBAD_COLUMNS = 'b.main_id, b.ra, b.dec, b.sp_type, b.sp_bibcode, b.otype, o.description AS otype_description, o.path AS otype_path, r.vsini, r.bibcode AS vsini_bibcode', ROTATION = 'LEFT JOIN mesRot AS r ON r.oidref = b.oid AND r.mespos = 1 LEFT JOIN otypedef AS o ON o.otype = b.otype';
 const simbadRow = (row: Readonly<Record<string, string>>): SimbadRow => ({ name: row.main_id ?? '', ...(row.sp_type ? { spectralType: { value: row.sp_type, ...(row.sp_bibcode ? { bibcode: row.sp_bibcode } : {}) } } : {}),
+  ...(row.otype && row.otype_description && row.otype_path ? { objectType: { code: row.otype, description: row.otype_description, path: row.otype_path } } : {}),
   ...(Number(row.vsini) > 0 ? { vsiniKmS: { value: Number(row.vsini), ...(row.vsini_bibcode ? { bibcode: row.vsini_bibcode } : {}) } } : {}) });
 
 /** SIMBAD's row for each star that has one, by star id. */

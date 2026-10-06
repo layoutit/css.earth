@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { besideCatalogued, parseLightCurve, rotationVerdict, SKY_TERMS, withinBreakup } from './photometry.mts';
+import { besideCatalogued, notTurning, parseLightCurve, rotationVerdict, SKY_TERMS, withinBreakup } from './photometry.mts';
 
 const peak = { periodDays: 3.88, power: 0.85, amplitude: 0.031 };
 const printed = { frames: 3600, aperturePixels: 21, saturated: false, spanDays: 26.6, scatter: 0.011, whole: peak, halves: [{ ...peak, periodDays: 3.76 }, null], time: [1, 2, 3], flux: [1.01, 0.99, 1] };
@@ -47,4 +47,12 @@ test('a period shorter than an orbit at the star\'s surface is not its rotation'
   // AU Mic, a dwarf: 4.85 d against 0.12 d.
   assert.deepEqual(withinBreakup({ detected: true, periodDays: 4.85, amplitude: 0.085 }, 0.1163), { detected: true, periodDays: 4.85, amplitude: 0.085 });
   assert.deepEqual(withinBreakup(seen, undefined), seen);
+});
+
+test('a star SIMBAD files as eclipsing or pulsating is not read for a rotation', () => {
+  assert.match(notTurning('Eclipsing Binary', '* > ** > EB*')!, /SIMBAD lists the star as Eclipsing Binary/u);
+  assert.match(notTurning('Classical Cepheid Variable', '* > Ev* > Ce* > cC*')!, /Classical Cepheid/u); assert.match(notTurning('gamma Dor Variable', '* > MS* > gD*')!, /gamma Dor/u);
+  // Spotted stars, young stars and plain stars are read.
+  for (const path of ['* > ** > BY*', '* > ** > RS*', '* > V* > Ro*', '* > Y*O > TT*', '* > V* > Er*', '* > PM*', '*']) assert.equal(notTurning('x', path), undefined);
+  assert.equal(notTurning(undefined, undefined), undefined);
 });

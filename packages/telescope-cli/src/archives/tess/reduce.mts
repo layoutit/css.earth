@@ -23,7 +23,7 @@ import { isRecord } from '@cssearth/core';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { ASSUMED_TILT_DEGREES, brightnessMap, brightnessTable } from './map.mts';
 import { GAIA_EPOCH_YEAR, lightRefusal, pixelLight, type PixelLight } from './neighbours.mts';
-import { besideCatalogued, BIN_DAYS, rotationVerdict, sectorLightCurve, withinBreakup, type RotationVerdict } from './photometry.mts';
+import { besideCatalogued, BIN_DAYS, notTurning, rotationVerdict, sectorLightCurve, withinBreakup, type RotationVerdict } from './photometry.mts';
 import { cadenceMinutes, fetchCutout, sectorsAt, type ImagedSector } from './pixels.mts';
 import { toolchainPins } from './toolchain.mts';
 
@@ -34,7 +34,7 @@ export const receiptPath = (id: string) => resolve(WORKSPACE, 'output/tess', id,
 export type TiltFrom = 'page' | 'record' | 'assumed';
 /** A star's place at `epochYear` and how it moves on the sky, degrees a year (the motion in right ascension as an arc on the sky). */
 export interface StarPlace { readonly id: string; readonly name: string; readonly raDegrees: number; readonly decDegrees: number; readonly epochYear: number; readonly motionRaDegreesPerYear: number; readonly motionDecDegreesPerYear: number;
-  /** The rotation period the star's record holds from the catalogues. */ readonly cataloguedPeriodDays?: number; /** The period of an orbit at the star's surface, from its recorded radius and mass: it cannot turn faster. */ readonly fastestTurnDays?: number; readonly tiltDegrees?: number; readonly tiltSource?: string; readonly tiltFrom: TiltFrom }
+  /** The rotation period the star's record holds from the catalogues. */ readonly cataloguedPeriodDays?: number; /** The period of an orbit at the star's surface, from its recorded radius and mass: it cannot turn faster. */ readonly fastestTurnDays?: number; /** Why SIMBAD's type of the star rules out reading a rotation in its light, when it does. */ readonly otherLight?: string; readonly tiltDegrees?: number; readonly tiltSource?: string; readonly tiltFrom: TiltFrom }
 /** Where the star is in a given year. A nearby star crosses a TESS pixel in a few years. */
 export function placeAt(star: Pick<StarPlace, 'raDegrees' | 'decDegrees' | 'epochYear' | 'motionRaDegreesPerYear' | 'motionDecDegreesPerYear'>, year: number): { readonly raDegrees: number; readonly decDegrees: number } {
   const years = year - star.epochYear, dec = star.decDegrees + star.motionDecDegreesPerYear * years;
@@ -65,6 +65,7 @@ export async function starPlace(id: string): Promise<StarPlace | undefined> {
     : isRecord(record) && typeof record.spinInclinationDegrees === 'number' ? { tiltDegrees: record.spinInclinationDegrees, tiltSource: `src/objects/${id}/source/measurements.json, spinInclinationDegrees`, tiltFrom: 'record' as const } : { tiltFrom: 'assumed' as const };
   return { id, name: isRecord(body.physical) && typeof body.physical.name === 'string' ? body.physical.name : id, raDegrees: star.rightAscensionDegrees as number, decDegrees: star.declinationDegrees as number, epochYear: typeof star.positionEpochJulianYear === 'number' ? star.positionEpochJulianYear : 2000,
     motionRaDegreesPerYear: motion('properMotionRaMasPerYear'), motionDecDegreesPerYear: motion('properMotionDecMasPerYear'), ...(isRecord(record) && typeof record.rotationPeriodDays === 'number' && record.rotationPeriodDays > 0 ? { cataloguedPeriodDays: record.rotationPeriodDays } : {}),
+    ...(() => { const other = isRecord(record) ? notTurning(typeof record.objectType === 'string' ? record.objectType : undefined, typeof record.objectTypePath === 'string' ? record.objectTypePath : undefined) : undefined; return other ? { otherLight: other } : {}; })(),
     ...(isRecord(body.physical) && typeof body.physical.meanRadiusKm === 'number' && typeof body.physical.gravitationalParameterKm3PerS2 === 'number' && body.physical.gravitationalParameterKm3PerS2 > 0 ? { fastestTurnDays: Number((2 * Math.PI * Math.sqrt(body.physical.meanRadiusKm ** 3 / body.physical.gravitationalParameterKm3PerS2) / 86400).toFixed(4)) } : {}), ...tilt };
 }
 
@@ -77,7 +78,7 @@ export const lightOf = (stars: readonly StarPlace[], keep = false) => pixelLight
 export async function reduceStar(id: string, keepPixels = false, light?: PixelLight | null): Promise<Record<string, unknown>> {
   const star = await starPlace(id); if (!star) throw new Error(`${id} is not a star with a place on the sky.`);
   const run = resolve(WORKSPACE, 'output/tess', id), pixels = resolve(run, 'pixels'), pins = await toolchainPins(); await mkdir(run, { recursive: true });
-  const own = light === undefined ? (await lightOf([star])).get(id) : light ?? undefined, refusal = lightRefusal(own), tried: Record<string, unknown>[] = [], stem = (sector: number) => `${id}-s${String(sector).padStart(4, '0')}`;
+  const own = light === undefined ? (await lightOf([star])).get(id) : light ?? undefined, refusal = star.otherLight ?? lightRefusal(own), tried: Record<string, unknown>[] = [], stem = (sector: number) => `${id}-s${String(sector).padStart(4, '0')}`;
   const sectors = refusal ? [] : await sectorsAt(...Object.values(placeAt(star, MISSION_YEAR)) as [number, number]), picked = pickSector(sectors), newest = sectors.at(-1);
   let rotation: RotationVerdict = { detected: false, reason: refusal ?? 'TESS has not imaged this place.' }, seen: { sector: number; time: readonly number[]; flux: readonly number[] } | undefined;
   // A sector in which no pixel stands above the sky at the star (the star at a detector's edge, a frame full of scattered

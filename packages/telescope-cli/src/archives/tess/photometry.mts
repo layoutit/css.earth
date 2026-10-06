@@ -52,6 +52,15 @@ export function besideCatalogued(verdict: RotationVerdict, cataloguedDays: numbe
   return { detected: false, reason: `The light's period, ${verdict.periodDays} d, is neither the star's catalogued rotation period, ${cataloguedDays} d, nor its half.` };
 }
 
+/** SIMBAD types whose light changes for a reason that is not the star turning: one star eclipsing or distorting another,
+ * matter passing between two, and pulsation. Each names a branch of SIMBAD's tree of types (`otypedef.path`), which a
+ * star's record holds as `objectTypePath` (new-object/metadata). SIMBAD files pulsators by what kind of star they are, so
+ * the branches are several. */
+export const NOT_TURNING = ['EB*', 'El*', 'CV*', 'XB*', 'Sy*', 'Pu*', 'RR*', 'Ce*', 'WV*', 'RV*', 'dS*', 'gD*', 'bC*', 'SX*', 'LP*'] as const;
+/** Why a star of this type is not looked at for a rotation, when it is not. */
+export const notTurning = (objectType: string | undefined, objectTypePath: string | undefined): string | undefined => objectTypePath !== undefined && NOT_TURNING.some(root => objectTypePath.split(' > ').includes(root))
+  ? `SIMBAD lists the star as ${objectType ?? objectTypePath}: its light changes for that reason, and a period in it would not be its turning.` : undefined;
+
 /** A verdict set beside the fastest the star could turn: the period of an orbit at its surface, from its recorded radius and
  * mass. A star turning faster would fly apart, so a shorter period in its light is something else: a pulsation, a close
  * pair, or another star's light. */

@@ -7,6 +7,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireRecord } from '@cssearth/core';
+import { notTurning } from '../../archives/tess/photometry.mts';
 import { receiptPath, ROTATION_SCHEMA } from '../../archives/tess/reduce.mts';
 import { readJson, type MapRoute, type RouteContext } from '../maps/route.mts';
 import type { SurfaceMapChoice } from '../maps/surface-maps.mts';
@@ -75,6 +76,10 @@ export async function draftsFromReducedPixels(names: readonly string[], context:
   for (const host of hosts) { const receipt: unknown = await readFile(receiptPath(host), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
     if (!isRecord(receipt) || receipt.schema !== ROTATION_SCHEMA) { if (!all) report.push(`  ${host}: not drafted: not reduced (${reduce(host)})`); continue; }
     if (!isRecord(receipt.map) || typeof receipt.map.sector !== 'number') { unseen += 1; if (!all) report.push(`  ${host}: not drafted: ${isRecord(receipt.rotation) && typeof receipt.rotation.reason === 'string' ? receipt.rotation.reason : 'its rotation is not seen'}`); continue; }
+    // A star reduced before its record held SIMBAD's type, and now known to change its light for another reason, is left out too.
+    const record: unknown = await readFile(resolve(context.root, 'src/objects', host, 'source/measurements.json'), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
+    const other = isRecord(record) ? notTurning(typeof record.objectType === 'string' ? record.objectType : undefined, typeof record.objectTypePath === 'string' ? record.objectTypePath : undefined) : undefined;
+    if (other) { unseen += 1; report.push(`  ${host}: not drafted: ${other}`); continue; }
     const choice = brightnessChoice(host, receipt.map.sector); brightnessMaps.push({ host, maps: [choice] }); if (!all) report.push(`  ${host}: ${choice.label} (${choice.program})`); }
   if (all) report.push(`  ${brightnessMaps.length} stars with a map; ${unseen} reduced stars whose rotation is not seen.`);
   return { stars: [], brightnessMaps, report };

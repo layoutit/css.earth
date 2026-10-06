@@ -26,7 +26,7 @@ export const PSCOMPPARS_COLUMNS = 'hostname,gaia_dr3_id,ra,dec,st_spectype,st_sp
 export const PSCOMPPARS_QUERY = `select distinct ${PSCOMPPARS_COLUMNS} from pscomppars`;
 /** The fields this pass owns in a measurements record, each with the field that holds its source, named as the record
  * names its others (radiusKm and radiusSource). A field a catalogue no longer gives is removed with its source. */
-export const METADATA_FIELDS = { spectralType: 'spectralTypeSource', metallicityDex: 'metallicitySource', luminosityLogSolar: 'luminositySource', ageGyr: 'ageSource',
+export const METADATA_FIELDS = { spectralType: 'spectralTypeSource', objectType: 'objectTypeSource', objectTypePath: 'objectTypeSource', metallicityDex: 'metallicitySource', luminosityLogSolar: 'luminositySource', ageGyr: 'ageSource',
   rotationPeriodDays: 'rotationPeriodSource', projectedRotationSpeedKmS: 'projectedRotationSpeedSource', spinInclinationDegrees: 'spinInclinationSource' } as const;
 /** The list this pass also owns: every catalogued rotation period, adopted or not. */
 export const CATALOGUED_PERIODS = 'rotationPeriodsCatalogued';
@@ -58,7 +58,8 @@ export interface HostRow { readonly host: string; readonly gaiaDr3?: string; rea
 export interface GaiaRow { readonly sourceId: string; readonly flags: string; readonly luminositySolar?: readonly [number, number, number]; readonly ageGyr?: readonly [number, number, number] }
 export const GAIA_FLAME_COLUMNS = 'source_id,flags_flame,lum_flame,lum_flame_lower,lum_flame_upper,age_flame,age_flame_lower,age_flame_upper';
 export const gaiaFlameQuery = (sourceIds: readonly string[]) => `SELECT ${GAIA_FLAME_COLUMNS.split(',').join(', ')} FROM gaiadr3.astrophysical_parameters WHERE source_id IN (${sourceIds.join(', ')})`;
-export interface SimbadRow { readonly name: string; readonly spectralType?: { readonly value: string; readonly bibcode?: string }; readonly vsiniKmS?: { readonly value: number; readonly bibcode?: string } }
+export interface SimbadRow { readonly name: string; readonly spectralType?: { readonly value: string; readonly bibcode?: string }; readonly vsiniKmS?: { readonly value: number; readonly bibcode?: string };
+  /** SIMBAD's main type of the object: its code, what it stands for, and where it hangs in SIMBAD's tree of types. */ readonly objectType?: { readonly code: string; readonly description: string; readonly path: string } }
 
 const split = (line: string) => [...line.matchAll(/("(?:[^"]|"")*"|[^,]*)(?:,|$)/gu)].map(match => match[1]!.replace(/^"|"$/gu, '').replaceAll('""', '"'));
 /** The archive's reference cell: an HTML anchor around the paper's short name. */
@@ -105,6 +106,7 @@ export function starMetadata(star: { readonly radiusKm?: number; readonly measur
   const out: StarMetadata = {};
   if (host?.spectralType) { out.spectralType = host.spectralType.value; out.spectralTypeSource = archive(host, `spectral type ${host.spectralType.value}`, host.spectralType); }
   else if (catalogued?.spectralType) { out.spectralType = catalogued.spectralType.value; out.spectralTypeSource = simbad(catalogued, `spectral type ${catalogued.spectralType.value}`, catalogued.spectralType.bibcode); }
+  if (catalogued?.objectType) { out.objectType = catalogued.objectType.description; out.objectTypePath = catalogued.objectType.path; out.objectTypeSource = simbad(catalogued, `main object type ${catalogued.objectType.code}, ${catalogued.objectType.description}`); }
   if (host?.metallicity) { out.metallicityDex = trim(host.metallicity.value, 3); out.metallicitySource = archive(host, `${host.metallicity.ratio} ${host.metallicity.value} dex`, host.metallicity); }
   if (host?.luminosityLogSolar) { out.luminosityLogSolar = trim(host.luminosityLogSolar.value, 3); out.luminositySource = archive(host, `log10 of the luminosity in solar units ${host.luminosityLogSolar.value}`, host.luminosityLogSolar); }
   else if (gaia?.luminositySolar && (gaia.flags === '00' || gaia.flags === '10')) { const [value, lower, upper] = gaia.luminositySolar; out.luminosityLogSolar = trim(Math.log10(value), 3); out.luminositySource = flame(gaia, `lum_flame ${value} solar luminosities (16th to 84th percentiles ${lower} to ${upper}); its log10 is recorded`); }
