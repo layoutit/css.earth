@@ -122,8 +122,8 @@ test('WWT image export has separate image numbers and an explicit bounded level'
 });
 
 test('WWT FITS acquisition selects a named numeric imageset and one tile',()=>{
-  assert.deepEqual(parseCli(['wwt-fits','data/wwt/phat-fits.json','--set','PHAT-f475w','--level','0','--x','0','--y','0','--out','fits-out','--json']),
-    {command:'wwt-fits',catalog:resolve('data/wwt/phat-fits.json'),setName:'PHAT-f475w',level:0,x:0,y:0,directory:resolve('fits-out'),json:true,verbose:false});
+  assert.deepEqual(parseCli(['wwt-fits','src/sources/wwt/phat-fits.json','--set','PHAT-f475w','--level','0','--x','0','--y','0','--out','fits-out','--json']),
+    {command:'wwt-fits',catalog:resolve('src/sources/wwt/phat-fits.json'),setName:'PHAT-f475w',level:0,x:0,y:0,directory:resolve('fits-out'),json:true,verbose:false});
   for(const args of [['wwt-fits','catalog.json','--set','Science','--level','0','--x','0','--out','fits-out'],
     ['wwt-fits','catalog.json','--set','Science','--level','-1','--x','0','--y','0','--out','fits-out'],
     ['wwt-fits','catalog.json','--set','Science','--level','0','--x','0','--y','0','--out','fits-out','--x','1']])assert.throws(()=>parseCli(args));

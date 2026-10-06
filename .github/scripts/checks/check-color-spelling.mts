@@ -16,7 +16,7 @@ const KEPT = new RegExp(`https?://[^\\s"'<>)\\]]+|Colo${'u'}rs & filters|Colo${'
 const THIRD_PARTY = new Set([
   'README.md',
   'pnpm-lock.yaml',
-  'data/wwt/core-imagesets.jsonl',
+  'src/sources/wwt/core-imagesets.jsonl',
   'packages/telescope-cli/src/fixtures/telescope-papers/article.html',
   'packages/telescope-cli/src/fixtures/telescope-stars/served-m51.json',
   'labs/nebula/models/lmc/candidates/source/wise-registration/validate-image-registration.pinned.py',

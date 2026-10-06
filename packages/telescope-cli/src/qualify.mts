@@ -130,7 +130,7 @@ async function qualifyPdsProduct(root: string, request: QualificationRequest): P
   const result = await qualifyPdsArchiveProduct({ id: programId, target: answer.target, targetLid: configuration.targetLid, targetName: configuration.targetName,
     lidvid: configuration.lidvid, telescope: request.telescope, archiveTelescope: observation.observatory, mode: request.mode, instrument: observation.instrument, kind: 'image',
     use: observation.use, ...(observation.units ? { units: observation.units } : {}) }, resolve(root, 'output/pds', programId));
-  await writeFile(resolve(root, 'data/pds/ledger.json'), `${JSON.stringify(await buildPdsLedger(), null, 2)}\n`);
+  await writeFile(resolve(root, 'src/sources/pds/ledger.json'), `${JSON.stringify(await buildPdsLedger(), null, 2)}\n`);
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
     program: programId, configuration, product: result.productPath, receipt: result.recordPath, archiveProgramme: configuration.lidvid };
 }

@@ -72,7 +72,7 @@ const bodyMap = (telescope: string, instrument: string, id: string) => ({ schema
     angularResolution: { majorArcsec: 0.05, minorArcsec: 0.05, basis: 'fitted point spread function' } }] });
 
 const inputs = (ledgers: readonly { telescope: string; value: unknown }[], rest: Partial<QueryInputs> = {}): QueryInputs =>
-  ({ ledgers: ledgers.map(entry => ({ ...entry, path: `data/${entry.telescope}/ledger.json` })), capabilities: CAPABILITIES,
+  ({ ledgers: ledgers.map(entry => ({ ...entry, path: `src/sources/${entry.telescope}/ledger.json` })), capabilities: CAPABILITIES,
     targetCatalogue: ['europa', 'hd-181327', 'ceres', 'vesta', 'jupiter', 'itokawa', 'io', 'flora', 'm42', 'bennu', 'comet-1p', 'comet-81p', 'nix', 'hydra'].map(id => ({ id, name: id === 'bennu' ? 'Bennu' : id, aliases: [] })),
     targetAssociations: [], bodyMaps: [], ...rest });
 const candidate = (answer: CapabilityAnswer, mode: string): Candidate => {
@@ -131,7 +131,7 @@ test('an unsearched target is an incomplete index, while an explicit empty searc
   assert.equal(skipped.endpoint.status, 'index-incomplete');
   assert.equal(skipped.endpoint.coverage, 'incomplete');
   assert.deepEqual(skipped.endpoint.blockerCodes, ['target-index-unavailable']);
-  assert.deepEqual(skipped.targetCoverage, [{ telescope: 'spitzer', ledger: 'data/spitzer/ledger.json', state: 'not-searched', reason: 'moving-target identifier unavailable' }]);
+  assert.deepEqual(skipped.targetCoverage, [{ telescope: 'spitzer', ledger: 'src/sources/spitzer/ledger.json', state: 'not-searched', reason: 'moving-target identifier unavailable' }]);
   assert.deepEqual(skipped.withoutTheTarget, []);
   const unsearched = queryCapabilities({ ...skipped.request }, inputs([{ telescope: 'spitzer', value: { ...base, notAsked: [] } }]));
   assert.equal(unsearched.endpoint.status, 'index-incomplete');
@@ -199,7 +199,7 @@ test('a cited target-in-field association exposes exact observations without cha
   assert.deepEqual(acs.programmes, ['10427']);
   assert.equal(acs.toolkitSupport.level, 'tool-without-checked-program');
   assert.deepEqual(acs.selectionAssessment.blockers.map(blocker => blocker.code), ['target-program-unqualified']);
-  assert.deepEqual(acs.evidence.targetAssociations, [{ source: 'data/telescopes/target-associations.json', archive: 'mast', collection: 'HST', archiveTarget: 'PLUTO', programme: '10427',
+  assert.deepEqual(acs.evidence.targetAssociations, [{ source: 'src/sources/telescopes/target-associations.json', archive: 'mast', collection: 'HST', archiveTarget: 'PLUTO', programme: '10427',
     astroquery: '0.4.11', queriedAt: '2026-09-19T12:00:00.000Z',
     citation: 'https://example.test/paper', locator: 'table 1', establishes: 'Nix is measured in both Pluto pointings.' }]);
   assert.match(formatAnswer(answer), /MAST HST via Astroquery 0\.4\.11.*archive target PLUTO, programme 10427/u);

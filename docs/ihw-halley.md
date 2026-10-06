@@ -7,7 +7,7 @@ scope and status. The PDS warns that these legacy holdings can contain old FITS 
 actually says and does not normalize the pixels into a new scientific product.
 
 [`archive-ledger.mts`](../packages/telescope-cli/src/archives/ihw/archive-ledger.mts) parses the complete fixed-width `FILELIST.TAB`. The committed
-[ledger](../data/ihw/ledger.json) retains every product id, archive observation id, observation time, filter, exposure, airmass,
+[ledger](../src/sources/ihw/ledger.json) retains every product id, archive observation id, observation time, filter, exposure, airmass,
 quality description, observatory, telescope, detector, units and pixel sampling. The index's exact bytes are pinned. Filter
 names are not converted into wavelength ranges because this dataset does not supply one response curve shared by the whole
 collection.

@@ -105,7 +105,7 @@ well as a descriptor directly. It verifies the artifact closure and saves the de
 Compatibility is not scientific fulfillment.
 WWT FITS reads one original numeric tile from a pinned WTML collection snapshot. It preserves the
 source FITS bytes, extracts an image and sample table through Astropy, and records the exact tile
-URL and hashes. Use data/wwt/phat-fits.json for WWT's PHAT f475w/f814w collection. Missing unit,
+URL and hashes. Use src/sources/wwt/phat-fits.json for WWT's PHAT f475w/f814w collection. Missing unit,
 uncertainty, celestial WCS or original untiled identity stay unresolved; WTML placement is separate.
 Family-run executes one operation from a verified product descriptor through the static owner allowlist.
 Its params file is optional only when that operation has no required parameters. The output directory

@@ -10,7 +10,7 @@
  * reproduction receipt or an author's deposit to compare with. A target is matched to a shipped object by name, or, for a
  * target that does not move, by lying within the object's radius on the sky; a moving target's name is also read by its first
  * word (TITAN-LEADING is Titan), and a background or offset pointing is never an object. --write replaces
- * data/jwst/ledger.json and docs/jwst-ledger.md; --local rewrites only the repository-derived part of both, from the ledger
+ * src/sources/jwst/ledger.json and docs/jwst-ledger.md; --local rewrites only the repository-derived part of both, from the ledger
  * already on disk, because pinning a program or writing a receipt changes nothing the archive said; --targets writes every
  * target of every mode, which is too long to keep. */
 import { sampleAgreement } from './sample-agreement.mts';
@@ -277,7 +277,7 @@ export function jwstLedgerGuide(ledger: Ledger): string {
     !Object.keys(object.timeSeriesVisits).some(exposure => ledger.timeSeries.find(entry => entry.exposure === exposure)!.checked.length));
   return `# JWST ledger
 
-This page is written by [\`archive-ledger.mts\`](../packages/telescope-cli/src/archives/jwst/archive-ledger.mts) from MAST's public archive as it stood on ${ledger.archiveDate}, and from the programs pinned in this repository. It answers two questions: what kinds of JWST observation can this project already turn into something drawn, and which of the objects it ships has JWST observed. The numbers are in [\`data/jwst/ledger.json\`](../data/jwst/ledger.json). How each route works is in [JWST imaging](jwst-imaging.md) and [eclipse mapping](eclipse-mapping.md).
+This page is written by [\`archive-ledger.mts\`](../packages/telescope-cli/src/archives/jwst/archive-ledger.mts) from MAST's public archive as it stood on ${ledger.archiveDate}, and from the programs pinned in this repository. It answers two questions: what kinds of JWST observation can this project already turn into something drawn, and which of the objects it ships has JWST observed. The numbers are in [\`src/sources/jwst/ledger.json\`](../src/sources/jwst/ledger.json). How each route works is in [JWST imaging](jwst-imaging.md) and [eclipse mapping](eclipse-mapping.md).
 
 ## Observing modes
 
@@ -342,7 +342,7 @@ async function surveyMast(args: readonly string[]): Promise<Ledger> {
  * what is pinned, checked and drawn, and ends the process when it has reported. Its parse rebuilds each object's keys in
  * their parse order, so a local pass puts `timeSeriesVisits` before `records` where a full pass wrote them after. */
 export const JWST_LEDGER: ArchiveLedger<Ledger> = {
-  schema: 'cssearth-jwst-ledger@2',   files: ledgerFiles('data/jwst/ledger.json', 'docs/jwst-ledger.md'), indent: 1, guide: jwstLedgerGuide,
+  schema: 'cssearth-jwst-ledger@2',   files: ledgerFiles('src/sources/jwst/ledger.json', 'docs/jwst-ledger.md'), indent: 1, guide: jwstLedgerGuide,
   survey: surveyMast, writes: 'with --write',
   local: { parse: parseJwstLedger, writes: 'always', exit: true, refresh: async previous => withRepositoryState(previous, await repositoryState()) },
   receiptProblems: ledger => ledger.receiptProblems,

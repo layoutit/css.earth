@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
 
 export const INVESTIGATION_SURVEY_SCHEMA = 'cssearth-investigation-survey@1';
-export const INVESTIGATION_SURVEY_DIRECTORY = 'data/investigations';
+export const INVESTIGATION_SURVEY_DIRECTORY = 'src/sources/investigations';
 
 export interface InvestigationSurvey {
   schema: typeof INVESTIGATION_SURVEY_SCHEMA;

@@ -111,7 +111,7 @@ export function matchWwtImagery(catalog: WwtCatalog, target: TargetCatalogueEntr
 
 export async function loadWwtImagery(root: string, target: TargetCatalogueEntry): Promise<WwtImageryResult> {
   try {
-    const contents = await readFile(resolve(root, 'data/wwt/core-imagesets.jsonl'), 'utf8');
+    const contents = await readFile(resolve(root, 'src/sources/wwt/core-imagesets.jsonl'), 'utf8');
     return matchWwtImagery(parseWwtCatalogLines(contents), target);
   } catch (error) {
     const reason = hasErrorCode(error, 'ENOENT') ? 'The pinned WWT catalog index is missing from this science checkout.'

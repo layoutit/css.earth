@@ -83,7 +83,7 @@ route, dataset or frame examined, including trials that failed. Each entry has a
 optional notes. Git holds its history; entries carry no commits or check dates.
 A facility keeps the same notebook in `src/facilities/<facility id>/investigations.json`,
 with `facilityId` in place of `objectId`. Reasoning many bodies share can live once
-under `data/investigations` and be named in an entry's `survey`.
+under `src/sources/investigations` and be named in an entry's `survey`.
 
 `node packages/bake/cli/report-investigations.mts` lists open entries across objects
 (`--summary`, `--facilities`, `--classification`, `--status`, `--search`, `--json`);
