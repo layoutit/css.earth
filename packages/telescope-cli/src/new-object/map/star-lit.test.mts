@@ -25,7 +25,8 @@ test('a hosted planet whose datasets are maps moves to the lit lane, once', () =
   assert.deepEqual(starLight(files, 'x-b', true), { retired: 'src/renderers/css/styles/x-b-surfaces.css' });
   const raster = read(files, 'source/preparation/raster.json'), descriptor = read(files, 'object.json').properties;
   assert.equal(raster.emission, undefined);
-  assert.deepEqual([raster.lighting.bank, raster.lighting.metadata.schema], ['sphere', 'cssx-b-prepared-lighting@1']);
+  assert.deepEqual(Object.keys(raster.lighting), ['bank', 'presentationSize', 'metadata']);
+  assert.deepEqual([raster.lighting.bank, raster.lighting.presentationSize, Object.keys(raster.lighting.metadata)], ['sphere', 460, ['sourceRadius', 'limbMeaning']]);
   assert.deepEqual(descriptor.recipe.materials, [{ id: 'lighting', source: 'raster', model: 'lit' }]);
   assert.equal(descriptor.recipe.emission, undefined);
   assert.deepEqual(descriptor.recipe.surfaces[0].datasets.map((dataset: { material: string }) => dataset.material), ['lighting', 'lighting']);

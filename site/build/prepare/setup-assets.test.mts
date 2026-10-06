@@ -36,6 +36,30 @@ test("setup installs pinned files, reuses them offline, and repairs a corrupt fi
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
+test("bytes several bodies publish are fetched once, and each body still gets its file", async () => {
+  const root = await mkdtemp(join(tmpdir(), "cssearth-setup-"));
+  const bytes = Buffer.from("shared lighting sheet"), sha256 = createHash("sha256").update(bytes).digest("hex");
+  const asset = (id: string) => ({ id, key: `${id}/lighting-sheet.webp`, location: "public" as const, filename: "lighting-sheet.webp",
+    file: join(root, id, "lighting-sheet.webp"), url: `https://example.invalid/${sha256}/lighting-sheet.webp`, bytes: bytes.length, sha256 });
+  const bodies = ["ariel", "titan", "miranda", "eris"].map(asset);
+  try {
+    let requests = 0;
+    const fetcher = async () => { requests++; return new Response(bytes); };
+    assert.deepEqual(await installRuntimeAssets(bodies, { fetcher, concurrency: 4 }), { installed: 4, reused: 0, skipped: 0 });
+    assert.equal(requests, 1);
+    for (const body of bodies) assert.deepEqual(await readFile(body.file), bytes);
+    // A body that lost its file takes it from one that holds it, without the network.
+    await rm(bodies[2]!.file);
+    assert.deepEqual(await installRuntimeAssets(bodies, { fetcher: async () => { throw new Error("Expected a local copy"); } }), { installed: 1, reused: 3, skipped: 0 });
+    // When the first fetch fails, the others still ask for themselves and each failure is named.
+    await Promise.all(bodies.map(body => rm(body.file)));
+    let attempts = 0;
+    await assert.rejects(installRuntimeAssets(bodies, { fetcher: async () => { attempts++; return new Response("gone", { status: 404 }); }, concurrency: 4 }),
+      /4 of 4 prepared files could not be installed/);
+    assert.equal(attempts, 4);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
+
 test("setup reports every unavailable file instead of stopping at the first", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-setup-"));
   const asset = (name: string) => ({ id: "sun", key: `sun/${name}`, location: "public" as const, filename: name, file: join(root, name),

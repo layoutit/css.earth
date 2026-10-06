@@ -10,13 +10,13 @@ import { mercuryPhaseMapping, venusPhaseMapping } from "./prepared-material-fixt
 
 const view = (z: number) => ({ sunViewDirection: [Math.sqrt(1 - z * z), 0, z], sceneMatrix: "moved",
   reference: { sceneMatrix: "initial", sunViewDirection: [0, 0, 1] } });
-const address = (frame: number, resource: string | null) => ({ resource, frame, row: Math.floor(frame / 8),
-  backgroundPosition: "0px 0px", backgroundSize: "3680px 460px", prewarm: ["next"] });
-const track: PreparedMaterialTrack = { id: "lighting", target: 0, defaultFrame: 230, frame: mercuryPhaseMapping, farBank: "billboard",
-  banks: [{ id: "rows", frames: Array.from({ length: 256 }, (_, frame) => address(frame, `row:${Math.floor(frame / 8)}`)),
-    fixed: address(255, "shadowless"), default: address(230, "initial") },
-  { id: "billboard", frames: Array.from({ length: 256 }, (_, frame) => address(frame, "billboard")), fixed: address(255, "billboard") }] };
-const selected: PreparedMaterialSelection = { track: "lighting", bank: "rows", mode: "frames", enabled: true, rotationEnabled: true, fixedMode: "shadowless" };
+const address = (frame: number, resource: string | null) => ({ resource, frame, row: null,
+  backgroundPosition: "-7.1875px -7.1875px", backgroundSize: "7590px 3795px", prewarm: [] });
+// One sheet holds every frame; the flood-lit frame a body shows with shadows off is a file of its own.
+const track: PreparedMaterialTrack = { id: "lighting", target: 0, defaultFrame: 127, frame: mercuryPhaseMapping,
+  banks: [{ id: "sheet", frames: Array.from({ length: 128 }, (_, frame) => address(frame, "lighting")),
+    fixed: address(127, "shadowless"), default: address(127, "initial") }] };
+const selected: PreparedMaterialSelection = { track: "lighting", bank: "sheet", mode: "frames", enabled: true, rotationEnabled: true, fixedMode: "shadowless" };
 
 test("Mercury and Venus preserve their actual prepared phase thresholds across camera roll", () => {
   for (const mapping of [mercuryPhaseMapping, venusPhaseMapping]) {
@@ -36,11 +36,13 @@ test("Mercury and Venus preserve their actual prepared phase thresholds across c
   }
 });
 
-test("material demand follows ready addresses, fixed shadows and the geometry-to-billboard bank", () => {
-  assert.deepEqual(resolvePreparedMaterialDemand(track, selected, view(-1)).required, ["row:0"]);
-  const fixed = { ...selected, mode: "fixed" as const, frameOverride: 255, rotationEnabled: false };
+test("material demand follows ready addresses and fixed shadows, and one sheet serves every distance", () => {
+  assert.deepEqual(resolvePreparedMaterialDemand(track, selected, view(-1)).required, ["lighting"]);
+  const fixed = { ...selected, mode: "fixed" as const, frameOverride: 127, rotationEnabled: false };
   assert.deepEqual(resolvePreparedMaterialDemand(track, fixed, view(-1)).required, ["shadowless"]);
-  assert.deepEqual(resolvePreparedMaterialDemand(track, selected, { ...view(-1), levelOfDetail: { stage: "billboard", silhouetteDiameter: 12, billboardOpacity: 1, markerOpacity: 0 } }).required, ["billboard"]);
+  const far = { ...view(-1), levelOfDetail: { stage: "billboard", silhouetteDiameter: 12, billboardOpacity: 1, markerOpacity: 0 } };
+  assert.deepEqual(resolvePreparedMaterialDemand(track, selected, far), resolvePreparedMaterialDemand(track, selected, view(-1)));
+  assert.deepEqual(resolvePreparedMaterialDemand(track, selected, view(1)).prewarm, []);
   const hidden = resolvePreparedMaterialDemand(track, { ...selected, enabled: false }, view(-1));
   assert.deepEqual(hidden.required, []);
   assert.deepEqual(hidden.prewarm, []);

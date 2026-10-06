@@ -129,12 +129,6 @@
     },
     {
       "location": "public",
-      "filename": "enceladus-lighting.webp",
-      "bytes": 954204,
-      "sha256": "09c31912cbad32cdae462761e680aee078091ee54704bb52311587cda2330c9a"
-    },
-    {
-      "location": "public",
       "filename": "enceladus-normal-poles@2x.webp",
       "bytes": 16856,
       "sha256": "609a597446b059ef564410543817e7977326c2e8f3d9b12c522173ce17f475f3"
@@ -150,6 +144,18 @@
       "filename": "enceladus-normal-thumbnail.webp",
       "bytes": 1722,
       "sha256": "a7fadfaa0174835105a0ed8fe0fbdb6b80457d78e4f8b3bbfdf43d4f5cb328db"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 84,
+      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-sheet.webp",
+      "bytes": 505512,
+      "sha256": "d856a42dd20ce06d1afd2cfd6344d3258423be857c6ba42f4b5ee7e1dbf6f1f8"
     },
     {
       "location": "prepared",
@@ -190,8 +196,8 @@
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 25729,
-      "sha256": "de8d5a7bc49c0ea19e569b85d9bde068ee300435e2126151f80b2afb23a94d82"
+      "bytes": 28739,
+      "sha256": "5d3e5286837a7574de655e173e3e681c4f02251f8a6d0f460198f5ac8df43e55"
     },
     {
       "location": "prepared",
@@ -238,8 +244,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 233915,
-      "sha256": "a7c30f0aa895a2508ec75cf9deacc11222f35521e80436dfde0d82857d57312a"
+      "bytes": 238051,
+      "sha256": "18d74a24314665ddd1cce29049248aa1f3a9f27c9490acf60f3075a9eb84d0f3"
     },
     {
       "location": "prepared",

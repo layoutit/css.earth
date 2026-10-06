@@ -1,110 +1,65 @@
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { existsSync } from 'node:fs';
 import { copyFile } from 'node:fs/promises';
-import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
 import { lightingFrame } from '../baking/index.ts';
-import { type LambertRasterConfig, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from '@cssearth/objects';
+import type { AuthoredSphereLaw, RasterRecipe, LightingRecipe } from '@cssearth/objects';
 import { limbSphereFrame, type Channels, type LimbLaw } from '../photometry/index.ts';
-import { raster, fileBytes, outputName } from './io.ts';
-import { LIGHTING_BANK_ROOT } from './lighting-banks.ts';
-/** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (`src/thread-pool/`). */
-export const LIGHTING_ENCODE_CONCURRENCY = Math.max(1, Math.min(8, availableParallelism()));
+import { raster, fileBytes } from './io.ts';
+import { LIGHTING_BANK_PRESENTATION_SIZE, LIGHTING_BANK_ROOT } from './lighting-banks.ts';
+import { LIGHTING_SHEET, lightingSheetAddress, lightingSheetLayout, lightingSheetViewZ, lightingShadowlessAddress, lightingShadowlessSize } from './lighting-sheet.ts';
 /** A body's published limb: its models and the overlay's reference color (packages/bake/src/photometry/limb.ts). */
 export interface PreparedLimb { readonly law: LimbLaw; readonly reference: Channels<number>; readonly referenceSource: string; readonly polarToEquatorial: number }
 
-/** One frame of the bank: the published limb law when the body has one, otherwise the shared bank's authored sphere law. */
-function frameFor(frameSize: number, frameIndex: number, recipe: LightingRecipe, limb: PreparedLimb | undefined) {
-    if (!limb) return lightingFrame(frameSize, frameIndex, recipe as LambertRasterConfig);
-    const z = recipe.minimumLightViewZ + (recipe.maximumLightViewZ - recipe.minimumLightViewZ) * frameIndex / (recipe.frameCount - 1);
-    return limbSphereFrame(frameSize, recipe.radiusScale, [Math.sqrt(Math.max(0, 1 - z * z)), 0, z], limb.law, limb.reference, limb.polarToEquatorial);
+/**
+ * One lighting frame, `size` pixels across with the overlay's box over its middle `box` pixels: the frame for the light's
+ * view z, or the flood-lit frame when it is null. The published limb law when the body has one, otherwise the bank's
+ * authored sphere law. A published law is flood-lit with the Sun behind the camera.
+ */
+function frameFor(size: number, box: number, lightViewZ: number | null, recipe: LightingRecipe, limb: PreparedLimb | undefined, radiusScale: number) {
+    const radius = box * radiusScale;
+    if (!limb) return lightingFrame({ size, radius }, lightViewZ, recipe as AuthoredSphereLaw);
+    const z = lightViewZ ?? 1;
+    return limbSphereFrame(size, radius / size, [Math.sqrt(Math.max(0, 1 - z * z)), 0, z], limb.law, limb.reference, limb.polarToEquatorial, box / 2);
 }
-export async function prepareLighting(config: RasterRecipe, recipe: LightingRecipe, publicDirectory: string, limb?: PreparedLimb) {
-    if (Boolean(recipe.limb) !== Boolean(limb)) throw new TypeError(`Lighting ${recipe.bankSchema}: lighting.limb ${recipe.limb ? 'names models that were not loaded' : 'is absent but a limb law was supplied'}.`);
-    // A recipe naming a shared bank takes the bank's rows and billboard as baked under public/lighting/<bank>/ (lighting-banks.ts):
-    // the same bytes an encode here would write, checked by prepare-lighting-bank --check, without the encode. The bake stages
-    // into a scratch directory, so the bank is found from the repository root every preparation tool runs from.
+/**
+ * A sphere's lighting: the sheet of every phase (lighting-sheet.ts) and the flood-lit frame as its own file, which is all a
+ * body shows with shadows off. A recipe naming a shared bank takes both files as baked under public/lighting/<bank>/
+ * (lighting-banks.ts): the same bytes an encode here would write, checked by prepare-lighting-bank --check, without the
+ * encode. The bake stages into a scratch directory, so the bank is found from the repository root every preparation tool
+ * runs from. `radiusScale` is the lit disc's radius as a share of the overlay's box: the sheet's own unless a lane's mesh
+ * ends elsewhere, which a bank cannot serve.
+ */
+export async function prepareLighting(config: Pick<RasterRecipe, 'publicBase'>, recipe: LightingRecipe, publicDirectory: string, limb?: PreparedLimb,
+    { radiusScale = LIGHTING_SHEET.radiusScale }: { radiusScale?: number } = {}) {
+    if (Boolean(recipe.limb) !== Boolean(limb)) throw new TypeError(`Lighting: lighting.limb ${recipe.limb ? 'names models that were not loaded' : 'is absent but a limb law was supplied'}.`);
     const bankDirectory = recipe.bank === undefined ? undefined : resolve(checkoutProjectRoot(import.meta.url), LIGHTING_BANK_ROOT, recipe.bank);
-    const banks: Record<string, unknown> = {};
-    const density = RASTER_DENSITY, frameSize = recipe.frameSize * density, rowCount = Math.ceil(recipe.frameCount / recipe.columns);
-    const bbSize = recipe.billboardFrameSize * density, bbRows = Math.ceil(recipe.frameCount / recipe.billboardColumns), bbWidth = bbSize * recipe.billboardColumns, bbHeight = bbSize * bbRows;
-    const billboard = new Uint8Array(bbWidth * bbHeight * 4);
-    const rows: {
-        rowIndex: number;
-        url: string;
-        encoding: string;
-        bytes: number;
-        width: number;
-        height: number;
-        decodedRgbaBytes: number;
-        firstFrame: number;
-        frameCount: number;
-    }[] = [], presentations = [];
-    // Encoding a lossless row (8 frames at 2x, about 0.5 MB) is single-threaded in libvips and took about 1.2 s; 32 rows in
-    // sequence made a shape-only planet a 40-second bake with one core busy. Rows now encode on sharp's thread pool while the
-    // next row's frames are computed, at most LIGHTING_ENCODE_CONCURRENCY in flight (each row holds 32 MB of RGBA until its
-    // encoder has it). Row order and bytes are unchanged: every row is still written from its own pixels.
-    const encodes: Promise<void>[] = [];
-    const pending = new Set<Promise<void>>();
-    const fromBank = async (file: string) => {
-        const source = resolve(bankDirectory!, file);
+    const { frameCount, frameSize, margin, columns, sheetFile, shadowlessFile } = LIGHTING_SHEET, { tile, rowCount, width, height } = lightingSheetLayout();
+    const shadowlessSize = lightingShadowlessSize(recipe.presentationSize);
+    const sheetPath = resolve(publicDirectory, sheetFile), shadowlessPath = resolve(publicDirectory, shadowlessFile);
+    if (bankDirectory && radiusScale !== LIGHTING_SHEET.radiusScale) throw new TypeError(`Lighting bank ${recipe.bank} is baked with a lit disc of ${LIGHTING_SHEET.radiusScale} of its box, not ${radiusScale}.`);
+    if (bankDirectory && shadowlessSize !== lightingShadowlessSize(LIGHTING_BANK_PRESENTATION_SIZE))
+        throw new TypeError(`Lighting bank ${recipe.bank} holds a flood-lit frame for a ${LIGHTING_BANK_PRESENTATION_SIZE} px overlay; a ${recipe.presentationSize} px overlay needs one of ${shadowlessSize} px, so this body states its own lighting.`);
+    if (bankDirectory) for (const [file, path] of [[sheetFile, sheetPath], [shadowlessFile, shadowlessPath]] as const) {
+        const source = resolve(bankDirectory, file);
         if (!existsSync(source)) throw new Error(`Lighting bank ${recipe.bank} has no ${file} under ${LIGHTING_BANK_ROOT}/${recipe.bank}; bake it: node packages/bake/cli/prepare-lighting-bank.mts.`);
-        await copyFile(source, resolve(publicDirectory, file));
-    };
-    for (let rowIndex = 0; rowIndex < rowCount; rowIndex++) {
-        const firstFrame = rowIndex * recipe.columns, frameCount = Math.min(recipe.columns, recipe.frameCount - firstFrame), width = frameSize * frameCount;
-        const pixels = bankDirectory ? undefined : new Uint8Array(width * frameSize * 4);
-        const file = outputName(recipe.rowOutput, density).replace('{row}', String(rowIndex).padStart(2, '0'));
-        const url = config.publicBase + file;
-        const thumbnails: Promise<void>[] = [];
-        for (let column = 0; column < frameCount; column++) {
-            const frameIndex = firstFrame + column;
-            presentations.push({ frameIndex, rowIndex, url, backgroundPosition: `${-column * recipe.presentationSize}px 0px`, backgroundSize: `${frameCount * recipe.presentationSize}px ${recipe.presentationSize}px` });
-            if (bankDirectory) continue;
-            const frame = frameFor(frameSize, frameIndex, recipe, limb);
-            for (let y = 0; y < frameSize; y++)
-                pixels!.set(frame.subarray(y * frameSize * 4, (y + 1) * frameSize * 4), (y * width + column * frameSize) * 4);
-            thumbnails.push(raster(frame, frameSize, frameSize).resize(bbSize, bbSize, { kernel: 'lanczos3' }).raw().toBuffer().then(thumbnail => {
-                for (let y = 0; y < bbSize; y++)
-                    billboard.set(thumbnail.subarray(y * bbSize * 4, (y + 1) * bbSize * 4), ((Math.floor(frameIndex / recipe.billboardColumns) * bbSize + y) * bbWidth + (frameIndex % recipe.billboardColumns) * bbSize) * 4);
-            }));
+        await copyFile(source, path);
+    } else {
+        const sheet = new Uint8Array(width * height * 4);
+        for (let frame = 0; frame < frameCount; frame++) {
+            const pixels = frameFor(tile, frameSize, lightingSheetViewZ(frame), recipe, limb, radiusScale), left = (frame % columns) * tile, top = Math.floor(frame / columns) * tile;
+            for (let y = 0; y < tile; y++) sheet.set(pixels.subarray(y * tile * 4, (y + 1) * tile * 4), ((top + y) * width + left) * 4);
         }
-        const path = resolve(publicDirectory, file);
-        const encode = (bankDirectory ? fromBank(file) : Promise.all(thumbnails).then(() => raster(pixels!, width, frameSize).webp({ lossless: true, alphaQuality: 100 }).toFile(path))).then(async () => {
-            rows[rowIndex] = { rowIndex, url, encoding: 'lossless-webp', ...await fileBytes(path), width, height: frameSize, decodedRgbaBytes: width * frameSize * 4, firstFrame, frameCount };
-        });
-        encodes.push(encode);
-        const tracked: Promise<void> = encode.finally(() => pending.delete(tracked));
-        pending.add(tracked);
-        if (pending.size >= LIGHTING_ENCODE_CONCURRENCY) await Promise.race(pending);
+        await raster(sheet, width, height).webp({ lossless: true, alphaQuality: 100, effort: 6 }).toFile(sheetPath);
+        // The flood-lit frame is the image every page opens on: its pixels and its encoding are those it has always had.
+        await raster(frameFor(shadowlessSize, shadowlessSize, null, recipe, limb, radiusScale), shadowlessSize, shadowlessSize).webp({ lossless: true, alphaQuality: 100 }).toFile(shadowlessPath);
     }
-    await Promise.all(encodes);
-    const bbFile = outputName(recipe.billboardOutput, density), bbPath = resolve(publicDirectory, bbFile), bbUrl = config.publicBase + bbFile;
-    if (bankDirectory) await fromBank(bbFile);
-    else await raster(billboard, bbWidth, bbHeight).webp({ lossless: true, alphaQuality: 100 }).toFile(bbPath);
-    const bbPresentations = Array.from({ length: recipe.frameCount }, (_, frameIndex) => ({ frameIndex, url: bbUrl, backgroundPosition: `${-(frameIndex % recipe.billboardColumns) * recipe.presentationSize}px ${-Math.floor(frameIndex / recipe.billboardColumns) * recipe.presentationSize}px`, backgroundSize: `${recipe.billboardColumns * recipe.presentationSize}px ${bbRows * recipe.presentationSize}px` }));
-    // The shadowless frame on its own: with shadows off (the default) a body shows only this frame, which a row carries
-    // beside seven others (the Moon's row 31 is 514 KB, this frame 57 KB).
-    const lastFrame = recipe.frameCount - 1, sfFile = outputName(recipe.billboardOutput, density).replace('billboard', 'shadowless');
-    if (!sfFile.includes('shadowless')) throw new TypeError(`Lighting output ${recipe.billboardOutput} does not name its billboard; the shadowless frame has no name.`);
-    const sfPath = resolve(publicDirectory, sfFile), sfUrl = config.publicBase + sfFile;
-    if (bankDirectory) await fromBank(sfFile);
-    else await raster(frameFor(frameSize, lastFrame, recipe, limb), frameSize, frameSize).webp({ lossless: true, alphaQuality: 100 }).toFile(sfPath);
-    const shadowless = { url: sfUrl, encoding: 'lossless-webp', ...await fileBytes(sfPath), width: frameSize, height: frameSize, frameIndex: lastFrame,
-        backgroundPosition: '0px 0px', backgroundSize: `${recipe.presentationSize}px ${recipe.presentationSize}px` };
-    // The far view's shadowless frame alone, the same tile the billboard atlas carries among its 256 (the Moon's atlas is
-    // 116 KB): with shadows off a distant body shows only this tile.
-    const sbFile = outputName(recipe.billboardOutput, density).replace('billboard', 'shadowless-billboard'), sbPath = resolve(publicDirectory, sbFile);
-    if (bankDirectory) await fromBank(sbFile);
-    else await raster(frameFor(frameSize, lastFrame, recipe, limb), frameSize, frameSize).resize(bbSize, bbSize, { kernel: 'lanczos3' }).webp({ lossless: true, alphaQuality: 100 }).toFile(sbPath);
-    const billboardShadowless = { url: config.publicBase + sbFile, encoding: 'lossless-webp', ...await fileBytes(sbPath), width: bbSize, height: bbSize, frameIndex: lastFrame,
-        backgroundPosition: '0px 0px', backgroundSize: `${recipe.presentationSize}px ${recipe.presentationSize}px` };
-    const defaultRow = Math.floor(recipe.defaultFrame / recipe.columns), initialWarmRows = [Math.max(0, defaultRow - 1), defaultRow, Math.min(rowCount - 1, defaultRow + 1)];
-    const initialDecodedWorkingSetBytes = initialWarmRows.reduce((sum, row) => sum + rows[row].decodedRgbaBytes, 0);
-    banks[density] = { schema: recipe.bankSchema, preparedPixelDensity: density, frameSize, presentationFrameSize: recipe.presentationSize,
-        billboard: { schema: recipe.billboardSchema, url: bbUrl, shadowless: billboardShadowless, encoding: 'lossless-webp', ...await fileBytes(bbPath), width: bbWidth, height: bbHeight, frameSize: bbSize, columns: recipe.billboardColumns, rowCount: bbRows, frameCount: recipe.frameCount, presentationFrameSize: recipe.presentationSize, decodedRgbaBytes: bbWidth * bbHeight * 4, presentations: bbPresentations },
-        transport: { model: 'row-shard-cache', encoding: 'lossless-webp', preloadBeforeMount: true, retainedLeafCount: 1, interpolation: 'nearest-prepared-camera-frame', framesPerRow: recipe.columns, rowCount, defaultFrame: recipe.defaultFrame, defaultRow, initialWarmRows, maximumRetainedRowCount: 3, addressWritesOnlyOnInput: true, retainLastReadyPresentation: true, idleCallbacks: 0, initialDecodedWorkingSetBytes, maximumDecodedWorkingSetBytes: initialDecodedWorkingSetBytes },
-        rows, presentations, shadowless, totalBytes: rows.reduce((sum, row) => sum + row.bytes, 0), fullBankDecodedRgbaBytes: rows.reduce((sum, row) => sum + row.decodedRgbaBytes, 0) };
+    const presentations = Array.from({ length: frameCount }, (_, frameIndex) => ({ frameIndex, lightViewZ: lightingSheetViewZ(frameIndex), ...lightingSheetAddress(frameIndex, recipe.presentationSize) }));
     const limbMetadata = limb ? { limb: { model: 'published-photometric-models-relative-to-the-flood-lit-disc-centre', models: limb.law.paths, referenceColor: limb.reference, referenceSource: limb.referenceSource } } : {};
-    return { ...recipe.metadata, ...limbMetadata, frameCount: recipe.frameCount, presentationFrameSize: recipe.presentationSize, defaultFrame: recipe.defaultFrame, preparedPixelDensities: [RASTER_DENSITY], banks };
+    return { ...recipe.metadata, ...limbMetadata, ...(recipe.bank === undefined ? {} : { bank: recipe.bank }), frameCount, presentationFrameSize: recipe.presentationSize,
+        // The frame a body starts beside: full phase, the nearest to the flood-lit frame it shows until shadows are turned on.
+        defaultFrame: frameCount - 1,
+        sheet: { url: config.publicBase + sheetFile, encoding: 'lossless-webp', ...await fileBytes(sheetPath), width, height, frameSize, margin, columns, rowCount, decodedRgbaBytes: width * height * 4, presentations },
+        shadowless: { url: config.publicBase + shadowlessFile, encoding: 'lossless-webp', ...await fileBytes(shadowlessPath), width: shadowlessSize, height: shadowlessSize, frameIndex: frameCount - 1,
+            ...lightingShadowlessAddress(recipe.presentationSize) } };
 }

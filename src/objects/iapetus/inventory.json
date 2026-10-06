@@ -591,213 +591,15 @@
     },
     {
       "location": "public",
-      "filename": "lighting-2x-billboard.webp",
-      "bytes": 121038,
-      "sha256": "6b914e3180e6fd52a93bd9a3ce67fa9851cb00499a910e5ed747771accd52088"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-00.webp",
-      "bytes": 61424,
-      "sha256": "8ab83ba753337cae8f1f5dd8d04c815b73d07b0e8ff1558feab8dab334ba4955"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-01.webp",
-      "bytes": 102652,
-      "sha256": "d5d1dcc652eef99d6580f70789c15943e25b5aeda98cb01c73759e68554251a1"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-02.webp",
-      "bytes": 125710,
-      "sha256": "09a393f79469f106096d5477169f675c1b361002eb44d4f839fc7c22701900a1"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-03.webp",
-      "bytes": 145892,
-      "sha256": "cd512a64c833e34da239633552660049ccc9f6e3f8433f339abe37afa310e816"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-04.webp",
-      "bytes": 162704,
-      "sha256": "e0aac25b32cca268ac5b1c6c6da3157c21450b190b0ab868463f73e783cb0d93"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-05.webp",
-      "bytes": 170996,
-      "sha256": "d8358788e6a735a6ae0e9de8347c4484b74a92f92cab428eb04dc7a04a5d9ece"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-06.webp",
-      "bytes": 184346,
-      "sha256": "be0f7fad31d9a86cf1564b6fdfba271793e3f0b30e05c0ae9b252c985ba2d15b"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-07.webp",
-      "bytes": 199218,
-      "sha256": "c07cc05159767f0411e7e6cffc2e8c4ad40cc6f2ddefec8659fbb41c6bb99880"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-08.webp",
-      "bytes": 215330,
-      "sha256": "9cbb99bf036729e9a77ec21000d0aac773f4fc2c5212ee60270de64dac44f946"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-09.webp",
-      "bytes": 227878,
-      "sha256": "6aef5291d265d3b47dd17fd345811d2c82860d132bccd63d76a2b1d1107327fb"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-10.webp",
-      "bytes": 235124,
-      "sha256": "9bc28592b13857b5dbce980da82fb2c052845949095d5baba7702ce07bb22804"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-11.webp",
-      "bytes": 242326,
-      "sha256": "687bfea2db69d24601799537924732197417cf64395b5795f034d10af4424ae5"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-12.webp",
-      "bytes": 247972,
-      "sha256": "390668d472e0ffef66dc74e05bdad7c3b3e4fdf92f295a04ddcc6d52338e3e80"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-13.webp",
-      "bytes": 249906,
-      "sha256": "33d9a92af3f9fb701c6126e081277284876e0c8741af4ecdbcf643f6742338ea"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-14.webp",
-      "bytes": 247698,
-      "sha256": "29d043fd6264e1dec7a1baf7b9b4e07e72eb9ef2d4d398b3539e227583ffc82b"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-15.webp",
-      "bytes": 239292,
-      "sha256": "67663659f0a909329e7d8f5e8c895b097dc2ab4348880d8f102f243ad67b0415"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-16.webp",
-      "bytes": 226130,
-      "sha256": "dc20e9ff0091ce33b8a2ae44f3da629abb103b97d3fe1377697e3dfba463c181"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-17.webp",
-      "bytes": 235482,
-      "sha256": "adf6f7c61f8394759f6e3cee2d924e8bc166dd05642e4a272b227f0cb554abbe"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-18.webp",
-      "bytes": 244656,
-      "sha256": "285d26eee877aabc566b84f5d1cca53e3ef3265cb695b88755a7e7a5b04455ed"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-19.webp",
-      "bytes": 255194,
-      "sha256": "3f0af2c8013c512a2f08c60231c5942445dc4ce01edec5b8718a730d65839c5c"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-20.webp",
-      "bytes": 266442,
-      "sha256": "f395ba86ff93f5aaf09b0ac0a4974389dd4eec7167a898860715b89d98dd62c6"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-21.webp",
-      "bytes": 277790,
-      "sha256": "c1bddc68ab053bf7308d3d09eb4d34b49cdd6f88eb3d34bdb8bca6cb99752ff4"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-22.webp",
-      "bytes": 291672,
-      "sha256": "df5dd04c02bff6ae2d5ef5a64efbadf6ae43b8b019de5e17efa52971673b0870"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-23.webp",
-      "bytes": 303992,
-      "sha256": "a4d8561a4a27cd277b590fb516db68ba47ea00aa0a96ff019d1dd3b1496865a4"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-24.webp",
-      "bytes": 326070,
-      "sha256": "440c0cd9b8f5b1911f9f7079d3e4093b965ad4bbee9fa471ff8f0ea75073e875"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-25.webp",
-      "bytes": 340330,
-      "sha256": "f1121c10b559296048737a7c3f7ba053609511fce02d5eda5291d5b4257e32f5"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-26.webp",
-      "bytes": 356134,
-      "sha256": "480e32def98cc425c3430f097c7683a10530803ebbc518e8d2b0fad24d7a15ab"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-27.webp",
-      "bytes": 362302,
-      "sha256": "a548c99fa2054b1337e26aa1c4c18b343e1d235f17d443660c248200d48b46b1"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-28.webp",
-      "bytes": 366004,
-      "sha256": "8a399e760088c180c8341610f07a30d568a80d89b4b352498a5693e330761f36"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-29.webp",
-      "bytes": 362770,
-      "sha256": "94a13037a3646ef6c7a30e42d1fcccf9d1c309bb457d0e7e0bacfb794e7180a5"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-30.webp",
-      "bytes": 355064,
-      "sha256": "39e0d7fadc44f7ec9c5bf238deff9900c2fb77e96c1b499b87ed31c717c1fcdc"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-row-31.webp",
-      "bytes": 284228,
-      "sha256": "9fb7971f8bbce0d14a1bd0fd5f14775c77527b4d5c631129ba38dc7cf79ddff8"
-    },
-    {
-      "location": "public",
-      "filename": "lighting-2x-shadowless-billboard.webp",
-      "bytes": 40,
-      "sha256": "9edae5aae6af07d80c69ff0e48fe3f8ec872f592ddc15ca13f562aff42cbc878"
-    },
-    {
-      "location": "public",
       "filename": "lighting-2x-shadowless.webp",
       "bytes": 84,
       "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-sheet.webp",
+      "bytes": 570138,
+      "sha256": "0b0d95dc5592ea2942dd908e930c18aae296dc09d9bfa5ba3a1cb0c44ee8a97c"
     },
     {
       "location": "prepared",
@@ -808,8 +610,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 83127,
-      "sha256": "40dc04c5d19ad8ff52f5210e93094dc993cf5ed29b7bff687bb6ccef28458a4b"
+      "bytes": 18942,
+      "sha256": "92c889a6c03adbf86ad4f282f7af8d9b07a4667e69a0c77c6df4bf504a5812ad"
     },
     {
       "location": "prepared",
@@ -886,14 +688,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 343872,
-      "sha256": "e9e341f25abb1dc6fc984ed1e6df31f27de1c18468593917c19b44f47b741167"
+      "bytes": 277822,
+      "sha256": "ca1a7b0f83857a5424740ae372f848fe916675cb41247785e28611c740964e88"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 374162,
-      "sha256": "dfc05c2a131b4d6edf8a971fd8343ba09f0bc26f2d8d76926154469cfc95d816"
+      "sha256": "7278b6176771c11fb67c55f7cb268c5e1796e4701a5db6382d0280e7f06781ca"
     },
     {
       "location": "prepared",

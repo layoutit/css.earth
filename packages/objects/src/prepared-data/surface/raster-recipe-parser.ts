@@ -157,26 +157,25 @@ export function parseRasterRecipe(value: unknown, resolveLighting: (recipe: Ligh
     }
     if (recipe.lighting !== undefined) {
         const authored = record(recipe.lighting, 'lighting');
-        // A recipe naming a shared bank states only its own fields; the bank's are filled in here (lighting-banks.ts).
+        // One sheet format serves every sphere (packages/bake/src/raster/lighting-sheet.ts): a recipe no longer lays out frames.
+        const retired = ['frameSize', 'columns', 'frameCount', 'billboardFrameSize', 'billboardColumns', 'rowOutput', 'billboardOutput', 'minimumLightViewZ',
+            'maximumLightViewZ', 'radiusScale', 'defaultFrame', 'bankSchema', 'billboardSchema'].filter(key => authored[key] !== undefined);
+        if (retired.length) throw new TypeError(`lighting states only its bank or its limb models, and its presentationSize; the sheet's layout is the lane's. Remove lighting.${retired.join(', lighting.')}.`);
+        if ((authored.bank === undefined) === (authored.limb === undefined))
+            throw new TypeError(`lighting names a shared bank (lighting.bank) or the body's published models (lighting.limb), one of the two; got bank ${JSON.stringify(authored.bank)}, limb ${JSON.stringify(authored.limb)}.`);
+        const stated = ['shadowlessFloodLimbFloor', 'ambientIntensity', 'terminator', 'maximumAlpha'].filter(key => authored[key] !== undefined);
+        if (stated.length) throw new TypeError(`An authored law belongs to a shared bank (lighting-banks.ts), not to a recipe; remove lighting.${stated.join(', lighting.')}.`);
+        // A recipe naming a shared bank takes the bank's authored law, filled in here (lighting-banks.ts).
         if (authored.bank !== undefined) text(authored.bank, 'lighting.bank');
         const lighting = authored.bank === undefined ? authored : resolveLighting(authored as unknown as LightingRecipe) as unknown as RecordValue;
-        fields(lighting, ['frameSize', 'columns', 'presentationSize', 'billboardFrameSize', 'billboardColumns', 'frameCount', 'radiusScale'], 'lighting', true);
-        fields(lighting, ['defaultFrame', 'minimumLightViewZ', 'maximumLightViewZ'], 'lighting');
-        const authoredLaw = ['shadowlessFloodLimbFloor', 'ambientIntensity', 'terminator', 'maximumAlpha'].filter(key => lighting[key] !== undefined);
-        if (lighting.limb !== undefined) {
-            if (authoredLaw.length) throw new TypeError(`lighting names published models in lighting.limb, so it states no authored law; remove lighting.${authoredLaw.join(', lighting.')}.`);
-            parseLimbBlock(lighting.limb, 'lighting.limb');
-        }
+        fields(lighting, ['presentationSize'], 'lighting', true);
+        if (lighting.limb !== undefined) parseLimbBlock(lighting.limb, 'lighting.limb');
         else {
             fields(lighting, ['maximumAlpha'], 'lighting', true);
             fields(lighting, ['shadowlessFloodLimbFloor', 'ambientIntensity'], 'lighting');
             numbers(lighting.terminator, 'lighting.terminator', 2);
         }
-        for (const key of ['rowOutput', 'billboardOutput'])
-            path(lighting[key], `lighting.${key}`);
-        for (const key of ['bankSchema', 'billboardSchema'])
-            text(lighting[key], `lighting.${key}`);
-        record(lighting.metadata, 'lighting.metadata');
+        if (lighting.metadata !== undefined) record(lighting.metadata, 'lighting.metadata');
         recipe.lighting = lighting;
     }
     if (recipe.emission !== undefined) {

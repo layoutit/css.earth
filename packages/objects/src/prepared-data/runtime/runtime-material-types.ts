@@ -15,7 +15,7 @@ export type PreparedMaterialRotation = PreparedMaterialRotationPolicy & (
 );
 
 export interface PreparedMaterialTrack {
-  id: string; target: number; frame: PreparedMaterialFrameMapping; defaultFrame: number; farBank?: string;
+  id: string; target: number; frame: PreparedMaterialFrameMapping; defaultFrame: number;
   banks: readonly PreparedMaterialBank[]; rotation?: PreparedMaterialRotation | null; quoted?: boolean; frameAttribute?: string | null; modeAttribute?: string | null;
 }
 

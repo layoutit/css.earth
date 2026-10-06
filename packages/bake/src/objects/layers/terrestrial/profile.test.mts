@@ -30,7 +30,7 @@ test('a shape display requires a source mesh and consumer for the shared neutral
  profile.presentation.defaultDataset='shape';
  assert.equal(fixtureRecord(parseTerrestrialProfile(profile),'presentation').defaultDataset,'shape');
  // Without its mesh the body is a sphere, which states lighting frames at its diameter; the shape view still needs the mesh.
- const sphereLighting={frameSize:512,columns:8,frameCount:128,logicalSize:profile.geometry.radius*2,terminatorWidth:.1,directionalAmbient:.05,fullPhaseAmbient:.35,fullPhaseDiffuse:.65,maximumOpacity:.95};
+ const sphereLighting={bank:'sphere',presentationSize:profile.geometry.radius*2};
  assert.throws(()=>parseTerrestrialProfile({...profile,lighting:sphereLighting,geometry:{...profile.geometry,radialTerrain:undefined}}),/pinned mesh/);
  profile.raster.shapeViews[0].consumer='';
  assert.throws(()=>parseTerrestrialProfile(profile),/source consumer/);
@@ -152,7 +152,7 @@ test('a cube declaration belongs only to the geometry-cube format', async () => 
  assert.throws(() => parseTerrestrialProfile(profile), /source-bound/);
 });
 test('only a sphere states lighting frames', async () => {
- const frames = { frameSize: 512, columns: 8, frameCount: 128, logicalSize: 460, terminatorWidth: 0.1, directionalAmbient: 0.05, fullPhaseAmbient: 0.35, fullPhaseDiffuse: 0.65, maximumOpacity: 0.95 };
+ const frames = { bank: 'sphere', presentationSize: 460 };
  const vesta = await read('vesta');
  assert.equal(vesta.lighting, undefined, 'a shape-model recipe states no lighting block');
  assert.throws(() => parseTerrestrialProfile({ ...vesta, lighting: frames }), /vesta: source\/preparation\/terrestrial\.json lighting is read by nothing: geometry\.radialTerrain/);
