@@ -60,7 +60,7 @@ const days = (period: number) => period >= 1 ? `${Number(period.toPrecision(3))}
 
 /** What is a brightness map's own in the records surface-maps.mts writes. */
 export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
-  consumer: BRIGHTNESS_CONSUMER, directory: BRIGHTNESS_DIRECTORY, inputTag: 'tess-map', stepGroup: 'brightness', variable: 'Brightness [%]', units: '%', controlLabel: 'Brightness map', legendTitle: 'Surface brightness',
+  consumer: BRIGHTNESS_CONSUMER, directory: BRIGHTNESS_DIRECTORY, generator: BRIGHTNESS_GENERATOR, inputTag: 'tess-map', stepGroup: 'brightness', variable: 'Brightness [%]', units: '%', controlLabel: 'Brightness map', legendTitle: 'Surface brightness',
   archiveUrl: TESS_ARCHIVE.pixels, references: [{ catalogueId: PIXELS_RECORD, role: 'material', evidence: TESS_ARCHIVE.pixels }, { catalogueId: METHOD_RECORD, role: 'method', evidence: METHOD_URL }, { catalogueId: GAIA_RECORD, role: 'reference', evidence: GAIA_URL }], colors: COLORS, palette: PALETTE,
   scale(maps) { const reach = scaleEnd(Math.max(...maps.flatMap(map => [100 - map.darkestPercent, map.brightestPercent - 100]))); return { minimum: 100 - reach, maximum: 100 + reach, labels: [`${100 - reach}%`, '100%', `${100 + reach}%`] }; },
   words(map, { count, epochs, tilt, outlined }) { const { choice } = map, swing = `${percent(map.amplitude)}%`, turn = days(map.periodDays);
@@ -72,7 +72,7 @@ export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
       inputTitle: `Brightness map of ${map.targetName} from its light curve in TESS sector ${map.sector}, measured from the full-frame images: brightness on a longitude-latitude grid`,
       credit: `NASA TESS full-frame images, sector ${map.sector}, from MAST's TESScut; photometry and map made in this project with ${map.codes.join(' and ')}. ${TESS_ARCHIVE.acknowledgment}`, displayCredit: 'NASA TESS · mapped here',
       license: 'Public NASA mission data (MAST); reduction by this project', licenseEvidence: ['https://archive.stsci.edu/publishing/data-use'],
-      acquisition: `Written by ${BRIGHTNESS_GENERATOR} for this star, from the pixels TESScut cuts out of the sector's full-frame images. The receipt (each sector's request, what was measured and the codes) is written again by that command under output/tess and is not kept in git.`,
+      acquisition: `Built by the generator for this star, from the pixels TESScut cuts out of the sector's full-frame images. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.`,
       redistribution: 'Public TESS data, reduced here.',
       description: `Brightness of the star's surface that reproduces its light as it turns once in ${turn}, fitted with starry to the light curve this project measured from the TESS full-frame images of sector ${map.sector} (the light swings by ${swing}; the map's curve leaves a scatter of ${percent(map.residual)}%, the light's own noise being ${percent(map.noise)}%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. ${tilted} ${others} A reduction made in this project, not a published map.`,
       surfaceTitle: `TESS · brightness map made here · ${choice.label}`, qualification: `Mapped in this project · TESS full-frame images, ${choice.label.toLowerCase()}`,

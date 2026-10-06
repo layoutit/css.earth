@@ -26,6 +26,7 @@ export interface MapKind<M extends SurfaceMap> {
   /** The name the kind's surfaces and inputs carry, by which a later run finds and replaces them. */ readonly consumer: string;
   /** Where its tables go under the star's `source/`, and the middle of its manifest input ids. */ readonly directory: string; readonly inputTag: string; readonly stepGroup: string;
   /** The table's column that is drawn, its units, and the names the page shows. */ readonly variable: string; readonly units: string; readonly controlLabel: string; readonly legendTitle: string;
+  /** The command that builds the kind's tables, when they are kept out of git and restored from the source cache (CONTRIBUTING.md). */ readonly generator?: string;
   readonly archiveUrl: string; readonly references: readonly { readonly catalogueId: string; readonly role: string; readonly evidence: string }[];
   readonly colors: readonly string[]; readonly palette: readonly (readonly number[])[];
   scale(maps: readonly M[]): MapScale;
@@ -74,7 +75,7 @@ export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: S
       title: words.inputTitle, sourceUrl: kind.archiveUrl,
       credit: words.credit, displayCredit: words.displayCredit,
       license: words.license, licenseEvidence: [...words.licenseEvidence],
-      acquisition: words.acquisition,
+      acquisition: words.acquisition, ...(kind.generator ? { generator: kind.generator } : {}),
       redistribution: words.redistribution, consumers: [kind.consumer],
       sourceBinding: { kind: 'catalogued', references: kind.references.map(reference => ({ ...reference })) } });
     newSurfaces.push({ id: choice.id, output: first.output, thumbnail: first.thumbnail, source: path, falseColor: true, science: { kind: 'terrestrial-scientific', id: choice.id, label: choice.label, format: 'tecplot-lonlat-map', path, variable: kind.variable,

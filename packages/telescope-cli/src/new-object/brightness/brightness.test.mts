@@ -26,6 +26,8 @@ test('a brightness map becomes the star page\'s records, saying it is made here 
   const control = read('source/content/object.json').datasets.controls[1]; assert.deepEqual([control.label, control.step, control.legend.meta, control.source.id], ['Brightness map', undefined, '%', 'hd-1-tess-map-brightness-sector-95']);
   assert.match(control.notes, /worked out in this project.*lightkurve.*starry.*their latitudes are not/u); assert.doesNotMatch(control.legendNote, /Black line/u);
   const input = read('source/manifest.json').inputs[1]; assert.equal(input.path, 'science/tess/hd-1-s0095.dat'); assert.match(input.credit, /TESS full-frame images, sector 95.*lightkurve 2\.6\.0 and starry 1\.2\.0/u);
+  // The table is built here and kept out of git: its input names the command that makes it.
+  assert.equal(input.generator, 'packages/telescope-cli/src/archives/tess/reduce.mts'); assert.match(input.acquisition, /Restored from the source cache; not tracked/u);
   assert.deepEqual(input.sourceBinding.references.map((reference: { catalogueId: string }) => reference.catalogueId), [...[...brightnessSourceRecords('2026-10-06').keys()].map(path => path.slice('src/sources/'.length, -'.json'.length)), 'gaia-2023-dr3']);
   assert.deepEqual(read('object.json').properties.recipe.surfaces[0].datasets.map((one: { id: string }) => one.id), ['color', 'radial-field-2007-06', 'brightness-sector-95']);
   // Only a page that measures the star's axis draws the star at the map's tilt, and outlines what it never shows.

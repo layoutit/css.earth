@@ -103,6 +103,9 @@ pixels, what was measured, the verdict with its reason, and the codes' versions.
 pixels are deleted. Requests to TESScut go one at a time; the service refuses requests sent side by side. Gaia's answer
 for all stars is one request of some ten minutes, kept under `output/tess/` so a star is asked once.
 
+The map's table (108 KB a star) is not tracked: its manifest input names `reduce.mts` as its generator, and it is published
+to and restored from the source cache (`node packages/bake/cli/publish-source-cache.mts --object=<star id>`).
+
 The spec lists each star whose receipt holds a map. Writing it adds a "Brightness map" dataset to the star's page and three
 values to its measurements record: the measured period, where it was measured, and the light's swing. The metadata pass then
 counts the measured period among the star's catalogued ones when it adopts a rotation period.
