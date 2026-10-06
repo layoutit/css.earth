@@ -5,7 +5,7 @@ import { PRODUCT_KINDS, type ProductKind } from './recipe-request.mts';
 import { assessSearchCoverage, type QueryInputs, type SearchCoverage, type TargetCoverage } from './query-contract.mts';
 import { indexedTargetObservations } from './query-modes.mts';
 import { loadQueryInputs, loadTargetCatalogue, type ArchiveSelection } from './query.mts';
-import { canonicalTargetRequest, resolveTarget, type TargetResolution } from '@cssearth/telescope';
+import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetResolution } from '@cssearth/telescope';
 import { explorationQualificationFor, type QualificationConfiguration } from './qualification-routes.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';
 import { parseRegion } from '@cssearth/objects';
@@ -243,12 +243,16 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
   const targetCatalogue = [...await loadTargetCatalogue(root), ...sky], resolution = resolveTarget(request.target, targetCatalogue);
   if (resolution.status !== 'resolved') return { ledgers: [], capabilities: [], targetCatalogue, targetAssociations: [], bodyMaps: [], qualifiedProducts: [] };
   if (archiveSelection) return loadQueryInputs(root, request, selectedObservation, progress, archiveSelection);
-  const target = targetCatalogue.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] };
-  const [inputs, opus, curatedImagery, wwtFits] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target), loadWwtImagery(root, target),loadWwtFitsLeads(root,target)]);
+  // A spelling the reader entered that resolved to this target joins these searches for this request, as it joins the VO search:
+  // KOA files HD 189733 A under "HD 189733" and "HD189733".
+  const named = withRequestedTargetName(request.requestedTargetName ?? request.target, resolution.canonical.id, targetCatalogue);
+  const target = named.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] };
   const filter: ArchiveLeadFilter = { ...(request.instrument ? { instrument: request.instrument } : {}),
     ...(request.time && 'fromIso' in request.time ? { time: request.time } : {}) };
-  const archiveLeads = selectedObservation ? [] : await Promise.all([searchKeckLeads(root, target, undefined, filter), searchGeminiLeads(root, target, undefined, filter),
-    searchChandraLeads(root, target, request.region, undefined, filter), searchSpitzerLeads(root, target, request.region, undefined, filter)]);
+  // Every archive is asked at once: each search talks to its own service, and the leads used to wait for the others to finish.
+  const [inputs, opus, curatedImagery, wwtFits, archiveLeads] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target), loadWwtImagery(root, target),loadWwtFitsLeads(root,target),
+    selectedObservation ? [] : Promise.all([searchKeckLeads(root, target, undefined, filter), searchGeminiLeads(root, target, undefined, filter),
+      searchChandraLeads(root, target, request.region, undefined, filter), searchSpitzerLeads(root, target, request.region, undefined, filter)])]);
   return { ...inputs, opus, archiveLeads, curatedImagery, wwtFits };
 }
 

@@ -22,7 +22,7 @@ import { dirname, resolve } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { Transform } from 'node:stream';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { tapRows } from '@cssearth/telescope/node';
+import { tapAnswer } from '@cssearth/telescope/node';
 
 export const KOA = 'https://koa.ipac.caltech.edu';
 export const TAP_SYNC = `${KOA}/TAP`;
@@ -81,9 +81,17 @@ async function koaText(url: string, body?: string): Promise<{ status: number; ty
   });
 }
 
-/** One ADQL query. PyVO owns the TAP request and VOTable parsing; KOA's CGI endpoints below remain archive-specific. */
+/** One ADQL query. PyVO owns the TAP request and VOTable parsing; KOA's CGI endpoints below remain archive-specific.
+ * KOA marks two complete answers OVERFLOW (measured 2026-10-06): one with no rows, and one the query's own TOP bounds. Those are
+ * returned; any other answer the service cut short is refused. */
 export async function koaQuery(adql: string): Promise<Record<string, string>[]> {
-  return tapRows(TAP_SYNC, adql);
+  return koaRows(adql, await tapAnswer(TAP_SYNC, adql));
+}
+export function koaRows(adql: string, answer: { readonly rows: Record<string, string>[]; readonly queryStatus: string; readonly complete: boolean }): Record<string, string>[] {
+  const top = /^\s*SELECT\s+TOP\s+(\d+)\s/iu.exec(adql);
+  if (!answer.complete && answer.rows.length && !(top && answer.rows.length <= Number(top[1])))
+    throw new Error(`KOA cut the answer short (${answer.queryStatus}, ${answer.rows.length} rows); its rows cannot build a complete ledger.`);
+  return answer.rows;
 }
 
 /** The calibration frames the archive associates with a science frame, as KOA itself groups them. Returned as the archive
