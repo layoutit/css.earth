@@ -6,7 +6,7 @@
  * (packages/objects/src/prepared-data/runtime-validation/shipped-runtime.ts).
  *
  * The bake's working form does name custom properties, inside its own headless measurement
- * (packages/bake/src/presentation/*-records.ts); it is not checked here. The shell's stylesheets (site/shell, site/layouts/site.css,
+ * (packages/bake/src/presentation/records/*-records.ts); it is not checked here. The shell's stylesheets (site/shell, site/layouts/site.css,
  * site/layouts/object-shell.css) keep their design tokens: they style the interface, not a body.
  */
 import { execFileSync } from 'node:child_process';

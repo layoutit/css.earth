@@ -8,7 +8,7 @@ export interface PreparedNode { tag: string; className: string | null; style: Pr
 
 import { applyPreparedProjectiveLayout, scalePreparedBackgroundAddresses, scalePreparedPixelLengths } from "./projective-layout.ts";
 import { leafBoxLengths, LEAF_BOX_UNSCALE } from "./leaf-box.ts";
-import { cleanPreparedTree } from "./clean-leaves.ts";
+import { cleanPreparedTree } from "../css/clean-leaves.ts";
 
 const cssName = (name: string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 // Preparation only: these inputs are the checked-in CSS declaration records,

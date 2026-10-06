@@ -1,4 +1,4 @@
-import { scanCssDeclarations } from './css-declaration-scanner.ts';
+import { scanCssDeclarations } from '../css/css-declaration-scanner.ts';
 
 // Alternative meshes as prepared records (the last steps of the presentation bindings, prepared-presentation-bindings.ts).
 //

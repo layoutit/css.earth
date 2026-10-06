@@ -7,7 +7,7 @@ import { parseHTML } from 'linkedom';
 
 import { createExactKeeper, createLeafBoxWriter, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
 
-// Two of Venus's leaf-box records (packages/bake/src/presentation/leaf-box-records.ts), under the system node 0.
+// Two of Venus's leaf-box records (packages/bake/src/presentation/records/leaf-box-records.ts), under the system node 0.
 const matrix = 'matrix3d(7.503457,-0.739026,0,0,0.004556,0.046257,100.99439,-0.007833,0.028587,0.290248,-0.956524,0,-7.905404,2381.267936,-12169.276988,1)';
 const boxes: PreparedLeafBox[] = [
   { node: 1, density: 0.003253, box: [64, 64], atlas: true, backgroundSize: [2016.96, 1489.454], backgroundPosition: [-14.5454, -1317.818], matrix, seam: [77.0239, 19.872] },

@@ -502,7 +502,7 @@ pixel, with the recipe's raster scale as a ceiling. On the iPhone 17 simulator
 Jupiter's page went from 2,823 to 133 MB of layers and Saturn's from 703 to 374 MB,
 with at most 4 of 3.16 million pixels changed at rest. A leaf names no image of its
 own: each dataset's variant writes the surface and pole textures every leaf reads
-(`scene/projector.ts`, `presentation/composite.ts`), which is what made Uranus's
+(`scene/projector.ts`, `presentation/lighting/composite.ts`), which is what made Uranus's
 and Neptune's datasets draw their own maps. On a body with a dense map the texture
 is drawn at half the resolution at maximum zoom and softens there (Ceres, Mars,
 Mercury).
@@ -520,7 +520,7 @@ Two texels per CSS pixel is what a leaf needs at maximum zoom. At rest the same 
 leaf on screen, and WebKit still backs all of it. So every projective leaf reads a factor, `--leaf-box`: its box,
 background size and position are `calc(<length> * var(--leaf-box, 1))`, and its matrix is followed by
 `scale(calc(1 / var(--leaf-box, 1)))`, so each texel lands where it did at any factor. Without a factor the leaf keeps
-its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds the rule:
+its full box. [leaf-box.ts](../packages/bake/src/presentation/layout/leaf-box.ts) holds the rule:
 
 - **The factor** is `min(1, step × density)`. A leaf's density is what its box needs per pixel of the body's silhouette:
   two box pixels per screen pixel (`LEAF_BOX_SCREEN_PIXELS`) at its most magnified edge, from its measured scene frame.
@@ -549,9 +549,9 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
     The silhouette steps: their bindings and leaf-box groups have plain names, and the page writes each leaf's final
     values from its record.
     The bake still measures images, meshes and steps in a headless browser through custom properties, then ships
-    records that name none ([texture-image-records.ts](../packages/bake/src/presentation/texture-image-records.ts),
-    [mesh-records.ts](../packages/bake/src/presentation/mesh-records.ts),
-    [step-name-records.ts](../packages/bake/src/presentation/step-name-records.ts)). The shipped-form check
+    records that name none ([texture-image-records.ts](../packages/bake/src/presentation/records/texture-image-records.ts),
+    [mesh-records.ts](../packages/bake/src/presentation/records/mesh-records.ts),
+    [step-name-records.ts](../packages/bake/src/presentation/records/step-name-records.ts)). The shipped-form check
     ([shipped-runtime.ts](../packages/objects/src/prepared-data/runtime-validation/shipped-runtime.ts)) refuses to pin
     or mount a runtime that names or reads one, and `node .github/scripts/checks/check-no-variables.mts` refuses one
     in a body stylesheet, a stage stylesheet or the renderer's source.

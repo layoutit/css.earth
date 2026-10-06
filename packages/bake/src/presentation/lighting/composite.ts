@@ -2,12 +2,12 @@ import { canonicalPreparedAsset, preparedResourcePool, PREPARED_PRESENTATION_SCH
 
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 
-import type { PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.ts';
+import type { PresentationInputs, PresentationDraft, SourceMaterialTrack } from '../types.ts';
 import { prepareSheetLighting } from './lighting-track.ts';
-import type { PreparedNode, PresentationAdapters } from './adapters.ts';
-import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
-import { RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../raster/index.ts';
-import { readsTexture } from './prepared-node-tree.ts';
+import type { PreparedNode, PresentationAdapters } from '../adapters.ts';
+import { seamOutsetBinding, seamOutsetInitialValue } from '../../scene/index.ts';
+import { RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../../raster/index.ts';
+import { readsTexture } from '../layout/prepared-node-tree.ts';
 
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
   const { namespace: ns, scene: plan, assets, datasets, sun, solarSource: solarSystemSource } = input;

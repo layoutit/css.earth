@@ -154,7 +154,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const id = config.namespace, sheet = lighting ? prepareSheetLighting(lighting, 'mounted') : null;
   const entries = [
     ...(plan.rings ? [plan.rings.resource] : []),
-    // The flood-lit frame loads with the page; the sheet loads when shadows are turned on (presentation/lighting-track.ts).
+    // The flood-lit frame loads with the page; the sheet loads when shadows are turned on (presentation/lighting/lighting-track.ts).
     ...(sheet ? sheet.entries : []),
     ...surfaces.flatMap(s => [
       { key: `surface:${s.id}`, url: s.surface.url, pool: s.id === config.presentation.defaultDataset ? 'mounted' : 'datasets' },

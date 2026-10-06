@@ -14,7 +14,7 @@ type Shipped = Pick<ObjectRuntimeDefinition, 'id' | 'tree' | 'variants'> &
  * - a texture write names a slot that lists its elements, or its own target's `backgroundImage`;
  * - no selection write, view binding, material, animation, texture level or depth partition names one, as a value or a key.
  * The bake's working form does name custom properties, until its last steps turn them into records
- * (packages/bake/src/presentation/*-records.ts), and it passes the runtime parser at several stages; this is checked
+ * (packages/bake/src/presentation/records/*-records.ts), and it passes the runtime parser at several stages; this is checked
  * where a runtime is pinned and where the page decodes one. */
 export function requireShippedRuntime(definition: Shipped): void {
   const fail = (reason: string): never => { throw new TypeError(`${definition.id}: prepared runtime ${reason}.`); };

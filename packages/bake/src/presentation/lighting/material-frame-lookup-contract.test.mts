@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { prepareFrameLookup } from "./index.ts";
+import { prepareFrameLookup } from "../index.ts";
 import { parsePreparedObjectRuntime } from '@cssearth/objects';
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 

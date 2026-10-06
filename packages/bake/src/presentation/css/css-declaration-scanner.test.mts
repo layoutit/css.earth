@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
 import { cleanPreparedTree } from './clean-leaves.ts';
-import { withLeafBoxRecords } from './leaf-box-records.ts';
-import { textureTileVariables, withTextureTileRecords } from './texture-tile-records.ts';
+import { withLeafBoxRecords } from '../records/leaf-box-records.ts';
+import { textureTileVariables, withTextureTileRecords } from '../records/texture-tile-records.ts';
 
 test('declaration fragments preserve quotes, URLs, nesting and malformed input', () => {
   const cases: readonly (readonly [string, readonly string[]])[] = [

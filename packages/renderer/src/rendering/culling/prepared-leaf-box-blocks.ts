@@ -8,7 +8,7 @@ import { unseenTextureWrites } from '../textures/prepared-texture-levels.js';
 import type { PhysicalProjection } from '../../prepared-data/physical-projection.js';
 import { createSettlePacer, SETTLE_PACING, type SettlePacerOptions } from '../loading/settle-pacer.js';
 
-// Leaf boxes by group (packages/bake/src/presentation/leaf-box.ts). Every leaf reads the silhouette step `binding.property`; the prepared
+// Leaf boxes by group (packages/bake/src/presentation/layout/leaf-box.ts). Every leaf reads the silhouette step `binding.property`; the prepared
 // groups say which leaves share one. A block of surface leaves (named in the placements) takes the step for the body's
 // diameter as it would look if the whole body sat at the block's nearest depth: the sharpest at the centre of a close
 // view, less at the limb, the first behind the body or off screen. Any other group (rings, shells) follows the silhouette.

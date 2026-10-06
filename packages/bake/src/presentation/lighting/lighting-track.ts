@@ -1,6 +1,6 @@
 import { preparedResourcePool, type PreparedMaterialSelection, type PreparedResourceEntry } from '@cssearth/objects';
 
-import type { SheetLighting, SourceMaterialTrack } from './types.ts';
+import type { SheetLighting, SourceMaterialTrack } from '../types.ts';
 
 const SHEET_KEY = 'lighting', SHADOWLESS_KEY = 'shadowless';
 
