@@ -37,7 +37,8 @@ Dates retain their supplied precision. A year is not expanded to an invented
 January date. Validation rejects impossible calendar dates and date intervals
 that establish an end before a start. An active status must include its `asOf`
 date and cannot contradict a known earlier end. The card displays the claim's
-date instead of describing it as live status.
+date instead of describing it as live status, and shows only its year: OSIRIS-REx
+reads 2016–2023 although its record ends on 2023-09-24.
 
 A facility carries a `band` only where its own cited source states one. Most
 spacecraft carry several instruments across the spectrum, so no single band is
@@ -73,7 +74,9 @@ crop to it rather than to the empty frame around it.
 Approved artwork is public domain or CC BY, with one recorded exception: the
 Herschel photograph is CC BY-SA 3.0, because its only public-domain alternative
 is too small for the frame and ESA's own images are share-alike. Each entry
-carries its `license`, so the obligation stays attached to the file it covers. An emblem represents a mission. Group artwork remains mission
+carries its `license`, so the obligation stays attached to the file it covers. An emblem represents a mission. A telescope that is the
+only participant of a mission with its own ID, as Hubble is, shows that emblem on its card too, so the card is the same
+whether a dataset credits the telescope or the mission. Group artwork remains mission
 artwork; the individual GRAIL vehicles have text details rather than duplicate
 portraits of the pair. The old Viking artwork remains in its approved library,
 without being relabelled as a specific orbiter or lander.
