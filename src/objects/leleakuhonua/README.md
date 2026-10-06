@@ -21,7 +21,7 @@ The normal grid marks unmapped terrain. Shadows default off. [Measurements](sour
 
 It is an extreme trans-Neptunian object: semimajor axis over 150 au and perihelion beyond 30 au, the definition [de la Fuente Marcos & de la Fuente Marcos (2018)](https://arxiv.org/abs/1809.02571) state. The Solar System map shows these objects as named dots by default, whatever their page shows; their orbits stay hidden like other trans-Neptunian orbits and appear on hover.
 
-![The Solar System map at its default view, with the extreme trans-Neptunian objects named](../../../evidence/extreme-tnos/solar-system-map.webp)
+![The Solar System map at its default view, with the extreme trans-Neptunian objects named](../../../docs/evidence/extreme-tnos/solar-system-map.webp)
 
 Captured headless from the development server on 2026-09-28 with this package prepared.
 
