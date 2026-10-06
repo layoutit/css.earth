@@ -8,8 +8,19 @@ import { createCameraOrientation } from './camera-orientation.js';
 import { worldCameraViewport, presentWorldCamera } from './world-camera.js';
 import type { WorldCameraViewport } from './world-camera.js';
 
-import type { PerspectiveWorldContext } from './perspective-dolly.js';
 import { clamp } from '@cssearth/core';
+
+/** The world a prepared camera places the body in: its frame, the body's size and the furthest extent the camera frames. */
+export interface PerspectiveWorldContext {
+  readonly frame: PreparedWorldCameraFrame;
+  readonly bodyRadiusUnits: number;
+  readonly maximumExtentUnits: number;
+  readonly kilometersPerUnit: number;
+  /** Optional authored alias calibration for legacy retained Sun framing. */
+  readonly framingReferenceZoom?: number;
+  /** Optional authored cubic-sky registration for a physical observer. */
+  readonly onWorldPublish?: (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
+}
 
 /** The live camera stays in its prepared local frame for float64 precision.
  * Input, focus changes and restored observers mutate this owner; frame capture is read-only. */

@@ -11,7 +11,8 @@ import { errorMessage } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
 import type { CameraDelta, CameraAngles, Vector3 } from './types.js';
 
-import type { PerspectiveDolly, PerspectivePublication, PerspectiveWorldContext } from './perspective-dolly.js';
+import type { PerspectiveWorldContext } from './prepared-camera.js';
+import type { PerspectiveDolly, PerspectivePublication } from './perspective-dolly.js';
 import type { PhysicalSharedCamera } from './view-url.js';
 
 import type { WorldCameraViewport } from './world-camera.js';

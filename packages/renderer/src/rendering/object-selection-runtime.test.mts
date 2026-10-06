@@ -13,7 +13,8 @@ import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract
 import type { ObjectSelectionState } from '@cssearth/renderer/rendering/object-selection-runtime.ts';
 import type { PreparedImage } from '@cssearth/renderer/rendering/prepared-image-store.ts';
 import type { PreparedResidencyTicket } from '@cssearth/renderer/rendering/prepared-residency.ts';
-import type { PreparedPresentationContext, PreparedPresentationPlan, PreparedView } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+import type { PreparedPresentationContext, PreparedPresentationPlan } from '@cssearth/renderer/rendering/prepared-presentation.ts';
+import type { PreparedView } from '@cssearth/renderer/rendering/prepared-view.ts';
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('earth'));
 const saturnDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('saturn'));
 
