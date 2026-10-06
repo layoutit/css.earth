@@ -1,0 +1,232 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "hd-179949-2009-09",
+ "target": {
+  "name": "HD 179949",
+  "object": "gumala",
+  "raDegrees": 288.889,
+  "decDegrees": -24.1798,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 55099,
+  "toMjd": 55115
+ },
+ "observations": [
+  {
+   "product": "1120050p",
+   "uri": "cadc:CFHT/1120050p.fits",
+   "bytes": 20568960,
+   "targetName": "HD 179949",
+   "proposal": "09BC19",
+   "mjdStart": 55099.208,
+   "exposureSeconds": 5040
+  },
+  {
+   "product": "1120058p",
+   "uri": "cadc:CFHT/1120058p.fits",
+   "bytes": 20568960,
+   "targetName": "HD 179949",
+   "proposal": "09BF05",
+   "mjdStart": 55099.278,
+   "exposureSeconds": 4760
+  },
+  {
+   "product": "1120372p",
+   "uri": "cadc:CFHT/1120372p.fits",
+   "bytes": 20563200,
+   "targetName": "HD 179949",
+   "proposal": "09BC19",
+   "mjdStart": 55101.197,
+   "exposureSeconds": 5040
+  },
+  {
+   "product": "1120380p",
+   "uri": "cadc:CFHT/1120380p.fits",
+   "bytes": 20563200,
+   "targetName": "HD 179949",
+   "proposal": "09BF05",
+   "mjdStart": 55101.264,
+   "exposureSeconds": 4760
+  },
+  {
+   "product": "1120502p",
+   "uri": "cadc:CFHT/1120502p.fits",
+   "bytes": 20557440,
+   "targetName": "HD 179949",
+   "proposal": "09BC19",
+   "mjdStart": 55102.202,
+   "exposureSeconds": 5040
+  },
+  {
+   "product": "1120506p",
+   "uri": "cadc:CFHT/1120506p.fits",
+   "bytes": 20557440,
+   "targetName": "HD 179949",
+   "proposal": "09BF05",
+   "mjdStart": 55102.262,
+   "exposureSeconds": 4760
+  },
+  {
+   "product": "1120746p",
+   "uri": "cadc:CFHT/1120746p.fits",
+   "bytes": 20563200,
+   "targetName": "HD 179949",
+   "proposal": "09BF05",
+   "mjdStart": 55103.261,
+   "exposureSeconds": 4760
+  },
+  {
+   "product": "1120895p",
+   "uri": "cadc:CFHT/1120895p.fits",
+   "bytes": 20566080,
+   "targetName": "HD 179949",
+   "proposal": "09BC19",
+   "mjdStart": 55104.205,
+   "exposureSeconds": 5040
+  },
+  {
+   "product": "1120899p",
+   "uri": "cadc:CFHT/1120899p.fits",
+   "bytes": 20566080,
+   "targetName": "HD 179949",
+   "proposal": "09BF05",
+   "mjdStart": 55104.267,
+   "exposureSeconds": 4760
+  },
+  {
+   "product": "1121033p",
+   "uri": "cadc:CFHT/1121033p.fits",
+   "bytes": 20563200,
+   "targetName": "HD 179949",
+   "proposal": "09BC19",
+   "mjdStart": 55105.205,
+   "exposureSeconds": 5040
+  },
+  {
+   "product": "1121037p",
+   "uri": "cadc:CFHT/1121037p.fits",
+   "bytes": 20563200,
+   "targetName": "HD 179949",
+   "proposal": "09BF05",
+   "mjdStart": 55105.266,
+   "exposureSeconds": 4760
+  },
+  {
+   "product": "1121171p",
+   "uri": "cadc:CFHT/1121171p.fits",
+   "bytes": 20566080,
+   "targetName": "HD 179949",
+   "proposal": "09BC19",
+   "mjdStart": 55106.22,
+   "exposureSeconds": 5040
+  },
+  {
+   "product": "1121519p",
+   "uri": "cadc:CFHT/1121519p.fits",
+   "bytes": 20566080,
+   "targetName": "HD 179949",
+   "proposal": "09BC19",
+   "mjdStart": 55108.274,
+   "exposureSeconds": 5040
+  },
+  {
+   "product": "1121702p",
+   "uri": "cadc:CFHT/1121702p.fits",
+   "bytes": 20566080,
+   "targetName": "HD 179949",
+   "proposal": "09BC19",
+   "mjdStart": 55109.201,
+   "exposureSeconds": 5040
+  },
+  {
+   "product": "1121706p",
+   "uri": "cadc:CFHT/1121706p.fits",
+   "bytes": 20566080,
+   "targetName": "HD 179949",
+   "proposal": "09BF05",
+   "mjdStart": 55109.262,
+   "exposureSeconds": 4760
+  },
+  {
+   "product": "1121997p",
+   "uri": "cadc:CFHT/1121997p.fits",
+   "bytes": 20566080,
+   "targetName": "HD 179949",
+   "proposal": "09BC19",
+   "mjdStart": 55111.223,
+   "exposureSeconds": 5040
+  },
+  {
+   "product": "1122001p",
+   "uri": "cadc:CFHT/1122001p.fits",
+   "bytes": 20566080,
+   "targetName": "HD 179949",
+   "proposal": "09BF05",
+   "mjdStart": 55111.285,
+   "exposureSeconds": 4760
+  },
+  {
+   "product": "1122557p",
+   "uri": "cadc:CFHT/1122557p.fits",
+   "bytes": 20563200,
+   "targetName": "HD 179949",
+   "proposal": "09BC19",
+   "mjdStart": 55114.207,
+   "exposureSeconds": 5040
+  },
+  {
+   "product": "1122561p",
+   "uri": "cadc:CFHT/1122561p.fits",
+   "bytes": 20563200,
+   "targetName": "HD 179949",
+   "proposal": "09BF05",
+   "mjdStart": 55114.268,
+   "exposureSeconds": 4760
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 6148,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 2288734: Teff"
+  },
+  "logGravity": {
+   "value": 4.32,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 2288734: logg"
+  },
+  "metallicity": {
+   "value": 0.2,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 2288734: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": -24.619,
+  "source": "SIMBAD, radial velocity of HD 179949 (2018A&A...616A...7S)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 7.02,
+   "source": "Fares et al. (2012), MNRAS, arXiv:1202.4472, Sect. 3: v sin i 7.02 ± 0.50 km/s, quoted from Valenti & Fischer (2005)"
+  },
+  "inclinationDegrees": {
+   "value": 60,
+   "source": "Fares et al. (2012), MNRAS, arXiv:1202.4472, Sect. 3: the tilt is about 60 degrees, from v sin i, the radius of 1.19 solar radii and the rotation period"
+  },
+  "periodDays": {
+   "value": 7.62,
+   "source": "Fares et al. (2012), MNRAS, arXiv:1202.4472, abstract: equatorial rotation period 7.62 ± 0.07 d"
+  },
+  "shearRadPerDay": {
+   "value": 0.216,
+   "source": "Fares et al. (2012), MNRAS, arXiv:1202.4472, abstract: surface rotation shear 0.216 ± 0.061 rad/d"
+  },
+  "maximumDegree": {
+   "value": 6,
+   "source": "Fares et al. (2012), MNRAS, arXiv:1202.4472, Sect. 3: the expansion is truncated at degree 6"
+  }
+ },
+ "published": {
+  "paper": "Fares et al. (2012, MNRAS; arXiv:1202.4472)",
+  "url": "https://arxiv.org/abs/1202.4472"
+ }
+}

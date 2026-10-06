@@ -1,0 +1,435 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "tau-boo-2008-01",
+ "target": {
+  "name": "tau Boo",
+  "object": "tepiamenit",
+  "raDegrees": 206.8134,
+  "decDegrees": 17.4572,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 54485,
+  "toMjd": 54496
+ },
+ "observations": [
+  {
+   "product": "966034p",
+   "uri": "cadc:CFHT/966034p.fits",
+   "bytes": 20589120,
+   "targetName": "tauboo",
+   "proposal": "07Bf10",
+   "mjdStart": 54485.582,
+   "exposureSeconds": 400
+  },
+  {
+   "product": "966038p",
+   "uri": "cadc:CFHT/966038p.fits",
+   "bytes": 20589120,
+   "targetName": "tauboo",
+   "proposal": "07Bf10",
+   "mjdStart": 54485.589,
+   "exposureSeconds": 400
+  },
+  {
+   "product": "966162p",
+   "uri": "cadc:CFHT/966162p.fits",
+   "bytes": 20589120,
+   "targetName": "tauboo",
+   "proposal": "07Bf10",
+   "mjdStart": 54486.566,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "966166p",
+   "uri": "cadc:CFHT/966166p.fits",
+   "bytes": 20589120,
+   "targetName": "tauboo",
+   "proposal": "07Bf10",
+   "mjdStart": 54486.576,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "966170p",
+   "uri": "cadc:CFHT/966170p.fits",
+   "bytes": 20589120,
+   "targetName": "tauboo",
+   "proposal": "07Bf10",
+   "mjdStart": 54486.586,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "966297p",
+   "uri": "cadc:CFHT/966297p.fits",
+   "bytes": 20592000,
+   "targetName": "tauBoo",
+   "proposal": "07Bf10",
+   "mjdStart": 54487.53,
+   "exposureSeconds": 940
+  },
+  {
+   "product": "966301p",
+   "uri": "cadc:CFHT/966301p.fits",
+   "bytes": 20592000,
+   "targetName": "tauBoo",
+   "proposal": "07Bf10",
+   "mjdStart": 54487.544,
+   "exposureSeconds": 940
+  },
+  {
+   "product": "966305p",
+   "uri": "cadc:CFHT/966305p.fits",
+   "bytes": 20592000,
+   "targetName": "tauBoo",
+   "proposal": "07Bf10",
+   "mjdStart": 54487.558,
+   "exposureSeconds": 940
+  },
+  {
+   "product": "966317p",
+   "uri": "cadc:CFHT/966317p.fits",
+   "bytes": 20592000,
+   "targetName": "tau Boo",
+   "proposal": "07Bf10",
+   "mjdStart": 54487.654,
+   "exposureSeconds": 940
+  },
+  {
+   "product": "966321p",
+   "uri": "cadc:CFHT/966321p.fits",
+   "bytes": 20592000,
+   "targetName": "tau Boo",
+   "proposal": "07Bf10",
+   "mjdStart": 54487.667,
+   "exposureSeconds": 940
+  },
+  {
+   "product": "966325p",
+   "uri": "cadc:CFHT/966325p.fits",
+   "bytes": 20592000,
+   "targetName": "tau Boo",
+   "proposal": "07Bf10",
+   "mjdStart": 54487.681,
+   "exposureSeconds": 500
+  },
+  {
+   "product": "966476p",
+   "uri": "cadc:CFHT/966476p.fits",
+   "bytes": 20589120,
+   "targetName": "tauBoo",
+   "proposal": "07Bf10",
+   "mjdStart": 54488.534,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "966480p",
+   "uri": "cadc:CFHT/966480p.fits",
+   "bytes": 20589120,
+   "targetName": "tauBoo",
+   "proposal": "07Bf10",
+   "mjdStart": 54488.547,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "966484p",
+   "uri": "cadc:CFHT/966484p.fits",
+   "bytes": 20589120,
+   "targetName": "tauBoo",
+   "proposal": "07Bf10",
+   "mjdStart": 54488.56,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "966496p",
+   "uri": "cadc:CFHT/966496p.fits",
+   "bytes": 20589120,
+   "targetName": "tauBoo",
+   "proposal": "07Bf10",
+   "mjdStart": 54488.654,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "966500p",
+   "uri": "cadc:CFHT/966500p.fits",
+   "bytes": 20589120,
+   "targetName": "tauBoo",
+   "proposal": "07Bf10",
+   "mjdStart": 54488.667,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "966504p",
+   "uri": "cadc:CFHT/966504p.fits",
+   "bytes": 20589120,
+   "targetName": "tauBoo",
+   "proposal": "07Bf10",
+   "mjdStart": 54488.68,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "966618p",
+   "uri": "cadc:CFHT/966618p.fits",
+   "bytes": 20589120,
+   "targetName": "Tau Boo",
+   "proposal": "07BC17",
+   "mjdStart": 54489.54,
+   "exposureSeconds": 1040
+  },
+  {
+   "product": "966622p",
+   "uri": "cadc:CFHT/966622p.fits",
+   "bytes": 20589120,
+   "targetName": "Tau Boo",
+   "proposal": "07BC17",
+   "mjdStart": 54489.554,
+   "exposureSeconds": 1040
+  },
+  {
+   "product": "966626p",
+   "uri": "cadc:CFHT/966626p.fits",
+   "bytes": 20589120,
+   "targetName": "Tau Boo",
+   "proposal": "07BC17",
+   "mjdStart": 54489.568,
+   "exposureSeconds": 1040
+  },
+  {
+   "product": "966638p",
+   "uri": "cadc:CFHT/966638p.fits",
+   "bytes": 20589120,
+   "targetName": "Tau Boo",
+   "proposal": "07BC17",
+   "mjdStart": 54489.653,
+   "exposureSeconds": 920
+  },
+  {
+   "product": "966642p",
+   "uri": "cadc:CFHT/966642p.fits",
+   "bytes": 20589120,
+   "targetName": "Tau Boo",
+   "proposal": "07BC17",
+   "mjdStart": 54489.666,
+   "exposureSeconds": 920
+  },
+  {
+   "product": "966646p",
+   "uri": "cadc:CFHT/966646p.fits",
+   "bytes": 20589120,
+   "targetName": "Tau Boo",
+   "proposal": "07BC17",
+   "mjdStart": 54489.679,
+   "exposureSeconds": 920
+  },
+  {
+   "product": "966762p",
+   "uri": "cadc:CFHT/966762p.fits",
+   "bytes": 20592000,
+   "targetName": "Tau Boo",
+   "proposal": "07BF17",
+   "mjdStart": 54490.555,
+   "exposureSeconds": 920
+  },
+  {
+   "product": "966768p",
+   "uri": "cadc:CFHT/966768p.fits",
+   "bytes": 20592000,
+   "targetName": "Tau Boo",
+   "proposal": "07BF17",
+   "mjdStart": 54490.598,
+   "exposureSeconds": 720
+  },
+  {
+   "product": "966941p",
+   "uri": "cadc:CFHT/966941p.fits",
+   "bytes": 20589120,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54492.54,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "966945p",
+   "uri": "cadc:CFHT/966945p.fits",
+   "bytes": 20589120,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54492.553,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "966949p",
+   "uri": "cadc:CFHT/966949p.fits",
+   "bytes": 20589120,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54492.566,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "966961p",
+   "uri": "cadc:CFHT/966961p.fits",
+   "bytes": 20589120,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54492.655,
+   "exposureSeconds": 880
+  },
+  {
+   "product": "966965p",
+   "uri": "cadc:CFHT/966965p.fits",
+   "bytes": 20589120,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54492.668,
+   "exposureSeconds": 880
+  },
+  {
+   "product": "966969p",
+   "uri": "cadc:CFHT/966969p.fits",
+   "bytes": 20589120,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54492.68,
+   "exposureSeconds": 880
+  },
+  {
+   "product": "967062p",
+   "uri": "cadc:CFHT/967062p.fits",
+   "bytes": 20592000,
+   "targetName": "tau Boo",
+   "proposal": "07BF10",
+   "mjdStart": 54493.539,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "967066p",
+   "uri": "cadc:CFHT/967066p.fits",
+   "bytes": 20592000,
+   "targetName": "tau Boo",
+   "proposal": "07BF10",
+   "mjdStart": 54493.553,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "967070p",
+   "uri": "cadc:CFHT/967070p.fits",
+   "bytes": 20592000,
+   "targetName": "tau Boo",
+   "proposal": "07BF10",
+   "mjdStart": 54493.566,
+   "exposureSeconds": 960
+  },
+  {
+   "product": "967082p",
+   "uri": "cadc:CFHT/967082p.fits",
+   "bytes": 20592000,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54493.654,
+   "exposureSeconds": 880
+  },
+  {
+   "product": "967086p",
+   "uri": "cadc:CFHT/967086p.fits",
+   "bytes": 20592000,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54493.666,
+   "exposureSeconds": 880
+  },
+  {
+   "product": "967090p",
+   "uri": "cadc:CFHT/967090p.fits",
+   "bytes": 20592000,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54493.679,
+   "exposureSeconds": 880
+  },
+  {
+   "product": "967278p",
+   "uri": "cadc:CFHT/967278p.fits",
+   "bytes": 20589120,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54495.61,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "967282p",
+   "uri": "cadc:CFHT/967282p.fits",
+   "bytes": 20589120,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54495.626,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "967286p",
+   "uri": "cadc:CFHT/967286p.fits",
+   "bytes": 20589120,
+   "targetName": "tau boo",
+   "proposal": "07BF10",
+   "mjdStart": 54495.642,
+   "exposureSeconds": 1200
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 6466,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: Teff"
+  },
+  "logGravity": {
+   "value": 4.25,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: logg"
+  },
+  "metallicity": {
+   "value": 0.26,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": -16.03,
+  "source": "SIMBAD, radial velocity of * tau Boo (2002ApJS..141..503N)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 14.27,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501), Table 1: v sin i 14.27 ± 0.06 km/s"
+  },
+  "inclinationDegrees": {
+   "value": 45,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the tilt their maps are made with, 45 degrees, beside the derived 44.5 ± 1.5 degrees their Table 1 quotes"
+  },
+  "periodDays": {
+   "value": 3.142,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the equatorial rate of 2.00 rad/d their Fourier-transform measurement of the differential rotation assumes, which is 3.142 d"
+  },
+  "shearRadPerDay": {
+   "value": 0.35,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): differential rotation 0.35 ± 0.14 rad/d from the Fourier transform of the line profile"
+  },
+  "maximumDegree": {
+   "value": 8,
+   "source": "Donati et al. (2008), MNRAS, doi:10.1111/j.1365-2966.2008.12946.x (arXiv:0802.1584), Sect. 3: the expansion is limited to degree 8"
+  }
+ },
+ "published": {
+  "paper": "Fares et al. (2009), MNRAS, doi:10.1111/j.1365-2966.2009.15303.x (arXiv:0906.4515)",
+  "url": "https://arxiv.org/abs/0906.4515",
+  "otherGeometry": true,
+  "meanGauss": {
+   "value": 3.1,
+   "source": "Table 3, January 2008: mean field strength"
+  },
+  "toroidalPercent": {
+   "value": 62,
+   "source": "Table 3, January 2008: toroidal share of the energy"
+  },
+  "spectra": {
+   "value": 40,
+   "source": "Table 1: 40 ESPaDOnS spectra of 19 to 29 January 2008"
+  },
+  "note": "The paper maps the run with a tilt of 40 degrees and v sin i 15.9 km/s; this program uses 45 degrees and 14.27 km/s."
+ }
+}

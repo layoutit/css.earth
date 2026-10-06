@@ -1,0 +1,254 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "bd-072388-2016-01",
+ "target": {
+  "name": "BD-072388",
+  "raDegrees": 123.46250446,
+  "decDegrees": -7.6402401,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 57387,
+  "toMjd": 57420
+ },
+ "observations": [
+  {
+   "product": "1884106p",
+   "uri": "cadc:CFHT/1884106p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57404.409,
+   "exposureSeconds": 496
+  },
+  {
+   "product": "1884114p",
+   "uri": "cadc:CFHT/1884114p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57404.486,
+   "exposureSeconds": 496
+  },
+  {
+   "product": "1884138p",
+   "uri": "cadc:CFHT/1884138p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57404.608,
+   "exposureSeconds": 496
+  },
+  {
+   "product": "1886261p",
+   "uri": "cadc:CFHT/1886261p.fits",
+   "bytes": 20586240,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57405.335,
+   "exposureSeconds": 496
+  },
+  {
+   "product": "1886281p",
+   "uri": "cadc:CFHT/1886281p.fits",
+   "bytes": 20586240,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57405.504,
+   "exposureSeconds": 496
+  },
+  {
+   "product": "1886697p",
+   "uri": "cadc:CFHT/1886697p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57406.32,
+   "exposureSeconds": 496
+  },
+  {
+   "product": "1886709p",
+   "uri": "cadc:CFHT/1886709p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57406.421,
+   "exposureSeconds": 496
+  },
+  {
+   "product": "1886729p",
+   "uri": "cadc:CFHT/1886729p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57406.558,
+   "exposureSeconds": 496
+  },
+  {
+   "product": "1887176p",
+   "uri": "cadc:CFHT/1887176p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57407.404,
+   "exposureSeconds": 496
+  },
+  {
+   "product": "1887184p",
+   "uri": "cadc:CFHT/1887184p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57407.472,
+   "exposureSeconds": 496
+  },
+  {
+   "product": "1887574p",
+   "uri": "cadc:CFHT/1887574p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57408.3,
+   "exposureSeconds": 992
+  },
+  {
+   "product": "1887590p",
+   "uri": "cadc:CFHT/1887590p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57408.434,
+   "exposureSeconds": 992
+  },
+  {
+   "product": "1887602p",
+   "uri": "cadc:CFHT/1887602p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57408.515,
+   "exposureSeconds": 992
+  },
+  {
+   "product": "1888144p",
+   "uri": "cadc:CFHT/1888144p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57409.369,
+   "exposureSeconds": 992
+  },
+  {
+   "product": "1888156p",
+   "uri": "cadc:CFHT/1888156p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57409.471,
+   "exposureSeconds": 992
+  },
+  {
+   "product": "1888169p",
+   "uri": "cadc:CFHT/1888169p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57409.518,
+   "exposureSeconds": 992
+  },
+  {
+   "product": "1888618p",
+   "uri": "cadc:CFHT/1888618p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57410.415,
+   "exposureSeconds": 992
+  },
+  {
+   "product": "1888634p",
+   "uri": "cadc:CFHT/1888634p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BE93",
+   "mjdStart": 57410.507,
+   "exposureSeconds": 416.4
+  },
+  {
+   "product": "1888928p",
+   "uri": "cadc:CFHT/1888928p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57411.484,
+   "exposureSeconds": 992
+  },
+  {
+   "product": "1889128p",
+   "uri": "cadc:CFHT/1889128p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57412.452,
+   "exposureSeconds": 992
+  },
+  {
+   "product": "1889349p",
+   "uri": "cadc:CFHT/1889349p.fits",
+   "bytes": 20589120,
+   "targetName": "BD-072388",
+   "proposal": "15BP19",
+   "mjdStart": 57413.495,
+   "exposureSeconds": 992
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 4903,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 19122666: Teff"
+  },
+  "logGravity": {
+   "value": 4.27,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 19122666: logg"
+  }
+ },
+ "radialVelocity": {
+  "value": -16.6,
+  "source": "SIMBAD, radial velocity of BD-07 2388 (2021A&A...645A..30Z)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 126.1,
+   "source": "Folsom, C. P. et al., arXiv:1711.08636: Table 2 (fundimental-param-table): P_rot, v sin i, v_r, i, R, M, dOmega"
+  },
+  "inclinationDegrees": {
+   "value": 38,
+   "source": "Folsom, C. P. et al., arXiv:1711.08636: +13/-13 deg"
+  },
+  "periodDays": {
+   "value": 0.32595,
+   "source": "Folsom, C. P. et al., arXiv:1711.08636: Table 2 (fundimental-param-table): P_rot, v sin i, v_r, i, R, M, dOmega"
+  },
+  "maximumDegree": {
+   "value": 15,
+   "source": "Folsom, C. P. et al., arXiv:1711.08636: 'carried out to 15th degree in l'"
+  }
+ },
+ "published": {
+  "paper": "Folsom, C. P. et al., arXiv:1711.08636",
+  "url": "https://arxiv.org/abs/1711.08636",
+  "meanGauss": {
+   "value": 195.5,
+   "source": "Table 1 (observations-table), Table 3 (table-mag-param): mean field strength, epoch 16 Jan - 25 Jan 2016"
+  },
+  "toroidalPercent": {
+   "value": 60.3,
+   "source": "Table 1 (observations-table), Table 3 (table-mag-param): toroidal share of the energy, epoch 16 Jan - 25 Jan 2016"
+  },
+  "spectra": {
+   "value": 20,
+   "source": "Table 1 (observations-table), Table 3 (table-mag-param): spectra used"
+  },
+  "note": "instruments ESPaDOnS; maxG: 1015.7; poloidalPct: 39.7; axisymmetricPct: 62.5; axisymmetricOf: total energy"
+ }
+}

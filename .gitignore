@@ -90,6 +90,8 @@ src/objects/venus/source/akatsuki/*.nc
 !src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png
 !src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png
 !src/objects/eps-eridani-corona/source/previews/*.png
+# The same previews of the coronae the generator derives (packages/telescope-cli/src/new-object/corona/).
+!src/objects/*-corona/source/previews/*.png
 !src/objects/eps-eridani-disc/source/previews/dust.png
 !src/objects/hd-181327-disc/source/previews/reflectance.png
 !src/objects/sun-cor1-density/source/previews/cor1-density.png

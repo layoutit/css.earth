@@ -150,6 +150,41 @@
           }
         ]
       }
+    },
+    {
+      "id": "gumala-espadons-map-radial-field-2009-10",
+      "path": "science/espadons/hd-179949-2009-09.dat",
+      "origin": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "productId": "Magnetic map of HD 179949, Oct 2009, from 18 ESPaDOnS spectra",
+      "title": "Magnetic map of HD 179949 from 18 polarised spectra of 25 September 2009 to 10 October 2009: radial, azimuthal and meridional field on a longitude-latitude grid",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "credit": "CFHT ESPaDOnS, CFHT programs 09BC19, 09BF05, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+      "displayCredit": "CFHT ESPaDOnS · mapped here",
+      "license": "CC BY 4.0 for the archived spectra (Canadian Astronomy Data Centre); reduction by this project",
+      "licenseEvidence": [
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program hd-179949-2009-09; the receipt beside that program (hd-179949-2009-09.map.json) records every archived spectrum by its pin, the line list, the codes and each step's result.",
+      "redistribution": "Archived spectra under CC BY 4.0, reduced here.",
+      "consumers": [
+        "espadons-zdi"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cadc-cfht-espadons",
+            "role": "material",
+            "evidence": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+          },
+          {
+            "catalogueId": "arxiv-1711-08636",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1711.08636"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

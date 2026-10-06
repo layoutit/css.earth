@@ -212,6 +212,564 @@
       "title": "Photosphere color",
       "detail": "From its spectrum",
       "summary": "The color of Gaia's spectrum of the star."
+    },
+    "corona-oct-2015": {
+      "title": "Derived corona, Oct 2015",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Oct 2015. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-dec-2015": {
+      "title": "Derived corona, Dec 2015",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Dec 2015. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-feb-2016": {
+      "title": "Derived corona, Feb 2016",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Feb 2016. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-jun-2016": {
+      "title": "Derived corona, Jun 2016",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Jun 2016. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-aug-2016": {
+      "title": "Derived corona, Aug 2016",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Aug 2016. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-sep-2016": {
+      "title": "Derived corona, Sep 2016",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Sep 2016. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-oct-2016": {
+      "title": "Derived corona, Oct 2016",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Oct 2016. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-dec-2016": {
+      "title": "Derived corona, Dec 2016",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Dec 2016. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-feb-2017": {
+      "title": "Derived corona, Feb 2017",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Feb 2017. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-jul-2017": {
+      "title": "Derived corona, Jul 2017",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Jul 2017. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-aug-2017": {
+      "title": "Derived corona, Aug 2017",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Aug 2017. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-sep-2017": {
+      "title": "Derived corona, Sep 2017",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Sep 2017. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-nov-2017": {
+      "title": "Derived corona, Nov 2017",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Nov 2017. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-dec-2017": {
+      "title": "Derived corona, Dec 2017",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Dec 2017. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-feb-2018": {
+      "title": "Derived corona, Feb 2018",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Feb 2018. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-jun-2018": {
+      "title": "Derived corona, Jun 2018",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Jun 2018. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-aug-2018": {
+      "title": "Derived corona, Aug 2018",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Aug 2018. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-sep-2018": {
+      "title": "Derived corona, Sep 2018",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Sep 2018. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-17251923",
+          "url": "https://zenodo.org/records/17251923",
+          "label": "Alvarado-Gómez et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
     }
   }
 }

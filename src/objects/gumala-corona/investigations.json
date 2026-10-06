@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "gumala-corona",
+  "entries": [
+    {
+      "id": "derived-corona",
+      "subject": "Gumala: a corona derived from its magnetic map",
+      "status": "included",
+      "finding": "The potential field of each map to degree 15, with its source surface at 2.5 radii, reproduces the map with an rms residual of 0% to 0%. X-ray luminosity 4.9 × 10^28 erg/s (2RXS J191534.4-241058, 22.05 arcsec from the star's Gaia position, stellar probability 0.9914); temperature 3.3 million kelvin, not measured: the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129); mass loss 13 times the Sun's, not measured: what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37), uncertain by a factor of 5 or more. The wind passes the speed of sound 1.81 radii out.",
+      "evidence": [
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+        "https://arxiv.org/abs/1505.00643",
+        "https://arxiv.org/abs/2105.00019"
+      ]
+    }
+  ]
+}

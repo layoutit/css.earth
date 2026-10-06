@@ -1,0 +1,184 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "tau-boo-2006-06",
+ "target": {
+  "name": "tau Boo",
+  "object": "tepiamenit",
+  "raDegrees": 206.8134,
+  "decDegrees": 17.4572,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 53899,
+  "toMjd": 53906
+ },
+ "observations": [
+  {
+   "product": "852120p",
+   "uri": "cadc:CFHT/852120p.fits",
+   "bytes": 20592000,
+   "targetName": "tauboo",
+   "proposal": "06AF7B",
+   "mjdStart": 53899.232,
+   "exposureSeconds": 635.1610000000001
+  },
+  {
+   "product": "852124p",
+   "uri": "cadc:CFHT/852124p.fits",
+   "bytes": 20592000,
+   "targetName": "tauboo",
+   "proposal": "06AF7B",
+   "mjdStart": 53899.242,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "852128p",
+   "uri": "cadc:CFHT/852128p.fits",
+   "bytes": 20592000,
+   "targetName": "tauboo",
+   "proposal": "06AF7B",
+   "mjdStart": 53899.254,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "852132p",
+   "uri": "cadc:CFHT/852132p.fits",
+   "bytes": 20592000,
+   "targetName": "tauboo",
+   "proposal": "06AF7B",
+   "mjdStart": 53899.265,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "852136p",
+   "uri": "cadc:CFHT/852136p.fits",
+   "bytes": 20592000,
+   "targetName": "tauboo",
+   "proposal": "06AF7B",
+   "mjdStart": 53899.274,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "852140p",
+   "uri": "cadc:CFHT/852140p.fits",
+   "bytes": 20592000,
+   "targetName": "tauboo",
+   "proposal": "06AF7B",
+   "mjdStart": 53899.283,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "852144p",
+   "uri": "cadc:CFHT/852144p.fits",
+   "bytes": 20592000,
+   "targetName": "tauboo",
+   "proposal": "06AF7B",
+   "mjdStart": 53899.293,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "852545p",
+   "uri": "cadc:CFHT/852545p.fits",
+   "bytes": 20592000,
+   "targetName": "tau Boo",
+   "proposal": "06AH20A",
+   "mjdStart": 53903.279,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "852549p",
+   "uri": "cadc:CFHT/852549p.fits",
+   "bytes": 20592000,
+   "targetName": "tau Boo",
+   "proposal": "06AH20A",
+   "mjdStart": 53903.288,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "852655p",
+   "uri": "cadc:CFHT/852655p.fits",
+   "bytes": 20597760,
+   "targetName": "tau Boo",
+   "proposal": "06AH20A",
+   "mjdStart": 53904.274,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "852659p",
+   "uri": "cadc:CFHT/852659p.fits",
+   "bytes": 20597760,
+   "targetName": "tau Boo",
+   "proposal": "06AH20A",
+   "mjdStart": 53904.284,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "852785p",
+   "uri": "cadc:CFHT/852785p.fits",
+   "bytes": 20592000,
+   "targetName": "tau Boo",
+   "proposal": "06AH20A",
+   "mjdStart": 53905.328,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "852789p",
+   "uri": "cadc:CFHT/852789p.fits",
+   "bytes": 20592000,
+   "targetName": "tau Boo",
+   "proposal": "06AH20A",
+   "mjdStart": 53905.345,
+   "exposureSeconds": 1200
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 6466,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: Teff"
+  },
+  "logGravity": {
+   "value": 4.25,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: logg"
+  },
+  "metallicity": {
+   "value": 0.26,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": -16.03,
+  "source": "SIMBAD, radial velocity of * tau Boo (2002ApJS..141..503N)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 14.27,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501), Table 1: v sin i 14.27 ± 0.06 km/s"
+  },
+  "inclinationDegrees": {
+   "value": 45,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the tilt their maps are made with, 45 degrees, beside the derived 44.5 ± 1.5 degrees their Table 1 quotes"
+  },
+  "periodDays": {
+   "value": 3.142,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the equatorial rate of 2.00 rad/d their Fourier-transform measurement of the differential rotation assumes, which is 3.142 d"
+  },
+  "shearRadPerDay": {
+   "value": 0.35,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): differential rotation 0.35 ± 0.14 rad/d from the Fourier transform of the line profile"
+  },
+  "maximumDegree": {
+   "value": 8,
+   "source": "Donati et al. (2008), MNRAS, doi:10.1111/j.1365-2966.2008.12946.x (arXiv:0802.1584), Sect. 3: the expansion is limited to degree 8"
+  }
+ },
+ "published": {
+  "paper": "Catala et al. (2007), MNRAS 374, L42 (arXiv:astro-ph/0610758)",
+  "url": "https://arxiv.org/abs/astro-ph/0610758",
+  "otherGeometry": true,
+  "meanGauss": {
+   "value": 1.8,
+   "source": "Fares et al. (2013, arXiv:1307.6091), Table 1, which lists 1.8 G for this map"
+  },
+  "note": "The paper maps the run with a tilt of 40 degrees and v sin i 15.9 km/s."
+ }
+}

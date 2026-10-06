@@ -1,0 +1,1149 @@
+{
+ "schema": "cssearth-espadons-map@2",
+ "program": "v374-peg-2006-08",
+ "target": {
+  "name": "V374 Peg",
+  "raDegrees": 330.3046842,
+  "decDegrees": 28.3069187,
+  "radiusDegrees": 0.02
+ },
+ "inputs": {
+  "observations": [
+   {
+    "product": "861079p",
+    "uri": "cadc:CFHT/861079p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861083p",
+    "uri": "cadc:CFHT/861083p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861099p",
+    "uri": "cadc:CFHT/861099p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861103p",
+    "uri": "cadc:CFHT/861103p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861269p",
+    "uri": "cadc:CFHT/861269p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861273p",
+    "uri": "cadc:CFHT/861273p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861387p",
+    "uri": "cadc:CFHT/861387p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861391p",
+    "uri": "cadc:CFHT/861391p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861413p",
+    "uri": "cadc:CFHT/861413p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861417p",
+    "uri": "cadc:CFHT/861417p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861553p",
+    "uri": "cadc:CFHT/861553p.fits",
+    "bytes": 20597760
+   },
+   {
+    "product": "861557p",
+    "uri": "cadc:CFHT/861557p.fits",
+    "bytes": 20597760
+   },
+   {
+    "product": "861582p",
+    "uri": "cadc:CFHT/861582p.fits",
+    "bytes": 20597760
+   },
+   {
+    "product": "861586p",
+    "uri": "cadc:CFHT/861586p.fits",
+    "bytes": 20597760
+   },
+   {
+    "product": "861715p",
+    "uri": "cadc:CFHT/861715p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861719p",
+    "uri": "cadc:CFHT/861719p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861742p",
+    "uri": "cadc:CFHT/861742p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861746p",
+    "uri": "cadc:CFHT/861746p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861867p",
+    "uri": "cadc:CFHT/861867p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861871p",
+    "uri": "cadc:CFHT/861871p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861989p",
+    "uri": "cadc:CFHT/861989p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "861993p",
+    "uri": "cadc:CFHT/861993p.fits",
+    "bytes": 20592000
+   }
+  ],
+  "lineData": {
+   "url": "http://kurucz.harvard.edu/linelists/gfnew/gfall08oct17.dat",
+   "bytes": 371660460,
+   "credit": "R. L. Kurucz, atomic line list gfall, version of 8 October 2017"
+  },
+  "toolchain": {
+   "file": "packages/telescope-cli/src/archives/espadons/toolchain.json",
+   "requirements": [
+    "numpy==2.5.3",
+    "scipy==1.16.3",
+    "matplotlib==3.11.2",
+    "astropy==8.0.1",
+    "LSDpy==1.0.0",
+    "specpolFlow==1.1.0"
+   ],
+   "zdipy": {
+    "url": "https://github.com/folsomcp/ZDIpy",
+    "commit": "86d9f98c426a709f3298bab95fda5f6f5e65e111"
+   },
+   "julia": {
+    "download": {
+     "path": "julia-1.12.7-macaarch64.tar.gz",
+     "url": "https://julialang-s3.julialang.org/bin/mac/aarch64/1.12/julia-1.12.7-macaarch64.tar.gz",
+     "bytes": 230457194
+    },
+    "executable": "julia-1.12.7/bin/julia",
+    "environment": "packages/telescope-cli/src/archives/espadons/korg"
+   }
+  }
+ },
+ "mask": {
+  "atmosphere": {
+   "effectiveTemperatureK": {
+    "value": 3240,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 283410775: Teff"
+   },
+   "logGravity": {
+    "value": 4.91,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 283410775: logg"
+   }
+  },
+  "korg": "1.3.1",
+  "candidates": 327037,
+  "synthesised": 23151,
+  "minimumDepth": 0.1,
+  "deepEnough": 8153,
+  "lines": 5567,
+  "species": {
+   "26.00": 2508,
+   "22.00": 1479,
+   "24.00": 1182,
+   "23.00": 958,
+   "27.00": 260,
+   "40.00": 252,
+   "28.00": 240,
+   "20.00": 206,
+   "21.00": 180,
+   "25.00": 179,
+   "41.00": 143,
+   "44.00": 78,
+   "39.00": 71,
+   "56.00": 68,
+   "38.00": 65,
+   "22.01": 56,
+   "11.00": 55,
+   "12.00": 31,
+   "39.01": 24,
+   "42.00": 24,
+   "19.00": 17,
+   "21.01": 16,
+   "45.00": 10,
+   "13.00": 8,
+   "20.01": 7,
+   "46.00": 6,
+   "29.00": 6,
+   "56.01": 6,
+   "23.01": 5,
+   "38.01": 5,
+   "3.00": 3,
+   "14.00": 2,
+   "40.01": 1,
+   "30.00": 1,
+   "26.01": 1
+  },
+  "meanDepth": 0.4677,
+  "meanWavelengthNm": 472.1,
+  "meanLande": 1.2377
+ },
+ "velocity": {
+  "kmS": -2.72,
+  "catalogued": {
+   "value": -4.79,
+   "source": "SIMBAD, radial velocity of V* V374 Peg (2018MNRAS.475.1960F)"
+  },
+  "searchCentreKmS": -4.2,
+  "searchDepth": 0.0296
+ },
+ "profiles": {
+  "halfWidthKmS": 79.2,
+  "stepKmS": 1.8,
+  "fieldHalfWidthKmS": 47.3,
+  "lineHalfWidthKmS": 63,
+  "spectra": [
+   {
+    "product": "861079p",
+    "utc": "2006-08-05T09:58:03",
+    "mjd": 53952.41532,
+    "used": true,
+    "longitudinal": {
+     "gauss": 274.02,
+     "error": 100.86,
+     "nullGauss": -2.34
+    },
+    "falseAlarm": 0.00007713378115237202,
+    "nullFalseAlarm": 0.9294470038343426,
+    "centreKmS": -2.79,
+    "chiSquare": {
+     "intensity": 145.3421,
+     "stokesV": 1.1229,
+     "null": 1.1268
+    },
+    "offset": {
+     "stokesV": -0.00063954,
+     "null": -0.00060655
+    }
+   },
+   {
+    "product": "861083p",
+    "utc": "2006-08-05T10:22:21",
+    "mjd": 53952.43219,
+    "used": true,
+    "longitudinal": {
+     "gauss": 112.47,
+     "error": 97.51,
+     "nullGauss": -26.25
+    },
+    "falseAlarm": 0.00025615156618363777,
+    "nullFalseAlarm": 0.3633214385995174,
+    "centreKmS": -2.34,
+    "chiSquare": {
+     "intensity": 160.2606,
+     "stokesV": 1.1014,
+     "null": 1.1027
+    },
+    "offset": {
+     "stokesV": -0.00060007,
+     "null": -0.00060661
+    }
+   },
+   {
+    "product": "861099p",
+    "utc": "2006-08-05T12:43:19",
+    "mjd": 53952.53009,
+    "used": true,
+    "longitudinal": {
+     "gauss": 321.47,
+     "error": 98.15,
+     "nullGauss": 54.64
+    },
+    "falseAlarm": 0,
+    "nullFalseAlarm": 0.10525188544072706,
+    "centreKmS": -2.95,
+    "chiSquare": {
+     "intensity": 153.7208,
+     "stokesV": 1.1062,
+     "null": 1.1043
+    },
+    "offset": {
+     "stokesV": -0.00056845,
+     "null": -0.0006081
+    }
+   },
+   {
+    "product": "861103p",
+    "utc": "2006-08-05T13:07:38",
+    "mjd": 53952.54697,
+    "used": true,
+    "longitudinal": {
+     "gauss": 327.94,
+     "error": 97.84,
+     "nullGauss": -39.69
+    },
+    "falseAlarm": 3.774758283725532e-15,
+    "nullFalseAlarm": 0.01864379898233981,
+    "centreKmS": -2.74,
+    "chiSquare": {
+     "intensity": 157.4916,
+     "stokesV": 1.099,
+     "null": 1.0992
+    },
+    "offset": {
+     "stokesV": -0.00057325,
+     "null": -0.000573
+    }
+   },
+   {
+    "product": "861269p",
+    "utc": "2006-08-07T12:31:57",
+    "mjd": 53954.5222,
+    "used": true,
+    "longitudinal": {
+     "gauss": 284.2,
+     "error": 92.33,
+     "nullGauss": 131.97
+    },
+    "falseAlarm": 0.02338133678550569,
+    "nullFalseAlarm": 0.3828832192095414,
+    "centreKmS": -2.82,
+    "chiSquare": {
+     "intensity": 185.6454,
+     "stokesV": 1.1431,
+     "null": 1.1391
+    },
+    "offset": {
+     "stokesV": -0.00050046,
+     "null": -0.00047103
+    }
+   },
+   {
+    "product": "861273p",
+    "utc": "2006-08-07T12:58:55",
+    "mjd": 53954.54092,
+    "used": true,
+    "longitudinal": {
+     "gauss": 279.43,
+     "error": 93.09,
+     "nullGauss": 42.8
+    },
+    "falseAlarm": 0.00014400344809528676,
+    "nullFalseAlarm": 0.16485843161259772,
+    "centreKmS": -2.91,
+    "chiSquare": {
+     "intensity": 175.1275,
+     "stokesV": 1.141,
+     "null": 1.1293
+    },
+    "offset": {
+     "stokesV": -0.00050718,
+     "null": -0.00048231
+    }
+   },
+   {
+    "product": "861387p",
+    "utc": "2006-08-08T08:30:57",
+    "mjd": 53955.35484,
+    "used": true,
+    "longitudinal": {
+     "gauss": 341.76,
+     "error": 111.83,
+     "nullGauss": -145.48
+    },
+    "falseAlarm": 7.593814466133608e-11,
+    "nullFalseAlarm": 0.631028381802367,
+    "centreKmS": -2.33,
+    "chiSquare": {
+     "intensity": 128.7412,
+     "stokesV": 1.1565,
+     "null": 1.1602
+    },
+    "offset": {
+     "stokesV": -0.00073794,
+     "null": -0.00070267
+    }
+   },
+   {
+    "product": "861391p",
+    "utc": "2006-08-08T08:55:54",
+    "mjd": 53955.37216,
+    "used": true,
+    "longitudinal": {
+     "gauss": 298.68,
+     "error": 97.51,
+     "nullGauss": 38.58
+    },
+    "falseAlarm": 6.9694106041851e-10,
+    "nullFalseAlarm": 0.07635848943115942,
+    "centreKmS": -2.58,
+    "chiSquare": {
+     "intensity": 167.4364,
+     "stokesV": 1.1287,
+     "null": 1.1288
+    },
+    "offset": {
+     "stokesV": -0.00056478,
+     "null": -0.00057376
+    }
+   },
+   {
+    "product": "861413p",
+    "utc": "2006-08-08T12:23:00",
+    "mjd": 53955.51598,
+    "used": true,
+    "longitudinal": {
+     "gauss": 261.28,
+     "error": 93.16,
+     "nullGauss": -75.15
+    },
+    "falseAlarm": 2.715679903175783e-10,
+    "nullFalseAlarm": 0.890699410858221,
+    "centreKmS": -2.29,
+    "chiSquare": {
+     "intensity": 185.4454,
+     "stokesV": 1.1423,
+     "null": 1.1436
+    },
+    "offset": {
+     "stokesV": -0.00047638,
+     "null": -0.00047333
+    }
+   },
+   {
+    "product": "861417p",
+    "utc": "2006-08-08T12:48:05",
+    "mjd": 53955.5334,
+    "used": true,
+    "longitudinal": {
+     "gauss": 37.85,
+     "error": 91.73,
+     "nullGauss": -59.02
+    },
+    "falseAlarm": 0.0000019070980373792068,
+    "nullFalseAlarm": 0.1766052812203983,
+    "centreKmS": -2.78,
+    "chiSquare": {
+     "intensity": 184.5721,
+     "stokesV": 1.1442,
+     "null": 1.1416
+    },
+    "offset": {
+     "stokesV": -0.0005199,
+     "null": -0.00049924
+    }
+   },
+   {
+    "product": "861553p",
+    "utc": "2006-08-09T07:37:45",
+    "mjd": 53956.31788,
+    "used": true,
+    "longitudinal": {
+     "gauss": 380.88,
+     "error": 98,
+     "nullGauss": 153.54
+    },
+    "falseAlarm": 0.000010010153866368832,
+    "nullFalseAlarm": 0.5909653646979499,
+    "centreKmS": -3.08,
+    "chiSquare": {
+     "intensity": 175.1835,
+     "stokesV": 1.1252,
+     "null": 1.1237
+    },
+    "offset": {
+     "stokesV": -0.00051624,
+     "null": -0.00049465
+    }
+   },
+   {
+    "product": "861557p",
+    "utc": "2006-08-09T08:03:43",
+    "mjd": 53956.33593,
+    "used": true,
+    "longitudinal": {
+     "gauss": 509.31,
+     "error": 96.85,
+     "nullGauss": 126.04
+    },
+    "falseAlarm": 6.806124075442455e-8,
+    "nullFalseAlarm": 0.26039916799750373,
+    "centreKmS": -2.98,
+    "chiSquare": {
+     "intensity": 184.6938,
+     "stokesV": 1.1226,
+     "null": 1.118
+    },
+    "offset": {
+     "stokesV": -0.0004854,
+     "null": -0.00049425
+    }
+   },
+   {
+    "product": "861582p",
+    "utc": "2006-08-09T12:31:19",
+    "mjd": 53956.52175,
+    "used": true,
+    "longitudinal": {
+     "gauss": 125.79,
+     "error": 94.13,
+     "nullGauss": 17.04
+    },
+    "falseAlarm": 5.095680211120168e-8,
+    "nullFalseAlarm": 0.8412274713781842,
+    "centreKmS": -2.62,
+    "chiSquare": {
+     "intensity": 170.1898,
+     "stokesV": 1.133,
+     "null": 1.1479
+    },
+    "offset": {
+     "stokesV": -0.00050463,
+     "null": -0.00050243
+    }
+   },
+   {
+    "product": "861586p",
+    "utc": "2006-08-09T12:53:49",
+    "mjd": 53956.53738,
+    "used": true,
+    "longitudinal": {
+     "gauss": 188.1,
+     "error": 94.33,
+     "nullGauss": -53.26
+    },
+    "falseAlarm": 0,
+    "nullFalseAlarm": 0.21300891900239094,
+    "centreKmS": -2.72,
+    "chiSquare": {
+     "intensity": 171.0399,
+     "stokesV": 1.1223,
+     "null": 1.1236
+    },
+    "offset": {
+     "stokesV": -0.00048411,
+     "null": -0.00049325
+    }
+   },
+   {
+    "product": "861715p",
+    "utc": "2006-08-10T08:08:45",
+    "mjd": 53957.33941,
+    "used": true,
+    "longitudinal": {
+     "gauss": 49.34,
+     "error": 80.26,
+     "nullGauss": -77.24
+    },
+    "falseAlarm": 0.00006961469383426344,
+    "nullFalseAlarm": 0.6778128351526103,
+    "centreKmS": -2.44,
+    "chiSquare": {
+     "intensity": 217.8062,
+     "stokesV": 1.1276,
+     "null": 1.1309
+    },
+    "offset": {
+     "stokesV": -0.0004144,
+     "null": -0.00042927
+    }
+   },
+   {
+    "product": "861719p",
+    "utc": "2006-08-10T08:37:53",
+    "mjd": 53957.35964,
+    "used": true,
+    "longitudinal": {
+     "gauss": 74.79,
+     "error": 77.86,
+     "nullGauss": -9.98
+    },
+    "falseAlarm": 0.005633770753190048,
+    "nullFalseAlarm": 0.46658098974506945,
+    "centreKmS": -2.54,
+    "chiSquare": {
+     "intensity": 229.0286,
+     "stokesV": 1.1181,
+     "null": 1.1135
+    },
+    "offset": {
+     "stokesV": -0.00044029,
+     "null": -0.00043755
+    }
+   },
+   {
+    "product": "861742p",
+    "utc": "2006-08-10T12:35:49",
+    "mjd": 53957.52488,
+    "used": true,
+    "longitudinal": {
+     "gauss": 285.1,
+     "error": 84.9,
+     "nullGauss": 1.06
+    },
+    "falseAlarm": 1.3199163695354343e-7,
+    "nullFalseAlarm": 0.22945921060010888,
+    "centreKmS": -2.32,
+    "chiSquare": {
+     "intensity": 213.1977,
+     "stokesV": 1.1228,
+     "null": 1.1192
+    },
+    "offset": {
+     "stokesV": -0.00045568,
+     "null": -0.0004457
+    }
+   },
+   {
+    "product": "861746p",
+    "utc": "2006-08-10T13:04:48",
+    "mjd": 53957.545,
+    "used": true,
+    "longitudinal": {
+     "gauss": 358.75,
+     "error": 93.16,
+     "nullGauss": -25.59
+    },
+    "falseAlarm": 2.87871448900745e-9,
+    "nullFalseAlarm": 0.4744998201469738,
+    "centreKmS": -2.34,
+    "chiSquare": {
+     "intensity": 194.8143,
+     "stokesV": 1.1493,
+     "null": 1.1485
+    },
+    "offset": {
+     "stokesV": -0.00054875,
+     "null": -0.00051507
+    }
+   },
+   {
+    "product": "861867p",
+    "utc": "2006-08-11T12:37:39",
+    "mjd": 53958.52615,
+    "used": true,
+    "longitudinal": {
+     "gauss": 346.49,
+     "error": 81.98,
+     "nullGauss": 35
+    },
+    "falseAlarm": 0.0002008399195508881,
+    "nullFalseAlarm": 0.9227561243917957,
+    "centreKmS": -2.72,
+    "chiSquare": {
+     "intensity": 228.3581,
+     "stokesV": 1.1169,
+     "null": 1.1193
+    },
+    "offset": {
+     "stokesV": -0.00042516,
+     "null": -0.00042018
+    }
+   },
+   {
+    "product": "861871p",
+    "utc": "2006-08-11T13:07:00",
+    "mjd": 53958.54653,
+    "used": true,
+    "longitudinal": {
+     "gauss": 395.97,
+     "error": 84.96,
+     "nullGauss": -65.91
+    },
+    "falseAlarm": 3.029430006851186e-8,
+    "nullFalseAlarm": 0.3417746871570915,
+    "centreKmS": -2.72,
+    "chiSquare": {
+     "intensity": 221.7011,
+     "stokesV": 1.105,
+     "null": 1.1136
+    },
+    "offset": {
+     "stokesV": -0.00044001,
+     "null": -0.00045299
+    }
+   },
+   {
+    "product": "861989p",
+    "utc": "2006-08-12T12:43:22",
+    "mjd": 53959.53012,
+    "used": true,
+    "longitudinal": {
+     "gauss": 261.97,
+     "error": 85.23,
+     "nullGauss": -10.28
+    },
+    "falseAlarm": 2.5214876853141277e-9,
+    "nullFalseAlarm": 0.0035121847575249054,
+    "centreKmS": -2.8,
+    "chiSquare": {
+     "intensity": 212.4741,
+     "stokesV": 1.1569,
+     "null": 1.1513
+    },
+    "offset": {
+     "stokesV": -0.00040835,
+     "null": -0.00041779
+    }
+   },
+   {
+    "product": "861993p",
+    "utc": "2006-08-12T13:12:28",
+    "mjd": 53959.55033,
+    "used": true,
+    "longitudinal": {
+     "gauss": 212.21,
+     "error": 85.57,
+     "nullGauss": 67.52
+    },
+    "falseAlarm": 0.00007452233793181495,
+    "nullFalseAlarm": 0.7893346750714659,
+    "centreKmS": -2.59,
+    "chiSquare": {
+     "intensity": 214.0123,
+     "stokesV": 1.1479,
+     "null": 1.1465
+    },
+    "offset": {
+     "stokesV": -0.00042017,
+     "null": -0.00047194
+    }
+   }
+  ]
+ },
+ "map": {
+  "star": {
+   "vsiniKmS": {
+    "value": 36.5,
+    "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 36.5 +/- 0.4 (Aug05) and 36.7 +/- 0.4 (Aug06) from brightness imaging; 36.5 adopted; absolute accuracy about 1 km/s"
+   },
+   "inclinationDegrees": {
+    "value": 70,
+    "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 'assuming i ~ 70 deg'"
+   },
+   "periodDays": {
+    "value": 0.4456,
+    "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 0.4456 d in the phase ephemeris; differential-rotation fit gives 0.445654 +/- 0.000002 d"
+   },
+   "maximumDegree": {
+    "value": 10,
+    "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): 'All results presented below are obtained assuming l <= 10'"
+   },
+   "shearRadPerDay": {
+    "value": 0.0063,
+    "source": "Morin, J. et al., arXiv:0711.1418 (Mon.Not.Roy.Astron.Soc.384:77-86,2008): differential rotation, complete Stokes V data set (Aug05 + Sep05 + Aug06, 87 spectra), reduced chi-square 1.15; solid-body rotation does not get below 1.5"
+   }
+  },
+  "spectraUsed": 22,
+  "maximumDegree": 10,
+  "middleMjd": 53955.98282,
+  "middleUtc": "2006-08-08T23:35:15",
+  "longitudeZero": "faces the observer at the middle of the run; longitude grows the way the star turns",
+  "chiSquareNoField": 2.01,
+  "detection": {
+   "points": 1562,
+   "sigma": 28.2
+  },
+  "ladder": [
+   {
+    "target": 1.8,
+    "iterations": 3,
+    "chiSquare": 1.8,
+    "entropy": -325.21,
+    "meanGauss": 48.39,
+    "maxGauss": 116.1,
+    "poloidalPercent": 94.6,
+    "toroidalPercent": 5.4,
+    "axisymmetricPercent": 28.1,
+    "dipolePercent": 62.198,
+    "quadrupolePercent": 21.898,
+    "octupolePercent": 8.498
+   },
+   {
+    "target": 1.6,
+    "iterations": 3,
+    "chiSquare": 1.6,
+    "entropy": -1450.44,
+    "meanGauss": 110.81,
+    "maxGauss": 254.9,
+    "poloidalPercent": 95.7,
+    "toroidalPercent": 4.3,
+    "axisymmetricPercent": 36.3,
+    "dipolePercent": 67.872,
+    "quadrupolePercent": 19.238,
+    "octupolePercent": 6.702
+   },
+   {
+    "target": 1.5,
+    "iterations": 2,
+    "chiSquare": 1.5,
+    "entropy": -2451.65,
+    "meanGauss": 151.26,
+    "maxGauss": 338,
+    "poloidalPercent": 96.2,
+    "toroidalPercent": 3.8,
+    "axisymmetricPercent": 42.3,
+    "dipolePercent": 70.803,
+    "quadrupolePercent": 17.678,
+    "octupolePercent": 5.858
+   },
+   {
+    "target": 1.4,
+    "iterations": 3,
+    "chiSquare": 1.4,
+    "entropy": -3870.34,
+    "meanGauss": 206.76,
+    "maxGauss": 438.8,
+    "poloidalPercent": 96.9,
+    "toroidalPercent": 3.1,
+    "axisymmetricPercent": 52.6,
+    "dipolePercent": 75.972,
+    "quadrupolePercent": 14.797,
+    "octupolePercent": 4.563
+   },
+   {
+    "target": 1.3,
+    "iterations": 4,
+    "chiSquare": 1.3,
+    "entropy": -5874.9,
+    "meanGauss": 277.34,
+    "maxGauss": 560.3,
+    "poloidalPercent": 97.4,
+    "toroidalPercent": 2.6,
+    "axisymmetricPercent": 62.1,
+    "dipolePercent": 80.397,
+    "quadrupolePercent": 12.141,
+    "octupolePercent": 3.539
+   },
+   {
+    "target": 1.25,
+    "iterations": 3,
+    "chiSquare": 1.25,
+    "entropy": -7187.66,
+    "meanGauss": 320.55,
+    "maxGauss": 642.5,
+    "poloidalPercent": 97.6,
+    "toroidalPercent": 2.4,
+    "axisymmetricPercent": 66.5,
+    "dipolePercent": 82.406,
+    "quadrupolePercent": 10.886,
+    "octupolePercent": 3.095
+   },
+   {
+    "target": 1.2,
+    "iterations": 4,
+    "chiSquare": 1.2,
+    "entropy": -8796.2,
+    "meanGauss": 370.14,
+    "maxGauss": 735.6,
+    "poloidalPercent": 97.8,
+    "toroidalPercent": 2.2,
+    "axisymmetricPercent": 70.4,
+    "dipolePercent": 84.186,
+    "quadrupolePercent": 9.734,
+    "octupolePercent": 2.713
+   },
+   {
+    "target": 1.15,
+    "iterations": 2,
+    "chiSquare": 1.15,
+    "entropy": -10828.16,
+    "meanGauss": 426.8,
+    "maxGauss": 841,
+    "poloidalPercent": 97.9,
+    "toroidalPercent": 2.1,
+    "axisymmetricPercent": 73.6,
+    "dipolePercent": 85.643,
+    "quadrupolePercent": 8.738,
+    "octupolePercent": 2.401
+   },
+   {
+    "target": 1.1,
+    "iterations": 4,
+    "chiSquare": 1.1,
+    "entropy": -13538.85,
+    "meanGauss": 495.2,
+    "maxGauss": 965.6,
+    "poloidalPercent": 98,
+    "toroidalPercent": 2,
+    "axisymmetricPercent": 76.6,
+    "dipolePercent": 86.961,
+    "quadrupolePercent": 7.762,
+    "octupolePercent": 2.131
+   },
+   {
+    "target": 1.05,
+    "iterations": 7,
+    "chiSquare": 1.05,
+    "entropy": -17583.66,
+    "meanGauss": 577.99,
+    "maxGauss": 1143.1,
+    "poloidalPercent": 98,
+    "toroidalPercent": 2,
+    "axisymmetricPercent": 78.8,
+    "dipolePercent": 87.785,
+    "quadrupolePercent": 6.98,
+    "octupolePercent": 1.955
+   },
+   {
+    "target": 1,
+    "iterations": 7,
+    "chiSquare": 1,
+    "entropy": -26032.04,
+    "meanGauss": 689.69,
+    "maxGauss": 1461.9,
+    "poloidalPercent": 97.7,
+    "toroidalPercent": 2.3,
+    "axisymmetricPercent": 80,
+    "dipolePercent": 87.429,
+    "quadrupolePercent": 6.447,
+    "octupolePercent": 2.033
+   }
+  ],
+  "verdict": {
+   "mapped": true
+  },
+  "chosen": {
+   "target": 1.05,
+   "iterations": 7,
+   "chiSquare": 1.05,
+   "entropy": -17583.66,
+   "meanGauss": 577.99,
+   "maxGauss": 1143.1,
+   "poloidalPercent": 98,
+   "toroidalPercent": 2,
+   "axisymmetricPercent": 78.8,
+   "dipolePercent": 87.785,
+   "quadrupolePercent": 6.98,
+   "octupolePercent": 1.955,
+   "chiSquareNoField": 2.01,
+   "lineStrength": 0.390093,
+   "knee": 0.5,
+   "radialGauss": [
+    -1055.42,
+    1117.21
+   ]
+  },
+  "coefficients": [
+   "General poloidal plus toroidal field",
+   "65 3 -3",
+   " 1  0  2.016797e+03 -0.000000e+00",
+   " 1  1  5.980239e+02 -6.640054e+02",
+   " 2  0 -1.090648e+02 -0.000000e+00",
+   " 2  1  1.571533e+02 -1.548773e+02",
+   " 2  2  3.182185e+02  6.357001e+02",
+   " 3  0 -3.131991e+01 -0.000000e+00",
+   " 3  1  1.034386e+02 -8.363563e+01",
+   " 3  2  1.303078e+02  1.503795e+02",
+   " 3  3 -1.044753e+02 -2.998335e+02",
+   " 4  0  2.637796e+00 -0.000000e+00",
+   " 4  1  5.590621e+01 -5.007589e+01",
+   " 4  2  8.878938e+01  5.555731e+01",
+   " 4  3 -5.574805e+01 -7.737512e+01",
+   " 4  4 -1.137142e+02 -1.941785e+02",
+   " 5  0  1.453972e-01 -0.000000e+00",
+   " 5  1  3.048356e+00 -1.312111e+01",
+   " 5  2  4.877879e+01  3.336964e+01",
+   " 5  3 -5.795151e+01 -1.083634e+01",
+   " 5  4 -1.454380e+01 -3.793792e+01",
+   " 5  5  1.453535e+02 -1.681468e+02",
+   " 6  0  6.334788e+00 -0.000000e+00",
+   " 6  1 -3.629782e+00 -2.352952e+00",
+   " 6  2  1.090732e+01  6.489574e+00",
+   " 6  3 -3.285526e+01 -1.299085e+00",
+   " 6  4  4.510063e+01  1.091502e+01",
+   " 6  5  2.232818e+01 -5.095433e+01",
+   " 6  6 -8.638248e+01 -4.706094e+01",
+   " 7  0  6.541464e+00 -0.000000e+00",
+   " 7  1 -1.263314e-01  2.797776e+00",
+   " 7  2 -2.292272e+00 -2.460088e+00",
+   " 7  3 -1.150599e+01  6.267141e+00",
+   " 7  4  3.204760e+01  1.342183e+01",
+   " 7  5 -1.932586e+01 -1.138524e+01",
+   " 7  6 -4.200023e+01 -3.074213e+01",
+   " 7  7 -9.618617e+01  1.605554e+02",
+   " 8  0  6.847316e+00 -0.000000e+00",
+   " 8  1  3.061458e-01  4.002973e+00",
+   " 8  2 -1.097997e+01 -7.660542e+00",
+   " 8  3 -6.508288e+00  6.664431e+00",
+   " 8  4  1.980008e+01  1.868847e+01",
+   " 8  5 -9.700912e+00  7.072355e+00",
+   " 8  6 -5.926134e+01 -3.336662e+01",
+   " 8  7 -2.617458e+01  4.425162e+01",
+   " 8  8  9.821059e+01  9.592098e+01",
+   " 9  0  5.632459e+00 -0.000000e+00",
+   " 9  1  3.044285e+00  1.023693e+00",
+   " 9  2 -1.225368e+01 -8.206543e+00",
+   " 9  3 -3.721870e+00  6.954608e+00",
+   " 9  4  1.201520e+01  1.568876e+01",
+   " 9  5  3.860646e+00  2.591345e+01",
+   " 9  6 -3.563527e+01 -1.638665e+01",
+   " 9  7 -1.007201e+01  3.519768e+01",
+   " 9  8  3.637322e+01  3.348733e+01",
+   " 9  9 -4.347011e+01  5.887437e+01",
+   "10  0  3.241098e+00 -0.000000e+00",
+   "10  1  3.243772e+00  2.551945e-01",
+   "10  2 -9.106557e+00 -3.713414e+00",
+   "10  3 -2.581665e+00  6.067823e+00",
+   "10  4  6.600193e+00  1.257720e+01",
+   "10  5  7.817794e+00  2.404132e+01",
+   "10  6 -2.473124e+01 -6.960612e+00",
+   "10  7 -1.501331e+00  1.572106e+01",
+   "10  8  4.756949e+01  3.553975e+01",
+   "10  9 -2.150579e+01  2.551278e+01",
+   "10 10 -1.464394e+02  1.528797e+01",
+   "",
+   " 1  0 -1.290874e+02 -0.000000e+00",
+   " 1  1  4.062640e+02 -3.082005e+02",
+   " 2  0  2.575085e+02 -0.000000e+00",
+   " 2  1  7.478586e+01 -5.597400e+01",
+   " 2  2  2.735255e+02  7.256465e+00",
+   " 3  0  1.041368e+02 -0.000000e+00",
+   " 3  1  6.259908e+01 -7.694294e+01",
+   " 3  2  4.301168e+01 -4.561157e+01",
+   " 3  3 -1.417482e+02  2.485404e+01",
+   " 4  0  2.431803e+01 -0.000000e+00",
+   " 4  1  2.471813e+00 -2.186206e+01",
+   " 4  2  4.629959e+01  2.054874e+01",
+   " 4  3 -3.392691e+01  4.552980e+01",
+   " 4  4  1.303888e+02  1.228197e+02",
+   " 5  0  2.534116e+01 -0.000000e+00",
+   " 5  1  1.092092e+01 -1.335757e+01",
+   " 5  2  3.089459e+00 -9.107406e+00",
+   " 5  3 -1.141217e+01  1.121147e+01",
+   " 5  4  6.926422e+01  4.673780e+01",
+   " 5  5 -1.559926e+02 -1.659384e+01",
+   " 6  0  1.174656e+01 -0.000000e+00",
+   " 6  1  1.089265e+01 -4.310771e+00",
+   " 6  2 -3.348218e+00 -7.450347e+00",
+   " 6  3  1.035706e+01  1.048026e+01",
+   " 6  4  2.818142e+01  1.642243e+01",
+   " 6  5 -5.351795e+01  2.581571e+01",
+   " 6  6 -6.063405e+01 -8.035106e+01",
+   " 7  0  1.178022e+01 -0.000000e+00",
+   " 7  1  1.745354e+00  3.141043e+00",
+   " 7  2 -9.169078e+00 -7.531978e+00",
+   " 7  3  3.096940e+00  6.364202e+00",
+   " 7  4  5.501988e-01  9.841435e+00",
+   " 7  5 -7.787221e+00  2.948259e+01",
+   " 7  6 -1.425310e+01 -3.029933e+00",
+   " 7  7  3.154917e+01 -3.118960e+01",
+   " 8  0  8.411522e+00 -0.000000e+00",
+   " 8  1  4.653655e+00 -4.856013e-01",
+   " 8  2 -1.208251e+01 -8.353265e+00",
+   " 8  3  2.130873e+00  4.982763e+00",
+   " 8  4 -1.973133e+00  7.344550e+00",
+   " 8  5  1.007072e+01  2.185828e+01",
+   " 8  6 -1.067794e+01  7.773142e+00",
+   " 8  7  2.040586e+01 -1.528035e+01",
+   " 8  8  1.475723e+01  1.555496e+01",
+   " 9  0  5.769175e+00 -0.000000e+00",
+   " 9  1  1.970043e+00  1.559315e+00",
+   " 9  2 -6.469494e+00 -6.497634e-01",
+   " 9  3 -1.295530e+00  3.768900e+00",
+   " 9  4 -3.458848e+00  8.668675e-01",
+   " 9  5  1.283206e+01  1.590573e+01",
+   " 9  6  6.516959e+00  1.089878e+01",
+   " 9  7  1.157459e+01 -4.770048e+00",
+   " 9  8 -2.115200e-01 -6.492286e+00",
+   " 9  9 -2.717530e+01  1.844639e+01",
+   "10  0  3.315741e+00 -0.000000e+00",
+   "10  1  3.995143e-01  1.411214e+00",
+   "10  2 -4.723701e+00 -8.709724e-01",
+   "10  3 -7.628591e-01  1.187750e+00",
+   "10  4  7.551249e-01  3.701626e-01",
+   "10  5  6.855579e+00  4.124959e+00",
+   "10  6  4.312278e+00  2.814933e+00",
+   "10  7  4.429555e+00 -6.930234e+00",
+   "10  8  3.730199e+00 -6.391467e+00",
+   "10  9 -4.354357e+00  3.629108e+00",
+   "10 10  2.874918e+01 -1.127707e+01",
+   "",
+   " 1  0 -1.707353e+02 -0.000000e+00",
+   " 1  1  6.693577e+01  2.028830e+01",
+   " 2  0 -3.415714e+01 -0.000000e+00",
+   " 2  1 -1.702151e+02 -2.919513e+02",
+   " 2  2 -3.525734e+01  5.943507e+01",
+   " 3  0  2.732120e+01 -0.000000e+00",
+   " 3  1 -7.305273e+01 -9.299270e+01",
+   " 3  2  1.100070e+02 -1.428560e+02",
+   " 3  3  5.090215e+01 -2.225858e+01",
+   " 4  0  2.526595e+01 -0.000000e+00",
+   " 4  1 -8.672084e+01 -5.122847e+01",
+   " 4  2  4.580075e+01 -5.457502e+01",
+   " 4  3 -5.486938e+01  8.319137e+01",
+   " 4  4  2.973329e+01 -3.099944e+01",
+   " 5  0  2.610845e+01 -0.000000e+00",
+   " 5  1 -5.395675e+01 -2.423563e+01",
+   " 5  2  3.948761e+01 -6.884525e+01",
+   " 5  3 -1.819986e+01  3.141148e+01",
+   " 5  4 -1.344965e+01 -1.594189e+01",
+   " 5  5  4.553704e+01  3.186198e+01",
+   " 6  0  1.890048e+01 -0.000000e+00",
+   " 6  1 -1.919882e+01  9.913479e-01",
+   " 6  2  1.616365e+01 -4.040430e+01",
+   " 6  3 -8.691731e-01  3.492203e+01",
+   " 6  4 -6.708598e-01 -8.547222e+00",
+   " 6  5 -4.802721e+01  9.794278e+00",
+   " 6  6  1.932289e+01 -2.044482e+01",
+   " 7  0  4.609392e+00 -0.000000e+00",
+   " 7  1 -1.354409e+01 -3.262026e+00",
+   " 7  2 -8.837033e+00 -7.381233e+00",
+   " 7  3  3.248269e-01  1.721537e+01",
+   " 7  4  1.639808e+01 -3.727738e+01",
+   " 7  5 -9.153052e+00  5.140050e+00",
+   " 7  6 -3.724053e+01  4.276223e+01",
+   " 7  7 -3.772713e+01 -2.854147e+01",
+   " 8  0  1.006708e+00 -0.000000e+00",
+   " 8  1 -4.107284e+00 -1.041649e+01",
+   " 8  2 -1.279531e+01  1.057008e+00",
+   " 8  3  7.910170e+00  3.303515e+00",
+   " 8  4  1.368287e+01 -1.770426e+01",
+   " 8  5  1.225446e+01  1.303141e+01",
+   " 8  6 -6.550817e+00  8.152227e+00",
+   " 8  7  3.201028e+01  1.657336e+01",
+   " 8  8 -2.831722e+01  2.581972e+01",
+   " 9  0 -1.187476e+00 -0.000000e+00",
+   " 9  1 -9.395403e-01 -1.066091e+01",
+   " 9  2 -1.486606e+01  1.710292e+01",
+   " 9  3  8.543442e+00  2.516794e+00",
+   " 9  4  2.211209e+01 -9.284019e+00",
+   " 9  5  1.224624e+01  2.621152e+00",
+   " 9  6 -1.122875e+01  3.514366e+01",
+   " 9  7  2.156910e+00  1.014344e+00",
+   " 9  8  2.997724e+01 -3.092891e+01",
+   " 9  9 -1.468396e+01 -1.341543e+01",
+   "10  0 -2.916820e+00 -0.000000e+00",
+   "10  1  1.505031e+00 -6.733692e+00",
+   "10  2 -9.873039e+00  1.760501e+01",
+   "10  3  1.013689e+01  4.250659e+00",
+   "10  4  1.602211e+01 -6.037710e+00",
+   "10  5  2.991794e+01 -1.216745e+01",
+   "10  6 -2.935935e+00  1.436722e+01",
+   "10  7  1.391703e+01 -6.752885e-01",
+   "10  8  1.318600e+00 -8.687649e-01",
+   "10  9  2.147857e+01  1.898516e+01",
+   "10 10 -6.630756e+00 -3.926103e+01"
+  ]
+ }
+}

@@ -1,0 +1,328 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "tau-boo-2007-06",
+ "target": {
+  "name": "tau Boo",
+  "object": "tepiamenit",
+  "raDegrees": 206.8134,
+  "decDegrees": 17.4572,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 54277,
+  "toMjd": 54287
+ },
+ "observations": [
+  {
+   "product": "921942p",
+   "uri": "cadc:CFHT/921942p.fits",
+   "bytes": 20586240,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54277.235,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "921950p",
+   "uri": "cadc:CFHT/921950p.fits",
+   "bytes": 20586240,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54277.3,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "922033p",
+   "uri": "cadc:CFHT/922033p.fits",
+   "bytes": 20583360,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54278.239,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "922037p",
+   "uri": "cadc:CFHT/922037p.fits",
+   "bytes": 20583360,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54278.25,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "922041p",
+   "uri": "cadc:CFHT/922041p.fits",
+   "bytes": 20583360,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54278.261,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "922200p",
+   "uri": "cadc:CFHT/922200p.fits",
+   "bytes": 20586240,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54279.229,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "922204p",
+   "uri": "cadc:CFHT/922204p.fits",
+   "bytes": 20586240,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54279.241,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "922208p",
+   "uri": "cadc:CFHT/922208p.fits",
+   "bytes": 20586240,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54279.252,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "922464p",
+   "uri": "cadc:CFHT/922464p.fits",
+   "bytes": 20586240,
+   "targetName": "Tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54281.326,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "922468p",
+   "uri": "cadc:CFHT/922468p.fits",
+   "bytes": 20586240,
+   "targetName": "Tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54281.337,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "922613p",
+   "uri": "cadc:CFHT/922613p.fits",
+   "bytes": 20586240,
+   "targetName": "Tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54282.229,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "922617p",
+   "uri": "cadc:CFHT/922617p.fits",
+   "bytes": 20586240,
+   "targetName": "Tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54282.24,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "922621p",
+   "uri": "cadc:CFHT/922621p.fits",
+   "bytes": 20586240,
+   "targetName": "Tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54282.252,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "923386p",
+   "uri": "cadc:CFHT/923386p.fits",
+   "bytes": 20586240,
+   "targetName": "Tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54283.231,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "923390p",
+   "uri": "cadc:CFHT/923390p.fits",
+   "bytes": 20586240,
+   "targetName": "Tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54283.243,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "923406p",
+   "uri": "cadc:CFHT/923406p.fits",
+   "bytes": 20586240,
+   "targetName": "Tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54283.41,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "923640p",
+   "uri": "cadc:CFHT/923640p.fits",
+   "bytes": 20586240,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54284.232,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "923644p",
+   "uri": "cadc:CFHT/923644p.fits",
+   "bytes": 20586240,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54284.248,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "923648p",
+   "uri": "cadc:CFHT/923648p.fits",
+   "bytes": 20586240,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54284.264,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "923661p",
+   "uri": "cadc:CFHT/923661p.fits",
+   "bytes": 20586240,
+   "targetName": "tau Boo",
+   "proposal": "07ac027",
+   "mjdStart": 54284.344,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "923979p",
+   "uri": "cadc:CFHT/923979p.fits",
+   "bytes": 20583360,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54285.283,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "923983p",
+   "uri": "cadc:CFHT/923983p.fits",
+   "bytes": 20583360,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54285.299,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "923991p",
+   "uri": "cadc:CFHT/923991p.fits",
+   "bytes": 20583360,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54285.357,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "923995p",
+   "uri": "cadc:CFHT/923995p.fits",
+   "bytes": 20583360,
+   "targetName": "tau Boo",
+   "proposal": "07ac27",
+   "mjdStart": 54285.373,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "924083p",
+   "uri": "cadc:CFHT/924083p.fits",
+   "bytes": 20589120,
+   "targetName": "tauboo",
+   "proposal": "07ac27",
+   "mjdStart": 54286.234,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "924087p",
+   "uri": "cadc:CFHT/924087p.fits",
+   "bytes": 20589120,
+   "targetName": "tauboo",
+   "proposal": "07ac27",
+   "mjdStart": 54286.245,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "924091p",
+   "uri": "cadc:CFHT/924091p.fits",
+   "bytes": 20589120,
+   "targetName": "tauboo",
+   "proposal": "07ac27",
+   "mjdStart": 54286.256,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "924095p",
+   "uri": "cadc:CFHT/924095p.fits",
+   "bytes": 20589120,
+   "targetName": "tauboo",
+   "proposal": "07ac27",
+   "mjdStart": 54286.268,
+   "exposureSeconds": 2400
+  },
+  {
+   "product": "924099p",
+   "uri": "cadc:CFHT/924099p.fits",
+   "bytes": 16837499,
+   "targetName": "tauboo",
+   "proposal": "07ac27",
+   "mjdStart": 54286.301,
+   "exposureSeconds": 2400
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 6466,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: Teff"
+  },
+  "logGravity": {
+   "value": 4.25,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: logg"
+  },
+  "metallicity": {
+   "value": 0.26,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": -16.03,
+  "source": "SIMBAD, radial velocity of * tau Boo (2002ApJS..141..503N)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 14.27,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501), Table 1: v sin i 14.27 ± 0.06 km/s"
+  },
+  "inclinationDegrees": {
+   "value": 45,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the tilt their maps are made with, 45 degrees, beside the derived 44.5 ± 1.5 degrees their Table 1 quotes"
+  },
+  "periodDays": {
+   "value": 3.142,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the equatorial rate of 2.00 rad/d their Fourier-transform measurement of the differential rotation assumes, which is 3.142 d"
+  },
+  "shearRadPerDay": {
+   "value": 0.35,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): differential rotation 0.35 ± 0.14 rad/d from the Fourier transform of the line profile"
+  },
+  "maximumDegree": {
+   "value": 8,
+   "source": "Donati et al. (2008), MNRAS, doi:10.1111/j.1365-2966.2008.12946.x (arXiv:0802.1584), Sect. 3: the expansion is limited to degree 8"
+  }
+ },
+ "published": {
+  "paper": "Donati et al. (2008), MNRAS, doi:10.1111/j.1365-2966.2008.12946.x (arXiv:0802.1584)",
+  "url": "https://arxiv.org/abs/0802.1584",
+  "otherGeometry": true,
+  "toroidalPercent": {
+   "value": 17,
+   "source": "Sect. 3: the toroidal part holds 17% of the energy"
+  },
+  "note": "The paper maps 30 ESPaDOnS and 2 NARVAL spectra of 12 June to 5 July 2007 with a tilt of 40 degrees; the archive run pinned here starts on 26 June."
+ }
+}

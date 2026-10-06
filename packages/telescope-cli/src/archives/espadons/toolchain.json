@@ -1,0 +1,39 @@
+{
+  "schema": "cssearth-espadons-toolchain@1",
+  "id": "zdi",
+  "purpose": "The published codes that turn polarised spectra into a magnetic map: line depths in a model atmosphere (Korg), least-squares deconvolution (LSDpy), the longitudinal field (SpecpolFlow) and Zeeman-Doppler imaging (ZDIpy). They are run as tools; none of their code is in this repository.",
+  "python": "python3.14",
+  "requirements": [
+    "numpy==2.5.3",
+    "scipy==1.16.3",
+    "matplotlib==3.11.2",
+    "astropy==8.0.1",
+    "LSDpy==1.0.0",
+    "specpolFlow==1.1.0"
+  ],
+  "zdipy": {
+    "url": "https://github.com/folsomcp/ZDIpy",
+    "commit": "86d9f98c426a709f3298bab95fda5f6f5e65e111"
+  },
+  "julia": {
+    "download": {
+      "path": "julia-1.12.7-macaarch64.tar.gz",
+      "url": "https://julialang-s3.julialang.org/bin/mac/aarch64/1.12/julia-1.12.7-macaarch64.tar.gz",
+      "bytes": 230457194
+    },
+    "executable": "julia-1.12.7/bin/julia",
+    "environment": "packages/telescope-cli/src/archives/espadons/korg"
+  },
+  "licenses": {
+    "Korg": "BSD-3-Clause (A. J. Wheeler et al.); cite Wheeler et al. 2023, AJ 165, 68 and 2024, AJ 167, 83; its model atmospheres are the MARCS grid made for SDSS",
+    "Julia": "MIT",
+    "LSDpy": "MIT (C. P. Folsom)",
+    "specpolFlow": "GPL-2.0-or-later (Folsom, Erba, Petit et al.)",
+    "ZDIpy": "GPL-2.0 (C. P. Folsom); cite Folsom et al. 2018, MNRAS 474, 4956"
+  },
+  "notes": [
+    "scipy stays below 1.17: ZDIpy calls scipy.special.lpmn, which 1.17 removes.",
+    "SpecpolFlow imports tkinter for its mask-cleaning window; tools.py stands a placeholder in for it, because the window is never opened here.",
+    "Korg's version is the one korg/Manifest.toml resolves (1.3.1); its packages and atmosphere grids go in the toolchain's own depot, not the user's."
+  ]
+}

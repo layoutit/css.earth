@@ -1,0 +1,222 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "wx-uma-2009-01",
+ "target": {
+  "name": "WX UMa",
+  "raDegrees": 166.37868993,
+  "decDegrees": 43.52163478,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 54832,
+  "toMjd": 55196
+ },
+ "observations": [
+  {
+   "product": "1050772p",
+   "uri": "cadc:CFHT/1050772p.fits",
+   "bytes": 20592000,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54842.496,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "1050780p",
+   "uri": "cadc:CFHT/1050780p.fits",
+   "bytes": 20592000,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54842.599,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "1050891p",
+   "uri": "cadc:CFHT/1050891p.fits",
+   "bytes": 20589120,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54843.425,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "1050907p",
+   "uri": "cadc:CFHT/1050907p.fits",
+   "bytes": 20589120,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54843.525,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "1050923p",
+   "uri": "cadc:CFHT/1050923p.fits",
+   "bytes": 20589120,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54843.627,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "1051142p",
+   "uri": "cadc:CFHT/1051142p.fits",
+   "bytes": 20592000,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54844.423,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "1051154p",
+   "uri": "cadc:CFHT/1051154p.fits",
+   "bytes": 20592000,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54844.572,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "1051168p",
+   "uri": "cadc:CFHT/1051168p.fits",
+   "bytes": 20592000,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54844.647,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "1051386p",
+   "uri": "cadc:CFHT/1051386p.fits",
+   "bytes": 20592000,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54845.461,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "1051394p",
+   "uri": "cadc:CFHT/1051394p.fits",
+   "bytes": 20592000,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54845.562,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "1051422p",
+   "uri": "cadc:CFHT/1051422p.fits",
+   "bytes": 20592000,
+   "targetName": "gl412b",
+   "proposal": "08BF95",
+   "mjdStart": 54845.651,
+   "exposureSeconds": 2860
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 2860,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 252803606: Teff"
+  },
+  "logGravity": {
+   "value": 5.24,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 252803606: logg"
+  }
+ },
+ "radialVelocity": {
+  "value": 70.02,
+  "source": "SIMBAD, radial velocity of BD+44 2051B (2018MNRAS.475.1960F)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 5,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "inclinationDegrees": {
+   "value": 40,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "periodDays": {
+   "value": 0.78,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "maximumDegree": {
+   "value": 4,
+   "source": "Morin, J. et al., arXiv:1005.5552: l_ZDI column of the fit table"
+  }
+ },
+ "published": {
+  "paper": "Morin, J. et al., arXiv:1005.5552",
+  "url": "https://arxiv.org/abs/1005.5552",
+  "meanGauss": {
+   "value": 1060,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): mean field strength, epoch 2009"
+  },
+  "toroidalPercent": {
+   "value": 4,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): toroidal share of the energy, epoch 2009"
+  },
+  "spectra": {
+   "value": 11,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): spectra used"
+  },
+  "note": "instruments ESPaDOnS; maxG: 4530; poloidalPct: 96; axisymmetricPct: 95; axisymmetricOf: total energy; two definitions printed as x/y",
+  "longitudinalFields": [
+   {
+    "utc": "2009-01-11T12:20:02",
+    "gauss": -1147.0,
+    "error": 108.0
+   },
+   {
+    "utc": "2009-01-11T14:48:06",
+    "gauss": -1151.0,
+    "error": 114.0
+   },
+   {
+    "utc": "2009-01-12T10:38:18",
+    "gauss": -1670.0,
+    "error": 100.0
+   },
+   {
+    "utc": "2009-01-12T13:01:57",
+    "gauss": -1707.0,
+    "error": 110.0
+   },
+   {
+    "utc": "2009-01-12T15:28:05",
+    "gauss": -1772.0,
+    "error": 98.0
+   },
+   {
+    "utc": "2009-01-13T10:34:54",
+    "gauss": -1638.0,
+    "error": 101.0
+   },
+   {
+    "utc": "2009-01-13T14:08:40",
+    "gauss": -1864.0,
+    "error": 101.0
+   },
+   {
+    "utc": "2009-01-13T15:57:51",
+    "gauss": -1735.0,
+    "error": 101.0
+   },
+   {
+    "utc": "2009-01-14T11:29:57",
+    "gauss": -1274.0,
+    "error": 90.0
+   },
+   {
+    "utc": "2009-01-14T13:54:25",
+    "gauss": -1366.0,
+    "error": 86.0
+   },
+   {
+    "utc": "2009-01-14T16:03:17",
+    "gauss": -1130.0,
+    "error": 89.0
+   }
+  ],
+  "longitudinalSource": "arXiv:1005.5552, journal of observations of WX UMa: UT at mid-exposure and longitudinal field of each spectrum"
+ }
+}

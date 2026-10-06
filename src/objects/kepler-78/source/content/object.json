@@ -52,6 +52,67 @@
         },
         "falseColor": false,
         "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,058 K and log g 4.58 (u1 0.641, u2 0.132): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "radial-field-2015-08",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Aug 2015",
+        "thumbnail": "kepler-78-dataset-radial-field-2015-08.webp",
+        "surface": "kepler-78-surface-radial-field-2015-08@2x.webp",
+        "poles": "kepler-78-poles-radial-field-2015-08@2x.webp",
+        "source": {
+          "id": "kepler-78-espadons-map-radial-field-2015-08",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-20",
+            "0",
+            "+20"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-20",
+              "0",
+              "+20"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Aug 2015, reconstructed in this project from 13 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Moutou et al. (2016, MNRAS; arXiv:1605.03255) map the same run with a mean field of 16 G; this map has 12 G.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 80° S; the star never shows us what lies below it."
       }
     ]
   },

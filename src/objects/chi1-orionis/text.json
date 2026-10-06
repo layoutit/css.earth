@@ -47,6 +47,109 @@
       "title": "Azimuthal field, Dec 2017",
       "detail": "ESO HARPSpol",
       "summary": "The part of the magnetic field running around the spin axis."
+    },
+    "corona-dec-2017": {
+      "title": "Derived corona, Dec 2017",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Dec 2017. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "vizier-j-a-a-659-a71",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+          "label": "Willamo et al. · HARPSpol: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "radial-field-2014-12": {
+      "title": "Radial field, Dec 2014",
+      "detail": "2 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "radial-field-2015-01": {
+      "title": "Radial field, Jan 2015",
+      "detail": "2 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "corona-dec-2014": {
+      "title": "Derived corona, Dec 2014",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Dec 2014. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "cadc-cfht-espadons",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+          "label": "CFHT ESPaDOnS · mapped here: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-jan-2015": {
+      "title": "Derived corona, Jan 2015",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Jan 2015. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "cadc-cfht-espadons",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+          "label": "CFHT ESPaDOnS · mapped here: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
     }
   }
 }

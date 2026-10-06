@@ -1,0 +1,1056 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "map-oct-2015",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_01.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 1 (Oct 2015): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-01; Member 'iHor_ZDI-Unconstrained_Epoch_01.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "oct-2015"
+    },
+    {
+      "id": "map-dec-2015",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_02.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 2 (Dec 2015): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-02; Member 'iHor_ZDI-Unconstrained_Epoch_02.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "dec-2015"
+    },
+    {
+      "id": "map-feb-2016",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_03.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 3 (Feb 2016): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-03; Member 'iHor_ZDI-Unconstrained_Epoch_03.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "feb-2016"
+    },
+    {
+      "id": "map-jun-2016",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_04.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 4 (Jun 2016): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-04; Member 'iHor_ZDI-Unconstrained_Epoch_04.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "jun-2016"
+    },
+    {
+      "id": "map-aug-2016",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_05.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 5 (Aug 2016): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-05; Member 'iHor_ZDI-Unconstrained_Epoch_05.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "aug-2016"
+    },
+    {
+      "id": "map-sep-2016",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_06.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 6 (Sep 2016): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-06; Member 'iHor_ZDI-Unconstrained_Epoch_06.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "sep-2016"
+    },
+    {
+      "id": "map-oct-2016",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_07.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 7 (Oct 2016): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-07; Member 'iHor_ZDI-Unconstrained_Epoch_07.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "oct-2016"
+    },
+    {
+      "id": "map-dec-2016",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_08.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 8 (Dec 2016): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-08; Member 'iHor_ZDI-Unconstrained_Epoch_08.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "dec-2016"
+    },
+    {
+      "id": "map-feb-2017",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_09.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 9 (Feb 2017): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-09; Member 'iHor_ZDI-Unconstrained_Epoch_09.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "feb-2017"
+    },
+    {
+      "id": "map-jul-2017",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_10.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 10 (Jul 2017): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-10; Member 'iHor_ZDI-Unconstrained_Epoch_10.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "jul-2017"
+    },
+    {
+      "id": "map-aug-2017",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_11.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 11 (Aug 2017): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-11; Member 'iHor_ZDI-Unconstrained_Epoch_11.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "aug-2017"
+    },
+    {
+      "id": "map-sep-2017",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_12.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 12 (Sep 2017): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-12; Member 'iHor_ZDI-Unconstrained_Epoch_12.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "sep-2017"
+    },
+    {
+      "id": "map-nov-2017",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_13.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 13 (Nov 2017): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-13; Member 'iHor_ZDI-Unconstrained_Epoch_13.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "nov-2017"
+    },
+    {
+      "id": "map-dec-2017",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_14.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 14 (Dec 2017): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-14; Member 'iHor_ZDI-Unconstrained_Epoch_14.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "dec-2017"
+    },
+    {
+      "id": "map-feb-2018",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_15.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 15 (Feb 2018): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-15; Member 'iHor_ZDI-Unconstrained_Epoch_15.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "feb-2018"
+    },
+    {
+      "id": "map-jun-2018",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_16.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 16 (Jun 2018): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-16; Member 'iHor_ZDI-Unconstrained_Epoch_16.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "jun-2018"
+    },
+    {
+      "id": "map-aug-2018",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_17.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 17 (Aug 2018): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-17; Member 'iHor_ZDI-Unconstrained_Epoch_17.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "aug-2018"
+    },
+    {
+      "id": "map-sep-2018",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-17251923",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/17251923"
+          },
+          {
+            "catalogueId": "arxiv-2510-03146",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2510.03146"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii/source/science/alvarado-gomez-2025/iHor_ZDI-Unconstrained_Epoch_18.dat",
+      "origin": "https://zenodo.org/records/17251923/files/iHor_ZDI-Unconstrained.zip?download=1",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "title": "Unconstrained ZDI map of iota Horologii, epoch 18 (Sep 2018): radial, azimuthal and meridional field on an 89 x 45 longitude-latitude grid",
+      "credit": "J. D. Alvarado-Gómez and G. Hussain (2025); ESO 3.6 m HARPSpol",
+      "displayCredit": "Alvarado-Gómez et al. · HARPSpol",
+      "acquisition": "The file the iota-horologii package holds for its own dataset radial-field-18; Member 'iHor_ZDI-Unconstrained_Epoch_18.dat' of iHor_ZDI-Unconstrained.zip, extracted unchanged by the zip-member operation in source/preparation/acquisition.json.",
+      "license": "CC BY 4.0",
+      "datasetId": "sep-2018"
+    },
+    {
+      "id": "corona-parameters",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-664-a105",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105"
+          },
+          {
+            "catalogueId": "arxiv-1505-00643",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/1505.00643"
+          },
+          {
+            "catalogueId": "arxiv-2105-00019",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/2105.00019"
+          }
+        ]
+      },
+      "path": "src/objects/iota-horologii-corona/source/corona-parameters.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "title": "ι Horologii · X-ray flux, coronal temperature and mass loss",
+      "credit": "Freund et al. (2022), A&A 664, A105; Johnstone & Güdel (2015), A&A 578, A129; Wood et al. (2021), ApJ 915, 37",
+      "displayCredit": "Freund et al. (2022), A&A 664, A105",
+      "acquisition": "Published numbers transcribed from their sources, and the quantities this package computes from them. This record identifies the transcription; the sources are the origin.",
+      "license": "Published numbers cited under normal scholarly citation; the sources are not redistributed here."
+    }
+  ],
+  "documents": [
+    {
+      "id": "delivery-json",
+      "path": "src/objects/iota-horologii-corona/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/iota-horologii-corona/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/iota-horologii-corona/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-oct-2015-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-oct-2015.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-oct-2015-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-oct-2015.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-oct-2015-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/oct-2015.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-dec-2015-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-dec-2015.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-dec-2015-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-dec-2015.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-dec-2015-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/dec-2015.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-feb-2016-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-feb-2016.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-feb-2016-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-feb-2016.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-feb-2016-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/feb-2016.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-jun-2016-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-jun-2016.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-jun-2016-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-jun-2016.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-jun-2016-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/jun-2016.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-aug-2016-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-aug-2016.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-aug-2016-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-aug-2016.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-aug-2016-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/aug-2016.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-sep-2016-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-sep-2016.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-sep-2016-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-sep-2016.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-sep-2016-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/sep-2016.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-oct-2016-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-oct-2016.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-oct-2016-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-oct-2016.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-oct-2016-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/oct-2016.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-dec-2016-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-dec-2016.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-dec-2016-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-dec-2016.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-dec-2016-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/dec-2016.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-feb-2017-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-feb-2017.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-feb-2017-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-feb-2017.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-feb-2017-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/feb-2017.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-jul-2017-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-jul-2017.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-jul-2017-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-jul-2017.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-jul-2017-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/jul-2017.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-aug-2017-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-aug-2017.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-aug-2017-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-aug-2017.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-aug-2017-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/aug-2017.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-sep-2017-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-sep-2017.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-sep-2017-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-sep-2017.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-sep-2017-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/sep-2017.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-nov-2017-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-nov-2017.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-nov-2017-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-nov-2017.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-nov-2017-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/nov-2017.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-dec-2017-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-dec-2017.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-dec-2017-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-dec-2017.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-dec-2017-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/dec-2017.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-feb-2018-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-feb-2018.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-feb-2018-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-feb-2018.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-feb-2018-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/feb-2018.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-jun-2018-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-jun-2018.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-jun-2018-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-jun-2018.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-jun-2018-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/jun-2018.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-aug-2018-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-aug-2018.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-aug-2018-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-aug-2018.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-aug-2018-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/aug-2018.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-sep-2018-ktx2",
+      "path": "src/objects/iota-horologii-corona/source/density-sep-2018.ktx2",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-sep-2018-json",
+      "path": "src/objects/iota-horologii-corona/source/volume-sep-2018.json",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-sep-2018-png",
+      "path": "src/objects/iota-horologii-corona/source/previews/sep-2018.png",
+      "generator": "packages/telescope-cli/src/new-object/corona/corona-bank.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/telescope-cli/src/new-object/corona/corona-bank.mts from the inputs bound above."
+      }
+    }
+  ]
+}

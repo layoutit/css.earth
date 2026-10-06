@@ -1,0 +1,848 @@
+{
+ "schema": "cssearth-espadons-map@2",
+ "program": "tau-boo-2006-06",
+ "target": {
+  "name": "tau Boo",
+  "object": "tepiamenit",
+  "raDegrees": 206.8134,
+  "decDegrees": 17.4572,
+  "radiusDegrees": 0.02
+ },
+ "inputs": {
+  "observations": [
+   {
+    "product": "852120p",
+    "uri": "cadc:CFHT/852120p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "852124p",
+    "uri": "cadc:CFHT/852124p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "852128p",
+    "uri": "cadc:CFHT/852128p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "852132p",
+    "uri": "cadc:CFHT/852132p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "852136p",
+    "uri": "cadc:CFHT/852136p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "852140p",
+    "uri": "cadc:CFHT/852140p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "852144p",
+    "uri": "cadc:CFHT/852144p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "852545p",
+    "uri": "cadc:CFHT/852545p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "852549p",
+    "uri": "cadc:CFHT/852549p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "852655p",
+    "uri": "cadc:CFHT/852655p.fits",
+    "bytes": 20597760
+   },
+   {
+    "product": "852659p",
+    "uri": "cadc:CFHT/852659p.fits",
+    "bytes": 20597760
+   },
+   {
+    "product": "852785p",
+    "uri": "cadc:CFHT/852785p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "852789p",
+    "uri": "cadc:CFHT/852789p.fits",
+    "bytes": 20592000
+   }
+  ],
+  "lineData": {
+   "url": "http://kurucz.harvard.edu/linelists/gfnew/gfall08oct17.dat",
+   "bytes": 371660460,
+   "credit": "R. L. Kurucz, atomic line list gfall, version of 8 October 2017"
+  },
+  "toolchain": {
+   "file": "packages/telescope-cli/src/archives/espadons/toolchain.json",
+   "requirements": [
+    "numpy==2.5.3",
+    "scipy==1.16.3",
+    "matplotlib==3.11.2",
+    "astropy==8.0.1",
+    "LSDpy==1.0.0",
+    "specpolFlow==1.1.0"
+   ],
+   "zdipy": {
+    "url": "https://github.com/folsomcp/ZDIpy",
+    "commit": "86d9f98c426a709f3298bab95fda5f6f5e65e111"
+   },
+   "julia": {
+    "download": {
+     "path": "julia-1.12.7-macaarch64.tar.gz",
+     "url": "https://julialang-s3.julialang.org/bin/mac/aarch64/1.12/julia-1.12.7-macaarch64.tar.gz",
+     "bytes": 230457194
+    },
+    "executable": "julia-1.12.7/bin/julia",
+    "environment": "packages/telescope-cli/src/archives/espadons/korg"
+   }
+  }
+ },
+ "mask": {
+  "atmosphere": {
+   "effectiveTemperatureK": {
+    "value": 6466,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: Teff"
+   },
+   "logGravity": {
+    "value": 4.25,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: logg"
+   },
+   "metallicity": {
+    "value": 0.26,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: [M/H]"
+   }
+  },
+  "korg": "1.3.1",
+  "candidates": 327037,
+  "synthesised": 21403,
+  "minimumDepth": 0.1,
+  "deepEnough": 8758,
+  "lines": 6169,
+  "species": {
+   "26.00": 4192,
+   "24.00": 867,
+   "28.00": 608,
+   "22.00": 485,
+   "26.01": 298,
+   "14.00": 298,
+   "25.00": 266,
+   "27.00": 265,
+   "22.01": 201,
+   "24.01": 156,
+   "6.00": 134,
+   "20.00": 130,
+   "23.00": 124,
+   "40.01": 113,
+   "23.01": 104,
+   "12.00": 99,
+   "16.00": 56,
+   "39.01": 54,
+   "25.01": 47,
+   "21.01": 43,
+   "20.01": 29,
+   "11.00": 21,
+   "13.00": 18,
+   "12.01": 17,
+   "8.00": 16,
+   "40.00": 15,
+   "21.00": 12,
+   "29.00": 12,
+   "14.01": 11,
+   "56.01": 10,
+   "28.01": 9,
+   "15.00": 7,
+   "27.01": 6,
+   "38.01": 6,
+   "7.00": 6,
+   "44.00": 4,
+   "19.00": 4,
+   "39.00": 4,
+   "30.00": 4,
+   "42.00": 3,
+   "41.01": 2,
+   "13.01": 1,
+   "38.00": 1
+  },
+  "meanDepth": 0.4233,
+  "meanWavelengthNm": 480.81,
+  "meanLande": 1.2181
+ },
+ "velocity": {
+  "kmS": -16.07,
+  "catalogued": {
+   "value": -16.03,
+   "source": "SIMBAD, radial velocity of * tau Boo (2002ApJS..141..503N)"
+  },
+  "searchCentreKmS": -15.4,
+  "searchDepth": 0.0869
+ },
+ "profiles": {
+  "halfWidthKmS": 50.4,
+  "stepKmS": 1.8,
+  "fieldHalfWidthKmS": 25.1,
+  "lineHalfWidthKmS": 34,
+  "spectra": [
+   {
+    "product": "852120p",
+    "utc": "2006-06-13T05:40:56",
+    "mjd": 53899.23676,
+    "used": false,
+    "leftOut": "its error is over 5 times the run's median",
+    "longitudinal": {
+     "gauss": 9.69,
+     "error": 26.81,
+     "nullGauss": -7.42
+    },
+    "falseAlarm": 0.6804145088413477,
+    "nullFalseAlarm": 0.4760062757382151,
+    "centreKmS": -16.04,
+    "chiSquare": {
+     "intensity": 1294.7559,
+     "stokesV": 270.047,
+     "null": 271.134
+    },
+    "offset": {
+     "stokesV": -0.0005754,
+     "null": -0.0006756
+    }
+   },
+   {
+    "product": "852124p",
+    "utc": "2006-06-13T05:56:34",
+    "mjd": 53899.24762,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.15,
+     "error": 0.76,
+     "nullGauss": 0.31
+    },
+    "falseAlarm": 0.002924036956580167,
+    "nullFalseAlarm": 0.03749900094378944,
+    "centreKmS": -16.06,
+    "chiSquare": {
+     "intensity": 6076.2481,
+     "stokesV": 1.043,
+     "null": 1.0443
+    },
+    "offset": {
+     "stokesV": -9.968e-7,
+     "null": -7.6941e-7
+    }
+   },
+   {
+    "product": "852128p",
+    "utc": "2006-06-13T06:12:31",
+    "mjd": 53899.2587,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.22,
+     "error": 0.9,
+     "nullGauss": -1.11
+    },
+    "falseAlarm": 0.0011448795869682948,
+    "nullFalseAlarm": 0.8506677720027416,
+    "centreKmS": -16.07,
+    "chiSquare": {
+     "intensity": 4315.7186,
+     "stokesV": 1.0294,
+     "null": 1.0391
+    },
+    "offset": {
+     "stokesV": -0.0000011664,
+     "null": -0.0000010879
+    }
+   },
+   {
+    "product": "852132p",
+    "utc": "2006-06-13T06:27:32",
+    "mjd": 53899.26913,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.79,
+     "error": 0.9,
+     "nullGauss": -0.22
+    },
+    "falseAlarm": 0.0000017360986003245316,
+    "nullFalseAlarm": 0.8591372077580692,
+    "centreKmS": -16.07,
+    "chiSquare": {
+     "intensity": 4249.8606,
+     "stokesV": 1.026,
+     "null": 1.0382
+    },
+    "offset": {
+     "stokesV": -9.8882e-7,
+     "null": -2.2732e-7
+    }
+   },
+   {
+    "product": "852136p",
+    "utc": "2006-06-13T06:41:04",
+    "mjd": 53899.27852,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.07,
+     "error": 0.91,
+     "nullGauss": -0.65
+    },
+    "falseAlarm": 0.00001743044603197408,
+    "nullFalseAlarm": 0.46259436899522366,
+    "centreKmS": -16.08,
+    "chiSquare": {
+     "intensity": 4168.1639,
+     "stokesV": 1.032,
+     "null": 1.0435
+    },
+    "offset": {
+     "stokesV": -0.0000014707,
+     "null": -3.9137e-8
+    }
+   },
+   {
+    "product": "852140p",
+    "utc": "2006-06-13T06:54:27",
+    "mjd": 53899.28781,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0,
+     "error": 0.89,
+     "nullGauss": -0.71
+    },
+    "falseAlarm": 4.0139041834752476e-7,
+    "nullFalseAlarm": 0.633521625492799,
+    "centreKmS": -16.09,
+    "chiSquare": {
+     "intensity": 4376.2733,
+     "stokesV": 1.0409,
+     "null": 1.0348
+    },
+    "offset": {
+     "stokesV": -8.6771e-7,
+     "null": -0.000001668
+    }
+   },
+   {
+    "product": "852144p",
+    "utc": "2006-06-13T07:07:47",
+    "mjd": 53899.29708,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.23,
+     "error": 0.91,
+     "nullGauss": -0.69
+    },
+    "falseAlarm": 0.002122919471960749,
+    "nullFalseAlarm": 0.9951384875312782,
+    "centreKmS": -16.09,
+    "chiSquare": {
+     "intensity": 4178.1842,
+     "stokesV": 1.0365,
+     "null": 1.0378
+    },
+    "offset": {
+     "stokesV": -0.0000012929,
+     "null": -0.0000019004
+    }
+   },
+   {
+    "product": "852545p",
+    "utc": "2006-06-17T06:47:40",
+    "mjd": 53903.28311,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.22,
+     "error": 0.9,
+     "nullGauss": 0.22
+    },
+    "falseAlarm": 0.000014791852724349575,
+    "nullFalseAlarm": 0.8832776330838412,
+    "centreKmS": -16.49,
+    "chiSquare": {
+     "intensity": 4433.3724,
+     "stokesV": 1.0594,
+     "null": 1.0698
+    },
+    "offset": {
+     "stokesV": -0.0000016983,
+     "null": -4.117e-7
+    }
+   },
+   {
+    "product": "852549p",
+    "utc": "2006-06-17T07:01:07",
+    "mjd": 53903.29245,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.57,
+     "error": 0.88,
+     "nullGauss": 0.02
+    },
+    "falseAlarm": 5.928797452980916e-10,
+    "nullFalseAlarm": 0.5162870412535598,
+    "centreKmS": -16.49,
+    "chiSquare": {
+     "intensity": 4606.2237,
+     "stokesV": 1.0556,
+     "null": 1.0658
+    },
+    "offset": {
+     "stokesV": -9.3124e-7,
+     "null": -2.577e-7
+    }
+   },
+   {
+    "product": "852655p",
+    "utc": "2006-06-18T06:41:23",
+    "mjd": 53904.27875,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.05,
+     "error": 0.96,
+     "nullGauss": -0.28
+    },
+    "falseAlarm": 0.35779581654141845,
+    "nullFalseAlarm": 0.47889153636470416,
+    "centreKmS": -16.07,
+    "chiSquare": {
+     "intensity": 3850.0052,
+     "stokesV": 1.0541,
+     "null": 1.0721
+    },
+    "offset": {
+     "stokesV": -9.0962e-7,
+     "null": -6.8961e-7
+    }
+   },
+   {
+    "product": "852659p",
+    "utc": "2006-06-18T06:54:53",
+    "mjd": 53904.28812,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.56,
+     "error": 1.01,
+     "nullGauss": 1.28
+    },
+    "falseAlarm": 0.13658567698231072,
+    "nullFalseAlarm": 0.03278968310583197,
+    "centreKmS": -16.07,
+    "chiSquare": {
+     "intensity": 3380.9517,
+     "stokesV": 1.0516,
+     "null": 1.0523
+    },
+    "offset": {
+     "stokesV": -0.0000010366,
+     "null": -0.0000012793
+    }
+   },
+   {
+    "product": "852785p",
+    "utc": "2006-06-19T08:04:13",
+    "mjd": 53905.33627,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.83,
+     "error": 1.1,
+     "nullGauss": 0.42
+    },
+    "falseAlarm": 0.00015377502603075577,
+    "nullFalseAlarm": 0.8867180506671622,
+    "centreKmS": -15.66,
+    "chiSquare": {
+     "intensity": 2835.5916,
+     "stokesV": 1.0641,
+     "null": 1.0635
+    },
+    "offset": {
+     "stokesV": -2.3839e-7,
+     "null": -0.0000019508
+    }
+   },
+   {
+    "product": "852789p",
+    "utc": "2006-06-19T08:27:33",
+    "mjd": 53905.35247,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.29,
+     "error": 1.2,
+     "nullGauss": 0.4
+    },
+    "falseAlarm": 0.00560232674297878,
+    "nullFalseAlarm": 0.15756396508307757,
+    "centreKmS": -15.67,
+    "chiSquare": {
+     "intensity": 2387.0395,
+     "stokesV": 1.0728,
+     "null": 1.0811
+    },
+    "offset": {
+     "stokesV": -0.0000015441,
+     "null": -0.0000025629
+    }
+   }
+  ]
+ },
+ "map": {
+  "star": {
+   "vsiniKmS": {
+    "value": 14.27,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501), Table 1: v sin i 14.27 ± 0.06 km/s"
+   },
+   "inclinationDegrees": {
+    "value": 45,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the tilt their maps are made with, 45 degrees, beside the derived 44.5 ± 1.5 degrees their Table 1 quotes"
+   },
+   "periodDays": {
+    "value": 3.142,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the equatorial rate of 2.00 rad/d their Fourier-transform measurement of the differential rotation assumes, which is 3.142 d"
+   },
+   "maximumDegree": {
+    "value": 8,
+    "source": "Donati et al. (2008), MNRAS, doi:10.1111/j.1365-2966.2008.12946.x (arXiv:0802.1584), Sect. 3: the expansion is limited to degree 8"
+   },
+   "shearRadPerDay": {
+    "value": 0.35,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): differential rotation 0.35 ± 0.14 rad/d from the Fourier transform of the line profile"
+   }
+  },
+  "spectraUsed": 12,
+  "maximumDegree": 8,
+  "middleMjd": 53902.30005,
+  "middleUtc": "2006-06-16T07:12:03",
+  "longitudeZero": "faces the observer at the middle of the run; longitude grows the way the star turns",
+  "chiSquareNoField": 1.818,
+  "detection": {
+   "points": 444,
+   "sigma": 12.2
+  },
+  "ladder": [
+   {
+    "target": 1.6,
+    "iterations": 2,
+    "chiSquare": 1.6,
+    "entropy": -0.02,
+    "meanGauss": 0.4,
+    "maxGauss": 1.2,
+    "poloidalPercent": 75.9,
+    "toroidalPercent": 24.1,
+    "axisymmetricPercent": 77,
+    "dipolePercent": 73.112,
+    "quadrupolePercent": 15.689,
+    "octupolePercent": 6.843
+   },
+   {
+    "target": 1.5,
+    "iterations": 2,
+    "chiSquare": 1.5,
+    "entropy": -0.04,
+    "meanGauss": 0.61,
+    "maxGauss": 1.8,
+    "poloidalPercent": 71.8,
+    "toroidalPercent": 28.2,
+    "axisymmetricPercent": 76.6,
+    "dipolePercent": 70.764,
+    "quadrupolePercent": 16.494,
+    "octupolePercent": 7.763
+   },
+   {
+    "target": 1.4,
+    "iterations": 2,
+    "chiSquare": 1.4,
+    "entropy": -0.08,
+    "meanGauss": 0.85,
+    "maxGauss": 2.5,
+    "poloidalPercent": 66.7,
+    "toroidalPercent": 33.3,
+    "axisymmetricPercent": 76,
+    "dipolePercent": 67.269,
+    "quadrupolePercent": 17.715,
+    "octupolePercent": 9.114
+   },
+   {
+    "target": 1.3,
+    "iterations": 2,
+    "chiSquare": 1.3,
+    "entropy": -0.14,
+    "meanGauss": 1.13,
+    "maxGauss": 3.1,
+    "poloidalPercent": 60.6,
+    "toroidalPercent": 39.4,
+    "axisymmetricPercent": 74.9,
+    "dipolePercent": 62.052,
+    "quadrupolePercent": 19.61,
+    "octupolePercent": 11.072
+   },
+   {
+    "target": 1.25,
+    "iterations": 2,
+    "chiSquare": 1.25,
+    "entropy": -0.19,
+    "meanGauss": 1.28,
+    "maxGauss": 3.5,
+    "poloidalPercent": 57.4,
+    "toroidalPercent": 42.6,
+    "axisymmetricPercent": 74.2,
+    "dipolePercent": 58.611,
+    "quadrupolePercent": 20.918,
+    "octupolePercent": 12.312
+   },
+   {
+    "target": 1.2,
+    "iterations": 2,
+    "chiSquare": 1.2,
+    "entropy": -0.26,
+    "meanGauss": 1.46,
+    "maxGauss": 3.9,
+    "poloidalPercent": 54.2,
+    "toroidalPercent": 45.8,
+    "axisymmetricPercent": 73.3,
+    "dipolePercent": 54.542,
+    "quadrupolePercent": 22.531,
+    "octupolePercent": 13.714
+   },
+   {
+    "target": 1.15,
+    "iterations": 2,
+    "chiSquare": 1.15,
+    "entropy": -0.35,
+    "meanGauss": 1.65,
+    "maxGauss": 4.4,
+    "poloidalPercent": 51.2,
+    "toroidalPercent": 48.8,
+    "axisymmetricPercent": 72.2,
+    "dipolePercent": 49.862,
+    "quadrupolePercent": 24.482,
+    "octupolePercent": 15.217
+   },
+   {
+    "target": 1.1,
+    "iterations": 2,
+    "chiSquare": 1.1,
+    "entropy": -0.48,
+    "meanGauss": 1.89,
+    "maxGauss": 4.9,
+    "poloidalPercent": 48.7,
+    "toroidalPercent": 51.3,
+    "axisymmetricPercent": 70.8,
+    "dipolePercent": 44.54,
+    "quadrupolePercent": 26.869,
+    "octupolePercent": 16.724
+   },
+   {
+    "target": 1.05,
+    "iterations": 2,
+    "chiSquare": 1.05,
+    "entropy": -0.68,
+    "meanGauss": 2.19,
+    "maxGauss": 5.7,
+    "poloidalPercent": 46.9,
+    "toroidalPercent": 53.1,
+    "axisymmetricPercent": 69.1,
+    "dipolePercent": 38.949,
+    "quadrupolePercent": 29.547,
+    "octupolePercent": 17.917
+   },
+   {
+    "target": 1,
+    "iterations": 3,
+    "chiSquare": 1,
+    "entropy": -1.06,
+    "meanGauss": 2.63,
+    "maxGauss": 6.9,
+    "poloidalPercent": 47.3,
+    "toroidalPercent": 52.7,
+    "axisymmetricPercent": 67.2,
+    "dipolePercent": 34.133,
+    "quadrupolePercent": 31.946,
+    "octupolePercent": 17.943
+   },
+   {
+    "target": 0.95,
+    "iterations": 11,
+    "chiSquare": 0.95,
+    "entropy": -2.63,
+    "meanGauss": 3.74,
+    "maxGauss": 12,
+    "poloidalPercent": 55.1,
+    "toroidalPercent": 44.9,
+    "axisymmetricPercent": 67.7,
+    "dipolePercent": 37.141,
+    "quadrupolePercent": 25.934,
+    "octupolePercent": 14.303
+   }
+  ],
+  "verdict": {
+   "mapped": true
+  },
+  "chosen": {
+   "target": 1.15,
+   "iterations": 2,
+   "chiSquare": 1.15,
+   "entropy": -0.35,
+   "meanGauss": 1.65,
+   "maxGauss": 4.4,
+   "poloidalPercent": 51.2,
+   "toroidalPercent": 48.8,
+   "axisymmetricPercent": 72.2,
+   "dipolePercent": 49.862,
+   "quadrupolePercent": 24.482,
+   "octupolePercent": 15.217,
+   "chiSquareNoField": 1.818,
+   "lineStrength": 0.493772,
+   "knee": 0.5,
+   "radialGauss": [
+    -3.39,
+    2.27
+   ]
+  },
+  "coefficients": [
+   "General poloidal plus toroidal field",
+   "44 3 -3",
+   " 1  0 -3.100339e+00 -0.000000e+00",
+   " 1  1  3.499955e-01 -1.304651e+00",
+   " 2  0 -1.505415e+00 -0.000000e+00",
+   " 2  1 -3.250861e-01 -6.016966e-01",
+   " 2  2 -2.153184e+00  8.515474e-01",
+   " 3  0 -7.632491e-01 -0.000000e+00",
+   " 3  1 -5.095482e-01 -2.936211e-02",
+   " 3  2 -9.532630e-01  2.575892e-01",
+   " 3  3  4.895686e-01 -2.014296e+00",
+   " 4  0 -2.553777e-01 -0.000000e+00",
+   " 4  1 -3.349839e-01  1.943717e-01",
+   " 4  2  1.066043e-01 -2.310374e-01",
+   " 4  3  1.007550e-01 -1.175153e+00",
+   " 4  4  7.293870e-01 -4.712590e-03",
+   " 5  0 -5.946691e-04 -0.000000e+00",
+   " 5  1 -1.649309e-01  1.766272e-01",
+   " 5  2  3.312283e-01 -2.777614e-01",
+   " 5  3 -2.257496e-01 -2.521318e-01",
+   " 5  4  7.416902e-01 -6.233326e-02",
+   " 5  5  1.354061e-01  3.438139e-02",
+   " 6  0  3.386841e-02 -0.000000e+00",
+   " 6  1 -7.565601e-02  1.050901e-01",
+   " 6  2  2.068189e-01 -1.325569e-01",
+   " 6  3 -2.095971e-01  3.553725e-02",
+   " 6  4  5.652151e-01 -8.658703e-02",
+   " 6  5 -1.890137e-03  2.100143e-02",
+   " 6  6 -5.151757e-02  2.481399e-01",
+   " 7  0  9.373278e-03 -0.000000e+00",
+   " 7  1 -2.094482e-02  5.310533e-02",
+   " 7  2  1.017785e-01 -2.518076e-02",
+   " 7  3 -6.680931e-02  3.671464e-02",
+   " 7  4  3.013710e-01 -5.253512e-02",
+   " 7  5 -9.309657e-02  7.523722e-03",
+   " 7  6 -1.888622e-02  1.068460e-01",
+   " 7  7 -1.765427e-01  9.681058e-02",
+   " 8  0  1.708377e-03 -0.000000e+00",
+   " 8  1  5.986832e-04  2.076025e-02",
+   " 8  2  4.439905e-02  1.263395e-02",
+   " 8  3  1.050528e-02  1.861658e-02",
+   " 8  4  7.409399e-02 -1.223610e-02",
+   " 8  5 -3.099017e-02 -5.835017e-03",
+   " 8  6  6.984336e-03 -1.357380e-02",
+   " 8  7 -1.191196e-01  4.629988e-02",
+   " 8  8  1.974628e-02  4.531615e-02",
+   "",
+   " 1  0 -8.059985e-01 -0.000000e+00",
+   " 1  1 -1.485379e+00 -7.287480e-01",
+   " 2  0 -4.512093e-01 -0.000000e+00",
+   " 2  1 -7.215949e-01  3.466234e-01",
+   " 2  2 -5.925255e-01  2.171398e-01",
+   " 3  0  7.114911e-02 -0.000000e+00",
+   " 3  1 -1.335803e-01  3.722702e-01",
+   " 3  2  4.492075e-01 -1.482566e-01",
+   " 3  3  1.206016e-01  2.254467e-01",
+   " 4  0  2.093813e-01 -0.000000e+00",
+   " 4  1  2.380432e-02  1.207496e-01",
+   " 4  2  1.940336e-01  5.195377e-02",
+   " 4  3 -1.588763e-01  6.475288e-01",
+   " 4  4 -2.196216e-01 -2.670167e-01",
+   " 5  0  5.950353e-02 -0.000000e+00",
+   " 5  1  4.776704e-02  3.661064e-03",
+   " 5  2 -9.142715e-02  2.020891e-01",
+   " 5  3 -5.227834e-03  1.563208e-01",
+   " 5  4 -3.150084e-01 -1.077433e-01",
+   " 5  5 -5.436359e-02 -5.991698e-02",
+   " 6  0 -5.941920e-03 -0.000000e+00",
+   " 6  1  7.248558e-02 -1.964550e-02",
+   " 6  2 -7.868749e-02  1.382011e-01",
+   " 6  3  1.315142e-01 -7.373335e-02",
+   " 6  4 -2.365229e-01  2.428668e-02",
+   " 6  5 -5.941718e-02 -8.557587e-02",
+   " 6  6  3.228591e-02 -7.173780e-02",
+   " 7  0  7.444679e-03 -0.000000e+00",
+   " 7  1  3.951473e-02 -2.963806e-02",
+   " 7  2 -4.266855e-02  4.487809e-02",
+   " 7  3  7.092141e-02 -2.316111e-02",
+   " 7  4 -1.829026e-01  3.798577e-02",
+   " 7  5  1.849651e-02 -7.141285e-02",
+   " 7  6  3.449475e-02 -7.470383e-02",
+   " 7  7  8.253903e-02 -4.249977e-03",
+   " 8  0 -5.121574e-03 -0.000000e+00",
+   " 8  1  7.955183e-03 -2.146084e-02",
+   " 8  2 -1.950478e-02  8.685098e-04",
+   " 8  3  4.385523e-04 -3.227885e-03",
+   " 8  4 -5.099487e-02  5.460301e-04",
+   " 8  5  3.455724e-02 -2.327126e-02",
+   " 8  6  8.791752e-03 -5.969060e-03",
+   " 8  7  5.448832e-02 -2.589099e-02",
+   " 8  8  1.491562e-02  1.663848e-04",
+   "",
+   " 1  0  4.987584e+00 -0.000000e+00",
+   " 1  1  8.642372e-01 -1.324394e+00",
+   " 2  0  2.957956e+00 -0.000000e+00",
+   " 2  1 -1.423263e-01 -8.559003e-01",
+   " 2  2 -8.146845e-01 -1.341973e+00",
+   " 3  0  1.188235e+00 -0.000000e+00",
+   " 3  1 -1.830715e-01 -4.194980e-01",
+   " 3  2 -2.948009e-01 -2.113926e-02",
+   " 3  3  1.089630e+00  5.027526e-01",
+   " 4  0  4.808133e-01 -0.000000e+00",
+   " 4  1  1.439255e-02 -7.856242e-02",
+   " 4  2 -7.909004e-02  1.684321e-01",
+   " 4  3  2.285601e-01  1.098802e-01",
+   " 4  4  4.838154e-02  1.993670e-01",
+   " 5  0  2.150487e-01 -0.000000e+00",
+   " 5  1  7.821043e-02  3.046092e-02",
+   " 5  2 -4.172058e-02 -5.931481e-02",
+   " 5  3 -3.770874e-02 -3.405164e-02",
+   " 5  4 -5.946821e-02 -2.465019e-02",
+   " 5  5 -1.596947e-02  1.247610e-01",
+   " 6  0  6.143514e-02 -0.000000e+00",
+   " 6  1  5.103724e-02 -2.272880e-03",
+   " 6  2  1.459146e-04 -1.004420e-01",
+   " 6  3 -2.137062e-02 -6.018081e-04",
+   " 6  4 -3.674655e-02  1.343413e-02",
+   " 6  5  3.298570e-02  5.328297e-02",
+   " 6  6 -1.580846e-01 -2.704213e-02",
+   " 7  0  1.345902e-02 -0.000000e+00",
+   " 7  1  2.352632e-02 -2.406783e-02",
+   " 7  2  3.269135e-02 -4.555836e-02",
+   " 7  3 -2.849974e-02  6.362551e-03",
+   " 7  4 -1.249240e-03  2.360659e-02",
+   " 7  5  1.203048e-02 -3.364126e-02",
+   " 7  6 -3.183872e-02 -4.964336e-03",
+   " 7  7 -8.285084e-02 -9.524900e-02",
+   " 8  0  5.064719e-03 -0.000000e+00",
+   " 8  1  4.356176e-03 -1.618083e-02",
+   " 8  2  3.188627e-02 -1.929479e-02",
+   " 8  3 -2.322348e-02 -8.294211e-03",
+   " 8  4  5.363212e-03  1.259010e-03",
+   " 8  5 -7.961683e-03 -2.615682e-02",
+   " 8  6  8.378177e-03  1.451255e-02",
+   " 8  7 -1.836022e-02 -1.641013e-02",
+   " 8  8 -4.149014e-02  2.177569e-02"
+  ]
+ }
+}

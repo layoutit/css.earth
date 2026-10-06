@@ -1,0 +1,1477 @@
+{
+ "schema": "cssearth-espadons-map@2",
+ "program": "tau-boo-2016-06",
+ "target": {
+  "name": "tau Boo",
+  "object": "tepiamenit",
+  "raDegrees": 206.8134,
+  "decDegrees": 17.4572,
+  "radiusDegrees": 0.02
+ },
+ "inputs": {
+  "observations": [
+   {
+    "product": "1938899p",
+    "uri": "cadc:CFHT/1938899p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1938903p",
+    "uri": "cadc:CFHT/1938903p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1938907p",
+    "uri": "cadc:CFHT/1938907p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1939111p",
+    "uri": "cadc:CFHT/1939111p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "1939115p",
+    "uri": "cadc:CFHT/1939115p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "1939119p",
+    "uri": "cadc:CFHT/1939119p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "1939362p",
+    "uri": "cadc:CFHT/1939362p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1939366p",
+    "uri": "cadc:CFHT/1939366p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1939370p",
+    "uri": "cadc:CFHT/1939370p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1939592p",
+    "uri": "cadc:CFHT/1939592p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1939596p",
+    "uri": "cadc:CFHT/1939596p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1939600p",
+    "uri": "cadc:CFHT/1939600p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940470p",
+    "uri": "cadc:CFHT/1940470p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940474p",
+    "uri": "cadc:CFHT/1940474p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940478p",
+    "uri": "cadc:CFHT/1940478p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940482p",
+    "uri": "cadc:CFHT/1940482p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940486p",
+    "uri": "cadc:CFHT/1940486p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940490p",
+    "uri": "cadc:CFHT/1940490p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940676p",
+    "uri": "cadc:CFHT/1940676p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940680p",
+    "uri": "cadc:CFHT/1940680p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940684p",
+    "uri": "cadc:CFHT/1940684p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940894p",
+    "uri": "cadc:CFHT/1940894p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940898p",
+    "uri": "cadc:CFHT/1940898p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1940902p",
+    "uri": "cadc:CFHT/1940902p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941080p",
+    "uri": "cadc:CFHT/1941080p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941084p",
+    "uri": "cadc:CFHT/1941084p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941088p",
+    "uri": "cadc:CFHT/1941088p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941290p",
+    "uri": "cadc:CFHT/1941290p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941294p",
+    "uri": "cadc:CFHT/1941294p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941298p",
+    "uri": "cadc:CFHT/1941298p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941507p",
+    "uri": "cadc:CFHT/1941507p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941511p",
+    "uri": "cadc:CFHT/1941511p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941515p",
+    "uri": "cadc:CFHT/1941515p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941696p",
+    "uri": "cadc:CFHT/1941696p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941700p",
+    "uri": "cadc:CFHT/1941700p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941704p",
+    "uri": "cadc:CFHT/1941704p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941894p",
+    "uri": "cadc:CFHT/1941894p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941898p",
+    "uri": "cadc:CFHT/1941898p.fits",
+    "bytes": 20586240
+   },
+   {
+    "product": "1941902p",
+    "uri": "cadc:CFHT/1941902p.fits",
+    "bytes": 20586240
+   }
+  ],
+  "lineData": {
+   "url": "http://kurucz.harvard.edu/linelists/gfnew/gfall08oct17.dat",
+   "bytes": 371660460,
+   "credit": "R. L. Kurucz, atomic line list gfall, version of 8 October 2017"
+  },
+  "toolchain": {
+   "file": "packages/telescope-cli/src/archives/espadons/toolchain.json",
+   "requirements": [
+    "numpy==2.5.3",
+    "scipy==1.16.3",
+    "matplotlib==3.11.2",
+    "astropy==8.0.1",
+    "LSDpy==1.0.0",
+    "specpolFlow==1.1.0"
+   ],
+   "zdipy": {
+    "url": "https://github.com/folsomcp/ZDIpy",
+    "commit": "86d9f98c426a709f3298bab95fda5f6f5e65e111"
+   },
+   "julia": {
+    "download": {
+     "path": "julia-1.12.7-macaarch64.tar.gz",
+     "url": "https://julialang-s3.julialang.org/bin/mac/aarch64/1.12/julia-1.12.7-macaarch64.tar.gz",
+     "bytes": 230457194
+    },
+    "executable": "julia-1.12.7/bin/julia",
+    "environment": "packages/telescope-cli/src/archives/espadons/korg"
+   }
+  }
+ },
+ "mask": {
+  "atmosphere": {
+   "effectiveTemperatureK": {
+    "value": 6466,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: Teff"
+   },
+   "logGravity": {
+    "value": 4.25,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: logg"
+   },
+   "metallicity": {
+    "value": 0.26,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: [M/H]"
+   }
+  },
+  "korg": "1.3.1",
+  "candidates": 327037,
+  "synthesised": 21403,
+  "minimumDepth": 0.1,
+  "deepEnough": 8758,
+  "lines": 6169,
+  "species": {
+   "26.00": 4192,
+   "24.00": 867,
+   "28.00": 608,
+   "22.00": 485,
+   "26.01": 298,
+   "14.00": 298,
+   "25.00": 266,
+   "27.00": 265,
+   "22.01": 201,
+   "24.01": 156,
+   "6.00": 134,
+   "20.00": 130,
+   "23.00": 124,
+   "40.01": 113,
+   "23.01": 104,
+   "12.00": 99,
+   "16.00": 56,
+   "39.01": 54,
+   "25.01": 47,
+   "21.01": 43,
+   "20.01": 29,
+   "11.00": 21,
+   "13.00": 18,
+   "12.01": 17,
+   "8.00": 16,
+   "40.00": 15,
+   "21.00": 12,
+   "29.00": 12,
+   "14.01": 11,
+   "56.01": 10,
+   "28.01": 9,
+   "15.00": 7,
+   "27.01": 6,
+   "38.01": 6,
+   "7.00": 6,
+   "44.00": 4,
+   "19.00": 4,
+   "39.00": 4,
+   "30.00": 4,
+   "42.00": 3,
+   "41.01": 2,
+   "13.01": 1,
+   "38.00": 1
+  },
+  "meanDepth": 0.4233,
+  "meanWavelengthNm": 480.81,
+  "meanLande": 1.2181
+ },
+ "velocity": {
+  "kmS": -16.46,
+  "catalogued": {
+   "value": -16.03,
+   "source": "SIMBAD, radial velocity of * tau Boo (2002ApJS..141..503N)"
+  },
+  "searchCentreKmS": -15.4,
+  "searchDepth": 0.087
+ },
+ "profiles": {
+  "halfWidthKmS": 50.4,
+  "stepKmS": 1.8,
+  "fieldHalfWidthKmS": 25.1,
+  "lineHalfWidthKmS": 34,
+  "spectra": [
+   {
+    "product": "1938899p",
+    "utc": "2016-06-09T07:20:00",
+    "mjd": 57548.30556,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.22,
+     "error": 1.31,
+     "nullGauss": 0.91
+    },
+    "falseAlarm": 0.29798034557304676,
+    "nullFalseAlarm": 0.3747754726970962,
+    "centreKmS": -16.23,
+    "chiSquare": {
+     "intensity": 2891.1685,
+     "stokesV": 1.42,
+     "null": 1.4352
+    },
+    "offset": {
+     "stokesV": -0.0000022588,
+     "null": -0.0000026418
+    }
+   },
+   {
+    "product": "1938903p",
+    "utc": "2016-06-09T07:28:32",
+    "mjd": 57548.31149,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.11,
+     "error": 1.33,
+     "nullGauss": 0.24
+    },
+    "falseAlarm": 0.23925692945122656,
+    "nullFalseAlarm": 0.9251454918334439,
+    "centreKmS": -16.22,
+    "chiSquare": {
+     "intensity": 2900.0595,
+     "stokesV": 1.4661,
+     "null": 1.4783
+    },
+    "offset": {
+     "stokesV": -0.0000017198,
+     "null": -0.0000019875
+    }
+   },
+   {
+    "product": "1938907p",
+    "utc": "2016-06-09T07:37:04",
+    "mjd": 57548.31741,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.51,
+     "error": 1.34,
+     "nullGauss": -1.42
+    },
+    "falseAlarm": 0.8291313172159401,
+    "nullFalseAlarm": 0.5075233386253131,
+    "centreKmS": -16.23,
+    "chiSquare": {
+     "intensity": 2727.1178,
+     "stokesV": 1.4323,
+     "null": 1.436
+    },
+    "offset": {
+     "stokesV": -0.0000026689,
+     "null": -0.0000028572
+    }
+   },
+   {
+    "product": "1939111p",
+    "utc": "2016-06-10T06:36:30",
+    "mjd": 57549.27536,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.64,
+     "error": 1.34,
+     "nullGauss": -0.55
+    },
+    "falseAlarm": 0.06823828009034938,
+    "nullFalseAlarm": 0.791708141663973,
+    "centreKmS": -16.19,
+    "chiSquare": {
+     "intensity": 2802.3278,
+     "stokesV": 1.4276,
+     "null": 1.4516
+    },
+    "offset": {
+     "stokesV": -0.000003132,
+     "null": -0.0000033125
+    }
+   },
+   {
+    "product": "1939115p",
+    "utc": "2016-06-10T06:45:01",
+    "mjd": 57549.28127,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.1,
+     "error": 1.35,
+     "nullGauss": -0.78
+    },
+    "falseAlarm": 0.08453854910736958,
+    "nullFalseAlarm": 0.16665803966981407,
+    "centreKmS": -16.2,
+    "chiSquare": {
+     "intensity": 2781.4175,
+     "stokesV": 1.4356,
+     "null": 1.4616
+    },
+    "offset": {
+     "stokesV": -0.0000013649,
+     "null": -0.0000028008
+    }
+   },
+   {
+    "product": "1939119p",
+    "utc": "2016-06-10T06:53:33",
+    "mjd": 57549.2872,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.43,
+     "error": 1.31,
+     "nullGauss": 0.33
+    },
+    "falseAlarm": 0.04949142742751289,
+    "nullFalseAlarm": 0.6115958036935025,
+    "centreKmS": -16.2,
+    "chiSquare": {
+     "intensity": 2966.1017,
+     "stokesV": 1.4369,
+     "null": 1.4754
+    },
+    "offset": {
+     "stokesV": -0.0000016445,
+     "null": -0.000003307
+    }
+   },
+   {
+    "product": "1939362p",
+    "utc": "2016-06-11T06:54:53",
+    "mjd": 57550.28811,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.26,
+     "error": 1.42,
+     "nullGauss": 3.11
+    },
+    "falseAlarm": 0.23280193866621457,
+    "nullFalseAlarm": 0.11545680286963367,
+    "centreKmS": -16.9,
+    "chiSquare": {
+     "intensity": 2388.5637,
+     "stokesV": 1.3866,
+     "null": 1.3843
+    },
+    "offset": {
+     "stokesV": -0.0000016132,
+     "null": -0.0000020795
+    }
+   },
+   {
+    "product": "1939366p",
+    "utc": "2016-06-11T07:03:25",
+    "mjd": 57550.29404,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.04,
+     "error": 1.53,
+     "nullGauss": -0.94
+    },
+    "falseAlarm": 0.4344716240268083,
+    "nullFalseAlarm": 0.15037494689264463,
+    "centreKmS": -16.9,
+    "chiSquare": {
+     "intensity": 2003.0049,
+     "stokesV": 1.3761,
+     "null": 1.3789
+    },
+    "offset": {
+     "stokesV": -0.0000028119,
+     "null": -0.0000031908
+    }
+   },
+   {
+    "product": "1939370p",
+    "utc": "2016-06-11T07:11:58",
+    "mjd": 57550.29999,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.2,
+     "error": 1.45,
+     "nullGauss": 2.66
+    },
+    "falseAlarm": 0.43103771334925467,
+    "nullFalseAlarm": 0.0707009320896107,
+    "centreKmS": -16.91,
+    "chiSquare": {
+     "intensity": 2246.2105,
+     "stokesV": 1.3791,
+     "null": 1.3767
+    },
+    "offset": {
+     "stokesV": -0.0000038308,
+     "null": -0.0000033075
+    }
+   },
+   {
+    "product": "1939592p",
+    "utc": "2016-06-12T07:26:50",
+    "mjd": 57551.31031,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.33,
+     "error": 1.32,
+     "nullGauss": -0.23
+    },
+    "falseAlarm": 0.0011105370762722888,
+    "nullFalseAlarm": 0.5417865119917555,
+    "centreKmS": -16.46,
+    "chiSquare": {
+     "intensity": 2764.8032,
+     "stokesV": 1.3822,
+     "null": 1.3872
+    },
+    "offset": {
+     "stokesV": -0.0000016223,
+     "null": -0.0000014623
+    }
+   },
+   {
+    "product": "1939596p",
+    "utc": "2016-06-12T07:35:30",
+    "mjd": 57551.31632,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.29,
+     "error": 1.39,
+     "nullGauss": 0.58
+    },
+    "falseAlarm": 0.112138987353402,
+    "nullFalseAlarm": 0.3801657514043564,
+    "centreKmS": -16.46,
+    "chiSquare": {
+     "intensity": 2438.2789,
+     "stokesV": 1.378,
+     "null": 1.3684
+    },
+    "offset": {
+     "stokesV": -0.0000023668,
+     "null": -0.000003171
+    }
+   },
+   {
+    "product": "1939600p",
+    "utc": "2016-06-12T07:44:17",
+    "mjd": 57551.32242,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.47,
+     "error": 1.39,
+     "nullGauss": -1.27
+    },
+    "falseAlarm": 0.13175882725027677,
+    "nullFalseAlarm": 0.19075050416398598,
+    "centreKmS": -16.45,
+    "chiSquare": {
+     "intensity": 2456.0266,
+     "stokesV": 1.3736,
+     "null": 1.3594
+    },
+    "offset": {
+     "stokesV": -0.0000014809,
+     "null": -0.0000022618
+    }
+   },
+   {
+    "product": "1940470p",
+    "utc": "2016-06-17T06:07:27",
+    "mjd": 57556.25518,
+    "used": true,
+    "longitudinal": {
+     "gauss": -2.47,
+     "error": 1.7,
+     "nullGauss": -1.79
+    },
+    "falseAlarm": 0.2103964149999158,
+    "nullFalseAlarm": 0.8052383355047095,
+    "centreKmS": -16.46,
+    "chiSquare": {
+     "intensity": 1784.9021,
+     "stokesV": 1.4708,
+     "null": 1.4695
+    },
+    "offset": {
+     "stokesV": -0.0000022402,
+     "null": -0.0000029468
+    }
+   },
+   {
+    "product": "1940474p",
+    "utc": "2016-06-17T06:16:00",
+    "mjd": 57556.26111,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.51,
+     "error": 2.02,
+     "nullGauss": -0.94
+    },
+    "falseAlarm": 0.7732651183640045,
+    "nullFalseAlarm": 0.12911789742534951,
+    "centreKmS": -16.47,
+    "chiSquare": {
+     "intensity": 1198.1991,
+     "stokesV": 1.4195,
+     "null": 1.4332
+    },
+    "offset": {
+     "stokesV": -0.0000032144,
+     "null": -0.0000045959
+    }
+   },
+   {
+    "product": "1940478p",
+    "utc": "2016-06-17T06:24:33",
+    "mjd": 57556.26705,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.86,
+     "error": 1.93,
+     "nullGauss": -0.17
+    },
+    "falseAlarm": 0.18557580501476145,
+    "nullFalseAlarm": 0.6989298080158638,
+    "centreKmS": -16.47,
+    "chiSquare": {
+     "intensity": 1290.7399,
+     "stokesV": 1.4174,
+     "null": 1.431
+    },
+    "offset": {
+     "stokesV": -0.0000035737,
+     "null": -0.0000029042
+    }
+   },
+   {
+    "product": "1940482p",
+    "utc": "2016-06-17T06:33:41",
+    "mjd": 57556.2734,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.96,
+     "error": 1.95,
+     "nullGauss": 1.35
+    },
+    "falseAlarm": 0.3976231088471309,
+    "nullFalseAlarm": 0.09615131129809984,
+    "centreKmS": -16.48,
+    "chiSquare": {
+     "intensity": 1264.9251,
+     "stokesV": 1.408,
+     "null": 1.4073
+    },
+    "offset": {
+     "stokesV": -0.0000036522,
+     "null": -0.0000038969
+    }
+   },
+   {
+    "product": "1940486p",
+    "utc": "2016-06-17T06:42:14",
+    "mjd": 57556.27933,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.21,
+     "error": 2.44,
+     "nullGauss": 3.82
+    },
+    "falseAlarm": 0.031730215920968474,
+    "nullFalseAlarm": 0.8178298809030018,
+    "centreKmS": -16.49,
+    "chiSquare": {
+     "intensity": 962.7382,
+     "stokesV": 1.6724,
+     "null": 1.6931
+    },
+    "offset": {
+     "stokesV": -0.0000071888,
+     "null": -0.0000065875
+    }
+   },
+   {
+    "product": "1940490p",
+    "utc": "2016-06-17T06:50:47",
+    "mjd": 57556.28527,
+    "used": true,
+    "longitudinal": {
+     "gauss": -2.19,
+     "error": 2.83,
+     "nullGauss": -0.96
+    },
+    "falseAlarm": 0.18462799055467494,
+    "nullFalseAlarm": 0.18368670107059215,
+    "centreKmS": -16.5,
+    "chiSquare": {
+     "intensity": 596.1907,
+     "stokesV": 1.427,
+     "null": 1.4394
+    },
+    "offset": {
+     "stokesV": -0.0000080612,
+     "null": -0.0000073172
+    }
+   },
+   {
+    "product": "1940676p",
+    "utc": "2016-06-18T05:41:06",
+    "mjd": 57557.23688,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.96,
+     "error": 1.66,
+     "nullGauss": -1.32
+    },
+    "falseAlarm": 0.009707500647443301,
+    "nullFalseAlarm": 0.9481523902048792,
+    "centreKmS": -16.92,
+    "chiSquare": {
+     "intensity": 1770.6699,
+     "stokesV": 1.4176,
+     "null": 1.4205
+    },
+    "offset": {
+     "stokesV": -0.0000015077,
+     "null": -0.0000036408
+    }
+   },
+   {
+    "product": "1940680p",
+    "utc": "2016-06-18T05:49:39",
+    "mjd": 57557.24281,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.52,
+     "error": 1.78,
+     "nullGauss": -0.32
+    },
+    "falseAlarm": 0.24056277982405305,
+    "nullFalseAlarm": 0.47776944596336357,
+    "centreKmS": -16.92,
+    "chiSquare": {
+     "intensity": 1530.0451,
+     "stokesV": 1.4105,
+     "null": 1.4305
+    },
+    "offset": {
+     "stokesV": -0.0000034512,
+     "null": -0.000003443
+    }
+   },
+   {
+    "product": "1940684p",
+    "utc": "2016-06-18T05:58:11",
+    "mjd": 57557.24875,
+    "used": true,
+    "longitudinal": {
+     "gauss": -2,
+     "error": 1.9,
+     "nullGauss": -0.25
+    },
+    "falseAlarm": 0.5043367495202215,
+    "nullFalseAlarm": 0.25485942257499516,
+    "centreKmS": -16.91,
+    "chiSquare": {
+     "intensity": 1339.6501,
+     "stokesV": 1.4199,
+     "null": 1.4192
+    },
+    "offset": {
+     "stokesV": -0.0000058319,
+     "null": -0.0000048301
+    }
+   },
+   {
+    "product": "1940894p",
+    "utc": "2016-06-19T05:58:56",
+    "mjd": 57558.24926,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.53,
+     "error": 1.34,
+     "nullGauss": -0.22
+    },
+    "falseAlarm": 0.017447188476341302,
+    "nullFalseAlarm": 0.5395241967869021,
+    "centreKmS": -16.22,
+    "chiSquare": {
+     "intensity": 2720.6671,
+     "stokesV": 1.3996,
+     "null": 1.4101
+    },
+    "offset": {
+     "stokesV": -0.0000027516,
+     "null": -0.0000028315
+    }
+   },
+   {
+    "product": "1940898p",
+    "utc": "2016-06-19T06:07:29",
+    "mjd": 57558.2552,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.49,
+     "error": 1.32,
+     "nullGauss": -0.65
+    },
+    "falseAlarm": 0.9676963014287197,
+    "nullFalseAlarm": 0.5907160304608442,
+    "centreKmS": -16.21,
+    "chiSquare": {
+     "intensity": 2815.2837,
+     "stokesV": 1.387,
+     "null": 1.4024
+    },
+    "offset": {
+     "stokesV": -0.0000022039,
+     "null": -0.0000017211
+    }
+   },
+   {
+    "product": "1940902p",
+    "utc": "2016-06-19T06:16:02",
+    "mjd": 57558.26114,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.01,
+     "error": 1.35,
+     "nullGauss": -0.02
+    },
+    "falseAlarm": 0.5939737857692997,
+    "nullFalseAlarm": 0.4249576085484341,
+    "centreKmS": -16.22,
+    "chiSquare": {
+     "intensity": 2649.0149,
+     "stokesV": 1.3869,
+     "null": 1.3997
+    },
+    "offset": {
+     "stokesV": -0.0000014804,
+     "null": -0.0000016904
+    }
+   },
+   {
+    "product": "1941080p",
+    "utc": "2016-06-20T05:48:19",
+    "mjd": 57559.24189,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.44,
+     "error": 1.31,
+     "nullGauss": 0.91
+    },
+    "falseAlarm": 0.6244099593824345,
+    "nullFalseAlarm": 0.9441341458644582,
+    "centreKmS": -16.2,
+    "chiSquare": {
+     "intensity": 2964.3427,
+     "stokesV": 1.4439,
+     "null": 1.4296
+    },
+    "offset": {
+     "stokesV": -0.0000011114,
+     "null": -0.0000013362
+    }
+   },
+   {
+    "product": "1941084p",
+    "utc": "2016-06-20T05:56:50",
+    "mjd": 57559.24781,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.7,
+     "error": 1.29,
+     "nullGauss": 1.27
+    },
+    "falseAlarm": 0.023726320399043987,
+    "nullFalseAlarm": 0.7178327650164641,
+    "centreKmS": -16.22,
+    "chiSquare": {
+     "intensity": 2971.5164,
+     "stokesV": 1.4195,
+     "null": 1.4274
+    },
+    "offset": {
+     "stokesV": -0.0000018019,
+     "null": -0.000001193
+    }
+   },
+   {
+    "product": "1941088p",
+    "utc": "2016-06-20T06:05:23",
+    "mjd": 57559.25374,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.51,
+     "error": 1.32,
+     "nullGauss": 0.46
+    },
+    "falseAlarm": 0.364425116994175,
+    "nullFalseAlarm": 0.40633896986016205,
+    "centreKmS": -16.23,
+    "chiSquare": {
+     "intensity": 2806.9207,
+     "stokesV": 1.408,
+     "null": 1.4187
+    },
+    "offset": {
+     "stokesV": -0.0000025686,
+     "null": -0.0000016347
+    }
+   },
+   {
+    "product": "1941290p",
+    "utc": "2016-06-21T06:46:52",
+    "mjd": 57560.28255,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.37,
+     "error": 1.33,
+     "nullGauss": 1.81
+    },
+    "falseAlarm": 0.2221464978778127,
+    "nullFalseAlarm": 0.36229076855574727,
+    "centreKmS": -16.92,
+    "chiSquare": {
+     "intensity": 2810.9917,
+     "stokesV": 1.3966,
+     "null": 1.4081
+    },
+    "offset": {
+     "stokesV": -0.0000011448,
+     "null": -0.0000022145
+    }
+   },
+   {
+    "product": "1941294p",
+    "utc": "2016-06-21T06:55:24",
+    "mjd": 57560.28848,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.97,
+     "error": 1.32,
+     "nullGauss": 0.87
+    },
+    "falseAlarm": 0.07524158155854532,
+    "nullFalseAlarm": 0.27172901887763923,
+    "centreKmS": -16.92,
+    "chiSquare": {
+     "intensity": 2804.0387,
+     "stokesV": 1.388,
+     "null": 1.4014
+    },
+    "offset": {
+     "stokesV": -0.0000019586,
+     "null": -0.0000011845
+    }
+   },
+   {
+    "product": "1941298p",
+    "utc": "2016-06-21T07:03:58",
+    "mjd": 57560.29442,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.73,
+     "error": 1.33,
+     "nullGauss": -0.21
+    },
+    "falseAlarm": 0.34610230906680695,
+    "nullFalseAlarm": 0.45718317034325817,
+    "centreKmS": -16.92,
+    "chiSquare": {
+     "intensity": 2746.7433,
+     "stokesV": 1.3863,
+     "null": 1.3994
+    },
+    "offset": {
+     "stokesV": -0.0000020955,
+     "null": -0.0000022981
+    }
+   },
+   {
+    "product": "1941507p",
+    "utc": "2016-06-22T06:47:24",
+    "mjd": 57561.28292,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.15,
+     "error": 1.66,
+     "nullGauss": -0.72
+    },
+    "falseAlarm": 0.07908561524477875,
+    "nullFalseAlarm": 0.6144196317354284,
+    "centreKmS": -16.45,
+    "chiSquare": {
+     "intensity": 1750.0524,
+     "stokesV": 1.4166,
+     "null": 1.4184
+    },
+    "offset": {
+     "stokesV": -0.0000038212,
+     "null": -0.0000023431
+    }
+   },
+   {
+    "product": "1941511p",
+    "utc": "2016-06-22T06:55:57",
+    "mjd": 57561.28885,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.89,
+     "error": 1.55,
+     "nullGauss": 1.52
+    },
+    "falseAlarm": 0.1568532366836084,
+    "nullFalseAlarm": 0.36545884055346534,
+    "centreKmS": -16.44,
+    "chiSquare": {
+     "intensity": 2018.9728,
+     "stokesV": 1.4226,
+     "null": 1.4156
+    },
+    "offset": {
+     "stokesV": -0.0000029572,
+     "null": -0.0000034508
+    }
+   },
+   {
+    "product": "1941515p",
+    "utc": "2016-06-22T07:04:29",
+    "mjd": 57561.29478,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.32,
+     "error": 1.57,
+     "nullGauss": 0.2
+    },
+    "falseAlarm": 0.003188900189666999,
+    "nullFalseAlarm": 0.3771199323575096,
+    "centreKmS": -16.44,
+    "chiSquare": {
+     "intensity": 1930.9406,
+     "stokesV": 1.4025,
+     "null": 1.4276
+    },
+    "offset": {
+     "stokesV": -0.0000027928,
+     "null": -0.000003141
+    }
+   },
+   {
+    "product": "1941696p",
+    "utc": "2016-06-23T05:49:13",
+    "mjd": 57562.24252,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.8,
+     "error": 1.35,
+     "nullGauss": -0.58
+    },
+    "falseAlarm": 0.017500437158443183,
+    "nullFalseAlarm": 0.1314726525921821,
+    "centreKmS": -16.08,
+    "chiSquare": {
+     "intensity": 2792.6363,
+     "stokesV": 1.4475,
+     "null": 1.4643
+    },
+    "offset": {
+     "stokesV": -0.0000026668,
+     "null": -0.0000021021
+    }
+   },
+   {
+    "product": "1941700p",
+    "utc": "2016-06-23T05:57:45",
+    "mjd": 57562.24845,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.14,
+     "error": 1.32,
+     "nullGauss": 0.06
+    },
+    "falseAlarm": 0.013628456165025504,
+    "nullFalseAlarm": 0.4497587416929383,
+    "centreKmS": -16.1,
+    "chiSquare": {
+     "intensity": 2891.4109,
+     "stokesV": 1.4316,
+     "null": 1.4676
+    },
+    "offset": {
+     "stokesV": -0.0000027529,
+     "null": -2.1263e-7
+    }
+   },
+   {
+    "product": "1941704p",
+    "utc": "2016-06-23T06:06:17",
+    "mjd": 57562.25437,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.35,
+     "error": 1.33,
+     "nullGauss": -0.14
+    },
+    "falseAlarm": 0.09434775774223148,
+    "nullFalseAlarm": 0.6970919671350522,
+    "centreKmS": -16.1,
+    "chiSquare": {
+     "intensity": 2841.9542,
+     "stokesV": 1.4418,
+     "null": 1.4485
+    },
+    "offset": {
+     "stokesV": -0.0000015462,
+     "null": -0.0000023016
+    }
+   },
+   {
+    "product": "1941894p",
+    "utc": "2016-06-24T05:51:38",
+    "mjd": 57563.2442,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.56,
+     "error": 1.35,
+     "nullGauss": 0.28
+    },
+    "falseAlarm": 0.22435099798658864,
+    "nullFalseAlarm": 0.8859421953114919,
+    "centreKmS": -16.77,
+    "chiSquare": {
+     "intensity": 2740.3782,
+     "stokesV": 1.4162,
+     "null": 1.4122
+    },
+    "offset": {
+     "stokesV": -0.0000023516,
+     "null": -0.0000018844
+    }
+   },
+   {
+    "product": "1941898p",
+    "utc": "2016-06-24T06:00:10",
+    "mjd": 57563.25012,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.9,
+     "error": 1.34,
+     "nullGauss": -0.22
+    },
+    "falseAlarm": 0.3063523247160249,
+    "nullFalseAlarm": 0.09656287753905202,
+    "centreKmS": -16.76,
+    "chiSquare": {
+     "intensity": 2764.1693,
+     "stokesV": 1.4023,
+     "null": 1.4182
+    },
+    "offset": {
+     "stokesV": -0.0000024714,
+     "null": -0.0000011893
+    }
+   },
+   {
+    "product": "1941902p",
+    "utc": "2016-06-24T06:08:42",
+    "mjd": 57563.25604,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.44,
+     "error": 1.34,
+     "nullGauss": 1.12
+    },
+    "falseAlarm": 0.11198195243720599,
+    "nullFalseAlarm": 0.0647546762223068,
+    "centreKmS": -16.77,
+    "chiSquare": {
+     "intensity": 2802.1528,
+     "stokesV": 1.4253,
+     "null": 1.4254
+    },
+    "offset": {
+     "stokesV": -0.0000023726,
+     "null": -0.0000014952
+    }
+   }
+  ]
+ },
+ "map": {
+  "star": {
+   "vsiniKmS": {
+    "value": 14.27,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501), Table 1: v sin i 14.27 ± 0.06 km/s"
+   },
+   "inclinationDegrees": {
+    "value": 45,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the tilt their maps are made with, 45 degrees, beside the derived 44.5 ± 1.5 degrees their Table 1 quotes"
+   },
+   "periodDays": {
+    "value": 3.142,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the equatorial rate of 2.00 rad/d their Fourier-transform measurement of the differential rotation assumes, which is 3.142 d"
+   },
+   "maximumDegree": {
+    "value": 8,
+    "source": "Donati et al. (2008), MNRAS, doi:10.1111/j.1365-2966.2008.12946.x (arXiv:0802.1584), Sect. 3: the expansion is limited to degree 8"
+   },
+   "shearRadPerDay": {
+    "value": 0.35,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): differential rotation 0.35 ± 0.14 rad/d from the Fourier transform of the line profile"
+   }
+  },
+  "spectraUsed": 39,
+  "maximumDegree": 8,
+  "middleMjd": 57555.7808,
+  "middleUtc": "2016-06-16T18:44:21",
+  "longitudeZero": "faces the observer at the middle of the run; longitude grows the way the star turns",
+  "chiSquareNoField": 1.183,
+  "detection": {
+   "points": 1443,
+   "sigma": 4.9
+  },
+  "ladder": [
+   {
+    "target": 1.15,
+    "iterations": 2,
+    "chiSquare": 1.15,
+    "entropy": -0.02,
+    "meanGauss": 0.41,
+    "maxGauss": 1.3,
+    "poloidalPercent": 72.2,
+    "toroidalPercent": 27.8,
+    "axisymmetricPercent": 67.5,
+    "dipolePercent": 65.778,
+    "quadrupolePercent": 10.41,
+    "octupolePercent": 10.54
+   },
+   {
+    "target": 1.1,
+    "iterations": 2,
+    "chiSquare": 1.1,
+    "entropy": -0.21,
+    "meanGauss": 1.06,
+    "maxGauss": 3.7,
+    "poloidalPercent": 64.2,
+    "toroidalPercent": 35.8,
+    "axisymmetricPercent": 55.6,
+    "dipolePercent": 41.836,
+    "quadrupolePercent": 9.591,
+    "octupolePercent": 20.311
+   },
+   {
+    "target": 1.05,
+    "iterations": 2,
+    "chiSquare": 1.05,
+    "entropy": -0.91,
+    "meanGauss": 1.89,
+    "maxGauss": 6.9,
+    "poloidalPercent": 65.9,
+    "toroidalPercent": 34.1,
+    "axisymmetricPercent": 47,
+    "dipolePercent": 24.75,
+    "quadrupolePercent": 7.22,
+    "octupolePercent": 25.401
+   },
+   {
+    "target": 1,
+    "iterations": 6,
+    "chiSquare": 1,
+    "entropy": -4.34,
+    "meanGauss": 3.58,
+    "maxGauss": 12.4,
+    "poloidalPercent": 74.4,
+    "toroidalPercent": 25.6,
+    "axisymmetricPercent": 45.9,
+    "dipolePercent": 20.61,
+    "quadrupolePercent": 5.497,
+    "octupolePercent": 23.692
+   }
+  ],
+  "verdict": {
+   "mapped": true
+  },
+  "chosen": {
+   "target": 1.05,
+   "iterations": 2,
+   "chiSquare": 1.05,
+   "entropy": -0.91,
+   "meanGauss": 1.89,
+   "maxGauss": 6.9,
+   "poloidalPercent": 65.9,
+   "toroidalPercent": 34.1,
+   "axisymmetricPercent": 47,
+   "dipolePercent": 24.75,
+   "quadrupolePercent": 7.22,
+   "octupolePercent": 25.401,
+   "chiSquareNoField": 1.183,
+   "lineStrength": 0.491678,
+   "knee": 0.5,
+   "radialGauss": [
+    -4.63,
+    6.59
+   ]
+  },
+  "coefficients": [
+   "General poloidal plus toroidal field",
+   "44 3 -3",
+   " 1  0  2.867576e+00 -0.000000e+00",
+   " 1  1 -1.175408e+00 -3.418336e-01",
+   " 2  0  8.464426e-01 -0.000000e+00",
+   " 2  1 -8.945763e-01 -9.826533e-01",
+   " 2  2  1.353859e+00 -8.280122e-01",
+   " 3  0 -3.557698e-01 -0.000000e+00",
+   " 3  1 -6.022225e-01 -1.094285e+00",
+   " 3  2  1.299971e+00 -6.342003e-01",
+   " 3  3  1.089406e+00 -3.519073e+00",
+   " 4  0 -1.122609e+00 -0.000000e+00",
+   " 4  1 -2.638106e-01 -6.600404e-01",
+   " 4  2  8.311434e-01 -2.894357e-01",
+   " 4  3 -2.008292e-01  1.049109e-01",
+   " 4  4  2.357125e-01 -1.511731e-01",
+   " 5  0 -1.262555e+00 -0.000000e+00",
+   " 5  1  5.426684e-02 -1.685285e-01",
+   " 5  2  2.807055e-01 -1.322649e-01",
+   " 5  3 -1.225840e+00  2.666273e+00",
+   " 5  4  1.267615e-01 -5.886455e-02",
+   " 5  5  6.782840e-01 -2.125441e-01",
+   " 6  0 -9.064865e-01 -0.000000e+00",
+   " 6  1  2.181202e-01  6.711933e-02",
+   " 6  2 -1.147120e-01 -1.610667e-01",
+   " 6  3 -1.377350e+00  2.128670e+00",
+   " 6  4 -1.694188e-01 -1.443031e-03",
+   " 6  5 -2.420159e-01 -1.372841e-01",
+   " 6  6 -8.938730e-02  7.125495e-01",
+   " 7  0 -4.851654e-01 -0.000000e+00",
+   " 7  1  2.335525e-01  1.042732e-01",
+   " 7  2 -2.961189e-01 -2.080943e-01",
+   " 7  3 -1.023348e+00  5.226980e-01",
+   " 7  4 -5.575135e-01  2.760918e-02",
+   " 7  5 -7.977834e-01  5.196834e-02",
+   " 7  6 -5.005346e-01  3.340193e-01",
+   " 7  7  1.583568e-01  6.068985e-02",
+   " 8  0 -2.243211e-01 -0.000000e+00",
+   " 8  1  1.906420e-01  7.769107e-02",
+   " 8  2 -3.434805e-01 -1.727062e-01",
+   " 8  3 -4.505018e-01 -5.324755e-01",
+   " 8  4 -6.730463e-01  1.331393e-01",
+   " 8  5 -3.468811e-01  2.468243e-01",
+   " 8  6 -5.463185e-01 -4.997221e-02",
+   " 8  7 -1.688470e-01  7.844346e-02",
+   " 8  8 -2.123780e-01 -1.696890e-02",
+   "",
+   " 1  0  1.279234e+00 -0.000000e+00",
+   " 1  1 -1.053507e+00  1.205593e+00",
+   " 2  0  9.185147e-02 -0.000000e+00",
+   " 2  1 -6.412153e-01  6.079779e-02",
+   " 2  2  3.332948e-01  1.018846e-01",
+   " 3  0 -9.907386e-01 -0.000000e+00",
+   " 3  1 -3.533485e-01  8.467978e-02",
+   " 3  2  3.192382e-01  4.556516e-01",
+   " 3  3  1.593867e+00 -5.492426e-01",
+   " 4  0 -9.636952e-01 -0.000000e+00",
+   " 4  1 -3.502965e-02  2.492137e-01",
+   " 4  2  4.241030e-01  3.061655e-01",
+   " 4  3  2.387233e-01  1.494102e+00",
+   " 4  4  5.801490e-01  6.034446e-01",
+   " 5  0 -2.826073e-01 -0.000000e+00",
+   " 5  1  7.798796e-02  1.598987e-01",
+   " 5  2  3.542423e-01 -9.759801e-03",
+   " 5  3 -4.690438e-02  3.388039e-01",
+   " 5  4  3.373788e-01  1.719469e-01",
+   " 5  5  4.553352e-01 -9.460889e-02",
+   " 6  0  1.109824e-01 -0.000000e+00",
+   " 6  1  4.180880e-02  3.807832e-02",
+   " 6  2  2.435346e-01 -1.335666e-01",
+   " 6  3 -1.224100e-01 -5.863809e-01",
+   " 6  4  1.000655e-01 -1.148480e-01",
+   " 6  5 -2.207350e-01 -6.929093e-03",
+   " 6  6  3.268651e-02 -1.347085e-01",
+   " 7  0  1.436990e-01 -0.000000e+00",
+   " 7  1  2.317760e-02  7.767553e-03",
+   " 7  2  1.225587e-01 -6.330298e-02",
+   " 7  3 -7.173249e-02 -2.798068e-01",
+   " 7  4 -6.559334e-02 -9.903165e-02",
+   " 7  5 -1.783707e-02  6.183996e-05",
+   " 7  6 -7.849093e-02 -2.020152e-01",
+   " 7  7 -5.784572e-03  6.460706e-02",
+   " 8  0  1.406052e-01 -0.000000e+00",
+   " 8  1  5.428130e-06 -1.114728e-02",
+   " 8  2  4.374190e-02  3.307418e-02",
+   " 8  3  1.328302e-01  2.370749e-02",
+   " 8  4  4.512843e-02 -1.386864e-02",
+   " 8  5  2.579453e-01  1.902714e-02",
+   " 8  6  1.295888e-01 -3.950152e-02",
+   " 8  7 -8.980856e-02  8.000342e-03",
+   " 8  8  1.459397e-01  3.948918e-02",
+   "",
+   " 1  0 -4.571722e+00 -0.000000e+00",
+   " 1  1 -1.162670e+00 -4.687103e-01",
+   " 2  0 -2.390675e+00 -0.000000e+00",
+   " 2  1  9.299051e-02  1.273356e-01",
+   " 2  2  5.123604e-01  7.983653e-01",
+   " 3  0 -5.163669e-01 -0.000000e+00",
+   " 3  1  2.269234e-01  8.860159e-02",
+   " 3  2  1.313179e-01  4.081097e-01",
+   " 3  3  3.309832e+00  1.156548e+00",
+   " 4  0  1.397758e-01 -0.000000e+00",
+   " 4  1  1.746260e-01 -7.246778e-02",
+   " 4  2 -1.193086e-01 -6.926432e-02",
+   " 4  3  1.412582e-01 -5.963242e-01",
+   " 4  4 -7.747787e-02  3.328595e-01",
+   " 5  0  2.534795e-01 -0.000000e+00",
+   " 5  1  2.862679e-01 -2.228822e-01",
+   " 5  2 -1.611283e-01 -3.729105e-01",
+   " 5  3 -6.804462e-01 -6.967281e-01",
+   " 5  4  1.541710e-01  7.187897e-02",
+   " 5  5  1.741728e-01  8.427538e-01",
+   " 6  0  2.791903e-01 -0.000000e+00",
+   " 6  1  3.693364e-01 -3.185288e-01",
+   " 6  2 -1.893087e-01 -3.363391e-01",
+   " 6  3 -1.273455e-01 -2.224642e-01",
+   " 6  4  1.540073e-01  6.027173e-02",
+   " 6  5  8.918475e-02 -8.880169e-02",
+   " 6  6 -5.164650e-01  1.415774e-01",
+   " 7  0  2.316187e-01 -0.000000e+00",
+   " 7  1  3.054538e-01 -2.957919e-01",
+   " 7  2 -2.111629e-01 -1.256460e-01",
+   " 7  3  8.624129e-03  1.116843e-01",
+   " 7  4  1.036247e-01 -3.855083e-02",
+   " 7  5  8.762391e-02 -4.596752e-01",
+   " 7  6 -7.239884e-02 -7.602719e-02",
+   " 7  7 -3.534135e-02  2.259837e-01",
+   " 8  0  1.500334e-01 -0.000000e+00",
+   " 8  1  1.846442e-01 -2.042429e-01",
+   " 8  2 -1.426061e-01  5.407606e-02",
+   " 8  3 -1.025662e-01  2.658656e-01",
+   " 8  4  8.499934e-02 -8.863541e-02",
+   " 8  5  1.768187e-02 -1.234409e-01",
+   " 8  6 -2.719410e-02 -3.466280e-01",
+   " 8  7 -2.359765e-03  9.718817e-03",
+   " 8  8  2.435107e-02 -1.352062e-01"
+  ]
+ }
+}

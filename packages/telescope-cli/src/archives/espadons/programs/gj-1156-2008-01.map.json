@@ -1,0 +1,498 @@
+{
+ "schema": "cssearth-espadons-map@2",
+ "program": "gj-1156-2008-01",
+ "target": {
+  "name": "GJ 1156",
+  "raDegrees": 184.74749887,
+  "decDegrees": 11.12604812,
+  "radiusDegrees": 0.02
+ },
+ "inputs": {
+  "observations": [
+   {
+    "product": "965914p",
+    "uri": "cadc:CFHT/965914p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "966018p",
+    "uri": "cadc:CFHT/966018p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "966046p",
+    "uri": "cadc:CFHT/966046p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "966150p",
+    "uri": "cadc:CFHT/966150p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "966178p",
+    "uri": "cadc:CFHT/966178p.fits",
+    "bytes": 20592000
+   },
+   {
+    "product": "966309p",
+    "uri": "cadc:CFHT/966309p.fits",
+    "bytes": 20592000
+   }
+  ],
+  "lineData": {
+   "url": "http://kurucz.harvard.edu/linelists/gfnew/gfall08oct17.dat",
+   "bytes": 371660460,
+   "credit": "R. L. Kurucz, atomic line list gfall, version of 8 October 2017"
+  },
+  "toolchain": {
+   "file": "packages/telescope-cli/src/archives/espadons/toolchain.json",
+   "requirements": [
+    "numpy==2.5.3",
+    "scipy==1.16.3",
+    "matplotlib==3.11.2",
+    "astropy==8.0.1",
+    "LSDpy==1.0.0",
+    "specpolFlow==1.1.0"
+   ],
+   "zdipy": {
+    "url": "https://github.com/folsomcp/ZDIpy",
+    "commit": "86d9f98c426a709f3298bab95fda5f6f5e65e111"
+   },
+   "julia": {
+    "download": {
+     "path": "julia-1.12.7-macaarch64.tar.gz",
+     "url": "https://julialang-s3.julialang.org/bin/mac/aarch64/1.12/julia-1.12.7-macaarch64.tar.gz",
+     "bytes": 230457194
+    },
+    "executable": "julia-1.12.7/bin/julia",
+    "environment": "packages/telescope-cli/src/archives/espadons/korg"
+   }
+  }
+ },
+ "mask": {
+  "atmosphere": {
+   "effectiveTemperatureK": {
+    "value": 3110,
+    "source": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4.5V, for SIMBAD's spectral type M4.5Ve: Teff"
+   },
+   "logGravity": {
+    "value": 5.03,
+    "source": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4.5V, for SIMBAD's spectral type M4.5Ve: from the row's mass and radius"
+   }
+  },
+  "korg": "1.3.1",
+  "candidates": 327037,
+  "synthesised": 21861,
+  "minimumDepth": 0.1,
+  "deepEnough": 7660,
+  "lines": 5121,
+  "species": {
+   "26.00": 2267,
+   "22.00": 1410,
+   "24.00": 1100,
+   "23.00": 927,
+   "27.00": 285,
+   "28.00": 235,
+   "40.00": 215,
+   "20.00": 193,
+   "25.00": 165,
+   "21.00": 159,
+   "41.00": 144,
+   "44.00": 92,
+   "56.00": 80,
+   "39.00": 72,
+   "38.00": 65,
+   "11.00": 53,
+   "22.01": 36,
+   "12.00": 33,
+   "42.00": 27,
+   "45.00": 18,
+   "39.01": 18,
+   "19.00": 17,
+   "21.01": 11,
+   "20.01": 7,
+   "13.00": 6,
+   "56.01": 5,
+   "46.00": 4,
+   "23.01": 3,
+   "38.01": 3,
+   "29.00": 3,
+   "3.00": 3,
+   "14.00": 2,
+   "24.01": 1,
+   "40.01": 1
+  },
+  "meanDepth": 0.4676,
+  "meanWavelengthNm": 471.33,
+  "meanLande": 1.2413
+ },
+ "velocity": {
+  "kmS": 9.77,
+  "catalogued": {
+   "value": 6,
+   "source": "SIMBAD, radial velocity of V* GL Vir (2018MNRAS.475.1960F)"
+  },
+  "searchCentreKmS": 10.2,
+  "searchDepth": 0.0378
+ },
+ "profiles": {
+  "halfWidthKmS": 54,
+  "stepKmS": 1.8,
+  "fieldHalfWidthKmS": 27.8,
+  "lineHalfWidthKmS": 38,
+  "spectra": [
+   {
+    "product": "965914p",
+    "utc": "2008-01-19T11:36:25",
+    "mjd": 54484.48363,
+    "used": true,
+    "longitudinal": {
+     "gauss": -25.97,
+     "error": 337.19,
+     "nullGauss": 604.99
+    },
+    "falseAlarm": 0.05403067770431624,
+    "nullFalseAlarm": 0.005289928606549643,
+    "centreKmS": 11.48,
+    "chiSquare": {
+     "intensity": 13.1692,
+     "stokesV": 0.7774,
+     "null": 0.7777
+    },
+    "offset": {
+     "stokesV": -0.0071826,
+     "null": -0.0071083
+    }
+   },
+   {
+    "product": "966018p",
+    "utc": "2008-01-20T11:39:03",
+    "mjd": 54485.48545,
+    "used": true,
+    "longitudinal": {
+     "gauss": -207.33,
+     "error": 138.21,
+     "nullGauss": -99.82
+    },
+    "falseAlarm": 0.000021241903646274096,
+    "nullFalseAlarm": 0.10011776368206693,
+    "centreKmS": 9.75,
+    "chiSquare": {
+     "intensity": 103.798,
+     "stokesV": 1.026,
+     "null": 1.0286
+    },
+    "offset": {
+     "stokesV": -0.0018145,
+     "null": -0.0017669
+    }
+   },
+   {
+    "product": "966046p",
+    "utc": "2008-01-20T15:23:13",
+    "mjd": 54485.64112,
+    "used": true,
+    "longitudinal": {
+     "gauss": 243.73,
+     "error": 145.36,
+     "nullGauss": 28.63
+    },
+    "falseAlarm": 0.004847372112610104,
+    "nullFalseAlarm": 0.22388486443543465,
+    "centreKmS": 9.44,
+    "chiSquare": {
+     "intensity": 101.8151,
+     "stokesV": 1.02,
+     "null": 1.0187
+    },
+    "offset": {
+     "stokesV": -0.0016962,
+     "null": -0.0017568
+    }
+   },
+   {
+    "product": "966150p",
+    "utc": "2008-01-21T11:30:40",
+    "mjd": 54486.47964,
+    "used": true,
+    "longitudinal": {
+     "gauss": -322.94,
+     "error": 187.49,
+     "nullGauss": -129.9
+    },
+    "falseAlarm": 0.00048128249759749053,
+    "nullFalseAlarm": 0.08678502607047456,
+    "centreKmS": 9.77,
+    "chiSquare": {
+     "intensity": 69.4959,
+     "stokesV": 1.0667,
+     "null": 1.065
+    },
+    "offset": {
+     "stokesV": -0.0025702,
+     "null": -0.0025779
+    }
+   },
+   {
+    "product": "966178p",
+    "utc": "2008-01-21T15:23:58",
+    "mjd": 54486.64164,
+    "used": true,
+    "longitudinal": {
+     "gauss": 224.34,
+     "error": 154.66,
+     "nullGauss": 248.04
+    },
+    "falseAlarm": 0.009545293377218211,
+    "nullFalseAlarm": 0.04502288399217702,
+    "centreKmS": 9.76,
+    "chiSquare": {
+     "intensity": 107.42,
+     "stokesV": 1.1802,
+     "null": 1.1734
+    },
+    "offset": {
+     "stokesV": -0.0018948,
+     "null": -0.0019456
+    }
+   },
+   {
+    "product": "966309p",
+    "utc": "2008-01-22T14:08:29",
+    "mjd": 54487.58924,
+    "used": true,
+    "longitudinal": {
+     "gauss": 117.85,
+     "error": 135.42,
+     "nullGauss": -3.66
+    },
+    "falseAlarm": 0.018572461379445127,
+    "nullFalseAlarm": 0.11558701354432954,
+    "centreKmS": 10.27,
+    "chiSquare": {
+     "intensity": 101.3543,
+     "stokesV": 1.0061,
+     "null": 1.0087
+    },
+    "offset": {
+     "stokesV": -0.0017375,
+     "null": -0.0017348
+    }
+   }
+  ]
+ },
+ "map": {
+  "star": {
+   "vsiniKmS": {
+    "value": 17,
+    "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+   },
+   "inclinationDegrees": {
+    "value": 60,
+    "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+   },
+   "periodDays": {
+    "value": 0.491,
+    "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+   },
+   "maximumDegree": {
+    "value": 6,
+    "source": "Morin, J. et al., arXiv:1005.5552: l_ZDI column of the fit table"
+   }
+  },
+  "spectraUsed": 6,
+  "maximumDegree": 6,
+  "middleMjd": 54486.03643,
+  "middleUtc": "2008-01-21T00:52:27",
+  "longitudeZero": "faces the observer at the middle of the run; longitude grows the way the star turns",
+  "chiSquareNoField": 1.64,
+  "detection": {
+   "points": 258,
+   "sigma": 7.3
+  },
+  "ladder": [
+   {
+    "target": 1.6,
+    "iterations": 2,
+    "chiSquare": 1.6,
+    "entropy": -31.83,
+    "meanGauss": 12.66,
+    "maxGauss": 52.1,
+    "poloidalPercent": 79.2,
+    "toroidalPercent": 20.8,
+    "axisymmetricPercent": 20.6,
+    "dipolePercent": 41.38,
+    "quadrupolePercent": 38.2,
+    "octupolePercent": 15.634
+   },
+   {
+    "target": 1.5,
+    "iterations": 4,
+    "chiSquare": 1.5,
+    "entropy": -464.41,
+    "meanGauss": 49.73,
+    "maxGauss": 194.3,
+    "poloidalPercent": 78.7,
+    "toroidalPercent": 21.3,
+    "axisymmetricPercent": 20.1,
+    "dipolePercent": 42.756,
+    "quadrupolePercent": 38.876,
+    "octupolePercent": 14.252
+   },
+   {
+    "target": 1.4,
+    "iterations": 3,
+    "chiSquare": 1.4,
+    "entropy": -1753.43,
+    "meanGauss": 104.78,
+    "maxGauss": 369.1,
+    "poloidalPercent": 77.3,
+    "toroidalPercent": 22.7,
+    "axisymmetricPercent": 21.1,
+    "dipolePercent": 46.088,
+    "quadrupolePercent": 39.092,
+    "octupolePercent": 11.575
+   },
+   {
+    "target": 1.3,
+    "iterations": 12,
+    "chiSquare": 1.3,
+    "entropy": -6372.15,
+    "meanGauss": 250.12,
+    "maxGauss": 649,
+    "poloidalPercent": 61.8,
+    "toroidalPercent": 38.2,
+    "axisymmetricPercent": 36.7,
+    "dipolePercent": 56.607,
+    "quadrupolePercent": 32.851,
+    "octupolePercent": 6.684
+   },
+   {
+    "target": 1.25,
+    "iterations": 58,
+    "chiSquare": 1.25,
+    "entropy": -74278.65,
+    "meanGauss": 673.59,
+    "maxGauss": 1893.8,
+    "poloidalPercent": 75,
+    "toroidalPercent": 25,
+    "axisymmetricPercent": 12.8,
+    "dipolePercent": 47.095,
+    "quadrupolePercent": 18.118,
+    "octupolePercent": 5.855
+   }
+  ],
+  "verdict": {
+   "mapped": true
+  },
+  "chosen": {
+   "target": 1.4,
+   "iterations": 3,
+   "chiSquare": 1.4,
+   "entropy": -1753.43,
+   "meanGauss": 104.78,
+   "maxGauss": 369.1,
+   "poloidalPercent": 77.3,
+   "toroidalPercent": 22.7,
+   "axisymmetricPercent": 21.1,
+   "dipolePercent": 46.088,
+   "quadrupolePercent": 39.092,
+   "octupolePercent": 11.575,
+   "chiSquareNoField": 1.64,
+   "lineStrength": 0.19629,
+   "knee": 0.5,
+   "radialGauss": [
+    -296.69,
+    348.64
+   ]
+  },
+  "coefficients": [
+   "General poloidal plus toroidal field",
+   "27 3 -3",
+   " 1  0  4.889953e+01 -0.000000e+00",
+   " 1  1  1.413915e+01  3.821490e+02",
+   " 2  0  4.739163e+00 -0.000000e+00",
+   " 2  1 -1.762002e+00  9.512819e+01",
+   " 2  2 -1.279359e+02 -3.244871e+02",
+   " 3  0 -3.415979e-01 -0.000000e+00",
+   " 3  1 -5.506633e+00  1.227115e+01",
+   " 3  2 -5.149057e+01 -1.250467e+02",
+   " 3  3  8.081520e+01  1.102237e+02",
+   " 4  0 -1.856074e+00 -0.000000e+00",
+   " 4  1 -3.301539e+00  2.320598e+00",
+   " 4  2 -8.414347e+00 -3.456343e+01",
+   " 4  3  3.797729e+01  5.661708e+01",
+   " 4  4 -4.161184e+00 -1.553077e+01",
+   " 5  0 -2.524981e+00 -0.000000e+00",
+   " 5  1 -1.702517e+00 -1.148700e+00",
+   " 5  2 -5.733386e-01 -1.410326e+01",
+   " 5  3  1.263609e+01  2.561348e+01",
+   " 5  4 -7.158784e+00 -1.187133e+01",
+   " 5  5 -1.628810e+01 -1.398536e+01",
+   " 6  0 -1.255018e+00 -0.000000e+00",
+   " 6  1 -8.770767e-01 -2.909053e+00",
+   " 6  2  6.731656e-01 -5.184481e+00",
+   " 6  3  6.636585e+00  1.476259e+01",
+   " 6  4 -9.580696e+00 -9.869692e+00",
+   " 6  5 -2.841512e+00 -4.647938e+00",
+   " 6  6  2.333780e+01  1.268116e+01",
+   "",
+   " 1  0 -1.894806e+00 -0.000000e+00",
+   " 1  1 -5.777516e+01 -1.179276e+02",
+   " 2  0  8.829196e+00 -0.000000e+00",
+   " 2  1 -2.179297e+01 -7.836819e+01",
+   " 2  2  1.452982e+01 -3.024154e-01",
+   " 3  0  2.988701e+00 -0.000000e+00",
+   " 3  1 -8.030503e+00 -1.839337e+01",
+   " 3  2  2.895274e+01  4.861088e+01",
+   " 3  3 -1.704166e+01  3.794068e+00",
+   " 4  0 -1.090935e+00 -0.000000e+00",
+   " 4  1 -4.666042e+00 -1.198520e+01",
+   " 4  2  6.783417e+00  1.053173e+01",
+   " 4  3 -2.174013e+01 -1.785019e+01",
+   " 4  4 -1.927543e+01 -1.531467e+01",
+   " 5  0  2.983035e-01 -0.000000e+00",
+   " 5  1 -2.302131e+00 -8.361945e+00",
+   " 5  2  1.695229e+00  6.256234e+00",
+   " 5  3 -3.740420e+00 -3.918971e+00",
+   " 5  4 -7.485223e+00 -3.017041e+00",
+   " 5  5  1.882810e+01  9.373179e+00",
+   " 6  0 -1.179302e-02 -0.000000e+00",
+   " 6  1 -1.268611e+00 -2.732080e+00",
+   " 6  2  6.134102e-01  4.236986e+00",
+   " 6  3 -1.663502e+00 -5.237028e+00",
+   " 6  4 -2.271839e+00  1.626492e-01",
+   " 6  5  5.789867e+00  5.589794e+00",
+   " 6  6 -4.862236e+00 -9.826522e+00",
+   "",
+   " 1  0  2.605797e+02 -0.000000e+00",
+   " 1  1  4.393057e+01 -2.770190e+01",
+   " 2  0  1.076459e+02 -0.000000e+00",
+   " 2  1  6.287889e+01 -1.995470e+00",
+   " 2  2  5.800649e+01 -2.923992e+01",
+   " 3  0  4.941021e+01 -0.000000e+00",
+   " 3  1  3.520379e+01 -2.036159e+00",
+   " 3  2 -4.634814e+01  1.472302e+01",
+   " 3  3 -2.943915e+01  2.052175e+01",
+   " 4  0  3.368977e+01 -0.000000e+00",
+   " 4  1  6.984905e+00 -5.238192e-01",
+   " 4  2 -2.930703e+01  9.449342e+00",
+   " 4  3  2.217863e+01 -9.920241e+00",
+   " 4  4  7.035346e+00 -3.363972e+00",
+   " 5  0  1.872415e+01 -0.000000e+00",
+   " 5  1 -4.342420e-01  3.138835e-01",
+   " 5  2 -9.892424e+00  3.921296e-01",
+   " 5  3  1.330725e+01 -5.802274e+00",
+   " 5  4 -6.418147e+00  5.244012e+00",
+   " 5  5  4.828247e+00 -3.417642e+00",
+   " 6  0  1.123935e+01 -0.000000e+00",
+   " 6  1 -1.475856e+00 -4.903828e-02",
+   " 6  2 -5.534246e+00 -7.955043e-02",
+   " 6  3  7.913997e+00 -3.012640e+00",
+   " 6  4 -3.411293e+00  2.926488e+00",
+   " 6  5 -3.562282e-01 -7.644231e-01",
+   " 6  6 -4.611006e+00  8.872665e+00"
+  ]
+ }
+}

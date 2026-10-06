@@ -1,0 +1,89 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "tepiamenit-corona",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/tepiamenit-corona/source/volume-jan-2024.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/tepiamenit-corona/source/provenance.json"
+    },
+    {
+      "path": "src/objects/tepiamenit-corona/source/density-jun-2006.ktx2"
+    },
+    {
+      "path": "src/objects/tepiamenit-corona/source/density-jun-2007.ktx2"
+    },
+    {
+      "path": "src/objects/tepiamenit-corona/source/density-jan-2008.ktx2"
+    },
+    {
+      "path": "src/objects/tepiamenit-corona/source/density-jun-2016.ktx2"
+    },
+    {
+      "path": "src/objects/tepiamenit-corona/source/density-jan-2024.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      206.81193393147302,
+      17.457361762085814
+    ],
+    "distancePc": 15.613356809810588,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.0004433949328824266
+  },
+  "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+  "description": "Tepiamenit’s corona, derived here from 5 observed maps of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
+  "defaultDataset": "jan-2024",
+  "framingRadiusUnits": 4,
+  "attachedTo": "tepiamenit",
+  "acceptedLabResult": "tepiamenit-corona-density-grids",
+  "compactInputs": {
+    "path": "src/objects/tepiamenit-corona/source/volume-jan-2024.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "jun-2006",
+      "label": "Derived corona · Jun 2006",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/tepiamenit-corona/source/volume-jun-2006.json"
+      }
+    },
+    {
+      "id": "jun-2007",
+      "label": "Derived corona · Jun 2007",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/tepiamenit-corona/source/volume-jun-2007.json"
+      }
+    },
+    {
+      "id": "jan-2008",
+      "label": "Derived corona · Jan 2008",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/tepiamenit-corona/source/volume-jan-2008.json"
+      }
+    },
+    {
+      "id": "jun-2016",
+      "label": "Derived corona · Jun 2016",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/tepiamenit-corona/source/volume-jun-2016.json"
+      }
+    },
+    {
+      "id": "jan-2024",
+      "label": "Derived corona · Jan 2024",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/tepiamenit-corona/source/volume-jan-2024.json"
+      }
+    }
+  ]
+}

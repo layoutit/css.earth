@@ -1,0 +1,258 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "hd-189733-2006-06",
+ "target": {
+  "name": "HD 189733",
+  "raDegrees": 300.18213726,
+  "decDegrees": 22.71085365,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 53886,
+  "toMjd": 53980
+ },
+ "observations": [
+  {
+   "product": "851717p",
+   "uri": "cadc:CFHT/851717p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53896.485,
+   "exposureSeconds": 3840
+  },
+  {
+   "product": "851721p",
+   "uri": "cadc:CFHT/851721p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53896.531,
+   "exposureSeconds": 3840
+  },
+  {
+   "product": "851873p",
+   "uri": "cadc:CFHT/851873p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53897.433,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "851877p",
+   "uri": "cadc:CFHT/851877p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53897.477,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "851881p",
+   "uri": "cadc:CFHT/851881p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53897.521,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "852053p",
+   "uri": "cadc:CFHT/852053p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53898.459,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "852057p",
+   "uri": "cadc:CFHT/852057p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53898.504,
+   "exposureSeconds": 4000
+  },
+  {
+   "product": "852061p",
+   "uri": "cadc:CFHT/852061p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53898.553,
+   "exposureSeconds": 4000
+  },
+  {
+   "product": "852165p",
+   "uri": "cadc:CFHT/852165p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53899.476,
+   "exposureSeconds": 2920
+  },
+  {
+   "product": "852170p",
+   "uri": "cadc:CFHT/852170p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53899.518,
+   "exposureSeconds": 3384
+  },
+  {
+   "product": "852174p",
+   "uri": "cadc:CFHT/852174p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53899.559,
+   "exposureSeconds": 3384
+  },
+  {
+   "product": "852179p",
+   "uri": "cadc:CFHT/852179p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06AF34",
+   "mjdStart": 53899.605,
+   "exposureSeconds": 2400
+  },
+  {
+   "product": "861069p",
+   "uri": "cadc:CFHT/861069p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bd01",
+   "mjdStart": 53952.351,
+   "exposureSeconds": 1400
+  },
+  {
+   "product": "861073p",
+   "uri": "cadc:CFHT/861073p.fits",
+   "bytes": 20592000,
+   "targetName": "v374peg",
+   "proposal": "06bd01",
+   "mjdStart": 53952.371,
+   "exposureSeconds": 1100
+  },
+  {
+   "product": "861395p",
+   "uri": "cadc:CFHT/861395p.fits",
+   "bytes": 20592000,
+   "targetName": "hd189733",
+   "proposal": "06bf27",
+   "mjdStart": 53955.383,
+   "exposureSeconds": 2860
+  },
+  {
+   "product": "861564p",
+   "uri": "cadc:CFHT/861564p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06bf27",
+   "mjdStart": 53956.378,
+   "exposureSeconds": 4200
+  },
+  {
+   "product": "861723p",
+   "uri": "cadc:CFHT/861723p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06bf27",
+   "mjdStart": 53957.373,
+   "exposureSeconds": 3600
+  },
+  {
+   "product": "861849p",
+   "uri": "cadc:CFHT/861849p.fits",
+   "bytes": 20592000,
+   "targetName": "HD 189733",
+   "proposal": "06bf27",
+   "mjdStart": 53958.384,
+   "exposureSeconds": 3520
+  },
+  {
+   "product": "861971p",
+   "uri": "cadc:CFHT/861971p.fits",
+   "bytes": 20597760,
+   "targetName": "HD189733",
+   "proposal": "06bf27",
+   "mjdStart": 53959.384,
+   "exposureSeconds": 3520
+  },
+  {
+   "product": "862261p",
+   "uri": "cadc:CFHT/862261p.fits",
+   "bytes": 20589120,
+   "targetName": "HD189733",
+   "proposal": "06bt15",
+   "mjdStart": 53961.527,
+   "exposureSeconds": 480
+  },
+  {
+   "product": "862265p",
+   "uri": "cadc:CFHT/862265p.fits",
+   "bytes": 20589120,
+   "targetName": "HD189733",
+   "proposal": "06bt15",
+   "mjdStart": 53961.535,
+   "exposureSeconds": 480
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 5023,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 256364928: Teff"
+  },
+  "logGravity": {
+   "value": 4.58,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 256364928: logg"
+  },
+  "metallicity": {
+   "value": 0.02,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 256364928: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": -2.317,
+  "source": "SIMBAD, radial velocity of HD 189733 (2018A&A...616A...7S)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 2.97,
+   "source": "Fares, R. et al., arXiv:1003.6027: 2.97 +/- 0.22 km/s, quoted from Winn et al. 2006 (Sect. 1); the paper does not print a separately fitted value"
+  },
+  "inclinationDegrees": {
+   "value": 85,
+   "source": "Fares, R. et al., arXiv:1003.6027: '~85 deg' (Sect. 3, modelling)"
+  },
+  "periodDays": {
+   "value": 12,
+   "source": "Fares, R. et al., arXiv:1003.6027: 12 d equatorial period used for the phase ephemeris"
+  },
+  "maximumDegree": {
+   "value": 4,
+   "source": "Fares, R. et al., arXiv:1003.6027: printed as 'the five lowest terms only, i.e., l < 5'"
+  },
+  "shearRadPerDay": {
+   "value": 0.146,
+   "source": "Fares, R. et al., arXiv:1003.6027: differential rotation, June 2007 data; applied unchanged to 2006 and July 2008"
+  }
+ },
+ "published": {
+  "paper": "Fares, R. et al., arXiv:1003.6027",
+  "url": "https://arxiv.org/abs/1003.6027",
+  "meanGauss": {
+   "value": 33,
+   "source": "Table 2; Sect. 3: mean field strength, epoch 2006 (June + August 2006, merged)"
+  },
+  "toroidalPercent": {
+   "value": 33,
+   "source": "Table 2; Sect. 3: toroidal share of the energy, epoch 2006 (June + August 2006, merged)"
+  },
+  "note": "instruments ESPaDOnS; poloidalPct: 67; axisymmetricPct: 56; axisymmetricOf: poloidal energy; visiblePolePolarity: positive radial field regions cover the pole (all three epochs)"
+ }
+}

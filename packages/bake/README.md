@@ -54,7 +54,7 @@ to clean up before `SIGKILL`; the parent then preserves the received signal. An 
 | `@cssearth/bake/objects/charts` | chart renderers and readers and their shared SVG style | Node only |
 | `@cssearth/bake/objects/content` | the object-content contract, dataset vocabulary, prepared legends | Node only |
 | `@cssearth/bake/objects/surface-features` | surface-feature banks, feature notes, image-control fits | Node only |
-| `@cssearth/bake/objects/stellar` | a star's color dataset, limb darkening, starspots, gravity darkening | Node only |
+| `@cssearth/bake/objects/stellar` | a star's color dataset, limb darkening, starspots, gravity darkening, a corona derived from a magnetic map | Node only |
 | `@cssearth/bake/objects/lineage` | which manifest sources each prepared product of a layered body reads, built in memory | Node only |
 | `@cssearth/bake/objects/candidates` | read-only public-archive searches and imagery and resolved-star candidates | Node only (network) |
 | `@cssearth/bake/objects/default-view` | what the default camera looks at and the turn toward a partial dataset's data | Node only (`node:*`, `sharp`) |

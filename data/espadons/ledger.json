@@ -1,0 +1,4718 @@
+{
+ "schema": "cssearth-espadons-ledger@1",
+ "surveyed": "2026-10-06",
+ "archive": {
+  "targetNames": 3005,
+  "spectra": 22652
+ },
+ "shippedStars": 3105,
+ "stars": [
+  {
+   "id": "polaris",
+   "spectra": 545,
+   "typedNames": [
+    "* alf UMi",
+    "Polaris",
+    "alf UMi"
+   ],
+   "firstYear": 2020,
+   "lastYear": 2026,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "antares",
+   "spectra": 440,
+   "typedNames": [
+    "* alf Sco",
+    "Antares",
+    "HD 148478",
+    "hd 148478"
+   ],
+   "firstYear": 2010,
+   "lastYear": 2024,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "sirius",
+   "spectra": 421,
+   "typedNames": [
+    "Sirius",
+    "Sirius A"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "vega",
+   "spectra": 332,
+   "typedNames": [
+    "HD 172167 (Vega)",
+    "Vega",
+    "vega"
+   ],
+   "firstYear": 2006,
+   "lastYear": 2011,
+   "axis": "measured",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "betelgeuse",
+   "spectra": 268,
+   "typedNames": [
+    "* alf Ori",
+    "Betelgeuse",
+    "HD 39801",
+    "Shells of Betelgeuse"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2023,
+   "axis": "measured",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "tepiamenit",
+   "spectra": 203,
+   "typedNames": [
+    "Tau Boo",
+    "tau Boo",
+    "tau boo",
+    "tauBoo",
+    "tauboo"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2024,
+   "axis": "measured",
+   "state": "mapped",
+   "programs": [
+    "tau-boo-2005-03",
+    "tau-boo-2006-06",
+    "tau-boo-2007-06",
+    "tau-boo-2008-01",
+    "tau-boo-2016-06",
+    "tau-boo-2024-01"
+   ],
+   "maps": [
+    {
+     "program": "tau-boo-2006-06",
+     "middleUtc": "2006-06-16T07:12:03",
+     "meanGauss": 1.65
+    },
+    {
+     "program": "tau-boo-2007-06",
+     "middleUtc": "2007-06-30T18:18:33",
+     "meanGauss": 1.29
+    },
+    {
+     "program": "tau-boo-2008-01",
+     "middleUtc": "2008-01-25T14:48:55",
+     "meanGauss": 2.17
+    },
+    {
+     "program": "tau-boo-2016-06",
+     "middleUtc": "2016-06-16T18:44:21",
+     "meanGauss": 1.89
+    },
+    {
+     "program": "tau-boo-2024-01",
+     "middleUtc": "2024-01-10T01:50:21",
+     "meanGauss": 1.47
+    }
+   ],
+   "reasons": [
+    "tau-boo-2005-03: The field is not detected: the 2072 points of the run's Stokes V profiles stand -2.5 standard deviations above none (reduced chi-square 0.92), under the 4 a map asks for."
+   ]
+  },
+  {
+   "id": "sigma-bootis",
+   "spectra": 136,
+   "typedNames": [
+    "HD 128167",
+    "sig Boo"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2021,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "titawin",
+   "spectra": 118,
+   "typedNames": [
+    "UPS_AND",
+    "Ups And",
+    "upsilon And"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "deneb",
+   "spectra": 117,
+   "typedNames": [
+    "Deneb",
+    "HD 197345",
+    "alpha cyg",
+    "deneb"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2012,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "mirfak",
+   "spectra": 115,
+   "typedNames": [
+    "HD 20902"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "rastaban",
+   "spectra": 107,
+   "typedNames": [
+    "HD 159181"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "mekbuda",
+   "spectra": 100,
+   "typedNames": [
+    "* zet Gem",
+    "HD 52973",
+    "zet Gem",
+    "zeta Gem"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2025,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "spica",
+   "spectra": 91,
+   "typedNames": [
+    "Alpha Vir",
+    "AlphaVir",
+    "Spica",
+    "alpha virginis"
+   ],
+   "firstYear": 2006,
+   "lastYear": 2013,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "arneb",
+   "spectra": 83,
+   "typedNames": [
+    "Alpha Lep",
+    "HD 36673",
+    "alpha lep"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2019,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gq-lup",
+   "spectra": 81,
+   "typedNames": [
+    "GQ Lup"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2016,
+   "axis": "measured",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "tureis",
+   "spectra": 76,
+   "typedNames": [
+    "* rho Pup",
+    "HD 67523",
+    "HD67523",
+    "Rho Puppis"
+   ],
+   "firstYear": 2010,
+   "lastYear": 2022,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "nusakan",
+   "spectra": 73,
+   "typedNames": [
+    "Beta CrB",
+    "BetaCrB",
+    "HD 137909",
+    "beta crb"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2016,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "regulus",
+   "spectra": 65,
+   "typedNames": [
+    "HD 87901",
+    "HD87901"
+   ],
+   "firstYear": 2012,
+   "lastYear": 2012,
+   "axis": "measured",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "mebsuta",
+   "spectra": 53,
+   "typedNames": [
+    "HD 48329"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2010,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-189733",
+   "spectra": 52,
+   "typedNames": [
+    "HD 189733",
+    "HD189733",
+    "hd 189733",
+    "hd189733"
+   ],
+   "firstYear": 2006,
+   "lastYear": 2023,
+   "axis": "measured",
+   "state": "mapped",
+   "programs": [
+    "hd-189733-2006-06",
+    "hd-189733-2006-06-as-drawn",
+    "hd-189733-2006-08-as-drawn",
+    "hd-189733-2007-06",
+    "hd-189733-2007-06-as-drawn",
+    "hd-189733-2013-09",
+    "hd-189733-2013-09-as-drawn"
+   ],
+   "maps": [
+    {
+     "program": "hd-189733-2006-08-as-drawn",
+     "middleUtc": "2006-08-09T22:47:31",
+     "meanGauss": 26.52
+    },
+    {
+     "program": "hd-189733-2007-06-as-drawn",
+     "middleUtc": "2007-06-29T00:59:25",
+     "meanGauss": 23.83
+    },
+    {
+     "program": "hd-189733-2007-06",
+     "middleUtc": "2007-06-29T00:59:25",
+     "meanGauss": 23.5
+    },
+    {
+     "program": "hd-189733-2013-09-as-drawn",
+     "middleUtc": "2013-09-20T08:59:13",
+     "meanGauss": 55.36
+    },
+    {
+     "program": "hd-189733-2013-09",
+     "middleUtc": "2013-09-20T08:59:13",
+     "meanGauss": 50.27
+    }
+   ],
+   "reasons": [
+    "hd-189733-2006-06-as-drawn: no map",
+    "hd-189733-2006-06: The map does not describe the spectra: its reduced chi-square stays at 8.90. The field changed during the run, or it is too strong for the weak-field treatment."
+   ]
+  },
+  {
+   "id": "arcturus",
+   "spectra": 49,
+   "typedNames": [
+    "* alf Boo",
+    "HD 124897",
+    "HD124897"
+   ],
+   "firstYear": 2006,
+   "lastYear": 2022,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "rigel",
+   "spectra": 47,
+   "typedNames": [
+    "Rigel",
+    "Rigel A",
+    "Rigel BC"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2021,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "diphda",
+   "spectra": 46,
+   "typedNames": [
+    "Beta Cet",
+    "BetaCep",
+    "HD 4128",
+    "__beta_~Cet",
+    "beta cet",
+    "betacet"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "pollux",
+   "spectra": 45,
+   "typedNames": [
+    "HD 62509",
+    "Pollux",
+    "beta Gem",
+    "pollux"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "chi1-orionis",
+   "spectra": 44,
+   "typedNames": [
+    "HD39587"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2015,
+   "axis": "measured",
+   "state": "mapped",
+   "programs": [
+    "chi1-ori-2014-12",
+    "chi1-ori-2014-12-all",
+    "chi1-ori-2015-01"
+   ],
+   "maps": [
+    {
+     "program": "chi1-ori-2014-12",
+     "middleUtc": "2014-12-25T13:12:14",
+     "meanGauss": 20.14
+    },
+    {
+     "program": "chi1-ori-2015-01",
+     "middleUtc": "2015-01-11T01:06:51",
+     "meanGauss": 17.26
+    }
+   ],
+   "reasons": [
+    "chi1-ori-2014-12-all: The map does not describe the spectra: its reduced chi-square stays at 2.30. The field changed during the run, or it is too strong for the weak-field treatment."
+   ]
+  },
+  {
+   "id": "edasich",
+   "spectra": 44,
+   "typedNames": [
+    "iota Dra"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "enif",
+   "spectra": 42,
+   "typedNames": [
+    "Epsilon Peg",
+    "HD 206778",
+    "eps peg",
+    "hd 206778"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "helvetios",
+   "spectra": 39,
+   "typedNames": [
+    "51 Peg",
+    "51Peg",
+    "51peg"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-75732",
+   "spectra": 34,
+   "typedNames": [
+    "55 Cnc"
+   ],
+   "firstYear": 2012,
+   "lastYear": 2018,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gumala",
+   "spectra": 31,
+   "typedNames": [
+    "HD 179949",
+    "HD179949"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2009,
+   "axis": "measured",
+   "state": "mapped",
+   "programs": [
+    "hd-179949-2007-06",
+    "hd-179949-2009-09"
+   ],
+   "maps": [
+    {
+     "program": "hd-179949-2009-09",
+     "middleUtc": "2009-10-02T18:25:03",
+     "meanGauss": 3.15
+    }
+   ],
+   "reasons": [
+    "hd-179949-2007-06: The field is not detected: the 270 points of the run's Stokes V profiles stand 3.5 standard deviations above none (reduced chi-square 1.30), under the 4 a map asks for."
+   ]
+  },
+  {
+   "id": "m43",
+   "spectra": 31,
+   "typedNames": [
+    "HD 37061",
+    "NU Ori",
+    "NUOri",
+    "hd 37061"
+   ],
+   "firstYear": 2006,
+   "lastYear": 2012,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "aldebaran",
+   "spectra": 30,
+   "typedNames": [
+    "* alf Tau",
+    "HD 29139",
+    "aldebaran",
+    "alpha tau"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2022,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "sadalsuud",
+   "spectra": 29,
+   "typedNames": [
+    "Beta Aqr",
+    "HD 204867"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "cebalrai",
+   "spectra": 26,
+   "typedNames": [
+    "HR 6603"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "m20",
+   "spectra": 26,
+   "typedNames": [
+    "HD 164492",
+    "HD 164492 C"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2015,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "sadalmelik",
+   "spectra": 26,
+   "typedNames": [
+    "HD 209750",
+    "alpha aqr"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "yed-prior",
+   "spectra": 25,
+   "typedNames": [
+    "HR 6056"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "m25",
+   "spectra": 24,
+   "typedNames": [
+    "BD-19 5044L"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2016,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "muscida",
+   "spectra": 24,
+   "typedNames": [
+    "omicron UMa"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "m7",
+   "spectra": 23,
+   "typedNames": [
+    "HD 162725"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2016,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "af-lep",
+   "spectra": 22,
+   "typedNames": [
+    "HR1817",
+    "hr1817"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "kulou",
+   "spectra": 22,
+   "typedNames": [
+    "HD 115892"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-504",
+   "spectra": 20,
+   "typedNames": [
+    "* e Vir"
+   ],
+   "firstYear": 2025,
+   "lastYear": 2025,
+   "axis": "measured",
+   "state": "mapped",
+   "programs": [
+    "gj-504-2025-04"
+   ],
+   "maps": [
+    {
+     "program": "gj-504-2025-04",
+     "middleUtc": "2025-04-07T10:02:36",
+     "meanGauss": 4.59
+    }
+   ],
+   "reasons": []
+  },
+  {
+   "id": "gomeisa",
+   "spectra": 20,
+   "typedNames": [
+    "HD 58715"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "brachium",
+   "spectra": 19,
+   "typedNames": [
+    "HD 133216"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "heryibwia",
+   "spectra": 19,
+   "typedNames": [
+    "HD 167618"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "kraz",
+   "spectra": 19,
+   "typedNames": [
+    "HD 109379"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "au-mic",
+   "spectra": 18,
+   "typedNames": [
+    "AU Mic",
+    "AUMic",
+    "HD 197481",
+    "HD197481",
+    "aumic"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2023,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-209458",
+   "spectra": 15,
+   "typedNames": [
+    "HD 209458"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2020,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "kepler-78",
+   "spectra": 15,
+   "typedNames": [
+    "Kepler-78"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2015,
+   "axis": "measured",
+   "state": "mapped",
+   "programs": [
+    "kepler-78-2015-08"
+   ],
+   "maps": [
+    {
+     "program": "kepler-78-2015-08",
+     "middleUtc": "2015-08-10T21:19:47",
+     "meanGauss": 11.91
+    }
+   ],
+   "reasons": []
+  },
+  {
+   "id": "flegetonte",
+   "spectra": 14,
+   "typedNames": [
+    "HD 102195",
+    "HD102195",
+    "hd102195"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2008,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "fomalhaut",
+   "spectra": 14,
+   "typedNames": [
+    "HD 216956"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "iota-piscium",
+   "spectra": 14,
+   "typedNames": [
+    "iot Psc"
+   ],
+   "firstYear": 2016,
+   "lastYear": 2016,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "udkadua",
+   "spectra": 14,
+   "typedNames": [
+    "HD 222107",
+    "HD222107",
+    "Lambda And",
+    "lamba and",
+    "lambda And",
+    "lambda andromeda"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2006,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "nganurganity",
+   "spectra": 13,
+   "typedNames": [
+    "HD 52877"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hamal",
+   "spectra": 12,
+   "typedNames": [
+    "Alpha Ari",
+    "HD 12929",
+    "alpha Ari",
+    "alpha ari",
+    "alphaari"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-90839",
+   "spectra": 12,
+   "typedNames": [
+    "36 UMa"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2017,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "marsic",
+   "spectra": 12,
+   "typedNames": [
+    "HD 145001",
+    "__kappa_~Her A"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "zeta-aquilae-a",
+   "spectra": 12,
+   "typedNames": [
+    "HR 7235"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2009,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "jian",
+   "spectra": 11,
+   "typedNames": [
+    "HD 175775"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "kaus-media",
+   "spectra": 10,
+   "typedNames": [
+    "HD 168454"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "phact",
+   "spectra": 10,
+   "typedNames": [
+    "HD 37795"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "xi-pegasi",
+   "spectra": 10,
+   "typedNames": [
+    "ksi Peg"
+   ],
+   "firstYear": 2016,
+   "lastYear": 2016,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "eps-eridani",
+   "spectra": 9,
+   "typedNames": [
+    "epsilon Eri"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "formosa",
+   "spectra": 9,
+   "typedNames": [
+    "HD 100655"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-820-b",
+   "spectra": 9,
+   "typedNames": [
+    "61 Cyg B",
+    "61 cyg B",
+    "HD201092 SPT1"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "matrichakra",
+   "spectra": 9,
+   "typedNames": [
+    "__delta_~CrB"
+   ],
+   "firstYear": 2010,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "t-mon",
+   "spectra": 9,
+   "typedNames": [
+    "T Mon"
+   ],
+   "firstYear": 2021,
+   "lastYear": 2021,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "alchiba",
+   "spectra": 8,
+   "typedNames": [
+    "HD 105452"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "alcyone",
+   "spectra": 8,
+   "typedNames": [
+    "Eta Tau"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2009,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hip-41378",
+   "spectra": 8,
+   "typedNames": [
+    "HIP41378"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2018,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "ping",
+   "spectra": 8,
+   "typedNames": [
+    "HD 32887",
+    "hd 32887"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "groombridge-34-a",
+   "spectra": 7,
+   "typedNames": [
+    "Gl 15A",
+    "HD1326",
+    "J00182549+4401376",
+    "gx and",
+    "gxand"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2016,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-135344-a",
+   "spectra": 7,
+   "typedNames": [
+    "HD 135344",
+    "HD135344",
+    "SAO 206463",
+    "Sao 206463"
+   ],
+   "firstYear": 2006,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "m82",
+   "spectra": 7,
+   "typedNames": [
+    "SN2014J"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "monch",
+   "spectra": 7,
+   "typedNames": [
+    "HD 130322",
+    "HD130322",
+    "hd130322"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2008,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "rukbat",
+   "spectra": 7,
+   "typedNames": [
+    "hd 181869"
+   ],
+   "firstYear": 2015,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "zavijava",
+   "spectra": 7,
+   "typedNames": [
+    "HD 102870",
+    "hr4540"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "alqiladah",
+   "spectra": 6,
+   "typedNames": [
+    "HD 177241"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "barnards-star",
+   "spectra": 6,
+   "typedNames": [
+    "GJ699",
+    "J17574849+0441405"
+   ],
+   "firstYear": 2016,
+   "lastYear": 2017,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "seginus",
+   "spectra": 6,
+   "typedNames": [
+    "Gamma Boo"
+   ],
+   "firstYear": 2006,
+   "lastYear": 2006,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "baekdu",
+   "spectra": 5,
+   "typedNames": [
+    "* 8 UMi"
+   ],
+   "firstYear": 2022,
+   "lastYear": 2022,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "chalawan",
+   "spectra": 5,
+   "typedNames": [
+    "47 UMa",
+    "HIP 53721"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "dalim",
+   "spectra": 5,
+   "typedNames": [
+    "HD 20010"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "denebola",
+   "spectra": 5,
+   "typedNames": [
+    "HR 4534",
+    "HR4534"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2008,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-820-a",
+   "spectra": 5,
+   "typedNames": [
+    "61 Cyg A",
+    "61 cyg A"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2005,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "kochab",
+   "spectra": 5,
+   "typedNames": [
+    "HD 131873"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "pi1-gruis",
+   "spectra": 5,
+   "typedNames": [
+    "PIGRU"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2005,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "groombridge-1618",
+   "spectra": 4,
+   "typedNames": [
+    "Gl380"
+   ],
+   "firstYear": 2015,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hat-p-2",
+   "spectra": 4,
+   "typedNames": [
+    "HD 147506",
+    "HD147506"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-173667",
+   "spectra": 4,
+   "typedNames": [
+    "HD173667 TAT2"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "izar",
+   "spectra": 4,
+   "typedNames": [
+    "HD 129989"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2008,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "ltt-1445-a",
+   "spectra": 4,
+   "typedNames": [
+    "GJ3193A"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2018,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "m87",
+   "spectra": 4,
+   "typedNames": [
+    "M87",
+    "M87 filament"
+   ],
+   "firstYear": 2012,
+   "lastYear": 2012,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "nembus",
+   "spectra": 4,
+   "typedNames": [
+    "HD 9927"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2008,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "ngc-1275",
+   "spectra": 4,
+   "typedNames": [
+    "NGC 1275 E",
+    "NGC 1275 SW"
+   ],
+   "firstYear": 2010,
+   "lastYear": 2010,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "toi-1807",
+   "spectra": 4,
+   "typedNames": [
+    "TOI 1807b"
+   ],
+   "firstYear": 2021,
+   "lastYear": 2021,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "alkaid",
+   "spectra": 3,
+   "typedNames": [
+    "eta UMa"
+   ],
+   "firstYear": 2019,
+   "lastYear": 2019,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "aurwandilsta",
+   "spectra": 3,
+   "typedNames": [
+    "HD143807"
+   ],
+   "firstYear": 2023,
+   "lastYear": 2024,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "ce-tauri",
+   "spectra": 3,
+   "typedNames": [
+    "HD 36389"
+   ],
+   "firstYear": 2010,
+   "lastYear": 2010,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "eltanin",
+   "spectra": 3,
+   "typedNames": [
+    "HD 164058"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-226868",
+   "spectra": 3,
+   "typedNames": [
+    "Cygnus X-1",
+    "HDE 226868"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2019,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-97658",
+   "spectra": 3,
+   "typedNames": [
+    "HD 97658"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2016,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "keid",
+   "spectra": 3,
+   "typedNames": [
+    "Gl166A"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2018,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "m77",
+   "spectra": 3,
+   "typedNames": [
+    "NGC1068"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2005,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "nekkar",
+   "spectra": 3,
+   "typedNames": [
+    "HD 133208"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "perseus-cluster",
+   "spectra": 3,
+   "typedNames": [
+    "NGC 1275 W",
+    "NGC 1275 horseshoe"
+   ],
+   "firstYear": 2010,
+   "lastYear": 2010,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "aerostaticus",
+   "spectra": 2,
+   "typedNames": [
+    "HD202627"
+   ],
+   "firstYear": 2015,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "alphard",
+   "spectra": 2,
+   "typedNames": [
+    "alphard"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "b-aquilae",
+   "spectra": 2,
+   "typedNames": [
+    "HD182572 RVT1"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "be-ceti",
+   "spectra": 2,
+   "typedNames": [
+    "HD1835"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "measured",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "fafnir",
+   "spectra": 2,
+   "typedNames": [
+    "42 Dra"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-357",
+   "spectra": 2,
+   "typedNames": [
+    "09360161-2139371"
+   ],
+   "firstYear": 2015,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-436",
+   "spectra": 2,
+   "typedNames": [
+    "GL436",
+    "Gl436"
+   ],
+   "firstYear": 2015,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-486",
+   "spectra": 2,
+   "typedNames": [
+    "GL486",
+    "Gl486"
+   ],
+   "firstYear": 2015,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-687",
+   "spectra": 2,
+   "typedNames": [
+    "GJ687"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-806",
+   "spectra": 2,
+   "typedNames": [
+    "Gl806",
+    "gl806"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2017,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-880",
+   "spectra": 2,
+   "typedNames": [
+    "Gl880"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2018,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-146233",
+   "spectra": 2,
+   "typedNames": [
+    "18 sco"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2005,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-29391",
+   "spectra": 2,
+   "typedNames": [
+    "* 51 Eri"
+   ],
+   "firstYear": 2024,
+   "lastYear": 2024,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hd-63433",
+   "spectra": 2,
+   "typedNames": [
+    "HD 63433",
+    "HIP 38228"
+   ],
+   "firstYear": 2010,
+   "lastYear": 2022,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hr-8799",
+   "spectra": 2,
+   "typedNames": [
+    "HD 218396"
+   ],
+   "firstYear": 2024,
+   "lastYear": 2025,
+   "axis": "measured",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "intercrus",
+   "spectra": 2,
+   "typedNames": [
+    "HD 81688"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "m106",
+   "spectra": 2,
+   "typedNames": [
+    "NGC 4258"
+   ],
+   "firstYear": 2006,
+   "lastYear": 2006,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "m39",
+   "spectra": 2,
+   "typedNames": [
+    "HD 205073"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2005,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "minelauva",
+   "spectra": 2,
+   "typedNames": [
+    "delta Vir"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "musica",
+   "spectra": 2,
+   "typedNames": [
+    "18 Del"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "quasar-3c-273",
+   "spectra": 2,
+   "typedNames": [
+    "3C 273"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2005,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "struve-2398-a",
+   "spectra": 2,
+   "typedNames": [
+    "Gl725A"
+   ],
+   "firstYear": 2015,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "telum",
+   "spectra": 2,
+   "typedNames": [
+    "HD189319 SPT2"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "tengshe",
+   "spectra": 2,
+   "typedNames": [
+    "HD 216946"
+   ],
+   "firstYear": 2010,
+   "lastYear": 2010,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "theta-persei",
+   "spectra": 2,
+   "typedNames": [
+    "J02441025+4913540"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2018,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "trappist-1",
+   "spectra": 2,
+   "typedNames": [
+    "Trappist-1"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2017,
+   "axis": "measured",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "vindemiatrix",
+   "spectra": 2,
+   "typedNames": [
+    "epsilon Vir"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "wasp-12",
+   "spectra": 2,
+   "typedNames": [
+    "WASP12-obs1"
+   ],
+   "firstYear": 2010,
+   "lastYear": 2010,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "aniara",
+   "spectra": 1,
+   "typedNames": [
+    "HD 102956"
+   ],
+   "firstYear": 2016,
+   "lastYear": 2016,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "baijiu",
+   "spectra": 1,
+   "typedNames": [
+    "HD206742"
+   ],
+   "firstYear": 2015,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "beemim",
+   "spectra": 1,
+   "typedNames": [
+    "HD 28028"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "beta-comae-berenices",
+   "spectra": 1,
+   "typedNames": [
+    "HIP 64394"
+   ],
+   "firstYear": 2011,
+   "lastYear": 2011,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "bibha",
+   "spectra": 1,
+   "typedNames": [
+    "HD 86081"
+   ],
+   "firstYear": 2016,
+   "lastYear": 2016,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "dubhe",
+   "spectra": 1,
+   "typedNames": [
+    "HD 95689"
+   ],
+   "firstYear": 2008,
+   "lastYear": 2008,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "epsilon-cygni",
+   "spectra": 1,
+   "typedNames": [
+    "eps cyg"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2005,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-338-b",
+   "spectra": 1,
+   "typedNames": [
+    "gl338a"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-412-a",
+   "spectra": 1,
+   "typedNames": [
+    "Gl412A"
+   ],
+   "firstYear": 2006,
+   "lastYear": 2006,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-526",
+   "spectra": 1,
+   "typedNames": [
+    "hip67155"
+   ],
+   "firstYear": 2015,
+   "lastYear": 2015,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "gj-809",
+   "spectra": 1,
+   "typedNames": [
+    "GJ809"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2017,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "hat-p-22",
+   "spectra": 1,
+   "typedNames": [
+    "HAT-P-22"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2017,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "honores",
+   "spectra": 1,
+   "typedNames": [
+    "* 7 And"
+   ],
+   "firstYear": 2024,
+   "lastYear": 2024,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "illyrian",
+   "spectra": 1,
+   "typedNames": [
+    "HD 82886"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "lacaille-9352",
+   "spectra": 1,
+   "typedNames": [
+    "hd217989"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2007,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "m15",
+   "spectra": 1,
+   "typedNames": [
+    "M15 center"
+   ],
+   "firstYear": 2017,
+   "lastYear": 2017,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "m16",
+   "spectra": 1,
+   "typedNames": [
+    "ngc6611_W254"
+   ],
+   "firstYear": 2007,
+   "lastYear": 2007,
+   "axis": "none",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "nervia",
+   "spectra": 1,
+   "typedNames": [
+    "HD 49674"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "nihal",
+   "spectra": 1,
+   "typedNames": [
+    "HD 36079"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "pherkad-minor",
+   "spectra": 1,
+   "typedNames": [
+    "11 UMi"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "procyon",
+   "spectra": 1,
+   "typedNames": [
+    "procyon"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2005,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "safina",
+   "spectra": 1,
+   "typedNames": [
+    "HD 218594"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "struve-2398-b",
+   "spectra": 1,
+   "typedNames": [
+    "HD173740"
+   ],
+   "firstYear": 2005,
+   "lastYear": 2005,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "theemin",
+   "spectra": 1,
+   "typedNames": [
+    "HD 29291"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "toi-6008",
+   "spectra": 1,
+   "typedNames": [
+    "J20414744+4938482"
+   ],
+   "firstYear": 2016,
+   "lastYear": 2016,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "tonatiuh",
+   "spectra": 1,
+   "typedNames": [
+    "HD 104985"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "veritate",
+   "spectra": 1,
+   "typedNames": [
+    "14 And"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "wazn",
+   "spectra": 1,
+   "typedNames": [
+    "HD 39425"
+   ],
+   "firstYear": 2014,
+   "lastYear": 2014,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  },
+  {
+   "id": "wr-124",
+   "spectra": 1,
+   "typedNames": [
+    "M1-67"
+   ],
+   "firstYear": 2009,
+   "lastYear": 2009,
+   "axis": "display convention",
+   "state": "held",
+   "programs": [],
+   "maps": [],
+   "reasons": []
+  }
+ ],
+ "targets": [
+  {
+   "name": "* 51 Eri",
+   "raDegrees": 69.40070833333333,
+   "decDegrees": -2.474,
+   "spectra": 2,
+   "firstMjd": 60549.598,
+   "lastMjd": 60549.606
+  },
+  {
+   "name": "* 7 And",
+   "raDegrees": 348.13812499999995,
+   "decDegrees": 49.40686111111111,
+   "spectra": 1,
+   "firstMjd": 60549.525,
+   "lastMjd": 60549.525
+  },
+  {
+   "name": "* 8 UMi",
+   "raDegrees": 224.20175,
+   "decDegrees": 74.90094444444445,
+   "spectra": 5,
+   "firstMjd": 59627.469,
+   "lastMjd": 59776.235
+  },
+  {
+   "name": "* alf Boo",
+   "raDegrees": 213.90854166666665,
+   "decDegrees": 19.169861111111114,
+   "spectra": 16,
+   "firstMjd": 59807.227,
+   "lastMjd": 59807.243
+  },
+  {
+   "name": "* alf Ori",
+   "raDegrees": 88.79308333333337,
+   "decDegrees": 7.407138888888885,
+   "spectra": 48,
+   "firstMjd": 59628.331,
+   "lastMjd": 59985.246
+  },
+  {
+   "name": "* alf Sco",
+   "raDegrees": 247.3519999999993,
+   "decDegrees": -26.432138983051036,
+   "spectra": 295,
+   "firstMjd": 59627.657,
+   "lastMjd": 60545.245
+  },
+  {
+   "name": "* alf Tau",
+   "raDegrees": 68.98041666666666,
+   "decDegrees": 16.50811111111111,
+   "spectra": 16,
+   "firstMjd": 59806.624,
+   "lastMjd": 59806.64
+  },
+  {
+   "name": "* alf UMi",
+   "raDegrees": 37.9726721737322,
+   "decDegrees": 89.26425637295691,
+   "spectra": 401,
+   "firstMjd": 59627.24,
+   "lastMjd": 61223.635
+  },
+  {
+   "name": "* e Vir",
+   "raDegrees": 199.19135833333326,
+   "decDegrees": 9.4255,
+   "spectra": 20,
+   "firstMjd": 60770.374,
+   "lastMjd": 60774.461
+  },
+  {
+   "name": "* rho Pup",
+   "raDegrees": 121.88533333333343,
+   "decDegrees": -24.30405555555557,
+   "spectra": 64,
+   "firstMjd": 59627.44,
+   "lastMjd": 59633.455
+  },
+  {
+   "name": "* zet Gem",
+   "raDegrees": 106.02704166666659,
+   "decDegrees": 20.57030555555557,
+   "spectra": 50,
+   "firstMjd": 60691.449,
+   "lastMjd": 60691.6
+  },
+  {
+   "name": "09360161-2139371",
+   "raDegrees": 144.00699999999998,
+   "decDegrees": -21.662388888888884,
+   "spectra": 2,
+   "firstMjd": 57030.629,
+   "lastMjd": 57084.404
+  },
+  {
+   "name": "11 UMi",
+   "raDegrees": 229.27449999999996,
+   "decDegrees": 71.82388888888889,
+   "spectra": 1,
+   "firstMjd": 56759.52,
+   "lastMjd": 56759.52
+  },
+  {
+   "name": "14 And",
+   "raDegrees": 352.8216666666666,
+   "decDegrees": 39.23641666666667,
+   "spectra": 1,
+   "firstMjd": 56911.482,
+   "lastMjd": 56911.482
+  },
+  {
+   "name": "18 Del",
+   "raDegrees": 314.6081666666666,
+   "decDegrees": 10.839361111111112,
+   "spectra": 2,
+   "firstMjd": 56814.579,
+   "lastMjd": 56911.426
+  },
+  {
+   "name": "18 sco",
+   "raDegrees": 243.911021,
+   "decDegrees": -8.365389,
+   "spectra": 2,
+   "firstMjd": 53540.291,
+   "lastMjd": 53541.266
+  },
+  {
+   "name": "36 UMa",
+   "raDegrees": 157.65574999999995,
+   "decDegrees": 55.98036111111113,
+   "spectra": 12,
+   "firstMjd": 57766.548,
+   "lastMjd": 57766.66
+  },
+  {
+   "name": "3C 273",
+   "raDegrees": 187.280875,
+   "decDegrees": 2.054833,
+   "spectra": 2,
+   "firstMjd": 53424.451,
+   "lastMjd": 53424.481
+  },
+  {
+   "name": "42 Dra",
+   "raDegrees": 276.49579166666666,
+   "decDegrees": 65.56355555555555,
+   "spectra": 2,
+   "firstMjd": 56759.602,
+   "lastMjd": 56759.607
+  },
+  {
+   "name": "47 UMa",
+   "raDegrees": 164.8675520833333,
+   "decDegrees": 40.43011111111111,
+   "spectra": 4,
+   "firstMjd": 56668.675,
+   "lastMjd": 56679.498
+  },
+  {
+   "name": "51 Peg",
+   "raDegrees": 344.36643194444434,
+   "decDegrees": 20.76832870370369,
+   "spectra": 30,
+   "firstMjd": 53632.24,
+   "lastMjd": 56910.435
+  },
+  {
+   "name": "51Peg",
+   "raDegrees": 344.37106249999994,
+   "decDegrees": 20.768819444444446,
+   "spectra": 2,
+   "firstMjd": 54275.636,
+   "lastMjd": 54275.642
+  },
+  {
+   "name": "51peg",
+   "raDegrees": 344.36949999999996,
+   "decDegrees": 20.7688253968254,
+   "spectra": 7,
+   "firstMjd": 54276.538,
+   "lastMjd": 54276.643
+  },
+  {
+   "name": "55 Cnc",
+   "raDegrees": 133.14814828431366,
+   "decDegrees": 28.330308823529414,
+   "spectra": 34,
+   "firstMjd": 55959.264,
+   "lastMjd": 58119.654
+  },
+  {
+   "name": "61 Cyg A",
+   "raDegrees": 316.73320850000005,
+   "decDegrees": 38.7544305,
+   "spectra": 2,
+   "firstMjd": 53544.57,
+   "lastMjd": 53546.581
+  },
+  {
+   "name": "61 Cyg B",
+   "raDegrees": 316.7359375,
+   "decDegrees": 38.7504445,
+   "spectra": 2,
+   "firstMjd": 53544.58,
+   "lastMjd": 53546.591
+  },
+  {
+   "name": "61 cyg A",
+   "raDegrees": 316.739417,
+   "decDegrees": 38.757139,
+   "spectra": 3,
+   "firstMjd": 53540.589,
+   "lastMjd": 53543.555
+  },
+  {
+   "name": "61 cyg B",
+   "raDegrees": 316.744625,
+   "decDegrees": 38.7495275,
+   "spectra": 2,
+   "firstMjd": 53540.602,
+   "lastMjd": 53543.546
+  },
+  {
+   "name": "AU Mic",
+   "raDegrees": 311.28958333333327,
+   "decDegrees": -31.34089583333333,
+   "spectra": 4,
+   "firstMjd": 53567.427,
+   "lastMjd": 53568.48
+  },
+  {
+   "name": "AUMic",
+   "raDegrees": 311.2896979166666,
+   "decDegrees": -31.340874999999997,
+   "spectra": 4,
+   "firstMjd": 53949.372,
+   "lastMjd": 53949.491
+  },
+  {
+   "name": "Alpha Ari",
+   "raDegrees": 31.792291666666664,
+   "decDegrees": 23.462055555555555,
+   "spectra": 1,
+   "firstMjd": 54373.486,
+   "lastMjd": 54373.486
+  },
+  {
+   "name": "Alpha Lep",
+   "raDegrees": 83.18249999999992,
+   "decDegrees": -17.82227777777779,
+   "spectra": 40,
+   "firstMjd": 58561.21,
+   "lastMjd": 58561.287
+  },
+  {
+   "name": "Alpha Vir",
+   "raDegrees": 201.30124999999995,
+   "decDegrees": -11.156041666666667,
+   "spectra": 2,
+   "firstMjd": 53746.677,
+   "lastMjd": 53746.684
+  },
+  {
+   "name": "AlphaVir",
+   "raDegrees": 201.29863802083327,
+   "decDegrees": -11.161071180555558,
+   "spectra": 32,
+   "firstMjd": 54540.58,
+   "lastMjd": 54553.475
+  },
+  {
+   "name": "Antares",
+   "raDegrees": 247.35191666666654,
+   "decDegrees": -26.431999999999984,
+   "spectra": 89,
+   "firstMjd": 55966.657,
+   "lastMjd": 56116.255
+  },
+  {
+   "name": "BD-19 5044L",
+   "raDegrees": 277.9356545138889,
+   "decDegrees": -19.120465277777775,
+   "spectra": 24,
+   "firstMjd": 54650.433,
+   "lastMjd": 57616.223
+  },
+  {
+   "name": "Beta Aqr",
+   "raDegrees": 322.8986249999999,
+   "decDegrees": -5.574777777777777,
+   "spectra": 1,
+   "firstMjd": 54374.415,
+   "lastMjd": 54374.415
+  },
+  {
+   "name": "Beta Cet",
+   "raDegrees": 10.901583333333331,
+   "decDegrees": -17.990833333333335,
+   "spectra": 4,
+   "firstMjd": 54461.281,
+   "lastMjd": 54461.309
+  },
+  {
+   "name": "Beta CrB",
+   "raDegrees": 231.9583333333335,
+   "decDegrees": 29.105833333333308,
+   "spectra": 59,
+   "firstMjd": 55203.639,
+   "lastMjd": 57549.265
+  },
+  {
+   "name": "BetaCep",
+   "raDegrees": 10.901375,
+   "decDegrees": -17.991194444444446,
+   "spectra": 3,
+   "firstMjd": 54463.266,
+   "lastMjd": 54463.275
+  },
+  {
+   "name": "BetaCrB",
+   "raDegrees": 231.9546666666666,
+   "decDegrees": 29.11019444444445,
+   "spectra": 5,
+   "firstMjd": 54274.245,
+   "lastMjd": 54274.303
+  },
+  {
+   "name": "Betelgeuse",
+   "raDegrees": 88.79298764656612,
+   "decDegrees": 7.407053880513689,
+   "spectra": 199,
+   "firstMjd": 55971.44,
+   "lastMjd": 59185.415
+  },
+  {
+   "name": "Cygnus X-1",
+   "raDegrees": 299.59162499999996,
+   "decDegrees": 35.201638888888894,
+   "spectra": 2,
+   "firstMjd": 58642.603,
+   "lastMjd": 58644.478
+  },
+  {
+   "name": "Deneb",
+   "raDegrees": 310.35791927083335,
+   "decDegrees": 45.28062152777778,
+   "spectra": 16,
+   "firstMjd": 54956.462,
+   "lastMjd": 55109.345
+  },
+  {
+   "name": "Epsilon Peg",
+   "raDegrees": 326.05379166666665,
+   "decDegrees": 9.871833333333333,
+   "spectra": 1,
+   "firstMjd": 54374.411,
+   "lastMjd": 54374.411
+  },
+  {
+   "name": "Eta Tau",
+   "raDegrees": 56.871244791666655,
+   "decDegrees": 24.10513541666667,
+   "spectra": 8,
+   "firstMjd": 55100.5,
+   "lastMjd": 55110.512
+  },
+  {
+   "name": "GJ3193A",
+   "raDegrees": 45.46114583333332,
+   "decDegrees": -16.593291666666666,
+   "spectra": 4,
+   "firstMjd": 58002.621,
+   "lastMjd": 58127.339
+  },
+  {
+   "name": "GJ687",
+   "raDegrees": 264.10791666666665,
+   "decDegrees": 68.33913888888888,
+   "spectra": 2,
+   "firstMjd": 56884.431,
+   "lastMjd": 56903.266
+  },
+  {
+   "name": "GJ699",
+   "raDegrees": 269.44819791666663,
+   "decDegrees": 4.743145833333333,
+   "spectra": 4,
+   "firstMjd": 57825.654,
+   "lastMjd": 57905.556
+  },
+  {
+   "name": "GJ809",
+   "raDegrees": 313.3325,
+   "decDegrees": 62.15058333333333,
+   "spectra": 1,
+   "firstMjd": 58002.467,
+   "lastMjd": 58002.467
+  },
+  {
+   "name": "GL436",
+   "raDegrees": 175.54941666666664,
+   "decDegrees": 26.703583333333334,
+   "spectra": 1,
+   "firstMjd": 57031.641,
+   "lastMjd": 57031.641
+  },
+  {
+   "name": "GL486",
+   "raDegrees": 191.98179166666665,
+   "decDegrees": 9.749472222222222,
+   "spectra": 1,
+   "firstMjd": 57036.653,
+   "lastMjd": 57036.653
+  },
+  {
+   "name": "GQ Lup",
+   "raDegrees": 237.30050668724283,
+   "decDegrees": -35.65122668038406,
+   "spectra": 81,
+   "firstMjd": 55013.287,
+   "lastMjd": 57563.305
+  },
+  {
+   "name": "Gamma Boo",
+   "raDegrees": 218.02196527777775,
+   "decDegrees": 38.308814814814816,
+   "spectra": 6,
+   "firstMjd": 53897.398,
+   "lastMjd": 53898.393
+  },
+  {
+   "name": "Gl 15A",
+   "raDegrees": 4.608124999999999,
+   "decDegrees": 44.02475,
+   "spectra": 1,
+   "firstMjd": 57327.313,
+   "lastMjd": 57327.313
+  },
+  {
+   "name": "Gl166A",
+   "raDegrees": 63.80687499999999,
+   "decDegrees": -7.669712962962964,
+   "spectra": 3,
+   "firstMjd": 57975.577,
+   "lastMjd": 58123.346
+  },
+  {
+   "name": "Gl380",
+   "raDegrees": 152.83666666666667,
+   "decDegrees": 49.452111111111115,
+   "spectra": 4,
+   "firstMjd": 57107.273,
+   "lastMjd": 57115.371
+  },
+  {
+   "name": "Gl412A",
+   "raDegrees": 166.36475,
+   "decDegrees": 43.525999999999996,
+   "spectra": 1,
+   "firstMjd": 53748.514,
+   "lastMjd": 53748.514
+  },
+  {
+   "name": "Gl436",
+   "raDegrees": 175.54945833333332,
+   "decDegrees": 26.703555555555553,
+   "spectra": 1,
+   "firstMjd": 57080.416,
+   "lastMjd": 57080.416
+  },
+  {
+   "name": "Gl486",
+   "raDegrees": 191.98174999999998,
+   "decDegrees": 9.749444444444444,
+   "spectra": 1,
+   "firstMjd": 57080.428,
+   "lastMjd": 57080.428
+  },
+  {
+   "name": "Gl725A",
+   "raDegrees": 280.6886458333333,
+   "decDegrees": 59.63836111111111,
+   "spectra": 2,
+   "firstMjd": 57205.293,
+   "lastMjd": 57328.208
+  },
+  {
+   "name": "Gl806",
+   "raDegrees": 311.2691666666666,
+   "decDegrees": 44.50038888888889,
+   "spectra": 1,
+   "firstMjd": 57975.446,
+   "lastMjd": 57975.446
+  },
+  {
+   "name": "Gl880",
+   "raDegrees": 344.1400625,
+   "decDegrees": 16.552013888888887,
+   "spectra": 2,
+   "firstMjd": 57974.569,
+   "lastMjd": 58124.214
+  },
+  {
+   "name": "HAT-P-22",
+   "raDegrees": 155.68166666666664,
+   "decDegrees": 50.12833333333333,
+   "spectra": 1,
+   "firstMjd": 57768.574,
+   "lastMjd": 57768.574
+  },
+  {
+   "name": "HD 100655",
+   "raDegrees": 173.76579166666667,
+   "decDegrees": 20.441555555555556,
+   "spectra": 9,
+   "firstMjd": 56765.369,
+   "lastMjd": 56825.265
+  },
+  {
+   "name": "HD 102195",
+   "raDegrees": 176.42713541666663,
+   "decDegrees": 2.822961805555555,
+   "spectra": 8,
+   "firstMjd": 54487.424,
+   "lastMjd": 54548.494
+  },
+  {
+   "name": "HD 102870",
+   "raDegrees": 177.67604166666666,
+   "decDegrees": 1.7694583333333334,
+   "spectra": 2,
+   "firstMjd": 53719.68,
+   "lastMjd": 53721.681
+  },
+  {
+   "name": "HD 102956",
+   "raDegrees": 177.84374999999997,
+   "decDegrees": 57.64072222222222,
+   "spectra": 1,
+   "firstMjd": 57414.572,
+   "lastMjd": 57414.572
+  },
+  {
+   "name": "HD 104985",
+   "raDegrees": 181.31191666666666,
+   "decDegrees": 76.90591666666667,
+   "spectra": 1,
+   "firstMjd": 56675.554,
+   "lastMjd": 56675.554
+  },
+  {
+   "name": "HD 105452",
+   "raDegrees": 182.10422916666664,
+   "decDegrees": -24.72886111111111,
+   "spectra": 8,
+   "firstMjd": 56693.584,
+   "lastMjd": 56693.628
+  },
+  {
+   "name": "HD 109379",
+   "raDegrees": 188.5958333333333,
+   "decDegrees": -23.39676754385965,
+   "spectra": 19,
+   "firstMjd": 56693.601,
+   "lastMjd": 57198.288
+  },
+  {
+   "name": "HD 115892",
+   "raDegrees": 200.15,
+   "decDegrees": -36.71227777777778,
+   "spectra": 22,
+   "firstMjd": 56696.578,
+   "lastMjd": 56696.641
+  },
+  {
+   "name": "HD 124897",
+   "raDegrees": 213.91640625000005,
+   "decDegrees": 19.182483506944447,
+   "spectra": 32,
+   "firstMjd": 54702.221,
+   "lastMjd": 55735.302
+  },
+  {
+   "name": "HD 128167",
+   "raDegrees": 218.67083333333326,
+   "decDegrees": 29.745,
+   "spectra": 3,
+   "firstMjd": 55631.443,
+   "lastMjd": 55633.496
+  },
+  {
+   "name": "HD 12929",
+   "raDegrees": 31.791680555555548,
+   "decDegrees": 23.46287962962963,
+   "spectra": 3,
+   "firstMjd": 54699.552,
+   "lastMjd": 54806.255
+  },
+  {
+   "name": "HD 129989",
+   "raDegrees": 221.2458229166666,
+   "decDegrees": 27.074173611111114,
+   "spectra": 4,
+   "firstMjd": 54702.224,
+   "lastMjd": 54817.638
+  },
+  {
+   "name": "HD 130322",
+   "raDegrees": 221.8890833333333,
+   "decDegrees": -0.28031944444444445,
+   "spectra": 4,
+   "firstMjd": 54485.658,
+   "lastMjd": 54493.618
+  },
+  {
+   "name": "HD 131873",
+   "raDegrees": 222.67555,
+   "decDegrees": 74.15543333333333,
+   "spectra": 5,
+   "firstMjd": 54702.23,
+   "lastMjd": 55757.4
+  },
+  {
+   "name": "HD 133208",
+   "raDegrees": 225.4843888888889,
+   "decDegrees": 40.390574074074074,
+   "spectra": 3,
+   "firstMjd": 54702.234,
+   "lastMjd": 55614.666
+  },
+  {
+   "name": "HD 133216",
+   "raDegrees": 226.01666666666657,
+   "decDegrees": -25.281944444444438,
+   "spectra": 19,
+   "firstMjd": 55614.605,
+   "lastMjd": 57207.273
+  },
+  {
+   "name": "HD 135344",
+   "raDegrees": 228.96070833333332,
+   "decDegrees": -37.152027777777775,
+   "spectra": 1,
+   "firstMjd": 53745.639,
+   "lastMjd": 53745.639
+  },
+  {
+   "name": "HD 137909",
+   "raDegrees": 231.96137499999998,
+   "decDegrees": 29.104064814814816,
+   "spectra": 6,
+   "firstMjd": 53894.391,
+   "lastMjd": 53894.427
+  },
+  {
+   "name": "HD 145001",
+   "raDegrees": 242.01813888888884,
+   "decDegrees": 17.046962962962965,
+   "spectra": 3,
+   "firstMjd": 54757.198,
+   "lastMjd": 55614.562
+  },
+  {
+   "name": "HD 147506",
+   "raDegrees": 245.1581666666666,
+   "decDegrees": 41.05404629629629,
+   "spectra": 3,
+   "firstMjd": 54277.255,
+   "lastMjd": 54279.268
+  },
+  {
+   "name": "HD 148478",
+   "raDegrees": 247.3518409090908,
+   "decDegrees": -26.431990530303043,
+   "spectra": 44,
+   "firstMjd": 55221.678,
+   "lastMjd": 55725.395
+  },
+  {
+   "name": "HD 159181",
+   "raDegrees": 262.6082500000001,
+   "decDegrees": 52.301389408099766,
+   "spectra": 107,
+   "firstMjd": 54876.569,
+   "lastMjd": 55757.474
+  },
+  {
+   "name": "HD 162725",
+   "raDegrees": 268.4922282608695,
+   "decDegrees": -34.83107246376813,
+   "spectra": 23,
+   "firstMjd": 53566.372,
+   "lastMjd": 57611.291
+  },
+  {
+   "name": "HD 164058",
+   "raDegrees": 269.15,
+   "decDegrees": 51.48888888888889,
+   "spectra": 3,
+   "firstMjd": 55614.614,
+   "lastMjd": 55614.621
+  },
+  {
+   "name": "HD 164492",
+   "raDegrees": 270.598125,
+   "decDegrees": -23.03086111111111,
+   "spectra": 1,
+   "firstMjd": 55726.509,
+   "lastMjd": 55726.509
+  },
+  {
+   "name": "HD 164492 C",
+   "raDegrees": 270.5962916666667,
+   "decDegrees": -23.033361111111113,
+   "spectra": 25,
+   "firstMjd": 56884.259,
+   "lastMjd": 57207.382
+  },
+  {
+   "name": "HD 167618",
+   "raDegrees": 274.40833333333325,
+   "decDegrees": -36.76166666666666,
+   "spectra": 19,
+   "firstMjd": 56908.216,
+   "lastMjd": 57202.394
+  },
+  {
+   "name": "HD 168454",
+   "raDegrees": 275.25,
+   "decDegrees": -29.828083333333332,
+   "spectra": 10,
+   "firstMjd": 56908.213,
+   "lastMjd": 57116.634
+  },
+  {
+   "name": "HD 172167 (Vega)",
+   "raDegrees": 279.23458009834405,
+   "decDegrees": 38.78369375431322,
+   "spectra": 322,
+   "firstMjd": 55083.237,
+   "lastMjd": 55085.446
+  },
+  {
+   "name": "HD 175775",
+   "raDegrees": 284.43333333333334,
+   "decDegrees": -21.106638888888888,
+   "spectra": 11,
+   "firstMjd": 56903.37,
+   "lastMjd": 56903.406
+  },
+  {
+   "name": "HD 177241",
+   "raDegrees": 286.1708333333333,
+   "decDegrees": -21.741472222222225,
+   "spectra": 6,
+   "firstMjd": 56908.368,
+   "lastMjd": 56910.292
+  },
+  {
+   "name": "HD 179949",
+   "raDegrees": 288.88938505747115,
+   "decDegrees": -24.180530651341,
+   "spectra": 29,
+   "firstMjd": 54274.446,
+   "lastMjd": 55114.268
+  },
+  {
+   "name": "HD 189733",
+   "raDegrees": 300.18436363636357,
+   "decDegrees": 22.70928619528619,
+   "spectra": 33,
+   "firstMjd": 53896.485,
+   "lastMjd": 60136.298
+  },
+  {
+   "name": "HD 197345",
+   "raDegrees": 310.3579495614033,
+   "decDegrees": 45.28032309941521,
+   "spectra": 19,
+   "firstMjd": 55079.305,
+   "lastMjd": 55735.606
+  },
+  {
+   "name": "HD 197481",
+   "raDegrees": 311.29141666666663,
+   "decDegrees": -31.34325,
+   "spectra": 5,
+   "firstMjd": 60119.619,
+   "lastMjd": 60136.419
+  },
+  {
+   "name": "HD 20010",
+   "raDegrees": 48.020833333333336,
+   "decDegrees": -28.987611111111114,
+   "spectra": 5,
+   "firstMjd": 56703.207,
+   "lastMjd": 57080.22
+  },
+  {
+   "name": "HD 204867",
+   "raDegrees": 322.8896934523809,
+   "decDegrees": -5.571159722222225,
+   "spectra": 28,
+   "firstMjd": 55080.397,
+   "lastMjd": 55757.523
+  },
+  {
+   "name": "HD 205073",
+   "raDegrees": 322.8433333333333,
+   "decDegrees": 48.35322222222223,
+   "spectra": 2,
+   "firstMjd": 53567.405,
+   "lastMjd": 53569.459
+  },
+  {
+   "name": "HD 206778",
+   "raDegrees": 326.04650000000015,
+   "decDegrees": 9.875,
+   "spectra": 24,
+   "firstMjd": 55725.53,
+   "lastMjd": 55725.617
+  },
+  {
+   "name": "HD 20902",
+   "raDegrees": 51.08069130434787,
+   "decDegrees": 49.86115483091784,
+   "spectra": 115,
+   "firstMjd": 54868.247,
+   "lastMjd": 55756.637
+  },
+  {
+   "name": "HD 209458",
+   "raDegrees": 330.795575,
+   "decDegrees": 18.882296296296296,
+   "spectra": 15,
+   "firstMjd": 53633.241,
+   "lastMjd": 59188.243
+  },
+  {
+   "name": "HD 209750",
+   "raDegrees": 331.44597999999996,
+   "decDegrees": -0.3198399999999999,
+   "spectra": 25,
+   "firstMjd": 55080.409,
+   "lastMjd": 55729.628
+  },
+  {
+   "name": "HD 216946",
+   "raDegrees": 344.1083333333333,
+   "decDegrees": 49.733555555555554,
+   "spectra": 2,
+   "firstMjd": 55516.309,
+   "lastMjd": 55516.316
+  },
+  {
+   "name": "HD 216956",
+   "raDegrees": 344.4125,
+   "decDegrees": -29.622222222222216,
+   "spectra": 14,
+   "firstMjd": 56883.423,
+   "lastMjd": 56883.449
+  },
+  {
+   "name": "HD 218396",
+   "raDegrees": 346.87035416666663,
+   "decDegrees": 21.133902777777777,
+   "spectra": 2,
+   "firstMjd": 60549.519,
+   "lastMjd": 61017.266
+  },
+  {
+   "name": "HD 218594",
+   "raDegrees": 347.36249999999995,
+   "decDegrees": -21.17238888888889,
+   "spectra": 1,
+   "firstMjd": 56883.394,
+   "lastMjd": 56883.394
+  },
+  {
+   "name": "HD 222107",
+   "raDegrees": 354.39537499999994,
+   "decDegrees": 46.45436111111111,
+   "spectra": 2,
+   "firstMjd": 53570.625,
+   "lastMjd": 53571.639
+  },
+  {
+   "name": "HD 28028",
+   "raDegrees": 66.00833333333333,
+   "decDegrees": -34.01683333333333,
+   "spectra": 1,
+   "firstMjd": 56698.259,
+   "lastMjd": 56698.259
+  },
+  {
+   "name": "HD 29139",
+   "raDegrees": 68.97916666666664,
+   "decDegrees": 16.509166666666662,
+   "spectra": 10,
+   "firstMjd": 54700.632,
+   "lastMjd": 54815.323
+  },
+  {
+   "name": "HD 29291",
+   "raDegrees": 68.88749999999999,
+   "decDegrees": -30.562333333333335,
+   "spectra": 1,
+   "firstMjd": 56700.199,
+   "lastMjd": 56700.199
+  },
+  {
+   "name": "HD 32887",
+   "raDegrees": 76.3625,
+   "decDegrees": -22.370833333333334,
+   "spectra": 5,
+   "firstMjd": 54757.649,
+   "lastMjd": 54816.308
+  },
+  {
+   "name": "HD 36079",
+   "raDegrees": 82.06249999999999,
+   "decDegrees": -20.759416666666667,
+   "spectra": 1,
+   "firstMjd": 56700.208,
+   "lastMjd": 56700.208
+  },
+  {
+   "name": "HD 36389",
+   "raDegrees": 83.05291666666665,
+   "decDegrees": 18.59422222222222,
+   "spectra": 3,
+   "firstMjd": 55488.501,
+   "lastMjd": 55488.514
+  },
+  {
+   "name": "HD 36673",
+   "raDegrees": 83.18249999999999,
+   "decDegrees": -17.822222222222223,
+   "spectra": 3,
+   "firstMjd": 55101.611,
+   "lastMjd": 55101.616
+  },
+  {
+   "name": "HD 37061",
+   "raDegrees": 83.88065277777777,
+   "decDegrees": -5.267384259259259,
+   "spectra": 6,
+   "firstMjd": 55222.256,
+   "lastMjd": 55229.31
+  },
+  {
+   "name": "HD 37795",
+   "raDegrees": 84.91234999999999,
+   "decDegrees": -34.0741,
+   "spectra": 10,
+   "firstMjd": 55874.55,
+   "lastMjd": 57080.284
+  },
+  {
+   "name": "HD 39425",
+   "raDegrees": 87.74166666666665,
+   "decDegrees": -35.76830555555556,
+   "spectra": 1,
+   "firstMjd": 56701.286,
+   "lastMjd": 56701.286
+  },
+  {
+   "name": "HD 39801",
+   "raDegrees": 88.79294212962967,
+   "decDegrees": 7.4070185185185204,
+   "spectra": 18,
+   "firstMjd": 55102.618,
+   "lastMjd": 55521.398
+  },
+  {
+   "name": "HD 4128",
+   "raDegrees": 10.896268518518516,
+   "decDegrees": -17.988712962962964,
+   "spectra": 9,
+   "firstMjd": 54700.546,
+   "lastMjd": 54756.421
+  },
+  {
+   "name": "HD 48329",
+   "raDegrees": 100.98292374213841,
+   "decDegrees": 25.131079140461225,
+   "spectra": 53,
+   "firstMjd": 54877.463,
+   "lastMjd": 55555.564
+  },
+  {
+   "name": "HD 49674",
+   "raDegrees": 102.87704166666666,
+   "decDegrees": 40.86805555555556,
+   "spectra": 1,
+   "firstMjd": 56764.222,
+   "lastMjd": 56764.222
+  },
+  {
+   "name": "HD 52877",
+   "raDegrees": 105.42967948717948,
+   "decDegrees": -27.934790598290604,
+   "spectra": 13,
+   "firstMjd": 55102.623,
+   "lastMjd": 56964.654
+  },
+  {
+   "name": "HD 52973",
+   "raDegrees": 106.02708333333332,
+   "decDegrees": 20.57024074074074,
+   "spectra": 3,
+   "firstMjd": 55084.538,
+   "lastMjd": 55084.55
+  },
+  {
+   "name": "HD 58715",
+   "raDegrees": 111.78766666666664,
+   "decDegrees": 8.289305555555556,
+   "spectra": 20,
+   "firstMjd": 55870.631,
+   "lastMjd": 55876.657
+  },
+  {
+   "name": "HD 62509",
+   "raDegrees": 116.32853993055552,
+   "decDegrees": 28.0262326388889,
+   "spectra": 24,
+   "firstMjd": 54758.65,
+   "lastMjd": 57011.613
+  },
+  {
+   "name": "HD 63433",
+   "raDegrees": 117.47949999999999,
+   "decDegrees": 27.363111111111113,
+   "spectra": 1,
+   "firstMjd": 59834.618,
+   "lastMjd": 59834.618
+  },
+  {
+   "name": "HD 67523",
+   "raDegrees": 121.88633333333334,
+   "decDegrees": -24.30432777777778,
+   "spectra": 10,
+   "firstMjd": 56698.36,
+   "lastMjd": 57326.653
+  },
+  {
+   "name": "HD 81688",
+   "raDegrees": 142.16662499999998,
+   "decDegrees": 45.60180555555556,
+   "spectra": 2,
+   "firstMjd": 56708.405,
+   "lastMjd": 57019.663
+  },
+  {
+   "name": "HD 82886",
+   "raDegrees": 143.93779166666667,
+   "decDegrees": 34.780833333333334,
+   "spectra": 1,
+   "firstMjd": 56678.643,
+   "lastMjd": 56678.643
+  },
+  {
+   "name": "HD 86081",
+   "raDegrees": 149.02454166666666,
+   "decDegrees": -3.8084166666666666,
+   "spectra": 1,
+   "firstMjd": 57407.489,
+   "lastMjd": 57407.489
+  },
+  {
+   "name": "HD 87901",
+   "raDegrees": 152.09295833333329,
+   "decDegrees": 11.967222222222228,
+   "spectra": 30,
+   "firstMjd": 55931.642,
+   "lastMjd": 55934.633
+  },
+  {
+   "name": "HD 95689",
+   "raDegrees": 165.92916666666665,
+   "decDegrees": 61.750861111111114,
+   "spectra": 1,
+   "firstMjd": 54759.644,
+   "lastMjd": 54759.644
+  },
+  {
+   "name": "HD 97658",
+   "raDegrees": 168.63845833333332,
+   "decDegrees": 25.71035185185185,
+   "spectra": 3,
+   "firstMjd": 56677.627,
+   "lastMjd": 57402.534
+  },
+  {
+   "name": "HD 9927",
+   "raDegrees": 24.495437499999994,
+   "decDegrees": 48.628458333333334,
+   "spectra": 4,
+   "firstMjd": 54677.537,
+   "lastMjd": 54756.537
+  },
+  {
+   "name": "HD102195",
+   "raDegrees": 176.4270555555555,
+   "decDegrees": 2.824287037037037,
+   "spectra": 3,
+   "firstMjd": 54488.576,
+   "lastMjd": 54541.478
+  },
+  {
+   "name": "HD124897",
+   "raDegrees": 213.91529166666666,
+   "decDegrees": 19.18241666666667,
+   "spectra": 1,
+   "firstMjd": 53950.338,
+   "lastMjd": 53950.338
+  },
+  {
+   "name": "HD130322",
+   "raDegrees": 221.8882708333333,
+   "decDegrees": -0.2803333333333333,
+   "spectra": 2,
+   "firstMjd": 54488.616,
+   "lastMjd": 54492.618
+  },
+  {
+   "name": "HD1326",
+   "raDegrees": 4.597208333333333,
+   "decDegrees": 44.01763888888889,
+   "spectra": 1,
+   "firstMjd": 53951.533,
+   "lastMjd": 53951.533
+  },
+  {
+   "name": "HD135344",
+   "raDegrees": 228.95680208333332,
+   "decDegrees": -37.156305555555555,
+   "spectra": 4,
+   "firstMjd": 54169.574,
+   "lastMjd": 54169.644
+  },
+  {
+   "name": "HD143807",
+   "raDegrees": 240.36058333333327,
+   "decDegrees": 29.851000000000003,
+   "spectra": 3,
+   "firstMjd": 59985.673,
+   "lastMjd": 60311.659
+  },
+  {
+   "name": "HD147506",
+   "raDegrees": 245.15324999999999,
+   "decDegrees": 41.055277777777775,
+   "spectra": 1,
+   "firstMjd": 54282.266,
+   "lastMjd": 54282.266
+  },
+  {
+   "name": "HD173667 TAT2",
+   "raDegrees": 281.422,
+   "decDegrees": 20.544868055555558,
+   "spectra": 4,
+   "firstMjd": 54278.599,
+   "lastMjd": 54279.436
+  },
+  {
+   "name": "HD173740",
+   "raDegrees": 280.691,
+   "decDegrees": 59.623333333333335,
+   "spectra": 1,
+   "firstMjd": 53601.233,
+   "lastMjd": 53601.233
+  },
+  {
+   "name": "HD179949",
+   "raDegrees": 288.8967083333333,
+   "decDegrees": -24.185430555555556,
+   "spectra": 2,
+   "firstMjd": 54282.557,
+   "lastMjd": 54283.579
+  },
+  {
+   "name": "HD182572 RVT1",
+   "raDegrees": 291.2458958333333,
+   "decDegrees": 11.945111111111112,
+   "spectra": 2,
+   "firstMjd": 54281.584,
+   "lastMjd": 54281.588
+  },
+  {
+   "name": "HD1835",
+   "raDegrees": 5.715791666666665,
+   "decDegrees": -12.209444444444443,
+   "spectra": 2,
+   "firstMjd": 56909.348,
+   "lastMjd": 56909.369
+  },
+  {
+   "name": "HD189319 SPT2",
+   "raDegrees": 299.68860416666655,
+   "decDegrees": 19.48813888888889,
+   "spectra": 2,
+   "firstMjd": 54281.575,
+   "lastMjd": 54281.578
+  },
+  {
+   "name": "HD189733",
+   "raDegrees": 300.18337499999996,
+   "decDegrees": 22.710498263888887,
+   "spectra": 16,
+   "firstMjd": 53959.384,
+   "lastMjd": 56619.179
+  },
+  {
+   "name": "HD197481",
+   "raDegrees": 311.2897083333333,
+   "decDegrees": -31.340888888888887,
+   "spectra": 3,
+   "firstMjd": 53950.396,
+   "lastMjd": 53950.483
+  },
+  {
+   "name": "HD201092 SPT1",
+   "raDegrees": 316.7474083333333,
+   "decDegrees": 38.75231666666667,
+   "spectra": 5,
+   "firstMjd": 54279.47,
+   "lastMjd": 54281.601
+  },
+  {
+   "name": "HD202627",
+   "raDegrees": 319.48449999999997,
+   "decDegrees": -32.172555555555554,
+   "spectra": 2,
+   "firstMjd": 57261.473,
+   "lastMjd": 57261.485
+  },
+  {
+   "name": "HD206742",
+   "raDegrees": 326.2367083333333,
+   "decDegrees": -33.025777777777776,
+   "spectra": 1,
+   "firstMjd": 57261.499,
+   "lastMjd": 57261.499
+  },
+  {
+   "name": "HD222107",
+   "raDegrees": 354.39099999999996,
+   "decDegrees": 46.45631111111111,
+   "spectra": 5,
+   "firstMjd": 53950.634,
+   "lastMjd": 53951.65
+  },
+  {
+   "name": "HD39587",
+   "raDegrees": 88.59574999999997,
+   "decDegrees": 20.2761388888889,
+   "spectra": 44,
+   "firstMjd": 57011.541,
+   "lastMjd": 57036.536
+  },
+  {
+   "name": "HD67523",
+   "raDegrees": 121.88604166666666,
+   "decDegrees": -24.304333333333336,
+   "spectra": 1,
+   "firstMjd": 57414.49,
+   "lastMjd": 57414.49
+  },
+  {
+   "name": "HD87901",
+   "raDegrees": 152.09295833333334,
+   "decDegrees": 11.967222222222228,
+   "spectra": 35,
+   "firstMjd": 55959.575,
+   "lastMjd": 55959.652
+  },
+  {
+   "name": "HDE 226868",
+   "raDegrees": 299.5904166666666,
+   "decDegrees": 35.20161111111111,
+   "spectra": 1,
+   "firstMjd": 56912.24,
+   "lastMjd": 56912.24
+  },
+  {
+   "name": "HIP 38228",
+   "raDegrees": 117.47958333333332,
+   "decDegrees": 27.363166666666668,
+   "spectra": 1,
+   "firstMjd": 55198.611,
+   "lastMjd": 55198.611
+  },
+  {
+   "name": "HIP 53721",
+   "raDegrees": 164.86749999999998,
+   "decDegrees": 40.43011111111111,
+   "spectra": 1,
+   "firstMjd": 55196.663,
+   "lastMjd": 55196.663
+  },
+  {
+   "name": "HIP 64394",
+   "raDegrees": 197.96666666666664,
+   "decDegrees": 27.878055555555555,
+   "spectra": 1,
+   "firstMjd": 55611.493,
+   "lastMjd": 55611.493
+  },
+  {
+   "name": "HIP41378",
+   "raDegrees": 126.61604166666665,
+   "decDegrees": 10.080361111111111,
+   "spectra": 8,
+   "firstMjd": 58116.383,
+   "lastMjd": 58127.506
+  },
+  {
+   "name": "HR 4534",
+   "raDegrees": 177.2673611111111,
+   "decDegrees": 14.57337962962963,
+   "spectra": 3,
+   "firstMjd": 54487.457,
+   "lastMjd": 54493.692
+  },
+  {
+   "name": "HR 6056",
+   "raDegrees": 243.5865799999999,
+   "decDegrees": -3.693991111111113,
+   "spectra": 25,
+   "firstMjd": 55611.677,
+   "lastMjd": 55756.501
+  },
+  {
+   "name": "HR 6603",
+   "raDegrees": 265.86666666666673,
+   "decDegrees": 4.567222222222224,
+   "spectra": 26,
+   "firstMjd": 55631.666,
+   "lastMjd": 55747.495
+  },
+  {
+   "name": "HR 7235",
+   "raDegrees": 286.34997569444437,
+   "decDegrees": 13.863333333333335,
+   "spectra": 12,
+   "firstMjd": 55099.272,
+   "lastMjd": 55114.19
+  },
+  {
+   "name": "HR1817",
+   "raDegrees": 81.76904166666667,
+   "decDegrees": -11.902654040404038,
+   "spectra": 11,
+   "firstMjd": 54461.359,
+   "lastMjd": 54461.473
+  },
+  {
+   "name": "HR4534",
+   "raDegrees": 177.2679583333333,
+   "decDegrees": 14.571458333333332,
+   "spectra": 2,
+   "firstMjd": 54488.696,
+   "lastMjd": 54492.695
+  },
+  {
+   "name": "J00182549+4401376",
+   "raDegrees": 4.619680555555554,
+   "decDegrees": 44.028731481481486,
+   "spectra": 3,
+   "firstMjd": 57609.626,
+   "lastMjd": 57677.298
+  },
+  {
+   "name": "J02441025+4913540",
+   "raDegrees": 41.04270833333332,
+   "decDegrees": 49.23166666666667,
+   "spectra": 2,
+   "firstMjd": 58062.424,
+   "lastMjd": 58125.214
+  },
+  {
+   "name": "J17574849+0441405",
+   "raDegrees": 269.44833333333327,
+   "decDegrees": 4.7425138888888885,
+   "spectra": 2,
+   "firstMjd": 57616.311,
+   "lastMjd": 57677.262
+  },
+  {
+   "name": "J20414744+4938482",
+   "raDegrees": 310.44837499999994,
+   "decDegrees": 49.64694444444444,
+   "spectra": 1,
+   "firstMjd": 57673.273,
+   "lastMjd": 57673.273
+  },
+  {
+   "name": "Kepler-78",
+   "raDegrees": 293.74125,
+   "decDegrees": 44.44841666666665,
+   "spectra": 15,
+   "firstMjd": 56907.344,
+   "lastMjd": 57263.336
+  },
+  {
+   "name": "Lambda And",
+   "raDegrees": 354.3908333333333,
+   "decDegrees": 46.45813888888889,
+   "spectra": 1,
+   "firstMjd": 53566.576,
+   "lastMjd": 53566.576
+  },
+  {
+   "name": "M1-67",
+   "raDegrees": 287.87837499999995,
+   "decDegrees": 16.860583333333334,
+   "spectra": 1,
+   "firstMjd": 54879.646,
+   "lastMjd": 54879.646
+  },
+  {
+   "name": "M15 center",
+   "raDegrees": 322.49304166666667,
+   "decDegrees": 12.167,
+   "spectra": 1,
+   "firstMjd": 58057.307,
+   "lastMjd": 58057.307
+  },
+  {
+   "name": "M87",
+   "raDegrees": 187.70512499999995,
+   "decDegrees": 12.389666666666667,
+   "spectra": 2,
+   "firstMjd": 55957.502,
+   "lastMjd": 55957.589
+  },
+  {
+   "name": "M87 filament",
+   "raDegrees": 187.70575,
+   "decDegrees": 12.389444444444443,
+   "spectra": 2,
+   "firstMjd": 55958.512,
+   "lastMjd": 55958.603
+  },
+  {
+   "name": "NGC 1275 E",
+   "raDegrees": 49.95833333333332,
+   "decDegrees": 41.51305555555555,
+   "spectra": 2,
+   "firstMjd": 55486.452,
+   "lastMjd": 55486.536
+  },
+  {
+   "name": "NGC 1275 SW",
+   "raDegrees": 49.94814583333333,
+   "decDegrees": 41.509875,
+   "spectra": 2,
+   "firstMjd": 55527.327,
+   "lastMjd": 55560.223
+  },
+  {
+   "name": "NGC 1275 W",
+   "raDegrees": 49.94833333333332,
+   "decDegrees": 41.512,
+   "spectra": 2,
+   "firstMjd": 55516.394,
+   "lastMjd": 55517.316
+  },
+  {
+   "name": "NGC 1275 horseshoe",
+   "raDegrees": 49.937458333333325,
+   "decDegrees": 41.523666666666664,
+   "spectra": 1,
+   "firstMjd": 55526.342,
+   "lastMjd": 55526.342
+  },
+  {
+   "name": "NGC 4258",
+   "raDegrees": 184.74575,
+   "decDegrees": 47.303,
+   "spectra": 2,
+   "firstMjd": 53748.566,
+   "lastMjd": 53748.625
+  },
+  {
+   "name": "NGC1068",
+   "raDegrees": 40.66838888888889,
+   "decDegrees": -0.010879629629629628,
+   "spectra": 3,
+   "firstMjd": 53602.457,
+   "lastMjd": 53602.558
+  },
+  {
+   "name": "NU Ori",
+   "raDegrees": 83.88156140350877,
+   "decDegrees": -5.267461988304094,
+   "spectra": 19,
+   "firstMjd": 55870.587,
+   "lastMjd": 56289.262
+  },
+  {
+   "name": "NUOri",
+   "raDegrees": 83.88474999999998,
+   "decDegrees": -5.265240740740741,
+   "spectra": 3,
+   "firstMjd": 54167.21,
+   "lastMjd": 54167.29
+  },
+  {
+   "name": "PIGRU",
+   "raDegrees": 335.6842,
+   "decDegrees": -45.947938888888885,
+   "spectra": 5,
+   "firstMjd": 53604.471,
+   "lastMjd": 53604.484
+  },
+  {
+   "name": "Polaris",
+   "raDegrees": 37.95479214559379,
+   "decDegrees": 89.26402777777798,
+   "spectra": 87,
+   "firstMjd": 59269.341,
+   "lastMjd": 59574.256
+  },
+  {
+   "name": "Pollux",
+   "raDegrees": 116.32730208333332,
+   "decDegrees": 28.031055555555554,
+   "spectra": 4,
+   "firstMjd": 54373.651,
+   "lastMjd": 54463.645
+  },
+  {
+   "name": "Rho Puppis",
+   "raDegrees": 121.8875,
+   "decDegrees": -24.304444444444446,
+   "spectra": 1,
+   "firstMjd": 55221.521,
+   "lastMjd": 55221.521
+  },
+  {
+   "name": "Rigel",
+   "raDegrees": 78.63332314814808,
+   "decDegrees": -8.20166666666666,
+   "spectra": 45,
+   "firstMjd": 55164.621,
+   "lastMjd": 55228.436
+  },
+  {
+   "name": "Rigel A",
+   "raDegrees": 78.63458333333332,
+   "decDegrees": -8.201666666666666,
+   "spectra": 1,
+   "firstMjd": 59574.27,
+   "lastMjd": 59574.27
+  },
+  {
+   "name": "Rigel BC",
+   "raDegrees": 78.63333333333333,
+   "decDegrees": -8.20411111111111,
+   "spectra": 1,
+   "firstMjd": 59574.278,
+   "lastMjd": 59574.278
+  },
+  {
+   "name": "SAO 206463",
+   "raDegrees": 228.9598333333333,
+   "decDegrees": -37.14516666666667,
+   "spectra": 1,
+   "firstMjd": 53747.643,
+   "lastMjd": 53747.643
+  },
+  {
+   "name": "SN2014J",
+   "raDegrees": 148.92499999999998,
+   "decDegrees": 69.67416666666666,
+   "spectra": 7,
+   "firstMjd": 56693.428,
+   "lastMjd": 56702.492
+  },
+  {
+   "name": "Sao 206463",
+   "raDegrees": 228.95858333333328,
+   "decDegrees": -37.146972222222225,
+   "spectra": 1,
+   "firstMjd": 53745.672,
+   "lastMjd": 53745.672
+  },
+  {
+   "name": "Shells of Betelgeuse",
+   "raDegrees": 88.79295833333333,
+   "decDegrees": 7.410759259259259,
+   "spectra": 3,
+   "firstMjd": 56520.589,
+   "lastMjd": 56557.571
+  },
+  {
+   "name": "Sirius",
+   "raDegrees": 101.28744444444443,
+   "decDegrees": -16.71610648148148,
+   "spectra": 6,
+   "firstMjd": 55077.649,
+   "lastMjd": 55611.237
+  },
+  {
+   "name": "Sirius A",
+   "raDegrees": 101.28713724899619,
+   "decDegrees": -16.716111311914307,
+   "spectra": 415,
+   "firstMjd": 55229.38,
+   "lastMjd": 55636.395
+  },
+  {
+   "name": "Spica",
+   "raDegrees": 201.2983333333332,
+   "decDegrees": -11.16133333333334,
+   "spectra": 30,
+   "firstMjd": 56430.325,
+   "lastMjd": 56464.247
+  },
+  {
+   "name": "T Mon",
+   "raDegrees": 96.30412499999998,
+   "decDegrees": 7.0856666666666674,
+   "spectra": 9,
+   "firstMjd": 59542.531,
+   "lastMjd": 59542.633
+  },
+  {
+   "name": "TOI 1807b",
+   "raDegrees": 201.28258333333332,
+   "decDegrees": 38.92230555555555,
+   "spectra": 4,
+   "firstMjd": 59574.61,
+   "lastMjd": 59574.642
+  },
+  {
+   "name": "Tau Boo",
+   "raDegrees": 206.81993055555552,
+   "decDegrees": 17.46125771604938,
+   "spectra": 18,
+   "firstMjd": 54281.326,
+   "lastMjd": 54490.598
+  },
+  {
+   "name": "Trappist-1",
+   "raDegrees": 346.62691666666666,
+   "decDegrees": -5.043777777777778,
+   "spectra": 2,
+   "firstMjd": 58062.265,
+   "lastMjd": 58064.26
+  },
+  {
+   "name": "UPS_AND",
+   "raDegrees": 24.19770833333333,
+   "decDegrees": 41.40461111111111,
+   "spectra": 1,
+   "firstMjd": 54372.643,
+   "lastMjd": 54372.643
+  },
+  {
+   "name": "Ups And",
+   "raDegrees": 24.19467644927541,
+   "decDegrees": 41.40073357487926,
+   "spectra": 115,
+   "firstMjd": 53632.322,
+   "lastMjd": 53638.647
+  },
+  {
+   "name": "Vega",
+   "raDegrees": 279.23475,
+   "decDegrees": 38.78369444444444,
+   "spectra": 8,
+   "firstMjd": 55077.363,
+   "lastMjd": 55757.49
+  },
+  {
+   "name": "WASP12-obs1",
+   "raDegrees": 97.636625,
+   "decDegrees": 29.672333333333334,
+   "spectra": 2,
+   "firstMjd": 55200.34,
+   "lastMjd": 55202.536
+  },
+  {
+   "name": "__beta_~Cet",
+   "raDegrees": 10.895833333333336,
+   "decDegrees": -17.98638541666666,
+   "spectra": 24,
+   "firstMjd": 55102.428,
+   "lastMjd": 55757.636
+  },
+  {
+   "name": "__delta_~CrB",
+   "raDegrees": 237.3958333333333,
+   "decDegrees": 26.06833333333333,
+   "spectra": 9,
+   "firstMjd": 55222.602,
+   "lastMjd": 55725.3
+  },
+  {
+   "name": "__kappa_~Her A",
+   "raDegrees": 242.01665277777772,
+   "decDegrees": 17.046941358024693,
+   "spectra": 9,
+   "firstMjd": 55222.615,
+   "lastMjd": 55486.217
+  },
+  {
+   "name": "aldebaran",
+   "raDegrees": 68.98220833333333,
+   "decDegrees": 16.51571296296296,
+   "spectra": 3,
+   "firstMjd": 54370.591,
+   "lastMjd": 54370.635
+  },
+  {
+   "name": "alf UMi",
+   "raDegrees": 37.95479166666661,
+   "decDegrees": 89.26405555555547,
+   "spectra": 57,
+   "firstMjd": 59174.241,
+   "lastMjd": 59174.328
+  },
+  {
+   "name": "alpha Ari",
+   "raDegrees": 31.79287499999999,
+   "decDegrees": 23.462777777777777,
+   "spectra": 6,
+   "firstMjd": 56704.21,
+   "lastMjd": 56911.574
+  },
+  {
+   "name": "alpha aqr",
+   "raDegrees": 331.4475416666666,
+   "decDegrees": -0.32466666666666666,
+   "spectra": 1,
+   "firstMjd": 54373.411,
+   "lastMjd": 54373.411
+  },
+  {
+   "name": "alpha ari",
+   "raDegrees": 31.799,
+   "decDegrees": 23.463,
+   "spectra": 1,
+   "firstMjd": 54374.488,
+   "lastMjd": 54374.488
+  },
+  {
+   "name": "alpha cyg",
+   "raDegrees": 310.363,
+   "decDegrees": 45.279611,
+   "spectra": 1,
+   "firstMjd": 53543.527,
+   "lastMjd": 53543.527
+  },
+  {
+   "name": "alpha lep",
+   "raDegrees": 83.18258333333327,
+   "decDegrees": -17.82227777777779,
+   "spectra": 40,
+   "firstMjd": 58056.53,
+   "lastMjd": 58056.605
+  },
+  {
+   "name": "alpha tau",
+   "raDegrees": 68.98649999999999,
+   "decDegrees": 16.5165,
+   "spectra": 1,
+   "firstMjd": 54374.484,
+   "lastMjd": 54374.484
+  },
+  {
+   "name": "alpha virginis",
+   "raDegrees": 201.2983333333332,
+   "decDegrees": -11.161333333333339,
+   "spectra": 27,
+   "firstMjd": 56466.239,
+   "lastMjd": 56472.239
+  },
+  {
+   "name": "alphaari",
+   "raDegrees": 31.798124999999995,
+   "decDegrees": 23.4665,
+   "spectra": 1,
+   "firstMjd": 54375.487,
+   "lastMjd": 54375.487
+  },
+  {
+   "name": "alphard",
+   "raDegrees": 141.8995833333333,
+   "decDegrees": -8.654902777777778,
+   "spectra": 2,
+   "firstMjd": 54464.607,
+   "lastMjd": 54464.634
+  },
+  {
+   "name": "aumic",
+   "raDegrees": 311.29370833333326,
+   "decDegrees": -31.334083333333332,
+   "spectra": 2,
+   "firstMjd": 53895.587,
+   "lastMjd": 53895.614
+  },
+  {
+   "name": "beta Gem",
+   "raDegrees": 116.33066666666664,
+   "decDegrees": 28.02630555555556,
+   "spectra": 5,
+   "firstMjd": 56757.355,
+   "lastMjd": 56757.363
+  },
+  {
+   "name": "beta cet",
+   "raDegrees": 10.905097222222219,
+   "decDegrees": -17.988324074074075,
+   "spectra": 3,
+   "firstMjd": 54373.463,
+   "lastMjd": 54375.468
+  },
+  {
+   "name": "beta crb",
+   "raDegrees": 231.963389,
+   "decDegrees": 29.110324000000002,
+   "spectra": 3,
+   "firstMjd": 53540.272,
+   "lastMjd": 53540.282
+  },
+  {
+   "name": "betacet",
+   "raDegrees": 10.90713888888889,
+   "decDegrees": -17.988240740740746,
+   "spectra": 3,
+   "firstMjd": 54375.491,
+   "lastMjd": 54376.483
+  },
+  {
+   "name": "delta Vir",
+   "raDegrees": 193.89999999999998,
+   "decDegrees": 3.3975,
+   "spectra": 2,
+   "firstMjd": 55729.234,
+   "lastMjd": 55729.251
+  },
+  {
+   "name": "deneb",
+   "raDegrees": 310.3581337448561,
+   "decDegrees": 45.28499245541831,
+   "spectra": 81,
+   "firstMjd": 56103.598,
+   "lastMjd": 56105.644
+  },
+  {
+   "name": "eps cyg",
+   "raDegrees": 311.558833,
+   "decDegrees": 33.971417,
+   "spectra": 1,
+   "firstMjd": 53543.531,
+   "lastMjd": 53543.531
+  },
+  {
+   "name": "eps peg",
+   "raDegrees": 326.053708,
+   "decDegrees": 9.879028,
+   "spectra": 1,
+   "firstMjd": 53541.642,
+   "lastMjd": 53541.642
+  },
+  {
+   "name": "epsilon Eri",
+   "raDegrees": 53.23508333333332,
+   "decDegrees": -9.458305555555555,
+   "spectra": 9,
+   "firstMjd": 56703.231,
+   "lastMjd": 56910.602
+  },
+  {
+   "name": "epsilon Vir",
+   "raDegrees": 195.5458333333333,
+   "decDegrees": 10.959166666666667,
+   "spectra": 2,
+   "firstMjd": 55729.238,
+   "lastMjd": 55729.256
+  },
+  {
+   "name": "eta UMa",
+   "raDegrees": 206.88449999999997,
+   "decDegrees": 49.31319444444444,
+   "spectra": 3,
+   "firstMjd": 58562.403,
+   "lastMjd": 58564.336
+  },
+  {
+   "name": "gl338a",
+   "raDegrees": 138.59499999999997,
+   "decDegrees": 52.68666666666666,
+   "spectra": 1,
+   "firstMjd": 54275.256,
+   "lastMjd": 54275.256
+  },
+  {
+   "name": "gl806",
+   "raDegrees": 311.2688749999999,
+   "decDegrees": 44.50025,
+   "spectra": 1,
+   "firstMjd": 57882.623,
+   "lastMjd": 57882.623
+  },
+  {
+   "name": "gx and",
+   "raDegrees": 4.595375,
+   "decDegrees": 44.022944,
+   "spectra": 1,
+   "firstMjd": 53546.625,
+   "lastMjd": 53546.625
+  },
+  {
+   "name": "gxand",
+   "raDegrees": 4.596042,
+   "decDegrees": 44.019944,
+   "spectra": 1,
+   "firstMjd": 53545.623,
+   "lastMjd": 53545.623
+  },
+  {
+   "name": "hd 148478",
+   "raDegrees": 247.35187499999998,
+   "decDegrees": -26.432000000000013,
+   "spectra": 12,
+   "firstMjd": 57264.221,
+   "lastMjd": 57264.24
+  },
+  {
+   "name": "hd 181869",
+   "raDegrees": 290.9715416666666,
+   "decDegrees": -40.61591666666667,
+   "spectra": 7,
+   "firstMjd": 57264.27,
+   "lastMjd": 57264.304
+  },
+  {
+   "name": "hd 189733",
+   "raDegrees": 300.1833333333333,
+   "decDegrees": 22.710833333333333,
+   "spectra": 1,
+   "firstMjd": 54285.323,
+   "lastMjd": 54285.323
+  },
+  {
+   "name": "hd 206778",
+   "raDegrees": 326.04648697916673,
+   "decDegrees": 9.875006944444443,
+   "spectra": 16,
+   "firstMjd": 54820.18,
+   "lastMjd": 54820.222
+  },
+  {
+   "name": "hd 32887",
+   "raDegrees": 76.36524999999999,
+   "decDegrees": -22.37102777777778,
+   "spectra": 3,
+   "firstMjd": 57269.631,
+   "lastMjd": 57269.636
+  },
+  {
+   "name": "hd 37061",
+   "raDegrees": 83.88601388888885,
+   "decDegrees": -5.26187962962963,
+   "spectra": 3,
+   "firstMjd": 53747.355,
+   "lastMjd": 53747.439
+  },
+  {
+   "name": "hd102195",
+   "raDegrees": 176.42868055555553,
+   "decDegrees": 2.8243796296296293,
+   "spectra": 3,
+   "firstMjd": 54484.441,
+   "lastMjd": 54486.437
+  },
+  {
+   "name": "hd130322",
+   "raDegrees": 221.8889583333333,
+   "decDegrees": -0.28147222222222223,
+   "spectra": 1,
+   "firstMjd": 54486.657,
+   "lastMjd": 54486.657
+  },
+  {
+   "name": "hd189733",
+   "raDegrees": 300.1817083333333,
+   "decDegrees": 22.710305555555554,
+   "spectra": 2,
+   "firstMjd": 53955.383,
+   "lastMjd": 54286.336
+  },
+  {
+   "name": "hd217989",
+   "raDegrees": 346.4845833333333,
+   "decDegrees": -35.85447222222222,
+   "spectra": 1,
+   "firstMjd": 54275.618,
+   "lastMjd": 54275.618
+  },
+  {
+   "name": "hip67155",
+   "raDegrees": 206.43883333333332,
+   "decDegrees": 14.886055555555554,
+   "spectra": 1,
+   "firstMjd": 57032.643,
+   "lastMjd": 57032.643
+  },
+  {
+   "name": "hr1817",
+   "raDegrees": 81.76918939393939,
+   "decDegrees": -11.900623737373737,
+   "spectra": 11,
+   "firstMjd": 54464.304,
+   "lastMjd": 54464.42
+  },
+  {
+   "name": "hr4540",
+   "raDegrees": 177.67779166666665,
+   "decDegrees": 1.7621222222222221,
+   "spectra": 5,
+   "firstMjd": 54276.231,
+   "lastMjd": 54276.241
+  },
+  {
+   "name": "iot Psc",
+   "raDegrees": 354.98941666666667,
+   "decDegrees": 5.624250000000003,
+   "spectra": 14,
+   "firstMjd": 57616.568,
+   "lastMjd": 57616.648
+  },
+  {
+   "name": "iota Dra",
+   "raDegrees": 231.23241666666652,
+   "decDegrees": 58.9660277777778,
+   "spectra": 44,
+   "firstMjd": 56759.53,
+   "lastMjd": 56825.383
+  },
+  {
+   "name": "ksi Peg",
+   "raDegrees": 341.6743333333333,
+   "decDegrees": 12.170611111111112,
+   "spectra": 10,
+   "firstMjd": 57615.351,
+   "lastMjd": 57615.411
+  },
+  {
+   "name": "lamba and",
+   "raDegrees": 354.397667,
+   "decDegrees": 46.455056,
+   "spectra": 1,
+   "firstMjd": 53544.626,
+   "lastMjd": 53544.626
+  },
+  {
+   "name": "lambda And",
+   "raDegrees": 354.38980208333334,
+   "decDegrees": 46.45552777777778,
+   "spectra": 4,
+   "firstMjd": 53567.649,
+   "lastMjd": 53569.64
+  },
+  {
+   "name": "lambda andromeda",
+   "raDegrees": 354.39099999999996,
+   "decDegrees": 46.45813888888889,
+   "spectra": 1,
+   "firstMjd": 53949.642,
+   "lastMjd": 53949.642
+  },
+  {
+   "name": "ngc6611_W254",
+   "raDegrees": 274.678,
+   "decDegrees": -13.7855,
+   "spectra": 1,
+   "firstMjd": 54376.25,
+   "lastMjd": 54376.25
+  },
+  {
+   "name": "omicron UMa",
+   "raDegrees": 127.56679166666665,
+   "decDegrees": 60.718416666666656,
+   "spectra": 24,
+   "firstMjd": 56679.479,
+   "lastMjd": 57011.589
+  },
+  {
+   "name": "pollux",
+   "raDegrees": 116.32935763888888,
+   "decDegrees": 28.029287037037037,
+   "spectra": 12,
+   "firstMjd": 54370.644,
+   "lastMjd": 54466.498
+  },
+  {
+   "name": "procyon",
+   "raDegrees": 114.825375,
+   "decDegrees": 5.230722222222222,
+   "spectra": 1,
+   "firstMjd": 53718.683,
+   "lastMjd": 53718.683
+  },
+  {
+   "name": "sig Boo",
+   "raDegrees": 218.6711557017541,
+   "decDegrees": 29.745881578947415,
+   "spectra": 133,
+   "firstMjd": 57764.557,
+   "lastMjd": 59362.31
+  },
+  {
+   "name": "tau Boo",
+   "raDegrees": 206.81524079807684,
+   "decDegrees": 17.45797444551283,
+   "spectra": 104,
+   "firstMjd": 53452.369,
+   "lastMjd": 60328.589
+  },
+  {
+   "name": "tau boo",
+   "raDegrees": 206.81756249999998,
+   "decDegrees": 17.465208333333333,
+   "spectra": 12,
+   "firstMjd": 54492.54,
+   "lastMjd": 54495.642
+  },
+  {
+   "name": "tauBoo",
+   "raDegrees": 206.8140921474358,
+   "decDegrees": 17.45805341880343,
+   "spectra": 52,
+   "firstMjd": 54487.53,
+   "lastMjd": 57769.658
+  },
+  {
+   "name": "tauboo",
+   "raDegrees": 206.81708578431372,
+   "decDegrees": 17.463433006535947,
+   "spectra": 17,
+   "firstMjd": 53899.232,
+   "lastMjd": 54486.586
+  },
+  {
+   "name": "upsilon And",
+   "raDegrees": 24.199916666666667,
+   "decDegrees": 41.406388888888884,
+   "spectra": 2,
+   "firstMjd": 56911.555,
+   "lastMjd": 56911.56
+  },
+  {
+   "name": "vega",
+   "raDegrees": 279.2405,
+   "decDegrees": 38.78581944444444,
+   "spectra": 2,
+   "firstMjd": 53895.645,
+   "lastMjd": 53895.647
+  },
+  {
+   "name": "zet Gem",
+   "raDegrees": 106.02716666666673,
+   "decDegrees": 20.57027777777776,
+   "spectra": 45,
+   "firstMjd": 59183.502,
+   "lastMjd": 59183.635
+  },
+  {
+   "name": "zeta Gem",
+   "raDegrees": 106.02716666666666,
+   "decDegrees": 20.570305555555557,
+   "spectra": 2,
+   "firstMjd": 59541.375,
+   "lastMjd": 59541.379
+  }
+ ]
+}

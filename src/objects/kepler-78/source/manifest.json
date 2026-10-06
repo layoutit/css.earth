@@ -176,6 +176,41 @@
           }
         ]
       }
+    },
+    {
+      "id": "kepler-78-espadons-map-radial-field-2015-08",
+      "path": "science/espadons/kepler-78-2015-08.dat",
+      "origin": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "productId": "Magnetic map of Kepler-78, Aug 2015, from 13 ESPaDOnS spectra",
+      "title": "Magnetic map of Kepler-78 from 13 polarised spectra of 23 July 2015 to 29 August 2015: radial, azimuthal and meridional field on a longitude-latitude grid",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "credit": "CFHT ESPaDOnS, CFHT programs 15AC21, 15AF09, 15BD96, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+      "displayCredit": "CFHT ESPaDOnS · mapped here",
+      "license": "CC BY 4.0 for the archived spectra (Canadian Astronomy Data Centre); reduction by this project",
+      "licenseEvidence": [
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program kepler-78-2015-08; the receipt beside that program (kepler-78-2015-08.map.json) records every archived spectrum by its pin, the line list, the codes and each step's result.",
+      "redistribution": "Archived spectra under CC BY 4.0, reduced here.",
+      "consumers": [
+        "espadons-zdi"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cadc-cfht-espadons",
+            "role": "material",
+            "evidence": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+          },
+          {
+            "catalogueId": "arxiv-1711-08636",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1711.08636"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

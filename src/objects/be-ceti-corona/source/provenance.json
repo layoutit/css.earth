@@ -1,0 +1,203 @@
+{
+  "schema": "cssearth-volume-provenance@2",
+  "title": "BE Ceti corona: derived from an observed magnetic map of the star",
+  "kind": "derived-from-an-observed-magnetic-map-through-a-stated-model",
+  "authors": [
+    "Willamo et al. (2022), A&A 659, A71; ESO 3.6 m HARPSpol; VizieR (CDS)"
+  ],
+  "organizations": [
+    "cssEarth (the derivation)"
+  ],
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "note": "The grids are computed here. The magnetic maps keep their own terms (VizieR catalogue data, public with citation of the paper and CDS); the other inputs are published numbers cited under normal scholarly citation."
+  },
+  "sources": [
+    {
+      "id": "map-dec-2017",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+      "role": "The magnetic map of Dec 2017: ZDI map of BE Ceti (Dec 2017): radial, meridional and azimuthal field (kG) and normalised brightness on 1876 equal-area cells"
+    },
+    {
+      "id": "vizier-j-a-a-664-a105",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+      "role": "Freund et al. (2022), A&A 664, A105: 2RXS J002252.2-121233, 9.74 arcsec from the star's Gaia position, stellar probability 0.9995"
+    },
+    {
+      "id": "arxiv-1505-00643",
+      "url": "https://arxiv.org/abs/1505.00643",
+      "role": "Johnstone & Güdel (2015), A&A 578, A129: Equation 4: T = 0.11 F_X^0.26 million kelvin"
+    },
+    {
+      "id": "arxiv-2105-00019",
+      "url": "https://arxiv.org/abs/2105.00019",
+      "role": "Wood et al. (2021), ApJ 915, 37: Section 5.1 and Table 3: mass loss per unit surface rises as F_X^0.77"
+    },
+    {
+      "id": "potential-field",
+      "url": "https://doi.org/10.1007/BF00145734",
+      "role": "Altschuler & Newkirk (1969), Solar Physics 9, 131: the potential field of a surface map out to a source surface"
+    },
+    {
+      "id": "source-surface",
+      "url": "https://doi.org/10.1007/BF00146478",
+      "role": "Schatten, Wilcox & Ness (1969), Solar Physics 6, 442: the source surface"
+    },
+    {
+      "id": "streamer-belt",
+      "url": "https://doi.org/10.1086/511416",
+      "role": "Wang, Sheeley & Rich (2007), ApJ 658, 1340: the Sun's streamer belt follows the neutral line of that field"
+    },
+    {
+      "id": "wind-solution",
+      "url": "https://doi.org/10.1086/146579",
+      "role": "Parker (1958), ApJ 128, 664: the isothermal wind"
+    },
+    {
+      "id": "radiative-loss",
+      "url": "https://doi.org/10.1086/155949",
+      "role": "Rosner, Tucker & Vaiana (1978), ApJ 220, 643: the power radiated per unit emission measure"
+    }
+  ],
+  "paper": {
+    "citation": "No paper: the derivation is this repository's, by the method of docs/stellar-corona-from-magnetic-maps.md."
+  },
+  "measured": {
+    "star": {
+      "id": "be-ceti",
+      "massSolar": 0.9415072,
+      "radiusSolar": 1,
+      "radiusArcsec": 0.00021798729820280858,
+      "distancePc": 21.33366163672302,
+      "sceneOriginRaDecDeg": [
+        5.718774689885265,
+        -12.208984966587652
+      ],
+      "inclinationDegrees": 65.00018049773658
+    },
+    "xray": {
+      "fluxErgCm2S": 2.1e-12,
+      "band": "0.1 to 2.4 keV (ROSAT)",
+      "luminosityErgS": 1.1435655257890504e+29,
+      "surfaceFluxErgCm2S": 1880213.5744143508
+    },
+    "temperature": {
+      "kelvin": 4706375.265585617,
+      "measured": false
+    },
+    "massLoss": {
+      "solar": 22.031269928915325,
+      "measured": false,
+      "solarMassLossSolarMassesPerYear": 2e-14
+    },
+    "wind": {
+      "soundKmS": 254.38352052029546,
+      "criticalRadii": 1.3877312301537243,
+      "speedAtSurfaceKmS": 171.94051156736018,
+      "speedAt4RadiiKmS": 509.4888249199281
+    },
+    "atRest": {
+      "scaleHeightRadii": 0.36030031546138286,
+      "basePerCm3": 645443150.3144023,
+      "emissionMeasureCm3": 1.5653243135168663e+51
+    },
+    "method": {
+      "sourceRadii": 2.5,
+      "nearRadii": 1.2,
+      "nearWidthDegrees": 15,
+      "farRadii": 2,
+      "farWidthDegrees": 8,
+      "decayPower": 3,
+      "harmonicDegree": 15,
+      "mapCells": [
+        180,
+        90
+      ]
+    },
+    "maps": {
+      "dec-2017": {
+        "label": "Dec 2017",
+        "surface": "radial-field",
+        "meanAbsGauss": 10.532090401054457,
+        "harmonicsResidual": 0.0035204566856122427,
+        "neutralLineCells": 556,
+        "skyWithin10DegreesOfLine": 0.2084964754731232,
+        "openShare": [
+          {
+            "radii": 1.05,
+            "share": 0.24353561854980696
+          },
+          {
+            "radii": 1.2,
+            "share": 0.3497233160938892
+          },
+          {
+            "radii": 1.5,
+            "share": 0.50504388054057
+          },
+          {
+            "radii": 2,
+            "share": 0.7534159286264022
+          },
+          {
+            "radii": 2.4,
+            "share": 0.9546233475887219
+          }
+        ],
+        "electronsPerCm3OffSheet": [
+          {
+            "radii": 1.2,
+            "density": 21285521.047020633
+          },
+          {
+            "radii": 2,
+            "density": 2232393.796134944
+          },
+          {
+            "radii": 3,
+            "density": 583166.5789235248
+          },
+          {
+            "radii": 4,
+            "density": 285980.6135856575
+          }
+        ],
+        "sheetOverOffSheetAt2Radii": 72.17772242111502
+      }
+    },
+    "display": {
+      "densityRangePerCm3": [
+        100000,
+        1000000000
+      ],
+      "innerFadeRadii": [
+        1,
+        1.16
+      ],
+      "outerFadeRadii": [
+        2.6,
+        4
+      ],
+      "fullScaleColumnRadii": 4.76,
+      "topAlpha": 0.9,
+      "color": [
+        1,
+        0.945,
+        0.925
+      ],
+      "exposureGain": 0.4837363640743794
+    }
+  },
+  "models": {
+    "dec-2017": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. The map of the star's surface magnetic field from Dec 2017 (Willamo et al. · HARPSpol) is continued outward as a field with no electric currents, out to 2.5 stellar radii, where the wind is taken to pull it straight. Gas at rest fills a sheet about the line where that field reverses, as the Sun's bright streamers do; the wind fills the rest. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.7 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 22 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The method was tested on the one star with a published simulation of its corona, ε Eridani, where its density is within a factor of two of the simulation's on average, and on the Sun, whose corona is measured dense along the same line. The rotation axis is 65° from the line of sight, as the map was fitted, and the corona is drawn in the same frame as the star's own maps; where the axis points on the sky and the star's rotation phase today are conventions."
+  },
+  "limitations": [
+    "No telescope has imaged this corona, and no paper publishes this result: every grid is derived here.",
+    "The field has no electric currents and is taken radial from the source surface outward; the place of the dense sheet follows from the map, and against the published simulation of ε Eridani the derived density is within a factor of two on average.",
+    "The amount of gas is set by one X-ray flux, one temperature and one mass loss for the whole star. The mass loss is not measured for this star; it sets how bright the gas away from the sheet is drawn.",
+    "A magnetic map resolves only the large-scale field, and misses the hemisphere the star never turns toward us.",
+    "The position angle of the rotation axis on the sky and the rotation phase are conventions, not measurements.",
+    "The star's spin is left out of the gas balance.",
+    "The radial filter, the logarithmic scale, the two radial fades and the exposure are display choices."
+  ]
+}

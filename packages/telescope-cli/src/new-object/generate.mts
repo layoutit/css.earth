@@ -10,7 +10,7 @@ import { dirname, resolve } from 'node:path';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { bindInputs, installColorDataset, json } from './dataset.mts';
-import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
+import { CROSS_CHECK_AGREEMENT, inclinedPoleOrientation } from '@cssearth/bake/objects/stellar';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
 import { citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchCatalogueRow, rowArchive, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, readIdentifiers, telescopeResolver, type Archive, type CatalogueRow, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives/archives.mts';
@@ -240,7 +240,9 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     const axis = north.map((n, k) => Math.sin(i) * n - Math.cos(i) * los[k]!);
     const axisRa = (Math.atan2(axis[1]!, axis[0]!) * 180 / Math.PI + 360) % 360, axisDec = Math.asin(axis[2]!) * 180 / Math.PI;
     const rotation = read(`${s}/preparation/rotation.json`);
-    Object.assign(rotation, { rightAscensionDegrees: axisRa, declinationDegrees: axisDec, displayMeridianDegrees: 90,
+    // The meridian that turns longitude 0 toward Earth. It is 90 or 270 by the side of the celestial pole the axis falls on: a fixed 90 showed the far side of five stars' maps.
+    const meridian = Number(((inclinedPoleOrientation({ rightAscensionDegrees: row.ra, declinationDegrees: row.dec }, spec.spin.inclinationDegrees, 0).displayMeridianDegrees % 360 + 360) % 360).toFixed(6));
+    Object.assign(rotation, { rightAscensionDegrees: axisRa, declinationDegrees: axisDec, displayMeridianDegrees: meridian,
       source: `Spin inclination ${spec.spin.inclinationDegrees} degrees from the line of sight${spec.spin.periodDays ? ` and rotation period ${spec.spin.periodDays} d` : ''}: ${spec.spin.source} (${spec.spin.url}), with the north pole tilted toward us. The direction of the axis on the sky is not measured; it is placed toward celestial north as a convention. The axis is sin(i) x sky-north - cos(i) x (direction to the star): RA ${axisRa.toFixed(4)}, Dec ${axisDec >= 0 ? '+' : ''}${axisDec.toFixed(4)}. Longitude 0 faces the Sun as a display convention.`,
       coordinateSystem: 'ICRF/J2000. +Z is the spin axis above; +X is the display meridian; east longitude. No spin is propagated.',
       qualification: 'The tilt of the spin axis is measured; its position angle on the sky and the rotation phase are display conventions.' });

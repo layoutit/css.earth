@@ -1,0 +1,119 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "ad-leo-2019-11",
+ "target": {
+  "name": "AD Leo",
+  "raDegrees": 154.90117008,
+  "decDegrees": 19.8700029,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 58787,
+  "toMjd": 58819
+ },
+ "observations": [
+  {
+   "product": "2459737p",
+   "uri": "cadc:CFHT/2459737p.fits",
+   "bytes": 20692800,
+   "targetName": "AD Leo",
+   "proposal": "19BC06",
+   "mjdStart": 58802.551,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "2459908p",
+   "uri": "cadc:CFHT/2459908p.fits",
+   "bytes": 20692800,
+   "targetName": "AD Leo",
+   "proposal": "19BC06",
+   "mjdStart": 58803.59,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "2460223p",
+   "uri": "cadc:CFHT/2460223p.fits",
+   "bytes": 20692800,
+   "targetName": "AD Leo",
+   "proposal": "19BC06",
+   "mjdStart": 58806.582,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "2460227p",
+   "uri": "cadc:CFHT/2460227p.fits",
+   "bytes": 20692800,
+   "targetName": "AD Leo",
+   "proposal": "19BC06",
+   "mjdStart": 58806.599,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "2460231p",
+   "uri": "cadc:CFHT/2460231p.fits",
+   "bytes": 20692800,
+   "targetName": "AD Leo",
+   "proposal": "19BC06",
+   "mjdStart": 58806.615,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "2460499p",
+   "uri": "cadc:CFHT/2460499p.fits",
+   "bytes": 20692800,
+   "targetName": "AD Leo",
+   "proposal": "19BC06",
+   "mjdStart": 58808.647,
+   "exposureSeconds": 1200
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 3430,
+   "source": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M3V, for SIMBAD's spectral type dM3: Teff"
+  },
+  "logGravity": {
+   "value": 4.89,
+   "source": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M3V, for SIMBAD's spectral type dM3: from the row's mass and radius"
+  }
+ },
+ "radialVelocity": {
+  "value": 12.43,
+  "source": "SIMBAD, radial velocity of V* AD Leo (2018MNRAS.475.1960F)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 3,
+   "source": "Bellotti, S. et al., arXiv:2307.01016 (A&A 676, A56 (2023)): ZDI input v_e sin i = 3 km/s (from Morin et al. 2008); Zeeman-broadening fits give 3.3 to 3.5 km/s for SPIRou epochs (tab:zbroad-ir)"
+  },
+  "inclinationDegrees": {
+   "value": 20,
+   "source": "Bellotti, S. et al., arXiv:2307.01016 (A&A 676, A56 (2023)): Sect. 4 (i, v sin i, P_rot, lmax, chi2); tab:zdi_output (field numbers)"
+  },
+  "periodDays": {
+   "value": 2.23,
+   "source": "Bellotti, S. et al., arXiv:2307.01016 (A&A 676, A56 (2023)): Sect. 4 (i, v sin i, P_rot, lmax, chi2); tab:zdi_output (field numbers)"
+  },
+  "maximumDegree": {
+   "value": 8,
+   "source": "Bellotti, S. et al., arXiv:2307.01016 (A&A 676, A56 (2023)): entropy weighting proportional to l"
+  }
+ },
+ "published": {
+  "paper": "Bellotti, S. et al., arXiv:2307.01016 (A&A 676, A56 (2023))",
+  "url": "https://arxiv.org/abs/2307.01016",
+  "meanGauss": {
+   "value": 158,
+   "source": "tab:zdi_output, tab:log_opt: mean field strength, epoch 2019 (optical)"
+  },
+  "toroidalPercent": {
+   "value": 5,
+   "source": "tab:zdi_output, tab:log_opt: toroidal share of the energy, epoch 2019 (optical)"
+  },
+  "spectra": {
+   "value": 6,
+   "source": "tab:zdi_output, tab:log_opt: 6 rows in tab:log_opt"
+  },
+  "note": "instruments ESPaDOnS; maxG: 577.2; poloidalPct: 95; axisymmetricPct: 77; axisymmetricOf: total energy"
+ }
+}

@@ -1,0 +1,166 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "dx-cnc-2008-01",
+ "target": {
+  "name": "DX Cnc",
+  "raDegrees": 127.45563663,
+  "decDegrees": 26.77600671,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 54466,
+  "toMjd": 54831
+ },
+ "observations": [
+  {
+   "product": "965828p",
+   "uri": "cadc:CFHT/965828p.fits",
+   "bytes": 20589120,
+   "targetName": "gj 11111",
+   "proposal": "07Bf29B",
+   "mjdStart": 54483.348,
+   "exposureSeconds": 2080
+  },
+  {
+   "product": "965898p",
+   "uri": "cadc:CFHT/965898p.fits",
+   "bytes": 20589120,
+   "targetName": "gj1111",
+   "proposal": "07Bf29b",
+   "mjdStart": 54484.345,
+   "exposureSeconds": 2240
+  },
+  {
+   "product": "965922p",
+   "uri": "cadc:CFHT/965922p.fits",
+   "bytes": 20589120,
+   "targetName": "gj1111",
+   "proposal": "07Bf29b",
+   "mjdStart": 54484.53,
+   "exposureSeconds": 2280
+  },
+  {
+   "product": "966026p",
+   "uri": "cadc:CFHT/966026p.fits",
+   "bytes": 20589120,
+   "targetName": "GJ 1111",
+   "proposal": "07Bf29B",
+   "mjdStart": 54485.531,
+   "exposureSeconds": 2400
+  },
+  {
+   "product": "966134p",
+   "uri": "cadc:CFHT/966134p.fits",
+   "bytes": 20592000,
+   "targetName": "gj1111",
+   "proposal": "07Bf29b",
+   "mjdStart": 54486.345,
+   "exposureSeconds": 2240
+  },
+  {
+   "product": "966158p",
+   "uri": "cadc:CFHT/966158p.fits",
+   "bytes": 20592000,
+   "targetName": "gj1111",
+   "proposal": "07Bf29b",
+   "mjdStart": 54486.527,
+   "exposureSeconds": 2800
+  },
+  {
+   "product": "966289p",
+   "uri": "cadc:CFHT/966289p.fits",
+   "bytes": 20592000,
+   "targetName": "GJ 1111",
+   "proposal": "07Bf29b",
+   "mjdStart": 54487.463,
+   "exposureSeconds": 2440
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 2814,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 3664898: Teff"
+  },
+  "logGravity": {
+   "value": 5.25,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 3664898: logg"
+  }
+ },
+ "radialVelocity": {
+  "value": 10.62,
+  "source": "SIMBAD, radial velocity of G 51-15 (2018MNRAS.475.1960F)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 13,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "inclinationDegrees": {
+   "value": 60,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "periodDays": {
+   "value": 0.46,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "maximumDegree": {
+   "value": 6,
+   "source": "Morin, J. et al., arXiv:1005.5552: l_ZDI column of the fit table"
+  }
+ },
+ "published": {
+  "paper": "Morin, J. et al., arXiv:1005.5552",
+  "url": "https://arxiv.org/abs/1005.5552",
+  "meanGauss": {
+   "value": 80,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): mean field strength, epoch 2008"
+  },
+  "toroidalPercent": {
+   "value": 27,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): toroidal share of the energy, epoch 2008"
+  },
+  "spectra": {
+   "value": 7,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): spectra used"
+  },
+  "note": "instruments ESPaDOnS; maxG: 200; poloidalPct: 73; axisymmetricPct: 49; axisymmetricOf: total energy; two definitions printed as x/y",
+  "longitudinalFields": [
+   {
+    "utc": "2008-01-18T08:40:11",
+    "gauss": 81.0,
+    "error": 61.0
+   },
+   {
+    "utc": "2008-01-19T08:36:58",
+    "gauss": 34.0,
+    "error": 52.0
+   },
+   {
+    "utc": "2008-01-19T13:04:15",
+    "gauss": 86.0,
+    "error": 79.0
+   },
+   {
+    "utc": "2008-01-20T13:06:39",
+    "gauss": 11.0,
+    "error": 46.0
+   },
+   {
+    "utc": "2008-01-21T08:37:30",
+    "gauss": 135.0,
+    "error": 54.0
+   },
+   {
+    "utc": "2008-01-21T13:03:28",
+    "gauss": 131.0,
+    "error": 58.0
+   },
+   {
+    "utc": "2008-01-22T11:28:19",
+    "gauss": 166.0,
+    "error": 54.0
+   }
+  ],
+  "longitudinalSource": "arXiv:1005.5552, journal of observations of DX Cnc: UT at mid-exposure and longitudinal field of each spectrum"
+ }
+}

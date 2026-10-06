@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-2105-00019",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wood et al. (2021): New Observational Constraints on the Winds of M Dwarf Stars",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2105.00019"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/abfda5"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2105.00019",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/abfda5",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2105.00019",
+      "checkedOn": "2026-10-06",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wood et al. (2021)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2105.00019"
+    }
+  ],
+  "creators": [
+    "Brian E. Wood",
+    "Hans-Reinhard Mueller",
+    "Seth Redfield",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

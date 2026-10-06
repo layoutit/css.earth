@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "iota-horologii-corona",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        256861070345287260,
+        220493939959668160,
+        -415045727553215700
+      ],
+      "localToReferenceXyzw": [
+        0.3933293137089263,
+        0.8560122346471911,
+        0.3048234618117618,
+        0.1400634222082293
+      ],
+      "metersPerUnit": 807012000,
+      "boundsUnits": {
+        "min": [
+          -4,
+          -4,
+          -4
+        ],
+        "max": [
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "iota-horologii"
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}

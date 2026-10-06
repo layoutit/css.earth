@@ -230,6 +230,187 @@
           "group": "field-components",
           "label": "Around the star"
         }
+      },
+      {
+        "id": "radial-field-2014-12",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Dec 2014",
+        "thumbnail": "chi1-orionis-dataset-radial-field-2014-12.webp",
+        "surface": "chi1-orionis-surface-radial-field-2014-12@2x.webp",
+        "poles": "chi1-orionis-poles-radial-field-2014-12@2x.webp",
+        "source": {
+          "id": "chi1-orionis-espadons-map-radial-field-2014-12",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Dec 2014"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-50",
+            "0",
+            "+50"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-50",
+              "0",
+              "+50"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Dec 2014, reconstructed in this project from 16 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Step through the 2 maps to see the field change.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 65° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-2015-01",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Jan 2015",
+        "thumbnail": "chi1-orionis-dataset-radial-field-2015-01.webp",
+        "surface": "chi1-orionis-surface-radial-field-2015-01@2x.webp",
+        "poles": "chi1-orionis-poles-radial-field-2015-01@2x.webp",
+        "source": {
+          "id": "chi1-orionis-espadons-map-radial-field-2015-01",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Jan 2015"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-50",
+            "0",
+            "+50"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-50",
+              "0",
+              "+50"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Jan 2015, reconstructed in this project from 28 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Step through the 2 maps to see the field change.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 65° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "corona-dec-2014",
+        "label": "Derived corona",
+        "thumbnail": "chi1-orionis-dataset-color.webp",
+        "volume": {
+          "objectId": "chi1-orionis-corona",
+          "datasetId": "dec-2014",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Dec 2014 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.7 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 23 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Dec 2014",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-jan-2015",
+        "label": "Derived corona",
+        "thumbnail": "chi1-orionis-dataset-color.webp",
+        "volume": {
+          "objectId": "chi1-orionis-corona",
+          "datasetId": "jan-2015",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Jan 2015 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.7 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 23 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Jan 2015",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-dec-2017",
+        "label": "Derived corona",
+        "thumbnail": "chi1-orionis-dataset-color.webp",
+        "volume": {
+          "objectId": "chi1-orionis-corona",
+          "datasetId": "dec-2017",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Dec 2017 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.7 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 23 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density.",
+        "step": {
+          "group": "derived-corona",
+          "label": "Dec 2017",
+          "autoplay": false,
+          "opens": "last"
+        }
       }
     ]
   },

@@ -11,6 +11,7 @@ BE Ceti is a young star like the Sun that turns once every 7.7 days. Its magneti
 - **Radial field**: red where the field points out of the star, blue where it points in.
 - **Meridional field**: the field running north or south along the surface.
 - **Azimuthal field**: the field running one way or the other around the spin axis.
+- **Derived corona**: the gas around the star, placed by the field of the radial map. It is derived here, not observed and not published; its own package says how ([be-ceti-corona](../be-ceti-corona/README.md)).
 
 Each map uses its paper figure's color bar: the field linear from minus to plus the strongest value of any component in that map, through white at 0; the brightness from the map's darkest to its brightest point, in the figure's black-red-orange-white colors. A thin black line marks 65° S, below which the star never faces us, as the paper's horizontal line does. [latitude-belt-map.ts](../../../packages/bake/src/objects/raster/latitude-belt-map.ts) reads the tables and interpolates around each belt and between belts, so every cell keeps its deposited value. The star turns too slowly for a brightness map: the deposited brightness is 1.0 everywhere, so none is shown.
 

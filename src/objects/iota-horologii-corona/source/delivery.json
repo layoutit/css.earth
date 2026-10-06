@@ -1,0 +1,232 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "iota-horologii-corona",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/iota-horologii-corona/source/volume-sep-2018.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/iota-horologii-corona/source/provenance.json"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-oct-2015.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-dec-2015.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-feb-2016.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-jun-2016.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-aug-2016.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-sep-2016.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-oct-2016.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-dec-2016.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-feb-2017.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-jul-2017.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-aug-2017.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-sep-2017.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-nov-2017.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-dec-2017.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-feb-2018.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-jun-2018.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-aug-2018.ktx2"
+    },
+    {
+      "path": "src/objects/iota-horologii-corona/source/density-sep-2018.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      40.643356167825516,
+      -50.798667507202715
+    ],
+    "distancePc": 17.3573350227535,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.0003107932188693984
+  },
+  "sourceUrl": "https://zenodo.org/records/17251923",
+  "description": "ι Horologii’s corona, derived here from 18 observed maps of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
+  "defaultDataset": "sep-2018",
+  "framingRadiusUnits": 4,
+  "attachedTo": "iota-horologii",
+  "acceptedLabResult": "iota-horologii-corona-density-grids",
+  "compactInputs": {
+    "path": "src/objects/iota-horologii-corona/source/volume-sep-2018.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "oct-2015",
+      "label": "Derived corona · Oct 2015",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-oct-2015.json"
+      }
+    },
+    {
+      "id": "dec-2015",
+      "label": "Derived corona · Dec 2015",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-dec-2015.json"
+      }
+    },
+    {
+      "id": "feb-2016",
+      "label": "Derived corona · Feb 2016",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-feb-2016.json"
+      }
+    },
+    {
+      "id": "jun-2016",
+      "label": "Derived corona · Jun 2016",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-jun-2016.json"
+      }
+    },
+    {
+      "id": "aug-2016",
+      "label": "Derived corona · Aug 2016",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-aug-2016.json"
+      }
+    },
+    {
+      "id": "sep-2016",
+      "label": "Derived corona · Sep 2016",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-sep-2016.json"
+      }
+    },
+    {
+      "id": "oct-2016",
+      "label": "Derived corona · Oct 2016",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-oct-2016.json"
+      }
+    },
+    {
+      "id": "dec-2016",
+      "label": "Derived corona · Dec 2016",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-dec-2016.json"
+      }
+    },
+    {
+      "id": "feb-2017",
+      "label": "Derived corona · Feb 2017",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-feb-2017.json"
+      }
+    },
+    {
+      "id": "jul-2017",
+      "label": "Derived corona · Jul 2017",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-jul-2017.json"
+      }
+    },
+    {
+      "id": "aug-2017",
+      "label": "Derived corona · Aug 2017",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-aug-2017.json"
+      }
+    },
+    {
+      "id": "sep-2017",
+      "label": "Derived corona · Sep 2017",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-sep-2017.json"
+      }
+    },
+    {
+      "id": "nov-2017",
+      "label": "Derived corona · Nov 2017",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-nov-2017.json"
+      }
+    },
+    {
+      "id": "dec-2017",
+      "label": "Derived corona · Dec 2017",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-dec-2017.json"
+      }
+    },
+    {
+      "id": "feb-2018",
+      "label": "Derived corona · Feb 2018",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-feb-2018.json"
+      }
+    },
+    {
+      "id": "jun-2018",
+      "label": "Derived corona · Jun 2018",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-jun-2018.json"
+      }
+    },
+    {
+      "id": "aug-2018",
+      "label": "Derived corona · Aug 2018",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-aug-2018.json"
+      }
+    },
+    {
+      "id": "sep-2018",
+      "label": "Derived corona · Sep 2018",
+      "sourceUrl": "https://zenodo.org/records/17251923",
+      "recipe": {
+        "path": "src/objects/iota-horologii-corona/source/volume-sep-2018.json"
+      }
+    }
+  ]
+}

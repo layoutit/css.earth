@@ -1,0 +1,173 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "hd-6569-2015-09",
+ "target": {
+  "name": "HD 6569",
+  "raDegrees": 16.6089721,
+  "decDegrees": -14.2964182,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 57265,
+  "toMjd": 57297
+ },
+ "observations": [
+  {
+   "product": "1834039p",
+   "uri": "cadc:CFHT/1834039p.fits",
+   "bytes": 20586240,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57284.437,
+   "exposureSeconds": 576
+  },
+  {
+   "product": "1834193p",
+   "uri": "cadc:CFHT/1834193p.fits",
+   "bytes": 20586240,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57285.477,
+   "exposureSeconds": 576
+  },
+  {
+   "product": "1834197p",
+   "uri": "cadc:CFHT/1834197p.fits",
+   "bytes": 20586240,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57285.486,
+   "exposureSeconds": 576
+  },
+  {
+   "product": "1834416p",
+   "uri": "cadc:CFHT/1834416p.fits",
+   "bytes": 20586240,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57287.432,
+   "exposureSeconds": 576
+  },
+  {
+   "product": "1834629p",
+   "uri": "cadc:CFHT/1834629p.fits",
+   "bytes": 20580480,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57288.535,
+   "exposureSeconds": 1152
+  },
+  {
+   "product": "1834755p",
+   "uri": "cadc:CFHT/1834755p.fits",
+   "bytes": 20586240,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57289.366,
+   "exposureSeconds": 1152
+  },
+  {
+   "product": "1834922p",
+   "uri": "cadc:CFHT/1834922p.fits",
+   "bytes": 20586240,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57290.495,
+   "exposureSeconds": 1152
+  },
+  {
+   "product": "1835221p",
+   "uri": "cadc:CFHT/1835221p.fits",
+   "bytes": 20586240,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57293.574,
+   "exposureSeconds": 1152
+  },
+  {
+   "product": "1835225p",
+   "uri": "cadc:CFHT/1835225p.fits",
+   "bytes": 20586240,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57293.59,
+   "exposureSeconds": 1152
+  },
+  {
+   "product": "1835367p",
+   "uri": "cadc:CFHT/1835367p.fits",
+   "bytes": 20580480,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57294.539,
+   "exposureSeconds": 1152
+  },
+  {
+   "product": "1835547p",
+   "uri": "cadc:CFHT/1835547p.fits",
+   "bytes": 20580480,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57295.544,
+   "exposureSeconds": 1152
+  },
+  {
+   "product": "1835551p",
+   "uri": "cadc:CFHT/1835551p.fits",
+   "bytes": 20580480,
+   "targetName": "HD 6569",
+   "proposal": "15BP19",
+   "mjdStart": 57295.56,
+   "exposureSeconds": 1152
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 5024,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 66534229: Teff"
+  },
+  "logGravity": {
+   "value": 4.58,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 66534229: logg"
+  }
+ },
+ "radialVelocity": {
+  "value": 7.878,
+  "source": "SIMBAD, radial velocity of HD 6569 (2018A&A...616A...7S)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 5.25,
+   "source": "Folsom, C. P. et al., arXiv:1711.08636: Table 2 (fundimental-param-table): P_rot, v sin i, v_r, i, R, M, dOmega"
+  },
+  "inclinationDegrees": {
+   "value": 77,
+   "source": "Folsom, C. P. et al., arXiv:1711.08636: +13/-15 deg"
+  },
+  "periodDays": {
+   "value": 7.13,
+   "source": "Folsom, C. P. et al., arXiv:1711.08636: Table 2 (fundimental-param-table): P_rot, v sin i, v_r, i, R, M, dOmega"
+  },
+  "maximumDegree": {
+   "value": 15,
+   "source": "Folsom, C. P. et al., arXiv:1711.08636: 'carried out to 15th degree in l'"
+  }
+ },
+ "published": {
+  "paper": "Folsom, C. P. et al., arXiv:1711.08636",
+  "url": "https://arxiv.org/abs/1711.08636",
+  "meanGauss": {
+   "value": 25,
+   "source": "Table 1 (observations-table), Table 3 (table-mag-param): mean field strength, epoch 18 Sep - 29 Sep 2015"
+  },
+  "toroidalPercent": {
+   "value": 40,
+   "source": "Table 1 (observations-table), Table 3 (table-mag-param): toroidal share of the energy, epoch 18 Sep - 29 Sep 2015"
+  },
+  "spectra": {
+   "value": 12,
+   "source": "Table 1 (observations-table), Table 3 (table-mag-param): spectra used"
+  },
+  "note": "instruments ESPaDOnS; maxG: 48.6; poloidalPct: 60; axisymmetricPct: 85.2; axisymmetricOf: total energy"
+ }
+}

@@ -1,0 +1,154 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "ek-dra-2006-11",
+ "target": {
+  "name": "EK Dra",
+  "raDegrees": 219.75087668,
+  "decDegrees": 64.29166101,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 54039,
+  "toMjd": 54102
+ },
+ "observations": [
+  {
+   "product": "881547p",
+   "uri": "cadc:CFHT/881547p.fits",
+   "bytes": 20574720,
+   "targetName": "EK Dra",
+   "proposal": "06bf42",
+   "mjdStart": 54069.677,
+   "exposureSeconds": 240
+  },
+  {
+   "product": "881823p",
+   "uri": "cadc:CFHT/881823p.fits",
+   "bytes": 20580480,
+   "targetName": "EK Dra",
+   "proposal": "06bf42",
+   "mjdStart": 54074.672,
+   "exposureSeconds": 240
+  },
+  {
+   "product": "881959p",
+   "uri": "cadc:CFHT/881959p.fits",
+   "bytes": 20583360,
+   "targetName": "EK Dra",
+   "proposal": "06bc10",
+   "mjdStart": 54075.672,
+   "exposureSeconds": 400
+  },
+  {
+   "product": "882084p",
+   "uri": "cadc:CFHT/882084p.fits",
+   "bytes": 20580480,
+   "targetName": "ek dra",
+   "proposal": "06bf08",
+   "mjdStart": 54076.668,
+   "exposureSeconds": 720
+  },
+  {
+   "product": "882088p",
+   "uri": "cadc:CFHT/882088p.fits",
+   "bytes": 20580480,
+   "targetName": "ek dra",
+   "proposal": "06bf08",
+   "mjdStart": 54076.679,
+   "exposureSeconds": 240
+  },
+  {
+   "product": "882305p",
+   "uri": "cadc:CFHT/882305p.fits",
+   "bytes": 20580480,
+   "targetName": "ek dra",
+   "proposal": "06bf08",
+   "mjdStart": 54077.671,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "882483p",
+   "uri": "cadc:CFHT/882483p.fits",
+   "bytes": 20580480,
+   "targetName": "ek dra",
+   "proposal": "06bf08",
+   "mjdStart": 54078.674,
+   "exposureSeconds": 480
+  },
+  {
+   "product": "882660p",
+   "uri": "cadc:CFHT/882660p.fits",
+   "bytes": 20580480,
+   "targetName": "EKDra",
+   "proposal": "06bf08",
+   "mjdStart": 54079.671,
+   "exposureSeconds": 600
+  },
+  {
+   "product": "882779p",
+   "uri": "cadc:CFHT/882779p.fits",
+   "bytes": 20580480,
+   "targetName": "EK Dra",
+   "proposal": "06bf08",
+   "mjdStart": 54080.672,
+   "exposureSeconds": 480
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 5647,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: Teff"
+  },
+  "logGravity": {
+   "value": 4.45,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: logg"
+  },
+  "metallicity": {
+   "value": -0.07,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": -20.687,
+  "source": "SIMBAD, radial velocity of V* EK Dra (2018A&A...616A...7S)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 16.4,
+   "source": "Waite, Ian et al., arXiv:1611.07751: Table 1 (EKDra_parameters)"
+  },
+  "inclinationDegrees": {
+   "value": 60,
+   "source": "Waite, Ian et al., arXiv:1611.07751: 60 +/- 5 deg"
+  },
+  "periodDays": {
+   "value": 2.766,
+   "source": "Waite, Ian et al., arXiv:1611.07751: rotational period 2.766 +/- 0.002 d; equatorial period 2.51 +/- 0.07 d in the comparison table"
+  },
+  "maximumDegree": {
+   "value": 12,
+   "source": "Waite, Ian et al., arXiv:1611.07751: Table 1 (EKDra_parameters)"
+  },
+  "shearRadPerDay": {
+   "value": 0.27,
+   "source": "Waite, Ian et al., arXiv:1611.07751: differential rotation, approximate adopted values (Table 1); per-epoch fits are under epochs"
+  }
+ },
+ "published": {
+  "paper": "Waite, Ian et al., arXiv:1611.07751",
+  "url": "https://arxiv.org/abs/1611.07751",
+  "meanGauss": {
+   "value": 90,
+   "source": "EKDra_Mapping_Table, magpot_EKDra, journals: mean field strength, epoch Dec 2006"
+  },
+  "toroidalPercent": {
+   "value": 83,
+   "source": "EKDra_Mapping_Table, magpot_EKDra, journals: toroidal share of the energy, epoch Dec 2006"
+  },
+  "spectra": {
+   "value": 8,
+   "source": "EKDra_Mapping_Table, magpot_EKDra, journals: phi_V column of the mapping table; the topology table lists 7 phases"
+  },
+  "note": "instruments ESPaDOnS; poloidalPct: 17"
+ }
+}

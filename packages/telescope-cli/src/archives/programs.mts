@@ -1,6 +1,6 @@
 /** Where an archive's pinned programs and their receipts live: `src/archives/<archive>/programs`, beside the archive's code.
  * JWST shares one programs root: time-series directories and imaging, cube and starlight-subtraction JSON files. */
-export type ProgramArchive = 'pds' | 'keck' | 'gemini' | 'naco' | 'chandra' | 'spitzer' | 'juno' | 'hst' | 'jwst' | 'ihw';
+export type ProgramArchive = 'pds' | 'keck' | 'gemini' | 'naco' | 'chandra' | 'spitzer' | 'juno' | 'hst' | 'jwst' | 'ihw' | 'espadons';
 
 export interface ArchivePrograms {
   /** The repository-relative directory the programs and their receipts are in. */

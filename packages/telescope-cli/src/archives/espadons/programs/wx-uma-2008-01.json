@@ -1,0 +1,133 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "wx-uma-2008-01",
+ "target": {
+  "name": "WX UMa",
+  "raDegrees": 166.37868993,
+  "decDegrees": 43.52163478,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 54466,
+  "toMjd": 54831
+ },
+ "observations": [
+  {
+   "product": "965833p",
+   "uri": "cadc:CFHT/965833p.fits",
+   "bytes": 20589120,
+   "targetName": "gl 412b",
+   "proposal": "07Bf29b",
+   "mjdStart": 54483.419,
+   "exposureSeconds": 1081.535
+  },
+  {
+   "product": "965906p",
+   "uri": "cadc:CFHT/965906p.fits",
+   "bytes": 20589120,
+   "targetName": "gl412b",
+   "proposal": "07Bf29b",
+   "mjdStart": 54484.41,
+   "exposureSeconds": 2240
+  },
+  {
+   "product": "966042p",
+   "uri": "cadc:CFHT/966042p.fits",
+   "bytes": 20589120,
+   "targetName": "GJ412b",
+   "proposal": "07Bf28b",
+   "mjdStart": 54485.599,
+   "exposureSeconds": 2000
+  },
+  {
+   "product": "966142p",
+   "uri": "cadc:CFHT/966142p.fits",
+   "bytes": 20592000,
+   "targetName": "gl412b",
+   "proposal": "07Bf29b",
+   "mjdStart": 54486.407,
+   "exposureSeconds": 2160
+  },
+  {
+   "product": "966174p",
+   "uri": "cadc:CFHT/966174p.fits",
+   "bytes": 20592000,
+   "targetName": "gl412b",
+   "proposal": "07Bf29b",
+   "mjdStart": 54486.598,
+   "exposureSeconds": 2080
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 2860,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 252803606: Teff"
+  },
+  "logGravity": {
+   "value": 5.24,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 252803606: logg"
+  }
+ },
+ "radialVelocity": {
+  "value": 70.02,
+  "source": "SIMBAD, radial velocity of BD+44 2051B (2018MNRAS.475.1960F)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 5,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "inclinationDegrees": {
+   "value": 40,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "periodDays": {
+   "value": 0.78,
+   "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+  },
+  "maximumDegree": {
+   "value": 4,
+   "source": "Morin, J. et al., arXiv:1005.5552: l_ZDI column of the fit table"
+  }
+ },
+ "published": {
+  "paper": "Morin, J. et al., arXiv:1005.5552",
+  "url": "https://arxiv.org/abs/1005.5552",
+  "meanGauss": {
+   "value": 1030,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): mean field strength, epoch 2008"
+  },
+  "toroidalPercent": {
+   "value": 3,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): toroidal share of the energy, epoch 2008"
+  },
+  "spectra": {
+   "value": 4,
+   "source": "Table 2 (tab:obs), fit table of the star, Table 9 (tab:syn): spectra used"
+  },
+  "note": "instruments ESPaDOnS; maxG: 4550; poloidalPct: 97; axisymmetricPct: 83; axisymmetricOf: total energy; two definitions printed as x/y",
+  "longitudinalFields": [
+   {
+    "utc": "2008-01-19T10:10:43",
+    "gauss": -1416.0,
+    "error": 206.0
+   },
+   {
+    "utc": "2008-01-20T14:40:40",
+    "gauss": -1725.0,
+    "error": 115.0
+   },
+   {
+    "utc": "2008-01-21T10:06:06",
+    "gauss": -2135.0,
+    "error": 123.0
+   },
+   {
+    "utc": "2008-01-21T14:40:34",
+    "gauss": -1968.0,
+    "error": 114.0
+   }
+  ],
+  "longitudinalSource": "arXiv:1005.5552, journal of observations of WX UMa: UT at mid-exposure and longitudinal field of each spectrum"
+ }
+}

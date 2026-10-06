@@ -1,0 +1,200 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "eq-peg-a-2006-08",
+ "target": {
+  "name": "EQ Peg A",
+  "raDegrees": 352.96739105,
+  "decDegrees": 19.93725844,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 53951,
+  "toMjd": 53961
+ },
+ "observations": [
+  {
+   "product": "861091p",
+   "uri": "cadc:CFHT/861091p.fits",
+   "bytes": 20592000,
+   "targetName": "eqPegA",
+   "proposal": "06bf10",
+   "mjdStart": 53952.485,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "861115p",
+   "uri": "cadc:CFHT/861115p.fits",
+   "bytes": 20592000,
+   "targetName": "eqPegA",
+   "proposal": "06bf10",
+   "mjdStart": 53952.602,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "861261p",
+   "uri": "cadc:CFHT/861261p.fits",
+   "bytes": 20592000,
+   "targetName": "eqpegA",
+   "proposal": "06bf10",
+   "mjdStart": 53954.462,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "861289p",
+   "uri": "cadc:CFHT/861289p.fits",
+   "bytes": 20592000,
+   "targetName": "eqpegA",
+   "proposal": "06bf10",
+   "mjdStart": 53954.628,
+   "exposureSeconds": 800
+  },
+  {
+   "product": "861405p",
+   "uri": "cadc:CFHT/861405p.fits",
+   "bytes": 20592000,
+   "targetName": "eq peg a",
+   "proposal": "06bf10",
+   "mjdStart": 53955.475,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "861433p",
+   "uri": "cadc:CFHT/861433p.fits",
+   "bytes": 20592000,
+   "targetName": "eqpega",
+   "proposal": "06bf10",
+   "mjdStart": 53955.63,
+   "exposureSeconds": 1200
+  },
+  {
+   "product": "861574p",
+   "uri": "cadc:CFHT/861574p.fits",
+   "bytes": 20597760,
+   "targetName": "eqpegA",
+   "proposal": "06bf10",
+   "mjdStart": 53956.481,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "861602p",
+   "uri": "cadc:CFHT/861602p.fits",
+   "bytes": 20597760,
+   "targetName": "eqpega",
+   "proposal": "06bf10",
+   "mjdStart": 53956.615,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "861606p",
+   "uri": "cadc:CFHT/861606p.fits",
+   "bytes": 20597760,
+   "targetName": "eqpega",
+   "proposal": "06bf10",
+   "mjdStart": 53956.627,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "861734p",
+   "uri": "cadc:CFHT/861734p.fits",
+   "bytes": 20592000,
+   "targetName": "eqpeg a",
+   "proposal": "06bf10",
+   "mjdStart": 53957.479,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "861762p",
+   "uri": "cadc:CFHT/861762p.fits",
+   "bytes": 20592000,
+   "targetName": "eqpeg a",
+   "proposal": "06bf10",
+   "mjdStart": 53957.631,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "861859p",
+   "uri": "cadc:CFHT/861859p.fits",
+   "bytes": 20592000,
+   "targetName": "eqpega",
+   "proposal": "06bf10",
+   "mjdStart": 53958.481,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "861887p",
+   "uri": "cadc:CFHT/861887p.fits",
+   "bytes": 20592000,
+   "targetName": "eqpeg a",
+   "proposal": "06bf10",
+   "mjdStart": 53958.629,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "861981p",
+   "uri": "cadc:CFHT/861981p.fits",
+   "bytes": 20592000,
+   "targetName": "eqpega",
+   "proposal": "06bf10",
+   "mjdStart": 53959.486,
+   "exposureSeconds": 640
+  },
+  {
+   "product": "862009p",
+   "uri": "cadc:CFHT/862009p.fits",
+   "bytes": 20592000,
+   "targetName": "eqpega",
+   "proposal": "06bf10",
+   "mjdStart": 53959.634,
+   "exposureSeconds": 640
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 3345,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 247985094: Teff"
+  },
+  "logGravity": {
+   "value": 4.83,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 247985094: logg"
+  }
+ },
+ "radialVelocity": {
+  "value": 0.31,
+  "source": "SIMBAD, radial velocity of BD+19 5116A (2018MNRAS.475.1960F)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 17.5,
+   "source": "Morin, J. et al., arXiv:0808.1423 (Mon.Not.Roy.Astron.Soc.390:567-581,2010): Table 1; Sect. 8"
+  },
+  "inclinationDegrees": {
+   "value": 60,
+   "source": "Morin, J. et al., arXiv:0808.1423 (Mon.Not.Roy.Astron.Soc.390:567-581,2010): Table 1; Sect. 8"
+  },
+  "periodDays": {
+   "value": 1.06,
+   "source": "Morin, J. et al., arXiv:0808.1423 (Mon.Not.Roy.Astron.Soc.390:567-581,2010): P_ZDI = 1.06 d; P_rot = 1.061(4) d"
+  },
+  "maximumDegree": {
+   "value": 6,
+   "source": "Morin, J. et al., arXiv:0808.1423 (Mon.Not.Roy.Astron.Soc.390:567-581,2010): Table 1; Sect. 8"
+  }
+ },
+ "published": {
+  "paper": "Morin, J. et al., arXiv:0808.1423 (Mon.Not.Roy.Astron.Soc.390:567-581,2010)",
+  "url": "https://arxiv.org/abs/0808.1423",
+  "meanGauss": {
+   "value": 480,
+   "source": "Table 7 (tab:syn); journal table; star section: mean field strength, epoch 2006"
+  },
+  "toroidalPercent": {
+   "value": 15,
+   "source": "Table 7 (tab:syn); journal table; star section: toroidal share of the energy, epoch 2006"
+  },
+  "spectra": {
+   "value": 15,
+   "source": "Table 7 (tab:syn); journal table; star section: spectra used"
+  },
+  "note": "instruments ESPaDOnS; poloidalPct: 85; axisymmetricPct: 69; axisymmetricOf: total energy; first value m = 0, second m < l/2"
+ }
+}

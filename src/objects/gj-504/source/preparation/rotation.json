@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-display-orientation@1",
-  "rightAscensionDegrees": 19.192300524893994,
-  "declinationDegrees": 80.57499534585095,
-  "displayMeridianDegrees": -90,
+  "rightAscensionDegrees": 19.19129252279214,
+  "declinationDegrees": 9.174429082056186,
+  "displayMeridianDegrees": 270,
   "phase": "arbitrary-display-phase",
-  "source": "No rotation axis of GJ 504 on the sky is measured; the papers cited in the README were checked. The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
-  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
-  "qualification": "Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of GJ 504 are unmeasured; the axis shown is where celestial north lies on the sky."
+  "source": "Spin inclination 18.6 degrees from the line of sight (Bonnefoy et al. (2018), A&A, arXiv:1807.00657, abstract: the rotation axis is 18.6 +4.3/-3.8 degrees (or 162.4) from the line of sight) and rotation period 3.33 d at the equator (Bonnefoy et al. (2018), A&A, arXiv:1807.00657, Sect. 3: rotation period 3.33 +0.08/-0.10 d, from Donahue et al. (1996)): the values the star's magnetic maps are fitted with, with the north pole tilted toward us. The direction of the axis on the sky is not measured; it is placed toward celestial north as a convention. Longitude 0 faces the Sun as a display convention.",
+  "coordinateSystem": "ICRF/J2000. +Z is the spin axis above; +X is the display meridian; east longitude. No spin is propagated.",
+  "qualification": "The tilt of the spin axis is measured; its position angle on the sky and the rotation phase are display conventions."
 }

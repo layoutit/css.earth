@@ -29,6 +29,8 @@ For a body's sources, processing, evidence and known problems, read its
 | One example picture per telescope | [Telescope examples](telescope-examples.md) |
 | Pinned sources, commands and outputs for the 18 telescope data families | [Telescope family examples](telescope-family-examples/README.md) |
 | Exoplanet light curves to maps | [Eclipse mapping](eclipse-mapping.md) |
+| Archived polarised spectra of a star to a map of its magnetic field | [A star's magnetic map from archived spectra](stellar-magnetic-maps-from-spectra.md) |
+| A star's magnetic map to a corona drawn around it | [A star's corona from its magnetic map](stellar-corona-from-magnetic-maps.md) |
 | JWST images to sky band composites | [JWST imaging](jwst-imaging.md) |
 | What JWST's public archive holds and what this project can reduce | [JWST ledger](jwst-ledger.md) |
 | Hubble observations re-calibrated from raw and checked against the archive | [Hubble](hubble.md) |

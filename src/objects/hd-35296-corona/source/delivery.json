@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "hd-35296-corona",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/hd-35296-corona/source/volume-dec-2017.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/hd-35296-corona/source/provenance.json"
+    },
+    {
+      "path": "src/objects/hd-35296-corona/source/density-dec-2017.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      81.10804151489697,
+      17.383482099045942
+    ],
+    "distancePc": 14.579634716203845,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.0003508670886913907
+  },
+  "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+  "description": "HD 35296’s corona, derived here from an observed map of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
+  "defaultDataset": "dec-2017",
+  "framingRadiusUnits": 4,
+  "attachedTo": "hd-35296",
+  "acceptedLabResult": "hd-35296-corona-density-grids",
+  "compactInputs": {
+    "path": "src/objects/hd-35296-corona/source/volume-dec-2017.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "dec-2017",
+      "label": "Derived corona · Dec 2017",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+      "recipe": {
+        "path": "src/objects/hd-35296-corona/source/volume-dec-2017.json"
+      }
+    }
+  ]
+}

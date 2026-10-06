@@ -47,6 +47,46 @@
         },
         "qualification": "Photosphere color from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,068 K and log g 4.27 (u1 0.403, u2 0.292): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "radial-field-2009-10",
+      "output": "gumala-surface-{id}{suffix}.webp",
+      "thumbnail": "gumala-dataset-{id}.webp",
+      "source": "science/espadons/hd-179949-2009-09.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2009-10",
+        "label": "Oct 2009",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/hd-179949-2009-09.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -10,
+        "maximum": 10,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-10",
+          "0",
+          "+10"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 18 ESPaDOnS spectra of 25 September 2009 to 10 October 2009 (reduced chi-square 1.00, against 2.9 with no field); mean field 3.1 G. A reduction made in this project, not a published map. Black line: 60 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Oct 2009",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
     }
   ],
   "emission": {

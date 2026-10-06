@@ -17,10 +17,26 @@ GJ 504 is a Sun-like star whose measured size allows two ages, 21 million or 4 b
 **Color dataset.** Gaia DR3 publishes no sampled spectrum of this bright star, so the color is a Planck spectrum at its published temperature, weighted by the CIE 1931 2° observer from 380 to 780 nm and converted to sRGB with the D65 white ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)). Its limb is darkened by the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,200 K (the record) and log g 4.26 (from the record's mass and radius (packages/astronomy/data/bodies/gj-504.json)): a model, since no fit of this star's limb exists.
 
 **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
+- **Magnetic maps.** 19 polarised spectra from CFHT's ESPaDOnS spectropolarimeter, in the
+  [Canadian Astronomy Data Centre](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/) archive (CC BY 4.0): 19 of 5 April 2025 to 9 April 2025 (program 25AF14).
+  The programs `gj-504-2025-04` in
+  [the telescope's ESPaDOnS archive](../../../packages/telescope-cli/src/archives/espadons/programs/) pin every spectrum by
+  its size, and the receipt beside each records what every step measured. The maps are the tables in
+  `source/science/espadons/`.
+
+**Magnetic maps.** The maps of these runs are made here, with the codes the method's authors publish and nothing of our
+own in between ([A star's magnetic map from archived spectra](../../../docs/stellar-magnetic-maps-from-spectra.md)): Korg
+computes the depth of 7,044 atomic lines in a 6,029 K, log g 4.23 model atmosphere, LSDpy averages them into one
+polarised profile for each spectrum, and ZDIpy fits the field to each run's profiles. The fit uses a tilt of
+18.6°, an equatorial period of 3.33 days and a projected rotation speed of 6.5 km/s
+(Bonnefoy et al. (2018)); the page draws the star with the same tilt
+([rotation.json](source/preparation/rotation.json)). Longitude 0 faces us at the middle of each run. One color scale, ±15 G, serves
+the map.
 
 ## Evidence
 
 Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. The four stars in the app, headless Chromium at 800 × 600 on this version: each is drawn in its measured color.
+- Apr 2025: the map reaches a reduced chi-square of 1.30, against 2.08 with no field; mean field 4.6 G, 19% of its energy toroidal.
 
 ## Known problems
 
@@ -28,3 +44,7 @@ Run of 2026-09-23 (this version): see the planet's README for its placement agai
 - The limb darkening is a model: the quadratic law Claret & Bloemen (2011), A&A 529, A75 computes from ATLAS model atmospheres for the Johnson V band at 6,200 K (the record) and log g 4.26 (from the record's mass and radius (packages/astronomy/data/bodies/gj-504.json)).
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+- **The magnetic maps are this project's reduction, not published maps.** How tightly a map is fitted is a choice the
+  mapping code leaves open; it is set on 21 published maps, whose mean fields the same recipe reproduces with a scatter of a
+  factor 1.4. The direction of the axis on the sky is not measured, only its tilt toward us.
+

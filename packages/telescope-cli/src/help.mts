@@ -20,7 +20,7 @@ Human entry points:
   telescope leads TARGET | --class CLASS [--json] [--out DIRECTORY]
   telescope stars GALAXY [--json] [--out DIRECTORY]
   telescope new-object SPEC.json [--check] [--skip-existing] [--json]
-  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... | --from-table CLASS:GALAXY=TABLE[#ROW]... | --from-esa PAGE_ID=PICTURE_URL... --out SPEC.json
+  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... | --from-table CLASS:GALAXY=TABLE[#ROW]... | --from-esa PAGE_ID=PICTURE_URL... | --from-magnetic HOST... | --from-spectra HOST... --out SPEC.json
   telescope ascl SOFTWARE [--json]
   telescope ascl --product PRODUCT.json|RUN/pick-N/result.json [--json]
   telescope wwt-fits EXPLORE.json --pick N --level N --x X --y Y --out DIRECTORY
@@ -53,7 +53,11 @@ an eclipsing binary from DEBCat, --from-apokasc a Kepler-field giant from APOKAS
 what was generated; --skip-existing leaves objects already in the universe alone. --from-esa drafts a picture ESA publishes for Hubble or Webb as one more
 dataset of a page that shows a shaped layer bank (m57=https://esawebb.org/images/weic2320c/): it reads the picture's page and the sky tags in its JPEG, finds the
 star the picture shows at the page's place, and leaves the sentences and what each color takes on the bank's walls to write; a spec of pictures writes each
-picture's bank and its page's dataset, may be run again, and bakes with SPEC.json --bake. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
+picture's bank and its page's dataset, may be run again, and bakes with SPEC.json --bake. --from-magnetic drafts a star's corona, derived from the magnetic maps its
+page already shows and its ROSAT X-ray flux (docs/stellar-corona-from-magnetic-maps.md); a spec of coronae writes each star's volume bank and its "Derived corona"
+dataset, and bakes with SPEC.json --bake. --from-spectra drafts a star's magnetic maps from the programs of archived polarised spectra this repository has
+reduced (packages/telescope-cli/src/archives/espadons); a spec of magneticMaps writes each map as a "Radial field" dataset of the star's page, and bakes with
+SPEC.json --bake. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
 Papers lists up to 20 OpenAlex works that name the target, by any spelling of its catalogue names, in their title or
 abstract, with the instrument and any one of the --about phrases (singular or plural); --fulltext asks for the works whose
 indexed full text names them. It uses arXiv's Atom API when OpenAlex is unavailable or its daily budget is spent, and the

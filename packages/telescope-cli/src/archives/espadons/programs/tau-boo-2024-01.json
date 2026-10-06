@@ -1,0 +1,219 @@
+{
+ "schema": "cssearth-espadons-program@1",
+ "id": "tau-boo-2024-01",
+ "target": {
+  "name": "tau Boo",
+  "object": "tepiamenit",
+  "raDegrees": 206.8134,
+  "decDegrees": 17.4572,
+  "radiusDegrees": 0.02
+ },
+ "span": {
+  "fromMjd": 60309,
+  "toMjd": 60329
+ },
+ "observations": [
+  {
+   "product": "2947583p",
+   "uri": "cadc:CFHT/2947583p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60309.555,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2947587p",
+   "uri": "cadc:CFHT/2947587p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60309.564,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2948050p",
+   "uri": "cadc:CFHT/2948050p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60310.625,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2948054p",
+   "uri": "cadc:CFHT/2948054p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60310.634,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2948452p",
+   "uri": "cadc:CFHT/2948452p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60311.545,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2948456p",
+   "uri": "cadc:CFHT/2948456p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60311.554,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2948476p",
+   "uri": "cadc:CFHT/2948476p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60311.666,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2948480p",
+   "uri": "cadc:CFHT/2948480p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60311.675,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2948849p",
+   "uri": "cadc:CFHT/2948849p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60312.663,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2948853p",
+   "uri": "cadc:CFHT/2948853p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60312.673,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2949426p",
+   "uri": "cadc:CFHT/2949426p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60314.637,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2949430p",
+   "uri": "cadc:CFHT/2949430p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60314.646,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2949864p",
+   "uri": "cadc:CFHT/2949864p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60315.56,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2949868p",
+   "uri": "cadc:CFHT/2949868p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60315.57,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2950396p",
+   "uri": "cadc:CFHT/2950396p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60317.554,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2950400p",
+   "uri": "cadc:CFHT/2950400p.fits",
+   "bytes": 20689920,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60317.563,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2951515p",
+   "uri": "cadc:CFHT/2951515p.fits",
+   "bytes": 20692800,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60328.58,
+   "exposureSeconds": 700
+  },
+  {
+   "product": "2951519p",
+   "uri": "cadc:CFHT/2951519p.fits",
+   "bytes": 20692800,
+   "targetName": "tau Boo",
+   "proposal": "24AF19",
+   "mjdStart": 60328.589,
+   "exposureSeconds": 700
+  }
+ ],
+ "atmosphere": {
+  "effectiveTemperatureK": {
+   "value": 6466,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: Teff"
+  },
+  "logGravity": {
+   "value": 4.25,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: logg"
+  },
+  "metallicity": {
+   "value": 0.26,
+   "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: [M/H]"
+  }
+ },
+ "radialVelocity": {
+  "value": -16.03,
+  "source": "SIMBAD, radial velocity of * tau Boo (2002ApJS..141..503N)"
+ },
+ "star": {
+  "vsiniKmS": {
+   "value": 14.27,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501), Table 1: v sin i 14.27 ± 0.06 km/s"
+  },
+  "inclinationDegrees": {
+   "value": 45,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the tilt their maps are made with, 45 degrees, beside the derived 44.5 ± 1.5 degrees their Table 1 quotes"
+  },
+  "periodDays": {
+   "value": 3.142,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the equatorial rate of 2.00 rad/d their Fourier-transform measurement of the differential rotation assumes, which is 3.142 d"
+  },
+  "shearRadPerDay": {
+   "value": 0.35,
+   "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): differential rotation 0.35 ± 0.14 rad/d from the Fourier transform of the line profile"
+  },
+  "maximumDegree": {
+   "value": 8,
+   "source": "Donati et al. (2008), MNRAS, doi:10.1111/j.1365-2966.2008.12946.x (arXiv:0802.1584), Sect. 3: the expansion is limited to degree 8"
+  }
+ }
+}

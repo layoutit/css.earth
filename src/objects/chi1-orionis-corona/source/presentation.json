@@ -1,0 +1,192 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "chi1-orionis-corona",
+  "name": "χ¹ Orionis corona",
+  "defaultDataset": "dec-2017",
+  "bank": {
+    "path": "src/objects/chi1-orionis-corona/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "dec-2014",
+      "path": "src/objects/chi1-orionis-corona/source/volume-dec-2014.json"
+    },
+    {
+      "id": "jan-2015",
+      "path": "src/objects/chi1-orionis-corona/source/volume-jan-2015.json"
+    },
+    {
+      "id": "dec-2017",
+      "path": "src/objects/chi1-orionis-corona/source/volume-dec-2017.json"
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "datasets": [
+    {
+      "id": "dec-2014",
+      "label": "Derived corona · Dec 2014",
+      "title": "χ¹ Orionis’s corona, derived from its magnetic field of Dec 2014",
+      "description": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. The map of the star's surface magnetic field from Dec 2014 (CFHT ESPaDOnS · mapped here) is continued outward as a field with no electric currents, out to 2.5 stellar radii, where the wind is taken to pull it straight. Gas at rest fills a sheet about the line where that field reverses, as the Sun's bright streamers do; the wind fills the rest. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.7 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 23 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The method was tested on the one star with a published simulation of its corona, ε Eridani, where its density is within a factor of two of the simulation's on average, and on the Sun, whose corona is measured dense along the same line. The rotation axis is 65° from the line of sight, as the map was fitted, and the corona is drawn in the same frame as the star's own maps; where the axis points on the sky and the star's rotation phase today are conventions.",
+      "summary": "Derived here, not an image: gas placed by the magnetic field mapped in Dec 2014.",
+      "detail": "96³ grid, 1 to 4 stellar radii",
+      "facts": [
+        {
+          "id": "kind",
+          "label": "Kind",
+          "value": "Derived here from an observed magnetic map; not an observation and not a published result"
+        },
+        {
+          "id": "map",
+          "label": "Magnetic map",
+          "value": "Dec 2014, mean strength 8.5 gauss (CFHT ESPaDOnS · mapped here)"
+        },
+        {
+          "id": "xray",
+          "label": "X-ray output",
+          "value": "1.2 × 10^29 erg per second, 0.1 to 2.4 keV (ROSAT) (Freund et al. (2022), A&A 664, A105)"
+        },
+        {
+          "id": "temperature",
+          "label": "Temperature",
+          "value": "4.7 million kelvin, not measured: the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129)"
+        },
+        {
+          "id": "mass-loss",
+          "label": "Mass loss",
+          "value": "23 times the Sun's, not measured: what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37), uncertain by a factor of 5 or more"
+        },
+        {
+          "id": "density",
+          "label": "Density at 2 radii",
+          "value": "2.3 × 10^6 electrons per cm³ away from the sheet, 68 times that on it"
+        },
+        {
+          "id": "orientation",
+          "label": "Orientation",
+          "value": "Rotation axis 65° from the line of sight, as the map was fitted; its direction on the sky and the rotation phase are conventions"
+        },
+        {
+          "id": "filter",
+          "label": "Brightness",
+          "value": "Proportional to density at each distance; the gas on the sheet is fully bright. The fall-off with distance is compressed (log₁₀ density, 1.0 × 10^5 to 1.0 × 10^9 cm⁻³)"
+        }
+      ],
+      "input": "map-dec-2014",
+      "preview": {
+        "path": "src/objects/chi1-orionis-corona/source/previews/dec-2014.png",
+        "authoredFrom": "map-dec-2014"
+      }
+    },
+    {
+      "id": "jan-2015",
+      "label": "Derived corona · Jan 2015",
+      "title": "χ¹ Orionis’s corona, derived from its magnetic field of Jan 2015",
+      "description": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. The map of the star's surface magnetic field from Jan 2015 (CFHT ESPaDOnS · mapped here) is continued outward as a field with no electric currents, out to 2.5 stellar radii, where the wind is taken to pull it straight. Gas at rest fills a sheet about the line where that field reverses, as the Sun's bright streamers do; the wind fills the rest. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.7 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 23 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The method was tested on the one star with a published simulation of its corona, ε Eridani, where its density is within a factor of two of the simulation's on average, and on the Sun, whose corona is measured dense along the same line. The rotation axis is 65° from the line of sight, as the map was fitted, and the corona is drawn in the same frame as the star's own maps; where the axis points on the sky and the star's rotation phase today are conventions.",
+      "summary": "Derived here, not an image: gas placed by the magnetic field mapped in Jan 2015.",
+      "detail": "96³ grid, 1 to 4 stellar radii",
+      "facts": [
+        {
+          "id": "kind",
+          "label": "Kind",
+          "value": "Derived here from an observed magnetic map; not an observation and not a published result"
+        },
+        {
+          "id": "map",
+          "label": "Magnetic map",
+          "value": "Jan 2015, mean strength 6.7 gauss (CFHT ESPaDOnS · mapped here)"
+        },
+        {
+          "id": "xray",
+          "label": "X-ray output",
+          "value": "1.2 × 10^29 erg per second, 0.1 to 2.4 keV (ROSAT) (Freund et al. (2022), A&A 664, A105)"
+        },
+        {
+          "id": "temperature",
+          "label": "Temperature",
+          "value": "4.7 million kelvin, not measured: the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129)"
+        },
+        {
+          "id": "mass-loss",
+          "label": "Mass loss",
+          "value": "23 times the Sun's, not measured: what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37), uncertain by a factor of 5 or more"
+        },
+        {
+          "id": "density",
+          "label": "Density at 2 radii",
+          "value": "2.1 × 10^6 electrons per cm³ away from the sheet, 72 times that on it"
+        },
+        {
+          "id": "orientation",
+          "label": "Orientation",
+          "value": "Rotation axis 65° from the line of sight, as the map was fitted; its direction on the sky and the rotation phase are conventions"
+        },
+        {
+          "id": "filter",
+          "label": "Brightness",
+          "value": "Proportional to density at each distance; the gas on the sheet is fully bright. The fall-off with distance is compressed (log₁₀ density, 1.0 × 10^5 to 1.0 × 10^9 cm⁻³)"
+        }
+      ],
+      "input": "map-jan-2015",
+      "preview": {
+        "path": "src/objects/chi1-orionis-corona/source/previews/jan-2015.png",
+        "authoredFrom": "map-jan-2015"
+      }
+    },
+    {
+      "id": "dec-2017",
+      "label": "Derived corona · Dec 2017",
+      "title": "χ¹ Orionis’s corona, derived from its magnetic field of Dec 2017",
+      "description": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. The map of the star's surface magnetic field from Dec 2017 (Willamo et al. · HARPSpol) is continued outward as a field with no electric currents, out to 2.5 stellar radii, where the wind is taken to pull it straight. Gas at rest fills a sheet about the line where that field reverses, as the Sun's bright streamers do; the wind fills the rest. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 4.7 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 23 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The method was tested on the one star with a published simulation of its corona, ε Eridani, where its density is within a factor of two of the simulation's on average, and on the Sun, whose corona is measured dense along the same line. The rotation axis is 65° from the line of sight, as the map was fitted, and the corona is drawn in the same frame as the star's own maps; where the axis points on the sky and the star's rotation phase today are conventions.",
+      "summary": "Derived here, not an image: gas placed by the magnetic field mapped in Dec 2017.",
+      "detail": "96³ grid, 1 to 4 stellar radii",
+      "facts": [
+        {
+          "id": "kind",
+          "label": "Kind",
+          "value": "Derived here from an observed magnetic map; not an observation and not a published result"
+        },
+        {
+          "id": "map",
+          "label": "Magnetic map",
+          "value": "Dec 2017, mean strength 5.8 gauss (Willamo et al. · HARPSpol)"
+        },
+        {
+          "id": "xray",
+          "label": "X-ray output",
+          "value": "1.2 × 10^29 erg per second, 0.1 to 2.4 keV (ROSAT) (Freund et al. (2022), A&A 664, A105)"
+        },
+        {
+          "id": "temperature",
+          "label": "Temperature",
+          "value": "4.7 million kelvin, not measured: the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129)"
+        },
+        {
+          "id": "mass-loss",
+          "label": "Mass loss",
+          "value": "23 times the Sun's, not measured: what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37), uncertain by a factor of 5 or more"
+        },
+        {
+          "id": "density",
+          "label": "Density at 2 radii",
+          "value": "2.1 × 10^6 electrons per cm³ away from the sheet, 73 times that on it"
+        },
+        {
+          "id": "orientation",
+          "label": "Orientation",
+          "value": "Rotation axis 65° from the line of sight, as the map was fitted; its direction on the sky and the rotation phase are conventions"
+        },
+        {
+          "id": "filter",
+          "label": "Brightness",
+          "value": "Proportional to density at each distance; the gas on the sheet is fully bright. The fall-off with distance is compressed (log₁₀ density, 1.0 × 10^5 to 1.0 × 10^9 cm⁻³)"
+        }
+      ],
+      "input": "map-dec-2017",
+      "preview": {
+        "path": "src/objects/chi1-orionis-corona/source/previews/dec-2017.png",
+        "authoredFrom": "map-dec-2017"
+      }
+    }
+  ]
+}

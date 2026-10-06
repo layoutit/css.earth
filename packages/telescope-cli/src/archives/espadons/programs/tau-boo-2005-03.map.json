@@ -1,0 +1,1796 @@
+{
+ "schema": "cssearth-espadons-map@2",
+ "program": "tau-boo-2005-03",
+ "target": {
+  "name": "tau Boo",
+  "object": "tepiamenit",
+  "raDegrees": 206.8134,
+  "decDegrees": 17.4572,
+  "radiusDegrees": 0.02
+ },
+ "inputs": {
+  "observations": [
+   {
+    "product": "785775p",
+    "uri": "cadc:CFHT/785775p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785779p",
+    "uri": "cadc:CFHT/785779p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785783p",
+    "uri": "cadc:CFHT/785783p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785787p",
+    "uri": "cadc:CFHT/785787p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785791p",
+    "uri": "cadc:CFHT/785791p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785795p",
+    "uri": "cadc:CFHT/785795p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785799p",
+    "uri": "cadc:CFHT/785799p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785803p",
+    "uri": "cadc:CFHT/785803p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785807p",
+    "uri": "cadc:CFHT/785807p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785811p",
+    "uri": "cadc:CFHT/785811p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785815p",
+    "uri": "cadc:CFHT/785815p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785819p",
+    "uri": "cadc:CFHT/785819p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785823p",
+    "uri": "cadc:CFHT/785823p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785827p",
+    "uri": "cadc:CFHT/785827p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785831p",
+    "uri": "cadc:CFHT/785831p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785835p",
+    "uri": "cadc:CFHT/785835p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785839p",
+    "uri": "cadc:CFHT/785839p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785843p",
+    "uri": "cadc:CFHT/785843p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "785847p",
+    "uri": "cadc:CFHT/785847p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786203p",
+    "uri": "cadc:CFHT/786203p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786207p",
+    "uri": "cadc:CFHT/786207p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786211p",
+    "uri": "cadc:CFHT/786211p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786215p",
+    "uri": "cadc:CFHT/786215p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786219p",
+    "uri": "cadc:CFHT/786219p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786223p",
+    "uri": "cadc:CFHT/786223p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786227p",
+    "uri": "cadc:CFHT/786227p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786231p",
+    "uri": "cadc:CFHT/786231p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786235p",
+    "uri": "cadc:CFHT/786235p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786239p",
+    "uri": "cadc:CFHT/786239p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786243p",
+    "uri": "cadc:CFHT/786243p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786247p",
+    "uri": "cadc:CFHT/786247p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786251p",
+    "uri": "cadc:CFHT/786251p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786255p",
+    "uri": "cadc:CFHT/786255p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786259p",
+    "uri": "cadc:CFHT/786259p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786263p",
+    "uri": "cadc:CFHT/786263p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786267p",
+    "uri": "cadc:CFHT/786267p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786271p",
+    "uri": "cadc:CFHT/786271p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786275p",
+    "uri": "cadc:CFHT/786275p.fits",
+    "bytes": 20600640
+   },
+   {
+    "product": "786648p",
+    "uri": "cadc:CFHT/786648p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786652p",
+    "uri": "cadc:CFHT/786652p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786656p",
+    "uri": "cadc:CFHT/786656p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786660p",
+    "uri": "cadc:CFHT/786660p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786664p",
+    "uri": "cadc:CFHT/786664p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786668p",
+    "uri": "cadc:CFHT/786668p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786672p",
+    "uri": "cadc:CFHT/786672p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786676p",
+    "uri": "cadc:CFHT/786676p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786680p",
+    "uri": "cadc:CFHT/786680p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786684p",
+    "uri": "cadc:CFHT/786684p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786688p",
+    "uri": "cadc:CFHT/786688p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786692p",
+    "uri": "cadc:CFHT/786692p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786696p",
+    "uri": "cadc:CFHT/786696p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786700p",
+    "uri": "cadc:CFHT/786700p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786704p",
+    "uri": "cadc:CFHT/786704p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786708p",
+    "uri": "cadc:CFHT/786708p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786712p",
+    "uri": "cadc:CFHT/786712p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786716p",
+    "uri": "cadc:CFHT/786716p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786720p",
+    "uri": "cadc:CFHT/786720p.fits",
+    "bytes": 20589120
+   },
+   {
+    "product": "786724p",
+    "uri": "cadc:CFHT/786724p.fits",
+    "bytes": 20589120
+   }
+  ],
+  "lineData": {
+   "url": "http://kurucz.harvard.edu/linelists/gfnew/gfall08oct17.dat",
+   "bytes": 371660460,
+   "credit": "R. L. Kurucz, atomic line list gfall, version of 8 October 2017"
+  },
+  "toolchain": {
+   "file": "packages/telescope-cli/src/archives/espadons/toolchain.json",
+   "requirements": [
+    "numpy==2.5.3",
+    "scipy==1.16.3",
+    "matplotlib==3.11.2",
+    "astropy==8.0.1",
+    "LSDpy==1.0.0",
+    "specpolFlow==1.1.0"
+   ],
+   "zdipy": {
+    "url": "https://github.com/folsomcp/ZDIpy",
+    "commit": "86d9f98c426a709f3298bab95fda5f6f5e65e111"
+   },
+   "julia": {
+    "download": {
+     "path": "julia-1.12.7-macaarch64.tar.gz",
+     "url": "https://julialang-s3.julialang.org/bin/mac/aarch64/1.12/julia-1.12.7-macaarch64.tar.gz",
+     "bytes": 230457194
+    },
+    "executable": "julia-1.12.7/bin/julia",
+    "environment": "packages/telescope-cli/src/archives/espadons/korg"
+   }
+  }
+ },
+ "mask": {
+  "atmosphere": {
+   "effectiveTemperatureK": {
+    "value": 6466,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: Teff"
+   },
+   "logGravity": {
+    "value": 4.25,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: logg"
+   },
+   "metallicity": {
+    "value": 0.26,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 72506701: [M/H]"
+   }
+  },
+  "korg": "1.3.1",
+  "candidates": 327037,
+  "synthesised": 21403,
+  "minimumDepth": 0.1,
+  "deepEnough": 8758,
+  "lines": 6169,
+  "species": {
+   "26.00": 4192,
+   "24.00": 867,
+   "28.00": 608,
+   "22.00": 485,
+   "26.01": 298,
+   "14.00": 298,
+   "25.00": 266,
+   "27.00": 265,
+   "22.01": 201,
+   "24.01": 156,
+   "6.00": 134,
+   "20.00": 130,
+   "23.00": 124,
+   "40.01": 113,
+   "23.01": 104,
+   "12.00": 99,
+   "16.00": 56,
+   "39.01": 54,
+   "25.01": 47,
+   "21.01": 43,
+   "20.01": 29,
+   "11.00": 21,
+   "13.00": 18,
+   "12.01": 17,
+   "8.00": 16,
+   "40.00": 15,
+   "21.00": 12,
+   "29.00": 12,
+   "14.01": 11,
+   "56.01": 10,
+   "28.01": 9,
+   "15.00": 7,
+   "27.01": 6,
+   "38.01": 6,
+   "7.00": 6,
+   "44.00": 4,
+   "19.00": 4,
+   "39.00": 4,
+   "30.00": 4,
+   "42.00": 3,
+   "41.01": 2,
+   "13.01": 1,
+   "38.00": 1
+  },
+  "meanDepth": 0.4233,
+  "meanWavelengthNm": 480.81,
+  "meanLande": 1.2181
+ },
+ "velocity": {
+  "kmS": -16.26,
+  "catalogued": {
+   "value": -16.03,
+   "source": "SIMBAD, radial velocity of * tau Boo (2002ApJS..141..503N)"
+  },
+  "searchCentreKmS": -15.4,
+  "searchDepth": 0.0882
+ },
+ "profiles": {
+  "halfWidthKmS": 50.4,
+  "stepKmS": 1.8,
+  "fieldHalfWidthKmS": 25.1,
+  "lineHalfWidthKmS": 34,
+  "spectra": [
+   {
+    "product": "785775p",
+    "utc": "2005-03-23T08:57:13",
+    "mjd": 53452.37307,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.16,
+     "error": 1.73,
+     "nullGauss": -2.73
+    },
+    "falseAlarm": 0.6405426714055312,
+    "nullFalseAlarm": 0.024016792350579963,
+    "centreKmS": -16.28,
+    "chiSquare": {
+     "intensity": 3562.5955,
+     "stokesV": 1.1345,
+     "null": 1.1624
+    },
+    "offset": {
+     "stokesV": -0.0000015019,
+     "null": -0.0000040427
+    }
+   },
+   {
+    "product": "785779p",
+    "utc": "2005-03-23T09:19:31",
+    "mjd": 53452.38856,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.51,
+     "error": 1.23,
+     "nullGauss": 0.55
+    },
+    "falseAlarm": 0.6042271146299327,
+    "nullFalseAlarm": 0.17193825628091086,
+    "centreKmS": -16.24,
+    "chiSquare": {
+     "intensity": 7833.4667,
+     "stokesV": 1.16,
+     "null": 1.2354
+    },
+    "offset": {
+     "stokesV": -0.0000015181,
+     "null": -6.031e-7
+    }
+   },
+   {
+    "product": "785783p",
+    "utc": "2005-03-23T09:42:04",
+    "mjd": 53452.40422,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.36,
+     "error": 1.2,
+     "nullGauss": 0.4
+    },
+    "falseAlarm": 0.9405142979190524,
+    "nullFalseAlarm": 0.3573090089873251,
+    "centreKmS": -16.24,
+    "chiSquare": {
+     "intensity": 8404.706,
+     "stokesV": 1.1558,
+     "null": 1.1699
+    },
+    "offset": {
+     "stokesV": -9.364e-7,
+     "null": 2.203e-7
+    }
+   },
+   {
+    "product": "785787p",
+    "utc": "2005-03-23T10:05:19",
+    "mjd": 53452.42036,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.35,
+     "error": 1.25,
+     "nullGauss": 0.6
+    },
+    "falseAlarm": 0.3285607056276423,
+    "nullFalseAlarm": 0.9592473098633596,
+    "centreKmS": -16.26,
+    "chiSquare": {
+     "intensity": 7131.6166,
+     "stokesV": 1.1994,
+     "null": 1.2094
+    },
+    "offset": {
+     "stokesV": -0.0000012907,
+     "null": -0.0000017109
+    }
+   },
+   {
+    "product": "785791p",
+    "utc": "2005-03-23T10:27:53",
+    "mjd": 53452.43604,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.83,
+     "error": 1.27,
+     "nullGauss": -0.63
+    },
+    "falseAlarm": 0.9124180591554132,
+    "nullFalseAlarm": 0.7330576932685373,
+    "centreKmS": -16.27,
+    "chiSquare": {
+     "intensity": 6853.8521,
+     "stokesV": 1.1727,
+     "null": 1.2041
+    },
+    "offset": {
+     "stokesV": -8.0323e-7,
+     "null": -0.0000023226
+    }
+   },
+   {
+    "product": "785795p",
+    "utc": "2005-03-23T10:51:04",
+    "mjd": 53452.45213,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.19,
+     "error": 1.32,
+     "nullGauss": 2.54
+    },
+    "falseAlarm": 0.5512037509059406,
+    "nullFalseAlarm": 0.9319460842541076,
+    "centreKmS": -16.29,
+    "chiSquare": {
+     "intensity": 6541.5422,
+     "stokesV": 1.19,
+     "null": 1.1843
+    },
+    "offset": {
+     "stokesV": -0.0000013011,
+     "null": -0.0000016897
+    }
+   },
+   {
+    "product": "785799p",
+    "utc": "2005-03-23T11:13:44",
+    "mjd": 53452.46788,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.75,
+     "error": 1.34,
+     "nullGauss": 0.99
+    },
+    "falseAlarm": 0.9290057405086967,
+    "nullFalseAlarm": 0.17062926332605288,
+    "centreKmS": -16.3,
+    "chiSquare": {
+     "intensity": 6168.7667,
+     "stokesV": 1.1783,
+     "null": 1.1709
+    },
+    "offset": {
+     "stokesV": -0.0000018827,
+     "null": -0.0000016524
+    }
+   },
+   {
+    "product": "785803p",
+    "utc": "2005-03-23T11:36:52",
+    "mjd": 53452.48395,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.45,
+     "error": 1.33,
+     "nullGauss": -0.54
+    },
+    "falseAlarm": 0.4619245709015495,
+    "nullFalseAlarm": 0.7832798757448436,
+    "centreKmS": -16.31,
+    "chiSquare": {
+     "intensity": 6335.3333,
+     "stokesV": 1.1783,
+     "null": 1.1857
+    },
+    "offset": {
+     "stokesV": -0.0000015459,
+     "null": -8.4167e-7
+    }
+   },
+   {
+    "product": "785807p",
+    "utc": "2005-03-23T11:59:29",
+    "mjd": 53452.49964,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.35,
+     "error": 1.3,
+     "nullGauss": 0.04
+    },
+    "falseAlarm": 0.9625736678929407,
+    "nullFalseAlarm": 0.8238514385006797,
+    "centreKmS": -16.33,
+    "chiSquare": {
+     "intensity": 6391.3771,
+     "stokesV": 1.1744,
+     "null": 1.2065
+    },
+    "offset": {
+     "stokesV": -0.0000027623,
+     "null": -0.0000012778
+    }
+   },
+   {
+    "product": "785811p",
+    "utc": "2005-03-23T12:22:39",
+    "mjd": 53452.51573,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.68,
+     "error": 1.18,
+     "nullGauss": -0.73
+    },
+    "falseAlarm": 0.33985175646898147,
+    "nullFalseAlarm": 0.658651635357495,
+    "centreKmS": -16.31,
+    "chiSquare": {
+     "intensity": 8285.1134,
+     "stokesV": 1.1662,
+     "null": 1.1886
+    },
+    "offset": {
+     "stokesV": -0.0000013464,
+     "null": -0.0000011402
+    }
+   },
+   {
+    "product": "785815p",
+    "utc": "2005-03-23T12:45:11",
+    "mjd": 53452.53139,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.11,
+     "error": 1.19,
+     "nullGauss": 0.71
+    },
+    "falseAlarm": 0.7412093291138996,
+    "nullFalseAlarm": 0.15938021145444314,
+    "centreKmS": -16.33,
+    "chiSquare": {
+     "intensity": 8350.9817,
+     "stokesV": 1.1527,
+     "null": 1.1579
+    },
+    "offset": {
+     "stokesV": -0.0000018606,
+     "null": -3.9673e-7
+    }
+   },
+   {
+    "product": "785819p",
+    "utc": "2005-03-23T13:09:00",
+    "mjd": 53452.54793,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.81,
+     "error": 1.25,
+     "nullGauss": -0.95
+    },
+    "falseAlarm": 0.4348071165568457,
+    "nullFalseAlarm": 0.5400607855502217,
+    "centreKmS": -16.34,
+    "chiSquare": {
+     "intensity": 7675.1875,
+     "stokesV": 1.1576,
+     "null": 1.2033
+    },
+    "offset": {
+     "stokesV": -9.8063e-7,
+     "null": -0.0000025481
+    }
+   },
+   {
+    "product": "785823p",
+    "utc": "2005-03-23T13:31:33",
+    "mjd": 53452.56358,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.38,
+     "error": 1.3,
+     "nullGauss": -1.06
+    },
+    "falseAlarm": 0.09510863310018203,
+    "nullFalseAlarm": 0.7335141400584979,
+    "centreKmS": -16.35,
+    "chiSquare": {
+     "intensity": 6762.4052,
+     "stokesV": 1.1421,
+     "null": 1.1552
+    },
+    "offset": {
+     "stokesV": -0.0000022756,
+     "null": -0.0000011194
+    }
+   },
+   {
+    "product": "785827p",
+    "utc": "2005-03-23T13:54:37",
+    "mjd": 53452.57961,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.91,
+     "error": 1.34,
+     "nullGauss": 0.87
+    },
+    "falseAlarm": 0.3768700399759243,
+    "nullFalseAlarm": 0.9151269769837401,
+    "centreKmS": -16.36,
+    "chiSquare": {
+     "intensity": 6371.4662,
+     "stokesV": 1.1709,
+     "null": 1.1771
+    },
+    "offset": {
+     "stokesV": -0.0000023209,
+     "null": -0.000002051
+    }
+   },
+   {
+    "product": "785831p",
+    "utc": "2005-03-23T14:17:07",
+    "mjd": 53452.59523,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.65,
+     "error": 1.37,
+     "nullGauss": -0.13
+    },
+    "falseAlarm": 0.7221661041785903,
+    "nullFalseAlarm": 0.7446083198181991,
+    "centreKmS": -16.4,
+    "chiSquare": {
+     "intensity": 6216.4816,
+     "stokesV": 1.1204,
+     "null": 1.1498
+    },
+    "offset": {
+     "stokesV": -0.0000017398,
+     "null": -0.0000015448
+    }
+   },
+   {
+    "product": "785835p",
+    "utc": "2005-03-23T14:40:18",
+    "mjd": 53452.61132,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.24,
+     "error": 1.36,
+     "nullGauss": -0.25
+    },
+    "falseAlarm": 0.3475275129005363,
+    "nullFalseAlarm": 0.6858832690492167,
+    "centreKmS": -16.41,
+    "chiSquare": {
+     "intensity": 6258.9394,
+     "stokesV": 1.1403,
+     "null": 1.1591
+    },
+    "offset": {
+     "stokesV": -6.4764e-7,
+     "null": -0.0000023839
+    }
+   },
+   {
+    "product": "785839p",
+    "utc": "2005-03-23T15:02:52",
+    "mjd": 53452.627,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.72,
+     "error": 1.35,
+     "nullGauss": 0.53
+    },
+    "falseAlarm": 0.1347215640290944,
+    "nullFalseAlarm": 0.12227202273801929,
+    "centreKmS": -16.42,
+    "chiSquare": {
+     "intensity": 6287.4833,
+     "stokesV": 1.1364,
+     "null": 1.1307
+    },
+    "offset": {
+     "stokesV": -0.0000012052,
+     "null": -0.0000025945
+    }
+   },
+   {
+    "product": "785843p",
+    "utc": "2005-03-23T15:24:42",
+    "mjd": 53452.64216,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.46,
+     "error": 1.55,
+     "nullGauss": -2.17
+    },
+    "falseAlarm": 0.6373436994710685,
+    "nullFalseAlarm": 0.926938720927732,
+    "centreKmS": -16.44,
+    "chiSquare": {
+     "intensity": 4896.7605,
+     "stokesV": 1.1514,
+     "null": 1.1473
+    },
+    "offset": {
+     "stokesV": -0.0000016532,
+     "null": -0.0000023528
+    }
+   },
+   {
+    "product": "785847p",
+    "utc": "2005-03-23T15:46:07",
+    "mjd": 53452.65703,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.1,
+     "error": 1.43,
+     "nullGauss": 0.85
+    },
+    "falseAlarm": 0.9232998180614621,
+    "nullFalseAlarm": 0.9087862543295319,
+    "centreKmS": -16.44,
+    "chiSquare": {
+     "intensity": 5835.3181,
+     "stokesV": 1.1569,
+     "null": 1.1625
+    },
+    "offset": {
+     "stokesV": -0.0000027755,
+     "null": -0.0000014581
+    }
+   },
+   {
+    "product": "786203p",
+    "utc": "2005-03-24T08:46:56",
+    "mjd": 53453.36593,
+    "used": true,
+    "longitudinal": {
+     "gauss": -2.59,
+     "error": 1.28,
+     "nullGauss": -0.1
+    },
+    "falseAlarm": 0.23598711930061167,
+    "nullFalseAlarm": 0.20975116959565065,
+    "centreKmS": -16.38,
+    "chiSquare": {
+     "intensity": 6889.4078,
+     "stokesV": 1.1872,
+     "null": 1.2054
+    },
+    "offset": {
+     "stokesV": -0.0000016044,
+     "null": -0.0000023389
+    }
+   },
+   {
+    "product": "786207p",
+    "utc": "2005-03-24T09:10:01",
+    "mjd": 53453.38196,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.14,
+     "error": 1.23,
+     "nullGauss": 0.74
+    },
+    "falseAlarm": 0.5820357825367496,
+    "nullFalseAlarm": 0.36078799101019476,
+    "centreKmS": -16.35,
+    "chiSquare": {
+     "intensity": 7420.039,
+     "stokesV": 1.1874,
+     "null": 1.2094
+    },
+    "offset": {
+     "stokesV": -3.7525e-7,
+     "null": -0.000001717
+    }
+   },
+   {
+    "product": "786211p",
+    "utc": "2005-03-24T09:33:11",
+    "mjd": 53453.39806,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.11,
+     "error": 1.22,
+     "nullGauss": 0.7
+    },
+    "falseAlarm": 0.7643655597012249,
+    "nullFalseAlarm": 0.897849734841721,
+    "centreKmS": -16.33,
+    "chiSquare": {
+     "intensity": 7368.3589,
+     "stokesV": 1.2036,
+     "null": 1.2156
+    },
+    "offset": {
+     "stokesV": -0.0000014969,
+     "null": -0.0000021298
+    }
+   },
+   {
+    "product": "786215p",
+    "utc": "2005-03-24T09:55:49",
+    "mjd": 53453.41376,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.59,
+     "error": 1.21,
+     "nullGauss": -0.06
+    },
+    "falseAlarm": 0.8500190106629293,
+    "nullFalseAlarm": 0.5780193360764277,
+    "centreKmS": -16.33,
+    "chiSquare": {
+     "intensity": 7279.8413,
+     "stokesV": 1.1763,
+     "null": 1.1798
+    },
+    "offset": {
+     "stokesV": -0.0000024899,
+     "null": -0.0000011858
+    }
+   },
+   {
+    "product": "786219p",
+    "utc": "2005-03-24T10:18:57",
+    "mjd": 53453.42983,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.31,
+     "error": 1.2,
+     "nullGauss": -1.68
+    },
+    "falseAlarm": 0.7326896620026839,
+    "nullFalseAlarm": 0.32366631147282465,
+    "centreKmS": -16.31,
+    "chiSquare": {
+     "intensity": 7428.9927,
+     "stokesV": 1.1451,
+     "null": 1.1543
+    },
+    "offset": {
+     "stokesV": -0.0000012347,
+     "null": -0.0000023442
+    }
+   },
+   {
+    "product": "786223p",
+    "utc": "2005-03-24T10:41:33",
+    "mjd": 53453.44552,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.55,
+     "error": 1.21,
+     "nullGauss": 0.57
+    },
+    "falseAlarm": 0.8854376464115283,
+    "nullFalseAlarm": 0.45770235684407456,
+    "centreKmS": -16.31,
+    "chiSquare": {
+     "intensity": 7350.6294,
+     "stokesV": 1.1465,
+     "null": 1.1511
+    },
+    "offset": {
+     "stokesV": -4.7416e-7,
+     "null": -0.0000019738
+    }
+   },
+   {
+    "product": "786227p",
+    "utc": "2005-03-24T11:04:13",
+    "mjd": 53453.46126,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.4,
+     "error": 1.17,
+     "nullGauss": 0.51
+    },
+    "falseAlarm": 0.6447888833637523,
+    "nullFalseAlarm": 0.03580764118586566,
+    "centreKmS": -16.3,
+    "chiSquare": {
+     "intensity": 7946.4058,
+     "stokesV": 1.1529,
+     "null": 1.1772
+    },
+    "offset": {
+     "stokesV": -0.0000018366,
+     "null": 6.1167e-8
+    }
+   },
+   {
+    "product": "786231p",
+    "utc": "2005-03-24T11:26:46",
+    "mjd": 53453.47693,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.37,
+     "error": 1.17,
+     "nullGauss": -0.69
+    },
+    "falseAlarm": 0.7659125080966845,
+    "nullFalseAlarm": 0.9757733821897053,
+    "centreKmS": -16.3,
+    "chiSquare": {
+     "intensity": 7846.7801,
+     "stokesV": 1.139,
+     "null": 1.2163
+    },
+    "offset": {
+     "stokesV": -0.0000021753,
+     "null": -0.0000021874
+    }
+   },
+   {
+    "product": "786235p",
+    "utc": "2005-03-24T11:49:59",
+    "mjd": 53453.49305,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.16,
+     "error": 1.17,
+     "nullGauss": 0.04
+    },
+    "falseAlarm": 0.6878442209354023,
+    "nullFalseAlarm": 0.0363817633896093,
+    "centreKmS": -16.3,
+    "chiSquare": {
+     "intensity": 8126.1692,
+     "stokesV": 1.1699,
+     "null": 1.1567
+    },
+    "offset": {
+     "stokesV": -6.8397e-7,
+     "null": -0.0000012583
+    }
+   },
+   {
+    "product": "786239p",
+    "utc": "2005-03-24T12:12:32",
+    "mjd": 53453.50872,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.02,
+     "error": 1.19,
+     "nullGauss": -1.24
+    },
+    "falseAlarm": 0.3745275369376895,
+    "nullFalseAlarm": 0.20376821336457251,
+    "centreKmS": -16.28,
+    "chiSquare": {
+     "intensity": 7700.5383,
+     "stokesV": 1.1502,
+     "null": 1.1603
+    },
+    "offset": {
+     "stokesV": -0.0000025045,
+     "null": -6.0963e-7
+    }
+   },
+   {
+    "product": "786243p",
+    "utc": "2005-03-24T12:35:12",
+    "mjd": 53453.52446,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.4,
+     "error": 1.15,
+     "nullGauss": -1.08
+    },
+    "falseAlarm": 0.1708333551998733,
+    "nullFalseAlarm": 0.08972976423869494,
+    "centreKmS": -16.26,
+    "chiSquare": {
+     "intensity": 7947.0678,
+     "stokesV": 1.1345,
+     "null": 1.1466
+    },
+    "offset": {
+     "stokesV": -9.9164e-7,
+     "null": -0.0000019255
+    }
+   },
+   {
+    "product": "786247p",
+    "utc": "2005-03-24T12:57:49",
+    "mjd": 53453.54015,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.54,
+     "error": 1.14,
+     "nullGauss": 0.51
+    },
+    "falseAlarm": 0.8305462831349157,
+    "nullFalseAlarm": 0.5900030273623442,
+    "centreKmS": -16.29,
+    "chiSquare": {
+     "intensity": 8751.3205,
+     "stokesV": 1.1841,
+     "null": 1.2108
+    },
+    "offset": {
+     "stokesV": -0.0000017604,
+     "null": -0.000001643
+    }
+   },
+   {
+    "product": "786251p",
+    "utc": "2005-03-24T13:24:31",
+    "mjd": 53453.5587,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.44,
+     "error": 1.14,
+     "nullGauss": 0.15
+    },
+    "falseAlarm": 0.5780303004883802,
+    "nullFalseAlarm": 0.9870068601407259,
+    "centreKmS": -16.26,
+    "chiSquare": {
+     "intensity": 8819.7306,
+     "stokesV": 1.1907,
+     "null": 1.2127
+    },
+    "offset": {
+     "stokesV": -0.0000010804,
+     "null": 1.7256e-8
+    }
+   },
+   {
+    "product": "786255p",
+    "utc": "2005-03-24T13:47:04",
+    "mjd": 53453.57436,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.88,
+     "error": 1.15,
+     "nullGauss": 0.56
+    },
+    "falseAlarm": 0.8158264170559903,
+    "nullFalseAlarm": 0.4128057595868906,
+    "centreKmS": -16.27,
+    "chiSquare": {
+     "intensity": 8905.0086,
+     "stokesV": 1.1456,
+     "null": 1.1513
+    },
+    "offset": {
+     "stokesV": -0.0000019192,
+     "null": -0.0000017777
+    }
+   },
+   {
+    "product": "786259p",
+    "utc": "2005-03-24T14:09:46",
+    "mjd": 53453.59012,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.4,
+     "error": 1.2,
+     "nullGauss": -0.63
+    },
+    "falseAlarm": 0.57428244262326,
+    "nullFalseAlarm": 0.532530953268959,
+    "centreKmS": -16.24,
+    "chiSquare": {
+     "intensity": 8095.8754,
+     "stokesV": 1.1634,
+     "null": 1.1543
+    },
+    "offset": {
+     "stokesV": -0.0000022049,
+     "null": -0.0000022316
+    }
+   },
+   {
+    "product": "786263p",
+    "utc": "2005-03-24T14:32:19",
+    "mjd": 53453.60578,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.29,
+     "error": 1.26,
+     "nullGauss": 2.61
+    },
+    "falseAlarm": 0.20580057855413836,
+    "nullFalseAlarm": 0.006247380559337934,
+    "centreKmS": -16.22,
+    "chiSquare": {
+     "intensity": 6771.8194,
+     "stokesV": 1.1264,
+     "null": 1.2028
+    },
+    "offset": {
+     "stokesV": -0.0000018428,
+     "null": -0.0000029144
+    }
+   },
+   {
+    "product": "786267p",
+    "utc": "2005-03-24T14:55:51",
+    "mjd": 53453.62213,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.66,
+     "error": 1.46,
+     "nullGauss": -0.22
+    },
+    "falseAlarm": 0.8631247635677176,
+    "nullFalseAlarm": 0.7399502397321218,
+    "centreKmS": -16.21,
+    "chiSquare": {
+     "intensity": 5066.7919,
+     "stokesV": 1.1398,
+     "null": 1.1533
+    },
+    "offset": {
+     "stokesV": -0.0000028835,
+     "null": -0.0000032353
+    }
+   },
+   {
+    "product": "786271p",
+    "utc": "2005-03-24T15:18:31",
+    "mjd": 53453.63786,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.93,
+     "error": 1.55,
+     "nullGauss": -0.35
+    },
+    "falseAlarm": 0.39791372861991026,
+    "nullFalseAlarm": 0.10910082566506096,
+    "centreKmS": -16.21,
+    "chiSquare": {
+     "intensity": 4565.065,
+     "stokesV": 1.1421,
+     "null": 1.1215
+    },
+    "offset": {
+     "stokesV": -0.0000021408,
+     "null": -0.0000025291
+    }
+   },
+   {
+    "product": "786275p",
+    "utc": "2005-03-24T15:41:43",
+    "mjd": 53453.65398,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.26,
+     "error": 1.72,
+     "nullGauss": -2.09
+    },
+    "falseAlarm": 0.9692755246364662,
+    "nullFalseAlarm": 0.6727010335143858,
+    "centreKmS": -16.2,
+    "chiSquare": {
+     "intensity": 3676.7554,
+     "stokesV": 1.1236,
+     "null": 1.1286
+    },
+    "offset": {
+     "stokesV": -0.0000014269,
+     "null": -0.0000022588
+    }
+   },
+   {
+    "product": "786648p",
+    "utc": "2005-03-25T08:39:28",
+    "mjd": 53454.36075,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.78,
+     "error": 2.38,
+     "nullGauss": 1.77
+    },
+    "falseAlarm": 0.09121091168126028,
+    "nullFalseAlarm": 0.3182254094881374,
+    "centreKmS": -15.8,
+    "chiSquare": {
+     "intensity": 579.5691,
+     "stokesV": 1.1685,
+     "null": 1.1626
+    },
+    "offset": {
+     "stokesV": -0.0000046315,
+     "null": -0.0000070959
+    }
+   },
+   {
+    "product": "786652p",
+    "utc": "2005-03-25T09:02:02",
+    "mjd": 53454.37642,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.22,
+     "error": 2.97,
+     "nullGauss": 0.98
+    },
+    "falseAlarm": 0.9191370782392764,
+    "nullFalseAlarm": 0.20681205228408595,
+    "centreKmS": -15.79,
+    "chiSquare": {
+     "intensity": 485.6503,
+     "stokesV": 1.5296,
+     "null": 1.5338
+    },
+    "offset": {
+     "stokesV": -0.000011148,
+     "null": -0.0000096099
+    }
+   },
+   {
+    "product": "786656p",
+    "utc": "2005-03-25T09:25:17",
+    "mjd": 53454.39256,
+    "used": true,
+    "longitudinal": {
+     "gauss": 2.01,
+     "error": 2.46,
+     "nullGauss": 0.71
+    },
+    "falseAlarm": 0.7886148186291488,
+    "nullFalseAlarm": 0.9804819911012418,
+    "centreKmS": -15.79,
+    "chiSquare": {
+     "intensity": 591.201,
+     "stokesV": 1.2606,
+     "null": 1.2682
+    },
+    "offset": {
+     "stokesV": -0.0000071867,
+     "null": -0.0000073384
+    }
+   },
+   {
+    "product": "786660p",
+    "utc": "2005-03-25T09:47:55",
+    "mjd": 53454.40829,
+    "used": true,
+    "longitudinal": {
+     "gauss": 2.71,
+     "error": 3.08,
+     "nullGauss": 1.25
+    },
+    "falseAlarm": 0.6895640828868393,
+    "nullFalseAlarm": 0.8202667192924709,
+    "centreKmS": -15.77,
+    "chiSquare": {
+     "intensity": 518.3462,
+     "stokesV": 1.7469,
+     "null": 1.7466
+    },
+    "offset": {
+     "stokesV": -0.000011578,
+     "null": -0.000012205
+    }
+   },
+   {
+    "product": "786664p",
+    "utc": "2005-03-25T10:11:10",
+    "mjd": 53454.42442,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.72,
+     "error": 2.34,
+     "nullGauss": -0.44
+    },
+    "falseAlarm": 0.4951753246933883,
+    "nullFalseAlarm": 0.7531881201587969,
+    "centreKmS": -15.77,
+    "chiSquare": {
+     "intensity": 575.433,
+     "stokesV": 1.1152,
+     "null": 1.1161
+    },
+    "offset": {
+     "stokesV": -0.0000061044,
+     "null": -0.000004304
+    }
+   },
+   {
+    "product": "786668p",
+    "utc": "2005-03-25T10:33:45",
+    "mjd": 53454.44011,
+    "used": true,
+    "longitudinal": {
+     "gauss": 4.14,
+     "error": 2.64,
+     "nullGauss": -2.25
+    },
+    "falseAlarm": 0.25310787009362823,
+    "nullFalseAlarm": 0.23940572497975365,
+    "centreKmS": -15.78,
+    "chiSquare": {
+     "intensity": 524.5291,
+     "stokesV": 1.2841,
+     "null": 1.2588
+    },
+    "offset": {
+     "stokesV": -0.0000063271,
+     "null": -0.0000094743
+    }
+   },
+   {
+    "product": "786672p",
+    "utc": "2005-03-25T10:57:17",
+    "mjd": 53454.45645,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.47,
+     "error": 3.79,
+     "nullGauss": 1.44
+    },
+    "falseAlarm": 0.06669453252321644,
+    "nullFalseAlarm": 0.6244622920085785,
+    "centreKmS": -15.77,
+    "chiSquare": {
+     "intensity": 333.4891,
+     "stokesV": 1.7299,
+     "null": 1.7241
+    },
+    "offset": {
+     "stokesV": -0.000017219,
+     "null": -0.000017766
+    }
+   },
+   {
+    "product": "786676p",
+    "utc": "2005-03-25T11:19:53",
+    "mjd": 53454.47214,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.15,
+     "error": 2.54,
+     "nullGauss": -1.64
+    },
+    "falseAlarm": 0.5899723231846696,
+    "nullFalseAlarm": 0.7097460157535478,
+    "centreKmS": -15.75,
+    "chiSquare": {
+     "intensity": 479.4282,
+     "stokesV": 1.1002,
+     "null": 1.109
+    },
+    "offset": {
+     "stokesV": -0.0000099432,
+     "null": -0.000006448
+    }
+   },
+   {
+    "product": "786680p",
+    "utc": "2005-03-25T11:42:59",
+    "mjd": 53454.48819,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.08,
+     "error": 2.51,
+     "nullGauss": 1.23
+    },
+    "falseAlarm": 0.5764149967769291,
+    "nullFalseAlarm": 0.02680349762843115,
+    "centreKmS": -15.76,
+    "chiSquare": {
+     "intensity": 490.6152,
+     "stokesV": 1.1013,
+     "null": 1.1173
+    },
+    "offset": {
+     "stokesV": -0.0000068978,
+     "null": -0.0000078959
+    }
+   },
+   {
+    "product": "786684p",
+    "utc": "2005-03-25T12:05:34",
+    "mjd": 53454.50387,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0.89,
+     "error": 2.04,
+     "nullGauss": 0.3
+    },
+    "falseAlarm": 0.7233404528726131,
+    "nullFalseAlarm": 0.7755446515179967,
+    "centreKmS": -15.73,
+    "chiSquare": {
+     "intensity": 809.4806,
+     "stokesV": 1.1564,
+     "null": 1.1539
+    },
+    "offset": {
+     "stokesV": -0.000003778,
+     "null": -0.0000037838
+    }
+   },
+   {
+    "product": "786688p",
+    "utc": "2005-03-25T12:28:50",
+    "mjd": 53454.52003,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.33,
+     "error": 1.7,
+     "nullGauss": 1.22
+    },
+    "falseAlarm": 0.7990662692276407,
+    "nullFalseAlarm": 0.19112899591318144,
+    "centreKmS": -15.72,
+    "chiSquare": {
+     "intensity": 1141.4867,
+     "stokesV": 1.0981,
+     "null": 1.0972
+    },
+    "offset": {
+     "stokesV": -0.0000024153,
+     "null": -0.0000032528
+    }
+   },
+   {
+    "product": "786692p",
+    "utc": "2005-03-25T12:51:25",
+    "mjd": 53454.53571,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.29,
+     "error": 1.79,
+     "nullGauss": -0.75
+    },
+    "falseAlarm": 0.1312683601102016,
+    "nullFalseAlarm": 0.09316299633140357,
+    "centreKmS": -15.72,
+    "chiSquare": {
+     "intensity": 990.4507,
+     "stokesV": 1.0815,
+     "null": 1.0875
+    },
+    "offset": {
+     "stokesV": -0.0000031794,
+     "null": -0.0000043299
+    }
+   },
+   {
+    "product": "786696p",
+    "utc": "2005-03-25T13:14:40",
+    "mjd": 53454.55186,
+    "used": true,
+    "longitudinal": {
+     "gauss": 1.06,
+     "error": 1.7,
+     "nullGauss": -1.76
+    },
+    "falseAlarm": 0.21575487752858313,
+    "nullFalseAlarm": 0.9492295831504913,
+    "centreKmS": -15.7,
+    "chiSquare": {
+     "intensity": 1129.0918,
+     "stokesV": 1.0937,
+     "null": 1.0843
+    },
+    "offset": {
+     "stokesV": -0.0000030437,
+     "null": -0.0000032414
+    }
+   },
+   {
+    "product": "786700p",
+    "utc": "2005-03-25T13:37:14",
+    "mjd": 53454.56753,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.79,
+     "error": 1.89,
+     "nullGauss": -3.04
+    },
+    "falseAlarm": 0.7298892268363714,
+    "nullFalseAlarm": 0.08131411423001189,
+    "centreKmS": -15.72,
+    "chiSquare": {
+     "intensity": 937.2096,
+     "stokesV": 1.1527,
+     "null": 1.1463
+    },
+    "offset": {
+     "stokesV": -5.4668e-7,
+     "null": -0.0000047649
+    }
+   },
+   {
+    "product": "786704p",
+    "utc": "2005-03-25T14:00:22",
+    "mjd": 53454.5836,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.74,
+     "error": 1.75,
+     "nullGauss": -0.39
+    },
+    "falseAlarm": 0.9914043403950457,
+    "nullFalseAlarm": 0.13753572916964862,
+    "centreKmS": -15.71,
+    "chiSquare": {
+     "intensity": 1113.3789,
+     "stokesV": 1.1584,
+     "null": 1.1641
+    },
+    "offset": {
+     "stokesV": -0.0000041742,
+     "null": -0.0000034254
+    }
+   },
+   {
+    "product": "786708p",
+    "utc": "2005-03-25T14:22:59",
+    "mjd": 53454.5993,
+    "used": true,
+    "longitudinal": {
+     "gauss": -0.58,
+     "error": 2.13,
+     "nullGauss": -1.7
+    },
+    "falseAlarm": 0.5057041415076323,
+    "nullFalseAlarm": 0.5478045756820755,
+    "centreKmS": -15.71,
+    "chiSquare": {
+     "intensity": 725.8898,
+     "stokesV": 1.1577,
+     "null": 1.1642
+    },
+    "offset": {
+     "stokesV": -0.0000034527,
+     "null": -0.0000055835
+    }
+   },
+   {
+    "product": "786712p",
+    "utc": "2005-03-25T14:46:46",
+    "mjd": 53454.61582,
+    "used": true,
+    "longitudinal": {
+     "gauss": 0,
+     "error": 4.95,
+     "nullGauss": 3.43
+    },
+    "falseAlarm": 0.4629997292787631,
+    "nullFalseAlarm": 0.5966396222488826,
+    "centreKmS": -15.74,
+    "chiSquare": {
+     "intensity": 200.6914,
+     "stokesV": 1.8783,
+     "null": 1.9142
+    },
+    "offset": {
+     "stokesV": -0.000030945,
+     "null": -0.000034407
+    }
+   },
+   {
+    "product": "786716p",
+    "utc": "2005-03-25T15:09:21",
+    "mjd": 53454.6315,
+    "used": false,
+    "leftOut": "its error is over 5 times the run's median",
+    "longitudinal": {
+     "gauss": 32.67,
+     "error": 19.48,
+     "nullGauss": 26.41
+    },
+    "falseAlarm": 0.6359615174829875,
+    "nullFalseAlarm": 0.6588511103239014,
+    "centreKmS": -15.71,
+    "chiSquare": {
+     "intensity": 444.7752,
+     "stokesV": 62.4588,
+     "null": 62.4249
+    },
+    "offset": {
+     "stokesV": -0.00036649,
+     "null": -0.00036811
+    }
+   },
+   {
+    "product": "786720p",
+    "utc": "2005-03-25T15:30:54",
+    "mjd": 53454.64646,
+    "used": false,
+    "leftOut": "its error is over 5 times the run's median",
+    "longitudinal": {
+     "gauss": 5.13,
+     "error": 8.91,
+     "nullGauss": -0.08
+    },
+    "falseAlarm": 0.8443252795895395,
+    "nullFalseAlarm": 0.8741856619380666,
+    "centreKmS": -15.74,
+    "chiSquare": {
+     "intensity": 165.3566,
+     "stokesV": 5.1358,
+     "null": 5.3402
+    },
+    "offset": {
+     "stokesV": -0.00011169,
+     "null": -0.00011046
+    }
+   },
+   {
+    "product": "786724p",
+    "utc": "2005-03-25T15:46:51",
+    "mjd": 53454.65755,
+    "used": true,
+    "longitudinal": {
+     "gauss": -1.65,
+     "error": 3.26,
+     "nullGauss": -3.05
+    },
+    "falseAlarm": 0.7275850269703252,
+    "nullFalseAlarm": 0.4096338815916568,
+    "centreKmS": -15.72,
+    "chiSquare": {
+     "intensity": 284.2683,
+     "stokesV": 1.1492,
+     "null": 1.166
+    },
+    "offset": {
+     "stokesV": -0.000015899,
+     "null": -0.00001027
+    }
+   }
+  ]
+ },
+ "map": {
+  "star": {
+   "vsiniKmS": {
+    "value": 14.27,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501), Table 1: v sin i 14.27 ± 0.06 km/s"
+   },
+   "inclinationDegrees": {
+    "value": 45,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the tilt their maps are made with, 45 degrees, beside the derived 44.5 ± 1.5 degrees their Table 1 quotes"
+   },
+   "periodDays": {
+    "value": 3.142,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): the equatorial rate of 2.00 rad/d their Fourier-transform measurement of the differential rotation assumes, which is 3.142 d"
+   },
+   "maximumDegree": {
+    "value": 8,
+    "source": "Donati et al. (2008), MNRAS, doi:10.1111/j.1365-2966.2008.12946.x (arXiv:0802.1584), Sect. 3: the expansion is limited to degree 8"
+   },
+   "shearRadPerDay": {
+    "value": 0.35,
+    "source": "Mengel et al. (2016), MNRAS, doi:10.1093/mnras/stw828 (arXiv:1604.02501): differential rotation 0.35 ± 0.14 rad/d from the Fourier transform of the line profile"
+   }
+  },
+  "spectraUsed": 56,
+  "maximumDegree": 8,
+  "middleMjd": 53453.51531,
+  "middleUtc": "2005-03-24T12:22:02",
+  "longitudeZero": "faces the observer at the middle of the run; longitude grows the way the star turns",
+  "chiSquareNoField": 0.921,
+  "detection": {
+   "points": 2072,
+   "sigma": -2.5
+  },
+  "ladder": [],
+  "verdict": {
+   "mapped": false,
+   "reason": "The field is not detected: the 2072 points of the run's Stokes V profiles stand -2.5 standard deviations above none (reduced chi-square 0.92), under the 4 a map asks for."
+  }
+ }
+}

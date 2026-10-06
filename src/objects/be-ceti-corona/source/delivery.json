@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "be-ceti-corona",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/be-ceti-corona/source/volume-dec-2017.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/be-ceti-corona/source/provenance.json"
+    },
+    {
+      "path": "src/objects/be-ceti-corona/source/density-dec-2017.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      5.718774689885265,
+      -12.208984966587652
+    ],
+    "distancePc": 21.33366163672302,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.00021798729820280858
+  },
+  "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+  "description": "BE Ceti’s corona, derived here from an observed map of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
+  "defaultDataset": "dec-2017",
+  "framingRadiusUnits": 4,
+  "attachedTo": "be-ceti",
+  "acceptedLabResult": "be-ceti-corona-density-grids",
+  "compactInputs": {
+    "path": "src/objects/be-ceti-corona/source/volume-dec-2017.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "dec-2017",
+      "label": "Derived corona · Dec 2017",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71",
+      "recipe": {
+        "path": "src/objects/be-ceti-corona/source/volume-dec-2017.json"
+      }
+    }
+  ]
+}

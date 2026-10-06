@@ -1,0 +1,289 @@
+{
+ "schema": "cssearth-espadons-map@2",
+ "program": "dx-cnc-2007-03",
+ "target": {
+  "name": "DX Cnc",
+  "raDegrees": 127.45563663,
+  "decDegrees": 26.77600671,
+  "radiusDegrees": 0.02
+ },
+ "inputs": {
+  "observations": [
+   {
+    "product": "897499p",
+    "uri": "cadc:CFHT/897499p.fits",
+    "bytes": 20580480
+   },
+   {
+    "product": "897735p",
+    "uri": "cadc:CFHT/897735p.fits",
+    "bytes": 20580480
+   },
+   {
+    "product": "897838p",
+    "uri": "cadc:CFHT/897838p.fits",
+    "bytes": 20580480
+   },
+   {
+    "product": "897986p",
+    "uri": "cadc:CFHT/897986p.fits",
+    "bytes": 20580480
+   },
+   {
+    "product": "898118p",
+    "uri": "cadc:CFHT/898118p.fits",
+    "bytes": 20580480
+   }
+  ],
+  "lineData": {
+   "url": "http://kurucz.harvard.edu/linelists/gfnew/gfall08oct17.dat",
+   "bytes": 371660460,
+   "credit": "R. L. Kurucz, atomic line list gfall, version of 8 October 2017"
+  },
+  "toolchain": {
+   "file": "packages/telescope-cli/src/archives/espadons/toolchain.json",
+   "requirements": [
+    "numpy==2.5.3",
+    "scipy==1.16.3",
+    "matplotlib==3.11.2",
+    "astropy==8.0.1",
+    "LSDpy==1.0.0",
+    "specpolFlow==1.1.0"
+   ],
+   "zdipy": {
+    "url": "https://github.com/folsomcp/ZDIpy",
+    "commit": "86d9f98c426a709f3298bab95fda5f6f5e65e111"
+   },
+   "julia": {
+    "download": {
+     "path": "julia-1.12.7-macaarch64.tar.gz",
+     "url": "https://julialang-s3.julialang.org/bin/mac/aarch64/1.12/julia-1.12.7-macaarch64.tar.gz",
+     "bytes": 230457194
+    },
+    "executable": "julia-1.12.7/bin/julia",
+    "environment": "packages/telescope-cli/src/archives/espadons/korg"
+   }
+  }
+ },
+ "mask": {
+  "atmosphere": {
+   "effectiveTemperatureK": {
+    "value": 2814,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 3664898: Teff"
+   },
+   "logGravity": {
+    "value": 5.25,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 3664898: logg"
+   }
+  },
+  "korg": "1.3.1",
+  "candidates": 327037,
+  "synthesised": 19927,
+  "minimumDepth": 0.1,
+  "deepEnough": 6894,
+  "lines": 4529,
+  "species": {
+   "26.00": 1971,
+   "22.00": 1238,
+   "23.00": 976,
+   "24.00": 913,
+   "27.00": 273,
+   "28.00": 187,
+   "20.00": 186,
+   "40.00": 163,
+   "25.00": 152,
+   "41.00": 151,
+   "21.00": 124,
+   "44.00": 111,
+   "56.00": 101,
+   "39.00": 68,
+   "38.00": 67,
+   "11.00": 43,
+   "42.00": 41,
+   "12.00": 29,
+   "45.00": 26,
+   "19.00": 17,
+   "22.01": 14,
+   "21.01": 7,
+   "29.00": 6,
+   "56.01": 6,
+   "39.01": 5,
+   "20.01": 5,
+   "46.00": 4,
+   "3.00": 4,
+   "14.00": 2,
+   "13.00": 2,
+   "38.01": 2
+  },
+  "meanDepth": 0.4401,
+  "meanWavelengthNm": 471.94,
+  "meanLande": 1.2461
+ },
+ "velocity": {
+  "kmS": 23.68,
+  "catalogued": {
+   "value": 10.62,
+   "source": "SIMBAD, radial velocity of G 51-15 (2018MNRAS.475.1960F)"
+  },
+  "searchCentreKmS": 11.2,
+  "searchDepth": 0.0427
+ },
+ "profiles": {
+  "halfWidthKmS": 48.6,
+  "stepKmS": 1.8,
+  "fieldHalfWidthKmS": 23.8,
+  "lineHalfWidthKmS": 32,
+  "spectra": [
+   {
+    "product": "897499p",
+    "utc": "2007-03-02T10:30:15",
+    "mjd": 54161.43768,
+    "used": true,
+    "longitudinal": {
+     "gauss": -227.8,
+     "error": 344.05,
+     "nullGauss": -179.46
+    },
+    "falseAlarm": 0.003998210928468637,
+    "nullFalseAlarm": 0.19878080087203165,
+    "centreKmS": 22.33,
+    "chiSquare": {
+     "intensity": 77.7504,
+     "stokesV": 0.9113,
+     "null": 0.9248
+    },
+    "offset": {
+     "stokesV": -0.0037929,
+     "null": -0.0039458
+    }
+   },
+   {
+    "product": "897735p",
+    "utc": "2007-03-04T10:27:32",
+    "mjd": 54163.43579,
+    "used": true,
+    "longitudinal": {
+     "gauss": 190.9,
+     "error": 447.85,
+     "nullGauss": -496.1
+    },
+    "falseAlarm": 0.00028187817678804183,
+    "nullFalseAlarm": 0.25152067394911115,
+    "centreKmS": 24.98,
+    "chiSquare": {
+     "intensity": 81.6159,
+     "stokesV": 0.9074,
+     "null": 0.907
+    },
+    "offset": {
+     "stokesV": -0.0036631,
+     "null": -0.0034461
+    }
+   },
+   {
+    "product": "897838p",
+    "utc": "2007-03-05T10:36:56",
+    "mjd": 54164.44232,
+    "used": true,
+    "longitudinal": {
+     "gauss": -112.42,
+     "error": 345.09,
+     "nullGauss": 56.31
+    },
+    "falseAlarm": 0.4037546574340134,
+    "nullFalseAlarm": 0.08967632580512741,
+    "centreKmS": 23.68,
+    "chiSquare": {
+     "intensity": 90.353,
+     "stokesV": 0.8963,
+     "null": 0.8891
+    },
+    "offset": {
+     "stokesV": -0.003367,
+     "null": -0.0032831
+    }
+   },
+   {
+    "product": "897986p",
+    "utc": "2007-03-06T10:25:42",
+    "mjd": 54165.43452,
+    "used": true,
+    "longitudinal": {
+     "gauss": 439.61,
+     "error": 432.26,
+     "nullGauss": -401.99
+    },
+    "falseAlarm": 0.9028403381086975,
+    "nullFalseAlarm": 0.6499073360732528,
+    "centreKmS": 22.34,
+    "chiSquare": {
+     "intensity": 41.9775,
+     "stokesV": 0.7754,
+     "null": 0.7876
+    },
+    "offset": {
+     "stokesV": -0.0057281,
+     "null": -0.005483
+    }
+   },
+   {
+    "product": "898118p",
+    "utc": "2007-03-07T09:49:55",
+    "mjd": 54166.40967,
+    "used": true,
+    "longitudinal": {
+     "gauss": 892.2,
+     "error": 564.76,
+     "nullGauss": 181.78
+    },
+    "falseAlarm": 0.22015570471104828,
+    "nullFalseAlarm": 0.0026939968966982475,
+    "centreKmS": 24.28,
+    "chiSquare": {
+     "intensity": 60.0764,
+     "stokesV": 0.896,
+     "null": 0.8899
+    },
+    "offset": {
+     "stokesV": -0.0045796,
+     "null": -0.0046666
+    }
+   }
+  ]
+ },
+ "map": {
+  "star": {
+   "vsiniKmS": {
+    "value": 13,
+    "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+   },
+   "inclinationDegrees": {
+    "value": 60,
+    "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+   },
+   "periodDays": {
+    "value": 0.46,
+    "source": "Morin, J. et al., arXiv:1005.5552: Table 1 (tab:sample)"
+   },
+   "maximumDegree": {
+    "value": 6,
+    "source": "Morin, J. et al., arXiv:1005.5552: l_ZDI column of the fit table"
+   }
+  },
+  "spectraUsed": 5,
+  "maximumDegree": 6,
+  "middleMjd": 54163.92367,
+  "middleUtc": "2007-03-04T22:10:05",
+  "longitudeZero": "faces the observer at the middle of the run; longitude grows the way the star turns",
+  "chiSquareNoField": 1.246,
+  "detection": {
+   "points": 175,
+   "sigma": 2.3
+  },
+  "ladder": [],
+  "verdict": {
+   "mapped": false,
+   "reason": "The field is not detected: the 175 points of the run's Stokes V profiles stand 2.3 standard deviations above none (reduced chi-square 1.25), under the 4 a map asks for."
+  }
+ }
+}
