@@ -1,27 +1,20 @@
 /** Build-dependent assertions: a broken answer cannot become an accepted baseline. */
 import assert from 'node:assert/strict';
-import { readFile, stat } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
-import { matchesPatterns } from './deployment-config.mts';
 import { catalogue, requestsForTarget } from './requests.mts';
 import { expectation } from './expectations.mts';
-import { loadEdge } from './revision-entries.mts';
+import { loadPageRoute } from './revision-entries.mts';
 import { canonicalHtml, prepareAstroClasses, object, readRecording, serialise } from './model.mts';
-export const covered = matchesPatterns;
-function stringPatterns(value: unknown, fallback: string[]): string[] {
-  if (value === undefined) return fallback;
-  assert.ok(Array.isArray(value) && value.every(item => typeof item === 'string'), 'Invalid function inclusion patterns');
-  return value;
-}
 export async function check(dir: string, root?: string): Promise<void> {
-  const edgeRoute = await loadEdge(root ?? process.cwd());
+  const pageRoute = await loadPageRoute(root ?? process.cwd());
   const records = await readRecording(dir);
   const index = object(records.get('index.json'));
   assert.ok(Array.isArray(index.catalogue), 'Missing catalogue');
   const target = index.target;
-  if (target !== 'preview' && target !== 'netlify' && target !== 'cloudflare') throw new Error('Invalid recorded target');
+  if (target !== 'preview' && target !== 'cloudflare') throw new Error('Invalid recorded target');
   if (root) {
     await prepareAstroClasses(resolve(root, 'dist'));
     assert.equal(serialise(index.catalogue), serialise(requestsForTarget(await catalogue(resolve(root, 'dist')), target).map(request => ({ ...request, path: canonicalHtml(request.path) }))), 'Recorded catalogue omits or changes a required request');
@@ -53,7 +46,7 @@ export async function check(dir: string, root?: string): Promise<void> {
     }
     if (typeof request.path === 'string') {
       const url = new URL(request.path, 'https://answers.invalid');
-      const handled = url.pathname === '/.netlify/functions/search' ? target !== 'preview' : Boolean(edgeRoute(new Request(url)));
+      const handled = url.pathname === '/.netlify/functions/search' ? target !== 'preview' : Boolean(pageRoute(new Request(url)));
       if (handled && answer.status === 200) {
         assert.equal(headers['x-robots-tag'], 'noindex, follow', `${id}: rewritten page missing robots directive`);
         for (const name of ['content-length', 'content-encoding', 'etag', 'last-modified', 'expires']) assert.equal(headers[name], undefined, `${id}: rewritten page kept stale ${name}`);
@@ -105,24 +98,8 @@ export async function check(dir: string, root?: string): Promise<void> {
     if (id === 'missing-page' || id === 'missing-file') assert.equal(answer.status, 404);
   }
   assert.deepEqual([...ids].sort(), Array.isArray(index.requests) ? [...index.requests].sort() : [], 'Catalogue/index mismatch');
-  assert.equal(records.size, ids.size + 2, 'Unexpected or missing files');
-  const closure = object(records.get('closure.json')), functions = object(closure.functions);
-  assert.ok(Array.isArray(closure.included) && closure.included.every(item => typeof item === 'string'));
-  const patterns: string[] = [];
-  for (const item of closure.included) if (typeof item === 'string') patterns.push(item);
-  if (index.target === 'netlify') {
-    assert.deepEqual(Object.keys(functions).sort(), ['find', 'report', 'search']);
-    for (const name of ['find', 'search']) assert.ok(Array.isArray(functions[name]) && functions[name].length > 0, `${name}: empty trace`);
-  }
-  for (const [name, files] of Object.entries(functions)) {
-    assert.ok(Array.isArray(files));
-    for (const file of files) { assert.equal(typeof file, 'string'); assert.ok(covered(String(file), closure.includedByFunction ? stringPatterns(object(closure.includedByFunction)[name], patterns) : patterns), `${name}: unpackaged ${String(file)}`);
-      if (root) {
-        assert.ok(!String(file).startsWith('/') && !String(file).split('/').includes('..'), `${name}: unsafe closure path`);
-        assert.ok((await stat(resolve(root, String(file)))).isFile(), `${name}: missing closure file ${String(file)}`);
-      } }
-  }
-  console.log(`Sane baseline: ${ids.size} ${String(index.target)} answers; closure covered`);
+  assert.equal(records.size, ids.size + 1, 'Unexpected or missing files');
+  console.log(`Sane baseline: ${ids.size} ${String(index.target)} answers`);
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {

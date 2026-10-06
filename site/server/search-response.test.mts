@@ -186,7 +186,7 @@ test('queries stay text, are bounded, and cannot become executable attributes or
   await assert.rejects(readPublicFile('/features/../../secrets.json'), /path is invalid/u);
 });
 
-test('Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function', () => {
+test('The page route keeps all query parameters, bypasses assets, and never recurses on its handler', () => {
   const result = searchRoute(new Request(`${origin}/saturn/?q=titan&dataset=visible&v=view`));
   assert.equal(result?.pathname, '/.netlify/functions/search');
   assert.equal(result?.searchParams.get('object'), 'saturn');
@@ -227,7 +227,7 @@ test('an unreadable saved view renders the page as if it were absent', async () 
     assert.equal(response.headers.get('location'), null, query);
     return response.text();
   };
-  // Not a redirect: Netlify appends the original query to a function redirect whose target has none (a loop on /).
+  // Not a redirect: the site's first host appended the original query to a function redirect whose target had none (a loop on /).
   assert.equal(await body('v=681&q=saturn'), await body('q=saturn'));
   assert.equal(await body('v=not-a-view'), await body(''));
   // Two views are a malformed request, not an old link.

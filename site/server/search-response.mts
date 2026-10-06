@@ -78,7 +78,7 @@ export async function renderSearchResponse(html: string, url: URL, data: SearchD
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);
 }
 
-/** Netlify's query rewrite and local middleware call this same request handler. */
+/** The Worker's page route and the preview middleware call this same request handler. */
 export async function handleSearchRequest(request: Request, data: SearchData, fetcher: typeof fetch = fetch): Promise<Response> {
   if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Method not allowed', { status: 405, headers: { Allow: 'GET, HEAD' } });
   const url = new URL(request.url);
@@ -100,8 +100,8 @@ export async function handleSearchRequest(request: Request, data: SearchData, fe
     catch (error) {
       if (!(error instanceof UnreadableSavedView)) throw error;
       // An unreadable shared view (an older format, a damaged copy) renders the page as if it were absent; the browser
-      // reports and ignores the same value, and its next camera change rewrites it. Not a redirect: Netlify appends
-      // the original query to a function redirect whose target has none, which looped on the root page.
+      // reports and ignores the same value, and its next camera change rewrites it. Not a redirect: the site's first host
+      // appended the original query to a function redirect whose target had none, which looped on the root page.
       const withoutView = new URL(address);
       withoutView.searchParams.delete('v');
       html = await render(withoutView);

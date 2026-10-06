@@ -3,7 +3,7 @@ import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
-import { normalisations, publicLayoutNeutral, readRecording, serialise } from './model.mts';
+import { normalisations, readRecording, serialise } from './model.mts';
 export interface Difference { file: string; dimension: string; base?: unknown; head?: unknown }
 export function dimensions(file: string, base: unknown, head: unknown, path = ''): Difference[] {
   if (serialise(base) === serialise(head)) return [];
@@ -14,7 +14,6 @@ export function dimensions(file: string, base: unknown, head: unknown, path = ''
 }
 export async function compare(base: string, head: string): Promise<Difference[]> {
   const [before, after] = await Promise.all([readRecording(base), readRecording(head)]);
-  for (const recording of [before, after]) for (const file of ['closure.json', 'index.json']) recording.set(file, publicLayoutNeutral(recording.get(file)));
   return [...new Set([...before.keys(), ...after.keys()])].sort().flatMap(file => dimensions(file, before.get(file), after.get(file)));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

@@ -3,7 +3,7 @@
  * Cloudflare serves the built site (`dist`) as a Worker's static assets and runs deploy/cloudflare/worker.ts for the addresses a
  * static file cannot answer: the find and report endpoints, and a page address carrying a query. Run after build:deploy.
  *
- * The Worker runs the handlers Netlify's functions run, and it has no disk. Two modules that read one are swapped for the
+ * The Worker runs the site's own handlers (site/server/), and it has no disk. Two modules that read one are swapped for the
  * Worker's own (deploy/cloudflare/search-data.ts, deploy/cloudflare/project-files.ts); the project files the page handler reads go into
  * the script, and the catalogues the search reads are staged beside the built pages. `import.meta.url` is a `file:`
  * address, so site/directory/world-context-plan.mts reads the whole world as it does in Node.
@@ -16,7 +16,7 @@ import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { build } from 'esbuild';
 import { hasErrorCode } from '@cssearth/core';
-import { FUNCTION_PROJECT_FILES } from '../handlers/function-project-files.mts';
+import { WORKER_PROJECT_FILES } from './worker-project-files.mts';
 
 const { values: { noindex } } = parseArgs({ options: { noindex: { type: 'boolean', default: false } } });
 const root = resolve(import.meta.dirname, '../..');
@@ -27,7 +27,7 @@ const objects = resolve(root, 'src/objects');
 async function projectFiles(): Promise<Record<string, string>> {
   const ids = (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort();
   const files: Record<string, string> = {};
-  for (const pattern of FUNCTION_PROJECT_FILES) {
+  for (const pattern of WORKER_PROJECT_FILES) {
     const every = pattern.includes('*');
     for (const path of every ? ids.map(id => pattern.replace('*', id)) : [pattern]) {
       // An object without the file has none to carry; a file named outright must exist.
@@ -83,7 +83,7 @@ for (const id of await readdir(scenes)) {
     staged.push(`/scenes/${id}/${name}`);
   }
 }
-// The rule netlify.toml gives Netlify: Astro names every file under /_astro/ by its content hash.
+// Astro names every file under /_astro/ by its content hash, so a file there never changes: browsers keep it for a year.
 const headers = ['/_astro/*', '  Cache-Control: public, max-age=31536000, immutable', ...(noindex ? ['/*', '  X-Robots-Tag: noindex'] : []), ''];
 await writeFile(resolve(dist, '_headers'), headers.join('\n'));
 

@@ -1,6 +1,6 @@
 /** Qualify current restored build and reversible mutations of ignored build outputs only. */
 import { spawn } from 'node:child_process';
-import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { command } from './clone-restore.mts';
@@ -45,19 +45,15 @@ async function mutation(label: string, target: string, file: string, from: strin
 }
 const config = await readDeploymentConfig(process.cwd());
 try {
-  for (const target of ['preview', 'netlify', 'cloudflare']) {
+  for (const target of ['preview', 'cloudflare']) {
     await record(target, 'base'); await run(`${target}-base-check`, 'check.mts', ['--recorded', resolve(out, target, 'base')]);
     await record(target, 'repeat'); await diff(target, 'repeat', 0);
   }
   await mutation('static-byte', 'preview', 'dist/earth/index.html', '<!DOCTYPE html>', '<!DOCTYPE htmL>');
-  const bundle = `${config.functionsDirectory}/search.mjs`;
-  await mutation('handler-rewrite', 'netlify', bundle, 'html.slice(0, start) + document2.body.innerHTML', 'html.slice(0, start) + "<!-- L2 rewrite mutation -->" + document2.body.innerHTML');
-  await mutation('header', 'netlify', bundle, 'headers.set("cache-control", "private, no-store")', 'headers.set("cache-control", "public, max-age=9")');
-  await mutation('status', 'netlify', `${config.functionsDirectory}/find.mjs`, 'return json({ error: "Pass object=<body id>." }, 400)', 'return json({ error: "Pass object=<body id>." }, 401)');
-  await mutation('body', 'netlify', `${config.functionsDirectory}/find.mjs`, 'Pass object=<body id>.', 'Deliberately changed response.');
-  const file = 'src/objects/observable-universe/prepared/world-index.json';
-  await rename(file, file + '.l2-mutation');
-  try { await record('netlify', 'missing-closure', 2); }
-  finally { await rename(file + '.l2-mutation', file); }
-  for (const target of ['preview', 'netlify']) { await record(target, 'restored'); await diff(target, 'restored', 0); }
+  const bundle = config.workerMain;
+  await mutation('handler-rewrite', 'cloudflare', bundle, 'html.slice(0, start) + document2.body.innerHTML', 'html.slice(0, start) + "<!-- L2 rewrite mutation -->" + document2.body.innerHTML');
+  await mutation('header', 'cloudflare', bundle, 'headers.set("cache-control", "private, no-store")', 'headers.set("cache-control", "public, max-age=9")');
+  await mutation('status', 'cloudflare', bundle, 'return json({ error: "Pass object=<body id>." }, 400)', 'return json({ error: "Pass object=<body id>." }, 401)');
+  await mutation('body', 'cloudflare', bundle, 'Pass object=<body id>.', 'Deliberately changed response.');
+  for (const target of ['preview', 'cloudflare']) { await record(target, 'restored'); await diff(target, 'restored', 0); }
 } catch (error) { console.error(String(error)); process.exitCode = 2; }

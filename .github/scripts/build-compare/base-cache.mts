@@ -20,17 +20,17 @@ export async function fingerprint(path: string): Promise<{ bytes: number; md5: s
 const md5 = (value: Buffer): string => createHash('md5').update(value).digest('hex');
 /** Required consumer roots prevent a self-consistent but incomplete manifest from qualifying. */
 export async function requirePayload(root: string): Promise<void> {
-  for (const path of ['base/dist/index.html', 'base/toolchain.json', 'base/build.json', 'base/pnpm-lock.yaml', 'performance/base/measures.json', 'performance/base.md', ...['preview', 'netlify', 'cloudflare'].map(target => `server-answers/base/${target}/index.json`)]) {
+  for (const path of ['base/dist/index.html', 'base/toolchain.json', 'base/build.json', 'base/pnpm-lock.yaml', 'performance/base/measures.json', 'performance/base.md', ...['preview', 'cloudflare'].map(target => `server-answers/base/${target}/index.json`)]) {
     if (!(await stat(join(root, path))).isFile() || !(await stat(join(root, path))).size) throw new Error(`Missing payload: ${path}`);
   }
   for (const folder of ['base/metadata', 'base/inventories']) if (!(await files(join(root, folder))).length) throw new Error(`Empty payload: ${folder}`);
-  for (const target of ['preview', 'netlify', 'cloudflare']) {
+  for (const target of ['preview', 'cloudflare']) {
     const folder = join(root, 'server-answers/base', target);
     const index = record(JSON.parse(await readFile(join(folder, 'index.json'), 'utf8')));
-    if (index.target !== target || index.schema !== 2) throw new Error('Invalid recording index');
+    if (index.target !== target || index.schema !== 3) throw new Error('Invalid recording index');
     const requests = array(index.requests).map(string);
     if (!requests.length || new Set(requests).size !== requests.length) throw new Error('Empty or duplicate recording requests');
-    for (const name of ['closure', ...requests]) {
+    for (const name of requests) {
       if (!/^[\w-]+$/u.test(name)) throw new Error('Unsafe request id');
       record(JSON.parse(await readFile(join(folder, `${name}.json`), 'utf8')));
     }

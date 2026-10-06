@@ -9,7 +9,7 @@ import { parseFeaturePin } from '../search/feature-search.mts';
 import { builtSearchData, readPublicFile, type SearchData } from './search-data.mts';
 import type { CatalogueIndexEntry } from '../search/catalogue-index.mts';
 
-/** Exercise Netlify's exact routing and handlers in Astro dev and static preview. Dev has no built catalogue, so it
+/** Exercise the Worker's exact routing and handlers in Astro dev and static preview. Dev has no built catalogue, so it
  * computes the one the build would write, under Vite; a static preview reads the built file like the deploy. */
 export function searchServer(): Plugin {
   const middleware = (data: () => Promise<SearchData>): Connect.NextHandleFunction => (request, response, next) => {

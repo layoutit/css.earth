@@ -6,12 +6,12 @@ import { parseArgs } from 'node:util';
 import { spawnSync } from 'node:child_process';
 import { scriptsAt, expandScript } from './revision-entries.mts';
 import { serialise } from './model.mts';
-const { values } = parseArgs({ options: { copy: { type: 'string' }, target: { type: 'string', default: 'netlify' } } });
+const { values } = parseArgs({ options: { copy: { type: 'string' }, target: { type: 'string', default: 'cloudflare' } } });
 if (!values.copy) throw new Error('Usage: mutate.mts --copy <disposable-copy>');
 const copy = await realpath(values.copy);
 if (!(copy.startsWith(await realpath(tmpdir()) + sep) || copy.startsWith(await realpath(process.cwd()) + '-')) || copy === await realpath(process.cwd())) throw new Error('Mutation copy must be disposable and outside the task worktree');
 await stat(resolve(copy, '.git'));
-if (!['preview', 'netlify'].includes(values.target ?? '')) throw new Error('Mutation target must be preview or netlify');
+if (!['preview', 'cloudflare'].includes(values.target ?? '')) throw new Error('Mutation target must be preview or cloudflare');
 const target = values.target;
 const output = resolve(copy, `output/server-answers-${target}-mutations`);
 await mkdir(output, { recursive: true });
@@ -26,8 +26,8 @@ function run(name: string, args: string[], expected: number) {
   });
 }
 const scripts = '.github/scripts/server-answers/';
-const bundleStep = expandScript(await scriptsAt(copy), 'build:deploy').at(-1);
-if (!bundleStep?.startsWith('node ')) throw new Error('Unsupported Netlify bundle entry');
+const bundleStep = expandScript(await scriptsAt(copy), 'deploy:cloudflare-preview').find(step => step.startsWith('node '))?.replace(/\s+--noindex\b/u, '');
+if (!bundleStep) throw new Error('Unsupported Worker bundle entry');
 const bundleArgs = bundleStep.slice(5).split(/\s+/u);
 const base = `output/server-answers-${target}-mutations/base`;
 async function changed(name: string, file: string, from: string, to: string) {
@@ -37,7 +37,7 @@ async function changed(name: string, file: string, from: string, to: string) {
     await writeFile(path, original.replace(from, to));
     await run(`${name}-bundle`, bundleArgs, 0);
     const head = `output/server-answers-${target}-mutations/${name}`;
-    await run(`${name}-record`, [scripts + 'record.mts', '--target', 'netlify', '--dist', 'dist', '--out', head], 0);
+    await run(`${name}-record`, [scripts + 'record.mts', '--target', 'cloudflare', '--dist', 'dist', '--out', head], 0);
     await run(`${name}-diff`, [scripts + 'diff.mts', '--base', base, '--head', head, '--summary'], 1);
   } finally { await writeFile(path, original); }
 }
@@ -66,20 +66,21 @@ try {
     await run('restored-diff', [scripts + 'diff.mts', '--base', base, '--head', restored, '--summary'], 0);
   } else {
   await run('base-bundle', bundleArgs, 0);
-  await run('base-record', [scripts + 'record.mts', '--target', 'netlify', '--dist', 'dist', '--out', base], 0);
+  await run('base-record', [scripts + 'record.mts', '--target', 'cloudflare', '--dist', 'dist', '--out', base], 0);
   await run('base-check', [scripts + 'check.mts', '--recorded', base], 0);
   await changed('header', 'site/server/search-response.mts', "headers.set('cache-control', 'private, no-store')", "headers.set('cache-control', 'public, max-age=9')");
   await changed('status', 'site/server/find.mts', "return json({ error: 'Pass object=<body id>.' }, 400)", "return json({ error: 'Pass object=<body id>.' }, 401)");
   await changed('body', 'site/server/find.mts', 'Pass object=<body id>.', 'Deliberately changed response.');
   const missing = resolve(copy, 'src/objects/observable-universe/prepared/world-index.json');
   await rename(missing, missing + '.mutation');
-  try { await run('missing-closure-check', [scripts + 'check.mts', '--recorded', base], 1); }
+  // The Worker carries the project files the page handler reads in its script: one missing fails the bundle, not a request.
+  try { await run('missing-project-file-bundle', bundleArgs, 1); }
   finally { await rename(missing + '.mutation', missing); }
-  // Pure route gate is evidence for the edge; the real preview gate still requires a listener.
+  // Pure route gate is evidence for the Worker's router; the real preview gate still requires a listener.
   const route = resolve(copy, 'site/server/search-route.mts'), routeText = await readFile(route, 'utf8');
   try {
     await writeFile(route, routeText.replace("['q', 'dataset'", "['dataset'"));
-    await run('query-pure-logic', ['--test', '--test-name-pattern=Netlify edge', scripts + 'answers.test.mts'], 1);
+    await run('query-pure-logic', ['--test', '--test-name-pattern=The page route keeps', 'site/server/search-response.test.mts'], 1);
   } finally { await writeFile(route, routeText); }
   await run('prepared-base', ['.github/scripts/server-answers/prepared-probe.mts'], 0);
   const prepared = resolve(copy, 'site/server/prepared-files.mts'), preparedText = await readFile(prepared, 'utf8');
@@ -88,9 +89,9 @@ try {
     await run('prepared-range-status', ['.github/scripts/server-answers/prepared-probe.mts'], 1);
   } finally { await writeFile(prepared, preparedText); }
   await run('restored-bundle', bundleArgs, 0);
-  await run('restored-record', [scripts + 'record.mts', '--target', 'netlify', '--dist', 'dist', '--out', 'output/server-answers-netlify-mutations/restored'], 0);
-  await run('restored-check', [scripts + 'check.mts', '--recorded', 'output/server-answers-netlify-mutations/restored'], 0);
-  await run('restored-diff', [scripts + 'diff.mts', '--base', base, '--head', 'output/server-answers-netlify-mutations/restored'], 0);
+  await run('restored-record', [scripts + 'record.mts', '--target', 'cloudflare', '--dist', 'dist', '--out', `output/server-answers-${target}-mutations/restored`], 0);
+  await run('restored-check', [scripts + 'check.mts', '--recorded', `output/server-answers-${target}-mutations/restored`], 0);
+  await run('restored-diff', [scripts + 'diff.mts', '--base', base, '--head', `output/server-answers-${target}-mutations/restored`], 0);
   }
 } finally { await writeFile(resolve(output, 'results.json'), serialise(results)); }
 console.log(`Mutation results: ${output}/results.json`);
