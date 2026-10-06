@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Mancini et al. 2014, the stellar temperature of the default parameter set of Qatar-2 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract)",
   "surfaceGravityLogg": 4.53,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/qatar-2.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.529, rounded to two decimals",
+  "spectralType": "K5V",
+  "spectralTypeSource": "SIMBAD, Qatar 2: spectral type K5V (2017ApJ...836..167D)",
+  "metallicityDex": 0.02,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Qatar-2 (pscomppars): [M/H] 0.02 dex, from Mancini et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract)",
+  "luminosityLogSolar": -0.683,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Qatar-2 (pscomppars): log10 of the luminosity in solar units -0.6832, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "ageGyr": 5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Qatar-2 (pscomppars): age 5 Gyr, from Mancini et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract)",
+  "rotationPeriodDays": 18,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Qatar-2 (pscomppars): rotation period 18 d, from Mo&#x10D;nik et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017MNRAS.471..394M/abstract)",
+  "projectedRotationSpeedKmS": 3.28,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Qatar-2 (pscomppars): projected rotation speed 3.28 km/s, from Mancini et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

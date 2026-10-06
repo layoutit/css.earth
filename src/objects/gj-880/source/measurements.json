@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 880: effective temperature in K, 3713 +/- 11, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.72,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-880.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.716, rounded to two decimals",
+  "spectralType": "M1.5V",
+  "spectralTypeSource": "SIMBAD, HD 216899: spectral type M1.5V (2013AJ....145..102L)",
+  "projectedRotationSpeedKmS": 2.88,
+  "projectedRotationSpeedSource": "SIMBAD, HD 216899: projected rotation speed 2.88 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

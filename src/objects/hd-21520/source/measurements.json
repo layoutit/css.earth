@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Nies et al. 2024, the stellar temperature of the default parameter set of HD 21520 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract)",
   "surfaceGravityLogg": 4.44,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-21520.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.438, rounded to two decimals",
+  "spectralType": "G2/3V",
+  "spectralTypeSource": "SIMBAD, HD 21520: spectral type G2/3V (1978MSS...C02....0H)",
+  "metallicityDex": 0.049,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 21520 (pscomppars): [Fe/H] 0.049 dex, from Nies et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract)",
+  "luminosityLogSolar": 0.066,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 21520 (pscomppars): log10 of the luminosity in solar units 0.06595, from Nies et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract)",
+  "ageGyr": 5.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 21520 (pscomppars): age 5.3 Gyr, from Nies et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract)",
+  "projectedRotationSpeedKmS": 2.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 21520 (pscomppars): projected rotation speed 2.5 km/s, from Nies et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3744N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -9,6 +9,16 @@
   "radiusSource": "Radius 3.986 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 80687: radius 3.986 solar radii, implied by the fitted luminosity 8.501 solar luminosities (fractional uncertainty 0.059) and temperature (https://doi.org/10.1093/mnras/stx1433): 2,773,060 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4940 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 80687: effective temperature 4940 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.045) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
   "effectiveTemperatureK": 4940,
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 80687: effective temperature 4940 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.045) (https://doi.org/10.1093/mnras/stx1433)",
+  "spectralType": "K0 III- IV",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 148427 (pscomppars): spectral type K0 III- IV, from Piccinini et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.104P/abstract)",
+  "metallicityDex": 0.154,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 148427 (pscomppars): [Fe/H] 0.154 dex, from Fischer et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...703.1545F/abstract)",
+  "luminosityLogSolar": 0.78,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 148427 (pscomppars): log10 of the luminosity in solar units 0.78, from Fischer et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...703.1545F/abstract)",
+  "ageGyr": 2.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 148427 (pscomppars): age 2.5 Gyr, from Fischer et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...703.1545F/abstract)",
+  "projectedRotationSpeedKmS": 2.13,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 148427 (pscomppars): projected rotation speed 2.13 km/s, from Fischer et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...703.1545F/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

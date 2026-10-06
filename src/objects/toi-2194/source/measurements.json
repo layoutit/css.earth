@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-2194 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract)",
   "surfaceGravityLogg": 4.63,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2194.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.628, rounded to two decimals",
+  "spectralType": "K3.5Vk:",
+  "spectralTypeSource": "SIMBAD, HD 188474: spectral type K3.5Vk: (2006AJ....132..161G)",
+  "metallicityDex": -0.372,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2194 (pscomppars): [M/H] -0.372 dex, from Mistry et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract)",
+  "luminosityLogSolar": -0.69,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2194 (pscomppars): log10 of the luminosity in solar units -0.68955, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 11.014,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6748283784056800384, flags_flame 00: age_flame 11.013615 Gyr (16th to 84th percentiles 4.496315 to 13.5)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

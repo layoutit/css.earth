@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1776 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.46,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1776.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.459, rounded to two decimals",
+  "spectralType": "G4V",
+  "spectralTypeSource": "SIMBAD, HD 95072: spectral type G4V (2018MNRAS.481.3244G)",
+  "metallicityDex": -0.193,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1776 (pscomppars): [Fe/H] -0.193 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": -0.053,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1776 (pscomppars): log10 of the luminosity in solar units -0.05306, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 5.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1776 (pscomppars): age 5.1 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "SIMBAD, HD 95072: projected rotation speed 3 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

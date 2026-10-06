@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Kunovac Hod&#x17E;i&#x107; et al. 2021, the stellar temperature of the default parameter set of pi Men c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract)",
   "surfaceGravityLogg": 4.33,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-39091.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.331, rounded to two decimals",
+  "spectralType": "G0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 39091 (pscomppars): spectral type G0 V, from Piccinini et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.104P/abstract)",
+  "metallicityDex": 0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 39091 (pscomppars): [Fe/H] 0.09 dex, from Hatzes et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..223H/abstract)",
+  "luminosityLogSolar": 0.16,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 39091 (pscomppars): log10 of the luminosity in solar units 0.15957, from Venner et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162...12V/abstract)",
+  "ageGyr": 3.92,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 39091 (pscomppars): age 3.92 Gyr, from Hatzes et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..223H/abstract)",
+  "rotationPeriodDays": 18.3,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 39091 (pscomppars): rotation period 18.3 d, from Kunovac Hod&#x17E;ić et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.2893K/abstract)",
+  "projectedRotationSpeedKmS": 3.34,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 39091 (pscomppars): projected rotation speed 3.34 km/s, from Hatzes et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..223H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

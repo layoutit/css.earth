@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Diamond-Lowe et al. 2022, the stellar temperature of the default parameter set of K2-3 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract)",
   "surfaceGravityLogg": 4.7,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-3.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.703, rounded to two decimals",
+  "spectralType": "M V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-3 (pscomppars): spectral type M V, from Diamond-Lowe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract)",
+  "metallicityDex": -0.157,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-3 (pscomppars): [Fe/H] -0.157 dex, from Diamond-Lowe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract)",
+  "luminosityLogSolar": -1.231,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-3 (pscomppars): log10 of the luminosity in solar units -1.23136, from Diamond-Lowe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract)",
+  "ageGyr": 6.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-3 (pscomppars): age 6.9 Gyr, from Diamond-Lowe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract)",
+  "rotationPeriodDays": 40.71,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-3 (pscomppars): rotation period 40.71 d, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "projectedRotationSpeedKmS": 1.21,
+  "projectedRotationSpeedSource": "SIMBAD, K2-3: projected rotation speed 1.21 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

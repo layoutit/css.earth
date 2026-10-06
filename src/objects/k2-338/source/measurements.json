@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "de Leon et al. 2021, the stellar temperature of the default parameter set of K2-338 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)",
   "surfaceGravityLogg": 4.66,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-338.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.659, rounded to two decimals",
+  "spectralType": "K3V",
+  "spectralTypeSource": "SIMBAD, K2-338: spectral type K3V (2017ApJ...836..167D)",
+  "metallicityDex": -0.23,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-338 (pscomppars): [Fe/H] -0.23 dex, from de Leon et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)",
+  "luminosityLogSolar": -0.836,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-338 (pscomppars): log10 of the luminosity in solar units -0.83644, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "ageGyr": 9.068,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 656201703533465088, flags_flame 00: age_flame 9.067896 Gyr (16th to 84th percentiles 5.7404556 to 12.346608)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

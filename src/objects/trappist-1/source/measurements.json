@@ -7,6 +7,18 @@
   "distanceSource": "Gaia DR3 parallax 80.2123 +/- 0.0716 mas for source 2635476908753563008 (photometry/gaia-dr3-source.csv): 1000/80.2123 = 12.467 pc, no zero-point correction.",
   "radiusKm": 82927.44,
   "radiusSource": "0.1192 solar radii (82,927.44 km at 695,700 km per solar radius) from Agol et al. (2021, PSJ 2, 1), who combine the photodynamic stellar density with the Mann et al. (2019) mass. About 1.16 Jupiter radii.",
+  "spectralType": "M8.0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): spectral type M8.0 V, from Piaulet-Ghorayeb et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P/abstract)",
+  "metallicityDex": 0.052,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): [Fe/H] 0.052 dex, from Piaulet-Ghorayeb et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P/abstract)",
+  "luminosityLogSolar": -3.257,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): log10 of the luminosity in solar units -3.25727, from Agol et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021PSJ.....2....1A/abstract)",
+  "ageGyr": 7.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): age 7.6 Gyr, from Piaulet-Ghorayeb et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P/abstract)",
+  "rotationPeriodDays": 1.4,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): rotation period 1.4 d, from Gillon et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016Natur.533..221G/abstract)",
+  "projectedRotationSpeedKmS": 2.04,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): projected rotation speed 2.04 km/s, from Hirano et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020ApJ...890L..27H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the catalogue radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured. A star's limb is not a sharp surface."

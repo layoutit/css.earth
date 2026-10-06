@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Parc et al. 2025, the stellar temperature of the default parameter set of TOI-756 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract)",
   "surfaceGravityLogg": 4.73,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-756.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.735, rounded to two decimals",
+  "spectralType": "M1 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-756 (pscomppars): spectral type M1 V, from Parc et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract)",
+  "metallicityDex": 0.196,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-756 (pscomppars): [Fe/H] 0.196 dex, from Parc et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract)",
+  "luminosityLogSolar": -1.387,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-756 (pscomppars): log10 of the luminosity in solar units -1.38722, from Parc et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract)",
+  "ageGyr": 3.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-756 (pscomppars): age 3.2 Gyr, from Parc et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.138P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

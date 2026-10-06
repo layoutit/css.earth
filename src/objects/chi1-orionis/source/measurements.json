@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Valenti & Fischer (2005), ApJS 159, 141, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729)",
   "surfaceGravityLogg": 4.4,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/chi1-orionis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.396, rounded to two decimals",
+  "spectralType": "G0V",
+  "spectralTypeSource": "SIMBAD, * chi01 Ori: spectral type G0V (1989ApJS...71..245K)",
+  "luminosityLogSolar": 0.052,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3399063235755057792, flags_flame 00: lum_flame 1.126165 solar luminosities (16th to 84th percentiles 1.1151782 to 1.1372281); its log10 is recorded",
+  "ageGyr": 5.869,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3399063235755057792, flags_flame 00: age_flame 5.869017 Gyr (16th to 84th percentiles 4.8345537 to 6.889654)",
+  "projectedRotationSpeedKmS": 10.79,
+  "projectedRotationSpeedSource": "SIMBAD, * chi01 Ori: projected rotation speed 10.79 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 39587) (photometry/stellar-color.json); no image of the photosphere exists."

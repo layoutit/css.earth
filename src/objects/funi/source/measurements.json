@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1692267077979468544: teff_gspphot 5727.5093 K (16th-84th percentiles 5726.456-5728.7827), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.32,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/funi.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.320, rounded to two decimals",
+  "spectralType": "G0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 109246 (pscomppars): spectral type G0 V, from Boisse et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...523A..88B/abstract)",
+  "metallicityDex": 0.1,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 109246 (pscomppars): [Fe/H] 0.1 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.1,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 109246 (pscomppars): log10 of the luminosity in solar units 0.10028, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 9.371,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1692267077979468544, flags_flame 00: age_flame 9.370943 Gyr (16th to 84th percentiles 8.267419 to 10.474457)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 109246 (pscomppars): projected rotation speed 3 km/s, from Boisse et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...523A..88B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

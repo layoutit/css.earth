@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Barros et al. 2023, the stellar temperature of the default parameter set of HD 207496 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-207496.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.569, rounded to two decimals",
+  "spectralType": "K2.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 207496 (pscomppars): spectral type K2.5 V, from Barros et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract)",
+  "metallicityDex": 0.095,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 207496 (pscomppars): [Fe/H] 0.095 dex, from Barros et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract)",
+  "luminosityLogSolar": -0.509,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 207496 (pscomppars): log10 of the luminosity in solar units -0.50858, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 0.52,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 207496 (pscomppars): age 0.52 Gyr, from Barros et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract)",
+  "rotationPeriodDays": 12.36,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 207496 (pscomppars): rotation period 12.36 d, from Barros et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...673A...4B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Chakrabarty & Sengupta 2019, the stellar temperature of the default parameter set of WASP-33 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract)",
   "surfaceGravityLogg": 4.29,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-33.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.294, rounded to two decimals",
+  "spectralType": "A",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-33 (pscomppars): spectral type A, from Watanabe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.512.4404W/abstract)",
+  "metallicityDex": 0.1,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-33 (pscomppars): [M/H] 0.1 dex, from Zhang et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155...83Z/abstract)",
+  "luminosityLogSolar": 0.819,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-33 (pscomppars): log10 of the luminosity in solar units 0.81944, from Johnson et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...810L..23J/abstract)",
+  "ageGyr": 0.865,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 328636019723252096, flags_flame 00: age_flame 0.86461663 Gyr (16th to 84th percentiles 0.58951247 to 1.1395178)",
+  "projectedRotationSpeedKmS": 85.6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-33 (pscomppars): projected rotation speed 85.6 km/s, from Watanabe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.512.4404W/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

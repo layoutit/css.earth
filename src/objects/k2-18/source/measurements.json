@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Effective temperature 3457 ± 39 K from Sarkis et al. 2018 (AJ 155, 257; https://arxiv.org/abs/1805.00830), Table 2, which adopts it from Benneke et al. 2017.",
   "surfaceGravityLogg": 4.84,
   "surfaceGravitySource": "log g from the astronomy record's GM and radius (physicalNotes), log10(GM/R^2) in cgs",
+  "spectralType": "M2.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-18 (pscomppars): spectral type M2.5 V, from Benneke et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017ApJ...834..187B/abstract)",
+  "metallicityDex": 0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-18 (pscomppars): [Fe/H] 0.09 dex, from Montet et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...809...25M/abstract)",
+  "luminosityLogSolar": -1.597,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-18 (pscomppars): log10 of the luminosity in solar units -1.59688, from Benneke et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...887L..14B/abstract)",
+  "rotationPeriodDays": 38.6,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-18 (pscomppars): rotation period 38.6 d, from Cloutier et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...608A..35C/abstract)",
+  "projectedRotationSpeedKmS": 2.51,
+  "projectedRotationSpeedSource": "SIMBAD, K2-18: projected rotation speed 2.51 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

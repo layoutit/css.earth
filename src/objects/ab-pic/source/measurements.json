@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "4878 K (4876 to 4881 K), Gaia DR3 GSP-Phot, source 5495052596695570816, https://gea.esac.esa.int/archive/",
   "surfaceGravityLogg": 4.29,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ab-pic.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.286, rounded to two decimals",
+  "spectralType": "K2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): spectral type K2 V, from Chauvin et al. 2005 (https://ui.adsabs.harvard.edu/abs/2005A&A...438L..29C/abstract)",
+  "metallicityDex": 0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): [Fe/H] 0.04 dex, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
+  "luminosityLogSolar": -0.226,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): log10 of the luminosity in solar units -0.22631, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 0.03,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): age 0.03 Gyr, from Chauvin et al. 2005 (https://ui.adsabs.harvard.edu/abs/2005A&A...438L..29C/abstract)",
+  "projectedRotationSpeedKmS": 10.35,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): projected rotation speed 10.35 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

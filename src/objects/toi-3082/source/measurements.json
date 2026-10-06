@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-3082 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract)",
   "surfaceGravityLogg": 4.59,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-3082.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.589, rounded to two decimals",
+  "metallicityDex": 0.17,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-3082 (pscomppars): [M/H] 0.17 dex, from Mistry et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract)",
+  "luminosityLogSolar": -0.861,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-3082 (pscomppars): log10 of the luminosity in solar units -0.86121, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 0.219,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3509135344808097024, flags_flame 00: age_flame 0.21928215 Gyr (16th to 84th percentiles 0.2 to 2.8420424)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

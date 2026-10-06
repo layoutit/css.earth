@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Thygesen et al. 2024, the stellar temperature of the default parameter set of HIP 116454 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract)",
   "surfaceGravityLogg": 4.58,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hip-116454.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.582, rounded to two decimals",
+  "spectralType": "K1",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HIP 116454 (pscomppars): spectral type K1, from Vanderburg et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...59V/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HIP 116454 (pscomppars): [Fe/H] 0 dex, from Thygesen et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract)",
+  "luminosityLogSolar": -0.473,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HIP 116454 (pscomppars): log10 of the luminosity in solar units -0.47314, from Thygesen et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract)",
+  "ageGyr": 5.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HIP 116454 (pscomppars): age 5.5 Gyr, from Thygesen et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..161T/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HIP 116454 (pscomppars): projected rotation speed 2 km/s, from Vanderburg et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...59V/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

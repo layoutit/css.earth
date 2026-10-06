@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Xue et al. 2024, the stellar temperature of the default parameter set of GJ 1132 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract)",
   "surfaceGravityLogg": 5.04,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-1132.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.038, rounded to two decimals",
+  "spectralType": "M4.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 1132 (pscomppars): spectral type M4.5 V, from Weisserman et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.165W/abstract)",
+  "metallicityDex": -0.18,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 1132 (pscomppars): [Fe/H] -0.18 dex, from Weisserman et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A.165W/abstract)",
+  "luminosityLogSolar": -2.321,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 1132 (pscomppars): log10 of the luminosity in solar units -2.32148, from Xue et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...973L...8X/abstract)",
+  "ageGyr": 5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 1132 (pscomppars): age 5 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodDays": 122.3,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 1132 (pscomppars): rotation period 122.3 d, from Bonfils et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...618A.142B/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 1132 (pscomppars): projected rotation speed 2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

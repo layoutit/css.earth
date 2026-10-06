@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 145, Name='RZ Gem', columns Teff, e_Teff (K): Teff 5750 +/- 412 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 2.2,
   "surfaceGravitySource": "log g 2.2 from 2013MNRAS.428.3252A; the 5 published values span log g 1.73 to 2.36, across which the limb law changes by at most 0.4% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2013MNRAS.428.3252A)",
+  "spectralType": "F5",
+  "spectralTypeSource": "SIMBAD, V* RZ Gem: spectral type F5",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

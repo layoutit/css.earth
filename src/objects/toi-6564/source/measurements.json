@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Battley et al. 2026, the stellar temperature of the default parameter set of TOI-6564 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract)",
   "surfaceGravityLogg": 4.05,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-6564.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.049, rounded to two decimals",
+  "metallicityDex": 0.19,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-6564 (pscomppars): [Fe/H] 0.19 dex, from Battley et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract)",
+  "luminosityLogSolar": 0.506,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6564 (pscomppars): log10 of the luminosity in solar units 0.50581, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-6564 (pscomppars): age 4 Gyr, from Battley et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract)",
+  "projectedRotationSpeedKmS": 1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6564 (pscomppars): projected rotation speed 1 km/s, from Battley et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549g1053B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

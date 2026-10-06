@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Collins et al. 2017, the stellar temperature of the default parameter set of Qatar-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract)",
   "surfaceGravityLogg": 4.55,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/qatar-1.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.552, rounded to two decimals",
+  "metallicityDex": 0.171,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Qatar-1 (pscomppars): [Fe/H] 0.171 dex, from Collins et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract)",
+  "luminosityLogSolar": -0.438,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Qatar-1 (pscomppars): log10 of the luminosity in solar units -0.43771, from Collins et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract)",
+  "ageGyr": 1.19,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Qatar-1 (pscomppars): age 1.19 Gyr, from Mislis et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015MNRAS.448.2617M/abstract)",
+  "rotationPeriodDays": 23.7,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Qatar-1 (pscomppars): rotation period 23.7 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 1.76,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Qatar-1 (pscomppars): projected rotation speed 1.76 km/s, from Collins et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...78C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

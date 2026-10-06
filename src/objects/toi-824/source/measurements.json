@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Burt et al. 2020, the stellar temperature of the default parameter set of TOI-824 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract)",
   "surfaceGravityLogg": 4.61,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-824.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.605, rounded to two decimals",
+  "spectralType": "K4 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-824 (pscomppars): spectral type K4 V, from Burt et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract)",
+  "metallicityDex": -0.092,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-824 (pscomppars): [Fe/H] -0.092 dex, from Burt et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract)",
+  "luminosityLogSolar": -0.71,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-824 (pscomppars): log10 of the luminosity in solar units -0.70997, from Burt et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract)",
+  "ageGyr": 7.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-824 (pscomppars): age 7.5 Gyr, from Burt et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract)",
+  "projectedRotationSpeedKmS": 2.17,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-824 (pscomppars): projected rotation speed 2.165 km/s, from Burt et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..153B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

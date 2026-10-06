@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Liu et al. 2026, the stellar temperature of the default parameter set of HD 50554 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...72L/abstract)",
   "surfaceGravityLogg": 4.34,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-50554.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.337, rounded to two decimals",
+  "spectralType": "F8 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 50554 (pscomppars): spectral type F8 V, from Xiao et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023RAA....23e5022X/abstract)",
+  "metallicityDex": 0.02,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 50554 (pscomppars): [Fe/H] 0.02 dex, from Xiao et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023RAA....23e5022X/abstract)",
+  "luminosityLogSolar": 0.175,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 50554 (pscomppars): log10 of the luminosity in solar units 0.17543, from Perrier et al. 2003 (https://ui.adsabs.harvard.edu/abs/2003A&A...410.1039P/abstract)",
+  "ageGyr": 2.16,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 50554 (pscomppars): age 2.16 Gyr, from Liu et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014RAA....14.1447L/abstract)",
+  "projectedRotationSpeedKmS": 3.88,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 50554 (pscomppars): projected rotation speed 3.88 km/s, from Fischer et al. 2002 (https://ui.adsabs.harvard.edu/abs/2002PASP..114..529F/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Martioli et al. 2024, the stellar temperature of the default parameter set of TOI-3568 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.312M/abstract)",
   "surfaceGravityLogg": 4.62,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-3568.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.617, rounded to two decimals",
+  "metallicityDex": -0.01,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-3568 (pscomppars): [Fe/H] -0.01 dex, from Martioli et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.312M/abstract)",
+  "luminosityLogSolar": 0.33,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-3568 (pscomppars): log10 of the luminosity in solar units 0.33, from Martioli et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.312M/abstract)",
+  "ageGyr": 6.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-3568 (pscomppars): age 6.1 Gyr, from Martioli et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.312M/abstract)",
+  "projectedRotationSpeedKmS": 1.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-3568 (pscomppars): projected rotation speed 1.4 km/s, from Martioli et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.312M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

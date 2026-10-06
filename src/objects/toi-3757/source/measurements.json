@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Kanodia et al. 2022, the stellar temperature of the default parameter set of TOI-3757 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....164...81K/abstract)",
   "surfaceGravityLogg": 4.66,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-3757.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.659, rounded to two decimals",
+  "spectralType": "M0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-3757 (pscomppars): spectral type M0 V, from Kanodia et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...81K/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-3757 (pscomppars): [Fe/H] 0 dex, from Kanodia et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...81K/abstract)",
+  "luminosityLogSolar": -1.06,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-3757 (pscomppars): log10 of the luminosity in solar units -1.06048, from Kanodia et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...81K/abstract)",
+  "ageGyr": 7.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-3757 (pscomppars): age 7.1 Gyr, from Kanodia et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...81K/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-3757 (pscomppars): projected rotation speed 2 km/s, from Kanodia et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164...81K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Rodriguez et al. 2021, the stellar temperature of TOI-1478 b's parameter set from Rodriguez et al. 2021 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....161..194R/abstract)",
   "surfaceGravityLogg": 4.37,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1478.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.374, rounded to two decimals",
+  "metallicityDex": 0.078,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1478 (pscomppars): [Fe/H] 0.078 dex, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "luminosityLogSolar": -0.013,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1478 (pscomppars): log10 of the luminosity in solar units -0.01278, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 9.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1478 (pscomppars): age 9.1 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 1.24,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1478 (pscomppars): projected rotation speed 1.24 km/s, from Rice et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164..104R/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

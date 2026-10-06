@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 157, Name='SV Mon', columns Teff, e_Teff (K): Teff 5375 +/- 406 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 0.7,
   "surfaceGravitySource": "log g 0.7 from 2023A&A...678A.195D, the median of its 5 spectra; the 12 published values span log g 0.7 to 1.5, across which the limb law changes by at most 1.2% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.195D)",
+  "spectralType": "G1Ib",
+  "spectralTypeSource": "SIMBAD, V* SV Mon: spectral type G1Ib (2007A&A...469..713M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

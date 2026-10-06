@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Effective temperature 3934 ± 41 K from Richichi & Roccatagliata 2005 (A&A 433, 305; https://doi.org/10.1051/0004-6361:20041765), Section 4: the lunar-occultation and VLTI/VINCI diameter with the bolometric flux.",
   "surfaceGravityLogg": 1.21,
   "surfaceGravitySource": "log g from the asteroseismic mass 1.16 +/- 0.07 solar masses of Farr et al. 2018 (ApJL 865, L20; https://arxiv.org/abs/1802.09812), abstract, and the package radius, log10(GM/R^2) in cgs",
+  "spectralType": "K5 III",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of alf Tau (pscomppars): spectral type K5 III, from Hatzes et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...580A..31H/abstract)",
+  "metallicityDex": -0.27,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of alf Tau (pscomppars): [Fe/H] -0.27 dex, from Hatzes et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...580A..31H/abstract)",
+  "luminosityLogSolar": 2.672,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of alf Tau (pscomppars): log10 of the luminosity in solar units 2.672, from Turnbull 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract)",
+  "ageGyr": 6.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of alf Tau (pscomppars): age 6.6 Gyr, from Hatzes et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...580A..31H/abstract)",
+  "projectedRotationSpeedKmS": 4.3,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Tau: projected rotation speed 4.3 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

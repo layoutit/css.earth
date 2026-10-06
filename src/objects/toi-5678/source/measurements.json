@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Ulmer-Moll et al. 2023, the stellar temperature of the default parameter set of TOI-5678 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract)",
   "surfaceGravityLogg": 4.45,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5678.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.450, rounded to two decimals",
+  "spectralType": "G7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5678 (pscomppars): spectral type G7 V, from Ulmer-Moll et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5678 (pscomppars): [Fe/H] 0 dex, from Ulmer-Moll et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract)",
+  "luminosityLogSolar": -0.131,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5678 (pscomppars): log10 of the luminosity in solar units -0.13069, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 8.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5678 (pscomppars): age 8.5 Gyr, from Ulmer-Moll et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract)",
+  "projectedRotationSpeedKmS": 3.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5678 (pscomppars): projected rotation speed 3.1 km/s, from Ulmer-Moll et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...674A..43U/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

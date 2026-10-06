@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Baines et al. (2021), AJ 162, 198, HD 35497: effective temperature 12026 +/- 262 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ac2431)",
   "surfaceGravityLogg": 3.63,
   "surfaceGravitySource": "Baines et al. (2021), AJ 162, 198, HD 35497: log g 3.63, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 4) (https://doi.org/10.3847/1538-3881/ac2431)",
+  "spectralType": "B7III",
+  "spectralTypeSource": "SIMBAD, * bet Tau: spectral type B7III (2024A&A...690A.176N)",
+  "projectedRotationSpeedKmS": 60,
+  "projectedRotationSpeedSource": "SIMBAD, * bet Tau: projected rotation speed 60 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

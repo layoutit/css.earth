@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of CoRoT-7 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.51,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/corot-7.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.514, rounded to two decimals",
+  "spectralType": "G9 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of CoRoT-7 (pscomppars): spectral type G9 V, from John et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.515.3975J/abstract)",
+  "metallicityDex": 0.06,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of CoRoT-7 (pscomppars): [M/H] 0.06 dex, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "luminosityLogSolar": -0.289,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of CoRoT-7 (pscomppars): log10 of the luminosity in solar units -0.28938, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 1.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of CoRoT-7 (pscomppars): age 1.8 Gyr, from John et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.515.3975J/abstract)",
+  "projectedRotationSpeedKmS": 3.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of CoRoT-7 (pscomppars): projected rotation speed 3.5 km/s, from Leger et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...506..287L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

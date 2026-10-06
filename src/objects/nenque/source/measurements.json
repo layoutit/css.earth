@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 4988158666636598272: teff_gspphot 5776.7295 K (16th-84th percentiles 5775.3755-5779.2227), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.32,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/nenque.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.322, rounded to two decimals",
+  "spectralType": "G2/3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 6434 (pscomppars): spectral type G2/3 V, from Michigan Catalog, Vol. 2 (https://ui.adsabs.harvard.edu/abs/1978MSS...C02....0H/abstract)",
+  "metallicityDex": -0.55,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 6434 (pscomppars): [Fe/H] -0.55 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.05,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 6434 (pscomppars): log10 of the luminosity in solar units 0.05, from Mayor et al. 2004 (https://ui.adsabs.harvard.edu/abs/2004A&A...415..391M/abstract)",
+  "ageGyr": 11.27,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 6434 (pscomppars): age 11.27 Gyr, from Hinkel et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....150..169H/abstract)",
+  "projectedRotationSpeedKmS": 2.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 6434 (pscomppars): projected rotation speed 2.2 km/s, from Hinkel et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....150..169H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

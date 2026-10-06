@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "McGruder et al. 2023, the stellar temperature of the default parameter set of WASP-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-6.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.574, rounded to two decimals",
+  "spectralType": "G8V",
+  "spectralTypeSource": "SIMBAD, WASP-6: spectral type G8V (2009A&A...501..785G)",
+  "metallicityDex": -0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-6 (pscomppars): [Fe/H] -0.15 dex, from McGruder et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract)",
+  "luminosityLogSolar": -0.297,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-6 (pscomppars): log10 of the luminosity in solar units -0.29675, from Barstow et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017ApJ...834...50B/abstract)",
+  "ageGyr": 3.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-6 (pscomppars): age 3.2 Gyr, from McGruder et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract)",
+  "rotationPeriodDays": 28.28,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-6 (pscomppars): rotation period 28.28 d, from McGruder et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-6 (pscomppars): projected rotation speed 1.5 km/s, from McGruder et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

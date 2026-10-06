@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Powers et al. 2023, the stellar temperature of the default parameter set of TOI-3785 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...44P/abstract)",
   "surfaceGravityLogg": 4.76,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-3785.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.756, rounded to two decimals",
+  "spectralType": "M2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-3785 (pscomppars): spectral type M2 V, from Powers et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...44P/abstract)",
+  "metallicityDex": 0.099,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-3785 (pscomppars): [Fe/H] 0.099 dex, from Powers et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...44P/abstract)",
+  "luminosityLogSolar": -1.435,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-3785 (pscomppars): log10 of the luminosity in solar units -1.43533, from Powers et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...44P/abstract)",
+  "ageGyr": 8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-3785 (pscomppars): age 8 Gyr, from Powers et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...44P/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-3785 (pscomppars): projected rotation speed 2 km/s, from Powers et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...44P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

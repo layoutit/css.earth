@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Duck et al. 2021, the stellar temperature of the default parameter set of K2-212 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..136D/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-212.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.569, rounded to two decimals",
+  "spectralType": "K7V",
+  "spectralTypeSource": "SIMBAD, K2-212: spectral type K7V (2019AJ....158...87D)",
+  "metallicityDex": 0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-212 (pscomppars): [Fe/H] 0.03 dex, from Livingston et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract)",
+  "luminosityLogSolar": -0.91,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-212 (pscomppars): log10 of the luminosity in solar units -0.90958, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 6.286,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2538824923230146560, flags_flame 00: age_flame 6.285739 Gyr (16th to 84th percentiles 2.944016 to 10.050688)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

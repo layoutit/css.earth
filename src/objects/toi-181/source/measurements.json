@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-181 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M/abstract)",
   "surfaceGravityLogg": 4.61,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-181.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.609, rounded to two decimals",
+  "spectralType": "K",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-181 (pscomppars): spectral type K, from Mistry et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M/abstract)",
+  "metallicityDex": 0.272,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-181 (pscomppars): [M/H] 0.272 dex, from Mistry et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M/abstract)",
+  "luminosityLogSolar": -0.526,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-181 (pscomppars): log10 of the luminosity in solar units -0.52578, from Mistry et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M/abstract)",
+  "ageGyr": 5.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-181 (pscomppars): age 5.4 Gyr, from Mistry et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M/abstract)",
+  "projectedRotationSpeedKmS": 2.28,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-181 (pscomppars): projected rotation speed 2.28 km/s, from Mistry et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.521.1066M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

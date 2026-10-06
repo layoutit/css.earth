@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Incha et al. 2023, the stellar temperature of the default parameter set of K2-417 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract)",
   "surfaceGravityLogg": 4.67,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-417.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.670, rounded to two decimals",
+  "spectralType": "M V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-417 (pscomppars): spectral type M V, from Incha et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract)",
+  "luminosityLogSolar": -1.202,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-417 (pscomppars): log10 of the luminosity in solar units -1.20204, from Incha et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

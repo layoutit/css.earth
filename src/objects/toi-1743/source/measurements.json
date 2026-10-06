@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Yalçinkaya et al. 2025, the stellar temperature of the default parameter set of TOI-1743 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract)",
   "surfaceGravityLogg": 4.91,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1743.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.910, rounded to two decimals",
+  "spectralType": "M4 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1743 (pscomppars): spectral type M4 V, from Yalçinkaya et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract)",
+  "metallicityDex": 0.22,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1743 (pscomppars): [Fe/H] 0.22 dex, from Yalçinkaya et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract)",
+  "luminosityLogSolar": -1.971,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1743 (pscomppars): log10 of the luminosity in solar units -1.97074, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 9.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1743 (pscomppars): age 9.7 Gyr, from Yalçinkaya et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A.209Y/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

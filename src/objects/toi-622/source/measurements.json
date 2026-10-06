@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Psaridi et al. 2023, the stellar temperature of the default parameter set of TOI-622 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract)",
   "surfaceGravityLogg": 4.25,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-622.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.255, rounded to two decimals",
+  "spectralType": "F6 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-622 (pscomppars): spectral type F6 V, from Psaridi et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract)",
+  "metallicityDex": 0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-622 (pscomppars): [Fe/H] 0.09 dex, from Psaridi et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract)",
+  "luminosityLogSolar": 0.474,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-622 (pscomppars): log10 of the luminosity in solar units 0.47407, from Psaridi et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract)",
+  "ageGyr": 0.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-622 (pscomppars): age 0.9 Gyr, from Psaridi et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract)",
+  "rotationPeriodDays": 3.77,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-622 (pscomppars): rotation period 3.77 d, from Psaridi et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract)",
+  "projectedRotationSpeedKmS": 19,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-622 (pscomppars): projected rotation speed 19 km/s, from Psaridi et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..39P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-6 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.27,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-6.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.272, rounded to two decimals",
+  "spectralType": "F8V",
+  "spectralTypeSource": "SIMBAD, BD+41 4831: spectral type F8V (2013MNRAS.433.2097F)",
+  "metallicityDex": -0.13,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-6 (pscomppars): [Fe/H] -0.13 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.553,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-6 (pscomppars): log10 of the luminosity in solar units 0.55267, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 2.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-6 (pscomppars): age 2.3 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 7.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-6 (pscomppars): projected rotation speed 7.8 km/s, from Albrecht et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012ApJ...757...18A/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

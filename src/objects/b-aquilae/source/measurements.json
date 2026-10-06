@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 182572: effective temperature in K, from the angular diameter and the bolometric flux, 5787 +/- 92 (https://doi.org/10.1088/0004-637X/746/1/101)",
   "surfaceGravityLogg": 4.23,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/b-aquilae.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.233, rounded to two decimals",
+  "spectralType": "G7IVHdel1",
+  "spectralTypeSource": "SIMBAD, * b Aql: spectral type G7IVHdel1 (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 2.42,
+  "projectedRotationSpeedSource": "SIMBAD, * b Aql: projected rotation speed 2.42 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Oddo et al. 2023, the stellar temperature of the default parameter set of TOI-444 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
   "surfaceGravityLogg": 4.64,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-444.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.637, rounded to two decimals",
+  "spectralType": "K1/2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-444 (pscomppars): spectral type K1/2 V, from Oddo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
+  "metallicityDex": 0.08,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-444 (pscomppars): [Fe/H] 0.08 dex, from Oddo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
+  "luminosityLogSolar": -0.418,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-444 (pscomppars): log10 of the luminosity in solar units -0.41794, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 0.57,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-444 (pscomppars): age 0.57 Gyr, from Oddo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
+  "rotationPeriodDays": 13,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-444 (pscomppars): rotation period 13 d, from Oddo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Cloutier et al. 2021, the stellar temperature of the default parameter set of TOI-1634 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162...79C/abstract)",
   "surfaceGravityLogg": 4.83,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1634.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.832, rounded to two decimals",
+  "spectralType": "M2",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1634 (pscomppars): spectral type M2, from Cloutier et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162...79C/abstract)",
+  "metallicityDex": 0.19,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1634 (pscomppars): [Fe/H] 0.19 dex, from Hirano et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..161H/abstract)",
+  "luminosityLogSolar": -1.578,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1634 (pscomppars): log10 of the luminosity in solar units -1.5784, from Hirano et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..161H/abstract)",
+  "rotationPeriodDays": 77,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1634 (pscomppars): rotation period 77 d, from Palethorpe et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag520P/abstract)",
+  "projectedRotationSpeedKmS": 1.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1634 (pscomppars): projected rotation speed 1.3 km/s, from Palethorpe et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag520P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Livingston et al. 2018, the stellar temperature of the default parameter set of K2-117 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract)",
   "surfaceGravityLogg": 4.76,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-117.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.755, rounded to two decimals",
+  "spectralType": "M1.0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-117 (pscomppars): spectral type M1.0 V, from Hirano et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract)",
+  "metallicityDex": -0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-117 (pscomppars): [Fe/H] -0.05 dex, from Livingston et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract)",
+  "luminosityLogSolar": -1.357,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-117 (pscomppars): log10 of the luminosity in solar units -1.35655, from Hirano et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract)",
+  "ageGyr": 12.691,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 597829077890316928, flags_flame 00: age_flame 12.690801 Gyr (16th to 84th percentiles 6.9601617 to 13.5)",
+  "projectedRotationSpeedKmS": 2.91,
+  "projectedRotationSpeedSource": "SIMBAD, K2-117: projected rotation speed 2.91 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

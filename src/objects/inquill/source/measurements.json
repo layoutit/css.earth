@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 5950535424666050304: teff_gspphot 5805.5874 K (16th-84th percentiles 5799.3726-5809.8247), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 3.81,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/inquill.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.809, rounded to two decimals",
+  "spectralType": "F8 IV/V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 156411 (pscomppars): spectral type F8 IV/V, from Naef et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...523A..15N/abstract)",
+  "metallicityDex": -0.12,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 156411 (pscomppars): [Fe/H] -0.12 dex, from Naef et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...523A..15N/abstract)",
+  "luminosityLogSolar": 0.731,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 156411 (pscomppars): log10 of the luminosity in solar units 0.731, from Naef et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...523A..15N/abstract)",
+  "ageGyr": 4.28,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 156411 (pscomppars): age 4.28 Gyr, from Jofré et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...574A..50J/abstract)",
+  "projectedRotationSpeedKmS": 3.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 156411 (pscomppars): projected rotation speed 3.3 km/s, from Naef et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...523A..15N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

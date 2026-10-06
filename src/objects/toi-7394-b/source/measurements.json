@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Premnath et al. 2026, the stellar temperature of the default parameter set of TOI-7394 B b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract)",
   "surfaceGravityLogg": 4.66,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-7394-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.664, rounded to two decimals",
+  "spectralType": "M1 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-7394 B (pscomppars): spectral type M1 V, from Premnath et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract)",
+  "metallicityDex": 0.5,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-7394 B (pscomppars): [Fe/H] 0.5 dex, from Premnath et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract)",
+  "luminosityLogSolar": -1.167,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-7394 B (pscomppars): log10 of the luminosity in solar units -1.16749, from Premnath et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-7394 B (pscomppars): projected rotation speed 2 km/s, from Premnath et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...92P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

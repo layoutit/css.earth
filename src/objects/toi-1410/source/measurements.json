@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1410.01 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.58,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1410.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.581, rounded to two decimals",
+  "metallicityDex": 0.328,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1410 (pscomppars): [Fe/H] 0.328 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": -0.622,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1410 (pscomppars): log10 of the luminosity in solar units -0.6216, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 6.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1410 (pscomppars): age 6.6 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

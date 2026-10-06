@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1700658653802527104: teff_gspphot 4860.1943 K (16th-84th percentiles 4845.6187-4862.3267), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 2.88,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/baekdu.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.876, rounded to two decimals",
+  "spectralType": "K0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of 8 UMi (pscomppars): spectral type K0, from Lee et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...584A..79L/abstract)",
+  "metallicityDex": -0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of 8 UMi (pscomppars): [m/H] -0.03 dex, from Hon et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023Natur.618..917H/abstract)",
+  "luminosityLogSolar": 1.723,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of 8 UMi (pscomppars): log10 of the luminosity in solar units 1.72346, from Hon et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023Natur.618..917H/abstract)",
+  "ageGyr": 1.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of 8 UMi (pscomppars): age 1.7 Gyr, from Lee et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...584A..79L/abstract)",
+  "projectedRotationSpeedKmS": 3.6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of 8 UMi (pscomppars): projected rotation speed 3.6 km/s, from Lee et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...584A..79L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Boisse et al. 2013, the stellar temperature of the default parameter set of HAT-P-42 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B/abstract)",
   "surfaceGravityLogg": 4.14,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-42.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.140, rounded to two decimals",
+  "metallicityDex": 0.27,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-42 (pscomppars): [Fe/H] 0.27 dex, from Boisse et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract)",
+  "luminosityLogSolar": 0.356,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-42 (pscomppars): log10 of the luminosity in solar units 0.356, from Boisse et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract)",
+  "ageGyr": 5.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-42 (pscomppars): age 5.2 Gyr, from Boisse et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract)",
+  "projectedRotationSpeedKmS": 3.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-42 (pscomppars): projected rotation speed 3.5 km/s, from Boisse et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Brady et al. 2024, the stellar temperature of the default parameter set of TOI-1450 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract)",
   "surfaceGravityLogg": 4.75,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1450-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.751, rounded to two decimals",
+  "spectralType": "M3.0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1450 A (pscomppars): spectral type M3.0 V, from Brady et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract)",
+  "metallicityDex": -0.12,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1450 A (pscomppars): [Fe/H] -0.12 dex, from Brady et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract)",
+  "luminosityLogSolar": -1.565,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1450 A (pscomppars): log10 of the luminosity in solar units -1.56499, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 35,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1450 A (pscomppars): rotation period 35 d, from Brady et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

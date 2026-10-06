@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Clark et al. 2023, the stellar temperature of the default parameter set of TOI-778 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract)",
   "surfaceGravityLogg": 4.12,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-778.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.118, rounded to two decimals",
+  "spectralType": "F3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-778 (pscomppars): spectral type F3 V, from Clark et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-778 (pscomppars): [M/H] 0 dex, from Clark et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract)",
+  "luminosityLogSolar": 0.76,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-778 (pscomppars): log10 of the luminosity in solar units 0.76042, from Clark et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract)",
+  "ageGyr": 1.95,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-778 (pscomppars): age 1.95 Gyr, from Clark et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract)",
+  "rotationPeriodDays": 2.584,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-778 (pscomppars): rotation period 2.584 d, from Clark et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract)",
+  "projectedRotationSpeedKmS": 39.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-778 (pscomppars): projected rotation speed 39.9 km/s, from Clark et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..207C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

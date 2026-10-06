@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-34 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.5,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-34.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.502, rounded to two decimals",
+  "metallicityDex": -0.02,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-34 (pscomppars): [Fe/H] -0.02 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.039,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-34 (pscomppars): log10 of the luminosity in solar units 0.0393, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 7.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-34 (pscomppars): age 7.8 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 1.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-34 (pscomppars): projected rotation speed 1.4 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

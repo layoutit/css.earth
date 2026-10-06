@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Carleo et al. 2026, the stellar temperature of the default parameter set of TOI-1472 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract)",
   "surfaceGravityLogg": 4.53,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1472.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.529, rounded to two decimals",
+  "metallicityDex": 0.27,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1472 (pscomppars): [Fe/H] 0.27 dex, from Carleo et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract)",
+  "luminosityLogSolar": -0.356,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1472 (pscomppars): log10 of the luminosity in solar units -0.35556, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "ageGyr": 3.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1472 (pscomppars): age 3.1 Gyr, from Carleo et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549f1958C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

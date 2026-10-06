@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Hord et al. 2024, the stellar temperature of the default parameter set of TOI-5082.01 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..233H/abstract)",
   "surfaceGravityLogg": 4.5,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5082.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.500, rounded to two decimals",
+  "spectralType": "G0V",
+  "spectralTypeSource": "SIMBAD, HD 53532: spectral type G0V",
+  "metallicityDex": 0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5082 (pscomppars): [M/H] 0.09 dex, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "luminosityLogSolar": -0.09,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5082 (pscomppars): log10 of the luminosity in solar units -0.08961, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 10.407,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3368214650329888512, flags_flame 00: age_flame 10.406918 Gyr (16th to 84th percentiles 8.97696 to 11.813708)",
+  "projectedRotationSpeedKmS": 5.8,
+  "projectedRotationSpeedSource": "SIMBAD, HD 53532: projected rotation speed 5.8 km/s, the measurement SIMBAD prefers (2024A&A...690A.370F)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Wells et al. 2019, the stellar temperature of the default parameter set of K2-133 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract)",
   "surfaceGravityLogg": 4.79,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-133.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.786, rounded to two decimals",
+  "spectralType": "M1.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-133 (pscomppars): spectral type M1.5 V, from Wells et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract)",
+  "luminosityLogSolar": -1.479,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-133 (pscomppars): log10 of the luminosity in solar units -1.47886, from Wells et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.487.1865W/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

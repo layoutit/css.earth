@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "David et al. 2018, the stellar temperature of the default parameter set of K2-284 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..302D/abstract)",
   "surfaceGravityLogg": 4.67,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-284.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.671, rounded to two decimals",
+  "spectralType": "M0V",
+  "spectralTypeSource": "SIMBAD, K2-284: spectral type M0V (2019AJ....158...87D)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-284 (pscomppars): [Fe/H] 0 dex, from David et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..302D/abstract)",
+  "luminosityLogSolar": -1.013,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-284 (pscomppars): log10 of the luminosity in solar units -1.01323, from David et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..302D/abstract)",
+  "ageGyr": 0.12,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-284 (pscomppars): age 0.12 Gyr, from David et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..302D/abstract)",
+  "rotationPeriodDays": 8.88,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-284 (pscomppars): rotation period 8.88 d, from David et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..302D/abstract)",
+  "projectedRotationSpeedKmS": 3.54,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-284 (pscomppars): projected rotation speed 3.54 km/s, from David et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..302D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

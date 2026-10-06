@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Srivastava et al. 2026, the stellar temperature of the default parameter set of TOI-4552 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract)",
   "surfaceGravityLogg": 4.94,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4552.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.941, rounded to two decimals",
+  "spectralType": "M4.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4552 (pscomppars): spectral type M4.5 V, from Srivastava et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract)",
+  "metallicityDex": -0.07,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4552 (pscomppars): [Fe/H] -0.07 dex, from Srivastava et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract)",
+  "luminosityLogSolar": -2.078,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4552 (pscomppars): log10 of the luminosity in solar units -2.07779, from Srivastava et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..73S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Zhou et al. 2019, the stellar temperature of the default parameter set of HAT-P-70 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract)",
   "surfaceGravityLogg": 4.18,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-70.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.176, rounded to two decimals",
+  "spectralType": "A2",
+  "spectralTypeSource": "SIMBAD, HD 287325: spectral type A2 (1995A&AS..110..367N)",
+  "metallicityDex": -0.059,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-70 (pscomppars): [Fe/H] -0.059 dex, from Zhou et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract)",
+  "luminosityLogSolar": 1.223,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-70 (pscomppars): log10 of the luminosity in solar units 1.22272, from Zhou et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract)",
+  "ageGyr": 0.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-70 (pscomppars): age 0.6 Gyr, from Zhou et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract)",
+  "projectedRotationSpeedKmS": 99.85,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-70 (pscomppars): projected rotation speed 99.85 km/s, from Zhou et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..141Z/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

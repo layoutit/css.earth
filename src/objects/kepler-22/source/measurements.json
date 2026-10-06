@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-22 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
   "surfaceGravityLogg": 4.49,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-22.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.493, rounded to two decimals",
+  "spectralType": "G5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Kepler-22 (pscomppars): spectral type G5 V, from Borucki et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012ApJ...745..120B/abstract)",
+  "metallicityDex": -0.255,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-22 (pscomppars): [Fe/H] -0.255 dex, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "luminosityLogSolar": -0.19,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-22 (pscomppars): log10 of the luminosity in solar units -0.19024, from Q1-Q17 DR25 Supplemental KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
+  "ageGyr": 7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-22 (pscomppars): age 7 Gyr, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "projectedRotationSpeedKmS": 0.6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-22 (pscomppars): projected rotation speed 0.6 km/s, from Borucki et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012ApJ...745..120B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

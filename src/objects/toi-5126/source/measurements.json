@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Fairnington et al. 2024, the stellar temperature of the default parameter set of TOI-5126 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract)",
   "surfaceGravityLogg": 4.34,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5126.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.344, rounded to two decimals",
+  "spectralType": "F V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5126 (pscomppars): spectral type F V, from Fairnington et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract)",
+  "metallicityDex": 0.18,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5126 (pscomppars): [Fe/H] 0.18 dex, from Fairnington et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract)",
+  "luminosityLogSolar": 0.299,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5126 (pscomppars): log10 of the luminosity in solar units 0.29885, from Fairnington et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract)",
+  "ageGyr": 0.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5126 (pscomppars): age 0.8 Gyr, from Fairnington et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

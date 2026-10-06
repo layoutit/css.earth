@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 126660: effective temperature in K, from the angular diameter and the bolometric flux, 6265 +/- 41 (https://doi.org/10.1088/0004-637X/746/1/101)",
   "surfaceGravityLogg": 4.05,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/theta-bootis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.051, rounded to two decimals",
+  "spectralType": "F7V",
+  "spectralTypeSource": "SIMBAD, * tet Boo: spectral type F7V (2001AJ....121.2148G)",
+  "luminosityLogSolar": 0.625,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1604859511344724864, flags_flame 00: lum_flame 4.2140408 solar luminosities (16th to 84th percentiles 4.19418 to 4.2326865); its log10 is recorded",
+  "ageGyr": 3.412,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1604859511344724864, flags_flame 00: age_flame 3.4121625 Gyr (16th to 84th percentiles 2.9780538 to 3.8462565)",
+  "projectedRotationSpeedKmS": 29.2,
+  "projectedRotationSpeedSource": "SIMBAD, * tet Boo: projected rotation speed 29.2 km/s, the measurement SIMBAD prefers (2009A&A...493.1099S)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

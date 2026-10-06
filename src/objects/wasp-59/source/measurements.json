@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Hebrard et al. 2013, the stellar temperature of the default parameter set of WASP-59 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...549A.134H/abstract)",
   "surfaceGravityLogg": 4.72,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-59.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.720, rounded to two decimals",
+  "spectralType": "K5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-59 (pscomppars): spectral type K5 V, from Hebrard et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract)",
+  "metallicityDex": -0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-59 (pscomppars): [Fe/H] -0.15 dex, from Hebrard et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract)",
+  "luminosityLogSolar": -0.794,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-59 (pscomppars): log10 of the luminosity in solar units -0.79407, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 0.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-59 (pscomppars): age 0.5 Gyr, from Hebrard et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract)",
+  "projectedRotationSpeedKmS": 2.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-59 (pscomppars): projected rotation speed 2.3 km/s, from Hebrard et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

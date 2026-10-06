@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Almenara et al. 2024, the stellar temperature of the default parameter set of TOI-4860 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract)",
   "surfaceGravityLogg": 4.86,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4860.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.862, rounded to two decimals",
+  "spectralType": "M3.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4860 (pscomppars): spectral type M3.5 V, from Almenara et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract)",
+  "metallicityDex": 0.27,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4860 (pscomppars): [Fe/H] 0.27 dex, from Almenara et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.166A/abstract)",
+  "luminosityLogSolar": -1.836,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4860 (pscomppars): log10 of the luminosity in solar units -1.83565, from Triaud et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..98T/abstract)",
+  "ageGyr": 4.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4860 (pscomppars): age 4.5 Gyr, from Triaud et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.525L..98T/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

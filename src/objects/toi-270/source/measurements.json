@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Kaye et al. 2022, the stellar temperature of the default parameter set of TOI-270 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.5464K/abstract)",
   "surfaceGravityLogg": 4.87,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-270.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.865, rounded to two decimals",
+  "spectralType": "M3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-270 (pscomppars): spectral type M3 V, from Mikal-Evans et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...84M/abstract)",
+  "metallicityDex": -0.17,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-270 (pscomppars): [Fe/H] -0.17 dex, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "luminosityLogSolar": -1.712,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-270 (pscomppars): log10 of the luminosity in solar units -1.7122, from Van Eylen et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2154V/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

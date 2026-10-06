@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Morello et al. 2026, the stellar temperature of the default parameter set of TOI-7009 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M/abstract)",
   "surfaceGravityLogg": 4.7,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-7009.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.701, rounded to two decimals",
+  "metallicityDex": -0.11,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-7009 (pscomppars): [Fe/H] -0.11 dex, from Morello et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.549ag183M/abstract)",
+  "luminosityLogSolar": -0.888,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-7009 (pscomppars): log10 of the luminosity in solar units -0.88845, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

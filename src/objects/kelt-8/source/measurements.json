@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of KELT-8 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.02,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kelt-8.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.018, rounded to two decimals",
+  "spectralType": "G2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of KELT-8 (pscomppars): spectral type G2 V, from Fulton et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...810...30F/abstract)",
+  "metallicityDex": 0.27,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of KELT-8 (pscomppars): [Fe/H] 0.27 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.265,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of KELT-8 (pscomppars): log10 of the luminosity in solar units 0.26483, from Mallonn et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...622A..81M/abstract)",
+  "ageGyr": 5.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of KELT-8 (pscomppars): age 5.4 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 3.7,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KELT-8 (pscomppars): projected rotation speed 3.7 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

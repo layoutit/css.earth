@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Desgrange et al. (2022), Table 1, https://arxiv.org/abs/2206.00425",
   "surfaceGravityLogg": 4.28,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-95086.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.278, rounded to two decimals",
+  "spectralType": "A8 III",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 95086 (pscomppars): spectral type A8 III, from Rameau et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...772L..15R/abstract)",
+  "metallicityDex": 0.14,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 95086 (pscomppars): [Fe/H] 0.14 dex, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
+  "luminosityLogSolar": 0.821,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 95086 (pscomppars): log10 of the luminosity in solar units 0.82124, from Galicher et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...565L...4G/abstract)",
+  "ageGyr": 0.017,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 95086 (pscomppars): age 0.017 Gyr, from Rameau et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...779L..26R/abstract)",
+  "projectedRotationSpeedKmS": 17.14,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 95086 (pscomppars): projected rotation speed 17.14 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

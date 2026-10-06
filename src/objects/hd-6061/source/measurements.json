@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of HD 6061 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.44,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-6061.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.443, rounded to two decimals",
+  "spectralType": "G0",
+  "spectralTypeSource": "SIMBAD, HD 6061: spectral type G0 (1993yCat.3135....0C)",
+  "metallicityDex": -0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 6061 (pscomppars): [Fe/H] -0.05 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": 0.055,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 6061 (pscomppars): log10 of the luminosity in solar units 0.05538, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 2.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 6061 (pscomppars): age 2.4 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

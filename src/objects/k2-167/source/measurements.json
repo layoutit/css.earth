@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-167 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
   "surfaceGravityLogg": 4.12,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-167.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.121, rounded to two decimals",
+  "spectralType": "F7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-167 (pscomppars): spectral type F7 V, from Michigan Catalog, Vol. 4 (https://ui.adsabs.harvard.edu/abs/1988MSS...C04....0H/abstract)",
+  "metallicityDex": -0.456,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-167 (pscomppars): [Fe/H] -0.456 dex, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "luminosityLogSolar": 0.507,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-167 (pscomppars): log10 of the luminosity in solar units 0.50651, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "ageGyr": 5.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-167 (pscomppars): age 5.3 Gyr, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "projectedRotationSpeedKmS": 2.88,
+  "projectedRotationSpeedSource": "SIMBAD, HD 212657: projected rotation speed 2.88 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

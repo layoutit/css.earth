@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "TICv8, the stellar temperature of Kepler-411 c's parameter set from TICv8 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "surfaceGravityLogg": 4.55,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-411.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.550, rounded to two decimals",
+  "spectralType": "K2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Kepler-411 (pscomppars): spectral type K2 V, from Sun et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract)",
+  "metallicityDex": 0.21,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-411 (pscomppars): [Fe/H] 0.21 dex, from Fulton & Petigura 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..264F/abstract)",
+  "luminosityLogSolar": -0.579,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-411 (pscomppars): log10 of the luminosity in solar units -0.57899, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 0.212,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-411 (pscomppars): age 0.212 Gyr, from Sun et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract)",
+  "rotationPeriodDays": 10.4,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Kepler-411 (pscomppars): rotation period 10.4 d, from Sun et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...624A..15S/abstract)",
+  "projectedRotationSpeedKmS": 5.39,
+  "projectedRotationSpeedSource": "SIMBAD, Kepler-411: projected rotation speed 5.39 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

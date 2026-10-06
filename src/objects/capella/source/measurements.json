@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Torres et al. (2015), ApJ 807, 26, Table 5: primary Teff 4970 +/- 50 K (https://doi.org/10.1088/0004-637X/807/1/26)",
   "surfaceGravityLogg": 2.69,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/capella.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.691, rounded to two decimals",
+  "spectralType": "G3III:",
+  "spectralTypeSource": "SIMBAD, * alf Aur: spectral type G3III: (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 35,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Aur: projected rotation speed 35 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

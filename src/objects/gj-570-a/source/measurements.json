@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 570A: effective temperature in K, 4507 +/- 58, from the literature measurement the table lists (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-570-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.572, rounded to two decimals",
+  "spectralType": "K4V",
+  "spectralTypeSource": "SIMBAD, HD 131977: spectral type K4V (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 2.8,
+  "projectedRotationSpeedSource": "SIMBAD, HD 131977: projected rotation speed 2.8 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

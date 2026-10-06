@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Ranshaw et al. 2026, the stellar temperature of the default parameter set of K2-232 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract)",
   "surfaceGravityLogg": 4.32,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-232.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.322, rounded to two decimals",
+  "spectralType": "F",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-232 (pscomppars): spectral type F, from Ranshaw et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract)",
+  "metallicityDex": 0.106,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-232 (pscomppars): [Fe/H] 0.106 dex, from Ranshaw et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract)",
+  "luminosityLogSolar": 0.216,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-232 (pscomppars): log10 of the luminosity in solar units 0.21643, from Yu et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..127Y/abstract)",
+  "ageGyr": 3.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-232 (pscomppars): age 3.9 Gyr, from Ranshaw et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract)",
+  "projectedRotationSpeedKmS": 4.16,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-232 (pscomppars): projected rotation speed 4.16 km/s, from Ranshaw et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260909077R/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

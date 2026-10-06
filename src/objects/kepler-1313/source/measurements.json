@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1313 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
   "surfaceGravityLogg": 4.54,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-1313.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.543, rounded to two decimals",
+  "spectralType": "K2V",
+  "spectralTypeSource": "SIMBAD, Kepler-1313: spectral type K2V (2022A&A...664A..78F)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-1313 (pscomppars): [Fe/H] 0 dex, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "luminosityLogSolar": -0.325,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1313 (pscomppars): log10 of the luminosity in solar units -0.3248, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 2.69,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-1313 (pscomppars): age 2.69 Gyr, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "projectedRotationSpeedKmS": 7.87,
+  "projectedRotationSpeedSource": "SIMBAD, Kepler-1313: projected rotation speed 7.87 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

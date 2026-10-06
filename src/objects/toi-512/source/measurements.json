@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Rodrigues et al. 2025, the stellar temperature of the default parameter set of TOI-512 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract)",
   "surfaceGravityLogg": 4.41,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-512.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.409, rounded to two decimals",
+  "spectralType": "K0",
+  "spectralTypeSource": "SIMBAD, CD-38 2650: spectral type K0 (1955AnCap..18....0J)",
+  "metallicityDex": -0.11,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-512 (pscomppars): [Fe/H] -0.11 dex, from Rodrigues et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract)",
+  "luminosityLogSolar": -0.257,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-512 (pscomppars): log10 of the luminosity in solar units -0.25696, from Rodrigues et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract)",
+  "ageGyr": 8.235,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-512 (pscomppars): age 8.235 Gyr, from Rodrigues et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract)",
+  "projectedRotationSpeedKmS": 1.63,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-512 (pscomppars): projected rotation speed 1.63 km/s, from Rodrigues et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.237R/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

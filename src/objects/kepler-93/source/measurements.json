@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-93 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-93.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.471, rounded to two decimals",
+  "spectralType": "G5V",
+  "spectralTypeSource": "SIMBAD, BD+38 3583: spectral type G5V (2018MNRAS.481.3244G)",
+  "metallicityDex": -0.18,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-93 (pscomppars): [Fe/H] -0.18 dex, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
+  "luminosityLogSolar": -0.106,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-93 (pscomppars): log10 of the luminosity in solar units -0.10565, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 5.05,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-93 (pscomppars): age 5.05 Gyr, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
+  "projectedRotationSpeedKmS": 0.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-93 (pscomppars): projected rotation speed 0.5 km/s, from Marcy et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJS..210...20M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

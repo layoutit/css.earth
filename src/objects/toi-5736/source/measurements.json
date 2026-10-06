@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Gomez Barrientos et al. 2026, the stellar temperature of the default parameter set of TOI-5736 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....171...99G/abstract)",
   "surfaceGravityLogg": 4.67,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5736.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.667, rounded to two decimals",
+  "spectralType": "M0e",
+  "spectralTypeSource": "SIMBAD, UCAC4 698-056156: spectral type M0e (2019MNRAS.485.2167G)",
+  "luminosityLogSolar": -1.133,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5736 (pscomppars): log10 of the luminosity in solar units -1.1332, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "projectedRotationSpeedKmS": 2.03,
+  "projectedRotationSpeedSource": "SIMBAD, UCAC4 698-056156: projected rotation speed 2.03 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

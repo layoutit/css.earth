@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Poultourtzidis et al. 2026, the stellar temperature of the default parameter set of TOI-1243 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
   "surfaceGravityLogg": 4.73,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1243.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.733, rounded to two decimals",
+  "spectralType": "M2.0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1243 (pscomppars): spectral type M2.0 V, from Poultourtzidis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
+  "metallicityDex": -0.2,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1243 (pscomppars): [Fe/H] -0.2 dex, from Poultourtzidis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
+  "luminosityLogSolar": -1.446,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1243 (pscomppars): log10 of the luminosity in solar units -1.44551, from Poultourtzidis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1243 (pscomppars): projected rotation speed 2 km/s, from Poultourtzidis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A.106P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

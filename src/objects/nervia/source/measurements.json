@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 951427000863064192: teff_gspphot 5592.4697 K (16th-84th percentiles 5589.76-5595.2583), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.38,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/nervia.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.380, rounded to two decimals",
+  "spectralType": "G5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 49674 (pscomppars): spectral type G5 V, from Butler et al. 2003 (https://ui.adsabs.harvard.edu/abs/2003ApJ...582..455B/abstract)",
+  "metallicityDex": 0.32,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 49674 (pscomppars): [Fe/H] 0.32 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": -0.022,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 49674 (pscomppars): log10 of the luminosity in solar units -0.02162, from Wright et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...657..533W/abstract)",
+  "ageGyr": 3.62,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 49674 (pscomppars): age 3.62 Gyr, from Sanz-Forcada et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...511L...8S/abstract)",
+  "projectedRotationSpeedKmS": 0.42,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 49674 (pscomppars): projected rotation speed 0.42 km/s, from Butler et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

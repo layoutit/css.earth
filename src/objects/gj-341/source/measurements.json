@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "DiTomasso et al. 2025, the stellar temperature of the default parameter set of GJ 341 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract)",
   "surfaceGravityLogg": 4.71,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-341.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.710, rounded to two decimals",
+  "spectralType": "M1",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 341 (pscomppars): spectral type M1, from DiTomasso et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract)",
+  "metallicityDex": -0.16,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 341 (pscomppars): [Fe/H] -0.16 dex, from DiTomasso et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract)",
+  "luminosityLogSolar": -1.311,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 341 (pscomppars): log10 of the luminosity in solar units -1.31072, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "projectedRotationSpeedKmS": 2.32,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 341 (pscomppars): projected rotation speed 2.32 km/s, from DiTomasso et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...979..214D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

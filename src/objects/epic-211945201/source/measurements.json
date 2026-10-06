@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Livingston et al. 2018, the stellar temperature of the default parameter set of EPIC 211945201 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract)",
   "surfaceGravityLogg": 4.22,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-211945201.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.220, rounded to two decimals",
+  "spectralType": "G0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of EPIC 211945201 (pscomppars): spectral type G0, from Chakraborty et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156....3C/abstract)",
+  "metallicityDex": 0.1,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of EPIC 211945201 (pscomppars): [Fe/H] 0.1 dex, from Livingston et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..277L/abstract)",
+  "luminosityLogSolar": 0.373,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of EPIC 211945201 (pscomppars): log10 of the luminosity in solar units 0.37334, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "ageGyr": 3.99,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of EPIC 211945201 (pscomppars): age 3.99 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 0.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of EPIC 211945201 (pscomppars): projected rotation speed 0.1 km/s, from Howard et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

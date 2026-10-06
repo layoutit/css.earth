@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Lustig-Yaeger et al. 2023, the stellar temperature of the default parameter set of LHS 475 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract)",
   "surfaceGravityLogg": 4.97,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lhs-475.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.965, rounded to two decimals",
+  "spectralType": "M3.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LHS 475 (pscomppars): spectral type M3.5 V, from Lustig-Yaeger et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract)",
+  "luminosityLogSolar": -2.064,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LHS 475 (pscomppars): log10 of the luminosity in solar units -2.06449, from Ment et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..197M/abstract)",
+  "rotationPeriodDays": 79.32,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LHS 475 (pscomppars): rotation period 79.32 d, from Lustig-Yaeger et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023NatAs...7.1317L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

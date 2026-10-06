@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6053512007260865280: teff_gspphot 6070.5117 K (16th-84th percentiles 6069.662-6071.4014), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.28,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tupa.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.276, rounded to two decimals",
+  "spectralType": "F8 V CH+0.4",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 108147 (pscomppars): spectral type F8 V CH+0.4, from Gray et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006AJ....132..161G/abstract)",
+  "metallicityDex": 0.18,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 108147 (pscomppars): [M/H] 0.1803 dex, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "luminosityLogSolar": 0.303,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 108147 (pscomppars): log10 of the luminosity in solar units 0.30297, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 3.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 108147 (pscomppars): age 3.2 Gyr, from Takeda et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJS..168..297T/abstract)",
+  "projectedRotationSpeedKmS": 5.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 108147 (pscomppars): projected rotation speed 5.3 km/s, from Pepe et al. 2002 (https://ui.adsabs.harvard.edu/abs/2002A&A...388..632P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

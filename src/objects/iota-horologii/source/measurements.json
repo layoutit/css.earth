@@ -9,6 +9,18 @@
   "radiusSource": "Radius 1.16 +/- 0.04 solar radii and mass 1.23 +/- 0.12 solar masses: Bruntt et al. (2010, MNRAS 405, 1907), as tabulated by Alvarado-Gomez et al. (2018, MNRAS 473, 4326; arXiv:1710.02438), Table 1, the values the ZDI maps of this package were computed with. Temperature 6080 +/- 80 K from the same table. presentationUp: the display axis is a sky-plane convention.",
   "effectiveTemperatureK": 6080,
   "effectiveTemperatureSource": "Bruntt et al. (2010), MNRAS 405, 1907: 6,080 +/- 80 K, as tabulated by Alvarado-Gomez et al. (2018), Table 1 (https://arxiv.org/abs/1710.02438)",
+  "spectralType": "G0V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HR 810 (pscomppars): spectral type G0V, from Turnbull 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract)",
+  "metallicityDex": 0.16,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HR 810 (pscomppars): [Fe/H] 0.16 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.253,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HR 810 (pscomppars): log10 of the luminosity in solar units 0.25309, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 2.72,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HR 810 (pscomppars): age 2.72 Gyr, from Turnbull 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract)",
+  "rotationPeriodDays": 7.9,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HR 810 (pscomppars): rotation period 7.9 d, from Pizzolato et al. 2003 (https://ui.adsabs.harvard.edu/abs/2003A&A...397..147P/abstract)",
+  "projectedRotationSpeedKmS": 6.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HR 810 (pscomppars): projected rotation speed 6.5 km/s, from Valenti & Fischer 2005 (https://ui.adsabs.harvard.edu/abs/2005ApJS..159..141V/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."

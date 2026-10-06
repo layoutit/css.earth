@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Hellier et al. 2019, the stellar temperature of the default parameter set of WASP-145 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract)",
   "surfaceGravityLogg": 4.65,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-145-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.654, rounded to two decimals",
+  "spectralType": "K2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-145 A (pscomppars): spectral type K2 V, from Hellier et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract)",
+  "metallicityDex": -0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-145 A (pscomppars): [Fe/H] -0.04 dex, from Hellier et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract)",
+  "luminosityLogSolar": -0.684,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-145 A (pscomppars): log10 of the luminosity in solar units -0.68352, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 6.99,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-145 A (pscomppars): age 6.99 Gyr, from Hellier et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract)",
+  "projectedRotationSpeedKmS": 2.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-145 A (pscomppars): projected rotation speed 2.1 km/s, from Hellier et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019MNRAS.482.1379H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Domiciano de Souza et al. (2021), A&A 654, A19, Sect. 5.3: Teff 7661 +/- 81 K from the bolometric flux of the SED fit and the PIONIER diameter (https://doi.org/10.1051/0004-6361/202140478)",
   "surfaceGravityLogg": 1.7,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/canopus.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.701, rounded to two decimals",
+  "spectralType": "A9II",
+  "spectralTypeSource": "SIMBAD, * alf Car: spectral type A9II (1989ApJS...69..301G)",
+  "projectedRotationSpeedKmS": 9,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Car: projected rotation speed 9 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

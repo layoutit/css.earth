@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Chen et al. 2020, the stellar temperature of WASP-21 b's parameter set from Chen et al. 2020 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...642A..54C/abstract)",
   "surfaceGravityLogg": 4.28,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-21.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.277, rounded to two decimals",
+  "spectralType": "G3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-21 (pscomppars): spectral type G3 V, from Bouchy et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract)",
+  "metallicityDex": -0.22,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-21 (pscomppars): [M/H] -0.22 dex, from Alderson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.497.5182A/abstract)",
+  "luminosityLogSolar": 0.304,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-21 (pscomppars): log10 of the luminosity in solar units 0.30426, from Alderson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.497.5182A/abstract)",
+  "ageGyr": 12,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-21 (pscomppars): age 12 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-21 (pscomppars): projected rotation speed 1.5 km/s, from Bouchy et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

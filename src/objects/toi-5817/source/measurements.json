@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Naponiello et al. 2025, the stellar temperature of the default parameter set of TOI-5817 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
   "surfaceGravityLogg": 4.12,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5817.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.116, rounded to two decimals",
+  "spectralType": "G2 IV-V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5817 (pscomppars): spectral type G2 IV-V, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
+  "metallicityDex": -0.24,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5817 (pscomppars): [Fe/H] -0.24 dex, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
+  "luminosityLogSolar": 0.312,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5817 (pscomppars): log10 of the luminosity in solar units 0.31175, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
+  "ageGyr": 9.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5817 (pscomppars): age 9.7 Gyr, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
+  "projectedRotationSpeedKmS": 1.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5817 (pscomppars): projected rotation speed 1.2 km/s, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

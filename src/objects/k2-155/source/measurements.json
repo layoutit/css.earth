@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Díez Alonso et al. 2018, the stellar temperature of the default parameter set of K2-155 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D/abstract)",
   "surfaceGravityLogg": 4.72,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-155.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.724, rounded to two decimals",
+  "spectralType": "K7",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-155 (pscomppars): spectral type K7, from Luo et al. 2018 (http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=V/153/stellar4)",
+  "metallicityDex": -0.3,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-155 (pscomppars): [Fe/H] -0.3 dex, from Díez Alonso et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D/abstract)",
+  "luminosityLogSolar": -1.229,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-155 (pscomppars): log10 of the luminosity in solar units -1.22915, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodDays": 34.8,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-155 (pscomppars): rotation period 34.8 d, from Díez Alonso et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D/abstract)",
+  "projectedRotationSpeedKmS": 1.2,
+  "projectedRotationSpeedSource": "SIMBAD, LP 415-17: projected rotation speed 1.2 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

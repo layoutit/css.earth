@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Osborn et al. 2026, the stellar temperature of the default parameter set of TOI-672 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract)",
   "surfaceGravityLogg": 4.71,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-672.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.706, rounded to two decimals",
+  "spectralType": "M0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-672 (pscomppars): spectral type M0 V, from Osborn et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract)",
+  "metallicityDex": -0.14,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-672 (pscomppars): [Fe/H] -0.14 dex, from Osborn et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract)",
+  "luminosityLogSolar": -1.319,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-672 (pscomppars): log10 of the luminosity in solar units -1.31885, from Osborn et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract)",
+  "ageGyr": 11.151,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5396580575830873728, flags_flame 00: age_flame 11.150886 Gyr (16th to 84th percentiles 6.060696 to 13.5)",
+  "rotationPeriodDays": 18.5,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-672 (pscomppars): rotation period 18.5 d, from Osborn et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract)",
+  "projectedRotationSpeedKmS": 3.75,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-672 (pscomppars): projected rotation speed 3.75 km/s, from Osborn et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...709A..23O/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

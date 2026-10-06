@@ -9,6 +9,12 @@
   "radiusSource": "0.0121 +/- 0.0002 solar radii (8,417.97 km at 695,700 km per solar radius), Limbach et al. (2025, arXiv:2504.16982), Table 1, from white dwarf model fits to its photometry and Gaia distance. About 1.32 Earth radii. Vanderburg et al. (2020, Nature 585, 363), Table 1, gave 0.0131 +/- 0.00054 solar radii.",
   "effectiveTemperatureK": 4920,
   "effectiveTemperatureSource": "Limbach et al. (2025), arXiv:2504.16982, Table 1: 4920 +/- 50 K. https://arxiv.org/abs/2504.16982",
+  "spectralType": "DC",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WD 1856+534 (pscomppars): spectral type DC, from Vanderburg et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020Natur.585..363V/abstract)",
+  "luminosityLogSolar": -4.12,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WD 1856+534 (pscomppars): log10 of the luminosity in solar units -4.12, from Calculated Value (/docs/pscp_calc.html)",
+  "ageGyr": 7.93,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WD 1856+534 (pscomppars): age 7.93 Gyr, from Vanderburg et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020Natur.585..363V/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured."

@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 14, Name='AN Aur', columns Teff, e_Teff (K): Teff 5500 +/- 153 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 1.94,
   "surfaceGravitySource": "log g 1.94 from 2011AJ....141...53S; the 2 published values span log g 1.94 to 2.13, across which the limb law changes by at most 0.2% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2011AJ....141...53S)",
+  "spectralType": "F6",
+  "spectralTypeSource": "SIMBAD, V* AN Aur: spectral type F6",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

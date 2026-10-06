@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Mann et al. 2016, the stellar temperature of the default parameter set of K2-33 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract)",
   "surfaceGravityLogg": 4.14,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-33.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.144, rounded to two decimals",
+  "spectralType": "M3.3",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-33 (pscomppars): spectral type M3.3, from Mann et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract)",
+  "luminosityLogSolar": -0.824,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-33 (pscomppars): log10 of the luminosity in solar units -0.82391, from Mann et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract)",
+  "ageGyr": 0.009,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-33 (pscomppars): age 0.0093 Gyr, from Mann et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract)",
+  "rotationPeriodDays": 6.29,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-33 (pscomppars): rotation period 6.29 d, from Mann et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract)",
+  "projectedRotationSpeedKmS": 8.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-33 (pscomppars): projected rotation speed 8.2 km/s, from Mann et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....152...61M/abstract)",
+  "spinInclinationDegrees": 76.2,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.05 solar radii): sin i = v sin i × P / (2πR) = 0.971. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Eschen et al. 2025, the stellar temperature of the default parameter set of TOI-2345 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2345.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.574, rounded to two decimals",
+  "spectralType": "K",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2345 (pscomppars): spectral type K, from Eschen et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract)",
+  "metallicityDex": -0.1,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2345 (pscomppars): [Fe/H] -0.1 dex, from Eschen et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract)",
+  "luminosityLogSolar": -0.636,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2345 (pscomppars): log10 of the luminosity in solar units -0.63639, from Eschen et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract)",
+  "ageGyr": 6.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2345 (pscomppars): age 6.3 Gyr, from Eschen et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract)",
+  "projectedRotationSpeedKmS": 2.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2345 (pscomppars): projected rotation speed 2.3 km/s, from Eschen et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.2614E/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

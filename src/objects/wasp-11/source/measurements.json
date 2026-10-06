@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-11 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.69,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-11.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.692, rounded to two decimals",
+  "spectralType": "K3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-11 (pscomppars): spectral type K3 V, from Mancini et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...579A.136M/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-11 (pscomppars): [Fe/H] 0 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-11 (pscomppars): log10 of the luminosity in solar units 0, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 7.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-11 (pscomppars): age 7.6 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 1.04,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-11 (pscomppars): projected rotation speed 1.04 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

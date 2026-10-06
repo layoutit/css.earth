@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 92352621 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467)",
   "surfaceGravityLogg": 4.18,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/cd-34-14724-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.180, rounded to two decimals",
+  "spectralType": "F9",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-94 B (pscomppars): spectral type F9, from Neveu-VanMalle et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...572A..49N/abstract)",
+  "metallicityDex": 0.23,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-94 B (pscomppars): [Fe/H] 0.23 dex, from Neveu-VanMalle et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...572A..49N/abstract)",
+  "luminosityLogSolar": 0.351,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-94 B (pscomppars): log10 of the luminosity in solar units 0.35112, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-94 B (pscomppars): age 4 Gyr, from Neveu-VanMalle et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...572A..49N/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-94 B (pscomppars): projected rotation speed 1.5 km/s, from Neveu-VanMalle et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...572A..49N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of HD 149026 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.29,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-149026.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.292, rounded to two decimals",
+  "spectralType": "G0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 149026 (pscomppars): spectral type G0, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
+  "metallicityDex": 0.32,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 149026 (pscomppars): [Fe/H] 0.32 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.48,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 149026 (pscomppars): log10 of the luminosity in solar units 0.48, from Carter et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...696..241C/abstract)",
+  "ageGyr": 2.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 149026 (pscomppars): age 2.6 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 149026 (pscomppars): projected rotation speed 6 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 20630: effective temperature in K, from the angular diameter and the bolometric flux, 5776 +/- 81 (https://doi.org/10.1088/0004-637X/746/1/101)",
   "surfaceGravityLogg": 4.53,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kappa-ceti.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.527, rounded to two decimals",
+  "spectralType": "G5V",
+  "spectralTypeSource": "SIMBAD, * kap01 Cet: spectral type G5V (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 5.86,
+  "projectedRotationSpeedSource": "SIMBAD, * kap01 Cet: projected rotation speed 5.86 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 20630) (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Mistry et al. 2024, the stellar temperature of the default parameter set of TOI-2068 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
   "surfaceGravityLogg": 4.73,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2068.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.729, rounded to two decimals",
+  "metallicityDex": 0.27,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2068 (pscomppars): [Fe/H] 0.27 dex, from Mistry et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
+  "luminosityLogSolar": -1.311,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2068 (pscomppars): log10 of the luminosity in solar units -1.31069, from Mistry et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
+  "ageGyr": 7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2068 (pscomppars): age 7 Gyr, from Mistry et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...30M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

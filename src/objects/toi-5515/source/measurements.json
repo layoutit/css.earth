@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TOI-5515 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5515.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.574, rounded to two decimals",
+  "luminosityLogSolar": -0.242,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5515 (pscomppars): log10 of the luminosity in solar units -0.24167, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 0.504,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 631855767313862912, flags_flame 00: age_flame 0.5042795 Gyr (16th to 84th percentiles 0.2 to 1.6750487)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

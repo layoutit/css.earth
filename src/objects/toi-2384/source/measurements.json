@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Bryant et al. 2024, the stellar temperature of the default parameter set of TOI-2384 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.533.3893B/abstract)",
   "surfaceGravityLogg": 4.67,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2384.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.668, rounded to two decimals",
+  "metallicityDex": 0.332,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2384 (pscomppars): [Fe/H] 0.332 dex, from Bryant et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.533.3893B/abstract)",
+  "luminosityLogSolar": -1.119,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2384 (pscomppars): log10 of the luminosity in solar units -1.11907, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 9.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2384 (pscomppars): age 9.4 Gyr, from Bryant et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.533.3893B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

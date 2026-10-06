@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Dai et al. 2023, the stellar temperature of the default parameter set of TOI-2018 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract)",
   "surfaceGravityLogg": 4.61,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2018.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.609, rounded to two decimals",
+  "spectralType": "K V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2018 (pscomppars): spectral type K V, from Dai et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract)",
+  "metallicityDex": -0.58,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2018 (pscomppars): [Fe/H] -0.58 dex, from Dai et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract)",
+  "luminosityLogSolar": -1,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2018 (pscomppars): log10 of the luminosity in solar units -1, from Dai et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract)",
+  "rotationPeriodDays": 23.5,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2018 (pscomppars): rotation period 23.5 d, from Dai et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2018 (pscomppars): projected rotation speed 2 km/s, from Dai et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...49D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

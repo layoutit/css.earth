@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Persson et al. 2025, the stellar temperature of the default parameter set of TOI-1438 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract)",
   "surfaceGravityLogg": 4.55,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1438.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.553, rounded to two decimals",
+  "spectralType": "K0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1438 (pscomppars): spectral type K0 V, from Persson et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract)",
+  "metallicityDex": 0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1438 (pscomppars): [Fe/H] 0.03 dex, from Persson et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract)",
+  "luminosityLogSolar": -0.347,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1438 (pscomppars): log10 of the luminosity in solar units -0.34679, from Persson et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract)",
+  "ageGyr": 2.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1438 (pscomppars): age 2.2 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "projectedRotationSpeedKmS": 1.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1438 (pscomppars): projected rotation speed 1.8 km/s, from Persson et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..69P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

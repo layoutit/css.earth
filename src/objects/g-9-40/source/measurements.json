@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Luque et al. 2022, the stellar temperature of the default parameter set of G 9-40 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract)",
   "surfaceGravityLogg": 4.95,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/g-9-40.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.946, rounded to two decimals",
+  "spectralType": "M2.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of G 9-40 (pscomppars): spectral type M2.5 V, from Stefansson et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..100S/abstract)",
+  "metallicityDex": -0.07,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of G 9-40 (pscomppars): [Fe/H] -0.07 dex, from Luque et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract)",
+  "luminosityLogSolar": -1.96,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of G 9-40 (pscomppars): log10 of the luminosity in solar units -1.96019, from Luque et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract)",
+  "ageGyr": 9.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of G 9-40 (pscomppars): age 9.9 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodDays": 30,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of G 9-40 (pscomppars): rotation period 30 d, from Luque et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of G 9-40 (pscomppars): projected rotation speed 2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

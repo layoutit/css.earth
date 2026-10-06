@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 702B: effective temperature in K, 4393 +/- 149, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.63,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-702-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.630, rounded to two decimals",
+  "spectralType": "K4V",
+  "spectralTypeSource": "SIMBAD, * 70 Oph B: spectral type K4V (1967AJ.....72.1334C)",
+  "projectedRotationSpeedKmS": 6.26,
+  "projectedRotationSpeedSource": "SIMBAD, * 70 Oph B: projected rotation speed 6.26 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

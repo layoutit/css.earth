@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "de Leon et al. 2021, the stellar temperature of the default parameter set of K2-344 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)",
   "surfaceGravityLogg": 4.77,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-344.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.765, rounded to two decimals",
+  "metallicityDex": -0.95,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-344 (pscomppars): [Fe/H] -0.95 dex, from de Leon et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)",
+  "luminosityLogSolar": -1.225,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-344 (pscomppars): log10 of the luminosity in solar units -1.22508, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "projectedRotationSpeedKmS": 1.52,
+  "projectedRotationSpeedSource": "SIMBAD, K2-344: projected rotation speed 1.52 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

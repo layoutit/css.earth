@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1315900158983769472: teff_gspphot 4938.5146 K (16th-84th percentiles 4931.8877-4944.814), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 2.87,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kamuy.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.875, rounded to two decimals",
+  "spectralType": "K0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 145457 (pscomppars): spectral type K0, from Cannon & Pickering 1918 (https://ui.adsabs.harvard.edu/abs/1918AnHar..91....1C/abstract)",
+  "metallicityDex": -0.14,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 145457 (pscomppars): [Fe/H] -0.14 dex, from Sato et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010PASJ...62.1063S/abstract)",
+  "luminosityLogSolar": 1.655,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 145457 (pscomppars): log10 of the luminosity in solar units 1.65514, from Sato et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010PASJ...62.1063S/abstract)",
+  "ageGyr": 2.605,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 145457 (pscomppars): age 2.605 Gyr, from Sousa et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...576A..94S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Effective temperature 5757 ± 85 K from Jenkins et al. 2015 (AJ 150, 56; https://arxiv.org/abs/1507.06723), Table 2, the radius source: high-resolution spectroscopy with SpecMatch.",
   "surfaceGravityLogg": 4.36,
   "surfaceGravitySource": "log g from the astronomy record's GM and radius (physicalNotes), log10(GM/R^2) in cgs",
+  "spectralType": "G2",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Kepler-452 (pscomppars): spectral type G2, from Jenkins et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....150...56J/abstract)",
+  "metallicityDex": 0.21,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-452 (pscomppars): [Fe/H] 0.21 dex, from Jenkins et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....150...56J/abstract)",
+  "luminosityLogSolar": 0.084,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-452 (pscomppars): log10 of the luminosity in solar units 0.08448, from Q1-Q17 DR25 Supplemental KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
+  "ageGyr": 6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-452 (pscomppars): age 6 Gyr, from Jenkins et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....150...56J/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

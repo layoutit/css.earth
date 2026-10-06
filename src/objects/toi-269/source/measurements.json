@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Cointepas et al. 2021, the stellar temperature of the default parameter set of TOI-269 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...650A.145C/abstract)",
   "surfaceGravityLogg": 4.83,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-269.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.831, rounded to two decimals",
+  "spectralType": "M2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-269 (pscomppars): spectral type M2 V, from Cointepas et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...650A.145C/abstract)",
+  "metallicityDex": -0.29,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-269 (pscomppars): [Fe/H] -0.29 dex, from Cointepas et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...650A.145C/abstract)",
+  "luminosityLogSolar": -1.647,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-269 (pscomppars): log10 of the luminosity in solar units -1.64675, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

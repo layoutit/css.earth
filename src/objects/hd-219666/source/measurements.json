@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Murphy et al. 2025, the stellar temperature of the default parameter set of HD 219666 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169..286M/abstract)",
   "surfaceGravityLogg": 4.4,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-219666.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.397, rounded to two decimals",
+  "spectralType": "G5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 219666 (pscomppars): spectral type G5 V, from Oddo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
+  "metallicityDex": 0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 219666 (pscomppars): [Fe/H] 0.04 dex, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "luminosityLogSolar": -0.028,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 219666 (pscomppars): log10 of the luminosity in solar units -0.0278, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 10,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 219666 (pscomppars): age 10 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 2.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 219666 (pscomppars): projected rotation speed 2.2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

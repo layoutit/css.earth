@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Osborn et al. 2021, the stellar temperature of the default parameter set of TOI-431 d in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract)",
   "surfaceGravityLogg": 4.6,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-431.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.602, rounded to two decimals",
+  "spectralType": "K3+Vk:",
+  "spectralTypeSource": "SIMBAD, CD-26 2288: spectral type K3+Vk: (2006AJ....132..161G)",
+  "metallicityDex": 0.2,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-431 (pscomppars): [Fe/H] 0.2 dex, from Osborn et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract)",
+  "luminosityLogSolar": -0.565,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-431 (pscomppars): log10 of the luminosity in solar units -0.56509, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 11.409,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2908664557091200768, flags_flame 00: age_flame 11.408794 Gyr (16th to 84th percentiles 9.148018 to 13.5)",
+  "rotationPeriodDays": 30.5,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-431 (pscomppars): rotation period 30.5 d, from Osborn et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract)",
+  "projectedRotationSpeedKmS": 2.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-431 (pscomppars): projected rotation speed 2.5 km/s, from Osborn et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.2782O/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

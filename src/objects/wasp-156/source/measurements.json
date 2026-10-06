@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Lafarga et al. 2026, the stellar temperature of the default parameter set of WASP-156 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.tmp..940L/abstract)",
   "surfaceGravityLogg": 4.6,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-156.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.602, rounded to two decimals",
+  "spectralType": "K3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-156 (pscomppars): spectral type K3 V, from Lafarga et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.tmp..940L/abstract)",
+  "metallicityDex": 0.32,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-156 (pscomppars): [Fe/H] 0.32 dex, from Lafarga et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.tmp..940L/abstract)",
+  "luminosityLogSolar": -0.418,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-156 (pscomppars): log10 of the luminosity in solar units -0.41794, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "ageGyr": 5.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-156 (pscomppars): age 5.6 Gyr, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-156 (pscomppars): projected rotation speed 2 km/s, from Lafarga et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.tmp..940L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

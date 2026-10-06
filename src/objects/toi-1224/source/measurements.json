@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Thao et al. 2024, the stellar temperature of the default parameter set of TOI-1224 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract)",
   "surfaceGravityLogg": 4.83,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1224.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.827, rounded to two decimals",
+  "luminosityLogSolar": -1.697,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1224 (pscomppars): log10 of the luminosity in solar units -1.6968, from Thao et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract)",
+  "ageGyr": 0.21,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1224 (pscomppars): age 0.21 Gyr, from Thao et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract)",
+  "rotationPeriodDays": 1.23,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1224 (pscomppars): rotation period 1.23 d, from Thao et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract)",
+  "projectedRotationSpeedKmS": 22.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1224 (pscomppars): projected rotation speed 22.1 km/s, from Thao et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

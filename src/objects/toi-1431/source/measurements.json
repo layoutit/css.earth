@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Addison et al. 2021, the stellar temperature of the default parameter set of TOI-1431 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract)",
   "surfaceGravityLogg": 4.15,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1431.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.150, rounded to two decimals",
+  "spectralType": "Am C",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1431 (pscomppars): spectral type Am C, from Addison et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract)",
+  "metallicityDex": 0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1431 (pscomppars): [Fe/H] 0.09 dex, from Addison et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract)",
+  "luminosityLogSolar": 1.068,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1431 (pscomppars): log10 of the luminosity in solar units 1.06819, from Addison et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract)",
+  "ageGyr": 0.29,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1431 (pscomppars): age 0.29 Gyr, from Addison et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract)",
+  "projectedRotationSpeedKmS": 6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1431 (pscomppars): projected rotation speed 6 km/s, from Addison et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..292A/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

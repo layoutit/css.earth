@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Guenther et al. 2026, the stellar temperature of the default parameter set of TOI-4427 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
   "surfaceGravityLogg": 4.49,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4427.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.494, rounded to two decimals",
+  "metallicityDex": 0.002,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4427 (pscomppars): [Fe/H] 0.002 dex, from Guenther et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
+  "luminosityLogSolar": -0.174,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4427 (pscomppars): log10 of the luminosity in solar units -0.17393, from Guenther et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
+  "ageGyr": 7.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4427 (pscomppars): age 7.9 Gyr, from Guenther et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

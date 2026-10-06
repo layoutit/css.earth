@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Murgas et al. 2021, the stellar temperature of the default parameter set of TOI-674 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract)",
   "surfaceGravityLogg": 4.81,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-674.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.815, rounded to two decimals",
+  "spectralType": "M2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-674 (pscomppars): spectral type M2 V, from Murgas et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract)",
+  "metallicityDex": 0.17,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-674 (pscomppars): [Fe/H] 0.17 dex, from Murgas et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract)",
+  "luminosityLogSolar": -1.614,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-674 (pscomppars): log10 of the luminosity in solar units -1.61439, from Murgas et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract)",
+  "rotationPeriodDays": 52,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-674 (pscomppars): rotation period 52 d, from Murgas et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract)",
+  "projectedRotationSpeedKmS": 0.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-674 (pscomppars): projected rotation speed 0.4 km/s, from Murgas et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...653A..60M/abstract)",
+  "spinInclinationDegrees": 78.2,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.42 solar radii): sin i = v sin i × P / (2πR) = 0.979. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

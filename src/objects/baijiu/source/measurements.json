@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6591574171318785664: teff_gspphot 10048.173 K (16th-84th percentiles 10034.558-10066.791), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 3.92,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/baijiu.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.922, rounded to two decimals",
+  "spectralType": "A0IV",
+  "spectralTypeSource": "SIMBAD, * iot PsA: spectral type A0IV (1987ApJS...65..581G)",
+  "luminosityLogSolar": 1.916,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6591574171318785664, flags_flame 00: lum_flame 82.501274 solar luminosities (16th to 84th percentiles 81.11319 to 84.02048); its log10 is recorded",
+  "ageGyr": 0.347,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6591574171318785664, flags_flame 00: age_flame 0.34745696 Gyr (16th to 84th percentiles 0.2983663 to 0.39651936)",
+  "projectedRotationSpeedKmS": 55,
+  "projectedRotationSpeedSource": "SIMBAD, * iot PsA: projected rotation speed 55 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

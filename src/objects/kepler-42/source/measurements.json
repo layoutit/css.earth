@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Muirhead et al. 2012, the stellar temperature of the default parameter set of Kepler-42 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract)",
   "surfaceGravityLogg": 5.09,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-42.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.091, rounded to two decimals",
+  "spectralType": "M",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Kepler-42 (pscomppars): spectral type M, from Muirhead et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract)",
+  "metallicityDex": -0.33,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-42 (pscomppars): [M/H] -0.33 dex, from Muirhead et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract)",
+  "luminosityLogSolar": -2.62,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-42 (pscomppars): log10 of the luminosity in solar units -2.62, from Muirhead et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract)",
+  "ageGyr": 4.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-42 (pscomppars): age 4.5 Gyr, from Muirhead et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract)",
+  "projectedRotationSpeedKmS": 3.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-42 (pscomppars): projected rotation speed 3.3 km/s, from Muirhead et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012arXiv1201.2189M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

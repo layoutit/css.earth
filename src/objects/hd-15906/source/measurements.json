@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Tuson et al. 2023, the stellar temperature of the default parameter set of HD 15906 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-15906.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.572, rounded to two decimals",
+  "spectralType": "K V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 15906 (pscomppars): spectral type K V, from Tuson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract)",
+  "metallicityDex": 0.02,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 15906 (pscomppars): [Fe/H] 0.02 dex, from Tuson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract)",
+  "luminosityLogSolar": -0.569,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 15906 (pscomppars): log10 of the luminosity in solar units -0.56864, from Tuson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract)",
+  "projectedRotationSpeedKmS": 2.7,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 15906 (pscomppars): projected rotation speed 2.7 km/s, from Tuson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523.3090T/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

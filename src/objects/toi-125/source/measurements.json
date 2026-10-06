@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Nielsen et al. 2020, the stellar temperature of the default parameter set of TOI-125 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract)",
   "surfaceGravityLogg": 4.52,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-125.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.515, rounded to two decimals",
+  "spectralType": "K0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-125 (pscomppars): spectral type K0 V, from Nielsen et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract)",
+  "metallicityDex": -0.02,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-125 (pscomppars): [Fe/H] -0.02 dex, from Nielsen et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract)",
+  "luminosityLogSolar": -0.285,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-125 (pscomppars): log10 of the luminosity in solar units -0.28483, from Nielsen et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract)",
+  "ageGyr": 6.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-125 (pscomppars): age 6.8 Gyr, from Nielsen et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract)",
+  "projectedRotationSpeedKmS": 1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-125 (pscomppars): projected rotation speed 1 km/s, from Nielsen et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.492.5399N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

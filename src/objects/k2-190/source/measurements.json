@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Mayo et al. 2018, the stellar temperature of the default parameter set of K2-190 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-190.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.474, rounded to two decimals",
+  "metallicityDex": -0.19,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-190 (pscomppars): [Fe/H] -0.19 dex, from Mayo et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155..136M/abstract)",
+  "luminosityLogSolar": -0.068,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-190 (pscomppars): log10 of the luminosity in solar units -0.06781, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "ageGyr": 4.979,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3607243530404017280, flags_flame 00: age_flame 4.9786224 Gyr (16th to 84th percentiles 3.8289032 to 6.0903063)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

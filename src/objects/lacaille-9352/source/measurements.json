@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 887: effective temperature in K, 3676 +/- 35, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.81,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lacaille-9352.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.809, rounded to two decimals",
+  "spectralType": "M1 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 887 (pscomppars): spectral type M1 V, from Hartogh et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..93H/abstract)",
+  "metallicityDex": -0.06,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 887 (pscomppars): [Fe/H] -0.06 dex, from Hartogh et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..93H/abstract)",
+  "luminosityLogSolar": -1.434,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 887 (pscomppars): log10 of the luminosity in solar units -1.43415, from Hartogh et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..93H/abstract)",
+  "ageGyr": 2.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 887 (pscomppars): age 2.9 Gyr, from Hartogh et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..93H/abstract)",
+  "rotationPeriodDays": 38.7,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 887 (pscomppars): rotation period 38.7 d, from Hartogh et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..93H/abstract)",
+  "projectedRotationSpeedKmS": 2.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 887 (pscomppars): projected rotation speed 2.5 km/s, from Hartogh et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..93H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

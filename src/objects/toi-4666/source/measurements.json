@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Dransfield et al. 2026, the stellar temperature of the default parameter set of TOI-4666 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract)",
   "surfaceGravityLogg": 4.66,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4666.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.664, rounded to two decimals",
+  "spectralType": "M2&plusmn;0.5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4666 (pscomppars): spectral type M2&plusmn;0.5, from Dransfield et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract)",
+  "metallicityDex": 0.79,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4666 (pscomppars): [Fe/H] 0.79 dex, from Dransfield et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract)",
+  "luminosityLogSolar": -1.195,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4666 (pscomppars): log10 of the luminosity in solar units -1.19518, from Dransfield et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract)",
+  "ageGyr": 3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4666 (pscomppars): age 3 Gyr, from Dransfield et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract)",
+  "rotationPeriodDays": 15.3,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-4666 (pscomppars): rotation period 15.3 d, from Frensch et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..73F/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

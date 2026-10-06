@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 526: effective temperature in K, 3618 +/- 31, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.78,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-526.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.784, rounded to two decimals",
+  "spectralType": "M2V",
+  "spectralTypeSource": "SIMBAD, HD 119850: spectral type M2V (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 1.48,
+  "projectedRotationSpeedSource": "SIMBAD, HD 119850: projected rotation speed 1.48 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

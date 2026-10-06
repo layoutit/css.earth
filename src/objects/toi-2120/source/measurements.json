@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Hori et al. 2024, the stellar temperature of the default parameter set of TOI-2120 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
   "surfaceGravityLogg": 4.98,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2120.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.984, rounded to two decimals",
+  "spectralType": "M4.5V",
+  "spectralTypeSource": "SIMBAD, G 244-27: spectral type M4.5V (2024ApJS..271...48G)",
+  "metallicityDex": 0.39,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2120 (pscomppars): [Fe/H] 0.39 dex, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
+  "luminosityLogSolar": -2.287,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2120 (pscomppars): log10 of the luminosity in solar units -2.28651, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

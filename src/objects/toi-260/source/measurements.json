@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Hobson et al. 2024, the stellar temperature of the default parameter set of TOI-260 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
   "surfaceGravityLogg": 4.66,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-260.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.661, rounded to two decimals",
+  "spectralType": "K8 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-260 (pscomppars): spectral type K8 V, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "metallicityDex": -0.47,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-260 (pscomppars): [Fe/H] -0.47 dex, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "luminosityLogSolar": -1.059,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-260 (pscomppars): log10 of the luminosity in solar units -1.05899, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "ageGyr": 15.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-260 (pscomppars): age 15.9 Gyr, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "rotationPeriodDays": 31,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-260 (pscomppars): rotation period 31 d, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "projectedRotationSpeedKmS": 3.8,
+  "projectedRotationSpeedSource": "SIMBAD, BD-10 47: projected rotation speed 3.8 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

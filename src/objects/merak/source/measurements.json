@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 95418: effective temperature in K, from the angular diameter and the bolometric flux, 9377 +/- 75 (https://doi.org/10.1088/0004-637X/746/1/101)",
   "surfaceGravityLogg": 3.68,
   "surfaceGravitySource": "log g 3.68 from 2023ApJS..266...41P; the 10 published values span log g 3.1 to 4.3, across which the limb law changes by at most 0.3% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023ApJS..266...41P)",
+  "spectralType": "A1IVps",
+  "spectralTypeSource": "SIMBAD, * bet UMa: spectral type A1IVps (2010MNRAS.403.1089P)",
+  "projectedRotationSpeedKmS": 46,
+  "projectedRotationSpeedSource": "SIMBAD, * bet UMa: projected rotation speed 46 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 95418) (photometry/stellar-color.json); no image of the photosphere exists."

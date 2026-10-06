@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Livingston et al. 2026, the stellar temperature of the default parameter set of V1298 Tau c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract)",
   "surfaceGravityLogg": 4.24,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/v1298-tau.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.238, rounded to two decimals",
+  "spectralType": "K1",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of V1298 Tau (pscomppars): spectral type K1, from Suárez Mascareño et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..232S/abstract)",
+  "metallicityDex": 0.1,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of V1298 Tau (pscomppars): [Fe/H] 0.1 dex, from Suárez Mascareño et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..232S/abstract)",
+  "luminosityLogSolar": -0.02,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of V1298 Tau (pscomppars): log10 of the luminosity in solar units -0.02045, from Suárez Mascareño et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..232S/abstract)",
+  "ageGyr": 0.02,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of V1298 Tau (pscomppars): age 0.02 Gyr, from Livingston et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026Natur.649..310L/abstract)",
+  "rotationPeriodDays": 2.91,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of V1298 Tau (pscomppars): rotation period 2.91 d, from Finociety et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.526.4627F/abstract)",
+  "projectedRotationSpeedKmS": 24.77,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of V1298 Tau (pscomppars): projected rotation speed 24.77 km/s, from Johnson et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..247J/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

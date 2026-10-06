@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 356473029 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467)",
   "surfaceGravityLogg": 4.46,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/bd-50-1471-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.461, rounded to two decimals",
+  "spectralType": "G8 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of XO-2 S (pscomppars): spectral type G8 V, from Ruggieri et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract)",
+  "metallicityDex": 0.32,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of XO-2 S (pscomppars): [Fe/H] 0.32 dex, from Ruggieri et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract)",
+  "luminosityLogSolar": -0.123,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of XO-2 S (pscomppars): log10 of the luminosity in solar units -0.12302, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 7.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of XO-2 S (pscomppars): age 7.1 Gyr, from Desidera et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...567L...6D/abstract)",
+  "projectedRotationSpeedKmS": 1.7,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of XO-2 S (pscomppars): projected rotation speed 1.7 km/s, from Desidera et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...567L...6D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

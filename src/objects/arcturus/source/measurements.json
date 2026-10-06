@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Effective temperature 4295 ± 26 K from Lacour et al. 2008 (A&A 485, 561; https://doi.org/10.1051/0004-6361:200809611), abstract: the IOTA/IONIC Rosseland diameter 21.05 ± 0.21 mas with the bolometric flux.",
   "surfaceGravityLogg": 1.66,
   "surfaceGravitySource": "log g 1.66 +/- 0.05 measured by Ramirez & Allende Prieto 2011 (ApJ 743, 135; https://arxiv.org/abs/1109.4425), abstract",
+  "spectralType": "K1.5IIIFe-0.5",
+  "spectralTypeSource": "SIMBAD, * alf Boo: spectral type K1.5IIIFe-0.5 (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 4.2,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Boo: projected rotation speed 4.2 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

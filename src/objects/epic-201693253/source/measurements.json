@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 201693253: APOGEE DR17 effective temperature 4596.766 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.25,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-201693253.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.255, rounded to two decimals",
+  "luminosityLogSolar": 1.756,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3812519224573358080, flags_flame 10: lum_flame 56.95227 solar luminosities (16th to 84th percentiles 51.742798 to 63.35045); its log10 is recorded",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

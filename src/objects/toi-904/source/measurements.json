@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Harris et al. 2023, the stellar temperature of the default parameter set of TOI-904 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract)",
   "surfaceGravityLogg": 4.74,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-904.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.740, rounded to two decimals",
+  "metallicityDex": 0.022,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-904 (pscomppars): [Fe/H] 0.022 dex, from Harris et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract)",
+  "luminosityLogSolar": -1.292,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-904 (pscomppars): log10 of the luminosity in solar units -1.29243, from Harris et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract)",
+  "ageGyr": 1.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-904 (pscomppars): age 1.5 Gyr, from Harris et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract)",
+  "rotationPeriodDays": 17.1,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-904 (pscomppars): rotation period 17.1 d, from Harris et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-904 (pscomppars): projected rotation speed 2 km/s, from Harris et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...959L...1H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

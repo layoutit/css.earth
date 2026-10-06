@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Heidari et al. 2025, the stellar temperature of the default parameter set of TOI-2537 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "surfaceGravityLogg": 4.55,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2537.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.551, rounded to two decimals",
+  "metallicityDex": 0.08,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2537 (pscomppars): [Fe/H] 0.08 dex, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "luminosityLogSolar": -0.521,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2537 (pscomppars): log10 of the luminosity in solar units -0.52143, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "ageGyr": 1.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2537 (pscomppars): age 1.1 Gyr, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "rotationPeriodDays": 19,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2537 (pscomppars): rotation period 19 d, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2537 (pscomppars): projected rotation speed 3 km/s, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Rescigno et al. 2026, the stellar temperature of the default parameter set of TOI-2134 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)",
   "surfaceGravityLogg": 4.61,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2134.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.608, rounded to two decimals",
+  "spectralType": "K5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2134 (pscomppars): spectral type K5 V, from Rescigno et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)",
+  "metallicityDex": 0.12,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2134 (pscomppars): [Fe/H] 0.12 dex, from Rescigno et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)",
+  "luminosityLogSolar": -0.717,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2134 (pscomppars): log10 of the luminosity in solar units -0.7167, from Rescigno et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)",
+  "ageGyr": 3.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2134 (pscomppars): age 3.8 Gyr, from Rescigno et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)",
+  "rotationPeriodDays": 48.94,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2134 (pscomppars): rotation period 48.94 d, from Rescigno et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2134 (pscomppars): projected rotation speed 2 km/s, from Rescigno et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.550g1265R/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

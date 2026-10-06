@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Hua et al. 2023, the stellar temperature of the default parameter set of TOI-784 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...32H/abstract)",
   "surfaceGravityLogg": 4.48,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-784.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.482, rounded to two decimals",
+  "spectralType": "G",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 307842 (pscomppars): spectral type G, from Hua et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...32H/abstract)",
+  "metallicityDex": -0.13,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 307842 (pscomppars): [Fe/H] -0.13 dex, from Hua et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...32H/abstract)",
+  "luminosityLogSolar": -0.19,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 307842 (pscomppars): log10 of the luminosity in solar units -0.19034, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 0.325,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5251941573573934080, flags_flame 00: age_flame 0.32517046 Gyr (16th to 84th percentiles 0.2 to 1.3695245)",
+  "projectedRotationSpeedKmS": 1.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 307842 (pscomppars): projected rotation speed 1.1 km/s, from Hua et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...32H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

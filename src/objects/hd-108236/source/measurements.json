@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bonfanti et al. 2021, the stellar temperature of the default parameter set of HD 108236 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract)",
   "surfaceGravityLogg": 4.49,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-108236.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.491, rounded to two decimals",
+  "spectralType": "G3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 108236 (pscomppars): spectral type G3 V, from Daylan et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...85D/abstract)",
+  "metallicityDex": -0.28,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 108236 (pscomppars): [Fe/H] -0.28 dex, from Bonfanti et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract)",
+  "luminosityLogSolar": -0.15,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 108236 (pscomppars): log10 of the luminosity in solar units -0.14997, from Bonfanti et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract)",
+  "ageGyr": 6.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 108236 (pscomppars): age 6.7 Gyr, from Bonfanti et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...646A.157B/abstract)",
+  "projectedRotationSpeedKmS": 4.7,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 108236 (pscomppars): projected rotation speed 4.7 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

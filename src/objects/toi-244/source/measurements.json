@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Castro-González et al. 2023, the stellar temperature of the default parameter set of TOI-244 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract)",
   "surfaceGravityLogg": 4.81,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-244.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.811, rounded to two decimals",
+  "spectralType": "M2.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-244 (pscomppars): spectral type M2.5 V, from Castro-González et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract)",
+  "metallicityDex": -0.39,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-244 (pscomppars): [Fe/H] -0.39 dex, from Castro-González et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract)",
+  "luminosityLogSolar": -1.643,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-244 (pscomppars): log10 of the luminosity in solar units -1.64264, from Castro-González et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract)",
+  "ageGyr": 7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-244 (pscomppars): age 7 Gyr, from Castro-González et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract)",
+  "rotationPeriodDays": 53.3,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-244 (pscomppars): rotation period 53.3 d, from Castro-González et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A..52C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

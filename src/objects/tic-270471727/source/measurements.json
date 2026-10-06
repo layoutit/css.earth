@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 270471727 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract)",
   "surfaceGravityLogg": 4.36,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-270471727.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.362, rounded to two decimals",
+  "metallicityDex": -0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TIC 270471727 (pscomppars): [M/H] -0.09 dex, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "luminosityLogSolar": -0.17,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TIC 270471727 (pscomppars): log10 of the luminosity in solar units -0.17008, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 13.467,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5211963566978081536, flags_flame 00: age_flame 13.467146 Gyr (16th to 84th percentiles 11.651131 to 13.5)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "SIMBAD, UCAC4 058-004726: projected rotation speed 1.5 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

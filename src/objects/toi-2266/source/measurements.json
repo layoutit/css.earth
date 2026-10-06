@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Parviainen et al. 2024, the stellar temperature of the default parameter set of TOI-2266 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.170P/abstract)",
   "surfaceGravityLogg": 5.04,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2266.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.039, rounded to two decimals",
+  "spectralType": "M5.0+0.5-0.5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2266 (pscomppars): spectral type M5.0+0.5-0.5, from Parviainen et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.170P/abstract)",
+  "luminosityLogSolar": -2.167,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2266 (pscomppars): log10 of the luminosity in solar units -2.16716, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 0.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2266 (pscomppars): age 0.3 Gyr, from Parviainen et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...683A.170P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

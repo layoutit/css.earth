@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 5406324138654973824: teff_gspphot 5085.374 K (16th-84th percentiles 5084.5425-5086.242), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.5,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/natasha.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.502, rounded to two decimals",
+  "spectralType": "K1.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 85390 (pscomppars): spectral type K1.5 V, from Gray et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006AJ....132..161G/abstract)",
+  "metallicityDex": -0.07,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 85390 (pscomppars): [Fe/H] -0.07 dex, from Mordasini et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...526A.111M/abstract)",
+  "luminosityLogSolar": -0.367,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 85390 (pscomppars): log10 of the luminosity in solar units -0.36653, from Mordasini et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...526A.111M/abstract)",
+  "ageGyr": 7.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 85390 (pscomppars): age 7.2 Gyr, from Mordasini et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...526A.111M/abstract)",
+  "projectedRotationSpeedKmS": 4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 85390 (pscomppars): projected rotation speed 4 km/s, from Nordstrom et al. 2004 (https://ui.adsabs.harvard.edu/abs/2004A&A...418..989N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

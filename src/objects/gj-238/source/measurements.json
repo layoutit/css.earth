@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Tey et al. 2024, the stellar temperature of the default parameter set of GJ 238 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract)",
   "surfaceGravityLogg": 4.79,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-238.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.791, rounded to two decimals",
+  "spectralType": "M2.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 238 (pscomppars): spectral type M2.5 V, from Tey et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract)",
+  "metallicityDex": 0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 238 (pscomppars): [Fe/H] 0.15 dex, from Tey et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract)",
+  "luminosityLogSolar": -1.616,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 238 (pscomppars): log10 of the luminosity in solar units -1.61618, from Tey et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract)",
+  "rotationPeriodDays": 44,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 238 (pscomppars): rotation period 44 d, from Tey et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract)",
+  "projectedRotationSpeedKmS": 2.19,
+  "projectedRotationSpeedSource": "SIMBAD, L 182-44: projected rotation speed 2.19 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

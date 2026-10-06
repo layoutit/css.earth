@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Sha et al. 2023, the stellar temperature of the default parameter set of TOI-2000 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract)",
   "surfaceGravityLogg": 4.36,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2000.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.363, rounded to two decimals",
+  "metallicityDex": 0.439,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2000 (pscomppars): [Fe/H] 0.439 dex, from Sha et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract)",
+  "luminosityLogSolar": 0.06,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2000 (pscomppars): log10 of the luminosity in solar units 0.05956, from Sha et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract)",
+  "ageGyr": 5.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2000 (pscomppars): age 5.3 Gyr, from Sha et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract)",
+  "projectedRotationSpeedKmS": 2.99,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2000 (pscomppars): projected rotation speed 2.99 km/s, from Sha et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.524.1113S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

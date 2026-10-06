@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Guenther et al. 2026, the stellar temperature of the default parameter set of TOI-2049 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
   "surfaceGravityLogg": 3.62,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2049.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.624, rounded to two decimals",
+  "metallicityDex": 0.311,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2049 (pscomppars): [Fe/H] 0.311 dex, from Guenther et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
+  "luminosityLogSolar": 1.104,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2049 (pscomppars): log10 of the luminosity in solar units 1.1038, from Guenther et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
+  "ageGyr": 2.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2049 (pscomppars): age 2.2 Gyr, from Guenther et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
+  "projectedRotationSpeedKmS": 16,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2049 (pscomppars): projected rotation speed 16 km/s, from Guenther et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172...54G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Kanodia et al. 2024, the stellar temperature of the default parameter set of TOI-6034 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract)",
   "surfaceGravityLogg": 4.77,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-6034.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.770, rounded to two decimals",
+  "metallicityDex": -0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-6034 (pscomppars): [Fe/H] -0.09 dex, from Kanodia et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract)",
+  "luminosityLogSolar": -1.403,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6034 (pscomppars): log10 of the luminosity in solar units -1.4034, from Kanodia et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract)",
+  "ageGyr": 7.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-6034 (pscomppars): age 7.8 Gyr, from Kanodia et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6034 (pscomppars): projected rotation speed 2 km/s, from Kanodia et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..235K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

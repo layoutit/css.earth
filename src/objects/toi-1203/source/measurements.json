@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Gandolfi et al. 2025, the stellar temperature of the default parameter set of TOI-1203.01 in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025arXiv250910136G/abstract)",
   "surfaceGravityLogg": 4.24,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1203.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.242, rounded to two decimals",
+  "spectralType": "G3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1203 (pscomppars): spectral type G3 V, from Gandolfi et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025arXiv250910136G/abstract)",
+  "metallicityDex": -0.39,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1203 (pscomppars): [Fe/H] -0.39 dex, from Gandolfi et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025arXiv250910136G/abstract)",
+  "luminosityLogSolar": 0.13,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1203 (pscomppars): log10 of the luminosity in solar units 0.12977, from Giacalone et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...24G/abstract)",
+  "ageGyr": 12.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1203 (pscomppars): age 12.5 Gyr, from Gandolfi et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025arXiv250910136G/abstract)",
+  "projectedRotationSpeedKmS": 1.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1203 (pscomppars): projected rotation speed 1.4 km/s, from Gandolfi et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025arXiv250910136G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

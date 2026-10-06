@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Smith 2015, the stellar temperature of the default parameter set of XO-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract)",
   "surfaceGravityLogg": 4.35,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/xo-5.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.349, rounded to two decimals",
+  "spectralType": "G8 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of XO-5 (pscomppars): spectral type G8 V, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
+  "metallicityDex": 0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of XO-5 (pscomppars): [Fe/H] 0.05 dex, from Smith 2015 (https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract)",
+  "luminosityLogSolar": -0.06,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of XO-5 (pscomppars): log10 of the luminosity in solar units -0.06, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
+  "ageGyr": 8.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of XO-5 (pscomppars): age 8.5 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 1.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of XO-5 (pscomppars): projected rotation speed 1.8 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

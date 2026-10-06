@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Elliott et al. (2024, PASA 41, e056; arXiv:2401.01468): effective temperature 7422 +/- 58 K from the CHARA limb-darkened diameter, bolometric flux and parallax, https://arxiv.org/abs/2401.01468",
   "surfaceGravityLogg": 4.31,
   "surfaceGravitySource": "log g from the PARSEC isochrone mass 1.550 solar masses of Elliott et al. (2024, PASA 41, e056) and the package radius 1,006,594 km, log10(GM/R^2) in cgs: 4.31 (Rajan et al. 2017 fit 3.95 +/- 0.04 from the spectral energy distribution).",
+  "spectralType": "F0 IV",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of 51 Eri (pscomppars): spectral type F0 IV, from Macintosh et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015Sci...350...64M/abstract)",
+  "metallicityDex": 0.13,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of 51 Eri (pscomppars): [Fe/H] 0.13 dex, from Elliott et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...43E/abstract)",
+  "luminosityLogSolar": 0.757,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of 51 Eri (pscomppars): log10 of the luminosity in solar units 0.7574, from Elliott et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...43E/abstract)",
+  "ageGyr": 0.023,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of 51 Eri (pscomppars): age 0.0232 Gyr, from Elliott et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024PASA...41...43E/abstract)",
+  "projectedRotationSpeedKmS": 65.19,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of 51 Eri (pscomppars): projected rotation speed 65.19 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."

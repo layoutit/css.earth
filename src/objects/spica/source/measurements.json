@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Tkachenko et al. (2016), MNRAS 458, 1964, Tables 4 and 7: primary Teff 25,300 +/- 500 K from the disentangled spectrum (https://doi.org/10.1093/mnras/stw255)",
   "surfaceGravityLogg": 3.75,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/spica.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.749, rounded to two decimals",
+  "spectralType": "B1V",
+  "spectralTypeSource": "SIMBAD, * alf Vir: spectral type B1V (1953ApJ...117..313J)",
+  "projectedRotationSpeedKmS": 90,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Vir: projected rotation speed 90 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

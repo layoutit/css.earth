@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Esparza-Borges et al. 2022, the stellar temperature of the default parameter set of TOI-2081 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract)",
   "surfaceGravityLogg": 4.72,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2081.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.715, rounded to two decimals",
+  "spectralType": "M1.0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2081 (pscomppars): spectral type M1.0, from Esparza-Borges et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract)",
+  "metallicityDex": -0.5,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2081 (pscomppars): [Fe/H] -0.5 dex, from Esparza-Borges et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract)",
+  "luminosityLogSolar": -1.338,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2081 (pscomppars): log10 of the luminosity in solar units -1.33847, from Esparza-Borges et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..10E/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

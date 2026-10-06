@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Kanodia et al. 2023, the stellar temperature of the default parameter set of TOI-5205 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..120K/abstract)",
   "surfaceGravityLogg": 4.84,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5205.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.840, rounded to two decimals",
+  "spectralType": "M4.0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5205 (pscomppars): spectral type M4.0, from Kanodia et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..120K/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5205 (pscomppars): [Fe/H] 0 dex, from Kanodia et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..120K/abstract)",
+  "luminosityLogSolar": -1.712,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5205 (pscomppars): log10 of the luminosity in solar units -1.7122, from Kanodia et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..120K/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5205 (pscomppars): projected rotation speed 2 km/s, from Kanodia et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..120K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

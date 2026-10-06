@@ -9,6 +9,10 @@
   "radiusSource": "Radius 7.747 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17608: radius 7.747 solar radii, implied by the fitted luminosity 211.434 solar luminosities (fractional uncertainty 0.783) and temperature (https://doi.org/10.1093/mnras/stx1433): 5,389,588 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 7913 +/- 3358 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17608: effective temperature 7913 +/- 3358 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.448) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
   "effectiveTemperatureK": 7913,
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17608: effective temperature 7913 +/- 3358 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.448) (https://doi.org/10.1093/mnras/stx1433)",
+  "spectralType": "B6IV(e)",
+  "spectralTypeSource": "SIMBAD, * 23 Tau: spectral type B6IV(e) (1982ApJS...50...55S)",
+  "projectedRotationSpeedKmS": 195,
+  "projectedRotationSpeedSource": "SIMBAD, * 23 Tau: projected rotation speed 195 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 215) (photometry/stellar-color.json); no image of the photosphere exists."

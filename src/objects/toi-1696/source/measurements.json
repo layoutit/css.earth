@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Mori et al. 2022, the stellar temperature of the default parameter set of TOI-1696 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..298M/abstract)",
   "surfaceGravityLogg": 4.96,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1696.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.958, rounded to two decimals",
+  "spectralType": "M5V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1696 (pscomppars): spectral type M5V, from Mori et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..298M/abstract)",
+  "metallicityDex": 0.336,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1696 (pscomppars): [Fe/H] 0.336 dex, from Mori et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..298M/abstract)",
+  "luminosityLogSolar": -2.148,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1696 (pscomppars): log10 of the luminosity in solar units -2.14813, from Mori et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..298M/abstract)",
+  "ageGyr": 7.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1696 (pscomppars): age 7.1 Gyr, from Beard et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..286B/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1696 (pscomppars): projected rotation speed 2 km/s, from Beard et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..286B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

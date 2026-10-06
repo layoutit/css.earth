@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Barkaoui et al. 2024, the stellar temperature of the default parameter set of TOI-6008 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
   "surfaceGravityLogg": 5.03,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-6008.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.032, rounded to two decimals",
+  "spectralType": "M5.0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-6008 (pscomppars): spectral type M5.0, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
+  "metallicityDex": 0.3,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-6008 (pscomppars): [Fe/H] 0.3 dex, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
+  "luminosityLogSolar": -2.329,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6008 (pscomppars): log10 of the luminosity in solar units -2.32873, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
+  "ageGyr": 3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-6008 (pscomppars): age 3 Gyr, from Barkaoui et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A.264B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

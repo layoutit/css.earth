@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6770313530317154560: teff_gspphot 6067.7993 K (16th-84th percentiles 6066.251-6069.3955), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.27,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gumala.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.273, rounded to two decimals",
+  "spectralType": "F8 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 179949 (pscomppars): spectral type F8 V, from Wittenmyer et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...654..625W/abstract)",
+  "metallicityDex": 0.137,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 179949 (pscomppars): [Fe/H] 0.137 dex, from Butler et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B/abstract)",
+  "luminosityLogSolar": 0.301,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 179949 (pscomppars): log10 of the luminosity in solar units 0.30146, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 2.56,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 179949 (pscomppars): age 2.56 Gyr, from Takeda et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJS..168..297T/abstract)",
+  "projectedRotationSpeedKmS": 6.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 179949 (pscomppars): projected rotation speed 6.3 km/s, from Tinney et al. 2001 (https://ui.adsabs.harvard.edu/abs/2001ApJ...551..507T/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

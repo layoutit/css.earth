@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Kendall et al. 2026, the stellar temperature of the default parameter set of NGTS-35 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract)",
   "surfaceGravityLogg": 4.58,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ngts-35.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.582, rounded to two decimals",
+  "spectralType": "K3.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of NGTS-35 (pscomppars): spectral type K3.5 V, from Kendall et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract)",
+  "metallicityDex": 0.085,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of NGTS-35 (pscomppars): [Fe/H] 0.085 dex, from Kendall et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract)",
+  "luminosityLogSolar": -0.597,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of NGTS-35 (pscomppars): log10 of the luminosity in solar units -0.59688, from Kendall et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract)",
+  "ageGyr": 1.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of NGTS-35 (pscomppars): age 1.5 Gyr, from Kendall et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547f2189K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

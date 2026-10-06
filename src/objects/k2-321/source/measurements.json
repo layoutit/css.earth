@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-321 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
   "surfaceGravityLogg": 4.65,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-321.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.651, rounded to two decimals",
+  "metallicityDex": 0.148,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-321 (pscomppars): [Fe/H] 0.148 dex, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "luminosityLogSolar": -1.201,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-321 (pscomppars): log10 of the luminosity in solar units -1.20066, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "ageGyr": 10.874,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3856449627544923392, flags_flame 00: age_flame 10.874001 Gyr (16th to 84th percentiles 6.185155 to 13.5)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

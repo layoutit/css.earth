@@ -10,6 +10,8 @@
   "projectedSeparationSource": "Computed here from the two Gaia DR3 positions at epoch 2016.0 (photometry/gaia-dr3-source.csv in each package): 10.31 arcsec west and 4.95 arcsec south of HD 189733 A, 11.44 arcsec at position angle 244 degrees, 226 au at 19.776 pc. The separation along the line of sight is not measured, so the true distance between the stars is at least this.",
   "radiusKm": 155836.8,
   "radiusSource": "0.224 solar radii (155,836.8 km at 695,700 km per solar radius) from the TESS Input Catalog v8.2 (photometry/tic-8.2.tsv; Stassun et al. 2019, AJ 158, 138), which derives the radius of a cool dwarf from its Ks magnitude and distance (Mann et al. 2015). A model value, not a measured diameter.",
+  "spectralType": "M4V",
+  "spectralTypeSource": "SIMBAD, HD 189733B: spectral type M4V (2006ApJ...641L..57B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the catalogue radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json). No image, limb darkening or rotation of this star is measured. A star's limb is not a sharp surface."

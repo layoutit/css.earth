@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Kemmer et al. 2020, the stellar temperature of the default parameter set of GJ 3473 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract)",
   "surfaceGravityLogg": 4.87,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-3473.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.872, rounded to two decimals",
+  "spectralType": "M4",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 3473 (pscomppars): spectral type M4, from Hawley et al. 1996 (https://ui.adsabs.harvard.edu/abs/1996AJ....112.2799H/abstract)",
+  "metallicityDex": 0.11,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 3473 (pscomppars): [Fe/H] 0.11 dex, from Kemmer et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract)",
+  "luminosityLogSolar": -1.824,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 3473 (pscomppars): log10 of the luminosity in solar units -1.82391, from Kemmer et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract)",
+  "rotationPeriodDays": 168.3,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 3473 (pscomppars): rotation period 168.3 d, from Kemmer et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 3473 (pscomppars): projected rotation speed 2 km/s, from Kemmer et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...642A.236K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

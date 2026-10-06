@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Mallorquín et al. 2023, the stellar temperature of the default parameter set of TOI-1801 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
   "surfaceGravityLogg": 4.71,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1801.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.707, rounded to two decimals",
+  "spectralType": "M0.5+/-0.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): spectral type M0.5+/-0.5 V, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
+  "metallicityDex": -0.19,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): [Fe/H] -0.19 dex, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
+  "luminosityLogSolar": -1.23,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): log10 of the luminosity in solar units -1.23003, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
+  "ageGyr": 0.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): age 0.7 Gyr, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
+  "rotationPeriodDays": 15.98,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): rotation period 15.98 d, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1801 (pscomppars): projected rotation speed 3 km/s, from Mallorquín et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...680A..76M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Parc et al. 2026, the stellar temperature of the default parameter set of TOI-4336 A c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract)",
   "surfaceGravityLogg": 4.9,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4336-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.897, rounded to two decimals",
+  "spectralType": "M3.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4336 A (pscomppars): spectral type M3.5 V, from Parc et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract)",
+  "metallicityDex": 0.14,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4336 A (pscomppars): [Fe/H] 0.14 dex, from Parc et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract)",
+  "luminosityLogSolar": -1.959,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4336 A (pscomppars): log10 of the luminosity in solar units -1.95861, from Parc et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract)",
+  "ageGyr": 6.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4336 A (pscomppars): age 6.7 Gyr, from Timmermans et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...687A..48T/abstract)",
+  "rotationPeriodDays": 35.5,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-4336 A (pscomppars): rotation period 35.5 d, from Parc et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A..81P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

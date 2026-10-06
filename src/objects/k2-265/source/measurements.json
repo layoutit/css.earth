@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Thygesen et al. 2023, the stellar temperature of the default parameter set of K2-265 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-265.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.465, rounded to two decimals",
+  "spectralType": "G8 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-265 (pscomppars): spectral type G8 V, from Lam et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...620A..77L/abstract)",
+  "metallicityDex": 0.033,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-265 (pscomppars): [Fe/H] 0.033 dex, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "luminosityLogSolar": -0.182,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-265 (pscomppars): log10 of the luminosity in solar units -0.18243, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "ageGyr": 7.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-265 (pscomppars): age 7.8 Gyr, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
+  "projectedRotationSpeedKmS": 1.8,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-265 (pscomppars): projected rotation speed 1.8 km/s, from Howard et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

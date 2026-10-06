@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Hirano et al. 2016, the stellar temperature of the default parameter set of K2-28 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...820...41H/abstract)",
   "surfaceGravityLogg": 4.93,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-28.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.929, rounded to two decimals",
+  "spectralType": "M4",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-28 (pscomppars): spectral type M4, from Hirano et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...820...41H/abstract)",
+  "metallicityDex": 0.26,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-28 (pscomppars): [Fe/H] 0.26 dex, from Hirano et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...820...41H/abstract)",
+  "luminosityLogSolar": -1.94,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-28 (pscomppars): log10 of the luminosity in solar units -1.9397, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

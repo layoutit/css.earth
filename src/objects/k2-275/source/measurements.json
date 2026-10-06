@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Castro-González et al. 2022, the stellar temperature of the default parameter set of K2-275 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract)",
   "surfaceGravityLogg": 4.65,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-275.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.647, rounded to two decimals",
+  "spectralType": "K3V",
+  "spectralTypeSource": "SIMBAD, K2-275: spectral type K3V (2017ApJ...836..167D)",
+  "metallicityDex": -0.06,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-275 (pscomppars): [Fe/H] -0.06 dex, from Castro-González et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.509.1075C/abstract)",
+  "luminosityLogSolar": -0.593,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-275 (pscomppars): log10 of the luminosity in solar units -0.59332, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "ageGyr": 6.922,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 661598415839633024, flags_flame 00: age_flame 6.922293 Gyr (16th to 84th percentiles 4.6007175 to 9.245756)",
+  "projectedRotationSpeedKmS": 4.7,
+  "projectedRotationSpeedSource": "SIMBAD, K2-275: projected rotation speed 4.7 km/s, the measurement SIMBAD prefers (2018AJ....155...21P)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

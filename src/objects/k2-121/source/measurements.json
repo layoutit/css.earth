@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Howard et al. 2025, the stellar temperature of the default parameter set of K2-121 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
   "surfaceGravityLogg": 4.63,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-121.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.631, rounded to two decimals",
+  "spectralType": "K5V",
+  "spectralTypeSource": "SIMBAD, K2-121: spectral type K5V (2017ApJ...836..167D)",
+  "metallicityDex": 0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-121 (pscomppars): [Fe/H] 0.04 dex, from Howard et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
+  "luminosityLogSolar": -0.745,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-121 (pscomppars): log10 of the luminosity in solar units -0.74531, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "projectedRotationSpeedKmS": 4.38,
+  "projectedRotationSpeedSource": "SIMBAD, K2-121: projected rotation speed 4.38 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

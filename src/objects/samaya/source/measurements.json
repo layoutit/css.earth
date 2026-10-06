@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6592695123423391616: teff_gspphot 6116.9478 K (16th-84th percentiles 6116.1553-6117.8145), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.19,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/samaya.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.193, rounded to two decimals",
+  "spectralType": "F7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 205739 (pscomppars): spectral type F7 V, from Michigan Catalog, Vol. 3 (https://ui.adsabs.harvard.edu/abs/1982MSS...C03....0H/abstract)",
+  "metallicityDex": 0.19,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 205739 (pscomppars): [Fe/H] 0.19 dex, from Lopez-Morales et al. 2008 (https://ui.adsabs.harvard.edu/abs/2008AJ....136.1901L/abstract)",
+  "luminosityLogSolar": 0.36,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 205739 (pscomppars): log10 of the luminosity in solar units 0.36, from Lopez-Morales et al. 2008 (https://ui.adsabs.harvard.edu/abs/2008AJ....136.1901L/abstract)",
+  "ageGyr": 2.84,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 205739 (pscomppars): age 2.84 Gyr, from Lopez-Morales et al. 2008 (https://ui.adsabs.harvard.edu/abs/2008AJ....136.1901L/abstract)",
+  "projectedRotationSpeedKmS": 4.48,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 205739 (pscomppars): projected rotation speed 4.48 km/s, from Lopez-Morales et al. 2008 (https://ui.adsabs.harvard.edu/abs/2008AJ....136.1901L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

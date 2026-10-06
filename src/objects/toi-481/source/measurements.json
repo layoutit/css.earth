@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Brahm et al. 2020, the stellar temperature of the default parameter set of TOI-481 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract)",
   "surfaceGravityLogg": 4.05,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-481.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.055, rounded to two decimals",
+  "spectralType": "G",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-481 (pscomppars): spectral type G, from Brahm et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract)",
+  "metallicityDex": 0.26,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-481 (pscomppars): [Fe/H] 0.26 dex, from Brahm et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract)",
+  "luminosityLogSolar": 0.435,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-481 (pscomppars): log10 of the luminosity in solar units 0.43457, from Brahm et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract)",
+  "ageGyr": 6.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-481 (pscomppars): age 6.7 Gyr, from Brahm et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract)",
+  "projectedRotationSpeedKmS": 4.54,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-481 (pscomppars): projected rotation speed 4.54 km/s, from Brahm et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..235B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

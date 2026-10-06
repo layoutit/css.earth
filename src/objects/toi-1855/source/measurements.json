@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Schulte et al. 2024, the stellar temperature of the default parameter set of TOI-1855 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168...32S/abstract)",
   "surfaceGravityLogg": 4.4,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1855.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.397, rounded to two decimals",
+  "metallicityDex": 0.399,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1855 (pscomppars): [Fe/H] 0.399 dex, from Schulte et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...32S/abstract)",
+  "luminosityLogSolar": -0.095,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1855 (pscomppars): log10 of the luminosity in solar units -0.09474, from Schulte et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...32S/abstract)",
+  "ageGyr": 8.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1855 (pscomppars): age 8.2 Gyr, from Schulte et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...32S/abstract)",
+  "projectedRotationSpeedKmS": 5.74,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1855 (pscomppars): projected rotation speed 5.74 km/s, from Schulte et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...32S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

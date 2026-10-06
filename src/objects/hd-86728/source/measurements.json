@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 86728: effective temperature in K, from the angular diameter and the bolometric flux, 5612 +/- 52 (https://doi.org/10.1088/0004-637X/746/1/101)",
   "surfaceGravityLogg": 4.26,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-86728.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.261, rounded to two decimals",
+  "spectralType": "G1V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 86728 (pscomppars): spectral type G1V, from Turnbull 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract)",
+  "metallicityDex": 0.2,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 86728 (pscomppars): [Fe/H] 0.2 dex, from Gupta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169....1G/abstract)",
+  "luminosityLogSolar": 0.135,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 86728 (pscomppars): log10 of the luminosity in solar units 0.13513, from Gupta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169....1G/abstract)",
+  "ageGyr": 9.52,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 86728 (pscomppars): age 9.52 Gyr, from Takeda et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJS..168..297T/abstract)",
+  "projectedRotationSpeedKmS": 2.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 86728 (pscomppars): projected rotation speed 2.4 km/s, from Gupta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169....1G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

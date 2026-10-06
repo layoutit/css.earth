@@ -7,6 +7,18 @@
   "distanceSource": "Gaia DR3 parallax 50.567 +/- 0.016 mas (photometry/gaia-dr3-source.csv): 1000/50.567 = 19.776 pc, no zero-point correction",
   "radiusKm": 523166.4,
   "radiusSource": "0.752 solar radii (523,166.4 km at 695,700 km per solar radius), the stellar radius Lally et al. (2025, arXiv:2503.20895, Table 1) fix for their eclipse map of HD 189733b. A model-dependent value; the interferometric diameter above gives 0.818 solar radii at the Gaia distance.",
+  "spectralType": "K2 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 189733 (pscomppars): spectral type K2 V, from Paredes et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..176P/abstract)",
+  "metallicityDex": -0.02,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 189733 (pscomppars): [Fe/H] -0.02 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": -0.461,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 189733 (pscomppars): log10 of the luminosity in solar units -0.46119, from Barstow et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017ApJ...834...50B/abstract)",
+  "ageGyr": 1.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 189733 (pscomppars): age 1.4 Gyr, from Southworth 2010 (https://ui.adsabs.harvard.edu/abs/2010MNRAS.408.1689S/abstract)",
+  "rotationPeriodDays": 11.95,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 189733 (pscomppars): rotation period 11.95 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 3.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 189733 (pscomppars): projected rotation speed 3.5 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the map paper's radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json) and dimmed toward the limb by a law fitted to TESS transits, because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."

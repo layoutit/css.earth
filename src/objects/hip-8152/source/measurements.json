@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of HIP 8152 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.45,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hip-8152.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.445, rounded to two decimals",
+  "spectralType": "G5",
+  "spectralTypeSource": "SIMBAD, BD-19 302: spectral type G5",
+  "metallicityDex": 0.007,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HIP 8152 (pscomppars): [Fe/H] 0.007 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": -0.08,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HIP 8152 (pscomppars): log10 of the luminosity in solar units -0.0804, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HIP 8152 (pscomppars): age 6 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

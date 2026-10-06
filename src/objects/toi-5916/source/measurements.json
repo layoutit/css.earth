@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "O'Brien et al. 2026, the stellar temperature of the default parameter set of TOI-5916 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract)",
   "surfaceGravityLogg": 4.78,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5916.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.777, rounded to two decimals",
+  "spectralType": "M2",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5916 (pscomppars): spectral type M2, from O'Brien et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract)",
+  "metallicityDex": 0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5916 (pscomppars): [Fe/H] 0.04 dex, from O'Brien et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract)",
+  "luminosityLogSolar": -1.457,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5916 (pscomppars): log10 of the luminosity in solar units -1.45717, from O'Brien et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract)",
+  "ageGyr": 5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5916 (pscomppars): age 5 Gyr, from Dransfield et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.547ag448D/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5916 (pscomppars): projected rotation speed 2 km/s, from O'Brien et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172..117O/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-13 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.02,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-13.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.022, rounded to two decimals",
+  "spectralType": "G1V",
+  "spectralTypeSource": "SIMBAD, BD+34 1976: spectral type G1V (2011A&A...529A.136E)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-13 (pscomppars): [Fe/H] 0 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.436,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-13 (pscomppars): log10 of the luminosity in solar units 0.43636, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-13 (pscomppars): age 5 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 5.7,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-13 (pscomppars): projected rotation speed 5.7 km/s, from Brothwell et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014MNRAS.440.3392B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Cadieux et al. 2024, the stellar temperature of the default parameter set of LHS 1140 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract)",
   "surfaceGravityLogg": 5.04,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lhs-1140.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.035, rounded to two decimals",
+  "spectralType": "M4.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LHS 1140 (pscomppars): spectral type M4.5 V, from Cadieux et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract)",
+  "metallicityDex": -0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of LHS 1140 (pscomppars): [Fe/H] -0.15 dex, from Cadieux et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract)",
+  "luminosityLogSolar": -2.42,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LHS 1140 (pscomppars): log10 of the luminosity in solar units -2.42022, from Cadieux et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract)",
+  "ageGyr": 5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of LHS 1140 (pscomppars): age 5 Gyr, from Cadieux et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract)",
+  "rotationPeriodDays": 131,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LHS 1140 (pscomppars): rotation period 131 d, from Cadieux et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

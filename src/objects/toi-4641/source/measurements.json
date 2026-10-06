@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bieryla et al. 2024, the stellar temperature of the default parameter set of TOI-4641 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract)",
   "surfaceGravityLogg": 4.12,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4641.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.116, rounded to two decimals",
+  "spectralType": "F0",
+  "spectralTypeSource": "SIMBAD, HD 17607: spectral type F0 (1993yCat.3135....0C)",
+  "metallicityDex": -0.09,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4641 (pscomppars): [M/H] -0.09 dex, from Bieryla et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract)",
+  "luminosityLogSolar": 0.695,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4641 (pscomppars): log10 of the luminosity in solar units 0.69461, from Bieryla et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract)",
+  "ageGyr": 2.69,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4641 (pscomppars): age 2.69 Gyr, from Bieryla et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract)",
+  "projectedRotationSpeedKmS": 86.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4641 (pscomppars): projected rotation speed 86.3 km/s, from Bieryla et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.52710955B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Crossfield et al. 2025, the stellar temperature of the default parameter set of HD 135694 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025AJ....169...89C/abstract)",
   "surfaceGravityLogg": 4.38,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-135694.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.380, rounded to two decimals",
+  "spectralType": "K0",
+  "spectralTypeSource": "SIMBAD, HD 135694: spectral type K0 (1993yCat.3135....0C)",
+  "metallicityDex": -0.121,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 135694 (pscomppars): [Fe/H] -0.121 dex, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "luminosityLogSolar": 0.039,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 135694 (pscomppars): log10 of the luminosity in solar units 0.03941, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "ageGyr": 9.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 135694 (pscomppars): age 9.8 Gyr, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "projectedRotationSpeedKmS": 4,
+  "projectedRotationSpeedSource": "SIMBAD, HD 135694: projected rotation speed 4 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

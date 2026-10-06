@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Turner et al. 2016, the stellar temperature of WASP-123 b's parameter set from Turner et al. 2016 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016PASP..128f4401T/abstract)",
   "surfaceGravityLogg": 4.29,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-123.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.287, rounded to two decimals",
+  "spectralType": "G5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-123 (pscomppars): spectral type G5, from Alexoudi 2022 (https://ui.adsabs.harvard.edu/abs/2022AN....34324012A/abstract)",
+  "metallicityDex": 0.18,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-123 (pscomppars): [Fe/H] 0.18 dex, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "luminosityLogSolar": 0.162,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-123 (pscomppars): log10 of the luminosity in solar units 0.16234, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 6.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-123 (pscomppars): age 6.9 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-123 (pscomppars): projected rotation speed 1 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

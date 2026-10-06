@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Polanski et al. 2021, the stellar temperature of the default parameter set of Wolf 503 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract)",
   "surfaceGravityLogg": 4.6,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wolf-503.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.599, rounded to two decimals",
+  "spectralType": "K3.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Wolf 503 (pscomppars): spectral type K3.5 V, from Polanski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract)",
+  "metallicityDex": -0.47,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Wolf 503 (pscomppars): [Fe/H] -0.47 dex, from Polanski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract)",
+  "luminosityLogSolar": -0.676,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Wolf 503 (pscomppars): log10 of the luminosity in solar units -0.67572, from Polanski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract)",
+  "ageGyr": 11,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Wolf 503 (pscomppars): age 11 Gyr, from Polanski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..238P/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "SIMBAD, BD-05 3763: projected rotation speed 1.5 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

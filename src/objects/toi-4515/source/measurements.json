@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Carleo et al. 2024, the stellar temperature of the default parameter set of TOI-4515 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract)",
   "surfaceGravityLogg": 4.55,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-4515.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.546, rounded to two decimals",
+  "spectralType": "G8/G9",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4515 (pscomppars): spectral type G8/G9, from Carleo et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract)",
+  "metallicityDex": 0.05,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-4515 (pscomppars): [Fe/H] 0.05 dex, from Carleo et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract)",
+  "luminosityLogSolar": -0.236,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4515 (pscomppars): log10 of the luminosity in solar units -0.23582, from Carleo et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract)",
+  "ageGyr": 1.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4515 (pscomppars): age 1.2 Gyr, from Carleo et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract)",
+  "rotationPeriodDays": 15.5,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-4515 (pscomppars): rotation period 15.5 d, from Carleo et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract)",
+  "projectedRotationSpeedKmS": 3.4,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4515 (pscomppars): projected rotation speed 3.4 km/s, from Carleo et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.135C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

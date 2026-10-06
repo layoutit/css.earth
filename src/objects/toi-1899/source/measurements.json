@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Lin et al. 2023, the stellar temperature of the default parameter set of TOI-1899 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract)",
   "surfaceGravityLogg": 4.67,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1899.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.672, rounded to two decimals",
+  "spectralType": "M0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-1899 (pscomppars): spectral type M0, from Cañas et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..147C/abstract)",
+  "metallicityDex": 0.28,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1899 (pscomppars): [Fe/H] 0.28 dex, from Lin et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract)",
+  "luminosityLogSolar": -1.057,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1899 (pscomppars): log10 of the luminosity in solar units -1.05685, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 7.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1899 (pscomppars): age 7.1 Gyr, from Lin et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...90L/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1899 (pscomppars): projected rotation speed 2 km/s, from Cañas et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....160..147C/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

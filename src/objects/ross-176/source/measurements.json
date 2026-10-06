@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Geraldía-González et al. 2025, the stellar temperature of the default parameter set of Ross 176 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract)",
   "surfaceGravityLogg": 4.69,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ross-176.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.689, rounded to two decimals",
+  "spectralType": "K7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Ross 176 (pscomppars): spectral type K7 V, from Geraldía-González et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract)",
+  "metallicityDex": -0.19,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Ross 176 (pscomppars): [Fe/H] -0.19 dex, from Geraldía-González et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract)",
+  "luminosityLogSolar": -1.109,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Ross 176 (pscomppars): log10 of the luminosity in solar units -1.10891, from Geraldía-González et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract)",
+  "ageGyr": 3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Ross 176 (pscomppars): age 3 Gyr, from Geraldía-González et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract)",
+  "rotationPeriodDays": 33,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Ross 176 (pscomppars): rotation period 33 d, from Geraldía-González et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Ross 176 (pscomppars): projected rotation speed 2 km/s, from Geraldía-González et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...700A.216G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

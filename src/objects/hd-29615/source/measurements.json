@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Waite et al. (2015), MNRAS 449, 8, as listed by Willamo et al. (2022), Table 2 (https://arxiv.org/abs/2110.06729)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-29615.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.466, rounded to two decimals",
+  "spectralType": "G3V",
+  "spectralTypeSource": "SIMBAD, HD 29615: spectral type G3V (2006A&A...460..695T)",
+  "luminosityLogSolar": 0.024,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4891725758804030208, flags_flame 00: lum_flame 1.0577374 solar luminosities (16th to 84th percentiles 1.0522983 to 1.0631976); its log10 is recorded",
+  "ageGyr": 6.463,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4891725758804030208, flags_flame 00: age_flame 6.4628024 Gyr (16th to 84th percentiles 5.4065857 to 7.519862)",
+  "projectedRotationSpeedKmS": 20.52,
+  "projectedRotationSpeedSource": "SIMBAD, HD 29615: projected rotation speed 20.52 km/s, the measurement SIMBAD prefers (2021A&A...645A..30Z)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

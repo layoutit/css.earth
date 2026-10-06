@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Bonnefoy et al. (2018), Appendix A, https://arxiv.org/abs/1807.00657",
   "surfaceGravityLogg": 4.26,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-504.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.257, rounded to two decimals",
+  "spectralType": "G0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 504 (pscomppars): spectral type G0 V, from Kuzuhara et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...774...11K/abstract)",
+  "metallicityDex": 0.28,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 504 (pscomppars): [Fe/H] 0.28 dex, from Kuzuhara et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...774...11K/abstract)",
+  "luminosityLogSolar": 0.332,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 504 (pscomppars): log10 of the luminosity in solar units 0.332, from Kuzuhara et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...774...11K/abstract)",
+  "ageGyr": 0.16,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 504 (pscomppars): age 0.16 Gyr, from Kuzuhara et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...774...11K/abstract)",
+  "rotationPeriodDays": 3.33,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 504 (pscomppars): rotation period 3.33 d, from D'Orazi et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...598A..19D/abstract)",
+  "projectedRotationSpeedKmS": 5.47,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 504 (pscomppars): projected rotation speed 5.47 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

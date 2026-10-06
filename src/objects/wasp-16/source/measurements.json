@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-16 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-16.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.575, rounded to two decimals",
+  "spectralType": "G3V",
+  "spectralTypeSource": "SIMBAD, WASP-16: spectral type G3V (2011A&A...529A.136E)",
+  "metallicityDex": 0.01,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-16 (pscomppars): [Fe/H] 0.01 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.01,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-16 (pscomppars): log10 of the luminosity in solar units 0.01005, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 8.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-16 (pscomppars): age 8.6 Gyr, from Southworth et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013MNRAS.434.1300S/abstract)",
+  "projectedRotationSpeedKmS": 3.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-16 (pscomppars): projected rotation speed 3.2 km/s, from Albrecht et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012ApJ...757...18A/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

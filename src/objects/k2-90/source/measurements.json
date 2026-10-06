@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Dressing et al. 2017, the stellar temperature of the default parameter set of K2-90 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....154..207D/abstract)",
   "surfaceGravityLogg": 4.68,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-90.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.681, rounded to two decimals",
+  "spectralType": "K5V",
+  "spectralTypeSource": "SIMBAD, K2-90: spectral type K5V (2017ApJ...836..167D)",
+  "metallicityDex": -0.225,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-90 (pscomppars): [Fe/H] -0.225 dex, from Livingston et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract)",
+  "luminosityLogSolar": -0.953,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-90 (pscomppars): log10 of the luminosity in solar units -0.95318, from Barros et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract)",
+  "ageGyr": 0.66,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 65331198513957376, flags_flame 00: age_flame 0.6604289 Gyr (16th to 84th percentiles 0.2 to 3.5173697)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

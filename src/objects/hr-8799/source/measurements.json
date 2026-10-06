@@ -9,6 +9,16 @@
   "radiusSource": "Radius: the CHARA Array limb-darkened angular diameter 0.342 +/- 0.008 mas of Baines et al. (2012, ApJ 761, 57; arXiv:1210.0556) at the Gaia DR3 distance 40.8798 pc: 1,045,756 km, 1.5032 solar radii at 695700 km per solar radius (Baines et al. give 1.44 +/- 0.06 solar radii from the same diameter at the Hipparcos parallax of their time). GM from the stellar mass 1.47 solar masses that Zurlo et al. (2022, A&A 666, A133) adopt for the four-planet fit these orbits come from, times the JPL solar GM 132712440041.93938 km^3/s^2; Baines et al. derive 1.516 +0.038/-0.024 solar masses from the same diameter. presentationUp: the display axis (celestial north at the star) is up; the star's spin axis has no measured direction on the sky (Wright et al. 2011 constrain only its inclination, from asteroseismology).",
   "effectiveTemperatureK": 7193,
   "effectiveTemperatureSource": "Baines et al. (2012, ApJ 761, 57; arXiv:1210.0556): effective temperature 7193 +/- 87 K from the CHARA limb-darkened diameter and bolometric flux, https://arxiv.org/abs/1210.0556",
+  "spectralType": "A5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HR 8799 (pscomppars): spectral type A5, from Gravity Collaboration et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...623L..11G/abstract)",
+  "metallicityDex": -0.5,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HR 8799 (pscomppars): [Fe/H] -0.5 dex, from Gravity Collaboration et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...623L..11G/abstract)",
+  "luminosityLogSolar": 0.733,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HR 8799 (pscomppars): log10 of the luminosity in solar units 0.73347, from Konopacky et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016AJ....152...28K/abstract)",
+  "ageGyr": 0.03,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HR 8799 (pscomppars): age 0.03 Gyr, from Gravity Collaboration et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...623L..11G/abstract)",
+  "projectedRotationSpeedKmS": 34.79,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HR 8799 (pscomppars): projected rotation speed 34.79 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."

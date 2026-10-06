@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Effective temperature 7680 ± 90 K from van Belle et al. 2001 (ApJ 559, 1155; https://doi.org/10.1086/322340), Section 3.3: the PTI mean Rosseland diameter with the Alonso et al. 1994 bolometric flux. The authors call this single value a geometric construct: the rapidly rotating surface ranges from about 7100 to 9300 K.",
   "surfaceGravityLogg": 4.13,
   "surfaceGravitySource": "log g from the mass 1.74 +/- 0.49 solar masses that van Belle et al. 2001 (ApJ 559, 1155; https://doi.org/10.1086/322340), Section 5, measure from the oblateness and v sin i, and the package radius, log10(GM/R^2) in cgs; a mean over the rapidly rotating surface",
+  "spectralType": "A7Vn",
+  "spectralTypeSource": "SIMBAD, * alf Aql: spectral type A7Vn (2003AJ....126.2048G)",
+  "projectedRotationSpeedKmS": 203,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Aql: projected rotation speed 203 km/s, the measurement SIMBAD prefers (2009A&A...493.1099S)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

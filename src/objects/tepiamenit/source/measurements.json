@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1244571953471006720: teff_gspphot 6319.2407 K (16th-84th percentiles 6317.7007-6321.0938), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.19,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tepiamenit.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.189, rounded to two decimals",
+  "spectralType": "F7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of tau Boo (pscomppars): spectral type F7 V, from Butler et al. 1997 (https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B/abstract)",
+  "metallicityDex": 0.264,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of tau Boo (pscomppars): [M/H] 0.2642 dex, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "luminosityLogSolar": 0.505,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of tau Boo (pscomppars): log10 of the luminosity in solar units 0.50548, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of tau Boo (pscomppars): age 2 Gyr, from Butler et al. 1997 (https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B/abstract)",
+  "rotationPeriodDays": 4,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of tau Boo (pscomppars): rotation period 4 d, from Butler et al. 1997 (https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B/abstract)",
+  "projectedRotationSpeedKmS": 14.98,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of tau Boo (pscomppars): projected rotation speed 14.98 km/s, from Butler et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

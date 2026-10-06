@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 205: effective temperature in K, 3801 +/- 9, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.71,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-205.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.710, rounded to two decimals",
+  "spectralType": "M1.5Ve",
+  "spectralTypeSource": "SIMBAD, HD 36395: spectral type M1.5Ve (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 4.2,
+  "projectedRotationSpeedSource": "SIMBAD, HD 36395: projected rotation speed 4.2 km/s, the measurement SIMBAD prefers (2025A&A...698A..93J)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

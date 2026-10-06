@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3101382419728401408: teff_gspphot 5981.8096 K (16th-84th percentiles 5980.145-5983.5635), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.2,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/citala.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.205, rounded to two decimals",
+  "spectralType": "G0V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 52265 (pscomppars): spectral type G0V, from Turnbull 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract)",
+  "metallicityDex": 0.21,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 52265 (pscomppars): [Fe/H] 0.21 dex, from Naef et al. 2001 (https://ui.adsabs.harvard.edu/abs/2001A&A...375..205N/abstract)",
+  "luminosityLogSolar": 0.297,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 52265 (pscomppars): log10 of the luminosity in solar units 0.297, from Naef et al. 2001 (https://ui.adsabs.harvard.edu/abs/2001A&A...375..205N/abstract)",
+  "ageGyr": 3.5,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 52265 (pscomppars): age 3.5 Gyr, from Naef et al. 2001 (https://ui.adsabs.harvard.edu/abs/2001A&A...375..205N/abstract)",
+  "projectedRotationSpeedKmS": 5.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 52265 (pscomppars): projected rotation speed 5.2 km/s, from Naef et al. 2001 (https://ui.adsabs.harvard.edu/abs/2001A&A...375..205N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

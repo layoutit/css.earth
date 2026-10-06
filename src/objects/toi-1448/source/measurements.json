@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Hori et al. 2024, the stellar temperature of the default parameter set of TOI-1448 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
   "surfaceGravityLogg": 4.85,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1448.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.849, rounded to two decimals",
+  "spectralType": "M3V",
+  "spectralTypeSource": "SIMBAD, TOI-1448: spectral type M3V (2024ApJS..271...48G)",
+  "metallicityDex": 0.37,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1448 (pscomppars): [Fe/H] 0.37 dex, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
+  "luminosityLogSolar": -1.755,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1448 (pscomppars): log10 of the luminosity in solar units -1.75498, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
+  "rotationPeriodDays": 42.28,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1448 (pscomppars): rotation period 42.28 d, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

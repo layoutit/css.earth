@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Magliano et al. 2023, the stellar temperature of the default parameter set of TOI-277 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1562M/abstract)",
   "surfaceGravityLogg": 4.52,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-277.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.525, rounded to two decimals",
+  "spectralType": "M0:",
+  "spectralTypeSource": "SIMBAD, G 268-143: spectral type M0: (1985ApJS...59..197B)",
+  "metallicityDex": -0.01,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-277 (pscomppars): [Fe/H] -0.01 dex, from Magliano et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1562M/abstract)",
+  "luminosityLogSolar": -1.35,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-277 (pscomppars): log10 of the luminosity in solar units -1.3504, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Beard et al. 2022, the stellar temperature of the default parameter set of GJ 3929 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract)",
   "surfaceGravityLogg": 4.92,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-3929.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.923, rounded to two decimals",
+  "spectralType": "M3.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of GJ 3929 (pscomppars): spectral type M3.5 V, from Kemmer et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...659A..17K/abstract)",
+  "metallicityDex": -0.02,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 3929 (pscomppars): [Fe/H] -0.02 dex, from Beard et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract)",
+  "luminosityLogSolar": -1.963,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 3929 (pscomppars): log10 of the luminosity in solar units -1.96257, from Beard et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract)",
+  "ageGyr": 7.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 3929 (pscomppars): age 7.1 Gyr, from Beard et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract)",
+  "rotationPeriodDays": 122,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 3929 (pscomppars): rotation period 122 d, from Kemmer et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...659A..17K/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 3929 (pscomppars): projected rotation speed 2 km/s, from Beard et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

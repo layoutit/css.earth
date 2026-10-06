@@ -9,6 +9,14 @@
   "radiusSource": "Radius 0.12 solar radii: the radius Climent et al. (2022, A&A 660, A65; arXiv:2201.12606) adopt for each component of the pair, from the Chabrier et al. (2000) evolutionary models at the pair's age and mass (they give 0.12 to 0.14 over those ranges); a model radius, since neither star's disc is measured. 83,484 km at 695,700 km per solar radius. GM: half the dynamical total mass 0.141 +/- 0.008 solar masses of the A-B orbit (Dupuy et al. 2023, MNRAS 519, 1688; doi:10.1093/mnras/stac3557; arXiv:2208.08448, Table 3), because Dupuy et al. find the two nearly equal (K-band flux ratio 0.033 +/- 0.004 mag; 74 +/- 4 Jupiter masses each if the mass ratio is near unity) while their fitted mass ratio, 0.45 +/- 0.08, is poorly constrained; times the JPL solar GM. Temperature 2700 K: the best-fitting BT-Settl model to the pair's combined spectrum (Dupuy et al. 2023, section 4), which describes both stars only because they are nearly equal. presentationUp: the display axis (celestial north at the star) is up; no spin axis is measured on the sky.",
   "effectiveTemperatureK": 2700,
   "effectiveTemperatureSource": "2700 K: the best-fitting BT-Settl model to the pair's combined spectrum, Dupuy et al. (2023, MNRAS 519, 1688), section 4, https://arxiv.org/abs/2208.08448",
+  "spectralType": "M7.5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of VHS J125601.92-125723.9 (pscomppars): spectral type M7.5, from Dupuy et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020RNAAS...4...54D/abstract)",
+  "luminosityLogSolar": -3.14,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of VHS J125601.92-125723.9 (pscomppars): log10 of the luminosity in solar units -3.14, from Gauza et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...804...96G/abstract)",
+  "ageGyr": 0.14,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of VHS J125601.92-125723.9 (pscomppars): age 0.14 Gyr, from Dupuy et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1688D/abstract)",
+  "projectedRotationSpeedKmS": 75,
+  "projectedRotationSpeedSource": "SIMBAD, LP 736-15: projected rotation speed 75 km/s, the measurement SIMBAD prefers (2023AJ....165..164B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published model radius. The star's disc is not resolved; its color is a blackbody at the published temperature."

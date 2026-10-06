@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Nava et al. 2022, the stellar temperature of the default parameter set of K2-222 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract)",
   "surfaceGravityLogg": 4.35,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-222.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.351, rounded to two decimals",
+  "spectralType": "G0",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-222 (pscomppars): spectral type G0, from Nava et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract)",
+  "metallicityDex": -0.315,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-222 (pscomppars): [Fe/H] -0.315 dex, from Nava et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract)",
+  "luminosityLogSolar": 0.127,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-222 (pscomppars): log10 of the luminosity in solar units 0.1271, from Nava et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract)",
+  "ageGyr": 7.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-222 (pscomppars): age 7.1 Gyr, from Nava et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract)",
+  "projectedRotationSpeedKmS": 3.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-222 (pscomppars): projected rotation speed 3.1 km/s, from Nava et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163...41N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

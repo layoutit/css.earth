@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Effective temperature 3755 ± 90 K from Torres et al. 2015 (ApJ 800, 99; https://arxiv.org/abs/1501.01101), Table 5, KOI-0571, the radius source: a spectroscopic value it adopts from Mann et al. 2013 and Muirhead et al. 2014.",
   "surfaceGravityLogg": 4.74,
   "surfaceGravitySource": "log g from the astronomy record's GM and radius (physicalNotes), log10(GM/R^2) in cgs",
+  "spectralType": "M1",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Kepler-186 (pscomppars): spectral type M1, from Quintana et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014Sci...344..277Q/abstract)",
+  "metallicityDex": -0.26,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-186 (pscomppars): [Fe/H] -0.26 dex, from Torres et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract)",
+  "luminosityLogSolar": -1.26,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-186 (pscomppars): log10 of the luminosity in solar units -1.26, from Torres et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract)",
+  "ageGyr": 4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-186 (pscomppars): age 4 Gyr, from Torres et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract)",
+  "projectedRotationSpeedKmS": 1.73,
+  "projectedRotationSpeedSource": "SIMBAD, Kepler-186: projected rotation speed 1.73 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

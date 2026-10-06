@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Jofré et al. 2025, the stellar temperature of the default parameter set of HD 202772 A b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract)",
   "surfaceGravityLogg": 3.86,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-202772-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.859, rounded to two decimals",
+  "metallicityDex": 0.232,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 202772 A (pscomppars): [Fe/H] 0.232 dex, from Jofré et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract)",
+  "luminosityLogSolar": 1.009,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 202772 A (pscomppars): log10 of the luminosity in solar units 1.00945, from Jofré et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract)",
+  "ageGyr": 1.63,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 202772 A (pscomppars): age 1.63 Gyr, from Jofré et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract)",
+  "projectedRotationSpeedKmS": 4.75,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 202772 A (pscomppars): projected rotation speed 4.75 km/s, from Jofré et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025MNRAS.544.3994J/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 213558: effective temperature in K, from the angular diameter and the bolometric flux, 9131 +/- 167 (https://doi.org/10.1088/0004-637X/746/1/101)",
   "surfaceGravityLogg": 4.12,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/alpha-lacertae.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.120, rounded to two decimals",
+  "spectralType": "A1V",
+  "spectralTypeSource": "SIMBAD, * alf Lac: spectral type A1V",
+  "projectedRotationSpeedKmS": 128,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Lac: projected rotation speed 128 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1065) (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Johnson et al. 2009, the stellar temperature of the default parameter set of WASP-10 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...692L.100J/abstract)",
   "surfaceGravityLogg": 4.63,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-10.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.625, rounded to two decimals",
+  "spectralType": "K5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-10 (pscomppars): spectral type K5 V, from Salz et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015A&A...576A..42S/abstract)",
+  "metallicityDex": 0.03,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-10 (pscomppars): [M/H] 0.03 dex, from Johnson et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...692L.100J/abstract)",
+  "luminosityLogSolar": -0.64,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-10 (pscomppars): log10 of the luminosity in solar units -0.64029, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-10 (pscomppars): age 7 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodDays": 11.91,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-10 (pscomppars): rotation period 11.91 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-10 (pscomppars): projected rotation speed 3 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

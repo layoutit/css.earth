@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 746, 101, HD 30652: effective temperature in K, from the angular diameter and the bolometric flux, 6516 +/- 19 (https://doi.org/10.1088/0004-637X/746/1/101)",
   "surfaceGravityLogg": 4.3,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tabit.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.303, rounded to two decimals",
+  "spectralType": "F6V",
+  "spectralTypeSource": "SIMBAD, * pi.03 Ori: spectral type F6V (1973ARA&A..11...29M)",
+  "luminosityLogSolar": 0.455,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3288921720025503360, flags_flame 00: lum_flame 2.854192 solar luminosities (16th to 84th percentiles 2.8361046 to 2.8687923); its log10 is recorded",
+  "ageGyr": 4.002,
+  "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3288921720025503360, flags_flame 00: age_flame 4.001862 Gyr (16th to 84th percentiles 3.434232 to 4.5694366)",
+  "projectedRotationSpeedKmS": 19.22,
+  "projectedRotationSpeedSource": "SIMBAD, * pi.03 Ori: projected rotation speed 19.22 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 306) (photometry/stellar-color.json); no image of the photosphere exists."

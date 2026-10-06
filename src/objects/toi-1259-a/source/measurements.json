@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Martin et al. 2021, the stellar temperature of TOI-1259 A b's parameter set from Martin et al. 2021 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021MNRAS.507.4132M/abstract)",
   "surfaceGravityLogg": 4.6,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1259-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.602, rounded to two decimals",
+  "metallicityDex": -0.5,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1259 A (pscomppars): [Fe/H] -0.5 dex, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "luminosityLogSolar": -0.59,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1259 A (pscomppars): log10 of the luminosity in solar units -0.58996, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "ageGyr": 4.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1259 A (pscomppars): age 4.8 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodDays": 26.7,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1259 A (pscomppars): rotation period 26.7 d, from Veldhuis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A.272V/abstract)",
+  "projectedRotationSpeedKmS": 1.28,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1259 A (pscomppars): projected rotation speed 1.28 km/s, from Veldhuis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A.272V/abstract)",
+  "spinInclinationDegrees": 70.9,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.715 solar radii): sin i = v sin i × P / (2πR) = 0.945. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of TOI-561 b's parameter set from MacDougall et al. 2023 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.49,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-561.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.493, rounded to two decimals",
+  "spectralType": "G9 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-561 (pscomppars): spectral type G9 V, from Lacedelli et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.511.4551L/abstract)",
+  "metallicityDex": -0.41,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-561 (pscomppars): [Fe/H] -0.41 dex, from Brinkman et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...88B/abstract)",
+  "luminosityLogSolar": -0.282,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-561 (pscomppars): log10 of the luminosity in solar units -0.28233, from Brinkman et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...88B/abstract)",
+  "ageGyr": 16.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-561 (pscomppars): age 16.1 Gyr, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-561 (pscomppars): projected rotation speed 2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

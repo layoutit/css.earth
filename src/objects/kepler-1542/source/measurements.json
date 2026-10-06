@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Morton et al. 2016, the stellar temperature of the default parameter set of Kepler-1542 c in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
   "surfaceGravityLogg": 4.42,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-1542.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.420, rounded to two decimals",
+  "spectralType": "G5V",
+  "spectralTypeSource": "SIMBAD, Kepler-1542: spectral type G5V (2016A&A...594A..39F)",
+  "metallicityDex": 0.06,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-1542 (pscomppars): [Fe/H] 0.06 dex, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "luminosityLogSolar": 0.07,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1542 (pscomppars): log10 of the luminosity in solar units 0.07026, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
+  "ageGyr": 8.51,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-1542 (pscomppars): age 8.51 Gyr, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "projectedRotationSpeedKmS": 0.8,
+  "projectedRotationSpeedSource": "SIMBAD, Kepler-1542: projected rotation speed 0.8 km/s, the measurement SIMBAD prefers (2018ApJS..237...38B)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

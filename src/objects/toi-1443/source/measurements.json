@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "MacDougall et al. 2023, the stellar temperature of the default parameter set of TOI-1443 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1443.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.571, rounded to two decimals",
+  "metallicityDex": -0.294,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-1443 (pscomppars): [Fe/H] -0.294 dex, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "luminosityLogSolar": -0.42,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1443 (pscomppars): log10 of the luminosity in solar units -0.42022, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "ageGyr": 7.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1443 (pscomppars): age 7.4 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

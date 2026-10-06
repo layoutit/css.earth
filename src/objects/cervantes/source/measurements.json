@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 5945941905576552064: teff_gspphot 5590.9136 K (16th-84th percentiles 5589.6675-5592.4976), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 4.09,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/cervantes.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.092, rounded to two decimals",
+  "spectralType": "G3 IV-V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 160691 (pscomppars): spectral type G3 IV-V, from Benedict et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..295B/abstract)",
+  "metallicityDex": 0.28,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 160691 (pscomppars): [Fe/H] 0.28 dex, from Benedict et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..295B/abstract)",
+  "luminosityLogSolar": 0.278,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 160691 (pscomppars): log10 of the luminosity in solar units 0.27848, from Gozdziewski et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...657..546G/abstract)",
+  "ageGyr": 5.7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 160691 (pscomppars): age 5.7 Gyr, from Benedict et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..295B/abstract)",
+  "projectedRotationSpeedKmS": 3.1,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 160691 (pscomppars): projected rotation speed 3.1 km/s, from Benedict et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..295B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Zúñiga-Fernández et al. 2025, the stellar temperature of the default parameter set of TOI-2267 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
   "surfaceGravityLogg": 5.04,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2267.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.037, rounded to two decimals",
+  "spectralType": "M5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-2267 A (pscomppars): spectral type M5 V, from Zúñiga-Fernández et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
+  "metallicityDex": 0.164,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2267 A (pscomppars): [Fe/H] 0.164 dex, from Zúñiga-Fernández et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
+  "luminosityLogSolar": -2.481,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2267 A (pscomppars): log10 of the luminosity in solar units -2.48149, from Zúñiga-Fernández et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
+  "ageGyr": 1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2267 A (pscomppars): age 1 Gyr, from Zúñiga-Fernández et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
+  "rotationPeriodDays": 0.6958,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2267 A (pscomppars): rotation period 0.6958 d, from Zúñiga-Fernández et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
+  "projectedRotationSpeedKmS": 17.6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2267 A (pscomppars): projected rotation speed 17.6 km/s, from Zúñiga-Fernández et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

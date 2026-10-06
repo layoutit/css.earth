@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "August et al. 2025, the stellar temperature of the default parameter set of LHS 1478 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract)",
   "surfaceGravityLogg": 5.02,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lhs-1478.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.017, rounded to two decimals",
+  "spectralType": "m3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LHS 1478 (pscomppars): spectral type m3 V, from Soto et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...649A.144S/abstract)",
+  "metallicityDex": -0.38,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of LHS 1478 (pscomppars): [Fe/H] -0.38 dex, from August et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract)",
+  "luminosityLogSolar": -2.13,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LHS 1478 (pscomppars): log10 of the luminosity in solar units -2.1296, from August et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.171A/abstract)",
+  "projectedRotationSpeedKmS": 2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of LHS 1478 (pscomppars): projected rotation speed 2 km/s, from Soto et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...649A.144S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

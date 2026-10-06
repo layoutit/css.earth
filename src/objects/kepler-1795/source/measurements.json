@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Q1-Q17 DR25 KOI Table, the stellar temperature of the default parameter set of Kepler-1795 b in the NASA Exoplanet Archive (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
   "surfaceGravityLogg": 4.65,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-1795.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.648, rounded to two decimals",
+  "metallicityDex": 0.28,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-1795 (pscomppars): [Fe/H] 0.28 dex, from Q1-Q17 DR25 KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
+  "luminosityLogSolar": -0.757,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1795 (pscomppars): log10 of the luminosity in solar units -0.757, from Calculated Value (/docs/pscp_calc.html)",
+  "ageGyr": 5.8,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-1795 (pscomppars): age 5.8 Gyr, from Q1-Q8 KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
+  "projectedRotationSpeedKmS": 3.27,
+  "projectedRotationSpeedSource": "SIMBAD, Kepler-1795: projected rotation speed 3.27 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

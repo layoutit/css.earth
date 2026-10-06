@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Naponiello et al. 2025, the stellar temperature of the default parameter set of TOI-5800 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
   "surfaceGravityLogg": 4.55,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5800.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.553, rounded to two decimals",
+  "spectralType": "K3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5800 (pscomppars): spectral type K3 V, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
+  "metallicityDex": -0.04,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-5800 (pscomppars): [Fe/H] -0.04 dex, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
+  "luminosityLogSolar": -0.51,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5800 (pscomppars): log10 of the luminosity in solar units -0.51004, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
+  "ageGyr": 8.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5800 (pscomppars): age 8.1 Gyr, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
+  "projectedRotationSpeedKmS": 1.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5800 (pscomppars): projected rotation speed 1.3 km/s, from Naponiello et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A..79N/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

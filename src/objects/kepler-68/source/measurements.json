@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bonomo et al. 2023, the stellar temperature of the default parameter set of Kepler-68 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
   "surfaceGravityLogg": 4.26,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kepler-68.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.264, rounded to two decimals",
+  "spectralType": "G1V",
+  "spectralTypeSource": "SIMBAD, BD+48 2893: spectral type G1V (2018MNRAS.481.3244G)",
+  "metallicityDex": 0.11,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Kepler-68 (pscomppars): [Fe/H] 0.11 dex, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "luminosityLogSolar": 0.231,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-68 (pscomppars): log10 of the luminosity in solar units 0.23106, from Mills et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....157..145M/abstract)",
+  "ageGyr": 6.84,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-68 (pscomppars): age 6.84 Gyr, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "projectedRotationSpeedKmS": 0.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-68 (pscomppars): projected rotation speed 0.5 km/s, from Gilliland et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...766...40G/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

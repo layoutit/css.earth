@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Carleo et al. 2021, the stellar temperature of TOI-942 c's parameter set from Carleo et al. 2021 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2021A&A...645A..71C/abstract)",
   "surfaceGravityLogg": 4.45,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-942.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.450, rounded to two decimals",
+  "spectralType": "K2.5 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-942 (pscomppars): spectral type K2.5 V, from Carleo et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...645A..71C/abstract)",
+  "metallicityDex": -0.221,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-942 (pscomppars): [Fe/H] -0.221 dex, from Zhou et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161....2Z/abstract)",
+  "luminosityLogSolar": -0.359,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-942 (pscomppars): log10 of the luminosity in solar units -0.35853, from Carleo et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...645A..71C/abstract)",
+  "ageGyr": 0.053,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-942 (pscomppars): age 0.053 Gyr, from Wirth et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021ApJ...917L..34W/abstract)",
+  "rotationPeriodDays": 3.39,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-942 (pscomppars): rotation period 3.39 d, from Carleo et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...645A..71C/abstract)",
+  "projectedRotationSpeedKmS": 14.24,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-942 (pscomppars): projected rotation speed 14.24 km/s, from Wirth et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021ApJ...917L..34W/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

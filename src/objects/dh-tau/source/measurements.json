@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "3600 +/- 150 K: Xuan et al. (2024), Table 1, https://arxiv.org/abs/2405.13128",
   "surfaceGravityLogg": 4.04,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/dh-tau.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.044, rounded to two decimals",
+  "spectralType": "M0.5",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of DH Tau (pscomppars): spectral type M0.5, from Patience et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012A%26A...540A..85P/abstract)",
+  "luminosityLogSolar": -0.212,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of DH Tau (pscomppars): log10 of the luminosity in solar units -0.21153, from Zhou et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...783L..17Z/abstract)",
+  "ageGyr": 0.001,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of DH Tau (pscomppars): age 0.001 Gyr, from Patience et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012A%26A...540A..85P/abstract)",
+  "projectedRotationSpeedKmS": 7.1,
+  "projectedRotationSpeedSource": "SIMBAD, V* DH Tau: projected rotation speed 7.1 km/s, the measurement SIMBAD prefers (2025ApJ...978...42H)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is a blackbody at the published temperature."

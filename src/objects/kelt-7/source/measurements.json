@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of KELT-7 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
   "surfaceGravityLogg": 4.17,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kelt-7.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.168, rounded to two decimals",
+  "spectralType": "F",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of KELT-7 (pscomppars): spectral type F, from Bieryla et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....150...12B/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of KELT-7 (pscomppars): [Fe/H] 0 dex, from Stassun et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "luminosityLogSolar": 0.758,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of KELT-7 (pscomppars): log10 of the luminosity in solar units 0.758, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "ageGyr": 1.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of KELT-7 (pscomppars): age 1.3 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "projectedRotationSpeedKmS": 69.3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KELT-7 (pscomppars): projected rotation speed 69.3 km/s, from Zhou et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.460.3376Z/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

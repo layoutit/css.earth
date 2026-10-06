@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 497653157602636928: teff_gspphot 4574.2593 K (16th-84th percentiles 4573.531-4575.221), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 2.5,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/mago.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.499, rounded to two decimals",
+  "spectralType": "K1 III",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 32518 (pscomppars): spectral type K1 III, from Dollinger et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...505.1311D/abstract)",
+  "metallicityDex": -0.15,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 32518 (pscomppars): [Fe/H] -0.15 dex, from Dollinger et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...505.1311D/abstract)",
+  "luminosityLogSolar": 1.666,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 32518 (pscomppars): log10 of the luminosity in solar units 1.66577, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
+  "ageGyr": 5.83,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HD 32518 (pscomppars): age 5.83 Gyr, from Dollinger et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...505.1311D/abstract)",
+  "projectedRotationSpeedKmS": 1.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 32518 (pscomppars): projected rotation speed 1.2 km/s, from Dollinger et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...505.1311D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

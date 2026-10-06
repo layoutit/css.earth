@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 206102116: APOGEE DR17 effective temperature 4723.306 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.92,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-206102116.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.922, rounded to two decimals",
+  "projectedRotationSpeedKmS": 8.21,
+  "projectedRotationSpeedSource": "SIMBAD, UCAC4 390-136422: projected rotation speed 8.21 km/s, the measurement SIMBAD prefers (2023A&A...676A.129H)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

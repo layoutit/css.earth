@@ -9,6 +9,8 @@
   "radiusSource": "Radius 11.93 solar radii from Hamann et al. (2019), A&A 625, A57, Table 1, WR 124: R* = 11.93 solar radii, the radius where the continuum's Rosseland optical depth is 20 (Sect. 2), under the wind (https://arxiv.org/abs/1904.04687): 8,299,701 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 44700 K from Hamann et al. (2019), A&A 625, A57, Table 1, WR 124: T* = 44.7 kK, the temperature at that radius; spectral subtype WN8h (https://arxiv.org/abs/1904.04687). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
   "effectiveTemperatureK": 44700,
   "effectiveTemperatureSource": "Hamann et al. (2019), A&A 625, A57, Table 1, WR 124: T* = 44.7 kK, the temperature at that radius; spectral subtype WN8h (https://arxiv.org/abs/1904.04687)",
+  "spectralType": "WN8h",
+  "spectralTypeSource": "SIMBAD, Hen 2-427: spectral type WN8h (2006A&A...457.1015H)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

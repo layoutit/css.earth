@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 725A: effective temperature in K, 3407 +/- 15, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.84,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/struve-2398-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.837, rounded to two decimals",
+  "spectralType": "M3",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Gl 725 A (pscomppars): spectral type M3, from Cortés-Zuleta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract)",
+  "metallicityDex": -0.19,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Gl 725 A (pscomppars): [Fe/H] -0.19 dex, from Cortés-Zuleta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract)",
+  "luminosityLogSolar": -1.809,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Gl 725 A (pscomppars): log10 of the luminosity in solar units -1.809, from Cortés-Zuleta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract)",
+  "ageGyr": 6.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of Gl 725 A (pscomppars): age 6.2 Gyr, from Cortés-Zuleta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract)",
+  "rotationPeriodDays": 103.1,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Gl 725 A (pscomppars): rotation period 103.1 d, from Cortés-Zuleta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract)",
+  "projectedRotationSpeedKmS": 1.55,
+  "projectedRotationSpeedSource": "SIMBAD, HD 173739: projected rotation speed 1.55 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

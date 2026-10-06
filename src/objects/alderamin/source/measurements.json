@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Effective temperature 7510 ± 160 K, the true effective temperature of the beta-free model of Zhao et al. 2009 (ApJ 701, 209; https://arxiv.org/abs/0906.2241), Table 3.",
   "surfaceGravityLogg": 3.91,
   "surfaceGravitySource": "log g from the mass 1.92 ± 0.04 solar masses of Zhao et al. 2009 (ApJ 701, 209; https://arxiv.org/abs/0906.2241), Table 3, and the volume-equivalent radius, log10(GM/R^2) in cgs",
+  "spectralType": "A8Vn",
+  "spectralTypeSource": "SIMBAD, * alf Cep: spectral type A8Vn (2003AJ....126.2048G)",
+  "projectedRotationSpeedKmS": 196,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Cep: projected rotation speed 196 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a giant star is not a solid surface and its limb is not sharp."

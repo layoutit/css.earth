@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Delrez et al. 2022, the stellar temperature of the default parameter set of LP 890-9 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract)",
   "surfaceGravityLogg": 5.13,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lp-890-9.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.126, rounded to two decimals",
+  "spectralType": "M6 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LP 890-9 (pscomppars): spectral type M6 V, from Delrez et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract)",
+  "metallicityDex": -0.028,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of LP 890-9 (pscomppars): [Fe/H] -0.028 dex, from Delrez et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract)",
+  "luminosityLogSolar": -2.841,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LP 890-9 (pscomppars): log10 of the luminosity in solar units -2.84134, from Delrez et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract)",
+  "ageGyr": 7.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of LP 890-9 (pscomppars): age 7.2 Gyr, from Delrez et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...667A..59D/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

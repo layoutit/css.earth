@@ -9,6 +9,16 @@
   "radiusSource": "Radius: 1.756 +/- 0.071 solar radii at 695700 km per solar radius (Ehrenreich et al. 2020, Nature 580, 597; arXiv:2003.05528, Extended Data Table 1, from their ESPRESSO spectra and the Gaia DR2 parallax). GM from their stellar mass 1.458 +/- 0.021 solar masses (same table) times the JPL solar GM 132712440041.93938 km^3/s^2. The star has a bound companion, WASP-76 B, 0.44 arcsec away and about ten times fainter (same paper, Methods); it is not placed. presentationUp: the display axis is a sky-plane convention; the star's spin axis is not measured in three dimensions (Ehrenreich et al. 2020 measure only its sky-projected angle to the orbit, 61 degrees).",
   "effectiveTemperatureK": 6329,
   "effectiveTemperatureSource": "Ehrenreich et al. (2020), Nature 580, 597, Extended Data Table 1: 6,329 +/- 65 K from their ESPRESSO spectra (https://arxiv.org/abs/2003.05528)",
+  "spectralType": "F7",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of WASP-76 (pscomppars): spectral type F7, from Ehrenreich et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020Natur.580..597E/abstract)",
+  "metallicityDex": 0.366,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of WASP-76 (pscomppars): [Fe/H] 0.366 dex, from Ehrenreich et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020Natur.580..597E/abstract)",
+  "luminosityLogSolar": 0.654,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-76 (pscomppars): log10 of the luminosity in solar units 0.65418, from Fu et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..108F/abstract)",
+  "ageGyr": 1.816,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-76 (pscomppars): age 1.816 Gyr, from Ehrenreich et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020Natur.580..597E/abstract)",
+  "projectedRotationSpeedKmS": 1.48,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-76 (pscomppars): projected rotation speed 1.48 km/s, from Ehrenreich et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020Natur.580..597E/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."

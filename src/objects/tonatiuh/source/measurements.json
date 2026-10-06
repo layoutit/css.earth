@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1693159194226600192: teff_gspphot 4942.6973 K (16th-84th percentiles 4934.4336-4950.7627), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 2.85,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tonatiuh.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.847, rounded to two decimals",
+  "spectralType": "G9 III",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HD 104985 (pscomppars): spectral type G9 III, from Teng et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T/abstract)",
+  "metallicityDex": -0.32,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HD 104985 (pscomppars): [Fe/H] -0.32 dex, from Teng et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T/abstract)",
+  "luminosityLogSolar": 1.77,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 104985 (pscomppars): log10 of the luminosity in solar units 1.76989, from Teng et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023PASJ...75.1030T/abstract)",
+  "projectedRotationSpeedKmS": 2.7,
+  "projectedRotationSpeedSource": "SIMBAD, HD 104985: projected rotation speed 2.7 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

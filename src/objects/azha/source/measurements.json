@@ -9,6 +9,10 @@
   "radiusSource": "Radius 11.243 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 13701: radius 11.243 solar radii, implied by the fitted luminosity 53.924 solar luminosities (fractional uncertainty 0.054) and temperature (https://doi.org/10.1093/mnras/stx1433): 7,821,755 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4668 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 13701: effective temperature 4668 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.024) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
   "effectiveTemperatureK": 4668,
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 13701: effective temperature 4668 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.024) (https://doi.org/10.1093/mnras/stx1433)",
+  "spectralType": "K1+IIIb",
+  "spectralTypeSource": "SIMBAD, * eta Eri: spectral type K1+IIIb (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 2.2,
+  "projectedRotationSpeedSource": "SIMBAD, * eta Eri: projected rotation speed 2.2 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Silverstein et al. 2022, the stellar temperature of the default parameter set of LHS 1678 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract)",
   "surfaceGravityLogg": 4.94,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lhs-1678.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.941, rounded to two decimals",
+  "spectralType": "M2.0 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of LHS 1678 (pscomppars): spectral type M2.0 V, from Silverstein et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract)",
+  "luminosityLogSolar": -1.839,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of LHS 1678 (pscomppars): log10 of the luminosity in solar units -1.83863, from Silverstein et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract)",
+  "ageGyr": 7,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of LHS 1678 (pscomppars): age 7 Gyr, from Silverstein et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract)",
+  "rotationPeriodDays": 64,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LHS 1678 (pscomppars): rotation period 64 d, from Silverstein et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract)",
+  "projectedRotationSpeedKmS": 0.53,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of LHS 1678 (pscomppars): projected rotation speed 0.53 km/s, from Silverstein et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..151S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

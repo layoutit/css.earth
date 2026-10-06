@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Rea et al. 2026, the stellar temperature of the default parameter set of TOI-707 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract)",
   "surfaceGravityLogg": 4.45,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-707.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.453, rounded to two decimals",
+  "metallicityDex": 0.16,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-707 (pscomppars): [Fe/H] 0.16 dex, from Rea et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract)",
+  "luminosityLogSolar": -0.108,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-707 (pscomppars): log10 of the luminosity in solar units -0.10846, from Rea et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract)",
+  "ageGyr": 0.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-707 (pscomppars): age 0.6 Gyr, from Rea et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract)",
+  "projectedRotationSpeedKmS": 4.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-707 (pscomppars): projected rotation speed 4.9 km/s, from Rea et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...711A..86R/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

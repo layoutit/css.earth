@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Sozzetti et al. 2009, the stellar temperature of the default parameter set of TrES-3 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract)",
   "surfaceGravityLogg": 4.57,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tres-3.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.569, rounded to two decimals",
+  "spectralType": "G4 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TrES-3 (pscomppars): spectral type G4 V, from O'Donovan et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...663L..37O/abstract)",
+  "metallicityDex": -0.19,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TrES-3 (pscomppars): [Fe/H] -0.19 dex, from Sozzetti et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract)",
+  "luminosityLogSolar": -0.204,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TrES-3 (pscomppars): log10 of the luminosity in solar units -0.20412, from Sozzetti et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract)",
+  "ageGyr": 0.9,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TrES-3 (pscomppars): age 0.9 Gyr, from Sozzetti et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TrES-3 (pscomppars): projected rotation speed 1.5 km/s, from Sozzetti et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

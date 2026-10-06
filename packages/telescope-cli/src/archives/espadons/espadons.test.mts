@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { parseTecplotLonLat } from '@cssearth/bake/objects/raster';
 import { assignTargets, guide, ledgerStar, recordedResults } from './archive-ledger.mts';
-import { runsOf } from './archive.mts';
+import { recordedStar, runsOf } from './archive.mts';
 import { compareFields } from './compare.mts';
 import { chooseParameters, dwarfRow, parseDwarfSequence } from './catalogue.mts';
 import { atomicLines, effectiveLande, lsLande } from './kurucz.mts';
@@ -172,4 +172,13 @@ test('runs are split at gaps, published fields are matched by time, and a progra
   assert.throws(() => parseProgram({ ...base, star: { vsiniKmS: { value: 3, source: ' ' }, inclinationDegrees: cite(85), periodDays: cite(12), maximumDegree: cite(5) } }), /source is empty/u);
   assert.throws(() => parseProgram({ ...base, observations: [product(900001, 1), product(900001, 2)] }), /listed twice/u);
   assert.throws(() => parseProgram({ ...base, observations: [{ ...product(900001, 1), product: 'x' }] }), /not a polarimetric product id/u);
+});
+
+test('a star\'s rotation is taken from its own record, each value cited as the record cites it, or not at all', () => {
+  const record = { rotationPeriodDays: 12.3, rotationPeriodSource: 'archive: 12.3 d', projectedRotationSpeedKmS: 3.23, projectedRotationSpeedSource: 'archive: 3.23 km/s', spinInclinationDegrees: 68.1, spinInclinationSource: 'computed here' };
+  const star = recordedStar(record, 'src/objects/hd-1/source/measurements.json')!;
+  assert.deepEqual([star.periodDays.value, star.vsiniKmS.value, star.inclinationDegrees.value, star.maximumDegree.value], [12.3, 3.23, 68.1, 15]);
+  assert.equal(star.periodDays.source, 'src/objects/hd-1/source/measurements.json, rotationPeriodDays: archive: 12.3 d');
+  // Without a tilt there is no map to fit: period and speed alone are not a rotation.
+  assert.equal(recordedStar({ ...record, spinInclinationDegrees: undefined }, 'x'), undefined); assert.equal(recordedStar(null, 'x'), undefined);
 });

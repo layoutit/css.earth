@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 699: effective temperature in K, 3222 +/- 10, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 5.06,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/barnards-star.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.059, rounded to two decimals",
+  "spectralType": "M3.5-4 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of Barnard's star (pscomppars): spectral type M3.5-4 V, from González Hernández et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..79G/abstract)",
+  "metallicityDex": -0.56,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of Barnard's star (pscomppars): [Fe/H] -0.56 dex, from González Hernández et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..79G/abstract)",
+  "luminosityLogSolar": -2.45,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of Barnard's star (pscomppars): log10 of the luminosity in solar units -2.44977, from González Hernández et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..79G/abstract)",
+  "rotationPeriodDays": 142,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Barnard's star (pscomppars): rotation period 142 d, from González Hernández et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..79G/abstract)",
+  "projectedRotationSpeedKmS": 3.08,
+  "projectedRotationSpeedSource": "SIMBAD, NAME Barnard's star: projected rotation speed 3.08 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

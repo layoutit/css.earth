@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Bryant et al. 2025, the stellar temperature of the default parameter set of TOI-6894 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract)",
   "surfaceGravityLogg": 5.04,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-6894.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.040, rounded to two decimals",
+  "metallicityDex": 0.142,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-6894 (pscomppars): [Fe/H] 0.142 dex, from Bryant et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract)",
+  "luminosityLogSolar": -2.426,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6894 (pscomppars): log10 of the luminosity in solar units -2.42597, from Bryant et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025NatAs...9.1031B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Leleu et al. 2024, the stellar temperature of the default parameter set of TOI-178 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract)",
   "surfaceGravityLogg": 4.61,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-178.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.607, rounded to two decimals",
+  "spectralType": "K",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-178 (pscomppars): spectral type K, from Leleu et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...649A..26L/abstract)",
+  "metallicityDex": -0.23,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-178 (pscomppars): [Fe/H] -0.23 dex, from Leleu et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract)",
+  "luminosityLogSolar": -0.866,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-178 (pscomppars): log10 of the luminosity in solar units -0.86646, from Leleu et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract)",
+  "ageGyr": 6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-178 (pscomppars): age 6 Gyr, from Leleu et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract)",
+  "projectedRotationSpeedKmS": 1.5,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-178 (pscomppars): projected rotation speed 1.5 km/s, from Leleu et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.211L/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

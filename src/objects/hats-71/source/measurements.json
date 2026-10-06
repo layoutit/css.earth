@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Bakos et al. 2020, the stellar temperature of the default parameter set of HATS-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract)",
   "surfaceGravityLogg": 4.77,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hats-71.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.765, rounded to two decimals",
+  "spectralType": "M3 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HATS-71 (pscomppars): spectral type M3 V, from Bakos et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract)",
+  "metallicityDex": 0.17,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HATS-71 (pscomppars): [Fe/H] 0.17 dex, from Bakos et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract)",
+  "luminosityLogSolar": -1.56,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HATS-71 (pscomppars): log10 of the luminosity in solar units -1.55988, from Bakos et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract)",
+  "ageGyr": 3.2,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HATS-71 (pscomppars): age 3.2 Gyr, from Bakos et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract)",
+  "rotationPeriodDays": 41.72,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HATS-71 (pscomppars): rotation period 41.72 d, from Bakos et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..267B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

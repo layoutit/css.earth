@@ -11,6 +11,18 @@
   "effectiveTemperatureSource": "Bonomo et al. 2023, the stellar temperature of the default parameter set of K2-141 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
   "surfaceGravityLogg": 4.62,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-141.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.622, rounded to two decimals",
+  "spectralType": "K7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-141 (pscomppars): spectral type K7 V, from Barragán et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...612A..95B/abstract)",
+  "metallicityDex": 0,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-141 (pscomppars): [Fe/H] 0 dex, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "luminosityLogSolar": -0.75,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-141 (pscomppars): log10 of the luminosity in solar units -0.75, from Malavolta et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155..107M/abstract)",
+  "ageGyr": 6.3,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of K2-141 (pscomppars): age 6.3 Gyr, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "rotationPeriodDays": 15.17,
+  "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-141 (pscomppars): rotation period 15.17 d, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "projectedRotationSpeedKmS": 3,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-141 (pscomppars): projected rotation speed 3 km/s, from Barragán et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...612A..95B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

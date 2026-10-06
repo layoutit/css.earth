@@ -11,6 +11,8 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1823769768209737344: teff_gspphot 3701.894 K (16th-84th percentiles 3690.8794-3760.1555), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 0.75,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gaia-dr3-1823769768209737344.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 0.752, rounded to two decimals",
+  "luminosityLogSolar": 3.169,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1823769768209737344, flags_flame 10: lum_flame 1475.5012 solar luminosities (16th to 84th percentiles 1285.799 to 1781.6107); its log10 is recorded",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

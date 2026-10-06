@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Peluso et al. 2024, the stellar temperature of the default parameter set of TIC 139270665 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract)",
   "surfaceGravityLogg": 4.44,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-139270665.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.439, rounded to two decimals",
+  "spectralType": "G2",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TIC 139270665 (pscomppars): spectral type G2, from Peluso et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract)",
+  "metallicityDex": 0.156,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of TIC 139270665 (pscomppars): [Fe/H] 0.156 dex, from Peluso et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract)",
+  "luminosityLogSolar": 0.032,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of TIC 139270665 (pscomppars): log10 of the luminosity in solar units 0.03222, from Peluso et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract)",
+  "ageGyr": 3.4,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of TIC 139270665 (pscomppars): age 3.4 Gyr, from Peluso et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract)",
+  "projectedRotationSpeedKmS": 4.2,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TIC 139270665 (pscomppars): projected rotation speed 4.2 km/s, from Peluso et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..170P/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

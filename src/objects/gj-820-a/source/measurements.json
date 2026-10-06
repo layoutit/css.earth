@@ -11,6 +11,12 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 820A: effective temperature in K, 4361 +/- 17, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.63,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-820-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.630, rounded to two decimals",
+  "spectralType": "K5V",
+  "spectralTypeSource": "SIMBAD, * 61 Cyg A: spectral type K5V (1989ApJS...71..245K)",
+  "luminosityLogSolar": -0.822,
+  "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1872046609345556480, flags_flame 00: lum_flame 0.15068895 solar luminosities (16th to 84th percentiles 0.145659 to 0.1556939); its log10 is recorded",
+  "projectedRotationSpeedKmS": 4.72,
+  "projectedRotationSpeedSource": "SIMBAD, * 61 Cyg A: projected rotation speed 4.72 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 201091) (photometry/stellar-color.json); no image of the photosphere exists."

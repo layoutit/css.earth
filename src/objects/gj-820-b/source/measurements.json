@@ -11,6 +11,10 @@
   "effectiveTemperatureSource": "Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 820B: effective temperature in K, 3932 +/- 25, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112)",
   "surfaceGravityLogg": 4.68,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-820-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.679, rounded to two decimals",
+  "spectralType": "K7V",
+  "spectralTypeSource": "SIMBAD, * 61 Cyg B: spectral type K7V (1989ApJS...71..245K)",
+  "projectedRotationSpeedKmS": 3.21,
+  "projectedRotationSpeedSource": "SIMBAD, * 61 Cyg B: projected rotation speed 3.21 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

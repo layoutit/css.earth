@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "Wang et al. 2019, the stellar temperature of the default parameter set of HAT-P-9 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract)",
   "surfaceGravityLogg": 4.29,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hat-p-9.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.293, rounded to two decimals",
+  "spectralType": "F7",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of HAT-P-9 (pscomppars): spectral type F7, from Luo et al. 2018 (http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=V/153/stellar4)",
+  "metallicityDex": 0.12,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of HAT-P-9 (pscomppars): [Fe/H] 0.12 dex, from Wang et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract)",
+  "luminosityLogSolar": 0.418,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-9 (pscomppars): log10 of the luminosity in solar units 0.4183, from Wang et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W/abstract)",
+  "ageGyr": 1.6,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-9 (pscomppars): age 1.6 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "projectedRotationSpeedKmS": 11.9,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-9 (pscomppars): projected rotation speed 11.9 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
