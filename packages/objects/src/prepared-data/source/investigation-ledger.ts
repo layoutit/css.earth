@@ -6,7 +6,7 @@ export type InvestigationStatus = typeof INVESTIGATION_STATUSES[number];
 
 export interface InvestigationEntry {
   id: string; subject: string; status: InvestigationStatus; finding: string; revisitWhen?: string;
-  /** The shared record this decision leans on (data/investigations), when the reasoning is not this body's own. */
+  /** The shared record this decision leans on (src/sources/investigations), when the reasoning is not this body's own. */
   survey?: string;
   evidence: string[];
 }

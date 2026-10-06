@@ -90,7 +90,7 @@ hands the re-run an oracle for free.
    `compare.mts <program id> <work> halves` checks the two science half-stacks against each other. They are registered
    through the world coordinates each product carries, and that registration is then checked against the data by measuring
    the same agreement at the eight neighbouring whole-pixel shifts.
-5. **Ledger.** `archive-ledger.mts [work]` writes [data/gemini/ledger.json](../data/gemini/ledger.json) and
+5. **Ledger.** `archive-ledger.mts [work]` writes [src/sources/gemini/ledger.json](../src/sources/gemini/ledger.json) and
    [docs/gemini-ledger.md](gemini-ledger.md): public frame counts by instrument counted server-side, the shipped objects
    Gemini observed, a census of Europa, and each instrument's state read from the pinned programs and the receipts beside
    them. A capability counts as reduced only when a receipt parses, names a pinned program, and names a product whose own

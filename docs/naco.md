@@ -76,7 +76,7 @@ Two other things are worth knowing before reading the code.
    fitted disc centre. It publishes relative filter intensity with an explicit sky-noise uncertainty; no absolute calibration
    or photometric correction is claimed. The shared stage owns the ephemeris, rotation model, camera, projection, measured
    resolution, body-map metadata and product record.
-6. **Ledger.** `archive-ledger.mts` writes [data/naco/ledger.json](../data/naco/ledger.json) and
+6. **Ledger.** `archive-ledger.mts` writes [src/sources/naco/ledger.json](../src/sources/naco/ledger.json) and
    [docs/naco-ledger.md](naco-ledger.md): frame counts by mode counted server-side by the archive, the shipped objects NACO
    observed, one retrievable identity per programme, target spelling, mode and night, and each mode's state read from the
    pinned programs and the receipts beside them rather than declared. When qualification is the only query blocker, that

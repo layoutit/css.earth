@@ -2,7 +2,7 @@
 /** What the Gemini archive holds for this project's bodies, and what this toolkit has actually proven, derived rather than
  * declared.
  *
- *   node packages/telescope-cli/src/archives/gemini/archive-ledger.mts        writes data/gemini/ledger.json and docs/gemini-ledger.md
+ *   node packages/telescope-cli/src/archives/gemini/archive-ledger.mts        writes src/sources/gemini/ledger.json and docs/gemini-ledger.md
  *
  * Every count comes from the archive, counted server-side by an ADQL `GROUP BY` rather than by downloading rows and counting
  * them here. Every capability's state comes from the pinned programs and the receipts beside them: an instrument counts as
@@ -442,7 +442,7 @@ export function ledgerMarkdown(ledger: Ledger): string {
 /** The Gemini ledger: always a full pass, written every time, with an optional work directory whose product records
  * back the receipts (`archive-ledger.mts [work]`). It has no local pass, and receipt problems are recorded, not reported. */
 export const GEMINI_LEDGER: ArchiveLedger<Ledger> = {
-  schema: SCHEMA,   files: ledgerFiles('data/gemini/ledger.json', 'docs/gemini-ledger.md'), indent: 2,
+  schema: SCHEMA,   files: ledgerFiles('src/sources/gemini/ledger.json', 'docs/gemini-ledger.md'), indent: 2,
   guide: ledger => `${ledgerMarkdown(ledger)}\n`,
   survey: args => surveyGemini(args[0] ? resolve(args[0]) : null), writes: 'always',
   summary: ledger => [`${ledger.instruments.length} instruments, ${ledger.objects.length} shipped objects, ` +

@@ -5,7 +5,7 @@ import test from 'node:test';
 import { explorationAnswer } from '../exploration.mts';
 import { loadWwtImagery, matchWwtImagery, parseWwtCatalog, parseWwtCatalogLines } from './wwt-catalog.mts';
 
-const catalog = parseWwtCatalogLines(await readFile(resolve('data/wwt/core-imagesets.jsonl'), 'utf8'));
+const catalog = parseWwtCatalogLines(await readFile(resolve('src/sources/wwt/core-imagesets.jsonl'), 'utf8'));
 
 test('pinned WWT index preserves generic imageset metadata, source revision and credits', () => {
   assert.equal(catalog.imagesets.length, 4169);

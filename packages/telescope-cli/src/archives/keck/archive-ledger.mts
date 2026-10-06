@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** What the Keck Observatory Archive holds, for this project's objects, derived rather than declared.
  *
- *   node packages/telescope-cli/src/archives/keck/archive-ledger.mts      writes data/keck/ledger.json and docs/keck-ledger.md
+ *   node packages/telescope-cli/src/archives/keck/archive-ledger.mts      writes src/sources/keck/ledger.json and docs/keck-ledger.md
  *
  * Every count comes from KOA, counted server-side by an ADQL `GROUP BY` rather than by downloading rows and counting them
  * here. Every mode's state comes from the pinned programs and the product records and receipts beside them:
@@ -280,14 +280,14 @@ export function keckLedgerGuide(ledger: Ledger) {
     '| object | frames | instruments |', '|---|---|---|');
   for (const object of ledger.objects.slice(0, 40))
     lines.push(`| ${object.id} | ${object.frames.toLocaleString('en-US')} | ${Object.entries(object.instruments).map(([name, count]) => `${name} ${count.toLocaleString('en-US')}`).join(', ')} |`);
-  if (ledger.objects.length > 40) lines.push('', `${ledger.objects.length} objects matched in all; the rest are in [the ledger](../data/keck/ledger.json).`);
+  if (ledger.objects.length > 40) lines.push('', `${ledger.objects.length} objects matched in all; the rest are in [the ledger](../src/sources/keck/ledger.json).`);
   return `${lines.join('\n')}\n`;
 }
 
 /** The Keck ledger: always a full pass against KOA, written every time. It has no local pass, and receipt problems are
  * recorded in the ledger rather than reported. */
 export const KECK_LEDGER: ArchiveLedger<Ledger> = {
-  schema: SCHEMA,   files: ledgerFiles('data/keck/ledger.json', 'docs/keck-ledger.md'), indent: 2, guide: keckLedgerGuide,
+  schema: SCHEMA,   files: ledgerFiles('src/sources/keck/ledger.json', 'docs/keck-ledger.md'), indent: 2, guide: keckLedgerGuide,
   survey: () => surveyKeck(new Date().toISOString().slice(0, 10)), writes: 'always',
   summary: ledger => [`KECK_LEDGER ${KECK_LEDGER.files.ledger} (${ledger.objects.length} objects, ${ledger.modes.filter(mode => mode.state === 'reduced').length} of ${ledger.modes.length} instruments reduced)`],
 };

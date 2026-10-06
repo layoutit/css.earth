@@ -708,7 +708,7 @@ catalogue alias resolves to one canonical id. A near spelling is never silently 
 and "the archives contain no observation of a shipped target" are different scientific results.
 
 An archive target is the name of the pointing, not a complete inventory of its field. Source-backed exceptions live in
-[`data/telescopes/target-associations.json`](../data/telescopes/target-associations.json). Each one names a canonical target,
+[`src/sources/telescopes/target-associations.json`](../src/sources/telescopes/target-associations.json). Each one names a canonical target,
 the MAST collection, exact observation ids, and the source that establishes the body was in those fields. It deliberately
 does not copy the programme, instrument, filter, time, or archive target. The query asks current MAST rows for those facts
 through the pinned Astroquery client and refuses missing, duplicate, extra, or wrong-collection results. It therefore can find

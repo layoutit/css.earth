@@ -21,7 +21,7 @@
  *
  * Each mode's state is read from this repository, not declared: the programs pinned in packages/telescope-cli/src/archives/spitzer/programs and the
  * ones that carry a reproduction receipt that parses and names the observation and product it checked. A mode counts as
- * checked only then. --write replaces data/spitzer/ledger.json and docs/spitzer-ledger.md; --local rewrites only the
+ * checked only then. --write replaces src/sources/spitzer/ledger.json and docs/spitzer-ledger.md; --local rewrites only the
  * repository's own state from the ledger already on disk, for when a program is pinned or a receipt written and nothing the
  * archive said has changed. */
 import { readFileSync } from 'node:fs';
@@ -350,7 +350,7 @@ export function spitzerLedgerGuide(ledger: Ledger): string {
  * archive's holdings and their measurement date and retakes the object list, pinned programs and checked products.
  * Receipt problems are not reported: a receipt that does not stand up counts for nothing in `repositoryState`. */
 export const SPITZER_LEDGER: ArchiveLedger<Ledger> = {
-  schema: SCHEMA,   files: ledgerFiles('data/spitzer/ledger.json', 'docs/spitzer-ledger.md'), indent: 2, guide: spitzerLedgerGuide,
+  schema: SCHEMA,   files: ledgerFiles('src/sources/spitzer/ledger.json', 'docs/spitzer-ledger.md'), indent: 2, guide: spitzerLedgerGuide,
   survey: async () => { const objects = await spitzerShippedObjects(), state = await repositoryState();
     return assembleSpitzerLedger(objects, await surveyArchive(objects), state, new Date().toISOString().slice(0, 10)); },
   writes: 'with --write',

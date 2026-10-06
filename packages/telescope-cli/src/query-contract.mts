@@ -11,7 +11,7 @@ import type { TargetAssociation } from '@cssearth/telescope/node';
 import type { TargetCatalogueEntry, TargetResolution } from '@cssearth/telescope';
 
 export const ARCSEC_PER_RADIAN = 206_264.806_247;
-export const TARGET_ASSOCIATIONS_PATH = 'data/telescopes/target-associations.json';
+export const TARGET_ASSOCIATIONS_PATH = 'src/sources/telescopes/target-associations.json';
 export const MODES_SCHEMA = 'cssearth-telescope-modes@1';
 
 /** What an instrument mode can do, from its own documentation. `bands` means the coverage is the one `bands.mts` already

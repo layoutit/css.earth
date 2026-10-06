@@ -18,7 +18,7 @@ test('M31 exploration links the pinned PHAT FITS collection without treating til
   try{
     const path=resolve(scratch,'explore.json'),saved={schema:'cssearth-telescope-exploration@1',target:'m31',answer:{target:'m31',wwtFits:m31}};
     await writeFile(path,JSON.stringify(saved));
-    assert.deepEqual(await resolveWwtFitsLead(root,path,2),{catalog:resolve(root,'data/wwt/phat-fits.json'),imageset:'PHAT-f814w'});
+    assert.deepEqual(await resolveWwtFitsLead(root,path,2),{catalog:resolve(root,'src/sources/wwt/phat-fits.json'),imageset:'PHAT-f814w'});
     await writeFile(path,JSON.stringify({...saved,answer:{...saved.answer,wwtFits:{...m31,matches:m31.matches.map(row=>({...row,bandPass:'Changed'}))}}}));
     await assert.rejects(resolveWwtFitsLead(root,path,1),/changed; explore again/u);
     await writeFile(path,JSON.stringify({...saved,answer:{...saved.answer,wwtFits:{...m31,matches:m31.matches.map(row=>({...row,sourceUrl:'https://example.org/changed'}))}}}));

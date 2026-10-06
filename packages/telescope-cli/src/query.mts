@@ -396,7 +396,7 @@ export async function loadQueryInputs(root: string, targetOrRequest: string | Ca
   }
   const ledgers: { telescope: string; path: string; value: unknown }[] = [], dynamicCapabilities: ModeCapability[] = [];
   for (const telescope of LEDGER_TELESCOPES) {
-    const path = `data/${telescope}/ledger.json`;
+    const path = `src/sources/${telescope}/ledger.json`;
     const value = await readJsonSource(resolve(root, path)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
     if (value !== undefined) {
       const prepared = ADAPTERS[telescope]!.prepare ? await ADAPTERS[telescope]!.prepare!(root, canonicalTarget, value) : { value };
