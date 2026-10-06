@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-lobe-surface-model@1",
+  "source": "publication-bryce-1996-ngc-650-kinematics",
+  "locator": "Bryce et al. (1996). Sect. 1: the bright core is a rectangle of about 95 by 42 arcsec at position angle about 35 deg; the inner lobes extend about 85 arcsec from the central star; the nebula's major axis is at position angle -55 deg. Sect. 4.1: the core is a ring, its diameter 93 arcsec from the rectangle's major axis. Where each lobe's middle lies on the axis is not printed: it is measured on the bank's picture (packages/bake/authoring/m76/lobe-outline.mts).",
+  "ringRadiusArcsec": 46.5,
+  "reachArcsec": 85,
+  "receding": {
+    "middleArcsec": 36.5
+  },
+  "approaching": {
+    "middleArcsec": 35
+  },
+  "mesh": {
+    "around": 96,
+    "along": 48
+  }
+}

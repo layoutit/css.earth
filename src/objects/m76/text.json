@@ -22,14 +22,14 @@
     ]
   },
   "introduction": {
-    "text": "ESA/Hubble's photograph of it stands here as a flat picture facing the Sun, 1.98 pc wide.",
+    "text": "It is a ring of gas seen almost edge-on with a lobe blown out of each open end; the north-western lobe points toward us.",
     "sources": [
       {
-        "catalogueId": "esahubble-heic2408a",
-        "url": "https://esahubble.org/images/heic2408a/",
-        "label": "ESA/Hubble heic2408a: NASA, ESA, STScI, A. Pagan (STScI)",
-        "checked": "2026-10-02",
-        "locator": "Little Dumbbell Nebula (M76); g 475, [O III] 502, H-alpha 656, [N II] 658 and I 814 nm"
+        "catalogueId": "publication-bryce-1996-ngc-650-kinematics",
+        "url": "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract",
+        "label": "Bryce et al. (1996), A&A 307, 253: a kinematical investigation of the bipolar planetary nebula NGC 650-1",
+        "checked": "2026-10-05",
+        "locator": "Abstract and Sect. 4.1: a bright central ring with two attached lobes, inclined about 75°, the north-west lobe toward the observer"
       },
       {
         "catalogueId": "wikipedia-little-dumbbell-nebula",
@@ -45,7 +45,7 @@
     "optical": {
       "title": "Little Dumbbell Nebula in visible light",
       "detail": "4000 × 2524 px",
-      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "summary": "Hubble's picture on the nebula's ring and two lobes as spectra place them; the far side repeats the picture.",
       "sources": [
         {
           "catalogueId": "esahubble-heic2408a",
@@ -53,6 +53,20 @@
           "label": "ESA/Hubble heic2408a: NASA, ESA, STScI, A. Pagan (STScI)",
           "checked": "2026-10-02",
           "locator": "Little Dumbbell Nebula (M76)"
+        },
+        {
+          "catalogueId": "publication-bryce-1996-ngc-650-kinematics",
+          "url": "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract",
+          "label": "Bryce et al. (1996), A&A 307, 253: a kinematical investigation of the bipolar planetary nebula NGC 650-1",
+          "checked": "2026-10-05",
+          "locator": "Sect. 1 and 4.1: the ring's diameter and tilt, the lobes' reach and the axis's position angle"
+        },
+        {
+          "catalogueId": "publication-ramos-larios-2018-ngc-650-halo",
+          "url": "https://arxiv.org/abs/1801.01215",
+          "label": "Ramos-Larios et al. (2018), MNRAS 475, 932: the halo around NGC 650-1",
+          "checked": "2026-10-05",
+          "locator": "Abstract and Sect. 5: a SHAPE model with a ring at 75° and lobes at 85°"
         }
       ]
     }
