@@ -1,0 +1,35 @@
+{
+  "id": "source-fomalhaut-disc-dust-b6-cont",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Fomalhaut Disc · dust b6 cont",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://almascience.nrao.edu/dataPortal/member.uid___A001_X2d8_X7c.ari_l.member.uid___A001_X2d8_X7c.ari_l.Fomalhaut_sci.spw0_1_2_3_223746MHz.12m_223746MHz.12m.cont.I.pbcor.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/fomalhaut-disc/source/manifest.json",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ALMA (ESO/NAOJ/NRAO), project 2015.1.00966.S (PI P. Kalas); imaged by the ARI-L project (Massardi et al. 2021, PASP 133, 085001; CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2015.1.00966.S.",
+      "scope": "The dust b6 cont input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

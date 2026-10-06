@@ -63,6 +63,16 @@ export interface ImageLayerRecipe {
      * Every value is one a paper prints. */
     rings?: { source: string; basis: string; disc: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number }; ring: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number };
       lineOfSightThicknessArcsec?: number };
+    /** Published gas streams about a centre (./streams.ts): each a bundle of Keplerian orbits in one plane through the
+     * centre. A stream's elements are its middle orbit's, as the paper prints them: the node counted from east through
+     * north to where the gas crosses the plane of the sky going away, the inclination between the sight line going away
+     * and the angular momentum. `trueAnomalyDeg` is the part of the orbit the gas is on, and `dispersion` the bundle's
+     * spread in semi-major axis as a fraction of it. A stream's `surface` is its published extent beyond the bundle:
+     * `path` is a picture of a paper's map, north up and east to the left, opaque or white where the stream is, its
+     * cells `cellArcsec` wide and the centre at `centreCell`, counted from the middle of the top left cell. */
+    streams?: { source: string; basis: string; dispersion: number;
+      streams: { id: string; semiMajorArcsec: number; eccentricity: number; ascendingNodeDeg: number; argumentOfPerifocusDeg: number; inclinationDeg: number; trueAnomalyDeg: [number, number];
+        surface?: { source: string; basis: string; path: string; cellArcsec: number; centreCell: [number, number] } }[] };
     /** A nebula's published surface (./surface.ts): a closed mesh a paper made from spectra (`path`, a binary STL whose z
      * axis is the nebula's pole), placed on the sky. `arcsecPerUnit` is the file's unit on the sky and `originUnits` the
      * star in the file's units. `pole.tiltDeg` is the pole's angle from the sight line, `pole.paDeg` the position angle
@@ -187,6 +197,27 @@ const ringsOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['rings']>
   return { source: text(r.source, 'geometry.rings.source'), basis: text(r.basis, 'geometry.rings.basis'), disc, ring,
     ...(r.lineOfSightThicknessArcsec === undefined ? {} : { lineOfSightThicknessArcsec: positive(r.lineOfSightThicknessArcsec, 'geometry.rings.lineOfSightThicknessArcsec') }), };
 };
+const streamsOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['streams']> => {
+  const s = object(v, 'geometry.streams'), dispersion = finite(s.dispersion, 'geometry.streams.dispersion');
+  if (!(dispersion > 0 && dispersion < 1)) throw new TypeError(`geometry.streams.dispersion is a fraction of the semi-major axis, above 0 and under 1; got ${dispersion}.`);
+  if (!Array.isArray(s.streams) || !s.streams.length) throw new TypeError('geometry.streams.streams lists at least one stream.');
+  const seen = new Set<string>(), streams = s.streams.map((value: unknown, index: number) => {
+    const name = `geometry.streams.streams[${index}]`, q = object(value, name), id = text(q.id, `${name}.id`), eccentricity = finite(q.eccentricity, `${name}.eccentricity`), inclination = finite(q.inclinationDeg, `${name}.inclinationDeg`);
+    if (!/^[a-z0-9-]+$/u.test(id) || id === 'sky' || seen.has(id)) throw new TypeError(`${name}.id names the stream's plane in file names: lower-case letters, digits and hyphens, once each, and not "sky"; got ${JSON.stringify(id)}.`);
+    seen.add(id);
+    if (!(eccentricity >= 0 && eccentricity < 1)) throw new TypeError(`${name}.eccentricity is a bound orbit's, from 0 to under 1; got ${eccentricity}.`);
+    if (!(inclination >= 0 && inclination <= 180) || Math.abs(inclination - 90) < 1) throw new TypeError(`${name}.inclinationDeg is from 0 to 180 and not within a degree of 90, where the plane is edge-on and no sight line's depth on it is defined; got ${inclination}.`);
+    if (!Array.isArray(q.trueAnomalyDeg) || q.trueAnomalyDeg.length !== 2) throw new TypeError(`${name}.trueAnomalyDeg is where the gas starts and ends along the orbit, in degrees.`);
+    const from = finite(q.trueAnomalyDeg[0], `${name}.trueAnomalyDeg[0]`), to = finite(q.trueAnomalyDeg[1], `${name}.trueAnomalyDeg[1]`);
+    if (!(to > from && to - from <= 360)) throw new TypeError(`${name}.trueAnomalyDeg ends after it starts, a whole turn later at most; got ${from} to ${to}.`);
+    const surface = q.surface === undefined ? undefined : object(q.surface, `${name}.surface`);
+    if (surface && (!Array.isArray(surface.centreCell) || surface.centreCell.length !== 2)) throw new TypeError(`${name}.surface.centreCell is the centre in the map's cells: across from the left and down from the top.`);
+    return { id, semiMajorArcsec: positive(q.semiMajorArcsec, `${name}.semiMajorArcsec`), eccentricity, ascendingNodeDeg: finite(q.ascendingNodeDeg, `${name}.ascendingNodeDeg`), argumentOfPerifocusDeg: finite(q.argumentOfPerifocusDeg, `${name}.argumentOfPerifocusDeg`), inclinationDeg: inclination, trueAnomalyDeg: [from, to] as [number, number],
+      ...(surface === undefined ? {} : { surface: { source: text(surface.source, `${name}.surface.source`), basis: text(surface.basis, `${name}.surface.basis`), path: path(surface.path), cellArcsec: positive(surface.cellArcsec, `${name}.surface.cellArcsec`),
+        centreCell: [finite((surface.centreCell as unknown[])[0], `${name}.surface.centreCell[0]`), finite((surface.centreCell as unknown[])[1], `${name}.surface.centreCell[1]`)] as [number, number] } }) };
+  });
+  return { source: text(s.source, 'geometry.streams.source'), basis: text(s.basis, 'geometry.streams.basis'), dispersion, streams };
+};
 const surfaceOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['surface']> => {
   const s = object(v, 'geometry.surface'), pole = object(s.pole, 'geometry.surface.pole'), tilt = finite(pole.tiltDeg, 'geometry.surface.pole.tiltDeg');
   if (!(tilt > 0 && tilt < 180)) throw new TypeError(`geometry.surface.pole.tiltDeg is the pole's angle from the sight line, above 0 and below 180; got ${tilt}.`);
@@ -302,6 +333,7 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       ...(g.shape===undefined?{}:{shape:(()=>{if(g.bulge!==undefined||b.flat!==true)throw new TypeError('geometry.shape is for a flat bank without a bulge.');return shapeOf(g.shape);})()}),
       ...(g.body===undefined?{}:{body:(()=>{if(g.bulge!==undefined||g.shape!==undefined||b.flat!==true)throw new TypeError('geometry.body is for a flat bank without a bulge or walls.');return bodyOf(g.body);})()}),
       ...(g.rings===undefined?{}:{rings:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||b.flat!==true)throw new TypeError('geometry.rings is for a flat bank without a bulge, walls or a body.');return ringsOf(g.rings);})()}),
+      ...(g.streams===undefined?{}:{streams:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||g.surface!==undefined||g.densityGrid!==undefined||b.flat!==true)throw new TypeError('geometry.streams is for a flat bank without a bulge, walls, a body, rings, a surface or a density grid.');return streamsOf(g.streams);})()}),
       ...(g.surface===undefined?{}:{surface:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||b.flat!==true)throw new TypeError('geometry.surface is for a flat bank without a bulge, walls, a body or rings.');return surfaceOf(g.surface);})()}),
       ...(g.densityGrid===undefined?{}:{densityGrid:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||g.surface!==undefined||b.flat!==true)throw new TypeError('geometry.densityGrid is for a flat bank without a bulge, walls, a body, rings or a surface.');return densityOf(g.densityGrid);})()}),
       ...(g.collision===undefined?{}:{collision:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||g.surface!==undefined||g.densityGrid!==undefined||b.flat!==true)throw new TypeError('geometry.collision is for a flat bank without a bulge, walls, a body, rings, a surface or a density grid.');return collisionOf(g.collision);})()}),

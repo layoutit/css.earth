@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "galactic-centre",
+  "displayName": "Galactic Centre",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "8,277 pc (±9)",
+        "source": {
+          "catalogueId": "arxiv-2112-07478",
+          "url": "https://arxiv.org/abs/2112.07478",
+          "label": "GRAVITY Collaboration (2022), A&A 657, L12; Table 1: the distance to Sgr A*, 8277 ± 9 pc",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (ICRS)",
+        "value": "RA 266.417°, Dec -29.008°",
+        "source": {
+          "catalogueId": "simbad-sgr-a-star",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sgr+A*",
+          "label": "SIMBAD, NAME Sgr A*: ICRS 17 45 40.0360, −29 00 28.170, from Petrov et al. (2011), VLBA (2011AJ....142...35P)",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "streams",
+        "label": "Its streams",
+        "value": "Northern Arm, Eastern Arm and Western Arc",
+        "source": {
+          "catalogueId": "publication-zhao-2009-sgr-a-west-streams",
+          "url": "https://arxiv.org/abs/0904.3133",
+          "label": "Zhao, Morris, Goss & An (2009), ApJ 699, 186: Dynamics of ionized gas at the Galactic Center; abstract: three ionized streams in the central 3 pc, each on a Keplerian orbit about Sgr A*",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "periods",
+        "label": "Time for one orbit",
+        "value": "45,000, 76,000, 54,000 years",
+        "source": {
+          "catalogueId": "publication-zhao-2009-sgr-a-west-streams",
+          "url": "https://arxiv.org/abs/0904.3133",
+          "label": "Zhao, Morris, Goss & An (2009), ApJ 699, 186: Dynamics of ionized gas at the Galactic Center; Table 5: periods of 45, 76 and 54 thousand years for the Northern Arm, Eastern Arm and Western Arc",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "closest",
+        "label": "Closest to the black hole",
+        "value": "0.17, 0.25, 0.89 pc",
+        "source": {
+          "catalogueId": "publication-zhao-2009-sgr-a-west-streams",
+          "url": "https://arxiv.org/abs/0904.3133",
+          "label": "Zhao, Morris, Goss & An (2009), ApJ 699, 186: Dynamics of ionized gas at the Galactic Center; Table 5: perifocal distances of 0.17, 0.25 and 0.89 pc, at the paper's 8 kpc",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "1.83 arcmin, 4.42 pc at its distance",
+        "source": {
+          "catalogueId": "mast-hlsp-hpsgc-paschen-alpha",
+          "url": "https://archive.stsci.edu/prepds/hpsgc/",
+          "label": "MAST, HST/NICMOS Paschen-α Survey of the Galactic Centre: hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits",
+          "checked": "2026-10-05"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Hubble · near infrared",
+        "thumbnail": "galactic-centre-dataset-optical.webp",
+        "volume": {
+          "objectId": "galactic-centre-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "galactic-centre-layers-optical",
+          "path": "../../galactic-centre-layers/source/manifest.json",
+          "url": "https://archive.stsci.edu/prepds/hpsgc/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "GRAVITY Collaboration (2022), A&A 657, L12; Table 1: the distance to Sgr A*, 8277 ± 9 pc",
+      "href": "https://arxiv.org/abs/2112.07478"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "SIMBAD, NAME Sgr A*: ICRS 17 45 40.0360, −29 00 28.170, from Petrov et al. (2011), VLBA (2011AJ....142...35P)",
+      "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sgr+A*"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Zhao, Morris, Goss & An (2009), ApJ 699, 186: Dynamics of ionized gas at the Galactic Center; abstract: three ionized streams in the central 3 pc, each on a Keplerian orbit about Sgr A*",
+      "href": "https://arxiv.org/abs/0904.3133"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Zhao, Morris, Goss & An (2009), ApJ 699, 186: Dynamics of ionized gas at the Galactic Center; Table 5: periods of 45, 76 and 54 thousand years for the Northern Arm, Eastern Arm and Western Arc",
+      "href": "https://arxiv.org/abs/0904.3133"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Zhao, Morris, Goss & An (2009), ApJ 699, 186: Dynamics of ionized gas at the Galactic Center; Table 5: perifocal distances of 0.17, 0.25 and 0.89 pc, at the paper's 8 kpc",
+      "href": "https://arxiv.org/abs/0904.3133"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "MAST, HST/NICMOS Paschen-α Survey of the Galactic Centre: hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits",
+      "href": "https://archive.stsci.edu/prepds/hpsgc/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/0904.3133",
+      "credit": "Zhao, Morris, Goss & An (2009), ApJ 699, 186: Dynamics of ionized gas at the Galactic Center"
+    }
+  }
+}

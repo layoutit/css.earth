@@ -2245,6 +2245,16 @@
           }
         ]
       },
+      "launch": {
+        "value": "2003",
+        "citations": [
+          {
+            "catalogueId": "reference-spitzer-mission",
+            "checkedOn": "2026-10-05",
+            "locator": "Launch Date and Time: Aug. 25, 2003"
+          }
+        ]
+      },
       "imageId": "spitzer"
     },
     {
@@ -2525,15 +2535,12 @@
       },
       "aliases": [],
       "description": {
-        "value": "A telescope at La Silla whose Wide Field Imager recorded the Helix optical image in blue, green and red filters.",
+        "value": "A 2.2-metre telescope at ESO's La Silla Observatory in Chile. Its Wide Field Imager has a field of view as large as the full Moon.",
         "citations": [
           {
             "catalogueId": "reference-mpg-eso-2-2m",
-            "checkedOn": "2026-09-13"
-          },
-          {
-            "catalogueId": "eso-eso0907a",
-            "checkedOn": "2026-09-13"
+            "checkedOn": "2026-10-05",
+            "locator": "Telescope overview: the Wide Field Imager with a field of view as large as the full Moon"
           }
         ]
       },
@@ -2681,6 +2688,16 @@
           }
         ]
       },
+      "launch": {
+        "value": "2009",
+        "citations": [
+          {
+            "catalogueId": "reference-wise",
+            "checkedOn": "2026-10-05",
+            "locator": "Launch Date and Time: Dec. 14, 2009"
+          }
+        ]
+      },
       "imageId": "wise"
     },
     {
@@ -2736,6 +2753,16 @@
           }
         ]
       },
+      "launch": {
+        "value": "2021",
+        "citations": [
+          {
+            "catalogueId": "reference-webb-mission",
+            "checkedOn": "2026-10-05",
+            "locator": "Launch: Dec 25, 2021"
+          }
+        ]
+      },
       "imageId": "webb"
     },
     {
@@ -2788,6 +2815,16 @@
             "catalogueId": "reference-chandra",
             "checkedOn": "2026-09-14",
             "locator": "Who we are: X-ray emission"
+          }
+        ]
+      },
+      "launch": {
+        "value": "1999",
+        "citations": [
+          {
+            "catalogueId": "reference-chandra",
+            "checkedOn": "2026-10-05",
+            "locator": "About Chandra: Since its launch on July 23, 1999"
           }
         ]
       },
@@ -3536,7 +3573,8 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "deep-impact"
     },
     {
       "id": "stardust",
@@ -3595,7 +3633,8 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "stardust"
     },
     {
       "id": "deep-space-1",
@@ -3654,7 +3693,8 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "deep-space-1"
     },
     {
       "id": "lucy",
@@ -3703,7 +3743,8 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "lucy"
     },
     {
       "id": "stereo",
@@ -3762,7 +3803,8 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "stereo"
     },
     {
       "id": "giotto",
@@ -3879,7 +3921,113 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "nicer"
+    },
+    {
+      "id": "sloan-2-5m",
+      "name": {
+        "value": "Sloan Foundation 2.5-metre telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescopes: The Sloan Foundation 2.5m Telescope at Apache Point Observatory"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The Sloan Digital Sky Survey's own telescope at Apache Point Observatory in New Mexico. Its camera recorded the survey's images of the sky through five color filters.",
+        "citations": [
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescopes: a dedicated 2.5-m telescope located at Apache Point Observatory, in south east New Mexico"
+          },
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "SDSS Imaging Camera: collected photometric imaging data through the SDSS r, i, u, z and g filters"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescopes: a dedicated 2.5-m telescope located at Apache Point Observatory, in south east New Mexico"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescopes: a dedicated 2.5-m telescope located at Apache Point Observatory, in south east New Mexico"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "SDSS Imaging Camera: collected photometric imaging data through the SDSS r, i, u, z and g filters"
+          }
+        ]
+      },
+      "imageId": "sloan-2-5m"
+    },
+    {
+      "id": "mayall-4m",
+      "name": {
+        "value": "Nicholas U. Mayall 4-metre telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-mayall-4m",
+            "checkedOn": "2026-10-05",
+            "locator": "Title: NSF Nicholas U. Mayall 4-meter Telescope"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "A 4-metre telescope just below the summit of Kitt Peak in Arizona. It was the second largest in the world when it first observed in 1973.",
+        "citations": [
+          {
+            "catalogueId": "reference-mayall-4m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescope overview: the second-largest telescope by aperture at the time of its first light in 1973, located just below the summit of Kitt Peak"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-mayall-4m",
+            "checkedOn": "2026-10-05",
+            "locator": "Kitt Peak National Observatory: over twenty optical and two radio telescopes"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-mayall-4m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescope overview: the second-largest telescope by aperture at the time of its first light in 1973, located just below the summit of Kitt Peak"
+          }
+        ]
+      },
+      "imageId": "mayall-4m"
     }
   ],
   "missions": [

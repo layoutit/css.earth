@@ -144,11 +144,13 @@ test("another star's system overview is left by the distance from that star, not
 
 test('a centre walks the objects it is inside, and one with a scene of its own ends the walk', () => {
   const at = (id: string) => stepsOf(id).map(step => step.id);
-  assert.deepEqual(at('sgr-a-star'), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
+  assert.deepEqual(at('galactic-centre'), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
   assert.deepEqual(at('lmc'), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
   assert.deepEqual(at('abell-2744'), ['observable-universe']);
-  // A star of the Cloud, M33 in M31's subgroup and M87* are each inside an object with a scene: that object takes the view.
+  // A star of the Cloud, M33 in M31's subgroup, M87* and Sagittarius A* in the gas about it are each inside an object
+  // with a scene: that object takes the view.
   assert.deepEqual(at('hv-1005'), ['lmc']);
+  assert.deepEqual(at('sgr-a-star'), ['galactic-centre']);
   assert.deepEqual(at('m33'), ['m31']);
   assert.deepEqual(at('m87-star'), ['m87']);
   assert.deepEqual(at('m87'), ['virgo-cluster']);
