@@ -142,6 +142,27 @@ test('category pills publish browsing state and coalesce category notifications'
   f.lifetime.destroy();
 });
 
+test('a view the camera carried to another scene keeps a pressed pill and its results', async () => {
+  const f = mount();
+  const pill = f.get('.object-search-category');
+  f.setAnswer({ objects: { total: 0, offset: 0, rows: [] }, classification: 'planet', features: [] });
+  f.event(pill, 'click');
+  await f.settle();
+  // The hand-over a pill's landing asks for: the scene changes, no result was chosen.
+  const restore = f.controller.previewSelection({ objectId: 'mars' }, true);
+  assert.equal(f.controller.readSubject().objectId, 'mars');
+  assert.equal(f.input.value, 'Planets');
+  assert.equal(pill.getAttribute('aria-pressed'), 'true');
+  assert.equal(f.browser.hidden, false);
+  await f.settle();
+  assert.deepEqual(f.categories, ['planet'], 'the category stays highlighted');
+  restore();
+  assert.equal(f.controller.readSubject().objectId, 'earth');
+  assert.equal(f.input.value, 'Planets');
+  assert.equal(f.browser.hidden, false);
+  f.lifetime.destroy();
+});
+
 test('flight previews restore searches, ignore stale cancellation, and binding preserves newer queries', async () => {
   const f = mount();
   f.input.value = 'mars';

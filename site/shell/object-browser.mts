@@ -278,13 +278,17 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   presentBrowser();
   refreshSelection();
 
-  const previewSelection = (subject: SceneSubject) => {
+  const previewSelection = (subject: SceneSubject, keepSearch = false) => {
     const previous = subjectOverride, previousOpen = open, previousQuery = search.value;
     const preview = { subject };
     subjectOverride = preview;
-    // Choosing a result ends that search; a cancelled flight gives the query back.
-    if (search.value) search.value = '';
-    setOpen(false);
+    // Choosing a result ends that search; a cancelled flight gives the query back. A view the camera carried to another
+    // scene chose no result, so its search stays (`keepSearch`): the Stars pill pressed on Earth ended un-pressed, its list
+    // closed and no star marked, once its landing handed the view to the Milky Way (2026-10-06).
+    if (!keepSearch) {
+      if (search.value) search.value = '';
+      setOpen(false);
+    }
     presentSelection();
     return () => {
       if (subjectOverride !== preview) return;

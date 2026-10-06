@@ -243,7 +243,7 @@ export function mountObjectShell({
         if (target.preview) restoreBrowser = objectBrowser.previewSelection(subjectOf(target.object.id, 'system'));
       } else {
         if (!retainsSourceCard) sheet.showSelection();
-        restoreBrowser = objectBrowser.previewSelection(subjectOf(target.object.id, target.view));
+        restoreBrowser = objectBrowser.previewSelection(subjectOf(target.object.id, target.view), target.handover === true);
         updateBodyCard();
       }
       return transition;
