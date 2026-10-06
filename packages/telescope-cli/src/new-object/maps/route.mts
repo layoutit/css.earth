@@ -9,6 +9,7 @@
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
+import { writeWorldBillboard } from '@cssearth/bake/site-assets';
 import { requireRecord } from '@cssearth/core';
 import { readStar } from '../corona/corona.mts';
 import { isConventionOnly, parseSurfaceMaps, surfaceMapFiles, type MapKind, type SurfaceMap, type SurfaceMapChoice, type SurfaceMapEntry } from './surface-maps.mts';
@@ -77,13 +78,16 @@ export async function bakeSurfaceMaps(results: readonly SurfaceMapResult[], { ro
   const hosts = [...new Set(results.map(result => result.host))], tilted = [...new Set(results.filter(result => result.tilted).map(result => result.host))], kept = hosts.filter(host => !tilted.includes(host));
   for (const host of tilted) await rm(resolve(root, 'src/objects', host, 'prepared/arrival-billboard.json'), { force: true });
   const groups = (ids: readonly string[]) => Array.from({ length: Math.ceil(ids.length / BAKE_GROUP) }, (_, i) => ids.slice(i * BAKE_GROUP, (i + 1) * BAKE_GROUP));
+  const run = async (args: readonly string[]) => { progress(`== ${args.join(' ')}`);
+    const code = await new Promise<number | null>(done => { spawn('node', args, { cwd: root, stdio: ['ignore', 2, 2] }).on('error', () => done(null)).on('close', done); });
+    if (code !== 0) progress(`FAILED: node ${args.join(' ')}`); return code === 0; };
   // A star's bake reads every input its manifest declares, and its inventory keeps only the baked files the checkout holds:
   // the star's baked files and the downloads a checkout lacks are restored first.
-  for (const args of [...groups(hosts).flatMap(group => [['packages/bake/cli/setup-assets.mts', ...group.map(host => `--object=${host}`)], ['packages/bake/cli/restore-source-inputs.mts', ...group.map(host => `--object=${host}`)]]), ...groups(hosts).map(group => ['packages/bake/cli/prepare-object.mts', ...group, '--to', 'text']), ...groups(kept).map(group => ['packages/bake/cli/prepare-object.mts', ...group, '--from', 'pins'])]) {
-    progress(`== ${args.join(' ')}`);
-    const code = await new Promise<number | null>(done => { spawn('node', args, { cwd: root, stdio: ['ignore', 2, 2] }).on('error', () => done(null)).on('close', done); });
-    if (code !== 0) { progress(`FAILED: node ${args.join(' ')}`); return false; }
-  }
+  for (const group of groups(hosts)) for (const args of [['packages/bake/cli/setup-assets.mts', ...group.map(host => `--object=${host}`)], ['packages/bake/cli/restore-source-inputs.mts', ...group.map(host => `--object=${host}`)], ['packages/bake/cli/prepare-object.mts', ...group, '--to', 'text']]) if (!await run(args)) return false;
+  // The prepare step clears a star's world billboard and the skipped billboard step would write it again: it is made here
+  // from the arrival photograph the star keeps.
+  for (const host of kept) await writeWorldBillboard(root, host);
+  for (const group of groups(kept)) if (!await run(['packages/bake/cli/prepare-object.mts', ...group, '--from', 'pins'])) return false;
   if (tilted.length) progress(`The axis of ${tilted.join(', ')} changed. Restart the running site, then: node packages/bake/cli/prepare-object.mts ${tilted.join(' ')} --from billboard`);
   return true;
 }

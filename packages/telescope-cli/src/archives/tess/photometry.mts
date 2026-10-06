@@ -35,7 +35,21 @@ export interface SectorLightCurve { readonly frames: number; readonly aperturePi
  * were wrong, all swinging under 0.7%; and both periods over 9 days that passed the other tests were wrong, a sector
  * holding too few turns and the spacecraft's own 13.7-day orbit leaving its mark in the light. */
 export const ROTATION_POWER = 0.3, ORBIT_AGREEMENT = 0.2, ONE_SECTOR_DAYS = 9, ROTATION_SWING = 0.007;
-export interface RotationVerdict { readonly detected: boolean; readonly periodDays?: number; /** Peak to peak, as a share of the mean light. */ readonly amplitude?: number; readonly reason?: string }
+export interface RotationVerdict { readonly detected: boolean; readonly periodDays?: number; /** The light's own strongest period, when the rotation is taken as twice it. */ readonly lightPeriodDays?: number; /** Peak to peak, as a share of the mean light. */ readonly amplitude?: number; readonly reason?: string }
+
+/** How closely the light's period and a catalogued rotation period must agree to be one period: the metadata pass's own measure. */
+export const CATALOGUE_AGREEMENT = 0.2;
+/** A verdict set beside the rotation period the star's record already holds. Two spot groups on opposite sides of a star
+ * make its light repeat twice a turn, so the light's strongest period may be half the rotation: when it is half the
+ * catalogued period, the star is taken to turn once in two of them. A period that is neither the catalogued one nor its half
+ * is not believed: one of the two is wrong, and these pixels cannot say which. */
+export function besideCatalogued(verdict: RotationVerdict, cataloguedDays: number | undefined): RotationVerdict {
+  if (!verdict.detected || verdict.periodDays === undefined || cataloguedDays === undefined) return verdict;
+  const near = (days: number) => Math.abs(verdict.periodDays! - days) <= CATALOGUE_AGREEMENT * days;
+  if (near(cataloguedDays)) return verdict;
+  if (near(cataloguedDays / 2)) return { ...verdict, periodDays: Number((2 * verdict.periodDays).toFixed(2)), lightPeriodDays: verdict.periodDays };
+  return { detected: false, reason: `The light's period, ${verdict.periodDays} d, is neither the star's catalogued rotation period, ${cataloguedDays} d, nor its half.` };
+}
 
 /** Whether a sector's light curve shows the star's rotation, and why not when it does not. */
 export function rotationVerdict(curve: SectorLightCurve): RotationVerdict {
