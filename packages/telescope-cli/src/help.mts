@@ -20,7 +20,7 @@ Human entry points:
   telescope leads TARGET | --class CLASS [--json] [--out DIRECTORY]
   telescope stars GALAXY [--json] [--out DIRECTORY]
   telescope new-object SPEC.json [--check] [--skip-existing] [--json]
-  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... | --from-table CLASS:GALAXY=TABLE[#ROW]... | --from-esa PAGE_ID=PICTURE_URL... | --from-magnetic HOST... | --from-spectra HOST... --out SPEC.json
+  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... | --from-table CLASS:GALAXY=TABLE[#ROW]... | --from-esa PAGE_ID=PICTURE_URL... | --from-magnetic HOST... | --from-spectra HOST... | --from-pixels all|HOST... --out SPEC.json
   telescope ascl SOFTWARE [--json]
   telescope ascl --product PRODUCT.json|RUN/pick-N/result.json [--json]
   telescope wwt-fits EXPLORE.json --pick N --level N --x X --y Y --out DIRECTORY
@@ -57,7 +57,9 @@ picture's bank and its page's dataset, may be run again, and bakes with SPEC.jso
 page already shows and its ROSAT X-ray flux (docs/stellar-corona-from-magnetic-maps.md); a spec of coronae writes each star's volume bank and its "Derived corona"
 dataset, and bakes with SPEC.json --bake. --from-spectra drafts a star's magnetic maps from the programs of archived polarised spectra this repository has
 reduced (packages/telescope-cli/src/archives/espadons); a spec of magneticMaps writes each map as a "Radial field" dataset of the star's page, and bakes with
-SPEC.json --bake. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
+SPEC.json --bake. --from-pixels drafts the brightness map of each star this repository has reduced from its light in the TESS full-frame images
+(packages/telescope-cli/src/archives/tess; all is every reduced star); a spec of brightnessMaps writes each map as a "Brightness map" dataset of the star's
+page and the measured period into its measurements record, and bakes with SPEC.json --bake. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
 Papers lists up to 20 OpenAlex works that name the target, by any spelling of its catalogue names, in their title or
 abstract, with the instrument and any one of the --about phrases (singular or plural); --fulltext asks for the works whose
 indexed full text names them. It uses arXiv's Atom API when OpenAlex is unavailable or its daily budget is spent, and the
