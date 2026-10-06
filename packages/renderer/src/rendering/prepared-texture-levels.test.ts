@@ -206,8 +206,9 @@ const sized = { textureLevels, variants, assets: { entries: [
 ], pools: [], startup: [] } } as unknown as PreparedPresentationDefinition;
 
 /** Commits a small level and then the full one on a page of 100 leaves; returns the leaves landed by each frame, and
- * by the frames that ran while the camera was `moving`. */
-function levelLanding(moving: boolean) {
+ * by the frames that ran while the camera was `moving`. With `decodes`, the page's image has a handle whose decodes
+ * are collected there, and the leaves landed before the first of them resolved are returned too. */
+async function levelLanding(moving: boolean, decodes?: (() => void)[]) {
   const frames: ((time: number) => void)[] = [];
   let now = 0;
   const frame = () => { now += 16; frames.shift()!(now); };
@@ -228,7 +229,8 @@ function levelLanding(moving: boolean) {
       tree: { nodes: [], camera: 0, scene: 0, stageClasses: [], textureBindings: [{ target: 1, name: 'backgroundImage', leaves: leaves.map((_, index) => index + 2) }] } } as unknown as PreparedPresentationDefinition;
     const presentation = mountPreparedPresentation(stage as unknown as HTMLElement, { own() {}, registerAnimation() {}, seekAnimation() {} }, paged,
       { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
-    const resources = { url: (key: string) => `/${key}.webp` } as unknown as PreparedResources;
+    const resources = { url: (key: string) => `/${key}.webp`,
+      ...(decodes ? { read: () => ({ decode: () => new Promise<void>(resolve => { decodes.push(resolve); }) }) } : {}) } as unknown as PreparedResources;
     const view = (silhouetteDiameter: number) => ({ sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0 } });
     const small = resolvePreparedPresentation(paged, { selection: { datasetId: 'a' }, view: view(100) });
     presentation.commitSelection({ selection: { datasetId: 'a' }, resources, plan: small });
@@ -248,6 +250,14 @@ function levelLanding(moving: boolean) {
       motion.active = false;
       for (const listener of listeners) listener(motion);
     }
+    let undecoded = 0;
+    if (decodes) {
+      for (let waited = 0; waited < 3 && frames.length; waited++) frame();
+      undecoded = sharp();
+      assert.equal(decodes.length, 1, 'the page is decoded again once, before its first leaves');
+      decodes[0]!();
+      for (let turn = 0; turn < 8; turn++) await Promise.resolve();
+    }
     const shares: number[] = [];
     while (frames.length && sharp() < 100) { const before = sharp(); frame(); shares.push(sharp() - before);
       // A leaf takes its box with its image: none shows the full level in the small one's box, or the small one in the full one's.
@@ -255,20 +265,28 @@ function levelLanding(moving: boolean) {
     assert.equal(sharp(), 100);
     // The document's pacer is shared: leave it with no frame pending.
     while (frames.length) frame();
-    return { shares, whileMoving };
+    return { shares, whileMoving, undecoded };
   } finally { unstubAllGlobals(); }
 }
 
-test('a level switch lands a page a slice of its leaves a frame, not the page whole', () => {
-  const { shares } = levelLanding(false);
+test('a level switch lands a page a slice of its leaves a frame, not the page whole', async () => {
+  const { shares } = await levelLanding(false);
   assert.ok(shares.length >= 4 && Math.max(...shares) <= 32, `shares ${shares.join(' ')}`);
   assert.equal(shares[0], 8);
 });
 
-test('what is left of a level waits while the camera moves and lands once it is still', () => {
-  const { shares, whileMoving } = levelLanding(true);
+test('what is left of a level waits while the camera moves and lands once it is still', async () => {
+  const { shares, whileMoving } = await levelLanding(true);
   assert.equal(whileMoving, 0);
   assert.ok(shares.length >= 4 && Math.max(...shares) <= 32, `shares ${shares.join(' ')}`);
+});
+
+test('a page of a level switch is decoded again just before its first leaves land, and lands once that is done', async () => {
+  const decodes: (() => void)[] = [];
+  const { shares, undecoded } = await levelLanding(false, decodes);
+  assert.equal(undecoded, 0, 'no leaf paints from an image that may have lost its pixels');
+  assert.ok(shares.length >= 4 && Math.max(...shares) <= 32 && shares[0]! > 0, `shares ${shares.join(' ')}`);
+  assert.equal(decodes.length, 1, 'and it is not decoded again while its leaves land');
 });
 
 test('tile leaf records name one texture write each, with finite placements and each leaf once', () => {

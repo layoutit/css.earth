@@ -296,7 +296,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       styleWrites += leaves.length;
     } else if (!samePreparedStyle(styleValue(target(index), name), name, value)) { writeStyle(target(index), name, value); styleWrites++; }
   }
-  type CommittedWrite = Exclude<PreparedWrite, { kind: "texture" }> & { shown?: string } | { kind: "tile"; target: number; name: string; tile: PreparedTextureTile | undefined };
+  type CommittedWrite = Exclude<PreparedWrite, { kind: "texture" }> & { shown?: string; address?: string } | { kind: "tile"; target: number; name: string; tile: PreparedTextureTile | undefined };
   function publish(binding: CommittedWrite) {
     const element = target(binding.target);
     if (binding.kind === "attribute") { if (readAttribute(element, binding.name) !== binding.value) writeAttribute(element, binding.name, binding.value); }
@@ -309,8 +309,22 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   // with its image and its tile placement, held while the camera moves (settle-pacer.ts); a dataset change still lands
   // whole. A page is split across frames too: the Moon's pages of 96 to 128 leaves, each landing whole, made four frames
   // of 41 to 79 ms after a flight landed there on the iPad (2026-10-04).
+  // A page's first leaves paint from pixels decoded just before them, one page at a time. The decode that made the level
+  // ready can be a zoom old by then, and WebKit keeps no decoded pixels of an image nothing draws: the Moon's pages,
+  // landing after a zoom in, were decoded again inside their first paint, on the page's thread (105 of 129 ms of one
+  // frame in `WebPReadPlugin::decodeWebP`; frames of 121 to 196 ms on an iPad, 2026-10-06).
   let committedVariant: unknown = null, levelPacer: ReturnType<typeof createSettlePacer> | null = null;
-  const pendingLevels = new Map<string, { leaves: readonly HTMLElement[]; done: number; image: string; shown: string | undefined; tile: Extract<CommittedWrite, { kind: "tile" }> | null }>();
+  const pendingLevels = new Map<string, { leaves: readonly HTMLElement[]; done: number; image: string; shown: string | undefined; tile: Extract<CommittedWrite, { kind: "tile" }> | null;
+    decode: (() => Promise<unknown>) | null; decoding: boolean; decodedAt: number }>();
+  const PAINT_SOON_MS = 200, clock = () => globalThis.performance?.now() ?? Date.now();
+  const Decoder = (stage.ownerDocument?.defaultView as { Image?: new () => { src: string; decode(): Promise<void> } } | null | undefined)?.Image;
+  /** Decodes a page again off the page's thread: through the handle its residency keeps, or one made for its address. */
+  const pageDecode = (resources: PreparedResources, key: string | undefined, address: string | undefined): (() => Promise<unknown>) | null => {
+    const kept = key !== undefined && typeof resources.read === "function" ? resources.read(key) : null;
+    if (kept && typeof kept.decode === "function") return () => kept.decode();
+    if (address === undefined || typeof Decoder?.prototype?.decode !== "function") return null;
+    return () => { const image = new Decoder(); image.src = address; return image.decode(); };
+  };
   return Object.freeze({ cameraElement, sceneElement, connect, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.dataset) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
@@ -330,7 +344,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
         // camera re-plans and commits the complete group before it is shown.
         if (binding.resource !== null && !url && !plan?.deferredTextures) throw new Error(`Prepared selection texture is not ready: ${binding.resource}`);
         const image = { kind: "style" as const, target: binding.target, name: binding.name, value: url === null ? "none" : binding.quoted ? `url(${JSON.stringify(url)})` : `url(${url})`,
-          ...(shown === null ? {} : { shown }) };
+          ...(shown === null ? {} : { shown }), ...(url ? { address: url } : {}) };
         // A page some level draws from a shared sheet places its leaves on its tile (or on the page itself) with every image.
         if (binding.resource === null || !textureTiles.has(binding.target, binding.name)) return [image];
         return [image, { kind: "tile" as const, target: binding.target, name: binding.name, tile: plan?.textureTiles?.[binding.resource] }];
@@ -357,7 +371,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
         const next = writes[index + 1];
         const tile = next?.kind === "tile" && next.target === binding.target && next.name === binding.name ? next : null;
         if (tile) index++;
-        pendingLevels.set(`${binding.target}:${binding.name}`, { leaves, done: 0, image: binding.value, shown: binding.shown, tile });
+        pendingLevels.set(`${binding.target}:${binding.name}`, { leaves, done: 0, image: binding.value, shown: binding.shown, tile,
+          decode: pageDecode(resources, binding.shown, binding.address), decoding: false, decodedAt: -Infinity });
       }
       if (pendingLevels.size) {
         if (!levelPacer) context.own(() => levelPacer?.destroy());
@@ -369,6 +384,11 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
           let written = 0;
           for (const [key, unit] of pendingLevels) {
             if (written >= budget) break;
+            if (unit.done === 0 && unit.decode && !(clock() - unit.decodedAt < PAINT_SOON_MS)) {
+              // A failed decode leaves the page to its paint, as before.
+              if (!unit.decoding) { unit.decoding = true; void unit.decode().catch(() => {}).then(() => { unit.decoding = false; unit.decodedAt = clock(); levelPacer?.request(); }); }
+              break;
+            }
             const share = unit.leaves.slice(unit.done, unit.done + Math.max(1, Math.floor((budget - written) / LEVEL_LEAF_UNITS)));
             unit.done += share.length;
             if (unit.tile) styleWrites += textureTiles.publish(unit.tile.target, unit.tile.name, unit.tile.tile, new Set(share));
