@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "MACS J0025.4-1222: the 2008 composite in its layers",
+  "publisher": "Chandra X-ray Center",
+  "sourceId": "macs",
+  "sourcePage": "https://chandra.harvard.edu/photo/2008/macs/",
+  "download": "https://chandra.harvard.edu/photo/2008/macs/macs_optical.tif",
+  "credit": "X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+  "license": "NASA-SAO",
+  "original": {
+    "dimensions": [
+      4200,
+      4143
+    ],
+    "bands": [
+      "Hubble ACS F555W F814W",
+      "lensing mass map",
+      "Chandra ACIS X-ray"
+    ],
+    "fieldOfViewDeg": [
+      0.0544382,
+      0.0536994
+    ]
+  },
+  "checkedSource": {
+    "kind": "TIFF layers on one frame: optical alone, the lensing mass map alone, the X-ray gas alone",
+    "dimensions": [
+      4200,
+      4143
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.004483,
+    "lineOfNodesPaDeg": 245.563,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 16.1 arcsec from the published position, which is the whole of the recipe's inclination. Not a measured orientation of the cluster."
+  },
+  "registration": {
+    "catalogue": "Gaia DR3 (CDS I/355/gaiadr3)",
+    "sourcesInFrame": 8,
+    "matched": 7,
+    "rmsArcsec": 0.092,
+    "maxArcsec": 0.124,
+    "pixelArcsec": 0.04666,
+    "northClockwiseDeg": 31.973,
+    "embeddedTags": {
+      "pixelArcsec": 0.02331,
+      "note": "The files' embedded tags give half the measured scale and a reference pixel outside the frame; not used."
+    }
+  },
+  "displayModel": "The optical picture, its stars removed, lies on one flat plane facing the Sun at the cluster's comoving distance. The hot gas and the mass, the publisher's own layers, are each spread along the sight line through a body of revolution about the line through the two published mass peaks, in the plane of the sky. No depth is measured.",
+  "coverage": "The whole published frame. The pink and blue are the publisher's renderings of an X-ray image and a mass map, not light the eye would see.",
+  "acquisition": {
+    "url": "https://chandra.harvard.edu/photo/2008/macs/macs_optical.tif",
+    "dimensions": [
+      4200,
+      4143
+    ],
+    "operation": "Download the publisher's TIFF layers; no crop or resample."
+  }
+}

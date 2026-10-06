@@ -1,0 +1,44 @@
+{
+  "id": "publication-bradac-2008-macs-j0025",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Revealing the Properties of Dark Matter in the Merging Cluster MACS J0025.4-1222",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0806.2320"
+    },
+    {
+      "type": "doi",
+      "value": "10.1086/591246"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0806.2320",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0806.2320",
+      "checkedOn": "2026-10-05",
+      "locator": "Sect. III: the peak of the adaptively smoothed X-ray image is at 00:25:29.5, -12:22:36.6, within 5 arcsec. Table 2: offsets of the peaks from it in arcminutes; total mass, south-east (-0.70 +/- 0.25, -0.43 +/- 0.06) and north-west (0.46 +/- 0.13, 0.20 +/- 0.04); Figures 3 and 4 have north up and east left. Sect. V: the subclusters differ by 100 +/- 80 km/s along the line of sight. Abstract: the total mass of each subcluster is offset from the peak of the hot gas and aligned with the galaxies; a head-on collision in the plane of the sky is assumed."
+    }
+  ],
+  "creators": [
+    "Bradač, M.",
+    "Allen, S. W.",
+    "Treu, T.",
+    "Ebeling, H.",
+    "Massey, R.",
+    "Morris, R. G.",
+    "von der Linden, A.",
+    "Applegate, D."
+  ],
+  "publisher": "ApJ 687, 959",
+  "publicationDate": "2008",
+  "relations": [],
+  "statements": []
+}
