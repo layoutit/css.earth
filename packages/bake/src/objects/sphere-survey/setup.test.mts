@@ -134,4 +134,6 @@ test('the ADAM mesh keeps the primary error bound where it reaches the face targ
   assert.equal(loose.maximumErrorMeters, 50_000, 'a bound that already reaches the target stays');
   const tight = await adamSimplification({ method: 'source-meshoptimizer', targetFaces: 800, maximumErrorMeters: 10, regularize: true }, path, grid, counts, 800, 230 / 100_000);
   assert.ok(tight.maximumErrorMeters > 10 && tight.maximumErrorMeters % 100 === 0, `a tight bound becomes the next hundred metres: ${tight.maximumErrorMeters}`);
+  const bounded = await adamSimplification({ method: 'source-meshoptimizer', maximumErrorMeters: 10, regularize: true }, path, grid, counts, 800, 230 / 100_000);
+  assert.deepEqual(bounded, { method: 'source-meshoptimizer', maximumErrorMeters: 10, regularize: true }, 'a bound that decides the face count carries over unchanged');
 });

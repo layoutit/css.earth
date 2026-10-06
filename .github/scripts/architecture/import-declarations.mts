@@ -1,5 +1,5 @@
 /** Declaration inventory layered on the production cruise and resolver; no independent resolution policy.
- * Computed imports remain unresolved. Astro CSS and new URL assets are recorded although the scanner
+ * Computed imports remain unresolved. Astro CSS, new URL assets and Vite globs are recorded although the scanner
  * cannot see them; markup component references use their frontmatter imports, as in the scanner. */
 import { execFileSync, spawnSync } from 'node:child_process';
 import { mkdirSync, readFileSync, realpathSync, writeFileSync } from 'node:fs';
@@ -19,7 +19,7 @@ export interface Declaration {
   readonly kind: Kind; readonly symbols: readonly string[]; readonly form: string;
   readonly sideEffectOnly: boolean; readonly test: boolean; readonly unresolved?: boolean;
 }
-interface Parsed extends Omit<Declaration, 'from' | 'to' | 'test'> { readonly computed?: boolean }
+interface Parsed extends Omit<Declaration, 'from' | 'to' | 'test'> { readonly computed?: boolean; readonly glob?: { readonly base?: string } }
 export const codeTarget = (path: string): boolean => /\.(?:[cm]?[jt]s|tsx|jsx|astro)(?:[?#].*)?$/u.test(path);
 const lineAt = (source: string, offset: number): number => source.slice(0, offset).split('\n').length;
 
@@ -28,8 +28,8 @@ export function parseDeclarations(source: string, file: string): Parsed[] {
   const found: Parsed[] = [];
   const parse = (text: string, offset: number): void => {
     const tree = ts.createSourceFile(file, text, ts.ScriptTarget.Latest, true, file.endsWith('.tsx') ? ts.ScriptKind.TSX : ts.ScriptKind.TS);
-    const add = (node: ts.Node, specifier: string, kind: Kind, symbols: string[], form: string, sideEffectOnly = false, computed = false): void => {
-      found.push({ line: lineAt(source, offset + node.getStart(tree)), specifier, kind, symbols, form, sideEffectOnly, ...(computed ? { computed: true } : {}) });
+    const add = (node: ts.Node, specifier: string, kind: Kind, symbols: string[], form: string, sideEffectOnly = false, computed = false, glob?: { base?: string }): void => {
+      found.push({ line: lineAt(source, offset + node.getStart(tree)), specifier, kind, symbols, form, sideEffectOnly, ...(computed ? { computed: true } : {}), ...(glob ? { glob } : {}) });
     };
     const visit = (node: ts.Node): void => {
       if ((ts.isImportDeclaration(node) || ts.isExportDeclaration(node)) && node.moduleSpecifier && ts.isStringLiteralLike(node.moduleSpecifier)) {
@@ -53,6 +53,18 @@ export function parseDeclarations(source: string, file: string): Parsed[] {
       } else if (ts.isCallExpression(node) && node.expression.kind === ts.SyntaxKind.ImportKeyword && node.arguments[0]) {
         const arg = node.arguments[0];
         add(node, ts.isStringLiteralLike(arg) ? arg.text : arg.getText(tree), 'lazy', ['(dynamic)'], 'dynamic-import', false, !ts.isStringLiteralLike(arg));
+      } else if (ts.isCallExpression(node) && node.expression.getText(tree) === 'import.meta.glob') {
+        // Vite globs are imports too: each literal pattern becomes edges to the tracked files it matches. Exclusions
+        // (`!pattern`) are ignored, so the edges over-approximate; a computed pattern stays unresolved.
+        const [patterns, settings] = node.arguments;
+        const literals = patterns && ts.isStringLiteralLike(patterns) ? [patterns.text]
+          : patterns && ts.isArrayLiteralExpression(patterns) && patterns.elements.every(ts.isStringLiteralLike) ? patterns.elements.map(element => (element as ts.StringLiteralLike).text) : undefined;
+        const setting = (name: string): ts.Expression | undefined => settings && ts.isObjectLiteralExpression(settings)
+          ? settings.properties.find((property): property is ts.PropertyAssignment => ts.isPropertyAssignment(property) && property.name.getText(tree).replace(/^['"]|['"]$/gu, '') === name)?.initializer : undefined;
+        const base = setting('base'), kind: Kind = setting('eager')?.kind === ts.SyntaxKind.TrueKeyword ? 'value' : 'lazy';
+        if (!literals || (base && !ts.isStringLiteralLike(base))) add(node, patterns?.getText(tree) ?? '', kind, ['(glob)'], 'import.meta.glob', false, true);
+        else for (const pattern of literals.filter(pattern => !pattern.startsWith('!')))
+          add(node, pattern, kind, ['(glob)'], 'import.meta.glob', false, false, base && ts.isStringLiteralLike(base) ? { base: base.text } : {});
       } else if (ts.isNewExpression(node) && node.expression.getText(tree) === 'URL' && node.arguments?.length === 2
         && node.arguments[1]?.getText(tree) === 'import.meta.url' && node.arguments[0] && ts.isStringLiteralLike(node.arguments[0])) {
         add(node, node.arguments[0].text, 'value', [], 'new URL(.., import.meta.url)');
@@ -91,6 +103,21 @@ export function parseDeclarations(source: string, file: string): Parsed[] {
   return found;
 }
 
+/** A literal Vite glob as a repository-relative pattern, resolved like Vite's `toAbsoluteGlob` with the site's Vite
+ * root at the repository root; an alias or other bare pattern returns undefined and stays unresolved. */
+export function globPattern(from: string, pattern: string, base?: string): string | undefined {
+  const dir = base === undefined ? posix.dirname(from) : base.startsWith('/') ? base.slice(1) : posix.join(posix.dirname(from), base);
+  const resolved = pattern.startsWith('/') ? pattern.slice(1) : pattern.startsWith('./') || pattern.startsWith('../') ? posix.join(dir, pattern)
+    : pattern.startsWith('**') ? pattern : undefined;
+  return resolved === undefined ? undefined : posix.normalize(resolved).replace(/^\.\//u, '');
+}
+
+/** The literal directories a glob starts with, ending at the last `/` before any glob syntax (extglobs included). */
+export function globDirectory(pattern: string): string {
+  const literal = pattern.slice(0, pattern.search(/[*?[\]{}()!@+\\]|$/u));
+  return literal.slice(0, literal.lastIndexOf('/') + 1);
+}
+
 export interface InventoryOptions { readonly prefix: string; readonly checkAgainstScanner?: boolean; readonly graph?: ImportGraph }
 const pairKey = (from: string, to: string) => `${from}\n${to}`;
 export async function readImportDeclarations(checkout: string, options: InventoryOptions) {
@@ -108,7 +135,15 @@ export async function readImportDeclarations(checkout: string, options: Inventor
   const ignored = new Set(ignoredResult.stdout.split('\0').filter(Boolean));
   const declarations: Declaration[] = [];
   for (const [from, entries] of parsedFiles) for (const parsed of entries) {
-    const { computed, ...entry } = parsed;
+    const { computed, glob, ...entry } = parsed;
+    if (glob) {
+      const pattern = globPattern(from, entry.specifier, glob.base), prefix = pattern === undefined ? '' : globDirectory(pattern);
+      // Vite never matches the importing file itself.
+      const matches = pattern ? files.filter(file => file !== from && file.startsWith(prefix) && posix.matchesGlob(file, pattern)) : [];
+      if (!matches.length) declarations.push({ ...entry, from, to: null, test: isTestPath(from), unresolved: true });
+      for (const to of matches) declarations.push({ ...entry, from, to, kind: codeTarget(to) ? entry.kind : 'asset', test: isTestPath(from) });
+      continue;
+    }
     const problems: { from: string; specifier: string; reason: string }[] = [];
     const dependency = dependencies.get(from)?.find(item => item.module === parsed.specifier);
     const resolved = dependency && !dependency.couldNotResolve ? dependency.resolved : resolveImport(from, parsed.specifier);
@@ -147,8 +182,8 @@ export async function readImportDeclarations(checkout: string, options: Inventor
     scanner.missing = [...expected].filter(key => !actual.has(key)).sort(byText);
     for (const key of [...actual].filter(key => !expected.has(key)).sort(byText)) {
       const hits = declarations.filter(entry => entry.to !== null && pairKey(entry.from, entry.to) === key);
-      if (hits.every(entry => entry.form === 'new URL(.., import.meta.url)' || ((entry.from.endsWith('.astro') || entry.from.endsWith('.css')) && entry.kind === 'asset')))
-        scanner.exceptions.push({ pair: key, reason: 'Production scanner does not read new URL or stylesheet imports' });
+      if (hits.every(entry => entry.form === 'new URL(.., import.meta.url)' || entry.form === 'import.meta.glob' || ((entry.from.endsWith('.astro') || entry.from.endsWith('.css')) && entry.kind === 'asset')))
+        scanner.exceptions.push({ pair: key, reason: 'Production scanner does not read new URL, import.meta.glob or stylesheet imports' });
       else scanner.extra.push(key);
     }
     scanner.unexplained = scanner.missing.length + scanner.extra.length;

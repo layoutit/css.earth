@@ -605,7 +605,10 @@ every texel. While the camera moves, frames match full boxes in Chrome (a record
 content, the same raster work) and in the simulator. The switch after the camera stops costs Chrome seven style passes of
 1–3 ms; in the simulator it costs one frame of 35–104 ms on Saturn.
 
-The recipe's `texelsPerFace` sets the body's budget: its face count times that value.
+The recipe sets the atlas budget of each mesh: `atlasTexels` for the whole atlas, or `texelsPerFace` times the face
+count where the recipe authors that count with `simplification.targetFaces`. A mesh without a face target is reduced to
+the fewest faces within `simplification.maximumErrorMeters`, never more than its `faceBudget`. It states `atlasTexels`,
+so its texel density does not follow the count the error bound leaves.
 The triangle's base is the edge that least shears the `u` leaf's bottom-edge and
 top-centre shape. A fixed square per triangle would give large and thin triangles
 several times fewer texels per metre than small ones, at the same bytes.
