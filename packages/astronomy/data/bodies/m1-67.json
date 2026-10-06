@@ -1,0 +1,28 @@
+{
+  "id": "m1-67",
+  "classification": "nebula",
+  "order": 5393,
+  "physical": {
+    "name": "M1-67",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M1-67 is recorded: it is an extended nebula, and its package frames it at 1.995 pc (object.json worldFrame.bodyRadiusM), the circle its picture is drawn in, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 287.87864548657,
+    "declinationDegrees": 16.860611371739996,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 6400,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "SIMBAD, WR 124 (the same entry as PN M 1-67): ICRS 19 11 30.8749, +16 51 38.201, from Gaia EDR3 (2020yCat.1350....0G) (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WR+124)",
+      "distance": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67: an estimated distance of 6.4 (+2.5, −0.8) kpc, from Jiménez-Hernández et al. (2020) (https://arxiv.org/abs/2204.07778)",
+      "properMotion": "Zero: the nebula is held at the star's catalogued place; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}

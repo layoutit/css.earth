@@ -32,6 +32,10 @@ src/objects/m31-layers/source/lggs-stars/table4.dat.gz
 src/objects/cassiopeia-a-layers/source/ejecta-speeds.dat
 # The same file beside the cassiopeia-a-miri-layers bank; restored from the same origin (src/objects/cassiopeia-a-miri-layers/source/manifest.json).
 src/objects/cassiopeia-a-miri-layers/source/ejecta-speeds.dat
+# M1-67's model grid (17 MB); built by packages/bake/authoring/m1-67/shell-grid.mts, restored from the source mirror.
+src/objects/m1-67-layers/source/shell-grid.dat
+# The Crab's measured filaments (416,573 rows, 11.5 MB); built by packages/bake/authoring/m1/filament-speeds.mts, restored from the source mirror.
+src/objects/m1-layers/source/filament-speeds.dat
 # The Homunculus's published surface (855 kB); restored from its NASA 3D Resources origin (src/objects/homunculus-nebula-layers/source/manifest.json).
 src/objects/homunculus-nebula-layers/source/homunculus.stl
 # Earth's dated NASA MUR tile archives (45 MB a day); restored from the source mirror (src/objects/earth/source/manifest.json).
@@ -87,6 +91,7 @@ src/objects/venus/source/akatsuki/*.nc
 # Previews a package's own author draws from its pinned downloads; no checkout without those downloads can redraw them.
 !src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png
 !src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png
+!src/objects/eps-eridani-corona/source/previews/*.png
 !src/objects/eps-eridani-disc/source/previews/dust.png
 !src/objects/hd-181327-disc/source/previews/reflectance.png
 !src/objects/sun-cor1-density/source/previews/cor1-density.png
@@ -270,35 +275,35 @@ src/objects/*/source/**/*.bpc
 !src/objects/moon/source/science/diviner-ghrm/tbol_m-compact.tif
 
 # Combined catalogues and navigation are rebuilt from individual body records.
-/site/prepared-sources.json
-/site/prepared-source-credits.json
-/site/prepared-facilities.json
-/site/prepared-catalogue.mjs
-/site/prepared-overview-objects.json
-/site/prepared-dataset-volumes.json
-/site/prepared-dot-catalogues.json
-/site/prepared-stellar-extents.json
-/site/prepared-fit-boxes.json
-/site/prepared-context-objects.mts
-/site/prepared-context-bank-assets.json
-/site/prepared-hosted-banks.json
-/site/prepared-context-json.mts
-/site/prepared-feature-index.json
-/site/prepared-dataset-billboards.json
+/site/prepared/prepared-sources.json
+/site/prepared/prepared-source-credits.json
+/site/prepared/prepared-facilities.json
+/site/prepared/prepared-catalogue.mjs
+/site/prepared/prepared-overview-objects.json
+/site/prepared/prepared-dataset-volumes.json
+/site/prepared/prepared-dot-catalogues.json
+/site/prepared/prepared-stellar-extents.json
+/site/prepared/prepared-fit-boxes.json
+/site/prepared/prepared-context-objects.mts
+/site/prepared/prepared-context-bank-assets.json
+/site/prepared/prepared-hosted-banks.json
+/site/prepared/prepared-context-json.mts
+/site/prepared/prepared-feature-index.json
+/site/prepared/prepared-dataset-billboards.json
 /public/navigation/dataset-billboards/
 /public/navigation/dataset-sprites/
 /public/features/
 /packages/astronomy/src/data/generated/
-/site/prepared-navigation-markers.mjs
+/site/prepared/prepared-navigation-markers.mjs
 /src/platform/solar-geometry.mts
-/site/moon-labels.prepared.json
+/site/prepared/moon-labels.prepared.json
 
 # AKARI AcuA v1: restored and verified from each body source manifest.
 /src/objects/*/source/reference/AcuA_V1.txt.gz
 
 # Shared shell outputs, replayed by pnpm prepare:shell from pinned fonts and vectors.
-/site/prepared-shell-icons.mjs
-/site/prepared-shell-titles.mjs
+/site/prepared/prepared-shell-icons.mjs
+/site/prepared/prepared-shell-titles.mjs
 
 # Large source inputs with pinned archive downloads; `pnpm prepare:checkout` (or
 # `node packages/bake/cli/object-operations.mts acquire <id>`) restores and verifies them.
@@ -355,7 +360,7 @@ src/objects/*/source/**/*.bpc
 
 # Small expected-output receipt supports offline source recovery.
 
-/site/prepared-world-presentation.json
+/site/prepared/prepared-world-presentation.json
 
 # Solar System source products restored from their manifest origins or source-cache.
 /src/objects/mars/source/geology/SIM3292_Global_Geology.shp

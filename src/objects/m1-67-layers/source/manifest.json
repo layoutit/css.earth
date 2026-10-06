@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/m1-67-layers/source/starless.jpg",
+      "origin": "https://cdn.esawebb.org/archives/images/large/weic2307a.jpg",
+      "sourceUrl": "https://esawebb.org/images/weic2307a/",
+      "title": "Wolf-Rayet 124 (NIRCam and MIRI composite image)",
+      "credit": "NASA, ESA, CSA, STScI, Webb ERO Production Team",
+      "displayCredit": "ESA/Webb",
+      "acquisition": "The publisher's JPEG (4416 x 4349 px) with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/m1-67-layers --star-red-over-blue=0.8` (NOX over the whole picture; where the light it took is redder than a star's, the nebula's own clumps, the picture keeps its pixels). Restored from the source cache; not tracked. Its scale and direction on the sky are the file's embedded tags; its place is set by the star (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esawebb-weic2307a",
+            "role": "material",
+            "evidence": "src/objects/m1-67-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://esawebb.org/images/weic2307a/"
+          }
+        ]
+      },
+      "generator": "labs/nebula/run.mts remove-stars"
+    },
+    {
+      "id": "shape-model",
+      "path": "src/objects/m1-67-layers/source/shape-model.json",
+      "origin": "https://arxiv.org/abs/2204.07778",
+      "sourceUrl": "https://arxiv.org/abs/2204.07778",
+      "title": "M 1-67: the bodies of the SHAPE model of Zavala et al. (2022), Table 2, with the lobes' outline read from Figure 3",
+      "credit": "Zavala et al. (2022)",
+      "displayCredit": "Zavala et al. (2022)",
+      "acquisition": "Transcribed from the paper: each body's sizes and speed from Table 2, the axis from Sect. 4. The lobes' outline is measured on the paper's Figure 3 by packages/bake/authoring/m1-67/lobe-outline.mts; the figure itself is not kept.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "publication-zavala-2022-m1-67-shape-model",
+            "role": "material",
+            "evidence": "https://arxiv.org/abs/2204.07778"
+          }
+        ]
+      },
+      "license": "Factual numerical parameters; source attribution retained.",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "OAN-SPM 2.1 m, Manchester Echelle Spectrometer",
+            "evidence": "https://arxiv.org/abs/2204.07778",
+            "reason": "A model fitted to long-slit spectra, not an observation of its own."
+          }
+        ]
+      }
+    },
+    {
+      "id": "shell-grid",
+      "path": "src/objects/m1-67-layers/source/shell-grid.dat",
+      "origin": "https://arxiv.org/abs/2204.07778",
+      "sourceUrl": "https://arxiv.org/abs/2204.07778",
+      "title": "M 1-67: where the model of Zavala et al. (2022) has gas, on a cube of 101 cells a side",
+      "credit": "Zavala et al. (2022)",
+      "displayCredit": "Zavala et al. (2022)",
+      "acquisition": "Built from source/shape-model.json by the generator (`node packages/bake/authoring/m1-67/shell-grid.mts src/objects/m1-67-layers 101 1.5 4`): 1 inside a body's wall, 0 outside, the faces softened by 4 arcsec. Restored from the source cache; not tracked. Read by the image-layer bake for where each sight line's gas is.",
+      "generator": "packages/bake/authoring/m1-67/shell-grid.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "publication-zavala-2022-m1-67-shape-model",
+            "role": "method",
+            "evidence": "src/objects/m1-67-layers/source/shape-model.json"
+          }
+        ]
+      },
+      "license": "Derived from factual numerical parameters; source attribution retained.",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "OAN-SPM 2.1 m, Manchester Echelle Spectrometer",
+            "evidence": "https://arxiv.org/abs/2204.07778",
+            "reason": "A grid written from a model fitted to long-slit spectra, not an observation of its own."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/m1-67-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/m1-67-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/m1-67-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

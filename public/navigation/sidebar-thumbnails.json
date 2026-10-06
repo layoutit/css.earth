@@ -111,6 +111,26 @@
       "bytes": 14268
     },
     {
+      "path": "src/objects/eps-eridani-corona/prepared/presentation.json",
+      "bytes": 11350
+    },
+    {
+      "path": "public/scenes/eps-eridani-corona/datasets/simulation-2008-01.webp",
+      "bytes": 7002
+    },
+    {
+      "path": "public/scenes/eps-eridani-corona/datasets/simulation-2011-10.webp",
+      "bytes": 6542
+    },
+    {
+      "path": "public/scenes/eps-eridani-corona/datasets/simulation-2013-10.webp",
+      "bytes": 6956
+    },
+    {
+      "path": "public/scenes/eps-eridani-corona/datasets/wind.webp",
+      "bytes": 4114
+    },
+    {
       "path": "src/objects/eps-eridani-disc/prepared/presentation.json",
       "bytes": 2940
     },
@@ -834,6 +854,51 @@
       ],
       "credit": "ESA/Webb",
       "sourceUrl": "https://esawebb.org/images/elgordo1/"
+    },
+    "eps-eridani-corona/simulation-2008-01": {
+      "url2x": "/navigation/focus-eps-eridani-corona-simulation-2008-01@2x.webp",
+      "inputs": [
+        "src/objects/eps-eridani-corona/prepared/presentation.json",
+        "public/scenes/eps-eridani-corona/datasets/simulation-2008-01.webp"
+      ],
+      "credit": "Ó Fionnagáin et al. (2022)",
+      "sourceUrl": "https://zenodo.org/records/5575241"
+    },
+    "eps-eridani-corona/simulation-2011-10": {
+      "url2x": "/navigation/focus-eps-eridani-corona-simulation-2011-10@2x.webp",
+      "inputs": [
+        "src/objects/eps-eridani-corona/prepared/presentation.json",
+        "public/scenes/eps-eridani-corona/datasets/simulation-2011-10.webp"
+      ],
+      "credit": "Ó Fionnagáin et al. (2022)",
+      "sourceUrl": "https://zenodo.org/records/5575241"
+    },
+    "eps-eridani-corona/simulation-2013-10": {
+      "url2x": "/navigation/focus-eps-eridani-corona-simulation-2013-10@2x.webp",
+      "inputs": [
+        "src/objects/eps-eridani-corona/prepared/presentation.json",
+        "public/scenes/eps-eridani-corona/datasets/simulation-2013-10.webp"
+      ],
+      "credit": "Ó Fionnagáin et al. (2022)",
+      "sourceUrl": "https://zenodo.org/records/5575241"
+    },
+    "eps-eridani-corona/wind": {
+      "url2x": "/navigation/focus-eps-eridani-corona-wind@2x.webp",
+      "inputs": [
+        "src/objects/eps-eridani-corona/prepared/presentation.json",
+        "public/scenes/eps-eridani-corona/datasets/wind.webp"
+      ],
+      "credit": "Wood et al. (2002)",
+      "sourceUrl": "https://arxiv.org/abs/astro-ph/0203437"
+    },
+    "eps-eridani-corona": {
+      "url2x": "/navigation/focus-object-eps-eridani-corona@2x.webp",
+      "inputs": [
+        "src/objects/eps-eridani-corona/prepared/presentation.json",
+        "public/scenes/eps-eridani-corona/datasets/simulation-2013-10.webp"
+      ],
+      "credit": "Ó Fionnagáin et al. (2022)",
+      "sourceUrl": "https://zenodo.org/records/5575241"
     },
     "eps-eridani-disc/dust": {
       "url2x": "/navigation/focus-eps-eridani-disc-dust@2x.webp",
@@ -1905,6 +1970,7 @@
     "earendel-layers": "earendel-layers",
     "einstein-cross-layers": "einstein-cross-layers",
     "el-gordo-layers": "el-gordo-layers",
+    "eps-eridani-corona": "eps-eridani-corona",
     "eps-eridani-disc": "eps-eridani-disc",
     "gn-z11-volume": "gn-z11-volume",
     "hd-181327-disc": "hd-181327-disc",

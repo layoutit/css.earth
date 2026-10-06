@@ -1,7 +1,7 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import credits from './prepared-source-credits.json' with { type: 'json' };
+import credits from './prepared/prepared-source-credits.json' with { type: 'json' };
 import { parseSourceCredits } from '@cssearth/objects/provenance';
 import { projectRoot } from '@cssearth/core/node';
 import { parseSourceIcons } from './content/source-icons.mts';

@@ -11,8 +11,8 @@ type FramingFrame = Pick<PreparedWorldCameraFrame, 'referenceFrame' | 'epochJdTt
 interface FramingCandidate { originM?: PositionM; minimumM: PositionM; maximumM: PositionM; cameraToReference: readonly number[]; }
 interface SystemView { readonly candidates: readonly FramingCandidate[]; }
 const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map(2)];
-import datasetVolumes from './prepared-dataset-volumes.json' with { type: 'json' };
-import fitBoxes from './prepared-fit-boxes.json' with { type: 'json' };
+import datasetVolumes from './prepared/prepared-dataset-volumes.json' with { type: 'json' };
+import fitBoxes from './prepared/prepared-fit-boxes.json' with { type: 'json' };
 import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_PADDING_PIXELS } from './browser/runtime-policy.mts';
 import { systemFramingRadii } from './world/system-framing-radii.mts';
 export { systemFramingRadii } from './world/system-framing-radii.mts';
@@ -94,7 +94,7 @@ export function loadSystemView(id: string, read?: (id: string) => Promise<unknow
 export const DATASET_VOLUMES: ReadonlyMap<string, { readonly frame: DensityVolumeFrame; readonly host?: string }> = new Map(
   Object.entries(datasetVolumes).map(([id, bank]) => {
     const host: unknown = 'host' in bank ? bank.host : undefined;
-    if (host !== undefined && typeof host !== 'string') throw new TypeError(`site/prepared-dataset-volumes.json: ${id}.host must be an object id.`);
+    if (host !== undefined && typeof host !== 'string') throw new TypeError(`site/prepared/prepared-dataset-volumes.json: ${id}.host must be an object id.`);
     return [id, { frame: parseDensityVolumeFrame(bank.frame), ...(host === undefined ? {} : { host }) }];
   }));
 
@@ -103,7 +103,7 @@ export const DATASET_VOLUMES: ReadonlyMap<string, { readonly frame: DensityVolum
 const FIT_BOXES: ReadonlyMap<string, { centre: PositionM; candidate: FramingCandidate }> = new Map(Object.entries(fitBoxes as Record<string, Record<string, unknown>>).map(([id, box]) => {
   const position = (field: 'centreM' | 'minimumM' | 'maximumM'): PositionM => {
     const value = box[field];
-    if (!Array.isArray(value) || value.length !== 3 || !value.every(Number.isFinite)) throw new TypeError(`site/prepared-fit-boxes.json: ${id}.${field} must be three numbers.`);
+    if (!Array.isArray(value) || value.length !== 3 || !value.every(Number.isFinite)) throw new TypeError(`site/prepared/prepared-fit-boxes.json: ${id}.${field} must be three numbers.`);
     return [value[0], value[1], value[2]];
   };
   return [id, { centre: position('centreM'), candidate: { minimumM: position('minimumM'), maximumM: position('maximumM'), cameraToReference: [1, 0, 0, 0, 1, 0, 0, 0, 1] } }];
@@ -118,7 +118,7 @@ function boxZoomTarget(from: WorldCameraPose, box: { centre: PositionM; candidat
 /** Fit the galaxies inside `objectId` at the current viewing angle, centred on them: an overview's `zoom.frame` {fit: drawn-galaxies}. */
 export function drawnGalaxiesZoomTarget(objectId: string, from: WorldCameraPose, optics: Optics, rect: MapViewport) {
   const box = FIT_BOXES.get(objectId);
-  if (!box) throw new TypeError(`site/prepared-fit-boxes.json has no box for ${objectId}: its zoom.frame fits the galaxies inside it. Run pnpm prepare:catalog.`);
+  if (!box) throw new TypeError(`site/prepared/prepared-fit-boxes.json has no box for ${objectId}: its zoom.frame fits the galaxies inside it. Run pnpm prepare:catalog.`);
   return boxZoomTarget(from, box, optics, rect);
 }
 

@@ -1,7 +1,7 @@
 // Written by site/build/prepare/prepare-world-presentation.mts from the moon groups, the JPL mission targets and the galaxy
 // and cluster presentation recipes; the browser only validates it. It lists no system: a page reads a system's members
 // and framing from the bodies its world holds (site/object-systems.mts, site/system-framing.mts).
-import prepared from './prepared-world-presentation.json' with { type: 'json' };
+import prepared from './prepared/prepared-world-presentation.json' with { type: 'json' };
 import { isRecord } from '@cssearth/core';
 
 const ids = (value: unknown, name: string): readonly string[] => {
@@ -42,7 +42,7 @@ function categoryFrames(value: unknown) {
 
 function parseWorldPresentation(value: unknown) {
   if (!isRecord(value) || value.schema !== 'cssearth-world-presentation@6' || !isRecord(value.moons)) {
-    throw new TypeError(`site/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@6; run pnpm prepare:world-context.`);
+    throw new TypeError(`site/prepared/prepared-world-presentation.json is ${isRecord(value) ? String(value.schema) : typeof value}, not cssearth-world-presentation@6; run pnpm prepare:world-context.`);
   }
   return Object.freeze({
     moons: Object.freeze({ major: ids(value.moons.major, 'moons.major'), minor: ids(value.moons.minor, 'moons.minor') }),

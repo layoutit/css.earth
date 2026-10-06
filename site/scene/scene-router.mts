@@ -15,7 +15,7 @@ import { isRecord } from '@cssearth/core';
 import type { ObjectEntry } from '../objects.mts';
 import { isExtendedClassification, type ObjectDescriptor } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
-import type { NavigationIntent } from '../navigation/navigation-request.mts';
+import { failedFlightPageLoad, type NavigationIntent } from '../navigation/navigation-request.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import type { ObjectShell, ShellNavigationTransition } from '../shell/object-shell-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
@@ -540,11 +540,13 @@ export function createSceneRouter({
         error.name === 'AbortError' && error.preserveView === true;
       if (!requests.finish(request, error instanceof Error && error.name === 'AbortError' ? 'cancelled' : 'failed')) return false;
       centeredObjectId = null;
+      // A tab older than the deployed build cannot read another object's files: the address is loaded as a page instead.
+      const pageLoad = failedFlightPageLoad(request, error, source?.objectId, windowTarget.navigator.onLine);
       // A hand-over that could not mount its scene leaves the mounted one framed as it is.
       if (handover.subject) { handover.clear(); publishFraming(); }
       publication.publish();
       if (scenes.current === source && source) {
-        source.shell?.setDatasetNotice?.(errorMessage(error));
+        if (!pageLoad) source.shell?.setDatasetNotice?.(errorMessage(error));
         // Input can take over a same-owner selection flight before arrival. The
         // selected destination still owns that camera: keep only the drawn view
         // from the departed URL, otherwise its saved camera is restored
@@ -567,6 +569,7 @@ export function createSceneRouter({
       }
       else if (scenes.current) fail(scenes.current, error);
       else report(error);
+      if (pageLoad) windowTarget.location[pageLoad](request.url);
       return false;
     }
   }

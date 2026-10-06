@@ -81,7 +81,7 @@ export async function prepareText({ ids = [] as readonly string[], check = false
     ...catalogueTextWarnings(bodies.map(body => ({ text: body.text, name: body.context.name })))];
   let composition = 'checked';
   try {
-    const exploration = parsePreparedExploration(await readJson(resolve(projectRoot, 'site/prepared-facilities.json')), sourceResolver(sourceCatalog), DATASET_ROUTES);
+    const exploration = parsePreparedExploration(await readJson(resolve(projectRoot, 'site/prepared/prepared-facilities.json')), sourceResolver(sourceCatalog), DATASET_ROUTES);
     const found = bodies.flatMap(body => compositionGroups(body, exploration).flatMap(blocks => compositionWarnings(body.id, blocks)));
     warnings.push(...new Map(found.map(finding => [JSON.stringify(finding), finding])).values());
   } catch (error) {

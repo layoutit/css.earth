@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "eps-eridani-corona",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        58674240692610460,
+        78503906579137920,
+        -16327222453164898
+      ],
+      "localToReferenceXyzw": [
+        0.24067875769811878,
+        0.724042083801795,
+        0.6134014175737684,
+        0.20390070474457905
+      ],
+      "metersPerUnit": 514818000.00000006,
+      "boundsUnits": {
+        "min": [
+          -4,
+          -4,
+          -4
+        ],
+        "max": [
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "eps-eridani"
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}

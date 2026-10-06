@@ -57,7 +57,7 @@ export function decodeCruiseResult(value: unknown): CruisedModule[] {
 }
 
 /** A generated module (untracked) is counted as its tracked declaration, so the graph is the same whether or
- * not the checkout has run its preparation steps: `site/prepared-shell-titles.mjs` becomes `….d.mts`. */
+ * not the checkout has run its preparation steps: `site/prepared/prepared-shell-titles.mjs` becomes `….d.mts`. */
 export function trackedStandIn(path: string, tracked: ReadonlySet<string>): string | undefined {
   if (tracked.has(path)) return path;
   const match = /^(.*)\.([cm]?)[jt]s$/u.exec(path);

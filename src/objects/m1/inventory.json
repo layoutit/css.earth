@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "m1-dataset-hubble-measured.webp",
+      "bytes": 30892,
+      "sha256": "1e56c36be1c6f7f3547efb72a9f24249390d653fc2a8932f0480629db466bcb2"
+    },
+    {
+      "location": "public",
       "filename": "m1-dataset-hubble-optical.webp",
       "bytes": 33070,
       "sha256": "53507d986cbe3b15755973f1fbd014985cb6bfd9162d970caf433c47c12d5972"
@@ -46,20 +52,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1522,
-      "sha256": "3a9bb201955465724c452a9bc1216bce7d4e2a7f883df21e2361b6617608921a"
+      "bytes": 1727,
+      "sha256": "42ce4f4bcfac45b13c186be3198fe0a39c8f7e93036d75f6898e03439d17b431"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 2376,
-      "sha256": "88a8353fbc30ef378892f70535eea55b68a973169a19fdfd71871196fe3f2347"
+      "bytes": 2730,
+      "sha256": "675773a01705a6a6cdcd2074b5b6270065a551540b1362d4eaeaa7eaad71837c"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 6054,
-      "sha256": "fd6b3323ca087e27ae135b64bd41990b54e68d72a8208ab00a8e8a39378c73d7"
+      "bytes": 6341,
+      "sha256": "b21d248dafeab61c13a30ba2bff86647fb675a65ee26780349771bac3b11c42e"
     },
     {
       "location": "prepared",
@@ -70,8 +76,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3589,
-      "sha256": "01b84e8bae2f2291162cdf003f7d3fb4b3addf7b0ff8bb057daec1127f4f32f4"
+      "bytes": 4977,
+      "sha256": "2df2446111ca15e42c8374cdc085b41b10deabc09442ac45fb3f5ef5a248a299"
     },
     {
       "location": "prepared",

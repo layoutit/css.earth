@@ -14,7 +14,7 @@ const SVG_METADATA = /<metadata>([^<]+)<\/metadata>/u;
 export async function prepareShellTitles({
   sourceRoot = resolve(import.meta.dirname, "../../source/titles"),
   publicRoot = resolve(import.meta.dirname, "../../../public/shell"),
-  moduleOutput = resolve(import.meta.dirname, "../../prepared-shell-titles.mjs"),
+  moduleOutput = resolve(import.meta.dirname, "../../prepared/prepared-shell-titles.mjs"),
 } = {}) {
   validateManifest();
   await mkdir(publicRoot, { recursive: true });

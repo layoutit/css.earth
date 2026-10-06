@@ -98,7 +98,7 @@ part of the package's source interpretation update.
 `pnpm prepare:catalog` derives discovery from exposed `prepared/controls.json`
 datasets and their raster recipes. It writes each body's
 discovery beside its descriptor and distance in the ignored prepared catalogue
-(`site/prepared-catalogue.mjs`) that the single `OBJECTS` registry reads. Runtime reads this prepared metadata; it does not inspect source images or
+(`site/prepared/prepared-catalogue.mjs`) that the single `OBJECTS` registry reads. Runtime reads this prepared metadata; it does not inspect source images or
 generate assets. The controls come from R2, not Git, so the dev, build and deploy
 chains restore prepared assets before the catalogue runs. Without them, a clean
 checkout finds no imagery for any body, and moons and small bodies read **Shape only**.

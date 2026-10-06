@@ -1,0 +1,211 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "eps-eridani-corona",
+  "name": "ε Eridani corona",
+  "defaultDataset": "simulation-2013-10",
+  "bank": {
+    "path": "src/objects/eps-eridani-corona/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "simulation-2008-01",
+      "path": "src/objects/eps-eridani-corona/source/volume-simulation-2008-01.json"
+    },
+    {
+      "id": "simulation-2011-10",
+      "path": "src/objects/eps-eridani-corona/source/volume-simulation-2011-10.json"
+    },
+    {
+      "id": "simulation-2013-10",
+      "path": "src/objects/eps-eridani-corona/source/volume-simulation-2013-10.json"
+    },
+    {
+      "id": "wind",
+      "path": "src/objects/eps-eridani-corona/source/volume-wind.json"
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "datasets": [
+    {
+      "id": "simulation-2008-01",
+      "label": "Simulated corona · January 2008",
+      "title": "ε Eridani’s corona in a published simulation, for its magnetic field of January 2008",
+      "description": "Nobody has imaged this corona. This is the gas density in the magnetohydrodynamic simulation Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115 ran for this star, driven by the map of its surface magnetic field observed in January 2008 (Jeffers et al. (2014), A&A 569, A79), from the data they released (https://zenodo.org/records/5575241). The released state is ten minutes after the authors set off an eruption near the equator of the model; that eruption disturbs 6% of the volume drawn here. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The rotation axis is tilted 46° from the line of sight, as the magnetic maps were fitted; these sources give neither where the axis points on the sky nor the star's rotation phase today, so both are drawn by convention.",
+      "summary": "A published simulation, not an image: gas shaped by the magnetic field mapped in January 2008.",
+      "detail": "96³ grid from 5.1 million simulation cells, 1 to 4 stellar radii",
+      "facts": [
+        {
+          "id": "kind",
+          "label": "Kind",
+          "value": "A published simulation driven by an observed magnetic map, not an observation"
+        },
+        {
+          "id": "map",
+          "label": "Magnetic map",
+          "value": "January 2008, from spectropolarimetry (Jeffers et al. (2014), A&A 569, A79)"
+        },
+        {
+          "id": "state",
+          "label": "State",
+          "value": "Ten minutes after a modelled eruption near the equator, which disturbs 6% of the drawn volume"
+        },
+        {
+          "id": "density",
+          "label": "Density at 2 radii",
+          "value": "Typically 1.2 × 10^7 electrons per cm³; the densest twentieth is 10 times the thinnest"
+        },
+        {
+          "id": "orientation",
+          "label": "Orientation",
+          "value": "Rotation axis 46° from the line of sight, as the maps were fitted; its direction on the sky and the rotation phase are conventions"
+        },
+        {
+          "id": "filter",
+          "label": "Brightness",
+          "value": "Proportional to density at each distance; 10 times the typical density is fully bright. The fall-off with distance is compressed (log₁₀ density, 1.0 × 10^5 to 1.0 × 10^9 cm⁻³)"
+        }
+      ],
+      "input": "run-2008-01-equator",
+      "preview": {
+        "path": "src/objects/eps-eridani-corona/source/previews/simulation-2008-01.png",
+        "authoredFrom": "run-2008-01-equator"
+      }
+    },
+    {
+      "id": "simulation-2011-10",
+      "label": "Simulated corona · October 2011",
+      "title": "ε Eridani’s corona in a published simulation, for its magnetic field of October 2011",
+      "description": "Nobody has imaged this corona. This is the gas density in the magnetohydrodynamic simulation Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115 ran for this star, driven by the map of its surface magnetic field observed in October 2011 (Jeffers et al. (2014), A&A 569, A79), from the data they released (https://zenodo.org/records/5575241). The released state is ten minutes after the authors set off an eruption near the equator of the model; that eruption disturbs 9% of the volume drawn here. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The rotation axis is tilted 46° from the line of sight, as the magnetic maps were fitted; these sources give neither where the axis points on the sky nor the star's rotation phase today, so both are drawn by convention.",
+      "summary": "A published simulation, not an image: gas shaped by the magnetic field mapped in October 2011.",
+      "detail": "96³ grid from 5.2 million simulation cells, 1 to 4 stellar radii",
+      "facts": [
+        {
+          "id": "kind",
+          "label": "Kind",
+          "value": "A published simulation driven by an observed magnetic map, not an observation"
+        },
+        {
+          "id": "map",
+          "label": "Magnetic map",
+          "value": "October 2011, from spectropolarimetry (Jeffers et al. (2014), A&A 569, A79)"
+        },
+        {
+          "id": "state",
+          "label": "State",
+          "value": "Ten minutes after a modelled eruption near the equator, which disturbs 9% of the drawn volume"
+        },
+        {
+          "id": "density",
+          "label": "Density at 2 radii",
+          "value": "Typically 1.1 × 10^7 electrons per cm³; the densest twentieth is 9 times the thinnest"
+        },
+        {
+          "id": "orientation",
+          "label": "Orientation",
+          "value": "Rotation axis 46° from the line of sight, as the maps were fitted; its direction on the sky and the rotation phase are conventions"
+        },
+        {
+          "id": "filter",
+          "label": "Brightness",
+          "value": "Proportional to density at each distance; 10 times the typical density is fully bright. The fall-off with distance is compressed (log₁₀ density, 1.0 × 10^5 to 1.0 × 10^9 cm⁻³)"
+        }
+      ],
+      "input": "run-2011-10-equator",
+      "preview": {
+        "path": "src/objects/eps-eridani-corona/source/previews/simulation-2011-10.png",
+        "authoredFrom": "run-2011-10-equator"
+      }
+    },
+    {
+      "id": "simulation-2013-10",
+      "label": "Simulated corona · October 2013",
+      "title": "ε Eridani’s corona in a published simulation, for its magnetic field of October 2013",
+      "description": "Nobody has imaged this corona. This is the gas density in the magnetohydrodynamic simulation Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115 ran for this star, driven by the map of its surface magnetic field observed in October 2013 (Jeffers et al. (2014), A&A 569, A79), from the data they released (https://zenodo.org/records/5575241). The released state is ten minutes after the authors set off an eruption near the equator of the model; that eruption disturbs 4% of the volume drawn here. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The rotation axis is tilted 46° from the line of sight, as the magnetic maps were fitted; these sources give neither where the axis points on the sky nor the star's rotation phase today, so both are drawn by convention.",
+      "summary": "A published simulation, not an image: gas shaped by the magnetic field mapped in October 2013.",
+      "detail": "96³ grid from 5.3 million simulation cells, 1 to 4 stellar radii",
+      "facts": [
+        {
+          "id": "kind",
+          "label": "Kind",
+          "value": "A published simulation driven by an observed magnetic map, not an observation"
+        },
+        {
+          "id": "map",
+          "label": "Magnetic map",
+          "value": "October 2013, from spectropolarimetry (Jeffers et al. (2014), A&A 569, A79)"
+        },
+        {
+          "id": "state",
+          "label": "State",
+          "value": "Ten minutes after a modelled eruption near the equator, which disturbs 4% of the drawn volume"
+        },
+        {
+          "id": "density",
+          "label": "Density at 2 radii",
+          "value": "Typically 1.1 × 10^7 electrons per cm³; the densest twentieth is 15 times the thinnest"
+        },
+        {
+          "id": "orientation",
+          "label": "Orientation",
+          "value": "Rotation axis 46° from the line of sight, as the maps were fitted; its direction on the sky and the rotation phase are conventions"
+        },
+        {
+          "id": "filter",
+          "label": "Brightness",
+          "value": "Proportional to density at each distance; 10 times the typical density is fully bright. The fall-off with distance is compressed (log₁₀ density, 1.0 × 10^5 to 1.0 × 10^9 cm⁻³)"
+        }
+      ],
+      "input": "run-2013-10-equator",
+      "preview": {
+        "path": "src/objects/eps-eridani-corona/source/previews/simulation-2013-10.png",
+        "authoredFrom": "run-2013-10-equator"
+      }
+    },
+    {
+      "id": "wind",
+      "label": "Modelled wind · measured mass loss",
+      "title": "ε Eridani’s corona as the wind that carries its measured mass loss",
+      "description": "Nobody has imaged this corona. This is the density of the wind Parker (1958) derives for gas at 4.06 million kelvin, the temperature measured from the star's X-ray spectrum, carrying 30 times the Sun's mass loss, which Wood et al. (2002) measure from the star's astrosphere. It leaves the surface at 93 kilometres a second and passes the speed of sound 1.89 radii out. It is the same in every direction, because the model has no magnetic field; the simulated datasets show what the field does to it.",
+      "summary": "Modelled, not observed: the outflow at the measured temperature that carries the measured mass loss.",
+      "detail": "96³ grid, 1 to 4 stellar radii",
+      "facts": [
+        {
+          "id": "kind",
+          "label": "Kind",
+          "value": "A model from published numbers, not an observation"
+        },
+        {
+          "id": "mass-loss",
+          "label": "Mass loss",
+          "value": "30 times the Sun's, measured from the astrosphere (Wood et al. 2002)"
+        },
+        {
+          "id": "temperature",
+          "label": "Temperature",
+          "value": "4.06 million K, measured from the X-ray spectrum (Bennedik et al. 2026)"
+        },
+        {
+          "id": "base",
+          "label": "Density at the surface",
+          "value": "6.2 × 10^7 electrons per cm³"
+        },
+        {
+          "id": "edge",
+          "label": "Density at 4 radii",
+          "value": "8.9 × 10^5 electrons per cm³, moving at 408 km/s"
+        },
+        {
+          "id": "scale",
+          "label": "Brightness",
+          "value": "log₁₀ density, 1.0 × 10^5 to 1.0 × 10^9 cm⁻³, in the star's color"
+        }
+      ],
+      "input": "wind-parameters",
+      "preview": {
+        "path": "src/objects/eps-eridani-corona/source/previews/wind.png",
+        "authoredFrom": "wind-parameters"
+      }
+    }
+  ]
+}

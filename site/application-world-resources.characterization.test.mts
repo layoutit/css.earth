@@ -42,7 +42,7 @@ const requests: string[] = [];
 let bankResponse: Response | null = null;
 let catalogLoads = 0, plannerCount = 0;
 let loadFailure: Error | null = new Error('initial volume decode');
-mock.module(new URL('./prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: declarations, CONTEXT_OBJECT_ASSET_URLS: assets, CONTEXT_GALAXY_SAMPLE: {} } });
+mock.module(new URL('./prepared/prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: declarations, CONTEXT_OBJECT_ASSET_URLS: assets, CONTEXT_GALAXY_SAMPLE: {} } });
 mock.module(new URL('./world/context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: availability } });
 mock.module(new URL('./world-context-plan.mts', import.meta.url).href, { namedExports: { ...world,
   WORLD_DOT_BANKS: ['inside'], onWorldSystems: (callback: typeof onSystems) => { onSystems = callback; return () => {}; } } });
@@ -87,7 +87,8 @@ function isolatedTest(name: string, run: () => Promise<void>, phone = false) {
     if (process.env.RESOURCE_CASE === name) { await run(); return; }
     const env: NodeJS.ProcessEnv = { ...process.env, RESOURCE_CASE: name, RESOURCE_PHONE: String(phone) };
     delete env.NODE_TEST_CONTEXT; // Start an independent runner, not an IPC child of this one.
-    const child = spawnSync(process.execPath, [...process.execArgv.filter(argument => !argument.startsWith('--test-shard')), '--import', pathToFileURL(join(hookDirectory, 'register.mjs')).href, '--test', '--test-name-pattern', name, fileURLToPath(import.meta.url)],
+    // The summary below is TAP's. Node 22 prints TAP to a pipe by default and Node 24 prints the spec format, so name it.
+    const child = spawnSync(process.execPath, [...process.execArgv.filter(argument => !/^--test-(?:shard|reporter)/u.test(argument)), '--import', pathToFileURL(join(hookDirectory, 'register.mjs')).href, '--test', '--test-reporter=tap', '--test-name-pattern', name, fileURLToPath(import.meta.url)],
       { encoding: 'utf8', timeout: 30000, env });
     assert.equal(child.status, 0, child.stdout + child.stderr);
     assert.match(child.stdout, /# pass 1(?:\n|\r)/u, 'the isolated case must actually run');

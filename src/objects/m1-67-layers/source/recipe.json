@@ -1,0 +1,87 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m1-67-layers",
+  "source": {
+    "path": "starless.jpg",
+    "dimensions": [
+      4416,
+      4349
+    ],
+    "originalDimensions": [
+      4416,
+      4349
+    ],
+    "publisherUrl": "https://esawebb.org/images/weic2307a/",
+    "downloadUrl": "https://cdn.esawebb.org/archives/images/large/weic2307a.jpg",
+    "credit": "NASA, ESA, CSA, STScI, Webb ERO Production Team",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 287.8791935,
+    "centerDecDeg": 16.8604008,
+    "fieldOfViewDeg": [
+      0.03683596,
+      0.03627708
+    ],
+    "northClockwiseDeg": 40.64
+  },
+  "target": {
+    "centerRaDeg": 287.87864548657,
+    "centerDecDeg": 16.860611371739996,
+    "distancePc": 6400
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 201.873,
+    "thicknessKpc": 0.00000206,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.0019951,
+    "supportTaperFraction": 0.9,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "densityGrid": {
+      "source": "publication-zavala-2022-m1-67-shape-model",
+      "basis": "Zavala et al. (2022) fit long-slit spectra of the nebula at 15 slit positions with a model built in the SHAPE software: three nested structures, each a pair of hollow lobes along one symmetry axis and a torus about it, the axis in the plane of the sky at position angle -40° (Sect. 4). Table 2 prints each body's sizes in arcseconds and its speed, in proportion to distance from the star. The paper says each pair of lobes is an ellipsoid \"squished at the waist\" and prints a squish parameter without its formula; the lobes' outline is read here from the paper's own drawing of the model, Figure 3 (packages/bake/authoring/m1-67/lobe-outline.mts): two rounded lobes whose middles lie 0.409 of the semi-major axis from the star and that are 1.294 times the semi-minor axis wide for the middle structure, 0.354 and 1.100 for the outer one; the inner structure's lobes cannot be told from its torus in the drawing and take the middle structure's proportions, whose squish is nearly the same (0.55 and 0.56). packages/bake/authoring/m1-67/shell-grid.mts writes where those bodies have gas on a cube of 101 cells of 1.5 arcsec, every body's wall with the same density, the bodies' faces softened by a Gaussian of 4 arcsec so that the walls have no step where one body ends: both are choices made here, not the paper's. The cube's second axis is the symmetry axis, at position angle 320°; the model is the same in front of the star and behind it, so which end of the first axis is toward the Sun changes nothing. The paper's two jets, its blowouts and the outer structure's deformation towards the south-west are described in words only and are left out. The star's own light ends 5.7 arcsec from it in this picture (packages/bake/authoring/m1-67/star-light.mts): all of it within half that, and less and less out to it, stays at the star. The smooth light is read over 16 face pixels, a presentation value.",
+      "path": "shell-grid.dat",
+      "cells": 101,
+      "cellArcsec": 1.5,
+      "toward": "high",
+      "secondAxisPaDeg": 320,
+      "thirdAxisPaDeg": 50,
+      "smoothPixels": 16,
+      "starRadiusArcsec": 2.85
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1500,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 56,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 56
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

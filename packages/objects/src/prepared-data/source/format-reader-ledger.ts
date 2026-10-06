@@ -66,5 +66,5 @@ export const FORMAT_READER_POLICIES: readonly FormatReaderPolicy[] = [
   { schema: SYSTEM_TEXT_SCHEMA, readers: ['readSystemText'], paths: ['navigation/system-text.json'] },
   { schema: OBJECT_TEXT_SCHEMA, readers: ['parseObjectText'], paths: ['text.json'] },
   { schema: PREPARED_TEXT_SCHEMA, readers: ['parsePreparedText'], paths: ['prepared/text.json'] },
-  { schema: PREPARED_EXPLORATION_SCHEMA, readers: ['parsePreparedExploration'], paths: ['site/prepared-facilities.json'] },
+  { schema: PREPARED_EXPLORATION_SCHEMA, readers: ['parsePreparedExploration'], paths: ['site/prepared/prepared-facilities.json'] },
 ];

@@ -45,7 +45,7 @@ export function preparedJsonImports(file: string, source: string, root: string):
 /** Generated modules that import prepared JSON found by rule, so that no authored file names its object: the application's
  * context objects import the galaxy catalogue's display sample (site/build/prepare/prepare-catalog.mts contextObjectModule).
  * The preparation build writes them before this scan; git ignores them, so the listing below does not find them. */
-const GENERATED_IMPORTERS = ['site/prepared-context-objects.mts'];
+const GENERATED_IMPORTERS = ['site/prepared/prepared-context-objects.mts'];
 
 /** Scan maintained source, including test imports. Generated declarations are not an alternate data contract.
  * All authored TypeScript/Astro is a conservative superset of the application and test compiler programs, so a

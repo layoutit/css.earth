@@ -130,7 +130,7 @@ renderer enforces. Every other bank is a bake input written to the ignored `outp
 inventoried, never published, and never imported as a module (`packages/bake/src/volume/node/catalogue-banks.ts`). Vite
 serves an imported JSON file as an array literal, which Safari cannot compile past about a hundred thousand elements, and
 the site's build reads only `datasets` and `presentation` from a context object's `prepared/`, plus its source manifest
-(`site/prepared-context-json.mts`).
+(`site/prepared/prepared-context-json.mts`).
 
 Presentation compilers import `PREPARED_PRESENTATION_SCHEMA`, prepared material/selection records and the
 leaf-box data shape from `@cssearth/objects`. The sky/Sun-dependent presentation-envelope validator remains in bake.

@@ -33,7 +33,7 @@ const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..
 export const explorationCompilerClosure = [
   'site/build/prepare/prepare-facilities.mts', 'packages/bake/src/sources/spatial-source-citations.ts', 'packages/catalog/src/spatial.ts', 'packages/objects/src/prepared-data/catalogue/galaxy-catalog.ts', 'packages/objects/src/prepared-data/catalogue/spatial-relations.ts', 'packages/objects/src/prepared-data/catalogue/cluster-catalog.ts', 'packages/objects/src/provenance/exploration-catalog.ts', 'packages/objects/src/provenance/exploration-contributions.ts',
   'packages/objects/src/provenance/prepared-exploration.ts', 'packages/objects/src/provenance/object-lineage.ts', 'packages/objects/src/provenance/product-input-evidence.ts', 'packages/objects/src/node/prepared-registry.ts', 'packages/objects/src/registry/object-schema.ts',
-  'packages/objects/src/registry/object-catalog.ts', 'site/prepared-catalogue.mjs', 'site/build/prepare/prepare-catalog.mts', 'packages/objects/src/node/catalog-directory.ts',
+  'packages/objects/src/registry/object-catalog.ts', 'site/prepared/prepared-catalogue.mjs', 'site/build/prepare/prepare-catalog.mts', 'packages/objects/src/node/catalog-directory.ts',
   'packages/objects/src/registry/navigable-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'packages/bake/src/navigation/navigation-destinations.ts',
   'packages/objects/src/registry/object-zoom.ts', 'packages/objects/src/registry/object-tree.ts',
   'site/source/facilities/catalog.json', 'site/source/facilities/render-library.json', 'site/source/facilities/emblem-library.json',
@@ -195,10 +195,10 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   const payload = { schema: PREPARED_EXPLORATION_SCHEMA, catalog, agencies, images, emblems,
     graph: compileContributions(objects, catalog, DATASET_ROUTES) };
   const prepared = parsePreparedExploration(payload,sources,DATASET_ROUTES);
-  const output = { path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(payload, null, 2) + '\n' };
-  const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
+  const output = { path: resolve(root, 'site/prepared/prepared-facilities.json'), text: JSON.stringify(payload, null, 2) + '\n' };
+  const sourcesOutput = {path:resolve(root,'site/prepared/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
   // What the pages read of it: each object's provider index (@cssearth/objects/provenance).
-  const creditsOutput = {path:resolve(root,'site/prepared-source-credits.json'),text:JSON.stringify(sourceCredits(preparedSources.usage,preparedSources.sources))+'\n'};
+  const creditsOutput = {path:resolve(root,'site/prepared/prepared-source-credits.json'),text:JSON.stringify(sourceCredits(preparedSources.usage,preparedSources.sources))+'\n'};
   const catalogueOutputs = [sourcesOutput,creditsOutput,output];
   const outputs = [...volumes.flatMap(volume => volume.outputs),...catalogueOutputs];
   if (publish) await writePreparedSet(publish === 'catalogues' ? catalogueOutputs : outputs);
