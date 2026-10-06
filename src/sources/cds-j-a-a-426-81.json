@@ -1,0 +1,46 @@
+{
+  "id": "cds-j-a-a-426-81",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Kinematic analysis of the Minispiral (Paumard+, 2004): the Northern Arm model's maps",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "J/A+A/426/81"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/426/81",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/426/81/fig7b.fit",
+      "label": "fig7b.fit, 80,256 bytes"
+    },
+    {
+      "role": "original",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/426/81/fig7berr.fit",
+      "label": "fig7berr.fit, 80,256 bytes"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/426/81/ReadMe",
+      "checkedOn": "2026-10-05",
+      "locator": "ReadMe, fig7b.fit: the line-of-sight distance from the plane that holds the central mass (Sgr A*), in equivalent milliarcseconds on the sky, positive where the structure is farther from the observer than the central mass. The model fixes a mass of 3 million Suns and a distance of 8 kpc; the pixel is 0.353 arcsec and Sgr A* is at pixel (59.2538, 38.9849), counted from 0 at the lower left."
+    }
+  ],
+  "publisher": "CDS, Strasbourg",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Paumard, Maillard & Morris (2004), A&A 426, 81; CDS catalogue J/A+A/426/81",
+      "scope": "citation",
+      "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/426/81"
+    }
+  ]
+}

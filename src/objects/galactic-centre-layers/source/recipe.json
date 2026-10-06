@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "galactic-centre-layers",
+  "source": {
+    "path": "paschen-alpha.png",
+    "dimensions": [
+      1101,
+      1101
+    ],
+    "originalDimensions": [
+      1101,
+      1101
+    ],
+    "publisherUrl": "https://archive.stsci.edu/prepds/hpsgc/",
+    "downloadUrl": "https://archive.stsci.edu/pub/hlsp/hpsgc/hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits",
+    "credit": "NASA, ESA, Q. D. Wang (University of Massachusetts, Amherst) and the HST/NICMOS Paschen-α Survey of the Galactic Centre (Wang et al. 2010; Dong et al. 2011), from MAST",
+    "license": "NASA-MAST"
+  },
+  "observation": {
+    "centerRaDeg": 266.4167899,
+    "centerDecDeg": -29.0078664,
+    "fieldOfViewDeg": [
+      0.03058333,
+      0.03058333
+    ],
+    "northClockwiseDeg": 0
+  },
+  "target": {
+    "centerRaDeg": 266.4167899,
+    "centerDecDeg": -29.0078664,
+    "distancePc": 8277
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 0,
+    "thicknessKpc": 0.000001,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.0020064,
+    "supportTaperFraction": 0.9,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "streams": {
+      "source": "publication-zhao-2009-sgr-a-west-streams",
+      "basis": "Zhao, Morris, Goss & An (2009) measured the motion of the ionized gas with the Very Large Array: across the sky from compact radio features over years of images, along the sight line from the H92α line. Each of the three streams fits one Keplerian orbit about Sgr A*; Table 5 prints the orbits (distance 8 kpc, mass 4.2 million Suns). The paper draws each stream as a bundle of such orbits, the semi-major axis spread by ±0.25 of its value to roughly match the stream's width, over a range of true anomaly: 192° to 460°, 195° to 430° and 130° to 420°. Each semi-major axis here is the table's value in thousands of astronomical units at its 8 kpc, an angle on the sky: 205 kau, 25.625 arcsec; 289 kau, 36.125 arcsec; 236 kau, 29.500 arcsec. The Western Arc's printed parsecs (1.11) do not match its printed 236 kau (1.144 pc); the paper's own 17 places on that stream (Table 3) lie 0.35 arcsec from the orbit with 236 kau and 0.77 arcsec with 1.11 pc, root mean square, so the kau value is used. The Western Arc is ended at a true anomaly of 302°, just past its last measured place (W17 of Table 3, at 301°): the paper's calculation runs on to 420°, through the Northern Arm. Checked against the paper's own measurements with packages/bake/src/image-layers/streams.test.ts: the orbits pass the 51 places of Table 3 within 0.19, 0.61, 0.35 arcsec and give their radial velocities within 36, 40, 21 km/s (Northern Arm, Eastern Arm, Western Arc; root mean square).",
+      "dispersion": 0.25,
+      "streams": [
+        {
+          "id": "northern-arm",
+          "semiMajorArcsec": 25.625,
+          "eccentricity": 0.83,
+          "ascendingNodeDeg": 64,
+          "argumentOfPerifocusDeg": 132,
+          "inclinationDeg": 139,
+          "trueAnomalyDeg": [
+            192,
+            460
+          ],
+          "surface": {
+            "source": "publication-paumard-2004-minispiral",
+            "basis": "Paumard, Maillard & Morris (2004) fit a system of Keplerian orbits to the Northern Arm's radial velocities over a field of about 40 arcsec and found that the arm is not only the bright narrow lane of the pictures: it is a faint, continuous, triangular surface whose western rim is bright. Their model's line-of-sight distance at each 0.353 arcsec cell is at the CDS (J/A+A/426/81, fig7b.fit). packages/bake/authoring/galactic-centre/northern-arm-surface.mts keeps the continuous sheet of that map that holds the wedge east of the rim (2,959 cells, 369 square arcsec); the model's orbits cross the field a second time and those cells are left out. The sheet says where the arm is; its depth here is the plane of Zhao et al.'s orbit, which the map's own depths differ from by 3.3 arcsec at the median (90% under 12.8, 7 root mean square), against the map's own error of 4 arcsec.",
+            "path": "northern-arm-surface.png",
+            "cellArcsec": 0.353,
+            "centreCell": [
+              59.2538,
+              53.0151
+            ]
+          }
+        },
+        {
+          "id": "eastern-arm",
+          "semiMajorArcsec": 36.125,
+          "eccentricity": 0.82,
+          "ascendingNodeDeg": -42,
+          "argumentOfPerifocusDeg": -280,
+          "inclinationDeg": 122,
+          "trueAnomalyDeg": [
+            195,
+            430
+          ]
+        },
+        {
+          "id": "western-arc",
+          "semiMajorArcsec": 29.5,
+          "eccentricity": 0.2,
+          "ascendingNodeDeg": 71,
+          "argumentOfPerifocusDeg": 22,
+          "inclinationDeg": 117,
+          "trueAnomalyDeg": [
+            130,
+            302
+          ]
+        }
+      ]
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1101,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.02,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

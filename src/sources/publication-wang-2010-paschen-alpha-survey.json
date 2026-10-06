@@ -1,0 +1,45 @@
+{
+  "id": "publication-wang-2010-paschen-alpha-survey",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "HST/NICMOS Paschen-α Survey of the Galactic Centre: Overview",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0911.2226"
+    },
+    {
+      "type": "doi",
+      "value": "10.1111/j.1365-2966.2009.15973.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0911.2226",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0911.2226",
+      "checkedOn": "2026-10-05",
+      "locator": "Abstract: 144 Hubble orbits, two narrow-band filters at 1.87 and 1.90 µm in NICMOS Camera 3; mosaic maps of the Paschen-α line and continuum emission."
+    }
+  ],
+  "creators": [
+    "Wang, Q. D.",
+    "Dong, H.",
+    "Cotera, A.",
+    "Stolovy, S.",
+    "Morris, M.",
+    "Lang, C. C.",
+    "Muno, M. P.",
+    "Schneider, G.",
+    "Calzetti, D."
+  ],
+  "publisher": "MNRAS 402, 895",
+  "publicationDate": "2010",
+  "relations": [],
+  "statements": []
+}

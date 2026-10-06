@@ -1,0 +1,46 @@
+{
+  "id": "publication-dong-2011-paschen-alpha-products",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hubble Space Telescope Paschen α survey of the Galactic Centre: data reduction and products",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1105.1703"
+    },
+    {
+      "type": "doi",
+      "value": "10.1111/j.1365-2966.2011.19013.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1105.1703",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1105.1703",
+      "checkedOn": "2026-10-05",
+      "locator": "Abstract: programme 11120; the central 2253 pc² (416 arcmin²) in the 1.87 and 1.90 µm narrow bands; the final mosaic's pixel is 0.1 arcsec and its resolution 0.2 arcsec."
+    }
+  ],
+  "creators": [
+    "Dong, H.",
+    "Wang, Q. D.",
+    "Cotera, A.",
+    "Stolovy, S.",
+    "Morris, M. R.",
+    "Mauerhan, J.",
+    "Mills, E. A.",
+    "Schneider, G.",
+    "Calzetti, D.",
+    "Lang, C."
+  ],
+  "publisher": "MNRAS 417, 114",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": []
+}

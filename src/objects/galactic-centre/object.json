@@ -1,0 +1,100 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "galactic-centre",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Galactic Centre",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 61911078789194.99
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Galactic Centre",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 1707253801,
+      "description": "The Galactic Centre is the middle of the Milky Way, 8,277 parsecs away: gas and stars orbiting a black hole.",
+      "aliases": [
+        "Galactic Center",
+        "Sagittarius A West",
+        "Sgr A West",
+        "Minispiral",
+        "Mini-spiral"
+      ],
+      "order": 5394,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -13959703919334214000,
+        -222925557062698830000,
+        -123851787125810970000
+      ],
+      "presentationToReference": [
+        -0.054920708535000765,
+        0,
+        -0.998490718922321,
+        -0.9160973237537909,
+        0.3977771559319137,
+        0.05038876491699302,
+        -0.3971767983973328,
+        -0.9174820620691818,
+        0.02184620324281818
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 199713157384499.97,
+      "bodyRadiusM": 61911078789194990
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
