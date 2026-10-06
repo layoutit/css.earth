@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/b-aquilae.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.233, rounded to two decimals",
   "spectralType": "G7IVHdel1",
   "spectralTypeSource": "SIMBAD, * b Aql: spectral type G7IVHdel1 (1989ApJS...71..245K)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * b Aql: main object type PM*, High Proper Motion Star",
   "rotationPeriodsCatalogued": [
     {
       "days": 32,

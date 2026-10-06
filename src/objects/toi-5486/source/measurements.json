@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5486.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.717, rounded to two decimals",
   "spectralType": "M2.5",
   "spectralTypeSource": "SIMBAD, TOI-5486: spectral type M2.5 (2024A&A...690A..62P)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, TOI-5486: main object type PM*, High Proper Motion Star",
   "luminosityLogSolar": -1.308,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5486 (pscomppars): log10 of the luminosity in solar units -1.30844, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {

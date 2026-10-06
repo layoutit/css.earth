@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 2710472 (Gold): Asteroseismic log g 2.5652 +/- 0.0041 (https://arxiv.org/abs/2410.00102)",
   "spectralType": "K0III-IV",
   "spectralTypeSource": "SIMBAD, TYC 3134-1502-1: spectral type K0III-IV (2016A&A...594A..39F)",
+  "objectType": "Red Giant Branch star",
+  "objectTypePath": "* > Ev* > RG*",
+  "objectTypeSource": "SIMBAD, TYC 3134-1502-1: main object type RG*, Red Giant Branch star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

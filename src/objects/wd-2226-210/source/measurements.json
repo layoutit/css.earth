@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2: log g from a fit of the star's spectrum (https://arxiv.org/abs/astro-ph/9908181)",
   "spectralType": "DAO.5",
   "spectralTypeSource": "SIMBAD, NGC 7293: spectral type DAO.5 (2011ApJ...743..138G)",
+  "objectType": "Planetary Nebula",
+  "objectTypePath": "* > Ev* > PN",
+  "objectTypeSource": "SIMBAD, NGC 7293: main object type PN, Planetary Nebula",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

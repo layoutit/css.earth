@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/achernar.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.379, rounded to two decimals",
   "spectralType": "B6Vpe",
   "spectralTypeSource": "SIMBAD, * alf Eri: spectral type B6Vpe (2006MNRAS.371..252L)",
+  "objectType": "Be Star",
+  "objectTypePath": "* > MS* > Be*",
+  "objectTypeSource": "SIMBAD, * alf Eri: main object type Be*, Be Star",
   "projectedRotationSpeedKmS": 235,
   "projectedRotationSpeedSource": "SIMBAD, * alf Eri: projected rotation speed 235 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

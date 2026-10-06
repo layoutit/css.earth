@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 41075: effective temperature 3900 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.165) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "K4+III",
   "spectralTypeSource": "SIMBAD, * 31 Lyn: spectral type K4+III (1989ApJS...71..245K)",
+  "objectType": "Long-Period Variable",
+  "objectTypePath": "* > Ev* > LP*",
+  "objectTypeSource": "SIMBAD, * 31 Lyn: main object type LP*, Long-Period Variable",
   "projectedRotationSpeedKmS": 19,
   "projectedRotationSpeedSource": "SIMBAD, * 31 Lyn: projected rotation speed 19 km/s, the measurement SIMBAD prefers (1970CoKwa.189....0U)",
   "shape": {

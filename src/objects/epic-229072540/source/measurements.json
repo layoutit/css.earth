@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-229072540.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.193, rounded to two decimals",
   "spectralType": "F9",
   "spectralTypeSource": "SIMBAD, 2MASS J12393014+0005146: spectral type F9 (2020ApJS..249....3A)",
+  "objectType": "Red Giant Branch star",
+  "objectTypePath": "* > Ev* > RG*",
+  "objectTypeSource": "SIMBAD, 2MASS J12393014+0005146: main object type RG*, Red Giant Branch star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

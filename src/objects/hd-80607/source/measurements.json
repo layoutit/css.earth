@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-80607.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.411, rounded to two decimals",
   "spectralType": "G5",
   "spectralTypeSource": "SIMBAD, HD 80607: spectral type G5 (1998A&AS..129..237F)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, HD 80607: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "SIMBAD, HD 80607: projected rotation speed 2 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

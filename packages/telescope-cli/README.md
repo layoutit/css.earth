@@ -79,6 +79,23 @@ program needs three blocks a person fills from catalogues and papers, each value
 degree). `reduce.mts` writes a receipt, the map as a table and a picture under ignored `output/espadons/`; git holds the program, not the result.
 `telescope new-object --from-spectra STAR --out SPEC.json` then drafts the star's reduced maps as datasets of its page.
 
+### A star's rotation and brightness map from TESS pixels
+
+Every star TESS imaged has its light in the mission's full-frame images, whether or not the mission made a light curve for
+it. The tools of `src/archives/tess/` measure that light from the pixels with lightkurve, find the period it turns in, and
+have starry fit the brightness map that reproduces the light curve.
+[A star's rotation and brightness map from TESS pixels](../../docs/stellar-brightness-maps-from-tess.md) describes each step,
+the rule that believes a rotation with its measurement on our own stars, and what a light curve cannot fix.
+
+```sh
+node packages/telescope-cli/src/archives/tess/toolchain.mts install
+node packages/telescope-cli/src/archives/tess/reduce.mts au-mic      # or --all: every star without a receipt
+```
+
+`reduce.mts` asks Gaia whose light the star's pixels hold, fetches one sector's pixels, and writes a receipt, the light curve
+and, when the rotation is seen, the map as a table under ignored `output/tess/`.
+`telescope new-object --from-pixels all --out SPEC.json` then drafts every reduced star's map as a dataset of its page.
+
 ## Supported v1 boundary
 
 | Current artifact | Supported next operation | Additional input |

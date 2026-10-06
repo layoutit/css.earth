@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5902477 (Gold): Asteroseismic log g 2.7316 +/- 0.0041 (https://arxiv.org/abs/2410.00102)",
   "spectralType": "G6V",
   "spectralTypeSource": "SIMBAD, TYC 3141-618-1: spectral type G6V (2016A&A...594A..39F)",
+  "objectType": "Horizontal Branch Star",
+  "objectTypePath": "* > Ev* > HB*",
+  "objectTypeSource": "SIMBAD, TYC 3141-618-1: main object type HB*, Horizontal Branch Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

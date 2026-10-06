@@ -11,10 +11,16 @@
   "effectiveTemperatureSource": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ek-draconis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.470, rounded to two decimals",
+  "rotationPeriodMeasuredDays": 2.71,
+  "rotationPeriodMeasuredSource": "Measured in this project from the star's light in the TESS full-frame images of sector 50 (packages/telescope-cli/src/archives/tess/reduce.mts): 2.71 d, the light swinging by 2.3% as the star turns",
+  "rotationLightSwingPercent": 2.31,
   "spectralType": "G5VFe-0.7CH-1(k)",
   "spectralTypeSource": "SIMBAD, V* EK Dra: spectral type G5VFe-0.7CH-1(k) (2003AJ....126.2048G)",
+  "objectType": "BY Dra Variable",
+  "objectTypePath": "* > ** > BY*",
+  "objectTypeSource": "SIMBAD, V* EK Dra: main object type BY*, BY Dra Variable",
   "rotationPeriodDays": 2.64,
-  "rotationPeriodSource": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 2.64 d, the row 0.0 arcsec from the star's J2000 place. The middle of 13 catalogued periods, 11 of them within 20% of it",
+  "rotationPeriodSource": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 2.64 d, the row 0.0 arcsec from the star's J2000 place. The middle of 14 periods, catalogued and measured here, 12 of them within 20% of it",
   "rotationPeriodsCatalogued": [
     {
       "days": 2.6,

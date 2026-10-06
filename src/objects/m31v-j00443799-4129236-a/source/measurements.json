@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Primary Teff 33900 +/- 500 K, Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045)",
   "surfaceGravityLogg": 3.57,
   "surfaceGravitySource": "Primary log g 3.57 +/- 0.03 (cgs), Ribas et al. (2005), ApJ 635, L37, Table 2 (https://arxiv.org/abs/astro-ph/0511045)",
+  "objectType": "Eclipsing Binary",
+  "objectTypePath": "* > ** > EB*",
+  "objectTypeSource": "SIMBAD, LGGS J004438.01+412923.9: main object type EB*, Eclipsing Binary",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

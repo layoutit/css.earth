@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g 1.6 from 2023A&A...678A.195D, the median of its 3 spectra; the 7 published values span log g 1.5 to 2.5, across which the limb law changes by at most 0.7% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.195D)",
   "spectralType": "G0",
   "spectralTypeSource": "SIMBAD, V* ST Tau: spectral type G0 (1993yCat.3135....0C)",
+  "objectType": "Classical Cepheid Variable",
+  "objectTypePath": "* > Ev* > Ce* > cC*",
+  "objectTypeSource": "SIMBAD, V* ST Tau: main object type cC*, Classical Cepheid Variable",
   "luminosityLogSolar": 3.204,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3346584610911570176, flags_flame 10: lum_flame 1597.888 solar luminosities (16th to 84th percentiles 1496.4357 to 1715.418); its log10 is recorded",
   "shape": {

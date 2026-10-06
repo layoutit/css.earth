@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 65109: effective temperature 9191 +/- 421 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.034) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "kA1.5hA3mA3Va",
   "spectralTypeSource": "SIMBAD, * iot Cen: spectral type kA1.5hA3mA3Va (2006AJ....132..161G)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * iot Cen: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 85,
   "projectedRotationSpeedSource": "SIMBAD, * iot Cen: projected rotation speed 85 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

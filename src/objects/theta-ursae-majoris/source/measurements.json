@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/theta-ursae-majoris.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.868, rounded to two decimals",
   "spectralType": "F7V",
   "spectralTypeSource": "SIMBAD, * tet UMa: spectral type F7V (2009ApJS..180..117A)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * tet UMa: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 8.77,
   "projectedRotationSpeedSource": "SIMBAD, * tet UMa: projected rotation speed 8.77 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {

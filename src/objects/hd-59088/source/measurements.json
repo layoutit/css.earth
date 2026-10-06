@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004) (https://arxiv.org/abs/1204.1200)",
   "spectralType": "O6f",
   "spectralTypeSource": "SIMBAD, NGC 2392: spectral type O6f (1977ApJ...215..609H)",
+  "objectType": "Planetary Nebula",
+  "objectTypePath": "* > Ev* > PN",
+  "objectTypeSource": "SIMBAD, NGC 2392: main object type PN, Planetary Nebula",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

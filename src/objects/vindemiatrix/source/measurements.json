@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/vindemiatrix.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.752, rounded to two decimals",
   "spectralType": "G8III-IIIb",
   "spectralTypeSource": "SIMBAD, * eps Vir: spectral type G8III-IIIb (1989ApJS...71..245K)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * eps Vir: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 137,
   "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 137 d, the row 0.0 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

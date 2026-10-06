@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 206129788: APOGEE DR17 effective temperature 4689.5586 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.05,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-206129788.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.051, rounded to two decimals",
+  "objectType": "Red Giant Branch star",
+  "objectTypePath": "* > Ev* > RG*",
+  "objectTypeSource": "SIMBAD, UCAC4 394-126827: main object type RG*, Red Giant Branch star",
   "luminosityLogSolar": 2.013,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2613169089136874240, flags_flame 10: lum_flame 102.998245 solar luminosities (16th to 84th percentiles 89.49029 to 119.24599); its log10 is recorded",
   "shape": {

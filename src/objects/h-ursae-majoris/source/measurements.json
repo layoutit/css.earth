@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/h-ursae-majoris.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.774, rounded to two decimals",
   "spectralType": "F0V",
   "spectralTypeSource": "SIMBAD, * h UMa: spectral type F0V (1995ApJS...99..135A)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * h UMa: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 155.3,
   "projectedRotationSpeedSource": "SIMBAD, * h UMa: projected rotation speed 155.3 km/s, the measurement SIMBAD prefers (2009A&A...493.1099S)",
   "shape": {

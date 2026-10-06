@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/alpha-lacertae.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.120, rounded to two decimals",
   "spectralType": "A1V",
   "spectralTypeSource": "SIMBAD, * alf Lac: spectral type A1V",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * alf Lac: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 128,
   "projectedRotationSpeedSource": "SIMBAD, * alf Lac: projected rotation speed 128 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {

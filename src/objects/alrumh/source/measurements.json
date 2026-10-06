@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 71995: effective temperature 3659 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.133) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "M3-III",
   "spectralTypeSource": "SIMBAD, * 34 Boo: spectral type M3-III (1989ApJS...71..245K)",
+  "objectType": "Long-Period Variable",
+  "objectTypePath": "* > Ev* > LP*",
+  "objectTypeSource": "SIMBAD, * 34 Boo: main object type LP*, Long-Period Variable",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

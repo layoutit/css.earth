@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/lp-544-12.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.212, rounded to two decimals",
   "spectralType": "M6V",
   "spectralTypeSource": "SIMBAD, LP 544-12: spectral type M6V (1995AJ....110.1838R)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, LP 544-12: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 24.01,
   "rotationPeriodSource": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 24.01 d, the row 0.2 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

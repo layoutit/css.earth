@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 3234655 (Gold): APOGEE effective temperature (K) 4963.778 +/- 57.2926 (https://arxiv.org/abs/2410.00102)",
   "surfaceGravityLogg": 2.5358,
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 3234655 (Gold): Asteroseismic log g 2.5358 +/- 0.0043 (https://arxiv.org/abs/2410.00102)",
+  "objectType": "Horizontal Branch Star",
+  "objectTypePath": "* > Ev* > HB*",
+  "objectTypeSource": "SIMBAD, UCAC4 642-068427: main object type HB*, Horizontal Branch Star",
   "rotationPeriodDays": 128.09,
   "rotationPeriodSource": "VizieR J/A+A/605/A111/table2 (Surface rotation of Kepler red giant stars), column Prot: 128.09 d, the row 0.1 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

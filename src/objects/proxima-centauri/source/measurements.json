@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Effective temperature 3098 ± 56 K from Demory et al. 2009 (A&A 505, 205; https://doi.org/10.1051/0004-6361/200911976), Table 4, GJ 551, derived Teff: the VLTI/AMBER diameter with surface-brightness relations.",
   "spectralType": "M5.5Ve",
   "spectralTypeSource": "SIMBAD, NAME Proxima Centauri: spectral type M5.5Ve (1991AJ....101..662B)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, NAME Proxima Centauri: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 83.5,
   "rotationPeriodSource": "VizieR J/A+A/638/A20/tableb1 (M dwarfs X-ray activity and rotation relations), column Prot: 83.5 d, the row 0.0 arcsec from the star's J2000 place. The middle of 15 catalogued periods, 11 of them within 20% of it",
   "rotationPeriodsCatalogued": [

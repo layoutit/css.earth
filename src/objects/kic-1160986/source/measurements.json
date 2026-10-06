@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 1160986 (Gold): APOGEE effective temperature (K) 4316.977 +/- 42.5267 (https://arxiv.org/abs/2410.00102)",
   "surfaceGravityLogg": 1.8445,
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 1160986 (Gold): Asteroseismic log g 1.8445 +/- 0.004 (https://arxiv.org/abs/2410.00102)",
+  "objectType": "Red Giant Branch star",
+  "objectTypePath": "* > Ev* > RG*",
+  "objectTypeSource": "SIMBAD, UCAC4 635-069256: main object type RG*, Red Giant Branch star",
   "luminosityLogSolar": 2.23,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2050249922052366720, flags_flame 10: lum_flame 169.99088 solar luminosities (16th to 84th percentiles 152.04672 to 185.6447); its log10 is recorded",
   "shape": {

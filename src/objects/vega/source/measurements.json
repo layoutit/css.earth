@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the model mass 2.15 (+0.10/-0.15) solar masses of Monnier et al. 2012 (ApJL 761, L3; https://arxiv.org/abs/1211.6055), abstract and Table 2, and the package radius, log10(GM/R^2) in cgs; a mean over the gravity-darkened surface",
   "spectralType": "A0V",
   "spectralTypeSource": "SIMBAD, * alf Lyr: spectral type A0V (2024A&A...690A.176N)",
+  "objectType": "delta Sct Variable",
+  "objectTypePath": "* > MS* > dS*",
+  "objectTypeSource": "SIMBAD, * alf Lyr: main object type dS*, delta Sct Variable",
   "projectedRotationSpeedKmS": 24,
   "projectedRotationSpeedSource": "SIMBAD, * alf Lyr: projected rotation speed 24 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {

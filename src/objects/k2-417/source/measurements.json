@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-417.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.670, rounded to two decimals",
   "spectralType": "M V",
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of K2-417 (pscomppars): spectral type M V, from Incha et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, G 273-20: main object type PM*, High Proper Motion Star",
   "luminosityLogSolar": -1.202,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-417 (pscomppars): log10 of the luminosity in solar units -1.20204, from Incha et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.523..474I/abstract)",
   "shape": {

@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 11802109 (Gold): APOGEE effective temperature (K) 4776.2583 +/- 44.9868 (https://arxiv.org/abs/2410.00102)",
   "surfaceGravityLogg": 2.3737,
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 11802109 (Gold): Asteroseismic log g 2.3737 +/- 0.0038 (https://arxiv.org/abs/2410.00102)",
+  "objectType": "Horizontal Branch Star",
+  "objectTypePath": "* > Ev* > HB*",
+  "objectTypeSource": "SIMBAD, UCAC4 701-064488: main object type HB*, Horizontal Branch Star",
   "luminosityLogSolar": 1.77,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2132333550298538496, flags_flame 10: lum_flame 58.91163 solar luminosities (16th to 84th percentiles 57.13627 to 60.84544); its log10 is recorded",
   "shape": {

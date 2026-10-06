@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g 0.89 from 2024A&A...690A.246T, the median of its 2 spectra; the 9 published values span log g 0.79 to 1.9, across which the limb law changes by at most 1.0% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2024A%26A...690A.246T)",
   "spectralType": "G2Ib",
   "spectralTypeSource": "SIMBAD, V* YZ Sgr: spectral type G2Ib (1988MSS...C04....0H)",
+  "objectType": "Classical Cepheid Variable",
+  "objectTypePath": "* > Ev* > Ce* > cC*",
+  "objectTypeSource": "SIMBAD, V* YZ Sgr: main object type cC*, Classical Cepheid Variable",
   "luminosityLogSolar": 3.329,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4099189015819292800, flags_flame 00: lum_flame 2134.5393 solar luminosities (16th to 84th percentiles 2025.9689 to 2244.03); its log10 is recorded",
   "shape": {

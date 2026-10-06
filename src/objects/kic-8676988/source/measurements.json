@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 8676988 (Gold): APOGEE effective temperature (K) 4768.3677 +/- 45.9926 (https://arxiv.org/abs/2410.00102)",
   "surfaceGravityLogg": 2.4927,
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 8676988 (Gold): Asteroseismic log g 2.4927 +/- 0.0038 (https://arxiv.org/abs/2410.00102)",
+  "objectType": "Horizontal Branch Star",
+  "objectTypePath": "* > Ev* > HB*",
+  "objectTypeSource": "SIMBAD, 2MASS J19050455+4450492: main object type HB*, Horizontal Branch Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

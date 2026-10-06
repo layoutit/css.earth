@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the dynamical mass 2.20 ± 0.06 solar masses of Gardner et al. 2021 (https://doi.org/10.3847/1538-4357/ac1172) and the volume-equivalent radius, log10(GM/R^2) in cgs",
   "spectralType": "A5IVnn",
   "spectralTypeSource": "SIMBAD, * alf Oph: spectral type A5IVnn (2001AJ....121.2148G)",
+  "objectType": "Double or Multiple Star",
+  "objectTypePath": "* > **",
+  "objectTypeSource": "SIMBAD, * alf Oph: main object type **, Double or Multiple Star",
   "projectedRotationSpeedKmS": 214,
   "projectedRotationSpeedSource": "SIMBAD, * alf Oph: projected rotation speed 214 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

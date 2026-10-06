@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Mistry et al. 2023, the stellar temperature of the default parameter set of TOI-5803 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....166....9M/abstract)",
   "surfaceGravityLogg": 4.61,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5803.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.613, rounded to two decimals",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, TYC 556-982-1: main object type PM*, High Proper Motion Star",
   "luminosityLogSolar": -0.439,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5803 (pscomppars): log10 of the luminosity in solar units -0.43899, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {

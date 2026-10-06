@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 94005: effective temperature 4675 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.051) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "K1III",
   "spectralTypeSource": "SIMBAD, * del CrA: spectral type K1III (1978MSS...C02....0H)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * del CrA: main object type PM*, High Proper Motion Star",
   "luminosityLogSolar": 1.757,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6717240825593666304, flags_flame 10: lum_flame 57.168125 solar luminosities (16th to 84th percentiles 55.80923 to 58.68192); its log10 is recorded",
   "shape": {

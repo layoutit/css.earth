@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the astronomy record's GM and radius (physicalNotes), log10(GM/R^2) in cgs",
   "spectralType": "F8Ib",
   "spectralTypeSource": "SIMBAD, * alf UMi: spectral type F8Ib (1993ASPC...45...59L)",
+  "objectType": "Classical Cepheid Variable",
+  "objectTypePath": "* > Ev* > Ce* > cC*",
+  "objectTypeSource": "SIMBAD, * alf UMi: main object type cC*, Classical Cepheid Variable",
   "rotationPeriodDays": 79,
   "rotationPeriodSource": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 79 d, the row 0.1 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

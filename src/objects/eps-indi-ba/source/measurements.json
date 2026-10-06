@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "1312 +/- 13 K, SM08 hybrid models, Chen et al. (2022), https://arxiv.org/abs/2205.08077",
   "spectralType": "T1V+T6V",
   "spectralTypeSource": "SIMBAD, * eps Ind B: spectral type T1V+T6V (2005AJ....129.2849B)",
+  "objectType": "Brown Dwarf",
+  "objectTypePath": "* > LM* > BD*",
+  "objectTypeSource": "SIMBAD, * eps Ind B: main object type BD*, Brown Dwarf",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a star is not a solid surface and its limb is not sharp."

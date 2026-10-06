@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gaia-dr3-473934007432818688.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.066, rounded to two decimals",
   "spectralType": "M5",
   "spectralTypeSource": "SIMBAD, 2MASS J04014299+6053457: spectral type M5 (2024AJ....168..273B)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, 2MASS J04014299+6053457: main object type PM*, High Proper Motion Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

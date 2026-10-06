@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/xi-geminorum.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.804, rounded to two decimals",
   "spectralType": "F5IV-V",
   "spectralTypeSource": "SIMBAD, * ksi Gem: spectral type F5IV-V (2003AJ....126.2048G)",
+  "objectType": "Red Giant Branch star",
+  "objectTypePath": "* > Ev* > RG*",
+  "objectTypeSource": "SIMBAD, * ksi Gem: main object type RG*, Red Giant Branch star",
   "rotationPeriodDays": 1.5,
   "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 1.5 d, the row 0.0 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g 1 from 2008AJ....135..209M; the 1 published value span log g 1 to 1, across which the limb law changes by at most 0.0% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2008AJ....135..209M)",
   "spectralType": "M0III-IIIb",
   "spectralTypeSource": "SIMBAD, * gam Eri: spectral type M0III-IIIb (1989ApJS...71..245K)",
+  "objectType": "Long-Period Variable Candidate",
+  "objectTypePath": "* > Ev* > LP*",
+  "objectTypeSource": "SIMBAD, * gam Eri: main object type LP?, Long-Period Variable Candidate",
   "projectedRotationSpeedKmS": 3.8,
   "projectedRotationSpeedSource": "SIMBAD, * gam Eri: projected rotation speed 3.8 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {

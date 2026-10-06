@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 8599017 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467)",
   "surfaceGravityLogg": 4.88,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-349013-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.882, rounded to two decimals",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, HD 349013B: main object type PM*, High Proper Motion Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

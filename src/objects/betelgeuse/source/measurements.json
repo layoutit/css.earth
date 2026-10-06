@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Effective temperature 3600 ± 25 K from Levesque & Massey 2020 (ApJL 891, L37; https://arxiv.org/abs/2002.10463), abstract and Section 3: MARCS model fits to optical spectrophotometry of 15 February 2020, during the Great Dimming. The radius source, Joyce et al. 2020, adopts this value in its Table 2.",
   "spectralType": "M1-M2Ia-Iab",
   "spectralTypeSource": "SIMBAD, * alf Ori: spectral type M1-M2Ia-Iab (1989ApJS...71..245K)",
+  "objectType": "Red Supergiant",
+  "objectTypePath": "* > Ma* > sg* > s*r",
+  "objectTypeSource": "SIMBAD, * alf Ori: main object type s*r, Red Supergiant",
   "projectedRotationSpeedKmS": 14.3,
   "projectedRotationSpeedSource": "SIMBAD, * alf Ori: projected rotation speed 14.3 km/s, the measurement SIMBAD prefers (2023ApJS..266...11B)",
   "shape": {

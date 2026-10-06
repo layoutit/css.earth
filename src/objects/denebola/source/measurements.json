@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 57632: effective temperature 8730 +/- 612 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.054) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "A3Va",
   "spectralTypeSource": "SIMBAD, * bet Leo: spectral type A3Va (2009ApJ...694.1085V)",
+  "objectType": "delta Sct Variable",
+  "objectTypePath": "* > MS* > dS*",
+  "objectTypeSource": "SIMBAD, * bet Leo: main object type dS*, delta Sct Variable",
   "projectedRotationSpeedKmS": 128,
   "projectedRotationSpeedSource": "SIMBAD, * bet Leo: projected rotation speed 128 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {

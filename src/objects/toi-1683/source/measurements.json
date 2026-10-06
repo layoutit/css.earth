@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1683.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.590, rounded to two decimals",
   "spectralType": "K0",
   "spectralTypeSource": "SIMBAD, HD 283636: spectral type K0 (1995A&AS..110..367N)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, HD 283636: main object type *, Star",
   "luminosityLogSolar": -0.787,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1683 (pscomppars): log10 of the luminosity in solar units -0.78662, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {

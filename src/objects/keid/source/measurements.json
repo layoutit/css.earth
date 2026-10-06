@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/keid.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.538, rounded to two decimals",
   "spectralType": "K0V",
   "spectralTypeSource": "SIMBAD, * omi02 Eri: spectral type K0V (1989ApJS...71..245K)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * omi02 Eri: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 37.113,
   "rotationPeriodSource": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 37.113 d, the row 0.0 arcsec from the star's J2000 place. The middle of 7 catalogued periods, 6 of them within 20% of it",
   "rotationPeriodsCatalogued": [

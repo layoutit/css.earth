@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tyc-6349-200-1.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.403, rounded to two decimals",
   "spectralType": "K7",
   "spectralTypeSource": "SIMBAD, HD 358623: spectral type K7 (2018MNRAS.475.1960F)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, HD 358623: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 3.4,
   "rotationPeriodSource": "VizieR J/A+A/591/A43/sample (Differential rotation in solar-like stars), column <P>: 3.4 d, the row 0.2 arcsec from the star's J2000 place. The middle of 4 catalogued periods, 4 of them within 20% of it",
   "rotationPeriodsCatalogued": [

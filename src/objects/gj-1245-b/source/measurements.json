@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-1245-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.225, rounded to two decimals",
   "spectralType": "M6V",
   "spectralTypeSource": "SIMBAD, G 208-45: spectral type M6V (1991ApJS...77..417K)",
+  "objectType": "Low-mass Star",
+  "objectTypePath": "* > LM*",
+  "objectTypeSource": "SIMBAD, G 208-45: main object type LM*, Low-mass Star",
   "rotationPeriodDays": 0.709,
   "rotationPeriodSource": "VizieR J/AJ/166/16/table1 (Radial velocities of 123 active stars), column Per: 0.709 d, the row 0.0 arcsec from the star's J2000 place. The middle of 9 catalogued periods, 7 of them within 20% of it",
   "rotationPeriodsCatalogued": [

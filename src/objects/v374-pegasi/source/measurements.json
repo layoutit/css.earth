@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/v374-pegasi.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.822, rounded to two decimals",
   "spectralType": "M3.5Ve",
   "spectralTypeSource": "SIMBAD, V* V374 Peg: spectral type M3.5Ve (2015AJ....149..106D)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, V* V374 Peg: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 0.45,
   "rotationPeriodSource": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 0.45 d, the row 0.0 arcsec from the star's J2000 place. The middle of 12 catalogued periods, 12 of them within 20% of it",
   "rotationPeriodsCatalogued": [

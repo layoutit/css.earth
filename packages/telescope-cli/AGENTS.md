@@ -52,7 +52,7 @@ never a published result: every sentence these modules write says it is derived 
 star whose gas, at its X-ray temperature, would not be held by its gravity is refused, not drawn.
 
 What the catalogues print of every star is `src/new-object/metadata/`: `--metadata --all | STAR_ID...` writes spectral type,
-metallicity, luminosity, age, rotation period, projected rotation speed and the tilt those give into each star's
+SIMBAD's object type with its place in SIMBAD's tree of types, metallicity, luminosity, age, rotation period, projected rotation speed and the tilt those give into each star's
 `source/measurements.json`, each beside its source. `star-metadata.mts` owns the fields and which catalogue stands before
 which; `metadata.mts` asks the NASA Exoplanet Archive once, and SIMBAD and the Gaia Archive in groups of stars. The pass never
 replaces a value the record holds from its own source, computes a tilt only for a page that draws no measured axis, and bakes
@@ -85,6 +85,28 @@ A star no paper maps takes its rotation from its own measurements record (`archi
 typed here. A run's receipt is a result: `reduce.mts` writes it under ignored `output/espadons/<program id>/` and it is never committed; the
 ledger records each run's verdict. The one choice the codes leave open, how tightly a map is fitted, is `KNEE` in `reduce.mts`, and it is settled by `benchmark.mts`
 on the published runs.
+
+A star's rotation and brightness map from its light in the TESS full-frame images are `src/archives/tess/`: `neighbours.mts`
+asks Gaia DR3 whose light the star's pixels hold and refuses a star that shares them, `pixels.mts` reads
+the star's pixels through MAST's TESScut (one request at a time, where the star was in the sector's year), `photometry.mts` has lightkurve and astropy measure the light
+curve and its period and holds the rule that believes a rotation, `map.mts` has starry fit the map, and `reduce.mts` runs a
+star, or every star with `--all`, and writes its receipt and light curve under ignored `output/tess/<star id>/`. The science is
+the pinned codes' (`toolchain.json`, and the telescope's starry toolchain); `tools.py` holds calls and nothing else. The
+rule's constants carry their measurement on our own labelled stars; change one only with that table measured again
+([method note](../../docs/stellar-brightness-maps-from-tess.md)).
+
+Every kind of surface map this repository reduces reaches a star's page through `src/new-object/maps/`: `surface-maps.mts`
+writes the records any map needs (table, manifest input, raster surface, dataset, control, text) from a `MapKind`, and
+`route.mts` reads a spec, writes each star and bakes from a `MapRoute`; `routes.mts` lists the kinds (`MAP_ROUTES`). A kind supplies only what is its own: its column,
+units, colors, sentences, how its reduction is read and the catalogue records it is bound to. `magnetic/` is the kind for
+maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a convention page takes the maps' tilt) and
+`brightness/` the kind for maps from TESS light (`--from-pixels`, a spec's `brightnessMaps`; the page's axis is never
+changed, and the measured period goes into the star's measurements record; `new-object-cli.mts --tess-light` writes the
+reduction's verdict, sector and light scatter into the record of every star it looked at, mapped or not). A kind whose maps are how the star looks
+supplies `natural`: the newest map in the star's own color, which becomes the dataset the page opens on
+(`Color + brightness`). Its contrast is stretched by a cube root (`stretched`, chosen by eye), because the measured contrast cannot be
+seen; its sentences state the stretch with the star's numbers, and say what is measured (longitudes) and what is not
+(latitudes, shapes, any color change). A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
 
 The papers API behind `telescope papers` is `src/papers.mts` and `src/papers/`. There is one search path: `findWorks`
 (`papers/works.mts`) asks OpenAlex, then arXiv when OpenAlex refuses, and the command and the star survey both call it; a

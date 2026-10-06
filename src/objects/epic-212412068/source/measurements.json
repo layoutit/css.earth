@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 212412068: APOGEE DR17 effective temperature 4896.6646 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.37,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-212412068.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.372, rounded to two decimals",
+  "objectType": "Horizontal Branch Star",
+  "objectTypePath": "* > Ev* > HB*",
+  "objectTypeSource": "SIMBAD, UCAC4 377-064864: main object type HB*, Horizontal Branch Star",
   "luminosityLogSolar": 1.699,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3608265625245454848, flags_flame 10: lum_flame 49.95386 solar luminosities (16th to 84th percentiles 46.99253 to 53.273983); its log10 is recorded",
   "shape": {

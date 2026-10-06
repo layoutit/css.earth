@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 69701: effective temperature 6201 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.025) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "F7III",
   "spectralTypeSource": "SIMBAD, * iot Vir: spectral type F7III (2001AJ....121.2148G)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * iot Vir: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 7.6,
   "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 7.6 d, the row 0.0 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-526.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.784, rounded to two decimals",
   "spectralType": "M2V",
   "spectralTypeSource": "SIMBAD, HD 119850: spectral type M2V (1989ApJS...71..245K)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, HD 119850: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 52.3,
   "rotationPeriodSource": "VizieR J/A+A/672/A37/table1 (Activity indicators in M dwarfs), column Prot: 52.3 d, the row 0.0 arcsec from the star's J2000 place. The middle of 11 catalogued periods, 9 of them within 20% of it",
   "rotationPeriodsCatalogued": [

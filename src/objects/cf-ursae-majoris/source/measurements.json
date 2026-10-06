@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g 4.72 from 2025A&A...698A..93J; the 115 published values span log g 3.77 to 5, across which the limb law changes by at most 0.6% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2025A%26A...698A..93J)",
   "spectralType": "K1V_Fe-1.5",
   "spectralTypeSource": "SIMBAD, HD 103095: spectral type K1V_Fe-1.5 (2003AJ....126.2048G)",
+  "objectType": "Chemically Peculiar Star",
+  "objectTypePath": "* > Pe*",
+  "objectTypeSource": "SIMBAD, HD 103095: main object type Pe*, Chemically Peculiar Star",
   "rotationPeriodDays": 31,
   "rotationPeriodSource": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 31 d, the row 0.0 arcsec from the star's J2000 place. The middle of 5 catalogued periods, 4 of them within 20% of it",
   "rotationPeriodsCatalogued": [

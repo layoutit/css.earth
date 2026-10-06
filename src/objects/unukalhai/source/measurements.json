@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/unukalhai.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.514, rounded to two decimals",
   "spectralType": "K2IIIbCN1",
   "spectralTypeSource": "SIMBAD, * alf Ser: spectral type K2IIIbCN1 (1989ApJS...71..245K)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * alf Ser: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 246,
   "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 246 d, the row 0.0 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [
