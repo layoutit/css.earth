@@ -3,6 +3,9 @@
   tools.py light-curve <job.json>      a star's light from its pixels in one sector (lightkurve), with the sky's own
                                        variation regressed out, and the period of what is left (astropy's Lomb-Scargle)
 
+  tools.py map <job.json>              the brightness map that reproduces a rotational light curve (starry); run with
+                                       the starry toolchain's interpreter
+
 It prints one JSON document.
 """
 import json
@@ -45,10 +48,41 @@ def light_curve(job):
             'time': [round(float(value), 5) for value in time], 'flux': [round(float(value), 6) for value in flux]}
 
 
+def brightness_map(job):
+    """starry's own inversion of a rotational light curve (Luger et al. 2019): the spherical-harmonic map, seen at the
+    star's tilt and turning with its period, that reproduces the light curve, with starry's Gaussian prior on the map."""
+    import numpy as np
+    import starry
+    starry.config.lazy = False
+    starry.config.quiet = True
+    time, flux, period = np.array(job['time']), np.array(job['flux']), job['periodDays']
+    theta = 360.0 * (time - time[0]) / period
+    star = starry.Map(ydeg=job['degree'], inc=job['inclinationDegrees'])
+    noise = float(np.std(np.diff(flux)) / np.sqrt(2))
+    star.set_data(flux, C=noise ** 2)
+    mean = np.zeros(star.Ny)
+    mean[0] = 1.0
+    width = np.full(star.Ny, job['priorWidth'])
+    width[0] = job['priorWidth'] * 10
+    star.set_prior(mu=mean, L=width)
+    solution, _ = star.solve(theta=theta)
+    star.amp = solution[0]
+    star[1:, :] = solution[1:] / solution[0]
+    model = star.flux(theta=theta)
+    longitudes, latitudes = np.array(job['longitudesDegrees']), np.array(job['latitudesDegrees'])
+    lon, lat = np.meshgrid(longitudes, latitudes)
+    values = np.array(star.intensity(lat=lat.ravel(), lon=lon.ravel())).reshape(lat.shape)
+    values = values / np.mean(values)
+    return {'starry': starry.__version__, 'noise': noise, 'residual': float(np.std(flux - model)), 'values': [[round(float(value), 5) for value in row] for row in values]}
+
+
 if __name__ == '__main__':
     if len(sys.argv) == 3 and sys.argv[1] == 'light-curve':
         with open(sys.argv[2]) as handle:
             result = light_curve(json.load(handle))
+    elif len(sys.argv) == 3 and sys.argv[1] == 'map':
+        with open(sys.argv[2]) as handle:
+            result = brightness_map(json.load(handle))
     else:
         raise SystemExit(__doc__)
     json.dump(result, sys.stdout)
