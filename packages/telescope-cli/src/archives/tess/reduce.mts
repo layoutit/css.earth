@@ -5,7 +5,7 @@
  *   node packages/telescope-cli/src/archives/tess/reduce.mts --all [--keep-pixels]
  *
  * For each star already in the tree: whose light its pixels hold (neighbours.mts); the sectors that imaged its place; its
- * pixels in the newest one (pixels.mts), cut where the star was that year; its light curve and the period of its light
+ * pixels in one of them (pixels.mts; `pickSector` says which), cut where the star was that year; its light curve and the period of its light
  * (photometry.mts); and, when the rotation is seen, the brightness map that reproduces the light curve (map.mts). One sector
  * is read for a star: the rule that accepts a rotation is settled on single sectors. A star too faint, or whose pixels hold
  * too much of other stars' light, is not fetched.
@@ -24,7 +24,7 @@ import { WORKSPACE } from '@cssearth/telescope/node';
 import { ASSUMED_TILT_DEGREES, brightnessMap, brightnessTable } from './map.mts';
 import { GAIA_EPOCH_YEAR, lightRefusal, pixelLight, type PixelLight } from './neighbours.mts';
 import { besideCatalogued, BIN_DAYS, rotationVerdict, sectorLightCurve, type RotationVerdict } from './photometry.mts';
-import { cadenceMinutes, fetchCutout, sectorsAt } from './pixels.mts';
+import { cadenceMinutes, fetchCutout, sectorsAt, type ImagedSector } from './pixels.mts';
 import { toolchainPins } from './toolchain.mts';
 
 export const ROTATION_SCHEMA = 'cssearth-tess-rotation@1';
@@ -41,6 +41,10 @@ export function placeAt(star: Pick<StarPlace, 'raDegrees' | 'decDegrees' | 'epoc
   return { raDegrees: Number((((star.raDegrees + star.motionRaDegreesPerYear * years / Math.cos(dec * Math.PI / 180)) % 360 + 360) % 360).toFixed(6)), decDegrees: Number(dec.toFixed(6)) }; }
 /** The middle of a sector as a year: sector 1 began on 25 July 2018, and a sector lasts two orbits of 13.7 days. */
 export const sectorYear = (sector: number) => 2018.56 + (sector - 0.5) * 27.4 / 365.25;
+/** The sector read for a star: the newest imaged every ten minutes (sectors 27 to 55) when there is one, else the newest of
+ * all. A ten-minute sector's pixels arrive in some 5 seconds and a 200-second sector's in 85 (60 MB for one star, measured
+ * 2026-10-06), and the rule that believes a rotation holds as well on them (photometry.mts). */
+export const pickSector = (sectors: readonly ImagedSector[]): ImagedSector | undefined => sectors.filter(one => one.sector >= 27 && one.sector <= 55).at(-1) ?? sectors.at(-1);
 /** The year the sectors that imaged a place are asked for: the middle of the mission so far. */
 const MISSION_YEAR = 2022;
 /** The angle between a pole and the line of sight to a place, degrees: the tilt a page draws. */
@@ -73,7 +77,7 @@ export async function reduceStar(id: string, keepPixels = false, light?: PixelLi
   const star = await starPlace(id); if (!star) throw new Error(`${id} is not a star with a place on the sky.`);
   const run = resolve(WORKSPACE, 'output/tess', id), pixels = resolve(run, 'pixels'), pins = await toolchainPins(); await mkdir(run, { recursive: true });
   const own = light === undefined ? (await lightOf([star])).get(id) : light ?? undefined, refusal = lightRefusal(own), tried: Record<string, unknown>[] = [], stem = (sector: number) => `${id}-s${String(sector).padStart(4, '0')}`;
-  const sectors = refusal ? [] : (await sectorsAt(...Object.values(placeAt(star, MISSION_YEAR)) as [number, number])).reverse(), newest = sectors[0];
+  const sectors = refusal ? [] : await sectorsAt(...Object.values(placeAt(star, MISSION_YEAR)) as [number, number]), newest = pickSector(sectors);
   let rotation: RotationVerdict = { detected: false, reason: refusal ?? 'TESS has not imaged this place.' }, seen: { sector: number; time: readonly number[]; flux: readonly number[] } | undefined;
   if (newest) { const { sector } = newest, place = placeAt(star, sectorYear(sector)), cutout = await fetchCutout(place.raDegrees, place.decDegrees, sector, pixels), curve = await sectorLightCurve(cutout.file);
     rotation = curve ? besideCatalogued(rotationVerdict(curve), star.cataloguedPeriodDays) : { detected: false, reason: 'No pixel stands above the sky at the star.' };

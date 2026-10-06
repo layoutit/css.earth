@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { lightRefusal, parseNeighbours } from './neighbours.mts';
-import { placeAt, sectorYear, tiltOfPole } from './reduce.mts';
+import { pickSector, placeAt, sectorYear, tiltOfPole } from './reduce.mts';
 
 test('a star\'s pixels are its own when Gaia\'s neighbours give little of the light', () => {
   // Three stars: one alone but for a faint neighbour, one with a neighbour as bright as itself 49 arcseconds away, one Gaia does not hold.
@@ -21,6 +21,9 @@ test('a star is looked for where it was in the sector\'s year', () => {
   assert.ok(Math.abs(sectorYear(1) - 2018.6) < 0.01 && Math.abs(sectorYear(95) - 2025.65) < 0.01);
   assert.ok(Math.abs((then.decDegrees - star.decDegrees) * 3600 - 10.362394 * (sectorYear(80) - 2016)) < 0.01); assert.ok(then.raDegrees < star.raDegrees);
   assert.deepEqual(placeAt(star, 2016), { raDegrees: 269.448503, decDegrees: 4.73942 });
+  // The newest ten-minute sector is read when there is one; a place imaged only since sector 56 gives its newest.
+  const imaged = (...numbers: number[]) => numbers.map(sector => ({ sector, camera: 1, ccd: 1 }));
+  assert.equal(pickSector(imaged(13, 39, 66, 98))!.sector, 39); assert.equal(pickSector(imaged(13, 66, 98))!.sector, 98); assert.equal(pickSector([]), undefined);
   // A pole in the plane of the sky is tilted 90 degrees; one pointing at us, 0.
   assert.equal(tiltOfPole(311.29, 58.66, 311.29, -31.34), 90); assert.equal(tiltOfPole(131.29, 31.34, 311.29, -31.34), 0);
 });
