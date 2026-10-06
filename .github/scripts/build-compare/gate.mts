@@ -1,9 +1,8 @@
 /** Tiny merge-base-owned PR gate and demand selector; no dependencies or builds. */
-import { execFileSync } from 'node:child_process';
 import { readFileSync, appendFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { hasSiteRenames, applicationPaths } from './source-paths.mts';
+import { hasSiteRenames, applicationPaths, gitOutput } from './source-paths.mts';
 export interface GateInput { declarationStatus: string; siteRenames: boolean; labels: string[]; branch: string; dispatch?: boolean; applicationChanged?: boolean; }
 export function gateDecision(input: GateInput): { required: boolean; fresh: boolean; run: boolean; passes: boolean } {
   const fresh = /^[AM]\s/u.test(input.declarationStatus);
@@ -14,7 +13,7 @@ export function cancelBuild(action: string): boolean { return action === 'synchr
 function main(): void {
   const base = process.argv[2];
   if (!base) throw new Error('Usage: gate.mts <merge-base> [--select]');
-  const git = (args: string[]): string => execFileSync('git', args, { encoding: 'utf8' });
+  const git = (args: string[]): string => gitOutput(args);
   const event: unknown = process.env.GITHUB_EVENT_PATH ? JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH, 'utf8')) : {};
   const object = (value: unknown): Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value) ? Object.fromEntries(Object.entries(value)) : {};
   const pr = object(object(event).pull_request), head = object(pr.head);
