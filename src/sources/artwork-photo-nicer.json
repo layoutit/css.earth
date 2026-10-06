@@ -1,0 +1,32 @@
+{
+  "id": "artwork-photo-nicer",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "NICER photograph",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:Iss072e371305_(Dec_17,_2024)_---_The_NICER_(Neutron_star_Interior_Composition_Explorer)_X-ray_telescope_is_pictured_installed_on_the_starboard_side_of_the_International_Space_Station%27s_integrated_truss_segment.jpg",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Iss072e371305_%28Dec_17%2C_2024%29_---_The_NICER_%28Neutron_star_Interior_Composition_Explorer%29_X-ray_telescope_is_pictured_installed_on_the_starboard_side_of_the_International_Space_Station%27s_integrated_truss_segment.jpg",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Iss072e371305_(Dec_17,_2024)_---_The_NICER_(Neutron_star_Interior_Composition_Explorer)_X-ray_telescope_is_pictured_installed_on_the_starboard_side_of_the_International_Space_Station%27s_integrated_truss_segment.jpg",
+      "checkedOn": "2026-10-05",
+      "locator": "File licence, author and original file size"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Wikimedia Commons",
+  "creators": [
+    "NASA Johnson Space Center"
+  ]
+}

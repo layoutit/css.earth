@@ -30,8 +30,13 @@
       "capture": {
         "attributions": [
           {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/"
+          },
+          {
             "kind": "unresolved",
-            "label": "Hubble ACS F435W F606W F814W Magellan optical",
+            "label": "Magellan optical",
             "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/",
             "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }
@@ -62,8 +67,13 @@
       "capture": {
         "attributions": [
           {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/"
+          },
+          {
             "kind": "unresolved",
-            "label": "Hubble ACS F435W F606W F814W Magellan optical",
+            "label": "Magellan optical",
             "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/",
             "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }
@@ -94,8 +104,18 @@
       "capture": {
         "attributions": [
           {
+            "kind": "facility",
+            "facilityId": "chandra",
+            "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/"
+          },
+          {
             "kind": "unresolved",
-            "label": "Chandra ACIS X-ray Hubble ACS F435W F606W F814W Magellan optical",
+            "label": "Magellan optical",
             "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/",
             "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }
@@ -126,8 +146,19 @@
       "capture": {
         "attributions": [
           {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/"
+          },
+          {
             "kind": "unresolved",
-            "label": "weak-lensing mass map Hubble ACS F435W F606W F814W Magellan optical",
+            "label": "weak-lensing mass map",
+            "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          },
+          {
+            "kind": "unresolved",
+            "label": "Magellan optical",
             "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/",
             "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }
@@ -206,8 +237,24 @@
       "capture": {
         "attributions": [
           {
+            "kind": "facility",
+            "facilityId": "chandra",
+            "evidence": "https://esahubble.org/images/opo0639a/"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://esahubble.org/images/opo0639a/"
+          },
+          {
             "kind": "unresolved",
-            "label": "Chandra ACIS X-ray weak-lensing mass map Hubble ACS F435W F606W F814W Magellan optical",
+            "label": "weak-lensing mass map",
+            "evidence": "https://esahubble.org/images/opo0639a/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          },
+          {
+            "kind": "unresolved",
+            "label": "Magellan optical",
             "evidence": "https://esahubble.org/images/opo0639a/",
             "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }

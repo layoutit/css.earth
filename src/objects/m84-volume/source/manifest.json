@@ -27,10 +27,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "SDSS g, r, i",
-            "evidence": "https://www.sdss.org/",
-            "reason": "The survey's color composite of coadded images; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "sloan-2-5m",
+            "evidence": "https://www.sdss.org/instruments/ — the SDSS imaging camera on the Sloan Foundation 2.5m Telescope at Apache Point Observatory collected the survey's images"
           }
         ]
       }

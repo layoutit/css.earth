@@ -2525,15 +2525,12 @@
       },
       "aliases": [],
       "description": {
-        "value": "A telescope at La Silla whose Wide Field Imager recorded the Helix optical image in blue, green and red filters.",
+        "value": "A 2.2-metre telescope at ESO's La Silla Observatory in Chile. Its Wide Field Imager has a field of view as large as the full Moon.",
         "citations": [
           {
             "catalogueId": "reference-mpg-eso-2-2m",
-            "checkedOn": "2026-09-13"
-          },
-          {
-            "catalogueId": "eso-eso0907a",
-            "checkedOn": "2026-09-13"
+            "checkedOn": "2026-10-05",
+            "locator": "Telescope overview: the Wide Field Imager with a field of view as large as the full Moon"
           }
         ]
       },
@@ -2681,6 +2678,16 @@
           }
         ]
       },
+      "launch": {
+        "value": "2009",
+        "citations": [
+          {
+            "catalogueId": "reference-wise",
+            "checkedOn": "2026-10-05",
+            "locator": "Launch Date and Time: Dec. 14, 2009"
+          }
+        ]
+      },
       "imageId": "wise"
     },
     {
@@ -2788,6 +2795,16 @@
             "catalogueId": "reference-chandra",
             "checkedOn": "2026-09-14",
             "locator": "Who we are: X-ray emission"
+          }
+        ]
+      },
+      "launch": {
+        "value": "1999",
+        "citations": [
+          {
+            "catalogueId": "reference-chandra",
+            "checkedOn": "2026-10-05",
+            "locator": "About Chandra: Since its launch on July 23, 1999"
           }
         ]
       },
@@ -3536,7 +3553,8 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "deep-impact"
     },
     {
       "id": "stardust",
@@ -3595,7 +3613,8 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "stardust"
     },
     {
       "id": "deep-space-1",
@@ -3654,7 +3673,8 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "deep-space-1"
     },
     {
       "id": "lucy",
@@ -3703,7 +3723,8 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "lucy"
     },
     {
       "id": "stereo",
@@ -3762,7 +3783,8 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "stereo"
     },
     {
       "id": "giotto",
@@ -3879,7 +3901,68 @@
             "checkedOn": "2026-10-02"
           }
         ]
-      }
+      },
+      "imageId": "nicer"
+    },
+    {
+      "id": "sloan-2-5m",
+      "name": {
+        "value": "Sloan Foundation 2.5-metre telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescopes: The Sloan Foundation 2.5m Telescope at Apache Point Observatory"
+          }
+        ]
+      },
+      "aliases": [],
+      "description": {
+        "value": "The Sloan Digital Sky Survey's own telescope at Apache Point Observatory in New Mexico. Its camera recorded the survey's images of the sky through five color filters.",
+        "citations": [
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescopes: a dedicated 2.5-m telescope located at Apache Point Observatory, in south east New Mexico"
+          },
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "SDSS Imaging Camera: collected photometric imaging data through the SDSS r, i, u, z and g filters"
+          }
+        ]
+      },
+      "kind": {
+        "value": "optical-telescope",
+        "citations": [
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescopes: a dedicated 2.5-m telescope located at Apache Point Observatory, in south east New Mexico"
+          }
+        ]
+      },
+      "setting": {
+        "value": "ground",
+        "citations": [
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "Telescopes: a dedicated 2.5-m telescope located at Apache Point Observatory, in south east New Mexico"
+          }
+        ]
+      },
+      "band": {
+        "value": "Optical",
+        "citations": [
+          {
+            "catalogueId": "reference-sloan-2-5m",
+            "checkedOn": "2026-10-05",
+            "locator": "SDSS Imaging Camera: collected photometric imaging data through the SDSS r, i, u, z and g filters"
+          }
+        ]
+      },
+      "imageId": "sloan-2-5m"
     }
   ],
   "missions": [
