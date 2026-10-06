@@ -78,6 +78,10 @@ within 20% is kept; half of it means the star turns once in two of the light's p
 other period is not believed, because one of the two is wrong and these pixels cannot say which. A star with no catalogued
 period keeps what its light shows.
 
+A star cannot turn faster than an orbit at its own surface, which its recorded radius and mass give. A shorter period in
+its light is something else, a pulsation, a close pair or another star's light, and is not taken as rotation: the pixels
+of EPIC 205979159, a giant of 7 solar radii, show 0.16 days, where nothing could turn it faster than 2.3 days.
+
 ## What the map is and is not
 
 A light curve is one number at each moment: the star's whole disc added up. It fixes how bright each longitude is. It does
@@ -150,5 +154,7 @@ counts the measured period among the star's catalogued ones when it adopts a rot
   more than ten times the light's own swing would still pass as the star.
 - These are the mission's calibrated images. The frames before calibration are public too, with a published calibrator
   (TICA, Fausnaugh et al. 2020), but that route works on whole detectors.
+- A periodic light is taken as rotation. A pulsating star or a close pair whose period is longer than the surface orbit's
+  would pass; the page's text says the period is the light's.
 - One sector is read for a star. A star whose sector is refused may show its rotation in another.
 - A star with no catalogued period whose light repeats twice a turn is given half its true period.
