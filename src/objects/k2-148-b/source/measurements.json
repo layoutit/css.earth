@@ -36,6 +36,9 @@
       "source": "VizieR J/A+A/675/A180/tablec1 (Rotation of wide binaries), column ProtRH20: 16.28 d, the row 0.0 arcsec from the star's J2000 place"
     }
   ],
+  "rotationPeriodMeasuredDays": 16.14,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 8 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 16.14 d, the light swinging by 1.2% as the star turns",
+  "rotationLightSwingPercent": 1.18,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -31,6 +31,21 @@
               "id": "color",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "brightness-campaign-6",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness-campaign-17",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "color-brightness",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }

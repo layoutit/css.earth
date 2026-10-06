@@ -32,6 +32,9 @@
   ],
   "projectedRotationSpeedKmS": 4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-77 (pscomppars): projected rotation speed 4 km/s, from Gaidos et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017MNRAS.464..850G/abstract)",
+  "rotationPeriodMeasuredDays": 20.01,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 4 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 20.01 d, the light swinging by 3.2% as the star turns",
+  "rotationLightSwingPercent": 3.25,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

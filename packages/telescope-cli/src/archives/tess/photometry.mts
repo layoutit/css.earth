@@ -1,12 +1,13 @@
-/** A star's light curve from its TESS pixels, and the period of its light.
+/** A star's light curve from its TESS pixels, the period of its light, and the rule that judges a TESS sector.
  *
  * The science is not this module's: lightkurve measures the star's light from the pixels and regresses the sky's own
  * variation out of it, and astropy's Lomb-Scargle periodogram finds the period (tools.py holds the calls, toolchain.json
  * pins the codes). What is written here is the job those calls read and the reading of what they print.
  *
- * The choices the codes leave open are the constants below. Each is to be settled against the mission's own light curves
- * of the same stars and sectors (benchmark), not by taste; the values here are the ones the first comparison supports:
- * two sky terms reproduce AB Pictoris's 3.89-day rotation with a correlation of 0.997, and five remove it. */
+ * Whether a light curve shows a rotation is a published method's to say (methods.mts), for the stars and the light
+ * curves its paper is about. No such method is wired yet for a TESS sector measured from full-frame pixels: the rule
+ * below (`rotationVerdict`) and the constants of the photometry are this repository's own, set on our labelled stars,
+ * and are to be replaced by a published method. */
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -38,7 +39,8 @@ export interface SectorLightCurve { readonly frames: number; readonly aperturePi
 export const ROTATION_POWER = 0.3, ORBIT_AGREEMENT = 0.2, ONE_SECTOR_DAYS = 9, ROTATION_SWING = 0.007;
 export interface RotationVerdict { readonly detected: boolean; readonly periodDays?: number; /** The light's own strongest period, when the rotation is taken as twice it. */ readonly lightPeriodDays?: number; /** Peak to peak, as a share of the mean light. */ readonly amplitude?: number; readonly reason?: string }
 
-/** How closely the light's period and a catalogued rotation period must agree to be one period: the metadata pass's own measure. */
+/** How closely the light's period and a catalogued rotation period must agree to be one period: the metadata pass's own
+ * measure, and the one Reinhold & Hekker (2020, Sect. 3.1) use for two campaigns of one star (periods within 20% are consistent). */
 export const CATALOGUE_AGREEMENT = 0.2;
 /** A verdict set beside the rotation period the star's record already holds. Two spot groups on opposite sides of a star
  * make its light repeat twice a turn, so the light's strongest period may be half the rotation: when it is half the
@@ -70,14 +72,20 @@ export function withinBreakup(verdict: RotationVerdict, fastestTurnDays: number 
   return { detected: false, reason: `The light's period, ${shortest} d, is shorter than the ${fastestTurnDays.toFixed(2)} d of an orbit at the star's surface (its recorded radius and mass): the star cannot turn that fast, so the light changes for another reason.` };
 }
 
-/** Whether a sector's light curve shows the star's rotation, and why not when it does not. */
+/** What one TESS sector can vouch for. `longestDays` is the longest period believed without a catalogue beside it and
+ * `swing` the smallest swing of the light. This rule is this repository's own, measured on our labelled stars; a Kepler
+ * or K2 star is judged by a published method instead (methods.mts), and a published method for a TESS sector is to
+ * replace it. */
+export const TESS_LIMITS = { power: ROTATION_POWER, agreement: ORBIT_AGREEMENT, longestDays: ONE_SECTOR_DAYS, swing: ROTATION_SWING } as const;
+
+/** Whether a TESS sector's light curve shows the star's rotation, and why not when it does not. */
 export function rotationVerdict(curve: SectorLightCurve): RotationVerdict {
-  const { whole, halves } = curve, days = Number(whole.periodDays.toFixed(2));
+  const { whole, halves } = curve, days = Number(whole.periodDays.toFixed(2)), limits = TESS_LIMITS;
   if (curve.saturated) return { detected: false, reason: 'The star saturates the detector: its light has bled out of the aperture.' };
-  if (whole.power < ROTATION_POWER) return { detected: false, reason: `No period stands out: the strongest, ${days} d, has a periodogram power of ${whole.power.toFixed(2)}, under the ${ROTATION_POWER} a rotation asks for.` };
-  if (!halves.every(half => half !== null && Math.abs(half.periodDays - whole.periodDays) <= ORBIT_AGREEMENT * whole.periodDays)) return { detected: false, reason: `The sector's two orbits do not show the same period (${halves.map(half => half === null ? 'none' : `${half.periodDays.toFixed(2)} d`).join(' and ')} against ${days} d over both).` };
-  if (whole.periodDays > ONE_SECTOR_DAYS) return { detected: false, reason: `A period of ${days} d is longer than the ${ONE_SECTOR_DAYS} d a sector can vouch for.` };
-  if (whole.amplitude < ROTATION_SWING) return { detected: false, reason: `The light swings by ${(100 * whole.amplitude).toFixed(2)}% at ${days} d, under the ${(100 * ROTATION_SWING).toFixed(1)}% at which a period from these pixels can be trusted.` };
+  if (whole.power < limits.power) return { detected: false, reason: `No period stands out: the strongest, ${days} d, has a periodogram power of ${whole.power.toFixed(2)}, under the ${limits.power} a rotation asks for.` };
+  if (!halves.every(half => half !== null && Math.abs(half.periodDays - whole.periodDays) <= limits.agreement * whole.periodDays)) return { detected: false, reason: `The sector's two orbits do not show the same period (${halves.map(half => half === null ? 'none' : `${half.periodDays.toFixed(2)} d`).join(' and ')} against ${days} d over both).` };
+  if (whole.periodDays > limits.longestDays) return { detected: false, reason: `A period of ${days} d is longer than the ${limits.longestDays} d a sector can vouch for.` };
+  if (whole.amplitude < limits.swing) return { detected: false, reason: `The light swings by ${(100 * whole.amplitude).toFixed(2)}% at ${days} d, under the ${Number((100 * limits.swing).toPrecision(2))}% at which a period from these pixels can be trusted.` };
   return { detected: true, periodDays: days, amplitude: whole.amplitude };
 }
 
@@ -93,6 +101,8 @@ export function parseLightCurve(value: unknown): SectorLightCurve | undefined {
     scatter: requireFiniteNumber(record.scatter, 'scatter'), whole: peak(record.whole, 'whole sector'), halves: requireArray(record.halves, 'halves').map((half, index) => isRecord(half) ? peak(half, `orbit ${index + 1}`) : null), time, flux };
 }
 
+/** The missions whose light is read: TESS's full-frame cutouts here, and K2's own light curves (archives/kepler). */
+export type Mission = 'TESS' | 'K2';
 /** One sector's light curve of a star, from the cutout file of its pixels. */
 export async function sectorLightCurve(cutoutFile: string): Promise<SectorLightCurve | undefined> {
   const { python } = await toolchainPaths(), directory = await mkdtemp(join(tmpdir(), 'tess-')), job = join(directory, 'job.json');

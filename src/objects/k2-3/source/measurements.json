@@ -48,6 +48,9 @@
   ],
   "projectedRotationSpeedKmS": 1.21,
   "projectedRotationSpeedSource": "SIMBAD, K2-3: projected rotation speed 1.21 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
+  "rotationPeriodMeasuredDays": 39.62,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 1 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 39.62 d, the light swinging by 0.20% as the star turns (the light repeats every 19.81 d, half the catalogued rotation period, and the star is taken to turn once in two of them)",
+  "rotationLightSwingPercent": 0.2,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
