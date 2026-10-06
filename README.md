@@ -91,7 +91,7 @@ Re-preparing an object from its original sources needs more: `node packages/bake
 - [Adding a body](src/objects/README.md): package layout and the preparation steps.
 - [Provenance and documentation contract](docs/provenance/CONTRACT.md): how sources, credits and evidence are recorded.
 - [Documentation index](docs/README.md): surface preparation, interferometric imaging, eclipse mapping, navigation, performance and more.
-- [Contributing](CONTRIBUTING.md): setup, which checks to run and where things live.
+- [Contributing](.github/CONTRIBUTING.md): setup, which checks to run and where things live.
 - [Celestial skill](.agents/skills/celestial-skill/SKILL.md): the workflow agents follow for body work.
 
 ## License and Data

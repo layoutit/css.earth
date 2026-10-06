@@ -19,7 +19,9 @@ export const TYPES = ['feat', 'fix', 'docs', 'style', 'refactor', 'perf', 'test'
 export const MAX_LENGTH = 150;
 const CONVENTIONAL = new RegExp(`^(${TYPES.join('|')})(\\([a-z0-9._/-]+\\))?!?: \\S(.*\\S)?$`, 'u');
 const ATTRIBUTION = /co-authored-by|generated (with|by)|🤖/iu;
-const HOOK_SOURCE = '.githooks/commit-msg';
+const HOOK_SOURCE = '.github/hooks/commit-msg';
+/** Where branches from before the hooks moved under `.github/` keep it; the shared dispatcher still runs theirs. */
+const EARLIER_HOOK_SOURCE = '.githooks/commit-msg';
 const HOOK_MARKER = 'cssearth-commit-message-hook';
 
 /** The message as Git stores it: comment lines and trailing blank lines removed (the default `strip` cleanup). */
@@ -82,8 +84,10 @@ export const DISPATCHER_MARKER = 'cssearth-commit-msg-dispatcher';
 export const DISPATCHER = `#!/bin/sh
 # ${HOOK_MARKER} ${DISPATCHER_MARKER}: run this worktree's tracked ${HOOK_SOURCE}. Written by \`pnpm install\`.
 root=$(git rev-parse --show-toplevel) || { echo "commit-msg: cannot find this worktree's top level; run git commit from inside the worktree." >&2; exit 1; }
-[ -f "$root/${HOOK_SOURCE}" ] || { echo "commit-msg: $root/${HOOK_SOURCE} is missing; restore it (git checkout -- ${HOOK_SOURCE}), or skip once with git commit --no-verify." >&2; exit 1; }
-exec sh "$root/${HOOK_SOURCE}" "$@"
+hook="$root/${HOOK_SOURCE}"
+[ -f "$hook" ] || [ ! -f "$root/${EARLIER_HOOK_SOURCE}" ] || hook="$root/${EARLIER_HOOK_SOURCE}"
+[ -f "$hook" ] || { echo "commit-msg: $root/${HOOK_SOURCE} is missing; restore it (git checkout -- ${HOOK_SOURCE}), or skip once with git commit --no-verify." >&2; exit 1; }
+exec sh "$hook" "$@"
 `;
 
 const git = async (root: string, ...args: string[]) => (await execFileAsync('git', args, { cwd: root })).stdout.trim();
@@ -91,7 +95,7 @@ const git = async (root: string, ...args: string[]) => (await execFileAsync('git
 /** Point this clone's core.hooksPath at a dispatcher that runs each worktree's own tracked hook. Git then never reads
  * `.git/hooks`, so a copy an older branch's installer writes there cannot replace the check; that installer also
  * returns early once core.hooksPath is set. Leaves any core.hooksPath already configured (including the pre-push
- * opt-in `.githooks`) and never disables a hook of the contributor's own in `.git/hooks`. */
+ * opt-in `.github/hooks`) and never disables a hook of the contributor's own in `.git/hooks`. */
 export async function installHook(root: string): Promise<string> {
   let common: string, configured: string | undefined;
   try {
@@ -103,7 +107,7 @@ export async function installHook(root: string): Promise<string> {
   }
   // Not `git rev-parse --git-path hooks`: that answers core.hooksPath once it is set.
   const legacy = resolve(common, 'hooks'), directory = resolve(common, HOOKS_DIRECTORY), target = resolve(directory, 'commit-msg');
-  if (configured !== undefined && (!configured || resolve(root, configured) !== directory)) return `core.hooksPath is ${JSON.stringify(configured)}; left unchanged (${HOOK_SOURCE} applies when that path is .githooks).`;
+  if (configured !== undefined && (!configured || resolve(root, configured) !== directory)) return `core.hooksPath is ${JSON.stringify(configured)}; left unchanged (${HOOK_SOURCE} applies when that path is .github/hooks).`;
   if (configured === undefined) {
     const own: string[] = [];
     for (const name of await readdir(legacy).catch(() => [] as string[])) {
@@ -135,13 +139,13 @@ async function main(args: readonly string[]): Promise<number> {
     const problems = rangeProblems(await commitsIn(args[1], root));
     if (!problems.length) return 0;
     console.error(`Commit messages must be one Conventional Commits line with no attribution:\n${problems.join('\n')}\n` +
-      'Reword them (git rebase -i, then "reword"), and see CONTRIBUTING.md#commits.');
+      'Reword them (git rebase -i, then "reword"), and see .github/CONTRIBUTING.md#commits.');
     return 1;
   }
   if (args.length === 1 && args[0] && !args[0].startsWith('--')) {
     const problem = messageProblem(await readFile(args[0], 'utf8'));
     if (!problem) return 0;
-    console.error(`commit-msg: ${problem}\nSee CONTRIBUTING.md#commits. Skip once with git commit --no-verify; CI still checks.`);
+    console.error(`commit-msg: ${problem}\nSee .github/CONTRIBUTING.md#commits. Skip once with git commit --no-verify; CI still checks.`);
     return 1;
   }
   console.error('Usage: commit-message.mts <message-file> | --range <a>..<b> | --install');

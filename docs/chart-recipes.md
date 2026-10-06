@@ -79,7 +79,7 @@ The generator keeps an archive planet only when one of these charts shows a meas
    bounds against the source. Inspect the actual panel at desktop and mobile
    sizes. Preserve the data's scientific limits in the body README.
 5. Publish changed prepared assets and commit only their inventories, following
-   the [delivery guide](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
+   the [delivery guide](../.github/CONTRIBUTING.md#publishing-prepared-assets-maintainers).
 
 ## Preview and refresh existing charts
 

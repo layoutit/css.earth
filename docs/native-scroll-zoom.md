@@ -20,7 +20,7 @@ in the zoom commit.
 ## Run it
 
 Use a checkout whose packages, renderer, generated shell modules and prepared
-assets are already available. Follow [CONTRIBUTING](../CONTRIBUTING.md) for setup.
+assets are already available. Follow [CONTRIBUTING](../.github/CONTRIBUTING.md) for setup.
 From the repository root, start the existing site and then the experiment:
 
 ```sh

@@ -103,7 +103,7 @@ How the Worker differs from the Netlify functions:
   default R2 deploy downloads and sha-verifies every inventoried key from R2 in
   its setup, with no restored cache, and runs `pnpm check:deploy-assets`; a key
   R2 does not serve blocks publication. The nightly sweep checks every key again. See the
-  [publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
+  [publishing instructions](../.github/CONTRIBUTING.md#publishing-prepared-assets-maintainers).
 - Gate on what ships; report what is merely incomplete. A merge-required check may
   only assert something whose failure means the shipped application is broken, wrong
   or unverifiable as shipped: it does not compile, it does not build, it does not
@@ -306,7 +306,7 @@ test goes red; restore it and confirm green. A comment alone proves nothing.
 
 ## Repairing asset and provenance failures
 
-The [publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers)
+The [publishing instructions](../.github/CONTRIBUTING.md#publishing-prepared-assets-maintainers)
 own the commands and credentials. These rules prevent stale-receipt failures:
 
 1. Verify actual bytes against their owning inventory before changing that
@@ -335,7 +335,7 @@ the first failing owner when many consumers report the same missing input.
 
 ## Verifying a CI change
 
-Use the [contributor checks](../CONTRIBUTING.md#check-your-change) to prepare a
+Use the [contributor checks](../.github/CONTRIBUTING.md#check-your-change) to prepare a
 clean checkout. `pnpm check:pr --list` prints the selected workflow commands;
 `pnpm check:pr` runs that plan locally. The local runner can include advisory and
 production-smoke jobs even though their GitHub triggers exclude PRs.
