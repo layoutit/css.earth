@@ -1,15 +1,15 @@
-# A star's rotation and brightness map from TESS pixels and K2 light curves
+# A star's rotation and brightness map from the TESS and K2 missions' light curves
 
 A star with dark spots dims each time the spots turn to face us. The rise and fall of its light gives the time it takes to
 turn once, and the shape of that curve says which longitudes of the star are darker or brighter.
 
-TESS has imaged almost the whole sky every 30 minutes or faster since 2018. The mission publishes light curves only for the
-stars it was asked to watch. Its full-frame images hold every other star too. This note describes how the telescope's TESS
-tools measure a star's light from those images, decide whether its rotation is seen, and make a brightness map from it.
+Two missions publish light curves of the stars they were asked to watch. K2 (2014 to 2018) watched one field after another
+along the ecliptic, some 80 days each, with an image every 30 minutes. TESS has watched since 2018, a sector of some 27
+days at a time, and publishes a light curve every 2 minutes for its targets. Each mission's pipeline corrects the flux for
+the spacecraft's systematics (PDC-MAP). This note describes how the telescope's tools take those light curves as they are,
+have a published method decide whether a star's rotation is seen in them, and make a brightness map from it.
 
-K2 (2014 to 2018) watched far fewer stars, each for some 80 days at a time, and published a light curve of every one.
-For a star K2 watched, that light curve is read and judged by a published method: see
-[K2 light curves](#k2-light-curves).
+Nothing here is measured from pixels, and no rule of this repository decides whether a star is seen turning.
 
 A map made this way is **this project's reduction**. It is not a published map, and every dataset made from one says so.
 
@@ -20,95 +20,28 @@ Each step of the science is run by the code its authors publish, pinned in
 
 | Step | Code | What it does |
 | --- | --- | --- |
-| Whose light | [Gaia DR3](https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355) through [CDS X-Match](http://cdsxmatch.u-strasbg.fr/) | Every Gaia source within 63 arcseconds of the star, with its magnitude in Gaia's red band |
-| Pixels | MAST's [TESScut](https://mast.stsci.edu/tesscut/) | Cuts the same 11 × 11 pixels out of every calibrated full-frame image of a sector at the star's place |
-| Light curve, K2 | The K2 mission's own, from [MAST](https://archive.stsci.edu/missions-and-data/k2) (DOI 10.17909/T9WS3R) | The long-cadence light curve of a campaign with the flux the mission's pipeline corrected (PDC-MAP); nothing is measured here |
-| Light curve | [lightkurve](https://lightkurve.github.io/lightkurve/) 2.6.0 | Adds up the pixels that stand above the sky, and removes what the sky pixels have in common with them (scattered light and pointing drift) |
-| Period | [astropy](https://www.astropy.org/) Lomb-Scargle periodogram (VanderPlas 2018, ApJS 236, 16) | The period that best fits the light curve, over the whole sector and in each of its two orbits |
-| Period, K2 | astropy's generalized Lomb-Scargle, and [star-privateer](https://gitlab.com/sybreton/star_privateer) 1.3.1 (Breton et al. 2024, A&A 689, A229) for the wavelet and the autocorrelation | The three periods that Reinhold & Hekker (2020) compare |
+| Light curve, K2 | The K2 mission's own, from [MAST](https://archive.stsci.edu/missions-and-data/k2) (DOI 10.17909/T9WS3R) | The long-cadence light curve of a campaign with the flux the mission's pipeline corrected (PDC-MAP) |
+| Light curve, TESS | The TESS mission's own, from [MAST](https://archive.stsci.edu/missions-and-data/tess) (DOI 10.17909/t9-nmc8-f686) | The 2-minute light curve of a sector with the flux the mission's pipeline corrected (PDC-MAP) |
+| Reading a file | [lightkurve](https://lightkurve.github.io/lightkurve/) 2.6.0 | Reads the light curve's file with its quality flags, as it is |
+| Period, K2 | [astropy](https://www.astropy.org/)'s generalized Lomb-Scargle, and [star-privateer](https://gitlab.com/sybreton/star_privateer) 1.3.1 (Breton et al. 2024, A&A 689, A229) for the wavelet and the autocorrelation | The three periods that Reinhold & Hekker (2020) compare |
+| Period, TESS | [SpinSpotter](https://github.com/rae-holcomb/SpinSpotter) 0.2.0 (Holcomb et al. 2022, ApJ 936, 138) | The period of the light's autocorrelation and the height, width and fit of its peaks |
+| Neighbours | [Gaia DR3](https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355) through [CDS X-Match](http://cdsxmatch.u-strasbg.fr/) | The Gaia sources around the star, counted for its page to say; nothing is refused on them |
 | The map | [starry](https://starry.readthedocs.io/) 1.2.0 (Luger et al. 2019, AJ 157, 64) | The brightness over the surface, as spherical harmonics up to degree 5, that reproduces the light curve as the star turns |
 
-What this repository writes is what lies between them: the reader of TESScut's answers, the files each code reads, the rule
-that decides whether a TESS sector shows a rotation, the published criteria as a table of methods, and the conversion of starry's map to the table the star pages draw.
+What this repository writes is what lies between them: the readers of MAST's answers, the files each code reads, the
+published criteria as a table of methods, and the conversion of starry's map to the table the star pages draw.
 [`tools.py`](../packages/telescope-cli/src/archives/tess/tools.py) holds calls to those codes and nothing else.
 
-## Whose light the pixels hold
+## Finding a star's light curves
 
-A TESS pixel is 21 arcseconds wide, and the pixels added up for a star reach some three pixels from it. Any other star in
-that circle adds its light, and its rotation, to the star's. Before a star's pixels are fetched, Gaia DR3 is asked for every
-source within 63 arcseconds ([`neighbours.mts`](../packages/telescope-cli/src/archives/tess/neighbours.mts)). A star is not
-reduced when Gaia has no source at its place, when it is fainter than magnitude 13.5, or when the other stars give more than
-10% of the light. A neighbour counts whole wherever it lies in the circle, so the share is an upper bound.
+For every star, MAST is asked which K2 light curves lie at its place
+([`kepler/light-curves.mts`](../packages/telescope-cli/src/archives/kepler/light-curves.mts)) and, when K2 did not watch
+it, which TESS 2-minute light curves do ([`tess/light-curves.mts`](../packages/telescope-cli/src/archives/tess/light-curves.mts)).
+K2 listed its targets where surveys of about the year 2000 had them, so a star that moves is looked for at its recorded
+place and at its places in 2016 and 2000; for TESS, at its places in 2019 and 2025. Each file is read as the mission
+publishes it.
 
-Of our 3,139 stars, 1,485 pass: 317 have no Gaia source (the brightest stars, and stars of other galaxies), 458 are too
-faint and 879 share their pixels. Two of the labelled stars show what the guard is for. V1298 Tauri turns in 2.93 days; its
-pixels gave 4.95 days, and Gaia lists a star as bright as it 49 arcseconds away. HD 222259 B's pixels show the rotation of
-its brighter companion, 5 arcseconds away.
-
-The pixels are cut where the star was in the sector's year. A nearby star crosses a pixel in a few years: Barnard's Star
-moves 10 arcseconds a year.
-
-## When a rotation is believed
-
-This section is the rule for a TESS sector, and it is this repository's own: its numbers were set on our labelled stars,
-not taken from a paper. A K2 star is judged by a published method instead
-([below](#a-published-method-for-each-kind-of-star)), and a published method for a TESS sector is to replace this rule.
-
-One sector is read: the newest imaged every ten minutes (sectors 27 to 55) when the star has one, else the newest of all.
-A ten-minute sector's pixels arrive in about 5 seconds; a 200-second sector's take 85 (60 MB for one star). Its period is
-accepted only when all of these hold
-([`photometry.mts`](../packages/telescope-cli/src/archives/tess/photometry.mts)):
-
-- the star does not saturate the detector;
-- the periodogram peak has a power of at least 0.3;
-- each of the sector's two orbits, searched alone, gives a period within 20% of the whole sector's;
-- the period is 9 days or less;
-- the light swings by at least 0.7% of its mean.
-
-The rule was settled on 87 of our stars whose rotation the catalogues print and whose light the mission also measured,
-in the sector the mission's light curve is of. TESScut answered for 78, and a light curve was measured for 76.
-
-| Rule | Periods accepted | Equal to the catalogue's or the mission's within 10% |
-| --- | --- | --- |
-| As above | 24 | 24 |
-| As above, on the 20 that also pass the neighbour guard | 20 | 20 |
-| Without the 0.7% floor | 33 | 30 |
-| Periods over 9 days that pass the other tests | 2 | 0 |
-| As above, in each star's newest ten-minute sector (67 measured) | 20 | 19; the other is half the catalogued period |
-
-The rule is strict on purpose, and it leaves out real rotations. For 33 of the 76 stars the catalogue prints a period of
-9 days or less and the mission's own light curve shows the same one. The rule accepts 19 of them, all with the right period,
-and refuses 14: 6 whose two orbits disagree, 6 that swing by less than 0.7% and 2 with a weak peak. No star of the set
-saturates the detector, so that test is a guard this table does not measure. A sector lasts 27 days and the spacecraft
-circles the Earth every 13.7 days, which leaves its own mark in the light; that is why long periods are not accepted.
-
-Two groups of spots on opposite sides of a star make its light repeat twice a turn, and no rule can tell that from the
-light alone. So a period is set beside the rotation period the star's record already holds from the catalogues: the same
-within 20% is kept; half of it means the star turns once in two of the light's periods, and the map is made that way; any
-other period is not believed, because one of the two is wrong and these pixels cannot say which. A star with no catalogued
-period keeps what its light shows.
-
-A star cannot turn faster than an orbit at its own surface, which its recorded radius and mass give. A shorter period in
-its light is something else, a pulsation, a close pair or another star's light, and is not taken as rotation: the pixels
-of EPIC 205979159, a giant of 7 solar radii, show 0.16 days, where nothing could turn it faster than 2.3 days.
-
-A star's record holds SIMBAD's main type of it. A star SIMBAD files as an eclipsing or ellipsoidal binary, a cataclysmic,
-X-ray or symbiotic pair, or a pulsating variable of any kind is not read at all: its light changes for that reason.
-
-## K2 light curves
-
-K2 watched one field after another along the ecliptic, for some 80 days each, with an image every 30 minutes. For each
-star it was asked to watch, the mission's pipeline publishes a long-cadence light curve of the campaign, with the flux it
-corrected for the spacecraft's systematics (PDC-MAP). Against one TESS sector that is three times the days, so a star
-that turns in two or three weeks is seen turning several times.
-
-For every star, MAST is asked once which K2 light curves lie at its place
-([`light-curves.mts`](../packages/telescope-cli/src/archives/kepler/light-curves.mts)). The mission listed its targets where
-surveys of about the year 2000 had them, so a star that moves is looked for at its recorded place, at its place in 2016
-and at its place in 2000. This repository measures nothing from a K2 star's pixels: the light curve is read as the
-mission publishes it.
-
-### A published method for each kind of star
+## A published method for each kind of star
 
 Whether a light curve shows a star turning is not this repository's judgement, nor anyone's here. A method is taken from
 the paper that made it, for the kind of star and the light curves the paper applies it to, with its preparation, its
@@ -119,10 +52,12 @@ given no verdict, and is not fetched.
 | Kind of star and light curve | Method | State |
 | --- | --- | --- |
 | Between 3250 and 6250 K with log g over 4.2; the K2 mission's PDC-MAP light curve of a campaign, campaigns 0 to 18 without 9 | Reinhold & Hekker (2020, A&A 635, A43) | Wired |
+| A dwarf by the cuts of Ciardi et al. (2011); the TESS mission's 2-minute PDC-MAP light curve of a sector | Holcomb et al. (2022, ApJ 936, 138) | Wired |
 | One Kepler quarter, the mission's PDC-MAP light curve | Reinhold, Reiners & Basri (2013, A&A 560, A4) | Read, not wired |
-| Giants and subgiants (log g 4.2 or less) | None for rotation in one campaign | Not wired |
-| One TESS sector, the mission's 2-minute light curve | Holcomb et al. (2022, SpinSpotter) | Read, not wired |
-| One TESS sector, measured from full-frame pixels | None: the rule above is this repository's own | To replace |
+| Giants and subgiants | None for rotation in one campaign or sector | Not wired |
+| A star with full-frame images only | None | Not wired |
+
+### K2: Reinhold & Hekker (2020)
 
 Reinhold & Hekker (Sects. 2 and 3) use the mission's PDC-MAP light curves. They divide each by a third-order polynomial,
 drop points more than six median absolute deviations from the median, and bin it to three hours. They take the period of
@@ -176,6 +111,32 @@ in three campaigns, which give 11.54, 11.70 and 11.25 days: its period is their 
 
 ![Six of the K2 stars in the app (K2-100, K2-102, K2-136, K2-141, K2-198, K2-233): Color + brightness above, Brightness map below](images/stellar-brightness-maps-k2.webp)
 
+### TESS: Holcomb et al. (2022)
+
+Holcomb et al. (Sects. II and III) use the mission's 2-minute PDC-MAP light curves, binned to 30 minutes, with the
+transits they know of masked. Their stars are dwarfs by the cuts of Ciardi et al. (2011) on the star's temperature and
+surface gravity: log g at least 3.5 at 6000 K or hotter, at least 4.0 at 4250 K or cooler, and at least 5.2 - 0.00028 T
+between; a star without either value is left out. Their code, SpinSpotter, is run on each sector and on all of a star's
+sectors stitched together. It finds the period of the light's autocorrelation and fits parabolas to its peaks. A period is
+valid when:
+
+- the peaks' height is over a quarter of their width;
+- their width is between 0.4 and 0.6 of the period;
+- the parabolas fit them with an R² over 0.9.
+
+A star with several sectors needs a valid period in at least half of them, rounded up, and in the stitched light curve,
+whose period is the star's. A star whose light is lopsided (the midpoint of its 5th and 95th percentiles farther than
+0.01 from zero) is removed as a possible eclipsing binary. On the stars its authors inspected by eye, 4.9% of the periods
+these criteria accepted were false, and 6.2% on a second set.
+
+The transits masked are those of the star's planets here: each planet's published period and mid-transit time, and the
+published duration its transit chart is drawn with.
+
+One reading of the paper is ours and is not printed in it: its sample is sectors 1 to 26, its criteria are stated for
+"the TESS 2-minute cadence data", and they are applied here to any sector's 2-minute light curve.
+
+@@TESS@@
+
 ## What the map is and is not
 
 A light curve is one number at each moment: the star's whole disc added up. It fixes how bright each longitude is. It does
@@ -191,9 +152,9 @@ The map is made at one tilt of the star's axis:
 
 Each map's text says which. A brightness map never changes the axis a page draws.
 
-For AU Microscopii in sector 95 the pixels give a period of 4.85 days (the NASA Exoplanet Archive prints 4.856) and a swing
-of 8.5%. The map's curve leaves a scatter of 0.51% about the light, where the light's own noise is 0.17%: spots that change
-during the sector, and flares, are not in a map of one fixed surface.
+For AU Microscopii the method gives a period of 4.84 days (the NASA Exoplanet Archive prints 4.856) and a light that varies
+by 7.9%. The map of sector 95 leaves a scatter of 0.30% about the light, where the light's own noise is 0.14%: spots that
+change during the sector, and flares, are not in a map of one fixed surface.
 
 ## What the page opens on
 
@@ -226,21 +187,22 @@ The dataset's text gives the month the sector was observed, because spots come a
 
 ```sh
 node packages/telescope-cli/src/archives/tess/toolchain.mts install
-node packages/telescope-cli/src/archives/tess/reduce.mts <star id>...     # or --all: every star without a receipt
+node packages/telescope-cli/src/archives/tess/reduce.mts <star id>...     # or --all: every star not yet judged
 pnpm telescope new-object --from-pixels all --out output/tess/specs/all.json
 pnpm telescope new-object output/tess/specs/all.json --bake
 pnpm telescope new-object --metadata <star id>...
 node packages/telescope-cli/src/new-object/new-object-cli.mts --pixel-light --all
 ```
 
-`reduce.mts` asks MAST whether K2 watched the star and reads its light curves when it did; any other star is read from
-one TESS sector. It writes a receipt for each star under ignored `output/tess/<star id>/`: the mission and its sector
-or campaigns, the request that fetched each, what was measured, the verdict with its reason, and the codes' versions. The light curve is kept beside it and the
-pixels are deleted. Requests to TESScut go one at a time; the service refuses requests sent side by side. Gaia's answer
-for all stars is one request of some ten minutes, kept under `output/tess/` so a star is asked once.
+`reduce.mts` asks MAST for the star's K2 light curves and, when K2 did not watch it, its TESS 2-minute ones, and has the
+published method for its kind of star judge them. It writes a receipt for each star under ignored
+`output/tess/<star id>/`: the mission, each sector or campaign with the request that fetched it and the pipeline version
+that made it, the method, what it measured, the verdict with its reason, and the codes' versions. Each light curve is kept
+beside it as the method prepared it. Requests to MAST go one at a time. Gaia's answer for all stars is one request of
+some ten minutes, kept under `output/tess/` so a star is asked once.
 
 The map's table (108 KB a star) is not tracked: its manifest input names `reduce.mts` as its generator, and it is published
-to and restored from the source cache (`node packages/bake/cli/publish-source-cache.mts --object=<star id>`).
+to and restored from the source cache (`node packages/bake/cli/publish-source-cache.mts --file=<table> --key=<star id>/<its path under source/>`).
 
 `--pixel-light` writes what the reduction found into the record of every star it looked at, mapped or not: the verdict in
 the reduction's own sentence (a rotation, or why none is accepted, or why the star was not read), the mission and its sector
@@ -252,11 +214,10 @@ counts the measured period among the star's catalogued ones when it adopts a rot
 
 ## Limits
 
-- The neighbour guard reads Gaia's magnitudes, not the pixels. A neighbour that gives under 10% of the light and swings by
-  more than ten times the light's own swing would still pass as the star.
-- These are the mission's calibrated images. The frames before calibration are public too, with a published calibrator
-  (TICA, Fausnaugh et al. 2020), but that route works on whole detectors.
+- A star no mission published a light curve of is not judged: no published method is wired for full-frame images.
+- No method is wired for a Kepler quarter, for giants or for stars hotter or cooler than a method's own range.
+- Other stars near a star are counted for its page to say and nothing is refused on them: the missions' light curves
+  correct for crowding, and no published limit is applied here.
 - A periodic light is taken as rotation. A pulsating star or a close pair that SIMBAD does not file as one, with a period
   longer than the surface orbit's, would pass as a turning, spotted star.
-- One TESS sector is read for a star. A star whose sector is refused may show its rotation in another.
 - A star with no catalogued period whose light repeats twice a turn is given half its true period.
