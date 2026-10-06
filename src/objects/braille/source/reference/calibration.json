@@ -1,0 +1,16 @@
+{
+  "method": "published-dimensions-fit",
+  "diameterKm": 1.19,
+  "uncertaintyKm": 0.04,
+  "quantity": "volume-equivalent diameter of this mesh with its three extents fitted to the published 2.1 × 1 × 1 km",
+  "reference": "Oberst et al. (2001), Icarus 153, 16–23",
+  "referenceUrl": "https://doi.org/10.1006/icar.2001.6648",
+  "notes": "The mesh's longest extent across the spin axis, the extent at right angles to it and the extent along the spin axis are 2.1533, 1.1070, 1.0620 source units. One scale fitted to 2.1, 1, 1 km by least squares is 0.9572 km per unit; each extent alone gives 0.975, 0.903, 0.942 km per unit, and half that range is the quoted uncertainty. The published dimensions carry no error bars.",
+  "visibleDescription": "Scale fitted to the published 2.1 × 1 × 1 km: volume-equivalent diameter 1.19 ± 0.04 km.",
+  "catalogueId": "doi-10-1006-icar-2001-6648",
+  "scaleKmPerSourceUnit": 0.9591352052938472,
+  "sourceUrl": "https://doi.org/10.1006/icar.2001.6648",
+  "sourceLabel": "Oberst et al. (2001), Icarus 153, 16–23",
+  "diameterSemantics": "volume-equivalent diameter of this mesh with its three extents fitted to the published 2.1 × 1 × 1 km",
+  "limitations": "Uniform scale of the unchanged deposited mesh by the adopted diameter and its quoted uncertainty. The mesh's longest extent across the spin axis, the extent at right angles to it and the extent along the spin axis are 2.1533, 1.1070, 1.0620 source units. One scale fitted to 2.1, 1, 1 km by least squares is 0.9572 km per unit; each extent alone gives 0.975, 0.903, 0.942 km per unit, and half that range is the quoted uncertainty. The published dimensions carry no error bars."
+}

@@ -1,0 +1,16 @@
+{
+  "method": "published-convex-volume-transfer",
+  "diameterKm": 68.3,
+  "uncertaintyKm": 1.4,
+  "quantity": "volume-equivalent diameter of the occultation-scaled convex model",
+  "reference": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+  "referenceUrl": "https://doi.org/10.3847/PSJ/acaf79",
+  "notes": "Table 3 gives the convex shape volume 1.67 × 10^5 km³ of the model its authors scaled to the 2021 October 20 occultation chords; a sphere of that volume is 68.3 km across. The quoted error is that of the table's surface-equivalent diameter, 69.3 ± 1.4 km. That model's mesh is not archived, so its volume is given to the Ďurech & Hanuš (2026) mesh, whose proportions differ: at this scale the mesh measures 81.7 × 79.9 × 63.1 km (longest extent across the spin axis, the extent at right angles to it, the extent along it) where the table lists 77.5 × 71.3 × 61.8 km.",
+  "visibleDescription": "Scale from the occultation-measured volume of Mottola et al. (2023): volume-equivalent diameter 68.3 ± 1.4 km.",
+  "catalogueId": "doi-10-3847-psj-acaf79",
+  "scaleKmPerSourceUnit": 55.049525235441365,
+  "sourceUrl": "https://doi.org/10.3847/PSJ/acaf79",
+  "sourceLabel": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+  "diameterSemantics": "volume-equivalent diameter of the occultation-scaled convex model",
+  "limitations": "Uniform scale of the unchanged deposited mesh by the adopted diameter and its quoted uncertainty. Table 3 gives the convex shape volume 1.67 × 10^5 km³ of the model its authors scaled to the 2021 October 20 occultation chords; a sphere of that volume is 68.3 km across. The quoted error is that of the table's surface-equivalent diameter, 69.3 ± 1.4 km. That model's mesh is not archived, so its volume is given to the Ďurech & Hanuš (2026) mesh, whose proportions differ: at this scale the mesh measures 81.7 × 79.9 × 63.1 km (longest extent across the spin axis, the extent at right angles to it, the extent along it) where the table lists 77.5 × 71.3 × 61.8 km."
+}

@@ -5,64 +5,100 @@
   "displayName": "Orus",
   "publicBase": "/scenes/orus/",
   "raster": {
-    "width": 512,
-    "height": 256,
+    "width": 4096,
+    "height": 2048,
     "bandCount": 16,
     "gutter": 64,
-    "poleSize": 128,
+    "poleSize": 512,
     "reportMissingPixels": true,
-    "observations": [
+    "observations": [],
+    "scientific": [
       {
-        "id": "model",
-        "consumer": "model-surface",
-        "validity": {
-          "kind": "image-rgb-no-data",
-          "noData": 160,
-          "centerLongitude": 180
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/model_21900_1.tri",
+        "format": "pds-plate-model",
+        "grid": {
+          "metersPerUnit": 48359.75822224511,
+          "expectedVertices": 574,
+          "expectedFaces": 1144,
+          "indexBase": 1
         },
-        "metadata": {
-          "label": "Shape model",
-          "modeled": true,
-          "coverage": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. The original convex mesh and local concavities are not represented. Full approximation dimensions: 70.7 × 63 × 51.4 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain."
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -30
+        },
+        "minimum": -5,
+        "maximum": 10,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 30000,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 600
         }
       }
     ],
-    "scientific": [],
     "observedColors": [],
-    "mosaics": []
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
   },
   "geometry": {
     "radius": 230,
-    "radiusKm": 30.5875269554397,
-    "camera": {
-      "framingScale": 0.865276575825734
-    },
-    "mapUrl": "/scenes/orus/orus-model-surface@2x.webp",
-    "polesUrl": "/scenes/orus/orus-model-poles@2x.webp",
+    "radiusKm": 30,
+    "mapUrl": "/scenes/orus/orus-shape-surface@2x.webp",
+    "polesUrl": "/scenes/orus/orus-shape-surface@2x.webp",
     "radialTerrain": {
-      "path": "shape/ellipsoid.tab",
-      "format": "pds-radius-table",
+      "path": "shape/model_21900_1.tri",
+      "format": "pds-plate-model",
       "grid": {
-        "metersPerUnit": 1000,
-        "expectedVertices": 2522,
-        "expectedFaces": 5040,
-        "stepDegrees": 5,
-        "longitudeDirection": "east-positive"
+        "metersPerUnit": 48359.75822224511,
+        "expectedVertices": 574,
+        "expectedFaces": 1144,
+        "indexBase": 1
       },
-      "faceBudget": 2000,
-      "texelsPerFace": 4096,
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "atlasTexels": 13107200,
+      "primitive": "u",
       "simplification": {
-        "targetFaces": 480,
-        "maximumErrorMeters": 764.6881738859925,
-        "method": "source-meshoptimizer"
-      },
-      "primitive": "u"
+        "method": "source-meshoptimizer",
+        "maximumErrorMeters": 600,
+        "regularize": true
+      }
     }
   },
   "celestial": {
-    "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
+    "sunSource": "Published pole and period of Ďurech & Hanuš (2026), model 1 of (21900) Orus, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
   },
   "presentation": {
-    "defaultDataset": "model"
+    "defaultDataset": "shape"
   }
 }

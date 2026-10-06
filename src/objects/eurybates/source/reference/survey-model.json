@@ -1,0 +1,89 @@
+{
+  "deposit": {
+    "title": "Spins and shapes of asteroids reconstructed from photometry from surveys",
+    "authors": "J. Ďurech, J. Hanuš",
+    "doi": "10.5281/zenodo.22812438",
+    "url": "https://doi.org/10.5281/zenodo.22812438",
+    "version": "2026-09-17",
+    "license": "CC-BY-4.0",
+    "paper": "https://arxiv.org/abs/2610.06082",
+    "archive": "shape_models.tar.gz",
+    "archiveBytes": 506746645,
+    "file": "shape_models/model_3548_2.tri",
+    "table": "spin_results"
+  },
+  "asteroidNumber": 3548,
+  "solution": 2,
+  "lambda": 321.7,
+  "beta": -62.2,
+  "periodHours": 8.702737,
+  "nonconvex": false,
+  "mesh": {
+    "vertices": 574,
+    "faces": 1144,
+    "signedVolumeSourceUnitsCubed": 0.9999999996850688,
+    "volumeEquivalentDiameterSourceUnits": 1.240700981668555,
+    "closedManifold": true,
+    "extentsSourceUnits": [
+      1.3027957,
+      1.394991,
+      1.1468201
+    ],
+    "spinExtentsSourceUnits": [
+      1.4835871352558825,
+      1.451514191939109,
+      1.1468201
+    ],
+    "eulerCharacteristic": 2,
+    "scaledVolumeCubicKm": 166824.846284141,
+    "physicalRadiusKm": 34.15
+  },
+  "alternativeModels": [
+    {
+      "solution": 1,
+      "lambda": 140,
+      "beta": -45.9,
+      "periodHours": 8.702737,
+      "file": "shape_models/model_3548_1.tri"
+    }
+  ],
+  "selectionReason": "The deposit lists two spin solutions with the same period. Solution 2 is selected because its pole lies beside the pole of Mottola et al. (2023), ecliptic (320°, −60°), which the 2021 October 20 occultation told apart from its mirror; the separation of both solutions is in /comparison.",
+  "comparison": {
+    "reference": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+    "referenceUrl": "https://doi.org/10.3847/PSJ/acaf79",
+    "publishedExtentsKm": [
+      77.5,
+      71.3,
+      61.8
+    ],
+    "publishedConvexVolumeCubicKm": 167000,
+    "publishedSurfaceEquivalentDiameter": "69.3 ± 1.4 km",
+    "poleEclipticJ2000Degrees": [
+      320,
+      -60
+    ],
+    "periodHours": 8.7027283,
+    "periodText": "8.7027283 ± 0.0000029 h",
+    "meshExtentsKm": [
+      81.7,
+      79.9,
+      63.1
+    ],
+    "poleSeparationDegrees": {
+      "solution2": 2.3,
+      "solution1": 74.1
+    },
+    "meshExtentRatios": {
+      "solution2": [
+        1.294,
+        1.266,
+        1
+      ],
+      "solution1": [
+        1.293,
+        1.275,
+        1
+      ]
+    }
+  }
+}

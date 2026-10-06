@@ -6,16 +6,29 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Display reference radius",
+        "value": "34.15 km (size-calibrated model)",
+        "source": {
+          "url": "https://doi.org/10.3847/PSJ/acaf79",
+          "label": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+          "checked": "2026-10-06",
+          "path": "source/reference/calibration.json",
+          "catalogueId": "doi-10-3847-psj-acaf79",
+          "locator": "/diameterKm; radius = diameterKm / 2"
+        }
+      },
+      {
         "id": "dimensions",
-        "label": "Full approximation dimensions",
+        "label": "Published dimensions",
         "value": "77.5 × 71.3 × 61.8 km",
         "source": {
           "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
           "label": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
           "checked": "2026-09-16",
-          "path": "source/measurements.json",
+          "path": "source/reference/survey-model.json",
           "catalogueId": "doi-10-3847-psj-acaf79",
-          "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+          "locator": "/comparison/publishedExtentsKm"
         }
       },
       {
@@ -26,9 +39,9 @@
           "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
           "label": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
           "checked": "2026-09-16",
-          "path": "source/measurements.json",
+          "path": "source/reference/survey-model.json",
           "catalogueId": "doi-10-3847-psj-acaf79",
-          "locator": "/spin/periodHours"
+          "locator": "/comparison/periodText"
         }
       },
       {
@@ -63,23 +76,47 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "model",
-    "labels": {
-      "model": "Shape model"
-    },
+    "defaultDataset": "shape",
     "controls": [
       {
-        "id": "model",
-        "label": "Shape model",
-        "thumbnail": "/scenes/eurybates/eurybates-model-thumbnail.webp",
-        "surface": "eurybates-model-surface@2x.webp",
-        "poles": "eurybates-model-poles@2x.webp",
+        "id": "shape",
+        "label": "Shape",
+        "thumbnail": "/scenes/eurybates/eurybates-shape-thumbnail.webp",
+        "surface": "eurybates-shape-surface@2x.webp",
+        "poles": "eurybates-shape-surface@2x.webp",
         "source": {
-          "id": "occultation-approximation",
-          "path": "../manifest.json",
-          "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
+          "id": "eurybates-shape",
+          "path": "../manifest.json"
         },
+        "falseColor": false,
+        "notes": "Scale from the occultation-measured volume of Mottola et al. (2023): volume-equivalent diameter 68.3 ± 1.4 km. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/eurybates/eurybates-elevation-thumbnail.webp",
+        "surface": "eurybates-elevation-surface@2x.webp",
+        "poles": "eurybates-elevation-surface@2x.webp",
+        "source": {
+          "id": "eurybates-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-10",
+            "0",
+            "10"
+          ],
+          "meta": "km · 34.15 km reference sphere",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.22812438",
+          "image": "/scenes/eurybates/eurybates-elevation-legend.webp"
+        },
+        "notes": "Radius on the shape model minus a 34.15 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },
@@ -97,8 +134,14 @@
   "charts": [],
   "resources": [
     {
-      "label": "Shape and dimensions",
-      "role": "surface",
+      "label": "Model record",
+      "role": "terrain",
+      "description": "Ďurech & Hanuš (2026), model 2 of (3548) Eurybates, deposit version 2026-09-17",
+      "href": "https://doi.org/10.5281/zenodo.22812438"
+    },
+    {
+      "label": "Size and published dimensions",
+      "role": "facts",
       "description": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
       "href": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
     },
@@ -113,16 +156,22 @@
       "role": "facts",
       "description": "Published model and interpretation",
       "href": "https://doi.org/10.1007/s11214-025-01173-7"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Published pole and period; arbitrary display phase",
+      "href": "https://doi.org/10.5281/zenodo.22812438"
     }
   ],
   "provenance": {
     "editorial": {
-      "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
-      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3"
+      "url": "https://doi.org/10.5281/zenodo.22812438",
+      "credit": "Ďurech & Hanuš (2026), Spins and shapes of asteroids reconstructed from photometry from surveys, Zenodo 10.5281/zenodo.22812438; model 2 of (3548) Eurybates."
     },
     "physical": {
-      "path": "../measurements.json",
-      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3"
+      "path": "../../../../../packages/astronomy/data/bodies/eurybates.json",
+      "credit": "Vendored JPL physical and orbital data"
     }
   }
 }

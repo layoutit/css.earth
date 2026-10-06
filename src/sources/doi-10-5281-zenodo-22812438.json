@@ -1,0 +1,52 @@
+{
+  "id": "doi-10-5281-zenodo-22812438",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Spins and shapes of asteroids reconstructed from photometry from surveys (Ďurech & Hanuš 2026): spin table and shape models",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.22812438"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.5281/zenodo.22812438",
+      "label": "Zenodo deposit"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/braille/source/manifest.json",
+      "locator": "/inputs/0"
+    },
+    {
+      "path": "src/objects/eurybates/source/manifest.json",
+      "locator": "/inputs/0"
+    },
+    {
+      "path": "src/objects/orus/source/manifest.json",
+      "locator": "/inputs/0"
+    },
+    {
+      "path": "src/objects/raup/source/manifest.json",
+      "locator": "/inputs/0"
+    },
+    {
+      "url": "https://zenodo.org/records/22812438",
+      "checkedOn": "2026-10-06",
+      "locator": "Title, publication date 2026-09-17, license CC BY 4.0, files shape_models.tar.gz and spin_results"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. Ďurech and J. Hanuš (2026), Spins and shapes of asteroids reconstructed from photometry from surveys, Zenodo, doi:10.5281/zenodo.22812438 (CC BY 4.0); described in arXiv:2610.06082.",
+      "scope": "citation",
+      "evidence": "https://zenodo.org/records/22812438"
+    }
+  ],
+  "publisher": "Zenodo"
+}

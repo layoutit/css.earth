@@ -1,3 +1,9 @@
-# Credits
+# (21900) Orus: attribution and reuse
 
-Scientific shape constraints: Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3; Levison et al. (2025), Space Science Reviews 221, 70. Numerical extraction and ellipsoid approximation: cssEarth, MIT. Retain the source citations and approximate status; research papers are not relicensed or bundled. The missing-data grid is authored display content, not observed regolith.
+The selected geometry and spin are model 1 of (21900) Orus in [Ďurech & Hanuš (2026), *Spins and shapes of asteroids reconstructed from photometry from surveys*](https://doi.org/10.5281/zenodo.22812438), described in [their paper](https://arxiv.org/abs/2610.06082). The deposit is distributed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). Preserve attribution, source links and notice of changes.
+
+Changes for cssEarth: apply the separately documented physical scale; reduce the mesh to the fewest faces that stay within 2% of the radius of the source, at most 800, through the existing preparer; add the shared coordinate grid and a false-color, shape-derived radial-relief view. The original source mesh bytes remain intact. These outputs are derived visualizations; they are not photographs or newly measured terrain.
+
+Physical-size credit: [Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3](https://doi.org/10.3847/PSJ/acaf79). JPL Small-Body Database and Horizons records are credited to NASA/JPL. Research papers are not relicensed or bundled; the deposit's CC BY license does not override their notices.
+
+No agency, archive, author or mission endorsement is implied. Source-coordinate grids and relief colors are visualization choices. No model-derived density, composition or optical appearance is supplied.
