@@ -12,12 +12,9 @@ import { fetchPreparedCatalogueBank, fetchPreparedJson } from './catalogue-point
 import { mountGalaxyBacking } from './galaxy-backing.js';
 import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import { afterStartup } from '../rendering/loading/startup-gate.js';
-import { galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
+import { catalogueDotsOpacity, galaxyOutsideFade, logarithmicFade, preparedVolumeOpacity, starFieldFade } from './world-context/context-scale.js';
 
 const PARSEC_M = 3.085677581491367e16;
-/** Inside the Solar System a faint share of the galaxy's dots stays, so its sky is never empty; past the planets they
- * rise to full with the star field (starFieldFade). A presentation choice, by eye on 2026-09-30. */
-const SOLAR_SYSTEM_DOTS = .3;
 /** From among the local stars the flat face-on image is seen edge-on, a line across the view: it fades in as the camera
  * pulls out from 0.05 to 5 pc from the viewed body. A presentation choice, by eye on 2026-09-30. */
 const BACKING_FADE_IN_M = [.05 * PARSEC_M, 5 * PARSEC_M] as const;
@@ -143,7 +140,9 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       // them past the system (world-context-planner.ts); measured like them from the selected body. A detailed focus (a
       // nebula's or a galaxy's picture) keeps them, as it keeps the stars' markers: they are the sky around it.
       const starField = starFieldFade(volumeDistanceM, plan.system);
-      const shownDots = SOLAR_SYSTEM_DOTS + (1 - SOLAR_SYSTEM_DOTS) * starField;
+      // The selected body is in the Solar System while it is nearer the Sun than where that system is fully retired.
+      const inSolarSystem = Math.hypot(...selectedPositionM.map((value, axis) => value - plan.focus.positionM[axis]!)) < plan.system.hiddenDistanceM;
+      const shownDots = catalogueDotsOpacity(starField, inSolarSystem);
       // A star the world draws as a body is its marker's to draw: its own dot in the galaxy's bank is left out.
       for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots, withoutM);
       // The backing shows with the dots, and gives way to a detailed focus as the galaxy's volume does.

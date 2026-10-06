@@ -3,7 +3,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { createSystemFade } from './context-scale.js';
+import { catalogueDotsOpacity, createSystemFade } from './context-scale.js';
 import { createWorldContextPlanner } from './world-context-planner.js';
 import type { WorldContextView } from './world-context-planner.js';
 import { packWorldBodies, unpackWorldBodies } from './world-context-view-transport.js';
@@ -869,4 +869,10 @@ test('the moons of a framed planet keep their names before stars beyond the Sola
     positionM: [0, 1, 2].map(index => jupiter.positionM[index]! - toward[index]! * .08 * 149597870700) as [number, number, number] } };
   const named = new Set(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index]!.id));
   for (const moon of ['io', 'europa', 'ganymede', 'callisto']) assert.equal(named.has(moon), true, `${moon} is named`);
+});
+
+test('the galaxy dots are faint only inside the Solar System', () => {
+  assert.equal(catalogueDotsOpacity(0, true), .3);
+  assert.equal(catalogueDotsOpacity(1, true), 1, 'past the planets they rise to full with the star field');
+  assert.equal(catalogueDotsOpacity(0, false), 1, "another star's system has no dots of its own, so the galaxy's are whole");
 });
