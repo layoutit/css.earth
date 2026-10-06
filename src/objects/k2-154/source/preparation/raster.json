@@ -106,10 +106,10 @@
         "minimum": 99.4,
         "maximum": 100.6,
         "colors": [
-          "#1a130e",
-          "#5c4533",
-          "#9c7557",
-          "#d6a077",
+          "#7f4507",
+          "#9f6329",
+          "#bf824a",
+          "#dfa06c",
           "#ffbf8e"
         ],
         "labels": [
@@ -117,7 +117,7 @@
           "100.6%"
         ],
         "limbOf": "color",
-        "description": "The star's color (#ffbf8e, its Color dataset) over the brightness map this project made from the star's light in K2 campaign 102 (July to September 2016): the map's scale, 99.4% to 100.6% of the mean surface, runs from a dark tone of the color to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 1.2% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "description": "The star's color (#ffbf8e, its Color dataset) over the brightness map this project made from the star's light in K2 campaign 102 (July to September 2016): the map's scale, 99.4% to 100.6% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 1.2% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
         "title": "K2 · the star in its color over its brightness map · July to September 2016",
         "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
       }
