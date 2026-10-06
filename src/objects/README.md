@@ -110,6 +110,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Start the shared development site | `pnpm dev` |
 | See what a body's inventory lists, or what changed in it since a revision | `pnpm lookup inventory <id> [--search=<text>] [--since=<revision>]` |
 | See what a body's source manifest declares | `pnpm lookup manifest <id> [--search=<text>] [--full]` |
+| Find a value in a body's JSON records, with the file and jq path that hold it | `pnpm lookup records <id> [--search=<text>] [--file=<text>] [--full]` |
 | Restore missing source inputs | `node packages/bake/cli/restore-source-inputs.mts --object=<id>`; the source manifest reader checks declared-file coverage, not stored digests |
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
 | Update the source/mission catalogues | `node site/build/prepare/catalog/prepare-facilities.mts --catalog-only` |

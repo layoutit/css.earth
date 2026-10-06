@@ -8,7 +8,7 @@ import { projectRoot } from '@cssearth/core/node';
 
 const root = projectRoot(import.meta.url), run = (...args: string[]) => promisify(execFile)(process.execPath, [resolve(import.meta.dirname, 'index.mts'), ...args], { cwd: root });
 
-test('the command reads a tracked body: its inventory against a revision, and its manifest', async t => {
+test('the command reads a tracked body: its inventory against a revision, its manifest, and a value in its records', async t => {
   // A sparse checkout holds no body package; the lookups themselves are tested beside their modules.
   if (!existsSync(resolve(root, 'src/objects/moon/inventory.json'))) return t.skip('src/objects/moon is not in this checkout');
   assert.match((await run('inventory', 'moon', '--search=runtime.json', '--location=prepared')).stdout, /^moon: 1 of \d+ files \(prepared, matching "runtime\.json"\), [\d,]+ bytes\nprepared +[\d,]+ {2}runtime\.json\n$/u);
@@ -17,7 +17,10 @@ test('the command reads a tracked body: its inventory against a revision, and it
   assert.match((await run('manifest', 'moon', '--kind=generated')).stdout, /^moon: \d+ of \d+ entries \(generated\): generated \d+\ngenerated {2}/u);
   await assert.rejects(run('inventory', 'moon', '--since=no-such-revision'), /Not a git revision: no-such-revision/u);
   await assert.rejects(run('inventory', 'no-such-body'), /No object package src\/objects\/no-such-body/u);
-  await assert.rejects(run('files', 'moon'), /Usage: pnpm lookup <inventory\|manifest>/u);
+  assert.match((await run('records', 'moon', '--search=bodyRadiusM', '--file=object.json')).stdout,
+    /^moon: 1 of [\d,]+ entries \(in files named "object\.json", matching "bodyRadiusM"\) in 1 of \d+ JSON files\nobject\.json {2}\.properties\.worldFrame {2}bodyRadiusM: 1737400, /u);
+  assert.match((await run('records', 'moon')).stdout, /^moon: [\d,]+ entries in \d+ JSON files\n(?:.*\n)* *\d+ {2}object\.json\n/u);
+  await assert.rejects(run('files', 'moon'), /Usage: pnpm lookup <inventory\|manifest\|records>/u);
 });
 
 test('an inventory compared with the commit it is checked out at has no differences', async t => {
