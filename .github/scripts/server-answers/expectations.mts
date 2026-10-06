@@ -1,7 +1,7 @@
 /** Target tables describe code-owned behavior, never values learned from recorded answers.
  * Vite preview: CORS precedes plugins; searchServer handles FIND_PATH and page rewrites only.
  * Vite's bundled sirv handles ranges/ETag, but not If-Modified-Since; final middleware sends 404.
- * Handler targets: find.mts, search-response.mts, report.ts and deploy/cloudflare/worker.ts.
+ * Handler targets: find.mts, search-response.mts, deploy/handlers/report.ts and deploy/cloudflare/worker.ts.
  * Worker static types: host.mts's offline ASSETS adapter (not provider HTTP behavior).
  */
 import { type Target, type AnswerRequest, object } from './model.mts';
