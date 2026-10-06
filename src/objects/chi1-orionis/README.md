@@ -28,7 +28,7 @@ Each map uses its paper figure's color bar: the field linear from minus to plus 
   [Canadian Astronomy Data Centre](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/) archive (CC BY 4.0): 16 of 20 December 2014 to 30 December 2014 (program 14BF09); 28 of 7 January 2015 to 14 January 2015 (program 14BF09).
   The programs `chi1-ori-2014-12`, `chi1-ori-2015-01` in
   [the telescope's ESPaDOnS archive](../../../packages/telescope-cli/src/archives/espadons/programs/) pin every spectrum by
-  its size, and the receipt beside each records what every step measured. The maps are the tables in
+  its size. A run's receipt, with what every step measured, is a result that `reduce.mts` writes under ignored `output/espadons`. The maps are the tables in
   `source/science/espadons/`.
 
 **Magnetic maps.** The maps of these runs are made here, with the codes the method's authors publish and nothing of our

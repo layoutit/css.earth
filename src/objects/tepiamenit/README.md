@@ -13,7 +13,7 @@ Gaia's parallax, brightness and spectrum give it 1.5 solar radii and 1.25 solar 
   [Canadian Astronomy Data Centre](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/) archive (CC BY 4.0): 12 of 13 June 2006 to 19 June 2006 (programs 06AF7B, 06AH20A); 26 of 26 June 2007 to 5 July 2007 (programs 07AC027, 07AC27); 40 of 20 January 2008 to 30 January 2008 (programs 07BC17, 07BF10, 07BF17); 39 of 9 June 2016 to 24 June 2016 (program 16AF01); 18 of 31 December 2023 to 19 January 2024 (program 24AF19).
   The programs `tau-boo-2006-06`, `tau-boo-2007-06`, `tau-boo-2008-01`, `tau-boo-2016-06`, `tau-boo-2024-01` in
   [the telescope's ESPaDOnS archive](../../../packages/telescope-cli/src/archives/espadons/programs/) pin every spectrum by
-  its size, and the receipt beside each records what every step measured. The maps are the tables in
+  its size. A run's receipt, with what every step measured, is a result that `reduce.mts` writes under ignored `output/espadons`. The maps are the tables in
   `source/science/espadons/`.
 
 **Magnetic maps.** The maps of these runs are made here, with the codes the method's authors publish and nothing of our

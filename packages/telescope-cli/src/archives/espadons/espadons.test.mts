@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { parseTecplotLonLat } from '@cssearth/bake/objects/raster';
-import { assignTargets, guide, ledgerStar } from './archive-ledger.mts';
+import { assignTargets, guide, ledgerStar, recordedResults } from './archive-ledger.mts';
 import { runsOf } from './archive.mts';
 import { compareFields } from './compare.mts';
 import { chooseParameters, dwarfRow, parseDwarfSequence } from './catalogue.mts';
@@ -148,6 +148,8 @@ test('the ledger gives each archive target to the nearest shipped star and works
   const at = { raDegrees: 300, decDegrees: 22.7 }, held = ledgerStar(stars[1]!, given.get('hd-1')!, [], 'display convention');
   assert.deepEqual([held.spectra, held.state, held.firstYear, held.lastYear, held.typedNames], [52, 'held', 2006, 2013, ['HD 1', 'hd1']]);
   assert.equal(ledgerStar(stars[1]!, given.get('hd-1')!, [{ program: 'hd-1-2007-06', ...at }], 'measured').state, 'pinned');
+  // A receipt is not in git: a run this machine has not reduced keeps what the ledger file records of it.
+  assert.deepEqual([...recordedResults({ stars: [{ maps: [{ program: 'hd-1-2007-06', middleUtc: '2007-06-28', meanGauss: 24 }], reasons: ['hd-1-2006-06: The field is not detected.'] }] })], [['hd-1-2007-06', { mapped: true, middleUtc: '2007-06-28', meanGauss: 24 }], ['hd-1-2006-06', { mapped: false, reason: 'The field is not detected.' }]]);
   const refused = ledgerStar(stars[1]!, given.get('hd-1')!, [{ program: 'hd-1-2006-06', ...at, receipt: { mapped: false, reason: 'The field is not detected.' } }], 'measured'); assert.deepEqual([refused.state, refused.reasons], ['reduced, no map', ['hd-1-2006-06: The field is not detected.']]);
   const mapped = ledgerStar(stars[1]!, given.get('hd-1')!, [{ program: 'hd-1-2013-09', ...at, receipt: { mapped: true, middleUtc: '2013-09-20T10:00:00', meanGauss: 55.4 } }, { program: 'hd-1-2007-06', ...at, receipt: { mapped: true, middleUtc: '2007-06-29T00:00:00', meanGauss: 23.8 } }, { program: 'other', raDegrees: 10, decDegrees: 10 }], 'measured');
   assert.deepEqual([mapped.state, mapped.programs, mapped.maps.map(map => map.program)], ['mapped', ['hd-1-2007-06', 'hd-1-2013-09'], ['hd-1-2007-06', 'hd-1-2013-09']]);

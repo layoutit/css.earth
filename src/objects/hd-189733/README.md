@@ -28,7 +28,7 @@ each with a corona derived from it ([hd-189733-corona](../hd-189733-corona/READM
   August 2006 (programs 06BD01, 06BF27, 06BT15), 15 of 23 June to 4 July 2007 (07AC27) and 7 of 13 to 27 September 2013
   (13BE92). The three programs `hd-189733-<run>-as-drawn` in
   [the telescope's ESPaDOnS archive](../../../packages/telescope-cli/src/archives/espadons/programs/) pin every spectrum
-  by its size, and the receipt beside each records what every step measured. The maps are the tables in
+  by its size. A run's receipt, with what every step measured, is a result that `reduce.mts` writes under ignored `output/espadons`. The maps are the tables in
   `source/science/espadons/`.
 
 ## Processing

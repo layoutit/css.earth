@@ -21,9 +21,9 @@ import { tapRows } from '@cssearth/telescope/node';
 import { isCommand, ledgerFiles, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '../ledger.mts';
 import { namedShippedObjects, readJsonOrNull, type NamedShippedObject } from '../targets.mts';
 import { CADC_TAP } from './cadc.mts';
-import { MAP_SCHEMA, PROGRAMS, PROGRAM_SCHEMA } from './program.mts';
+import { MAP_SCHEMA, PROGRAMS, PROGRAM_SCHEMA, receiptPath } from './program.mts';
 
-const SCHEMA = 'cssearth-espadons-ledger@1';
+const SCHEMA = 'cssearth-espadons-ledger@1', LEDGER_JSON = 'src/sources/espadons/ledger.json';
 /** How far a typed target may lie from a star and be the star, degrees: the search radius of a program. */
 export const MATCH_DEGREES = 0.02;
 /** A star with fewer spectra than this cannot be mapped and is only counted. */
@@ -53,13 +53,22 @@ export function ledgerStar(star: NamedShippedObject, targets: readonly ArchiveTa
     maps: maps.map(local => ({ program: local.program, middleUtc: local.receipt!.middleUtc ?? '', meanGauss: local.receipt!.meanGauss ?? NaN })).sort((a, b) => a.middleUtc.localeCompare(b.middleUtc)),
     reasons: [...new Set(receipts.filter(local => !local.receipt!.mapped).map(local => `${local.program}: ${local.receipt!.reason ?? 'no map'}`))].sort() }; }
 
-/** The programs beside this code with their receipts, read as the external values they are. */
-async function localPrograms(): Promise<Local[]> { const out: Local[] = [];
-  for (const file of (await readdir(PROGRAMS)).filter(name => name.endsWith('.json') && !name.endsWith('.map.json')).sort()) { const program = await readJsonOrNull(resolve(PROGRAMS, file));
-    if (!isRecord(program) || program.schema !== PROGRAM_SCHEMA || !isRecord(program.target)) continue; const id = requireString(program.id, `${file} id`), receipt = await readJsonOrNull(resolve(PROGRAMS, `${id}.map.json`));
+/** What a ledger already records of each run. A receipt stays in ignored output/, so on a machine that has not reduced a
+ * run, its result is the one the ledger file holds. */
+export function recordedResults(ledger: unknown): Map<string, NonNullable<Local['receipt']>> { const out = new Map<string, NonNullable<Local['receipt']>>();
+  if (!isRecord(ledger) || !Array.isArray(ledger.stars)) return out;
+  for (const star of ledger.stars) { if (!isRecord(star)) continue;
+    for (const map of Array.isArray(star.maps) ? star.maps : []) if (isRecord(map) && typeof map.program === 'string' && typeof map.middleUtc === 'string' && typeof map.meanGauss === 'number') out.set(map.program, { mapped: true, middleUtc: map.middleUtc, meanGauss: map.meanGauss });
+    for (const reason of Array.isArray(star.reasons) ? star.reasons : []) { const cut = typeof reason === 'string' ? reason.indexOf(': ') : -1; if (cut > 0) out.set((reason as string).slice(0, cut), { mapped: false, reason: (reason as string).slice(cut + 2) }); } }
+  return out; }
+
+/** The programs beside this code, each with its receipt when this machine has reduced it and else with what the ledger records. */
+async function localPrograms(): Promise<Local[]> { const out: Local[] = [], recorded = recordedResults(await readJsonOrNull(resolve(REPOSITORY, LEDGER_JSON)));
+  for (const file of (await readdir(PROGRAMS)).filter(name => name.endsWith('.json')).sort()) { const program = await readJsonOrNull(resolve(PROGRAMS, file));
+    if (!isRecord(program) || program.schema !== PROGRAM_SCHEMA || !isRecord(program.target)) continue; const id = requireString(program.id, `${file} id`), receipt = await readJsonOrNull(receiptPath(id));
     const map = isRecord(receipt) && receipt.schema === MAP_SCHEMA && isRecord(receipt.map) ? receipt.map : undefined, verdict = map && isRecord(map.verdict) ? map.verdict : undefined, chosen = map && isRecord(map.chosen) ? map.chosen : undefined;
     out.push({ program: id, raDegrees: requireFiniteNumber(program.target.raDegrees, `${id} raDegrees`), decDegrees: requireFiniteNumber(program.target.decDegrees, `${id} decDegrees`),
-      ...(isRecord(receipt) && receipt.schema === MAP_SCHEMA ? { receipt: { mapped: verdict?.mapped === true, ...(typeof verdict?.reason === 'string' ? { reason: verdict.reason } : map ? {} : { reason: 'averaged, not mapped: the program has no star block' }), ...(typeof map?.middleUtc === 'string' ? { middleUtc: map.middleUtc } : {}), ...(typeof chosen?.meanGauss === 'number' ? { meanGauss: chosen.meanGauss } : {}) } } : {}) }); }
+      ...(isRecord(receipt) && receipt.schema === MAP_SCHEMA ? { receipt: { mapped: verdict?.mapped === true, ...(typeof verdict?.reason === 'string' ? { reason: verdict.reason } : map ? {} : { reason: 'averaged, not mapped: the program has no star block' }), ...(typeof map?.middleUtc === 'string' ? { middleUtc: map.middleUtc } : {}), ...(typeof chosen?.meanGauss === 'number' ? { meanGauss: chosen.meanGauss } : {}) } } : recorded.has(id) ? { receipt: recorded.get(id)! } : {}) }); }
   return out; }
 const axisOf = async (id: string): Promise<LedgerStar['axis']> => { const record = await readJsonOrNull(resolve(REPOSITORY, 'src/objects', id, 'source/preparation/rotation.json'));
   return !isRecord(record) ? 'none' : record.schema === 'cssearth-display-orientation@1' && !/inclination/iu.test(String(record.source ?? '')) ? 'display convention' : 'measured'; };
@@ -77,8 +86,9 @@ export function guide(ledger: EspadonsLedger): string { const listed = ledger.st
   return `# What the archive holds of ESPaDOnS polarised spectra
 
 Written by \`packages/telescope-cli/src/archives/espadons/archive-ledger.mts\` from the [Canadian Astronomy Data Centre](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/) on ${ledger.surveyed}.
-The counts are the archive's own, from one grouped query. Every state is worked out from the programs and receipts in
-\`packages/telescope-cli/src/archives/espadons/programs\`, not declared. [A star's magnetic map from archived
+The counts are the archive's own, from one grouped query. Every state is worked out from the programs in
+\`packages/telescope-cli/src/archives/espadons/programs\` and the receipts \`reduce.mts\` writes under ignored \`output/espadons\`; a run
+not reduced on this machine keeps the result recorded here. [A star's magnetic map from archived
 spectra](stellar-magnetic-maps-from-spectra.md) describes what a map is made with and what it cannot do.
 
 The archive holds ${ledger.archive.spectra.toLocaleString('en-US')} polarised spectra under ${ledger.archive.targetNames.toLocaleString('en-US')} typed target names. ${ledger.stars.length} of the ${ledger.shippedStars.toLocaleString('en-US')} stars this project ships have some: ${total.toLocaleString('en-US')} spectra.
@@ -93,7 +103,7 @@ page already draws a measured tilt or only a display convention.
 ${listed.map(row).join('\n')}
 ${reasons.length ? `\n## Reduced without a map\n\n${reasons.join('\n')}\n` : ''}`; }
 
-export const ESPADONS_LEDGER: ArchiveLedger<EspadonsLedger> = { schema: SCHEMA, files: ledgerFiles('src/sources/espadons/ledger.json', 'docs/espadons-ledger.md'), indent: 1, guide, writes: 'always',
+export const ESPADONS_LEDGER: ArchiveLedger<EspadonsLedger> = { schema: SCHEMA, files: ledgerFiles(LEDGER_JSON, 'docs/espadons-ledger.md'), indent: 1, guide, writes: 'always',
   survey: async () => { const answered = await tapRows(CADC_TAP, "SELECT o.target_name, AVG(o.targetPosition_coordinates_cval1) AS ra, AVG(o.targetPosition_coordinates_cval2) AS dec, COUNT(*) AS n, MIN(p.time_bounds_lower) AS first, MAX(p.time_bounds_lower) AS last FROM caom2.Observation o JOIN caom2.Plane p ON o.obsID=p.obsID WHERE o.collection='CFHT' AND o.instrument_name='ESPaDOnS' AND p.productID LIKE '%p' AND p.calibrationLevel=2 GROUP BY o.target_name", 10000);
     const targets = answered.map((row): ArchiveTarget => ({ name: row.target_name ?? '', raDegrees: Number(row.ra), decDegrees: Number(row.dec), spectra: Number(row.n), firstMjd: Number(row.first), lastMjd: Number(row.last) })).filter(target => [target.raDegrees, target.decDegrees, target.spectra, target.firstMjd, target.lastMjd].every(Number.isFinite));
     // Only the targets that fall on a shipped star are kept for the local pass; a star shipped later needs the archive asked again.

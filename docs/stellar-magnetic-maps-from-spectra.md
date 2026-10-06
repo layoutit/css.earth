@@ -58,15 +58,16 @@ why it is not used here.
 [`benchmark.mts`](../packages/telescope-cli/src/archives/espadons/benchmark.mts) reduces nothing: it reads the receipts of
 every program whose `published` block holds what a paper prints for the same run, and scores a rule for the target against
 them. [`compare.mts`](../packages/telescope-cli/src/archives/espadons/compare.mts) sets one program's longitudinal fields
-beside a paper's table, spectrum by spectrum.
+beside a paper's table, spectrum by spectrum. A receipt is a result: `reduce.mts` writes it under ignored `output/espadons`, and
+it is not in git. The numbers below are those of the receipts of 6 October 2026.
 
-38 runs of 23 stars with published maps are pinned, from F to late M stars. Each is reduced with the rotation, tilt and
+41 runs of 25 stars with published maps are pinned, from F to late M stars. Each is reduced with the rotation, tilt and
 harmonic degree its paper used:
 
-- **21 runs give a map.** The median of our mean field over the published one is 1.05, and the runs scatter about it by a
-  factor 1.4. The share of the energy in the toroidal part differs from the published share by 11 points rms (20 runs),
-  3 points lower on average. With `KNEE` at 0.3 the median is 1.06 and at 0.7 it is 0.97.
-- **14 runs give no map to show**, each with its reason in the receipt: in 5 the field is not detected, and in 9 the fit
+- **23 runs give a map.** Over the 22 whose paper prints a mean field, the median of ours over the published one is 1.05, and
+  the runs scatter about it by a factor 1.4. The share of the energy in the toroidal part differs from the published share by
+  13 points rms (21 runs), 1 point lower on average. With `KNEE` at 0.3 the median is 1.06 and at 0.7 it is 0.97.
+- **15 runs give no map to show**, each with its reason in the receipt: in 6 the field is not detected, and in 9 the fit
   does not describe the spectra (the next section says which stars).
 - **3 runs are not reduced**: one star is cooler than the model atmospheres reach, and one run's line is too shallow for
   ZDIpy to start from.

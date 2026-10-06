@@ -13,16 +13,16 @@ import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, isRecord, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { parseProgram, PROGRAMS, PROGRAM_SCHEMA, type EspadonsProgram } from './program.mts';
+import { parseProgram, PROGRAMS, PROGRAM_SCHEMA, receiptPath, type EspadonsProgram } from './program.mts';
 import { chooseFit, KNEE } from './reduce.mts';
 
 export interface LadderStep { readonly target: number; readonly chiSquare: number; readonly meanGauss: number; readonly toroidalPercent: number; readonly axisymmetricPercent: number }
 export interface Scored { readonly id: string; readonly spectra: number; readonly target: number; readonly steps: number; readonly meanGauss: number; readonly toroidalPercent: number; readonly axisymmetricPercent: number; readonly publishedMeanGauss?: number; readonly publishedToroidalPercent?: number }
 /** The programs with a star and a published block of the same tilt and period, each with its receipt's ladder when it has been reduced and a field was found. */
 export async function benchmarkRuns(only?: string) { const runs: { program: EspadonsProgram; spectra?: number; ladder?: LadderStep[]; /** Why reduce.mts made no map to show of this run. */ refused?: string }[] = [];
-  for (const name of (await readdir(PROGRAMS)).filter(file => file.endsWith('.json') && !file.endsWith('.map.json')).sort()) { const value = JSON.parse(await readFile(resolve(PROGRAMS, name), 'utf8')) as { schema?: string }; if (value.schema !== PROGRAM_SCHEMA) continue;
+  for (const name of (await readdir(PROGRAMS)).filter(file => file.endsWith('.json')).sort()) { const value = JSON.parse(await readFile(resolve(PROGRAMS, name), 'utf8')) as { schema?: string }; if (value.schema !== PROGRAM_SCHEMA) continue;
     const program = parseProgram(value); if (!program.published || program.published.otherGeometry || !program.star || (only && !program.id.includes(only))) continue;
-    const map = await readFile(resolve(PROGRAMS, `${program.id}.map.json`), 'utf8').then(text => (JSON.parse(text) as { map?: unknown }).map, () => undefined);
+    const map = await readFile(receiptPath(program.id), 'utf8').then(text => (JSON.parse(text) as { map?: unknown }).map, () => undefined);
     if (map === undefined) { runs.push({ program }); continue; }
     const record = requireRecord(map, `${program.id} map`), verdict = record.verdict;
     if (!isRecord(verdict)) { runs.push({ program }); continue; }   // a receipt of an earlier reduction, which gave no verdict

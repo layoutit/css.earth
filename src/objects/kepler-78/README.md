@@ -13,7 +13,7 @@ Its radius and temperature follow Bonomo et al. 2023. The introduction is genera
   [Canadian Astronomy Data Centre](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/) archive (CC BY 4.0): 13 of 23 July 2015 to 29 August 2015 (programs 15AC21, 15AF09, 15BD96).
   The programs `kepler-78-2015-08` in
   [the telescope's ESPaDOnS archive](../../../packages/telescope-cli/src/archives/espadons/programs/) pin every spectrum by
-  its size, and the receipt beside each records what every step measured. The maps are the tables in
+  its size. A run's receipt, with what every step measured, is a result that `reduce.mts` writes under ignored `output/espadons`. The maps are the tables in
   `source/science/espadons/`.
 
 **Magnetic maps.** The maps of these runs are made here, with the codes the method's authors publish and nothing of our

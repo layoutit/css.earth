@@ -139,7 +139,7 @@
         "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/about.html",
         "https://creativecommons.org/licenses/by/4.0/"
       ],
-      "acquisition": "Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program gj-504-2025-04; the receipt beside that program (gj-504-2025-04.map.json) records every archived spectrum by its pin, the line list, the codes and each step's result.",
+      "acquisition": "Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program gj-504-2025-04, which pins every archived spectrum by its size. The run's receipt (the line list, the codes and each step's result) is written again by that command under output/espadons and is not kept in git.",
       "redistribution": "Archived spectra under CC BY 4.0, reduced here.",
       "consumers": [
         "espadons-zdi"

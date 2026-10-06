@@ -12,7 +12,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord } from '@cssearth/core';
-import { PROGRAMS, readProgram, type PublishedRun } from './program.mts';
+import { readProgram, receiptPath, type PublishedRun } from './program.mts';
 
 export interface FieldPair { readonly utc: string; readonly ours: number; readonly oursError: number; readonly published: number; readonly publishedError: number }
 /** Our longitudinal fields beside the published ones of the same spectra, and how they agree. */
@@ -27,7 +27,7 @@ export function compareFields(ours: readonly { readonly utc: string; readonly ga
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const id = process.argv[2]; if (!id) throw new TypeError('Usage: compare.mts <program id>');
-  const program = await readProgram(id), receipt = requireRecord(JSON.parse(await readFile(resolve(PROGRAMS, `${id}.map.json`), 'utf8')), 'map receipt');
+  const program = await readProgram(id), receipt = requireRecord(JSON.parse(await readFile(receiptPath(id), 'utf8')), 'map receipt');
   if (!program.published) throw new Error(`${id} has no published block to compare with.`);
   console.log(`${id} against ${program.published.paper}`);
   const spectra = requireArray(requireRecord(receipt.profiles, 'receipt profiles').spectra, 'receipt spectra').map(entry => requireRecord(entry, 'receipt spectrum')).filter(entry => entry.used !== false).map(entry => { const field = requireRecord(entry.longitudinal, 'longitudinal'); return { utc: String(entry.utc), gauss: Number(field.gauss), error: Number(field.error) }; });

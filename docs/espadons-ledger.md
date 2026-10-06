@@ -1,8 +1,9 @@
 # What the archive holds of ESPaDOnS polarised spectra
 
 Written by `packages/telescope-cli/src/archives/espadons/archive-ledger.mts` from the [Canadian Astronomy Data Centre](https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/) on 2026-10-06.
-The counts are the archive's own, from one grouped query. Every state is worked out from the programs and receipts in
-`packages/telescope-cli/src/archives/espadons/programs`, not declared. [A star's magnetic map from archived
+The counts are the archive's own, from one grouped query. Every state is worked out from the programs in
+`packages/telescope-cli/src/archives/espadons/programs` and the receipts `reduce.mts` writes under ignored `output/espadons`; a run
+not reduced on this machine keeps the result recorded here. [A star's magnetic map from archived
 spectra](stellar-magnetic-maps-from-spectra.md) describes what a map is made with and what it cannot do.
 
 The archive holds 22,652 polarised spectra under 3,005 typed target names. 164 of the 3,107 stars this project ships have some: 4,831 spectra.

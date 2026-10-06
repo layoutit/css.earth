@@ -12,9 +12,9 @@
  *    A program without a `star` block stops after step 3.
  *
  * The depths of step 2 and steps 3 and 4 are the published codes toolchain.json pins; install them once with toolchain.mts. The result is the
- * receipt `<program id>.map.json` beside the program: every input by its pin, what each step measured, every step of the
- * ladder and the chosen map's coefficients as ZDIpy wrote them. The mean lines, ZDIpy's files and the map as a table and a
- * picture go under output/espadons/<program id>. */
+ * receipt `<program id>.map.json`: every input by its pin, what each step measured, every step of the ladder and the chosen
+ * map's coefficients as ZDIpy wrote them. It goes under ignored output/espadons/<program id> with the mean lines, ZDIpy's
+ * files and the map as a table and a picture: a receipt is a result, and git holds the program, not the result. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -25,7 +25,7 @@ import { productFiles } from './cadc.mts';
 import { meanLines, type MeanLine } from './lsd.mts';
 import { lineMask, MINIMUM_DEPTH } from './mask.mts';
 import { readPolarisedSpectrum, type PolarisedSpectrum } from './product.mts';
-import { DOWNLOADS, MAP_SCHEMA, PROGRAMS, readProgram } from './program.mts';
+import { DOWNLOADS, MAP_SCHEMA, readProgram, receiptPath } from './program.mts';
 import { toolchainPins } from './toolchain.mts';
 import { fieldGrid, fitMap, mapTable, middleMjd, prepareRun, type MapFit, type MapRun } from './zdi.mts';
 
@@ -47,7 +47,7 @@ export const detectionSigma = (chiSquareNoField: number, points: number) => (chi
 /** A map whose reduced chi-square stays above this, or whose ladder has fewer steps than `FEWEST_STEPS`, does not describe
  * its spectra: the field changed during the run (HD 189733's June and August 2006 together stop at 8.9), or it is too
  * strong for ZDIpy's weak-field treatment (the red dwarfs GJ 51, WX UMa, EV Lac and AD Leo stop at 2.3 to 19.5, with mean
- * fields 0.06 to 3.6 times the published ones). The 21 published runs that stay under it are within a factor 2. */
+ * fields 0.06 to 3.6 times the published ones). The 22 published runs that stay under it are within a factor 2.2. */
 export const POOR_FIT = 2, FEWEST_STEPS = 3;
 /** The targets a map is fitted to, from loose to tight: steps of a fifth less from the fit with no field down to 3, then
  * these. The ladder stops at the first target ZDIpy does not reach within `ITERATIONS`. */
@@ -58,7 +58,7 @@ export function ladderTargets(chiSquareNoField: number): number[] { const target
 /** The step of a ladder that is the map. A tighter target always fits better and always holds more field; past some point
  * the field grows to fit noise. Between two steps, the fit bought is the percent of chi-square lost for each percent of
  * mean field added. The map is the last step before that price, past its best, first falls under `KNEE`. At 0.5 the maps of
- * 21 published runs have a median mean field 1.05 times the published one, with a scatter of a factor 1.4 (benchmark.mts);
+ * 22 published runs have a median mean field 1.05 times the published one, with a scatter of a factor 1.4 (benchmark.mts);
  * 0.3 gives 1.06 and 0.7 gives 0.97. */
 export const KNEE = 0.5;
 export function chooseFit<T extends Pick<MapFit, 'chiSquare' | 'meanGauss'>>(ladder: readonly T[], knee = KNEE): T {
@@ -111,7 +111,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   console.log(`${averaged.means.lines} lines outside the Earth's bands and the hydrogen lines; the star's line at ${averaged.velocityKmS.toFixed(1)} km/s${program.radialVelocity ? ` (catalogued ${program.radialVelocity.value})` : ', found with no catalogued velocity'}, ${(100 * averaged.searchDepth).toFixed(1)}% deep in the first spectrum`);
   const medianError = averaged.lines.map(line => line.error).sort((a, b) => a - b)[Math.floor(averaged.lines.length / 2)]!, reason = averaged.lines.map(line => line.nullFalseAlarm < NULL_FALSE_ALARM ? 'a signal in the null check' : line.error > ERROR_LIMIT * medianError ? `its error is over ${ERROR_LIMIT} times the run's median` : ''), valid = reason.map(text => !text);
   for (const [i, line] of averaged.lines.entries()) console.log(`  ${line.product} ${utc(line.mjd)}${valid[i] ? '' : ` LEFT OUT, ${reason[i]}`}: longitudinal field ${line.gauss.toFixed(1)} ± ${line.error.toFixed(1)} G (null ${line.nullGauss.toFixed(1)}); false-alarm chance ${line.falseAlarm.toExponential(1)} (null ${line.nullFalseAlarm.toExponential(1)}); errors scaled by a chi-square of ${line.chiSquare.stokesV?.toFixed(2) ?? '?'}`);
-  await mkdir(PROGRAMS, { recursive: true });
+  await mkdir(run, { recursive: true });
   const pins = await toolchainPins(), spectrumRecord = (line: MeanLine, i: number) => ({ product: line.product, utc: utc(line.mjd), mjd: round(line.mjd, 5), used: valid[i]!, ...(valid[i] ? {} : { leftOut: reason[i]! }), longitudinal: { gauss: round(line.gauss, 2), error: round(line.error, 2), nullGauss: round(line.nullGauss, 2) }, falseAlarm: line.falseAlarm, nullFalseAlarm: line.nullFalseAlarm, centreKmS: round(line.centreKmS, 2), chiSquare: line.chiSquare, offset: line.offset });
   const receipt: Record<string, unknown> = { schema: MAP_SCHEMA, program: id, target: program.target, inputs: { observations: observations.map(({ product, uri, bytes }) => ({ product, uri, bytes })), ...(unread.length ? { leftOut: unread } : {}), lineData: { url: mask.pin.url, bytes: mask.pin.bytes, credit: mask.pin.credit }, toolchain: { file: pins.file, requirements: pins.entry.requirements, zdipy: pins.entry.zdipy, julia: pins.entry.julia } },
     mask: { atmosphere: program.atmosphere, korg: mask.korg, candidates: mask.candidates, synthesised: mask.synthesised, minimumDepth: MINIMUM_DEPTH, deepEnough: mask.lines.length, lines: averaged.means.lines, species: Object.fromEntries(species),
@@ -142,6 +142,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
       map.verdict = { mapped: false, reason }; console.log(`map: none. ${reason}`); }
     receipt.map = map;
   } else console.log('No star block in the program: the spectra are averaged, not mapped.');
-  await writeFile(resolve(PROGRAMS, `${id}.map.json`), `${JSON.stringify(receipt, null, 1)}\n`);
-  console.log(`receipt ${resolve(PROGRAMS, `${id}.map.json`)}; mean lines${program.star ? ', ZDIpy files, map table and picture' : ''} in ${run}`);
+  await writeFile(receiptPath(id), `${JSON.stringify(receipt, null, 1)}\n`);
+  console.log(`receipt ${receiptPath(id)}; mean lines${program.star ? ', ZDIpy files, map table and picture' : ''} in ${run}`);
 }

@@ -26,7 +26,7 @@
       "title": "Magnetic map of HD 179949 from 18 polarised spectra of 25 September 2009 to 10 October 2009: radial, azimuthal and meridional field on a longitude-latitude grid",
       "credit": "CFHT ESPaDOnS, CFHT programs 09BC19, 09BF05, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
       "displayCredit": "CFHT ESPaDOnS · mapped here",
-      "acquisition": "The file the gumala package holds for its own dataset radial-field-2009-10; Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program hd-179949-2009-09; the receipt beside that program (hd-179949-2009-09.map.json) records every archived spectrum by its pin, the line list, the codes and each step's result.",
+      "acquisition": "The file the gumala package holds for its own dataset radial-field-2009-10; Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program hd-179949-2009-09, which pins every archived spectrum by its size. The run's receipt (the line list, the codes and each step's result) is written again by that command under output/espadons and is not kept in git.",
       "license": "CC BY 4.0 for the archived spectra (Canadian Astronomy Data Centre); reduction by this project",
       "datasetId": "oct-2009"
     },

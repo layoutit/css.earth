@@ -58,4 +58,6 @@ export function parseProgram(value: unknown): EspadonsProgram {
     span: { fromMjd: number(span, 'fromMjd', 'span'), toMjd: number(span, 'toMjd', 'span') }, observations, ...(atmosphere ? { atmosphere } : {}), ...(radialVelocity ? { radialVelocity } : {}), ...(star ? { star } : {}), ...(published ? { published } : {}) };
 }
 export const programPath = (id: string) => { if (!ID.test(id)) throw new TypeError(`${id} is not a program id.`); return resolve(PROGRAMS, `${id}.json`); };
+/** A run's receipt. It is a result, not an input: reduce.mts writes it under ignored output/ and git never holds it. */
+export const receiptPath = (id: string) => { if (!ID.test(id)) throw new TypeError(`${id} is not a program id.`); return resolve(WORKSPACE, 'output/espadons', id, `${id}.map.json`); };
 export const readProgram = async (id: string) => parseProgram(JSON.parse(await readFile(programPath(id), 'utf8')));

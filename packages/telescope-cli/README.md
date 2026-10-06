@@ -74,7 +74,7 @@ node packages/telescope-cli/src/archives/espadons/reduce.mts hd-189733-2007-06
 `archive.mts` writes a program beside the code, with each spectrum pinned by its size. Before `reduce.mts` can run, the
 program needs three blocks a person fills from catalogues and papers, each value with where it is printed: `atmosphere`
 (temperature, gravity), `radialVelocity`, and `star` (rotation period, tilt, projected rotation speed, the highest harmonic
-degree). `reduce.mts` writes a receipt beside the program and the map as a table and a picture under `output/espadons/`.
+degree). `reduce.mts` writes a receipt, the map as a table and a picture under ignored `output/espadons/`; git holds the program, not the result.
 `telescope new-object --from-spectra STAR --out SPEC.json` then drafts the star's reduced maps as datasets of its page.
 
 ## Supported v1 boundary

@@ -5,7 +5,7 @@ import { spawn } from 'node:child_process';
 import { mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { isRecord, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { MAP_SCHEMA, PROGRAMS } from '../../archives/espadons/program.mts';
+import { MAP_SCHEMA, PROGRAMS, receiptPath } from '../../archives/espadons/program.mts';
 import { readStar } from '../corona/corona.mts';
 import { isConventionOnly, magneticMapFiles, mapSourceRecords, parseMagneticMaps, reducedMap, tiltedRotation, type MagneticMapEntry, type ReducedMap } from './map-datasets.mts';
 
@@ -19,7 +19,7 @@ const readJson = async (path: string, what: string): Promise<unknown> => { try {
 const reduce = (program: string) => `node packages/telescope-cli/src/archives/espadons/reduce.mts ${program}`;
 
 async function reduced(root: string, choice: MagneticMapEntry['maps'][number]): Promise<ReducedMap> {
-  const receipt = requireRecord(await readJson(resolve(PROGRAMS, `${choice.program}.map.json`), `${choice.program} is not reduced (${reduce(choice.program)})`), `${choice.program} receipt`);
+  const receipt = requireRecord(await readJson(receiptPath(choice.program), `${choice.program} is not reduced (${reduce(choice.program)})`), `${choice.program} receipt`);
   if (receipt.schema !== MAP_SCHEMA) throw new Error(`${choice.program}: its receipt is of an earlier reduction; reduce it again (${reduce(choice.program)}).`);
   const table = await readFile(resolve(root, 'output/espadons', choice.program, `${choice.program}.dat`), 'utf8').catch(() => { throw new Error(`${choice.program}: its map table is not in output/espadons (${reduce(choice.program)}).`); });
   return reducedMap(choice, receipt, await readJson(resolve(PROGRAMS, `${choice.program}.json`), `${choice.program}: no such program`), table);
@@ -57,7 +57,7 @@ export async function runMagneticMaps(specPath: string, context: Context): Promi
  * first; a map's label is the month and year of the middle of its run. */
 export async function draftsFromReducedPrograms(names: readonly string[], context: Context): Promise<{ readonly stars: readonly unknown[]; readonly magneticMaps: readonly unknown[]; readonly report: readonly string[] }> {
   const magneticMaps: unknown[] = [], report: string[] = [], receipts: { program: string; ra: number; dec: number; mjd: number; tilt: number; refused?: string }[] = [];
-  for (const name of (await readdir(PROGRAMS)).filter(file => file.endsWith('.map.json')).sort()) { const receipt = await readJson(resolve(PROGRAMS, name), name);
+  for (const name of (await readdir(PROGRAMS)).filter(file => file.endsWith('.json')).sort()) { const receipt: unknown = await readFile(receiptPath(name.slice(0, -'.json'.length)), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
     if (!isRecord(receipt) || receipt.schema !== MAP_SCHEMA || !isRecord(receipt.target) || !isRecord(receipt.map)) continue;
     receipts.push({ program: requireString(receipt.program, 'program'), ra: requireFiniteNumber(receipt.target.raDegrees, 'raDegrees'), dec: requireFiniteNumber(receipt.target.decDegrees, 'decDegrees'), mjd: requireFiniteNumber(receipt.map.middleMjd, 'middleMjd'), tilt: requireFiniteNumber(requireRecord(requireRecord(receipt.map.star, 'map star').inclinationDegrees, 'inclination').value, 'inclination'),
       ...(isRecord(receipt.map.verdict) && receipt.map.verdict.mapped === true ? {} : { refused: isRecord(receipt.map.verdict) ? requireString(receipt.map.verdict.reason, 'verdict reason') : 'reduced before maps carried a verdict; reduce it again' }) }); }
