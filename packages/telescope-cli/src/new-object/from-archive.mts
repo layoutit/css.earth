@@ -7,8 +7,8 @@
  * out and named, so the README can say so; a host left with no planet to add is left out, not drafted as a lone star. A host the
  * universe holds is found by the Gaia DR3 source its position cites, then by name. The card and introduction are
  * drafted from the row's numbers and cite the row's paper; a person edits them, or keeps them. */
-import { archiveHostQuery, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, decodeEntities, NASA_TAP, parseArchiveRows } from './orbit.mts';
-import { fetchGaiaRow, type Archive } from './archives/archives.mts';
+import { archiveHostQuery, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, NASA_TAP, parseArchiveRows } from './orbit.mts';
+import { decodeEntities, fetchGaiaRow, type Archive } from './archives/archives.mts';
 import { duplicateName, hostId as idForHost, planetId, planetPrefix, type Existing } from './identity.mts';
 import { TIC, ticRow, wideCompanions } from './companions.mts';
 import { wikipediaQuotes } from './prose.mts';

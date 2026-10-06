@@ -7,7 +7,7 @@
  * the band's name says which system it is. A planet missing any of the three bands in both systems is left out and named. */
 import type { Archive } from './archives.mts';
 import { SIMBAD_TAP } from '../companions.mts';
-import type { PhotometrySpec } from '../spec.mts';
+import type { PhotometrySpec } from '../spec-types.mts';
 
 export const ULTRACOOL = { record: 'https://doi.org/10.5281/zenodo.15802304', credit: 'Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo)',
   main: 'https://zenodo.org/api/records/15802304/files/UltracoolSheet%20-%20Main.csv/content', references: 'https://zenodo.org/api/records/15802304/files/UltracoolSheet%20-%20References.csv/content' };

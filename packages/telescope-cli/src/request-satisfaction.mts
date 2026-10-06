@@ -1,22 +1,21 @@
 /** Product facts answer a request; catalogue capabilities and successful decoding alone do not. */
 import type { CalibrationDependency } from './calibration-dependencies.mts';
-import type { NativeMetadata } from './native-metadata.mts';
+import type { MetadataFacts } from './native-metadata.mts';
 import { inputWavelengths } from './recipe-request.mts';
 import type { CapabilityRequest, ProductKind, RequestedResult } from './recipe-request.mts';
-import type { ConstraintVerdict } from './query-contract.mts';
-import { supportsMeasuredResolution, PROFILE_ASSUMPTIONS, RESOLUTION_ASSUMPTIONS, type ResolutionEvidence } from '@cssearth/objects';
-export interface ProductFacts {
+import { supportsMeasuredResolution, PROFILE_ASSUMPTIONS, RESOLUTION_ASSUMPTIONS, type ResolutionAssumption } from '@cssearth/objects';
+export type ConstraintAnswer = 'yes' | 'no' | 'partial' | 'unknown';
+export interface ConstraintVerdict { readonly answer: ConstraintAnswer; readonly reason: string;
+  readonly assumptions?: readonly { readonly id: ResolutionAssumption; readonly description: string; readonly accepted: boolean }[] }
+export interface ProductFacts extends MetadataFacts {
   readonly regionCoverage?: { readonly region: import('@cssearth/objects').IcrsCircle; readonly answer: 'partial' | 'unknown'; readonly reason: string; readonly usablePixelCenters: number; readonly invalidPixelCenters: number };
-  readonly nativeMetadata?: NativeMetadata;
   readonly calibrationDependencies?: readonly CalibrationDependency[];
   readonly verified: boolean;
   readonly target: string;
   readonly kind?: ProductKind;
   readonly result?: RequestedResult;
-  readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
   readonly startIso?: string; readonly endIso?: string;
-  readonly angularResolutionArcsec?: number; readonly surfaceResolutionKm?: number; readonly resolutionElements?: number;
-  readonly resolutionEvidence?: readonly ResolutionEvidence[];
+  readonly surfaceResolutionKm?: number; readonly resolutionElements?: number;
   /** Conditional observed-profile upper bound; exceeding a request is unknown, not a measured rejection. */
   readonly angularResolutionBound?: { readonly arcsec: number; readonly method: 'jwst-point-source-profile@1'; readonly receipt: string };
 }

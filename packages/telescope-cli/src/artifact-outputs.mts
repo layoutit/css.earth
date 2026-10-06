@@ -9,7 +9,7 @@ import { verifiedProduct } from './verified-product.mts';
 import { validateSphereSource } from './sphere/sphere.mts';
 import { inspectSpatialObject } from './spatial-handoff.mts';
 import { contextTarget, sourceContext } from './delivery-context.mts';
-import type { FamilyOperation } from './family-handlers.mts';
+import type { FamilyOperation } from './family-handler.mts';
 import { verifiedExecutableFamilyOperations } from './family-operation.mts';
 import { openPdsSource } from './pds-source.mts';
 import { parseProductDescriptor } from './product-descriptor.mts';

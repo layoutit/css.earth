@@ -8,7 +8,7 @@ import type { SourceRelevance } from './source-relevance.mts';
 import type { ProductSoftware } from '@cssearth/objects';
 import type { SourceProcessingSoftware } from './source-product-contract.mts';
 import type { DeliveryContext } from './delivery-context.mts';
-import type { FamilyOperation } from './family-handlers.mts';
+import type { FamilyOperation } from './family-handler.mts';
 import { requireString } from '@cssearth/core';
 
 const briefDiagnostic=(value:string)=>value.length<=280?value:`${value.slice(0,279).trimEnd()}… (full reason in saved result)`;

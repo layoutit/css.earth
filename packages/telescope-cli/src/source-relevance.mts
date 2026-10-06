@@ -3,7 +3,6 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import type { NativeMetadata } from './native-metadata.mts';
-import type { OutputChoice } from './outputs.mts';
 import type { ProductDescriptor } from './product-descriptor.mts';
 import { PRODUCT_KINDS } from './recipe-request.mts';
 import { parseSkyTarget } from '@cssearth/telescope/node';
@@ -91,7 +90,7 @@ function covers(intervals:readonly (readonly [number,number])[],requested:readon
     :verdict('unknown','Native wavelength bins overlap the request but do not establish complete coverage.');
 }
 
-export function assessSourceRelevance(question:SourceQuestion,metadata:readonly NativeMetadata[],outputs:readonly OutputChoice[],descriptor?:ProductDescriptor):SourceRelevance{
+export function assessSourceRelevance(question:SourceQuestion,metadata:readonly NativeMetadata[],outputs:readonly {readonly kind:string;readonly available:boolean}[],descriptor?:ProductDescriptor):SourceRelevance{
   const represented=descriptor?.components.map(component=>component.representation.kind)??[];
   const descriptorArrays=descriptor?.components.filter(component=>component.representation.kind==='array')??[];
   const contents:SourceRelevance['contents'][number][]=metadata.map(item=>{
