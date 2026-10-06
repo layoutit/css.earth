@@ -23,7 +23,7 @@ import { startupFetch } from './startup-requests.mts';
 // client's static graph; Vite still emits it as a small chunk nothing loads.
 // That module's import is JSON-attributed, so the Node read can only yield data.
 // A host with no file system swaps that one module for its own reader
-// (site/build/bundle-cloudflare-worker.mts).
+// (deploy/cloudflare/bundle-worker.mts).
 // The main thread reads the summary and the files it needs: every body and camera fact, with each orbit reduced to its parent,
 // bounds and size. Only the planner worker projects orbit paths; it reads each orbit centre's binary bank when a frame
 // first needs it. The full JSON is build-time only.

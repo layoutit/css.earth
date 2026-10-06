@@ -29,9 +29,10 @@ files expanded from its global/per-function `included_files`. Globs support `*`,
 reads through file APIs, directory/stat/open operations, streams and module loading are traced. Reads outside the
 real isolated root fail; missing packaged data fails during replay. File reads are part of `closure.json`.
 
-`index.json` records the configured functions directory, edge route, worker main, assets binding/directory,
+`index.json` records the edge route, included files, assets binding/directory (from the repository root),
 `run_worker_first`, `html_handling`, all header rules and immutable cache rules from both `netlify.toml` and `dist/_headers`.
-Changes to these facts appear in the diff. Temporary packages are removed when a child exits or disconnects.
+Changes to these facts appear in the diff. Where the checkout keeps the functions, the edge router and the Worker script is
+layout, not a fact: moving them changes no recording. Temporary packages are removed when a child exits or disconnects.
 
 Cloudflare warms the find catalogue and lazy page modules before representative requests. Any child diagnostic
 containing `page-handler-fallback` rejects the recording. Rewritten search answers must retain their submitted-search
@@ -122,7 +123,8 @@ place files are copied into each isolated function package. Build subprocesses r
 Each clone is deleted immediately after its recording/checks; only one clone exists at a time.
 
 Build steps and preview entry come from each revision's `package.json`; function bundles and edge routing come
-from its `netlify.toml`; the Worker output comes from its `wrangler.jsonc`. The checker imports that clone's edge
+from its `netlify.toml`; the Worker output comes from the wrangler configuration its `deploy:cloudflare-preview` script
+names with `--config`, whose `main` and `assets.directory` are read from that file's folder. The checker imports that clone's edge
 route too. Unsupported script/config shapes fail explicitly. No entry is imported from the other revision.
 
 Use **Node 24** for CI qualification. Start from a provisioned checkout with its inventoried data restored.

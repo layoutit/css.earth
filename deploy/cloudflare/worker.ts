@@ -1,8 +1,8 @@
 // Cloudflare's entry for the site: the built pages are the Worker's static assets, and this script answers only what a
 // static file cannot. It is Netlify's edge router and its three functions (netlify/) in one place, calling the same
-// handlers. site/build/bundle-cloudflare-worker.mts bundles it; wrangler.jsonc names the paths that skip it.
-import searchRoute from '../site/server/search-route.mts';
-import { FIND_PATH } from '../site/search/find-protocol.mts';
+// handlers. deploy/cloudflare/bundle-worker.mts bundles it; deploy/cloudflare/wrangler.jsonc names the paths that skip it.
+import searchRoute from '../../site/server/search-route.mts';
+import { FIND_PATH } from '../../site/search/find-protocol.mts';
 import { siteFetcher, useAssets, type Assets } from './assets.ts';
 import { answerOrFallback } from './fallback.ts';
 
@@ -27,12 +27,12 @@ async function report(request: Request): Promise<Response> {
 // and an address with no query never needs it.
 async function find(request: Request): Promise<Response> {
   const [{ handleFindRequest }, { builtSearchData }, { FEATURE_PIN }] = await Promise.all([
-    import('../site/server/find.mts'), import('../site/server/search-data.mts'), import('../site/server/feature-pin.mts')]);
+    import('../../site/server/find.mts'), import('../../site/server/search-data.mts'), import('../../site/server/feature-pin.mts')]);
   return handleFindRequest(request, builtSearchData(FEATURE_PIN));
 }
 async function page(request: Request, assets: Assets): Promise<Response> {
   const [{ handleSearchRequest }, { builtSearchData }, { FEATURE_PIN }] = await Promise.all([
-    import('../site/server/search-response.mts'), import('../site/server/search-data.mts'), import('../site/server/feature-pin.mts')]);
+    import('../../site/server/search-response.mts'), import('../../site/server/search-data.mts'), import('../../site/server/feature-pin.mts')]);
   const origin = new URL(request.url).origin;
   return handleSearchRequest(request, builtSearchData(FEATURE_PIN), siteFetcher(origin, assets));
 }

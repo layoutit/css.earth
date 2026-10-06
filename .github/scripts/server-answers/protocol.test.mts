@@ -2,10 +2,10 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
-import handleFindRequest from '../../../netlify/functions/find.ts';
-import handleSearchRequest from '../../../netlify/functions/search.ts';
-import edgeRoute from '../../../netlify/edge-functions/search-route.ts';
-import worker from '../../../cloudflare/worker.ts';
+import handleFindRequest from '../../../deploy/netlify/functions/find.ts';
+import handleSearchRequest from '../../../deploy/netlify/functions/search.ts';
+import edgeRoute from '../../../deploy/netlify/edge-functions/search-route.ts';
+import worker from '../../../deploy/cloudflare/worker.ts';
 import { expectation } from './expectations.mts';
 
 test('fixed find expectation statuses and types come from the real handler, through deployed Netlify entrypoints', async () => {

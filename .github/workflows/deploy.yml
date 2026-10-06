@@ -119,7 +119,7 @@ jobs:
           fi
       - name: Publish the prebuilt site to Cloudflare
         # Bundles the Worker, answers one search and one page from the bundle, and uploads it with the built pages as its
-        # static assets (wrangler.jsonc, the `production` environment). docs/ci-cd.md, "Serving the site from Cloudflare".
+        # static assets (deploy/cloudflare/wrangler.jsonc, the `production` environment). docs/ci-cd.md, "Serving the site from Cloudflare".
         if: env.HOST == 'cloudflare'
         run: pnpm deploy:cloudflare
       - name: Publish the prebuilt site to Netlify
@@ -134,7 +134,9 @@ jobs:
         # that workspace-selection prompt when --cwd resolves to a directory OTHER than the process's
         # actual working directory, so this step runs from $RUNNER_TEMP and points --cwd/--dir at the
         # checkout with absolute paths. netlify.toml, the edge function and the search function are
-        # still read from the checkout (via --cwd), not from $RUNNER_TEMP.
+        # still read from the checkout (via --cwd), not from $RUNNER_TEMP. netlify deploy has no option naming a
+        # configuration file and resolves every path in it from --cwd, so netlify.toml stays at the root while the
+        # functions and the edge router it names live in deploy/netlify.
         run: |
           cd "$RUNNER_TEMP"
           pnpm --package=netlify-cli@27.8.0 dlx netlify deploy \

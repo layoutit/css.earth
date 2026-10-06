@@ -10,7 +10,7 @@ import { assertNoFallback } from './record.mts';
 import { compare, dimensions } from './diff.mts';
 import { expectation, expectationTable, targetTables } from './expectations.mts';
 import { check, covered } from './check.mts';
-import edgeRoute from '../../../netlify/edge-functions/search-route.ts';
+import edgeRoute from '../../../deploy/netlify/edge-functions/search-route.ts';
 const origin = 'http://127.0.0.1:12345';
 test('text bytes stay exact; JSON key order is deterministic; arrays retain order', async () => {
   const html = '<html>\r\n unchanged \t</html>';

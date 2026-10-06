@@ -1,10 +1,10 @@
-// Entry script: node site/build/bundle-cloudflare-worker.mts [--noindex]
+// Entry script: node deploy/cloudflare/bundle-worker.mts [--noindex]
 /**
- * Cloudflare serves the built site (`dist`) as a Worker's static assets and runs cloudflare/worker.ts for the addresses a
+ * Cloudflare serves the built site (`dist`) as a Worker's static assets and runs deploy/cloudflare/worker.ts for the addresses a
  * static file cannot answer: the find and report endpoints, and a page address carrying a query. Run after build:deploy.
  *
  * The Worker runs the handlers Netlify's functions run, and it has no disk. Two modules that read one are swapped for the
- * Worker's own (cloudflare/search-data.ts, cloudflare/project-files.ts); the project files the page handler reads go into
+ * Worker's own (deploy/cloudflare/search-data.ts, deploy/cloudflare/project-files.ts); the project files the page handler reads go into
  * the script, and the catalogues the search reads are staged beside the built pages. `import.meta.url` is a `file:`
  * address, so site/directory/world-context-plan.mts reads the whole world as it does in Node.
  *
@@ -16,11 +16,11 @@ import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 import { build } from 'esbuild';
 import { hasErrorCode } from '@cssearth/core';
-import { FUNCTION_PROJECT_FILES } from './function-project-files.mts';
+import { FUNCTION_PROJECT_FILES } from '../handlers/function-project-files.mts';
 
 const { values: { noindex } } = parseArgs({ options: { noindex: { type: 'boolean', default: false } } });
 const root = resolve(import.meta.dirname, '../..');
-const dist = resolve(root, 'dist'), output = resolve(root, 'cloudflare/bundled');
+const dist = resolve(root, 'dist'), output = resolve(root, 'deploy/cloudflare/bundled');
 const objects = resolve(root, 'src/objects');
 
 /** The project files the page handler reads, each as compact JSON text under its project path. */
@@ -43,12 +43,12 @@ async function projectFiles(): Promise<Record<string, string>> {
 
 const files = await projectFiles();
 const swapped = new Map([
-  [resolve(root, 'site/server/search-data.mts'), resolve(root, 'cloudflare/search-data.ts')],
-  [resolve(root, 'site/prepared/prepared-world-context-node-source.mts'), resolve(root, 'cloudflare/project-files.ts')],
+  [resolve(root, 'site/server/search-data.mts'), resolve(root, 'deploy/cloudflare/search-data.ts')],
+  [resolve(root, 'site/prepared/prepared-world-context-node-source.mts'), resolve(root, 'deploy/cloudflare/project-files.ts')],
 ]);
 await rm(output, { recursive: true, force: true });
 const result = await build({
-  entryPoints: [resolve(root, 'cloudflare/worker.ts')], outfile: resolve(output, 'worker.mjs'), absWorkingDir: root,
+  entryPoints: [resolve(root, 'deploy/cloudflare/worker.ts')], outfile: resolve(output, 'worker.mjs'), absWorkingDir: root,
   bundle: true, platform: 'neutral', format: 'esm', target: 'es2022', metafile: true, logLevel: 'warning',
   mainFields: ['module', 'main'], conditions: ['workerd', 'worker', 'import'],
   // linkedom's main entry reaches Node built-ins through its CommonJS dependencies; its worker build has none.
@@ -64,11 +64,11 @@ const result = await build({
 });
 // A Node built-in left in the script would fail the Worker as it loads; name the module that brought it.
 const [script] = Object.values(result.metafile.outputs);
-if (!script) throw new Error('cloudflare/worker.ts bundled to nothing.');
+if (!script) throw new Error('deploy/cloudflare/worker.ts bundled to nothing.');
 const external = script.imports.filter(entry => entry.external).map(entry => entry.path);
 if (external.length) {
   const importers = Object.entries(result.metafile.inputs).filter(([, input]) => input.imports.some(entry => external.includes(entry.path))).map(([path]) => path);
-  throw new Error(`cloudflare/bundled/worker.mjs imports ${external.join(', ')}, which a Worker does not have (from ${importers.join(', ')}).`);
+  throw new Error(`deploy/cloudflare/bundled/worker.mjs imports ${external.join(', ')}, which a Worker does not have (from ${importers.join(', ')}).`);
 }
 
 // What the handlers read from the built site that the build does not publish there.
@@ -100,7 +100,7 @@ const assets = { async fetch(input: Request | URL | string, init?: RequestInit):
 const loaded: unknown = await import(pathToFileURL(resolve(output, 'worker.mjs')).href);
 const worker = typeof loaded === 'object' && loaded !== null && 'default' in loaded ? loaded.default : undefined;
 if (typeof worker !== 'object' || worker === null || !('fetch' in worker) || typeof worker.fetch !== 'function')
-  throw new Error('cloudflare/bundled/worker.mjs has no default export with a fetch handler.');
+  throw new Error('deploy/cloudflare/bundled/worker.mjs has no default export with a fetch handler.');
 const ask = (address: string) => (worker.fetch as (request: Request, env: unknown, context: unknown) => Promise<Response>)(
   new Request(`https://deploy.invalid${address}`), { ASSETS: assets }, { waitUntil() {} });
 
@@ -109,11 +109,11 @@ const body: unknown = await found.json();
 const foundObjects = typeof body === 'object' && body !== null && 'objects' in body ? body.objects : null;
 const foundFeatures = typeof body === 'object' && body !== null && 'features' in body ? body.features : null;
 if (!found.ok || typeof foundObjects !== 'object' || foundObjects === null || !('total' in foundObjects) || !foundObjects.total || !Array.isArray(foundFeatures) || !foundFeatures.length)
-  throw new Error(`cloudflare/bundled/worker.mjs: a search for "europa" found no objects or features (HTTP ${found.status}): ${JSON.stringify(body).slice(0, 300)}`);
+  throw new Error(`deploy/cloudflare/bundled/worker.mjs: a search for "europa" found no objects or features (HTTP ${found.status}): ${JSON.stringify(body).slice(0, 300)}`);
 const searched = await ask('/earth/?q=europa');
 const html = await searched.text();
 if (!searched.ok || !html.includes('data-search-submitted'))
-  throw new Error(`cloudflare/bundled/worker.mjs: the page /earth/?q=europa did not render its search (HTTP ${searched.status}): ${html.slice(0, 300)}`);
+  throw new Error(`deploy/cloudflare/bundled/worker.mjs: the page /earth/?q=europa did not render its search (HTTP ${searched.status}): ${html.slice(0, 300)}`);
 
-console.log(`cloudflare/bundled/worker.mjs: ${(script.bytes / 1e6).toFixed(2)} MB with ${Object.keys(files).length} project files; staged ${staged.join(', ')} and _headers${noindex ? ' (noindex)' : ''}`);
-console.log(`cloudflare/bundled/worker.mjs: a search for "europa" answers ${String(foundObjects.total)} objects and ${foundFeatures.length} features; /earth/?q=europa renders`);
+console.log(`deploy/cloudflare/bundled/worker.mjs: ${(script.bytes / 1e6).toFixed(2)} MB with ${Object.keys(files).length} project files; staged ${staged.join(', ')} and _headers${noindex ? ' (noindex)' : ''}`);
+console.log(`deploy/cloudflare/bundled/worker.mjs: a search for "europa" answers ${String(foundObjects.total)} objects and ${foundFeatures.length} features; /earth/?q=europa renders`);

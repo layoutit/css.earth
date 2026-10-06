@@ -1,20 +1,20 @@
-// Entry script: node site/build/bundle-netlify-functions.mts
+// Entry script: node deploy/netlify/bundle-functions.mts
 /**
  * Netlify packages a v2 function by tracing its files, so workspace packages stay external imports. The renderer's source
  * subpaths are TypeScript, which Node cannot load from node_modules: the deployed search function failed to load and
  * every search, dataset, settings and shared-view request answered 502 ("handler is not a function").
  *
- * Bundle each function in netlify/functions into one ES module in netlify/functions-bundled, workspace code included, and
+ * Bundle each function in deploy/netlify/functions into one ES module in deploy/netlify/functions-bundled, workspace code included, and
  * let netlify.toml point Netlify at that directory. Node built-ins stay external; everything else is inlined.
  */
 import { readdir, readFile, rm } from 'node:fs/promises';
 import { extname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
-import { FUNCTION_PROJECT_FILES } from './function-project-files.mts';
+import { FUNCTION_PROJECT_FILES } from '../handlers/function-project-files.mts';
 
 const root = resolve(import.meta.dirname, '../..');
-const source = resolve(root, 'netlify/functions'), output = resolve(root, 'netlify/functions-bundled');
+const source = resolve(root, 'deploy/netlify/functions'), output = resolve(root, 'deploy/netlify/functions-bundled');
 const entries = (await readdir(source)).filter(name => extname(name) === '.ts').map(name => resolve(source, name));
 if (!entries.length) throw new Error(`No Netlify functions found in ${source}.`);
 await rm(output, { recursive: true, force: true });
