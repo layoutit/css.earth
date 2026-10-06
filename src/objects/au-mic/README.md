@@ -10,9 +10,13 @@ Its radius and temperature follow Mallorquín et al. 2024. It is also HD 197481,
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,540 K and log g 4.37 (u1 0.476, u2 0.311): a model, because no fit of this star's limb is used.
 
+**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the star's light in TESS's full-frame images of sector 95 (July and August 2025), cut at the star's place by MAST's [TESScut](https://mast.stsci.edu/tesscut/) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+
 ## Evidence
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+
+**Brightness from TESS.** In sector 95 the light swings by 8.5% with a period of 4.85 d, and each of the sector's two orbits alone shows the same period within 20%. The star's record holds 4.856 d from the catalogues. The map's light curve leaves a scatter of 0.53% about the light, whose own noise is 0.17%. Gaia DR3 lists 16 other stars within 63 arcseconds, giving 0.29% of the light in the star's pixels.
 
 ## Known problems
 
@@ -21,5 +25,7 @@ Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** AU Mic d: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by transit timing variations).
 - **Not shown.** AU Mic e: found without a transit, and no paper's row measures its whole orbit together (period, eccentricity, periastron time and an inclination with an error bar) (found by radial velocity).
 - **Quoted text.** The introduction quotes sentences of the Wikipedia article "AU Microscopii" (revision 1376711247) verbatim, CC BY-SA 4.0.
+
+- **Brightness from TESS.** Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. The map is made at a tilt of 71.2°, worked out from the star's rotation speed, period and radius; the page draws the axis by convention. The map is of July and August 2025: spots come and go within weeks or months.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -12,7 +12,7 @@ import { receiptPath, ROTATION_SCHEMA } from '../../archives/tess/reduce.mts';
 import { readJson, type MapRoute, type RouteContext } from '../maps/route.mts';
 import type { SurfaceMapChoice } from '../maps/surface-maps.mts';
 import { MEASURED_PERIOD } from '../metadata/star-metadata.mts';
-import { BRIGHTNESS_GENERATOR, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, monthsOf, percent, reducedBrightness, STRETCH_NAME, TESS_ARCHIVE, type BrightnessSurfaceMap } from './brightness-maps.mts';
+import { BRIGHTNESS_GENERATOR, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, monthsOf, percent, reducedBrightness, TESS_ARCHIVE, type BrightnessSurfaceMap } from './brightness-maps.mts';
 
 const reduce = (host: string) => `node ${BRIGHTNESS_GENERATOR} ${host}`;
 /** The light's swing as the star turns, percent of its mean, beside the measured period in the star's record. */
@@ -25,10 +25,13 @@ async function reduced(root: string, host: string, choice: SurfaceMapChoice): Pr
   return reducedBrightness(choice, receipt, table, await readJson(resolve(root, 'output/tess', host, `${choice.program}.curve.json`), `${choice.program}: its light curve is not in output/tess/${host} (${reduce(host)})`));
 }
 
-/** A record with `fields` set before its `shape`, as the catalogued values are; fields it already holds are replaced in place of being added. */
-function beforeShape(record: Readonly<Record<string, unknown>>, fields: Readonly<Record<string, unknown>>): Record<string, unknown> { const out: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(record)) { if (key === 'shape') Object.assign(out, fields); if (!(key in fields)) out[key] = value; }
-  return 'shape' in record ? out : { ...out, ...fields }; }
+/** A record with `fields`: a field it already holds keeps its place, a new one is set before its `shape`, as the catalogued
+ * values are. Written again, the record does not move. */
+function beforeShape(record: Readonly<Record<string, unknown>>, fields: Readonly<Record<string, unknown>>): Record<string, unknown> { const out: Record<string, unknown> = {}, pending = new Map(Object.entries(fields));
+  const rest = () => { for (const [key, value] of pending) out[key] = value; pending.clear(); };
+  for (const [key, value] of Object.entries(record)) { if (key === 'shape') for (const [name, next] of [...pending]) if (!(name in record)) { out[name] = next; pending.delete(name); }
+    if (pending.has(key)) { out[key] = pending.get(key); pending.delete(key); } else out[key] = value; }
+  rest(); return out; }
 
 /** The star's measurements record with the period of its newest map, the light's swing and where both come from. */
 export function withMeasuredRotation(record: Readonly<Record<string, unknown>>, map: Pick<BrightnessSurfaceMap, 'periodDays' | 'sector' | 'amplitude' | 'lightPeriodDays'>): Record<string, unknown> {
@@ -44,9 +47,10 @@ export function withTessLight(record: Readonly<Record<string, unknown>>, receipt
   const verdict = rotation.detected === true ? `The star's rotation is seen: ${String(rotation.periodDays)} d, the light swinging by ${percent(Number(rotation.amplitude))}%.` : typeof rotation.reason === 'string' ? rotation.reason : 'No rotation is seen.';
   const flux = isRecord(curve) && Array.isArray(curve.flux) ? curve.flux.filter((value): value is number => typeof value === 'number') : [], mean = flux.reduce((sum, value) => sum + value, 0) / (flux.length || 1);
   const scatter = flux.length > 1 && mean > 0 ? Number((100 * Math.sqrt(flux.reduce((sum, value) => sum + (value - mean) ** 2, 0) / flux.length) / mean).toFixed(2)) : undefined;
-  const without = Object.fromEntries(Object.entries(record).filter(([key]) => !(Object.values(TESS_LIGHT) as readonly string[]).includes(key)));
-  return beforeShape(without, { [TESS_LIGHT.verdict]: verdict, ...(sector === undefined ? {} : { [TESS_LIGHT.sector]: sector }), ...(scatter === undefined ? {} : { [TESS_LIGHT.scatter]: scatter }),
-    [TESS_LIGHT.source]: sector === undefined ? `Looked at in this project before any pixel was fetched (${BRIGHTNESS_GENERATOR}); the star's TESS pixels were not read` : `Read in this project from the TESS full-frame images of sector ${sector} (${BRIGHTNESS_GENERATOR})${scatter === undefined ? '' : '; the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean'}` });
+  const fields: Record<string, unknown> = { [TESS_LIGHT.verdict]: verdict, ...(sector === undefined ? {} : { [TESS_LIGHT.sector]: sector }), ...(scatter === undefined ? {} : { [TESS_LIGHT.scatter]: scatter }),
+    [TESS_LIGHT.source]: sector === undefined ? `Looked at in this project before any pixel was fetched (${BRIGHTNESS_GENERATOR}); the star's TESS pixels were not read` : `Read in this project from the TESS full-frame images of sector ${sector} (${BRIGHTNESS_GENERATOR})${scatter === undefined ? '' : '; the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean'}` };
+  // A field of an earlier look that this one does not have (a sector, a scatter) goes; the others keep their place.
+  return beforeShape(Object.fromEntries(Object.entries(record).filter(([key]) => !(Object.values(TESS_LIGHT) as readonly string[]).includes(key) || key in fields)), fields);
 }
 
 /** `--tess-light --all | STAR_ID...`: each star the reduction has looked at gains what it found, in its measurements record. */
@@ -79,7 +83,7 @@ export function withBrightnessReadme(readme: string, map: BrightnessSurfaceMap, 
   const paragraphs: readonly (readonly [string, string])[] = [
     ['Sources', `${README_LEAD} The Color + brightness and Brightness map datasets are made in this project from the star's light in TESS's full-frame images of sector ${map.sector} (${when}), cut at the star's place by MAST's [TESScut](${TESS_ARCHIVE.pixels}) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](${NOTE})). The map's table is built by \`${BRIGHTNESS_GENERATOR}\` and restored from the source cache.`],
     ['Evidence', `${README_LEAD} In sector ${map.sector} the light swings by ${percent(map.amplitude)}% with a period of ${map.periodDays} d, and each of the sector's two orbits alone shows the same period within 20%. ${beside} The map's light curve leaves a scatter of ${percent(map.residual)}% about the light, whose own noise is ${percent(map.noise)}%. ${others}`],
-    ['Known problems', `- ${README_LEAD} Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast stretched so it can be seen (the darkest part by the ${STRETCH_NAME} of its share of light lost); Brightness map has the measured values. ${tilt} The map is of ${when}: spots come and go within weeks or months.`]];
+    ['Known problems', `- ${README_LEAD} Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. ${tilt} The map is of ${when}: spots come and go within weeks or months.`]];
   return paragraphs.reduce((text, [section, paragraph]) => atEndOf(text, section, paragraph), kept);
 }
 

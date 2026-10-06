@@ -11,9 +11,6 @@
   "effectiveTemperatureSource": "4878 K (4876 to 4881 K), Gaia DR3 GSP-Phot, source 5495052596695570816, https://gea.esac.esa.int/archive/",
   "surfaceGravityLogg": 4.29,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ab-pic.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.286, rounded to two decimals",
-  "rotationPeriodMeasuredDays": 3.92,
-  "rotationPeriodMeasuredSource": "Measured in this project from the star's light in the TESS full-frame images of sector 39 (packages/telescope-cli/src/archives/tess/reduce.mts): 3.92 d, the light swinging by 1.6% as the star turns",
-  "rotationLightSwingPercent": 1.63,
   "spectralType": "K2 V",
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): spectral type K2 V, from Chauvin et al. 2005 (https://ui.adsabs.harvard.edu/abs/2005A&A...438L..29C/abstract)",
   "objectType": "Eruptive Variable",
@@ -69,6 +66,13 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): projected rotation speed 10.35 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
   "spinInclinationDegrees": 46.4,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.093 solar radii): sin i = v sin i × P / (2πR) = 0.724. Not a measurement of the axis: the three numbers come from different papers.",
+  "rotationPeriodMeasuredDays": 3.92,
+  "rotationPeriodMeasuredSource": "Measured in this project from the star's light in the TESS full-frame images of sector 39 (packages/telescope-cli/src/archives/tess/reduce.mts): 3.92 d, the light swinging by 1.6% as the star turns",
+  "rotationLightSwingPercent": 1.63,
+  "tessLight": "The star's rotation is seen: 3.92 d, the light swinging by 1.6%.",
+  "tessLightSector": 39,
+  "tessLightScatterPercent": 0.75,
+  "tessLightSource": "Read in this project from the TESS full-frame images of sector 39 (packages/telescope-cli/src/archives/tess/reduce.mts); the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius. The star's disc is not resolved; its color is Gaia's spectrum of it."

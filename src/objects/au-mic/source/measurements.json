@@ -125,6 +125,10 @@
   "rotationPeriodMeasuredDays": 4.85,
   "rotationPeriodMeasuredSource": "Measured in this project from the star's light in the TESS full-frame images of sector 95 (packages/telescope-cli/src/archives/tess/reduce.mts): 4.85 d, the light swinging by 8.5% as the star turns",
   "rotationLightSwingPercent": 8.47,
+  "tessLight": "The star's rotation is seen: 4.85 d, the light swinging by 8.5%.",
+  "tessLightSector": 95,
+  "tessLightScatterPercent": 3.1,
+  "tessLightSource": "Read in this project from the TESS full-frame images of sector 95 (packages/telescope-cli/src/archives/tess/reduce.mts); the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

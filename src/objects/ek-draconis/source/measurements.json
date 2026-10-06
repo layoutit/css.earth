@@ -11,9 +11,6 @@
   "effectiveTemperatureSource": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82)",
   "surfaceGravityLogg": 4.47,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ek-draconis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.470, rounded to two decimals",
-  "rotationPeriodMeasuredDays": 2.71,
-  "rotationPeriodMeasuredSource": "Measured in this project from the star's light in the TESS full-frame images of sector 50 (packages/telescope-cli/src/archives/tess/reduce.mts): 2.71 d, the light swinging by 2.3% as the star turns",
-  "rotationLightSwingPercent": 2.31,
   "spectralType": "G5VFe-0.7CH-1(k)",
   "spectralTypeSource": "SIMBAD, V* EK Dra: spectral type G5VFe-0.7CH-1(k) (2003AJ....126.2048G)",
   "objectType": "BY Dra Variable",
@@ -77,6 +74,13 @@
   ],
   "projectedRotationSpeedKmS": 17,
   "projectedRotationSpeedSource": "SIMBAD, V* EK Dra: projected rotation speed 17 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "rotationPeriodMeasuredDays": 2.71,
+  "rotationPeriodMeasuredSource": "Measured in this project from the star's light in the TESS full-frame images of sector 50 (packages/telescope-cli/src/archives/tess/reduce.mts): 2.71 d, the light swinging by 2.3% as the star turns",
+  "rotationLightSwingPercent": 2.31,
+  "tessLight": "The star's rotation is seen: 2.71 d, the light swinging by 2.3%.",
+  "tessLightSector": 50,
+  "tessLightScatterPercent": 0.88,
+  "tessLightSource": "Read in this project from the TESS full-frame images of sector 50 (packages/telescope-cli/src/archives/tess/reduce.mts); the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

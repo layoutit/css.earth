@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { surfaceMapFiles } from '../maps/surface-maps.mts';
 import { adoptPeriod, measuredPeriod, starMetadata } from '../metadata/star-metadata.mts';
-import { BRIGHTNESS_CONSUMER, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, dimmed, monthsOf, reducedBrightness, shortMonthsOf, stretched, tessDay } from './brightness-maps.mts';
+import { BRIGHTNESS_CONSUMER, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, monthsOf, reducedBrightness, shortMonthsOf, tessDay, tinted } from './brightness-maps.mts';
 import { withBrightnessReadme, withMeasuredRotation, withTessLight } from './brightness.mts';
 
 const TABLE = 'TITLE     = "test"\nVARIABLES = "Longitude [Deg]" "Latitude [Deg]" "Brightness [%]"\nZONE I=2, J=2, K=1, ZONETYPE=Ordered\n';
@@ -27,7 +27,8 @@ test('a brightness map becomes the star page\'s records, saying it is made here 
   assert.match(science.description, /turns once in 4\.85 days.*sector 95 \(the light swings by 8\.5%; the map's curve leaves a scatter of 0\.51%, the light's own noise being 0\.17%\)\. A light curve fixes how bright each longitude is, not the latitude.*No tilt of this star's axis is known: the map is made at 60°.*Gaia DR3 lists 16 other stars within 63 arcseconds, giving 0\.29% of the light in the star's pixels\. A reduction made in this project, not a published map\./u);
   const control = read('source/content/object.json').datasets.controls[1]; assert.deepEqual([control.label, control.step, control.legend.meta, control.source.id], ['Brightness map', undefined, '%', 'hd-1-tess-map-brightness-sector-95']);
   assert.match(control.notes, /worked out in this project.*lightkurve.*starry.*their latitudes are not/u); assert.doesNotMatch(control.legendNote, /Black line/u);
-  const input = read('source/manifest.json').inputs[1]; assert.equal(input.path, 'science/tess/hd-1-s0095.dat'); assert.match(input.credit, /TESS full-frame images, sector 95.*lightkurve 2\.6\.0 and starry 1\.2\.0/u);
+  // The table is built here and kept out of git, so it is a generated intermediate of the manifest, not an input.
+  assert.equal(read('source/manifest.json').inputs.length, 1); const input = read('source/manifest.json').generatedIntermediates[0]; assert.equal(input.path, 'science/tess/hd-1-s0095.dat'); assert.match(input.credit, /TESS full-frame images, sector 95.*lightkurve 2\.6\.0 and starry 1\.2\.0/u);
   // The table is built here and kept out of git: its input names the command that makes it.
   assert.equal(input.generator, 'packages/telescope-cli/src/archives/tess/reduce.mts'); assert.match(input.acquisition, /Restored from the source cache; not tracked/u);
   assert.deepEqual(input.sourceBinding.references.map((reference: { catalogueId: string }) => reference.catalogueId), [...[...brightnessSourceRecords('2026-10-06').keys()].map(path => path.slice('src/sources/'.length, -'.json'.length)), 'gaia-2023-dr3']);
@@ -36,11 +37,11 @@ test('a brightness map becomes the star page\'s records, saying it is made here 
   const colored = surfaceMapFiles(BRIGHTNESS_MAPS, { host: 'hd-1', maps: [choice] }, { id: 'hd-1', name: 'HD 1', colorHex: '#ffc08b' }, [map], HOST()), shown = (path: string) => JSON.parse(colored.files.get(`src/objects/hd-1/${path}`)!) as Record<string, any>;
   assert.equal(colored.opensOn, 'color-brightness'); assert.deepEqual([shown('source/content/object.json').datasets.defaultDataset, shown('source/content/object.json').datasets.controls.map((one: { id: string }) => one.id)], ['color-brightness', ['color-brightness', 'brightness-sector-95', 'color']]);
   const own = shown('source/preparation/raster.json').surfaces.at(-1).science;
-  assert.deepEqual([own.id, own.limbOf, own.minimum, own.maximum, own.colors.length, own.colors.at(-1), shown('source/preparation/raster.json').surfaces.at(-1).falseColor], ['color-brightness', 'color', 93.4, 104.2, 9, '#ffc08b', false]);
-  // The darkest part gives 10.4% less light and is drawn 47% dimmer: the cube root. A display value is not linear in light: half the light is 188 of 255.
-  assert.equal(own.colors[0], dimmed('#ffc08b', 1 - Math.cbrt(1 - 93.4 / 104.2))); assert.equal(own.colors[4], dimmed('#ffc08b', 1 - Math.cbrt(1 - 93.4 / 104.2) / 2));   // half way, half the dimming assert.equal(dimmed('#ffffff', 0.5), '#bcbcbc'); assert.equal(dimmed('#ffc08b', 1), '#ffc08b'); assert.ok(Math.abs(stretched(0.027) - 0.3) < 1e-9);
-  assert.match(shown('source/content/object.json').datasets.controls[0].notes, /in TESS's images of August 2025.*The contrast is stretched so the eye can see it: the darkest part gives 10\.4% less light than the brightest and is drawn 47% dimmer \(the cube root of that share\), and the parts in between in proportion\. The Brightness map dataset has the measured values.*Their latitudes and shapes are not.*No change of color is drawn/u);
-  assert.deepEqual(shown('text.json').datasets['color-brightness'], { title: 'Color + brightness, Aug 2025', detail: 'TESS sector 95', summary: 'The star in its own color, darker where its light shows it darker; the contrast is stretched to be seen.' });
+  assert.deepEqual([own.id, own.limbOf, own.minimum, own.maximum, own.colors.length, own.colors.at(-1), shown('source/preparation/raster.json').surfaces.at(-1).falseColor], ['color-brightness', 'color', 92, 108, 5, '#ffc08b', false]);
+  // The Brightness map's own scale and grays, tinted with the star's color: its darkest gray (26 of 255) is a tenth of the color.
+  assert.deepEqual(own.colors, tinted('#ffc08b')); assert.deepEqual(tinted('#ffc08b'), ['#1a140e', '#5c4532', '#9c7555', '#d6a175', '#ffc08b']);
+  assert.match(shown('source/content/object.json').datasets.controls[0].notes, /in TESS's images of August 2025.*The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 10\.4% less light than the brightest, and is drawn as dark as on the Brightness map, whose scale has the measured values.*Their latitudes and shapes are not.*No change of color is drawn/u);
+  assert.deepEqual(shown('text.json').datasets['color-brightness'], { title: 'Color + brightness, Aug 2025', detail: 'TESS sector 95', summary: 'The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen.' });
   assert.equal(shown('text.json').datasets['brightness-sector-95'].detail, 'Sector 95, mapped here'); assert.equal(shortMonthsOf('2025-12-20', '2026-01-15'), 'Dec 2025 to Jan 2026'); assert.equal(monthsOf('2025-08-29', '2025-09-22'), 'August and September 2025'); assert.equal(tessDay(3890.5), '2025-08-03');
   // Written again over its own records, nothing moves and the page is not said to open elsewhere.
   const again = surfaceMapFiles(BRIGHTNESS_MAPS, { host: 'hd-1', maps: [choice] }, { id: 'hd-1', name: 'HD 1', colorHex: '#ffc08b' }, [map], { content: shown('source/content/object.json'), text: shown('text.json'), manifest: shown('source/manifest.json'), raster: shown('source/preparation/raster.json'), descriptor: shown('object.json') });
