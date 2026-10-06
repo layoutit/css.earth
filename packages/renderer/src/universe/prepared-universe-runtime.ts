@@ -428,7 +428,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               // The bank the subject drew before a dataset pick, drawn until the picked bank does.
               const standIn = detailStandIn.of(detailedFocus?.objectId, selected.positionM, id => catalogBanks.drawing(id) || datasets.drawing(id));
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId, insideGalaxy === undefined || insideGalaxy === detailedFocus?.objectId ? undefined
-                : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) }, selectionHolders, selected.positionM as readonly [number, number, number], standIn);
+                : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) }, selectionHolders, selected.positionM as readonly [number, number, number], standIn, selected.positionM);
               // A bank of plain-dot stars dims like every marker outside a highlighted category and like every body outside
               // the focus star's system (the frame's `otherSystems`).
               catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem,
