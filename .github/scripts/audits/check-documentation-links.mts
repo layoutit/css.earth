@@ -198,7 +198,9 @@ function audit(snapshot: Snapshot): Audit {
     'docs/fixtures/telescope-projection/europa-oracle.json', 'docs/fixtures/telescope-projection/europa-registration.json']);
   // The site proposal is generated from these exact owner-requested inputs; arbitrary JSON stays forbidden.
   const sitePlanInputs = new Set(['docs/site-architecture/moves.json', 'docs/site-architecture/tiers.json', 'docs/site-architecture/edits.json', 'docs/site-architecture/references.json', 'docs/site-architecture/loader-options.json']);
-  for (const file of docs) if (!guides.has(file) && !illustrations.has(file) && !projectionEvidence.has(file) && !sitePlanInputs.has(file)) errors.push({file, reason: 'docs/ accepts Markdown guides and illustrations under docs/images/; move code, fixtures and raw output to their owner'});
+  // Browser and figure evidence lives under docs/evidence/: its images, cited from body READMEs, and each capture's receipt.
+  const evidence = new Set(docs.filter(path => /^docs\/evidence\/.+(?:\.(?:png|jpg|jpeg|webp|avif|gif|svg)|\/receipt\.json)$/i.test(path)));
+  for (const file of docs) if (!guides.has(file) && !illustrations.has(file) && !evidence.has(file) && !projectionEvidence.has(file) && !sitePlanInputs.has(file)) errors.push({file, reason: 'docs/ accepts Markdown guides, illustrations under docs/images/ and evidence images under docs/evidence/; move code, fixtures and raw output to their owner'});
   const index = 'docs/README.md';
   if (!guides.has(index)) errors.push({file: index, reason: 'missing documentation index'});
   const pending = guides.has(index) ? [index] : [];

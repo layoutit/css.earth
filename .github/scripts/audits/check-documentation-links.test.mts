@@ -65,7 +65,7 @@ test('scoped mode checks non-Markdown additions and broken anchors', t => {
   f.write('docs/guide.md', '# Guide\n\n[Missing section](README.md#missing)\n\n![Comparison](images/comparison.svg)\n');
   assert.deepEqual(new Set(f.check('HEAD').errors.map(error => error.reason)), new Set([
     'missing Markdown anchor',
-    'docs/ accepts Markdown guides and illustrations under docs/images/; move code, fixtures and raw output to their owner',
+    'docs/ accepts Markdown guides, illustrations under docs/images/ and evidence images under docs/evidence/; move code, fixtures and raw output to their owner',
   ]));
 });
 
@@ -221,4 +221,11 @@ test('only named executable site-plan inputs are admitted beside the guide', t =
   const f = fixture(t);
   for (const name of ['moves', 'tiers', 'edits', 'references', 'loader-options', 'unexpected']) f.write(`docs/site-architecture/${name}.json`, '{}');
   assert.deepEqual(f.check().errors.map(error => error.file), ['docs/site-architecture/unexpected.json']);
+});
+
+test('evidence images and their capture receipt are admitted under docs/evidence/, other files are not', t => {
+  const f = fixture(t);
+  for (const path of ['docs/evidence/ui/capture/desktop.png', 'docs/evidence/ui/capture/receipt.json', 'docs/evidence/map/view.webp',
+    'docs/evidence/ui/capture/raw.json', 'docs/evidence/ui/capture/capture.mts']) f.write(path, 'evidence');
+  assert.deepEqual(f.check().errors.map(error => error.file), ['docs/evidence/ui/capture/capture.mts', 'docs/evidence/ui/capture/raw.json']);
 });
