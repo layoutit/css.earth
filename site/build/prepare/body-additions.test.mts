@@ -48,6 +48,14 @@ test('the build reads three named prepared files and the source manifest per con
   assert.doesNotMatch(source, /prepared\/\*\.json/u);
 });
 
+test('each generated glob names a base the dev server accepts', () => {
+  const source = contextObjectModule([{ id: 'nebula' }], {}) + contextObjectJsonModule([{ id: 'm33' }]);
+  const bases = [...source.matchAll(/import\.meta\.glob\(.*?\{ base: '([^']*)'/gu)].map(match => match[1]!);
+  assert.equal(bases.length, 3);
+  // Vite's dev transform refuses a base that does not start with '/', './' or '../'; the build's own glob plugin takes '..'.
+  for (const base of bases) assert.match(base, /^(?:\/|\.\/|\.\.\/)/u, `import.meta.glob base '${base}' fails in astro dev.`);
+});
+
 test('asset-origin context resources come from inventories without local prepared bytes', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-context-assets-'));
   t.after(() => rm(root, { recursive: true, force: true }));
