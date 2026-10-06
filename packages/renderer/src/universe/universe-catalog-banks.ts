@@ -38,11 +38,15 @@ interface ImageBank {
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
   initialCatalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardImage,
-  pointBanks = [], imagesBefore = end }: {
+  pointBanks = [], imagesBefore = end, picturesBefore = imagesBefore }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   /** Where a galaxy's billboard and its image slices mount: under the world's dot layer, so its catalogue's dots and its
    * stars' show over its picture. Without one they mount where every other layer does. */
   imagesBefore?: Element;
+  /** Where the image slices of a picture with no dots of its own mount: just over the world's dot layer, as the slice
+   * volumes are, so that no dot paints on it. A nebula stands among the galaxy's dots, and they stay around a selected
+   * one: under the dot layer the Helix's picture had the galaxy's dots and its globular clusters painted on it. */
+  picturesBefore?: Element;
   declarations: readonly { id: string; frame: DensityVolumeFrame; surrounds?: true; host?: string }[];
   initialImages: ReadonlyMap<string, PreparedImageLayerMount>;
   volumeDeclarations: readonly { id: string; frame: DensityVolumeFrame }[];
@@ -144,7 +148,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       if (loaded.payload.id !== bank.id || JSON.stringify(loaded.payload.frame) !== JSON.stringify(bank.frame)) {
         throw new TypeError('Prepared image-layer identity/frame mismatch.');
       }
-      bank.mounted = mountPreparedCssImageLayers({ host: root, before: imagesBefore, payload: loaded.payload, resolveResource: loaded.resolveResource,
+      // Its own dots are its catalogue's (placed in its frame) and the plain stars inside the object it draws for.
+      const ownDots = (loaded.cataloguePointUrls?.length ?? 0) > 0 || (bank.host !== undefined && points.some(point => point.host === bank.host));
+      bank.mounted = mountPreparedCssImageLayers({ host: root, before: ownDots ? imagesBefore : picturesBefore, payload: loaded.payload, resolveResource: loaded.resolveResource,
         onDrawn: () => { requestPublication?.(); } });
       bank.mounted.root.style.display = 'none';
       // The dots are mounted beside the slices, not inside them: from inside the galaxy they draw without its photograph.
