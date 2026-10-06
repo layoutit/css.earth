@@ -15,9 +15,9 @@
 
 ## Views
 
-**Source constraints** (the default) uses solid gray for stereo control, blue for limb silhouettes, and the shared gray grid for poorly constrained regions. The published model has 480 stereo control points on about 70% of the nucleus. Flag 1 means stereo control (11104 vertices), flag 2 limb silhouette (1450), and flag 3 not well constrained (3468).
+**Source constraints** uses solid gray for stereo control, blue for limb silhouettes, and the shared gray grid for poorly constrained regions. The published model has 480 stereo control points on about 70% of the nucleus. Flag 1 means stereo control (11104 vertices), flag 2 limb silhouette (1450), and flag 3 not well constrained (3468).
 
-**Deep Impact** combines eight archived ITS photographs from the 2005 approach. Three cropped close-ups add finer ridges and depressions, reaching 3.1 m/pixel in a small patch over about 6.6 km². Total photographic coverage remains around 31%. **Stardust-NExT** is a separate six-image 2011 view. These are photographs with their original illumination, not albedo or change maps. The grid marks unsupported image/shape correspondence. The [photography method note](source/reference/encounter-photography.md) explains camera registration, image quality, alternatives and uncertainty.
+**Deep Impact** (the default) combines eight archived ITS photographs from the 2005 approach. Three cropped close-ups add finer ridges and depressions, reaching 3.1 m/pixel in a small patch over about 6.6 km². Total photographic coverage remains around 31%. **Stardust-NExT** is a separate six-image 2011 view. These are photographs with their original illumination, not albedo or change maps. The grid marks unsupported image/shape correspondence. The [photography method note](source/reference/encounter-photography.md) explains camera registration, image quality, alternatives and uncertainty.
 
 **Color temperature** shows a fitted temperature, weighted toward warmer parts of a detector pixel. **Infrared slope** measures how reflected sunlight changes across 1.5–2.2 µm, in percent per 100 nm; it does not measure terrain steepness or identify minerals. Both are false-color, partial views. The selected scan yields 221 accepted spatial pixels and 1,590 of the model’s 32,040 facets (facet counts, not area percentages). Values span 288.5–309.2 K and 3.461–4.943%/100 nm.
 

@@ -108,7 +108,8 @@ instead of editing a shared list or atlas position.
   published on another model of the same body names that model as an alternative
   with `"display": "body-mesh"`: each texel is read at the closest point of that
   model's surface and drawn on the body's mesh, as Bennu's six facet tables are
-  from four versions of its shape.
+  from four versions of its shape. The default dataset may draw on either mesh:
+  the 35 VLT/SPHERE asteroids open on a photograph that rides its own.
 - **One atlas size for a body's datasets:** on a mesh of triangles every face
   draws its atlas at the layout's size. A dataset with `textureScale` below 1 is
   drawn enlarged, which Safari does with a cropped copy for each face: comet
