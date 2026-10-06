@@ -1,0 +1,65 @@
+{
+  "id": "zenodo-5575241-eps-eridani-cme-simulations",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Simulations of Coronal Mass Ejections on the star ε Eridani",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.5281/zenodo.5575241"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/5575241",
+      "label": "Zenodo record 5575241"
+    },
+    {
+      "role": "original",
+      "url": "https://zenodo.org/api/records/5575241/files/eEri_CME_simulations.tar.gz/content",
+      "label": "eEri_CME_simulations.tar.gz"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/records/5575241",
+      "checkedOn": "2026-10-05",
+      "locator": "Record description: BATS-R-US AWSoM simulations of eruptions on ε Eridani at the 10 minute post-eruption mark, Tecplot binary, with the variable list; version v 0.1; licence CC BY 4.0; one file of 6,355,199,342 bytes"
+    },
+    {
+      "url": "https://arxiv.org/abs/2111.02284",
+      "checkedOn": "2026-10-05",
+      "locator": "Sections I and II: the magnetic maps of January 2008, October 2011 and October 2013 (Jeffers et al. 2014) as boundary conditions; eruptions at latitude +10° and ±70°"
+    }
+  ],
+  "creators": [
+    "D. Ó Fionnagáin",
+    "R. D. Kavanagh",
+    "A. A. Vidotto"
+  ],
+  "publisher": "Zenodo",
+  "publicationDate": "2021-10-18",
+  "version": "v 0.1",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115, doi:10.3847/1538-4357/ac35de; data doi:10.5281/zenodo.5575241",
+      "scope": "Use of the simulation files",
+      "evidence": "Zenodo record citation"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International.",
+      "scope": "The deposited files and display derivatives of them",
+      "evidence": "Zenodo record licence field"
+    },
+    {
+      "kind": "limitation",
+      "text": "The deposit holds each simulation ten minutes after a modelled eruption, not the steady state the eruption starts from; the authors offer the full set on request.",
+      "scope": "Scientific interpretation",
+      "evidence": "Zenodo record description"
+    }
+  ]
+}

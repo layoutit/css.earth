@@ -13,7 +13,7 @@ const schemas = new Set(['PRODUCT_RECORD_SCHEMA', 'VO_METADATA_SCHEMA', 'VO_DISC
 const publishers = new Set([
   'packages/telescope/src/node/product-record.ts', 'packages/telescope-cli/src/body-map-publication.mts',
   'packages/telescope-cli/src/vo/discovery.mts', 'packages/telescope-cli/authoring/circumstellar/author.mts',
-  'packages/bake/authoring/betelgeuse-shell/author.mts', 'packages/bake/authoring/galileo-lucy/orbits.mts',
+  'packages/bake/authoring/betelgeuse-shell/author.mts', 'packages/bake/authoring/eps-eridani-corona/author.mts', 'packages/bake/authoring/galileo-lucy/orbits.mts',
   'packages/bake/cli/prepare-nebula-field-catalogues.mts', 'site/build/fixtures/context-package.mts',
 ]);
 // Routing and scientific checks retained by the move. Only these exact AST expressions
