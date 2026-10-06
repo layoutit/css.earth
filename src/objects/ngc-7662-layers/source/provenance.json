@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "NGC 7662",
+  "publisher": "ESA/Hubble",
+  "sourceId": "opo9738c20",
+  "sourcePage": "https://esahubble.org/images/opo9738c20/",
+  "download": "https://cdn.esahubble.org/archives/images/large/opo9738c20.jpg",
+  "credit": "Bruce Balick and Jason Alexander (University of Washington), Arsen Hajian (S. Naval Observatory), Yervant Terzian (Cornell University), Mario Perinotto (University of Florence), Patrizio Patriarchi (Arcetri Observatory) and NASA/ESA",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      737,
+      737
+    ],
+    "bands": [
+      "Hubble",
+      "WFPC2",
+      "H-alpha 656 nm",
+      "[N II] 658 nm",
+      "[O I] 631 nm"
+    ],
+    "fieldOfViewDeg": [
+      0.009259955,
+      0.009259955
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      737,
+      737
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 38.788,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 0.8 arcsec from the star, which is the whole of the recipe's inclination. Not the orientation of the nebula."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags for scale and direction, 0.0452 arcsec per pixel and north 106.92° right of vertical, and the central star for place: its peak, pixel 361.0, 350.6, is set at the star's Gaia EDR3 place, so the frame's centre is 351.4740504°, 42.53509°. The tags alone put the star 0.32 arcsec from there.",
+    "pixelArcsec": 0.04523,
+    "northClockwiseDeg": 106.92
+  },
+  "displayModel": "Each sight line's light lies on the walls of the two shells of Guerrero, Jaxon & Chu (2004): inside the inner shell's outline on that shell's near and far walls, between the two outlines on the outer shell's. The walls share the picture's smooth light; its fine detail is on the near wall inside the inner shell and on the shells' equatorial plane outside it. The central star's own light, out to 1.5 arcsec, stays at the star.",
+  "coverage": "The published frame inside a circle about the star: the picture fades out between 15.2 and 15.8 arcsec, the largest circle the frame holds, so no straight edge shows. The outer shell's long axis reaches 15.7 arcsec on the sky: its two ends lie in that fade.",
+  "acquisition": {
+    "url": "https://cdn.esahubble.org/archives/images/large/opo9738c20.jpg",
+    "dimensions": [
+      737,
+      737
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "ngc-7662-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      737,
+      737
+    ],
+    "originalDimensions": [
+      737,
+      737
+    ],
+    "publisherUrl": "https://esahubble.org/images/opo9738c20/",
+    "downloadUrl": "https://cdn.esahubble.org/archives/images/large/opo9738c20.jpg",
+    "credit": "Bruce Balick and Jason Alexander (University of Washington), Arsen Hajian (S. Naval Observatory), Yervant Terzian (Cornell University), Mario Perinotto (University of Florence), Patrizio Patriarchi (Arcetri Observatory) and NASA/ESA",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 351.4740504,
+    "centerDecDeg": 42.53509,
+    "fieldOfViewDeg": [
+      0.009259955,
+      0.009259955
+    ],
+    "northClockwiseDeg": 106.92
+  },
+  "target": {
+    "centerRaDeg": 351.47429990928,
+    "centerDecDeg": 42.53494224371,
+    "distancePc": 1740.029971482858
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 38.788,
+    "thicknessKpc": 1.41e-7,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.00013329,
+    "supportTaperFraction": 0.96,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "shape": {
+      "source": "publication-guerrero-2004-ngc-7662-structure",
+      "basis": "Guerrero, Jaxon & Chu (2004) took long-slit echelle spectra of the [O III] lines with the 4 m telescope at Kitt Peak and fit each of the nebula's two shells with an ellipsoidal shell in homologous expansion, its speed in proportion to distance from the star (Sect. 3.2). Table 1: the inner shell is 13 by 19.7 arcsec and expands at 35 km/s at its equator and 53 km/s along its pole; the outer shell is 28 by 33.6 arcsec, at 50 and 60 km/s; the major axis of each is tilted 50 degrees against the line of sight along position angle 45 degrees, its north-east end toward us. The outer shell's tilt is not measured: the paper assumes it is the inner shell's. Here each shell is that ellipsoid of revolution: the outer shell (ring) with the law 60 km/s at 16.8 arcsec, the inner shell with 53 km/s at 9.85. A check: seen at that tilt the two ellipsoids are 17.3 by 13.0 and 31.4 by 28.0 arcsec on the sky, and the paper measures 17.9 by 12.4 and 30.8 by 27.2 (Sect. 3.1). All three display channels take the same speeds: the paper's spectra are [O III], and this picture shows H-alpha, [N II] and [O I]. The star's own light ends 1.5 arcsec from it in this picture (packages/bake/authoring/m1-67/star-light.mts): all of it within half that, and less and less out to it, stays at the star. The smooth light is read over 8 face pixels, a presentation value.",
+      "expansionKmSPerArcsec": 3.571,
+      "ring": {
+        "semiMajorArcsec": 14,
+        "semiMinorArcsec": 14,
+        "majorPaDeg": 135,
+        "polarTiltDeg": 50,
+        "polarLeansToPaDeg": 45,
+        "expansionKmS": [
+          60,
+          60,
+          60
+        ]
+      },
+      "inner": {
+        "source": "publication-guerrero-2004-ngc-7662-structure",
+        "semiMajorArcsec": 6.5,
+        "semiMinorArcsec": 6.5,
+        "majorPaDeg": 135,
+        "expansionKmSPerArcsec": 5.381,
+        "expansionKmS": [
+          53,
+          53,
+          53
+        ]
+      },
+      "starRadiusArcsec": 0.75,
+      "smoothPixels": 8
+    }
+  },
+  "bake": {
+    "maxFacePixels": 737,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 56,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 56
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

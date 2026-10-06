@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-opo9738c20",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "NGC 7662 (Hubble WFPC2)",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "opo9738c20"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/opo9738c20/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/large/opo9738c20.jpg",
+      "label": "JPEG, 737 x 737 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/opo9738c20/",
+      "checkedOn": "2026-10-05",
+      "locator": "737 x 737 px over 33.3 × 33.3 arcsec; WFPC2: H-alpha 656 nm in green, [N II] 658 nm in red and [O I] 631 nm in magenta, as ESA's page lists them; released 17 December 1997. The file's embedded sky tags for scale and direction, 0.0452 arcsec per pixel and north 106.92° right of vertical, and the central star for place: its peak, pixel 361.0, 350.6, is set at the star's Gaia EDR3 place, so the frame's centre is 351.4740504°, 42.53509°. The tags alone put the star 0.32 arcsec from there."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bruce Balick and Jason Alexander (University of Washington), Arsen Hajian (S. Naval Observatory), Yervant Terzian (Cornell University), Mario Perinotto (University of Florence), Patrizio Patriarchi (Arcetri Observatory) and NASA/ESA",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/opo9738c20/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}

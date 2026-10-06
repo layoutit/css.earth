@@ -21,7 +21,7 @@ test('every scene and every package the host draws has exactly one searchable de
     && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length).map(([id]) => id);
   // Galaxies, nebulae and clusters, the four objects seen from inside, and five places of the Nearby Universe (the Shapley
   // Supercluster, the Hercules and Leo clusters, the Great Attractor and the Local Void) that show its galaxy field.
-  assert.equal(hosted.length, 167);
+  assert.equal(hosted.length, 168);
   // A bank is context the world draws, never an object: none carries a catalogue entry.
   for (const [id, descriptor] of descriptors) if (isRecord(descriptor) && typeof descriptor.type === 'string' && /-bank$/u.test(descriptor.type)) assert.ok(isRecord(descriptor.properties) && descriptor.properties.catalog === undefined, id);
   // The registry holds objects only. An object seen from inside is one of them, and so is a system: a host with the bodies

@@ -1,0 +1,28 @@
+{
+  "id": "ngc-7662",
+  "classification": "nebula",
+  "order": 5394,
+  "physical": {
+    "name": "Blue Snowball Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Blue Snowball Nebula is recorded: it is an extended nebula, and its package frames it at 0.133 pc (object.json worldFrame.bodyRadiusM), the circle its picture is drawn in, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 351.47429990928,
+    "declinationDegrees": 42.53494224371,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 1740.029971482858,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "Chornay & Walton (2021), PN G106.5-17.6: its central star, Gaia EDR3 1924818288379268736",
+      "distance": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G106.5-17.6: distance 1,740 pc (1,648 to 1,842) from the Gaia EDR3 parallax of its central star (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110)",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}
