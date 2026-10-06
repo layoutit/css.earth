@@ -37,7 +37,7 @@ The pages read only the credits file: the whole catalogue is tens of megabytes.
 The three prepared files are ignored build outputs; do not edit or commit them.
 
 Each row shows the favicon of the site it links to, loaded from that site: the
-repository keeps no copy of a site's mark. `node site/build/prepare/refresh-source-icons.mts`
+repository keeps no copy of a site's mark. `node site/build/prepare/shell/refresh-source-icons.mts`
 finds the icon address of each site not yet recorded and writes it to
 [source-icons.json](../site/source/source-icons.json). A DOI is keyed by its
 registrant prefix and resolved to its publisher. A site that refuses the request
@@ -93,7 +93,7 @@ reads the files in ID order and rejects duplicate identities.
 
 ## Prepare and check
 
-Run `node site/build/prepare/prepare-facilities.mts --catalog-only` after changing catalogue
+Run `node site/build/prepare/catalog/prepare-facilities.mts --catalog-only` after changing catalogue
 metadata, bindings or capture records. It rebuilds both shared catalogues from each object's
 source records without generating previews; volume presentations must already be installed
 from their inventories. Without `--catalog-only` it also rebuilds the volume presentations

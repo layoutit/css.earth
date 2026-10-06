@@ -4,7 +4,7 @@ import type { SceneFactory } from '../browser/browser-types.mts';
 import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';
 import { prepareArrivalBillboard } from '../navigation/arrival-billboard.mts';
 import { createPreparedArrival } from '../navigation/prepared-arrival.mts';
-import { namesSystem } from '../world/navigation-scope.mts';
+import { namesSystem } from '../world/systems/navigation-scope.mts';
 import { MOBILE_VIEWPORT_QUERY } from '../browser/runtime-policy.mts';
 import { releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
 

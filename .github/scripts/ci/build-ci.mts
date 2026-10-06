@@ -44,17 +44,17 @@ export function ciBuildPlan(root: string, mode: CiBuildMode): readonly CiBuildTa
     ({ id, after, command: process.execPath, args: [file, ...args] });
   const tasks: CiBuildTask[] = [
     { id: 'packages', after: [], command: 'pnpm', args: ['-r', '--filter', './packages/**', 'build'], outputs: packageOutputs(root) },
-    node('titles', 'site/build/prepare/prepare-shell-titles.mts'),
-    node('catalog', 'site/build/prepare/prepare-catalog.mts', ['packages']),
+    node('titles', 'site/build/prepare/shell/prepare-shell-titles.mts'),
+    node('catalog', 'site/build/prepare/catalog/prepare-catalog.mts', ['packages']),
     node('solar', 'packages/bake/cli/prepare-solar-geometry.mts', ['catalog']),
   ];
   if (mode === 'full' || mode === 'generators') tasks.push(
     // Hashes icon sources with @cssearth/core/node, so it waits for the packages build.
-    node('icons', 'site/build/prepare/prepare-shell-icons.mts', ['packages']),
+    node('icons', 'site/build/prepare/shell/prepare-shell-icons.mts', ['packages']),
     node('navigation', 'packages/bake/cli/prepare-navigation.mts', ['solar'], ['--catalog-only']),
-    node('world', 'site/build/prepare/prepare-spatial-context.ts', ['navigation']),
-    node('moon-labels', 'site/build/prepare/prepare-moon-labels.mts', ['world']),
-    node('world-presentation', 'site/build/prepare/prepare-world-presentation.mts', ['world']),
+    node('world', 'site/build/prepare/world/prepare-spatial-context.ts', ['navigation']),
+    node('moon-labels', 'site/build/prepare/world/prepare-moon-labels.mts', ['world']),
+    node('world-presentation', 'site/build/prepare/world/prepare-world-presentation.mts', ['world']),
   );
   // Split callers compile before restoring selected inputs. Keep the full generator closure and its
   // internal ordering; only the already-completed package prerequisite leaves this phase.

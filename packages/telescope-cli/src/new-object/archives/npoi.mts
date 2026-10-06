@@ -14,7 +14,7 @@
  * GM stays the records' unpublished 0, and its limb law reads the literature log g the paper lists beside its diameter (Table 4), when
  * that log g is the star's own (GRAVITY). */
 import { VIZIER_ASU, type Archive } from './archives.mts';
-import { preferredName, simbadIdentifiers } from '../display-name.mts';
+import { preferredName, simbadIdentifiers } from '../names/display-name.mts';
 
 type Paper = 2018 | 2021;
 export const NPOI: Readonly<Record<Paper, { readonly catalogue: string; readonly key: string; readonly paper: string; readonly credit: string }>> = {

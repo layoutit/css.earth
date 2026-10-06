@@ -191,7 +191,7 @@ Library, Gaia DR3 XP (from the ARI Heidelberg mirror when ESA's DataLink is down
 part 2. With none, the color is a Planck spectrum at the cited temperature.
 
 A planet nobody has imaged takes its color from what is measured
-([new-object/planet-datasets.mts](../packages/telescope-cli/src/new-object/planet-datasets.mts)). Where the NASA Exoplanet Archive's
+([new-object/planets/planet-datasets.mts](../packages/telescope-cli/src/new-object/planets/planet-datasets.mts)). Where the NASA Exoplanet Archive's
 emission-spectroscopy table holds a measured dayside brightness temperature from a secondary eclipse, the planet gets the
 "Thermal glow" dataset: a black body at that temperature over the disc, lit by the sphere lighting so the day side faces its
 star, with reflected starlight left out because nothing measured says how much there is. The row is chosen by rule, the
@@ -283,7 +283,7 @@ beside the planet, and every text calls it a model.
 No published table reaches a planet cooler than 1,500 K, and a cloud-free model is not an answer for a cloudy planet. Where a
 paper has fitted a public grid of model atmospheres to the planet, the law is computed from that fitted model: PICASO takes
 its structure and its clouds and gives the intensity at eight viewing angles in the middle band of the planet's color
-([picaso-limb.mts](../packages/telescope-cli/src/new-object/picaso-limb.mts)). The fit is transcribed with its table in
+([picaso-limb.mts](../packages/telescope-cli/src/new-object/darkening/picaso-limb.mts)). The fit is transcribed with its table in
 `source/photometry/atmosphere-fit.json`. Three grids are read:
 
 - **Sonora Diamondback** (Morley et al. [2024](https://doi.org/10.3847/1538-4357/ad71d5)), cloudy, with the release's cloud

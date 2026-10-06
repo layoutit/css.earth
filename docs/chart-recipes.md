@@ -52,7 +52,7 @@ preparation derives image dimensions from the generated SVG. The content
 recipe also records dimensions for consumers of the authored document.
 Keep its alt text, source reference and chart title meaningful.
 
-Generated exoplanets get their charts from `new-object` (`packages/telescope-cli/src/new-object/planet-charts.mts`): HD 3167 c's orbits, HAT-P-11 b's transit folded from three TESS sectors (landing on 0 hours once its orbit took the ephemeris that predicts today) and its transmission spectrum from Fraine et al. (2014), as the NASA Exoplanet Archive lists it.
+Generated exoplanets get their charts from `new-object` (`packages/telescope-cli/src/new-object/planets/planet-charts.mts`): HD 3167 c's orbits, HAT-P-11 b's transit folded from three TESS sectors (landing on 0 hours once its orbit took the ephemeris that predicts today) and its transmission spectrum from Fraine et al. (2014), as the NASA Exoplanet Archive lists it.
 
 ![Generated charts: HD 3167 system orbits, HAT-P-11 b transit from TESS, HAT-P-11 b transmission spectrum](images/generated-exoplanet-charts.webp)
 
@@ -85,16 +85,16 @@ The generator keeps an archive planet only when one of these charts shows a meas
 
 ```sh
 # Render all registered charts under output/chart-recipes/.
-node site/build/prepare/prepare-charts.mts
+node site/build/prepare/authored/prepare-charts.mts
 
 # Refresh an existing object's chart images, content sizes and inventory.
-node site/build/prepare/prepare-charts.mts --object=mars --write
+node site/build/prepare/authored/prepare-charts.mts --object=mars --write
 
 # Omit --object to refresh every existing chart package.
-node site/build/prepare/prepare-charts.mts --write
+node site/build/prepare/authored/prepare-charts.mts --write
 
 # Regenerate this illustration from the same sources and renderers.
-node site/build/prepare/prepare-chart-catalog.mts --write
+node site/build/prepare/authored/prepare-chart-catalog.mts --write
 ```
 
 The partial refresh preserves all other inventory entries, textures, galleries

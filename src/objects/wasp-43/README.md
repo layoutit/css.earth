@@ -1,6 +1,6 @@
 # WASP-43
 
-WASP-43 is a K7 dwarf in Sextans, the host star of the hot Jupiter [WASP-43b](../wasp-43b/README.md). No image of the star exists: it is a sphere of the published size in the color of its measured temperature, darkened toward its edge as its planet's transits measure, with its axis along the planet's orbit. Because a body with imagery orbits it, preparation marks it `hostsImagery` ([prepare-catalog.mts](../../../site/build/prepare/prepare-catalog.mts)) and it stays on the map. The Milky Way overview lists it under Systems.
+WASP-43 is a K7 dwarf in Sextans, the host star of the hot Jupiter [WASP-43b](../wasp-43b/README.md). No image of the star exists: it is a sphere of the published size in the color of its measured temperature, darkened toward its edge as its planet's transits measure, with its axis along the planet's orbit. Because a body with imagery orbits it, preparation marks it `hostsImagery` ([prepare-catalog.mts](../../../site/build/prepare/catalog/prepare-catalog.mts)) and it stays on the map. The Milky Way overview lists it under Systems.
 
 ## Sources
 

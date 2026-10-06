@@ -106,13 +106,13 @@ widths; changing the selected map must retain the mounted scene.
 
 ## Publish and check
 
-`node site/build/prepare/prepare-text.mts` checks every body, then writes `prepared/text.json` and the
+`node site/build/prepare/authored/prepare-text.mts` checks every body, then writes `prepared/text.json` and the
 card into `object.json`. If any body fails validation, it writes nothing. Supply
 object IDs to limit publication after the shared validation. A changed card
 changes catalogue text; regenerate the catalogues with
-`node site/build/prepare/prepare-facilities.mts --catalog-only`. Changed prepared text refreshes the
+`node site/build/prepare/catalog/prepare-facilities.mts --catalog-only`. Changed prepared text refreshes the
 body inventory and must be published through the usual asset workflow.
-`node site/build/prepare/prepare-text.mts --check` verifies without writing.
+`node site/build/prepare/authored/prepare-text.mts --check` verifies without writing.
 
 These errors block publication:
 
@@ -131,8 +131,8 @@ Warnings are for the reviewer and never block:
 - repetition between blocks shown together: the introduction, one dataset
   summary and the mission, facility and note cards beside it. This check reads
   `site/prepared/prepared-facilities.json`, so run
-  `node site/build/prepare/prepare-facilities.mts --catalog-only` first.
+  `node site/build/prepare/catalog/prepare-facilities.mts --catalog-only` first.
 
-`site/build/prepare/prepare-text.test.mts` runs the check on every registered body.
+`site/build/prepare/authored/prepare-text.test.mts` runs the check on every registered body.
 No repository test measures line wrapping. Inspect affected desktop and phone layouts in a browser
 when text or typography changes.

@@ -21,7 +21,7 @@ import { GAIA_TAP, type Archive } from '../archives/archives.mts';
 import { simbadRows } from '../archives/tables/simbad-tap.mts';
 import { json } from '../dataset.mts';
 import { isConventionOnly } from '../maps/surface-maps.mts';
-import { NASA_TAP } from '../orbit.mts';
+import { NASA_TAP } from '../planets/orbit.mts';
 import { cataloguedPeriods } from './rotation-catalogues.mts';
 import { gaiaFlameQuery, METADATA_FIELDS, parseGaiaRows, parseHostRows, PSCOMPPARS_QUERY, recordedPeriods, starMetadata, withMetadata, type CataloguedPeriod, type GaiaRow, type HostRow, type SimbadRow, measuredPeriod } from './star-metadata.mts';
 

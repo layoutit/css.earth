@@ -4,8 +4,8 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { acquireWwtFits } from './wwt-fits.mts';
-import { listArtifactOutputs } from '../artifact-outputs.mts';
-import { exportOutput } from '../outputs.mts';
+import { listArtifactOutputs } from '../delivery/artifact-outputs.mts';
+import { exportOutput } from '../delivery/outputs.mts';
 
 const test = sourceTest();
 const card = (key: string, value: string): string => `${key.padEnd(8)}= ${value}`.padEnd(80);

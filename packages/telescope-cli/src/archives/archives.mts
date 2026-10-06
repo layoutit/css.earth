@@ -1,11 +1,11 @@
 /** Every archive the telescope asks or keeps a ledger of, described once. `explore` runs each `search`
  * (exploration.mts); the registry check compares each `registry` address (vo/registry-check.mts); `ledgers.mts` runs each
- * `ledgerCommand`; and an archive with a ledger has a coverage reader under the same id (query-modes.mts `ADAPTERS`, which
+ * `ledgerCommand`; and an archive with a ledger has a coverage reader under the same id (observation-query/query-modes.mts `ADAPTERS`, which
  * archives.test.mts holds to this list). An archive's own code stays in its folder; this is the list, not the code. */
 import type { IcrsCircle } from '@cssearth/objects';
 import type { TargetCatalogueEntry } from '@cssearth/telescope';
-import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadFilter, type ArchiveLeadService, type LeadPosition } from '../archive-leads.mts';
-import { searchChandraLeads, searchSpitzerLeads } from '../other-leads.mts';
+import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadFilter, type ArchiveLeadService, type LeadPosition } from '../archive-adapters/archive-leads.mts';
+import { searchChandraLeads, searchSpitzerLeads } from '../archive-adapters/other-leads.mts';
 import { SERVICES } from '../vo/discovery.mts';
 import { TAP as CHANDRA_TAP } from './chandra/archive.mts';
 import { CADC_TAP } from './gemini/cadc.mts';

@@ -67,9 +67,9 @@ The application reads files in [world-context-plan.mts](../../site/directory/wor
 - at startup, the summary, the files every page reads, and the files of the page's own object and of the objects it is
   inside that are not among those (`/earth/` reads `earth-system.json`, `/trappist-1b/` reads `trappist-1-system.json`)
 - when navigation flies to a body the world does not hold: the body's entry names its files, and the flight and its
-  preview wait for them ([scene-transition.mts](../../site/scene/scene-transition.mts))
+  preview wait for them ([scene-transition.mts](../../site/scene/session/scene-transition.mts))
 - when the camera comes within twice the distance at which a system's bodies are drawn
-  ([world-approach.mts](../../site/world/world-approach.mts)): the places of every file read, asked for after the first view is
+  ([world-approach.mts](../../site/world/application/world-approach.mts)): the places of every file read, asked for after the first view is
   interactive ([startup gate](startup-gate.md)), give each system's place
 - when a category pill is highlighted: the files that have its marked members
 

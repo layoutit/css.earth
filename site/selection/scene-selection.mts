@@ -1,12 +1,12 @@
 import type { WorldCameraPose } from '@cssearth/engine';
-import { zoomScopeAtCamera } from '../world/zoom-scope.mts';
-import { namesSystem, type PageView } from '../world/navigation-scope.mts';
-import { systemById, type SystemObjects } from '../world/object-systems.mts';
-import { SYSTEM_RANGES } from '../world/system-framing.mts';
-import { zoomChain, zoomStepOf } from '../world/inside-view.mts';
-import { selectionKey, subjectOf, type SceneSubject } from '../world/scene-subject.mts';
+import { zoomScopeAtCamera } from '../world/systems/zoom-scope.mts';
+import { namesSystem, type PageView } from '../world/systems/navigation-scope.mts';
+import { systemById, type SystemObjects } from '../world/systems/object-systems.mts';
+import { SYSTEM_RANGES } from '../world/systems/system-framing.mts';
+import { zoomChain, zoomStepOf } from '../world/systems/inside-view.mts';
+import { selectionKey, subjectOf, type SceneSubject } from '../world/systems/scene-subject.mts';
 import { systemHostId, systemObjectId } from '../model/system-address.mts';
-export { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView, type SceneSubject } from '../world/scene-subject.mts';
+export { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView, type SceneSubject } from '../world/systems/scene-subject.mts';
 
 /** The camera has crossed into a scope of the zoom (an object seen from inside, or back to the centre's own system): the
  * view is handed to the scene that shows it. */

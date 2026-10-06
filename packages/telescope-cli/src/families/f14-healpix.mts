@@ -2,7 +2,7 @@
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
 import type { FamilyHandler, FamilyOperation } from '../family-handler.mts';
-import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
+import type { DescriptorMember, ProductDescriptor } from '../products/product-descriptor.mts';
 import { descriptor, stable } from './common.mts';
 export interface HealpixPin {readonly path:string}
 export interface HealpixMap {readonly nside:number;readonly ordering:'RING'|'NESTED';readonly frame:string;readonly quantity:string;readonly unit?:string;readonly semantics:'probability-mass'|'density';readonly pixelAreaSteradians:number;readonly pixels:number;readonly astropy:string;readonly astropyHealpix:string}

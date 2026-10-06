@@ -19,12 +19,12 @@ const PAGE_PATIENCE_MS = 10_000;
 // and an address with no query never needs it.
 async function find(request: Request): Promise<Response> {
   const [{ handleFindRequest }, { builtSearchData }, { FEATURE_PIN }] = await Promise.all([
-    import('../../site/server/find.mts'), import('../../site/server/search-data.mts'), import('../../site/server/feature-pin.mts')]);
+    import('../../site/server/search/find.mts'), import('../../site/server/search/search-data.mts'), import('../../site/server/feature-pin.mts')]);
   return handleFindRequest(request, builtSearchData(FEATURE_PIN));
 }
 async function page(request: Request, assets: Assets): Promise<Response> {
   const [{ handleSearchRequest }, { builtSearchData }, { FEATURE_PIN }] = await Promise.all([
-    import('../../site/server/search-response.mts'), import('../../site/server/search-data.mts'), import('../../site/server/feature-pin.mts')]);
+    import('../../site/server/search/search-response.mts'), import('../../site/server/search/search-data.mts'), import('../../site/server/feature-pin.mts')]);
   const origin = new URL(request.url).origin;
   return handleSearchRequest(request, builtSearchData(FEATURE_PIN), siteFetcher(origin, assets));
 }

@@ -1,5 +1,5 @@
 import { OBJECTS, ancestorsOf, type NavigableObject } from '../directory/objects.mts';
-import { WORLD_HOST_ID } from '../world/navigation-scope.mts';
+import { WORLD_HOST_ID } from '../world/systems/navigation-scope.mts';
 import { catalogueMoons } from './moon-catalogue.mts';
 import { APPLICATION_WORLD_CONTEXT, APPLICATION_WORLD_FILE_OF } from '../directory/world-context-plan.mts';
 
@@ -7,7 +7,7 @@ const PARSEC_M = 3.085677581491367e16;
 const objects = new Map(OBJECTS.map(object => [object.id, object] as const));
 const childIds = new Map<string, string[]>();
 for (const object of OBJECTS) if (object.parent) childIds.set(object.parent, [...childIds.get(object.parent) ?? [], object.id]);
-/** The bodies the map draws as plain dots, with no name, hover or click (site/build/prepare/prepare-spatial-context.ts). */
+/** The bodies the map draws as plain dots, with no name, hover or click (site/build/prepare/world/prepare-spatial-context.ts). */
 const plainDots = new Set(APPLICATION_WORLD_CONTEXT.bodies.flatMap(body => 'plainDot' in body && body.plainDot === true ? [body.id] : []));
 /** The bodies the world draws from their record alone, by the object whose file has them (world-holders.ts `placeOf`): each
  * has an orbit and no measured size, so no package and no page yet. */

@@ -181,7 +181,7 @@ const policyExceptions = [
 const readerContracts = [
   { id: 'A236', readers: [
     ['packages/bake/src/objects/celestial/celestial.ts', 'parseSolarSceneSource(JSON.parse'],
-    ['site/build/prepare/prepare-world-navigation.ts', "parseSolarSceneSource(sources.get('solar-system'), 'units')"]] },
+    ['site/build/prepare/authored/prepare-world-navigation.ts', "parseSolarSceneSource(sources.get('solar-system'), 'units')"]] },
   { id: 'A237-ledger', readers: [
     ['packages/bake/src/sources/investigation-ledger.ts', 'parseSharedInvestigationLedger(value,'],
     ['packages/bake/src/sources/investigation-ledger.ts', 'parseSharedFacilityLedger(value,']] },
@@ -191,8 +191,8 @@ const readerContracts = [
     ['packages/bake/src/scene/profile.ts', "export { parseGeometryProfile, type GeometryProfile } from '@cssearth/objects'"]] },
   { id: 'A239', readers: [
     ['packages/bake/src/objects/layers/paged-ellipsoid/globe/profile-source.ts', 'parsePagedRecipe(value)'],
-    ['site/build/prepare/prepare-world-navigation.ts', "parsePagedRecipe(paged, 'surface-arc')"],
-    ['site/build/prepare/prepare-world-navigation.ts', "parsePagedRecipe(paged, 'drag')"]] },
+    ['site/build/prepare/authored/prepare-world-navigation.ts', "parsePagedRecipe(paged, 'surface-arc')"],
+    ['site/build/prepare/authored/prepare-world-navigation.ts', "parsePagedRecipe(paged, 'drag')"]] },
   { id: 'A240', readers: [
     ['site/build/charts/charts.ts', 'parseChartAssetRecipe(config)'],
     ['site/build/charts/charts.ts', 'resolve(root,chartSourcePath(value))'],

@@ -7,7 +7,7 @@ import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, type PreparedVolumeDatasets } fro
 import { writeVolumeDatasetBank } from '@cssearth/objects/node';
 const test = sourceTest();
 import { parseCli } from './cli-arguments.mts';
-import { exportSpatialObject,inspectSpatialObject } from './spatial-handoff.mts';
+import { exportSpatialObject,inspectSpatialObject } from './delivery/spatial-handoff.mts';
 
 const frame={referenceFrame:'fixture-icrf',epochJdTt:2460000.5,originM:[1,2,3],localToReferenceXyzw:[0,0,0,1],metersPerUnit:1,boundsUnits:{min:[-1,-1,-1],max:[1,1,1]}};
 

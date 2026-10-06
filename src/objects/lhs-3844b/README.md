@@ -18,7 +18,7 @@ It is the only planet known around Batsũ̀. Its orbit and size follow Nagel et 
 
 Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/lhs-3844b.json).
 
-- Run of 2026-10-04: [`new-object --phase-curve`](../../../packages/telescope-cli/src/new-object/phase-curve-dataset.mts) wrote the dataset from the record. The paper's night side was not an input: the map's night hemisphere is 580 K, inside the printed 0 to 710 K (one sigma), and its maximum falls 6° from noon, as printed.
+- Run of 2026-10-04: [`new-object --phase-curve`](../../../packages/telescope-cli/src/new-object/planets/phase-curve-dataset.mts) wrote the dataset from the record. The paper's night side was not an input: the map's night hemisphere is 580 K, inside the printed 0 to 710 K (one sigma), and its maximum falls 6° from noon, as printed.
 
 
 ## Known problems

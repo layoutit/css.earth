@@ -16,7 +16,7 @@
   ],
   "substitutions": [
     {
-      "file": "site/scene/scene-publication.mts",
+      "file": "site/scene/session/scene-publication.mts",
       "before": "    const root = documentTarget.documentElement;",
       "after": "    const root = documentTarget.documentElement;\n    stage.style.transform = \"translateX(1px)\";",
       "occurrences": 1

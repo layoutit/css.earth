@@ -9,7 +9,7 @@ export interface RendererException { readonly path: string; readonly reason: str
 export const PREPARATION_RENDERER_EXCEPTIONS: readonly RendererException[] = [
   { path: 'packages/telescope-cli/package.json', reason: 'Declares renderer for the four named runtime transport/publication consumers.' },
   { path: 'packages/telescope-cli/src/implementation-dependencies.mts', reason: 'Reads the declared renderer build config input to follow its entry sources; never runs renderer here.' },
-  { path: 'packages/telescope-cli/src/spatial-handoff.mts', reason: 'Runs application loaders, including compressed binary point banks, for physical resource handoff.' },
+  { path: 'packages/telescope-cli/src/delivery/spatial-handoff.mts', reason: 'Runs application loaders, including compressed binary point banks, for physical resource handoff.' },
   { path: 'packages/telescope-cli/src/sphere/native-scroll/native-camera.mts', reason: 'Reads retained renderer variants and camera transforms for native CSS publication.' },
   { path: 'packages/telescope-cli/src/sphere/sphere-html.mts', reason: 'Serializes and publishes retained renderer scenes into sphere HTML.' },
   { path: 'packages/telescope-cli/src/sphere/sphere-oracle.mts', reason: 'Runs the world-context renderer to generate oracle scenes.' },

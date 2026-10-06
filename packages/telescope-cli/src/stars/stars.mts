@@ -20,7 +20,7 @@ import { displayName } from '../papers.mts';
 import { forms, spellings } from '../papers/names.mts';
 import { mentionsAny } from '../papers/text.mts';
 import { findWorks, openSession } from '../papers/works.mts';
-import { loadTargetCatalogue } from '../query.mts';
+import { loadTargetCatalogue } from '../observation-query/query.mts';
 
 export const STARS_SCHEMA = 'cssearth-telescope-stars@1';
 const REQUEST_TIMEOUT_MS = 60_000;

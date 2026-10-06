@@ -11,7 +11,7 @@ const schemas = new Set(['PRODUCT_RECORD_SCHEMA', 'VO_METADATA_SCHEMA', 'VO_DISC
   'NEBULA_DELIVERY_SCHEMA', 'VOLUME_SOURCE_MANIFEST_SCHEMA']);
 // Publishers serialize schemas; these are not permission to validate them locally.
 const publishers = new Set([
-  'packages/telescope/src/node/product-record.ts', 'packages/telescope-cli/src/body-map-publication.mts',
+  'packages/telescope/src/node/product-record.ts', 'packages/telescope-cli/src/delivery/body-map-publication.mts',
   'packages/telescope-cli/src/vo/discovery.mts', 'packages/telescope-cli/authoring/circumstellar/author.mts',
   'packages/bake/authoring/betelgeuse-shell/author.mts', 'packages/bake/authoring/eps-eridani-corona/author.mts', 'packages/bake/authoring/galileo-lucy/orbits.mts',
   'packages/bake/cli/prepare-nebula-field-catalogues.mts', 'packages/telescope-cli/src/new-object/corona/corona-bank.mts', 'site/build/fixtures/context-package.mts',
@@ -19,9 +19,9 @@ const publishers = new Set([
 // Routing and scientific checks retained by the move. Only these exact AST expressions
 // are admitted, never the containing file or a named function's arbitrary body.
 const routing: Readonly<Record<string, readonly string[]>> = {
-  'packages/telescope-cli/src/fits-source.mts': ['raw.schema !== PRODUCT_RECORD_SCHEMA'],
-  'packages/telescope-cli/src/pds-source.mts': ['raw.schema !== PRODUCT_RECORD_SCHEMA'],
-  'packages/telescope-cli/src/artifact-outputs.mts': ['raw.schema!==PRODUCT_RECORD_SCHEMA'],
+  'packages/telescope-cli/src/archive-adapters/fits-source.mts': ['raw.schema !== PRODUCT_RECORD_SCHEMA'],
+  'packages/telescope-cli/src/archive-adapters/pds-source.mts': ['raw.schema !== PRODUCT_RECORD_SCHEMA'],
+  'packages/telescope-cli/src/delivery/artifact-outputs.mts': ['raw.schema!==PRODUCT_RECORD_SCHEMA'],
   'packages/astronomy/cli/body-epoch-ephemeris.mts': ['record.schema === PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA', 'parameters.schema !== PUBLISHED_MUTUAL_ORBIT_SCHEMA'],
   'packages/astronomy/cli/lib/ephemeris-records.mts': ['objectValue(value).schema === PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA'],
   'packages/bake/src/nebula/delivery-kind.ts': ['schema === NEBULA_DELIVERY_SCHEMA'],
@@ -65,7 +65,7 @@ function violations(path: string, text: string): string[] {
         const expression = normalize(parent.getText(source));
         const count = (routedUses.get(expression) ?? 0) + 1;
         routedUses.set(expression, count);
-        const maximum = path === 'packages/telescope-cli/src/artifact-outputs.mts' ? 2 : 1;
+        const maximum = path === 'packages/telescope-cli/src/delivery/artifact-outputs.mts' ? 2 : 1;
         if (count > maximum) locate(node, 'An admitted routing expression was copied');
       }
       const pythonMetadata = path === 'packages/telescope/src/node/astroquery.ts' && ts.isTemplateSpan(parent) && node.text === 'VO_METADATA_SCHEMA';

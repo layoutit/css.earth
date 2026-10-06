@@ -120,7 +120,7 @@ from `OPENALEX_API_KEY` and sent as a header, never written to a URL, a report o
 
 The sky band composer is `src/sky/` (exported as `./sky/*`): `sky-band-composite.mts` composes pinned hips2fits, AllWISE
 atlas and JWST level-3 bands on one TAN grid, and `author-sky-bands.mts` acquires and pins those bands. It moved from
-`tools/objects/observation/` (now here) because it imports this package's JWST imaging modules. `site/build/prepare/prepare-volume-presentation.mts`
+`tools/objects/observation/` (now here) because it imports this package's JWST imaging modules. `site/build/prepare/catalog/prepare-volume-presentation.mts`
 and the nebula lab's sky-band adapter use it; its tests are beside the composer in `src/sky/` and the request reader in `src/resolution-evidence.test.mts`, using the
 `@cssearth/objects/node/source-test` helper and FITS fixtures they read.
 
@@ -138,7 +138,7 @@ The workspace's tools import it only through the subpaths `package.json` exports
 Sphere framing reads numeric silhouette geometry from `@cssearth/engine`. Its runtime publication, scene serialization and prepared loaders remain renderer consumers.
 
 Renderer runtime exceptions are file-scoped in [the architecture rule](../../.github/scripts/architecture/dependencies/preparation-without-renderer.mts):
-`src/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
+`src/delivery/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
 The package keeps its renderer dependency for these four consumers and the declared build metadata reader. F16 validation uses objects contracts.
 

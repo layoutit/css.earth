@@ -8,8 +8,8 @@ import { SITE_ORIGIN } from "./content/seo.mts";
 import { performanceSourceMaps } from "./build/source-maps.mts";
 import { packageSources } from "./build/package-sources.mts";
 import { inlinePageStylesheets } from "./build/inline-page-stylesheet.mts";
-import { searchServer } from './server/search-server.mts';
-import { prepareContextAvailability } from "./build/prepare/prepare-context-availability.mts";
+import { searchServer } from './server/search/search-server.mts';
+import { prepareContextAvailability } from "./build/prepare/catalog/prepare-context-availability.mts";
 import { preparedMotionCss } from "./build/prepared-motion-css.mts";
 import { assetOrigin, resolveWorldBillboards } from "./server-assets/asset-origin.mts";
 

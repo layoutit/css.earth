@@ -35,8 +35,8 @@ Use prepared assets matching the inventories and real Chrome:
 ```sh
 pnpm setup:assets
 pnpm build
-node site/build/prepare/prepare-social-images.mts                  # all registered objects
-# node site/build/prepare/prepare-social-images.mts --object=earth # one object
+node site/build/prepare/shell/prepare-social-images.mts                  # all registered objects
+# node site/build/prepare/shell/prepare-social-images.mts --object=earth # one object
 pnpm build                          # include the new images
 node --test site/journeys/seo-discovery.test.mts
 ```

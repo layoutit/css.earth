@@ -24,7 +24,7 @@ rejects sky at I/F ≤0.02, requires incidence and emission ≤55°, and normali
 the surface with a Lommel–Seeliger term, `gain=(mu0+mu)/(2*mu0)`, with gain≤2.
 The display range is 0–0.492 I/F, shown linearly. Shared commands are
 `node packages/bake/cli/object-operations.mts acquire pallene --verify-only` and
-`node site/build/prepare/prepare-authored.ts pallene --write`.
+`node site/build/prepare/authored/prepare-authored.ts pallene --write`.
 
 ## Evidence
 

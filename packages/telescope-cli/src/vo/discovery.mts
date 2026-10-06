@@ -2,12 +2,12 @@ import { parseSnapshot, VO_DISCOVERY_SCHEMA, canonical, jsonValue, parseMetadata
 import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { astroquery, mastService, type MastServiceRequest, type MastServiceResult, recordKey, type TransferLimits } from '@cssearth/telescope/node';
-import type { ProductKind } from '../recipe-request.mts';
+import type { ProductKind } from '../requests/recipe-request.mts';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { recall } from '../archives/memory.mts';
-import { mapIvoaProductType, type ProductTypeMapping } from '../product-type.mts';
-import type { FamilyId } from '../product-descriptor.mts';
-import { productTypeFamilyEvidence, type ObservationFamilyEvidence } from '../observation-families.mts';
+import { mapIvoaProductType, type ProductTypeMapping } from '../products/product-type.mts';
+import type { FamilyId } from '../products/product-descriptor.mts';
+import { productTypeFamilyEvidence, type ObservationFamilyEvidence } from '../products/observation-families.mts';
 
 export interface ServiceProfile {
   readonly authority: string; readonly service: string; readonly table: string; readonly model: DiscoverySnapshot['model'];

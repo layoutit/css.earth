@@ -67,7 +67,7 @@ A galaxy or nebula:
 
 ```sh
 node packages/bake/cli/prepare-image-layers.mts src/objects/m51-layers
-node site/build/prepare/prepare-volume-presentation.mts --object=m51-layers
+node site/build/prepare/catalog/prepare-volume-presentation.mts --object=m51-layers
 node packages/bake/cli/prepare-object.mts m51
 ```
 

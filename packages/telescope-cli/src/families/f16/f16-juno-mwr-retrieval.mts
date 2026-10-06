@@ -11,9 +11,9 @@ import { basename, resolve } from 'node:path';
 import { pds3Values } from '@cssearth/telescope';
 import { fileSize } from '@cssearth/telescope/node';
 import type { FamilyHandler, FamilyOperation } from '../../family-handler.mts';
-import type { AxisDescriptor, DescriptorIssue, DescriptorMember, ProductComponent, ProductDescriptor, UncertaintyDescriptor } from '../../product-descriptor.mts';
+import type { AxisDescriptor, DescriptorIssue, DescriptorMember, ProductComponent, ProductDescriptor, UncertaintyDescriptor } from '../../products/product-descriptor.mts';
 import { assertPlanetaryProductSemantics, planetaryOutputPolicy } from '../../planetary-depth-policy.mts';
-import { JUNO_MWR_NH3_F16_PROFILE } from '../../observation-families.mts';
+import { JUNO_MWR_NH3_F16_PROFILE } from '../../products/observation-families.mts';
 import { descriptor, stable } from '../common.mts';
 
 /** Archive landing pages for facts that live in the volume rather than in a pinned file. */

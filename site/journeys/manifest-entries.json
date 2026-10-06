@@ -162,7 +162,7 @@
     {
       "id": "control:site:build:prepare:prepare-world-navigation:input:markup:1",
       "kind": "control",
-      "source": "site/build/prepare/prepare-world-navigation.ts:244",
+      "source": "site/build/prepare/authored/prepare-world-navigation.ts:244",
       "tag": "input",
       "selector": "input",
       "markup": "<Input | undefined>"
@@ -941,7 +941,7 @@
     {
       "id": "control:site:server:search-response:input:input:1",
       "kind": "control",
-      "source": "site/server/search-response.mts:41",
+      "source": "site/server/search/search-response.mts:41",
       "tag": "input",
       "selector": "input"
     },
@@ -1722,7 +1722,7 @@
     {
       "id": "handler:site:catalogue-moon-labels:observer:ResizeObserver:1",
       "kind": "handler",
-      "source": "site/world/catalogue-moon-labels.mts:101",
+      "source": "site/world/application/catalogue-moon-labels.mts:101",
       "eventTypes": [
         "ResizeObserver"
       ],
@@ -2294,7 +2294,7 @@
     {
       "id": "handler:site:scene:scene-datasets:createDatasetEffects:abort:1",
       "kind": "handler",
-      "source": "site/scene/scene-datasets.mts:43",
+      "source": "site/scene/session/scene-datasets.mts:43",
       "eventTypes": [
         "abort"
       ],
@@ -2303,7 +2303,7 @@
     {
       "id": "handler:site:scene:scene-feature:selectSceneFeature:abort:1",
       "kind": "handler",
-      "source": "site/scene/scene-feature.mts:54",
+      "source": "site/scene/session/scene-feature.mts:54",
       "eventTypes": [
         "abort"
       ],

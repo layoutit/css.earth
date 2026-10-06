@@ -59,7 +59,7 @@ Reproduce, after restoring the declared inputs:
 ```sh
 node packages/bake/authoring/comet-1p/prepare-giotto.mts --write
 node packages/bake/authoring/comet-1p/prepare-encounters.mts --write
-node site/build/prepare/prepare-authored.ts comet-1p --write
+node site/build/prepare/authored/prepare-authored.ts comet-1p --write
 ```
 
 ## Evidence

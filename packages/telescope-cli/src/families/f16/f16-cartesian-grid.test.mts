@@ -7,7 +7,7 @@ import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
 import { astroqueryToolchain, fileSize, readProductRecord } from '@cssearth/telescope/node';
 import {executeFamilyOperation} from '../../family-operation.mts';
-import {listArtifactOutputs} from '../../artifact-outputs.mts';
+import {listArtifactOutputs} from '../../delivery/artifact-outputs.mts';
 import {importLocalArtifact} from '../../local-import.mts';
 import {cropPhysicalCartesianGrid,inspectPhysicalCartesianGrid,physicalVolumeEncoding,physicalVolumeOutputFiles,slicePhysicalCartesianGrid,type PhysicalGridContext} from './f16-cartesian-grid.mts';
 

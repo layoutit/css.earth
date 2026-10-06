@@ -46,16 +46,16 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
     [node('packages/bake/cli/check-stale-builds.mts', '--run')] },
   { name: 'inputs', purpose: "check the reader text budgets and restore the Sun's stale files before the long bake", scope: 'ids', commands: async ids =>
     [node('site/build/prepare/check-preparation-inputs.mts', ...ids)] },
-  { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('site/build/prepare/prepare-catalog.mts')] },
+  { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('site/build/prepare/catalog/prepare-catalog.mts')] },
   { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', scope: 'once', commands: async (ids, { root = projectRoot(import.meta.url) } = {}) =>
     (await Promise.all(ids.map(id => exists(resolve(root, 'packages/astronomy/data/bodies', `${id}.json`))))).some(Boolean) ? [node('packages/bake/cli/prepare-solar-geometry.mts')] : [] },
   { name: 'prepare', purpose: 'prepare datasets, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { reuseImages = false } = {}) =>
-    [node('site/build/prepare/prepare-authored.ts', id!, '--write', ...(reuseImages ? ['--reuse-images'] : []))] },
-  { name: 'discovery', purpose: 'recompute discovery now that prepared datasets exist', scope: 'once', commands: async () => [node('site/build/prepare/prepare-catalog.mts')] },
-  { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('site/build/prepare/author-source-records.mts', id!)] },
-  { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('site/build/prepare/prepare-object-json.mts', ...ids)] },
+    [node('site/build/prepare/authored/prepare-authored.ts', id!, '--write', ...(reuseImages ? ['--reuse-images'] : []))] },
+  { name: 'discovery', purpose: 'recompute discovery now that prepared datasets exist', scope: 'once', commands: async () => [node('site/build/prepare/catalog/prepare-catalog.mts')] },
+  { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('site/build/prepare/catalog/author-source-records.mts', id!)] },
+  { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('site/build/prepare/authored/prepare-object-json.mts', ...ids)] },
   { name: 'audit', purpose: 'check the prepared presentation against its descriptor', scope: 'each', commands: async ([id]) => [node('packages/bake/cli/check-prepared-presentation.mts', '--object', id!)] },
-  { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('site/build/prepare/prepare-text.mts', ...ids)] },
+  { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('site/build/prepare/authored/prepare-text.mts', ...ids)] },
   { name: 'markers', purpose: 'draw the navigation markers', scope: 'ids', commands: async ids => [node('packages/bake/cli/prepare-navigation.mts', ...ids)] },
   // Every body arrives through its billboard: without one the camera flies in onto a mesh still loading. The renderer photographs the
   // delivered body in the running site and skips a body whose prepared runtime has not changed; the catalogue then carries the arrival
@@ -71,18 +71,18 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
       const status = await fetch(new URL(`/${id}/`, origin), { signal: AbortSignal.timeout(120_000) }).then(response => response.status, () => 0);
       if (status === 404) throw new Error(`The site at ${origin} does not know ${id} (404 for /${id}/): it was started before the object existed. Restart it, then resume from the billboard step.`);
     }
-    return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('site/build/prepare/prepare-catalog.mts')];
+    return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('site/build/prepare/catalog/prepare-catalog.mts')];
   } },
   { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
   // A star or planet that gains orbiting bodies hosts a system, an object of its own whose page its members link to; its package is read
   // from the world's orbit graph, so it follows the world step. Every system is rewritten: unchanged ones come out the same, in a second.
   // The systems step moves each host inside its system in the object tree, and the world files follow the tree, so the world is placed again.
   { name: 'systems', purpose: 'write the package of every system, so a new host has its system page, and place the world by the tree they change', scope: 'once', commands: async () => [node('site/build/prepare/system-packages.mts'), ['pnpm', 'prepare:world-context']] },
-  { name: 'catalogues', purpose: 'rebuild the shared sources and facilities catalogues from the object\'s source records', scope: 'once', commands: async () => [node('site/build/prepare/prepare-facilities.mts', '--catalog-only')] },
+  { name: 'catalogues', purpose: 'rebuild the shared sources and facilities catalogues from the object\'s source records', scope: 'once', commands: async () => [node('site/build/prepare/catalog/prepare-facilities.mts', '--catalog-only')] },
   // The world context is written under the Sun's prepared/ and into the package of each object that holds bodies; without this
   // their inventories still pin the bytes from before the object existed.
   // The catalogue carries every descriptor as the pins leave it (prepared-registry.ts preparedCatalogueModule).
-  { name: 'pins', purpose: "pin the regenerated world files into the Sun's inventory and into each object's that holds them", scope: 'once', commands: async () => [node('site/build/prepare/prepare-object-json.mts', 'sun'), node('site/build/prepare/pin-world-files.mts'), node('site/build/prepare/prepare-catalog.mts')] },
+  { name: 'pins', purpose: "pin the regenerated world files into the Sun's inventory and into each object's that holds them", scope: 'once', commands: async () => [node('site/build/prepare/authored/prepare-object-json.mts', 'sun'), node('site/build/prepare/world/pin-world-files.mts'), node('site/build/prepare/catalog/prepare-catalog.mts')] },
 ]);
 
 export type Progress = (line: string) => void;

@@ -1,7 +1,7 @@
 /** The telescope command line: every command's arguments, parsed and checked before anything runs. */
 import { resolve } from 'node:path';
 import { parseExplorationArguments, type ExplorationRequest } from './exploration.mts';
-import { validateOutputRequest, type OutputRequest } from './outputs.mts';
+import { validateOutputRequest, type OutputRequest } from './delivery/outputs.mts';
 import { WWT_IMAGE_MAX_LEVEL } from './wwt/wwt-image.mts';
 
 const queryValues = new Set(['--target', '--wavelength', '--kind', '--from', '--to', '--min-arcsec', '--min-km', '--min-elements', '--range-km', '--radius-km', '--continuum', '--accept-assumptions', '--icrs-circle', '--spectral-frame', '--max-science-bytes', '--max-metadata-bytes', '--max-link-depth', '--max-link-requests', '--max-expanded-bytes', '--max-package-members']);

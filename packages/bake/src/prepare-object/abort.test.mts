@@ -7,7 +7,7 @@ import test from 'node:test';
 import { prepareObjects } from './index.ts';
 
 const alive = (pid: number) => { try { process.kill(pid, 0); return true; } catch { return false; } };
-for (const [step, script] of [['builds', 'packages/bake/cli/check-stale-builds.mts'], ['sources', 'site/build/prepare/author-source-records.mts']] as const) {
+for (const [step, script] of [['builds', 'packages/bake/cli/check-stale-builds.mts'], ['sources', 'site/build/prepare/catalog/author-source-records.mts']] as const) {
   test(`aborting ${step} kills the command and its long-running child`, { timeout: 10_000 }, async () => {
     const root = await mkdtemp(resolve(tmpdir(), 'prepare-abort-')), controller = new AbortController();
     const put = async (path: string, text: string) => { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); };
@@ -138,8 +138,8 @@ test('parent hangup waits for cleanup of every concurrently running step group',
       await mkdir(resolve(root, 'src/objects', id), { recursive: true });
       await writeFile(resolve(root, 'src/objects', id, 'object.json'), '{}');
     }
-    await mkdir(resolve(root, 'site/build/prepare'), { recursive: true });
-    await writeFile(resolve(root, 'site/build/prepare/prepare-authored.ts'), `import { writeFileSync } from 'node:fs';
+    await mkdir(resolve(root, 'site/build/prepare/authored'), { recursive: true });
+    await writeFile(resolve(root, 'site/build/prepare/authored/prepare-authored.ts'), `import { writeFileSync } from 'node:fs';
 const id = process.argv[2];
 process.on('SIGTERM', () => setTimeout(() => { writeFileSync(id + '.cleanup', 'SIGTERM'); process.exit(0); }, id === 'first' ? 50 : 250));
 writeFileSync(id + '.pid', String(process.pid)); setInterval(() => {}, 1000);`);

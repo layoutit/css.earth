@@ -12,7 +12,7 @@ import { startupFetch } from '../directory/startup-requests.mts';
 /** Started at boot (`startup-boot.mts`), so the decoding worker's script loads beside the first object's bytes. */
 export { prestartPreparedObjectDecoding as prestartObjectDecoding } from '@cssearth/renderer';
 import { preparedObjectUrl } from '../prepared/prepared-object-path.mts';
-import { insideViewDescriptor } from '../world/inside-view.mts';
+import { insideViewDescriptor } from '../world/systems/inside-view.mts';
 
 // The application supplies its shell nodes and authoritative input policy.
 // The CSS renderer consumes prepared content; the engine supplies numeric behavior.

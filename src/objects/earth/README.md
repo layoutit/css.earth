@@ -131,7 +131,7 @@ python packages/bake/src/objects/layers/paged-ellipsoid/extract-tomography.py \
   /path/to/GLAD-M35.r0.1-n4c.nc \
   src/objects/earth/source/interior/tomography.json \
   src/objects/earth/source/interior/glad-m35-vsv-subset.f32.gz
-node site/build/prepare/prepare-authored.ts earth --write
+node site/build/prepare/authored/prepare-authored.ts earth --write
 ```
 
 </details>

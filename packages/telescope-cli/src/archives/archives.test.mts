@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { WORKSPACE } from '@cssearth/telescope/node';
-import { ADAPTERS } from '../query-modes.mts';
+import { ADAPTERS } from '../observation-query/query-modes.mts';
 import { SERVICES } from '../vo/discovery.mts';
 import { ARCHIVES } from './archives.mts';
 

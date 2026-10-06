@@ -54,7 +54,7 @@
     {
       "id": "handler:site:application-world-context:createApplicationWorldContext:abort:1",
       "reason": "Shared world survives detail navigation; its mount abort is available only during loading at router disposal, before the current ready-load API returns. Outgoing document observations are not retained after replacement.",
-      "evidence": "site/scene/application-world-context.mts:38 registers signal abort; site/scene/scene-world.mts:31-59 creates the controller only in loading state, destroy at lines 124-130 aborts only loading state; site/scene/scene-router.mts:166 binds pagehide to destroyActiveScene, whose session disposal runs at line 614. journeyApi.load waits through the ready barrier before returning. Tranche e ready-page navigation did not invoke this abort."
+      "evidence": "site/scene/application-world-context.mts:38 registers signal abort; site/scene/session/scene-world.mts:31-59 creates the controller only in loading state, destroy at lines 124-130 aborts only loading state; site/scene/scene-router.mts:166 binds pagehide to destroyActiveScene, whose session disposal runs at line 614. journeyApi.load waits through the ready barrier before returning. Tranche e ready-page navigation did not invoke this abort."
     }
   ]
 }

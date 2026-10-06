@@ -1,7 +1,7 @@
 /** Static observational-family registry. Handlers describe capabilities and retain their existing scientific owners. */
-import type { NativeMetadata } from './native-metadata.mts';
+import type { NativeMetadata } from './products/native-metadata.mts';
 import type { FamilyHandler, FamilyOperation, FormatProfile, HandlerEvidenceReference, OperationParameter } from './family-handler.mts';
-import { parseProductDescriptor, type AxisDescriptor, type CalibrationDescriptor, type DescriptorIssue, type DescriptorMember, type FamilyId, type FrameDescriptor, type ProductComponent, type ProductDependency, type ProductDescriptor, type QuantityDescriptor, type TimeDescriptor } from './product-descriptor.mts';
+import { parseProductDescriptor, type AxisDescriptor, type CalibrationDescriptor, type DescriptorIssue, type DescriptorMember, type FamilyId, type FrameDescriptor, type ProductComponent, type ProductDependency, type ProductDescriptor, type QuantityDescriptor, type TimeDescriptor } from './products/product-descriptor.mts';
 import { F03_SPECTRUM_HANDLER } from './families/f03-spectrum.mts';
 import { F04_SLIT_PROFILE_HANDLER } from './families/f04-slit-profile.mts';
 import { F05_PHOTOMETRY_HANDLER } from './families/f05-photometry.mts';
@@ -33,7 +33,7 @@ export interface RasterCompatibilityInput {
   readonly quantity:QuantityDescriptor;readonly calibration:CalibrationDescriptor;readonly frame?:FrameDescriptor;readonly time?:TimeDescriptor;readonly dependencies?:readonly ProductDependency[];
 }
 
-const outputOwner={module:'packages/telescope-cli/src/outputs.mts',export:'exportOutput'} as const;
+const outputOwner={module:'packages/telescope-cli/src/delivery/outputs.mts',export:'exportOutput'} as const;
 const out:OperationParameter={id:'out',option:'--out',kind:'output-directory',required:true,description:'New output directory.'};
 const integer=(id:string,description:string):OperationParameter=>({id,option:`--${id}`,kind:'integer',required:true,minimum:0,description});
 const numbers=(id:string,count:number,description:string):OperationParameter=>({id,option:`--${id}`,kind:'number-list',required:true,count,description});
@@ -58,9 +58,9 @@ function rasterOperations(descriptor:ProductDescriptor):FamilyOperation[]{
 }
 
 const RASTER_PROFILES:readonly FormatProfile[]=[
-  {id:'fits-image-array@1',format:'FITS image HDU',version:'FITS 4.0 compatibility profile',families:['F01','F02'],publicBaseline:true,evidence:[{path:'packages/telescope-cli/src/product-science.test.mts',establishes:'Pinned FITS image and spectral-cube readback and native exports.',status:'complete'},{path:'packages/telescope-cli/src/cube-outputs.test.mts',establishes:'Image, spectrum and aggregate cube outputs with masks and units.',status:'complete'}]},
-  {id:'pds-image-array@1',format:'PDS image array decoded by the pinned pdr boundary',version:'repository PDS compatibility profile',families:['F01','F02'],evidence:[{path:'packages/telescope-cli/src/output-handoffs.test.mts',establishes:'Pinned PDS arrays and companions enter the existing output boundary.',status:'partial'}]},
-  {id:'isis3-image-array@1',format:'ISIS3 numeric core',version:'repository ISIS3 compatibility profile',families:['F01','F02'],evidence:[{path:'packages/telescope-cli/src/product-science.test.mts',establishes:'ISIS core metadata, masks and calibration dependency checks.',status:'partial'}]},
+  {id:'fits-image-array@1',format:'FITS image HDU',version:'FITS 4.0 compatibility profile',families:['F01','F02'],publicBaseline:true,evidence:[{path:'packages/telescope-cli/src/qualification/product-science.test.mts',establishes:'Pinned FITS image and spectral-cube readback and native exports.',status:'complete'},{path:'packages/telescope-cli/src/delivery/cube-outputs.test.mts',establishes:'Image, spectrum and aggregate cube outputs with masks and units.',status:'complete'}]},
+  {id:'pds-image-array@1',format:'PDS image array decoded by the pinned pdr boundary',version:'repository PDS compatibility profile',families:['F01','F02'],evidence:[{path:'packages/telescope-cli/src/delivery/output-handoffs.test.mts',establishes:'Pinned PDS arrays and companions enter the existing output boundary.',status:'partial'}]},
+  {id:'isis3-image-array@1',format:'ISIS3 numeric core',version:'repository ISIS3 compatibility profile',families:['F01','F02'],evidence:[{path:'packages/telescope-cli/src/qualification/product-science.test.mts',establishes:'ISIS core metadata, masks and calibration dependency checks.',status:'partial'}]},
 ] as const;
 export const RASTER_F01_F02_HANDLER:FamilyHandler={id:'raster-f01-f02',profiles:RASTER_PROFILES,families:['F01','F02'],recognizes:members=>members.some(member=>Buffer.from(member.prefix).subarray(0,9).toString('latin1')==='SIMPLE  =')?['fits-image-array@1']:[],operations:rasterOperations};
 export const FAMILY_HANDLERS:readonly FamilyHandler[]=[RASTER_F01_F02_HANDLER,F02_MIXED_ND_HANDLER,F03_SPECTRUM_HANDLER,F04_SLIT_PROFILE_HANDLER,F05_PHOTOMETRY_HANDLER,F06_TIME_SERIES_HANDLER,F07_DYNAMIC_SPECTRUM_HANDLER,F08_TABLE_HANDLER,F09_ASTROMETRY_HANDLER,F10_EVENTS_HANDLER,F11_MEASUREMENT_SET_HANDLER,F12_OIFITS_HANDLER,F13_POLARIMETRY_HANDLER,F14_BODY_MAP_SPHERE_HANDLER,F14_HEALPIX_HANDLER,F15_RADAR_HANDLER,F16_SPATIAL_PHYSICAL_HANDLER,F16_CARTESIAN_GRID_HANDLER,F16_SPHERICAL_GRID_HANDLER,F16_PLANETARY_DEPTH_HANDLER,F16_JUNO_MWR_RETRIEVAL_HANDLER,F16_PLANETARY_COVERAGE_HANDLER,F16_SHARAD_PDS4_HANDLER,F17_CALIBRATION_HANDLER,F18_COMPOUND_HANDLER];

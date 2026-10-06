@@ -13,13 +13,13 @@
  * takes its name's slug as its id; a planet host keeps its designation's id, which its planets' ids are made from. */
 import { GAIA_TAP, type Archive } from './archives.mts';
 import { adql, csv, SIMBAD_TAP } from '../companions.mts';
-import { preferredName } from '../display-name.mts';
+import { preferredName } from '../names/display-name.mts';
 import { draftFromGaia, gaiaDraftQuery, parseGaiaDraftRow } from './gaia.mts';
 import { draftsFromHipparcos, starQuotes } from './hipparcos.mts';
 import { readIauNames, type IauName } from './iau-names.mts';
-import { duplicateName, duplicateStar, existingBodies, slug } from '../identity.mts';
+import { duplicateName, duplicateStar, existingBodies, slug } from '../names/identity.mts';
 import { spelledOut } from '../prose.mts';
-import { renamed } from '../rename.mts';
+import { renamed } from '../revise/rename.mts';
 
 const NASA_TAP = 'https://exoplanetarchive.ipac.caltech.edu/TAP/sync';
 const CONCURRENCY = 4;

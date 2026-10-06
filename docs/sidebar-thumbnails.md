@@ -6,7 +6,7 @@ search and overview members display them in the shared 40 px result row. Smaller
 navigation markers display them at 14 or 16 CSS pixels. The sidebar does not download
 a full preview just for an icon.
 
-Run `node site/build/prepare/prepare-sidebar-thumbnails.mts` after restoring the runtime assets or
+Run `node site/build/prepare/shell/prepare-sidebar-thumbnails.mts` after restoring the runtime assets or
 changing a prepared dataset preview. Run it with `--check` to reproduce every
 thumbnail in memory and compare its bytes with the committed files.
 
