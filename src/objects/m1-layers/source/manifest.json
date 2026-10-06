@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/m1-layers/source/source.jpg",
+      "origin": "https://cdn.esahubble.org/archives/images/large/heic0515a.jpg",
+      "sourceUrl": "https://esahubble.org/images/heic0515a/",
+      "title": "Most detailed image of the Crab Nebula",
+      "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
+      "displayCredit": "ESA/Hubble",
+      "acquisition": "The publisher's JPEG (3864 x 3864 px), downloaded unchanged; not tracked. Its place on the sky is the file's embedded tags (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esahubble-heic0515a",
+            "role": "material",
+            "evidence": "src/objects/m1-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://esahubble.org/images/heic0515a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "measured-depths",
+      "path": "src/objects/m1-layers/source/filament-speeds.dat",
+      "origin": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
+      "sourceUrl": "https://github.com/thomasorb/M1_paper",
+      "title": "The Crab's filaments, 416,573 velocity components of the 3D map of Martin, Milisavljevic & Drissen (2021) as places and speeds",
+      "credit": "Martin, Milisavljevic & Drissen (2021)",
+      "displayCredit": "Martin et al. (2021)",
+      "acquisition": "Built from the authors' files 3dmap_XYZflux.fits, 3dmap_XYZvel.fits and m1.deep_frame.fits by the generator (`node packages/bake/authoring/m1/filament-speeds.mts src/objects/m1-layers 2000.3`), which downloads them at commit af491d4, places each point through the frame's fit to Gaia DR3 and moves it to the picture's date. Restored from the source cache; not tracked.",
+      "generator": "packages/bake/authoring/m1/filament-speeds.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "github-thomasorb-m1-paper",
+            "role": "material",
+            "evidence": "https://github.com/thomasorb/M1_paper"
+          },
+          {
+            "catalogueId": "martin-2021",
+            "role": "method",
+            "evidence": "https://arxiv.org/pdf/2101.02709v1"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "method",
+            "evidence": "https://doi.org/10.1051/0004-6361/202243940"
+          }
+        ]
+      },
+      "license": "GNU General Public License 3.0, the licence of the authors' repository. The table is a derived copy under the same licence; retain the credit to Martin, Milisavljevic & Drissen (2021).",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "CFHT SITELLE",
+            "evidence": "https://arxiv.org/pdf/2101.02709v1",
+            "reason": "Velocity components fitted to a SITELLE spectral cube, not an observation of its own."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/m1-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/m1-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/m1-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

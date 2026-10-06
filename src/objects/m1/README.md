@@ -1,6 +1,6 @@
 # Crab Nebula
 
-Crab Nebula as an object of the world: its place, its card and its list marker. It has no surface. Its datasets show the [Crab Nebula volume](../m1-volume/README.md) bank, whose README holds the sources, processing, evidence and known problems of the imagery.
+Crab Nebula as an object of the world: its place, its card and its list marker. It has no surface. Its datasets show the [Crab Nebula volume](../m1-volume/README.md) bank, whose README holds the sources, processing, evidence and known problems of the imagery. One dataset, "Hubble · measured depths", shows the [measured-depths bank](../m1-layers/README.md) instead: Hubble's picture with each filament at the depth its Doppler speed gives.
 
 ## Sources
 
