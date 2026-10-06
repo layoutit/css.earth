@@ -234,7 +234,7 @@ every entry pushed, and the display server draws it at a cost by the layers on s
 shown, the push made a frame of 239 to 317 ms on comet 67P's arrival, 159 to 175 ms on Psyche's and 77 to 95 ms on
 Mars's on the iPad; written at the hand-over, none of 60 ms at 67P or Mars, and at Psyche one frame of 205 to 268 ms
 (the comet's scene leaving and Psyche's mounting) where there were two (2026-10-06). With comet 67P at rest on
-screen, a push alone froze the page for 1.9 to 2.0 s: an entry is never pushed over a mounted body.
+screen, a push alone froze the page for 1.9 to 2.0 s. A navigation that keeps its scene still pushes over it.
 
 ### Optional controls and scene retirement
 
