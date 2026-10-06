@@ -45,7 +45,7 @@ test('a selected satellite overview retains its selected host locator', () => {
   assert.ok(moons.some(id => close.get(id) === 1));
   for (const id of moons) assert.equal(close.get(id), closePlain.get(id), id);
   // One emphasis per body: a highlighted set dims the rest, another star's bodies read as not belonging inside the
-  // Sun's system, and a hovered body is never dimmed.
+  // camera's own system (here the Sun's), and a hovered body is never dimmed.
   const other = 1 + plan.bodies.findIndex(star => !star.orbit && plan.bodies.some(body => body.orbit?.centerBodyId === star.id));
   const emphasis = (next: WorldContextView) => { const frame = calculate(next); return (id: string | number) => frame.projectedBodies[typeof id === 'number' ? id : index(id)]!.emphasis; };
   assert.ok(other > 0);

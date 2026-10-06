@@ -589,10 +589,17 @@ test('each planetary system fades with the camera distance from its own star', (
   assert.equal(fade.of(index('earth')), 0);
   assert.equal(fade.of(index('moon')), 0);
   assert.equal(fade.of(index('betelgeuse')), 1, 'a star outside every system is never faded');
+  // The camera's own system is the one it stands in: WASP-43's here, with its star and planet, and no other body.
+  assert.deepEqual([fade.ownOpacity(), fade.ownStarDistanceM()], [1, 1e11]);
+  assert.deepEqual(['wasp-43', 'wasp-43b', 'sun', 'earth', 'betelgeuse'].map(id => fade.inOwnSystem(index(id))), [true, true, false, false, false]);
   assert.equal(fade.update([0, 0, 1e11]), 1);
   assert.equal(fade.of(index('earth')), 1);
   assert.equal(fade.of(index('wasp-43b')), 0);
+  assert.deepEqual(['wasp-43', 'wasp-43b', 'sun', 'earth', 'betelgeuse'].map(id => fade.inOwnSystem(index(id))), [false, false, true, true, false]);
   assert.equal(fade.update([0, 0, 1e18]), 0, 'between the stars every system has retired');
+  assert.deepEqual([fade.ownOpacity(), fade.ownStarDistanceM(), fade.inOwnSystem(index('earth'))], [0, Number.POSITIVE_INFINITY, false], 'and the camera has no system of its own');
+  assert.equal(fade.update([0, 0, 1e11], true), 0);
+  assert.equal(fade.ownOpacity(), 0, 'nor past the scale of systems');
 });
 
 test('the Solar System begins revealing context as the distance readout hands from light-years to AU', () => {

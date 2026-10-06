@@ -8,7 +8,7 @@ const CLOSE_ORBIT_OPACITY = .3;
 const OUTSIDE_FAMILY_OPACITY = .25;
 /** Bodies outside a highlighted category. */
 export const UNHIGHLIGHTED_OPACITY = .3;
-/** Other stars' bodies seen from inside the focus star's system, in steps so a dolly rewrites few opacities. */
+/** Other stars' bodies seen from inside a star's system, in steps so a dolly rewrites few opacities. */
 const OTHER_SYSTEM_OPACITY = .3, OTHER_SYSTEM_STEPS = 16;
 
 /** What the reader is looking at, resolved once per frame. Every rule about what belongs to the selection reads it. */
@@ -96,14 +96,14 @@ export function namedBesideSubject(subject: ContextSubject, satelliteOf: string 
   return satelliteOf === undefined ? !(minor && subject.quietMinors) : subject.families.has(satelliteOf);
 }
 
-/** Inside the focus star's system, other systems' bodies stay clickable but read as not belonging to it; they come up to
- * full as the stars around the system fill the view (`starField`, 0 to 1). */
-export function otherSystemsOpacity(focusSystemOpacity: number, starField: number): number {
-  return focusSystemOpacity > .5
+/** Inside a star's system, the Sun's or a placed star's (the camera's own), other systems' bodies stay clickable but read
+ * as not belonging to it; they come up to full as the stars around the system fill the view (`starField`, 0 to 1). */
+export function otherSystemsOpacity(ownSystemOpacity: number, starField: number): number {
+  return ownSystemOpacity > .5
     ? OTHER_SYSTEM_OPACITY + (1 - OTHER_SYSTEM_OPACITY) * Math.round(starField * OTHER_SYSTEM_STEPS) / OTHER_SYSTEM_STEPS : 1;
 }
 
 /** The one alpha a body's marker, caption and path share on top of their own fades. A hovered body is never dimmed. */
-export function contextEmphasis(hovered: boolean, outsideHighlight: boolean, inFocusSystem: boolean, otherSystems: number): number {
-  return hovered ? 1 : (outsideHighlight ? UNHIGHLIGHTED_OPACITY : 1) * (inFocusSystem ? 1 : otherSystems);
+export function contextEmphasis(hovered: boolean, outsideHighlight: boolean, inOwnSystem: boolean, otherSystems: number): number {
+  return hovered ? 1 : (outsideHighlight ? UNHIGHLIGHTED_OPACITY : 1) * (inOwnSystem ? 1 : otherSystems);
 }

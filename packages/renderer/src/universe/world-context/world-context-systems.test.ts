@@ -75,6 +75,26 @@ test('the planner plans another system\'s bodies after their own indices once it
   assert.ok(frame.projectedBodies.every(body => body.index < 1 + extended.bodies.length));
 });
 
+test('inside a placed star\'s system the bodies of every other system dim, as they do inside the Sun\'s', () => {
+  const extended = extendWorldContext(summary, [trappist]), points = [extended.focus, ...extended.bodies];
+  const at = (id: string) => points.findIndex(point => point.id === id), star = points[at('trappist-1')]!;
+  const other = points.find(point => point.id !== 'sun' && point.id !== 'trappist-1' && !('orbit' in point && point.orbit))!.id;
+  const calculate = createWorldContextPlanner(summary);
+  calculate.extend(extended);
+  // The planner retains its outputs, so each frame's values are read before the next is planned.
+  const emphasis = (distanceM: number) => {
+    const frame = calculate({ ...view(points.length), selectedId: 'trappist-1', world: { referenceFrame: summary.frame.referenceFrame, epochJdTt: summary.frame.epochJdTt,
+      pose: { positionM: [star.positionM[0], star.positionM[1], star.positionM[2] + distanceM], orientationXyzw: [0, 0, 0, 1] } } });
+    return ['trappist-1', 'trappist-1b', 'sun', other].map(id => frame.projectedBodies.find(body => body.index === at(id))!.emphasis);
+  };
+  // Among the planets; then where the stars around the system fill the view, as around the Sun's.
+  const fullM = extended.system.fadeOutStartDistanceM, rising = emphasis(fullM / 4);
+  assert.deepEqual(emphasis(4e11), [1, 1, .3, .3]);
+  assert.deepEqual(rising.slice(0, 2), [1, 1]);
+  assert.ok(rising[2]! > .3 && rising[2]! < 1 && rising[3] === rising[2], `rising: ${rising[2]}`);
+  assert.deepEqual(emphasis(fullM), [1, 1, 1, 1]);
+});
+
 test('the planner client sends a system just before the first view that holds its bodies', async () => {
   const posted: unknown[] = [];
   const worker: WorldPlannerWorker = { onmessage: null, onerror: null, postMessage: value => { posted.push(value); }, terminate() {} };
