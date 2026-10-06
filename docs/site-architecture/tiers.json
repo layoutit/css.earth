@@ -149,13 +149,6 @@
     },
     {
       "tier": 11,
-      "name": "Retired test folder; no final occupants",
-      "folders": [
-        "site/test"
-      ]
-    },
-    {
-      "tier": 11,
       "name": "Cross-cutting journeys and support",
       "folders": [
         "site/journeys"
@@ -447,7 +440,7 @@
     "site/vendor/cesium-LICENSE.md",
     "site/layouts/wordmark.css"
   ],
-  "status": "planned",
+  "status": "enforced",
   "forbid": [
     {
       "from": [

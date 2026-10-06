@@ -1,8 +1,10 @@
 # Site architecture plan
 
-**Option 3 was decided by the owner on 2026-10-05: relocate queued loader functions to their owners.** The router starts at module evaluation exactly as today, and all loading uses the same single serialized queue chain. S2 changes only documentation and tools; it moves no application files. The projection proves connectivity, not runtime behavior or generated chunk bytes. This PR is ready for the owner to merge.
+**Status: enforced.** S4 ended on 2026-10-06 with the site root at four allowlisted files and zero site folder cycles. `pnpm check:architecture` now fails on any site file or folder cycle, any upward, lateral or forbidden import, any production import of a test, any tracked site source file outside a declared folder, and any loose `site/` file that `.github/scripts/architecture/site-root-allowlist.json` does not name.
 
-[moves.json](site-architecture/moves.json) records destinations; [tiers.json](site-architecture/tiers.json) records layers, denies and planned/enforced status; [edits.json](site-architecture/edits.json) records the decided semantic changes. Only structural tables are committed here (the folders and the S3 changes); counts that move with every ordinary import are printed by `--tables` and written to the CI job summary.
+Option 3 was decided by the owner on 2026-10-05: relocate queued loader functions to their owners. The router starts at module evaluation exactly as before, and all loading uses the same single serialized queue chain. The projection proves connectivity, not runtime behavior or generated chunk bytes.
+
+[moves.json](site-architecture/moves.json) records destinations; [tiers.json](site-architecture/tiers.json) records layers, denies and the enforced status; [edits.json](site-architecture/edits.json) records the decided semantic changes. Only structural tables are committed here (the folders and the S3 changes); counts that move with every ordinary import are printed by `--tables` and written to the CI job summary.
 
 ## Folder ownership
 
@@ -35,7 +37,6 @@ A folder imports itself or strictly lower layers. Sibling folders, including L0 
 | 9 | `components/` | Reusable Astro markup and SSR composition | 0 |
 | 10 | `pages/` | Routes and object-page entries | 0 |
 | 11 | `journeys/` | Cross-cutting journeys and support | 0 |
-| 11 | `test/` | Retired test folder; no final occupants | 0 |
 <!-- /generated:folders -->
 
 The table is the final layering. Directory owns startup requests, startup world reads, object entries, registry and world context plan: it is the lower world family. World owns framing, visibility, datasets and camera context. History and fragments belong to navigation. The model's held-address reader carries its WeakMap and registration/disposal state; history keeps its re-export.
@@ -48,9 +49,9 @@ Registry types live in directory, navigation types in navigation and presenter t
 
 ## Contributor workflow
 
-There is no deadline. With `status: "planned"`, a plan finding is a WARNING with the fix command and a GitHub Actions annotation; it never fails `pnpm check:architecture`. The check reports the first plan finding. With `status: "enforced"`, every plan finding fails. The owner changes the status when S4 ends. Existing architecture rules and scanner failures always fail. Strict `--accept` always fails on plan findings. Stale generated tables are the exception to the warning: `pnpm check:architecture` fails whenever the committed folder and change tables differ from what `--write` would produce, in either status. They change only with `moves.json`, `tiers.json` or `edits.json`, so an ordinary pull request that adds an import never touches this document.
+The plan's status is `enforced`: every plan finding fails `pnpm check:architecture`, which reports the first one. (The checker still accepts `status: "planned"`, under which a plan finding is only a warning with the fix command and a GitHub Actions annotation; a test keeps the committed status at `enforced`.) Existing architecture rules, scanner failures and strict `--accept` always fail. `pnpm check:architecture` also fails whenever the committed folder and change tables differ from what `--write` would produce. They change only with `moves.json`, `tiers.json` or `edits.json`, so an ordinary pull request that adds an import never touches this document.
 
-When a warning names your file, update its destination or semantic edits and run `node .github/scripts/architecture/site-architecture.mts --write`, then strict `--accept`. Do not change application behavior just to silence a plan warning. Every mapped path is checked for existence, including deleted mapped files; generated inputs are explicit exceptions. Routine checks rescan the compact inventory so stale references produce findings.
+When a finding names your file, move it to the folder that owns it, or update the plan's tiers or semantic edits, and run `node .github/scripts/architecture/site-architecture.mts --write`, then strict `--accept`. Do not change application behavior just to silence a plan finding; a cycle requires an ownership change, not a tier exemption. Every mapped path is checked for existence, including deleted mapped files; generated inputs are explicit exceptions. Routine checks rescan the compact inventory so stale references produce findings.
 
 ## S3 atomic changes
 
@@ -102,7 +103,7 @@ S3 replays current locations with root-level additions. File SCCs cannot increas
 
 The sequence table (one row per S3 and S4 step: file and folder SCCs, upward and lateral edges, result) is derived from the live import graph, so it is not committed. Print it with `node .github/scripts/architecture/site-architecture.mts --tables`; CI writes it to the job summary.
 
-The reference scan covers full/extensionless/relative file strings plus the retired site/test/ folder prefix, including site/test/** and site/test/* globs. It does not prove arbitrary computed paths or every possible folder spelling. Plan-internal inventories and plan-checker implementation files are excluded. Generated tables exclude themselves. Dated history stays separate from live references. Full line-numbered output exists only on demand with --references; it is not committed.
+The reference scan covers full/extensionless/relative file strings plus the retired test folder's prefix and its `**` and `*` globs. It does not prove arbitrary computed paths or every possible folder spelling. Plan-internal inventories and plan-checker implementation files are excluded. Generated tables exclude themselves. Dated history stays separate from live references. Full line-numbered output exists only on demand with --references; it is not committed.
 
 The live reference counts by scope and class are derived on demand with `--tables`, or in full with `--references`.
 
@@ -117,7 +118,7 @@ Required reference updates include:
 
 Tests with depth-sensitive relative reads are listed by `--tables`.
 
-Move PRs delete applied mappings/groups, retarget pending edits and regenerate tables. The --references --old gate fails live old-file references and also prints covering folder/glob references for review. During partial moves, old globs may still serve remaining tests: extend wiring for the moved tests and prove executed identities. Once the folder is retired, run --references --old site/test/ and require zero live folder/glob references. Both gates work after removing applied map entries.
+Move PRs delete applied mappings/groups, retarget pending edits and regenerate tables. The --references --old gate fails live old-file references and also prints covering folder/glob references for review. During partial moves, old globs may still serve remaining tests: extend wiring for the moved tests and prove executed identities. The test folder is now retired: a file placed there has no owning folder and fails the check. Both gates work after removing applied map entries.
 
 ## Executable projection
 
@@ -142,12 +143,12 @@ pnpm check:architecture
 node .github/scripts/architecture/site-architecture.mts --write
 node .github/scripts/architecture/site-architecture.mts --accept
 # Per-move gate: substitute that PR's actual old paths; fails before migration.
-node .github/scripts/architecture/site-architecture.mts --references --old site/test/source-link.test.mts
+node .github/scripts/architecture/site-architecture.mts --references --old site/<old-folder>/<file>.test.mts
 ```
 
 ## Owner decisions and remaining ownership
 
 - Option 3 and the final folder ownership, including page-boot helpers in startup, were decided by the owner.
-- There is no deadline. The owner sets S4/S5 timing and changes planned to enforced when S4 ends.
+- S4 ended with the final root moves; the owner set the plan to enforced. S5 timing remains the owner's.
 - Branches touching scene-router, startup-boot and ObjectLayout are timed together so they do not collide.
 - The real-iPad startup-proof device owner remains to be assigned.
