@@ -4,7 +4,7 @@ const test = sourceTest();
 import type { Vector3 } from '@cssearth/engine';
 import { LIT_DEFAULT_VIEW, LOPSIDED_COVERAGE, openingDirection, prepareDefaultCameraAngles, prepareFacingCameraAngles } from '@cssearth/bake/objects/scene';
 import { detectMissingCoverage, missingCoverageColor } from '@cssearth/bake/raster';
-import * as solarGeometry from './solar-geometry.mts';
+import * as solarGeometry from '../../../../../src/platform/solar-geometry.mts';
 
 const distance = (a: Vector3, b: Vector3) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
 const point = (longitude: number, latitude: number) => { const l = longitude * Math.PI / 180, b = latitude * Math.PI / 180; return [Math.cos(b) * Math.cos(l), Math.cos(b) * Math.sin(l), Math.sin(b)] as unknown as Vector3; };

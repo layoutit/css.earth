@@ -5,7 +5,7 @@ import type { Vector3 } from '@cssearth/engine';
 import { preparedControlPitch } from '@cssearth/engine';
 import { LOPSIDED_COVERAGE, MINIMUM_COVERED_SHARE, prepareDefaultCameraAngles } from '@cssearth/bake/objects/scene';
 import { authoredFocusDatasets, coverageDirection, coveredShare, faceDatasetData } from '@cssearth/bake/objects/default-view';
-import * as solarGeometry from './solar-geometry.mts';
+import * as solarGeometry from '../../../../../src/platform/solar-geometry.mts';
 
 const point = (longitude: number, latitude: number, length = 0.7) => { const l = longitude * Math.PI / 180, b = latitude * Math.PI / 180;
   return [length * Math.cos(b) * Math.cos(l), length * Math.cos(b) * Math.sin(l), length * Math.sin(b)] as unknown as Vector3; };

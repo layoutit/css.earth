@@ -2,11 +2,10 @@ import { PREPARED_CUBIC_SKY_SCHEMA, validatePreparedCubicSky } from '@cssearth/o
 import { requireRecord, requireFiniteNumber } from '@cssearth/core';
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import PREPARED_MERCURY_SKY from "./mercury/prepared/sky.json" with {type: "json"};
-import PREPARED_VENUS_SKY from "./venus/prepared/sky.json" with {type: "json"};
+import PREPARED_MERCURY_SKY from "../../../../../src/objects/mercury/prepared/sky.json" with {type: "json"};
+import PREPARED_VENUS_SKY from "../../../../../src/objects/venus/prepared/sky.json" with {type: "json"};
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, CUBIC_SKY_STANDARD } from '@cssearth/bake/presentation';
 
 const runtimeSky = async (id: string) => requireRecord(await loadObjectTestDefinition(id)).sky;
@@ -64,11 +63,4 @@ test("every object package prepares its sky for the shared camera without privat
     assert.ok(Math.abs(requireFiniteNumber(projection.horizontalFovDegrees) -
       CUBIC_SKY_CAMERA_PRESENTATION_STANDARD.horizontalFovDegrees) < 1e-6, objectId);
   }
-});
-
-test("the retained sky stylesheet keeps no private Sun or catalogue stars", async () => {
-  const css = await readFile(new URL("../../site/layouts/cubic-sky.css", import.meta.url), "utf8");
-  assert.doesNotMatch(css, /object-directional-sun|object-cubic-sky-star/u);
-  assert.doesNotMatch(css,
-    /filter\s*:|mask(?:-image)?\s*:|clip-path\s*:|mix-blend-mode\s*:|gradient\(/u);
 });

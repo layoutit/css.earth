@@ -26,7 +26,7 @@ The Illustration is resized unchanged onto the sphere with its left edge at 0° 
 
 ## Evidence
 
-- [`equirectangular-illustration.test.mts`](../../../src/platform/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0°. The Illustration opens in the browser ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
+- [`equirectangular-illustration.test.mts`](../../../packages/bake/src/objects/interpretation/equirectangular-illustration.test.mts) checks that the map keeps its left edge at 0°. The Illustration opens in the browser ([all ten planets](../../../docs/images/eyes-on-exoplanets-illustrations.webp)).
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks that the planet transits at the published times, and [`object-systems.test.mts`](../../../site/world/object-systems.test.mts) that the system holds all seven planets.
 - `dataset-fits.test.mts` checks that the drawn rock shows the middle of the measured eclipse depth and is dark at night.
 - The rendered [day side](source/reference/rendered-model-day.png) and [terminator](source/reference/rendered-model-terminator.png) show the model dataset.

@@ -24,7 +24,7 @@ Run of 2026-10-03: the limb law changed from a model to the one Kervella et al. 
 
 Run of 2026-09-21 (this version):
 
-- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue color #fff5f4 is the color dataset's prepared color; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the color and marker from the pinned spectrum.
+- [`object-package-consistency.test.mts`](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) checks that the catalogue color #fff5f4 is the color dataset's prepared color; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the color and marker from the pinned spectrum.
 
 ## Known problems
 

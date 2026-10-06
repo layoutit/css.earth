@@ -21,7 +21,7 @@ Gravity darkening: the same fit gives the pole 10,070 ± 90 K and the equator 8,
 Run of 2026-09-21 (this version):
 
 - [`gravity-darkening.test.mts`](../../../packages/bake/src/objects/stellar/gravity-darkening.test.mts) (now [`packages/bake/src/objects/stellar/gravity-darkening.test.mts`](../../../packages/bake/src/objects/stellar/gravity-darkening.test.mts)) checks the Roche model against the paper's equatorial radius and temperature.
-- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue color #b3c9ff is the color dataset's prepared color and that the limb-darkening law is read at the recorded temperature and gravity; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the color and marker from the pinned spectrum.
+- [`object-package-consistency.test.mts`](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) checks that the catalogue color #b3c9ff is the color dataset's prepared color and that the limb-darkening law is read at the recorded temperature and gravity; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the color and marker from the pinned spectrum.
 
 ## Known problems
 

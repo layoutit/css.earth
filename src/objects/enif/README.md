@@ -14,7 +14,7 @@ Its brightness, measured band by band, gives 8,508 times the Sun's luminosity at
 
 Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from VizieR V/137D/XHIP and the archives named above; each choice was read with the dataset's own reader.
 
-- The color's cross-check differs by 2 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.
+- The color's cross-check differs by 2 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) recomputes it after preparation.
 
 ![Enif, Alphard, Denebola, Malmok, Rigil Kentaurus and Dìwö as their pages open, 3 October 2026](evidence/2026-10-03/pages.jpg)
 

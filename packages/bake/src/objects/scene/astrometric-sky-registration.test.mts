@@ -7,8 +7,8 @@ import {
   requireBodyFixedEclipticNorth,
   requireBodyFixedSunDirection,
   requireBodyFixedToIcrf,
-} from "./solar-geometry.mts";
-import * as solarGeometry from './solar-geometry.mts';
+} from "../../../../../src/platform/solar-geometry.mts";
+import * as solarGeometry from '../../../../../src/platform/solar-geometry.mts';
 
 // IAU 1976 obliquity at J2000 (84381.448 arcseconds): the J2000 ecliptic north
 // pole in ICRF is +z tilted about +x by it. Independent of the prepared

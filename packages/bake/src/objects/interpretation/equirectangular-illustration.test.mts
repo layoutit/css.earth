@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import test from 'node:test';
 import sharp from 'sharp';
 import { createSurfaceInterpreter } from '@cssearth/bake/objects/interpretation';
-import * as solarGeometry from './solar-geometry.mts';
+import * as solarGeometry from '../../../../../src/platform/solar-geometry.mts';
 
 const input = (path: string) => ({ path, id: path, origin: `https://example.test/${path}`, credit: 'Fixture', license: 'Fixture', acquisition: 'Fixture',
   redistribution: 'Fixture', sourceBinding: { kind: 'local', reason: 'Authored test fixture' }, consumers: ['datasets'] });
