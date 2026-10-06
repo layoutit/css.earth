@@ -27,10 +27,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "MPG/ESO 2.2-m WFI B, V, red, Hα",
-            "evidence": "https://www.eso.org/public/images/eso1118a/",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "mpg-eso-2-2m",
+            "evidence": "https://www.eso.org/public/images/eso1118a/"
           }
         ]
       }

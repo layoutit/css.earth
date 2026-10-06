@@ -372,6 +372,80 @@
       }
     },
     {
+      "id": "deep-impact",
+      "path": "images/deep-impact.webp",
+      "url": "/shell/facility-renders/deep-impact.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 15356,
+      "subject": {
+        "left": 180,
+        "top": 15,
+        "width": 232,
+        "height": 267
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-deep-impact",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/43"
+          }
+        ]
+      },
+      "source": {
+        "id": "deep-impact",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/epoxi_deepimpact.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 518886,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
+      }
+    },
+    {
+      "id": "deep-space-1",
+      "path": "images/deep-space-1.webp",
+      "url": "/shell/facility-renders/deep-space-1.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 14402,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-deep-space-1",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/47"
+          }
+        ]
+      },
+      "source": {
+        "id": "deep-space-1",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Deep_Space_1_clean_%28PIA04242%29.png",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Deep_Space_1_clean_(PIA04242).png",
+        "credit": "NASA/JPL",
+        "license": "Public domain",
+        "bytes": 415893,
+        "kind": "published-artwork",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
       "id": "eso-3-6m",
       "path": "images/eso-3-6m.webp",
       "url": "/shell/facility-renders/eso-3-6m.webp",
@@ -822,6 +896,46 @@
       }
     },
     {
+      "id": "lucy",
+      "path": "images/lucy.webp",
+      "url": "/shell/facility-renders/lucy.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 24690,
+      "subject": {
+        "left": 184,
+        "top": 15,
+        "width": 225,
+        "height": 267
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-lucy",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/45"
+          }
+        ]
+      },
+      "source": {
+        "id": "lucy",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/lucy.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 1203112,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
+      }
+    },
+    {
       "id": "magellan",
       "path": "images/magellan.webp",
       "url": "/shell/facility-renders/magellan.webp",
@@ -1009,6 +1123,40 @@
             0.44020438923913846
           ]
         }
+      }
+    },
+    {
+      "id": "mayall-4m",
+      "path": "images/mayall-4m.webp",
+      "url": "/shell/facility-renders/mayall-4m.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 25878,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-mayall-4m",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/50"
+          }
+        ]
+      },
+      "source": {
+        "id": "mayall-4m",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/f/f3/Nicholas_U_Mayall_4-meter_Telescope_%28noirlab-kitt-peak-drone7-3992x2242%29.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Nicholas_U_Mayall_4-meter_Telescope_(noirlab-kitt-peak-drone7-3992x2242).jpg",
+        "credit": "KPNO/NOIRLab/NSF/AURA/P. Marenfeld",
+        "license": "CC BY 4.0",
+        "bytes": 2614771,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
       }
     },
     {
@@ -1206,6 +1354,40 @@
       }
     },
     {
+      "id": "nicer",
+      "path": "images/nicer.webp",
+      "url": "/shell/facility-renders/nicer.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 37210,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-nicer",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/48"
+          }
+        ]
+      },
+      "source": {
+        "id": "nicer",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/Iss072e371305_%28Dec_17%2C_2024%29_---_The_NICER_%28Neutron_star_Interior_Composition_Explorer%29_X-ray_telescope_is_pictured_installed_on_the_starboard_side_of_the_International_Space_Station%27s_integrated_truss_segment.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:Iss072e371305_(Dec_17,_2024)_---_The_NICER_(Neutron_star_Interior_Composition_Explorer)_X-ray_telescope_is_pictured_installed_on_the_starboard_side_of_the_International_Space_Station%27s_integrated_truss_segment.jpg",
+        "credit": "NASA Johnson Space Center",
+        "license": "Public domain",
+        "bytes": 3768036,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
       "id": "odyssey",
       "path": "images/odyssey.webp",
       "url": "/shell/facility-renders/odyssey.webp",
@@ -1366,6 +1548,40 @@
       }
     },
     {
+      "id": "sloan-2-5m",
+      "path": "images/sloan-2-5m.webp",
+      "url": "/shell/facility-renders/sloan-2-5m.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 19998,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-sloan-2-5m",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/49"
+          }
+        ]
+      },
+      "source": {
+        "id": "sloan-2-5m",
+        "url": "https://upload.wikimedia.org/wikipedia/commons/7/77/SDSS_telescope_new.jpg",
+        "sourcePage": "https://commons.wikimedia.org/wiki/File:SDSS_telescope_new.jpg",
+        "credit": "Sloan Digital Sky Survey",
+        "license": "CC BY 4.0",
+        "bytes": 86020,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
       "id": "spitzer",
       "path": "images/spitzer.webp",
       "url": "/shell/facility-renders/spitzer.webp",
@@ -1397,6 +1613,86 @@
         "bytes": 1638522,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 80 (lossy lane)."
+      }
+    },
+    {
+      "id": "stardust",
+      "path": "images/stardust.webp",
+      "url": "/shell/facility-renders/stardust.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 20890,
+      "subject": {
+        "left": 38,
+        "top": 15,
+        "width": 517,
+        "height": 267
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-stardust",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/44"
+          }
+        ]
+      },
+      "source": {
+        "id": "stardust",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/Stardust_NeXT.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 274754,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
+      }
+    },
+    {
+      "id": "stereo",
+      "path": "images/stereo.webp",
+      "url": "/shell/facility-renders/stereo.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 8220,
+      "subject": {
+        "left": 197,
+        "top": 15,
+        "width": 198,
+        "height": 267
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-stereo",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/46"
+          }
+        ]
+      },
+      "source": {
+        "id": "stereo",
+        "url": "https://science.nasa.gov/wp-content/uploads/2023/05/stereo.png",
+        "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
+        "credit": "NASA spacecraft artwork collection",
+        "license": "Public domain",
+        "bytes": 4174113,
+        "kind": "official-prerendered-artwork",
+        "preparation": "Clear the near-black matte (alpha below 32, RGB at most 8), trim the transparent margin, fit inside 521x255 without upscaling, centre on a transparent 592x296 frame, encode WebP quality 80 (lossy lane) with alpha quality 40."
       }
     },
     {

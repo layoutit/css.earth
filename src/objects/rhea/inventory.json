@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 84,
+      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-sheet.webp",
+      "bytes": 498966,
+      "sha256": "c74428a56a7649a8547138acd39980f5f0b36e976b9d9059f45627902299db5d"
+    },
+    {
+      "location": "public",
       "filename": "rhea-arrival.webp",
       "bytes": 105828,
       "sha256": "1dd7fa21645299af1d85fcca346d912da5c23c6d4761e2140fc9e70c5707e461"
@@ -105,12 +117,6 @@
     },
     {
       "location": "public",
-      "filename": "rhea-lighting.webp",
-      "bytes": 923552,
-      "sha256": "5ef6d034366c774b59d6806c50564dde8d3e34d2f92fc75a6f8359173676e579"
-    },
-    {
-      "location": "public",
       "filename": "rhea-normal-poles@2x.webp",
       "bytes": 13214,
       "sha256": "0196399cdc08ed07d2bb8b71e8167deb5969454c1d4bdc9b62ffc246b39a72c5"
@@ -190,8 +196,8 @@
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 24951,
-      "sha256": "49524c13712bb3ca4be7cbd77cf89272403eada30c348d9885df6a575bcf3e4b"
+      "bytes": 27956,
+      "sha256": "79f6b74af85e3dfec0a2e07f34286d115a77c63e2572a87d1db15fafa8644eb8"
     },
     {
       "location": "prepared",
@@ -238,8 +244,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 226369,
-      "sha256": "c43e78c2cf38d3e890a0bd49d1ad1997e153bc7bf8766e243c4f7d0b44ac54e7"
+      "bytes": 230505,
+      "sha256": "a2889ccb308686df2b799861502f8095585cf4ad1558575659e6b0d19cfc6e95"
     },
     {
       "location": "prepared",

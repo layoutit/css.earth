@@ -22,7 +22,9 @@ export interface ShellOptions {
 }
 
 /** The arriving object and the view of it; `preview` shows a system's selection while its framing flight is under way. */
-export interface ShellNavigationTarget { view: SceneView; object: ObjectEntry; targetWorldCamera?: WorldCameraPose; preview?: boolean }
+export interface ShellNavigationTarget { view: SceneView; object: ObjectEntry; targetWorldCamera?: WorldCameraPose; preview?: boolean;
+  /** The camera carried the view to this scene (a zoom's or a pill landing's hand-over): the reader chose no result, so an open search stays. */
+  handover?: boolean }
 
 export interface ShellNavigationTransition {
   /** Publish the arriving selection while its camera can still be in flight. */

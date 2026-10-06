@@ -105,12 +105,6 @@
     },
     {
       "location": "public",
-      "filename": "dione-lighting.webp",
-      "bytes": 897282,
-      "sha256": "2ac4852d060d5db244e1c7dce6fa4b2838440e6211eb8cae359492f0fb71d024"
-    },
-    {
-      "location": "public",
       "filename": "dione-normal-poles@2x.webp",
       "bytes": 16770,
       "sha256": "8594482d164d8b2b3b10d4120c4edac9d907f62233bad7eb8ec7f029c0055155"
@@ -152,6 +146,18 @@
       "sha256": "0e6ddde3daddf6a8b8e02f54e158d513c3c094998139a3063d5e63997d786f58"
     },
     {
+      "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 84,
+      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-sheet.webp",
+      "bytes": 491230,
+      "sha256": "016d5d7be3d5ed523b521077cceae0d84104f62573afede719fe5e5c65c4241f"
+    },
+    {
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 300,
@@ -190,8 +196,8 @@
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 25137,
-      "sha256": "7bd50b5b7b9360109dd42ffc12089e32338cd15b40a0f6abf7c0596fb8a9b8fe"
+      "bytes": 28142,
+      "sha256": "f35d9995048d02415d27b5e4a55060166038ede1ec092fec9794f9c0e4d32f02"
     },
     {
       "location": "prepared",
@@ -238,8 +244,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 226281,
-      "sha256": "bdadd4feb874d03bb588ba08776c60fd7da010b93087ad1d3807eb2db63eb922"
+      "bytes": 230417,
+      "sha256": "28408dbd67a09919c4725415bffa77b4005a300bfd7caaf25d3276154c52ea70"
     },
     {
       "location": "prepared",

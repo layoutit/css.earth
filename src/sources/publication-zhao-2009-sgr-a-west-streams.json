@@ -1,0 +1,40 @@
+{
+  "id": "publication-zhao-2009-sgr-a-west-streams",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Dynamics of Ionized Gas at the Galactic Center: Very Large Array Observations of the Three-dimensional Velocity Field and Location of the Ionized Streams in Sagittarius A West",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0904.3133"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/699/1/186"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0904.3133",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0904.3133",
+      "checkedOn": "2026-10-05",
+      "locator": "Abstract: the three ionized streams in the central 3 pc are modelled as three bundles of Keplerian orbits about Sgr A*; the Northern and Eastern Arm streams may collide in the Bar region, a few arcseconds south of Sgr A*, where most of the orbiting gas is behind Sgr A*. Table 5, Northern Arm, Eastern Arm, Western Arc: distance 8 kpc; mass 4.2 (+6, −3) million Suns; eccentricity 0.83 ± 0.10, 0.82 ± 0.05, 0.20 ± 0.15; semi-major axis 205 ± 91, 289 ± 140, 236 ± 12 kau (0.99 ± 0.44, 1.40 ± 0.68, 1.11 ± 0.06 pc); longitude of ascending node 64 ± 28, −42 ± 11, 71 ± 6°; argument of perifocus 132 ± 40, −280 ± 8, 22 ± 48°; inclination 139 ± 10, 122 ± 5, 117 ± 3°; perifocal distance 0.17, 0.25, 0.89 pc; period 45, 76, 54 thousand years. The table's note: the node is the angle from the +x axis (east) to where the gas crosses the plane of the sky from negative to positive z, counterclockwise as seen from +z, which points away from the Earth; the inclination is between the +z axis and the angular momentum. The text with the table: the streams are bundles of orbits with the semi-major axis spread by ±0.25 of its value, over true anomalies of 192° to 460°, 195° to 430° and 130° to 420°. Table 3: 17 places on each stream, offsets from Sgr A* in arcseconds, with the H92α radial velocity at each. Fig. 21d: positive z is behind the centre."
+    }
+  ],
+  "creators": [
+    "Zhao, Jun-Hui",
+    "Morris, Mark R.",
+    "Goss, W. M.",
+    "An, Tao"
+  ],
+  "publisher": "ApJ 699, 186",
+  "publicationDate": "2009",
+  "relations": [],
+  "statements": []
+}

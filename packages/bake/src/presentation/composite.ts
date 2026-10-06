@@ -1,39 +1,37 @@
-import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool, PREPARED_PRESENTATION_SCHEMA, type PreparedVariant, type PreparedWrite, type PreparedResourceEntry } from '@cssearth/objects';
+import { canonicalPreparedAsset, preparedResourcePool, PREPARED_PRESENTATION_SCHEMA, type PreparedVariant, type PreparedWrite, type PreparedResourceEntry } from '@cssearth/objects';
 
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 
-import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.ts';
+import type { PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.ts';
+import { prepareSheetLighting } from './lighting-track.ts';
 import type { PreparedNode, PresentationAdapters } from './adapters.ts';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
 import { RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../raster/index.ts';
 import { readsTexture } from './prepared-node-tree.ts';
 
-const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
   const { namespace: ns, scene: plan, assets, datasets, sun, solarSource: solarSystemSource } = input;
   const { createPreparedNodeTree, prepareCssomDeclarationReads } = adapters;
 
   const material=plan.material;
-  // An airless body carries Mercury's Lambert row bank instead of an atmospheric phase atlas: the composite plane
-  // then streams the same row shards and billboard the row-bank cutaway uses, and no atmosphere toggle exists.
+  // An airless body carries a sphere's lighting sheet instead of an atmospheric phase atlas: the composite plane then
+  // draws the same sheet the row-bank cutaway uses (lighting-track.ts), and no atmosphere toggle exists.
   const planes=plan.planes??[];
   const atmospheric='lightingUrl' in material && typeof material.lightingUrl==='string';
-  const bank=atmospheric?null:assets.lighting?.banks[String(CANONICAL_PREPARED_IMAGE_DENSITY)];
-  if(!atmospheric&&(!bank||!bank.billboard||bank.billboard.presentations.length!==assets.lighting.frameCount))throw new TypeError('Airless composite needs the prepared lighting bank and billboard atlas.');
+  if(!atmospheric&&!assets.lighting)throw new TypeError('Airless composite needs the prepared lighting sheet.');
+  const sheet=atmospheric?null:prepareSheetLighting(assets.lighting);
   const layers=atmospheric?(["surface","poles","material"] as const):(["surface","poles"] as const);
-  const warm=[
-    ...(atmospheric?[{key:"lighting",url:canonicalPreparedAsset(material.lightingUrl,material.lighting2xUrl),pool:"warm"}]
-      :[{key:"shadowless",url:bank!.shadowless.url,pool:"warm"},{key:SHADOWLESS_BILLBOARD_KEY,url:bank!.billboard.shadowless.url,pool:"warm"}])];
-  // The billboard atlas serves the far view with shadows on; it loads when that view needs a frame.
-  const billboardAtlas=atmospheric?[]:[{key:BILLBOARD_LIGHTING_KEY,url:bank!.billboard.url,pool:"billboard"}];
-  const lightingRows=atmospheric?[]:bank!.rows.map((row,index)=>({key:`lighting:${index}`,url:row.url,pool:"lighting"}));
+  // The flood-lit frame loads with the page; the sheet loads when shadows are turned on.
+  const warm=atmospheric?[{key:"lighting",url:canonicalPreparedAsset(material.lightingUrl,material.lighting2xUrl),pool:"warm"}]
+    :sheet!.entries.filter(entry=>entry.pool==="warm");
+  const lightingSheet=sheet?sheet.entries.filter(entry=>entry.pool!=="warm"):[];
   // A surface too large to decode as one image comes as pages, each at every level (preparation/raster/pages.ts).
   const paged=pagedSurface(plan.body.surfacePages,datasets);
   const entries=[...warm,...datasets.controls.flatMap(dataset=>layers.filter(layer=>!(paged&&layer==="surface")).map(layer=>({key:`${layer}:${dataset.id}`,
-    url:canonicalPreparedAsset(dataset[`${layer}Url`],dataset[`${layer}2xUrl`]),pool:"material"}))),...(paged?.entries??[]),...lightingRows,...billboardAtlas,
+    url:canonicalPreparedAsset(dataset[`${layer}Url`],dataset[`${layer}2xUrl`]),pool:"material"}))),...(paged?.entries??[]),...lightingSheet,
     ...planes.map(entry=>({key:entry.id,url:entry.url,pool:"warm"}))];
   const required=(id: string)=>[...(paged?.keys(id)??[]),...layers.filter(layer=>!(paged&&layer==="surface")).map(layer=>`${layer}:${id}`),
-    ...(atmospheric?[]:["shadowless",SHADOWLESS_BILLBOARD_KEY])];
+    ...(sheet?.required??[])];
   const b=createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.body.leaves,...planes.flatMap(entry=>entry.leaves)].map(leaf => leaf.style)) });
   const camera=b.element("div","polycss-camera object-render-root");
   const scene=b.element("div","polycss-scene",`transform:${plan.camera.defaultTransform}`,{"aria-hidden":"true","data-polycss-lighting":"baked"});
@@ -60,8 +58,6 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   if(atmospheric){plane.style.backgroundSize=material.backgroundSize;plane.style.backgroundPosition=material.backgroundPositions[material.defaultFrame];}
   b.append(null,composite);b.append(composite,plane);
   const {tree,index}=b.finish({camera,scene});
-  const address=(p: AtlasAddress,resource=`lighting:${p.rowIndex}`,row=p.rowIndex)=>({resource,frame:p.frameIndex,row,backgroundPosition:p.backgroundPosition,backgroundSize:p.backgroundSize});
-  const billboardAddress=(p: AtlasAddress)=>address(p,BILLBOARD_LIGHTING_KEY,0);
   const track: SourceMaterialTrack=atmospheric?{id:"lighting",target:index(plane),frame:{source:"sun-z",minimum:material.minimumLightViewZ,
     maximum:material.maximumLightViewZ,count:material.frameCount,baseFrame:0,span:material.directionalFrameCount-1,
     maximumFrame:material.directionalFrameCount-1,remap:null},
@@ -70,18 +66,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     demand:{ capacity:1, defaultFrame:material.defaultFrame },
     rotation:{kind:"angle",source:"view-sun",reference:"prepared",baseDegrees:material.baseLightAzimuthDegrees,
       zeroAtPole:false},frameAttribute:null,modeAttribute:null,quoted:true}
-  :{id:"lighting",target:index(plane),frame:{source:"sun-z",minimum:assets.lighting.minimumLightViewZ,maximum:assets.lighting.maximumLightViewZ,
-      count:assets.lighting.frameCount,baseFrame:0,remap:null},
-    banks:[{id:"rows",frames:bank!.presentations.map(p=>address(p)),default:null,fixed:{resource:"shadowless",frame:bank!.shadowless.frameIndex,row:null,backgroundPosition:bank!.shadowless.backgroundPosition,backgroundSize:bank!.shadowless.backgroundSize},
-      rows:bank!.rows.map((_,row)=>({row,resource:`lighting:${row}`,firstFrame:row*bank!.transport.framesPerRow,
-        lastFrame:Math.min(bank!.presentations.length-1,(row+1)*bank!.transport.framesPerRow-1)}))},
-     {id:"billboard",frames:bank!.billboard.presentations.map(billboardAddress),default:null,fixed:{resource:SHADOWLESS_BILLBOARD_KEY,frame:bank!.billboard.shadowless.frameIndex,row:null,
-       backgroundPosition:bank!.billboard.shadowless.backgroundPosition,backgroundSize:bank!.billboard.shadowless.backgroundSize},
-      rows:[{row:0,resource:BILLBOARD_LIGHTING_KEY,firstFrame:0,lastFrame:bank!.billboard.presentations.length-1}]}],
-    farBank:"billboard",
-    demand:{capacity:bank!.transport.maximumRetainedRowCount,defaultFrame:bank!.transport.defaultFrame},
-    rotation:{kind:"angle",source:"view-sun",reference:"prepared",baseDegrees:assets.lighting.baseLightAzimuthDegrees,
-      zeroAtPole:false},frameAttribute:null,modeAttribute:null,quoted:true};
+  :sheet!.track(index(plane));
   const variants: PreparedVariant[]=[];
   const atmospheres: (boolean|null)[]=atmospheric?[false,true]:[null];
   const ringNode = planeNodes.get('rings');
@@ -99,11 +84,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
       ...(ringNode && rings!==null?[{kind:"style",target:index(ringNode),name:"display",value:rings?"block":"none"} as PreparedWrite]:[]),
     ],materials:[atmospheric?{track:"lighting",bank:"lighting",mode:"frames",enabled:true,rotationEnabled:shadows,
       frameOverride:shadows?null:material.frameCount-1,clearWhenHidden:false,fixedMode:"shadowless"}
-      :{track:"lighting",bank:"rows",mode:shadows?"frames":"fixed",enabled:true,rotationEnabled:shadows,
-        frameOverride:shadows?null:assets.lighting.frameCount-1,clearWhenHidden:false,fixedMode:"full-phase-curvature",
-        modeLabel:shadows?"directional-terminator":"full-phase-curvature",
-        addressAttributes:[{name:"data-material-frame",source:shadows?"frame":"literal",value:null},
-          {name:"data-material-mode",source:"literal",value:shadows?null:"full-phase-curvature"}]}]});
+      :sheet!.selection(shadows)]});
   }
   return {schema:PREPARED_PRESENTATION_SCHEMA,camera:plan.camera,sky:plan.starfield,sun:sun,
     ...(paged?{textureLevels:paged.textureLevels}:{}),
@@ -111,11 +92,9 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
       preparedResourcePool("material",entries,{retention:"selection",capacity:6,concurrency:6}),
       ...(paged?[preparedResourcePool("pages",entries,{retention:"selection",concurrency:2,capacity:paged.pageCount*2*paged.textureLevels.levels.length,
         eviction:"capacity",maximumDecodedBytes:paged.maximumDecodedBytes})]:[]),
-      ...(atmospheric?[]:[preparedResourcePool("lighting",entries,{retention:"selection",decoding:"sync",capacity:bank!.transport.maximumRetainedRowCount,
-        concurrency:bank!.transport.maximumRetainedRowCount,eviction:"capacity",reuse:true}),
-        preparedResourcePool("billboard",entries,{retention:"selection",decoding:"sync"})])],
-      // A paged surface starts at its first level, the one the first selection chooses. Lighting rows are not startup
-      // assets: shadows start off, which shows the one shadowless frame, and the rows load when shadows are turned on.
+      ...(sheet?[sheet.pool(entries)]:[])],
+      // A paged surface starts at its first level, the one the first selection chooses. The lighting sheet is not a
+      // startup asset: shadows start off, which shows the one flood-lit frame, and the sheet loads when shadows are turned on.
       startup:[...new Set([...warm.map(entry=>entry.key),...required(datasets.defaultDataset).map(key=>paged?.textureLevels.levels[0]!.resources[key]??key)])]},
     tree,variants,...(atmospheric?{}:{resourceOrder:"materials-first" as const}),materials:[track],
     viewBindings:[{kind:"silhouette-fit",target:index(composite),minimumRadius:POINT_MIN_RADIUS_PX,

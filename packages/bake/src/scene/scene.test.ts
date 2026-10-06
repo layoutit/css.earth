@@ -8,7 +8,7 @@ import { prepareGeometryScene, parseGeometryProfile, leafImageCandidates, widest
 import type { GeometryProfile, GeometrySceneAssets, LeafImagePixels, SolarSceneSource } from './geometry-scene.ts';
 import { prepareLeafSeamOutset, prepareSeamOutsetSteps } from './seam-outset.ts';
 import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
-import { readRasterRecipe, outputName, packedRasterSize, rasterPageName, rasterPagePlan } from '../raster/index.ts';
+import { readRasterRecipe, outputName, packedRasterSize, rasterPageName, rasterPagePlan, LIGHTING_SHEET } from '../raster/index.ts';
 import type { RasterRecipe } from '@cssearth/objects';
 import { TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
 import { prepareComposite } from '../presentation/composite.ts';
@@ -40,7 +40,8 @@ async function prepareAuthored(id:string,direction:[number,number,number],edit:(
  widths:(raster:RasterRecipe,profile:GeometryProfile)=>LeafImagePixels=publishedWidths){
  const root=`src/objects/${id}/source`, profile=edit(parseGeometryProfile(await readJson(`${root}/preparation/geometry.json`))),raster=readRasterRecipe(await readJson(`${root}/preparation/raster.json`));
  const assets:GeometrySceneAssets={...extra};
- if(raster.lighting)assets.lighting={frameCount:raster.lighting.frameCount,defaultFrame:raster.lighting.defaultFrame};
+ // The sheet's frames are the lane's, not the recipe's; a body starts beside the last, full phase (raster/lighting.ts).
+ if(raster.lighting)assets.lighting={frameCount:LIGHTING_SHEET.frameCount,defaultFrame:LIGHTING_SHEET.frameCount-1};
  if(raster.interior){
   const source=await readJson(`${root}/${raster.interior.source}`) as {metallicCoreRadiusFraction:number;presentation:{cutaway:{centerLongitudeDegrees:number;widthDegrees:number}}};
   const url=(template:string)=>raster.publicBase+outputName(template,RASTER_DENSITY);

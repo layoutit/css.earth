@@ -27,10 +27,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "DECam g, r, i, z",
-            "evidence": "https://www.legacysurvey.org/dr10/",
-            "reason": "The survey's color composite of coadded images; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "blanco-4m",
+            "evidence": "https://www.legacysurvey.org/dr10/description/ — DECam: Dark Energy Camera on the Blanco 4-meter telescope"
           }
         ]
       }

@@ -122,8 +122,9 @@ test("a system's exit distance scales the Sun's 100 AU by the prepared framing r
 
 test('a system is named by its star’s system name', () => {
   assert.equal(systemById(SCENE_OBJECTS, 'wasp-43')!.name, 'Gnomon system');
-  // Sgr A*'s system is the Galactic Centre. A star's system name is never its constellation: Sirius's read "Canis Major".
-  assert.equal(systemById(SCENE_OBJECTS, 'sgr-a-star')!.name, 'Galactic Centre');
+  // Sgr A*'s system is named as every star's is; the Galactic Centre is the page it stands inside. A star's system name
+  // is never its constellation: Sirius's read "Canis Major".
+  assert.equal(systemById(SCENE_OBJECTS, 'sgr-a-star')!.name, 'Sagittarius A* system');
   assert.equal(systemById(SCENE_OBJECTS, 'sirius')!.name, 'Sirius system');
   assert.equal(systemById(SCENE_OBJECTS, SOLAR_SYSTEM_ID)!.name, 'Solar System');
 });

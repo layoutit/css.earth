@@ -1,0 +1,32 @@
+{
+  "id": "artwork-photo-deep-space-1",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "Deep Space 1 artwork",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://commons.wikimedia.org/wiki/File:Deep_Space_1_clean_(PIA04242).png",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Deep_Space_1_clean_%28PIA04242%29.png",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://commons.wikimedia.org/wiki/File:Deep_Space_1_clean_(PIA04242).png",
+      "checkedOn": "2026-10-05",
+      "locator": "File licence, author and original file size"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Wikimedia Commons",
+  "creators": [
+    "NASA/JPL"
+  ]
+}

@@ -27,10 +27,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "WFI [O III] V R H-alpha",
-            "evidence": "https://www.eso.org/public/images/eso0902c/",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "mpg-eso-2-2m",
+            "evidence": "https://www.eso.org/public/images/eso0902c/"
           }
         ]
       }

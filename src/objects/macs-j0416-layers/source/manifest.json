@@ -27,10 +27,14 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "Hubble ACS Hubble WFC3 Webb NIRCam 0.4 to 5 um",
-            "evidence": "https://esawebb.org/images/weic2327a/",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://esawebb.org/images/weic2327a/"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://esawebb.org/images/weic2327a/"
           }
         ]
       }

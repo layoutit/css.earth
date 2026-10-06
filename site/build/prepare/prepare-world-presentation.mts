@@ -12,6 +12,7 @@ import majorMoons from '../../source/major-moons.json' with { type: 'json' };
 import catalogueIds from '../../prepared/prepared-dot-catalogues.json' with { type: 'json' };
 import { discoveryVisibility, type ObjectDiscovery } from '@cssearth/objects';
 import { WORLD_OBJECTS } from '../../world-objects.mts';
+import { ancestorsOf } from '../../objects.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
 import { worldFilesOf } from '../../server/world-places.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
@@ -87,6 +88,21 @@ export function prepareCategoryFrame(positionsM: readonly Position[]): CategoryF
   return { centreM, minimumM: minimum.map((value, axis) => value - centreM[axis]!), maximumM: maximum.map((value, axis) => value - centreM[axis]!) };
 }
 
+/** The members a pill frames: those inside the smallest region of the zoom (an object seen from inside: the Milky Way, the
+ * Local Group, the Nearby Universe) that holds more than half of them; `regionsOf` names the regions a body is inside. A view
+ * draws a category's markers at their own scale only: fitted around every star, the 21 in other galaxies put the camera 67
+ * million light-years out, where the markers are galaxies and no star is drawn, and the galaxies' box reached the quasar
+ * 3C 273, where the markers are clusters (css.earth 0.6928, 2026-10-06). Every member is still highlighted. Without a region
+ * that holds most of them, every member is framed. */
+export function framedMembers<Member extends { readonly id: string }>(members: readonly Member[], regionsOf: (id: string) => readonly string[]): readonly Member[] {
+  const regions = new Map(members.map(member => [member.id, new Set(regionsOf(member.id))]));
+  const held = new Map<string, number>();
+  for (const inside of regions.values()) for (const region of inside) held.set(region, (held.get(region) ?? 0) + 1);
+  // Regions nest, so of those holding most members the one holding the fewest is the smallest.
+  const smallest = [...held].filter(([, count]) => count > members.length / 2).sort((a, b) => a[1] - b[1])[0]?.[0];
+  return smallest === undefined ? members : members.filter(member => regions.get(member.id)!.has(smallest));
+}
+
 /** Whether a body is notable: featured itself (a featured discovery or a default feature), or anywhere in the orbit tree of a
  * featured body, so every planet of a featured star is notable with it. `centreOf` names each body's orbit centre. */
 export function notableBodies(worldObjects: readonly { id: string; discovery: { featured: boolean } }[], defaultFeatures: ReadonlySet<string>,
@@ -105,10 +121,11 @@ export function notableBodies(worldObjects: readonly { id: string; discovery: { 
  * notable bodies (notableBodies) are only some of its members, at least two, is marked and framed by those alone, listed as its
  * memberIds: the 40 notable exoplanets and stars, not all 865 and 2,174. hostIds lists the placed stars whose systems hold the
  * marked members: from afar a planet is drawn inside its star's dot, so the pill marks that star too. holderIds lists the
- * holder files that have marked members the summary does not. */
+ * holder files that have marked members the summary does not. The box is fitted to the marked members `framedMembers` keeps. */
 export function prepareCategoryFrames(worldObjects: typeof WORLD_OBJECTS,
   defaultFeatures: ReadonlySet<string>, orbitFeatures: ReadonlySet<string>, notable: ReadonlySet<string>,
-  centreOf: ReadonlyMap<string, string>, worldHostId: string, holderFilesOf: (ids: readonly string[]) => readonly string[] = () => []) {
+  centreOf: ReadonlyMap<string, string>, worldHostId: string, holderFilesOf: (ids: readonly string[]) => readonly string[] = () => [],
+  regionsOf: (id: string) => readonly string[] = () => []) {
   // Where a member is drawn from afar: inside the dot of the placed star its orbits lead to. The world's own host (the Sun) is
   // never one, so a pill marks another star only for its members' systems.
   const placedStars = new Set(worldObjects.filter(object => (object.classification === 'star' || object.classification === 'black-hole') && object.id !== worldHostId).map(object => object.id));
@@ -122,12 +139,12 @@ export function prepareCategoryFrames(worldObjects: typeof WORLD_OBJECTS,
     const marked = new Set(discoveryVisibility(worldObjects, { illustrations: false, highlighted: classification, defaultFeatures, orbitFeatures }).highlightedBodies);
     const bodies = worldObjects.filter(object => marked.has(object.id)), notables = bodies.filter(object => notable.has(object.id));
     const narrowed = notables.length >= 2 && notables.length < bodies.length;
-    const frame = prepareCategoryFrame((narrowed ? notables : bodies).map(object => {
+    const markedBodies = narrowed ? notables : bodies;
+    const frame = prepareCategoryFrame(framedMembers(markedBodies, regionsOf).map(object => {
       // Preparation reads every system's file (site/world-context-plan.mts), so every body is placed.
       if (!object.worldFrame) throw new TypeError(`${object.id} has no world position; the world context read here lacks its system.`);
       return object.worldFrame.originM;
     }));
-    const markedBodies = narrowed ? notables : bodies;
     const hostIds = [...new Set(markedBodies.flatMap(object => hostOf(object.id) ?? []))];
     // The holder files that have marked members the summary does not: a page reads them when the pill is highlighted.
     const holderIds = holderFilesOf(markedBodies.map(object => object.id));
@@ -156,7 +173,9 @@ export function prepareWorldPresentation() {
     clusters: layerPresentation('clusters', ['fadeStartDistanceM', 'fullDistanceM']),
     categoryFrames: prepareCategoryFrames(WORLD_OBJECTS, new Set(defaultFeatureIds), new Set(orbitFeatureIds),
       notableBodies(WORLD_OBJECTS, new Set(defaultFeatureIds), orbitCentres(APPLICATION_WORLD_CONTEXT)), orbitCentres(APPLICATION_WORLD_CONTEXT),
-      APPLICATION_WORLD_CONTEXT.focus.id, worldFilesOf),
+      APPLICATION_WORLD_CONTEXT.focus.id, worldFilesOf,
+      // The objects seen from inside that a body is inside (their `zoom` facts make them the zoom's regions).
+      id => ancestorsOf(id).filter(object => object.zoom !== undefined).map(object => object.id)),
   };
 }
 

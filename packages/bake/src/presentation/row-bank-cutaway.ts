@@ -1,44 +1,35 @@
-import { CANONICAL_PREPARED_IMAGE_DENSITY, canonicalPreparedAsset, preparedResourcePool, PREPARED_PRESENTATION_SCHEMA, type PreparedVariant, type PreparedWrite } from '@cssearth/objects';
+import { canonicalPreparedAsset, preparedResourcePool, PREPARED_PRESENTATION_SCHEMA, type PreparedVariant, type PreparedWrite } from '@cssearth/objects';
 
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 
-import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMaterialTrack } from './types.ts';
+import type { PresentationInputs, PresentationDraft } from './types.ts';
+import { prepareSheetLighting } from './lighting-track.ts';
 import type { PreparedNode, PresentationAdapters } from './adapters.ts';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
-const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
 export async function prepareRowBankCutaway(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
   const { namespace: ns, scene: plan, assets, datasets, sun } = input;
   const { createPreparedNodeTree, prepareCssomDeclarationReads } = adapters;
 
-  const bank = assets.lighting.banks[String(CANONICAL_PREPARED_IMAGE_DENSITY)], normal = datasets.controls.find(dataset => dataset.id === datasets.defaultDataset);
+  const sheet = prepareSheetLighting(assets.lighting), normal = datasets.controls.find(dataset => dataset.id === datasets.defaultDataset);
   if (!normal) throw new TypeError("The default dataset is missing.");
   // The stars ride the scene matrix through the prepared astrometric
   // registration, exactly like the observed Sun.
   if (plan.starfield.cameraContract !== "scene-locked-unbounded-accumulated-matrix3d" || typeof plan.starfield.sceneRegistration !== "string") {
     throw new TypeError("Object cubic-sky camera binding is incompatible.");
   }
-  // The far view's lighting: every frame in one small atlas, so the overlay
-  // keeps the phase while the row shards stop streaming.
-  const billboard = bank.billboard;
-  if (!billboard || typeof billboard.schema !== "string" || billboard.presentations.length !== assets.lighting.frameCount) {
-    throw new Error("Object has no prepared billboard lighting atlas.");
-  }
   for (const dataset of datasets.controls) if (!/^#[0-9a-f]{6}$/u.test(dataset.billboardColor ?? "")) throw new Error(`Object dataset ${dataset.id} has no prepared billboard color.`);
   // A body without a cutaway (the recipe's `cutaway`, parked on Mercury) has no interior assets, nodes or pose.
   const interiorAssets = assets.interior, interiorPlan = interiorAssets ? plan.interior : null;
   const interiorKeys = interiorPlan ? ["outerSurface", "outerPoles", "outerSurfaceUnlit", "outerPolesUnlit", "core", "corePoles", "section"] : [];
   const entries = [
-    { key: "shadowless", url: bank.shadowless.url, pool: "warm" },
-    { key: SHADOWLESS_BILLBOARD_KEY, url: billboard.shadowless.url, pool: "warm" },
-    // The billboard atlas serves the far view with shadows on; it loads when that view needs a frame.
-    { key: BILLBOARD_LIGHTING_KEY, url: billboard.url, pool: "billboard" },
+    // The flood-lit frame loads with the page; the sheet loads when shadows are turned on (lighting-track.ts).
+    ...sheet.entries,
     ...datasets.controls.filter(dataset => dataset.view === "exterior").flatMap(dataset => {
       const pool = dataset.id === datasets.defaultDataset ? "warm" : "datasets";
       return [{ key: `surface:${dataset.id}`, url: canonicalPreparedAsset(dataset.surfaceUrl, dataset.surface2xUrl), pool },
         { key: `poles:${dataset.id}`, url: canonicalPreparedAsset(dataset.polesUrl, dataset.poles2xUrl), pool }];
     }),
     ...interiorAssets ? interiorKeys.map(name => ({ key: `interior:${name}`, pool: "datasets", url: canonicalPreparedAsset(interiorAssets[`${name}Url`], interiorAssets[`${name}2xUrl`]) })) : [],
-    ...bank.rows.map((row, index) => ({ key: `lighting:${index}`, url: row.url, pool: "lighting" })),
   ];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([
     ...plan.bodyLeaves, ...interiorPlan ? [...interiorPlan.outerBodyLeaves, ...interiorPlan.coreLeaves, ...interiorPlan.sectionLeaves] : []].map(leaf => leaf.style)) });
@@ -77,28 +68,13 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   }
   // The overlay root carries the billboard (a flat disc of the surface's mean
   // color fitted to the same silhouette as the overlay above it, which
-  // lights it) and the terminator overlay.
+  // lights it from the same sheet at every distance) and the terminator overlay.
   const materialRoot = b.element("div", `${ns}-material-root object-render-root`);
   // The page writes the disc's color and its opacity on the disc itself.
   const billboardDisc = b.element("s", `${ns}-billboard`, `opacity:0;background-color:${normal.billboardColor}`), materialLeaf = b.element("s", `${ns}-material`);
   b.append(null, materialRoot); b.append(materialRoot, billboardDisc); b.append(materialRoot, materialLeaf);
   const { tree, index } = b.finish({ camera, scene });
-  const address = (p: AtlasAddress, resource = `lighting:${p.rowIndex}`, row = p.rowIndex) => ({ resource, frame: p.frameIndex, row,
-    backgroundPosition: p.backgroundPosition, backgroundSize: p.backgroundSize });
-  // The near bank streams row shards; past the geometry stage the far bank
-  // draws the same frame from the billboard atlas (one row).
-  const billboardAddress = (p: AtlasAddress) => address(p, BILLBOARD_LIGHTING_KEY, 0);
-  const track: SourceMaterialTrack = { id: "lighting", target: index(materialLeaf), frame: { source: "sun-z", minimum: assets.lighting.minimumLightViewZ,
-      maximum: assets.lighting.maximumLightViewZ, count: assets.lighting.frameCount, baseFrame: 0, remap: null },
-    banks: [{ id: "rows", frames: bank.presentations.map(p => address(p)), default: null, fixed: { resource: "shadowless", frame: bank.shadowless.frameIndex, row: null, backgroundPosition: bank.shadowless.backgroundPosition, backgroundSize: bank.shadowless.backgroundSize },
-      rows: bank.rows.map((_, row) => ({ row, resource: `lighting:${row}`, firstFrame: row * bank.transport.framesPerRow,
-        lastFrame: Math.min(bank.presentations.length - 1, (row + 1) * bank.transport.framesPerRow - 1) })) },
-    { id: "billboard", frames: billboard.presentations.map(billboardAddress), default: null, fixed: { resource: SHADOWLESS_BILLBOARD_KEY, frame: billboard.shadowless.frameIndex, row: null, backgroundPosition: billboard.shadowless.backgroundPosition, backgroundSize: billboard.shadowless.backgroundSize },
-      rows: [{ row: 0, resource: BILLBOARD_LIGHTING_KEY, firstFrame: 0, lastFrame: billboard.presentations.length - 1 }] }],
-    farBank: "billboard",
-    demand: { capacity: bank.transport.maximumRetainedRowCount, defaultFrame: bank.transport.defaultFrame },
-    rotation: { kind: "angle", source: "view-sun", reference: "prepared", baseDegrees: assets.lighting.baseLightAzimuthDegrees,
-      zeroAtPole: false }, frameAttribute: null, modeAttribute: null, quoted: true };
+  const track = sheet.track(index(materialLeaf));
   const variants: PreparedVariant[] = datasets.controls.flatMap(dataset => [false, true].map(shadows => {
     const interior = dataset.view === "interior", writeTexture = (target: PreparedNode, name: string, resource: string): PreparedWrite => ({ kind: "texture", target: index(target), name, resource, quoted: true });
     return { when: { datasetId: dataset.id, shadows }, required: interior
@@ -112,22 +88,15 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
         { kind: "attribute", target: -1, name: "data-dataset", value: interior || dataset.id === datasets.defaultDataset ? null : dataset.id },
         { kind: "class", target: -1, name: `${ns}-hide-shadows`, value: !shadows },
         { kind: "style", target: index(billboardDisc), name: "backgroundColor", value: dataset.billboardColor },
-      ], materials: [{ track: "lighting", bank: "rows", mode: shadows ? "frames" : "fixed", enabled: true, rotationEnabled: shadows,
-        frameOverride: shadows ? null : assets.lighting.frameCount - 1, clearWhenHidden: false, fixedMode: "full-phase-curvature",
-        modeLabel: shadows ? "directional-terminator" : "full-phase-curvature",
-        addressAttributes: [{ name: "data-material-frame", source: shadows ? "frame" : "literal", value: null },
-          { name: "data-material-mode", source: "literal", value: shadows ? null : "full-phase-curvature" }],
-      }] };
+      ], materials: [sheet.selection(shadows)] };
   }));
   const startup = entries.filter(entry => entry.pool === "warm").map(entry => entry.key);
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun,
     assets: { entries, pools: [preparedResourcePool("warm", entries, { retention: "warm", decoding: "sync" }),
       // A switch holds both datasets' surface and poles until the new one commits; the cutaway holds its seven images and one more.
       preparedResourcePool("datasets", entries, { retention: "selection", decoding: "sync", capacity: Math.max(interiorKeys.length + 1, 4), concurrency: Math.max(interiorKeys.length + 1, 4) }),
-      preparedResourcePool("lighting", entries, { retention: "selection", decoding: "sync", capacity: bank.transport.maximumRetainedRowCount,
-        concurrency: bank.transport.maximumRetainedRowCount, eviction: "capacity", reuse: true }),
-      preparedResourcePool("billboard", entries, { retention: "selection", decoding: "sync" })],
-      // Lighting rows load when shadows are turned on; shadows start off and show the one shadowless frame.
+      sheet.pool(entries)],
+      // The lighting sheet loads when shadows are turned on; shadows start off and show the one flood-lit frame.
       startup },
     tree, variants, resourceOrder: "materials-first", materials: [track],
     viewBindings: [

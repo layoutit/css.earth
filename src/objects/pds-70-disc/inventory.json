@@ -17,7 +17,7 @@
       "location": "prepared",
       "filename": "delivery.json",
       "bytes": 1889,
-      "sha256": "c6e7f86da01a785c30e011c3d2784658083442edbf6c218a53fbf0d8475a40f9"
+      "sha256": "7e1b140760d16d5d752a48ee50329b4ed49db7b9862e807226905cdbf0b96cbf"
     },
     {
       "location": "prepared",
@@ -196,8 +196,8 @@
     {
       "location": "prepared",
       "filename": "dust/volume.json",
-      "bytes": 130134,
-      "sha256": "9e8b88fdeeb3c1727aaf359a596acdfbc7ab88fe390d5427a6395f9c724da4a0"
+      "bytes": 130128,
+      "sha256": "c4d7136ce465d9d09bef4da3578e60f171ab6a634d716250d62dc78207b45292"
     },
     {
       "location": "prepared",
@@ -209,13 +209,13 @@
       "location": "prepared",
       "filename": "record.json",
       "bytes": 12011,
-      "sha256": "2b02597a8a66f82f31ffe1958ae085d3ee6c6a7a6ccd28ab360c04fd9e9e535c"
+      "sha256": "4259e9eed464ee9929700a0bcc2af6397c362fc9ba753d7abf44f2752f218bbe"
     },
     {
       "location": "prepared",
       "filename": "stars.bin",
-      "bytes": 381,
-      "sha256": "a36db29c4d0d176bfec63af2c0f399c6a4109cae51f3a167f2e1efb1ba2ec47a"
+      "bytes": 379,
+      "sha256": "94b5bb172bb0c9d61a2572d06160639b937378c637a72be980d3c399df5e75cc"
     }
   ]
 }

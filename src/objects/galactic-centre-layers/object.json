@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "galactic-centre-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "galactic-centre",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -13959704062415135000,
+        -222925558294730150000,
+        -123851788016082780000
+      ],
+      "localToReferenceXyzw": [
+        0.8612427767582184,
+        -0.026939331709042048,
+        -0.015865988214227772,
+        0.5072311330220669
+      ],
+      "metersPerUnit": 30856775814913670,
+      "boundsUnits": {
+        "min": [
+          -2.1207661193783087,
+          -2.112740514385865,
+          -3.4122472508188366
+        ],
+        "max": [
+          2.0846508969102686,
+          2.116770332152997,
+          1.5329029658532818
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

@@ -29,10 +29,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "Hubble ACS/WFC",
-            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
           }
         ]
       },
@@ -62,10 +61,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "Hubble ACS/WFC",
-            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
           }
         ]
       }
@@ -94,10 +92,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "Chandra ACIS X-ray",
-            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "chandra",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
           }
         ]
       }
@@ -158,8 +155,18 @@
       "capture": {
         "attributions": [
           {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "chandra",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
+          },
+          {
             "kind": "unresolved",
-            "label": "Hubble ACS/WFC weak-lensing mass map Chandra ACIS X-ray",
+            "label": "weak-lensing mass map",
             "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
             "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
           }

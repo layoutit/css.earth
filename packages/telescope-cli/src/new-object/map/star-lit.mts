@@ -29,7 +29,7 @@ export function starLight(files: PackageFiles, id: string, hosted: boolean): { r
   const own = surfaces.find(surface => !MAP_KINDS.has(String(requireRecord(surface.science, `${id} science`).kind)));
   if (own) return { why: `its ${String(own.id)} dataset is its own light (${String(requireRecord(own.science, `${id} science`).kind)}), so it stays self-luminous` };
   delete raster.emission;
-  raster.lighting = hostedPlanetLighting(id);
+  raster.lighting = hostedPlanetLighting();
   files.set(`${s}/preparation/raster.json`, json(raster));
 
   const descriptor = read(`${o}/object.json`), properties = requireRecord(descriptor.properties, `${id} properties`), recipe = requireRecord(properties.recipe, `${id} recipe`);

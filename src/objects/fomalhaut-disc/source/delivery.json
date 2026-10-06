@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "fomalhaut-disc",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/fomalhaut-disc/source/volume-dust.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/fomalhaut-disc/source/provenance.json"
+    },
+    {
+      "path": "src/objects/fomalhaut-disc/source/density-dust.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      344.4154961336604,
+      -29.623456941471378
+    ],
+    "distancePc": 7.703777306123596,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.12980645211604414
+  },
+  "sourceUrl": "https://almascience.nrao.edu/aq/?projectCode=2015.1.00966.S",
+  "description": "The narrow belt of dust around Fomalhaut, 136 au along its long half-axis, in its own glow at 1.3 millimetres, as ALMA imaged it in December 2015 and January 2016 (project 2015.1.00966.S), in the color scale MacGregor et al. (2017) show it in. The belt is eccentric: its centre lies 14 au north of the star. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the image, and its thickness is the opening angle MacGregor et al. cite, not a measurement made here.",
+  "defaultDataset": "dust",
+  "framingRadiusUnits": 230,
+  "attachedTo": "fomalhaut",
+  "acceptedLabResult": "fomalhaut-disc-density-grids",
+  "compactInputs": {
+    "path": "src/objects/fomalhaut-disc/source/volume-dust.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "dust",
+      "label": "ALMA · dust ring, 1.3 mm",
+      "sourceUrl": "https://almascience.nrao.edu/aq/?projectCode=2015.1.00966.S",
+      "recipe": {
+        "path": "src/objects/fomalhaut-disc/source/volume-dust.json"
+      }
+    }
+  ]
+}
