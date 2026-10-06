@@ -134,7 +134,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       if (loaded.payload.id !== bank.id || JSON.stringify(loaded.payload.frame) !== JSON.stringify(bank.frame)) {
         throw new TypeError('Prepared image-layer identity/frame mismatch.');
       }
-      bank.mounted = mountPreparedCssImageLayers({ host: root, before: imagesBefore, payload: loaded.payload, resolveResource: loaded.resolveResource });
+      bank.mounted = mountPreparedCssImageLayers({ host: root, before: imagesBefore, payload: loaded.payload, resolveResource: loaded.resolveResource,
+        onDrawn: () => { requestPublication?.(); } });
       bank.mounted.root.style.display = 'none';
       // The dots are mounted beside the slices, not inside them: from inside the galaxy they draw without its photograph.
       bank.points = (loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host: root, before: end, url,
@@ -200,8 +201,13 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
      * is inside, by the object tree: a bank whose light lies on walls (`surrounds`) draws around a body inside its host, as
      * a nebula's walls around its central star; the first such bank declared for that host stands for it. `bodyM` is
      * that body's place: the sheets through it are left out (prepared-image-layer-runtime.ts). */
+    /** Whether the bank is on screen: shown, with a stack whose images are decoded. */
+    drawing(id: string): boolean { const bank = byId.get(id); return bank?.mounted?.drawing() === true && bank.publishedOpacity > 0; },
+    /** `standIn`: the bank drawn in the detailed one's place until that one draws (detailed-focus-context.ts), of either
+     * kind: it is drawn as the detailed bank is, and while one stands in the detailed bank's billboard stays out. */
     publishImages(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailedObjectId?: string,
-      inside?: { readonly objectId: string; readonly opacity: number }, within: readonly string[] = [], bodyM?: readonly [number, number, number]) {
+      inside?: { readonly objectId: string; readonly opacity: number }, within: readonly string[] = [], bodyM?: readonly [number, number, number],
+      standIn?: string) {
       if (lifetime.disposed) return;
       let around: string | undefined;
       if (within.length) for (const bank of images) if (bank.surrounds && bank.host !== undefined && within.includes(bank.host)) { around = bank.id; break; }
@@ -213,12 +219,15 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       for (const bank of images) {
         // A galaxy's slices paint only for the observer who selected it, at any distance from it: the context's distance
         // fade is measured from the selected body, which is the galaxy itself. Walls paint around a body inside them too.
-        const opacity = bank.id === detailedObjectId || bank.id === around ? projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits) : 0;
+        const opacity = bank.id === detailedObjectId || bank.id === around || bank.id === standIn ? projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits) : 0;
         // Its billboard shows it from everywhere else, and gives way as the loaded slices fade in.
         if (billboards && bank.billboardIndex >= 0) {
           const context = bank.independent ? 1 : volumeOpacity;
           const sibling = selected !== undefined && bank !== selected && bank.host === selected.host;
-          const handoff = sibling || bank.mounted ? Math.min(1, (sibling ? selectedOpacity : opacity) / Math.max(context, Number.MIN_VALUE)) : 0;
+          // It gives way to slices that draw: a bank whose images are still decoding has nothing on screen to give way to,
+          // unless another bank stands in for it.
+          const draws = (sibling ? selected : bank).mounted?.drawing() === true || (standIn !== undefined && (bank.id === detailedObjectId || sibling));
+          const handoff = draws ? Math.min(1, (sibling ? selectedOpacity : opacity) / Math.max(context, Number.MIN_VALUE)) : 0;
           billboards.publish(bank.billboardIndex, context * projectedVolumeOpacity(world, viewport, bank.frame, bank.billboardRadiusUnits) * (1 - handoff) *
             outsideVolumeOpacity(world, bank.frame, bank.radiusUnits), world, viewport);
         }
