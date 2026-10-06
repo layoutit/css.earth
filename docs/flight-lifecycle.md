@@ -207,7 +207,7 @@ to committing; same-body dataset changes can proceed directly to committing.
 Loading and flight preparation can overlap. These phases describe application
 ownership, not additional camera paths or clocks.
 
-`site/scene/scene-feature.mts` applies named-feature and city selections under
+`site/scene/session/scene-feature.mts` applies named-feature and city selections under
 that same request. Search rows use ordinary links, label clicks issue feature
 intents, and direct URLs join the retained-scene path after the initial mount.
 The request awaits a supporting dataset before fetching a city or flying to a
@@ -239,7 +239,7 @@ Every subject is an object's scene; the geometric pivot is that object's centre.
 
 ## Scene activation and prepared ownership
 
-`site/scene/scene-session.mts` admits one live session. Its state is loading, ready,
+`site/scene/session/scene-session.mts` admits one live session. Its state is loading, ready,
 failed or disposed; loading distinguishes native activation from subsequent
 dataset and saved-view restoration. A native handle cannot publish readiness
 before its ready promise resolves and the router commits restoration. Playback
@@ -288,7 +288,7 @@ Choose checks for the changed behavior after building and preparing its inputs:
 ```sh
 node --test packages/objects/src/node/prepared-activation-transport.test.mts
 node --test site/navigation/navigation-lifecycle.test.mts
-node --test site/scene/scene-session.test.mts
+node --test site/scene/session/scene-session.test.mts
 node --test site/journeys/rendered-page.test.mts
 ```
 

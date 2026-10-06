@@ -13,6 +13,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 | Visible body | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32) rotation-A F395N/F502N/F631N global map, 2025-08-29; unobserved polar and ring-occluded rows are filled during preparation |
 | Visible body color | [Karkoschka (1998)](https://doi.org/10.1006/icar.1998.5913) full-disc albedo spectrum, [PDS `1995LOW.TAB`](https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl) (ESO, July 1995, rings edge-on) |
 | Ring opacity profile | [Cassini UVIS HSP alpha Virginis occultation, 2006 day 285](https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL), 1 km bins, PDS CO-SR-UVIS-HSP-2/4-OCC-V3.0 |
+| Ring shadow on the globe | The Sun's position from Saturn's center on 2025-08-29, [JPL Horizons](https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='10'&OBJ_DATA='NO'&MAKE_EPHEM='YES'&EPHEM_TYPE='VECTORS'&CENTER='500@699'&REF_PLANE='B'&VEC_TABLE='1'&TLIST='2025-08-29%2012:00') (DE441, IAU_SATURN frame), with the ring opacity profile along the slant path ([Colwell et al. 2010](https://doi.org/10.1088/0004-6256/140/6/1569)) |
 | Ultraviolet and methane bands | [Hubble OPAL Cycle 32](https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32), 2025 |
 | Ring boundaries and motion | [PDS ring statistics](https://pds-rings.seti.org/saturn/saturn_rings_table.html) and JPL SAT441 |
 | Interior | [Mankovich and Fuller (2021)](https://doi.org/10.1038/s41550-021-01448-3) and [Movshovitz density profiles](https://doi.org/10.7291/D1P07G) |
@@ -132,6 +133,24 @@ The mutual shadows of body and rings are prepared from one fixed light and keep
 the ring gaps. They are cross-checked against NASA's
 [Saturn shadow on the rings](https://science.nasa.gov/photojournal/saturns-shadow-upon-the-rings/)
 and [ring shadows on Saturn](https://science.nasa.gov/photojournal/rings-and-shadows/).
+
+The globe's own image also carries the rings' shadow, so it shows with shadows
+off, when the globe is flood lit. It is the direct sunlight each latitude keeps
+at local noon on the visible map's date.
+[JPL Horizons](https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='10'&OBJ_DATA='NO'&MAKE_EPHEM='YES'&EPHEM_TYPE='VECTORS'&CENTER='500@699'&REF_PLANE='B'&VEC_TABLE='1'&TLIST='2025-08-29%2012:00')
+gives the Sun's position from Saturn's center in the body equator frame at
+2025-08-29 12:00 TDB: 1.71 degrees south of the ring plane, 115 days after the
+equinox. The recipe stores that position and preparation takes the elevation
+from it. With the Sun that low the rings cast one band from 0.2 to 2.3 degrees
+north (planetocentric), 14 of the image's 1,024 rows. Its darkness is the
+occultation profile along the slanted sunlight: the profile is a normal optical
+depth, the slant depth times the sine of the elevation
+([Colwell et al. 2010](https://doi.org/10.1088/0004-6256/140/6/1569)), so a bin
+of depth tau passes exp(-tau / sin 1.71 degrees) of the direct beam. The A and B
+rings pass nothing, the Cassini Division's row 17 % and the C ring's rows 7 to
+12 %.
+
+![Saturn's default view before and after the ring shadow](evidence/2026-10-06/ring-shadow-before-after.webp)
 
 ## Geometry and motion
 
@@ -276,6 +295,7 @@ The Cassini dataset in the app:
 - Interior layers are illustrations.
 - Narrow ring features are widened and brightened for readability; they do not establish optical depth or fully resolved ringlets.
 - Rotation is accelerated. The camera, shadows and background orientation are presentation choices, and source observations come from different dates.
+- The ring shadow in the globe's image is the noon shadow at every longitude and holds the direct beam only: light the rings and the atmosphere scatter into it is not modeled. It stays when the rings are hidden. With shadows on, the lighting frames add their own ring shadow from the scene's authored light. The ultraviolet, methane, Cassini and dated maps do not carry it.
 - The visible map's color balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colors are kept, but a seasonal change in Saturn's overall color since 1995 would not show. The tie sets channel ratios only; the map's overall brightness is still the archive TIF's arbitrary scale, kept at its untied mean, and its brightest 5 % of texels are compressed by a soft shoulder.
 - The map's blue channel is F395N (violet) data, displayed as sRGB blue. Each display channel's limb law is a weighted mean of OPAL's per-filter coefficients, interpolated between filters. The navigation portrait and context image still crop the untied TIF.
 - The visible map is Hubble's, 1,800 pixels around the planet. At the default view on a 2x screen one source pixel covers 1.8 screen pixels, against 0.9 on Jupiter, so Saturn is softer. A 4,096-pixel body image showed 4 % more fine detail than the shipped 2,048 in a composed default view (2026-10-05) and was not shipped.

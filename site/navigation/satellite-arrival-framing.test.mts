@@ -1,5 +1,5 @@
 import { parsePreparedObjectRuntime } from '@cssearth/objects';
-import { readSystemViewFile } from '../world/system-view-file.test-support.mts';
+import { readSystemViewFile } from '../world/systems/system-view-file.test-support.mts';
 
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -9,10 +9,10 @@ import { selectPreparedResponsiveZoom } from '@cssearth/renderer/navigation/came
 import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';
 import type { SceneFactory } from '../browser/browser-types.mts';
 import { SCENE_OBJECTS } from '../directory/objects.mts';
-import { allSatelliteSystems } from '../world/satellite-systems.mts';
+import { allSatelliteSystems } from '../world/systems/satellite-systems.mts';
 import { satelliteSelectionAtCamera } from '../selection/satellite-selection.mts';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
-import { loadSystemView } from '../world/system-framing.mts';
+import { loadSystemView } from '../world/systems/system-framing.mts';
 import { navigationFixture, required, unusedSharedView } from './navigation-test-values.test-support.mts';
 
 const test = sourceTest();

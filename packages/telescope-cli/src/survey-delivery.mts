@@ -6,13 +6,13 @@ import { readFile, writeFile, mkdir, access, readdir, stat } from 'node:fs/promi
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireRecord, requireString } from '@cssearth/core';
-import { loadSourceProducts, type LoadedSourceProduct } from './source-products.mts';
-import { loadQualifiedObservations } from './qualified-observations.mts';
-import { qualifySourceProduct } from './qualify-source.mts';
+import { loadSourceProducts, type LoadedSourceProduct } from './products/source-products.mts';
+import { loadQualifiedObservations } from './qualification/qualified-observations.mts';
+import { qualifySourceProduct } from './qualification/qualify-source.mts';
 import { saveSession, getSession, type SessionServices } from './session.mts';
-import { requestFromArguments } from './query.mts';
-import { type QueryInputs } from './query-contract.mts';
-import { assessRequest } from './request-satisfaction.mts';
+import { requestFromArguments } from './observation-query/query.mts';
+import { type QueryInputs } from './observation-query/query-contract.mts';
+import { assessRequest } from './requests/request-satisfaction.mts';
 export function shuffled<T>(items:readonly T[],seed:string):T[]{
   // The seed text is folded into the generator's 32-bit state, so one seed always gives one order.
   let state=0;for(const char of seed)state=(Math.imul(state,31)+char.codePointAt(0)!)>>>0;const result=[...items];

@@ -1,5 +1,5 @@
 import type { OrientationXyzw, PhysicalCameraPose } from '@cssearth/engine';
-import { readSystemViewFile } from './system-view-file.test-support.mts';
+import { readSystemViewFile } from './systems/system-view-file.test-support.mts';
 import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parseCompleteWorldContext, parsePreparedWorldContext, parsePreparedWorldContextSummary, worldContextGeometry, isPlacedClassification } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import { required, stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
@@ -19,7 +19,7 @@ import { type PackedWorldContextView, unpackWorldBodies } from '../../packages/r
 import { createWorldContextPlanner } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';
 import { SCENE_OBJECTS } from '../directory/objects.mts';
 import { labelImportance } from '../../packages/renderer/src/labels/universe-label-policy.js';
-import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from './system-framing.mts';
+import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from './systems/system-framing.mts';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));

@@ -5,7 +5,7 @@ import { astroqueryToolchain, plotNumericPreview, type FigureOptions, fileSize }
 import { resolve } from 'node:path';
 import { readFitsImage } from '@cssearth/fits';
 import type { FamilyHandler, FamilyOperation } from '../family-handler.mts';
-import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
+import type { DescriptorMember, ProductDescriptor } from '../products/product-descriptor.mts';
 import { descriptor, stable } from './common.mts';
 
 export interface DegreeLinearPolarizationInput { readonly id:string; readonly target?:string; readonly intensity:DescriptorMember; readonly dolp:DescriptorMember; readonly shape:readonly [number,number]; readonly producingRecord:string }

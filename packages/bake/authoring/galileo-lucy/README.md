@@ -21,7 +21,7 @@ commands below rebuild them from the selected originals and published measuremen
    body source directory.
 5. Catalogue entries live in each descriptor's `properties.catalog`; physical values, orbit states and independent
    fixtures live in `packages/astronomy/data/bodies/<id>.json`. Run `pnpm prepare:catalog`, build the packages,
-   regenerate solar geometry, and run `node site/build/prepare/prepare-authored.ts <id> --write` once per new body. To
+   regenerate solar geometry, and run `node site/build/prepare/authored/prepare-authored.ts <id> --write` once per new body. To
    rebuild title and context source images, run `node packages/bake/authoring/galileo-lucy/initialize.mts` first.
 6. Run `node packages/bake/cli/prepare-navigation.mts dactyl dinkinesh selam` for the three marker images. For a new
    parent without a prepared context image, include that parent in the command. Run `pnpm prepare:world-context` to

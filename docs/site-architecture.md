@@ -8,7 +8,7 @@ Option 3 was decided by the owner on 2026-10-05: relocate queued loader function
 
 ## Folder ownership
 
-A folder imports itself or strictly lower layers. Sibling folders, including L0 siblings, cannot import each other. Value, lazy, type, CSS and JSON edges all count. Tests are leaf consumers above production. There are no lateral allowances. For a legitimate new sibling edge, re-derive longest-path levels for the production DAG and regenerate all tables; a cycle requires an ownership change, not a tier exemption.
+A folder imports itself or strictly lower layers. Sibling folders, including L0 siblings, cannot import each other. Value, lazy, type, CSS and JSON edges all count. Tests are leaf consumers above production. There are no lateral allowances. A folder owns its subfolders by longest-prefix ownership: `world/systems/` and `world/application/` belong to `world/` and its tier, so they may import each other and are bound by `world/`'s layer like any of its files. A subfolder becomes a folder of its own only when tiers.json lists it. For a legitimate new sibling edge, re-derive longest-path levels for the production DAG and regenerate all tables; a cycle requires an ownership change, not a tier exemption.
 
 <!-- generated:folders -->
 | Tier | Folder | Purpose | Incoming moves |
@@ -132,7 +132,7 @@ Commands from a clean checkout:
 ```sh
 export PATH=$HOME/.nvm/versions/node/v22.23.2/bin:$PATH
 pnpm install --frozen-lockfile
-node --test .github/scripts/architecture/*.test.mts .github/scripts/audits/check-documentation-links.test.mts
+node --test .github/scripts/architecture/*.test.mts .github/scripts/architecture/*/*.test.mts .github/scripts/audits/check-documentation-links.test.mts
 node .github/scripts/architecture/site-architecture.mts --accept
 node .github/scripts/architecture/site-architecture.mts --identity
 node .github/scripts/architecture/site-architecture.mts --sequence

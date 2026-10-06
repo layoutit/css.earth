@@ -8,7 +8,7 @@ const TYPES: Readonly<Record<string, string>> = { '.json': 'application/json', '
 const PREPARED = /^\/src\/objects\/[a-z0-9-]+\/prepared\/[A-Za-z0-9@._/-]+$/u;
 
 /** A build without ASSET_ORIGIN names context objects' prepared files by their checkout path
- * (site/build/prepare/prepare-catalog.mts, contextObjectAssetUrls), which the dev server serves from the project root.
+ * (site/build/prepare/catalog/prepare-catalog.mts, contextObjectAssetUrls), which the dev server serves from the project root.
  * The static preview serves the same paths, so a local performance build loads them as dev does. */
 export function preparedFiles(root: string): Plugin {
   const objects = resolve(root, 'src/objects');

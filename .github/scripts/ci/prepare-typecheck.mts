@@ -43,7 +43,7 @@ export function preparedJsonImports(file: string, source: string, root: string):
 }
 
 /** Generated modules that import prepared JSON found by rule, so that no authored file names its object: the application's
- * context objects import the galaxy catalogue's display sample (site/build/prepare/prepare-catalog.mts contextObjectModule).
+ * context objects import the galaxy catalogue's display sample (site/build/prepare/catalog/prepare-catalog.mts contextObjectModule).
  * The preparation build writes them before this scan; git ignores them, so the listing below does not find them. */
 const GENERATED_IMPORTERS = ['site/prepared/prepared-context-objects.mts'];
 
@@ -171,8 +171,8 @@ async function run(root: string, args: string[]) {
 export async function prepareTypecheck() {
   const result = await restoreTypecheckInputs();
   console.log(`Typecheck inputs: ${result.files} pinned files, ${result.bytes} bytes; ${result.installed} downloaded, ${result.reused} reused. No body texture banks.`);
-  await run(projectRoot, ['site/build/prepare/prepare-feature-index.mts']);
-  await run(projectRoot, ['site/build/prepare/prepare-facilities.mts', '--catalog-only', '--restored-only']);
+  await run(projectRoot, ['site/build/prepare/catalog/prepare-feature-index.mts']);
+  await run(projectRoot, ['site/build/prepare/catalog/prepare-facilities.mts', '--catalog-only', '--restored-only']);
   console.log('Typecheck preparation complete: source catalogues generated.');
 }
 

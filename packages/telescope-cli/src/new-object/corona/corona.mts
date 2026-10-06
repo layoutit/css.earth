@@ -145,9 +145,9 @@ export async function runCoronae(specPath: string, context: Context): Promise<Co
  * text in one run, the dataset billboards and the banks' sidebar thumbnails. Stops at the first step that fails. */
 export async function bakeCoronae(results: readonly CoronaResult[], { root, progress }: Pick<Context, 'root' | 'progress'>): Promise<boolean> {
   const banks = results.map(result => result.id), hosts = [...new Set(results.map(result => result.host))], node = (...args: string[]) => ['node', ...args];
-  const steps = [node('packages/bake/cli/check-stale-builds.mts', '--run'), ...banks.flatMap(bank => [node('site/build/prepare/author-source-records.mts', bank), node('packages/bake/cli/prepare-nebulae.mts', `--object=${bank}`), node('site/build/prepare/prepare-volume-presentation.mts', `--object=${bank}`)]),
+  const steps = [node('packages/bake/cli/check-stale-builds.mts', '--run'), ...banks.flatMap(bank => [node('site/build/prepare/catalog/author-source-records.mts', bank), node('packages/bake/cli/prepare-nebulae.mts', `--object=${bank}`), node('site/build/prepare/catalog/prepare-volume-presentation.mts', `--object=${bank}`)]),
     // The stars' images do not change, so their bake stops after the page data (--reuse-images); the reader text is its own step.
-    node('packages/bake/cli/prepare-object.mts', ...hosts, '--reuse-images', '--from', 'catalogue'), node('site/build/prepare/prepare-text.mts', ...hosts), node('packages/bake/cli/prepare-dataset-billboards.mts')];
+    node('packages/bake/cli/prepare-object.mts', ...hosts, '--reuse-images', '--from', 'catalogue'), node('site/build/prepare/authored/prepare-text.mts', ...hosts), node('packages/bake/cli/prepare-dataset-billboards.mts')];
   for (const [command, ...args] of steps as [string, ...string[]][]) {
     progress(`== ${args.join(' ')}`);
     const code = await new Promise<number | null>(done => { spawn(command, args, { cwd: root, stdio: ['ignore', 2, 2] }).on('error', () => done(null)).on('close', done); });

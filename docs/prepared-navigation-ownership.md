@@ -21,7 +21,7 @@ The CSS renderer owns object mounting, camera navigation, saved-view encoding,
 material publication and map paging. Bake reads pure format, matrix and asset-address
 contracts from objects and numeric camera geometry from engine; it has no renderer dependency.
 Telescope's four scene publication/physical handoff consumers are named, file-scoped
-exceptions in [the architecture rule](../.github/scripts/architecture/preparation-without-renderer.mts).
+exceptions in [the architecture rule](../.github/scripts/architecture/dependencies/preparation-without-renderer.mts).
 Labs own their renderer bundlers. CSS-specific layout and runtime transport stay with renderer.
 Platform tests exercise those renderer implementations; there is no separate platform mount or codec.
 
@@ -113,7 +113,7 @@ comparisons and the interpretation used for its model.
 ## Verification
 
 - `node --test packages/objects/src/node/prepared-activation-transport.test.mts` checks the served transport carries the runtime whole.
-- `node --test site/navigation/navigation-lifecycle.test.mts site/scene/scene-session.test.mts`
+- `node --test site/navigation/navigation-lifecycle.test.mts site/scene/session/scene-session.test.mts`
   checks navigation and retained scene state.
 - `node --test site/journeys/rendered-page.test.mts` parses built HTML for the
   information-tab rules. It does not run Chrome or verify animation and flight behavior.

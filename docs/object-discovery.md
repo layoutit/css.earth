@@ -26,7 +26,7 @@ Category browsing respects **Illustration models** and updates when that setting
 changes; an explicit name search still finds an excluded illustration.
 A pill also flies the camera, at its current angle, to a prepared box around
 its members (`prepareCategoryFrames` in
-[`prepare-world-presentation.mts`](../site/build/prepare/prepare-world-presentation.mts)).
+[`prepare-world-presentation.mts`](../site/build/prepare/world/prepare-world-presentation.mts)).
 The box holds the members inside the smallest region of the zoom that holds
 most of them, the Milky Way for the stars and the Nearby Universe for the
 galaxies, and of those the nearest nine in ten. Members outside the box, such
@@ -176,7 +176,7 @@ optimize coverage separately for every photograph.
 The world-navigation stage owns the default camera: it derives the pose and
 rewrites every prepared value computed from it (camera angles and state, the
 scene transform, the Sun's reference view direction). Changing the rule or a
-body's inputs needs only `node site/build/prepare/prepare-object-json.mts --keep-bindings`,
+body's inputs needs only `node site/build/prepare/authored/prepare-object-json.mts --keep-bindings`,
 which re-runs that stage for every object in seconds. Earth, Saturn, Jupiter,
 Neptune and Uranus bake their lighting banks at the rule's pitch, so changing
 that pitch also re-bakes those five.

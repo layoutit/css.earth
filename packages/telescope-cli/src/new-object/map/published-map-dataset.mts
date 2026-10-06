@@ -17,7 +17,7 @@ import { containedPath } from '@cssearth/bake/objects/sources';
 import type { Archive } from '../archives/archives.mts';
 import { zipMember } from './zip-member.mts';
 import { bindInputs, json, openOnMap, type PackageFiles } from '../dataset.mts';
-import { DATASET_REBUILD_FILES, writeWithMarker } from '../planet-datasets.mts';
+import { DATASET_REBUILD_FILES, writeWithMarker } from '../planets/planet-datasets.mts';
 import { ZENODO_RECORDS, namesObject, parseZenodoRecord, reuseLicense, sizeText, type ReuseLicense } from '../../simulations/simulations.mts';
 
 export interface PublishedMapEntry {

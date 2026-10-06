@@ -1,5 +1,5 @@
 /** Scientific output policy for planetary depth-like products. It performs no inversion or rendering. */
-import type {AxisDescriptor,PlanetaryPlacementDescriptor,ProductComponent} from './product-descriptor.mts';
+import type {AxisDescriptor,PlanetaryPlacementDescriptor,ProductComponent} from './products/product-descriptor.mts';
 
 export type PlanetaryOutputKind='native'|'slice'|'profile'|'coverage'|'isosurface'|'interactive-html'|'body-attachment';
 export interface PlanetaryOutputVerdict {readonly output:PlanetaryOutputKind;readonly available:boolean;readonly reason:string;readonly labelRequirement?:string}

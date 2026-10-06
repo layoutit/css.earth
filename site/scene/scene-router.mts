@@ -4,11 +4,11 @@ import { importSceneRegistry, importPackagedObjectRuntime } from './scene-import
 import { afterSceneFrame } from './scene-frame.mts';
 import { retainInputSurface } from '@cssearth/renderer';
 import { holdStartup, releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
-import { createSceneWorld, type WorldContextOwner } from './scene-world.mts';
-import { createSceneView } from './scene-view.mts';
-import { selectSceneFeature } from './scene-feature.mts';
-import { createScenePublication } from './scene-publication.mts';
-import { focusExistingScene, prepareSceneReplacement } from './scene-transition.mts';
+import { createSceneWorld, type WorldContextOwner } from './session/scene-world.mts';
+import { createSceneView } from './session/scene-view.mts';
+import { selectSceneFeature } from './session/scene-feature.mts';
+import { createScenePublication } from './session/scene-publication.mts';
+import { focusExistingScene, prepareSceneReplacement } from './session/scene-transition.mts';
 import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
@@ -24,12 +24,12 @@ import { createNavigationContent } from '../navigation/navigation-content.mts';
 import { createNavigationHistory, bindNavigationLinks, navigationHref } from '../navigation/navigation-history.mts';
 import { createWorldViewport, stageSized } from '../world/world-viewport.mts';
 import type { createSceneSelection, SceneSubject } from '../selection/scene-selection.mts';
-import { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView } from '../world/scene-subject.mts';
-import type { createSceneActivation } from './scene-activation.mts';
+import { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView } from '../world/systems/scene-subject.mts';
+import type { createSceneActivation } from './session/scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
-import { WORLD_HOST_ID, namesSystem } from '../world/navigation-scope.mts';
+import { WORLD_HOST_ID, namesSystem } from '../world/systems/navigation-scope.mts';
 import { systemHostId } from '../model/system-address.mts';
-import { insideBody, pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../world/inside-view.mts';
+import { insideBody, pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../world/systems/inside-view.mts';
 import { knownInner, loadAncestors, loadHolder, loadInner, registerDirectoryRuntimeLoader } from '../directory/object-directory.mts';
 import { bodyInView, createCameraHandover } from './camera-handover.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../browser/runtime-policy.mts';
@@ -38,11 +38,11 @@ import { retainInitialScene } from './initial-scene.mts';
 import { createNavigationLifecycle, type NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import { createNavigationReadiness } from '../navigation/navigation-readiness.mts';
 import { createWorldPreferences } from '../world/world-preferences.mts';
-import { createDatasetEffects } from './scene-datasets.mts';
-import { createSceneSessions, type SceneSession as Session } from './scene-session.mts';
+import { createDatasetEffects } from './session/scene-datasets.mts';
+import { createSceneSessions, type SceneSession as Session } from './session/scene-session.mts';
 import { readPreparedDescriptor } from '../navigation/prepared-descriptor.mts';
-import { satelliteSystemOfMember } from '../world/satellite-systems.mts';
-import { systemOfObject } from '../world/object-systems.mts';
+import { satelliteSystemOfMember } from '../world/systems/satellite-systems.mts';
+import { systemOfObject } from '../world/systems/object-systems.mts';
 import { DIAGNOSTICS_ENABLED } from '../browser/diagnostics-policy.mts';
 import { observeSceneRetirement } from './scene-memory.mts';
 import { releaseStartupRequests, startFlightRequest } from '../directory/startup-requests.mts';
@@ -67,7 +67,7 @@ interface SceneReplacement {
   request: NavigationRequest;
   selectionTransition: ShellNavigationTransition | null | undefined;
 }
-export type { WorldContextOwner, WorldContextMount } from './scene-world.mts';
+export type { WorldContextOwner, WorldContextMount } from './session/scene-world.mts';
 export interface RouterOptions {
   stage: HTMLElement;
   objectId: string;
@@ -857,4 +857,4 @@ if (typeof document !== "undefined") {
   createSceneRouter({ stage, objectId, persistentWorldContext });
 }
 
-export type { SceneDiagnostics } from './scene-publication.mts';
+export type { SceneDiagnostics } from './session/scene-publication.mts';

@@ -21,7 +21,7 @@ The geometry is the original `216_Kleopatra_mpcd.obj` from the [LAM VLT/SPHERE a
 
 `source-meshoptimizer` simplifies the original 3,168-face mesh to 800 faces without sampling replacement radial geometry. The 800-face result has volume 855,483.71 km³, 1.12% below the original. The physical reference radius is 59.1 km, from the MPCD volume-equivalent diameter of 118.2 ±0.8 km. The pole is λ=74.1°, β=+21.6° with a 5.385282 h period; the display phase is arbitrary.
 
-Restore with `node packages/bake/cli/object-operations.mts acquire kleopatra`; verify with `acquire kleopatra --verify-only`; prepare with `node site/build/prepare/prepare-authored.ts kleopatra --write`.
+Restore with `node packages/bake/cli/object-operations.mts acquire kleopatra`; verify with `acquire kleopatra --verify-only`; prepare with `node site/build/prepare/authored/prepare-authored.ts kleopatra --write`.
 
 ## Evidence
 

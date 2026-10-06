@@ -1,6 +1,6 @@
 import { cardView, presentCardView } from './selection-presentation.mts';
 import { renderSourceLink } from '../browser/source-link.mts';
-import { zoomStepOf } from '../world/inside-view.mts';
+import { zoomStepOf } from '../world/systems/inside-view.mts';
 import { isExtendedClassification } from '@cssearth/objects';
 import { bindTabPanels } from './tab-panels.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';

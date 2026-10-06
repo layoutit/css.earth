@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { parseCli } from '../cli-arguments.mts';
-import { loadTargetCatalogue } from '../query.mts';
+import { loadTargetCatalogue } from '../observation-query/query.mts';
 import { parseSimbadTsv } from '../new-object/archives/tables/simbad-tap.mts';
 import { spellings } from '../papers/names.mts';
 import { openAlexQuery } from '../papers/works.mts';

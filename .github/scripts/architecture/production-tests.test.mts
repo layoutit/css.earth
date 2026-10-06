@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
-import type { ImportGraph } from './graph.mts';
+import type { ImportGraph } from './import-graph/graph.mts';
 
 test('production test boundary rejects fixtures/helpers; test consumers may import production', () => {
   const edges = ['site/a.test.mts', 'site/world/fixtures/object.mts', 'site/world/object.test-support.mts'].map(to =>

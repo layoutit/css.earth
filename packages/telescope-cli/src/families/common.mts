@@ -1,5 +1,5 @@
-import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
-import { parseProductDescriptor } from '../product-descriptor.mts';
+import type { DescriptorMember, ProductDescriptor } from '../products/product-descriptor.mts';
+import { parseProductDescriptor } from '../products/product-descriptor.mts';
 
 export const csvCell=(value:unknown):string=>{
   if(value===null||value===undefined)return '';

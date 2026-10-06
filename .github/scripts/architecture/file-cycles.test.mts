@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { checkFileCycles, fileCycles } from './file-cycles.mts';
-import type { ImportGraph } from './graph.mts';
+import type { ImportGraph } from './import-graph/graph.mts';
 import { gateVerdict } from './report.mts';
 
 function graph(...pairs: readonly (readonly [string, string] | readonly [string, string, 'type'])[]): ImportGraph {

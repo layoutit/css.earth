@@ -13,7 +13,7 @@
  * The color is the Planck spectrum at the GSP-Phot temperature: GSP-Phot's extinction says how much dust reddens the
  * spectrum, and the color routes do not remove it. */
 import { GAIA_TAP, type Archive } from './archives.mts';
-import { preferredName, simbadIdentifiers } from '../display-name.mts';
+import { preferredName, simbadIdentifiers } from '../names/display-name.mts';
 import { sunWidth } from '../prose.mts';
 
 export const GAIA_FLAME = { paper: 'https://doi.org/10.1051/0004-6361/202243688', credit: 'Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)' };

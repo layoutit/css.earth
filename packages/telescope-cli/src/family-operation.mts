@@ -10,7 +10,7 @@ import type { ProductInput } from '@cssearth/objects';
 import { VERSION } from './help.mts';
 import { operationsForDescriptor } from './family-handlers.mts';
 import type { FamilyOperation } from './family-handler.mts';
-import { parseProductDescriptor, type DescriptorMember, type ProductDescriptor } from './product-descriptor.mts';
+import { parseProductDescriptor, type DescriptorMember, type ProductDescriptor } from './products/product-descriptor.mts';
 import { filterTableRows, inspectFitsTable, previewTableHistogram, previewTableScatter, readFitsTableRows, exportTableCsv, tableHistogram, tableScatterData, type TableFilter } from './families/f08-table.mts';
 import { exportSpectrumCsv, previewSpectrum, selectSpectrumRange, spectrumChartData, type SpectrumSample } from './families/f03-spectrum.mts';
 import { exportPhotometryCsv, previewSed, sedPlotData, sedTable, type PhotometryPoint } from './families/f05-photometry.mts';
@@ -28,12 +28,12 @@ import { contextFromPhysicalGridDescriptor, cropPhysicalCartesianGrid, exportPhy
 import { contextFromSphericalGridDescriptor, inspectPhysicalSphericalGrid, preparePhysicalSphericalVolume, type SphericalDisplayFill, type SphericalDisplayWeight } from './families/f16/f16-spherical-grid.mts';
 import { contextFromPlanetaryDepthDescriptor, exportPlanetaryDepthNative, inspectPlanetaryDepthGrid, slicePlanetaryDepthGrid } from './families/f16/f16-planetary-depth.mts';
 import { inspectNearMsiBundle } from './families/f17-calibration.mts';
-import { exportSpatialObject, inspectSpatialObject } from './spatial-handoff.mts';
+import { exportSpatialObject, inspectSpatialObject } from './delivery/spatial-handoff.mts';
 import { extractMixedNd, inspectMixedNd } from './families/f02-mixed-nd.mts';
 import { inspectHealpix, selectHealpix } from './families/f14-healpix.mts';
 import { previewUvfitsSelection } from './families/f11-measurement-set.mts';
 
-import { verifiedProduct } from './verified-product.mts';
+import { verifiedProduct } from './products/verified-product.mts';
 
 export const FAMILY_OPERATION_STAGE='telescope-family-operation' as const;
 type FamilyOperationArguments=

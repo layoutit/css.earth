@@ -125,8 +125,8 @@ export async function runPictures(specPath: string, context: Context): Promise<P
  * world. Stops at the first step that fails. */
 export async function bakePictures(results: readonly PictureResult[], { root, progress }: Pick<Context, 'root' | 'progress'>): Promise<boolean> {
   const banks = results.map(result => result.id), hosts = [...new Set(results.map(result => result.host))], node = (...args: string[]) => ['node', ...args];
-  const steps = [node('packages/bake/cli/check-stale-builds.mts', '--run'), ...banks.flatMap(bank => [node('packages/bake/cli/prepare-image-layers.mts', `src/objects/${bank}`), node('site/build/prepare/prepare-volume-presentation.mts', `--object=${bank}`)]),
-    ...hosts.map(host => node('site/build/prepare/companion-context.mts', host)), node('packages/bake/cli/prepare-object.mts', ...hosts, '--from', 'catalogue', '--to', 'markers'), node('site/build/prepare/prepare-catalog.mts'),
+  const steps = [node('packages/bake/cli/check-stale-builds.mts', '--run'), ...banks.flatMap(bank => [node('packages/bake/cli/prepare-image-layers.mts', `src/objects/${bank}`), node('site/build/prepare/catalog/prepare-volume-presentation.mts', `--object=${bank}`)]),
+    ...hosts.map(host => node('site/build/prepare/companion-context.mts', host)), node('packages/bake/cli/prepare-object.mts', ...hosts, '--from', 'catalogue', '--to', 'markers'), node('site/build/prepare/catalog/prepare-catalog.mts'),
     node('packages/bake/cli/prepare-object.mts', ...hosts, '--from', 'world'), node('packages/bake/cli/prepare-navigation.mts', '--catalog-only')];
   for (const [command, ...args] of steps as [string, ...string[]][]) {
     progress(`== ${args.join(' ')}`);

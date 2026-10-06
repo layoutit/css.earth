@@ -4,16 +4,16 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { test } from 'node:test';
-import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './astro-imports.mts';
+import { astroScriptBlocks, astroSpecifiers, moduleSpecifiers } from './import-graph/astro-imports.mts';
 import { compare, createBaseline, decodeBaseline, formatBaseline, isStale, isWorse, measure } from './baseline.mts';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, stronglyConnected } from './folders.mts';
-import { decodeCruiseResult, missingSources, repositoryFiles, type ImportGraph } from './graph.mts';
+import { decodeCruiseResult, missingSources, repositoryFiles, type ImportGraph } from './import-graph/graph.mts';
 import { formatDelta, formatFindings } from './report.mts';
-import { declaredPackage, undeclaredImports } from './declared-dependencies.mts';
+import { declaredPackage, undeclaredImports } from './dependencies/declared-dependencies.mts';
 import { isBroken, OBJECT_FORMAT_FOLDERS, objectCodeFiles, REPOSITORY_RULES, repositoryFindings, RETIRED_FOLDERS, retiredFiles } from './repository-rules.mts';
 import { evaluateRules, LAYER_RULES } from './rules.mts';
-import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './workspaces.mts';
-import { packageCycles, packageCycleText } from './package-cycles.mts';
+import { builtSource, exportTargets, tsupEntries, workspacePackages, workspaceSource } from './import-graph/workspaces.mts';
+import { packageCycles, packageCycleText } from './dependencies/package-cycles.mts';
 import { isTestPath, zoneOf } from './zones.mts';
 
 /** A small graph from `from -> to` pairs; every named path becomes a file. */
@@ -144,8 +144,8 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
     ['site/a.mts', 'packages/bake/src/stars/index.ts'], ['site/b.mts', 'packages/bake/src/prepared/y.mts', 'type'],
     ['packages/renderer/src/stars/bank.ts', 'packages/bake/src/stars/index.ts', 'type'], ['packages/renderer/src/stars/bank.test.ts', 'packages/bake/src/stars/index.ts'],
     ['packages/renderer/src/stars/bank.ts', 'packages/core/src/index.ts'],
-    ['site/c.mts', 'packages/telescope-cli/src/query.mts'], ['packages/renderer/src/sky/d.ts', 'packages/telescope-cli/src/archives/programs.mts', 'type'],
-    ['packages/renderer/src/sky/d.test.ts', 'packages/telescope-cli/src/query.mts'],
+    ['site/c.mts', 'packages/telescope-cli/src/observation-query/query.mts'], ['packages/renderer/src/sky/d.ts', 'packages/telescope-cli/src/archives/programs.mts', 'type'],
+    ['packages/renderer/src/sky/d.test.ts', 'packages/telescope-cli/src/observation-query/query.mts'],
     ['labs/objects/o.mts', 'site/directory/objects.mts'], ['site/astro.config.mts', 'labs/prepare/p.mts'],
     ['deploy/cloudflare/worker.ts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
     ['labs/ci/x.mts', '.github/scripts/ci/y.mts'], ['.github/scripts/ci/y.mts', 'labs/ci/z.mts'], ['.github/scripts/ci/y.mts', 'packages/core/src/validate.ts'],
@@ -159,7 +159,7 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
     'packages/p/src/a.test.ts>labs/helper.mts', 'packages/renderer/src/f.ts>site/build/prepare/p.mts', 'src/renderers/css/x.ts>labs/prepared/y.mts'], 'CI scripts in .github/ are an application tree too');
   assert.deepEqual(pairs('runtime-imports-no-preparation'), [
     'packages/renderer/src/sky/d.ts>packages/telescope-cli/src/archives/programs.mts', 'packages/renderer/src/stars/bank.ts>packages/bake/src/stars/index.ts',
-    'site/a.mts>packages/bake/src/stars/index.ts', 'site/b.mts>packages/bake/src/prepared/y.mts', 'site/c.mts>packages/telescope-cli/src/query.mts',
+    'site/a.mts>packages/bake/src/stars/index.ts', 'site/b.mts>packages/bake/src/prepared/y.mts', 'site/c.mts>packages/telescope-cli/src/observation-query/query.mts',
   ], 'the renderer package is runtime, type-only imports count, neither runtime owner reaches bake or the telescope command, tests may, and site/build is build-time');
   assert.deepEqual(pairs('runtime-imports-no-site-build'), ['site/e.mts>site/build/prepare/p.mts'],
     'the runtime never imports site-owned preparation, even for a type; tests and astro.config may');

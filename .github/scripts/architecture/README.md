@@ -4,7 +4,7 @@
 (`repository-rules.mts`). Repository rules always fail on findings, including
 baseline updates. `file-cycles.mts` fails on any file-level import cycle in `packages/`,
 counting type-only, dynamic and test imports; it has no baseline either.
-Contract lint runs the check and `node --test .github/scripts/architecture/*.test.mts`.
+Contract lint runs the check and `node --test .github/scripts/architecture/*.test.mts .github/scripts/architecture/*/*.test.mts`.
 
 - `bake-without-renderer.mts` locks bake's dependency fields and forbids bake entries
   in the preparation renderer exception list. `declared-dependencies.mts` rejects
@@ -120,7 +120,7 @@ checkout with installed dependencies:
 ```sh
 export PATH=$HOME/.nvm/versions/node/v22.23.2/bin:$PATH
 pnpm install --frozen-lockfile
-node .github/scripts/architecture/import-declarations.mts --prefix site/ --out output/plan7/imports.json --check-against-scanner
+node .github/scripts/architecture/site-plan/import-declarations.mts --prefix site/ --out output/plan7/imports.json --check-against-scanner
 node .github/scripts/architecture/site-architecture.mts --write
 node .github/scripts/architecture/site-architecture.mts --accept
 node .github/scripts/architecture/site-architecture.mts --identity

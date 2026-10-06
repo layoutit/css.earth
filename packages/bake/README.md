@@ -70,7 +70,7 @@ Every entry validates what it reads and fails with a `TypeError` or `RangeError`
 for example `Compact sampled replay changed accepted <dataset> volume`.
 
 The nebula boundary checks (the `nebula-boundaries` rule of `pnpm check:architecture`, in
-`.github/scripts/architecture/nebula-packages.mts` and `nebula-inbound.mts`) enforce that the runtime closure imports nothing from
+`.github/scripts/architecture/nebula/nebula-packages.mts` and `nebula-inbound.mts`) enforce that the runtime closure imports nothing from
 `@cssearth/bake`, the lab's reconstruction package may import `@cssearth/bake/volume` but not its node
 entry; volume-viewer consumes `@cssearth/objects`, the main volume entry imports no platform dependency, and no volume source names an object, an object path or
 another topic.

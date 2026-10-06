@@ -19,7 +19,7 @@ Catalogue color: #f1efff, this dataset's prepared color.
 Run of 2026-09-23 (this version):
 
 - [`object-package-consistency.test.mts`](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) checks the catalogue distance against the world frame and that the catalogue color is the color dataset's prepared color.
-- [`object-systems.test.mts`](../../../site/world/object-systems.test.mts) places WASP-121 and WASP-121b in one system.
+- [`object-systems.test.mts`](../../../site/world/systems/object-systems.test.mts) places WASP-121 and WASP-121b in one system.
 
 ## Known problems
 

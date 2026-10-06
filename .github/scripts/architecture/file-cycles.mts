@@ -1,7 +1,7 @@
 /** File-level import cycles inside packages/. Every import counts: runtime, type-only, dynamic and test imports. A cycle is
  * broken at its root (move the type to the module that owns it, or extract the shared piece into a leaf module), never by
  * a dynamic import or a duplicate. Every cycle fails the architecture check; there is no baseline. */
-import type { ImportGraph } from './graph.mts';
+import type { ImportGraph } from './import-graph/graph.mts';
 import { stronglyConnected } from './folders.mts';
 import { byText } from './zones.mts';
 

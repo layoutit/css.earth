@@ -112,8 +112,8 @@ Read the current `package.json` and runner arguments before using commands:
 | See what a body's source manifest declares | `pnpm lookup manifest <id> [--search=<text>] [--full]` |
 | Restore missing source inputs | `node packages/bake/cli/restore-source-inputs.mts --object=<id>`; the source manifest reader checks declared-file coverage, not stored digests |
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
-| Update the source/mission catalogues | `node site/build/prepare/prepare-facilities.mts --catalog-only` |
-| Bind new inputs to catalogue records | `node site/build/prepare/author-source-records.mts <id>` |
+| Update the source/mission catalogues | `node site/build/prepare/catalog/prepare-facilities.mts --catalog-only` |
+| Bind new inputs to catalogue records | `node site/build/prepare/catalog/author-source-records.mts <id>` |
 | Check shared body runtime behavior | `node --test site/world/runtime-package.test.mts`; run affected scientific tests beside their owning modules too |
 | Run the full package, renderer, native, preparation and lab sequence | `pnpm test`; choose its individual suites for focused work |
 | Check source identities and bindings | `node --test "src/sources/*.test.mts" "packages/bake/src/objects/sources/*.test.mts"`, or select the affected files |

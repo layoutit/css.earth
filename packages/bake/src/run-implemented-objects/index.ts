@@ -64,7 +64,7 @@ export async function resolveObjectCommand(
 ) {
   const scripts: Readonly<Partial<Record<string, string>>> = Object.freeze({
     acquire: 'packages/bake/cli/object-operations.mts',
-    prepare: 'site/build/prepare/prepare-authored.ts',
+    prepare: 'site/build/prepare/authored/prepare-authored.ts',
     assemble: 'packages/bake/cli/object-operations.mts',
   });
   const relative = scripts[mode];

@@ -18,9 +18,9 @@ test('deploy generation and object authoring place the object with the same worl
 test('reuse-images preparation reaches the authored preparation only when asked', async () => {
   const prepare = PREPARATION_STEPS.find(step => step.name === 'prepare');
   assert.ok(prepare);
-  assert.deepEqual(await prepare.commands(['earth']), [['node', 'site/build/prepare/prepare-authored.ts', 'earth', '--write']]);
+  assert.deepEqual(await prepare.commands(['earth']), [['node', 'site/build/prepare/authored/prepare-authored.ts', 'earth', '--write']]);
   assert.deepEqual(await prepare.commands(['earth'], { reuseImages: true }),
-    [['node', 'site/build/prepare/prepare-authored.ts', 'earth', '--write', '--reuse-images']]);
+    [['node', 'site/build/prepare/authored/prepare-authored.ts', 'earth', '--write', '--reuse-images']]);
 });
 
 test('several objects run each tool once: the id-list tools take every id, the authored preparation runs per object, the Sun and the world files are re-pinned last', async () => {
@@ -32,7 +32,7 @@ test('several objects run each tool once: the id-list tools take every id, the a
     const commands = await PREPARATION_STEPS.find(step => step.name === name)!.commands(ids);
     assert.equal(commands.length, 1, name); assert.deepEqual(commands[0]!.slice(-2), ids, name);
   }
-  assert.deepEqual(await PREPARATION_STEPS.at(-1)!.commands(ids), [['node', 'site/build/prepare/prepare-object-json.mts', 'sun'], ['node', 'site/build/prepare/pin-world-files.mts'], ['node', 'site/build/prepare/prepare-catalog.mts']]);
+  assert.deepEqual(await PREPARATION_STEPS.at(-1)!.commands(ids), [['node', 'site/build/prepare/authored/prepare-object-json.mts', 'sun'], ['node', 'site/build/prepare/world/pin-world-files.mts'], ['node', 'site/build/prepare/catalog/prepare-catalog.mts']]);
 });
 
 test('a site that does not know a new object stops the billboard step before any page is photographed', async () => {

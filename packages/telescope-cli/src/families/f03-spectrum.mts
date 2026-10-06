@@ -1,5 +1,5 @@
 import type { FamilyHandler, FamilyOperation } from '../family-handler.mts';
-import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
+import type { DescriptorMember, ProductDescriptor } from '../products/product-descriptor.mts';
 import { csv, descriptor, stable } from './common.mts';
 import { requireFiniteNumber as finite } from '@cssearth/core';
 import { plotNumericPreview, type FigureOptions } from '@cssearth/telescope/node';

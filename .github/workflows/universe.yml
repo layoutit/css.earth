@@ -188,7 +188,7 @@ jobs:
       - name: Check live references to retired paths
         run: node .github/scripts/checks/check-stale-references.mts
       - name: Mutation-check architecture rules
-        run: node --test .github/scripts/architecture/*.test.mts .github/scripts/architecture/ratchets/*.test.mts
+        run: node --test .github/scripts/architecture/*.test.mts .github/scripts/architecture/*/*.test.mts
       - name: Check the architecture against its baseline
         # Fails when a change adds a folder-cycle edge or a forbidden import (.github/scripts/architecture/rules.mts) that
         # .github/scripts/architecture/baseline.json does not record, or breaks a repository rule (repository-rules.mts:
@@ -419,7 +419,7 @@ jobs:
           fi
           # Generate once after restoring the Sun's published world context and the other selected banks.
           node .github/scripts/ci/build-ci.mts generators
-          node site/build/prepare/prepare-feature-index.mts
+          node site/build/prepare/catalog/prepare-feature-index.mts
       - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         # Main saves the restored files once per inventory state; pull requests read main's copy and never save their
         # own (a few of those would fill the repository's 10 GB of cache).
@@ -432,7 +432,7 @@ jobs:
         # and .github/; integration/ suites run in the packages lane. A test whose restored input this job leaves out skips through sourceTest() and names it.
         run: |
           if [ "$CI_LANE_SKIP" = true ]; then exit 0; fi
-          node site/build/prepare/prepare-facilities.mts --catalog-only
+          node site/build/prepare/catalog/prepare-facilities.mts --catalog-only
           # The runner image already carries Chrome's system libraries: fetch the browser alone. `--with-deps` ran apt-get,
           # which once took 6.5 min on a slow mirror.
           pnpm exec playwright install --only-shell chromium

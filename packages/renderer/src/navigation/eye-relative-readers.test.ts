@@ -9,7 +9,7 @@ import { join, relative, resolve } from 'node:path';
 const root = resolve(import.meta.dirname, '../../../..');
 const SUBTRACTIONS = [/pose\.positionM\[[^\]]+\]!? - /u, / - [\w.]*pose\.positionM\[/u, /pose\.positionM\.map\(\(\w+, \w+\) => \(?\w+ - /u];
 // A world point made from the eye and a camera-space offset: not a difference of two world positions.
-const ALLOWED = new Set(['site/world/system-framing.mts: const focusPositionM = tuple(axis => from.pose.positionM[axis] - offset[axis]);']);
+const ALLOWED = new Set(['site/world/systems/system-framing.mts: const focusPositionM = tuple(axis => from.pose.positionM[axis] - offset[axis]);']);
 
 function sources(directory: string): string[] {
   return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
