@@ -102,6 +102,7 @@
     "typecheck:tests": "tsc -b .github/tsconfig.tests.json --pretty false",
     "typecheck:scripts": "tsc -p .github/scripts/tsconfig.json && tsc -p labs/tsconfig.json",
     "telescope": "node packages/telescope-cli/run-typed-module.mjs packages/telescope-cli/src/cli.mts",
+    "lookup": "node packages/bake/cli/lookup/index.mts",
     "test:lab": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && node --experimental-strip-types labs/nebula/run.mts test",
     "oracles:setup": "node packages/core/src/node/oracle/setup.mts",
     "oracles:run": "node packages/core/src/node/oracle/run.mts",
