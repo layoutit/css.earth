@@ -1,6 +1,6 @@
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { requiredElement, requiredSection, sectionElement, setLinkSelected } from '../browser/browser-types.mts';
-import type { ObjectEntry } from '../objects.mts';
+import type { ObjectEntry } from '../directory/objects.mts';
 import { navigationFragments, type NavigationFragments } from './navigation-fragments.mts';
 import { createNavigationStyles, type NavigationStyleStage } from './navigation-styles.mts';
 import { publishPreparedDescriptor, readPreparedDescriptor } from './prepared-descriptor.mts';

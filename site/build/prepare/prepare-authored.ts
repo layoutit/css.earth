@@ -1,20 +1,15 @@
-import { readFeatureMapLongitude, readPreparedPanelContentRecord, readComparableSource, readObjectDescriptorRecord, validatePreparedCubicSky, validateDirectionalSunPlan } from '@cssearth/objects';
+import { readFeatureMapLongitude, readPreparedPanelContentRecord, readComparableSource, readObjectDescriptorRecord, validatePreparedCubicSky, validateDirectionalSunPlan, parsePreparedObjectRuntime, readObjectContentDatasets, parseObjectDescriptor, RASTER_RECIPE_SCHEMA, parsePresentationProfile, AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readAuthoredPreparationSources, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type AuthoredObjectDescriptor } from '@cssearth/objects';
 import { requireInventory } from '@cssearth/objects/node';
-import { parsePreparedObjectRuntime } from '@cssearth/objects';
-import { readObjectContentDatasets, parseObjectDescriptor } from '@cssearth/objects';
-import { RASTER_RECIPE_SCHEMA } from '@cssearth/objects';
 import { BANDED_ELLIPSOID_SCHEMA, LAYERED_OBLATE_SCHEMA } from '@cssearth/bake/objects/scene';
-import { readNonArrayRecord } from '@cssearth/core';
-import { isRecord } from '@cssearth/core';
+import { readNonArrayRecord, isRecord } from '@cssearth/core';
 import '@cssearth/bake/thread-pool';
 import { execFileSync } from 'node:child_process';
 import { access, cp, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { parsePresentationProfile, AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readAuthoredPreparationSources, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type AuthoredObjectDescriptor } from '@cssearth/objects';
 import { readAuthoredSources, type VerifiedSource } from '@cssearth/bake/objects/sources';
-import { readRasterRecipe, prepareLimb, prepareRasterAssets, surfaceCoordinateWidth, prepareLighting, prepareAtmosphere, outputName } from '@cssearth/bake/raster';
+import { readRasterRecipe, prepareLimb, prepareRasterAssets, surfaceCoordinateWidth, prepareLighting, prepareAtmosphere, outputName, LIGHTING_SHEET } from '@cssearth/bake/raster';
 import { leafImageCandidates, parseGeometryProfile, prepareGeometryScene, widestLeafImages, type GeometrySceneAssets, type SolarSceneSource } from '@cssearth/bake/scene';
 import { prepareCssPresentation, type PresentationInputs } from '@cssearth/bake/presentation';
 import { prepareCelestialAssets } from '@cssearth/bake/objects/celestial';
@@ -255,19 +250,17 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
           const changed = [...new Set([...existing.keys(), ...staged.keys()])].filter(filename => JSON.stringify(existing.get(filename)) !== JSON.stringify(staged.get(filename)));
           const chartSource = result.sources.get('charts')?.value as { charts?: { output?: unknown }[] } | undefined;
           const chartOutputs = new Set(chartSource?.charts?.map(chart => chart.output).filter((output): output is string => typeof output === 'string' && output.endsWith('.svg')) ?? []);
-          // The lighting and atmosphere stages are recomputed from their recipes: their images may change, and the lighting
-          // stage may add the shadowless frames the published set predates.
+          // The lighting and atmosphere stages are recomputed from their recipes, so their images may change. The lighting
+          // stage writes the sheet and the flood-lit frame (lighting-sheet.ts), which a published set may predate.
           const rasterRecipe = result.sources.get('raster')?.value as { lighting?: Record<string, unknown>; atmosphere?: Record<string, unknown> } | undefined;
-          const billboardName = typeof rasterRecipe?.lighting?.billboardOutput === 'string' ? outputName(rasterRecipe.lighting.billboardOutput, RASTER_DENSITY) : null;
-          const shadowless = new Set(billboardName ? ['shadowless', 'shadowless-billboard'].map(name => billboardName.replace('billboard', name)) : []);
-          // A row template names every row ("lighting-{density}x-row-{row}.webp"), so each output is matched as a pattern.
-          const pattern = (name: string) => new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&').replace('\\{row\\}', '\\d+')}$`, 'u');
-          const recomputed = [...(result.recomputedImages ?? []), ...shadowless, ...[rasterRecipe?.lighting, rasterRecipe?.atmosphere].flatMap(block => Object.entries(block ?? {}))
+          const lighting = new Set<string>(rasterRecipe?.lighting ? [LIGHTING_SHEET.sheetFile, LIGHTING_SHEET.shadowlessFile] : []);
+          const pattern = (name: string) => new RegExp(`^${name.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&')}$`, 'u');
+          const recomputed = [...(result.recomputedImages ?? []), ...Object.entries(rasterRecipe?.atmosphere ?? {})
             .filter(([key, value]) => key.endsWith('Output') && typeof value === 'string').map(([, value]) => outputName(value as string, RASTER_DENSITY))].map(pattern);
           const redrawn = (filename: string) => recomputed.some(output => output.test(filename));
           // A removed dataset drops its images: the run may leave published images out, never add or change others.
           const removed = (filename: string) => existing.has(filename) && !staged.has(filename);
-          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !removed(filename) && !(redrawn(filename) && existing.has(filename) && staged.has(filename)) && !(shadowless.has(filename) && !existing.has(filename)));
+          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !removed(filename) && !lighting.has(filename) && !(redrawn(filename) && existing.has(filename) && staged.has(filename)));
           if (unexpected.length || !changed.length)
             throw new Error(`${id}: the presentation changed the published image set (${unexpected.join(', ') || 'order only'}); run the full preparation.`);
         }

@@ -630,7 +630,7 @@ test('inside its authored range a system draws every member orbit, named or not,
   for (const body of at(2.5)) assert.equal(body.orbitVisibility, 0, plan.bodies[body.index - 1]!.id);
 });
 
-/** The summary with every object's file read, as Node reads it (site/world-context-plan.mts): `prepared` is the root object's. */
+/** The summary with every object's file read, as Node reads it (site/directory/world-context-plan.mts): `prepared` is the root object's. */
 const readWholeSummary = async (prepared: URL) => parseCompleteWorldContext(JSON.parse(await readFile(new URL('world.json', prepared), 'utf8')),
   async id => JSON.parse(await readFile(new URL(`../../${id}/prepared/members.json`, prepared), 'utf8')),
   JSON.parse(await readFile(new URL('world-index.json', prepared), 'utf8')));
@@ -821,6 +821,17 @@ test('a body beyond the Local Group keeps its dot at the scale of its cluster, a
   };
   assert.equal(dotted(3e6), true, 'from 3 Mpc, framing the Virgo Cluster, M87* keeps a dot');
   assert.equal(dotted(12e6), false, 'past 10 Mpc it has gone, as from the Milky Way');
+});
+
+test('a galaxy of a highlighted category keeps its dot where the galaxies have given way to their clusters', () => {
+  const points = [plan.focus, ...plan.bodies], index = points.findIndex(body => body.id === 'm81');
+  const calculate = createWorldContextPlanner(plan), input = view();
+  // Looking down -z at the Sun from 70 Mpc, where the Galaxies pill frames the Nearby Universe's galaxies.
+  input.world.pose.positionM = [0, 0, 70e6 * 3.085677581491367e16];
+  const dotted = () => calculate(input).projectedBodies.some(body => body.index === index && body.markerOpacity > 0);
+  assert.equal(dotted(), false, 'past 40 Mpc M81 has given way');
+  input.bodies[index]!.highlighted = true;
+  assert.equal(dotted(), true, 'highlighted, it keeps its dot');
 });
 
 test('a star of a Magellanic Cloud keeps its dot in its galaxy\'s view, past the scope that retires the Milky Way\'s stars', () => {

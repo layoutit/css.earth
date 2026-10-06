@@ -2,16 +2,16 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
 import type { createNavigationContent } from '../navigation/navigation-content.mts';
 import type { NavigationLifecycle, NavigationRequest } from '../navigation/navigation-lifecycle.mts';
-import type { ObjectEntry } from '../objects.mts';
+import type { ObjectEntry } from '../directory/objects.mts';
 import type { ShellNavigationTransition } from '../shell/object-shell-types.mts';
-import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
+import type { createPreparedWorldNavigation } from '../navigation/prepared-world-navigation.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
-import { subjectView } from './scene-subject.mts';
+import { subjectView } from '../world/scene-subject.mts';
 import type { WorldContextMount } from './scene-world.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
-import { loadWorldSystemOf } from '../world-context-plan.mts';
+import { loadWorldSystemOf } from '../directory/world-context-plan.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 
@@ -77,6 +77,12 @@ export async function focusExistingScene({ session, request, selectionTransition
   return true;
 }
 
+/** The scene a flight delivers keeps that flight's callbacks for as long as it is mounted. The world's publisher is
+ * built here, outside the request, so that it names the world and nothing of the scene the flight left. */
+function worldPresenter(getWorld: () => WorldContextMount | null): NonNullable<Parameters<Navigation['prepare']>[0]['presentWorld']> {
+  return (world, viewport, options) => getWorld()?.present(world, viewport, options);
+}
+
 /** Content, factory and flight prepare concurrently, with resources still owned by the request. */
 export function prepareSceneReplacement({ fromId, source, object, request, navigation, requests, loadObject,
   contentTransport, reducedMotion, getWorld, stage }: {
@@ -93,7 +99,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   getWorld(): WorldContextMount | null;
 }) {
   // A body of another system is previewed and flown to once that system's bodies are in the world
-  // (site/world-context-plan.mts); for a body the world already holds this resolves at once.
+  // (site/directory/world-context-plan.mts); for a body the world already holds this resolves at once.
   const systemTask = loadWorldSystemOf(object.id);
   const contentTask = contentTransport.load(object, { signal: request.signal })
     .then(content => {
@@ -115,7 +121,8 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   // the destination factory, content and texture bank load independently.
   requests.advance(request, 'flying');
   // What the flight starts from is read now, as if it started now; a body of another system starts once that system is read.
-  const fromMount = source?.mount ?? null, cameraViewport = getWorld()?.viewport, presenting = getWorld() !== null;
+  const fromMount = source?.mount ?? null, cameraViewport = getWorld()?.viewport;
+  const presentWorld = getWorld() ? worldPresenter(getWorld) : null;
   const prepare = () => navigation.prepare({
     fromId, toId: object.id, fromMount, toFactory: factoryTask,
     signal: request.signal, url: request.url, stage,
@@ -126,7 +133,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
     preserveView: request.camera.kind === 'preserve',
     cameraViewport,
     timing: request.timing,
-    presentWorld: presenting ? (world, viewport, options) => getWorld()?.present(world, viewport, options) : null,
+    presentWorld,
   });
   const preparationTask = systemTask ? systemTask.then(prepare) : prepare();
   return request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));

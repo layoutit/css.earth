@@ -20,6 +20,13 @@ export function retainInputSurface(surface: HTMLElement): () => void {
     if (surface.style.cursor !== cursor) surface.style.cursor = cursor;
   };
 }
+/** The native listener outlives every scene that leases its slot. It is built here, where no scene's callback is in
+ * scope, so that it names the slot and nothing of the scene that registered first. */
+function createSlot(target: EventTarget, type: string, options: AddEventListenerOptions): Slot {
+  const slot: Slot = { target, type, capture: !!options.capture, passive: options.passive,
+    callback: null, listener: event => slot.callback?.(event) };
+  return slot;
+}
 export function bindInputEvent<E extends Event>(surface: HTMLElement, key: string, target: EventTarget,
   type: string, callback: (event: E) => void, options: AddEventListenerOptions = {}): () => void {
   const callbackListener = callback as EventListener;
@@ -34,11 +41,9 @@ export function bindInputEvent<E extends Event>(surface: HTMLElement, key: strin
     throw new Error(`Shared input registration changed: ${key}`);
   }
   if (!slot) {
-    const entry: Slot = { target, type, capture: !!options.capture, passive: options.passive,
-      callback: null, listener: event => entry.callback?.(event) };
-    slot = entry;
-    target.addEventListener(type, entry.listener, options);
-    slots.set(key, entry);
+    slot = createSlot(target, type, options);
+    target.addEventListener(type, slot.listener, options);
+    slots.set(key, slot);
   }
   if (slot.callback) throw new Error(`Shared input registration still leased: ${key}`);
   slot.callback = callbackListener;

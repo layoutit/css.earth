@@ -8,11 +8,11 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import { selectPreparedResponsiveZoom } from '@cssearth/renderer/navigation/camera-layout.ts';
 import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';
 import type { SceneFactory } from '../browser/browser-types.mts';
-import { SCENE_OBJECTS } from '../objects.mts';
-import { allSatelliteSystems } from '../satellite-systems.mts';
-import { satelliteSelectionAtCamera } from '../satellite-selection.mts';
-import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
-import { loadSystemView } from '../system-framing.mts';
+import { SCENE_OBJECTS } from '../directory/objects.mts';
+import { allSatelliteSystems } from '../world/satellite-systems.mts';
+import { satelliteSelectionAtCamera } from '../selection/satellite-selection.mts';
+import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
+import { loadSystemView } from '../world/system-framing.mts';
 import { navigationFixture, required, unusedSharedView } from './navigation-test-values.test-support.mts';
 
 const test = sourceTest();

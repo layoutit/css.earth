@@ -132,9 +132,9 @@ with a `feature` parameter (`city-<id>` for a city). The response selects
 a compatible dataset and publishes the same feature caption used by live labels;
 JavaScript adds the camera flight after that body is ready.
 
-`netlify/edge-functions/search-route.ts` (its routing is `site/server/search-route.mts`) routes requests containing `q`, `dataset`,
+`deploy/netlify/edge-functions/search-route.ts` (its routing is `site/server/search-route.mts`) routes requests containing `q`, `dataset`,
 `settings`, `feature`, `v` or `overview` to the Node function in
-`netlify/functions/search.ts`. It keeps the view parameters, and passes ordinary pages and assets straight through.
+`deploy/netlify/functions/search.ts`. It keeps the view parameters, and passes ordinary pages and assets straight through.
 The search work runs in Node because parsing the shell and searching the index
 can exceed Netlify's edge CPU budget. The application continues to build static
 pages; it does not need an Astro server adapter.
@@ -152,7 +152,7 @@ warm function instances cache only index data that passed that check. Query resp
 are not cached and carry `noindex, follow`. An index failure leaves object
 search usable and displays a retry message in the existing feature section.
 
-Live search asks `netlify/functions/find.ts` instead of downloading anything.
+Live search asks `deploy/netlify/functions/find.ts` instead of downloading anything.
 One request per query, `?q=<query>&object=<body>`, answers the first 40 matching
 objects, their total and the named-feature rows together; `&offset=<row>` answers
 a later page of objects as the list scrolls (the Stars category lists about

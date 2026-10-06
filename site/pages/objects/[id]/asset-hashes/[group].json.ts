@@ -1,5 +1,5 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { SCENE_OBJECTS } from '../../../../objects.mts';
+import { SCENE_OBJECTS } from '../../../../directory/objects.mts';
 import { assetHashSplit, assetOrigin } from '../../../../server-assets/asset-origin.mts';
 import { preparedAssetGroupFile } from '@cssearth/renderer';
 

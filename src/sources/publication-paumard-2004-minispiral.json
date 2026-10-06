@@ -1,0 +1,39 @@
+{
+  "id": "publication-paumard-2004-minispiral",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kinematic and structural analysis of the Minispiral in the Galactic Center from BEAR spectro-imagery",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0405197"
+    },
+    {
+      "type": "doi",
+      "value": "10.1051/0004-6361:20034209"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0405197",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0405197",
+      "checkedOn": "2026-10-05",
+      "locator": "Abstract: the Northern Arm is not only the bright narrow north-south lane of intensity images but a faint, continuous, triangular surface, drawn out into a narrow stream near Sgr A*, with a bright western rim; a system of Keplerian orbits fits most of it. Sect. 5.4: the orbits are not quite coplanar, their planes varying over about 10°. Sect. 5.5: the model is published as four FITS files, the first giving the distance to the observer at each point of the field."
+    }
+  ],
+  "creators": [
+    "Paumard, T.",
+    "Maillard, J.-P.",
+    "Morris, M."
+  ],
+  "publisher": "A&A 426, 81",
+  "publicationDate": "2004",
+  "relations": [],
+  "statements": []
+}

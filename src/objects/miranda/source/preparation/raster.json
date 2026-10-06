@@ -341,27 +341,6 @@
   ],
   "lighting": {
     "bank": "sphere",
-    "presentationSize": 460,
-    "defaultFrame": 230,
-    "bankSchema": "cssmiranda-prepared-lighting-bank@1",
-    "billboardSchema": "cssmiranda-prepared-lighting-billboard@1",
-    "metadata": {
-      "schema": "cssmiranda-prepared-lighting@1",
-      "storageModel": "prepared-full-resolution-density-row-shards",
-      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
-      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
-      "ambientIntensity": 0.05,
-      "shadowlessFloodLimbFloor": 0.35,
-      "orenNayarRoughness": 0,
-      "terminatorSmoothstep": [
-        0,
-        0.1
-      ],
-      "minimumLightViewZ": -1,
-      "maximumLightViewZ": 1,
-      "baseLightAzimuthDegrees": 0,
-      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
-      "runtimeRasterization": false
-    }
+    "presentationSize": 460
   }
 }

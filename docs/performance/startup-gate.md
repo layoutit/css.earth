@@ -33,7 +33,7 @@ site's import and the renderer's built bundle share it.
 1. The scene router holds the gate when a cold page's first view is a body. A focus or overview arrival shows the world
    first, so it never holds the gate, and its banks load at once.
 2. The startup arrival releases the gate when it marks `cssearth:startup-detail-ready`
-   ([startup-billboard.mts](../../site/startup-billboard.mts)). An initial view without a prepared arrival releases it
+   ([startup-billboard.mts](../../site/scene/startup-billboard.mts)). An initial view without a prepared arrival releases it
    once it has arrived. A cancelled or failed one still releases it.
 3. Released, the gate waits for `requestIdleCallback` (at most 1 s), then runs what waited, in order.
 

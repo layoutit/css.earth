@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-7662",
+  "displayName": "Blue Snowball Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "1,740 pc (1,648 to 1,842)",
+        "source": {
+          "catalogueId": "chornay-walton-2021-pn-central-stars",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G106.5-17.6: distance 1,740 pc (1,648 to 1,842) from the Gaia EDR3 parallax of its central star",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (ICRS)",
+        "value": "RA 351.474°, Dec 42.535°",
+        "source": {
+          "catalogueId": "chornay-walton-2021-pn-central-stars",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), PN G106.5-17.6: its central star, Gaia EDR3 1924818288379268736",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "shells",
+        "label": "Its two shells",
+        "value": "13 × 19.7 and 28 × 33.6 arcsec",
+        "source": {
+          "catalogueId": "publication-guerrero-2004-ngc-7662-structure",
+          "url": "https://arxiv.org/abs/astro-ph/0407029",
+          "label": "Guerrero, Jaxon & Chu (2004), AJ 128, 1705: physical structure of planetary nebulae. II. NGC 7662; Table 1: the inner and the outer shell's angular sizes",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "axis",
+        "label": "Its long axis",
+        "value": "50° from our sight line, the north-east end toward us",
+        "source": {
+          "catalogueId": "publication-guerrero-2004-ngc-7662-structure",
+          "url": "https://arxiv.org/abs/astro-ph/0407029",
+          "label": "Guerrero, Jaxon & Chu (2004), AJ 128, 1705: physical structure of planetary nebulae. II. NGC 7662; Sect. 3.2: the major axis is tilted 50° against the line of sight along position angle 45°",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "speeds",
+        "label": "Speed of its expansion",
+        "value": "inner shell 35 to 53 km/s, outer shell 50 to 60 km/s",
+        "source": {
+          "catalogueId": "publication-guerrero-2004-ngc-7662-structure",
+          "url": "https://arxiv.org/abs/astro-ph/0407029",
+          "label": "Guerrero, Jaxon & Chu (2004), AJ 128, 1705: physical structure of planetary nebulae. II. NGC 7662; Table 1: each shell's speed at its equator and along its pole",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "33.3 arcsec, 0.28 pc at its distance",
+        "source": {
+          "catalogueId": "esahubble-opo9738c20",
+          "url": "https://esahubble.org/images/opo9738c20/",
+          "label": "ESA/Hubble opo9738c20: Bruce Balick and Jason Alexander (University of Washington), Arsen Hajian (S. Naval Observatory), Yervant Terzian (Cornell University), Mario Perinotto (University of Florence), Patrizio Patriarchi (Arcetri Observatory) and NASA/ESA",
+          "checked": "2026-10-05"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Hubble · optical",
+        "thumbnail": "ngc-7662-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-7662-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-7662-layers-optical",
+          "path": "../../ngc-7662-layers/source/manifest.json",
+          "url": "https://esahubble.org/images/opo9738c20/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G106.5-17.6: distance 1,740 pc (1,648 to 1,842) from the Gaia EDR3 parallax of its central star",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chornay & Walton (2021), PN G106.5-17.6: its central star, Gaia EDR3 1924818288379268736",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Guerrero, Jaxon & Chu (2004), AJ 128, 1705: physical structure of planetary nebulae. II. NGC 7662; Table 1: the inner and the outer shell's angular sizes",
+      "href": "https://arxiv.org/abs/astro-ph/0407029"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Guerrero, Jaxon & Chu (2004), AJ 128, 1705: physical structure of planetary nebulae. II. NGC 7662; Sect. 3.2: the major axis is tilted 50° against the line of sight along position angle 45°",
+      "href": "https://arxiv.org/abs/astro-ph/0407029"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Guerrero, Jaxon & Chu (2004), AJ 128, 1705: physical structure of planetary nebulae. II. NGC 7662; Table 1: each shell's speed at its equator and along its pole",
+      "href": "https://arxiv.org/abs/astro-ph/0407029"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Hubble opo9738c20: Bruce Balick and Jason Alexander (University of Washington), Arsen Hajian (S. Naval Observatory), Yervant Terzian (Cornell University), Mario Perinotto (University of Florence), Patrizio Patriarchi (Arcetri Observatory) and NASA/ESA",
+      "href": "https://esahubble.org/images/opo9738c20/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/astro-ph/0407029",
+      "credit": "Guerrero, Jaxon & Chu (2004), AJ 128, 1705: physical structure of planetary nebulae. II. NGC 7662"
+    }
+  }
+}

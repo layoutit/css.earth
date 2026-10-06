@@ -12,7 +12,7 @@ Saved cameras enter the same preparation transaction before attachment. Static p
 
 Saved cameras, alternate datasets, feature links and system/overview links do not use the default photograph. Their scene stays hidden until the requested view is restored. Objects without a prepared billboard retain their existing server scene. Without JavaScript, the prepared billboard remains a static illustration.
 
-`site/test/startup-billboard.test.mts` covers saved-view eligibility and the prepared perspective/texture selection at phone, tablet and desktop sizes. Real-device verification uses `--cold-load` with native screenshots; inspect the response sources and filmstrip, not just the capture's HTTP statuses.
+`site/scene/startup-billboard.test.mts` covers saved-view eligibility and the prepared perspective/texture selection at phone, tablet and desktop sizes. Real-device verification uses `--cold-load` with native screenshots; inspect the response sources and filmstrip, not just the capture's HTTP statuses.
 
 The normal camera frame presenter preserves the stage offset used by world labels; arrival does not overwrite it with camera-root optics. Selected mesh captions project the existing prepared picking triangles through the same camera and static ancestor matrices. They reuse that result for label planning and publication, with no layout reads or new geometry/assets. Bodies without a static picking mesh retain their sphere bound. Small-screen typography changes text size without scaling its positioning transform. Distant nebula banks fade out in body close-ups; attached shells and a selected nebula remain eligible.
 

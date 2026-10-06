@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
+import { createDetailStandIn, detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
 import type { WorldCameraPose } from '@cssearth/engine';
 
 const focus = { positionM: [1e12, -2e12, 3e12] as const, framingRadiusM: 1e6 };
@@ -39,4 +39,23 @@ test('two prepared positions are one place to the last bits a double holds at th
   assert.equal(samePlaceM([1.5e11, 0, 0], [1.5e11 + 0.0005, 0, 0]), true);
   assert.equal(samePlaceM([1.5e11, 0, 0], [1.5e11 + 0.01, 0, 0]), false, 'a planet a centimetre off is refused as before');
   assert.equal(samePlaceM([1, 2, 3], [1, 2]), false);
+});
+
+test('the bank a subject drew before a dataset pick stands in until the picked bank draws, and never for another subject', () => {
+  const standIn = createDetailStandIn(), helix = {}, crab = {}, drawing = new Set<string>();
+  const of = (picked: string | undefined, subject: unknown) => standIn.of(picked, subject, id => drawing.has(id));
+  assert.equal(of('photograph', helix), undefined, 'nothing was drawn before the first bank');
+  drawing.add('photograph');
+  assert.equal(of('photograph', helix), undefined);
+  assert.equal(of('slices', helix), 'photograph', 'picked, and not drawing yet');
+  drawing.delete('photograph');
+  assert.equal(of('slices', helix), 'photograph', 'whatever the stand-in itself reports');
+  drawing.add('slices');
+  assert.equal(of('slices', helix), undefined, 'it draws: the stand-in leaves');
+  assert.equal(of('photograph', helix), 'slices', 'and it stands in for the next pick');
+  assert.equal(of('pulsar', crab), undefined, 'no bank of one body stands in for another body');
+  drawing.add('pulsar');
+  assert.equal(of('pulsar', crab), undefined);
+  assert.equal(of(undefined, crab), undefined);
+  assert.equal(of('wind', crab), undefined, 'nothing stands in after the subject had no bank');
 });

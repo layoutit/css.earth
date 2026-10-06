@@ -2,7 +2,7 @@
 
 Every detailed body is an authored data package under `src/objects/<id>/`.
 The directory name also covers the Sun, moons, dwarf planets, asteroids and
-comets. `OBJECTS` in `site/objects.mts` remains the only rendered-body registry.
+comets. `OBJECTS` in `site/directory/objects.mts` remains the only rendered-body registry.
 Navigation selects one active scene; it does not embed child scenes.
 
 Read [AGENTS.md](../../AGENTS.md), the
@@ -34,7 +34,7 @@ public/navigation/body-<id>*.webp   prepared navigation images
 public/navigation/<id>-context.webp  optional resolved context image
 packages/astronomy/data/bodies/<id>.json  physical data and orbit records
 src/objects/<id>/*.test.mts      object-specific application checks
-site/test/                     shared runtime/package, shell, route and rendered-page checks
+site/<layer>/*.test.mts        shared runtime/package, shell, route and rendered-page checks, beside the code they test
 site/pages/[id].astro           one shared route for all body ids
 ```
 

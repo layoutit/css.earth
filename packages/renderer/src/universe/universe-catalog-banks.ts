@@ -31,6 +31,8 @@ interface ImageBank {
    * inside it (ImageLayerBankDescriptor `surrounds` and `host`). */
   surrounds: boolean;
   host: string | undefined;
+  /** The selected body it was last shown for: it is kept in layout only while that body stays selected. */
+  shownFor: unknown;
 }
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
@@ -64,7 +66,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     const facts = prepared?.plan.banks.get(bank.id);
     return { id: bank.id, frame: bank.frame, radiusUnits: volumeFramingRadiusUnits(bank.frame), mounted: null, points: [], dotsShown: false, loading: null, publishedOpacity: NaN,
       billboardIndex: facts?.billboard ? billboardCount++ : -1, billboardRadiusUnits: facts?.billboard?.radiusUnits ?? 0,
-      independent: facts?.contextVisibility === 'independent', surrounds: bank.surrounds === true, host: bank.host };
+      independent: facts?.contextVisibility === 'independent', surrounds: bank.surrounds === true, host: bank.host, shownFor: undefined };
   });
   const byId = new Map(images.map(bank => [bank.id, bank]));
   // A package that is only catalogue dots mounts them the first time its catalogue row is selected; they draw while it is.
@@ -94,6 +96,14 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     mounted?.destroy();
   });
 
+  /** The bank last drawn for the selected body stays in layout at opacity 0 when it leaves the picture, until the body
+   * changes or another of its banks takes that place. Out of layout, a bank shown again makes every layer anew: on an
+   * iPad Cassiopeia A's 1,397 patches made a frame of 272 to 281 ms each time, 220 to 231 ms when hidden by
+   * `visibility`, and 24 to 42 ms from opacity 0, where Safari keeps the layers and their surfaces. Its second bank of
+   * 773 patches kept that way held 25 MB more in the page's process (2026-10-06). A reader who goes back to the
+   * dataset before, or zooms out and in again, gets the kept bank. */
+  let kept: ImageBank | null = null, keptFor: unknown;
+  function leaveLayout(bank: ImageBank) { if (bank.mounted) bank.mounted.root.style.display = 'none'; }
   function publishResidency() {
     if (lifetime.disposed) return;
     root.dataset.imageLayerDeclaredBankCount = String(images.length);
@@ -134,7 +144,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       if (loaded.payload.id !== bank.id || JSON.stringify(loaded.payload.frame) !== JSON.stringify(bank.frame)) {
         throw new TypeError('Prepared image-layer identity/frame mismatch.');
       }
-      bank.mounted = mountPreparedCssImageLayers({ host: root, before: imagesBefore, payload: loaded.payload, resolveResource: loaded.resolveResource });
+      bank.mounted = mountPreparedCssImageLayers({ host: root, before: imagesBefore, payload: loaded.payload, resolveResource: loaded.resolveResource,
+        onDrawn: () => { requestPublication?.(); } });
       bank.mounted.root.style.display = 'none';
       // The dots are mounted beside the slices, not inside them: from inside the galaxy they draw without its photograph.
       bank.points = (loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host: root, before: end, url,
@@ -200,19 +211,34 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
      * is inside, by the object tree: a bank whose light lies on walls (`surrounds`) draws around a body inside its host, as
      * a nebula's walls around its central star; the first such bank declared for that host stands for it. `bodyM` is
      * that body's place: the sheets through it are left out (prepared-image-layer-runtime.ts). */
+    /** Whether the bank is on screen: shown, with a stack whose images are decoded. */
+    drawing(id: string): boolean { const bank = byId.get(id); return bank?.mounted?.drawing() === true && bank.publishedOpacity > 0; },
+    /** `standIn`: the bank drawn in the detailed one's place until that one draws (detailed-focus-context.ts), of either
+     * kind: it is drawn as the detailed bank is, and while one stands in the detailed bank's billboard stays out. */
     publishImages(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailedObjectId?: string,
-      inside?: { readonly objectId: string; readonly opacity: number }, within: readonly string[] = [], bodyM?: readonly [number, number, number]) {
+      inside?: { readonly objectId: string; readonly opacity: number }, within: readonly string[] = [], bodyM?: readonly [number, number, number],
+      standIn?: string, subject?: unknown) {
       if (lifetime.disposed) return;
+      if (kept && subject !== keptFor) { leaveLayout(kept); kept = null; }
       let around: string | undefined;
       if (within.length) for (const bank of images) if (bank.surrounds && bank.host !== undefined && within.includes(bank.host)) { around = bank.id; break; }
+      // A host with several banks shows one dataset at a time: the selected bank's slices stand for the host, so its other
+      // banks' billboards give way with the selected bank's own. Near a nebula the context's fade hid them already; a
+      // cluster's two banks are seen from where that context is in full view.
+      const selected = images.find(bank => bank.id === detailedObjectId && bank.host !== undefined && bank.mounted);
+      const selectedOpacity = selected ? projectedVolumeOpacity(world, viewport, selected.frame, selected.radiusUnits) : 0;
       for (const bank of images) {
         // A galaxy's slices paint only for the observer who selected it, at any distance from it: the context's distance
         // fade is measured from the selected body, which is the galaxy itself. Walls paint around a body inside them too.
-        const opacity = bank.id === detailedObjectId || bank.id === around ? projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits) : 0;
+        const opacity = bank.id === detailedObjectId || bank.id === around || bank.id === standIn ? projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits) : 0;
         // Its billboard shows it from everywhere else, and gives way as the loaded slices fade in.
         if (billboards && bank.billboardIndex >= 0) {
           const context = bank.independent ? 1 : volumeOpacity;
-          const handoff = bank.mounted ? Math.min(1, opacity / Math.max(context, Number.MIN_VALUE)) : 0;
+          const sibling = selected !== undefined && bank !== selected && bank.host === selected.host;
+          // It gives way to slices that draw: a bank whose images are still decoding has nothing on screen to give way to,
+          // unless another bank stands in for it.
+          const draws = (sibling ? selected : bank).mounted?.drawing() === true || (standIn !== undefined && (bank.id === detailedObjectId || sibling));
+          const handoff = draws ? Math.min(1, (sibling ? selectedOpacity : opacity) / Math.max(context, Number.MIN_VALUE)) : 0;
           billboards.publish(bank.billboardIndex, context * projectedVolumeOpacity(world, viewport, bank.frame, bank.billboardRadiusUnits) * (1 - handoff) *
             outsideVolumeOpacity(world, bank.frame, bank.radiusUnits), world, viewport);
         }
@@ -230,8 +256,17 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
           // opacity leaves or reaches 1. Cassiopeia A's 1,397 patches made a frame of 180 to 208 ms each way with the camera
           // still on an iPad, and none between 0.999 and 0.99 (2026-10-05): the first frames of every zoom out of a nebula.
           bank.mounted.root.style.opacity = String(Math.min(STACK_OPACITY_CEILING, opacity));
-          if (opacity > 0 && bank.mounted.root.style.display === 'none') bank.mounted.resume();
-          bank.mounted.root.style.display = opacity > 0 ? '' : 'none';
+          if (opacity > 0) {
+            if (bank.mounted.root.style.display === 'none') bank.mounted.resume();
+            // A kept bank draws from this write: who waits for it to draw is told with the camera still.
+            else if (!(bank.publishedOpacity > 0) && bank.mounted.drawing()) requestPublication?.();
+            bank.mounted.root.style.display = '';
+            bank.shownFor = subject;
+            if (kept === bank) kept = null;
+          } else if (bank.publishedOpacity > 0 && subject !== undefined && bank.shownFor === subject) {
+            if (kept && kept !== bank) leaveLayout(kept);
+            kept = bank; keptFor = subject;
+          } else if (kept !== bank) bank.mounted.root.style.display = 'none';
           bank.publishedOpacity = opacity;
         }
         if (opacity > 0) bank.mounted.publish({ world, viewport }, bank.id === around && bank.id !== detailedObjectId && bodyM !== undefined ? bodyM : false);

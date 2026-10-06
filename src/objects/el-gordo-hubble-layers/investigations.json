@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "el-gordo-hubble-layers",
+  "entries": [
+    {
+      "id": "nasa-2014-layers",
+      "subject": "NASA/STScI release 2014-22: El Gordo in layers",
+      "status": "included",
+      "finding": "Five TIFFs of 6184 x 3748 px on one frame: Hubble ACS/WFC alone, the weak-lensing mass map alone, the Chandra X-ray gas alone, and two composites. The files carry no sky tags: the Hubble layer was registered against Gaia DR3 (16 of 16 stars in the frame, 0.17 arcsec rms; 0.05000 arcsec per pixel, north 50.62 degrees right of vertical).",
+      "evidence": [
+        "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+        "https://www.stsci.edu/copyright"
+      ]
+    },
+    {
+      "id": "chandra-2012-layers",
+      "subject": "Chandra X-ray Center: El Gordo (2012)",
+      "status": "excluded",
+      "finding": "X-ray, optical and infrared, and a galaxy density map as separate TIFFs of 3600 x 3600 px. The purple layer is the density of galaxies on the sky, not mass; the 2014 release has the lensing mass map, so its layers are used.",
+      "evidence": [
+        "https://chandra.harvard.edu/photo/2012/elgordo/more.html"
+      ]
+    },
+    {
+      "id": "collision-lines",
+      "subject": "Depth of the gas and the mass",
+      "status": "included",
+      "finding": "Nothing measures depth in the cluster. Menanteau et al. (2012) take the gas apart as round about an axis through 01:02:54.9, -49:15:52.5 at position angle 136 degrees; Jee et al. (2014) give the two mass peaks and fit two round halos. Each of the publisher's pictures is taken apart as a body of revolution about its line.",
+      "evidence": [
+        "https://arxiv.org/abs/1109.0953",
+        "https://arxiv.org/abs/1309.5097"
+      ]
+    },
+    {
+      "id": "tilt",
+      "subject": "The collision line's angle from the plane of the sky",
+      "status": "unresolved",
+      "finding": "Ng et al. (2015) estimate 21 (+9, -11) degrees from the radio relic's polarisation. Which end is the farther is not settled: the south-eastern component recedes at 586 km/s relative to the north-western (Menanteau et al. 2012), which puts it behind if the subclusters are still moving apart and in front if they are returning, and Ng et al. prefer the return while Menanteau et al. have the gas bullet moving outward. The lines are drawn in the plane of the sky.",
+      "evidence": [
+        "https://arxiv.org/abs/1412.1826",
+        "https://arxiv.org/abs/1109.0953"
+      ],
+      "revisitWhen": "A paper settles whether the subclusters are moving apart or returning."
+    },
+    {
+      "id": "star-removal",
+      "subject": "NOX star removal on the Hubble layer",
+      "status": "included",
+      "finding": "NOX over hubble.tif, then again over a copy a quarter of the size for the saturated stars (4.52% of the picture took that pass). NOX takes compact light whatever it is, the cluster's galaxies with the Milky Way's stars, as on the Bullet Cluster's picture. On the X-ray layer NOX left the point sources as they were: the bake takes those down itself (geometry.collision.gas.pointSourceArcsec).",
+      "evidence": [
+        "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
+      ],
+      "revisitWhen": "The cluster's galaxies are to come back: Webb's picture is the page's other dataset."
+    }
+  ]
+}

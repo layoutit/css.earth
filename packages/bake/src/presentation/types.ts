@@ -15,15 +15,15 @@ export interface Dataset {
   coronaUrl?: string; corona2xUrl?: string; limbUrl?: string; limb2xUrl?: string;
 }
 export interface Datasets { defaultDataset: string; controls: Dataset[]; }
-export interface AtlasAddress { frameIndex: number; rowIndex: number; url: string; backgroundPosition: string; backgroundSize: string; }
-export interface Billboard { schema: string; url: string; columns: number; rowCount: number; frameCount: number; presentations: AtlasAddress[]; shadowless: ShadowlessFrame; }
-/** The last lighting frame alone: what a body shows with shadows off. */
+/** One frame of a sphere's lighting sheet: the light's view-space z it was lit from and its address in the sheet. */
+export interface LightingSheetFrame { frameIndex: number; lightViewZ: number; backgroundPosition: string; backgroundSize: string; }
+/** The flood-lit frame alone: what a body shows with shadows off. */
 export interface ShadowlessFrame { url: string; frameIndex: number; backgroundPosition: string; backgroundSize: string; }
-export interface Bank { billboard: Billboard; presentations: AtlasAddress[]; rows: {url: string}[]; shadowless: ShadowlessFrame;
-  transport: {framesPerRow: number; maximumRetainedRowCount: number; defaultFrame: number; initialWarmRows: number[]}; }
+/** A sphere's prepared lighting (packages/bake/src/raster/lighting.ts): one sheet of every phase and the flood-lit frame. */
+export interface SheetLighting { frameCount: number; defaultFrame: number; sheet: { url: string; presentations: LightingSheetFrame[] }; shadowless: ShadowlessFrame; }
 export interface RasterAssets {
   surfaceDimensions: { width: number; height: number };
-  lighting: { banks: Record<string, Bank>; frameCount: number; minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number };
+  lighting: SheetLighting;
   interior?: Record<string, string>;
   /** An unlit body's plate sizes; present instead of a lighting bank. */
   emission?: { offLimbContext: { logicalSize: number }; limbMaterial: { logicalSize: number } };
@@ -45,8 +45,9 @@ export interface Scene {
 }
 export interface SolarSource { bodyId: string; }
 export interface SourceMaterialTrack extends Omit<PreparedMaterialTrack, 'frame' | 'defaultFrame' | 'rotation' | 'banks'> {
+  /** Frames even in the light's view z, or one unit light direction per frame (`samples`). */
   frame: {source: string; minimum: number; maximum: number; count: number; baseFrame: number;
-    span?: number; maximumFrame?: number; remap: null};
+    span?: number; maximumFrame?: number; remap: null} | {count: number; samples: readonly (readonly [number, number, number])[]};
   banks: { id: string; frames: PreparedMaterialAddress[]; default: PreparedMaterialAddress | null; fixed: PreparedMaterialAddress | null;
     rows?: {row: number; resource: string; firstFrame: number; lastFrame: number}[] }[];
   demand: {capacity: number; defaultFrame: number}; rotation: PreparedMaterialRotation & {source: string};

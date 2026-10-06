@@ -21,8 +21,8 @@ function reachedModules(file: URL, tree: ts.SourceFile): string[] {
 }
 
 test('the directory imports erased aliases directly without depending on the registry', () => {
-  const file = new URL('../object-directory.mts', import.meta.url), directory = source(file);
-  const registry = new URL('../objects.mts', import.meta.url).pathname;
+  const file = new URL('./object-directory.mts', import.meta.url), directory = source(file);
+  const registry = new URL('./objects.mts', import.meta.url).pathname;
   assert.ok(!reachedModules(file, directory).some(module => module === registry || module === registry.replace(/\.mts$/u, '')), 'the directory must not name the registry in any import, re-export or import type');
   const typesPath = new URL('./object-entry-types.mts', import.meta.url).pathname;
   const imports = directory.statements.filter(ts.isImportDeclaration);
@@ -34,10 +34,10 @@ test('the directory imports erased aliases directly without depending on the reg
 });
 
 test('the registry preserves every extracted alias as an erased re-export', () => {
-  const registry = source(new URL('../objects.mts', import.meta.url));
+  const registry = source(new URL('./objects.mts', import.meta.url));
   const typesPath = new URL('./object-entry-types.mts', import.meta.url).pathname;
   const exports = registry.statements.filter(ts.isExportDeclaration).filter(node =>
-    node.moduleSpecifier && ts.isStringLiteral(node.moduleSpecifier) && new URL(node.moduleSpecifier.text, new URL('../objects.mts', import.meta.url)).pathname === typesPath);
+    node.moduleSpecifier && ts.isStringLiteral(node.moduleSpecifier) && new URL(node.moduleSpecifier.text, new URL('./objects.mts', import.meta.url)).pathname === typesPath);
   assert.equal(exports.length, 1);
   const entry = exports[0]!;
   assert.ok(entry.isTypeOnly);

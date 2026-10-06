@@ -1,0 +1,39 @@
+{
+  "id": "publication-guerrero-2004-ngc-7662-structure",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Physical Structure of Planetary Nebulae. II. NGC 7662",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0407029"
+    },
+    {
+      "type": "doi",
+      "value": "10.1086/423913"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0407029",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0407029",
+      "checkedOn": "2026-10-05",
+      "locator": "Sect. 2: the echelle spectrograph on the 4 m telescope at Kitt Peak, 21 to 23 October 1986, the [O III] 4959 and 5007 lines. Sect. 3.1: a bright 17.9 by 12.4 arcsec inner shell inside a 30.8 by 27.2 arcsec outer shell, and a faint round halo 134 arcsec across (Chu, Jacoby & Arendt 1987). Sect. 3.2: the inner shell is \"an expanding prolate ellipsoidal shell with its northeast side tilted towards us\"; shells in homologous expansion, speed in proportion to radius; the inner shell's major axis \"is tilted by 50° against the line of sight along PA 45°\", expanding at 35 ± 3 km/s in the equatorial plane and 53 ± 6 km/s along the pole; the outer shell, with the inner shell's inclination assumed, at 50 ± 5 and 60 ± 8 km/s; axial ratios 1.5 and 1.2; kinematic ages of about 700 and 1,050 years at 800 pc (Hajian & Terzian 1996). Table 1: inner shell 13 by 19.7 arcsec, 0.050 by 0.076 pc; outer shell 28 by 33.6 arcsec, 0.109 by 0.130 pc; inclination 50°, the angle between the major axis and the line of sight. The fit uses the sectors free of the fast low-ionisation emission regions."
+    }
+  ],
+  "creators": [
+    "Guerrero, M. A.",
+    "Jaxon, E. G.",
+    "Chu, Y.-H."
+  ],
+  "publisher": "AJ 128, 1705",
+  "publicationDate": "2004",
+  "relations": [],
+  "statements": []
+}

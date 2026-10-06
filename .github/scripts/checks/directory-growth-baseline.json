@@ -81,11 +81,6 @@
       "implementations": 30,
       "tests": 0,
       "reason": "Existing shared application-shell components remain together pending plan 7: site architecture."
-    },
-    "site/test": {
-      "implementations": 7,
-      "tests": 129,
-      "reason": "Flat site integration tests are advisory only; splitting their common harness ownership belongs to plan 7: site architecture."
     }
   }
 }

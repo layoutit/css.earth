@@ -1,8 +1,6 @@
 {
   "extends": "../tsconfig.base.json",
   "include": [
-    "test/**/*.ts",
-    "test/**/*.mts",
     "**/*.test.ts",
     "**/*.test.mts",
     "env.d.ts",

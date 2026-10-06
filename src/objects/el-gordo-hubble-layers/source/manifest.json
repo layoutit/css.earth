@@ -1,0 +1,219 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/el-gordo-hubble-layers/source/starless.jpg",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKRXF86FHKE6A9J3W0HVFC.tif",
+      "sourceUrl": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+      "title": "El Gordo: Hubble ACS/WFC, stars removed",
+      "credit": "NASA, ESA, and J. Jee (University of California, Davis)",
+      "displayCredit": "NASA/STScI",
+      "acquisition": "The publisher's Hubble layer with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/el-gordo-hubble-layers --from=hubble.tif --coarse=4` (NOX over the whole picture, then again over a copy a quarter of the size, 1546 x 937 px, for the saturated stars: 4.52% of the picture took that pass). NOX takes compact light whatever it is, the cluster's galaxies with the Milky Way's stars. Not tracked. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-2014-el-gordo-layers",
+            "role": "material",
+            "evidence": "src/objects/el-gordo-hubble-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "visible"
+      ],
+      "datasetId": "optical",
+      "license": "May be used as in the public domain (https://www.stsci.edu/copyright); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
+          }
+        ]
+      },
+      "generator": "labs/nebula/run.mts remove-stars"
+    },
+    {
+      "id": "visible",
+      "path": "src/objects/el-gordo-hubble-layers/source/hubble.tif",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKRXF86FHKE6A9J3W0HVFC.tif",
+      "sourceUrl": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+      "title": "'El Gordo' (Hubble ACS/WFC)",
+      "credit": "NASA, ESA, and J. Jee (University of California, Davis)",
+      "displayCredit": "NASA/STScI",
+      "acquisition": "The publisher's TIFF (6184 x 3748 px), restored from its origin; not tracked. The frame's place on the sky was measured on it against Gaia DR3 (recipe observation); the star-free photograph is made from it. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-2014-el-gordo-layers",
+            "role": "material",
+            "evidence": "src/objects/el-gordo-hubble-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "May be used as in the public domain (https://www.stsci.edu/copyright); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gas",
+      "path": "src/objects/el-gordo-hubble-layers/source/xray.tif",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKSAYXQBA9MVN9PM5KX4EM.tif",
+      "sourceUrl": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+      "title": "'El Gordo' (Chandra X-ray)",
+      "credit": "NASA, ESA, and J. Jee (University of California, Davis)",
+      "displayCredit": "NASA/STScI",
+      "acquisition": "The publisher's TIFF (6184 x 3748 px) of the X-ray gas alone, on the Hubble layer's frame; restored from its origin, not tracked. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-2014-el-gordo-layers",
+            "role": "material",
+            "evidence": "src/objects/el-gordo-hubble-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "May be used as in the public domain (https://www.stsci.edu/copyright); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "chandra",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mass",
+      "path": "src/objects/el-gordo-hubble-layers/source/mass.tif",
+      "origin": "https://assets.science.nasa.gov/content/dam/science/missions/hubble/releases/2014/04/STScI-01EVVKQXPBYZ6W08GY800C1NCV.tif",
+      "sourceUrl": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+      "title": "'El Gordo' (Mass Map)",
+      "credit": "NASA, ESA, and J. Jee (University of California, Davis)",
+      "displayCredit": "NASA/STScI",
+      "acquisition": "The publisher's TIFF (6184 x 3748 px) of the lensing mass map alone, on the Hubble layer's frame; restored from its origin, not tracked. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-2014-el-gordo-layers",
+            "role": "material",
+            "evidence": "src/objects/el-gordo-hubble-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "May be used as in the public domain (https://www.stsci.edu/copyright); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "weak-lensing mass map",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "composite",
+      "path": "src/objects/el-gordo-hubble-layers/source/composite.jpg",
+      "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/hubble/releases/2014/04/STScI-01EVVKR5JKJSQP98DV5V2PKM45.tif",
+      "sourceUrl": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+      "title": "Galaxy Cluster 'El Gordo' with Mass Map and X-ray",
+      "credit": "NASA, ESA, and J. Jee (University of California, Davis)",
+      "displayCredit": "NASA/STScI",
+      "acquisition": "The publisher's 1280 x 775 px rendition of the three layers together, restored from its origin; not tracked. The dataset's preview. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-2014-el-gordo-layers",
+            "role": "material",
+            "evidence": "src/objects/el-gordo-hubble-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "May be used as in the public domain (https://www.stsci.edu/copyright); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "chandra",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought"
+          },
+          {
+            "kind": "unresolved",
+            "label": "weak-lensing mass map",
+            "evidence": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/el-gordo-hubble-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/el-gordo-hubble-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/el-gordo-hubble-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

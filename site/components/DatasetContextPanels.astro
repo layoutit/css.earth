@@ -6,7 +6,7 @@ interface Props {
   directSourceIdsByDataset?: Readonly<Record<string, readonly string[]>>;
 }
 import { datasetContributors } from '../content/dataset-context.mts';
-import { EXPLORATION } from '../exploration-catalog.mts';
+import { EXPLORATION } from '../content/exploration-catalog.mts';
 import ObjectCard from './ObjectCard.astro';
 import InformationTabs from './InformationTabs.astro';
 import SelectedContent from './SelectedContent.astro';
@@ -19,10 +19,10 @@ const contexts = (datasets?.controls ?? []).map(dataset => {
   const own = dataset.volume && (EXPLORATION.graph.byObject[owner] ?? []).some(index => EXPLORATION.graph.edges[index].sourceId === datasetId) ? [datasetId] : undefined;
   return { dataset, ...datasetContributors(owner, datasetId, EXPLORATION.graph, EXPLORATION.catalog, directSourceIdsByDataset?.[dataset.id] ?? own) };
 });
-const span = (from?: { value: string }, to?: { value: string }) =>
-  from ? `${from.value}${to ? `–${to.value}` : ''}` : null;
-// Missions and facilities share one contributor shape, so a body that credits
-// several of them collapses into a single tabbed card instead of a stack.
+// A card shows years; the record keeps the precision its source gave (OSIRIS-REx ended on 2023-09-24).
+const year = (date: { value: string }) => date.value.slice(0, 4), span = (from?: { value: string }, to?: { value: string }) => from ? `${year(from)}${to ? `–${year(to)}` : ''}` : null;
+// Missions and facilities share one contributor shape, so a body that credits several of them collapses into a single tabbed card
+// instead of a stack. A telescope that is the whole of a mission with its name (Hubble) wears that mission's emblem either way.
 const contributors = (context: (typeof contexts)[number]) => [
   ...context.missions.map(mission => ({
     id: mission.id, title: mission.shortName?.value ?? mission.name.value,
@@ -35,17 +35,17 @@ const contributors = (context: (typeof contexts)[number]) => [
       ? EXPLORATION.catalog.facilities.find(facility => facility.id === mission.participants[0].facilityId)?.band?.value
       : undefined,
   })),
+  ...context.facilities.map(facility => ({
+    id: facility.id, title: facility.name.value, lead: undefined, description: facility.description.value,
+    dates: span(facility.commissioned, facility.retired) ?? (facility.launch ? year(facility.launch) : null),
+    image: facility.imageId ? EXPLORATION.images[facility.imageId] : undefined,
+    emblem: EXPLORATION.emblems[EXPLORATION.catalog.missions.find(mission => mission.id === facility.id && mission.participants.length === 1)?.emblemId ?? ''], attribute: { 'data-facility': facility.id }, band: facility.band?.value,
+  })),
   ...context.notes.map(note => ({
     id: note.label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''),
     title: note.label, lead: undefined, description: note.reason,
     dates: null, image: undefined, emblem: undefined,
     attribute: { 'data-unresolved': note.label }, band: undefined,
-  })),
-  ...context.facilities.map(facility => ({
-    id: facility.id, title: facility.name.value, lead: undefined, description: facility.description.value,
-    dates: span(facility.commissioned, facility.retired) ?? facility.launch?.value ?? null,
-    image: facility.imageId ? EXPLORATION.images[facility.imageId] : undefined,
-    emblem: undefined, attribute: { 'data-facility': facility.id }, band: facility.band?.value,
   })),
 ];
 // A dataset shows one card: several contributors become its tabs. A tab names

@@ -234,7 +234,7 @@ commands to it; replacing a card never reads preferences back from the DOM.
 A newly mounted world receives the latest settings. Playback permission remains
 governed by the shared runtime policy.
 
-`site/scene/scene-selection.mts` owns the committed subject and projects its URL.
+`site/selection/scene-selection.mts` owns the committed subject and projects its URL.
 Every subject is an object's scene; the geometric pivot is that object's centre.
 
 ## Scene activation and prepared ownership

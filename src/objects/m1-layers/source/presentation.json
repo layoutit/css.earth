@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m1-layers",
+  "name": "Crab Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m1-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m1-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m1-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · measured depths",
+      "title": "Crab filaments at their measured depths",
+      "description": "ESA/Hubble's mosaic of the Crab, [O I] 631 nm in blue, [S II] 673 nm in green, [O III] 502 nm in red, with its filaments where they were measured to be. Martin, Milisavljevic & Drissen (2021) fitted the spectrum at every pixel of a SITELLE cube and found 416,573 velocity components; the nebula expands evenly enough that a speed along the sight line is a distance from its centre. Each filament's light stands at the depth of the speeds measured there, in front of the centre where they approach and behind it where they recede. The smooth blue light of the pulsar's wind has no measured depth: it lies on the ellipsoid that holds the measured points.",
+      "summary": "Hubble's picture with each filament at the depth its Doppler speed gives: 416,573 measured points.",
+      "detail": "3864 × 3864 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "[O I] 631 nm in blue, [S II] 673 nm in green, [O III] 502 nm in red"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3864 × 3864"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "6.41 × 6.41 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m1-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/heic0515a.jpg"
+      }
+    }
+  ]
+}

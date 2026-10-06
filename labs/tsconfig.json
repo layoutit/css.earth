@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../output/tsbuildinfo/labs.tsbuildinfo"
+  },
+  "include": [
+    "experiments/**/*.mts",
+    "investigations/**/*.mts",
+    "performance/**/*.mts",
+    "../site/env.d.ts"
+  ],
+  "exclude": [
+    "performance/**/*.test.mts",
+    "**/dist/**",
+    "**/node_modules/**",
+    "**/oracles/**"
+  ]
+}

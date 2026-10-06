@@ -41,3 +41,20 @@ test('a dataset read from another model of the body draws on the body\'s mesh, a
     await assert.rejects(loadRadialModels({ sourceDirectory: directory, source, config: config([{ datasetId: 'gravity', display: 'elsewhere', ...profile('survey.obj') }]) }), /body-mesh/);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
+
+test('the default dataset can draw on a second shape model, and the body\'s mesh keeps the name of its shape view', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-radial-models-'));
+  try {
+    await writeFile(join(directory, 'body.obj'), tetrahedron(1));
+    await writeFile(join(directory, 'survey.obj'), tetrahedron(1.01));
+    const source = await fixtureSource(directory, ['body', 'survey'].map(id => ({ id, path: `${id}.obj`, consumers: ['geometry'] })));
+    const config = (defaultDataset: string) => ({ namespace: 'fixture', presentation: { defaultDataset },
+      raster: { scientific: [{ id: 'elevation' }], shapeViews: [{ id: 'shape' }], surfaceObservations: [{ id: 'photograph' }] },
+      geometry: { radius: 1, radiusKm: .001, radialTerrain: profile('body.obj'), radialTerrainAlternatives: [{ datasetId: 'photograph', ...profile('survey.obj') }] } });
+    const named = async (defaultDataset: string) => (await loadRadialModels({ sourceDirectory: directory, source, config: config(defaultDataset) })).map(model => [model.id, model.datasetIds]);
+    // The photograph rides the survey's own mesh. Opening on it renames no mesh, so the prepared scene stays as it was.
+    const meshes = [['shape', ['elevation', 'shape']], ['photograph', ['photograph']]];
+    assert.deepEqual(await named('shape'), meshes);
+    assert.deepEqual(await named('photograph'), meshes);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});

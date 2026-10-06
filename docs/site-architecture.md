@@ -1,8 +1,10 @@
 # Site architecture plan
 
-**Option 3 was decided by the owner on 2026-10-05: relocate queued loader functions to their owners.** The router starts at module evaluation exactly as today, and all loading uses the same single serialized queue chain. S2 changes only documentation and tools; it moves no application files. The projection proves connectivity, not runtime behavior or generated chunk bytes. This PR is ready for the owner to merge.
+**Status: enforced.** S4 ended on 2026-10-06 with the site root at four allowlisted files and zero site folder cycles. `pnpm check:architecture` now fails on any site file or folder cycle, any upward, lateral or forbidden import, any production import of a test, any tracked site source file outside a declared folder, and any loose `site/` file that `.github/scripts/architecture/site-root-allowlist.json` does not name.
 
-[moves.json](site-architecture/moves.json) records destinations; [tiers.json](site-architecture/tiers.json) records layers, denies and planned/enforced status; [edits.json](site-architecture/edits.json) records the decided semantic changes. Only structural tables are committed here (the folders and the S3 changes); counts that move with every ordinary import are printed by `--tables` and written to the CI job summary.
+Option 3 was decided by the owner on 2026-10-05: relocate queued loader functions to their owners. The router starts at module evaluation exactly as before, and all loading uses the same single serialized queue chain. The projection proves connectivity, not runtime behavior or generated chunk bytes.
+
+[moves.json](site-architecture/moves.json) records destinations; [tiers.json](site-architecture/tiers.json) records layers, denies and the enforced status; [edits.json](site-architecture/edits.json) records the decided semantic changes. Only structural tables are committed here (the folders and the S3 changes); counts that move with every ordinary import are printed by `--tables` and written to the CI job summary.
 
 ## Folder ownership
 
@@ -11,31 +13,30 @@ A folder imports itself or strictly lower layers. Sibling folders, including L0 
 <!-- generated:folders -->
 | Tier | Folder | Purpose | Incoming moves |
 | ---: | --- | --- | --- |
-| 0 | `browser/` | Browser input, DOM and serialized import queue | 1; `import-queue.mts` |
+| 0 | `browser/` | Browser input, DOM and serialized import queue | 0 |
 | 0 | `model/` | Object identities, routes and held addresses | 0 |
 | 0 | `overview/` | Prepared spectral overview readers | 0 |
-| 0 | `prepared/` | Prepared transports and generated inputs | 23; `prepared-catalogue.d.mts`, `prepared-navigation-markers.d.mts`, `prepared-shell-icons.d.mts`, `prepared-shell-titles.d.mts` |
+| 0 | `prepared/` | Prepared transports and generated inputs | 0 |
 | 0 | `source/` | Preserved input records and artwork | 0 |
 | 0 | `vendor/` | Preserved third-party notices | 0 |
 | 0 | `server-assets/` | Server and build prepared-asset origin | 0 |
 | 0 | `contracts/` | Shared page and shell interfaces | 0 |
-| 1 | `directory/` | Startup reads and object catalogue directory | 9; `startup-world.mts`, `object-directory.mts`, `objects.mts`, `world-context-plan.mts` |
+| 1 | `directory/` | Startup reads and object catalogue directory | 0 |
 | 1 | `minimap/` | Surface-map measurements and view formatting | 0 |
-| 2 | `world/` | Shared framing, visibility and camera context | 41; `world-objects.mts`, `world-system-views.mts`, `stellar-extents.mts`, `hosted-banks.mts` |
-| 3 | `content/` | Card content, citations and metadata | 11; `exploration-catalog.mts`, `source-documentation.mts`, `seo.mts`, `seo-trail.mts` |
-| 3 | `navigation/` | History, requests, flights and arrivals | 4; `prepared-world-navigation.mts` |
+| 2 | `world/` | Shared framing, visibility and camera context | 0 |
+| 3 | `content/` | Card content, citations and metadata | 0 |
+| 3 | `navigation/` | History, requests, flights and arrivals | 0 |
 | 4 | `search/` | Catalogue search and result presentation | 0 |
-| 4 | `selection/` | Committed selection and camera handovers | 8; `scene/scene-selection.mts`, `satellite-selection.mts`, `overview-selection.mts`, `showcase.mts` |
-| 5 | `shell/` | Retained shell controls and panels | 14; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
-| 6 | `server/` | SSR readers, responses and host middleware | 7; `object-entry.mts`, `world-places.mts`, `dot-catalogue-data.mts`, `social-images.mts` |
-| 6 | `scene/` | Scene sessions, replacement and publication | 10; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts`, `scene-imports.mts` |
-| 7 | `startup/` | Page boot helpers and router entry | 5; `shared-imports.mts`, `startup-boot.mts` |
-| 7 | `build/` | Site preparation and packaging | 3; `prepare-body-moons.mts` |
-| 8 | `layouts/` | Shared page frame and its styles | 2; `components/ObjectSwatchStyles.astro`, `object-shell.css` |
+| 4 | `selection/` | Committed selection and camera handovers | 0 |
+| 5 | `shell/` | Retained shell controls and panels | 0 |
+| 6 | `server/` | SSR readers, responses and host middleware | 0 |
+| 6 | `scene/` | Scene sessions, replacement and publication | 0 |
+| 7 | `startup/` | Page boot helpers and router entry | 0 |
+| 7 | `build/` | Site preparation and packaging | 0 |
+| 8 | `layouts/` | Shared page frame and its styles | 0 |
 | 9 | `components/` | Reusable Astro markup and SSR composition | 0 |
 | 10 | `pages/` | Routes and object-page entries | 0 |
 | 11 | `journeys/` | Cross-cutting journeys and support | 0 |
-| 11 | `test/` | Retired test folder; no final occupants | 0 |
 <!-- /generated:folders -->
 
 The table is the final layering. Directory owns startup requests, startup world reads, object entries, registry and world context plan: it is the lower world family. World owns framing, visibility, datasets and camera context. History and fragments belong to navigation. The model's held-address reader carries its WeakMap and registration/disposal state; history keeps its re-export.
@@ -48,9 +49,9 @@ Registry types live in directory, navigation types in navigation and presenter t
 
 ## Contributor workflow
 
-There is no deadline. With `status: "planned"`, a plan finding is a WARNING with the fix command and a GitHub Actions annotation; it never fails `pnpm check:architecture`. The check reports the first plan finding. With `status: "enforced"`, every plan finding fails. The owner changes the status when S4 ends. Existing architecture rules and scanner failures always fail. Strict `--accept` always fails on plan findings. Stale generated tables are the exception to the warning: `pnpm check:architecture` fails whenever the committed folder and change tables differ from what `--write` would produce, in either status. They change only with `moves.json`, `tiers.json` or `edits.json`, so an ordinary pull request that adds an import never touches this document.
+The plan's status is `enforced`: every plan finding fails `pnpm check:architecture`, which reports the first one. (The checker still accepts `status: "planned"`, under which a plan finding is only a warning with the fix command and a GitHub Actions annotation; a test keeps the committed status at `enforced`.) Existing architecture rules, scanner failures and strict `--accept` always fail. `pnpm check:architecture` also fails whenever the committed folder and change tables differ from what `--write` would produce. They change only with `moves.json`, `tiers.json` or `edits.json`, so an ordinary pull request that adds an import never touches this document.
 
-When a warning names your file, update its destination or semantic edits and run `node .github/scripts/architecture/site-architecture.mts --write`, then strict `--accept`. Do not change application behavior just to silence a plan warning. Every mapped path is checked for existence, including deleted mapped files; generated inputs are explicit exceptions. Routine checks rescan the compact inventory so stale references produce findings.
+When a finding names your file, move it to the folder that owns it, or update the plan's tiers or semantic edits, and run `node .github/scripts/architecture/site-architecture.mts --write`, then strict `--accept`. Do not change application behavior just to silence a plan finding; a cycle requires an ownership change, not a tier exemption. Every mapped path is checked for existence, including deleted mapped files; generated inputs are explicit exceptions. Routine checks rescan the compact inventory so stale references produce findings.
 
 ## S3 atomic changes
 
@@ -63,18 +64,18 @@ The changes array partitions stable edit ids into atomic groups. All seven group
 
 ## Decided loader design: option 3
 
-Read sources: site/import-queue.mts:13–26, site/shared-imports.mts:1–7, site/startup-boot.mts:1–24, site/layouts/ObjectLayout.astro:162–178, site/object-directory.mts:55–72, site/object-adapter.mts:1–20 and site/scene/scene-router.mts:839–845.
+Read sources: site/import-queue.mts:13–26, site/shared-imports.mts:1–7, site/startup/startup-boot.mts:1–24, site/layouts/ObjectLayout.astro:162–178, site/object-directory.mts:55–72, site/object-adapter.mts:1–20 and site/scene/scene-router.mts:839–845.
 
 ```text
 layout → startup/shared-imports → queued router import (module autostart)
        → startup/startup-boot   → scene/scene-imports → registry/runtime
-                               → world/world-imports → application world
+                               → scene/world-imports → application world
                                   all loaders → browser/import-queue
 router → directory runtime-loader registration → first scene call
 ```
 
 - Move queuedImport and its **single last chain** to browser/import-queue. Keep its pending sharing and rejection-reset semantics unchanged. It has no imports of scene/runtime modules.
-- Scene/scene-imports owns importSceneRegistry and importPackagedObjectRuntime. World/world-imports owns importApplicationWorld. Each function still wraps only import(), using the same queuedImport. Startup/shared-imports keeps only importSceneRouter; startup-boot imports scene/world loaders directly.
+- Scene/scene-imports owns importSceneRegistry and importPackagedObjectRuntime. Scene/world-imports owns importApplicationWorld. Each function still wraps only import(), using the same queuedImport. Startup/shared-imports keeps only importSceneRouter; startup-boot imports scene/world loaders directly.
 - Router imports scene/world loader modules. Its existing object-directory import registers only the directory runtime loader before any scene call, then runs the existing module-evaluation autostart. The adapter directly imports scene/scene-imports; its frozen default remains intact. No factory or .then(start) is introduced.
 - Directory exports a typed registration function. It reads the configured loader at scene invocation, never during objectFromEntry or registry construction. Missing registration fails clearly. Metadata callers in build, Astro SSR and server endpoints remain valid without a loader. System-host recursion, abort signals, retry and entry identity must remain identical.
 - Root-level scene-imports/world-imports exist during S3; imports point at current paths until S4. No thunk awaits a queued function behind itself. The router's rejection remains a module-evaluation failure with the existing retry behavior and layout failure cleanup.
@@ -102,7 +103,7 @@ S3 replays current locations with root-level additions. File SCCs cannot increas
 
 The sequence table (one row per S3 and S4 step: file and folder SCCs, upward and lateral edges, result) is derived from the live import graph, so it is not committed. Print it with `node .github/scripts/architecture/site-architecture.mts --tables`; CI writes it to the job summary.
 
-The reference scan covers full/extensionless/relative file strings plus the retired site/test/ folder prefix, including site/test/** and site/test/* globs. It does not prove arbitrary computed paths or every possible folder spelling. Plan-internal inventories and plan-checker implementation files are excluded. Generated tables exclude themselves. Dated history stays separate from live references. Full line-numbered output exists only on demand with --references; it is not committed.
+The reference scan covers full/extensionless/relative file strings plus the retired test folder's prefix and its `**` and `*` globs. It does not prove arbitrary computed paths or every possible folder spelling. Plan-internal inventories and plan-checker implementation files are excluded. Generated tables exclude themselves. Dated history stays separate from live references. Full line-numbered output exists only on demand with --references; it is not committed.
 
 The live reference counts by scope and class are derived on demand with `--tables`, or in full with `--references`.
 
@@ -117,7 +118,7 @@ Required reference updates include:
 
 Tests with depth-sensitive relative reads are listed by `--tables`.
 
-Move PRs delete applied mappings/groups, retarget pending edits and regenerate tables. The --references --old gate fails live old-file references and also prints covering folder/glob references for review. During partial moves, old globs may still serve remaining tests: extend wiring for the moved tests and prove executed identities. Once the folder is retired, run --references --old site/test/ and require zero live folder/glob references. Both gates work after removing applied map entries.
+Move PRs delete applied mappings/groups, retarget pending edits and regenerate tables. The --references --old gate fails live old-file references and also prints covering folder/glob references for review. During partial moves, old globs may still serve remaining tests: extend wiring for the moved tests and prove executed identities. The test folder is now retired: a file placed there has no owning folder and fails the check. Both gates work after removing applied map entries.
 
 ## Executable projection
 
@@ -142,12 +143,12 @@ pnpm check:architecture
 node .github/scripts/architecture/site-architecture.mts --write
 node .github/scripts/architecture/site-architecture.mts --accept
 # Per-move gate: substitute that PR's actual old paths; fails before migration.
-node .github/scripts/architecture/site-architecture.mts --references --old site/test/source-link.test.mts
+node .github/scripts/architecture/site-architecture.mts --references --old site/<old-folder>/<file>.test.mts
 ```
 
 ## Owner decisions and remaining ownership
 
 - Option 3 and the final folder ownership, including page-boot helpers in startup, were decided by the owner.
-- There is no deadline. The owner sets S4/S5 timing and changes planned to enforced when S4 ends.
+- S4 ended with the final root moves; the owner set the plan to enforced. S5 timing remains the owner's.
 - Branches touching scene-router, startup-boot and ObjectLayout are timed together so they do not collide.
 - The real-iPad startup-proof device owner remains to be assigned.

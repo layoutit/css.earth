@@ -1,4 +1,3 @@
-import { parseObjectDescriptor, parsePreparedWorldCameraFrame } from '@cssearth/objects';
 /**
  * The asteroids that have a page and no map marker, each at its own prepared position.
  *
@@ -9,6 +8,7 @@ import { parseObjectDescriptor, parsePreparedWorldCameraFrame } from '@cssearth/
  *
  * Usage: node site/build/prepare/paged-asteroid-dot-positions.mts
  */
+import { parseObjectDescriptor, parsePreparedWorldCameraFrame } from '@cssearth/objects';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';

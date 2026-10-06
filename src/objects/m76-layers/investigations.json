@@ -13,22 +13,82 @@
       ]
     },
     {
-      "id": "volume",
-      "subject": "The shape of the Little Dumbbell Nebula",
-      "status": "deferred",
-      "finding": "The picture is flat. Depth needs the nebula's shape as a paper gives it, which is how the Ring and the Owl took theirs. A search of arXiv on 2026-10-03 found no paper that prints the Little Dumbbell's three-dimensional shape; the kinematic studies of its ring and lobes (Bryce et al. 1996) predate arXiv and were not read.",
-      "evidence": [
-        "https://arxiv.org/abs/1308.2477"
-      ],
-      "revisitWhen": "A kinematic paper with the ring's tilt and the lobes' size is read."
-    },
-    {
       "id": "star-removal",
       "subject": "Stars in the picture",
       "status": "included",
       "finding": "The photograph first kept its stars, which stood on the nebula's plane whatever their own distances. The Nebula Lab's NOX removes them and keeps the nebula's structure. One pass left the saturated stars, tens of pixels wide; a second pass over a quarter-size copy takes them, and the picture takes that pass's result only where it took a star.",
       "evidence": [
         "https://github.com/charvey2718/nox"
+      ]
+    },
+    {
+      "id": "volume",
+      "subject": "The shape of the Little Dumbbell Nebula",
+      "status": "included",
+      "finding": "Bryce et al. (1996, A&A 307, 253) took echelle spectra with the Isaac Newton and William Herschel Telescopes and found a bright ring with a lobe attached to each open end. The ring is 93 arcsec across (Sect. 4.1), at position angle about 35 deg, and expands at 44 km/s; the inner lobes reach about 85 arcsec from the central star along position angle -55 deg (Sect. 1). The picture lies on that surface. The paper predates arXiv; its pages were read as the scans the Astrophysics Data System serves.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract",
+        "https://articles.adsabs.harvard.edu/full/1996A%26A...307..253B"
+      ]
+    },
+    {
+      "id": "tilt",
+      "subject": "How far the nebula is tilted",
+      "status": "included",
+      "finding": "Bryce et al. (1996, Sect. 4.1) measure the ring's two sides on the sky along the central slit, 22.5 and 33 arcsec, 50 arcsec together, and find an inclination of 73 to 80 degrees; they adopt 76. The ring's approaching side is toward the south-east and the north-west lobe points toward the observer. Ramos-Larios et al. (2018, MNRAS 475, 932) fit a SHAPE model to their own spectra: 75 degrees for the ring and 85 for the lobes, the eastern lobe receding. The bank draws ring and lobes about one axis, at 76 degrees.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract",
+        "https://arxiv.org/abs/1801.01215"
+      ]
+    },
+    {
+      "id": "lobe-width",
+      "subject": "How wide the lobes are",
+      "status": "included",
+      "finding": "Neither paper prints the lobes' width. It is measured on the bank's picture (packages/bake/authoring/m76/lobe-outline.mts): along the bipolar axis, the places across it where the light falls to a share of the picture's range. Each lobe is half an ellipse that reaches 85 arcsec and is as wide as the ring at the star; its middle is fitted. At a share of 0.15 the north-west lobe's middle is 35.0 arcsec out and its half-width 65.1 arcsec, the south-east one's 36.5 and 70.6, with an rms of 10 arcsec; at shares of 0.1 and 0.2 the half-widths are 68.5 and 75.8, and 61.2 and 66.7. A check: the paper's lobes are up to 120 km/s apart along the sight line, and at the ring's rate a wall 65 arcsec from the axis moves at 62 km/s.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract",
+        "https://esahubble.org/images/heic2408a/"
+      ]
+    },
+    {
+      "id": "model-file",
+      "subject": "A file of the shape",
+      "status": "excluded",
+      "finding": "No file of the nebula's shape is published: Bryce et al. (1996) print sizes and a side-view sketch (their Fig. 11), and Ramos-Larios et al. (2018) show their SHAPE model only as synthetic spectra (their Fig. 4). The surface is written here from the printed sizes (packages/bake/authoring/m76/lobe-surface.mts).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract",
+        "https://arxiv.org/abs/1801.01215"
+      ]
+    },
+    {
+      "id": "ring-inside",
+      "subject": "The ring's own thickness",
+      "status": "deferred",
+      "finding": "Bryce et al. (1996, Fig. 7) draw the ring thick, with denser inner and outer faces, and Ramos-Larios et al. (2018, Sect. 4.1) see emission across its inside. Neither prints the inner radius. The bank lays the bar's light on the ring's outer face alone, the surface's waist.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract",
+        "https://arxiv.org/abs/1801.01215"
+      ],
+      "revisitWhen": "A paper prints the ring's inner radius."
+    },
+    {
+      "id": "outer-lobes",
+      "subject": "The faint outer lobes",
+      "status": "deferred",
+      "finding": "Bryce et al. (1996, Sect. 1 and 4.1) describe fainter outer lobes reaching about 135 arcsec to the north-west and 165 to the south-east, expanding at about 5 km/s, and a detached cap at the south-east tip. Their shape is not printed, and the frame cuts them. They stay on the flat picture.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract"
+      ],
+      "revisitWhen": "A paper prints the outer lobes' shape and a picture holds them whole."
+    },
+    {
+      "id": "far-side",
+      "subject": "The side away from the Sun",
+      "status": "included",
+      "finding": "The photograph shows the nebula from one side. The half of the surface away from the Sun was never photographed: it repeats the picture, sight line by sight line, as the image-layer bake does for any published surface.",
+      "evidence": [
+        "https://esahubble.org/images/heic2408a/"
       ]
     }
   ]

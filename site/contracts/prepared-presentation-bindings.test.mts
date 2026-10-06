@@ -21,8 +21,8 @@ async function mimasRuntime(root: string): Promise<PresentationSource> {
 async function fixture(run: (fixture: Fixture) => Promise<void>) {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-bindings-'));
   const page = join(root, 'src/objects/fixture'); await mkdir(page, { recursive: true });
-  await mkdir(join(root, 'site'));
-  await writeFile(join(root, 'site/object-shell.css'), '');
+  await mkdir(join(root, 'site/layouts'), { recursive: true });
+  await writeFile(join(root, 'site/layouts/object-shell.css'), '');
   await writeFile(join(page, 'object.json'), JSON.stringify({id:'fixture', properties:{page:{stylesheets:['src/objects/fixture/fixture.css']}}}));
   const css = `.scene, .moving, .fixed, .leaf { position:absolute; top:0; left:0; transform-origin:0 0; }
     .scene, .moving, .fixed { transform-style:preserve-3d; }

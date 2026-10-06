@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "el-gordo-hubble-layers",
+  "name": "El Gordo",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/el-gordo-hubble-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/el-gordo-hubble-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/el-gordo-hubble-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · Chandra · composite",
+      "title": "Gas and mass of El Gordo",
+      "description": "NASA's 2014 Hubble release of El Gordo in its layers: Chandra's X-ray image of the hot gas in red and the mass map from gravitational lensing in blue. Each is drawn as a body round a published line: the gas about the axis Menanteau et al. (2012) took it apart on, the mass about the line through the two peaks of Jee et al. (2014). That depth is a symmetry the papers assume, not a measurement. The Hubble picture, with its stars and galaxies removed, stands flat at the cluster's distance.",
+      "summary": "Red is X-ray gas and blue is the lensing mass map, each drawn round a published line. Their depth is not measured.",
+      "detail": "6184 × 3748 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Red: hot gas in X-rays (Chandra). Blue: mass from gravitational lensing (Hubble)"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "6184 × 3748"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "5.15 × 3.12 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "Public domain (NASA, STScI); credit requested"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/el-gordo-hubble-layers/source/composite.jpg",
+        "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/hubble/releases/2014/04/STScI-01EVVKR5JKJSQP98DV5V2PKM45.tif"
+      }
+    }
+  ]
+}

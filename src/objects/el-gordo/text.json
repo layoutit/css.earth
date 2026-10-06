@@ -53,6 +53,34 @@
           "locator": "Webb spotlights gravitational arcs in 'El Gordo' galaxy cluster (NIRCam image)"
         }
       ]
+    },
+    "gas-and-mass": {
+      "title": "Gas and mass of El Gordo",
+      "detail": "6184 × 3748 px",
+      "summary": "Red is X-ray gas and blue is the lensing mass map, each drawn round a published line. Their depth is not measured.",
+      "sources": [
+        {
+          "catalogueId": "nasa-2014-el-gordo-layers",
+          "url": "https://science.nasa.gov/missions/hubble/hubble-finds-that-monster-el-gordo-galaxy-cluster-is-bigger-than-thought",
+          "label": "NASA/STScI release 2014-22: NASA, ESA, and J. Jee (University of California, Davis)",
+          "checked": "2026-10-05",
+          "locator": "'El Gordo' (Hubble ACS/WFC), (Mass Map) and (Chandra X-ray), three pictures on one frame"
+        },
+        {
+          "catalogueId": "publication-menanteau-2012-el-gordo",
+          "url": "https://arxiv.org/abs/1109.0953",
+          "label": "Menanteau et al. (2012), ApJ 748, 7",
+          "checked": "2026-10-05",
+          "locator": "Sect. III.2.2: the gas taken apart about an axis through 01:02:54.9, -49:15:52.5 at position angle 136 degrees"
+        },
+        {
+          "catalogueId": "publication-jee-2014-el-gordo-weak-lensing",
+          "url": "https://arxiv.org/abs/1309.5097",
+          "label": "Jee et al. (2014), ApJ 785, 20",
+          "checked": "2026-10-05",
+          "locator": "Sect. IV.2: the places of the two mass peaks"
+        }
+      ]
     }
   }
 }

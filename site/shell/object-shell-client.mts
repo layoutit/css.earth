@@ -1,24 +1,24 @@
-import { cardView, presentCardView } from '../selection-presentation.mts';
+import { cardView, presentCardView } from './selection-presentation.mts';
 import { renderSourceLink } from '../browser/source-link.mts';
-import { zoomStepOf } from '../inside-view.mts';
+import { zoomStepOf } from '../world/inside-view.mts';
 import { isExtendedClassification } from '@cssearth/objects';
 import { bindTabPanels } from './tab-panels.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
-import { createObjectBrowserController } from '../object-browser.mts';
-import { applySeoHead, objectSeo } from '../seo.mts';
-import { knownObject, loadObject } from '../object-directory.mts';
+import { createObjectBrowserController } from './object-browser.mts';
+import { applySeoHead, objectSeo } from '../content/seo.mts';
+import { knownObject, loadObject } from '../directory/object-directory.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
 import type { SceneLifetime } from '@cssearth/engine';
-import { selectionKey, starSystem, subjectOf, subjectView, type SceneView } from '../scene/scene-selection.mts';
-import type { DestinationPresentation } from '../destination-browser.mts';
+import { selectionKey, starSystem, subjectOf, subjectView, type SceneView } from '../selection/scene-selection.mts';
+import type { DestinationPresentation } from './destination-browser.mts';
 import type { ShellCamera, PlaybackState } from '../browser/browser-types.mts';
 import { errorMessage, requiredElement, sectionElement } from '../browser/browser-types.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import { DIAGNOSTICS_ENABLED } from '../browser/diagnostics-policy.mts';
 import { createSceneLifetime } from "@cssearth/engine";
-import { createViewReadout } from "../view-readout.mts";
+import { createViewReadout } from "./view-readout.mts";
 import { createSurfaceMapReader } from "../minimap/surface-map-context.mts";
-import { mountDiagnosticRecorder } from '../diagnostic-recorder.mts';
+import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bindNavigationIntent, navigationFragments } from '../navigation/navigation-fragments.mts';
 import { createSheetController } from './shell-sheet.mts';
 import { bindDatasetPicker } from './dataset-picker.mts';
@@ -243,7 +243,7 @@ export function mountObjectShell({
         if (target.preview) restoreBrowser = objectBrowser.previewSelection(subjectOf(target.object.id, 'system'));
       } else {
         if (!retainsSourceCard) sheet.showSelection();
-        restoreBrowser = objectBrowser.previewSelection(subjectOf(target.object.id, target.view));
+        restoreBrowser = objectBrowser.previewSelection(subjectOf(target.object.id, target.view), target.handover === true);
         updateBodyCard();
       }
       return transition;

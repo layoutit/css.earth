@@ -47,14 +47,14 @@ test('folders follow the prototype zones', () => {
     'src/renderers/css/index.ts': 'src/renderers/css(root)',
     'src/preparation/stars/x.ts': 'src/preparation/stars',
     'site/components/X.astro': 'site/components',
-    'site/objects.mts': 'site(root)',
+    'site/env.d.ts': 'site(root)',
     '.github/scripts/ci/x.mts': '.github/scripts/ci',
     '.github/scripts/x.mts': '.github/scripts(root)',
-    'netlify/functions/x.mts': 'netlify',
+    'deploy/netlify/functions/x.mts': 'deploy',
     'astro.config.mts': '(repository root)',
   };
   for (const [file, zone] of Object.entries(expected)) assert.equal(zoneOf(file), zone, file);
-  for (const file of ['site/test/x.mts', 'labs/a.test.mts', 'tests/objects/x.mts', 'src/x/fixtures/a.json', 'labs/ci/foo-harness.mts'])
+  for (const file of ['packages/renderer/test/x.mts', 'labs/a.test.mts', 'tests/objects/x.mts', 'src/x/fixtures/a.json', 'labs/ci/foo-harness.mts'])
     assert.equal(isTestPath(file), true, file);
   assert.equal(isTestPath('labs/ci/testing-tools.mts'), false);
 });
@@ -147,16 +147,16 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
     ['packages/renderer/src/stars/bank.ts', 'packages/core/src/index.ts'],
     ['site/c.mts', 'packages/telescope-cli/src/query.mts'], ['packages/renderer/src/sky/d.ts', 'packages/telescope-cli/src/archives/programs.mts', 'type'],
     ['packages/renderer/src/sky/d.test.ts', 'packages/telescope-cli/src/query.mts'],
-    ['labs/objects/o.mts', 'site/objects.mts'], ['astro.config.mts', 'labs/prepare/p.mts'],
-    ['netlify/functions/f.mts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
+    ['labs/objects/o.mts', 'site/directory/objects.mts'], ['astro.config.mts', 'labs/prepare/p.mts'],
+    ['deploy/netlify/functions/f.mts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
     ['labs/ci/x.mts', '.github/scripts/ci/y.mts'], ['.github/scripts/ci/y.mts', 'labs/ci/z.mts'], ['.github/scripts/ci/y.mts', 'packages/core/src/validate.ts'],
-    ['site/build/prepare/p.mts', 'packages/bake/src/stars/index.ts'], ['site/e.mts', 'site/build/prepare/p.mts', 'type'], ['site/test/e.test.mts', 'site/build/prepare/p.mts'],
+    ['site/build/prepare/p.mts', 'packages/bake/src/stars/index.ts'], ['site/e.mts', 'site/build/prepare/p.mts', 'type'], ['site/world/e.test.mts', 'site/build/prepare/p.mts'],
     ['astro.config.mts', 'site/build/source-maps.mts'], ['packages/renderer/src/f.ts', 'site/build/prepare/p.mts', 'type'], ['packages/bake/src/g.ts', 'site/build/prepare/p.mts'],
   ));
   const pairs = (rule: string) => (violations.get(rule) ?? []).map(item => `${item.from}>${item.to}`);
   assert.deepEqual(pairs('packages-import-only-packages'), ['packages/bake/src/g.ts>site/build/prepare/p.mts', 'packages/p/src/a.test.ts>labs/helper.mts',
     'packages/p/src/a.ts>src/platform/x.mts', 'packages/renderer/src/f.ts>site/build/prepare/p.mts'], 'no package reaches site/build, not even the bake or a renderer type');
-  assert.deepEqual(pairs('nothing-imports-applications'), ['.github/scripts/ci/y.mts>labs/ci/z.mts', 'labs/ci/x.mts>.github/scripts/ci/y.mts', 'labs/objects/o.mts>site/objects.mts', 'packages/bake/src/g.ts>site/build/prepare/p.mts',
+  assert.deepEqual(pairs('nothing-imports-applications'), ['.github/scripts/ci/y.mts>labs/ci/z.mts', 'labs/ci/x.mts>.github/scripts/ci/y.mts', 'labs/objects/o.mts>site/directory/objects.mts', 'packages/bake/src/g.ts>site/build/prepare/p.mts',
     'packages/p/src/a.test.ts>labs/helper.mts', 'packages/renderer/src/f.ts>site/build/prepare/p.mts', 'src/renderers/css/x.ts>labs/prepared/y.mts'], 'CI scripts in .github/ are an application tree too');
   assert.deepEqual(pairs('runtime-imports-no-preparation'), [
     'packages/renderer/src/sky/d.ts>packages/telescope-cli/src/archives/programs.mts', 'packages/renderer/src/stars/bank.ts>packages/bake/src/stars/index.ts',
@@ -248,12 +248,12 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
   assert.equal(isBroken(found), true);
   assert.doesNotMatch(formatFindings(clean), /broken/u);
   assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
-  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['authoring-policies', 'site-build-format-readers', 'bake-without-renderer', 'format-schema-ownership', 'preparation-without-renderer', 'workspace-package-cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
+  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['authoring-policies', 'site-build-format-readers', 'bake-without-renderer', 'format-schema-ownership', 'preparation-without-renderer', 'workspace-package-cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports', 'site-root-allowlist'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies, pre-install imports and the site root allowlist are the repository rules');
 });
 
 test('a script or Astro module inside an object package is a finding; its data is not', () => {
   assert.deepEqual(objectCodeFiles(['src/objects/mars/object.json', 'src/objects/mars/README.md', 'src/objects/mars/runtime/definition.mjs',
-    'src/objects/mars/site/Card.astro', 'src/objects/mars/x.d.ts', 'src/platform/object-runtime.mts', 'site/objects.mts', 'src/objects/earth/paged-ellipsoid-scene.test.mts',
+    'src/objects/mars/site/Card.astro', 'src/objects/mars/x.d.ts', 'src/platform/object-runtime.mts', 'site/directory/objects.mts', 'src/objects/earth/paged-ellipsoid-scene.test.mts',
     'src/objects/europa/scientific-focus.test.mts', 'src/objects/earth/fixtures/polar-caps.mts']),
   ['src/objects/mars/runtime/definition.mjs: object packages hold data only; put code in packages/ or site/',
     'src/objects/mars/site/Card.astro: object packages hold data only; put code in packages/ or site/',

@@ -27,10 +27,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "SDSS g r i",
-            "evidence": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "sloan-2-5m",
+            "evidence": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record — obs_description: the survey uses a dedicated 2.5-m wide-angle optical telescope at Apache Point Observatory in New Mexico"
           }
         ]
       },

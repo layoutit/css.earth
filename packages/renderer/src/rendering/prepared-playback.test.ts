@@ -1,9 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { createPreparedPlayback } from "./prepared-playback.js";
-type TestAnimation = Omit<import("./prepared-playback.js").PreparedAnimation, "playState"> & { playState: AnimationPlayState; calls: string[] };
+import { createPreparedPlayback, releaseAnimation } from "./prepared-playback.js";
+type TestAnimation = Omit<import("./prepared-playback.js").PreparedAnimation, "playState"> & { playState: AnimationPlayState; calls: string[];
+  effect: AnimationEffect | null; timeline: AnimationTimeline | null };
 function animation(time = 12): TestAnimation {
-  return { currentTime: time, playbackRate: 1, playState: "running", calls: [],
+  return { currentTime: time, playbackRate: 1, playState: "running", calls: [], effect: {} as AnimationEffect, timeline: {} as AnimationTimeline,
     play() { this.playState = "running"; this.calls.push("play"); },
     pause() { this.playState = "paused"; this.calls.push("pause"); },
     cancel() { this.playState = "idle"; this.calls.push("cancel"); },
@@ -46,6 +47,7 @@ test("duplicate registration and unchanged permission do not restart native anim
   owner.register(a, { initialTime: 0 }); owner.setAllowed(true); owner.setSelection({ speed: 1 });
   assert.equal(a.currentTime, 100); assert.deepEqual(a.calls, ["pause", "play"]);
   owner.destroy(); owner.destroy(); assert.deepEqual(a.calls, ["pause", "play", "cancel"]);
+  assert.deepEqual([a.effect, a.timeline], [null, null], "a destroyed owner's animation names no element and no timeline");
 });
 test("saved motion restores actual visual times without replacing camera-addressed poses", () => {
   const owner = createPreparedPlayback(), first = animation(1234), second = animation(5678), pose = animation(99);
@@ -83,4 +85,17 @@ test("a light curve plays on its own permission, at its own rate, and never hold
   owner.setLightCurves(false); assert.equal(light.playState, "paused");
   assert.throws(() => owner.register(animation(), { lightCurve: "yes" as unknown as boolean }), /prepared role/);
   owner.destroy();
+});
+
+test("an ended animation is cancelled with its effect still on it, then loses its effect and its timeline", () => {
+  const calls: string[] = [];
+  const ended = { effect: {} as AnimationEffect | null, timeline: {} as AnimationTimeline | null,
+    cancel() { calls.push(`cancel, effect ${this.effect === null ? "gone" : "present"}`); } };
+  releaseAnimation(ended);
+  assert.deepEqual(calls, ["cancel, effect present"]);
+  assert.equal(ended.effect, null, "it names no element");
+  assert.equal(ended.timeline, null, "the document timeline no longer holds it");
+  const standIn = { cancelled: 0, cancel() { this.cancelled++; } };
+  releaseAnimation(standIn);
+  assert.equal(standIn.cancelled, 1); assert.deepEqual(Object.keys(standIn), ["cancelled", "cancel"], "a stand-in is only cancelled");
 });

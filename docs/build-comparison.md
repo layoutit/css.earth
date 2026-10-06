@@ -367,8 +367,8 @@ changes without explaining missing files.
 | `refresh-photographs.ts` | Raw recursive order determines refresh processing; authoring command outside comparison recipe. |
 | `refresh-content.mts` | Raw order determines independent copied outputs; authoring command outside comparison recipe. |
 | `inline-page-stylesheet.mts` | Raw directory order determines independent page processing after emit; cannot change prerender module graph. |
-| `bundle-netlify-functions.mts` | Raw order determines entry list; deployment command excluded from comparison. |
-| `bundle-cloudflare-worker.mts` | Object ids are sorted; scene/name iteration uses raw order for independent copies; excluded deployment command. |
+| `deploy/netlify/bundle-functions.mts` | Raw order determines entry list; deployment command excluded from comparison. |
+| `deploy/cloudflare/bundle-worker.mts` | Object ids are sorted; scene/name iteration uses raw order for independent copies; excluded deployment command. |
 | `object-page-data.mts` | Reads explicit object paths; no directory/glob discovery. Reaches `ObjectPage.astro` directly. |
 
 The same lane runs the [performance guard](performance-guard.md#in-the-comparison-lane) concurrently with server answers after L3 comparison.

@@ -45,9 +45,16 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
     if (!time) inventoryTimes.set(path, time = Promise.resolve(statSync(path, { throwIfNoEntry: false })?.mtimeMs ?? Number.POSITIVE_INFINITY));
     return time;
   };
+  // Many bodies publish the same bytes (a shared lighting bank is one file listed by 877 of them). The first entry of a
+  // content address answers for it: the file that holds those bytes once it is verified or fetched, or null when that
+  // entry ended without one. The others read that file instead of fetching, and fetch only if it fails them.
+  const holders = new Map<string, Promise<string | null>>();
   await Promise.all(Array.from({ length: Math.min(concurrency, assets.length) }, async () => {
     while (next < assets.length) {
       const asset = assets[next++];
+      let announce: ((file: string | null) => void) | undefined;
+      const earlier = holders.get(asset.sha256);
+      if (!earlier) holders.set(asset.sha256, new Promise(resolve => { announce = resolve; }));
       try {
         // Synchronous: 110,000 async stats queue on libuv's four threads and cost seconds of idle.
         const info = statSync(asset.file, { throwIfNoEntry: false });
@@ -55,13 +62,15 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
         if (info?.size === asset.bytes && !(trustFresh && asset.inventory && info.mtimeMs > await inventoryTime(asset.inventory))) existing = await readFile(asset.file);
         if (info?.size === asset.bytes && (existing === undefined || sha256(existing) === asset.sha256)) {
           if (existing !== undefined) { const now = new Date(); await utimes(asset.file, now, now); }
+          announce?.(asset.file);
           reused++;
         } else {
+          const held = await earlier, copy = held ? await readFile(held).catch(() => undefined) : undefined;
           // A dropped connection, a 5xx or a 429 is not a missing asset. Across 5,500+ files a single transient
           // failure would otherwise fail the whole run, so retry them with backoff, including a
           // connection that drops while the body streams. A 404 still fails (or skips) on the first
           // response: "not published" is a fact, not a blip.
-          let bytes: Buffer | 'missing' | undefined;
+          let bytes: Buffer | 'missing' | undefined = copy?.length === asset.bytes && sha256(copy) === asset.sha256 ? copy : undefined;
           for (let attempt = 0; bytes === undefined; attempt++) {
             let response: Awaited<ReturnType<typeof fetcher>> | undefined;
             try {
@@ -100,6 +109,7 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
           }
           if (bytes.length !== asset.bytes || sha256(bytes) !== asset.sha256) throw new Error(`Prepared asset does not match its inventory: ${asset.id}/${asset.filename}.`);
           await publishSourceBytes({ destination: asset.file, bytes });
+          announce?.(asset.file);
           installed++;
         }
         onProgress({ completed: installed + reused + skipped, total: assets.length, installed, reused, skipped });
@@ -107,6 +117,9 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
         // Name the file on every failure: a bare network message ("terminated") says nothing about which one.
         const message = error instanceof Error ? error.message : String(error);
         failures.push(message.startsWith('Prepared asset') ? message : `${asset.id}/${asset.filename} (${asset.url}): ${message}`);
+      } finally {
+        // An entry that did not end with its file leaves the others of its content address to fetch for themselves.
+        announce?.(null);
       }
     }
   }));

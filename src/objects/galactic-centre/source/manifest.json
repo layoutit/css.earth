@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [],
+  "generatedIntermediates": [
+    {
+      "id": "companion-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://archive.stsci.edu/prepds/hpsgc/",
+      "credit": "NASA, ESA, Q. D. Wang (University of Massachusetts, Amherst) and the HST/NICMOS Paschen-α Survey of the Galactic Centre (Wang et al. 2010; Dong et al. 2011), from MAST; the default dataset's picture as the Galactic Centre bank publishes it, saved by site/build/prepare/companion-context.mts",
+      "license": "Public NASA mission data (MAST); retain the recorded credit.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "site/build/prepare/companion-context.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/galactic-centre-layers/source/manifest.json)."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet and dataset list."
+      }
+    },
+    {
+      "path": "presentation/solar-system.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored framing: the radius the page frames the object at, a presentation value."
+      }
+    },
+    {
+      "path": "preparation/navigation.json"
+    }
+  ]
+}

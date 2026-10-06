@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "datasets/optical.webp",
+      "bytes": 11918,
+      "sha256": "a9dee191fe187f90d826a927326dae2ebb6a025c851fd12241103939a2dc22a4"
+    },
+    {
+      "location": "prepared",
+      "filename": "image-layers.json",
+      "bytes": 25066,
+      "sha256": "e64a65604299701e445d1c6aa6dff32f0c4d9f59d36aa00324eeb348c9196664"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/plane-eastern-arm.webp",
+      "bytes": 36920,
+      "sha256": "7892f88667b73aa7c8867891eae8f7ee0cab853924c7404780495e912f60ac10"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/plane-northern-arm.webp",
+      "bytes": 39458,
+      "sha256": "704e8186bbd561d9fa35c31676780d8b228f91d2cb1a6be21d062f51b16751d4"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/plane-sky.webp",
+      "bytes": 141104,
+      "sha256": "6a184ca0ad54a44ba54a4e2ead495cc6e690ad10636505060eecf3f309911a12"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/plane-western-arc.webp",
+      "bytes": 48128,
+      "sha256": "1421c6047b6d3f46b6d63da07718b585677af8651f372441bb39eb175b0a31df"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 2286,
+      "sha256": "16e756fb9a3c186fe61710b50535b0b4337e02ec1401979b0613a371425568bb"
+    }
+  ]
+}

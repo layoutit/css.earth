@@ -6,7 +6,7 @@ import { parsePreparedObjectRuntime, splitPreparedDatasetTables } from '@csseart
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { SCENE_OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../directory/objects.mts';
 import { objectRuntimePackageTests, preparedSelectionFixture } from '@cssearth/renderer/test/object-runtime-package.mts';
 import { loadObjectTestDefinition, required } from '@cssearth/objects/node/contract';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';

@@ -5,8 +5,8 @@ import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { SCENE_OBJECTS } from '../objects.mts';
-import { billboardSocialImages } from '../social-images.mts';
+import { SCENE_OBJECTS } from '../directory/objects.mts';
+import { billboardSocialImages } from '../server/social-images.mts';
 import { resolveBuildSceneAddress } from '../server-assets/asset-origin.mts';
 
 const root = resolve(import.meta.dirname, '../..');

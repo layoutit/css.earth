@@ -2,6 +2,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { ImageLayerRecipe, LayerAxis } from './config.ts';
 import { rad } from './disc.ts';
+import { removeCompactSources } from './compact-sources.ts';
 import { paintTexel } from './texel.ts';
 
 /** A cluster merger's hot gas and mass (`geometry.collision`). The X-ray papers take the gas as round about the line
@@ -44,19 +45,22 @@ export async function imageLayerCollision(options: { recipe: ImageLayerRecipe; s
   // Light under the pictures' background is none, and a picture ends at the frame as the photograph does.
   const read = async (name: 'gas' | 'mass') => { const medium = collision[name]!, picture = sharp(resolve(options.sourceDirectory, medium.path)), metadata = await picture.metadata();
     if (metadata.width !== recipe.source.dimensions[0] || metadata.height !== recipe.source.dimensions[1]) throw new TypeError(`${recipe.id}: ${medium.path} is ${metadata.width} by ${metadata.height} px; the ${name} picture (geometry.collision.${name}.path) is on the photograph's frame, ${recipe.source.dimensions.join(' by ')} px.`);
-    const rgb = await picture.resize({ width: W, height: H, fit: 'fill' }).removeAlpha().toColorspace('srgb').raw().toBuffer(), tau = [0, 1, 2].map(() => new Float32Array(count)), light = new Float32Array(count); let pixels = 0;
+    const rgb = await picture.resize({ width: W, height: H, fit: 'fill' }).removeAlpha().toColorspace('srgb').raw().toBuffer(), tau = [0, 1, 2].map(() => new Float32Array(count)), light = new Float32Array(count), framed = new Uint8Array(count); let pixels = 0;
+    // Point sources in the picture are not the body's light: they are taken down to the light around them.
+    const sources = medium.pointSourceArcsec === undefined ? 0 : removeCompactSources(rgb, W, H, Math.max(1, Math.ceil(medium.pointSourceArcsec / 2 / pixelArcsec)));
     for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) { const p = py * W + px, edge = Math.min(px / Math.max(1, W - 1), (W - 1 - px) / Math.max(1, W - 1), py / Math.max(1, H - 1), (H - 1 - py) / Math.max(1, H - 1)), t = Math.min(1, edge / recipe.bake.edgeTaperFraction), fade = t * t * (3 - 2 * t);
       for (let c = 0; c < 3; c++) { const value = Math.max(0, rgb[3 * p + c]! - PICTURE_FLOOR) / (255 - PICTURE_FLOOR) * fade; tau[c]![p] = -Math.log(1 - Math.min(value, .998)); light[p] += tau[c]![p]!; }
+      framed[p] = fade === 1 ? 1 : 0;
       if (light[p]! > 0) pixels++; }
     if (!pixels) throw new TypeError(`${recipe.id}: the ${name} picture (${medium.path}) holds no light above its background.`);
-    return { name, medium, tau, light, pixels }; };
+    return { name, medium, tau, light, framed, pixels, sources }; };
   const pictures = [await read('gas'), ...(collision.mass ? [await read('mass')] : [])];
   let left = W, top = H, right = -1, bottom = -1;
   for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) if (pictures.some(picture => picture.light[py * W + px]! > 0)) { left = Math.min(left, px); right = Math.max(right, px); top = Math.min(top, py); bottom = Math.max(bottom, py); }
   const bw = right - left + 1, bh = bottom - top + 1, fscale = Math.min(1, facePixels / Math.max(bw, bh)), sw = Math.max(2, Math.round(bw * fscale)), sh = Math.max(2, Math.round(bh * fscale));
   // Stations and rings are as wide as a cell of the leaves: a body can show nothing finer.
   const bin = pixelArcsec / fscale;
-  const bodies = pictures.map(({ name, medium, tau, light, pixels }) => {
+  const bodies = pictures.map(({ name, medium, tau, light, framed, pixels, sources }) => {
     // The line on the sky, from the main concentration to the subcluster's, and the direction across it.
     const from = sky(...options.pixel(medium.from.raDeg, medium.from.decDeg)), to = sky(...options.pixel(medium.to.raDeg, medium.to.decDeg)), length = Math.hypot(to[0] - from[0], to[1] - from[1]);
     if (!(length > 0)) throw new TypeError(`${recipe.id}: geometry.collision.${name} runs from one place on the sky to another; its ends are the same.`);
@@ -65,7 +69,8 @@ export async function imageLayerCollision(options: { recipe: ImageLayerRecipe; s
     for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) { const p = py * W + px, [east, north] = sky(px, py); s[p] = station(east, north); r[p] = offset(east, north);
       if (light[p]! > 0) { first = Math.min(first, s[p]!); last = Math.max(last, s[p]!); widest = Math.max(widest, Math.abs(r[p]!)); } }
     const stations = Math.floor((last - first) / bin) + 1, rings = Math.floor(widest / bin) + 1, sums = [new Float64Array(stations * rings), new Float64Array(stations * rings)], counts = [new Uint32Array(stations * rings), new Uint32Array(stations * rings)];
-    for (let p = 0; p < count; p++) { const i = Math.floor((s[p]! - first) / bin), j = Math.floor(Math.abs(r[p]!) / bin); if (i < 0 || i >= stations || j >= rings) continue; const side = r[p]! < 0 ? 1 : 0; sums[side]![i * rings + j] += light[p]!; counts[side]![i * rings + j]++; }
+    // Where the picture fades out at the frame it holds no reading of the body: the frame cuts that side off there.
+    for (let p = 0; p < count; p++) { const i = Math.floor((s[p]! - first) / bin), j = Math.floor(Math.abs(r[p]!) / bin); if (!framed[p] || i < 0 || i >= stations || j >= rings) continue; const side = r[p]! < 0 ? 1 : 0; sums[side]![i * rings + j] += light[p]!; counts[side]![i * rings + j]++; }
     // The two sides' mean light, and how much of the light differs between them. Where the frame cuts one side off, the other stands for both.
     const mean = new Float32Array(stations * rings); let differs = 0, all = 0;
     for (let k = 0; k < stations * rings; k++) { const a = counts[0]![k]! ? sums[0]![k]! / counts[0]![k]! : NaN, b = counts[1]![k]! ? sums[1]![k]! / counts[1]![k]! : NaN, weight = counts[0]![k]! + counts[1]![k]!;
@@ -82,7 +87,7 @@ export async function imageLayerCollision(options: { recipe: ImageLayerRecipe; s
       return (at(i, j) * (1 - tx) + at(i + 1, j) * tx) * (1 - ty) + (at(i, j + 1) * (1 - tx) + at(i + 1, j + 1) * tx) * ty; };
     /** How much the body emits at a place on the sky and a depth. */
     const emission = (east: number, north: number, depth: number) => { const alongSky = station(east, north); return emit(alongSky * cos + depth * sin, Math.hypot(offset(east, north), depth * cos - alongSky * sin)); };
-    return { name, source: medium.source, tau, emission, pixels, reachArcsec: (outermost + 1) * bin, differs: all > 0 ? differs / all : 0, refused: whole > 0 ? refused / whole : 0 }; });
+    return { name, source: medium.source, tau, emission, pixels, sources, reachArcsec: (outermost + 1) * bin, differs: all > 0 ? differs / all : 0, refused: whole > 0 ? refused / whole : 0 }; });
   // The grid of the leaves: each cell's place on the sky and each picture's light toward the Sun there by channel (0 to 1).
   const cells = Array.from({ length: sw * sh }, (_, t) => { const i = t % sw, j = Math.floor(t / sw), x0 = left + Math.floor(i * bw / sw), x1 = Math.max(x0 + 1, left + Math.floor((i + 1) * bw / sw)), y0 = top + Math.floor(j * bh / sh), y1 = Math.max(y0 + 1, top + Math.floor((j + 1) * bh / sh));
     const area = (x1 - x0) * (y1 - y0), [east, north] = sky((x0 + x1 - 1) / 2, (y0 + y1 - 1) / 2);

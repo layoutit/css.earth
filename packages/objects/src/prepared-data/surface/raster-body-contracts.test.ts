@@ -80,12 +80,7 @@ test('body admission, normalization and first diagnostics remain fixed', () => {
 test('resolving a lighting bank replaces lighting on the caller recipe', () => {
   const authored = { bank: 'fixture' };
   const recipe = { ...rasterRecipeFixture(), lighting: authored };
-  const resolved = {
-    ...authored, frameSize: 8, columns: 1, presentationSize: 8, billboardFrameSize: 8, billboardColumns: 1,
-    frameCount: 1, radiusScale: 1, defaultFrame: 0, minimumLightViewZ: -1, maximumLightViewZ: 1,
-    maximumAlpha: 1, shadowlessFloodLimbFloor: 0, ambientIntensity: 0, terminator: [0, 1] as const,
-    rowOutput: 'row.webp', billboardOutput: 'billboard.webp', bankSchema: 'bank', billboardSchema: 'billboard', metadata: {},
-  };
+  const resolved = { ...authored, presentationSize: 8, maximumAlpha: 1, shadowlessFloodLimbFloor: 0, ambientIntensity: 0, terminator: [0, 1] as const };
   const result = parseRasterRecipe(recipe, () => resolved);
   assert.notStrictEqual(resolved, authored);
   assert.strictEqual(recipe.lighting, resolved);

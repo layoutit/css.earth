@@ -4,8 +4,7 @@ import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { createObjectControlBinding } from '@cssearth/renderer/testing';
-import { initialObjectSelection, reduceObjectSelection } from '@cssearth/renderer/testing';
+import { createObjectControlBinding, initialObjectSelection, reduceObjectSelection } from '@cssearth/renderer/testing';
 
 import type { ObjectAction, ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
 

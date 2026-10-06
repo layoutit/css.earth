@@ -1,5 +1,5 @@
 // The prepared catalogue: every navigable object once, as `prepare:catalog` writes it and the application registry
-// (`site/objects.mts`) reads it. Preparation needs the same object list without the shell, so `readPreparedObjects` decodes
+// (`site/directory/objects.mts`) reads it. Preparation needs the same object list without the shell, so `readPreparedObjects` decodes
 // the same entries with the same contracts and binds no scene loader. It is a read of the one registry, never a second list.
 import { createRequire } from 'node:module';
 import { resolve } from 'node:path';
@@ -55,7 +55,7 @@ export function readPreparedObjects(root: string): PreparedObjectRegistry {
 function decodeRegistry(checkout: string): PreparedObjectRegistry {
   // Loaded on behalf of the application registry module, as that module imports it: the preparation trace then counts only
   // the registry fields of another body's descriptor it reached.
-  const load = createRequire(resolve(checkout, 'site/objects.mts'));
+  const load = createRequire(resolve(checkout, 'site/directory/objects.mts'));
   const module: unknown = load(resolve(checkout, PREPARED_CATALOGUE.entries));
   const catalogue = isRecord(module) ? module.CATALOGUE_ENTRIES : undefined;
   if (!Array.isArray(catalogue)) throw new TypeError(`Invalid prepared catalogue: ${PREPARED_CATALOGUE.entries} exports no CATALOGUE_ENTRIES array.`);

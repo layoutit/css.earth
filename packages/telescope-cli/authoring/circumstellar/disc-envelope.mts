@@ -317,6 +317,18 @@ export interface DiscModel {
   readonly inclinationDeg: number; readonly positionAngleDeg: number; readonly centreUnits: readonly [number, number];
   /** Which end of the minor axis is nearer the observer: its position angle, degrees east of north. A convention. */
   readonly nearSidePositionAngleDeg: number;
+  /** How far the centre lies toward the observer from the star's sky plane, in units. Absent, the centre is in that plane. */
+  readonly centreDepthUnits?: number;
+}
+/** The centre depth that puts the star in the ring's plane. An eccentric ring's centre is off the star, which is the focus of
+ * its orbits and so lies in their plane: the centre is then nearer or farther than the star by its offset along the minor axis
+ * times the tangent of the inclination. */
+export function centreDepthThroughStar(model: Pick<DiscModel, 'inclinationDeg' | 'positionAngleDeg' | 'centreUnits' | 'nearSidePositionAngleDeg'>): number {
+  const phi = model.positionAngleDeg * DEG, i = model.inclinationDeg * DEG, minor = [Math.cos(phi), -Math.sin(phi)];
+  const nearAlongMinor = Math.cos((model.nearSidePositionAngleDeg - (model.positionAngleDeg + 90)) * DEG) >= 0 ? 1 : -1;
+  // The star seen from the centre is (east, north) = (cx, -cy); its distance from the plane is zero.
+  const [cx, cy] = model.centreUnits;
+  return -nearAlongMinor * (cx * minor[0]! - cy * minor[1]!) * Math.tan(i);
 }
 /** Density of the ring model at a sky-plane point, z toward the observer. */
 export function discDensity(model: DiscModel): (x: number, y: number, z: number) => number {
@@ -327,9 +339,9 @@ export function discDensity(model: DiscModel): (x: number, y: number, z: number)
   const nearAlongMinor = Math.cos((model.nearSidePositionAngleDeg - (model.positionAngleDeg + 90)) * DEG) >= 0 ? 1 : -1;
   const inPlaneMinor = [minor[0]! * Math.cos(i), minor[1]! * Math.cos(i), nearAlongMinor * Math.sin(i)];
   const normal = [-nearAlongMinor * minor[0]! * Math.sin(i), -nearAlongMinor * minor[1]! * Math.sin(i), Math.cos(i)];
-  const { radiusUnits: R, gaussianWidthUnits: w, gaussianHeightUnits: h } = model, [cx, cy] = model.centreUnits;
-  return (x, y, z) => {
-    const e = -(x - cx), n = y - cy;
+  const { radiusUnits: R, gaussianWidthUnits: w, gaussianHeightUnits: h } = model, [cx, cy] = model.centreUnits, cz = model.centreDepthUnits ?? 0;
+  return (x, y, sightZ) => {
+    const e = -(x - cx), n = y - cy, z = sightZ - cz;
     const a = e * nodes[0]! + n * nodes[1]!, b = e * inPlaneMinor[0]! + n * inPlaneMinor[1]! + z * inPlaneMinor[2]!;
     const zd = e * normal[0]! + n * normal[1]! + z * normal[2]!, rd = Math.hypot(a, b);
     return Math.exp(-(((rd - R) / w) ** 2) / 2 - ((zd / h) ** 2) / 2);
@@ -347,7 +359,7 @@ export function profileDiscDensity(model: DiscModel, profile: readonly { readonl
   const nearAlongMinor = Math.cos((model.nearSidePositionAngleDeg - (model.positionAngleDeg + 90)) * DEG) >= 0 ? 1 : -1;
   const inPlaneMinor = [minor[0]! * Math.cos(i), minor[1]! * Math.cos(i), nearAlongMinor * Math.sin(i)];
   const normal = [-nearAlongMinor * minor[0]! * Math.sin(i), -nearAlongMinor * minor[1]! * Math.sin(i), Math.cos(i)];
-  const h = model.gaussianHeightUnits, [cx, cy] = model.centreUnits, peak = Math.max(...profile.map(ring => ring.value));
+  const h = model.gaussianHeightUnits, [cx, cy] = model.centreUnits, cz = model.centreDepthUnits ?? 0, peak = Math.max(...profile.map(ring => ring.value));
   const floor = 1e-6 * peak, radii = profile.map(ring => ring.radiusUnits), values = profile.map(ring => Math.max(floor, ring.value));
   const surface = (r: number) => {
     if (r <= radii[0]!) return values[0]!;
@@ -356,8 +368,8 @@ export function profileDiscDensity(model: DiscModel, profile: readonly { readonl
     const t = (r - radii[k - 1]!) / (radii[k]! - radii[k - 1]!);
     return values[k - 1]! * (1 - t) + values[k]! * t;
   };
-  return (x, y, z) => {
-    const e = -(x - cx), n = y - cy;
+  return (x, y, sightZ) => {
+    const e = -(x - cx), n = y - cy, z = sightZ - cz;
     const a = e * nodes[0]! + n * nodes[1]!, b = e * inPlaneMinor[0]! + n * inPlaneMinor[1]! + z * inPlaneMinor[2]!;
     const zd = e * normal[0]! + n * normal[1]! + z * normal[2]!;
     return surface(Math.hypot(a, b)) * Math.exp(-((zd / h) ** 2) / 2);

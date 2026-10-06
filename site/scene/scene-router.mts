@@ -1,6 +1,6 @@
-import { prepareStartupBillboard } from '../startup-billboard.mts';
-import { importApplicationWorld } from '../world-imports.mts';
-import { importSceneRegistry, importPackagedObjectRuntime } from '../scene-imports.mts';
+import { prepareStartupBillboard } from './startup-billboard.mts';
+import { importApplicationWorld } from './world-imports.mts';
+import { importSceneRegistry, importPackagedObjectRuntime } from './scene-imports.mts';
 import { afterSceneFrame } from './scene-frame.mts';
 import { retainInputSurface } from '@cssearth/renderer';
 import { holdStartup, releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
@@ -12,26 +12,25 @@ import { focusExistingScene, prepareSceneReplacement } from './scene-transition.
 import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
-import type { ObjectEntry } from '../objects.mts';
+import type { ObjectEntry } from '../directory/objects.mts';
 import { isExtendedClassification, type ObjectDescriptor } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import { failedFlightPageLoad, type NavigationIntent } from '../navigation/navigation-request.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import type { ObjectShell, ShellNavigationTransition } from '../shell/object-shell-types.mts';
-import type { WorldHandoff } from '../prepared-world-navigation.mts';
-import { objectAdapter } from "../object-adapter.mts";
+import type { WorldHandoff, createPreparedWorldNavigation } from '../navigation/prepared-world-navigation.mts';
+import { objectAdapter } from "./object-adapter.mts";
 import { createNavigationContent } from '../navigation/navigation-content.mts';
 import { createNavigationHistory, bindNavigationLinks, navigationHref } from '../navigation/navigation-history.mts';
-import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldViewport, stageSized } from '../world/world-viewport.mts';
-import type { createSceneSelection, SceneSubject } from './scene-selection.mts';
-import { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView } from './scene-subject.mts';
+import type { createSceneSelection, SceneSubject } from '../selection/scene-selection.mts';
+import { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView } from '../world/scene-subject.mts';
 import type { createSceneActivation } from './scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
-import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
+import { WORLD_HOST_ID, namesSystem } from '../world/navigation-scope.mts';
 import { systemHostId } from '../model/system-address.mts';
-import { insideBody, pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../inside-view.mts';
-import { knownInner, loadAncestors, loadHolder, loadInner, registerDirectoryRuntimeLoader } from '../object-directory.mts';
+import { insideBody, pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../world/inside-view.mts';
+import { knownInner, loadAncestors, loadHolder, loadInner, registerDirectoryRuntimeLoader } from '../directory/object-directory.mts';
 import { bodyInView, createCameraHandover } from './camera-handover.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../browser/runtime-policy.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
@@ -42,8 +41,8 @@ import { createWorldPreferences } from '../world/world-preferences.mts';
 import { createDatasetEffects } from './scene-datasets.mts';
 import { createSceneSessions, type SceneSession as Session } from './scene-session.mts';
 import { readPreparedDescriptor } from '../navigation/prepared-descriptor.mts';
-import { satelliteSystemOfMember } from '../satellite-systems.mts';
-import { systemOfObject } from '../object-systems.mts';
+import { satelliteSystemOfMember } from '../world/satellite-systems.mts';
+import { systemOfObject } from '../world/object-systems.mts';
 import { DIAGNOSTICS_ENABLED } from '../browser/diagnostics-policy.mts';
 import { observeSceneRetirement } from './scene-memory.mts';
 import { releaseStartupRequests, startFlightRequest } from '../directory/startup-requests.mts';
@@ -504,7 +503,7 @@ export function createSceneRouter({
       });
       const selectionTransition = shellOwner?.shell?.beginNavigation?.(ofStar
         ? { view: 'system', object, preview: request.camera.kind === 'frame' && request.camera.framing === 'center' }
-        : { view: requestView, object,
+        : { view: requestView, object, handover: request.camera.kind === 'preserve',
           targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined });
       if (selectionTransition) request.own(() => selectionTransition.dispose());
       if (source && request.scene === 'reuse') {
@@ -833,7 +832,7 @@ export function createSceneRouter({
 
 function createWorldContextOwner(): WorldContextOwner {
   // The world renderer and its markers stay out of the startup script; they load with the world.
-  let world: Promise<ReturnType<typeof import('../application-world-context.mts').createApplicationWorldContext>> | null = null;
+  let world: Promise<ReturnType<typeof import('./application-world-context.mts').createApplicationWorldContext>> | null = null;
   return {
     createViewport: createWorldViewport,
     async mount(options: Parameters<WorldContextOwner['mount']>[0]) {

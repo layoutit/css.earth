@@ -30,8 +30,11 @@ function withinReach(sheet: Sheet, p: readonly number[], reach: number): boolean
 }
 
 /** Transparent prepared layer banks. No opaque viewport matte is allowed here. */
-export function mountPreparedCssImageLayers({ host, before, payload, resolveResource }: {
+export function mountPreparedCssImageLayers({ host, before, payload, resolveResource, onDrawn }: {
   host: HTMLElement; before: Element; payload: PreparedCssImageLayers; resolveResource(path: string): string;
+  /** Told when a stack's images are decoded and it joins the drawing with the camera still: who hands the picture
+   * over to this bank learns that it draws (universe-catalog-banks.ts). */
+  onDrawn?(): void;
 }) {
   const document = host.ownerDocument, root = document.createElement('div');
   root.className = 'prepared-image-layer-bank'; root.dataset.imageLayerObject = payload.id;
@@ -126,9 +129,41 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
   host.insertBefore(root, before);
   let destroyed = false;
   const quotable = (address: string) => address.replace(/["\\\n\r]/g, char => `\\${char}`);
+  const set = (element: HTMLElement, property: 'opacity' | 'visibility' | 'display', value: string) => {
+    if (element.style[property] !== value) element.style[property] = value;
+  };
+  /** What is drawn stays until what replaces it can be. A stack the camera turns to is hidden while its images decode,
+   * and its share of the picture was taken from the stacks drawn before it was shown: turning the Southern Ring on an
+   * iPad, a recorded frame had the stack that drew at 0.14 and the one that did not at 0.86, and another had the only
+   * stack wanted still hidden (2026-10-06). The stacks whose images are decoded share the whole picture; the one that
+   * drew most (`lead`) stays, whole, when the camera has turned fully away from it before the next is decoded. */
+  let lead: (typeof banks)[number] | null = null, mixed: Record<'x' | 'y' | 'z', number> | null = null;
+  const drawable = (weights: Record<'x' | 'y' | 'z', number>) => banks.filter(bank => weights[bank.axis] > 0 && bank.drawn && bank.ready);
+  const heldOf = (weights: Record<'x' | 'y' | 'z', number>) => drawable(weights).length || !lead?.drawn || !lead.ready ? null : lead;
+  const mix = (weights: Record<'x' | 'y' | 'z', number>) => {
+    mixed = weights;
+    const drawn = drawable(weights), share = drawn.reduce((sum, bank) => sum + weights[bank.axis], 0), held = heldOf(weights);
+    if (drawn.length) lead = drawn.reduce((most, bank) => weights[bank.axis] > weights[most.axis] ? bank : most);
+    for (const bank of banks) {
+      const weight = weights[bank.axis], wanted = weight > 0 || bank === held;
+      // Never 1 (STACK_OPACITY_CEILING): a drag across M31 had its longest frame at 108 to 111 ms with a bank's opacity
+      // reaching 1, and 67 to 72 ms under the ceiling (iPad, 2026-10-04). A stack of patches was drawn at 1 for a day:
+      // under the ceiling a wedge of the Homunculus had gone black for a step of a drag at its nearest view, in headless
+      // Chrome. That was looked for again and not found. At the nearest view, on the nebula's page and around its star,
+      // the picture under the ceiling matched the picture at 1 at every step: 580 steps in Chrome on a GPU, 90 in the
+      // software-rendered shell, 11 on an iPad. And at 1 the bank crossed 1 on every zoom out: Cassiopeia A's 1,397
+      // patches repainted in one frame of 291 ms on the iPad, 51 ms under the ceiling (2026-10-05).
+      set(bank.projection, 'opacity', String(Math.min(STACK_OPACITY_CEILING, bank === held ? 1 : bank.ready && share > 0 ? weight / share : weight)));
+      set(bank.projection, 'visibility', wanted && bank.ready ? 'visible' : 'hidden');
+      // A zero-weight axis contributes nothing; its 3D leaves leave compositing.
+      set(bank.projection, 'display', wanted ? '' : 'none');
+    }
+  };
   return Object.freeze({ root,
+    /** Whether any of the bank is on screen once its root is shown: a stack with its images decoded. */
+    drawing: () => banks.some(bank => bank.drawn && bank.ready),
     /** The bank root is shown again: each stack it draws waits for its images' decode, as one the camera turns to does. */
-    resume() { for (const bank of banks) { bank.drawn = false; bank.turn++; } },
+    resume() { lead = null; for (const bank of banks) { bank.drawn = false; bank.turn++; } },
     /** `around`: the bank is drawn around a body that stands inside it, at that place (reference metres). The sheets the
      * camera stands on are left out, and so are the sheets through the body: they hold the picture's own image of it, a
      * saturated glare many times its size, and the body is drawn in their place (Eta Carinae inside the Homunculus was a
@@ -143,12 +178,10 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
       const weights = imageLayerAxisWeights(local.orientationXyzw, views);
       const [ox, oy] = publication.viewport.principalOffsetPixels;
       const perspective = `${transform.focalPixels}px`, perspectiveOrigin = `calc(50% + ${ox}px) calc(50% + ${oy}px)`;
+      const held = heldOf(weights);
       for (const bank of banks) {
         // Every write is on change: this publishes every camera frame (motion-freezes-membership.md). A stack's scenes
         // take the same camera, so what was last written is kept once for the stack, not read back from each scene.
-        const set = (element: HTMLElement, property: 'opacity' | 'visibility' | 'display', value: string) => {
-          if (element.style[property] !== value) element.style[property] = value;
-        };
         arrange(bank, body !== null);
         if (bank.apart) {
           // The flat element is a point at the stage's centre: the perspective's origin is measured from there.
@@ -162,7 +195,7 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
           if (bank.perspectiveOrigin !== perspectiveOrigin) { bank.perspectiveOrigin = perspectiveOrigin; for (const { camera } of bank.runs) camera.style.perspectiveOrigin = perspectiveOrigin; }
           if (bank.transform !== cssTransform) { bank.transform = cssTransform; for (const { scene } of bank.runs) scene.style.transform = cssTransform; }
         }
-        const weight = weights[bank.axis], wanted = weight > 0;
+        const weight = weights[bank.axis], wanted = weight > 0 || bank === held;
         if (wanted && !bank.images) {
           // Leaves cut from one atlas share its address.
           const images = new Map<string, string>(), addresses = new Map<string, string>();
@@ -183,7 +216,8 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
             void Promise.all((bank.handles as { decode(): Promise<void> }[]).map(handle => handle.decode().catch(() => {}))).then(() => {
               if (destroyed || bank.turn !== turn) return;
               bank.ready = true;
-              if (bank.drawn) bank.projection.style.visibility = 'visible';
+              // It takes its share from the stacks drawn so far in the same write, and a stack held for it leaves.
+              if (bank.drawn && mixed) { mix(mixed); onDrawn?.(); }
             });
           }
         } else if (!wanted && bank.drawn) { bank.drawn = false; bank.turn++; bank.handles = []; bank.ready = !decodes; }
@@ -193,18 +227,8 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
           const shown = body && texture.sheet && (withinReach(texture.sheet, local.positionUnits, bank.reach) || withinReach(texture.sheet, body, bank.reach)) ? '0' : '';
           if (texture.shown !== shown) { texture.shown = shown; texture.element.style.opacity = shown; }
         }
-        // Never 1 (STACK_OPACITY_CEILING): a drag across M31 had its longest frame at 108 to 111 ms with a bank's opacity
-        // reaching 1, and 67 to 72 ms under the ceiling (iPad, 2026-10-04). A stack of patches was drawn at 1 for a day:
-        // under the ceiling a wedge of the Homunculus had gone black for a step of a drag at its nearest view, in headless
-        // Chrome. That was looked for again and not found. At the nearest view, on the nebula's page and around its star,
-        // the picture under the ceiling matched the picture at 1 at every step: 580 steps in Chrome on a GPU, 90 in the
-        // software-rendered shell, 11 on an iPad. And at 1 the bank crossed 1 on every zoom out: Cassiopeia A's 1,397
-        // patches repainted in one frame of 291 ms on the iPad, 51 ms under the ceiling (2026-10-05).
-        set(bank.projection, 'opacity', String(Math.min(STACK_OPACITY_CEILING, weight)));
-        set(bank.projection, 'visibility', wanted && bank.ready ? 'visible' : 'hidden');
-        // A zero-weight axis contributes nothing; its 3D leaves leave compositing.
-        set(bank.projection, 'display', wanted ? '' : 'none');
       }
+      mix(weights);
     },
     destroy() { if (destroyed) return; destroyed = true; root.remove(); },
   });

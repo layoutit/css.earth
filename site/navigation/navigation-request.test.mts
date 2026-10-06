@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { requireObject } from '../objects.mts';
-import { subjectView } from '../scene/scene-subject.mts';
-import { WORLD_OBJECTS } from '../world-objects.mts';
+import { requireObject } from '../directory/objects.mts';
+import { subjectView } from '../world/scene-subject.mts';
+import { WORLD_OBJECTS } from '../world/world-objects.mts';
 import { failedFlightPageLoad, resolveNavigation } from './navigation-request.mts';
 
 test('a body without a hosted system opens detail on the first click', () => {

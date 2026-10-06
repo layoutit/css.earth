@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "galactic-centre-layers",
+  "name": "Sagittarius A West",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/galactic-centre-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/galactic-centre-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/galactic-centre-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · near infrared",
+      "title": "Sagittarius A West in hydrogen light",
+      "description": "Hubble's map of the hydrogen Paschen-α line, 1.87 µm, about Sgr A*: gas ionized by the hot stars of the central cluster, with those stars' own light subtracted. Its brightness is shown in a color ramp from dark red to white. The gas is three streams in orbit about the black hole. Zhao et al. (2009) measured their motion across the sky and along the sight line with the Very Large Array and fit each with a Keplerian orbit; a stream's light lies here on its orbit's plane, where the paper's bundle of orbits is. The Northern Arm also holds the surface Paumard et al. (2004) mapped east of its bright rim. Light outside the streams has no published depth and lies on the plane of the sky through the black hole: 44.2% of the picture's light is on the Northern Arm's plane, 22.1% on the Eastern Arm's, 15.5% on the Western Arc's and 18.2% on the plane of the sky. Dark spots are where a bright star was subtracted.",
+      "summary": "Hubble's map of glowing hydrogen on the planes of the three gas streams' orbits about the black hole.",
+      "detail": "1101 × 1101 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "hydrogen Paschen-α line, 1.87 µm, the 1.90 µm continuum subtracted"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "1101 × 1101"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "1.83 × 1.83 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "Public NASA mission data (MAST)"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/galactic-centre-layers/source/paschen-alpha.png",
+        "url": "https://archive.stsci.edu/prepds/hpsgc/"
+      }
+    }
+  ]
+}

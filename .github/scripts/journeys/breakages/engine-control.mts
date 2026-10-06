@@ -12,7 +12,7 @@ for (const name of await readdir(resolve(dist, '_astro'))) {
   if (!input || typeof input !== 'object' || !('version' in input) || input.version !== 3 || !('sources' in input) || !Array.isArray(input.sources)
     || !input.sources.every(value => typeof value === 'string') || !('mappings' in input) || typeof input.mappings !== 'string'
     || !('names' in input) || !Array.isArray(input.names) || !input.names.every(value => typeof value === 'string')) throw new Error('Invalid source map');
-  if (!input.sources.some(value => value.endsWith('/site/startup-boot.mts'))) continue;
+  if (!input.sources.some(value => value.endsWith('/site/startup/startup-boot.mts'))) continue;
   const map: RawSourceMap = { version: '3', sources: input.sources, names: input.names, mappings: input.mappings };
   const generator = new SourceMapGenerator();
   new SourceMapConsumer(map).eachMapping(row => {

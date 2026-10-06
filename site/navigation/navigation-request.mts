@@ -1,14 +1,13 @@
-import type { PositionM } from '@cssearth/engine';
-import type { WorldCameraPose } from '@cssearth/engine';
+import type { PositionM, WorldCameraPose } from '@cssearth/engine';
 import type { ShellCamera } from '../browser/browser-types.mts';
-import type { ObjectEntry } from '../objects.mts';
-import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
+import type { ObjectEntry } from '../directory/objects.mts';
+import type { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
 import { withDataset } from '../model/dataset-url.mts';
-import { namesSystem, withView } from './navigation-scope.mts';
-import { systemById, type SystemObjects } from '../object-systems.mts';
-import { satelliteSystemByHost } from '../satellite-systems.mts';
-import { zoomStepOf } from '../inside-view.mts';
-import { moonSystem, selectionKey, starSystem, subjectOf, subjectView, type SceneSubject } from '../scene/scene-subject.mts';
+import { namesSystem, withView } from '../world/navigation-scope.mts';
+import { systemById, type SystemObjects } from '../world/object-systems.mts';
+import { satelliteSystemByHost } from '../world/satellite-systems.mts';
+import { zoomStepOf } from '../world/inside-view.mts';
+import { moonSystem, selectionKey, starSystem, subjectOf, subjectView, type SceneSubject } from '../world/scene-subject.mts';
 
 import type { NavigationHistory, NavigationIntent, SceneView, SelectionTarget } from './navigation-types.mts';
 export type { NavigationHistory, NavigationIntent } from './navigation-types.mts';

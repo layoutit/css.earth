@@ -5,11 +5,9 @@ import { restoreFactsheetEvidence } from '@cssearth/bake/objects/acquisition';
 import { mkdtemp, mkdir, readFile, readdir, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { parseFactsheet, verifyFactsheetSources } from '@cssearth/bake/sources';
-import { factsheetCitations } from '@cssearth/bake/sources';
+import { parseFactsheet, verifyFactsheetSources, factsheetCitations } from '@cssearth/bake/sources';
 import { parseSourceCatalog, sourceResolver } from '@cssearth/objects/sources';
-import { compileSourceUsage, parseSourceUsage, sourceUsageIndexes } from '@cssearth/objects/provenance';
-import { DATASET_ROUTES } from '@cssearth/objects/provenance';
+import { compileSourceUsage, parseSourceUsage, sourceUsageIndexes, DATASET_ROUTES } from '@cssearth/objects/provenance';
 
 const citation = { catalogueId: 'radius-table', url: 'https://example.invalid/radii', label: 'Radius table',
   checked: '2026-09-10', path: 'source/review.json', locator: '/references/0' };

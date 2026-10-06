@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "../../output/tsbuildinfo/scripts.tsbuildinfo"
+  },
+  "include": [
+    "**/*.mts",
+    "../../astro.config.mts",
+    "../../eslint.config.mts",
+    "../../site/env.d.ts"
+  ],
+  "exclude": [
+    "**/*.test.mts",
+    "**/dist/**",
+    "**/node_modules/**",
+    "**/oracles/**"
+  ]
+}

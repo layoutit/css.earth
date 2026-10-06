@@ -2,7 +2,7 @@
  * A real browser never runs a Node built-in: Vite externalizes any `node:` import
  * reachable from the client bundle and throws the moment the module's exports are
  * touched, even when the call site itself never executes there (see
- * `site/world-context-plan.mts`, fixed after `pnpm dev` broke on every page).
+ * `site/directory/world-context-plan.mts`, fixed after `pnpm dev` broke on every page).
  *
  * This walks the actual static-import closure from the site's real client entry
  * points — found the same way a browser finds them, from the one non-`is:inline`
