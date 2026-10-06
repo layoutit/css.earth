@@ -15,9 +15,9 @@ import { nativeQualificationRoute } from './vo/access.mts';
 import { FAMILY_IDS, type FamilyId } from './product-descriptor.mts';
 import type { ObservationFamilyEvidence } from './observation-families.mts';
 import { searchOpus, type OpusService } from './opus.mts';
-import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadFilter, type ArchiveLeadService, type LeadPosition } from './archive-leads.mts';
+import type { ArchiveLeadFilter, ArchiveLeadService, LeadPosition } from './archive-leads.mts';
+import { ARCHIVES } from './archives/archives.mts';
 import { namedShippedObject, readJsonOrNull } from './archives/targets.mts';
-import { searchChandraLeads, searchSpitzerLeads } from './other-leads.mts';
 import { loadWwtImagery, type WwtImageryResult } from './wwt/wwt-catalog.mts';
 import { loadWwtFitsLeads, type WwtFitsLeads } from './wwt/wwt-fits-leads.mts';
 
@@ -256,8 +256,8 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
     : selectedObservation ? undefined : (await namedShippedObject(resolution.canonical.id, readJsonOrNull, root)).position;
   // Every archive is asked at once: each search talks to its own service, and the leads used to wait for the others to finish.
   const [inputs, opus, curatedImagery, wwtFits, archiveLeads] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target), loadWwtImagery(root, target),loadWwtFitsLeads(root,target),
-    selectedObservation ? [] : Promise.all([searchKeckLeads(root, target, undefined, filter, position), searchGeminiLeads(root, target, undefined, filter, position),
-      searchChandraLeads(root, target, request.region, undefined, filter), searchSpitzerLeads(root, target, request.region, undefined, filter)])]);
+    selectedObservation ? [] : Promise.all(ARCHIVES.flatMap(archive => archive.search
+      ? [archive.search(root, target, { ...(request.region ? { region: request.region } : {}), ...(position ? { position } : {}), filter })] : []))]);
   return { ...inputs, opus, archiveLeads, curatedImagery, wwtFits };
 }
 
