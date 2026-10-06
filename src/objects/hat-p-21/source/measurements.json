@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-21 (pscomppars): age 10.2 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "rotationPeriodDays": 15.88,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HAT-P-21 (pscomppars): rotation period 15.88 d, from Mancini et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...664A.162M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 15.88,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 15.88 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.9,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 15.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.34809,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 4.34809 d, the row 0.2 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-21 (pscomppars): projected rotation speed 3.5 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "spinInclinationDegrees": 65.2,

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "ek-draconis",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 5647,
+      "lowerKelvin": 5647,
+      "upperKelvin": 5647,
+      "citation": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: Teff: 5647 K; the source gives no uncertainty, so the range is the value itself, https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+    },
+    "note": "The Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 14390+6417 KON 1: 0.8 arcsec apart, magnitudes 6 and 8.9: the companion gives 6.5% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature, so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "hd-6569-corona",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/hd-6569-corona/source/volume-sep-2015.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/hd-6569-corona/source/provenance.json"
+    },
+    {
+      "path": "src/objects/hd-6569-corona/source/density-sep-2015.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      16.60973607689118,
+      -14.297119613571375
+    ],
+    "distancePc": 45.46657588227225,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.00007773523846358773
+  },
+  "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+  "description": "HD 6569’s corona, derived here from an observed map of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
+  "defaultDataset": "sep-2015",
+  "framingRadiusUnits": 4,
+  "attachedTo": "hd-6569",
+  "acceptedLabResult": "hd-6569-corona-density-grids",
+  "compactInputs": {
+    "path": "src/objects/hd-6569-corona/source/volume-sep-2015.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "sep-2015",
+      "label": "Derived corona · Sep 2015",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/hd-6569-corona/source/volume-sep-2015.json"
+      }
+    }
+  ]
+}

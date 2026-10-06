@@ -1,0 +1,54 @@
+{
+  "id": "tyc-5164-567-1",
+  "name": "TYC 5164-567-1",
+  "system": "TYC 5164-567-1 system",
+  "description": "A star 0.89 solar radii and 0.9 solar masses that turns once in 4.68 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 4222102218052861440",
+  "gaia": "4222102218052861440",
+  "paper": {
+    "url": "https://arxiv.org/abs/1601.00684",
+    "credit": "Folsom et al., arXiv:1601.00684"
+  },
+  "radius": {
+    "value": 0.89,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: radius 0.89 solar radii",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "mass": {
+    "value": 0.9,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: mass 0.9 solar masses",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "temperature": {
+    "value": 5151,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 243635796: Teff",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+  },
+  "spin": {
+    "inclinationDegrees": 65,
+    "periodDays": 4.68,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: rotation period 4.68 d and an axis 65 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "The Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 20048-0239 ELP 45 AB: 2.7 arcsec apart, magnitudes 8.05 and 10.31: the companion gives 11.1% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 89% of the Sun's width that turns once in 4.68 days, with a mapped magnetic field.",
+    "introduction": "Folsom et al. give it 0.89 solar radii, 0.9 solar masses, a rotation period of 4.68 days and an axis tilted 65° from the line of sight.",
+    "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+  },
+  "notes": [],
+  "order": 5802
+}

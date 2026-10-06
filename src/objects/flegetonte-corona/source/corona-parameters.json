@@ -1,0 +1,130 @@
+{
+  "schema": "cssearth-published-model-parameters@2",
+  "objectId": "flegetonte-corona",
+  "citation": "Freund et al. (2022), A&A 664, A105: 2RXS J114543.4+024925, 17.27 arcsec from the star's Gaia position, stellar probability 0.9976; Johnstone & Güdel (2015), A&A 578, A129: Equation 4: T = 0.11 F_X^0.26 million kelvin; Wood et al. (2021), ApJ 915, 37: Section 5.1 and Table 3: mass loss per unit surface rises as F_X^0.77",
+  "star": {
+    "id": "flegetonte",
+    "massSolar": 0.83683115,
+    "radiusSolar": 0.846190168175938,
+    "radiusArcsec": 0.00013404544764424495,
+    "distancePc": 29.357055706167532,
+    "sceneOriginRaDecDeg": [
+      176.42481973958206,
+      2.820639771490236
+    ],
+    "inclinationDegrees": 68.10000000000001
+  },
+  "xray": {
+    "fluxErgCm2S": 1.6e-13,
+    "band": "0.1 to 2.4 keV (ROSAT)",
+    "luminosityErgS": 1.6498935737245465e+28,
+    "surfaceFluxErgCm2S": 378848.9694977585
+  },
+  "temperature": {
+    "kelvin": 3103086.4422066864,
+    "measured": false
+  },
+  "massLoss": {
+    "solar": 4.594675608152899,
+    "measured": false,
+    "solarMassLossSolarMassesPerYear": 2e-14
+  },
+  "wind": {
+    "soundKmS": 206.55829201546177,
+    "criticalRadii": 2.2107735421600876,
+    "speedAtSurfaceKmS": 56.43222140162553,
+    "speedAt4RadiiKmS": 326.4744626013463
+  },
+  "atRest": {
+    "scaleHeightRadii": 0.2261651817632408,
+    "basePerCm3": 517386659.0150239,
+    "emissionMeasureCm3": 1.8338037981297296e+50
+  },
+  "method": {
+    "sourceRadii": 2.5,
+    "nearRadii": 1.2,
+    "nearWidthDegrees": 15,
+    "farRadii": 2,
+    "farWidthDegrees": 8,
+    "decayPower": 3,
+    "harmonicDegree": 15,
+    "mapCells": [
+      180,
+      90
+    ]
+  },
+  "maps": {
+    "jan-2008": {
+      "label": "Jan 2008",
+      "surface": "radial-field-2008-01",
+      "meanAbsGauss": 8.853466389785384,
+      "harmonicsResidual": 0.0018379659147683266,
+      "neutralLineCells": 452,
+      "skyWithin10DegreesOfLine": 0.19031212052695237,
+      "openShare": [
+        {
+          "radii": 1.05,
+          "share": 0.3071607021415854
+        },
+        {
+          "radii": 1.2,
+          "share": 0.3791358178463587
+        },
+        {
+          "radii": 1.5,
+          "share": 0.5288978885411101
+        },
+        {
+          "radii": 2,
+          "share": 0.7801848828621395
+        },
+        {
+          "radii": 2.4,
+          "share": 0.9576529788126643
+        }
+      ],
+      "electronsPerCm3OffSheet": [
+        {
+          "radii": 1.2,
+          "density": 14455835.881219193
+        },
+        {
+          "radii": 2,
+          "density": 1170521.5314955814
+        },
+        {
+          "radii": 3,
+          "density": 280249.9913976672
+        },
+        {
+          "radii": 4,
+          "density": 129987.4691551122
+        }
+      ],
+      "sheetOverOffSheetAt2Radii": 48.45170553556287
+    }
+  },
+  "display": {
+    "densityRangePerCm3": [
+      100000,
+      1000000000
+    ],
+    "innerFadeRadii": [
+      1,
+      1.16
+    ],
+    "outerFadeRadii": [
+      2.6,
+      4
+    ],
+    "fullScaleColumnRadii": 4.76,
+    "topAlpha": 0.9,
+    "color": [
+      1,
+      0.914,
+      0.843
+    ],
+    "exposureGain": 0.4837363640743794
+  },
+  "notes": "The published numbers this corona's amount of gas follows from, and what packages/telescope-cli/src/new-object/corona/corona-bank.mts computes from them and from the star's magnetic maps."
+}

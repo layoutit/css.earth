@@ -21,6 +21,24 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-370 (pscomppars): age 1.4 Gyr, from Sozzetti et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.535..531S/abstract)",
   "rotationPeriodDays": 13.55,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-370 (pscomppars): rotation period 13.55 d, from Sozzetti et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.535..531S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 11.4116,
+      "source": "VizieR I/358/vrm (Gaia DR3 Part 4. Variability), column Prot: 11.411584235862978 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 13.34,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 13.34 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.07549,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.07549 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 13.4274,
+      "source": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 13.427357 d, the row 0.7 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-370 (pscomppars): projected rotation speed 3.3 km/s, from Sozzetti et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.535..531S/abstract)",
   "spinInclinationDegrees": 69.3,

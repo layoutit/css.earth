@@ -15,6 +15,14 @@
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-4527 (pscomppars): spectral type M2V:, from Turnbull 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv151001731T/abstract)",
   "luminosityLogSolar": -1.398,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4527 (pscomppars): log10 of the luminosity in solar units -1.39838, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 33,
+  "rotationPeriodSource": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 33 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 33,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 33 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.16,
   "projectedRotationSpeedSource": "SIMBAD, G 2-33: projected rotation speed 3.16 km/s, the measurement SIMBAD prefers (2010MNRAS.407.1657H)",
   "shape": {

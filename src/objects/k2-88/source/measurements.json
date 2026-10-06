@@ -15,6 +15,22 @@
   "spectralTypeSource": "SIMBAD, K2-88: spectral type M1V (2017ApJ...836..167D)",
   "luminosityLogSolar": -1.545,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-88 (pscomppars): log10 of the luminosity in solar units -1.54478, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 32.21,
+  "rotationPeriodSource": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 32.21 d, the row 0.1 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 32.21,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 32.21 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 31.5108,
+      "source": "VizieR J/ApJS/243/28/table6 (M-type star magnetic activities from LAMOST & Kepler), column Per: 31.510787 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 32.21,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 32.21 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

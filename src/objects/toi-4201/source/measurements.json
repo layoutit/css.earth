@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4201 (pscomppars): age 1.4 Gyr, from Gan et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..165G/abstract)",
   "rotationPeriodDays": 17.3,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-4201 (pscomppars): rotation period 17.3 d, from Gan et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..165G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 17.3,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 17.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.65,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4201 (pscomppars): projected rotation speed 1.65 km/s, from Gan et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...969L..24G/abstract)",
   "spinInclinationDegrees": 63.6,

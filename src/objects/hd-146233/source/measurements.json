@@ -17,8 +17,70 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4345775217221821312, flags_flame 00: lum_flame 1.1064116 solar luminosities (16th to 84th percentiles 1.101025 to 1.1118286); its log10 is recorded",
   "ageGyr": 9.946,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4345775217221821312, flags_flame 00: age_flame 9.946297 Gyr (16th to 84th percentiles 8.763813 to 11.1285515)",
+  "rotationPeriodDays": 22.3,
+  "rotationPeriodSource": "VizieR J/MNRAS/485/L68/table1a (The evolution of stellar rotation), column Prot: 22.3 d, the row 0.0 arcsec from the star's J2000 place. The middle of 14 catalogued periods, 14 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 20,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 20 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.7,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 23.7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 24 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.7,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 22.7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.7,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 22.7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.7,
+      "source": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 22.7 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.7,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 22.7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.2,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 22.2 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.3,
+      "source": "VizieR J/MNRAS/485/L68/table1a (The evolution of stellar rotation), column Prot: 22.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 21.9,
+      "source": "VizieR J/MNRAS/485/L68/table1a (The evolution of stellar rotation), column ProtP: 21.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.1,
+      "source": "VizieR J/MNRAS/485/L68/table1a (The evolution of stellar rotation), column ProtPRo2: 20.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.3,
+      "source": "VizieR J/MNRAS/485/L68/table1b (The evolution of stellar rotation), column Prot: 22.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 21.9,
+      "source": "VizieR J/MNRAS/485/L68/table1b (The evolution of stellar rotation), column ProtP: 21.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.1,
+      "source": "VizieR J/MNRAS/485/L68/table1b (The evolution of stellar rotation), column ProtPRo2: 20.1 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.3,
   "projectedRotationSpeedSource": "SIMBAD, * 18 Sco: projected rotation speed 2.3 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "spinInclinationDegrees": 60.4,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.166 solar radii): sin i = v sin i × P / (2πR) = 0.869. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

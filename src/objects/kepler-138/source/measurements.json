@@ -19,6 +19,86 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-138 (pscomppars): log10 of the luminosity in solar units -1.25181, from Piaulet et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023NatAs...7..206P/abstract)",
   "ageGyr": 2.21,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-138 (pscomppars): age 2.21 Gyr, from Gaidos et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.534.3277G/abstract)",
+  "rotationPeriodDays": 19.12,
+  "rotationPeriodSource": "VizieR J/ApJS/244/21/table3 (Surface rotation & activity of Kepler stars. I.), column Prot: 19.12 d, the row 0.1 arcsec from the star's J2000 place. The middle of 19 catalogued periods, 16 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 18.9371,
+      "source": "VizieR J/A+A/560/A4/table (Rotation periods of active Kepler stars), column P1: 18.9371 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.7345,
+      "source": "VizieR J/A+A/560/A4/table (Rotation periods of active Kepler stars), column P2: 23.7345 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.38,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 19.38 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.38,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 19.38 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.39,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 18.39 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.12,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 19.12 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.86,
+      "source": "VizieR J/A+A/694/A157/tablea1 (Earth 2.0 candidates stellar magnetic activity), column Prot: 18.86 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.12,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 19.12 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.394,
+      "source": "VizieR J/ApJ/775/L11/table1 (Stellar rotation periods for KOIs), column Prot: 19.394 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.34,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 19.34 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.7,
+      "source": "VizieR J/ApJ/803/69/table1 (Kepler planetary host stars rotation periods), column Prot: 9.7 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.39,
+      "source": "VizieR J/ApJ/807/170/table2 (Prograde vs retrogade motions. II. KOIs), column Prot: 19.39 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.4,
+      "source": "VizieR J/ApJS/218/26/table5 (Parameters of planets orbiting coolest dwarfs), column Prot: 19.4 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.12,
+      "source": "VizieR J/ApJS/244/21/table3 (Surface rotation & activity of Kepler stars. I.), column Prot: 19.12 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.8357,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 3.8357 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.86,
+      "source": "VizieR J/MNRAS/432/1203/table2 (Rotation periods of M-dwarf stars), column Per: 18.86 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.12,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 19.12 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.12,
+      "source": "VizieR J/MNRAS/533/1290/table1 (Properties of late-type stars in Kelper field), column Per: 19.12 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.937,
+      "source": "VizieR J/other/RMxAA/56.139/keplerd (On the evolution of angular momentum), column Per: 18.937 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.62,
   "projectedRotationSpeedSource": "SIMBAD, Kepler-138: projected rotation speed 1.62 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "shape": {

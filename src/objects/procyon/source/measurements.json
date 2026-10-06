@@ -11,6 +11,22 @@
   "effectiveTemperatureSource": "Aufdenberg, Ludwig & Kervella (2005), ApJ 633, 424, Table 7: effective temperature 6543 +/- 84 K from the angular diameter and the bolometric flux (https://doi.org/10.1086/452622)",
   "surfaceGravityLogg": 3.99,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/procyon.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.992, rounded to two decimals",
+  "rotationPeriodDays": 23,
+  "rotationPeriodSource": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 23 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 23,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 23 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protlit: 3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 23 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

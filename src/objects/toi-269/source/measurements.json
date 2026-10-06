@@ -17,6 +17,14 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-269 (pscomppars): [Fe/H] -0.29 dex, from Cointepas et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...650A.145C/abstract)",
   "luminosityLogSolar": -1.647,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-269 (pscomppars): log10 of the luminosity in solar units -1.64675, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 35.7,
+  "rotationPeriodSource": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 35.7 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 35.7,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 35.7 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

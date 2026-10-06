@@ -19,6 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-162 (pscomppars): log10 of the luminosity in solar units -0.65691, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 13.299,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3694878833385971840, flags_flame 00: age_flame 13.299436 Gyr (16th to 84th percentiles 10.62868 to 13.5)",
+  "rotationPeriodDays": 14.5576,
+  "rotationPeriodSource": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 14.557579 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14.97,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 14.97 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.5576,
+      "source": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 14.557579 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

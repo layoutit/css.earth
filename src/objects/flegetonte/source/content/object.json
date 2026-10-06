@@ -52,6 +52,78 @@
         },
         "falseColor": false,
         "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,209 K and log g 4.51 (u1 0.597, u2 0.166): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "radial-field-2008-01",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Jan 2008",
+        "thumbnail": "flegetonte-dataset-radial-field-2008-01.webp",
+        "surface": "flegetonte-surface-radial-field-2008-01@2x.webp",
+        "poles": "flegetonte-poles-radial-field-2008-01@2x.webp",
+        "source": {
+          "id": "flegetonte-espadons-map-radial-field-2008-01",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-40",
+            "0",
+            "+40"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-40",
+              "0",
+              "+40"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Jan 2008, reconstructed in this project from 10 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 68° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "corona-jan-2008",
+        "label": "Derived corona",
+        "thumbnail": "flegetonte-dataset-color.webp",
+        "volume": {
+          "objectId": "flegetonte-corona",
+          "datasetId": "jan-2008",
+          "surface": "color"
+        },
+        "notes": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. Gas at rest is placed along the line where the field of the Jan 2008 map reverses, and the wind everywhere else. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 3.1 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 4.6 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. Drawn out to 4 stellar radii in the star's own color; at each distance brightness is proportional to density."
       }
     ]
   },

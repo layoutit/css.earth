@@ -17,8 +17,18 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-6324 (pscomppars): [Fe/H] -0.32 dex, from Lee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..36L/abstract)",
   "luminosityLogSolar": -1.998,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6324 (pscomppars): log10 of the luminosity in solar units -1.99802, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 1.007,
+  "rotationPeriodSource": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 1.007 d, the row 0.8 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.007,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 1.007 d, the row 0.8 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6324 (pscomppars): projected rotation speed 2 km/s, from Lee et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...983L..36L/abstract)",
+  "spinInclinationDegrees": 7.8,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.293 solar radii): sin i = v sin i × P / (2πR) = 0.136. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

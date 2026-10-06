@@ -17,6 +17,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of mu Leo (pscomppars): log10 of the luminosity in solar units 1.797, from Lee et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...566A..67L/abstract)",
   "ageGyr": 3.35,
   "ageSource": "NASA Exoplanet Archive, composite parameters of mu Leo (pscomppars): age 3.35 Gyr, from Lee et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...566A..67L/abstract)",
+  "rotationPeriodDays": 268,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 268 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 268,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 268 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of mu Leo (pscomppars): projected rotation speed 2.4 km/s, from Lee et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014A&A...566A..67L/abstract)",
   "shape": {

@@ -1,0 +1,78 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "ek-draconis",
+  "angularDiameterMas": 0.25,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 653,958 km at 34.40 pc = 0.25 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 34.404388048325885,
+  "distanceSource": "Gaia DR3 parallax 29.0661 +/- 0.0217 mas (same row, RUWE 1.43): 34.40 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+  "radiusKm": 653958,
+  "radiusSource": "Radius 0.94 solar radii from Waite et al., arXiv:1611.07751, Table 1: radius 0.94 solar radii (https://arxiv.org/abs/1611.07751): 653,958 km at 695,700 km per solar radius. Mass 0.95 solar masses from Waite et al., arXiv:1611.07751, Table 1: mass 0.95 solar masses (https://arxiv.org/abs/1611.07751); GM is that mass times the JPL solar GM. Temperature 5647 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82). Spin inclination 60 degrees and rotation period 2.766 d from Waite et al., arXiv:1611.07751, Table 1: rotation period 2.766 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1611.07751). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5647,
+  "effectiveTemperatureSource": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82)",
+  "surfaceGravityLogg": 4.47,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ek-draconis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.470, rounded to two decimals",
+  "spectralType": "G5VFe-0.7CH-1(k)",
+  "spectralTypeSource": "SIMBAD, V* EK Dra: spectral type G5VFe-0.7CH-1(k) (2003AJ....126.2048G)",
+  "rotationPeriodDays": 2.64,
+  "rotationPeriodSource": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 2.64 d, the row 0.0 arcsec from the star's J2000 place. The middle of 13 catalogued periods, 11 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.6,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 2.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.68,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 2.68 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.6,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 2.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.64,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 2.64 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.66857,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 2.66857 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.67,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 2.67 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.61,
+      "source": "VizieR J/ApJ/754/69/table5 (UV spectroscopy of solar-mass stars), column Prot: 2.61 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.62,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 2.62 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.8,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 2.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.686,
+      "source": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 2.686 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.77,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 2.77 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.8,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 0.8 d, the row 0.2 arcsec from the star's J2000 place"
+    }
+  ],
+  "projectedRotationSpeedKmS": 17,
+  "projectedRotationSpeedSource": "SIMBAD, V* EK Dra: projected rotation speed 17 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -17,6 +17,42 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4891725758804030208, flags_flame 00: lum_flame 1.0577374 solar luminosities (16th to 84th percentiles 1.0522983 to 1.0631976); its log10 is recorded",
   "ageGyr": 6.463,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4891725758804030208, flags_flame 00: age_flame 6.4628024 Gyr (16th to 84th percentiles 5.4065857 to 7.519862)",
+  "rotationPeriodDays": 2.39,
+  "rotationPeriodSource": "VizieR J/ApJ/890/46/table1 (Superflares on solar-type stars from TESS first year), column Per: 2.39 d, the row 0.0 arcsec from the star's J2000 place. The middle of 8 catalogued periods, 7 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.25,
+      "source": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 4.25 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.3,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 2.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.39,
+      "source": "VizieR J/AJ/164/213/table1 (Power-law for cumulative flare frequency distributions), column Prot: 2.39 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.4,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 2.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.39661,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 2.39661 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.39,
+      "source": "VizieR J/ApJ/890/46/table1 (Superflares on solar-type stars from TESS first year), column Per: 2.39 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.32,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 2.32 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.39234,
+      "source": "VizieR J/MNRAS/496/1197/table4 (Young exoplanets in TESS sectors 1-5), column Prot: 2.392344 d, the row 0.9 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 20.52,
   "projectedRotationSpeedSource": "SIMBAD, HD 29615: projected rotation speed 20.52 km/s, the measurement SIMBAD prefers (2021A&A...645A..30Z)",
   "shape": {

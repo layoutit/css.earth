@@ -13,6 +13,16 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kornephoros.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.498, rounded to two decimals",
   "spectralType": "G7IIIaFe-0.5",
   "spectralTypeSource": "SIMBAD, * bet Her: spectral type G7IIIaFe-0.5 (1989ApJS...71..245K)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 176,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 176 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.85764,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 3.85764 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3,
   "projectedRotationSpeedSource": "SIMBAD, * bet Her: projected rotation speed 3 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {

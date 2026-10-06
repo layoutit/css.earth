@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of Wolf 327 (pscomppars): age 4.1 Gyr, from Murgas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)",
   "rotationPeriodDays": 44.4,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Wolf 327 (pscomppars): rotation period 44.4 d, from Murgas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.9762,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 0.9762 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Wolf 327 (pscomppars): projected rotation speed 2 km/s, from Murgas et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract)",
   "shape": {

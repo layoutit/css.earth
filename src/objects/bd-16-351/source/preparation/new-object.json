@@ -1,0 +1,54 @@
+{
+  "id": "bd-16-351",
+  "name": "BD-16 351",
+  "system": "BD-16 351 system",
+  "description": "A star 0.88 solar radii and 0.9 solar masses that turns once in 3.21 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 5147904718169224704",
+  "gaia": "5147904718169224704",
+  "paper": {
+    "url": "https://arxiv.org/abs/1601.00684",
+    "credit": "Folsom et al., arXiv:1601.00684"
+  },
+  "radius": {
+    "value": 0.88,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: radius 0.88 solar radii",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "mass": {
+    "value": 0.9,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: mass 0.9 solar masses",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "temperature": {
+    "value": 5291,
+    "source": "SIMBAD, measurements of BD-16 351 (table mesFe_h), row of 2024A&A...690A..97C: Teff",
+    "url": "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt"
+  },
+  "spin": {
+    "inclinationDegrees": 42,
+    "periodDays": 3.21,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.21 d and an axis 42 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "The Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 02016-1610 ELP 3: 0.5 arcsec apart, magnitudes 8.43 and 9.09: the companion gives 35.3% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 88% of the Sun's width that turns once in 3.21 days, with a mapped magnetic field.",
+    "introduction": "Folsom et al. give it 0.88 solar radii, 0.9 solar masses, a rotation period of 3.21 days and an axis tilted 42° from the line of sight.",
+    "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+  },
+  "notes": [],
+  "order": 5798
+}

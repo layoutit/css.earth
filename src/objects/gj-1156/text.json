@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gj-1156",
+  "card": {
+    "text": "A star 16% of the Sun's width that turns once in 11.8 hours, with a mapped magnetic field.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1005-5552",
+        "url": "https://arxiv.org/abs/1005.5552",
+        "label": "Morin et al. (2010)",
+        "checked": "2026-10-06",
+        "locator": "Morin et al., arXiv:1005.5552, Table 1"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Morin et al. give it 0.16 solar radii, 0.14 solar masses, a rotation period of 11.8 hours and an axis tilted 60° from the line of sight.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1005-5552",
+        "url": "https://arxiv.org/abs/1005.5552",
+        "label": "Morin et al. (2010)",
+        "checked": "2026-10-06",
+        "locator": "Morin et al., arXiv:1005.5552, Table 1"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "radial-field-2007-03": {
+      "title": "Radial field, Mar 2007",
+      "detail": "3 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "radial-field-2008-01": {
+      "title": "Radial field, Jan 2008",
+      "detail": "3 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "radial-field-2009-01": {
+      "title": "Radial field, Jan 2009",
+      "detail": "3 epochs, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "corona-mar-2007": {
+      "title": "Derived corona, Mar 2007",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Mar 2007. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "cadc-cfht-espadons",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+          "label": "CFHT ESPaDOnS · mapped here: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-jan-2008": {
+      "title": "Derived corona, Jan 2008",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Jan 2008. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "cadc-cfht-espadons",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+          "label": "CFHT ESPaDOnS · mapped here: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    },
+    "corona-jan-2009": {
+      "title": "Derived corona, Jan 2009",
+      "detail": "Derived, not an image",
+      "summary": "Derived here from the field mapped in Jan 2009. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "cadc-cfht-espadons",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+          "label": "CFHT ESPaDOnS · mapped here: the magnetic map",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "vizier-j-a-a-664-a105",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/664/A105",
+          "label": "Freund et al. (2022), A&A 664, A105",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-1505-00643",
+          "url": "https://arxiv.org/abs/1505.00643",
+          "label": "Johnstone & Güdel (2015), A&A 578, A129",
+          "checked": "2026-10-06"
+        },
+        {
+          "catalogueId": "arxiv-2105-00019",
+          "url": "https://arxiv.org/abs/2105.00019",
+          "label": "Wood et al. (2021), ApJ 915, 37",
+          "checked": "2026-10-06"
+        }
+      ]
+    }
+  }
+}

@@ -19,6 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of CoRoT-7 (pscomppars): log10 of the luminosity in solar units -0.28938, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 1.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of CoRoT-7 (pscomppars): age 1.8 Gyr, from John et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.515.3975J/abstract)",
+  "rotationPeriodDays": 21.783,
+  "rotationPeriodSource": "VizieR J/other/RMxAA/56.139/corotd (On the evolution of angular momentum), column Per: 21.783 d, the row 0.2 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 22.4,
+      "source": "VizieR J/AJ/155/177/table1 (Obliquities of planetary & eclipsing binary systems), column Pphot: 22.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 21.783,
+      "source": "VizieR J/other/RMxAA/56.139/corotd (On the evolution of angular momentum), column Per: 21.783 d, the row 0.2 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of CoRoT-7 (pscomppars): projected rotation speed 3.5 km/s, from Leger et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...506..287L/abstract)",
   "shape": {

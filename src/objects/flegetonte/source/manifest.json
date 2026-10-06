@@ -150,6 +150,41 @@
           }
         ]
       }
+    },
+    {
+      "id": "flegetonte-espadons-map-radial-field-2008-01",
+      "path": "science/espadons/flegetonte-2008-01.dat",
+      "origin": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "productId": "Magnetic map of HD 102195, Jan 2008, from 10 ESPaDOnS spectra",
+      "title": "Magnetic map of HD 102195 from 10 polarised spectra of 19 January 2008 to 30 January 2008: radial, azimuthal and meridional field on a longitude-latitude grid",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "credit": "CFHT ESPaDOnS, CFHT programs 07BC17, 07BF10, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+      "displayCredit": "CFHT ESPaDOnS · mapped here",
+      "license": "CC BY 4.0 for the archived spectra (Canadian Astronomy Data Centre); reduction by this project",
+      "licenseEvidence": [
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program flegetonte-2008-01, which pins every archived spectrum by its size. The run's receipt (the line list, the codes and each step's result) is written again by that command under output/espadons and is not kept in git.",
+      "redistribution": "Archived spectra under CC BY 4.0, reduced here.",
+      "consumers": [
+        "espadons-zdi"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cadc-cfht-espadons",
+            "role": "material",
+            "evidence": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+          },
+          {
+            "catalogueId": "arxiv-1711-08636",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1711.08636"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

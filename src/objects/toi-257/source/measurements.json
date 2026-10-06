@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-257 (pscomppars): log10 of the luminosity in solar units 0.63649, from Addison et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.502.3704A/abstract)",
   "ageGyr": 4.811,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4747624104168195072, flags_flame 00: age_flame 4.8106437 Gyr (16th to 84th percentiles 4.278926 to 5.342395)",
+  "rotationPeriodDays": 14.8104,
+  "rotationPeriodSource": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 14.8104 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14.8104,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 14.8104 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 9.4,
   "projectedRotationSpeedSource": "SIMBAD, HD 19916: projected rotation speed 9.4 km/s, the measurement SIMBAD prefers (2025A&A...697A.102T)",
   "shape": {

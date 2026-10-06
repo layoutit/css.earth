@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hip-12545",
+  "angularDiameterMas": 0.22,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 744,399 km at 44.30 pc = 0.22 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 44.296259457873006,
+  "distanceSource": "Gaia DR3 parallax 22.5753 +/- 0.0216 mas (same row, RUWE 1.16): 44.30 pc, no zero-point correction",
+  "radiusKm": 744399,
+  "radiusSource": "Radius 1.07 solar radii from Folsom et al., arXiv:1601.00684, Table 2: radius 1.07 solar radii (https://arxiv.org/abs/1601.00684): 744,399 km at 695,700 km per solar radius. Mass 0.95 solar masses from Folsom et al., arXiv:1601.00684, Table 2: mass 0.95 solar masses (https://arxiv.org/abs/1601.00684); GM is that mass times the JPL solar GM. Temperature 4100 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 318785502: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82). Spin inclination 39 degrees and rotation period 4.83 d from Folsom et al., arXiv:1601.00684, Table 2: rotation period 4.83 d and an axis 39 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1601.00684). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4100,
+  "effectiveTemperatureSource": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 318785502: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82)",
+  "surfaceGravityLogg": 4.36,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hip-12545.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.357, rounded to two decimals",
+  "spectralType": "K6Ve",
+  "spectralTypeSource": "SIMBAD, BD+05 378: spectral type K6Ve (2006A&A...460..695T)",
+  "rotationPeriodDays": 4.83,
+  "rotationPeriodSource": "VizieR J/A+A/600/A83/sample (Photometry of beta Pic members), column Prot: 4.83 d, the row 0.4 arcsec from the star's J2000 place. The middle of 6 catalogued periods, 5 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.25,
+      "source": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 1.25 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.83,
+      "source": "VizieR J/A+A/591/A43/sample (Differential rotation in solar-like stars), column <P>: 4.83 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.83,
+      "source": "VizieR J/A+A/600/A83/sample (Photometry of beta Pic members), column Prot: 4.83 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.9,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 4.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.83,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 4.83 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.85437,
+      "source": "VizieR J/MNRAS/496/1197/table4 (Young exoplanets in TESS sectors 1-5), column Prot: 4.854369 d, the row 1.5 arcsec from the star's J2000 place"
+    }
+  ],
+  "projectedRotationSpeedKmS": 40,
+  "projectedRotationSpeedSource": "SIMBAD, BD+05 378: projected rotation speed 40 km/s, the measurement SIMBAD prefers (2006A&A...460..695T)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

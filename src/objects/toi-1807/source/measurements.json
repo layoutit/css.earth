@@ -21,6 +21,24 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1807 (pscomppars): age 2.1 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "rotationPeriodDays": 8.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1807 (pscomppars): rotation period 8.8 d, from Nardiello et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...664A.163N/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.549,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 0.549 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.31,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 4.31 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.01,
+      "source": "VizieR J/AJ/170/32/table3 (TI-DYE. III. TOI-2076 light curves & comoving stars), column Prot: 9.01 d, the row 2.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.242,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 4.242 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1807 (pscomppars): projected rotation speed 4.2 km/s, from Nardiello et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...664A.163N/abstract)",
   "spinInclinationDegrees": 78.3,

@@ -19,6 +19,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of IRAS 04125+2902 (pscomppars): age 0.0033 Gyr, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract)",
   "rotationPeriodDays": 11.31,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of IRAS 04125+2902 (pscomppars): rotation period 11.31 d, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 10.9473,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 10.94728 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.1434,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 12.1434 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 7.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of IRAS 04125+2902 (pscomppars): projected rotation speed 7.1 km/s, from Barber et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024Natur.635..574B/abstract)",
   "shape": {

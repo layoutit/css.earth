@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of Qatar-2 (pscomppars): age 5 Gyr, from Mancini et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract)",
   "rotationPeriodDays": 18,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Qatar-2 (pscomppars): rotation period 18 d, from Mo&#x10D;nik et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017MNRAS.471..394M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 18.25,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 18.25 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.03,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 18.03 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.5,
+      "source": "VizieR J/AJ/155/177/table1 (Obliquities of planetary & eclipsing binary systems), column Pphot: 18.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.28,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Qatar-2 (pscomppars): projected rotation speed 3.28 km/s, from Mancini et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract)",
   "shape": {

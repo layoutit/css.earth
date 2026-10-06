@@ -17,6 +17,58 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of GJ 15 A (pscomppars): [Fe/H] -0.34 dex, from Pinamonti et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...617A.104P/abstract)",
   "luminosityLogSolar": -1.655,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 15 A (pscomppars): log10 of the luminosity in solar units -1.655, from Pinamonti et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...617A.104P/abstract)",
+  "rotationPeriodDays": 44.99,
+  "rotationPeriodSource": "VizieR J/ApJ/960/62/table4 (Red dwarfs, Xray, UV, and CaII), column Prot: 44.99 d, the row 0.0 arcsec from the star's J2000 place. The middle of 12 catalogued periods, 11 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 44,
+      "source": "VizieR J/A+A/609/A117/table1 (CARMENES radial velocity curves of 7 M-dwarf), column Prot: 44 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 45,
+      "source": "VizieR J/A+A/652/A28/tablea1 (Activity indicators across the M dwarf domain), column Prot: 45 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 45,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 45 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 45,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 45 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 45,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 45 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 45,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 45 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 30.52,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 30.52 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.99,
+      "source": "VizieR J/ApJ/960/62/table2 (Red dwarfs, Xray, UV, and CaII), column Prot: 44.99 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.99,
+      "source": "VizieR J/ApJ/960/62/table4 (Red dwarfs, Xray, UV, and CaII), column Prot: 44.99 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 44.99,
+      "source": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 44.99 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 43.86,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 43.86 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 43.82,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 43.82 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.09,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 15 A (pscomppars): projected rotation speed 1.09 km/s, from Pinamonti et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...617A.104P/abstract)",
   "shape": {

@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 18599 (pscomppars): age 0.4 Gyr, from Desidera et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract)",
   "rotationPeriodDays": 8.73,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 18599 (pscomppars): rotation period 8.73 d, from Desidera et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 5.4,
+      "source": "VizieR J/A+A/639/A35/tablec1 (RV jitter and photometric var. correlation), column Prot: 5.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 8.69263,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 8.69263 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 8.489,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 8.489 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 18599 (pscomppars): projected rotation speed 4.5 km/s, from Desidera et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...675A.158D/abstract)",
   "shape": {

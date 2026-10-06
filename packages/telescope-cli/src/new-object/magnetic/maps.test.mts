@@ -52,3 +52,11 @@ test('a reduced map becomes the star page\'s records, on one scale, each sentenc
   assert.throws(() => magneticMapFiles({ host: 'hd-1', maps: [entry.maps[1]!] }, { id: 'hd-1', name: 'HD 1' }, [second], taken), /already exists and is not one of these maps/u);
   assert.throws(() => reducedMap(entry.maps[0]!, { ...receipt('x', 1, [-1, 1]), map: {} }, program(), TABLE), /no step of the ladder was chosen/u);
 });
+
+test('a run that names its star is that star\'s alone; any other is the star\'s at its place', async () => {
+  const { isRunOf } = await import('./maps.mts');
+  // EQ Pegasi A and B are 5.8 arcseconds apart.
+  const a = { object: 'eq-pegasi-a', ra: 352.9674, dec: 19.9373 }, unnamed = { ra: 352.9674, dec: 19.9373 };
+  assert.equal(isRunOf(a, 'eq-pegasi-a', 352.9691, 19.9372), true); assert.equal(isRunOf(a, 'eq-pegasi-b', 352.9691, 19.9372), false);
+  assert.equal(isRunOf(unnamed, 'eq-pegasi-b', 352.9691, 19.9372), true); assert.equal(isRunOf(unnamed, 'elsewhere', 10, 19.9372), false);
+});

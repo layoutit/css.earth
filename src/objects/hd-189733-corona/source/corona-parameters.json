@@ -200,6 +200,55 @@
         }
       ],
       "sheetOverOffSheetAt2Radii": 61.51400073021636
+    },
+    "jul-2023": {
+      "label": "Jul 2023",
+      "surface": "radial-field-2023-07",
+      "meanAbsGauss": 12.177015986254558,
+      "harmonicsResidual": 0.0025387259340080605,
+      "neutralLineCells": 498,
+      "skyWithin10DegreesOfLine": 0.1990829839483762,
+      "openShare": [
+        {
+          "radii": 1.05,
+          "share": 0.3355688107216799
+        },
+        {
+          "radii": 1.2,
+          "share": 0.39525521526503926
+        },
+        {
+          "radii": 1.5,
+          "share": 0.5270478787967754
+        },
+        {
+          "radii": 2,
+          "share": 0.7735553872457014
+        },
+        {
+          "radii": 2.4,
+          "share": 0.956822654851676
+        }
+      ],
+      "electronsPerCm3OffSheet": [
+        {
+          "radii": 1.2,
+          "density": 18356399.837798227
+        },
+        {
+          "radii": 2,
+          "density": 1747331.461623867
+        },
+        {
+          "radii": 3,
+          "density": 433115.5073498901
+        },
+        {
+          "radii": 4,
+          "density": 204789.945587416
+        }
+      ],
+      "sheetOverOffSheetAt2Radii": 61.35258921942941
     }
   },
   "display": {

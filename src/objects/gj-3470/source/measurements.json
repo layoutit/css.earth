@@ -21,6 +21,40 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 3470 (pscomppars): age 1.65 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "rotationPeriodDays": 21.54,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 3470 (pscomppars): rotation period 21.54 d, from Kosiarek et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....157...97K/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 34,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 34 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.7,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 20.7 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.7,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 20.7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 21.54,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 21.54 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 21.9,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 21.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 21.54,
+      "source": "VizieR J/ApJ/960/62/table4 (Red dwarfs, Xray, UV, and CaII), column Prot: 21.54 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 21.54,
+      "source": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 21.54 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.7,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 20.7 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.92,
   "projectedRotationSpeedSource": "SIMBAD, LP 424-4: projected rotation speed 0.92 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "spinInclinationDegrees": 45.7,

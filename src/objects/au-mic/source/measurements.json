@@ -21,6 +21,100 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of AU Mic (pscomppars): age 0.0185 Gyr, from Donati et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.525..455D/abstract)",
   "rotationPeriodDays": 4.856,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of AU Mic (pscomppars): rotation period 4.856 d, from Donati et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.525..455D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.9,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 4.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.85,
+      "source": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 4.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.84,
+      "source": "VizieR J/A+A/591/A43/sample (Differential rotation in solar-like stars), column <P>: 4.84 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 10 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.86,
+      "source": "VizieR J/A+A/600/A83/sample (Photometry of beta Pic members), column Prot: 4.86 d, the row 0.5 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.85,
+      "source": "VizieR J/A+A/638/A20/tableb1 (M dwarfs X-ray activity and rotation relations), column Prot: 4.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6,
+      "source": "VizieR J/A+A/639/A35/tablec1 (RV jitter and photometric var. correlation), column Prot: 6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.84,
+      "source": "VizieR J/A+A/652/A28/tablea1 (Activity indicators across the M dwarf domain), column Prot: 4.84 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.86,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 4.86 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.9,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 4.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.89,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 4.89 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.85,
+      "source": "VizieR J/A+A/672/A37/table1 (Activity indicators in M dwarfs), column Prot: 4.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.89,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 4.89 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.89,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 4.89 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.89,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 4.89 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.9,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 4.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.85,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 4.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.83167,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 4.83167 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.85,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 4.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.86,
+      "source": "VizieR J/ApJ/960/62/table2 (Red dwarfs, Xray, UV, and CaII), column Prot: 4.86 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.86,
+      "source": "VizieR J/ApJ/960/62/table4 (Red dwarfs, Xray, UV, and CaII), column Prot: 4.86 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.86,
+      "source": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 4.86 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.85,
+      "source": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 4.85 d, the row 0.8 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 8.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of AU Mic (pscomppars): projected rotation speed 8.5 km/s, from Donati et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.525..455D/abstract)",
   "spinInclinationDegrees": 71.2,

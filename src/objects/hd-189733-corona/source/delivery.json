@@ -3,7 +3,7 @@
   "id": "hd-189733-corona",
   "method": "density-grid",
   "request": {
-    "path": "src/objects/hd-189733-corona/source/volume-sep-2013.json"
+    "path": "src/objects/hd-189733-corona/source/volume-jul-2023.json"
   },
   "inputPins": [
     {
@@ -17,6 +17,9 @@
     },
     {
       "path": "src/objects/hd-189733-corona/source/density-sep-2013.ktx2"
+    },
+    {
+      "path": "src/objects/hd-189733-corona/source/density-jul-2023.ktx2"
     }
   ],
   "sky": {
@@ -29,13 +32,13 @@
     "arcsecPerUnit": 0.0001768401742724881
   },
   "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
-  "description": "HD 189733 A’s corona, derived here from 3 observed maps of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
-  "defaultDataset": "sep-2013",
+  "description": "HD 189733 A’s corona, derived here from 4 observed maps of the star’s surface magnetic field and its X-ray output. One unit is one stellar radius. It is not an observation and not a published result.",
+  "defaultDataset": "jul-2023",
   "framingRadiusUnits": 4,
   "attachedTo": "hd-189733",
   "acceptedLabResult": "hd-189733-corona-density-grids",
   "compactInputs": {
-    "path": "src/objects/hd-189733-corona/source/volume-sep-2013.json"
+    "path": "src/objects/hd-189733-corona/source/volume-jul-2023.json"
   },
   "compactMethod": "density-grid",
   "grids": [
@@ -61,6 +64,14 @@
       "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
       "recipe": {
         "path": "src/objects/hd-189733-corona/source/volume-sep-2013.json"
+      }
+    },
+    {
+      "id": "jul-2023",
+      "label": "Derived corona · Jul 2023",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "recipe": {
+        "path": "src/objects/hd-189733-corona/source/volume-jul-2023.json"
       }
     }
   ]

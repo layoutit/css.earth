@@ -13,6 +13,54 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kappa-ceti.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.527, rounded to two decimals",
   "spectralType": "G5V",
   "spectralTypeSource": "SIMBAD, * kap01 Cet: spectral type G5V (1989ApJS...71..245K)",
+  "rotationPeriodDays": 9.24,
+  "rotationPeriodSource": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 9.24 d, the row 0.0 arcsec from the star's J2000 place. The middle of 11 catalogued periods, 10 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 9.4,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 9.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.21,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 9.21 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.24,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 9.24 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.3,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 9.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.4,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 9.4 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 8.77,
+      "source": "VizieR J/ApJ/754/69/table5 (UV spectroscopy of solar-mass stars), column Prot: 8.77 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.24,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 9.24 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.3,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 9.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10.2,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 10.2 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.86,
   "projectedRotationSpeedSource": "SIMBAD, * kap01 Cet: projected rotation speed 5.86 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {

@@ -17,6 +17,16 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1775 (pscomppars): log10 of the luminosity in solar units -0.31605, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "ageGyr": 0.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1775 (pscomppars): age 0.8 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 15.7332,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 15.7332 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.329,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 5.329 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

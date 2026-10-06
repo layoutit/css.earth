@@ -13,6 +13,14 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-206.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.894, rounded to two decimals",
   "luminosityLogSolar": -1.836,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-206 (pscomppars): log10 of the luminosity in solar units -1.83581, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 45.8,
+  "rotationPeriodSource": "VizieR J/ApJ/962/47/table5 (TESS stellar rotation in the Southern CVZ), column Prot: 45.8 d, the row 2.4 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 45.8,
+      "source": "VizieR J/ApJ/962/47/table5 (TESS stellar rotation in the Southern CVZ), column Prot: 45.8 d, the row 2.4 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.09,
   "projectedRotationSpeedSource": "SIMBAD, TOI-206: projected rotation speed 4.09 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

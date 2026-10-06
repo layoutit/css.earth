@@ -2,13 +2,17 @@
  *
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --metadata --all
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --metadata <star id>...
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --metadata --all --periods [fresh]
  *
  * A star is a package whose source/measurements.json is a uniform-disc star's and whose body record holds a place on the
  * sky. The NASA Exoplanet Archive is asked once for the composite parameters of every host, and SIMBAD and the Gaia
  * Archive in groups of stars: SIMBAD by Gaia DR3 or Hipparcos identifier and by place for a star with neither, the Gaia
  * Archive by Gaia DR3 source. star-metadata.mts says which fields
  * are written and from which catalogue. Only the record changes: nothing is baked, and a field the record already holds
- * from its own source is left alone. Run again, the pass rewrites only what a catalogue changed. */
+ * from its own source is left alone. Run again, the pass rewrites only what a catalogue changed.
+ *
+ * `--periods` also looks for each star's rotation period in every catalogue table that prints one (rotation-catalogues.mts,
+ * some five hundred requests the first time). Without it, a star keeps the catalogued periods its record already lists. */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
@@ -18,14 +22,18 @@ import { simbadRows } from '../archives/tables/simbad-tap.mts';
 import { json } from '../dataset.mts';
 import { isConventionOnly } from '../magnetic/map-datasets.mts';
 import { NASA_TAP } from '../orbit.mts';
-import { gaiaFlameQuery, METADATA_FIELDS, parseGaiaRows, parseHostRows, PSCOMPPARS_QUERY, starMetadata, withMetadata, type GaiaRow, type HostRow, type SimbadRow } from './star-metadata.mts';
+import { cataloguedPeriods } from './rotation-catalogues.mts';
+import { gaiaFlameQuery, METADATA_FIELDS, parseGaiaRows, parseHostRows, PSCOMPPARS_QUERY, recordedPeriods, starMetadata, withMetadata, type CataloguedPeriod, type GaiaRow, type HostRow, type SimbadRow } from './star-metadata.mts';
 
 /** How far a catalogue's star may lie from the record's place and be the star, degrees: both are Gaia positions near 2016. */
 export const MATCH_DEGREES = 5 / 3600;
 /** Identifiers in one SIMBAD question, and places in one. */
 const NAMED = 200, PLACED = 20, SOURCES = 500;
 
-interface Star { readonly id: string; readonly path: string; readonly record: Record<string, unknown>; readonly raDegrees: number; readonly decDegrees: number; readonly identifier?: string; readonly gaiaDr3?: string; readonly measuredAxis: boolean }
+/** Where the rotation-period harvest is kept between runs. */
+export const PERIODS_KEPT = 'output/metadata/rotation-periods.jsonl';
+
+interface Star { readonly id: string; readonly path: string; readonly record: Record<string, unknown>; readonly raDegrees: number; readonly decDegrees: number; /** The place moved back to J2000 with the record's proper motion, where the catalogues list it. */ readonly j2000: { readonly raDegrees: number; readonly decDegrees: number }; readonly identifier?: string; readonly gaiaDr3?: string; readonly measuredAxis: boolean }
 const readJson = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8').catch(() => 'null')) as unknown;
 const apart = (a: { raDegrees: number; decDegrees: number }, raDegrees: number, decDegrees: number) => Math.hypot((a.raDegrees - raDegrees) * Math.cos(decDegrees * Math.PI / 180), a.decDegrees - decDegrees);
 
@@ -36,7 +44,8 @@ async function stars(root: string, ids: readonly string[]): Promise<Star[]> { co
     if (!isRecord(record) || record.schema !== UNIFORM_DISC_STAR_SCHEMA || !place || typeof place.rightAscensionDegrees !== 'number' || typeof place.declinationDegrees !== 'number') { if (ids.length) throw new Error(`${id} is not a star with a measurements record and a place on the sky.`); continue; }
     const gaiaDr3 = /Gaia DR3 (?:source )?(\d{10,})/u.exec(isRecord(place.sources) ? String(place.sources.position ?? '') : '')?.[1], hipparcos = typeof place.hipparcosId === 'number' || typeof place.hipparcosId === 'string' ? String(place.hipparcosId) : undefined;
     const rotation = await readJson(resolve(root, 'src/objects', id, 'source/preparation/rotation.json'));
-    out.push({ id, path, record, raDegrees: place.rightAscensionDegrees, decDegrees: place.declinationDegrees, ...(gaiaDr3 ? { identifier: `Gaia DR3 ${gaiaDr3}`, gaiaDr3 } : hipparcos ? { identifier: `HIP ${hipparcos}` } : {}), measuredAxis: isRecord(rotation) && !isConventionOnly(rotation) }); }
+    const years = (typeof place.positionEpochJulianYear === 'number' ? place.positionEpochJulianYear : 2000) - 2000, motion = (key: string) => typeof place[key] === 'number' ? place[key] * years / 3.6e6 : 0, dec2000 = place.declinationDegrees - motion('properMotionDecMasPerYear');
+    out.push({ id, path, record, raDegrees: place.rightAscensionDegrees, decDegrees: place.declinationDegrees, j2000: { raDegrees: place.rightAscensionDegrees - motion('properMotionRaMasPerYear') / Math.cos(dec2000 * Math.PI / 180), decDegrees: dec2000 }, ...(gaiaDr3 ? { identifier: `Gaia DR3 ${gaiaDr3}`, gaiaDr3 } : hipparcos ? { identifier: `HIP ${hipparcos}` } : {}), measuredAxis: isRecord(rotation) && !isConventionOnly(rotation) }); }
   return out; }
 
 const SIMBAD_COLUMNS = 'b.main_id, b.ra, b.dec, b.sp_type, b.sp_bibcode, r.vsini, r.bibcode AS vsini_bibcode', ROTATION = 'LEFT JOIN mesRot AS r ON r.oidref = b.oid AND r.mespos = 1';
@@ -63,11 +72,12 @@ function hostOf(star: Star, byGaia: ReadonlyMap<string, HostRow>, hosts: readonl
   return hosts.map(host => ({ host, degrees: apart(host, star.raDegrees, star.decDegrees) })).filter(entry => entry.degrees <= MATCH_DEGREES && !(entry.host.gaiaDr3 && star.gaiaDr3)).sort((a, b) => a.degrees - b.degrees)[0]?.host; }
 
 /** Writes the records; returns one line a changed star and a last line of counts. */
-export async function writeStarMetadata(root: string, ids: readonly string[], archive: Archive, report: (line: string) => void = () => undefined): Promise<string[]> {
+export async function writeStarMetadata(root: string, ids: readonly string[], archive: Archive, report: (line: string) => void = () => undefined, periods?: 'kept' | 'fresh'): Promise<string[]> {
   const list = await stars(root, ids), hosts = parseHostRows(await archive.text(`${NASA_TAP}?${new URLSearchParams({ query: PSCOMPPARS_QUERY, format: 'csv' })}`)), byGaia = new Map(hosts.flatMap(host => host.gaiaDr3 ? [[host.gaiaDr3, host] as const] : []));
   report(`${list.length} stars; the archive lists ${hosts.length} hosts.`);
   const catalogued = await simbadByStar(archive, list), flame = await gaiaBySource(archive, list), lines: string[] = [], counts = new Map<string, number>(); let hosted = 0;
-  for (const star of list) { const host = hostOf(star, byGaia, hosts), fields = starMetadata({ ...(typeof star.record.radiusKm === 'number' ? { radiusKm: star.record.radiusKm } : {}), measuredAxis: star.measuredAxis }, host, catalogued.get(star.id), star.gaiaDr3 ? flame.get(star.gaiaDr3) : undefined);
+  const harvested: Map<string, CataloguedPeriod[]> | undefined = periods ? await cataloguedPeriods(list.map(star => ({ id: star.id, ...star.j2000 })), resolve(root, PERIODS_KEPT), periods === 'fresh', report) : undefined;
+  for (const star of list) { const host = hostOf(star, byGaia, hosts), fields = starMetadata({ ...(typeof star.record.radiusKm === 'number' ? { radiusKm: star.record.radiusKm } : {}), measuredAxis: star.measuredAxis }, host, catalogued.get(star.id), star.gaiaDr3 ? flame.get(star.gaiaDr3) : undefined, harvested ? harvested.get(star.id) ?? [] : recordedPeriods(star.record));
     if (host) hosted++; for (const field of Object.keys(METADATA_FIELDS)) if (field in fields) counts.set(field, (counts.get(field) ?? 0) + 1);
     const next = json(withMetadata(star.record, fields)); if (next !== json(star.record)) { await writeFile(star.path, next); lines.push(`${star.id}: ${Object.keys(METADATA_FIELDS).filter(field => field in fields).join(', ') || 'no catalogued value'}`); report(lines.at(-1)!); } }
   lines.push(`${list.length} stars, ${hosted} of them archive hosts, ${catalogued.size} in SIMBAD and ${flame.size} with a Gaia FLAME row: ${Object.keys(METADATA_FIELDS).map(field => `${field} ${counts.get(field) ?? 0}`).join(', ')}.`);

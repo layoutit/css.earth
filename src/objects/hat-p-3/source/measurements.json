@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-3 (pscomppars): age 1.6 Gyr, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
   "rotationPeriodDays": 19.9,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HAT-P-3 (pscomppars): rotation period 19.9 d, from Bourrier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 19.6,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 19.6 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.46,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-3 (pscomppars): projected rotation speed 0.46 km/s, from Bourrier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract)",
   "spinInclinationDegrees": 12,

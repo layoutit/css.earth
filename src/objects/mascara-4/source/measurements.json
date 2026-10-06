@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of MASCARA-4 (pscomppars): log10 of the luminosity in solar units 1.08743, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "ageGyr": 0.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of MASCARA-4 (pscomppars): age 0.8 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodDays": 0.88,
+  "rotationPeriodSource": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 0.88 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.88,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 0.88 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 43,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of MASCARA-4 (pscomppars): projected rotation speed 43 km/s, from Zhang et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract)",
+  "spinInclinationDegrees": 24.7,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.79 solar radii): sin i = v sin i × P / (2πR) = 0.418. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

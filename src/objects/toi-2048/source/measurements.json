@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2048 (pscomppars): age 0.3 Gyr, from Newton et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164..115N/abstract)",
   "rotationPeriodDays": 7.97,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2048 (pscomppars): rotation period 7.97 d, from Newton et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164..115N/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 8.1,
+      "source": "VizieR J/AJ/164/115/table6 (TESS Hunt for Young and Maturing Exoplanets. VII.), column Per: 8.1 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.95,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 3.95 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2048 (pscomppars): projected rotation speed 4.8 km/s, from Newton et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164..115N/abstract)",
   "spinInclinationDegrees": 73.2,

@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1898 (pscomppars): log10 of the luminosity in solar units 0.55121, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "ageGyr": 3.1,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1898 (pscomppars): age 3.1 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "rotationPeriodDays": 1.0778,
+  "rotationPeriodSource": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.07778 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.07778,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.07778 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 7.44,
   "projectedRotationSpeedSource": "SIMBAD, HD 83342: projected rotation speed 7.44 km/s, the measurement SIMBAD prefers (2024ApJ...968L...2L)",
+  "spinInclinationDegrees": 5.6,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.613 solar radii): sin i = v sin i × P / (2πR) = 0.098. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

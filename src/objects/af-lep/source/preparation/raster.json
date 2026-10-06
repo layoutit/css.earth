@@ -47,6 +47,46 @@
           }
         }
       }
+    },
+    {
+      "id": "radial-field-2007-12",
+      "output": "af-lep-surface-{id}{suffix}.webp",
+      "thumbnail": "af-lep-dataset-{id}.webp",
+      "source": "science/espadons/af-lep-2007-12.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2007-12",
+        "label": "Dec 2007",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/af-lep-2007-12.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -57
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -150,
+        "maximum": 150,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-150",
+          "0",
+          "+150"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 19 ESPaDOnS spectra of 27 December 2007 to 30 December 2007 (reduced chi-square 1.30, against 1.9 with no field); mean field 20 G. A reduction made in this project, not a published map. Black line: 57 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Dec 2007",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
     }
   ],
   "emission": {

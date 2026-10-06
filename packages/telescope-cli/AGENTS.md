@@ -56,8 +56,12 @@ metallicity, luminosity, age, rotation period, projected rotation speed and the 
 `source/measurements.json`, each beside its source. `star-metadata.mts` owns the fields and which catalogue stands before
 which; `metadata.mts` asks the NASA Exoplanet Archive once, and SIMBAD and the Gaia Archive in groups of stars. The pass never
 replaces a value the record holds from its own source, computes a tilt only for a page that draws no measured axis, and bakes
-nothing. A tool that needs a star's rotation or type reads the record, not a catalogue; a new star gets its values by running
-the pass on it.
+nothing. A tool that needs a star's rotation or type reads the record, not a catalogue; the generator runs the pass on every star
+it writes. `--periods` adds the rotation periods no archive row gives: `rotation-catalogues.mts` asks the Virtual Observatory
+registry (RegTAP at the GAVO data centre) for every VizieR table with a rotation-period column and CDS X-Match for our stars
+in each, and the record keeps them all (`rotationPeriodsCatalogued`). One is adopted only when more than half agree with the middle one (`adoptPeriod`);
+two that disagree, often a rotation and its half, are left for a person or a fit to choose between. The registry is how a new kind of value is found too:
+ask it which tables print the column before reading any paper.
 
 The star survey behind `telescope stars GALAXY` is `src/stars/`. It and the generator's `--from-table` route
 (`src/new-object/archives/tables/table-stars.mts`) read VizieR's table metadata and SIMBAD through the same two modules,

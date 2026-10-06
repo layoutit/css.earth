@@ -17,6 +17,34 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3116883781327753216, flags_flame 00: lum_flame 1.6199714 solar luminosities (16th to 84th percentiles 1.6135772 to 1.6264321); its log10 is recorded",
   "ageGyr": 5.722,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3116883781327753216, flags_flame 00: age_flame 5.722326 Gyr (16th to 84th percentiles 4.879643 to 6.5648975)",
+  "rotationPeriodDays": 1.36,
+  "rotationPeriodSource": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 1.36 d, the row 0.0 arcsec from the star's J2000 place. The middle of 6 catalogued periods, 4 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.15,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 1.15 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.7522,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 3.7522 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.36,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 1.36 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.4,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 1.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 2 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.15,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 1.15 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 35.6,
   "projectedRotationSpeedSource": "SIMBAD, V* V1358 Ori: projected rotation speed 35.6 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

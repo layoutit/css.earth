@@ -19,8 +19,26 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 160691 (pscomppars): log10 of the luminosity in solar units 0.27848, from Gozdziewski et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...657..546G/abstract)",
   "ageGyr": 5.7,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 160691 (pscomppars): age 5.7 Gyr, from Benedict et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..295B/abstract)",
+  "rotationPeriodDays": 14.04,
+  "rotationPeriodSource": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 14.04 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14.04,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 14.04 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.04,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 14.04 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 31,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 31 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 160691 (pscomppars): projected rotation speed 3.1 km/s, from Benedict et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..295B/abstract)",
+  "spinInclinationDegrees": 35.9,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.467 solar radii): sin i = v sin i × P / (2πR) = 0.587. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

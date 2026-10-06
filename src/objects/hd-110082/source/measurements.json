@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 110082 (pscomppars): age 0.25 Gyr, from Tofflemire et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..171T/abstract)",
   "rotationPeriodDays": 2.34,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 110082 (pscomppars): rotation period 2.34 d, from Tofflemire et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..171T/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.3,
+      "source": "VizieR J/AJ/161/171/table7 (THYME. V. Discovering a new stellar association), column Prot: 2.3 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.149,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 2.149 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 25.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 110082 (pscomppars): projected rotation speed 25.3 km/s, from Tofflemire et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..171T/abstract)",
   "spinInclinationDegrees": 79.5,

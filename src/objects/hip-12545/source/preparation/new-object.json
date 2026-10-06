@@ -1,0 +1,43 @@
+{
+  "id": "hip-12545",
+  "name": "HIP 12545",
+  "system": "HIP 12545 system",
+  "description": "A star 1.07 solar radii and 0.95 solar masses that turns once in 4.83 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 18211043587721088",
+  "gaia": "18211043587721088",
+  "paper": {
+    "url": "https://arxiv.org/abs/1601.00684",
+    "credit": "Folsom et al., arXiv:1601.00684"
+  },
+  "radius": {
+    "value": 1.07,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: radius 1.07 solar radii",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "mass": {
+    "value": 0.95,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: mass 0.95 solar masses",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "temperature": {
+    "value": 4100,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 318785502: Teff",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+  },
+  "spin": {
+    "inclinationDegrees": 39,
+    "periodDays": 4.83,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: rotation period 4.83 d and an axis 39 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 1.1 times the Sun's width that turns once in 4.83 days, with a mapped magnetic field.",
+    "introduction": "Folsom et al. give it 1.07 solar radii, 0.95 solar masses, a rotation period of 4.83 days and an axis tilted 39° from the line of sight.",
+    "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+  },
+  "notes": [],
+  "order": 5791
+}

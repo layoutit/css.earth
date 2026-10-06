@@ -13,6 +13,40 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-412-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.843, rounded to two decimals",
   "spectralType": "M1.0V",
   "spectralTypeSource": "SIMBAD, BD+44 2051: spectral type M1.0V (2013AJ....145..102L)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 100,
+      "source": "VizieR J/A+A/652/A28/tablea1 (Activity indicators across the M dwarf domain), column Prot: 100 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 100.9,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 100.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 100.9,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 100.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 100.9,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 100.9 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 36.9,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 36.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 36.9,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 36.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.027,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 4.027 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 46.4,
+      "source": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 46.4 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.13,
   "projectedRotationSpeedSource": "SIMBAD, BD+44 2051: projected rotation speed 2.13 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {

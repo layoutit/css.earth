@@ -17,8 +17,34 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5592237639209047424, flags_flame 00: lum_flame 0.6290463 solar luminosities (16th to 84th percentiles 0.6239872 to 0.634104); its log10 is recorded",
   "ageGyr": 12.508,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5592237639209047424, flags_flame 00: age_flame 12.508041 Gyr (16th to 84th percentiles 10.899293 to 13.5)",
+  "rotationPeriodDays": 5.06,
+  "rotationPeriodSource": "VizieR J/A+A/591/A43/sample (Differential rotation in solar-like stars), column <P>: 5.06 d, the row 0.0 arcsec from the star's J2000 place. The middle of 5 catalogued periods, 4 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 5.04,
+      "source": "VizieR J/A+A/573/A126/sample (VLT/NaCo Large program I. Sample), column Prot: 5.04 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.06,
+      "source": "VizieR J/A+A/591/A43/sample (Differential rotation in solar-like stars), column <P>: 5.06 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.26,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 5.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.1,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 5.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.22,
   "projectedRotationSpeedSource": "SIMBAD, HD 61005: projected rotation speed 4.22 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "spinInclinationDegrees": 27.4,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.918 solar radii): sin i = v sin i × P / (2πR) = 0.460. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

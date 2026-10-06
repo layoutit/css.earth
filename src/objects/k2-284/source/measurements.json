@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-284 (pscomppars): age 0.12 Gyr, from David et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..302D/abstract)",
   "rotationPeriodDays": 8.88,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-284 (pscomppars): rotation period 8.88 d, from David et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..302D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 8.84,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 8.84 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 8.84,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 8.84 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.54,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-284 (pscomppars): projected rotation speed 3.54 km/s, from David et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..302D/abstract)",
   "shape": {

@@ -13,6 +13,38 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/keid.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.538, rounded to two decimals",
   "spectralType": "K0V",
   "spectralTypeSource": "SIMBAD, * omi02 Eri: spectral type K0V (1989ApJS...71..245K)",
+  "rotationPeriodDays": 37.113,
+  "rotationPeriodSource": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 37.113 d, the row 0.0 arcsec from the star's J2000 place. The middle of 7 catalogued periods, 6 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 37.1,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 37.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 43,
+      "source": "VizieR J/A+A/511/A54/table1 (Magnetic cycles and radial-velocity for 8 stars), column Prot: 43 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 37.113,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 37.113 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.555,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protlit: 22.555 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 40,
+      "source": "VizieR J/AJ/163/171/table1 (The EXPRES Stellar Signals Project. II. RVel), column Prot: 40 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 40,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 40 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 36.8,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 36.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 9.21,
   "projectedRotationSpeedSource": "SIMBAD, * omi02 Eri: projected rotation speed 9.21 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

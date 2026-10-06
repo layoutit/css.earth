@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-41 (pscomppars): age 1.2 Gyr, from Southworth et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract)",
   "rotationPeriodDays": 18.41,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-41 (pscomppars): rotation period 18.41 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 18.41,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 18.41 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.41,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 18.41 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.64,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-41 (pscomppars): projected rotation speed 2.64 km/s, from Neveu-VanMalle et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015arXiv150907750N/abstract)",
   "shape": {

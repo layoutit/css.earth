@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1444 (pscomppars): log10 of the luminosity in solar units -0.17587, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "ageGyr": 3.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1444 (pscomppars): age 3.8 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "rotationPeriodDays": 0.47,
+  "rotationPeriodSource": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 0.47 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.47,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 0.47 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1444 (pscomppars): projected rotation speed 2 km/s, from Dai et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162...62D/abstract)",
+  "spinInclinationDegrees": 1.2,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.91 solar radii): sin i = v sin i × P / (2πR) = 0.020. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

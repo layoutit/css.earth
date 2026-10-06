@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HIP 97166 (pscomppars): log10 of the luminosity in solar units -0.32514, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
   "ageGyr": 1.2,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HIP 97166 (pscomppars): age 1.2 Gyr, from MacDougall et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...33M/abstract)",
+  "rotationPeriodDays": 10.289,
+  "rotationPeriodSource": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 10.289 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 10.289,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 10.289 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

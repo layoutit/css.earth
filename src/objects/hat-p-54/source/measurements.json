@@ -19,6 +19,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-54 (pscomppars): log10 of the luminosity in solar units -0.9017, from Bakos et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract)",
   "ageGyr": 3.9,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-54 (pscomppars): age 3.9 Gyr, from Bakos et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract)",
+  "rotationPeriodDays": 14.02,
+  "rotationPeriodSource": "VizieR J/ApJS/264/12/param (Chromospheric activities from LAMOST and K2), column PRot: 14.02 d, the row 0.1 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 15.29,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 15.29 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.02,
+      "source": "VizieR J/ApJS/264/12/param (Chromospheric activities from LAMOST and K2), column PRot: 14.02 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 8.0193,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 8.0193 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.35,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-54 (pscomppars): projected rotation speed 2.35 km/s, from Bakos et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract)",
   "shape": {

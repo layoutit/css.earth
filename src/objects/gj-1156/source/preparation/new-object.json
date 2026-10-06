@@ -1,0 +1,49 @@
+{
+  "id": "gj-1156",
+  "name": "GJ 1156",
+  "system": "GJ 1156 system",
+  "description": "A star 0.16 solar radii and 0.14 solar masses that turns once in 11.8 hours; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 3907283967108054528",
+  "gaia": "3907283967108054528",
+  "paper": {
+    "url": "https://arxiv.org/abs/1005.5552",
+    "credit": "Morin et al., arXiv:1005.5552"
+  },
+  "radius": {
+    "value": 0.16,
+    "source": "Morin et al., arXiv:1005.5552, Table 1: radius 0.16 solar radii (theoretical radius)",
+    "url": "https://arxiv.org/abs/1005.5552"
+  },
+  "mass": {
+    "value": 0.14,
+    "source": "Morin et al., arXiv:1005.5552, Table 1: mass 0.14 solar masses",
+    "url": "https://arxiv.org/abs/1005.5552"
+  },
+  "temperature": {
+    "value": 3110,
+    "source": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4.5V, for SIMBAD's spectral type M4.5Ve: Teff",
+    "url": "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt"
+  },
+  "spin": {
+    "inclinationDegrees": 60,
+    "periodDays": 0.491,
+    "source": "Morin et al., arXiv:1005.5552, Table 1: rotation period 0.491 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1005.5552"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 16% of the Sun's width that turns once in 11.8 hours, with a mapped magnetic field.",
+    "introduction": "Morin et al. give it 0.16 solar radii, 0.14 solar masses, a rotation period of 11.8 hours and an axis tilted 60° from the line of sight.",
+    "locator": "Morin et al., arXiv:1005.5552, Table 1"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 6,
+    "uncertainty": 0.015,
+    "source": "SIMBAD's radial velocity for Gaia DR3 3907283967108054528 (quality A), from 2018MNRAS.475.1960F; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.475.1960F/abstract"
+  },
+  "order": 5788
+}

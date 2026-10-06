@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 118203 (pscomppars): age 4.73 Gyr, from Zhang et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract)",
   "rotationPeriodDays": 23.1,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 118203 (pscomppars): rotation period 23.1 d, from Zhang et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.1,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 6.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 22 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.89,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 118203 (pscomppars): projected rotation speed 5.89 km/s, from Zhang et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract)",
   "shape": {

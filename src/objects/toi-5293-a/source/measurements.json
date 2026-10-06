@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5293 A (pscomppars): age 2.9 Gyr, from Cañas et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract)",
   "rotationPeriodDays": 20.6,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-5293 A (pscomppars): rotation period 20.6 d, from Cañas et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 20.6,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 20.6 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5293 A (pscomppars): projected rotation speed 2 km/s, from Cañas et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166...30C/abstract)",
   "shape": {

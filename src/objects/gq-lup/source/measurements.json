@@ -19,6 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of GQ Lup (pscomppars): log10 of the luminosity in solar units -0.07239, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 0.001,
   "ageSource": "NASA Exoplanet Archive, composite parameters of GQ Lup (pscomppars): age 0.001 Gyr, from Neuhauser et al. 2005 (https://ui.adsabs.harvard.edu/abs/2005A&A...435L..13N/abstract)",
+  "rotationPeriodDays": 8.4,
+  "rotationPeriodSource": "VizieR J/AJ/165/164/table2 (Tull RVels, rotation periods and Inclinations), column Prot: 8.4 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 8.4,
+      "source": "VizieR J/AJ/165/164/table2 (Tull RVels, rotation periods and Inclinations), column Prot: 8.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 8.4,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 8.4 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 6.33,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GQ Lup (pscomppars): projected rotation speed 6.33 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
   "shape": {

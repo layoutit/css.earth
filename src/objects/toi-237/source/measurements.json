@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-237 (pscomppars): age 4.5 Gyr, from Patel & Espinoza 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..228P/abstract)",
   "rotationPeriodDays": 102,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-237 (pscomppars): rotation period 102 d, from Patel & Espinoza 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..228P/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 5.436,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 5.436 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 6.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-237 (pscomppars): projected rotation speed 6.4 km/s, from Patel & Espinoza 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..228P/abstract)",
   "shape": {

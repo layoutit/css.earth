@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-6 (pscomppars): age 3.2 Gyr, from McGruder et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract)",
   "rotationPeriodDays": 28.28,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-6 (pscomppars): rotation period 28.28 d, from McGruder et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 23.8,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 23.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-6 (pscomppars): projected rotation speed 1.5 km/s, from McGruder et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract)",
   "shape": {

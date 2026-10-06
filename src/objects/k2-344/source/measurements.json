@@ -15,6 +15,16 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-344 (pscomppars): [Fe/H] -0.95 dex, from de Leon et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021MNRAS.508..195D/abstract)",
   "luminosityLogSolar": -1.225,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-344 (pscomppars): log10 of the luminosity in solar units -1.22508, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 16.7488,
+      "source": "VizieR J/ApJS/243/28/table6 (M-type star magnetic activities from LAMOST & Kepler), column Per: 16.748782 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.0193,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 6.0193 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.52,
   "projectedRotationSpeedSource": "SIMBAD, K2-344: projected rotation speed 1.52 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

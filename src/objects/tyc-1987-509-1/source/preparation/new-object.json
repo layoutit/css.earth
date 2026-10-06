@@ -1,0 +1,43 @@
+{
+  "id": "tyc-1987-509-1",
+  "name": "TYC 1987-509-1",
+  "system": "TYC 1987-509-1 system",
+  "description": "A star 0.83 solar radii and 0.9 solar masses that turns once in 9.43 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 4019588600164776448",
+  "gaia": "4019588600164776448",
+  "paper": {
+    "url": "https://arxiv.org/abs/1711.08636",
+    "credit": "Folsom et al., arXiv:1711.08636"
+  },
+  "radius": {
+    "value": 0.83,
+    "source": "Folsom et al., arXiv:1711.08636, Table 2: radius 0.83 solar radii",
+    "url": "https://arxiv.org/abs/1711.08636"
+  },
+  "mass": {
+    "value": 0.9,
+    "source": "Folsom et al., arXiv:1711.08636, Table 2: mass 0.9 solar masses",
+    "url": "https://arxiv.org/abs/1711.08636"
+  },
+  "temperature": {
+    "value": 5340,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 307751624: Teff",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+  },
+  "spin": {
+    "inclinationDegrees": 67,
+    "periodDays": 9.43,
+    "source": "Folsom et al., arXiv:1711.08636, Table 2: rotation period 9.43 d and an axis 67 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1711.08636"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 83% of the Sun's width that turns once in 9.43 days, with a mapped magnetic field.",
+    "introduction": "Folsom et al. give it 0.83 solar radii, 0.9 solar masses, a rotation period of 9.43 days and an axis tilted 67° from the line of sight.",
+    "locator": "Folsom et al., arXiv:1711.08636, Table 2"
+  },
+  "notes": [],
+  "order": 5794
+}

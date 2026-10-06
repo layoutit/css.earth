@@ -13,6 +13,28 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/groombridge-1618.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.646, rounded to two decimals",
   "spectralType": "K6VeFe-1",
   "spectralTypeSource": "SIMBAD, HD 88230: spectral type K6VeFe-1 (1989ApJS...71..245K)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.67,
+      "source": "VizieR J/A+A/638/A20/tableb1 (M dwarfs X-ray activity and rotation relations), column Prot: 11.67 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 27.1518,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 27.1518 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.67,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 11.67 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 38.3,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 38.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.38,
   "projectedRotationSpeedSource": "SIMBAD, HD 88230: projected rotation speed 4.38 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

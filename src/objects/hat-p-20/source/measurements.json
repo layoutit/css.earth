@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-20 (pscomppars): age 6.7 Gyr, from Bakos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
   "rotationPeriodDays": 14.48,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HAT-P-20 (pscomppars): rotation period 14.48 d, from Esposito et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...601A..53E/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14.48,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 14.48 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-20 (pscomppars): projected rotation speed 2.1 km/s, from Bakos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
   "spinInclinationDegrees": 60,

@@ -17,8 +17,18 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-3884 (pscomppars): [Fe/H] 0.04 dex, from Libby-Roberts et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract)",
   "luminosityLogSolar": -2.032,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-3884 (pscomppars): log10 of the luminosity in solar units -2.03152, from Almenara et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...667L..11A/abstract)",
+  "rotationPeriodDays": 4.22,
+  "rotationPeriodSource": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 4.22 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.22,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 4.22 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.59,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-3884 (pscomppars): projected rotation speed 3.59 km/s, from Libby-Roberts et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..249L/abstract)",
+  "spinInclinationDegrees": 82.5,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.302 solar radii): sin i = v sin i × P / (2πR) = 0.992. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

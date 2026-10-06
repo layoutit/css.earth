@@ -19,6 +19,16 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-199 (pscomppars): log10 of the luminosity in solar units -0.33819, from Hobson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract)",
   "ageGyr": 0.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-199 (pscomppars): age 0.8 Gyr, from Hobson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.04328,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.04328 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.8,
+      "source": "VizieR J/ApJ/962/47/table5 (TESS stellar rotation in the Southern CVZ), column Prot: 22.8 d, the row 1.2 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-199 (pscomppars): projected rotation speed 0.5 km/s, from Hobson et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....166..201H/abstract)",
   "shape": {

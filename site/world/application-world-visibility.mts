@@ -39,7 +39,8 @@ export function bodyAnnotations(objects: readonly Annotated[], unpackagedIds: It
     annotationOpacities: Object.fromEntries(objects.map(object => [object.id, annotationOpacity(object.classification)])),
     annotationPriorities: Object.fromEntries([...objects.map(object =>
       [object.id, object.discovery.illustration && !orbitFeatures.has(object.id) ? 0 : labelImportance(object.classification, defaultFeatures.has(object.id) || object.classification === 'satellite' && !minorMoons.has(object.id), object.discovery.orientationReference ?? 0, object.discovery.featured,
-        object.discovery.imagery || object.discovery.hostsImagery === true)]),
+        // A star on the map for a map or two of its surface is not featured, and ranks as any star does.
+        object.discovery.imagery && (object.classification !== 'star' || object.discovery.featured) || object.discovery.hostsImagery === true)]),
       ...[...unpackagedIds].map(id => [id, labelImportance('planet')])]),
   };
 }

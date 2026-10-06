@@ -15,6 +15,22 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1273423791421021568, flags_flame 00: lum_flame 32.770157 solar luminosities (16th to 84th percentiles 30.817005 to 34.916374); its log10 is recorded",
   "ageGyr": 0.825,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1273423791421021568, flags_flame 00: age_flame 0.8251587 Gyr (16th to 84th percentiles 0.72043496 to 0.9292186)",
+  "rotationPeriodDays": 18.4877,
+  "rotationPeriodSource": "VizieR J/MNRAS/483/3127/table3 (Rotational and magnetic properties of mCP stars), column Prot: 18.4877 d, the row 0.3 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 18.4877,
+      "source": "VizieR J/MNRAS/483/3127/table3 (Rotational and magnetic properties of mCP stars), column Prot: 18.4877 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.487,
+      "source": "VizieR J/MNRAS/510/5743/tablea1 (Variable stars study with TESS), column Prot: 18.487 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.49,
+      "source": "VizieR J/MNRAS/513/1429/tablea1 (MOBSTER. VI. Radio magnetospheres of hot stars), column Prot: 18.49 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 23,
   "projectedRotationSpeedSource": "SIMBAD, * bet CrB: projected rotation speed 23 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

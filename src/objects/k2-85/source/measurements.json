@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-85 (pscomppars): log10 of the luminosity in solar units -0.81171, from Barros et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract)",
   "ageGyr": 4.845,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 49784688211974144, flags_flame 00: age_flame 4.844691 Gyr (16th to 84th percentiles 1.9292114 to 7.6007357)",
+  "rotationPeriodDays": 30.95,
+  "rotationPeriodSource": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 30.95 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 30.95,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 30.95 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-85 (pscomppars): projected rotation speed 3 km/s, from Howard et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
   "shape": {

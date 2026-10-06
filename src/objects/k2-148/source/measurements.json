@@ -19,8 +19,30 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-148 (pscomppars): log10 of the luminosity in solar units -0.99568, from Hirano et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract)",
   "ageGyr": 11.309,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2536443724641751808, flags_flame 00: age_flame 11.30899 Gyr (16th to 84th percentiles 6.2241726 to 13.5)",
+  "rotationPeriodDays": 14.75,
+  "rotationPeriodSource": "VizieR J/A+A/675/A180/tablec1 (Rotation of wide binaries), column ProtRH20: 14.75 d, the row 0.0 arcsec from the star's J2000 place. The middle of 4 catalogued periods, 4 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14.75,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 14.75 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.8,
+      "source": "VizieR J/A+A/675/A180/tablec1 (Rotation of wide binaries), column Prot: 14.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.75,
+      "source": "VizieR J/A+A/675/A180/tablec1 (Rotation of wide binaries), column ProtRH20: 14.75 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.75,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 14.75 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.87,
   "projectedRotationSpeedSource": "SIMBAD, K2-148: projected rotation speed 1.87 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "spinInclinationDegrees": 59.6,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.632 solar radii): sin i = v sin i × P / (2πR) = 0.863. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

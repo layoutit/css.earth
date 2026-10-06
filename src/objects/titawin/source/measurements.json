@@ -19,6 +19,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of ups And (pscomppars): age 5 Gyr, from Curiel et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A&A...525A..78C/abstract)",
   "rotationPeriodDays": 12,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of ups And (pscomppars): rotation period 12 d, from Butler et al. 1997 (https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.4,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 7.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 12 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.9,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 11.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 9.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of ups And (pscomppars): projected rotation speed 9.2 km/s, from Butler et al. 1997 (https://ui.adsabs.harvard.edu/abs/1997ApJ...474L.115B/abstract)",
   "shape": {

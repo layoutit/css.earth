@@ -1,0 +1,173 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "v374-pegasi-arrival.webp",
+      "bytes": 30080,
+      "sha256": "a4815fb68ba152b67381911f335f5d3f14f01a7b1e174ef1ecf4b550224b4872"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-billboard.webp",
+      "bytes": 5488,
+      "sha256": "0b2993a553e4ffe56c220b97541ff67e55802073849328818065e96ee81670f7"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-dataset-color.webp",
+      "bytes": 44,
+      "sha256": "b822a5627c90c496eef4a70759b9a21f867c38ba17a9c6e80372659635fab665"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-dataset-radial-field-2005-08.webp",
+      "bytes": 340,
+      "sha256": "22a3f48748cb6cdddf6320952bf350acb8378a37efdb31eea66bb234020d539e"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-dataset-radial-field-2006-08.webp",
+      "bytes": 390,
+      "sha256": "563623dc878c2ffba13b688ba2712d4a865f65afd0150c7ee9795fae201916c1"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-limb-color@2x.webp",
+      "bytes": 93148,
+      "sha256": "ae1637c3acf3862e73e3a14e2b26ee141cac0e7b293d47ea1411545feef20d32"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-poles-color@2x.webp",
+      "bytes": 1340,
+      "sha256": "7b7dae71b71aa3515b0abd3a54a05b461a2f6a750a93b128a208e624acb10a86"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-poles-radial-field-2005-08@2x.webp",
+      "bytes": 21202,
+      "sha256": "14105d4fa5fcae99877ec79c398eea394d61e3fefe830fdbb7d968d48dce7434"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-poles-radial-field-2006-08@2x.webp",
+      "bytes": 21430,
+      "sha256": "85d4bd6a6645ffe33294399cbecd475e8f8c5040e74d48da83fb93d2ab823db4"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-surface-color@2x.webp",
+      "bytes": 38,
+      "sha256": "a239288de963f2c647710c0e2512f000f31450619409ecd70be3f7318ba7ac26"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-surface-radial-field-2005-08@2x.webp",
+      "bytes": 38318,
+      "sha256": "995b603c3d704a319fe168b4967043375ff290fa78174ea3d5d765709d2318e0"
+    },
+    {
+      "location": "public",
+      "filename": "v374-pegasi-surface-radial-field-2006-08@2x.webp",
+      "bytes": 41796,
+      "sha256": "05e976aef75e80e696b143f72e814caec41656892dd50793afd0d0695af4f9a4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 374,
+      "sha256": "be30ca12cf6411723ed0ce0724b1dbac4e096c5954930cdaf6e318f1974af2de"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 2425,
+      "sha256": "33eda201bb4e60fe1e642236b2ce5998b8ff7cdfc1475b54109ef1067ac79d80"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 664,
+      "sha256": "8dffddf25a5e8bce513106b9fb208c0c94a978afc649e515261133c72ec5b0ac"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 1621,
+      "sha256": "4d29bba54bfdddfad9988a9a337d888ab7c7b031d4b9a8623166d16ece274ed9"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 3584,
+      "sha256": "ecafddcd9fa85c7f4c24cba1aa425f85a55976bd4d31f5571c747c7b0fdf2d67"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 5467,
+      "sha256": "50c8990c9e77f4a5e56691123de2b251b93ba55b9c67fbe2256de5550bc83571"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 337,
+      "sha256": "14872e47ad83db30550b75813169b6d7a53512d50bf6730e345079bd11ca6808"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 440,
+      "sha256": "8a29135abd3438cd0180f45c37e6cf47f3b916888d7965e8d470e72ecf96319b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/radial-field-2005-08.webp",
+      "bytes": 3130,
+      "sha256": "af830554bed0331d6d6c593edeaeed8ef6ef1ca165585d3ff787f63ab449851b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/radial-field-2006-08.webp",
+      "bytes": 3400,
+      "sha256": "3039fcb718c2fe276fba95461e448f9f8f112d79163054774099acb51f8de489"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 255134,
+      "sha256": "f017420c3d653aa1ac7fad9b08033f7d6ca0d1814362c4fe6c2fa80db8186605"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 394702,
+      "sha256": "4a40879a903956ba7739f51a200988390ac3a557147f5ab46b1b93c79104c906"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1205,
+      "sha256": "2bb033b05ddf76a0b5399f70c6568ea53dfc52cdd9d5ca7315656132ae9dd465"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1378,
+      "sha256": "cea17729b454d80840c57ca8142cc4e9d035d6d795fb60ce7259600f9e6de825"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1161,
+      "sha256": "3d41ddb23f06574fea11983c73f370bc9736c1968044624eee803f1fe4a0949c"
+    }
+  ]
+}

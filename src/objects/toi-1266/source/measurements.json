@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1266 (pscomppars): age 4.6 Gyr, from Greklek-McKeon et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract)",
   "rotationPeriodDays": 44.6,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1266 (pscomppars): rotation period 44.6 d, from Greklek-McKeon et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 18.801,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 18.801 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20,
+      "source": "VizieR J/AJ/170/32/table3 (TI-DYE. III. TOI-2076 light curves & comoving stars), column Prot: 20 d, the row 2.5 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1266 (pscomppars): projected rotation speed 1.3 km/s, from Greklek-McKeon et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..292G/abstract)",
   "shape": {

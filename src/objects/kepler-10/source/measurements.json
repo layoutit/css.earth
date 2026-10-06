@@ -19,6 +19,56 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-10 (pscomppars): log10 of the luminosity in solar units 0.05467, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
   "ageGyr": 10.6,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-10 (pscomppars): age 10.6 Gyr, from Dumusque et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14.05,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 14.05 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35.23,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 35.23 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35.23,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 35.23 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 48.56,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column A18Per: 48.56 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.81,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column D21Per: 12.81 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.2,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M15Per: 18.2 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.2,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 18.2 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.88,
+      "source": "VizieR J/ApJ/803/69/table1 (Kepler planetary host stars rotation periods), column Prot: 22.88 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 18.2,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 18.2 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35.603,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Prot: 35.603 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 21.9,
+      "source": "VizieR J/ApJS/237/17/table1 (Temporal frequency shifts in 87 Kepler stars), column Prot: 21.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 48.5573,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 48.5573033233311 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.04,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-10 (pscomppars): projected rotation speed 2.04 km/s, from Dumusque et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...789..154D/abstract)",
   "shape": {

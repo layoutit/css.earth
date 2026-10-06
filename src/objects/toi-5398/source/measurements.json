@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5398 (pscomppars): age 0.65 Gyr, from Mantovan et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.129M/abstract)",
   "rotationPeriodDays": 7.34,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-5398 (pscomppars): rotation period 7.34 d, from Mantovan et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.129M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.34,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 7.34 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.15545,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.15545 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 7.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5398 (pscomppars): projected rotation speed 7.5 km/s, from Mantovan et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...682A.129M/abstract)",
   "shape": {

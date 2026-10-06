@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_apo, EPIC 248171802: APOGEE DR17 effective temperature 4660.3115 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.32,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-248171802.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.322, rounded to two decimals",
+  "rotationPeriodDays": 32.2256,
+  "rotationPeriodSource": "VizieR J/MNRAS/495/1252/table5 (Magnetic activity based on LAMOST and Kepler), column Prot: 32.225645 d, the row 0.1 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 32.2256,
+      "source": "VizieR J/MNRAS/495/1252/table5 (Magnetic activity based on LAMOST and Kepler), column Prot: 32.225645 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

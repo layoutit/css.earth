@@ -19,6 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 153950 (pscomppars): log10 of the luminosity in solar units 0.34635, from Moutou et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...496..513M/abstract)",
   "ageGyr": 4.3,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 153950 (pscomppars): age 4.3 Gyr, from Moutou et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009A&A...496..513M/abstract)",
+  "rotationPeriodDays": 27.1518,
+  "rotationPeriodSource": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 27.1518 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 27.1518,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 27.1518 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 27.1518,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 27.1518 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 153950 (pscomppars): projected rotation speed 5 km/s, from Nordstrom et al. 2004 (https://ui.adsabs.harvard.edu/abs/2004A&A...418..989N/abstract)",
   "shape": {

@@ -15,6 +15,14 @@
   "spectralTypeSource": "SIMBAD, LSPM J1104+3027: spectral type M3.0 (2023A&A...678A...1F)",
   "luminosityLogSolar": -1.779,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1806 (pscomppars): log10 of the luminosity in solar units -1.77852, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodDays": 6.4124,
+  "rotationPeriodSource": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 6.4124 d, the row 0.4 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.4124,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 6.4124 d, the row 0.4 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

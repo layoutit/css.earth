@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "tyc-6878-195-1",
+  "angularDiameterMas": 0.19,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 953,109 km at 67.71 pc = 0.19 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 67.70907515824835,
+  "distanceSource": "Gaia DR3 parallax 14.7691 +/- 0.2115 mas (same row, RUWE 11.99): 67.71 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+  "radiusKm": 953109,
+  "radiusSource": "Radius 1.37 solar radii from Folsom et al., arXiv:1601.00684, Table 2: radius 1.37 solar radii (https://arxiv.org/abs/1601.00684): 953,109 km at 695,700 km per solar radius. Mass 1.17 solar masses from Folsom et al., arXiv:1601.00684, Table 2: mass 1.17 solar masses (https://arxiv.org/abs/1601.00684); GM is that mass times the JPL solar GM. Temperature 4600 K from Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row K4V, for SIMBAD's spectral type K4V(e): Teff (https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt). Spin inclination 68 degrees and rotation period 5.7 d from Folsom et al., arXiv:1601.00684, Table 2: rotation period 5.7 d and an axis 68 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1601.00684). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4600,
+  "effectiveTemperatureSource": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row K4V, for SIMBAD's spectral type K4V(e): Teff (https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt)",
+  "surfaceGravityLogg": 4.23,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tyc-6878-195-1.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.233, rounded to two decimals",
+  "spectralType": "K4V(e)",
+  "spectralTypeSource": "SIMBAD, CD-26 13904: spectral type K4V(e) (2006A&A...460..695T)",
+  "rotationPeriodDays": 5.65,
+  "rotationPeriodSource": "VizieR J/A+A/600/A83/sample (Photometry of beta Pic members), column Prot: 5.65 d, the row 0.7 arcsec from the star's J2000 place. The middle of 4 catalogued periods, 4 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 5.65,
+      "source": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 5.65 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.73,
+      "source": "VizieR J/A+A/591/A43/sample (Differential rotation in solar-like stars), column <P>: 5.73 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.65,
+      "source": "VizieR J/A+A/600/A83/sample (Photometry of beta Pic members), column Prot: 5.65 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.72,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 5.72 d, the row 0.3 arcsec from the star's J2000 place"
+    }
+  ],
+  "projectedRotationSpeedKmS": 12.7,
+  "projectedRotationSpeedSource": "SIMBAD, CD-26 13904: projected rotation speed 12.7 km/s, the measurement SIMBAD prefers (2022AJ....164..174H)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

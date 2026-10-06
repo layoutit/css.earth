@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-1245-b",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "GJ 1245 B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2006-08",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2007-10",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 97398
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gj-1245-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "GJ 1245 B",
+      "classification": "star",
+      "color": "#ffb364",
+      "distanceAu": 961282.5,
+      "description": "A star 14% of the Sun's width that turns once in 17 hours, with a mapped magnetic field.",
+      "systemName": "GJ 1245 B system",
+      "order": 5801,
+      "context": {
+        "order": 5798
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        48990011937694050,
+        -90290842912089020,
+        100636241434799330
+      ],
+      "presentationToReference": [
+        -0.03666827341126757,
+        0.4754677702590281,
+        -0.8789686212658246,
+        0.06764435489665209,
+        -0.8763618426235353,
+        -0.4768796095914539,
+        0.9970354451952309,
+        0.07694361726868437,
+        0.000028034940799503246
+      ],
+      "orbitUpReference": [
+        -0.4754677702590281,
+        0.8763618426235353,
+        -0.07694361726868437
+      ],
+      "metersPerUnit": 314187.0967741936,
+      "bodyRadiusM": 97398000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

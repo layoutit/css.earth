@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "bd-16-351",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5147904718169224704: position at J2016.0. Distance: Gaia DR3 parallax 13.8029 +/- 0.0584 mas (same row, RUWE 2.84): 72.45 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published. Proper motion: Gaia DR3 (same row): 69.240, -26.753 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.88 solar radii from Folsom et al., arXiv:1601.00684, Table 2: radius 0.88 solar radii (https://arxiv.org/abs/1601.00684). Mass 0.9 solar masses from Folsom et al., arXiv:1601.00684, Table 2: mass 0.9 solar masses (https://arxiv.org/abs/1601.00684). Temperature 5291 K from SIMBAD, measurements of BD-16 351 (table mesFe_h), row of 2024A&A...690A..97C: Teff.",
+      "evidence": [
+        "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt",
+        "https://arxiv.org/abs/1601.00684"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 5,291 K, because the Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 02016-1610 ELP 3: 0.5 arcsec apart, magnitudes 8.43 and 9.09: the companion gives 35.3% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature, through the CIE 1931 2-degree observer: #ffeada. Routes tried in order: stis-ngsl: skipped; gaia-xp: skipped; pulkovo: skipped; kiehling: skipped; kharitonov: skipped; burnashev: skipped; planck: used.",
+      "evidence": [
+        "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,291 K and log g 4.5 (u1 0.575, u2 0.182): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "spin",
+      "subject": "Spin",
+      "status": "included",
+      "finding": "Inclination 42 degrees from the line of sight, period 3.21 d, from Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.21 d and an axis 42 degrees from the line of sight, the values its magnetic maps were made with; the axis's direction on the sky is a convention.",
+      "evidence": [
+        "https://arxiv.org/abs/1601.00684"
+      ]
+    }
+  ]
+}

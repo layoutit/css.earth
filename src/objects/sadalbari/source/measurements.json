@@ -11,8 +11,18 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 112748: effective temperature 5005 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.083) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "G8+III",
   "spectralTypeSource": "SIMBAD, * mu. Peg: spectral type G8+III (1989ApJS...71..245K)",
+  "rotationPeriodDays": 50,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 50 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 50,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 50 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4,
   "projectedRotationSpeedSource": "SIMBAD, * mu. Peg: projected rotation speed 4 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
+  "spinInclinationDegrees": 26.4,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (8.892 solar radii): sin i = v sin i × P / (2πR) = 0.445. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

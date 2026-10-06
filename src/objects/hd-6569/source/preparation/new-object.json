@@ -1,0 +1,43 @@
+{
+  "id": "hd-6569",
+  "name": "HD 6569",
+  "system": "HD 6569 system",
+  "description": "A star 0.76 solar radii and 0.85 solar masses that turns once in 7.13 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 2371914419569515136",
+  "gaia": "2371914419569515136",
+  "paper": {
+    "url": "https://arxiv.org/abs/1711.08636",
+    "credit": "Folsom et al., arXiv:1711.08636"
+  },
+  "radius": {
+    "value": 0.76,
+    "source": "Folsom et al., arXiv:1711.08636, Table 2: radius 0.76 solar radii",
+    "url": "https://arxiv.org/abs/1711.08636"
+  },
+  "mass": {
+    "value": 0.85,
+    "source": "Folsom et al., arXiv:1711.08636, Table 2: mass 0.85 solar masses",
+    "url": "https://arxiv.org/abs/1711.08636"
+  },
+  "temperature": {
+    "value": 5024,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 66534229: Teff",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+  },
+  "spin": {
+    "inclinationDegrees": 77,
+    "periodDays": 7.13,
+    "source": "Folsom et al., arXiv:1711.08636, Table 2: rotation period 7.13 d and an axis 77 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1711.08636"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 76% of the Sun's width that turns once in 7.13 days, with a mapped magnetic field.",
+    "introduction": "Folsom et al. give it 0.76 solar radii, 0.85 solar masses, a rotation period of 7.13 days and an axis tilted 77° from the line of sight.",
+    "locator": "Folsom et al., arXiv:1711.08636, Table 2"
+  },
+  "notes": [],
+  "order": 5790
+}

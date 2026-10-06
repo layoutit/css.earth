@@ -19,8 +19,26 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-275 (pscomppars): log10 of the luminosity in solar units -0.59332, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
   "ageGyr": 6.922,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 661598415839633024, flags_flame 00: age_flame 6.922293 Gyr (16th to 84th percentiles 4.6007175 to 9.245756)",
+  "rotationPeriodDays": 6.0197,
+  "rotationPeriodSource": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 6.0197 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 9.3528,
+      "source": "VizieR J/ApJS/243/28/table6 (M-type star magnetic activities from LAMOST & Kepler), column Per: 9.352796 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.01969,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 6.01969 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.0197,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 6.0197 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.7,
   "projectedRotationSpeedSource": "SIMBAD, K2-275: projected rotation speed 4.7 km/s, the measurement SIMBAD prefers (2018AJ....155...21P)",
+  "spinInclinationDegrees": 54.1,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.69 solar radii): sin i = v sin i × P / (2πR) = 0.810. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

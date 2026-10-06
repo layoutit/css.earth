@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "bd-16-351",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "BD-16 351",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2012-09",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 612216
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/bd-16-351-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "BD-16 351",
+      "classification": "star",
+      "color": "#ffeada",
+      "distanceAu": 14943615,
+      "description": "A star 88% of the Sun's width that turns once in 3.21 days, with a mapped magnetic field.",
+      "systemName": "BD-16 351 system",
+      "order": 5798,
+      "context": {
+        "order": 5795
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1851949497152224800,
+        1086476936103111200,
+        -622461755594243200
+      ],
+      "presentationToReference": [
+        0.7327909467573324,
+        0.45493511926733216,
+        0.506015281990288,
+        0.429906514571144,
+        0.2668929642103252,
+        -0.862524512338239,
+        0.5274446104377057,
+        -0.8495894201979238,
+        0.0000028235536714102995
+      ],
+      "orbitUpReference": [
+        -0.45493511926733216,
+        -0.2668929642103252,
+        0.8495894201979238
+      ],
+      "metersPerUnit": 1974890.322580645,
+      "bodyRadiusM": 612216000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

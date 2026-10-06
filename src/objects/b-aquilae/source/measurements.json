@@ -13,6 +13,16 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/b-aquilae.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.233, rounded to two decimals",
   "spectralType": "G7IVHdel1",
   "spectralTypeSource": "SIMBAD, * b Aql: spectral type G7IVHdel1 (1989ApJS...71..245K)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 32,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 32 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 40,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 40 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.42,
   "projectedRotationSpeedSource": "SIMBAD, * b Aql: projected rotation speed 2.42 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

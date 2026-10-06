@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-33 (pscomppars): log10 of the luminosity in solar units 0.81944, from Johnson et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...810L..23J/abstract)",
   "ageGyr": 0.865,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 328636019723252096, flags_flame 00: age_flame 0.86461663 Gyr (16th to 84th percentiles 0.58951247 to 1.1395178)",
+  "rotationPeriodDays": 0.52,
+  "rotationPeriodSource": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 0.52 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.52,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 0.52 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 85.6,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-33 (pscomppars): projected rotation speed 85.6 km/s, from Watanabe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022MNRAS.512.4404W/abstract)",
+  "spinInclinationDegrees": 37.5,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.444 solar radii): sin i = v sin i × P / (2πR) = 0.609. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

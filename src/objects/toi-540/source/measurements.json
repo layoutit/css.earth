@@ -19,6 +19,36 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-540 (pscomppars): age 1.1 Gyr, from Ment et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract)",
   "rotationPeriodDays": 0.7261,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-540 (pscomppars): rotation period 0.7261 d, from Ment et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.239,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 1.239 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.726,
+      "source": "VizieR J/AJ/165/265/table1 (Properties of 363 M-dwarfs from TESS), column PRot: 0.726 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.726,
+      "source": "VizieR J/AJ/166/16/table1 (Radial velocities of 123 active stars), column Per: 0.726 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.72592,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 0.72592 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.72,
+      "source": "VizieR J/ApJ/905/107/table1 (Spectroscopic activity indicators of TIC stars), column Prot: 0.72 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.000019,
+      "source": "VizieR J/ApJ/935/104/table1 (Catalog of Stellar Flares in 219 M-dwarfs), column Prot: 0.000019 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.73,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 0.73 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 13.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-540 (pscomppars): projected rotation speed 13.5 km/s, from Ment et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract)",
   "shape": {

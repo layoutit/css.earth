@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-4507 (pscomppars): log10 of the luminosity in solar units 0.14922, from Espinoza-Retamal et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract)",
   "ageGyr": 0.7,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-4507 (pscomppars): age 0.7 Gyr, from Espinoza-Retamal et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract)",
+  "rotationPeriodDays": 1.69,
+  "rotationPeriodSource": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 1.69 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.69,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 1.69 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 7.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-4507 (pscomppars): projected rotation speed 7.3 km/s, from Espinoza-Retamal et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026ApJ...996L..13E/abstract)",
+  "spinInclinationDegrees": 13.6,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.04 solar radii): sin i = v sin i × P / (2πR) = 0.234. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

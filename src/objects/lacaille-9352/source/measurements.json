@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 887 (pscomppars): age 2.9 Gyr, from Hartogh et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..93H/abstract)",
   "rotationPeriodDays": 38.7,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 887 (pscomppars): rotation period 38.7 d, from Hartogh et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..93H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 33,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 33 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33,
+      "source": "VizieR J/ApJ/960/62/table4 (Red dwarfs, Xray, UV, and CaII), column Prot: 33 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 887 (pscomppars): projected rotation speed 2.5 km/s, from Hartogh et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...707A..93H/abstract)",
   "shape": {

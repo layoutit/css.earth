@@ -19,6 +19,12 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-155 (pscomppars): log10 of the luminosity in solar units -1.22915, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "rotationPeriodDays": 34.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-155 (pscomppars): rotation period 34.8 d, from Díez Alonso et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018MNRAS.476L..50D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 24.66,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 24.66 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.2,
   "projectedRotationSpeedSource": "SIMBAD, LP 415-17: projected rotation speed 1.2 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "shape": {

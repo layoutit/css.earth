@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-500 (pscomppars): log10 of the luminosity in solar units -0.70002, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 5,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-500 (pscomppars): age 5 Gyr, from Serrano et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract)",
+  "rotationPeriodDays": 45.4959,
+  "rotationPeriodSource": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 45.495899 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 45.4959,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 45.495899 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-500 (pscomppars): projected rotation speed 1.1 km/s, from Serrano et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022NatAs...6..736S/abstract)",
   "shape": {

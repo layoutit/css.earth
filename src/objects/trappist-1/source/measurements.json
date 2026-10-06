@@ -17,6 +17,32 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): age 7.6 Gyr, from Piaulet-Ghorayeb et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJ...989..181P/abstract)",
   "rotationPeriodDays": 1.4,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): rotation period 1.4 d, from Gillon et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016Natur.533..221G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.3,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 3.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.3,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 3.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.3,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 3.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.3,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 3.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.304,
+      "source": "VizieR J/ApJ/916/77/table3 (K2 rotation periods for SDSS & Gaia M dwarfs), column Per: 3.304 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.295,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 3.295 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.04,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TRAPPIST-1 (pscomppars): projected rotation speed 2.04 km/s, from Hirano et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020ApJ...890L..27H/abstract)",
   "shape": {

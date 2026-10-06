@@ -13,6 +13,46 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-880.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.716, rounded to two decimals",
   "spectralType": "M1.5V",
   "spectralTypeSource": "SIMBAD, HD 216899: spectral type M1.5V (2013AJ....145..102L)",
+  "rotationPeriodDays": 39.5,
+  "rotationPeriodSource": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 39.5 d, the row 0.1 arcsec from the star's J2000 place. The middle of 9 catalogued periods, 8 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 28,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 28 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 40,
+      "source": "VizieR J/A+A/652/A28/tablea1 (Activity indicators across the M dwarf domain), column Prot: 40 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.5,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 39.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.5,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 39.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.5,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 39.5 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.5,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 39.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.5,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 39.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.5,
+      "source": "VizieR J/AJ/159/52/table1 (M dwarfs at high spectral-resolution in Y band), column Prot: 39.5 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 37.5,
+      "source": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 37.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.88,
   "projectedRotationSpeedSource": "SIMBAD, HD 216899: projected rotation speed 2.88 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {

@@ -1,11 +1,12 @@
 {
   "schema": "cssearth-volume-provenance@2",
-  "title": "HD 189733 A corona: derived from 3 observed magnetic maps of the star",
+  "title": "HD 189733 A corona: derived from 4 observed magnetic maps of the star",
   "kind": "derived-from-an-observed-magnetic-map-through-a-stated-model",
   "authors": [
     "CFHT ESPaDOnS, CFHT programs 06BD01, 06BF27, 06BT15, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
     "CFHT ESPaDOnS, CFHT program 07AC27, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
-    "CFHT ESPaDOnS, CFHT program 13BE92, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency."
+    "CFHT ESPaDOnS, CFHT program 13BE92, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+    "CFHT ESPaDOnS, CFHT program 23AF01, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency."
   ],
   "organizations": [
     "cssEarth (the derivation)"
@@ -29,6 +30,11 @@
       "id": "map-sep-2013",
       "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
       "role": "The magnetic map of Sep 2013: Magnetic map of HD 189733 from 7 polarised spectra of 13 September 2013 to 27 September 2013: radial, azimuthal and meridional field on a longitude-latitude grid"
+    },
+    {
+      "id": "map-jul-2023",
+      "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "role": "The magnetic map of Jul 2023: Magnetic map of HD 189733 from 8 polarised spectra of 24 June 2023 to 11 July 2023: radial, azimuthal and meridional field on a longitude-latitude grid"
     },
     {
       "id": "vizier-j-a-a-664-a105",
@@ -273,6 +279,55 @@
           }
         ],
         "sheetOverOffSheetAt2Radii": 61.51400073021636
+      },
+      "jul-2023": {
+        "label": "Jul 2023",
+        "surface": "radial-field-2023-07",
+        "meanAbsGauss": 12.177015986254558,
+        "harmonicsResidual": 0.0025387259340080605,
+        "neutralLineCells": 498,
+        "skyWithin10DegreesOfLine": 0.1990829839483762,
+        "openShare": [
+          {
+            "radii": 1.05,
+            "share": 0.3355688107216799
+          },
+          {
+            "radii": 1.2,
+            "share": 0.39525521526503926
+          },
+          {
+            "radii": 1.5,
+            "share": 0.5270478787967754
+          },
+          {
+            "radii": 2,
+            "share": 0.7735553872457014
+          },
+          {
+            "radii": 2.4,
+            "share": 0.956822654851676
+          }
+        ],
+        "electronsPerCm3OffSheet": [
+          {
+            "radii": 1.2,
+            "density": 18356399.837798227
+          },
+          {
+            "radii": 2,
+            "density": 1747331.461623867
+          },
+          {
+            "radii": 3,
+            "density": 433115.5073498901
+          },
+          {
+            "radii": 4,
+            "density": 204789.945587416
+          }
+        ],
+        "sheetOverOffSheetAt2Radii": 61.35258921942941
       }
     },
     "display": {
@@ -301,7 +356,8 @@
   "models": {
     "aug-2006": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. The map of the star's surface magnetic field from Aug 2006 (CFHT ESPaDOnS · mapped here) is continued outward as a field with no electric currents, out to 2.5 stellar radii, where the wind is taken to pull it straight. Gas at rest fills a sheet about the line where that field reverses, as the Sun's bright streamers do; the wind fills the rest. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 3.8 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 6.9 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The method was tested on the one star with a published simulation of its corona, ε Eridani, where its density is within a factor of two of the simulation's on average, and on the Sun, whose corona is measured dense along the same line. The rotation axis is 72° from the line of sight, as the map was fitted, and the corona is drawn in the same frame as the star's own maps; where the axis points on the sky and the star's rotation phase today are conventions.",
     "jun-2007": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. The map of the star's surface magnetic field from Jun 2007 (CFHT ESPaDOnS · mapped here) is continued outward as a field with no electric currents, out to 2.5 stellar radii, where the wind is taken to pull it straight. Gas at rest fills a sheet about the line where that field reverses, as the Sun's bright streamers do; the wind fills the rest. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 3.8 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 6.9 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The method was tested on the one star with a published simulation of its corona, ε Eridani, where its density is within a factor of two of the simulation's on average, and on the Sun, whose corona is measured dense along the same line. The rotation axis is 72° from the line of sight, as the map was fitted, and the corona is drawn in the same frame as the star's own maps; where the axis points on the sky and the star's rotation phase today are conventions.",
-    "sep-2013": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. The map of the star's surface magnetic field from Sep 2013 (CFHT ESPaDOnS · mapped here) is continued outward as a field with no electric currents, out to 2.5 stellar radii, where the wind is taken to pull it straight. Gas at rest fills a sheet about the line where that field reverses, as the Sun's bright streamers do; the wind fills the rest. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 3.8 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 6.9 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The method was tested on the one star with a published simulation of its corona, ε Eridani, where its density is within a factor of two of the simulation's on average, and on the Sun, whose corona is measured dense along the same line. The rotation axis is 72° from the line of sight, as the map was fitted, and the corona is drawn in the same frame as the star's own maps; where the axis points on the sky and the star's rotation phase today are conventions."
+    "sep-2013": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. The map of the star's surface magnetic field from Sep 2013 (CFHT ESPaDOnS · mapped here) is continued outward as a field with no electric currents, out to 2.5 stellar radii, where the wind is taken to pull it straight. Gas at rest fills a sheet about the line where that field reverses, as the Sun's bright streamers do; the wind fills the rest. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 3.8 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 6.9 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The method was tested on the one star with a published simulation of its corona, ε Eridani, where its density is within a factor of two of the simulation's on average, and on the Sun, whose corona is measured dense along the same line. The rotation axis is 72° from the line of sight, as the map was fitted, and the corona is drawn in the same frame as the star's own maps; where the axis points on the sky and the star's rotation phase today are conventions.",
+    "jul-2023": "No telescope has imaged this corona, and this is not a published result: it is derived here from the star's magnetic map by a standard method. The map of the star's surface magnetic field from Jul 2023 (CFHT ESPaDOnS · mapped here) is continued outward as a field with no electric currents, out to 2.5 stellar radii, where the wind is taken to pull it straight. Gas at rest fills a sheet about the line where that field reverses, as the Sun's bright streamers do; the wind fills the rest. How much gas there is follows from three numbers. The star's X-ray output is measured (Freund et al. (2022), A&A 664, A105). Its coronal temperature, 3.8 million kelvin, is not measured: it is the temperature stars of this X-ray output have (Johnstone & Güdel (2015), A&A 578, A129). Its mass loss, 6.9 times the Sun's, is not measured either: it is what the X-ray output suggests (Wood et al. (2021), ApJ 915, 37). Stars with a measured wind lie within a factor of 5 of that relation, and one is 38 times below it. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The method was tested on the one star with a published simulation of its corona, ε Eridani, where its density is within a factor of two of the simulation's on average, and on the Sun, whose corona is measured dense along the same line. The rotation axis is 72° from the line of sight, as the map was fitted, and the corona is drawn in the same frame as the star's own maps; where the axis points on the sky and the star's rotation phase today are conventions."
   },
   "limitations": [
     "No telescope has imaged this corona, and no paper publishes this result: every grid is derived here.",

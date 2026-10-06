@@ -11,6 +11,16 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 3419: effective temperature 4835 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.041) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "G9.5IIICH-1",
   "spectralTypeSource": "SIMBAD, * bet Cet: spectral type G9.5IIICH-1 (1989ApJS...71..245K)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 42,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 42 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 215,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 215 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.8,
   "projectedRotationSpeedSource": "SIMBAD, * bet Cet: projected rotation speed 5.8 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {

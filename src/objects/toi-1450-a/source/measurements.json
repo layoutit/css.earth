@@ -19,6 +19,12 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1450 A (pscomppars): log10 of the luminosity in solar units -1.56499, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "rotationPeriodDays": 35,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1450 A (pscomppars): rotation period 35 d, from Brady et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...67B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 25.1256,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 25.125601 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

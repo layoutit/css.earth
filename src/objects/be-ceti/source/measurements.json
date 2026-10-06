@@ -17,6 +17,42 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2423493369021649920, flags_flame 00: lum_flame 1.0681224 solar luminosities (16th to 84th percentiles 1.0619087 to 1.0736436); its log10 is recorded",
   "ageGyr": 9.95,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2423493369021649920, flags_flame 00: age_flame 9.949624 Gyr (16th to 84th percentiles 8.709824 to 11.16913)",
+  "rotationPeriodDays": 7.78,
+  "rotationPeriodSource": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 7.78 d, the row 0.0 arcsec from the star's J2000 place. The middle of 8 catalogued periods, 7 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.7,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 7.7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.655,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 7.655 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.78,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 7.78 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.8,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 7.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.76,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 7.76 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 10 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.78,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 7.78 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.78,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 7.78 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.7,
   "projectedRotationSpeedSource": "SIMBAD, * 9 Cet: projected rotation speed 2.7 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

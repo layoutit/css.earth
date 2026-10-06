@@ -21,6 +21,40 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 504 (pscomppars): age 0.16 Gyr, from Kuzuhara et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013ApJ...774...11K/abstract)",
   "rotationPeriodDays": 3.33,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 504 (pscomppars): rotation period 3.33 d, from D'Orazi et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...598A..19D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.328,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 3.328 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.855,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 4.855 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.165,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protlit: 3.165 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.33,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 3.33 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.42,
+      "source": "VizieR J/AJ/165/164/table2 (Tull RVels, rotation periods and Inclinations), column Prot: 3.42 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.33,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 3.33 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.47,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 504 (pscomppars): projected rotation speed 5.47 km/s, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
   "shape": {

@@ -13,6 +13,34 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-338-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.709, rounded to two decimals",
   "spectralType": "K7V",
   "spectralTypeSource": "SIMBAD, HD 79210: spectral type K7V (1991ApJS...77..417K)",
+  "rotationPeriodDays": 16.3,
+  "rotationPeriodSource": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 16.3 d, the row 0.0 arcsec from the star's J2000 place. The middle of 6 catalogued periods, 6 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 16.3,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 16.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.54,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 17.54 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.54,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 17.54 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.3,
+      "source": "VizieR J/ApJ/960/62/table2 (Red dwarfs, Xray, UV, and CaII), column Prot: 16.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.3,
+      "source": "VizieR J/ApJ/960/62/table6 (Red dwarfs, Xray, UV, and CaII), column Prot: 16.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.3,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 16.3 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.75,
   "projectedRotationSpeedSource": "SIMBAD, HD 79210: projected rotation speed 2.75 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {

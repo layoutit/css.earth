@@ -11,6 +11,7 @@ import { loadScienceSurface } from '@cssearth/bake/objects/raster';
 import { readAuthoredRotation } from '@cssearth/bake/objects/scene';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { fetchPublication, VIZIER_ASU, type Archive } from '../archives/archives.mts';
+import { blendingCompanion, WDS_CREDIT } from '../companion-blend.mts';
 import { publicationRecord } from '../publication-record.mts';
 import { GM_SUN, SOLAR_RADIUS_KM } from '../hosted.mts';
 import { coronaFiles, coronaPhysics, parseCoronae, type CoronaEntry, type CoronaMapInput, type CoronaSource, type CoronaStar } from './corona-bank.mts';
@@ -68,6 +69,9 @@ export async function draftsFromMagneticMaps(names: readonly string[], context: 
       const when = (label: string) => { const match = /^(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) (\d{4})$/u.exec(label); return match ? Number(match[2]) * 12 + 'JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(match[1]!) / 3 : NaN; };
       const maps = drafted.every(map => Number.isFinite(when(map.label))) ? [...drafted].sort((a, b) => when(a.label) - when(b.label)) : drafted;
       const distance = Math.hypot(...star.originM), raDeg = (Math.atan2(star.originM[1], star.originM[0]) * 180 / Math.PI + 360) % 360, decDeg = Math.asin(star.originM[2] / distance) * 180 / Math.PI;
+      // ROSAT's survey does not separate two stars this close: a companion that gives a share of the light gives a share of the X-rays.
+      const pair = await blendingCompanion(context.archive, { ra: raDeg, dec: decDeg });
+      if (pair) throw new Error(`${host}: its ROSAT source is two stars'. ${WDS_CREDIT} lists WDS ${pair.wds} ${pair.discoverer}: ${pair.separationArcsec < 0 ? 'separation not measured' : `${pair.separationArcsec} arcsec apart`}, the companion ${(pair.share * 100).toFixed(1)}% of the light. Cite this star's own X-ray flux by hand.`);
       const tsv = await context.archive.text(VIZIER_ASU, { '-source': ROSAT_STARS.source, '-c': `${raDeg.toFixed(5)} ${decDeg >= 0 ? '+' : ''}${decDeg.toFixed(5)}`, '-c.rs': String(ROSAT_STARS.radiusArcsec), '-out': '2RXS,Sep,pstellar,FX', '-out.max': '3', '-sort': '_r' });
       const rows = tsv.split('\n').filter(line => line && !line.startsWith('#')).map(line => line.split('\t')), header = rows.findIndex(row => row.includes('FX')), row = header < 0 ? undefined : rows.slice(header + 3).find(cells => cells.length >= rows[header]!.length);
       if (!row) throw new Error(`${host}: no star within ${ROSAT_STARS.radiusArcsec} arcsec in ${ROSAT_STARS.label}; cite its X-ray flux by hand.`);

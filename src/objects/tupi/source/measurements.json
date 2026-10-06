@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 23079 (pscomppars): age 2.6 Gyr, from Delisle et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...703A..78D/abstract)",
   "rotationPeriodDays": 15,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 23079 (pscomppars): rotation period 15 d, from Delisle et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...703A..78D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 27.1518,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 27.1518 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 27.1518,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 27.1518 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.1,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 19.1 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.99,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 23079 (pscomppars): projected rotation speed 2.99 km/s, from Butler et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B/abstract)",
   "spinInclinationDegrees": 52.4,

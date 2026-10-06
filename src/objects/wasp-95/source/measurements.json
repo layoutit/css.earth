@@ -19,6 +19,16 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of WASP-95 (pscomppars): log10 of the luminosity in solar units 0.17781, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 2.4,
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-95 (pscomppars): age 2.4 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.904945,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 0.904945 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.7,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 20.7 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-95 (pscomppars): projected rotation speed 3.1 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {

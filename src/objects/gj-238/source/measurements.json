@@ -19,6 +19,16 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 238 (pscomppars): log10 of the luminosity in solar units -1.61618, from Tey et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract)",
   "rotationPeriodDays": 44,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 238 (pscomppars): rotation period 44 d, from Tey et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..283T/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 81,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 81 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 81,
+      "source": "VizieR J/AJ/163/257/table1 (Properties of 125 M-dwarfs in the southern CVZ), column Prot: 81 d, the row 0.2 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.19,
   "projectedRotationSpeedSource": "SIMBAD, L 182-44: projected rotation speed 2.19 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

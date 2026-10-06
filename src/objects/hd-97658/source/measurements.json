@@ -21,6 +21,24 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 97658 (pscomppars): age 3.9 Gyr, from Ellis et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..118E/abstract)",
   "rotationPeriodDays": 34,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 97658 (pscomppars): rotation period 34 d, from Guo et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020AJ....159..239G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 47.6417,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 47.641701 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 47.6417,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 47.641701 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 42,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 42 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 41,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 41 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 97658 (pscomppars): projected rotation speed 0.5 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "spinInclinationDegrees": 27.5,

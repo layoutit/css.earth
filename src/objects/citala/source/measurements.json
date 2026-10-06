@@ -19,8 +19,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 52265 (pscomppars): log10 of the luminosity in solar units 0.297, from Naef et al. 2001 (https://ui.adsabs.harvard.edu/abs/2001A&A...375..205N/abstract)",
   "ageGyr": 3.5,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 52265 (pscomppars): age 3.5 Gyr, from Naef et al. 2001 (https://ui.adsabs.harvard.edu/abs/2001A&A...375..205N/abstract)",
+  "rotationPeriodDays": 9.42,
+  "rotationPeriodSource": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 9.42 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 9.42,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 9.42 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 9.42,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 9.42 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 52265 (pscomppars): projected rotation speed 5.2 km/s, from Naef et al. 2001 (https://ui.adsabs.harvard.edu/abs/2001A&A...375..205N/abstract)",
+  "spinInclinationDegrees": 44.1,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.391 solar radii): sin i = v sin i × P / (2πR) = 0.696. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

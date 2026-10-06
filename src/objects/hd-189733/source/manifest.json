@@ -429,6 +429,41 @@
           }
         ]
       }
+    },
+    {
+      "id": "hd-189733-espadons-map-radial-field-2023-07",
+      "path": "science/espadons/hd-189733-2023-06.dat",
+      "origin": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "productId": "Magnetic map of HD 189733, Jul 2023, from 8 ESPaDOnS spectra",
+      "title": "Magnetic map of HD 189733 from 8 polarised spectra of 24 June 2023 to 11 July 2023: radial, azimuthal and meridional field on a longitude-latitude grid",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "credit": "CFHT ESPaDOnS, CFHT program 23AF01, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+      "displayCredit": "CFHT ESPaDOnS · mapped here",
+      "license": "CC BY 4.0 for the archived spectra (Canadian Astronomy Data Centre); reduction by this project",
+      "licenseEvidence": [
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program hd-189733-2023-06, which pins every archived spectrum by its size. The run's receipt (the line list, the codes and each step's result) is written again by that command under output/espadons and is not kept in git.",
+      "redistribution": "Archived spectra under CC BY 4.0, reduced here.",
+      "consumers": [
+        "espadons-zdi"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cadc-cfht-espadons",
+            "role": "material",
+            "evidence": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+          },
+          {
+            "catalogueId": "arxiv-1711-08636",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1711.08636"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

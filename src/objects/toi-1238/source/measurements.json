@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1238 (pscomppars): age 0.8 Gyr, from González-Álvarez et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...658A.138G/abstract)",
   "rotationPeriodDays": 40,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1238 (pscomppars): rotation period 40 d, from González-Álvarez et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...658A.138G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 40,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 40 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1238 (pscomppars): projected rotation speed 2 km/s, from González-Álvarez et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...658A.138G/abstract)",
   "shape": {

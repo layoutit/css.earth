@@ -19,6 +19,24 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of L 168-9 (pscomppars): log10 of the luminosity in solar units -1.14086, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
   "rotationPeriodDays": 29,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of L 168-9 (pscomppars): rotation period 29 d, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 23,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 23 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.402,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 1.402 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.4448,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 33.444801 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.8,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 29.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.59,
   "projectedRotationSpeedSource": "SIMBAD, CD-60 8051: projected rotation speed 2.59 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

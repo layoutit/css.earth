@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-0808-1423",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Morin et al. (2008): Large-scale magnetic topologies of mid-M dwarfs",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0808.1423"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1365-2966.2008.13809.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/0808.1423",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/j.1365-2966.2008.13809.x",
+      "label": "Mon.Not.Roy.Astron.Soc.390:567-581,2010"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0808.1423",
+      "checkedOn": "2026-10-06",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Morin et al. (2008), Mon.Not.Roy.Astron.Soc.390:567-581,2010",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/0808.1423"
+    }
+  ],
+  "publisher": "Mon.Not.Roy.Astron.Soc.390:567-581,2010",
+  "creators": [
+    "J. Morin",
+    "J. -F. Donati",
+    "P. Petit",
+    "et al."
+  ],
+  "publicationDate": "2008"
+}

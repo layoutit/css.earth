@@ -19,6 +19,20 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-415 (pscomppars): log10 of the luminosity in solar units -2.45469, from Hirano et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract)",
   "rotationPeriodDays": 4.298,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-415 (pscomppars): rotation period 4.298 d, from Hirano et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..131H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.32045,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 4.32045 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.297,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 1.297 d, the row 1.5 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.1502,
+      "source": "VizieR J/ApJS/243/28/table6 (M-type star magnetic activities from LAMOST & Kepler), column Per: 2.150198 d, the row 0.4 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

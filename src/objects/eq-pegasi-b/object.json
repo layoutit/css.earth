@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "eq-pegasi-b",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "EQ Pegasi B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2006-08",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 173925
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/eq-pegasi-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "EQ Pegasi B",
+      "classification": "star",
+      "color": "#ffbe7a",
+      "distanceAu": 1289900.7,
+      "description": "A star 25% of the Sun's width that turns once in 9.72 hours, with a mapped magnetic field.",
+      "systemName": "EQ Pegasi B system",
+      "order": 5787,
+      "context": {
+        "order": 5784
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        180038716485359650,
+        -22190770157321184,
+        65800156688971070
+      ],
+      "presentationToReference": [
+        0.6387930364288127,
+        0.7595897865621382,
+        -0.1223389257781144,
+        -0.07872125107036498,
+        -0.09364709300428428,
+        -0.9924883810915691,
+        0.7653407223191343,
+        -0.6436253398696576,
+        0.00002525259449515073
+      ],
+      "orbitUpReference": [
+        -0.7595897865621382,
+        0.09364709300428428,
+        0.6436253398696576
+      ],
+      "metersPerUnit": 561048.3870967742,
+      "bodyRadiusM": 173925000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

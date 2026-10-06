@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-942 (pscomppars): age 0.053 Gyr, from Wirth et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021ApJ...917L..34W/abstract)",
   "rotationPeriodDays": 3.39,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-942 (pscomppars): rotation period 3.39 d, from Carleo et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...645A..71C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.4,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 3.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.41824,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 3.41824 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 14.24,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-942 (pscomppars): projected rotation speed 14.24 km/s, from Wirth et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021ApJ...917L..34W/abstract)",
   "shape": {

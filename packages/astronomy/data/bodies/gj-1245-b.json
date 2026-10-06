@@ -1,0 +1,30 @@
+{
+ "id": "gj-1245-b",
+ "classification": "star",
+ "order": 5801,
+ "physical": {
+  "name": "GJ 1245 B",
+  "horizonsCode": null,
+  "meanRadiusKm": 97398,
+  "gravitationalParameterKm3PerS2": 15925492805.03272,
+  "parent": null,
+  "effectiveTemperatureK": 2865
+ },
+ "physicalNotes": "Radius 0.14 solar radii from Morin et al., arXiv:1005.5552, Table 1: radius 0.14 solar radii (theoretical radius) (https://arxiv.org/abs/1005.5552): 97,398 km at 695,700 km per solar radius. Mass 0.12 solar masses from Morin et al., arXiv:1005.5552, Table 1: mass 0.12 solar masses (https://arxiv.org/abs/1005.5552); GM is that mass times the JPL solar GM. Temperature 2865 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 274127413: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82). Spin inclination 40 degrees and rotation period 0.71 d from Morin et al., arXiv:1005.5552, Table 1: rotation period 0.71 d and an axis 40 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1005.5552). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 298.48192590176114,
+  "declinationDegrees": 44.41290615922913,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 4.660385954058287,
+  "properMotionRaMasPerYear": 349.36300477619653,
+  "properMotionDecMasPerYear": -480.32231510686086,
+  "radialVelocityKmPerS": 3.932475,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2079073928612821760 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gj-1245-b/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 214.5745 +/- 0.0476 mas (same row, RUWE 1.61): 4.66 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): 349.363, -480.322 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 3.93 +/- 0.38 km/s"
+  }
+ }
+}

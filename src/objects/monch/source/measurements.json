@@ -19,8 +19,26 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 130322 (pscomppars): log10 of the luminosity in solar units -0.23544, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 0.35,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 130322 (pscomppars): age 0.35 Gyr, from Udry et al. 2000 (https://ui.adsabs.harvard.edu/abs/2000A&A...356..590U/abstract)",
+  "rotationPeriodDays": 26.1,
+  "rotationPeriodSource": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 26.1 d, the row 0.1 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 26.1,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 26.1 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 16 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.1,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 26.1 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 130322 (pscomppars): projected rotation speed 0.5 km/s, from Hinkel et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...803....8H/abstract)",
+  "spinInclinationDegrees": 17,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.881 solar radii): sin i = v sin i × P / (2πR) = 0.293. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 17156 (pscomppars): age 3.3 Gyr, from Kane et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract)",
   "rotationPeriodDays": 12.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 17156 (pscomppars): rotation period 12.8 d, from Fischer et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...669.1336F/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 12.8,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 12.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 17156 (pscomppars): projected rotation speed 2.8 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "spinInclinationDegrees": 27.8,

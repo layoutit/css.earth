@@ -15,6 +15,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of VHS J125601.92-125723.9 (pscomppars): log10 of the luminosity in solar units -3.14, from Gauza et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...804...96G/abstract)",
   "ageGyr": 0.14,
   "ageSource": "NASA Exoplanet Archive, composite parameters of VHS J125601.92-125723.9 (pscomppars): age 0.14 Gyr, from Dupuy et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.519.1688D/abstract)",
+  "rotationPeriodDays": 0.0866,
+  "rotationPeriodSource": "VizieR J/AJ/165/164/table2 (Tull RVels, rotation periods and Inclinations), column Prot: 0.0866 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.0866,
+      "source": "VizieR J/AJ/165/164/table2 (Tull RVels, rotation periods and Inclinations), column Prot: 0.0866 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 75,
   "projectedRotationSpeedSource": "SIMBAD, LP 736-15: projected rotation speed 75 km/s, the measurement SIMBAD prefers (2023AJ....165..164B)",
   "shape": {

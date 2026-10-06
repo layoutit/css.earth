@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "eq-pegasi-b",
+  "angularDiameterMas": 0.37,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 173,925 km at 6.25 pc = 0.37 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 6.253577810127021,
+  "distanceSource": "Gaia DR3 parallax 159.9085 +/- 0.0513 mas (same row, RUWE 1.59): 6.25 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+  "radiusKm": 173925,
+  "radiusSource": "Radius 0.25 solar radii from Morin et al., arXiv:0808.1423, Table 1: radius 0.25 solar radii (theoretical radius; R sin i = 0.23(1)) (https://arxiv.org/abs/0808.1423): 173,925 km at 695,700 km per solar radius. Mass 0.25 solar masses from Morin et al., arXiv:0808.1423, Table 1: mass 0.25 solar masses (https://arxiv.org/abs/0808.1423); GM is that mass times the JPL solar GM. Temperature 3210 K from Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4V, for SIMBAD's spectral type M4.0Ve: Teff (https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt). Spin inclination 60 degrees and rotation period 0.405 d from Morin et al., arXiv:0808.1423, Table 1: rotation period 0.405 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/0808.1423). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3210,
+  "effectiveTemperatureSource": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4V, for SIMBAD's spectral type M4.0Ve: Teff (https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt)",
+  "surfaceGravityLogg": 5.04,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/eq-pegasi-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.040, rounded to two decimals",
+  "spectralType": "M4.0Ve",
+  "spectralTypeSource": "SIMBAD, BD+19 5116B: spectral type M4.0Ve (2015AJ....149..106D)",
+  "rotationPeriodDays": 0.4,
+  "rotationPeriodSource": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 0.4 d, the row 0.9 arcsec from the star's J2000 place. The middle of 7 catalogued periods, 5 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.4,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 0.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.4,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 0.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.404,
+      "source": "VizieR J/AJ/166/16/table1 (Radial velocities of 123 active stars), column Per: 0.404 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.0669,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 1.0669 d, the row 0.6 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.2,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 0.2 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.404,
+      "source": "VizieR J/MNRAS/390/567/table1 (Magnetic field and velocity of mid M dwarfs), column Prot: 0.404 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.4,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 0.4 d, the row 0.9 arcsec from the star's J2000 place"
+    }
+  ],
+  "projectedRotationSpeedKmS": 25.2,
+  "projectedRotationSpeedSource": "SIMBAD, BD+19 5116B: projected rotation speed 25.2 km/s, the measurement SIMBAD prefers (2023AJ....166...16P)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

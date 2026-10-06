@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-6 (pscomppars): log10 of the luminosity in solar units 0.55267, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "ageGyr": 2.3,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-6 (pscomppars): age 2.3 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
+  "rotationPeriodDays": 1.9173,
+  "rotationPeriodSource": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 1.9173 d, the row 0.3 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.9173,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 1.9173 d, the row 0.3 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 7.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-6 (pscomppars): projected rotation speed 7.8 km/s, from Albrecht et al. 2012 (https://ui.adsabs.harvard.edu/abs/2012ApJ...757...18A/abstract)",
+  "spinInclinationDegrees": 10.5,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.62 solar radii): sin i = v sin i × P / (2πR) = 0.182. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-50 (pscomppars): age 7 Gyr, from Knudstrup et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.379K/abstract)",
   "rotationPeriodDays": 16.3,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-50 (pscomppars): rotation period 16.3 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 16.3,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 16.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.3,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 16.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.488,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 5.488 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.97,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-50 (pscomppars): projected rotation speed 1.97 km/s, from Knudstrup et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A.379K/abstract)",
   "spinInclinationDegrees": 48.8,

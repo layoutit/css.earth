@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-199 (pscomppars): log10 of the luminosity in solar units -0.73283, from Akana Murphy et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract)",
   "ageGyr": 5.04,
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-199 (pscomppars): age 5.04 Gyr, from Akana Murphy et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..294A/abstract)",
+  "rotationPeriodDays": 10.3378,
+  "rotationPeriodSource": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 10.33782967 d, the row 0.9 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 10.3378,
+      "source": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 10.33782967 d, the row 0.9 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.8,
   "projectedRotationSpeedSource": "SIMBAD, K2-199: projected rotation speed 1.8 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
+  "spinInclinationDegrees": 32.6,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.682 solar radii): sin i = v sin i × P / (2πR) = 0.539. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

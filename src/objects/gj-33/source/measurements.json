@@ -15,6 +15,30 @@
   "spectralTypeSource": "SIMBAD, HD 4628: spectral type K2.5V (2006AJ....132..161G)",
   "luminosityLogSolar": -0.522,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2552925644460225152, flags_flame 00: lum_flame 0.3003031 solar luminosities (16th to 84th percentiles 0.29529613 to 0.30531013); its log10 is recorded",
+  "rotationPeriodDays": 39,
+  "rotationPeriodSource": "VizieR J/A+A/511/A54/table1 (Magnetic cycles and radial-velocity for 8 stars), column Prot: 39 d, the row 0.0 arcsec from the star's J2000 place. The middle of 5 catalogued periods, 4 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 38,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 38 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39,
+      "source": "VizieR J/A+A/511/A54/table1 (Magnetic cycles and radial-velocity for 8 stars), column Prot: 39 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 47,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 47 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 38.5,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 38.5 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 42.8,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 42.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.67,
   "projectedRotationSpeedSource": "SIMBAD, HD 4628: projected rotation speed 2.67 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

@@ -19,6 +19,16 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1024 (pscomppars): log10 of the luminosity in solar units -0.34993, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
   "ageGyr": 5.25,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-1024 (pscomppars): age 5.25 Gyr, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 66.4162,
+      "source": "VizieR J/A+A/694/A157/tablea1 (Earth 2.0 candidates stellar magnetic activity), column Prot: 66.41621 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 28.03,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 28.03 d, the row 0.2 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

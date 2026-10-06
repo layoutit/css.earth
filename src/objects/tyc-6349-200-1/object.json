@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tyc-6349-200-1",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TYC 6349-200-1",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2013-06",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 667872
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tyc-6349-200-1-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TYC 6349-200-1",
+      "classification": "star",
+      "color": "#ffc6a1",
+      "distanceAu": 9505705.2,
+      "description": "A star the Sun's width that turns once in 3.41 days, with a mapped magnetic field.",
+      "systemName": "TYC 6349-200-1 system",
+      "order": 5796,
+      "context": {
+        "order": 5793
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        943943327396768500,
+        -977077780208296800,
+        -420081641975723000
+      ],
+      "presentationToReference": [
+        0.6494460273274976,
+        0.2469353082414614,
+        -0.7191959476611544,
+        -0.6722417474449758,
+        -0.25560485935548954,
+        -0.6948073034057616,
+        0.35540243468588767,
+        -0.9347133835660827,
+        0.000001337355922673823
+      ],
+      "orbitUpReference": [
+        -0.2469353082414614,
+        0.25560485935548954,
+        0.9347133835660827
+      ],
+      "metersPerUnit": 2154425.806451613,
+      "bodyRadiusM": 667872000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

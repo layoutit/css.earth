@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of Gl 725 A (pscomppars): age 6.2 Gyr, from Cortés-Zuleta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract)",
   "rotationPeriodDays": 103.1,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Gl 725 A (pscomppars): rotation period 103.1 d, from Cortés-Zuleta et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...693A.164C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 103.1,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 103.1 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.55,
   "projectedRotationSpeedSource": "SIMBAD, HD 173739: projected rotation speed 1.55 km/s, the measurement SIMBAD prefers (2024A&A...687A.205M)",
   "shape": {

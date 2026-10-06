@@ -17,6 +17,14 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-124 (pscomppars): [Fe/H] 0.023 dex, from Livingston et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019AJ....157..102L/abstract)",
   "luminosityLogSolar": -1.659,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-124 (pscomppars): log10 of the luminosity in solar units -1.65919, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "rotationPeriodDays": 38.88,
+  "rotationPeriodSource": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 38.88 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 38.88,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 38.88 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 65.7,
   "projectedRotationSpeedSource": "SIMBAD, K2-124: projected rotation speed 65.7 km/s, the measurement SIMBAD prefers (2018AJ....155...21P)",
   "shape": {

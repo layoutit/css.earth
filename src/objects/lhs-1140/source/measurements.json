@@ -21,6 +21,32 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of LHS 1140 (pscomppars): age 5 Gyr, from Cadieux et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract)",
   "rotationPeriodDays": 131,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of LHS 1140 (pscomppars): rotation period 131 d, from Cadieux et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...960L...3C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 130.878,
+      "source": "VizieR J/AJ/156/217/table1 (Stellar properties for M dwarfs in MEarth-South), column Per: 130.878 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 131,
+      "source": "VizieR J/ApJ/905/107/table1 (Spectroscopic activity indicators of TIC stars), column Prot: 131 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 130.878,
+      "source": "VizieR J/ApJ/916/77/table3 (K2 rotation periods for SDSS & Gaia M dwarfs), column Per: 130.87801 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.0022,
+      "source": "VizieR J/ApJ/935/104/table1 (Catalog of Stellar Flares in 219 M-dwarfs), column Prot: 0.0022 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 130.878,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 130.878 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 130.9,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 130.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 183579 (pscomppars): age 3.1 Gyr, from Bonfanti et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671L...8B/abstract)",
   "rotationPeriodDays": 24.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 183579 (pscomppars): rotation period 24.8 d, from Bonfanti et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...671L...8B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 8.6,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 8.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.6,
+      "source": "VizieR J/MNRAS/485/L68/table1b (The evolution of stellar rotation), column ProtP: 23.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.5,
+      "source": "VizieR J/MNRAS/485/L68/table1b (The evolution of stellar rotation), column ProtPRo2: 23.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 183579 (pscomppars): projected rotation speed 2 km/s, from Nordstrom et al. 2004 (https://ui.adsabs.harvard.edu/abs/2004A&A...418..989N/abstract)",
   "shape": {

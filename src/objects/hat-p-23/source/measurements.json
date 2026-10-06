@@ -19,8 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HAT-P-23 (pscomppars): log10 of the luminosity in solar units 0.199, from Bakos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
   "ageGyr": 4,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HAT-P-23 (pscomppars): age 4 Gyr, from Bakos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
+  "rotationPeriodDays": 7.5,
+  "rotationPeriodSource": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 7.5 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.5,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 7.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 8.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-23 (pscomppars): projected rotation speed 8.1 km/s, from Bakos et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract)",
+  "spinInclinationDegrees": 86.5,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.203 solar radii): sin i = v sin i × P / (2πR) = 0.998. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

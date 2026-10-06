@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 220.35822114029253,
+  "declinationDegrees": 33.01180862735855,
+  "displayMeridianDegrees": 270,
+  "phase": "arbitrary-display-phase",
+  "source": "Spin inclination 39 degrees from the line of sight and rotation period 4.83 d: Folsom et al., arXiv:1601.00684, Table 2: rotation period 4.83 d and an axis 39 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1601.00684), with the north pole tilted toward us. The direction of the axis on the sky is not measured; it is placed toward celestial north as a convention. The axis is sin(i) x sky-north - cos(i) x (direction to the star): RA 220.3582, Dec +33.0118. Longitude 0 faces the Sun as a display convention.",
+  "coordinateSystem": "ICRF/J2000. +Z is the spin axis above; +X is the display meridian; east longitude. No spin is propagated.",
+  "qualification": "The tilt of the spin axis is measured; its position angle on the sky and the rotation phase are display conventions."
+}

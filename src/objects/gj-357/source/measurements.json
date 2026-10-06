@@ -19,6 +19,52 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 357 (pscomppars): log10 of the luminosity in solar units -1.79833, from Luque et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...628A..39L/abstract)",
   "rotationPeriodDays": 77.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 357 (pscomppars): rotation period 77.8 d, from Oddo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 114,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 114 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.931,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 3.931 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 74.3,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 74.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 74.3,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 74.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 77.8,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 77.8 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 74.3,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 74.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 77.8,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 77.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.5297,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 20.529699 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 86.1,
+      "source": "VizieR J/ApJ/960/62/table3 (Red dwarfs, Xray, UV, and CaII), column Prot: 86.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 86.1,
+      "source": "VizieR J/ApJ/960/62/table7 (Red dwarfs, Xray, UV, and CaII), column Prot: 86.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 77.8,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 77.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 357 (pscomppars): projected rotation speed 2 km/s, from Luque et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019A&A...628A..39L/abstract)",
   "shape": {

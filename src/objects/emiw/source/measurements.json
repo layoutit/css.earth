@@ -17,6 +17,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 7199 (pscomppars): log10 of the luminosity in solar units -0.1549, from Dumusque et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...535A..55D/abstract)",
   "ageGyr": 6.79,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 7199 (pscomppars): age 6.79 Gyr, from Dumusque et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...535A..55D/abstract)",
+  "rotationPeriodDays": 42.89,
+  "rotationPeriodSource": "VizieR J/A+A/535/A55/stars (4 stars with long-period planets), column Prot: 42.89 d, the row 0.4 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 42.89,
+      "source": "VizieR J/A+A/535/A55/stars (4 stars with long-period planets), column Prot: 42.89 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 41.4,
+      "source": "VizieR J/A+A/654/A168/tablee2 (Convective blueshifts for solar-type stars), column Prot: 41.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 42.89,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 42.89 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 7199 (pscomppars): projected rotation speed 2.5 km/s, from Valenti & Fischer 2005 (https://ui.adsabs.harvard.edu/abs/2005ApJS..159..141V/abstract)",
   "shape": {

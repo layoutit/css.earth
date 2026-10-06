@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "flegetonte-corona",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -903005784468654500,
+        56419601164951050,
+        44577180835115920
+      ],
+      "localToReferenceXyzw": [
+        -0.47209661840898415,
+        0.5025136800393851,
+        0.5278817031385088,
+        -0.4959291196851258
+      ],
+      "metersPerUnit": 588694500.0000001,
+      "boundsUnits": {
+        "min": [
+          -4,
+          -4,
+          -4
+        ],
+        "max": [
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "flegetonte"
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}

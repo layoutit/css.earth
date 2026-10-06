@@ -19,6 +19,16 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of KELT-20 (pscomppars): log10 of the luminosity in solar units 1.1038, from Lund et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract)",
   "ageGyr": 0.6,
   "ageSource": "NASA Exoplanet Archive, composite parameters of KELT-20 (pscomppars): age 0.6 Gyr, from Lund et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.7,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 0.7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 29.5334,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 29.5334 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 117.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KELT-20 (pscomppars): projected rotation speed 117.4 km/s, from Lund et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract)",
   "shape": {

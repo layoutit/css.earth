@@ -21,6 +21,28 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 486 (pscomppars): age 4 Gyr, from Caballero et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.120C/abstract)",
   "rotationPeriodDays": 130.1,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 486 (pscomppars): rotation period 130.1 d, from Trifonov et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021Sci...371.1038T/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 147,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 147 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 49.4,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 49.4 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 49.9,
+      "source": "VizieR J/A+A/684/A9/tablec1 (Rotation periods for 261 M dwarfs), column Pbest: 49.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 49.4,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 49.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 49.9,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 49.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 486 (pscomppars): projected rotation speed 2 km/s, from Caballero et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...665A.120C/abstract)",
   "shape": {

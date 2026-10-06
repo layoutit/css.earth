@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of Gliese 12 (pscomppars): age 7 Gyr, from Turner et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T/abstract)",
   "rotationPeriodDays": 85,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of Gliese 12 (pscomppars): rotation period 85 d, from Turner et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.545f1703T/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 74,
+      "source": "VizieR J/A+A/600/A13/tablea3 (HARPS M dwarf sample magnetic activity), column Prot: 74 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 81.17,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 81.17 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 78.5,
+      "source": "VizieR J/ApJ/960/62/table7 (Red dwarfs, Xray, UV, and CaII), column Prot: 78.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Gliese 12 (pscomppars): projected rotation speed 2 km/s, from Kuzuhara et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJ...967L..21K/abstract)",
   "shape": {

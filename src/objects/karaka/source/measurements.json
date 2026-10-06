@@ -17,6 +17,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 137388 (pscomppars): log10 of the luminosity in solar units -0.33724, from Dumusque et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...535A..55D/abstract)",
   "ageGyr": 6.45,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 137388 (pscomppars): age 6.45 Gyr, from Dumusque et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011A%26A...535A..55D/abstract)",
+  "rotationPeriodDays": 40.6,
+  "rotationPeriodSource": "VizieR J/A+A/654/A168/tablee2 (Convective blueshifts for solar-type stars), column Prot: 40.6 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 42.44,
+      "source": "VizieR J/A+A/535/A55/stars (4 stars with long-period planets), column Prot: 42.44 d, the row 0.5 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 40.6,
+      "source": "VizieR J/A+A/654/A168/tablee2 (Convective blueshifts for solar-type stars), column Prot: 40.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35,
+      "source": "VizieR J/ApJ/734/70/table1 (Chromospheric activity of Southern stars), column Prot: 35 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 137388 (pscomppars): projected rotation speed 4 km/s, from Nordstrom et al. 2004 (https://ui.adsabs.harvard.edu/abs/2004A&A...418..989N/abstract)",
   "shape": {

@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2076 (pscomppars): age 0.21 Gyr, from Wang et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026NatAs..10..818W/abstract)",
   "rotationPeriodDays": 7.21,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-2076 (pscomppars): rotation period 7.21 d, from Frazier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..41F/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.27,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 7.27 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5.43,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 5.43 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.36,
+      "source": "VizieR J/AJ/170/32/table3 (TI-DYE. III. TOI-2076 light curves & comoving stars), column Prot: 7.36 d, the row 1.9 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.27,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2076 (pscomppars): projected rotation speed 5.27 km/s, from Frazier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..41F/abstract)",
   "spinInclinationDegrees": 82.2,

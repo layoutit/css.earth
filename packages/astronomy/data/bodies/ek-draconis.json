@@ -1,0 +1,30 @@
+{
+ "id": "ek-draconis",
+ "classification": "star",
+ "order": 5799,
+ "physical": {
+  "name": "EK Draconis",
+  "horizonsCode": null,
+  "meanRadiusKm": 653958,
+  "gravitationalParameterKm3PerS2": 126076818039.8424,
+  "parent": null,
+  "effectiveTemperatureK": 5647
+ },
+ "physicalNotes": "Radius 0.94 solar radii from Waite et al., arXiv:1611.07751, Table 1: radius 0.94 solar radii (https://arxiv.org/abs/1611.07751): 653,958 km at 695,700 km per solar radius. Mass 0.95 solar masses from Waite et al., arXiv:1611.07751, Table 1: mass 0.95 solar masses (https://arxiv.org/abs/1611.07751); GM is that mass times the JPL solar GM. Temperature 5647 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82). Spin inclination 60 degrees and rotation period 2.766 d from Waite et al., arXiv:1611.07751, Table 1: rotation period 2.766 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1611.07751). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 219.74948584800893,
+  "declinationDegrees": 64.29149618188796,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 34.404388048325885,
+  "properMotionRaMasPerYear": -135.75073196522396,
+  "properMotionDecMasPerYear": -37.08905496606187,
+  "radialVelocityKmPerS": -21.120468,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1668690628102524672 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/ek-draconis/source/photometry/gaia-dr3-source.csv; cross-identification HD 129333, HIP 71631: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+1668690628102524672",
+   "distance": "Gaia DR3 parallax 29.0661 +/- 0.0217 mas (same row, RUWE 1.43): 34.40 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+   "properMotion": "Gaia DR3 (same row): -135.751, -37.089 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -21.12 +/- 0.19 km/s"
+  }
+ }
+}

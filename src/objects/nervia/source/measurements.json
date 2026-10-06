@@ -19,8 +19,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 49674 (pscomppars): log10 of the luminosity in solar units -0.02162, from Wright et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJ...657..533W/abstract)",
   "ageGyr": 3.62,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 49674 (pscomppars): age 3.62 Gyr, from Sanz-Forcada et al. 2010 (https://ui.adsabs.harvard.edu/abs/2010A%26A...511L...8S/abstract)",
+  "rotationPeriodDays": 28,
+  "rotationPeriodSource": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 28 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 28,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 28 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 28,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 28 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.42,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 49674 (pscomppars): projected rotation speed 0.42 km/s, from Butler et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...646..505B/abstract)",
+  "spinInclinationDegrees": 13.2,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.021 solar radii): sin i = v sin i × P / (2πR) = 0.228. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

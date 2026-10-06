@@ -21,6 +21,24 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 1214 (pscomppars): age 3 Gyr, from Berta et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011ApJ...736...12B/abstract)",
   "rotationPeriodDays": 124.7,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 1214 (pscomppars): rotation period 124.7 d, from Cloutier et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..174C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 54.88,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 54.88 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 125,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 125 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 125,
+      "source": "VizieR J/ApJ/960/62/table5 (Red dwarfs, Xray, UV, and CaII), column Prot: 125 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 125,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 125 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 1214 (pscomppars): projected rotation speed 2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {

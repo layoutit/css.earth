@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-107 (pscomppars): age 3.4 Gyr, from Bourrier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract)",
   "rotationPeriodDays": 17.1,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-107 (pscomppars): rotation period 17.1 d, from Bourrier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 16.41,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 16.41 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.1,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 17.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.1,
+      "source": "VizieR J/AJ/155/177/table1 (Obliquities of planetary & eclipsing binary systems), column Pphot: 17.1 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.51,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-107 (pscomppars): projected rotation speed 0.507 km/s, from Bourrier et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...669A..63B/abstract)",
   "spinInclinationDegrees": 14.9,

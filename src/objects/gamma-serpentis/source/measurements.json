@@ -17,8 +17,18 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1193030490492925824, flags_flame 00: lum_flame 3.054756 solar luminosities (16th to 84th percentiles 3.0420077 to 3.0681338); its log10 is recorded",
   "ageGyr": 3.769,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 1193030490492925824, flags_flame 00: age_flame 3.7692122 Gyr (16th to 84th percentiles 3.2297766 to 4.308658)",
+  "rotationPeriodDays": 6.2,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 6.2 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.2,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 6.2 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 11.71,
   "projectedRotationSpeedSource": "SIMBAD, * gam Ser: projected rotation speed 11.71 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
+  "spinInclinationDegrees": 77.1,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.472 solar radii): sin i = v sin i × P / (2πR) = 0.975. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 736) (photometry/stellar-color.json); no image of the photosphere exists."

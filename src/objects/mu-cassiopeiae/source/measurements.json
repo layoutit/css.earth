@@ -13,6 +13,14 @@
   "surfaceGravitySource": "log g 4.28 from 2025A&A...698A..93J, the median of its 2 spectra; the 69 published values span log g 4.07 to 4.84, across which the limb law changes by at most 0.2% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2025A%26A...698A..93J)",
   "spectralType": "G5Vb",
   "spectralTypeSource": "SIMBAD, * mu. Cas: spectral type G5Vb (1989ApJS...71..245K)",
+  "rotationPeriodDays": 29,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 29 d, the row 1.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 29,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 29 d, the row 1.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.17,
   "projectedRotationSpeedSource": "SIMBAD, * mu. Cas: projected rotation speed 4.17 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {

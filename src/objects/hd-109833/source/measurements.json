@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 109833 (pscomppars): age 0.027 Gyr, from Wood et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract)",
   "rotationPeriodDays": 5.111,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 109833 (pscomppars): rotation period 5.111 d, from Wood et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 5.11,
+      "source": "VizieR J/AJ/165/85/table5 (THYME. IX. MELANGE-4 association members), column PRot: 5.11 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 10.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 109833 (pscomppars): projected rotation speed 10.5 km/s, from Wood et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract)",
   "shape": {

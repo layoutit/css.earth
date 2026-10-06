@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "v374-pegasi",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "V374 Pegasi",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2005-08",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "radial-field-2006-08",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 236538
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/v374-pegasi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "V374 Pegasi",
+      "classification": "star",
+      "color": "#ffbf7c",
+      "distanceAu": 1877599.2,
+      "description": "A star 34% of the Sun's width that turns once in 10.7 hours, with a mapped magnetic field.",
+      "systemName": "V374 Pegasi system",
+      "order": 5803,
+      "context": {
+        "order": 5800
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        214825752353272830,
+        -122495583222395280,
+        133195421196029260
+      ],
+      "presentationToReference": [
+        0.5778075062325315,
+        0.6486675390912234,
+        -0.4953472614950841,
+        -0.3294642024576302,
+        -0.3698949161647298,
+        -0.8686950502301974,
+        0.7467207142167016,
+        -0.665137711098103,
+        0.000015325650390255585
+      ],
+      "orbitUpReference": [
+        -0.6486675390912234,
+        0.3698949161647298,
+        0.665137711098103
+      ],
+      "metersPerUnit": 763025.8064516129,
+      "bodyRadiusM": 236538000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

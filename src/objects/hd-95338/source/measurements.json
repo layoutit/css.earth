@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 95338 (pscomppars): log10 of the luminosity in solar units -0.3098, from Díaz et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020MNRAS.496.4330D/abstract)",
   "ageGyr": 9.5,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 95338 (pscomppars): age 9.5 Gyr, from Kálmán et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract)",
+  "rotationPeriodDays": 44,
+  "rotationPeriodSource": "VizieR J/ApJ/734/70/table1 (Chromospheric activity of Southern stars), column Prot: 44 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 44,
+      "source": "VizieR J/ApJ/734/70/table1 (Chromospheric activity of Southern stars), column Prot: 44 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.23,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 95338 (pscomppars): projected rotation speed 1.23 km/s, from Kálmán et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.240K/abstract)",
   "shape": {

@@ -19,6 +19,18 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2084 (pscomppars): log10 of the luminosity in solar units -1.49214, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
   "ageGyr": 7.5,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-2084 (pscomppars): age 7.5 Gyr, from Barkaoui et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..38B/abstract)",
+  "rotationPeriodDays": 38.7886,
+  "rotationPeriodSource": "VizieR J/AJ/170/15/table1 (Rotation periods of 272 stars from TESS & ZTF), column Prot-ZTF-r: 38.78857628586744 d, the row 1.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 38.7953,
+      "source": "VizieR J/AJ/170/15/table1 (Rotation periods of 272 stars from TESS & ZTF), column Prot-TESS: 38.79525905181036 d, the row 1.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 38.7886,
+      "source": "VizieR J/AJ/170/15/table1 (Rotation periods of 272 stars from TESS & ZTF), column Prot-ZTF-r: 38.78857628586744 d, the row 1.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

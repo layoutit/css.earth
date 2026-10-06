@@ -15,6 +15,22 @@
   "spectralTypeSource": "SIMBAD, HD 10780: spectral type K0V (2007AJ....133.2524W)",
   "luminosityLogSolar": -0.273,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 512167948043650816, flags_flame 00: lum_flame 0.5331325 solar luminosities (16th to 84th percentiles 0.52808535 to 0.53816235); its log10 is recorded",
+  "rotationPeriodDays": 25.9,
+  "rotationPeriodSource": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 25.9 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 26,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 23 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 25.9,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 25.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "SIMBAD, HD 10780: projected rotation speed 2 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

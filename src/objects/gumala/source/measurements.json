@@ -19,6 +19,26 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 179949 (pscomppars): log10 of the luminosity in solar units 0.30146, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 2.56,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 179949 (pscomppars): age 2.56 Gyr, from Takeda et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJS..168..297T/abstract)",
+  "rotationPeriodDays": 7.6,
+  "rotationPeriodSource": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 7.6 d, the row 0.0 arcsec from the star's J2000 place. The middle of 4 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.6,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 7.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.6,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 7.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 5,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.6,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 7.6 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 6.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 179949 (pscomppars): projected rotation speed 6.3 km/s, from Tinney et al. 2001 (https://ui.adsabs.harvard.edu/abs/2001ApJ...551..507T/abstract)",
   "shape": {

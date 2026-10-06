@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-29 (pscomppars): age 2.6 Gyr, from Santerne et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract)",
   "rotationPeriodDays": 10.79,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-29 (pscomppars): rotation period 10.79 d, from Santerne et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 10.76,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 10.76 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.06317,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 6.06317 d, the row 0.5 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-29 (pscomppars): projected rotation speed 3.7 km/s, from Santerne et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...824...55S/abstract)",
   "spinInclinationDegrees": 66.6,

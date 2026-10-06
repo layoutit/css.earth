@@ -11,6 +11,14 @@
   "effectiveTemperatureSource": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 56399551 (VizieR IV/39/tic82) (https://doi.org/10.3847/1538-3881/ab3467)",
   "surfaceGravityLogg": 4.58,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-152-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.583, rounded to two decimals",
+  "rotationPeriodDays": 6.0632,
+  "rotationPeriodSource": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 6.06317 d, the row 3.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 6.06317,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 6.06317 d, the row 3.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

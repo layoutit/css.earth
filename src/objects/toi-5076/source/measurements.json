@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5076 (pscomppars): age 8.4 Gyr, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "rotationPeriodDays": 57,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-5076 (pscomppars): rotation period 57 d, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 57,
+      "source": "VizieR J/A+A/694/A36/stars (Velocity curves of 7 transiting systems), column Prot: 57 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5076 (pscomppars): projected rotation speed 2.3 km/s, from Heidari et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...694A..36H/abstract)",
   "shape": {

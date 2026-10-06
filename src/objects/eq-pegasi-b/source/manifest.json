@@ -1,0 +1,240 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [
+    {
+      "id": "eq-pegasi-b-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/0808.1423",
+      "credit": "Morin et al., arXiv:0808.1423",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "eq-pegasi-b-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "datasets"
+      ]
+    },
+    {
+      "id": "eq-pegasi-b-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "eq-pegasi-b-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "eq-pegasi-b-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "eq-pegasi-b-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt",
+      "credit": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row M4V, for SIMBAD's spectral type M4.0Ve: Teff; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the published temperature and the color computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored color recipe naming the cited temperature; repinned when edited."
+      }
+    },
+    {
+      "id": "eq-pegasi-b-claret-2017-limb-darkening",
+      "path": "photometry/claret-2017-tess-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret (2017), A&A 600, A30 (VizieR J/A+A/600/A30)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic TESS coefficients of the grid nodes at 3200..3300 K, log g 5..5.5, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eq-pegasi-b-claret-2017-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "eq-pegasi-b-gaia-dr3-source",
+      "path": "photometry/gaia-dr3-source.csv",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Creevey et al. (2023), A&A 674, A26 (FLAME)",
+      "license": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia Archive TAP query in source/preparation/acquisition.json: the gaia_source row of source_id 2824770686019004032 (position, parallax, proper motion, radial velocity) with its FLAME mass and radius.",
+      "redistribution": "One catalogue row, retained unchanged with its credit.",
+      "consumers": [
+        "placement"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eq-pegasi-b-gaia-dr3-source",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "eq-pegasi-b-espadons-map-radial-field-2006-08",
+      "path": "science/espadons/eq-peg-b-2006-08.dat",
+      "origin": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "productId": "Magnetic map of EQ Peg B, Aug 2006, from 14 ESPaDOnS spectra",
+      "title": "Magnetic map of EQ Peg B from 14 polarised spectra of 5 August 2006 to 12 August 2006: radial, azimuthal and meridional field on a longitude-latitude grid",
+      "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/",
+      "credit": "CFHT ESPaDOnS, CFHT program 06BF10, from the Canadian Astronomy Data Centre; reduced and mapped in this project with Korg 1.3.1, LSDpy 1.0.0, specpolFlow 1.1.0, ZDIpy. This research used the facilities of the Canadian Astronomy Data Centre operated by the National Research Council of Canada with the support of the Canadian Space Agency.",
+      "displayCredit": "CFHT ESPaDOnS · mapped here",
+      "license": "CC BY 4.0 for the archived spectra (Canadian Astronomy Data Centre); reduction by this project",
+      "licenseEvidence": [
+        "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/about.html",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Written by packages/telescope-cli/src/archives/espadons/reduce.mts with the program eq-peg-b-2006-08, which pins every archived spectrum by its size. The run's receipt (the line list, the codes and each step's result) is written again by that command under output/espadons and is not kept in git.",
+      "redistribution": "Archived spectra under CC BY 4.0, reduced here.",
+      "consumers": [
+        "espadons-zdi"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cadc-cfht-espadons",
+            "role": "material",
+            "evidence": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+          },
+          {
+            "catalogueId": "arxiv-1711-08636",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1711.08636"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "limb-darkened-disc-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+        "inputs": [
+          "eq-pegasi-b-stellar-color",
+          "eq-pegasi-b-claret-2017-limb-darkening",
+          "eq-pegasi-b-preparation-raster"
+        ]
+      },
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/new-object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
+      }
+    }
+  ]
+}

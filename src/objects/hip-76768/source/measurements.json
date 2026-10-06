@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hip-76768",
+  "angularDiameterMas": 0.21,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 591,345 km at 38.53 pc = 0.21 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 38.52723833926101,
+  "distanceSource": "Gaia DR3 parallax 25.9557 +/- 0.0401 mas (same row, RUWE 1.81): 38.53 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+  "radiusKm": 591345,
+  "radiusSource": "Radius 0.85 solar radii from Folsom et al., arXiv:1601.00684, Table 2: radius 0.85 solar radii (https://arxiv.org/abs/1601.00684): 591,345 km at 695,700 km per solar radius. Mass 0.8 solar masses from Folsom et al., arXiv:1601.00684, Table 2: mass 0.8 solar masses (https://arxiv.org/abs/1601.00684); GM is that mass times the JPL solar GM. Temperature 4440 K from Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row K5V, for SIMBAD's spectral type K5V: Teff (https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt). Spin inclination 60 degrees and rotation period 3.7 d from Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.7 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1601.00684). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4440,
+  "effectiveTemperatureSource": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row K5V, for SIMBAD's spectral type K5V: Teff (https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt)",
+  "surfaceGravityLogg": 4.48,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hip-76768.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.482, rounded to two decimals",
+  "spectralType": "K5V",
+  "spectralTypeSource": "SIMBAD, HD 139751: spectral type K5V (1986AJ.....92..139S)",
+  "rotationPeriodDays": 3.64,
+  "rotationPeriodSource": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 3.64 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.7,
+      "source": "VizieR J/A+A/520/A15/periods (RACE-OC project: YSOs within 100pc), column Per: 3.7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.64,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 3.64 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
+  "projectedRotationSpeedKmS": 6.5,
+  "projectedRotationSpeedSource": "SIMBAD, HD 139751: projected rotation speed 6.5 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

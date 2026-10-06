@@ -1,0 +1,49 @@
+{
+  "id": "tyc-6878-195-1",
+  "name": "TYC 6878-195-1",
+  "system": "TYC 6878-195-1 system",
+  "description": "A star 1.37 solar radii and 1.17 solar masses that turns once in 5.7 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 6764026419748892160",
+  "gaia": "6764026419748892160",
+  "paper": {
+    "url": "https://arxiv.org/abs/1601.00684",
+    "credit": "Folsom et al., arXiv:1601.00684"
+  },
+  "radius": {
+    "value": 1.37,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: radius 1.37 solar radii",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "mass": {
+    "value": 1.17,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: mass 1.17 solar masses",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "temperature": {
+    "value": 4600,
+    "source": "Pecaut & Mamajek (2013, ApJS 208, 9), the online table's version 2022.04.16, row K4V, for SIMBAD's spectral type K4V(e): Teff",
+    "url": "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt"
+  },
+  "spin": {
+    "inclinationDegrees": 68,
+    "periodDays": 5.7,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: rotation period 5.7 d and an axis 68 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 1.4 times the Sun's width that turns once in 5.7 days, with a mapped magnetic field.",
+    "introduction": "Folsom et al. give it 1.37 solar radii, 1.17 solar masses, a rotation period of 5.7 days and an axis tilted 68° from the line of sight.",
+    "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -9.481,
+    "uncertainty": 0.108,
+    "source": "SIMBAD's radial velocity for Gaia DR3 6764026419748892160 (quality A), from 2021MNRAS.506..150B; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021MNRAS.506..150B/abstract"
+  },
+  "order": 5797
+}

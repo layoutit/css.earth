@@ -15,6 +15,20 @@
   "spectralTypeSource": "SIMBAD, BPM 5856: spectral type M0V (2006A&A...460..695T)",
   "luminosityLogSolar": -1.111,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-833 (pscomppars): log10 of the luminosity in solar units -1.11104, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.01,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot1: 4.01 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.49,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot2: 7.49 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.2,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 15.2 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.7,
   "projectedRotationSpeedSource": "SIMBAD, BPM 5856: projected rotation speed 3.7 km/s, the measurement SIMBAD prefers (2006A&A...460..695T)",
   "shape": {

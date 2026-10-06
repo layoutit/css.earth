@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-6569",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2371914419569515136: position at J2016.0. Distance: Gaia DR3 parallax 21.9942 +/- 0.0179 mas (same row, RUWE 0.96): 45.47 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): 99.927, -94.676 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.76 solar radii from Folsom et al., arXiv:1711.08636, Table 2: radius 0.76 solar radii (https://arxiv.org/abs/1711.08636). Mass 0.85 solar masses from Folsom et al., arXiv:1711.08636, Table 2: mass 0.85 solar masses (https://arxiv.org/abs/1711.08636). Temperature 5024 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 66534229: Teff.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82",
+        "https://arxiv.org/abs/1711.08636"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 2371914419569515136, through the CIE 1931 2-degree observer: #ffe2ce. Routes tried in order: stis-ngsl: HD 6569 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2371914419569515136&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,024 K and log g 4.61 (u1 0.651, u2 0.124): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "spin",
+      "subject": "Spin",
+      "status": "included",
+      "finding": "Inclination 77 degrees from the line of sight, period 7.13 d, from Folsom et al., arXiv:1711.08636, Table 2: rotation period 7.13 d and an axis 77 degrees from the line of sight, the values its magnetic maps were made with; the axis's direction on the sky is a convention.",
+      "evidence": [
+        "https://arxiv.org/abs/1711.08636"
+      ]
+    }
+  ]
+}

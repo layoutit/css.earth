@@ -21,6 +21,12 @@
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 5482316880495405056, flags_flame 00: age_flame 8.417157 Gyr (16th to 84th percentiles 6.356648 to 10.371697)",
   "rotationPeriodDays": 36,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-286 (pscomppars): rotation period 36 d, from Hobson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 68.4,
+      "source": "VizieR J/ApJ/962/47/table5 (TESS stellar rotation in the Southern CVZ), column Prot: 68.4 d, the row 1.2 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.5,
   "projectedRotationSpeedSource": "SIMBAD, CD-60 1348: projected rotation speed 1.5 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

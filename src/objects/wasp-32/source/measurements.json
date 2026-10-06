@@ -19,6 +19,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-32 (pscomppars): age 2.22 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "rotationPeriodDays": 11.6,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-32 (pscomppars): rotation period 11.6 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 11.6,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 11.6 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.9,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-32 (pscomppars): projected rotation speed 3.9 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "spinInclinationDegrees": 70.3,

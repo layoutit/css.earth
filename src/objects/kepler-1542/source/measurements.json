@@ -19,6 +19,56 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-1542 (pscomppars): log10 of the luminosity in solar units 0.07026, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
   "ageGyr": 8.51,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-1542 (pscomppars): age 8.51 Gyr, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 37.81,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 37.81 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.81,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 15.81 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.81,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 15.81 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.23,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column A18Per: 19.23 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 13.1,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column D21Per: 13.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 43.52,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M15Per: 43.52 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 43.52,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 43.52 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 13.1,
+      "source": "VizieR J/ApJ/890/L31/table1 (Rotational periods and J_2_ of Kepler stars), column Prot: 13.1 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 43.52,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 43.52 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 37.186,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Prot: 37.186 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.42,
+      "source": "VizieR J/ApJS/241/29/table1 (Flare catalog through LC data of Kepler DR25), column Prot: 14.42 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.2344,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 19.2344401926167 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 0.8,
   "projectedRotationSpeedSource": "SIMBAD, Kepler-1542: projected rotation speed 0.8 km/s, the measurement SIMBAD prefers (2018ApJS..237...38B)",
   "shape": {

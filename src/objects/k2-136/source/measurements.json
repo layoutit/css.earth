@@ -21,6 +21,32 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-136 (pscomppars): age 0.65 Gyr, from Mayo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M/abstract)",
   "rotationPeriodDays": 15,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-136 (pscomppars): rotation period 15 d, from Mann et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155....4M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14.68,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 14.68 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.95,
+      "source": "VizieR J/A+A/640/A66/hyades (Updated X-ray view of the Hyades cluster), column Per: 14.95 d, the row 1.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.95,
+      "source": "VizieR J/ApJ/879/100/table3 (K2 rotation periods for Hyades & Praesepe members), column Prot1: 14.95 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.95,
+      "source": "VizieR J/ApJ/916/77/table3 (K2 rotation periods for SDSS & Gaia M dwarfs), column Per: 14.95 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.953,
+      "source": "VizieR J/ApJ/931/45/table2 (The factory & the beehive. IV. Praesepe & Hyades), column Prot: 14.953 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 14.95,
+      "source": "VizieR J/ApJ/962/12/table1 (The Factory and the Beehive. V.), column Prot: 14.95 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-136 (pscomppars): projected rotation speed 2 km/s, from Mayo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..235M/abstract)",
   "spinInclinationDegrees": 61.1,

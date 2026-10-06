@@ -13,6 +13,14 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/capella.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.691, rounded to two decimals",
   "spectralType": "G3III:",
   "spectralTypeSource": "SIMBAD, * alf Aur: spectral type G3III: (1989ApJS...71..245K)",
+  "rotationPeriodDays": 104,
+  "rotationPeriodSource": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 104 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 104,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 104 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 35,
   "projectedRotationSpeedSource": "SIMBAD, * alf Aur: projected rotation speed 35 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

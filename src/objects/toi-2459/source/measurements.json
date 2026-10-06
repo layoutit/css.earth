@@ -15,6 +15,16 @@
   "spectralTypeSource": "SIMBAD, CD-39 1993: spectral type K7V (2010JDSO....6...30B)",
   "luminosityLogSolar": -0.896,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2459 (pscomppars): log10 of the luminosity in solar units -0.89565, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 3.91,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 3.91 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10.49,
+      "source": "VizieR J/AJ/168/41/table3 (THYME. X. MELANGE-5 association cand. members), column Prot: 10.49 d, the row 1.5 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

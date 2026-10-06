@@ -17,6 +17,22 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2261614264931057664, flags_flame 00: lum_flame 0.43389577 solar luminosities (16th to 84th percentiles 0.42880833 to 0.43894202); its log10 is recorded",
   "ageGyr": 9.933,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2261614264931057664, flags_flame 00: age_flame 9.933178 Gyr (16th to 84th percentiles 7.9920483 to 11.718977)",
+  "rotationPeriodDays": 33,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 33 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 33,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 33 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 31,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 31 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.8,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 33.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 6.79,
   "projectedRotationSpeedSource": "SIMBAD, * sig Dra: projected rotation speed 6.79 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {

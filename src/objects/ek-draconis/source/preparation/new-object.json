@@ -1,0 +1,54 @@
+{
+  "id": "ek-draconis",
+  "name": "EK Draconis",
+  "system": "EK Draconis system",
+  "description": "A star 0.94 solar radii and 0.95 solar masses that turns once in 2.77 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 1668690628102524672",
+  "gaia": "1668690628102524672",
+  "paper": {
+    "url": "https://arxiv.org/abs/1611.07751",
+    "credit": "Waite et al., arXiv:1611.07751"
+  },
+  "radius": {
+    "value": 0.94,
+    "source": "Waite et al., arXiv:1611.07751, Table 1: radius 0.94 solar radii",
+    "url": "https://arxiv.org/abs/1611.07751"
+  },
+  "mass": {
+    "value": 0.95,
+    "source": "Waite et al., arXiv:1611.07751, Table 1: mass 0.95 solar masses",
+    "url": "https://arxiv.org/abs/1611.07751"
+  },
+  "temperature": {
+    "value": 5647,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 159613900: Teff",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+  },
+  "spin": {
+    "inclinationDegrees": 60,
+    "periodDays": 2.766,
+    "source": "Waite et al., arXiv:1611.07751, Table 1: rotation period 2.766 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1611.07751"
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "The Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 14390+6417 KON 1: 0.8 arcsec apart, magnitudes 6 and 8.9: the companion gives 6.5% of the light, which a measured spectrum would blend with the star's. The color is the Planck spectrum at the star's temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 94% of the Sun's width that turns once in 2.77 days, with a mapped magnetic field.",
+    "introduction": "Waite et al. give it 0.94 solar radii, 0.95 solar masses, a rotation period of 2.77 days and an axis tilted 60° from the line of sight.",
+    "locator": "Waite et al., arXiv:1611.07751, Table 1"
+  },
+  "notes": [],
+  "order": 5799
+}

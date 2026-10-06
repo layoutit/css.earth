@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-141 (pscomppars): age 6.3 Gyr, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
   "rotationPeriodDays": 15.17,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-141 (pscomppars): rotation period 15.17 d, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7,
+      "source": "VizieR J/ApJ/890/L31/table1 (Rotational periods and J_2_ of Kepler stars), column Prot: 7 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-141 (pscomppars): projected rotation speed 3 km/s, from Barragán et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...612A..95B/abstract)",
   "shape": {

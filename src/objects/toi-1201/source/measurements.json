@@ -19,6 +19,12 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1201 (pscomppars): log10 of the luminosity in solar units -1.46852, from Kossakowski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...656A.124K/abstract)",
   "rotationPeriodDays": 21,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1201 (pscomppars): rotation period 21 d, from Kossakowski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...656A.124K/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 21,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 21 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1201 (pscomppars): projected rotation speed 2 km/s, from Kossakowski et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021A&A...656A.124K/abstract)",
   "shape": {

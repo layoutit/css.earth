@@ -1,0 +1,43 @@
+{
+  "id": "tyc-486-4943-1",
+  "name": "TYC 486-4943-1",
+  "system": "TYC 486-4943-1 system",
+  "description": "A star 0.69 solar radii and 0.75 solar masses that turns once in 3.75 days; its magnetic field has been mapped.",
+  "parent": "milky-way",
+  "target": "Gaia DR3 4289366113217575424",
+  "gaia": "4289366113217575424",
+  "paper": {
+    "url": "https://arxiv.org/abs/1601.00684",
+    "credit": "Folsom et al., arXiv:1601.00684"
+  },
+  "radius": {
+    "value": 0.69,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: radius 0.69 solar radii",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "mass": {
+    "value": 0.75,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: mass 0.75 solar masses",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "temperature": {
+    "value": 4663,
+    "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 212488763: Teff",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+  },
+  "spin": {
+    "inclinationDegrees": 75,
+    "periodDays": 3.75,
+    "source": "Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.75 d and an axis 75 degrees from the line of sight, the values its magnetic maps were made with",
+    "url": "https://arxiv.org/abs/1601.00684"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 69% of the Sun's width that turns once in 3.75 days, with a mapped magnetic field.",
+    "introduction": "Folsom et al. give it 0.69 solar radii, 0.75 solar masses, a rotation period of 3.75 days and an axis tilted 75° from the line of sight.",
+    "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+  },
+  "notes": [],
+  "order": 5793
+}

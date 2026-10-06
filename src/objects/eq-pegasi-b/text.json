@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "eq-pegasi-b",
+  "card": {
+    "text": "A star 25% of the Sun's width that turns once in 9.72 hours, with a mapped magnetic field.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0808-1423",
+        "url": "https://arxiv.org/abs/0808.1423",
+        "label": "Morin et al. (2008), Mon.Not.Roy.Astron.Soc.390:567-581,2010",
+        "checked": "2026-10-06",
+        "locator": "Morin et al., arXiv:0808.1423, Table 1"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Morin et al. give it 0.25 solar radii, 0.25 solar masses, a rotation period of 9.72 hours and an axis tilted 60° from the line of sight.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-0808-1423",
+        "url": "https://arxiv.org/abs/0808.1423",
+        "label": "Morin et al. (2008), Mon.Not.Roy.Astron.Soc.390:567-581,2010",
+        "checked": "2026-10-06",
+        "locator": "Morin et al., arXiv:0808.1423, Table 1"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "radial-field-2006-08": {
+      "title": "Radial field, Aug 2006",
+      "detail": "1 epoch, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    }
+  }
+}

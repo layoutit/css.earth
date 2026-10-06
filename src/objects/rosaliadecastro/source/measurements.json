@@ -19,6 +19,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of HD 149143 (pscomppars): log10 of the luminosity in solar units 0.35, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
   "ageGyr": 4.28,
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 149143 (pscomppars): age 4.28 Gyr, from Ment et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156..213M/abstract)",
+  "rotationPeriodDays": 28,
+  "rotationPeriodSource": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 28 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 28,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 28 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 28,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 28 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 28,
+      "source": "VizieR J/ApJ/919/138/table1 (Rot. vel. & per. of hot Jupiter host stars), column Prot: 28 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.9,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 149143 (pscomppars): projected rotation speed 3.9 km/s, from da Silva et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006A&A...446..717D/abstract)",
   "shape": {

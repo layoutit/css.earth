@@ -19,6 +19,16 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1718 (pscomppars): log10 of the luminosity in solar units -0.17723, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 11.818,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 885778666260181632, flags_flame 00: age_flame 11.817725 Gyr (16th to 84th percentiles 10.255754 to 13.379696)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 32.3729,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 32.372898 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 46,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 46 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

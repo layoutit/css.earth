@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-444 (pscomppars): age 0.57 Gyr, from Oddo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
   "rotationPeriodDays": 13,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-444 (pscomppars): rotation period 13 d, from Oddo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..134O/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.89,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 4.89 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.573,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 7.573 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

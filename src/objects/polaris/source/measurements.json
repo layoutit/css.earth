@@ -13,8 +13,18 @@
   "surfaceGravitySource": "log g from the astronomy record's GM and radius (physicalNotes), log10(GM/R^2) in cgs",
   "spectralType": "F8Ib",
   "spectralTypeSource": "SIMBAD, * alf UMi: spectral type F8Ib (1993ASPC...45...59L)",
+  "rotationPeriodDays": 79,
+  "rotationPeriodSource": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 79 d, the row 0.1 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 79,
+      "source": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 79 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 15,
   "projectedRotationSpeedSource": "SIMBAD, * alf UMi: projected rotation speed 15 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "spinInclinationDegrees": 30.4,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (46.262 solar radii): sin i = v sin i × P / (2πR) = 0.506. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, shown in the shared neutral gray because no image of the photosphere is cast here (see investigations.json). The photosphere of a pulsating supergiant is not a solid surface and its limb is not sharp."

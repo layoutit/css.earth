@@ -13,6 +13,14 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-201678652.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.248, rounded to two decimals",
   "luminosityLogSolar": 1.984,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3800451843940483072, flags_flame 10: lum_flame 96.38124 solar luminosities (16th to 84th percentiles 85.04054 to 114.23222); its log10 is recorded",
+  "rotationPeriodDays": 21.3314,
+  "rotationPeriodSource": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 21.331353 d, the row 0.1 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 21.3314,
+      "source": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 21.331353 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

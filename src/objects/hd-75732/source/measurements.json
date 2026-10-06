@@ -21,6 +21,24 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of 55 Cnc (pscomppars): age 5.5 Gyr, from Marcy et al. 2002 (https://ui.adsabs.harvard.edu/abs/2002ApJ...581.1375M/abstract)",
   "rotationPeriodDays": 38.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of 55 Cnc (pscomppars): rotation period 38.8 d, from Bourrier et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 43.367,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 43.367 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 38.8,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 38.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 47,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 47 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 40.7,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 40.7 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.23,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of 55 Cnc (pscomppars): projected rotation speed 1.23 km/s, from Bourrier et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...619A...1B/abstract)",
   "shape": {

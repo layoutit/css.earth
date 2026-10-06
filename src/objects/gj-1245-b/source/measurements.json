@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gj-1245-b",
+  "angularDiameterMas": 0.28,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 97,398 km at 4.66 pc = 0.28 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 4.660385954058287,
+  "distanceSource": "Gaia DR3 parallax 214.5745 +/- 0.0476 mas (same row, RUWE 1.61): 4.66 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
+  "radiusKm": 97398,
+  "radiusSource": "Radius 0.14 solar radii from Morin et al., arXiv:1005.5552, Table 1: radius 0.14 solar radii (theoretical radius) (https://arxiv.org/abs/1005.5552): 97,398 km at 695,700 km per solar radius. Mass 0.12 solar masses from Morin et al., arXiv:1005.5552, Table 1: mass 0.12 solar masses (https://arxiv.org/abs/1005.5552); GM is that mass times the JPL solar GM. Temperature 2865 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 274127413: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82). Spin inclination 40 degrees and rotation period 0.71 d from Morin et al., arXiv:1005.5552, Table 1: rotation period 0.71 d and an axis 40 degrees from the line of sight, the values its magnetic maps were made with (https://arxiv.org/abs/1005.5552). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 2865,
+  "effectiveTemperatureSource": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 274127413: Teff (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82)",
+  "surfaceGravityLogg": 5.22,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-1245-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.225, rounded to two decimals",
+  "spectralType": "M6V",
+  "spectralTypeSource": "SIMBAD, G 208-45: spectral type M6V (1991ApJS...77..417K)",
+  "rotationPeriodDays": 0.709,
+  "rotationPeriodSource": "VizieR J/AJ/166/16/table1 (Radial velocities of 123 active stars), column Per: 0.709 d, the row 0.0 arcsec from the star's J2000 place. The middle of 9 catalogued periods, 7 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.7,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 0.7 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.263,
+      "source": "VizieR J/AJ/165/265/table1 (Properties of 363 M-dwarfs from TESS), column PRot: 0.263 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.709,
+      "source": "VizieR J/AJ/166/16/table1 (Radial velocities of 123 active stars), column Per: 0.709 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6.869,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 6.869 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.71,
+      "source": "VizieR J/ApJS/241/29/table1 (Flare catalog through LC data of Kepler DR25), column Prot: 0.71 d, the row 1.6 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.626671,
+      "source": "VizieR J/ApJS/243/28/table6 (M-type star magnetic activities from LAMOST & Kepler), column Per: 0.626671 d, the row 1.6 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.7,
+      "source": "VizieR J/ApJS/244/21/table3 (Surface rotation & activity of Kepler stars. I.), column Prot: 0.7 d, the row 1.6 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.71,
+      "source": "VizieR J/MNRAS/407/2269/stars (Polarisation of a sample of late M dwarfs), column Prot: 0.71 d, the row 1.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.71,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 0.71 d, the row 1.9 arcsec from the star's J2000 place"
+    }
+  ],
+  "projectedRotationSpeedKmS": 7.1,
+  "projectedRotationSpeedSource": "SIMBAD, G 208-45: projected rotation speed 7.1 km/s, the measurement SIMBAD prefers (2023AJ....166...16P)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

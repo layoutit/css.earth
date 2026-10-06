@@ -17,6 +17,14 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of TOI-2120 (pscomppars): [Fe/H] 0.39 dex, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
   "luminosityLogSolar": -2.287,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2120 (pscomppars): log10 of the luminosity in solar units -2.28651, from Hori et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....167..289H/abstract)",
+  "rotationPeriodDays": 2.406,
+  "rotationPeriodSource": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 2.406 d, the row 0.1 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.406,
+      "source": "VizieR J/ApJ/821/93/table1 (Rotation & Galactic kinematics of mid M dwarfs), column Per: 2.406 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

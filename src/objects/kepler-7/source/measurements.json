@@ -19,6 +19,44 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-7 (pscomppars): log10 of the luminosity in solar units 0.69639, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
   "ageGyr": 2.9,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-7 (pscomppars): age 2.9 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 4.88553,
+      "source": "VizieR J/A+A/694/A157/tablea1 (Earth 2.0 candidates stellar magnetic activity), column Prot: 4.88553 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.02,
+      "source": "VizieR J/AJ/155/177/table1 (Obliquities of planetary & eclipsing binary systems), column Pphot: 15.02 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.89,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column A18Per: 15.89 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 16.69,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column D21Per: 16.69 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 103.25,
+      "source": "VizieR J/AJ/161/265/table1 (Compared rotation periods for 1189 CKS host stars), column M15Per: 103.25 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 103.25,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 103.25 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24.096,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Prot: 24.096 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.4522,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 2.4522 d, the row 0.4 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.8865,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 15.8864790006478 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-7 (pscomppars): projected rotation speed 4.2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {

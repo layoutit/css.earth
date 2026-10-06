@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HATS-75 (pscomppars): age 14.9 Gyr, from Jordán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract)",
   "rotationPeriodDays": 35.0435,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HATS-75 (pscomppars): rotation period 35.0435 d, from Jordán et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..125J/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 35.0435,
+      "source": "VizieR J/AJ/163/125/objects (Light curve & radial velocity of 4 giants planets), column Prot: 35.0435 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35.04,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 35.04 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

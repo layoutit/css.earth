@@ -1,0 +1,118 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/eq-pegasi-b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "eq-pegasi-b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csseq-pegasi-b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "eq-pegasi-b-surface-{id}{suffix}.webp",
+      "thumbnail": "eq-pegasi-b-dataset-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2017-tess-quadratic.tsv",
+          "grid": {
+            "teffK": 3210,
+            "logg": 5.04,
+            "models": {
+              "Type": "q",
+              "Mod": "PC"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "aLSM",
+            "u2": "bLSM"
+          }
+        },
+        "qualification": "Photosphere color from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,210 K and log g 5.04 (u1 0.153, u2 0.477): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    },
+    {
+      "id": "radial-field-2006-08",
+      "output": "eq-pegasi-b-surface-{id}{suffix}.webp",
+      "thumbnail": "eq-pegasi-b-dataset-{id}.webp",
+      "source": "science/espadons/eq-peg-b-2006-08.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "radial-field-2006-08",
+        "label": "Aug 2006",
+        "format": "tecplot-lonlat-map",
+        "path": "science/espadons/eq-peg-b-2006-08.dat",
+        "variable": "B<sub>R</sub> [G]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "espadons-zdi",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "G",
+        "minimum": -2000,
+        "maximum": 2000,
+        "colors": [
+          "#0000ff",
+          "#00ffff",
+          "#ffffff",
+          "#ff8000",
+          "#ff0000"
+        ],
+        "labels": [
+          "-2000",
+          "0",
+          "+2000"
+        ],
+        "description": "Radial component of the star's large-scale magnetic field, fitted with ZDIpy to 14 ESPaDOnS spectra of 5 August 2006 to 12 August 2006 (reduced chi-square 1.10, against 1.5 with no field); mean field 442 G. A reduction made in this project, not a published map. Black line: 60 degrees south, below which the star never faces us.",
+        "title": "ESPaDOnS · magnetic map made here · Aug 2006",
+        "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "eq-pegasi-b-context-{id}{suffix}.webp",
+    "limbOutput": "eq-pegasi-b-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csseq-pegasi-b-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

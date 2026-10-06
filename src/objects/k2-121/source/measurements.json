@@ -17,6 +17,16 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-121 (pscomppars): [Fe/H] 0.04 dex, from Howard et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025ApJS..278...52H/abstract)",
   "luminosityLogSolar": -0.745,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-121 (pscomppars): log10 of the luminosity in solar units -0.74531, from Pope et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016MNRAS.461.3399P/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 10.37,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 10.37 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.87045,
+      "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 4.87045 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.38,
   "projectedRotationSpeedSource": "SIMBAD, K2-121: projected rotation speed 4.38 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

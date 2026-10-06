@@ -19,8 +19,26 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5082 (pscomppars): log10 of the luminosity in solar units -0.08961, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 10.407,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3368214650329888512, flags_flame 00: age_flame 10.406918 Gyr (16th to 84th percentiles 8.97696 to 11.813708)",
+  "rotationPeriodDays": 7.837,
+  "rotationPeriodSource": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 7.837 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.837,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 7.837 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 8.69263,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 8.69263 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 6,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 6 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.8,
   "projectedRotationSpeedSource": "SIMBAD, HD 53532: projected rotation speed 5.8 km/s, the measurement SIMBAD prefers (2024A&A...690A.370F)",
+  "spinInclinationDegrees": 75,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.93 solar radii): sin i = v sin i × P / (2πR) = 0.966. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

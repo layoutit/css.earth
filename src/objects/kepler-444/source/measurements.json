@@ -19,6 +19,32 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-444 (pscomppars): log10 of the luminosity in solar units -0.42455, from Q1-Q17 DR25 Supplemental KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
   "ageGyr": 11.23,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-444 (pscomppars): age 11.23 Gyr, from Campante et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...799..170C/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 27.13,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 27.13 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.26,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 39.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 39.26,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 39.26 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.507282,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 0.507282 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 49.4,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 49.4 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 17.203,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 17.2030237691329 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-444 (pscomppars): projected rotation speed 2 km/s, from Nordstrom et al. 2004 (https://ui.adsabs.harvard.edu/abs/2004A&A...418..989N/abstract)",
   "shape": {

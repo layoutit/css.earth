@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-561 (pscomppars): log10 of the luminosity in solar units -0.28233, from Brinkman et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...88B/abstract)",
   "ageGyr": 16.1,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-561 (pscomppars): age 16.1 Gyr, from Polanski et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024ApJS..272...32P/abstract)",
+  "rotationPeriodDays": 77.229,
+  "rotationPeriodSource": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 77.229 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 77.229,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 77.229 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-561 (pscomppars): projected rotation speed 2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {

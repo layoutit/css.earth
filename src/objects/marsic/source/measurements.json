@@ -11,8 +11,18 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 79043: effective temperature 4934 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.105) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "G7III",
   "spectralTypeSource": "SIMBAD, * kap Her A: spectral type G7III (1981ApJS...45..437A)",
+  "rotationPeriodDays": 48,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 48 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 48,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 48 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 9.9,
   "projectedRotationSpeedSource": "SIMBAD, * kap Her A: projected rotation speed 9.9 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "spinInclinationDegrees": 36.5,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (15.773 solar radii): sin i = v sin i × P / (2πR) = 0.595. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

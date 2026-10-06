@@ -1,0 +1,155 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hip-76768",
+  "displayName": "HIP 76768",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.85 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1601-00684",
+          "url": "https://arxiv.org/abs/1601.00684",
+          "label": "Folsom et al. (2016)",
+          "checked": "2026-10-06",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "38.5 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-hip-76768",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-06",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "3.7 days",
+        "source": {
+          "catalogueId": "arxiv-1601-00684",
+          "url": "https://arxiv.org/abs/1601.00684",
+          "label": "Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.7 d and an axis 60 degrees from the line of sight, the values its magnetic maps were made with",
+          "checked": "2026-10-06",
+          "path": "source/preparation/rotation.json",
+          "locator": "source"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hip-76768-dataset-color.webp",
+        "surface": "hip-76768-surface-color@2x.webp",
+        "poles": "hip-76768-poles-color@2x.webp",
+        "source": {
+          "id": "hip-76768-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,440 K and log g 4.48 (u1 0.787, u2 0.010): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "radial-field-2013-05",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, May 2013",
+        "thumbnail": "hip-76768-dataset-radial-field-2013-05.webp",
+        "surface": "hip-76768-surface-radial-field-2013-05@2x.webp",
+        "poles": "hip-76768-poles-radial-field-2013-05@2x.webp",
+        "source": {
+          "id": "hip-76768-espadons-map-radial-field-2013-05",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-500",
+            "0",
+            "+500"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-500",
+              "0",
+              "+500"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in May 2013, reconstructed in this project from 24 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Folsom, C. P. et al., arXiv:1601.00684 map the same run with a mean field of 113 G; this map has 162 G.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 60° S; the star never shows us what lies below it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Folsom et al., arXiv:1601.00684",
+      "href": "https://arxiv.org/abs/1601.00684"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1601.00684",
+      "credit": "Folsom et al., arXiv:1601.00684"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hip-76768.json",
+      "credit": "Folsom et al., arXiv:1601.00684, Table 2: radius 0.85 solar radii radius; Gaia DR3 astrometry; measured spin tilt, axis direction a display convention"
+    }
+  }
+}

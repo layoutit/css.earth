@@ -17,6 +17,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of WASP-43 (pscomppars): age 7 Gyr, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "rotationPeriodDays": 15.6,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of WASP-43 (pscomppars): rotation period 15.6 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 15.6,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 15.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 7.41,
+      "source": "VizieR J/ApJS/250/20/table2 (Rotation periods in TESS objects of interest (TOIs)), column Prot1: 7.41 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15.69,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 15.69 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of WASP-43 (pscomppars): projected rotation speed 4 km/s, from Hellier et al. 2011 (https://ui.adsabs.harvard.edu/abs/2011arXiv1104.2823H/abstract)",
   "shape": {

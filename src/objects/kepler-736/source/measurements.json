@@ -17,6 +17,50 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-736 (pscomppars): log10 of the luminosity in solar units -0.34984, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
   "ageGyr": 4.27,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-736 (pscomppars): age 4.27 Gyr, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "rotationPeriodDays": 33.05,
+  "rotationPeriodSource": "VizieR J/ApJS/244/21/table3 (Surface rotation & activity of Kepler stars. I.), column Prot: 33.05 d, the row 0.0 arcsec from the star's J2000 place. The middle of 10 catalogued periods, 10 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 35.71,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 35.71 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 32.3,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 32.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 32.3,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 32.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.05,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 33.05 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.24,
+      "source": "VizieR J/A+A/679/L12/table1 (Close-in planets around fast-rotating stars), column Prot: 33.24 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.05,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 33.05 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.789,
+      "source": "VizieR J/ApJ/775/L11/table1 (Stellar rotation periods for KOIs), column Prot: 34.789 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.78,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 34.78 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.79,
+      "source": "VizieR J/ApJ/807/170/table2 (Prograde vs retrogade motions. II. KOIs), column Prot: 34.79 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.05,
+      "source": "VizieR J/ApJS/244/21/table3 (Surface rotation & activity of Kepler stars. I.), column Prot: 33.05 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.17,
   "projectedRotationSpeedSource": "SIMBAD, Kepler-736: projected rotation speed 3.17 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {

@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-776 (pscomppars): age 6.1 Gyr, from Fridlund et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..12F/abstract)",
   "rotationPeriodDays": 21.13,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-776 (pscomppars): rotation period 21.13 d, from Fridlund et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..12F/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 15.665,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 15.665 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.04328,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.04328 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 22.7,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 22.7 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-776 (pscomppars): projected rotation speed 2.2 km/s, from Fridlund et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...684A..12F/abstract)",
   "shape": {

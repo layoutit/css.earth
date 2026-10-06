@@ -21,6 +21,28 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-3 (pscomppars): age 6.9 Gyr, from Diamond-Lowe et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....164..172D/abstract)",
   "rotationPeriodDays": 40.71,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-3 (pscomppars): rotation period 40.71 d, from Bonomo et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 19.89,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 19.89 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 38.86,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 38.86 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 20.0237,
+      "source": "VizieR J/ApJS/243/28/table6 (M-type star magnetic activities from LAMOST & Kepler), column Per: 20.023726 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 0.0034,
+      "source": "VizieR J/ApJS/282/29/table5 (Magnetic activity of M-type stars from LAMOST+TESS), column Prot: 0.0034 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 19.89,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 19.89 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.21,
   "projectedRotationSpeedSource": "SIMBAD, K2-3: projected rotation speed 1.21 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "shape": {

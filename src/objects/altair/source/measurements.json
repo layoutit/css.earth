@@ -13,6 +13,14 @@
   "surfaceGravitySource": "log g from the mass 1.74 +/- 0.49 solar masses that van Belle et al. 2001 (ApJ 559, 1155; https://doi.org/10.1086/322340), Section 5, measure from the oblateness and v sin i, and the package radius, log10(GM/R^2) in cgs; a mean over the rapidly rotating surface",
   "spectralType": "A7Vn",
   "spectralTypeSource": "SIMBAD, * alf Aql: spectral type A7Vn (2003AJ....126.2048G)",
+  "rotationPeriodDays": 0.37,
+  "rotationPeriodSource": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 0.37 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 0.37,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 0.37 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 203,
   "projectedRotationSpeedSource": "SIMBAD, * alf Aql: projected rotation speed 203 km/s, the measurement SIMBAD prefers (2009A&A...493.1099S)",
   "shape": {

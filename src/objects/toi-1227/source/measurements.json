@@ -19,6 +19,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1227 (pscomppars): age 0.011 Gyr, from Mann et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..156M/abstract)",
   "rotationPeriodDays": 1.65,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1227 (pscomppars): rotation period 1.65 d, from Mann et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..156M/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.65,
+      "source": "VizieR J/AJ/163/156/table5 (THYME. VI. TOI-1227 radial velocity), column Prot: 1.65 d, the row 0.7 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.67,
+      "source": "VizieR J/ApJ/952/63/table3 (Gaia-Chandra members of 7-25Myr clusters with ZTF), column PRot: 1.67 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.663,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 1.663 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 16.65,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1227 (pscomppars): projected rotation speed 16.65 km/s, from Mann et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..156M/abstract)",
   "spinInclinationDegrees": 75.9,

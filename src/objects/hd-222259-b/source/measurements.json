@@ -13,6 +13,22 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-222259-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.451, rounded to two decimals",
   "spectralType": "K3Ve",
   "spectralTypeSource": "SIMBAD, HD 222259B: spectral type K3Ve (2006A&A...460..695T)",
+  "rotationPeriodDays": 2.85,
+  "rotationPeriodSource": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 2.85 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.85,
+      "source": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 2.85 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.6,
+      "source": "VizieR J/AJ/167/210/table1 (<200Myr planet's hosts TESS parameters), column Prot: 3.6 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.849,
+      "source": "VizieR J/MNRAS/496/1197/table4 (Young exoplanets in TESS sectors 1-5), column Prot: 2.849003 d, the row 1.5 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 17.03,
   "projectedRotationSpeedSource": "SIMBAD, HD 222259B: projected rotation speed 17.03 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

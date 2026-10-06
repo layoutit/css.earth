@@ -21,6 +21,32 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 3929 (pscomppars): age 7.1 Gyr, from Beard et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract)",
   "rotationPeriodDays": 122,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of GJ 3929 (pscomppars): rotation period 122 d, from Kemmer et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...659A..17K/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 57.2,
+      "source": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 57.2 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 57.22,
+      "source": "VizieR J/A+A/670/A139/table1 (CARMENES search for exoplanets around M dwarfs), column Prot: 57.22 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 57.22,
+      "source": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 57.22 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 57.22,
+      "source": "VizieR J/A+A/696/A27/tableb1 (CARMENES. Dependence of RV measurements), column Prot: 57.22 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 122,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 122 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 57.216,
+      "source": "VizieR J/other/RMxAA/56.139/hatnetd (On the evolution of angular momentum), column Per: 57.216 d, the row 0.7 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of GJ 3929 (pscomppars): projected rotation speed 2 km/s, from Beard et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022ApJ...936...55B/abstract)",
   "shape": {

@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hip-12545",
+  "card": {
+    "text": "A star 1.1 times the Sun's width that turns once in 4.83 days, with a mapped magnetic field.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1601-00684",
+        "url": "https://arxiv.org/abs/1601.00684",
+        "label": "Folsom et al. (2016)",
+        "checked": "2026-10-06",
+        "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Folsom et al. give it 1.07 solar radii, 0.95 solar masses, a rotation period of 4.83 days and an axis tilted 39° from the line of sight.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1601-00684",
+        "url": "https://arxiv.org/abs/1601.00684",
+        "label": "Folsom et al. (2016)",
+        "checked": "2026-10-06",
+        "locator": "Folsom et al., arXiv:1601.00684, Table 2"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "radial-field-2012-09": {
+      "title": "Radial field, Sep 2012",
+      "detail": "1 epoch, mapped here",
+      "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    }
+  }
+}

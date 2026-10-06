@@ -13,6 +13,14 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/cebalrai.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.426, rounded to two decimals",
   "spectralType": "K2IIICN0.5",
   "spectralTypeSource": "SIMBAD, * bet Oph: spectral type K2IIICN0.5 (1989ApJS...71..245K)",
+  "rotationPeriodDays": 290,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 290 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 290,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 290 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 5.4,
   "projectedRotationSpeedSource": "SIMBAD, * bet Oph: projected rotation speed 5.4 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {

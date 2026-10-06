@@ -19,6 +19,20 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of GJ 143 (pscomppars): log10 of the luminosity in solar units -0.6862, from Dragomir et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract)",
   "ageGyr": 3.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of GJ 143 (pscomppars): age 3.8 Gyr, from Dragomir et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...875L...7D/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 7.79,
+      "source": "VizieR J/A+A/661/A101/tableb3 (Magnetic moments of rocky planets), column Prot: 7.79 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35.613,
+      "source": "VizieR J/A+A/661/A101/tableb4 (Magnetic moments of rocky planets), column Prot: 35.613 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 47.6417,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 47.641701 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.1,
   "projectedRotationSpeedSource": "SIMBAD, HD 21749: projected rotation speed 2.1 km/s, the measurement SIMBAD prefers (2025A&A...697A.102T)",
   "shape": {

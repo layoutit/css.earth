@@ -17,6 +17,46 @@
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3400292798990117888, flags_flame 00: lum_flame 1.8159001 solar luminosities (16th to 84th percentiles 1.8088264 to 1.8232195); its log10 is recorded",
   "ageGyr": 4.688,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3400292798990117888, flags_flame 00: age_flame 4.687564 Gyr (16th to 84th percentiles 3.926729 to 5.4484076)",
+  "rotationPeriodDays": 3.56,
+  "rotationPeriodSource": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 3.56 d, the row 0.0 arcsec from the star's J2000 place. The middle of 9 catalogued periods, 8 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 2.9,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 2.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.3,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 4.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 2.98,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 2.98 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.78,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protlit: 3.78 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.67029,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 3.67029 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.56,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 3.56 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.56,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 3.56 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.9,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 3.9 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 3.5,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 3.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 16,
   "projectedRotationSpeedSource": "SIMBAD, * 111 Tau: projected rotation speed 16 km/s, the measurement SIMBAD prefers (2009A&A...493.1099S)",
   "shape": {

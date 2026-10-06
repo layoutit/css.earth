@@ -21,6 +21,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-77 (pscomppars): age 4.7 Gyr, from Thygesen et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165..155T/abstract)",
   "rotationPeriodDays": 19.8,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-77 (pscomppars): rotation period 19.8 d, from Gaidos et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017MNRAS.464..850G/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 20.31,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 20.31 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-77 (pscomppars): projected rotation speed 4 km/s, from Gaidos et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017MNRAS.464..850G/abstract)",
   "shape": {

@@ -17,6 +17,22 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-16 (pscomppars): log10 of the luminosity in solar units -0.90301, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 3.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-16 (pscomppars): age 3.8 Gyr, from Q1-Q8 KOI Table (https://exoplanetarchive.ipac.caltech.edu/docs/Kepler_KOI_docs.html)",
+  "rotationPeriodDays": 34.42,
+  "rotationPeriodSource": "VizieR J/A+A/679/L12/table1 (Close-in planets around fast-rotating stars), column Prot: 34.42 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 34.42,
+      "source": "VizieR J/A+A/679/L12/table1 (Close-in planets around fast-rotating stars), column Prot: 34.42 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10.9963,
+      "source": "VizieR J/A+A/694/A157/tablea1 (Earth 2.0 candidates stellar magnetic activity), column Prot: 10.9963 d, the row 0.2 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35,
+      "source": "VizieR J/MNRAS/447/2714/table2 (Flare stars across the H-R diagram), column Prot: 35 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; the photosphere of a star is not a solid surface and its limb is not sharp."

@@ -19,8 +19,34 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of 47 UMa (pscomppars): log10 of the luminosity in solar units 0.1978, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 6.48,
   "ageSource": "NASA Exoplanet Archive, composite parameters of 47 UMa (pscomppars): age 6.48 Gyr, from Takeda et al. 2007 (https://ui.adsabs.harvard.edu/abs/2007ApJS..168..297T/abstract)",
+  "rotationPeriodDays": 15,
+  "rotationPeriodSource": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 15 d, the row 0.0 arcsec from the star's J2000 place. The middle of 5 catalogued periods, 3 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 14,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 14 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 15 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 15,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 15 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24.8,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 24.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.1,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 23.1 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of 47 UMa (pscomppars): projected rotation speed 2.8 km/s, from Wittenmyer et al. 2009 (https://ui.adsabs.harvard.edu/abs/2009ApJS..182...97W/abstract)",
+  "spinInclinationDegrees": 40.7,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.273 solar radii): sin i = v sin i × P / (2πR) = 0.652. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

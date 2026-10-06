@@ -19,6 +19,14 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-26 (pscomppars): log10 of the luminosity in solar units -1.3098, from Schlieder et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract)",
   "ageGyr": 1,
   "ageSource": "NASA Exoplanet Archive, composite parameters of K2-26 (pscomppars): age 1 Gyr, from Schlieder et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...818...87S/abstract)",
+  "rotationPeriodDays": 85.9,
+  "rotationPeriodSource": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 85.9 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 85.9,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 85.9 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -13,6 +13,18 @@
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 8189460 (Gold): Asteroseismic log g 2.9917 +/- 0.0046 (https://arxiv.org/abs/2410.00102)",
   "spectralType": "G6V",
   "spectralTypeSource": "SIMBAD, UCAC4 671-080277: spectral type G6V (2016A&A...594A..39F)",
+  "rotationPeriodDays": 112,
+  "rotationPeriodSource": "VizieR J/A+A/639/A63/tablec1 (Active red giants asteroseismic & rotation param.), column Prot: 112 d, the row 0.1 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 112,
+      "source": "VizieR J/A+A/639/A63/tablec1 (Active red giants asteroseismic & rotation param.), column Prot: 112 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 112,
+      "source": "VizieR J/A+A/686/A93/s-lines (RGs Chromospheric indices from LAMOST spect.), column Prot: 112 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -21,6 +21,60 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of eps Eri (pscomppars): age 0.6 Gyr, from Llop-Sayson et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....162..181L/abstract)",
   "rotationPeriodDays": 11.1,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of eps Eri (pscomppars): rotation period 11.1 d, from Thompson et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 11.3,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 11.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.5,
+      "source": "VizieR J/A+A/410/671/table1 (X-ray emission in cool main sequence stars), column Per: 11.5 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.68,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 11.68 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.68,
+      "source": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 11.68 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.629,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 11.629 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.84,
+      "source": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protlit: 11.84 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10.3,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 10.3 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 13,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 13 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.68,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 11.68 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.68,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 11.68 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.68,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 1.68 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 10.3,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 10.3 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.8,
+      "source": "VizieR J/MNRAS/444/3517/stars (BCool survey of solar-type stars), column Per: 11.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of eps Eri (pscomppars): projected rotation speed 2.4 km/s, from Valenti & Fischer 2005 (https://ui.adsabs.harvard.edu/abs/2005ApJS..159..141V/abstract)",
   "spinInclinationDegrees": 45.4,

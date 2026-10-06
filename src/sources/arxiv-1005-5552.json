@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-1005-5552",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Morin et al. (2010): Large-scale magnetic topologies of late M dwarfs",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1005.5552"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1365-2966.2010.17101.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1005.5552",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/j.1365-2966.2010.17101.x",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1005.5552",
+      "checkedOn": "2026-10-06",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Morin et al. (2010)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1005.5552"
+    }
+  ],
+  "creators": [
+    "J. Morin",
+    "J. F. Donati",
+    "P. Petit",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

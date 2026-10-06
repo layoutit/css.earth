@@ -19,6 +19,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of eps Ind A (pscomppars): age 3.48 Gyr, from Sanghi et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172..115S/abstract)",
   "rotationPeriodDays": 18.33,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of eps Ind A (pscomppars): rotation period 18.33 d, from Sanghi et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172..115S/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 22,
+      "source": "VizieR J/A+A/469/309/table2 (Chromospheric activity in late-type stars), column Prot: 22 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.2871,
+      "source": "VizieR J/AJ/168/234/table10 (Flares & flaring stars from TESS & machine learning), column Prot: 11.28709 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of eps Ind A (pscomppars): projected rotation speed 2 km/s, from Sanghi et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026AJ....172..115S/abstract)",
   "shape": {

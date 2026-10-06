@@ -19,8 +19,62 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-37 (pscomppars): log10 of the luminosity in solar units -0.32187, from Gajdoš et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019RAA....19...41G/abstract)",
   "ageGyr": 3.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-37 (pscomppars): age 3.8 Gyr, from Morton et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016ApJ...822...86M/abstract)",
+  "rotationPeriodDays": 26.01,
+  "rotationPeriodSource": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 26.01 d, the row 0.3 arcsec from the star's J2000 place. The middle of 12 catalogued periods, 9 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 59.12,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 59.12 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.01,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 26.01 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.01,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 26.01 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.54,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 23.54 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.54,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 23.54 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 26.2,
+      "source": "VizieR J/ApJ/803/69/table1 (Kepler planetary host stars rotation periods), column Prot: 26.2 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35.186,
+      "source": "VizieR J/ApJ/961/85/table2 (The California-Kepler Survey. XI. Activity), column Prot: 35.186 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 28.79,
+      "source": "VizieR J/ApJS/237/17/table1 (Temporal frequency shifts in 87 Kepler stars), column Prot: 28.79 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.54,
+      "source": "VizieR J/ApJS/255/17/table1 (Surface rotation & activity for Kepler stars. II.), column Prot: 23.54 d, the row 0.3 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.54,
+      "source": "VizieR J/ApJS/271/19/table3 (FGK dwarfs from LAMOST DR7 and Gaia DR3 and Kepler), column Prot: 23.54 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 41.7772,
+      "source": "VizieR J/MNRAS/474/2094/table5 (Inferring probabilistic stellar rotation periods), column Per: 41.7771852558402 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 23.54,
+      "source": "VizieR J/MNRAS/533/1290/table1 (Properties of late-type stars in Kelper field), column Per: 23.54 d, the row 0.3 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Kepler-37 (pscomppars): projected rotation speed 1.1 km/s, from Barclay et al. 2013 (https://ui.adsabs.harvard.edu/abs/2013Natur.494..452B/abstract)",
+  "spinInclinationDegrees": 45.8,
+  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.789 solar radii): sin i = v sin i × P / (2πR) = 0.717. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

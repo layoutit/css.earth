@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of G 9-40 (pscomppars): age 9.9 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "rotationPeriodDays": 30,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of G 9-40 (pscomppars): rotation period 30 d, from Luque et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...666A.154L/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 34.08,
+      "source": "VizieR J/A+A/635/A43/table2 (Stellar rotation periods from K2 Campaigns 0-18), column Prot: 34.08 d, the row 0.5 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 35.3585,
+      "source": "VizieR J/ApJS/243/28/table6 (M-type star magnetic activities from LAMOST & Kepler), column Per: 35.358541 d, the row 0.5 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.08,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 34.08 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of G 9-40 (pscomppars): projected rotation speed 2 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "shape": {

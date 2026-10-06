@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "tyc-6349-200-1",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 6882838031333427456: position at J2016.0. Distance: Gaia DR3 parallax 21.6990 +/- 0.0213 mas (same row, RUWE 0.97): 46.09 pc, no zero-point correction. Proper motion: Gaia DR3 (same row): 57.317, -62.203 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 6882838031333427456 (quality A), from 2018yCat.1345....0G; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://ui.adsabs.harvard.edu/abs/2018yCat.1345....0G/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.96 solar radii from Folsom et al., arXiv:1601.00684, Table 2: radius 0.96 solar radii (https://arxiv.org/abs/1601.00684). Mass 0.85 solar masses from Folsom et al., arXiv:1601.00684, Table 2: mass 0.85 solar masses (https://arxiv.org/abs/1601.00684). Temperature 4144 K from TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 206190624: Teff.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82",
+        "https://arxiv.org/abs/1601.00684"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 6882838031333427456, through the CIE 1931 2-degree observer: #ffc6a1. Routes tried in order: stis-ngsl: HD 358623 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6882838031333427456&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,144 K and log g 4.4 (u1 0.736, u2 0.054): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "spin",
+      "subject": "Spin",
+      "status": "included",
+      "finding": "Inclination 52 degrees from the line of sight, period 3.41 d, from Folsom et al., arXiv:1601.00684, Table 2: rotation period 3.41 d and an axis 52 degrees from the line of sight, the values its magnetic maps were made with; the axis's direction on the sky is a convention.",
+      "evidence": [
+        "https://arxiv.org/abs/1601.00684"
+      ]
+    }
+  ]
+}

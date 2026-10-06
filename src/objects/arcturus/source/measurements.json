@@ -13,6 +13,14 @@
   "surfaceGravitySource": "log g 1.66 +/- 0.05 measured by Ramirez & Allende Prieto 2011 (ApJ 743, 135; https://arxiv.org/abs/1109.4425), abstract",
   "spectralType": "K1.5IIIFe-0.5",
   "spectralTypeSource": "SIMBAD, * alf Boo: spectral type K1.5IIIFe-0.5 (1989ApJS...71..245K)",
+  "rotationPeriodDays": 353,
+  "rotationPeriodSource": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 353 d, the row 0.0 arcsec from the star's J2000 place",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 353,
+      "source": "VizieR J/A+A/177/131/table2 (CaII and MgII excess flux density in cool stars), column Per: 353 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 4.2,
   "projectedRotationSpeedSource": "SIMBAD, * alf Boo: projected rotation speed 4.2 km/s, the measurement SIMBAD prefers (2008AJ....135..209M)",
   "shape": {

@@ -17,6 +17,40 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 189733 (pscomppars): age 1.4 Gyr, from Southworth 2010 (https://ui.adsabs.harvard.edu/abs/2010MNRAS.408.1689S/abstract)",
   "rotationPeriodDays": 11.95,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 189733 (pscomppars): rotation period 11.95 d, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 1.09176,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 1.09176 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.45,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 11.45 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 1.09176,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 1.09176 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.8,
+      "source": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 11.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.8,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 11.8 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.04,
+      "source": "VizieR J/ApJ/964/80/table1 (MgII line profiles & refined param. of FGKM stars), column Per: 12.04 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 11.953,
+      "source": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 11.953 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 12.5,
+      "source": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 12.5 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 3.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 189733 (pscomppars): projected rotation speed 3.5 km/s, from Bonomo et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract)",
   "shape": {

@@ -21,6 +21,20 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of HD 4208 (pscomppars): age 3.813 Gyr, from Barbato et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...615A.175B/abstract)",
   "rotationPeriodDays": 25,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 4208 (pscomppars): rotation period 25 d, from Barbato et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...615A.175B/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 24,
+      "source": "VizieR J/A+A/684/A28/tablea1 (Evolution of lithium in FGK dwarfs), column Prot: 24 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24,
+      "source": "VizieR J/ApJ/725/875/table1 (Chromospheric activity for CPS stars), column Prot: 24 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 24.8,
+      "source": "VizieR J/ApJ/946/98/tableb2 (HST/COS obs. of main-sequence FGKM dwarfs), column Prot: 24.8 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 2.83,
   "projectedRotationSpeedSource": "SIMBAD, HD 4208: projected rotation speed 2.83 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
   "shape": {

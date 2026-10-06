@@ -19,6 +19,12 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1259 A (pscomppars): age 4.8 Gyr, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "rotationPeriodDays": 26.7,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1259 A (pscomppars): rotation period 26.7 d, from Veldhuis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A.272V/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 26.7,
+      "source": "VizieR J/A+A/705/A142/tablea1 (Physical properties study of planet systems), column Prot: 26.7 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.28,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1259 A (pscomppars): projected rotation speed 1.28 km/s, from Veldhuis et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026A&A...708A.272V/abstract)",
   "spinInclinationDegrees": 70.9,

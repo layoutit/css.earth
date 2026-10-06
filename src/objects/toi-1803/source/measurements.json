@@ -21,6 +21,16 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-1803 (pscomppars): age 1.4 Gyr, from Zingales et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract)",
   "rotationPeriodDays": 13.659,
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of TOI-1803 (pscomppars): rotation period 13.659 d, from Zingales et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract)",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 13.6129,
+      "source": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 13.6129 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 4.54,
+      "source": "VizieR J/ApJS/250/20/table1 (Rotation periods in TESS objects of interest (TOIs)), column Prot: 4.54 d, the row 0.0 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1803 (pscomppars): projected rotation speed 1 km/s, from Zingales et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...695A.273Z/abstract)",
   "spinInclinationDegrees": 22.2,

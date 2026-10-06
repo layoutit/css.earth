@@ -1,0 +1,224 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "gj-1245-b",
+  "displayName": "GJ 1245 B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.14 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1005-5552",
+          "url": "https://arxiv.org/abs/1005.5552",
+          "label": "Morin et al. (2010)",
+          "checked": "2026-10-06",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "4.7 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-gj-1245-b",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-06",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "17 hours",
+        "source": {
+          "catalogueId": "arxiv-1005-5552",
+          "url": "https://arxiv.org/abs/1005.5552",
+          "label": "Morin et al., arXiv:1005.5552, Table 1: rotation period 0.71 d and an axis 40 degrees from the line of sight, the values its magnetic maps were made with",
+          "checked": "2026-10-06",
+          "path": "source/preparation/rotation.json",
+          "locator": "source"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "gj-1245-b-dataset-color.webp",
+        "surface": "gj-1245-b-surface-color@2x.webp",
+        "poles": "gj-1245-b-poles-color@2x.webp",
+        "source": {
+          "id": "gj-1245-b-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=IV/39/tic82"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 2,865 K and log g 5.22 (u1 0.228, u2 0.546): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "radial-field-2006-08",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Aug 2006",
+        "thumbnail": "gj-1245-b-dataset-radial-field-2006-08.webp",
+        "surface": "gj-1245-b-surface-radial-field-2006-08@2x.webp",
+        "poles": "gj-1245-b-poles-radial-field-2006-08@2x.webp",
+        "source": {
+          "id": "gj-1245-b-espadons-map-radial-field-2006-08",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Aug 2006"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-500",
+            "0",
+            "+500"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-500",
+              "0",
+              "+500"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Aug 2006, reconstructed in this project from 6 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Morin, J. et al., arXiv:1005.5552 map the same run with a mean field of 170 G; this map has 98 G. Step through the 2 maps to see the field change.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 40° S; the star never shows us what lies below it."
+      },
+      {
+        "id": "radial-field-2007-10",
+        "label": "Radial field",
+        "qualification": "Mapped in this project · CFHT ESPaDOnS spectra, Oct 2007",
+        "thumbnail": "gj-1245-b-dataset-radial-field-2007-10.webp",
+        "surface": "gj-1245-b-surface-radial-field-2007-10@2x.webp",
+        "poles": "gj-1245-b-poles-radial-field-2007-10@2x.webp",
+        "source": {
+          "id": "gj-1245-b-espadons-map-radial-field-2007-10",
+          "path": "../manifest.json",
+          "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "radial",
+          "label": "Oct 2007"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Radial magnetic field",
+          "labels": [
+            "-500",
+            "0",
+            "+500"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                255
+              ],
+              [
+                0,
+                255,
+                255
+              ],
+              [
+                255,
+                255,
+                255
+              ],
+              [
+                255,
+                128,
+                0
+              ],
+              [
+                255,
+                0,
+                0
+              ]
+            ],
+            "labels": [
+              "-500",
+              "0",
+              "+500"
+            ]
+          },
+          "meta": "G",
+          "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
+        },
+        "notes": "The star's large-scale magnetic field in Oct 2007, reconstructed in this project from 6 archived ESPaDOnS spectra with the published codes LSDpy and ZDIpy. It is this project's reduction, not a published map. Morin, J. et al., arXiv:1005.5552 map the same run with a mean field of 180 G; this map has 122 G. Step through the 2 maps to see the field change.",
+        "legendNote": "Red: field pointing out of the star; blue: into it. Black line: 40° S; the star never shows us what lies below it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Morin et al., arXiv:1005.5552",
+      "href": "https://arxiv.org/abs/1005.5552"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1005.5552",
+      "credit": "Morin et al., arXiv:1005.5552"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gj-1245-b.json",
+      "credit": "Morin et al., arXiv:1005.5552, Table 1: radius 0.14 solar radii radius; Gaia DR3 astrometry; measured spin tilt, axis direction a display convention"
+    }
+  }
+}

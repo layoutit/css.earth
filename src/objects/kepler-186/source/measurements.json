@@ -19,6 +19,74 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Kepler-186 (pscomppars): log10 of the luminosity in solar units -1.26, from Torres et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract)",
   "ageGyr": 4,
   "ageSource": "NASA Exoplanet Archive, composite parameters of Kepler-186 (pscomppars): age 4 Gyr, from Torres et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015ApJ...800...99T/abstract)",
+  "rotationPeriodDays": 34.29,
+  "rotationPeriodSource": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 34.29 d, the row 0.1 arcsec from the star's J2000 place. The middle of 16 catalogued periods, 16 of them within 20% of it",
+  "rotationPeriodsCatalogued": [
+    {
+      "days": 34.9037,
+      "source": "VizieR J/A+A/560/A4/table (Rotation periods of active Kepler stars), column P1: 34.9037 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.26,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtACF: 34.26 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 37.59,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtFin: 37.59 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 37.59,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtGPS: 37.59 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.75,
+      "source": "VizieR J/A+A/678/A24/tablec1 (New rotation periods of 67163 Kepler stars), column ProtS21: 33.75 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.75,
+      "source": "VizieR J/A+A/714/A124/table1 (Enhanced magnetic activity after period gap), column Prot: 33.75 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.404,
+      "source": "VizieR J/ApJ/775/L11/table1 (Stellar rotation periods for KOIs), column Prot: 34.404 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.29,
+      "source": "VizieR J/ApJ/801/3/table1 (Rotation periods for Q3-Q14 KOIs), column Prot: 34.29 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.31,
+      "source": "VizieR J/ApJ/803/69/table1 (Kepler planetary host stars rotation periods), column Prot: 34.31 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.4,
+      "source": "VizieR J/ApJ/807/170/table2 (Prograde vs retrogade motions. II. KOIs), column Prot: 34.4 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.3,
+      "source": "VizieR J/ApJS/218/26/table5 (Parameters of planets orbiting coolest dwarfs), column Prot: 34.3 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.75,
+      "source": "VizieR J/ApJS/244/21/table3 (Surface rotation & activity of Kepler stars. I.), column Prot: 33.75 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.695,
+      "source": "VizieR J/MNRAS/432/1203/table2 (Rotation periods of M-dwarf stars), column Per: 33.695 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.75,
+      "source": "VizieR J/MNRAS/520/5283/table1 (Rotation periods and ages of cool host stars), column Prot: 33.75 d, the row 0.0 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 33.75,
+      "source": "VizieR J/MNRAS/533/1290/table1 (Properties of late-type stars in Kelper field), column Per: 33.75 d, the row 0.1 arcsec from the star's J2000 place"
+    },
+    {
+      "days": 34.904,
+      "source": "VizieR J/other/RMxAA/56.139/keplerd (On the evolution of angular momentum), column Per: 34.904 d, the row 0.1 arcsec from the star's J2000 place"
+    }
+  ],
   "projectedRotationSpeedKmS": 1.73,
   "projectedRotationSpeedSource": "SIMBAD, Kepler-186: projected rotation speed 1.73 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
   "shape": {
