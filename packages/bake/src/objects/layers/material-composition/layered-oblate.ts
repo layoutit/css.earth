@@ -114,6 +114,20 @@ export async function prepareSurfaceColor({ sourcePath, unobservedRows, width, h
   return { data, info, tie: report };
 }
 
+/** Multiplies each map row's color by the share of direct sunlight the row keeps, in linear light. Alpha is untouched. */
+export function shadeMapRows(data: Buffer, info: { width: number; height: number; channels: number }, direct: Float64Array) {
+  if (direct.length !== info.height) throw new RangeError(`Row shading has ${direct.length} rows for a ${info.height}-row map.`);
+  const colors = Math.min(3, info.channels);
+  for (let y = 0; y < info.height; y += 1) {
+    const share = direct[y]!;
+    if (share >= 1) continue;
+    for (let x = 0; x < info.width; x += 1) for (let channel = 0; channel < colors; channel += 1) {
+      const offset = (y * info.width + x) * info.channels + channel;
+      data[offset] = Math.round(255 * linearToSrgb(srgbToLinear(data[offset]! / 255) * share));
+    }
+  }
+}
+
 /** Source-configured oblate surface, projected material banks and retained cutaway. */
 export async function createLayeredOblatePreparation({ sourceDirectory, publicDirectory, stagingDirectory, config:input, preparedInputs }: {sourceDirectory:string;publicDirectory:string;stagingDirectory:string;config:unknown;preparedInputs:LayeredInputs}) {
   const config=parse(input,layeredRecipe,'layered oblate recipe');
@@ -1842,6 +1856,9 @@ async function prepareNormalMaterialMasters() {
     PLANET_RASTER_SOURCE_HEIGHT,
     { kernel: sharp.kernel.lanczos3 },
   ).raw().toBuffer({ resolveWithObject: true });
+  // The rings' shadow at local noon on the map's date, on the body's rows only: the map, the caps and the limb overlay's
+  // reference color above keep the sunlit surface.
+  shadeMapRows(rasterSource.data, rasterSource.info, preparedInputs.noonRingShadow(rasterSource.info.height));
   const packedSurface = packProjectiveSurfaceRaster(rasterSource.data, {
     width: rasterSource.info.width,
     height: rasterSource.info.height,

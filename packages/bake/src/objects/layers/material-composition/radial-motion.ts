@@ -6,7 +6,7 @@ export const bodyRingShadow = object({model:string,edgeFeather:object({model:str
 import {readFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import { parseRadialLayerRecipe, sampleRadialProfile, rasterObservedRadialField, loadObservedProfile } from '../giant/index.ts';
+import { parseRadialLayerRecipe, sampleRadialProfile, rasterObservedRadialField, loadObservedProfile, noonRingShadowRows } from '../giant/index.ts';
 import {verifyObservationSources} from '../observed-surfaces/index.ts';
 import {cropTransparentRgba} from './rgba.ts';
 import {rotateX as rotateVectorX,rotateZ as rotateVectorZ} from '../../geometry/index.ts';
@@ -30,6 +30,7 @@ const BODY_EQUATORIAL_RADIUS_KM = config.parameters.bodyEquatorialRadiusKm;
 const BODY_POLAR_RADIUS_KM = config.parameters.bodyPolarRadiusKm;
 const F_RING_OUTER_KM = config.parameters.fRingOuterKm;
 const STATIC_WORLD_LIGHT_DIRECTION = config.parameters.staticWorldLightDirection;
+const SUN_POSITION_BODY_EQUATOR_KM = config.parameters.sunPositionBodyEquatorKm;
 const BODY_OBLIQUITY_DEGREES = config.parameters.bodyObliquityDegrees;
 const STATIC_SYSTEM_TILT_AXIS = config.parameters.staticSystemTiltAxis;
 const STATIC_SYSTEM_NODE_DEGREES = config.parameters.staticSystemNodeDegrees;
@@ -51,7 +52,13 @@ const cropped=cropTransparentRgba({rgba:feathered,width:RING_SHADOW_TEXTURE_SIZE
 await writePreparedRgbaWebp(cropped.rgba,cropped.bounds.width,resolve(publicRoot,config.shadow.filename),cropped.bounds.height);
 const bodyOnRings={...shadowModel,directTransmission:BODY_SHADOW_RING_DIRECT_TRANSMISSION,shadowedPixelCount:shadow.shadowedPixelCount,meanCoverage:shadow.meanCoverage,denseAlphaRamp:[BODY_SHADOW_DENSE_ALPHA_START,BODY_SHADOW_DENSE_ALPHA_END],edgeFeather:{...shadowModel.edgeFeather,sigmaTexturePixels:BODY_SHADOW_EDGE_FEATHER_SIGMA,ringSupportAlpha:BODY_SHADOW_RING_SUPPORT_ALPHA}};
 const ringSource={textureSize:layer.size,texture2xSize:layer.size*2,shadowTextureSourceSize:RING_SHADOW_TEXTURE_SIZE,shadowTextureBounds:cropped.bounds,shadowTextureTransparentGutter:RING_SHADOW_TRANSPARENT_GUTTER,planeVisualOrbitSeconds:visualOrbitSeconds(F_RING_OUTER_KM),[config.fields.gravitationalParameter]:BODY_GM_KM3_PER_S2,shadowModel:{...config.shadowModel,worldLightDirection:STATIC_WORLD_LIGHT_DIRECTION,objectLightDirection:STATIC_OBJECT_LIGHT_DIRECTION,systemTiltDegrees:BODY_OBLIQUITY_DEGREES,systemNodeDegrees:STATIC_SYSTEM_NODE_DEGREES,meshRotationDegrees:STATIC_MESH_ROTATION_DEGREES,[config.fields.bodyOnRings]:bodyOnRings}};
-return {ringSource};
+// The rings' shadow on the surface map: the Sun's elevation over the ring plane is its position's z over its distance.
+const sunSineElevation=SUN_POSITION_BODY_EQUATOR_KM[2]/Math.hypot(...SUN_POSITION_BODY_EQUATOR_KM);
+const noonRingShadow=(rows: number)=>{
+  if(!profile.opticalDepth)throw new TypeError('The ring shadow on the surface map needs an optical depth profile.');
+  return noonRingShadowRows(rows,{equatorialRadius:BODY_EQUATORIAL_RADIUS_KM,polarRadius:BODY_POLAR_RADIUS_KM},sunSineElevation,layer.sourceBounds,profile.opticalDepth);
+};
+return {ringSource,noonRingShadow};
 function createBodyShadowOverlay(textureSize: number) {
   const center = (textureSize - 1) / 2;
   const sampleOffsets = config.shadow.sampleOffsets;
