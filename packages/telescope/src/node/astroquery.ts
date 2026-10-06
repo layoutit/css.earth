@@ -74,7 +74,8 @@ class SafeVoSession:
         self.trust_env = False  # Archive URLs must connect directly, never through an ambient proxy.
 
     def send(self, prepared_request, **kwargs):
-        import ipaddress, socket
+        import ipaddress, socket, time
+        import requests
         check_vo_url(prepared_request.url)
         original = socket.getaddrinfo
         allowed = request.get('allowedPrivateHosts') or []
@@ -86,7 +87,14 @@ class SafeVoSession:
             return answers
         socket.getaddrinfo = guarded_getaddrinfo
         try:
-            return super().send(prepared_request, **kwargs)
+            # An archive that drops the connection is asked again, twice: KOA closed one of four small queries on 2026-10-06.
+            # A timeout or an HTTP error is the archive's answer and is not asked again.
+            for attempt in range(3):
+                try:
+                    return super().send(prepared_request, **kwargs)
+                except requests.exceptions.ConnectionError as error:
+                    if attempt == 2 or isinstance(error, requests.exceptions.Timeout): raise
+                    time.sleep(2 * (attempt + 1))
         finally:
             socket.getaddrinfo = original
 
@@ -253,6 +261,7 @@ elif operation in ('vo-tap', 'vo-links', 'vo-parse'):
             if os.path.exists(staging): os.unlink(staging)
     if len(payload) > limit: raise ValueError('VO metadata byte limit exceeded')
     def lossless(v):
+        if isinstance(v, np.floating) and v.dtype.itemsize < 8: return value(v)  # the archive's decimal, as tap-query states it
         if isinstance(v, np.generic): return lossless(v.item())
         if isinstance(v, np.ndarray) and v.ndim == 0:
             return None if np.ma.is_masked(v) else lossless(v.item())
@@ -515,6 +524,13 @@ export async function astroqueryText(request: Extract<AstroqueryRequest, { reado
 
 /** Generic VO table access belongs to PyVO. This string view keeps the archive ledgers stable while PyVO owns TAP and VOTable parsing. */
 export async function tapRows(service: string, query: string, maxrec?: number, mode?: 'async'): Promise<Record<string, string>[]> {
-  const rows = await astroqueryRows({ operation: 'tap-query', service, query, ...(maxrec === undefined ? {} : { maxrec }), ...(mode ? { mode } : {}) });
-  return rows.map(row => Object.fromEntries(Object.entries(row).map(([name, value]) => [name, value === null ? '' : String(value)])));
+  const answer = await tapAnswer(service, query, maxrec, mode);
+  if (!answer.complete) throw new Error(`TAP query was incomplete (${answer.queryStatus}); its rows cannot build a complete ledger.`);
+  return answer.rows;
+}
+/** The same rows with the service's own status, for a caller that knows what its archive means by an answer it marks cut short. */
+export async function tapAnswer(service: string, query: string, maxrec?: number, mode?: 'async'): Promise<{ readonly rows: Record<string, string>[]; readonly queryStatus: string; readonly complete: boolean }> {
+  const answer = await astroquery({ operation: 'tap-query', service, query, ...(maxrec === undefined ? {} : { maxrec }), ...(mode ? { mode } : {}) });
+  if (!answer.rows || !answer.tap) throw new TypeError('TAP query returned no rows or status.');
+  return { ...answer.tap, rows: answer.rows.map(row => Object.fromEntries(Object.entries(row).map(([name, value]) => [name, value === null ? '' : String(value)]))) };
 }
