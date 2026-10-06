@@ -97,7 +97,7 @@ async function main(args: readonly string[]) {
   if (!source) throw new TypeError('Usage: archive-ledger FILELIST.TAB [--write]');
   const ledger = await buildIhwLedger(await readFile(resolve(source), 'utf8'));
   const json = `${JSON.stringify(ledger, null, 2)}\n`;
-  if (args.includes('--write')) await writeFile(resolve(ROOT, 'data/ihw/ledger.json'), json); else process.stdout.write(json);
+  if (args.includes('--write')) await writeFile(resolve(ROOT, 'src/sources/ihw/ledger.json'), json); else process.stdout.write(json);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) await main(process.argv.slice(2));

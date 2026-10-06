@@ -12,7 +12,7 @@ const test = sourceTest();
 const root = WORKSPACE;
 
 test('a saved WWT TAN entry becomes one pinned static PNG without network access in the test', async () => {
-  const catalog = parseWwtCatalogLines(await readFile(resolve(root, 'data/wwt/core-imagesets.jsonl'), 'utf8'));
+  const catalog = parseWwtCatalogLines(await readFile(resolve(root, 'src/sources/wwt/core-imagesets.jsonl'), 'utf8'));
   const imageset = catalog.imagesets.find(row => row.name === 'VST snaps a very detailed view of the Triangulum Galaxy');
   assert.ok(imageset);
   const work = await mkdtemp(resolve(tmpdir(), 'wwt-image-test-'));

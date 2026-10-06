@@ -17,7 +17,8 @@ export function importSkeleton(text: string): string {
   return text.replace(/(@import\s+)(['"])([^'"]+)\2|url\(\s*(['"]?)([^\s'"()]+)\4\s*\)/gu, '<style-specifier>');
 }
 export function sourceDiff(checkout: string, base: string, head: string): SourceDiff {
-  const git = (args: string[]): string => execFileSync('git', args, { cwd: checkout, encoding: 'utf8' });
+  // Source files can exceed execFileSync's 1 MiB default (shared ledgers are several MiB).
+  const git = (args: string[]): string => execFileSync('git', args, { cwd: checkout, encoding: 'utf8', maxBuffer: 1024 ** 3 });
   const fields = git(['diff', '--name-status', '-z', '-M', `${base}..${head}`]).split('\0');
   const paths = new Set<string>(), renames: Record<string, string> = {}; let specifierOnly = true;
   for (let i = 0; i < fields.length && fields[i];) {
@@ -27,6 +28,7 @@ export function sourceDiff(checkout: string, base: string, head: string): Source
     paths.add(old); paths.add(next);
     if (status.startsWith('R')) renames[old] = next;
     if (!/^[MR]/u.test(status)) { specifierOnly = false; continue; }
+    if (status === 'R100') continue; // Identical bytes: the skeletons are equal without reading them.
     if (importSkeleton(git(['show', `${base}:${old}`])) !== importSkeleton(git(['show', `${head}:${next}`]))) specifierOnly = false;
   }
   return { paths: [...paths].sort(), renames, specifierOnly: specifierOnly && Object.keys(renames).length > 0 };

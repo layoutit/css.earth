@@ -16,7 +16,7 @@ Venus shows a cloud map, one Akatsuki ultraviolet exposure, Magellan radar, elev
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/VENUS/target), snapshot 2026-09-11, public domain |
 | Feature notes | English Wikipedia lead summaries (CC BY-SA 4.0, retrieved 2026-09-12), in `source/features/notes.json` |
 | Landing sites | 13 sites in `source/features/sites.json`, each quoting the NASA NSSDCA, PDS, LROC, agency or paper page it came from |
-| Planet facts | NASA Science snapshot in `data/object-information/venus.json` |
+| Planet facts | NASA Science snapshot in `src/sources/object-information/venus.json` |
 
 The archive asks that the ultraviolet data set be cited as:
 

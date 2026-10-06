@@ -59,7 +59,7 @@ export async function exportWwtImage(root: string, explorationPath: string, pick
   if (curated.state !== 'indexed' || !Array.isArray(curated.matches) || pick > curated.matches.length)
     throw new TypeError('The saved exploration has no WWT image at that number.');
   const selected = object(curated.matches[pick - 1], 'selected WWT image');
-  const catalog = parseWwtCatalogLines(await readFile(resolve(root, 'data/wwt/core-imagesets.jsonl'), 'utf8'));
+  const catalog = parseWwtCatalogLines(await readFile(resolve(root, 'src/sources/wwt/core-imagesets.jsonl'), 'utf8'));
   if (curated.revision !== catalog.source.revision) throw new TypeError('The saved WWT catalog revision differs from this checkout.');
   const imageset = catalog.imagesets.find(row => row.sourceFile === selected.sourceFile && row.name === selected.name && row.urlTemplate === selected.urlTemplate);
   if (!imageset || JSON.stringify(imageset.position) !== JSON.stringify(selected.position)) throw new TypeError('The saved WWT image differs from the pinned catalog.');

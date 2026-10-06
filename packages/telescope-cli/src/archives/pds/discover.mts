@@ -12,7 +12,7 @@ import { sourcePds3Observations } from './source-observations.mts';
 const ROOT = WORKSPACE;
 export const PDS_DISCOVERY_SCHEMA = 'cssearth-pds-discovery@1';
 export const PDS_DISCOVERY_STORE_SCHEMA = 'cssearth-pds-discovery@2';
-export const PDS_DISCOVERY = resolve(ROOT, 'data/pds/discovery.json');
+export const PDS_DISCOVERY = resolve(ROOT, 'src/sources/pds/discovery.json');
 
 export interface PdsDiscoveredObservation {
   readonly id: string; readonly lidvid: string; readonly targetLid: string; readonly targetName: string;
@@ -173,7 +173,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       });
       await writeFile(PDS_DISCOVERY, `${JSON.stringify(mergePdsDiscovery(existing, discovery), null, 2)}\n`);
       const { buildPdsLedger } = await import('./archive-ledger.mts');
-      await writeFile(resolve(ROOT, 'data/pds/ledger.json'), `${JSON.stringify(await buildPdsLedger(), null, 2)}\n`);
+      await writeFile(resolve(ROOT, 'src/sources/pds/ledger.json'), `${JSON.stringify(await buildPdsLedger(), null, 2)}\n`);
     }
     process.stdout.write(`${JSON.stringify(discovery, null, 2)}\n`);
   }

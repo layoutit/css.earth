@@ -16,7 +16,7 @@
  * Each configuration's state is read from this repository, not declared: the programs pinned in packages/telescope-cli/src/archives/hst/programs and
  * the ones that carry a reproduction receipt naming an observation of that configuration and the MAST product the program pins
  * for it. A receipt that cannot be read, states another schema or names something else is reported as a problem and proves
- * nothing. --write replaces data/hst/ledger.json and docs/hubble-ledger.md. --local rewrites only that state, from the ledger
+ * nothing. --write replaces src/sources/hst/ledger.json and docs/hubble-ledger.md. --local rewrites only that state, from the ledger
  * already on disk: when a program is pinned or a receipt written, nothing the archive said has changed, and a pass that takes
  * half an hour should not be repeated to record it.
  *
@@ -487,7 +487,7 @@ async function surveyMast(): Promise<Ledger> {
  * capabilities of every configuration from the repository, reads the ledger on disk as absent rather than failing when
  * it is missing, and ends the process when it has reported. */
 export const HST_LEDGER: ArchiveLedger<Ledger> = {
-  schema: 'cssearth-hst-ledger@1',   files: ledgerFiles('data/hst/ledger.json', 'docs/hubble-ledger.md'), indent: 2, guide: hubbleLedgerGuide,
+  schema: 'cssearth-hst-ledger@1',   files: ledgerFiles('src/sources/hst/ledger.json', 'docs/hubble-ledger.md'), indent: 2, guide: hubbleLedgerGuide,
   survey: surveyMast, writes: 'with --write',
   local: { parse: parseHubbleLedger, read: readJson, writes: 'always', exit: true, refresh: async previous => withRepositoryState(previous, await repositoryReceipts()) },
   receiptProblems: ledger => ledger.receiptProblems,

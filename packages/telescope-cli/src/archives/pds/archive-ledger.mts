@@ -18,7 +18,7 @@ export async function buildPdsLedger() {
   const searched = new Set<string>();
   const searchResults: { target: string; registryProducts: number; admittedProducts: number; rejected: { lidvid: string; reason: string }[]; scope: unknown }[] = [];
   const harvestDates: string[] = [];
-  const discoveryPath = resolve(ROOT, 'data/pds/discovery.json');
+  const discoveryPath = resolve(ROOT, 'src/sources/pds/discovery.json');
   const discovery = await readFile(discoveryPath, 'utf8').then(text => requireRecord(JSON.parse(text) as unknown, 'PDS discovery')).catch((error: unknown) => {
     if (hasErrorCode(error, 'ENOENT')) return undefined;
     throw error;
@@ -83,6 +83,6 @@ export async function buildPdsLedger() {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const ledger = await buildPdsLedger(), json = `${JSON.stringify(ledger, null, 2)}\n`;
-  if (process.argv.includes('--write')) { await writeFile(resolve(ROOT, 'data/pds/ledger.json'), json); }
+  if (process.argv.includes('--write')) { await writeFile(resolve(ROOT, 'src/sources/pds/ledger.json'), json); }
   else process.stdout.write(json);
 }

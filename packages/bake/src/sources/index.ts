@@ -7,7 +7,7 @@
 // catalogue compiles, and the bibliography citations of the prepared galaxy and cluster catalogues; the context packages'
 // lineage, read from their manifests and source presentations, at the application route passed in; the facility artwork refresh, which
 // swaps model-render bytes under unchanged attribution; and the investigation ledgers beside each object and facility,
-// the shared investigation surveys they quote (`data/investigations/`) and the report over them
+// the shared investigation surveys they quote (`src/sources/investigations/`) and the report over them
 // (`packages/bake/cli/report-investigations.mts`). The astronomy data audit ledger (`astronomy-data/`, documented at
 // `src/sources/astronomy-data/README.md`) is its own bundle, `@cssearth/bake/sources/astronomy-data`: its `model.ts`
 // loads `node:sqlite`, which prints an experimental-feature warning on import, and this barrel must stay silent for
