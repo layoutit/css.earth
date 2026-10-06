@@ -1,0 +1,14 @@
+{
+  "id": "tess-photometry",
+  "python": "python3.14",
+  "requirements": ["numpy==2.5.3", "astropy==8.0.1", "lightkurve==2.6.0"],
+  "licenses": {
+    "lightkurve": "MIT (Lightkurve Collaboration 2018, ascl:1812.013)",
+    "astropy": "BSD-3-Clause (Astropy Collaboration 2022, ApJ 935, 167)"
+  },
+  "notes": [
+    "lightkurve measures a star's light from its pixels: the aperture, the light curve and the regression of the sky's own variation out of it (RegressionCorrector).",
+    "astropy's LombScargle finds the period of a light curve.",
+    "lightkurve warns that its pixel-response model needs oktopus; that part is not used."
+  ]
+}
