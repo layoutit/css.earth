@@ -42,7 +42,7 @@ import { writeLedger } from '../ledger.mts';
 import { publicationRecord } from '../publication-record.mts';
 import { datasetMarkerEntry } from '../planet-datasets.mts';
 import { storedSpecDocument, STORED_SPEC } from '../refresh.mts';
-import type { Cited, DraftText } from '../spec.mts';
+import type { Cited, DraftText } from '../spec-types.mts';
 
 const GM_SUN = 132712440041.93938, PARSEC_KM = 3.085677581491367e13, MAS_RAD = Math.PI / 180 / 3.6e6;
 const PLASMA = ['#0d0887', '#7e03a8', '#cc4778', '#f89540', '#f0f921'];

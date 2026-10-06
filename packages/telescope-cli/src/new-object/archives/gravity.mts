@@ -16,7 +16,7 @@ import { interpolateQuadraticLimbDarkening } from '@cssearth/bake/objects/stella
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { SIMBAD_TAP } from '../companions.mts';
 import { GRIDS } from '../limb.mts';
-import type { Cited } from '../spec.mts';
+import type { Cited } from '../spec-types.mts';
 
 /** Survey pipelines, which fit gravities for large samples with one automated model; a star's own analysis comes first. */
 export const SURVEY_PIPELINES: Readonly<Record<string, string>> = {

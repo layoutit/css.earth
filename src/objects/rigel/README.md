@@ -20,7 +20,7 @@ Color dataset: The color of Rigel's spectrum as the Pulkovo spectrophotometric c
 
 Run of 2026-09-21 (this version):
 
-- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue color #bdcfff is the color dataset's prepared color; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the color and marker from the pinned spectrum.
+- [`object-package-consistency.test.mts`](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) checks that the catalogue color #bdcfff is the color dataset's prepared color; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the color and marker from the pinned spectrum.
 
 ## Known problems
 

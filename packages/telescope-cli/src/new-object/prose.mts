@@ -7,7 +7,7 @@
  * keeps its `TODO(new-object)` for a person. */
 import type { Archive, Publication } from './archives/archives.mts';
 import { CHECKED } from './color.mts';
-import type { DraftQuotes } from './spec.mts';
+import type { DraftQuotes } from './spec-types.mts';
 
 export const WIKIPEDIA_SUMMARY = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
 /** A citation quote's ceiling in the reader-text format (packages/objects/src/prepared-data/content/object-text.ts). */

@@ -288,7 +288,7 @@ export async function prepareBodyMarkers({ projectRoot, outputRoot, descriptors 
     for (const descriptor of descriptors) {
       const sourcePath = descriptor.owner === 'object'
         ? resolve(projectRoot, 'src/objects', descriptor.objectId, 'source', descriptor.source.path)
-        : resolve(projectRoot, 'src/navigation/source', descriptor.source.path);
+        : resolve(projectRoot, 'site/source/navigation', descriptor.source.path);
       const tile = await renderMarker(descriptor, { sourcePath, tileSize });
       await sharp(tile).webp({ lossless: true, effort: 6 }).toFile(resolve(outputRoot, `body-${descriptor.objectId}@2x.webp`));
     }
@@ -296,7 +296,7 @@ export async function prepareBodyMarkers({ projectRoot, outputRoot, descriptors 
 }
 
 export async function renderNavigation({ projectRoot, outputRoot, descriptors }: MarkerRenderOptions) {
-  const navigationSourceRoot = resolve(projectRoot, "src/navigation/source");
+  const navigationSourceRoot = resolve(projectRoot, "site/source/navigation");
   await prepareSunIndicator({ projectRoot, outputRoot });
 
   await prepareBodyMarkers({ projectRoot, outputRoot, descriptors });

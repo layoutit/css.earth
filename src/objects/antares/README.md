@@ -25,7 +25,7 @@ Antares is the nearest red supergiant. Its package holds the placement, the publ
 - [`investigations.json`](investigations.json) records the two image routes that were checked and excluded, with the measured numbers.
 - A site discovery test checked that Antares is hidden from the map under every discovery setting while the imaged stars stay visible. [Commit 223e32ae7b](https://github.com/layoutit/css.earth/commit/223e32ae7b40911ea0b2a480227d2dcd66424012) removed it with the standing-red tests; no current test pins Antares, and [`object-discovery.test.ts`](../../../packages/objects/src/registry/object-discovery.test.ts) checks the shared discovery rule.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/antares/` with the default camera.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue color #ffc595 is the star field's color at the cited 3660 K.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) checks that the catalogue color #ffc595 is the star field's color at the cited 3660 K.
 
 ## Known problems
 

@@ -26,7 +26,7 @@ import { parseRegion, parseAcceptedAssumptions } from '@cssearth/objects';
 import { loadVoInputs, voCandidates } from './vo/bridge.mts';
 import type { DiscoveryRequest } from './vo/discovery.mts';
 import { loadQualifiedObservations, matchingProduct } from './qualified-observations.mts';
-import { assessInput, assessRequest } from './request-satisfaction.mts';
+import { assessInput, assessRequest, type ConstraintAnswer, type ConstraintVerdict } from './request-satisfaction.mts';
 import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { flagValue, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
@@ -36,7 +36,7 @@ import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm }
 import type { SourceIntakeIssue } from './source-intake.mts';
 import { loadSourceProducts, sourceQualifiedObservations } from './source-products.mts';
 import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry } from '@cssearth/telescope';
-import { ARCSEC_PER_RADIAN, type Candidate, type CapabilityAnswer, type ConstraintAnswer, type ConstraintVerdict, type ModeCapability, OBSERVATION_SELECTION_SCHEMA, type ObservationSelection, ObservationSelectionError, type QueryInputs, type ReportedResolution, type SelectionAssessment, type SelectionBlocker, TARGET_ASSOCIATIONS_PATH, type TargetCoverage, type ToolkitLevel, type ToolkitSupport, type UnassignedEvidence, assessSearchCoverage } from './query-contract.mts';
+import { ARCSEC_PER_RADIAN, type Candidate, type CapabilityAnswer, type ModeCapability, OBSERVATION_SELECTION_SCHEMA, type ObservationSelection, ObservationSelectionError, type QueryInputs, type ReportedResolution, type SelectionAssessment, type SelectionBlocker, TARGET_ASSOCIATIONS_PATH, type TargetCoverage, type ToolkitLevel, type ToolkitSupport, type UnassignedEvidence, assessSearchCoverage } from './query-contract.mts';
 import { ADAPTERS, EVIDENCE_TELESCOPE_NAMES, type TargetMode, forTarget, intersectIntervals, intervalWords, mergeIntervals, missingRequestFields, parseModeCapabilities, sourceModes, stringList, targetCoverage, workflowAssessment } from './query-modes.mts';
 
 const verdict = (answer: ConstraintAnswer, reason: string): ConstraintVerdict => ({ answer, reason });

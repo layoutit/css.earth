@@ -4,7 +4,7 @@ import { spawn } from 'node:child_process';
 import { astroqueryToolchain, plotNumericPreview, type FigureOptions, fileSize } from '@cssearth/telescope/node';
 import { resolve } from 'node:path';
 import { readFitsImage } from '@cssearth/fits';
-import type { FamilyHandler, FamilyOperation } from '../family-handlers.mts';
+import type { FamilyHandler, FamilyOperation } from '../family-handler.mts';
 import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
 import { descriptor, stable } from './common.mts';
 

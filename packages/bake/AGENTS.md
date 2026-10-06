@@ -107,7 +107,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
 - `src/astronomy/` is published as `@cssearth/bake/astronomy` (Node only): preparation's access to the built astronomy
   package (`loadAstronomyPackage`), which finds the build through this package's own name so the path holds from `dist/`.
   It imports no topic. `packages/bake/cli/prepare-solar-geometry.mts` generates `src/platform/solar-geometry.mts` from it;
-  its test is `src/platform/solar-geometry.test.mts`.
+  its test is `packages/bake/cli/prepare-solar-geometry.test.mts`.
 - `src/navigation/` is published as `@cssearth/bake/navigation` (Node only): the navigation distances
   the catalogue and search destinations are built with, and the marker recipes whose source bytes are checked and drawn
   into navigation marker sprites, and the navigation preparation (`prepare-navigation.ts`, with the Sun, black-hole,
@@ -266,8 +266,8 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     code that makes an intermediate, such as the radial snapshot and PDS constraint map in this topic.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the
     surface-observation pipeline (formats, cameras, pixel geometry, photometry, footprints, surface transfer, registration) in
-    `surface-observations/`, described in its README (its tests are in `src/objects/layers/terrestrial/surface-observations/`, its evidence in
-    `evidence/photograph-pipeline/`, the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
+    `surface-observations/`, described in its README (its tests are in `src/objects/layers/terrestrial/surface-observations/`,
+    the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Body pipeline tests stay in `packages/bake/authoring/<body>/`; domain tests also live under
   `packages/bake/src/objects/<topic>/`. The moved terrestrial Node suites live in

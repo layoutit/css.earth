@@ -5,62 +5,9 @@ import { directionFromRaDec, skyBasis } from './stars.js'
 import { RAD_PER_DEG } from './angles.js'
 import { keplerStateKm, type KeplerianElements } from './kepler.js'
 import type { Vec3 } from './vec3.js'
+import type { HostedOrbit } from './data/records.js'
+export type { HostedOrbit } from './data/records.js'
 
-/** A planet on a transit-fitted bound orbit around a placed star. */
-export interface HostedOrbit {
-  readonly periodDays: number
-  /** Semi-major axis in units of the host star's radius, the quantity a transit fit returns. */
-  readonly semiMajorAxisStellarRadii: number
-  /** Orbital inclination to the plane of the sky, degrees (90 is edge-on). */
-  readonly inclinationDegrees: number
-  /** Elliptic eccentricity in [0, 1). */
-  readonly eccentricity: number
-  /** Argument of periapsis in the orbital plane, in the convention where the transit falls at true anomaly f = pi/2 - omega:
-   * RadVel's, which reports the star's omega (a planet-centric omega differs by 180 degrees). It is not a position angle on the sky. */
-  readonly argumentOfPeriapsisDegrees?: number
-  /**
-   * Meaning assigned to `transitTimeBmjdTdb`. Required for an eccentric orbit so its epoch is never silently
-   * reinterpreted. `inferior-conjunction` uses the transit convention f = pi/2 - argumentOfPeriapsis; `superior-conjunction`
-   * is the body behind its host, f = 3pi/2 - argumentOfPeriapsis (an eclipse ephemeris that times the companion's occultation,
-   * as Cygnus X-1's times its black hole behind the star); `periastron` is the epoch of periastron passage (f = 0), the epoch an
-   * astrometric orbit of a directly imaged planet publishes.
-   */
-  readonly epochDefinition?: 'inferior-conjunction' | 'superior-conjunction' | 'periastron'
-  /** Barycentric modified Julian date in TDB at the stated epoch definition. */
-  readonly transitTimeBmjdTdb: number
-  /** Position angle of the ascending node, degrees east of celestial north. */
-  readonly ascendingNodePositionAngleDegrees: number
-  /**
-   * The published orbit this planet is predicted from, named as the prediction tool knows it. Tools call that owner for
-   * predicted positions and their uncertainty; the runtime never reads this.
-   */
-  readonly prediction?: {
-    readonly tool: 'whereistheplanet'
-    readonly planet: string
-    readonly reference: string
-  }
-  /**
-   * Set when the orbit's own publication judges it too weakly measured to constrain the central mass: a fit to a short arc
-   * of the orbit. The body is placed by it; its path is not drawn. `sources.constraint` quotes the criterion.
-   */
-  readonly weaklyConstrained?: true
-  /**
-   * A circumbinary orbit: the elements are Jacobi elements about the centre of mass of the parent and this companion, itself
-   * on a hosted orbit around the same parent (Kepler-16 (AB) b about Kepler-16 A and B). States stay parent-centred, as a
-   * satellite's `barycentreCompanion` does. `sources.barycentre` cites the masses that weight the centre.
-   */
-  readonly barycentreCompanion?: string
-  readonly sources: {
-    readonly period: string
-    readonly shape: string
-    readonly phase: string
-    readonly orientation: string
-    readonly eccentricity?: string
-    readonly argumentOfPeriapsis?: string
-    readonly constraint?: string
-    readonly barycentre?: string
-  }
-}
 export type HostedPlanetId = keyof typeof HOSTED_ORBITS
 export const HOSTED_PLANET_IDS: readonly HostedPlanetId[] = Object.keys(HOSTED_ORBITS) as HostedPlanetId[]
 export const hostedOrbit = (id: HostedPlanetId): HostedOrbit => HOSTED_ORBITS[id]

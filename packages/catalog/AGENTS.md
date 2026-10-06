@@ -20,7 +20,7 @@ Skipping (3) produces data the browser reads as garbage with no error, because
 every field still parses. That is the failure mode this package exists to
 prevent.
 
-Run package tests with `pnpm --filter @cssearth/catalog test` from the repository
+Run package tests with `pnpm test:run packages/catalog/src/catalog.test.ts` from the repository
 root. They do not replace cross-language evidence. The retained
 `scripts/check-parity.mts` runner references a missing `gen_fixture.py`; repair
 that fixture path or supply an independently generated Python fixture before

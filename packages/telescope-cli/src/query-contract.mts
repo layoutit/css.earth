@@ -2,8 +2,7 @@
 import type { ProductKind, CapabilityRequest } from './recipe-request.mts';
 import type { VoInputs, VoProductCandidate } from './vo/bridge.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';
-import type { RequestSatisfaction } from './request-satisfaction.mts';
-import type { ResolutionAssumption } from '@cssearth/objects';
+import type { ConstraintVerdict, RequestSatisfaction } from './request-satisfaction.mts';
 import type { SourceIntakeIssue } from './source-intake.mts';
 import type { LoadedSourceProduct } from './source-products.mts';
 import type { QualificationAction } from './qualification-routes.mts';
@@ -33,9 +32,6 @@ export interface ModeCapability {
   readonly note?: string;
 }
 
-export type ConstraintAnswer = 'yes' | 'no' | 'partial' | 'unknown';
-export interface ConstraintVerdict { readonly answer: ConstraintAnswer; readonly reason: string;
-  readonly assumptions?: readonly { readonly id: ResolutionAssumption; readonly description: string; readonly accepted: boolean }[] }
 /** What this repository can do with a mode, in rising order of what has actually been established here.
  *
  * `archive-final` is its own level and not a weaker `proven`: the observatory's own final product was pinned, downloaded and

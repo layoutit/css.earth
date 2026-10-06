@@ -2,7 +2,7 @@
  * dataset from the best archived spectrum (color.mts) with its limb-darkening law (limb.mts), the catalogue color and navigation
  * marker from that dataset, the manifest, acquisition plan, source records, credits and the README sections the data determine. Prose
  * only a person can write (the reader card and introduction, the README's account of the star) is marked TODO(new-object), which
- * src/objects/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
+ * packages/telescope-cli/src/new-object/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
@@ -15,9 +15,10 @@ import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
 import { fetchGaiaEclipsingPeriod, fetchCatalogueRow, rowArchive, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, readIdentifiers, telescopeResolver, type Archive, type CatalogueRow, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives/archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
-import { chooseLimb, type LimbChoice } from './limb.mts';
+import { chooseLimb } from './limb.mts';
+import type { LimbChoice } from './limb-choice.mts';
 import { chooseGravity } from './archives/gravity.mts';
-import type { Cited, StarSpec } from './spec.mts';
+import type { Cited, StarSpec } from './spec-types.mts';
 import { citedRow, DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
 import { quoteSource } from './prose.mts';
@@ -293,7 +294,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}${gravity && limb.limbDarkening ? ` Gravity: ${gravity.sentence}.` : ''}`, '',
     ...spec.spin ? [`**Spin.** ${spec.spin.inclinationDegrees}° from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''} (${spec.spin.source}). The axis's direction on the sky is unmeasured and set toward celestial north.`, ''] : [],
     '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from ${gaia ? 'Gaia DR3, SIMBAD' : `${catalogueRow!.archive} ${spec.position!.catalogue}`} and the archives named above; each choice was read with the dataset's own reader.`, '',
-    ...color.crossCheck ? [`- The color's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
+    ...color.crossCheck ? [`- The color's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the rest of the package.`], '',
     '## Known problems', '', '- **Assumptions of the frame.** The axis\'s position angle and the rotation phase are conventions.',
     ...limb.limbDarkening ? [`- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and ${gravity?.kind === 'bounded' ? 'a display gravity inside its class\'s published range (see Limb)' : 'gravity'}, not a measurement of this star.`] : [],

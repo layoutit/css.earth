@@ -1,5 +1,5 @@
-/** SIMBAD's TAP service answered as tab-separated text. Paper titles and star names hold commas, so the comma-separated answer the
- * identifier lookups read (companions.mts `csv`) cannot carry them. */
+/** SIMBAD's TAP service answered as tab-separated text, which the star survey and the table route read. The identifier
+ * lookups read the comma-separated answer (companions.mts `csv`), which keeps a quoted comma inside its cell. */
 import { SIMBAD_TAP } from '../../companions.mts';
 import type { Archive } from '../archives.mts';
 

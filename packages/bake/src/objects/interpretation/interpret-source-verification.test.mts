@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createSurfaceInterpreter } from '@cssearth/bake/objects/interpretation';
-import * as solarGeometry from './solar-geometry.mts';
+import * as solarGeometry from '../../../../../src/platform/solar-geometry.mts';
 
 const bytes = Buffer.from('pinned');
 const pin = (path: string) => ({path});

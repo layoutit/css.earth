@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { bandDepth } from './vir-projection.mts';
-import { parseRecipe } from './vir-mosaic.mts';
+import { parseRecipe } from './vir-recipe.mts';
 const test = sourceTest();
 
 test('band depth is 1 - Rb/Rc at the band minimum under the line joining the two anchor maxima (Frigeri et al. 2019)', () => {

@@ -23,7 +23,11 @@ over 47 ms. The price is paid at rest: the sharper pages a zoom in asks for are 
 (about ten frames of 33 to 49 ms where there were two), and those faces hold 58 MB more in the page's process
 (2026-10-05). Those pages land a slice a frame, and what is left of them waits whenever the camera moves again
 (`rendering/prepared-presentation.ts`): a drag begun a third of a second after a zoom in had seven or eight frames of
-29 to 54 ms in its first half second, and none once the rest waited for the next pause.
+29 to 54 ms in its first half second, and none once the rest waited for the next pause. Each page is decoded again, off
+the page's thread, just before its first slice lands, one page at a time: the decode that made the level ready can be
+a zoom old, and WebKit keeps no decoded pixels of an image nothing draws. The Moon's pages were decoded inside their
+first paint: frames of 117 to 195 ms after a zoom in and one of 632 to 642 ms after a second one on the iPad, against
+one of 99 to 100 ms and none over 44 ms with the decode (2026-10-06).
 
 A body's mesh is shown or hidden when the camera publishes a view, and everything that decision reads must ask for a
 publication when it changes with the camera still: the end of a motion that kept detail resident, the decode a hidden
@@ -227,6 +231,14 @@ Departure history checkpoints reuse the view already saved after a drag. The URL
 view must all match before a replacement can be skipped. A new camera pose or stale history state still publishes;
 explicit pushes remain distinct entries even when they name the same URL. Back restoration still remembers the
 departed view before adopting the incoming entry.
+
+A flight that replaces the scene writes its history entry at the hand-over, when the camera has arrived and neither
+body is mounted (`site/navigation/navigation-history.mts`, `commit(…, true)`). Safari takes a picture of the page for
+every entry pushed, and the display server draws it at a cost by the layers on screen. Written once the body was
+shown, the push made a frame of 239 to 317 ms on comet 67P's arrival, 159 to 175 ms on Psyche's and 77 to 95 ms on
+Mars's on the iPad; written at the hand-over, none of 60 ms at 67P or Mars, and at Psyche one frame of 205 to 268 ms
+(the comet's scene leaving and Psyche's mounting) where there were two (2026-10-06). With comet 67P at rest on
+screen, a push alone froze the page for 1.9 to 2.0 s. A navigation that keeps its scene still pushes over it.
 
 ### Optional controls and scene retirement
 

@@ -5,16 +5,17 @@ import { initialObjectSelection } from '@cssearth/renderer/runtime/object-contra
 import { publishPreparedNativeView } from '@cssearth/renderer/rendering/prepared-native-view.ts';
 import { preparedSceneMatrix, distanceForSilhouetteRadius } from '@cssearth/engine';
 import { serializePreparedMatrix4 } from '@cssearth/core';
-import { CAMERA_POSE_SCHEMA, parsePreparedWorldCameraFrame } from '@cssearth/objects';
+import { CAMERA_POSE_SCHEMA, parsePreparedWorldCameraFrame, type ObjectRuntimeDefinition } from '@cssearth/objects';
 import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
 import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
 import { carryViewportValues } from '@cssearth/telescope-cli/sphere/native-scroll/carry-values';
-import type { measurementSphere } from './sphere-lane.mts';
 import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
 
 const escape=(s:string)=>s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
-type Prepared=Awaited<ReturnType<typeof measurementSphere>>;
-export function sphereHtml(prepared:Prepared, metadata:Record<string,unknown>, title:string, legend:string):string {
+/** What the page reads of a prepared measurement sphere (`measurementSphere`): its one-dataset runtime, frame, world context,
+ * CSS and the data URLs that replace its asset URLs. */
+export interface PreparedMeasurementSphere {readonly definition:ObjectRuntimeDefinition;readonly worldFrame:unknown;readonly context:unknown;readonly css:string;readonly embeddedAssets:Readonly<Record<string,string>>}
+export function sphereHtml(prepared:PreparedMeasurementSphere, metadata:Record<string,unknown>, title:string, legend:string):string {
   const {definition}=prepared,frame=parsePreparedWorldCameraFrame(prepared.worldFrame);
   if(!frame)throw new TypeError('Sphere requires its prepared physical frame');
   const selection=initialObjectSelection(definition.controls);

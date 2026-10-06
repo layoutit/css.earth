@@ -1,5 +1,4 @@
-import { type CameraPlan, type PerspectiveCameraPlan, type LevelOfDetailPlan, type OrbitLineFade, type PreparedWorldCameraFrame } from '@cssearth/objects';
-import { type WorldCameraPose } from '@cssearth/engine';
+import { type CameraPlan, type PerspectiveCameraPlan, type LevelOfDetailPlan, type OrbitLineFade } from '@cssearth/objects';
 
 import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
 import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
@@ -11,18 +10,8 @@ import type { CameraViewport } from './camera-viewport.js';
 import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from './world-camera.js';
 import type { WorldCameraViewport } from './world-camera.js';
 
-import { createPreparedCamera } from './prepared-camera.js';
+import { createPreparedCamera, type PerspectiveWorldContext } from './prepared-camera.js';
 import { createCameraOrientation } from './camera-orientation.js';
-export interface PerspectiveWorldContext {
-  readonly frame: PreparedWorldCameraFrame;
-  readonly bodyRadiusUnits: number;
-  readonly maximumExtentUnits: number;
-  readonly kilometersPerUnit: number;
-  /** Optional authored alias calibration for legacy retained Sun framing. */
-  readonly framingReferenceZoom?: number;
-  /** Optional authored cubic-sky registration for a physical observer. */
-  readonly onWorldPublish?: (world: WorldCameraPose, viewport: WorldCameraViewport) => void;
-}
 export interface PerspectiveDollyOptions { sunDirection?: Vector3 | null; cameraPlan: CameraPlan; worldContext: PerspectiveWorldContext; cameraElement: HTMLElement; sceneElement: HTMLElement; stage: HTMLElement; viewport: CameraViewport;
   /** Prepared activation groups of the mesh; a resolving mesh returns through them in stages. */
   revealGroups?: readonly (readonly HTMLElement[])[];

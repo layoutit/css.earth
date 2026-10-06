@@ -26,8 +26,5 @@
   },
   "include": [
     "solar-geometry.mts"
-  ],
-  "exclude": [
-    "**/*.test.mts"
   ]
 }

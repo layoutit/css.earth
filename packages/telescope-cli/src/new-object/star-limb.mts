@@ -28,9 +28,11 @@ import { chooseGravity, citedGravity, type GravityChoice } from './archives/grav
 import { simbadPosition } from './generate.mts';
 import { fitInterferometricLimb } from './archives/interferometric-limb.mts';
 import { bindInputs, installColorDataset, json, type PackageFiles } from './dataset.mts';
-import { chooseLimb, GRIDS, HOWARTH, whiteDwarfGrid, type LimbChoice } from './limb.mts';
+import { chooseLimb, GRIDS, HOWARTH, whiteDwarfGrid } from './limb.mts';
+import type { LimbChoice } from './limb-choice.mts';
 import { STORED_SPEC } from './refresh.mts';
-import { parseStarSpec, whiteDwarfSpec, type StarSpec } from './spec.mts';
+import { parseStarSpec, whiteDwarfSpec } from './spec.mts';
+import type { StarSpec } from './spec-types.mts';
 
 const GM_SUN = 132712440041.93938;
 const parseWhiteDwarf = (entry: unknown, id: string) => { const value = (entry as { whiteDwarf?: unknown } | null)?.whiteDwarf; return value === undefined ? undefined : whiteDwarfSpec(value, `${id}.whiteDwarf`); };

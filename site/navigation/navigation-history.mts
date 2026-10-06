@@ -22,6 +22,11 @@ const navigationFeature = (event: Event): string | undefined => 'detail' in even
 // reads the held address (navigationHref) and the History API hears of it when a write cannot meet a gesture:
 //  - A navigation's entry is written when the camera rests after it, with the view the entry it left keeps: Back has
 //    to find both.
+//  - A flight that replaces the scene writes its entry at the hand-over, ahead of its landing (`commit(…, true)`): the
+//    camera has arrived and neither body is mounted. Safari takes a picture of the page for every entry pushed, which
+//    the display server draws at a cost by the layers on screen. Written once the body was shown, the push made a frame
+//    of 239 to 317 ms on comet 67P's arrival, 159 to 175 ms on Psyche's and 77 to 95 ms on Mars's; written at the
+//    hand-over, none over 55 ms. With comet 67P at rest on screen a push alone froze the page 1.9 to 2.0 s (2026-10-06).
 //  - A view's address is written when the reader leaves the page's content: the window loses focus (the address bar,
 //    another tab), a mouse leaves the page, the page is hidden, or a Command, Control or F5 key goes down (a reload
 //    or a copy of the address starts there).
@@ -46,6 +51,8 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
   // Not randomUUID: it exists only in secure contexts, and a device on the network loads the dev server over plain http.
   const prefix = Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join('');
   let serial = 0, entry = `${prefix}-${++serial}`, disposed = false;
+  // The entry written ahead of its flight's landing, while that flight still mounts its scene.
+  let ahead: string | null = null;
   // The held writes in the order the History API will hear them: the view an entry keeps, then the push that left it.
   const held: HeldWrite[] = [];
   let moving = false, timer: number | null = null;
@@ -130,7 +137,8 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     // Back before an arrival's entry was written (its camera still flies): the browser left the entry the flight
     // departed from, one step too far. Step forward to it again; that move restores the departure.
     if (unpublished && previous.has(entry) && previous.get(entry) !== targetEntry) { windowTarget.history.forward(); return; }
-    if (navigating() && departure && previous.get(entry) === targetEntry) {
+    // An entry written ahead is the flight's own: Back from it is an ordinary step to the entry it left.
+    if (navigating() && departure && previous.get(entry) === targetEntry && entry !== ahead) {
       const location = new URL(departure, windowTarget.location.href);
       // The router loads the object the entry names before it acts, and declines one that is not an object.
       const id = objectIdAtPath(location.pathname);
@@ -169,9 +177,11 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
       snapshots.set(entry, path);
       hold({ push: false, entry, path });
     },
-    commit(url: string, action: NavigationHistory = { history: 'push' }) {
+    /** `now`: the entry is written at once, whatever the camera does (a flight's hand-over). */
+    commit(url: string, action: NavigationHistory = { history: 'push' }, now = false) {
       const { history } = action, targetEntry = action.history === 'pop' ? action.entry : undefined;
       if (disposed) return;
+      ahead = null;
       if (history === 'pop' && !targetEntry) throw new TypeError('History restoration requires an entry.');
       const value = new URL(url, navigationHref(windowTarget)), path = value.pathname + value.search + value.hash;
       const from = entry;
@@ -185,6 +195,7 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
       // The entry a push leaves keeps the view it was left in, written just before the push.
       if (push && departed !== undefined) hold({ push: false, entry: from, path: departed });
       hold({ push, entry, path });
+      if (now && push) { ahead = entry; flush(); }
     },
     destroy() {
       if (disposed) return;

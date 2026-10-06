@@ -22,7 +22,7 @@ import { chooseLimb } from './limb.mts';
 import { storedHostedSpec, storedSpecDocument } from './refresh.mts';
 import { archiveRows, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
 import { TODO } from './scaffold.mts';
-import type { Cited, HostedSpec, StarSpec } from './spec.mts';
+import type { Cited, HostedSpec, StarSpec } from './spec-types.mts';
 
 // EARTH_GM is DE440's, km^3/s^2, the unit of the Jupiter and Sun values beside it.
 export const JUPITER_RADIUS_KM = 71492, JUPITER_GM = 126686531.9, SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938, EARTH_RADIUS_KM = 6371.0, EARTH_GM = 398600.435436;

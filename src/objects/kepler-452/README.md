@@ -19,7 +19,7 @@ Color dataset: The color of Gaia DR3's measured spectrum of Kepler-452. Its samp
 
 Run of 2026-09-21 (this version):
 
-- [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue color #ffece1 is the color dataset's prepared color and that the limb-darkening law is read at the recorded temperature and gravity; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the color and marker from the pinned spectrum.
+- [`object-package-consistency.test.mts`](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) checks that the catalogue color #ffece1 is the color dataset's prepared color and that the limb-darkening law is read at the recorded temperature and gravity; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the color and marker from the pinned spectrum.
 
 ## Known problems
 

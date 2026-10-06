@@ -10,7 +10,7 @@ import type { RuntimePolicy } from "../navigation/runtime-policy.js";
 
 
 import type { PreparedResourceLease } from './prepared-resource-lease.js';
-import type { PerspectiveWorldContext } from '../navigation/perspective-dolly.js';
+import type { PerspectiveWorldContext } from '../navigation/prepared-camera.js';
 
 import type { SurfaceFeatureLayerRuntime, SurfaceFeatureNavigationRuntime } from '../labels/surface-feature-types.js';
 

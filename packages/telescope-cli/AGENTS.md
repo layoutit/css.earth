@@ -20,7 +20,7 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   it. Per-body authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps, the circumstellar
   discs) is `authoring/<archive>/` (exported by no subpath: it imports this package through its own name, never the
   other way), a leaf the architecture check enforces; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. Receipts and ledgers record program paths
-  where `src/archives/programs.mts` puts them. No archive module names a body (`archives/archive-scope.test.mts`).
+  where `src/archives/programs.mts` puts them. No archive module names a body.
   The Juno archive tests are beside the archive in `src/archives/juno/`;
   `test:packages` runs every test in this package;
 - the entry scripts it runs by path as processes and the built sphere package entry (`src/workspace-commands/`, the sphere
@@ -34,8 +34,9 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
 
 The object generator behind `telescope new-object` is `src/new-object/`: `cli.mts` is the entry the telescope runs as a process of its
 own through `workspace-commands/new-object.mts`, `new-object-cli.mts` is the standalone entry for the modes the telescope does not expose
-(`--star-limb`, `--imaged-limb`, `--star-lit`, `--thermal`, `--thermal-entries`, `--expected-glow`, `--host-light`, `--phase-curve`, `--simulation`, `--rock-eclipse`, `--published-map`, `--charts`, `--retext`, `--retime`, the shape-only scaffold), and
-`new-hosted-planet.mts` scaffolds one hosted planet. `hosted-orbits/` holds the two Python fitters `hosted.mts` runs beside it.
+(`--star-limb`, `--imaged-limb`, `--star-lit`, `--thermal`, `--thermal-entries`, `--expected-glow`, `--host-light`, `--phase-curve`, `--simulation`, `--rock-eclipse`, `--published-map`, `--charts`, `--retext`, `--retime`, `--rename`, `--draft-photometry`, `--photometry`, the shape-only scaffold), and
+`new-hosted-planet.mts` scaffolds one hosted planet. `--hosted <handoff>` is the generator's own second phase (`generate.mts`
+`runHostedPhase`), started by a system run in a process that loads the rebuilt astronomy package; nobody types it. `hosted-orbits/` holds the two Python fitters `hosted.mts` runs beside it.
 The generated solar geometry (`src/platform/solar-geometry.mts`) stays generated: the entries load it with `solar-epoch.mts` and
 pass the epoch down, so no module here imports it.
 
