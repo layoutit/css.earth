@@ -97,3 +97,33 @@ test('archive source filters narrow Keck tables and Gemini rows before their sam
     assert.equal(gemini.state, 'empty-in-scope');
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('with a place on the sky, Keck and Gemini are asked by name and by place, and a spelling only the place finds is reported', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'place-leads-'));
+  const position = { raDeg: 346.8696, decDeg: 21.1343, radiusDeg: 0.5 / 60 }, koa: string[] = [], cadc: string[] = [];
+  try {
+    const keck = await searchKeckLeads(root, target, async query => {
+      koa.push(query);
+      if (!query.includes('koa_nirc2')) return [];
+      const placed = query.includes('CONTAINS(');
+      if (query.includes('SELECT TOP')) return [{ koaid: 'N2.20090805.31896.fits', targname: 'hd 218396', koaimtyp: 'object', filehand: '/koadata9/NIRC2/20090805/lev0/N2.20090805.31896.fits', date_obs: '2009-08-05 00:00:00' }];
+      return placed ? [{ targname: 'HR8799', frames: '6' }, { targname: 'hd 218396', frames: '113' }, { targname: '', frames: '2' }] : [{ targname: 'HR8799', frames: '8' }];
+    }, undefined, position);
+    assert.equal(koa.filter(query => query.includes("CIRCLE('ICRS', 346.8696, 21.1343, 0.008333333333333333)")).length, 15, '14 counts by place and one sample');
+    assert.ok(koa.every(query => !(query.includes('targname IN') && query.includes('CONTAINS('))), 'never both conditions in one query');
+    // HR8799 by name holds the six the place found; the place adds the two spellings no name search tries.
+    assert.deepEqual(keck.instruments.map(item => [item.sample, item.records]), [['HR8799', 8], ['hd 218396', 113], ['(no target name)', 2]]);
+    assert.match(keck.scope, /within 30 arcsec of the target's position/u);
+    const lead = keck.sources?.[0];
+    assert.ok(lead && 'koaid' in lead && lead.targetName === 'hd 218396');
+
+    const frame = (name: string, target_name: string) => ({ observationID: name.slice(0, -5), type: 'OBJECT', intent: 'science', instrument_name: 'GPI', target_name,
+      uri: `gemini:GEMINI/${name}`, contentLength: '2880', energy_bandpassName: 'H', time_exposure: '60', time_bounds_lower: '56962', dataRelease: '2016-01-01T00:00:00.000' });
+    const gemini = await searchGeminiLeads(root, target, async query => { cadc.push(query); return query.includes('INTERSECTS(')
+      ? [frame('S20141101S0001.fits', 'HR 8799'), frame('S20141101S0002.fits', 'HD218396')] : [frame('S20141101S0001.fits', 'HR 8799')]; }, undefined, position);
+    assert.equal(cadc.length, 2);
+    assert.match(cadc[1]!, /INTERSECTS\(CIRCLE\('ICRS', 346\.8696, 21\.1343, 0\.008333333333333333\), p\.position_bounds\) = 1/u);
+    assert.deepEqual(gemini.instruments.map(item => [item.instrument, item.records]), [['GPI', 2]]);
+    assert.equal(gemini.evidence?.length, 2);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
