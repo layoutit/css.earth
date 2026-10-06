@@ -23,6 +23,12 @@ file-stability hashes. Preserve product versions and acquisition routes. Runtime
 inventories identify published bytes; original evidence and untracked result
 receipts retain their own hashes. A source-coverage check is not digest verification.
 
+Read a body's records with `pnpm lookup`, not an inline script. `pnpm lookup
+records <id> --search=<text>` finds a value in any JSON file beside the body and
+prints the file and jq path that hold it; alone it lists those files.
+`pnpm lookup inventory <id>` lists the published files and `pnpm lookup manifest
+<id>` the declared sources. Each takes several ids and `--json`.
+
 Build a body whose appearance is supported by its sources and whose behavior
 comes from cssEarth's shared application. Follow this workflow for a new body;
 for a repair, enter at the affected stage and reuse valid work already done.

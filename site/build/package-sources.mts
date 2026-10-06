@@ -3,16 +3,19 @@ import { fileURLToPath } from 'node:url';
 import type { Plugin } from 'vite';
 import rendererConfig from '../../packages/renderer/tsup.config.ts';
 import objectsConfig from '../../packages/objects/tsup.config.ts';
+import engineConfig from '../../packages/engine/tsup.config.ts';
 
 // tsup's shared chunks reach the client bundler as single modules, so one startup import pulled every
 // renderer module sharing that chunk (the universe, volume and star runtimes) into the first load, and every
-// object contract the objects package's one bundle holds into the chunk of its first importer.
+// object contract the objects package's one bundle holds into the chunk of its first importer. The engine's one bundle
+// did the same: the startup cover's single `smoothstep` put the whole engine (29.6 KB of 50.8 KB) in every page's first load.
 // The client build compiles the same entries from their TypeScript sources and splits per module.
-// Renderer and objects modules only declare and export, so an unused one is dropped rather than kept for its
+// Renderer, objects and engine modules only declare and export, so an unused one is dropped rather than kept for its
 // load-time effects; worker entries keep theirs. Server rendering and Node tools keep the built packages.
 const packages: readonly { name: string; directory: string; config: unknown }[] = [
   { name: '@cssearth/renderer', directory: 'renderer', config: rendererConfig },
-  { name: '@cssearth/objects', directory: 'objects', config: objectsConfig }];
+  { name: '@cssearth/objects', directory: 'objects', config: objectsConfig },
+  { name: '@cssearth/engine', directory: 'engine', config: engineConfig }];
 const built = packages.map(({ name, directory, config }) => {
   const root = fileURLToPath(new URL(`../../packages/${directory}/`, import.meta.url));
   return { name, sources: `${root}src/`, entries: new Map<string, string>(entryPairs(config, root).map(([output, source]) => [`${root}dist/${output}.js`, source])) };

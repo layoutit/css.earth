@@ -129,9 +129,9 @@
         "poles": "venus-poles-clouds@2x.webp",
         "material": "venus-material@2x.webp",
         "shortLabel": "Illustration",
-        "qualification": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
+        "qualification": "An illustration of Venus’s clouds from the OpenSpace project, not a photograph.",
         "falseColor": false,
-        "notes": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck."
+        "notes": "An illustration of Venus’s clouds from the OpenSpace project, not a photograph."
       },
       {
         "id": "radar",
@@ -139,71 +139,35 @@
         "thumbnail": "venus-dataset-radar.webp",
         "surface": "venus-radar@2x.webp",
         "source": {
-          "id": "usgs-magellan-fmap-left-look-global-mosaic-75m",
-          "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m"
+          "id": "usgs-magellan-color",
+          "url": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m"
         },
         "poles": "venus-poles-radar@2x.webp",
         "material": "venus-observation-material@2x.webp",
         "shortLabel": "SAR",
-        "legend": {
-          "kind": "scale",
-          "title": "Radar brightness",
-          "meta": "dB relative to the Muhleman law",
-          "labels": [
-            "≤−20",
-            "+5",
-            "≥+30"
-          ],
-          "recipe": {
-            "palette": [
-              [
-                1,
-                1,
-                1
-              ],
-              [
-                251,
-                251,
-                251
-              ]
-            ],
-            "labels": [
-              "≤−20",
-              "+5",
-              "≥+30"
-            ]
-          },
-          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_sar_fmap_left_look_global_mosaic_75m"
-        },
         "falseColor": true,
-        "qualification": "USGS Magellan SAR FMAP left-look global mosaic (75 m per pixel from full-resolution F-BIDRs, mission cycles 1 and 3), read through NASA Trek zoom-4 tiles at about 4.64 km per pixel. Gray is the product’s DN: radar cross-section divided by the Muhleman law, 0.2 × DN − 20.2 dB, clipped at −20 and +30 dB.",
-        "notes": "Magellan’s radar looked through the clouds from orbit. Bright ground returned more of the radar signal than average; dark ground returned less. Brightness is the echo in decibels relative to an average Venus surface seen at the same angle (the Muhleman law): 0 dB is average, +10 dB is ten times stronger. USGS mosaicked Magellan’s full-resolution left-looking radar strips at 75 m per pixel. NASA Trek’s zoom-4 tiles average them to about 4.6 km per pixel. This is radar brightness, not visible color. Slopes facing the radar, rough ground and some minerals all look bright. Gray grid marks missing source data: the poles beyond 84° N and 80° S, and strips the left-looking radar missed.",
-        "noData": true,
+        "qualification": "USGS Magellan C3-MDIR synthetic color radar mosaic at 4,641 m per pixel, shown as published. The orange color is added to radar brightness; it is not measured surface color.",
+        "notes": "Magellan’s radar looked through the clouds from orbit. Bright ground returned more of the radar signal; dark ground returned less. USGS joined Magellan’s radar images into one global map and colored it. This is that map as USGS publishes it, at about 4.6 km per pixel, with no change to its brightness or sharpness. The orange color is added to simulate the surface. It follows radar brightness and is not measured color. Slopes facing the radar, rough ground and some minerals all look bright. The map runs from pole to pole. A flat tone fills a small area near the south pole that holds no radar image, about 0.4% of the globe.",
         "facts": [
           {
             "id": "meaning",
             "label": "What it shows",
-            "value": "Magellan’s radar looked through the clouds from orbit. Bright ground returned more of the radar signal than average; dark ground returned less."
-          },
-          {
-            "id": "scale",
-            "label": "Reading the scale",
-            "value": "Brightness is the echo in decibels relative to an average Venus surface seen at the same angle (the Muhleman law): 0 dB is average, +10 dB is ten times stronger."
+            "value": "Magellan’s radar looked through the clouds from orbit. Bright ground returned more of the radar signal; dark ground returned less."
           },
           {
             "id": "method",
             "label": "How it was made",
-            "value": "USGS mosaicked Magellan’s full-resolution left-looking radar strips at 75 m per pixel. NASA Trek’s zoom-4 tiles average them to about 4.6 km per pixel."
+            "value": "USGS joined Magellan’s radar images into one global map and colored it. This is that map as USGS publishes it, at about 4.6 km per pixel, with no change to its brightness or sharpness."
           },
           {
             "id": "limit",
             "label": "Limits",
-            "value": "This is radar brightness, not visible color. Slopes facing the radar, rough ground and some minerals all look bright."
+            "value": "The orange color is added to simulate the surface. It follows radar brightness and is not measured color. Slopes facing the radar, rough ground and some minerals all look bright."
           },
           {
             "id": "coverage",
             "label": "Coverage",
-            "value": "Gray grid marks missing source data: the poles beyond 84° N and 80° S, and strips the left-looking radar missed."
+            "value": "The map runs from pole to pole. A flat tone fills a small area near the south pole that holds no radar image, about 0.4% of the globe."
           }
         ]
       },

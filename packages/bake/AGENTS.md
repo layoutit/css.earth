@@ -83,7 +83,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   as installed, and the facility artwork refresh; and the investigation ledgers beside each object and facility with the
   shared surveys they quote (`src/sources/investigations/`) and the report over them (`packages/bake/cli/report-investigations.mts`
   is its command), and the lookup of what a source manifest declares (`manifest-lookup.ts`; `packages/bake/cli/lookup/index.mts manifest`
-  is its command). The application passes in the route its context objects show at
+  is its command) and of a value wherever an object's JSON records keep it (`record-lookup.ts`; `records` is its command). The application passes in the route its context objects show at
   (`CONTEXT_ROUTE`) and its dataset routes. It imports `runtime-source`, `objects/content` and `delivery`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned
   JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `src/sources/`.
 - `src/contract/` is published as `@cssearth/bake/contract` (Node only): the checked object runtime definition preparation
