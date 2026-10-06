@@ -69,6 +69,16 @@ class ProvenanceInventory(unittest.TestCase):
         self.assertEqual(staged['missingRequiredFilesByRegisteredBody']['README.md'], ['example'])
         self.assertTrue(report['indexUnchangedDuringRead'])
 
+    def test_catalogue_import_from_the_prepared_folder_is_recognised(self):
+        self.write('site/directory/objects.mts', "import { CATALOGUE_ENTRIES } from '../prepared/prepared-catalogue.mjs';\n")
+        self.write('src/objects/example/object.json', {'id': 'example', 'properties': {'catalog': {}}})
+        self.commit()
+        result, report = self.run_inventory()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        snapshot = report['snapshots'][0]
+        self.assertEqual(snapshot['registryBasis'], 'descriptor properties.catalog')
+        self.assertEqual(snapshot['registeredBodies'], 1)
+
     def test_empty_or_mismatched_catalogue_cannot_report_success(self):
         self.write('site/directory/objects.mts', "import { OBJECT_DESCRIPTORS } from './prepared-object-catalog.mts';\n")
         self.commit()
