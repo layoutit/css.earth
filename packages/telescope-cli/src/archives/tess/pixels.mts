@@ -54,10 +54,10 @@ export function onlyZipMember(zip: Buffer): { readonly name: string; readonly by
 }
 
 let last = 0;
-/** One request to the service, after the pace and through every 429. */
-async function paced(url: string): Promise<Response> {
+/** One request to MAST, after the pace and through every 429: TESScut, and the Kepler and K2 files of archives/kepler. */
+export async function paced(url: string, init: RequestInit = {}): Promise<Response> {
   for (;;) { const wait = last + PACE_MS - Date.now(); if (wait > 0) await new Promise(done => setTimeout(done, wait));
-    const response = await fetch(url, { headers: { 'User-Agent': USER_AGENT }, redirect: 'follow', signal: AbortSignal.timeout(600_000) }); last = Date.now();
+    const response = await fetch(url, { ...init, headers: { 'User-Agent': USER_AGENT, ...init.headers as Record<string, string> | undefined }, redirect: 'follow', signal: AbortSignal.timeout(600_000) }); last = Date.now();
     if (response.status !== 429) return response;
     await new Promise(done => setTimeout(done, BACK_OFF_MS)); }
 }
