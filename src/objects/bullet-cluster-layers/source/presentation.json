@@ -21,9 +21,9 @@
     {
       "id": "optical",
       "label": "Chandra · Hubble · composite",
-      "title": "Gas, mass and galaxies of the Bullet",
-      "description": "The 2006 composite of the Bullet Cluster: Chandra's X-ray image of the hot gas in pink and the mass map from gravitational lensing in blue, laid over a visible-light image from Magellan and Hubble. It stands as one flat picture facing the Sun at the cluster's distance.",
-      "summary": "Pink is X-ray gas and blue is the lensing mass map, over a visible-light image. A flat picture of the sky, with no depth.",
+      "title": "Gas and mass of the Bullet",
+      "description": "The 2006 composite of the Bullet Cluster in its layers: Chandra's X-ray image of the hot gas in pink and the mass map from gravitational lensing in blue. Each is drawn as a body round about the line of the collision: a symmetry the papers assume, not a measured depth. The visible-light image, with its stars and galaxies removed, stands flat at the cluster's distance.",
+      "summary": "Pink is X-ray gas and blue is the lensing mass map, each drawn round the line of the collision. Their depth is not measured.",
       "detail": "3000 × 2168 px",
       "facts": [
         {
@@ -44,7 +44,7 @@
         {
           "id": "license",
           "label": "License",
-          "value": "CC-BY-4.0"
+          "value": "No copyright asserted (Chandra X-ray Center); credit requested"
         }
       ],
       "input": "optical",
