@@ -1,0 +1,251 @@
+{
+  "schema": "cssearth-espadons-program@1",
+  "id": "af-lep-2007-12",
+  "target": {
+    "name": "HR1817",
+    "object": "af-lep",
+    "raDegrees": 81.76904166666667,
+    "decDegrees": -11.902654040404038,
+    "radiusDegrees": 0.02
+  },
+  "span": {
+    "fromMjd": 54461,
+    "toMjd": 54465
+  },
+  "observations": [
+    {
+      "product": "962040p",
+      "uri": "cadc:CFHT/962040p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.359,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962044p",
+      "uri": "cadc:CFHT/962044p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.371,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962048p",
+      "uri": "cadc:CFHT/962048p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.382,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962052p",
+      "uri": "cadc:CFHT/962052p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.394,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962056p",
+      "uri": "cadc:CFHT/962056p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.405,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962060p",
+      "uri": "cadc:CFHT/962060p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.417,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962064p",
+      "uri": "cadc:CFHT/962064p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.428,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962068p",
+      "uri": "cadc:CFHT/962068p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.439,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962072p",
+      "uri": "cadc:CFHT/962072p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.451,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962076p",
+      "uri": "cadc:CFHT/962076p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.462,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962080p",
+      "uri": "cadc:CFHT/962080p.fits",
+      "bytes": 20592000,
+      "targetName": "HR1817",
+      "proposal": "07BF16",
+      "mjdStart": 54461.473,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962350p",
+      "uri": "cadc:CFHT/962350p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.304,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962354p",
+      "uri": "cadc:CFHT/962354p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.315,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962358p",
+      "uri": "cadc:CFHT/962358p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.326,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962362p",
+      "uri": "cadc:CFHT/962362p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.338,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962366p",
+      "uri": "cadc:CFHT/962366p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.349,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962370p",
+      "uri": "cadc:CFHT/962370p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.36,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962374p",
+      "uri": "cadc:CFHT/962374p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.372,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962378p",
+      "uri": "cadc:CFHT/962378p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.383,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962382p",
+      "uri": "cadc:CFHT/962382p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.397,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962386p",
+      "uri": "cadc:CFHT/962386p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.409,
+      "exposureSeconds": 800
+    },
+    {
+      "product": "962390p",
+      "uri": "cadc:CFHT/962390p.fits",
+      "bytes": 20589120,
+      "targetName": "hr1817",
+      "proposal": "07BO01",
+      "mjdStart": 54464.42,
+      "exposureSeconds": 800
+    }
+  ],
+  "atmosphere": {
+    "effectiveTemperatureK": {
+      "value": 6409,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 94945758: Teff"
+    },
+    "logGravity": {
+      "value": 4.48,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 94945758: logg"
+    },
+    "metallicity": {
+      "value": 0.29,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 94945758: [M/H]"
+    }
+  },
+  "radialVelocity": {
+    "value": 20.61,
+    "source": "SIMBAD, radial velocity of V* AF Lep (2018yCat.1345....0G)"
+  },
+  "star": {
+    "vsiniKmS": {
+      "value": 54.7,
+      "source": "src/objects/af-lep/source/measurements.json, projectedRotationSpeedKmS: NASA Exoplanet Archive, composite parameters of AF Lep (pscomppars): projected rotation speed 54.7 km/s, from Mesa et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..93M/abstract)"
+    },
+    "inclinationDegrees": {
+      "value": 56.7,
+      "source": "src/objects/af-lep/source/measurements.json, spinInclinationDegrees: Computed here from this record's rotation period, projected rotation speed and radius (1.25 solar radii): sin i = v sin i × P / (2πR) = 0.836. Not a measurement of the axis: the three numbers come from different papers."
+    },
+    "periodDays": {
+      "value": 0.966,
+      "source": "src/objects/af-lep/source/measurements.json, rotationPeriodDays: NASA Exoplanet Archive, composite parameters of AF Lep (pscomppars): rotation period 0.966 d, from De Rosa et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023A&A...672A..94D/abstract)"
+    },
+    "maximumDegree": {
+      "value": 15,
+      "source": "ZDIpy's own example input (inzdi.dat), which fits to degree 15 and leaves its entropy to remove what the spectra do not ask for; no paper maps this star"
+    }
+  }
+}

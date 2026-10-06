@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-espadons-program@1",
+  "id": "hip-41378-2017-12",
+  "target": {
+    "name": "HIP41378",
+    "object": "hip-41378",
+    "raDegrees": 126.61604166666665,
+    "decDegrees": 10.080361111111111,
+    "radiusDegrees": 0.02
+  },
+  "span": {
+    "fromMjd": 58116,
+    "toMjd": 58128
+  },
+  "observations": [
+    {
+      "product": "2237745p",
+      "uri": "cadc:CFHT/2237745p.fits",
+      "bytes": 20692800,
+      "targetName": "HIP41378",
+      "proposal": "17BF06",
+      "mjdStart": 58116.383,
+      "exposureSeconds": 3348
+    },
+    {
+      "product": "2237918p",
+      "uri": "cadc:CFHT/2237918p.fits",
+      "bytes": 20692800,
+      "targetName": "HIP41378",
+      "proposal": "17BF06",
+      "mjdStart": 58117.584,
+      "exposureSeconds": 2430.9
+    },
+    {
+      "product": "2238799p",
+      "uri": "cadc:CFHT/2238799p.fits",
+      "bytes": 20692800,
+      "targetName": "HIP41378",
+      "proposal": "17BF06",
+      "mjdStart": 58122.556,
+      "exposureSeconds": 3348
+    },
+    {
+      "product": "2238942p",
+      "uri": "cadc:CFHT/2238942p.fits",
+      "bytes": 20692800,
+      "targetName": "HIP41378",
+      "proposal": "17BF06",
+      "mjdStart": 58123.576,
+      "exposureSeconds": 2659
+    },
+    {
+      "product": "2239073p",
+      "uri": "cadc:CFHT/2239073p.fits",
+      "bytes": 20692800,
+      "targetName": "HIP41378",
+      "proposal": "17BF06",
+      "mjdStart": 58124.567,
+      "exposureSeconds": 2541.3999999999996
+    },
+    {
+      "product": "2239195p",
+      "uri": "cadc:CFHT/2239195p.fits",
+      "bytes": 20692800,
+      "targetName": "HIP41378",
+      "proposal": "17BF06",
+      "mjdStart": 58125.504,
+      "exposureSeconds": 2556.7999999999997
+    },
+    {
+      "product": "2239297p",
+      "uri": "cadc:CFHT/2239297p.fits",
+      "bytes": 20692800,
+      "targetName": "HIP41378",
+      "proposal": "17BF06",
+      "mjdStart": 58126.598,
+      "exposureSeconds": 3265
+    },
+    {
+      "product": "2239445p",
+      "uri": "cadc:CFHT/2239445p.fits",
+      "bytes": 20692800,
+      "targetName": "HIP41378",
+      "proposal": "17BF06",
+      "mjdStart": 58127.506,
+      "exposureSeconds": 3343.6
+    }
+  ],
+  "atmosphere": {
+    "effectiveTemperatureK": {
+      "value": 6352,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 366443426: Teff"
+    },
+    "logGravity": {
+      "value": 4.3,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 366443426: logg"
+    },
+    "metallicity": {
+      "value": 0.02,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 366443426: [M/H]"
+    }
+  },
+  "radialVelocity": {
+    "value": 50.42,
+    "source": "SIMBAD, radial velocity of BD+10 1799 (2018yCat.1345....0G)"
+  },
+  "star": {
+    "vsiniKmS": {
+      "value": 5.6,
+      "source": "src/objects/hip-41378/source/measurements.json, projectedRotationSpeedKmS: NASA Exoplanet Archive, composite parameters of HIP 41378 (pscomppars): projected rotation speed 5.6 km/s, from Grouffal et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.173G/abstract)"
+    },
+    "inclinationDegrees": {
+      "value": 41.6,
+      "source": "src/objects/hip-41378/source/measurements.json, spinInclinationDegrees: Computed here from this record's rotation period, projected rotation speed and radius (1.3 solar radii): sin i = v sin i × P / (2πR) = 0.664. Not a measurement of the axis: the three numbers come from different papers."
+    },
+    "periodDays": {
+      "value": 7.8,
+      "source": "src/objects/hip-41378/source/measurements.json, rotationPeriodDays: NASA Exoplanet Archive, composite parameters of HIP 41378 (pscomppars): rotation period 7.8 d, from Grouffal et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...701A.173G/abstract)"
+    },
+    "maximumDegree": {
+      "value": 15,
+      "source": "ZDIpy's own example input (inzdi.dat), which fits to degree 15 and leaves its entropy to remove what the spectra do not ask for; no paper maps this star"
+    }
+  }
+}

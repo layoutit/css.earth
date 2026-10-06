@@ -1,0 +1,143 @@
+{
+  "schema": "cssearth-espadons-program@1",
+  "id": "flegetonte-2008-01",
+  "target": {
+    "name": "HD 102195",
+    "object": "flegetonte",
+    "raDegrees": 176.42713541666663,
+    "decDegrees": 2.822961805555555,
+    "radiusDegrees": 0.02
+  },
+  "span": {
+    "fromMjd": 54484,
+    "toMjd": 54496
+  },
+  "observations": [
+    {
+      "product": "965910p",
+      "uri": "cadc:CFHT/965910p.fits",
+      "bytes": 20589120,
+      "targetName": "hd102195",
+      "proposal": "07Bf10",
+      "mjdStart": 54484.441,
+      "exposureSeconds": 2160
+    },
+    {
+      "product": "966014p",
+      "uri": "cadc:CFHT/966014p.fits",
+      "bytes": 20589120,
+      "targetName": "hd102195",
+      "proposal": "07Bf10",
+      "mjdStart": 54485.442,
+      "exposureSeconds": 2240
+    },
+    {
+      "product": "966146p",
+      "uri": "cadc:CFHT/966146p.fits",
+      "bytes": 20589120,
+      "targetName": "hd102195",
+      "proposal": "07Bf10",
+      "mjdStart": 54486.437,
+      "exposureSeconds": 2240
+    },
+    {
+      "product": "966279p",
+      "uri": "cadc:CFHT/966279p.fits",
+      "bytes": 20592000,
+      "targetName": "HD 102195",
+      "proposal": "07Bf10",
+      "mjdStart": 54487.424,
+      "exposureSeconds": 2240
+    },
+    {
+      "product": "966488p",
+      "uri": "cadc:CFHT/966488p.fits",
+      "bytes": 20589120,
+      "targetName": "HD102195",
+      "proposal": "07Bf10",
+      "mjdStart": 54488.576,
+      "exposureSeconds": 3120
+    },
+    {
+      "product": "966630p",
+      "uri": "cadc:CFHT/966630p.fits",
+      "bytes": 20589120,
+      "targetName": "HD 102195",
+      "proposal": "07BC17",
+      "mjdStart": 54489.584,
+      "exposureSeconds": 2520
+    },
+    {
+      "product": "966746p",
+      "uri": "cadc:CFHT/966746p.fits",
+      "bytes": 20592000,
+      "targetName": "HD 102195",
+      "proposal": "07BF10",
+      "mjdStart": 54490.419,
+      "exposureSeconds": 2520
+    },
+    {
+      "product": "966953p",
+      "uri": "cadc:CFHT/966953p.fits",
+      "bytes": 20589120,
+      "targetName": "HD102195",
+      "proposal": "07BF10",
+      "mjdStart": 54492.581,
+      "exposureSeconds": 2800
+    },
+    {
+      "product": "967074p",
+      "uri": "cadc:CFHT/967074p.fits",
+      "bytes": 20592000,
+      "targetName": "HD 102195",
+      "proposal": "07BF10",
+      "mjdStart": 54493.581,
+      "exposureSeconds": 2800
+    },
+    {
+      "product": "967274p",
+      "uri": "cadc:CFHT/967274p.fits",
+      "bytes": 20589120,
+      "targetName": "HD 102195",
+      "proposal": "07BF10",
+      "mjdStart": 54495.567,
+      "exposureSeconds": 3200
+    }
+  ],
+  "atmosphere": {
+    "effectiveTemperatureK": {
+      "value": 5276,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 397024052: Teff"
+    },
+    "logGravity": {
+      "value": 4.55,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 397024052: logg"
+    },
+    "metallicity": {
+      "value": 0.05,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 397024052: [M/H]"
+    }
+  },
+  "radialVelocity": {
+    "value": 2.05,
+    "source": "SIMBAD, radial velocity of HD 102195 (2018A&A...616A...7S)"
+  },
+  "star": {
+    "vsiniKmS": {
+      "value": 3.23,
+      "source": "src/objects/flegetonte/source/measurements.json, projectedRotationSpeedKmS: NASA Exoplanet Archive, composite parameters of HD 102195 (pscomppars): projected rotation speed 3.23 km/s, from Ge et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...648..683G/abstract)"
+    },
+    "inclinationDegrees": {
+      "value": 68.1,
+      "source": "src/objects/flegetonte/source/measurements.json, spinInclinationDegrees: Computed here from this record's rotation period, projected rotation speed and radius (0.846 solar radii): sin i = v sin i × P / (2πR) = 0.928. Not a measurement of the axis: the three numbers come from different papers."
+    },
+    "periodDays": {
+      "value": 12.3,
+      "source": "src/objects/flegetonte/source/measurements.json, rotationPeriodDays: NASA Exoplanet Archive, composite parameters of HD 102195 (pscomppars): rotation period 12.3 d, from Ge et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...648..683G/abstract)"
+    },
+    "maximumDegree": {
+      "value": 15,
+      "source": "ZDIpy's own example input (inzdi.dat), which fits to degree 15 and leaves its entropy to remove what the spectra do not ask for; no paper maps this star"
+    }
+  }
+}

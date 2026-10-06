@@ -76,7 +76,8 @@ written here is the archive reader (`cadc.mts`, `product.mts`), the Kurucz line 
 files those codes read and the conversion of what they write (`mask.mts`, `lsd.mts`, `zdi.mts`); `tools.py` and `korg/depths.jl`
 hold calls and nothing else. Do not add a step of physics to these modules: when a step is missing, find the published code that
 does it and pin it. A program's `atmosphere`, `radialVelocity`, `star` and `published` values each carry where they are printed.
-A run's receipt is a result: `reduce.mts` writes it under ignored `output/espadons/<program id>/` and it is never committed; the
+A star no paper maps takes its rotation from its own measurements record (`archive.mts --object`, `--ledger`), never from a value
+typed here. A run's receipt is a result: `reduce.mts` writes it under ignored `output/espadons/<program id>/` and it is never committed; the
 ledger records each run's verdict. The one choice the codes leave open, how tightly a map is fitted, is `KNEE` in `reduce.mts`, and it is settled by `benchmark.mts`
 on the published runs.
 

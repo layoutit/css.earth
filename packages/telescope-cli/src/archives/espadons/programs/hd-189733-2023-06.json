@@ -1,0 +1,129 @@
+{
+  "schema": "cssearth-espadons-program@1",
+  "id": "hd-189733-2023-06",
+  "target": {
+    "name": "HD 189733",
+    "object": "hd-189733",
+    "raDegrees": 300.18436363636357,
+    "decDegrees": 22.70928619528619,
+    "radiusDegrees": 0.02
+  },
+  "span": {
+    "fromMjd": 60119,
+    "toMjd": 60137
+  },
+  "observations": [
+    {
+      "product": "2881515p",
+      "uri": "cadc:CFHT/2881515p.fits",
+      "bytes": 20689920,
+      "targetName": "HD 189733",
+      "proposal": "23AF01",
+      "mjdStart": 60119.602,
+      "exposureSeconds": 1140
+    },
+    {
+      "product": "2881644p",
+      "uri": "cadc:CFHT/2881644p.fits",
+      "bytes": 20689920,
+      "targetName": "HD 189733",
+      "proposal": "23AF01",
+      "mjdStart": 60120.552,
+      "exposureSeconds": 1140
+    },
+    {
+      "product": "2882096p",
+      "uri": "cadc:CFHT/2882096p.fits",
+      "bytes": 20689920,
+      "targetName": "HD 189733",
+      "proposal": "23AF01",
+      "mjdStart": 60122.383,
+      "exposureSeconds": 1140
+    },
+    {
+      "product": "2884024p",
+      "uri": "cadc:CFHT/2884024p.fits",
+      "bytes": 20689920,
+      "targetName": "HD 189733",
+      "proposal": "23AF01",
+      "mjdStart": 60133.558,
+      "exposureSeconds": 1140
+    },
+    {
+      "product": "2884162p",
+      "uri": "cadc:CFHT/2884162p.fits",
+      "bytes": 20689920,
+      "targetName": "HD 189733",
+      "proposal": "23AF01",
+      "mjdStart": 60134.608,
+      "exposureSeconds": 1140
+    },
+    {
+      "product": "2884166p",
+      "uri": "cadc:CFHT/2884166p.fits",
+      "bytes": 20689920,
+      "targetName": "HD 189733",
+      "proposal": "23AF01",
+      "mjdStart": 60134.626,
+      "exposureSeconds": 1140
+    },
+    {
+      "product": "2884278p",
+      "uri": "cadc:CFHT/2884278p.fits",
+      "bytes": 20689920,
+      "targetName": "HD 189733",
+      "proposal": "23AF01",
+      "mjdStart": 60135.586,
+      "exposureSeconds": 1140
+    },
+    {
+      "product": "2884388p",
+      "uri": "cadc:CFHT/2884388p.fits",
+      "bytes": 20689920,
+      "targetName": "HD 189733",
+      "proposal": "23AF01",
+      "mjdStart": 60136.298,
+      "exposureSeconds": 1140
+    }
+  ],
+  "atmosphere": {
+    "effectiveTemperatureK": {
+      "value": 5023,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 256364928: Teff"
+    },
+    "logGravity": {
+      "value": 4.58,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 256364928: logg"
+    },
+    "metallicity": {
+      "value": 0.02,
+      "source": "TESS Input Catalog 8.2 (VizieR IV/39/tic82), TIC 256364928: [M/H]"
+    }
+  },
+  "radialVelocity": {
+    "value": -2.317,
+    "source": "SIMBAD, radial velocity of HD 189733 (2018A&A...616A...7S)"
+  },
+  "star": {
+    "vsiniKmS": {
+      "value": 2.97,
+      "source": "Fares, R. et al., arXiv:1003.6027: 2.97 +/- 0.22 km/s, quoted from Winn et al. 2006 (Sect. 1); the paper does not print a separately fitted value"
+    },
+    "inclinationDegrees": {
+      "value": 71.87,
+      "source": "Cristo et al. (2024), A&A 682, A28 (arXiv:2310.06681), Table 4, model M1: i* = 71.87 +5.55/-6.91 degrees, the tilt src/objects/hd-189733/source/preparation/rotation.json draws the star with"
+    },
+    "periodDays": {
+      "value": 11.454,
+      "source": "Cristo et al. (2024), Table 4, model M1: equatorial period 11.454 +0.092/-0.088 days, the period src/objects/hd-189733/source/preparation/rotation.json turns the star with"
+    },
+    "maximumDegree": {
+      "value": 4,
+      "source": "Fares, R. et al., arXiv:1003.6027: printed as 'the five lowest terms only, i.e., l < 5'"
+    },
+    "shearRadPerDay": {
+      "value": 0.159,
+      "source": "Cristo et al. (2024), Table 4, model M1: differential rotation alpha 0.29 +0.13/-0.12, times the equatorial rate 2 pi / 11.454 d"
+    }
+  }
+}

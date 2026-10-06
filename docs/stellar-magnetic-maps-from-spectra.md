@@ -34,7 +34,7 @@ map to the table the star packages already draw. The GPL codes are run as tools;
 | The atomic lines | R. L. Kurucz's list `gfall08oct17.dat`, pinned by its size |
 | Temperature, gravity, metallicity | A catalogue, with the row cited: the TESS Input Catalog where it has both, else the dwarf sequence of Pecaut & Mamajek (2013) by the star's spectral type |
 | Radial velocity | SIMBAD, with the paper it cites; the star's line is looked for within 30 km/s of it |
-| Rotation period, tilt of the axis, projected rotation speed, how much slower the poles turn | Papers. A map cannot find these by itself |
+| Rotation period, tilt of the axis, projected rotation speed, how much slower the poles turn | The paper that mapped the star; else the star's own record (`source/measurements.json`), where the generator's `--metadata` pass writes what the NASA Exoplanet Archive and SIMBAD print, and the tilt the period, the speed and the radius give together. A map cannot find these by itself |
 | The finest detail to fit (the highest harmonic degree) | The paper that mapped the star, or the star's rotation speed |
 
 ## The one open choice
@@ -118,12 +118,15 @@ Two things keep a result honest without a paper to check it against, and both ar
 node packages/telescope-cli/src/archives/espadons/toolchain.mts install          # once: about 3.3 GB under output/toolchains/zdi
 node packages/telescope-cli/src/archives/espadons/archive.mts --runs --ra 300.182 --dec 22.711
 node packages/telescope-cli/src/archives/espadons/archive.mts hd-189733-2007-06 --name "HD 189733" --ra 300.182 --dec 22.711 --from 2007-06-20 --to 2007-07-06
-# add the program's atmosphere, radialVelocity and star blocks, each value with its source
+# add the program's star block, each value with its source, unless --object names a star whose record holds its rotation
 node packages/telescope-cli/src/archives/espadons/reduce.mts hd-189733-2007-06
 node packages/telescope-cli/src/archives/espadons/compare.mts hd-189733-2007-06  # when the program has a published block
 pnpm telescope new-object --from-spectra hd-189733 --out output/maps/hd-189733.json
 pnpm telescope new-object output/maps/hd-189733.json --bake
 ```
+
+`archive.mts --ledger` pins, in one go, every run of every listed star whose rotation is known: at least 6 spectra spread over at
+least half a rotation.
 
 The last two commands put each reduced map on the star's page as a "Radial field" dataset. A star with such datasets can
 then be given a corona ([A star's corona from its magnetic map](stellar-corona-from-magnetic-maps.md)).
