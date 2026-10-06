@@ -14,23 +14,23 @@ A folder imports itself or strictly lower layers. Sibling folders, including L0 
 | 0 | `browser/` | Browser input, DOM and serialized import queue | 1; `import-queue.mts` |
 | 0 | `model/` | Object identities, routes and held addresses | 0 |
 | 0 | `overview/` | Prepared spectral overview readers | 0 |
-| 0 | `prepared/` | Prepared transports and generated inputs | 23; `prepared-catalogue.d.mts`, `prepared-navigation-markers.d.mts`, `prepared-shell-icons.d.mts`, `prepared-shell-titles.d.mts` |
+| 0 | `prepared/` | Prepared transports and generated inputs | 0 |
 | 0 | `source/` | Preserved input records and artwork | 0 |
 | 0 | `vendor/` | Preserved third-party notices | 0 |
 | 0 | `server-assets/` | Server and build prepared-asset origin | 0 |
 | 0 | `contracts/` | Shared page and shell interfaces | 0 |
 | 1 | `directory/` | Startup reads and object catalogue directory | 9; `startup-world.mts`, `object-directory.mts`, `objects.mts`, `world-context-plan.mts` |
 | 1 | `minimap/` | Surface-map measurements and view formatting | 0 |
-| 2 | `world/` | Shared framing, visibility and camera context | 41; `world-objects.mts`, `world-system-views.mts`, `stellar-extents.mts`, `hosted-banks.mts` |
-| 3 | `content/` | Card content, citations and metadata | 11; `exploration-catalog.mts`, `source-documentation.mts`, `seo.mts`, `seo-trail.mts` |
-| 3 | `navigation/` | History, requests, flights and arrivals | 4; `prepared-world-navigation.mts` |
+| 2 | `world/` | Shared framing, visibility and camera context | 29; `world-objects.mts`, `world-system-views.mts`, `application-world-context.mts`, `application-world-resources.mts` |
+| 3 | `content/` | Card content, citations and metadata | 8; `seo.mts`, `seo-trail.mts`, `system-card.mts`, `object-children.mts` |
+| 3 | `navigation/` | History, requests, flights and arrivals | 1 |
 | 4 | `search/` | Catalogue search and result presentation | 0 |
 | 4 | `selection/` | Committed selection and camera handovers | 8; `scene/scene-selection.mts`, `satellite-selection.mts`, `overview-selection.mts`, `showcase.mts` |
-| 5 | `shell/` | Retained shell controls and panels | 14; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
-| 6 | `server/` | SSR readers, responses and host middleware | 7; `object-entry.mts`, `world-places.mts`, `dot-catalogue-data.mts`, `social-images.mts` |
-| 6 | `scene/` | Scene sessions, replacement and publication | 10; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts`, `scene-imports.mts` |
-| 7 | `startup/` | Page boot helpers and router entry | 5; `shared-imports.mts`, `startup-boot.mts` |
-| 7 | `build/` | Site preparation and packaging | 3; `prepare-body-moons.mts` |
+| 5 | `shell/` | Retained shell controls and panels | 3; `diagnostic-recorder.mts` |
+| 6 | `server/` | SSR readers, responses and host middleware | 2; `dot-catalogue-data.mts` |
+| 6 | `scene/` | Scene sessions, replacement and publication | 7; `object-adapter.mts`, `packaged-object-runtime.mts`, `scene-imports.mts` |
+| 7 | `startup/` | Page boot helpers and router entry | 3; `shared-imports.mts` |
+| 7 | `build/` | Site preparation and packaging | 0 |
 | 8 | `layouts/` | Shared page frame and its styles | 2; `components/ObjectSwatchStyles.astro`, `object-shell.css` |
 | 9 | `components/` | Reusable Astro markup and SSR composition | 0 |
 | 10 | `pages/` | Routes and object-page entries | 0 |
@@ -63,7 +63,7 @@ The changes array partitions stable edit ids into atomic groups. All seven group
 
 ## Decided loader design: option 3
 
-Read sources: site/import-queue.mts:13–26, site/shared-imports.mts:1–7, site/startup-boot.mts:1–24, site/layouts/ObjectLayout.astro:162–178, site/object-directory.mts:55–72, site/object-adapter.mts:1–20 and site/scene/scene-router.mts:839–845.
+Read sources: site/import-queue.mts:13–26, site/shared-imports.mts:1–7, site/startup/startup-boot.mts:1–24, site/layouts/ObjectLayout.astro:162–178, site/object-directory.mts:55–72, site/object-adapter.mts:1–20 and site/scene/scene-router.mts:839–845.
 
 ```text
 layout → startup/shared-imports → queued router import (module autostart)

@@ -14,7 +14,7 @@
   ],
   "substitutions": [
     {
-      "file": "site/startup-boot.mts",
+      "file": "site/startup/startup-boot.mts",
       "before": "export function startBodyCode(document: Document) {",
       "after": "export function startBodyCode(document: Document) {\n  const journeyAgent = document.defaultView?.navigator.userAgent ?? \"\";\n  if (/AppleWebKit/u.test(journeyAgent) && /Safari/u.test(journeyAgent) && !/Chrome|Chromium|Edg/u.test(journeyAgent)) throw new Error(\"Deliberate WebKit startup breakage\");",
       "occurrences": 1

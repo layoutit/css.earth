@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { resolveWorldBillboards } from '../../../server-assets/asset-origin.mts';
-import { worldFiles } from '../../../world-places.mts';
+import { worldFiles } from '../../../server/world-places.mts';
 
 // One object's world bodies, copied at build from its own package (`src/objects/<id>/prepared/members.json`: the bodies
 // inside it, a system drawn as its host; or the asteroid dot bank's rows): a page reads the files of the objects it is

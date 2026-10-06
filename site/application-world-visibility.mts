@@ -5,12 +5,12 @@ import { contextAnnotationOpacity } from '@cssearth/renderer/navigation/marker-p
 import { discoveryVisibility, parseObjectDiscovery, type ObjectClassification, type PreparedContextBody, type PreparedWorldContext } from '@cssearth/objects';
 import { labelImportance } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, loadWorldHolder, onWorldSystems } from './world-context-plan.mts';
-import { PREPARED_WORLD_PRESENTATION as prepared } from './prepared-world-presentation.mts';
+import { PREPARED_WORLD_PRESENTATION as prepared } from './world/prepared-world-presentation.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from './satellite-systems.mts';
 import { planetarySystemParents } from './model/planetary-system-members.mts';
 import { orbitRoot } from './model/orbit-root.mts';
 import type { SceneLifetime } from '@cssearth/engine';
-import type { ApplicationWorldLayer } from './application-world-types.mts';
+import type { ApplicationWorldLayer } from './world/application-world-types.mts';
 
 // Phones get a lighter scene: no celestial sky cube.
 const phone = globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches === true;

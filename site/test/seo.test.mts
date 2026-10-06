@@ -4,7 +4,7 @@ const test = sourceTest();
 import { SCENE_OBJECTS, requireObject } from "../objects.mts";
 import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
 import { pageTrail } from "../seo-trail.mts";
-import { availableSocialImages, billboardSocialImages, committedSocialImages } from "../social-images.mts";
+import { availableSocialImages, billboardSocialImages, committedSocialImages } from "../server/social-images.mts";
 
 test("the home page is named and addressed as the site, not as the Earth page it opens on", () => {
   const earth = objectSeo(requireObject("earth")), home = homeSeo(earth);

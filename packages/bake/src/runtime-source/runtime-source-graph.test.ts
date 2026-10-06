@@ -7,7 +7,7 @@ import { resolveRuntimeSource } from './runtime-source-graph.ts';
 
 const root = fileURLToPath(new URL('../../../..', import.meta.url));
 const options = { root, source: (path: string) => readFile(path, 'utf8') };
-const importer = resolve(root, 'site/source-documentation.mts');
+const importer = resolve(root, 'site/content/source-documentation.mts');
 
 test('workspace imports close on the source entry of the package export or of a declared subpath export', async () => {
   assert.equal(await resolveRuntimeSource('@cssearth/core', importer, options), resolve(root, 'packages/core/src/index.ts'));
