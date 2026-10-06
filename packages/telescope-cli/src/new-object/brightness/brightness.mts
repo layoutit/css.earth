@@ -4,7 +4,7 @@
  *
  * A brightness map never changes the axis a page draws: a light curve fixes longitudes, not the tilt. The period measured
  * on the way is written into the star's measurements record, where the metadata pass counts it among the star's periods. */
-import { readdir, readFile } from 'node:fs/promises';
+import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireRecord } from '@cssearth/core';
 import { notTurning } from '../../archives/tess/photometry.mts';
@@ -25,13 +25,39 @@ async function reduced(root: string, host: string, choice: SurfaceMapChoice): Pr
   return reducedBrightness(choice, receipt, table, await readJson(resolve(root, 'output/tess', host, `${choice.program}.curve.json`), `${choice.program}: its light curve is not in output/tess/${host} (${reduce(host)})`));
 }
 
-/** The star's measurements record with the period of its newest map, the light's swing and where both come from, set before
- * the record's `shape` as the catalogued values are. */
-export function withMeasuredRotation(record: Readonly<Record<string, unknown>>, map: Pick<BrightnessSurfaceMap, 'periodDays' | 'sector' | 'amplitude' | 'lightPeriodDays'>): Record<string, unknown> {
-  const fields = { [MEASURED_PERIOD.days]: map.periodDays, [MEASURED_PERIOD.source]: `Measured in this project from the star's light in the TESS full-frame images of sector ${map.sector} (${BRIGHTNESS_GENERATOR}): ${map.periodDays} d, the light swinging by ${percent(map.amplitude)}% as the star turns${map.lightPeriodDays === undefined ? '' : ` (the light repeats every ${map.lightPeriodDays} d, half the catalogued rotation period, and the star is taken to turn once in two of them)`}`,
-    [LIGHT_SWING]: Number((100 * map.amplitude).toFixed(2)) }, out: Record<string, unknown> = {};
+/** A record with `fields` set before its `shape`, as the catalogued values are; fields it already holds are replaced in place of being added. */
+function beforeShape(record: Readonly<Record<string, unknown>>, fields: Readonly<Record<string, unknown>>): Record<string, unknown> { const out: Record<string, unknown> = {};
   for (const [key, value] of Object.entries(record)) { if (key === 'shape') Object.assign(out, fields); if (!(key in fields)) out[key] = value; }
-  return 'shape' in record ? out : { ...out, ...fields };
+  return 'shape' in record ? out : { ...out, ...fields }; }
+
+/** The star's measurements record with the period of its newest map, the light's swing and where both come from. */
+export function withMeasuredRotation(record: Readonly<Record<string, unknown>>, map: Pick<BrightnessSurfaceMap, 'periodDays' | 'sector' | 'amplitude' | 'lightPeriodDays'>): Record<string, unknown> {
+  return beforeShape(record, { [MEASURED_PERIOD.days]: map.periodDays, [MEASURED_PERIOD.source]: `Measured in this project from the star's light in the TESS full-frame images of sector ${map.sector} (${BRIGHTNESS_GENERATOR}): ${map.periodDays} d, the light swinging by ${percent(map.amplitude)}% as the star turns${map.lightPeriodDays === undefined ? '' : ` (the light repeats every ${map.lightPeriodDays} d, half the catalogued rotation period, and the star is taken to turn once in two of them)`}`,
+    [LIGHT_SWING]: Number((100 * map.amplitude).toFixed(2)) });
+}
+
+/** What the reduction found in a star's TESS light, for every star it looked at and not only those with a map: the verdict in
+ * the reduction's own sentence, the sector read, and the scatter of the light over it. A star not read says why. */
+export const TESS_LIGHT = { verdict: 'tessLight', sector: 'tessLightSector', scatter: 'tessLightScatterPercent', source: 'tessLightSource' } as const;
+export function withTessLight(record: Readonly<Record<string, unknown>>, receipt: unknown, curve?: unknown): Record<string, unknown> {
+  const reduced = requireRecord(receipt, 'receipt'), rotation = requireRecord(reduced.rotation, 'receipt rotation'), tried = Array.isArray(reduced.tried) ? reduced.tried.filter(isRecord).at(-1) : undefined, sector = typeof tried?.sector === 'number' ? tried.sector : undefined;
+  const verdict = rotation.detected === true ? `The star's rotation is seen: ${String(rotation.periodDays)} d, the light swinging by ${percent(Number(rotation.amplitude))}%.` : typeof rotation.reason === 'string' ? rotation.reason : 'No rotation is seen.';
+  const flux = isRecord(curve) && Array.isArray(curve.flux) ? curve.flux.filter((value): value is number => typeof value === 'number') : [], mean = flux.reduce((sum, value) => sum + value, 0) / (flux.length || 1);
+  const scatter = flux.length > 1 && mean > 0 ? Number((100 * Math.sqrt(flux.reduce((sum, value) => sum + (value - mean) ** 2, 0) / flux.length) / mean).toFixed(2)) : undefined;
+  const without = Object.fromEntries(Object.entries(record).filter(([key]) => !(Object.values(TESS_LIGHT) as readonly string[]).includes(key)));
+  return beforeShape(without, { [TESS_LIGHT.verdict]: verdict, ...(sector === undefined ? {} : { [TESS_LIGHT.sector]: sector }), ...(scatter === undefined ? {} : { [TESS_LIGHT.scatter]: scatter }),
+    [TESS_LIGHT.source]: sector === undefined ? `Looked at in this project before any pixel was fetched (${BRIGHTNESS_GENERATOR}); the star's TESS pixels were not read` : `Read in this project from the TESS full-frame images of sector ${sector} (${BRIGHTNESS_GENERATOR})${scatter === undefined ? '' : '; the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean'}` });
+}
+
+/** `--tess-light --all | STAR_ID...`: each star the reduction has looked at gains what it found, in its measurements record. */
+export async function writeTessLight(root: string, ids: readonly string[] | 'all', report: (line: string) => void): Promise<number> {
+  const hosts = ids === 'all' ? (await readdir(resolve(root, 'output/tess'), { withFileTypes: true }).catch(() => [])).filter(entry => entry.isDirectory()).map(entry => entry.name).sort() : ids; let written = 0;
+  for (const host of hosts) { const receipt: unknown = await readFile(receiptPath(host), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined), path = resolve(root, 'src/objects', host, 'source/measurements.json');
+    const record: unknown = await readFile(path, 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
+    if (!isRecord(receipt) || receipt.schema !== ROTATION_SCHEMA || !isRecord(record)) { if (ids !== 'all') report(`  ${host}: not written: ${isRecord(record) ? `not reduced (${reduce(host)})` : 'no measurements record'}`); continue; }
+    const last = Array.isArray(receipt.tried) ? receipt.tried.filter(isRecord).at(-1) : undefined, curve: unknown = typeof last?.lightCurve === 'string' ? await readFile(resolve(root, 'output/tess', host, last.lightCurve), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined) : undefined;
+    const next = `${JSON.stringify(withTessLight(record, receipt, curve), null, 2)}\n`; if (next !== await readFile(path, 'utf8')) { await writeFile(path, next); written += 1; } }
+  report(`${written} record(s) changed of ${hosts.length} star(s) looked at.`); return written;
 }
 
 /** The lead every paragraph this route writes into a star's README begins with: a later run finds and replaces them by it. */

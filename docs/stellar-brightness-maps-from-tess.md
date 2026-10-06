@@ -137,6 +137,7 @@ node packages/telescope-cli/src/archives/tess/reduce.mts <star id>...     # or -
 pnpm telescope new-object --from-pixels all --out output/tess/specs/all.json
 pnpm telescope new-object output/tess/specs/all.json --bake
 pnpm telescope new-object --metadata <star id>...
+node packages/telescope-cli/src/new-object/new-object-cli.mts --tess-light --all
 ```
 
 `reduce.mts` writes a receipt for each star under ignored `output/tess/<star id>/`: the sector, the request that cut its
@@ -146,6 +147,10 @@ for all stars is one request of some ten minutes, kept under `output/tess/` so a
 
 The map's table (108 KB a star) is not tracked: its manifest input names `reduce.mts` as its generator, and it is published
 to and restored from the source cache (`node packages/bake/cli/publish-source-cache.mts --object=<star id>`).
+
+`--tess-light` writes what the reduction found into the record of every star it looked at, mapped or not: the verdict in
+the reduction's own sentence (a rotation, or why none is accepted, or why the star was not read), the sector, and the scatter
+of the star's light over it.
 
 The spec lists each star whose receipt holds a map. Writing it adds a "Brightness map" dataset to the star's page and three
 values to its measurements record: the measured period, where it was measured, and the light's swing. The metadata pass then
