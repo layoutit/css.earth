@@ -325,6 +325,11 @@ export async function compare(base: Build, head: Build, moves: Moves = {}, mode:
       if (route || hasInline) { closureOutputs.add(name); if (classify(name) === 'html') closurePages.add(name); }
     }
   }
+  // Astro copies the public directory verbatim: a changed source file there is its own output at the same relative path.
+  for (const path of sourcePaths) {
+    const copied = /^(?:site\/)?public\/(.+)$/u.exec(path)?.[1];
+    if (copied && (base.files.has(copied) || head.files.has(copied))) closureOutputs.add(copied);
+  }
   progress('Output closure finished');
   let comparedFiles = 0;
   progress('Comparing emitted file bytes');
