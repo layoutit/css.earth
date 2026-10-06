@@ -24,13 +24,13 @@ Shape-only views use the shared neutral gray (#808080 sRGB), a display conventio
 
 ## Processing
 
-The original surface is simplified with meshoptimizer 1.2.0 to 790 triangles. Elevation samples the original mesh radius minus a 104 km reference sphere, with a -30 to 20 km legend and a cartographic hillshade.
+The original surface is simplified with meshoptimizer 1.2.0 to 800 triangles. Elevation samples the original mesh radius minus a 104 km reference sphere, with a -30 to 20 km legend and a cartographic hillshade.
 
 Each photograph camera is computed, never authored: the rotation record gives the pole and absolute rotational phase, JPL Horizons gives the Paranal sighting and Sun direction, each frame's header gives its plate scale and exposure, and the disc centre is fitted to the mesh limb. `node packages/bake/cli/observer-cameras.mts themis` reproduces every camera field. Level matching joins all 30 frames as a single group; overlapping frames are averaged, each fading out toward its disc edge.
 
 ## Evidence
 
-Source and output are each one closed component. Nearest-triangle sampling between them measured p95 931.4 m and maximum 2449.6 m. No repeated radial intersection was found, which supports the radial-height dataset. Re-prepared 2026-10-06: the error allowance now decides the face count, 790 faces at 1659 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Source and output are each one closed component. Nearest-triangle sampling between them measured p95 931.4 m and maximum 2449.6 m. No repeated radial intersection was found, which supports the radial-height dataset.
 
 The frames cover 84.9% of the retained surface area, leaving at most a factor of 1.15 between overlapping frames.
 

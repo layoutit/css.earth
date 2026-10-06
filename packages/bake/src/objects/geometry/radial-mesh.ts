@@ -94,14 +94,20 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
   // by the coarsest stopping error whose surface stays within it.
   let sampled: number | null | undefined;
   if (targetFaces === undefined && preserveSource && !open && !imagePlane) {
-    sampled = sampledSourceDistance(mesh, positions, simplified, maximumErrorMeters);
-    if (sampled === null) {
+    const coarsest = (levels: readonly number[]): [Uint32Array, number, number] => {
+      const whole = reduce(maximumErrorMeters), distance = sampledSourceDistance(mesh, positions, whole[0], maximumErrorMeters, levels);
+      if (distance !== null) return [whole[0], whole[1], distance];
       let low = 0, high = maximumErrorMeters, kept: [Uint32Array, number, number] = [...reduce(0), 0];
       for (let step = 0; step < 10; step++) {
-        const middle = (low + high) / 2, [candidate, estimate] = reduce(middle), distance = sampledSourceDistance(mesh, positions, candidate, maximumErrorMeters);
-        if (distance === null) high = middle; else { low = middle; kept = [candidate, estimate, distance]; }
+        const middle = (low + high) / 2, [candidate, estimate] = reduce(middle), found = sampledSourceDistance(mesh, positions, candidate, maximumErrorMeters, levels);
+        if (found === null) high = middle; else { low = middle; kept = [candidate, estimate, found]; }
       }
-      [simplified, error, sampled] = kept;
+      return kept;
+    };
+    [simplified, error, sampled] = coarsest(SOURCE_DISTANCE_STEPS);
+    // One look at about the density a map samples at. Only a surface that fails it is searched again with that density in.
+    if (sampledSourceDistance(mesh, positions, simplified, maximumErrorMeters, [MAP_DENSITY_STEPS]) === null) {
+      [simplified, error, sampled] = coarsest([...SOURCE_DISTANCE_STEPS, MAP_DENSITY_STEPS]);
     }
   }
   // Edge collapses can leave exactly coincident, oppositely wound face pairs
@@ -141,11 +147,14 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
  * triangle, then 325. A map samples the source at every texel within the same bound; 45 points alone let the farthest
  * spot of a triangle slip through, a few hundred texels of 13 million on one body in four (2026-10-06). */
 const SOURCE_DISTANCE_STEPS = [8, 24] as const;
+/** About the density a map samples a triangle at (4,753 points). The 325 points still left 1 to 68 texels of 13 million
+ * beyond the bound on 11 of 256 bodies (2026-10-06), so the surface the search keeps is checked once at this density. */
+const MAP_DENSITY_STEPS = 96;
 /** The largest distance from a reduced surface to its source over a grid of points on every triangle, or null when one
  * of them has no source surface within `bound`. Sampled, so not a continuous Hausdorff distance. */
-function sampledSourceDistance(source: TerrainMesh, positions: readonly (readonly number[])[], indices: Uint32Array, bound: number): number | null {
+function sampledSourceDistance(source: TerrainMesh, positions: readonly (readonly number[])[], indices: Uint32Array, bound: number, levels: readonly number[]): number | null {
   let maximum: number | null = 0;
-  for (const steps of SOURCE_DISTANCE_STEPS) if ((maximum = sampledAt(source, positions, indices, bound, steps)) === null) break;
+  for (const steps of levels) if ((maximum = sampledAt(source, positions, indices, bound, steps)) === null) break;
   return maximum;
 }
 function sampledAt(source: TerrainMesh, positions: readonly (readonly number[])[], indices: Uint32Array, bound: number, steps: number): number | null {
