@@ -16,9 +16,12 @@ The lab's image residuals and reconstruction caches remain separate.
 
 The GAVO distance catalogue is CC-BY-4.0. Credit ESA/Gaia/DPAC;
 Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae; and GAVO. The source
-records retain query text, original response identity, release and acquisition
-date. Native response caches are ignored; the compact scientific extracts are
-committed so a clean bake does not depend on a live archive query.
+records retain the query text, the service asked, the release and the acquisition
+date. The queries are asked and their answers decoded by PyVO, through the
+telescope's `tap-query`; the cone and joined queries run as archive jobs, because
+GAVO cuts a direct query off after about 20 s. The kept answers are ignored; the
+compact scientific extracts are committed so a clean bake does not depend on a
+live archive query.
 
 ## Preparation
 
@@ -81,7 +84,8 @@ sparse M2–9 and Lagoon fields are not a complete view of every surrounding sta
 
 The normal clean-checkout [nebula preparation command](README.md#reproduce-from-a-clean-checkout)
 rebuilds the points alongside the cloud. An intentional catalogue refresh uses
-`node packages/bake/cli/prepare-nebula-field-catalogues.mts --two-stage m42 helix m2-9 m45 m1 m8` and requires
+`node packages/bake/cli/prepare-nebula-field-catalogues.mts --two-stage m42-volume m2-9-volume m45-volume m8-volume`
+(Helix and the Crab without `--two-stage`), needs the telescope's astronomy packages installed, and requires
 updating the delivery/source pins after inspecting the new selection. It is not
 part of ordinary installation. Refresh reuses the saved radius and magnitude
 limit unless an explicit override is supplied.

@@ -21,7 +21,7 @@ export type AstroqueryRequest =
   | { readonly operation: 'vo-parse'; readonly file: string; readonly url: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly timeModel?: 'epn-tap-2.0' }
   | { readonly operation: 'mast-service'; readonly service: string; readonly parameters: Readonly<Record<string, unknown>>; readonly pagesize?: number; readonly page?: number }
   | { readonly operation: 'mast-download'; readonly uri: string; readonly destination: string }
-  | { readonly operation: 'tap-query'; readonly service: string; readonly query: string; readonly maxrec?: number }
+  | { readonly operation: 'tap-query'; readonly service: string; readonly query: string; readonly maxrec?: number; readonly mode?: 'async'; readonly allowedPrivateHosts?: readonly string[] }
   | { readonly operation: 'alma-data-info'; readonly ids: readonly string[]; readonly expandTarfiles?: boolean }
   | { readonly operation: 'vizier-region'; readonly catalog: string; readonly ra: number; readonly dec: number; readonly radiusDegrees: number; readonly columns: readonly string[] }
   | { readonly operation: 'horizons-ephemerides'; readonly id: string; readonly location: string; readonly epochs: HorizonsEpochs; readonly quantities: string; readonly raw?: boolean }
@@ -95,6 +95,8 @@ def value(item):
         return None
     if isinstance(item, bytes):
         return item.decode('utf-8', errors='replace')
+    if isinstance(item, np.floating) and item.dtype.itemsize < 8:
+        return value(float(str(item)))  # the decimal the archive holds (0.0488783), not its 64-bit expansion (0.048878300935029984)
     if isinstance(item, np.generic):
         return value(item.item())
     if isinstance(item, (list, tuple, np.ndarray)):
@@ -106,6 +108,8 @@ def value(item):
             pass
     if isinstance(item, float) and not math.isfinite(item):
         return None
+    if isinstance(item, int) and not isinstance(item, bool) and abs(item) > 9007199254740991:
+        return str(item)  # a JSON reader holds integers exactly only to 2**53; a Gaia source_id is larger
     if isinstance(item, (str, int, float, bool)):
         return item
     return str(item)
@@ -382,7 +386,9 @@ elif operation == 'tap-query':
                 kwargs['timeout'] = (15, 45)
             return super().request(method, url, **kwargs)
     answer['pyvo'] = pyvo.__version__
-    result = pyvo.dal.TAPService(request['service'], session=TapSession()).search(request['query'], maxrec=request.get('maxrec'))
+    service = pyvo.dal.TAPService(request['service'], session=TapSession())
+    # A query the service's synchronous limit cuts off runs as a job: PyVO submits it, waits for it and deletes it.
+    result = (service.run_async if request.get('mode') == 'async' else service.search)(request['query'], maxrec=request.get('maxrec'))
     status = str(result.query_status)
     answer['tap'] = {'queryStatus': status, 'complete': status.upper() == 'OK'}
     answer['rows'] = rows(result.to_table())
@@ -508,7 +514,7 @@ export async function astroqueryText(request: Extract<AstroqueryRequest, { reado
 }
 
 /** Generic VO table access belongs to PyVO. This string view keeps the archive ledgers stable while PyVO owns TAP and VOTable parsing. */
-export async function tapRows(service: string, query: string, maxrec?: number): Promise<Record<string, string>[]> {
-  const rows = await astroqueryRows({ operation: 'tap-query', service, query, ...(maxrec === undefined ? {} : { maxrec }) });
+export async function tapRows(service: string, query: string, maxrec?: number, mode?: 'async'): Promise<Record<string, string>[]> {
+  const rows = await astroqueryRows({ operation: 'tap-query', service, query, ...(maxrec === undefined ? {} : { maxrec }), ...(mode ? { mode } : {}) });
   return rows.map(row => Object.fromEntries(Object.entries(row).map(([name, value]) => [name, value === null ? '' : String(value)])));
 }

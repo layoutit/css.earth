@@ -41,11 +41,12 @@ export interface DiscoveryRequest {
   readonly spectralFrame?: 'barycentric';
   readonly transferLimits?: TransferLimits;
 }
-/** A bounded service list, with no target-specific selection rules. */
+/** A bounded service list, with no target-specific selection rules. `authority` is the service's identifier in the registry of
+ * Virtual Observatory services, which says what address it has (registry-check.mts asks it); the address stays pinned here. */
 export const SERVICES: readonly ServiceProfile[] = [
-  { authority: 'ivo://eso.org', service: 'https://archive.eso.org/tap_obs', table: 'ivoa.ObsCore', model: 'obscore-1.1', identityColumns: ['obs_publisher_did', 'obs_id'], timeScale: 'utc', documentation: 'https://archive.eso.org/tap_obs' },
-  { authority: 'ivo://alma', service: 'https://almascience.eso.org/tap', table: 'ivoa.obscore', model: 'obscore-1.1', identityColumns: ['obs_publisher_did', 'obs_id'], timeScale: 'utc', documentation: 'https://almascience.eso.org/alma-data/archive/archive-notebooks/nb9_ALMA_Download_data.html' },
-  { authority: 'ivo://esa/psa', service: 'https://psa.esa.int/psa-tap/tap', table: 'psa.epn_core', model: 'epn-tap-2.0', identityColumns: ['granule_uid'], documentation: 'https://archives.esac.esa.int/psa/' },
+  { authority: 'ivo://eso.org/tap_obs', service: 'https://archive.eso.org/tap_obs', table: 'ivoa.ObsCore', model: 'obscore-1.1', identityColumns: ['obs_publisher_did', 'obs_id'], timeScale: 'utc', documentation: 'https://archive.eso.org/tap_obs' },
+  { authority: 'ivo://jao.alma/tap_eu', service: 'https://almascience.eso.org/tap', table: 'ivoa.obscore', model: 'obscore-1.1', identityColumns: ['obs_publisher_did', 'obs_id'], timeScale: 'utc', documentation: 'https://almascience.eso.org/alma-data/archive/archive-notebooks/nb9_ALMA_Download_data.html' },
+  { authority: 'ivo://esavo/psa/epntap', service: 'https://psa.esa.int/psa-tap/tap', table: 'psa.epn_core', model: 'epn-tap-2.0', identityColumns: ['granule_uid'], documentation: 'https://archives.esac.esa.int/psa/' },
   { authority: 'ivo://archive.stsci.edu/caomtap', service: 'https://mast.stsci.edu/vo-tap/api/v0.1/caom/', table: 'ivoa.obscore',
     model: 'obscore-1.1', identityColumns: ['access_format', 'obs_publisher_did', 'obs_id', 'access_url'], timeScale: 'utc', collections: ['JWST'], label: 'MAST JWST', compactNameVariants: true, facetByInstrument: true, spatialMatch: 'mast-api-cone',
     documentation: 'https://mast.stsci.edu/vo-tap/api/v0.1/caom/examples' },

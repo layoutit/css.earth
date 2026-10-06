@@ -16,7 +16,8 @@
         "CADC",
         "SIMBAD",
         "OiDB",
-        "VizieR"
+        "VizieR",
+        "GAVO (Gaia DR3 with Bailer-Jones distances for the nebula star fields; the registry of Virtual Observatory services)"
       ]
     },
     {
@@ -189,6 +190,11 @@
     }
   ],
   "retained": [
+    {
+      "mechanic": "The object generator's catalogue lookups and archived archive answers (SIMBAD, Gaia and NASA Exoplanet Archive TAP; VizieR ASU)",
+      "implementation": "packages/telescope-cli/src/new-object/archives/archives.mts (Archive.text) with the CSV and TSV readers beside each lookup",
+      "reason": "An answer kept beside a body (a Gaia source row, a SIMBAD row, a spectrum table) is the archive's own text, restored later from the same URL, so it is fetched as bytes. The lookups that are only read stay on the same client: it waits and retries on the 429 and 5xx answers the NASA and Gaia services gave during 24-host and 818-host batches, which PyVO does not, and one SIMBAD lookup through tap-query took 1.2 to 1.4 s against 0.3 to 1.6 s by direct request (2026-10-06, three runs each). Moving the SIMBAD lookups alone would remove about six lines."
+    },
     {
       "mechanic": "SPHERE pinned Horizons text tables",
       "implementation": "packages/bake/cli/sphere-horizons.mts with packages/bake/src/objects/layers/terrestrial/registration/sphere-horizons.ts",
