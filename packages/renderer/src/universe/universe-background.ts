@@ -140,12 +140,14 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       skyLayer?.publish(world, viewport, completedContribution < 1);
       if (volumeVisible && volumeSize > 0) volumeLayer!.publish({ world, viewport });
       // The catalogue dots are the stars around the Solar System (starFieldFade), whole before the host stars give way to
-      // them past the system (world-context-planner.ts); measured like them from the selected body. The backing shows with them.
-      const starField = detailContextOpacity * starFieldFade(volumeDistanceM, plan.system);
-      const shownDots = detailContextOpacity * SOLAR_SYSTEM_DOTS + (1 - SOLAR_SYSTEM_DOTS) * starField;
+      // them past the system (world-context-planner.ts); measured like them from the selected body. A detailed focus (a
+      // nebula's or a galaxy's picture) keeps them, as it keeps the stars' markers: they are the sky around it.
+      const starField = starFieldFade(volumeDistanceM, plan.system);
+      const shownDots = SOLAR_SYSTEM_DOTS + (1 - SOLAR_SYSTEM_DOTS) * starField;
       // A star the world draws as a body is its marker's to draw: its own dot in the galaxy's bank is left out.
       for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots, withoutM);
-      const shownBacking = starField * volumeSize * logarithmicFade(volumeDistanceM, BACKING_FADE_IN_M[0], BACKING_FADE_IN_M[1]);
+      // The backing shows with the dots, and gives way to a detailed focus as the galaxy's volume does.
+      const shownBacking = detailContextOpacity * starField * volumeSize * logarithmicFade(volumeDistanceM, BACKING_FADE_IN_M[0], BACKING_FADE_IN_M[1]);
       backingFrame = { world, viewport, distanceM: volumeDistanceM, shown: shownBacking };
       if (backing) publishBacking(backingFrame);
       else if (shownBacking > 0 && backingUrl && !backingLoading) {
