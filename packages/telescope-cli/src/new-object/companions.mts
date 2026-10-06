@@ -16,7 +16,19 @@ export const CHANCE_ALIGNMENT_MAX = 0.1;
 const EL_BADRY = { url: 'https://arxiv.org/abs/2101.05282', credit: 'El-Badry, Rix & Heintz (2021), MNRAS 506, 2269' };
 export const TIC = { url: 'https://doi.org/10.3847/1538-3881/ab3467', credit: 'Stassun et al. (2019), AJ 158, 138 (TIC v8.2)' };
 
-export const csv = (text: string) => { const [header, ...lines] = text.trim().split(/\r?\n/u); const keys = header!.split(','); return lines.filter(Boolean).map(line => Object.fromEntries(line.split(',').map((cell, i) => [keys[i]!, cell.replace(/^"|"$/gu, '')]))); };
+/** One line's cells. A quoted cell may hold commas and doubled quotes: 1,357 SIMBAD identifiers hold a comma (2026-10-06). */
+const cells = (line: string) => {
+  const out: string[] = [];
+  for (let i = 0; ; i++) {
+    if (line[i] === '"') {
+      let cell = '';
+      for (i++; i < line.length && (line[i] !== '"' || line[i + 1] === '"'); i++) { if (line[i] === '"') i++; cell += line[i]; }
+      out.push(cell); i++;
+    } else { const end = line.indexOf(',', i); out.push(line.slice(i, end < 0 ? line.length : end)); i = end < 0 ? line.length : end; }
+    if (line[i] !== ',') return out;
+  }
+};
+export const csv = (text: string) => { const [header, ...lines] = text.trim().split(/\r?\n/u); const keys = cells(header!); return lines.filter(Boolean).map(line => Object.fromEntries(cells(line).map((cell, i) => [keys[i]!, cell]))); };
 export const adql = (query: string) => ({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: query });
 /** An ASU TSV answer's rows: the header is the first line after the comments, the rows follow the dashed separator line (the unit
  * line between them can be blank). */

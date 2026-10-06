@@ -403,6 +403,21 @@ interface ArchiveAdapter {
   readonly evidenceNames?: Readonly<Record<string, string>>;
 }
 
+/** A star's polarised ESPaDOnS spectra at the Canadian Astronomy Data Centre, and how far the magnetic-map route got with them
+ * (archives/espadons/archive-ledger.mts): held in the archive, pinned, reduced without a map, or mapped. */
+const ESPADONS_MODE = 'ESPaDOnS polarimetry';
+function espadonsModes(value: unknown, target: string): TargetMode[] {
+  const ledger = requireRecord(value, 'ESPaDOnS ledger');
+  if (ledger.schema !== 'cssearth-espadons-ledger@1') throw new TypeError(`Unsupported ESPaDOnS ledger schema ${String(ledger.schema)}.`);
+  const star = requireArray(ledger.stars, 'stars').map(raw => requireRecord(raw, 'star')).find(entry => entry.id === target);
+  if (!star) return [];
+  const state = requireString(star.state, 'state'), programs = stringList(star.programs, 'programs'), reasons = stringList(star.reasons, 'reasons');
+  const mapped = requireArray(star.maps, 'maps').map(raw => requireString(requireRecord(raw, 'map').program, 'map program'));
+  return [{ telescope: 'CFHT', mode: ESPADONS_MODE, archiveDate: requireString(ledger.surveyed, 'surveyed'),
+    observations: { count: requireFiniteNumber(star.spectra, 'spectra'), scope: 'this-mode' as const }, programmes: [], dates: [],
+    toolkit: { ...(state === 'reduced, no map' ? { routeState: 'refused', refusedBecause: reasons.join('; ') || 'The reduced runs gave no map.' }
+      : { routeState: state, tool: 'packages/telescope-cli/src/archives/espadons/reduce.mts' }), programs, checked: mapped, receipts: [] } }];
+}
 const modeRows = (value: unknown, ledgerName: string, field: string, telescope: string, modeField: string) => {
   const ledger = requireRecord(value, `${ledgerName} ledger`);
   return requireArray(ledger[field], `${ledgerName} ${field}`).map(raw => ({ telescope, mode: requireString(requireRecord(raw, `${ledgerName} mode`)[modeField], `${ledgerName} mode`) }));
@@ -450,6 +465,7 @@ export const ADAPTERS: Readonly<Record<string, ArchiveAdapter>> = Object.freeze(
   spitzer: { modes: spitzerModes, modeKeys: value => modeRows(value, 'Spitzer', 'modes', 'Spitzer', 'mode'), missingCoverage: spitzerMissing, evidenceNames: { SPITZER: 'Spitzer' } },
   gemini: { modes: geminiModes, modeKeys: value => modeRows(value, 'Gemini', 'capabilities', 'Gemini', 'instrument'), missingCoverage: ordinaryMissing('gemini'), evidenceNames: { GEMINI: 'Gemini' } },
   keck: { modes: keckModes, modeKeys: value => modeRows(value, 'Keck', 'modes', 'Keck', 'instrument'), missingCoverage: ordinaryMissing('keck'), evidenceNames: { KECK: 'Keck' } },
+  espadons: { modes: espadonsModes, modeKeys: () => [{ telescope: 'CFHT', mode: ESPADONS_MODE }], missingCoverage: ordinaryMissing('espadons'), evidenceNames: { CFHT: 'CFHT', ESPADONS: 'CFHT' } },
   ihw: { modes: ihwModes, modeKeys: value => modeRows(value, 'IHW', 'modes', 'IHW/PDS', 'mode'), missingCoverage: (ledger, _value, _target) => ({ telescope: 'ihw', ledger, state: 'not-searched', reason: 'This IHW dataset is a target-specific Halley collection; it is not a search of other targets.' }), evidenceNames: { 'IHW/PDS': 'IHW/PDS' } },
   pds: { modes: pdsModes, modeKeys: value => requireArray(requireRecord(value, 'PDS ledger').modes, 'PDS modes').map(raw => { const entry = requireRecord(raw, 'PDS mode'); return {
     telescope: requireString(entry.telescope, 'PDS telescope'), mode: requireString(entry.mode, 'PDS mode') }; }), missingCoverage: pdsMissing },
