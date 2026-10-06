@@ -1,10 +1,9 @@
 /** Offline display-volume reconstruction from an exactly partitioned photograph. */
 import { validateBounds } from './bounds.ts';
 import type { FilledComponent, FilledComponentsResult } from './filled-components.ts';
-import type { FilledVolumePart } from './filled-parts.ts';
 
 export type * from './filled-contracts.ts';
-import type {Vec3,Bounds3,NumericArray,FilledDepthPrior,FilledVolumeChannels,FilledVolumeOptions,FilledVolumeDiagnostics,FilledVolumeSampler} from './filled-contracts.ts';
+import type {Vec3,Bounds3,NumericArray,FilledDepthPrior,FilledVolumeChannels,FilledVolumeOptions,FilledVolumeDiagnostics,FilledVolumeSampler,FilledVolumePart} from './filled-contracts.ts';
 
 interface Term { share: number; family: number; half: number; part: number }
 interface Family { pixels: number[]; weight: number; x: number; y: number; mode?: number; offset: number }

@@ -2,7 +2,7 @@
 import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
-import type { ExtractionOptions, NativeExtractionReceipt } from './extraction.ts';
+import type { ExtractionOptions, NativeExtractionReceipt } from './extraction-types.ts';
 
 type SupportFactory = (signal: Buffer, width: number, height: number,
   threshold: number, options: ExtractionOptions) => Promise<Buffer>;

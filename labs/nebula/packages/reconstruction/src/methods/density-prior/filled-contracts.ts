@@ -1,5 +1,4 @@
 import type {FilledComponentsResult} from './filled-components.ts';
-import type {FilledVolumePart} from './filled-parts.ts';
 export type Vec3 = [number, number, number];
 export type Bounds3 = { min: Vec3; max: Vec3 };
 export type NumericArray = Float32Array<ArrayBufferLike> | Float64Array<ArrayBufferLike>;
@@ -75,4 +74,19 @@ export interface FilledVolumeSampler {
   /** Frozen-geometry contribution samplers for offline independent banks. */
   parts: readonly FilledVolumePart[];
   diagnostics: FilledVolumeDiagnostics;
+}
+
+export interface FilledVolumePart {
+  id: string;
+  kind: 'extended' | 'compact' | 'diffuse';
+  componentId?: string;
+  scale?: number;
+  radius?: number;
+  integratedIntensity: number;
+  supportBoundsKpc: Bounds3;
+  /** Allocation-free optical RGB emissivity using the reference reconstruction's frozen geometry. */
+  sample(xKpc: number, yKpc: number, zKpc: number, out: Vec3): void;
+  /** Optical column for this independently baked contribution. */
+  integratedTargetAtPixel(pixel: number, out: Vec3): void;
+  interpretation: string;
 }

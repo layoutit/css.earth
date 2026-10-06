@@ -1,6 +1,8 @@
 /** Standalone, portable rendering of evidence prepared after capture. */
 import { isRecord } from '@cssearth/core';
-import type { writeNavigationAnalysis } from './webkit-trace-slices.mts';
+import { writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { writeNavigationManifest } from './webkit-trace-slices.mts';
 import { COST_KINDS } from './trace-costs.mts';
 import type { TraceLocation } from './trace-model.mts';
 const esc = (v: unknown) => String(v ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch]!);
@@ -9,7 +11,7 @@ const source = (l: TraceLocation) => {
   return original ? `${esc(original.source)}:${esc(original.line)}` : `${esc(l.url)}:${esc(l.lineNumber)}:${esc(l.columnNumber)}`;
 };
 const json = (v: unknown) => `<pre>${esc(JSON.stringify(v, null, 2))}</pre>`;
-export function analysisHtml(a: Awaited<ReturnType<typeof writeNavigationAnalysis>>) {
+export function analysisHtml(a: Awaited<ReturnType<typeof writeNavigationManifest>>) {
   const link = (id: string, label: unknown) => `<a data-trace="${esc(a.views.find(v => v.id === id)?.path ?? 'trace.devtools.json')}">${esc(label)}</a>`;
   const tasks = a.clues.tasks.map(t => `<article id="${esc(t.id)}"><h3>${link(t.id, `${t.flight ?? 'Recording'} — ${t.durationMs} ms`)} <small>${esc(t.phase)}</small></h3>
     <p>Script ${t.exclusiveMs.script} ms · style ${t.exclusiveMs.style} ms · layout ${t.exclusiveMs.layout} ms · paint ${t.exclusiveMs.paint} ms · composite ${t.exclusiveMs.commit} ms. Source clock ${(t.traceStartUs / 1000).toFixed(3)} ms.</p>
@@ -38,4 +40,11 @@ export function analysisHtml(a: Awaited<ReturnType<typeof writeNavigationAnalysi
 <h2>Capture hooks and exact scheduling links</h2>${json(a.clues.causes.coverage)}<details><summary>Motion writes, target identities and diagnostic limits</summary>${json(a.clues.causes)}</details>
 <h2>Coverage and limits</h2>${json(a.clues.coverage)}<ul>${a.clues.limitations.map(l => `<li>${esc(l)}</li>`).join('')}<li>Source-map annotations describe the supplied build. The bundle and map files used are listed below.</li></ul><details><summary>Source-map provenance</summary>${json(a.buildSources)}</details>
 <script>for(const a of document.querySelectorAll('[data-trace]')){const trace=new URL(a.dataset.trace,location.href);a.target='_top';a.href='/devtools/trace_app.html?follow=1&loadTimelineFromURL='+encodeURIComponent(trace.pathname)}</script>`;
+}
+
+/** The analysis of a capture: its slices and `analysis.json` (webkit-trace-slices.mts), then this page as `analysis.html`. */
+export async function writeNavigationAnalysis(trace: unknown, directory: string, receipt: unknown, raw: unknown = null) {
+  const manifest = await writeNavigationManifest(trace, directory, receipt, raw);
+  await writeFile(resolve(directory, 'analysis.html'), analysisHtml(manifest));
+  return manifest;
 }
