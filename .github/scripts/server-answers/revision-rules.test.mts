@@ -16,6 +16,10 @@ test('restoration includes data and dependencies, excluding compiled/generated o
   for (const path of ['node_modules/', 'packages/core/node_modules/', 'src/objects/earth/prepared/', 'public/navigation/']) assert.equal(restoreInput(path), true, path);
   for (const path of ['packages/core/dist/', 'site/prepared-shell.mts', 'public/features/', 'public/shell/', 'public/scenes/', 'dist/', 'output/']) assert.equal(restoreInput(path), false, path);
 });
+test('restoration reads the public directory in either layout', () => {
+  assert.equal(restoreInput('site/public/navigation/'), true);
+  for (const path of ['site/public/features/', 'site/public/shell/', 'site/public/scenes/']) assert.equal(restoreInput(path), false, path);
+});
 test('validators keep presence and each stale rewritten header remains observable', async () => {
   for (const name of ['last-modified', 'expires', 'content-encoding']) {
     const retained = await recordAnswer('probe', new Response('x', { headers: { [name]: name === 'content-encoding' ? 'gzip' : 'clock' } }), 'https://answers.invalid');

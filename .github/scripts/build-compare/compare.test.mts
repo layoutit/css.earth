@@ -443,3 +443,12 @@ test('a dependency only closure modules import leaves with them; one another mod
   assert.equal(gone(shared)?.insideClosure, false, 'an importer outside the closure keeps the removal independent');
   assert.equal(shared.exitCode, 1); assert.equal(shared.declaration.layoutEligible, false);
 });
+test('a changed public-directory source is its own copied output, in either layout', async () => {
+  for (const path of ['public/catalog.json', 'site/public/catalog.json']) {
+    const base = fixture(), head = fixture(); head.files.set('catalog.json', Buffer.from('{"changed":true}'));
+    const outputs = [{ glob: 'catalog.json', reason: 'Regenerated public file' }];
+    assert.equal((await compare(base, head, {}, 'semantic', undefined, { paths: [path], outputs })).exitCode, 0, path);
+    assert.equal((await compare(base, head, {}, 'semantic', undefined, { paths: ['site/a.mts'], outputs })).exitCode, 1, 'an unrelated source grants nothing');
+    assert.equal((await compare(base, head, {}, 'semantic', undefined, { paths: [path] })).exitCode, 1, 'the output must still be declared');
+  }
+});
