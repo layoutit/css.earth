@@ -40,28 +40,30 @@ export function withMeasuredRotation(record: Readonly<Record<string, unknown>>, 
     [LIGHT_SWING]: Number((100 * map.amplitude).toFixed(2)) });
 }
 
-/** What the reduction found in a star's TESS light, for every star it looked at and not only those with a map: the verdict in
- * the reduction's own sentence, the sector read, and the scatter of the light over it. A star not read says why. */
-export const TESS_LIGHT = { verdict: 'tessLight', sector: 'tessLightSector', scatter: 'tessLightScatterPercent', source: 'tessLightSource' } as const;
-export function withTessLight(record: Readonly<Record<string, unknown>>, receipt: unknown, curve?: unknown): Record<string, unknown> {
-  const reduced = requireRecord(receipt, 'receipt'), rotation = requireRecord(reduced.rotation, 'receipt rotation'), tried = Array.isArray(reduced.tried) ? reduced.tried.filter(isRecord).at(-1) : undefined, sector = typeof tried?.sector === 'number' ? tried.sector : undefined;
+/** What the reduction found in a star's light, for every star it looked at and not only those with a map: the verdict in
+ * the reduction's own sentence, the mission and window read, and the scatter of the light over it. A star not read says why. */
+export const PIXEL_LIGHT = { verdict: 'pixelLight', mission: 'pixelLightMission', window: 'pixelLightWindow', scatter: 'pixelLightScatterPercent', source: 'pixelLightSource' } as const;
+export function withPixelLight(record: Readonly<Record<string, unknown>>, receipt: unknown, curve?: unknown): Record<string, unknown> {
+  const reduced = requireRecord(receipt, 'receipt'), rotation = requireRecord(reduced.rotation, 'receipt rotation'), tried = Array.isArray(reduced.tried) ? reduced.tried.filter(isRecord).at(-1) : undefined;
+  // A receipt from before Kepler and K2 were read names a TESS sector alone.
+  const window = typeof tried?.window === 'number' ? tried.window : typeof tried?.sector === 'number' ? tried.sector : undefined, mission: LightMission = tried?.mission === 'Kepler' || tried?.mission === 'K2' ? tried.mission : 'TESS', from = MISSIONS[mission];
   const verdict = rotation.detected === true ? `The star's rotation is seen: ${String(rotation.periodDays)} d, the light swinging by ${percent(Number(rotation.amplitude))}%.` : typeof rotation.reason === 'string' ? rotation.reason : 'No rotation is seen.';
   const flux = isRecord(curve) && Array.isArray(curve.flux) ? curve.flux.filter((value): value is number => typeof value === 'number') : [], mean = flux.reduce((sum, value) => sum + value, 0) / (flux.length || 1);
   const scatter = flux.length > 1 && mean > 0 ? Number((100 * Math.sqrt(flux.reduce((sum, value) => sum + (value - mean) ** 2, 0) / flux.length) / mean).toFixed(2)) : undefined;
-  const fields: Record<string, unknown> = { [TESS_LIGHT.verdict]: verdict, ...(sector === undefined ? {} : { [TESS_LIGHT.sector]: sector }), ...(scatter === undefined ? {} : { [TESS_LIGHT.scatter]: scatter }),
-    [TESS_LIGHT.source]: sector === undefined ? `Looked at in this project before any pixel was fetched (${BRIGHTNESS_GENERATOR}); the star's TESS pixels were not read` : `Read in this project from the TESS full-frame images of sector ${sector} (${BRIGHTNESS_GENERATOR})${scatter === undefined ? '' : '; the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean'}` };
-  // A field of an earlier look that this one does not have (a sector, a scatter) goes; the others keep their place.
-  return beforeShape(Object.fromEntries(Object.entries(record).filter(([key]) => !(Object.values(TESS_LIGHT) as readonly string[]).includes(key) || key in fields)), fields);
+  const fields: Record<string, unknown> = { [PIXEL_LIGHT.verdict]: verdict, ...(window === undefined ? {} : { [PIXEL_LIGHT.mission]: mission, [PIXEL_LIGHT.window]: window }), ...(scatter === undefined ? {} : { [PIXEL_LIGHT.scatter]: scatter }),
+    [PIXEL_LIGHT.source]: window === undefined ? `Looked at in this project before any pixel was fetched (${BRIGHTNESS_GENERATOR}); the star's pixels were not read` : `Read in this project from the ${from.name} ${from.pixels} of ${from.window} ${window} (${BRIGHTNESS_GENERATOR})${scatter === undefined ? '' : `; the scatter is the standard deviation of the light in 30-minute bins over the ${from.window}, as a share of its mean`}` };
+  // A field of an earlier look that this one does not have (a window, a scatter) goes; the others keep their place.
+  return beforeShape(Object.fromEntries(Object.entries(record).filter(([key]) => !(Object.values(PIXEL_LIGHT) as readonly string[]).includes(key) || key in fields)), fields);
 }
 
-/** `--tess-light --all | STAR_ID...`: each star the reduction has looked at gains what it found, in its measurements record. */
-export async function writeTessLight(root: string, ids: readonly string[] | 'all', report: (line: string) => void): Promise<number> {
+/** `--pixel-light --all | STAR_ID...`: each star the reduction has looked at gains what it found, in its measurements record. */
+export async function writePixelLight(root: string, ids: readonly string[] | 'all', report: (line: string) => void): Promise<number> {
   const hosts = ids === 'all' ? (await readdir(resolve(root, 'output/tess'), { withFileTypes: true }).catch(() => [])).filter(entry => entry.isDirectory()).map(entry => entry.name).sort() : ids; let written = 0;
   for (const host of hosts) { const receipt: unknown = await readFile(receiptPath(host), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined), path = resolve(root, 'src/objects', host, 'source/measurements.json');
     const record: unknown = await readFile(path, 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
     if (!isRecord(receipt) || receipt.schema !== ROTATION_SCHEMA || !isRecord(record)) { if (ids !== 'all') report(`  ${host}: not written: ${isRecord(record) ? `not reduced (${reduce(host)})` : 'no measurements record'}`); continue; }
     const last = Array.isArray(receipt.tried) ? receipt.tried.filter(isRecord).at(-1) : undefined, curve: unknown = typeof last?.lightCurve === 'string' ? await readFile(resolve(root, 'output/tess', host, last.lightCurve), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined) : undefined;
-    const next = `${JSON.stringify(withTessLight(record, receipt, curve), null, 2)}\n`; if (next !== await readFile(path, 'utf8')) { await writeFile(path, next); written += 1; } }
+    const next = `${JSON.stringify(withPixelLight(record, receipt, curve), null, 2)}\n`; if (next !== await readFile(path, 'utf8')) { await writeFile(path, next); written += 1; } }
   report(`${written} record(s) changed of ${hosts.length} star(s) looked at.`); return written;
 }
 

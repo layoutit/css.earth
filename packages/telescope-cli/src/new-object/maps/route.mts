@@ -25,7 +25,7 @@ export interface MapRoute<M extends SurfaceMap> {
   /** One chosen map's reduction, read and checked; it throws with the command that makes what is missing. */
   reduced(root: string, host: string, choice: SurfaceMapChoice): Promise<M>;
   /** The records of the source catalogue the kind's maps are bound to, written once and then kept. */
-  sourceRecords(checkedOn: string): Map<string, string>;
+  sourceRecords(checkedOn: string, maps: readonly M[]): Map<string, string>;
   /** The rotation record of a page whose axis was a convention, with the tilt its maps are fitted with. */
   tiltedRotation?(previous: Json, place: SkyPlace, map: M): Json;
   /** Other records of the star that its maps bring with them, by path. */
@@ -56,7 +56,7 @@ async function writeMaps<M extends SurfaceMap>(route: MapRoute<M>, entry: Surfac
   if (!redrawn && route.kind.natural && shownNow === shownBefore) for (const [path, value] of files) if (path.endsWith('.dat') && await readFile(resolve(root, path), 'utf8').catch(() => '') !== value) redrawn = true;
   if (tilts) files.set(star.rotationRecord, `${JSON.stringify(route.tiltedRotation!(rotation, place, maps[0]!), null, 2)}\n`);
   // The catalogue records the maps are bound to are written once and then kept, with the day they were checked.
-  for (const [path, value] of route.sourceRecords(new Date().toISOString().slice(0, 10))) if (!await stat(resolve(root, path)).then(() => true, () => false)) files.set(path, value);
+  for (const [path, value] of route.sourceRecords(new Date().toISOString().slice(0, 10), maps)) if (!await stat(resolve(root, path)).then(() => true, () => false)) files.set(path, value);
   for (const [path, value] of await route.starRecords?.(root, entry.host, maps) ?? []) files.set(path, value);
   for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
   return { host: entry.host, maps: maps.length, files: files.size, ...(tilts ? { tilted: true } : {}), ...(redrawn ? { redrawn: true } : {}), report: tilts ? `${report}; the page's axis is now tilted ${maps[0]!.inclinationDegrees}° as the maps are` : redrawn ? `${report}; the page now opens on ${String(shownNow)}` : report };

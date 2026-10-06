@@ -3,7 +3,7 @@ import test from 'node:test';
 import { surfaceMapFiles } from '../maps/surface-maps.mts';
 import { adoptPeriod, measuredPeriod, starMetadata } from '../metadata/star-metadata.mts';
 import { BRIGHTNESS_CONSUMER, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, monthsOf, reducedBrightness, missionDay, shortMonthsOf, tinted } from './brightness-maps.mts';
-import { withBrightnessReadme, withMeasuredRotation, withTessLight } from './brightness.mts';
+import { withBrightnessReadme, withMeasuredRotation, withPixelLight } from './brightness.mts';
 
 const TABLE = 'TITLE     = "test"\nVARIABLES = "Longitude [Deg]" "Latitude [Deg]" "Brightness [%]"\nZONE I=2, J=2, K=1, ZONETYPE=Ordered\n';
 const receipt = (from: string, source: string) => ({ schema: 'cssearth-tess-rotation@1', star: { id: 'hd-1', name: 'HD 1' }, light: { gaiaDr3: '1', magnitude: 6.8, neighbours: 16, neighbourShare: 0.0029 }, rotation: { detected: true, periodDays: 4.85, amplitude: 0.085 }, toolchain: { id: 'tess-photometry', requirements: ['numpy==2.5.3', 'lightkurve==2.6.0'] },
@@ -83,12 +83,14 @@ test('the star\'s README says what its brightness datasets are made from, once',
 test('every star the reduction looked at carries what its light showed, or why it was not read', () => {
   const record = { schema: 'cssearth-uniform-disc-star@1', radiusKm: 600000, shape: 'sphere' };
   // A star read and quiet: the reduction's own sentence, the sector and the scatter of the kept light curve.
-  const quiet = withTessLight(record, { rotation: { detected: false, reason: 'No period stands out: the strongest, 4.13 d, has a periodogram power of 0.03, under the 0.3 a rotation asks for.' }, tried: [{ sector: 42, lightCurve: 'x.curve.json' }] }, { flux: [1.002, 0.998, 1.002, 0.998] });
-  assert.deepEqual(Object.keys(quiet), ['schema', 'radiusKm', 'tessLight', 'tessLightSector', 'tessLightScatterPercent', 'tessLightSource', 'shape']);
-  assert.deepEqual([quiet.tessLightSector, quiet.tessLightScatterPercent], [42, 0.2]); assert.match(String(quiet.tessLight), /^No period stands out/u); assert.match(String(quiet.tessLightSource), /sector 42.*standard deviation of the light in 30-minute bins/u);
+  const quiet = withPixelLight(record, { rotation: { detected: false, reason: 'No period stands out: the strongest, 4.13 d, has a periodogram power of 0.03, under the 0.3 a rotation asks for.' }, tried: [{ sector: 42, lightCurve: 'x.curve.json' }] }, { flux: [1.002, 0.998, 1.002, 0.998] });
+  assert.deepEqual(Object.keys(quiet), ['schema', 'radiusKm', 'pixelLight', 'pixelLightMission', 'pixelLightWindow', 'pixelLightScatterPercent', 'pixelLightSource', 'shape']);
+  assert.deepEqual([quiet.pixelLightMission, quiet.pixelLightWindow, quiet.pixelLightScatterPercent], ['TESS', 42, 0.2]); assert.match(String(quiet.pixelLight), /^No period stands out/u); assert.match(String(quiet.pixelLightSource), /TESS full-frame images of sector 42.*standard deviation of the light in 30-minute bins/u);
+  // A K2 star names its campaign.
+  const campaign = withPixelLight(record, { rotation: { detected: false, reason: 'No period stands out.' }, tried: [{ mission: 'K2', window: 13 }] }); assert.deepEqual([campaign.pixelLightMission, campaign.pixelLightWindow], ['K2', 13]); assert.match(String(campaign.pixelLightSource), /K2 target pixel files of campaign 13/u);
   // A star with a rotation says so; one refused before any pixel was fetched keeps the reason and names no sector.
-  assert.match(String(withTessLight(record, receipt('assumed', 'assumed')).tessLight), /rotation is seen: 4\.85 d, the light swinging by 8\.5%/u);
-  const shared = withTessLight(quiet, { rotation: { detected: false, reason: 'Other stars give 50% of the light within 63 arcseconds of the star.' }, tried: [] });
-  assert.deepEqual([shared.tessLightSector, shared.tessLightScatterPercent], [undefined, undefined]); assert.match(String(shared.tessLightSource), /the star's TESS pixels were not read/u);
-  assert.deepEqual(withTessLight(quiet, { rotation: { detected: false, reason: 'No period stands out: the strongest, 4.13 d, has a periodogram power of 0.03, under the 0.3 a rotation asks for.' }, tried: [{ sector: 42 }] }, { flux: [1.002, 0.998, 1.002, 0.998] }), quiet);
+  assert.match(String(withPixelLight(record, receipt('assumed', 'assumed')).pixelLight), /rotation is seen: 4\.85 d, the light swinging by 8\.5%/u);
+  const shared = withPixelLight(quiet, { rotation: { detected: false, reason: 'Other stars give 50% of the light within 63 arcseconds of the star.' }, tried: [] });
+  assert.deepEqual([shared.pixelLightWindow, shared.pixelLightScatterPercent], [undefined, undefined]); assert.match(String(shared.pixelLightSource), /the star's pixels were not read/u);
+  assert.deepEqual(withPixelLight(quiet, { rotation: { detected: false, reason: 'No period stands out: the strongest, 4.13 d, has a periodogram power of 0.03, under the 0.3 a rotation asks for.' }, tried: [{ sector: 42 }] }, { flux: [1.002, 0.998, 1.002, 0.998] }), quiet);
 });

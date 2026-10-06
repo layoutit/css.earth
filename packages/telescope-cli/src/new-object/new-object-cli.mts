@@ -9,7 +9,7 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --metadata --all | <star id>... [--periods [fresh]]
- *   node packages/telescope-cli/src/new-object/new-object-cli.mts --tess-light --all | <star id>...
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --pixel-light --all | <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb <id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-lit <id>...
@@ -79,11 +79,11 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     const { renameStars } = await import('./revise/rename.mts'), { liveArchive } = await import('./archives/archives.mts');
     const { lines, refresh } = await renameStars(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), liveArchive);
     process.stdout.write(`${lines.join('\n')}\n${refresh.length ? `Regenerate: node packages/telescope-cli/src/new-object/new-object-cli.mts --refresh ${refresh.join(' ')} --bake\n` : ''}`);
-  } else if (args.includes('--tess-light')) {
-    // What the TESS reduction found of each star it looked at, into its measurements record: `--tess-light --all | STAR_ID...` (new-object/brightness/brightness.mts).
-    const { writeTessLight } = await import('./brightness/brightness.mts'), ids = args.filter(argument => !argument.startsWith('--'));
-    if (!ids.length && !args.includes('--all')) throw new TypeError('Usage: --tess-light --all | <star id>...');
-    await writeTessLight(checkoutProjectRoot(import.meta.url), ids.length ? ids : 'all', line => process.stdout.write(`${line}\n`));
+  } else if (args.includes('--pixel-light')) {
+    // What the reduction of a star's light found of each star it looked at, into its measurements record: `--pixel-light --all | STAR_ID...` (new-object/brightness/brightness.mts).
+    const { writePixelLight } = await import('./brightness/brightness.mts'), ids = args.filter(argument => !argument.startsWith('--'));
+    if (!ids.length && !args.includes('--all')) throw new TypeError('Usage: --pixel-light --all | <star id>...');
+    await writePixelLight(checkoutProjectRoot(import.meta.url), ids.length ? ids : 'all', line => process.stdout.write(`${line}\n`));
   } else if (args.includes('--metadata') && !specPath) {
     // What the catalogues print of stars already in the tree, into their measurements records: `--metadata --all | STAR_ID...` (new-object/metadata/metadata.mts).
     const { writeStarMetadata } = await import('./metadata/metadata.mts'), { liveArchive } = await import('./archives/archives.mts'), ids = args.filter(argument => !argument.startsWith('--'));

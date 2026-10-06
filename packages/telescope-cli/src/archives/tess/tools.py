@@ -41,7 +41,14 @@ def light_curve(job):
         moved = raw.to_corrector('sff').correct(windows=job['sffWindows'], restore_trend=True) if mission == 'K2' else raw
         curve = moved.remove_nans().remove_outliers(sigma=job['outlierSigma']).normalize()
     binned = curve.bin(time_bin_size=job['binDays']).remove_nans()
-    time, flux = np.asarray(binned.time.value, dtype=float), np.asarray(binned.flux.value, dtype=float)
+    time, raw_flux = np.asarray(binned.time.value, dtype=float), np.asarray(binned.flux.value, dtype=float)
+    degree = job.get('trendDegree', -1)
+
+    def level(t, f):
+        # A campaign's or a quarter's slow drift, as a polynomial in time (numpy), taken out of the light.
+        return f if degree < 0 else f - np.polynomial.Polynomial.fit(t, f, degree)(t) + np.mean(f)
+
+    flux = level(time, raw_flux)
 
     def peak(t, f, longest):
         frequency = np.linspace(1 / longest, 1 / job['shortestDays'], job['frequencies'])
@@ -54,11 +61,12 @@ def light_curve(job):
     # The two orbits of a TESS sector, apart: the gap between them is the longest in the times. A Kepler quarter or a K2
     # campaign has no such gap and is cut at the middle of its time.
     gap = int(np.argmax(np.diff(time))) if mission == 'TESS' else int(np.searchsorted(time, (time.min() + time.max()) / 2)) - 1
-    halves = [(time[:gap + 1], flux[:gap + 1]), (time[gap + 1:], flux[gap + 1:])]
+    halves = [(time[:gap + 1], level(time[:gap + 1], raw_flux[:gap + 1])), (time[gap + 1:], level(time[gap + 1:], raw_flux[gap + 1:]))] if len(time) > 20 else []
     span = float(time.max() - time.min())
+    longest = span / job.get('longestShare', 2)
     return {'frames': int(len(curve.time)), 'aperturePixels': int(mask.sum()), 'saturated': bool(mission == 'TESS' and np.nanmax(tpf.flux.value) > job['saturationElectronsPerSecond']),
-            'spanDays': span, 'scatter': float(np.std(flux)), 'whole': peak(time, flux, span / 2),
-            'halves': [peak(t, f, float(t.max() - t.min())) if len(t) > 10 else None for t, f in halves],
+            'spanDays': span, 'scatter': float(np.std(flux)), 'whole': peak(time, flux, longest),
+            'halves': [peak(t, f, min(longest, float(t.max() - t.min()))) if len(t) > 10 else None for t, f in halves],
             'time': [round(float(value), 5) for value in time], 'flux': [round(float(value), 6) for value in flux]}
 
 
