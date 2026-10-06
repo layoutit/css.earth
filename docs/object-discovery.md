@@ -146,6 +146,8 @@ and its caption covers no other marker
 ([`uncrowded-stars.ts`](../packages/renderer/src/universe/world-context/uncrowded-stars.ts)). A star with nothing to see but
 its color is one of the galaxy's plain dots and has no marker to keep.
 
+![The map 13.7 light-years from the Sun, before and after: V1358 Orionis and HD 29615 are no longer featured and keep their ring and name, because nothing crowds them; Keid and Zaurak, with only a color to show, are plain dots](images/uncrowded-stars.webp)
+
 [Itokawa](../src/objects/itokawa/README.md),
 [Ryugu](../src/objects/ryugu/README.md) and
 [67P](../src/objects/comet-67p/README.md) illustrate useful observation datasets
