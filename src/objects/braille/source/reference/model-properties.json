@@ -1,0 +1,85 @@
+{
+  "source": "https://doi.org/10.5281/zenodo.22812438",
+  "model": "shape_models/model_9969_1.tri",
+  "modelVersion": "2026-09-17",
+  "diameterKm": 1.19,
+  "diameterInterpretation": "Scale fitted to the published 2.1 × 1 × 1 km: volume-equivalent diameter 1.19 ± 0.04 km.",
+  "calibration": {
+    "method": "published-dimensions-fit",
+    "diameterKm": 1.19,
+    "uncertaintyKm": 0.04,
+    "quantity": "volume-equivalent diameter of this mesh with its three extents fitted to the published 2.1 × 1 × 1 km",
+    "reference": "Oberst et al. (2001), Icarus 153, 16–23",
+    "referenceUrl": "https://doi.org/10.1006/icar.2001.6648",
+    "notes": "The mesh's longest extent across the spin axis, the extent at right angles to it and the extent along the spin axis are 2.1533, 1.1070, 1.0620 source units. One scale fitted to 2.1, 1, 1 km by least squares is 0.9572 km per unit; each extent alone gives 0.975, 0.903, 0.942 km per unit, and half that range is the quoted uncertainty. The published dimensions carry no error bars.",
+    "visibleDescription": "Scale fitted to the published 2.1 × 1 × 1 km: volume-equivalent diameter 1.19 ± 0.04 km.",
+    "catalogueId": "doi-10-1006-icar-2001-6648",
+    "scaleKmPerSourceUnit": 0.9591352052938472,
+    "sourceUrl": "https://doi.org/10.1006/icar.2001.6648",
+    "sourceLabel": "Oberst et al. (2001), Icarus 153, 16–23",
+    "diameterSemantics": "volume-equivalent diameter of this mesh with its three extents fitted to the published 2.1 × 1 × 1 km",
+    "limitations": "Uniform scale of the unchanged deposited mesh by the adopted diameter and its quoted uncertainty. The mesh's longest extent across the spin axis, the extent at right angles to it and the extent along the spin axis are 2.1533, 1.1070, 1.0620 source units. One scale fitted to 2.1, 1, 1 km by least squares is 0.9572 km per unit; each extent alone gives 0.975, 0.903, 0.942 km per unit, and half that range is the quoted uncertainty. The published dimensions carry no error bars."
+  },
+  "periodHours": 227.854386,
+  "poleEclipticJ2000Degrees": [
+    315.8,
+    -15.7
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://doi.org/10.5281/zenodo.22812438",
+    "vertices": 574,
+    "faces": 1144,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 959.1352052938472,
+    "firstVertexKm": [
+      0.48075932813950123,
+      0.6554796173307318,
+      0.38895915485153965
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      1.777812732854053,
+      1.6666399466895663,
+      1.0186240317858695
+    ],
+    "volumeCubicKm": 0.8823471890884538,
+    "volumeEquivalentRadiusKm": 0.595,
+    "radialRangeKm": [
+      0.45220553683792863,
+      1.087139775031333
+    ]
+  },
+  "elevation": [
+    -0.2,
+    0.5
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1144,
+    "sourceVertices": 574,
+    "weldedVertices": 574,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 11.9,
+    "estimatedErrorMeters": 1.3511933088302612,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 882254422.9835242
+    }
+  }
+}

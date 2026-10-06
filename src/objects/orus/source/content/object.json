@@ -6,16 +6,29 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Display reference radius",
+        "value": "30 km (size-calibrated model)",
+        "source": {
+          "url": "https://doi.org/10.3847/PSJ/acaf79",
+          "label": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+          "checked": "2026-10-06",
+          "path": "source/reference/calibration.json",
+          "catalogueId": "doi-10-3847-psj-acaf79",
+          "locator": "/diameterKm; radius = diameterKm / 2"
+        }
+      },
+      {
         "id": "dimensions",
-        "label": "Full approximation dimensions",
+        "label": "Published dimensions",
         "value": "70.7 × 63 × 51.4 km",
         "source": {
           "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
           "label": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
           "checked": "2026-09-16",
-          "path": "source/measurements.json",
+          "path": "source/reference/survey-model.json",
           "catalogueId": "doi-10-3847-psj-acaf79",
-          "locator": "/constraints/fullAxesKm/0; /constraints/fullAxesKm/1; /constraints/fullAxesKm/2"
+          "locator": "/comparison/publishedExtentsKm"
         }
       },
       {
@@ -26,9 +39,9 @@
           "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
           "label": "Shape Models of Lucy Targets (3548) Eurybates and (21900) Orus from Disk-integrated Photometry",
           "checked": "2026-09-16",
-          "path": "source/measurements.json",
+          "path": "source/reference/survey-model.json",
           "catalogueId": "doi-10-3847-psj-acaf79",
-          "locator": "/spin/periodHours"
+          "locator": "/comparison/periodText"
         }
       },
       {
@@ -63,23 +76,47 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "model",
-    "labels": {
-      "model": "Shape model"
-    },
+    "defaultDataset": "shape",
     "controls": [
       {
-        "id": "model",
-        "label": "Shape model",
-        "thumbnail": "/scenes/orus/orus-model-thumbnail.webp",
-        "surface": "orus-model-surface@2x.webp",
-        "poles": "orus-model-poles@2x.webp",
+        "id": "shape",
+        "label": "Shape",
+        "thumbnail": "/scenes/orus/orus-shape-thumbnail.webp",
+        "surface": "orus-shape-surface@2x.webp",
+        "poles": "orus-shape-surface@2x.webp",
         "source": {
-          "id": "occultation-approximation",
-          "path": "../manifest.json",
-          "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
+          "id": "orus-shape",
+          "path": "../manifest.json"
         },
+        "falseColor": false,
+        "notes": "Scale from the occultation-measured volume of Mottola et al. (2023): volume-equivalent diameter 60 ± 0.9 km. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/orus/orus-elevation-thumbnail.webp",
+        "surface": "orus-elevation-surface@2x.webp",
+        "poles": "orus-elevation-surface@2x.webp",
+        "source": {
+          "id": "orus-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-5",
+            "2.5",
+            "10"
+          ],
+          "meta": "km · 30 km reference sphere",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.22812438",
+          "image": "/scenes/orus/orus-elevation-legend.webp"
+        },
+        "notes": "Radius on the shape model minus a 30 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },
@@ -97,8 +134,14 @@
   "charts": [],
   "resources": [
     {
-      "label": "Shape and dimensions",
-      "role": "surface",
+      "label": "Model record",
+      "role": "terrain",
+      "description": "Ďurech & Hanuš (2026), model 1 of (21900) Orus, deposit version 2026-09-17",
+      "href": "https://doi.org/10.5281/zenodo.22812438"
+    },
+    {
+      "label": "Size and published dimensions",
+      "role": "facts",
       "description": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3; Levison et al. (2025), Space Science Reviews 221, 70",
       "href": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
     },
@@ -113,16 +156,22 @@
       "role": "facts",
       "description": "Published model and interpretation",
       "href": "https://doi.org/10.1007/s11214-025-01173-7"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Published pole and period; arbitrary display phase",
+      "href": "https://doi.org/10.5281/zenodo.22812438"
     }
   ],
   "provenance": {
     "editorial": {
-      "url": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
-      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3; Levison et al. (2025), Space Science Reviews 221, 70"
+      "url": "https://doi.org/10.5281/zenodo.22812438",
+      "credit": "Ďurech & Hanuš (2026), Spins and shapes of asteroids reconstructed from photometry from surveys, Zenodo 10.5281/zenodo.22812438; model 1 of (21900) Orus."
     },
     "physical": {
-      "path": "../measurements.json",
-      "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3; Levison et al. (2025), Space Science Reviews 221, 70"
+      "path": "../../../../../packages/astronomy/data/bodies/orus.json",
+      "credit": "Vendored JPL physical and orbital data"
     }
   }
 }

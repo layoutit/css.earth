@@ -4,24 +4,21 @@
   "entries": [
     {
       "id": "selected-shape-and-spin",
-      "subject": "DAMIT 5835: selected shape and spin",
+      "subject": "Ďurech & Hanuš (2026), model 1 of (9165) Raup: selected shape and spin",
       "status": "included",
-      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-5835.txt. Model 5835, version 2019-10-23, pole (269°, 87°), period 46.22 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "finding": "Model 1 of the deposit (version 2026-09-17), pole (285.6°, 56.9°), period 1303.393531 h, taken unchanged from shape_models/model_9165_1.tri. The deposit lists one spin solution for (9165) Raup. It replaces DAMIT model 5835 (pole 269°, 87°; period 46.22 h), whose period the paper lists among those it corrects (its Table 2) and which the LCDB period of 1320 h already contradicted.",
       "evidence": [
-        "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835",
-        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/raup/source/preparation/terrestrial.json",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/raup/source/reference/damit-model.json"
+        "https://doi.org/10.5281/zenodo.22812438",
+        "https://arxiv.org/abs/2610.06082"
       ]
     },
     {
       "id": "selected-physical-scale",
       "subject": "Physical scale",
       "status": "included",
-      "finding": "The retained calibration uses 4.839 ±0.167 km. The thermal effective spherical diameter is used as an approximate volume-equivalent display scale; no joint shape/thermal inversion or independently measured volume is implied.,Quoted ±0.167 km is the catalog fit error; approximately 20% additional systematic diameter uncertainty applies.,Slow spin can leave the thermal observations sensitive to viewing aspect and incomplete rotation coverage; the diameter is an approximate global display scale.",
+      "finding": "4.839 ± 0.167 km, NEATM effective spherical diameter at the observing geometry. A thermal effective spherical diameter from NEOWISE, given to the mesh volume as an approximate display scale; its quoted fit error excludes about 20% systematic uncertainty.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/raup/source/reference/calibration.json",
-        "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D9165"
+        "https://doi.org/10.1088/2041-8205/759/1/L8"
       ]
     },
     {
@@ -34,20 +31,20 @@
     },
     {
       "id": "recorded-reference-1",
-      "subject": "Other DAMIT matches",
+      "subject": "DAMIT model 5835",
       "status": "excluded",
-      "finding": "The current DAMIT metadata export lists only selected model 5835 for this target; no other DAMIT shape is available in this listing to adopt. The imported 'included' status did not mean a second model was rendered. This check says nothing about unexamined archives.",
-      "revisitWhen": "The target obtains another DAMIT release or a concrete model is identified in a different archive.",
+      "finding": "DAMIT lists one model for this target, 5835 (version 2019-10-23, pole 269°, 87°, period 46.22 h), which this package showed until 2026-10-06. The Lightcurve Database period of 1320 h contradicted it, and Table 2 of Ďurech & Hanuš (2026) lists it among the DAMIT periods their new model corrects (1303.39 h). The DAMIT exports read on 2026-10-06 still hold only model 5835.",
+      "revisitWhen": "DAMIT replaces model 5835 with the 2026 model, or lists another model for this target.",
       "evidence": [
-        "https://damit.cuni.cz/?q=9165",
-        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835",
+        "https://arxiv.org/abs/2610.06082"
       ]
     },
     {
       "id": "sbn-catalogue-facts",
       "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
       "status": "unresolved",
-      "finding": "Shown rotation \"46.22 hours\" (damit-models) differs from the LCDB V4.0 summary record 6176 period 1320. h (U 3-, synodic); the shown value is kept.",
+      "finding": "Shown rotation \"1303.393531 hours\" (doi-10-5281-zenodo-22812438) differs from the LCDB V4.0 summary record 6176 period 1320. h (U 3-, synodic); the shown value is kept.",
       "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
       "evidence": [
         "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",

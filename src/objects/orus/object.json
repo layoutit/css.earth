@@ -44,7 +44,7 @@
       ],
       "shape": {
         "kind": "radial-terrain",
-        "radiusKm": 30.5875269554397
+        "radiusKm": 30
       },
       "surfaces": [
         {
@@ -53,7 +53,12 @@
           "projection": "equirectangular",
           "datasets": [
             {
-              "id": "model",
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
               "source": "content",
               "material": "lighting"
             }
@@ -72,28 +77,28 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -755749287740.0371,
-        -77593506656.21928,
-        -149633725914.18774
+        -755749287740.0372,
+        -77593506656.21933,
+        -149633725914.18784
       ],
       "presentationToReference": [
-        -0.9853704882243226,
+        -0.9853704882243224,
         5.551115123125783e-17,
-        -0.17042593974087483,
-        -0.156362742623536,
-        0.39777715593191365,
+        -0.1704259397408748,
+        -0.1563627426235359,
+        0.3977771559319137,
         0.9040597474381679,
-        -0.06779154560714895,
-        -0.9174820620691819,
+        -0.06779154560714906,
+        -0.9174820620691818,
         0.3919578703451123
       ],
       "orbitUpReference": [
         -5.551115123125783e-17,
-        -0.39777715593191365,
-        0.9174820620691819
+        -0.3977771559319137,
+        0.9174820620691818
       ],
-      "metersPerUnit": 132.98924763234652,
-      "bodyRadiusM": 30587.5269554397
+      "metersPerUnit": 130.43478260869566,
+      "bodyRadiusM": 30000
     },
     "page": {
       "stylesheets": [
@@ -104,9 +109,6 @@
       }
     },
     "catalog": {
-      "illustrationDatasets": [
-        "model"
-      ],
       "name": "Orus",
       "classification": "asteroid",
       "color": "#9a9a9a",

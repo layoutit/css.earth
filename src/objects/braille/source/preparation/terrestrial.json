@@ -5,64 +5,101 @@
   "displayName": "Braille",
   "publicBase": "/scenes/braille/",
   "raster": {
-    "width": 512,
-    "height": 256,
+    "width": 4096,
+    "height": 2048,
     "bandCount": 16,
     "gutter": 64,
-    "poleSize": 128,
+    "poleSize": 512,
     "reportMissingPixels": true,
-    "observations": [
+    "observations": [],
+    "scientific": [
       {
-        "id": "model",
-        "consumer": "model-surface",
-        "validity": {
-          "kind": "image-rgb-no-data",
-          "noData": 160,
-          "centerLongitude": 180
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/model_9969_1.tri",
+        "format": "pds-plate-model",
+        "grid": {
+          "metersPerUnit": 959.1352052938472,
+          "expectedVertices": 574,
+          "expectedFaces": 1144,
+          "indexBase": 1
         },
-        "metadata": {
-          "label": "Shape model",
-          "modeled": true,
-          "coverage": "Ellipsoid approximation of the published 2.1 × 1 × 1 km size estimate combining Deep Space 1 images and ground-based photometry. The equal short axes are part of that coarse estimate; resolved local terrain is not represented. Full approximation dimensions: 2.1 × 1 × 1 km. Arbitrary display pole and meridian. The published 226.4 ± 1.3 h estimate is synodic and is not installed as a sidereal spin or an observed pole. The grid marks unmapped terrain."
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -0.595
+        },
+        "minimum": -0.2,
+        "maximum": 0.5,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 595,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 11.9
         }
       }
     ],
-    "scientific": [],
     "observedColors": [],
-    "mosaics": []
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
   },
   "geometry": {
     "radius": 230,
-    "radiusKm": 0.6402895824937471,
-    "camera": {
-      "framingScale": 0.6097996023749972
-    },
-    "mapUrl": "/scenes/braille/braille-model-surface@2x.webp",
-    "polesUrl": "/scenes/braille/braille-model-poles@2x.webp",
+    "radiusKm": 0.595,
+    "mapUrl": "/scenes/braille/braille-shape-surface@2x.webp",
+    "polesUrl": "/scenes/braille/braille-shape-surface@2x.webp",
     "radialTerrain": {
-      "path": "shape/ellipsoid.tab",
-      "format": "pds-radius-table",
+      "path": "shape/model_9969_1.tri",
+      "format": "pds-plate-model",
       "grid": {
-        "metersPerUnit": 1000,
-        "expectedVertices": 2522,
-        "expectedFaces": 5040,
-        "stepDegrees": 5,
-        "longitudeDirection": "east-positive"
+        "metersPerUnit": 959.1352052938472,
+        "expectedVertices": 574,
+        "expectedFaces": 1144,
+        "indexBase": 1
       },
-      "faceBudget": 2000,
-      "texelsPerFace": 4096,
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "texelsPerFace": 16384,
+      "primitive": "u",
       "simplification": {
-        "targetFaces": 480,
-        "maximumErrorMeters": 16.007239562343678,
-        "method": "source-meshoptimizer"
-      },
-      "primitive": "u"
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 11.9,
+        "regularize": true
+      }
     }
   },
   "celestial": {
-    "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Arbitrary display pole and meridian. The published 226.4 ± 1.3 h estimate is synodic and is not installed as a sidereal spin or an observed pole."
+    "sunSource": "Published pole and period of Ďurech & Hanuš (2026), model 1 of (9969) Braille, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
   },
   "presentation": {
-    "defaultDataset": "model"
+    "defaultDataset": "shape"
   }
 }

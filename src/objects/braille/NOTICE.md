@@ -1,3 +1,9 @@
-# Credits
+# (9969) Braille: attribution and reuse
 
-Scientific shape constraints: Oberst et al. (2001), Icarus 153, 16–23; Buratti et al. (2004), Icarus 167, 129–135, Table 1. Numerical extraction and ellipsoid approximation: cssEarth, MIT. Retain the source citations and approximate status; research papers are not relicensed or bundled. The missing-data grid is authored display content, not observed regolith.
+The selected geometry and spin are model 1 of (9969) Braille in [Ďurech & Hanuš (2026), *Spins and shapes of asteroids reconstructed from photometry from surveys*](https://doi.org/10.5281/zenodo.22812438), described in [their paper](https://arxiv.org/abs/2610.06082). The deposit is distributed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). Preserve attribution, source links and notice of changes.
+
+Changes for cssEarth: apply the separately documented physical scale; simplify for an 800-face retained raster presentation through the existing preparer; add the shared coordinate grid and a false-color, shape-derived radial-relief view. The original source mesh bytes remain intact. These outputs are derived visualizations; they are not photographs or newly measured terrain.
+
+Physical-size credit: [Oberst et al. (2001), Icarus 153, 16–23](https://doi.org/10.1006/icar.2001.6648). JPL Small-Body Database and Horizons records are credited to NASA/JPL. Research papers are not relicensed or bundled; the deposit's CC BY license does not override their notices.
+
+No agency, archive, author or mission endorsement is implied. Source-coordinate grids and relief colors are visualization choices. No model-derived density, composition or optical appearance is supplied.

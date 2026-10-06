@@ -6,8 +6,21 @@
   "panel": {
     "facts": [
       {
+        "id": "radius",
+        "label": "Display reference radius",
+        "value": "0.595 km (size-calibrated model)",
+        "source": {
+          "url": "https://doi.org/10.1006/icar.2001.6648",
+          "label": "Oberst et al. (2001), Icarus 153, 16–23",
+          "checked": "2026-10-06",
+          "path": "source/reference/calibration.json",
+          "catalogueId": "doi-10-1006-icar-2001-6648",
+          "locator": "/diameterKm; radius = diameterKm / 2"
+        }
+      },
+      {
         "id": "dimensions",
-        "label": "Full approximation dimensions",
+        "label": "Published dimensions",
         "value": "2.1 × 1 × 1 km",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=9969",
@@ -19,16 +32,16 @@
         }
       },
       {
-        "id": "rotation",
-        "label": "Rotation period",
-        "value": "226.4 ± 1.3 h (synodic estimate)",
+        "id": "rotation-period",
+        "label": "Model rotation period",
+        "value": "227.854386 hours",
         "source": {
-          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=9969",
-          "label": "JPL Small-Body Database",
-          "checked": "2026-09-16",
-          "path": "source/reference/sbdb.json",
-          "catalogueId": "jpl-small-body-database",
-          "locator": "phys_par.rot_per (h)"
+          "url": "https://doi.org/10.5281/zenodo.22812438",
+          "label": "Ďurech & Hanuš (2026), model 1 of (9969) Braille",
+          "checked": "2026-10-06",
+          "path": "source/reference/survey-model.json",
+          "catalogueId": "doi-10-5281-zenodo-22812438",
+          "locator": "/periodHours"
         }
       },
       {
@@ -49,23 +62,47 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "model",
-    "labels": {
-      "model": "Shape model"
-    },
+    "defaultDataset": "shape",
     "controls": [
       {
-        "id": "model",
-        "label": "Shape model",
-        "thumbnail": "/scenes/braille/braille-model-thumbnail.webp",
-        "surface": "braille-model-surface@2x.webp",
-        "poles": "braille-model-poles@2x.webp",
+        "id": "shape",
+        "label": "Shape",
+        "thumbnail": "/scenes/braille/braille-shape-thumbnail.webp",
+        "surface": "braille-shape-surface@2x.webp",
+        "poles": "braille-shape-surface@2x.webp",
         "source": {
-          "id": "occultation-approximation",
-          "path": "../manifest.json",
-          "url": "https://doi.org/10.1006/icar.2001.6648"
+          "id": "braille-shape",
+          "path": "../manifest.json"
         },
+        "falseColor": false,
+        "notes": "Scale fitted to the published 2.1 × 1 × 1 km: volume-equivalent diameter 1.19 ± 0.04 km. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/braille/braille-elevation-thumbnail.webp",
+        "surface": "braille-elevation-surface@2x.webp",
+        "poles": "braille-elevation-surface@2x.webp",
+        "source": {
+          "id": "braille-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-0.2",
+            "0.15",
+            "0.5"
+          ],
+          "meta": "km · 0.595 km reference sphere",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.22812438",
+          "image": "/scenes/braille/braille-elevation-legend.webp"
+        },
+        "notes": "Radius on the shape model minus a 0.595 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },
@@ -83,8 +120,14 @@
   "charts": [],
   "resources": [
     {
-      "label": "Shape and dimensions",
-      "role": "surface",
+      "label": "Model record",
+      "role": "terrain",
+      "description": "Ďurech & Hanuš (2026), model 1 of (9969) Braille, deposit version 2026-09-17",
+      "href": "https://doi.org/10.5281/zenodo.22812438"
+    },
+    {
+      "label": "Size and published dimensions",
+      "role": "facts",
       "description": "Oberst et al. (2001), Icarus 153, 16–23; Buratti et al. (2004), Icarus 167, 129–135, Table 1",
       "href": "https://doi.org/10.1006/icar.2001.6648"
     },
@@ -99,16 +142,22 @@
       "role": "facts",
       "description": "Published model and interpretation",
       "href": "https://doi.org/10.1016/j.icarus.2003.06.002"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Published pole and period; arbitrary display phase",
+      "href": "https://doi.org/10.5281/zenodo.22812438"
     }
   ],
   "provenance": {
     "editorial": {
-      "url": "https://doi.org/10.1006/icar.2001.6648",
-      "credit": "Oberst et al. (2001), Icarus 153, 16–23; Buratti et al. (2004), Icarus 167, 129–135, Table 1"
+      "url": "https://doi.org/10.5281/zenodo.22812438",
+      "credit": "Ďurech & Hanuš (2026), Spins and shapes of asteroids reconstructed from photometry from surveys, Zenodo 10.5281/zenodo.22812438; model 1 of (9969) Braille."
     },
     "physical": {
-      "path": "../measurements.json",
-      "credit": "Oberst et al. (2001), Icarus 153, 16–23; Buratti et al. (2004), Icarus 167, 129–135, Table 1"
+      "path": "../../../../../packages/astronomy/data/bodies/braille.json",
+      "credit": "Vendored JPL physical and orbital data"
     }
   }
 }

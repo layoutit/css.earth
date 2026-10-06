@@ -1,0 +1,85 @@
+{
+  "source": "https://doi.org/10.5281/zenodo.22812438",
+  "model": "shape_models/model_21900_1.tri",
+  "modelVersion": "2026-09-17",
+  "diameterKm": 60,
+  "diameterInterpretation": "Scale from the occultation-measured volume of Mottola et al. (2023): volume-equivalent diameter 60 ± 0.9 km.",
+  "calibration": {
+    "method": "published-convex-volume-transfer",
+    "diameterKm": 60,
+    "uncertaintyKm": 0.9,
+    "quantity": "volume-equivalent diameter of the occultation-scaled convex model",
+    "reference": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+    "referenceUrl": "https://doi.org/10.3847/PSJ/acaf79",
+    "notes": "Table 3 gives the convex shape volume 1.13 × 10^5 km³ of the model its authors scaled to the 2021 October 16 occultation chords; a sphere of that volume is 60 km across. The quoted error is that of the table's surface-equivalent diameter, 60.5 ± 0.9 km. That model's mesh is not archived, so its volume is given to the Ďurech & Hanuš (2026) mesh, whose proportions differ: at this scale the mesh measures 70.4 × 59.8 × 58.2 km (longest extent across the spin axis, the extent at right angles to it, the extent along it) where the table lists 70.7 × 63 × 51.4 km.",
+    "visibleDescription": "Scale from the occultation-measured volume of Mottola et al. (2023): volume-equivalent diameter 60 ± 0.9 km.",
+    "catalogueId": "doi-10-3847-psj-acaf79",
+    "scaleKmPerSourceUnit": 48.35975822224511,
+    "sourceUrl": "https://doi.org/10.3847/PSJ/acaf79",
+    "sourceLabel": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
+    "diameterSemantics": "volume-equivalent diameter of the occultation-scaled convex model",
+    "limitations": "Uniform scale of the unchanged deposited mesh by the adopted diameter and its quoted uncertainty. Table 3 gives the convex shape volume 1.13 × 10^5 km³ of the model its authors scaled to the 2021 October 16 occultation chords; a sphere of that volume is 60 km across. The quoted error is that of the table's surface-equivalent diameter, 60.5 ± 0.9 km. That model's mesh is not archived, so its volume is given to the Ďurech & Hanuš (2026) mesh, whose proportions differ: at this scale the mesh measures 70.4 × 59.8 × 58.2 km (longest extent across the spin axis, the extent at right angles to it, the extent along it) where the table lists 70.7 × 63 × 51.4 km."
+  },
+  "periodHours": 13.486235,
+  "poleEclipticJ2000Degrees": [
+    36.8,
+    -54
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://doi.org/10.5281/zenodo.22812438",
+    "vertices": 574,
+    "faces": 1144,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 48359.75822224511,
+    "firstVertexKm": [
+      6.053369867783843,
+      1.176932886647526,
+      29.398395128812492
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      62.49787378181732,
+      68.96750994045078,
+      58.228814569256365
+    ],
+    "volumeCubicKm": 113097.33552923256,
+    "volumeEquivalentRadiusKm": 30,
+    "radialRangeKm": [
+      26.848935466784145,
+      36.056152562601866
+    ]
+  },
+  "elevation": [
+    -5,
+    10
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 1144,
+    "sourceVertices": 574,
+    "weldedVertices": 574,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 600,
+    "estimatedErrorMeters": 78.85201263427734,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 113076183011581.84
+    }
+  }
+}

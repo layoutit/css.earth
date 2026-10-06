@@ -1,0 +1,60 @@
+{
+  "deposit": {
+    "title": "Spins and shapes of asteroids reconstructed from photometry from surveys",
+    "authors": "J. Ďurech, J. Hanuš",
+    "doi": "10.5281/zenodo.22812438",
+    "url": "https://doi.org/10.5281/zenodo.22812438",
+    "version": "2026-09-17",
+    "license": "CC-BY-4.0",
+    "paper": "https://arxiv.org/abs/2610.06082",
+    "archive": "shape_models.tar.gz",
+    "archiveBytes": 506746645,
+    "file": "shape_models/model_9165_1.tri",
+    "table": "spin_results"
+  },
+  "asteroidNumber": 9165,
+  "solution": 1,
+  "lambda": 285.6,
+  "beta": 56.9,
+  "periodHours": 1303.393531,
+  "nonconvex": false,
+  "mesh": {
+    "vertices": 574,
+    "faces": 1144,
+    "signedVolumeSourceUnitsCubed": 1.0000000309275006,
+    "volumeEquivalentDiameterSourceUnits": 1.2407009945893934,
+    "closedManifold": true,
+    "extentsSourceUnits": [
+      1.4528717,
+      2.180784,
+      1.0465585
+    ],
+    "spinExtentsSourceUnits": [
+      2.320452387957897,
+      1.0026281377826622,
+      1.0465585
+    ],
+    "eulerCharacteristic": 2,
+    "scaledVolumeCubicKm": 59.32878966755032,
+    "physicalRadiusKm": 2.4195
+  },
+  "alternativeModels": [],
+  "selectionReason": "The deposit lists one spin solution for (9165) Raup. It replaces DAMIT model 5835 (pole 269°, 87°; period 46.22 h), whose period the paper lists among those it corrects (its Table 2) and which the LCDB period of 1320 h already contradicted.",
+  "comparison": {
+    "lightCurveDatabase": {
+      "periodHours": 1320,
+      "source": "JPL Small-Body Database rot_per, quoting LCDB (Rev. 2023-October); Warner et al. (2009)",
+      "path": "source/reference/sbdb.json"
+    },
+    "replacedModel": {
+      "archive": "DAMIT",
+      "modelId": 5835,
+      "modelVersion": "2019-10-23",
+      "poleEclipticJ2000Degrees": [
+        269,
+        87
+      ],
+      "periodHours": 46.22
+    }
+  }
+}

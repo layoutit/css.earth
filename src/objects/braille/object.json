@@ -44,7 +44,7 @@
       ],
       "shape": {
         "kind": "radial-terrain",
-        "radiusKm": 0.6402895824937471
+        "radiusKm": 0.595
       },
       "surfaces": [
         {
@@ -53,7 +53,12 @@
           "projection": "equirectangular",
           "datasets": [
             {
-              "id": "model",
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
               "source": "content",
               "material": "lighting"
             }
@@ -78,22 +83,22 @@
       ],
       "presentationToReference": [
         0.3947929456191001,
-        2.4356826039297786e-17,
-        0.9187701181957293,
+        5.551115123125783e-17,
+        0.9187701181957292,
         0.8429551026097637,
-        0.3977771559319137,
-        -0.36221544583697834,
-        0.3654657645711254,
-        -0.9174820620691818,
-        -0.1570396150903483
+        0.39777715593191376,
+        -0.3622154458369783,
+        0.36546576457112545,
+        -0.9174820620691817,
+        -0.1570396150903482
       ],
       "orbitUpReference": [
-        0,
-        -0.3977771559319137,
-        0.9174820620691818
+        -5.551115123125783e-17,
+        -0.39777715593191376,
+        0.9174820620691817
       ],
-      "metersPerUnit": 2.783867749972814,
-      "bodyRadiusM": 640.2895824937472
+      "metersPerUnit": 2.5869565217391304,
+      "bodyRadiusM": 595
     },
     "page": {
       "stylesheets": [
@@ -104,9 +109,6 @@
       }
     },
     "catalog": {
-      "illustrationDatasets": [
-        "model"
-      ],
       "name": "Braille",
       "classification": "asteroid",
       "color": "#9a9a9a",

@@ -1,0 +1,79 @@
+{
+  "deposit": {
+    "title": "Spins and shapes of asteroids reconstructed from photometry from surveys",
+    "authors": "J. Ďurech, J. Hanuš",
+    "doi": "10.5281/zenodo.22812438",
+    "url": "https://doi.org/10.5281/zenodo.22812438",
+    "version": "2026-09-17",
+    "license": "CC-BY-4.0",
+    "paper": "https://arxiv.org/abs/2610.06082",
+    "archive": "shape_models.tar.gz",
+    "archiveBytes": 506746645,
+    "file": "shape_models/model_9969_1.tri",
+    "table": "spin_results"
+  },
+  "asteroidNumber": 9969,
+  "solution": 1,
+  "lambda": 315.8,
+  "beta": -15.7,
+  "periodHours": 227.854386,
+  "nonconvex": false,
+  "mesh": {
+    "vertices": 574,
+    "faces": 1144,
+    "signedVolumeSourceUnitsCubed": 1.0000000229767991,
+    "volumeEquivalentDiameterSourceUnits": 1.2407009913012457,
+    "closedManifold": true,
+    "extentsSourceUnits": [
+      1.853558,
+      1.7376486,
+      1.0620234
+    ],
+    "spinExtentsSourceUnits": [
+      2.153271895920718,
+      1.1069532631505752,
+      1.0620234
+    ],
+    "eulerCharacteristic": 2,
+    "scaledVolumeCubicKm": 0.8823471890884538,
+    "physicalRadiusKm": 0.595
+  },
+  "alternativeModels": [
+    {
+      "solution": 2,
+      "lambda": 10.9,
+      "beta": -75.8,
+      "periodHours": 227.854386,
+      "file": "shape_models/model_9969_2.tri"
+    }
+  ],
+  "selectionReason": "The deposit lists two spin solutions with the same period. Solution 1 is selected because its mesh has the proportions Deep Space 1 and ground-based photometry gave (2.1 × 1 × 1 km, Oberst et al. 2001); the proportions of both meshes are in /comparison. No unique-pole claim.",
+  "comparison": {
+    "reference": "Oberst et al. (2001), Icarus 153, 16–23",
+    "referenceUrl": "https://doi.org/10.1006/icar.2001.6648",
+    "publishedExtentsKm": [
+      2.1,
+      1,
+      1
+    ],
+    "publishedExtentRatios": [
+      2.1,
+      1,
+      1
+    ],
+    "synodicPeriodText": "226.4 ± 1.3 h (synodic estimate)",
+    "synodicPeriodSource": "Oberst et al. (2001), Icarus 153, 16–23",
+    "meshExtentRatios": {
+      "solution1": [
+        2.028,
+        1.042,
+        1
+      ],
+      "solution2": [
+        2.317,
+        1.423,
+        1
+      ]
+    }
+  }
+}

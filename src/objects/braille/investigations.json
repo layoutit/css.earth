@@ -3,14 +3,22 @@
   "objectId": "braille",
   "entries": [
     {
-      "id": "selected-model",
-      "subject": "Selected source model",
+      "id": "selected-shape-and-spin",
+      "subject": "Ďurech & Hanuš (2026), model 1 of (9969) Braille: selected shape and spin",
       "status": "included",
-      "finding": "Oberst et al. (2001) combine two DS1 images with ground-based photometry to estimate a 2.1 × 1.0 × 1.0 km body and a 226.4 ± 1.3 h synodic period. The equal short axes are a coarse size estimate, not resolved terrain or a complete shape; no measured pole or sidereal ephemeris is installed. The checked-in radius table halves the full axes once, and its geometric-mean reference radius is rendering scale only. Buratti et al. (2004) contributes integrated spectroscopy/classification, not a surface map.",
+      "finding": "Model 1 of the deposit (version 2026-09-17), pole (315.8°, -15.7°), period 227.854386 h, taken unchanged from shape_models/model_9969_1.tri. The deposit lists two spin solutions with the same period. Solution 1 is selected because its mesh has the proportions Deep Space 1 and ground-based photometry gave (2.1 × 1 × 1 km, Oberst et al. 2001); the proportions of both meshes are in /comparison. No unique-pole claim.",
       "evidence": [
-        "https://doi.org/10.1006/icar.2001.6648",
-        "https://pubs.usgs.gov/publication/70022780",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/braille/source/measurements.json"
+        "https://doi.org/10.5281/zenodo.22812438",
+        "https://arxiv.org/abs/2610.06082"
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "1.19 ± 0.04 km, volume-equivalent diameter of this mesh with its three extents fitted to the published 2.1 × 1 × 1 km. The mesh's longest extent across the spin axis, the extent at right angles to it and the extent along the spin axis are 2.1533, 1.1070, 1.0620 source units. One scale fitted to 2.1, 1, 1 km by least squares is 0.9572 km per unit; each extent alone gives 0.975, 0.903, 0.942 km per unit, and half that range is the quoted uncertainty. The published dimensions carry no error bars.",
+      "evidence": [
+        "https://doi.org/10.1006/icar.2001.6648"
       ]
     },
     {
@@ -44,6 +52,17 @@
       "evidence": [
         "https://pds-rings.seti.org/press_releases/pages/PIA01xxx/PIA01345.html",
         "https://github.com/layoutit/css.earth/pull/192"
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown rotation \"227.854386 hours\" (doi-10-5281-zenodo-22812438) differs from the LCDB V4.0 summary record 6470 period 226.4 h (U 2, synodic); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/ast-lightcurve-database_V4_0/data/lc_summary.csv",
+        "packages/bake/authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

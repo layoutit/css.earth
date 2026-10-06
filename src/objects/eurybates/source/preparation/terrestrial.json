@@ -5,64 +5,101 @@
   "displayName": "Eurybates",
   "publicBase": "/scenes/eurybates/",
   "raster": {
-    "width": 512,
-    "height": 256,
+    "width": 4096,
+    "height": 2048,
     "bandCount": 16,
     "gutter": 64,
-    "poleSize": 128,
+    "poleSize": 512,
     "reportMissingPixels": true,
-    "observations": [
+    "observations": [],
+    "scientific": [
       {
-        "id": "model",
-        "consumer": "model-surface",
-        "validity": {
-          "kind": "image-rgb-no-data",
-          "noData": 160,
-          "centerLongitude": 180
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/model_3548_2.tri",
+        "format": "pds-plate-model",
+        "grid": {
+          "metersPerUnit": 55049.52523544137,
+          "expectedVertices": 574,
+          "expectedFaces": 1144,
+          "indexBase": 1
         },
-        "metadata": {
-          "label": "Shape model",
-          "modeled": true,
-          "coverage": "Authored ellipsoid approximation constrained to the published convex model's maximum extents. These are not independently measured ellipsoid axes; the irregular convex outline and model volume are not reproduced. Full approximation dimensions: 77.5 × 71.3 × 61.8 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain."
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -34.15
+        },
+        "minimum": -10,
+        "maximum": 10,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 34150,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 683
         }
       }
     ],
-    "scientific": [],
     "observedColors": [],
-    "mosaics": []
+    "shapeViews": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "consumer": "shape"
+      }
+    ]
   },
   "geometry": {
     "radius": 230,
-    "radiusKm": 34.948609955746875,
-    "camera": {
-      "framingScale": 0.9018996117612097
-    },
-    "mapUrl": "/scenes/eurybates/eurybates-model-surface@2x.webp",
-    "polesUrl": "/scenes/eurybates/eurybates-model-poles@2x.webp",
+    "radiusKm": 34.15,
+    "mapUrl": "/scenes/eurybates/eurybates-shape-surface@2x.webp",
+    "polesUrl": "/scenes/eurybates/eurybates-shape-surface@2x.webp",
     "radialTerrain": {
-      "path": "shape/ellipsoid.tab",
-      "format": "pds-radius-table",
+      "path": "shape/model_3548_2.tri",
+      "format": "pds-plate-model",
       "grid": {
-        "metersPerUnit": 1000,
-        "expectedVertices": 2522,
-        "expectedFaces": 5040,
-        "stepDegrees": 5,
-        "longitudeDirection": "east-positive"
+        "metersPerUnit": 55049.52523544137,
+        "expectedVertices": 574,
+        "expectedFaces": 1144,
+        "indexBase": 1
       },
-      "faceBudget": 2000,
-      "texelsPerFace": 4096,
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "texelsPerFace": 16384,
+      "primitive": "u",
       "simplification": {
-        "targetFaces": 480,
-        "maximumErrorMeters": 873.7152488936719,
-        "method": "source-meshoptimizer"
-      },
-      "primitive": "u"
+        "method": "source-meshoptimizer",
+        "targetFaces": 800,
+        "maximumErrorMeters": 683,
+        "regularize": true
+      }
     }
   },
   "celestial": {
-    "sunSource": "JPL Horizons heliocentric state at the fixed 2026-09-03 TT scene epoch. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
+    "sunSource": "Published pole and period of Ďurech & Hanuš (2026), model 2 of (3548) Eurybates, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
   },
   "presentation": {
-    "defaultDataset": "model"
+    "defaultDataset": "shape"
   }
 }

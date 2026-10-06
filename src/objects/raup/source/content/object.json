@@ -47,14 +47,14 @@
       {
         "id": "rotation-period",
         "label": "Model rotation period",
-        "value": "46.22 hours",
+        "value": "1303.393531 hours",
         "source": {
-          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835",
-          "label": "DAMIT model 5835",
-          "checked": "2026-09-08",
-          "path": "source/reference/damit-model.json",
-          "catalogueId": "damit-models",
-          "locator": "Model 5835; /periodHours"
+          "url": "https://doi.org/10.5281/zenodo.22812438",
+          "label": "Ďurech & Hanuš (2026), model 1 of (9165) Raup",
+          "checked": "2026-10-06",
+          "path": "source/reference/survey-model.json",
+          "catalogueId": "doi-10-5281-zenodo-22812438",
+          "locator": "/periodHours"
         }
       }
     ],
@@ -102,7 +102,7 @@
           "path": "../manifest.json"
         },
         "falseColor": false,
-        "notes": "Thermal diameter 4.839 ± 0.167 km; quoted fit error excludes about 20% systematic uncertainty and shape/aspect effects. Slow spin and short-wave thermal data leave scale sensitive to viewing aspect; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
+        "notes": "Approximate scale from a thermal diameter of 4.839 ± 0.167 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects. The convex model shows broad shape; rotational phase is illustrative. Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.",
         "noData": true
       },
       {
@@ -121,15 +121,15 @@
           "width": 256,
           "height": 16,
           "labels": [
-            "-0.7",
-            "0.8",
-            "2.3"
+            "-1",
+            "2",
+            "5"
           ],
-          "meta": "km · 2.4195 km reference sphere",
-          "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835",
+          "meta": "km · 2.42 km reference sphere",
+          "sourceUrl": "https://doi.org/10.5281/zenodo.22812438",
           "image": "/scenes/raup/raup-elevation-legend.webp"
         },
-        "notes": "Radius on the shape model minus a 2.4195 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+        "notes": "Radius on the shape model minus a 2.42 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
       }
     ]
   },
@@ -149,8 +149,8 @@
     {
       "label": "Model record",
       "role": "terrain",
-      "description": "DAMIT model 5835, version 2019-10-23",
-      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835"
+      "description": "Ďurech & Hanuš (2026), model 1 of (9165) Raup, deposit version 2026-09-17",
+      "href": "https://doi.org/10.5281/zenodo.22812438"
     },
     {
       "label": "Size calibration",
@@ -162,13 +162,13 @@
       "label": "Rotation",
       "role": "rotation",
       "description": "Published pole and period; arbitrary display phase",
-      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835"
+      "href": "https://doi.org/10.5281/zenodo.22812438"
     }
   ],
   "provenance": {
     "editorial": {
-      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835",
-      "credit": "DAMIT, Astronomical Institute of Charles University; Raup model 5835; original model authors identified in its pinned reference records."
+      "url": "https://doi.org/10.5281/zenodo.22812438",
+      "credit": "Ďurech & Hanuš (2026), Spins and shapes of asteroids reconstructed from photometry from surveys, Zenodo 10.5281/zenodo.22812438; model 1 of (9165) Raup."
     },
     "physical": {
       "path": "../../../../../packages/astronomy/data/bodies/raup.json",
