@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { discDensity, fitDiscEnvelope, ringGeometry, smoothToBeam, subtractPointSources, type SkyPlane } from './disc-envelope.mts';
+import { centreDepthThroughStar, discDensity, fitDiscEnvelope, profileDiscDensity, ringGeometry, smoothToBeam, subtractPointSources, type SkyPlane } from './disc-envelope.mts';
 import type { SkyProjection } from '@cssearth/fits';
 
 const SIZE = 64, HALF = 140, STEP = 2 * HALF / SIZE;
@@ -45,6 +45,24 @@ test('the density puts the stated near side toward the observer', () => {
   let best = -Infinity, at = 0;
   for (let z = -HALF; z <= HALF; z += 1) { const v = density(nearX * Math.cos(30 * Math.PI / 180) + 3, nearY * Math.cos(30 * Math.PI / 180) - 2, z); if (v > best) { best = v; at = z; } }
   assert.ok(at > 20, `near side at z ${at}`);
+});
+
+test('an off-centre ring whose plane holds the star: the centre depth puts the star in the plane, and the projection keeps', () => {
+  // The fixture's centre is 3 units west and 2 south of the star. Without a centre depth the plane misses the star.
+  const depth = centreDepthThroughStar(ring), through = { ...ring, centreDepthUnits: depth };
+  const off = (model: typeof ring & { centreDepthUnits?: number }) => {
+    // The star's distance from the mid-plane: where the density of a very wide ring peaks along the sight line through the star.
+    const density = profileDiscDensity({ ...model, gaussianHeightUnits: 0.5 }, [{ radiusUnits: 0, value: 1 }, { radiusUnits: 200, value: 1 }]);
+    let best = -Infinity, at = 0;
+    for (let z = -20; z <= 20; z += 0.01) { const v = density(0, 0, z); if (v > best) { best = v; at = z; } }
+    return at;
+  };
+  assert.ok(Math.abs(off(ring)) > 0.5, `without a centre depth the plane crosses the star's sight line at z ${off(ring)}`);
+  assert.ok(Math.abs(off(through)) < 0.02, `with it, at z ${off(through)}`);
+  // A shift along the line of sight changes no column: both project to the same image.
+  const flat = render(discDensity(ring), 0), moved = render(discDensity(through), 0);
+  const worst = flat.plane.reduce((most, value, p) => Math.max(most, Math.abs(value - moved.plane[p]!)), 0), peak = flat.plane.reduce((most, value) => Math.max(most, value), 0);
+  assert.ok(worst < 0.02 * peak, `projection changed by ${worst} of ${peak}`);
 });
 
 test('a spherical shell is not drawn as a ring', () => {

@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "fomalhaut-disc",
+  "entries": [
+    {
+      "id": "dataset-dust",
+      "subject": "ALMA band 6 continuum of project 2015.1.00966.S, December 2015 and January 2016: the ARI-L image at the beam and in the color scale of MacGregor et al. (2017) Figure 1",
+      "status": "included",
+      "finding": "MacGregor et al. (2017) deposited no image, and the archive's own delivery for this member holds only primary-beam maps. The archive lists the ARI-L project's continuum image of the same seven executions (CASA 5.6.1-8, beam 1.284 x 0.940 arcsec, 0.19 arcsec pixels, primary-beam corrected). With the star (0.75 mJy) and the background galaxy (0.150 mJy) of the paper removed and the image smoothed to the paper's 1.56 x 1.15 arcsec beam, its noise is 12.6 microJy per beam in a 2 to 4.5 arcsec annulus against the paper's 14, and the level there is -18.3 microJy per beam. The ring holds 21.5 mJy between 0.75 and 1.25 of its long half-axis, 25.6 mJy with the level inside the ring taken off; the paper fits 24.7. Cut from the star along the paper's axes it peaks at 483 (north-west), 381 (south-east), 226 (north-east) and 222 (south-west) microJy per beam; the paper's Figure 5 cuts, read from the figure's PDF paths, peak at 0.2243, 0.2035, 0.1173 and 0.1140 mJy per square arcsecond, which times the beam's 2.033 square arcseconds is 456, 414, 238 and 232.",
+      "evidence": [
+        "https://arxiv.org/abs/1705.05867",
+        "https://almascience.nrao.edu/aq/?projectCode=2015.1.00966.S",
+        "https://almascience.org/alma-data/aril"
+      ]
+    },
+    {
+      "id": "color-scale",
+      "subject": "The color bar of MacGregor et al. (2017) Figure 1 against the panel beside it",
+      "status": "included",
+      "finding": "The bar is a 20 x 256 image in the figure's PDF, black to white through red and orange, with five labelled ticks from 0.0 to 0.8 mJy per beam evenly spaced end to end, so it is linear. The panel is a 521 x 521 JPEG. Read through the bar, the panel's ring peaks at 723 and 630 microJy per beam at its two ends and 339 to 398 on its sides: about 1.5 times the paper's own Figure 5 cuts and this image. The recipe follows the bar's labels, so the ring is drawn darker than the printed panel.",
+      "evidence": [
+        "https://arxiv.org/abs/1705.05867"
+      ]
+    },
+    {
+      "id": "ring-geometry-and-depth",
+      "subject": "How the ALMA image is given depth",
+      "status": "included",
+      "finding": "The ridge stands 14 to 38 times above the noise in every azimuth and is traced on the image: long half-axis 136.2 au, inclination 66.6 degrees, nodes at position angle 336.6 degrees, centre 14.4 au from the star (14.35 north, 0.67 west), against the paper's 136.3 au, 65.6 and 337.9 degrees. A disc of that geometry following the image's deprojected radial profile leaves a residual of 3.06e-5 Jy per beam, against 7.43e-5 for a spherical shell and 7.58e-5 for constant depth. Two things were added to the tool for this ring, each asked for by the recipe. The plane passes through the star, the focus of the orbits, which puts the off-centre ellipse's centre 11.7 au nearer than the star. And the image is cut by radius in the ring's plane, not on the sky: with the sky cut, columns far along the short axis cross the plane outside the 230 au cube and put 32% of each drawn column's depth weight on the cube's faces; with the plane cut, none.",
+      "evidence": [
+        "https://arxiv.org/abs/1705.05867"
+      ]
+    },
+    {
+      "id": "offset-against-the-orbit-fit",
+      "subject": "The ridge ellipse's centre against the paper's eccentric orbit fit",
+      "status": "included",
+      "finding": "The paper fits orbits about the star: forced eccentricity 0.12 +/- 0.01 and argument of periastron 22.5 +/- 4.3 degrees, which on its 136.3 au puts the centre 16.4 au from the star. The ridge ellipse measured here has its centre 14.4 au from the star, and its long axis meets the ridge 122 au from the star to the south-east and 150 au to the north-west. The drawn ring is that measured ellipse, not the paper's orbits.",
+      "evidence": [
+        "https://arxiv.org/abs/1705.05867"
+      ]
+    },
+    {
+      "id": "near-side",
+      "subject": "Which side of the belt is nearer",
+      "status": "included",
+      "finding": "East. Kalas et al. (2013) find the eastern half brighter in scattered starlight and take it as the side out of the sky plane, in the forward-scattering direction. They note that Le Bouquin et al. (2009), from the star's spin, tentatively put the western side nearer. The ALMA image cannot tell.",
+      "evidence": [
+        "https://arxiv.org/abs/1305.2222"
+      ]
+    },
+    {
+      "id": "thickness-literature",
+      "subject": "Is the belt's vertical thickness measured here?",
+      "status": "included",
+      "finding": "No. MacGregor et al. (2017) model a flat belt and cite Boley et al. (2012, ApJL 750, L21) for an opening angle of about 1 degree from the mid-plane; the drawn height is tan 1 degree = 0.0175 of the radius.",
+      "evidence": [
+        "https://arxiv.org/abs/1705.05867"
+      ]
+    },
+    {
+      "id": "jwst-inner-belts",
+      "subject": "JWST MIRI images of the inner belts (programme 1193; Gáspár et al. 2023, arXiv:2305.03789)",
+      "status": "deferred",
+      "finding": "The paper's images are PSF-subtracted by its authors, so the archive mosaics are not the published images. The authors' reduced images are on GitHub without a licence. Not built.",
+      "revisitWhen": "The authors' reduced images carry a licence, or the PSF subtraction is reproduced from the archive exposures.",
+      "evidence": [
+        "https://arxiv.org/abs/2305.03789",
+        "https://github.com/merope82/Fomalhaut"
+      ]
+    }
+  ]
+}

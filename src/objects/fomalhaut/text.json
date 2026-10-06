@@ -32,6 +32,19 @@
       "title": "Photosphere color",
       "detail": "From its spectrum",
       "summary": "The color of a measured spectrum of the star, from the ground. The darker edge is a model, not a measurement."
+    },
+    "dust-ring": {
+      "title": "Dust ring, 1.3 mm",
+      "detail": "ALMA, 2015 and 2016",
+      "summary": "The narrow dust belt in its own glow at 1.3 mm, its centre 14 au off the star. Its depth is the tilted ring that fits.",
+      "sources": [
+        {
+          "catalogueId": "source-fomalhaut-disc-dust-b6-cont",
+          "url": "https://almascience.nrao.edu/aq/?projectCode=2015.1.00966.S",
+          "label": "ALMA project 2015.1.00966.S, ARI-L continuum image",
+          "checked": "2026-10-06"
+        }
+      ]
     }
   }
 }
