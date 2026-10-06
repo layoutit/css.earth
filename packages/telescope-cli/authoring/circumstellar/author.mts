@@ -656,7 +656,7 @@ function edgeOnLimitations(datasets: readonly CircumstellarDataset[]) {
     'Nothing finer than an image\u2019s pixels or the grid\u2019s cells is in the drawn volume.',
     ...datasets.flatMap(dataset => dataset.beyondGrid ? [`${dataset.id}: ${dataset.beyondGrid}`] : []),
     ...datasets.flatMap(dataset => dataset.deposit ? [
-      `${dataset.id}: the ${dataset.deposit.instrument} image is the authors\u2019 own reduction (${dataset.deposit.title}), combined from observations made ${dataset.deposit.observed}, and carries no sky coordinates; its orientation is stated and checked, not read from a header. Close to the star its PSF subtraction leaves light off the disc too, which is drawn with the disc. It is one visible filter shown in grey, brightness only.`,
+      `${dataset.id}: the ${dataset.deposit.instrument} image is the authors\u2019 own reduction (${dataset.deposit.title}), combined from observations made ${dataset.deposit.observed}, and carries no sky coordinates; its orientation is stated and checked, not read from a header. Close to the star its PSF subtraction leaves light off the disc too, which is drawn with the disc. It is one visible filter shown in gray, brightness only.`,
     ] : dataset.hst ? [
       `${dataset.id}: the colors are the disc\u2019s contrast to the star in ${Object.keys(dataset.hst.products).map(filterOf).join(', ')}, blue, green and red, which the eye would see as its color against the star\u2019s: a white disc scatters like the star shines. The reference star\u2019s light was removed at the flux ratio the paper states, not at the scale that best cancels it here, and what that leaves near the star and along the occulting finger is drawn with the disc (${dataset.hst.subtraction}.psf-subtraction.json records the scale a free fit would choose).`,
     ] : [
@@ -831,7 +831,10 @@ export async function author(id: string, options: { sources?: readonly string[] 
     local(name, `Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json.`));
   const documents = [local('circumstellar.json', 'Object-owned recipe: the datasets, their pinned program and bands, the stated conventions and the published geometry each is checked against.'),
     ...recipe.datasets.flatMap(dataset => dataset.colorMap ? [local(dataset.colorMap.path, `The publisher's color map the ${dataset.id} dataset is shown in, read from the published figure as the file itself records (${dataset.colorMap.source}).`)] : []),
-    ...['delivery.json', 'presentation.json', 'provenance.json'].map(name => local(name, 'Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above.'))];
+    ...['delivery.json', 'presentation.json', 'provenance.json'].map(name => local(name, 'Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above.')),
+    // An edge-on dataset's depth is the lab's reconstruction; its record sits under source/ with the density it wrote, in name order.
+    ...built.flatMap(b => b.kind === 'edge-on' ? [b.dataset] : []).sort((a, b) => a.id < b.id ? -1 : 1).map(dataset => local(reconstructionPath(dataset),
+      `Object-owned record of the ${dataset.id} dataset reconstruction: the grid it solved on, the shown image it was fitted to and the settings that produced the density this package ships.`))];
   outputs.push(['manifest.json', Buffer.from(JSON.stringify({ schema: VOLUME_SOURCE_MANIFEST_SCHEMA, pathBase: 'repository', inputs, documents, generatedIntermediates: intermediates }, null, 2) + '\n')]);
   return { outputs, measured, root };
 }
