@@ -67,7 +67,7 @@ test("a host's other bank gives its billboard way to the bank selected for that 
   assert.deepEqual([shown('picture'), shown('gas'), shown('elsewhere')], [false, false, true], "the selected bank's slices stand for the cluster: neither of its billboards shows");
 });
 
-test("a bank's billboard, and the bank its host showed before a dataset pick, stay until the picked bank draws", async t => {
+test("a bank's billboard stays until the bank draws, and a bank that stands in is drawn as the detailed one is", async t => {
   decoding.add('picture').add('gas'); t.after(() => { decoding.clear(); });
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime(), billboard = { radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] };
@@ -78,23 +78,21 @@ test("a bank's billboard, and the bank its host showed before a dataset pick, st
     loadImageLayer: async id => ({ payload: { id, frame } }) as never, billboards: { plan, imageUrl: id => `/billboards/${id}.webp` } });
   const billboardShown = (id: string) => { const node = root.querySelector<HTMLElement>(`[data-dataset-billboard="${id}"]`)!; return node.style.display === 'block' && Number(node.style.opacity) > 0; };
   const bankShown = (id: string) => { const node = root.querySelector<HTMLElement>(`[data-image-layer-object="${id}"]`); return node !== null && node.style.display !== 'none'; };
-  const publish = (detailed: string) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
-    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, detailed);
+  const publish = (detailed: string, standIn?: string) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, detailed, undefined, [], undefined, standIn);
   publish('picture');
   await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
   publish('picture');
-  assert.deepEqual([bankShown('picture'), billboardShown('picture')], [true, true], 'mounted, its images still decoding: the billboard is all there is to see');
+  assert.deepEqual([bankShown('picture'), billboardShown('picture'), banks.drawing('picture')], [true, true, false], 'mounted, its images still decoding: the billboard is all there is to see');
   drawn.get('picture')!(); publish('picture');
-  assert.deepEqual([bankShown('picture'), billboardShown('picture')], [true, false], 'it draws: the billboard gives way');
-  // Another dataset of the same host is picked: its bank mounts and decodes behind the one on screen.
-  publish('gas');
+  assert.deepEqual([bankShown('picture'), billboardShown('picture'), banks.drawing('picture')], [true, false, true], 'it draws: the billboard gives way');
+  // Another dataset of the same host is picked: its bank mounts and decodes while the one drawn before stands in.
+  publish('gas', 'picture');
   await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '2'));
-  publish('gas');
-  assert.deepEqual([bankShown('picture'), bankShown('gas'), billboardShown('picture'), billboardShown('gas')], [true, true, false, false], 'the bank shown before the pick stands in');
-  drawn.get('gas')!();
-  assert.deepEqual([bankShown('picture'), bankShown('gas')], [false, true], 'it leaves in the write that shows the picked bank');
-  publish('gas');
-  assert.deepEqual([bankShown('picture'), bankShown('gas'), billboardShown('gas')], [false, true, false]);
+  publish('gas', 'picture');
+  assert.deepEqual([bankShown('picture'), bankShown('gas'), billboardShown('picture'), billboardShown('gas'), banks.drawing('gas')], [true, true, false, false, false], 'no billboard shows over the stand-in');
+  drawn.get('gas')!(); publish('gas');
+  assert.deepEqual([bankShown('picture'), bankShown('gas'), billboardShown('gas'), banks.drawing('gas')], [false, true, false, true], 'the picked bank draws: the stand-in is no longer asked for');
   lifetime.destroy();
 });
 

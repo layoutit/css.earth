@@ -22,7 +22,7 @@ import { mountEnvironmentLabels } from './environment-labels.js';
 
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import { createContextFocusBank } from './prepared-focus-bank.js';
-import { detailedFocusContextOpacity, samePlaceM, selectedBodyContextOpacity } from './detailed-focus-context.js';
+import { createDetailStandIn, detailedFocusContextOpacity, samePlaceM, selectedBodyContextOpacity } from './detailed-focus-context.js';
 import type { SelectedBank } from './detailed-focus-context.js';
 
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
@@ -259,6 +259,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const captionFlags = () => ({ overview: selectionPreview ? false : overview && !systemSelection, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
         // The bank the mounted scene's dataset shows as its companion: its subject, drawn whole while it is shown.
         let companion: string | null = null;
+        const detailStandIn = createDetailStandIn();
         // The banks that are a scene's whole subject: a galaxy's image layers, and a volume that is not attached to a body.
         const subjectBanks = new Set([...declaredImageLayers.map(bank => bank.id), ...declaredVolumes.filter((_, index) => !datasetFacts[index]!.attached).map(bank => bank.id)]);
         // Banks declared after this mount (`addBanks`) join its layers, and a free cloud becomes a subject as at mount.
@@ -424,14 +425,16 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               // the body's own system, over the band the stellar neighbourhood takes around the Sun. A body inside an object whose
               // picture lies on walls (a nebula's central star) stands inside those walls (`selectionHolders`).
               const insideGalaxy = catalogBanks.imageBankContaining(selected.positionM);
+              // The bank the subject drew before a dataset pick, drawn until the picked bank does.
+              const standIn = detailStandIn.of(detailedFocus?.objectId, selected.positionM, id => catalogBanks.drawing(id) || datasets.drawing(id));
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId, insideGalaxy === undefined || insideGalaxy === detailedFocus?.objectId ? undefined
-                : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) }, selectionHolders, selected.positionM as readonly [number, number, number]);
+                : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) }, selectionHolders, selected.positionM as readonly [number, number, number], standIn);
               // A bank of plain-dot stars dims like every marker outside a highlighted category and like every body outside
               // the focus star's system (the frame's `otherSystems`).
               catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem,
                 { inside: selectionHolders, look: () => ({ opacity: (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, hiddenAtM: starPlaces }) });
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
-                selectedBodyContextOpacity(world, viewport, captionBody));
+                selectedBodyContextOpacity(world, viewport, captionBody), standIn);
               for (const [index, shell] of shellLayers.entries()) {
                 shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
               }

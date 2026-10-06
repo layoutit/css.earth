@@ -10,6 +10,24 @@ export interface SelectedBank { readonly positionM: readonly [number, number, nu
 export const samePlaceM = (a: readonly number[], b: readonly number[]) => a.length === b.length
   && a.every((value, axis) => Math.abs(value - b[axis]!) <= Math.max(.001, 8 * Number.EPSILON * Math.abs(value)));
 
+/** What a subject draws stays until what replaces it can draw. A dataset picked for the subject is another bank, of
+ * pictures or of slices, and its images decode after the pick: the bank the subject drew before stands in for it until
+ * it draws. Recorded on an iPad, the Helix had nothing on screen for 0.4 s when its photograph was picked after a slice
+ * dataset, and the Ring for a grab at each pick (2026-10-06). `subject` is the selected body: no bank stands in for
+ * another body's. */
+export function createDetailStandIn() {
+  let drawn: string | undefined, subject: unknown;
+  return {
+    /** The bank to draw in the picked one's place, if any; `draws` answers for a bank of either kind. */
+    of(picked: string | undefined, selected: unknown, draws: (id: string) => boolean): string | undefined {
+      if (picked === undefined || selected !== subject) { drawn = undefined; subject = selected; }
+      if (picked === undefined) return undefined;
+      if (draws(picked)) { drawn = picked; return undefined; }
+      return drawn === picked ? undefined : drawn;
+    },
+  };
+}
+
 /** Presentation only: normal focus arrival is about 6.1 authored radii. */
 const HIDDEN_WITHIN_RADII = 8;
 const RESTORED_BY_RADII = 32;

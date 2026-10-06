@@ -36,6 +36,8 @@ interface DatasetBank {
   lastUsed: number;
   subscribers: number;
   enabled: boolean;
+  /** Whether the last publication drew its slices: shown, with the images its view demands decoded. */
+  drawn: boolean;
 }
 
 /** One stable record owns each declared bank through load, publication and eviction. */
@@ -60,7 +62,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     // A bank's own star points stay hidden unless a caller shows them.
     pendingSelection: undefined, pendingStarsVisible: false,
     framing: { frame: declared.frame, radiusUnits: volumeFramingRadiusUnits(declared.frame), visibility },
-    residentNodes: 0, visible: false, lastUsed: 0, subscribers: 0,
+    residentNodes: 0, visible: false, lastUsed: 0, subscribers: 0, drawn: false,
     enabled: !bankFacts.attached,
   });
   const banks: DatasetBank[] = declarations.map((declared, index) => record(declared, facts[index]!));
@@ -282,16 +284,22 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     /** While the camera coasts no bank mounts, shows or hides: a shown bank fades, the rest wait for the coast to stop
      * (motion-freezes-membership.md). */
     setCoasting(active: boolean) { coasting = active; billboards?.setCoasting(active); },
-    publish(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailContextOpacity: number, detailedObjectId?: string, bodyContextOpacity = 1) {
+    /** Whether the bank's slices are on screen (its last publication drew them). */
+    drawing(id: string): boolean { return byId.get(id)?.drawn === true; },
+    /** `standIn`: the bank drawn in the detailed one's place until that one draws (detailed-focus-context.ts), of either
+     * kind: it is drawn as the detailed bank is, and while one stands in the detailed bank's billboard stays out. */
+    publish(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailContextOpacity: number, detailedObjectId?: string, bodyContextOpacity = 1,
+      standIn?: string) {
       if (lifetime.disposed) return;
-      let residencyChanged = false;
+      let residencyChanged = false, drawingChanged = false;
       for (const bank of banks) {
         const { frame, radiusUnits, visibility } = bank.framing;
-        const presentationOpacity = bank.id === detailedObjectId ? 1
+        const detailed = bank.id === detailedObjectId || bank.id === standIn;
+        const presentationOpacity = detailed ? 1
           : detailContextOpacity * (bank.facts.attached ? 1 : bodyContextOpacity);
         const contextOpacity = bank.facts.contextVisibility === 'independent' ? 1 : volumeOpacity;
         // An attached volume shows with its host's dataset, and always as the page's own focus (M87 on /m87/).
-        const shown = bank.enabled || bank.id === detailedObjectId ? presentationOpacity * contextOpacity : 0;
+        const shown = bank.enabled || detailed ? presentationOpacity * contextOpacity : 0;
         const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
         const incoming = bank.id === detailedObjectId;
         const ready = texturesReady(bank, { world, viewport }, shown > 0 && (requestedOpacity > 0 || incoming), incoming);
@@ -299,10 +307,13 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         if (billboards && bank.billboardIndex >= 0) {
           // The billboard pictures the selected dataset; a dataset with no view of its own draws none.
           const billboardRadiusUnits = billboards.radiusUnits(bank.billboardIndex, bank.pendingSelection);
-          const billboardOpacity = billboardRadiusUnits === undefined ? 0
+          const covered = standIn !== undefined && bank.id === detailedObjectId && !ready;
+          const billboardOpacity = billboardRadiusUnits === undefined || covered ? 0
             : shown * projectedVolumeOpacity(world, viewport, frame, billboardRadiusUnits) * (ready ? 1 - opacity / Math.max(shown, Number.MIN_VALUE) : 1);
           billboards.publish(bank.billboardIndex, billboardOpacity, world, viewport, bank.pendingSelection);
         }
+        const drawn = bank.mounted !== null && Boolean(ready) && opacity > 0;
+        if (drawn !== bank.drawn) { bank.drawn = drawn; drawingChanged = true; }
         if (!bank.mounted) {
           const visible = requestedOpacity > 0 && projectVolumeSphere(world, viewport, frame, radiusUnits).visible;
           if (visible !== bank.visible) { bank.visible = visible; bank.lastUsed = ++useClock; residencyChanged = true; }
@@ -327,6 +338,8 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         if (visible && ready) for (const points of bank.points) points.publish({ world, viewport });
       }
       if (residencyChanged) trimWarmResidency();
+      // Who hands the picture over to a bank, or takes it back, learns that it draws with the camera still.
+      if (drawingChanged) requestPublication?.();
     },
   };
 }
