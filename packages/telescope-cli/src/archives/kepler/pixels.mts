@@ -39,11 +39,15 @@ export function parseObservations(body: unknown): Observation[] {
     return (mission === 'Kepler' || mission === 'K2') && Number(row.t_exptime) === LONG_CADENCE_SECONDS && typeof row.obs_id === 'string' && typeof row.target_name === 'string' && typeof row.s_ra === 'number' && typeof row.s_dec === 'number'
       ? [{ mission, target: row.target_name, id: row.obs_id, raDegrees: row.s_ra, decDegrees: row.s_dec, days: Number.isFinite(days) ? Number(days.toFixed(1)) : 0 }] : []; });
 }
-/** A K2 observation's one file, at the address the mission files it under: its campaign, then its target's number in two steps. */
+/** Campaigns the mission filed in two parts, each with its own files (`c101`, `c102`); the second part is read, which is the
+ * longer for campaigns 10 and 11 (48 days each against 6 and 23). */
+export const SPLIT_CAMPAIGNS: readonly number[] = [9, 10, 11];
+/** A K2 observation's one file, at the address the mission files it under: its campaign (the folder without a leading
+ * zero, the file name with it), then its target's number in two steps. */
 export function campaignFile(observation: Observation): PixelFile | undefined {
   const named = /^ktwo(\d{9})-c(\d+)_lc$/u.exec(observation.id); if (!named || observation.mission !== 'K2') return undefined;
-  const [, target, campaign] = named as unknown as [string, string, string], filename = `ktwo${target}-c${campaign}_lpd-targ.fits.gz`;
-  return { mission: 'K2', target: observation.target, window: Number(campaign), filename, days: observation.days, uri: `mast:K2/url/missions/k2/target_pixel_files/c${campaign}/${target.slice(0, 4)}00000/${target.slice(4, 6)}000/${filename}` };
+  const [, target, campaign] = named as unknown as [string, string, string], part = SPLIT_CAMPAIGNS.includes(Number(campaign)) ? `${Number(campaign)}2` : campaign, filename = `ktwo${target}-c${part}_lpd-targ.fits.gz`;
+  return { mission: 'K2', target: observation.target, window: Number(campaign), filename, days: observation.days, uri: `mast:K2/url/missions/k2/target_pixel_files/c${Number(part)}/${target.slice(0, 4)}00000/${target.slice(4, 6)}000/${filename}` };
 }
 /** Where a Kepler target's quarters are filed, and its files from that folder's listing: the observation's id flags the
  * quarters it has, 0 to 17, and the folder lists one file for each in the order of time. */

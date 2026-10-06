@@ -77,8 +77,12 @@ const KEPT_LIGHT = { csv: resolve(WORKSPACE, 'output/tess/gaia-neighbours.csv'),
 export const lightOf = (stars: readonly StarPlace[], keep = false, radiusArcsec: number = PIXELS.TESS.radiusArcsec) => pixelLight(stars.map(star => ({ id: star.id, ...placeAt(star, GAIA_EPOCH_YEAR) })), keep ? KEPT_LIGHT : undefined, radiusArcsec);
 /** A star's light counted at TESS's radius and at Kepler's; `null` where Gaia has no source at its place. */
 export interface StarLight { readonly wide: PixelLight | null; readonly near: PixelLight | null }
-/** The year Kepler and K2 targets are looked for at: between Kepler's field (2009 to 2013) and K2's campaigns (2014 to 2018). */
-const KEPLER_YEAR = 2014;
+/** The years Kepler and K2 targets are looked for at, beside the star's recorded place: between Kepler's field (2009 to 2013)
+ * and K2's campaigns (2014 to 2018), and 2000, the epoch of the surveys the missions' target lists took their places from
+ * (Kepler-42 moves 0.4 arcseconds a year and its target sits 7 arcseconds from where Gaia has it in 2016). */
+export const KEPLER_YEARS = [2014, 2000] as const;
+/** The places a star's Kepler or K2 target may be listed at. */
+export const targetPlaces = (star: StarPlace) => [star, ...KEPLER_YEARS.map(year => placeAt(star, year))];
 /** A window's name in a file: a TESS sector, a K2 campaign, a Kepler quarter. */
 export const windowStem = (id: string, mission: Mission, window: number) => `${id}-${mission === 'TESS' ? `s${String(window).padStart(4, '0')}` : mission === 'K2' ? `c${String(window).padStart(2, '0')}` : `q${String(window).padStart(2, '0')}`}`;
 
@@ -90,7 +94,7 @@ export async function reduceStar(id: string, keepPixels = false, light?: StarLig
   const run = resolve(WORKSPACE, 'output/tess', id), pixels = resolve(run, 'pixels'), pins = await toolchainPins(); await mkdir(run, { recursive: true });
   const near = light === undefined ? (await lightOf([star], false, PIXELS.Kepler.radiusArcsec)).get(id) : light.near ?? undefined, tried: Record<string, unknown>[] = [];
   // Kepler and K2 are asked only for a star their pixels could follow as its own.
-  const files = star.otherLight || lightRefusal(near, 'Kepler') ? [] : await pixelFilesAt([star, placeAt(star, KEPLER_YEAR)]), file = pickFile(files);
+  const files = star.otherLight || lightRefusal(near, 'Kepler') ? [] : await pixelFilesAt(targetPlaces(star)), file = pickFile(files);
   if (!file && earlier) { const kept = { ...earlier, pixelFiles: [] }; await writeFile(receiptPath(id), `${JSON.stringify(kept, null, 1)}\n`); return kept; }
   const mission: Mission = file ? file.mission : 'TESS', own = file ? near : light === undefined ? (await lightOf([star])).get(id) : light.wide ?? undefined, refusal = star.otherLight ?? lightRefusal(own, mission);
   let rotation: RotationVerdict = { detected: false, reason: refusal ?? 'TESS has not imaged this place.' }, seen: { window: number; time: readonly number[]; flux: readonly number[] } | undefined;

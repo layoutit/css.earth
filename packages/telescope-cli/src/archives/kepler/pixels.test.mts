@@ -13,6 +13,9 @@ test('MAST\'s answer for a place is read as the long-cadence pixel files of Kepl
   // A K2 campaign's file is at the address the mission files it under.
   assert.deepEqual(campaignFile(observations[1]!), { mission: 'K2', target: 'ktwo247589423', window: 13, filename: 'ktwo247589423-c13_lpd-targ.fits.gz', days: 80.6, uri: 'mast:K2/url/missions/k2/target_pixel_files/c13/247500000/89000/ktwo247589423-c13_lpd-targ.fits.gz' });
   assert.equal(campaignFile(observations[0]!), undefined);
+  // A one-digit campaign's folder has no leading zero; campaign 10 was filed in two parts, and the second is read.
+  assert.equal(campaignFile({ ...observations[1]!, id: 'ktwo201403360-c01_lc' })!.uri, 'mast:K2/url/missions/k2/target_pixel_files/c1/201400000/03000/ktwo201403360-c01_lpd-targ.fits.gz');
+  const split = campaignFile({ ...observations[1]!, id: 'ktwo201425594-c10_lc' })!; assert.deepEqual([split.window, split.uri], [10, 'mast:K2/url/missions/k2/target_pixel_files/c102/201400000/25000/ktwo201425594-c102_lpd-targ.fits.gz']);
   // A Kepler target's folder lists one file for each quarter its observation flags, in the order of time.
   assert.equal(quarterFolder('005772710'), 'https://archive.stsci.edu/missions/kepler/target_pixel_files/0057/005772710/');
   const stamps = ['2009131105131', '2009166043257', '2009259160929', '2009350155506', '2010265121752', '2010355172524', '2011073133259', '2011271113734', '2012004120508', '2012088054726', '2012277125453', '2013011073258', '2013098041711'];
