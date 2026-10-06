@@ -12,7 +12,6 @@
       "site/layouts"
     ],
     "cycleClosingEdges": [
-      {"from":"site(root)","to":"site/search","imports":8},
       {"from":"site(root)","to":"site/navigation","imports":6},
       {"from":"site(root)","to":"site/scene","imports":5},
       {"from":"site/shell","to":"site/scene","imports":2},
