@@ -3,18 +3,18 @@
  * `--update-baseline` never records one. */
 import { checkSourceRatchets } from './ratchets/source-ratchets.mts';
 import { checkAuthoringPolicies } from './ratchets/authoring-policy.mts';
-import { checkSiteBuildFormatReaders } from './site-build-format-readers.mts';
+import { checkSiteBuildFormatReaders } from './formats/site-build-format-readers.mts';
 import ts from 'typescript';
-import { checkBakeWithoutRenderer } from './bake-without-renderer.mts';
-import { checkFormatSchemaOwnership } from './format-schema-ownership.mts';
+import { checkBakeWithoutRenderer } from './dependencies/bake-without-renderer.mts';
+import { checkFormatSchemaOwnership } from './formats/format-schema-ownership.mts';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, posix, resolve } from 'node:path';
-import { declaredPackage, importedSpecifiers, checkDeclaredDependencies } from './declared-dependencies.mts';
+import { declaredPackage, importedSpecifiers, checkDeclaredDependencies } from './dependencies/declared-dependencies.mts';
 import { isTestPath } from './zones.mts';
-import { checkNebulaBoundaries } from './nebula-packages.mts';
-import { checkPackageCycles } from './package-cycles.mts';
-import { checkPreparationWithoutRenderer } from './preparation-without-renderer.mts';
-import { checkPreInstallImports } from './pre-install-imports.mts';
+import { checkNebulaBoundaries } from './nebula/nebula-packages.mts';
+import { checkPackageCycles } from './dependencies/package-cycles.mts';
+import { checkPreparationWithoutRenderer } from './dependencies/preparation-without-renderer.mts';
+import { checkPreInstallImports } from './dependencies/pre-install-imports.mts';
 import { checkSiteRootAllowlist } from './site-root-allowlist.mts';
 
 export interface RepositoryRule {

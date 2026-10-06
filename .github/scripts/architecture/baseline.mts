@@ -7,7 +7,7 @@
  * existing edges. */
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { cycleClosingEdges, folderCycles, folderGraph, layerOrder, type FolderEdge } from './folders.mts';
-import type { ImportGraph } from './graph.mts';
+import type { ImportGraph } from './import-graph/graph.mts';
 import { compareViolations, evaluateRules, LAYER_RULES, NO_BASELINE_RULES, type LayerRule, type Violation } from './rules.mts';
 import { byText, zoneOf } from './zones.mts';
 

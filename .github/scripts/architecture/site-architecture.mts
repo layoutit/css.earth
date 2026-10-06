@@ -2,11 +2,11 @@
 import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readImportDeclarations } from './import-declarations.mts';
-import { repositoryFiles, type ImportGraph } from './graph.mts';
-import { project, editList, type ProjectionInput } from './projection.mts';
-import { sequence, minimality } from './plan-proofs.mts';
-import { references, liveReferences, coveringReferences, compactReferences } from './plan-references.mts';
+import { readImportDeclarations } from './site-plan/import-declarations.mts';
+import { repositoryFiles, type ImportGraph } from './import-graph/graph.mts';
+import { project, editList, type ProjectionInput } from './site-plan/projection.mts';
+import { sequence, minimality } from './site-plan/plan-proofs.mts';
+import { references, liveReferences, coveringReferences, compactReferences } from './site-plan/plan-references.mts';
 import { byText, isTestPath } from './zones.mts';
 
 const DOC = 'docs/site-architecture.md';

@@ -25,7 +25,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     console.error('The architecture check needs the shared packages built: run `pnpm build:core` (or `pnpm install`) first.');
     process.exitCode = 2;
   } else {
-    const [{ check, map }, { IncompleteGraphError }] = await Promise.all([import('./report.mts'), import('./graph.mts')]);
+    const [{ check, map }, { IncompleteGraphError }] = await Promise.all([import('./report.mts'), import('./import-graph/graph.mts')]);
     try {
       if (command === 'map') await map(root);
       else if (!await check(root, update)) process.exitCode = 1;

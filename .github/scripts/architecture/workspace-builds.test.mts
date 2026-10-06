@@ -44,7 +44,7 @@ test('mixed source and built exports retain their own bundling policy', () => {
 });
 
 test('CLI-only workspace dependencies are dev dependencies without losing build order', async () => {
-  const { declaredPackage, undeclaredImports } = await import('./declared-dependencies.mts');
+  const { declaredPackage, undeclaredImports } = await import('./dependencies/declared-dependencies.mts');
   const astronomy = declaredPackage('packages/astronomy/package.json', { name: '@cssearth/astronomy', devDependencies: { '@cssearth/objects': 'workspace:*' } }, true);
   const objects = declaredPackage('packages/objects/package.json', { name: '@cssearth/objects' }, true);
   const code = "import { readObject } from '@cssearth/objects';";

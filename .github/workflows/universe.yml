@@ -188,7 +188,7 @@ jobs:
       - name: Check live references to retired paths
         run: node .github/scripts/checks/check-stale-references.mts
       - name: Mutation-check architecture rules
-        run: node --test .github/scripts/architecture/*.test.mts .github/scripts/architecture/ratchets/*.test.mts
+        run: node --test .github/scripts/architecture/*.test.mts .github/scripts/architecture/*/*.test.mts
       - name: Check the architecture against its baseline
         # Fails when a change adds a folder-cycle edge or a forbidden import (.github/scripts/architecture/rules.mts) that
         # .github/scripts/architecture/baseline.json does not record, or breaks a repository rule (repository-rules.mts:

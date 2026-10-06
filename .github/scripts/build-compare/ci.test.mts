@@ -109,7 +109,7 @@ test('report mode head toolchain mismatch skips without swallowing other failure
   for (const [mode, label, failure] of [['semantic', 'head', '{}'], ['report', 'base', '{}'], ['report', 'head', undefined]] as const) assert.equal(skipToolchain(mode, label, failure), false);
 });
 test('asset restore substitution fails loudly if the production recipe changes', () => {
-  assert.equal(comparisonPreparation({ scripts: { 'build:deploy': 'pnpm build:packages && pnpm setup:asset-data && astro build' } }), 'pnpm build:packages && node .github/scripts/build-compare/restore-preparation.mts --checkout .');
+  assert.equal(comparisonPreparation({ scripts: { 'build:deploy': 'pnpm build:packages && pnpm setup:asset-data && astro build' } }), 'pnpm build:packages && node .github/scripts/build-compare/preparation/restore-preparation.mts --checkout .');
   for (const restore of ['pnpm setup:assets', 'pnpm setup:asset-data --location=all', 'pnpm setup:asset-data && pnpm setup:asset-data']) assert.throws(() => comparisonPreparation({ scripts: { 'build:deploy': `pnpm a && ${restore} && astro build` } }), /exactly one standalone/u);
 });
 test('semantic output declarations validate reasons and layout', () => {
