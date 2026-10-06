@@ -1,6 +1,6 @@
 /** The short provider index each page's "Sources" link shows and the rows its Sources tab lists, computed once from the prepared source usage when the catalogue
  * is written (site/build/prepare/prepare-facilities.mts). The site reads this file instead of the whole catalogue: with batch 1 of the exoplanets
- * (2026-09-29) `site/prepared-sources.json` reached 41 MB, and importing it put the dev server and the site typecheck past 4 GB.
+ * (2026-09-29) `site/prepared/prepared-sources.json` reached 41 MB, and importing it put the dev server and the site typecheck past 4 GB.
  * The complete author and institutional credits stay in each body's README, which the link opens. */
 import { isRecord } from '@cssearth/core';
 import type { SourceKind, SourceRecord, SourceResolver } from '../sources/catalog.js';

@@ -42,7 +42,7 @@ async function checkout(records: { scenes?: PreparedCatalogueRow[]; focuses?: un
     await mkdir(join(root, 'src/objects', id), { recursive: true });
     await writeFile(join(root, 'src/objects', id, 'object.json'), JSON.stringify(descriptor(id, order, classification, 'milky-way')));
   }
-  await mkdir(join(root, 'site'));
+  await mkdir(join(root, 'site/prepared'), { recursive: true });
   // The catalogue order is the order prepare:catalog wrote, not the alphabetical one.
   await writeFile(join(root, PREPARED_CATALOGUE.entries), records.module ??
     preparedCatalogueModule([...records.scenes ?? scenes, ...records.focuses ?? [focus], ...records.insides ?? insides] as PreparedCatalogueRow[]));

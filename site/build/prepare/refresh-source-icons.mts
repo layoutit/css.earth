@@ -57,7 +57,7 @@ async function siteIcon(host: string): Promise<SourceIcon> {
   return { sourceUrl: `https://${host}/` };
 }
 
-const credits = parseSourceCredits(JSON.parse(await readFile(resolve(root, 'site/prepared-source-credits.json'), 'utf8')));
+const credits = parseSourceCredits(JSON.parse(await readFile(resolve(root, 'site/prepared/prepared-source-credits.json'), 'utf8')));
 const all = process.argv.includes('--all'), retry = all || process.argv.includes('--retry');
 const recorded = parseSourceIcons(JSON.parse(await readFile(recordPath, 'utf8').catch(() => '{}')));
 // --all keeps each recorded address, which may be a correction, and asks it again.

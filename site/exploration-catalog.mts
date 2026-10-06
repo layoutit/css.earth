@@ -1,4 +1,4 @@
-import input from './prepared-facilities.json' with { type: 'json' };
+import input from './prepared/prepared-facilities.json' with { type: 'json' };
 import { parsePreparedExploration } from '@cssearth/objects/provenance';
 import { DATASET_ROUTES } from '@cssearth/objects/provenance';
 

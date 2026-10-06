@@ -270,35 +270,35 @@ src/objects/*/source/**/*.bpc
 !src/objects/moon/source/science/diviner-ghrm/tbol_m-compact.tif
 
 # Combined catalogues and navigation are rebuilt from individual body records.
-/site/prepared-sources.json
-/site/prepared-source-credits.json
-/site/prepared-facilities.json
-/site/prepared-catalogue.mjs
-/site/prepared-overview-objects.json
-/site/prepared-dataset-volumes.json
-/site/prepared-dot-catalogues.json
-/site/prepared-stellar-extents.json
-/site/prepared-fit-boxes.json
-/site/prepared-context-objects.mts
-/site/prepared-context-bank-assets.json
-/site/prepared-hosted-banks.json
-/site/prepared-context-json.mts
-/site/prepared-feature-index.json
-/site/prepared-dataset-billboards.json
+/site/prepared/prepared-sources.json
+/site/prepared/prepared-source-credits.json
+/site/prepared/prepared-facilities.json
+/site/prepared/prepared-catalogue.mjs
+/site/prepared/prepared-overview-objects.json
+/site/prepared/prepared-dataset-volumes.json
+/site/prepared/prepared-dot-catalogues.json
+/site/prepared/prepared-stellar-extents.json
+/site/prepared/prepared-fit-boxes.json
+/site/prepared/prepared-context-objects.mts
+/site/prepared/prepared-context-bank-assets.json
+/site/prepared/prepared-hosted-banks.json
+/site/prepared/prepared-context-json.mts
+/site/prepared/prepared-feature-index.json
+/site/prepared/prepared-dataset-billboards.json
 /public/navigation/dataset-billboards/
 /public/navigation/dataset-sprites/
 /public/features/
 /packages/astronomy/src/data/generated/
-/site/prepared-navigation-markers.mjs
+/site/prepared/prepared-navigation-markers.mjs
 /src/platform/solar-geometry.mts
-/site/moon-labels.prepared.json
+/site/prepared/moon-labels.prepared.json
 
 # AKARI AcuA v1: restored and verified from each body source manifest.
 /src/objects/*/source/reference/AcuA_V1.txt.gz
 
 # Shared shell outputs, replayed by pnpm prepare:shell from pinned fonts and vectors.
-/site/prepared-shell-icons.mjs
-/site/prepared-shell-titles.mjs
+/site/prepared/prepared-shell-icons.mjs
+/site/prepared/prepared-shell-titles.mjs
 
 # Large source inputs with pinned archive downloads; `pnpm prepare:checkout` (or
 # `node packages/bake/cli/object-operations.mts acquire <id>`) restores and verifies them.
@@ -355,7 +355,7 @@ src/objects/*/source/**/*.bpc
 
 # Small expected-output receipt supports offline source recovery.
 
-/site/prepared-world-presentation.json
+/site/prepared/prepared-world-presentation.json
 
 # Solar System source products restored from their manifest origins or source-cache.
 /src/objects/mars/source/geology/SIM3292_Global_Geology.shp

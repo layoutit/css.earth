@@ -10,8 +10,8 @@ import { parsePreparedSources, parsePreparedExploration, parseExplorationImage, 
  * routes, which validate the prepared facilities and sources. */
 export async function prepareArtworkRefresh(root: string, before: Buffer, after: Buffer, images: ReadonlyMap<string, Buffer>, routes: DatasetRoutes) {
   const previous = requireRecord(JSON.parse(before.toString())), next = requireRecord(JSON.parse(after.toString()));
-  const facilities = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared-facilities.json'), 'utf8')));
-  const sources = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared-sources.json'), 'utf8')));
+  const facilities = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared/prepared-facilities.json'), 'utf8')));
+  const sources = requireRecord(JSON.parse(await readFile(resolve(root, 'site/prepared/prepared-sources.json'), 'utf8')));
   const validatedSources = parsePreparedSources(sources, routes), validatedFacilities = parsePreparedExploration(facilities, validatedSources.sources, routes);
   const previousEntries = requireArray(previous.entries).map(value => requireRecord(value));
   const nextEntries = requireArray(next.entries).map(value => requireRecord(value));
@@ -33,6 +33,6 @@ export async function prepareArtworkRefresh(root: string, before: Buffer, after:
   }
   facilities.images = prepared;
   parsePreparedExploration(facilities, validatedSources.sources, routes); parsePreparedSources(sources, routes);
-  return [{ path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(facilities, null, 2) + '\n' },
-    { path: resolve(root, 'site/prepared-sources.json'), text: JSON.stringify(sources, null, 2) + '\n' }];
+  return [{ path: resolve(root, 'site/prepared/prepared-facilities.json'), text: JSON.stringify(facilities, null, 2) + '\n' },
+    { path: resolve(root, 'site/prepared/prepared-sources.json'), text: JSON.stringify(sources, null, 2) + '\n' }];
 }

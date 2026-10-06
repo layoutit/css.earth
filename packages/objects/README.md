@@ -16,7 +16,7 @@ entry of the prepared catalogue, as the registry and a page's object directory b
 reads, `contextColor()` picks a body's world-context color, and `validateWorldRotation()` checks a rotation. The host
 binds `loadScene` to its own scene type; the site's client build compiles these modules from source, one module each.
 Preparation reads the same registry through `readPreparedObjects(root)` in `@cssearth/objects/node`: it decodes the
-prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`: `site/prepared-catalogue.mjs`, every scene object's
+prepared catalogue `prepare:catalog` writes (`PREPARED_CATALOGUE`: `site/prepared/prepared-catalogue.mjs`, every scene object's
 descriptor with its distance and discovery and every prepared focus in registry order, written by
 `preparedCatalogueModule()`) with these contracts and binds a `loadScene` that refuses to mount, so a preparer that lists objects through it does not import the application. A site
 test (run in the universe runtime lane) holds both reads equal.

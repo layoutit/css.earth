@@ -45,7 +45,7 @@ mock.module(new URL('./application-world-frames.mts', import.meta.url).href, { n
 mock.module(new URL('./application-world-visibility.mts', import.meta.url).href, { namedExports: { worldVisibilityPolicy: { minorMoonIds: [] },
   createApplicationWorldVisibility: () => ({ selectObject: (id: string) => effects.push(['visibility-select', id]), setSurrounding: (ids: readonly string[]) => effects.push(['surrounding', ids]), setIllustrationModelsEnabled() {}, setHighlightedClassification() {} }) } });
 // One holder's picture lies on walls: the bank of 'known' says so.
-mock.module(new URL('./prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: { 'known-layers': { properties: { surrounds: true, host: 'known' } }, 'outer-layers': { properties: { host: 'mars-parent' } } } } });
+mock.module(new URL('./prepared/prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: { 'known-layers': { properties: { surrounds: true, host: 'known' } }, 'outer-layers': { properties: { host: 'mars-parent' } } } } });
 mock.module(new URL('./object-directory.mts', import.meta.url).href, { namedExports: { knownAncestors: (...args: unknown[]) => { effects.push(['known-ancestors', ...args]); return [{ id: 'known' }]; }, ancestorIds: (...args: unknown[]) => { effects.push(['ancestor-ids', ...args]); return ancestorResult; } } });
 mock.module(new URL('./world/context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: {} } });
 mock.module(new URL('./browser/diagnostics-policy.mts', import.meta.url).href, { namedExports: { DIAGNOSTICS_ENABLED: true } });

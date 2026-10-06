@@ -6,7 +6,7 @@ const input = { schema: 'cssearth-world-presentation@6', moons: { major: ['moon'
   clusters: { fadeStartDistanceM: 7, fullDistanceM: 8 }, categoryFrames: { planet: { centreM: [0, 0, 0], minimumM: [-1, -2, -3], maximumM: [1, 2, 3] } },
 };
 test('prepared world import validates ids, distances, boxes and ordered corners', () => {
-  const subject = new URL('./prepared-world-presentation.mts', import.meta.url), dependency = new URL('./prepared-world-presentation.json', import.meta.url);
+  const subject = new URL('./prepared-world-presentation.mts', import.meta.url), dependency = new URL('./prepared/prepared-world-presentation.json', import.meta.url);
   const valid = importWithJson(subject, dependency, input, `
 const value = loaded.PREPARED_WORLD_PRESENTATION;
 console.log(JSON.stringify({ ...value, categoryFrames: [...value.categoryFrames], frozenIds: [value.moons.major, value.moons.minor, value.defaultFeatureIds, value.orbitFeatureIds, value.hiddenOrbitIds].map(Object.isFrozen) }));
@@ -34,7 +34,7 @@ console.log(JSON.stringify({ ...value, categoryFrames: [...value.categoryFrames]
 
 test('equal category bounds are valid and optional member, host and holder ids are checked', () => {
   const subject = new URL('./prepared-world-presentation.mts', import.meta.url);
-  const dependency = new URL('./prepared-world-presentation.json', import.meta.url);
+  const dependency = new URL('./prepared/prepared-world-presentation.json', import.meta.url);
   const frame = { centreM: [1, 2, 3], minimumM: [1, 2, 3], maximumM: [1, 2, 3], memberIds: ['moon'], hostIds: ['planet'], holderIds: ['system'] };
   const result = importWithJson(subject, dependency, { ...input, categoryFrames: { planet: frame } });
   assert.equal(result.status, 0, result.stderr);

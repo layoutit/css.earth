@@ -9,7 +9,7 @@ import { readFileSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import majorMoons from '../../source/major-moons.json' with { type: 'json' };
-import catalogueIds from '../../prepared-dot-catalogues.json' with { type: 'json' };
+import catalogueIds from '../../prepared/prepared-dot-catalogues.json' with { type: 'json' };
 import { discoveryVisibility, type ObjectDiscovery } from '@cssearth/objects';
 import { WORLD_OBJECTS } from '../../world-objects.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
@@ -21,13 +21,13 @@ import { isExtremeTransNeptunian } from '@cssearth/astronomy';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
-const output = resolve(import.meta.dirname, '../../prepared-world-presentation.json');
+const output = resolve(import.meta.dirname, '../../prepared/prepared-world-presentation.json');
 
 /** A dot layer's presentation record, with the distances named in `fields`. Its catalogue is the one context object of its
  * type (prepare-catalog.mts dotCatalogueIds), so no catalogue is named here. */
 function layerPresentation<Field extends string>(layer: 'galaxies' | 'clusters', fields: readonly Field[]): Record<Field, number> {
   const id: unknown = (catalogueIds as Record<string, unknown>)[layer];
-  if (typeof id !== 'string') throw new TypeError(`site/prepared-dot-catalogues.json names no catalogue for the ${layer} dot layer. Run pnpm prepare:catalog.`);
+  if (typeof id !== 'string') throw new TypeError(`site/prepared/prepared-dot-catalogues.json names no catalogue for the ${layer} dot layer. Run pnpm prepare:catalog.`);
   const path = `src/objects/${id}/source/presentation.json`;
   return readCataloguePresentationDistances(JSON.parse(readFileSync(resolve(import.meta.dirname, '../../..', path), 'utf8')), fields);
 }
@@ -160,7 +160,7 @@ export function prepareWorldPresentation() {
   };
 }
 
-/** Write site/prepared-world-presentation.json, leaving an unchanged file untouched. */
+/** Write site/prepared/prepared-world-presentation.json, leaving an unchanged file untouched. */
 export async function writeWorldPresentation() {
   const text = `${JSON.stringify(prepareWorldPresentation())}\n`;
   await mkdir(dirname(output), { recursive: true });

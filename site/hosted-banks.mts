@@ -1,5 +1,5 @@
 import { isRecord } from '@cssearth/core';
-import records from './prepared-hosted-banks.json' with { type: 'json' };
+import records from './prepared/prepared-hosted-banks.json' with { type: 'json' };
 
 /** A bank the world draws only for the bodies that hold it (prepare-catalog.mts `readHostedContextBanks`), as an object
  * entry carries it: its descriptor, and its files when it has no list of its own (`/world/context-assets/<id>.json`). */
@@ -7,7 +7,7 @@ export interface HostedBank { readonly descriptor: unknown; readonly files?: Rea
 interface HostedBankRecord extends HostedBank { readonly carriers: readonly string[] }
 
 function parseRecords(value: unknown): ReadonlyMap<string, HostedBankRecord> {
-  const path = 'site/prepared-hosted-banks.json';
+  const path = 'site/prepared/prepared-hosted-banks.json';
   if (!isRecord(value)) throw new TypeError(`${path}: expected banks by id; run pnpm prepare:catalog.`);
   return new Map(Object.entries(value).map(([id, record]) => {
     if (!isRecord(record) || !Array.isArray(record.carriers) || !record.carriers.every(carrier => typeof carrier === 'string')

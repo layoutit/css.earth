@@ -95,7 +95,7 @@ test('independent asteroid, moon and comet branches merge without changing exist
   git('config', 'user.email', 'test@example.invalid');
   git('config', 'commit.gpgsign', 'false');
   git('config', 'core.hooksPath', '/dev/null');
-  await write(resolve(root, '.gitignore'), '/site/prepared-catalogue.mjs\n/site/prepared-overview-objects.json\n/site/prepared-context-objects.mts\n/packages/astronomy/src/data/generated/\n');
+  await write(resolve(root, '.gitignore'), '/site/prepared/prepared-catalogue.mjs\n/site/prepared/prepared-overview-objects.json\n/site/prepared/prepared-context-objects.mts\n/packages/astronomy/src/data/generated/\n');
   await mkdir(resolve(root, 'packages/astronomy/data/fixtures'), { recursive: true });
   await addBody(root, 'sun', 'star');
   await addBody(root, 'existing-body', 'asteroid');

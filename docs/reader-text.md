@@ -130,7 +130,7 @@ Warnings are for the reviewer and never block:
 - a card or introduction that another body shares;
 - repetition between blocks shown together: the introduction, one dataset
   summary and the mission, facility and note cards beside it. This check reads
-  `site/prepared-facilities.json`, so run
+  `site/prepared/prepared-facilities.json`, so run
   `node site/build/prepare/prepare-facilities.mts --catalog-only` first.
 
 `site/build/prepare/prepare-text.test.mts` runs the check on every registered body.
