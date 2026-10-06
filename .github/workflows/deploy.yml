@@ -12,7 +12,7 @@ on:
         options: [cloudflare, netlify]
         default: cloudflare
       bundle_textures:
-        description: Bundle public/scenes into the deploy instead of serving it from R2 (rollback switch)
+        description: Bundle site/public/scenes into the deploy instead of serving it from R2 (rollback switch)
         type: boolean
         default: false
 
@@ -58,7 +58,7 @@ jobs:
             [ -n "$CLOUDFLARE_API_TOKEN" ] || missing CLOUDFLARE_API_TOKEN "a Cloudflare API token from the Edit Cloudflare Workers template"
             [ -n "$CLOUDFLARE_ACCOUNT_ID" ] || missing CLOUDFLARE_ACCOUNT_ID "the Cloudflare account id"
             if [ "$BUNDLE_TEXTURES" = "true" ]; then
-              echo "::error::bundle_textures is Netlify's rollback: a Worker's static assets cannot hold public/scenes. Dispatch with host netlify to use it."
+              echo "::error::bundle_textures is Netlify's rollback: a Worker's static assets cannot hold site/public/scenes. Dispatch with host netlify to use it."
               exit 1
             fi
           else
@@ -72,7 +72,7 @@ jobs:
         # R2 closure. Its catalog-only preparation does not publish preview bytes or rewrite asset inventories;
         # those authoring outputs must be published explicitly before a deploy is allowed to reference them.
         # ASSET_ORIGIN points every texture, scene JSON and startup preload at the published R2
-        # bucket instead of bundling public/scenes (1.44 GB) into the deploy; astro.config.mts
+        # bucket instead of bundling site/public/scenes (1.44 GB) into the deploy; astro.config.mts
         # removes dist/scenes once the build finishes and the assemble step tolerates its absence.
         # Publication proof: with no restored cache, the build's first setup downloads every inventoried key from that
         # R2 origin and checks its bytes against the inventory's content address (about 30 s for 19,954 keys); a key R2 does not serve fails the
@@ -82,7 +82,7 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=6144
           # The deploy imports the packages' JavaScript only; their type declarations were most of build:packages.
           CSSEARTH_SKIP_DECLARATIONS: '1'
-          # Default: textures and scene JSON resolve to R2, so the deploy ships no public/scenes copy.
+          # Default: textures and scene JSON resolve to R2, so the deploy ships no site/public/scenes copy.
           # This cannot be a dispatch input that defaults on, because the automatic workflow_run path has
           # no inputs at all and shares the `production-deploy` concurrency group with cancel-in-progress:
           # a green main would cancel a hand-dispatched R2 deploy and publish the bundled build instead.

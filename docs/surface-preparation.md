@@ -800,7 +800,7 @@ body's new prepared data served in place of the published one.
 The sheet and the flood-lit frame of an opaque sphere lit by the Sun with no
 atmosphere do not depend on the body. Such a law is a bank named once in
 [lighting-banks.ts](../packages/bake/src/raster/lighting-banks.ts) and baked once
-into `public/lighting/<bank>/` (tracked, like the navigation atlases) by
+into `site/public/lighting/<bank>/` (tracked, like the navigation atlases) by
 `node packages/bake/cli/prepare-lighting-bank.mts`. A body's raster recipe names
 it, `"lighting": { "bank": "sphere", "presentationSize": 460 }`; the parser fills
 the bank's law in, and the bake copies the bank's two files into the body's scene

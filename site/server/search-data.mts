@@ -17,12 +17,12 @@ export interface SearchData {
 const root = () => projectRoot(import.meta.url);
 const jsonAt = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
 
-/** The feature index and places catalogues from `public/`. The deployed functions carry these files (netlify.toml
+/** The feature index and places catalogues from `site/public/`. The deployed functions carry these files (netlify.toml
  * `included_files`): reading them over HTTP from the site and the asset bucket made a new instance's first search take
  * 3 to 4.5 s, from disk about 80 ms. */
 export const readPublicFile: ReadPrepared = async path => {
   if (!/^\/[a-z0-9][a-z0-9/_.-]*\.json$/u.test(path) || path.includes('..')) throw new TypeError(`Prepared search file path is invalid: ${path}.`);
-  return jsonAt(resolve(root(), 'public', path.slice(1)));
+  return jsonAt(resolve(root(), 'site/public', path.slice(1)));
 };
 
 /** The object catalogue the build wrote (`pages/catalogue/index.json.ts`), for the deployed functions and a static

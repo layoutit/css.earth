@@ -49,7 +49,7 @@ for (const id of ids) {
       const inventory = await readInventory(id, resolve(projectRoot, 'src/objects', id));
       for (const asset of records(receipt.changedAssets)) {
         const filename = requireString(asset.filename), row = inventory?.assets.find(entry => entry.location === 'public' && entry.filename === filename);
-        if (!row || sha256(await readFile(resolve(projectRoot, 'public/scenes', id, filename))) !== row.sha256)
+        if (!row || sha256(await readFile(resolve(projectRoot, 'site/public/scenes', id, filename))) !== row.sha256)
           throw new Error(`Refreshed asset changed before resume: ${id}/${filename}.`);
       }
       continue;

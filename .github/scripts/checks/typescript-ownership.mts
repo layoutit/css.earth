@@ -161,9 +161,9 @@ function resolveLocalImports(root: string, from: string, specifier: string, file
     targets = validPath(target) ? [target] : [];
   } else if (pathname.startsWith('/') && !pathname.startsWith('//')) {
     const target = posix.normalize(pathname).slice(1);
-    // Astro's configured root is this repository and publicDir is ./public.
+    // Astro's configured root is this repository and publicDir is ./site/public.
     // Check both local URL owners, including public scripts loaded by src.
-    targets = [target, posix.join('public', target)];
+    targets = [target, posix.join('site/public', target)];
   } else if (pathname.startsWith('.')) {
     targets = [posix.normalize(posix.join(posix.dirname(from), pathname))];
   } else return [];

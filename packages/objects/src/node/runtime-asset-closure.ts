@@ -8,7 +8,7 @@ import { promisify } from "node:util";
 
 /**
  * One inventory per object, `src/objects/<id>/inventory.json`: every baked file the object ships that git does not
- * hold, with the bytes and hash R2 serves it under. A `public` asset lives at `public/scenes/<id>/<filename>`; a
+ * hold, with the bytes and hash R2 serves it under. A `public` asset lives at `site/public/scenes/<id>/<filename>`; a
  * `prepared` asset lives at `src/objects/<id>/prepared/<filename>` and may be nested. The inventory is the only
  * thing a bake commits; `setup:assets` restores from it and `publish:runtime-assets` uploads from it. The R2 key
  * is `runtime-assets/<sha256>/<filename>`, whichever location the file has.

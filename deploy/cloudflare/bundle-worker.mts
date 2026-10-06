@@ -73,7 +73,7 @@ if (external.length) {
 
 // What the handlers read from the built site that the build does not publish there.
 const staged: string[] = [];
-const scenes = resolve(root, 'public/scenes');
+const scenes = resolve(root, 'site/public/scenes');
 for (const id of await readdir(scenes)) {
   const names = await readdir(resolve(scenes, id)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOTDIR')) return []; throw error; });
   for (const name of names.filter(name => name.endsWith('-places.json'))) {

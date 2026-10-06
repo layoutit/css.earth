@@ -1,17 +1,13 @@
 {
-  "mode": "pure-move",
+  "mode": "semantic",
   "moves": {
-    "evidence/distant-worlds/outer-worlds/worlds.webp": "docs/evidence/distant-worlds/outer-worlds/worlds.webp",
-    "evidence/extreme-tnos/solar-system-map.webp": "docs/evidence/extreme-tnos/solar-system-map.webp",
-    "evidence/ui/sidebar-and-system-cards-2026-09-30/earth-dataset-rows.png": "docs/evidence/ui/sidebar-and-system-cards-2026-09-30/earth-dataset-rows.png",
-    "evidence/ui/sidebar-and-system-cards-2026-09-30/jupiter-system.png": "docs/evidence/ui/sidebar-and-system-cards-2026-09-30/jupiter-system.png",
-    "evidence/ui/sidebar-and-system-cards-2026-09-30/mercury-detail.png": "docs/evidence/ui/sidebar-and-system-cards-2026-09-30/mercury-detail.png",
-    "evidence/ui/sidebar-and-system-cards-2026-09-30/milky-way-bodies.png": "docs/evidence/ui/sidebar-and-system-cards-2026-09-30/milky-way-bodies.png",
-    "evidence/ui/sidebar-and-system-cards-2026-09-30/receipt.json": "docs/evidence/ui/sidebar-and-system-cards-2026-09-30/receipt.json",
-    "evidence/ui/sidebar-and-system-cards-2026-09-30/saturn-system.png": "docs/evidence/ui/sidebar-and-system-cards-2026-09-30/saturn-system.png",
-    "evidence/ui/sidebar-and-system-cards-2026-09-30/solar-system-desktop.png": "docs/evidence/ui/sidebar-and-system-cards-2026-09-30/solar-system-desktop.png",
-    "evidence/ui/sidebar-and-system-cards-2026-09-30/solar-system-mobile.png": "docs/evidence/ui/sidebar-and-system-cards-2026-09-30/solar-system-mobile.png",
-    "evidence/ui/sidebar-and-system-cards-2026-09-30/solar-system-tablet.png": "docs/evidence/ui/sidebar-and-system-cards-2026-09-30/solar-system-tablet.png"
+    "public/navigation/sidebar-thumbnails.json": "site/public/navigation/sidebar-thumbnails.json"
   },
-  "change": "Plan 8 R3: move the images docs display from evidence/ into docs/evidence/"
+  "outputs": [
+    {
+      "glob": "navigation/sidebar-thumbnails.json",
+      "reason": "The receipt names its preview inputs by repository path, which is now site/public/scenes/... instead of public/scenes/..."
+    }
+  ],
+  "change": "Plan 8 R3: move Astro's public directory from public/ into site/public/"
 }

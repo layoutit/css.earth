@@ -11,7 +11,7 @@ const SVG_ROOT = /<svg\b[^>]*\bwidth="([0-9.]+)"[^>]*\bheight="([0-9.]+)"[^>]*\b
 
 export async function prepareShellIcons({
   sourceRoot = resolve(import.meta.dirname, "../../source/icons"),
-  publicRoot = resolve(import.meta.dirname, "../../../public/shell"),
+  publicRoot = resolve(import.meta.dirname, "../../public/shell"),
   moduleOutput = resolve(import.meta.dirname, "../../prepared/prepared-shell-icons.mjs"),
 } = {}) {
   validateManifest();

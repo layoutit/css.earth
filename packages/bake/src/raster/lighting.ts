@@ -24,7 +24,7 @@ function frameFor(size: number, box: number, lightViewZ: number | null, recipe: 
 }
 /**
  * A sphere's lighting: the sheet of every phase (lighting-sheet.ts) and the flood-lit frame as its own file, which is all a
- * body shows with shadows off. A recipe naming a shared bank takes both files as baked under public/lighting/<bank>/
+ * body shows with shadows off. A recipe naming a shared bank takes both files as baked under site/public/lighting/<bank>/
  * (lighting-banks.ts): the same bytes an encode here would write, checked by prepare-lighting-bank --check, without the
  * encode. The bake stages into a scratch directory, so the bank is found from the repository root every preparation tool
  * runs from. `radiusScale` is the lit disc's radius as a share of the overlay's box: the sheet's own unless a lane's mesh

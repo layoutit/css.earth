@@ -170,7 +170,7 @@ one request for the newest text; a newer request cancels the older one.
 Both functions read their data from files deployed beside them (`included_files`
 in `netlify.toml`, read by `site/server/search-data.mts`): the object catalogue
 the build writes to `dist/catalogue/index.json`, the feature index and each
-body's places catalogue from `public/`. Fetching them over HTTP made a new
+body's places catalogue from `site/public/`. Fetching them over HTTP made a new
 function instance's first search take 3 to 4.5 s; from disk it takes about
 0.2 s. The object catalogue is built under Vite, which the bundled functions
 cannot run, so they read the built file; Astro dev computes the same catalogue

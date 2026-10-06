@@ -75,7 +75,7 @@ export async function loadMarkerDescriptors({
 
 export async function prepareNavigation({
   projectRoot = ROOT,
-  outputRoot = resolve(projectRoot, "public/navigation"),
+  outputRoot = resolve(projectRoot, "site/public/navigation"),
   planets = PLANET_MARKER_PLANETS(),
   presentationPath = resolve(projectRoot, "site/prepared/prepared-navigation-markers.mjs"),
   moveFile = moveNavigationFile,
@@ -86,7 +86,7 @@ export async function prepareNavigation({
   if (objectIds?.some(id => !descriptors.some(descriptor => descriptor.objectId === id))) throw new TypeError('Unknown navigation object.');
   const selected = objectIds ? descriptors.filter(descriptor => objectIds.includes(descriptor.objectId)) : descriptors;
   // A crash or failed rollback must never leave recoverable source/backups in
-  // public/, which Vite copies recursively (including dot directories).
+  // site/public/, which Vite copies recursively (including dot directories).
   const cacheRoot = resolve(projectRoot, "node_modules/.cache");
   await mkdir(cacheRoot, { recursive: true });
   const staging = await mkdtemp(resolve(cacheRoot, "navigation-prepare-"));
@@ -554,7 +554,7 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
 /** Project-authored UI outline, rasterized once at canonical 4x density. */
 export async function prepareSunIndicator({
   projectRoot = ROOT,
-  outputRoot = resolve(projectRoot, "public/navigation"),
+  outputRoot = resolve(projectRoot, "site/public/navigation"),
 } = {}) {
   const swatch = requireRecord(JSON.parse(await readFile(resolve(projectRoot, "src/objects/sun/swatch.json"), "utf8")));
   const hex = (isRecord(swatch.display) ? swatch.display.hex : undefined) ?? swatch.hex;

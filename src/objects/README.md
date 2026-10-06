@@ -29,9 +29,9 @@ src/objects/<id>/
   prepared/                    generated content, geometry and lineage records
   inventory.json               generated inventory of the baked files (public textures and prepared/*)
 
-public/scenes/<id>/             installed/generated serving assets
-public/navigation/body-<id>*.webp   prepared navigation images
-public/navigation/<id>-context.webp  optional resolved context image
+site/public/scenes/<id>/             installed/generated serving assets
+site/public/navigation/body-<id>*.webp   prepared navigation images
+site/public/navigation/<id>-context.webp  optional resolved context image
 packages/astronomy/data/bodies/<id>.json  physical data and orbit records
 src/objects/<id>/*.test.mts      object-specific application checks
 site/<layer>/*.test.mts        shared runtime/package, shell, route and rendered-page checks, beside the code they test
@@ -74,7 +74,7 @@ Builds assemble `OBJECTS`, astronomy exports, solar geometry, Sun context,
 navigation metadata and the minimap. These combined outputs are ignored. Do not
 edit or force-add them, or append entries to shared TypeScript tables or the
 Sun's source list. The runtime reads markers from packed pages
-(`public/navigation/body-markers-NN@2x.webp`, in catalogue order). Adding a body
+(`site/public/navigation/body-markers-NN@2x.webp`, in catalogue order). Adding a body
 redraws its page and moves the tiles after it, so commit the redrawn pages.
 After merging main into a branch that adds bodies, run
 `node packages/bake/cli/prepare-navigation.mts <id>...` and

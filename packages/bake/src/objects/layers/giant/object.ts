@@ -64,7 +64,7 @@ export function prepareSharedCelestial(namespace:string) {
 export async function prepareLayeredGiantObject({objectDirectory,publicDirectory,outputDirectory,write=false,prepareContent}: {objectDirectory:string;publicDirectory:string;outputDirectory:string;write?:boolean;prepareContent:(context: ContentPreparationContext) => Promise<PreparedObjectContentAssets>}) {
   if(typeof prepareContent!=='function')throw new TypeError('Shared content preparation capability is required.');
   const root=await realpath(objectDirectory),sourceDirectory=resolve(root,'source'),raw=await readJson(resolve(root,'object.json')),{descriptor,sources}=await readAuthoredSources(root,raw);
-  if(!write&&resolve(publicDirectory)===resolve(root,'../../../public/scenes',descriptor.id))throw new Error('Read-only source comparison cannot target canonical public assets.');
+  if(!write&&resolve(publicDirectory)===resolve(root,'../../../site/public/scenes',descriptor.id))throw new Error('Read-only source comparison cannot target canonical public assets.');
   const requiredSource=(id:string)=>{const source=sources.get(id);if(!source)throw new Error(`Layered giant source ${id} is missing.`);return source;};
   const required=(id:string)=>requiredSource(id).value;
   const geometryConfig=parse(required('geometry'),bandedGeometryRecipe,'banded geometry');

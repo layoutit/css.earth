@@ -13,6 +13,7 @@ A folder imports itself or strictly lower layers. Sibling folders, including L0 
 <!-- generated:folders -->
 | Tier | Folder | Purpose | Incoming moves |
 | ---: | --- | --- | --- |
+| 0 | `public/` | Astro public directory, served as-is | 0 |
 | 0 | `browser/` | Browser input, DOM and serialized import queue | 0 |
 | 0 | `model/` | Object identities, routes and held addresses | 0 |
 | 0 | `overview/` | Prepared spectral overview readers | 0 |

@@ -11,7 +11,7 @@ import { WORLD_BILLBOARD_SIZE, worldBillboardFilename } from '../world-context/i
  * photograph and no billboard stops the deploy build ("No published asset hash"): the arrival bake writes both. Returns
  * what it did; a body without a photograph of its own has no billboard. */
 export async function writeWorldBillboard(root: string, id: string): Promise<'written' | 'current' | 'none'> {
-  const directory = resolve(root, 'public/scenes', id), objectDirectory = resolve(root, 'src/objects', id);
+  const directory = resolve(root, 'site/public/scenes', id), objectDirectory = resolve(root, 'src/objects', id);
   const own = `${id}-arrival.webp`, filename = worldBillboardFilename(id), target = resolve(directory, filename);
   const inventory = await readInventory(id, objectDirectory);
   const photograph = inventory?.assets.find(asset => asset.location === 'public' && asset.filename === own);

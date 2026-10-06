@@ -37,6 +37,13 @@
     },
     {
       "tier": 0,
+      "name": "Astro public directory, served as-is",
+      "folders": [
+        "site/public"
+      ]
+    },
+    {
+      "tier": 0,
       "name": "Object identities, routes and held addresses",
       "folders": [
         "site/model"

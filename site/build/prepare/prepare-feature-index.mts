@@ -36,7 +36,7 @@ async function preparedPlaces(root: string, objectId: string, settlements: reado
   if (pin === null) return null;
   if (radiusM === null) throw new TypeError(`${objectId}: places need the body's radius.`);
   if (!isRecord(pin) || !Number.isSafeInteger(pin.count)) throw new TypeError(`${objectId}: prepared places descriptor is invalid.`);
-  const url = text(pin.url, `${objectId} places url`), bytes = await readFile(resolve(root, 'public', url.replace(/^\//u, '')));
+  const url = text(pin.url, `${objectId} places url`), bytes = await readFile(resolve(root, 'site/public', url.replace(/^\//u, '')));
   const catalog = readDestinationSettlements(JSON.parse(bytes.toString('utf8')), { objectId, count: Number(pin.count) });
   const duplicates: (readonly [string, string])[] = [];
   for (const place of catalog) {
@@ -62,7 +62,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     let catalog: Record<string, unknown> | null = null;
     for (const pin of pins) {
       const url = text(pin.url, `${object.id} catalogue url`), file = url.split('/').at(-1)!;
-      const bytes = await readFile(resolve(root, 'public/scenes', object.id, file));
+      const bytes = await readFile(resolve(root, 'site/public/scenes', object.id, file));
       const part = readFeatureSearchCatalog(JSON.parse(bytes.toString('utf8')), object.id, pin.count);
       catalog ??= part;
       values.push(...part.features);
@@ -95,8 +95,8 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
   }
   const index = { schema: FEATURE_INDEX_SCHEMA, objects, features, places };
   const encoded = Buffer.from(`${JSON.stringify(index)}\n`);
-  await mkdir(resolve(root, 'public/features'), { recursive: true });
-  await writeFile(resolve(root, 'public/features/index.json'), encoded);
+  await mkdir(resolve(root, 'site/public/features'), { recursive: true });
+  await writeFile(resolve(root, 'site/public/features/index.json'), encoded);
   const pin = { schema: FEATURE_INDEX_SCHEMA, url: FEATURE_INDEX_URL, count: features.length, objects: objects.map(object => object.id) };
   await writeFile(resolve(root, 'site/prepared/prepared-feature-index.json'), `${JSON.stringify(pin, null, 2)}\n`);
   return pin;

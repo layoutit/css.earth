@@ -40,7 +40,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   sharp.cache(false);
   const objectRoot=await realpath(objectDirectory),descriptorPath=resolve(objectRoot,'object.json');
   const rawDescriptor=requireRecord(await json(descriptorPath)),{descriptor,sources}=await readAuthoredSources(objectRoot,rawDescriptor);
-  if(!write&&resolve(publicDirectory)===resolve(objectRoot,'../../../public/scenes',descriptor.id))throw new Error('Read-only source comparison cannot target canonical public assets.');
+  if(!write&&resolve(publicDirectory)===resolve(objectRoot,'../../../site/public/scenes',descriptor.id))throw new Error('Read-only source comparison cannot target canonical public assets.');
   const requiredSource=(id:string)=>{const source=sources.get(id);if(!source)throw new TypeError(`Layered preparation requires ${id}.`);return source;};
   const required=(id:string)=>requiredSource(id).value;
   const geometry=parse(required('geometry'),layeredRecipe,'layered geometry'),surface=parse(required('surface'),spectralRecipe,'spectral material'),materials=parse(required('materials'),cutawayRecipe,'cutaway material'),radialMotion=parse(required('radial-motion'),radialMotionRecipe,'radial motion'),rings=parseRadialLayerRecipe(required('rings')),presentationConfig=parse(required('presentation'),layeredPresentationRecipe,'layered presentation');

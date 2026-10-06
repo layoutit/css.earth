@@ -1,4 +1,4 @@
-/** Bake the shared lighting banks (`lighting-banks.ts`) into `public/lighting/<bank>/`, or check the tracked files against a
+/** Bake the shared lighting banks (`lighting-banks.ts`) into `site/public/lighting/<bank>/`, or check the tracked files against a
  * fresh bake; `packages/bake/cli/prepare-lighting-bank.mts` is the command.
  *
  * A body whose raster recipe names a bank copies these files at its own bake instead of encoding them, so this check is what

@@ -37,7 +37,7 @@ export async function withPreparedInteriorFill<T extends PreparedPresentationDef
   exclude?: SurfaceMeanExclusion,
 ): Promise<T> {
   // Write-mode preparation stages every scene asset in a flat directory before publishing; the
-  // surface mean must read those staged pixels, never a previously published copy under public/.
+  // surface mean must read those staged pixels, never a previously published copy under site/public/.
   const resolveAsset = typeof publicRoot === 'string' ? (url: string) => resolve(publicRoot, `.${url}`) : publicRoot;
   if (!geometry || presentation.viewBindings.some(binding => binding.kind === 'interior-disc')) return presentation;
   const assets = presentation.assets;

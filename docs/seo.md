@@ -18,7 +18,7 @@ built by `site/content/seo-trail.mts` from the prepared world context. A centre 
 a page, such as a binary's barycentre, is skipped.
 
 Every page has a share image of its own. The 16 committed captures in
-`public/social/` are plain screenshots of the actual CSS scene, with the
+`site/public/social/` are plain screenshots of the actual CSS scene, with the
 application controls hidden. Every other scene page uses its arrival billboard:
 `site/build/share-images.mts` runs in `pnpm build:deploy` after `astro build`. It
 centres each billboard on black at 1200×630 and writes `dist/social/<id>.jpg`

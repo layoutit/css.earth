@@ -7,7 +7,7 @@ import { requireRecord, requireArray, requireString } from '@cssearth/core';
 // render scales the same file up. One small palette PNG each, about 3 KB (2.2 MB of 288 px PNGs before).
 const SIZE=128;
 const root=path.resolve(import.meta.dirname,'../../../site/source/facilities/emblems');
-const output=path.resolve(import.meta.dirname,'../../../public/shell/facility-emblems');
+const output=path.resolve(import.meta.dirname,'../../../site/public/shell/facility-emblems');
 const catalogueRoot=path.resolve(import.meta.dirname,'../../../src/sources');
 const historicalEvidence='site/source/facilities/emblem-library.json';
 

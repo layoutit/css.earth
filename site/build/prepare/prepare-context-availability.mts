@@ -56,7 +56,7 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
           const filename = url.slice(`/scenes/${id}/`.length);
           if (!published.assets.some(candidate => candidate.filename === filename && candidate.location === 'public'))
             throw new TypeError(`Unpublished dataset preview: ${id}/inventory.json has no public asset ${filename} for ${url}.`);
-        } else await verify(resolve(projectRoot, 'public'), url.slice(1));
+        } else await verify(resolve(projectRoot, 'site/public'), url.slice(1));
       }
       return [id, { available: true }] as const;
     } catch (error) {

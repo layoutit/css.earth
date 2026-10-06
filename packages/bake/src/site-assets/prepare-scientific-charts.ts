@@ -20,7 +20,7 @@ const contextPath = resolve(
 
 export async function prepareScientificCharts({
   planetIds,
-  outputRoot = resolve(projectRoot, "public/scenes"),
+  outputRoot = resolve(projectRoot, "site/public/scenes"),
 }: {planetIds?:readonly string[];outputRoot?:string} = {}) {
   const context = validateScientificChartsContext(JSON.parse(await readFile(contextPath, "utf8")));
   const availablePlanetIds = Object.keys(context.planets);

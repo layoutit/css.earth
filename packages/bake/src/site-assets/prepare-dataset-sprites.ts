@@ -8,10 +8,10 @@ import { sourceArray, sourceId, sourceObject, sourceText } from '@cssearth/objec
 // Dataset icons occupy 14 CSS pixels. A 42-pixel tile stays sharp through 3x DPR.
 const tile = 42;
 
-/** Bake each object's dataset thumbnails into one sprite under public/navigation/dataset-sprites; returns how many were written. */
+/** Bake each object's dataset thumbnails into one sprite under site/public/navigation/dataset-sprites; returns how many were written. */
 export async function prepareDatasetSprites(root = checkoutProjectRoot(import.meta.url)) {
-  const destination = resolve(root, 'public/navigation/dataset-sprites');
-  const sidebar = sourceObject(JSON.parse(await readFile(resolve(root, 'public/navigation/sidebar-thumbnails.json'), 'utf8')));
+  const destination = resolve(root, 'site/public/navigation/dataset-sprites');
+  const sidebar = sourceObject(JSON.parse(await readFile(resolve(root, 'site/public/navigation/sidebar-thumbnails.json'), 'utf8')));
   const sidebarImages = sourceObject(sidebar.images);
   await rm(destination, { recursive: true, force: true });
   await mkdir(destination, { recursive: true });
@@ -39,7 +39,7 @@ export async function prepareDatasetSprites(root = checkoutProjectRoot(import.me
       const url = sidebarEntry ? sourceText(sourceObject(sidebarEntry).url2x) : sourceText(dataset.thumbnailUrl);
       if (!/^\/(?:scenes|navigation)\/[a-z0-9_@./-]+\.webp$/u.test(url) || url.includes('/../'))
         throw new TypeError(`Invalid dataset thumbnail URL for ${id}/${datasetId}: ${url}`);
-      const input = await readFile(resolve(root, 'public', url.slice(1)));
+      const input = await readFile(resolve(root, 'site/public', url.slice(1)));
       // The old <img> used object-fit: cover; bake that same crop into the sprite.
       return { input: await sharp(input).resize(tile, tile, { fit: 'cover', kernel: 'lanczos3' }).png().toBuffer(),
         left: index % columns * tile, top: Math.floor(index / columns) * tile };
