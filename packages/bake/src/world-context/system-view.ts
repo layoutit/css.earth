@@ -1,6 +1,6 @@
 import type { PreparedSystemViewCandidate, PreparedSystemView, PreparedWorldContextData } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-import type { OrbitalState, Vector3 } from './spatial-context.ts';
+import type { OrbitalState, Vector3 } from './orbital-state.ts';
 
 export interface SystemViewPolicy {
   readonly minimumRadiusShare: number;

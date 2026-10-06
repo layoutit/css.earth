@@ -16,6 +16,7 @@ export * from './landmarks.ts';
 export * from './natural-earth.ts';
 export * from './notes-schema.ts';
 export * from './notes.ts';
+export * from './preparation-context.ts';
 export * from './project-encounter-landmarks.ts';
 export * from './project-orthophoto-landmarks.ts';
 export * from './shp.ts';

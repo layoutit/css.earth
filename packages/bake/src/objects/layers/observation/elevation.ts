@@ -1,5 +1,5 @@
 import type { Relief } from '../../raster/index.ts';
-import type { RasterImage } from './raster.ts';
+import type { RasterImage } from './raster-image.ts';
 import { terrainBrightness } from '../../raster/index.ts';
 export interface ElevationRecipe {noData: number; palette: readonly (readonly number[])[]; rangeMetres: number; relief?: Relief;}
 // USGS's pinned GeoTIFF is uncompressed, signed 16-bit, one strip per row.

@@ -21,5 +21,6 @@ export * from './pds-float-map.ts';
 export * from './plate-saturation.ts';
 export * from './point-sources.ts';
 export * from './raster.ts';
+export * from './raster-image.ts';
 export * from './solar-synoptic.ts';
 export * from './spectral-band-maps.ts';
