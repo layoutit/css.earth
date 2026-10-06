@@ -111,6 +111,8 @@ Read the current `package.json` and runner arguments before using commands:
 | See what a body's inventory lists, or what changed in it since a revision | `pnpm lookup inventory <id> [--search=<text>] [--since=<revision>]` |
 | See what a body's source manifest declares | `pnpm lookup manifest <id> [--search=<text>] [--full]` |
 | Find a value in a body's JSON records, with the file and jq path that hold it | `pnpm lookup records <id> [--search=<text>] [--file=<text>] [--full]` |
+| Find a value in a body's restored bake (`prepared/runtime.json`, `scene.json` and the rest) | `pnpm lookup prepared <id> [--search=<text>] [--file=<text>] [--full]` |
+| Ask every body at once: which hold a value, in one list of rows led by the body id | `pnpm lookup records --every --search=<text> [--file=<text>]`, or `prepared --every` |
 | Restore missing source inputs | `node packages/bake/cli/restore-source-inputs.mts --object=<id>`; the source manifest reader checks declared-file coverage, not stored digests |
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
 | Update the source/mission catalogues | `node site/build/prepare/catalog/prepare-facilities.mts --catalog-only` |

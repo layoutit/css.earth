@@ -26,6 +26,9 @@ receipts retain their own hashes. A source-coverage check is not digest verifica
 Read a body's records with `pnpm lookup`, not an inline script. `pnpm lookup
 records <id> --search=<text>` finds a value in any JSON file beside the body and
 prints the file and jq path that hold it; alone it lists those files.
+`pnpm lookup prepared <id> --search=<text>` asks the same of the restored bake
+under `prepared/`. Both take `--file=<text>` to read only the files so named, and
+`--every` in place of an id to ask every body at once.
 `pnpm lookup inventory <id>` lists the published files and `pnpm lookup manifest
 <id>` the declared sources. Each takes several ids and `--json`.
 
