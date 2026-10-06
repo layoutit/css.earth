@@ -215,13 +215,12 @@ test('catalogue refresh preserves the existing Helix core identities, matching t
   await writeFile(join(owner, 'delivery.json'), await readFile('src/objects/helix-volume/source/delivery.json'));
   // A one-row catalogue cache exercises the actual refresh CLI without requiring native processing or archive access.
   const query = source.provenance.query.replace(/^WITH candidates AS \(SELECT (?!ALL )/, 'WITH candidates AS (SELECT ALL ');
-  const star = source.stars[0], columns = ['source_id', 'ra', 'dec', 'pmra', 'pmdec', 'parallax', 'parallax_error',
-    'phot_g_mean_mag', 'phot_bp_mean_mag', 'phot_rp_mean_mag', 'ruwe', 'r_med_geo', 'r_lo_geo', 'r_hi_geo'];
+  // In column order: source_id, ra, dec, pmra, pmdec, parallax, parallax_error, the G, BP and RP magnitudes, ruwe and the three distances.
+  const star = source.stars[0];
   const cells = [star.sourceId, star.raDeg, star.decDeg, star.pmRaMasYr, star.pmDecMasYr, star.parallaxMas,
     star.parallaxErrorMas, star.photGMeanMag, '', '', star.ruwe, star.distancePc, star.distanceLowerPc, star.distanceUpperPc];
   const cache = join(root, '.local/nebula-lab/stellar-fields'); await mkdir(cache, { recursive: true });
-  await writeFile(join(cache, 'helix-volume.csv'), `${columns.join(',')}\n${cells.join(',')}\n`);
-  await writeFile(join(cache, 'helix-volume.csv.query.json'), JSON.stringify({ query }));
+  await writeFile(join(cache, 'helix-volume.json'), JSON.stringify({ query, rows: [cells.map(String)] }));
   const refreshed = spawnSync(process.execPath, ['--experimental-strip-types',
     join(process.cwd(), 'packages/bake/cli/prepare-nebula-field-catalogues.mts'), 'helix-volume'], { cwd: root, encoding: 'utf8', timeout: 3000 });
   assert.equal(refreshed.status, 0, `${refreshed.error?.message ?? ''}\n${refreshed.stdout}\n${refreshed.stderr}`);

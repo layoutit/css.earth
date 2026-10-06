@@ -1,6 +1,6 @@
 // The Worker's site/server/search-data.mts: the same exports, read from the built site's assets instead of a disk.
 // deploy/cloudflare/bundle-worker.mts swaps this module in, so the handlers and their warm-instance cache
-// (site/server/find.mts keys it on `readPublicFile`) are the ones Netlify runs.
+// (site/server/find.mts keys it on `readPublicFile`) are the ones the preview server runs.
 import { parseCatalogueIndex, type CatalogueIndexEntry } from '../../site/search/catalogue-index.mts';
 import type { FeatureIndexPin } from '../../site/search/feature-search.mts';
 import type { ReadPrepared, SearchData } from '../../site/server/search-data.mts';

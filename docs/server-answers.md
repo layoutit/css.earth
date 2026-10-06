@@ -1,8 +1,7 @@
 # Server answers safety net
 
-L2 records server behavior through the real preview middleware, the built Netlify functions and their actual edge
-router, and the built Cloudflare Worker. It compares status, headers, response bodies, deployment facts and packaged
-file reads. A recording becomes a baseline only after its sanity check passes. Browser bundle contents belong to L3.
+L2 records server behavior through the real preview middleware and the built Cloudflare Worker. It compares status,
+headers, response bodies and deployment facts. A recording becomes a baseline only after its sanity check passes. Browser bundle contents belong to L3.
 
 The [runner](../.github/scripts/server-answers/record.mts), [checker](../.github/scripts/server-answers/check.mts),
 [differ](../.github/scripts/server-answers/diff.mts) and their tests live together. The package commands are
@@ -23,16 +22,10 @@ settings, saved views, view/category contexts and combinations. Additional reque
 - Navigation, first-view data, prepared files, robots, sitemap, missing paths, static ranges and conditional requests.
 - Report responses; the report's diagnostic text is outside the comparison.
 
-Netlify page requests pass through the imported edge function. Its pass-throughs use the static adapter, rather
-than the search function. Each function runs in its own temporary package containing only its bundle and the
-files expanded from its global/per-function `included_files`. Globs support `*`, `**` and `!` exclusions. Runtime
-reads through file APIs, directory/stat/open operations, streams and module loading are traced. Reads outside the
-real isolated root fail; missing packaged data fails during replay. File reads are part of `closure.json`.
-
-`index.json` records the edge route, included files, assets binding/directory (from the repository root),
-`run_worker_first`, `html_handling`, all header rules and immutable cache rules from both `netlify.toml` and `dist/_headers`.
-Changes to these facts appear in the diff. Where the checkout keeps the functions, the edge router and the Worker script is
-layout, not a fact: moving them changes no recording. Temporary packages are removed when a child exits or disconnects.
+The Worker runs as bundled; its assets binding and the files it reads from the built site go through the static
+adapter. `index.json` records the assets binding/directory (from the repository root), `run_worker_first`,
+`html_handling`, all header rules and the immutable cache rule from `dist/_headers`. Changes to these facts appear in the
+diff. Where the checkout keeps the Worker script is layout, not a fact: moving it changes no recording.
 
 Cloudflare warms the find catalogue and lazy page modules before representative requests. Any child diagnostic
 containing `page-handler-fallback` rejects the recording. Rewritten search answers must retain their submitted-search
@@ -59,13 +52,13 @@ All response headers are retained except this deny list:
 
 - `date`: server clock. Last-Modified and Expires retain `present`, because their presence controls stale-header checks; conditional probes use the original timestamp.
 - `server`, `connection`, `keep-alive`: server implementation and socket lifetime.
-- `host`, `x-nf-request-id`, `cf-ray`, `x-served-by`, `via`: host/routing/request identifiers.
+- `host`, `cf-ray`, `x-served-by`, `via`: host/routing/request identifiers.
 - `age`, `cf-cache-status`, `x-cache`, `x-cache-hits`, `server-timing`: cache residency and elapsed execution time.
 
 Security headers, cookies, robots directives and newly added headers remain visible. Static stand-ins send
 content type, length, strong ETag, Last-Modified and Expires. Requests explicitly negotiate gzip; the stand-in
 supplies Content-Encoding for compressible files while delivering decoded bytes, as `fetch` does. This exercises
-rewritten-page cleanup. Every `[[headers]]` rule in `netlify.toml` and every rule in `dist/_headers` applies in order.
+rewritten-page cleanup. Every rule in `dist/_headers` applies in order.
 Ordinary files use revalidation. Cloudflare bypasses the Worker on `run_worker_first` exclusions; its assets binding
 redirects slashless directory pages for `auto-trailing-slash`. These adapters are not measurements of hosted CDN headers.
 
@@ -80,8 +73,9 @@ build-comparison job, after L3 compares the merge base and head. It reuses those
 two production-shaped builds; it adds no Astro build, preparation or clone.
 
 For each checkout it moves the comparison output back to `dist`, resolves and
-runs only the Netlify and Cloudflare bundlers from that revision’s scripts,
-then records and checks preview, Netlify and Cloudflare. The output returns to
+runs only the Worker bundler from that revision’s scripts (an older revision
+also runs the one bundler it has after Astro), then records and checks preview
+and Cloudflare. The output returns to
 its evidence directory afterward, including on recording failure. The Worker
 bundler also stages place files and `_headers`. Each target is diffed base against head.
 The trusted recording tools come from the merge base, with the comparison
@@ -112,20 +106,19 @@ a production-origin address shape resolved offline by the recorder host.
 The clone helper restores dependencies, downloaded `src/objects/*/prepared` inputs and public inputs. It excludes
 compiled `packages/*/dist`, generated shell modules and generated features/shell outputs. Every clone runs
 `CSSEARTH_SKIP_DECLARATIONS=1 pnpm build:packages` and `pnpm prepare:shell`, then its own offline deployment
-sequence, including metadata preparation, share images, assembly and both bundles. Download-only setup is skipped;
+sequence, including metadata preparation, share images, assembly and the Worker bundle. Download-only setup is skipped;
 missing inputs fail with network disabled. Environment image restoration is offline and remains in the sequence.
 `prepare:typecheck` is unnecessary here: deployment regenerates the feature and facility catalogues it supplies.
 
 `site/public/scenes` is a read-only shared symlink, not a copied tree. Metadata preparation, share images, feature
 bundling and the published-origin adapter read it. It is detached while Astro copies `site/public/`, then restored for
-bundling/recording; a production-shaped Astro build uses the manifest and emits no scene copy. Declared Netlify
-place files are copied into each isolated function package. Build subprocesses reject writes into shared scenes.
+bundling/recording; a production-shaped Astro build uses the manifest and emits no scene copy. Build subprocesses reject writes into shared scenes.
 Each clone is deleted immediately after its recording/checks; only one clone exists at a time.
 
-Build steps and preview entry come from each revision's `package.json`; function bundles and edge routing come
-from its `netlify.toml`; the Worker output comes from the wrangler configuration its `deploy:cloudflare-preview` script
-names with `--config`, whose `main` and `assets.directory` are read from that file's folder. The checker imports that clone's edge
-route too. Unsupported script/config shapes fail explicitly. No entry is imported from the other revision.
+Build steps and preview entry come from each revision's `package.json`; the Worker output comes from the wrangler
+configuration its `deploy:cloudflare-preview` script names with `--config`, whose `main` and `assets.directory` are read
+from that file's folder. The checker imports that clone's page router (`site/server/search-route.mts`) too. Unsupported
+script/config shapes fail explicitly. No entry is imported from the other revision.
 
 Use **Node 24** for CI qualification. Start from a provisioned checkout with its inventoried data restored.
 The preview baseline requires `src/objects/earth/prepared/runtime.json`; otherwise its prepared probe returns 404.
@@ -178,15 +171,15 @@ JS
 | Missing browser chunk / wrong same-name chunk size class | Recording fails / body diff 1. |
 | Missing-object find status | Status diff 1. |
 | Missing-object find text | JSON body diff 1. |
-| Remove packaged world-index | Record fails, or checker rejects missing closure; never a passing baseline. |
-| Remove `q` rewrite trigger | Real edge test/preview diff fails; submitted-marker sanity fails. |
+| Remove world-index before bundling the Worker | The Worker bundle fails; never a passing baseline. |
+| Remove `q` rewrite trigger | Real page-route test/preview diff fails; submitted-marker sanity fails. |
 | Change prepared Range status | Real middleware probe and preview sanity fail; static range behavior remains separate. |
 | Worker handler failure | Real fallback test verifies fallback log; recorder rejects such a diagnostic. |
 
 ## Cost and limits
 
 Measurements dated **2026-10-05**, clean builds of commit **47e83c97cf4133a1d185ff5c597c0185471f3671**,
-on this macOS machine. Same-revision repeat and distinct empty-commit version builds each gave **diff 0 on all
+on this macOS machine, when Netlify was still a recorded target. Same-revision repeat and distinct empty-commit version builds each gave **diff 0 on all
 three targets**. Those comparisons used the plain asset shape; a separate production-origin build passed sanity
 on Netlify and Cloudflare. They do not qualify the updated package rebuild/production-shaped comparison flow.
 Linux and Node 24 clean comparisons have not been run.
@@ -227,11 +220,11 @@ Deleting `site/public/features/index.json` does not affect the Cloudflare target
 
 L2 cannot see:
 
-- Hosted Netlify/Cloudflare edge execution, CDN configuration enforcement, compression or provider HEAD body removal.
+- Hosted Cloudflare edge execution, CDN configuration enforcement, compression or provider HEAD body removal.
 - Browser behavior or bundle contents (L1 and L3), report log text, or query/object combinations outside the catalogue.
-- Dormant filesystem branches not triggered during replay; the isolated package still prevents undeclared file access.
+- Dormant code branches not triggered during replay.
 - Live published-origin availability and provider CORS; the offline asset-origin variant covers address resolution
-  and function responses using restored inventory files.
+  and handler responses using restored inventory files.
 - A positive deployed place lookup when the current feature index contains no places; its successful lookup branch remains outside this catalogue. Dione feature search is covered, but its feature-page selection currently lacks prepared
   geometry and fails; that unsupported page probe cannot be called a healthy baseline.
 - Arbitrary cryptographic digest collisions in compact static/binary fingerprints.

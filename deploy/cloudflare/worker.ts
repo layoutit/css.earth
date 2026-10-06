@@ -1,11 +1,11 @@
 // Cloudflare's entry for the site: the built pages are the Worker's static assets, and this script answers only what a
-// static file cannot. It is Netlify's edge router and its three functions (deploy/netlify/) in one place, calling the same
-// handlers. deploy/cloudflare/bundle-worker.mts bundles it; deploy/cloudflare/wrangler.jsonc names the paths that skip it.
+// static file cannot: the find and report endpoints and a page address carrying a query, answered by the site's own
+// handlers (site/server/). deploy/cloudflare/bundle-worker.mts bundles it; deploy/cloudflare/wrangler.jsonc names the paths that skip it.
 import searchRoute from '../../site/server/search-route.mts';
 import { FIND_PATH } from '../../site/search/find-protocol.mts';
 import { siteFetcher, useAssets, type Assets } from './assets.ts';
 import { answerOrFallback } from './fallback.ts';
-import { report } from '../handlers/report.ts';
+import { report } from './report.ts';
 
 interface Env { readonly ASSETS?: Assets }
 /** The part of the runtime's request context the Worker uses. */
@@ -52,7 +52,7 @@ export default {
   async fetch(request: Request, env: Env, context: Context): Promise<Response> {
     const assets = useAssets(env.ASSETS);
     const url = new URL(request.url);
-    // The site has one address: `www.` answers with a move to it, as Netlify's primary domain did.
+    // The site has one address: `www.` answers with a move to it.
     if (url.hostname.startsWith('www.')) { url.hostname = url.hostname.slice(4); return Response.redirect(url.href, 301); }
     if (url.pathname === FIND_PATH) return held(context, find(request));
     if (url.pathname === REPORT_PATH) return report(request);

@@ -41,9 +41,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     });
   });
   const config = await readDeploymentConfig(root);
-  for (const file of ['dist/earth/index.html', `${config.functionsDirectory}/search.mjs`, config.workerMain]) {
+  for (const file of ['dist/earth/index.html', config.workerMain]) {
     if ((await stat(resolve(root, file))).size === 0) throw new Error(`Empty build artifact ${file}`);
   }
   if (!(await readFile(resolve(root, 'dist/earth/index.html'), 'utf8')).includes('https://assets.invalid')) throw new Error('Build omitted production asset origin');
-  console.log('Offline revision build complete: page and both bundles verified');
+  console.log('Offline revision build complete: page and Worker bundle verified');
 }
