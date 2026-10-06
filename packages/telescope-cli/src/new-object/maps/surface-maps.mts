@@ -116,7 +116,11 @@ export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: S
   body.datasets = [...listed.filter(dataset => !ids.has(requireString(dataset.id, 'declared dataset id')) && !dropped.has(requireString(dataset.id, 'declared dataset id'))), ...entry.maps.map(map => ({ ...like, id: map.id })), ...(natural ? [{ ...like, id: natural.id }] : [])];
   files.set(`${at}/object.json`, json(descriptor));
   raster.surfaces = [...surfaces.filter(surface => !ours(surface)), ...newSurfaces];
-  manifest.inputs = [...inputs.filter(input => !oursInput(input)), ...newInputs];
+  // A table this repository builds and keeps out of git is a generated intermediate of the manifest: the restorer reads it
+  // from the source mirror, and the check that every declared file can be restored accepts it there (check-body-references.mts).
+  const built = Array.isArray(manifest.generatedIntermediates) ? manifest.generatedIntermediates.map(one => requireRecord(one, `${star.id} generated intermediate`)) : [];
+  manifest.inputs = [...inputs.filter(input => !oursInput(input)), ...(kind.generator ? [] : newInputs)];
+  manifest.generatedIntermediates = [...built.filter(one => !oursInput(one)), ...(kind.generator ? newInputs : [])];
   // A kind with a natural view puts it and its maps before the star's other datasets; any other kind's maps follow them.
   const others = controls.filter(control => !ids.has(requireString(control.id, 'control id')) && !dropped.has(requireString(control.id, 'control id')));
   shown.controls = natural ? [...newControls, ...others] : [...others, ...newControls];

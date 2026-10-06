@@ -25,10 +25,13 @@ async function reduced(root: string, host: string, choice: SurfaceMapChoice): Pr
   return reducedBrightness(choice, receipt, table, await readJson(resolve(root, 'output/tess', host, `${choice.program}.curve.json`), `${choice.program}: its light curve is not in output/tess/${host} (${reduce(host)})`));
 }
 
-/** A record with `fields` set before its `shape`, as the catalogued values are; fields it already holds are replaced in place of being added. */
-function beforeShape(record: Readonly<Record<string, unknown>>, fields: Readonly<Record<string, unknown>>): Record<string, unknown> { const out: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(record)) { if (key === 'shape') Object.assign(out, fields); if (!(key in fields)) out[key] = value; }
-  return 'shape' in record ? out : { ...out, ...fields }; }
+/** A record with `fields`: a field it already holds keeps its place, a new one is set before its `shape`, as the catalogued
+ * values are. Written again, the record does not move. */
+function beforeShape(record: Readonly<Record<string, unknown>>, fields: Readonly<Record<string, unknown>>): Record<string, unknown> { const out: Record<string, unknown> = {}, pending = new Map(Object.entries(fields));
+  const rest = () => { for (const [key, value] of pending) out[key] = value; pending.clear(); };
+  for (const [key, value] of Object.entries(record)) { if (key === 'shape') for (const [name, next] of [...pending]) if (!(name in record)) { out[name] = next; pending.delete(name); }
+    if (pending.has(key)) { out[key] = pending.get(key); pending.delete(key); } else out[key] = value; }
+  rest(); return out; }
 
 /** The star's measurements record with the period of its newest map, the light's swing and where both come from. */
 export function withMeasuredRotation(record: Readonly<Record<string, unknown>>, map: Pick<BrightnessSurfaceMap, 'periodDays' | 'sector' | 'amplitude' | 'lightPeriodDays'>): Record<string, unknown> {
@@ -44,9 +47,10 @@ export function withTessLight(record: Readonly<Record<string, unknown>>, receipt
   const verdict = rotation.detected === true ? `The star's rotation is seen: ${String(rotation.periodDays)} d, the light swinging by ${percent(Number(rotation.amplitude))}%.` : typeof rotation.reason === 'string' ? rotation.reason : 'No rotation is seen.';
   const flux = isRecord(curve) && Array.isArray(curve.flux) ? curve.flux.filter((value): value is number => typeof value === 'number') : [], mean = flux.reduce((sum, value) => sum + value, 0) / (flux.length || 1);
   const scatter = flux.length > 1 && mean > 0 ? Number((100 * Math.sqrt(flux.reduce((sum, value) => sum + (value - mean) ** 2, 0) / flux.length) / mean).toFixed(2)) : undefined;
-  const without = Object.fromEntries(Object.entries(record).filter(([key]) => !(Object.values(TESS_LIGHT) as readonly string[]).includes(key)));
-  return beforeShape(without, { [TESS_LIGHT.verdict]: verdict, ...(sector === undefined ? {} : { [TESS_LIGHT.sector]: sector }), ...(scatter === undefined ? {} : { [TESS_LIGHT.scatter]: scatter }),
-    [TESS_LIGHT.source]: sector === undefined ? `Looked at in this project before any pixel was fetched (${BRIGHTNESS_GENERATOR}); the star's TESS pixels were not read` : `Read in this project from the TESS full-frame images of sector ${sector} (${BRIGHTNESS_GENERATOR})${scatter === undefined ? '' : '; the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean'}` });
+  const fields: Record<string, unknown> = { [TESS_LIGHT.verdict]: verdict, ...(sector === undefined ? {} : { [TESS_LIGHT.sector]: sector }), ...(scatter === undefined ? {} : { [TESS_LIGHT.scatter]: scatter }),
+    [TESS_LIGHT.source]: sector === undefined ? `Looked at in this project before any pixel was fetched (${BRIGHTNESS_GENERATOR}); the star's TESS pixels were not read` : `Read in this project from the TESS full-frame images of sector ${sector} (${BRIGHTNESS_GENERATOR})${scatter === undefined ? '' : '; the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean'}` };
+  // A field of an earlier look that this one does not have (a sector, a scatter) goes; the others keep their place.
+  return beforeShape(Object.fromEntries(Object.entries(record).filter(([key]) => !(Object.values(TESS_LIGHT) as readonly string[]).includes(key) || key in fields)), fields);
 }
 
 /** `--tess-light --all | STAR_ID...`: each star the reduction has looked at gains what it found, in its measurements record. */
