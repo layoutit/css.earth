@@ -12,8 +12,10 @@ floors sensitive to behavior-preserving edits. Unminified maps still have gaps.
 
 ## Scope and units
 
-`--scope root` selects 105 tracked TypeScript sources directly under `site/`.
-`--scope site` includes its nested TypeScript sources. Tests, declarations, test
+`--scope root` selects the cohort of former `site/` root sources that the
+[floors](../.github/coverage-ratchet.json) store, wherever those files now live; a
+listed file that is no longer tracked fails until its move is recorded there.
+`--scope site` selects every tracked TypeScript source under `site/`. Tests, declarations, test
 helpers and evidence are excluded. `--scope <file.json>` accepts a JSON array of
 repository paths; include every source affected by the change. Each summary and
 floor stores the scope id and exact file list. Scope changes cannot pass silently.
