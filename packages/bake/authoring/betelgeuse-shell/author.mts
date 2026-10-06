@@ -18,7 +18,7 @@
  * Every grid shares one frame anchored on Betelgeuse's prepared scene origin, so one volume unit is one stellar radius. */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
-import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
+import { PUBLISHED_MODEL_PARAMETERS_SCHEMA, VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
 import { access, readFile, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { resolve } from 'node:path';
@@ -901,7 +901,7 @@ export async function author(defaultDataset = 'zimpol-v') {
     })),
   };
   outputs.push(['veil-2019-12-parameters.json', Buffer.from(JSON.stringify({
-    schema: 'cssearth-published-model-parameters@2', objectId: 'betelgeuse-shell', datasetId: 'veil-2019-12',
+    schema: PUBLISHED_MODEL_PARAMETERS_SCHEMA, objectId: 'betelgeuse-shell', datasetId: 'veil-2019-12',
     citation: 'Montarg\u00e8s, M., Cannon, E., Lagadec, E., de Koter, A., Kervella, P., Sanchez-Bermudez, J., Paladini, C., Cannon, E., et al. 2021, "A dusty veil shading Betelgeuse during its Great Dimming", Nature 594, 365',
     doi: '10.1038/s41586-021-03546-8', preprint: 'https://arxiv.org/abs/2201.10551',
     locator: 'Extended Data Table 3, column "December 2019"; axes defined by Extended Data Figure 6',

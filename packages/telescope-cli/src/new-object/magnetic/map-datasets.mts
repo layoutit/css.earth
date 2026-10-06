@@ -10,6 +10,7 @@
  * maps of a star share one color scale, so stepping through them shows the field change; a star with one map has no steps. */
 import { inclinedPoleOrientation } from '@cssearth/bake/objects/stellar';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { DISPLAY_ORIENTATION_SCHEMA } from '@cssearth/objects';
 
 export const MAP_GENERATOR = 'packages/telescope-cli/src/archives/espadons/reduce.mts', MAP_CONSUMER = 'espadons-zdi', MAP_DIRECTORY = 'science/espadons';
 /** Where the spectra are kept, and the terms the archive states for them. */
@@ -64,12 +65,12 @@ export function reducedMap(choice: MagneticMapChoice, receipt: unknown, program:
 }
 
 /** True for a rotation record that draws a star's axis by convention alone, with no measured tilt. */
-export const isConventionOnly = (rotation: Json) => rotation.schema === 'cssearth-display-orientation@1' && !/inclination/iu.test(String(rotation.source ?? ''));
+export const isConventionOnly = (rotation: Json) => rotation.schema === DISPLAY_ORIENTATION_SCHEMA && !/inclination/iu.test(String(rotation.source ?? ''));
 /** A star's rotation record with the tilt its maps are fitted with: the pole tilted toward us, north on the sky by
  * convention, and the meridian that turns longitude 0 toward Earth (as the generator writes for a spec's `spin`). */
 export function tiltedRotation(previous: Json, place: { readonly rightAscensionDegrees: number; readonly declinationDegrees: number }, map: Pick<ReducedMap, 'inclinationDegrees' | 'inclinationSource' | 'periodDays' | 'periodSource'>): Json {
   const pole = inclinedPoleOrientation(place, map.inclinationDegrees, 0), meridian = Number(((pole.displayMeridianDegrees % 360 + 360) % 360).toFixed(6));
-  return { ...previous, schema: 'cssearth-display-orientation@1', rightAscensionDegrees: pole.rightAscensionDegrees, declinationDegrees: pole.declinationDegrees, displayMeridianDegrees: meridian, phase: 'arbitrary-display-phase',
+  return { ...previous, schema: DISPLAY_ORIENTATION_SCHEMA, rightAscensionDegrees: pole.rightAscensionDegrees, declinationDegrees: pole.declinationDegrees, displayMeridianDegrees: meridian, phase: 'arbitrary-display-phase',
     source: `Spin inclination ${map.inclinationDegrees} degrees from the line of sight (${map.inclinationSource}) and rotation period ${map.periodDays} d at the equator (${map.periodSource}): the values the star's magnetic maps are fitted with, with the north pole tilted toward us. The direction of the axis on the sky is not measured; it is placed toward celestial north as a convention. Longitude 0 faces the Sun as a display convention.`,
     coordinateSystem: 'ICRF/J2000. +Z is the spin axis above; +X is the display meridian; east longitude. No spin is propagated.', qualification: 'The tilt of the spin axis is measured; its position angle on the sky and the rotation phase are display conventions.' }; }
 

@@ -17,6 +17,7 @@
 import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { DISPLAY_ORIENTATION_SCHEMA } from '@cssearth/objects';
 import { tapRows } from '@cssearth/telescope/node';
 import { isCommand, ledgerFiles, REPOSITORY, runArchiveLedger, type ArchiveLedger } from '../ledger.mts';
 import { namedShippedObjects, readJsonOrNull, type NamedShippedObject } from '../targets.mts';
@@ -71,7 +72,7 @@ async function localPrograms(): Promise<Local[]> { const out: Local[] = [], reco
       ...(isRecord(receipt) && receipt.schema === MAP_SCHEMA ? { receipt: { mapped: verdict?.mapped === true, ...(typeof verdict?.reason === 'string' ? { reason: verdict.reason } : map ? {} : { reason: 'averaged, not mapped: the program has no star block' }), ...(typeof map?.middleUtc === 'string' ? { middleUtc: map.middleUtc } : {}), ...(typeof chosen?.meanGauss === 'number' ? { meanGauss: chosen.meanGauss } : {}) } } : recorded.has(id) ? { receipt: recorded.get(id)! } : {}) }); }
   return out; }
 const axisOf = async (id: string): Promise<LedgerStar['axis']> => { const record = await readJsonOrNull(resolve(REPOSITORY, 'src/objects', id, 'source/preparation/rotation.json'));
-  return !isRecord(record) ? 'none' : record.schema === 'cssearth-display-orientation@1' && !/inclination/iu.test(String(record.source ?? '')) ? 'display convention' : 'measured'; };
+  return !isRecord(record) ? 'none' : record.schema === DISPLAY_ORIENTATION_SCHEMA && !/inclination/iu.test(String(record.source ?? '')) ? 'display convention' : 'measured'; };
 async function rows(targets: readonly ArchiveTarget[]): Promise<{ stars: LedgerStar[]; shipped: number }> { const shipped = (await namedShippedObjects(readJsonOrNull)).filter(star => star.position && star.position.radiusDeg < 0.05), given = assignTargets(targets, shipped), locals = await localPrograms(), stars: LedgerStar[] = [];
   for (const star of shipped) { const own = given.get(star.id); if (own) stars.push(ledgerStar(star, own, locals, await axisOf(star.id))); }
   return { stars: stars.sort((a, b) => b.spectra - a.spectra || a.id.localeCompare(b.id)), shipped: shipped.length }; }

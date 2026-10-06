@@ -7,7 +7,7 @@ import { CORONA_DISPLAY, JOHNSTONE_GUEDEL_2015, SECONDS_PER_YEAR, SHEET_CORONA, 
   expandSurfaceField, hydrostaticCorona, massLossFromSurfaceFlux, neutralLine, openShare, parkerWind, sheetCoronaDensity, synthesizeSurfaceField, xraySurfaceFlux } from '@cssearth/bake/objects/stellar';
 import { encodeDensityKtx2 } from '@cssearth/bake/density';
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
-import { INVESTIGATION_LEDGER_SCHEMA, NEBULA_DELIVERY_SCHEMA, OBJECT_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, VOLUME_SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
+import { INVESTIGATION_LEDGER_SCHEMA, NEBULA_DELIVERY_SCHEMA, OBJECT_SCHEMA, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, PUBLISHED_MODEL_PARAMETERS_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, VOLUME_SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { json, type PackageFiles } from '../dataset.mts';
 
@@ -250,7 +250,7 @@ export function coronaFiles(entry: CoronaEntry, inputs: CoronaInputs): CoronaFil
     recipes: datasets.map(dataset => ({ id: dataset.id, path: `${s}/volume-${dataset.id}.json` })), sharedInputs: [], inputEvidence: [],
     datasets: datasets.map(dataset => ({ id: dataset.id, label: dataset.label, title: dataset.title, description: dataset.description, summary: dataset.summary, detail: dataset.detail, facts: dataset.facts, input: dataset.input,
       preview: { path: `${s}/previews/${dataset.id}.png`, authoredFrom: dataset.input } })) }));
-  files.set(`${s}/corona-parameters.json`, json({ schema: 'cssearth-published-model-parameters@2', objectId: bank, citation: sources.map(source => `${source.label}: ${source.locator}`).join('; '), ...measured,
+  files.set(`${s}/corona-parameters.json`, json({ schema: PUBLISHED_MODEL_PARAMETERS_SCHEMA, objectId: bank, citation: sources.map(source => `${source.label}: ${source.locator}`).join('; '), ...measured,
     notes: `The published numbers this corona's amount of gas follows from, and what ${CORONA_GENERATOR} computes from them and from the star's magnetic maps.` }));
 
   // The manifest: each dataset's map, as the star's own manifest records it, and the published numbers.
@@ -265,7 +265,7 @@ export function coronaFiles(entry: CoronaEntry, inputs: CoronaInputs): CoronaFil
     documents: ['delivery.json', 'presentation.json', 'provenance.json'].map(name => ({ id: name.replace(/[^a-z0-9-]+/gu, '-'), path: `${s}/${name}`, sourceBinding: local('Object-owned delivery, provenance or presentation record; the inputs it cites are bound above.') })),
     generatedIntermediates: datasets.flatMap(dataset => [`density-${dataset.id}.ktx2`, `volume-${dataset.id}.json`, `previews/${dataset.id}.png`]).map(name => ({ id: name.replace(/[^a-z0-9-]+/gu, '-'), path: `${s}/${name}`, generator: CORONA_GENERATOR,
       sourceBinding: local(`Density grid, slab recipe or preview written by ${CORONA_GENERATOR} from the inputs bound above.`) })) }));
-  files.set(`${at}/object.json`, json({ schema: OBJECT_SCHEMA, id: bank, type: 'volume-dataset-bank', properties: { preparation: { source: 'source/delivery.json' }, host: star.id }, prepared: { format: 'cssearth-volume-dataset-index@1', url: 'prepared/datasets.json' } }));
+  files.set(`${at}/object.json`, json({ schema: OBJECT_SCHEMA, id: bank, type: 'volume-dataset-bank', properties: { preparation: { source: 'source/delivery.json' }, host: star.id }, prepared: { format: PREPARED_VOLUME_DATASET_INDEX_SCHEMA, url: 'prepared/datasets.json' } }));
   const first = datasets[0]!.corona.measured, last = datasets.at(-1)!.corona.measured;
   files.set(`${at}/investigations.json`, json({ schema: INVESTIGATION_LEDGER_SCHEMA, objectId: bank, entries: [
     { id: 'derived-corona', subject: `${star.name}: a corona derived from ${datasets.length === 1 ? 'its magnetic map' : `its ${datasets.length} magnetic maps`}`, status: 'included',
