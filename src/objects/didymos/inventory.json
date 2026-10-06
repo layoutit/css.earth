@@ -40,8 +40,14 @@
     {
       "location": "public",
       "filename": "didymos-arrival.webp",
-      "bytes": 38880,
-      "sha256": "7f2d8a804fffd0c624d4bbf2e58e9fd1d59f07a2037ee671f150cbdada34686b"
+      "bytes": 39328,
+      "sha256": "d7b3a2815ed123458de29d1b983e3056cba04ccbf4a3801ae2876091771b81f7"
+    },
+    {
+      "location": "public",
+      "filename": "didymos-billboard.webp",
+      "bytes": 4836,
+      "sha256": "4ce6e00514ca0e22fbf87bbe59bf333206ad843ea17766374392d04472c1da75"
     },
     {
       "location": "public",
@@ -244,8 +250,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 496615,
-      "sha256": "a1cd9b535e58cd08f830662ace4b95d9337f3615565cc391f657d6e3cd145111"
+      "bytes": 496617,
+      "sha256": "7a8a807535a7ab58d47254fda2608e6b685d63627617af7b6af976b1d7b4d74d"
     },
     {
       "location": "prepared",

@@ -48,7 +48,7 @@ The displayed phase is not propagated from the historical source epoch and does 
 
 Model publication: [Inversion of asteroid photometry from Gaia DR2 and the Lowell Observatory photometric database](https://damit.cuni.cz/projects/damit/references/view/182).
 
-The refreshed DAMIT search on 2026-09-08 found no size-calibrated same-body mesh. A published physical size is therefore applied through the existing `metersPerUnit` source conversion, before the established meshoptimizer/PolyCSS raster preparation, which keeps the fewest faces its error allowance permits, 288 of at most 800.
+The refreshed DAMIT search on 2026-09-08 found no size-calibrated same-body mesh. A published physical size is therefore applied through the existing `metersPerUnit` source conversion, before the established meshoptimizer/PolyCSS raster preparation, which keeps the fewest faces its error allowance permits, 306 of at most 800.
 
 </details>
 

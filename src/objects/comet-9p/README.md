@@ -25,7 +25,7 @@ The Deep Impact site and S1–S4 are searchable places. S1–S4 are manually sel
 
 ## Processing
 
-The mesh keeps the published geometry and pole (RA 255°, Dec +64.5°) and is reduced by meshoptimizer to 510 triangles. The equivalent-volume radius 2.83 km supplies scale only. JPL Horizons elements at JD 2461286.5 supply heliocentric placement; the conic omits perturbations and outgassing. No dust, tails, jets or tumble simulation is included.
+The mesh keeps the published geometry and pole (RA 255°, Dec +64.5°) and is reduced by meshoptimizer to 1000 triangles. The equivalent-volume radius 2.83 km supplies scale only. JPL Horizons elements at JD 2461286.5 supply heliocentric placement; the conic omits perturbations and outgassing. No dust, tails, jets or tumble simulation is included.
 
 The [shared fitter](../../../packages/bake/src/objects/layers/terrestrial/missions/hrii-spectra.ts) follows [Groussin et al. (2013), §§2.2–2.3, equations 1–4](https://doi.org/10.1016/j.icarus.2012.10.003): a solar-normalized continuum anchored at 1.8 µm and a Planck spectrum over 3.1–4.4 µm. All nonzero detector flags are rejected. A visible context image ties the scan to the body frame with a held-out RMS of 71.9 m, suitable only for coarse placement. Only stereo-controlled facets with incidence and emission below 75° qualify. The [scan recipe](source/science/hrii/scan.json) and [preparation record](source/science/hrii/preparation.json) give coverage, fit residuals and withheld pixels.
 
