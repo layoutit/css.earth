@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g 0.9 from 2023A&A...678A.195D, the median of its 14 spectra; the 17 published values span log g 0.4 to 2, across which the limb law changes by at most 0.7% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.195D)",
   "spectralType": "F6",
   "spectralTypeSource": "SIMBAD, V* VY Sgr: spectral type F6",
+  "objectType": "Classical Cepheid Variable",
+  "objectTypePath": "* > Ev* > Ce* > cC*",
+  "objectTypeSource": "SIMBAD, V* VY Sgr: main object type cC*, Classical Cepheid Variable",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

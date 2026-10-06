@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-220595258.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.442, rounded to two decimals",
   "spectralType": "K",
   "spectralTypeSource": "SIMBAD, BD+08 92: spectral type K",
+  "objectType": "Horizontal Branch Star",
+  "objectTypePath": "* > Ev* > HB*",
+  "objectTypeSource": "SIMBAD, BD+08 92: main object type HB*, Horizontal Branch Star",
   "luminosityLogSolar": 1.761,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 2750053579510985344, flags_flame 10: lum_flame 57.698616 solar luminosities (16th to 84th percentiles 55.608643 to 59.99061); its log10 is recorded",
   "shape": {

@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/xi-pegasi.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.951, rounded to two decimals",
   "spectralType": "F6V",
   "spectralTypeSource": "SIMBAD, * ksi Peg: spectral type F6V (2001AJ....121.2148G)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * ksi Peg: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 12.67,
   "projectedRotationSpeedSource": "SIMBAD, * ksi Peg: projected rotation speed 12.67 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
   "shape": {

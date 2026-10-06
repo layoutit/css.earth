@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g 3.68 from 2023ApJS..266...41P; the 10 published values span log g 3.1 to 4.3, across which the limb law changes by at most 0.3% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023ApJS..266...41P)",
   "spectralType": "A1IVps",
   "spectralTypeSource": "SIMBAD, * bet UMa: spectral type A1IVps (2010MNRAS.403.1089P)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * bet UMa: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 46,
   "projectedRotationSpeedSource": "SIMBAD, * bet UMa: projected rotation speed 46 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {

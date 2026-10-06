@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-205.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.710, rounded to two decimals",
   "spectralType": "M1.5Ve",
   "spectralTypeSource": "SIMBAD, HD 36395: spectral type M1.5Ve (1989ApJS...71..245K)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, HD 36395: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 33.8,
   "rotationPeriodSource": "VizieR J/A+A/662/A41/tableb1 (Magnetic fields in 292 M dwarfs.), column Per: 33.8 d, the row 0.0 arcsec from the star's J2000 place. The middle of 15 catalogued periods, 12 of them within 20% of it",
   "rotationPeriodsCatalogued": [

@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/groombridge-1618.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.646, rounded to two decimals",
   "spectralType": "K6VeFe-1",
   "spectralTypeSource": "SIMBAD, HD 88230: spectral type K6VeFe-1 (1989ApJS...71..245K)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, HD 88230: main object type PM*, High Proper Motion Star",
   "rotationPeriodsCatalogued": [
     {
       "days": 6,

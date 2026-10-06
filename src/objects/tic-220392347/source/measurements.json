@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, tess_apo, TIC 220392347: APOGEE DR17 effective temperature 4809.795 +/- 50 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 2.35,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-220392347.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.352, rounded to two decimals",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, TYC 8515-1023-1: main object type *, Star",
   "luminosityLogSolar": 1.768,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4678068075178062464, flags_flame 10: lum_flame 58.554085 solar luminosities (16th to 84th percentiles 57.43885 to 59.732998); its log10 is recorded",
   "shape": {

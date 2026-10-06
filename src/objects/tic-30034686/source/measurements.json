@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-30034686.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.780, rounded to two decimals",
   "spectralType": "K7",
   "spectralTypeSource": "SIMBAD, HD 268815: spectral type K7 (1993yCat.3135....0C)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, HD 268815: main object type *, Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

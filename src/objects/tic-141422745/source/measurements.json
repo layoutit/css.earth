@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-141422745.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.133, rounded to two decimals",
   "spectralType": "CEMP",
   "spectralTypeSource": "SIMBAD, TYC 9378-79-1: spectral type CEMP (2018AJ....155..256P)",
+  "objectType": "Chemically Peculiar Star",
+  "objectTypePath": "* > Pe*",
+  "objectTypeSource": "SIMBAD, TYC 9378-79-1: main object type Pe*, Chemically Peculiar Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

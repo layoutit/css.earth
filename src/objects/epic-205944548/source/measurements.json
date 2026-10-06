@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Khan et al. (2023), A&A 677, A21, k2_gal, EPIC 205944548: GALAH DR3 effective temperature 4631.7324 +/- 98 K (the catalogue's final uncertainty) (https://doi.org/10.1051/0004-6361/202346196)",
   "surfaceGravityLogg": 1.96,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/epic-205944548.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.963, rounded to two decimals",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, UCAC4 368-189401: main object type *, Star",
   "projectedRotationSpeedKmS": 7.54,
   "projectedRotationSpeedSource": "SIMBAD, UCAC4 368-189401: projected rotation speed 7.54 km/s, the measurement SIMBAD prefers (2023A&A...676A.129H)",
   "shape": {

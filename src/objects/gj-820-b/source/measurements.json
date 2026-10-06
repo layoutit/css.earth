@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-820-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.679, rounded to two decimals",
   "spectralType": "K7V",
   "spectralTypeSource": "SIMBAD, * 61 Cyg B: spectral type K7V (1989ApJS...71..245K)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * 61 Cyg B: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 37.84,
   "rotationPeriodSource": "VizieR J/ApJ/743/48/catalog (Stars with rotation periods and X-ray luminosities), column Prot: 37.84 d, the row 0.1 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
   "rotationPeriodsCatalogued": [

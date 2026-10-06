@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/dubhe.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.512, rounded to two decimals",
   "spectralType": "G9III+A7.5",
   "spectralTypeSource": "SIMBAD, * alf UMa: spectral type G9III+A7.5 (2014yCat....1.2023S)",
+  "objectType": "Spectroscopic Binary",
+  "objectTypePath": "* > ** > SB*",
+  "objectTypeSource": "SIMBAD, * alf UMa: main object type SB*, Spectroscopic Binary",
   "projectedRotationSpeedKmS": 6,
   "projectedRotationSpeedSource": "SIMBAD, * alf UMa: projected rotation speed 6 km/s, the measurement SIMBAD prefers (2025A&A...698A..93J)",
   "shape": {

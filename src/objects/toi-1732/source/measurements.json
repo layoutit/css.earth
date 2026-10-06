@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-1732.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.624, rounded to two decimals",
   "spectralType": "M0",
   "spectralTypeSource": "SIMBAD, TOI-1732: spectral type M0 (2023ApJS..264...17Z)",
+  "objectType": "Emission-line Star",
+  "objectTypePath": "* > Em*",
+  "objectTypeSource": "SIMBAD, TOI-1732: main object type Em*, Emission-line Star",
   "luminosityLogSolar": -1.09,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-1732 (pscomppars): log10 of the luminosity in solar units -1.08955, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {

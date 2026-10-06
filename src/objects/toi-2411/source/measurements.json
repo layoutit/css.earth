@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-2411.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.586, rounded to two decimals",
   "spectralType": "K5V",
   "spectralTypeSource": "SIMBAD, G 271-53: spectral type K5V (1986AJ.....92..139S)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, G 271-53: main object type PM*, High Proper Motion Star",
   "luminosityLogSolar": -0.871,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-2411 (pscomppars): log10 of the luminosity in solar units -0.87076, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {

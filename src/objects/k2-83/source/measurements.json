@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/k2-83.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.868, rounded to two decimals",
   "spectralType": "M1V",
   "spectralTypeSource": "SIMBAD, K2-83: spectral type M1V (2017ApJ...836..167D)",
+  "objectType": "Low-mass Star",
+  "objectTypePath": "* > LM*",
+  "objectTypeSource": "SIMBAD, K2-83: main object type LM*, Low-mass Star",
   "luminosityLogSolar": -1.204,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-83 (pscomppars): log10 of the luminosity in solar units -1.20362, from Barros et al. 2016 (https://ui.adsabs.harvard.edu/abs/2016A&A...594A.100B/abstract)",
   "rotationPeriodsCatalogued": [

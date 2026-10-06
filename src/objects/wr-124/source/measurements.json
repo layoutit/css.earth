@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Hamann et al. (2019), A&A 625, A57, Table 1, WR 124: T* = 44.7 kK, the temperature at that radius; spectral subtype WN8h (https://arxiv.org/abs/1904.04687)",
   "spectralType": "WN8h",
   "spectralTypeSource": "SIMBAD, Hen 2-427: spectral type WN8h (2006A&A...457.1015H)",
+  "objectType": "Wolf-Rayet",
+  "objectTypePath": "* > Ma* > sg* > s*b > WR*",
+  "objectTypeSource": "SIMBAD, Hen 2-427: main object type WR*, Wolf-Rayet",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Luck (2018), AJ 156, 171, VizieR J/AJ/156/171/table11, recno 39, Name='VX Per', column Gavg ('Average gravity over cycle'; log g in dex, ReadMe unit label cm/s2): log g 1.64 averaged over the pulsation cycle (https://ui.adsabs.harvard.edu/abs/2018AJ....156..171L)",
   "spectralType": "G2IV",
   "spectralTypeSource": "SIMBAD, V* VX Per: spectral type G2IV (1978A&AS...32...25R)",
+  "objectType": "Classical Cepheid Variable",
+  "objectTypePath": "* > Ev* > Ce* > cC*",
+  "objectTypeSource": "SIMBAD, V* VX Per: main object type cC*, Classical Cepheid Variable",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 36188: effective temperature 8197 +/- 3804 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.319) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "B8Ve",
   "spectralTypeSource": "SIMBAD, * bet CMi: spectral type B8Ve (2006MNRAS.371..252L)",
+  "objectType": "Be Star",
+  "objectTypePath": "* > MS* > Be*",
+  "objectTypeSource": "SIMBAD, * bet CMi: main object type Be*, Be Star",
   "projectedRotationSpeedKmS": 210,
   "projectedRotationSpeedSource": "SIMBAD, * bet CMi: projected rotation speed 210 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

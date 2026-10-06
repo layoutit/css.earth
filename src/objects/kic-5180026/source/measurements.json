@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5180026 (Gold): Asteroseismic log g 2.0361 +/- 0.0038 (https://arxiv.org/abs/2410.00102)",
   "spectralType": "K1.5III",
   "spectralTypeSource": "SIMBAD, UCAC4 652-069631: spectral type K1.5III (2022A&A...664A..78F)",
+  "objectType": "Red Giant Branch star",
+  "objectTypePath": "* > Ev* > RG*",
+  "objectTypeSource": "SIMBAD, UCAC4 652-069631: main object type RG*, Red Giant Branch star",
   "rotationPeriodDays": 8.2583,
   "rotationPeriodSource": "VizieR J/MNRAS/495/1252/table2 (Magnetic activity based on LAMOST and Kepler), column Prot: 8.258281 d, the row 0.0 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

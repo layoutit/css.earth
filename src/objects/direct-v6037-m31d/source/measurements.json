@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 14.925 d in Li et al. (2021), ApJ 920, 84, table 2; not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures (https://arxiv.org/abs/2002.02186)",
   "limbDisplayGravityLogg": 0.85,
   "limbDisplayGravitySource": "no gravity of this star is published (none in SIMBAD); Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra) gives the class's range, log g -1.33 to 2.86. Across log g 0 to 2.85, the part the grid covers, the limb laws differ by at most 1.9% of the centre brightness from the one drawn, at log g 0.85, the gravity closest to all of them; log g 0.85 is a display choice, not a measurement (https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3)",
+  "objectType": "Classical Cepheid Variable",
+  "objectTypePath": "* > Ev* > Ce* > cC*",
+  "objectTypeSource": "SIMBAD, DIRECT V6037 M31D: main object type cC*, Classical Cepheid Variable",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-1156.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.176, rounded to two decimals",
   "spectralType": "M4.5Ve",
   "spectralTypeSource": "SIMBAD, V* GL Vir: spectral type M4.5Ve (2015AJ....149..106D)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, V* GL Vir: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 0.491,
   "rotationPeriodSource": "VizieR J/AJ/166/16/table1 (Radial velocities of 123 active stars), column Per: 0.491 d, the row 0.0 arcsec from the star's J2000 place. The middle of 13 catalogued periods, 12 of them within 20% of it",
   "rotationPeriodsCatalogued": [

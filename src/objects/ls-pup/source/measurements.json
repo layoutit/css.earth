@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 116, Name='LS Pup', columns Teff, e_Teff (K): Teff 5500 +/- 226 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 1.5,
   "surfaceGravitySource": "log g 1.5 from 2023A&A...678A.195D; the 4 published values span log g 0.7 to 1.5, across which the limb law changes by at most 1.0% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.195D)",
+  "objectType": "Classical Cepheid Variable",
+  "objectTypePath": "* > Ev* > Ce* > cC*",
+  "objectTypeSource": "SIMBAD, V* LS Pup: main object type cC*, Classical Cepheid Variable",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

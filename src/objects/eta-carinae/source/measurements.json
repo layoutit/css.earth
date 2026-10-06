@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Groh et al. (2012), arXiv:1204.1963, Table 2: the primary's effective temperature where its wind turns opaque (Rosseland optical depth 2/3) (https://arxiv.org/abs/1204.1963)",
   "spectralType": "LBV",
   "spectralTypeSource": "SIMBAD, * eta Car: spectral type LBV (2022A&A...657A.131M)",
+  "objectType": "Blue Supergiant",
+  "objectTypePath": "* > Ma* > sg* > s*b",
+  "objectTypeSource": "SIMBAD, * eta Car: main object type s*b, Blue Supergiant",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

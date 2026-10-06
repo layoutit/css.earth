@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5270662 (Gold): APOGEE effective temperature (K) 5311.763 +/- 66.9539 (https://arxiv.org/abs/2410.00102)",
   "surfaceGravityLogg": 2.3803,
   "surfaceGravitySource": "Pinsonneault et al. (2025), ApJS 276, 69 (APOKASC-3), table4, KIC 5270662 (Gold): Asteroseismic log g 2.3803 +/- 0.0048 (https://arxiv.org/abs/2410.00102)",
+  "objectType": "Chemically Peculiar Star",
+  "objectTypePath": "* > Pe*",
+  "objectTypeSource": "SIMBAD, UCAC4 653-072997: main object type Pe*, Chemically Peculiar Star",
   "rotationPeriodDays": 0.418,
   "rotationPeriodSource": "VizieR J/ApJS/211/24/table2 (Rotation periods of Kepler MS stars), column Prot: 0.418 d, the row 0.1 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

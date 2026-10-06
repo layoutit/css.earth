@@ -13,6 +13,9 @@
   "surfaceGravitySource": "Miller-Jones et al. (2021), Science 371, 1046, Table 1: log g1 = 3.348 (median; 5th-95th percentile 3.335-3.360), derived (https://arxiv.org/abs/2102.09091)",
   "spectralType": "O9.7Iabpvar",
   "spectralTypeSource": "SIMBAD, HD 226868: spectral type O9.7Iabpvar (2011ApJS..193...24S)",
+  "objectType": "High Mass X-ray Binary",
+  "objectTypePath": "* > ** > XB* > HXB",
+  "objectTypeSource": "SIMBAD, HD 226868: main object type HXB, High Mass X-ray Binary",
   "rotationPeriodDays": 0.6077,
   "rotationPeriodSource": "VizieR J/AJ/155/39/table6 (Variability properties of TIC sources with KELT), column Prot: 0.607688 d, the row 0.0 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

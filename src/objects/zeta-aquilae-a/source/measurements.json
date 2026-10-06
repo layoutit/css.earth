@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/zeta-aquilae-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.958, rounded to two decimals",
   "spectralType": "A0IV-Vnn",
   "spectralTypeSource": "SIMBAD, * zet Aql: spectral type A0IV-Vnn (2003AJ....126.2048G)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * zet Aql: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 317,
   "projectedRotationSpeedSource": "SIMBAD, * zet Aql: projected rotation speed 317 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
   "shape": {

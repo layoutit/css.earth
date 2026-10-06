@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Groenewegen (2020), A&A 635, A33, VizieR J/A+A/635/A33/table1, recno 247, Name='VW Cen', columns Teff, e_Teff (K): Teff 4750 +/- 168 K from a fit to the spectral energy distribution at mean light (not spectroscopic) (https://arxiv.org/abs/2002.02186)",
   "surfaceGravityLogg": 1.5,
   "surfaceGravitySource": "log g 1.5 from 2022MNRAS.510.1894K; the 7 published values span log g 0.69 to 1.82, across which the limb law changes by at most 1.0% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2022MNRAS.510.1894K)",
+  "objectType": "Classical Cepheid Variable",
+  "objectTypePath": "* > Ev* > Ce* > cC*",
+  "objectTypeSource": "SIMBAD, V* VW Cen: main object type cC*, Classical Cepheid Variable",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

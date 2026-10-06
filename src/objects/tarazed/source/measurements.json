@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tarazed.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.058, rounded to two decimals",
   "spectralType": "K3II",
   "spectralTypeSource": "SIMBAD, * gam Aql: spectral type K3II (1989ApJS...71..245K)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, * gam Aql: main object type *, Star",
   "projectedRotationSpeedKmS": 8,
   "projectedRotationSpeedSource": "SIMBAD, * gam Aql: projected rotation speed 8 km/s, the measurement SIMBAD prefers (2025A&A...698A..93J)",
   "shape": {

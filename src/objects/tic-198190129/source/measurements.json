@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Lafarga et al. 2026, the stellar temperature of the default parameter set of TIC 198190129 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026MNRAS.548ag512L/abstract)",
   "surfaceGravityLogg": 4.63,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tic-198190129.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.630, rounded to two decimals",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, 2MASS J16251970+6022376: main object type *, Star",
   "luminosityLogSolar": -0.992,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TIC 198190129 (pscomppars): log10 of the luminosity in solar units -0.99152, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {

@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Filippazzo et al. (2015), ApJ 810, 158: 1,334 +/- 58 K from the measured bolometric luminosity and an evolutionary-model radius (https://arxiv.org/abs/1508.01767)",
   "spectralType": "L7.5+T0.5",
   "spectralTypeSource": "SIMBAD, NAME Luhman 16: spectral type L7.5+T0.5 (2013ApJ...772..129B)",
+  "objectType": "Double or Multiple Star",
+  "objectTypePath": "* > **",
+  "objectTypeSource": "SIMBAD, NAME Luhman 16: main object type **, Double or Multiple Star",
   "luminosityLogSolar": -4.66,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of Luhman 16 A (pscomppars): log10 of the luminosity in solar units -4.66, from Garcia et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017ApJ...846...97G/abstract)",
   "shape": {

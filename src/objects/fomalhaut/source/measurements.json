@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass 1.92 +/- 0.02 solar masses of Mamajek 2012 (ApJL 754, L20; https://arxiv.org/abs/1206.6353), Table 2, and the package radius, log10(GM/R^2) in cgs",
   "spectralType": "A4V",
   "spectralTypeSource": "SIMBAD, * alf PsA: spectral type A4V (2006AJ....132..161G)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * alf PsA: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 97,
   "projectedRotationSpeedSource": "SIMBAD, * alf PsA: projected rotation speed 97 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

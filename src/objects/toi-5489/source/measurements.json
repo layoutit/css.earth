@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5489.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.804, rounded to two decimals",
   "spectralType": "M2",
   "spectralTypeSource": "SIMBAD, UCAC4 508-048355: spectral type M2 (2023ApJS..264...17Z)",
+  "objectType": "Emission-line Star",
+  "objectTypePath": "* > Em*",
+  "objectTypeSource": "SIMBAD, UCAC4 508-048355: main object type Em*, Emission-line Star",
   "luminosityLogSolar": -1.608,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5489 (pscomppars): log10 of the luminosity in solar units -1.60776, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "shape": {

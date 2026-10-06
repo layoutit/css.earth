@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/toi-5319.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.766, rounded to two decimals",
   "spectralType": "M",
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of TOI-5319 (pscomppars): spectral type M, from Peláez-Torres et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, ** TOI 5319A: main object type PM*, High Proper Motion Star",
   "luminosityLogSolar": -1.459,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5319 (pscomppars): log10 of the luminosity in solar units -1.45905, from Peláez-Torres et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024A&A...690A..62P/abstract)",
   "shape": {

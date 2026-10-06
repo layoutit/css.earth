@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/capella.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.691, rounded to two decimals",
   "spectralType": "G3III:",
   "spectralTypeSource": "SIMBAD, * alf Aur: spectral type G3III: (1989ApJS...71..245K)",
+  "objectType": "Spectroscopic Binary",
+  "objectTypePath": "* > ** > SB*",
+  "objectTypeSource": "SIMBAD, * alf Aur: main object type SB*, Spectroscopic Binary",
   "rotationPeriodDays": 104,
   "rotationPeriodSource": "VizieR J/A+A/659/A3/table2 (magnetically active stars FIP bias sample), column Prot: 104 d, the row 0.0 arcsec from the star's J2000 place",
   "rotationPeriodsCatalogued": [

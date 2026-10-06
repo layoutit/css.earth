@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Effective temperature 12100 ± 150 K from Przybilla et al. 2010 (A&A 517, A38; https://doi.org/10.1051/0004-6361/201014164), Table 1, HD 34085: a non-LTE spectroscopic analysis. The radius source, Moravveji et al. 2012, adopts this value in its Table 1.",
   "spectralType": "B8Ia",
   "spectralTypeSource": "SIMBAD, * bet Ori: spectral type B8Ia (2024A&A...690A.176N)",
+  "objectType": "Blue Supergiant",
+  "objectTypePath": "* > Ma* > sg* > s*b",
+  "objectTypeSource": "SIMBAD, * bet Ori: main object type s*b, Blue Supergiant",
   "projectedRotationSpeedKmS": 35,
   "projectedRotationSpeedSource": "SIMBAD, * bet Ori: projected rotation speed 35 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "shape": {

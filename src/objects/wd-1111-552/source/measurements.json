@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(Teff) = 4.97, a temperature from the literature the paper compiles; spectral type DAO (https://arxiv.org/abs/2109.12114)",
   "surfaceGravityLogg": 6.94,
   "surfaceGravitySource": "Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2: log g from a fit of the star's spectrum (https://arxiv.org/abs/astro-ph/9908181)",
+  "objectType": "Planetary Nebula",
+  "objectTypePath": "* > Ev* > PN",
+  "objectTypeSource": "SIMBAD, M 97: main object type PN, Planetary Nebula",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hd-222259-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.451, rounded to two decimals",
   "spectralType": "K3Ve",
   "spectralTypeSource": "SIMBAD, HD 222259B: spectral type K3Ve (2006A&A...460..695T)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, HD 222259B: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 2.85,
   "rotationPeriodSource": "VizieR J/AJ/167/189/fig12 (Rotation period for 10909 TESS targets), column Prot: 2.85 d, the row 0.0 arcsec from the star's J2000 place. The middle of 3 catalogued periods, 2 of them within 20% of it",
   "rotationPeriodsCatalogued": [

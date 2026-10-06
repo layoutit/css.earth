@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-880.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.716, rounded to two decimals",
   "spectralType": "M1.5V",
   "spectralTypeSource": "SIMBAD, HD 216899: spectral type M1.5V (2013AJ....145..102L)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, HD 216899: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 39.5,
   "rotationPeriodSource": "VizieR J/A+A/678/A1/table2 (Paschen lines in M dwarfs chromospheres), column Prot: 39.5 d, the row 0.1 arcsec from the star's J2000 place. The middle of 9 catalogued periods, 8 of them within 20% of it",
   "rotationPeriodsCatalogued": [

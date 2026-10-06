@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Jencson et al. (2022), ApJ 930, 81, section 4.4.1: the model that best fits the star's light before its 2019 dimming has T_eff = 4300 K; the models that fit well span 3700 to 4700 K (https://doi.org/10.3847/1538-4357/ac626c)",
   "limbDisplayGravityLogg": 0.4,
   "limbDisplayGravitySource": "no gravity of this star is published (none in SIMBAD); Levesque et al. (2005), ApJ 628, 973, table 4 (the gravities it computes for the Galactic K- and M-type supergiants of known distance that it fits) gives the class's range, log g -0.9 to 1.3. Across log g 0 to 1.3, the part the grid covers, the limb laws differ by at most 1.0% of the centre brightness from the one drawn, at log g 0.4, the gravity closest to all of them; log g 0.4 is a display choice, not a measurement (https://doi.org/10.1086/430901)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, NAME M51-DS1: main object type *, Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

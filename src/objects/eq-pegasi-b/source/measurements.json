@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/eq-pegasi-b.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 5.040, rounded to two decimals",
   "spectralType": "M4.0Ve",
   "spectralTypeSource": "SIMBAD, BD+19 5116B: spectral type M4.0Ve (2015AJ....149..106D)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, BD+19 5116B: main object type PM*, High Proper Motion Star",
   "rotationPeriodDays": 0.4,
   "rotationPeriodSource": "VizieR J/MNRAS/441/2361/table1 (Stellar magnetism, age and rotation), column Prot: 0.4 d, the row 0.9 arcsec from the star's J2000 place. The middle of 7 catalogued periods, 5 of them within 20% of it",
   "rotationPeriodsCatalogued": [

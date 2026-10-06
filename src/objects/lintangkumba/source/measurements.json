@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 112716: effective temperature 3905 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.106) (https://doi.org/10.1093/mnras/stx1433)",
   "spectralType": "M0III",
   "spectralTypeSource": "SIMBAD, * tau Aqr: spectral type M0III (1989ApJS...71..245K)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, * tau Aqr: main object type *, Star",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1081) (photometry/stellar-color.json); no image of the photosphere exists."

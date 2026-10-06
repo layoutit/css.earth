@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gaia-dr3-4051659602122050176.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.556, rounded to two decimals",
   "spectralType": "F8:",
   "spectralTypeSource": "SIMBAD, CD-27 12874: spectral type F8: (1964AJ.....69..104M)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, CD-27 12874: main object type *, Star",
   "luminosityLogSolar": 3.461,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 4051659602122050176, flags_flame 10: lum_flame 2887.3918 solar luminosities (16th to 84th percentiles 2403.9229 to 3473.1858); its log10 is recorded",
   "shape": {

@@ -11,6 +11,9 @@
   "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3921318923799408640: teff_gspphot 4952.8013 K (16th-84th percentiles 4896.49-4967.757), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
   "surfaceGravityLogg": 2.45,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gaia-dr3-3921318923799408640.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 2.454, rounded to two decimals",
+  "objectType": "Red Giant Branch star",
+  "objectTypePath": "* > Ev* > RG*",
+  "objectTypeSource": "SIMBAD, 2MASS J12122691+1428372: main object type RG*, Red Giant Branch star",
   "luminosityLogSolar": 2.239,
   "luminositySource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 3921318923799408640, flags_flame 10: lum_flame 173.42111 solar luminosities (16th to 84th percentiles 146.86919 to 210.86212); its log10 is recorded",
   "shape": {

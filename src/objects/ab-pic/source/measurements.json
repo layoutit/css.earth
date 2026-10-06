@@ -11,8 +11,14 @@
   "effectiveTemperatureSource": "4878 K (4876 to 4881 K), Gaia DR3 GSP-Phot, source 5495052596695570816, https://gea.esac.esa.int/archive/",
   "surfaceGravityLogg": 4.29,
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/ab-pic.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.286, rounded to two decimals",
+  "rotationPeriodMeasuredDays": 3.92,
+  "rotationPeriodMeasuredSource": "Measured in this project from the star's light in the TESS full-frame images of sector 39 (packages/telescope-cli/src/archives/tess/reduce.mts): 3.92 d, the light swinging by 1.6% as the star turns",
+  "rotationLightSwingPercent": 1.63,
   "spectralType": "K2 V",
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): spectral type K2 V, from Chauvin et al. 2005 (https://ui.adsabs.harvard.edu/abs/2005A&A...438L..29C/abstract)",
+  "objectType": "Eruptive Variable",
+  "objectTypePath": "* > V* > Er*",
+  "objectTypeSource": "SIMBAD, HD 44627: main object type Er*, Eruptive Variable",
   "metallicityDex": 0.04,
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): [Fe/H] 0.04 dex, from Swastik et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161..114S/abstract)",
   "luminosityLogSolar": -0.226,
@@ -20,7 +26,7 @@
   "ageGyr": 0.03,
   "ageSource": "NASA Exoplanet Archive, composite parameters of AB Pic (pscomppars): age 0.03 Gyr, from Chauvin et al. 2005 (https://ui.adsabs.harvard.edu/abs/2005A&A...438L..29C/abstract)",
   "rotationPeriodDays": 3.87,
-  "rotationPeriodSource": "VizieR J/AJ/164/213/table1 (Power-law for cumulative flare frequency distributions), column Prot: 3.87 d, the row 0.0 arcsec from the star's J2000 place. The middle of 9 catalogued periods, 9 of them within 20% of it",
+  "rotationPeriodSource": "VizieR J/AJ/164/213/table1 (Power-law for cumulative flare frequency distributions), column Prot: 3.87 d, the row 0.0 arcsec from the star's J2000 place. The middle of 10 periods, catalogued and measured here, 10 of them within 20% of it",
   "rotationPeriodsCatalogued": [
     {
       "days": 3.85,

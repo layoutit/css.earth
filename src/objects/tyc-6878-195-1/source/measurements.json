@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tyc-6878-195-1.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.233, rounded to two decimals",
   "spectralType": "K4V(e)",
   "spectralTypeSource": "SIMBAD, CD-26 13904: spectral type K4V(e) (2006A&A...460..695T)",
+  "objectType": "Double or Multiple Star",
+  "objectTypePath": "* > **",
+  "objectTypeSource": "SIMBAD, CD-26 13904: main object type **, Double or Multiple Star",
   "rotationPeriodDays": 5.65,
   "rotationPeriodSource": "VizieR J/A+A/600/A83/sample (Photometry of beta Pic members), column Prot: 5.65 d, the row 0.7 arcsec from the star's J2000 place. The middle of 4 catalogued periods, 4 of them within 20% of it",
   "rotationPeriodsCatalogued": [

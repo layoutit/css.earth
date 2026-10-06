@@ -13,6 +13,9 @@
   "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gj-570-a.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.572, rounded to two decimals",
   "spectralType": "K4V",
   "spectralTypeSource": "SIMBAD, HD 131977: spectral type K4V (1989ApJS...71..245K)",
+  "objectType": "BY Dra Variable",
+  "objectTypePath": "* > ** > BY*",
+  "objectTypeSource": "SIMBAD, HD 131977: main object type BY*, BY Dra Variable",
   "rotationPeriodDays": 39.993,
   "rotationPeriodSource": "VizieR J/A+A/661/A24/table3 (Corona-chromosphere connection), column Protcomp: 39.993 d, the row 0.0 arcsec from the star's J2000 place. The middle of 2 catalogued periods, 2 of them within 20% of it",
   "rotationPeriodsCatalogued": [
