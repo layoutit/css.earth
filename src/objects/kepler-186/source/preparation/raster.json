@@ -47,6 +47,562 @@
           }
         }
       }
+    },
+    {
+      "id": "brightness-quarter-2",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q02.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-2",
+        "label": "Quarter 2",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q02.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 2 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.07%, the light's own noise being 0.03%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 2",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-3",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q03.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-3",
+        "label": "Quarter 3",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q03.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 3 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.10%, the light's own noise being 0.04%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 3",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-4",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q04.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-4",
+        "label": "Quarter 4",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q04.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 4 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.13%, the light's own noise being 0.04%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 4",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-5",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q05.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-5",
+        "label": "Quarter 5",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q05.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 5 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.09%, the light's own noise being 0.03%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 5",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-6",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q06.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-6",
+        "label": "Quarter 6",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q06.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 6 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.08%, the light's own noise being 0.03%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 6",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-7",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q07.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-7",
+        "label": "Quarter 7",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q07.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 7 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.11%, the light's own noise being 0.04%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 7",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-8",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q08.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-8",
+        "label": "Quarter 8",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q08.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 8 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.08%, the light's own noise being 0.04%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 8",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-9",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q09.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-9",
+        "label": "Quarter 9",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q09.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 9 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.10%, the light's own noise being 0.03%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 9",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-10",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q10.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-10",
+        "label": "Quarter 10",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q10.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 10 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.12%, the light's own noise being 0.03%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 10",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-11",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q11.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-11",
+        "label": "Quarter 11",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q11.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 11 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.07%, the light's own noise being 0.04%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 11",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-12",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q12.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-12",
+        "label": "Quarter 12",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q12.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 12 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.18%, the light's own noise being 0.05%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 12",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-14",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q14.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-14",
+        "label": "Quarter 14",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q14.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 14 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.13%, the light's own noise being 0.03%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 14",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-15",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q15.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-15",
+        "label": "Quarter 15",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q15.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 15 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.13%, the light's own noise being 0.03%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 15",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "brightness-quarter-16",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q16.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-quarter-16",
+        "label": "Quarter 16",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q16.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 33.8 days, fitted with starry to the measured points of quarter 16 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels (the light varies by 0.80%; the map's curve leaves a scatter of 0.10%, the light's own noise being 0.04%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Santos et al. (2019, ApJS 244, 21) list the star as a rotator in their table (VizieR J/ApJS/244/21, table 3): a rotation period of 33.75 ± 2.4 d and a photometric activity (S_ph, the scatter of the light over five rotations) of 2186 parts per million. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 6 other stars within 16 arcseconds, with 5.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "Kepler · brightness map made here · Quarter 16",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "kepler-186-surface-{id}{suffix}.webp",
+      "thumbnail": "kepler-186-dataset-{id}.webp",
+      "source": "science/kepler/kepseismic/kepler-186-q16.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/kepler/kepseismic/kepler-186-q16.dat",
+        "variable": "Brightness [%]",
+        "consumer": "kepler-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 98,
+        "maximum": 102,
+        "colors": [
+          "#7e4300",
+          "#9f6222",
+          "#bf8045",
+          "#df9f67",
+          "#ffbd89"
+        ],
+        "labels": [
+          "98%",
+          "102%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#ffbd89, its Color dataset) over the brightness map this project made from the star's light in Kepler quarter 16 (January to April 2013): the map's scale, 98% to 102% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 3.3% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "Kepler · the star in its color over its brightness map · January to April 2013",
+        "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+      }
     }
   ],
   "emission": {

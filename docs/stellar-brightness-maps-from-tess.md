@@ -1,4 +1,4 @@
-# A star's rotation and brightness map from the TESS and K2 missions' light curves
+# A star's rotation and brightness map from the TESS, K2 and Kepler missions' light curves
 
 A star with dark spots dims each time the spots turn to face us. The rise and fall of its light gives the time it takes to
 turn once, and the shape of that curve says which longitudes of the star are darker or brighter.
@@ -8,6 +8,10 @@ along the ecliptic, some 80 days each, with an image every 30 minutes. TESS has 
 days at a time, and publishes a light curve every 2 minutes for its targets. Each mission's pipeline corrects the flux for
 the spacecraft's systematics (PDC-MAP). This note describes how the telescope's tools take those light curves as they are,
 have a published method decide whether a star's rotation is seen in them, and make a brightness map from it.
+
+Kepler (2009 to 2013) watched one field for four years, with an image every 30 minutes. For a Kepler star the light curve
+read is KEPSEISMIC, which its authors make from the mission's pixels, and the star's rotation is the verdict Santos et al.
+(2019, 2021) published on that light curve.
 
 Nothing here is measured from pixels, and no rule of this repository decides whether a star is seen turning. It is
 decided by a published method run on the light curves its paper uses, or by a paper's own published verdict on the
@@ -24,10 +28,15 @@ Each step of the science is run by the code its authors publish, pinned in
 | --- | --- | --- |
 | Light curve, K2 | The K2 mission's own, from [MAST](https://archive.stsci.edu/missions-and-data/k2) (DOI 10.17909/T9WS3R) | The long-cadence light curve of a campaign with the flux the mission's pipeline corrected (PDC-MAP) |
 | Light curve, TESS | The TESS mission's own, from [MAST](https://archive.stsci.edu/missions-and-data/tess) (DOI 10.17909/t9-nmc8-f686) | The 2-minute light curve of a sector with the flux the mission's pipeline corrected (PDC-MAP) |
+| Light curve, Kepler | [KEPSEISMIC](https://archive.stsci.edu/hlsp/kepseismic) (Mathur, Santos & García; DOI 10.17909/t9-mrpw-gc07), from MAST | The star's four years as one light curve, made from the mission's pixels in its authors' own aperture, corrected with KADACS (García et al. 2011, MNRAS 414, L6) and high-pass filtered at 20, 55 and 80 days |
 | Reading a file | [lightkurve](https://lightkurve.github.io/lightkurve/) 2.6.0 | Reads the light curve's file with its quality flags, as it is |
+| Reading a file, Kepler | This repository's FITS reader | Reads a KEPSEISMIC file's table and its mark for each point |
 | Period, K2 | [astropy](https://www.astropy.org/)'s generalized Lomb-Scargle, and [star-privateer](https://gitlab.com/sybreton/star_privateer) 1.3.1 (Breton et al. 2024, A&A 689, A229) for the wavelet and the autocorrelation | The three periods that Reinhold & Hekker (2020) compare |
 | Period, TESS | [SpinSpotter](https://github.com/rae-holcomb/SpinSpotter) 0.2.0 (Holcomb et al. 2022, ApJ 936, 138) | The period of the light's autocorrelation and the height, width and fit of its peaks |
 | Verdict, TESS, when that method refuses | The catalogue of [Colman et al. (2024, AJ 167, 189)](https://arxiv.org/abs/2402.14954), at [VizieR J/AJ/167/189](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/167/189) | The targets the paper found turning in sectors 1 to 26, each with its period. The paper's code has no licence and is not run |
+| Verdict, TESS, for a TESS Object of Interest | The tables of [Canto Martins et al. (2020, ApJS 250, 20)](https://arxiv.org/abs/2007.03079), at [VizieR J/ApJS/250/20](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/250/20) | The 1000 TOIs the paper searched in sectors 1 to 22, each in the table of what its authors found: an unambiguous rotation period, a dubious one, ambiguous variability, noise or pulsation. Its periods were chosen by inspection, which cannot be run |
+| Verdict, Kepler | The catalogues of Santos et al. ([2019, ApJS 244, 21](https://arxiv.org/abs/1908.05222); [2021, ApJS 255, 17](https://arxiv.org/abs/2107.02217)), at VizieR [J/ApJS/244/21](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/244/21) and [J/ApJS/255/17](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/255/17) | The Kepler stars the papers give a rotation period, and the stars they give none, with the reason |
+| Quarters, Kepler | Tables 1 and 2 of the [Kepler Data Release 25 Notes](https://archive.stsci.edu/kepler/release_notes/release_notes25/KSCI-19065-002DRN25.pdf) (KSCI-19065-002) | The first and last long cadence of each of the mission's 18 quarters |
 | Temperature and gravity a record lacks | The TESS Input Catalog v8 (Stassun et al. 2019, AJ 158, 138), in the header of the star's own light curve | The two values Holcomb et al. select their stars by |
 | Other stars' light in a TESS target's pixels | The TESS Input Catalog (Stassun et al. 2019, AJ 158, 138), at [MAST](https://archive.stsci.edu/missions-and-data/tess) (DOI 10.17909/fwdt-2x66) | The target's contamination ratio: the other stars' flux in its pixels over its own. A target at the limit two papers print is not read |
 | Neighbours | [Gaia DR3](https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355) through [CDS X-Match](http://cdsxmatch.u-strasbg.fr/) | The Gaia sources around the star, counted for its page to say; nothing is refused on them |
@@ -48,6 +57,11 @@ K2 listed its targets where surveys of about the year 2000 had them, so a star t
 place and at its places in 2016 and 2000; for TESS, at its places in 2019 and 2025. Each file is read as the mission
 publishes it.
 
+A star that none of this gives a rotation is asked for among the KEPSEISMIC light curves
+([`kepler/kepseismic.mts`](../packages/telescope-cli/src/archives/kepler/kepseismic.mts)): the target within one Kepler
+pixel, 4 arcseconds, of its recorded place or of its places in 2011 and 2000. A star whose record gives a surface
+gravity under log g 3.5 is not asked for, because the papers that judge Kepler's light cut their samples there.
+
 ## A published method for each kind of star
 
 Whether a light curve shows a star turning is not this repository's judgement, nor anyone's here. A method is taken from
@@ -61,6 +75,8 @@ given no verdict, and is not fetched.
 | Between 3250 and 6250 K with log g over 4.2; the K2 mission's PDC-MAP light curve of a campaign, campaigns 0 to 18 without 9 | Reinhold & Hekker (2020, A&A 635, A43) | Wired |
 | A dwarf by the cuts of Ciardi et al. (2011); the TESS mission's 2-minute PDC-MAP light curve of a sector | Holcomb et al. (2022, ApJ 936, 138) | Wired |
 | A target in the paper's catalogue of rotators; the TESS mission's 2-minute light curve of a sector, sectors 1 to 26 | Colman et al. (2024, AJ 167, 189): the paper's own verdict, read from its table | Wired, for a star Holcomb et al.'s method refuses |
+| A TESS Object of Interest in the paper's table of unambiguous rotation periods; the TESS mission's 2-minute light curves of its sectors among 1 to 22 | Canto Martins et al. (2020, ApJS 250, 20): the paper's own verdict, read from its tables | Wired, for a star Holcomb et al.'s method refuses |
+| A star of the papers' samples (Kepler's main-sequence stars and subgiants); the KEPSEISMIC light curve of its four years | Santos et al. (2019, ApJS 244, 21; 2021, ApJS 255, 17): the papers' own verdict, read from their tables | Wired, for a star nothing above gives a rotation |
 | One Kepler quarter, the mission's PDC-MAP light curve | Reinhold, Reiners & Basri (2013, A&A 560, A4) | Read, not wired |
 | Giants and subgiants | None for rotation in one campaign or sector | Not wired |
 | A star with full-frame images only | None | Not wired |
@@ -216,6 +232,224 @@ in its one sector.
 
 ![The six stars in the app (BE Ceti, HD 6569, HD 15906, HD 63433, Merga and TOI-1136): Color + brightness above, Brightness map below](images/stellar-brightness-maps-published-verdict.webp)
 
+### TESS: the verdict Canto Martins et al. (2020) published
+
+Canto Martins et al. (Sects. II and III) searched the mission's 2-minute PDC-MAP light curves of the first 1000 TESS
+Objects of Interest with public light curves, in sectors 1 to 22. From each light curve they removed flares and the
+transits of the TOI catalogue, corrected jumps, divided each sector by a third-order polynomial and dropped points over
+3.5 standard deviations; a star's sectors were joined in one series. They computed its Lomb-Scargle periodogram, its
+fast Fourier transform and its wavelet map, and inspected every light curve by eye. A period is confident when the light
+holds more than three cycles of it, or 2.5 to 3 when the signal is clear, large and persistent. The period they print is
+the peak of the wavelet's global spectrum.
+
+An inspection cannot be run here. The paper publishes its verdict on every one of the 1000 as the table it lists the
+star in, and [`canto-martins.mts`](../packages/telescope-cli/src/archives/tess/canto-martins.mts) reads the five tables,
+for a star Holcomb et al.'s method refuses:
+
+| Table | What the paper says of its stars | How it is read |
+| --- | --- | --- |
+| Table 1, 131 stars | "Unambiguous rotation periods" | The star's period is `Prot` |
+| Table 2, 32 stars | "Dubious" periods: a possible rotation whose period "could not be disentangled among two or more possibilities", or under three cycles | No rotation with one period |
+| Table 3, 109 stars | "Ambiguous variability" | No rotation |
+| Table 4, 714 stars | "Noisy" light curves | No rotation |
+| Table 5, 10 stars | A pulsation period | No rotation |
+
+| Column of Table 1 | What the table's description says | How it is read |
+| --- | --- | --- |
+| `Prot`, `e_Prot` | The rotation period and its error | The star's period |
+| `tSPAN` | The effective time span of the light analysed: the total less its gaps | Decides which light the verdict is on (below) |
+| `Ncyc` | The span over the period | Kept with the row |
+| `Sectors` | The TESS observation sectors, taken from the TOI Release Portal | Not read. It is not the list of the sectors analysed: in 28 of the 131 rows the span is over 28 days for each sector named (TIC 271900960 names sector 4 and spans 285 days) |
+
+The table does not name the sectors a period was found in. It gives the time span of the light that was analysed. So a
+row is taken only when that span says which of the star's sectors it covers: when it is longer than one sector fewer of
+the star's 2-minute sectors among 1 to 22 could hold, and no longer than all of them hold, at 28 days a sector ("the
+typical 28-day time span of the TESS sectors", Sect. II). Then every one of those sectors was analysed, and each becomes
+one Brightness map at the paper's period. A sector after 22 was not judged by the paper and gets no map on its verdict.
+
+Three checks then apply to a paper's verdict, Colman et al.'s included. Each can only withhold a map:
+
+- Two papers that print one star periods more than 20% apart contradict each other, and neither is taken. A paper's
+  period counts here whether or not its row is a verdict on the star's light.
+- A paper's period that is half the star's catalogued period is not doubled, as a period measured here would be. The
+  paper states the rotation itself, so the two published values differ, and nothing is drawn at a period the paper does
+  not give.
+- A star's record adopts no period when its catalogues disagree. A paper's period is then one of the two sides: where
+  the record holds a period from another table more than 20% from the paper's, nothing is drawn.
+
+The table prints no measure of the light's swing. A star's is measured here, for its page to say: the mean, over the
+sectors mapped, of the 95th less the 5th percentile of each sector's light as SpinSpotter's cleaning prepares it.
+
+Of our stars with a TESS 2-minute light curve, 297 are among the paper's 1000: 29 in Table 1, 10 in Table 2, 36 in Table
+3 and 222 in Table 4. Eleven of the 29 were drawn before, nine by Holcomb et al.'s method and two on Colman et al.'s
+verdict, each at the paper's period within 20%. What happened to the other 18:
+
+| What the star's row gives, and what it is set beside | Stars |
+| --- | --- |
+| One period, on light the span identifies, the catalogued period within 20%: drawn | 4 |
+| Half the catalogued period (TOI-426, TOI-444, TOI-1807 and HD 235088) | 4 |
+| A time span that does not say which of the star's sectors were analysed (TOI-1301, TOI-1346, TOI-1659 and TOI-1782) | 4 |
+| Neither the catalogued period nor its half (HD 183579: 8.6 d beside 24.8 d; WASP-50: 5.49 d beside 16.3 d) | 2 |
+| The record adopts no period, and holds another table's more than 20% away (TOI-1775: 5.33 d beside 15.73 d from the ground; WASP-8: 7.25 d beside 15.31 d) | 2 |
+| Colman et al.'s table prints another period (HIP 65 A: 13.22 d here, 10.51 d there) | 1 |
+| Holcomb et al.'s method accepts a period itself, which is neither the catalogued one nor its half, so the star stays that method's (TOI-1803) | 1 |
+
+| Star | Period, days | Catalogued, days | Span, days | Sectors mapped | Maps | Swing |
+| --- | --- | --- | --- | --- | --- | --- |
+| HD 18599 | 8.489 ± 0.858 | 8.73 | 42 | 2 and 3 | 2 | 0.68% |
+| HD 110082 | 2.149 ± 0.044 | 2.34 | 52 | 12 and 13 | 2 | 0.49% |
+| TOI-778 | 2.531 ± 0.160 | 2.584 | 20 | 10 | 1 | 0.10% |
+| WASP-140 | 10.229 ± 1.217 | 10.44 | 43 | 4 and 5 | 2 | 0.76% |
+
+Colman et al.'s table also prints another period for two of the four stars whose span does not say their sectors:
+5.59 d beside 10.13 d for TOI-1346, and 5.14 d beside 6.93 d for TOI-1659.
+
+WASP-140's record adopts the paper's own 10.229 d; the 10.44 d beside it is from another table. One table prints 5.4 d
+for HD 18599, measured on the mission's SAP flux (Hojjatpanah et al. 2020), where two others and the paper give 8.5 to
+8.7 d; the record adopts 8.73 d. This is a comparison, not a setting.
+
+The paper's Table 1 holds half the catalogued period for four of our stars. Newton et al. (2022, AJ 164, 115, Sect.
+2.1.1) describe one way that happens: for a star turning in 6 to 12 days, the mission's PDC-MAP correction can change
+the light so that it repeats in half the star's period. Whether it happened to these four was not checked here.
+
+![The four stars in the app (WASP-140, HD 18599, TOI-778 and HD 110082): Color + brightness above, Brightness map below](images/stellar-brightness-maps-canto-martins.webp)
+
+On the night these stars were drawn, 7 October 2026, VizieR's TAP service still answered 503. The five tables were read
+from VizieR's plain table service, by the columns the entry's queries name, and kept where `reduce.mts` keeps a table.
+The queries of `canto-martins.mts` have not yet been answered by the TAP service.
+
+### Papers read and not wired
+
+A paper's table is read as a verdict only when the paper measured on the light curve that is mapped (the mission's
+2-minute PDC-MAP light curve), marks its firm detections of rotation, and says which of a star's light a row is of.
+These were read on 7 October 2026. "Ours" counts our stars with a TESS 2-minute light curve that the table lists with a
+period, and how many of them have no map.
+
+| Paper | Light curve | What a row asserts | Why it is not wired | Ours, without a map |
+| --- | --- | --- | --- | --- |
+| Stelzer et al. (2022, A&A 665, A30) | 2-minute PDC-MAP, sectors 1 to 26, named for each star | A "reliable" period: found and consistent in all the star's sectors | It qualifies and adds nothing: none of our 8 stars in it has a reliable period | 0, 0 |
+| Magaudda et al. (2022, A&A 661, A29) | 2-minute PDC-MAP | A period with a flag: reliable, not reliable or ambiguous | It names no sectors; none of our 4 stars in it has a period | 0, 0 |
+| Medina et al. (2020, ApJ 905, 107; 2022, ApJ 935, 104) | 2-minute PDC-MAP, year 1 | A period with its source; one source is "this work using TESS photometry" | It names no sectors; our one star with a TESS period there is drawn already | 1, 0 |
+| Günther et al. (2020, AJ 159, 60) | 2-minute PDC-MAP, sectors 1 and 2, one row a sector | A period under 5 days from a Fourier transform, checked by eye, of a flaring star | It adds nothing: its one period for a star of ours without a map, LHS 3844's 0.46 d, is the star's planet's orbit | 3, 1 |
+| Doyle et al. (2019, MNRAS 489, 437; 2020, MNRAS 494, 3596) | 2-minute PDC-MAP, sectors 1 to 3 and 1 to 13, named for each star | The period of a flaring star, from a periodogram and its authors' inspection | It adds nothing: our one star in the two is drawn already | 1, 0 |
+| Ramsay et al. (2020, MNRAS 497, 2320) | 2-minute PDC-MAP, sectors 1 to 13 | Stars turning in under a day | Its table is not at VizieR, and was not read | not counted |
+| Lambier et al. (2025, AJ 170, 168) | 2-minute PDC-MAP and its authors' own full-frame light curves, sectors named | A "real" or "possible" period of a dwarf of type M6 or later | None of its 133 stars is ours | 0, 0 |
+| Lin et al. (2024, AJ 168, 234) | 2-minute PDC-MAP, sectors 1 to 72 | The mean of a flaring star's valid periods (a Lomb-Scargle peak, a Fourier fit and an autocorrelation that agree) | It does not say which sectors gave a valid period, nor how many. Proxima Centauri's row prints 4.8 d | 30, 11 |
+| Gao et al. (2025, ApJS 276, 57) | 2-minute PDC-MAP, sectors 1 to 67, a star's sectors joined | A periodic variable with a class from a random forest; ROT is one of 12 | The class is no detection of rotation: the paper counts a ROT star as rightly classed when Gaia DR3 calls it a main-sequence oscillator (25.3% of them), and gives the class a purity of 83.3% | 102, 59 |
+| Fetherolf et al. (2023, ApJS 268, 4), and Simpson et al. (2023, AJ 166, 72) on its planet hosts | 2-minute PDC-MAP, sectors 1 to 26, one row a sector | A period of variability, with no class: rotation, pulsation and close pairs together | It does not claim rotation | 240, 196 |
+| Tu et al. (2022, ApJ 935, 90) | The mission's PDC-MAP light curves, a star's sectors joined | "Periodicity of the star", the Lomb-Scargle peak, up to 346 days | No row is marked a detection, and none is checked | 211, 192 |
+| Ren et al. (2026, ApJS 282, 29) and Su et al. (2025, ApJS 276, 44) | TESS 2-minute light curves | A rotation period beside spectroscopic activity, from 0.003 days up | No row is marked a detection; WASP-10's 3.098 d is its planet's orbit | 11 without a map, matched by place |
+| Ment & Charbonneau (2023, AJ 165, 265) | 2-minute PDC-MAP, sectors 1 to 42, named for each star | A Lomb-Scargle period used to detrend the light | The paper says its periods "have not been rigorously vetted" as rotation | 3, 1 |
+| Wang et al. (2025, ApJS 281, 52) | 2-minute light curves, sectors 1 to 74 | "Period", from 0 to 25,960 days, of a flaring star | The table does not say what the period is of, or where it is from; only its description was read | 384, 314 |
+| Schmitt et al. (2026, A&A 709, A180) | 2-minute SAP flux, sectors 1 to 58: the paper finds PDC-MAP overcorrects | A period, with a flag for a possibly bad one | Not the light curve that is mapped | 64, 36 |
+| Newton et al. (2022, AJ 164, 115) | 2-minute SAP flux, and its authors' own full-frame light curves | A secure or a candidate period | Not the light curve that is mapped | 2, 2 |
+| Howard et al. (2021, AJ 162, 147) | 2-minute SAP flux, with photometry from the ground | A period with a grade | Not the light curve that is mapped | not counted |
+| Hojjatpanah et al. (2020, A&A 639, A35) | 2-minute SAP flux, a star's sectors joined | A rotation period beside the star's radial-velocity scatter | Not the light curve that is mapped | 1 without a map, matched by place |
+| Howard et al. (2020, ApJ 895, 140) | Evryscope, from the ground | A rotation period of a flaring star | Not TESS's light | 1, 0 |
+| Messina et al. (2022, A&A 657, L3) | Full-frame images, PATHOS | A period with a grade | Not the light curve that is mapped | 2, 2 |
+| Anthony et al. (2022, AJ 163, 257) | Full-frame images, its authors' own aperture | A period, reliable under 15 days | Not the light curve that is mapped | 2 without a map, matched by place |
+| Seli et al. (2021, A&A 650, A138) | Full-frame images, its authors' own photometry | A period under 5 days | Not the light curve that is mapped | not counted |
+| Claytor et al. (2024, ApJ 962, 47) and Hattori et al. (2025, AJ 170, 15) | Full-frame images, their authors' own photometry | A period from a neural network, or beside one from the ground | Not the light curve that is mapped | 9, 9 |
+| Oelkers et al. (2018, AJ 155, 39) | KELT, from the ground | A rotation period | Not TESS's light | 50, 42 |
+| Gaidos et al. (2023, MNRAS 520, 5283) and Rossi et al. (2026, A&A 705, A142) | None of their own: each row cites the paper its period is from | A period from the literature | Compilations | not counted |
+
+The Virtual Observatory registry lists 169 VizieR tables with a column that names the TESS Input Catalog and a column
+for a period. Each was asked for our stars by their TIC numbers. Most hold planets' orbits or eclipsing pairs; the
+tables of rotation or variability among them are in the rows above.
+
+### Kepler: the verdict Santos et al. (2019, 2021) published
+
+Santos et al. measure rotation in the KEPSEISMIC light curves of 159,442 Kepler stars: the dwarfs the mission's catalogue
+called K and M in the first paper, its F and G dwarfs and its subgiants in the second. For each star they take the period
+of the wavelet power spectrum, of the autocorrelation and of the product of the two, in the star's light filtered at 20,
+55 and 80 days (2019, Sects. II.1 and III.1).
+
+Their criteria cannot be run here as printed. In the first paper 40% of the periods were chosen by its authors'
+inspection of the light curves (Sect. III.1.2). In the second the choice is a random forest trained on the first paper's
+stars, a quarter of whose stars were then inspected too (Sects. III.3.2 and III.3.3), and no published code holds the
+trained forest. So nothing is judged here. A star's rotation is the papers' own verdict on it, its row in their tables
+([`santos.mts`](../packages/telescope-cli/src/archives/kepler/santos.mts)), read through VizieR's TAP service for a star
+that nothing above gives a rotation, and its light is the light curve they judged.
+
+| Table | What a row says | How it is read |
+| --- | --- | --- |
+| Table 3 (2019), Table 1 (2021), column `Prot` | The star's rotation period: the wavelet's, or the product's or the autocorrelation's where the wavelet gives none | The star's period |
+| The same tables, first flag set to 1 | A Type 1 classical-pulsator or close-binary candidate, whose signal "may be distinct from the rotational behavior of single stars" (2019, Sect. II.2). The papers print its period and leave it out of their own results | No rotation is taken from it |
+| Table 1 (2021), first flag 0 | "No rotation modulation" (six rows) | No rotation is taken from it |
+| Table 4 (2019), Table 2 (2021) | No period, and for most stars the reason: no modulation, a possible one, a red giant, an eclipsing binary, a polluted light curve | No rotation, with the papers' reason |
+| Table 5 (2019) | Several signals, "likely to be associated with different unresolved sources" | No rotation. No number is read: the file holds a row's periods before its activities, where its description labels them signal by signal |
+| The other flags | A Gaia binary or subgiant candidate, a planet candidate, the FliPer class | Kept with the row; the papers keep such stars in their analysis, and nothing is decided on them here |
+
+A period is read in the light of one filter: 20 days for a period under 23 days, 55 days from 23 to 60, 80 days from 60
+on (2019, Sect. III.1.1; 2021, Sect. III.3.3).
+
+A KEPSEISMIC light curve is one series of the star's four years, and a star's spots change within months. So it is cut
+at the mission's own quarters ([`quarters.json`](../packages/telescope-cli/src/archives/kepler/quarters.json)), and each
+quarter has its own Brightness map, all at the papers' period. Two things decide whether a quarter has one:
+
+- The papers remove "Kepler Quarters with anomalously high variance compared with their neighbours" from their rotation
+  analysis (2019, Sect. III.1), by the rule of García et al. (2014, A&A 572, A34, Sect. 2). Each quarter's variance is
+  divided by the median of the star's quarters; the quarter is removed when that ratio stands more than 0.9 above the
+  ratios of the quarter before and the quarter after, on average. A quarter the rule removes is not part of the light
+  the verdict is on, and has no map.
+- A quarter whose measured light spans less than one turn of the star has no map: not every longitude faced Kepler in it.
+
+The file's authors put the light on a regular grid, fill its gaps shorter than 20 days by in-painting, and take a known
+planet's transits out and fill them the same way (2019, Sect. II.1; García et al. 2014, A&A 568, A10). The file holds
+one integer for each point, which marks the measured points 1, the filled-in ones 2 and the empty ones 0
+([`kepseismic.mts`](../packages/telescope-cli/src/archives/kepler/kepseismic.mts) says how that was checked). A map is
+fitted to the measured points only.
+
+Of our stars, 89 have a KEPSEISMIC light curve. The records of 60 put them under log g 3.5, and they are not asked for.
+The other 29 are all in the papers' tables. Two of them, Kepler-63 and Kepler-1313, are already drawn from their TESS
+light and are left as they are. What happened to the 27:
+
+| What happened | Stars |
+| --- | --- |
+| Not read: SIMBAD files the star as an eclipsing binary (HAT-P-11, Kepler-78 and Kepler-96; the tables give each a period) | 3 |
+| Holcomb et al.'s method accepts a period in its TESS light that is neither the catalogued one nor its half, so the star stays that method's and is not drawn (GJ 1245 B, Kepler-1651) | 2 |
+| The tables give a rotation period: drawn | 12 |
+| The tables give no period: no rotational modulation (4), a possible one (2), an eclipsing binary (1), no reason given (3) | 10 |
+
+Holcomb et al.'s method had refused the TESS light of all 12: their periods, 10 to 50 days, are long beside a sector of
+27 days. Each has one map for every quarter kept: 154 maps of 205 quarters. The variance rule removes 36 quarters, and
+15 hold less than a turn.
+
+| Star | Paper | Period, days | Catalogued, days | Filter, days | Quarters | Removed by the variance rule | Under one turn | Maps | Swing |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Kepler-22 | 2021 | 19.25 | 22.35 | 20 | 18 | 3, 6, 12, 14, 15, 17 | 0 | 11 | 0.05% |
+| Kepler-37 | 2021 | 23.54 | 26.01 | 55 | 18 | 4, 13, 16 | 0 | 14 | 0.12% |
+| Kepler-93 | 2021 | 27.95 | 29.41 | 55 | 18 | 8, 12 | 0 | 15 | 0.03% |
+| Kepler-94 | 2019 | 50.11 | 44.31 | 55 | 18 | 5, 13, 15 | 0, 1, 17 | 12 | 0.25% |
+| Kepler-138 | 2019 | 19.12 | this table's own | 20 | 18 | 6, 10, 17 | 0 | 14 | 0.40% |
+| Kepler-186 | 2019 | 33.75 | 34.29 | 55 | 17 | 13 | 1, 17 | 14 | 0.80% |
+| Kepler-411 | 2019 | 10.32 | 10.4 | 20 | 15 | 2, 5 | 0 | 12 | 2.0% |
+| Kepler-538 | 2021 | 24.1 | 25.2 | 55 | 18 | 6, 10, 12 | 0 | 14 | 0.13% |
+| Kepler-732 | 2019 | 34.46 | 36.007 | 55 | 17 | 2, 7, 10, 13 | 1, 17 | 11 | 0.95% |
+| Kepler-736 | 2019 | 33.05 | this table's own | 55 | 17 | 5, 13, 16 | 17 | 13 | 0.33% |
+| Kepler-1656 | 2021 | 18.62 | none | 20 | 14 | 3, 7, 14, 16 | 0 | 9 | 0.10% |
+| Kepler-1795 | 2019 | 19.12 | 19.23 | 20 | 17 | 11, 13 | none | 15 | 0.65% |
+
+Nine of the 12 have a catalogued period from another source, each within 20% of the table's. This is a comparison, not a
+setting.
+
+On the night these stars were drawn, 7 October 2026, VizieR's TAP service answered 503 for hours. The tables were read
+from the catalogue's own files at CDS, by the byte ranges of their description, and kept where `reduce.mts` keeps a
+table. The queries of `santos.mts` have not yet been answered by the service.
+
+The variance rule removes a quarter for what the star does as well as for what the instrument does. The variance of
+Kepler-186's light is 3.5, 4.2 and 4.4 times the median of its quarters in quarters 11, 12 and 13, and 1.7 times in
+quarter 14. Quarter 13 stands far above the quarter after it and is removed; quarter 12, nearly as far above the median,
+is not.
+
+Kepler-22 and Kepler-93 are drawn at the tilts their records work out, 17.8° and 18.4°. Seen so nearly from the pole, a
+swing of 0.05% and 0.03% takes maps that run from 92% to 108% and from 96% to 104% of the mean surface.
+
+Gaia DR3 lists three other stars within 16 arcseconds of Kepler-1795, with 45% of their light and the star's together,
+and two within 16 arcseconds of Kepler-732, with 17%. Each star's datasets say so. The papers flag neither row.
+
+![Six of the Kepler stars in the app (Kepler-22, Kepler-37, Kepler-138, Kepler-186, Kepler-411 and Kepler-732): Color + brightness above, Brightness map below](images/stellar-brightness-maps-kepler.webp)
+
 ### A star K2's method refuses
 
 K2's light is judged first. A star K2 did not watch is judged on its TESS light, and so is a star whose K2 light
@@ -352,6 +586,10 @@ So 109 stars have maps, 327 maps in all: 65 stars with 278 maps from TESS, 6 of 
 Colman et al.'s verdict, and 44 stars with 49 maps from K2. A star TESS has watched often has a map for each valid
 sector: TOI-1224 has 9, and four more stars have 8.
 
+Kepler's light adds 12 stars and 154 maps on the verdict of Santos et al., counted in the section on Kepler above, and
+the verdict of Canto Martins et al. adds 4 stars and 7 maps from TESS, counted in its section: 132 stars have maps, 523
+maps in all.
+
 The light of 18 of the 109 stars swings by under 0.1%, and 10 of those are hotter than 7,000 K (Stellio at 9,131 K swings
 by 0.012%, the least). Holcomb et al. (Sect. III) exclude no star by how much its light varies, and write that some, the
 hotter ones above all, "may warrant additional inspection" to tell rotation from pulsation. They print no cut for it, and
@@ -361,7 +599,7 @@ none is applied here.
 
 ### What here is not printed in a paper
 
-Nine things around the methods are this repository's, and a reader should know them as such:
+Twenty-three things around the methods are this repository's, and a reader should know them as such:
 
 1. Holcomb et al.'s criteria are applied to sectors after their sample's 26.
 2. A star's temperature and surface gravity are read from its record here; Holcomb et al. read them from the TESS Input
@@ -381,11 +619,42 @@ Nine things around the methods are this repository's, and a reader should know t
 8. A map on Colman et al.'s verdict is made from the sector's light as SpinSpotter's cleaning prepares it (30-minute
    bins, the star's known transits masked), as every TESS map here is. The paper judged the light clipped at three
    sigma.
-9. A star's TESS light is not read when the TESS Input Catalog gives its target a contamination ratio of 0.2 or more.
-   The limit is printed by Fetherolf et al. (2023) and García Soto et al. (2023) for their own searches of the same
-   light curves. Holcomb et al. and Colman et al. print none, and setting it before their verdicts is this
-   repository's. So is reading a target the catalog gives no ratio, as Fetherolf et al.'s own catalogue holds such
-   stars.
+9. Kepler's light is read last: for a star that no method gives a rotation on its K2 or TESS light, and no row of
+   Colman et al.'s table does. No criteria are run on it; its rotation is a row of Santos et al.'s tables or nothing.
+10. A star whose record gives a surface gravity under log g 3.5 is not asked for among the Kepler light curves. That is
+    the cut Santos et al. (2021, Sect. II.2) put on their sample, applied to the record's value.
+11. Santos et al.'s tables do not print the filter a row's period was read in, and a period chosen by eye may come from
+    another. The light curve mapped is the one the papers call appropriate for the period.
+12. A row flagged as a Type 1 classical-pulsator or close-binary candidate is not taken as a star's rotation, though the
+    papers print a period for it.
+13. A KEPSEISMIC file's mark for each point is described by neither its README nor the papers. It is read as empty,
+    measured or filled in after being set beside the mission's own light curves of two stars, and the filled-in points
+    are left out of a map's fit.
+14. García et al.'s rule is printed for a quarter with two neighbours. A star's first and last quarters are judged on
+    their one neighbour. The variance is taken over every point the file holds of the quarter, filled-in ones included.
+15. A quarter whose measured light spans less than one turn of the star has no map. No paper prints that limit.
+16. A Kepler star's swing is measured here, as the 95th less the 5th percentile of the light of the quarters mapped.
+    The papers print another measure of it, S_ph.
+17. Canto Martins et al.'s tables are looked up for a star Holcomb et al.'s method refuses, after Colman et al.'s. A row
+    of their Table 1 is taken only when its time span says that every one of the star's 2-minute sectors among 1 to 22
+    was analysed: longer than one sector fewer could hold, and no longer than they all hold, at the paper's 28 days a
+    sector. The sectors the table names are not read.
+18. The paper judged a star's sectors joined in one series, each divided by a third-order polynomial, with flares and
+    transits removed. Here each of those sectors has its own map at the paper's period, made from the sector's light as
+    SpinSpotter's cleaning prepares it.
+19. The swing of a star drawn on Canto Martins et al.'s verdict is measured here: the mean, over the sectors mapped, of
+    the 95th less the 5th percentile of each sector's light. The table prints none.
+20. A paper's period that is half the star's catalogued period is withheld. A period measured here is doubled in that
+    case (item 5); a paper's is its statement of the rotation itself.
+21. Where a star's record adopts no period because its catalogues disagree, a paper's period that is more than 20% from
+    a period the record holds from another table is withheld.
+22. Two papers that print one star periods more than 20% apart give it none, whether or not each row is a verdict on
+    the star's light.
+23. A star's TESS light is not read when the TESS Input Catalog gives its target a contamination ratio of 0.2 or more.
+    The limit is printed by Fetherolf et al. (2023) and García Soto et al. (2023) for their own searches of the same
+    light curves. Holcomb et al. and Colman et al. print none, and setting it before their verdicts is this
+    repository's. So is reading a target the catalog gives no ratio, as Fetherolf et al.'s own catalogue holds such
+    stars.
 
 ## What the map is and is not
 
@@ -462,10 +731,12 @@ node packages/telescope-cli/src/new-object/new-object-cli.mts --pixel-light --al
 `reduce.mts` asks MAST for the star's K2 light curves and, when K2 has none or its method refuses the star, its TESS
 2-minute ones, each only when a method covers the star's kind, and has that method judge them. Before a TESS light curve
 is judged it asks MAST for the TESS Input Catalog's contamination ratio of the star's target. For a star the TESS method
-refuses it looks the star up in Colman et al.'s table, which is one request to VizieR for all stars, kept under
-`output/tess/published/`. `--all` leaves a star alone once it has a receipt; a star judged before a change to the
+refuses it looks the star up in Colman et al.'s table and in Canto Martins et al.'s five, each one request to VizieR
+for all stars, kept under `output/tess/published/`. For a star still without a rotation it asks MAST for the star's KEPSEISMIC light curves and
+looks the star up in Santos et al.'s tables (five requests to VizieR, kept the same way), fetches the file of the
+filter its period is read in, and writes one light curve a quarter. `--all` leaves a star alone once it has a receipt; a star judged before a change to the
 route is judged again by name. It writes a receipt for each star under ignored
-`output/tess/<star id>/`: the mission, each sector or campaign with the request that fetched it and the pipeline version
+`output/tess/<star id>/`: the mission, each sector, campaign or quarter with the request that fetched it and the pipeline version
 that made it, the method, what it measured, the verdict with its reason, and the codes' versions. Each light curve is kept
 beside it as the method prepared it. A star's files are fetched eight at a time and its maps are made in one starry
 process. Gaia's answer for all stars is one request of some ten minutes, kept under `output/tess/` so a star is asked once.
@@ -492,11 +763,19 @@ counts the measured period among the star's catalogued ones when it adopts a rot
 ## Limits
 
 - A star no mission published a light curve of is not judged: no published method is wired for full-frame images.
-- No method is wired for a Kepler quarter, for giants or for stars hotter or cooler than a method's own range.
+- No method is wired for giants or for stars hotter or cooler than a method's own range. No method is run on a Kepler
+  star: it has the verdict Santos et al. published, or none.
+- A Kepler star's maps are of 2009 to 2013, and only of the quarters the papers' rule keeps. That rule also removes a
+  quarter in which the star itself varied far more than in the quarter before or after.
+- KEPSEISMIC's apertures are larger than the mission's own (Santos et al. 2019, Sect. II.1), so more of a neighbour's
+  light falls in them.
 - A star of Colman et al.'s catalogue with more 2-minute sectors among 1 to 26 than the table counts detections has no
   map on that verdict: the table does not say which sectors they are.
 - A map on Colman et al.'s verdict is of sectors 1 to 26 only (2018 to 2020), however often TESS has watched the star
   since.
+- A map on Canto Martins et al.'s verdict is of sectors 1 to 22 only (2018 to 2020), and only for a star whose row's
+  time span says which sectors were analysed. The paper's periods come from its authors' inspection of each light curve;
+  for four of our stars its unambiguous period is half the catalogued one, and those stars are not drawn.
 - A TESS target is left out at the published limit on the catalog's contamination ratio. The catalog's ratio is an
   estimate from star positions and brightnesses, and it does not always agree with the share the mission's own header
   gives for the aperture: a star may be withheld whose aperture is nearly all its own light, and one read whose aperture

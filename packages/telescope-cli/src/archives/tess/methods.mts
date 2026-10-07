@@ -160,7 +160,7 @@ export const METHODS: readonly PeriodMethod[] = [REINHOLD_HEKKER_2020, HOLCOMB_2
 /** The method for a star's light from a mission, or why no published method here covers it. */
 export function methodFor(mission: Mission, star: StarKind): { readonly method: PeriodMethod } | { readonly reason: string } {
   const made = METHODS.filter(method => method.missions.includes(mission));
-  if (!made.length) return { reason: `No published method is wired here for a ${mission === 'K2' ? 'K2 campaign' : 'TESS sector'}.` };
+  if (!made.length) return { reason: `No published method is wired here for a ${mission === 'K2' ? 'K2 campaign' : mission === 'Kepler' ? 'Kepler quarter' : 'TESS sector'}.` };
   const reasons: string[] = [];
   for (const method of made) { const reason = method.outside(star); if (reason === undefined) return { method }; reasons.push(reason); }
   return { reason: reasons.join(' ') };

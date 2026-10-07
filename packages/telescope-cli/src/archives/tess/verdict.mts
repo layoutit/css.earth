@@ -5,7 +5,7 @@
  * object SIMBAD files it as, the fastest its recorded radius and mass let it turn, and how much of other stars' light
  * the TESS Input Catalog puts in its pixels. Each can only withhold a map. */
 /** The missions whose light curves are read. */
-export type Mission = 'TESS' | 'K2';
+export type Mission = 'TESS' | 'K2' | 'Kepler';
 export interface RotationVerdict { readonly detected: boolean; readonly periodDays?: number; /** The light's own strongest period, when the rotation is taken as twice it. */ readonly lightPeriodDays?: number; /** Peak to peak, as a share of the mean light. */ readonly amplitude?: number; readonly reason?: string }
 
 /** How closely the light's period and a catalogued rotation period must agree to be one period: the metadata pass's own
