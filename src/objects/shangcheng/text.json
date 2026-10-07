@@ -46,6 +46,36 @@
       "title": "Photosphere color",
       "detail": "From its temperature",
       "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "brightness-sector-25": {
+      "title": "Brightness map, Sector 25",
+      "detail": "Sector 25, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-26": {
+      "title": "Brightness map, Sector 26",
+      "detail": "Sector 26, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-52": {
+      "title": "Brightness map, Sector 52",
+      "detail": "Sector 52, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-59": {
+      "title": "Brightness map, Sector 59",
+      "detail": "Sector 59, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-79": {
+      "title": "Brightness map, Sector 79",
+      "detail": "Sector 79, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, May to Jun 2024",
+      "detail": "TESS sector 79",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

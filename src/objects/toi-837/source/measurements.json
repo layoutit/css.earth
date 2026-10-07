@@ -46,6 +46,9 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-837 (pscomppars): projected rotation speed 16.8 km/s, from Barragán et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4275B/abstract)",
   "spinInclinationDegrees": 69.8,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (1.052 solar radii): sin i = v sin i × P / (2πR) = 0.938. Not a measurement of the axis: the three numbers come from different papers.",
+  "rotationPeriodMeasuredDays": 2.99,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 10, 11, 37, 63, 64 and 90 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 2.99 d, the light swinging by 2.6% as the star turns",
+  "rotationLightSwingPercent": 2.63,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

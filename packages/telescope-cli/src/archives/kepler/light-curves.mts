@@ -70,3 +70,11 @@ export async function fetchLightCurve(file: Pick<CampaignLightCurve, 'filename' 
   await mkdir(directory, { recursive: true }); await writeFile(`${path}.part`, bytes); await rename(`${path}.part`, path);
   return { file: path, url, bytes: bytes.length };
 }
+
+/** Several files, eight at a time: MAST answers that many side by side (measured 2026-10-06: eight 2 MB light curves in
+ * 2 s, none refused). One at a time, a star TESS watched for 41 sectors took a minute to fetch. */
+export async function fetchLightCurves<File extends Pick<CampaignLightCurve, 'filename' | 'uri'>>(files: readonly File[], directory: string, atOnce = 8): Promise<(File & { readonly file: string; readonly url: string; readonly bytes: number })[]> {
+  const fetched: (File & { readonly file: string; readonly url: string; readonly bytes: number })[] = [];
+  for (let start = 0; start < files.length; start += atOnce) fetched.push(...await Promise.all(files.slice(start, start + atOnce).map(async file => ({ ...file, ...await fetchLightCurve(file, directory) }))));
+  return fetched;
+}

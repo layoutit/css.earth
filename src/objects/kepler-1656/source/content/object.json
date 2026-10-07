@@ -36,8 +36,608 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "color",
+    "defaultDataset": "color-brightness",
     "controls": [
+      {
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "qualification": "The star's color, darker where Kepler saw it dimmer (contrast drawn stronger) · October 2012 to January 2013, mapped in this project",
+        "thumbnail": "kepler-1656-dataset-color-brightness.webp",
+        "surface": "kepler-1656-surface-color-brightness@2x.webp",
+        "poles": "kepler-1656-poles-color-brightness@2x.webp",
+        "source": {
+          "id": "kepler-1656-kepler-map-brightness-quarter-15",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "falseColor": false,
+        "notes": "Kepler-1656 in its own color, darker where its light in Kepler's images of October 2012 to January 2013 says it was darker. As the star turned once in 18.6 days its light rose and fell by 0.10%. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 0.5% less light than the brightest, and is drawn as a much darker tone of the star's own hue; the Brightness map's scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's limb law, drawn 1.5 times as strong."
+      },
+      {
+        "id": "brightness-quarter-1",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · KEPSEISMIC light curve of Kepler, quarter 1",
+        "thumbnail": "kepler-1656-dataset-brightness-quarter-1.webp",
+        "surface": "kepler-1656-surface-brightness-quarter-1@2x.webp",
+        "poles": "kepler-1656-poles-brightness-quarter-1@2x.webp",
+        "source": {
+          "id": "kepler-1656-kepler-map-brightness-quarter-1",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Quarter 1"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.4%",
+            "100%",
+            "100.6%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.4%",
+              "100%",
+              "100.6%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "notes": "Where the star's surface was darker and brighter in Kepler quarter 1, worked out in this project from how its light rose and fell by 0.10% as it turned once in 18.6 days. The light curve is KEPSEISMIC's; Santos et al. (2021, ApJS 255, 17) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 9 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-quarter-2",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · KEPSEISMIC light curve of Kepler, quarter 2",
+        "thumbnail": "kepler-1656-dataset-brightness-quarter-2.webp",
+        "surface": "kepler-1656-surface-brightness-quarter-2@2x.webp",
+        "poles": "kepler-1656-poles-brightness-quarter-2@2x.webp",
+        "source": {
+          "id": "kepler-1656-kepler-map-brightness-quarter-2",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Quarter 2"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.4%",
+            "100%",
+            "100.6%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.4%",
+              "100%",
+              "100.6%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "notes": "Where the star's surface was darker and brighter in Kepler quarter 2, worked out in this project from how its light rose and fell by 0.10% as it turned once in 18.6 days. The light curve is KEPSEISMIC's; Santos et al. (2021, ApJS 255, 17) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 9 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-quarter-4",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · KEPSEISMIC light curve of Kepler, quarter 4",
+        "thumbnail": "kepler-1656-dataset-brightness-quarter-4.webp",
+        "surface": "kepler-1656-surface-brightness-quarter-4@2x.webp",
+        "poles": "kepler-1656-poles-brightness-quarter-4@2x.webp",
+        "source": {
+          "id": "kepler-1656-kepler-map-brightness-quarter-4",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Quarter 4"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.4%",
+            "100%",
+            "100.6%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.4%",
+              "100%",
+              "100.6%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "notes": "Where the star's surface was darker and brighter in Kepler quarter 4, worked out in this project from how its light rose and fell by 0.10% as it turned once in 18.6 days. The light curve is KEPSEISMIC's; Santos et al. (2021, ApJS 255, 17) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 9 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-quarter-6",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · KEPSEISMIC light curve of Kepler, quarter 6",
+        "thumbnail": "kepler-1656-dataset-brightness-quarter-6.webp",
+        "surface": "kepler-1656-surface-brightness-quarter-6@2x.webp",
+        "poles": "kepler-1656-poles-brightness-quarter-6@2x.webp",
+        "source": {
+          "id": "kepler-1656-kepler-map-brightness-quarter-6",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Quarter 6"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.4%",
+            "100%",
+            "100.6%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.4%",
+              "100%",
+              "100.6%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "notes": "Where the star's surface was darker and brighter in Kepler quarter 6, worked out in this project from how its light rose and fell by 0.10% as it turned once in 18.6 days. The light curve is KEPSEISMIC's; Santos et al. (2021, ApJS 255, 17) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 9 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-quarter-8",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · KEPSEISMIC light curve of Kepler, quarter 8",
+        "thumbnail": "kepler-1656-dataset-brightness-quarter-8.webp",
+        "surface": "kepler-1656-surface-brightness-quarter-8@2x.webp",
+        "poles": "kepler-1656-poles-brightness-quarter-8@2x.webp",
+        "source": {
+          "id": "kepler-1656-kepler-map-brightness-quarter-8",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Quarter 8"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.4%",
+            "100%",
+            "100.6%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.4%",
+              "100%",
+              "100.6%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "notes": "Where the star's surface was darker and brighter in Kepler quarter 8, worked out in this project from how its light rose and fell by 0.10% as it turned once in 18.6 days. The light curve is KEPSEISMIC's; Santos et al. (2021, ApJS 255, 17) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 9 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-quarter-10",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · KEPSEISMIC light curve of Kepler, quarter 10",
+        "thumbnail": "kepler-1656-dataset-brightness-quarter-10.webp",
+        "surface": "kepler-1656-surface-brightness-quarter-10@2x.webp",
+        "poles": "kepler-1656-poles-brightness-quarter-10@2x.webp",
+        "source": {
+          "id": "kepler-1656-kepler-map-brightness-quarter-10",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Quarter 10"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.4%",
+            "100%",
+            "100.6%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.4%",
+              "100%",
+              "100.6%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "notes": "Where the star's surface was darker and brighter in Kepler quarter 10, worked out in this project from how its light rose and fell by 0.10% as it turned once in 18.6 days. The light curve is KEPSEISMIC's; Santos et al. (2021, ApJS 255, 17) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 9 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-quarter-11",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · KEPSEISMIC light curve of Kepler, quarter 11",
+        "thumbnail": "kepler-1656-dataset-brightness-quarter-11.webp",
+        "surface": "kepler-1656-surface-brightness-quarter-11@2x.webp",
+        "poles": "kepler-1656-poles-brightness-quarter-11@2x.webp",
+        "source": {
+          "id": "kepler-1656-kepler-map-brightness-quarter-11",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Quarter 11"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.4%",
+            "100%",
+            "100.6%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.4%",
+              "100%",
+              "100.6%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "notes": "Where the star's surface was darker and brighter in Kepler quarter 11, worked out in this project from how its light rose and fell by 0.10% as it turned once in 18.6 days. The light curve is KEPSEISMIC's; Santos et al. (2021, ApJS 255, 17) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 9 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-quarter-12",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · KEPSEISMIC light curve of Kepler, quarter 12",
+        "thumbnail": "kepler-1656-dataset-brightness-quarter-12.webp",
+        "surface": "kepler-1656-surface-brightness-quarter-12@2x.webp",
+        "poles": "kepler-1656-poles-brightness-quarter-12@2x.webp",
+        "source": {
+          "id": "kepler-1656-kepler-map-brightness-quarter-12",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Quarter 12"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.4%",
+            "100%",
+            "100.6%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.4%",
+              "100%",
+              "100.6%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "notes": "Where the star's surface was darker and brighter in Kepler quarter 12, worked out in this project from how its light rose and fell by 0.10% as it turned once in 18.6 days. The light curve is KEPSEISMIC's; Santos et al. (2021, ApJS 255, 17) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 9 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-quarter-15",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · KEPSEISMIC light curve of Kepler, quarter 15",
+        "thumbnail": "kepler-1656-dataset-brightness-quarter-15.webp",
+        "surface": "kepler-1656-surface-brightness-quarter-15@2x.webp",
+        "poles": "kepler-1656-poles-brightness-quarter-15@2x.webp",
+        "source": {
+          "id": "kepler-1656-kepler-map-brightness-quarter-15",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Quarter 15"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.4%",
+            "100%",
+            "100.6%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.4%",
+              "100%",
+              "100.6%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/hlsp/kepseismic"
+        },
+        "notes": "Where the star's surface was darker and brighter in Kepler quarter 15, worked out in this project from how its light rose and fell by 0.10% as it turned once in 18.6 days. The light curve is KEPSEISMIC's; Santos et al. (2021, ApJS 255, 17) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 9 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
       {
         "id": "color",
         "label": "Color",

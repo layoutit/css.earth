@@ -18,57 +18,42 @@ Other universe browsers exist, and many of them inspired this platform: NASA's [
 
 Every object has its own URL and they all share one camera, so you can fly from Saturn to another galaxy without leaving the page. The catalogue includes Solar System bodies, stars and exoplanets, plus the nebulae and galaxies below.
 
+<img src=".github/assets/zoom-out.webp" alt="One camera move from Earth out past the Solar System and the Milky Way to the observable universe and back, rendered as DOM and CSS markup" width="960">
+
 ### The Solar System
 
 The Sun, the eight planets, dwarf planets, moons, asteroids, comets and other trans-Neptunian objects, all on their orbits. Where a mission photographed a body, its surface comes from that mission's images; the rest are shown as shape models.
 
-<img src=".github/assets/solar-system.webp" alt="An endless zoom from the whole Solar System in to Earth and back out, rendered as DOM and CSS markup" width="960">
-
 ### Stars and Exoplanets
 
-Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1.
+Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1. Some stars also carry a corona modelled from maps of their magnetic field, such as ε Eridani and HD 189733, or a debris disc, such as Fomalhaut and β Pictoris.
 
 <img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the planet TRAPPIST-1b coloured by its JWST MIRI 15 µm temperature map, hot day side to cold night side, rendered as DOM and CSS markup" width="960">
 
 ### Nebulae and Galaxies
 
-The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster. Beyond them: the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
+The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes or as pictures placed on published 3D shapes, such as the Ring and Cassiopeia A, plus the Pleiades cluster. Beyond them: the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group, the Galactic Centre, galaxy clusters such as the Bullet Cluster and Abell 1689, and the nearby and observable universe.
 
-<img src=".github/assets/nebulae-galaxies.webp" alt="The Crab Nebula as a 3D volume, and the Milky Way seen at an angle from outside, rendered as DOM and CSS markup" width="960">
+<img src=".github/assets/milky-way.webp" alt="The Milky Way seen at an angle from outside, rendered as DOM and CSS markup" width="960">
 
-## Datasets
+## How It Works
 
-Each object has datasets assigned, with selectable views of its available products. A view can be a true-colour or single-filter photograph, an enhanced- or false-colour mosaic, a thermal, infrared, ultraviolet or radar map, topography, or an interior model.
+css.earth uses the [PolyCSS](https://github.com/LayoutitStudio/polycss) engine to turn celestial bodies into 3D DOM elements. The universe is a shared `matrix3d(...)` scene, and nothing is drawn to a `<canvas>` or relies on WebGL.
 
-Sequences such as **Hubble dates** start looping when opened. Each map stays on screen for 1.5 seconds before the next begins loading. Use **Pause** or the arrows to inspect one step; leaving the sequence or hiding the tab stops playback.
+Every pixel has a source. What you see is built from public data from spacecraft and telescopes, such as Cassini at Saturn, New Horizons at Pluto, and Hubble and Webb at the Ring Nebula. An object can carry several datasets to switch between, and its README names the data behind each one, how it was processed and its known limits.
 
-The data comes from spacecraft, landers and telescopes, including:
+<img src=".github/assets/dataset-examples.webp" alt="Three datasets: Earth's sea-surface temperature anomaly during ENSO monitoring, asteroid Itokawa's elevation from the Hayabusa shape model, and Ceres in enhanced colour from Dawn, rendered as DOM and CSS markup" width="960">
 
-- **Planetary missions:** MESSENGER, Cassini, Galileo, Juno, Dawn, New Horizons, Voyager 1 and 2, Rosetta, Hayabusa and Hayabusa2, OSIRIS-REx, NEAR Shoemaker, DART and LICIACube, Magellan, the Viking orbiters and landers, LRO, MRO and Mars Odyssey.
-- **Space telescopes:** Hubble, Webb, Spitzer, Herschel, Chandra, WISE, Gaia and Hipparcos.
-- **Ground-based facilities:** ESO's VLT, VLTI, VISTA and VST, ALMA, the VLA and VLBA, and the Arecibo and Goldstone radars.
+## Telescope API
 
-Preparation reads these products from their public archives, such as NASA's PDS, USGS Astrogeology, MAST, the ESO and ALMA archives and JAXA's JLPEDA, and records each one in `src/sources/`. Each body's README names the products behind its views, how they were processed and their known limits.
+css.earth includes a `telescope` API for finding observations of a target. `explore` looks through the JWST, Hubble, ESO, ALMA, Keck, Gemini, Chandra and Spitzer archives at once, then asks which result to retrieve.
 
-## Toolkits
+```sh
+pnpm telescope explore eris
+pnpm telescope explore eris --kind cube --wavelength 2.2,2.4 --out runs/eris
+```
 
-Preparation reads archive formats directly with in-house TypeScript readers. The FITS, PDS, SPICE and photometry readers are checked against independent reference implementations in [the owner-local oracles](packages/core/src/node/oracle/README.md).
-
-- **FITS and PDS:** FITS images and tables, including Rice-compressed ones, with their sky orientation, and PDS3 and PDS4 labels ([`@cssearth/fits`](packages/fits/README.md), [PDS labels](docs/pds-labels.md)).
-- **SPICE:** kernels, clocks, frames and pointing, used to place a spacecraft's camera for each photograph ([`@cssearth/spice`](packages/spice/README.md)).
-- **Surface imagery:** image decoding, shape-model reduction, UV mapping and texture atlases ([surface preparation](docs/surface-preparation.md), [colour preparation](docs/color-preparation.md)).
-- **Photometry:** Hapke and disc models that separate a surface's brightness from its lighting and viewing angles ([`packages/bake/src/photometry/`](packages/bake/src/photometry/README.md)).
-- **Interferometry:** calibration and image reconstruction for stellar surfaces from raw VLTI and ALMA observations ([interferometric imaging](docs/interferometric-imaging.md)).
-- **Eclipse mapping:** exoplanet maps fitted from raw JWST light curves ([eclipse mapping](docs/eclipse-mapping.md)).
-- **Nebulae and galaxies:** 3D volumes and galaxy fields from surveys and catalogues ([prepared nebulae](docs/nebulae/README.md), [galaxies](docs/galaxies/README.md)); the volume bake is [`@cssearth/bake/volume`](packages/bake/README.md).
-
-## Architecture
-
-- **Rendering:** every body is a [PolyCSS](https://github.com/LayoutitStudio/polycss) mesh of HTML elements, placed with CSS `matrix3d(...)` and painted from prepared texture atlases. No canvas or WebGL. The runtime is [`@cssearth/renderer`](packages/renderer/README.md).
-- **Preparation:** Node reads declared source products and writes the textures, geometry, orbits and page text, each recording its sources. Runtime inventories pin the published outputs; source manifests record paths, acquisition and attribution.
-- **Objects:** each one is a package under [`src/objects/<id>/`](src/objects/README.md). One registry, one shell and one camera serve them all.
-- **Delivery:** prepared files are stored in R2; `pnpm setup:assets` fetches them before Astro builds the site, which a Cloudflare Worker serves.
-- **Runtime:** the browser loads prepared state and moves the camera. It never derives geometry or textures.
+A retrieved file can be exported as an image, a spectrum, a map projected onto its body, or a standalone 3D sphere in HTML. For some instruments, the observatory's own software is run again on the same inputs and the result is checked against the published product. See the [command guide](packages/telescope-cli/README.md) for more information.
 
 ## How to Run
 
@@ -90,7 +75,7 @@ Re-preparing an object from its original sources needs more: `node packages/bake
 
 - [Adding a body](src/objects/README.md): package layout and the preparation steps.
 - [Provenance and documentation contract](docs/provenance/CONTRACT.md): how sources, credits and evidence are recorded.
-- [Documentation index](docs/README.md): surface preparation, interferometric imaging, eclipse mapping, navigation, performance and more.
+- [Documentation index](docs/README.md): surface preparation, interferometric imaging, eclipse mapping, telescopes, navigation, performance and more.
 - [Contributing](.github/CONTRIBUTING.md): setup, which checks to run and where things live.
 - [Celestial skill](.agents/skills/celestial-skill/SKILL.md): the workflow agents follow for body work.
 

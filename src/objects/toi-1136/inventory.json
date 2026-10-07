@@ -4,14 +4,44 @@
     {
       "location": "public",
       "filename": "toi-1136-arrival.webp",
-      "bytes": 27586,
-      "sha256": "ed95fd3a89455c3a1aadfde4d6d43473c22257f2449bec26e68ab588d97fc375"
+      "bytes": 28674,
+      "sha256": "a86781416bdcc8dcc81b46370f7e109585e021a66bdf8d2987a35f317b8b096c"
     },
     {
       "location": "public",
       "filename": "toi-1136-billboard.webp",
-      "bytes": 4874,
-      "sha256": "20f17218b460e58426ee7df3d3d8e1f01b97c25752f751e91b133f06b147a9d5"
+      "bytes": 4934,
+      "sha256": "7fb8cd6e245e204e5270156541ae17ba23bb0d952d7eedf08dfa24482d1b297f"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-dataset-brightness-sector-14.webp",
+      "bytes": 190,
+      "sha256": "f888632c54fc94610ccfc48938a650c54ec9332c36009e63165509de67695d6b"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-dataset-brightness-sector-15.webp",
+      "bytes": 194,
+      "sha256": "c42475e8a9605846d68d97cc801b30213e685345b15824437ed0c0b4bd52080a"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-dataset-brightness-sector-21.webp",
+      "bytes": 186,
+      "sha256": "6f3067cd987e4ecaed7326347c435d4ed14f65d46b2cc8647f6efadee534c27e"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-dataset-brightness-sector-22.webp",
+      "bytes": 194,
+      "sha256": "8083f34a0725d2503f2b51162f80d61c271d73388f43930f387c01072ea1375d"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-dataset-color-brightness.webp",
+      "bytes": 198,
+      "sha256": "c2b6dce9bb97694ab9206f038ebe410b30894b68a549789f9ad5ee24ab630197"
     },
     {
       "location": "public",
@@ -21,15 +51,81 @@
     },
     {
       "location": "public",
+      "filename": "toi-1136-limb-color-brightness@2x.webp",
+      "bytes": 120512,
+      "sha256": "3619e6a047b3b1aa9125902c79953ece4086f2d76c2ebb762800259cb2650d1e"
+    },
+    {
+      "location": "public",
       "filename": "toi-1136-limb-color@2x.webp",
       "bytes": 98586,
       "sha256": "be124c28e630631979c2005b358cf996d07b8e810ab27a40abb78bc3e939d20f"
     },
     {
       "location": "public",
+      "filename": "toi-1136-poles-brightness-sector-14@2x.webp",
+      "bytes": 9914,
+      "sha256": "2b57c0394522c856c2836a779693cd2efecb4c0d9377a4f6ad6e55d0df12ec9c"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-poles-brightness-sector-15@2x.webp",
+      "bytes": 11224,
+      "sha256": "08524c2bb8f3b3a827ff1863690168a16265249014b56b9d6f7e79f253e5292e"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-poles-brightness-sector-21@2x.webp",
+      "bytes": 9668,
+      "sha256": "bedb389867b404acaf4e7cd0f1f0842a55ff59251ec3919382c467916a7eddc5"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-poles-brightness-sector-22@2x.webp",
+      "bytes": 10132,
+      "sha256": "573608368b7633a36045b4c115700920de0fb96d31a09f56ef37d1d61a0bec9c"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-poles-color-brightness@2x.webp",
+      "bytes": 11304,
+      "sha256": "f4a428edbf52014dc8503038457dfe93493cbe06a49e296088458a518692c004"
+    },
+    {
+      "location": "public",
       "filename": "toi-1136-poles-color@2x.webp",
       "bytes": 1340,
       "sha256": "fa0536ba87e6d2715d6db0df54514ae9e831f65d5195f405ebd16c4c0576bf97"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-surface-brightness-sector-14@2x.webp",
+      "bytes": 15054,
+      "sha256": "0a0a1b20da87527c5c4ca3f679bc02e5712bea893852eb8cb823f352dbdcaea3"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-surface-brightness-sector-15@2x.webp",
+      "bytes": 14712,
+      "sha256": "1ec7285825897daffe35d24bae26ee886351f9cc309d13d994eef856fca34123"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-surface-brightness-sector-21@2x.webp",
+      "bytes": 13868,
+      "sha256": "e5464d53dacb7e3079f25a92e7bc63ca57c39c17eebc8668f7b8106c5e799b86"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-surface-brightness-sector-22@2x.webp",
+      "bytes": 14002,
+      "sha256": "35bc5e895be3c6ca53b20935a05f2e78b1a7dee78418e7ac2ac18a0c24e042e4"
+    },
+    {
+      "location": "public",
+      "filename": "toi-1136-surface-color-brightness@2x.webp",
+      "bytes": 16816,
+      "sha256": "2ace23d83208cacf5ef46033d2d62b353360f4c5f656eb68647e43170870d7f1"
     },
     {
       "location": "public",
@@ -40,20 +136,20 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 372,
-      "sha256": "0102a6a2f01b17c85abac2a0277f263620414e937988f23631a91a2c18f82ef3"
+      "bytes": 383,
+      "sha256": "9697e29ddf70cd54a0c470d59286dab4ecf7bc217a4735add15d1899e0a88a58"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1884,
-      "sha256": "325121bf5cfe89bdfc72a8e992cfdeea325b25163ca8bb76bf89119f77c1c345"
+      "bytes": 2890,
+      "sha256": "fe408ce84e814bc7a9c090534540bd8165d5ca7f8fbe5d93d1766666e29b444f"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 723,
-      "sha256": "7ed911981e72ceafaccd7488cff0521732e48e72ed3f9db46ca7369e8cecf084"
+      "bytes": 661,
+      "sha256": "734bc65d7edb784a7b49978cc4e038c32fbfc7b96e7ac168ad2441cfd6ed1ef0"
     },
     {
       "location": "prepared",
@@ -64,20 +160,50 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 366,
-      "sha256": "a995aaec2d7a2b5224d9365d5da03515dabf25f3870ccf4d7c9e039d9f709c83"
+      "bytes": 6873,
+      "sha256": "0bc5cdcef0dd034b14e85529a329f6d2c088d59780ecdf460afea6c3403a2dce"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1062,
-      "sha256": "d63df3e7790508360fe4da6945bf25ea3ec61cbdb574a5295b1a332e44e45935"
+      "bytes": 10622,
+      "sha256": "9ced2551241c9e85acc34949195cb0b189ad72db162a9b83b246e9c757dfe986"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+      "bytes": 683,
+      "sha256": "fcada00193a64c764e1741e9ffafb5920c6aeed69a6dd53c8d40b7be456d228d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-14.webp",
+      "bytes": 1310,
+      "sha256": "063d890a6079fc096fe64f03ce7b1669e5320b79e00adc96b11b6c9fdb8720b2"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-15.webp",
+      "bytes": 1252,
+      "sha256": "42bc8f9ad421d30843380657ab2820f1c54ca4dd6df45ccb33d4c546342443c6"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-21.webp",
+      "bytes": 1196,
+      "sha256": "0762dce7538dfce9ec75bc35eaf6ecf9c6936a3e89f5f05591d9dfbe30681a64"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-22.webp",
+      "bytes": 1252,
+      "sha256": "d50a1dc96d1026a51055704b0b111a590c9f0445d7d1864e0eff935ef1843acf"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1274,
+      "sha256": "626b1ec90a743aa93b26c98c66c9a23cef11fa234022a2e9b880c8b9841f2032"
     },
     {
       "location": "prepared",
@@ -88,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 249467,
-      "sha256": "5ae769fd5f7f5c1fb2ee8fb0fa2085c891e60c4819decb6d7d8ba5e0bf511ece"
+      "bytes": 261966,
+      "sha256": "e70ea0441b117c672299f9b80499f4f041a1112139c1e0ee3b440659fe747a38"
     },
     {
       "location": "prepared",
@@ -112,8 +238,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1670,
-      "sha256": "d3127c98bd30f0a9332ea957426f5435701294bd0a1a19acd4ab1df7e0457fdd"
+      "bytes": 2757,
+      "sha256": "ab2ac1283cae7376286ed9f61b9ac707e524356b2495d6141cf3cd2c79d47f08"
     },
     {
       "location": "prepared",

@@ -22,6 +22,9 @@
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 892160231749198848, flags_flame 00: age_flame 1.4291655 Gyr (16th to 84th percentiles 1.1079878 to 1.750271)",
   "projectedRotationSpeedKmS": 50.74,
   "projectedRotationSpeedSource": "SIMBAD, * rho Gem: projected rotation speed 50.74 km/s, the measurement SIMBAD prefers (2010A&A...520A..79M)",
+  "rotationPeriodMeasuredDays": 1.36,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 20, 44, 45, 46, 47, 60, 71 and 72 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 1.36 d, the light swinging by 0.09% as the star turns",
+  "rotationLightSwingPercent": 0.09,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 478) (photometry/stellar-color.json); no image of the photosphere exists."

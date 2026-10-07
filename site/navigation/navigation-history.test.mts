@@ -88,6 +88,10 @@ test("a flight's entry written at its hand-over is pushed at once and once, and 
   assert.deepEqual(calls.map(([id, intent]) => [id, intent.url, intent.history?.history]), [['mars', 'https://css.earth/mars/', 'pop']],
     'Back returns to the view the flight left, as a step back and not as a new entry');
   assert.notEqual(earth, mars);
+  // A hop that replaces its entry (the slideshow's, after its first) names its object at the hand-over too.
+  const entries = pushes; replaces = 0;
+  history.commit('/europa/', { history: 'replace' }, true);
+  assert.deepEqual([pushes, replaces, href], [entries, 1, 'https://css.earth/europa/'], 'the address names the object shown, with no new entry');
 });
 
 test('settled view checkpoints skip native history writes without losing real entries', () => {

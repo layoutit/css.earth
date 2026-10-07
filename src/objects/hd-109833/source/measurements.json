@@ -36,6 +36,9 @@
   ],
   "projectedRotationSpeedKmS": 10.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 109833 (pscomppars): projected rotation speed 10.5 km/s, from Wood et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023AJ....165...85W/abstract)",
+  "rotationPeriodMeasuredDays": 5.05,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 38, 39 and 100 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 5.05 d, the light swinging by 1.3% as the star turns",
+  "rotationLightSwingPercent": 1.34,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

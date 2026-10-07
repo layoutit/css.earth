@@ -36,8 +36,84 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "color",
+    "defaultDataset": "color-brightness",
     "controls": [
+      {
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "qualification": "The star's color, darker where K2 saw it dimmer (contrast drawn stronger) · December 2016 to March 2017, mapped in this project",
+        "thumbnail": "gj-9827-dataset-color-brightness.webp",
+        "surface": "gj-9827-surface-color-brightness@2x.webp",
+        "poles": "gj-9827-poles-color-brightness@2x.webp",
+        "source": {
+          "id": "gj-9827-k2-map-brightness-campaign-12",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/k2"
+        },
+        "falseColor": false,
+        "notes": "GJ 9827 in its own color, darker where its light in K2's images of December 2016 to March 2017 says it was darker. As the star turned once in 31.9 days its light rose and fell by 0.32%. The light repeats every 15.9 days, half the catalogued rotation period, and the star is taken to turn once in two of them. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 1.5% less light than the brightest, and is drawn as a much darker tone of the star's own hue; the Brightness map's scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's limb law, drawn 1.5 times as strong."
+      },
+      {
+        "id": "brightness-campaign-12",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · K2 mission light curve, campaign 12",
+        "thumbnail": "gj-9827-dataset-brightness-campaign-12.webp",
+        "surface": "gj-9827-surface-brightness-campaign-12@2x.webp",
+        "poles": "gj-9827-poles-brightness-campaign-12@2x.webp",
+        "source": {
+          "id": "gj-9827-k2-map-brightness-campaign-12",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/k2"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99%",
+            "100%",
+            "101%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99%",
+              "100%",
+              "101%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+        },
+        "notes": "Where the star's surface was darker and brighter in K2 campaign 12, worked out in this project from how its light rose and fell by 0.32% as it turned once in 31.9 days. The light curve is the mission's own; the criteria of Reinhold & Hekker (2020, A&A 635, A43) decide that it shows the star turning, and starry finds the map that reproduces it. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. The light repeats every 15.9 days, half the rotation period the catalogues print for the star: two groups of spots on opposite sides do that. The map is made at a tilt of 64°, worked out from the star's rotation speed, period and radius.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
       {
         "id": "color",
         "label": "Color",

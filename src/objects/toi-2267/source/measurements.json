@@ -40,6 +40,9 @@
   ],
   "projectedRotationSpeedKmS": 17.6,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-2267 A (pscomppars): projected rotation speed 17.6 km/s, from Zúñiga-Fernández et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025A&A...702A..85Z/abstract)",
+  "rotationPeriodMeasuredDays": 0.73,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 20, 25, 26, 40, 52, 53, 59 and 60 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 0.73 d, the light swinging by 0.95% as the star turns",
+  "rotationLightSwingPercent": 0.95,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

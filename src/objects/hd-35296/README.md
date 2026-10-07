@@ -26,6 +26,8 @@ Each map uses its paper figure's color bar: the field linear from minus to plus 
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,170 K and log g 4.39 (u1 0.389, u2 0.299): a model, because no fit of this star's limb is used.
 
+**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the TESS mission's own 2-minute light curves of sectors 43, 44, 45 and 71 (the newest of October and November 2023; their PDC-MAP flux, kept at [MAST](https://archive.stsci.edu/missions-and-data/tess)) ([source record](../../sources/mast-tess-light-curves.json)). They are the light curves [Holcomb et al. (2022, ApJ 936, 138)](https://arxiv.org/abs/2206.10629) use, and their criteria decide whether each shows the star turning: SpinSpotter, their code, measures it, and starry (Luger et al. 2019) makes the map that reproduces each ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+
 ## Evidence
 
 Generated 2026-09-24 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
@@ -36,6 +38,8 @@ Run of 2026-09-23 (this version):
 - The paper's Table 3 also gives the correlation of brightness with the strength of each field component. Over the deposited cells: hd35296.dat: paper (0.24, 0.26, 0.09), read (0.24, 0.26, -0.09) (radial, meridional, azimuthal). The sizes agree; the sign convention is not stated.
 - The reader's own tests check that a cell centre keeps its value, that the interpolation wraps at longitude 0, and that a table with a misplaced cell or belts out of order is refused.
 
+**Brightness from TESS.** Holcomb et al. (2022, ApJ 936, 138) ask the peaks of the light's autocorrelation to have a height over a quarter of their width, a width between 0.4 and 0.6 and a parabola fit over 0.9, in at least half the star's sectors and in all of them together. Sector 43 gives a period of 3.80 d from the autocorrelation, whose peaks have a height of 0.35, a width of 0.47 and a fit of 1.00; Sector 44 gives a period of 3.88 d from the autocorrelation, whose peaks have a height of 0.33, a width of 0.43 and a fit of 0.98; Sector 45 gives a period of 3.65 d from the autocorrelation, whose peaks have a height of 0.40, a width of 0.46 and a fit of 1.00; Sector 71 gives a period of 3.76 d from the autocorrelation, whose peaks have a height of 0.39, a width of 0.48 and a fit of 1.00. All 4 together give a period of 3.55 d from the autocorrelation, whose peaks have a height of 0.43, a width of 0.51 and a fit of 0.99, which is the star's period: 3.55 d. The light varies by 0.90% (the range between its 5th and 95th percentiles). On the stars its authors inspected by eye, 4.9% of the periods these criteria accepted were false, and 6.2% on a second set. The star's record holds 3.56 d from the catalogues. The map's light curve leaves a scatter of 0.14% about the light, whose own noise is 0.03%. Gaia DR3 lists 18 other stars within 63 arcseconds, with under 0.1% of their light and the star's together.
+
 ## Known problems
 
 - **Only the large-scale field.** The inversion stops at spherical-harmonic degree 10, so smaller structures are not in the maps.
@@ -43,5 +47,7 @@ Run of 2026-09-23 (this version):
 - **Bright features.** The paper warns that the bright high-latitude features may be artefacts, and that this star's rotation is close to the limit where a brightness map can be made.
 - **Not shown.** The alternative maps with differential rotation in the paper's appendix are not deposited ([ledger](investigations.json)).
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+
+- **Brightness from TESS.** Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. The map is made at the tilt the page draws, 65°. The map is of October and November 2023: spots come and go within weeks or months.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

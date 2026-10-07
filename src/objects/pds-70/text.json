@@ -61,6 +61,21 @@
           "checked": "2026-09-23"
         }
       ]
+    },
+    "brightness-sector-11": {
+      "title": "Brightness map, Sector 11",
+      "detail": "Sector 11, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-102": {
+      "title": "Brightness map, Sector 102",
+      "detail": "Sector 102, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, Mar to Apr 2026",
+      "detail": "TESS sector 102",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

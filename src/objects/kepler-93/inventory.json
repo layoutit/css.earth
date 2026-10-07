@@ -4,14 +4,110 @@
     {
       "location": "public",
       "filename": "kepler-93-arrival.webp",
-      "bytes": 27228,
-      "sha256": "616120f8e0664c878cd6fbb185b5a8d3777219cef36721430b5a314ef9faee85"
+      "bytes": 30006,
+      "sha256": "339b9d68c38757eae0cd2ada9539eee7d0377a84a15a4bf8fb892f211c5b53d3"
     },
     {
       "location": "public",
       "filename": "kepler-93-billboard.webp",
-      "bytes": 4806,
-      "sha256": "1eddaffb8c1a865a892c506ad13b4235cf55bbc895ce0a76f9aa02a9085b6fd9"
+      "bytes": 5338,
+      "sha256": "d6eeeb450882763cda6c155c24aa98c5c9db01939661906e6b5e783078a7f001"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-1.webp",
+      "bytes": 238,
+      "sha256": "19756038af8cc7624e0a81b3bc0f8dd9403e15b04395319fefd81c8b99469700"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-10.webp",
+      "bytes": 156,
+      "sha256": "e8013fb51c36a9bb6692486a88cf5243f438e77d5f6a9c885a828e0d8a9189ef"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-11.webp",
+      "bytes": 202,
+      "sha256": "de74d65c8e4d1691c4ffc4686944ce786429c03723ee1afc9c195cdd998ca767"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-13.webp",
+      "bytes": 214,
+      "sha256": "ed29cbe9e4c7bfc4ac0a89922082aa2b56f655961aeeae5a607e67e3f84e0fbd"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-14.webp",
+      "bytes": 212,
+      "sha256": "9bf390b4204c9b739acaad0b014d96304c0cd9e88213ff631f2bef0acae2896b"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-15.webp",
+      "bytes": 118,
+      "sha256": "e0a55f383279279ec919125e48735e5fc299dfaff716730985641ed7ca04fea6"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-16.webp",
+      "bytes": 178,
+      "sha256": "cce5fe216a86498884134d7966e09065664ddc69f8534f0c619b0194355b6571"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-17.webp",
+      "bytes": 194,
+      "sha256": "60062f64112adfaca114933e752662057fb2379c6c047a656f44ed990ef527a4"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-2.webp",
+      "bytes": 132,
+      "sha256": "e23768ff4e19ec09227b94f7e8ff547cd746241d2de89e077c947d4ea501f060"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-3.webp",
+      "bytes": 176,
+      "sha256": "f12946f2099ec4e01c3d00b42b3676f642046a6097341662537c5edfd6d19827"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-4.webp",
+      "bytes": 220,
+      "sha256": "7ffa3433ad786aea747e70659b1756f5e54a85ad94e1d7b9240019bad690aaee"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-5.webp",
+      "bytes": 134,
+      "sha256": "7646d54fa8f0b0e57fdb4bcbb3ca017f75ceca7eab4b29f5cefd8ac3eb6079cc"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-6.webp",
+      "bytes": 218,
+      "sha256": "5ca14fdea6f73fd5ee2cbc0bc644fd184f68bf87d14916a6a72afbe853443f8f"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-7.webp",
+      "bytes": 192,
+      "sha256": "5a2cf6830f20217506684dde953867b3b39645b352fd74236674b40ed0b7b332"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-brightness-quarter-9.webp",
+      "bytes": 218,
+      "sha256": "beed3d667af87aea896e03d8eae734d6d3f2df91b6b53fdefc80ebc4ddb595c0"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-dataset-color-brightness.webp",
+      "bytes": 276,
+      "sha256": "806e2cdb66e43d0d02080b736593f78d724ecae007c48ee283dbd7adc872d7ea"
     },
     {
       "location": "public",
@@ -21,15 +117,213 @@
     },
     {
       "location": "public",
+      "filename": "kepler-93-limb-color-brightness@2x.webp",
+      "bytes": 121218,
+      "sha256": "7587d7c429fcfc6f4b18ee46b4bc6f3e4c6cbe2518382250d1d3f4fee5e5d978"
+    },
+    {
+      "location": "public",
       "filename": "kepler-93-limb-color@2x.webp",
       "bytes": 98730,
       "sha256": "7ab7ce57d3ba9eba21959370efd8f611ebfe8a048c70d23d771970751b34f80c"
     },
     {
       "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-1@2x.webp",
+      "bytes": 3950,
+      "sha256": "5edd6ed7a7a60214e36979fe0f2d87d94907328d3a477b1e9d7db0aaa1c35366"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-10@2x.webp",
+      "bytes": 2756,
+      "sha256": "82e58bef5527d93cefd41d8a00782ea4b45bf00e738f82d27da90373fc65bb97"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-11@2x.webp",
+      "bytes": 2762,
+      "sha256": "589be129fed428e863565ff8dcb12ba925e5c1ba20ceafef435abba362647224"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-13@2x.webp",
+      "bytes": 4118,
+      "sha256": "303538811a93b1c3ee7f21d3ec5cf18579cc34254fa5717d94d1c62f7ebb0643"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-14@2x.webp",
+      "bytes": 3878,
+      "sha256": "47e8a51218f230bcfe001d8d612f12e23526095eb48d5040c889aebb3a218345"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-15@2x.webp",
+      "bytes": 2764,
+      "sha256": "0624202bb17cc341cce40c20357a63901fc085dc722deba900bc7a86b359de1a"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-16@2x.webp",
+      "bytes": 3708,
+      "sha256": "e822a20f5241f9f352cd3c3d090ba2dc8cd8315c3a0e81c5d398191874ef7b72"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-17@2x.webp",
+      "bytes": 2986,
+      "sha256": "414d9f6597d606352028052febdfb2ef37ff2ab48247f83fe937b7c0131e43de"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-2@2x.webp",
+      "bytes": 3886,
+      "sha256": "d75dbad0ff3b543f8f87c2e6da033ac3d46055c5ce62a57f22b888fec2a2584e"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-3@2x.webp",
+      "bytes": 3406,
+      "sha256": "4b6cea292e7a713234e90ace164b771fae4aedfe4fecafd2420ec91d7cd5fbc2"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-4@2x.webp",
+      "bytes": 4288,
+      "sha256": "9f5ff70ee655a3477085939fe1b23ff32d95169340e0e11736ee0b0fd1ae9694"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-5@2x.webp",
+      "bytes": 4016,
+      "sha256": "b9c3717f8620b51e1bc88350de6b5613025a65f036a270c9cbfc570fcfe55f17"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-6@2x.webp",
+      "bytes": 4462,
+      "sha256": "e7df560d1793acb4c7f8f98b70389ad5fcf797ef504a9dd4e8c4dc23f1611df3"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-7@2x.webp",
+      "bytes": 5352,
+      "sha256": "2b98a5dd2b6608111797572096a403256106ba37da43241b791368d1d6f62c7c"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-brightness-quarter-9@2x.webp",
+      "bytes": 4054,
+      "sha256": "873e19948f87304ab0a39c7f6432385b53b34cbcc62002568837f9581715a859"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-poles-color-brightness@2x.webp",
+      "bytes": 4466,
+      "sha256": "35d2abd2b7aef9d3399c635356c5c9958c9dc2c271636b82439363c48e370f58"
+    },
+    {
+      "location": "public",
       "filename": "kepler-93-poles-color@2x.webp",
       "bytes": 1340,
       "sha256": "0708525fe2d1b234c9ebd9252263751233d1b242f1c84798d93b15b54d9d9c75"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-1@2x.webp",
+      "bytes": 16698,
+      "sha256": "9552104f5c92299a7911cfc00e425436466197310e425a5e05a61fc2d7e0588b"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-10@2x.webp",
+      "bytes": 11172,
+      "sha256": "0c9928638dc0c4bfc23dc45a9c18a3a55e368322f06cc880f664e6d0c5baa01d"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-11@2x.webp",
+      "bytes": 14842,
+      "sha256": "006b5ccdc0491bc60c6aa7c6a586002d25be19efd0dadff6665ccd617553ad53"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-13@2x.webp",
+      "bytes": 14942,
+      "sha256": "1278dd9021d170910ebf4cfc6a9067e05ca42018b3eee8a31445af8d6bd98bdc"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-14@2x.webp",
+      "bytes": 15440,
+      "sha256": "790566a407d250f7a4286df36fda26a33f48b724b670700ca9a59fb472b54e82"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-15@2x.webp",
+      "bytes": 8960,
+      "sha256": "d514087c3eeb87e3a80b329ccad06b491bee67f7b62b8818e1cff23d4f57bc84"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-16@2x.webp",
+      "bytes": 12146,
+      "sha256": "430cf7c9c99204e4f961dee39b699ff321eb73afaad2fe26edf8c1497741f8c2"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-17@2x.webp",
+      "bytes": 13250,
+      "sha256": "0516cad9833dc65a6cbd36b4779709d0a31a0b056f377740ad201ba748436124"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-2@2x.webp",
+      "bytes": 10188,
+      "sha256": "e3eb094d8c18abfa1d5a09b828797fe442434cb63059f2623378b7a9f80c85f7"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-3@2x.webp",
+      "bytes": 12330,
+      "sha256": "fbdbc32052455d1fb02d70c7e44e830efa4cd7cc71579f8d432ef1e288c283bb"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-4@2x.webp",
+      "bytes": 15792,
+      "sha256": "315318dd1c737b3c8c3dda842aa018e9f1612caf571c5383e0e8a1a9c507410f"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-5@2x.webp",
+      "bytes": 10274,
+      "sha256": "9749eec2cd43a7d97799a3b045ce185d2f1d6477ae4c20349966a20ec0ca8aec"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-6@2x.webp",
+      "bytes": 14914,
+      "sha256": "beb06c040140a499abe952a291cf9d21f474361b5cf539a503d0ae15e4c4c6ce"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-7@2x.webp",
+      "bytes": 13630,
+      "sha256": "27c473a305e64fc8f8126295cb16b45d28c4892a65296d04bd9a961d53777f02"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-brightness-quarter-9@2x.webp",
+      "bytes": 16680,
+      "sha256": "d8ddb1ee7a78f13d0b56c08ed9e3847653956e9a9c5e23523edbb23eccf81d80"
+    },
+    {
+      "location": "public",
+      "filename": "kepler-93-surface-color-brightness@2x.webp",
+      "bytes": 20786,
+      "sha256": "20c317a2f840f316dee2dea14b2d012f40cdf72c279f08a7ccbbd7d3e4d65b3b"
     },
     {
       "location": "public",
@@ -40,20 +334,20 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 377,
-      "sha256": "7aed42c7b3f6ae5ef1b46d00cfb8c5a73424788ad95b86816bc69dd85eda2349"
+      "bytes": 388,
+      "sha256": "d30dfd38b9b5b0544708a59b009b666c3f7f195a634fc29ea1a41f6ce6b35e05"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1898,
-      "sha256": "0ef21ce318df27a1ab6eb0b553fb57f594b480a5671a362895f36da5c40b442b"
+      "bytes": 5361,
+      "sha256": "3966ad01dfbd91a15b7acb68f49c3e917d28efd69fdb5825441b3e67b9563588"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 724,
-      "sha256": "5cba9b332694c1dd02f5375a029217ce5d0ef96fb377a72a8976525d779b7d2b"
+      "bytes": 662,
+      "sha256": "45b73213c3f68bd46882525b16acce2f8adb6e0d395eab949dfd205f4a904e25"
     },
     {
       "location": "prepared",
@@ -64,20 +358,116 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 368,
-      "sha256": "a23a7edb7d6c51df375a557d599c489ca5482149e9cff2449ea5c3ff328ebcc8"
+      "bytes": 24335,
+      "sha256": "cc64fecde8d4d733945431311683cb61037464aa87ec52cc573099052043e0b0"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1078,
-      "sha256": "783300b7c5c10ce92c1c4a60e097998dbe1cf969f778ae035833e8ae8f172991"
+      "bytes": 34629,
+      "sha256": "f200f4ef446dcf8844b06297cfa8d9660326b534a0c4928d5aeb15f66d2e2858"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+      "bytes": 1995,
+      "sha256": "2c9cd06730e535feb617ca9b212e8b76f7b2433b36f4c4f2f3d792b27a847673"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-1.webp",
+      "bytes": 1522,
+      "sha256": "fa28833d6df5f0f7fcbd64c6a93cdf828859621c660187adaedb5b32ea94834a"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-10.webp",
+      "bytes": 952,
+      "sha256": "6593125dbc21dfa1b2b37f15f748942c2d84e9ddcb250235538155c0384557aa"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-11.webp",
+      "bytes": 1342,
+      "sha256": "aeb0a0dab57193b1fc053f5acbc06cfeb9bfa80222e24094d04a851b5172c121"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-13.webp",
+      "bytes": 1344,
+      "sha256": "337ad72ca4cc0c942f761f7a88ddd25a4dd8f754edffb0594f62f368cb2a0b55"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-14.webp",
+      "bytes": 1268,
+      "sha256": "01d449a55c7427852f58e01a51320f1a8e5f78118e0db8af6ccdfcd87a31b6aa"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-15.webp",
+      "bytes": 684,
+      "sha256": "989a9be60feab708558d530276a7a8c7953245101bc290f12a53fc668a5ff45e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-16.webp",
+      "bytes": 1064,
+      "sha256": "63be5a5fa948957e4211cefe50393a03e4a1791437f5b12f01ff02cebd5dbbf2"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-17.webp",
+      "bytes": 1204,
+      "sha256": "c578ea732ed5764f65dd18b781bb0b29c22303d1bdc569f834689fbca32ac93e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-2.webp",
+      "bytes": 818,
+      "sha256": "939fe97179d50f64a11ed39abb41993e5d9123bc7885becef1742a9f48662961"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-3.webp",
+      "bytes": 1070,
+      "sha256": "10ab5ac6f2029605ddcfe1a667b1b1af24ca7dc3965833021136c4eab38ac615"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-4.webp",
+      "bytes": 1364,
+      "sha256": "9a4fb3987c28e783f6b3c4b49bbcdf95a6496860e687d8b5f0fefc64658a95a3"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-5.webp",
+      "bytes": 818,
+      "sha256": "21e65cb5974d8597676530b08113109030b6ebfa535fb765096fc871f6ee52fb"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-6.webp",
+      "bytes": 1324,
+      "sha256": "f907a26ce4e5f64478fa19f89924aa1ee9823a758c6e5df36f459497abbe94f7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-7.webp",
+      "bytes": 1216,
+      "sha256": "b206453e5b98735debfb6b3ff57f59c012b437f5b59643eb86375df97ce0d2ed"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-quarter-9.webp",
+      "bytes": 1456,
+      "sha256": "296e691bb2cb454807687fbc6931ac0b69695f3e40e1df769cff30db246d5f69"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1710,
+      "sha256": "69d340dfcbca85bc569ddb595376d7a6ba0e921acd02bd60856e2738cd75cc7d"
     },
     {
       "location": "prepared",
@@ -88,8 +478,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 249493,
-      "sha256": "516b5e2bd65f4b7738503ce28667d7bfce0a5bc68f7dcd316c1bb74b5d54221e"
+      "bytes": 292445,
+      "sha256": "8a0f63502fc460d7233c11d82d828c18324ed98c0606e90939a74d9a17928eb0"
     },
     {
       "location": "prepared",
@@ -112,8 +502,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1770,
-      "sha256": "4243df179ae73eadc5d78b257476d217dbe91e3f50f1469a8f99b654278909b4"
+      "bytes": 5279,
+      "sha256": "f64ca62f3f2529343256e28041268f1106135e97b3fdf799e4e33820059fe596"
     },
     {
       "location": "prepared",

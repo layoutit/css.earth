@@ -30,6 +30,9 @@
   ],
   "projectedRotationSpeedKmS": 21.88,
   "projectedRotationSpeedSource": "SIMBAD, HD 181327: projected rotation speed 21.88 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "rotationPeriodMeasuredDays": 1.47,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 13, 67 and 94 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 1.47 d, the light swinging by 0.15% as the star turns",
+  "rotationLightSwingPercent": 0.15,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the Gaia FLAME radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."

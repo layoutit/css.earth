@@ -4,14 +4,26 @@
     {
       "location": "public",
       "filename": "tania-borealis-arrival.webp",
-      "bytes": 28792,
-      "sha256": "85cef77e24ce6310b865da1f5041b729ce32d6cbe4148f25fecd3d64402cb8c2"
+      "bytes": 28892,
+      "sha256": "60e7753fd2dea4988eaf450cb82f0b817c561464e5423b0bcde002ed35231b8f"
     },
     {
       "location": "public",
       "filename": "tania-borealis-billboard.webp",
-      "bytes": 5168,
-      "sha256": "296a3045e37d3ebdca4b3da8d60d637ddbece90c3ad631d19c68860dba2fe1a1"
+      "bytes": 5106,
+      "sha256": "bc67dbb5827f271f69170cdedc95c95ae3e6ad81173eeb0597cf1e3dc59c52f9"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-dataset-brightness-sector-21.webp",
+      "bytes": 178,
+      "sha256": "a37edd06fda8228f9c9933cfee2ed16d4de762f7871ec5a73a4057def511c353"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-dataset-color-brightness.webp",
+      "bytes": 178,
+      "sha256": "e1224147a7173856108b68440b8b4815213f53bb4f91826cdf3680f378954c2e"
     },
     {
       "location": "public",
@@ -21,15 +33,45 @@
     },
     {
       "location": "public",
+      "filename": "tania-borealis-limb-color-brightness@2x.webp",
+      "bytes": 114652,
+      "sha256": "448e4e38a7775f71fa595aa8bbc6160068a2eee57ecc2062c6a2d1008fc003bf"
+    },
+    {
+      "location": "public",
       "filename": "tania-borealis-limb-color@2x.webp",
       "bytes": 93520,
       "sha256": "c5e8ac521b6b3de3d1386488536334767eb69f74a858ab9872f9b0aee94c30a5"
     },
     {
       "location": "public",
+      "filename": "tania-borealis-poles-brightness-sector-21@2x.webp",
+      "bytes": 12072,
+      "sha256": "fea0456bdacedf1be935806be7408d76abd1451ae04ef95a8adc62f4a0f0efc6"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-poles-color-brightness@2x.webp",
+      "bytes": 13056,
+      "sha256": "69351de7b94499522aa33ae3f1e2a36c7dfe6e4f5ff8f1f2a8afe1ba4611d356"
+    },
+    {
+      "location": "public",
       "filename": "tania-borealis-poles-color@2x.webp",
       "bytes": 1340,
       "sha256": "1df3d38b59516c3afc7319f7d7e1b186d6c5222988401caf460f389cff7ebb6a"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-surface-brightness-sector-21@2x.webp",
+      "bytes": 14160,
+      "sha256": "30956931551d3d782e2d1875d4937510c78dbc053cafc394849ad59cfb11f7a4"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-surface-color-brightness@2x.webp",
+      "bytes": 17468,
+      "sha256": "44244b95a1ad099713d3826e9847ace7ac8264cbbd7f5c7bbaf06b6e6a871d2e"
     },
     {
       "location": "public",
@@ -40,14 +82,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 394,
-      "sha256": "4c3f0a58023602da45d18acc4f4fac78b649ec77d6bfc17131dbd1849ceccd91"
+      "bytes": 405,
+      "sha256": "8a8210b9f680028f5860cb4a4baea957c196a21b7d51915e07b3eede8a43e615"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2051,
-      "sha256": "4ce5744eb1f54eda8057dd6d33808f31e18de37f802fb3e78199970f0e0ced9a"
+      "bytes": 2676,
+      "sha256": "2edd30a89128f17a347d213f955860a572aefec930ad72e6c97397b887e46d22"
     },
     {
       "location": "prepared",
@@ -64,20 +106,32 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 378,
-      "sha256": "578c23ba1c25fc05b4a83b4b57bae710a32269572bee7492a4598a4c14f3eb2e"
+      "bytes": 2091,
+      "sha256": "cc0316ba854bc5964ffccdeec72477f4ab797356d74e955913c631909cba9cd0"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1068,
-      "sha256": "68cfcdc7f28a61a8c21be02ebc8334b432857925463a0804353a35dd82197746"
+      "bytes": 4249,
+      "sha256": "e5936d6a847bef20fab522ddf395828f452ec433ceaf34f3c4ef1994fa83f63d"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+      "bytes": 329,
+      "sha256": "79e33d0cae0ac0a9f656e326888e9ffc6c879d9a30d1575c2b8457a3fa80e88e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-21.webp",
+      "bytes": 1186,
+      "sha256": "46a08746f75b208a117e12354788e7fb0d20fabd0a984886f9ed6e54012cfa58"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1262,
+      "sha256": "d1844450c21802ad968514244d5ec74059673a6be85d8a3defb6ae46008e3e14"
     },
     {
       "location": "prepared",
@@ -88,8 +142,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 249636,
-      "sha256": "da88cf059d1f94f70b7344989438e18469a0adf8739acd3b7da863eda289bd58"
+      "bytes": 253960,
+      "sha256": "0dfd8b47fec657454b01de5629b3dbafc5ca27c2603efcd2a977940a4c12f464"
     },
     {
       "location": "prepared",
@@ -112,8 +166,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1315,
-      "sha256": "25d728b119039acc30302a5163de8837f2e2c61eb5bcd83f64acf231adecf1a6"
+      "bytes": 1748,
+      "sha256": "66dfd3ff01802a622e1e6f1756564c0acf6645512458239f7a51f93acc9a45da"
     },
     {
       "location": "prepared",

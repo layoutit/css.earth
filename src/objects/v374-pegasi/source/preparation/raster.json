@@ -126,6 +126,124 @@
         "title": "ESPaDOnS · magnetic map made here · Aug 2006",
         "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
       }
+    },
+    {
+      "id": "brightness-sector-15",
+      "output": "v374-pegasi-surface-{id}{suffix}.webp",
+      "thumbnail": "v374-pegasi-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/v374-pegasi-s0015.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-15",
+        "label": "Sector 15",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/v374-pegasi-s0015.dat",
+        "variable": "Brightness [%]",
+        "outlineLatitudes": [
+          -70
+        ],
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99,
+        "maximum": 101,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "99%",
+          "100%",
+          "101%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 11.5 hours, fitted with starry to the TESS mission's own 2-minute light curve of sector 15 (its PDC-MAP flux) (the light varies by 2.3%; the map's curve leaves a scatter of 0.80%, the light's own noise being 0.21%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 0.48 d from the autocorrelation, whose peaks have a height of 0.76, a width of 0.50 and a fit of 0.99, and in all 2 of the star's sectors together a period of 0.48 d from the autocorrelation, whose peaks have a height of 0.75, a width of 0.50 and a fit of 0.99; its criteria accept that as the star's rotation. The map is made at the tilt the page draws the star with, 70°. Gaia DR3 lists 15 other stars within 63 arcseconds, with 3.2% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 15",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "brightness-sector-56",
+      "output": "v374-pegasi-surface-{id}{suffix}.webp",
+      "thumbnail": "v374-pegasi-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/v374-pegasi-s0056.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-56",
+        "label": "Sector 56",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/v374-pegasi-s0056.dat",
+        "variable": "Brightness [%]",
+        "outlineLatitudes": [
+          -70
+        ],
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99,
+        "maximum": 101,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "99%",
+          "100%",
+          "101%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 11.5 hours, fitted with starry to the TESS mission's own 2-minute light curve of sector 56 (its PDC-MAP flux) (the light varies by 2.3%; the map's curve leaves a scatter of 0.83%, the light's own noise being 0.29%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 0.48 d from the autocorrelation, whose peaks have a height of 0.75, a width of 0.50 and a fit of 0.99, and in all 2 of the star's sectors together a period of 0.48 d from the autocorrelation, whose peaks have a height of 0.75, a width of 0.50 and a fit of 0.99; its criteria accept that as the star's rotation. The map is made at the tilt the page draws the star with, 70°. Gaia DR3 lists 15 other stars within 63 arcseconds, with 3.2% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 56",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "v374-pegasi-surface-{id}{suffix}.webp",
+      "thumbnail": "v374-pegasi-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/v374-pegasi-s0056.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/v374-pegasi-s0056.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99,
+        "maximum": 101,
+        "colors": [
+          "#794803",
+          "#9a6621",
+          "#bc843f",
+          "#dda15e",
+          "#ffbf7c"
+        ],
+        "labels": [
+          "99%",
+          "101%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#ffbf7c, its Color dataset) over the brightness map this project made from the star's light in TESS sector 56 (September 2022): the map's scale, 99% to 101% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 1.7% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "TESS · the star in its color over its brightness map · September 2022",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
     }
   ],
   "emission": {

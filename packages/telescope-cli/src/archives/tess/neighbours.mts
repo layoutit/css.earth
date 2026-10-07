@@ -36,8 +36,8 @@ export function parseNeighbours(csv: string, radiusArcsec = NEIGHBOUR_ARCSEC): M
 
 /** What each mission's pixels can follow. Kepler's and K2's are 4 arcseconds wide and the pixels added up for a star reach
  * some four of them; their photometer follows stars far fainter than TESS, and its apertures take in a bright star's bleed. */
-/** How far from a star its neighbours are counted, by mission: three TESS pixels, four of K2's. */
-export const PIXELS = { TESS: { radiusArcsec: NEIGHBOUR_ARCSEC }, K2: { radiusArcsec: 16 } } as const;
+/** How far from a star its neighbours are counted, by mission: three TESS pixels, four of K2's and of Kepler's. */
+export const PIXELS = { TESS: { radiusArcsec: NEIGHBOUR_ARCSEC }, K2: { radiusArcsec: 16 }, Kepler: { radiusArcsec: 16 } } as const;
 
 /** X-Match's answer for `stars`, which are at their places at Gaia's epoch: one request for all of them, as CSV with its header. */
 export async function askNeighbours(stars: readonly { readonly id: string; readonly raDegrees: number; readonly decDegrees: number }[]): Promise<string> {

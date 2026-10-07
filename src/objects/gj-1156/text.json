@@ -138,6 +138,16 @@
           "checked": "2026-10-06"
         }
       ]
+    },
+    "brightness-sector-49": {
+      "title": "Brightness map, Sector 49",
+      "detail": "Sector 49, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, Mar 2022",
+      "detail": "TESS sector 49",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

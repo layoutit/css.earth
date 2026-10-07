@@ -44,6 +44,9 @@
   ],
   "projectedRotationSpeedKmS": 22.1,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-1224 (pscomppars): projected rotation speed 22.1 km/s, from Thao et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024AJ....168...41T/abstract)",
+  "rotationPeriodMeasuredDays": 1.23,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 1, 13, 27, 28, 66, 67, 68, 93 and 95 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 1.23 d, the light swinging by 1.7% as the star turns",
+  "rotationLightSwingPercent": 1.68,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

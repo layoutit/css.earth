@@ -60,9 +60,9 @@ test('the Stars box holds the Milky Way\'s stars and the Galaxies box the Nearby
   assert.ok(side('star') <= 2 * farthestM && farthestM < 1000 * PARSEC_M, 'the star frame is the navigational stars\' box');
   assert.ok(!holds('star', 'm31-v1'), 'a star of Andromeda is marked, not framed');
   assert.ok(side('star') < 30e3 * PARSEC_M, 'the star frame is smaller than the Milky Way');
-  // The galaxies' box reached the quasar 3C 273, 670 Mpc out, where the markers are clusters.
+  // The galaxies' box reached the quasar 3C 273, 670 Mpc out, where the markers are clusters. GN-z11 is farther still.
   for (const galaxy of ['m81', 'm87', 'ngc-1365']) assert.ok(holds('galaxy', galaxy), `${galaxy} lies outside the galaxy frame`);
-  assert.ok(!holds('galaxy', 'quasar-3c-273'), 'a quasar past the Nearby Universe is marked, not framed');
+  assert.ok(!holds('galaxy', 'gn-z11'), 'a galaxy past the Nearby Universe is marked, not framed');
   assert.ok(side('galaxy') < 100e6 * PARSEC_M, 'the galaxy frame is smaller than the Nearby Universe');
 });
 

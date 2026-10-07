@@ -1,0 +1,41 @@
+{
+  "id": "mast-kepseismic-light-curves",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "KEPSEISMIC: Kepler light curves optimized for asteroseismology, at MAST",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17909/t9-mrpw-gc07"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://archive.stsci.edu/hlsp/kepseismic",
+      "label": "Kepler at MAST"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17909/t9-mrpw-gc07",
+      "label": "KEPSEISMIC: Kepler light curves optimized for asteroseismology, at MAST"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://api.datacite.org/dois/10.17909/t9-mrpw-gc07",
+      "checkedOn": "2026-10-07",
+      "locator": "DataCite record of the DOI: Kepler Light Curves Optimized For Asteroseismology (\"KEPSEISMIC\"), S. Mathur, Â. Santos and R. A. García, STScI/MAST, 2019. A file holds one target's light curve of all its quarters, made from the mission's pixels, corrected with KADACS (García et al. 2011, MNRAS 414, L6), its gaps under 20 days filled in (García et al. 2014, A&A 568, A10; Pires et al. 2015, A&A 574, A18) and high-pass filtered at 20, 55 or 80 days."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This work includes data collected by the Kepler mission, funded by the NASA Science Mission Directorate, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/missions-and-data/kepler"
+    }
+  ],
+  "publisher": "Mikulski Archive for Space Telescopes (STScI)"
+}

@@ -175,6 +175,51 @@
         "kind": "local",
         "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
+    },
+    {
+      "id": "v1298-tau-k2-map-brightness-campaign-4",
+      "path": "science/k2/pdcsap/v1298-tau-c04.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/k2",
+      "productId": "Brightness map of V1298 Tau from its light in K2 campaign 4",
+      "title": "Brightness map of V1298 Tau from its light curve in K2 campaign 4, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2",
+      "credit": "NASA K2 mission light curve (PDC-MAP), campaign 4, from MAST; its rotation judged by the criteria of Reinhold & Hekker (2020, A&A 635, A43); map made in this project with lightkurve 2.6.0, star-privateer 1.3.1 and starry 1.2.0. This work includes data collected by the K2 mission, funded by the NASA Science Mission Directorate, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA K2 · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the campaign published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the campaign's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public K2 data, reduced here.",
+      "consumers": [
+        "k2-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-k2-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/k2"
+          },
+          {
+            "catalogueId": "arxiv-2001-08214",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2001.08214"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
     }
   ],
   "documents": [

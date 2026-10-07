@@ -30,6 +30,41 @@
       "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
       "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "brightness-sector-40": {
+      "title": "Brightness map, Sector 40",
+      "detail": "Sector 40, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-41": {
+      "title": "Brightness map, Sector 41",
+      "detail": "Sector 41, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-55": {
+      "title": "Brightness map, Sector 55",
+      "detail": "Sector 55, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-75": {
+      "title": "Brightness map, Sector 75",
+      "detail": "Sector 75, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-81": {
+      "title": "Brightness map, Sector 81",
+      "detail": "Sector 81, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-82": {
+      "title": "Brightness map, Sector 82",
+      "detail": "Sector 82, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, Aug to Sep 2024",
+      "detail": "TESS sector 82",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }
