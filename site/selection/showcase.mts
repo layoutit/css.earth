@@ -12,7 +12,7 @@ export const SHOWCASE_OBJECT_IDS: readonly string[] = Object.freeze([
   'betelgeuse', 'r-doradus', 'pi1-gruis',
   'wasp-39b', 'hd-189733b', 'trappist-1b',
   'm42', 'm8', 'm1', 'helix', 'm2-9', 'm45',
-  'lmc', 'smc', 'm31', 'm33', 'm81', 'm83', 'm101', 'ngc-253', 'm87', 'cartwheel-galaxy',
+  'lmc', 'smc', 'm31', 'm33', 'm81', 'm83', 'm101', 'ngc-253', 'm87',
 ]);
 /** How long a body stays once its flight has landed, before the tour flies on. */
 export const SHOWCASE_DWELL_MS = 7000;

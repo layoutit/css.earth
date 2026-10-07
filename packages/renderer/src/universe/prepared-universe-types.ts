@@ -38,6 +38,8 @@ export interface PreparedUniverseOptions {
   datasetVisibility?: PreparedPointVisibility;
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   environmentLinks?: Readonly<Record<string, string>>;
+  /** Caption text by environment object id; an object without one is captioned with its id. */
+  environmentNames?: Readonly<Record<string, string>>;
   /** The context packages a level object's datasets name (its `overview.packages`): the world always draws them, so each
    * answers as a bank with nothing to load. */
   contextBanks?: readonly string[];

@@ -432,7 +432,7 @@ names each field.
 | Gas streams on Keplerian orbits about a centre | `geometry.streams` | `streams.ts` | `galactic-centre-layers` |
 | A cluster merger's hot gas and mass, each round about its line | `geometry.collision` | `collision.ts` | `bullet-cluster-layers`, `el-gordo-hubble-layers`, `macs-j0025-layers` |
 | A relaxed cluster's hot gas and mass as fitted ellipsoidal shells | `geometry.ellipsoid` | `collision.ts`, `galaxies.ts` | `abell-1689-chandra-layers` |
-| A bulge-plus-disc fit of a galaxy's light | `geometry.bulge` | `bulge.ts` | `m31-layers`, `m81-layers`, `m104-layers` |
+| A bulge-plus-disc fit of a galaxy's light | `geometry.bulge` | `bulge.ts` | `m31-layers`, `m81-layers`, `m58-layers` |
 
 The [Messier guide](../../../../docs/messier/README.md) explains the walls, the body
 and the bulge. A volumetric bake from images and a spatial prior belongs to the

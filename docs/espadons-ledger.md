@@ -6,8 +6,8 @@ The counts are the archive's own, from one grouped query. Every state is worked 
 not reduced on this machine keeps the result recorded here. [A star's magnetic map from archived
 spectra](stellar-magnetic-maps-from-spectra.md) describes what a map is made with and what it cannot do.
 
-The archive holds 22,652 polarised spectra under 3,005 typed target names. 176 of the 3,117 stars this project ships have some: 5,051 spectra.
-94 stars have 6 or more and are listed. Mapped: 23. Reduced without a map: 1. Pinned: 0. Held: 152.
+The archive holds 22,652 polarised spectra under 3,005 typed target names. 173 of the 3,090 stars this project ships have some: 5,040 spectra.
+93 stars have 6 or more and are listed. Mapped: 23. Reduced without a map: 1. Pinned: 0. Held: 149.
 
 Spectra alone do not make a map. A star also needs its rotation period, the tilt of its axis and its projected rotation
 speed from papers, a field strong enough to detect, and spectra spread through a rotation. "Axis" says whether the star's
@@ -102,7 +102,6 @@ page already draws a measured tilt or only a display convention.
 | [ping](../src/objects/ping/README.md) | 8 | 2008 to 2015 | HD 32887, hd 32887 | display convention | held |
 | [groombridge-34-a](../src/objects/groombridge-34-a/README.md) | 7 | 2005 to 2016 | Gl 15A, HD1326, J00182549+4401376, and 2 more | display convention | held |
 | [hd-135344-a](../src/objects/hd-135344-a/README.md) | 7 | 2006 to 2007 | HD 135344, HD135344, SAO 206463, and 1 more | display convention | held |
-| [m82](../src/objects/m82/README.md) | 7 | 2014 | SN2014J | none | held |
 | [monch](../src/objects/monch/README.md) | 7 | 2008 | HD 130322, HD130322, hd130322 | display convention | held |
 | [rukbat](../src/objects/rukbat/README.md) | 7 | 2015 | hd 181869 | display convention | held |
 | [zavijava](../src/objects/zavijava/README.md) | 7 | 2005 to 2007 | HD 102870, hr4540 | display convention | held |

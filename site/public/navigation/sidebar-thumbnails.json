@@ -11,30 +11,6 @@
       "bytes": 16042
     },
     {
-      "path": "src/objects/abell-2744-layers/prepared/presentation.json",
-      "bytes": 1622
-    },
-    {
-      "path": "site/public/scenes/abell-2744-layers/datasets/optical.webp",
-      "bytes": 18658
-    },
-    {
-      "path": "src/objects/abell-370-layers/prepared/presentation.json",
-      "bytes": 1554
-    },
-    {
-      "path": "site/public/scenes/abell-370-layers/datasets/optical.webp",
-      "bytes": 20058
-    },
-    {
-      "path": "src/objects/abell-s1063-layers/prepared/presentation.json",
-      "bytes": 1548
-    },
-    {
-      "path": "site/public/scenes/abell-s1063-layers/datasets/optical.webp",
-      "bytes": 18018
-    },
-    {
       "path": "src/objects/be-ceti-corona/prepared/presentation.json",
       "bytes": 4218
     },
@@ -87,14 +63,6 @@
       "bytes": 24340
     },
     {
-      "path": "src/objects/cartwheel-galaxy-layers/prepared/presentation.json",
-      "bytes": 1539
-    },
-    {
-      "path": "site/public/scenes/cartwheel-galaxy-layers/datasets/optical.webp",
-      "bytes": 15414
-    },
-    {
       "path": "src/objects/chi1-orionis-corona/prepared/presentation.json",
       "bytes": 12443
     },
@@ -109,22 +77,6 @@
     {
       "path": "site/public/scenes/chi1-orionis-corona/datasets/dec-2017.webp",
       "bytes": 4080
-    },
-    {
-      "path": "src/objects/earendel-layers/prepared/presentation.json",
-      "bytes": 1508
-    },
-    {
-      "path": "site/public/scenes/earendel-layers/datasets/optical.webp",
-      "bytes": 1812
-    },
-    {
-      "path": "src/objects/einstein-cross-layers/prepared/presentation.json",
-      "bytes": 1463
-    },
-    {
-      "path": "site/public/scenes/einstein-cross-layers/datasets/optical.webp",
-      "bytes": 2426
     },
     {
       "path": "src/objects/el-gordo-layers/prepared/presentation.json",
@@ -355,14 +307,6 @@
       "bytes": 4288
     },
     {
-      "path": "src/objects/jades-gs-z14-0-layers/prepared/presentation.json",
-      "bytes": 1527
-    },
-    {
-      "path": "site/public/scenes/jades-gs-z14-0-layers/datasets/optical.webp",
-      "bytes": 144
-    },
-    {
       "path": "src/objects/lmc-volume/prepared/presentation.json",
       "bytes": 4847
     },
@@ -531,38 +475,6 @@
       "bytes": 4326
     },
     {
-      "path": "src/objects/macs-j0416-layers/prepared/presentation.json",
-      "bytes": 1637
-    },
-    {
-      "path": "site/public/scenes/macs-j0416-layers/datasets/optical.webp",
-      "bytes": 17250
-    },
-    {
-      "path": "src/objects/macs-j0717-layers/prepared/presentation.json",
-      "bytes": 1478
-    },
-    {
-      "path": "site/public/scenes/macs-j0717-layers/datasets/optical.webp",
-      "bytes": 15890
-    },
-    {
-      "path": "src/objects/macs-j1149-layers/prepared/presentation.json",
-      "bytes": 1522
-    },
-    {
-      "path": "site/public/scenes/macs-j1149-layers/datasets/optical.webp",
-      "bytes": 18602
-    },
-    {
-      "path": "src/objects/mom-z14-layers/prepared/presentation.json",
-      "bytes": 1510
-    },
-    {
-      "path": "site/public/scenes/mom-z14-layers/datasets/optical.webp",
-      "bytes": 1634
-    },
-    {
       "path": "src/objects/ngc-1275-volume/prepared/presentation.json",
       "bytes": 1390
     },
@@ -711,22 +623,6 @@
       "bytes": 5604
     },
     {
-      "path": "src/objects/quasar-3c-273-layers/prepared/presentation.json",
-      "bytes": 1528
-    },
-    {
-      "path": "site/public/scenes/quasar-3c-273-layers/datasets/optical.webp",
-      "bytes": 4406
-    },
-    {
-      "path": "src/objects/smacs-0723-layers/prepared/presentation.json",
-      "bytes": 1530
-    },
-    {
-      "path": "site/public/scenes/smacs-0723-layers/datasets/optical.webp",
-      "bytes": 18880
-    },
-    {
       "path": "src/objects/smc-volume/prepared/presentation.json",
       "bytes": 7689
     },
@@ -749,14 +645,6 @@
     {
       "path": "site/public/scenes/smc-volume/datasets/smc-allwise-wide.webp",
       "bytes": 3552
-    },
-    {
-      "path": "src/objects/stephans-quintet-layers/prepared/presentation.json",
-      "bytes": 1528
-    },
-    {
-      "path": "site/public/scenes/stephans-quintet-layers/datasets/optical.webp",
-      "bytes": 18234
     },
     {
       "path": "src/objects/sun-cor1-density/prepared/presentation.json",
@@ -789,14 +677,6 @@
     {
       "path": "site/public/scenes/tepiamenit-corona/datasets/jan-2024.webp",
       "bytes": 4344
-    },
-    {
-      "path": "src/objects/ton-618-layers/prepared/presentation.json",
-      "bytes": 1524
-    },
-    {
-      "path": "site/public/scenes/ton-618-layers/datasets/optical.webp",
-      "bytes": 3518
     },
     {
       "path": "src/objects/milky-way-volume/object.json",
@@ -837,60 +717,6 @@
       ],
       "credit": "ESA/Hubble",
       "sourceUrl": "https://esahubble.org/images/heic1317a/"
-    },
-    "abell-2744-layers/optical": {
-      "url2x": "/navigation/focus-abell-2744-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/abell-2744-layers/prepared/presentation.json",
-        "site/public/scenes/abell-2744-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2305a/"
-    },
-    "abell-2744-layers": {
-      "url2x": "/navigation/focus-object-abell-2744-layers@2x.webp",
-      "inputs": [
-        "src/objects/abell-2744-layers/prepared/presentation.json",
-        "site/public/scenes/abell-2744-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2305a/"
-    },
-    "abell-370-layers/optical": {
-      "url2x": "/navigation/focus-abell-370-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/abell-370-layers/prepared/presentation.json",
-        "site/public/scenes/abell-370-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/heic1711a/"
-    },
-    "abell-370-layers": {
-      "url2x": "/navigation/focus-object-abell-370-layers@2x.webp",
-      "inputs": [
-        "src/objects/abell-370-layers/prepared/presentation.json",
-        "site/public/scenes/abell-370-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/heic1711a/"
-    },
-    "abell-s1063-layers/optical": {
-      "url2x": "/navigation/focus-abell-s1063-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/abell-s1063-layers/prepared/presentation.json",
-        "site/public/scenes/abell-s1063-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/heic1615a/"
-    },
-    "abell-s1063-layers": {
-      "url2x": "/navigation/focus-object-abell-s1063-layers@2x.webp",
-      "inputs": [
-        "src/objects/abell-s1063-layers/prepared/presentation.json",
-        "site/public/scenes/abell-s1063-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/heic1615a/"
     },
     "be-ceti-corona/dec-2017": {
       "url2x": "/navigation/focus-be-ceti-corona-dec-2017@2x.webp",
@@ -1009,24 +835,6 @@
       "credit": "ESA/Hubble",
       "sourceUrl": "https://esahubble.org/images/opo0639a/"
     },
-    "cartwheel-galaxy-layers/optical": {
-      "url2x": "/navigation/focus-cartwheel-galaxy-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/cartwheel-galaxy-layers/prepared/presentation.json",
-        "site/public/scenes/cartwheel-galaxy-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2211a/"
-    },
-    "cartwheel-galaxy-layers": {
-      "url2x": "/navigation/focus-object-cartwheel-galaxy-layers@2x.webp",
-      "inputs": [
-        "src/objects/cartwheel-galaxy-layers/prepared/presentation.json",
-        "site/public/scenes/cartwheel-galaxy-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2211a/"
-    },
     "chi1-orionis-corona/dec-2014": {
       "url2x": "/navigation/focus-chi1-orionis-corona-dec-2014@2x.webp",
       "inputs": [
@@ -1062,42 +870,6 @@
       ],
       "credit": "Willamo et al. · HARPSpol",
       "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/659/A71"
-    },
-    "earendel-layers/optical": {
-      "url2x": "/navigation/focus-earendel-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/earendel-layers/prepared/presentation.json",
-        "site/public/scenes/earendel-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/sunrisearc1/"
-    },
-    "earendel-layers": {
-      "url2x": "/navigation/focus-object-earendel-layers@2x.webp",
-      "inputs": [
-        "src/objects/earendel-layers/prepared/presentation.json",
-        "site/public/scenes/earendel-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/sunrisearc1/"
-    },
-    "einstein-cross-layers/optical": {
-      "url2x": "/navigation/focus-einstein-cross-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/einstein-cross-layers/prepared/presentation.json",
-        "site/public/scenes/einstein-cross-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/potw1204a/"
-    },
-    "einstein-cross-layers": {
-      "url2x": "/navigation/focus-object-einstein-cross-layers@2x.webp",
-      "inputs": [
-        "src/objects/einstein-cross-layers/prepared/presentation.json",
-        "site/public/scenes/einstein-cross-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/potw1204a/"
     },
     "el-gordo-layers/optical": {
       "url2x": "/navigation/focus-el-gordo-layers-optical@2x.webp",
@@ -1612,24 +1384,6 @@
       "credit": "Alvarado-Gómez et al. · HARPSpol",
       "sourceUrl": "https://zenodo.org/records/17251923"
     },
-    "jades-gs-z14-0-layers/optical": {
-      "url2x": "/navigation/focus-jades-gs-z14-0-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/jades-gs-z14-0-layers/prepared/presentation.json",
-        "site/public/scenes/jades-gs-z14-0-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/jades5/"
-    },
-    "jades-gs-z14-0-layers": {
-      "url2x": "/navigation/focus-object-jades-gs-z14-0-layers@2x.webp",
-      "inputs": [
-        "src/objects/jades-gs-z14-0-layers/prepared/presentation.json",
-        "site/public/scenes/jades-gs-z14-0-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/jades5/"
-    },
     "lmc-volume/horalek-widefield": {
       "url2x": "/navigation/focus-lmc-volume-horalek-widefield@2x.webp",
       "inputs": [
@@ -2008,78 +1762,6 @@
       "credit": "SDSS",
       "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
     },
-    "macs-j0416-layers/optical": {
-      "url2x": "/navigation/focus-macs-j0416-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/macs-j0416-layers/prepared/presentation.json",
-        "site/public/scenes/macs-j0416-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2327a/"
-    },
-    "macs-j0416-layers": {
-      "url2x": "/navigation/focus-object-macs-j0416-layers@2x.webp",
-      "inputs": [
-        "src/objects/macs-j0416-layers/prepared/presentation.json",
-        "site/public/scenes/macs-j0416-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2327a/"
-    },
-    "macs-j0717-layers/optical": {
-      "url2x": "/navigation/focus-macs-j0717-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/macs-j0717-layers/prepared/presentation.json",
-        "site/public/scenes/macs-j0717-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/opo0917a/"
-    },
-    "macs-j0717-layers": {
-      "url2x": "/navigation/focus-object-macs-j0717-layers@2x.webp",
-      "inputs": [
-        "src/objects/macs-j0717-layers/prepared/presentation.json",
-        "site/public/scenes/macs-j0717-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/opo0917a/"
-    },
-    "macs-j1149-layers/optical": {
-      "url2x": "/navigation/focus-macs-j1149-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/macs-j1149-layers/prepared/presentation.json",
-        "site/public/scenes/macs-j1149-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/heic1505b/"
-    },
-    "macs-j1149-layers": {
-      "url2x": "/navigation/focus-object-macs-j1149-layers@2x.webp",
-      "inputs": [
-        "src/objects/macs-j1149-layers/prepared/presentation.json",
-        "site/public/scenes/macs-j1149-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/heic1505b/"
-    },
-    "mom-z14-layers/optical": {
-      "url2x": "/navigation/focus-mom-z14-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/mom-z14-layers/prepared/presentation.json",
-        "site/public/scenes/mom-z14-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2603a/"
-    },
-    "mom-z14-layers": {
-      "url2x": "/navigation/focus-object-mom-z14-layers@2x.webp",
-      "inputs": [
-        "src/objects/mom-z14-layers/prepared/presentation.json",
-        "site/public/scenes/mom-z14-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2603a/"
-    },
     "ngc-1275-volume/sdss-optical": {
       "url2x": "/navigation/focus-ngc-1275-volume-sdss-optical@2x.webp",
       "inputs": [
@@ -2413,42 +2095,6 @@
       "credit": "ALMA (ESO/NAOJ/NRAO)",
       "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2018.A.00030.S"
     },
-    "quasar-3c-273-layers/optical": {
-      "url2x": "/navigation/focus-quasar-3c-273-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/quasar-3c-273-layers/prepared/presentation.json",
-        "site/public/scenes/quasar-3c-273-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/potw1346a/"
-    },
-    "quasar-3c-273-layers": {
-      "url2x": "/navigation/focus-object-quasar-3c-273-layers@2x.webp",
-      "inputs": [
-        "src/objects/quasar-3c-273-layers/prepared/presentation.json",
-        "site/public/scenes/quasar-3c-273-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Hubble",
-      "sourceUrl": "https://esahubble.org/images/potw1346a/"
-    },
-    "smacs-0723-layers/optical": {
-      "url2x": "/navigation/focus-smacs-0723-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/smacs-0723-layers/prepared/presentation.json",
-        "site/public/scenes/smacs-0723-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2209a/"
-    },
-    "smacs-0723-layers": {
-      "url2x": "/navigation/focus-object-smacs-0723-layers@2x.webp",
-      "inputs": [
-        "src/objects/smacs-0723-layers/prepared/presentation.json",
-        "site/public/scenes/smacs-0723-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2209a/"
-    },
     "smc-volume/smc-horalek-wide": {
       "url2x": "/navigation/focus-smc-volume-smc-horalek-wide@2x.webp",
       "inputs": [
@@ -2502,24 +2148,6 @@
       ],
       "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
       "sourceUrl": "https://noirlab.edu/public/images/iotw2615a/"
-    },
-    "stephans-quintet-layers/optical": {
-      "url2x": "/navigation/focus-stephans-quintet-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/stephans-quintet-layers/prepared/presentation.json",
-        "site/public/scenes/stephans-quintet-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2208a/"
-    },
-    "stephans-quintet-layers": {
-      "url2x": "/navigation/focus-object-stephans-quintet-layers@2x.webp",
-      "inputs": [
-        "src/objects/stephans-quintet-layers/prepared/presentation.json",
-        "site/public/scenes/stephans-quintet-layers/datasets/optical.webp"
-      ],
-      "credit": "ESA/Webb",
-      "sourceUrl": "https://esawebb.org/images/weic2208a/"
     },
     "sun-cor1-density/electron-density": {
       "url2x": "/navigation/focus-sun-cor1-density-electron-density@2x.webp",
@@ -2593,24 +2221,6 @@
       "credit": "CFHT ESPaDOnS · mapped here",
       "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
     },
-    "ton-618-layers/optical": {
-      "url2x": "/navigation/focus-ton-618-layers-optical@2x.webp",
-      "inputs": [
-        "src/objects/ton-618-layers/prepared/presentation.json",
-        "site/public/scenes/ton-618-layers/datasets/optical.webp"
-      ],
-      "credit": "CDS (SDSS)",
-      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
-    },
-    "ton-618-layers": {
-      "url2x": "/navigation/focus-object-ton-618-layers@2x.webp",
-      "inputs": [
-        "src/objects/ton-618-layers/prepared/presentation.json",
-        "site/public/scenes/ton-618-layers/datasets/optical.webp"
-      ],
-      "credit": "CDS (SDSS)",
-      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
-    },
     "milky-way-volume/volume": {
       "url2x": "/navigation/focus-milky-way-volume-volume@2x.webp",
       "inputs": [
@@ -2636,17 +2246,11 @@
   },
   "defaults": {
     "abell-1689-layers": "abell-1689-layers",
-    "abell-2744-layers": "abell-2744-layers",
-    "abell-370-layers": "abell-370-layers",
-    "abell-s1063-layers": "abell-s1063-layers",
     "be-ceti-corona": "be-ceti-corona",
     "beta-pictoris-disc": "beta-pictoris-disc",
     "betelgeuse-shell": "betelgeuse-shell",
     "bullet-cluster-layers": "bullet-cluster-layers",
-    "cartwheel-galaxy-layers": "cartwheel-galaxy-layers",
     "chi1-orionis-corona": "chi1-orionis-corona",
-    "earendel-layers": "earendel-layers",
-    "einstein-cross-layers": "einstein-cross-layers",
     "el-gordo-layers": "el-gordo-layers",
     "eps-eridani-corona": "eps-eridani-corona",
     "eps-eridani-disc": "eps-eridani-disc",
@@ -2662,7 +2266,6 @@
     "hd-6569-corona": "hd-6569-corona",
     "helix-volume": "helix-volume",
     "iota-horologii-corona": "iota-horologii-corona",
-    "jades-gs-z14-0-layers": "jades-gs-z14-0-layers",
     "lmc-volume": "lmc-volume",
     "m1-volume": "m1-volume",
     "m101-layers": "m101-layers",
@@ -2677,10 +2280,6 @@
     "m83-layers": "m83-layers",
     "m87-volume": "m87-volume",
     "m95-layers": "m95-layers",
-    "macs-j0416-layers": "macs-j0416-layers",
-    "macs-j0717-layers": "macs-j0717-layers",
-    "macs-j1149-layers": "macs-j1149-layers",
-    "mom-z14-layers": "mom-z14-layers",
     "ngc-1275-volume": "ngc-1275-volume",
     "ngc-1365-layers": "ngc-1365-layers",
     "ngc-1637-layers": "ngc-1637-layers",
@@ -2699,13 +2298,9 @@
     "ngc-6946-layers": "ngc-6946-layers",
     "omega-centauri-volume": "omega-centauri-volume",
     "pds-70-disc": "pds-70-disc",
-    "quasar-3c-273-layers": "quasar-3c-273-layers",
-    "smacs-0723-layers": "smacs-0723-layers",
     "smc-volume": "smc-volume",
-    "stephans-quintet-layers": "stephans-quintet-layers",
     "sun-cor1-density": "sun-cor1-density",
     "tepiamenit-corona": "tepiamenit-corona",
-    "ton-618-layers": "ton-618-layers",
     "milky-way-volume": "milky-way-volume"
   }
 }

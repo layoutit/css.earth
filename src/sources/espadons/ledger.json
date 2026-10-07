@@ -5,7 +5,7 @@
   "targetNames": 3005,
   "spectra": 22652
  },
- "shippedStars": 3117,
+ "shippedStars": 3090,
  "stars": [
   {
    "id": "polaris",
@@ -1635,20 +1635,6 @@
    "reasons": []
   },
   {
-   "id": "m82",
-   "spectra": 7,
-   "typedNames": [
-    "SN2014J"
-   ],
-   "firstYear": 2014,
-   "lastYear": 2014,
-   "axis": "none",
-   "state": "held",
-   "programs": [],
-   "maps": [],
-   "reasons": []
-  },
-  {
    "id": "monch",
    "spectra": 7,
    "typedNames": [
@@ -2337,20 +2323,6 @@
    "reasons": []
   },
   {
-   "id": "m106",
-   "spectra": 2,
-   "typedNames": [
-    "NGC 4258"
-   ],
-   "firstYear": 2006,
-   "lastYear": 2006,
-   "axis": "none",
-   "state": "held",
-   "programs": [],
-   "maps": [],
-   "reasons": []
-  },
-  {
    "id": "m39",
    "spectra": 2,
    "typedNames": [
@@ -2387,20 +2359,6 @@
    "firstYear": 2014,
    "lastYear": 2014,
    "axis": "display convention",
-   "state": "held",
-   "programs": [],
-   "maps": [],
-   "reasons": []
-  },
-  {
-   "id": "quasar-3c-273",
-   "spectra": 2,
-   "typedNames": [
-    "3C 273"
-   ],
-   "firstYear": 2005,
-   "lastYear": 2005,
-   "axis": "none",
    "state": "held",
    "programs": [],
    "maps": [],
