@@ -276,7 +276,8 @@ test('a nebula with a backing is drawn from afar on that one fixed plane, never 
   const plane = root.querySelector<HTMLElement>('.prepared-galaxy-backing > [data-galaxy-backing="nebula"]')!;
   const image = plane.querySelector('img')!, scene = plane.querySelector<HTMLElement>('.css-volume-scene')!;
   assert.equal(plane.querySelectorAll('*').length + 1, 5, 'projection, camera, scene, mesh and one image');
-  assert.equal(plane.style.display, '');
+  const shown = () => plane.style.display !== 'none' && Number(plane.style.opacity) > 0;
+  assert.equal(shown(), true);
   assert.equal(image.getAttribute('src'), '/backing/backing.webp');
   // Orbiting turns the scene, the plane's one transform for the camera; the image stays where the bake laid it.
   const facing = scene.style.transform;
@@ -287,7 +288,7 @@ test('a nebula with a backing is drawn from afar on that one fixed plane, never 
   front('nebula');
   await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
   front('nebula');
-  assert.equal(plane.style.display === 'none' || Number(plane.style.opacity) === 0, true, 'its loaded slices replace the plane');
+  assert.equal(shown(), false, 'its loaded slices replace the plane');
   lifetime.destroy();
   assert.equal(root.querySelector('.prepared-galaxy-backing'), null, 'the scene takes its plane with it');
 });
