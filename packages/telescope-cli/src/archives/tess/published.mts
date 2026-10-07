@@ -13,10 +13,8 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { isRecord } from '@cssearth/core';
 import { tapRows } from '@cssearth/telescope/node';
+import { VIZIER_TAP } from '../espadons/catalogue.mts';
 import type { Mission, RotationVerdict } from './verdict.mts';
-
-/** VizieR's table access service (CDS). The telescope's PyVO reader asks it, as it asks every VO table. */
-export const VIZIER_TAP = 'https://tapvizier.cds.unistra.fr/TAPVizieR/tap';
 
 /** A star's row in a paper's table, as the columns this module reads. */
 export interface PublishedRow { /** The target's number in the TESS Input Catalog. */ readonly tic: number; /** The table's period, days; some rows print none. */ readonly rotationDays?: number; /** The paper flags the period as a potential half-period. */ readonly halfPeriod: boolean;
@@ -24,7 +22,7 @@ export interface PublishedRow { /** The target's number in the TESS Input Catalo
 /** What a row says of a star, given the mission's windows the star has: the paper's verdict, and the windows whose light it is a verdict on. */
 export interface PublishedJudgement { readonly verdict: RotationVerdict; readonly windows: readonly number[] }
 export interface PublishedVerdict { readonly id: string; readonly citation: string; readonly url: string; /** Where in the paper the sample, the light curves and the table are described. */ readonly where: string;
-  /** The published table a verdict is a row of, the service that serves it and the query that reads it whole. */ readonly table: string; readonly service: string; readonly query: string;
+  /** The published table a verdict is a row of, the TAP service that serves it (asked through the telescope's PyVO reader) and the query that reads it whole. */ readonly table: string; readonly service: string; readonly query: string;
   readonly missions: readonly Mission[]; /** The light curve the paper judged. */ readonly lightCurve: string;
   /** What a row of the table asserts, in a sentence's words. */ readonly asks: string; /** What the paper itself measured of its detections' reliability. */ readonly reliability: string;
   /** The service's answer as rows, by the target's number. */ parse(rows: readonly Readonly<Record<string, string>>[]): Map<number, PublishedRow>;
