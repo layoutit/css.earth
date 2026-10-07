@@ -100,8 +100,22 @@ that paper uses; do not widen an entry beyond its paper, do not add a limit no p
 our own stars: a comparison with the catalogues is evidence for the note, not a setting. Where an entry reads something
 into its paper, its comment says so.
 
+Three things around the two methods are stated in the note as this repository's. K2's light is judged first, and a star
+K2's method refuses is judged on its TESS light too (`reduceStar`); a rotation K2's method accepts stays K2's. A star
+whose record holds no temperature or no surface gravity takes the missing value from the TESS Input Catalog, the
+catalogue Holcomb et al. select from, as the primary header of the star's own 2-minute light curve carries it (an entry's
+`catalogue`; `tools.py input-catalogue` is lightkurve reading the header): only to fill, never to replace, and only when
+the light curve's target lies within 3 arcseconds of the star. And `tess/published.mts` holds the third kind of entry, a
+paper's own verdict: a paper whose code cannot be run here (Colman et al. 2024: no licence) still lists in its published
+table the stars it found turning. An entry there reads the table through the telescope's TAP reader and says what a row
+asserts and which columns decide, after the paper's sections on its sample, its light curves and its table and the
+table's own description have been read; it is looked up only for a star the wired method refuses, it is a verdict only
+on the light the paper judged, and it measures nothing. A column that does not hold what its description says is not
+read, and the entry's comment gives the count.
+
 `verdict.mts` holds the verdict's shape and three checks against what is already published of the star (its catalogued
-period, SIMBAD's type, the fastest its radius and mass let it turn); each can only withhold a map. `neighbours.mts` counts
+period, SIMBAD's type, the fastest its radius and mass let it turn); each can only withhold a map, a paper's own verdict
+included. `neighbours.mts` counts
 the Gaia sources around a star for its page to say. `map.mts` has starry fit the map of each accepted light curve.
 `reduce.mts` runs a star, or every star with `--all`, and writes its receipt and light curves under ignored
 `output/tess/<star id>/`. The science is the pinned codes' (`toolchain.json`, and the telescope's starry toolchain);
@@ -113,8 +127,8 @@ writes the records any map needs (table, manifest input, raster surface, dataset
 units, colors, sentences, how its reduction is read and the catalogue records it is bound to. `magnetic/` is the kind for
 maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a convention page takes the maps' tilt) and
 `brightness/` the kind for maps from a star's TESS or K2 mission light curves (`--from-pixels`, a spec's `brightnessMaps`; what differs by
-mission is one table, `MISSIONS`; a map's records name the published method that judged it, in the method's own words, and the paper's own light curve; the page's axis is never
-changed, and the measured period goes into the star's measurements record; `new-object-cli.mts --pixel-light` writes the
+mission is one table, `MISSIONS`; a map's records name the published method that judged it, in the method's own words, and the paper's own light curve; a map drawn on a paper's own verdict says the rotation and its period are that paper's, names the method that refused the same light, and brings no measured period; the page's axis is never
+changed, and a period measured here goes into the star's measurements record; `new-object-cli.mts --pixel-light` writes the
 reduction's verdict, mission, window and light scatter into the record of every star it looked at, mapped or not). A kind whose maps are how the star looks
 supplies `natural`: the newest map in the star's own color, which becomes the dataset the page opens on
 (`Color + brightness`). It is the Brightness map's scale drawn from a darker, richer step of the star's own hue up to its color (`tinted`, `DARK_STEP`; never toward black), far stronger than the

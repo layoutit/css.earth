@@ -31,6 +31,16 @@
               "id": "color",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "brightness-sector-23",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "color-brightness",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }
