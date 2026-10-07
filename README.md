@@ -42,27 +42,16 @@ css.earth uses the [PolyCSS](https://github.com/LayoutitStudio/polycss) engine t
 
 Every pixel has a source. What you see is built from public data from spacecraft and telescopes, such as Cassini at Saturn, New Horizons at Pluto, and Hubble and Webb at the Ring Nebula. An object can carry several datasets to switch between, and its README names the data behind each one, how it was processed and its known limits.
 
-## Toolkits
+## Telescope API
 
-Preparation reads archive formats directly with in-house TypeScript readers. The FITS, PDS, SPICE and photometry readers are checked against independent reference implementations in [the owner-local oracles](packages/core/src/node/oracle/README.md).
+css.earth includes a `telescope` API for finding observations of a target. `explore` looks through the JWST, Hubble, ESO, ALMA, Keck, Gemini, Chandra and Spitzer archives at once, then asks which result to retrieve.
 
-- **FITS and PDS:** FITS images and tables, including Rice-compressed ones, with their sky orientation, and PDS3 and PDS4 labels ([`@cssearth/fits`](packages/fits/README.md), [PDS labels](docs/pds-labels.md)).
-- **SPICE:** kernels, clocks, frames and pointing, used to place a spacecraft's camera for each photograph ([`@cssearth/spice`](packages/spice/README.md)).
-- **Surface imagery:** image decoding, shape-model reduction, UV mapping and texture atlases ([surface preparation](docs/surface-preparation.md), [colour preparation](docs/color-preparation.md)).
-- **Photometry:** Hapke and disc models that separate a surface's brightness from its lighting and viewing angles ([`packages/bake/src/photometry/`](packages/bake/src/photometry/README.md)).
-- **Interferometry:** calibration and image reconstruction for stellar surfaces from raw VLTI and ALMA observations ([interferometric imaging](docs/interferometric-imaging.md)).
-- **Eclipse mapping:** exoplanet maps fitted from raw JWST light curves ([eclipse mapping](docs/eclipse-mapping.md)).
-- **Nebulae and galaxies:** 3D volumes and galaxy fields from surveys and catalogues ([prepared nebulae](docs/nebulae/README.md), [galaxies](docs/galaxies/README.md)); the volume bake is [`@cssearth/bake/volume`](packages/bake/README.md).
-- **Telescope command:** finds and pins archive observations and re-runs the observatory's own software ([command guide](packages/telescope-cli/README.md), [virtual telescopes](docs/virtual-telescopes.md)).
-- **Stellar maps:** a star's magnetic map from archived polarised spectra, its brightness map from TESS pixels, and a corona from the magnetic map ([magnetic maps](docs/stellar-magnetic-maps-from-spectra.md), [TESS brightness maps](docs/stellar-brightness-maps-from-tess.md), [coronae](docs/stellar-corona-from-magnetic-maps.md)).
+```sh
+pnpm telescope explore eris
+pnpm telescope explore eris --kind cube --wavelength 2.2,2.4 --out runs/eris
+```
 
-## Architecture
-
-- **Rendering:** every body is a [PolyCSS](https://github.com/LayoutitStudio/polycss) mesh of HTML elements, placed with CSS `matrix3d(...)` and painted from prepared texture atlases. No canvas or WebGL. The runtime is [`@cssearth/renderer`](packages/renderer/README.md).
-- **Preparation:** Node reads declared source products and writes the textures, geometry, orbits and page text, each recording its sources. Runtime inventories pin the published outputs; source manifests record paths, acquisition and attribution.
-- **Objects:** each one is a package under [`src/objects/<id>/`](src/objects/README.md). One registry, one shell and one camera serve them all.
-- **Delivery:** prepared files are stored in R2; `pnpm setup:assets` fetches them before Astro builds the site, which a Cloudflare Worker serves.
-- **Runtime:** the browser loads prepared state and moves the camera. It never derives geometry or textures.
+A retrieved file can be exported as an image, a spectrum, a map projected onto its body, or a standalone 3D sphere in HTML. For some instruments, the observatory's own software is run again on the same inputs and the result is checked against the published product. See the [command guide](packages/telescope-cli/README.md) for more information.
 
 ## How to Run
 
