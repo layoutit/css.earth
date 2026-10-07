@@ -39,6 +39,7 @@ src/objects/*/source/science/kepler/kepseismic/*.dat
 src/objects/*/source/science/tess/pdcsap/*.dat
 src/objects/*/source/science/k2/pdcsap/fine/*.dat
 src/objects/*/source/science/tess/pdcsap/fine/*.dat
+src/objects/*/source/science/kepler/kepseismic/fine/*.dat
 # M1-67's model grid (17 MB); built by packages/bake/authoring/m1-67/shell-grid.mts, restored from the source mirror.
 src/objects/m1-67-layers/source/shell-grid.dat
 # The Crab's measured filaments (416,573 rows, 11.5 MB); built by packages/bake/authoring/m1/filament-speeds.mts, restored from the source mirror.
