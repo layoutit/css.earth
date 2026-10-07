@@ -137,7 +137,8 @@ the TESS Input Catalog gives a contamination ratio of 0.2 or more is not read as
 2023 and García Soto et al. 2023 print that limit for their own searches of the same light curves, and
 `light-curves.mts` asks MAST for the ratio). Do not replace it with a number of ours, and do not decide anything on the
 aperture shares a receipt keeps from a light curve's header (`CROWDSAP`, `FLFRCSAP`): no paper found prints a limit on
-them for rotation. `neighbours.mts` counts
+them for rotation. The ratio is of TESS's pixels: do not set it beside K2's or Kepler's light, for which no published
+limit is wired; a star it leaves unread on TESS is still asked for among Kepler's light curves. `neighbours.mts` counts
 the Gaia sources around a star for its page to say. `map.mts` has starry fit the map of each accepted light curve, and
 writes its values to five decimals of the mean, or to seven for a map whose whole range would hold under 256 steps at
 five (`written`): that is how a number is written, and no star gains or loses a map by it.
