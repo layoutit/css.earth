@@ -192,7 +192,7 @@ const columnsOf = (table: SantosTable) => ['KIC', 'Q', table.flag, ...Object.val
  * and a star's row is in one of them. What a row says is `santosVerdict`; which of the star's quarters the verdict is on
  * is known only from its light (`santosStar`), so `judge` gives the windows it is handed back for an accepted row. */
 function published(id: SantosPaper): PublishedVerdict<SantosRow> { const paper = SANTOS_PAPERS[id], tables = SANTOS_TABLES.filter(table => table.paper === id);
-  return { id: paper.id, citation: paper.citation, url: paper.url, where: paper.where, table: `VizieR ${paper.catalogue}, ${tables.find(table => table.holds === 'rotation')!.name.split('/').at(-1)!.replace('table', 'table ')}`, service: VIZIER_TAP,
+  return { id: paper.id, citation: paper.citation, url: paper.url, where: paper.where, catalogue: paper.catalogue, table: `VizieR ${paper.catalogue}, ${tables.find(table => table.holds === 'rotation')!.name.split('/').at(-1)!.replace('table', 'table ')}`, service: VIZIER_TAP,
     query: tables.map(table => `SELECT ${columnsOf(table).join(', ')} FROM "${table.name}"`), missions: ['Kepler'], lightCurve: SANTOS_LIGHT_CURVE, asks: paper.asks, reliability: paper.reliability,
     swing: 'measured here over the quarters mapped; the table prints another measure of it, S_ph',
     parse(answered) { const rows = new Map<number, SantosRow>();

@@ -111,7 +111,13 @@ table the stars it found turning. An entry there reads the table through the tel
 asserts and which columns decide, after the paper's sections on its sample, its light curves and its table and the
 table's own description have been read; it is looked up only for a star the wired method refuses, it is a verdict only
 on the light the paper judged, and it measures nothing. A column that does not hold what its description says is not
-read, and the entry's comment gives the count.
+read, and the entry's comment gives the count. `tess/canto-martins.mts` is a second such entry, for a TESS Object of
+Interest (Canto Martins et al. 2020: its periods were chosen by its authors' inspection), and `tess/papers.mts` lists
+the entries in the order they are asked. A paper is wired only when it measured on the mission's 2-minute PDC-MAP light
+curves, marks its firm detections of rotation and says which of a star's light a row is of; the note lists the papers
+read that do not, each with the reason. A paper's verdict is drawn at the paper's own period or not at all
+(`keptAsPublished`): half the catalogued period, or a period apart from another table's where the star's record adopts
+none, withholds it, and two papers that print one star periods more than 20% apart give it none (`publishedApart`).
 
 A Kepler star has no method wired. Its rotation is its row in the tables of Santos et al. (2019, 2021): two more entries
 of the published-verdict kind (`kepler/santos.mts`), asked of a star no method and no paper above gives a rotation. Its

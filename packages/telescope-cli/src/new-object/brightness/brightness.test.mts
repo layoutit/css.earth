@@ -9,6 +9,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { SAME_STAR_ARCSEC } from '../../archives/tess/methods.mts';
 import { SANTOS_2019 } from '../../archives/kepler/santos.mts';
+import { CANTO_MARTINS_2020 } from '../../archives/tess/canto-martins.mts';
 import { COLMAN_2024 } from '../../archives/tess/published.mts';
 import { MATCH_ARCSEC } from '../metadata/rotation-catalogues.mts';
 import { BRIGHTNESS_ROUTE, withBrightnessReadme, withMeasuredRotation, withPixelLight } from './brightness.mts';
@@ -210,6 +211,26 @@ test('a paper\'s own verdict is worded as the paper\'s, and brings no period mea
     assert.deepEqual([...(await BRIGHTNESS_ROUTE.starRecords!(root, 'hd-1', [map])).keys()], ['src/objects/hd-1/README.md']);
     assert.deepEqual([...(await BRIGHTNESS_ROUTE.starRecords!(root, 'hd-1', [reducedBrightness(brightnessChoice('hd-1', 'TESS', 95), receipt('assumed', 'assumed'), TABLE, LIGHT)])).keys()], ['src/objects/hd-1/source/measurements.json', 'src/objects/hd-1/README.md']); }
   finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a verdict whose table prints no swing says the swing is measured here, over every sector mapped', () => {
+  // HD 110082 as reduce.mts wrote it on 2026-10-07: Holcomb et al.'s criteria refuse its eight sectors, and Canto Martins et al.'s Table 1 lists the star, on its sectors 12 and 13.
+  const none = 'A valid period is found in 3 of the star\'s 8 sectors, and Holcomb et al. (2022) ask for at least 4.', row = CANTO_MARTINS_2020.parse([{ TIC: '383390264', Prot: '2.149', e_Prot: '0.044', tSPAN: '52', Ncyc: '24.2', table: '0' }]).get(383390264)!, said = CANTO_MARTINS_2020.judge(row, [12, 13, 27]).verdict;
+  const paper = { id: CANTO_MARTINS_2020.id, citation: CANTO_MARTINS_2020.citation, url: CANTO_MARTINS_2020.url, where: CANTO_MARTINS_2020.where, lightCurve: CANTO_MARTINS_2020.lightCurve, asks: CANTO_MARTINS_2020.asks, reliability: CANTO_MARTINS_2020.reliability, published: CANTO_MARTINS_2020.table, swing: CANTO_MARTINS_2020.swing };
+  const own = (window: number) => ({ mission: 'TESS', window, method: 'canto-martins-2020', analysis: CANTO_MARTINS_2020.measures(row), says: CANTO_MARTINS_2020.says(row), verdict: said }), one = receipt('record', 'measurements.json, spinInclinationDegrees').maps[0]!;
+  const listed = { ...receipt('record', 'x'), method: paper, rotation: { ...said, amplitude: 0.004896 }, refused: [{ mission: 'TESS', method: HOLCOMB, rotation: { detected: false, reason: none } }], tried: [own(12), own(13)],
+    maps: [{ ...one, window: 12, table: 'hd-1-s0012.dat', periodDays: 2.149 }, { ...one, window: 13, table: 'hd-1-s0013.dat', periodDays: 2.149 }] };
+  // Sector 13: 19 June to 17 July 2019.
+  const choices = [brightnessChoice('hd-1', 'TESS', 12), brightnessChoice('hd-1', 'TESS', 13)], maps = [reducedBrightness(choices[0]!, listed, TABLE, { time: [1625, 1652], flux: [1, 1] }), reducedBrightness(choices[1]!, listed, TABLE, { time: [1653.9, 1682.3], flux: [1, 1] })], map = maps[1]!;
+  assert.deepEqual([map.method.published, map.method.swing, map.method.campaigns, map.periodDays, map.amplitude, map.periodSource], ['VizieR J/ApJS/250/20, table 1', 'measured here over the sectors mapped; the table prints none', 2, 2.149, 0.004896, 'published by Canto Martins et al. (2020, ApJS 250, 20) (VizieR J/ApJS/250/20, table 1)']);
+  const { files } = surfaceMapFiles(BRIGHTNESS_MAPS, { host: 'hd-1', maps: choices }, { id: 'hd-1', name: 'HD 1' }, maps, HOST()), read = (path: string) => JSON.parse(files.get(`src/objects/hd-1/${path}`)!) as Record<string, any>;
+  assert.match(read('source/preparation/raster.json').surfaces[3].science.description, /turns once in 2\.15 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 13 \(its PDC-MAP flux\) \(the light varies by 0\.49%;.*Canto Martins et al\. \(2020, ApJS 250, 20\) list the star as a rotator in their table \(VizieR J\/ApJS\/250\/20, table 1\): a rotation period of 2\.149 ± 0\.044 d, the peak of the wavelet's global spectrum of 52 days of the star's light in sectors 1 to 22 \(24\.2 cycles\), which the paper lists among its unambiguous rotation periods\. The rotation and its period are theirs, taken as published; no criteria were applied to them here\./u);
+  assert.deepEqual(read('source/manifest.json').generatedIntermediates[1].sourceBinding.references.map((reference: { catalogueId: string }) => reference.catalogueId), ['mast-tess-light-curves', 'arxiv-2007-03079', 'arxiv-1810-06559', 'gaia-2023-dr3']);
+  const record = JSON.parse(brightnessSourceRecords('2026-10-07', maps).get('src/sources/arxiv-2007-03079.json')!) as Record<string, any>; assert.deepEqual(record.identifiers, [{ type: 'arXiv', value: '2007.03079' }, { type: 'DOI', value: '10.3847/1538-4365/aba73f' }]);
+  // The README names both sectors, the paper's own words for what it asks, and where the swing comes from.
+  const readme = withBrightnessReadme('# HD 1\n\n## Sources\n\nGaia.\n\n## Evidence\n\nRun.\n\n## Known problems\n\n- None.\n', map, 2.34, maps);
+  assert.match(readme, /light curves of sectors 12 and 13 \(the newest of June and July 2019; their PDC-MAP flux.*They are among the light curves \[Canto Martins et al\. \(2020, ApJS 250, 20\)\]\(https:\/\/arxiv\.org\/abs\/2007\.03079\) searched for rotation, and the star's row in their table \(VizieR J\/ApJS\/250\/20, table 1\) is their verdict that each shows the star turning: the period is theirs and nothing is judged here/su);
+  assert.match(readme, /ask the Lomb-Scargle periodogram, the fast Fourier transform and the wavelet map of a star's light to show one period.*: the star's period is 2\.149 d, as published, and no criteria were applied to it here\. The light varies by 0\.49% \(the range between its 5th and 95th percentiles, measured here over the sectors mapped; the table prints none\)\..*The criteria of Holcomb et al\. \(2022, ApJ 936, 138\), applied here to the star's TESS light, are not met: A valid period is found in 3 of the star's 8 sectors.*The star's record holds 2\.34 d from the catalogues\./su);
 });
 
 test('a Kepler star\'s map is of a quarter of its KEPSEISMIC light curve, on the rotation Santos et al. published', () => {
