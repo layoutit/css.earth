@@ -20,6 +20,7 @@ ESO's optical photograph of the Helix Nebula from the Wide Field Imager, laid on
 - **Stars:** the bake removes the stars Gaia lists in the field where they show: 843 of the 1,027 in the picture; 1 stand in extended light and stay. The central star stays.
 - **Sky:** the photograph's sky is 16 of 255 levels in its brightest channel, the median outside the nebula; the recipe's floor, 0.063, takes it away, as 0.02 does the Hubble photograph's 5.
 - **Size:** the picture inside a circle of 770″ about the star, fading out over its last 7%; drawn 4,096 px on its long side, 0.43″ per pixel.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, as [the Hubble bank](../helix-layers/README.md#the-picture) is: [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun onto the slices' own plane through the frame's centre. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/helix-wfi-layers backing` again. From afar the Helix is drawn by one of its banks at a time: the bank of its selected dataset, or the Hubble bank while none of the Helix's banks is selected, so while another body is selected the Hubble bank draws it. Every bank of a body drawn this way needs a plane, so this one has its own.
 
 ## Reproduce
 
@@ -27,6 +28,7 @@ ESO's optical photograph of the Helix Nebula from the Wide Field Imager, laid on
 node packages/bake/cli/restore-source-inputs.mts --object=helix-wfi-layers
 node packages/bake/authoring/helix/register-eso.mts helix-wfi-layers
 node packages/bake/cli/prepare-image-layers.mts src/objects/helix-wfi-layers
+node packages/bake/cli/prepare-galaxy-backing.mts src/objects/helix-wfi-layers backing
 node site/build/prepare/catalog/prepare-volume-presentation.mts --object=helix-wfi-layers
 pnpm prepare:objects --object=helix
 ```
@@ -51,5 +53,6 @@ The registration was checked apart from the generator: the stars of the written 
 - The Hubble photograph is placed by what its publisher prints, which misses the same Gaia stars by about 4″ rms and up to 7″ at its edge; this one is placed by Gaia. Switching between the two datasets, a feature near the frame's edge can move by a few arcseconds.
 - As the page opens, parts of the sheets draw as dark or light rectangles. The Hubble dataset shows the same on `main`; it is not from this bank.
 - The photograph's corners outside the circle are not drawn, so its top and bottom strips do not show.
+- The far picture holds only the flat slices' light, as the Hubble bank's does: from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - Colors are the publisher's display composite, not a measurement.
 - The bank is 3.7 MB, 3.3 MB of it the two ring sheets for the view the page opens on. Headless Chromium draws it; Safari is not measured yet.
