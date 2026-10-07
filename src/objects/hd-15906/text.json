@@ -30,6 +30,16 @@
       "title": "Photosphere color",
       "detail": "From its temperature",
       "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "brightness-sector-4": {
+      "title": "Brightness map, Sector 4",
+      "detail": "Sector 4, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, Oct to Nov 2018",
+      "detail": "TESS sector 4",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

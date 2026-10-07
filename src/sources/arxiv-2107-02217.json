@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-2107-02217",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Santos et al. (2021): Surface Rotation and Photometric Activity for Kepler Targets. II. G and F Main-sequence Stars and Cool Subgiant Stars",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2107.02217"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/ac033f"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2107.02217",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4365/ac033f",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2107.02217",
+      "checkedOn": "2026-10-07",
+      "locator": "arXiv listing: title, authors, DOI (ApJS 255, 17). Sects. II and III print the light curves, the sample and how a rotation period is selected; the catalogue is VizieR J/ApJS/255/17, whose ReadMe describes each column of Tables 1 (39,591 stars with a period) and 2."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Santos et al. (2021)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2107.02217"
+    }
+  ],
+  "creators": [
+    "A. R. G. Santos",
+    "S. N. Breton",
+    "S. Mathur",
+    "R. A. García"
+  ],
+  "publicationDate": "2021"
+}

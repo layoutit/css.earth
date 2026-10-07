@@ -36,8 +36,283 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "color",
+    "defaultDataset": "color-brightness",
     "controls": [
+      {
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "qualification": "The star's color, darker where TESS saw it dimmer (contrast drawn stronger) · February and March 2020, mapped in this project",
+        "thumbnail": "toi-1136-dataset-color-brightness.webp",
+        "surface": "toi-1136-surface-color-brightness@2x.webp",
+        "poles": "toi-1136-poles-color-brightness@2x.webp",
+        "source": {
+          "id": "toi-1136-tess-map-brightness-sector-22",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "falseColor": false,
+        "notes": "TOI-1136 in its own color, darker where its light in TESS's images of February and March 2020 says it was darker. As the star turned once in 8.68 days its light rose and fell by 2.3%. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 9.2% less light than the brightest, and is drawn as a much darker tone of the star's own hue; the Brightness map's scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's limb law, drawn 1.5 times as strong."
+      },
+      {
+        "id": "brightness-sector-14",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · TESS mission light curve, sector 14",
+        "thumbnail": "toi-1136-dataset-brightness-sector-14.webp",
+        "surface": "toi-1136-surface-brightness-sector-14@2x.webp",
+        "poles": "toi-1136-poles-brightness-sector-14@2x.webp",
+        "source": {
+          "id": "toi-1136-tess-map-brightness-sector-14",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Sector 14"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "94%",
+            "100%",
+            "106%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "94%",
+              "100%",
+              "106%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "notes": "Where the star's surface was darker and brighter in TESS sector 14, worked out in this project from how its light rose and fell by 2.3% as it turned once in 8.68 days. The light curve is the mission's own; Colman et al. (2024, AJ 167, 189) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 4 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-sector-15",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · TESS mission light curve, sector 15",
+        "thumbnail": "toi-1136-dataset-brightness-sector-15.webp",
+        "surface": "toi-1136-surface-brightness-sector-15@2x.webp",
+        "poles": "toi-1136-poles-brightness-sector-15@2x.webp",
+        "source": {
+          "id": "toi-1136-tess-map-brightness-sector-15",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Sector 15"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "94%",
+            "100%",
+            "106%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "94%",
+              "100%",
+              "106%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "notes": "Where the star's surface was darker and brighter in TESS sector 15, worked out in this project from how its light rose and fell by 2.3% as it turned once in 8.68 days. The light curve is the mission's own; Colman et al. (2024, AJ 167, 189) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 4 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-sector-21",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · TESS mission light curve, sector 21",
+        "thumbnail": "toi-1136-dataset-brightness-sector-21.webp",
+        "surface": "toi-1136-surface-brightness-sector-21@2x.webp",
+        "poles": "toi-1136-poles-brightness-sector-21@2x.webp",
+        "source": {
+          "id": "toi-1136-tess-map-brightness-sector-21",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Sector 21"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "94%",
+            "100%",
+            "106%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "94%",
+              "100%",
+              "106%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "notes": "Where the star's surface was darker and brighter in TESS sector 21, worked out in this project from how its light rose and fell by 2.3% as it turned once in 8.68 days. The light curve is the mission's own; Colman et al. (2024, AJ 167, 189) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 4 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
+      {
+        "id": "brightness-sector-22",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · TESS mission light curve, sector 22",
+        "thumbnail": "toi-1136-dataset-brightness-sector-22.webp",
+        "surface": "toi-1136-surface-brightness-sector-22@2x.webp",
+        "poles": "toi-1136-poles-brightness-sector-22@2x.webp",
+        "source": {
+          "id": "toi-1136-tess-map-brightness-sector-22",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "falseColor": true,
+        "step": {
+          "group": "brightness",
+          "label": "Sector 22"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "94%",
+            "100%",
+            "106%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "94%",
+              "100%",
+              "106%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "notes": "Where the star's surface was darker and brighter in TESS sector 22, worked out in this project from how its light rose and fell by 2.3% as it turned once in 8.68 days. The light curve is the mission's own; Colman et al. (2024, AJ 167, 189) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Step through the 4 maps to see the spots change.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
       {
         "id": "color",
         "label": "Color",

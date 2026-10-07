@@ -1,0 +1,55 @@
+{
+  "id": "arxiv-1908-05222",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Santos et al. (2019): Surface Rotation and Photometric Activity for Kepler Targets. I. M and K Main-sequence Stars",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1908.05222"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/ab3b56"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1908.05222",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4365/ab3b56",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1908.05222",
+      "checkedOn": "2026-10-07",
+      "locator": "arXiv listing: title, authors, DOI (ApJS 244, 21). Sects. II and III print the light curves, the sample and how a rotation period is selected; the catalogue is VizieR J/ApJS/244/21, whose ReadMe describes each column of Tables 3 (15,640 stars with a period), 4 and 5."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Santos et al. (2019)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1908.05222"
+    }
+  ],
+  "creators": [
+    "A. R. G. Santos",
+    "R. A. García",
+    "S. Mathur",
+    "L. Bugnet",
+    "J. L. van Saders",
+    "T. S. Metcalfe",
+    "G. V. A. Simonian",
+    "M. H. Pinsonneault"
+  ],
+  "publicationDate": "2019"
+}

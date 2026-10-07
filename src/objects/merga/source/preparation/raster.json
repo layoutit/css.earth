@@ -47,6 +47,81 @@
         },
         "qualification": "Photosphere color from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,249 K and log g 3.8 (u1 0.375, u2 0.304): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "brightness-sector-23",
+      "output": "merga-surface-{id}{suffix}.webp",
+      "thumbnail": "merga-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/merga-s0023.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-23",
+        "label": "Sector 23",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/merga-s0023.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 85,
+        "maximum": 115,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "85%",
+          "100%",
+          "115%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 4.18 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 23 (its PDC-MAP flux) (the light varies by 0.09%; the map's curve leaves a scatter of 0.01%, the light's own noise being 0.01%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Colman et al. (2024, AJ 167, 189) list the star as a rotator in their table (VizieR J/AJ/167/189/fig12): a rotation period of 4.18 d, the highest peak of the Lomb-Scargle periodogram of the star's one sector among sectors 1 to 26, which passed both of the paper's classifiers. The rotation and its period are theirs, taken as published; no criteria were applied to them here. The map is made at a tilt of 16°, worked out from the star's rotation speed, period and radius. Gaia DR3 lists 1 other star within 63 arcseconds, with under 0.1% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 23",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "merga-surface-{id}{suffix}.webp",
+      "thumbnail": "merga-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/merga-s0023.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/merga-s0023.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 85,
+        "maximum": 115,
+        "colors": [
+          "#b95669",
+          "#cb7e8d",
+          "#dca6b0",
+          "#eeced4",
+          "#fff6f7"
+        ],
+        "labels": [
+          "85%",
+          "115%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#fff6f7, its Color dataset) over the brightness map this project made from the star's light in TESS sector 23 (March and April 2020): the map's scale, 85% to 115% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 25.6% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "TESS · the star in its color over its brightness map · March and April 2020",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
     }
   ],
   "emission": {
