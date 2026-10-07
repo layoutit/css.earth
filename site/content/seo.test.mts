@@ -34,3 +34,9 @@ test("every scene page has a share image of its own: a committed capture or its 
   assert.ok(billboards.size > 3000, `${billboards.size} billboard share images`);
   assert.equal(objectSeo(requireObject("betelgeuse"), { socialImages: available }).image, "https://css.earth/social/betelgeuse.jpg");
 });
+
+test("a system's page shares the image of the host whose scene it mounts", () => {
+  const available = availableSocialImages(SCENE_OBJECTS);
+  assert.equal(objectSeo(requireObject("mars-system"), { socialImages: available }).image, "https://css.earth/social/mars.jpg");
+  assert.equal(objectSeo(requireObject("trappist-1-system"), { socialImages: available }).image, "https://css.earth/social/trappist-1.jpg");
+});

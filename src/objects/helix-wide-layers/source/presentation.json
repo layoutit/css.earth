@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "helix-wide-layers",
+  "name": "Helix Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/helix-wide-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/helix-wide-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/helix-wide-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO · wider field",
+      "title": "The wider Helix field",
+      "description": "ESO's wider photograph of the Helix Nebula, from the ESO 3.6 m telescope, laid on the same two tilted rings as the Hubble photograph: an inner disc and the outer ring around it, each about 100 arcsec deep (O'Dell, McCullough & Meixner 2004). Its filters are not listed by the publisher.",
+      "summary": "ESO's wider photograph on the nebula's two published rings, the same frame as the Hubble photograph's.",
+      "detail": "6850 × 4759 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "filters not listed"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "6850 × 4759"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "27.26 × 29.38 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/helix-wide-layers/source/source.jpg",
+        "url": "https://cdn.eso.org/images/large/helix.jpg"
+      }
+    }
+  ]
+}

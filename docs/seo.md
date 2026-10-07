@@ -17,13 +17,18 @@ has a `BreadcrumbList` down its orbit chain (cssEarth › Sun › Mars › Phobo
 built by `site/content/seo-trail.mts` from the prepared world context. A centre without
 a page, such as a binary's barycentre, is skipped.
 
-Every page has a share image of its own. The 16 committed captures in
-`site/public/social/` are plain screenshots of the actual CSS scene, with the
-application controls hidden. Every other scene page uses its arrival billboard:
+Every page but a cluster's has a share image of its own. The 81 committed
+captures in `site/public/social/` are plain screenshots of the actual CSS scene,
+with the application controls hidden: 16 Solar System bodies, and the 65 galaxy
+and nebula pages, which have no arrival billboard. Every other scene page uses
+its arrival billboard:
 `site/build/share-images.mts` runs in `pnpm build:deploy` after `astro build`. It
 centres each billboard on black at 1200×630 and writes `dist/social/<id>.jpg`
-(about 3,570 cards, 24 MB). A billboard it cannot read fails the deploy. Pages
-with neither, such as the pages of galaxies and nebulae, fall back to the Earth capture.
+(about 3,570 cards, 24 MB). A billboard it cannot read fails the deploy. A
+system's page, such as `/mars-system/`, mounts its host's scene and uses its
+host's image. A page with neither a capture nor a billboard falls back to the
+Earth capture: the 73 pages of galaxy, globular and open clusters do, and so
+does a new galaxy or nebula page until it is captured.
 None of these images adds requests to ordinary page loads.
 
 ![Share images drawn from the arrival billboards of Betelgeuse, WASP-43 b, Phobos and Comet 67P](images/share-cards.webp)
@@ -42,6 +47,10 @@ node --test site/journeys/seo-discovery.test.mts
 ```
 
 Inspect the images before committing them. A new object needs its own capture.
+The preparer captures a page once its picture has held still for a second: a
+page's picture layers show after its ready mark. It captures a page's default
+view, except a nebula's: a nebula is turned by 25° and 12° and brought close
+enough for its silhouette to span 62% of the frame's height, so its depth shows.
 The social-image preparer starts and closes a preview on port 4266; pass
 `--base-url=http://localhost:4210` to capture an existing server instead.
 

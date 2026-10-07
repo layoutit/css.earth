@@ -50,7 +50,7 @@
     "eso-vista": {
       "title": "Helix in near infrared",
       "detail": "6592 × 6592 px",
-      "summary": "Near-infrared false color on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
+      "summary": "VISTA's near-infrared photograph on the nebula's two published rings, in the same frame as the Hubble photograph.",
       "sources": [
         {
           "catalogueId": "eso-eso1205a",
@@ -58,13 +58,20 @@
           "label": "Helix · eso1205a; ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
           "checked": "2026-10-01",
           "locator": "Helix · eso1205a"
+        },
+        {
+          "catalogueId": "publication-odell-2004-helix-structure",
+          "url": "https://arxiv.org/abs/astro-ph/0407556",
+          "label": "O'Dell, McCullough & Meixner (2004), AJ 128, 2339: Unraveling the Helix Nebula: its structure and knots",
+          "checked": "2026-10-04",
+          "locator": "Sect. III.1 and IV: an inner disc of radius 250 arcsec tilted 23 degrees and an outer ring of radius 371 arcsec tilted 53 degrees; the far side of the disc's axis at position angle 288 degrees, of the ring's at about 168 degrees"
         }
       ]
     },
     "eso-wfi": {
       "title": "Helix in visible light",
       "detail": "7059 × 6535 px",
-      "summary": "Optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
+      "summary": "ESO's optical photograph on the nebula's two published rings, in the same frame as the Hubble photograph.",
       "sources": [
         {
           "catalogueId": "eso-eso0907a",
@@ -72,13 +79,20 @@
           "label": "Helix · eso0907a; ESO",
           "checked": "2026-10-01",
           "locator": "Helix · eso0907a"
+        },
+        {
+          "catalogueId": "publication-odell-2004-helix-structure",
+          "url": "https://arxiv.org/abs/astro-ph/0407556",
+          "label": "O'Dell, McCullough & Meixner (2004), AJ 128, 2339: Unraveling the Helix Nebula: its structure and knots",
+          "checked": "2026-10-04",
+          "locator": "Sect. III.1 and IV: an inner disc of radius 250 arcsec tilted 23 degrees and an outer ring of radius 371 arcsec tilted 53 degrees; the far side of the disc's axis at position angle 288 degrees, of the ring's at about 168 degrees"
         }
       ]
     },
     "eso-wide": {
       "title": "The wider Helix field",
       "detail": "6850 × 4759 px",
-      "summary": "Wide optical display on a partly velocity-constrained model; halo and bright-core depths remain inferred.",
+      "summary": "ESO's wider photograph on the nebula's two published rings, in the same frame as the Hubble photograph.",
       "sources": [
         {
           "catalogueId": "eso-helix",
@@ -86,6 +100,13 @@
           "label": "Helix · helix; ESO",
           "checked": "2026-10-01",
           "locator": "Helix · helix"
+        },
+        {
+          "catalogueId": "publication-odell-2004-helix-structure",
+          "url": "https://arxiv.org/abs/astro-ph/0407556",
+          "label": "O'Dell, McCullough & Meixner (2004), AJ 128, 2339: Unraveling the Helix Nebula: its structure and knots",
+          "checked": "2026-10-04",
+          "locator": "Sect. III.1 and IV: an inner disc of radius 250 arcsec tilted 23 degrees and an outer ring of radius 371 arcsec tilted 53 degrees; the far side of the disc's axis at position angle 288 degrees, of the ring's at about 168 degrees"
         }
       ]
     }

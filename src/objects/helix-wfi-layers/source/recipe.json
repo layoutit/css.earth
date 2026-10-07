@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "helix-wfi-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      6145,
+      6623
+    ],
+    "originalDimensions": [
+      6145,
+      6623
+    ],
+    "publisherUrl": "https://www.eso.org/public/images/eso0907a/",
+    "downloadUrl": "https://cdn.eso.org/images/original/eso0907a.tif",
+    "credit": "ESO",
+    "license": "CC-BY-4.0",
+    "foregroundStars": {
+      "path": "gaia-dr3-field.csv",
+      "raDegColumn": "ra",
+      "decDegColumn": "dec",
+      "gMagColumn": "phot_g_mean_mag",
+      "source": "gaia-2023-dr3",
+      "basis": "Every Gaia DR3 source in the picture's field but the nebula's own central star. A planetary nebula holds one star, so each of the others is in front of the nebula or behind it, and the bank would draw it on the nebula's planes. The query is this table's origin in the source manifest."
+    }
+  },
+  "observation": {
+    "centerRaDeg": 337.4246667,
+    "centerDecDeg": -20.837025,
+    "fieldOfViewDeg": [
+      0.4543333,
+      0.4896667
+    ],
+    "northClockwiseDeg": -0.3
+  },
+  "target": {
+    "centerRaDeg": 337.410625,
+    "centerDecDeg": -20.837111,
+    "distancePc": 216
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 0,
+    "thicknessKpc": 1e-06,
+    "supportRadiusKpc": 0.00080634,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportTaperFraction": 0.93,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "rings": {
+      "source": "publication-odell-2004-helix-structure",
+      "basis": "O'Dell, McCullough & Meixner (2004): the main ring is two rings. The inner ring is an ellipse of 499 by 459 arcsec, a circle of radius 250 arcsec tilted 23 degrees out of the plane of the sky, the edge of an inner disc; the outer ring is an ellipse of 742 by 446 arcsec, a circle of radius 371 arcsec tilted 53 degrees (Sect. III.1). The more distant side of each symmetry axis: the inner disc's at position angle 288 degrees by its ring's orientation and radial-velocity pattern (303 by its plumes), the outer ring's at about 168 degrees (Sect. IV). The outer features share the outer ring's orientation. The disc's value here is the kinematic one, 288 degrees. Most of the main ring's emission comes from a disc about 100 arcsec in line-of-sight thickness (Sect. IV.3.1, citing O'Dell 1998).",
+      "disc": {
+        "radiusArcsec": 250,
+        "tiltDeg": 23,
+        "farAxisPaDeg": 288
+      },
+      "ring": {
+        "radiusArcsec": 371,
+        "tiltDeg": 53,
+        "farAxisPaDeg": 168
+      },
+      "lineOfSightThicknessArcsec": 100
+    }
+  },
+  "bake": {
+    "maxFacePixels": 4096,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.063,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 8,
+    "bulgeFacePixels": 384,
+    "bulgeCrossSlices": 64
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

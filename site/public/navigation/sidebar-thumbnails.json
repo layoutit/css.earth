@@ -215,22 +215,6 @@
       "bytes": 3904
     },
     {
-      "path": "src/objects/helix-volume/prepared/presentation.json",
-      "bytes": 4746
-    },
-    {
-      "path": "site/public/scenes/helix-volume/datasets/eso-vista.webp",
-      "bytes": 39332
-    },
-    {
-      "path": "site/public/scenes/helix-volume/datasets/eso-wfi.webp",
-      "bytes": 9410
-    },
-    {
-      "path": "site/public/scenes/helix-volume/datasets/eso-wide.webp",
-      "bytes": 8158
-    },
-    {
       "path": "src/objects/iota-horologii-corona/prepared/presentation.json",
       "bytes": 74066
     },
@@ -1176,42 +1160,6 @@
       ],
       "credit": "CFHT ESPaDOnS · mapped here",
       "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
-    },
-    "helix-volume/eso-vista": {
-      "url2x": "/navigation/focus-helix-volume-eso-vista@2x.webp",
-      "inputs": [
-        "src/objects/helix-volume/prepared/presentation.json",
-        "site/public/scenes/helix-volume/datasets/eso-vista.webp"
-      ],
-      "credit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
-      "sourceUrl": "https://www.eso.org/public/images/eso1205a/"
-    },
-    "helix-volume/eso-wfi": {
-      "url2x": "/navigation/focus-helix-volume-eso-wfi@2x.webp",
-      "inputs": [
-        "src/objects/helix-volume/prepared/presentation.json",
-        "site/public/scenes/helix-volume/datasets/eso-wfi.webp"
-      ],
-      "credit": "ESO",
-      "sourceUrl": "https://www.eso.org/public/images/eso0907a/"
-    },
-    "helix-volume/eso-wide": {
-      "url2x": "/navigation/focus-helix-volume-eso-wide@2x.webp",
-      "inputs": [
-        "src/objects/helix-volume/prepared/presentation.json",
-        "site/public/scenes/helix-volume/datasets/eso-wide.webp"
-      ],
-      "credit": "ESO",
-      "sourceUrl": "https://www.eso.org/public/images/helix/"
-    },
-    "helix-volume": {
-      "url2x": "/navigation/focus-object-helix-volume@2x.webp",
-      "inputs": [
-        "src/objects/helix-volume/prepared/presentation.json",
-        "site/public/scenes/helix-volume/datasets/eso-wfi.webp"
-      ],
-      "credit": "ESO",
-      "sourceUrl": "https://www.eso.org/public/images/eso0907a/"
     },
     "iota-horologii-corona/oct-2015": {
       "url2x": "/navigation/focus-iota-horologii-corona-oct-2015@2x.webp",
@@ -2264,7 +2212,6 @@
     "hd-189733-corona": "hd-189733-corona",
     "hd-35296-corona": "hd-35296-corona",
     "hd-6569-corona": "hd-6569-corona",
-    "helix-volume": "helix-volume",
     "iota-horologii-corona": "iota-horologii-corona",
     "lmc-volume": "lmc-volume",
     "m1-volume": "m1-volume",
