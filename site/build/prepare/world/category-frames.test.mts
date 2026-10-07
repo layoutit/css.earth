@@ -55,7 +55,9 @@ test('the Stars box holds the Milky Way\'s stars and the Galaxies box the Nearby
   const side = (classification: string) => { const frame = PREPARED_WORLD_PRESENTATION.categoryFrames.get(classification)!; return Math.max(...frame.maximumM.map((value, axis) => value - frame.minimumM[axis]!)); };
   // Fitted around every notable star, the box was 8.6 Mpc wide: the camera landed among galaxies, where no star is drawn.
   for (const star of NAVIGATIONAL_STAR_OBJECT_IDS) assert.ok(holds('star', star), `${star} lies outside the star frame`);
-  assert.ok(side('star') < 1000 * PARSEC_M, 'the star frame is the navigational stars\' box: Deneb, the farthest, is 433 parsecs away');
+  // The box is the listed stars' own: no wider than twice the distance of the farthest of them (Alnilam, 606 parsecs).
+  const farthestM = Math.max(...NAVIGATIONAL_STAR_OBJECT_IDS.map(id => Math.hypot(...place(id))));
+  assert.ok(side('star') <= 2 * farthestM && farthestM < 1000 * PARSEC_M, 'the star frame is the navigational stars\' box');
   assert.ok(!holds('star', 'm31-v1'), 'a star of Andromeda is marked, not framed');
   assert.ok(side('star') < 30e3 * PARSEC_M, 'the star frame is smaller than the Milky Way');
   // The galaxies' box reached the quasar 3C 273, 670 Mpc out, where the markers are clusters. GN-z11 is farther still.

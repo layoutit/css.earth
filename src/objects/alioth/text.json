@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alioth",
+  "card": {
+    "text": "A giant of type A1 III-IV, 24 parsecs away: 4.3 times the Sun's width and 104 times its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad08be",
+        "url": "https://doi.org/10.3847/1538-3881/ad08be",
+        "label": "Baines et al. (2023), The Astronomical Journal 166 268",
+        "checked": "2026-10-07",
+        "locator": "Tables 2, 5 and 7, HD 112185: parallax, MK type, limb-darkened diameter, radius, Teff, luminosity"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 1.644 milliarcseconds, which gives 4.29 solar radii and 8,908 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ad08be",
+        "url": "https://doi.org/10.3847/1538-3881/ad08be",
+        "label": "Baines et al. (2023), The Astronomical Journal 166 268",
+        "checked": "2026-10-07",
+        "locator": "Tables 2, 5 and 7, HD 112185: parallax, MK type, limb-darkened diameter, radius, Teff, luminosity"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

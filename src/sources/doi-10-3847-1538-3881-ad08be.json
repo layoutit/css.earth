@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-3847-1538-3881-ad08be",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Baines et al. (2023): 33 New Stellar Angular Diameters from the NPOI, and Nearly 180 NPOI Diameters as an Ensemble",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad08be"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.3847/1538-3881/ad08be",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.3847/1538-3881/ad08be",
+      "checkedOn": "2026-10-07",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Baines et al. (2023), The Astronomical Journal 166 268",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3847/1538-3881/ad08be"
+    }
+  ],
+  "publisher": "The Astronomical Journal 166 268",
+  "creators": [
+    "Ellyn K. Baines",
+    "James H. Clark III",
+    "Henrique R. Schmitt",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

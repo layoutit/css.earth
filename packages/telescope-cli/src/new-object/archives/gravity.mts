@@ -7,6 +7,10 @@
  * 2. **Bounded.** No value published: the limb law is read across the range the spec cites for the star's class, and drawn at
  *    the gravity whose law is closest to all the others. The largest difference to any of them is recorded; the gravity is
  *    marked unmeasured and never becomes a fact of the star.
+ * 3. **Photometric.** Neither of those: the gravity a paper measured from the star's own Stroemgren (uvby, H-beta) photometry
+ *    (PHOTOMETRIC_GRAVITIES), searched at the same position. It is a published value of the star, so it is a fact of the star as
+ *    in 1, and the sentence says it is photometric. The most recent paper is used. This stage is read only for a star the
+ *    first two leave without a law, so no star drawn before it existed changes.
  *
  * Either way the README states the spread of limb laws across the published values or the range, measured on the same grid.
  *
@@ -14,6 +18,7 @@
  * reads the limb law at it as at any cited gravity. */
 import { interpolateQuadraticLimbDarkening } from '@cssearth/bake/objects/stellar';
 import { VIZIER_ASU, type Archive } from './archives.mts';
+import { vizierRows } from './npoi.mts';
 import { SIMBAD_TAP } from '../companions.mts';
 import { GRIDS } from '../darkening/limb.mts';
 import type { Cited } from '../spec-types.mts';
@@ -34,6 +39,30 @@ export interface GravityChoice {
   /** The gravities the spread was measured over, and the largest limb difference across them, as a fraction of the centre. */
   readonly span: readonly [number, number]; readonly spread: number;
   readonly sentence: string;
+  /** Where a published value was read, when not in SIMBAD's compilation of spectroscopic measurements. */
+  readonly compilation?: string;
+}
+
+/** How a cited photometric gravity's source begins (star-limb.mts recognises a gravity it cited by this). */
+export const PHOTOMETRIC_CITED = "A gravity measured from the star's Stroemgren photometry";
+/** Papers that measure a star's gravity from its Stroemgren photometry, each read from its VizieR table (stage 3); titles as SIMBAD's
+ * reference table gives them, as the spectroscopic stage's are. */
+export const PHOTOMETRIC_GRAVITIES = [
+  { table: 'J/ApJ/804/146/table5', column: 'log(g)', error: 'e_log(g)', bibcode: '2015ApJ...804..146D', title: 'The ages of early-type stars: Stromgren photometric methods calibrated, validated, tested, and applied to hosts and prospective hosts of directly imaged exoplanets.' },
+  { table: 'V/14/catalog', column: 'log.g', error: undefined, bibcode: '1980A&AS...40..199P', title: 'An analysis of the Hauck-Mermillod catalogue of homogeneous four-color data. II.' },
+] as const;
+
+/** Every photometric gravity within an arcsecond of the star, with its paper and the table it was read from. */
+export async function photometricGravities(archive: Archive, ra: number, dec: number, where: string) {
+  const rows: { logg: number; error?: number; bibcode: string; title: string; table: string }[] = [];
+  for (const paper of PHOTOMETRIC_GRAVITIES) {
+    // VizieR's answer: the column names, their units and a rule, then the rows.
+    const found = vizierRows(await archive.text(VIZIER_ASU, { '-source': paper.table, '-c': `${ra} ${dec < 0 ? '' : '+'}${dec}`, '-c.rs': '1', '-out': [paper.column, ...(paper.error ? [paper.error] : [])].join(','), '-out.max': '5' })).slice(2);
+    if (found.length > 1) throw new Error(`${where}: VizieR ${paper.table} holds ${found.length} rows within 1 arcsecond; name the star's own.`);
+    const cell = found[0]?.[paper.column], logg = Number(cell), error = paper.error ? Number(found[0]?.[paper.error]) : Number.NaN;
+    if (cell && Number.isFinite(logg)) rows.push({ logg, ...(Number.isFinite(error) && error > 0 ? { error } : {}), bibcode: paper.bibcode, title: paper.title, table: paper.table });
+  }
+  return rows;
 }
 
 const tsv = (text: string) => {
@@ -91,7 +120,7 @@ async function lawsAcross(archive: Archive, teffK: number, loggs: readonly numbe
 /** A published choice as a spec's cited `gravity` (spec.mts): the value, the rule's sentence under the compilation it was read from, and the paper. */
 export function citedGravity(choice: GravityChoice): Cited {
   if (choice.kind !== 'published') throw new TypeError(`A spec cites a published gravity; log g ${choice.logg} is a display choice inside a range.`);
-  return { value: choice.logg, source: `SIMBAD's compilation of spectroscopic measurements (mesFe_h): ${choice.sentence}`, url: choice.url };
+  return { value: choice.logg, source: `${choice.compilation ?? "SIMBAD's compilation of spectroscopic measurements (mesFe_h)"}: ${choice.sentence}`, url: choice.url };
 }
 
 /** Intensity relative to the centre across the disc, mu from 0 to 1, for a quadratic law. */
@@ -119,7 +148,18 @@ export async function chooseGravity({ archive, ra, dec, teffK, range, where, rad
       sentence: `log g ${published.logg} from ${published.bibcode}${published.measurements > 1 ? `, the median of its ${published.measurements} spectra` : ''}${pipeline ? ` (${pipeline}, a survey pipeline: no analysis of this star's own spectra is published)` : ''}; ` +
         `the ${values.length} published value${values.length === 1 ? '' : 's'} span log g ${span[0]} to ${span[1]}${Number.isFinite(spread) ? `, across which the limb law changes by at most ${(spread * 100).toFixed(1)}% of the centre brightness` : ''}` };
   }
-  if (!range) return null;
+  if (!range) {
+    // Stage 3: a gravity measured from the star's own photometry, under the same check against its radius.
+    const measured = (await photometricGravities(archive, ra, dec, where)).filter(row => radiusSolar === undefined || impliedMassSolar(row.logg, radiusSolar) <= LARGEST_STELLAR_MASS_SOLAR);
+    const chosen = choosePublished(measured);
+    if (!chosen) return null;
+    const own = measured.find(row => row.bibcode === chosen.bibcode)!, values = measured.map(row => row.logg), gravities = [...new Set(values)], span = [Math.min(...values), Math.max(...values)] as const;
+    const laws = await lawsAcross(archive, teffK, gravities, where, true).then(found => found.map(law => profile(law!)), () => null);
+    const spread = laws ? Math.max(0, ...laws.map(law => difference(law, laws[gravities.indexOf(chosen.logg)]!))) : Number.NaN;
+    return { logg: chosen.logg, kind: 'published', source: `${chosen.bibcode} ("${chosen.title}")`, url: `https://ui.adsabs.harvard.edu/abs/${encodeURIComponent(chosen.bibcode)}`, span, spread, compilation: `${PHOTOMETRIC_CITED} (VizieR ${own.table})`,
+      sentence: `log g ${chosen.logg}${own.error === undefined ? '' : ` +/- ${own.error}`} from ${chosen.bibcode}, measured from the star's Stroemgren photometry: ${every.length ? "the spectroscopic values in SIMBAD's compilation contradict the star's radius" : "SIMBAD's compilation holds no spectroscopic gravity of this star"}` +
+        (values.length > 1 ? `; the ${values.length} photometric values span log g ${span[0]} to ${span[1]}${Number.isFinite(spread) ? `, across which the limb law changes by at most ${(spread * 100).toFixed(1)}% of the centre brightness` : ''}` : '') };
+  }
   // Every 0.05 dex inside the cited range, on round values.
   const first = Math.ceil(range.min / 0.05 - 1e-9), last = Math.floor(range.max / 0.05 + 1e-9);
   const loggs = Array.from({ length: last - first + 1 }, (_, i) => Number(((first + i) * 0.05).toFixed(2)));

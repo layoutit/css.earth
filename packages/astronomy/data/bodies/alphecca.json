@@ -1,0 +1,30 @@
+{
+ "id": "alphecca",
+ "classification": "star",
+ "order": 5805,
+ "physical": {
+  "name": "Alphecca",
+  "horizonsCode": null,
+  "meanRadiusKm": 2699316,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 8152
+ },
+ "physicalNotes": "Radius 3.88 +/- 0.11 solar radii from Baines et al. (2025), AJ 169, 293, HD 139006: radius 3.88 +/- 0.11 solar radii (Table 7), from the limb-darkened angular diameter 1.525 +/- 0.027 mas (NPOI, Table 6) and the Gaia DR3 (Gaia Collaboration 2022) parallax (https://doi.org/10.3847/1538-3881/adc930): 2,699,316 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 8152 +/- 93 K from Baines et al. (2025), AJ 169, 293, HD 139006: effective temperature 8152 +/- 93 K (Table 7), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/adc930). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 233.67254376294218,
+  "declinationDegrees": 26.714295174747274,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 23.674,
+  "properMotionRaMasPerYear": 118.92724128982546,
+  "properMotionDecMasPerYear": -87.71096348146563,
+  "radialVelocityKmPerS": 1.7,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1222646935698492160 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/alphecca/source/photometry/gaia-dr3-source.csv; cross-identification HD 139006, HR 5793, HIP 76267: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+1222646935698492160",
+   "distance": "Baines et al. (2025), AJ 169, 293, HD 139006: the Gaia DR3 (Gaia Collaboration 2022) parallax the radius was computed with (Table 2), 42.24 +/- 0.98 mas, inverted (https://doi.org/10.3847/1538-3881/adc930): 23.674 +/- 0.549 pc; Gaia DR3 parallax 42.2408 +/- 0.9770 mas (same row, RUWE 10.34), 43.2 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): 118.927, -87.711 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 1222646935698492160 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract)"
+  }
+ }
+}

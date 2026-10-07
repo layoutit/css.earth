@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "markab",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Markab",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3721995
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/markab-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Markab",
+      "classification": "star",
+      "color": "#b7ccff",
+      "distanceAu": 8432703.9,
+      "description": "A giant of type B9 III, 41 parsecs away: 5.3 times the Sun's width.",
+      "systemName": "Markab system",
+      "aliases": [
+        "HD 218045"
+      ],
+      "order": 5806,
+      "context": {
+        "order": 5803
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1182166693357883000,
+        -290571756226478340,
+        330860873548957060
+      ],
+      "presentationToReference": [
+        0.9370993119119456,
+        0.2546978463035846,
+        -0.23869203317763613,
+        -0.2303351924279819,
+        -0.06260659581097641,
+        -0.9710953162744251,
+        0.26227958125504686,
+        -0.9649919280746739,
+        0.000002720416286579348
+      ],
+      "orbitUpReference": [
+        -0.2546978463035846,
+        0.06260659581097641,
+        0.9649919280746739
+      ],
+      "metersPerUnit": 12006435.483870968,
+      "bodyRadiusM": 3721995000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

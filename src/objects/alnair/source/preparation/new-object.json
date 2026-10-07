@@ -1,0 +1,62 @@
+{
+  "id": "alnair",
+  "name": "Alnair",
+  "system": "Alnair system",
+  "description": "A subgiant of type B7 IV 31.0 parsecs away, 3.4 times the Sun's width: its disc was measured with the Narrabri intensity interferometer.",
+  "aliases": [
+    "HD 209952"
+  ],
+  "parent": "milky-way",
+  "order": 5815,
+  "target": "HD 209952",
+  "paper": {
+    "url": "https://doi.org/10.1086/154093",
+    "credit": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417"
+  },
+  "radius": {
+    "value": 3.4,
+    "source": "Computed here, not printed by a paper: 3.4 +/- 0.23 solar radii, from the limb-darkened angular diameter 1.02 +/- 0.07 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 32.29 +/- 0.21 mas (van Leeuwen 2007, XHIP)",
+    "url": "https://doi.org/10.1093/mnras/167.1.121",
+    "uncertainty": 0.23
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 14050,
+    "source": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 209952: effective temperature 14050 +/- 540 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared",
+    "url": "https://doi.org/10.1086/154093",
+    "uncertainty": 540
+  },
+  "radialVelocity": {
+    "value": 10.9,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 109268: RV 10.9 +/- 1.7 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 1.7
+  },
+  "distance": {
+    "value": 30.969,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 109268: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 32.29 +/- 0.21 mas, inverted",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 0.201
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "109268"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A subgiant of type B7 IV, 31 parsecs away: 3.4 times the Sun's width.",
+    "introduction": "Its disc spans 1.02 milliarcseconds, which at its distance is 3.4 solar radii, and its surface is at 14,050 K.",
+    "locator": "Tables 1 and 6, HD 209952: MK type, limb-darkened diameter, effective temperature"
+  },
+  "notes": []
+}

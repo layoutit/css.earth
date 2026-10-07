@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "alphecca",
+  "displayName": "Alphecca",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "3.9 solar radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-adc930",
+          "url": "https://doi.org/10.3847/1538-3881/adc930",
+          "label": "Baines et al. (2025), The Astronomical Journal 169 293",
+          "checked": "2026-10-07",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "23.7 parsecs",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-adc930",
+          "url": "https://doi.org/10.3847/1538-3881/adc930",
+          "label": "Baines et al. (2025), AJ 169, 293, HD 139006: the Gaia DR3 (Gaia Collaboration 2022) parallax the radius was computed with (Table 2), 42.24 +/- 0.98 mas, inverted",
+          "checked": "2026-10-07",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "alphecca-dataset-color.webp",
+        "surface": "alphecca-surface-color@2x.webp",
+        "poles": "alphecca-poles-color@2x.webp",
+        "source": {
+          "id": "alphecca-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat"
+        },
+        "falseColor": false,
+        "notes": "The color of the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 720). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 8,152 K and log g 3.82 (u1 0.330, u2 0.312): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Baines et al. (2025), AJ 169, 293",
+      "href": "https://doi.org/10.3847/1538-3881/adc930"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.3847/1538-3881/adc930",
+      "credit": "Baines et al. (2025), AJ 169, 293"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/alphecca.json",
+      "credit": "Baines et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

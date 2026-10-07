@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kaus-australis",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 90185: position at J1991.25; Gaia cannot see the star. Distance: Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 90185: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 22.76 +/- 0.24 mas, inverted (https://doi.org/10.1134/S1063773712050015): 43.937 +/- 0.463 pc; Gaia DR3 cannot see the star. Proper motion: VizieR V/137D/XHIP row HIP = 90185 (same row): -39.42, -124.2 mas/yr. Radial velocity from Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 90185: RV -15 +/- 3.7 km/s (quality B).",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=V/137D/XHIP",
+        "https://doi.org/10.1134/S1063773712050015"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 6.8 +/- 0.29 solar radii from Computed here, not printed by a paper: 6.8 +/- 0.29 solar radii, from the limb-darkened angular diameter 1.44 +/- 0.06 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 22.76 +/- 0.24 mas (van Leeuwen 2007, XHIP) (https://doi.org/10.1093/mnras/167.1.121). No mass is measured, so GM is 0, the records' unpublished value. Temperature 9460 +/- 220 K from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 169022: effective temperature 9460 +/- 220 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared.",
+      "evidence": [
+        "https://doi.org/10.1086/154093",
+        "https://doi.org/10.1093/mnras/167.1.121"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Kaus Australis is HR 6879., cross-checked against Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 247 (BS 6879) (0 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #bacdff. Routes tried in order: stis-ngsl: HD 169022 is not in the library; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; kiehling: HR 6879 is not among its 60 stars; kharitonov: HR 6879 is not in the catalogue; pulkovo: used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
+        "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 9,460 K and log g 3.57 (u1 0.250, u2 0.325): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "surface-gravity",
+      "subject": "Surface gravity",
+      "status": "included",
+      "finding": "Published: log g 3.57 from 1980A&AS...40..199P, measured from the star's Stroemgren photometry: SIMBAD's compilation holds no spectroscopic gravity of this star.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/1980A%26AS...40..199P"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "bellatrix",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Bellatrix",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 4167243
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/bellatrix-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Bellatrix",
+      "classification": "star",
+      "color": "#a7c1ff",
+      "distanceAu": 15964825.7,
+      "description": "A giant of type B2 III, 77 parsecs away: 6.0 times the Sun's width.",
+      "systemName": "Bellatrix system",
+      "aliases": [
+        "HD 35468"
+      ],
+      "order": 5808,
+      "context": {
+        "order": 5805
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        359749024109930240,
+        2346233040673502700,
+        264134142519852860
+      ],
+      "presentationToReference": [
+        0.15062946146423037,
+        0.016761851734536204,
+        0.9884481805666019,
+        0.98238437271598,
+        0.10931948549494663,
+        -0.15155921065560785,
+        0.11059705955596966,
+        -0.9938653281091707,
+        -1.5402585994772917e-7
+      ],
+      "orbitUpReference": [
+        -0.016761851734536204,
+        -0.10931948549494663,
+        0.9938653281091707
+      ],
+      "metersPerUnit": 13442719.35483871,
+      "bodyRadiusM": 4167243000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-1093-mnras-167-1-121",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Brown et al. (1974): The Angular Diameters of 32 Stars",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/167.1.121"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1093/mnras/167.1.121",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1093/mnras/167.1.121",
+      "checkedOn": "2026-10-07",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Brown et al. (1974), Monthly Notices of the Royal Astronomical Society 167 121-136",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1093/mnras/167.1.121"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 167 121-136",
+  "creators": [
+    "R. Hanbury Brown",
+    "J. Davis",
+    "L. R. Allen"
+  ],
+  "publicationDate": "1974"
+}

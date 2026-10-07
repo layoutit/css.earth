@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "adhara",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Adhara",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7443990
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/adhara-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Adhara",
+      "classification": "star",
+      "color": "#a3bcff",
+      "distanceAu": 25623243.3,
+      "description": "A bright giant of type B2 II, 124 parsecs away: 10.7 times the Sun's width.",
+      "systemName": "Adhara system",
+      "aliases": [
+        "HD 52089"
+      ],
+      "order": 5810,
+      "context": {
+        "order": 5807
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -848508760931220500,
+        3244360780781719600,
+        -1856729683378786800
+      ],
+      "presentationToReference": [
+        -0.2213587857696293,
+        0.12255995564416478,
+        0.9674602551190905,
+        0.8463881530746223,
+        -0.4686218513578916,
+        0.2530230320837051,
+        -0.48438350745821734,
+        -0.874855769657149,
+        -2.695031263256203e-7
+      ],
+      "orbitUpReference": [
+        -0.12255995564416478,
+        0.4686218513578916,
+        0.874855769657149
+      ],
+      "metersPerUnit": 24012870.967741936,
+      "bodyRadiusM": 7443990000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

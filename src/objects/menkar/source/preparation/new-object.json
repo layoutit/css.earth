@@ -1,0 +1,67 @@
+{
+  "id": "menkar",
+  "name": "Menkar",
+  "system": "Menkar system",
+  "description": "One of the Gaia benchmark stars, 76.4 parsecs away, 100 times the Sun's width: its disc was measured by interferometry.",
+  "aliases": [
+    "HD 18884"
+  ],
+  "parent": "milky-way",
+  "target": "HD 18884",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202347136",
+    "credit": "Soubiran et al. (2024), A&A 682, A145"
+  },
+  "radius": {
+    "value": 100.206,
+    "source": "Soubiran et al. (2024), A&A 682, A145, HD 18884: radius 100.206 +/- 3.384 solar radii, from the limb-darkened angular diameter 12.2 +/- 0.04 mas (measured in 2006A&A...460..855W, as the table lists it) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.1051/0004-6361/202347136",
+    "uncertainty": 3.384
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 3738,
+    "source": "Soubiran et al. (2024), A&A 682, A145, HD 18884: effective temperature 3738 +/- 170 K, from the angular diameter and the bolometric flux of the paper's SED fit",
+    "url": "https://doi.org/10.1051/0004-6361/202347136",
+    "uncertainty": 170
+  },
+  "gravity": {
+    "value": 0.66,
+    "source": "Soubiran et al. (2024), A&A 682, A145, HD 18884: log g 0.66 +/- 0.07, the paper's own, from Newton's law with its radius and a mass from evolution models",
+    "url": "https://doi.org/10.1051/0004-6361/202347136"
+  },
+  "radialVelocity": {
+    "value": -26.08,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 14135: RV -26.08 +/- 0.02 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 0.02
+  },
+  "distance": {
+    "value": 76.394,
+    "source": "Soubiran et al. (2024), A&A 682, A145, HD 18884: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with, 13.09 +/- 0.44 mas, inverted",
+    "url": "https://doi.org/10.1051/0004-6361/202347136",
+    "uncertainty": 2.568
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "14135"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "One of the Gaia benchmark stars, 76 parsecs away: 100 times the Sun's width and 1,764 times its light.",
+    "introduction": "Its disc spans 12.2 milliarcseconds, which gives 100.206 solar radii and 3,738 K at its surface.",
+    "locator": "The catalogue's table, HD 18884: limb-darkened diameter, parallax, Teff, luminosity, radius, log g"
+  },
+  "notes": [],
+  "order": 5807
+}

@@ -1,0 +1,62 @@
+{
+  "id": "peacock",
+  "name": "Peacock",
+  "system": "Peacock system",
+  "description": "A dwarf of type B2.5 V 54.8 parsecs away, 4.7 times the Sun's width: its disc was measured with the Narrabri intensity interferometer.",
+  "aliases": [
+    "HD 193924"
+  ],
+  "parent": "milky-way",
+  "order": 5814,
+  "target": "HD 193924",
+  "paper": {
+    "url": "https://doi.org/10.1086/154093",
+    "credit": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417"
+  },
+  "radius": {
+    "value": 4.72,
+    "source": "Computed here, not printed by a paper: 4.72 +/- 0.32 solar radii, from the limb-darkened angular diameter 0.8 +/- 0.05 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 18.24 +/- 0.52 mas (van Leeuwen 2007, XHIP)",
+    "url": "https://doi.org/10.1093/mnras/167.1.121",
+    "uncertainty": 0.32
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 17880,
+    "source": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 193924: effective temperature 17880 +/- 680 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared",
+    "url": "https://doi.org/10.1086/154093",
+    "uncertainty": 680
+  },
+  "radialVelocity": {
+    "value": 2,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 100751: RV 2 +/- 3.9 km/s (quality D)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 3.9
+  },
+  "distance": {
+    "value": 54.825,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 100751: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 18.24 +/- 0.52 mas, inverted",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 1.563
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "100751"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A dwarf of type B2.5 V, 55 parsecs away: 4.7 times the Sun's width.",
+    "introduction": "Its disc spans 0.8 milliarcseconds, which at its distance is 4.72 solar radii, and its surface is at 17,880 K.",
+    "locator": "Tables 1 and 6, HD 193924: MK type, limb-darkened diameter, effective temperature"
+  },
+  "notes": []
+}

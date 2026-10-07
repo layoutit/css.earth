@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "alphecca",
+  "angularDiameterMas": 1.52,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 2,699,316 km at 23.67 pc = 1.52 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 23.674,
+  "distanceSource": "Baines et al. (2025), AJ 169, 293, HD 139006: the Gaia DR3 (Gaia Collaboration 2022) parallax the radius was computed with (Table 2), 42.24 +/- 0.98 mas, inverted (https://doi.org/10.3847/1538-3881/adc930): 23.674 +/- 0.549 pc; Gaia DR3 parallax 42.2408 +/- 0.9770 mas (same row, RUWE 10.34), 43.2 standard errors, is not used",
+  "radiusKm": 2699316,
+  "radiusSource": "Radius 3.88 +/- 0.11 solar radii from Baines et al. (2025), AJ 169, 293, HD 139006: radius 3.88 +/- 0.11 solar radii (Table 7), from the limb-darkened angular diameter 1.525 +/- 0.027 mas (NPOI, Table 6) and the Gaia DR3 (Gaia Collaboration 2022) parallax (https://doi.org/10.3847/1538-3881/adc930): 2,699,316 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 8152 +/- 93 K from Baines et al. (2025), AJ 169, 293, HD 139006: effective temperature 8152 +/- 93 K (Table 7), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/adc930). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 8152,
+  "effectiveTemperatureSource": "Baines et al. (2025), AJ 169, 293, HD 139006: effective temperature 8152 +/- 93 K (Table 7), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/adc930)",
+  "surfaceGravityLogg": 3.82,
+  "surfaceGravitySource": "Baines et al. (2025), AJ 169, 293, HD 139006: log g 3.82, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 6) (https://doi.org/10.3847/1538-3881/adc930)",
+  "spectralType": "A1IV",
+  "spectralTypeSource": "SIMBAD, * alf CrB: spectral type A1IV (2003AJ....126.2048G)",
+  "objectType": "Spectroscopic Binary",
+  "objectTypePath": "* > ** > SB*",
+  "objectTypeSource": "SIMBAD, * alf CrB: main object type SB*, Spectroscopic Binary",
+  "projectedRotationSpeedKmS": 138,
+  "projectedRotationSpeedSource": "SIMBAD, * alf CrB: projected rotation speed 138 km/s, the measurement SIMBAD prefers (2007A&A...463..671R)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 720) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

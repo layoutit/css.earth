@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "alioth",
+  "angularDiameterMas": 1.64,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 2,984,553 km at 24.26 pc = 1.64 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 24.26,
+  "distanceSource": "Baines et al. (2023), AJ 166, 268, HD 112185: the Gaia DR2 (Gaia Collaboration 2018) parallax the radius was computed with (Table 2), 41.22 +/- 1.84 mas, inverted (https://doi.org/10.3847/1538-3881/ad08be): 24.26 +/- 1.083 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 2984553,
+  "radiusSource": "Radius 4.29 +/- 0.21 solar radii from Baines et al. (2023), AJ 166, 268, HD 112185: radius 4.29 +0.19/-0.21 solar radii (Table 7), from the limb-darkened angular diameter 1.644 +/- 0.02 mas (NPOI, Table 5) and the Gaia DR2 (Gaia Collaboration 2018) parallax (https://doi.org/10.3847/1538-3881/ad08be): 2,984,553 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 8908 +/- 54 K from Baines et al. (2023), AJ 166, 268, HD 112185: effective temperature 8908 +/- 54 K (Table 7), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ad08be). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 8908,
+  "effectiveTemperatureSource": "Baines et al. (2023), AJ 166, 268, HD 112185: effective temperature 8908 +/- 54 K (Table 7), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ad08be)",
+  "surfaceGravityLogg": 3.59,
+  "surfaceGravitySource": "Baines et al. (2023), AJ 166, 268, HD 112185: log g 3.59, from McDonald et al. (2017), as the paper lists it beside the diameter (Table 5) (https://doi.org/10.3847/1538-3881/ad08be)",
+  "spectralType": "A1III-IVpkB9",
+  "spectralTypeSource": "SIMBAD, * eps UMa: spectral type A1III-IVpkB9 (2003AJ....126.2048G)",
+  "objectType": "alpha2 CVn Variable",
+  "objectTypePath": "* > Pe* > a2*",
+  "objectTypeSource": "SIMBAD, * eps UMa: main object type a2*, alpha2 CVn Variable",
+  "projectedRotationSpeedKmS": 25,
+  "projectedRotationSpeedSource": "SIMBAD, * eps UMa: projected rotation speed 25 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 635) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

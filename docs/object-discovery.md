@@ -57,7 +57,9 @@ Almanac print, as the US Naval Observatory's [Celestial Navigation Data](https:/
 returns them. [`site/source/usno-navigational-stars.json`](../site/source/usno-navigational-stars.json) preserves the names
 and numbers as the service printed them, with the date and the requests.
 [`navigational-stars.mts`](../site/build/prepare/world/navigational-stars.mts) binds each name to its cssEarth object; a
-star of the list without a binding has no page yet. It adds no score and no brightness threshold.
+star of the list without a binding has no page yet (13 of the 58 on 2026-10-06). It adds no score and no brightness threshold.
+
+![Twelve of the navigational stars' pages in the app](images/navigational-stars.webp)
 
 A listed star is featured whatever its page shows, and the Stars pill frames the listed stars and nothing else: Deneb, 433
 parsecs away, is the farthest. A package's `featured` mark remains for two uses: to promote a star the list leaves out

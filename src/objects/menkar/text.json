@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "menkar",
+  "card": {
+    "text": "One of the Gaia benchmark stars, 76 parsecs away: 100 times the Sun's width and 1,764 times its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202347136",
+        "url": "https://doi.org/10.1051/0004-6361/202347136",
+        "label": "Soubiran et al. (2024), Astronomy & Astrophysics 682 A145",
+        "checked": "2026-10-07",
+        "locator": "The catalogue's table, HD 18884: limb-darkened diameter, parallax, Teff, luminosity, radius, log g"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 12.2 milliarcseconds, which gives 100.206 solar radii and 3,738 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202347136",
+        "url": "https://doi.org/10.1051/0004-6361/202347136",
+        "label": "Soubiran et al. (2024), Astronomy & Astrophysics 682 A145",
+        "checked": "2026-10-07",
+        "locator": "The catalogue's table, HD 18884: limb-darkened diameter, parallax, Teff, luminosity, radius, log g"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

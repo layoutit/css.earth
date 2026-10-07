@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "bellatrix",
+  "card": {
+    "text": "A giant of type B2 III, 77 parsecs away: 6.0 times the Sun's width.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1086-154093",
+        "url": "https://doi.org/10.1086/154093",
+        "label": "Code et al. (1976), The Astrophysical Journal 203 417",
+        "checked": "2026-10-07",
+        "locator": "Tables 1 and 6, HD 35468: MK type, limb-darkened diameter, effective temperature"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 0.72 milliarcseconds, which at its distance is 5.99 solar radii, and its surface is at 21,580 K.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1086-154093",
+        "url": "https://doi.org/10.1086/154093",
+        "label": "Code et al. (1976), The Astrophysical Journal 203 417",
+        "checked": "2026-10-07",
+        "locator": "Tables 1 and 6, HD 35468: MK type, limb-darkened diameter, effective temperature"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}
