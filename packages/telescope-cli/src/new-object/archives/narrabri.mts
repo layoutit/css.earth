@@ -8,7 +8,7 @@
  * Neither paper prints a radius the map can use: the 1976 radii are for twelve stars at the parallaxes of their day. The radius
  * is computed here, and its source says so: the angular diameter times the distance of the Hipparcos parallax (van Leeuwen 2007, as
  * XHIP lists it), with both errors. The star is placed at that parallax, so its radius and distance agree, and by its XHIP row when
- * SIMBAD lists no Gaia DR3 source for it, as the NPOI route places its stars.
+ * Gaia DR3 does not place it (npoi.mts gaiaPlaces), as the NPOI route places its stars.
  *
  * A star whose 1976 temperature is of the primary of a multiple star (the table's asterisk) is refused: the page would show one
  * star with a number that is another's. No mass is measured, and none is recorded. */
@@ -16,7 +16,7 @@ import table from './code-1976.json' with { type: 'json' };
 import { isRecord } from '@cssearth/core';
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { preferredName, simbadIdentifiers } from '../names/display-name.mts';
-import { parseXhipRow, starKind, vizierRows, XHIP } from './npoi.mts';
+import { gaiaPlaces, parseXhipRow, starKind, vizierRows, XHIP } from './npoi.mts';
 
 export const JMDC = { source: 'II/345/jmdc', bibcode: '1974MNRAS.167..121H', credit: 'JMDC, the JMMC Measured Stellar Diameters Catalogue (Duvert 2016), VizieR II/345' };
 /** The radius, in solar radii, of one milliarcsecond of angular diameter at one parsec. A milliarcsecond at a parsec spans a
@@ -92,9 +92,9 @@ export async function draftsFromNarrabri(names: readonly string[], archive: Arch
     if (!hip) throw new Error(`HD ${hd}: SIMBAD lists no HIP number, and the radius needs the Hipparcos parallax.`);
     const jmdc = await archive.text(VIZIER_ASU, { '-source': JMDC.source, '-c': `HD ${hd}`, '-c.rs': '10', '-out': 'ID1,LDdiam,e_LDdiam,Method,BibCode', '-out.max': '50' });
     const xhip = await archive.text(VIZIER_ASU, { '-source': XHIP.catalogue, HIP: `=${hip}`, '-out.all': '1', '-out.max': '5' });
-    const gaia = identifiers.some(id => id.startsWith('Gaia DR3 ')), star = draftFromNarrabri(parseNarrabriRow(hd, jmdc, xhip, hip), identifiers, parseXhipRow(xhip, hip), gaia);
+    const gaia = await gaiaPlaces(archive, identifiers), star = draftFromNarrabri(parseNarrabriRow(hd, jmdc, xhip, hip), identifiers, parseXhipRow(xhip, hip), gaia);
     stars.push(star);
-    report.push(`HD ${hd}: drafted as ${star.name} from ${NARRABRI.credit}; its radius is computed here from the measured diameter and the Hipparcos parallax; no mass is recorded${gaia ? '' : `; placed by Hipparcos (HIP ${hip}), which Gaia DR3 does not list`}.`);
+    report.push(`HD ${hd}: drafted as ${star.name} from ${NARRABRI.credit}; its radius is computed here from the measured diameter and the Hipparcos parallax; no mass is recorded${gaia ? '' : `; placed by Hipparcos (HIP ${hip}), which Gaia DR3 does not place`}.`);
   }
   return { stars, report };
 }

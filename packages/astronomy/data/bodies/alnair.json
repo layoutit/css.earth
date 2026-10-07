@@ -12,19 +12,19 @@
  },
  "physicalNotes": "Radius 3.4 +/- 0.23 solar radii from Computed here, not printed by a paper: 3.4 +/- 0.23 solar radii, from the limb-darkened angular diameter 1.02 +/- 0.07 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 32.29 +/- 0.21 mas (van Leeuwen 2007, XHIP) (https://doi.org/10.1093/mnras/167.1.121): 2,365,380 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 14050 +/- 540 K from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 209952: effective temperature 14050 +/- 540 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
  "star": {
-  "rightAscensionDegrees": 332.05907779469464,
-  "declinationDegrees": -46.96161734131188,
-  "positionEpochJulianYear": 2016,
+  "rightAscensionDegrees": 332.05781852,
+  "declinationDegrees": -46.96061595,
+  "positionEpochJulianYear": 1991.25,
   "distanceParsecs": 30.969,
-  "properMotionRaMasPerYear": 0,
-  "properMotionDecMasPerYear": 0,
+  "properMotionRaMasPerYear": 126.69,
+  "properMotionDecMasPerYear": -147.47,
   "radialVelocityKmPerS": 10.9,
   "presentationUp": "display-axis",
   "sources": {
-   "position": "Gaia DR3 source 6560604777055249536 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/alnair/source/photometry/gaia-dr3-source.csv; cross-identification HD 209952, HR 8425, HIP 109268: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+6560604777055249536",
-   "distance": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 109268: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 32.29 +/- 0.21 mas, inverted (https://doi.org/10.1134/S1063773712050015): 30.969 +/- 0.201 pc; Gaia DR3 gives this source no parallax (a two-parameter solution)",
-   "properMotion": "Gaia DR3 source 6560604777055249536 is a two-parameter solution with no proper motion; zero is assumed (at 31 pc, 1 mas/yr would be 0 km/s across the sky)",
-   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 6560604777055249536 (quality B), from 2006AstL...32..759G; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract)"
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 109268: RAJ2000 332.05781852, DEJ2000 -46.96061595 (ICRS at epoch J1991.25), from the archived row src/objects/alnair/source/photometry/catalogue-row.tsv; SIMBAD names it HD 209952",
+   "distance": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 109268: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 32.29 +/- 0.21 mas, inverted (https://doi.org/10.1134/S1063773712050015): 30.969 +/- 0.201 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 109268 (same row): 126.69, -147.47 mas/yr",
+   "radialVelocity": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 109268: RV 10.9 +/- 1.7 km/s (quality A) (https://doi.org/10.1134/S1063773712050015)"
   }
  }
 }

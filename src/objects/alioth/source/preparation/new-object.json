@@ -7,6 +7,7 @@
     "HD 112185"
   ],
   "parent": "milky-way",
+  "order": 5804,
   "target": "HD 112185",
   "paper": {
     "url": "https://doi.org/10.3847/1538-3881/ad08be",
@@ -30,11 +31,30 @@
     "source": "Baines et al. (2023), AJ 166, 268, HD 112185: log g 3.59, from McDonald et al. (2017), as the paper lists it beside the diameter (Table 5)",
     "url": "https://doi.org/10.3847/1538-3881/ad08be"
   },
+  "radialVelocity": {
+    "value": -12.7,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 62956: RV -12.7 +/- 0.2 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 0.2
+  },
   "distance": {
     "value": 24.26,
     "source": "Baines et al. (2023), AJ 166, 268, HD 112185: the Gaia DR2 (Gaia Collaboration 2018) parallax the radius was computed with (Table 2), 41.22 +/- 1.84 mas, inverted",
     "url": "https://doi.org/10.3847/1538-3881/ad08be",
     "uncertainty": 1.083
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "62956"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
   },
   "planets": [],
   "companions": [],
@@ -43,12 +63,5 @@
     "introduction": "Its disc spans 1.644 milliarcseconds, which gives 4.29 solar radii and 8,908 K at its surface.",
     "locator": "Tables 2, 5 and 7, HD 112185: parallax, MK type, limb-darkened diameter, radius, Teff, luminosity"
   },
-  "notes": [],
-  "radialVelocity": {
-    "value": -12.7,
-    "uncertainty": 0.2,
-    "source": "SIMBAD's radial velocity for Gaia DR3 1576683529448755328 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
-  },
-  "order": 5804
+  "notes": []
 }

@@ -6,4 +6,4 @@ Color: Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue 
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 
-Placement: Gaia DR3 source 1576683529448755328: position; distance: Baines et al. (2023), AJ 166, 268, HD 112185: the Gaia DR2 (Gaia Collaboration 2018) parallax the radius was computed with (Table 2), 41.22 +/- 1.84 mas, inverted. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+Placement: position from Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 62956 (CDS, Strasbourg); distance: Baines et al. (2023), AJ 166, 268, HD 112185: the Gaia DR2 (Gaia Collaboration 2018) parallax the radius was computed with (Table 2), 41.22 +/- 1.84 mas, inverted; radial velocity: Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 62956: RV -12.7 +/- 0.2 km/s (quality A).

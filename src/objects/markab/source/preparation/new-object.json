@@ -7,6 +7,7 @@
     "HD 218045"
   ],
   "parent": "milky-way",
+  "order": 5806,
   "target": "HD 218045",
   "paper": {
     "url": "https://doi.org/10.3847/1538-3881/adc930",
@@ -30,11 +31,30 @@
     "source": "Baines et al. (2025), AJ 169, 293, HD 218045: log g 3.51, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 6)",
     "url": "https://doi.org/10.3847/1538-3881/adc930"
   },
+  "radialVelocity": {
+    "value": -2.7,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 113963: RV -2.7 +/- 0.8 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 0.8
+  },
   "distance": {
     "value": 40.883,
     "source": "Baines et al. (2025), AJ 169, 293, HD 218045: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 2), 24.46 +/- 0.19 mas, inverted",
     "url": "https://doi.org/10.3847/1538-3881/adc930",
     "uncertainty": 0.318
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "113963"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
   },
   "planets": [],
   "companions": [],
@@ -43,12 +63,5 @@
     "introduction": "Its disc spans 1.218 milliarcseconds, which gives 5.35 solar radii and 8,935 K at its surface.",
     "locator": "Tables 2, 6 and 7, HD 218045: parallax, MK type, limb-darkened diameter, radius, Teff"
   },
-  "notes": [],
-  "radialVelocity": {
-    "value": -2.7,
-    "uncertainty": 0.8,
-    "source": "SIMBAD's radial velocity for Gaia DR3 2816504901198512768 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
-  },
-  "order": 5806
+  "notes": []
 }

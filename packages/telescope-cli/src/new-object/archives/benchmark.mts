@@ -4,15 +4,15 @@
  * parallax and where it is from, the bolometric flux of the paper's SED fit, and from those the effective temperature, the
  * luminosity and the radius, and a surface gravity from Newton's law. Read by HD number, one VizieR request.
  *
- * The star is placed at the parallax the paper computed its radius with. A star SIMBAD lists no Gaia DR3 source for is placed by
- * its Hipparcos row in XHIP, as the NPOI route places its stars (npoi.mts).
+ * The star is placed at the parallax the paper computed its radius with. A star Gaia DR3 does not place (npoi.mts gaiaPlaces)
+ * is placed by its Hipparcos row in XHIP, as the NPOI route places its stars.
  *
  * The table prints two masses, from two sets of evolution models (BaSTI and STAREVOL), and adopts neither here: the star is
  * drafted "unmeasured" and its limb law reads the paper's own surface gravity. A star whose diameter is indirect (the nine the
  * paper keeps apart from its benchmark stars) is refused. */
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { preferredName, simbadIdentifiers } from '../names/display-name.mts';
-import { parseXhipRow, vizierRows, XHIP } from './npoi.mts';
+import { gaiaPlaces, parseXhipRow, vizierRows, XHIP } from './npoi.mts';
 
 export const BENCHMARK = { source: 'J/A+A/682/A145/catalog', paper: 'https://doi.org/10.1051/0004-6361/202347136', credit: 'Soubiran et al. (2024), A&A 682, A145' };
 /** Where each parallax is from, by the codes of the table's note. */
@@ -69,13 +69,13 @@ export async function draftsFromBenchmark(names: readonly string[], archive: Arc
     if (!/^\d{1,6}$/u.test(hd)) throw new Error(`${BENCHMARK.credit} is read by HD number, not ${hd}.`);
     const row = parseBenchmarkRow(await archive.text(VIZIER_ASU, { '-source': BENCHMARK.source, HD: `HD${hd}`, '-out.all': '1', '-out.max': '5' }), hd);
     const identifiers = await simbadIdentifiers(archive, `HD ${hd}`);
-    // A star SIMBAD lists no Gaia DR3 source for is placed by its Hipparcos row.
-    const hip = identifiers.some(id => id.startsWith('Gaia DR3 ')) ? undefined : identifiers.find(id => /^HIP \d+$/u.test(id))?.slice(4);
-    if (!identifiers.some(id => id.startsWith('Gaia DR3 ')) && !hip) throw new Error(`HD ${hd}: SIMBAD lists neither a Gaia DR3 source nor a HIP number.`);
+    // A star Gaia DR3 does not place (gaiaPlaces) sits on its Hipparcos row.
+    const placed = await gaiaPlaces(archive, identifiers), hip = placed ? undefined : identifiers.find(id => /^HIP \d+$/u.test(id))?.slice(4);
+    if (!placed && !hip) throw new Error(`HD ${hd}: Gaia DR3 does not place the star and SIMBAD lists no HIP number.`);
     const hipparcos = hip ? parseXhipRow(await archive.text(VIZIER_ASU, { '-source': XHIP.catalogue, HIP: `=${hip}`, '-out.all': '1', '-out.max': '5' }), hip) : undefined;
     const star = draftFromBenchmark(row, identifiers, hipparcos);
     stars.push(star);
-    report.push(`HD ${hd}: drafted as ${star.name} from ${BENCHMARK.credit}; the table's two model masses are not taken, so none is recorded${hipparcos ? `; placed by Hipparcos (HIP ${hip}), which Gaia DR3 does not list` : ''}.`);
+    report.push(`HD ${hd}: drafted as ${star.name} from ${BENCHMARK.credit}; the table's two model masses are not taken, so none is recorded${hipparcos ? `; placed by Hipparcos (HIP ${hip}), which Gaia DR3 does not place` : ''}.`);
   }
   return { stars, report };
 }

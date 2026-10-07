@@ -190,15 +190,15 @@
       }
     },
     {
-      "id": "markab-gaia-dr3-source",
-      "path": "photometry/gaia-dr3-source.csv",
-      "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
-      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Creevey et al. (2023), A&A 674, A26 (FLAME)",
-      "license": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "id": "markab-catalogue-row",
+      "path": "photometry/catalogue-row.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry; VizieR V/137D/XHIP (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
       "licenseEvidence": [
-        "https://www.cosmos.esa.int/web/gaia-users/credits"
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
       ],
-      "acquisition": "Gaia Archive TAP query in source/preparation/acquisition.json: the gaia_source row of source_id 2816504901198512768 (position, radial velocity) with its FLAME mass and radius.",
+      "acquisition": "VizieR ASU TSV query in source/preparation/acquisition.json: V/137D/XHIP row HIP = 113963, every column, with the response's dated comment lines and blank lines removed so the bytes are stable.",
       "redistribution": "One catalogue row, retained unchanged with its credit.",
       "consumers": [
         "placement"
@@ -207,7 +207,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-markab-gaia-dr3-source",
+            "catalogueId": "source-markab-catalogue-row",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }

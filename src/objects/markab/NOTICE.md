@@ -6,4 +6,4 @@ Color: Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps,
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 
-Placement: Gaia DR3 source 2816504901198512768: position; distance: Baines et al. (2025), AJ 169, 293, HD 218045: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 2), 24.46 +/- 0.19 mas, inverted. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+Placement: position from Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 113963 (CDS, Strasbourg); distance: Baines et al. (2025), AJ 169, 293, HD 218045: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 2), 24.46 +/- 0.19 mas, inverted; radial velocity: Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 113963: RV -2.7 +/- 0.8 km/s (quality A).

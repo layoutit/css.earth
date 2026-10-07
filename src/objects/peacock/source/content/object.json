@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Color from its measured spectrum. The disc itself is unresolved.",
+        "qualification": "Color from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
         "thumbnail": "peacock-dataset-color.webp",
         "surface": "peacock-surface-color@2x.webp",
         "poles": "peacock-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
         },
         "falseColor": false,
-        "notes": "The color of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). No limb darkening is drawn: no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 17,880 K and log g 3.94 (u1 0.131, u2 0.271): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
       }
     ]
   },

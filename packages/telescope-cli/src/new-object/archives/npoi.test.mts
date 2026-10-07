@@ -1,7 +1,8 @@
 /** Bright stars whose discs the NPOI measured (npoi.mts), drafted offline from rows as VizieR serves them. */
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { draftFromNpoi, parseNpoiRow, parseXhipRow } from './npoi.mts';
+import type { Archive } from './archives.mts';
+import { draftFromNpoi, gaiaPlaces, parseNpoiRow, parseXhipRow } from './npoi.mts';
 import { parseStarSpec } from '../spec.mts';
 
 // Rows as VizieR serves them, 2026-10-03 (header, units, dashes, the star's row), with only the columns the route reads.
@@ -78,4 +79,12 @@ test('the 2023 and 2025 papers are read by their own table numbers, columns and 
   assert.equal(second.text.locator, 'Tables 2, 6 and 7, HD 139006: parallax, MK type, limb-darkened diameter, radius, Teff');
   assert.equal(second.text.card, 'A subgiant of type A1 IV, 24 parsecs away: 3.9 times the Sun\'s width.');
   assert.throws(() => parseNpoiRow(2025, '139006', { ...baines2025, parallax: tsv('HD\tSpType\tplx\te_plx\tr_plx', ' \t \tmas\tmas\t ', '139006\tA1 IV\t 42.24\t 0.98\tXX99') }), /names parallax source XX99, which the table note does not list/u);
+});
+
+test('Gaia DR3 places a star only when its source has a proper motion', async () => {
+  // Alnair (Gaia DR3 6560604777055249536) has a two-parameter solution: the row's pmra is empty. Alphecca's holds a motion.
+  const gaia = (pmra: string): Archive => ({ async text() { return `pmra\n${pmra}\n`; }, async bytes() { throw new Error('offline'); }, async exists() { return false; } });
+  assert.equal(await gaiaPlaces(gaia(''), ['HD 209952', 'Gaia DR3 6560604777055249536', 'HIP 109268']), false);
+  assert.equal(await gaiaPlaces(gaia('118.927'), ['HD 139006', 'Gaia DR3 1222646935698492160']), true);
+  assert.equal(await gaiaPlaces(gaia('118.927'), ['HD 35468', 'HIP 25336']), false, 'a star SIMBAD links no Gaia DR3 source to');
 });

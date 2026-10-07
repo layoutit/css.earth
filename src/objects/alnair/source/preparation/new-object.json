@@ -7,6 +7,7 @@
     "HD 209952"
   ],
   "parent": "milky-way",
+  "order": 5815,
   "target": "HD 209952",
   "paper": {
     "url": "https://doi.org/10.1086/154093",
@@ -25,11 +26,30 @@
     "url": "https://doi.org/10.1086/154093",
     "uncertainty": 540
   },
+  "radialVelocity": {
+    "value": 10.9,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 109268: RV 10.9 +/- 1.7 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 1.7
+  },
   "distance": {
     "value": 30.969,
     "source": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 109268: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 32.29 +/- 0.21 mas, inverted",
     "url": "https://doi.org/10.1134/S1063773712050015",
     "uncertainty": 0.201
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "109268"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
   },
   "planets": [],
   "companions": [],
@@ -38,12 +58,5 @@
     "introduction": "Its disc spans 1.02 milliarcseconds, which at its distance is 3.4 solar radii, and its surface is at 14,050 K.",
     "locator": "Tables 1 and 6, HD 209952: MK type, limb-darkened diameter, effective temperature"
   },
-  "notes": [],
-  "radialVelocity": {
-    "value": 10.9,
-    "uncertainty": 1.7,
-    "source": "SIMBAD's radial velocity for Gaia DR3 6560604777055249536 (quality B), from 2006AstL...32..759G; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
-  },
-  "order": 5815
+  "notes": []
 }

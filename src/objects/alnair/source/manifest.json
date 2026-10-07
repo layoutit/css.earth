@@ -164,15 +164,41 @@
       }
     },
     {
-      "id": "alnair-gaia-dr3-source",
-      "path": "photometry/gaia-dr3-source.csv",
-      "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
-      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Creevey et al. (2023), A&A 674, A26 (FLAME)",
-      "license": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "id": "alnair-claret-2011-limb-darkening",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75 (VizieR J/A+A/529/A75)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
       "licenseEvidence": [
-        "https://www.cosmos.esa.int/web/gaia-users/credits"
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
       ],
-      "acquisition": "Gaia Archive TAP query in source/preparation/acquisition.json: the gaia_source row of source_id 6560604777055249536 (position, radial velocity) with its FLAME mass and radius.",
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 14000..15000 K, log g 3.5..4, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-alnair-claret-2011-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "alnair-catalogue-row",
+      "path": "photometry/catalogue-row.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry; VizieR V/137D/XHIP (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV query in source/preparation/acquisition.json: V/137D/XHIP row HIP = 109268, every column, with the response's dated comment lines and blank lines removed so the bytes are stable.",
       "redistribution": "One catalogue row, retained unchanged with its credit.",
       "consumers": [
         "placement"
@@ -181,7 +207,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-alnair-gaia-dr3-source",
+            "catalogueId": "source-alnair-catalogue-row",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
@@ -191,10 +217,10 @@
   ],
   "generatedIntermediates": [
     {
-      "id": "uniform-disc-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
-      "credit": "The color dataset as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -204,13 +230,14 @@
         "inputs": [
           "alnair-stellar-color",
           "alnair-pulkovo",
+          "alnair-claret-2011-limb-darkening",
           "alnair-preparation-raster"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The color dataset rendered as a disc; `context-markers.mts --check` recomputes it."
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

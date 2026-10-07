@@ -4,4 +4,6 @@ Radius, mass and temperature: Radius 3.4 +/- 0.23 solar radii from Computed here
 
 Color: Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Alnair is HR 8425., through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b). Cross-check: Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 285 (BS 8425).
 
-Placement: Gaia DR3 source 6560604777055249536: position; distance: Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 109268: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 32.29 +/- 0.21 mas, inverted. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
+
+Placement: position from Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 109268 (CDS, Strasbourg); distance: Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 109268: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 32.29 +/- 0.21 mas, inverted; radial velocity: Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 109268: RV 10.9 +/- 1.7 km/s (quality A).

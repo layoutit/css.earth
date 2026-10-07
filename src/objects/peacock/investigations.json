@@ -31,6 +31,24 @@
         "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
         "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 17,880 K and log g 3.94 (u1 0.131, u2 0.271): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "surface-gravity",
+      "subject": "Surface gravity",
+      "status": "included",
+      "finding": "Published: log g 3.94 +/- 0.14 from 2015ApJ...804..146D, measured from the star's Stroemgren photometry: SIMBAD's compilation holds no spectroscopic gravity of this star.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2015ApJ...804..146D"
+      ]
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "schema": "cssearth-display-orientation@1",
-  "rightAscensionDegrees": 166.19050678740496,
-  "declinationDegrees": 74.79491701789365,
-  "displayMeridianDegrees": -90.00000000000001,
+  "rightAscensionDegrees": 166.19007055999998,
+  "declinationDegrees": 74.79463247,
+  "displayMeridianDegrees": -90,
   "phase": "arbitrary-display-phase",
   "source": "No measured rotation axis or period is used. The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
   "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",

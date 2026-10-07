@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import type { Archive } from './archives.mts';
-import { chooseGravity, choosePublished, impliedMassSolar, SURVEY_PIPELINES } from './gravity.mts';
+import { chooseGravity, choosePublished, citedGravity, impliedMassSolar, PHOTOMETRIC_GRAVITIES, SURVEY_PIPELINES } from './gravity.mts';
 
 const test = sourceTest();
 const range = { min: -1.33, max: 2.86, source: 'Luck (2018), AJ 156, 171, table 3', url: 'https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3' };
@@ -18,8 +18,9 @@ test("a star's own analysis comes before a survey pipeline; the most recent pape
 
 // A grid whose u1 falls with log g, so the law closest to all others sits mid-range.
 const grid = ['logg\tTeff\tZ\txi\ta\tb\tFilt\tMet\tMod', '[cm/s2]\tK\t[Sun]\tkm/s\t\t\t\t\t', '-----\t-----\t-----\t-----\t-----\t-----\t-----\t-----\t-----', ...[5000, 6000].flatMap(teff => [0, 1, 2, 3].map(logg => `${logg}\t${teff}\t0\t2\t${(0.7 - 0.05 * logg).toFixed(3)}\t0.1\tV\tL\tA`))].join('\n');
-const archive = (simbad: string): Archive => ({
-  async text(url) { return url.includes('simbad') ? simbad : grid; },
+// The two photometric tables answer with `photometric` (by default no row); every other VizieR request is the limb grid.
+const archive = (simbad: string, photometric: Readonly<Record<string, string>> = {}): Archive => ({
+  async text(url, form) { const table = String((form as Record<string, string> | undefined)?.['-source'] ?? ''); return url.includes('simbad') ? simbad : PHOTOMETRIC_GRAVITIES.some(paper => paper.table === table) ? photometric[table] ?? '' : grid; },
   async bytes() { throw new Error('offline'); }, async exists() { return false; },
 });
 
@@ -61,4 +62,25 @@ test('a published gravity that would make the star more massive than any star co
   const both = `${library}"* bet Gru"\t1.0\t"2011AJ....142..136L"\t"A paper"\n`;
   assert.equal((await chooseGravity({ archive: archive(both), ra: 0, dec: 0, teffK: 5500, where: 'test', radiusSolar: 153.871, contradicted: sentence => { reason = sentence; } }))?.logg, 1);
   assert.equal(reason, undefined);
+});
+
+test("a star with no spectroscopic gravity takes the one measured from its photometry, the most recent paper's", async () => {
+  const none = 'main_id\tlog_g\tbibcode\ttitle\n';
+  // Gienah (HD 106625) and Alnair (HD 209952) in David & Hillenbrand (2015), table 5; Kaus Australis (HD 169022) in Philip & Egret (1980). Rows as VizieR gives them.
+  const table5 = (logg: string) => ['#RESOURCE=yCat_18040146', 'log(g)\te_log(g)', '[cm/s2]\t[cm/s2]', '-----\t-----', `${logg}\t 0.14`].join('\n');
+  const uvby = (logg: string) => ['log.g', '[cm/s2]', '-----', logg].join('\n');
+  const gienah = await chooseGravity({ archive: archive(none, { 'J/ApJ/804/146/table5': table5(' 3.44'), 'V/14/catalog': uvby('     ') }), ra: 183.95154, dec: -17.54193, teffK: 5500, where: 'gienah', radiusSolar: 3.8 });
+  assert.equal(gienah?.kind, 'published');
+  assert.equal(gienah?.logg, 3.44);
+  assert.equal(gienah?.sentence, "log g 3.44 +/- 0.14 from 2015ApJ...804..146D, measured from the star's Stroemgren photometry: SIMBAD's compilation holds no spectroscopic gravity of this star");
+  assert.match(citedGravity(gienah!).source, /^A gravity measured from the star's Stroemgren photometry \(VizieR J\/ApJ\/804\/146\/table5\): log g 3\.44/u);
+  const kaus = await chooseGravity({ archive: archive(none, { 'V/14/catalog': uvby(' 3.57') }), ra: 276.04299, dec: -34.38462, teffK: 5500, where: 'kaus-australis' });
+  assert.equal(kaus?.logg, 3.57);
+  assert.match(kaus!.sentence, /^log g 3\.57 from 1980A&AS\.\.\.40\.\.199P, measured/u);
+  // A spectroscopic value comes first: Alnair's 3.84, not the photometric 4.00.
+  const alnair = await chooseGravity({ archive: archive(`${none}"* alf Gru"\t3.84\t"2003AJ....125.1598L"\t"A paper"\n`, { 'J/ApJ/804/146/table5': table5(' 4.00') }), ra: 332.05827, dec: -46.96097, teffK: 5500, where: 'alnair' });
+  assert.equal(alnair?.logg, 3.84);
+  assert.equal(alnair?.compilation, undefined);
+  // A class range comes first too: the star keeps the display gravity it was drawn at before this stage existed.
+  assert.equal((await chooseGravity({ archive: archive(none, { 'V/14/catalog': uvby(' 2.00') }), ra: 0, dec: 0, teffK: 5500, range, where: 'test' }))?.kind, 'bounded');
 });

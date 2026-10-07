@@ -4,4 +4,6 @@ Radius, mass and temperature: Radius 3.8 +/- 0.31 solar radii from Computed here
 
 Color: Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Gienah is HR 4662., through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b). Cross-check: Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 613: HR 4662; VizieR III/202.
 
+Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
+
 Placement: position from Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 59803 (CDS, Strasbourg); distance: Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 59803: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 21.23 +/- 0.2 mas, inverted; radial velocity: Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 59803: RV -4.2 +/- 2.6 km/s (quality A).

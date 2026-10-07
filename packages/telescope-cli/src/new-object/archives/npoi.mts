@@ -8,8 +8,8 @@
  * (with a literature log g) and the parameters table (radius, temperature), whose numbers differ by paper (`NPOI`), and the 2018
  * Table 6 (mass).
  *
- * The star is placed at the parallax the paper computed its radius with, so the radius and the distance agree. A star SIMBAD lists no
- * Gaia DR3 source for (most stars brighter than about second magnitude) is placed by its Hipparcos row in XHIP (Anderson & Francis
+ * The star is placed at the parallax the paper computed its radius with, so the radius and the distance agree. A star Gaia DR3 does not
+ * place (gaiaPlaces: most stars brighter than about second magnitude) is placed by its Hipparcos row in XHIP (Anderson & Francis
  * 2012), with that row's proper motion and radial velocity, as Procyon is.
  *
  * A row the paper flags is refused: a radius of no use (a parallax error over 50%, 2018 and 2021), a diameter fit of doubtful value
@@ -17,7 +17,8 @@
  * "unmeasured": GM stays the records' unpublished 0, and its limb law reads the literature log g the paper lists beside its
  * diameter, when that log g is the star's own (GRAVITY). The 2025 paper's luminosity is a literature value (its r_L), not the
  * paper's, and is left out. */
-import { VIZIER_ASU, type Archive } from './archives.mts';
+import { GAIA_TAP, VIZIER_ASU, type Archive } from './archives.mts';
+import { adql, csv } from '../companions.mts';
 import { preferredName, simbadIdentifiers } from '../names/display-name.mts';
 
 type Paper = 2018 | 2021 | 2023 | 2025;
@@ -103,7 +104,17 @@ export function parseNpoiRow(year: Paper, hd: string, tables: NpoiTables) {
     gravity: t4.logg && gravitySource ? { value: number(t4, 'logg', at.diameter), source: gravitySource } : undefined };
 }
 
-/** The Hipparcos row that places a star Gaia DR3 lists no source for, with its radial velocity, from XHIP. */
+/** Whether Gaia DR3 places the star: SIMBAD links a source and that source has a proper motion. Gaia lists a star too bright for
+ * its astrometry with a two-parameter solution, a position alone (Alnair, Alioth, Markab): such a star sits on its Hipparcos row,
+ * which holds its motion, and is found in SIMBAD at the J2000 place that motion gives. */
+export async function gaiaPlaces(archive: Archive, identifiers: readonly string[]) {
+  const source = identifiers.flatMap(id => /^Gaia DR3 (\d+)$/u.exec(id.replace(/\s+/gu, ' '))?.[1] ?? [])[0];
+  if (!source) return false;
+  const rows = csv(await archive.text(GAIA_TAP, adql(`SELECT pmra FROM gaiadr3.gaia_source WHERE source_id = ${source}`)));
+  return rows.length === 1 && Boolean(rows[0]!.pmra);
+}
+
+/** The Hipparcos row that places a star Gaia DR3 does not place, with its radial velocity, from XHIP. */
 export function parseXhipRow(tsv: string, hip: string) {
   const rows = vizierRows(tsv).filter(row => row.HIP === hip);
   if (rows.length !== 1) throw new Error(`${XHIP.credit}: ${rows.length} rows for HIP ${hip}, not one.`);
@@ -174,13 +185,13 @@ export async function draftsFromNpoi(names: readonly string[], archive: Archive)
     }
     if (!found) throw new Error(`None of ${PAPERS.map(year => NPOI[year].credit).join(', ')} measured HD ${hd}.`);
     const identifiers = await simbadIdentifiers(archive, `HD ${hd}`);
-    // A star SIMBAD lists no Gaia DR3 source for is placed by its Hipparcos row.
-    const hip = identifiers.some(id => id.startsWith('Gaia DR3 ')) ? undefined : identifiers.find(id => /^HIP \d+$/u.test(id))?.slice(4);
-    if (!identifiers.some(id => id.startsWith('Gaia DR3 ')) && !hip) throw new Error(`HD ${hd}: SIMBAD lists neither a Gaia DR3 source nor a HIP number.`);
+    // A star Gaia DR3 does not place (gaiaPlaces) sits on its Hipparcos row.
+    const placed = await gaiaPlaces(archive, identifiers), hip = placed ? undefined : identifiers.find(id => /^HIP \d+$/u.test(id))?.slice(4);
+    if (!placed && !hip) throw new Error(`HD ${hd}: Gaia DR3 does not place the star and SIMBAD lists no HIP number.`);
     const hipparcos = hip ? parseXhipRow(await archive.text(VIZIER_ASU, { '-source': XHIP.catalogue, HIP: `=${hip}`, '-out.all': '1', '-out.max': '5' }), hip) : undefined;
     const star = draftFromNpoi(found, identifiers, hipparcos);
     stars.push(star);
-    report.push(`HD ${hd}: drafted as ${star.name} from ${NPOI[found.year].credit}${found.mass ? '' : '; the paper gives no mass, so none is recorded'}${hipparcos ? `; placed by Hipparcos (HIP ${hip}), which Gaia DR3 does not list` : ''}.`);
+    report.push(`HD ${hd}: drafted as ${star.name} from ${NPOI[found.year].credit}${found.mass ? '' : '; the paper gives no mass, so none is recorded'}${hipparcos ? `; placed by Hipparcos (HIP ${hip}), which Gaia DR3 does not place` : ''}.`);
   }
   return { stars, report };
 }
