@@ -37,10 +37,16 @@ None of the images covers the full Bridge, Wing or tidal debris. Exact input ide
 - **Stars against images.** Of the 40 brightest stars projected onto each original, those within 1 px of a photographic peak: Horálek 22 (median 0.67 px), DSS2 35 (0.70 px), VISTA 20 (3.12 px), AllWISE 14 (3.84 px), SMASH 9 (5.26 px). Mirroring east–west gives 0 for every image.
 - **App.** Each dataset decodes one texture at the Earth framing, the world camera is unchanged across all five switches, and all 1,803 stars mount and toggle. The side views show line-of-sight extent rather than a flat sheet.
 - **Replay.** From a removed `prepared/`, all 1,360 regenerated slice textures are byte-identical to the promotion output.
+- **Far view (2026-10-07).** Zooming out of this page, the plane alone and the volume alone at the switch distance keep the same position, size and orientation; the plane is brighter.
+
+![At the switch distance from Earth's side, the volume alone (left) and the far plane alone (right)](evidence/2026-10-07/far-plane-handover.jpg)
 
 ## Known problems
 
 - From well off the Earth line of sight the far plane is foreshortened, while the volume keeps its 25 kpc depth. The hand-over there is a cross-fade between two different shapes: from the Local Group view the plane is narrower and brighter than the volume it gives way to.
+
+  ![From the Local Group view, the volume alone (left) and the far plane alone (right)](evidence/2026-10-07/far-plane-off-axis.jpg)
+
 - The envelope is the ellipsoid's shape hypothesis and the detail components are conditioned on the simulation that the same VMC comparison disfavours. The two carry different depth hypotheses, and neither is measured gas geometry. The model records `materialGatePassed: false`.
 - Photometric red-clump distances include intrinsic luminosity scatter, photometric error, reddening uncertainty and contamination, and have not been deconvolved into geometric depth. Large-scale extensions outside the survey footprint remain model-dependent.
 - Faint concentric ripples remain in the outer halo where alpha is still quantized. Detail resolution is bounded by the 384-pixel fit and 128 slabs.

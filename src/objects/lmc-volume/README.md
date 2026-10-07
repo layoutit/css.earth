@@ -36,6 +36,11 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 - **Datasets against their own images.** After the tone fit, render flux differs from each dataset's own image by Horálek +1.8%, VISTA +16.6% and AllWISE +264%.
 - **App inspection.** Captures from the running application cover the Earth view, an oblique view, both 90° side views, all three dataset switches and stars on and off. The side views show line-of-sight extent rather than a flat sheet.
 - **Replay.** With the laboratory caches moved aside, all 726 regenerated slice textures are byte-identical to the promotion output. The [object descriptor](object.json) names the result and the [prepared inventory](inventory.json) pins it.
+- **Far view (2026-10-07).** Orbiting the [Local Group view](https://css.earth/local-group/?v=UcPBSdeTgAB4DcEhEGMB7It8w9cmYXTIITFBQsczQAAAAD_1pAuVThJnP-NnfzRILxg_0qeZjQ7M1z_Uzd6KHW3bAAA) in 12-pixel drags, the old billboard's angle jumped from -34° to -140°, -164° and -178°. The fixed plane's angle moved from 14° to 13.5° over the same drags and stayed between 13.5° and 18° over twelve drags. From afar each cloud is 5 DOM nodes. Zooming out of this page, the plane alone and the volume alone at the switch distance, below, keep the same position, size and orientation.
+
+![Top: the old billboard over four small drags, turning. Bottom: the fixed plane over the same drags.](evidence/2026-10-07/far-plane-orbit.jpg)
+
+![At the switch distance, the volume alone (left) and the far plane alone (right)](evidence/2026-10-07/far-plane-handover.jpg)
 
 ![The LMC page with HV 2827, HV 877 and HV 900 ringed and named](evidence/2026-10-01/featured-cepheids.jpg)
 
