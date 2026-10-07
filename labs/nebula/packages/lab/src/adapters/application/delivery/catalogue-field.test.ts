@@ -1,10 +1,9 @@
 import { test, type TestContext } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
-import { spawnSync } from 'node:child_process';
+import { mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { samePreparedCatalogueGeometry, type DensityVolumeFrame, type PreparedCataloguePoint } from '@cssearth/objects';
+import { type DensityVolumeFrame, type PreparedCataloguePoint } from '@cssearth/objects';
 
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 import { embedNebulaFrame, METERS_PER_PARSEC } from './nebula-frame.ts';
@@ -164,72 +163,3 @@ test('the acquired Crab catalogue prepares a nonempty physical volume with pinne
   assert.ok(result.points.slice(1).every(p => Math.hypot(...p.positionUnits) * target.metersPerUnit / METERS_PER_PARSEC < 50.001));
 });
 
-test('the checked-in Helix selection retains wide-image cores and its central star across the budget and datasets', async () => {
-  const path = 'src/objects/helix-volume/source/stellar-field.json', bytes = await readFile(path);
-  const source: unknown = JSON.parse(bytes.toString());
-  assert.ok(source && typeof source === 'object' && 'selection' in source && 'provenance' in source);
-  const selection = source.selection, provenance = source.provenance;
-  assert.ok(selection && typeof selection === 'object' && 'retainIds' in selection && Array.isArray(selection.retainIds));
-  const ids = selection.retainIds;
-  assert.ok(ids.every((id): id is string => typeof id === 'string'));
-  assert.equal(ids.length, 34);
-  for (const id of ['eso-wfi-1508','eso-vista-12992','eso-vista-13414','eso-vista-11915','eso-vista-17840','eso-vista-10069','eso-wide-785']) assert.ok(ids.includes(id));
-  assert.ok('retainedAppearance' in selection); assert.equal(selection.retainedAppearance,'anchor');
-  assert.ok('retainedMatchArcsec' in selection); assert.equal(selection.retainedMatchArcsec, 10);
-  assert.ok(provenance && typeof provenance === 'object' && 'imageAnchors' in provenance);
-  const anchors = provenance.imageAnchors;
-  assert.ok(anchors && typeof anchors === 'object' && 'matches' in anchors && Array.isArray(anchors.matches));
-  assert.deepEqual(anchors.matches.map((match: unknown) => {
-    assert.ok(match && typeof match === 'object' && 'imageId' in match && 'gaiaSourceId' in match && 'matchArcsec' in match);
-    if (match.imageId === 'eso-vista-10069') { assert.equal(match.gaiaSourceId,null); assert.equal(match.matchArcsec,null); }
-    else {
-      assert.ok(typeof match.gaiaSourceId === 'string' && /^\d{10,20}$/.test(match.gaiaSourceId));
-      assert.ok(typeof match.matchArcsec === 'number' && match.matchArcsec < 10);
-    }
-    return match.imageId;
-  }), ids);
-  // Synthetic retained geometry isolates the delivery contract without requiring a generated compiler cache.
-  const existing: PreparedCataloguePoint[] = ids.map((id, i) => ({ ...retainedPoint, id,
-    positionUnits: id === 'eso-wfi-1508' ? [0, 0, 0] : [i * 13, i * 7, (i % 3) * 20] }));
-  const target = embedNebulaFrame(frame, { centerIcrsDegrees: [337.4107083333334, -20.83717222222222],
-    distancePc: 216, imageRotationDegrees: 0, arcsecPerUnit: 1 });
-  const pin = { path };
-  const wfi = await prepareNebulaCatalogueField(process.cwd(), pin, target, [...existing.map(p => p.id.startsWith('eso-vista-') ? {...p,opacity:0} : p), { ...retainedPoint, id: 'unvetted-image-peak' }], existing);
-  const infrared = await prepareNebulaCatalogueField(process.cwd(), pin, target,
-    existing.map(point => ({ ...point, colorCss: '#aabbcc', opacity: 0.25 })), existing);
-  assert.equal(wfi.points.length, 1500); assert.equal(wfi.receipt.retainedCount, 34); assert.equal(wfi.receipt.catalogueCount, 1466);
-  assert.deepEqual(wfi.points.slice(0, 34).map(point => point.id), ids);
-  assert.ok(wfi.points.some(point => point.id === 'eso-wfi-1508'));
-  assert.ok(!wfi.points.some(point => point.id === 'unvetted-image-peak'));
-  assert.ok(samePreparedCatalogueGeometry({ frame: target, points: wfi.points }, { frame: target, points: infrared.points }));
-  assert.deepEqual(wfi.points.slice(0,34),existing);
-  assert.deepEqual(infrared.points.slice(0,34),existing);
-});
-
-test('catalogue refresh preserves the existing Helix core identities, matching tolerance and evidence', async t => {
-  const sourceBytes = await readFile('src/objects/helix-volume/source/stellar-field.json');
-  const source = JSON.parse(sourceBytes.toString());
-  const { root } = await fixture(t, {}), owner = join(root, 'src/objects/helix-volume/source');
-  await mkdir(owner, { recursive: true });
-  await writeFile(join(owner, 'stellar-field.json'), sourceBytes);
-  await writeFile(join(owner, 'delivery.json'), await readFile('src/objects/helix-volume/source/delivery.json'));
-  // A one-row catalogue cache exercises the actual refresh CLI without requiring native processing or archive access.
-  const query = source.provenance.query.replace(/^WITH candidates AS \(SELECT (?!ALL )/, 'WITH candidates AS (SELECT ALL ');
-  // In column order: source_id, ra, dec, pmra, pmdec, parallax, parallax_error, the G, BP and RP magnitudes, ruwe and the three distances.
-  const star = source.stars[0];
-  const cells = [star.sourceId, star.raDeg, star.decDeg, star.pmRaMasYr, star.pmDecMasYr, star.parallaxMas,
-    star.parallaxErrorMas, star.photGMeanMag, '', '', star.ruwe, star.distancePc, star.distanceLowerPc, star.distanceUpperPc];
-  const cache = join(root, '.local/nebula-lab/stellar-fields'); await mkdir(cache, { recursive: true });
-  await writeFile(join(cache, 'helix-volume.json'), JSON.stringify({ query, rows: [cells.map(String)] }));
-  const refreshed = spawnSync(process.execPath, ['--experimental-strip-types',
-    join(process.cwd(), 'packages/bake/cli/prepare-nebula-field-catalogues.mts'), 'helix-volume'], { cwd: root, encoding: 'utf8', timeout: 3000 });
-  assert.equal(refreshed.status, 0, `${refreshed.error?.message ?? ''}\n${refreshed.stdout}\n${refreshed.stderr}`);
-  assert.match(refreshed.stdout, /NEBULA_FIELD_CATALOGUES_COMPLETE/);
-  const next = JSON.parse(await readFile(join(owner, 'stellar-field.json'), 'utf8'));
-  assert.equal(next.stars.length, 1);
-  assert.deepEqual(next.selection.retainIds, source.selection.retainIds);
-  assert.equal(next.selection.retainedMatchArcsec, 10);
-  assert.equal(next.selection.retainedAppearance, 'anchor');
-  assert.deepEqual(next.provenance.imageAnchors, source.provenance.imageAnchors);
-  assert.equal(next.provenance.retainedSources, source.provenance.retainedSources);
-});
