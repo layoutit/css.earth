@@ -24,6 +24,7 @@ const {
   settings,
   destinations,
   features,
+  motion,
   navigation = false,
 } = Astro.props;
 requireObjectControls({ datasets, settings }, objectId);
@@ -36,6 +37,10 @@ const shadowSetting = settings?.controls.find((setting) =>
   setting.kind === "toggle" && setting.name === "shadows");
 const remainingSettings = settings?.controls.filter((setting) =>
   setting !== speedSetting && setting !== shadowSetting) ?? [];
+// A shell switch is rendered where it has something to act on: rotation where the body spins or carries a Speed, light
+// curves on a pulsating star, surface labels on a body with named features. The heliosphere and the illustration models
+// are on the map every page draws, so every page has their switches.
+const rotates = motion.spin || speedSetting !== undefined;
 const speedValues: Readonly<Record<string, number>> = Object.freeze({
   off: 0,
   normal: 1,
@@ -135,21 +140,21 @@ import Detached from './Detached.astro';
 >
   <h2 id="object-settings-title">{PREPARED_SHELL_TITLES.settings.label}</h2>
   <div class="object-settings">
-    <label class="object-setting-control object-motion-setting-control">
+    {rotates && <label class="object-setting-control object-motion-setting-control">
       <input class="object-motion-setting" type="checkbox" name="motion" aria-describedby="object-motion-description" disabled />
       <span class="object-setting-text">Illustrative rotation</span>
       <span class="object-setting-switch" aria-hidden="true"></span>
       <span id="object-motion-blocked" class="object-motion-blocked" hidden>
         Paused by reduced motion
       </span>
-    </label>
-    <p id="object-motion-description" class="object-motion-description">Accelerated display rotation. The scene epoch stays fixed.</p>
-    <label class="object-setting-control object-light-curves-setting-control">
+    </label>}
+    {rotates && <p id="object-motion-description" class="object-motion-description">Accelerated display rotation. The scene epoch stays fixed.</p>}
+    {motion.lightCurve && <label class="object-setting-control object-light-curves-setting-control">
       <input class="object-light-curves-setting" type="checkbox" name="lightCurves" aria-describedby="object-light-curves-description" checked disabled />
       <span class="object-setting-text">Light curves</span>
       <span class="object-setting-switch" aria-hidden="true"></span>
-    </label>
-    <p id="object-light-curves-description" class="object-motion-description">Pulsating stars brighten and fade as measured, three days per second.</p>
+    </label>}
+    {motion.lightCurve && <p id="object-light-curves-description" class="object-motion-description">Pulsating stars brighten and fade as measured, three days per second.</p>}
     {speedSetting && <label class="object-setting-control object-speed-setting-control">
       <span class="object-setting-text">{speedSetting.label}</span>
       <input
@@ -172,11 +177,11 @@ import Detached from './Detached.astro';
       <span class="object-setting-text">{shadowSetting.label}</span>
       <span class="object-setting-switch" aria-hidden="true"></span>
     </label>}
-    <label class="object-setting-control object-surface-labels-setting-control">
+    {features && <label class="object-setting-control object-surface-labels-setting-control">
       <input class="object-surface-labels-setting" type="checkbox" name="surfaceLabels" disabled />
       <span class="object-setting-text">Surface labels</span>
       <span class="object-setting-switch" aria-hidden="true"></span>
-    </label>
+    </label>}
     <label class="object-setting-control">
       <input class="object-heliosphere-setting" type="checkbox" name="heliosphere" disabled />
       <span class="object-setting-text">Heliosphere</span>

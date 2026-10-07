@@ -90,8 +90,9 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
   if (descriptor.id !== id || reference?.url !== 'prepared/page.json') {
     throw new TypeError(`${id}: invalid prepared page reference.`);
   }
-  // The page data is the runtime's asset table and its published controls, read when needed (prepared-transport.ts).
-  const object: unknown = await preparedPageData(directory, id);
+  // The page data is the runtime's asset table, what its motion plays and its published controls, read when needed
+  // (prepared-transport.ts).
+  const object = await preparedPageData(directory, id);
   if (!isRecord(object) || object.schema !== OBJECT_PAGE_SCHEMA || object.id !== id || !object.assets || !object.controls) {
     throw new TypeError(`${id}: incomplete prepared page data.`);
   }
@@ -100,5 +101,5 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
   // `DatasetList.astro` and its sibling result/overview components read dataset thumbnail and
   // dataset-preview addresses straight off this data, outside the runtime `resources.url()`
   // chokepoint (`prepared-residency.ts`) and outside `PreparedObjectHead`'s preload list.
-  return { descriptor, assets: await resolveSceneAddressesDeep(object.assets, root), controls: await resolveSceneAddressesDeep(object.controls, root) };
+  return { descriptor, assets: await resolveSceneAddressesDeep(object.assets, root), controls: await resolveSceneAddressesDeep(object.controls, root), motion: object.motion };
 }

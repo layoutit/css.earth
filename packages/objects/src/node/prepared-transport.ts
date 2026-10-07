@@ -94,11 +94,24 @@ export function preparedObjectTransport(descriptor: SceneDescriptor, data: strin
     `"format":${JSON.stringify(descriptor.prepared.format)},"data":${data}}`;
 }
 
-/** A scene body's page data: the runtime's asset table, read from its head, and its published `prepared/controls.json`,
- * which is the runtime's controls. */
+/** What a runtime's infinite motion plays, told apart as the renderer does (`prepared-presentation.ts`): a track whose
+ * every keyframe is an opacity is a star's light curve, any other track is a spin. */
+function preparedMotionKinds(motion: unknown, id: string): { spin: boolean; lightCurve: boolean } {
+  if (motion === undefined) return { spin: false, lightCurve: false };
+  if (!Array.isArray(motion)) throw new TypeError(`${id}: prepared/runtime.json motion must be a list of tracks.`);
+  const lightCurves = motion.map((track: unknown) => {
+    if (!isRecord(track) || !Array.isArray(track.keyframes) || !track.keyframes.length) throw new TypeError(`${id}: a prepared motion track has no keyframes.`);
+    return track.keyframes.every(frame => isRecord(frame) && 'opacity' in frame);
+  });
+  return { spin: lightCurves.includes(false), lightCurve: lightCurves.includes(true) };
+}
+
+/** A scene body's page data: the runtime's asset table, what its motion plays, and its published
+ * `prepared/controls.json`, which is the runtime's controls. The motion list closes the runtime, so the file is read
+ * to its end: 4 s over 4,574 bodies, against 1 s for the asset table alone (2026-10-07). */
 export async function preparedPageData(objectDirectory: string, id: string) {
-  const { assets } = await readJsonHead(resolve(objectDirectory, 'prepared/runtime.json'), ['assets']);
+  const { assets, motion } = await readJsonHead(resolve(objectDirectory, 'prepared/runtime.json'), ['assets', 'motion']);
   const controls: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/controls.json'), 'utf8'));
   if (!isRecord(assets)) throw new TypeError(`${id}: prepared/runtime.json has no asset table.`);
-  return { schema: OBJECT_PAGE_SCHEMA, id, assets, controls: requireRecord(controls, `${id} prepared controls`) };
+  return { schema: OBJECT_PAGE_SCHEMA, id, assets, controls: requireRecord(controls, `${id} prepared controls`), motion: preparedMotionKinds(motion, id) };
 }
