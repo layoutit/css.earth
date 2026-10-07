@@ -9,6 +9,13 @@ test('share metadata chooses only declared captures or the supplied fallback', (
   assert.equal(objectSeo(object, { socialImages: new Set() }).image, 'https://css.earth/social/earth.jpg');
   assert.equal(objectSeo(object, { socialImages: new Set(), defaultSocialImageId: 'sun' }).image, 'https://css.earth/social/sun.jpg');
 });
+test('a system page shares its host\'s image, under its own title and address', () => {
+  const system = { id: 'mars-system', name: 'Mars System', description: 'Mars and its moons.', route: '/mars-system/', system: { host: 'mars' } };
+  const seo = objectSeo(system, { socialImages: new Set(['mars']) });
+  assert.equal(seo.image, 'https://css.earth/social/mars.jpg');
+  assert.equal(seo.canonical, 'https://css.earth/mars-system/');
+  assert.equal(objectSeo(system, { socialImages: new Set() }).image, 'https://css.earth/social/earth.jpg');
+});
 test('live head updates present metadata and keeps the loaded share image', () => {
   const { document } = parseHTML('<html><head><title>Old</title><link rel="canonical" href="/old"><meta name="description" content="Old"><meta property="og:title" content="Old"><meta property="og:image" content="loaded.jpg"></head><body></body></html>');
   const seo = objectSeo(object); applySeoHead(document, seo); applySeoHead(document, seo);
