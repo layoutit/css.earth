@@ -27,15 +27,24 @@ import warnings
 
 def mission_light_curve(job):
     """The light curve a mission's pipeline publishes for a star, as it is: lightkurve reads the long-cadence file's
-    PDC-MAP flux with its default quality mask, and the campaign from the file's header."""
+    PDC-MAP flux with its default quality mask, and the campaign from the file's header, with what the header says of
+    the light in the aperture (`aperture_light`)."""
     warnings.filterwarnings('ignore')
     import numpy as np
     import lightkurve as lk
 
     curve = lk.read(job['file'], flux_column='pdcsap_flux').remove_nans()
     flux = np.asarray(curve.flux.value, dtype=float)
-    return {'frames': int(len(flux)), 'window': int(curve.campaign), 'pipeline': str(curve.meta.get('PROCVER', '')),
+    return {'frames': int(len(flux)), 'window': int(curve.campaign), 'pipeline': str(curve.meta.get('PROCVER', '')), **aperture_light(curve),
             'time': [round(float(value), 5) for value in np.asarray(curve.time.value, dtype=float)], 'flux': [round(float(value), 6) for value in flux / np.mean(flux)]}
+
+
+def aperture_light(curve):
+    """What the pipeline's own header says of the light in a light curve's aperture, as lightkurve reads it: CROWDSAP,
+    the share of the aperture's light that is the target's ("ratio of target flux to total flux in op. ap."), and
+    FLFRCSAP, the share of the target's light the aperture holds (TESS Science Data Products Description Document,
+    EXP-TESS-ARC-ICD-TM-0014 Rev F, Table 14). A value the header leaves blank is null. Nothing is worked out."""
+    return {'targetShare': curve.meta.get('CROWDSAP'), 'targetHeld': curve.meta.get('FLFRCSAP')}
 
 
 def input_catalogue(job):
@@ -93,7 +102,8 @@ def spinspotter(job):
     stitched one, with the package's own cleaning (transits masked when given, bins of the job's size, normalized
     about zero). What is returned of each is what the paper's criteria read: the period, and the height, width and fit
     of the autocorrelation's peaks; and the midpoint and distance of the light's 5th and 95th percentiles (the paper's
-    X_var and Y_var). lightkurve reads each file's PDC-MAP flux. Deciding is methods.mts's."""
+    X_var and Y_var). lightkurve reads each file's PDC-MAP flux, and what its header says of the light in the aperture
+    (`aperture_light`), which is kept and decides nothing. Deciding is methods.mts's."""
     warnings.filterwarnings('ignore')
     import numpy as np
     import lightkurve as lk
@@ -114,7 +124,7 @@ def spinspotter(job):
                 'time': [round(float(value) - job['timeZero'], 5) for value in time[seen]], 'flux': [round(float(value) + 1, 6) for value in light[seen]]}
 
     curves = [lk.read(path) for path in job['files']]
-    sectors = [{'sector': int(curve.meta['SECTOR']), 'pipeline': str(curve.meta.get('PROCVER', '')), 'frames': int(len(curve)), **measured(*ss.process_LightCurve(curve, bs=size, transit=transit))} for curve in curves]
+    sectors = [{'sector': int(curve.meta['SECTOR']), 'pipeline': str(curve.meta.get('PROCVER', '')), 'frames': int(len(curve)), **aperture_light(curve), **measured(*ss.process_LightCurve(curve, bs=size, transit=transit))} for curve in curves]
     stitched = None
     if len(curves) > 1:
         # The authors' own stitching (each sector normalized by its median), with transits taken out of each sector first as their cleaning does.
@@ -127,7 +137,8 @@ def spinspotter(job):
 def brightness_maps(job):
     """starry's own inversion of a rotational light curve (Luger et al. 2019), once for each light curve of the job: the
     spherical-harmonic map, seen at the star's tilt and turning with its period, that reproduces the light curve, with
-    starry's Gaussian prior on the map. One process makes all of a star's maps: starry is imported and compiled once."""
+    starry's Gaussian prior on the map. One process makes all of a star's maps: starry is imported and compiled once.
+    A map's values are its brightness over its mean, as starry gives them: how many decimals a table keeps is map.mts's."""
     import numpy as np
     import starry
     starry.config.lazy = False
@@ -153,7 +164,7 @@ def brightness_maps(job):
         model = star.flux(theta=theta)
         values = np.array(star.intensity(lat=lat.ravel(), lon=lon.ravel())).reshape(lat.shape)
         values = values / np.mean(values)
-        made.append({'noise': noise, 'residual': float(np.std(flux - model)), 'values': [[round(float(value), 5) for value in row] for row in values]})
+        made.append({'noise': noise, 'residual': float(np.std(flux - model)), 'values': [[float(value) for value in row] for row in values]})
     return {'starry': starry.__version__, 'maps': made}
 
 

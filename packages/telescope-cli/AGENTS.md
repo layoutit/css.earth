@@ -113,10 +113,17 @@ table's own description have been read; it is looked up only for a star the wire
 on the light the paper judged, and it measures nothing. A column that does not hold what its description says is not
 read, and the entry's comment gives the count.
 
-`verdict.mts` holds the verdict's shape and three checks against what is already published of the star (its catalogued
-period, SIMBAD's type, the fastest its radius and mass let it turn); each can only withhold a map, a paper's own verdict
-included. `neighbours.mts` counts
-the Gaia sources around a star for its page to say. `map.mts` has starry fit the map of each accepted light curve.
+`verdict.mts` holds the verdict's shape and four checks against what is already published of the star (its catalogued
+period, SIMBAD's type, the fastest its radius and mass let it turn, and the share of other stars' light in its TESS
+pixels); each can only withhold a map, a paper's own verdict included. The fourth is a published limit: a TESS target
+the TESS Input Catalog gives a contamination ratio of 0.2 or more is not read as its star's (`blended`; Fetherolf et al.
+2023 and García Soto et al. 2023 print that limit for their own searches of the same light curves, and
+`light-curves.mts` asks MAST for the ratio). Do not replace it with a number of ours, and do not decide anything on the
+aperture shares a receipt keeps from a light curve's header (`CROWDSAP`, `FLFRCSAP`): no paper found prints a limit on
+them for rotation. `neighbours.mts` counts
+the Gaia sources around a star for its page to say. `map.mts` has starry fit the map of each accepted light curve, and
+writes its values to five decimals of the mean, or to seven for a map whose whole range would hold under 256 steps at
+five (`written`): that is how a number is written, and no star gains or loses a map by it.
 `reduce.mts` runs a star, or every star with `--all`, and writes its receipt and light curves under ignored
 `output/tess/<star id>/`. The science is the pinned codes' (`toolchain.json`, and the telescope's starry toolchain);
 `tools.py` holds calls and nothing else ([method note](../../docs/stellar-brightness-maps-from-tess.md)).
@@ -134,6 +141,7 @@ supplies `natural`: the newest map in the star's own color, which becomes the da
 (`Color + brightness`). It is the Brightness map's scale drawn from a darker, richer step of the star's own hue up to its color (`tinted`, `DARK_STEP`; never toward black), far stronger than the
 real contrast, which cannot be seen; its sentences say so with the star's number, and say what is measured (longitudes) and
 what is not (latitudes, shapes, any color change). A map's scale is drawn from its range, never a reason to leave a star out: a receipt gives the range to a tenth of a percent, and a map that reads 100 to 100 there takes it from its table (`mapRange`).
+A table written with seven decimals is filed under `fine/` in its mission's directory (`tableDirectory`): the source mirror keeps the first bytes published at a path, so a table written again takes a new one.
 A kind's steps take its `stepGroup` id, or that id with `-maps` after it on a page whose other datasets already hold it as a dataset's id or a group's (a published map filed as `brightness`).
 `--bake` takes 40 stars a command, and removes a star's stale arrival picture just before its own group is baked. A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
 

@@ -48,9 +48,6 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of LTT 1445 A (pscomppars): projected rotation speed 3.4 km/s, from Kokori et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract)",
   "spinInclinationDegrees": 20.8,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.265 solar radii): sin i = v sin i × P / (2πR) = 0.354. Not a measurement of the axis: the three numbers come from different papers.",
-  "rotationPeriodMeasuredDays": 1.41,
-  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 4 and 31 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 1.41 d, the light swinging by 1.1% as the star turns",
-  "rotationLightSwingPercent": 1.1,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

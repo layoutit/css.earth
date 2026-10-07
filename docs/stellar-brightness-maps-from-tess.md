@@ -29,6 +29,7 @@ Each step of the science is run by the code its authors publish, pinned in
 | Period, TESS | [SpinSpotter](https://github.com/rae-holcomb/SpinSpotter) 0.2.0 (Holcomb et al. 2022, ApJ 936, 138) | The period of the light's autocorrelation and the height, width and fit of its peaks |
 | Verdict, TESS, when that method refuses | The catalogue of [Colman et al. (2024, AJ 167, 189)](https://arxiv.org/abs/2402.14954), at [VizieR J/AJ/167/189](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/167/189) | The targets the paper found turning in sectors 1 to 26, each with its period. The paper's code has no licence and is not run |
 | Temperature and gravity a record lacks | The TESS Input Catalog v8 (Stassun et al. 2019, AJ 158, 138), in the header of the star's own light curve | The two values Holcomb et al. select their stars by |
+| Other stars' light in a TESS target's pixels | The TESS Input Catalog (Stassun et al. 2019, AJ 158, 138), at [MAST](https://archive.stsci.edu/missions-and-data/tess) (DOI 10.17909/fwdt-2x66) | The target's contamination ratio: the other stars' flux in its pixels over its own. A target at the limit two papers print is not read |
 | Neighbours | [Gaia DR3](https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355) through [CDS X-Match](http://cdsxmatch.u-strasbg.fr/) | The Gaia sources around the star, counted for its page to say; nothing is refused on them |
 | The map | [starry](https://starry.readthedocs.io/) 1.2.0 (Luger et al. 2019, AJ 157, 64) | The brightness over the surface, as spherical harmonics up to degree 5, that reproduces the light curve as the star turns |
 
@@ -193,23 +194,27 @@ Nothing is measured or judged here for such a star. Its datasets say that the ro
 and its README gives the sentence with which Holcomb et al.'s criteria refuse the same light. A period a paper published
 is not written into the star's record as one measured here.
 
-A star is found in the catalogue by the TIC number in its light curve's file name. Of the 877 stars whose TESS light
-curves were read, 39 are in it. Holcomb et al.'s method accepts 19 of them itself and refuses 20. Of the 19, 17
+A star is found in the catalogue by the TIC number in its light curve's file name. Of the 776 stars whose TESS light
+curves are read, 33 are in it. Holcomb et al.'s method accepts 17 of them itself and refuses 16. Of the 17, 15
 are at the table's period within 20%; HIP 67522 is at twice the period the table flags as a potential half, and TOI-2459
-at 11.13 days where the table prints 3.91. For the 20 it refuses:
+at 11.13 days where the table prints 3.91. For the 16 it refuses:
 
 | What the star's row gives | Stars |
 | --- | --- |
-| One period, found in as many sectors as the star has among 1 to 26: the paper's verdict is taken | 8 |
-| Detections in fewer sectors than the star has | 9 |
-| A potential half-period | 3 |
+| One period, found in as many sectors as the star has among 1 to 26: the paper's verdict is taken | 7 |
+| Detections in fewer sectors than the star has | 7 |
+| A potential half-period | 2 |
 
-Seven of the eight are drawn, with ten maps: BE Ceti, HD 6569, HD 15906, HD 63433, Merga and YSES 1 have one sector
-each, and TOI-1136 has four. TOI-2076's 5.43 days is neither its catalogued 7.21 days nor half of it, so it is not
-drawn. Six of the seven have a catalogued period from another source, each within 20% of the table's (7.78, 7.13, 6.4,
-3.7, 8.19 and 5.5 days); HD 15906's only catalogued period is this table's own. This is a comparison, not a setting.
+Six of the seven are drawn, with nine maps: BE Ceti, HD 6569, HD 15906, HD 63433 and Merga have one sector each, and
+TOI-1136 has four. TOI-2076's 5.43 days is neither its catalogued 7.21 days nor half of it, so it is not drawn. Five of
+the six have a catalogued period from another source, each within 20% of the table's (7.78, 7.13, 6.4, 3.7 and 8.19
+days); HD 15906's only catalogued period is this table's own. This is a comparison, not a setting.
 
-![Six of the seven stars in the app (BE Ceti, HD 6569, HD 63433, Merga, TOI-1136 and YSES 1): Color + brightness above, Brightness map below](images/stellar-brightness-maps-published-verdict.webp)
+Six more stars are rows of the table and are not read at all: the TESS Input Catalog gives their targets too much of
+other stars' light ([below](#a-star-whose-tess-pixels-hold-other-stars-light)). YSES 1 is one of them, with one period
+in its one sector.
+
+![The six stars in the app (BE Ceti, HD 6569, HD 15906, HD 63433, Merga and TOI-1136): Color + brightness above, Brightness map below](images/stellar-brightness-maps-published-verdict.webp)
 
 ### A star K2's method refuses
 
@@ -224,9 +229,11 @@ place: within a pixel, the nearest target of a faint companion is its bright nei
 
 K2's method refuses 40 of our stars: the periodogram's peak for 32, the three periods for 4, two campaigns apart for 2,
 the period's range for 1, and 1 has no campaign the paper analyses. Of those 40, 38 have TESS 2-minute light curves of
-their own. Holcomb et al.'s method accepts none of them: 31 have no valid period in any sector, 5 have one sector, which
-is outside the criteria, and 2 have one sector with no repeating peaks. WASP-157 has no 2-minute light curve, and the
-one nearest K2-122 B is of a target 18.9 arcseconds from it. So this rule draws no star today.
+their own. WASP-104's are not read: the TESS Input Catalog gives its target a contamination ratio of 0.86
+([below](#a-star-whose-tess-pixels-hold-other-stars-light)). Holcomb et al.'s method accepts none of the other 37: 30
+have no valid period in any sector, 5 have one sector, which is outside the criteria, and 2 have one sector with no
+repeating peaks. WASP-157 has no 2-minute light curve, and the one nearest K2-122 B is of a target 18.9 arcseconds from
+it. So this rule draws no star today.
 
 ### A star whose record holds no temperature or no surface gravity
 
@@ -248,59 +255,113 @@ method accepts none: each has a valid period in fewer than half its sectors, Alr
 TRAPPIST-1's header gives a gravity and no temperature, so it is still left out. For two more, HD 189733 B and Kulou,
 the nearest light curve is another target's. So this rule draws no star today either.
 
+### A star whose TESS pixels hold other stars' light
+
+A TESS pixel is 21 arcseconds wide, and the mission publishes a light curve of its own for a target a few arcseconds
+from a brighter star. HD 222259 B (DS Tuc B) lies 5.4 arcseconds from DS Tuc A. Its own light curve gave 2.85 days,
+which is A's rotation, and a map of it drew A's spots on B's page.
+
+Neither Holcomb et al. nor Colman et al. prints a limit on such blending. Two papers that read the same light curves
+do. Fetherolf et al. (2023, ApJS 268, 4, Sect. II.1) search the 2-minute PDC-MAP light curves of sectors 1 to 26 for
+periodic variability only in stars "not severely blended with neighboring stars (CONTRATIO < 0.2)". García Soto et al.
+(2023, AJ 165, 192, Sect. II.2) "limit the contamination ratio to <20%" for the rotation periods they measure in them.
+The contamination ratio is the TESS Input Catalog's: "the ratio of the total contaminant flux to the target star flux"
+in the target's pixels (Stassun et al. 2019, AJ 158, 138, Sect. III.2.1).
+
+That limit is applied here before any TESS light is read
+([`verdict.mts`](../packages/telescope-cli/src/archives/tess/verdict.mts), `blended`).
+[`reduce.mts`](../packages/telescope-cli/src/archives/tess/reduce.mts) asks MAST for the ratio of the star's target. At
+0.2 or more no method judges the star's light curves, and no paper's verdict is taken for them. A target
+the catalog gives no ratio is read, because the paper's own catalogue holds such stars: of the 4,662 stars in its table
+of autocorrelation periods ([MAST](https://archive.stsci.edu/hlsp/tess-svc), DOI 10.17909/f8pz-vj63), 1,334 have no
+ratio, and the largest ratio is 0.19994.
+
+The receipts of 900 stars list a TESS 2-minute light curve. The catalog gives the targets of 842 a ratio, and of 102
+of those 0.2 or more (24 of them over 1). One of the 102 is a giant no method covers. Holcomb et al.'s method had read the
+other 101. It accepted 8: 6 had maps, and 2 a period that was not drawn. It refused 93, and one of those, YSES 1, had a
+map on Colman et al.'s verdict. The seven lose their 35 maps:
+
+| Star | Contamination ratio | Period its light gave, days | Maps withheld | The target's share of its aperture's light |
+| --- | --- | --- | --- | --- |
+| HD 222259 B | 2.2 | 2.85 | 8 | 30% |
+| LTT 1445 A | 1.3 | 1.41 | 2 | 42% |
+| EQ Pegasi A | 0.93 | 1.08 | 2 | 51% |
+| YSES 1 | 0.83 | 5.46, Colman et al.'s | 1 | 57 to 62% |
+| TOI-1860 | 0.45 | 4.46 | 11 | 99% |
+| DS Tuc A | 0.43 | 2.85 | 10 | 70% |
+| TYC 486-4943-1 | 0.38 | 3.78 | 1 | 83% |
+
+Their pages show what they showed before the maps, and no period measured here stays in their records. LTT 1445 A's
+1.41 days is the period Winters et al. (2019, AJ 158, 152) found in the same light and suspect comes from one of its two
+companions, 7 arcseconds away.
+
+The last column is not the catalog's. It is the mission's own number for the aperture it used: the header of each
+light curve gives the share of the aperture's light that is the target's (`CROWDSAP`) and the share of the target's
+light the aperture holds (`FLFRCSAP`). The TESS Science Data Products Description Document (EXP-TESS-ARC-ICD-TM-0014
+Rev F, Table 14) defines both and sets no limit on either. lightkurve reads them, and a receipt keeps them beside each
+light curve it read. Nothing is decided on them: no paper found prints a limit on that share for a rotation. The two
+numbers do not always agree. The catalog's ratio withholds TOI-1860, whose header gives it 99% of its aperture's
+light, and DS Tuc A, whose 2.85 days is its catalogued rotation. It reads TOI-1227 (ratio 0.12), whose header gives it
+43 to 59%. Both are stated here as measured; the limit applied is the published one.
+
+The ratio is worked out for TESS's pixels, and Reinhold & Hekker print no limit on blending: K2's light is read as
+before.
+
 ### Every star
 
 The counts in the sections on the two methods are of the first stars each was run on. `reduce.mts --all` has since judged
-every star with a page, 3,118 on 6 October 2026. These numbers are counted from the receipts.
+every star with a page, 3,118 on 6 October 2026, and the stars whose TESS target is blended were judged again on 7
+October. These numbers are counted from the receipts.
 
 | What happened | Stars |
 | --- | --- |
 | Not read: no method covers its kind (evolved, or outside both methods' temperatures) | 1,438 |
 | Not read: SIMBAD files it as a pulsating star or a close pair | 534 |
 | Not read: neither its record nor a light curve's header holds both its temperature and its surface gravity (162 of them are not stars) | 192 |
+| Not read: the TESS Input Catalog gives its TESS target a contamination ratio of 0.2 or more | 100 |
 | Not read: a method covers its kind, and its mission publishes no light curve of the star | 28 |
-| Read by Holcomb et al.'s method, on TESS light curves | 877 |
+| Read by Holcomb et al.'s method, on TESS light curves | 776 |
 | Read by Reinhold & Hekker's method, on K2 light curves | 87 |
 
-The two last rows share 38 stars, which K2's method refused and TESS's then read: 926 stars are read. Of them, 116 have
-a rotation that is drawn: 65 by Holcomb et al.'s method on TESS light, 44 by Reinhold & Hekker's on K2 light, and 7 on
-the verdict Colman et al. published. Why the other 810 have none, by the last light that was judged:
+The two last rows share 37 stars, which K2's method refused and TESS's then read: 826 stars are read. Of them, 109 have
+a rotation that is drawn: 59 by Holcomb et al.'s method on TESS light, 44 by Reinhold & Hekker's on K2 light, and 6 on
+the verdict Colman et al. published. Why the other 717 have none, by the last light that was judged:
 
 | Reason | TESS | K2 |
 | --- | --- | --- |
-| A valid period in fewer of the star's sectors than half, rounded up (in none of them for 599) | 693 | |
-| The star's one sector is outside the criteria | 44 | |
-| No valid period in all the star's sectors together | 29 | |
-| No repeating peaks in the autocorrelation of the star's one sector | 26 | |
+| A valid period in fewer of the star's sectors than half, rounded up (in none of them for 530) | 612 | |
+| The star's one sector is outside the criteria | 36 | |
+| No valid period in all the star's sectors together | 27 | |
+| No repeating peaks in the autocorrelation of the star's one sector | 25 | |
 | Lopsided light: removed as a possible eclipsing binary | 4 | |
-| Refused by K2's method, and TESS publishes no 2-minute light curve of the star | | 2 |
-| Accepted by the method at a period that is neither the catalogued one nor its half: not drawn | 9 | 3 |
+| Refused by K2's method, and no TESS light of the star is read: none is published, the nearest is another target's, or its target is blended | | 3 |
+| Accepted by the method at a period that is neither the catalogued one nor its half: not drawn | 7 | 3 |
 
-Of the 805 under TESS, 38 are the stars K2's method refused first, for the reasons given above, and 13 are in Colman et
+Of the 711 under TESS, 37 are the stars K2's method refused first, for the reasons given above, and 10 are in Colman et
 al.'s catalogue without a verdict that could be taken or drawn.
 
 No period was refused as shorter than an orbit at the star's surface.
 
-The two methods accept 121 stars, and 87 of them have a rotation period in the catalogues. The method's period is the
-catalogued one within 20% for 68 (TESS 39, K2 29), half of it for 7 (TESS 1, K2 6) and another period for 12 (TESS 9,
-K2 3). The 12 have no map; the 7 are drawn at twice the light's period. The other 34 have no catalogued period, and the
+The two methods accept 113 stars, and 81 of them have a rotation period in the catalogues. The method's period is the
+catalogued one within 20% for 64 (TESS 35, K2 29), half of it for 7 (TESS 1, K2 6) and another period for 10 (TESS 7,
+K2 3). The 10 have no map; the 7 are drawn at twice the light's period. The other 32 have no catalogued period, and the
 method alone vouches for theirs: BD-16 351 is one, because the 3.23 days its record holds were measured in this project
 under the rule since removed. This is a comparison, not a setting.
 
-So 116 stars have maps, 362 maps in all: 72 stars with 313 maps from TESS, 7 of those stars and 10 of those maps on
+So 109 stars have maps, 327 maps in all: 65 stars with 278 maps from TESS, 6 of those stars and 9 of those maps on
 Colman et al.'s verdict, and 44 stars with 49 maps from K2. A star TESS has watched often has a map for each valid
-sector: TOI-1860 has 11 and DS Tuc A has 10.
+sector: TOI-1224 has 9, and four more stars have 8.
 
-The light of 18 of the 116 stars swings by under 0.1%, and 10 of those are hotter than 7,000 K (Stellio at 9,131 K swings
+The light of 18 of the 109 stars swings by under 0.1%, and 10 of those are hotter than 7,000 K (Stellio at 9,131 K swings
 by 0.012%, the least). Holcomb et al. (Sect. III) exclude no star by how much its light varies, and write that some, the
 hotter ones above all, "may warrant additional inspection" to tell rotation from pulsation. They print no cut for it, and
 none is applied here.
 
-![Six of the stars in the app (DS Tuc A, PDS 70, HIP 67522, TOI-837, HD 29615 and Biham): Color + brightness above, Brightness map below](images/stellar-brightness-maps-all-stars.webp)
+![Six of the stars in the app (TOI-1224, PDS 70, HIP 67522, TOI-837, HD 29615 and Biham): Color + brightness above, Brightness map below](images/stellar-brightness-maps-all-stars.webp)
 
 ### What here is not printed in a paper
 
-Eight things around the methods are this repository's, and a reader should know them as such:
+Nine things around the methods are this repository's, and a reader should know them as such:
 
 1. Holcomb et al.'s criteria are applied to sectors after their sample's 26.
 2. A star's temperature and surface gravity are read from its record here; Holcomb et al. read them from the TESS Input
@@ -320,6 +381,11 @@ Eight things around the methods are this repository's, and a reader should know 
 8. A map on Colman et al.'s verdict is made from the sector's light as SpinSpotter's cleaning prepares it (30-minute
    bins, the star's known transits masked), as every TESS map here is. The paper judged the light clipped at three
    sigma.
+9. A star's TESS light is not read when the TESS Input Catalog gives its target a contamination ratio of 0.2 or more.
+   The limit is printed by Fetherolf et al. (2023) and García Soto et al. (2023) for their own searches of the same
+   light curves. Holcomb et al. and Colman et al. print none, and setting it before their verdicts is this
+   repository's. So is reading a target the catalog gives no ratio, as Fetherolf et al.'s own catalogue holds such
+   stars.
 
 ## What the map is and is not
 
@@ -367,9 +433,18 @@ the scale's ends and the text tell them apart.
 
 A scale ends at the smallest of 1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6 or 8 times a power of ten that holds the star's maps. A
 receipt gives a map's range to a tenth of a percent; a map that reads 100% to 100% there takes its range from its table.
-Biham's light swings by 0.01%, and its Brightness maps are drawn from 99.96% to 100.04%. A table holds a map to a
-thousandth of a percent of the mean, so the narrowest map here (Shangcheng in sector 52, 99.995% to 100.005%) has 11
-distinct values. A scale is only how a map is drawn: no star is kept or left out by it.
+Biham's light swings by 0.01%, and its Brightness maps are drawn from 99.96% to 100.04%. A scale is only how a map is
+drawn: no star is kept or left out by it.
+
+A table holds a map's values to five decimals of its mean, or to seven when at five the map's whole range would hold
+fewer than 256 steps, the levels of the 8-bit picture drawn from it
+([`map.mts`](../packages/telescope-cli/src/archives/tess/map.mts), `written`). The narrowest map here (Shangcheng in
+sector 52, 99.995% to 100.005%) held 11 distinct values at five decimals and holds 771 at seven. This is how a number is
+written: no star gains or loses a map by it. Of the 327 maps, 58 are written with seven decimals, those of 16 stars; the
+other 269 tables are as they were, byte for byte. A table with seven decimals is filed under `fine/` beside the others,
+because the source mirror keeps the first bytes published at a path.
+
+![Shangcheng's Brightness map of sector 52 in the app, from its table with five decimals and with seven](images/stellar-brightness-maps-narrow-map.webp)
 
 The dataset's text gives the month the sector was observed, because spots come and go within weeks or months.
 
@@ -385,7 +460,8 @@ node packages/telescope-cli/src/new-object/new-object-cli.mts --pixel-light --al
 ```
 
 `reduce.mts` asks MAST for the star's K2 light curves and, when K2 has none or its method refuses the star, its TESS
-2-minute ones, each only when a method covers the star's kind, and has that method judge them. For a star the TESS method
+2-minute ones, each only when a method covers the star's kind, and has that method judge them. Before a TESS light curve
+is judged it asks MAST for the TESS Input Catalog's contamination ratio of the star's target. For a star the TESS method
 refuses it looks the star up in Colman et al.'s table, which is one request to VizieR for all stars, kept under
 `output/tess/published/`. `--all` leaves a star alone once it has a receipt; a star judged before a change to the
 route is judged again by name. It writes a receipt for each star under ignored
@@ -421,8 +497,15 @@ counts the measured period among the star's catalogued ones when it adopts a rot
   map on that verdict: the table does not say which sectors they are.
 - A map on Colman et al.'s verdict is of sectors 1 to 26 only (2018 to 2020), however often TESS has watched the star
   since.
-- Other stars near a star are counted for its page to say and nothing is refused on them: the missions' light curves
-  correct for crowding, and no published limit is applied here.
+- A TESS target is left out at the published limit on the catalog's contamination ratio. The catalog's ratio is an
+  estimate from star positions and brightnesses, and it does not always agree with the share the mission's own header
+  gives for the aperture: a star may be withheld whose aperture is nearly all its own light, and one read whose aperture
+  is half other stars'.
+- No limit is applied to K2 light: Reinhold & Hekker print none. A K2 target is the star's when it lies within one of
+  the mission's pixels (4 arcseconds) of it, so two stars that both lie that near one target are given the same light
+  curve: K2-29 and WASP-152 B, 4.3 arcseconds apart, both have a map of the light of EPIC 211089792, which lies 1.4 and
+  2.9 arcseconds from them.
+- The Gaia sources near a star are counted for its page to say, and nothing is refused on that count.
 - A periodic light is taken as rotation. A pulsating star or a close pair that SIMBAD does not file as one, with a period
   longer than the surface orbit's, would pass as a turning, spotted star.
 - A star with no catalogued period whose light repeats twice a turn is given half its true period.

@@ -93,7 +93,8 @@ node packages/telescope-cli/src/archives/tess/reduce.mts au-mic      # or --all:
 ```
 
 `reduce.mts` asks MAST for the star's light curves, has the method judge them, and writes a receipt, each light curve and,
-when the rotation is accepted, one map a sector or campaign as a table under ignored `output/tess/`.
+when the rotation is accepted, one map a sector or campaign as a table under ignored `output/tess/`. A TESS target whose
+pixels the TESS Input Catalog gives too much of other stars' light (a contamination ratio of 0.2 or more) is not read.
 `telescope new-object --from-pixels all --out SPEC.json` then drafts every reduced star's maps as datasets of its page.
 
 ## Supported v1 boundary

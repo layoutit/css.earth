@@ -3,7 +3,7 @@ import test from 'node:test';
 import { validateDatasetSteps } from '@cssearth/bake/objects/content';
 import { surfaceMapFiles } from '../maps/surface-maps.mts';
 import { adoptPeriod, measuredPeriod, starMetadata } from '../metadata/star-metadata.mts';
-import { BRIGHTNESS_CONSUMER, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, mapRange, monthsOf, percent, reducedBrightness, missionDay, shortMonthsOf, tinted } from './brightness-maps.mts';
+import { BRIGHTNESS_CONSUMER, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, mapRange, monthsOf, percent, reducedBrightness, missionDay, shortMonthsOf, tinted, tableDirectory } from './brightness-maps.mts';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -160,6 +160,19 @@ test('a star whose light swings by a hundredth of a percent still gets a scale, 
   // A range the receipt does give is the receipt's, whatever the table holds; a table with no rows leaves it as it is.
   assert.deepEqual([mapRange(93.4, 104.2, rows), mapRange(100, 100.1, rows), mapRange(100, 100, TABLE)], [[93.4, 104.2], [100, 100.1], [100, 100]]);
   assert.deepEqual([0.085, 0.0051, 0.00051, 0.00005, 0.00004, 0.000004].map(percent), ['8.5', '0.51', '0.05', '0.01', '0.004', 'under 0.001']);
+});
+
+test('a table that holds its map to seven decimals of the mean is filed under its own directory, and any other where it was', () => {
+  // Five decimals of the mean leave the last two decimals of a percent at zero; Shangcheng's map of sector 52, written again, does not.
+  const fine = `${TABLE}DATAPACKING=POINT\nDT=(SINGLE SINGLE SINGLE)\n      0.00000    -90.00000    100.00000\n      5.00000    -90.00000     99.99537\n     10.00000    -90.00000    100.00463\n`;
+  const wide = fine.replace('99.99537', '99.99500').replace('100.00463', '100.00500');
+  assert.deepEqual([tableDirectory('TESS', fine), tableDirectory('K2', fine), tableDirectory('TESS', wide), tableDirectory('K2', wide), tableDirectory('TESS', TABLE)], ['science/tess/pdcsap/fine', 'science/k2/pdcsap/fine', 'science/tess/pdcsap', 'science/k2/pdcsap', 'science/tess/pdcsap']);
+  const faint = { ...receipt('assumed', 'assumed'), rotation: { detected: true, periodDays: 0.73, amplitude: 0.00013 }, maps: [{ ...receipt('assumed', 'assumed').maps[0]!, periodDays: 0.73, residual: 0.00004, noise: 0.00002, darkestPercent: 100, brightestPercent: 100 }] };
+  const choice = brightnessChoice('hd-1', 'TESS', 95), map = reducedBrightness(choice, faint, fine, LIGHT); assert.deepEqual([map.darkestPercent, map.brightestPercent], [99.99537, 100.00463]);
+  const { files } = surfaceMapFiles(BRIGHTNESS_MAPS, { host: 'hd-1', maps: [choice] }, { id: 'hd-1', name: 'HD 1', colorHex: '#ffc08b' }, [map], HOST()), read = (path: string) => JSON.parse(files.get(`src/objects/hd-1/${path}`)!) as Record<string, any>;
+  assert.equal(files.get('src/objects/hd-1/source/science/tess/pdcsap/fine/hd-1-s0095.dat'), fine); assert.equal(read('source/manifest.json').generatedIntermediates[0].path, 'science/tess/pdcsap/fine/hd-1-s0095.dat');
+  const surfaces = read('source/preparation/raster.json').surfaces.filter((surface: { science: { consumer?: string } }) => surface.science.consumer === 'tess-starry');
+  assert.deepEqual(surfaces.map((surface: { source: string; science: { path: string; minimum: number; maximum: number } }) => [surface.source, surface.science.path, surface.science.minimum, surface.science.maximum]), [['science/tess/pdcsap/fine/hd-1-s0095.dat', 'science/tess/pdcsap/fine/hd-1-s0095.dat', 99.995, 100.005], ['science/tess/pdcsap/fine/hd-1-s0095.dat', 'science/tess/pdcsap/fine/hd-1-s0095.dat', 99.995, 100.005]]);
 });
 
 test('a page that already files a dataset or a group under the steps\' own id gives the maps\' steps another, which the bake accepts', () => {
