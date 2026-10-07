@@ -34,7 +34,7 @@ Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and pla
 
 The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes or as pictures placed on published 3D shapes, such as the Ring and Cassiopeia A, plus the Pleiades cluster. Beyond them: the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group, the Galactic Centre, galaxy clusters such as the Bullet Cluster and Abell 1689, and the nearby and observable universe.
 
-<img src=".github/assets/ring-nebula.webp" alt="The Ring Nebula turning, with Hubble's picture on its published 3D shape, rendered as DOM and CSS markup" width="49%"> <img src=".github/assets/milky-way.webp" alt="The Milky Way seen at an angle from outside, rendered as DOM and CSS markup" width="49%">
+<img src=".github/assets/ring-nebula.webp" alt="The Ring Nebula turning, with Webb's near-infrared picture on its published 3D shape, rendered as DOM and CSS markup" width="49%"> <img src=".github/assets/milky-way.webp" alt="The Milky Way seen at an angle from outside, rendered as DOM and CSS markup" width="49%">
 
 ## How It Works
 
