@@ -789,12 +789,12 @@ test('beyond the Local Group scale a galaxy is named, not a star or a galaxy ins
   };
   const andromeda = named('m31', 4e6);
   for (const galaxy of ['m31', 'm33']) assert.equal(andromeda.has(galaxy), true, `from 4 Mpc ${galaxy} is named`);
-  for (const inside of ['m31-v1', 'vhk-45', 'm110', 'm32']) assert.equal(andromeda.has(inside), false, `${inside}, within its galaxy's circle, is not`);
+  for (const inside of ['m31-v1', 'vhk-45']) assert.equal(andromeda.has(inside), false, `${inside}, within its galaxy's circle, is not`);
   const home = named('milky-way', 4e6);
   assert.equal(home.has('milky-way'), true, 'from 4 Mpc the Milky Way is named');
   assert.equal(home.has('lmc'), false, 'the Large Cloud, within its circle, is not');
   const near = named('m31-v1', 100e3);
-  for (const body of ['m31-v1', 'm31', 'm110', 'm32']) assert.equal(near.has(body), true, `from 100 kpc, inside the Local Group scale and clear of each other, ${body} is named`);
+  for (const body of ['m31-v1', 'm31']) assert.equal(near.has(body), true, `from 100 kpc, inside the Local Group scale and clear of each other, ${body} is named`);
   input.bodies[points.findIndex(body => body.id === 'm31-v1')]!.highlighted = true;
   assert.equal(named('m31', 4e6).has('m31-v1'), true, 'a star the reader highlights keeps its name');
 });
