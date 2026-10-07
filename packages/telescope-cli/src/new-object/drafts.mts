@@ -28,8 +28,10 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   iau: { names: 'all | NAME', draft: async (names, context) => (await import('./archives/iau.mts')).draftsFromIau(names, context) },
   // A nearby A, F or G star whose disc the CHARA Array measured (Boyajian et al. 2012) (chara.mts).
   chara: { names: 'HD', draft: async (names, { archive }) => (await import('./archives/chara.mts')).draftsFromChara(names, archive) },
-  // A bright star whose disc the Navy Precision Optical Interferometer measured (Baines et al. 2018, 2021) (npoi.mts).
+  // A bright star whose disc the Navy Precision Optical Interferometer measured (Baines et al. 2018, 2021, 2023, 2025) (npoi.mts).
   npoi: { names: 'HD', draft: async (names, { archive }) => (await import('./archives/npoi.mts')).draftsFromNpoi(names, archive) },
+  // One of the Gaia FGK benchmark stars, with a measured diameter and the paper's fundamental temperature and gravity (Soubiran et al. 2024) (benchmark.mts).
+  benchmark: { names: 'HD', draft: async (names, { archive }) => (await import('./archives/benchmark.mts')).draftsFromBenchmark(names, archive) },
   // A Cepheid Hubble found in another galaxy (Hoffmann et al. 2016), placed by its catalogue row: HOST (N4536) or HOST/ID (sh0es.mts).
   sh0es: { names: 'HOST[/ID]', draft: async (names, { archive }) => (await import('./archives/sh0es.mts')).draftsFromSh0es(names, archive) },
   // A Cepheid in the Andromeda Galaxy: Hubble's V1, or those Hubble measured for its distance (Li et al. 2021) (m31-cepheids.mts).
