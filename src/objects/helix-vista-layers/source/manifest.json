@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/helix-vista-layers/source/source.jpg",
+      "origin": "https://cdn.eso.org/images/original/eso1205a.tif",
+      "sourceUrl": "https://www.eso.org/public/images/eso1205a/",
+      "title": "Helix · eso1205a",
+      "credit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "displayCredit": "ESO",
+      "acquisition": "The publisher's original TIFF (6592 x 6592 px, source/original.tif) resampled onto the Hubble photograph's frame, 6145 x 6623 px, by its AVM sky tags refined on Gaia DR3 (326 stars, 0.13 arcsec rms). Restored by its generator; not tracked. A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1205a",
+            "role": "material",
+            "evidence": "src/objects/helix-vista-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "original",
+        "gaia-field-stars"
+      ],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vista",
+            "evidence": "https://www.eso.org/public/images/eso1205a/"
+          }
+        ]
+      },
+      "generator": "packages/bake/authoring/helix/register-eso.mts"
+    },
+    {
+      "id": "original",
+      "path": "src/objects/helix-vista-layers/source/original.tif",
+      "origin": "https://cdn.eso.org/images/original/eso1205a.tif",
+      "sourceUrl": "https://www.eso.org/public/images/eso1205a/",
+      "title": "Helix · eso1205a (original TIFF)",
+      "credit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
+      "displayCredit": "ESO",
+      "acquisition": "The publisher's original TIFF with its AVM sky tags, downloaded unchanged; not tracked.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "eso-eso1205a",
+            "role": "material",
+            "evidence": "https://www.eso.org/public/images/eso1205a/"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vista",
+            "evidence": "https://www.eso.org/public/images/eso1205a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaia-field-stars",
+      "path": "src/objects/helix-vista-layers/source/gaia-dr3-field.csv",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+source_id%2C+ra%2C+dec%2C+parallax%2C+parallax_error%2C+pmra%2C+pmdec%2C+phot_g_mean_mag+FROM+gaiadr3.gaia_source+WHERE+1%3DCONTAINS(POINT('ICRS'%2C+ra%2C+dec)%2C+CIRCLE('ICRS'%2C+337.424667%2C+-20.837025%2C+0.34))+AND+phot_g_mean_mag+IS+NOT+NULL+AND+0%3DCONTAINS(POINT('ICRS'%2C+ra%2C+dec)%2C+CIRCLE('ICRS'%2C+337.410625%2C+-20.837111%2C+0.0006))+ORDER+BY+source_id",
+      "title": "Gaia DR3 stars in the picture's field, gaia-dr3-field.csv",
+      "credit": "Gaia Collaboration, Vallenari et al. (2023), A&A 674, A1",
+      "acquisition": "Query result downloaded unchanged from the ESA Gaia archive; read by the image-layer bake to remove the field's stars from the photograph.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "material",
+            "evidence": "https://gea.esac.esa.int/tap-server/tap/sync"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/helix-vista-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/helix-vista-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/helix-vista-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

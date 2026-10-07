@@ -1,0 +1,947 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "datasets/optical.webp",
+      "bytes": 36294,
+      "sha256": "346e840f79da0cf6c67ff892457b32004091234dd905db66ac699d000ea7bec6"
+    },
+    {
+      "location": "prepared",
+      "filename": "image-layers.json",
+      "bytes": 295276,
+      "sha256": "a09f210a6764e6fc91b79cdb2265f23545e89a010cd3098f705f9066ef1d2be5"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/glow-disc-00.webp",
+      "bytes": 4784,
+      "sha256": "b8c423af493af79d12a4b864c51d29945ed978ad20af880a1fe12473256c0554"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/glow-disc-01.webp",
+      "bytes": 4568,
+      "sha256": "371932389a6f4ac66fce4fd51b90dfa7890234c7977c3d9a9049409afcc66178"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/glow-disc-02.webp",
+      "bytes": 3516,
+      "sha256": "482af4f29b71d3141636ebfe56b66ec72ebf5284071f507b1d77a68deb52a24c"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/glow-disc-03.webp",
+      "bytes": 978,
+      "sha256": "f6d14cbb98b7510b8f85531f66431ddb402fdb8e91510f24286f0a01359b88a2"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/glow-ring-00.webp",
+      "bytes": 8900,
+      "sha256": "b52fb6eff2e7501b5670f6888d46ff83e7743278f58d7625d00a69075537f8ea"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/glow-ring-01.webp",
+      "bytes": 8230,
+      "sha256": "d5b21ca6d582a3e23667d68e03e2470a96053f9b816ec9f6335940b3157d1350"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/glow-ring-02.webp",
+      "bytes": 6436,
+      "sha256": "41aedcc92d15c0573bcc75f02a3a5df2873451ac44b3f89cf832559330123b5c"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/glow-ring-03.webp",
+      "bytes": 2308,
+      "sha256": "7d2ad0491590cf425f397a83e0ca9db60fcdbd81e5e549d9838991f65f54a9b2"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/plane-disc.webp",
+      "bytes": 821912,
+      "sha256": "1c94d93411cc0acfdcd7a5ddf8f29d867fccdd50ccdbbd1d7e36cdaaa8ff8e43"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/plane-ring.webp",
+      "bytes": 5407130,
+      "sha256": "e0541e94c4691fccdd938a48181945847ac069bbcdbb1f12e498a4b528c86e16"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-19.webp",
+      "bytes": 376,
+      "sha256": "213c0259128817c2a7f127aab9b2b09c1a6786d284692724cb160290fbb74d49"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-20.webp",
+      "bytes": 716,
+      "sha256": "4fd6d725309621aba2842c8a1550f9e53d81f5ccc29fad4a4d8f0abd7afb4a21"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-21.webp",
+      "bytes": 910,
+      "sha256": "6e73ace1b1eabbd3e9571c96fd6a2c05f6db880f5d82fecc217f16c2ead62429"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-22.webp",
+      "bytes": 1164,
+      "sha256": "75f4fda202498cbd2e8b8ea5859facc8d5ab5456e7bce1b04cc6bb0f618066d4"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-23.webp",
+      "bytes": 1102,
+      "sha256": "6d395fd7aa618fd7390271fc6ee4b05ea1a6c2ca9e12b207cbac4a1aae3f5d43"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-24.webp",
+      "bytes": 752,
+      "sha256": "a5a221c13f80a7f7bd6c956c4d6a16ccf191d3cde3fbf0260f749c3d082a23a9"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-25.webp",
+      "bytes": 572,
+      "sha256": "aa92f4e0ac4cf3dc62c8643895e13753c785583e16631d31446689ab8ce9416e"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-26.webp",
+      "bytes": 746,
+      "sha256": "9d2d919d23651c8fc1e527e91179549f24ec1e5d52847fcbf03a066a29b30d0f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-27.webp",
+      "bytes": 942,
+      "sha256": "9796b58c749fc0f95f02bb33a91781e5915c36895840994a09d929ca7f12bae5"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-28.webp",
+      "bytes": 1120,
+      "sha256": "a2c44dc893a32aeb79db821e23531b26d9ff67581a66a851108d197f49a2f224"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-29.webp",
+      "bytes": 1036,
+      "sha256": "f3e01e185c1f3629ac8bbf49dcf91c4375f3c84408b1a5cfde5e30d165bd2a6a"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-30.webp",
+      "bytes": 918,
+      "sha256": "4140400362c8b60e0883f9b8e5278f29f98f058014f9c1d9be99e946588ac11e"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-31.webp",
+      "bytes": 878,
+      "sha256": "ba495d2462c4c6b9b8e486707b5294475e5d749a30712f42b7dd052101b8f4ac"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-32.webp",
+      "bytes": 768,
+      "sha256": "2d43fa75c4f86dcda31b6bdc8f3bbffea65d99ef5092e2b092d85f40f13e8b5b"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-33.webp",
+      "bytes": 634,
+      "sha256": "5041db37c4124d5810d82062504aeaff9c03f8c59f8c55e226a6890733a78d7a"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-34.webp",
+      "bytes": 676,
+      "sha256": "b8b455e1ea9e421bc9b191ad304de0a837b24d776c82e1779811103b4a7670e5"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-35.webp",
+      "bytes": 504,
+      "sha256": "cc16e38a81791c08a29c1770515611bcec9369c6f8b0f0c985a6723d9f5907d1"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-36.webp",
+      "bytes": 558,
+      "sha256": "3f33f6ad9e9cb24f51f9e7e96938a4c9139af0f72478d5706efff17b84209eb9"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-37.webp",
+      "bytes": 476,
+      "sha256": "b3ed0721276fe3f2809e38e9a39b60d5cff37a624a7ff16ccf41e13d86ed0d63"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-38.webp",
+      "bytes": 896,
+      "sha256": "9e846a17396b7d4267ccefaa94d630cbef61cb14c9956f5541b882d4ea3fd7e9"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-39.webp",
+      "bytes": 826,
+      "sha256": "b73f4c47a3d075547f205c2cc06b8f5c5d1f6a12a4fce2619140c1c81c9af26a"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-40.webp",
+      "bytes": 520,
+      "sha256": "d360d5e2e16ee381becdfc07a8339f661425b0daa9ec2086e3578db4b98e081f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-41.webp",
+      "bytes": 940,
+      "sha256": "cfa6cb6138bd451ba6c3dd4d2aec0170edb4974d25f1c6d918fcf724c57912b0"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-42.webp",
+      "bytes": 1100,
+      "sha256": "1d6e47868ac2c7f0ab4e66c56713cb4ad59b539f97e7f886d1f7728cdc56c2fe"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-43.webp",
+      "bytes": 840,
+      "sha256": "191c2442b4515c6e1aaf1d4b42995200b9fb172013f633f7ea486c141aa75fbe"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-disc-44.webp",
+      "bytes": 366,
+      "sha256": "42ae1512f84e049dcb2823ac31480240208d4a5c9d056ace718b06af6d4fa032"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-02.webp",
+      "bytes": 352,
+      "sha256": "e99db529e6b7c748859c787a701e6eaa57a78fecab6c35d6cfcc3dfb7b08a2fd"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-03.webp",
+      "bytes": 352,
+      "sha256": "9deef86a435894826541f99f245ae74fc9ded8c975e14aff72fa5214c18a4393"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-05.webp",
+      "bytes": 490,
+      "sha256": "aa6cdd0b8a12b2d1991a7237e8eaead706578db503c08ae154fe2f5f2d84fa06"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-06.webp",
+      "bytes": 486,
+      "sha256": "695a0346a55e045e779ace20cb1a8376d1bd5a7269163480c14f5a1183a9ec01"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-07.webp",
+      "bytes": 200,
+      "sha256": "6c70024f5be6e2836cb1e00a60209151db911976972bfefd37c524ffbd1d0a6a"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-10.webp",
+      "bytes": 324,
+      "sha256": "c3bf03512a0f0e2dbd232012853b4d349616b34778814021e5a4baa2cea3e4c7"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-11.webp",
+      "bytes": 436,
+      "sha256": "1816fb8c38744e5f4f7168d608ac644306eb090fe4c32eb631fedc17f3e4ee45"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-12.webp",
+      "bytes": 372,
+      "sha256": "fd20609793994a2b18cf0de885e75be729f4cb407078f8dd3eb50238ed41f1c8"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-13.webp",
+      "bytes": 474,
+      "sha256": "f2f11a1a8830c38684ca866642391636c5e9500fcff28d2b50f059f590600b96"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-14.webp",
+      "bytes": 410,
+      "sha256": "a14356ec74ffe23b24197005c4b6e60761b1316e069230b599532b13d392ec26"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-16.webp",
+      "bytes": 760,
+      "sha256": "0612b03885ddb6e5ed010a76eef27dea84ffe9d360f4bd2c3d57b719bfec48d5"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-17.webp",
+      "bytes": 890,
+      "sha256": "c1a02459c188413189d7ade57046b8aa83b4dff0b85eadf465e8004eda009068"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-18.webp",
+      "bytes": 986,
+      "sha256": "f1d62a2d7ef99f0d1ba814c0c77819aaeaf47110047b962e960d5006f557960d"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-19.webp",
+      "bytes": 898,
+      "sha256": "d9e8b6f6fd5e0df24071c391a4cf03080a2e75c143a4d99f4d92c01217d2d929"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-20.webp",
+      "bytes": 850,
+      "sha256": "71cead52aab18883bbc041c7927140cbc4ab85f6a91685d1c6ca9a75cc0ec153"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-21.webp",
+      "bytes": 940,
+      "sha256": "3c885bc285c43f8e721b0fd45f3e8ea6ba73e008535c900252a1535d3a590f86"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-22.webp",
+      "bytes": 932,
+      "sha256": "187eb6c27e11e9344122dac14a01ccc7ce5fe0bee0e9280bf71f8f8995189eac"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-23.webp",
+      "bytes": 860,
+      "sha256": "9563dacd3ad686a2111a2e91119eff81e6b0f7102ef8dcd92468a88899b4b5d1"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-24.webp",
+      "bytes": 834,
+      "sha256": "f04bfb580d7cf5a5c98b9ac67d292f027de6a395825c2521a75a6fe5223a3eda"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-25.webp",
+      "bytes": 610,
+      "sha256": "5657e1cb114d6a0f9968a529091e9435bed0baa4b930f5adc2415ac91e7ae175"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-26.webp",
+      "bytes": 728,
+      "sha256": "6cae0d1ec65222d1b67daecb15daedb7d3836a34bbaed3e94eeeacff9b326a9f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-27.webp",
+      "bytes": 1112,
+      "sha256": "681bf30bd8e37ed96b3194c34b05fc46df9eb8b67c83a81f737297084861f16f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-28.webp",
+      "bytes": 1346,
+      "sha256": "f8f63340d682a948583fd508aa1eaa30c358dfa22ff40965bbc65b4412fe909d"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-29.webp",
+      "bytes": 1288,
+      "sha256": "d2ef693ca18e9d743f7a0e617b9d5e6dc0bb3afeee9f342c5ce6992209b9d254"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-30.webp",
+      "bytes": 1076,
+      "sha256": "f64ada3d3a4e3dd4c9e422a792bef432586d9a634c68c06e2c6d7a6ccf3b4542"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-31.webp",
+      "bytes": 1126,
+      "sha256": "c6940dc3686c733af5f0318cc6b4232f161805c884275afe43cabb5733fe9798"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-32.webp",
+      "bytes": 1038,
+      "sha256": "ee3799fcec2990249505dd3248a43aefb0d05ffcd3c16cb4320d6588fde8ac97"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-33.webp",
+      "bytes": 636,
+      "sha256": "6dd12e9ecebeb0e0e92fda0ac72d14f4b7201db01bdee18fc380251acb3c472c"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-34.webp",
+      "bytes": 782,
+      "sha256": "454b2c72b9ab5031ee4601073bfbd577763963e00780793844000d36ca57fb9a"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-35.webp",
+      "bytes": 698,
+      "sha256": "2a09dbc7ef049e6034ab188273565cd7eb773bba341dbce66a3e5b838dcaaf96"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-36.webp",
+      "bytes": 714,
+      "sha256": "074ec3f0ffff739962a19a10ac1f0986ace8a3c5f73c0009f449efb0f36219df"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-37.webp",
+      "bytes": 698,
+      "sha256": "481f6d2ae5761492466cdc58ba07030962701ff279585d519a4d1bd8758393ee"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-38.webp",
+      "bytes": 934,
+      "sha256": "346e348f100c185a2ec7ad64a1c8fb628df1cb8852efa806981987aebc472677"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-39.webp",
+      "bytes": 1148,
+      "sha256": "35361c8f7ef8bed6f3b179f2f817d1abed3b0b7eab6a85ccff0b9979af4bc193"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-40.webp",
+      "bytes": 1112,
+      "sha256": "e14e5f569ea2907eee67d7ef20a0109ba070f1b60dccf3783bb0388278f11ef7"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-41.webp",
+      "bytes": 810,
+      "sha256": "ff5f9fc8988627ff7d75396280c1933b19ca916953e8c3f80e2e9c07de4f76c5"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-42.webp",
+      "bytes": 754,
+      "sha256": "5c153acf80d72103fb680c1327d8b174746eb6639795d104d490f53b1856b721"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-43.webp",
+      "bytes": 884,
+      "sha256": "953d0b1ae550a73345548457c1e337027f06910b3f9b251a78ce6fe2887129f8"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-44.webp",
+      "bytes": 450,
+      "sha256": "88302a9964dc4e5b1e8315aeae70bb5963e9627ecca6fafde1981f21a908427d"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-45.webp",
+      "bytes": 468,
+      "sha256": "dacb25f7e727771bb1bd90278aaf729244b57aaa8d9a74e287d3925cd654c750"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-46.webp",
+      "bytes": 640,
+      "sha256": "385f5e16e70bcbd9f646bcec7a96c0d1e096fe139040eb7268e4ef0718742ccd"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-47.webp",
+      "bytes": 1170,
+      "sha256": "c01a424aaf766607400b5194a7ab909bbd0a919a267a11e29fe93c63f1c40039"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-48.webp",
+      "bytes": 1322,
+      "sha256": "add8b0cdfaeb3691918dc91ced8d0f4bc3cd6e7a918097d6fc2278a75a3fadb6"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-49.webp",
+      "bytes": 1418,
+      "sha256": "0eaf348937971a7711a757a97a7199aef2a85804499e3f2f3422042f876a548f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-50.webp",
+      "bytes": 1150,
+      "sha256": "32ee5c94ef8a330897301b896460f5878b1c446fa8b61415cca03c34d5d413fe"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-51.webp",
+      "bytes": 666,
+      "sha256": "b80efe0152b94449e85b3638caa1db3e38d64e02f701c6dbbd5ea76cfc7df8e2"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-52.webp",
+      "bytes": 484,
+      "sha256": "b8af2b059268eeb0e368dc286135cb4cc4f602e9d4bd84e2d8ab6328b7a3e128"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-53.webp",
+      "bytes": 524,
+      "sha256": "2fa5dbade170ad4aa910bb11de336702a842b472b4241915e4cf75944903d5d3"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-54.webp",
+      "bytes": 626,
+      "sha256": "514aeec1030f38777f6223eac0677e35ff8f316a885fd321c94be65fc57947e9"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-55.webp",
+      "bytes": 514,
+      "sha256": "f81bb8e90b18bfa7d1abfb2808de272228661da7386d76cdce5425711ad7fa24"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-x-ring-56.webp",
+      "bytes": 400,
+      "sha256": "feb6c527df69460dbd080457d024d2a079fdebe679f4fc36a572a3e25b13b037"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-17.webp",
+      "bytes": 314,
+      "sha256": "aae0165733c4fadbb61b0a369624eead608d0871e0ee2bdc9f5e2a77c7d86292"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-18.webp",
+      "bytes": 468,
+      "sha256": "21dc66b96b47d5bf8b1025c03f7fd4bcfba7365de371153efcb6a6d29d64f418"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-19.webp",
+      "bytes": 636,
+      "sha256": "426527aeaafe48e144ebf5d7627312b578e38befddbf7510f9cdd82d793b6612"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-20.webp",
+      "bytes": 758,
+      "sha256": "f0175f6579d87a7f8fe378168e61343deb03e7b65b9ee6298669012b14aa3abc"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-21.webp",
+      "bytes": 1062,
+      "sha256": "e46935dbfeb9ea93c84452969f8b45c7538ff1df357a4d9f873ed575fccdd265"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-22.webp",
+      "bytes": 1228,
+      "sha256": "cfc3f29e56f7b3462f104a3792d25ddce8f3d11f3288d67a1e2695a9b0097f6f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-23.webp",
+      "bytes": 1154,
+      "sha256": "cf7d71680bc60e5fac14060973fd728bbb545a640b1a81973e1d60c83bd32466"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-24.webp",
+      "bytes": 998,
+      "sha256": "f75a029786b21ac1079fff4e3c7fb248e00dd57eae5d4985f3e2f754de95cd6f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-25.webp",
+      "bytes": 786,
+      "sha256": "0826b3938b76bd61ecfbfbd89d56bb282f575648dabbc47ab5d3f201718d1078"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-26.webp",
+      "bytes": 672,
+      "sha256": "883398a9b1b3b9d67bef296f1368110bd75014b1bdd762862eebeb8520104eca"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-27.webp",
+      "bytes": 780,
+      "sha256": "a901d025e3290dd050867e448b74f5f34cb2455784626a93d2e6deee7bf9dc3b"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-28.webp",
+      "bytes": 738,
+      "sha256": "d683bf30e0ed6f3d2a64c09b2c194b773e91e592807c18514215645f7f086c18"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-29.webp",
+      "bytes": 568,
+      "sha256": "c60baaa134f21536d7f39ff15ac734f29848907f40da3f04a7e55bf1a4493681"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-30.webp",
+      "bytes": 620,
+      "sha256": "dbf79d42acb3caaf72359594472b1aac24d1b2ca58e4dfe9e58365a60a22a879"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-31.webp",
+      "bytes": 734,
+      "sha256": "68bdb8bc94d4c0b7fd216c0d0500c152ef062ef400aa43a7791b5f68927e8d2f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-32.webp",
+      "bytes": 828,
+      "sha256": "636ff4fcade87bacc910ca22b07322a92b5111e3703bca95b8e06f1f0c23bd97"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-33.webp",
+      "bytes": 840,
+      "sha256": "0c4a8fa30ff6e0b74913ba8f32b3085757e20e986341619a2db1443cf3db3285"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-34.webp",
+      "bytes": 868,
+      "sha256": "82d0f7eccaf4f4a1a1e86e9cfaee7f77af6ff506f2926e3843be88e9bda4206a"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-35.webp",
+      "bytes": 922,
+      "sha256": "32705e4e61437b3a4f20f4e1c440bcf1c9d6a06cd6857b735491bbe0ccf4a717"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-36.webp",
+      "bytes": 702,
+      "sha256": "70b18067c6ff86b17e1d7ef3d9c2515a5cf3c394a5fda02ca9a0194e6ac75009"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-37.webp",
+      "bytes": 354,
+      "sha256": "43f8007314958318d258404c584e18d20381fdbafe5e9c9dcdea30032ef4282d"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-39.webp",
+      "bytes": 432,
+      "sha256": "7ecb86dbe956646129503dd551945bdde40c821e3533fccc32c5ff25d0c70eca"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-40.webp",
+      "bytes": 622,
+      "sha256": "fb2f54e20febeb473248a6b2cc4dfa5bf1a359617ad3f5b65a81997afcd813e6"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-41.webp",
+      "bytes": 976,
+      "sha256": "1cb2597a8d550ffb3f19b236df7cd52072294918f0e69b8818ce9b509f136ccd"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-42.webp",
+      "bytes": 940,
+      "sha256": "ed8f9d9b82a0b601d1d7013f0a583e5bdef8830bb4ca28590a7bcef9c7753328"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-43.webp",
+      "bytes": 686,
+      "sha256": "3dfc8ef995c65418b5a8fcd62e1d30a6d08649aa79ee3fa983f3e4f9f6a23232"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-44.webp",
+      "bytes": 620,
+      "sha256": "5e8a4027a8f04e569625819b80e21bbb8ffbeca95e5a5c7cdcb457ad29dae260"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-disc-45.webp",
+      "bytes": 332,
+      "sha256": "184844fbfcc7a62baae801b7e2b89e50d64fdeb94436e84ba9846eb543791c9c"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-15.webp",
+      "bytes": 448,
+      "sha256": "5a08d8cdb334cd3e58c098499d11de9377934acb304cfb048dc99c72b455f297"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-16.webp",
+      "bytes": 790,
+      "sha256": "b8fb456ada5beaa654800c23d58bdd915dd7a223d9a6e1d3ee6100b4eec637f4"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-17.webp",
+      "bytes": 586,
+      "sha256": "d82aa889ccf2efc30fee0ad05fdaff63c2bf88b1dca65bc58ec4ae0aed5cf832"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-18.webp",
+      "bytes": 642,
+      "sha256": "f8ab4f232fcfb7e999e2946d784722201649bea82a76f9a1d2783952922e155e"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-19.webp",
+      "bytes": 928,
+      "sha256": "053d39034a2909954a39091c1d228c4c27e123451a59f5428dec096134d1d4e0"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-20.webp",
+      "bytes": 1646,
+      "sha256": "176730ac2cd58cad2e75c8c927c2e509b0f130716511dbf2bf871e05884c3d21"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-21.webp",
+      "bytes": 2060,
+      "sha256": "66696f4f256965dfa10fa5685ac918c8b751874ed57cd865d0d8ba915c3cf6a8"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-22.webp",
+      "bytes": 2048,
+      "sha256": "500d2ac47f5ebd54cbc9420767a35f84483500249f6ce2dbaf5b420d371669a9"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-23.webp",
+      "bytes": 1574,
+      "sha256": "ea7ad6f0ac6db25b449563675e466c32bc3834df89afa2485347f605f9b6f8c6"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-24.webp",
+      "bytes": 1284,
+      "sha256": "014ceed72a900a8ab2b1ecd79fb73f2a79a1bf7c72fad672760b8d22df8e06c1"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-25.webp",
+      "bytes": 1084,
+      "sha256": "7dd8084a32b97eca0374f2496410b2099cf1c9817bda3135938dd764788d47cb"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-26.webp",
+      "bytes": 1168,
+      "sha256": "6dfd0089ec247409bc71901c175850995fbf67adf36483251f7bb2a35b97cbea"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-27.webp",
+      "bytes": 1300,
+      "sha256": "308b97da5e879c53bd83670f7baf62b294c42937741716f8f9f91299670a843a"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-28.webp",
+      "bytes": 1482,
+      "sha256": "fe33592a388f82a1f54b2895a1c8d40c426a21c83b24a3d08bb17a0ba115a96f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-29.webp",
+      "bytes": 1236,
+      "sha256": "a1e1a6bb8d9f023049ee7c0efbd99eb3f065d91cfc3452f8e20b3db625b27d79"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-30.webp",
+      "bytes": 974,
+      "sha256": "796a39f9847833934912a5e54338694cf54cdc7c30d4409e525f82038df82354"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-31.webp",
+      "bytes": 1182,
+      "sha256": "da7f053e3df9e0804ad73427738ea37da57c9321b286c3357d3d358ad73b65bf"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-32.webp",
+      "bytes": 1442,
+      "sha256": "1109072b750e008c2cf65611668b7e740347cf05f486766a7d3fb1aa8167512e"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-33.webp",
+      "bytes": 990,
+      "sha256": "ac7f336f509a246a216006ed7016c9630d8dd34dd1de0dacbe55b6a6ee2555d4"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-34.webp",
+      "bytes": 884,
+      "sha256": "4313c9e7d6ec070bced7284c3d782011935d656cc2cb802fa6963f3ee0d545dc"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-35.webp",
+      "bytes": 694,
+      "sha256": "e60b9e0be1639d1807b838956dcc4de06d417cfc9a9bc5069f987642663b3a4b"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-36.webp",
+      "bytes": 550,
+      "sha256": "c0bf691a27edfa4c3d754fd0b27c998a1ec932903f057255206dd76651dc3dbd"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-37.webp",
+      "bytes": 360,
+      "sha256": "eee73f2f37fba93d8159a5395cda1d0250dd6c0b265db6529e0c06b7dc06495a"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-38.webp",
+      "bytes": 356,
+      "sha256": "bc92d9487d44ad391b1b80c9d0b5de88a54322ea52ffb5b0e354363d33f9b6ae"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-39.webp",
+      "bytes": 630,
+      "sha256": "f93bd1773fae2633713f4d4cf70481014e6b4d2155dd02dc7a6753a2eae07808"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-40.webp",
+      "bytes": 740,
+      "sha256": "b074176a3cc4d9a1d7830b1af9a4e25f7aeedb8cb5c3bb97ce55c2331bd524f3"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-41.webp",
+      "bytes": 1178,
+      "sha256": "09f73a7834f6418823bdb1299ff0a9186a65bc517af7541419a7ad68c99ad546"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-42.webp",
+      "bytes": 1108,
+      "sha256": "c2d654151d3a4e21ae5a0f5ec1bd37447918d779080cedc378c140ceb94b7b50"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-43.webp",
+      "bytes": 854,
+      "sha256": "c98ae92ccfda69a7cb13d27971eceec9d9fa77dedca323a84e6b9fcf32b6aff4"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-44.webp",
+      "bytes": 836,
+      "sha256": "0133b8b453b6e29d9dc9f537055e3c14888c4d0425fc5b83309becb9f5b8be68"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-45.webp",
+      "bytes": 794,
+      "sha256": "3df15d5176be444440d10234ae923f0d58d436eac0797494d655611a80a9f421"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-46.webp",
+      "bytes": 794,
+      "sha256": "76a5b55d3e024ce71528423434927f33a6b8535352a092a5c08318140e8bf813"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-47.webp",
+      "bytes": 828,
+      "sha256": "fabdc8eb51356cd083c373ae3d4c6b2a4e94377a900ec34542d7dbca008b5a1f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-48.webp",
+      "bytes": 1026,
+      "sha256": "3cd2c0bc458771ccd0af8923fb829e4c3cd8b77daadb104baa5e134f78ef4475"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-49.webp",
+      "bytes": 992,
+      "sha256": "e137a615f781578878b1cceb05af5e6712fd28e7d313f51cc29e48c8394960e0"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-50.webp",
+      "bytes": 886,
+      "sha256": "18d17deb7e04d65cb26cde838602c6f26687c637e757b9620ba2042382900f3f"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-51.webp",
+      "bytes": 534,
+      "sha256": "7336ffc6a9cf1854b830eab24aacd8a1d60715f111b8b6358f30be0ac94529c0"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-52.webp",
+      "bytes": 226,
+      "sha256": "84c40da06b35375c7940f476cd0cd7d708e296d97f36268b75c5c9e14a4927de"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-y-ring-53.webp",
+      "bytes": 208,
+      "sha256": "1555cb0ee40574b340c9e8297281da66f9d13046770ca0ca462a91fe11f450bd"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 1533,
+      "sha256": "e14fce66cf2ff7f84584bf01c400019cb1612d9da6869f141f1efeffdd5c03e1"
+    }
+  ]
+}

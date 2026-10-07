@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "helix-wfi-layers",
+  "name": "Helix Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/helix-wfi-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/helix-wfi-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/helix-wfi-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO WFI · optical detail",
+      "title": "Helix in visible light",
+      "description": "ESO's photograph of the Helix Nebula from the Wide Field Imager on the MPG/ESO 2.2 m telescope, in B, V and R light, laid on the same two tilted rings as the Hubble photograph: an inner disc and the outer ring around it, each about 100 arcsec deep (O'Dell, McCullough & Meixner 2004).",
+      "summary": "ESO's optical photograph on the nebula's two published rings, the same frame as the Hubble photograph's.",
+      "detail": "7059 × 6535 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "B, V and R"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "7059 × 6535"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "27.26 × 29.38 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/helix-wfi-layers/source/source.jpg",
+        "url": "https://cdn.eso.org/images/large/eso0907a.jpg"
+      }
+    }
+  ]
+}

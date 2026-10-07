@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Helix · helix",
+  "publisher": "ESO",
+  "sourceId": "helix",
+  "sourcePage": "https://www.eso.org/public/images/helix/",
+  "download": "https://cdn.eso.org/images/original/helix.tif",
+  "credit": "ESO",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      6850,
+      4759
+    ],
+    "bands": [
+      "ESO 3.6 m"
+    ],
+    "fieldOfViewDeg": [
+      0.8137,
+      0.5653
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published original TIFF",
+    "dimensions": [
+      6850,
+      4759
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 0,
+    "reference": "The picture lies on two tilted planes through the central star (recipe geometry.rings; https://arxiv.org/abs/astro-ph/0407556), as the Hubble dataset's; the recipe's own inclination is not used."
+  },
+  "registration": {
+    "method": "The file's embedded AVM sky tags (gnomonic, 0.4277 arcsec per pixel), refined on Gaia DR3: 389 stars of the field, centred in the photograph, fit a cubic from where the tags put them to where they show. The tags miss them by 2.76 arcsec rms, the fit by 0.51. The photograph is then resampled onto the Hubble photograph's frame (its centre, field and north), so the bake places it exactly as the rings bank's picture (packages/bake/authoring/helix/register-eso.mts).",
+    "pixelArcsec": 0.26617,
+    "northClockwiseDeg": -0.3
+  },
+  "displayModel": "The picture's light lies on two tilted planes through the central star: an inner disc of radius 250 arcsec tilted 23 degrees and the plane of the outer ring, radius 371 arcsec, tilted 53 degrees about another axis. Inside the disc's radius a sight line's light is on the disc, beyond the ring's radius on the ring's plane; between the two radii the planes share it in proportion. Which plane holds a patch of light there is not measured. Each structure is about 100 arcsec deep along the sight line: the smooth part of its light is a glow of that depth about its plane, and the rest, with every detail, lies on the plane.",
+  "coverage": "The Hubble photograph's frame inside a circle of 770 arcsec about the central star, fading out over its last 7%. The rings frame is the middle 27.3 by 29.4 arcmin of the photograph's 48.8 by 33.9. The stars Gaia lists in the field are removed before the bake where they show, all but the central star.",
+  "acquisition": {
+    "url": "https://cdn.eso.org/images/original/helix.tif",
+    "dimensions": [
+      6850,
+      4759
+    ],
+    "operation": "Download the publisher's original TIFF; resample it onto the Hubble photograph's 6145 x 6623 px frame through its sky tags and the Gaia fit, bilinear (register-eso.mts)."
+  }
+}
