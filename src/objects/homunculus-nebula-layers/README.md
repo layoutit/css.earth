@@ -23,6 +23,7 @@ ESA/Hubble's picture of the Homunculus, the two-lobed cloud of dust around the s
 - **Drawing:** each side of each lobe is a mesh of flat patches ([shape-patches.ts](../../../packages/bake/src/image-layers/shape-patches.ts)); where the surface folds, the two sides that meet there are led onto one another. The stack paints the plane, then the sides from the farthest to the nearest. Each holds what the photograph has left once those painted before it show through it, and none shows more than the photograph: from the Sun they are the photograph.
 - **Size:** 27.0 × 25.6 arcsec, 0.31 pc wide at 2,350 pc; the lobes reach 10.6″ from the star along their pole.
 - **Rim:** the picture fades out between 10.3″ and 11.4″ from the star on the sky, the largest circle the frame holds.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/homunculus-nebula-layers backing` again.
 
 ## Evidence
 
@@ -38,6 +39,7 @@ The bake's tests ([surface.test.ts](../../../packages/bake/src/image-layers/surf
 
 ## Known problems
 
+- The far picture holds only the flat slices' light: the walls' patches are left out, as they were from the billboard it replaced, so from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - Only the side of each lobe that faces the Sun was photographed. Every other side repeats that picture: it is not what those sides look like.
 - The model's unit, turn and star are measured on this picture, not published. A model made from 2012 spectra is laid on a picture made from earlier exposures; the nebula expands.
 - The model's outline and the picture's lobes share 86.8% of their pixels. Where the outline stands outside a lobe, the surface there holds dark sky.

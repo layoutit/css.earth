@@ -21,6 +21,7 @@ ESA/Webb's infrared picture of the planetary nebula NGC 2392, on the walls its s
 - **Drawing:** from the front, 56 terraces parallel to the picture; from the side, 56 and 56 curtains through its columns and rows. The face is 1,500 px of the picture's 3,505.
 - **Size:** 1.77 × 1.77 arcmin, 0.93 pc wide at 1,795 pc; the outer shell is 0.40 pc across.
 - **Rim:** the picture fades out between 46.8″ and 52.0″ from the star, the largest circle the frame holds.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/ngc-2392-webb-layers backing` again.
 
 ## Evidence
 
@@ -36,6 +37,7 @@ The terraces of this bank, composited along the Sun's sight line, differ from a 
 
 ## Known problems
 
+- The far picture holds only the flat slices' light: the walls' patches are left out, as they were from the billboard it replaced, so from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - No speed is measured in this picture's light. Dust and molecular hydrogen are drawn at the depths of the ionised gas where they lie on the sky.
 - The measured structures' places are from Hubble pictures of 2000 and 2007. Even at the inner shell's 120 km/s, a structure moves under 0.3″ across the sky in the twenty years since, inside the 1″ a measurement reaches.
 - The star's eight diffraction spikes are the telescope's, not the nebula's. Past 1.4″ they lie on the walls they cross.

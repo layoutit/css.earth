@@ -23,6 +23,7 @@ ESA/Webb's NIRCam picture of the supernova remnant Cassiopeia A, drawn as the sh
 - **Drawing:** the surfaces are meshes of flat patches, each a rectangle of the picture on a plane through the surface there ([shape-patches.ts](../../../packages/bake/src/image-layers/shape-patches.ts)). Neighbouring patches meet along their edges and share the light near them. The sphere's patches are drawn at half the picture's resolution: they hold blurred light alone. The stack paints the plane, the sphere's far half, its near half, then the ejecta behind the plane and those in front, and each surface carries the light it hides of those under it, so from the Sun they are the photograph. The mesh is the same from every side, so the bank has one stack; the other image-layer banks of nebulae draw their walls as slices, which show a fine feature as copies side by side when turned.
 - **Size:** the remnant is drawn 1,996 px across, in the forward shock's outline: 153″, 5.04 pc at 3,400 pc.
 - **Rim:** the picture fades out between 147″ and 153″, so no hard edge shows; 153″ is also the largest circle the frame holds about the expansion centre.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/cassiopeia-a-layers backing` again.
 
 ## Evidence
 
@@ -38,6 +39,7 @@ The bake's tests ([shape-speed.test.ts](../../../packages/bake/src/image-layers/
 
 ## Known problems
 
+- The far picture holds only the flat slices' light, and this bank's light is almost all on its walls, which are left out, as they were from the billboard it replaced: from afar the plane draws almost nothing. Edge-on it vanishes.
 - The smooth light's depth is not measured. A sphere is the remnant's published outline, not where each wisp is: the smoke lies between the reverse shock and the forward shock, and the glow of the Bright Ring belongs with its ejecta. Its structure is all on the far half; the near half holds a featureless glow.
 - The sphere's centre along the sight line is not measured; it is drawn about the picture's plane.
 - Seen from the side, the band where the two halves meet is dim and stretched: it is the picture's own faint edge.

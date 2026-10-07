@@ -87,7 +87,7 @@ export function imageLayerQuadLeaves(id: string, leaves: readonly Record<string,
 /** An image-layer galaxy seen from the Sun: its source-facing (z) slices projected along the line of sight onto a plane
  * through the frame origin, each resized to the size it covers there, then stacked far to near with the straight-alpha
  * "over" the page applies to them, in sRGB as the page does. */
-async function imageLayerBillboard(id: string, descriptor: Record<string, unknown>, objects: string) {
+export async function imageLayerBillboard(id: string, descriptor: Record<string, unknown>, objects: string) {
   const data = await preparedPayload(id, descriptor, objects);
   const frame = requireRecord(data.frame, `${id} frame`) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1];
   if (JSON.stringify(frame) !== JSON.stringify(requireRecord(descriptor.properties).frame)) throw new TypeError(`${id}: image-layer frame differs from the descriptor frame.`);
@@ -150,8 +150,16 @@ export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot
     let descriptor: Record<string, unknown>;
     try { descriptor = requireRecord(JSON.parse(await readFile(resolve(objects, id, 'object.json'), 'utf8'))); }
     catch (error) { if (isRecord(error) && error.code === 'ENOENT') continue; throw error; }
-    if (descriptor.type === 'image-layer-bank') { banks.push(await imageLayerBillboard(id, descriptor, objects)); continue; }
-    if (descriptor.type !== 'volume-dataset-bank') continue;
+    if (descriptor.type !== 'image-layer-bank' && descriptor.type !== 'volume-dataset-bank') continue;
+    // A bank that publishes a backing (packages/bake/cli/prepare-galaxy-backing.mts) is drawn from afar on that fixed
+    // plane, as the Milky Way is, and gets no camera-facing billboard: one image turned to face the camera spun as the
+    // camera orbited the LMC and the nebulae (2026-10-07).
+    const backing = (await readInventory(id, resolve(objects, id)))?.assets.some(asset => asset.location === 'prepared' && asset.filename === 'backing.json') === true;
+    if (descriptor.type === 'image-layer-bank') {
+      if (backing) { await preparedPayload(id, descriptor, objects); banks.push({ id, contextVisibility: 'galactic', attached: false, backing: true }); }
+      else banks.push(await imageLayerBillboard(id, descriptor, objects));
+      continue;
+    }
     // The inventory lists the bank's index; the bank is read whole from its files (@cssearth/objects volume-dataset-bank-files.ts).
     await preparedPayload(id, descriptor, objects);
     const data = requireRecord(await readVolumeDatasetBank(resolve(objects, id, 'prepared')) as unknown, `${id} datasets`);
@@ -178,10 +186,6 @@ export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot
     };
     // A cloud that accompanies a body stays dark until that body's dataset asks for it.
     const framingRadiusUnits = data.framingRadiusUnits;
-    // A bank that publishes a backing (packages/bake/cli/prepare-galaxy-backing.mts) is drawn from afar on that fixed
-    // plane, as the Milky Way is, and gets no camera-facing billboard: one image turned to face the camera spun as the
-    // camera orbited the LMC (2026-10-07).
-    const backing = (await readInventory(id, resolve(objects, id)))?.assets.some(asset => asset.location === 'prepared' && asset.filename === 'backing.json') === true;
     if (typeof framingRadiusUnits !== 'number' || !(framingRadiusUnits > 0)) throw new TypeError(`${id}: datasets need a positive framingRadiusUnits, got ${String(framingRadiusUnits)}.`);
     // The authored framing radius is what the universe hangs the bank's caption under, before any dataset loads.
     const bank = { id, contextVisibility, attached: data.attachedTo !== undefined, framingRadiusUnits } as (typeof banks)[number];

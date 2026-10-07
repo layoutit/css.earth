@@ -160,9 +160,10 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         // Published catalogues drawn through the bank, with its opacity (its descriptor's `cataloguePoints`).
         cataloguePointUrls: bankCataloguePoints(parseObjectDescriptor(set.descriptor)).map(bank => set.resolve(`prepared/${bank}.bin`)) };
     });
-    // A bank drawn from afar by its backing plane (its billboard facts say so) reads it from its own file list.
-    const loadVolumeBacking = createInFlightLoader(async (id: string) => {
-      if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
+    // A bank drawn from afar by its backing plane (its billboard facts say so), a volume dataset bank or an image-layer
+    // bank, reads it from its own file list.
+    const loadBacking = createInFlightLoader(async (id: string) => {
+      if (!volumeDatasetIds.has(id) && !imageLayerIds.has(id)) throw new TypeError(`Unknown prepared bank with a backing: ${id}.`);
       const set = await bankSet(id), path = 'prepared/backing.json';
       return { payload: parseGalaxyBacking(JSON.parse(new TextDecoder().decode(await set.transport.read(path))), `${id}/${path}`),
         resolveResource: (resource: string) => set.resolve(`prepared/${resource}`) };
@@ -188,7 +189,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       galaxyCataloguePoints: ['globular-clusters', 'old-star-dots', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.bin`)),
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: plan, volume, pointAppearance, sprites,
-      imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset, loadVolumeBacking,
+      imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset, loadBacking,
       backgroundCataloguePoints,
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
       // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the object it bounds.

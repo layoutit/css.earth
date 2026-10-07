@@ -39,6 +39,12 @@
     },
     {
       "location": "prepared",
+      "filename": "backing.json",
+      "bytes": 1596,
+      "sha256": "b9fa056863a651bbd6ac4df06ea949aea69d1cb4ccdf3fd9a30948ec8c3f76f6"
+    },
+    {
+      "location": "prepared",
       "filename": "chandra-xray/atlases/x.webp",
       "bytes": 82370,
       "sha256": "abf3e275fbe6c455fcaafeddbf9399033744c27e53823ac1ac8fdc9a092dd7f9"

@@ -23,6 +23,7 @@ ESA/Webb's mid-infrared picture of the Ring Nebula, on the walls of its ionised 
 - **Drawing:** from the front, 56 terraces parallel to the picture; from the side, 56 and 56 curtains through its columns and rows. The face is the picture's own 1,257 px.
 - **Size:** 2.33 × 1.88 arcmin, 0.54 pc wide at 790 pc.
 - **Rim:** the picture fades out between 50.0″ and 55.6″ from the star, the largest circle the frame holds.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m57-miri-layers backing` again.
 
 ## Evidence
 
@@ -38,6 +39,7 @@ The terraces of this bank, composited along the Sun's sight line, differ from th
 
 ## Known problems
 
+- The far picture holds only the flat slices' light: the walls' patches are left out, as they were from the billboard it replaced, so from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - Every speed here is one a paper prints for another line: [N II], [O III], He II or CO. Which one a color takes is a choice by ionisation energy, not a measurement in the mid infrared.
 - The paper's text names no line for the 12 and 15 µm filters; they go with the rest of the ionised gas.
 - The blue channel's molecular hydrogen lies on the ionised shell's outline, 44″ by 30″, at the molecular shell's depth. The molecular shell itself is a little larger, 47″ by 32.5″, as the near-infrared dataset draws it.

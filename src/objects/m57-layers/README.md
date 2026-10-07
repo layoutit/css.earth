@@ -24,6 +24,7 @@ ESA/Hubble's photograph of the Ring Nebula, laid on the walls the nebula's spect
 - **Drawing:** from the front, 56 terraces parallel to the picture, at the picture's resolution, each holding the wall light at its depth; from the side, 56 and 56 curtains through the picture's columns and rows. A browser draws each terrace as a layer of its own, so a wall's light passes from one terrace to the next over at least 12 face pixels, and every leaf is drawn on its quad exactly: the leaf compiler's outset of 0.6 CSS px, unseen on a galaxy, is 2.5″ here and made the terraces overlap as rings ([prepare.ts](../../../packages/bake/src/image-layers/prepare.ts), [shape.ts](../../../packages/bake/src/image-layers/shape.ts)).
 - **Size:** 2.10 × 2.10 arcmin, 0.48 pc wide at 790 pc.
 - **Rim:** the picture fades out on a round rim between 70% and 98% of half its short side, so no straight edge shows.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m57-layers backing` again.
 
 ## Evidence
 
@@ -37,8 +38,13 @@ The same page with the camera turned: the shell with the lobe through its openin
 
 The bake's test ([shape.test.ts](../../../packages/bake/src/image-layers/shape.test.ts)) composites a small picture's terraces along the Sun's sight line and compares the sum with the flat bake of the same picture. The same sum over this bank's terraces differs from its flat bake by 0.6 of 255 levels per channel on average, which is the encoder's noise.
 
+The far view on 2026-10-07, in headless Chromium at 1400 × 800 from the Milky Way page with the camera placed near the nebula and turned 0°, 20°, 40° and 60° about the bank's frame: the old billboard stayed a circle 162 px wide, while the fixed plane narrowed from 170 to 160, 131 and 85 px, as the picture plane of the layers does. From afar each of the Ring's three banks is 5 DOM nodes.
+
+![Top: the old billboard at 0°, 20°, 40° and 60°. Bottom: the fixed plane at the same cameras.](evidence/2026-10-07/far-plane-orbit.jpg)
+
 ## Known problems
 
+- The far picture holds only the flat slices' light: the walls' patches are left out, as they were from the billboard it replaced, so from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - Which wall holds a patch of light is not measured. The split is a convention, and a patch drawn in front may be behind.
 - The walls are the smooth ellipsoids of the fitted velocity ellipses. The paper calls the Main Ring irregular and not symmetric, and says it has no evidence about the form of the Lobes, bubbles or almost open; they are drawn as closed ellipsoids.
 - The expansion law rests on the 2007 paper's assumption about the nebula's size along the sight line (O'Dell et al. 2013, Sect. III.1). Kastner et al. find the molecular shell, just outside the ionized gas, moving at 24 km/s along the sight line: deeper than the [N II] wall drawn here, which the picture's own lines give.
