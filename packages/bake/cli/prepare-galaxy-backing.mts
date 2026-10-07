@@ -22,7 +22,7 @@
  */
 import { GALAXY_BACKING_SCHEMA, parseDensityVolumeFrame, type DensityVolumeFrame, type VolumeSliceQuad } from '@cssearth/objects';
 import { readVolumeDatasetBank } from '@cssearth/objects/node';
-import { sunFacingImpostorView } from '@cssearth/bake/site-assets';
+import { imageLayerBillboard, sunFacingImpostorView } from '@cssearth/bake/site-assets';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
@@ -88,6 +88,35 @@ if (recipeValue.view === 'sun-facing-impostor') {
   const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
   await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
   console.log(`Prepared a ${2 * r} unit plane across the line of sight from ${view.id}, picturing ${views.length} datasets.`);
+  process.exit(0);
+}
+if (recipeValue.view === 'sun-facing-layers') {
+  if (recipeValue.schema !== 'cssearth-galaxy-backing-source@1' || recipeValue.id !== id || typeof recipeValue.source !== 'string' || typeof recipeValue.meaning !== 'string') {
+    throw new TypeError(`${recipePath}: needs schema cssearth-galaxy-backing-source@1, id ${id}, a source and a meaning.`);
+  }
+  const descriptor = JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')) as Record<string, unknown> & { type?: unknown; properties?: { frame?: unknown } };
+  if (descriptor.type !== 'image-layer-bank') throw new TypeError(`${recipePath}: a sun-facing-layers backing belongs to an image-layer bank.`);
+  const frame = parseDensityVolumeFrame(descriptor.properties?.frame);
+  // The bank's source-facing slices seen from the Sun and composited as the page composites them: the picture its
+  // billboard drew, laid in the slices' own plane through the frame's origin, so it lies where the layered model does.
+  const { view, radiusUnits: r, image } = await imageLayerBillboard(basename(objectDirectory), descriptor, resolve(objectDirectory, '..'));
+  const webp = await encodeLossyWebp(sharp(image), { alphaQuality: 100, effort: 4 });
+  const { width, height } = await sharp(image).metadata();
+  const texturePath = `${id}/${id}.webp`;
+  await rm(resolve(prepared, id), { recursive: true, force: true });
+  await mkdir(resolve(prepared, id), { recursive: true });
+  await writeFile(resolve(prepared, texturePath), webp);
+  // The picture's pixel (u, v) is the point (2u - 1) R right + (2v - 1) R down (prepare-dataset-billboards.ts).
+  const corner = (u: number, v: number): Vector3 => [0, 1, 2].map(axis => (2 * u - 1) * r * view.right[axis]! + (2 * v - 1) * r * view.down[axis]!) as Vector3;
+  const quad: VolumeSliceQuad = { id, axis: 'z', sliceIndex: 0, texturePath, widthPx: width!, heightPx: height!,
+    vertices: [corner(0, 0), corner(1, 0), corner(1, 1), corner(0, 1)], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, 0],
+    normal: view.back.map(value => -value) as Vector3, bytes: webp.length, alphaCoverage: 1 };
+  const leaf = compileLeaf(frame, quad);
+  await writeFile(resolve(prepared, `${id}.json`), JSON.stringify({ schema: GALAXY_BACKING_SCHEMA, id, source: recipeValue.source, meaning: recipeValue.meaning,
+    frame, leaf: { texturePath: leaf.texturePath, style: leaf.style } }) + '\n');
+  const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
+  await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
+  console.log(`Prepared a ${2 * r} unit plane in the slices' plane, ${width} x ${height} (${webp.length} bytes).`);
   process.exit(0);
 }
 const recipe = recipeValue as {

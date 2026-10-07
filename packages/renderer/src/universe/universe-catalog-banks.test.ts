@@ -254,3 +254,41 @@ test('a package of catalogue dots declared after mount draws while its host is s
   lifetime.destroy();
   assert.equal(root.querySelector('[data-catalogue-points]'), null);
 });
+
+test('a nebula with a backing is drawn from afar on that one fixed plane, never on a billboard, and hands it to its slices', async () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const style = { width: '256px', height: '256px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,-128,-128,0,1)', backgroundSize: '256px 256px', backgroundPosition: '0px 0px' };
+  const backed = parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@2', imagePx: 256, banks: [{ id: 'nebula', contextVisibility: 'galactic', attached: false, backing: true }] });
+  const loads: string[] = [];
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [{ id: 'nebula', frame }],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async () => ({ payload: { id: 'nebula', frame } }) as never, billboards: { plan: backed, imageUrl: id => `/billboards/${id}.webp` },
+    loadBacking: async id => { loads.push(id); return { payload: { id: 'backing', frame, leaf: { texturePath: 'backing/backing.webp', style } }, resolveResource: path => `/${path}` }; } });
+  const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as [number, number], widthPixels: 400, heightPixels: 300 };
+  const publish = (positionM: [number, number, number], orientationXyzw: [number, number, number, number], detailed?: string) =>
+    banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM, orientationXyzw } }, viewport, 1, detailed);
+  const front = (detailed?: string) => publish([0, 0, 10], [0, 0, 0, 1], detailed), side = () => publish([10, 0, 0], [0, Math.SQRT1_2, 0, Math.SQRT1_2]);
+  front();
+  await waitFor(() => assert.deepEqual(loads, ['nebula'], 'read the first time it shows from afar'));
+  front();
+  assert.equal(root.querySelector('[data-dataset-billboard]'), null, 'no camera-facing billboard');
+  const plane = root.querySelector<HTMLElement>('.prepared-galaxy-backing > [data-galaxy-backing="nebula"]')!;
+  const image = plane.querySelector('img')!, scene = plane.querySelector<HTMLElement>('.css-volume-scene')!;
+  assert.equal(plane.querySelectorAll('*').length + 1, 5, 'projection, camera, scene, mesh and one image');
+  const shown = () => plane.style.display !== 'none' && Number(plane.style.opacity) > 0;
+  assert.equal(shown(), true);
+  assert.equal(image.getAttribute('src'), '/backing/backing.webp');
+  // Orbiting turns the scene, the plane's one transform for the camera; the image stays where the bake laid it.
+  const facing = scene.style.transform;
+  side();
+  assert.equal(image.style.transform, style.transform, 'the plane is fixed in the bank\'s frame');
+  assert.notEqual(scene.style.transform, facing, 'the camera moved around it');
+  // Selected and loaded, its slices replace the plane.
+  front('nebula');
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
+  front('nebula');
+  assert.equal(shown(), false, 'its loaded slices replace the plane');
+  lifetime.destroy();
+  assert.equal(root.querySelector('.prepared-galaxy-backing'), null, 'the scene takes its plane with it');
+});

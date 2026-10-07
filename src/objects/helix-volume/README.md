@@ -17,6 +17,8 @@ The [stellar field](source/stellar-field.json) contains 6627 Gaia candidates in 
 
 Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
 
+**Far view.** From afar the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and lays each dataset's own Sun-facing impostor view through the frame's centre, across the line of sight from Earth; no image is re-encoded. From Earth the plane shows the view the volume was drawn as, and the hand-over keeps its position, size and orientation. It replaced a camera-facing billboard of the same view, which turned with the camera. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/helix-volume backing` again. From afar the Helix is drawn by one of its banks at a time: the bank of its selected dataset, or its default bank, [`helix-layers`](../helix-layers/README.md), while none is selected. The others draw nothing there, so two far images of the same nebula never overlap.
+
 ## Evidence
 
 - Final app inspection records front/oblique views across all three datasets after restoring the wider-image cores. Report context documents incomplete historical capture metadata.
@@ -25,6 +27,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 ## Known problems
 
+- From well off the Earth line of sight the far plane is foreshortened, and edge-on it vanishes, while the volume keeps its depth. The hand-over there is a cross-fade between two different shapes.
 - Residual bright stellar halos remain in the cloud. Retained cores restore visual anchors; they do not make the contaminated diffuse material scientifically star-free.
 - The first 28-core WFI-only fix missed upper halos outside that photograph. The current three-image union resolves that coverage omission; it does not justify arbitrary points on nebular knots.
 - Fine knots, outer-halo completeness, VISTA color streaks and unsupported depth remain unresolved. Earlier one-axis and disk/ring models failed visual inspection.

@@ -87,7 +87,7 @@ export function imageLayerQuadLeaves(id: string, leaves: readonly Record<string,
 /** An image-layer galaxy seen from the Sun: its source-facing (z) slices projected along the line of sight onto a plane
  * through the frame origin, each resized to the size it covers there, then stacked far to near with the straight-alpha
  * "over" the page applies to them, in sRGB as the page does. */
-async function imageLayerBillboard(id: string, descriptor: Record<string, unknown>, objects: string) {
+export async function imageLayerBillboard(id: string, descriptor: Record<string, unknown>, objects: string) {
   const data = await preparedPayload(id, descriptor, objects);
   const frame = requireRecord(data.frame, `${id} frame`) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1];
   if (JSON.stringify(frame) !== JSON.stringify(requireRecord(descriptor.properties).frame)) throw new TypeError(`${id}: image-layer frame differs from the descriptor frame.`);
@@ -144,14 +144,25 @@ async function imageLayerBillboard(id: string, descriptor: Record<string, unknow
 export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot(import.meta.url)) {
   const objects = resolve(projectRoot, 'src/objects');
   type Drawn = { view: { back: Vector; right: Vector; down: Vector }; radiusUnits: number; image: Buffer };
-  const banks: { id: string; contextVisibility: 'galactic' | 'independent'; attached: boolean; framingRadiusUnits?: number; backing?: true;
+  const banks: { id: string; contextVisibility: 'galactic' | 'independent'; attached: boolean; framingRadiusUnits?: number; backing?: true; host?: string; hostDefault?: true;
     view?: Drawn['view']; radiusUnits?: number; image?: Buffer; defaultDataset?: string; datasets?: (Drawn & { id: string })[] }[] = [];
+  const hosts = new Map<string, string>();
   for (const id of (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort()) {
     let descriptor: Record<string, unknown>;
     try { descriptor = requireRecord(JSON.parse(await readFile(resolve(objects, id, 'object.json'), 'utf8'))); }
     catch (error) { if (isRecord(error) && error.code === 'ENOENT') continue; throw error; }
-    if (descriptor.type === 'image-layer-bank') { banks.push(await imageLayerBillboard(id, descriptor, objects)); continue; }
-    if (descriptor.type !== 'volume-dataset-bank') continue;
+    if (descriptor.type !== 'image-layer-bank' && descriptor.type !== 'volume-dataset-bank') continue;
+    const host = requireRecord(descriptor.properties, `${id} properties`).host;
+    if (typeof host === 'string') hosts.set(id, host);
+    // A bank that publishes a backing (packages/bake/cli/prepare-galaxy-backing.mts) is drawn from afar on that fixed
+    // plane, as the Milky Way is, and gets no camera-facing billboard: one image turned to face the camera spun as the
+    // camera orbited the LMC and the nebulae (2026-10-07).
+    const backing = (await readInventory(id, resolve(objects, id)))?.assets.some(asset => asset.location === 'prepared' && asset.filename === 'backing.json') === true;
+    if (descriptor.type === 'image-layer-bank') {
+      if (backing) { await preparedPayload(id, descriptor, objects); banks.push({ id, contextVisibility: 'galactic', attached: false, backing: true }); }
+      else banks.push(await imageLayerBillboard(id, descriptor, objects));
+      continue;
+    }
     // The inventory lists the bank's index; the bank is read whole from its files (@cssearth/objects volume-dataset-bank-files.ts).
     await preparedPayload(id, descriptor, objects);
     const data = requireRecord(await readVolumeDatasetBank(resolve(objects, id, 'prepared')) as unknown, `${id} datasets`);
@@ -178,10 +189,6 @@ export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot
     };
     // A cloud that accompanies a body stays dark until that body's dataset asks for it.
     const framingRadiusUnits = data.framingRadiusUnits;
-    // A bank that publishes a backing (packages/bake/cli/prepare-galaxy-backing.mts) is drawn from afar on that fixed
-    // plane, as the Milky Way is, and gets no camera-facing billboard: one image turned to face the camera spun as the
-    // camera orbited the LMC (2026-10-07).
-    const backing = (await readInventory(id, resolve(objects, id)))?.assets.some(asset => asset.location === 'prepared' && asset.filename === 'backing.json') === true;
     if (typeof framingRadiusUnits !== 'number' || !(framingRadiusUnits > 0)) throw new TypeError(`${id}: datasets need a positive framingRadiusUnits, got ${String(framingRadiusUnits)}.`);
     // The authored framing radius is what the universe hangs the bank's caption under, before any dataset loads.
     const bank = { id, contextVisibility, attached: data.attachedTo !== undefined, framingRadiusUnits } as (typeof banks)[number];
@@ -195,6 +202,21 @@ export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot
     }
     if (others.length) { bank.defaultDataset = requireString(dataset.id, `${id} default dataset`); bank.datasets = others; }
     banks.push(bank);
+  }
+  // A body with several banks, one of them drawn on a backing, is drawn from afar by one bank at a time: the bank of its
+  // selected dataset, or its default dataset's bank (its content's `datasets.defaultDataset`). Every bank of such a body
+  // carries its host, and the default one says so. Bodies whose banks all draw billboards are left as they are.
+  const members = new Map<string, (typeof banks)[number][]>();
+  for (const bank of banks) { const host = hosts.get(bank.id); if (host !== undefined) members.set(host, [...members.get(host) ?? [], bank]); }
+  for (const [host, group] of members) {
+    if (group.length < 2 || !group.some(bank => bank.backing)) continue;
+    const content = requireRecord(JSON.parse(await readFile(resolve(objects, host, 'source/content/object.json'), 'utf8')), `${host} content`);
+    const datasets = requireRecord(content.datasets, `${host} datasets`), chosen = requireString(datasets.defaultDataset, `${host} default dataset`);
+    const control = requireArray(datasets.controls, `${host} dataset controls`).map(value => requireRecord(value)).find(value => value.id === chosen);
+    const defaultBank = requireString(requireRecord(control?.volume, `${host} ${chosen} volume`).objectId, `${host} ${chosen} bank`);
+    if (!group.some(bank => bank.id === defaultBank)) throw new TypeError(`${host}: default dataset ${chosen} is drawn by ${defaultBank}, none of its banks.`);
+    if (!group.every(bank => bank.backing)) throw new TypeError(`${host}: every bank of a body drawn from afar on a backing needs one (${group.filter(bank => !bank.backing).map(bank => bank.id).join(', ')}).`);
+    for (const bank of group) { bank.host = host; if (bank.id === defaultBank) bank.hostDefault = true; }
   }
   const drawn = banks.flatMap(bank => [...(bank.image ? [{ name: bank.id, image: bank.image }] : []),
     ...(bank.datasets ?? []).map(dataset => ({ name: `${bank.id}.${dataset.id}`, image: dataset.image }))]);
@@ -221,7 +243,7 @@ export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot
       ...(bank.view ? { billboard: { radiusUnits: bank.radiusUnits, ...bank.view } } : {}),
       ...(bank.datasets ? { defaultDataset: bank.defaultDataset,
         datasets: bank.datasets.map(dataset => ({ id: dataset.id, radiusUnits: dataset.radiusUnits, ...dataset.view })) } : {}),
-      ...(bank.backing ? { backing: true } : {}) })) };
+      ...(bank.backing ? { backing: true } : {}), ...(bank.host ? { host: bank.host } : {}), ...(bank.hostDefault ? { hostDefault: true } : {}) })) };
   await writeIfChanged(resolve(projectRoot, OUTPUT.metadata), `${JSON.stringify(metadata)}\n`);
   // The atlas an earlier checkout wrote here is no longer read.
   await rm(resolve(projectRoot, 'site/prepared/prepared-dataset-billboards.webp'), { force: true });

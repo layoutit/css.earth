@@ -24,6 +24,7 @@ ESA/Hubble's photograph of the planetary nebula NGC 2392, laid on the walls its 
 - **Drawing:** from the front, 56 terraces parallel to the picture at the picture's resolution; from the side, 56 and 56 curtains through its columns and rows, as the Ring Nebula's bank is drawn.
 - **Size:** 1.25 × 1.25 arcmin, 0.65 pc wide at 1,795 pc; the outer shell is 0.40 pc across.
 - **Rim:** the picture fades out on a round rim between 70% and 98% of half its side, so no straight edge shows.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/ngc-2392-layers backing` again. From afar NGC 2392 is drawn by one of its banks at a time: the bank of its selected dataset, or this bank while none is selected. The others draw nothing there, so two far images of the same nebula never overlap.
 
 ## Evidence
 
@@ -41,6 +42,7 @@ The paper's tilt is in its own table: the inner shell's approaching structures l
 
 ## Known problems
 
+- The far picture holds only the flat slices' light, and this bank's light is almost all on its walls, which are left out, as they were from the billboard it replaced: from afar the plane draws almost nothing. Edge-on it vanishes.
 - The fur is one surface. Where knots at rest and a cap at 55 km/s lie side by side on the sky, as in the south, it stands between the plane and the wall, at their mean speed: neither is at its own place. Drawn each at its own depth, neighbouring patches came apart from the page's camera.
 - The inner shell in the picture is not centred on the star: its rim is about 3″ farther out to the north than to the south. The wall is an ellipsoid about the star that holds the whole rim, so in the south the wall's edge lies outside the rim, over dark sky.
 - The paper calls the inner shell deformed, peanut-like. It is drawn as a plain spheroid.

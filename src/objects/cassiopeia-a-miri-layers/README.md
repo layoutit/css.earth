@@ -23,6 +23,7 @@ ESA/Webb's mid-infrared picture of the supernova remnant Cassiopeia A, as a shel
 - **Drawing:** the surfaces are meshes of flat patches, as in the near-infrared bank. The face is 1,500 px of the picture's 4,008.
 - **Size:** 7.41 × 7.41 arcmin, 7.33 pc wide at 3,400 pc; the forward shock's sphere is 5.04 pc across.
 - **Rim:** the published picture is a square mosaic that does not fill its frame: half the frame is empty. Its own light reaches 142.8″ from the expansion centre at its nearest edge, and the picture fades out between 128.5″ and 142.8″, the largest circle that light fills, so no straight edge shows. The generator measures it: the dark border joined to the frame's edge is the empty part.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/cassiopeia-a-miri-layers backing` again. From afar Cassiopeia A is drawn by one of its banks at a time: the bank of its selected dataset, or its default bank, [`cassiopeia-a-layers`](../cassiopeia-a-layers/README.md), while none is selected. The others draw nothing there, so two far images of the same nebula never overlap.
 
 ## Evidence
 
@@ -38,6 +39,7 @@ No bake code changes with this dataset.
 
 ## Known problems
 
+- The far picture holds only the flat slices' light, and this bank's light is almost all on its walls, which are left out, as they were from the billboard it replaced: from afar the plane draws almost nothing. Edge-on it vanishes.
 - The Green Monster is on the wrong side. X-ray spectra put it in front of the remnant (Vink et al. 2024; De Looze et al. 2024), but no paper gives its outline as numbers, so it is not treated apart: its broad light is shared by the sphere's two halves and the rest of it lies on the half behind the picture's plane.
 - The depths are measured in one line, [Ar II]. Dust, which is most of this picture's light, and the other lines are drawn at those depths or on the shock's sphere.
 - The rim's circle, 142.8″, is inside the forward shock's 153″: the remnant's outermost 10″ and everything beyond, which the mosaic holds on its other sides, are not drawn.

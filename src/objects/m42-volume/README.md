@@ -16,6 +16,8 @@ The [stellar field](source/stellar-field.json) contains 2780 Gaia candidates in 
 
 Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
 
+**Far view.** From afar the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and lays each dataset's own Sun-facing impostor view through the frame's centre, across the line of sight from Earth; no image is re-encoded. From Earth the plane shows the view the volume was drawn as, and the hand-over keeps its position, size and orientation. It replaced a camera-facing billboard of the same view, which turned with the camera. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m42-volume backing` again.
+
 ## Evidence
 
 - The [object descriptor](object.json) pins the installed bank; [delivery inputs](source/delivery.json) record saved controls and catalogue preparation. The source manifest distinguishes those inputs from generated delivery bytes.
@@ -24,6 +26,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 ## Known problems
 
+- From well off the Earth line of sight the far plane is foreshortened, and edge-on it vanishes, while the volume keeps its depth. The hand-over there is a cross-fade between two different shapes.
 - A rectangular optical coverage transition, pale neutral residuals and fine oblique slice bands remain. Adding surrounding stars does not repair the cloud’s photographic boundary.
 - The roughly 0.2 pc star/front distance and 0.1 pc equivalent layer are local published models at the papers’ distance, not whole-field measurements.
 - Orion-S, foreground Veil alternatives, extinction and overlapping fronts remain incomplete. Downloaded central MUSE diagnostic maps have not been fitted; several lack required masks, units or complete WCS.

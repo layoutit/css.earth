@@ -24,6 +24,10 @@ export interface DatasetBankBillboard {
   /** From afar the bank is its prepared backing (`prepared/backing.json`, `GALAXY_BACKING_SCHEMA`): one image on a plane
    * fixed in its frame, drawn as the Milky Way's is, in place of a camera-facing billboard. Such a bank has no billboard. */
   readonly backing?: true;
+  /** The body this bank is one dataset of, when that body has several banks: from afar one of them draws it, the bank of
+   * the body's selected dataset, or the body's default bank (`hostDefault`) while none of its banks is selected. */
+  readonly host?: string;
+  readonly hostDefault?: true;
 }
 export interface DatasetBillboards {
   /** The edge of every billboard image, in pixels. */
@@ -44,7 +48,7 @@ export function parseDatasetBillboards(value: unknown): DatasetBillboards {
   const imagePx = positive(input.imagePx, 'dataset billboard image size');
   const banks = new Map<string, DatasetBankBillboard>();
   for (const value of array(input.banks, 'dataset billboard banks')) {
-    const bank = record(value, 'dataset billboard bank', ['id', 'contextVisibility', 'attached', 'framingRadiusUnits', 'billboard', 'defaultDataset', 'datasets', 'backing']);
+    const bank = record(value, 'dataset billboard bank', ['id', 'contextVisibility', 'attached', 'framingRadiusUnits', 'billboard', 'defaultDataset', 'datasets', 'backing', 'host', 'hostDefault']);
     const id = text(bank.id, 'dataset billboard bank id');
     if (banks.has(id)) throw new TypeError(`Dataset billboard bank ${id} is listed twice.`);
     if (bank.contextVisibility !== 'galactic' && bank.contextVisibility !== 'independent') throw new TypeError('Unsupported dataset context visibility.');
@@ -63,10 +67,15 @@ export function parseDatasetBillboards(value: unknown): DatasetBillboards {
     if (bank.backing !== undefined && (bank.backing !== true || billboard || datasets)) {
       throw new TypeError(`Dataset billboard bank ${id}: backing is true, and a bank drawn by its backing has no billboard.`);
     }
+    const host = bank.host === undefined ? undefined : text(bank.host, `${id} host`);
+    if (bank.hostDefault !== undefined && (bank.hostDefault !== true || host === undefined)) {
+      throw new TypeError(`Dataset billboard bank ${id}: hostDefault is true, and only on a bank with a host.`);
+    }
     const framingRadiusUnits = bank.framingRadiusUnits === undefined ? undefined : positive(bank.framingRadiusUnits, 'dataset billboard framing radius');
     banks.set(id, Object.freeze({ id, contextVisibility: bank.contextVisibility, attached: bank.attached,
       ...(framingRadiusUnits === undefined ? {} : { framingRadiusUnits }), ...(billboard ? { billboard } : {}),
-      ...(datasets ? { defaultDataset, datasets } : {}), ...(bank.backing === true ? { backing: true as const } : {}) }));
+      ...(datasets ? { defaultDataset, datasets } : {}), ...(bank.backing === true ? { backing: true as const } : {}),
+      ...(host === undefined ? {} : { host }), ...(bank.hostDefault === true ? { hostDefault: true as const } : {}) }));
   }
   return Object.freeze({ imagePx, banks });
 }

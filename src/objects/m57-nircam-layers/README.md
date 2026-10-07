@@ -23,6 +23,7 @@ ESA/Webb's near-infrared picture of the Ring Nebula, laid on the shell of molecu
 - **Drawing:** from the front, 56 terraces parallel to the picture; from the side, 56 and 56 curtains through its columns and rows, as the Hubble dataset is drawn. The face is 1,500 px across the picture.
 - **Size:** 2.14 × 2.17 arcmin, 0.49 pc wide at 790 pc.
 - **Rim:** the picture fades out between 55.7″ and 61.9″ from the star, the largest circle the frame holds.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m57-nircam-layers backing` again. From afar the Ring is drawn by one of its banks at a time: the bank of its selected dataset, or its default bank, [`m57-layers`](../m57-layers/README.md), while none is selected. The others draw nothing there, so two far images of the same nebula never overlap.
 
 ## Evidence
 
@@ -38,6 +39,7 @@ The terraces of this bank, composited along the Sun's sight line, differ from th
 
 ## Known problems
 
+- The far picture holds only the flat slices' light: the walls' patches are left out, as they were from the billboard it replaced, so from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - The two datasets stand on different walls. Hubble's lie on the ionised shell of O'Dell et al. (44″ by 30″, 29″ deep in [N II]); this one on the molecular shell around it. Switching datasets changes the shape as well as the picture.
 - Kastner et al. call their shell's dimensions uncertain at about 10%, and the geometry of its openings not tightly constrained.
 - The shell's tilt of about 2° has no printed direction and is not applied. The openings' axis is tipped 12° in the paper, which puts the two openings about 4″ apart on the sky; here the opening is one circle about the star.

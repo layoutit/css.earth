@@ -19,6 +19,7 @@ ESA/Hubble's picture of the Blue Snowball Nebula (NGC 7662) on the walls of its 
 - **The star:** its own light ends 1.5″ from it in this picture ([star-light.mts](../../../packages/bake/authoring/m1-67/star-light.mts)). All of it within half that, and less and less out to it, stays at the star.
 - **Size:** the picture is drawn at its own 737 px, 0.045″ a pixel: 33.3″ across, 0.28 pc at 1,740 pc.
 - **Rim:** the picture fades out between 15.2″ and 15.8″ from the star, the largest circle the frame holds, so no straight edge shows.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/ngc-7662-layers backing` again.
 
 ## Evidence
 
@@ -34,6 +35,7 @@ The bake's tests of shells and their walls ([shape.test.ts](../../../packages/ba
 
 ## Known problems
 
+- The far picture holds only the flat slices' light, and this bank's light is almost all on its walls, which are left out, as they were from the billboard it replaced: from afar the plane draws almost nothing. Edge-on it vanishes.
 - The outer shell's tilt is assumed, not measured: its spectra show no clear tilt, so it is either nearly round or seen along its pole.
 - The frame is barely larger than the nebula. The outer shell's long axis reaches 15.7″ on the sky and the picture ends 15.8″ from the star: the shell's two ends lie in the rim's fade, and the frame cuts the red knots at one edge.
 - The red knots, the nebula's fast low-ionisation regions, have no depth of their own: the paper leaves them out of its fit and prints no speed for them. They lie on the walls with the rest.

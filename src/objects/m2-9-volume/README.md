@@ -16,6 +16,8 @@ The [stellar field](source/stellar-field.json) supplies seven Gaia sources in an
 
 Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
 
+**Far view.** From afar the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and lays each dataset's own Sun-facing impostor view through the frame's centre, across the line of sight from Earth; no image is re-encoded. From Earth the plane shows the view the volume was drawn as, and the hand-over keeps its position, size and orientation. It replaced a camera-facing billboard of the same view, which turned with the camera. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m2-9-volume backing` again.
+
 ## Evidence
 
 - [Delivery](source/delivery.json) retains the 144-slice symmetry result and adds the independently prepared catalogue field. This does not rerun or relabel the original separation as NOX.
@@ -24,6 +26,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 ## Known problems
 
+- From well off the Earth line of sight the far plane is foreshortened, and edge-on it vanishes, while the volume keeps its depth. The hand-over there is a cross-fade between two different shapes.
 - Authored axis position and zero inclination select one of many possible depths from a single photograph.
 - Faint planar background, rings and directional color/brightness changes remain in oblique views. Photographic RGB is neither calibrated additive emission nor measured density.
 - The small working grid is a bounded method trial; finer source pixels alone cannot resolve the distance or symmetry ambiguity.

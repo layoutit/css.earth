@@ -24,6 +24,7 @@ ESA/Hubble's photograph of the Little Dumbbell Nebula on the nebula's own shape:
 - **Size:** 5.01 × 3.16 arcmin, 1.98 pc wide at 1,359 pc.
 - **Rim:** the picture fades out on a round rim between 70% and 98% of half its long side; the nebula stands on dark sky, so the long edges show no straight line.
 - **Sky:** the picture's sky is not black: (14, 13, 11) of 255, each channel's median over the top and bottom 4% of the frame. It is subtracted as the background floor (14 of 255), so the frame's edge does not show.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m76-layers backing` again.
 
 ## Evidence
 
@@ -39,6 +40,7 @@ The surface's own tests are the bake's ([surface.test.ts](../../../packages/bake
 
 ## Known problems
 
+- The far picture holds only the flat slices' light: the walls' patches are left out, as they were from the billboard it replaced, so from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - The lobes' width and where their middles lie are measured on the picture, not published. The fit leaves 10″ rms: the real outline is boxier than an ellipse, and the south-east lobe is wider on one side of the axis than the other (64″ and 77″). A surface of revolution is the same all round.
 - The tilt is one number for ring and lobes, 76°. Bryce et al. (1996) give 73° to 80° for the ring; Ramos-Larios et al. (2018) fit 75° for the ring and 85° for the lobes.
 - The bar's light lies on the ring's outer face alone. The papers draw the ring thick and see emission across its inside, and print no inner radius.

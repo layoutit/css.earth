@@ -42,3 +42,11 @@ test('a bank drawn from afar by its fixed backing plane has no camera-facing bil
   assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[0]!, backing: true }] }), /has no billboard/);
   assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[1]!, backing: 'yes' }] }), /backing is true/);
 });
+
+test('a bank of a body with several banks names its host, and the default one says so', () => {
+  const backed = { ...input.banks[1]!, backing: true };
+  const parsed = parseDatasetBillboards({ ...input, banks: [{ ...backed, host: 'nebula', hostDefault: true }] }).banks.get('galaxy')!;
+  assert.deepEqual([parsed.host, parsed.hostDefault], ['nebula', true]);
+  assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...backed, hostDefault: true }] }), /only on a bank with a host/);
+  assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...backed, host: 'nebula', hostDefault: 'yes' }] }), /hostDefault is true/);
+});

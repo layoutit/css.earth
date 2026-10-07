@@ -20,14 +20,22 @@ The adopted **2,000 pc** scale follows [Martin et al. (2021), §3.4](https://doi
 
 Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
 
+**Far view.** From afar the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and lays each dataset's own Sun-facing impostor view through the frame's centre, across the line of sight from Earth; no image is re-encoded. From Earth the plane shows the view the volume was drawn as, and the hand-over keeps its position, size and orientation. It replaced a camera-facing billboard of the same view, which turned with the camera. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m1-volume backing` again. From afar the Crab is drawn by one of its banks at a time: the bank of its selected dataset, or this bank while none is selected. The others draw nothing there, so two far images of the same nebula never overlap.
+
 ## Evidence
 
 - Recorded app checks cover the catalogue field, projection and star toggle; evidence context states their version and limits.
 - The [object descriptor](object.json) pins the installed bank whose provenance identifies compiler result `3fac3e884fb5…`. The [delivery request](source/delivery.json) pins preparation inputs and retains the older accepted-lab reference separately. This documentation review did not perform a cold replay.
 - [Historical processing evidence](../../../labs/nebula/models/m1/processing-evidence.json) separates stellar registration, native pixel accounting and projected-signal checks. These establish their recorded processing behavior, not physical depth or current material acceptance.
+- **Far view (2026-10-07).** In headless Chromium at 1400 × 800, the camera placed 60 px of framing radius from the Crab and turned 0°, 30°, 60° and 90° about the bank's frame: the old billboard stayed face-on, while the fixed plane narrowed to 87%, 50% and 0% of its width, as a fixed plane does. From afar the bank is 5 DOM nodes. Zooming out of this page, the volume alone and the plane alone at the switch distance keep the same position, size and orientation.
+
+![Top: the old billboard at 0°, 30°, 60° and 90°. Bottom: the fixed plane at the same cameras.](evidence/2026-10-07/far-plane-orbit.jpg)
+
+![At the switch distance, the volume alone, half faded (left), and the far plane alone (right)](evidence/2026-10-07/far-plane-handover.jpg)
 
 ## Known problems
 
+- From well off the Earth line of sight the far plane is foreshortened, and edge-on it vanishes, while the volume keeps its depth. The hand-over there is a cross-fade between two different shapes.
 - Image color repeated through depth, softened filaments and oblique glow remain. Trials that lost the front view or created beads were rejected; shipping this version does not resolve that material failure.
 - Expansion may be nonuniform; smoothing, diffuse interior, jet lengths and strengths remain conditional. The northern ejecta-jet arrays were not acquired.
 - Unequal epochs, footprints and PSFs prevent a calibrated multiband comparison. Missing image coverage is not absent emission; no extinction, dust-density or relativistic radiative-transfer solution is claimed.

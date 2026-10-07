@@ -73,9 +73,10 @@ export interface PreparedUniverseOptions {
   datasetBillboards?: { readonly plan: DatasetBillboards; readonly imageUrl: (id: string, dataset?: string) => string };
   /** Mount the prepared celestial sky cube. Phones leave it out: its faces cost tens of megabytes of layers. */
   sky?: boolean;
-  /** The backing plane of a bank whose prepared billboards say it has one (`DatasetBankBillboard.backing`): its
-   * `GALAXY_BACKING_SCHEMA` payload and where its images are served. Read the first time the bank shows from afar. */
-  loadVolumeBacking?(id: string): Promise<{ payload: PreparedGalaxyBacking; resolveResource(path: string): string }>;
+  /** The backing plane of a bank, volume dataset or image layers, whose prepared billboards say it has one
+   * (`DatasetBankBillboard.backing`): its `GALAXY_BACKING_SCHEMA` payload and where its images are served. Read the
+   * first time the bank shows from afar. */
+  loadBacking?(id: string): Promise<{ payload: PreparedGalaxyBacking; resolveResource(path: string): string }>;
   /** A bank's payload, and any published catalogue points drawn with it (M87's globular clusters). */
   loadVolumeDataset?(id: string): Promise<Parameters<typeof createPreparedVolumeDatasets>[0] & { cataloguePointUrls?: readonly string[] }>;
   /** Testable cap for hidden banks with no active navigation subscriber. */

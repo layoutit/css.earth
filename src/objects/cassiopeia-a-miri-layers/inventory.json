@@ -9,6 +9,18 @@
     },
     {
       "location": "prepared",
+      "filename": "backing.json",
+      "bytes": 1290,
+      "sha256": "f19c143bb276f1cef4cd47ea8c8217dd8091c3f46a3d27405b1971fc457ab2fe"
+    },
+    {
+      "location": "prepared",
+      "filename": "backing/backing.webp",
+      "bytes": 5282,
+      "sha256": "b8def4452d72d2eabda532867952b5bcca817e317f447db04f983f5532bc0365"
+    },
+    {
+      "location": "prepared",
       "filename": "image-layers.json",
       "bytes": 1356389,
       "sha256": "b240f01d208a167e27004968f9627991e2780eeea9b8c7ebf63ffeedba152dd2"
