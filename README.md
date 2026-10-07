@@ -26,13 +26,13 @@ The Sun, the eight planets, dwarf planets, moons, asteroids, comets and other tr
 
 ### Stars and Exoplanets
 
-Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1.
+Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and planetary systems beyond the Sun, such as WASP-43, HD 189733 and TRAPPIST-1. Some stars also carry a corona modelled from maps of their magnetic field, such as ε Eridani and HD 189733, or a debris disc, such as Fomalhaut and β Pictoris.
 
 <img src=".github/assets/stars-exoplanets.webp" alt="Betelgeuse's imaged surface, and the planet TRAPPIST-1b coloured by its JWST MIRI 15 µm temperature map, hot day side to cold night side, rendered as DOM and CSS markup" width="960">
 
 ### Nebulae and Galaxies
 
-The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes, plus the Pleiades cluster. Beyond them: the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group and the nearby universe.
+The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes or as pictures placed on published 3D shapes, such as the Ring and Cassiopeia A, plus the Pleiades cluster. Beyond them: the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group, the Galactic Centre, galaxy clusters such as the Bullet Cluster and Abell 1689, and the nearby and observable universe.
 
 <img src=".github/assets/nebulae-galaxies.webp" alt="The Crab Nebula as a 3D volume, and the Milky Way seen at an angle from outside, rendered as DOM and CSS markup" width="960">
 
@@ -45,8 +45,8 @@ Sequences such as **Hubble dates** start looping when opened. Each map stays on 
 The data comes from spacecraft, landers and telescopes, including:
 
 - **Planetary missions:** MESSENGER, Cassini, Galileo, Juno, Dawn, New Horizons, Voyager 1 and 2, Rosetta, Hayabusa and Hayabusa2, OSIRIS-REx, NEAR Shoemaker, DART and LICIACube, Magellan, the Viking orbiters and landers, LRO, MRO and Mars Odyssey.
-- **Space telescopes:** Hubble, Webb, Spitzer, Herschel, Chandra, WISE, Gaia and Hipparcos.
-- **Ground-based facilities:** ESO's VLT, VLTI, VISTA and VST, ALMA, the VLA and VLBA, and the Arecibo and Goldstone radars.
+- **Space telescopes:** Hubble, Webb, Spitzer, Herschel, Chandra, WISE, TESS, Gaia and Hipparcos.
+- **Ground-based facilities:** ESO's VLT, VLTI, VISTA and VST, ALMA, the VLA and VLBA, Keck, Gemini, Subaru, CFHT, CHARA, and the Arecibo and Goldstone radars.
 
 Preparation reads these products from their public archives, such as NASA's PDS, USGS Astrogeology, MAST, the ESO and ALMA archives and JAXA's JLPEDA, and records each one in `src/sources/`. Each body's README names the products behind its views, how they were processed and their known limits.
 
@@ -61,6 +61,8 @@ Preparation reads archive formats directly with in-house TypeScript readers. The
 - **Interferometry:** calibration and image reconstruction for stellar surfaces from raw VLTI and ALMA observations ([interferometric imaging](docs/interferometric-imaging.md)).
 - **Eclipse mapping:** exoplanet maps fitted from raw JWST light curves ([eclipse mapping](docs/eclipse-mapping.md)).
 - **Nebulae and galaxies:** 3D volumes and galaxy fields from surveys and catalogues ([prepared nebulae](docs/nebulae/README.md), [galaxies](docs/galaxies/README.md)); the volume bake is [`@cssearth/bake/volume`](packages/bake/README.md).
+- **Telescope command:** finds and pins archive observations and re-runs the observatory's own software ([command guide](packages/telescope-cli/README.md), [virtual telescopes](docs/virtual-telescopes.md)).
+- **Stellar maps:** a star's magnetic map from archived polarised spectra, its brightness map from TESS pixels, and a corona from the magnetic map ([magnetic maps](docs/stellar-magnetic-maps-from-spectra.md), [TESS brightness maps](docs/stellar-brightness-maps-from-tess.md), [coronae](docs/stellar-corona-from-magnetic-maps.md)).
 
 ## Architecture
 
@@ -90,7 +92,7 @@ Re-preparing an object from its original sources needs more: `node packages/bake
 
 - [Adding a body](src/objects/README.md): package layout and the preparation steps.
 - [Provenance and documentation contract](docs/provenance/CONTRACT.md): how sources, credits and evidence are recorded.
-- [Documentation index](docs/README.md): surface preparation, interferometric imaging, eclipse mapping, navigation, performance and more.
+- [Documentation index](docs/README.md): surface preparation, interferometric imaging, eclipse mapping, telescopes, navigation, performance and more.
 - [Contributing](.github/CONTRIBUTING.md): setup, which checks to run and where things live.
 - [Celestial skill](.agents/skills/celestial-skill/SKILL.md): the workflow agents follow for body work.
 
