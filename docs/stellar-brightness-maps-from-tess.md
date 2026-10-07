@@ -224,8 +224,16 @@ node packages/telescope-cli/src/new-object/new-object-cli.mts --pixel-light --al
 method covers the star's kind, and has that method judge them. It writes a receipt for each star under ignored
 `output/tess/<star id>/`: the mission, each sector or campaign with the request that fetched it and the pipeline version
 that made it, the method, what it measured, the verdict with its reason, and the codes' versions. Each light curve is kept
-beside it as the method prepared it. Requests to MAST go one at a time. Gaia's answer for all stars is one request of
-some ten minutes, kept under `output/tess/` so a star is asked once.
+beside it as the method prepared it. A star's files are fetched eight at a time and its maps are made in one starry
+process. Gaia's answer for all stars is one request of some ten minutes, kept under `output/tess/` so a star is asked once.
+
+Every star takes hours on one run: about 13 s a star with light curves and 8 s a map, measured over 336 stars. Several
+runs share the stars, each taking every Nth (`--all --shard=K/N`, K from 0 to N-1); MAST answers requests sent side by
+side, and six runs were four times as fast as one:
+
+```sh
+for k in 0 1 2 3 4 5; do node packages/telescope-cli/src/archives/tess/reduce.mts --all --shard=$k/6 & done; wait
+```
 
 The map's table (108 KB a star) is not tracked: its manifest input names `reduce.mts` as its generator, and it is published
 to and restored from the source cache (`node packages/bake/cli/publish-source-cache.mts --file=<table> --key=<star id>/<its path under source/>`).
