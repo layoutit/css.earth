@@ -29,7 +29,7 @@ import type { createSceneActivation } from './session/scene-activation.mts';
 import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { WORLD_HOST_ID, namesSystem } from '../world/systems/navigation-scope.mts';
 import { systemHostId } from '../model/system-address.mts';
-import { insideBody, pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../world/systems/inside-view.mts';
+import { restoredViewBody, insideBody, pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../world/systems/inside-view.mts';
 import { knownInner, loadAncestors, loadHolder, loadInner, registerDirectoryRuntimeLoader } from '../directory/object-directory.mts';
 import { bodyInView, createCameraHandover } from './camera-handover.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../browser/runtime-policy.mts';
@@ -92,6 +92,8 @@ export function createSceneRouter({
   },
   persistentWorldContext,
 }: RouterOptions) {
+  // The scenes whose restored view has already centred the zoom (followSelectionCamera).
+  const centredScenes = new WeakSet<Session>();
   const sharedInput = documentTarget.querySelector<HTMLElement>('.object-input-surface');
   const releaseInput = sharedInput ? retainInputSurface(sharedInput) : () => {};
   const scenes = createSceneSessions();
@@ -654,6 +656,17 @@ export function createSceneRouter({
     // Until the arrival is ready the camera still shows the mounted object's default view, not the page's: following it
     // selected the Solar System for a moment on every overview page (and fetched its body list for nobody).
     if (requests.current || scenes.state.kind !== 'ready') return;
+    // A view restored from its address can stand anywhere inside an object seen from inside, which has no body of its own:
+    // once per scene, the page is handed to the body the camera stands next to, or the zoom is centred on the nearest star.
+    if (!centredScenes.has(session)) {
+      centredScenes.add(session);
+      if (zoomStepOf({ objectId: session.objectId }) !== null && new URL(navigationHref(windowTarget)).searchParams.has('v')) {
+        const body = restoredViewBody(frame);
+        // The restored camera is at rest already: the hand-over is committed now, before following the camera along the
+        // zoom chain (which this body is not on) withdraws it.
+        if (body !== null && body !== session.objectId) { handover.cross({ objectId: body }, 'zoom-scope'); handover.due(); return; }
+      }
+    }
     const selection = context?.selection;
     if (!selection) return;
     // The selection the camera was last in: the committed one, or one of another scene it has crossed into. The scene of
