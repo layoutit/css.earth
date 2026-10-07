@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "menkar",
+  "angularDiameterMas": 12.2,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 69,713,314 km at 76.39 pc = 12.2 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 76.394,
+  "distanceSource": "Soubiran et al. (2024), A&A 682, A145, HD 18884: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with, 13.09 +/- 0.44 mas, inverted (https://doi.org/10.1051/0004-6361/202347136): 76.394 +/- 2.568 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 69713314.2,
+  "radiusSource": "Radius 100.206 +/- 3.384 solar radii from Soubiran et al. (2024), A&A 682, A145, HD 18884: radius 100.206 +/- 3.384 solar radii, from the limb-darkened angular diameter 12.2 +/- 0.04 mas (measured in 2006A&A...460..855W, as the table lists it) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.1051/0004-6361/202347136): 69,713,314 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 3738 +/- 170 K from Soubiran et al. (2024), A&A 682, A145, HD 18884: effective temperature 3738 +/- 170 K, from the angular diameter and the bolometric flux of the paper's SED fit (https://doi.org/10.1051/0004-6361/202347136). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3738,
+  "effectiveTemperatureSource": "Soubiran et al. (2024), A&A 682, A145, HD 18884: effective temperature 3738 +/- 170 K, from the angular diameter and the bolometric flux of the paper's SED fit (https://doi.org/10.1051/0004-6361/202347136)",
+  "surfaceGravityLogg": 0.66,
+  "surfaceGravitySource": "Soubiran et al. (2024), A&A 682, A145, HD 18884: log g 0.66 +/- 0.07, the paper's own, from Newton's law with its radius and a mass from evolution models (https://doi.org/10.1051/0004-6361/202347136)",
+  "spectralType": "M1.5IIIa",
+  "spectralTypeSource": "SIMBAD, * alf Cet: spectral type M1.5IIIa (1989ApJS...71..245K)",
+  "objectType": "Long-Period Variable Candidate",
+  "objectTypePath": "* > Ev* > LP*",
+  "objectTypeSource": "SIMBAD, * alf Cet: main object type LP?, Long-Period Variable Candidate",
+  "projectedRotationSpeedKmS": 7,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Cet: projected rotation speed 7 km/s, the measurement SIMBAD prefers (2025A&A...698A..93J)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 158) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

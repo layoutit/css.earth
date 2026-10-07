@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alphecca",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alphecca",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2699316
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alphecca-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alphecca",
+      "classification": "star",
+      "color": "#b7caff",
+      "distanceAu": 4883116.8,
+      "description": "A subgiant of type A1 IV, 24 parsecs away: 3.9 times the Sun's width.",
+      "systemName": "Alphecca system",
+      "aliases": [
+        "HD 139006"
+      ],
+      "order": 5805,
+      "context": {
+        "order": 5802
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -386555203716337700,
+        -525710546647270800,
+        328389127239831600
+      ],
+      "presentationToReference": [
+        -0.5291612131169774,
+        -0.26630830023535706,
+        -0.8056477516621788,
+        -0.7196530481208202,
+        -0.3621709404361233,
+        0.5923948853881392,
+        0.4495418788755741,
+        -0.893259256391653,
+        0.000002765807353677527
+      ],
+      "orbitUpReference": [
+        0.26630830023535706,
+        0.3621709404361233,
+        0.893259256391653
+      ],
+      "metersPerUnit": 8707470.967741935,
+      "bodyRadiusM": 2699316000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

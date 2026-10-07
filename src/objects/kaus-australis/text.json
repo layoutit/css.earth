@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kaus-australis",
+  "card": {
+    "text": "A dwarf of type A0 V, 44 parsecs away: 6.8 times the Sun's width.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1086-154093",
+        "url": "https://doi.org/10.1086/154093",
+        "label": "Code et al. (1976), The Astrophysical Journal 203 417",
+        "checked": "2026-10-07",
+        "locator": "Tables 1 and 6, HD 169022: MK type, limb-darkened diameter, effective temperature"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 1.44 milliarcseconds, which at its distance is 6.8 solar radii, and its surface is at 9,460 K.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1086-154093",
+        "url": "https://doi.org/10.1086/154093",
+        "label": "Code et al. (1976), The Astrophysical Journal 203 417",
+        "checked": "2026-10-07",
+        "locator": "Tables 1 and 6, HD 169022: MK type, limb-darkened diameter, effective temperature"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

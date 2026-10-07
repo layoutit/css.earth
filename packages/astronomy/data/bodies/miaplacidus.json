@@ -1,0 +1,30 @@
+{
+ "id": "miaplacidus",
+ "classification": "star",
+ "order": 5811,
+ "physical": {
+  "name": "Miaplacidus",
+  "horizonsCode": null,
+  "meanRadiusKm": 4125501,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 9240
+ },
+ "physicalNotes": "Radius 5.93 +/- 0.26 solar radii from Computed here, not printed by a paper: 5.93 +/- 0.26 solar radii, from the limb-darkened angular diameter 1.59 +/- 0.07 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 28.82 +/- 0.11 mas (van Leeuwen 2007, XHIP) (https://doi.org/10.1093/mnras/167.1.121): 4,125,501 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 9240 +/- 220 K from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 80007: effective temperature 9240 +/- 220 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 138.30100317,
+  "declinationDegrees": -69.71747241,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 34.698,
+  "properMotionRaMasPerYear": -156.47,
+  "properMotionDecMasPerYear": 108.95,
+  "radialVelocityKmPerS": -5.1,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 45238: RAJ2000 138.30100317, DEJ2000 -69.71747241 (ICRS at epoch J1991.25), from the archived row src/objects/miaplacidus/source/photometry/catalogue-row.tsv; SIMBAD names it HD 80007",
+   "distance": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 45238: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 28.82 +/- 0.11 mas, inverted (https://doi.org/10.1134/S1063773712050015): 34.698 +/- 0.132 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 45238 (same row): -156.47, 108.95 mas/yr",
+   "radialVelocity": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 45238: RV -5.1 +/- 2.3 km/s (quality A) (https://doi.org/10.1134/S1063773712050015)"
+  }
+ }
+}

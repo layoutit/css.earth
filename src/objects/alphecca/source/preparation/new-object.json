@@ -1,0 +1,54 @@
+{
+  "id": "alphecca",
+  "name": "Alphecca",
+  "system": "Alphecca system",
+  "description": "A subgiant of type A1 IV 23.7 parsecs away, 3.9 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 139006"
+  ],
+  "parent": "milky-way",
+  "target": "HD 139006",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/adc930",
+    "credit": "Baines et al. (2025), AJ 169, 293"
+  },
+  "radius": {
+    "value": 3.88,
+    "source": "Baines et al. (2025), AJ 169, 293, HD 139006: radius 3.88 +/- 0.11 solar radii (Table 7), from the limb-darkened angular diameter 1.525 +/- 0.027 mas (NPOI, Table 6) and the Gaia DR3 (Gaia Collaboration 2022) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/adc930",
+    "uncertainty": 0.11
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 8152,
+    "source": "Baines et al. (2025), AJ 169, 293, HD 139006: effective temperature 8152 +/- 93 K (Table 7), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/adc930",
+    "uncertainty": 93
+  },
+  "gravity": {
+    "value": 3.82,
+    "source": "Baines et al. (2025), AJ 169, 293, HD 139006: log g 3.82, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 6)",
+    "url": "https://doi.org/10.3847/1538-3881/adc930"
+  },
+  "distance": {
+    "value": 23.674,
+    "source": "Baines et al. (2025), AJ 169, 293, HD 139006: the Gaia DR3 (Gaia Collaboration 2022) parallax the radius was computed with (Table 2), 42.24 +/- 0.98 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/adc930",
+    "uncertainty": 0.549
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A subgiant of type A1 IV, 24 parsecs away: 3.9 times the Sun's width.",
+    "introduction": "Its disc spans 1.525 milliarcseconds, which gives 3.88 solar radii and 8,152 K at its surface.",
+    "locator": "Tables 2, 6 and 7, HD 139006: parallax, MK type, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 1.7,
+    "uncertainty": 0.9,
+    "source": "SIMBAD's radial velocity for Gaia DR3 1222646935698492160 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+  },
+  "order": 5805
+}

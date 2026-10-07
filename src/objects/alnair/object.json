@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alnair",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alnair",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2365380
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alnair-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alnair",
+      "classification": "star",
+      "color": "#aec5ff",
+      "distanceAu": 6387839.3,
+      "description": "A subgiant of type B7 IV, 31 parsecs away: 3.4 times the Sun's width.",
+      "systemName": "Alnair system",
+      "aliases": [
+        "HD 209952"
+      ],
+      "order": 5815,
+      "context": {
+        "order": 5812
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        576165484226112060,
+        -305590997240908400,
+        -698450086129504900
+      ],
+      "presentationToReference": [
+        0.6029313172904645,
+        -0.6456969146341409,
+        -0.46856090432550634,
+        -0.31978726175527006,
+        0.3424696019815521,
+        -0.8834311964933453,
+        -0.7308966642757728,
+        -0.6824881435970506,
+        4.4754513020640143e-17
+      ],
+      "orbitUpReference": [
+        0.6456969146341409,
+        -0.3424696019815521,
+        0.6824881435970506
+      ],
+      "metersPerUnit": 7630258.064516129,
+      "bodyRadiusM": 2365380000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gienah",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Gienah",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2643660
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gienah-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Gienah",
+      "classification": "star",
+      "color": "#b1c8ff",
+      "distanceAu": 9715659.8,
+      "description": "A giant of type B8 III, 47 parsecs away: 3.8 times the Sun's width.",
+      "systemName": "Gienah system",
+      "aliases": [
+        "HD 106625"
+      ],
+      "order": 5812,
+      "context": {
+        "order": 5809
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1382560751658610700,
+        -95473308335447900,
+        -438068844148327800
+      ],
+      "presentationToReference": [
+        -0.951231005361051,
+        0.30068787689354476,
+        -0.06889394116362281,
+        -0.06568765308817849,
+        0.020772756875751953,
+        0.9976239896892757,
+        -0.30140455648774017,
+        -0.9534963519914659,
+        0.000008209461838125301
+      ],
+      "orbitUpReference": [
+        -0.30068787689354476,
+        -0.020772756875751953,
+        0.9534963519914659
+      ],
+      "metersPerUnit": 8527935.483870968,
+      "bodyRadiusM": 2643660000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

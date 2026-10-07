@@ -1,0 +1,54 @@
+{
+  "id": "alioth",
+  "name": "Alioth",
+  "system": "Alioth system",
+  "description": "A giant of type A1 III-IV 24.3 parsecs away, 4.3 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 112185"
+  ],
+  "parent": "milky-way",
+  "target": "HD 112185",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/ad08be",
+    "credit": "Baines et al. (2023), AJ 166, 268"
+  },
+  "radius": {
+    "value": 4.29,
+    "source": "Baines et al. (2023), AJ 166, 268, HD 112185: radius 4.29 +0.19/-0.21 solar radii (Table 7), from the limb-darkened angular diameter 1.644 +/- 0.02 mas (NPOI, Table 5) and the Gaia DR2 (Gaia Collaboration 2018) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/ad08be",
+    "uncertainty": 0.21
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 8908,
+    "source": "Baines et al. (2023), AJ 166, 268, HD 112185: effective temperature 8908 +/- 54 K (Table 7), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/ad08be",
+    "uncertainty": 54
+  },
+  "gravity": {
+    "value": 3.59,
+    "source": "Baines et al. (2023), AJ 166, 268, HD 112185: log g 3.59, from McDonald et al. (2017), as the paper lists it beside the diameter (Table 5)",
+    "url": "https://doi.org/10.3847/1538-3881/ad08be"
+  },
+  "distance": {
+    "value": 24.26,
+    "source": "Baines et al. (2023), AJ 166, 268, HD 112185: the Gaia DR2 (Gaia Collaboration 2018) parallax the radius was computed with (Table 2), 41.22 +/- 1.84 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/ad08be",
+    "uncertainty": 1.083
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A giant of type A1 III-IV, 24 parsecs away: 4.3 times the Sun's width and 104 times its light.",
+    "introduction": "Its disc spans 1.644 milliarcseconds, which gives 4.29 solar radii and 8,908 K at its surface.",
+    "locator": "Tables 2, 5 and 7, HD 112185: parallax, MK type, limb-darkened diameter, radius, Teff, luminosity"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -12.7,
+    "uncertainty": 0.2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 1576683529448755328 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+  },
+  "order": 5804
+}

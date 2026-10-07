@@ -1,0 +1,62 @@
+{
+  "id": "gienah",
+  "name": "Gienah",
+  "system": "Gienah system",
+  "description": "A giant of type B8 III 47.1 parsecs away, 3.8 times the Sun's width: its disc was measured with the Narrabri intensity interferometer.",
+  "aliases": [
+    "HD 106625"
+  ],
+  "parent": "milky-way",
+  "target": "HD 106625",
+  "paper": {
+    "url": "https://doi.org/10.1086/154093",
+    "credit": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417"
+  },
+  "radius": {
+    "value": 3.8,
+    "source": "Computed here, not printed by a paper: 3.8 +/- 0.31 solar radii, from the limb-darkened angular diameter 0.75 +/- 0.06 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 21.23 +/- 0.2 mas (van Leeuwen 2007, XHIP)",
+    "url": "https://doi.org/10.1093/mnras/167.1.121",
+    "uncertainty": 0.31
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 12450,
+    "source": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 106625: effective temperature 12450 +/- 530 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared",
+    "url": "https://doi.org/10.1086/154093",
+    "uncertainty": 530
+  },
+  "radialVelocity": {
+    "value": -4.2,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 59803: RV -4.2 +/- 2.6 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 2.6
+  },
+  "distance": {
+    "value": 47.103,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 59803: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 21.23 +/- 0.2 mas, inverted",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 0.444
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "59803"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A giant of type B8 III, 47 parsecs away: 3.8 times the Sun's width.",
+    "introduction": "Its disc spans 0.75 milliarcseconds, which at its distance is 3.8 solar radii, and its surface is at 12,450 K.",
+    "locator": "Tables 1 and 6, HD 106625: MK type, limb-darkened diameter, effective temperature"
+  },
+  "notes": [],
+  "order": 5812
+}

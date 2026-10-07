@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alnilam",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alnilam",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 31306500
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alnilam-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alnilam",
+      "classification": "star",
+      "color": "#a6c1ff",
+      "distanceAu": 125009258.7,
+      "description": "A supergiant of type B0 Ia, 606 parsecs away: 45.0 times the Sun's width.",
+      "systemName": "Alnilam system",
+      "aliases": [
+        "HD 37128"
+      ],
+      "order": 5809,
+      "context": {
+        "order": 5806
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1937038149054628900,
+        18596393538434740000,
+        -392274831338727600
+      ],
+      "presentationToReference": [
+        0.10357873036786402,
+        -0.002173137756255633,
+        0.9946188838382639,
+        0.9944000499279196,
+        -0.020863000527847335,
+        -0.10360152466217044,
+        -0.020975874683373637,
+        -0.9997799821367036,
+        -5.186982345318221e-9
+      ],
+      "orbitUpReference": [
+        0.002173137756255633,
+        0.020863000527847335,
+        0.9997799821367036
+      ],
+      "metersPerUnit": 100988709.67741935,
+      "bodyRadiusM": 31306500000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

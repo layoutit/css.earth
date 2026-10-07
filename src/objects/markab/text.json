@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "markab",
+  "card": {
+    "text": "A giant of type B9 III, 41 parsecs away: 5.3 times the Sun's width.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adc930",
+        "url": "https://doi.org/10.3847/1538-3881/adc930",
+        "label": "Baines et al. (2025), The Astronomical Journal 169 293",
+        "checked": "2026-10-07",
+        "locator": "Tables 2, 6 and 7, HD 218045: parallax, MK type, limb-darkened diameter, radius, Teff"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its disc spans 1.218 milliarcseconds, which gives 5.35 solar radii and 8,935 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-adc930",
+        "url": "https://doi.org/10.3847/1538-3881/adc930",
+        "label": "Baines et al. (2025), The Astronomical Journal 169 293",
+        "checked": "2026-10-07",
+        "locator": "Tables 2, 6 and 7, HD 218045: parallax, MK type, limb-darkened diameter, radius, Teff"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

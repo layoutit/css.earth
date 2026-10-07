@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kaus-australis",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kaus Australis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 4730760
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kaus-australis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kaus Australis",
+      "classification": "star",
+      "color": "#bacdff",
+      "distanceAu": 9062544.7,
+      "description": "A dwarf of type A0 V, 44 parsecs away: 6.8 times the Sun's width.",
+      "systemName": "Kaus Australis system",
+      "aliases": [
+        "HD 169022"
+      ],
+      "order": 5813,
+      "context": {
+        "order": 5810
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        117777675549499100,
+        -1112614124735830400,
+        -765664486399114500
+      ],
+      "presentationToReference": [
+        0.08687478519065023,
+        -0.059454086874412254,
+        -0.994443554583169,
+        -0.8206828036382869,
+        0.5616028125633139,
+        -0.1052711581268889,
+        -0.5647410977700132,
+        -0.8252681336843833,
+        0.000003822999944029341
+      ],
+      "orbitUpReference": [
+        0.059454086874412254,
+        -0.5616028125633139,
+        0.8252681336843833
+      ],
+      "metersPerUnit": 15260516.129032258,
+      "bodyRadiusM": 4730760000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

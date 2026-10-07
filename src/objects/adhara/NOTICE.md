@@ -1,0 +1,9 @@
+# Adhara credits
+
+Radius, mass and temperature: Radius 10.7 +/- 0.69 solar radii from Computed here, not printed by a paper: 10.7 +/- 0.69 solar radii, from the limb-darkened angular diameter 0.8 +/- 0.05 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 8.05 +/- 0.14 mas (van Leeuwen 2007, XHIP) (https://doi.org/10.1093/mnras/167.1.121); No mass is measured, so GM is 0, the records' unpublished value; temperature from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 52089: effective temperature 20990 +/- 760 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared.
+
+Color: HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 52089: 168-1020 nm, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b). Cross-check: Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Adhara is HR 2618..
+
+Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
+
+Placement: position from Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 33579 (CDS, Strasbourg); distance: Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 33579: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 8.05 +/- 0.14 mas, inverted; radial velocity: Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 33579: RV 27.3 +/- 0.4 km/s (quality A).

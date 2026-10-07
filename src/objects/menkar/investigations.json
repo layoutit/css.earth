@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "menkar",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 14135: position at J1991.25; Gaia cannot see the star. Distance: Soubiran et al. (2024), A&A 682, A145, HD 18884: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with, 13.09 +/- 0.44 mas, inverted (https://doi.org/10.1051/0004-6361/202347136): 76.394 +/- 2.568 pc; Gaia DR3 cannot see the star. Proper motion: VizieR V/137D/XHIP row HIP = 14135 (same row): -11.7, -77.7 mas/yr. Radial velocity from Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 14135: RV -26.08 +/- 0.02 km/s (quality A).",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=V/137D/XHIP",
+        "https://doi.org/10.1051/0004-6361/202347136",
+        "https://doi.org/10.1134/S1063773712050015"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 100.206 +/- 3.384 solar radii from Soubiran et al. (2024), A&A 682, A145, HD 18884: radius 100.206 +/- 3.384 solar radii, from the limb-darkened angular diameter 12.2 +/- 0.04 mas (measured in 2006A&A...460..855W, as the table lists it) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.1051/0004-6361/202347136). No mass is measured, so GM is 0, the records' unpublished value. Temperature 3738 +/- 170 K from Soubiran et al. (2024), A&A 682, A145, HD 18884: effective temperature 3738 +/- 170 K, from the angular diameter and the bolometric flux of the paper's SED fit.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202347136"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 158: HR 911; VizieR III/202, cross-checked against Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 25 (BS 911), the widest of its 2 scans (6 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffce84. Routes tried in order: stis-ngsl: HD 18884 is not in the library; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; pulkovo: HR 911 is not in the catalogue; kiehling: HR 911 is not among its 60 stars; kharitonov: used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+        "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,738 K and log g 0.66 (u1 1.015, u2 -0.171): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

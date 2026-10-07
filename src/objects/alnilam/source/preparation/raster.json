@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/alnilam/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "alnilam-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssalnilam-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "alnilam-surface-{id}{suffix}.webp",
+      "thumbnail": "alnilam-dataset-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "limbDarkening": {
+          "law": "quadratic",
+          "howarth": {
+            "paths": [
+              "photometry/howarth-2011/t24000g28.ucE",
+              "photometry/howarth-2011/t24000g30.ucE",
+              "photometry/howarth-2011/t25000g28.ucE",
+              "photometry/howarth-2011/t25000g30.ucE"
+            ],
+            "teffK": 24820,
+            "logg": 2.89,
+            "passband": "Bessell-V"
+          }
+        },
+        "qualification": "Photosphere color from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 381), dimmed toward the limb by the quadratic law Howarth (2011), MNRAS 413, 1515 computes from ATLAS9 model atmospheres for the Bessell V band at 24,820 K and log g 2.89, read between the models t24000g28, t24000g30, t25000g28, t25000g30 (u1 0.128, u2 0.390): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "alnilam-context-{id}{suffix}.webp",
+    "limbOutput": "alnilam-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssalnilam-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "black alpha darkens the photosphere according to the selected quadratic limb-darkening law; transparent outside the silhouette",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}
