@@ -193,7 +193,8 @@ Nothing is measured or judged here for such a star. Its datasets say that the ro
 and its README gives the sentence with which Holcomb et al.'s criteria refuse the same light. A period a paper published
 is not written into the star's record as one measured here.
 
-Of our stars, 39 are in the catalogue. Holcomb et al.'s method accepts 19 of them itself and refuses 20. Of the 19, 17
+A star is found in the catalogue by the TIC number in its light curve's file name. Of the 877 stars whose TESS light
+curves were read, 39 are in it. Holcomb et al.'s method accepts 19 of them itself and refuses 20. Of the 19, 17
 are at the table's period within 20%; HIP 67522 is at twice the period the table flags as a potential half, and TOI-2459
 at 11.13 days where the table prints 3.91. For the 20 it refuses:
 
