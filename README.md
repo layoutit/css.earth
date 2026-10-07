@@ -18,11 +18,11 @@ Other universe browsers exist, and many of them inspired this platform: NASA's [
 
 Every object has its own URL and they all share one camera, so you can fly from Saturn to another galaxy without leaving the page. The catalogue includes Solar System bodies, stars and exoplanets, plus the nebulae and galaxies below.
 
+<img src=".github/assets/zoom-out.webp" alt="One camera move from Earth out past the Solar System and the Milky Way to the observable universe and back, rendered as DOM and CSS markup" width="960">
+
 ### The Solar System
 
 The Sun, the eight planets, dwarf planets, moons, asteroids, comets and other trans-Neptunian objects, all on their orbits. Where a mission photographed a body, its surface comes from that mission's images; the rest are shown as shape models.
-
-<img src=".github/assets/solar-system.webp" alt="An endless zoom from the whole Solar System in to Earth and back out, rendered as DOM and CSS markup" width="960">
 
 ### Stars and Exoplanets
 
@@ -34,13 +34,15 @@ Stars whose surfaces have been imaged, such as Betelgeuse and R Doradus, and pla
 
 The Orion Nebula, the Crab, the Lagoon and the Helix, built as 3D volumes or as pictures placed on published 3D shapes, such as the Ring and Cassiopeia A, plus the Pleiades cluster. Beyond them: the Milky Way, the Large Magellanic Cloud, Andromeda, Triangulum, the Local Group, the Galactic Centre, galaxy clusters such as the Bullet Cluster and Abell 1689, and the nearby and observable universe.
 
-<img src=".github/assets/nebulae-galaxies.webp" alt="The Crab Nebula as a 3D volume, and the Milky Way seen at an angle from outside, rendered as DOM and CSS markup" width="960">
+<img src=".github/assets/milky-way.webp" alt="The Milky Way seen at an angle from outside, rendered as DOM and CSS markup" width="960">
 
 ## How It Works
 
 css.earth uses the [PolyCSS](https://github.com/LayoutitStudio/polycss) engine to turn celestial bodies into 3D DOM elements. The universe is a shared `matrix3d(...)` scene, and nothing is drawn to a `<canvas>` or relies on WebGL.
 
 Every pixel has a source. What you see is built from public data from spacecraft and telescopes, such as Cassini at Saturn, New Horizons at Pluto, and Hubble and Webb at the Ring Nebula. An object can carry several datasets to switch between, and its README names the data behind each one, how it was processed and its known limits.
+
+<img src=".github/assets/dataset-examples.webp" alt="Three datasets: Earth's sea-surface temperature anomaly during ENSO monitoring, asteroid Itokawa's elevation from the Hayabusa shape model, and Ceres in enhanced colour from Dawn, rendered as DOM and CSS markup" width="960">
 
 ## Telescope API
 
