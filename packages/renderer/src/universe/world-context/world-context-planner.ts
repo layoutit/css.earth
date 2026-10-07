@@ -18,6 +18,8 @@ const ORBIT_LOD_PIXELS = 0.1;
 // camera sample. This uses committed visibility, never worker-local history.
 const ANNOTATION_ENTRY_MARGIN = .05;
 export { orbitOutsideMarker } from './orbit-presentation.js';
+import { createUncrowdedStars } from './uncrowded-stars.js';
+import { hasPath, pathLevels, type PlannerOrbit } from './planner-orbit-levels.js';
 import { orbitBounds, orbitOutsideMarker, orbitPresentation, quantizeAlpha, ORBIT_FADE_START_PIXELS, ORBIT_FULL_PIXELS } from './orbit-presentation.js';
 
 /** UI measurements and the last committed annotation state, without DOM handles. */
@@ -82,26 +84,18 @@ interface ProjectedBody<Entry> {
   /** The body is the frame's emphasised subject; the reader points at it: the subject, hovered or highlighted. */
   emphasised: boolean; targeted: boolean; emphasis: number;
   segments: readonly OrbitSegment[]; labelPosition?: readonly number[];
+  /** The uncrowded-star rule's scratch (uncrowded-stars.ts). */ quietStar?: boolean; uncrowdedOpacity?: number; uncrowded?: boolean;
 }
 
 /** `annotationLandmarks`: moons named across their star's system, like the orientation references (a sourced list of
  * each planet's major moons). */
-/** An orbit is planned from its summary (centre, bounds, size) until its centre's bank supplies the path (`attachOrbits`);
- * a frame that would draw or measure a path it lacks names that body (`takeWantedOrbits`) and draws no segments for it. */
-type PlannerOrbit = PreparedContextOrbit | PreparedContextOrbitGeometry;
-const hasPath = (orbit: PlannerOrbit): orbit is PreparedContextOrbitGeometry => 'verticesM' in orbit;
-// Prepared detail levels are decoded once; each frame only selects one.
-const pathLevels = (orbit: PreparedContextOrbitGeometry) => [{ vertices: orbit.verticesM, trail: orbit.trail, activeChords: orbit.activeChords, deviationM: 0 },
-  // Each coarser level gathers its selected vertices once, into its own flat array.
-  ...(orbit.lod?.levels ?? []).map(level => ({ vertices: Float64Array.from({ length: level.vertexIndices.length * 3 },
-    (_, slot) => orbit.verticesM[level.vertexIndices[Math.floor(slot / 3)]! * 3 + slot % 3]!),
-    trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM }))];
 
 export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedWorldContextGeometry, initialPriorities: Readonly<Record<string, number>> = {},
   annotationLandmarks: readonly string[] = []) {
   // Each body's annotation tier: the first plan's, and each extension's for the bodies it adds (`extend`).
   const annotationPriorities: Record<string, number> = { ...initialPriorities };
   const wantedOrbits = new Set<string>(), landmarkMoonIds = new Set(annotationLandmarks), declutterMarkers = createMarkerDeclutter(annotationPriorities);
+  const uncrowdedStars = createUncrowdedStars(BODY_INDICATOR_DIAMETER);
   const points = [plan.focus, ...plan.bodies].map(body => 'classification' in body && isExtendedClassification(body.classification) ? { ...body, radiusM: 0 } : body), byId = new Map(points.map(point => [point.id, point]));
   const indexById = new Map(points.map((point, index) => [point.id, index] as const).reverse()); // Each id's first slot, looked up per frame.
   let systemFade = createSystemFade(plan);
@@ -341,9 +335,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           entry.galaxyField && (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
         // A retired galaxy level takes its own stars and nebulae with it; another galaxy's star, a galaxy, a cluster and a black hole (a galaxy's centre, its landmark from outside) keep their dots.
         const atGalaxyScale = view.galaxyRetired === true && body.id !== plan.focus.id && entry.orbit === null && entry.galaxyField && entry.kind !== 'galaxy' && entry.kind !== 'galaxy-cluster' && entry.kind !== 'black-hole' ? 1 : galaxyHost ? galaxyHandoff : 0;
-        const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
-          (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity)) *
-          (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));
+        const ownOpacity = (flightDestination ? bodyLod.proxyOpacity : ownsDetail ? lod.proxyOpacity : 1) *
+          (isLocator ? 1 : systemOpacity * (ownsDetail || flightDestination ? 1 : proxyOpacity));
+        const markerOpacity = ownOpacity * (isSelected || flightDestination ? 1 : (1 - beyondLocalGroup) * (1 - atGalaxyScale));
         const orbitVisibility = skipped ? 0 : appearance.opacity * bodyOrbitOpacity * systemOpacity;
         if (entry.orbit && orbitVisibility > 0) anchorLineWidth = Math.max(anchorLineWidth, appearance.width);
         // A flight destination keeps its circle until the preview hands off to detail.
@@ -362,15 +356,18 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         projected.inFrame = inFrame; projected.priority = priority; projected.coveredBy = typeof cover === 'string' ? cover : null;
         projected.lineWidth = appearance.width; projected.orbitVisibility = orbitVisibility;
         projected.segments = segments; projected.labelPosition = undefined; projected.emphasised = emphasised; projected.targeted = targeted; projected.emphasis = emphasis;
+        // The handoff is for a crowd of stars: one that stands alone keeps the marker it has inside the galaxy (uncrowded-stars.ts).
+        projected.quietStar = galaxyHost && galaxyHandoff > 0 && view.galaxyRetired !== true && !isSelected && !flightDestination; projected.uncrowded = false; projected.uncrowdedOpacity = ownOpacity * (1 - beyondLocalGroup);
         projectedBodies.push(projected);
       }
+      uncrowdedStars.keep(projectedBodies, width, height); // a star that is not featured keeps its marker where nothing crowds it
       // Orbitless locators use the same stroke as the visible system, then thin as they recede.
       for (const projected of projectedBodies) if (projected.entry.orbit === null && (projected === projectedBodies[0] || !projected.entry.bodyHidden)) projected.lineWidth = anchorLineWidth;
       // Shell chrome never decides whether a world annotation exists. An
       // in-frame anchor is already the visibility boundary; captions are kept
       // inside the viewport below, while partially clipped circles are left to
       // normal browser clipping. The viewport width still owns density only.
-      const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry> })[] = [];
+      const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry>; quiet: boolean })[] = [];
       // Beyond the Local Group scale a galaxy stands for what is inside it: a star, or a galaxy it holds (M110 in M31, the Large
       // Cloud in the Milky Way), whose marker falls within the galaxy's circle is not named, so the galaxy is. By tier a
       // featured star is admitted before a galaxy and held M31's name across the Local Group; by id M110 took it. The holder
@@ -445,7 +442,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // A presentation setting removes the body from annotation admission;
         // final admission below retires an on-screen context orbit with the caption.
         // Selection/hover can still reveal the complete annotation.
-        if (!projected.nameable || (!targeted && entry.labelHidden)) continue;
+        const quiet = !targeted && entry.labelHidden; // hidden by its rank, and still a candidate where nothing crowds it
+        if (!projected.nameable || quiet && !projected.uncrowded) continue;
         if (size.width === 0) { labelMeasurements.push(entry.index); projected.nameable = false; continue; }
         const gap = Math.max(5, diameter / 2, circle || referenceAnnotationOnly ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
@@ -476,7 +474,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
           pinned: hovered ? 3 : highlighted ? 2 : emphasised ? 1 : 0,
           priority, tier: annotationPriorities[body.id] ?? 0, shown: entry.labelShown,
           previousPlacement: entry.labelShown ? entry.labelPlacement : sides[0], placements,
-          ...(anchor ? { anchor } : {}),
+          ...(anchor ? { anchor } : {}), quiet,
         });
       }
       // The selected body's name is painted by the separate caption below its
@@ -498,7 +496,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         (rotationActive || preserveCommittedAnnotations) && candidate.projected.entry.prominent);
       const acceptedLandmarks = landmarks.flatMap(candidate => admitStableLabels([candidate], worldLabelBudget()));
       for (const { candidate, rect } of acceptedLandmarks) labelBudget.admit(rect, candidate.anchor);
-      const landmarkSet = new Set(landmarks), otherCandidates = candidates.filter(candidate => !landmarkSet.has(candidate));
+      const landmarkSet = new Set(landmarks), otherCandidates = candidates.filter(candidate => !landmarkSet.has(candidate) && !candidate.quiet);
       // Use the same admission during motion and at rest. Clear committed
       // placements survive first; obstructed labels can move and newly clear
       // labels can return. Gesture history must not strand a visible star as a dot.
@@ -511,7 +509,10 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const major = (candidate: typeof candidates[number]) => candidate.pinned > 0 || (ownSystem(candidate) ? moon(candidate) || (candidate.tier ?? 0) >= 2 : (candidate.tier ?? 0) >= 3);
       const passes = [(candidate: typeof candidates[number]) => ownSystem(candidate) && major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && major(candidate),
         (candidate: typeof candidates[number]) => ownSystem(candidate) && !major(candidate), (candidate: typeof candidates[number]) => !ownSystem(candidate) && !major(candidate)];
-      const accepted = [...acceptedLandmarks, ...passes.flatMap(pass => admitStableLabels(otherCandidates.filter(pass), labelBudget))];
+      // Last, the uncrowded stars: each takes a slot that is left, where its caption covers no other marker.
+      const accepted = [...acceptedLandmarks, ...passes.flatMap(pass => admitStableLabels(otherCandidates.filter(pass), labelBudget)),
+        ...admitStableLabels(candidates.filter(candidate => candidate.quiet && !landmarkSet.has(candidate)), labelBudget,
+          (candidate, rect) => !uncrowdedStars.marked(rect.left, rect.top, rect.right, rect.bottom, candidate.projected))];
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; } if (selectedLocator) selectedLocator.entry.indicatorShown = true;
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;

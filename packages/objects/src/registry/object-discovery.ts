@@ -82,7 +82,8 @@ function computeDiscoveryVisibility(objects: DiscoveryObjects, options: Discover
     const illustration = object.discovery.illustration && options.orbitFeatures?.has(object.id) !== true;
     // A star is named where there is more to find: a notable star (featured: marked so by its package, or real imagery), or a star
     // of a system, with something orbiting it or orbiting something itself. Every other star is a dot that names itself on
-    // hover, so the names on the map point to where there is more to click.
+    // hover, so the names on the map point to where there is more to click; where nothing crowds it the map names it too
+    // (the renderer's uncrowded-stars.ts).
     const namedStar = object.classification !== 'star' || object.discovery.featured || options.systemMembers?.has(object.id) === true;
     const featured = (!illustration || options.illustrations) && (options.defaultFeatures.has(object.id) || isDiscoveryAnchor(object) && namedStar);
     if (offTheMap(object)) { hiddenBodies.push(object.id); hiddenLabels.push(object.id); continue; }

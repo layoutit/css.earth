@@ -140,7 +140,13 @@ A star is the exception, because many stars can gain a map. A surface reconstruc
 magnetic, a spot or a brightness map) is something to see but not a picture of it. A star is featured when it is one of
 the navigational stars (below), when it has a picture of its own, or when its package marks it. Any other mapped star,
 however many maps its page holds, stays on the map as a dot that names itself on hover and opens on a click, and it ranks
-as any star does.
+as any star does. Past its system such a star gives way to the catalogue dots when it stands in a crowd; where no other
+marker is within its ring it keeps its marker, and it is named once every other caption has its place, if a slot is left
+and its caption covers no other marker
+([`uncrowded-stars.ts`](../packages/renderer/src/universe/world-context/uncrowded-stars.ts)). A star with nothing to see but
+its color is one of the galaxy's plain dots and has no marker to keep.
+
+![The map 13.7 light-years from the Sun, before and after: V1358 Orionis and HD 29615 are no longer featured and keep their ring and name, because nothing crowds them; Keid and Zaurak, with only a color to show, are plain dots](images/uncrowded-stars.webp)
 
 [Itokawa](../src/objects/itokawa/README.md),
 [Ryugu](../src/objects/ryugu/README.md) and
