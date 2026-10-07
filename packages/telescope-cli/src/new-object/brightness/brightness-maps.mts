@@ -115,6 +115,15 @@ export function tinted(colorHex: string): string[] { const color = [1, 3, 5].map
 /** The scale all of a star's brightness maps share: the same reach either side of the mean surface. */
 const brightnessScale = (maps: readonly BrightnessSurfaceMap[]) => { const reach = scaleEnd(Math.max(...maps.flatMap(map => [100 - map.darkestPercent, map.brightestPercent - 100]))); return { minimum: 100 - reach, maximum: 100 + reach, labels: [`${100 - reach}%`, '100%', `${100 + reach}%`] }; };
 
+/** The least and greatest brightness in a map's table (its third column), percent of the mean surface. */
+function tableRange(table: string): readonly [number, number] | undefined { let low = Infinity, high = -Infinity;
+  for (const line of table.split('\n')) { const cells = line.trim().split(/\s+/u).map(Number); if (cells.length !== 3 || !cells.every(Number.isFinite)) continue; low = Math.min(low, cells[2]!); high = Math.max(high, cells[2]!); }
+  return low <= high ? [low, high] : undefined; }
+/** A map's range, percent of its mean. The receipt gives it to a tenth of a percent, which is the whole range of a map
+ * of a star whose light swings by a hundredth: such a map reads 100 to 100 there, and its range is read from its table,
+ * which holds it to a thousandth. A scale is drawn from it, nothing else: no star is kept or left out by its range. */
+export function mapRange(darkest: number, brightest: number, table: string): readonly [number, number] { return darkest < 100 || brightest > 100 ? [darkest, brightest] : tableRange(table) ?? [darkest, brightest]; }
+
 /** `curve` is the window's light curve as the reduction kept it: its times date the map. */
 export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, table: string, curve: unknown): BrightnessSurfaceMap {
   const times = requireRecord(curve, `${choice.program} light curve`).time; if (!Array.isArray(times) || times.length < 2 || !times.every(time => typeof time === 'number')) throw new TypeError(`${choice.program}: its light curve holds no times; reduce the star again.`);
@@ -137,13 +146,15 @@ export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, ta
   const privateer = toolchain.find(pin => pin.startsWith('star-privateer')), spinspotter = toolchain.find(pin => pin.startsWith('spinspotter'));
   const tiltFrom = map.inclinationFrom; if (tiltFrom !== 'page' && tiltFrom !== 'record' && tiltFrom !== 'assumed') throw new TypeError(`${choice.program}: its receipt does not say where the map's tilt comes from; reduce the star again.`);
   if (map.table !== `${choice.program}.dat` || !table.includes('ZONE I=')) throw new TypeError(`${choice.program}: the receipt and the table do not describe one map.`);
+  const [darkestPercent, brightestPercent] = mapRange(requireFiniteNumber(map.darkestPercent, 'darkestPercent'), requireFiniteNumber(map.brightestPercent, 'brightestPercent'), table);
   return { choice, table, targetName: requireString(star.name, 'receipt star name'), inclinationDegrees: requireFiniteNumber(map.inclinationDegrees, 'map inclination'), inclinationSource: source, periodDays: period,
-    periodSource: `measured here from the star's light in ${windowName(mission, window)} (${BRIGHTNESS_GENERATOR})`, mission, window, fromUtc: missionDay(times[0] as number, mission), toUtc: missionDay(times.at(-1) as number, mission), amplitude: requireFiniteNumber(rotation.amplitude, 'rotation amplitude'), darkestPercent: requireFiniteNumber(map.darkestPercent, 'darkestPercent'),
-    brightestPercent: requireFiniteNumber(map.brightestPercent, 'brightestPercent'), residual: requireFiniteNumber(map.residual, 'residual'), noise: requireFiniteNumber(map.noise, 'noise'), ...(typeof rotation.lightPeriodDays === 'number' ? { lightPeriodDays: rotation.lightPeriodDays } : {}), ...(light ? { neighbourShare: requireFiniteNumber(light.neighbourShare, 'neighbourShare'), neighbours: requireFiniteNumber(light.neighbours, 'neighbours') } : {}), tiltFrom,
+    periodSource: `measured here from the star's light in ${windowName(mission, window)} (${BRIGHTNESS_GENERATOR})`, mission, window, fromUtc: missionDay(times[0] as number, mission), toUtc: missionDay(times.at(-1) as number, mission), amplitude: requireFiniteNumber(rotation.amplitude, 'rotation amplitude'), darkestPercent,
+    brightestPercent, residual: requireFiniteNumber(map.residual, 'residual'), noise: requireFiniteNumber(map.noise, 'noise'), ...(typeof rotation.lightPeriodDays === 'number' ? { lightPeriodDays: rotation.lightPeriodDays } : {}), ...(light ? { neighbourShare: requireFiniteNumber(light.neighbourShare, 'neighbourShare'), neighbours: requireFiniteNumber(light.neighbours, 'neighbours') } : {}), tiltFrom,
     codes: [lightkurve.replace('==', ' '), ...(method.periodsDays && privateer ? [privateer.replace('==', ' ')] : []), ...(method.periodsDays || !spinspotter ? [] : [spinspotter.replace('==', ' ').replace('spinspotter', 'SpinSpotter')]), `starry ${requireString(map.starry, 'starry version')}`], method };
 }
 
-export const percent = (share: number) => { const value = 100 * share; return value >= 10 ? value.toFixed(0) : value >= 1 ? value.toFixed(1) : value.toFixed(2); };
+/** A share as a percentage in a sentence: two decimals under 1%, and a third where two would print a measured value as 0.00. */
+export const percent = (share: number) => { const value = 100 * share; return value >= 10 ? value.toFixed(0) : value >= 1 ? value.toFixed(1) : value >= 0.005 ? value.toFixed(2) : value >= 0.0005 ? value.toFixed(3) : 'under 0.001'; };
 const days = (period: number) => period >= 1 ? `${Number(period.toPrecision(3))} days` : `${Number((period * 24).toPrecision(3))} hours`;
 
 /** What is a brightness map's own in the records surface-maps.mts writes. */
@@ -182,7 +193,7 @@ export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
   // Only a page that measures the star's axis draws the star at the map's tilt.
   outlines: map => map.tiltFrom === 'page',
   // The star in its own color over its Brightness map's scale: a darker tone of its hue where it is dimmer.
-  natural(map, star) { const when = monthsOf(map.fromUtc, map.toUtc), darkest = Number((100 * (1 - map.darkestPercent / map.brightestPercent)).toFixed(1)), scale = brightnessScale([map]);
+  natural(map, star) { const when = monthsOf(map.fromUtc, map.toUtc), less = 100 * (1 - map.darkestPercent / map.brightestPercent), darkest = Number(less.toFixed(1)) || Number(less.toPrecision(2)), scale = brightnessScale([map]);
     const halved = map.lightPeriodDays === undefined ? '' : ` The light repeats every ${days(map.lightPeriodDays)}, half the catalogued rotation period, and the star is taken to turn once in two of them.`;
     return { id: 'color-brightness', label: 'Color + brightness', minimum: scale.minimum, maximum: scale.maximum, colors: tinted(star.colorHex), limbStrength: LIMB_STRENGTH,
       description: `The star's color (${star.colorHex}, its Color dataset) over the brightness map this project made from the star's light in ${windowName(map.mission, map.window)} (${when}): the map's scale, ${scale.minimum}% to ${scale.maximum}% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives ${darkest}% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.`,

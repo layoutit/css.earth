@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { validateDatasetSteps } from '@cssearth/bake/objects/content';
 import { surfaceMapFiles } from '../maps/surface-maps.mts';
 import { adoptPeriod, measuredPeriod, starMetadata } from '../metadata/star-metadata.mts';
-import { BRIGHTNESS_CONSUMER, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, monthsOf, reducedBrightness, missionDay, shortMonthsOf, tinted } from './brightness-maps.mts';
+import { BRIGHTNESS_CONSUMER, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, mapRange, monthsOf, percent, reducedBrightness, missionDay, shortMonthsOf, tinted } from './brightness-maps.mts';
 import { withBrightnessReadme, withMeasuredRotation, withPixelLight } from './brightness.mts';
 
 const TABLE = 'TITLE     = "test"\nVARIABLES = "Longitude [Deg]" "Latitude [Deg]" "Brightness [%]"\nZONE I=2, J=2, K=1, ZONETYPE=Ordered\n';
@@ -139,4 +140,37 @@ test('every star the reduction looked at carries what its light showed, or why i
   const shared = withPixelLight(quiet, { rotation: { detected: false, reason: 'Other stars give 50% of the light within 63 arcseconds of the star.' }, tried: [] });
   assert.deepEqual([shared.pixelLightWindow, shared.pixelLightScatterPercent], [undefined, undefined]); assert.match(String(shared.pixelLightSource), /the star's pixels were not read/u);
   assert.deepEqual(withPixelLight(quiet, { rotation: { detected: false, reason: 'No period stands out: the strongest, 4.13 d, has a periodogram power of 0.03, under the 0.3 a rotation asks for.' }, tried: [{ sector: 42 }] }, { flux: [1.002, 0.998, 1.002, 0.998] }), quiet);
+});
+
+test('a star whose light swings by a hundredth of a percent still gets a scale, and no measured value is printed as zero', () => {
+  // The receipt gives a map's range to a tenth of a percent, so this map reads 100 to 100 there; its table holds 99.992 to 100.01.
+  const rows = `${TABLE}DATAPACKING=POINT\nDT=(SINGLE SINGLE SINGLE)\n      0.00000    -90.00000    100.00000\n      5.00000    -90.00000     99.99200\n     10.00000    -90.00000    100.01000\n`;
+  const faint = { ...receipt('assumed', 'assumed'), rotation: { detected: true, periodDays: 0.73, amplitude: 0.00013 }, maps: [{ ...receipt('assumed', 'assumed').maps[0]!, periodDays: 0.73, residual: 0.00004, noise: 0.00002, darkestPercent: 100, brightestPercent: 100 }] };
+  const choice = brightnessChoice('hd-1', 'TESS', 95), map = reducedBrightness(choice, faint, rows, LIGHT); assert.deepEqual([map.darkestPercent, map.brightestPercent], [99.992, 100.01]);
+  const { files, report } = surfaceMapFiles(BRIGHTNESS_MAPS, { host: 'hd-1', maps: [choice] }, { id: 'hd-1', name: 'HD 1', colorHex: '#ffc08b' }, [map], HOST()), surfaces = (JSON.parse(files.get('src/objects/hd-1/source/preparation/raster.json')!) as Record<string, any>).surfaces;
+  const gray = surfaces.find((surface: { id: string }) => surface.id === 'brightness-sector-95').science, own = surfaces.find((surface: { id: string }) => surface.id === 'color-brightness').science;
+  assert.deepEqual([gray.minimum, gray.maximum, gray.labels, own.minimum, own.maximum], [99.99, 100.01, ['99.99%', '100%', '100.01%'], 99.99, 100.01]); assert.match(report, /on one scale of 99\.99% to 100\.01% \(Sector 95: turns in 17\.5 hours, light swings 0\.01%\)/u);
+  assert.match(gray.description, /the light varies by 0\.01%; the map's curve leaves a scatter of 0\.004%, the light's own noise being 0\.002%/u); assert.match(own.description, /the map's scale, 99\.99% to 100\.01% of the mean surface.*the darkest part gives 0\.018% less light than the brightest/u);
+  // A range the receipt does give is the receipt's, whatever the table holds; a table with no rows leaves it as it is.
+  assert.deepEqual([mapRange(93.4, 104.2, rows), mapRange(100, 100.1, rows), mapRange(100, 100, TABLE)], [[93.4, 104.2], [100, 100.1], [100, 100]]);
+  assert.deepEqual([0.085, 0.0051, 0.00051, 0.00005, 0.00004, 0.000004].map(percent), ['8.5', '0.51', '0.05', '0.01', '0.004', 'under 0.001']);
+});
+
+test('a page that already files a dataset or a group under the steps\' own id gives the maps\' steps another, which the bake accepts', () => {
+  const choices = [brightnessChoice('hd-1', 'TESS', 95), brightnessChoice('hd-1', 'TESS', 96)], two = { ...receipt('assumed', 'assumed'), tried: [...receipt('assumed', 'assumed').tried, { ...receipt('assumed', 'assumed').tried[0]!, window: 96 }], maps: [receipt('assumed', 'assumed').maps[0]!, { ...receipt('assumed', 'assumed').maps[0]!, window: 96, table: 'hd-1-s0096.dat' }] };
+  const maps = choices.map(choice => reducedBrightness(choice, two, TABLE, LIGHT)), star = { id: 'hd-1', name: 'HD 1', colorHex: '#ffc08b' };
+  const written = (host: ReturnType<typeof HOST>) => { const { files } = surfaceMapFiles(BRIGHTNESS_MAPS, { host: 'hd-1', maps: choices }, star, maps, host), content = JSON.parse(files.get('src/objects/hd-1/source/content/object.json')!) as { datasets: { controls: { id: string; step?: { group: string; label: string } }[] } };
+    validateDatasetSteps('hd-1', content.datasets.controls); return { files, controls: content.datasets.controls, groups: [...new Set(content.datasets.controls.flatMap(control => control.step && control.id.startsWith('brightness-sector') ? [control.step.group] : []))] }; };
+  // Any other page keeps the kind's own group id.
+  assert.deepEqual(written(HOST()).groups, ['brightness']);
+  // A published map filed as the dataset `brightness`: the bake refuses a group of that id, so the steps take another.
+  const published = HOST(); published.content.datasets.controls.push({ id: 'brightness', label: 'Brightness' }); published.raster.surfaces.push({ id: 'brightness', output: 'x', thumbnail: 'y', science: { kind: 'terrestrial-scientific', consumer: 'doppler-imaging' } });
+  assert.throws(() => validateDatasetSteps('hd-1', [...published.content.datasets.controls, { id: 'a', step: { group: 'brightness', label: 'A' } }, { id: 'b', step: { group: 'brightness', label: 'B' } }]), /must not be a dataset id/u);
+  const beside = written(published); assert.deepEqual(beside.groups, ['brightness-maps']); assert.deepEqual(beside.controls.map(control => control.id), ['color-brightness', 'brightness-sector-95', 'brightness-sector-96', 'color', 'brightness']);
+  // Written again over its own records, the steps keep that id.
+  const records = (path: string) => JSON.parse(beside.files.get(`src/objects/hd-1/${path}`)!) as Record<string, any>;
+  assert.deepEqual(written({ content: records('source/content/object.json'), text: records('text.json'), manifest: records('source/manifest.json'), raster: records('source/preparation/raster.json'), descriptor: records('object.json') } as ReturnType<typeof HOST>).groups, ['brightness-maps']);
+  // Published maps of two epochs stepped under the group `brightness`: the light-curve maps do not join their steps.
+  const stepped = HOST(); stepped.content.datasets.controls.push({ id: 'brightness-2013', label: 'Brightness', step: { group: 'brightness', label: 'Sep 2013' } } as never, { id: 'brightness-2017', label: 'Brightness', step: { group: 'brightness', label: 'Dec 2017' } } as never);
+  assert.deepEqual(written(stepped).groups, ['brightness-maps']);
 });
