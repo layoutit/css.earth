@@ -57,7 +57,7 @@ picture's bank and its page's dataset, may be run again, and bakes with SPEC.jso
 page already shows and its ROSAT X-ray flux (docs/stellar-corona-from-magnetic-maps.md); a spec of coronae writes each star's volume bank and its "Derived corona"
 dataset, and bakes with SPEC.json --bake. --from-spectra drafts a star's magnetic maps from the programs of archived polarised spectra this repository has
 reduced (packages/telescope-cli/src/archives/espadons); a spec of magneticMaps writes each map as a "Radial field" dataset of the star's page, and bakes with
-SPEC.json --bake. --from-pixels drafts the brightness map of each star this repository has reduced from the TESS and K2 missions' light curves of it
+SPEC.json --bake. --from-pixels drafts the brightness map of each star this repository has reduced from the TESS, K2 and Kepler missions' light curves of it
 (packages/telescope-cli/src/archives/tess; all is every reduced star); a spec of brightnessMaps writes each map as a "Brightness map" dataset of the star's
 page and the measured period into its measurements record, and bakes with SPEC.json --bake. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
 Papers lists up to 20 OpenAlex works that name the target, by any spelling of its catalogue names, in their title or

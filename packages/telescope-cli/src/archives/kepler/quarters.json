@@ -1,0 +1,29 @@
+{
+  "title": "The Kepler mission's quarters: the mid-times of the first and last long cadence of each, as modified Julian dates, and how many long cadences it holds",
+  "source": {
+    "title": "Kepler Data Release 25 Notes Q0-Q17 (KSCI-19065-002), S. E. Thompson and D. A. Caldwell (editors), NASA Ames Research Center, 8 August 2016",
+    "url": "https://archive.stsci.edu/kepler/release_notes/release_notes25/KSCI-19065-002DRN25.pdf",
+    "locator": "Tables 1 and 2, 'Contents of Data Release 25: Cadence Data', the rows marked LC: columns 'First Cadence MJD midTime', 'Last Cadence MJD midTime' and 'Num CINs'",
+    "checkedOn": "2026-10-06"
+  },
+  "quarters": [
+    { "quarter": 0, "firstCadenceMjd": 54953.03815, "lastCadenceMjd": 54962.74411, "cadences": 476 },
+    { "quarter": 1, "firstCadenceMjd": 54964.01099, "lastCadenceMjd": 54997.48122, "cadences": 1639 },
+    { "quarter": 2, "firstCadenceMjd": 55002.01748, "lastCadenceMjd": 55090.96492, "cadences": 4354 },
+    { "quarter": 3, "firstCadenceMjd": 55092.72221, "lastCadenceMjd": 55181.99660, "cadences": 4370 },
+    { "quarter": 4, "firstCadenceMjd": 55184.87774, "lastCadenceMjd": 55274.70384, "cadences": 4397 },
+    { "quarter": 5, "firstCadenceMjd": 55275.99115, "lastCadenceMjd": 55370.66003, "cadences": 4634 },
+    { "quarter": 6, "firstCadenceMjd": 55371.94733, "lastCadenceMjd": 55461.79386, "cadences": 4398 },
+    { "quarter": 7, "firstCadenceMjd": 55462.67251, "lastCadenceMjd": 55552.04909, "cadences": 4375 },
+    { "quarter": 8, "firstCadenceMjd": 55567.86468, "lastCadenceMjd": 55634.84602, "cadences": 3279 },
+    { "quarter": 9, "firstCadenceMjd": 55641.01696, "lastCadenceMjd": 55738.42395, "cadences": 4768 },
+    { "quarter": 10, "firstCadenceMjd": 55739.34343, "lastCadenceMjd": 55832.76587, "cadences": 4573 },
+    { "quarter": 11, "firstCadenceMjd": 55833.70579, "lastCadenceMjd": 55930.82669, "cadences": 4754 },
+    { "quarter": 12, "firstCadenceMjd": 55931.90966, "lastCadenceMjd": 56014.52273, "cadences": 4044 },
+    { "quarter": 13, "firstCadenceMjd": 56015.23787, "lastCadenceMjd": 56105.55441, "cadences": 4421 },
+    { "quarter": 14, "firstCadenceMjd": 56106.63736, "lastCadenceMjd": 56203.81957, "cadences": 4757 },
+    { "quarter": 15, "firstCadenceMjd": 56205.98550, "lastCadenceMjd": 56303.63768, "cadences": 4780 },
+    { "quarter": 16, "firstCadenceMjd": 56304.59804, "lastCadenceMjd": 56390.46005, "cadences": 4203 },
+    { "quarter": 17, "firstCadenceMjd": 56391.72690, "lastCadenceMjd": 56423.50115, "cadences": 1556 }
+  ]
+}
