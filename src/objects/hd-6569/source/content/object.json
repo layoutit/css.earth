@@ -49,8 +49,84 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "color",
+    "defaultDataset": "color-brightness",
     "controls": [
+      {
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "qualification": "The star's color, darker where TESS saw it dimmer (contrast drawn stronger) · September and October 2018, mapped in this project",
+        "thumbnail": "hd-6569-dataset-color-brightness.webp",
+        "surface": "hd-6569-surface-color-brightness@2x.webp",
+        "poles": "hd-6569-poles-color-brightness@2x.webp",
+        "source": {
+          "id": "hd-6569-tess-map-brightness-sector-3",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "falseColor": false,
+        "notes": "HD 6569 in its own color, darker where its light in TESS's images of September and October 2018 says it was darker. As the star turned once in 7.48 days its light rose and fell by 2.1%. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 5.8% less light than the brightest, and is drawn as a much darker tone of the star's own hue; the Brightness map's scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's limb law, drawn 1.5 times as strong."
+      },
+      {
+        "id": "brightness-sector-3",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · TESS mission light curve, sector 3",
+        "thumbnail": "hd-6569-dataset-brightness-sector-3.webp",
+        "surface": "hd-6569-surface-brightness-sector-3@2x.webp",
+        "poles": "hd-6569-poles-brightness-sector-3@2x.webp",
+        "source": {
+          "id": "hd-6569-tess-map-brightness-sector-3",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "96%",
+            "100%",
+            "104%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "96%",
+              "100%",
+              "104%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+        },
+        "notes": "Where the star's surface was darker and brighter in TESS sector 3, worked out in this project from how its light rose and fell by 2.1% as it turned once in 7.48 days. The light curve is the mission's own; Colman et al. (2024, AJ 167, 189) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. The map is made at the tilt the page draws the star with, 77°.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter. Black line: 77° S; the star never shows us what lies below it."
+      },
       {
         "id": "color",
         "label": "Color",

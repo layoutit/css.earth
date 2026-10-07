@@ -27,15 +27,21 @@ polarised profile for each spectrum, and ZDIpy fits the field to each run's prof
 ([rotation.json](source/preparation/rotation.json)). Longitude 0 faces us at the middle of each run. One color scale, ±30 G, serves
 the map.
 
+**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the TESS mission's own 2-minute light curve of sector 3 (September and October 2018; its PDC-MAP flux, kept at [MAST](https://archive.stsci.edu/missions-and-data/tess)) ([source record](../../sources/mast-tess-light-curves.json)). It is among the light curves [Colman et al. (2024, AJ 167, 189)](https://arxiv.org/abs/2402.14954) searched for rotation, and the star's row in their table (VizieR J/AJ/167/189/fig12) is their verdict that it shows the star turning: the period is theirs and nothing is judged here, and starry (Luger et al. 2019) makes the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+
 ## Evidence
 
 Generated 2026-10-06 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 - Sep 2015: the map reaches a reduced chi-square of 1.80, against 3.04 with no field; mean field 14.6 G, 10% of its energy toroidal. Folsom, C. P. et al., arXiv:1711.08636 give 25 G and 40% for this run (instruments ESPaDOnS; maxG: 48.6; poloidalPct: 60; axisymmetricPct: 85.2; axisymmetricOf: total energy).
 
+**Brightness from TESS.** Colman et al. (2024, AJ 167, 189) ask a sector's light to pass both of the paper's random-forest classifiers (rotation detected; period accurate) with a Lomb-Scargle amplitude of at least 0.01. Their table (VizieR J/AJ/167/189/fig12) gives a rotation period of 7.48 d, the highest peak of the Lomb-Scargle periodogram of the star's one sector among sectors 1 to 26, which passed both of the paper's classifiers: the star's period is 7.48 d, as published, and no criteria were applied to it here. The light varies by 2.1% (the range between its 5th and 95th percentiles, as the table prints it). On the paper's blind test set its first classifier turned away 82% of the stars with no rotation and its second 95% of the inaccurate periods. The criteria of Holcomb et al. (2022, ApJ 936, 138), applied here to the star's TESS light, are not met: A valid period is found in 0 of the star's 2 sectors, and Holcomb et al. (2022) ask for at least 1. The star's record holds 7.13 d from the catalogues. The map's light curve leaves a scatter of 0.16% about the light, whose own noise is 0.05%. Gaia DR3 lists 5 other stars within 63 arcseconds, with 3.5% of their light and the star's together.
+
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
+
+- **Brightness from TESS.** Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. The map is made at the tilt the page draws, 77°. The map is of September and October 2018: spots come and go within weeks or months.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 - **The magnetic maps are this project's reduction, not published maps.** How tightly a map is fitted is a choice the

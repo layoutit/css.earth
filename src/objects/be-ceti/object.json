@@ -46,6 +46,16 @@
               "id": "azimuthal-field",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "brightness-sector-3",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "color-brightness",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }

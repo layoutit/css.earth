@@ -11,6 +11,7 @@
  * before writing its entry; take only what the paper presents as a detection. */
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
+import { isRecord } from '@cssearth/core';
 import { tapRows } from '@cssearth/telescope/node';
 import type { Mission, RotationVerdict } from './verdict.mts';
 
@@ -91,7 +92,9 @@ const held = new Map<string, Promise<Map<number, PublishedRow>>>();
 /** A paper's table, by target. It is one request for all stars: kept under `kept` when a path is given, and asked once a run. */
 export function publishedRows(paper: PublishedVerdict, kept?: string): Promise<Map<number, PublishedRow>> {
   const known = held.get(paper.id); if (known) return known;
-  const read = (async () => { const stored = kept === undefined ? undefined : await readFile(kept, 'utf8').then(text => JSON.parse(text) as Record<string, string>[], () => undefined); if (stored !== undefined) return paper.parse(stored);
+  const read = (async () => { const stored: unknown = kept === undefined ? undefined : await readFile(kept, 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
+    // A kept answer is read as the service's: rows of cells, each a string.
+    if (Array.isArray(stored)) return paper.parse(stored.filter(isRecord).map(row => Object.fromEntries(Object.entries(row).map(([name, value]) => [name, typeof value === 'string' ? value : '']))));
     const answered = await tapRows(paper.service, paper.query, MOST_ROWS), rows = paper.parse(answered);
     // Written beside its place and moved there whole: several runs side by side may ask for it at once.
     if (kept !== undefined) { await mkdir(dirname(kept), { recursive: true }); const part = `${kept}.${process.pid}.part`; await writeFile(part, `${JSON.stringify(answered)}\n`); await rename(part, kept); }
