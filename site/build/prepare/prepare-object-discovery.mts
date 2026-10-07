@@ -4,6 +4,7 @@ import { hasErrorCode, isRecord } from '@cssearth/core';
 import { readShapeModelDiscovery, readRasterDiscovery, readRuntimeCamera, readRuntimeCameraPrefix, parseObjectDescriptor, readObjectContentDatasets, requireCamera, parseArrivalView, parseArrivalBillboard, type CameraPlan, type ObjectDiscovery } from '@cssearth/objects';
 import { preparedDefaultViewRotation } from '@cssearth/engine';
 import { resolveBuildSceneAddress } from '../../server-assets/asset-origin.mts';
+import { isNavigationalStar } from './world/navigational-stars.mts';
 
 /** Authored exceptions describe illustrative datasets, not a permanent body blacklist. */
 export function discoveryPolicy(value: unknown) {
@@ -19,10 +20,12 @@ export function discoveryPolicy(value: unknown) {
 /** Only prepared, exposed observation datasets count. A source download, an
  * illustration texture, a shape/elevation view or a source count cannot promote a body.
  *
- * A star is featured, a named landmark of the map, when its package marks it or when it has a picture of its own: the
- * famous stars. A surface reconstructed from its spectra or its light (a magnetic, a spot or a brightness map) is something
- * to see but not a picture: however many its page holds, the star stays on the map as a dot that names itself on hover. */
-export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recipes: readonly unknown[], camera?: unknown): ObjectDiscovery {
+ * A star is featured, a named landmark of the map, when it is `listed` (one of the navigational stars of the almanacs:
+ * world/navigational-stars.mts), when it has a picture of its own, or when its package marks it: the mark promotes a star
+ * the list leaves out, and holds a star another page needs as a target. A surface reconstructed from its spectra or its
+ * light (a magnetic, a spot or a brightness map) is something to see but not a picture: however many its page holds, the
+ * star stays on the map as a dot that names itself on hover. */
+export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recipes: readonly unknown[], camera?: unknown, listed = false): ObjectDiscovery {
   const policy = discoveryPolicy(catalog);
   if (!isRecord(controls) || !isRecord(controls.datasets) || !Array.isArray(controls.datasets.controls)) throw new TypeError('Missing prepared discovery datasets.');
   const exposed = new Set(controls.datasets.controls.map(dataset => {
@@ -73,7 +76,7 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
       rotation: preparedDefaultViewRotation(camera) });
   }
   const landmark = !star || observed.size > reconstructed.size;
-  return { imagery, illustration, featured: !illustration && (policy.featured || imagery && landmark), ...(arrival ? { arrival } : {}),
+  return { imagery, illustration, featured: !illustration && (policy.featured || listed || imagery && landmark), ...(arrival ? { arrival } : {}),
     ...(illustration && simulated.size > 0 ? { simulation: true as const } : {}),
     // A star's color dataset from its spectrum or catalogued temperature is measured, though not an image of its surface.
     ...(!imagery && sourceColors.size ? { sourceColor: true as const } : {}),
@@ -152,7 +155,7 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
   };
   const controls: unknown = await preparedJson('controls.json') ?? { datasets: { controls: [] } };
   const camera = await preparedRuntimeCamera(resolve(objectDirectory, 'prepared', 'runtime.json'));
-  const discovery = deriveObjectDiscovery(descriptor.properties.catalog, controls, inputs, camera ?? undefined);
+  const discovery = deriveObjectDiscovery(descriptor.properties.catalog, controls, inputs, camera ?? undefined, typeof descriptor.id === 'string' && isNavigationalStar({ id: descriptor.id }));
   const billboard = await preparedJson('arrival-billboard.json');
   if (billboard !== null) {
     const asset = parseArrivalBillboard(billboard);

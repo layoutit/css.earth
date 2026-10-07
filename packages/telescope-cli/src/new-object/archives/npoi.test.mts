@@ -22,7 +22,7 @@ const xhip = tsv('HIP\tRV\te_RV\tq_RV', ' \tkm/s\tkm/s\t ', ' 37826\t   3.23\t  
 
 test('a 2018 NPOI row drafts a weighed star placed at the parallax its radius was computed with, by Hipparcos when Gaia lists none', () => {
   const pollux = draftFromNpoi(parseNpoiRow(2018, '62509', baines2018), ['HD 62509', 'NAME Pollux', '* bet Gem', 'HIP 37826'], parseXhipRow(xhip, '37826'));
-  assert.deepEqual([pollux.id, pollux.name, pollux.parent, pollux.featured, pollux.radius.value, pollux.temperature.value], ['pollux', 'Pollux', 'milky-way', true, 9.06, 4586]);
+  assert.deepEqual([pollux.id, pollux.name, pollux.parent, 'featured' in pollux, pollux.radius.value, pollux.temperature.value], ['pollux', 'Pollux', 'milky-way', false, 9.06, 4586], 'a proper name does not feature a star: the navigational list does');
   assert.deepEqual([pollux.distance.value, pollux.distance.uncertainty], [10.358, 0.029]);
   assert.equal(pollux.description, "A giant of type K0 III 10.4 parsecs away, 9.1 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.");
   assert.match(pollux.distance.source, /Hipparcos \(van Leeuwen 2007\) parallax .* 96\.54 \+\/- 0\.27 mas/u);
