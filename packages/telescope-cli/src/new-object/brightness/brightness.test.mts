@@ -8,6 +8,7 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { SAME_STAR_ARCSEC } from '../../archives/tess/methods.mts';
+import { SANTOS_2019 } from '../../archives/kepler/santos.mts';
 import { COLMAN_2024 } from '../../archives/tess/published.mts';
 import { MATCH_ARCSEC } from '../metadata/rotation-catalogues.mts';
 import { BRIGHTNESS_ROUTE, withBrightnessReadme, withMeasuredRotation, withPixelLight } from './brightness.mts';
@@ -209,6 +210,41 @@ test('a paper\'s own verdict is worded as the paper\'s, and brings no period mea
     assert.deepEqual([...(await BRIGHTNESS_ROUTE.starRecords!(root, 'hd-1', [map])).keys()], ['src/objects/hd-1/README.md']);
     assert.deepEqual([...(await BRIGHTNESS_ROUTE.starRecords!(root, 'hd-1', [reducedBrightness(brightnessChoice('hd-1', 'TESS', 95), receipt('assumed', 'assumed'), TABLE, LIGHT)])).keys()], ['src/objects/hd-1/source/measurements.json', 'src/objects/hd-1/README.md']); }
   finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a Kepler star\'s map is of a quarter of its KEPSEISMIC light curve, on the rotation Santos et al. published', () => {
+  // Kepler-186 as reduce.mts wrote it on 2026-10-07: Holcomb et al.'s method refuses its TESS light, and its row in Table 3 of Santos et al. (2019) is a rotation.
+  const none = 'A valid period is found in 0 of the star\'s 7 sectors, and Holcomb et al. (2022) ask for at least 4.', short = 'Quarter 1 holds 33.5 days of the star\'s light, less than one turn of 33.75 d: not every longitude faced Kepler in it.';
+  const row = SANTOS_2019.parse([{ KIC: '8120608', Q: '1-17', Fl1: '', Fl2: '0', Fl3: '0', Fl4: '0', Fl5: '0', DMK: '', Prot: '33.75', E_Prot: '2.40', Sph: '2186.4', E_Sph: '52.6', table: '0' }]).get(8120608)!, file = { pipeline: 'KADACS V5', filterDays: 55 };
+  const paper = { id: SANTOS_2019.id, citation: SANTOS_2019.citation, url: SANTOS_2019.url, where: SANTOS_2019.where, lightCurve: SANTOS_2019.lightCurve, asks: SANTOS_2019.asks, reliability: SANTOS_2019.reliability, published: SANTOS_2019.table, swing: SANTOS_2019.swing };
+  const quarter = (window: number, verdict: Record<string, unknown>) => ({ mission: 'Kepler', window, method: 'santos-2019', lightCurveFile: file, analysis: SANTOS_2019.measures(row), says: SANTOS_2019.says(row), verdict });
+  const listed = { ...receipt('assumed', 'assumed: no tilt of the star is known'), star: { id: 'kepler-186', name: 'Kepler-186' }, mission: 'Kepler', method: paper, rotation: { detected: true, periodDays: 33.75, amplitude: 0.008003 }, refused: [{ mission: 'TESS', method: HOLCOMB, rotation: { detected: false, reason: none } }],
+    tried: [{ mission: 'TESS', window: 41, method: 'holcomb-2022', analysis: { periodDays: null }, says: 'no repeating peaks in the autocorrelation', verdict: { detected: false, reason: 'none' } },
+      quarter(1, { detected: false, reason: short }), quarter(9, { detected: true, periodDays: 33.75, amplitude: 0.005594 }), quarter(16, { detected: true, periodDays: 33.75, amplitude: 0.004857 })],
+    maps: [{ ...receipt('assumed', 'assumed: no tilt of the star is known').maps[0]!, mission: 'Kepler', window: 9, table: 'kepler-186-q09.dat', periodDays: 33.75 }, { ...receipt('assumed', 'x').maps[0]!, mission: 'Kepler', window: 16, table: 'kepler-186-q16.dat', periodDays: 33.75 }] };
+  const choice = brightnessChoice('kepler-186', 'Kepler', 9); assert.deepEqual(choice, { program: 'kepler-186-q09', id: 'brightness-quarter-9', label: 'Quarter 9' });
+  // Quarter 9: 21 March to 26 June 2011, on the Kepler mission's clock. The file is read by this repository's own reader, so starry is the one code.
+  const map = reducedBrightness(choice, listed, TABLE, { time: [808.52, 905.92], flux: [1, 1] });
+  assert.deepEqual([map.mission, map.window, map.fromUtc, map.toUtc, map.periodDays, map.amplitude, map.codes, map.periodSource], ['Kepler', 9, '2011-03-21', '2011-06-26', 33.75, 0.008003, ['starry 1.2.0'], 'published by Santos et al. (2019, ApJS 244, 21) (VizieR J/ApJS/244/21, table 3)']);
+  assert.deepEqual([map.method.published, map.method.read, map.method.unmapped, map.method.refused], ['VizieR J/ApJS/244/21, table 3', 3, [short], [{ citation: HOLCOMB.citation, mission: 'TESS', reason: none }]]);
+  const { files } = surfaceMapFiles(BRIGHTNESS_MAPS, { host: 'kepler-186', maps: [choice] }, { id: 'kepler-186', name: 'Kepler-186' }, [map], HOST()), read = (path: string) => JSON.parse(files.get(`src/objects/kepler-186/${path}`)!) as Record<string, any>;
+  assert.equal(files.get('src/objects/kepler-186/source/science/kepler/kepseismic/kepler-186-q09.dat'), TABLE);
+  const science = read('source/preparation/raster.json').surfaces[2].science, input = read('source/manifest.json').generatedIntermediates[0], control = read('source/content/object.json').datasets.controls[1];
+  assert.equal(science.consumer, 'kepler-starry'); assert.equal(input.id, 'kepler-186-kepler-map-brightness-quarter-9');
+  assert.match(science.description, /turns once in 33\.8 days, fitted with starry to the measured points of quarter 9 of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels \(the light varies by 0\.80%;.*Santos et al\. \(2019, ApJS 244, 21\) list the star as a rotator in their table \(VizieR J\/ApJS\/244\/21, table 3\): a rotation period of 33\.75 ± 2\.4 d and a photometric activity \(S_ph, the scatter of the light over five rotations\) of 2186 parts per million\. The rotation and its period are theirs, taken as published; no criteria were applied to them here\./u);
+  assert.match(input.credit, /^KEPSEISMIC light curve of the NASA Kepler mission's pixels \(Mathur, Santos & García\), quarter 9, from MAST; its rotation and period as published by Santos et al\. \(2019, ApJS 244, 21\); map made in this project with starry 1\.2\.0\. This work includes data collected by the Kepler mission/u);
+  assert.match(input.title, /from its light curve in Kepler quarter 9, KEPSEISMIC's: brightness/u); assert.match(input.acquisition, /from the light curve of the quarter published by its authors as a high-level science product and kept at MAST\./u);
+  assert.equal(control.qualification, 'Mapped in this project · KEPSEISMIC light curve of Kepler, quarter 9'); assert.match(control.notes, /in Kepler quarter 9.*The light curve is KEPSEISMIC's; Santos et al\. \(2019, ApJS 244, 21\) found the star's rotation in it, and starry finds the map that reproduces it at their period\./u);
+  assert.deepEqual(input.sourceBinding.references.map((reference: { catalogueId: string }) => reference.catalogueId), ['mast-kepseismic-light-curves', 'arxiv-1908-05222', 'arxiv-1810-06559', 'gaia-2023-dr3']);
+  const records = brightnessSourceRecords('2026-10-07', [map]), product = JSON.parse(records.get('src/sources/mast-kepseismic-light-curves.json')!) as Record<string, any>;
+  assert.deepEqual(product.identifiers, [{ type: 'DOI', value: '10.17909/t9-mrpw-gc07' }]); assert.deepEqual((JSON.parse(records.get('src/sources/arxiv-1908-05222.json')!) as Record<string, any>).identifiers, [{ type: 'arXiv', value: '1908.05222' }, { type: 'DOI', value: '10.3847/1538-4365/ab3b56' }]);
+  // The README names the quarters mapped, whose verdict the rotation is, where the swing comes from and why a quarter has no map.
+  const later = reducedBrightness(brightnessChoice('kepler-186', 'Kepler', 16), listed, TABLE, { time: [1471.1, 1556.96], flux: [1, 1] });
+  const readme = withBrightnessReadme('# Kepler-186\n\n## Sources\n\nGaia.\n\n## Evidence\n\nRun.\n\n## Known problems\n\n- None.\n', later, 34.29, [map, later]);
+  assert.match(readme, /\*\*Brightness from Kepler\.\*\* The Color \+ brightness and Brightness map datasets are made in this project from quarters 9 and 16 of the star's KEPSEISMIC light curve \(the newest of January to April 2013\), which its authors make from the Kepler mission's pixels and keep at \[MAST\]\(https:\/\/archive\.stsci\.edu\/hlsp\/kepseismic\) \(\[source record\]\(\.\.\/\.\.\/sources\/mast-kepseismic-light-curves\.json\)\)\. It is the light curve \[Santos et al\. \(2019, ApJS 244, 21\)\]\(https:\/\/arxiv\.org\/abs\/1908\.05222\) judge, and the star's row in their table \(VizieR J\/ApJS\/244\/21, table 3\) is their verdict that it shows the star turning: the period is theirs and nothing is judged here, and starry/u);
+  assert.match(readme, /the star's period is 33\.75 d, as published, and no criteria were applied to it here\. The light varies by 0\.80% \(the range between its 5th and 95th percentiles, measured here over the quarters mapped; the table prints another measure of it, S_ph\)\. 1 of the star's 3 quarters has no map\. Quarter 1 holds 33\.5 days of the star's light, less than one turn of 33\.75 d: not every longitude faced Kepler in it\. For the 11,209 stars.*The criteria of Holcomb et al\. \(2022, ApJ 936, 138\), applied here to the star's TESS light, are not met: A valid period is found in 0 of the star's 7 sectors.*The star's record holds 34\.29 d from the catalogues\./su);
+  // What the reduction found is recorded for a Kepler star as for any other: the quarter last read.
+  const looked = withPixelLight({ shape: 'sphere' }, listed); assert.deepEqual([looked.pixelLightMission, looked.pixelLightWindow], ['Kepler', 16]); assert.match(String(looked.pixelLightSource), /^Read in this project from the Kepler KEPSEISMIC light curve of quarter 16/u);
 });
 
 test('a star K2\'s method refused is read from its TESS windows, and a value its record lacked is named', () => {

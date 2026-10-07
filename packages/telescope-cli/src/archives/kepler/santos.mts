@@ -6,12 +6,15 @@
  * authors' inspection, the second paper's selection is a random forest (ROOSTER) trained on the first, a quarter of
  * whose stars were then inspected too, and no published code holds the trained forest (star-privateer 1.3.1 ships the
  * training features, not a forest). What the papers publish of each star is its row in their tables, and that is what
- * this module reads, in the papers' terms and no further. Nothing is measured or judged here.
+ * this module reads, in the papers' terms and no further. Whether a star turns, and in what time, is not judged here.
+ * What is measured here is a quarter's variance, for the papers' own rule on a quarter, and the light's swing, for a
+ * page to say.
  *
  * What a row asserts (2019, Sects. II.2 and III.1; 2021, Sects. II.2 and III; the tables' ReadMe at CDS):
  * - A star of the 2019 paper is in its Table 3 (a rotation period was recovered), Table 4 (none was, with the reason) or
  *   Table 5 (its light holds up to three signals, "likely to be associated with different unresolved sources"); one of
- *   the 2021 paper is in its Table 1 (a period) or Table 2 (none, with the reason). The two samples share no star.
+ *   the 2021 paper is in its Table 1 (a period) or Table 2 (none; 36,201 of its 101,538 rows give the reason). The two
+ *   samples share no star.
  * - `Prot` of Table 3 or Table 1 is the star's rotation period: the wavelet's period, or the composite spectrum's or the
  *   autocorrelation's when the wavelet gives none (2019, Sect. III.1).
  * - The first flag of those two tables marks a Type 1 classical-pulsator or close-binary candidate, whose signal "may be
@@ -36,13 +39,11 @@
  * Sect. 2), which `anomalousQuarters` applies as printed. The rule is printed for a quarter with two neighbours; at a
  * star's first or last quarter the one neighbour is taken, which is a reading of ours. */
 import { medianAveraged } from '@cssearth/core';
-import { tapRows } from '@cssearth/telescope/node';
+import { VIZIER_TAP } from '../espadons/catalogue.mts';
+import type { PublishedVerdict } from '../tess/published.mts';
 import type { RotationVerdict } from '../tess/verdict.mts';
-import { POINT, type FilterDays } from './kepseismic.mts';
-import { measuredLight, type QuarterLight } from './quarters.mts';
-
-/** VizieR's table access service (CDS), which serves both catalogues. */
-export const VIZIER_TAP = 'https://tapvizier.cds.unistra.fr/TAPVizieR/tap';
+import { POINT, type FilterDays, type KepseismicSeries } from './kepseismic.mts';
+import { byQuarter, measuredLight, type QuarterLight } from './quarters.mts';
 
 export type SantosPaper = 'santos-2019' | 'santos-2021';
 /** The two papers, as a receipt and a page cite them. */
@@ -53,6 +54,10 @@ export const SANTOS_PAPERS: Readonly<Record<SantosPaper, { readonly id: SantosPa
   'santos-2021': { id: 'santos-2021', citation: 'Santos et al. (2021, ApJS 255, 17)', url: 'https://arxiv.org/abs/2107.02217', where: 'Sects. II and III; Tables 1 and 2', catalogue: 'J/ApJS/255/17',
     asks: 'the wavelet, the autocorrelation and their product to give one period in the star\'s light filtered at 20, 55 and 80 days, selected by the paper\'s random forest (ROOSTER), by its automatic criteria or by its authors\' inspection',
     reliability: 'For the 20,080 stars also in McQuillan et al. (2014), the paper\'s periods agree with theirs within 15% for 99.1%.' } };
+/** The papers' samples are main-sequence stars and subgiants: "to avoid potential red giants we consider a flat cut at
+ * log g = 3.5" (2021, Sect. II.2), and the 2019 paper's stars are dwarfs. A star whose record puts it below that cut is
+ * not in their tables, and is not asked for. */
+export const SANTOS_GRAVITY = 3.5;
 /** The light curve both papers judge. */
 export const SANTOS_LIGHT_CURVE = 'the KEPSEISMIC light curve of the star\'s four years with Kepler (KADACS, García et al. 2011), high-pass filtered at 20, 55 and 80 days';
 
@@ -98,9 +103,9 @@ const NO_ROTATION: Readonly<Record<SantosPaper, readonly string[]>> = {
 export function santosVerdict(row: SantosRow | undefined): RotationVerdict {
   if (!row) return { detected: false, reason: 'Santos et al. (2019, 2021) do not list the star in their rotation catalogues of Kepler stars.' };
   const paper = SANTOS_PAPERS[row.paper].citation, no = (reason: string): RotationVerdict => ({ detected: false, reason });
-  if (row.holds === 'none') { const reasons = row.flag.split(',').map(code => NO_ROTATION[row.paper][Number(code.trim())]);
-    if (row.flag === '' || reasons.some(reason => reason === undefined)) throw new TypeError(`${row.table}: KIC ${row.kic} carries the flag "${row.flag}", which the table's description does not list.`);
-    return no(`${paper} list the star without a rotation period: ${reasons.join(' and ')}.`); }
+  if (row.holds === 'none') { const reasons = row.flag === '' ? [] : row.flag.split(',').map(code => NO_ROTATION[row.paper][Number(code.trim())]);
+    if (reasons.some(reason => reason === undefined)) throw new TypeError(`${row.table}: KIC ${row.kic} carries the flag "${row.flag}", which the table's description does not list.`);
+    return no(`${paper} list the star without a rotation period${reasons.length ? `: ${reasons.join(' and ')}` : ''}.`); }
   if (row.holds === 'several') return no(`${paper} list the star among those whose light holds several signals, likely of different unresolved sources: their table does not give one period for the star.`);
   if (row.flag === '1') return no(`${paper} list the star with a period of ${row.rotationDays} d and flag it as a Type 1 classical-pulsator or close-binary candidate, whose signal may not be the rotation of a single star.`);
   if (row.flag === '0' && row.paper === 'santos-2021') return no(`${paper} list the star with a period of ${row.rotationDays} d and flag it as showing no rotational modulation.`);
@@ -116,10 +121,9 @@ export const santosMeasures = (row: SantosRow): Readonly<Record<string, number |
 export const SANTOS_FILTERS = [[23, 20], [60, 55], [Infinity, 80]] as const;
 export const filterFor = (rotationDays: number): FilterDays => SANTOS_FILTERS.find(([under]) => rotationDays < under)![1];
 
-/** García et al. (2014, A&A 572, A34), Sect. 2: "we computed the variance of every quarter in every light curve and
- * divided the resulting array by its median. Then, we computed the difference in this ratio between each quarter [and]
- * its two neighbours. If the mean of these two differences was greater than a threshold, empirically set to 0.9, we
- * removed the quarter from the light curve." */
+/** García et al. (2014, A&A 572, A34), Sect. 2: the variance of every quarter of a light curve is divided by the median
+ * of those variances; the difference of that ratio between a quarter and each of its two neighbours is taken; and the
+ * quarter is removed when the mean of the two differences is greater than a threshold the paper sets at 0.9. */
 export const ANOMALOUS_VARIANCE = 0.9;
 /** Which of a star's quarters that rule removes, from the variance of each in order. */
 export function anomalousQuarters(variances: readonly number[]): boolean[] {
@@ -157,10 +161,34 @@ export function quarterReadings(parts: readonly QuarterLight[], periodDays: numb
     return { quarter: part.quarter, points: part.time.length, measured: light.time.length, filled: part.state.filter(state => state === POINT.filled).length, spanDays: Number(spanDays.toFixed(1)), turns: Number(turns.toFixed(2)), varianceOverMedian: over, verdict, time: light.time, flux: light.flux }; });
 }
 
-/** A star's rows in the five tables, by its number in the Kepler Input Catalog: none, or one. */
-export async function santosRows(kic: number): Promise<SantosRow[]> {
-  if (!Number.isInteger(kic) || kic <= 0) throw new RangeError('A star is asked for by its number in the Kepler Input Catalog.');
-  const rows: SantosRow[] = [];
-  for (const table of SANTOS_TABLES) for (const cells of await tapRows(VIZIER_TAP, `SELECT * FROM "${table.name}" WHERE KIC = ${kic}`)) rows.push(parseSantosRow(table, cells));
-  return rows;
+/** A star under the papers' verdict: the verdict, and each of its quarters in the light the papers read its period in. */
+export interface SantosStar { readonly verdict: RotationVerdict; readonly quarters: readonly QuarterReading[] }
+/** A star's row set beside its light curve of the filter the papers take the row's period from. The star's swing is that
+ * of the light of all the quarters kept, together. A row that is no verdict of rotation reads no light. `turnDays` is
+ * the time the star turns in when that is not the row's period: twice it, where the catalogues print twice it
+ * (tess/verdict.mts). */
+export function santosStar(row: SantosRow | undefined, series: Pick<KepseismicSeries, 'kic' | 'filterDays' | 'time' | 'flux' | 'state' | 'stepDays'> | undefined, turnDays?: number): SantosStar {
+  const said = santosVerdict(row); if (!row || !said.detected || said.periodDays === undefined) return { verdict: said, quarters: [] };
+  if (!series || series.kic !== row.kic || series.filterDays !== filterFor(said.periodDays)) throw new TypeError(`KIC ${row.kic}: a period of ${said.periodDays} d is read in the star's light filtered at ${filterFor(said.periodDays)} days.`);
+  const quarters = quarterReadings(byQuarter(series), turnDays ?? said.periodDays, SANTOS_PAPERS[row.paper].citation), kept = quarters.filter(quarter => quarter.verdict.detected);
+  if (!kept.length) return { verdict: { detected: false, reason: `${SANTOS_PAPERS[row.paper].citation} list the star with a rotation period of ${said.periodDays} d, and none of its quarters is one a map can be made of: ${quarters.map(quarter => quarter.verdict.reason).join(' ')}` }, quarters };
+  return { verdict: { ...said, amplitude: Number(variabilityRange(kept.flatMap(quarter => quarter.flux)).toFixed(6)) }, quarters };
 }
+
+/** The columns asked of a table: the star, its quarters, the table's flags and, of a table of periods, the period and the activity. */
+const columnsOf = (table: SantosTable) => ['KIC', 'Q', table.flag, ...Object.values(table.alerts), ...(table.holds === 'rotation' ? ['Prot', 'E_Prot', 'Sph', 'E_Sph'] : [])];
+/** One paper as an entry of the published-verdict kind (tess/published.mts): its tables are asked whole, one query each,
+ * and a star's row is in one of them. What a row says is `santosVerdict`; which of the star's quarters the verdict is on
+ * is known only from its light (`santosStar`), so `judge` gives the windows it is handed back for an accepted row. */
+function published(id: SantosPaper): PublishedVerdict<SantosRow> { const paper = SANTOS_PAPERS[id], tables = SANTOS_TABLES.filter(table => table.paper === id);
+  return { id: paper.id, citation: paper.citation, url: paper.url, where: paper.where, table: `VizieR ${paper.catalogue}, ${tables.find(table => table.holds === 'rotation')!.name.split('/').at(-1)!.replace('table', 'table ')}`, service: VIZIER_TAP,
+    query: tables.map(table => `SELECT ${columnsOf(table).join(', ')} FROM "${table.name}"`), missions: ['Kepler'], lightCurve: SANTOS_LIGHT_CURVE, asks: paper.asks, reliability: paper.reliability,
+    swing: 'measured here over the quarters mapped; the table prints another measure of it, S_ph',
+    parse(answered) { const rows = new Map<number, SantosRow>();
+      for (const cells of answered) { const table = tables[Number(cell(cells, 'table') || Number.NaN)]; if (!table) throw new TypeError(`${paper.catalogue}: a row does not say which table it is of.`);
+        const row = parseSantosRow(table, cells); if (rows.has(row.kic)) throw new TypeError(`${paper.catalogue}: KIC ${row.kic} is listed twice.`); rows.set(row.kic, row); }
+      return rows; },
+    judge(row, windows) { const verdict = santosVerdict(row); return { verdict, windows: verdict.detected ? windows : [] }; }, says: santosSays, measures: santosMeasures }; }
+export const SANTOS_2019 = published('santos-2019'), SANTOS_2021 = published('santos-2021');
+/** The papers read of a star's Kepler light, in the order they are asked. */
+export const SANTOS: readonly PublishedVerdict<SantosRow>[] = [SANTOS_2019, SANTOS_2021];

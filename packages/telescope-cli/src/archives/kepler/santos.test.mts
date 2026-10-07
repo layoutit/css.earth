@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { anomalousQuarters, filterFor, parseSantosRow, quarterReadings, SANTOS_TABLES, santosMeasures, santosSays, santosVerdict, variabilityRange, variance } from './santos.mts';
+import { mjdOf } from './quarters.mts';
+import { anomalousQuarters, filterFor, parseSantosRow, quarterReadings, SANTOS, SANTOS_2019, SANTOS_2021, SANTOS_GRAVITY, SANTOS_TABLES, santosMeasures, santosSays, santosStar, santosVerdict, variabilityRange, variance } from './santos.mts';
 
 const table = (name: string) => SANTOS_TABLES.find(one => one.name.endsWith(name))!;
 /** Rows as VizieR prints them (2026-10-06), with the columns this module reads. */
@@ -17,8 +18,8 @@ const ROWS = {
   kepler1656: { KIC: '4815520', Q: '0-16', Prot: '18.62', E_Prot: '3.48', Sph: '253.9', E_Sph: '10.4', flag1: '', flag2: '1', flag3: '0', flag4: '0', flag5: '0' },
   kepler1313: { KIC: '6779260', Q: '0-17', Prot: '6.13', E_Prot: '0.42', Sph: '7506.6', E_Sph: '390.3', flag1: '1', flag2: '1', flag3: '0', flag4: '0', flag5: '0' },
   flaggedNone: { KIC: '3238657', Q: '1-17', Prot: '11.85', E_Prot: '1.33', Sph: '99.2', E_Sph: '8.4', flag1: '0', flag2: '1', flag3: '0', flag4: '', flag5: '0' },
-  // Kepler-10, Table 2: possible rotational modulation.
-  kepler10: { KIC: '11904151', Q: '0-17', flag1: '1', flag2: '1', flag3: '0', flag4: '0', flag5: '0' } } as const;
+  // Kepler-10, Table 2: possible rotational modulation. Kepler-452, Table 2: no reason given.
+  kepler10: { KIC: '11904151', Q: '0-17', flag1: '1', flag2: '1', flag3: '0', flag4: '0', flag5: '0' }, kepler452: { KIC: '8311864', Q: '0-17', flag1: '', flag2: '1', flag3: '0', flag4: '0', flag5: '0' } } as const;
 
 test('a row of a table of periods is the paper\'s verdict of rotation, with its period', () => {
   const row = parseSantosRow(table('244/21/table3'), ROWS.kepler186);
@@ -43,6 +44,7 @@ test('a star listed without a period, with several signals or not at all has no 
   assert.equal(santosVerdict(parseSantosRow(table('244/21/table4'), ROWS.kepler102)).reason, 'Santos et al. (2019, ApJS 244, 21) list the star without a rotation period: it shows no rotational modulation.');
   assert.equal(santosVerdict(parseSantosRow(table('244/21/table4'), ROWS.redGiantPair)).reason, 'Santos et al. (2019, ApJS 244, 21) list the star without a rotation period: it is a red giant and it is an eclipsing binary.');
   assert.equal(santosVerdict(parseSantosRow(table('255/17/table2'), ROWS.kepler10)).reason, 'Santos et al. (2021, ApJS 255, 17) list the star without a rotation period: it shows possible rotational modulation, with no period the paper could give.');
+  assert.equal(santosVerdict(parseSantosRow(table('255/17/table2'), ROWS.kepler452)).reason, 'Santos et al. (2021, ApJS 255, 17) list the star without a rotation period.');
   const several = parseSantosRow(table('244/21/table5'), ROWS.kepler1651);
   assert.equal(several.rotationDays, undefined); assert.match(santosVerdict(several).reason!, /several signals.*does not give one period/u);
   assert.match(santosVerdict(undefined).reason!, /do not list the star/u);
@@ -77,4 +79,35 @@ test('a quarter has a map when the papers\' rule keeps it and its measured light
   assert.equal(read[4]!.verdict.reason, 'Quarter 6 holds 5.0 days of the star\'s light, less than one turn of 10 d: not every longitude faced Kepler in it.');
   // numpy's percentiles: of 0 to 100 in steps of one, the 95th less the 5th is 90.
   assert.equal(variabilityRange(Array.from({ length: 101 }, (_, value) => value)), 90);
+});
+
+test('a star\'s row is set beside its light of the filter the papers read the period in', () => {
+  const row = parseSantosRow(table('244/21/table3'), ROWS.kepler186), step = 0.5, clock = (mjd: number) => mjd - mjdOf(0);
+  // Two points a day through quarters 2 and 3 (MJD 55002.02 to 55181.99), swinging by 3,000 parts per million every 33.75 days.
+  const time = Array.from({ length: 360 }, (_, index) => Number(clock(55002.1 + step * index).toFixed(6))), flux = time.map(at => 3000 * Math.sin(2 * Math.PI * at / 33.75));
+  const series = { kic: 8120608, filterDays: 55, time, flux, state: time.map(() => 1), stepDays: step };
+  const star = santosStar(row, series);
+  assert.deepEqual(star.quarters.map(quarter => [quarter.quarter, quarter.verdict.detected, quarter.turns > 2.5]), [[2, true, true], [3, true, true]]);
+  assert.equal(star.verdict.periodDays, 33.75); assert.ok(Math.abs(star.verdict.amplitude! - 0.0059) < 2e-4);
+  // The 20-day light is not the light a period of 33.75 days is read in.
+  assert.throws(() => santosStar(row, { ...series, filterDays: 20 }), /filtered at 55 days/u);
+  // A row that is no verdict of rotation reads no light.
+  assert.deepEqual(santosStar(parseSantosRow(table('244/21/table4'), ROWS.kepler102), undefined).quarters, []);
+  assert.equal(santosStar(undefined, undefined).verdict.detected, false);
+});
+
+test('each paper is an entry of the published-verdict kind: its tables asked whole, a star\'s row in one of them', () => {
+  assert.deepEqual(SANTOS.map(paper => [paper.id, paper.table, paper.missions]), [['santos-2019', 'VizieR J/ApJS/244/21, table 3', ['Kepler']], ['santos-2021', 'VizieR J/ApJS/255/17, table 1', ['Kepler']]]);
+  assert.deepEqual(SANTOS_2019.query, ['SELECT KIC, Q, Fl1, Fl2, Fl3, Fl4, Fl5, DMK, Prot, E_Prot, Sph, E_Sph FROM "J/ApJS/244/21/table3"', 'SELECT KIC, Q, Fl1, Fl2, Fl3, Fl4, Fl5, DMK FROM "J/ApJS/244/21/table4"', 'SELECT KIC, Q, Fl1, Fl2, Fl3, Fl4, Fl5, DMK FROM "J/ApJS/244/21/table5"']);
+  assert.deepEqual(SANTOS_2021.query, ['SELECT KIC, Q, flag1, flag3, flag4, Prot, E_Prot, Sph, E_Sph FROM "J/ApJS/255/17/table1"', 'SELECT KIC, Q, flag1, flag3, flag4 FROM "J/ApJS/255/17/table2"']);
+  // The answers of a paper's queries come as one list, each row saying which query it answers.
+  const rows = SANTOS_2019.parse([{ ...ROWS.kepler186, table: '0' }, { ...ROWS.gj1245b, table: '0' }, { ...ROWS.kepler102, table: '1' }, { ...ROWS.kepler1651, table: '2' }]);
+  assert.deepEqual([...rows].map(([kic, row]) => [kic, row.holds]), [[8120608, 'rotation'], [8451881, 'rotation'], [10187017, 'none'], [10905746, 'several']]);
+  // A row's verdict is the paper's on the star; the quarters handed in come back for a rotation, and none for anything else.
+  assert.deepEqual(SANTOS_2019.judge(rows.get(8120608)!, [2, 3]), { verdict: { detected: true, periodDays: 33.75 }, windows: [2, 3] });
+  assert.deepEqual(SANTOS_2019.judge(rows.get(8451881)!, [2, 3]).windows, []); assert.match(SANTOS_2019.says(rows.get(8120608)!), /^a rotation period of 33\.75 ± 2\.4 d/u);
+  assert.match(SANTOS_2019.swing, /^measured here/u); assert.equal(SANTOS_GRAVITY, 3.5);
+  assert.throws(() => SANTOS_2019.parse([{ ...ROWS.kepler186 }]), /does not say which table/u);
+  assert.throws(() => SANTOS_2019.parse([{ ...ROWS.kepler186, table: '0' }, { ...ROWS.kepler186, table: '0' }]), /listed twice/u);
+  assert.equal(SANTOS_2021.parse([{ ...ROWS.kepler1656, table: '0' }, { ...ROWS.kepler452, table: '1' }]).get(8311864)!.holds, 'none');
 });

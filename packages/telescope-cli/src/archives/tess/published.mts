@@ -23,13 +23,15 @@ export interface PublishedRow { /** The target's number in the TESS Input Catalo
   /** How many of the star's sectors the paper's detections come from. */ readonly sectors: number; /** The 95th less the 5th percentile of the light, as a share of its mean. */ readonly variabilityRange: number; readonly twoTermDays: number; readonly autocorrelationDays: number }
 /** What a row says of a star, given the mission's windows the star has: the paper's verdict, and the windows whose light it is a verdict on. */
 export interface PublishedJudgement { readonly verdict: RotationVerdict; readonly windows: readonly number[] }
-export interface PublishedVerdict { readonly id: string; readonly citation: string; readonly url: string; /** Where in the paper the sample, the light curves and the table are described. */ readonly where: string;
-  /** The published table a verdict is a row of, the service that serves it and the query that reads it whole. */ readonly table: string; readonly service: string; readonly query: string;
+export interface PublishedVerdict<Row = PublishedRow> { readonly id: string; readonly citation: string; readonly url: string; /** Where in the paper the sample, the light curves and the table are described. */ readonly where: string;
+  /** The published table a verdict is a row of, the service that serves it and the query that reads it whole. A catalogue of several tables gives a query for each, and a row then carries its query's place in the list as the cell `table`. */
+  readonly table: string; readonly service: string; readonly query: string | readonly string[];
   readonly missions: readonly Mission[]; /** The light curve the paper judged. */ readonly lightCurve: string;
   /** What a row of the table asserts, in a sentence's words. */ readonly asks: string; /** What the paper itself measured of its detections' reliability. */ readonly reliability: string;
-  /** The service's answer as rows, by the target's number. */ parse(rows: readonly Readonly<Record<string, string>>[]): Map<number, PublishedRow>;
-  /** A row's verdict on a star with these windows of the mission. */ judge(row: PublishedRow, windows: readonly number[]): PublishedJudgement;
-  /** What the row holds of an accepted star, in a sentence's words, and as the numbers a receipt keeps. */ says(row: PublishedRow): string; measures(row: PublishedRow): Readonly<Record<string, number | null>> }
+  /** Where the swing of an accepted star's light comes from, in a sentence's words: the table, or a measure made here. */ readonly swing: string;
+  /** The service's answer as rows, by the target's number. */ parse(rows: readonly Readonly<Record<string, string>>[]): Map<number, Row>;
+  /** A row's verdict on a star with these windows of the mission. */ judge(row: Row, windows: readonly number[]): PublishedJudgement;
+  /** What the row holds of an accepted star, in a sentence's words, and as the numbers a receipt keeps. */ says(row: Row): string; measures(row: Row): Readonly<Record<string, number | null>> }
 
 /** Colman et al. (2024), "Methods for the detection of stellar rotation periods in individual TESS sectors and results
  * from the Prime mission", AJ 167, 189, Sects. II.1, II.4 and III; its consolidated catalogue (C24) is VizieR
@@ -69,7 +71,7 @@ export const COLMAN_2024: PublishedVerdict = { id: 'colman-2024', citation: 'Col
   service: VIZIER_TAP, query: `SELECT ${COLUMNS.join(', ')} FROM "${TABLE}"`, missions: ['TESS'],
   lightCurve: 'the TESS mission\'s 2-minute light curve of a sector, among sectors 1 to 26',
   asks: 'a sector\'s light to pass both of the paper\'s random-forest classifiers (rotation detected; period accurate) with a Lomb-Scargle amplitude of at least 0.01',
-  reliability: 'On the paper\'s blind test set its first classifier turned away 82% of the stars with no rotation and its second 95% of the inaccurate periods.',
+  reliability: 'On the paper\'s blind test set its first classifier turned away 82% of the stars with no rotation and its second 95% of the inaccurate periods.', swing: 'as the table prints it',
   parse(answered) { const rows = new Map<number, PublishedRow>();
     for (const cells of answered) { const number = (column: typeof COLUMNS[number]) => { const cell = cells[column], value = Number(cell); if (cell === undefined || cell.trim() === '' || !Number.isFinite(value)) throw new TypeError(`${TABLE}: a row holds no ${column}.`); return value; };
       const tic = number('TIC'), flag = number('f_Prot'); if (flag !== 0 && flag !== 1) throw new TypeError(`${TABLE}: TIC ${tic} has a flag that is neither 0 nor 1.`);
@@ -83,19 +85,23 @@ export const COLMAN_2024: PublishedVerdict = { id: 'colman-2024', citation: 'Col
   says: colmanSays,
   measures: row => ({ rotationDays: row.rotationDays ?? null, variabilityRange: row.variabilityRange, sectors: row.sectors, twoTermDays: row.twoTermDays, autocorrelationDays: row.autocorrelationDays }) };
 
-/** Every paper whose table is read, in the order they are asked. */
+/** Every paper whose table is read of a star's TESS light, in the order they are asked. The papers read of a star's
+ * Kepler light are kepler/santos.mts `SANTOS`: entries of this same kind, with rows of their own. */
 export const PUBLISHED: readonly PublishedVerdict[] = [COLMAN_2024];
 
 /** The most rows a table is asked for: more than any table read here holds, so an answer cut short is refused. */
 const MOST_ROWS = 1_000_000;
-const held = new Map<string, Promise<Map<number, PublishedRow>>>();
-/** A paper's table, by target. It is one request for all stars: kept under `kept` when a path is given, and asked once a run. */
-export function publishedRows(paper: PublishedVerdict, kept?: string): Promise<Map<number, PublishedRow>> {
-  const known = held.get(paper.id); if (known) return known;
+const held = new Map<string, Promise<Map<number, unknown>>>();
+/** A paper's table, by target. It is one request a table for all stars: kept under `kept` when a path is given, and asked once a run. */
+export function publishedRows<Row>(paper: PublishedVerdict<Row>, kept?: string): Promise<Map<number, Row>> {
+  const known = held.get(paper.id); if (known) return known as Promise<Map<number, Row>>;
   const read = (async () => { const stored: unknown = kept === undefined ? undefined : await readFile(kept, 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
     // A kept answer is read as the service's: rows of cells, each a string.
     if (Array.isArray(stored)) return paper.parse(stored.filter(isRecord).map(row => Object.fromEntries(Object.entries(row).map(([name, value]) => [name, typeof value === 'string' ? value : '']))));
-    const answered = await tapRows(paper.service, paper.query, MOST_ROWS), rows = paper.parse(answered);
+    const answered: Record<string, string>[] = [];
+    if (typeof paper.query === 'string') answered.push(...await tapRows(paper.service, paper.query, MOST_ROWS));
+    else for (const [place, query] of paper.query.entries()) for (const cells of await tapRows(paper.service, query, MOST_ROWS)) answered.push({ ...cells, table: String(place) });
+    const rows = paper.parse(answered);
     // Written beside its place and moved there whole: several runs side by side may ask for it at once.
     if (kept !== undefined) { await mkdir(dirname(kept), { recursive: true }); const part = `${kept}.${process.pid}.part`; await writeFile(part, `${JSON.stringify(answered)}\n`); await rename(part, kept); }
     return rows; })();

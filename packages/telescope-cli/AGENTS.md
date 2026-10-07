@@ -113,6 +113,17 @@ table's own description have been read; it is looked up only for a star the wire
 on the light the paper judged, and it measures nothing. A column that does not hold what its description says is not
 read, and the entry's comment gives the count.
 
+A Kepler star has no method wired. Its rotation is its row in the tables of Santos et al. (2019, 2021): two more entries
+of the published-verdict kind (`kepler/santos.mts`), asked of a star no method and no paper above gives a rotation. Its
+light is the KEPSEISMIC light curve those papers judged (`kepler/kepseismic.mts` finds the three files at MAST, and this
+repository's FITS reader reads one: its table, and its mark for each point), of the filter the papers read a period of
+that length in. That light curve is the star's four years in one series, so it is cut at the mission's own quarters
+(`kepler/quarters.json`, from the Kepler Data Release 25 Notes; `kepler/quarters.mts`), and a quarter has a map when the
+papers' rule on a quarter's variance keeps it (García et al. 2014) and its measured light spans a turn of the star. A map
+is fitted to the measured points only. What this path reads into the papers and into the file is in the note's list and
+in the two modules' comments: the filter of a row, the flagged rows left out, the file's unlabelled marks, the rule at a
+star's first and last quarter, the one-turn limit, and the light's swing, which is measured here.
+
 `verdict.mts` holds the verdict's shape and three checks against what is already published of the star (its catalogued
 period, SIMBAD's type, the fastest its radius and mass let it turn); each can only withhold a map, a paper's own verdict
 included. `neighbours.mts` counts
@@ -126,8 +137,8 @@ writes the records any map needs (table, manifest input, raster surface, dataset
 `route.mts` reads a spec, writes each star and bakes from a `MapRoute`; `routes.mts` lists the kinds (`MAP_ROUTES`). A kind supplies only what is its own: its column,
 units, colors, sentences, how its reduction is read and the catalogue records it is bound to. `magnetic/` is the kind for
 maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a convention page takes the maps' tilt) and
-`brightness/` the kind for maps from a star's TESS or K2 mission light curves (`--from-pixels`, a spec's `brightnessMaps`; what differs by
-mission is one table, `MISSIONS`; a map's records name the published method that judged it, in the method's own words, and the paper's own light curve; a map drawn on a paper's own verdict says the rotation and its period are that paper's, names the method that refused the same light, and brings no measured period; the page's axis is never
+`brightness/` the kind for maps from a star's TESS, K2 or Kepler light curves (`--from-pixels`, a spec's `brightnessMaps`; what differs by
+mission is one table, `MISSIONS`, which also says whose light curve is read: the mission's own, or KEPSEISMIC; a map's records name the published method that judged it, in the method's own words, and the paper's own light curve; a map drawn on a paper's own verdict says the rotation and its period are that paper's, names the method that refused the same light, and brings no measured period; the page's axis is never
 changed, and a period measured here goes into the star's measurements record; `new-object-cli.mts --pixel-light` writes the
 reduction's verdict, mission, window and light scatter into the record of every star it looked at, mapped or not). A kind whose maps are how the star looks
 supplies `natural`: the newest map in the star's own color, which becomes the dataset the page opens on
