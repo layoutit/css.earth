@@ -9,7 +9,8 @@
  * paper's own terms.
  *
  * To add a kind of star or of data, read the paper that treats it and add its entry; do not widen an entry beyond what
- * its paper says, and do not add a threshold no paper prints. */
+ * its paper says, and do not add a threshold no paper prints. A paper whose code cannot be run here has its own verdict
+ * on a star read from its published table instead (published.mts). */
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -22,6 +23,9 @@ import { runTool, toolchainPaths } from './toolchain.mts';
 export interface Transit { readonly periodDays: number; readonly epochBjd: number; readonly durationDays: number }
 /** What a star's record says of the kind of star it is, and the transits its light holds. */
 export interface StarKind { readonly effectiveTemperatureK?: number; readonly surfaceGravityLogg?: number; readonly transits?: readonly Transit[] }
+/** What the catalogue a method's paper selects its stars from says of a light curve's target, as the file's own header
+ * carries it (tools.py `input-catalogue`): a value the header leaves blank is absent. */
+export interface InputCatalogue { readonly tic: number; readonly version: string; readonly effectiveTemperatureK?: number; readonly surfaceGravityLogg?: number }
 /** A mission's own light curve of one window, as tools.py `mission-light-curve` read it. */
 export interface MissionLightCurve { readonly frames: number; readonly window: number; /** The version of the mission's pipeline that made it, from the file's header. */ readonly pipeline: string; readonly time: readonly number[]; readonly flux: readonly number[] }
 /** What tools.py `rotation` measured of one light curve, prepared the way the method's paper prepares it. */
@@ -42,6 +46,7 @@ export interface PeriodMethod { readonly id: string; readonly citation: string; 
   /** What the paper asks of a light curve to accept a rotation, in a sentence's words. */ readonly asks: string;
   /** What the paper itself measured of its periods' reliability. */ readonly reliability: string;
   /** Why the paper's method is not for this star, when it is not. */ outside(star: StarKind): string | undefined;
+  /** The catalogue the paper takes a star's temperature and gravity from, when a light curve's file carries its values. */ readonly catalogue?: { readonly name: string; read(file: string): Promise<InputCatalogue> };
   /** Why the paper does not cover a window of the mission, when it does not. */ covers(window: number): string | undefined;
   /** The paper's method on a star's light curve files, one a window: what it measures of each and of the star, and its verdicts. */
   judge(files: readonly string[], star: StarKind): Promise<StarResult> }
@@ -99,7 +104,11 @@ export const REINHOLD_HEKKER_2020: PeriodMethod & { verdict(analysis: RotationAn
  * 5th and 95th percentiles farther than 0.01 from zero) is removed as a possible eclipsing binary.
  *
  * The paper's sample is sectors 1 to 26, and its criteria are stated for "the TESS 2-minute cadence data"; they are
- * applied here to any sector's 2-minute light curve. That is this entry's reading of the paper, not a sentence in it. */
+ * applied here to any sector's 2-minute light curve. That is this entry's reading of the paper, not a sentence in it.
+ *
+ * The paper takes temperature and gravity from the TESS Input Catalog v7 (Sect. III). A star's record is read first
+ * here; a value the record lacks is taken from the catalog as the header of the star's own 2-minute light curve carries
+ * it (`catalogue`; v8 in the files read, not the paper's v7), and never replaces a value the record holds. */
 const HOLCOMB = { binSeconds: 1800, timeZero: 2457000, heightOverWidth: 0.25, width: [0.4, 0.6], fit: 0.9, lopsided: 0.01 } as const;
 type Spin = { readonly periodDays: number | null; readonly height: number | null; readonly width: number | null; readonly fit: number | null; readonly centre: number; readonly range: number };
 const spinVerdict = (spin: Spin, of: string): RotationVerdict => { const { periodDays, height, width, fit } = spin;
@@ -127,7 +136,7 @@ export const HOLCOMB_2022: PeriodMethod = { id: 'holcomb-2022', citation: 'Holco
     if (temperature === undefined || gravity === undefined) return 'The star\'s record holds no temperature or no surface gravity, and Holcomb et al. (2022) leave such stars out.';
     const least = temperature >= 6000 ? 3.5 : temperature <= 4250 ? 4.0 : 5.2 - 2.8e-4 * temperature;
     return gravity >= least ? undefined : `With log g ${gravity} at ${Math.round(temperature)} K the star is not a dwarf by the cuts Holcomb et al. (2022) apply (log g at least ${Number(least.toFixed(2))} at that temperature).`; },
-  covers: () => undefined,
+  covers: () => undefined, catalogue: { name: 'TESS Input Catalog', read: inputCatalogue },
   async judge(files, star) { const { python } = await toolchainPaths(), directory = await mkdtemp(join(tmpdir(), 'spin-')), job = join(directory, 'job.json'), transits = star.transits ?? [];
     try { await writeFile(job, JSON.stringify({ files, binSeconds: HOLCOMB.binSeconds, timeZero: HOLCOMB.timeZero, ...(transits.length ? { transit: [transits.map(one => one.periodDays), transits.map(one => one.epochBjd), transits.map(one => one.durationDays)] } : {}) }));
       const printed = requireRecord(runTool(python, ['spinspotter', job]), 'SpinSpotter\'s answer'), numbers = (value: unknown, key: string) => requireArray(value, key).map((entry, index) => requireFiniteNumber(entry, `${key}[${index}]`));
@@ -148,6 +157,32 @@ export function methodFor(mission: Mission, star: StarKind): { readonly method: 
   for (const method of made) { const reason = method.outside(star); if (reason === undefined) return { method }; reasons.push(reason); }
   return { reason: reasons.join(' ') };
 }
+
+/** What tools.py `input-catalogue` printed for a light curve file. */
+export function parseInputCatalogue(value: unknown): InputCatalogue {
+  const record = requireRecord(value, 'input catalogue'), number = (key: string) => record[key] === null || record[key] === undefined ? undefined : requireFiniteNumber(record[key], key), temperature = number('effectiveTemperatureK'), gravity = number('surfaceGravityLogg');
+  // The header prints the catalog's version as a string ("8.2") or as a bare number (8).
+  return { tic: requireFiniteNumber(record.tic, 'TIC number'), version: typeof record.version === 'number' ? String(requireFiniteNumber(record.version, 'TIC version')) : requireString(record.version, 'TIC version'), ...(temperature === undefined ? {} : { effectiveTemperatureK: temperature }), ...(gravity === undefined ? {} : { surfaceGravityLogg: gravity }) };
+}
+/** The TESS Input Catalog's values for the target of a 2-minute light curve, from the file's primary header. */
+export async function inputCatalogue(file: string): Promise<InputCatalogue> {
+  const { python } = await toolchainPaths(), directory = await mkdtemp(join(tmpdir(), 'catalogue-')), job = join(directory, 'job.json');
+  try { await writeFile(job, JSON.stringify({ file })); return parseInputCatalogue(runTool(python, ['input-catalogue', job])); }
+  finally { await rm(directory, { recursive: true, force: true }); }
+}
+/** A star's kind with the catalogue's value where its record holds none, and which values those are. A value the record
+ * holds is never replaced. */
+export function filled(star: StarKind, from: InputCatalogue): { readonly star: StarKind; readonly fills: readonly ('effectiveTemperatureK' | 'surfaceGravityLogg')[] } {
+  const fills = (['effectiveTemperatureK', 'surfaceGravityLogg'] as const).filter(key => star[key] === undefined && from[key] !== undefined);
+  return { star: { ...star, ...Object.fromEntries(fills.map(key => [key, from[key]])) }, fills };
+}
+/** How far from a star's place a catalogue's entry, or a mission's target, may lie and still be the star, arcseconds: the
+ * metadata pass's own measure for a catalogue's row of a star (new-object/metadata/rotation-catalogues.mts). A light curve
+ * is listed within a pixel of a star, 21 arcseconds, and a companion that near is another entry of the catalogue and
+ * often no target of its own: the nearest light curve is then its neighbour's. */
+export const SAME_STAR_ARCSEC = 3;
+/** What the catalogue gives, in a sentence's words: "5023 K and log g 4.58", "4575 K and no surface gravity". */
+export const catalogueSays = (from: InputCatalogue) => `${from.effectiveTemperatureK === undefined ? 'no temperature' : `${Math.round(from.effectiveTemperatureK)} K`} and ${from.surfaceGravityLogg === undefined ? 'no surface gravity' : `log g ${Number(from.surfaceGravityLogg.toFixed(2))}`}`;
 
 /** What tools.py printed for a mission's light curve file. */
 export function parseMissionLightCurve(value: unknown): MissionLightCurve {

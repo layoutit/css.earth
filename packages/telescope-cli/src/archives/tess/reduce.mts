@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 /** A star's rotation and brightness map from the light curves a mission publishes of it: K2's when K2 watched the star,
- * else TESS's 2-minute ones.
+ * and TESS's 2-minute ones when K2 did not or its method refuses the star.
  *
  *   node packages/telescope-cli/src/archives/tess/reduce.mts <star id>... | --all
  *
  * A star is judged by the published method made for its kind of star and of light curve (methods.mts): every light
  * curve of the star that the method's paper covers is read from MAST as the mission publishes it
  * (kepler/light-curves.mts, light-curves.mts), and the method measures and judges them. A star the method is not for, or
- * that no mission published a light curve of, is given no verdict and nothing is fetched. Nothing of ours decides.
+ * that no mission published a light curve of, is given no verdict and nothing is fetched. A star the method refuses
+ * may still be a row of a paper's own table of rotators, which is then that paper's verdict on it (published.mts).
+ * Nothing of ours decides.
  *
  * When a rotation is accepted, starry makes the brightness map that reproduces each accepted light curve (map.mts). The
  * result is a receipt, output/tess/<star id>/rotation.json: the star, the Gaia sources around it, each window with its
@@ -23,9 +25,10 @@ import { WORKSPACE } from '@cssearth/telescope/node';
 import { ASSUMED_TILT_DEGREES, brightnessMaps, brightnessTable } from './map.mts';
 import { HOSTED_PLANET_IDS, hostedOrbit, hostedOrbitCentreId } from '@cssearth/astronomy';
 import { fetchLightCurves, lightCurvesAt } from '../kepler/light-curves.mts';
-import { sectorLightCurvesAt } from './light-curves.mts';
+import { apart, sectorLightCurvesAt } from './light-curves.mts';
 import { GAIA_EPOCH_YEAR, pixelLight, PIXELS, type PixelLight } from './neighbours.mts';
-import { methodFor, type PeriodMethod, type StarKind, type Transit } from './methods.mts';
+import { catalogueSays, filled, methodFor, METHODS, SAME_STAR_ARCSEC, type PeriodMethod, type StarKind, type StarResult, type Transit } from './methods.mts';
+import { PUBLISHED, publishedRows, ticOf, type PublishedVerdict } from './published.mts';
 import { besideCatalogued, notTurning, withinBreakup, type Mission, type RotationVerdict } from './verdict.mts';
 import { toolchainPins } from './toolchain.mts';
 
@@ -95,42 +98,88 @@ export async function transitsOf(id: string): Promise<Transit[]> { const transit
 /** What a mission calls one of its windows. */
 const WINDOW: Readonly<Record<Mission, string>> = { TESS: 'sector', K2: 'campaign' };
 interface Listed { readonly window: number; readonly filename: string; readonly uri: string }
+/** One mission's light curves of a star as a method judged them. */
+interface Attempt { readonly mission: Mission; readonly method: PeriodMethod; readonly listed: readonly Listed[]; readonly fetched: readonly (Listed & { readonly url: string; readonly bytes: number })[]; readonly judged: StarResult }
+/** Where a paper's table is kept, so every star of every run asks for it once. */
+const keptTable = (id: string) => resolve(WORKSPACE, 'output/tess/published', `${id}.json`);
+/** Whether a body is a star. A galaxy, a cluster or a nebula has a place on the sky too, and a light curve at its place is another object's. */
+const isStar = async (id: string) => { const body = await readJson(resolve(WORKSPACE, 'packages/astronomy/data/bodies', `${id}.json`)); return isRecord(body) && body.classification === 'star'; };
+const described = (by: PeriodMethod | PublishedVerdict) => ({ id: by.id, citation: by.citation, url: by.url, where: by.where, lightCurve: by.lightCurve, asks: by.asks, reliability: by.reliability, ...('table' in by ? { published: by.table } : {}) });
 
-/** One star, judged by the published method for its kind of star on the light curves a mission publishes of it: K2's when
- * K2 watched it, else TESS's 2-minute ones. `light` is what Gaia says of its surroundings, when the caller has asked for
- * many stars at once; it is counted for the page to say, never to refuse the star. */
+/** One star, judged on the light curves the missions publish of it.
+ *
+ * K2's are judged first, by the method for the star's kind. TESS's 2-minute ones are judged when K2 has no campaign of
+ * the star, and also when K2's method refuses it: that order is this repository's, and each method is still applied only
+ * to its own paper's light curves. A star whose record holds no temperature or no surface gravity takes the missing
+ * value from the catalogue the TESS method's paper uses, as the star's own light curve file carries it. When the method
+ * refuses, a paper's own verdict on the star is looked up in its published table (published.mts). `light` is what Gaia
+ * says of the star's surroundings, when the caller has asked for many stars at once; it is counted for the page to say,
+ * never to refuse the star. */
 export async function reduceStar(id: string, light?: StarLight): Promise<Record<string, unknown>> {
   const star = await starPlace(id); if (!star) throw new Error(`${id} is not a star with a place on the sky.`);
   const run = resolve(WORKSPACE, 'output/tess', id), files = resolve(run, 'light-curves'), pins = await toolchainPins(); await mkdir(run, { recursive: true });
-  const tried: Record<string, unknown>[] = [], accepted: { window: number; time: readonly number[]; flux: readonly number[] }[] = [];
-  const kind = { ...star, transits: await transitsOf(id) }, applies = (one: Mission) => methodFor(one, kind);
+  const tried: Record<string, unknown>[] = [], checked = (verdict: RotationVerdict) => withinBreakup(besideCatalogued(verdict, star.cataloguedPeriodDays), star.fastestTurnDays);
+  let kind: StarKind = { ...star, transits: await transitsOf(id) };
+  const applies = (one: Mission) => methodFor(one, kind);
   // A mission's archive is asked only about a star whose light from that mission a method here reads.
   const reads = (one: Mission) => { const found = applies(one); return star.otherLight || 'reason' in found ? undefined : found.method; };
-  const campaigns: Listed[] = reads('K2') ? (await lightCurvesAt(targetPlaces(star, 'K2'))).map(one => ({ window: one.campaign, filename: one.filename, uri: one.uri })) : [];
-  const sectors: Listed[] = !campaigns.length && reads('TESS') ? (await sectorLightCurvesAt(targetPlaces(star, 'TESS'))).map(one => ({ window: one.sector, filename: one.filename, uri: one.uri })) : [];
-  const mission: Mission = campaigns.length ? 'K2' : 'TESS', listed = campaigns.length ? campaigns : sectors, stem = (window: number) => windowStem(id, mission, window);
+  const stem = (mission: Mission, window: number) => windowStem(id, mission, window);
+  // A mission's light curves of the star, fetched and judged by the method for its kind; each window goes into `tried`.
+  const judge = async (mission: Mission, method: PeriodMethod, listed: readonly Listed[]): Promise<Attempt> => {
+    const wanted = listed.filter(one => { const left = method.covers(one.window); if (left) tried.push({ mission, window: one.window, verdict: { detected: false, reason: left } }); return !left; });
+    const fetched = await fetchLightCurves(wanted, files), judged = await method.judge(fetched.map(one => one.file), kind);
+    for (const window of judged.windows) { const file = fetched.find(one => one.window === window.window);
+      await writeFile(resolve(run, `${stem(mission, window.window)}.curve.json`), `${JSON.stringify({ mission, window: window.window, product: 'pdcsap', time: window.time, flux: window.flux })}\n`);
+      tried.push({ mission, window: window.window, method: method.id, lightCurveFile: { url: file?.url, bytes: file?.bytes, pipeline: window.pipeline }, frames: window.frames, lightCurve: `${stem(mission, window.window)}.curve.json`, analysis: window.measures, says: window.says, verdict: window.verdict }); }
+    return { mission, method, listed, fetched, judged }; };
+  const refused: Attempt[] = [], forK2 = reads('K2');
+  const campaigns: Listed[] = forK2 ? (await lightCurvesAt(targetPlaces(star, 'K2'))).map(one => ({ window: one.campaign, filename: one.filename, uri: one.uri })) : [];
+  let last = forK2 && campaigns.length ? await judge('K2', forK2, campaigns) : undefined, sectors: Listed[] = [], catalogue: Record<string, unknown> | undefined, elsewhere: string | undefined;
+  // A star K2 did not watch, or whose K2 light its method refuses, is judged on its TESS light. A rotation K2's method
+  // accepts stays K2's, drawn or not.
+  if (!last?.judged.verdict.detected) {
+    // A value the record lacks is the catalogue's of the method's own paper, read from the star's first light curve file.
+    const lacks = kind.effectiveTemperatureK === undefined || kind.surfaceGravityLogg === undefined, source = lacks && !star.otherLight && await isStar(id) ? METHODS.find(method => method.missions.includes('TESS') && method.catalogue)?.catalogue : undefined;
+    const places = targetPlaces(star, 'TESS'), found = reads('TESS') || source ? await sectorLightCurvesAt(places) : [], target = found[0];
+    // A star that comes to TESS by one of the two rules above is given a light curve only when its target lies at the
+    // star's own place: within a pixel, the nearest target of a faint companion is its bright neighbour.
+    const offset = target ? Number((3600 * Math.min(...places.map(place => apart(place, target)))).toFixed(1)) : 0;
+    if (target && offset > SAME_STAR_ARCSEC && (last || source)) elsewhere = `The 2-minute light curve nearest the star is of a target ${offset} arcseconds from its place (TIC ${target.target}), not the star's own.`;
+    else sectors = found.map(one => ({ window: one.sector, filename: one.filename, uri: one.uri }));
+    if (source && sectors[0]) { const [first] = await fetchLightCurves([sectors[0]], files), from = await source.read(first!.file), filling = filled(kind, from); kind = filling.star;
+      catalogue = { name: source.name, version: from.version, tic: from.tic, file: sectors[0].filename, effectiveTemperatureK: from.effectiveTemperatureK ?? null, surfaceGravityLogg: from.surfaceGravityLogg ?? null, fills: filling.fills,
+        says: `The ${source.name} (v${from.version}), in the header of the star's ${WINDOW.TESS} ${sectors[0].window} light curve, gives ${catalogueSays(from)}.` }; }
+    const forTess = reads('TESS');
+    if (forTess && sectors.length) { if (last) refused.push(last); last = await judge('TESS', forTess, sectors); } }
+  const mission: Mission = last?.mission ?? 'TESS', listed = last?.listed ?? sectors;
   const own = light === undefined ? (await lightOf([star], false, PIXELS[mission].radiusArcsec)).get(id) : (mission === 'K2' ? light.near : light.wide) ?? undefined;
   // Why each mission gave nothing to judge: its method leaves the star out, or it publishes no light curve of it.
-  const unread = (one: Mission) => { const found = applies(one); return 'reason' in found ? found.reason : `${one} publishes no ${one === 'TESS' ? '2-minute ' : ''}light curve of this star.`; };
-  let rotation: RotationVerdict = { detected: false, reason: star.otherLight ?? `${unread('K2')} ${unread('TESS')}` }, whole: Record<string, unknown> | undefined;
-  const method: PeriodMethod | undefined = listed.length ? reads(mission) : undefined;
-  if (method) { const wanted = listed.filter(one => { const left = method.covers(one.window);
-        if (left) tried.push({ mission, window: one.window, verdict: { detected: false, reason: left } }); return !left; });
-      const covered = await fetchLightCurves(wanted, files);
-      const judged = await method.judge(covered.map(one => one.file), kind);
-      for (const window of judged.windows) { const file = covered.find(one => one.window === window.window);
-        await writeFile(resolve(run, `${stem(window.window)}.curve.json`), `${JSON.stringify({ mission, window: window.window, product: 'pdcsap', time: window.time, flux: window.flux })}\n`);
-        tried.push({ mission, window: window.window, method: method.id, lightCurveFile: { url: file?.url, bytes: file?.bytes, pipeline: window.pipeline }, frames: window.frames, lightCurve: `${stem(window.window)}.curve.json`, analysis: window.measures, says: window.says, verdict: window.verdict }); }
-      if (judged.whole) whole = { analysis: judged.whole.measures, says: judged.whole.says, verdict: judged.whole.verdict };
-      rotation = withinBreakup(besideCatalogued(judged.verdict, star.cataloguedPeriodDays), star.fastestTurnDays);
-      if (rotation.detected) accepted.push(...judged.windows.filter(window => window.verdict.detected).map(window => ({ window: window.window, time: window.time, flux: window.flux }))); }
+  const unread = (one: Mission) => { const found = applies(one), more = one === 'TESS' ? (catalogue ? ` ${String(catalogue.says)}` : elsewhere ? ` ${elsewhere}` : '') : ''; return `${'reason' in found ? found.reason : `${one} publishes no ${one === 'TESS' ? '2-minute ' : ''}light curve of this star.`}${more}`; };
+  let rotation: RotationVerdict = { detected: false, reason: star.otherLight ?? `${unread('K2')} ${unread('TESS')}` }, by: PeriodMethod | PublishedVerdict | undefined = last?.method, published: Record<string, unknown> | undefined;
+  let accepted: { window: number; time: readonly number[]; flux: readonly number[] }[] = [];
+  if (last) { const { judged } = last; rotation = checked(judged.verdict);
+    if (rotation.detected) accepted = judged.windows.filter(window => window.verdict.detected);
+    if (!judged.verdict.detected) { const reasons = [...refused.map(one => one.judged.verdict.reason), judged.verdict.reason, ...(last.mission === 'K2' ? [unread('TESS')] : [])].filter(reason => reason !== undefined);
+      // The method refuses: a paper's own verdict on the star, when its table lists it, on the light the paper judged.
+      for (const paper of PUBLISHED) { const tic = last.mission === 'TESS' && paper.missions.includes('TESS') && !rotation.detected ? ticOf(last.listed[0]?.filename ?? '') : undefined, row = tic === undefined ? undefined : (await publishedRows(paper, keptTable(paper.id))).get(tic); if (!row) continue;
+        const said = paper.judge(row, last.listed.map(one => one.window)), kept = said.verdict.detected ? checked(said.verdict) : said.verdict;
+        published = { id: paper.id, citation: paper.citation, url: paper.url, table: paper.table, tic, row, verdict: said.verdict };
+        if (!kept.detected) { reasons.push(said.verdict.detected ? `${paper.citation} list the star with a rotation period of ${said.verdict.periodDays} d. ${kept.reason}` : kept.reason!); continue; }
+        rotation = kept; by = paper; accepted = judged.windows.filter(window => said.windows.includes(window.window));
+        for (const window of accepted) { const entry = tried.find(one => one.mission === last!.mission && one.window === window.window && one.method === last!.method.id);
+          tried.push({ mission: last.mission, window: window.window, method: paper.id, lightCurveFile: entry?.lightCurveFile, frames: entry?.frames, lightCurve: entry?.lightCurve, analysis: paper.measures(row), says: paper.says(row), verdict: said.verdict }); } }
+      if (!rotation.detected) rotation = { detected: false, reason: reasons.join(' ') }; } }
   await rm(files, { recursive: true, force: true });
-  const receipt: Record<string, unknown> = { schema: ROTATION_SCHEMA, star, ...(own ? { light: own } : {}), mission, lightCurves: listed.map(one => ({ window: one.window, file: one.filename })), tried, ...(whole ? { whole } : {}),
-    ...(method ? { method: { id: method.id, citation: method.citation, url: method.url, where: method.where, lightCurve: method.lightCurve, asks: method.asks, reliability: method.reliability } } : {}), rotation, toolchain: { id: pins.id, requirements: pins.entry.requirements } };
+  // What was tried before and refused, oldest first: an earlier mission's method and, when a paper's verdict decides, the method run on the same light.
+  const before = [...refused, ...(last && by !== last.method ? [last] : [])].map(one => ({ mission: one.mission, method: described(one.method), lightCurves: one.listed.map(file => ({ window: file.window, file: file.filename })),
+    ...(one.judged.whole ? { whole: { analysis: one.judged.whole.measures, says: one.judged.whole.says, verdict: one.judged.whole.verdict } } : {}), rotation: one.judged.verdict }));
+  const whole = last && by === last.method ? last.judged.whole : undefined;
+  const receipt: Record<string, unknown> = { schema: ROTATION_SCHEMA, star, ...(own ? { light: own } : {}), mission, lightCurves: listed.map(one => ({ window: one.window, file: one.filename })), ...(catalogue ? { inputCatalogue: catalogue } : {}), ...(elsewhere ? { elsewhere } : {}), tried,
+    ...(whole ? { whole: { analysis: whole.measures, says: whole.says, verdict: whole.verdict } } : {}), ...(before.length ? { refused: before } : {}), ...(published ? { published } : {}), ...(by ? { method: described(by) } : {}), rotation, toolchain: { id: pins.id, requirements: pins.entry.requirements } };
   // One map for each window whose light was accepted, all at the star's one period.
   const maps: Record<string, unknown>[] = [];
   const made = accepted.length ? await brightnessMaps(accepted, rotation.periodDays!, Math.min(star.tiltDegrees ?? ASSUMED_TILT_DEGREES, 90)) : [];
-  for (const [index, read] of accepted.entries()) { const map = made[index]!, table = `${stem(read.window)}.dat`, flat = map.values.flat();
+  for (const [index, read] of accepted.entries()) { const map = made[index]!, table = `${stem(mission, read.window)}.dat`, flat = map.values.flat();
     await writeFile(resolve(run, table), brightnessTable(`Brightness map of ${star.name} from its light in ${mission} ${WINDOW[mission]} ${read.window} (period ${rotation.periodDays} d)`, map));
     maps.push({ mission, window: read.window, table, degree: map.degree, inclinationDegrees: map.inclinationDegrees, inclinationFrom: star.tiltFrom, inclinationSource: star.tiltSource ?? `assumed: no tilt of the star is known, and ${ASSUMED_TILT_DEGREES} degrees is the middle tilt of axes that point at random`,
       periodDays: map.periodDays, residual: Number(map.residual.toFixed(5)), noise: Number(map.noise.toFixed(5)), darkestPercent: Number((100 * Math.min(...flat)).toFixed(1)), brightestPercent: Number((100 * Math.max(...flat)).toFixed(1)), starry: map.starry }); }

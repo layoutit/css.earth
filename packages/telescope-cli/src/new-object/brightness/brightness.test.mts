@@ -4,7 +4,13 @@ import { validateDatasetSteps } from '@cssearth/bake/objects/content';
 import { surfaceMapFiles } from '../maps/surface-maps.mts';
 import { adoptPeriod, measuredPeriod, starMetadata } from '../metadata/star-metadata.mts';
 import { BRIGHTNESS_CONSUMER, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, mapRange, monthsOf, percent, reducedBrightness, missionDay, shortMonthsOf, tinted } from './brightness-maps.mts';
-import { withBrightnessReadme, withMeasuredRotation, withPixelLight } from './brightness.mts';
+import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { SAME_STAR_ARCSEC } from '../../archives/tess/methods.mts';
+import { COLMAN_2024 } from '../../archives/tess/published.mts';
+import { MATCH_ARCSEC } from '../metadata/rotation-catalogues.mts';
+import { BRIGHTNESS_ROUTE, withBrightnessReadme, withMeasuredRotation, withPixelLight } from './brightness.mts';
 
 const TABLE = 'TITLE     = "test"\nVARIABLES = "Longitude [Deg]" "Latitude [Deg]" "Brightness [%]"\nZONE I=2, J=2, K=1, ZONETYPE=Ordered\n';
 const HOLCOMB = { id: 'holcomb-2022', citation: 'Holcomb et al. (2022, ApJ 936, 138)', url: 'https://arxiv.org/abs/2206.10629', where: 'Sects. II and III', lightCurve: 'the TESS mission\'s 2-minute light curve of a sector, reduced by its PDC-MAP pipeline and binned to 30 minutes',
@@ -173,4 +179,49 @@ test('a page that already files a dataset or a group under the steps\' own id gi
   // Published maps of two epochs stepped under the group `brightness`: the light-curve maps do not join their steps.
   const stepped = HOST(); stepped.content.datasets.controls.push({ id: 'brightness-2013', label: 'Brightness', step: { group: 'brightness', label: 'Sep 2013' } } as never, { id: 'brightness-2017', label: 'Brightness', step: { group: 'brightness', label: 'Dec 2017' } } as never);
   assert.deepEqual(written(stepped).groups, ['brightness-maps']);
+});
+
+test('a paper\'s own verdict is worded as the paper\'s, and brings no period measured here', async () => {
+  // BE Ceti as reduce.mts wrote it on 2026-10-06: SpinSpotter finds no peaks in its one sector, and Colman et al.'s table lists the star.
+  const none = 'SpinSpotter finds no repeating peaks in the autocorrelation of sector 3.', row = COLMAN_2024.parse([{ TIC: '184281898', Rvar: '0.0206', Prot: '7.76', f_Prot: '0', Sector: '1', Prot2: '7.71', ProtACF: '7.69' }]).get(184281898)!, said = COLMAN_2024.judge(row, [3]).verdict;
+  const paper = { id: COLMAN_2024.id, citation: COLMAN_2024.citation, url: COLMAN_2024.url, where: COLMAN_2024.where, lightCurve: COLMAN_2024.lightCurve, asks: COLMAN_2024.asks, reliability: COLMAN_2024.reliability, published: COLMAN_2024.table };
+  const listed = { ...receipt('page', 'rotation.json: the measured axis the star\'s page draws'), method: paper, rotation: said, refused: [{ mission: 'TESS', method: HOLCOMB, rotation: { detected: false, reason: none } }],
+    tried: [{ mission: 'TESS', window: 3, method: 'holcomb-2022', analysis: { periodDays: null, height: 0.29, width: 0.38, fit: 0.95, centre: 0.004, range: 0.0205 }, says: 'no repeating peaks in the autocorrelation', verdict: { detected: false, reason: none } },
+      { mission: 'TESS', window: 3, method: 'colman-2024', analysis: COLMAN_2024.measures(row), says: COLMAN_2024.says(row), verdict: said }], maps: [{ ...receipt('page', 'x').maps[0]!, window: 3, table: 'hd-1-s0003.dat', periodDays: 7.76 }] };
+  // Sector 3: 20 September to 17 October 2018. What is read of the window is the paper's row, not the refusing method's measure of the same light.
+  const choice = brightnessChoice('hd-1', 'TESS', 3), map = reducedBrightness(choice, listed, TABLE, { time: [1382.5, 1409.4], flux: [1, 1] });
+  assert.deepEqual([map.method.published, map.method.read, map.periodDays, map.amplitude, map.periodSource], ['VizieR J/AJ/167/189/fig12', 1, 7.76, 0.0206, 'published by Colman et al. (2024, AJ 167, 189) (VizieR J/AJ/167/189/fig12)']); assert.match(map.method.says, /^a rotation period of 7\.76 d/u);
+  assert.deepEqual(map.method.refused, [{ citation: HOLCOMB.citation, mission: 'TESS', reason: none }]);
+  const { files } = surfaceMapFiles(BRIGHTNESS_MAPS, { host: 'hd-1', maps: [choice] }, { id: 'hd-1', name: 'HD 1' }, [map], HOST()), read = (path: string) => JSON.parse(files.get(`src/objects/hd-1/${path}`)!) as Record<string, any>;
+  const science = read('source/preparation/raster.json').surfaces[2].science, input = read('source/manifest.json').generatedIntermediates[0];
+  assert.match(science.description, /turns once in 7\.76 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 3 \(its PDC-MAP flux\) \(the light varies by 2\.1%;.*Colman et al\. \(2024, AJ 167, 189\) list the star as a rotator in their table \(VizieR J\/AJ\/167\/189\/fig12\): a rotation period of 7\.76 d, the highest peak of the Lomb-Scargle periodogram of the star's one sector among sectors 1 to 26, which passed both of the paper's classifiers\. The rotation and its period are theirs, taken as published; no criteria were applied to them here\..*A reduction made in this project, not a published map\./u);
+  assert.match(input.credit, /^NASA TESS mission light curve \(PDC-MAP\), sector 3, from MAST; its rotation and period as published by Colman et al\. \(2024, AJ 167, 189\); map made in this project with lightkurve 2\.6\.0, SpinSpotter 0\.2\.0 and starry 1\.2\.0\./u);
+  assert.match(read('source/content/object.json').datasets.controls[1].notes, /The light curve is the mission's own; Colman et al\. \(2024, AJ 167, 189\) found the star's rotation in it, and starry finds the map that reproduces it at their period\./u);
+  assert.deepEqual(input.sourceBinding.references.map((reference: { catalogueId: string }) => reference.catalogueId), ['mast-tess-light-curves', 'arxiv-2402-14954', 'arxiv-1810-06559', 'gaia-2023-dr3']);
+  const record = JSON.parse(brightnessSourceRecords('2026-10-06', [map]).get('src/sources/arxiv-2402-14954.json')!) as Record<string, any>; assert.deepEqual(record.identifiers, [{ type: 'arXiv', value: '2402.14954' }, { type: 'DOI', value: '10.3847/1538-3881/ad2c86' }]);
+  // The README says whose verdict it is, what the table gives, and that the method run here on the star's light refuses.
+  const readme = withBrightnessReadme('# HD 1\n\n## Sources\n\nGaia.\n\n## Evidence\n\nRun.\n\n## Known problems\n\n- None.\n', map, 7.78);
+  assert.match(readme, /light curve of sector 3 \(September and October 2018; its PDC-MAP flux.*It is among the light curves \[Colman et al\. \(2024, AJ 167, 189\)\]\(https:\/\/arxiv\.org\/abs\/2402\.14954\) searched for rotation, and the star's row in their table \(VizieR J\/AJ\/167\/189\/fig12\) is their verdict that it shows the star turning: the period is theirs and nothing is judged here, and starry \(Luger et al\. 2019\) makes the map/su);
+  assert.match(readme, /Colman et al\. \(2024, AJ 167, 189\) ask a sector's light to pass both of the paper's random-forest classifiers.*Their table \(VizieR J\/AJ\/167\/189\/fig12\) gives a rotation period of 7\.76 d.*: the star's period is 7\.76 d, as published, and no criteria were applied to it here\. The light varies by 2\.1% \(the range between its 5th and 95th percentiles, as the table prints it\)\. On the paper's blind test set.*The criteria of Holcomb et al\. \(2022, ApJ 936, 138\), applied here to the star's TESS light, are not met: SpinSpotter finds no repeating peaks in the autocorrelation of sector 3\. The star's record holds 7\.78 d from the catalogues\./su);
+  // A published period is not a measured one: the star's record is left as it is, and only its README is written.
+  const root = await mkdtemp(join(tmpdir(), 'published-'));
+  try { await mkdir(join(root, 'src/objects/hd-1/source'), { recursive: true }); await writeFile(join(root, 'src/objects/hd-1/source/measurements.json'), '{"shape":"sphere"}\n'); await writeFile(join(root, 'src/objects/hd-1/README.md'), '# HD 1\n\n## Sources\n\nGaia.\n');
+    assert.deepEqual([...(await BRIGHTNESS_ROUTE.starRecords!(root, 'hd-1', [map])).keys()], ['src/objects/hd-1/README.md']);
+    assert.deepEqual([...(await BRIGHTNESS_ROUTE.starRecords!(root, 'hd-1', [reducedBrightness(brightnessChoice('hd-1', 'TESS', 95), receipt('assumed', 'assumed'), TABLE, LIGHT)])).keys()], ['src/objects/hd-1/source/measurements.json', 'src/objects/hd-1/README.md']); }
+  finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a star K2\'s method refused is read from its TESS windows, and a value its record lacked is named', () => {
+  // K2 campaign 8 and TESS sector 8 are two windows: the map of sector 8 reads what the TESS method measured, and the README keeps K2's refusal.
+  const low = 'The periodogram\'s highest peak, at 16.50 d, has a height of 0.08, not over the 0.3 that Reinhold & Hekker (2020) ask of a rotation.', own = receipt('assumed', 'assumed');
+  const after = { ...own, refused: [{ mission: 'K2', method: { id: 'reinhold-hekker-2020', citation: 'Reinhold & Hekker (2020, A&A 635, A43)' }, rotation: { detected: false, reason: low } }],
+    inputCatalogue: { name: 'TESS Input Catalog', version: '8.2', tic: 256364928, fills: ['surfaceGravityLogg'], says: 'The TESS Input Catalog (v8.2), in the header of the star\'s sector 41 light curve, gives 5023 K and log g 4.58.' },
+    tried: [{ mission: 'K2', window: 9, verdict: { detected: false, reason: 'not campaign 9' } }, { mission: 'K2', window: 8, method: 'reinhold-hekker-2020', says: 'periodogram 16.50 d, wavelet 14.00 d, autocorrelation 9.00 d; periodogram peak 0.08', analysis: { peakHeight: 0.08, lombScargleDays: 16.5, waveletDays: 14, autocorrelationDays: 9 }, verdict: { detected: false, reason: low } },
+      { ...own.tried[0]!, window: 8 }, { ...own.tried[0]!, window: 9, says: 'no repeating peaks in the autocorrelation', verdict: { detected: false, reason: 'none' } }], maps: [{ ...own.maps[0]!, window: 8, table: 'hd-1-s0008.dat' }] };
+  const map = reducedBrightness(brightnessChoice('hd-1', 'TESS', 8), after, TABLE, LIGHT);
+  assert.deepEqual([map.mission, map.method.id, map.method.says, map.method.read, map.method.periodsDays], ['TESS', 'holcomb-2022', SAYS, 2, undefined]);
+  const readme = withBrightnessReadme('# HD 1\n\n## Sources\n\nGaia.\n\n## Evidence\n\nRun.\n\n## Known problems\n\n- None.\n', map);
+  assert.match(readme, /Sector 8 gives a period of 4\.85 d.*; 1 more of the star's 2 sectors does not meet the criteria\..*On the stars its authors inspected by eye.*The criteria of Reinhold & Hekker \(2020, A&A 635, A43\), applied here to the star's K2 light, are not met: The periodogram's highest peak, at 16\.50 d, has a height of 0\.08.*The star's record holds no surface gravity: the TESS Input Catalog \(v8\.2\), in the header of the star's sector 41 light curve, gives 5023 K and log g 4\.58, and that is what decides whether the method is for this kind of star\. The star's record holds no catalogued rotation period/su);
+  // A star whose record held both values says nothing of the catalog; a catalogue's row of a star is matched as the metadata pass matches one.
+  assert.equal(reducedBrightness(brightnessChoice('hd-1', 'TESS', 95), own, TABLE, LIGHT).kindFrom, undefined); assert.equal(SAME_STAR_ARCSEC, MATCH_ARCSEC);
 });

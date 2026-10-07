@@ -12,6 +12,9 @@ computed here.
   tools.py spinspotter <job.json>          a star's TESS 2-minute light curves through SpinSpotter (Holcomb et al.
                                            2022), as its authors call it: each sector and the stitched light curve
 
+  tools.py input-catalogue <job.json>      what the TESS Input Catalog says of a light curve's target, as the
+                                           file's own header carries it and lightkurve reads it
+
   tools.py maps <job.json>                 the brightness map that reproduces each of a star's rotational light curves
                                            (starry), all in one process; run with the starry toolchain's interpreter
 
@@ -33,6 +36,17 @@ def mission_light_curve(job):
     flux = np.asarray(curve.flux.value, dtype=float)
     return {'frames': int(len(flux)), 'window': int(curve.campaign), 'pipeline': str(curve.meta.get('PROCVER', '')),
             'time': [round(float(value), 5) for value in np.asarray(curve.time.value, dtype=float)], 'flux': [round(float(value), 6) for value in flux / np.mean(flux)]}
+
+
+def input_catalogue(job):
+    """The target's temperature, surface gravity and TESS Input Catalog number, and the catalog's version, from the
+    primary header of a TESS 2-minute light curve (TEFF, LOGG, TICID, TICVER), as lightkurve reads the file. A value the
+    header leaves blank is null. Nothing is worked out."""
+    warnings.filterwarnings('ignore')
+    import lightkurve as lk
+
+    meta = lk.read(job['file']).meta
+    return {'tic': meta.get('TICID'), 'version': meta.get('TICVER'), 'effectiveTemperatureK': meta.get('TEFF'), 'surfaceGravityLogg': meta.get('LOGG')}
 
 
 def rotation(job):
@@ -153,6 +167,9 @@ if __name__ == '__main__':
     if len(sys.argv) == 3 and sys.argv[1] == 'mission-light-curve':
         with open(sys.argv[2]) as handle:
             result = mission_light_curve(json.load(handle))
+    elif len(sys.argv) == 3 and sys.argv[1] == 'input-catalogue':
+        with open(sys.argv[2]) as handle:
+            result = input_catalogue(json.load(handle))
     elif len(sys.argv) == 3 and sys.argv[1] == 'rotation':
         with open(sys.argv[2]) as handle:
             result = rotation(json.load(handle))

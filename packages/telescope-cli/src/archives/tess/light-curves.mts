@@ -29,7 +29,8 @@ export function parseSectorLightCurves(body: unknown): SectorLightCurve[] {
       ? [{ target: row.target_name, sector, filename, uri, raDegrees: row.s_ra, decDegrees: row.s_dec }] : []; }).sort((a, b) => a.sector - b.sector);
 }
 
-const apart = (a: Place, b: Place) => Math.hypot((a.raDegrees - b.raDegrees) * Math.cos(a.decDegrees * Math.PI / 180), a.decDegrees - b.decDegrees);
+/** The angle between two places, degrees. */
+export const apart = (a: Place, b: Place) => Math.hypot((a.raDegrees - b.raDegrees) * Math.cos(a.decDegrees * Math.PI / 180), a.decDegrees - b.decDegrees);
 /** Every sector's 2-minute light curve of the target at a star's place. A star that moves is given at more than one place;
  * the target nearest any of them, within a pixel, is the star's, and only its light curves are returned. */
 export async function sectorLightCurvesAt(places: readonly Place[]): Promise<SectorLightCurve[]> {
