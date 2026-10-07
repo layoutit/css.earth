@@ -4,6 +4,7 @@ export type { SceneFramePresenter, WorldContextOwner, WorldContextMount } from '
 import type { BrowserWindow } from '../../browser/browser-types.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { WorldCameraPose } from '@cssearth/engine';
+import { sceneDatasetVolume } from './scene-datasets.mts';
 
 type WorldFramePresenter = ReturnType<NonNullable<WorldContextMount['createFramePresenter']>>;
 
@@ -110,6 +111,10 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     session.own(() => { if (connectedSession === session) connectedSession = null; });
     session.framePresenter?.attach?.(world);
     select(session, navigation);
+    // The bank the session's dataset shows is the selected body's picture from here on. A flight selects the dataset only
+    // when it delivers the scene (scene-activation.mts `restore`), and the world draws the body on the way there.
+    const volume = sceneDatasetVolume(session);
+    world.expectVolumeDataset?.(volume?.objectId ?? null, volume?.datasetId);
     session.own(navigation.subscribe(frame => {
       if (isCurrent(session) && mounted() === world) onCameraChange(session, frame);
     }));

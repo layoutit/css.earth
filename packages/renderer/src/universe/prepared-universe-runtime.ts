@@ -261,6 +261,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const captionFlags = () => ({ overview: selectionPreview ? false : overview && !systemSelection, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
         // The bank the mounted scene's dataset shows as its companion: its subject, drawn whole while it is shown.
         let companion: string | null = null;
+        // The bank the selected body's scene will show once its flight delivers its dataset (`expectVolumeDataset`).
+        let expected: string | null = null;
         const detailStandIn = createDetailStandIn();
         // The banks that are a scene's whole subject: a galaxy's image layers, and a volume that is not attached to a body.
         const subjectBanks = new Set([...declaredImageLayers.map(bank => bank.id), ...declaredVolumes.filter((_, index) => !datasetFacts[index]!.attached).map(bank => bank.id)]);
@@ -317,7 +319,21 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (lifetime.disposed) return;
             if (!bankOf(id)) throw new TypeError(`Unknown prepared bank: ${id}.`);
             datasets.setEnabled(id, enabled);
-            if (enabled) companion = id; else if (companion === id) companion = null;
+            if (enabled) { companion = id; expected = null; }
+            else { if (companion === id) companion = null; if (expected === id) expected = null; }
+            requestPublication?.();
+          },
+          /** The bank the selected body's scene will show, and the dataset of it, told when the body is selected (none:
+           * `null`): the body's subject from then on, as it is once the scene's dataset is committed
+           * (`setVolumeDatasetEnabled`). A flight commits the dataset at its hand-over, and until then the bank was context,
+           * which gives way in a body's close-up: flying from Earth to M42, nothing drew the nebula from 3.0 to 4.5 s of
+           * 6.2, and nothing drew the Ring from 2.7 to 4.9 s. The bank shows that dataset on the way: left on its infrared
+           * one by an earlier visit, M42 flew in infrared and turned optical at the hand-over (2026-10-07). */
+          expectVolumeDataset(id: string | null, dataset?: string) {
+            if (lifetime.disposed) return;
+            if (id !== null && dataset !== undefined) bankOf(id)?.selectDataset(dataset);
+            if (expected === id) return;
+            expected = id;
             requestPublication?.();
           },
           selectVolumeDataset(id: string, dataset: string) {
@@ -400,8 +416,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               // the selected body's place and radius, and the context gives way to it. A volume attached to a body (a star's
               // disc) and a bank of dots (a cluster's members) show beside what is there and dim nothing. Until the scene's
               // own body is selected the companion has nothing to be framed by.
-              const detailedFocus: { objectId: string; focus: SelectedBank } | null = companion === null || !subjectBanks.has(companion) || selected === plan.focus ? null
-                : { objectId: companion, focus: { positionM: selected.positionM as SelectedBank['positionM'], framingRadiusM: selected.radiusM } };
+              const subject = expected ?? companion;
+              const detailedFocus: { objectId: string; focus: SelectedBank } | null = subject === null || !subjectBanks.has(subject) || selected === plan.focus ? null
+                : { objectId: subject, focus: { positionM: selected.positionM as SelectedBank['positionM'], framingRadiusM: selected.radiusM } };
               const detailContextOpacity = detailedFocusContextOpacity(world, detailedFocus?.focus ?? null);
               if (detailContextOpacity > 0) background.prefetch(distanceM);
               const outsideGalaxy = galaxyOutsideFade(

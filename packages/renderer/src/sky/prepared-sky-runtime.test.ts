@@ -727,5 +727,25 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     });
     select('no-bank'); mounted.publish(near, viewport, spatialFrame);
     assert.equal(mw.style.display, '');
+    // A flight selects a body before it commits its scene's dataset. Until the world is told which bank that dataset
+    // shows, the bank is context, which gives way in the body's close-up (the body a quarter of a sized viewport's
+    // short side); told, it is the body's subject at once.
+    const sized = { ...viewport, widthPixels: 1280, heightPixels: 800 }, close = camera(5);
+    const subject = context.bodies.find((body: { id: string }) => body.id === 'focus-bank') as { positionM: [number, number, number]; radiusM: number };
+    mounted.selectObject('focus-bank', { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, originM: subject.positionM,
+      presentationToReference: [0, 1, 0, 1, 0, 0, 0, 0, 1], metersPerUnit: subject.radiusM, bodyRadiusM: subject.radiusM });
+    mounted.publish(close, sized, spatialFrame);
+    assert.equal(findBank('focus-bank').style.display, 'none');
+    mounted.expectVolumeDataset('focus-bank', 'optical');
+    await waitFor(() => {
+      mounted.publish(close, sized, spatialFrame);
+      assert.equal(findBank('focus-bank').style.display, 'block');
+    });
+    assert.equal(mw.style.display, 'none');
+    // The committed dataset takes over from the expectation, and ends with its scene as before.
+    mounted.setVolumeDatasetEnabled('focus-bank', true); mounted.publish(close, sized, spatialFrame);
+    assert.equal(findBank('focus-bank').style.display, 'block');
+    mounted.setVolumeDatasetEnabled('focus-bank', false); mounted.publish(close, sized, spatialFrame);
+    assert.equal(findBank('focus-bank').style.display, 'none');
   } finally { mounted.destroy(); }
 });
