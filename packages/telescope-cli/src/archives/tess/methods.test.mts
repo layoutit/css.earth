@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { catalogueSays, filled, HOLCOMB_2022, holcombStar, methodFor, parseAnalysis, parseInputCatalogue, parseMissionLightCurve, REINHOLD_HEKKER_2020, type RotationAnalysis } from './methods.mts';
+import { catalogueSays, filled, HOLCOMB_2022, holcombStar, methodFor, parseAnalysis, parseApertureLight, parseInputCatalogue, parseMissionLightCurve, REINHOLD_HEKKER_2020, type RotationAnalysis } from './methods.mts';
 
 /** K2-100 in campaign 5, as tools.py measured it. */
 const analysis: RotationAnalysis = { spanDays: 74.8, variabilityRange: 0.0142, peakHeight: 0.349, lombScargleDays: 4.251, waveletDays: 4.255, autocorrelationDays: 4.25, starPrivateer: '1.3.1', time: [0, 0.125], flux: [1, 1] };
@@ -45,6 +45,13 @@ test('what the tool printed is read whole or refused', () => {
   assert.equal(parseAnalysis({ ...analysis }).waveletDays, 4.255);
   assert.throws(() => parseAnalysis({ ...analysis, flux: [1] }), /different lengths/u); assert.throws(() => parseAnalysis({ ...analysis, peakHeight: 'high' }), /peakHeight/u);
   assert.deepEqual(parseMissionLightCurve({ frames: 2, window: 13, pipeline: 'r63269', time: [2987.6, 2987.62], flux: [1, 1.001] }).window, 13); assert.throws(() => parseMissionLightCurve({ frames: 1, window: 13, pipeline: '', time: [1], flux: [1] }), /or none/u);
+});
+
+test('what a light curve\'s header says of the light in its aperture is kept as it is, and a blank value is left out', () => {
+  // HD 222259 B in sector 104 and K2-154 in campaign 10, as lightkurve read their headers on 2026-10-07.
+  assert.deepEqual(parseApertureLight({ targetShare: 0.30381778, targetHeld: 0.97676754 }), { targetShare: 0.30381778, targetHeld: 0.97676754 });
+  assert.deepEqual(parseMissionLightCurve({ frames: 2, window: 102, pipeline: 'r63269', targetShare: 1, targetHeld: 0.9535, time: [2987.6, 2987.62], flux: [1, 1.001] }).aperture, { targetShare: 1, targetHeld: 0.9535 });
+  assert.deepEqual(parseApertureLight({ targetShare: null }), {}); assert.throws(() => parseApertureLight({ targetShare: 'most' }), /targetShare/u);
 });
 
 test('Holcomb et al.\'s rule for a star is applied as their Sect. III prints it', () => {

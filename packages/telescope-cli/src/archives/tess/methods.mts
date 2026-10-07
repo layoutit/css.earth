@@ -26,8 +26,16 @@ export interface StarKind { readonly effectiveTemperatureK?: number; readonly su
 /** What the catalogue a method's paper selects its stars from says of a light curve's target, as the file's own header
  * carries it (tools.py `input-catalogue`): a value the header leaves blank is absent. */
 export interface InputCatalogue { readonly tic: number; readonly version: string; readonly effectiveTemperatureK?: number; readonly surfaceGravityLogg?: number }
+/** What the pipeline's own header says of the light in a light curve's aperture (tools.py `aperture_light`): the share of
+ * it that is the target's own (`CROWDSAP`) and the share of the target's light the aperture holds (`FLFRCSAP`). A receipt
+ * keeps them beside the file they are read from. Nothing is decided on them: no published method here sets a limit. */
+export interface ApertureLight { readonly targetShare?: number; readonly targetHeld?: number }
+/** The two shares in a tool's answer; a value the header leaves blank is absent. */
+export function parseApertureLight(record: Readonly<Record<string, unknown>>): ApertureLight {
+  const share = (key: 'targetShare' | 'targetHeld') => record[key] === null || record[key] === undefined ? {} : { [key]: requireFiniteNumber(record[key], key) };
+  return { ...share('targetShare'), ...share('targetHeld') }; }
 /** A mission's own light curve of one window, as tools.py `mission-light-curve` read it. */
-export interface MissionLightCurve { readonly frames: number; readonly window: number; /** The version of the mission's pipeline that made it, from the file's header. */ readonly pipeline: string; readonly time: readonly number[]; readonly flux: readonly number[] }
+export interface MissionLightCurve { readonly frames: number; readonly window: number; /** The version of the mission's pipeline that made it, from the file's header. */ readonly pipeline: string; readonly aperture: ApertureLight; readonly time: readonly number[]; readonly flux: readonly number[] }
 /** What tools.py `rotation` measured of one light curve, prepared the way the method's paper prepares it. */
 export interface RotationAnalysis { readonly spanDays: number; /** The 95th less the 5th percentile of the light, as a share of its mean. */ readonly variabilityRange: number;
   /** The highest peak of the generalized Lomb-Scargle periodogram, 0 to 1, and its period. */ readonly peakHeight: number; readonly lombScargleDays: number;
@@ -36,7 +44,7 @@ export interface RotationAnalysis { readonly spanDays: number; /** The 95th less
 
 /** What a method measured and decided of one window's light curve: the numbers its criteria read, those numbers in a
  * sentence's words, its verdict, and the light curve as the method prepared it, which a map is made from. */
-export interface WindowResult { readonly window: number; readonly pipeline: string; readonly frames: number; readonly measures: Readonly<Record<string, number | null>>; readonly says: string; readonly verdict: RotationVerdict;
+export interface WindowResult { readonly window: number; readonly pipeline: string; readonly aperture: ApertureLight; readonly frames: number; readonly measures: Readonly<Record<string, number | null>>; readonly says: string; readonly verdict: RotationVerdict;
   readonly time: readonly number[]; readonly flux: readonly number[] }
 /** A star's windows as a method judged them, what it measured of them all together when its paper asks for that, and its verdict for the star. */
 export interface StarResult { readonly windows: readonly WindowResult[]; readonly whole?: { readonly measures: Readonly<Record<string, number | null>>; readonly says: string; readonly verdict: RotationVerdict }; readonly verdict: RotationVerdict }
@@ -89,7 +97,7 @@ export const REINHOLD_HEKKER_2020: PeriodMethod & { verdict(analysis: RotationAn
   verdict: rhVerdict, star: rhStar,
   async judge(files) { const windows: WindowResult[] = [];
     for (const file of files) { const curve = await missionLightCurve(file), analysis = await rotationAnalysis(RH_PREPARATION, curve.time, curve.flux), two = (days: number) => days.toFixed(2);
-      windows.push({ window: curve.window, pipeline: curve.pipeline, frames: curve.frames, verdict: rhVerdict(analysis), time: analysis.time, flux: analysis.flux,
+      windows.push({ window: curve.window, pipeline: curve.pipeline, aperture: curve.aperture, frames: curve.frames, verdict: rhVerdict(analysis), time: analysis.time, flux: analysis.flux,
         measures: { spanDays: Number(analysis.spanDays.toFixed(1)), variabilityRange: analysis.variabilityRange, peakHeight: analysis.peakHeight, lombScargleDays: analysis.lombScargleDays, waveletDays: analysis.waveletDays, autocorrelationDays: analysis.autocorrelationDays },
         says: `periodogram ${two(analysis.lombScargleDays)} d, wavelet ${two(analysis.waveletDays)} d, autocorrelation ${two(analysis.autocorrelationDays)} d; periodogram peak ${analysis.peakHeight.toFixed(2)}` }); }
     return { windows, verdict: rhStar(windows.map(window => window.verdict)) }; } };
@@ -141,7 +149,7 @@ export const HOLCOMB_2022: PeriodMethod = { id: 'holcomb-2022', citation: 'Holco
     try { await writeFile(job, JSON.stringify({ files, binSeconds: HOLCOMB.binSeconds, timeZero: HOLCOMB.timeZero, ...(transits.length ? { transit: [transits.map(one => one.periodDays), transits.map(one => one.epochBjd), transits.map(one => one.durationDays)] } : {}) }));
       const printed = requireRecord(runTool(python, ['spinspotter', job]), 'SpinSpotter\'s answer'), numbers = (value: unknown, key: string) => requireArray(value, key).map((entry, index) => requireFiniteNumber(entry, `${key}[${index}]`));
       const sectors = requireArray(printed.sectors, 'sectors').map((entry, index) => { const record = requireRecord(entry, `sector ${index}`), window = requireFiniteNumber(record.sector, 'sector'), spin = parseSpin(record, `sector ${window}`);
-        return { spin, window, pipeline: requireString(record.pipeline, 'pipeline'), frames: requireFiniteNumber(record.frames, 'frames'), measures: spinMeasures(spin), says: spinSays(spin), verdict: spinVerdict(spin, `sector ${window}`), time: numbers(record.time, 'time'), flux: numbers(record.flux, 'flux') }; });
+        return { spin, window, pipeline: requireString(record.pipeline, 'pipeline'), aperture: parseApertureLight(record), frames: requireFiniteNumber(record.frames, 'frames'), measures: spinMeasures(spin), says: spinSays(spin), verdict: spinVerdict(spin, `sector ${window}`), time: numbers(record.time, 'time'), flux: numbers(record.flux, 'flux') }; });
       const stitched = printed.stitched === null || printed.stitched === undefined ? undefined : parseSpin(printed.stitched, 'the stitched light curve'), whole = stitched && { spin: stitched, measures: spinMeasures(stitched), says: spinSays(stitched), verdict: spinVerdict(stitched, 'all the sectors together') };
       return { windows: sectors.map(({ spin: _spin, ...window }) => window), ...(whole ? { whole: { measures: whole.measures, says: whole.says, verdict: whole.verdict } } : {}), verdict: holcombStar(sectors, whole) }; }
     finally { await rm(directory, { recursive: true, force: true }); } } };
@@ -188,7 +196,7 @@ export const catalogueSays = (from: InputCatalogue) => `${from.effectiveTemperat
 export function parseMissionLightCurve(value: unknown): MissionLightCurve {
   const record = requireRecord(value, 'mission light curve'), numbers = (key: string) => requireArray(record[key], key).map((entry, index) => requireFiniteNumber(entry, `${key}[${index}]`)), time = numbers('time'), flux = numbers('flux');
   if (time.length !== flux.length || time.length < 2) throw new TypeError('The mission\'s light curve has times and fluxes of different lengths, or none.');
-  return { frames: requireFiniteNumber(record.frames, 'frames'), window: requireFiniteNumber(record.window, 'window'), pipeline: requireString(record.pipeline, 'pipeline'), time, flux };
+  return { frames: requireFiniteNumber(record.frames, 'frames'), window: requireFiniteNumber(record.window, 'window'), pipeline: requireString(record.pipeline, 'pipeline'), aperture: parseApertureLight(record), time, flux };
 }
 /** A mission's light curve file, read as the mission publishes it. */
 export async function missionLightCurve(file: string): Promise<MissionLightCurve> {
