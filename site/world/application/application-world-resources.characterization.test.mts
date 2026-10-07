@@ -118,7 +118,7 @@ isolatedTest('initial decode failure permits retry; concurrent successful loads 
   const universe = await first;
   assert.deepEqual(universe.createFramePlanner(), { id: 1 }); assert.deepEqual(universe.createFramePlanner(), { id: 2 });
   assert.equal(await loadApplicationUniverse(), universe);
-  assert.deepEqual(options.environmentLinks, { [volumeId]: '/inside/' }); assert.ok(options.contextBanks?.includes('mesh'));
+  assert.deepEqual(options.environmentLinks, { [volumeId]: '/inside/' }); assert.deepEqual(options.environmentNames, { [volumeId]: 'Inside host' }); assert.ok(options.contextBanks?.includes('mesh'));
   assert.equal(options.plainDots?.minimumDiameterPixels, 1.5);
   assert.deepEqual(options.pointBanks?.find(bank => bank.id === 'inside/plain-stars'), { id: 'inside/plain-stars', url: '/world/dots/inside.bin', host: 'inside', stars: true });
   assert.equal(options.sky, true);
