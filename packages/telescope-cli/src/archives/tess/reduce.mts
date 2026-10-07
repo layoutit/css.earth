@@ -140,11 +140,16 @@ export async function reduceStar(id: string, light?: StarLight): Promise<Record<
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const args = process.argv.slice(2), named = args.filter(argument => !argument.startsWith('--')), all = !named.length;
-  if (all && !args.includes('--all')) throw new TypeError('Usage: reduce.mts <star id>... | --all');
+  if (all && !args.includes('--all')) throw new TypeError('Usage: reduce.mts <star id>... | --all [--shard=K/N]');
+  // `--shard=K/N` takes every Nth star, starting at the Kth: N runs side by side share the stars between them. MAST answers
+  // requests sent side by side (measured: eight files at once in 2 s, eight position queries at once, none refused).
+  const shard = args.find(argument => argument.startsWith('--shard='))?.slice(8).split('/').map(Number);
+  if (shard && !(shard.length === 2 && Number.isInteger(shard[0]) && Number.isInteger(shard[1]) && shard[1]! > 0 && shard[0]! >= 0 && shard[0]! < shard[1]!)) throw new TypeError('--shard=K/N needs 0 <= K < N.');
   const stars: StarPlace[] = [];
   for (const id of all ? (await readdir(resolve(WORKSPACE, 'src/objects'))).sort() : named) { const star = await starPlace(id); if (star) stars.push(star); else if (!all) console.log(`${id}: not a star with a place on the sky.`); }
   const wide = await lightOf(stars, true), near = await lightOf(stars, true, PIXELS.K2.radiusArcsec);
-  for (const star of stars) {
+  for (const [index, star] of stars.entries()) {
+    if (shard && index % shard[1]! !== shard[0]) continue;
     // `--all` leaves a star alone once it has been judged this way.
     const held = all ? await readJson(receiptPath(star.id)) : null; if (isRecord(held) && held.schema === ROTATION_SCHEMA) continue;
     try { const receipt = await reduceStar(star.id, { wide: wide.get(star.id) ?? null, near: near.get(star.id) ?? null }), rotation = receipt.rotation as RotationVerdict, maps = Array.isArray(receipt.maps) ? receipt.maps.length : 0;
