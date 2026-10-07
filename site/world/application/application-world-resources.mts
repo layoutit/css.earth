@@ -177,8 +177,9 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // The plan as it stands now: systems read later reach the universe through onWorldSystems below.
     const plan = applicationContext, sprites = billboards([plan.focus, ...plan.bodies]);
     const universe = createPreparedUniverse({
-      // The world's volume is the Milky Way's bank: clicking it opens its host's page.
+      // The world's volume is the Milky Way's bank: its caption carries its host's name, and clicking it opens its host's page.
       environmentLinks: (host => host ? { [applicationContext.volume.objectId]: `/${host.id}/` } : {})(insideHost(applicationContext.volume.objectId)),
+      environmentNames: (name => name ? { [applicationContext.volume.objectId]: name } : {})(hostName(applicationContext.volume.objectId)),
       contextBanks,
       stellarExtents: STELLAR_EXTENTS,
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
