@@ -33,4 +33,8 @@ test('a backing refuses a malformed near fade or section, naming the bank and th
   assert.throws(() => parseGalaxyBacking({ ...data, centreFadeM: [1, 2] }), /centreFadeM is \[far, near\] metres/);
   assert.throws(() => parseGalaxyBacking({ ...data, sections: [{ ...sections[0], texturePath: '../../x.webp' }] }), /backing: backing section 0 needs a texture path/);
   assert.throws(() => parseGalaxyBacking({ ...data, sections: 'rings' }), /backing: backing sections must be a list/);
+  const datasets = { optical: 'backing/backing.webp', infrared: 'infrared/impostors/view-00n.png' };
+  assert.deepEqual([...parseGalaxyBacking({ ...data, datasets }).datasets!], Object.entries(datasets), 'a bank names each dataset\'s image');
+  assert.throws(() => parseGalaxyBacking({ ...data, datasets: { infrared: datasets.infrared } }), /one of them the leaf's backing\/backing.webp/);
+  assert.throws(() => parseGalaxyBacking({ ...data, datasets: { ...datasets, infrared: '../x.png' } }), /backing datasets map each dataset id to a texture path/);
 });

@@ -39,7 +39,15 @@ export function mountGalaxyBacking({ host, before, payload, resolveResource }: {
   node.src = resolveResource(payload.leaf.texturePath);
   mesh.append(node); scene.append(mesh); camera.append(scene); root.append(camera); host.insertBefore(root, before);
   let perspective = '', origin = '', transform = '';
-  return Object.freeze({ root, publish(publication: VolumeCameraPublication) {
+  return Object.freeze({ root,
+    /** Draw another image of the same box on the plane (a volume bank's selected dataset, galaxy-backing.ts `datasets`);
+     * returns its url. */
+    setTexture(texturePath: string) {
+      const url = resolveResource(texturePath);
+      if (node.getAttribute('src') !== url) node.src = url;
+      return url;
+    },
+    publish(publication: VolumeCameraPublication) {
     const view = preparedVolumeCameraTransform(publication, payload.frame);
     const [x, y] = publication.viewport.principalOffsetPixels;
     // Written on change: this publishes every camera frame (motion-freezes-membership.md).

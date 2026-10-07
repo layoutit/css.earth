@@ -2,7 +2,7 @@ import { writeStyle } from '../rendering/dom/retained-write.js';
 import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
 import type { PreparedFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
-import { type DensityVolumeFrame, type PreparedPointVisibility, type DatasetBankBillboard, type DatasetBillboards } from '@cssearth/objects';
+import { type DensityVolumeFrame, type PreparedPointVisibility, type DatasetBankBillboard, type DatasetBillboards, type PreparedGalaxyBacking } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { createPreparedVolumeDatasets, type PreparedVolumeDatasetSource } from '../volume/prepared-volume-datasets.js';
@@ -10,15 +10,29 @@ import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
+import { mountGalaxyBacking } from './galaxy-backing.js';
+import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import { mountCataloguePoints } from './catalogue-points.js';
 import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 
 type DatasetMount = ReturnType<ReturnType<typeof createPreparedVolumeDatasets>['mount']>;
+/** A bank's backing plane (DatasetBankBillboard.backing): its far picture, fixed in its frame as the Milky Way's is. */
+interface FarPlane {
+  /** Where its image is served, and the plane's half-width: the impostor radius, the framing radius of the declared bounds. */
+  readonly radiusUnits: number;
+  loaded: { payload: PreparedGalaxyBacking; resolveResource(path: string): string } | null;
+  loading: boolean;
+  plane: ReturnType<typeof mountGalaxyBacking> | null;
+  /** The image the plane draws, and whether it is on screen. */
+  texture: string | null;
+  shown: boolean;
+}
 interface DatasetBank {
   readonly id: string;
   readonly facts: DatasetBankBillboard;
   readonly billboardIndex: number;
+  readonly far: FarPlane | null;
   mounted: DatasetMount | null;
   /** The cause of the bank's last failed load, already reported. */
   failure?: string;
@@ -43,7 +57,7 @@ interface DatasetBank {
 
 /** One stable record owns each declared bank through load, publication and eviction. */
 export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lifetime, declarations, facts, frame, visibility,
-  billboards: preparedBillboards, load, warmDomNodeBudget, requestPublication, prepareBillboardImage }: {
+  billboards: preparedBillboards, load, loadBacking, warmDomNodeBudget, requestPublication, prepareBillboardImage }: {
   root: HTMLElement; end: Element; frontRoot: HTMLElement; frontEnd: Element; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
   facts: readonly DatasetBankBillboard[];
@@ -51,14 +65,30 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   visibility: PreparedPointVisibility;
   billboards?: { plan: DatasetBillboards; imageUrl: (id: string, dataset?: string) => string };
   load: PreparedUniverseOptions['loadVolumeDataset'];
+  loadBacking?: PreparedUniverseOptions['loadVolumeBacking'];
   warmDomNodeBudget: number;
   requestPublication?: () => boolean;
   prepareBillboardImage: (url: string) => boolean;
 }) {
   let billboardCount = 0, useClock = 0, coasting = false;
   const pictured = (bankFacts: DatasetBankBillboard) => bankFacts.billboard !== undefined || (bankFacts.datasets?.size ?? 0) > 0;
+  // The backing planes' host, as the Milky Way's (universe-background.ts), made with the first bank that has one: where
+  // the billboards' layer goes, so the planes paint as the billboards they replace did.
+  let backingHost: HTMLElement | null = null;
+  const farPlane = (declared: { frame: DensityVolumeFrame }, bankFacts: DatasetBankBillboard): FarPlane | null => {
+    if (!bankFacts.backing) return null;
+    if (!backingHost) {
+      backingHost = root.ownerDocument.createElement('div');
+      backingHost.className = 'prepared-galaxy-backing';
+      backingHost.style.cssText = 'position:absolute;inset:0;pointer-events:none';
+      root.insertBefore(backingHost, end);
+      const host = backingHost;
+      lifetime.onDispose(() => host.remove());
+    }
+    return { radiusUnits: volumeFramingRadiusUnits(declared.frame), loaded: null, loading: false, plane: null, texture: null, shown: false };
+  };
   const record = (declared: { id: string; frame: DensityVolumeFrame }, bankFacts: DatasetBankBillboard): DatasetBank => ({
-    id: declared.id, facts: bankFacts, billboardIndex: pictured(bankFacts) ? billboardCount++ : -1,
+    id: declared.id, facts: bankFacts, billboardIndex: pictured(bankFacts) ? billboardCount++ : -1, far: farPlane(declared, bankFacts),
     mounted: null, points: [], textures: null, loading: null, generation: 0, explicitEnabled: undefined,
     // A bank's own star points stay hidden unless a caller shows them.
     pendingSelection: undefined, pendingStarsVisible: false,
@@ -77,6 +107,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     bank.points = [];
     mounted?.destroy();
     bank.textures?.destroy(); bank.textures = null;
+    bank.far?.plane?.destroy();
   });
   for (const bank of banks) release(bank);
   const billboardEntry = (bank: DatasetBank) => ({ id: bank.id, frame: bank.framing.frame, billboard: bank.facts.billboard,
@@ -201,6 +232,59 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     return true;
   }
 
+  /** Show a bank's backing plane at `opacity` (0 hides it), picturing its selected dataset. It mounts, shows and changes
+   * image only at rest; while the camera coasts a shown plane moves and fades (motion-freezes-membership.md). */
+  function publishFar(bank: DatasetBank, far: FarPlane, opacity: number, world: WorldCameraPose, viewport: WorldCameraViewport) {
+    const hide = () => {
+      if (far.shown && coasting) writeStyle(far.plane!.root, 'opacity', '0');
+      else if (far.shown) { far.plane!.root.style.display = 'none'; far.shown = false; }
+    };
+    if (!(opacity > 0) || !projectVolumeSphere(world, viewport, bank.framing.frame, far.radiusUnits).visible) { hide(); return; }
+    if (!far.loaded) {
+      if (far.loading || !loadBacking) return;
+      far.loading = true;
+      void loadBacking(bank.id).then(loaded => {
+        if (lifetime.disposed) return;
+        // Every image the plane may draw must resolve before it mounts: a failure leaves no plane behind.
+        const { payload, resolveResource } = loaded;
+        for (const path of [payload.leaf.texturePath, ...payload.datasets?.values() ?? []]) resolveResource(path);
+        far.loaded = loaded;
+        requestPublication?.();
+      // A backing that cannot be read is not asked for again: the bank's volume still draws once large, as the Milky
+      // Way's still draws without its backing.
+      }, (error: unknown) => { console.error(`Volume dataset bank ${bank.id}: its backing could not be loaded.`, error); });
+      return;
+    }
+    const { payload } = far.loaded, selection = bank.pendingSelection;
+    // The plane pictures the selected dataset; a dataset with no image of its own draws none.
+    const texture = selection === undefined || !payload.datasets ? payload.leaf.texturePath : payload.datasets.get(selection) ?? null;
+    if (texture === null) { hide(); return; }
+    if (!far.plane) {
+      if (coasting) return;
+      far.plane = mountGalaxyBacking({ host: backingHost!, before: null, payload, resolveResource: far.loaded.resolveResource });
+      far.plane.root.style.display = 'none';
+      far.plane.root.dataset.galaxyBacking = bank.id;
+      far.texture = payload.leaf.texturePath;
+    }
+    if (!far.shown && coasting) return;
+    if (far.texture !== texture) {
+      // Another dataset's image: the plane hides, and takes it at rest once it has decoded (layer-reveal.ts).
+      hide();
+      if (coasting) return;
+      far.texture = texture;
+      far.plane.setTexture(texture);
+    }
+    const { root: layer } = far.plane;
+    // The camera first, then the plane shows: it never paints before it is placed.
+    far.plane.publish({ world, viewport });
+    writeStyle(layer, 'opacity', String(opacity));
+    if (!far.shown) {
+      // A plane switching on waits for its decoded image and its own frame.
+      revealLayer(layer, far.plane.setTexture(texture));
+      layer.style.display = ''; far.shown = true;
+    }
+  }
+
   function select(id: string, dataset: string) {
     if (lifetime.disposed) return;
     const bank = byId.get(id);
@@ -306,6 +390,12 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         const incoming = bank.id === detailedObjectId;
         const ready = texturesReady(bank, { world, viewport }, shown > 0 && (requestedOpacity > 0 || incoming), incoming, requestedOpacity > 0);
         const opacity = ready ? requestedOpacity : 0;
+        if (bank.far) {
+          // The backing gives way to the volume as a billboard does, by the same screen size of the same sphere.
+          const covered = standIn !== undefined && bank.id === detailedObjectId && !ready;
+          publishFar(bank, bank.far, covered ? 0 : shown * projectedVolumeOpacity(world, viewport, frame, bank.far.radiusUnits) *
+            (ready ? 1 - opacity / Math.max(shown, Number.MIN_VALUE) : 1), world, viewport);
+        }
         if (billboards && bank.billboardIndex >= 0) {
           // The billboard pictures the selected dataset; a dataset with no view of its own draws none.
           const billboardRadiusUnits = billboards.radiusUnits(bank.billboardIndex, bank.pendingSelection);

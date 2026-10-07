@@ -26,6 +26,7 @@ None of the images covers the full Bridge, Wing or tidal debris. Exact input ide
 2. **Emission.** The registered, star-removed Horálek image is smoothed and divided by the integrated ellipsoid column to give an envelope gain, so image brightness scales the envelope but never moves it in depth. The remaining detail is fitted with 476 components at the strongest simulation mode along each ray. [`emission-envelope-ellipsoid.json`](source/evidence/smc/constrained/emission-envelope-ellipsoid.json) is the recipe; [EMISSION-METHOD.md](../../../labs/nebula/models/smc/constrained/EMISSION-METHOD.md) explains the method.
 3. **Datasets.** [`finite-datasets-ellipsoid.json`](source/evidence/smc/constrained/finite-lenses-ellipsoid.json) bakes each registered image onto that one geometry ([appearance receipt](source/lens-settings-evidence.json)). The [compact inputs](source/compact/inputs.json) carry what a replay needs; each delivered byte's laboratory record is under [`bake-inputs/references/`](source/bake-inputs/references).
 4. **Stars.** Table 3 rows with finite V ≤ 16 whose ray lands on covered footprint; each depth inverts the joint emission and ellipsoid density at a fixed per-star quantile. [Star preparation](../../../labs/nebula/models/smc/stars/README.md) records the selection.
+5. **Far view.** From afar the cloud is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and lays each dataset's own Sun-facing impostor view through the frame's centre, across the line of sight from Earth. No image is re-encoded. The frame's z axis is that line of sight, and the model was fitted to the sky image along it; it defines no disc plane. From Earth the plane therefore shows what the volume draws, and the hand-over keeps the same position, size and orientation. The plane replaced a camera-facing billboard of the same view, which spun as the camera orbited the cloud. After a rebake of the bank, run it again with `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/smc-volume backing`.
 
 `prepared/` is generated, not committed: `pnpm prepare:nebulae --if-missing` rebuilds the bank and its atlases from the compact inputs alone, and the [object descriptor](object.json) pins the result. Application provenance reads the evidence and recipe copies listed in [provenance references](source/provenance-references.json).
 
@@ -36,8 +37,15 @@ None of the images covers the full Bridge, Wing or tidal debris. Exact input ide
 - **Stars against images.** Of the 40 brightest stars projected onto each original, those within 1 px of a photographic peak: Horálek 22 (median 0.67 px), DSS2 35 (0.70 px), VISTA 20 (3.12 px), AllWISE 14 (3.84 px), SMASH 9 (5.26 px). Mirroring east–west gives 0 for every image.
 - **App.** Each dataset decodes one texture at the Earth framing, the world camera is unchanged across all five switches, and all 1,803 stars mount and toggle. The side views show line-of-sight extent rather than a flat sheet.
 - **Replay.** From a removed `prepared/`, all 1,360 regenerated slice textures are byte-identical to the promotion output.
+- **Far view (2026-10-07).** Zooming out of this page, the plane alone and the volume alone at the switch distance keep the same position, size and orientation; the plane is brighter.
+
+![At the switch distance from Earth's side, the volume alone (left) and the far plane alone (right)](evidence/2026-10-07/far-plane-handover.jpg)
 
 ## Known problems
+
+- From well off the Earth line of sight the far plane is foreshortened, while the volume keeps its 25 kpc depth. The hand-over there is a cross-fade between two different shapes: from the Local Group view the plane is narrower and brighter than the volume it gives way to.
+
+  ![From the Local Group view, the volume alone (left) and the far plane alone (right)](evidence/2026-10-07/far-plane-off-axis.jpg)
 
 - The envelope is the ellipsoid's shape hypothesis and the detail components are conditioned on the simulation that the same VMC comparison disfavours. The two carry different depth hypotheses, and neither is measured gas geometry. The model records `materialGatePassed: false`.
 - Photometric red-clump distances include intrinsic luminosity scatter, photometric error, reddening uncertainty and contamination, and have not been deconvolved into geometric depth. Large-scale extensions outside the survey footprint remain model-dependent.
