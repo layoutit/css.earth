@@ -20,9 +20,9 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isRecord } from '@cssearth/core';
 import { WORKSPACE } from '@cssearth/telescope/node';
-import { ASSUMED_TILT_DEGREES, brightnessMap, brightnessTable } from './map.mts';
+import { ASSUMED_TILT_DEGREES, brightnessMaps, brightnessTable } from './map.mts';
 import { HOSTED_PLANET_IDS, hostedOrbit, hostedOrbitCentreId } from '@cssearth/astronomy';
-import { fetchLightCurve, lightCurvesAt } from '../kepler/light-curves.mts';
+import { fetchLightCurves, lightCurvesAt } from '../kepler/light-curves.mts';
 import { sectorLightCurvesAt } from './light-curves.mts';
 import { GAIA_EPOCH_YEAR, pixelLight, PIXELS, type PixelLight } from './neighbours.mts';
 import { methodFor, type PeriodMethod, type StarKind, type Transit } from './methods.mts';
@@ -114,9 +114,9 @@ export async function reduceStar(id: string, light?: StarLight): Promise<Record<
   const unread = (one: Mission) => { const found = applies(one); return 'reason' in found ? found.reason : `${one} publishes no ${one === 'TESS' ? '2-minute ' : ''}light curve of this star.`; };
   let rotation: RotationVerdict = { detected: false, reason: star.otherLight ?? `${unread('K2')} ${unread('TESS')}` }, whole: Record<string, unknown> | undefined;
   const method: PeriodMethod | undefined = listed.length ? reads(mission) : undefined;
-  if (method) { const covered: (Listed & { file: string; url: string; bytes: number })[] = [];
-      for (const one of listed) { const left = method.covers(one.window);
-        if (left) tried.push({ mission, window: one.window, verdict: { detected: false, reason: left } }); else covered.push({ ...one, ...await fetchLightCurve(one, files) }); }
+  if (method) { const wanted = listed.filter(one => { const left = method.covers(one.window);
+        if (left) tried.push({ mission, window: one.window, verdict: { detected: false, reason: left } }); return !left; });
+      const covered = await fetchLightCurves(wanted, files);
       const judged = await method.judge(covered.map(one => one.file), kind);
       for (const window of judged.windows) { const file = covered.find(one => one.window === window.window);
         await writeFile(resolve(run, `${stem(window.window)}.curve.json`), `${JSON.stringify({ mission, window: window.window, product: 'pdcsap', time: window.time, flux: window.flux })}\n`);
@@ -129,7 +129,8 @@ export async function reduceStar(id: string, light?: StarLight): Promise<Record<
     ...(method ? { method: { id: method.id, citation: method.citation, url: method.url, where: method.where, lightCurve: method.lightCurve, asks: method.asks, reliability: method.reliability } } : {}), rotation, toolchain: { id: pins.id, requirements: pins.entry.requirements } };
   // One map for each window whose light was accepted, all at the star's one period.
   const maps: Record<string, unknown>[] = [];
-  for (const read of accepted) { const tilt = star.tiltDegrees ?? ASSUMED_TILT_DEGREES, map = await brightnessMap(read, rotation.periodDays!, Math.min(tilt, 90)), table = `${stem(read.window)}.dat`, flat = map.values.flat();
+  const made = accepted.length ? await brightnessMaps(accepted, rotation.periodDays!, Math.min(star.tiltDegrees ?? ASSUMED_TILT_DEGREES, 90)) : [];
+  for (const [index, read] of accepted.entries()) { const map = made[index]!, table = `${stem(read.window)}.dat`, flat = map.values.flat();
     await writeFile(resolve(run, table), brightnessTable(`Brightness map of ${star.name} from its light in ${mission} ${WINDOW[mission]} ${read.window} (period ${rotation.periodDays} d)`, map));
     maps.push({ mission, window: read.window, table, degree: map.degree, inclinationDegrees: map.inclinationDegrees, inclinationFrom: star.tiltFrom, inclinationSource: star.tiltSource ?? `assumed: no tilt of the star is known, and ${ASSUMED_TILT_DEGREES} degrees is the middle tilt of axes that point at random`,
       periodDays: map.periodDays, residual: Number(map.residual.toFixed(5)), noise: Number(map.noise.toFixed(5)), darkestPercent: Number((100 * Math.min(...flat)).toFixed(1)), brightestPercent: Number((100 * Math.max(...flat)).toFixed(1)), starry: map.starry }); }

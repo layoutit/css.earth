@@ -12,8 +12,8 @@ computed here.
   tools.py spinspotter <job.json>          a star's TESS 2-minute light curves through SpinSpotter (Holcomb et al.
                                            2022), as its authors call it: each sector and the stitched light curve
 
-  tools.py map <job.json>                  the brightness map that reproduces a rotational light curve (starry); run
-                                           with the starry toolchain's interpreter
+  tools.py maps <job.json>                 the brightness map that reproduces each of a star's rotational light curves
+                                           (starry), all in one process; run with the starry toolchain's interpreter
 
 It prints one JSON document.
 """
@@ -110,32 +110,43 @@ def spinspotter(job):
     return {'spinSpotter': version('spinspotter'), 'sectors': sectors, 'stitched': stitched}
 
 
-def brightness_map(job):
-    """starry's own inversion of a rotational light curve (Luger et al. 2019): the spherical-harmonic map, seen at the
-    star's tilt and turning with its period, that reproduces the light curve, with starry's Gaussian prior on the map."""
+def brightness_maps(job):
+    """starry's own inversion of a rotational light curve (Luger et al. 2019), once for each light curve of the job: the
+    spherical-harmonic map, seen at the star's tilt and turning with its period, that reproduces the light curve, with
+    starry's Gaussian prior on the map. One process makes all of a star's maps: starry is imported and compiled once."""
     import numpy as np
     import starry
     starry.config.lazy = False
     starry.config.quiet = True
-    time, flux, period = np.array(job['time']), np.array(job['flux']), job['periodDays']
-    theta = 360.0 * (time - time[0]) / period
-    star = starry.Map(ydeg=job['degree'], inc=job['inclinationDegrees'])
-    noise = float(np.std(np.diff(flux)) / np.sqrt(2))
-    star.set_data(flux, C=noise ** 2)
-    mean = np.zeros(star.Ny)
-    mean[0] = 1.0
-    width = np.full(star.Ny, job['priorWidth'])
-    width[0] = job['priorWidth'] * 10
-    star.set_prior(mu=mean, L=width)
-    solution, _ = star.solve(theta=theta)
-    star.amp = solution[0]
-    star[1:, :] = solution[1:] / solution[0]
-    model = star.flux(theta=theta)
+    period = job['periodDays']
     longitudes, latitudes = np.array(job['longitudesDegrees']), np.array(job['latitudesDegrees'])
     lon, lat = np.meshgrid(longitudes, latitudes)
-    values = np.array(star.intensity(lat=lat.ravel(), lon=lon.ravel())).reshape(lat.shape)
-    values = values / np.mean(values)
-    return {'starry': starry.__version__, 'noise': noise, 'residual': float(np.std(flux - model)), 'values': [[round(float(value), 5) for value in row] for row in values]}
+    made = []
+    for curve in job['curves']:
+        time, flux = np.array(curve['time']), np.array(curve['flux'])
+        theta = 360.0 * (time - time[0]) / period
+        star = starry.Map(ydeg=job['degree'], inc=job['inclinationDegrees'])
+        noise = float(np.std(np.diff(flux)) / np.sqrt(2))
+        star.set_data(flux, C=noise ** 2)
+        mean = np.zeros(star.Ny)
+        mean[0] = 1.0
+        width = np.full(star.Ny, job['priorWidth'])
+        width[0] = job['priorWidth'] * 10
+        star.set_prior(mu=mean, L=width)
+        solution, _ = star.solve(theta=theta)
+        star.amp = solution[0]
+        star[1:, :] = solution[1:] / solution[0]
+        model = star.flux(theta=theta)
+        values = np.array(star.intensity(lat=lat.ravel(), lon=lon.ravel())).reshape(lat.shape)
+        values = values / np.mean(values)
+        made.append({'noise': noise, 'residual': float(np.std(flux - model)), 'values': [[round(float(value), 5) for value in row] for row in values]})
+    return {'starry': starry.__version__, 'maps': made}
+
+
+def brightness_map(job):
+    """One light curve's map, as `brightness_maps` makes it."""
+    answer = brightness_maps({**job, 'curves': [{'time': job['time'], 'flux': job['flux']}]})
+    return {'starry': answer['starry'], **answer['maps'][0]}
 
 
 if __name__ == '__main__':
@@ -151,6 +162,9 @@ if __name__ == '__main__':
     elif len(sys.argv) == 3 and sys.argv[1] == 'map':
         with open(sys.argv[2]) as handle:
             result = brightness_map(json.load(handle))
+    elif len(sys.argv) == 3 and sys.argv[1] == 'maps':
+        with open(sys.argv[2]) as handle:
+            result = brightness_maps(json.load(handle))
     else:
         raise SystemExit(__doc__)
     json.dump(result, sys.stdout)

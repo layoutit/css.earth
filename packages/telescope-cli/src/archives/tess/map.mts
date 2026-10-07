@@ -23,14 +23,19 @@ export interface BrightnessMap { readonly longitudes: readonly number[]; readonl
 
 const range = (from: number, to: number, step: number) => Array.from({ length: Math.round((to - from) / step) + 1 }, (_, index) => from + index * step);
 
-export async function brightnessMap(curve: { readonly time: readonly number[]; readonly flux: readonly number[] }, periodDays: number, inclinationDegrees: number): Promise<BrightnessMap> {
+/** The map of each light curve, all at the star's one period and tilt: one call to starry for the star, which is imported
+ * and compiled once (8 s a map when each had its own). */
+export async function brightnessMaps(curves: readonly { readonly time: readonly number[]; readonly flux: readonly number[] }[], periodDays: number, inclinationDegrees: number): Promise<BrightnessMap[]> {
   if (!(periodDays > 0) || !(inclinationDegrees > 0 && inclinationDegrees <= 90)) throw new RangeError('A map needs a rotation period and a tilt between 0 and 90 degrees.');
+  if (!curves.length) return [];
   const longitudes = range(-180, 180, GRID_STEP_DEGREES), latitudes = range(-90, 90, GRID_STEP_DEGREES), directory = await mkdtemp(join(tmpdir(), 'tess-map-')), job = join(directory, 'job.json');
-  try { await writeFile(job, JSON.stringify({ time: curve.time, flux: curve.flux, periodDays, inclinationDegrees, degree: MAP_DEGREE, priorWidth: PRIOR_WIDTH, longitudesDegrees: longitudes, latitudesDegrees: latitudes }));
-    const answer = requireRecord(runTool(starryToolchainSync().python, ['map', job]), 'starry answer');
-    const values = requireArray(answer.values, 'map values').map(row => requireArray(row, 'map row').map(value => requireFiniteNumber(value, 'brightness')));
-    if (values.length !== latitudes.length || values.some(row => row.length !== longitudes.length)) throw new Error('starry returned a map of another shape.');
-    return { longitudes, latitudes, values, degree: MAP_DEGREE, inclinationDegrees, periodDays, residual: requireFiniteNumber(answer.residual, 'residual'), noise: requireFiniteNumber(answer.noise, 'noise'), starry: requireString(answer.starry, 'starry version') }; }
+  try { await writeFile(job, JSON.stringify({ curves: curves.map(curve => ({ time: curve.time, flux: curve.flux })), periodDays, inclinationDegrees, degree: MAP_DEGREE, priorWidth: PRIOR_WIDTH, longitudesDegrees: longitudes, latitudesDegrees: latitudes }));
+    const answer = requireRecord(runTool(starryToolchainSync().python, ['maps', job]), 'starry answer'), starry = requireString(answer.starry, 'starry version'), made = requireArray(answer.maps, 'maps');
+    if (made.length !== curves.length) throw new Error('starry returned another number of maps.');
+    return made.map((entry, index) => { const map = requireRecord(entry, `map ${index}`);
+      const values = requireArray(map.values, 'map values').map(row => requireArray(row, 'map row').map(value => requireFiniteNumber(value, 'brightness')));
+      if (values.length !== latitudes.length || values.some(row => row.length !== longitudes.length)) throw new Error('starry returned a map of another shape.');
+      return { longitudes, latitudes, values, degree: MAP_DEGREE, inclinationDegrees, periodDays, residual: requireFiniteNumber(map.residual, 'residual'), noise: requireFiniteNumber(map.noise, 'noise'), starry }; }); }
   finally { await rm(directory, { recursive: true, force: true }); }
 }
 
