@@ -40,16 +40,6 @@
       "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
       "summary": "The color of Gaia's spectrum of the star. No surface picture exists."
-    },
-    "brightness-sector-11": {
-      "title": "Brightness map, Sector 11",
-      "detail": "Sector 11, mapped here",
-      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
-    },
-    "color-brightness": {
-      "title": "Color + brightness, Apr to May 2019",
-      "detail": "TESS sector 11",
-      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

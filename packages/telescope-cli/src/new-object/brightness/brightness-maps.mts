@@ -49,6 +49,9 @@ const PERIOD_METHODS: Readonly<Record<string, { readonly record: string; readonl
     creators: ['R. J. Holcomb', 'P. Robertson', 'P. Hartigan', 'R. J. Oelkers', 'C. Robinson'], year: '2022', locator: 'arXiv listing: title, authors, DOI (ApJ 936, 138). Sects. II and III print the algorithm, the stars it is applied to and the criteria a rotation period must meet.' },
   'colman-2024': { record: 'arxiv-2402-14954', title: 'Colman et al. (2024): Methods for the detection of stellar rotation periods in individual TESS sectors and results from the Prime mission', arxiv: '2402.14954', doi: '10.3847/1538-3881/ad2c86',
     creators: ['I. L. Colman', 'R. Angus', 'T. David', 'J. Curtis', 'S. Hattori', 'Y. L. Lu'], year: '2024', locator: 'arXiv listing: title, authors, DOI (AJ 167, 189). Sects. II.4 and III print the sample, the light curves and what a detection is; the consolidated catalogue of 10,909 targets is VizieR J/AJ/167/189, table fig12, whose ReadMe describes each column.' },
+  'canto-martins-2020': { record: 'arxiv-2007-03079', title: 'Canto Martins et al. (2020): A Search for Rotation Periods in 1000 TESS Objects of Interest', arxiv: '2007.03079', doi: '10.3847/1538-4365/aba73f',
+    creators: ['B. L. Canto Martins', 'R. L. Gomes', 'Y. S. Messias', 'S. R. de Lira', 'I. C. Leão', 'L. A. Almeida', 'M. A. Teixeira', 'M. L. das Chagas', 'J. P. Bravo', 'A. Bewketu Belete', 'J. R. De Medeiros'], year: '2020',
+    locator: 'arXiv listing: title, authors, DOI (ApJS 250, 20). Sects. II and III print the sample, the light curves, the three periodicity analyses and the visual inspection; the catalogue is VizieR J/ApJS/250/20, whose ReadMe describes each column of Table 1 (131 stars with an unambiguous rotation period) and Tables 2 to 5.' },
   'santos-2019': { record: 'arxiv-1908-05222', title: 'Santos et al. (2019): Surface Rotation and Photometric Activity for Kepler Targets. I. M and K Main-sequence Stars', arxiv: '1908.05222', doi: '10.3847/1538-4365/ab3b56',
     creators: ['A. R. G. Santos', 'R. A. García', 'S. Mathur', 'L. Bugnet', 'J. L. van Saders', 'T. S. Metcalfe', 'G. V. A. Simonian', 'M. H. Pinsonneault'], year: '2019', locator: 'arXiv listing: title, authors, DOI (ApJS 244, 21). Sects. II and III print the light curves, the sample and how a rotation period is selected; the catalogue is VizieR J/ApJS/244/21, whose ReadMe describes each column of Tables 3 (15,640 stars with a period), 4 and 5.' },
   'santos-2021': { record: 'arxiv-2107-02217', title: 'Santos et al. (2021): Surface Rotation and Photometric Activity for Kepler Targets. II. G and F Main-sequence Stars and Cool Subgiant Stars', arxiv: '2107.02217', doi: '10.3847/1538-4365/ac033f',
@@ -145,8 +148,18 @@ function tableRange(table: string): readonly [number, number] | undefined { let 
   return low <= high ? [low, high] : undefined; }
 /** A map's range, percent of its mean. The receipt gives it to a tenth of a percent, which is the whole range of a map
  * of a star whose light swings by a hundredth: such a map reads 100 to 100 there, and its range is read from its table,
- * which holds it to a thousandth. A scale is drawn from it, nothing else: no star is kept or left out by its range. */
+ * which holds so narrow a map to seven decimals of its mean. A scale is drawn from it, nothing else: no star is kept or
+ * left out by its range. */
 export function mapRange(darkest: number, brightest: number, table: string): readonly [number, number] { return darkest < 100 || brightest > 100 ? [darkest, brightest] : tableRange(table) ?? [darkest, brightest]; }
+
+/** Where a map's table goes under the star's `source/`: its mission's directory, and `fine` under it for a table that
+ * holds its map to seven decimals of the mean (archives/tess/map.mts `written`), which shows in a value whose last two
+ * decimals of a percent are not zero. The source mirror keeps a path's first bytes: the narrow maps written again with
+ * seven decimals took a new path there, and the tables written with five keep theirs. */
+export const FINE_DIRECTORY = 'fine';
+export function tableDirectory(mission: LightMission, table: string): string {
+  const fine = table.split('\n').some(line => { const cells = line.trim().split(/\s+/u); return cells.length === 3 && /^\d+\.\d{5}$/u.test(cells[2]!) && !cells[2]!.endsWith('00'); });
+  return fine ? `${MISSIONS[mission].directory}/${FINE_DIRECTORY}` : MISSIONS[mission].directory; }
 
 /** `curve` is the window's light curve as the reduction kept it: its times date the map. */
 export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, table: string, curve: unknown): BrightnessSurfaceMap {
@@ -191,7 +204,7 @@ const days = (period: number) => period >= 1 ? `${Number(period.toPrecision(3))}
 /** What is a brightness map's own in the records surface-maps.mts writes. */
 export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
   consumer: BRIGHTNESS_CONSUMER, consumers: Object.values(MISSIONS).map(mission => mission.consumer), consumerOf: map => MISSIONS[map.mission].consumer, inputTag: MISSIONS.TESS.inputTag, inputTagOf: map => MISSIONS[map.mission].inputTag,
-  directory: MISSIONS.TESS.directory, directoryOf: map => MISSIONS[map.mission].directory, archiveOf: map => MISSIONS[map.mission].archive, generator: BRIGHTNESS_GENERATOR, stepGroup: 'brightness', variable: 'Brightness [%]', units: '%', controlLabel: 'Brightness map', legendTitle: 'Surface brightness',
+  directory: MISSIONS.TESS.directory, directoryOf: map => tableDirectory(map.mission, map.table), archiveOf: map => MISSIONS[map.mission].archive, generator: BRIGHTNESS_GENERATOR, stepGroup: 'brightness', variable: 'Brightness [%]', units: '%', controlLabel: 'Brightness map', legendTitle: 'Surface brightness',
   archiveUrl: MISSIONS.TESS.archive, references: [], referencesOf: map => [{ catalogueId: MISSIONS[map.mission].record, role: 'material', evidence: MISSIONS[map.mission].archive }, { catalogueId: PERIOD_METHODS[map.method.id]!.record, role: 'method', evidence: map.method.url }, { catalogueId: METHOD_RECORD, role: 'method', evidence: METHOD_URL }, { catalogueId: GAIA_RECORD, role: 'reference', evidence: GAIA_URL }], colors: COLORS, palette: PALETTE,
   scale: brightnessScale,
   words(map, { count, tilt, outlined }) { const { choice } = map, swing = `${percent(map.amplitude)}%`, turn = days(map.periodDays), from = MISSIONS[map.mission], where = windowName(map.mission, map.window);

@@ -6,7 +6,9 @@
  * the pixels of such a star.
  *
  * One call to MAST's archive, public and anonymous, through the pace mast.mts keeps for the host:
- * `Mast.Caom.Filtered.Position`, the TESS time series at a place. Each row names its sector and its file. */
+ * `Mast.Caom.Filtered.Position`, the TESS time series at a place. Each row names its sector and its file. A second
+ * call, `Mast.Catalogs.Filtered.Tic`, reads what the mission's input catalog says of other stars' light in a target's
+ * pixels. */
 import { isRecord } from '@cssearth/core';
 import { paced } from './mast.mts';
 
@@ -43,4 +45,23 @@ export async function sectorLightCurvesAt(places: readonly Place[]): Promise<Sec
   const near = (found: SectorLightCurve) => Math.min(...places.map(place => apart(place, found))), found = parseSectorLightCurves(await response.json()).filter(one => near(one) <= MATCH_DEGREES);
   const nearest = [...found].sort((a, b) => near(a) - near(b))[0]?.target;
   return found.filter(one => one.target === nearest);
+}
+
+/** A target's contamination ratio in MAST's answer for its TESS Input Catalog number: the flux of the other stars in the
+ * target's pixels over the target's own ("the ratio of the total contaminant flux to the target star flux", Stassun et
+ * al. 2019, AJ 158, 138, Sect. III.2.1). The catalog works one out for the stars of its Candidate Target List; a target
+ * it gives none has none here. */
+export function parseContaminationRatio(body: unknown, tic: number): number | undefined {
+  if (!isRecord(body) || body.status !== 'COMPLETE' || !Array.isArray(body.data)) throw new TypeError('MAST did not answer with rows of the TESS Input Catalog.');
+  const row = body.data.filter(isRecord).find(one => Number(one.ID) === tic); if (!row) throw new TypeError(`MAST's TESS Input Catalog holds no TIC ${tic}.`);
+  if (row.contratio === null || row.contratio === undefined) return undefined;
+  if (typeof row.contratio !== 'number' || !Number.isFinite(row.contratio) || row.contratio < 0) throw new TypeError(`TIC ${tic}: the catalog's contamination ratio is not a number.`);
+  return row.contratio;
+}
+/** The TESS Input Catalog's contamination ratio of a target, asked of MAST: one small request a star. */
+export async function contaminationRatio(tic: number): Promise<number | undefined> {
+  if (!Number.isInteger(tic) || tic <= 0) throw new RangeError('A target needs its TESS Input Catalog number.');
+  const response = await paced(MAST_INVOKE, { method: 'POST', body: new URLSearchParams({ request: JSON.stringify({ service: 'Mast.Catalogs.Filtered.Tic', format: 'json', params: { columns: 'ID,contratio', filters: [{ paramName: 'ID', values: [String(tic)] }] } }) }) });
+  if (!response.ok) throw new Error(`MAST answered ${response.status}.`);
+  return parseContaminationRatio(await response.json(), tic);
 }
