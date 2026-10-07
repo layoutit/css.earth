@@ -1,6 +1,6 @@
 # Helix: conditional emission compiler
 
-This lab model studies how to turn Helix Nebula photographs into a 3D emission cloud. The [shipped object record](../../../../src/objects/helix-volume/README.md) owns the active sources, delivery evidence and known problems.
+This lab model studies how to turn Helix Nebula photographs into a 3D emission cloud. Its volume was the Helix page's ESO datasets until 2026-10-07, when the page moved the three ESO photographs onto the nebula's two published rings ([ESO WFI](../../../../src/objects/helix-wfi-layers/README.md), [VISTA](../../../../src/objects/helix-vista-layers/README.md), [wider ESO field](../../../../src/objects/helix-wide-layers/README.md)); git history keeps its record. This model is not shipped.
 
 Open `/reconstruction?subject=helix-model-prior&inspection=compiler`. **Nebula → Compile nebula** runs the configured sources through separation, evidence, an optional velocity scaffold, positive multiscale emission fitting and a shared three-dataset bake. The [compiler method and complete setup](../../docs/emission-compiler.md) describe jobs, replay and assumptions. Visual acceptance is still open, and no compiled result is a production nebula asset.
 

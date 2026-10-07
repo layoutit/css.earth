@@ -1,7 +1,7 @@
 # Stars around nebulae
 
 The main application prepares a spherical stellar neighbourhood around Orion,
-Helix, M2–9, Pleiades, Crab and Lagoon. The source photograph does not select its
+M2–9, Pleiades, Crab and Lagoon. The source photograph does not select its
 boundary or assign stellar depth. Each object keeps its compact catalogue extract
 and display settings in `source/stellar-field.json`; `source/delivery.json` pins it.
 The lab's image residuals and reconstruction caches remain separate.
@@ -41,7 +41,7 @@ live archive query.
    The shared point renderer supplies perspective scaling as the camera moves.
 
 Explicit retained sources preserve the bright Pleiades catalogue stars, Crab
-pulsar and 34 bright Helix image cores from the registered optical/infrared union. These keep their previous model-conditioned depths; they are not relabelled
+pulsar. These keep their previous depths; they are not relabelled
 as Bailer-Jones distances. Nearby Gaia directions are excluded within the declared
 angular matching radius to avoid doubled lights. All spectral datasets share the
 same surrounding optical starfield; changing a nebula's false-color dataset does not
@@ -52,7 +52,6 @@ change stellar positions or claim optical photometry in radio/X-rays.
 | Object | Sphere radius | G limit | Source rows | Displayed points |
 | --- | ---: | ---: | ---: | ---: |
 | M42 | 50 pc | 14 | 2,780 | 1,500 |
-| Helix | 50 pc | 16 | 6,627 | 1,500: 1,466 Gaia + 34 image cores |
 | M2–9 | 10 pc | 14 | 7 | 7 |
 | M45 | 20 pc | 12 | 414 | 420, including eight retained HIP stars |
 | M1 | 50 pc | 16 | 280 | 281, including the pulsar |
@@ -60,23 +59,8 @@ change stellar positions or claim optical photometry in radio/X-rays.
 
 Each query completed without truncation. Larger/fainter archive queries timed out
 for some fields; these bounded selections retain real distances rather than
-inventing missing sources. Brightness ordering limits Orion and Helix to 1,500
+inventing missing sources. Brightness ordering limits Orion to 1,500
 points. M45 removes two directional Gaia duplicates of retained named stars.
-Helix retains 28 cores from the top 40 reference-image aperture-light ranks,
-with Gaia directions matched within 6″ and one point per matched identity. Six
-additional compact detections come from the wider VISTA/optical coverage. The
-union considers 2,000 candidates; only these 34 anchors enter the app budget. It
-includes the central star. One VISTA edge detection has positive compact-source
-photometry but no close Gaia association; the evidence preserves that distinction. Most matched counterparts are outside the neighbourhood; their
-residual halos were already baked into the conditional cloud. The cores keep
-those illustrative depths to stay attached to the halos, rather than falsely
-claiming the catalogue distances are the same. Matches, aperture evidence and distance intervals
-remain in the source provenance. Anchor-source photometry stays visible across
-dataset changes, even where the selected image has no coverage. Infrared source
-colors are display choices, not optical stellar photometry. A 10″ authored match radius avoids double lights
-near broad or saturated image peaks. This is an explicit display limitation;
-removing stellar halos from the cloud is a separate material-cleanup task.
-
 Magnitude limits, neighbourhood radii and completeness differ between objects;
 sparse M2–9 and Lagoon fields are not a complete view of every surrounding star.
 
@@ -85,7 +69,7 @@ sparse M2–9 and Lagoon fields are not a complete view of every surrounding sta
 The normal clean-checkout [nebula preparation command](README.md#reproduce-from-a-clean-checkout)
 rebuilds the points alongside the cloud. An intentional catalogue refresh uses
 `node packages/bake/cli/prepare-nebula-field-catalogues.mts --two-stage m42-volume m2-9-volume m45-volume m8-volume`
-(Helix and the Crab without `--two-stage`), needs the telescope's astronomy packages installed, and requires
+(the Crab without `--two-stage`), needs the telescope's astronomy packages installed, and requires
 updating the delivery/source pins after inspecting the new selection. It is not
 part of ordinary installation. Refresh reuses the saved radius and magnitude
 limit unless an explicit override is supplied.
@@ -96,13 +80,6 @@ Dataset switches and the Catalogue stars toggle must retain the same positions.
 The geometric tests check known independent ICRS positions, proper motion, distance
 ordering and soft boundaries; they do not establish cluster membership or exact
 physical depth.
-
-![Retained bright Helix cores and its surrounding field in the shared app](../images/nebulae/helix-cores.png)
-
-The 14 September app inspection shows the added upper-halo cores in the WFI
-dataset, including cores detected beyond that image’s coverage. Front and oblique
-views of all three datasets retain their geometry and source appearance. Their
-roughly one-pixel cores are intentionally subtle; existing coarse halos remain.
 
 No repository test switches stellar datasets or inspects their attribution. The merged-visibility regression was fixed in
 `prepared-sky-runtime`;

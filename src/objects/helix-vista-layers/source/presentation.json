@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "helix-vista-layers",
+  "name": "Helix Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/helix-vista-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/helix-vista-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/helix-vista-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO VISTA · infrared",
+      "title": "Helix in near infrared",
+      "description": "ESO's near-infrared photograph of the Helix Nebula from the VISTA telescope, in Y, J and K light, laid on the same two tilted rings as the Hubble photograph: an inner disc and the outer ring around it, each about 100 arcsec deep (O'Dell, McCullough & Meixner 2004).",
+      "summary": "VISTA's near-infrared photograph on the nebula's two published rings, the same frame as the Hubble photograph's.",
+      "detail": "6592 × 6592 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "Y, J and K"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "6592 × 6592"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "27.26 × 29.38 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/helix-vista-layers/source/source.jpg",
+        "url": "https://cdn.eso.org/images/large/eso1205a.jpg"
+      }
+    }
+  ]
+}
