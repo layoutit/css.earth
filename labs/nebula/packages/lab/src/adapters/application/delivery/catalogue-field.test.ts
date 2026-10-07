@@ -162,4 +162,3 @@ test('the acquired Crab catalogue prepares a nonempty physical volume with pinne
   assert.ok(Math.min(...depths) < -1); assert.ok(Math.max(...depths) > 1);
   assert.ok(result.points.slice(1).every(p => Math.hypot(...p.positionUnits) * target.metersPerUnit / METERS_PER_PARSEC < 50.001));
 });
-
