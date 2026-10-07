@@ -1,31 +1,31 @@
 {
-  "id": "mast-tess-full-frame-images",
+  "id": "mast-tess-light-curves",
   "kind": "data-product",
   "identityLevel": "work",
-  "title": "TESS calibrated full-frame images, read as cutouts through MAST's TESScut service",
+  "title": "TESS light curves (all sectors) at MAST",
   "identifiers": [
     {
       "type": "DOI",
-      "value": "10.17909/0cp4-2j79"
+      "value": "10.17909/t9-nmc8-f686"
     }
   ],
   "links": [
     {
       "role": "archive",
-      "url": "https://mast.stsci.edu/tesscut/",
-      "label": "TESScut at MAST"
+      "url": "https://archive.stsci.edu/missions-and-data/tess",
+      "label": "TESS at MAST"
     },
     {
       "role": "landing",
-      "url": "https://doi.org/10.17909/0cp4-2j79",
-      "label": "TESS calibrated full-frame images: all sectors"
+      "url": "https://doi.org/10.17909/t9-nmc8-f686",
+      "label": "TESS light curves (all sectors) at MAST"
     }
   ],
   "evidence": [
     {
-      "url": "https://mast.stsci.edu/tesscut/",
+      "url": "https://api.datacite.org/dois/10.17909/t9-nmc8-f686",
       "checkedOn": "2026-10-06",
-      "locator": "TESScut: the same pixels cut out of every full-frame image of a sector at one place on the sky, as a FITS cube."
+      "locator": "DataCite record of the DOI: TESS Light Curves - All Sectors, STScI/MAST, 2021. A file holds one target's 2-minute light curve of a sector, with the flux the mission's pipeline corrected (PDC-MAP)."
     }
   ],
   "relations": [],

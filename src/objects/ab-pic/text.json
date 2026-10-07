@@ -33,15 +33,185 @@
       "detail": "From its Gaia spectrum",
       "summary": "The color of Gaia's spectrum of the star. No surface picture exists."
     },
-    "brightness-sector-39": {
-      "title": "Brightness map, Sector 39",
-      "detail": "Sector 39, mapped here",
+    "color-brightness": {
+      "title": "Color + brightness, Nov 2025 to Jan 2026",
+      "detail": "TESS sector 98",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
+    },
+    "brightness-sector-1": {
+      "title": "Brightness map, Sector 1",
+      "detail": "Sector 1, mapped here",
       "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
     },
-    "color-brightness": {
-      "title": "Color + brightness, May to Jun 2021",
-      "detail": "TESS sector 39",
-      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
+    "brightness-sector-2": {
+      "title": "Brightness map, Sector 2",
+      "detail": "Sector 2, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-3": {
+      "title": "Brightness map, Sector 3",
+      "detail": "Sector 3, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-4": {
+      "title": "Brightness map, Sector 4",
+      "detail": "Sector 4, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-5": {
+      "title": "Brightness map, Sector 5",
+      "detail": "Sector 5, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-6": {
+      "title": "Brightness map, Sector 6",
+      "detail": "Sector 6, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-7": {
+      "title": "Brightness map, Sector 7",
+      "detail": "Sector 7, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-8": {
+      "title": "Brightness map, Sector 8",
+      "detail": "Sector 8, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-9": {
+      "title": "Brightness map, Sector 9",
+      "detail": "Sector 9, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-11": {
+      "title": "Brightness map, Sector 11",
+      "detail": "Sector 11, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-12": {
+      "title": "Brightness map, Sector 12",
+      "detail": "Sector 12, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-13": {
+      "title": "Brightness map, Sector 13",
+      "detail": "Sector 13, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-27": {
+      "title": "Brightness map, Sector 27",
+      "detail": "Sector 27, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-28": {
+      "title": "Brightness map, Sector 28",
+      "detail": "Sector 28, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-29": {
+      "title": "Brightness map, Sector 29",
+      "detail": "Sector 29, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-30": {
+      "title": "Brightness map, Sector 30",
+      "detail": "Sector 30, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-31": {
+      "title": "Brightness map, Sector 31",
+      "detail": "Sector 31, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-33": {
+      "title": "Brightness map, Sector 33",
+      "detail": "Sector 33, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-34": {
+      "title": "Brightness map, Sector 34",
+      "detail": "Sector 34, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-35": {
+      "title": "Brightness map, Sector 35",
+      "detail": "Sector 35, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-61": {
+      "title": "Brightness map, Sector 61",
+      "detail": "Sector 61, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-62": {
+      "title": "Brightness map, Sector 62",
+      "detail": "Sector 62, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-63": {
+      "title": "Brightness map, Sector 63",
+      "detail": "Sector 63, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-64": {
+      "title": "Brightness map, Sector 64",
+      "detail": "Sector 64, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-65": {
+      "title": "Brightness map, Sector 65",
+      "detail": "Sector 65, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-66": {
+      "title": "Brightness map, Sector 66",
+      "detail": "Sector 66, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-68": {
+      "title": "Brightness map, Sector 68",
+      "detail": "Sector 68, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-69": {
+      "title": "Brightness map, Sector 69",
+      "detail": "Sector 69, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-88": {
+      "title": "Brightness map, Sector 88",
+      "detail": "Sector 88, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-89": {
+      "title": "Brightness map, Sector 89",
+      "detail": "Sector 89, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-93": {
+      "title": "Brightness map, Sector 93",
+      "detail": "Sector 93, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-95": {
+      "title": "Brightness map, Sector 95",
+      "detail": "Sector 95, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-96": {
+      "title": "Brightness map, Sector 96",
+      "detail": "Sector 96, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-97": {
+      "title": "Brightness map, Sector 97",
+      "detail": "Sector 97, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-98": {
+      "title": "Brightness map, Sector 98",
+      "detail": "Sector 98, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
     }
   }
 }

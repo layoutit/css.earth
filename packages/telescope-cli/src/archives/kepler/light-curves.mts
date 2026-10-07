@@ -12,7 +12,7 @@
 import { mkdir, rename, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
-import { paced } from '../tess/pixels.mts';
+import { paced } from '../tess/mast.mts';
 
 export const MAST_INVOKE = 'https://mast.stsci.edu/api/v0/invoke', MAST_FILE = 'https://mast.stsci.edu/api/v0.1/Download/file';
 /** How far from a star's place the mission's own target may lie, degrees (4 arcseconds: one of its pixels). */

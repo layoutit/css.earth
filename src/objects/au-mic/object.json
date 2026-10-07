@@ -33,6 +33,11 @@
               "material": "emission"
             },
             {
+              "id": "brightness-sector-1",
+              "source": "content",
+              "material": "emission"
+            },
+            {
               "id": "brightness-sector-95",
               "source": "content",
               "material": "emission"

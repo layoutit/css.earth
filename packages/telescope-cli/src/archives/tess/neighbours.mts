@@ -1,31 +1,19 @@
-/** Whose light a star's TESS pixels hold.
+/** The Gaia sources around a star, counted for its page to say.
  *
- * A TESS pixel is 21 arcseconds wide, and the pixels added up for a star reach some three pixels from it. Every other star
- * inside that circle adds its light, and its rotation, to the star's. Gaia DR3 lists them: CDS X-Match returns every Gaia
- * source within NEIGHBOUR_ARCSEC of each star in one request, with its magnitude in Gaia's red band, which is close to
- * TESS's own. The star is the source at its place; the rest are neighbours, and their share of the light is their summed
- * flux over everyone's. No point-spread function is fitted: a neighbour counts whole wherever it lies in the circle, so the
- * share is an upper bound.
- *
- * A star is not reduced when Gaia has no source at its place (the share is then unknown), when it is brighter than
- * BRIGHTEST_MAGNITUDE or fainter than FAINTEST_MAGNITUDE, or when its neighbours give more than NEIGHBOUR_LIGHT_LIMIT of the light. */
+ * A mission's light curve of a star adds up pixels (21 arcseconds wide for TESS, 4 for K2), and other stars near it fall
+ * in them. Gaia DR3 lists them: CDS X-Match returns every Gaia source within a radius of each star in one request, with
+ * its magnitude in Gaia's red band. The star is the source at its place; the rest are neighbours, and their share is
+ * their summed flux over everyone's. The count is stated in a star's texts. Nothing is refused on it: the light curves
+ * are the missions' own, which correct for crowding, and no published method here sets a limit on it. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname } from 'node:path';
-import { USER_AGENT } from './pixels.mts';
+import { USER_AGENT } from './mast.mts';
 
 export const XMATCH = 'https://cdsxmatch.u-strasbg.fr/xmatch/api/v1/sync', GAIA_TABLE = 'I/355/gaiadr3', GAIA_EPOCH_YEAR = 2016;
 /** Three TESS pixels: how far from a star another star's light still falls in the pixels added up for it. */
 export const NEIGHBOUR_ARCSEC = 63;
 /** How far from a star's place at Gaia's epoch its own Gaia source may lie. */
 export const OWN_ARCSEC = 3;
-/** The largest share of the light that may be other stars': a neighbour then has to swing ten times more than the light does. */
-export const NEIGHBOUR_LIGHT_LIMIT = 0.1;
-/** Fainter than this a star's light is lost in the noise of these pixels; it is not fetched. */
-export const FAINTEST_MAGNITUDE = 13.5;
-/** Brighter than this a star saturates the detector and its light bleeds along the columns, beyond the pixels added up for it:
- * the seven of the first 70 stars read whose pixels showed nothing above the sky were all of magnitude 2.3 to 3.7. It is not fetched. */
-export const BRIGHTEST_MAGNITUDE = 5;
-
 export interface PixelLight { /** The star's own Gaia DR3 source and its magnitude (red band, or G where Gaia gives no red one). */ readonly gaiaDr3: string; readonly magnitude: number;
   readonly neighbours: number; /** The neighbours' share of all the light in the circle, 0 to 1. */ readonly neighbourShare: number;
   readonly brightest?: { readonly gaiaDr3: string; readonly magnitude: number; readonly arcsec: number } }
@@ -48,18 +36,8 @@ export function parseNeighbours(csv: string, radiusArcsec = NEIGHBOUR_ARCSEC): M
 
 /** What each mission's pixels can follow. Kepler's and K2's are 4 arcseconds wide and the pixels added up for a star reach
  * some four of them; their photometer follows stars far fainter than TESS, and its apertures take in a bright star's bleed. */
-export const PIXELS = { TESS: { radiusArcsec: NEIGHBOUR_ARCSEC, faintest: FAINTEST_MAGNITUDE, brightest: BRIGHTEST_MAGNITUDE, name: 'TESS' },
-  // A K2 star's light curve is the mission's, and no limit of ours is set on it: its neighbours are only counted, within four of its pixels, for the page to say.
-  K2: { radiusArcsec: 16 } } as const;
-
-/** Why a star's pixels are not fetched, when they are not. `light` counts the neighbours within the mission's own radius. */
-export function lightRefusal(light: PixelLight | undefined): string | undefined { const limits = PIXELS.TESS;
-  if (!light) return `Gaia DR3 has no source within ${OWN_ARCSEC} arcseconds of the star's place, so how much of the light in its pixels is its own is not known.`;
-  if (light.magnitude < limits.brightest) return `At magnitude ${light.magnitude.toFixed(1)} the star saturates ${limits.name}'s detector: its light bleeds beyond the pixels added up for it.`;
-  if (light.magnitude > limits.faintest) return `At magnitude ${light.magnitude.toFixed(1)} the star is fainter than the ${limits.faintest} these pixels can follow.`;
-  if (light.neighbourShare > NEIGHBOUR_LIGHT_LIMIT) return `Other stars give ${(100 * light.neighbourShare).toFixed(0)}% of the light within ${limits.radiusArcsec} arcseconds of the star (Gaia DR3${light.brightest ? `; the brightest, ${light.brightest.arcsec} arcseconds away, has magnitude ${light.brightest.magnitude.toFixed(1)} against the star's ${light.magnitude.toFixed(1)}` : ''}): a period in these pixels would not be known to be the star's.`;
-  return undefined;
-}
+/** How far from a star its neighbours are counted, by mission: three TESS pixels, four of K2's. */
+export const PIXELS = { TESS: { radiusArcsec: NEIGHBOUR_ARCSEC }, K2: { radiusArcsec: 16 } } as const;
 
 /** X-Match's answer for `stars`, which are at their places at Gaia's epoch: one request for all of them, as CSV with its header. */
 export async function askNeighbours(stars: readonly { readonly id: string; readonly raDegrees: number; readonly decDegrees: number }[]): Promise<string> {
