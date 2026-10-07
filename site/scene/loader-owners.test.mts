@@ -77,6 +77,21 @@ test('router registers the runtime at module evaluation before its unchanged aut
   assert.match(statements[autostart]!.getText(), /createSceneRouter\(\{ stage, objectId, persistentWorldContext \}\)/u);
 });
 
+test('the shell mounts before the first body clears the pending mark, so the rules for a reader without script never apply beside it', () => {
+  // ObjectLayout.astro gates those rules on the root lacking `data-body-pending` and the body lacking `data-sheet`. The
+  // sheet's controller writes `data-sheet` when the shell mounts (shell-sheet.test.mts); a mount that cleared the pending
+  // mark first would hide the loading mark and force the photograph on a page with script.
+  assert.match(source('../layouts/ObjectLayout.astro'), /const withoutScript = 'html:not\(\[data-body-pending\]\) body:not\(\[data-sheet\]\)';/u);
+  const router = source('./scene-router.mts');
+  const mount = router.slice(router.indexOf('async function mountApplication('), router.indexOf('function attachShell('));
+  const cleared = mount.indexOf('delete documentTarget.documentElement.dataset.bodyPending');
+  assert.ok(cleared > 0);
+  for (const attach of ['attachShell(session, ready, replacement);', 'if (!session.shell) attachShell(session, ready);']) {
+    const at = mount.indexOf(attach);
+    assert.ok(at > 0 && at < cleared, `${attach} comes before the pending mark is cleared`);
+  }
+});
+
 test('the default layout failure path clears pending presentation after a queued router evaluation failure', async () => {
   const layout = source('../layouts/ObjectLayout.astro');
   const script = layout.match(/<script>\s*(import \{ bindNativeViewForms \}[\s\S]*?)<\/script>/u)?.[1];
