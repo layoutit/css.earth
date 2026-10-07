@@ -31,6 +31,19 @@ test('information tab rules belong to the prepared scene head, never the replace
   }
 });
 
+test('the settings panel carries the shell switches that act on the page\'s body', async () => {
+  // Rotation where the body spins, light curves on a pulsating star, surface labels on a body with named features; the
+  // heliosphere and the illustration models are on the map of every page (ObjectShell.astro).
+  const pages: Record<string, string[]> = { earth: ['motion', 'surfaceLabels'], 'navigation/earth': ['motion', 'surfaceLabels'], titan: ['motion', 'surfaceLabels'],
+    dione: ['surfaceLabels'], 'cv-mon': ['lightCurves'], m87: [] };
+  for (const [route, expected] of Object.entries(pages)) {
+    const document = await page(route);
+    assert.ok(document, `${route} has no dist build`);
+    const names = [...document.querySelectorAll('.object-settings-panel input[class$="-setting"][type="checkbox"]')].map(input => input.getAttribute('name'));
+    assert.deepEqual(names.sort(), [...expected, 'heliosphere', 'illustrationModels'].sort(), route);
+  }
+});
+
 test('Enter in the search field submits the typed query, never a browse pill', async () => {
   for (const route of ['earth', 'saturn', 'navigation/earth']) {
     const document = await page(route);

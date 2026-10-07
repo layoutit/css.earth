@@ -13,21 +13,24 @@ export function createSettingsController(
   // The panel is mounted only while it is open: the gear mounts it just before its popover opens, and closing takes it off
   // the page again (detached-sections.ts). The server renders it mounted, so the gear works without JavaScript.
   const panel = requiredSection(documentTarget, '.object-settings-panel');
-  const motion = panel.querySelector(".object-motion-setting");
-  const lightCurves = panel.querySelector(".object-light-curves-setting");
-  const heliosphere = panel.querySelector(".object-heliosphere-setting");
-  const illustrationModels = panel.querySelector(".object-illustration-models-setting");
-  const surfaceLabels = panel.querySelector(".object-surface-labels-setting");
+  // The switch of each preference. A page carries the switches that act on its body (ObjectShell.astro): rotation,
+  // light curves and surface labels come and go with the scene, so each is read where it is used. The heliosphere and
+  // the illustration models are on the map of every page.
+  const switches = { motionEnabled: '.object-motion-setting', lightCurvesEnabled: '.object-light-curves-setting',
+    heliosphereEnabled: '.object-heliosphere-setting', illustrationModelsEnabled: '.object-illustration-models-setting',
+    surfaceLabelsEnabled: '.object-surface-labels-setting' } as const;
+  type Toggle = keyof typeof switches;
+  const toggles = Object.keys(switches) as Toggle[];
+  const everyPage: readonly Toggle[] = ['heliosphereEnabled', 'illustrationModelsEnabled'];
+  const input = (key: Toggle) => {
+    const found = panel.querySelector(switches[key]);
+    if (found === null ? everyPage.includes(key) : !(found instanceof windowTarget.HTMLInputElement)) throw new Error("Object shell settings controls are incomplete.");
+    return found as HTMLInputElement | null;
+  };
   let speed = panel.querySelector<HTMLInputElement>(
     '.object-speed-setting[type="range"][name="speed"]',
   );
-  if (!(motion instanceof windowTarget.HTMLInputElement) || !(lightCurves instanceof windowTarget.HTMLInputElement) ||
-      !(heliosphere instanceof windowTarget.HTMLInputElement) ||
-      !(illustrationModels instanceof windowTarget.HTMLInputElement) ||
-      !(surfaceLabels instanceof windowTarget.HTMLInputElement) ||
-      (speed !== null && !(speed instanceof windowTarget.HTMLInputElement))) {
-    throw new Error("Object shell settings controls are incomplete.");
-  }
+  if (speed !== null && !(speed instanceof windowTarget.HTMLInputElement)) throw new Error("Object shell settings controls are incomplete.");
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   // Every control applies as it changes, so the form's submit button (for a page without script) leaves the panel while
@@ -53,55 +56,66 @@ export function createSettingsController(
   showSection(panel, false);
   expand(false);
   lifetime.onDispose(() => showSection(panel, true));
-  const inputs = { motionEnabled: motion, lightCurvesEnabled: lightCurves, heliosphereEnabled: heliosphere,
-    illustrationModelsEnabled: illustrationModels, surfaceLabelsEnabled: surfaceLabels };
-  type Toggle = keyof typeof inputs;
   const render = () => {
-    for (const key of Object.keys(inputs) as Toggle[]) {
-      if (inputs[key].checked !== preferences.state[key]) inputs[key].checked = preferences.state[key];
+    for (const key of toggles) {
+      const control = input(key);
+      if (control && control.checked !== preferences.state[key]) control.checked = preferences.state[key];
     }
     const speedDisabled = !preferences.state.motionEnabled || speed?.dataset.runtimeReady === 'false';
     if (speed && speed.disabled !== speedDisabled) speed.disabled = speedDisabled;
-    const illustrations = illustrationModels.checked ? 'on' : 'off', labels = surfaceLabels.checked ? 'on' : 'off';
+    const illustrations = preferences.state.illustrationModelsEnabled ? 'on' : 'off', labels = preferences.state.surfaceLabelsEnabled ? 'on' : 'off';
     if (documentTarget.body.dataset.illustrationModels !== illustrations) documentTarget.body.dataset.illustrationModels = illustrations;
     if (documentTarget.body.dataset.surfaceLabels !== labels) documentTarget.body.dataset.surfaceLabels = labels;
   };
-  for (const key of Object.keys(inputs) as Toggle[]) {
-    const input = inputs[key];
-    if (input.disabled) input.disabled = false;
-    input.addEventListener('change', () => preferences.set(key, input.checked), { signal: events.signal });
-  }
+  // The switches are served disabled, and one that arrives with a body's page is too: each is enabled where it is found.
+  const enable = () => { for (const key of toggles) { const control = input(key); if (control?.disabled) control.disabled = false; } };
+  enable();
+  // One listener on the panel hears every switch, whichever page brought it.
+  panel.addEventListener('change', event => {
+    const key = toggles.find(key => event.target === input(key));
+    if (key) preferences.set(key, (event.target as HTMLInputElement).checked);
+  }, { signal: events.signal });
   lifetime.onDispose(preferences.subscribe(key => {
     render();
     if (key === 'surfaceLabelsEnabled') documentTarget.body.dispatchEvent(new windowTarget.Event('objectsurfacelabelschange'));
   }));
   render();
 
-  const row = motion.closest<HTMLElement>(".object-motion-setting-control")!;
-  const explanation = requiredElement(row, ".object-motion-blocked");
+  // The last published reason: a rotation switch that arrives with a body's page is told why it is paused.
+  let playbackReason: PlaybackState['reason'] | null = null;
+  const explain = () => {
+    const motion = input('motionEnabled');
+    if (!motion || playbackReason === null) return;
+    const row = motion.closest<HTMLElement>(".object-motion-setting-control")!;
+    const explanation = requiredElement(row, ".object-motion-blocked");
+    const blocked = preferences.state.motionEnabled && playbackReason === "reduced-motion";
+    if (row.dataset.motionBlocked !== String(blocked)) row.dataset.motionBlocked = String(blocked);
+    if (explanation.hidden !== !blocked) explanation.hidden = !blocked;
+    const descriptions = new Set((motion.getAttribute("aria-describedby") ?? "")
+      .split(/\s+/u).filter(id => id && id !== explanation.id));
+    if (blocked) descriptions.add(explanation.id);
+    const description = [...descriptions].join(' ');
+    if (description) {
+      if (motion.getAttribute('aria-describedby') !== description) motion.setAttribute('aria-describedby', description);
+    } else if (motion.hasAttribute('aria-describedby')) motion.removeAttribute('aria-describedby');
+  };
   return Object.freeze({
     bindObject() {
       const next = panel.querySelector('.object-speed-setting[type="range"][name="speed"]');
       if (next !== null && !(next instanceof windowTarget.HTMLInputElement)) throw new Error('Object speed control is invalid.');
       speed = next;
+      enable();
       render();
+      explain();
     },
     setPlaybackState({ reason }: PlaybackState) {
+      playbackReason = reason;
       render();
-      const blocked = preferences.state.motionEnabled && reason === "reduced-motion";
-      if (row.dataset.motionBlocked !== String(blocked)) row.dataset.motionBlocked = String(blocked);
-      if (explanation.hidden !== !blocked) explanation.hidden = !blocked;
-      const descriptions = new Set((motion.getAttribute("aria-describedby") ?? "")
-        .split(/\s+/u).filter(id => id && id !== explanation.id));
-      if (blocked) descriptions.add(explanation.id);
-      const description = [...descriptions].join(' ');
-      if (description) {
-        if (motion.getAttribute('aria-describedby') !== description) motion.setAttribute('aria-describedby', description);
-      } else if (motion.hasAttribute('aria-describedby')) motion.removeAttribute('aria-describedby');
+      explain();
     },
     destroy() {
       events.abort();
-      for (const input of [motion, lightCurves, heliosphere, illustrationModels, surfaceLabels]) input.disabled = true;
+      for (const key of toggles) { const control = input(key); if (control) control.disabled = true; }
       delete documentTarget.body.dataset.surfaceLabels;
     },
   });

@@ -30,5 +30,5 @@ const styles = await Promise.all(objectPageStyles(descriptor, { navigation })
     {styles.map(({ path, css }) => <style is:inline data-object-style={path === SHELL_STYLE_FILE ? SHELL_STYLE_ID : path} set:html={css} />)}
     {!navigation && !requireObject(objectId).discovery?.arrival?.billboard && <PreparedObjectHead preparedAssets={preparedPage.assets} />}
   </Fragment>
-  <PreparedObjectPanel slot="object-ui" preparedContent={preparedContent} preparedControls={preparedPage.controls} navigation={navigation} />
+  <PreparedObjectPanel slot="object-ui" preparedContent={preparedContent} preparedControls={preparedPage.controls} preparedMotion={preparedPage.motion} navigation={navigation} />
 </ObjectLayout>

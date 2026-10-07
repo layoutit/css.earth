@@ -3,7 +3,8 @@ import { json } from './harness/trace.mts';
 import type { Journey } from './harness/api.mts';
 
 type Api = Parameters<Journey['run']>[0];
-const settings = ['motion', 'lightCurves', 'surfaceLabels', 'heliosphere', 'illustrationModels'];
+// The shell switches Dione's page carries: it has named features, no prepared spin and no light curve (ObjectShell.astro).
+const settings = ['surfaceLabels', 'heliosphere', 'illustrationModels'];
 const gearId = 'control:site:components:ObjectShell:button:markup:4';
 const tabId = 'control:site:components:InformationTabs:input:markup:1';
 
@@ -187,7 +188,7 @@ const definitions: Journey[] = [
     },
   },
   {
-    id: 'shell-settings', recipe: { object: 'dione', settings }, exercises: [gearId, ...[6, 7, 10, 11, 12].map(ordinal => `control:site:components:ObjectShell:input:markup:${ordinal}`),
+    id: 'shell-settings', recipe: { object: 'dione', settings }, exercises: [gearId, ...[10, 11, 12].map(ordinal => `control:site:components:ObjectShell:input:markup:${ordinal}`),
       ...['click', 'beforetoggle', 'toggle', 'change'].map(event => `handler:site:shell:shell-settings:createSettingsController:${event}:1`)],
     async run(api) {
       const route = '/dione/'; await api.load(route, 'direct'); await openSettings(api, route);
@@ -268,8 +269,17 @@ const definitions: Journey[] = [
       api.setStep('wide'); await api.page.setViewportSize({ width: 1280, height: 800 }); await api.barrier('wide', route);
     },
   },
+  {
+    // The Light curves switch is on a pulsating star's page only.
+    id: 'shell-light-curves-setting', recipe: { object: 'cv-mon' }, exercises: [gearId, 'control:site:components:ObjectShell:input:markup:7'],
+    async run(api) {
+      const route = '/cv-mon/'; await api.load(route, 'direct'); await openSettings(api, route);
+      await toggleTwice(api, 'lightCurves', route);
+      await closeSettings(api, route);
+    },
+  },
   ...['earth-system', 'neptune-system', 'mars-system'].map((object): Journey => ({
-    id: `shell-${object}-settings`, recipe: { object }, exercises: [gearId, 'control:site:components:ObjectShell:input:markup:8'],
+    id: `shell-${object}-settings`, recipe: { object }, exercises: [gearId, ...[6, 8].map(ordinal => `control:site:components:ObjectShell:input:markup:${ordinal}`)],
     async run(api) {
       const route = `/${object}/`; await api.load(route, 'direct'); await openSettings(api, route);
       await toggleTwice(api, 'shadows', route);

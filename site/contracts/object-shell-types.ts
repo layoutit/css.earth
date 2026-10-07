@@ -74,4 +74,6 @@ export interface Props {
     title: PreparedTitle;
     controls: Setting[];
   };
+  /** What the body's prepared motion plays: the shell offers the rotation and light-curve switches only where one does. */
+  motion: { spin: boolean; lightCurve: boolean };
 }

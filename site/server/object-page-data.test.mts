@@ -17,7 +17,17 @@ test('page data and the object transport are read from the restored runtime, wit
  await writeFile(resolve(directory,'object.json'),JSON.stringify(descriptor));
  await writeFile(resolve(directory,'prepared/runtime.json'),JSON.stringify(data)+'\n');
  await writeFile(resolve(directory,'prepared/controls.json'),JSON.stringify(data.controls));
- assert.deepEqual(await loadObjectPageData('body',root),{descriptor,assets:data.assets,controls:data.controls});
+ assert.deepEqual(await loadObjectPageData('body',root),{descriptor,assets:data.assets,controls:data.controls,motion:{spin:false,lightCurve:false}});
+ // What the runtime's motion plays tells the shell which switches the page gets: a transform track is a spin, an opacity track a light curve.
+ const spin={target:1,id:'body-spin',keyframes:[{offset:0,transform:'rotateZ(0deg)'},{offset:1,transform:'rotateZ(360deg)'}],duration:1000,timings:[]};
+ const light={target:1,id:'body-light-curve',keyframes:[{offset:0,opacity:'1'},{offset:1,opacity:'0.5'}],duration:1000,timings:[]};
+ for(const [motion,kinds] of [[[spin],{spin:true,lightCurve:false}],[[light],{spin:false,lightCurve:true}],[[spin,light],{spin:true,lightCurve:true}],[[],{spin:false,lightCurve:false}]] as const){
+  await writeFile(resolve(directory,'prepared/runtime.json'),JSON.stringify({...data,motion})+'\n');
+  assert.deepEqual((await loadObjectPageData('body',root)).motion,kinds);
+ }
+ await writeFile(resolve(directory,'prepared/runtime.json'),JSON.stringify({...data,motion:[{...spin,keyframes:[]}]}));
+ await assert.rejects(loadObjectPageData('body',root),/no keyframes/);
+ await writeFile(resolve(directory,'prepared/runtime.json'),JSON.stringify(data)+'\n');
  // The transport is the runtime in its envelope, byte for byte what JSON.stringify of the envelope gives.
  const {bytes}=await readPreparedObjectBytes('body',root);
  assert.equal(bytes.toString('utf8'),JSON.stringify({schema:'cssearth-prepared-object@1',id:'body',type:'layered-body',format:'cssearth-css-object@5',data}));
@@ -41,7 +51,7 @@ test('objects own ordered CSS and scene-bound page metadata',async()=>{
   const data=JSON.parse(transport.bytes.toString('utf8')).data;
   // The page lists every dataset's entries; the transport carries its default dataset's (dataset-tables.ts in @cssearth/objects).
   const runtime=JSON.parse(await readFile(new URL(`../../src/objects/${id}/prepared/runtime.json`,import.meta.url),'utf8'));
-  assert.deepEqual(page,{descriptor:transport.descriptor,assets:runtime.assets,controls:data.controls},id);
+  assert.deepEqual(page,{descriptor:transport.descriptor,assets:runtime.assets,controls:data.controls,motion:{spin:true,lightCurve:false}},id);
   assert.deepEqual(data.assets.startup,runtime.assets.startup,id);
  }
 });
