@@ -17,9 +17,9 @@ has a `BreadcrumbList` down its orbit chain (cssEarth › Sun › Mars › Phobo
 built by `site/content/seo-trail.mts` from the prepared world context. A centre without
 a page, such as a binary's barycentre, is skipped.
 
-Every page has a share image of its own. The 154 committed captures in
-`site/public/social/` are plain screenshots of the actual CSS scene, with the
-application controls hidden: 16 Solar System bodies, and the 138 galaxy, cluster
+Every page but a cluster's has a share image of its own. The 81 committed
+captures in `site/public/social/` are plain screenshots of the actual CSS scene,
+with the application controls hidden: 16 Solar System bodies, and the 65 galaxy
 and nebula pages, which have no arrival billboard. Every other scene page uses
 its arrival billboard:
 `site/build/share-images.mts` runs in `pnpm build:deploy` after `astro build`. It
@@ -27,7 +27,8 @@ centres each billboard on black at 1200×630 and writes `dist/social/<id>.jpg`
 (about 3,570 cards, 24 MB). A billboard it cannot read fails the deploy. A
 system's page, such as `/mars-system/`, mounts its host's scene and uses its
 host's image. A page with neither a capture nor a billboard falls back to the
-Earth capture, so a new galaxy, cluster or nebula page needs a capture.
+Earth capture: the 73 pages of galaxy, globular and open clusters do, and so
+does a new galaxy or nebula page until it is captured.
 None of these images adds requests to ordinary page loads.
 
 ![Share images drawn from the arrival billboards of Betelgeuse, WASP-43 b, Phobos and Comet 67P](images/share-cards.webp)
