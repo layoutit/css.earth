@@ -43,8 +43,10 @@ def aperture_light(curve):
     """What the pipeline's own header says of the light in a light curve's aperture, as lightkurve reads it: CROWDSAP,
     the share of the aperture's light that is the target's ("ratio of target flux to total flux in op. ap."), and
     FLFRCSAP, the share of the target's light the aperture holds (TESS Science Data Products Description Document,
-    EXP-TESS-ARC-ICD-TM-0014 Rev F, Table 14). A value the header leaves blank is null. Nothing is worked out."""
-    return {'targetShare': curve.meta.get('CROWDSAP'), 'targetHeld': curve.meta.get('FLFRCSAP')}
+    EXP-TESS-ARC-ICD-TM-0014 Rev F, Table 14). A value the header leaves blank is null: astropy hands a blank value
+    of this header over as its own `Undefined`, which is no number. Nothing is worked out."""
+    number = lambda value: float(value) if isinstance(value, (int, float)) and not isinstance(value, bool) else None
+    return {'targetShare': number(curve.meta.get('CROWDSAP')), 'targetHeld': number(curve.meta.get('FLFRCSAP'))}
 
 
 def input_catalogue(job):
