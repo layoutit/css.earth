@@ -252,6 +252,38 @@ photograph now shows only over the empty default stage. At phone width the sheet
 hidden waiting for its controller; it now rests at its peek, and its handle opens it.
 `site/journeys/rendered-page.test.mts` checks all three in the built pages.
 
+On 2026-10-07 a reader with the NoScript extension reported that the page never left its loading mark. A blocker that
+refuses scripts with a policy header leaves scripting switched on for the parser, which then reads a `<noscript>` as
+text, so none of the page's rules for a reader without script applied: the mark kept turning and the photograph stayed
+hidden (Chromium 148 and Firefox 150 with `script-src 'none'`). NoScript 13.6.36 on its Default preset replaces each
+`<noscript>` with a span and was not affected; its Untrusted preset does not. The rules for the loading mark, the
+photograph, the phone sheet at its peek and the drawn stage's fit are now plain rules, gated on marks only the page's
+scripts write: `data-body-pending` on the root, set in the head and deleted when the first body mounts, and
+`data-sheet` on the body, set when the shell mounts and kept until the page leaves. With script one of the two is
+present from the head's script on, so the rules do not apply; no script or request was added, and the gates add 136
+bytes to a page before compression (Earth and Saturn, built 2026-10-07). On loads of the home page, Earth, M87, Vega,
+the Solar System and the Milky Way, with `?embed` and `?dataset`, at 1280×800 and 390×844, and on a flight, no frame
+had both marks absent (Chromium 148; Earth also in WebKit 26.4). A page restored from the back-forward cache has neither for
+the two or three frames before its shell mounts again; the sheet's rule also reads `data-scene-presented="false"`,
+which the page writes for those frames, and did not show the sheet in any of them.
+
+![Earth with every script refused by a policy header, in Chromium 148 at 1280×800: before, the loading mark; now, the photograph](images/native-policy-blocked.png)
+
+A load with script that fails loses both marks, so the failed page takes these rules, as the page of a reader without
+script does: at 390×844 the sheet rests at its peek where it stayed hidden before, with its search form working and
+its handle not, and a server-drawn stage takes the fit (M87 at 1320×559 in Chromium: scaled to 0.72, unscaled before).
+`data-ready` would tell a failed page apart, but no rule reads it today, and the page writes it twice a load and twice
+a flight: with these rules reading it, each change cost 23 µs on Earth and 82 µs on the Milky Way in Chromium 148,
+150 µs on Earth in WebKit 26.4 and 50 µs in Firefox 150, against nothing measurable now. The first flight removes the
+style with the page's other route styles, since the fragment does not carry it (`site/navigation/navigation-styles.mts`).
+
+The rules that read with `:has()` (the sheet's handle, the gear's pressed look) and the drag and wheel stylesheet stay
+in a `<noscript>`. A gate in front of a `:has()` does not stop the engine paying for it: adding 600 elements to a
+4,000-element test page took 48 ms with a gated `:has()` rule on the body and 6 ms without it or with a gated plain rule
+(Chromium 148; Firefox 150 took 26 ms in every case). And a page with script must never request the stylesheet. A reader behind such a blocker gets the still view with the sheet at its peek. In Firefox that
+view of a drawn body is not kept within the viewport's height, because the registered lengths its scale reads are
+declared in that stylesheet: Saturn's stage is unscaled at 1320×559, against 0.72 in Chromium.
+
 ![Saturn at phone width with JavaScript disabled: the search field and the card's sheet at its peek](images/native-phone.png)
 
 A dataset, settings or feature response without a saved view used to keep the prepared tree's mount pose: depth was
