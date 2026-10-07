@@ -300,8 +300,8 @@ Colman et al.'s table also prints another period for two of the four stars whose
 5.59 d beside 10.13 d for TOI-1346, and 5.14 d beside 6.93 d for TOI-1659.
 
 WASP-140's record adopts the paper's own 10.229 d; the 10.44 d beside it is from another table. One table prints 5.4 d
-for HD 18599 where two others and the paper give 8.5 to 8.7 d; the record adopts 8.73 d. This is a comparison, not a
-setting.
+for HD 18599, measured on the mission's SAP flux (Hojjatpanah et al. 2020), where two others and the paper give 8.5 to
+8.7 d; the record adopts 8.73 d. This is a comparison, not a setting.
 
 The paper's Table 1 holds half the catalogued period for four of our stars. Newton et al. (2022, AJ 164, 115, Sect.
 2.1.1) describe one way that happens: for a star turning in 6 to 12 days, the mission's PDC-MAP correction can change
@@ -326,7 +326,7 @@ period, and how many of them have no map.
 | Magaudda et al. (2022, A&A 661, A29) | 2-minute PDC-MAP | A period with a flag: reliable, not reliable or ambiguous | It names no sectors; none of our 4 stars in it has a period | 0, 0 |
 | Medina et al. (2020, ApJ 905, 107; 2022, ApJ 935, 104) | 2-minute PDC-MAP, year 1 | A period with its source; one source is "this work using TESS photometry" | It names no sectors; our one star with a TESS period there is drawn already | 1, 0 |
 | Günther et al. (2020, AJ 159, 60) | 2-minute PDC-MAP, sectors 1 and 2, one row a sector | A period under 5 days from a Fourier transform, checked by eye, of a flaring star | It adds nothing: its one period for a star of ours without a map, LHS 3844's 0.46 d, is the star's planet's orbit | 3, 1 |
-| Doyle et al. (2019, MNRAS 489, 437; 2020, MNRAS 494, 3596) | 2-minute PDC-MAP, sectors 1 to 3 and 1 to 13, named for each star | The period of a flaring star, selected by eye | It adds nothing: our one star in the two is drawn already | 1, 0 |
+| Doyle et al. (2019, MNRAS 489, 437; 2020, MNRAS 494, 3596) | 2-minute PDC-MAP, sectors 1 to 3 and 1 to 13, named for each star | The period of a flaring star, from a periodogram and its authors' inspection | It adds nothing: our one star in the two is drawn already | 1, 0 |
 | Ramsay et al. (2020, MNRAS 497, 2320) | 2-minute PDC-MAP, sectors 1 to 13 | Stars turning in under a day | Its table is not at VizieR, and was not read | not counted |
 | Lambier et al. (2025, AJ 170, 168) | 2-minute PDC-MAP and its authors' own full-frame light curves, sectors named | A "real" or "possible" period of a dwarf of type M6 or later | None of its 133 stars is ours | 0, 0 |
 | Lin et al. (2024, AJ 168, 234) | 2-minute PDC-MAP, sectors 1 to 72 | The mean of a flaring star's valid periods (a Lomb-Scargle peak, a Fourier fit and an autocorrelation that agree) | It does not say which sectors gave a valid period, nor how many. Proxima Centauri's row prints 4.8 d | 30, 11 |
@@ -339,6 +339,7 @@ period, and how many of them have no map.
 | Schmitt et al. (2026, A&A 709, A180) | 2-minute SAP flux, sectors 1 to 58: the paper finds PDC-MAP overcorrects | A period, with a flag for a possibly bad one | Not the light curve that is mapped | 64, 36 |
 | Newton et al. (2022, AJ 164, 115) | 2-minute SAP flux, and its authors' own full-frame light curves | A secure or a candidate period | Not the light curve that is mapped | 2, 2 |
 | Howard et al. (2021, AJ 162, 147) | 2-minute SAP flux, with photometry from the ground | A period with a grade | Not the light curve that is mapped | not counted |
+| Hojjatpanah et al. (2020, A&A 639, A35) | 2-minute SAP flux, a star's sectors joined | A rotation period beside the star's radial-velocity scatter | Not the light curve that is mapped | 1 without a map, matched by place |
 | Howard et al. (2020, ApJ 895, 140) | Evryscope, from the ground | A rotation period of a flaring star | Not TESS's light | 1, 0 |
 | Messina et al. (2022, A&A 657, L3) | Full-frame images, PATHOS | A period with a grade | Not the light curve that is mapped | 2, 2 |
 | Anthony et al. (2022, AJ 163, 257) | Full-frame images, its authors' own aperture | A period, reliable under 15 days | Not the light curve that is mapped | 2 without a map, matched by place |
