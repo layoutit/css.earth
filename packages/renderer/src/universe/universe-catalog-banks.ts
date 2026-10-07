@@ -8,7 +8,7 @@ import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-laye
 import { outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { createFarBackingPlanes, type FarBackingPlane } from './far-backing-planes.js';
+import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './far-backing-planes.js';
 import { mountCataloguePoints } from './catalogue-points.js';
 import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import type { PreparedCatalogBank, PreparedUniverseOptions, PreparedImageLayerMount } from './prepared-universe-types.js';
@@ -254,7 +254,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
           const handoff = draws ? Math.min(1, (sibling ? selectedOpacity : opacity) / Math.max(context, Number.MIN_VALUE)) : 0;
           const far = context * projectedVolumeOpacity(world, viewport, bank.frame, bank.far ? bank.far.radiusUnits : bank.billboardRadiusUnits) * (1 - handoff) *
             outsideVolumeOpacity(world, bank.frame, bank.radiusUnits);
-          if (bank.far) farPlanes.publish(bank.far, far, world, viewport, coasting);
+          if (bank.far) farPlanes.publish(bank.far, drawsFromAfar(prepared?.plan, bank.id, detailedObjectId) ? far : 0, world, viewport, coasting);
           else billboards!.publish(bank.billboardIndex, far, world, viewport);
         }
         const dotOpacity = Math.max(opacity, inside?.objectId === bank.id ? inside.opacity : 0);

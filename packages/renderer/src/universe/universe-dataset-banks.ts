@@ -10,7 +10,7 @@ import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { createFarBackingPlanes, type FarBackingPlane } from './far-backing-planes.js';
+import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './far-backing-planes.js';
 import { mountCataloguePoints } from './catalogue-points.js';
 import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
@@ -313,7 +313,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         const opacity = ready ? requestedOpacity : 0;
         if (bank.far) {
           // The backing gives way to the volume as a billboard does, by the same screen size of the same sphere.
-          const covered = standIn !== undefined && bank.id === detailedObjectId && !ready;
+          const covered = standIn !== undefined && bank.id === detailedObjectId && !ready || !drawsFromAfar(preparedBillboards?.plan, bank.id, detailedObjectId);
           farPlanes.publish(bank.far, covered ? 0 : shown * projectedVolumeOpacity(world, viewport, frame, bank.far.radiusUnits) *
             (ready ? 1 - opacity / Math.max(shown, Number.MIN_VALUE) : 1), world, viewport, coasting, bank.pendingSelection);
         }

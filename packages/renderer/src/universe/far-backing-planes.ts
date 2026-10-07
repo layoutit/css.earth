@@ -1,7 +1,7 @@
 import { writeStyle } from '../rendering/dom/retained-write.js';
 import { revealLayer } from '../rendering/dom/layer-reveal.js';
 import type { SceneLifetime, WorldCameraPose } from '@cssearth/engine';
-import { type DensityVolumeFrame, type PreparedGalaxyBacking } from '@cssearth/objects';
+import { type DensityVolumeFrame, type PreparedGalaxyBacking, type DatasetBillboards } from '@cssearth/objects';
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 
@@ -20,6 +20,16 @@ export interface FarBackingPlane {
   /** The image the plane draws, and whether it is on screen. */
   texture: string | null;
   shown: boolean;
+}
+
+/** Whether a bank draws its body from afar: a body with several banks (`DatasetBankBillboard.host`) is drawn by one of
+ * them, the bank of its selected dataset (`detailedObjectId`), or its default bank while none of its banks is selected.
+ * With every bank drawing, the Helix's volume billboard covered its layered model on its own page (2026-10-07). */
+export function drawsFromAfar(plan: DatasetBillboards | undefined, id: string, detailedObjectId: string | undefined): boolean {
+  const facts = plan?.banks.get(id);
+  if (facts?.host === undefined) return true;
+  const detailed = detailedObjectId === undefined ? undefined : plan!.banks.get(detailedObjectId);
+  return detailed?.host === facts.host ? id === detailedObjectId : facts.hostDefault === true;
 }
 
 /** The backing planes of one layer of banks (volume dataset banks, or image-layer banks): each bank whose prepared
