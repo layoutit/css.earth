@@ -1,8 +1,9 @@
 /** A star's brightness map, made by this repository from its light, as a dataset of the star's page.
  *
- * `archives/tess/reduce.mts` takes a star's light from one window of a mission (a K2 campaign's own light curve, or the
- * pixels of a TESS sector), has the period it turns in judged (for K2 by a published method, archives/tess/methods.mts),
- * and has starry fit the map that reproduces the light curve; it writes the map as a table and a receipt. This module
+ * `archives/tess/reduce.mts` takes a star's light from one window of a mission (a K2 campaign's or a TESS sector's own
+ * light curve), has the period it turns in judged by a published method (archives/tess/methods.mts) or reads it from a
+ * paper's own published verdict (archives/tess/published.mts), and has starry fit the map that reproduces the light
+ * curve; it writes the map as a table and a receipt. This module
  * is that kind of map for surface-maps.mts: where its table goes, its scale and colors, the archive and papers it is
  * bound to, and its sentences. It is pure: brightness.mts reads and writes.
  *
