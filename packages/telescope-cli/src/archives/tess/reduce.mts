@@ -36,8 +36,8 @@ import { PUBLISHED, publishedRows, ticOf, type PublishedVerdict } from './publis
 import { besideCatalogued, notTurning, withinBreakup, type Mission, type RotationVerdict } from './verdict.mts';
 import { toolchainPins } from './toolchain.mts';
 
-/** `@2`: every verdict is a published method's, on the mission's own light curves. A receipt of `@1` is of this repository's
- * earlier rule on full-frame pixels, and is not read. */
+/** `@2`: every verdict is a published method's, or a paper's own published verdict, on the mission's own light curves. A
+ * receipt of `@1` is of this repository's earlier rule on full-frame pixels, and is not read. */
 export const ROTATION_SCHEMA = 'cssearth-tess-rotation@2';
 export const receiptPath = (id: string) => resolve(WORKSPACE, 'output/tess', id, 'rotation.json');
 

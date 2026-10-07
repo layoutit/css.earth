@@ -2,8 +2,9 @@
  *
  * `archives/tess/reduce.mts` takes a star's light from one window of a mission (a K2 campaign's or a TESS sector's own
  * light curve, or a quarter of a Kepler star's KEPSEISMIC light curve), has the period it turns in judged by a published
- * method or taken from a paper's own verdict (archives/tess/methods.mts, published.mts, archives/kepler/santos.mts),
- * and has starry fit the map that reproduces the light curve; it writes the map as a table and a receipt. This module
+ * method (archives/tess/methods.mts) or reads it from a paper's own published verdict (archives/tess/published.mts,
+ * archives/kepler/santos.mts), and has starry fit the map that reproduces the light curve; it writes the map as a table
+ * and a receipt. This module
  * is that kind of map for surface-maps.mts: where its table goes, its scale and colors, the archive and papers it is
  * bound to, and its sentences. It is pure: brightness.mts reads and writes.
  *
