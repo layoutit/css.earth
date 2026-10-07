@@ -27,6 +27,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 3. **Datasets.** [`finite-datasets.json`](source/evidence/lmc/envelope/finite-lenses.json) bakes each registered image onto that one geometry with a per-channel tone curve fitted against that dataset's own image ([receipt](source/lens-settings-evidence.json)).
 4. **Delivery.** The [compact inputs](source/compact/inputs.json) carry exactly what a replay needs, and `pnpm prepare:nebulae --if-missing` rebuilds the bank and its atlases from them alone. Each delivered byte's laboratory record is numbered under [`bake-inputs/references/`](source/bake-inputs/references).
 5. **Stars.** Bonanos Table 3 rows with finite V ≤ 16 whose ray lands on a covered footprint pixel are placed at a fixed per-star quantile of the model density. 1,042 are placed; 39 rows outside the Horálek footprint are not. [Star preparation](../../../labs/nebula/models/lmc/stars/README.md) records the selection.
+6. **Far view.** From afar the cloud is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and lays each dataset's own Sun-facing impostor view through the frame's centre, across the line of sight from Earth. No image is re-encoded. The frame's z axis is that line of sight, and the model was fitted to the sky image along it; it defines no disc plane. From Earth the plane therefore shows what the volume draws, and the hand-over keeps the same position, size and orientation. The plane replaced a camera-facing billboard of the same view, which spun as the camera orbited the LMC. After a rebake of the bank, run it again with `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/lmc-volume backing`.
 
 ## Evidence
 
@@ -42,6 +43,7 @@ A browser capture of this page: the 35 packaged stars of the Cloud draw as dots,
 
 ## Known problems
 
+- From well off the Earth line of sight the far plane is foreshortened, while the volume keeps its depth. The hand-over there is a cross-fade between two different shapes.
 - **VISTA and AllWISE are brighter than their own images:** +17% and +264% after fitting. Every dataset shares the one opacity fitted to Horálek, so a tone curve can only dim or recolor inside it. AllWISE's own composite spans about 19 gray levels inside its footprint.
 - The envelope is the simulation's shape hypothesis and the detail components are conditioned on the same simulation; neither is measured gas geometry. The model records `materialGatePassed: false`. The LMC has no depth tracer here to test it.
 - The fit is cut along the Horálek image's bottom edge, and its black point still clips the faint outer halo. The brightest 0.1% of pixels reach only 0.89–0.96 of the image.

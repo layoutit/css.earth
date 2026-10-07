@@ -59,6 +59,17 @@ const unit = (a: readonly number[]): Vector => { const length = Math.hypot(a[0]!
 const minus = (a: readonly number[], b: readonly number[]): Vector => [a[0]! - b[0]!, a[1]! - b[1]!, a[2]! - b[2]!];
 const along = (a: readonly number[], b: readonly number[], scale: number): Vector => [a[0]! - b[0]! * scale, a[1]! - b[1]! * scale, a[2]! - b[2]! * scale];
 
+/** The impostor view a camera at the Sun takes of a volume (projectVolumeImpostors picks by the same direction): the
+ * one whose `back` points most nearly at the Sun. A far picture of the bank, billboard or backing, is this view. */
+export function sunFacingImpostorView(label: string, frame: unknown, views: unknown): Record<string, unknown> {
+  const local = presentPhysicalPoseInVolume({ positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] },
+    requireRecord(frame, `${label} frame`) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1]).positionUnits;
+  const length = Math.hypot(...local), toViewer = local.map(value => value / length);
+  const score = (value: Record<string, unknown>) => dot(vector(value.back, `${label} view back`), toViewer);
+  return requireArray(views, `${label} impostor views`).map(value => requireRecord(value))
+    .reduce((best, candidate) => score(candidate) > score(best) ? candidate : best);
+}
+
 /** The leaves of a z bank that are whole-picture slices: one quad whose UVs are the picture's corners. A shell's
  * `shape-*` leaves (shape-patches.ts) each show a part of the picture at its own depth, so they are no slice of the view
  * from the Sun and are left out. Any other leaf that is not a corner quad, and a bank left with no slice, are errors. */
@@ -133,7 +144,7 @@ async function imageLayerBillboard(id: string, descriptor: Record<string, unknow
 export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot(import.meta.url)) {
   const objects = resolve(projectRoot, 'src/objects');
   type Drawn = { view: { back: Vector; right: Vector; down: Vector }; radiusUnits: number; image: Buffer };
-  const banks: { id: string; contextVisibility: 'galactic' | 'independent'; attached: boolean; framingRadiusUnits?: number;
+  const banks: { id: string; contextVisibility: 'galactic' | 'independent'; attached: boolean; framingRadiusUnits?: number; backing?: true;
     view?: Drawn['view']; radiusUnits?: number; image?: Buffer; defaultDataset?: string; datasets?: (Drawn & { id: string })[] }[] = [];
   for (const id of (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort()) {
     let descriptor: Record<string, unknown>;
@@ -157,14 +168,7 @@ export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot
       if (JSON.stringify(volume.frame) !== descriptorFrame) throw new TypeError(`${label}: dataset frame differs from the descriptor frame.`);
       if (volume.impostors === undefined) return undefined;
       const impostors = requireRecord(volume.impostors, `${label} impostors`);
-      const frame = requireRecord(volume.frame) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1];
-      const local = presentPhysicalPoseInVolume({ positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] }, frame).positionUnits;
-      const length = Math.hypot(...local), toViewer = local.map(value => value / length);
-      const views = requireArray(impostors.views, `${label} impostor views`).map(value => requireRecord(value));
-      const view = views.reduce((best, candidate) => {
-        const score = (value: Record<string, unknown>) => vector(value.back, `${label} view back`).reduce((sum, item, axis) => sum + item * toViewer[axis]!, 0);
-        return score(candidate) > score(best) ? candidate : best;
-      });
+      const view = sunFacingImpostorView(label, volume.frame, impostors.views);
       const image = await readFile(resolve(objects, id, 'prepared', requireString(view.texturePath, `${label} view texture`)));
       const { width, height } = await sharp(image).metadata();
       if (width !== CELL_PX || height !== CELL_PX) throw new TypeError(`${label}: impostor view is ${width}x${height}, not ${CELL_PX} px.`);
@@ -174,9 +178,14 @@ export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot
     };
     // A cloud that accompanies a body stays dark until that body's dataset asks for it.
     const framingRadiusUnits = data.framingRadiusUnits;
+    // A bank that publishes a backing (packages/bake/cli/prepare-galaxy-backing.mts) is drawn from afar on that fixed
+    // plane, as the Milky Way is, and gets no camera-facing billboard: one image turned to face the camera spun as the
+    // camera orbited the LMC (2026-10-07).
+    const backing = (await readInventory(id, resolve(objects, id)))?.assets.some(asset => asset.location === 'prepared' && asset.filename === 'backing.json') === true;
     if (typeof framingRadiusUnits !== 'number' || !(framingRadiusUnits > 0)) throw new TypeError(`${id}: datasets need a positive framingRadiusUnits, got ${String(framingRadiusUnits)}.`);
     // The authored framing radius is what the universe hangs the bank's caption under, before any dataset loads.
     const bank = { id, contextVisibility, attached: data.attachedTo !== undefined, framingRadiusUnits } as (typeof banks)[number];
+    if (backing) { bank.backing = true; banks.push(bank); continue; }
     Object.assign(bank, await sunView(dataset));
     const others: NonNullable<(typeof bank)['datasets']> = [];
     for (const other of datasets) {
@@ -211,7 +220,8 @@ export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot
       ...(bank.framingRadiusUnits === undefined ? {} : { framingRadiusUnits: bank.framingRadiusUnits }),
       ...(bank.view ? { billboard: { radiusUnits: bank.radiusUnits, ...bank.view } } : {}),
       ...(bank.datasets ? { defaultDataset: bank.defaultDataset,
-        datasets: bank.datasets.map(dataset => ({ id: dataset.id, radiusUnits: dataset.radiusUnits, ...dataset.view })) } : {}) })) };
+        datasets: bank.datasets.map(dataset => ({ id: dataset.id, radiusUnits: dataset.radiusUnits, ...dataset.view })) } : {}),
+      ...(bank.backing ? { backing: true } : {}) })) };
   await writeIfChanged(resolve(projectRoot, OUTPUT.metadata), `${JSON.stringify(metadata)}\n`);
   // The atlas an earlier checkout wrote here is no longer read.
   await rm(resolve(projectRoot, 'site/prepared/prepared-dataset-billboards.webp'), { force: true });

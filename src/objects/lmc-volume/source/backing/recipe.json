@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-galaxy-backing-source@1",
+  "id": "backing",
+  "view": "sun-facing-impostor",
+  "source": "lmc-volume-sun-facing-impostor-views",
+  "meaning": "The LMC from afar: each dataset's prepared impostor view of this bank seen from the Sun, laid on one plane fixed in the bank's frame, through its centre and across the line of sight from Earth. The frame's z axis is that line of sight and the volume was fitted to the sky image along it, so from Earth the plane shows exactly what the volume draws; from elsewhere it turns and foreshortens as a fixed object, like the Milky Way's backing. It is a presentation of the volume, not a measurement of a disc."
+}

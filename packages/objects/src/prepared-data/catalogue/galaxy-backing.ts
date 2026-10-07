@@ -14,12 +14,15 @@ export interface PreparedGalaxyBacking {
   readonly centreFadeM?: readonly [number, number];
   /** Parts of the same image, transparent around them, drawn over it in order, each dimming on its own range. */
   readonly sections?: readonly ({ readonly texturePath: string } & BackingNearFade)[];
+  /** A volume bank's plane pictures the dataset that is selected: each dataset's image by its id, all drawn by the one
+   * leaf, so every image fills the leaf's box. The leaf's own image is the bank's default dataset's. */
+  readonly datasets?: ReadonlyMap<string, string>;
 }
 
 /** A `cssearth-galaxy-backing@1` bank (packages/bake/cli/prepare-galaxy-backing.mts): one face-on image plane in a galaxy's frame. */
 export function parseGalaxyBacking(value: unknown, at = 'galaxy backing'): PreparedGalaxyBacking {
   const data = value as { schema?: unknown; id?: unknown; frame?: unknown; leaf?: { texturePath?: unknown; style?: Record<string, unknown> };
-    nearFade?: unknown; centreFadeM?: unknown; sections?: unknown } | null;
+    nearFade?: unknown; centreFadeM?: unknown; sections?: unknown; datasets?: unknown } | null;
   if (!data || data.schema !== GALAXY_BACKING_SCHEMA || typeof data.id !== 'string' || !data.id) throw new TypeError(`${at}: expected a ${GALAXY_BACKING_SCHEMA} bank with an id.`);
   const leaf = data.leaf;
   if (!leaf || typeof leaf.texturePath !== 'string' || !/^[a-z0-9-]+(\/[a-z0-9.-]+)+$/u.test(leaf.texturePath) ||
@@ -46,9 +49,19 @@ export function parseGalaxyBacking(value: unknown, at = 'galaxy backing'): Prepa
     }
     return Object.freeze({ texturePath, ...nearFade(raw, `backing section ${index}`) });
   }) : (() => { throw new TypeError(`${data.id}: backing sections must be a list, got ${JSON.stringify(data.sections)}.`); })();
+  const texture = (path: unknown) => typeof path === 'string' && /^[a-z0-9-]+(\/[a-z0-9.-]+)+$/u.test(path);
+  let datasets: Map<string, string> | undefined;
+  if (data.datasets !== undefined) {
+    const entries = data.datasets && typeof data.datasets === 'object' && !Array.isArray(data.datasets) ? Object.entries(data.datasets) : [];
+    if (!entries.length || !entries.every(([id, path]) => /^[a-z0-9-]+$/u.test(id) && texture(path)) ||
+        !entries.some(([, path]) => path === leaf.texturePath)) {
+      throw new TypeError(`${data.id}: backing datasets map each dataset id to a texture path, one of them the leaf's ${leaf.texturePath}, got ${JSON.stringify(data.datasets)}.`);
+    }
+    datasets = new Map(entries as [string, string][]);
+  }
   return Object.freeze({ id: data.id, frame: parseDensityVolumeFrame(data.frame), leaf: Object.freeze({ texturePath: leaf.texturePath,
     style: Object.freeze(Object.fromEntries(LEAF_STYLE.map(key => [key, leaf.style![key] as string]))) as PreparedGalaxyBacking['leaf']['style'] }),
     ...(data.nearFade === undefined ? {} : { nearFade: nearFade(data.nearFade, 'backing nearFade') }),
     ...(centreFade === undefined ? {} : { centreFadeM: Object.freeze([centreFade[0], centreFade[1]]) as unknown as readonly [number, number] }),
-    ...(sections ? { sections: Object.freeze(sections) } : {}) });
+    ...(sections ? { sections: Object.freeze(sections) } : {}), ...(datasets ? { datasets } : {}) });
 }

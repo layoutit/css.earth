@@ -34,3 +34,11 @@ test('a bank with several datasets carries a view of each, so its billboard can 
   assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...bank, defaultDataset: undefined }] }), /default dataset/);
   assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[0]!, defaultDataset: 'dust' }] }), /without other datasets/);
 });
+
+test('a bank drawn from afar by its fixed backing plane has no camera-facing billboard', () => {
+  const parsed = parseDatasetBillboards({ ...input, banks: [{ ...input.banks[1]!, backing: true }] }).banks.get('galaxy')!;
+  assert.equal(parsed.backing, true);
+  assert.equal(parsed.billboard, undefined);
+  assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[0]!, backing: true }] }), /has no billboard/);
+  assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[1]!, backing: 'yes' }] }), /backing is true/);
+});
