@@ -1,6 +1,8 @@
 /** Requests to MAST, the archive the missions' light curves are read from.
  *
- * The archive answers 429 to requests sent side by side: they go one at a time, PACE_MS apart, and a 429 is waited out.
+ * Requests go PACE_MS apart and a 429 is waited out. The archive does answer requests sent side by side (measured
+ * 2026-10-06: eight light-curve files at once, eight position queries at once, none refused), so a star's files are
+ * fetched together and several runs may share the stars (reduce.mts --shard).
  * Every request is public and anonymous, and names this tool and nothing else. */
 export const USER_AGENT = 'cssEarth-telescope/1.0 (https://css.earth)';
 /** The pause between two requests, and the wait after the archive asks for one. */

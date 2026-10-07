@@ -18,6 +18,9 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-6699 (pscomppars): log10 of the luminosity in solar units -0.59732, from TICv8 (https://ui.adsabs.harvard.edu/abs/2019AJ....158..138S/abstract)",
   "ageGyr": 12.839,
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6450063790712030336, flags_flame 00: age_flame 12.839461 Gyr (16th to 84th percentiles 5.821908 to 13.5)",
+  "rotationPeriodMeasuredDays": 14.58,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 101, 102, 103 and 104 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 14.58 d, the light swinging by 0.28% as the star turns",
+  "rotationLightSwingPercent": 0.28,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

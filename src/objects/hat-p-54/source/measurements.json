@@ -40,6 +40,9 @@
   ],
   "projectedRotationSpeedKmS": 2.35,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HAT-P-54 (pscomppars): projected rotation speed 2.35 km/s, from Bakos et al. 2015 (https://ui.adsabs.harvard.edu/abs/2015AJ....149..149B/abstract)",
+  "rotationPeriodMeasuredDays": 14.75,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 0 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 14.75 d, the light swinging by 1.1% as the star turns",
+  "rotationLightSwingPercent": 1.14,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

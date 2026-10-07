@@ -36,6 +36,16 @@
               "id": "radial-field-2008-01",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "brightness-campaign-1",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "color-brightness",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }

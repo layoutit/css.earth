@@ -17,20 +17,36 @@ export const MAP_DEGREE = 5, PRIOR_WIDTH = 0.01;
 export const GRID_STEP_DEGREES = 5;
 /** The tilt a map is made at when none is known for the star: half of all axes that point at random are tilted less than this (cos 60° = 0.5). */
 export const ASSUMED_TILT_DEGREES = 60;
+/** How a map's values are written, as shares of its mean: to five decimals, or to seven when at five the map's whole range
+ * would hold fewer than 256 steps. Seven is all a line of the table holds, and 256 the levels of the 8-bit picture drawn
+ * from it: the light of a star that swings by a hundredth of a percent gives a map ten steps of the fifth decimal wide,
+ * drawn in flat bands. This is how a number is written. No star gains or loses a map by it, and a map that is not that
+ * narrow is written as it was before the rule. */
+export const VALUE_DECIMALS = 5, NARROW_DECIMALS = 7, LEAST_STEPS = 256;
+export function written(values: readonly (readonly number[])[]): number[][] {
+  let low = Infinity, high = -Infinity; for (const row of values) for (const value of row) { low = Math.min(low, value); high = Math.max(high, value); }
+  const decimals = (high - low) * 10 ** VALUE_DECIMALS < LEAST_STEPS ? NARROW_DECIMALS : VALUE_DECIMALS;
+  return values.map(row => row.map(value => Number(value.toFixed(decimals))));
+}
 
 export interface BrightnessMap { readonly longitudes: readonly number[]; readonly latitudes: readonly number[]; /** Brightness over the map's mean, rows by latitude from south. */ readonly values: readonly (readonly number[])[];
   readonly degree: number; readonly inclinationDegrees: number; readonly periodDays: number; /** Scatter of the light curve about the map's own curve, and the curve's noise, as shares of the mean light. */ readonly residual: number; readonly noise: number; readonly starry: string }
 
 const range = (from: number, to: number, step: number) => Array.from({ length: Math.round((to - from) / step) + 1 }, (_, index) => from + index * step);
 
-export async function brightnessMap(curve: { readonly time: readonly number[]; readonly flux: readonly number[] }, periodDays: number, inclinationDegrees: number): Promise<BrightnessMap> {
+/** The map of each light curve, all at the star's one period and tilt: one call to starry for the star, which is imported
+ * and compiled once (8 s a map when each had its own). */
+export async function brightnessMaps(curves: readonly { readonly time: readonly number[]; readonly flux: readonly number[] }[], periodDays: number, inclinationDegrees: number): Promise<BrightnessMap[]> {
   if (!(periodDays > 0) || !(inclinationDegrees > 0 && inclinationDegrees <= 90)) throw new RangeError('A map needs a rotation period and a tilt between 0 and 90 degrees.');
+  if (!curves.length) return [];
   const longitudes = range(-180, 180, GRID_STEP_DEGREES), latitudes = range(-90, 90, GRID_STEP_DEGREES), directory = await mkdtemp(join(tmpdir(), 'tess-map-')), job = join(directory, 'job.json');
-  try { await writeFile(job, JSON.stringify({ time: curve.time, flux: curve.flux, periodDays, inclinationDegrees, degree: MAP_DEGREE, priorWidth: PRIOR_WIDTH, longitudesDegrees: longitudes, latitudesDegrees: latitudes }));
-    const answer = requireRecord(runTool(starryToolchainSync().python, ['map', job]), 'starry answer');
-    const values = requireArray(answer.values, 'map values').map(row => requireArray(row, 'map row').map(value => requireFiniteNumber(value, 'brightness')));
-    if (values.length !== latitudes.length || values.some(row => row.length !== longitudes.length)) throw new Error('starry returned a map of another shape.');
-    return { longitudes, latitudes, values, degree: MAP_DEGREE, inclinationDegrees, periodDays, residual: requireFiniteNumber(answer.residual, 'residual'), noise: requireFiniteNumber(answer.noise, 'noise'), starry: requireString(answer.starry, 'starry version') }; }
+  try { await writeFile(job, JSON.stringify({ curves: curves.map(curve => ({ time: curve.time, flux: curve.flux })), periodDays, inclinationDegrees, degree: MAP_DEGREE, priorWidth: PRIOR_WIDTH, longitudesDegrees: longitudes, latitudesDegrees: latitudes }));
+    const answer = requireRecord(runTool(starryToolchainSync().python, ['maps', job]), 'starry answer'), starry = requireString(answer.starry, 'starry version'), made = requireArray(answer.maps, 'maps');
+    if (made.length !== curves.length) throw new Error('starry returned another number of maps.');
+    return made.map((entry, index) => { const map = requireRecord(entry, `map ${index}`);
+      const values = written(requireArray(map.values, 'map values').map(row => requireArray(row, 'map row').map(value => requireFiniteNumber(value, 'brightness'))));
+      if (values.length !== latitudes.length || values.some(row => row.length !== longitudes.length)) throw new Error('starry returned a map of another shape.');
+      return { longitudes, latitudes, values, degree: MAP_DEGREE, inclinationDegrees, periodDays, residual: requireFiniteNumber(map.residual, 'residual'), noise: requireFiniteNumber(map.noise, 'noise'), starry }; }); }
   finally { await rm(directory, { recursive: true, force: true }); }
 }
 

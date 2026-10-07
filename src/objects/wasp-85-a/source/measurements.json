@@ -42,6 +42,9 @@
   "projectedRotationSpeedSource": "SIMBAD, BD+07 2474A: projected rotation speed 2.72 km/s, the measurement SIMBAD prefers (2023A&A...676A..90R)",
   "spinInclinationDegrees": 60.3,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.935 solar radii): sin i = v sin i × P / (2πR) = 0.868. Not a measurement of the axis: the three numbers come from different papers.",
+  "rotationPeriodMeasuredDays": 13.4,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 1 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 13.4 d, the light swinging by 0.67% as the star turns (the light repeats every 6.7 d, half the catalogued rotation period, and the star is taken to turn once in two of them)",
+  "rotationLightSwingPercent": 0.67,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

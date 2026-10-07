@@ -15,7 +15,7 @@ import { readStar } from '../corona/corona.mts';
 import { isConventionOnly, parseSurfaceMaps, surfaceMapFiles, type MapKind, type SurfaceMap, type SurfaceMapChoice, type SurfaceMapEntry } from './surface-maps.mts';
 
 type Json = Record<string, unknown>;
-export interface RouteContext { readonly root: string; readonly progress: (line: string) => void }
+export interface RouteContext { readonly root: string; readonly progress: (line: string) => void; /** Runs one `node` command of the bake in `root` and says whether it succeeded. Left out, the command is spawned; a test passes its own. */ readonly run?: (args: readonly string[]) => Promise<boolean> }
 export interface SurfaceMapResult { readonly host: string; readonly maps: number; readonly files: number; /** The page's axis was a convention and now carries the maps' tilt. */ readonly tilted?: boolean;
   /** The page opens on another dataset, or on another map in its default dataset: its arrival photograph is of the old one. */ readonly redrawn?: boolean; readonly report?: string; readonly failed?: string }
 export interface SkyPlace { readonly rightAscensionDegrees: number; readonly declinationDegrees: number }
@@ -79,12 +79,12 @@ export const BAKE_GROUP = 40;
  * between (markers, arrival billboard, world context, systems, catalogues) show that view. A star whose axis was tilted, or
  * whose page opens on a new picture, has a new default view: its stored arrival picture is removed before the bake and the
  * rest of its chain is left to run once the site is restarted, because the running site holds the reader text it started with. */
-export async function bakeSurfaceMaps(results: readonly SurfaceMapResult[], { root, progress }: RouteContext): Promise<boolean> {
+export async function bakeSurfaceMaps(results: readonly SurfaceMapResult[], { root, progress, run: runner }: RouteContext): Promise<boolean> {
   const hosts = [...new Set(results.map(result => result.host))], flagged = new Set(results.filter(result => result.tilted || result.redrawn).map(result => result.host));
   const groups = (ids: readonly string[]) => Array.from({ length: Math.ceil(ids.length / BAKE_GROUP) }, (_, i) => ids.slice(i * BAKE_GROUP, (i + 1) * BAKE_GROUP));
-  const run = async (args: readonly string[]) => { progress(`== ${args.join(' ')}`);
-    const code = await new Promise<number | null>(done => { spawn('node', args, { cwd: root, stdio: ['ignore', 2, 2] }).on('error', () => done(null)).on('close', done); });
-    if (code !== 0) progress(`FAILED: node ${args.join(' ')}`); return code === 0; };
+  const spawned = async (args: readonly string[]) => await new Promise<number | null>(done => { spawn('node', args, { cwd: root, stdio: ['ignore', 2, 2] }).on('error', () => done(null)).on('close', done); }) === 0;
+  const run = async (args: readonly string[]) => { progress(`== ${args.join(' ')}`); const done = await (runner ?? spawned)(args);
+    if (!done) progress(`FAILED: node ${args.join(' ')}`); return done; };
   // A star's bake reads every input its manifest declares, and its inventory keeps only the baked files the checkout holds:
   // the star's baked files and the downloads a checkout lacks are restored first.
   for (const group of groups(hosts)) for (const args of [['packages/bake/cli/setup-assets.mts', ...group.map(host => `--object=${host}`)], ['packages/bake/cli/restore-source-inputs.mts', ...group.map(host => `--object=${host}`)]]) if (!await run(args)) return false;
@@ -96,8 +96,11 @@ export async function bakeSurfaceMaps(results: readonly SurfaceMapResult[], { ro
   const opensOn = async (host: string) => requireRecord(requireRecord(await readJson(resolve(root, 'src/objects', host, 'source/content/object.json'), host), host).datasets, `${host} datasets`).defaultDataset;
   const changed: string[] = []; for (const host of hosts) { const taken = await photographed(host); if (flagged.has(host) || taken !== await opensOn(host)) changed.push(host); }
   const kept = hosts.filter(host => !changed.includes(host));
-  for (const host of changed) { await rm(resolve(root, 'src/objects', host, 'prepared/arrival-billboard.json'), { force: true }); await rm(resolve(root, 'site/public/scenes', host, `${host}-billboard.webp`), { force: true }); }
-  for (const group of groups(hosts)) if (!await run(['packages/bake/cli/prepare-object.mts', ...group, '--to', 'text'])) return false;
+  // A group's pictures go just before its own bake. The bake's first step stops while another star's inventory lists a
+  // prepared file the checkout lacks (check-preparation-inputs.mts), and a star baked through its page text no longer
+  // lists its picture: with every star's removed at once, a second group stopped the first.
+  for (const group of groups(hosts)) { for (const host of group.filter(one => changed.includes(one))) { await rm(resolve(root, 'src/objects', host, 'prepared/arrival-billboard.json'), { force: true }); await rm(resolve(root, 'site/public/scenes', host, `${host}-billboard.webp`), { force: true }); }
+    if (!await run(['packages/bake/cli/prepare-object.mts', ...group, '--to', 'text'])) return false; }
   // The prepare step clears a star's world billboard and the skipped billboard step would write it again: it is made here
   // from the arrival photograph the star keeps.
   for (const host of kept) await writeWorldBillboard(root, host);

@@ -20,6 +20,9 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of ROXs 42 B (pscomppars): log10 of the luminosity in solar units -0.79156, from Gaia DR2 (https://ui.adsabs.harvard.edu/abs/2018A&A...616A...1G/abstract)",
   "ageGyr": 0.003,
   "ageSource": "NASA Exoplanet Archive, composite parameters of ROXs 42 B (pscomppars): age 0.0027 Gyr, from Currie et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014ApJ...780L..30C/abstract)",
+  "rotationPeriodMeasuredDays": 0.83,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curve of sector 91 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 0.83 d, the light swinging by 13% as the star turns",
+  "rotationLightSwingPercent": 12.99,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published model radius. The star's disc is not resolved; its color is a blackbody at the published temperature."

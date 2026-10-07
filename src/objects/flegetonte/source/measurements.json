@@ -52,6 +52,9 @@
   ],
   "projectedRotationSpeedKmS": 3.23,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 102195 (pscomppars): projected rotation speed 3.23 km/s, from Ge et al. 2006 (https://ui.adsabs.harvard.edu/abs/2006ApJ...648..683G/abstract)",
+  "rotationPeriodMeasuredDays": 11.35,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 1 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 11.35 d, the light swinging by 1.2% as the star turns",
+  "rotationLightSwingPercent": 1.23,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

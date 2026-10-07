@@ -12,8 +12,11 @@ computed here.
   tools.py spinspotter <job.json>          a star's TESS 2-minute light curves through SpinSpotter (Holcomb et al.
                                            2022), as its authors call it: each sector and the stitched light curve
 
-  tools.py map <job.json>                  the brightness map that reproduces a rotational light curve (starry); run
-                                           with the starry toolchain's interpreter
+  tools.py input-catalogue <job.json>      what the TESS Input Catalog says of a light curve's target, as the
+                                           file's own header carries it and lightkurve reads it
+
+  tools.py maps <job.json>                 the brightness map that reproduces each of a star's rotational light curves
+                                           (starry), all in one process; run with the starry toolchain's interpreter
 
 It prints one JSON document.
 """
@@ -24,15 +27,37 @@ import warnings
 
 def mission_light_curve(job):
     """The light curve a mission's pipeline publishes for a star, as it is: lightkurve reads the long-cadence file's
-    PDC-MAP flux with its default quality mask, and the campaign from the file's header."""
+    PDC-MAP flux with its default quality mask, and the campaign from the file's header, with what the header says of
+    the light in the aperture (`aperture_light`)."""
     warnings.filterwarnings('ignore')
     import numpy as np
     import lightkurve as lk
 
     curve = lk.read(job['file'], flux_column='pdcsap_flux').remove_nans()
     flux = np.asarray(curve.flux.value, dtype=float)
-    return {'frames': int(len(flux)), 'window': int(curve.campaign), 'pipeline': str(curve.meta.get('PROCVER', '')),
+    return {'frames': int(len(flux)), 'window': int(curve.campaign), 'pipeline': str(curve.meta.get('PROCVER', '')), **aperture_light(curve),
             'time': [round(float(value), 5) for value in np.asarray(curve.time.value, dtype=float)], 'flux': [round(float(value), 6) for value in flux / np.mean(flux)]}
+
+
+def aperture_light(curve):
+    """What the pipeline's own header says of the light in a light curve's aperture, as lightkurve reads it: CROWDSAP,
+    the share of the aperture's light that is the target's ("ratio of target flux to total flux in op. ap."), and
+    FLFRCSAP, the share of the target's light the aperture holds (TESS Science Data Products Description Document,
+    EXP-TESS-ARC-ICD-TM-0014 Rev F, Table 14). A value the header leaves blank is null: astropy hands a blank value
+    of this header over as its own `Undefined`, which is no number. Nothing is worked out."""
+    number = lambda value: float(value) if isinstance(value, (int, float)) and not isinstance(value, bool) else None
+    return {'targetShare': number(curve.meta.get('CROWDSAP')), 'targetHeld': number(curve.meta.get('FLFRCSAP'))}
+
+
+def input_catalogue(job):
+    """The target's temperature, surface gravity and TESS Input Catalog number, and the catalog's version, from the
+    primary header of a TESS 2-minute light curve (TEFF, LOGG, TICID, TICVER), as lightkurve reads the file. A value the
+    header leaves blank is null. Nothing is worked out."""
+    warnings.filterwarnings('ignore')
+    import lightkurve as lk
+
+    meta = lk.read(job['file']).meta
+    return {'tic': meta.get('TICID'), 'version': meta.get('TICVER'), 'effectiveTemperatureK': meta.get('TEFF'), 'surfaceGravityLogg': meta.get('LOGG')}
 
 
 def rotation(job):
@@ -79,7 +104,8 @@ def spinspotter(job):
     stitched one, with the package's own cleaning (transits masked when given, bins of the job's size, normalized
     about zero). What is returned of each is what the paper's criteria read: the period, and the height, width and fit
     of the autocorrelation's peaks; and the midpoint and distance of the light's 5th and 95th percentiles (the paper's
-    X_var and Y_var). lightkurve reads each file's PDC-MAP flux. Deciding is methods.mts's."""
+    X_var and Y_var). lightkurve reads each file's PDC-MAP flux, and what its header says of the light in the aperture
+    (`aperture_light`), which is kept and decides nothing. Deciding is methods.mts's."""
     warnings.filterwarnings('ignore')
     import numpy as np
     import lightkurve as lk
@@ -100,7 +126,7 @@ def spinspotter(job):
                 'time': [round(float(value) - job['timeZero'], 5) for value in time[seen]], 'flux': [round(float(value) + 1, 6) for value in light[seen]]}
 
     curves = [lk.read(path) for path in job['files']]
-    sectors = [{'sector': int(curve.meta['SECTOR']), 'pipeline': str(curve.meta.get('PROCVER', '')), 'frames': int(len(curve)), **measured(*ss.process_LightCurve(curve, bs=size, transit=transit))} for curve in curves]
+    sectors = [{'sector': int(curve.meta['SECTOR']), 'pipeline': str(curve.meta.get('PROCVER', '')), 'frames': int(len(curve)), **aperture_light(curve), **measured(*ss.process_LightCurve(curve, bs=size, transit=transit))} for curve in curves]
     stitched = None
     if len(curves) > 1:
         # The authors' own stitching (each sector normalized by its median), with transits taken out of each sector first as their cleaning does.
@@ -110,38 +136,53 @@ def spinspotter(job):
     return {'spinSpotter': version('spinspotter'), 'sectors': sectors, 'stitched': stitched}
 
 
-def brightness_map(job):
-    """starry's own inversion of a rotational light curve (Luger et al. 2019): the spherical-harmonic map, seen at the
-    star's tilt and turning with its period, that reproduces the light curve, with starry's Gaussian prior on the map."""
+def brightness_maps(job):
+    """starry's own inversion of a rotational light curve (Luger et al. 2019), once for each light curve of the job: the
+    spherical-harmonic map, seen at the star's tilt and turning with its period, that reproduces the light curve, with
+    starry's Gaussian prior on the map. One process makes all of a star's maps: starry is imported and compiled once.
+    A map's values are its brightness over its mean, as starry gives them: how many decimals a table keeps is map.mts's."""
     import numpy as np
     import starry
     starry.config.lazy = False
     starry.config.quiet = True
-    time, flux, period = np.array(job['time']), np.array(job['flux']), job['periodDays']
-    theta = 360.0 * (time - time[0]) / period
-    star = starry.Map(ydeg=job['degree'], inc=job['inclinationDegrees'])
-    noise = float(np.std(np.diff(flux)) / np.sqrt(2))
-    star.set_data(flux, C=noise ** 2)
-    mean = np.zeros(star.Ny)
-    mean[0] = 1.0
-    width = np.full(star.Ny, job['priorWidth'])
-    width[0] = job['priorWidth'] * 10
-    star.set_prior(mu=mean, L=width)
-    solution, _ = star.solve(theta=theta)
-    star.amp = solution[0]
-    star[1:, :] = solution[1:] / solution[0]
-    model = star.flux(theta=theta)
+    period = job['periodDays']
     longitudes, latitudes = np.array(job['longitudesDegrees']), np.array(job['latitudesDegrees'])
     lon, lat = np.meshgrid(longitudes, latitudes)
-    values = np.array(star.intensity(lat=lat.ravel(), lon=lon.ravel())).reshape(lat.shape)
-    values = values / np.mean(values)
-    return {'starry': starry.__version__, 'noise': noise, 'residual': float(np.std(flux - model)), 'values': [[round(float(value), 5) for value in row] for row in values]}
+    made = []
+    for curve in job['curves']:
+        time, flux = np.array(curve['time']), np.array(curve['flux'])
+        theta = 360.0 * (time - time[0]) / period
+        star = starry.Map(ydeg=job['degree'], inc=job['inclinationDegrees'])
+        noise = float(np.std(np.diff(flux)) / np.sqrt(2))
+        star.set_data(flux, C=noise ** 2)
+        mean = np.zeros(star.Ny)
+        mean[0] = 1.0
+        width = np.full(star.Ny, job['priorWidth'])
+        width[0] = job['priorWidth'] * 10
+        star.set_prior(mu=mean, L=width)
+        solution, _ = star.solve(theta=theta)
+        star.amp = solution[0]
+        star[1:, :] = solution[1:] / solution[0]
+        model = star.flux(theta=theta)
+        values = np.array(star.intensity(lat=lat.ravel(), lon=lon.ravel())).reshape(lat.shape)
+        values = values / np.mean(values)
+        made.append({'noise': noise, 'residual': float(np.std(flux - model)), 'values': [[float(value) for value in row] for row in values]})
+    return {'starry': starry.__version__, 'maps': made}
+
+
+def brightness_map(job):
+    """One light curve's map, as `brightness_maps` makes it."""
+    answer = brightness_maps({**job, 'curves': [{'time': job['time'], 'flux': job['flux']}]})
+    return {'starry': answer['starry'], **answer['maps'][0]}
 
 
 if __name__ == '__main__':
     if len(sys.argv) == 3 and sys.argv[1] == 'mission-light-curve':
         with open(sys.argv[2]) as handle:
             result = mission_light_curve(json.load(handle))
+    elif len(sys.argv) == 3 and sys.argv[1] == 'input-catalogue':
+        with open(sys.argv[2]) as handle:
+            result = input_catalogue(json.load(handle))
     elif len(sys.argv) == 3 and sys.argv[1] == 'rotation':
         with open(sys.argv[2]) as handle:
             result = rotation(json.load(handle))
@@ -151,6 +192,9 @@ if __name__ == '__main__':
     elif len(sys.argv) == 3 and sys.argv[1] == 'map':
         with open(sys.argv[2]) as handle:
             result = brightness_map(json.load(handle))
+    elif len(sys.argv) == 3 and sys.argv[1] == 'maps':
+        with open(sys.argv[2]) as handle:
+            result = brightness_maps(json.load(handle))
     else:
         raise SystemExit(__doc__)
     json.dump(result, sys.stdout)

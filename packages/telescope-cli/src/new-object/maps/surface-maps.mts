@@ -83,6 +83,11 @@ export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: S
   const newSurfaces: Json[] = [], newInputs: Json[] = [], newControls: Json[] = [];
   const directoryOf = (map: M) => kind.directoryOf?.(map) ?? kind.directory, archiveOf = (map: M) => kind.archiveOf?.(map) ?? kind.archiveUrl, mine = (consumer: unknown) => consumer === kind.consumer || (typeof consumer === 'string' && (kind.consumers ?? []).includes(consumer));
   const consumerOf = (map: M) => kind.consumerOf?.(map) ?? kind.consumer, inputIdOf = (map: M) => `${star.id}-${kind.inputTagOf?.(map) ?? kind.inputTag}-${map.choice.id}`;
+  // A step group's id is one of the page's names, which a dataset's id or another group may hold already (a published map
+  // filed as `brightness`): on such a page the kind's steps take the id with `-maps` after it, and on any other its own.
+  const formerIds = new Set(surfaces.filter(surface => isRecord(surface.science) && mine(surface.science.consumer)).map(surface => surface.id));
+  const held = new Set(controls.filter(control => !ids.has(requireString(control.id, 'control id')) && !formerIds.has(control.id)).flatMap(control => [control.id, isRecord(control.step) ? control.step.group : undefined]));
+  let stepGroup = kind.stepGroup; while (held.has(stepGroup)) stepGroup = `${stepGroup}-maps`;
   for (const map of maps) { const { choice } = map, path = `${directoryOf(map)}/${choice.program}.dat`, archive = archiveOf(map), inputId = inputIdOf(map), tilt = Math.round(map.inclinationDegrees), outlined = tilt <= 85 && (kind.outlines?.(map) ?? true);
     const words = kind.words(map, { star, count, epochs, tilt, outlined });
     files.set(`${at}/source/${path}`, map.table);
@@ -98,7 +103,7 @@ export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: S
       description: words.description,
       title: words.surfaceTitle, sourceUrl: archive } });
     newControls.push({ id: choice.id, label: kind.controlLabel, qualification: words.qualification, thumbnail: `${star.id}-dataset-${choice.id}.webp`, surface: `${star.id}-surface-${choice.id}@2x.webp`, poles: `${star.id}-poles-${choice.id}@2x.webp`,
-      source: { id: inputId, path: '../manifest.json', url: archive }, falseColor: true, ...(count > 1 ? { step: { group: kind.stepGroup, label: choice.label } } : {}),
+      source: { id: inputId, path: '../manifest.json', url: archive }, falseColor: true, ...(count > 1 ? { step: { group: stepGroup, label: choice.label } } : {}),
       legend: { kind: 'scale', title: kind.legendTitle, labels, recipe: { palette: kind.palette.map(color => [...color]), labels }, meta: kind.units, sourceUrl: archive },
       notes: words.notes,
       legendNote: words.legendNote });

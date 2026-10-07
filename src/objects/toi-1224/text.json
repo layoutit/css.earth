@@ -30,6 +30,56 @@
       "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
       "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "brightness-sector-1": {
+      "title": "Brightness map, Sector 1",
+      "detail": "Sector 1, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-13": {
+      "title": "Brightness map, Sector 13",
+      "detail": "Sector 13, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-27": {
+      "title": "Brightness map, Sector 27",
+      "detail": "Sector 27, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-28": {
+      "title": "Brightness map, Sector 28",
+      "detail": "Sector 28, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-66": {
+      "title": "Brightness map, Sector 66",
+      "detail": "Sector 66, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-67": {
+      "title": "Brightness map, Sector 67",
+      "detail": "Sector 67, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-68": {
+      "title": "Brightness map, Sector 68",
+      "detail": "Sector 68, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-93": {
+      "title": "Brightness map, Sector 93",
+      "detail": "Sector 93, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-95": {
+      "title": "Brightness map, Sector 95",
+      "detail": "Sector 95, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, Jul to Aug 2025",
+      "detail": "TESS sector 95",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

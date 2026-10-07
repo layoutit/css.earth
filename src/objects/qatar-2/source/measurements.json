@@ -40,6 +40,9 @@
   ],
   "projectedRotationSpeedKmS": 3.28,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of Qatar-2 (pscomppars): projected rotation speed 3.28 km/s, from Mancini et al. 2014 (https://ui.adsabs.harvard.edu/abs/2014MNRAS.443.2391M/abstract)",
+  "rotationPeriodMeasuredDays": 18.1,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 6 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 18.1 d, the light swinging by 1.5% as the star turns",
+  "rotationLightSwingPercent": 1.51,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

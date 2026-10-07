@@ -22,6 +22,9 @@
   "luminositySource": "NASA Exoplanet Archive, composite parameters of TOI-5126 (pscomppars): log10 of the luminosity in solar units 0.29885, from Fairnington et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract)",
   "ageGyr": 0.8,
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5126 (pscomppars): age 0.8 Gyr, from Fairnington et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.8768F/abstract)",
+  "rotationPeriodMeasuredDays": 4.22,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 45, 46, 48 and 72 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 4.22 d, the light swinging by 0.83% as the star turns",
+  "rotationLightSwingPercent": 0.83,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

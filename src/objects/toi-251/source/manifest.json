@@ -202,6 +202,231 @@
         "kind": "local",
         "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
+    },
+    {
+      "id": "toi-251-tess-map-brightness-sector-2",
+      "path": "science/tess/pdcsap/toi-251-s0002.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of TOI-251 from its light in TESS sector 2",
+      "title": "Brightness map of TOI-251 from its light curve in TESS sector 2, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 2, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "toi-251-tess-map-brightness-sector-29",
+      "path": "science/tess/pdcsap/toi-251-s0029.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of TOI-251 from its light in TESS sector 29",
+      "title": "Brightness map of TOI-251 from its light curve in TESS sector 29, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 29, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "toi-251-tess-map-brightness-sector-69",
+      "path": "science/tess/pdcsap/toi-251-s0069.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of TOI-251 from its light in TESS sector 69",
+      "title": "Brightness map of TOI-251 from its light curve in TESS sector 69, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 69, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "toi-251-tess-map-brightness-sector-96",
+      "path": "science/tess/pdcsap/toi-251-s0096.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of TOI-251 from its light in TESS sector 96",
+      "title": "Brightness map of TOI-251 from its light curve in TESS sector 96, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 96, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "toi-251-tess-map-brightness-sector-106",
+      "path": "science/tess/pdcsap/toi-251-s0106.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of TOI-251 from its light in TESS sector 106",
+      "title": "Brightness map of TOI-251 from its light curve in TESS sector 106, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 106, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
     }
   ],
   "documents": [

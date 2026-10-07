@@ -4,14 +4,50 @@
     {
       "location": "public",
       "filename": "hip-12545-arrival.webp",
-      "bytes": 29248,
-      "sha256": "25bbc2128fb844ea6915c1f96592b89e048e1bd50db5e4ec91474b7ef37f185e"
+      "bytes": 28444,
+      "sha256": "046c2c341a2a54c9ed24b79780b5986d6339cd395f25b23146367f35b7e6d1cf"
     },
     {
       "location": "public",
       "filename": "hip-12545-billboard.webp",
-      "bytes": 5234,
-      "sha256": "df417a4ed58743e28f24bcf69aa7d605fe59a708ed7ba8106d7e9d3b197b0cd5"
+      "bytes": 4918,
+      "sha256": "6b3e52dc82a79b21622a50b8240333c9d156f008a6f0a3b592608eb672f417be"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-dataset-brightness-sector-31.webp",
+      "bytes": 150,
+      "sha256": "b8d6204688cfe91f53a2717afc327e6ee16297395e87c9b2b867d3f3c9ddfe86"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-dataset-brightness-sector-4.webp",
+      "bytes": 166,
+      "sha256": "ce80bb9f7a4557f8804c9806349ba2638f4456c562e4612fa81fd8fd46ea7a97"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-dataset-brightness-sector-42.webp",
+      "bytes": 214,
+      "sha256": "7f00b01d83162771b724e612d7839d1df24b1f48896114b1bc27b6fb4a8744a0"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-dataset-brightness-sector-70.webp",
+      "bytes": 210,
+      "sha256": "6e2c73afca2dc67c6e059082116e5d0048d7f56ea812b0dd0f7f045d6a099ad2"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-dataset-brightness-sector-71.webp",
+      "bytes": 202,
+      "sha256": "d28382e0fe33706928e3b3f203514997c518d2a3514c9195200eee70397d0b1c"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-dataset-color-brightness.webp",
+      "bytes": 200,
+      "sha256": "89c7875c171408d68d870026ad2eb99a5acfc54864fa4753cb094345941123dd"
     },
     {
       "location": "public",
@@ -27,9 +63,51 @@
     },
     {
       "location": "public",
+      "filename": "hip-12545-limb-color-brightness@2x.webp",
+      "bytes": 125360,
+      "sha256": "b4acedd3e2383f01d1af445431a2deb7fbbbe0538783ed7ade382d2615de33d4"
+    },
+    {
+      "location": "public",
       "filename": "hip-12545-limb-color@2x.webp",
       "bytes": 101678,
       "sha256": "9f12ae337c161a4fedef497acac2adb161a90c9aaad3b83e97506250bc43bb27"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-poles-brightness-sector-31@2x.webp",
+      "bytes": 6902,
+      "sha256": "ceec0ef26e4cb21924065cf582718db8be3d5652e0e2dd79eeff0bc2bf932396"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-poles-brightness-sector-4@2x.webp",
+      "bytes": 6692,
+      "sha256": "e1e3fa5e574778151d284c610c948ebeeaa6d69d63a3eba70abfb96e5f2a6e97"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-poles-brightness-sector-42@2x.webp",
+      "bytes": 6866,
+      "sha256": "305a8b341858b0400793d19378c14eff71b2ee342190b34b06e839143c493bda"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-poles-brightness-sector-70@2x.webp",
+      "bytes": 8604,
+      "sha256": "6d3100eb817eb709cd9fc55d2297431051e909c7b5e219e3eb34566b5a2dab4b"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-poles-brightness-sector-71@2x.webp",
+      "bytes": 8784,
+      "sha256": "d9ad3f594b0dcf415cf61ad76a635bad0fee4b6406cd85e633c6aeaf7fc7b713"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-poles-color-brightness@2x.webp",
+      "bytes": 10678,
+      "sha256": "5be545ac0ec074eb542080b22871ad95bf338bfaeee1daa59cc0704285337743"
     },
     {
       "location": "public",
@@ -42,6 +120,42 @@
       "filename": "hip-12545-poles-radial-field-2012-09@2x.webp",
       "bytes": 35484,
       "sha256": "0fee7098fc8a19b012cefe179e1b92cb699a480af979c4cbf4386681ac564d1c"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-surface-brightness-sector-31@2x.webp",
+      "bytes": 11288,
+      "sha256": "931e7ff09cc328de2017c142edb8e0021ff5ab0431179e8165b37a9cbe1e1646"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-surface-brightness-sector-4@2x.webp",
+      "bytes": 12068,
+      "sha256": "6d95fc223ed76a0cb170cef57540c8e5da6a1b55c42835ec06210a55bb06bc54"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-surface-brightness-sector-42@2x.webp",
+      "bytes": 15918,
+      "sha256": "41b5d6934407811bd6d4df37be962f687ece718ee494298d5d7a5a00324615f7"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-surface-brightness-sector-70@2x.webp",
+      "bytes": 15056,
+      "sha256": "dd6963df8cc9e064dcfe63281a7f8782c9dab9bb4896c5e0e87bbe7fc38a6c0a"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-surface-brightness-sector-71@2x.webp",
+      "bytes": 14968,
+      "sha256": "ed35f8adc8960ce0fad67c6abe9f69261fbe877ecd71f6eb0c43000dcfb54a06"
+    },
+    {
+      "location": "public",
+      "filename": "hip-12545-surface-color-brightness@2x.webp",
+      "bytes": 16860,
+      "sha256": "eff1a7cc2816fc2255c7584d3c681e5564f0c95e1864f5f5a1af480a0360eda1"
     },
     {
       "location": "public",
@@ -58,14 +172,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 374,
-      "sha256": "e2245aacf23c3c3853edb091ae2425f64503110a0e163aa5cd981825c202ea9e"
+      "bytes": 385,
+      "sha256": "0df09de81b2a8a9a56d21ea91798a1d235d46f385645a5351b07d3af18fe13df"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1915,
-      "sha256": "c95b35141846698001ebf9f27a6d1d300101d83c3867a9975202ff46e7886bc3"
+      "bytes": 3352,
+      "sha256": "81acb882eca3cda4e092cff944367733854fa68c38895f718460ad042a47e960"
     },
     {
       "location": "prepared",
@@ -82,20 +196,56 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1923,
-      "sha256": "a9bde926c536109c4009cf7e01da9188bd6c743edaa5d059b72045ac7f871319"
+      "bytes": 10351,
+      "sha256": "34c45a3d610986886a3b8848a425771e689c896164e0522c4051470f91a6e6f4"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 3218,
-      "sha256": "e2bea182a279797f0b40d78c09a79f13693bbeef06c03959942ba57fbb0d043c"
+      "bytes": 15326,
+      "sha256": "507f4b6de067d13467dcb5bd5b99ef0a43e5a19cb61ec68e2f07ae1c2179ebb1"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 219,
-      "sha256": "0ca9b0bc8fa5114372707be9185d0ea4fca289bb645c8d27b680e62671c57c8e"
+      "bytes": 917,
+      "sha256": "161c9ee52814ac024a2067df453ac6bec4ebf049711e653d9cc8b94a5d1af0e2"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-31.webp",
+      "bytes": 934,
+      "sha256": "ede6a20a62d092a69ce9040d4b80caa6c566b5714684f25a785177d5a21fe27d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-4.webp",
+      "bytes": 1012,
+      "sha256": "b9ad2a047e06b534c7a12f706abac4f86e3447b67b2e4da6bbd7cacc08177f89"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-42.webp",
+      "bytes": 1406,
+      "sha256": "f2adb286546122bcbae16d0ad22fccea3d165f7723df0a7e0e39b2eab248b6d4"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-70.webp",
+      "bytes": 1362,
+      "sha256": "73cd04b9770b63f6751090e02bf6b30a4c729df0ed39e0d0d45dedecdd842375"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-71.webp",
+      "bytes": 1350,
+      "sha256": "61a7b329e85b3ef69a35784252e8ae939f76ae049a933784ccb26ad2c75a8e9d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1256,
+      "sha256": "06cc2e10800ceb49076ed16a1ee9b71a811a688fde90c9838cd02c86ced786ab"
     },
     {
       "location": "prepared",
@@ -112,8 +262,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 252205,
-      "sha256": "eaf4b09f8f57b90291d049aa9c31f035b572e5fd824d8f7acafbc1831638753f"
+      "bytes": 267827,
+      "sha256": "4546cd88e028b574eb4766953f4941c04860b7ed0cef21fb57ef4629bb2faa86"
     },
     {
       "location": "prepared",
@@ -136,8 +286,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1105,
-      "sha256": "6c0e8f31c07579ed6c1e1bdbd2aa95140f2f5ea0d6a2d869400de5c1764a9d56"
+      "bytes": 2407,
+      "sha256": "1a2c4a4225b9204f34d9184041d49d5d9c4bdea3f39770f1a37534d65e1c8c56"
     },
     {
       "location": "prepared",

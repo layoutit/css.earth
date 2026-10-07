@@ -42,6 +42,9 @@
   ],
   "projectedRotationSpeedKmS": 10.19,
   "projectedRotationSpeedSource": "SIMBAD, BD-03 4778: projected rotation speed 10.19 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "rotationPeriodMeasuredDays": 4.65,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curve of sector 81 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 4.65 d, the light swinging by 7.2% as the star turns",
+  "rotationLightSwingPercent": 7.17,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

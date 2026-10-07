@@ -4,14 +4,68 @@
     {
       "location": "public",
       "filename": "rho-geminorum-arrival.webp",
-      "bytes": 27000,
-      "sha256": "7f275b290a87bbf9b80a7c78f3eecba7840c08f00c510a9666883084ac4e1f25"
+      "bytes": 28330,
+      "sha256": "a1fed9546359132e3f88bb2212355b797981583dec4451196f976c0c8bf40e86"
     },
     {
       "location": "public",
       "filename": "rho-geminorum-billboard.webp",
-      "bytes": 4838,
-      "sha256": "5923f4945434b04ae9ee824f05d08219d5dd7110c0993dfe2f74f20f9026d69f"
+      "bytes": 5020,
+      "sha256": "71da3f1f35377fba6cb123d4978fa1e663e404e7c97a5201e5d967dcc4d21e0d"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-dataset-brightness-sector-20.webp",
+      "bytes": 210,
+      "sha256": "83e3e845e7153889a451d333896d90eedc58a957246303e4c2104a97024c023e"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-dataset-brightness-sector-44.webp",
+      "bytes": 236,
+      "sha256": "388ffb2ebb95527d499286cd3f3b6e66dc239be32e6ee5b453b69fdc28f5bdaf"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-dataset-brightness-sector-45.webp",
+      "bytes": 230,
+      "sha256": "a8770dd142b669bca85e1aa7c07f1b7f79e43b022bfa36a86d143a16720707c6"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-dataset-brightness-sector-46.webp",
+      "bytes": 214,
+      "sha256": "de4af1308c9e89ac588862a91099019d46a00b1cb240e05b058064f86ddef173"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-dataset-brightness-sector-47.webp",
+      "bytes": 234,
+      "sha256": "171e3a4377dc97cfe14c4fd2b7200087eb91e8bd996c110aca643cc7b140fbf5"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-dataset-brightness-sector-60.webp",
+      "bytes": 198,
+      "sha256": "508c2747404987ed66acfee2552791c7d339bd61dcc5bc1a286e862b999f998c"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-dataset-brightness-sector-71.webp",
+      "bytes": 198,
+      "sha256": "8819da11b368486d82ecbf70eef5aacb3b0983fe3b2cab031c0c8acb9c77b0b5"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-dataset-brightness-sector-72.webp",
+      "bytes": 188,
+      "sha256": "eefd892c17ca062b7de9ae7e15f7903031b7f19835a356b9df5d4a5a8bab82b8"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-dataset-color-brightness.webp",
+      "bytes": 236,
+      "sha256": "17e623f0fde8b840325e1d8d80a16e581ae65972d9bcf4067b9c2496424124b5"
     },
     {
       "location": "public",
@@ -21,15 +75,129 @@
     },
     {
       "location": "public",
+      "filename": "rho-geminorum-limb-color-brightness@2x.webp",
+      "bytes": 116488,
+      "sha256": "deec66e8fe51d46fb2a8bc887f7caf28ab549a4d00118cf6c721a198c8797200"
+    },
+    {
+      "location": "public",
       "filename": "rho-geminorum-limb-color@2x.webp",
       "bytes": 95346,
       "sha256": "5703b3a1f3caf4c285abf692ec191bc60e1d723ab7b77a65dc2819c0093ece40"
     },
     {
       "location": "public",
+      "filename": "rho-geminorum-poles-brightness-sector-20@2x.webp",
+      "bytes": 7760,
+      "sha256": "3dc9da575faeedd55d486df975a2a9df4843c841bc4728d72a38f5af3a08a7f7"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-poles-brightness-sector-44@2x.webp",
+      "bytes": 9354,
+      "sha256": "67498a9bd653a1a40df439ee41029dec5f343fd7b8a804f9adbb08f6cd60bd60"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-poles-brightness-sector-45@2x.webp",
+      "bytes": 9228,
+      "sha256": "072732f02ed00db215de0a9f2ee8770204266b6b97b9ee26d604b6cc56e20143"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-poles-brightness-sector-46@2x.webp",
+      "bytes": 9208,
+      "sha256": "7f92d851e0fadcf4acc3eff9b08ef5d40815a44b5738888054f197706cc740c6"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-poles-brightness-sector-47@2x.webp",
+      "bytes": 9036,
+      "sha256": "0d9e06431ed7629d8cd5e1cbf685c188243f6f53866785463725e45f191d5608"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-poles-brightness-sector-60@2x.webp",
+      "bytes": 8104,
+      "sha256": "d7f4241714e58157baeb561bf44d093f8a820fe8da9efee37366edd42f707ba6"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-poles-brightness-sector-71@2x.webp",
+      "bytes": 8970,
+      "sha256": "53b684cd447b989f93e50ec3b103e6700d000e03ee0aea918421d96eb9b31ef4"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-poles-brightness-sector-72@2x.webp",
+      "bytes": 9028,
+      "sha256": "164a7f67abdc4a32ef0807c0e6692330aa2bd8889e060ea805a251b8e8e0ebd6"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-poles-color-brightness@2x.webp",
+      "bytes": 13370,
+      "sha256": "fccaf4bcc0bd44b14708de5eff9b49f8495006bafbc9a4cae45a3219dc4888bd"
+    },
+    {
+      "location": "public",
       "filename": "rho-geminorum-poles-color@2x.webp",
       "bytes": 1340,
       "sha256": "f1e3c85801b9e92f1d7cb110967ec12612a7ae6d5202b039108ccf10f3fa2146"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-surface-brightness-sector-20@2x.webp",
+      "bytes": 17680,
+      "sha256": "6232652f21c2fc686a66ad7272cbcb95dde6c2c06f77bf924488950d914c1aa6"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-surface-brightness-sector-44@2x.webp",
+      "bytes": 19378,
+      "sha256": "6d259c3cca75f04be32ec3490295237acd322695aaafc445e701b8e717d97db9"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-surface-brightness-sector-45@2x.webp",
+      "bytes": 18822,
+      "sha256": "5a1731723cbf4ee8295f61b03d1729c8d3612908bc20e2b17d23d0cbb7904f76"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-surface-brightness-sector-46@2x.webp",
+      "bytes": 18610,
+      "sha256": "94986181db1e96dd8fb14e93de5b975f6ee5e1e4da7c41affc05e8ef8fcfec96"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-surface-brightness-sector-47@2x.webp",
+      "bytes": 18236,
+      "sha256": "abbe00ca81d3c968681d0e88fe10110f119bbddcc2b43701d6e236b3685f6978"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-surface-brightness-sector-60@2x.webp",
+      "bytes": 13844,
+      "sha256": "ee3b5484f8f1e2a83fb4aba2dbb034cf8e9fea96ec90d8394b2a8bdc41e4bf65"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-surface-brightness-sector-71@2x.webp",
+      "bytes": 13624,
+      "sha256": "47a07de23d4a9b22d7d8ccee0cde871ecdb24cf68ed68b5c88d947bd8e588f64"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-surface-brightness-sector-72@2x.webp",
+      "bytes": 14286,
+      "sha256": "62980eff0c40430e5af91fbda64c6737638d69fdc470b7abee10725368cb1489"
+    },
+    {
+      "location": "public",
+      "filename": "rho-geminorum-surface-color-brightness@2x.webp",
+      "bytes": 20706,
+      "sha256": "c4bf6010aa4e63a0270a03da9d411b941d6874f869bd371c2d90b7f79189c82d"
     },
     {
       "location": "public",
@@ -40,14 +208,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 389,
-      "sha256": "8ea754c575957749238cc7541d8b22aa665e9947b233ddbc915d409ab1487bf5"
+      "bytes": 400,
+      "sha256": "af114b59aba0bfdb85464d8061fe9b6b6d6a5883ae00b713b1f00ae7f950076c"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1673,
-      "sha256": "f328b78255adb8d23d86968b1f9fd121ddf9fe39394d9d94bff043ff93df18a6"
+      "bytes": 3931,
+      "sha256": "3efef06bad33f8763fe14c3929ec926c15f5916703546a8fee191980981ae2b1"
     },
     {
       "location": "prepared",
@@ -64,20 +232,74 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 376,
-      "sha256": "7abd6a125990f2d208361b4f30f7414fa0d1fdad20cb45b387e5c06fd8dc1370"
+      "bytes": 13373,
+      "sha256": "51b2de7cbe7d6aef69c8149aee57400175ca54d4d4934e7d6476f1cc863fe5d5"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1052,
-      "sha256": "d45e8b162b71b8853191ee1d09b6e762fed0630f50748ccd8238f055668c1e6a"
+      "bytes": 19822,
+      "sha256": "3b4589cba757e0e9a8317ac2fd552fac52741864cc3d6ade2225f530a82811fe"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+      "bytes": 1155,
+      "sha256": "81048527bd5a92fc2fbfa93baf9b1dcfee2348d62eb21888bcd600f7849ce00a"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-20.webp",
+      "bytes": 1610,
+      "sha256": "5c6391ab3f148eda2cd675fc7e1ed6f3d2831721aae5ea6b74d8ddb1c2e52a9e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-44.webp",
+      "bytes": 1872,
+      "sha256": "3fed1552d943398dd623bc720a0c900499a294baa751790e0be64e8618c6c50e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-45.webp",
+      "bytes": 1810,
+      "sha256": "f9ebf1849edd4d66c5271b1765644fd30976d893bdb18545b5fe6b1f405dcc35"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-46.webp",
+      "bytes": 1726,
+      "sha256": "1535f4a810c1d652ac8e90e8d9af4870fc89b966d5d59b616fa803d3ef82177b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-47.webp",
+      "bytes": 1678,
+      "sha256": "fd17df95931737b5b2ab9c707523ba955cb13242643ff6dd7e462e1a66b7862c"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-60.webp",
+      "bytes": 1228,
+      "sha256": "de2d477087f93bf586c7b9c6ca43c26c83abb43f722b4759a1d277183eb23386"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-71.webp",
+      "bytes": 1160,
+      "sha256": "67173dffaf3658e7b09936abfccf3cf7d43069f7316662a18d08c57594d14723"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-72.webp",
+      "bytes": 1250,
+      "sha256": "07b4bb6e0e47e63df58d8b3fee08341ca4b93901514575d80f4b3c5a30ff9848"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1636,
+      "sha256": "7308294a3de9447eca04a9536a9afbe2b76f416b0caf4d3fc226c06e15565882"
     },
     {
       "location": "prepared",
@@ -88,8 +310,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 249636,
-      "sha256": "691d22ec124545d76380dc30fdf68ddd05902027c05f7af8928c1f4c98cb3137"
+      "bytes": 273647,
+      "sha256": "1bab38457e8fc1a0024eb99752f201e3576d67bb9c428892e71b2383739cb979"
     },
     {
       "location": "prepared",
@@ -112,8 +334,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1023,
-      "sha256": "9158336ecd9e76362eb46f5391887f0c24c579b91a53be92b3d707f8cafec83c"
+      "bytes": 2982,
+      "sha256": "38d4e4f7cabc9e261ac7e18114a7e354c99fe316893ff2b1e089e2dbfa92016f"
     },
     {
       "location": "prepared",

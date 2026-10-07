@@ -47,6 +47,266 @@
         },
         "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,995 K and log g 4.45 (u1 0.416, u2 0.286): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "brightness-sector-10",
+      "output": "toi-837-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-837-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/toi-837-s0010.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-10",
+        "label": "Sector 10",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/toi-837-s0010.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 2.99 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 10 (its PDC-MAP flux) (the light varies by 2.6%; the map's curve leaves a scatter of 0.21%, the light's own noise being 0.04%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 3.10 d from the autocorrelation, whose peaks have a height of 0.42, a width of 0.42 and a fit of 0.94, and in all 7 of the star's sectors together a period of 2.99 d from the autocorrelation, whose peaks have a height of 0.63, a width of 0.43 and a fit of 0.99; its criteria accept that as the star's rotation. The map is made at a tilt of 70°, worked out from the star's rotation speed, period and radius. Gaia DR3 lists 142 other stars within 63 arcseconds, with 23% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 10",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "brightness-sector-11",
+      "output": "toi-837-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-837-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/toi-837-s0011.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-11",
+        "label": "Sector 11",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/toi-837-s0011.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 2.99 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 11 (its PDC-MAP flux) (the light varies by 2.6%; the map's curve leaves a scatter of 0.22%, the light's own noise being 0.04%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 3.14 d from the autocorrelation, whose peaks have a height of 0.34, a width of 0.42 and a fit of 0.93, and in all 7 of the star's sectors together a period of 2.99 d from the autocorrelation, whose peaks have a height of 0.63, a width of 0.43 and a fit of 0.99; its criteria accept that as the star's rotation. The map is made at a tilt of 70°, worked out from the star's rotation speed, period and radius. Gaia DR3 lists 142 other stars within 63 arcseconds, with 23% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 11",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "brightness-sector-37",
+      "output": "toi-837-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-837-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/toi-837-s0037.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-37",
+        "label": "Sector 37",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/toi-837-s0037.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 2.99 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 37 (its PDC-MAP flux) (the light varies by 2.6%; the map's curve leaves a scatter of 0.18%, the light's own noise being 0.04%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 3.06 d from the autocorrelation, whose peaks have a height of 0.49, a width of 0.47 and a fit of 1.00, and in all 7 of the star's sectors together a period of 2.99 d from the autocorrelation, whose peaks have a height of 0.63, a width of 0.43 and a fit of 0.99; its criteria accept that as the star's rotation. The map is made at a tilt of 70°, worked out from the star's rotation speed, period and radius. Gaia DR3 lists 142 other stars within 63 arcseconds, with 23% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 37",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "brightness-sector-63",
+      "output": "toi-837-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-837-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/toi-837-s0063.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-63",
+        "label": "Sector 63",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/toi-837-s0063.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 2.99 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 63 (its PDC-MAP flux) (the light varies by 2.6%; the map's curve leaves a scatter of 0.26%, the light's own noise being 0.05%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 3.06 d from the autocorrelation, whose peaks have a height of 0.59, a width of 0.47 and a fit of 1.00, and in all 7 of the star's sectors together a period of 2.99 d from the autocorrelation, whose peaks have a height of 0.63, a width of 0.43 and a fit of 0.99; its criteria accept that as the star's rotation. The map is made at a tilt of 70°, worked out from the star's rotation speed, period and radius. Gaia DR3 lists 142 other stars within 63 arcseconds, with 23% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 63",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "brightness-sector-64",
+      "output": "toi-837-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-837-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/toi-837-s0064.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-64",
+        "label": "Sector 64",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/toi-837-s0064.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 2.99 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 64 (its PDC-MAP flux) (the light varies by 2.6%; the map's curve leaves a scatter of 0.24%, the light's own noise being 0.05%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 3.02 d from the autocorrelation, whose peaks have a height of 0.61, a width of 0.47 and a fit of 1.00, and in all 7 of the star's sectors together a period of 2.99 d from the autocorrelation, whose peaks have a height of 0.63, a width of 0.43 and a fit of 0.99; its criteria accept that as the star's rotation. The map is made at a tilt of 70°, worked out from the star's rotation speed, period and radius. Gaia DR3 lists 142 other stars within 63 arcseconds, with 23% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 64",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "brightness-sector-90",
+      "output": "toi-837-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-837-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/toi-837-s0090.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-90",
+        "label": "Sector 90",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/toi-837-s0090.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 2.99 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 90 (its PDC-MAP flux) (the light varies by 2.6%; the map's curve leaves a scatter of 0.28%, the light's own noise being 0.05%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 2.99 d from the autocorrelation, whose peaks have a height of 0.38, a width of 0.44 and a fit of 1.00, and in all 7 of the star's sectors together a period of 2.99 d from the autocorrelation, whose peaks have a height of 0.63, a width of 0.43 and a fit of 0.99; its criteria accept that as the star's rotation. The map is made at a tilt of 70°, worked out from the star's rotation speed, period and radius. Gaia DR3 lists 142 other stars within 63 arcseconds, with 23% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 90",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "toi-837-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-837-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/toi-837-s0090.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/toi-837-s0090.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#b95264",
+          "#ca7b88",
+          "#dca3ac",
+          "#edcbd0",
+          "#fff3f4"
+        ],
+        "labels": [
+          "96%",
+          "104%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#fff3f4, its Color dataset) over the brightness map this project made from the star's light in TESS sector 90 (March and April 2025): the map's scale, 96% to 104% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 6.1% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "TESS · the star in its color over its brightness map · March and April 2025",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
     }
   ],
   "emission": {

@@ -87,6 +87,84 @@
         "title": "ESPaDOnS · magnetic map made here · Jun 2013",
         "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
       }
+    },
+    {
+      "id": "brightness-campaign-7",
+      "output": "tyc-6878-195-1-surface-{id}{suffix}.webp",
+      "thumbnail": "tyc-6878-195-1-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/tyc-6878-195-1-c07.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-campaign-7",
+        "label": "Campaign 7",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/tyc-6878-195-1-c07.dat",
+        "variable": "Brightness [%]",
+        "outlineLatitudes": [
+          -68
+        ],
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 88,
+        "maximum": 112,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "88%",
+          "100%",
+          "112%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 5.73 days, fitted with starry to the K2 mission's own light curve of campaign 7 (its PDC-MAP flux) (the light varies by 9.4%; the map's curve leaves a scatter of 0.79%, the light's own noise being 0.38%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. The period is the mean of three methods' periods (periodogram 5.75 d, wavelet 5.69 d, autocorrelation 5.75 d; periodogram peak 0.92), accepted by the criteria of Reinhold & Hekker (2020, A&A 635, A43). The map is made at the tilt the page draws the star with, 68°. Gaia DR3 lists 4 other stars within 16 arcseconds, with 1.8% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "K2 · brightness map made here · Campaign 7",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "tyc-6878-195-1-surface-{id}{suffix}.webp",
+      "thumbnail": "tyc-6878-195-1-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/tyc-6878-195-1-c07.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/tyc-6878-195-1-c07.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 88,
+        "maximum": 112,
+        "colors": [
+          "#955a01",
+          "#b07b31",
+          "#ca9c61",
+          "#e5be90",
+          "#ffdfc0"
+        ],
+        "labels": [
+          "88%",
+          "112%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#ffdfc0, its Color dataset) over the brightness map this project made from the star's light in K2 campaign 7 (October to December 2015): the map's scale, 88% to 112% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 18.7% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "K2 · the star in its color over its brightness map · October to December 2015",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
     }
   ],
   "emission": {
