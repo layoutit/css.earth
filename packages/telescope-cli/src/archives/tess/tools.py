@@ -1,9 +1,5 @@
-"""The calls into the published codes that photometry.mts and methods.mts make (toolchain.json pins them). Nothing is
+"""The calls into the published codes that methods.mts and map.mts make (toolchain.json pins them). Nothing is
 computed here.
-
-  tools.py light-curve <job.json>          a star's light from its pixels in one TESS sector (lightkurve), with the
-                                           sky's own variation regressed out, and the period of what is left
-                                           (astropy's Lomb-Scargle)
 
   tools.py mission-light-curve <job.json>  a K2 campaign's light curve as the mission publishes it: the PDC-MAP flux
                                            of its long-cadence file, read by lightkurve
@@ -13,6 +9,9 @@ computed here.
                                            autocorrelation (star-privateer, Breton et al. 2024), after the paper's own
                                            preparation of the light curve
 
+  tools.py spinspotter <job.json>          a star's TESS 2-minute light curves through SpinSpotter (Holcomb et al.
+                                           2022), as its authors call it: each sector and the stitched light curve
+
   tools.py map <job.json>                  the brightness map that reproduces a rotational light curve (starry); run
                                            with the starry toolchain's interpreter
 
@@ -21,41 +20,6 @@ It prints one JSON document.
 import json
 import sys
 import warnings
-
-
-def light_curve(job):
-    warnings.filterwarnings('ignore')
-    import numpy as np
-    import lightkurve as lk
-    from astropy.timeseries import LombScargle
-
-    tpf = lk.TessTargetPixelFile(job['cutout'])
-    tpf = tpf[tpf.quality == 0]
-    mask = tpf.create_threshold_mask(threshold=job['threshold'], reference_pixel='center')
-    if mask.sum() == 0:
-        return {'frames': int(len(tpf.time)), 'aperturePixels': 0}
-    raw = tpf.to_lightcurve(aperture_mask=mask)
-    sky = lk.DesignMatrix(tpf.flux[:, ~mask].value, name='sky').pca(job['skyTerms']).append_constant()
-    curve = lk.RegressionCorrector(raw).correct(sky).remove_nans().normalize()
-    binned = curve.bin(time_bin_size=job['binDays']).remove_nans()
-    time, flux = np.asarray(binned.time.value, dtype=float), np.asarray(binned.flux.value, dtype=float)
-
-    def peak(t, f, longest):
-        frequency = np.linspace(1 / longest, 1 / job['shortestDays'], job['frequencies'])
-        periodogram = LombScargle(t, f - np.mean(f))
-        power = periodogram.power(frequency)
-        best = int(np.argmax(power))
-        model = periodogram.model(t, frequency[best])
-        return {'periodDays': float(1 / frequency[best]), 'power': float(power[best]), 'amplitude': float(model.max() - model.min())}
-
-    # The two orbits of a sector, apart: the gap between them is the longest in the times.
-    gap = int(np.argmax(np.diff(time)))
-    halves = [(time[:gap + 1], flux[:gap + 1]), (time[gap + 1:], flux[gap + 1:])]
-    span = float(time.max() - time.min())
-    return {'frames': int(len(curve.time)), 'aperturePixels': int(mask.sum()), 'saturated': bool(np.nanmax(tpf.flux.value) > job['saturationElectronsPerSecond']),
-            'spanDays': span, 'scatter': float(np.std(flux)), 'whole': peak(time, flux, span / 2),
-            'halves': [peak(t, f, float(t.max() - t.min())) if len(t) > 10 else None for t, f in halves],
-            'time': [round(float(value), 5) for value in time], 'flux': [round(float(value), 6) for value in flux]}
 
 
 def mission_light_curve(job):
@@ -76,7 +40,7 @@ def rotation(job):
     six median absolute deviations from the median are dropped, and it is binned to three hours; then the highest peak of
     the generalized Lomb-Scargle periodogram between the time span and the Nyquist frequency, the highest peak of the
     wavelet power spectrum summed over time, and the autocorrelation's period. The variability range is the 95th less the
-    5th percentile of the light. Deciding what these numbers allow is photometry.mts's."""
+    5th percentile of the light. Deciding what these numbers allow is methods.mts's."""
     warnings.filterwarnings('ignore')
     import numpy as np
     import star_privateer as sp
@@ -110,6 +74,42 @@ def rotation(job):
             'time': [round(float(value), 5) for value in grid], 'flux': [round(float(value), 6) for value in light]}
 
 
+def spinspotter(job):
+    """Holcomb et al. (2022), Sect. II: SpinSpotter on each sector's light curve and, for several sectors, on the
+    stitched one, with the package's own cleaning (transits masked when given, bins of the job's size, normalized
+    about zero). What is returned of each is what the paper's criteria read: the period, and the height, width and fit
+    of the autocorrelation's peaks; and the midpoint and distance of the light's 5th and 95th percentiles (the paper's
+    X_var and Y_var). lightkurve reads each file's PDC-MAP flux. Deciding is methods.mts's."""
+    warnings.filterwarnings('ignore')
+    import numpy as np
+    import lightkurve as lk
+    import SpinSpotter as ss
+    from importlib.metadata import version
+
+    size, transit = job['binSeconds'], job.get('transit')
+
+    def measured(fits, result):
+        light = np.asarray(fits['flux_even'], dtype=float)
+        time = np.asarray(fits['time_even'], dtype=float)
+        seen = np.isfinite(light)
+        low, high = np.percentile(light[seen], 5), np.percentile(light[seen], 95)
+        number = lambda value: float(value) if np.isfinite(value) else None
+        return {'periodDays': number(ss.bins_to_days(result['P_avg'], size)), 'height': number(result['A_avg']), 'width': number(result['B_avg']), 'fit': number(result['R_avg']),
+                'centre': float((low + high) / 2), 'range': float(high - low),
+                # The package counts time in Julian days; the mission's own clock starts at `timeZero`.
+                'time': [round(float(value) - job['timeZero'], 5) for value in time[seen]], 'flux': [round(float(value) + 1, 6) for value in light[seen]]}
+
+    curves = [lk.read(path) for path in job['files']]
+    sectors = [{'sector': int(curve.meta['SECTOR']), 'pipeline': str(curve.meta.get('PROCVER', '')), 'frames': int(len(curve)), **measured(*ss.process_LightCurve(curve, bs=size, transit=transit))} for curve in curves]
+    stitched = None
+    if len(curves) > 1:
+        # The authors' own stitching (each sector normalized by its median), with transits taken out of each sector first as their cleaning does.
+        clean = [curve[~curve.create_transit_mask(*transit)] if transit else curve for curve in curves]
+        whole = measured(*ss.process_LightCurve(ss.prep_LightCurveCollection(lk.LightCurveCollection(clean), bs=size), bs=size, precleaned=True))
+        stitched = {key: value for key, value in whole.items() if key not in ('time', 'flux')}
+    return {'spinSpotter': version('spinspotter'), 'sectors': sectors, 'stitched': stitched}
+
+
 def brightness_map(job):
     """starry's own inversion of a rotational light curve (Luger et al. 2019): the spherical-harmonic map, seen at the
     star's tilt and turning with its period, that reproduces the light curve, with starry's Gaussian prior on the map."""
@@ -139,15 +139,15 @@ def brightness_map(job):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) == 3 and sys.argv[1] == 'light-curve':
-        with open(sys.argv[2]) as handle:
-            result = light_curve(json.load(handle))
-    elif len(sys.argv) == 3 and sys.argv[1] == 'mission-light-curve':
+    if len(sys.argv) == 3 and sys.argv[1] == 'mission-light-curve':
         with open(sys.argv[2]) as handle:
             result = mission_light_curve(json.load(handle))
     elif len(sys.argv) == 3 and sys.argv[1] == 'rotation':
         with open(sys.argv[2]) as handle:
             result = rotation(json.load(handle))
+    elif len(sys.argv) == 3 and sys.argv[1] == 'spinspotter':
+        with open(sys.argv[2]) as handle:
+            result = spinspotter(json.load(handle))
     elif len(sys.argv) == 3 and sys.argv[1] == 'map':
         with open(sys.argv[2]) as handle:
             result = brightness_map(json.load(handle))

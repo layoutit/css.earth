@@ -122,12 +122,10 @@ do not count as imagery. Partial photographic coverage does count; its gaps and
 interpretation remain the dataset panel's responsibility. Removing the prepared
 imagery restores the approximation gate when only that stand-in remains.
 
-A star is the exception, because many stars can gain a map. A surface reconstructed from a star's spectra (a magnetic or a
-spot map) is something to see but not a picture of it. Such a star is featured when its package marks it, when it also has a
-picture of its own, or when its page holds three or more things to see (maps, and banks such as a corona or a disc:
-`RICH_STAR` in `site/build/prepare/prepare-object-discovery.mts`). With one or two it stays on the map as a dot that names
-itself on hover and opens on a click, and it ranks as any star does. The names on the map then lead to the richest stars
-first, however many stars are mapped.
+A star is the exception, because many stars can gain a map. A surface reconstructed from a star's spectra or its light (a
+magnetic, a spot or a brightness map) is something to see but not a picture of it. A star is featured when its package
+marks it or when it has a picture of its own: the famous stars. Any other mapped star, however many maps its page holds,
+stays on the map as a dot that names itself on hover and opens on a click, and it ranks as any star does.
 
 [Itokawa](../src/objects/itokawa/README.md),
 [Ryugu](../src/objects/ryugu/README.md) and

@@ -16,16 +16,12 @@ export function discoveryPolicy(value: unknown) {
   return { featured, illustrationDatasets: illustrationDatasets as string[], ...(orientationReference === undefined ? {} : { orientationReference: Number(orientationReference) }) };
 }
 
-/** How many things to see make a star a landmark of the galaxy when none of them is a picture of it. */
-export const RICH_STAR = 3;
-
 /** Only prepared, exposed observation datasets count. A source download, an
  * illustration texture, a shape/elevation view or a source count cannot promote a body.
  *
- * A star is featured, a named landmark of the map, when its package marks it, when it has a picture of its own, or when its
- * page holds RICH_STAR or more things to see. A surface reconstructed from its spectra (a magnetic or a spot map) is
- * something to see but not a picture: with one or two the star stays on the map as a dot that names itself on hover, so the
- * names lead to the richest stars first however many stars gain a map. */
+ * A star is featured, a named landmark of the map, when its package marks it or when it has a picture of its own: the
+ * famous stars. A surface reconstructed from its spectra or its light (a magnetic, a spot or a brightness map) is something
+ * to see but not a picture: however many its page holds, the star stays on the map as a dot that names itself on hover. */
 export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recipes: readonly unknown[], camera?: unknown): ObjectDiscovery {
   const policy = discoveryPolicy(catalog);
   if (!isRecord(controls) || !isRecord(controls.datasets) || !Array.isArray(controls.datasets.controls)) throw new TypeError('Missing prepared discovery datasets.');
@@ -76,9 +72,7 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
     arrival = parseArrivalView({ defaultDataset: controls.datasets.defaultDataset, datasetIds: [...photographed],
       rotation: preparedDefaultViewRotation(camera) });
   }
-  // The banks a star's page shows beside its surfaces (a corona, a disc) are things to see too.
-  const banks = new Set(controls.datasets.controls.flatMap(control => isRecord(control) && isRecord(control.volume) && typeof control.volume.objectId === 'string' ? [control.volume.objectId] : []));
-  const landmark = !star || observed.size > reconstructed.size || observed.size + banks.size >= RICH_STAR;
+  const landmark = !star || observed.size > reconstructed.size;
   return { imagery, illustration, featured: !illustration && (policy.featured || imagery && landmark), ...(arrival ? { arrival } : {}),
     ...(illustration && simulated.size > 0 ? { simulation: true as const } : {}),
     // A star's color dataset from its spectrum or catalogued temperature is measured, though not an image of its surface.

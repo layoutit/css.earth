@@ -32,9 +32,10 @@ src/objects/m31-layers/source/lggs-stars/table4.dat.gz
 src/objects/cassiopeia-a-layers/source/ejecta-speeds.dat
 # The same file beside the cassiopeia-a-miri-layers bank; restored from the same origin (src/objects/cassiopeia-a-miri-layers/source/manifest.json).
 src/objects/cassiopeia-a-miri-layers/source/ejecta-speeds.dat
-# A star's brightness map from its light in TESS pixels or the K2 mission's light curves (108 KB a map, hundreds of stars); built by packages/telescope-cli/src/archives/tess/reduce.mts, restored from the source mirror.
+# A star's brightness map from the TESS or K2 mission's own light curves (108 KB a map, hundreds of stars); built by packages/telescope-cli/src/archives/tess/reduce.mts, restored from the source mirror.
 src/objects/*/source/science/tess/*.dat
 src/objects/*/source/science/k2/pdcsap/*.dat
+src/objects/*/source/science/tess/pdcsap/*.dat
 # M1-67's model grid (17 MB); built by packages/bake/authoring/m1-67/shell-grid.mts, restored from the source mirror.
 src/objects/m1-67-layers/source/shell-grid.dat
 # The Crab's measured filaments (416,573 rows, 11.5 MB); built by packages/bake/authoring/m1/filament-speeds.mts, restored from the source mirror.
