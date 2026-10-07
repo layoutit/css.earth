@@ -22,7 +22,8 @@ const navigationFeature = (event: Event): string | undefined => 'detail' in even
 // reads the held address (navigationHref) and the History API hears of it when a write cannot meet a gesture:
 //  - A navigation's entry is written when the camera rests after it, with the view the entry it left keeps: Back has
 //    to find both.
-//  - A flight that replaces the scene writes its entry at the hand-over, ahead of its landing (`commit(…, true)`): the
+//  - A flight that replaces the scene writes its entry at the hand-over, ahead of its landing (`commit(…, true)`),
+//    whether it pushes an entry or replaces the one it is on, so the address always names the object shown: the
 //    camera has arrived and neither body is mounted. Safari takes a picture of the page for every entry pushed, which
 //    the display server draws at a cost by the layers on screen. Written once the body was shown, the push made a frame
 //    of 239 to 317 ms on comet 67P's arrival, 159 to 175 ms on Psyche's and 77 to 95 ms on Mars's; written at the
@@ -195,7 +196,10 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
       // The entry a push leaves keeps the view it was left in, written just before the push.
       if (push && departed !== undefined) hold({ push: false, entry: from, path: departed });
       hold({ push, entry, path });
-      if (now && push) { ahead = entry; flush(); }
+      // A hop that replaces its entry (the slideshow's, after its first) names another object too: held like a view, the
+      // address showed the object before it until the page had been still for three seconds, and for good when the
+      // slideshow was stopped during a hop (2026-10-06).
+      if (now) { if (push) ahead = entry; flush(); }
     },
     destroy() {
       if (disposed) return;
