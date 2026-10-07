@@ -277,9 +277,9 @@ of autocorrelation periods ([MAST](https://archive.stsci.edu/hlsp/tess-svc), DOI
 ratio, and the largest ratio is 0.19994.
 
 The receipts of 900 stars list a TESS 2-minute light curve. The catalog gives the targets of 842 a ratio, and of 102
-of those 0.2 or more (24 of them over 1). One of the 102 is a giant no method covers. Holcomb et al.'s method had read the
-other 101. It accepted 8: 6 had maps, and 2 a period that was not drawn. It refused 93, and one of those, YSES 1, had a
-map on Colman et al.'s verdict. The seven lose their 35 maps:
+of those 0.2 or more (24 of them over 1). One of the 102 is a giant no method covers. Holcomb et al.'s method had read
+the other 101. It accepted 8: 6 had maps, and 2 a period that was not drawn. It refused 93, and one of those, YSES 1,
+had a map on Colman et al.'s verdict. The seven lose their 35 maps:
 
 | Star | Contamination ratio | Period its light gave, days | Maps withheld | The target's share of its aperture's light |
 | --- | --- | --- | --- | --- |
@@ -292,8 +292,8 @@ map on Colman et al.'s verdict. The seven lose their 35 maps:
 | TYC 486-4943-1 | 0.38 | 3.78 | 1 | 83% |
 
 Their pages show what they showed before the maps, and no period measured here stays in their records. LTT 1445 A's
-1.41 days is the period Winters et al. (2019, AJ 158, 152) found in the same light and suspect comes from one of its two
-companions, 7 arcseconds away.
+1.41 days is the 1.4 days Winters et al. (2019, AJ 158, 152) found in the target's TESS light and suspect comes from
+one of its two companions, 7 arcseconds away.
 
 The last column is not the catalog's. It is the mission's own number for the aperture it used: the header of each
 light curve gives the share of the aperture's light that is the target's (`CROWDSAP`) and the share of the target's
