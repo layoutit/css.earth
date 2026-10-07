@@ -112,6 +112,14 @@ export function parseXhipRow(tsv: string, hip: string) {
   return { hip, rv, error, quality: row.q_RV ?? '' };
 }
 
+/** What kind of star an MK type names, in words: the luminosity class it gives ("A giant of type K0 III"). A type between two
+ * classes takes the first; a type with no class is "a star of type"; no type at all is a naked-eye star. */
+export function starKind(spectralType: string) {
+  const CLASSES: Readonly<Record<string, string>> = { I: 'supergiant', II: 'bright giant', III: 'giant', IV: 'subgiant', V: 'dwarf' };
+  const luminosityClass = /(?:\s|\d)(I{1,3}|IV|V)(?![IV])/u.exec(spectralType)?.[1], word = luminosityClass ? CLASSES[luminosityClass]! : 'star';
+  return spectralType ? `A ${word} of type ${spectralType}` : 'A naked-eye star';
+}
+
 export function draftFromNpoi(row: ReturnType<typeof parseNpoiRow>, identifiers: readonly string[], hipparcos?: ReturnType<typeof parseXhipRow>) {
   const { credit, paper, tables: at } = NPOI[row.year], preferred = preferredName(identifiers), hd = `HD ${row.hd}`, name = preferred?.name ?? hd;
   // A table error of zero (some PARAM masses) is printed but is no uncertainty: the value is cited without one.
@@ -125,9 +133,7 @@ export function draftFromNpoi(row: ReturnType<typeof parseNpoiRow>, identifiers:
   // What kind of star, in the papers' own terms: the MK type they list from SIMBAD (Table 1; Table 5's is the best-fitting SED
   // template, G4 III for the F5 Ib supergiant Mirfak) and the luminosity class it names, as the 2018 abstract counts its sample
   // ("dwarfs, subgiants, giants, bright giants and supergiants"). A type between two classes takes the first.
-  const CLASSES: Readonly<Record<string, string>> = { I: 'supergiant', II: 'bright giant', III: 'giant', IV: 'subgiant', V: 'dwarf' };
-  const luminosityClass = /(?:\s|\d)(I{1,3}|IV|V)(?![IV])/u.exec(row.spectralType)?.[1], word = luminosityClass ? CLASSES[luminosityClass]! : 'star';
-  const kind = row.spectralType ? `A ${word} of type ${row.spectralType}` : 'A naked-eye star', l = row.luminosity;
+  const kind = starKind(row.spectralType), l = row.luminosity;
   const light = l === undefined ? '' : ` and ${l >= 100 ? Math.round(l).toLocaleString('en-US') : l >= 10 ? Math.round(l) : l.toFixed(1)} times its light`;
   const hip = hipparcos ? { position: { catalogue: XHIP.catalogue, row: { HIP: hipparcos.hip }, credit: XHIP.credit, url: XHIP.url, motion: { epoch: 1991.25, ra: 'pmRA', dec: 'pmDE' } },
     radialVelocity: { value: hipparcos.rv, uncertainty: hipparcos.error, source: `${XHIP.credit.split(' (XHIP)')[0]}, XHIP, HIP ${hipparcos.hip}: RV ${hipparcos.rv} +/- ${hipparcos.error} km/s${hipparcos.quality ? ` (quality ${hipparcos.quality})` : ''}`, url: XHIP.url } } : {};
