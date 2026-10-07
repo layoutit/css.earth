@@ -87,6 +87,84 @@
         "title": "ESPaDOnS · magnetic map made here · Jan 2008",
         "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
       }
+    },
+    {
+      "id": "brightness-campaign-1",
+      "output": "flegetonte-surface-{id}{suffix}.webp",
+      "thumbnail": "flegetonte-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/flegetonte-c01.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-campaign-1",
+        "label": "Campaign 1",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/flegetonte-c01.dat",
+        "variable": "Brightness [%]",
+        "outlineLatitudes": [
+          -68
+        ],
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 98,
+        "maximum": 102,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "98%",
+          "100%",
+          "102%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 11.3 days, fitted with starry to the K2 mission's own light curve of campaign 1 (its PDC-MAP flux) (the light varies by 1.2%; the map's curve leaves a scatter of 0.18%, the light's own noise being 0.07%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. The period is the mean of three methods' periods (periodogram 11.46 d, wavelet 11.22 d, autocorrelation 11.38 d; periodogram peak 0.78), accepted by the criteria of Reinhold & Hekker (2020, A&A 635, A43). The map is made at the tilt the page draws the star with, 68°. Gaia DR3 lists no other star within 16 arcseconds of it. A reduction made in this project, not a published map.",
+        "title": "K2 · brightness map made here · Campaign 1",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "flegetonte-surface-{id}{suffix}.webp",
+      "thumbnail": "flegetonte-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/flegetonte-c01.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/flegetonte-c01.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 98,
+        "maximum": 102,
+        "colors": [
+          "#a35d02",
+          "#ba8037",
+          "#d1a36d",
+          "#e8c6a2",
+          "#ffe9d7"
+        ],
+        "labels": [
+          "98%",
+          "102%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#ffe9d7, its Color dataset) over the brightness map this project made from the star's light in K2 campaign 1 (June to August 2014): the map's scale, 98% to 102% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 3.3% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "K2 · the star in its color over its brightness map · June to August 2014",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
     }
   ],
   "emission": {

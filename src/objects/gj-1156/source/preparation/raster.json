@@ -166,6 +166,84 @@
         "title": "ESPaDOnS · magnetic map made here · Jan 2009",
         "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
       }
+    },
+    {
+      "id": "brightness-sector-49",
+      "output": "gj-1156-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-1156-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/gj-1156-s0049.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-49",
+        "label": "Sector 49",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/gj-1156-s0049.dat",
+        "variable": "Brightness [%]",
+        "outlineLatitudes": [
+          -60
+        ],
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 97,
+        "maximum": 103,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "97%",
+          "100%",
+          "103%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 11.5 hours, fitted with starry to the TESS mission's own 2-minute light curve of sector 49 (its PDC-MAP flux) (the light varies by 1.5%; the map's curve leaves a scatter of 0.58%, the light's own noise being 0.30%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 0.48 d from the autocorrelation, whose peaks have a height of 0.50, a width of 0.49 and a fit of 0.99; its criteria accept that as the star's rotation. The map is made at the tilt the page draws the star with, 60°. Gaia DR3 lists 3 other stars within 63 arcseconds, with 0.27% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 49",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "gj-1156-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-1156-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/gj-1156-s0049.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/gj-1156-s0049.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 97,
+        "maximum": 103,
+        "colors": [
+          "#785200",
+          "#9a701d",
+          "#bb8e3a",
+          "#ddac57",
+          "#ffca74"
+        ],
+        "labels": [
+          "97%",
+          "103%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#ffca74, its Color dataset) over the brightness map this project made from the star's light in TESS sector 49 (March 2022): the map's scale, 97% to 103% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 4.8% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "TESS · the star in its color over its brightness map · March 2022",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
     }
   ],
   "emission": {

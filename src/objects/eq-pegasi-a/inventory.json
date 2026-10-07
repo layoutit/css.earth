@@ -4,14 +4,32 @@
     {
       "location": "public",
       "filename": "eq-pegasi-a-arrival.webp",
-      "bytes": 29948,
-      "sha256": "68a6a022cab6125a00836f0f9a3395435b4534cba4f2d9278af8a16eacf437d8"
+      "bytes": 29802,
+      "sha256": "1f240eb41cf5d77eb67436dd8c7669c5fa2c6fc03d7d98f89b78ea9b2a6e26ca"
     },
     {
       "location": "public",
       "filename": "eq-pegasi-a-billboard.webp",
-      "bytes": 5458,
-      "sha256": "b18275964150ef207a4cb9e8f0a4094f5a08095d96a3b8fb8ad6358b46904761"
+      "bytes": 5314,
+      "sha256": "3eb3bf3af2d0e4de44efdb073460395b8b661e19775ec8dd9205241731fb4ba8"
+    },
+    {
+      "location": "public",
+      "filename": "eq-pegasi-a-dataset-brightness-sector-56.webp",
+      "bytes": 150,
+      "sha256": "218661517414b2a8e39a5f8b664583344a913b1505c0174fcb1996effa5d4ee5"
+    },
+    {
+      "location": "public",
+      "filename": "eq-pegasi-a-dataset-brightness-sector-83.webp",
+      "bytes": 196,
+      "sha256": "9fdbbacdc6482c67471412ed584cea64e913b720780ebd19771c116bb72c84ea"
+    },
+    {
+      "location": "public",
+      "filename": "eq-pegasi-a-dataset-color-brightness.webp",
+      "bytes": 220,
+      "sha256": "80fbd084dfbfea375a2fe3421f45fbde6f0aa43491a9e4f1779271ac42b744cc"
     },
     {
       "location": "public",
@@ -27,9 +45,33 @@
     },
     {
       "location": "public",
+      "filename": "eq-pegasi-a-limb-color-brightness@2x.webp",
+      "bytes": 112232,
+      "sha256": "a708fe8ca91ee3b4ea3ac9d01e91d8f81dc1889bbb51eb3a35fa26953dfb509c"
+    },
+    {
+      "location": "public",
       "filename": "eq-pegasi-a-limb-color@2x.webp",
       "bytes": 92362,
       "sha256": "34251a976c92bf55568da30ab0013c7ca77bae16c295521f00ec3059788ac8b7"
+    },
+    {
+      "location": "public",
+      "filename": "eq-pegasi-a-poles-brightness-sector-56@2x.webp",
+      "bytes": 12100,
+      "sha256": "8ac119096c3db04ba8e767be2b3141d38346d63334744d5cfe39deab5259ba8b"
+    },
+    {
+      "location": "public",
+      "filename": "eq-pegasi-a-poles-brightness-sector-83@2x.webp",
+      "bytes": 9082,
+      "sha256": "4d55b6fb70f946f90c5c34d701f0c286c93d89e2f4aee87276830efe3e1d2d76"
+    },
+    {
+      "location": "public",
+      "filename": "eq-pegasi-a-poles-color-brightness@2x.webp",
+      "bytes": 10636,
+      "sha256": "8c2fadb2c213a813bdb44e3720af0597bf517ed55eb6f185bc9809562fa970eb"
     },
     {
       "location": "public",
@@ -42,6 +84,24 @@
       "filename": "eq-pegasi-a-poles-radial-field-2006-08@2x.webp",
       "bytes": 41982,
       "sha256": "407782ab7f29dad9c0cf455ef505f6797e7a0e389db78f6aa9217aae6e6a9244"
+    },
+    {
+      "location": "public",
+      "filename": "eq-pegasi-a-surface-brightness-sector-56@2x.webp",
+      "bytes": 12696,
+      "sha256": "428ff0796fad618c4a5b70b5e4d83abd9647913d26c70b608bada9f80c382aa8"
+    },
+    {
+      "location": "public",
+      "filename": "eq-pegasi-a-surface-brightness-sector-83@2x.webp",
+      "bytes": 15792,
+      "sha256": "c59e6e73d12041b2013b09f27a4aac2f8019468b38de7c3513aed9b381576991"
+    },
+    {
+      "location": "public",
+      "filename": "eq-pegasi-a-surface-color-brightness@2x.webp",
+      "bytes": 15104,
+      "sha256": "524414a29f650e2ffbac490bb406589b5697e16dbae1ff5f9b062b441d35fed9"
     },
     {
       "location": "public",
@@ -58,14 +118,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 375,
-      "sha256": "66060ec7064fdf3a62495414835082b5ae4cdb04c08e15cc2f164355ad1c443c"
+      "bytes": 386,
+      "sha256": "09300e712bdb4187cd4d3b57595030a03d1116df1732d25bd19655e8820fe23c"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2229,
-      "sha256": "8c39abd8faa27b3ad1f3d3c5bbf271bdf98e751b12dabb568c5832acce5707bf"
+      "bytes": 3045,
+      "sha256": "f9f37f1a45e7e21007c55699562214f8890047b7806b57d84e9901c94b2b4633"
     },
     {
       "location": "prepared",
@@ -82,20 +142,38 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1933,
-      "sha256": "78d802537bb585b8856a90275e7af9011c5ffafb965ebc4dc22fb265f0453118"
+      "bytes": 5402,
+      "sha256": "c357f2b6c4c94116aa332ec57f0ff1d51892a501347c5d4f60c3857eab109bab"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 3211,
-      "sha256": "b2833bdfbf28e533b7b467edf49c996e48191ee4948c4e0bc3ca8b980449adaa"
+      "bytes": 8671,
+      "sha256": "93f6e614a2326b8a14e1ab04f18081816f63c099ed7c0758cd73abbb239e017a"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 219,
-      "sha256": "9cdb41a48a188946a1f08c32b748e504a6b2eac1593a5baad61926e2c4108e98"
+      "bytes": 565,
+      "sha256": "a00778cef5cccd9d035c9ea7a3408f4c824678ee5021bb85a83ce0542bae605d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-56.webp",
+      "bytes": 1100,
+      "sha256": "6354440982df8ad15297cfdae94660b03ef3bccfea625a25b8e188cbec248347"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-83.webp",
+      "bytes": 1460,
+      "sha256": "a4d17a559c85af34370e1fb71bdf40876245c35afc1d86dd18cbde403717db7d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1250,
+      "sha256": "96c0c110e61025bd9f3aa271bcfddf54134a35d30281a55b469fd35e9e19c4d4"
     },
     {
       "location": "prepared",
@@ -112,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 252297,
-      "sha256": "bc6f8e13c6f98284612ebcf01b19b262e0347ddbcaccaa8dbafef4f97673b901"
+      "bytes": 259509,
+      "sha256": "fd4926f90090791497cc665c8ec5aa644a205a1e97023ad665bbd3ab4cfb96fc"
     },
     {
       "location": "prepared",
@@ -136,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1173,
-      "sha256": "0b97ec9be938ef97fac102cdd9671f81869ac8310d7af8592b18bbd8e4bb8e9d"
+      "bytes": 1817,
+      "sha256": "c974711fefc326e56a0272571f26f1010f48e07c7dc8adb9a6e09984e27b7fd9"
     },
     {
       "location": "prepared",

@@ -16,6 +16,9 @@
   "objectTypeSource": "SIMBAD, * alf Col: main object type Be*, Be Star",
   "projectedRotationSpeedKmS": 195,
   "projectedRotationSpeedSource": "SIMBAD, * alf Col: projected rotation speed 195 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "rotationPeriodMeasuredDays": 1.1,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 5, 6, 32, 33, 98 and 107 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 1.1 d, the light swinging by 0.04% as the star turns",
+  "rotationLightSwingPercent": 0.04,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 69 (BS 1956)) (photometry/stellar-color.json); no image of the photosphere exists."

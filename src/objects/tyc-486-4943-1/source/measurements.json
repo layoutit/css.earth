@@ -30,6 +30,9 @@
   ],
   "projectedRotationSpeedKmS": 12.52,
   "projectedRotationSpeedSource": "SIMBAD, ASAS J193304+0345.7: projected rotation speed 12.52 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "rotationPeriodMeasuredDays": 3.78,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curve of sector 54 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 3.78 d, the light swinging by 3.2% as the star turns",
+  "rotationLightSwingPercent": 3.16,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

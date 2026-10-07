@@ -71,6 +71,26 @@
               "id": "brightness-2017",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "brightness-sector-6",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness-sector-33",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness-sector-87",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "color-brightness",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }

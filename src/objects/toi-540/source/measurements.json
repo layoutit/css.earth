@@ -54,6 +54,9 @@
   ],
   "projectedRotationSpeedKmS": 13.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-540 (pscomppars): projected rotation speed 13.5 km/s, from Ment et al. 2021 (https://ui.adsabs.harvard.edu/abs/2021AJ....161...23M/abstract)",
+  "rotationPeriodMeasuredDays": 0.72,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 4, 5, 6, 31, 32 and 98 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 0.72 d, the light swinging by 0.54% as the star turns",
+  "rotationLightSwingPercent": 0.54,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

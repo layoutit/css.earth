@@ -124,6 +124,9 @@
   ],
   "projectedRotationSpeedKmS": 7.87,
   "projectedRotationSpeedSource": "SIMBAD, Kepler-1313: projected rotation speed 7.87 km/s, the measurement SIMBAD prefers (2022ApJS..259...35A)",
+  "rotationPeriodMeasuredDays": 6.22,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 40, 41, 55, 75, 81 and 82 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 6.22 d, the light swinging by 2.1% as the star turns",
+  "rotationLightSwingPercent": 2.13,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -79,7 +79,8 @@ lightkurve reads the mission's file. The periodogram is astropy's; the wavelet a
 codes. Campaigns 10 and 11 were filed in two parts; the second is read, whose 48 days are the "50 to 70 days" the paper
 gives for those campaigns.
 
-Of our stars, 67 are in the paper's range and have a K2 light curve. What the method gave on them:
+Of our stars with a Kepler or K2 name, the first it was run on, 67 are in the paper's range and have a K2 light curve.
+What the method gave on them:
 
 | Outcome | Stars |
 | --- | --- |
@@ -144,11 +145,60 @@ map, all at the period of the stitched light curve: 53 maps.
 | AU Mic | 3 | 2 | 4.84 | 4.856 | 2 |
 | AB Pic | 41 | 35 | 3.92 | 3.87 | 35 |
 | AF Lep | 4 | 4 | 1.01 | 0.966 | 4 |
-| BD-16 351 | 3 | 3 | 3.26 | 3.23 | 3 |
+| BD-16 351 | 3 | 3 | 3.26 | none (3.23 measured here earlier) | 3 |
 | EK Draconis | 12 | 9 | 2.68 | 2.64 | 9 |
 
 AU Mic's sectors 1, 27 and 95 give 4.97, 4.89 and 5.00 days. Sector 27 is not valid, because its peaks' width is 0.38
 where the paper asks for more than 0.4, so it has no map. All three together give 4.84 days.
+
+### Every star
+
+The counts in the two sections above are of the first stars each method was run on. `reduce.mts --all` has since judged
+every star with a page, 3,118 on 6 October 2026. These numbers are counted from the receipts.
+
+| What happened | Stars |
+| --- | --- |
+| Not read: no method covers its kind (evolved, or outside both methods' temperatures) | 1,438 |
+| Not read: SIMBAD files it as a pulsating star or a close pair | 534 |
+| Not read: its record holds no temperature or no surface gravity | 202 |
+| Not read: a method covers its kind, and its mission publishes no light curve of the star | 28 |
+| Read by Holcomb et al.'s method, on TESS light curves | 829 |
+| Read by Reinhold & Hekker's method, on K2 light curves | 87 |
+
+Of the 916 stars read, 109 have a rotation that is accepted and drawn: 65 from TESS and 44 from K2. Why the other 807 have
+none:
+
+| Reason | TESS | K2 |
+| --- | --- | --- |
+| A valid period in fewer of the star's sectors than half, rounded up (in none of them for 563) | 656 | |
+| The star's one sector is outside the criteria | 39 | |
+| No valid period in all the star's sectors together | 31 | |
+| No repeating peaks in the autocorrelation of the star's one sector | 25 | |
+| Lopsided light: removed as a possible eclipsing binary | 4 | |
+| The periodogram's peak is not over 0.3 | | 32 |
+| The three methods' periods do not agree | | 4 |
+| Two campaigns' periods deviate by over 20% | | 2 |
+| The period is not between a day and half the time span | | 1 |
+| The star's only campaign is one the paper does not analyse | | 1 |
+| Accepted by the method at a period that is neither the catalogued one nor its half: not drawn | 9 | 3 |
+
+No period was refused as shorter than an orbit at the star's surface.
+
+The methods accept 121 stars, and 87 of them have a rotation period in the catalogues. The method's period is the
+catalogued one within 20% for 68 (TESS 39, K2 29), half of it for 7 (TESS 1, K2 6) and another period for 12 (TESS 9,
+K2 3). The 12 have no map; the 7 are drawn at twice the light's period. The other 34 have no catalogued period, and the
+method alone vouches for theirs: BD-16 351 is one, because the 3.23 days its record holds were measured in this project
+under the rule since removed. This is a comparison, not a setting.
+
+So 109 stars have maps, 352 maps in all: 65 stars with 303 maps from TESS, and 44 stars with 49 maps from K2. A star TESS
+has watched often has a map for each valid sector: TOI-1860 has 11 and DS Tuc A has 10.
+
+The light of 17 of the 109 stars swings by under 0.1%, and 10 of those are hotter than 7,000 K (Stellio at 9,131 K swings
+by 0.012%, the least). Holcomb et al. (Sect. III) exclude no star by how much its light varies, and write that some, the
+hotter ones above all, "may warrant additional inspection" to tell rotation from pulsation. They print no cut for it, and
+none is applied here.
+
+![Six of the stars in the app (DS Tuc A, PDS 70, HIP 67522, TOI-837, HD 29615 and Biham): Color + brightness above, Brightness map below](images/stellar-brightness-maps-all-stars.webp)
 
 ### What here is not printed in a paper
 
@@ -206,6 +256,12 @@ on the star. So the darkest part is drawn as a darker, richer step of the star's
 higher in chroma, in OKLCH), chosen by eye from sheets of options. Each dataset's text says so with the star's own number, and the Brightness map carries the measured
 values on its scale. Every star's scale is its own, so a faintly spotted star is drawn as strongly as a heavily spotted one;
 the scale's ends and the text tell them apart.
+
+A scale ends at the smallest of 1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6 or 8 times a power of ten that holds the star's maps. A
+receipt gives a map's range to a tenth of a percent; a map that reads 100% to 100% there takes its range from its table.
+Biham's light swings by 0.01%, and its Brightness maps are drawn from 99.96% to 100.04%. A table holds a map to a
+thousandth of a percent of the mean, so the narrowest map here (Shangcheng in sector 52, 99.995% to 100.005%) has 11
+distinct values. A scale is only how a map is drawn: no star is kept or left out by it.
 
 The dataset's text gives the month the sector was observed, because spots come and go within weeks or months.
 

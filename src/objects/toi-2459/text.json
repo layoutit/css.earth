@@ -30,6 +30,26 @@
       "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
       "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "brightness-sector-5": {
+      "title": "Brightness map, Sector 5",
+      "detail": "Sector 5, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-33": {
+      "title": "Brightness map, Sector 33",
+      "detail": "Sector 33, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-98": {
+      "title": "Brightness map, Sector 98",
+      "detail": "Sector 98, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, Nov 2025 to Jan 2026",
+      "detail": "TESS sector 98",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

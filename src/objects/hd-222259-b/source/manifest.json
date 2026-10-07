@@ -202,6 +202,366 @@
         "kind": "local",
         "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
+    },
+    {
+      "id": "hd-222259-b-tess-map-brightness-sector-1",
+      "path": "science/tess/pdcsap/hd-222259-b-s0001.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of HD 222259B from its light in TESS sector 1",
+      "title": "Brightness map of HD 222259B from its light curve in TESS sector 1, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 1, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-222259-b-tess-map-brightness-sector-27",
+      "path": "science/tess/pdcsap/hd-222259-b-s0027.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of HD 222259B from its light in TESS sector 27",
+      "title": "Brightness map of HD 222259B from its light curve in TESS sector 27, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 27, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-222259-b-tess-map-brightness-sector-28",
+      "path": "science/tess/pdcsap/hd-222259-b-s0028.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of HD 222259B from its light in TESS sector 28",
+      "title": "Brightness map of HD 222259B from its light curve in TESS sector 28, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 28, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-222259-b-tess-map-brightness-sector-67",
+      "path": "science/tess/pdcsap/hd-222259-b-s0067.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of HD 222259B from its light in TESS sector 67",
+      "title": "Brightness map of HD 222259B from its light curve in TESS sector 67, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 67, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-222259-b-tess-map-brightness-sector-68",
+      "path": "science/tess/pdcsap/hd-222259-b-s0068.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of HD 222259B from its light in TESS sector 68",
+      "title": "Brightness map of HD 222259B from its light curve in TESS sector 68, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 68, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-222259-b-tess-map-brightness-sector-102",
+      "path": "science/tess/pdcsap/hd-222259-b-s0102.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of HD 222259B from its light in TESS sector 102",
+      "title": "Brightness map of HD 222259B from its light curve in TESS sector 102, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 102, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-222259-b-tess-map-brightness-sector-103",
+      "path": "science/tess/pdcsap/hd-222259-b-s0103.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of HD 222259B from its light in TESS sector 103",
+      "title": "Brightness map of HD 222259B from its light curve in TESS sector 103, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 103, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "hd-222259-b-tess-map-brightness-sector-104",
+      "path": "science/tess/pdcsap/hd-222259-b-s0104.dat",
+      "origin": "https://archive.stsci.edu/missions-and-data/tess",
+      "productId": "Brightness map of HD 222259B from its light in TESS sector 104",
+      "title": "Brightness map of HD 222259B from its light curve in TESS sector 104, the mission's own: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess",
+      "credit": "NASA TESS mission light curve (PDC-MAP), sector 104, from MAST; its rotation judged by the criteria of Holcomb et al. (2022, ApJ 936, 138); map made in this project with lightkurve 2.6.0, SpinSpotter 0.2.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the sector published by the mission and kept at MAST. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-light-curves",
+            "role": "material",
+            "evidence": "https://archive.stsci.edu/missions-and-data/tess"
+          },
+          {
+            "catalogueId": "arxiv-2206-10629",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2206.10629"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
     }
   ],
   "documents": [

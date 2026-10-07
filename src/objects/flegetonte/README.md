@@ -25,16 +25,22 @@ polarised profile for each spectrum, and ZDIpy fits the field to each run's prof
 ([rotation.json](source/preparation/rotation.json)). Longitude 0 faces us at the middle of each run. One color scale, ±40 G, serves
 the map.
 
+**Brightness from K2.** The Color + brightness and Brightness map datasets are made in this project from the K2 mission's own light curve of campaign 1 (June to August 2014; its PDC-MAP flux, kept at [MAST](https://archive.stsci.edu/missions-and-data/k2)) ([source record](../../sources/mast-k2-light-curves.json)). It is the light curve [Reinhold & Hekker (2020, A&A 635, A43)](https://arxiv.org/abs/2001.08214) use, and their criteria decide whether it shows the star turning: astropy and star-privateer compute their three periods, and starry (Luger et al. 2019) makes the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+
 ## Evidence
 
 Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 - Jan 2008: the map reaches a reduced chi-square of 1.00, against 7.00 with no field; mean field 16.4 G, 43% of its energy toroidal.
+
+**Brightness from K2.** In K2 campaign 1 the light varies by 1.2% (the range between its 5th and 95th percentiles). The periodogram, the wavelet and the autocorrelation give 11.46, 11.22 and 11.38 d, and the periodogram's peak has a height of 0.78: within what Reinhold & Hekker (2020, A&A 635, A43) ask of a rotation (the three within two days of each other, a peak over 0.3). The period is their mean, 11.35 d. Of the paper's stars observed in two campaigns, 75.7% gave periods within 20% of each other. The star's record holds 12.3 d from the catalogues. The map's light curve leaves a scatter of 0.18% about the light, whose own noise is 0.07%. Gaia DR3 lists no other star within 16 arcseconds.
 
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
 - **Quoted text.** The introduction quotes sentences of the Wikipedia article "HD 102195" (revision 1374437366) verbatim, CC BY-SA 4.0.
+
+- **Brightness from K2.** Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. The map is made at the tilt the page draws, 68.1°. The map is of June to August 2014: spots come and go within weeks or months.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 - **The magnetic maps are this project's reduction, not published maps.** How tightly a map is fitted is a choice the

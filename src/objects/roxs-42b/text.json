@@ -32,6 +32,16 @@
       "title": "Photosphere color",
       "detail": "From its temperature",
       "summary": "A blackbody at the star's published temperature. No surface picture exists."
+    },
+    "brightness-sector-91": {
+      "title": "Brightness map, Sector 91",
+      "detail": "Sector 91, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, Apr to May 2025",
+      "detail": "TESS sector 91",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

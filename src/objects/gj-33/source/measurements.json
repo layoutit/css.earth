@@ -44,6 +44,9 @@
   ],
   "projectedRotationSpeedKmS": 2.67,
   "projectedRotationSpeedSource": "SIMBAD, HD 4628: projected rotation speed 2.67 km/s, the measurement SIMBAD prefers (2025A&A...704A..49B)",
+  "rotationPeriodMeasuredDays": 44.04,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 8 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 44.04 d, the light swinging by 0.12% as the star turns (the light repeats every 22.02 d, half the catalogued rotation period, and the star is taken to turn once in two of them)",
+  "rotationLightSwingPercent": 0.12,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

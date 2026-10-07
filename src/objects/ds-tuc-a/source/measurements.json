@@ -48,6 +48,9 @@
   ],
   "projectedRotationSpeedKmS": 17.8,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of DS Tuc A (pscomppars): projected rotation speed 17.8 km/s, from Newton et al. 2019 (https://ui.adsabs.harvard.edu/abs/2019ApJ...880L..17N/abstract)",
+  "rotationPeriodMeasuredDays": 2.85,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 1, 27, 28, 67, 68, 94, 95, 102, 103 and 104 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 2.85 d, the light swinging by 5.4% as the star turns",
+  "rotationLightSwingPercent": 5.44,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

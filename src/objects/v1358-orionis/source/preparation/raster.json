@@ -393,6 +393,164 @@
         "description": "Brightness of the photosphere from the ZDI inversion (Dec 2017), relative to the unspotted surface. Black line: 59 degrees south, below which the star never faces us.",
         "title": "HARPSpol · ZDI brightness · Dec 2017"
       }
+    },
+    {
+      "id": "brightness-sector-6",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/v1358-orionis-s0006.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-6",
+        "label": "Sector 6",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/v1358-orionis-s0006.dat",
+        "variable": "Brightness [%]",
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 1.39 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 6 (its PDC-MAP flux) (the light varies by 4.2%; the map's curve leaves a scatter of 0.39%, the light's own noise being 0.05%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 1.39 d from the autocorrelation, whose peaks have a height of 0.63, a width of 0.46 and a fit of 0.99, and in all 3 of the star's sectors together a period of 1.39 d from the autocorrelation, whose peaks have a height of 0.70, a width of 0.47 and a fit of 1.00; its criteria accept that as the star's rotation. The map is made at the tilt the page draws the star with, 59°. Gaia DR3 lists 31 other stars within 63 arcseconds, with 0.42% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 6",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "brightness-sector-33",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/v1358-orionis-s0033.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-33",
+        "label": "Sector 33",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/v1358-orionis-s0033.dat",
+        "variable": "Brightness [%]",
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 1.39 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 33 (its PDC-MAP flux) (the light varies by 4.2%; the map's curve leaves a scatter of 0.43%, the light's own noise being 0.05%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 1.42 d from the autocorrelation, whose peaks have a height of 0.55, a width of 0.44 and a fit of 0.98, and in all 3 of the star's sectors together a period of 1.39 d from the autocorrelation, whose peaks have a height of 0.70, a width of 0.47 and a fit of 1.00; its criteria accept that as the star's rotation. The map is made at the tilt the page draws the star with, 59°. Gaia DR3 lists 31 other stars within 63 arcseconds, with 0.42% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 33",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "brightness-sector-87",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/v1358-orionis-s0087.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-sector-87",
+        "label": "Sector 87",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/v1358-orionis-s0087.dat",
+        "variable": "Brightness [%]",
+        "outlineLatitudes": [
+          -59
+        ],
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "96%",
+          "100%",
+          "104%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 1.39 days, fitted with starry to the TESS mission's own 2-minute light curve of sector 87 (its PDC-MAP flux) (the light varies by 4.2%; the map's curve leaves a scatter of 1.1%, the light's own noise being 0.18%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. In this sector the method of Holcomb et al. (2022, ApJ 936, 138) finds a period of 1.38 d from the autocorrelation, whose peaks have a height of 0.73, a width of 0.47 and a fit of 1.00, and in all 3 of the star's sectors together a period of 1.39 d from the autocorrelation, whose peaks have a height of 0.70, a width of 0.47 and a fit of 1.00; its criteria accept that as the star's rotation. The map is made at the tilt the page draws the star with, 59°. Gaia DR3 lists 31 other stars within 63 arcseconds, with 0.42% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "TESS · brightness map made here · Sector 87",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "v1358-orionis-surface-{id}{suffix}.webp",
+      "thumbnail": "v1358-orionis-dataset-{id}.webp",
+      "source": "science/tess/pdcsap/v1358-orionis-s0087.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/tess/pdcsap/v1358-orionis-s0087.dat",
+        "variable": "Brightness [%]",
+        "consumer": "tess-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 96,
+        "maximum": 104,
+        "colors": [
+          "#9b5fae",
+          "#b485c2",
+          "#ccabd6",
+          "#e5d1eb",
+          "#fdf7ff"
+        ],
+        "labels": [
+          "96%",
+          "104%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#fdf7ff, its Color dataset) over the brightness map this project made from the star's light in TESS sector 87 (December 2024 and January 2025): the map's scale, 96% to 104% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 6.8% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "TESS · the star in its color over its brightness map · December 2024 and January 2025",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/tess"
+      }
     }
   ],
   "emission": {

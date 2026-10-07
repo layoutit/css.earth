@@ -60,6 +60,9 @@
   ],
   "projectedRotationSpeedKmS": 24.77,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of V1298 Tau (pscomppars): projected rotation speed 24.77 km/s, from Johnson et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..247J/abstract)",
+  "rotationPeriodMeasuredDays": 2.84,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 4 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 2.84 d, the light swinging by 4.6% as the star turns",
+  "rotationLightSwingPercent": 4.55,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

@@ -24,6 +24,9 @@
   "ageSource": "NASA Exoplanet Archive, composite parameters of TOI-5143 (pscomppars): age 7.4 Gyr, from Radzom et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract)",
   "projectedRotationSpeedKmS": 2.53,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-5143 (pscomppars): projected rotation speed 2.53 km/s, from Radzom et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....169..189R/abstract)",
+  "rotationPeriodMeasuredDays": 4.27,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 45 and 72 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 4.27 d, the light swinging by 0.48% as the star turns",
+  "rotationLightSwingPercent": 0.48,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

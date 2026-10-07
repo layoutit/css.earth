@@ -26,6 +26,9 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of HD 80653 (pscomppars): rotation period 19.8 d, from Frustagli et al. 2020 (https://ui.adsabs.harvard.edu/abs/2020A&A...633A.133F/abstract)",
   "projectedRotationSpeedKmS": 3.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HD 80653 (pscomppars): projected rotation speed 3.5 km/s, from Naponiello et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026arXiv260719325N/abstract)",
+  "rotationPeriodMeasuredDays": 20.58,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 16 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 20.58 d, the light swinging by 0.09% as the star turns",
+  "rotationLightSwingPercent": 0.09,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

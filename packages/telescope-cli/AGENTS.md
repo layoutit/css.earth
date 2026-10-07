@@ -119,7 +119,9 @@ reduction's verdict, mission, window and light scatter into the record of every 
 supplies `natural`: the newest map in the star's own color, which becomes the dataset the page opens on
 (`Color + brightness`). It is the Brightness map's scale drawn from a darker, richer step of the star's own hue up to its color (`tinted`, `DARK_STEP`; never toward black), far stronger than the
 real contrast, which cannot be seen; its sentences say so with the star's number, and say what is measured (longitudes) and
-what is not (latitudes, shapes, any color change). A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
+what is not (latitudes, shapes, any color change). A map's scale is drawn from its range, never a reason to leave a star out: a receipt gives the range to a tenth of a percent, and a map that reads 100 to 100 there takes it from its table (`mapRange`).
+A kind's steps take its `stepGroup` id, or that id with `-maps` after it on a page whose other datasets already hold it as a dataset's id or a group's (a published map filed as `brightness`).
+`--bake` takes 40 stars a command, and removes a star's stale arrival picture just before its own group is baked. A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
 
 The papers API behind `telescope papers` is `src/papers.mts` and `src/papers/`. There is one search path: `findWorks`
 (`papers/works.mts`) asks OpenAlex, then arXiv when OpenAlex refuses, and the command and the star survey both call it; a

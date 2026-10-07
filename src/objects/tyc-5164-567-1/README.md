@@ -27,15 +27,21 @@ polarised profile for each spectrum, and ZDIpy fits the field to each run's prof
 ([rotation.json](source/preparation/rotation.json)). Longitude 0 faces us at the middle of each run. One color scale, ±200 G, serves
 the map.
 
+**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the TESS mission's own 2-minute light curve of sector 81 (July and August 2024; its PDC-MAP flux, kept at [MAST](https://archive.stsci.edu/missions-and-data/tess)) ([source record](../../sources/mast-tess-light-curves.json)). It is the light curve [Holcomb et al. (2022, ApJ 936, 138)](https://arxiv.org/abs/2206.10629) use, and their criteria decide whether it shows the star turning: SpinSpotter, their code, measures it, and starry (Luger et al. 2019) makes the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+
 ## Evidence
 
 Generated 2026-10-06 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 - Jun 2013: the map reaches a reduced chi-square of 1.20, against 4.06 with no field; mean field 74.4 G, 8% of its energy toroidal. Folsom, C. P. et al., arXiv:1601.00684 give 63.9 G and 10.6% for this run (instruments ESPaDOnS; maxG: 145.5; poloidalPct: 89.4; axisymmetricPct: 67.3; axisymmetricOf: total energy).
 
+**Brightness from TESS.** Holcomb et al. (2022, ApJ 936, 138) ask the peaks of the light's autocorrelation to have a height over a quarter of their width, a width between 0.4 and 0.6 and a parabola fit over 0.9, in at least half the star's sectors and in all of them together. Sector 81 gives a period of 4.81 d from the autocorrelation, whose peaks have a height of 0.31, a width of 0.45 and a fit of 1.00; 1 more of the star's 2 sectors does not meet the criteria. All 2 together give a period of 4.65 d from the autocorrelation, whose peaks have a height of 0.26, a width of 0.48 and a fit of 0.99, which is the star's period: 4.65 d. The light varies by 7.2% (the range between its 5th and 95th percentiles). On the stars its authors inspected by eye, 4.9% of the periods these criteria accepted were false, and 6.2% on a second set. The star's record holds 4.68 d from the catalogues. The map's light curve leaves a scatter of 0.54% about the light, whose own noise is 0.08%. Gaia DR3 lists 37 other stars within 63 arcseconds, with 3.1% of their light and the star's together.
+
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
+
+- **Brightness from TESS.** Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. The map is made at the tilt the page draws, 65°. The map is of July and August 2024: spots come and go within weeks or months.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 - **The magnetic maps are this project's reduction, not published maps.** How tightly a map is fitted is a choice the

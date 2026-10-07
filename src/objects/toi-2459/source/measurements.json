@@ -28,6 +28,9 @@
       "source": "VizieR J/AJ/168/41/table3 (THYME. X. MELANGE-5 association cand. members), column Prot: 10.49 d, the row 1.5 arcsec from the star's J2000 place"
     }
   ],
+  "rotationPeriodMeasuredDays": 11.13,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 5, 33 and 98 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 11.13 d, the light swinging by 0.52% as the star turns",
+  "rotationLightSwingPercent": 0.52,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

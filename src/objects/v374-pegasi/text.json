@@ -40,6 +40,21 @@
       "title": "Radial field, Aug 2006",
       "detail": "2 epochs, mapped here",
       "summary": "The star's magnetic field, mapped in this project from archived spectra by how it polarises starlight."
+    },
+    "brightness-sector-15": {
+      "title": "Brightness map, Sector 15",
+      "detail": "Sector 15, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-56": {
+      "title": "Brightness map, Sector 56",
+      "detail": "Sector 56, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, Sep 2022",
+      "detail": "TESS sector 56",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

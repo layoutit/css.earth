@@ -46,6 +46,9 @@
   "projectedRotationSpeedSource": "SIMBAD, HD 134319: projected rotation speed 10 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
   "spinInclinationDegrees": 68.7,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.94 solar radii): sin i = v sin i × P / (2πR) = 0.932. Not a measurement of the axis: the three numbers come from different papers.",
+  "rotationPeriodMeasuredDays": 4.46,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 14, 15, 16, 22, 23, 41, 48, 49, 50, 75 and 76 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 4.46 d, the light swinging by 2.7% as the star turns",
+  "rotationLightSwingPercent": 2.66,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
