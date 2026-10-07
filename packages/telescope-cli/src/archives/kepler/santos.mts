@@ -146,6 +146,7 @@ export function variabilityRange(flux: readonly number[]): number { const sorted
  * rule keeps it in their analysis, and the measured light a map of it is fitted to. */
 export interface QuarterReading { readonly quarter: number; /** Its points, and how many of them are measured and filled in. */ readonly points: number; readonly measured: number; readonly filled: number;
   /** From its first measured point to its last, days, and in turns of the star. */ readonly spanDays: number; readonly turns: number; /** The variance of its light over the median of the star's quarters. */ readonly varianceOverMedian: number;
+  /** Why the quarter has no map, when it has none: the papers' rule on its variance, or less than a turn of the star in it. */ readonly left?: 'variance' | 'turn';
   readonly verdict: RotationVerdict; readonly time: readonly number[]; readonly flux: readonly number[] }
 /** A star's quarters under a period the papers give it. A quarter the rule of García et al. (2014) removes is not part
  * of the light the papers' verdict is on, and has none. A quarter whose measured light spans less than one turn of the
@@ -158,11 +159,16 @@ export function quarterReadings(parts: readonly QuarterLight[], periodDays: numb
     const verdict: RotationVerdict = removed[index] ? { detected: false, reason: `In quarter ${part.quarter} the variance of the star's light is ${over} times the median of its quarters, more than ${ANOMALOUS_VARIANCE} of that median over the quarters beside it: ${citation} remove such a quarter from their rotation analysis (the rule of García et al. 2014).` }
       : turns < 1 ? { detected: false, reason: `Quarter ${part.quarter} holds ${spanDays.toFixed(1)} days of the star's light, less than one turn of ${periodDays} d: not every longitude faced Kepler in it.` }
       : { detected: true, periodDays, amplitude: Number(variabilityRange(light.flux).toFixed(6)) };
-    return { quarter: part.quarter, points: part.time.length, measured: light.time.length, filled: part.state.filter(state => state === POINT.filled).length, spanDays: Number(spanDays.toFixed(1)), turns: Number(turns.toFixed(2)), varianceOverMedian: over, verdict, time: light.time, flux: light.flux }; });
+    return { quarter: part.quarter, points: part.time.length, measured: light.time.length, filled: part.state.filter(state => state === POINT.filled).length, spanDays: Number(spanDays.toFixed(1)), turns: Number(turns.toFixed(2)), varianceOverMedian: over,
+      ...(removed[index] ? { left: 'variance' as const } : turns < 1 ? { left: 'turn' as const } : {}), verdict, time: light.time, flux: light.flux }; });
 }
 
-/** A star under the papers' verdict: the verdict, and each of its quarters in the light the papers read its period in. */
-export interface SantosStar { readonly verdict: RotationVerdict; readonly quarters: readonly QuarterReading[] }
+/** A star under the papers' verdict: the verdict, each of its quarters in the light the papers read its period in, and
+ * what a star's page says of that light: its filter, and the quarters left without a map with the reason for each. */
+export interface SantosStar { readonly verdict: RotationVerdict; readonly quarters: readonly QuarterReading[]; readonly note?: string }
+const listed = (items: readonly (string | number)[]) => items.join(', ').replace(/, ([^,]*)$/u, ' and $1');
+/** "quarter 13", "quarters 3, 6 and 12". */
+const quartersOf = (quarters: readonly QuarterReading[]) => `quarter${quarters.length === 1 ? '' : 's'} ${listed(quarters.map(quarter => quarter.quarter))}`;
 /** A star's row set beside its light curve of the filter the papers take the row's period from. The star's swing is that
  * of the light of all the quarters kept, together. A row that is no verdict of rotation reads no light. `turnDays` is
  * the time the star turns in when that is not the row's period: twice it, where the catalogues print twice it
@@ -171,8 +177,13 @@ export function santosStar(row: SantosRow | undefined, series: Pick<KepseismicSe
   const said = santosVerdict(row); if (!row || !said.detected || said.periodDays === undefined) return { verdict: said, quarters: [] };
   if (!series || series.kic !== row.kic || series.filterDays !== filterFor(said.periodDays)) throw new TypeError(`KIC ${row.kic}: a period of ${said.periodDays} d is read in the star's light filtered at ${filterFor(said.periodDays)} days.`);
   const quarters = quarterReadings(byQuarter(series), turnDays ?? said.periodDays, SANTOS_PAPERS[row.paper].citation), kept = quarters.filter(quarter => quarter.verdict.detected);
-  if (!kept.length) return { verdict: { detected: false, reason: `${SANTOS_PAPERS[row.paper].citation} list the star with a rotation period of ${said.periodDays} d, and none of its quarters is one a map can be made of: ${quarters.map(quarter => quarter.verdict.reason).join(' ')}` }, quarters };
-  return { verdict: { ...said, amplitude: Number(variabilityRange(kept.flatMap(quarter => quarter.flux)).toFixed(6)) }, quarters };
+  const removed = quarters.filter(quarter => quarter.left === 'variance'), short = quarters.filter(quarter => quarter.left === 'turn');
+  const note = [`The papers read a period of ${said.periodDays} d in the star's light filtered at ${series.filterDays} days, and that is the light curve mapped.`,
+    ...(removed.length + short.length ? [`${removed.length + short.length} of the star's ${quarters.length} quarters ${removed.length + short.length === 1 ? 'has' : 'have'} no map.`] : []),
+    ...(removed.length ? [`The papers' rule on a quarter's variance (García et al. 2014) removes ${quartersOf(removed)}, whose variance is ${listed(removed.map(quarter => quarter.varianceOverMedian))} times the median of the star's quarters.`] : []),
+    ...(short.length ? [`${quartersOf(short).replace(/^q/u, 'Q')} ${short.length === 1 ? 'holds' : 'hold'} less than one turn of the star.`] : [])].join(' ');
+  if (!kept.length) return { verdict: { detected: false, reason: `${SANTOS_PAPERS[row.paper].citation} list the star with a rotation period of ${said.periodDays} d, and none of its quarters is one a map can be made of: ${quarters.map(quarter => quarter.verdict.reason).join(' ')}` }, quarters, note };
+  return { verdict: { ...said, amplitude: Number(variabilityRange(kept.flatMap(quarter => quarter.flux)).toFixed(6)) }, quarters, note };
 }
 
 /** The columns asked of a table: the star, its quarters, the table's flags and, of a table of periods, the period and the activity. */

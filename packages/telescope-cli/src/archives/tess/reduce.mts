@@ -185,7 +185,7 @@ export async function reduceStar(id: string, light?: StarLight): Promise<Record<
       if (!kept.detected) { reasons.push(said.detected ? `${paper.citation} list the star with a rotation period of ${said.periodDays} d. ${kept.reason}` : kept.reason!); continue; }
       // The light the papers read a period of that length in, and each of its quarters under their rule.
       const [file] = await fetchLightCurves(targets.filter(one => one.filterDays === filterFor(said.periodDays!)), files); if (!file) throw new Error(`KEPSEISMIC lists no light curve of KIC ${kic} filtered at ${filterFor(said.periodDays!)} days.`);
-      const series = readKepseismic(new Uint8Array(await readFile(file.file))), read = santosStar(row, series, kept.periodDays);
+      const series = readKepseismic(new Uint8Array(await readFile(file.file))), read = santosStar(row, series, kept.periodDays); published = { ...published, note: read.note };
       for (const quarter of read.quarters) { const name = `${stem('Kepler', quarter.quarter)}.curve.json`;
         await writeFile(resolve(run, name), `${JSON.stringify({ mission: 'Kepler', window: quarter.quarter, product: 'kepseismic', time: quarter.time, flux: quarter.flux })}\n`);
         tried.push({ mission: 'Kepler', window: quarter.quarter, method: paper.id, lightCurveFile: { url: file.url, bytes: file.bytes, pipeline: series.pipeline, filterDays: series.filterDays }, frames: quarter.measured, lightCurve: name,

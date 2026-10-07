@@ -71,7 +71,7 @@ test('a quarter has a map when the papers\' rule keeps it and its measured light
   const part = (quarter: number, start: number, days: number, swing: number, filled: readonly number[] = []) => ({ quarter, time: Array.from({ length: days }, (_, day) => start + day), flux: Array.from({ length: days }, (_, day) => swing * Math.sin(2 * Math.PI * day / 10)),
     state: Array.from({ length: days }, (_, day) => filled.includes(day) ? 2 : 1) });
   const read = quarterReadings([part(2, 170, 40, 1000), part(3, 260, 40, 1000, [0, 1, 39]), part(4, 352, 40, 1000), part(5, 443, 40, 5000), part(6, 539, 6, 1000)], 10, 'Santos et al. (2019, ApJS 244, 21)');
-  assert.deepEqual(read.map(one => one.verdict.detected), [true, true, true, false, false]);
+  assert.deepEqual(read.map(one => [one.verdict.detected, one.left]), [[true, undefined], [true, undefined], [true, undefined], [false, 'variance'], [false, 'turn']]);
   // The points its authors filled in are counted, and left out of what a map is fitted to.
   assert.deepEqual([read[1]!.points, read[1]!.measured, read[1]!.filled, read[1]!.time[0], read[1]!.spanDays, read[1]!.turns], [40, 37, 3, 262, 36, 3.6]);
   assert.equal(read[0]!.verdict.periodDays, 10); assert.ok(Math.abs(read[0]!.verdict.amplitude! - 0.0019) < 1e-4);
@@ -89,6 +89,11 @@ test('a star\'s row is set beside its light of the filter the papers read the pe
   const star = santosStar(row, series);
   assert.deepEqual(star.quarters.map(quarter => [quarter.quarter, quarter.verdict.detected, quarter.turns > 2.5]), [[2, true, true], [3, true, true]]);
   assert.equal(star.verdict.periodDays, 33.75); assert.ok(Math.abs(star.verdict.amplitude! - 0.0059) < 2e-4);
+  // What a page says of the light: the filter read, and nothing more when every quarter has a map.
+  assert.equal(star.note, 'The papers read a period of 33.75 d in the star\'s light filtered at 55 days, and that is the light curve mapped.');
+  // With quarter 1 in the series too (33 days: under one turn), the note counts it and says why.
+  const early = Array.from({ length: 66 }, (_, index) => Number(clock(54964.1 + step * index).toFixed(6))), all = [...early, ...time], longer = { ...series, time: all, flux: all.map(at => 3000 * Math.sin(2 * Math.PI * at / 33.75)), state: all.map(() => 1) };
+  assert.equal(santosStar(row, longer).note, 'The papers read a period of 33.75 d in the star\'s light filtered at 55 days, and that is the light curve mapped. 1 of the star\'s 3 quarters has no map. Quarter 1 holds less than one turn of the star.');
   // The 20-day light is not the light a period of 33.75 days is read in.
   assert.throws(() => santosStar(row, { ...series, filterDays: 20 }), /filtered at 55 days/u);
   // A row that is no verdict of rotation reads no light.
