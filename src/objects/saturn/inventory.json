@@ -933,27 +933,9 @@
     },
     {
       "location": "prepared",
-      "filename": "image-quality.json",
-      "bytes": 4403,
-      "sha256": "f2cdea57443feee06769b208c61f4099a196ab472725f4da656d1885cf3285e6"
-    },
-    {
-      "location": "prepared",
-      "filename": "layouts.json",
-      "bytes": 309,
-      "sha256": "08d4d9a03bae5aa86b105cc1c0975a752c16471f9221db0b5b76be507fc79da6"
-    },
-    {
-      "location": "prepared",
       "filename": "leaf-boxes.json",
       "bytes": 134856,
       "sha256": "d4bdb2f0b8cd2bc2e3583989ab3b014f3c73da8e25acbdfa8519a420953ad60d"
-    },
-    {
-      "location": "prepared",
-      "filename": "material-datasets.json",
-      "bytes": 9206,
-      "sha256": "de66a099b1a334a21b9cc1d46fd46b51c7a6e00ecc1b96969924dc480f93a8ac"
     },
     {
       "location": "prepared",
@@ -1044,12 +1026,6 @@
       "filename": "text.json",
       "bytes": 4649,
       "sha256": "48cb1949d31dda06fd68a1c31cff8eee0770be08a425e0c9f99d955a7dc7e0dd"
-    },
-    {
-      "location": "prepared",
-      "filename": "views.json",
-      "bytes": 8408,
-      "sha256": "a323ba014e45e7199edccb58d7ec8f9a4639969625575ea694f55d4a578caac0"
     }
   ]
 }

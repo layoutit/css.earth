@@ -422,6 +422,9 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       if (binding.initial !== undefined && !(typeof binding.initial === "string" && Number.isFinite(Number(binding.initial)))) fail("silhouette step initial value must be a number");
       if (binding.boxes !== undefined) {
         if (binding.initial === undefined) fail("leaf box records need the initial step");
+        // A stored runtime names the file its leaf boxes are in (@cssearth/objects/node readPreparedRuntimeText reads it whole).
+        if (typeof binding.boxes === "object" && binding.boxes !== null && typeof Reflect.get(binding.boxes, "file") === "string")
+          fail(`leaf boxes are in ${String(Reflect.get(binding.boxes, "file"))}: this is a stored runtime, read it with readPreparedRuntimeText`);
         for (const box of array(binding.boxes, "leaf box records")) node((box as { node: number }).node);
       }
       finite(binding.hysteresis, "silhouette step hysteresis");

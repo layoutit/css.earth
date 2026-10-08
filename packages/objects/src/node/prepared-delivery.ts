@@ -12,8 +12,8 @@
  * record lists them.
  */
 
-/** Who reads a delivered record after its bake. `unaudited`: listed before this ledger existed, no reader traced yet. */
-export type PreparedReader = 'page' | 'site-build' | 'later-bake' | 'unaudited';
+/** Who reads a delivered record after its bake. */
+export type PreparedReader = 'page' | 'site-build' | 'later-bake';
 /** What a body's descriptor says about its delivery. A directory without a descriptor (a fixture, a stage) has neither. */
 export interface PreparedDeliveryContext { readonly retainsScene?: boolean; readonly keepsMaterial?: boolean }
 /** `when`: delivered only for a body the named context is true of, and a working record for every other body. */
@@ -47,6 +47,8 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   { name: 'panel.json', reader: 'later-bake', read: 'the content preparation of the bodies that author a panel' },
   { name: 'record.json', reader: 'later-bake', read: 'the volume bank preparation' },
   { name: 'texture-levels.json', reader: 'later-bake', read: 'the paged-ellipsoid preparation' },
+  { name: 'surface-raster-plan.json', reader: 'later-bake', read: 'packages/bake/src/objects/layers/paged-ellipsoid/object.ts compares a reuse-images run with it' },
+  { name: 'raster-assets.json', reader: 'later-bake', read: 'packages/bake/src/objects/layers/paged-ellipsoid/object.ts carries its image metadata into a reuse-images run' },
   // The world and the bank packages: the site resolves these by content address (site/prepared/prepared-context-objects.mts).
   { name: 'members.json', reader: 'page', read: 'site/server/world-places.mts' },
   { name: 'places.json', reader: 'page', read: 'site/server/world-places.mts; site/world/application/world-approach.mts' },
@@ -66,10 +68,6 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   { name: 'stars-provenance.json', reader: 'page', read: 'site/prepared/prepared-context-objects.mts' },
   { name: 'shell.json', reader: 'page', read: 'site/prepared/prepared-context-objects.mts' },
   { name: 'surface-mesh.json', reader: 'page', read: 'site/prepared/prepared-context-objects.mts' },
-  // Listed before this ledger and not traced to a reader by name (2026-10-08): fourteen files, under 1 MB together.
-  // Each stays until its lane's next bake shows whether anything reads it.
-  ...['image-quality.json', 'title.json', 'surface-raster-plan.json', 'raster-assets.json', 'runtime-assets.json', 'layouts.json', 'material-datasets.json', 'views.json']
-    .map(name => ({ name, reader: 'unaudited' as const, read: 'no reader found by name' })),
 ];
 
 export interface WorkingPreparedRecord { readonly name: string | RegExp; readonly why: string }
@@ -94,7 +92,9 @@ export const WORKING_PREPARED_RECORDS: readonly WorkingPreparedRecord[] = [
   { name: 'sky.json', why: 'a copy of the runtime\'s sky' },
   { name: 'sun.json', why: 'a copy of the runtime\'s sun' },
   { name: 'world-navigation.json', why: 'the receipt of the world-navigation step, which every page step rewrites' },
+  { name: /^(material-datasets|views|layouts)\.json$/u, why: 'the material-composition lane\'s datasets, views and layouts before its runtime carries them' },
   // Written by an earlier preparation and by none now; a checkout baked before the retirement still holds them.
+  { name: /^(image-quality|title|runtime-assets)\.json$/u, why: 'nothing writes or reads them (traced 2026-10-08)' },
   { name: 'provenance.json', why: 'retired 2026-09-29: lineage is read from the source records' },
   { name: 'lenses.json', why: 'retired 2026-09-29: datasets.json replaced it' },
 ];

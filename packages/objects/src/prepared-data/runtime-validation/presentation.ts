@@ -140,6 +140,10 @@ export function requireViewBindings(value: unknown, tree: PreparedTree, camera: 
           const parts = array(value, name);
           if (parts.length !== 2 || parts.some(part => typeof part !== 'number' ? typeof part !== 'string' || /var\(|calc\(/.test(part) : !Number.isFinite(part))) fail(`${name} must be two lengths or plain components`);
         };
+        // A stored runtime names the file its leaf boxes are in; it is read whole through readPreparedRuntimeText
+        // (@cssearth/objects/node), never parsed as it is stored.
+        if (typeof binding.boxes === 'object' && binding.boxes !== null && typeof Reflect.get(binding.boxes, 'file') === 'string')
+          fail(`leaf boxes are in ${String(Reflect.get(binding.boxes, 'file'))}: this is a stored runtime, read it with readPreparedRuntimeText`);
         for (const input of array(binding.boxes, 'leaf box records')) {
           const box = record(input, 'leaf box record', ['node', 'density', 'box', 'atlas', 'backgroundSize', 'backgroundPosition', 'matrix', 'seam']);
           const node = nodeReference(box.node, tree);

@@ -8,7 +8,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 
 import {
-  assembleRuntimeAssetClosure, inventoryPreparedAssets, inventoryPublicAssets, normalizeRuntimeAssetUrls,
+  assembleRuntimeAssetClosure, inventoryPreparedAssets, inventoryPreparedSubset, inventoryPublicAssets, normalizeRuntimeAssetUrls,
   readInventory, updateInventory, validateInventory, verifyInventory,
 } from "@cssearth/objects/node";
 
@@ -65,6 +65,12 @@ test("one inventory per object: each location is written by its own stage and ke
   // A top-level record the ledger does not declare is refused, not listed; a file in a record's own folder is delivered.
   await writeFile(resolve(preparedRoot, "notes.json"), "{}");
   await assert.rejects(inventoryPreparedAssets({ objectId: "fixture", objectDirectory, gitTrackedPaths: async () => new Set() }), /delivery ledger does not declare: notes\.json/u);
+  // A step that pins only its own files is not stopped by another step's leftover: it lists what it owns and keeps the rest.
+  await writeFile(resolve(preparedRoot, "members.json"), "members");
+  const pinned = await inventoryPreparedSubset({ objectId: "fixture", objectDirectory, owns: filename => filename === "members.json" });
+  assert.deepEqual(pinned?.assets.filter(asset => asset.location === "prepared").map(asset => asset.filename), ["atlases/x.webp", "members.json", "runtime.json"]);
+  await rm(resolve(preparedRoot, "members.json"));
+  await inventoryPreparedSubset({ objectId: "fixture", objectDirectory, owns: filename => filename === "members.json" });
   await rm(resolve(preparedRoot, "notes.json"));
   // Re-inventorying the public textures leaves the prepared entries alone, and vice versa.
   await writeFile(resolve(publicRoot, "a.webp"), "asset-a2");
