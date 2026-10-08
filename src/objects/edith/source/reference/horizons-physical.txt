@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27517%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 517 Edith (A903 SK)           2026-Oct-08 06:19:51
+Rec #:     517 (+COV) Soln.date: 2026-Jun-05_03:42:13   # obs: 9492 (1903-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458183.5 ! 2018-Mar-06.00 (TDB)         Residual RMS= .21717
+   EC= .1796114271130367   QR= 2.594350872846549   TP= 2457348.7461287128
+   OM= 274.235767851354    W=  140.6942508415754   IN= 3.196131193465865
+   A= 3.162343989893689    MA= 146.3015245256667   ADIST= 3.730337106940829
+   PER= 5.6237             N= .175263068           ANGMOM= .030092986
+   DAN= 3.5543             DDN= 2.6869             L= 54.9737295
+   B= 2.0239876            MOID= 1.60756004        TP= 2015-Nov-22.2461287128
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 55.945             ROTPER= 9.2747
+   H= 9.64                 G= .150                 B-V= .711
+                           ALBEDO= .026            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#83, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "achilles",
+  "generator": "packages/bake/authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 588,
+    "by": "SBDB record des 588"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 1,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_jupiter_trojans_csv::2.0",
+          "Asteroid_Number": "588",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00588",
+          "Absolute_mag": "8.47",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455324.9661185",
+          "N_W1": "9",
+          "N_W2": "9",
+          "N_W3": "9",
+          "N_W4": "9",
+          "Fit_code": "DVBI",
+          "Diameter": "130.099",
+          "Diameter_err": "0.554",
+          "V_albedo": "0.043",
+          "V_albedo_err": "0.006",
+          "IR_albedo": "0.129",
+          "IR_albedo_err": "0.011",
+          "Beaming_param": "0.711",
+          "Beaming_param_err": "0.007",
+          "Stacked_flag": "-",
+          "Reference": "Gr12b",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Gr12b": "Grav, T., A.K. Mainzer, J.M. Bauer, J.R. Masiero, C.R. Nugent, WISE/NEOWISE Observations of the Jovian Trojan Population: Taxonomy, Astroph. J. 759, 49, doi:10.1088/0004-637X/759/1/49, 2012."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

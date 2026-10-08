@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "massalia-arrival.webp",
+      "bytes": 29714,
+      "sha256": "f45a2ebf522177f2c352b988af8177adb70aaa2a23defabe98da7141cc8e4fac"
+    },
+    {
+      "location": "public",
+      "filename": "massalia-billboard.webp",
+      "bytes": 3772,
+      "sha256": "6de1e9a0eb70dd551ad0b8966153428bba121aeec2e4aaf5d50c794cd7976b4e"
+    },
+    {
+      "location": "public",
+      "filename": "massalia-color-surface-alpha@2x.webp",
+      "bytes": 94,
+      "sha256": "44334dc4c7759adb0c769d7ff94d2356bf9bea9e696c137af6d658a593da66ae"
+    },
+    {
+      "location": "public",
+      "filename": "massalia-color-surface@2x.webp",
+      "bytes": 50,
+      "sha256": "a66d258df565893cabf6c7b9e0eadddb0213dbd682c158179a9cb2d273bdff3e"
+    },
+    {
+      "location": "public",
+      "filename": "massalia-color-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "8e0f9eca0382fed384523346ed83490dc521e2a81af4a3e70735a43a71f33b21"
+    },
+    {
+      "location": "public",
+      "filename": "massalia-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "location": "public",
+      "filename": "massalia-elevation-surface-alpha@2x.webp",
+      "bytes": 108466,
+      "sha256": "39b85977d9290d592632131c80a62fea5b62a51c445a7449a02ffcdb21029899"
+    },
+    {
+      "location": "public",
+      "filename": "massalia-elevation-surface@2x.webp",
+      "bytes": 42748,
+      "sha256": "d3441a93e8fbc835385bf96242f68c87a3bde5cfcc4ca47ed7892b643c3b8d96"
+    },
+    {
+      "location": "public",
+      "filename": "massalia-elevation-thumbnail.webp",
+      "bytes": 5392,
+      "sha256": "8b843e9ebde6827c4c1099a530b663c53b78602695de3e755ad34521b140f9c4"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 303,
+      "sha256": "7ea1a1898b96937fbf71ac4be3b4a14234171b1dcf862864145f1d4dff07cd4d"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 531,
+      "sha256": "898f787f5ae36c4fbdb13a321c4821b32ab07c7c20d65b948f11562c75ae57a0"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 5058,
+      "sha256": "94433ad91fd104adac9e1fc901e6a999c898d1f68cb83a98dd7dbe8347d4fc53"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 1596,
+      "sha256": "9830828f1879a1b336819f60a46aff05015b0383e7e9aed69c673ebc3e999ca5"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 197,
+      "sha256": "e59fa149c7436a747634c9c123b38a9a14c9891a2299d55115da9e5708a92144"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 442,
+      "sha256": "5bc8b986306969d45815046383ad0f1e1d47e8ff3f18117591f0ed73a646921b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 3634,
+      "sha256": "736d7df30240f0b1a5961f73bb400305be2e62906067f02dd3cf5fa31b74a41e"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 320536,
+      "sha256": "86dd240b021dd6461a117e624929969b4407ff24d9c58f7df4178ba90f0b5194"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 270480,
+      "sha256": "abcdbcee4892e1fe882e4f9b17fca52a865d9cf2355593d6b4e7fa8400ab57e2"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 14029,
+      "sha256": "fa013e043a9323bd7b1f90ae4232aed473c3caa2c31ac638e0208de2e0021ac0"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1768,
+      "sha256": "79cdc5fed2b019976cad0db0e8b6a10742b5e514b2220f6fbc280b6a4dff8062"
+    }
+  ]
+}

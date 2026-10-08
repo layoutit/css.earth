@@ -1,0 +1,128 @@
+{
+  "id": "protogeneia",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Protogeneia",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 54.205
+      },
+      "schema": "cssearth-authored-object@2",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        440285759285.76697,
+        116624696244.76471,
+        63790218398.72381
+      ],
+      "presentationToReference": [
+        0.9576527253806323,
+        4.8713652078595585e-17,
+        0.28792578483186826,
+        0.26416674279043006,
+        0.39777715593191376,
+        -0.8786291972283944,
+        0.11453029980988473,
+        -0.9174820620691819,
+        -0.380932377472354
+      ],
+      "orbitUpReference": [
+        -9.244463733058732e-33,
+        -0.39777715593191376,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 235.67391304347825,
+      "bodyRadiusM": 54205
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/templates/small-body.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Protogeneia",
+      "classification": "asteroid",
+      "color": "#9b9a95",
+      "distanceAu": 3.13636157165271,
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in July 1875.",
+      "systemName": "Solar System",
+      "order": 283,
+      "context": {
+        "order": 329
+      }
+    }
+  },
+  "schema": "cssearth-object@2",
+  "parent": "solar-system",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

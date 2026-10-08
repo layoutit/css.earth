@@ -1,0 +1,158 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "comacina",
+  "displayName": "Comacina",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Display reference radius",
+        "value": "69.69 km (size-calibrated model)",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=489",
+          "label": "JPL Small-Body Database, physical parameters of (489) Comacina",
+          "checked": "2026-10-08",
+          "path": "source/reference/calibration.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "/diameterKm; radius = diameterKm / 2"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Solar semimajor axis",
+        "value": "3.151 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27489%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-10-08",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; A (km) / 149597870.7"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "5.59 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27489%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-10-08",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; PR (days) / 365.25"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Model rotation period",
+        "value": "9.02321 hours",
+        "source": {
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/809",
+          "label": "DAMIT model 809",
+          "checked": "2026-10-08",
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 809; /periodHours"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc color from a published reflectance spectrum and V geometric albedo, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "/scenes/comacina/comacina-color-thumbnail.webp",
+        "surface": "comacina-color-surface@2x.webp",
+        "poles": "comacina-color-surface@2x.webp",
+        "source": {
+          "id": "comacina-disc-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202243791"
+        },
+        "falseColor": false,
+        "notes": "Convex light-curve model at the 139.39 ± 3 km thermal diameter JPL lists. The convex model shows broad shape; rotational phase is illustrative. One mean color for the whole disc (Gaia DR3 reflectance spectrum), scaled to the 4.3% geometric albedo JPL lists; no terrain, albedo pattern or color variation is drawn."
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/comacina/comacina-elevation-thumbnail.webp",
+        "surface": "comacina-elevation-surface@2x.webp",
+        "poles": "comacina-elevation-surface@2x.webp",
+        "source": {
+          "id": "comacina-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-20",
+            "2.5",
+            "25"
+          ],
+          "meta": "km · 69.69 km reference sphere",
+          "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/809",
+          "image": "/scenes/comacina/comacina-elevation-legend.webp"
+        },
+        "notes": "Radius on the shape model minus a 69.69 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Model record",
+      "role": "terrain",
+      "description": "DAMIT model 809, version 2016-01-04",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/809"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Published pole and period; arbitrary display phase",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/809"
+    },
+    {
+      "label": "Gaia Collaboration, Galluccio et al. (2023)",
+      "role": "surface",
+      "description": "Gaia DR3 reflectance spectrum",
+      "href": "https://doi.org/10.1051/0004-6361/202243791"
+    },
+    {
+      "label": "JPL Small-Body Database",
+      "role": "surface",
+      "description": "Geometric albedo",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=489"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/809",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Comacina model 809; original model authors identified in its pinned reference records."
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/comacina.json",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

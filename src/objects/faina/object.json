@@ -1,0 +1,125 @@
+{
+  "id": "faina",
+  "parent": "solar-system",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Faina",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 56.8495
+      },
+      "schema": "cssearth-authored-object@2",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -380064640721.81793,
+        85312513469.57724,
+        158718601089.52692
+      ],
+      "presentationToReference": [
+        -0.9372315762343203,
+        -1.1102230246251565e-16,
+        0.3487075744937752,
+        0.31993294450569165,
+        0.39777715593191365,
+        0.8598931591998137,
+        0.13870790723404985,
+        -0.9174820620691819,
+        0.3728093108440725
+      ],
+      "orbitUpReference": [
+        1.1102230246251565e-16,
+        -0.39777715593191365,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 247.1717391304348,
+      "bodyRadiusM": 56849.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/templates/small-body.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Faina",
+      "classification": "asteroid",
+      "color": "#999b95",
+      "distanceAu": 2.551211857357946,
+      "description": "Main-belt asteroid found in 1913.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@2",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

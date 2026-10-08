@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "stereoskopia",
+  "card": {
+    "text": "Outer main-belt asteroid found in 1905.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=566",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "566 Stereoskopia (A905 KA); Discovered 1905-May-28 by Gotz, P. at Heidelberg; orbit class: Outer Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-127149",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/127149/shape.txt",
+        "label": "DAMIT shape 127149 · Stereoskopia",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "P. Gotz found Stereoskopia at Heidelberg on 28 May 1905.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=566",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "566 Stereoskopia (A905 KA); Discovered 1905-May-28 by Gotz, P. at Heidelberg; orbit class: Outer Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-127149",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/127149/shape.txt",
+        "label": "DAMIT shape 127149 · Stereoskopia",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Stereoskopia’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 74 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

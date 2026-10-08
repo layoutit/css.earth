@@ -1,0 +1,178 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "panopaea",
+  "displayName": "Panopaea",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Model volume-equivalent radius",
+        "value": "64 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Horizons pinned physical record",
+          "checked": "2026-09-16",
+          "path": "source/reference/horizons-physical.txt",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "Target physical data: RAD (km)"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Distance from Sun",
+        "value": "2.614 AU (mean)",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2770%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-16",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; A (km) / 149597870.7"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "4.23 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2770%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-16",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; PR (days) / 365.25"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Rotation period",
+        "value": "15.8044 hours",
+        "source": {
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171",
+          "label": "DAMIT model 6171",
+          "checked": "2026-09-16",
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "fields.Period (h)"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.062 ± 0.012 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2014 (Mas14)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      }
+    ]
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc color from a published reflectance spectrum and V geometric albedo, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "/scenes/panopaea/panopaea-color-thumbnail.webp",
+        "surface": "panopaea-color-surface@2x.webp",
+        "poles": "panopaea-color-surface@2x.webp",
+        "source": {
+          "id": "panopaea-disc-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202243791"
+        },
+        "falseColor": false,
+        "notes": "Calibrated DAMIT shape One mean color for the whole disc (Gaia DR3 reflectance spectrum), scaled to the 3.8% geometric albedo JPL lists; no terrain, albedo pattern or color variation is drawn."
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/panopaea/panopaea-elevation-thumbnail.webp",
+        "surface": "panopaea-elevation-surface@2x.webp",
+        "poles": "panopaea-elevation-surface@2x.webp",
+        "source": {
+          "id": "panopaea-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-10",
+            "0",
+            "10"
+          ],
+          "meta": "km · 64 km reference sphere",
+          "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171",
+          "image": "/scenes/panopaea/panopaea-elevation-legend.webp"
+        },
+        "notes": "Source shape · radial height"
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Model record",
+      "role": "facts",
+      "description": "DAMIT model 6171, version 2023-10-03",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171"
+    },
+    {
+      "label": "Shape data",
+      "role": "terrain",
+      "description": "Original calibrated vertex and triangle table",
+      "href": "https://damit.cuni.cz/projects/damit/stored_files/open/127404/shape.txt"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Published pole and period; arbitrary display phase",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171"
+    },
+    {
+      "label": "Gaia Collaboration, Galluccio et al. (2023)",
+      "role": "surface",
+      "description": "Gaia DR3 reflectance spectrum",
+      "href": "https://doi.org/10.1051/0004-6361/202243791"
+    },
+    {
+      "label": "JPL Small-Body Database",
+      "role": "surface",
+      "description": "Geometric albedo",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=70"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Panopaea model 6171, version 2023-10-03; source authors listed in the pinned model record."
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/panopaea.json",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

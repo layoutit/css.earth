@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27410%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                410 Chloris (A896 AC)          2026-Oct-08 06:17:50
+Rec #:     410 (+COV) Soln.date: 2026-Jun-05_03:34:08   # obs: 8886 (1906-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458279.5 ! 2018-Jun-10.00 (TDB)         Residual RMS= .20002
+   EC= .2421370316663035   QR= 2.063594119448902   TP= 2458668.2414336568
+   OM= 96.93881986791638   W=  172.9390569211675   IN= 10.96603155114281
+   A= 2.722911932200751    MA= 274.7264166373565   ADIST= 3.3822297449526
+   PER= 4.49323            N= .219358103           ANGMOM= .027540913
+   DAN= 3.37405            DDN= 2.06665            L= 270.0055422
+   B= 1.3399068            MOID= 1.04762006        TP= 2019-Jul-03.7414336568
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 59.4645            ROTPER= 32.5
+   H= 8.42                 G= .150                 B-V= .748
+                           ALBEDO= .043            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#94, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,15 @@
+{
+  "method": "radiometric-effective-diameter-transfer",
+  "diameterKm": 107.227,
+  "uncertaintyKm": 0.494,
+  "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "reference": "JPL Small-Body Database, physical parameters of (521) Brixia",
+  "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=521",
+  "notes": "JPL lists a diameter of 107.227 ± 0.494 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "scaleKmPerSourceUnit": 86.42452943539051,
+  "sourceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=521",
+  "sourceLabel": "JPL Small-Body Database, physical parameters of (521) Brixia",
+  "diameterSemantics": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. JPL lists a diameter of 107.227 ± 0.494 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "visibleDescription": "Convex light-curve model at the 107.227 ± 0.494 km thermal diameter JPL lists."
+}

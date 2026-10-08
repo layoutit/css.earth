@@ -1,0 +1,15 @@
+{
+  "method": "radiometric-effective-diameter-transfer",
+  "diameterKm": 131.038,
+  "uncertaintyKm": 1.195,
+  "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "reference": "JPL Small-Body Database, physical parameters of (911) Agamemnon",
+  "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=911",
+  "notes": "JPL lists a diameter of 131.038 ± 1.195 km, from NEOWISE (Grav et al. 2012, ApJ 759, 49; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "scaleKmPerSourceUnit": 105.61610364555435,
+  "sourceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=911",
+  "sourceLabel": "JPL Small-Body Database, physical parameters of (911) Agamemnon",
+  "diameterSemantics": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. JPL lists a diameter of 131.038 ± 1.195 km, from NEOWISE (Grav et al. 2012, ApJ 759, 49; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "visibleDescription": "Convex light-curve model at the 131.038 ± 1.195 km thermal diameter JPL lists."
+}

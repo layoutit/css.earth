@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "aegina",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 91",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 12 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.81505483,
+          "uncertainty": 0.002192451
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.8768635,
+          "uncertainty": 0.0011378969
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9336142,
+          "uncertainty": 0.0010426084
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9690253,
+          "uncertainty": 0.0010360915
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0010555441
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0044609,
+          "uncertainty": 0.0011205956
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 0.9547342,
+          "uncertainty": 0.001055184
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 0.9774597,
+          "uncertainty": 0.00097606995
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 0.98782355,
+          "uncertainty": 0.0010098991
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0021007,
+          "uncertainty": 0.0010714749
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0213075,
+          "uncertainty": 0.0010936394
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0355383,
+          "uncertainty": 0.0010692513
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.052884,
+          "uncertainty": 0.0011353204
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.081564,
+          "uncertainty": 0.0011172525
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1202639,
+          "uncertainty": 0.0013069458
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.1864454,
+          "uncertainty": 0.0017315658
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (91) Aegina",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.048,
+    "uncertainty": 0.005
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

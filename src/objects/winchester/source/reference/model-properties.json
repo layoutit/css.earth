@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/247",
+  "modelId": 247,
+  "modelVersion": "2011-02-18",
+  "diameterKm": 171,
+  "diameterInterpretation": "Convex light-curve model at the 171 ± 15 km equivalent diameter DAMIT lists for it.",
+  "calibration": {
+    "method": "published-volume-equivalent-size-transfer",
+    "diameterKm": 171,
+    "uncertaintyKm": 15,
+    "quantity": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+    "reference": "DAMIT model 247, version 2011-02-18",
+    "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/247",
+    "notes": "DAMIT marks the model as size-calibrated and lists an equivalent diameter of 171 ± 15 km with it; the model references describe the scaling.",
+    "scaleKmPerSourceUnit": 1.0000000225223846,
+    "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/247",
+    "sourceLabel": "DAMIT model 247, version 2011-02-18",
+    "diameterSemantics": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks the model as size-calibrated and lists an equivalent diameter of 171 ± 15 km with it; the model references describe the scaling.",
+    "visibleDescription": "Convex light-curve model at the 171 ± 15 km equivalent diameter DAMIT lists for it."
+  },
+  "periodHours": 9.4148,
+  "poleEclipticJ2000Degrees": [
+    304,
+    -60
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/812/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 1000.0000225223846,
+    "firstVertexKm": [
+      -0.06546200147436035,
+      4.079223091873829,
+      91.42531705911611
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      185.29249217322868,
+      175.38298895004306,
+      160.62589461767809
+    ],
+    "volumeCubicKm": 2618104.357333146,
+    "volumeEquivalentRadiusKm": 85.5,
+    "radialRangeKm": [
+      70.9860313702106,
+      98.40582157887403
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "outputFaces": 414,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1710,
+    "estimatedErrorMeters": 1556.0400390625,
+    "sampledErrorMeters": 1674.0304615593,
+    "topology": {
+      "vertices": 209,
+      "edges": 621,
+      "faces": 414,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 2596862346857373.5
+    }
+  }
+}

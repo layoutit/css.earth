@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "winchester",
+  "card": {
+    "text": "Main-belt asteroid found in 1913.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=747",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "747 Winchester (A913 EK); Discovered 1913-Mar-07 by Metcalf, J. H. at Winchester; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-812",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/812/shape.txt",
+        "label": "DAMIT shape 812 · Winchester",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "J. H. Metcalf found Winchester at Winchester on 7 March 1913.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=747",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "747 Winchester (A913 EK); Discovered 1913-Mar-07 by Metcalf, J. H. at Winchester; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-812",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/812/shape.txt",
+        "label": "DAMIT shape 812 · Winchester",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Winchester’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 85.5 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

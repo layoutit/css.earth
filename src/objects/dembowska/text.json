@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "dembowska",
+  "card": {
+    "text": "Main-belt asteroid found in 1892.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=349",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "349 Dembowska (A892 XB); Discovered 1892-Dec-09 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-606",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/606/shape.txt",
+        "label": "DAMIT shape 606 · Dembowska",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Charlois found Dembowska at Nice on 9 December 1892.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=349",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "349 Dembowska (A892 XB); Discovered 1892-Dec-09 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-606",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/606/shape.txt",
+        "label": "DAMIT shape 606 · Dembowska",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Dembowska’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 81 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

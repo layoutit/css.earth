@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27139%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 139 Juewa (A874 TA)           2026-Sep-08 10:25:16
+Rec #:     139 (+COV) Soln.date: 2026-Jun-05_03:11:58   # obs: 9304 (1881-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458010.5 ! 2017-Sep-14.00 (TDB)         Residual RMS= .20132
+   EC= .175302739489978    QR= 2.293597985956485   TP= 2457316.8582958481
+   OM= 1.834725380191609   W=  165.6007261834833   IN= 10.9124168224467
+   A= 2.781139329283139    MA= 147.4026021890923   ADIST= 3.268680672609794
+   PER= 4.63812            N= .212505392           ANGMOM= .028243269
+   DAN= 3.247              DDN= 2.3044             L= 167.6852756
+   B= 2.6982948            MOID= 1.30139005        TP= 2015-Oct-21.3582958481
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 75.558             ROTPER= 20.991
+   H= 8.04                 G= .150                 B-V= .693
+                           ALBEDO= .052            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#140, OCC=0
+2: source=ORB
+*******************************************************************************

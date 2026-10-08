@@ -75,7 +75,11 @@ describe('asteroid positions against JPL Horizons', () => {
       // Notable DAMIT asteroids added 2026-09-21: ceil(independent endpoint maximum * 1.15).
       apollo: 631, koronis: 2059, karin: 276, datura: 183, hungaria: 505,
       // Nonconvex DAMIT asteroids added 2026-09-25: ceil(independent endpoint maximum * 1.15).
-      aspasia: 233, papagena: 2527, ara: 244, aquitania: 243, carlova: 297, siegena: 2807, aurelia: 327, 'asteroid-1999-jv6': 210, nyx: 1152, eger: 592 }
+      aspasia: 233, papagena: 2527, ara: 244, aquitania: 243, carlova: 297, siegena: 2807, aurelia: 327, 'asteroid-1999-jv6': 210, nyx: 1152, eger: 592,
+      // Asteroids of 100 km or more added 2026-10-08 in their measured color: ceil(independent endpoint maximum * 1.15).
+      chicago: 9326, winchester: 1805, stereoskopia: 744, scheila: 885, bononia: 898, berbericia: 292, pulcova: 394, merapi: 3957, liguria: 439, philomela: 3931, dembowska: 262, comacina: 363, hedwig: 234, hispania: 250, hippo: 701, wratislavia: 262, elfriede: 420, agamemnon: 648,
+      'ophelia-171': 1392, ornamenta: 412, myrrha: 2396, tanete: 337, armenia: 288, charybdis: 266, josephina: 297, boliviana: 714, ninina: 3179, ekard: 228, armida: 350, chloris: 3388, princetonia: 618, ani: 833, faina: 1452, messalina: 3241, nestor: 1057, edith: 300, thia: 1409,
+      bredichina: 2137, gerlinde: 294, brixia: 1089, iduna: 2654, gratia: 2256, emita: 288, flammario: 208 }
     for (const id of SMALL_BODY_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       assert.ok(Math.hypot(...actual.map((v, i) => v - row.position[i]!)) < maximumErrorKm[id])

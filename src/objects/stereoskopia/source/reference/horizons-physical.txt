@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27566%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS             566 Stereoskopia (A905 KA)        2026-Oct-08 06:11:10
+Rec #:     566 (+COV) Soln.date: 2026-Jun-05_03:46:05  # obs: 13304 (1905-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457848.5 ! 2017-Apr-05.00 (TDB)         Residual RMS= .21399
+   EC= .1182846239555586   QR= 2.980270993466018   TP= 2458755.4056843664
+   OM= 79.56055015949102   W=  298.9877773735496   IN= 4.892170045133073
+   A= 3.380082818603134    MA= 216.1614866623354   ADIST= 3.779894643740251
+   PER= 6.2144             N= .158603608           ANGMOM= .031404038
+   DAN= 3.1521             DDN= 3.53546            L= 18.6370581
+   B= -4.2780704           MOID= 1.98643994        TP= 2019-Sep-28.9056843664
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 83.6905            ROTPER= 12.103
+   H= 8.2                  G= .150                 B-V= .712
+                           ALBEDO= .039            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#131, OCC=0
+2: source=ORB
+*******************************************************************************

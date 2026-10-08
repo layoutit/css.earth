@@ -1,0 +1,128 @@
+{
+  "id": "huberta",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Huberta",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 47.6
+      },
+      "schema": "cssearth-authored-object@2",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        201575018904.97665,
+        -412173534073.54114,
+        -134054714760.03117
+      ],
+      "presentationToReference": [
+        0.4232561644891464,
+        5.551115123125783e-17,
+        -0.9060100547024501,
+        -0.8312479732438163,
+        0.39777715593191376,
+        -0.38832993857899484,
+        -0.36039010280525813,
+        -0.9174820620691818,
+        -0.16836163334114296
+      ],
+      "orbitUpReference": [
+        -5.551115123125783e-17,
+        -0.39777715593191376,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 206.95652173913044,
+      "bodyRadiusM": 47600
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/templates/small-body.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Huberta",
+      "classification": "asteroid",
+      "color": "#9d9a94",
+      "distanceAu": 3.453696095317234,
+      "description": "Dark, carbon-rich asteroid in the outer main belt, discovered in October 1886.",
+      "systemName": "Solar System",
+      "order": 342,
+      "context": {
+        "order": 388
+      }
+    }
+  },
+  "schema": "cssearth-object@2",
+  "parent": "solar-system",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

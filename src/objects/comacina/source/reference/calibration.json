@@ -1,0 +1,15 @@
+{
+  "method": "radiometric-effective-diameter-transfer",
+  "diameterKm": 139.39,
+  "uncertaintyKm": 3,
+  "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "reference": "JPL Small-Body Database, physical parameters of (489) Comacina",
+  "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=489",
+  "notes": "JPL lists a diameter of 139.39 ± 3 km, from the IRAS Minor Planet Survey (PDS data set IRAS-A-FPA-3-RDR-IMPS-V6.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "scaleKmPerSourceUnit": 112.34778113322979,
+  "sourceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=489",
+  "sourceLabel": "JPL Small-Body Database, physical parameters of (489) Comacina",
+  "diameterSemantics": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. JPL lists a diameter of 139.39 ± 3 km, from the IRAS Minor Planet Survey (PDS data set IRAS-A-FPA-3-RDR-IMPS-V6.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "visibleDescription": "Convex light-curve model at the 139.39 ± 3 km thermal diameter JPL lists."
+}

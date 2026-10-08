@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27751%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 751 Faina (A913 HE)           2026-Oct-08 06:19:21
+Rec #:     751 (+COV) Soln.date: 2026-Jun-05_04:00:05  # obs: 15661 (1913-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457632.5 ! 2016-Sep-01.00 (TDB)         Residual RMS= .20536
+   EC= .1530535844658668   QR= 2.160155018469927   TP= 2457788.8746025059
+   OM= 78.86071322965614   W=  302.5644466063077   IN= 15.60591001300245
+   A= 2.550521472019701    MA= 322.1621181694463   ADIST= 2.940887925569476
+   PER= 4.07335            N= .241969484           ANGMOM= .027148675
+   DAN= 2.3012             DDN= 2.71439            L= 22.4089891
+   B= -13.1043786          MOID= 1.20580006        TP= 2017-Feb-04.3746025059
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 56.8495            ROTPER= 23.678
+   H= 8.93                 G= .080                 B-V= .685
+                           ALBEDO= .027            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#84, OCC=0
+2: source=ORB
+*******************************************************************************

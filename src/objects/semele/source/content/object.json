@@ -1,0 +1,191 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "semele",
+  "displayName": "Semele",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Display reference radius",
+        "value": "58.66 km (approximate thermal scale)",
+        "source": {
+          "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+          "label": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+          "checked": "2026-09-09",
+          "path": "source/reference/calibration.json",
+          "catalogueId": "akari-acua-v1",
+          "locator": "/diameterKm; radius = diameterKm / 2"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Solar semimajor axis",
+        "value": "3.103 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2786%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-09",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; A (km) / 149597870.7"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "5.46 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2786%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-09",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; PR (days) / 365.25"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Model rotation period",
+        "value": "16.642 hours",
+        "source": {
+          "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5799",
+          "label": "DAMIT model 5799",
+          "checked": "2026-09-09",
+          "path": "source/reference/damit-model.json",
+          "catalogueId": "damit-models",
+          "locator": "Model 5799; version 2019-10-23; /periodHours"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "diameter",
+        "label": "Occultation diameter",
+        "value": "110 ± 3 km (volume-equivalent; DAMIT model 5799 fitted to 3 occultations)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+          "label": "Herald et al. (2024), Small Bodies Occultations V4.0, asteroid diameters table",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "small-bodies-occultations-v4",
+          "locator": "/occultations/rows/0/fields/Dia_1; /occultations/rows/0/fields/Uncert_1; /occultations/rows/0/fields/Events_1; /occultations/rows/0/fields/Model_Source_1; /occultations/rows/0/fields/Model_Number_1"
+        }
+      },
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.056 ± 0.009 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2014 (Mas14)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      }
+    ]
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc color from a published reflectance spectrum and V geometric albedo, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "/scenes/semele/semele-color-thumbnail.webp",
+        "surface": "semele-color-surface@2x.webp",
+        "poles": "semele-color-surface@2x.webp",
+        "source": {
+          "id": "semele-disc-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202243791"
+        },
+        "falseColor": false,
+        "notes": "Convex light-curve reconstruction with approximate thermal size: 117.32 km effective diameter (catalog ±1.51 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; no surface imagery exists. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Absolute rotational phase is illustrative. One mean color for the whole disc (Gaia DR3 reflectance spectrum), scaled to the 5.6% geometric albedo JPL lists; no terrain, albedo pattern or color variation is drawn."
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/semele/semele-elevation-thumbnail.webp",
+        "surface": "semele-elevation-surface@2x.webp",
+        "poles": "semele-elevation-surface@2x.webp",
+        "source": {
+          "id": "semele-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-20",
+            "0",
+            "20"
+          ],
+          "meta": "km · 58.66 km reference sphere",
+          "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5799",
+          "image": "/scenes/semele/semele-elevation-legend.webp"
+        },
+        "notes": "Radius on the shape model minus a 58.66 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Model record",
+      "role": "terrain",
+      "description": "DAMIT model 5799, version 2019-10-23",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5799"
+    },
+    {
+      "label": "Size calibration",
+      "role": "facts",
+      "description": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
+      "href": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Published pole and period; arbitrary display phase",
+      "href": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5799"
+    },
+    {
+      "label": "Gaia Collaboration, Galluccio et al. (2023)",
+      "role": "surface",
+      "description": "Gaia DR3 reflectance spectrum",
+      "href": "https://doi.org/10.1051/0004-6361/202243791"
+    },
+    {
+      "label": "JPL Small-Body Database",
+      "role": "surface",
+      "description": "Geometric albedo",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=86"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5799",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Ďurech et al. (2020); model 5799, version 2019-10-23."
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/semele.json",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

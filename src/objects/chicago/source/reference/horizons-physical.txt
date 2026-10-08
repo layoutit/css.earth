@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27334%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                334 Chicago (A892 QB)          2026-Oct-08 06:09:11
+Rec #:     334 (+COV) Soln.date: 2026-Jun-05_03:28:20   # obs: 6726 (1892-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457634.5 ! 2016-Sep-03.00 (TDB)         Residual RMS= .22623
+   EC= .02235047444994105  QR= 3.807922601203997   TP= 2456740.4972142242
+   OM= 130.1781491925489   W=  148.2775903139461   IN= 4.641280605899822
+   A= 3.894977189357843    MA= 114.6266415231073   ADIST= 3.982031777511688
+   PER= 7.68715            N= .12821732            ANGMOM= .03394106
+   DAN= 3.96848            DDN= 3.8204             L= 278.5398464
+   B= 2.4384737            MOID= 2.79183006        TP= 2014-Mar-23.9972142242
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 99.385             ROTPER= 7.361
+   H= 7.63                 G= .150                 B-V= .736
+                           ALBEDO= .041            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#199, OCC=0
+2: source=ORB
+*******************************************************************************

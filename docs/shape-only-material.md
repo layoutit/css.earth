@@ -22,6 +22,17 @@ colors of Grav and Bauer (2007). Where nobody has measured the albedo, the recor
 assumed value as an estimate and the dataset says so
 ([estimates](../.agents/skills/celestial-skill/references/scientific-faithfulness.md#estimates)).
 
+A record may give a published reflectance spectrum in place of the color indices
+(`object.reflectance`: samples in rising wavelength and the wavelength they are normalized at,
+which must lie in the V band). The spectrum is rescaled to 1 there, its samples are joined by
+straight lines and integrated the same way, and the albedo scales it. The large asteroids use it
+with the Gaia DR3 mean reflectance spectra (Gaia Collaboration, Galluccio et al. 2023: 16 bands
+from 374 to 1034 nm) and the geometric albedo the JPL Small-Body Database lists, written by
+[asteroid-colors](../packages/bake/authoring/asteroid-colors/author.mts). Most of them reflect
+2% to 9% of sunlight, so they are drawn as dark as they are.
+
+![The 98 asteroids of 100 km or more at their default views, each in its measured color](images/shape-only-material/large-asteroids.webp)
+
 ![Ymir and Siarnaq in the app at their default views, each in its measured color](images/shape-only-material/measured-color-ymir-siarnaq.webp)
 All three also carry NASA's illustrative model texture as a second, non-default
 dataset (`glb-base-color`); it is listed in the package's illustration datasets and is

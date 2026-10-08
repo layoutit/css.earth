@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "winchester",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 747",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 29 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.86329347,
+          "uncertainty": 0.0006742487
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.901274,
+          "uncertainty": 0.0005813054
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.94956493,
+          "uncertainty": 0.00059991464
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.97957563,
+          "uncertainty": 0.0006369683
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.00067437696
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0138005,
+          "uncertainty": 0.0007405495
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0012319,
+          "uncertainty": 0.00077155576
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0205498,
+          "uncertainty": 0.0006208936
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0406051,
+          "uncertainty": 0.0006511663
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0521765,
+          "uncertainty": 0.0006699729
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0622007,
+          "uncertainty": 0.00069342746
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0656786,
+          "uncertainty": 0.0006896328
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0786687,
+          "uncertainty": 0.0007225673
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0958251,
+          "uncertainty": 0.0007405513
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1303576,
+          "uncertainty": 0.0008380303
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.1914271,
+          "uncertainty": 0.0011168527
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (747) Winchester",
+    "locator": "albedo; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+    "band": "V",
+    "value": 0.0503,
+    "uncertainty": 0.002
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

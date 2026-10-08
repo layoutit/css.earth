@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "atalante",
+  "card": {
+    "text": "Dark, carbon-rich main-belt asteroid, discovered in October 1855.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=36",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1855-10-05 by Goldschmidt, H. at Paris; albedo: 0.029; orbit class: Main-belt Asteroid; spec_T: C"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "H. Goldschmidt found Atalante at Paris in 1855. It is very dark, reflecting only about 3% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=36",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1855-10-05 by Goldschmidt, H. at Paris; albedo: 0.029; orbit class: Main-belt Asteroid; spec_T: C"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Atalante’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 55.27 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "method": "radiometric-effective-diameter-transfer",
+  "diameterKm": 113.699,
+  "uncertaintyKm": 2.449,
+  "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "reference": "JPL Small-Body Database, physical parameters of (751) Faina",
+  "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=751",
+  "notes": "JPL lists a diameter of 113.699 ± 2.449 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "scaleKmPerSourceUnit": 91.64093088178345,
+  "sourceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=751",
+  "sourceLabel": "JPL Small-Body Database, physical parameters of (751) Faina",
+  "diameterSemantics": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. JPL lists a diameter of 113.699 ± 2.449 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "visibleDescription": "Convex light-curve model at the 113.699 ± 2.449 km thermal diameter JPL lists."
+}

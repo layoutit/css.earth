@@ -1,0 +1,125 @@
+{
+  "id": "tanete",
+  "parent": "solar-system",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tanete",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 63.2365
+      },
+      "schema": "cssearth-authored-object@2",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        435608301997.84485,
+        96527299574.28188,
+        -188910762899.14532
+      ],
+      "presentationToReference": [
+        0.9995259505371732,
+        -5.551115123125783e-17,
+        0.03078756571669755,
+        0.028247039279846176,
+        0.3977771559319137,
+        -0.917047130190505,
+        0.012246590328854834,
+        -0.9174820620691819,
+        -0.3975885898848195
+      ],
+      "orbitUpReference": [
+        5.551115123125783e-17,
+        -0.3977771559319137,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 274.9413043478261,
+      "bodyRadiusM": 63236.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/templates/small-body.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tanete",
+      "classification": "asteroid",
+      "color": "#9b9a96",
+      "distanceAu": 2.9994301112499175,
+      "description": "Main-belt asteroid found in 1913.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@2",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

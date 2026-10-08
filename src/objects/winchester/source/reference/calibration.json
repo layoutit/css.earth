@@ -1,0 +1,15 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 171,
+  "uncertaintyKm": 15,
+  "quantity": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+  "reference": "DAMIT model 247, version 2011-02-18",
+  "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/247",
+  "notes": "DAMIT marks the model as size-calibrated and lists an equivalent diameter of 171 ± 15 km with it; the model references describe the scaling.",
+  "scaleKmPerSourceUnit": 1.0000000225223846,
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/247",
+  "sourceLabel": "DAMIT model 247, version 2011-02-18",
+  "diameterSemantics": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks the model as size-calibrated and lists an equivalent diameter of 171 ± 15 km with it; the model references describe the scaling.",
+  "visibleDescription": "Convex light-curve model at the 171 ± 15 km equivalent diameter DAMIT lists for it."
+}

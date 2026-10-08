@@ -1,0 +1,178 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "aemilia",
+  "displayName": "Aemilia",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Display reference radius",
+        "value": "67.5 km (occultation volume scale)",
+        "source": {
+          "url": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
+          "label": "Marciniak et al. (2018), Table 4: SAGE pole 1",
+          "checked": "2026-09-09",
+          "path": "source/reference/calibration.json",
+          "catalogueId": "marciniak-2018-slow-asteroids",
+          "locator": "/diameterKm; radius = diameterKm / 2"
+        }
+      },
+      {
+        "id": "distance-from-sun",
+        "label": "Solar semimajor axis",
+        "value": "3.109 AU",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27159%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-09",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; A (km) / 149597870.7"
+        }
+      },
+      {
+        "id": "orbital-period",
+        "label": "Orbital period",
+        "value": "5.48 years",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27159%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+          "label": "JPL Horizons, 2026-09-03 epoch",
+          "checked": "2026-09-09",
+          "path": "source/reference/horizons-elements.txt",
+          "catalogueId": "jpl-horizons",
+          "locator": "$$SOE first epoch; PR (days) / 365.25"
+        }
+      },
+      {
+        "id": "rotation-period",
+        "label": "Model rotation period",
+        "value": "24.4787 hours",
+        "source": {
+          "url": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102",
+          "label": "ISAM/SAGE102 original OBJ rotation header",
+          "checked": "2026-09-09",
+          "path": "source/reference/isam-model.json",
+          "catalogueId": "source-aemilia-aemilia-shape",
+          "locator": "/periodHours; ISAM model 102"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.064 ± 0.014 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2014 (Mas14)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      }
+    ]
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc color from a published reflectance spectrum and V geometric albedo, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "/scenes/aemilia/aemilia-color-thumbnail.webp",
+        "surface": "aemilia-color-surface@2x.webp",
+        "poles": "aemilia-color-surface@2x.webp",
+        "source": {
+          "id": "aemilia-disc-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202243791"
+        },
+        "falseColor": false,
+        "notes": "Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of135 ±7 km. An alternative pole remains possible. No surface imagery exists; rotation phase is illustrative. Photometry constrains the broad nonconvex shape; basin depths and fine relief are not directly resolved. A publication volume scale from the matching nominal SAGE pole family is applied uniformly; byte identity with the paper fit is not separately established. Diameter uncertainty does not bound local shape errors. No global reflectance mosaic, craters or regolith texture is inferred. The original body frame and connectivity are retained. Absolute display phase is arbitrary. Select ISAM SAGE model102, the nonconvex pole1 family from Marciniak et al. (2018). Its original OBJ pins target159, methodSAGE, pole(138.85848,65.93886) and period24.478724h. The published paper finds SAGE pole1 marginally preferred overall by thermal fits, while all convex/SAGE solutions fit the four-chord occultation similarly well. Table4 explicitly supplies a135 ±7 km volume-equivalent occultation diameter for SAGE pole1; Table7 TPM137 ±8 km is consistent. SAGE here uses disk-integrated photometry, not resolved images. Pole2 remains possible. This source supersedes DAMIT1869 convex130 ±7 km in this package; the archive model and its raw140-km size are retained as an excluded comparison. One mean color for the whole disc (Gaia DR3 reflectance spectrum), scaled to the 6.4% geometric albedo JPL lists; no terrain, albedo pattern or color variation is drawn."
+      },
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "thumbnail": "/scenes/aemilia/aemilia-elevation-thumbnail.webp",
+        "surface": "aemilia-elevation-surface@2x.webp",
+        "poles": "aemilia-elevation-surface@2x.webp",
+        "source": {
+          "id": "aemilia-shape",
+          "path": "../manifest.json"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Elevation",
+          "width": 256,
+          "height": 16,
+          "labels": [
+            "-20",
+            "0",
+            "20"
+          ],
+          "meta": "km · 67.5 km reference sphere",
+          "sourceUrl": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102",
+          "image": "/scenes/aemilia/aemilia-elevation-legend.webp"
+        },
+        "notes": "Radius on the SAGE shape model minus a 67.5 km reference sphere, in false color. Heights inherit the size uncertainty; this is not independent topography or gravitational height."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape model",
+      "role": "terrain",
+      "description": "ISAM/SAGE102 original nonconvex OBJ",
+      "href": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102"
+    },
+    {
+      "label": "Size calibration",
+      "role": "facts",
+      "description": "Marciniak et al. (2018), Table 4: SAGE pole 1",
+      "href": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf"
+    },
+    {
+      "label": "Rotation",
+      "role": "rotation",
+      "description": "Original SAGE pole and period; arbitrary display phase",
+      "href": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102"
+    },
+    {
+      "label": "Gaia Collaboration, Galluccio et al. (2023)",
+      "role": "surface",
+      "description": "Gaia DR3 reflectance spectrum",
+      "href": "https://doi.org/10.1051/0004-6361/202243791"
+    },
+    {
+      "label": "JPL Small-Body Database",
+      "role": "surface",
+      "description": "Geometric albedo",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=159"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102",
+      "credit": "ISAM, Astronomical Observatory of Adam Mickiewicz University; SAGE model 102; Marciniak et al. (2018), A&A610,A7; Bartczak and collaborators."
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/aemilia.json",
+      "credit": "Vendored JPL physical and orbital data"
+    }
+  }
+}

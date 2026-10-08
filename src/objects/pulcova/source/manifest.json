@@ -1,0 +1,191 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [
+    {
+      "id": "pulcova-shape",
+      "path": "shape/model-954.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/3582/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Pulcova model 954; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "datasetId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 118757.86568092999,
+        "referenceRadiusMeters": 73671.5
+      },
+      "coverage": "Published convex light-curve model 954. Convex light-curve model at the 147.343 ± 0.818 km thermal diameter JPL lists. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-3582",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "pulcova-disc-color",
+      "path": "photometry/disc-color.json",
+      "origin": "https://doi.org/10.1051/0004-6361/202243791",
+      "credit": "Gaia Collaboration, Galluccio et al. (2023), A&A 674, A35; ESA/Gaia/DPAC; albedo JPL Small-Body Database, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Queried gaiadr3.sso_reflectance_spectrum at the Gaia archive (https://gea.esac.esa.int/tap-server/tap/sync) and the JPL Small-Body Database API for asteroid 762 with packages/bake/authoring/asteroid-colors/fetch.mts, checked 2026-10-08; written by packages/bake/authoring/asteroid-colors/author.mts",
+      "redistribution": "Factual catalogue values only; Gaia data are released under the ESA/Gaia/DPAC terms with attribution",
+      "consumers": [
+        "color"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-2023-dr3-asteroid-reflectance-spectra",
+            "role": "material",
+            "evidence": "src/objects/pulcova/source/photometry/disc-color.json#/object"
+          },
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "material",
+            "evidence": "src/objects/pulcova/source/photometry/disc-color.json#/geometricAlbedo"
+          },
+          {
+            "catalogueId": "neowise-diameters-albedos-v2",
+            "role": "material",
+            "evidence": "src/objects/pulcova/source/photometry/disc-color.json#/geometricAlbedo/locator"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pulcova-cie-std-illuminant-d65",
+      "path": "reference/CIE_std_illum_D65.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
+      ],
+      "acquisition": "Downloaded unchanged; the bytes match the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "color"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-std-illuminant-d65",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json#/checksums"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/3582/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Pulcova model 954; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
+        "inputs": [
+          "pulcova-shape",
+          "pulcova-disc-color"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "datasetId": "color"
+      },
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/terrestrial.json"
+    },
+    {
+      "path": "reference/954-IAUspin.txt"
+    },
+    {
+      "path": "reference/calibration.json"
+    },
+    {
+      "path": "reference/damit-model.json"
+    },
+    {
+      "path": "reference/horizons-elements.txt"
+    },
+    {
+      "path": "reference/horizons-physical.txt"
+    },
+    {
+      "path": "reference/horizons-vectors.txt"
+    },
+    {
+      "path": "reference/model-properties.json"
+    },
+    {
+      "path": "reference/sbdb.json"
+    },
+    {
+      "path": "reference/sbn-catalogues.json",
+      "purpose": "Rows of the PDS Small Bodies Node catalogues that the factsheet cites, as their PDS4 labels read them, with each selection rule.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "asteroid-masses-baer-2012",
+            "role": "reference",
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+          },
+          {
+            "catalogueId": "binary-minor-planets-v3",
+            "role": "reference",
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+          },
+          {
+            "catalogueId": "neowise-diameters-albedos-v2",
+            "role": "reference",
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+          }
+        ]
+      }
+    }
+  ]
+}

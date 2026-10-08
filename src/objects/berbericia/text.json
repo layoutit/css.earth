@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "berbericia",
+  "card": {
+    "text": "Main-belt asteroid found in 1914.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=776",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "776 Berbericia (A914 BE); Discovered 1914-Jan-24 by Massinger, A. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-830",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/830/shape.txt",
+        "label": "DAMIT shape 830 · Berbericia",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Massinger found Berbericia at Heidelberg on 24 January 1914.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=776",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "776 Berbericia (A914 BE); Discovered 1914-Jan-24 by Massinger, A. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-830",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/830/shape.txt",
+        "label": "DAMIT shape 830 · Berbericia",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Berbericia’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 75.86 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

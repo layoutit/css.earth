@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "achilles",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 3934: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-3934.txt. Model 3934, version 2019-05-07, pole (172°, -5°), period 7.3063 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/3934",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/achilles/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/achilles/source/reference/damit-model.json"
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "The retained calibration uses 131 ±8 km. occultation-constrained volume-equivalent diameter",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/achilles/source/reference/calibration.json",
+        "https://doi.org/10.1051/0004-6361/202346022"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "survey": "surface-imagery-5",
+      "status": "unresolved",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/achilles/README.md"
+      ]
+    },
+    {
+      "id": "recorded-reference-1",
+      "subject": "NEOWISE thermal diameter 130.099 ± 0.554 km",
+      "status": "excluded",
+      "finding": "[NEOWISE thermal diameter 130.099 ± 0.554 km](https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=588&phys-par=1) — alternative — Consistent thermal effective diameter, but its formal precision omits systematic errors; occultation volume scale is more directly compatible.",
+      "revisitWhen": "New calibration or independent size evidence makes this alternative preferable to the currently adopted, physically compatible scale; do not average incompatible thermal fits.",
+      "evidence": [
+        "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=588&phys-par=1"
+      ]
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Achilles whole-disc color",
+      "status": "included",
+      "finding": "Gaia Collaboration, Galluccio et al. (2023) published the mean of 14 Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (0.911 at 462 nm, 1.026 at 638 nm). The shape is painted in that one color (#3c3a37 in sRGB) through the shared disc-integrated-color method, scaled to the 4.3% geometric albedo JPL lists (± 0.6%), from NEOWISE (Grav et al. 2012, ApJ 759, 49; PDS bundle neowise_diameters_albedos 2.0). It is one mean, not a map. Tinaut-Ruano et al. (2023), A&A 669, L14, found Gaia DR3 reflectances slightly too red at wavelengths shorter than 550 nm; the bands are used as published, without that paper's correction.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243791",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=588",
+        "https://doi.org/10.1051/0004-6361/202245134",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/achilles/source/photometry/disc-color.json"
+      ]
+    }
+  ]
+}

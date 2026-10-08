@@ -1,0 +1,15 @@
+{
+  "method": "radiometric-effective-diameter-transfer",
+  "diameterKm": 108.309,
+  "uncertaintyKm": 0.868,
+  "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "reference": "JPL Small-Body Database, physical parameters of (786) Bredichina",
+  "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=786",
+  "notes": "JPL lists a diameter of 108.309 ± 0.868 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "scaleKmPerSourceUnit": 87.29661703350492,
+  "sourceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=786",
+  "sourceLabel": "JPL Small-Body Database, physical parameters of (786) Bredichina",
+  "diameterSemantics": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. JPL lists a diameter of 108.309 ± 0.868 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "visibleDescription": "Convex light-curve model at the 108.309 ± 0.868 km thermal diameter JPL lists."
+}

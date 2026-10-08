@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27154%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                154 Bertha (A875 VD)           2026-Sep-08 10:25:18
+Rec #:     154 (+COV) Soln.date: 2026-Jun-05_03:12:51   # obs: 6478 (1880-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457373.5 ! 2015-Dec-17.00 (TDB)         Residual RMS= .1901
+   EC= .07727220877613486  QR= 2.949271838241487   TP= 2456874.4795964812
+   OM= 36.75068195662579   W=  159.5507749403296   IN= 20.97234916063566
+   A= 3.196253398122651    MA= 86.07173805540582   ADIST= 3.443234958003815
+   PER= 5.71439            N= .1724814             ANGMOM= .030662077
+   DAN= 3.42516            DDN= 2.96266            L= 197.5539344
+   B= 7.1835368            MOID= 1.95142996        TP= 2014-Aug-04.9795964812
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 96.3055            ROTPER= 25.224
+   H= 7.65                 G= .150                 B-V= n.a.
+                           ALBEDO= .044            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#80, OCC=0
+2: source=ORB
+*******************************************************************************

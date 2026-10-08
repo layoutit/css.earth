@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "elfriede",
+  "card": {
+    "text": "Main-belt asteroid found in 1906.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=618",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "618 Elfriede (A906 UM); Discovered 1906-Oct-17 by Lohnert, K. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-68800",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/68800/shape.txt",
+        "label": "DAMIT shape 68800 · Elfriede",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "K. Lohnert found Elfriede at Heidelberg on 17 October 1906.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=618",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "618 Elfriede (A906 UM); Discovered 1906-Oct-17 by Lohnert, K. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-68800",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/68800/shape.txt",
+        "label": "DAMIT shape 68800 · Elfriede",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Elfriede’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 73 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

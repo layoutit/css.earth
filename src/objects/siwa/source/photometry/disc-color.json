@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "siwa",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 140",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 20 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.87700313,
+          "uncertainty": 0.002652488
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.89135176,
+          "uncertainty": 0.0017155374
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.93252593,
+          "uncertainty": 0.0015864773
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9677674,
+          "uncertainty": 0.0015578513
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.001571486
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0309249,
+          "uncertainty": 0.001779097
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0436654,
+          "uncertainty": 0.001831754
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0565908,
+          "uncertainty": 0.0016334223
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0883914,
+          "uncertainty": 0.001691127
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.1118429,
+          "uncertainty": 0.0017260521
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.1313939,
+          "uncertainty": 0.001784778
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.1476581,
+          "uncertainty": 0.0017860522
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.1578789,
+          "uncertainty": 0.0017989858
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.1893116,
+          "uncertainty": 0.0019131947
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.2106174,
+          "uncertainty": 0.0022174434
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.2220138,
+          "uncertainty": 0.0028313205
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (140) Siwa",
+    "locator": "albedo; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+    "band": "V",
+    "value": 0.0676,
+    "uncertainty": 0.004
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27426%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 426 Hippo (A897 RA)           2026-Oct-08 06:14:07
+Rec #:     426 (+COV) Soln.date: 2026-Jun-05_03:35:03   # obs: 6928 (1897-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458230.5 ! 2018-Apr-22.00 (TDB)         Residual RMS= .17694
+   EC= .1041331768301561   QR= 2.588418894818493   TP= 2458160.8777175606
+   OM= 311.4070689186487   W=  222.5304073370755   IN= 19.47672682579142
+   A= 2.889289822855472    MA= 13.97222816076812   ADIST= 3.190160750892452
+   PER= 4.91128            N= .200686155           ANGMOM= .029081008
+   DAN= 3.0955             DDN= 2.65428            L= 172.2608717
+   B= -13.0257172          MOID= 1.62516999        TP= 2018-Feb-11.3777175606
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 68.781             ROTPER= 67.52
+   H= 8.55                 G= .150                 B-V= .710
+                           ALBEDO= .040            STYP= F
+
+ASTEROID comments: 
+1: soln ref.= JPL#146, OCC=0
+2: source=ORB
+*******************************************************************************

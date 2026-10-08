@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27911%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               911 Agamemnon (A919 FB)         2026-Oct-08 06:15:05
+Rec #:     911 (+COV) Soln.date: 2026-Jun-05_04:12:37   # obs: 5874 (1919-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458516.5 ! 2019-Feb-02.00 (TDB)         Residual RMS= .15723
+   EC= .0659255070884999   QR= 4.929323620738714   TP= 2459722.3365620556
+   OM= 338.0049980162646   W=  80.68556284177778   IN= 21.76381780017561
+   A= 5.277227521087815    MA= 261.9644039059872   ADIST= 5.625131421436917
+   PER= 12.12319           N= .081300899           ANGMOM= .039431067
+   DAN= 5.19882            DDN= 5.31096            L= 57.9896455
+   B= 21.4625287           MOID= 4.01983976        TP= 2022-May-22.8365620556
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 65.519             ROTPER= 6.592
+   H= 7.87                 G= .150                 B-V= .760
+                           ALBEDO= .072            STYP= D
+
+ASTEROID comments: 
+1: soln ref.= JPL#134, OCC=0
+2: source=ORB
+*******************************************************************************

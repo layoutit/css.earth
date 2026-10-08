@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1132",
+  "modelId": 1132,
+  "modelVersion": "2016-01-04",
+  "diameterKm": 127.639,
+  "diameterInterpretation": "Convex light-curve model at the 127.639 ± 1.686 km thermal diameter JPL lists.",
+  "calibration": {
+    "method": "radiometric-effective-diameter-transfer",
+    "diameterKm": 127.639,
+    "uncertaintyKm": 1.686,
+    "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+    "reference": "JPL Small-Body Database, physical parameters of (381) Myrrha",
+    "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=381",
+    "notes": "JPL lists a diameter of 127.639 ± 1.686 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+    "scaleKmPerSourceUnit": 102.8765189803531,
+    "sourceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=381",
+    "sourceLabel": "JPL Small-Body Database, physical parameters of (381) Myrrha",
+    "diameterSemantics": "effective diameter of a sphere fitted to thermal infrared measurements",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. JPL lists a diameter of 127.639 ± 1.686 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+    "visibleDescription": "Convex light-curve model at the 127.639 ± 1.686 km thermal diameter JPL lists."
+  },
+  "periodHours": 6.571954,
+  "poleEclipticJ2000Degrees": [
+    31,
+    44
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/4143/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 102876.5189803531,
+    "firstVertexKm": [
+      9.895898113758125,
+      7.43231411373561,
+      55.88180497449494
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      143.30915134653046,
+      128.04556797845342,
+      127.39435961330777
+    ],
+    "volumeCubicKm": 1088801.7277485423,
+    "volumeEquivalentRadiusKm": 63.8195,
+    "radialRangeKm": [
+      51.76744114982056,
+      76.05052510487387
+    ]
+  },
+  "elevation": [
+    -20,
+    20
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "outputFaces": 362,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1276.39,
+    "estimatedErrorMeters": 1244.0029296875,
+    "sampledErrorMeters": 1199.0250273243905,
+    "topology": {
+      "vertices": 183,
+      "edges": 543,
+      "faces": 362,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1077717700260208.6
+    }
+  }
+}

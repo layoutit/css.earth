@@ -1,0 +1,15 @@
+{
+  "method": "radiometric-effective-diameter-transfer",
+  "diameterKm": 154.334,
+  "uncertaintyKm": 5.413,
+  "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "reference": "JPL Small-Body Database, physical parameters of (361) Bononia",
+  "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=361",
+  "notes": "JPL lists a diameter of 154.334 ± 5.413 km, from NEOWISE (Grav et al. 2012, ApJ 744, 197; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "scaleKmPerSourceUnit": 124.39258393592442,
+  "sourceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=361",
+  "sourceLabel": "JPL Small-Body Database, physical parameters of (361) Bononia",
+  "diameterSemantics": "effective diameter of a sphere fitted to thermal infrared measurements",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. JPL lists a diameter of 154.334 ± 5.413 km, from NEOWISE (Grav et al. 2012, ApJ 744, 197; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+  "visibleDescription": "Convex light-curve model at the 154.334 ± 5.413 km thermal diameter JPL lists."
+}

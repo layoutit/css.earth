@@ -13,6 +13,21 @@ test('disc color preserves its compiler checks and diagnostics', () => {
   assert.throws(() => parseDiscColorRecord({ ...record, object: { indices: { 'B-V': { value: 1 }, 'V-R': { value: 1 } } } }), /V-I/);
   assert.throws(() => parseDiscColorRecord({ ...record, effectiveWavelengths: { nanometres: { B: 440, V: 440, R: 640, I: 790 } } }), /increase/);
 });
+test('a published reflectance spectrum replaces the color indices and is rescaled to 1 at its V wavelength', () => {
+  const samples = [{ wavelengthNm: 500, value: .9 }, { wavelengthNm: 540, value: 1.1 }, { wavelengthNm: 560, value: 1.3 }, { wavelengthNm: 700, value: 1.8 }];
+  const spectrum = (reflectance: unknown) => ({ schema: DISC_INTEGRATED_COLOR_SCHEMA, object: { reflectance }, geometricAlbedo: { band: 'V', value: .05 } });
+  const parsed = parseDiscColorRecord(spectrum({ normalizedAtNm: 550, samples }));
+  assert.ok('reflectance' in parsed);
+  assert.deepEqual(parsed.reflectance.map(([wavelength]) => wavelength), [500, 540, 560, 700]);
+  for (const [index, expected] of [.75, 1.1 / 1.2, 1.3 / 1.2, 1.5].entries()) assert.ok(Math.abs(parsed.reflectance[index]![1] - expected) < 1e-12);
+  assert.equal(parsed.geometricAlbedo, .05);
+  assert.throws(() => parseDiscColorRecord(spectrum({ normalizedAtNm: 550, samples: samples.slice(0, 1) })), /at least two samples/);
+  assert.throws(() => parseDiscColorRecord(spectrum({ normalizedAtNm: 550, samples: [...samples].reverse() })), /rise in wavelength/);
+  assert.throws(() => parseDiscColorRecord(spectrum({ normalizedAtNm: 550, samples: [{ wavelengthNm: 500, value: 0 }, ...samples.slice(1)] })), /positive/);
+  assert.throws(() => parseDiscColorRecord(spectrum({ normalizedAtNm: 650, samples })), /inside the V band/);
+  assert.throws(() => parseDiscColorRecord(spectrum({ normalizedAtNm: 550, samples: samples.slice(2) })), /inside its own samples/);
+  assert.throws(() => parseDiscColorRecord({ ...spectrum({ normalizedAtNm: 550, samples }), geometricAlbedo: { band: 'R', value: .05 } }), /V-band/);
+});
 test('public photometry preserves subset admission and numeric coercion', () => {
   const subset = { schema: DISC_INTEGRATED_COLOR_SCHEMA, geometricAlbedo: { band: 'R', value: '2', uncertainty: '.1' },
     object: { system: 'Vega' }, effectiveWavelengths: { nanometres: { R: '640' } } };

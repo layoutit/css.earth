@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "chicago-arrival.webp",
+      "bytes": 31086,
+      "sha256": "b6b923fb4189e822918a93064afa5a6cf2737f596cafeb68772c0b61c68a16bc"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-billboard.webp",
+      "bytes": 4054,
+      "sha256": "fe2a58cda2a6b65a188ab5075c8b851843ce795da3ae367ad0a1b53d9abd0a29"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-color-surface-alpha@2x.webp",
+      "bytes": 92,
+      "sha256": "d9db410a26325e986bc8506aac2169c18e5f1253b371099d80ef8589150b27d2"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-color-surface@2x.webp",
+      "bytes": 48,
+      "sha256": "6d093e9b6b9a99c3ae9a6d788bde9c3c057655132fd3f4b8073ac7fdd971a5de"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-color-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "1e9676c743d874bce4d0a9866c988dbb832879e8534e3b8b4389f7e965418bc2"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-elevation-surface-alpha@2x.webp",
+      "bytes": 102414,
+      "sha256": "c4899d46724034cdb35907f44bff8b67aa2a37e43a3bc0216e8776f0b58172de"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-elevation-surface@2x.webp",
+      "bytes": 43344,
+      "sha256": "de830c21cd806532eb362d978f2c995058e2eedff3c38c1e4dbe12c53fb5d56c"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-elevation-thumbnail.webp",
+      "bytes": 5448,
+      "sha256": "4121d7427f9c2a59a71efe67b6eb4bdb88fa6c1966fb775b3c34c38e7e1408d7"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "ca82f03354b777f76a371122bd3345ff9a0f2b967081977cb0da06d854309fad"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 515,
+      "sha256": "3d5c97432602b48cbd9d15fff236aa62ae045e08384bc4facff5b022fe7a363d"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 3652,
+      "sha256": "7cc9037172647e131940c3d04db3171a1c7c14b0857cd4d29dd333f453f00573"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 1572,
+      "sha256": "0d0151ea91fef072d4370011b7ca6cf117a48059aa9a7192fbb4e17412c6f8bc"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 197,
+      "sha256": "e59fa149c7436a747634c9c123b38a9a14c9891a2299d55115da9e5708a92144"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 482,
+      "sha256": "aa2e5b38cf425a229df4f05ac897756f84fa3b37ff784d4a1d503b1728837bb7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 3870,
+      "sha256": "48dffe822431241b0981faeb825825729f9930b28e46aa6e1688e0614c082e32"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 294752,
+      "sha256": "6428c13176959a232cf44ce376bceff7313a613cc5e0ec80a1e0d815634a42d0"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 249302,
+      "sha256": "050eedbec4967af809aa1235459cb516cc0ea919fe33e1d8364f12708c0cc2bd"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 12894,
+      "sha256": "68a7b8015def49fd4acabafb7d1ecbb98d9b08e7ef9bef23349b1d5b61d2e39f"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1739,
+      "sha256": "230493d95c3259f80d6ba1c2b80848c9d1119fb7a08647f3384afe93e6a32515"
+    }
+  ]
+}

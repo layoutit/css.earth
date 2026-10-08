@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hedwig",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 6114: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 6114, version 2023-10-03, pole (49°, 60°), period 27.2404 h, taken unchanged from the archive. Mirror solution 6115 recorded as an alternative.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6114",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "116 ± 16 km, volume-equivalent diameter DAMIT lists for this size-calibrated model. DAMIT marks the model as size-calibrated and lists an equivalent diameter of 116 ± 16 km with it; the model references describe the scaling.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6114"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6114"
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "The display scale \"58 km (size-calibrated model)\" (damit-models) implies a diameter of 116 km, outside the added Small Bodies Occultations V4.0 record 262, DAMIT model 6114 diameter 121 ± 2 km (volume-equivalent; DAMIT model 6114 fitted to 5 occultations). Both are shown; the display scale is not changed.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "packages/bake/authoring/sbn-catalogue-facts/author.mts"
+      ]
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Hedwig whole-disc color",
+      "status": "included",
+      "finding": "Gaia Collaboration, Galluccio et al. (2023) published the mean of 19 Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (0.918 at 462 nm, 1.038 at 638 nm). The shape is painted in that one color (#363431 in sRGB) through the shared disc-integrated-color method, scaled to the 3.5% geometric albedo JPL lists (± 0.5%), from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). It is one mean, not a map. Tinaut-Ruano et al. (2023), A&A 669, L14, found Gaia DR3 reflectances slightly too red at wavelengths shorter than 550 nm; the bands are used as published, without that paper's correction.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243791",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=476",
+        "https://doi.org/10.1051/0004-6361/202245134",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/hedwig/source/photometry/disc-color.json"
+      ]
+    }
+  ]
+}

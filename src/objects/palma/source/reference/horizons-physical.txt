@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27372%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 372 Palma (A893 QB)           2026-Sep-08 03:29:44
+Rec #:     372 (+COV) Soln.date: 2026-Jun-05_03:31:12   # obs: 5539 (1893-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457848.5 ! 2017-Apr-05.00 (TDB)         Residual RMS= .18139
+   EC= .2594679109022753   QR= 2.333602195495568   TP= 2458078.5742073515
+   OM= 327.3679288227      W=  115.5708392281351   IN= 23.82587271659224
+   A= 3.151250607301655    MA= 319.4633743048165   ADIST= 3.968899019107742
+   PER= 5.59413            N= .176189353           ANGMOM= .029490926
+   DAN= 3.30977            DDN= 2.64309            L= 84.9807191
+   B= 21.3701473           MOID= 1.44575           TP= 2017-Nov-21.0742073515
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 86.821             ROTPER= 8.567
+   H= 7.39                 G= .150                 B-V= n.a.
+                           ALBEDO= .059            STYP= B
+
+ASTEROID comments: 
+1: soln ref.= JPL#122, OCC=0
+2: source=ORB
+*******************************************************************************

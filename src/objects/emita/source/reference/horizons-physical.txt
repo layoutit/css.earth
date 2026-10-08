@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27481%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 481 Emita (A902 CB)           2026-Oct-08 06:21:04
+Rec #:     481 (+COV) Soln.date: 2026-Jun-05_03:39:31   # obs: 9446 (1902-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457723.5 ! 2016-Dec-01.00 (TDB)         Residual RMS= .23229
+   EC= .1567218336955884   QR= 2.31110267922978    TP= 2456951.1379191643
+   OM= 66.74330040021847   W=  349.7496599469372   IN= 9.842746623474737
+   A= 2.740617238269044    MA= 167.7847326340205   ADIST= 3.170131797308308
+   PER= 4.53713            N= .217235849           ANGMOM= .028125842
+   DAN= 2.31611            DDN= 3.16076            L= 56.6407086
+   B= -1.7431775           MOID= 1.32347           TP= 2014-Oct-20.6379191643
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 50.9145            ROTPER= 14.412
+   H= 8.78                 G= .150                 B-V= n.a.
+                           ALBEDO= .032            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#116, OCC=0
+2: source=ORB
+*******************************************************************************

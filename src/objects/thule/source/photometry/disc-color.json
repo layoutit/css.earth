@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "thule",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 279",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 25 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.8349453,
+          "uncertainty": 0.0075251795
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.8768986,
+          "uncertainty": 0.003295384
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9154131,
+          "uncertainty": 0.0026327828
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9568861,
+          "uncertainty": 0.0024565116
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0024178508
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0419699,
+          "uncertainty": 0.0026761165
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0540339,
+          "uncertainty": 0.0028892031
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0929507,
+          "uncertainty": 0.002587883
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.1373782,
+          "uncertainty": 0.002697059
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.1708968,
+          "uncertainty": 0.0028019187
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.2092823,
+          "uncertainty": 0.0028551982
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.2582135,
+          "uncertainty": 0.0028693457
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.2936426,
+          "uncertainty": 0.0030224775
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.35496,
+          "uncertainty": 0.003288497
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.4111516,
+          "uncertainty": 0.003967315
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.484617,
+          "uncertainty": 0.0059181047
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (279) Thule",
+    "locator": "albedo; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+    "band": "V",
+    "value": 0.0412,
+    "uncertainty": 0.003
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

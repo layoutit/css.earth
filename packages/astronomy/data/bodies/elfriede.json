@@ -1,0 +1,75 @@
+{
+  "id": "elfriede",
+  "classification": "asteroid",
+  "physical": {
+    "name": "Elfriede",
+    "horizonsCode": "618;",
+    "meanRadiusKm": 73,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Published shape models with documented physical size calibration.",
+  "acquisition": {
+    "heliocentric": {
+      "target": "618;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27618%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 477197494.8500035,
+      "eccentricity": 0.0681469620099154,
+      "inclinationRad": 0.4063294493366077,
+      "ascendingNodeRad": 0.7665860358162876,
+      "argumentOfPeriapsisRad": 5.24093581285542,
+      "meanAnomalyAtEpochRad": 1.0017250258336672,
+      "meanMotionRadPerDay": 0.003019411653806993
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27618%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          335554329.8807792,
+          312786732.0597539,
+          -3215168.507908053
+        ],
+        "velocity": [
+          -872061.1634120047,
+          1064968.920261676,
+          590338.9267282017
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          307892492.3999388,
+          343251447.9381559,
+          14482710.46898105
+        ],
+        "velocity": [
+          -970376.9958796233,
+          964744.0131408419,
+          588623.7764116414
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          277435807.9412763,
+          370601710.0083255,
+          32049583.63030945
+        ],
+        "velocity": [
+          -1058288.124902263,
+          857552.534741103,
+          581642.6318896778
+        ]
+      }
+    ]
+  }
+}

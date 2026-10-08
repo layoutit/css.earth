@@ -1,0 +1,98 @@
+{
+  "modelId": 16321,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16321",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/130623/shape.txt",
+  "spinUrl": null,
+  "version": "2026-04-30 15:07:16",
+  "lambda": 304.1,
+  "beta": 63.7,
+  "periodHours": 8.0975859,
+  "nonconvex": false,
+  "calibrated": false,
+  "sourceFields": {
+    "ID": "16321",
+    "Asteroid ID": "(20) Massalia",
+    "Lambda": "304.1",
+    "Beta": "63.7",
+    "Period": "8.0975859",
+    "YORP": "",
+    "JD0": "2435193",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "0 (No)",
+    "Equivalent Diameter": "",
+    "Equivalent Diameter Error": "",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "",
+    "Comment": "update",
+    "Created": "2026-04-28 12:34:44",
+    "Modified": "2026-04-30 15:07:16"
+  },
+  "originalVolume": 35.13365487698239,
+  "originalSignedVolume": 35.13365487698239,
+  "originalVolumeEquivalentDiameter": 4.063574591968617,
+  "originalUnits": "dimensionless DAMIT source units; uncalibrated model",
+  "vertices": 1922,
+  "faces": 3840,
+  "extentsSourceUnits": [
+    [
+      -2.35096603,
+      2.21250947
+    ],
+    [
+      -2.66683667,
+      2.37417313
+    ],
+    [
+      -1.57216949,
+      1.74927414
+    ]
+  ],
+  "radialRangeSourceUnits": [
+    1.5727525265723747,
+    2.72014796861556
+  ],
+  "firstVertexSourceUnits": [
+    0.0687205935,
+    0.24445146,
+    1.7466883
+  ],
+  "firstFaceZeroBased": [
+    0,
+    1,
+    2
+  ],
+  "alternatives": [
+    {
+      "modelId": 118,
+      "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/118",
+      "lambda": 179,
+      "beta": 39,
+      "periodHours": 8.09902,
+      "reason": "Original alternative pole solution retained as an unresolved ambiguity; one representative model is displayed."
+    },
+    {
+      "modelId": 119,
+      "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/119",
+      "lambda": 360,
+      "beta": 40,
+      "periodHours": 8.09902,
+      "reason": "Original alternative pole solution retained as an unresolved ambiguity; one representative model is displayed."
+    }
+  ],
+  "selectionReason": "Updated DAMIT16321 has the corrected8.0975859h period; old models118/119 are explicitly preliminary with poorfit and different period. The current record is an archive-authority update, has no linkedpublication, and is credited accordingly.",
+  "references": []
+}

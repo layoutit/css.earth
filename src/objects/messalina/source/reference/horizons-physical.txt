@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27545%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               545 Messalina (A904 TC)         2026-Oct-08 06:19:31
+Rec #:     545 (+COV) Soln.date: 2026-Jun-05_03:44:20   # obs: 7259 (1904-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457576.5 ! 2016-Jul-07.00 (TDB)         Residual RMS= .19955
+   EC= .1691205447510218   QR= 2.660064257902706   TP= 2457917.9703173377
+   OM= 333.6386587917664   W=  330.6743296670006   IN= 11.20434664465757
+   A= 3.201504431356533    MA= 301.2475649414873   ADIST= 3.74294460481036
+   PER= 5.72848            N= .172057225           ANGMOM= .030335919
+   DAN= 2.71031            DDN= 3.64779            L= 304.7814276
+   B= -5.4609439           MOID= 1.65153003        TP= 2017-Jun-13.4703173377
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 56.3155            ROTPER= 7.2
+   H= 8.79                 G= .150                 B-V= .686
+                           ALBEDO= .041            STYP= Cb
+
+ASTEROID comments: 
+1: soln ref.= JPL#89, OCC=0
+2: source=ORB
+*******************************************************************************

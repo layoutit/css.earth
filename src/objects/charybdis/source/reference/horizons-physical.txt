@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27388%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               388 Charybdis (A894 ED)         2026-Oct-08 06:16:47
+Rec #:     388 (+COV) Soln.date: 2026-Jun-05_03:32:20   # obs: 7521 (1894-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457623.5 ! 2016-Aug-23.00 (TDB)         Residual RMS= .22708
+   EC= .06490895874817915  QR= 2.810213010920933   TP= 2457542.3652458158
+   OM= 354.285511058423    W=  332.9975462430369   IN= 6.445707523051132
+   A= 3.005282787394538    MA= 15.34910237170708   ADIST= 3.200352563868143
+   PER= 5.20998            N= .189180365           ANGMOM= .029758244
+   DAN= 2.82901            DDN= 3.17632            L= 327.4297642
+   B= -2.9216328           MOID= 1.80044997        TP= 2016-Jun-02.8652458158
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 62.877             ROTPER= 9.516
+   H= 8.71                 G= .070                 B-V= .719
+                           ALBEDO= .042            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#137, OCC=0
+2: source=ORB
+*******************************************************************************

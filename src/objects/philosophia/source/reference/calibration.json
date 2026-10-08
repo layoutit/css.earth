@@ -1,0 +1,29 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 101.0,
+  "uncertaintyKm": 5.0,
+  "reportedUncertaintyKm": 5.0,
+  "uncertaintyKind": "Published size-model uncertainty; not local terrain accuracy or automatically a one-sigma interval.",
+  "diameterSemantics": "Published volume-equivalent diameter of the selected shape solution; isotropic transfer retains source shape and connectivity.",
+  "sourceUrl": "https://arxiv.org/pdf/1711.01893",
+  "reference": "Marciniak et al. (2018), A&A 610, A7",
+  "sourceLabel": "Marciniak et al. (2018), A&A 610, A7",
+  "limitations": "Marciniak2018 section5.2 and Table7 select the convex pole(95,+19) as the best thermal fit (chi-square1.2). Table7 reports101±5 km equivalent-volume diameter, with errors spanning the full3-sigma range. This primary publication scale supersedes DAMIT’s107±5 km field. The paper also presents SAGE nonconvex alternatives, but the selected convex solution gives the best thermal fit; no multichord occultation supports those concavities. Shape and thermal fit are explicitly the least constrained of the five studied targets; neither is a resolved terrain map.",
+  "publishedUncertainty": {
+    "lowerKm": 5,
+    "upperKm": 5,
+    "confidence": "full 3-sigma range",
+    "source": "Marciniak2018 Table7"
+  },
+  "visibleDescription": "Convex light-curve reconstruction; 101 km volume-equivalent diameter (±5 km). The grid marks unavailable imagery; rotational phase is illustrative.",
+  "scaleKmPerSourceUnit": 0.9439252199183333,
+  "metersPerSourceUnit": 943.9252199183334,
+  "sourceSignedVolume": 641431.0428382676,
+  "sourceVolumeEquivalentDiameter": 107.00000155599014,
+  "sourceSurfaceArea": 37622.81974405444,
+  "scaleEquation": "scaleKmPerSourceUnit = adoptedVolumeEquivalentDiameterKm / ((6 * sourceSignedVolume / pi) ** (1/3))",
+  "scaledSignedVolumeKm3": 539464.3420977033,
+  "derivedVolumeEquivalentDiameterKm": 101.0,
+  "archiveDeclaredDiameterKm": 107.0,
+  "archiveDeclaredUncertaintyKm": 5.0
+}

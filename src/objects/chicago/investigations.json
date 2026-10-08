@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "chicago",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 4269: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 4269, version 2019-05-07, pole (21°, 20°), period 7.36014 h, taken unchanged from the archive. Mirror solution 4270 recorded as an alternative.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4269",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "198.77 ± 5.597 km, effective diameter of a sphere fitted to thermal infrared measurements. JPL lists a diameter of 198.77 ± 5.597 km, from NEOWISE (Grav et al. 2012, ApJ 744, 197; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=334"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/4269"
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown size Display reference radius \"99.39 km (size-calibrated model)\" (jpl-small-body-database) differs from the Small Bodies Occultations V4.0 record 203, DAMIT model 4270 diameter 173 ± 2 km (volume-equivalent; DAMIT model 4270 fitted to 2 occultations); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "packages/bake/authoring/sbn-catalogue-facts/author.mts"
+      ]
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Chicago whole-disc color",
+      "status": "included",
+      "finding": "Gaia Collaboration, Galluccio et al. (2023) published the mean of 14 Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (0.934 at 462 nm, 1.015 at 638 nm). The shape is painted in that one color (#3a3936 in sRGB) through the shared disc-integrated-color method, scaled to the 4.1% geometric albedo JPL lists (± 0.7%), from NEOWISE (Grav et al. 2012, ApJ 744, 197; PDS bundle neowise_diameters_albedos 2.0). It is one mean, not a map. Tinaut-Ruano et al. (2023), A&A 669, L14, found Gaia DR3 reflectances slightly too red at wavelengths shorter than 550 nm; the bands are used as published, without that paper's correction.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243791",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=334",
+        "https://doi.org/10.1051/0004-6361/202245134",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/chicago/source/photometry/disc-color.json"
+      ]
+    }
+  ]
+}

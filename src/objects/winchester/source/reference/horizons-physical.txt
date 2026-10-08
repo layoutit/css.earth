@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27747%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              747 Winchester (A913 EK)         2026-Oct-08 06:10:58
+Rec #:     747 (+COV) Soln.date: 2026-Jun-05_03:59:52  # obs: 17750 (1913-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457383.5 ! 2015-Dec-27.00 (TDB)         Residual RMS= .19347
+   EC= .3401598896088454   QR= 1.979734966482787   TP= 2457288.9339542245
+   OM= 130.0811754079642   W=  275.4666274936587   IN= 18.16669038290486
+   A= 3.000325283816402    MA= 17.93439748042956   ADIST= 4.020915601150017
+   PER= 5.1971             N= .189649438           ANGMOM= .028019687
+   DAN= 2.56988            DDN= 2.74202            L= 45.8327154
+   B= -18.0812017          MOID= 1.08272004        TP= 2015-Sep-23.4339542245
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 85.855             ROTPER= 9.4146
+   H= 8.03                 G= .150                 B-V= .713
+                           ALBEDO= .0503           STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#141, OCC=0
+2: source=ORB
+*******************************************************************************

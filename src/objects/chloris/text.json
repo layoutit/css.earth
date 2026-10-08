@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "chloris",
+  "card": {
+    "text": "Main-belt asteroid found in 1896.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=410",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "410 Chloris (A896 AC); Discovered 1896-Jan-07 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-12685",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/12685/shape.txt",
+        "label": "DAMIT shape 12685 · Chloris",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Charlois found Chloris at Nice on 7 January 1896.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=410",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "410 Chloris (A896 AC); Discovered 1896-Jan-07 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-12685",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/12685/shape.txt",
+        "label": "DAMIT shape 12685 · Chloris",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Chloris’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 59.46 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-1721",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1721 · Freia",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1721"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1721/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/freia/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

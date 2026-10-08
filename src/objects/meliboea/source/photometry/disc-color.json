@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "meliboea",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 137",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 28 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.83156496,
+          "uncertainty": 0.003052731
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.88389707,
+          "uncertainty": 0.0015545704
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.94248486,
+          "uncertainty": 0.0013427293
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9820484,
+          "uncertainty": 0.001274654
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0012993353
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0094001,
+          "uncertainty": 0.0013523755
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 0.9953261,
+          "uncertainty": 0.0014600811
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 0.98736274,
+          "uncertainty": 0.001286712
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 0.990417,
+          "uncertainty": 0.0013102439
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0058519,
+          "uncertainty": 0.0013612541
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0227922,
+          "uncertainty": 0.0013642696
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0364623,
+          "uncertainty": 0.001313761
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0489501,
+          "uncertainty": 0.0013586094
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0645305,
+          "uncertainty": 0.0014212619
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.0881879,
+          "uncertainty": 0.0016663073
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.124756,
+          "uncertainty": 0.002183842
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (137) Meliboea",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.065,
+    "uncertainty": 0.005
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

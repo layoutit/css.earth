@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-751",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 751 · Hektor",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "751"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/751/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/hektor/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,56 @@
+{
+  "id": "gaia-2023-dr3-asteroid-reflectance-spectra",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gaia Collaboration, Galluccio et al. (2023): Gaia Data Release 3: Reflectance spectra of Solar System small bodies",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202243791"
+    },
+    {
+      "type": "arXiv",
+      "value": "2206.12174"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243791",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2206.12174",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "archive",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia archive, table gaiadr3.sso_reflectance_spectrum"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2206.12174",
+      "checkedOn": "2026-10-08",
+      "locator": "Abstract: mean reflectance spectra of 60,518 Solar System objects in 16 bands, 374 to 1034 nm"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC).",
+      "scope": "citation",
+      "evidence": "https://www.cosmos.esa.int/web/gaia-users/credits"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 674, A35",
+  "creators": [
+    "Gaia Collaboration",
+    "L. Galluccio",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

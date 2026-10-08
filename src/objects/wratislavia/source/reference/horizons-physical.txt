@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27690%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              690 Wratislavia (A909 UE)        2026-Oct-08 06:14:20
+Rec #:     690 (+COV) Soln.date: 2026-Jun-05_03:55:45  # obs: 10350 (1902-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457296.5 ! 2015-Oct-01.00 (TDB)         Residual RMS= .20042
+   EC= .1818790673956915   QR= 2.573818459220967   TP= 2457298.0519532957
+   OM= 253.1650895810586   W=  114.8695902245064   IN= 11.26426826697534
+   A= 3.146012229546286    MA= 359.7258791236172   ADIST= 3.718205999871604
+   PER= 5.58019            N= .176629591           ANGMOM= .030002464
+   DAN= 3.29389            DDN= 2.8258             L= 8.462582400000001
+   B= 10.2079133           MOID= 1.59835994        TP= 2015-Oct-02.5519532957
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 67.325             ROTPER= 8.64
+   H= 8.14                 G= .150                 B-V= .675
+                           ALBEDO= .0604           STYP= CPF
+
+ASTEROID comments: 
+1: soln ref.= JPL#84, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27659%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                659 Nestor (A908 FE)           2026-Oct-08 06:19:41
+Rec #:     659 (+COV) Soln.date: 2026-Jun-05_03:53:22   # obs: 7279 (1908-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458272.5 ! 2018-Jun-03.00 (TDB)         Residual RMS= .20011
+   EC= .1179271123192991   QR= 4.559779998557937   TP= 2458817.5548037519
+   OM= 350.7691163970936   W=  342.836202588063    IN= 4.520756857412366
+   A= 5.169391398648814    MA= 314.2927469319367   ADIST= 5.779002798739691
+   PER= 11.7535            N= .083858087           ANGMOM= .038838293
+   DAN= 4.5813             DDN= 5.7448             L= 333.655594
+   B= -1.3328316           MOID= 3.54973006        TP= 2019-Nov-30.0548037519
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 56.16              ROTPER= 15.98
+   H= 8.69                 G= .150                 B-V= .719
+                           ALBEDO= .035            STYP= XC
+
+ASTEROID comments: 
+1: soln ref.= JPL#125, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "bononia",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 1173: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 1173, version 2016-01-04, pole (115°, 45°), period 13.8063 h, taken unchanged from the archive. Mirror solution 1174 recorded as an alternative.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1173",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "154.334 ± 5.413 km, effective diameter of a sphere fitted to thermal infrared measurements. JPL lists a diameter of 154.334 ± 5.413 km, from NEOWISE (Grav et al. 2012, ApJ 744, 197; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=361"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/1173"
+      ]
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Bononia whole-disc color",
+      "status": "included",
+      "finding": "Gaia Collaboration, Galluccio et al. (2023) published the mean of 17 Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (0.920 at 462 nm, 1.043 at 638 nm). The shape is painted in that one color (#383734 in sRGB) through the shared disc-integrated-color method, scaled to the 3.8% geometric albedo JPL lists (± 0.5%), from NEOWISE (Grav et al. 2012, ApJ 744, 197; PDS bundle neowise_diameters_albedos 2.0). It is one mean, not a map. Tinaut-Ruano et al. (2023), A&A 669, L14, found Gaia DR3 reflectances slightly too red at wavelengths shorter than 550 nm; the bands are used as published, without that paper's correction.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243791",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=361",
+        "https://doi.org/10.1051/0004-6361/202245134",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/bononia/source/photometry/disc-color.json"
+      ]
+    }
+  ]
+}

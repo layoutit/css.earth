@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27596%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                596 Scheila (A906 DL)          2026-Oct-08 06:11:58
+Rec #:     596 (+COV) Soln.date: 2026-Jun-05_03:48:27   # obs: 8940 (1906-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457444.5 ! 2016-Feb-26.00 (TDB)         Residual RMS= .20896
+   EC= .1644024012010695   QR= 2.447048815436438   TP= 2457892.8708781842
+   OM= 70.67476939846418   W=  175.2645101209311   IN= 14.65551880430676
+   A= 2.928501492768495    MA= 271.8193498399048   ADIST= 3.409954170100552
+   PER= 5.0116             N= .196668995           ANGMOM= .029037171
+   DAN= 3.40767            DDN= 2.44823            L= 246.0926842
+   B= 1.1968352            MOID= 1.43425           TP= 2017-May-19.3708781842
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 79.863             ROTPER= 15.848
+   H= 8.92                 G= .150                 B-V= .714
+                           ALBEDO= .040            STYP= T
+
+ASTEROID comments: 
+1: soln ref.= JPL#119, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "veritas",
+  "card": {
+    "text": "Dark, carbon-rich main-belt asteroid, discovered in September 1902.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Veritas",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1902-09-03 by Wolf, M. at Heidelberg; albedo: 0.059; orbit class: Main-belt Asteroid; spec_B: Ch; spec_T: C"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M. Wolf found Veritas at Heidelberg in 1902. It is very dark, reflecting only about 6% of the sunlight that reaches it.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=Veritas",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-13",
+        "locator": "Discovery circumstances, orbit class and physical parameters",
+        "quote": "Discovered 1902-09-03 by Wolf, M. at Heidelberg; albedo: 0.059; orbit class: Main-belt Asteroid; spec_B: Ch; spec_T: C"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Veritas’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 59.401 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

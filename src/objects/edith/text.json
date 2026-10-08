@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "edith",
+  "card": {
+    "text": "Main-belt asteroid found in 1903.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=517",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "517 Edith (A903 SK); Discovered 1903-Sep-22 by Dugan, R. S. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-59706",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/59706/shape.txt",
+        "label": "DAMIT shape 59706 · Edith",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "R. S. Dugan found Edith at Heidelberg on 22 September 1903.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=517",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "517 Edith (A903 SK); Discovered 1903-Sep-22 by Dugan, R. S. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-59706",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/59706/shape.txt",
+        "label": "DAMIT shape 59706 · Edith",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Edith’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 55.95 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27624%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                624 Hektor (A907 CF)           2026-Sep-08 03:29:46
+Rec #:     624 (+COV) Soln.date: 2026-Jun-05_03:50:35   # obs: 8427 (1907-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458404.5 ! 2018-Oct-13.00 (TDB)         Residual RMS= .16987
+   EC= .02353385568878924  QR= 5.13467827385213    TP= 2456535.9293249538
+   OM= 342.7923856178209   W=  185.2773489739936   IN= 18.16455201953355
+   A= 5.258429392320693    MA= 152.7318219578771   ADIST= 5.382180510789255
+   PER= 12.05847           N= .081737247           ANGMOM= .039435665
+   DAN= 5.38163            DDN= 5.13518            L= 167.8081149
+   B= -1.6430983           MOID= 4.14139986        TP= 2013-Aug-31.4293249538
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 112.5              ROTPER= 6.924
+   H= 7.32                 G= .150                 B-V= .776
+                           ALBEDO= .025            STYP= D
+
+ASTEROID comments: 
+1: soln ref.= JPL#139, OCC=0
+2: source=ORB
+*******************************************************************************

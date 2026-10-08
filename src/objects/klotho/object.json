@@ -1,0 +1,128 @@
+{
+  "id": "klotho",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Klotho",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 42.5
+      },
+      "schema": "cssearth-authored-object@2",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -87081745825.88602,
+        -480752112764.801,
+        -99208701058.51846
+      ],
+      "presentationToReference": [
+        -0.17831067338444534,
+        -5.551115123125783e-17,
+        -0.9839742393768172,
+        -0.9027787141663969,
+        0.39777715593191376,
+        0.16359684430570529,
+        -0.3914024744495783,
+        -0.9174820620691819,
+        0.07092791253116904
+      ],
+      "orbitUpReference": [
+        5.551115123125783e-17,
+        -0.39777715593191376,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 184.7826086956522,
+      "bodyRadiusM": 42500
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/templates/small-body.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Klotho",
+      "classification": "asteroid",
+      "color": "#9d9a94",
+      "distanceAu": 2.6688807426668064,
+      "description": "Main-belt asteroid, discovered in February 1868.",
+      "systemName": "Solar System",
+      "order": 255,
+      "context": {
+        "order": 297
+      }
+    }
+  },
+  "schema": "cssearth-object@2",
+  "parent": "solar-system",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

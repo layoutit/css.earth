@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "hesperia-arrival.webp",
+      "bytes": 26026,
+      "sha256": "6707e2dc77029928dd8cb998b564084fbc180d9e58256c867cf67872fb10859b"
+    },
+    {
+      "location": "public",
+      "filename": "hesperia-billboard.webp",
+      "bytes": 4040,
+      "sha256": "0488fda9b5138e7623eade5b0216dd5ba1ed2874fc4c9327858f0070f55dbb4d"
+    },
+    {
+      "location": "public",
+      "filename": "hesperia-color-surface-alpha@2x.webp",
+      "bytes": 92,
+      "sha256": "c5c61abcada1acb4fe0c086aed309c539564b42434c3b296e4737dafa022b894"
+    },
+    {
+      "location": "public",
+      "filename": "hesperia-color-surface@2x.webp",
+      "bytes": 48,
+      "sha256": "ff61144a00ce63e21e78f5549583ec9a96da267b6963abf563c7e4ccaa9629a8"
+    },
+    {
+      "location": "public",
+      "filename": "hesperia-color-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "68759822473950b06f37dd5a021d93415805420a9ad92226b949a00d50848a6b"
+    },
+    {
+      "location": "public",
+      "filename": "hesperia-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "location": "public",
+      "filename": "hesperia-elevation-surface-alpha@2x.webp",
+      "bytes": 104826,
+      "sha256": "31ff9861eae78ae13405b9853bc7afb1acaf1b987704b5777ace0c21d11acb28"
+    },
+    {
+      "location": "public",
+      "filename": "hesperia-elevation-surface@2x.webp",
+      "bytes": 38208,
+      "sha256": "a6b09a15d515740128fffc30b093c58a9cf821c63037598195f722f7cdb0d12d"
+    },
+    {
+      "location": "public",
+      "filename": "hesperia-elevation-thumbnail.webp",
+      "bytes": 5180,
+      "sha256": "00b5eb466e24d6be28a5063b3b320662776349042419ee86553e51b77c8d51af"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 304,
+      "sha256": "19928f828503d532a11459f417f785f998776c45d090e9797888d9938643a975"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 531,
+      "sha256": "549379845c3178ef301f2eadf7dc0b7dd8dce98f86a3a512424a48dfdb4aea52"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 3860,
+      "sha256": "820fb17da3c2044d1daa47110f8d9404b834a88fcae2e3d9fff62a23f4981965"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 1594,
+      "sha256": "ea1d746e6ee1669915eb5bfde1778819b45468d96bfd75de99c2e936458bcd60"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 197,
+      "sha256": "e59fa149c7436a747634c9c123b38a9a14c9891a2299d55115da9e5708a92144"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 534,
+      "sha256": "4386897be6644df659e31058193ddcbb941786a10b5017ab5cc497c3fe373616"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 3602,
+      "sha256": "fc44170db109c7999f6bfbcd921bf8815e79e62e7acc53dc4f4a298a683f9c04"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 358031,
+      "sha256": "41dafe2d4b815d9f1456efa984397bdc0c91c9c532b3f8c5a728c025e38305ec"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 304083,
+      "sha256": "4997fbf7e5932ba31060c8701ec5fd133e33c26e2d4ecbe22c35ecf3da8f430f"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 15475,
+      "sha256": "574fbe30cd3783a2b1a5530bca597574b868be5fbb21406586f1bfd202b42004"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1454,
+      "sha256": "008d71485b2f60336c0fb736743fd15feb8ca8f14a829e23978d073f418a2d2b"
+    }
+  ]
+}

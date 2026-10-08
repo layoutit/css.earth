@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "winchester",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 247: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 247, version 2011-02-18, pole (304°, -60°), period 9.4148 h, taken unchanged from the archive.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/247",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "171 ± 15 km, volume-equivalent diameter DAMIT lists for this size-calibrated model. DAMIT marks the model as size-calibrated and lists an equivalent diameter of 171 ± 15 km with it; the model references describe the scaling.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/247"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/247"
+      ]
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Winchester whole-disc color",
+      "status": "included",
+      "finding": "Gaia Collaboration, Galluccio et al. (2023) published the mean of 29 Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (0.950 at 462 nm, 1.001 at 638 nm). The shape is painted in that one color (#403f3d in sRGB) through the shared disc-integrated-color method, scaled to the 5% geometric albedo JPL lists (± 0.2%), from the IRAS Minor Planet Survey (PDS data set IRAS-A-FPA-3-RDR-IMPS-V6.0). It is one mean, not a map. Tinaut-Ruano et al. (2023), A&A 669, L14, found Gaia DR3 reflectances slightly too red at wavelengths shorter than 550 nm; the bands are used as published, without that paper's correction.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243791",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=747",
+        "https://doi.org/10.1051/0004-6361/202245134",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/winchester/source/photometry/disc-color.json"
+      ]
+    }
+  ]
+}

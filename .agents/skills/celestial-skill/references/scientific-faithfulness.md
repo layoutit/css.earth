@@ -230,6 +230,13 @@ and not clickable. On 2026-10-06 this retired 185 pages; Braille, Eurybates and 
 populations kept theirs. Models that add resolved images or occultations to the light
 curves, and shapes from radar or spacecraft, are not affected.
 
+A measured color is something more to visit. An asteroid at least 100 km across in the JPL
+Small-Body Database, with a light-curve shape in DAMIT, a Gaia DR3 reflectance spectrum and a
+measured albedo, has a page that shows the shape in that color at that brightness. On 2026-10-08
+this brought back 54 of the retired pages in color and added 44 asteroids
+([asteroid colors](../../../../packages/bake/authoring/asteroid-colors/author.mts)). An asteroid
+with no published shape gets no page: it is never drawn as a sphere.
+
 A nebula's photograph follows the same rule. A page turns the camera around its subject, so
 the picture needs a depth someone measured: walls from spectra, a published surface or density
 grid, or measured points. A photograph standing as one flat picture at the nebula's distance

@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "comacina",
+  "card": {
+    "text": "Main-belt asteroid found in 1902.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=489",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "489 Comacina (A902 RD); Discovered 1902-Sep-02 by Carnera, L. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-3142",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3142/shape.txt",
+        "label": "DAMIT shape 3142 · Comacina",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "L. Carnera found Comacina at Heidelberg on 2 September 1902.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=489",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "489 Comacina (A902 RD); Discovered 1902-Sep-02 by Carnera, L. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-3142",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3142/shape.txt",
+        "label": "DAMIT shape 3142 · Comacina",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Comacina’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 69.69 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-65258",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 65258 · Sophrosyne",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "65258"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/65258/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/sophrosyne/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,128 @@
+{
+  "id": "semele",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Semele",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 58.66
+      },
+      "schema": "cssearth-authored-object@2",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -514060079896.39105,
+        64218765999.80713,
+        75535118631.37822
+      ],
+      "presentationToReference": [
+        -0.985352511342963,
+        1.1102230246251565e-16,
+        0.17052984603909,
+        0.15645807478828438,
+        0.39777715593191376,
+        0.9040432539719887,
+        0.06783287715893627,
+        -0.9174820620691819,
+        0.39195071955237265
+      ],
+      "orbitUpReference": [
+        -1.1102230246251565e-16,
+        -0.39777715593191376,
+        0.9174820620691819
+      ],
+      "metersPerUnit": 255.04347826086956,
+      "bodyRadiusM": 58660
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/templates/small-body.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Semele",
+      "classification": "asteroid",
+      "color": "#9b9a94",
+      "distanceAu": 3.102547858991143,
+      "description": "Dark, carbon-rich main-belt asteroid, discovered in January 1866.",
+      "systemName": "Solar System",
+      "order": 251,
+      "context": {
+        "order": 293
+      }
+    }
+  },
+  "schema": "cssearth-object@2",
+  "parent": "solar-system",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

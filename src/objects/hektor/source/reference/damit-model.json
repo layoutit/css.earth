@@ -1,0 +1,45 @@
+{
+  "modelId": 232,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/232",
+  "fields": {
+    "ID": "232",
+    "Asteroid ID": "(624) Hektor",
+    "Lambda": "333",
+    "Beta": "-31",
+    "Period": "6.920509",
+    "YORP": "",
+    "JD0": "2435957",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "1.39",
+    "LSM Parameter 3": "0.19",
+    "LSM Parameter 4": "-0",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "175",
+    "Equivalent Diameter Error": "21",
+    "Thermal Inertia": "6",
+    "Thermal Inertia Min": "0",
+    "Thermal Inertia Max": "8",
+    "Visual Albedo": "0.056",
+    "Visual Albedo Error": "0.017",
+    "Craters Angle": "60",
+    "Craters Surface Density": "0.9",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2016-06-27",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2016-06-27 12:21:03"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/749/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/750/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/751/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/163",
+    "https://damit.cuni.cz/projects/damit/references/view/104"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "method": "published-volume-equivalent-size-transfer",
+  "diameterKm": 118.8,
+  "uncertaintyKm": 0.6,
+  "uncertaintyKind": "Doubled published volume-equivalent radius fit uncertainty; it is not a bound on local surface accuracy.",
+  "diameterSemantics": "Twice the 59.4 ± 0.3 km volume-equivalent radius in Dutra et al. (2025), fitted to the same 574-vertex, 1144-facet DAMIT model.",
+  "sourceUrl": "https://doi.org/10.1098/rsta.2024.0187",
+  "reference": "Dutra et al. (2025), Philosophical Transactions A 383, 20240187",
+  "sourceLabel": "Dutra et al. (2025), occultation fit",
+  "scaleKmPerSourceUnit": 95.75232363210009,
+  "metersPerSourceUnit": 95752.32363210009,
+  "limitations": "The published occultation fit uses this same 574-vertex, 1144-facet dimensionless model, refining its uniform size, pole and period. Three observed chords constrain the silhouette; this remains an inverse model, without resolved local terrain. No albedo, craters or regolith are inferred.",
+  "visibleDescription": "Convex light-curve model fitted to a stellar occultation: 118.8 ± 0.6 km volume-equivalent diameter. Grid marks unavailable imagery; rotational phase is illustrative."
+}

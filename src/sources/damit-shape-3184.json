@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-3184",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 3184 · Atalante",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "3184"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3184/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/atalante/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

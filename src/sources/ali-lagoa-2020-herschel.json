@@ -1,0 +1,27 @@
+{
+  "id": "ali-lagoa-2020-herschel",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Alí-Lagoa et al. (2020): Thermal properties of large main-belt asteroids observed by Herschel PACS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2005.01479"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/pdf/2005.01479",
+      "label": "Alí-Lagoa et al. (2020): Thermal properties of large main-belt asteroids observed by Herschel PACS"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/massalia/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

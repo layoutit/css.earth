@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27536%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                536 Merapi (A904 JF)           2026-Oct-08 06:12:45
+Rec #:     536 (+COV) Soln.date: 2026-Jun-05_03:43:45   # obs: 6827 (1904-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457633.5 ! 2016-Sep-02.00 (TDB)         Residual RMS= .18564
+   EC= .08556896530512823  QR= 3.199202335671465   TP= 2457982.7726994059
+   OM= 59.23814458541662   W=  295.8412910200418   IN= 19.42453875554912
+   A= 3.4985714770048      MA= 307.3943261642808   ADIST= 3.797940618338135
+   PER= 6.54402            N= .150614903           ANGMOM= .0320576
+   DAN= 3.34808            DDN= 3.60751            L= 356.4203995
+   B= -17.4161759          MOID= 2.2537899         TP= 2017-Aug-17.2726994059
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 73.533             ROTPER= 8.791
+   H= 8.12                 G= .150                 B-V= .694
+                           ALBEDO= .048            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#144, OCC=0
+2: source=ORB
+*******************************************************************************

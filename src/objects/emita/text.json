@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "emita",
+  "card": {
+    "text": "Main-belt asteroid found in 1902.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=481",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "481 Emita (A902 CB); Discovered 1902-Feb-12 by Carnera, L. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-66049",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/66049/shape.txt",
+        "label": "DAMIT shape 66049 · Emita",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "L. Carnera found Emita at Heidelberg on 12 February 1902.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=481",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "481 Emita (A902 CB); Discovered 1902-Feb-12 by Carnera, L. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-66049",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/66049/shape.txt",
+        "label": "DAMIT shape 66049 · Emita",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Emita’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 50.91 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

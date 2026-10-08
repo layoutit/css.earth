@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27780%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                780 Armenia (A914 BJ)          2026-Oct-08 06:16:37
+Rec #:     780 (+COV) Soln.date: 2026-Jun-05_04:02:39   # obs: 6937 (1909-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458150.5 ! 2018-Feb-01.00 (TDB)         Residual RMS= .19236
+   EC= .09716146915132952  QR= 2.811216551874363   TP= 2457675.1681718468
+   OM= 144.8437019450472   W=  214.1992778614086   IN= 19.08486685687127
+   A= 3.113753407524391    MA= 85.26575574592836   ADIST= 3.416290263174419
+   PER= 5.49458            N= .179381541           ANGMOM= .030210914
+   DAN= 3.35388            DDN= 2.85493            L= 357.5534113
+   B= -10.5900144          MOID= 1.82238996        TP= 2016-Oct-13.6681718468
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 63.1315            ROTPER= 19.891
+   H= 8.99                 G= .150                 B-V= n.a.
+                           ALBEDO= .028            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#79, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,6 +1,7 @@
 // A uniform surface color from published whole-disc photometry: color indices relative to the Sun give reflectance at
-// each filter's effective wavelength, a piecewise-linear spectrum joins them, and the CIE 1931 observer under D65 turns
-// it into linear sRGB scaled so the V reflectance is the published geometric albedo. No map, terrain or variation is implied.
+// each filter's effective wavelength, or a published reflectance spectrum gives it at its own samples; a piecewise-linear
+// spectrum joins them, and the CIE 1931 observer under D65 turns it into linear sRGB scaled so the V reflectance is the
+// published geometric albedo. No map, terrain or variation is implied.
 import { requireString } from '@cssearth/core';
 import { parseDiscColorRecord, type DiscColorRecord } from '@cssearth/objects';
 import { linearToSrgb } from './color-transfer.ts';
@@ -25,8 +26,9 @@ export function parseCieTable(text: string, columns: number): Map<number, readon
   return rows;
 }
 
-/** Relative reflectance (V = 1) at each effective wavelength, from object minus solar color indices. */
+/** Relative reflectance (V = 1): at each effective wavelength from object minus solar color indices, or the published spectrum's own samples. */
 export function filterReflectance(record: DiscColorRecord): readonly (readonly [number, number])[] {
+  if ('reflectance' in record) return record.reflectance;
   const relative = (name: typeof INDICES[number]) => record.colorIndices[name] - record.solarColorIndices[name];
   const { B, V, R, I } = record.effectiveWavelengthsNm;
   // A redder B-V makes B fainter relative to V; a redder V-R or V-I makes R or I brighter.
@@ -36,7 +38,7 @@ export function filterReflectance(record: DiscColorRecord): readonly (readonly [
 function spectrum(points: readonly (readonly [number, number])[]) {
   return (wavelength: number) => {
     const [first, second] = [points[0]!, points[1]!];
-    // Blueward of B the B-V slope continues, never below zero; redward of I the I value holds.
+    // Blueward of the first point its slope continues, never below zero; redward of the last point its value holds.
     if (wavelength <= first[0]) return Math.max(0, first[1] + (second[1] - first[1]) * (wavelength - first[0]) / (second[0] - first[0]));
     for (let index = 1; index < points.length; index++) {
       const [a, b] = [points[index - 1]!, points[index]!];

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27171%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                171 Ophelia (A877 AB)          2026-Oct-08 06:15:14
+Rec #:     171 (+COV) Soln.date: 2026-Jun-05_03:14:09  # obs: 12275 (1985-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457415.5 ! 2016-Jan-28.00 (TDB)         Residual RMS= .14824
+   EC= .1319902540192265   QR= 2.717475511767018   TP= 2457538.2995010917
+   OM= 100.5377341358178   W=  56.97235481201501   IN= 2.546560337431443
+   A= 3.13069700467074     MA= 338.1506199114955   ADIST= 3.543918497574463
+   PER= 5.53949            N= .177927271           ANGMOM= .030170715
+   DAN= 2.86971            DDN= 3.31461            L= 157.4842145
+   B= 2.1348468            MOID= 1.72812998        TP= 2016-May-29.7995010917
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 65.404             ROTPER= 6.66535
+   H= 8.63                 G= .150                 B-V= .695
+                           ALBEDO= .076            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#159, OCC=0
+2: source=ORB
+*******************************************************************************

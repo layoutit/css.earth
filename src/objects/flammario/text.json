@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "flammario",
+  "card": {
+    "text": "Main-belt asteroid found in 1924.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1021",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "1021 Flammario (A924 EW); Discovered 1924-Mar-11 by Wolf, M. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-3302",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3302/shape.txt",
+        "label": "DAMIT shape 3302 · Flammario",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M. Wolf found Flammario at Heidelberg on 11 March 1924.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1021",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "1021 Flammario (A924 EW); Discovered 1924-Mar-11 by Wolf, M. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-3302",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3302/shape.txt",
+        "label": "DAMIT shape 3302 · Flammario",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Flammario’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 50.38 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

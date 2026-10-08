@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hispania",
+  "card": {
+    "text": "Main-belt asteroid found in 1915.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=804",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "804 Hispania (A915 FK); Discovered 1915-Mar-20 by Comas Sola, J. at Barcelona; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-61744",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/61744/shape.txt",
+        "label": "DAMIT shape 61744 · Hispania",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "J. Comas Sola found Hispania at Barcelona on 20 March 1915.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=804",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "804 Hispania (A915 FK); Discovered 1915-Mar-20 by Comas Sola, J. at Barcelona; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-61744",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/61744/shape.txt",
+        "label": "DAMIT shape 61744 · Hispania",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Hispania’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 68.98 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

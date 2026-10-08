@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-65319",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 65319 · Siwa",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "65319"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/65319/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/siwa/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

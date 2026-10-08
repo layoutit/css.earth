@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "faina",
+  "card": {
+    "text": "Main-belt asteroid found in 1913.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=751",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "751 Faina (A913 HE); Discovered 1913-Apr-28 by Neujmin, G. at Simeis; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-66411",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/66411/shape.txt",
+        "label": "DAMIT shape 66411 · Faina",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "G. Neujmin found Faina at Simeis on 28 April 1913.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=751",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "751 Faina (A913 HE); Discovered 1913-Apr-28 by Neujmin, G. at Simeis; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-66411",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/66411/shape.txt",
+        "label": "DAMIT shape 66411 · Faina",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Faina’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 56.85 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -1,0 +1,59 @@
+# (3451) Mentor
+
+The shape is painted in one measured whole-disc color at the measured brightness; no surface detail is mapped.
+
+L5 Jupiter Trojan. Source records checked 2026-09-09.
+
+## Sources
+
+| Source | What the view uses |
+| --- | --- |
+| [DAMIT model 4281](https://damit.cuni.cz/projects/damit/asteroid_models/view/4281), 2019-05-07; [Ďurech et al. (2019)](https://damit.cuni.cz/projects/damit/references/view/182) | Convex light-curve shape and paired sidereal spin. |
+| [NEOWISE v2, Gr12b](https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html); [Grav et al. (2012)](https://arxiv.org/abs/1209.1549) | Effective spherical diameter 126.288 ± 1.642 km; approximate mesh-volume scale. |
+
+[Model fields and mesh measurements](source/reference/damit-model.json).
+
+- **Color:** [Gaia Collaboration, Galluccio et al. (2023)](https://doi.org/10.1051/0004-6361/202243791) published Mentor's reflectance against the Sun in 16 bands from 374 to 1034 nm, the mean of 42 Gaia epoch spectra. [The record](source/photometry/disc-color.json) turns the bands into one sRGB color, #3c3b39, with the method of [shape-only material](../../../docs/shape-only-material.md).
+
+- **Brightness:** the color is scaled to the visible geometric albedo the [JPL Small-Body Database](https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3451) lists, 4.4% ± 0.8%, from NEOWISE (Grav et al. 2012, ApJ 759, 49; PDS bundle neowise_diameters_albedos 2.0).
+
+## Evidence
+
+- Recorded qualification includes source/package checks, independent mesh/scalar comparisons, and fresh source/runtime installation.
+- Headless Chrome passed this body at DPR 1/2, Shape/Elevation and both shadow states in `performance` build. Diagnostic APIs were enabled. These focused checks do not establish full-catalog browser or physical-device qualification.
+- Integration checked unchanged scene, terrain and image inventories plus non-marker runtime fields. It did not repeat the browser matrix; captures keep their original revision.
+
+## Known problems
+
+- The grid marks unmapped coverage: no registered global reflectance mosaic was found in the selected releases. Convex inversion leaves concavities and fine relief unresolved.
+- Transferring thermal diameter to mesh volume is approximate. The quoted fit error excludes additional thermal/shape uncertainty and does not measure local shape accuracy.
+- Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain.
+- Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT. The archive also lists an alternative pole.
+- Hanuš et al. (2023), [*Shape models and spin states of Jupiter Trojans: Testing the streaming instability formation scenario*](https://arxiv.org/abs/2308.05380v1), Table B.2 revises the shape/spin solution. The recorded public target query did not expose its numerical mesh; this view keeps the older mesh and matching pole.
+
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
+
+- The color is one mean for the whole disc, painted evenly: no terrain, albedo pattern or color variation is implied. Gaia DR3 reflectances are slightly too red at wavelengths shorter than 550 nm ([Tinaut-Ruano et al. 2023](https://doi.org/10.1051/0004-6361/202245134)); the bands are used as published.
+
+## Methods
+
+<details>
+<summary>Mesh scale, spin, source alternatives and preparation</summary>
+
+### Shape, scale and orientation
+
+The unmodified source has 572 vertices and 1140 triangles. Its signed tetrahedral volume is 1.0000001243334133 source units³; independent triangle-centroid divergence gives 1.0000001243334136. The existing recipe applies a uniform scale of 101.78761572588223 km per source unit. No unit-volume assumption is made. The Elevation reference sphere has radius 63.144 km.
+
+Original +Z spin axis and +X reference meridian are retained. The selected ecliptic J2000 pole is (237°, 57°), with sidereal period 7.69659 h. Conversion to equatorial J2000 uses obliquity 23.439291111°. Position uses JPL Horizons heliocentric ICRF elements; TDB is approximated as TT, under 2 ms.
+
+### Preparation
+
+The [terrestrial recipe](source/preparation/terrestrial.json) reads the original mesh through `source-meshoptimizer` and reduces it to the fewest native PolyCSS `u` raster triangles its error allowance permits, 260 of at most 800, in an atlas of 13,107,200 texels. Its error allowance is 1262.88 m. Sampled source-fit distances measure preparation error separately from source accuracy; they are not exhaustive Hausdorff bounds.
+
+Shadows and asteroid orbit visibility are off by default. The family report records source/result comparisons, numerical checks, runtime cases and delivery. Orbit fixtures sample the epoch and ±30 days; they do not bound the whole interval or establish long-term accuracy.
+
+[Grav et al. (2012), WISE/NEOWISE Observations of the Jovian Trojan Population: Taxonomy](https://arxiv.org/abs/1209.1549).
+
+[Ďurech et al. (2019), Inversion of asteroid photometry from Gaia DR2 and the Lowell Observatory photometric database](https://ui.adsabs.harvard.edu/abs/2019A&A...631A...2D).
+
+</details>

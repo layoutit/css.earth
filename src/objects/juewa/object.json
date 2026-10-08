@@ -1,0 +1,128 @@
+{
+  "id": "juewa",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Juewa",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 83.345
+      },
+      "schema": "cssearth-authored-object@2",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        260923363722.45325,
+        -312791146006.6697,
+        -215145157023.28964
+      ],
+      "presentationToReference": [
+        0.5736560639545463,
+        -5.204170427930421e-18,
+        -0.8190962826726647,
+        -0.7515061464597179,
+        0.3977771559319137,
+        -0.5263191484755075,
+        -0.32581778975593556,
+        -0.9174820620691817,
+        -0.2281872776029354
+      ],
+      "orbitUpReference": [
+        5.204170427930421e-18,
+        -0.3977771559319137,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 362.3695652173913,
+      "bodyRadiusM": 83345
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/templates/small-body.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Juewa",
+      "classification": "asteroid",
+      "color": "#9a9a95",
+      "distanceAu": 2.7861445733475856,
+      "description": "Dark main-belt asteroid, discovered on 10 October 1874.",
+      "systemName": "Solar System",
+      "order": 380,
+      "context": {
+        "order": 184
+      }
+    }
+  },
+  "schema": "cssearth-object@2",
+  "parent": "solar-system",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

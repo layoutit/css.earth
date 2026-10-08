@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hippo",
+  "card": {
+    "text": "Main-belt asteroid found in 1897.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=426",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "426 Hippo (A897 RA); Discovered 1897-Aug-25 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-128022",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/128022/shape.txt",
+        "label": "DAMIT shape 128022 · Hippo",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Charlois found Hippo at Nice on 25 August 1897.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=426",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "426 Hippo (A897 RA); Discovered 1897-Aug-25 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-128022",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/128022/shape.txt",
+        "label": "DAMIT shape 128022 · Hippo",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Hippo’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 61 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

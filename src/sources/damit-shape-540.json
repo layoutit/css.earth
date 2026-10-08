@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-540",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 540 · Adelheid",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "540"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/540/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/adelheid/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

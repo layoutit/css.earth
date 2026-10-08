@@ -376,7 +376,7 @@ async function authorBody(body: Body) {
   const originM = epochRow.split(',').slice(2, 5).map(value => Number(value) * 1000);
   const geometryRadius = requireFiniteNumber(templateGeometry.radius);
   const object = {
-    id,
+    id, parent: 'solar-system',
     properties: {
       preparation: { ...requireRecord(properties.preparation), label: name },
       recipe: { ...recipe, shape: { kind: 'radial-terrain', radiusKm } },

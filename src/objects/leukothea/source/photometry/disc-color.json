@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "leukothea",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 35",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 13 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.7925081,
+          "uncertainty": 0.001987465
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.8831409,
+          "uncertainty": 0.0012606642
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.93327767,
+          "uncertainty": 0.0011740302
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9706235,
+          "uncertainty": 0.0011381084
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0011701456
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0014033,
+          "uncertainty": 0.0012492515
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 0.98160774,
+          "uncertainty": 0.0012571906
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 0.9748263,
+          "uncertainty": 0.0011036907
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 0.9826646,
+          "uncertainty": 0.0011064775
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 0.9935019,
+          "uncertainty": 0.0011222219
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0047709,
+          "uncertainty": 0.0011439455
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0138122,
+          "uncertainty": 0.001182244
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0268646,
+          "uncertainty": 0.0011500001
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0393546,
+          "uncertainty": 0.0012257461
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.0746384,
+          "uncertainty": 0.001375279
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.1286138,
+          "uncertainty": 0.0017242192
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (35) Leukothea",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.066,
+    "uncertainty": 0.015
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

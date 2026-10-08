@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "diomedes",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 1437",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 26 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.88300157,
+          "uncertainty": 0.013357662
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.88136214,
+          "uncertainty": 0.005505399
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9414388,
+          "uncertainty": 0.0042973543
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9708203,
+          "uncertainty": 0.003994009
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0039319987
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0172299,
+          "uncertainty": 0.0040443987
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0229993,
+          "uncertainty": 0.00434326
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0388528,
+          "uncertainty": 0.003988636
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0627915,
+          "uncertainty": 0.0041332464
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0766262,
+          "uncertainty": 0.004222369
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.1021669,
+          "uncertainty": 0.0043591736
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.1208318,
+          "uncertainty": 0.004341886
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.136413,
+          "uncertainty": 0.004443408
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.1615458,
+          "uncertainty": 0.0049297833
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1970264,
+          "uncertainty": 0.006055926
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.2353148,
+          "uncertainty": 0.00919476
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (1437) Diomedes",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[jupiter_trojans] (http://adsabs.harvard.edu/abs/2012ApJ...759...49G)",
+    "band": "V",
+    "value": 0.061,
+    "uncertainty": 0.011
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

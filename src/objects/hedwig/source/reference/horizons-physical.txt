@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27476%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                476 Hedwig (A901 QB)           2026-Oct-08 06:13:48
+Rec #:     476 (+COV) Soln.date: 2026-Jun-05_03:39:20   # obs: 9651 (1901-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457705.5 ! 2016-Nov-13.00 (TDB)         Residual RMS= .18859
+   EC= .07242915642801706  QR= 2.458498255879172   TP= 2457963.1931081191
+   OM= 286.3631023131925   W=  .4105383938929196   IN= 10.92469747925467
+   A= 2.65046952792494     MA= 301.139675203044    ADIST= 2.842440799970708
+   PER= 4.31512            N= .228412491           ANGMOM= .027931914
+   DAN= 2.4585             DDN= 2.84244            L= 286.7662008
+   B= .0778041             MOID= 1.44309998        TP= 2017-Jul-28.6931081191
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 69.2465            ROTPER= 27.33
+   H= 8.7                  G= .150                 B-V= .716
+                           ALBEDO= .035            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#143, OCC=0
+2: source=ORB
+*******************************************************************************

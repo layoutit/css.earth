@@ -217,7 +217,7 @@ export { DISPLAY_ORIENTATION_SCHEMA, parseAuthoredOrientation, type DisplayOrien
 export { SYNCHRONOUS_ROTATION_SCHEMA, parseSynchronousRotation, type SynchronousRotation } from './prepared-data/orbit/synchronous-rotation.js';
 export { PUBLISHED_LIMB_DARKENING_SCHEMA, readPublishedPowerLaw, readPublishedLimbDarkening, checkLimbLaw, type LimbLaw, type PublishedLimbCoefficient, type PublishedLimbDarkening } from './prepared-data/photometry/published-limb-darkening.js';
 
-export { DISC_INTEGRATED_COLOR_SCHEMA, parseDiscColor, parseDiscColorRecord, parseDiscColorPhotometry, type DiscColorRecord, type DiscColorPhotometry } from './prepared-data/photometry/disc-integrated-color.js';
+export { DISC_INTEGRATED_COLOR_SCHEMA, parseDiscColor, parseDiscColorRecord, parseDiscColorPhotometry, type DiscColorRecord, type DiscColorIndices, type DiscReflectanceSpectrum, type DiscColorPhotometry } from './prepared-data/photometry/disc-integrated-color.js';
 export { STELLAR_PHOTOMETRIC_COLOR_SCHEMA, PLANCK_FLOOR_KELVIN, parseStellarColorRecord, parseMeasuredSpectrumRecord, checkStellarTemperature, type StellarColorRecord, type StellarTemperature, type MeasuredSpectrumRecord } from './prepared-data/photometry/stellar-photometric-color.js';
 export { UNIFORM_DISC_STAR_SCHEMA, parseUniformDiscStarMeasurements, type UniformDiscStarMeasurements } from './prepared-data/photometry/uniform-disc-star.js';
 export { MEASURED_SPECTRUM_SCHEMA, parseMeasuredSpectrumDocument, type Measurement } from './prepared-data/photometry/measured-spectrum.js';

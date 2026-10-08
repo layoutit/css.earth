@@ -1,0 +1,247 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "hispania",
+  "generator": "packages/bake/authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 804,
+    "by": "SBDB record des 804"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 643,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "804",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00804",
+          "Absolute_mag": "7.91",
+          "Slope_param": "+0.18",
+          "Mean_JD": "2455303.9602730",
+          "N_W1": "11",
+          "N_W2": "13",
+          "N_W3": "11",
+          "N_W4": "12",
+          "Fit_code": "DVBI",
+          "Diameter": "149.716",
+          "Diameter_err": "6.763",
+          "V_albedo": "0.054",
+          "V_albedo_err": "0.005",
+          "IR_albedo": "0.066",
+          "IR_albedo_err": "0.012",
+          "Beaming_param": "0.983",
+          "Beaming_param_err": "0.118",
+          "Stacked_flag": "-",
+          "Reference": "Mas14",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 139930,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "804",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00804",
+          "Absolute_mag": "7.84",
+          "Slope_param": "+0.18",
+          "Mean_JD": "2455573.0569285",
+          "N_W1": "10",
+          "N_W2": "10",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "137.952",
+          "Diameter_err": "1.964",
+          "V_albedo": "0.068",
+          "V_albedo_err": "0.010",
+          "IR_albedo": "0.077",
+          "IR_albedo_err": "0.014",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 153598,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "804",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00804",
+          "Absolute_mag": "7.84",
+          "Slope_param": "+0.18",
+          "Mean_JD": "2456706.3090087",
+          "N_W1": "8",
+          "N_W2": "8",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "163.691",
+          "Diameter_err": "57.377",
+          "V_albedo": "0.041",
+          "V_albedo_err": "0.033",
+          "IR_albedo": "0.061",
+          "IR_albedo_err": "0.081",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 153599,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "804",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00804",
+          "Absolute_mag": "7.84",
+          "Slope_param": "+0.18",
+          "Mean_JD": "2456986.1595644",
+          "N_W1": "11",
+          "N_W2": "11",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "135.893",
+          "Diameter_err": "49.749",
+          "V_albedo": "0.055",
+          "V_albedo_err": "0.029",
+          "IR_albedo": "0.082",
+          "IR_albedo_err": "0.068",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 162436,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "804",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00804",
+          "Absolute_mag": "7.84",
+          "Slope_param": "+0.18",
+          "Mean_JD": "2457143.4465153",
+          "N_W1": "10",
+          "N_W2": "10",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "125.333",
+          "Diameter_err": "52.687",
+          "V_albedo": "0.064",
+          "V_albedo_err": "0.038",
+          "IR_albedo": "0.096",
+          "IR_albedo_err": "0.094",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas14": "Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others, Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121, doi:10.1088/0004-637X/791/2/121, 2014."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  },
+  "masses": {
+    "catalogueId": "asteroid-masses-baer-2012",
+    "product": "urn:nasa:pds:compil.ast.masses:data:astmass12_tab::1.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/compil.ast.masses/data/astmass12.tab",
+    "rows": [
+      {
+        "recordNumber": 206,
+        "fields": {
+          "AST_NUMBER": "804",
+          "AST_NAME": "Hispania",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "5.000E-12",
+          "MASS_SOL_UNC": "4.00E-12",
+          "MASS_KG": "9.94E+18",
+          "MASS_KG_UNC": "7.96E+18",
+          "BULK_DENSITY": "4.82",
+          "BULK_DENSITY_UNC": "3.89",
+          "AXIS_A": "158.000",
+          "AXIS_B": "158.000",
+          "AXIS_C": "158.000",
+          "EQUIV_RADIUS_UNC": "2.900",
+          "SIZE_REF_CODE": "Tedesco et al. 2002",
+          "BINARY_NOTE": "-",
+          "DENSITY_NOTE": "N",
+          "MASS_REF": "Landgraf 1992"
+        }
+      },
+      {
+        "recordNumber": 207,
+        "fields": {
+          "AST_NUMBER": "804",
+          "AST_NAME": "Hispania",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "2.020E-12",
+          "MASS_SOL_UNC": "4.30E-13",
+          "MASS_KG": "4.02E+18",
+          "MASS_KG_UNC": "8.55E+17",
+          "BULK_DENSITY": "1.95",
+          "BULK_DENSITY_UNC": "0.47",
+          "AXIS_A": "158.000",
+          "AXIS_B": "158.000",
+          "AXIS_C": "158.000",
+          "EQUIV_RADIUS_UNC": "2.900",
+          "SIZE_REF_CODE": "Tedesco et al. 2002",
+          "BINARY_NOTE": "-",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Baer et al. 2008"
+        }
+      },
+      {
+        "recordNumber": 208,
+        "fields": {
+          "AST_NUMBER": "804",
+          "AST_NAME": "Hispania",
+          "PROV_DESIG": "-",
+          "SATELLITE_NAME": "-",
+          "MASS_SOL": "1.750E-12",
+          "MASS_SOL_UNC": "4.00E-13",
+          "MASS_KG": "3.48E+18",
+          "MASS_KG_UNC": "7.96E+17",
+          "BULK_DENSITY": "1.69",
+          "BULK_DENSITY_UNC": "0.43",
+          "AXIS_A": "158.000",
+          "AXIS_B": "158.000",
+          "AXIS_C": "158.000",
+          "EQUIV_RADIUS_UNC": "2.900",
+          "SIZE_REF_CODE": "Tedesco et al. 2002",
+          "BINARY_NOTE": "-",
+          "DENSITY_NOTE": "-",
+          "MASS_REF": "Baer et al. 2011"
+        }
+      }
+    ],
+    "references": {
+      "Baer et al. 2011": "Baer, J., S. Chesley, and R.D. Matson, Astrometric Masses of 26 asteroids, and observations on asteroid porosity, Astronomical Journal 141, 143, 2011."
+    },
+    "selected": {
+      "mass": 2
+    },
+    "rule": "The determination with the smallest stated mass uncertainty, excluding rows the compilation flags (DENSITY_NOTE N), rows for a secondary, and rows under three times their uncertainty. Density from the same row, when it is at least three times its uncertainty. 1 of 3 rows were excluded by that rule."
+  }
+}
