@@ -71,6 +71,11 @@ A star that none of this gives a rotation is asked for among the KEPSEISMIC ligh
 pixel, 4 arcseconds, of its recorded place or of its places in 2011 and 2000. A star whose record gives a surface
 gravity under log g 3.5 is not asked for, because the papers that judge Kepler's light cut their samples there.
 
+A star still without a rotation is looked for in the table of Newton et al. (2018), by its place in 2000. The row gives
+the star's 2MASS designation, which names its files in the MEarth release
+([`mearth/light-curves.mts`](../packages/telescope-cli/src/archives/mearth/light-curves.mts)): one text file a
+telescope, listed in the release's index of MEarth-South targets.
+
 ## A published method for each kind of star
 
 Whether a light curve shows a star turning is not this repository's judgement, nor anyone's here. A method is taken from
