@@ -47,7 +47,7 @@
         "refresh"
       ],
       "path": "surface/venus-clouds.jpg",
-      "url": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/venus/textures/2/venus_clouds.jpg"
+      "url": "https://bjj.mmedia.is/data/venus/venus.jpg"
     },
     {
       "kind": "download",
@@ -192,6 +192,46 @@
       ],
       "path": "science/mgn-gravity/geoid.dat",
       "url": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/geoid.dat"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "radar-history/Venus_Haystack_1967_Image_Global_23000m_v1.tif",
+      "url": "https://zenodo.org/records/18176179/files/Venus_Haystack_1967_Image_Global_23000m_v1.tif?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "radar-history/Venus_Goldstone_1972_Global_13329m_v1.tif",
+      "url": "https://zenodo.org/records/18176179/files/Venus_Goldstone_1972_Global_13329m_v1.tif?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "radar-history/Venus_Arecibo_1977_Global_5000m_v1.tif",
+      "url": "https://zenodo.org/records/18176179/files/Venus_Arecibo_1977_Global_5000m_v1.tif?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "radar-history/Venus_Pioneer_Backscatter_9278m_v1.tif",
+      "url": "https://zenodo.org/records/18176179/files/Venus_Pioneer_Backscatter_9278m_v1.tif?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "radar-history/Venus_Arecibo_1983_North_2116m_v1.tif",
+      "url": "https://zenodo.org/records/18176179/files/Venus_Arecibo_1983_North_2116m_v1.tif?download=1"
     }
   ]
 }

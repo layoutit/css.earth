@@ -1,0 +1,50 @@
+{
+  "id": "jonsson-jupiter-voyager1-map",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "A Voyager 1 map of Jupiter, 27 February 1979 (2025 version)",
+  "identifiers": [
+    {
+      "type": "Author resource",
+      "value": "https://bjj.mmedia.is/data/jupiter_vgr1/jupiter_vgr1_2025.jpg"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://bjj.mmedia.is/data/jupiter_vgr1/index.html",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/jupiter/source/manifest.json",
+      "locator": "/inputs/71"
+    }
+  ],
+  "publisher": "Björn Jónsson",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Björn Jónsson, from NASA/JPL Voyager images archived at the PDS Ring-Moon Systems Node",
+      "scope": "The map: 270 Voyager 1 narrow-angle frames (135 orange, 135 violet) taken on 1979-02-27 between 03:55:47 and 12:52:35, reprojected, illumination-adjusted and mosaicked by the author.",
+      "evidence": "https://bjj.mmedia.is/data/jupiter_vgr1/index.html"
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly available; no permission needed; credit \"created by Björn Jónsson\". The author asks sites to link to his maps, not to host a copy.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://bjj.mmedia.is/data/planetary_maps.html"
+    },
+    {
+      "kind": "limitation",
+      "text": "Green is synthetic: the frames are orange and violet only. Smooth dummy data fills gaps near the poles; the author's mask marks it, with real data he judged useless and small manual seam repairs.",
+      "scope": "Color and polar coverage of the map.",
+      "evidence": "https://bjj.mmedia.is/data/jupiter_vgr1/index.html"
+    }
+  ],
+  "creators": [
+    "Björn Jónsson"
+  ]
+}

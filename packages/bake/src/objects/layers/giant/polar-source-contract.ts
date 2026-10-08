@@ -10,9 +10,15 @@ const forbiddenPolarDetailOverride = (value: unknown): value is undefined => val
 const dataset = union(
   object({id:string, operation:literal('rgb-observed-gaps'), source:string, files, control,
     polarDetails:forbiddenPolarDetailOverride, coverageSources:array(string), planetographicAxisRatio:number, projection}),
-  // A color map with no per-band coverage maps: its measured rows are pinned, and every row outside them is missing.
+  // A color map whose publisher marks its bad data in a mask image of the map's size: a pixel the mask shows darker than
+  // half brightness is missing. Its rows are planetographic, as an `rgb-observed-gaps` map's are.
+  object({id: string, operation: literal('rgb-published-mask'), source: string, files, control, polarDetails: forbiddenPolarDetailOverride,
+    coverageMask: string, planetographicAxisRatio: number, projection}),
+  // A color map with no per-band coverage maps: its measured rows are pinned, and every row outside them is missing. With
+  // an ellipsoid ratio its rows are planetographic and are resampled to the mesh's latitude, as the other RGB maps' are.
   object({id: string, operation: literal('rgb-measured-rows'), source: string, files, control, polarDetails: forbiddenPolarDetailOverride,
-    coverage: object({columnStride: number, minimumMean: number, firstMeasuredRow: number, lastMeasuredRow: number}), projection}),
+    coverage: object({columnStride: number, minimumMean: number, firstMeasuredRow: number, lastMeasuredRow: number}),
+    planetographicAxisRatio: optional(number), projection}),
   object({id: string, operation: literal('scalar-observed-gaps'), source: string, files, control: forbiddenPolarDetailOverride, polarDetails: forbiddenPolarDetailOverride,
     label: string, shortLabel: string, filter: string, wavelength: string, measurement: string, qualification: string, structuralAuthority: optional(string),
     palette: array(tuple(number, number, number)), scalar: object({bitpix: number, width: number, height: number, percentiles: tuple(number, number), minimumCoverageFraction: number,

@@ -12,6 +12,8 @@ Its mean radius, 90.7 solar radii, comes from comparing how fast its surface mov
 
 **Brightness.** Gaia DR3 fits the star's G-band light with 3 harmonics of a 13.44-day period (vari_cepheid, source 4313179507891570304; the fit is described by Ripepi et al. (2023), A&A 674, A17). It swings 1.001 mag, so at minimum the star gives 40% of its peak light. The page plays that model: a black veil over the disc passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, 3 days of the cycle each second (a display rate). It starts at the phase for the scene date, 2026-09-03T00:00:00 TT: 0.61 of a cycle after maximum. It plays when Motion is on.
 
+**Pulsation.** The 10 steps of the Pulsation dataset are the model Gaia DR3 publishes of the star's G-band light (vari_cepheid, source 4313179507891570304: 3 harmonics of a 13.44-day period; the same row as [the source record](../../sources/gaia-dr3-vari-cepheid-v916-aql.json)), evaluated in this project a tenth of a period apart, from maximum light ([method note](../../../docs/pulsating-stars-light-through-a-cycle.md)). Each step draws the star's color dimmed to that phase's share of its light at maximum: 100, 90, 79, 71, 62, 54, 45, 40, 51, 82%.
+
 ## Evidence
 
 Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
@@ -25,5 +27,9 @@ Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** The star pulsates; it is drawn at its mean radius.
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
 - **Brightness.** The model is Gaia's 2014-2017 fit carried 328 cycles to the scene date; with the period's error the phase shown is known to 0.04 of a cycle, and period changes after 2017 are not included. The G band stands for all colors: the star's temperature and color change through the cycle, and the page does not show that.
+
+- **Model beyond the measurements.** Gaia's model of this star swings 1.00 ± 0.11 mag in G. The 35 epochs Gaia released and did not reject span 0.65 mag, and none falls in the stretch of 0.34 of a cycle that holds the model's minimum, which is 0.33 mag fainter than the faintest of them. The Pulsation steps and the Light curves veil draw the model as published ([method note](../../../docs/pulsating-stars-light-through-a-cycle.md#where-the-model-leaves-gaias-measurements)).
+
+- **Pulsation.** The steps show the light alone. The star's color and its size change through the cycle and are not drawn: no published calibration found turns Gaia's two colors into a Cepheid's temperature, and nothing here measures this star's size through the cycle. 10 steps a tenth of a period apart are a display choice; the model between them is continuous.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

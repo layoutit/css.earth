@@ -4,8 +4,8 @@
     {
       "id": "kaus-australis-observational-measurements",
       "path": "measurements.json",
-      "origin": "https://doi.org/10.1086/154093",
-      "credit": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417",
+      "origin": "https://doi.org/10.3847/1538-4357/ad630b",
+      "credit": "Bailey et al. (2024), ApJ 972, 103",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -212,6 +212,24 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
+      }
+    },
+    {
+      "id": "kaus-australis-roche-von-zeipel",
+      "path": "photometry/gravity-darkening.json",
+      "origin": "https://doi.org/10.3847/1538-4357/ad630b",
+      "credit": "Bailey et al. (2024), ApJ 972, 103",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table, with each cell quoted",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "datasets",
+        "rotation"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published model parameters transcribed in this package with their table cells; repinned when edited."
       }
     }
   ],

@@ -1,6 +1,6 @@
 # Jupiter source and preparation record
 
-Jupiter combines Hubble observations, its rings at their published optical depths, a magnetic field model and
+Jupiter combines Hubble observations, two Voyager maps from 1979, its rings at their published optical depths, a magnetic field model and
 modeled atmosphere charts.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
@@ -16,6 +16,10 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - Dated maps: the [OPAL release](https://archive.stsci.edu/hlsp/opal) supplies eleven RGB maps, 19 January 2015 to
   11 December 2025.
+- Voyager dates: two maps by Björn Jónsson, [Voyager 1, 27 February 1979](https://bjj.mmedia.is/data/jupiter_vgr1/index.html)
+  (his 2025 version) and [Voyager 2, 28 June 1979](https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html), each with his
+  bad-data mask. Free to use with credit ([his terms](https://bjj.mmedia.is/data/planetary_maps.html)); he asks sites to
+  link to his maps, not host a copy, so the files are downloaded from his address and never mirrored.
 - Magnetic field: [JRM33](https://doi.org/10.1029/2021JE007055), evaluated with the unchanged
   [PSH community implementation](https://github.com/rjwilson-LASP/PSH).
 - Rings: Galileo [PIA00701](https://pds-rings.seti.org/jupiter/galileo/PIA00701.html) and
@@ -33,7 +37,8 @@ Source selections, recorded trials and open questions are in the [investigation 
 ## Processing
 
 **Visible map.** The Hubble WFC3 map from 27 June 2019 is 3,600 by 1,800 pixels from the 395, 502 and 631 nm filters,
-and excludes latitudes beyond 80°. Bands are limited to eight degrees to reduce close-zoom faceting. Poleward of 64°
+and excludes latitudes beyond 80°. Its rows are planetographic, the same rows as the OPAL 2019 map, and are resampled to
+the mesh's latitude as the dated maps are; until 2026-10-07 they were read row for row. Bands are limited to eight degrees to reduce close-zoom faceting. Poleward of 64°
 the body is a dome of two rings and a flat cap at 80°.
 
 **Poles.** The map observed nothing beyond 80° north or south. The shared gray grid marks those caps; nothing is
@@ -43,6 +48,14 @@ was a 5-micron infrared image, and neither pole was registered to the Hubble lon
 **Dated maps.** Each OPAL image keeps the intersection of its three component footprints. Polar-connected zero fill
 and non-finite values are gaps. F395N, F502N and F631N provide the channels, except January 2024 uses F658N for red.
 There is no 2023 release; two observations belong to 2024.
+
+**Voyager dates.** The maps are 7,200 × 3,600 pixels (270 narrow-angle frames, orange and violet) and 5,760 × 2,880
+pixels (135 frames, orange, green and violet). Their author calibrated the frames, removed limb darkening with a
+Minnaert law that varies with latitude and filter, and computed red, green and blue from a spectrum estimated at each
+pixel; Voyager 1's green is synthetic. His mask is black where he filled gaps with smooth dummy data, where real data
+was useless and where he repaired seams by hand: those pixels are missing here, 9.40% of the Voyager 1 map and 8.61% of
+the Voyager 2 map, all poleward of 69° N and 75° S. The rows are planetographic, for his 71,516 × 66,871 km ellipsoid,
+and are resampled to the mesh's latitude as the OPAL maps are. Nothing is recolored or sharpened.
 
 **Ultraviolet and methane.** The 11 December 2025 OPAL maps `F275W` (275 nm) and `FQ889N` (889 nm) keep their measured
 values, including dark and negative samples. Only exact-zero regions connected to a polar edge, and non-finite
@@ -90,8 +103,18 @@ with its gray polar cap and the rings at true opacity on the right.
 - Every added dataset was selected and visually inspected in the browser on 26 September 2026.
 - Polar ring leaves place every texel within 0.33 of a 2x polar-atlas texel of its latitude, and the cap within 0.39.
   The cap's rim stands 0.15% of the radius outside the body.
+- Voyager rows against Hubble's: the zonal brightness profile of each Voyager map matches the OPAL 2015 map's best at a
+  shift of −0.2° to +0.5° between 60° N and 30° S (r 0.61 to 0.83, in 0.1° steps); the 2019 Hubble map measures −0.1° to
+  +0.5° the same way. A planetocentric map would sit up to 1.9° off. South of 30° S the 1979 belts do not match 2015
+  (r 0.14 or less), so the check says nothing there.
+- Default map rows: the 2019 map and the OPAL dated map of 2019-06-26 show the same clouds; their source files' rows
+  match at 0.0° (r 1.00). Read row for row, the default map's belts sat 1.2° to 1.9° poleward of the dated map's between
+  15° and 60° in both hemispheres (zonal brightness profiles of the two prepared maps, r 0.93 to 1.00), the offset of
+  planetographic rows on this ellipsoid. With the rows resampled the two agree to 0.00° in six of seven bands and 0.09°,
+  one row, in the seventh.
 - [Observed-map checks](../../../packages/bake/src/objects/layers/observed-surfaces/observed-polar.test.mts) cover the
-  RGB intersection, the date control, the valid zero field and the palette midpoint.
+  RGB intersection, the published mask, the planetographic rows of a measured-rows map, the date control, the valid zero
+  field and the palette midpoint.
 
 ## Known problems
 
@@ -99,6 +122,11 @@ with its gray polar cap and the rings at true opacity on the right.
 - Spectral gaps remain missing. The edge-fill mask is a heuristic without an independent validity mask.
 - The dated maps vary in filters and provider color processing, so they are a morphological comparison, not a
   calibrated color trend or a measurement of the Great Red Spot's shrinkage.
+- The Voyager maps are one author's reconstruction: synthetic green for Voyager 1, colors computed from an estimated
+  spectrum, and seams removed by hand near longitudes 255° (Voyager 1) and 35° (Voyager 2), where frames taken nine hours
+  apart meet. He estimates positions good to 0.25° to 0.5°, worse near the poles. His page does not say which way
+  longitude grows; the maps are taken with east to the right, as the Hubble maps are. Compare cloud shapes with the
+  Hubble dates, not color. He replaces his maps with improved versions; a refresh downloads the current file.
 - The magnetic map is an inferred internal field. It excludes external currents, and its grid follows the mesh's
   parametric latitude, not planetographic latitude.
 - The rings are invisible at their true opacity. An empty ring layer is still mounted.

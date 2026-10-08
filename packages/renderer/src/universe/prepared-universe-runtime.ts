@@ -446,14 +446,21 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               const insideGalaxy = catalogBanks.imageBankContaining(selected.positionM);
               // The bank the subject drew before a dataset pick, drawn until the picked bank does.
               const standIn = detailStandIn.of(detailedFocus?.objectId, selected.positionM, id => catalogBanks.drawing(id) || datasets.drawing(id));
-              catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId, insideGalaxy === undefined || insideGalaxy === detailedFocus?.objectId ? undefined
-                : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) }, selectionHolders, selected.positionM as readonly [number, number, number], standIn, selected.positionM);
+              // A flight's destination (`previewSelection`), while the page it leaves is the selected one, as it is until the
+              // flight's hand-over. Inside that page's own picture, a star of the galaxy, it stands among the galaxy's dots
+              // already, as on its own page, and the picture gives way (`enteredVolumeOpacity`).
+              const destination = previewCaption !== null && previewCaption.id !== selected.id && detailedFocus !== null ? previewCaption : null;
+              const entered = destination && detailedFocus && catalogBanks.imageBankHolds(detailedFocus.objectId, destination.positionM) ? destination : null;
+              const among = entered ? detailedFocus?.objectId : insideGalaxy === detailedFocus?.objectId ? undefined : insideGalaxy;
+              catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId, among === undefined ? undefined
+                : { objectId: among, opacity: logarithmicFade(eyeDistanceM(world.pose, (entered ?? selected).positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) }, selectionHolders, selected.positionM as readonly [number, number, number], standIn, selected.positionM);
               // A bank of plain-dot stars dims like every marker outside a highlighted category and like every body outside
               // the camera's own system (the frame's `otherSystems`).
               catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem,
                 { inside: selectionHolders, look: () => ({ opacity: (spatial.highlighting() ? UNHIGHLIGHTED_OPACITY : 1) * frame.otherSystems, hiddenAtM: starPlaces }) });
               datasets.publish(world, viewport, volumeOpacity, detailContextOpacity, detailedFocus?.objectId,
-                selectedBodyContextOpacity(world, viewport, captionBody), standIn);
+                selectedBodyContextOpacity(world, viewport, captionBody), standIn,
+                destination ? { toM: destination.positionM, closeUp: selectedBodyContextOpacity(world, viewport, destination) } : undefined);
               for (const [index, shell] of shellLayers.entries()) {
                 shell.publish(world, viewport, shellVisibility[mountedShells[index]!.payload.id] !== false);
               }

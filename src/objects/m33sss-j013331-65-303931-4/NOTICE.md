@@ -7,3 +7,5 @@ Color: a Planck spectrum at the temperature of Groenewegen (2020), A&A 635, A33,
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 
 Placement: position from Breuval et al. (2023), ApJ 951, 118, table 9, VizieR J/ApJ/951/118/table9 row ID = 01333165+3039314 (CDS, Strasbourg); distance: Placed in M33 as the app draws it, where the star's sight line crosses the disc's midplane: 860,320 pc (src/objects/m33-layers/source/recipe.json: centre 859,014 pc from the Local Volume Database v1.1.1 (Pace 2025), inclination 54 deg, line of nodes 22.5 deg). The galaxy's Cepheid distance, Breuval et al. (2023), ApJ 951, 118, abstract: modulus 24.622 +/- 0.03 mag, 840 kpc; it places the galaxy, not a star within it; radial velocity: SIMBAD's radial velocity of M33, the Cepheid's galaxy, from 2012AJ....144....4M; the star's own motion within the galaxy is not measured.
+
+Light curve: Gaia DR3 vari_cepheid, source 303379309921205120; Ripepi et al. (2023), A&A 674, A17.

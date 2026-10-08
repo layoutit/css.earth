@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202346847",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Royer et al. (2024): MELCHIORS",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2311.02705"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202346847"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2024A&A...681A.107R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A.107R",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202346847",
+      "label": "Astronomy & Astrophysics 681 A107"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A.107R",
+      "checkedOn": "2026-10-08",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Royer et al. (2024), Astronomy & Astrophysics 681 A107",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2024A&A...681A.107R"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 681 A107",
+  "creators": [
+    "P. Royer",
+    "T. Merle",
+    "K. Dsilva",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

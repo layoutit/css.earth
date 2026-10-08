@@ -86,7 +86,7 @@ export const parseGeologyDataset = shape({format:text,path:text,grid:parseGeolog
 export const parseScientificFocus = shape({longitudeDegrees:number,latitudeDegrees:number,zoom:number});
 export const scientificCameraFields = {minimumZoom:number,maximumZoom:number,initialScenePitchDegrees:number,maximumControlPitchDegrees:number,defaultControlPitchDegrees:number,maximumScenePitchDegrees:number};
 export const parseScientificCamera = shape(scientificCameraFields);
-export const parseScienceGrid = shape({...dimensions,noData:optional(nullable(number)),specialValueMagnitude:optional(number),referenceRadiusMeters:number,coordinates:optional(text),
+export const parseScienceGrid = shape({...dimensions,noData:optional(nullable(number)),specialValueMagnitude:optional(number),referenceRadiusMeters:number,inverseFlattening:optional(number),coordinates:optional(text),
   projection:optional(text),poleLatitude:optional(number),centerLongitude:number,longitudeRange:optional(array(number)),wrapLongitude:optional(boolean),
   origin:optional(array(number)),resolutionMeters:optional(number),resolution:optional(array(number)),withholdLatitudeDegrees:optional(number),latitudeRange:optional(array(number))});
 export const parseScienceInput = shape({format:text,path:text,grid:optional(requireRecord),sampling:optional(text),valueTransform:optional(parseTransform),

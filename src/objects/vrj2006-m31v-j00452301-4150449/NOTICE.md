@@ -7,3 +7,5 @@ Color: a Planck spectrum at the temperature of Groenewegen (2020), A&A 635, A33,
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 
 Placement: position from Li et al. (2021), ApJ 920, 84, table 2, VizieR J/ApJ/920/84/table2 row ID = CEPH-11.34599+41.84588, Per = 16.458 (CDS, Strasbourg); distance: Placed in M31 as the app draws it, where the star's sight line crosses the disc's midplane: 774,703 pc (src/objects/m31-layers/source/recipe.json: centre 776,247 pc from the Local Volume Database v1.1.1 (Pace 2025), inclination 74 deg, line of nodes 37.7 deg). The galaxy's Cepheid distance, Li et al. (2021), ApJ 920, 84, abstract: modulus 24.407 +/- 0.032 mag, 761 kpc; it places the galaxy, not a star within it; radial velocity: SIMBAD's radial velocity of M31, the Cepheid's galaxy, from 2012AJ....144....4M; the star's own motion within the galaxy is not measured.
+
+Light curve: Gaia DR3 vari_cepheid, source 375299538019181568; Ripepi et al. (2023), A&A 674, A17.

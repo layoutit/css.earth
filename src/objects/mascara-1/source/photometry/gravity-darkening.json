@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "mascara-1",
+  "source": "Hooton et al. (2022), Spi-OPS: Spitzer and CHEOPS confirm the near-polar orbit of MASCARA-1 b and reveal a hint of dayside reflection, A&A 658, A75 (https://doi.org/10.1051/0004-6361/202141645; https://arxiv.org/abs/2109.05031), Table 5, the joint fit to the CHEOPS and Spitzer light curves with priors from Doppler tomography, read from the authors' LaTeX source",
+  "caption": "Table 5: the parameters of the transit, occultation and phase-curve model with their priors and best fits, then the derived parameters.",
+  "model": {
+    "equatorialToPolarRadius": {
+      "value": 1.045916,
+      "uncertainty": 0.002,
+      "cell": "Oblateness f_obl 0.0439 +/- 0.0018 (Table 5, derived parameters); the local radius is R* at the equator and R*(1 - f*) at the poles (section 4.1). The ratio is 1 / (1 - 0.0439)."
+    },
+    "equatorialRadiusSolar": {
+      "value": 2.082,
+      "uncertainty": 0.024,
+      "cell": "Stellar Radius R* 2.082 (+0.022, -0.024) solar radii, prior N(2.072, 0.022) (Table 5); the stellar equatorial radius (section 4.1)"
+    },
+    "beta": {
+      "value": 0.199,
+      "cell": "Gravity darkening coefficient 0.199, fixed (Table 5): fixed from Claret's gravity-darkening tables after free fits ran to unphysically high values (section 5.1)"
+    },
+    "poleTemperatureK": {
+      "value": 7490,
+      "cell": "Stellar effective/polar temperature 7490 K, fixed (Table 5): one parameter is used for both the effective and the polar temperature (its footnote), fixed from the spectral classification (section 5.1)"
+    }
+  },
+  "reportedNotModelled": {
+    "rotationPeriodDays": {
+      "value": 0.853,
+      "cell": "Stellar rotational period P_rot 0.853 (+0.017, -0.016) days (Table 5, derived parameters)"
+    },
+    "projectedRotationSpeedKmS": {
+      "value": 101.7,
+      "cell": "Projected stellar rotational velocity 101.7 (+3.5, -4.2) km/s, prior N(109.0, 4.0) (Table 5)"
+    }
+  },
+  "note": "The paper fits PyTransit's gravity-darkened transit model, in which the flattening follows from the stellar density and rotation period (section 4.1), and publishes no fraction of break-up and no equatorial temperature. Here the Roche-von Zeipel model of the other rapid rotators takes the paper's flattening and its exponent, as for KELT-9: its rotation rate is that of the Roche surface with that flattening, 0.520 of break-up, and its equator comes out at 7,218 K. Neither the exponent nor the pole temperature is fitted: the paper fixes both (section 5.1)."
+}

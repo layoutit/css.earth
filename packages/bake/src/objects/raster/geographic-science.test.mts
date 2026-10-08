@@ -42,3 +42,28 @@ test('geographic science preserves native degree cells, signed values and missin
     assert.equal(masked.sample(315,-45),null);
   } finally { await rm(root,{recursive:true,force:true}); }
 });
+
+test('a geographic grid on an ellipsoid stated by its inverse flattening is read only when the grid declares it', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'geographic-ellipsoid-'));
+  try {
+    // Semi-major axis and inverse flattening, no semi-minor key: how GDAL writes an unnamed ellipsoid.
+    await writeFile(join(root, 'map.tif'), Buffer.from(writeArrayBuffer(
+      Float32Array.from([14, 25, 31, 67]), {
+        width:2, height:2, SamplesPerPixel:1, PhotometricInterpretation:1,
+        GTModelTypeGeoKey:2, GeographicTypeGeoKey:32767,
+        BitsPerSample:[32], SampleFormat:[3],
+        ModelPixelScale:[180,90,0], ModelTiepoint:[0,0,0,-180,90,0],
+        GeoDoubleParams:[448,170],
+        GeoKeyDirectory:[1,1,0,6, 1024,0,1,2, 1025,0,1,1, 2054,0,1,9102,
+          2057,34736,1,0, 2059,34736,1,1, 2061,0,1,0],
+      })));
+    const grid = {width:2,height:2,noData:null,coordinates:'degrees',referenceRadiusMeters:448,inverseFlattening:170,
+      centerLongitude:0,origin:[-180,90],resolution:[180,-90],wrapLongitude:true};
+    const dataset = {path:'map.tif',format:'geotiff',grid,sampling:'nearest'};
+    const source = await loadScienceSurface(root, dataset);
+    assert.equal(source.sample(-90,45),14);
+    assert.equal(source.sample(90,-45),67);
+    for (const changed of [{inverseFlattening:undefined},{inverseFlattening:171},{referenceRadiusMeters:449}])
+      await assert.rejects(loadScienceSurface(root,{...dataset,grid:{...grid,...changed}}));
+  } finally { await rm(root,{recursive:true,force:true}); }
+});

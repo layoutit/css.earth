@@ -192,7 +192,8 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     commands), and attaching the banks to a prepared globe (`attach.ts`). It imports `objects/geometry`, `objects/raster`,
     `objects/scene`, `objects/layers/paged-ellipsoid` and `objects/layers/terrestrial`.
   - `objects/stellar`: a star's color dataset from its measured, Gaia XP or Planck spectrum and its limb darkening, starspots
-    from a published figure or occultation, and Roche-von Zeipel gravity darkening, with the GaiaXPy script that samples a
+    from a published figure or occultation, and Roche-von Zeipel gravity darkening (by a fit's exponent, or by the law of
+    Espinosa Lara & Rieutord 2011 when the fit names it), with the GaiaXPy script that samples a
     continuous Gaia XP spectrum (`xp-continuous-sample.py`) the body READMEs name; and, in `corona/`, a corona density derived
     from a surface magnetic map (the potential field to a source surface, its reversal line and open share, gas at rest and
     Parker's wind, the radial-filter display), described with its checks in `docs/stellar-corona-from-magnetic-maps.md`.

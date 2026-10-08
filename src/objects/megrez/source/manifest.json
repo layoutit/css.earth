@@ -4,8 +4,8 @@
     {
       "id": "megrez-observational-measurements",
       "path": "measurements.json",
-      "origin": "https://doi.org/10.1093/mnras/stx1433",
-      "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770",
+      "origin": "https://doi.org/10.1088/0004-637X/813/1/58",
+      "credit": "Jones et al. (2015), ApJ 813, 58",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -164,6 +164,32 @@
       }
     },
     {
+      "id": "megrez-claret-2011-limb-darkening",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75 (VizieR J/A+A/529/A75)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 8500..8750 K, log g 3.5..4, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-megrez-claret-2011-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
       "id": "megrez-gaia-dr3-source",
       "path": "photometry/gaia-dr3-source.csv",
       "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
@@ -189,29 +215,21 @@
       }
     },
     {
-      "id": "megrez-claret-2011-limb-darkening",
-      "path": "photometry/claret-2011-v-quadratic.tsv",
-      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
-      "credit": "Claret & Bloemen (2011), A&A 529, A75 (VizieR J/A+A/529/A75)",
-      "license": "VizieR catalogue data, public with citation of the paper and CDS",
-      "licenseEvidence": [
-        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
-      ],
-      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 8500..8750 K, log g 3.5..4, solar metallicity.",
-      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "id": "megrez-roche-von-zeipel",
+      "path": "photometry/gravity-darkening.json",
+      "origin": "https://doi.org/10.1088/0004-637X/813/1/58",
+      "credit": "Jones et al. (2015), ApJ 813, 58",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table, with each cell quoted",
+      "redistribution": "Factual parameter transcription only; no paper figures",
       "consumers": [
         "assets",
-        "datasets"
+        "datasets",
+        "rotation"
       ],
       "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-megrez-claret-2011-limb-darkening",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
+        "kind": "local",
+        "reason": "Published model parameters transcribed in this package with their table cells; repinned when edited."
       }
     }
   ],
@@ -220,7 +238,7 @@
       "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
-      "credit": "The color dataset as a disc, dimmed toward the limb by its law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -230,14 +248,14 @@
         "inputs": [
           "megrez-stellar-color",
           "megrez-kharitonov",
-          "megrez-preparation-raster",
-          "megrez-claret-2011-limb-darkening"
+          "megrez-claret-2011-limb-darkening",
+          "megrez-preparation-raster"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "The color dataset rendered as a disc; `context-markers.mts --check` recomputes it."
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
     }
   ],

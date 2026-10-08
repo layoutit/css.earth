@@ -32,6 +32,19 @@
       "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
       "summary": "The color of Gaia's spectrum of the star. No surface picture exists."
+    },
+    "dust-ring": {
+      "title": "Dust ring, 1.3 mm",
+      "detail": "ALMA, 2015",
+      "summary": "The broad dust belt in its own glow at 1.3 mm, brightest about 200 au out. Its depth is the tilted ring Su et al. fitted.",
+      "sources": [
+        {
+          "catalogueId": "source-hd-95086-disc-dust-b6-cont",
+          "url": "https://almascience.eso.org/aq/?projectCode=2013.1.00612.S",
+          "label": "ALMA project 2013.1.00612.S, ARI-L continuum image",
+          "checked": "2026-10-08"
+        }
+      ]
     }
   }
 }

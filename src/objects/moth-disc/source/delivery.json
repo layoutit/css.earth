@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "moth-disc",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/moth-disc/source/volume-dust.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/moth-disc/source/provenance.json"
+    },
+    {
+      "path": "src/objects/moth-disc/source/density-dust.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      113.94727782436036,
+      -32.203350816522104
+    ],
+    "distancePc": 36.45083327687256,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.027434215081016632
+  },
+  "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S",
+  "description": "The debris disc of the Moth (HD 61005), seen 4.4° from edge-on, in its own glow at 1.3 millimetres, as ALMA imaged it on 18 June 2016 (project 2015.1.00633.S), one band shown in gray. One unit is one astronomical unit. The image has no third axis: the depth is reconstructed by taking the disc to be symmetric about its own axis, tilted as MacGregor et al. (2018) fitted, with its south side nearer, as Esposito et al. (2016) read its scattered light.",
+  "defaultDataset": "dust",
+  "framingRadiusUnits": 170,
+  "attachedTo": "moth",
+  "acceptedLabResult": "moth-disc-density-grids",
+  "compactInputs": {
+    "path": "src/objects/moth-disc/source/volume-dust.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "dust",
+      "label": "ALMA · debris disc, 1.3 mm",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S",
+      "recipe": {
+        "path": "src/objects/moth-disc/source/volume-dust.json"
+      }
+    }
+  ]
+}

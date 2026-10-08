@@ -86,6 +86,26 @@
       "detail": "Wieczorek et al. (2022)",
       "summary": "Model with 39 km beneath InSight and uniform crust density; one published example."
     },
+    "heat-flow-now": {
+      "title": "Modeled heat flow today",
+      "detail": "Parro et al. (2017)",
+      "summary": "Heat leaving Mars’s interior through the ground today, in a model; it has never been measured on the surface."
+    },
+    "heat-flow-1-5-ga": {
+      "title": "Heat flow 1.5 billion years ago",
+      "detail": "Parro et al. (2017)",
+      "summary": "The same model 1.5 billion years ago, when more of the interior’s radioactive heat remained."
+    },
+    "heat-flow-3-0-ga": {
+      "title": "Heat flow 3.0 billion years ago",
+      "detail": "Parro et al. (2017)",
+      "summary": "The same model 3.0 billion years ago: about twice today’s heat flow."
+    },
+    "heat-flow-3-5-ga": {
+      "title": "Heat flow 3.5 billion years ago",
+      "detail": "Parro et al. (2017)",
+      "summary": "The same model 3.5 billion years ago: two and a half times today’s heat flow."
+    },
     "albedo": {
       "title": "MGS TES surface albedo",
       "detail": "MGS TES",

@@ -65,7 +65,7 @@
       "location": "public",
       "filename": "mascara-1b-system-orbits.svg",
       "bytes": 4564,
-      "sha256": "618aef22f3f84f97fc185b7de2b40e37693a425898f98fe202ed72e982c95016"
+      "sha256": "173b15495dc9e483d770271dd1fb6dd09b71c537805f9b167e63e9530bf240dd"
     },
     {
       "location": "public",
@@ -130,26 +130,26 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 276709,
-      "sha256": "b9e32e2cdea421040c4c0da995789a1884caa922d9bd95a26966c8cb8008d905"
+      "bytes": 276714,
+      "sha256": "1204b986cf920f1a0d3afbdc48fceaf13e571dd47fd9c7b5e0da0e8cfc34166c"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 393615,
-      "sha256": "d242b46a75312e9d524bc7fa5afdc08737de2f783816e2782ffddbb5485aa37d"
+      "bytes": 393620,
+      "sha256": "4902a2cb9f57fab1f6a27a305c1abc7194c82190a51f3bbe399891654fedcb42"
     },
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1203,
-      "sha256": "d4df9cc3e463fee42e82817cdc72ec114f3285fa9c3ac8054a1be7aec3405dfe"
+      "bytes": 1204,
+      "sha256": "9eb611b966d3045268ea6dd9693b5a289e24046b2d2ec566d24ecccf7cc36d8d"
     },
     {
       "location": "prepared",
       "filename": "sun.json",
       "bytes": 677,
-      "sha256": "0d99502160ed613fd4f77eacb33c3565ba25c55221f9adbbc0fed24976a548f6"
+      "sha256": "d8a9f559c5b70c224f711f145eeb9513cfeb97eb85cb17a0202ba2bedd83f38c"
     },
     {
       "location": "prepared",
@@ -160,8 +160,8 @@
     {
       "location": "prepared",
       "filename": "world-navigation.json",
-      "bytes": 1157,
-      "sha256": "f4137eff636a794175eed8b67b5922c66d55ee700324ab376d3ce1b650061352"
+      "bytes": 1159,
+      "sha256": "3c0ab051ea20d7d2063161c84aa1b33841a83081a7a0ebf6af1ad751dc8b57ba"
     }
   ]
 }

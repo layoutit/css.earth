@@ -37,6 +37,15 @@
       "evidence": [
         "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
       ]
+    },
+    {
+      "id": "gravity-darkened-transit",
+      "subject": "Deline et al. (2022), A&A 659, A74: gravity-darkened fit to WASP-189 b's transits",
+      "status": "included",
+      "finding": "Sets the flattening (polar radius 2.88% smaller than the equatorial 2.363 solar radii), the gravity-darkening exponent (0.22, fixed in the paper), the pole temperature (7,967 K) and the spin axis (i* 68.2 degrees from the line of sight, lambda 91.7 degrees, period 1.198 days), all from Table 3. The Roche-von Zeipel shading from those numbers puts the equator 207 K below the pole, where the paper says about 200 K.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202142400"
+      ]
     }
   ]
 }

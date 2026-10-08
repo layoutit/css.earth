@@ -10,7 +10,7 @@ import { scanCssDeclarations } from '../css/css-declaration-scanner.ts';
 // ships names no custom property:
 // - a slot lists the elements that draw it under its plain name, and a write names the slot;
 // - each listed element holds the slot's first image as its own `background-image` and reads no variable;
-// - an image a container draws itself is a write of that container's `backgroundImage`;
+// - an image a container draws itself is a write of that container's `backgroundImage`, and the container reads no variable;
 // - a write whose elements a depth partition moved to its carriers keeps its slot, which lists none: the bindings
 //   restore the source branch from that write (prepared-depth-partitions.ts).
 // The page writes `background-image` on each listed element, and its served markup does the same
@@ -66,10 +66,20 @@ export function withTextureImageRecords<D extends Definition>(definition: D, con
     return undefined;
   };
   const properties = [...tree.properties];
+  // A container that draws a write's image itself (a star's limb plate with the veil of its light curve on it) reads the
+  // variable as a builder wrote it. Its write becomes a write of its own `backgroundImage` below, so the read goes: the
+  // plate of a star with a veil kept it, and such a star could not be prepared again.
+  const taken = new Set(slots.map(key)), drawnBy = new Map<number, Set<string>>();
+  for (const container of containers) if (variable(container.name) && !taken.has(key(container))) drawnBy.set(container.node, (drawnBy.get(container.node) ?? new Set<string>()).add(`var(${container.name})`));
   const nodes = tree.nodes.map((node, index) => {
-    const slot = slotOf.get(index);
+    const slot = slotOf.get(index), own = drawnBy.get(index);
     let ids = node.properties.filter(id => !(tree.properties[id]!.custom && names.has(tree.properties[id]!.name)));
     let style = node.style;
+    if (own) {
+      ids = ids.filter(id => !(imageProperty(tree.properties[id]!) && own.has(tree.properties[id]!.value)));
+      const parts = declarations(style), kept = parts.filter(part => !(part.name === 'background-image' && own.has(part.value)));
+      if (kept.length !== parts.length) style = kept.map(part => `${part.text};`).join('');
+    }
     if (slot) {
       const reads = `var(${slot.name})`;
       ids = ids.filter(id => !(imageProperty(tree.properties[id]!) && tree.properties[id]!.value === reads));

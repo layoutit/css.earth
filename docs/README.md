@@ -32,6 +32,7 @@ For a body's sources, processing, evidence and known problems, read its
 | Archived polarised spectra of a star to a map of its magnetic field | [A star's magnetic map from archived spectra](stellar-magnetic-maps-from-spectra.md) |
 | A star's light in the TESS full-frame images to its rotation period and a brightness map | [A star's rotation and brightness map from TESS pixels](stellar-brightness-maps-from-tess.md) |
 | A star's magnetic map to a corona drawn around it | [A star's corona from its magnetic map](stellar-corona-from-magnetic-maps.md) |
+| A Cepheid's published light-curve model to its light at ten phases of one cycle | [A pulsating star's light through one cycle](pulsating-stars-light-through-a-cycle.md) |
 | JWST images to sky band composites | [JWST imaging](jwst-imaging.md) |
 | What JWST's public archive holds and what this project can reduce | [JWST ledger](jwst-ledger.md) |
 | Hubble observations re-calibrated from raw and checked against the archive | [Hubble](hubble.md) |

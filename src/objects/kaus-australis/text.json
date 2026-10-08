@@ -2,34 +2,34 @@
   "schema": "cssearth-object-text@1",
   "objectId": "kaus-australis",
   "card": {
-    "text": "A dwarf of type A0 V, 44 parsecs away: 6.8 times the Sun's width.",
+    "text": "A star spinning at 99.5% or more of its break-up rate, the highest yet measured in our galaxy.",
     "sources": [
       {
-        "catalogueId": "doi-10-1086-154093",
-        "url": "https://doi.org/10.1086/154093",
-        "label": "Code et al. (1976), The Astrophysical Journal 203 417",
-        "checked": "2026-10-07",
-        "locator": "Tables 1 and 6, HD 169022: MK type, limb-darkened diameter, effective temperature"
+        "catalogueId": "doi-10-3847-1538-4357-ad630b",
+        "url": "https://doi.org/10.3847/1538-4357/ad630b",
+        "label": "Bailey et al. (2024), The Astrophysical Journal 972 103",
+        "checked": "2026-10-08",
+        "locator": "Abstract (rotation rate); Table 5, column Best: R_e, R_p, T_p, T_e"
       }
     ]
   },
   "introduction": {
-    "text": "Its disc spans 1.44 milliarcseconds, which at its distance is 6.8 solar radii, and its surface is at 9,460 K.",
+    "text": "Its polarized light fits a star of equatorial radius 8.8 solar radii and polar radius 6.0, with poles near 11,700 K and an equator near 7,400 K.",
     "sources": [
       {
-        "catalogueId": "doi-10-1086-154093",
-        "url": "https://doi.org/10.1086/154093",
-        "label": "Code et al. (1976), The Astrophysical Journal 203 417",
-        "checked": "2026-10-07",
-        "locator": "Tables 1 and 6, HD 169022: MK type, limb-darkened diameter, effective temperature"
+        "catalogueId": "doi-10-3847-1538-4357-ad630b",
+        "url": "https://doi.org/10.3847/1538-4357/ad630b",
+        "label": "Bailey et al. (2024), The Astrophysical Journal 972 103",
+        "checked": "2026-10-08",
+        "locator": "Abstract (rotation rate); Table 5, column Best: R_e, R_p, T_p, T_e"
       }
     ]
   },
   "datasets": {
     "color": {
       "title": "Photosphere color",
-      "detail": "From its spectrum",
-      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+      "detail": "Spectrum and spin",
+      "summary": "Measured color, with hot bright poles and a cool equator from the star's fast spin. The darker edge is a model."
     }
   }
 }

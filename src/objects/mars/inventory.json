@@ -93,6 +93,30 @@
     },
     {
       "location": "public",
+      "filename": "mars-dataset-heat-flow-1-5-ga.webp",
+      "bytes": 1194,
+      "sha256": "1e39ea764097203601661f7128b569906913e61607d250a780bbb7ca1479f629"
+    },
+    {
+      "location": "public",
+      "filename": "mars-dataset-heat-flow-3-0-ga.webp",
+      "bytes": 1634,
+      "sha256": "be17b6b5d9a5a1bb2de528efb698291c49b9ec8f442e8fde8c84c6e8302ebdb8"
+    },
+    {
+      "location": "public",
+      "filename": "mars-dataset-heat-flow-3-5-ga.webp",
+      "bytes": 1792,
+      "sha256": "961e89b47948243686649e9db57b0fb1f0b4d049665c24164ed18ed151d087b5"
+    },
+    {
+      "location": "public",
+      "filename": "mars-dataset-heat-flow-now.webp",
+      "bytes": 932,
+      "sha256": "7a483137557537ca30fc73347af24fb4f63e06653fb4f54ca5d4dc09b459445b"
+    },
+    {
+      "location": "public",
       "filename": "mars-dataset-hydrous-minerals.webp",
       "bytes": 1458,
       "sha256": "4ebd57c7214275cb8453cdbd80864b29c6b49db0d02297261671b7ef6aeaee39"
@@ -276,6 +300,30 @@
       "filename": "mars-poles-gullies@2x.webp",
       "bytes": 112032,
       "sha256": "e5350e3de03521ad3c36bc79cd0746bf8b90a9f74ec844148c456e66296241cb"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-heat-flow-1-5-ga@2x.webp",
+      "bytes": 13314,
+      "sha256": "2982c462d055bca161127553f39af12f954082d5f5d8a8aa7127af33f68b1919"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-heat-flow-3-0-ga@2x.webp",
+      "bytes": 16906,
+      "sha256": "d2380fc32a62be995d86cf9fac170c69c97821f5aec5b8213155ff92c952673c"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-heat-flow-3-5-ga@2x.webp",
+      "bytes": 18544,
+      "sha256": "27bdfe91eb772c7b4ef3d197af67aecb2cf4948e2cce1b56564efb5a841a24a5"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-heat-flow-now@2x.webp",
+      "bytes": 10936,
+      "sha256": "eff93286b329fa4bd63f1353d3efcbe81bcadde842f1339112e3cb9f6c54b4db"
     },
     {
       "location": "public",
@@ -753,6 +801,126 @@
     },
     {
       "location": "public",
+      "filename": "mars-surface-heat-flow-1-5-ga-page-0-level-130.webp",
+      "bytes": 8256,
+      "sha256": "8a7474c0617cbbb96f076fd7e4241f193e271537712be3858f12a875358e1869"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-1-5-ga-page-0-level-260.webp",
+      "bytes": 19582,
+      "sha256": "6eeaf4ba26b96c3f312919d1cc8ca3c10e3a1365270bf3a65c65a5a8b70dc58e"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-1-5-ga-page-0-level-520.webp",
+      "bytes": 28166,
+      "sha256": "4d7fcca44421266c693c4529cc2d21f55d3a04d162a4da4d81054815fb9e3708"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-1-5-ga-page-0.webp",
+      "bytes": 11594,
+      "sha256": "2fdcd34d5aea169bcdb6fbe2a3cd84f978acc6a1886edd75600e10af31583062"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-1-5-ga@2x.webp",
+      "bytes": 11594,
+      "sha256": "2fdcd34d5aea169bcdb6fbe2a3cd84f978acc6a1886edd75600e10af31583062"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-3-0-ga-page-0-level-130.webp",
+      "bytes": 10116,
+      "sha256": "9ef38a3f74a90425456d1d34f97a3b1d4f8fa5b94ad208d14ee515238eeb8c8c"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-3-0-ga-page-0-level-260.webp",
+      "bytes": 24630,
+      "sha256": "a04058500694dcafea1c5ae8ddafea056f98a2da2eb8ac2d8b9e4194e10c4d13"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-3-0-ga-page-0-level-520.webp",
+      "bytes": 36450,
+      "sha256": "1da3ff4b60c898e7279d669ced949cb2e16aa475cb52d44390af4c471ed1f9c0"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-3-0-ga-page-0.webp",
+      "bytes": 15446,
+      "sha256": "ff27ce8a08eb8535d1b7e402a1e0fa91e4e73922ec563e53e6697a01923d35ab"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-3-0-ga@2x.webp",
+      "bytes": 15446,
+      "sha256": "ff27ce8a08eb8535d1b7e402a1e0fa91e4e73922ec563e53e6697a01923d35ab"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-3-5-ga-page-0-level-130.webp",
+      "bytes": 12086,
+      "sha256": "7e8475724a7978366a808ca701635e355e89b6f12b8cfe601b3d318be4e88f01"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-3-5-ga-page-0-level-260.webp",
+      "bytes": 32136,
+      "sha256": "8156a00f77cde760bdcf3f872a665f9006d413aa97e232d51a8b3c03e5091b19"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-3-5-ga-page-0-level-520.webp",
+      "bytes": 50478,
+      "sha256": "c5c6026f93630831ebe1b01d929da86ac9c9173acd8a9c256d015ae576365762"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-3-5-ga-page-0.webp",
+      "bytes": 16998,
+      "sha256": "1d3a7773761a3f6119100e8625b375b8cffb0d2d790021f3e1e692d245c4c1f1"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-3-5-ga@2x.webp",
+      "bytes": 16998,
+      "sha256": "1d3a7773761a3f6119100e8625b375b8cffb0d2d790021f3e1e692d245c4c1f1"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-now-page-0-level-130.webp",
+      "bytes": 6932,
+      "sha256": "32b421aac5663691a19f535626e70fcc36cf63d01571613c6da1c5c9b8952cc1"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-now-page-0-level-260.webp",
+      "bytes": 15944,
+      "sha256": "2e8594756b857bb45c73c7f22031e5947dccc11252c9bb744ca93849a78372fa"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-now-page-0-level-520.webp",
+      "bytes": 16470,
+      "sha256": "3cf82b23b2a0b8954fd6519318014498fa5be7e1edba1aa7723f3f58cc186308"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-now-page-0.webp",
+      "bytes": 9212,
+      "sha256": "c61b673c8de8d0fa370c7156d6ea2cb6817644aa907ae6c3e6af10fbf3d11903"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-heat-flow-now@2x.webp",
+      "bytes": 9212,
+      "sha256": "c61b673c8de8d0fa370c7156d6ea2cb6817644aa907ae6c3e6af10fbf3d11903"
+    },
+    {
+      "location": "public",
       "filename": "mars-surface-hydrous-minerals-page-0-level-1040.webp",
       "bytes": 375378,
       "sha256": "ce5c51dcb898e54b6c505e331c1cc33c2120dee6fbd61f0e927ce4e2d01112e0"
@@ -1156,8 +1324,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 5237,
-      "sha256": "e1e3fda9b0b8efe88d37ba5dab11e9b70ac50eb4652c8f333fd982af0bb714e9"
+      "bytes": 6117,
+      "sha256": "9246922971c39a7308d4b91dc008955d60e80141e17a8f74d497ee52d6848c04"
     },
     {
       "location": "prepared",
@@ -1174,14 +1342,14 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 51008,
-      "sha256": "80a0749e2bb4e7304c9ca31a20c77eaca48cf1f00db313ad17c4e66723c55809"
+      "bytes": 56862,
+      "sha256": "167f82deed5ade2734244d8db63764c74ebf4cdf1e44afebfe8cac4338844225"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 69353,
-      "sha256": "c7b5d96ccc548cd3973d5644e61d6c6122d3fb9bd36da5de2a1f9c31c45cb97b"
+      "bytes": 77895,
+      "sha256": "98761f75f29229257b52fa5b27a7776e50226f9371e9635923e186ce6b3dffa2"
     },
     {
       "location": "prepared",
@@ -1192,8 +1360,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 2893,
-      "sha256": "849cf8db111d38c1267fe01e72d6bd26c649cfc8cf9dc86ce863df7c6c6867a9"
+      "bytes": 3327,
+      "sha256": "7b9e6d51a2bcd0147c42f3bb294d64a320ce6f537b019ad519f061120ea321a9"
     },
     {
       "location": "prepared",
@@ -1272,6 +1440,30 @@
       "filename": "minimaps/gullies.webp",
       "bytes": 6170,
       "sha256": "6eda7de366e0daa1c4a92f911bc55bbc881bfd935ff945046adf7276a05d95e7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/heat-flow-1-5-ga.webp",
+      "bytes": 1486,
+      "sha256": "ebb6d27582fa11f641ab00fb4da0d9aba044c8e9118d8a169cd88a18eb23226a"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/heat-flow-3-0-ga.webp",
+      "bytes": 2138,
+      "sha256": "fcdebba7b3bf9470a17583a8451600d2400bf2587924fca5c1111d5710b93eaa"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/heat-flow-3-5-ga.webp",
+      "bytes": 2972,
+      "sha256": "b9e8ac1517d8ba672cb10d46307d8119d671011686743ada916957fd60724d3b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/heat-flow-now.webp",
+      "bytes": 1194,
+      "sha256": "d0401c742fd9e0956a1e6e6c8d2a4ae9749fcc09e808c418627f9d9d0bb4730d"
     },
     {
       "location": "prepared",
@@ -1354,14 +1546,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 431353,
-      "sha256": "1cd06762a5a993fb46b9b4d0de9828f843701a3c563ba15c0f08e62532be06c0"
+      "bytes": 457010,
+      "sha256": "ce9dcd281cdbc2665ff97b43825f1f7e0d76fb1a2788aa9059d4a7a32cfdd551"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 393598,
-      "sha256": "91bcdfd4a4ea067e0d6ca23dac39fa2c6852339af818335f68f65368ea7b8cc6"
+      "bytes": 394015,
+      "sha256": "00e68a2fbec9051b602cc4338f7dab98a669088cc687f7853c97627d2f8b1a2e"
     },
     {
       "location": "prepared",
@@ -1378,8 +1570,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 5480,
-      "sha256": "b5f79f1a47bb495744b0f03b155a5665105389a0e0d391050c64981cdb85d756"
+      "bytes": 6251,
+      "sha256": "c65dbe1c005214565f4b18788ef608767d6cb99717b19cf60b21d8402f37e103"
     },
     {
       "location": "prepared",

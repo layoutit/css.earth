@@ -1,0 +1,8 @@
+TITLE     = "S Vul: light of the whole disc at 10 phases of one pulsation, percent of the light at maximum (Gaia DR3 vari_cepheid 2027971514401523456, G band)"
+VARIABLES = "Longitude [Deg]" "Latitude [Deg]" "Light at phase 0.0 [%]" "Light at phase 0.1 [%]" "Light at phase 0.2 [%]" "Light at phase 0.3 [%]" "Light at phase 0.4 [%]" "Light at phase 0.5 [%]" "Light at phase 0.6 [%]" "Light at phase 0.7 [%]" "Light at phase 0.8 [%]" "Light at phase 0.9 [%]"
+ZONE I=2, J=2, K=1, ZONETYPE=Ordered
+DATAPACKING=POINT
+0 -90 100.000 96.935 92.213 87.826 81.156 72.633 67.710 71.042 82.447 95.100
+360 -90 100.000 96.935 92.213 87.826 81.156 72.633 67.710 71.042 82.447 95.100
+0 90 100.000 96.935 92.213 87.826 81.156 72.633 67.710 71.042 82.447 95.100
+360 90 100.000 96.935 92.213 87.826 81.156 72.633 67.710 71.042 82.447 95.100

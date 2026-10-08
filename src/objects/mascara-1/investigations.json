@@ -37,6 +37,15 @@
       "evidence": [
         "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
       ]
+    },
+    {
+      "id": "gravity-darkened-transit",
+      "subject": "Hooton et al. (2022), A&A 658, A75: gravity-darkened fit to MASCARA-1 b's transits",
+      "status": "included",
+      "finding": "Sets the flattening (polar radius 4.39% smaller than the equatorial 2.082 solar radii), the gravity-darkening exponent (0.199) and pole temperature (7,490 K), both fixed in the paper, and the spin axis (i* 55.5 degrees from the line of sight, lambda -69.2 degrees, period 0.853 days), all from Table 5. The Roche-von Zeipel shading from those numbers puts the equator at 7,218 K.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202141645"
+      ]
     }
   ]
 }

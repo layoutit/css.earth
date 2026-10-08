@@ -1,0 +1,8 @@
+TITLE     = "VHK 20: light of the whole disc at 10 phases of one pulsation, percent of the light at maximum (Gaia DR3 vari_cepheid 303379554733947648, G band)"
+VARIABLES = "Longitude [Deg]" "Latitude [Deg]" "Light at phase 0.0 [%]" "Light at phase 0.1 [%]" "Light at phase 0.2 [%]" "Light at phase 0.3 [%]" "Light at phase 0.4 [%]" "Light at phase 0.5 [%]" "Light at phase 0.6 [%]" "Light at phase 0.7 [%]" "Light at phase 0.8 [%]" "Light at phase 0.9 [%]"
+ZONE I=2, J=2, K=1, ZONETYPE=Ordered
+DATAPACKING=POINT
+0 -90 100.000 89.284 81.233 75.098 65.500 59.703 50.699 40.940 48.275 79.462
+360 -90 100.000 89.284 81.233 75.098 65.500 59.703 50.699 40.940 48.275 79.462
+0 90 100.000 89.284 81.233 75.098 65.500 59.703 50.699 40.940 48.275 79.462
+360 90 100.000 89.284 81.233 75.098 65.500 59.703 50.699 40.940 48.275 79.462
