@@ -40,7 +40,7 @@ The cube (±540 au) is anchored on the star's scene origin. The star is placed a
 
 - **The color bar's unit.** The bar of Figure 3 is in signal-to-noise ratio. It is read here as multiples of 7.5 µJy per beam, the noise the paper gives for the map of both data sets; the figure's caption does not state it.
 - **The lengths at Gaia's distance.** The paper's lengths are carried by their angles to 86.46 pc.
-- **The fade** below three times the noise, the height and the near side: stated choices. The disc tool counts noise for the mean of its three color channels, which is the image noise over √3 when one band feeds all three, so the recipe gives it 3.4641 and 5.1962 for two and three times the noise.
+- **The fade** below three times the noise, the height and the near side: stated choices.
 
 ## Known problems
 
