@@ -11,31 +11,40 @@
  *
  * Presentation choices, from Cassiopeia A's ESA/Webb NIRCam picture (1.62, 3.56 and 4.44 µm as blue, green and red):
  * every constant below and the ratio its bank passes, 0.8. There the lost light, by its patches' red over blue, peaks
- * between 0.25 and 0.5 (the stars), falls to its lowest near 0.8, and tails off above 1 (the knots). */
+ * between 0.25 and 0.5 (the stars), falls to its lowest near 0.8, and tails off above 1 (the knots).
+ *
+ * Where the gas has knots as blue in red as the stars but greener (a mid-infrared picture: the stars are bluest, the
+ * ejecta's lines and the dust fall in the greener and redder filters), `greenOverBlue` asks a star's light to be no
+ * greener than that too. Where NOX's patches join bright gas over thousands of pixels, `mostPixels` asks a star's patch
+ * to be no larger: a larger one is read pixel by pixel, as a patch of gas is. */
 const FLOOR = 6, AROUND = 2, EASE = 0.15;
 
 export interface StarColorPass { patches: number; starPatches: number; takenPixels: number; givenBackPixels: number }
+export interface StarColorLimits { greenOverBlue?: number; mostPixels?: number }
 
 /** Puts back, in place, the pixels of `starless` (packed 8-bit RGB, `width` x `height`) where the light NOX took from
  * `original` is not a star's color. Returns the patches read, how many were stars, and how many pixels stayed taken or
  * were given back. */
-export function giveBackGas(starless: Uint8Array, original: Uint8Array, width: number, height: number, redOverBlue: number): StarColorPass {
+export function giveBackGas(starless: Uint8Array, original: Uint8Array, width: number, height: number, redOverBlue: number, limits: StarColorLimits = {}): StarColorPass {
   const count = width * height;
   if (starless.length !== count * 3 || original.length !== count * 3) throw new TypeError(`The pictures are not ${width} x ${height} packed RGB.`);
   if (!(redOverBlue > 0 && Number.isFinite(redOverBlue))) throw new RangeError(`A star's red over blue is a positive ratio; got ${redOverBlue}.`);
-  const lostRed = new Float32Array(count), lostBlue = new Float32Array(count), inPatch = new Uint8Array(count);
+  const { greenOverBlue, mostPixels } = limits;
+  if (greenOverBlue !== undefined && !(greenOverBlue > 0 && Number.isFinite(greenOverBlue))) throw new RangeError(`A star's green over blue is a positive ratio; got ${greenOverBlue}.`);
+  if (mostPixels !== undefined && !(Number.isInteger(mostPixels) && mostPixels > 0)) throw new RangeError(`A star's largest patch is a whole count of pixels; got ${mostPixels}.`);
+  const lostRed = new Float32Array(count), lostGreen = new Float32Array(count), lostBlue = new Float32Array(count), inPatch = new Uint8Array(count);
   for (let p = 0; p < count; p++) {
     const red = Math.max(0, original[3 * p]! - starless[3 * p]!), green = Math.max(0, original[3 * p + 1]! - starless[3 * p + 1]!), blue = Math.max(0, original[3 * p + 2]! - starless[3 * p + 2]!);
-    lostRed[p] = red; lostBlue[p] = blue; inPatch[p] = Math.max(red, green, blue) > FLOOR ? 1 : 0;
+    lostRed[p] = red; lostGreen[p] = green; lostBlue[p] = blue; inPatch[p] = Math.max(red, green, blue) > FLOOR ? 1 : 0;
   }
   // Each patch's lost red and blue, over its pixels joined through their eight neighbours.
   const patchOf = new Int32Array(count).fill(-1), star: boolean[] = [], stack: number[] = [];
   for (let start = 0; start < count; start++) {
     if (!inPatch[start] || patchOf[start]! >= 0) continue;
-    const id = star.length; let red = 0, blue = 0;
+    const id = star.length; let red = 0, green = 0, blue = 0, pixels = 0;
     patchOf[start] = id; stack.push(start);
     for (let p = stack.pop(); p !== undefined; p = stack.pop()) {
-      red += lostRed[p]!; blue += lostBlue[p]!;
+      red += lostRed[p]!; green += lostGreen[p]!; blue += lostBlue[p]!; pixels++;
       const x = p % width, y = (p - x) / width;
       for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
         const nx = x + dx, ny = y + dy, neighbour = ny * width + nx;
@@ -43,20 +52,21 @@ export function giveBackGas(starless: Uint8Array, original: Uint8Array, width: n
         patchOf[neighbour] = id; stack.push(neighbour);
       }
     }
-    star.push(red <= redOverBlue * blue);
+    star.push(red <= redOverBlue * blue && (greenOverBlue === undefined || green <= greenOverBlue * blue) && (mostPixels === undefined || pixels <= mostPixels));
   }
   let takenPixels = 0, givenBackPixels = 0;
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const p = y * width + x, id = patchOf[p]!;
     if (id < 0) continue;
     if (star[id]) { takenPixels++; continue; }
-    let red = 0, blue = 0;
+    let red = 0, green = 0, blue = 0;
     for (let dy = -AROUND; dy <= AROUND; dy++) for (let dx = -AROUND; dx <= AROUND; dx++) {
       const near = Math.max(0, Math.min(height - 1, y + dy)) * width + Math.max(0, Math.min(width - 1, x + dx));
-      red += lostRed[near]!; blue += lostBlue[near]!;
+      red += lostRed[near]!; green += lostGreen[near]!; blue += lostBlue[near]!;
     }
-    // 1 where the light lost around the pixel is a star's color, 0 where it is redder, eased between.
-    const ratio = red / Math.max(1e-6, blue), t = Math.max(0, Math.min(1, (redOverBlue * (1 + EASE) - ratio) / (2 * EASE * redOverBlue))), stars = t * t * (3 - 2 * t);
+    // 1 where the light lost around the pixel is a star's color, 0 where it is redder (or greener), eased between.
+    const starColored = (light: number, most: number) => { const ratio = light / Math.max(1e-6, blue), t = Math.max(0, Math.min(1, (most * (1 + EASE) - ratio) / (2 * EASE * most))); return t * t * (3 - 2 * t); };
+    const stars = Math.min(starColored(red, redOverBlue), greenOverBlue === undefined ? 1 : starColored(green, greenOverBlue));
     if (stars >= 0.5) takenPixels++; else givenBackPixels++;
     for (let channel = 0; channel < 3; channel++) starless[3 * p + channel] = Math.round(starless[3 * p + channel]! * stars + original[3 * p + channel]! * (1 - stars));
   }
