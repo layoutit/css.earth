@@ -117,6 +117,26 @@ describe('native source pole sampling', () => {
             assert.throws(() => readRasterRecipe({...config,surfaces:[{...config.surfaces[0],resolutionScale:.3}]}), /integer/);
         } finally { await rm(directory,{recursive:true,force:true}); }
     });
+    it('writes a small surface baked alone as the pages its body is published in', async () => {
+        const directory = await mkdtemp(join(tmpdir(), 'cssearth-paged-subset-'));
+        try {
+            await sharp({ create: { width: 128, height: 64, channels: 3, background: '#d8c89f' } }).png().toFile(join(directory, 'source.png'));
+            const surface = (id: string, resolutionScale?: number) => ({ id, source: 'source.png', falseColor: false, output: '{id}{suffix}.webp',
+                thumbnail: 'thumb-{id}.webp', ...(resolutionScale ? { resolutionScale } : {}) });
+            // The large surface (8192 × 4096 texels) is over the level limit, so both surfaces are published as pages.
+            const whole = readRasterRecipe({ schema: 'cssearth-raster-recipe@2', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
+                width: 1024, height: 512, latitudeBands: 16, polarTile: 16, resample: 'density-before-pack',
+                polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
+                thumbnail: { size: 8 }, surfaces: [surface('small'), surface('large', 4)] });
+            const alone = { ...whole, surfaces: whole.surfaces.filter(({ id }) => id === 'small') };
+            await prepareSurfaces(alone, directory, directory);
+            await assert.rejects(readFile(join(directory, 'small-page-0.webp')));
+            await prepareSurfaces(alone, directory, directory, undefined, whole);
+            const page = await sharp(join(directory, 'small-page-3.webp')).metadata(), level = await sharp(join(directory, 'small-page-0-level-260.webp')).metadata();
+            assert.deepEqual([page.width, page.height, level.width, level.height], [2080, 384, 260, 48]);
+            await assert.rejects(readFile(join(directory, 'small-page-4.webp')));
+        } finally { await rm(directory, { recursive: true, force: true }); }
+    });
     it('draws a catalogue dataset over an earlier surface: empty cells take its pixels scaled, feature cells keep their color', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-underlay-'));
         try {

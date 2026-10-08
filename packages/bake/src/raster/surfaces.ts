@@ -8,7 +8,7 @@ import { applyUnderlay, strongerLimb, withAlpha, type ObservationInterpretation,
 import { composeLimbPreview } from './emission-preview.ts';
 import { encodeLossyWebp, writeLossyWebp } from './lossy-lane.ts';
 import { missingCoverageColor } from './missing-coverage.ts';
-import { rasterPagePlan, rasterPageOutput, type RasterPagePlan } from './pages.ts';
+import { rasterPagePlan, rasterPageOutput, type RasterPagePlan, type RasterPageRecipe } from './pages.ts';
 type NativePoleSampler = { readonly sample: (longitudeDegrees: number, latitudeDegrees: number, color: number[]) => boolean; };
 
 /** Sample the original image in the exact normalized 2:1 domain used by the established `fit: 'fill'` resize.
@@ -69,8 +69,10 @@ async function writeRasterPages(image: Sharp, pages: RasterPagePlan, bands: numb
         }
     }
 }
-export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: string, publicDirectory: string, interpret?: ObservationInterpretation) {
-    const pages = rasterPagePlan(config, RASTER_DENSITY);
+/** `pageRecipe` is the body's whole recipe when `config` holds only some of its surfaces: every surface of a body shares
+ * one page plan, set by its largest surface, so a small surface baked alone still writes the pages its leaves read. */
+export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: string, publicDirectory: string, interpret?: ObservationInterpretation, pageRecipe: RasterPageRecipe = config) {
+    const pages = rasterPagePlan(pageRecipe, RASTER_DENSITY);
     const decoded = new Map<string, Uint8Array>();
     const constantSurfaces: Record<string, { packedWidth: number; packedHeight: number; rgba: number[] }> = {};
     const metadata: Record<string, unknown> = {};
