@@ -215,6 +215,186 @@
         "kind": "local",
         "reason": "The color dataset rendered as a disc; `author.mts --check` recomputes it."
       }
+    },
+    {
+      "id": "proxima-centauri-mearth-map-brightness-season-2014",
+      "path": "science/mearth/proxima-centauri-y2014.dat",
+      "origin": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html",
+      "productId": "Brightness map of Proxima Centauri from its light in MEarth season 2014",
+      "title": "Brightness map of Proxima Centauri from its light curve in MEarth season 2014, the MEarth Project's: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html",
+      "credit": "MEarth Project light curve (Data Release 11; Berta et al. 2012, AJ 144, 145), season 2014, from the project's public data release; its rotation and period as published by Newton et al. (2018, AJ 156, 217); map made in this project with sfit (commit 84c8bc2) and starry 1.2.0. This paper makes use of data from the MEarth Project, which is a collaboration between Harvard University and the Smithsonian Astrophysical Observatory. The MEarth Project acknowledges funding from the David and Lucile Packard Fellowship for Science and Engineering, the National Science Foundation under grants AST-0807690, AST-1109468, AST-1616624 and AST-1004488 (Alan T. Waterman Award), the National Aeronautics and Space Administration under Grant No. 80NSSC18K0476 issued through the XRP Program, and the John Templeton Foundation.",
+      "displayCredit": "MEarth Project · mapped here",
+      "license": "Public MEarth Project data, used with the citation and the acknowledgement its release asks for; reduction by this project",
+      "licenseEvidence": [
+        "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the season published by the MEarth Project in its Data Release 11. Restored from the source cache; not tracked. The receipt (the season's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public MEarth data, reduced here.",
+      "consumers": [
+        "mearth-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mearth-light-curves",
+            "role": "material",
+            "evidence": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+          },
+          {
+            "catalogueId": "arxiv-1807-09365",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1807.09365"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-mearth-map-brightness-season-2015",
+      "path": "science/mearth/proxima-centauri-y2015.dat",
+      "origin": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html",
+      "productId": "Brightness map of Proxima Centauri from its light in MEarth season 2015",
+      "title": "Brightness map of Proxima Centauri from its light curve in MEarth season 2015, the MEarth Project's: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html",
+      "credit": "MEarth Project light curve (Data Release 11; Berta et al. 2012, AJ 144, 145), season 2015, from the project's public data release; its rotation and period as published by Newton et al. (2018, AJ 156, 217); map made in this project with sfit (commit 84c8bc2) and starry 1.2.0. This paper makes use of data from the MEarth Project, which is a collaboration between Harvard University and the Smithsonian Astrophysical Observatory. The MEarth Project acknowledges funding from the David and Lucile Packard Fellowship for Science and Engineering, the National Science Foundation under grants AST-0807690, AST-1109468, AST-1616624 and AST-1004488 (Alan T. Waterman Award), the National Aeronautics and Space Administration under Grant No. 80NSSC18K0476 issued through the XRP Program, and the John Templeton Foundation.",
+      "displayCredit": "MEarth Project · mapped here",
+      "license": "Public MEarth Project data, used with the citation and the acknowledgement its release asks for; reduction by this project",
+      "licenseEvidence": [
+        "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the season published by the MEarth Project in its Data Release 11. Restored from the source cache; not tracked. The receipt (the season's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public MEarth data, reduced here.",
+      "consumers": [
+        "mearth-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mearth-light-curves",
+            "role": "material",
+            "evidence": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+          },
+          {
+            "catalogueId": "arxiv-1807-09365",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1807.09365"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-mearth-map-brightness-season-2016",
+      "path": "science/mearth/proxima-centauri-y2016.dat",
+      "origin": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html",
+      "productId": "Brightness map of Proxima Centauri from its light in MEarth season 2016",
+      "title": "Brightness map of Proxima Centauri from its light curve in MEarth season 2016, the MEarth Project's: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html",
+      "credit": "MEarth Project light curve (Data Release 11; Berta et al. 2012, AJ 144, 145), season 2016, from the project's public data release; its rotation and period as published by Newton et al. (2018, AJ 156, 217); map made in this project with sfit (commit 84c8bc2) and starry 1.2.0. This paper makes use of data from the MEarth Project, which is a collaboration between Harvard University and the Smithsonian Astrophysical Observatory. The MEarth Project acknowledges funding from the David and Lucile Packard Fellowship for Science and Engineering, the National Science Foundation under grants AST-0807690, AST-1109468, AST-1616624 and AST-1004488 (Alan T. Waterman Award), the National Aeronautics and Space Administration under Grant No. 80NSSC18K0476 issued through the XRP Program, and the John Templeton Foundation.",
+      "displayCredit": "MEarth Project · mapped here",
+      "license": "Public MEarth Project data, used with the citation and the acknowledgement its release asks for; reduction by this project",
+      "licenseEvidence": [
+        "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the season published by the MEarth Project in its Data Release 11. Restored from the source cache; not tracked. The receipt (the season's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public MEarth data, reduced here.",
+      "consumers": [
+        "mearth-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mearth-light-curves",
+            "role": "material",
+            "evidence": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+          },
+          {
+            "catalogueId": "arxiv-1807-09365",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1807.09365"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
+    },
+    {
+      "id": "proxima-centauri-mearth-map-brightness-season-2017",
+      "path": "science/mearth/proxima-centauri-y2017.dat",
+      "origin": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html",
+      "productId": "Brightness map of Proxima Centauri from its light in MEarth season 2017",
+      "title": "Brightness map of Proxima Centauri from its light curve in MEarth season 2017, the MEarth Project's: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html",
+      "credit": "MEarth Project light curve (Data Release 11; Berta et al. 2012, AJ 144, 145), season 2017, from the project's public data release; its rotation and period as published by Newton et al. (2018, AJ 156, 217); map made in this project with sfit (commit 84c8bc2) and starry 1.2.0. This paper makes use of data from the MEarth Project, which is a collaboration between Harvard University and the Smithsonian Astrophysical Observatory. The MEarth Project acknowledges funding from the David and Lucile Packard Fellowship for Science and Engineering, the National Science Foundation under grants AST-0807690, AST-1109468, AST-1616624 and AST-1004488 (Alan T. Waterman Award), the National Aeronautics and Space Administration under Grant No. 80NSSC18K0476 issued through the XRP Program, and the John Templeton Foundation.",
+      "displayCredit": "MEarth Project · mapped here",
+      "license": "Public MEarth Project data, used with the citation and the acknowledgement its release asks for; reduction by this project",
+      "licenseEvidence": [
+        "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      ],
+      "acquisition": "Built by the generator for this star, from the light curve of the season published by the MEarth Project in its Data Release 11. Restored from the source cache; not tracked. The receipt (the season's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public MEarth data, reduced here.",
+      "consumers": [
+        "mearth-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mearth-light-curves",
+            "role": "material",
+            "evidence": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+          },
+          {
+            "catalogueId": "arxiv-1807-09365",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1807.09365"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
     }
   ],
   "documents": [

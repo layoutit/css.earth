@@ -46,6 +46,192 @@
           }
         }
       }
+    },
+    {
+      "id": "brightness-season-2014",
+      "output": "proxima-centauri-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-dataset-{id}.webp",
+      "source": "science/mearth/proxima-centauri-y2014.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-season-2014",
+        "label": "Season 2014",
+        "format": "tecplot-lonlat-map",
+        "path": "science/mearth/proxima-centauri-y2014.dat",
+        "variable": "Brightness [%]",
+        "consumer": "mearth-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 98,
+        "maximum": 102,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "98%",
+          "100%",
+          "102%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 89 days, fitted with starry to the star's MEarth light curve of its 2014 season, one point a night (each night's median), after the segment baselines and the common mode of the model of Newton et al. (2016, 2018) are taken off it by that model's own code, sfit; the map is of the first degree, one brighter and one darker side, which is what the sinusoid of that model fixes (the light varies by 1.3%; the map's curve leaves a scatter of 0.57%, the light's own noise being 0.32%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Newton et al. (2018, AJ 156, 217) list the star as a rotator in their table (VizieR J/AJ/156/217/table1): a grade A rotation period of 88.977 d, with a sinusoid of semi-amplitude 0.0073 mag in the star's longest dataset, of 600 nights. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 11 other stars within 8 arcseconds, with 0.15% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "MEarth · brightness map made here · Season 2014",
+        "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      }
+    },
+    {
+      "id": "brightness-season-2015",
+      "output": "proxima-centauri-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-dataset-{id}.webp",
+      "source": "science/mearth/proxima-centauri-y2015.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-season-2015",
+        "label": "Season 2015",
+        "format": "tecplot-lonlat-map",
+        "path": "science/mearth/proxima-centauri-y2015.dat",
+        "variable": "Brightness [%]",
+        "consumer": "mearth-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 98,
+        "maximum": 102,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "98%",
+          "100%",
+          "102%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 89 days, fitted with starry to the star's MEarth light curve of its 2015 season, one point a night (each night's median), after the segment baselines and the common mode of the model of Newton et al. (2016, 2018) are taken off it by that model's own code, sfit; the map is of the first degree, one brighter and one darker side, which is what the sinusoid of that model fixes (the light varies by 1.3%; the map's curve leaves a scatter of 0.56%, the light's own noise being 0.29%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Newton et al. (2018, AJ 156, 217) list the star as a rotator in their table (VizieR J/AJ/156/217/table1): a grade A rotation period of 88.977 d, with a sinusoid of semi-amplitude 0.0073 mag in the star's longest dataset, of 600 nights. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 11 other stars within 8 arcseconds, with 0.15% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "MEarth · brightness map made here · Season 2015",
+        "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      }
+    },
+    {
+      "id": "brightness-season-2016",
+      "output": "proxima-centauri-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-dataset-{id}.webp",
+      "source": "science/mearth/proxima-centauri-y2016.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-season-2016",
+        "label": "Season 2016",
+        "format": "tecplot-lonlat-map",
+        "path": "science/mearth/proxima-centauri-y2016.dat",
+        "variable": "Brightness [%]",
+        "consumer": "mearth-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 98,
+        "maximum": 102,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "98%",
+          "100%",
+          "102%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 89 days, fitted with starry to the star's MEarth light curve of its 2016 season, one point a night (each night's median), after the segment baselines and the common mode of the model of Newton et al. (2016, 2018) are taken off it by that model's own code, sfit; the map is of the first degree, one brighter and one darker side, which is what the sinusoid of that model fixes (the light varies by 1.3%; the map's curve leaves a scatter of 0.79%, the light's own noise being 0.37%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Newton et al. (2018, AJ 156, 217) list the star as a rotator in their table (VizieR J/AJ/156/217/table1): a grade A rotation period of 88.977 d, with a sinusoid of semi-amplitude 0.0073 mag in the star's longest dataset, of 600 nights. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 11 other stars within 8 arcseconds, with 0.15% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "MEarth · brightness map made here · Season 2016",
+        "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      }
+    },
+    {
+      "id": "brightness-season-2017",
+      "output": "proxima-centauri-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-dataset-{id}.webp",
+      "source": "science/mearth/proxima-centauri-y2017.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-season-2017",
+        "label": "Season 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/mearth/proxima-centauri-y2017.dat",
+        "variable": "Brightness [%]",
+        "consumer": "mearth-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 98,
+        "maximum": 102,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "98%",
+          "100%",
+          "102%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 89 days, fitted with starry to the star's MEarth light curve of its 2017 season, one point a night (each night's median), after the segment baselines and the common mode of the model of Newton et al. (2016, 2018) are taken off it by that model's own code, sfit; the map is of the first degree, one brighter and one darker side, which is what the sinusoid of that model fixes (the light varies by 1.3%; the map's curve leaves a scatter of 0.88%, the light's own noise being 0.62%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Newton et al. (2018, AJ 156, 217) list the star as a rotator in their table (VizieR J/AJ/156/217/table1): a grade A rotation period of 88.977 d, with a sinusoid of semi-amplitude 0.0073 mag in the star's longest dataset, of 600 nights. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists 11 other stars within 8 arcseconds, with 0.15% of their light and the star's together. A reduction made in this project, not a published map.",
+        "title": "MEarth · brightness map made here · Season 2017",
+        "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "proxima-centauri-surface-{id}{suffix}.webp",
+      "thumbnail": "proxima-centauri-dataset-{id}.webp",
+      "source": "science/mearth/proxima-centauri-y2017.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/mearth/proxima-centauri-y2017.dat",
+        "variable": "Brightness [%]",
+        "consumer": "mearth-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99.7,
+        "maximum": 100.3,
+        "colors": [
+          "#775804",
+          "#99761f",
+          "#bb9439",
+          "#ddb254",
+          "#ffd06e"
+        ],
+        "labels": [
+          "99.7%",
+          "100.3%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#ffd06e, its Color dataset) over the brightness map this project made from the star's light in MEarth season 2017 (December 2016 to October 2017): the map's scale, 99.7% to 100.3% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 0.6% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "MEarth · the star in its color over its brightness map · December 2016 to October 2017",
+        "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      }
     }
   ],
   "emission": {

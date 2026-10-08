@@ -46,6 +46,81 @@
         },
         "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret (2017), A&A 600, A30 computes from PHOENIX model atmospheres for the TESS band at 3,300 K and log g 4.97 (u1 0.154, u2 0.460): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "brightness-season-2017",
+      "output": "lhs-475-surface-{id}{suffix}.webp",
+      "thumbnail": "lhs-475-dataset-{id}.webp",
+      "source": "science/mearth/lhs-475-y2017.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-season-2017",
+        "label": "Season 2017",
+        "format": "tecplot-lonlat-map",
+        "path": "science/mearth/lhs-475-y2017.dat",
+        "variable": "Brightness [%]",
+        "consumer": "mearth-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99.5,
+        "maximum": 100.5,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "99.5%",
+          "100%",
+          "100.5%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 79.3 days, fitted with starry to the star's MEarth light curve of its 2017 season, one point a night (each night's median), after the segment baselines and the common mode of the model of Newton et al. (2016, 2018) are taken off it by that model's own code, sfit; the map is of the first degree, one brighter and one darker side, which is what the sinusoid of that model fixes (the light varies by 0.46%; the map's curve leaves a scatter of 0.33%, the light's own noise being 0.30%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. Newton et al. (2018, AJ 156, 217) list the star as a rotator in their table (VizieR J/AJ/156/217/table1): a grade A rotation period of 79.317 d, with a sinusoid of semi-amplitude 0.0025 mag in the star's longest dataset, of 235 nights. The rotation and its period are theirs, taken as published; no criteria were applied to them here. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists no other star within 8 arcseconds of it. A reduction made in this project, not a published map.",
+        "title": "MEarth · brightness map made here · Season 2017",
+        "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "lhs-475-surface-{id}{suffix}.webp",
+      "thumbnail": "lhs-475-dataset-{id}.webp",
+      "source": "science/mearth/lhs-475-y2017.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/mearth/lhs-475-y2017.dat",
+        "variable": "Brightness [%]",
+        "consumer": "mearth-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99.5,
+        "maximum": 100.5,
+        "colors": [
+          "#7a5106",
+          "#9c6f25",
+          "#bd8d44",
+          "#deab62",
+          "#ffc981"
+        ],
+        "labels": [
+          "99.5%",
+          "100.5%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#ffc981, its Color dataset) over the brightness map this project made from the star's light in MEarth season 2017 (February to December 2017): the map's scale, 99.5% to 100.5% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 1% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "MEarth · the star in its color over its brightness map · February to December 2017",
+        "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+      }
     }
   ],
   "emission": {

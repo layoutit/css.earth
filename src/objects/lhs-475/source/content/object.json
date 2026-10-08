@@ -36,8 +36,84 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "color",
+    "defaultDataset": "color-brightness",
     "controls": [
+      {
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "qualification": "The star's color, darker where MEarth saw it dimmer (contrast drawn stronger) · February to December 2017, mapped in this project",
+        "thumbnail": "lhs-475-dataset-color-brightness.webp",
+        "surface": "lhs-475-surface-color-brightness@2x.webp",
+        "poles": "lhs-475-poles-color-brightness@2x.webp",
+        "source": {
+          "id": "lhs-475-mearth-map-brightness-season-2017",
+          "path": "../manifest.json",
+          "url": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+        },
+        "falseColor": false,
+        "notes": "LHS 475 in its own color, darker where its light in MEarth's images of February to December 2017 says it was darker. As the star turned once in 79.3 days its light rose and fell by 0.46%. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 1% less light than the brightest, and is drawn as a much darker tone of the star's own hue; the Brightness map's scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's limb law, drawn 1.5 times as strong."
+      },
+      {
+        "id": "brightness-season-2017",
+        "label": "Brightness map",
+        "qualification": "Mapped in this project · MEarth Project light curve, season 2017",
+        "thumbnail": "lhs-475-dataset-brightness-season-2017.webp",
+        "surface": "lhs-475-surface-brightness-season-2017@2x.webp",
+        "poles": "lhs-475-poles-brightness-season-2017@2x.webp",
+        "source": {
+          "id": "lhs-475-mearth-map-brightness-season-2017",
+          "path": "../manifest.json",
+          "url": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Surface brightness",
+          "labels": [
+            "99.5%",
+            "100%",
+            "100.5%"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                26,
+                26,
+                26
+              ],
+              [
+                92,
+                92,
+                92
+              ],
+              [
+                156,
+                156,
+                156
+              ],
+              [
+                214,
+                214,
+                214
+              ],
+              [
+                255,
+                255,
+                255
+              ]
+            ],
+            "labels": [
+              "99.5%",
+              "100%",
+              "100.5%"
+            ]
+          },
+          "meta": "%",
+          "sourceUrl": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+        },
+        "notes": "Where the star's surface was darker and brighter in MEarth season 2017, worked out in this project from how its light rose and fell by 0.46% as it turned once in 79.3 days. The light curve is the MEarth Project's; Newton et al. (2018, AJ 156, 217) found the star's rotation in it, and starry finds the map that reproduces it at their period. The longitudes of the dark and bright regions are fixed by the data; their latitudes are not. No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random.",
+        "legendNote": "Darker: dimmer than the star's mean surface; white: brighter."
+      },
       {
         "id": "color",
         "label": "Color",
