@@ -32,8 +32,8 @@ export interface PublishedPaper { readonly id: string; readonly citation: string
   readonly missions: readonly Mission[]; /** The light curve the paper judged. */ readonly lightCurve: string;
   /** What a row of the table asserts, in a sentence's words. */ readonly asks: string; /** What the paper itself measured of its detections' reliability. */ readonly reliability: string;
   /** Where the swing of an accepted star's light comes from, in a sentence's words: the table, or a measure made here. */ readonly swing: string }
-export interface PublishedVerdict<Row = PublishedRow> extends PublishedPaper {
-  /** The service's answer as rows, by the target's number. */ parse(rows: readonly Readonly<Record<string, string>>[]): Map<number, Row>;
+export interface PublishedVerdict<Row = PublishedRow, Key extends number | string = number> extends PublishedPaper {
+  /** The service's answer as rows, by the target's number, or by its designation where a table has no number for it. */ parse(rows: readonly Readonly<Record<string, string>>[]): Map<Key, Row>;
   /** A row's verdict on a star with these windows of the mission. */ judge(row: Row, windows: readonly number[]): PublishedJudgement;
   /** What the row holds of an accepted star, in a sentence's words, and as the numbers a receipt keeps. */ says(row: Row): string; measures(row: Row): Readonly<Record<string, number | null>> }
 
@@ -91,10 +91,10 @@ export const COLMAN_2024: PublishedVerdict = { id: 'colman-2024', citation: 'Col
 
 /** The most rows a table is asked for: more than any table read here holds, so an answer cut short is refused. */
 const MOST_ROWS = 1_000_000;
-const held = new Map<string, Promise<Map<number, unknown>>>();
+const held = new Map<string, Promise<Map<number | string, unknown>>>();
 /** A paper's table, by target. It is one request a table for all stars: kept under `kept` when a path is given, and asked once a run. */
-export function publishedRows<Row>(paper: PublishedVerdict<Row>, kept?: string): Promise<Map<number, Row>> {
-  const known = held.get(paper.id); if (known) return known as Promise<Map<number, Row>>;
+export function publishedRows<Row, Key extends number | string = number>(paper: PublishedVerdict<Row, Key>, kept?: string): Promise<Map<Key, Row>> {
+  const known = held.get(paper.id); if (known) return known as Promise<Map<Key, Row>>;
   const read = (async () => { const stored: unknown = kept === undefined ? undefined : await readFile(kept, 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
     // A kept answer is read as the service's: rows of cells, each a string.
     if (Array.isArray(stored)) return paper.parse(stored.filter(isRecord).map(row => Object.fromEntries(Object.entries(row).map(([name, value]) => [name, typeof value === 'string' ? value : '']))));

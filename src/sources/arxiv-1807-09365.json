@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-1807-09365",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Newton et al. (2018): New Rotation Period Measurements for M Dwarfs in the Southern Hemisphere: An Abundance of Slowly Rotating, Fully Convective Stars",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1807.09365"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aad73b"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1807.09365",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/aad73b",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1807.09365",
+      "checkedOn": "2026-10-08",
+      "locator": "arXiv listing: title, authors, DOI (AJ 156, 217). Sect. II.1 prints the last day of the MEarth-South light analysed; Sect. III the model fitted to a light curve and how a rotator is graded, after Sect. III.1 of Newton et al. (2016, ApJ 821, 93); the catalogue is VizieR J/AJ/156/217, whose ReadMe describes each column of Table 1 (574 stars, 234 of them grade A or B rotators)."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Newton et al. (2018)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1807.09365"
+    }
+  ],
+  "creators": [
+    "E. R. Newton",
+    "N. Mondrik",
+    "J. Irwin",
+    "J. G. Winters",
+    "D. Charbonneau"
+  ],
+  "publicationDate": "2018"
+}

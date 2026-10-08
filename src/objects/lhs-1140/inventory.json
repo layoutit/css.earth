@@ -4,14 +4,44 @@
     {
       "location": "public",
       "filename": "lhs-1140-arrival.webp",
-      "bytes": 30330,
-      "sha256": "2dc9dd2f3c49f5303492db1a409f7d62f001ff7d35586db8a81ff6883177d3a8"
+      "bytes": 30034,
+      "sha256": "ba01300898cef82902f3e422b6547ab7a75f48cd52dae10e77e0ddabe4f453fb"
     },
     {
       "location": "public",
       "filename": "lhs-1140-billboard.webp",
-      "bytes": 5476,
-      "sha256": "15ed14d407f7826e3c045bda1ea0b32369b940e5115ed0daa5cfe647182b5bef"
+      "bytes": 5262,
+      "sha256": "da11f111539c6dc92d3b52b930f6c2677e5c034c0ffc7a415683bbb6bc524d72"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-dataset-brightness-season-2014.webp",
+      "bytes": 100,
+      "sha256": "95211d51fe8a8c31846d9e065c118de3537f16412adcb48b27cdf5d0f6199dc1"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-dataset-brightness-season-2015.webp",
+      "bytes": 108,
+      "sha256": "9ceaac114dc4c23d6f6783f3fed8105b588ed9034df660a514ae9a55780348c1"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-dataset-brightness-season-2016.webp",
+      "bytes": 162,
+      "sha256": "cf413515c834e55cc7a5778ec376d556308eed4179a1979fdd16672fd0d09de2"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-dataset-brightness-season-2017.webp",
+      "bytes": 124,
+      "sha256": "4260787c68ac3553ffd832017d8e1e6039ea53d6d801e0b79298edb89c877715"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-dataset-color-brightness.webp",
+      "bytes": 130,
+      "sha256": "6196cf58dd6bd99716f6870e913a171793bc088c4b08322fa308c551c038368e"
     },
     {
       "location": "public",
@@ -21,15 +51,81 @@
     },
     {
       "location": "public",
+      "filename": "lhs-1140-limb-color-brightness@2x.webp",
+      "bytes": 114926,
+      "sha256": "f1694960df9dd5f58dbb88bfff32d5b92391f435e4b277b6fc2b53d9a4f3f103"
+    },
+    {
+      "location": "public",
       "filename": "lhs-1140-limb-color@2x.webp",
       "bytes": 94650,
       "sha256": "7592db755179e8f9407fb5802be52b0b7929f4602c7182cb9c04f6f666d8cf47"
     },
     {
       "location": "public",
+      "filename": "lhs-1140-poles-brightness-season-2014@2x.webp",
+      "bytes": 11194,
+      "sha256": "5ab8ef6d28204284331603508d36f3691adc33f9fe4e7877012f9102f8329dd0"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-poles-brightness-season-2015@2x.webp",
+      "bytes": 14432,
+      "sha256": "90e19c7a0c9f3855761c643e7f4cd0a20a366aa11ff9d288d875060d04a5494e"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-poles-brightness-season-2016@2x.webp",
+      "bytes": 17998,
+      "sha256": "508fb4a425c5d3ae8df6015217c4337c06ed1b4a3031acac702891f70dfe5034"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-poles-brightness-season-2017@2x.webp",
+      "bytes": 17656,
+      "sha256": "c0a181a418a59c3487454786ea1cb0cbb11c9686a27fb93418fd2c9e4d54c8f8"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-poles-color-brightness@2x.webp",
+      "bytes": 19486,
+      "sha256": "a82fb72ec23f74150973eb5d9aa59a8a8b2e532bd5d8059329c68ecca3bab3b2"
+    },
+    {
+      "location": "public",
       "filename": "lhs-1140-poles-color@2x.webp",
       "bytes": 1340,
       "sha256": "68c1de41918e46c60a3dd4563749b855e4e14a2031492c4dbe397f036cddc54c"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-surface-brightness-season-2014@2x.webp",
+      "bytes": 11160,
+      "sha256": "f37282b5180f5e48748309356a5ff98edd1e3ab3617bd606aa163f11147050ac"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-surface-brightness-season-2015@2x.webp",
+      "bytes": 12036,
+      "sha256": "a2745629ad4403b4b35d4d4350c7b3f60756156462b6a34da4d1a37cce4a24df"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-surface-brightness-season-2016@2x.webp",
+      "bytes": 13854,
+      "sha256": "34f8c6c472af2e081c615647de701b808d6bbf5d1b8f346083542d21694a9b89"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-surface-brightness-season-2017@2x.webp",
+      "bytes": 13574,
+      "sha256": "abf800c9b97db9140a107a29efca63c6c539f4917d73bdbcd811c39888d35775"
+    },
+    {
+      "location": "public",
+      "filename": "lhs-1140-surface-color-brightness@2x.webp",
+      "bytes": 14278,
+      "sha256": "57870cce796dcc5628d22249053632cb729537d13331af7a70173c3a91c1febe"
     },
     {
       "location": "public",
@@ -40,20 +136,20 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 379,
-      "sha256": "62c041b0c790b68fe2bfb626703b438da28b7ac6f6a685dc73aacc019fb2b0ca"
+      "bytes": 390,
+      "sha256": "4121fecd697f6580248c03c22193c0770e63dce7d5998a29b1c5902a06b4983f"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1878,
-      "sha256": "1a776039c6f181c57b3e7c380f8581247a39a3d9d43f51b1ae4ab370498718e9"
+      "bytes": 2916,
+      "sha256": "a72eed8e6442bdc082506b34c928796af4aeab1ca6ce6c43963d2c6e7a1fe50d"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 723,
-      "sha256": "daa0fa9fde46a6882560362e0d6f53f477d1d34ca1fc500a3dc08510acc3d40a"
+      "bytes": 661,
+      "sha256": "a7935821de2572a7793e71c9e3a083d640912af17e9331919aa70631249eba28"
     },
     {
       "location": "prepared",
@@ -64,20 +160,50 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 366,
-      "sha256": "5b4428c9f77618370a4e61e3f1174b1ec40fdfbb1f123533c6f4025b734aa625"
+      "bytes": 6917,
+      "sha256": "407c47cde66535125641ee23cac6a4ef7416a98b539cd10f2ff0b4cb4f8ab63d"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1062,
-      "sha256": "6b4636a93e2f47f64aba2f9696078ea589182f50bbccc4bcb128d6e8cd41714b"
+      "bytes": 10743,
+      "sha256": "8345611a1ca5f73c27b6a80c89c5f55e1cc1a0ca5d75799daf85f601da3bf2b0"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+      "bytes": 699,
+      "sha256": "6eb64aa58adeb51ad4043027c010ab06b65bc50e2096308abe0449f487d0ee4d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2014.webp",
+      "bytes": 780,
+      "sha256": "dd37beac2d5b5d97f12f6490f565fcc2415152584d51333c81348bc3eb2bea4d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2015.webp",
+      "bytes": 946,
+      "sha256": "71c670a677e76ec000331adc428fdac7e8ff8e8d281927965c9ec3406ce666f4"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2016.webp",
+      "bytes": 1028,
+      "sha256": "304a9fe7c50bfb00c8db472cba83b04e04993cd3ebc8eb82a2f6e2ddddf8ff7b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2017.webp",
+      "bytes": 1082,
+      "sha256": "cde7eb25fdf90fb4fcc9b697b94b92aa3688712543270c18bea871cb27367e7a"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 878,
+      "sha256": "d7296dda2cc98612d9e4aa5197acb06df2a419dc7eec38ec5dcd33ca4afb1c8f"
     },
     {
       "location": "prepared",
@@ -88,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 249479,
-      "sha256": "725932a21a3809ae71cd71c37080e5b4e4a5a01b70be20f5a05d74a94e81b47d"
+      "bytes": 262101,
+      "sha256": "0a5c26ceba53188d5bdf790aaa1300fb877c58c90edb2365bef9ffe1578eedda"
     },
     {
       "location": "prepared",
@@ -112,8 +238,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1617,
-      "sha256": "6dffcf1f19e2061cb8db792e978ed64474c0a4d7df447e5b5a1420338bd09adf"
+      "bytes": 2737,
+      "sha256": "a8780c8a757d83f0cb8f3362880c837807b6dd8928f905e8319d2e82eac87354"
     },
     {
       "location": "prepared",

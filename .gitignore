@@ -32,7 +32,7 @@ src/objects/m31-layers/source/lggs-stars/table4.dat.gz
 src/objects/cassiopeia-a-layers/source/ejecta-speeds.dat
 # The same file beside the cassiopeia-a-miri-layers bank; restored from the same origin (src/objects/cassiopeia-a-miri-layers/source/manifest.json).
 src/objects/cassiopeia-a-miri-layers/source/ejecta-speeds.dat
-# A star's brightness map from the TESS or K2 mission's own light curves, or from a Kepler star's KEPSEISMIC light curve (108 KB a map, hundreds of stars); built by packages/telescope-cli/src/archives/tess/reduce.mts, restored from the source mirror.
+# A star's brightness map from the TESS or K2 mission's own light curves, from a Kepler star's KEPSEISMIC light curve or from its MEarth light curve (108 KB a map, hundreds of stars); built by packages/telescope-cli/src/archives/tess/reduce.mts, restored from the source mirror.
 src/objects/*/source/science/tess/*.dat
 src/objects/*/source/science/k2/pdcsap/*.dat
 src/objects/*/source/science/kepler/kepseismic/*.dat
@@ -40,6 +40,8 @@ src/objects/*/source/science/tess/pdcsap/*.dat
 src/objects/*/source/science/k2/pdcsap/fine/*.dat
 src/objects/*/source/science/tess/pdcsap/fine/*.dat
 src/objects/*/source/science/kepler/kepseismic/fine/*.dat
+src/objects/*/source/science/mearth/*.dat
+src/objects/*/source/science/mearth/fine/*.dat
 # A star's surface map fitted to its interferometry of several nights (70 KB a map); built by packages/telescope-cli/src/archives/interferometry/surface-star.mts, restored from the source mirror.
 src/objects/*/source/science/interferometry/*.dat
 # M1-67's model grid (17 MB); built by packages/bake/authoring/m1-67/shell-grid.mts, restored from the source mirror.
@@ -173,8 +175,6 @@ src/objects/*/source/**/*.bpc
 /src/objects/comet-67p/source/science/*.wrl
 
 # Pinned thermophysical paper originals are restored through the body acquisition plans.
-/src/objects/klytia/source/reference/hanus-2018.pdf
-/src/objects/alkmene/source/reference/hanus-2018.pdf
 
 # New reference-paper originals are reacquired from their manifest-pinned URLs.
 /src/objects/*/source/reference/*.pdf
@@ -496,7 +496,6 @@ src/objects/wasp-43b/source/science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0
 !src/objects/haumea/source/alma/haumea-band7-continuum-cutout.fits
 !src/objects/pi1-gruis/source/observations/pi1-gruis-pionier-2014-09-squeeze.fits
 !src/objects/pi1-gruis/source/observations/pi1-gruis-pionier-2014-09-2.1mas.fits
-!src/objects/piazzia/source/reference/*.tab
 !src/objects/r-doradus/source/observations/r-doradus-alma-338ghz-0p625mas.fits
 !src/objects/ra-shalom/source/reference/pds-a2100_spin_state.csv
 !src/objects/rhea/source/vims/rhea-infrared.tif
@@ -505,7 +504,6 @@ src/objects/wasp-43b/source/science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0
 !src/objects/sn263-beta/source/reference/*.tab
 !src/objects/sn263-gamma/source/shape/*.tab
 !src/objects/sn263-gamma/source/reference/*.tab
-!src/objects/susi/source/reference/*.tab
 !src/objects/titan/source/geology/titan-geologic-units.tif
 # Catalogue tables of the flat galaxy banks' dots; restored from their CDS origin (each bank's source/<catalogue>/points.json).
 src/objects/*/source/feldmeier-pne/tab2-4.dat

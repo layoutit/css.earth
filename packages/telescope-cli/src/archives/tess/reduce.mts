@@ -12,7 +12,9 @@
  * star the method refuses may still be a row of a paper's own table of rotators, which is then that paper's verdict on
  * it (published.mts). A Kepler star has no method wired: its rotation is its row in the tables of Santos et al. (2019,
  * 2021), and its light the KEPSEISMIC light curve they judged, one map a quarter (kepler/santos.mts,
- * kepler/kepseismic.mts). Nothing of ours decides.
+ * kepler/kepseismic.mts). A star still without a rotation, which the MEarth Project watched from the ground, has its
+ * row in the table of Newton et al. (2018), and its light is the MEarth light curve they judged, one map a season
+ * (mearth/newton.mts, mearth/light-curves.mts). Nothing of ours decides.
  *
  * When a rotation is accepted, starry makes the brightness map that reproduces each accepted light curve (map.mts). The
  * result is a receipt, output/tess/<star id>/rotation.json: the star, the Gaia sources around it, each window with its
@@ -30,6 +32,9 @@ import { HOSTED_PLANET_IDS, hostedOrbit, hostedOrbitCentreId } from '@cssearth/a
 import { kepseismicAt, readKepseismic } from '../kepler/kepseismic.mts';
 import { fetchLightCurves, lightCurvesAt } from '../kepler/light-curves.mts';
 import { filterFor, SANTOS, SANTOS_GRAVITY, santosStar } from '../kepler/santos.mts';
+import { fetchLightCurve as fetchMearth, filesOf, MEARTH_RELEASE, parseLightCurve, southIndex } from '../mearth/light-curves.mts';
+import { MEARTH_MAP_DEGREE, MEARTH_PAPERS, newtonStar, rowAt } from '../mearth/newton.mts';
+import { toolchainPins as mearthPins } from '../mearth/toolchain.mts';
 import { apart, contaminationRatio, sectorLightCurvesAt } from './light-curves.mts';
 import { GAIA_EPOCH_YEAR, pixelLight, PIXELS, type PixelLight } from './neighbours.mts';
 import { catalogueSays, filled, methodFor, METHODS, SAME_STAR_ARCSEC, type PeriodMethod, type StarKind, type StarResult, type Transit } from './methods.mts';
@@ -91,11 +96,11 @@ export interface StarLight { readonly wide: PixelLight | null; readonly near: Pi
  * from surveys of about 2000 and its campaigns ran from 2014 to 2018. TESS has watched since 2018, and MAST lists its
  * targets where its input catalogue has them, in 2000: Barnard's Star's sector 80 light curve is listed 166 arcseconds
  * from the star's place in 2016. */
-export const TARGET_YEARS = { K2: [2016, 2000], TESS: [2000, 2019, 2025], Kepler: [2011, 2000] } as const;
+export const TARGET_YEARS = { K2: [2016, 2000], TESS: [2000, 2019, 2025], Kepler: [2011, 2000], MEarth: [2000] } as const;
 /** The places a star's target may be listed at by a mission. */
 export const targetPlaces = (star: StarPlace, mission: Mission = 'K2') => [star, ...TARGET_YEARS[mission].map(year => placeAt(star, year))];
-/** A window's name in a file: a TESS sector, a K2 campaign, a Kepler quarter. */
-export const windowStem = (id: string, mission: Mission, window: number) => `${id}-${mission === 'TESS' ? `s${String(window).padStart(4, '0')}` : `${mission === 'K2' ? 'c' : 'q'}${String(window).padStart(2, '0')}`}`;
+/** A window's name in a file: a TESS sector, a K2 campaign, a Kepler quarter, a MEarth season by its year. */
+export const windowStem = (id: string, mission: Mission, window: number) => `${id}-${mission === 'TESS' ? `s${String(window).padStart(4, '0')}` : mission === 'MEarth' ? `y${window}` : `${mission === 'K2' ? 'c' : 'q'}${String(window).padStart(2, '0')}`}`;
 
 /** The transits a star's light holds, from its planets' published orbits (packages/astronomy) and the published duration
  * each planet's transit chart is drawn with: what a method masks, as its paper masks the transits it knows of. */
@@ -106,12 +111,12 @@ export async function transitsOf(id: string): Promise<Transit[]> { const transit
   return transits; }
 
 /** What a mission calls one of its windows. */
-const WINDOW: Readonly<Record<Mission, string>> = { TESS: 'sector', K2: 'campaign', Kepler: 'quarter' };
+const WINDOW: Readonly<Record<Mission, string>> = { TESS: 'sector', K2: 'campaign', Kepler: 'quarter', MEarth: 'season' };
 interface Listed { readonly window: number; readonly filename: string; readonly uri: string }
 /** One mission's light curves of a star as a method judged them. */
 interface Attempt { readonly mission: Mission; readonly method: PeriodMethod; readonly listed: readonly Listed[]; readonly fetched: readonly (Listed & { readonly url: string; readonly bytes: number })[]; readonly judged: StarResult }
-/** Where a paper's table is kept, so every star of every run asks for it once. */
-const keptTable = (id: string) => resolve(WORKSPACE, 'output/tess/published', `${id}.json`);
+/** Where a paper's table is kept, so every star of every run asks for it once; and the index of the MEarth release. */
+const keptTable = (id: string) => resolve(WORKSPACE, 'output/tess/published', `${id}.json`), KEPT_MEARTH_INDEX = resolve(WORKSPACE, 'output/tess/published/mearth-south-index.html');
 /** Whether a body is a star. A galaxy, a cluster or a nebula has a place on the sky too, and a light curve at its place is another object's. */
 const isStar = async (id: string) => { const body = await readJson(resolve(WORKSPACE, 'packages/astronomy/data/bodies', `${id}.json`)); return isRecord(body) && body.classification === 'star'; };
 const described = (by: PeriodMethod | PublishedPaper) => ({ id: by.id, citation: by.citation, url: by.url, where: by.where, lightCurve: by.lightCurve, asks: by.asks, reliability: by.reliability, ...('table' in by ? { published: by.table, swing: by.swing } : {}) });
@@ -128,7 +133,10 @@ const described = (by: PeriodMethod | PublishedPaper) => ({ id: by.id, citation:
  * verdict: its light is too much other stars' (verdict.mts `blended`). A rotation a method or a paper gives a star
  * stays theirs, drawn or not. A star with none, which Kepler watched, is judged last by its row in the tables of Santos
  * et al. (2019, 2021), on the KEPSEISMIC light curve those papers judged: each quarter their rule keeps, and that holds
- * a turn of the star, has a map. The catalog's ratio is of TESS's pixels and is not set beside Kepler's light. `light`
+ * a turn of the star, has a map. The catalog's ratio is of TESS's pixels and is not set beside Kepler's light. A star
+ * still without a rotation that MEarth-South watched is judged by its row in the table of Newton et al. (2018), on its
+ * longest MEarth light curve with the baselines and common mode of the paper's model taken off by the paper's authors'
+ * own code: each season that holds a turn of the star has a map, at the paper's period or not at all. `light`
  * is what Gaia says of the star's surroundings, when the caller has asked for many stars at once; it is counted for the
  * page to say, never to refuse the star. */
 export async function reduceStar(id: string, light?: StarLight): Promise<Record<string, unknown>> {
@@ -214,17 +222,37 @@ export async function reduceStar(id: string, light?: StarLight): Promise<Record<
       accepted = read.quarters.filter(quarter => quarter.verdict.detected).map(quarter => ({ window: quarter.quarter, time: quarter.time, flux: quarter.flux })); }
     if (kic !== undefined && !there) reasons.push('Santos et al. (2019, 2021) do not list the star in their rotation catalogues of Kepler stars.');
     if (kic !== undefined && !rotation.detected) rotation = { detected: false, reason: reasons.join(' ') }; }
-  const own = light === undefined ? (await lightOf([star], false, PIXELS[mission].radiusArcsec)).get(id) : (mission === 'TESS' ? light.wide : light.near) ?? undefined;
+  // A star still without a rotation, which MEarth-South watched: the verdict of Newton et al. (2018), on the light they judged.
+  if (!claimed && !rotation.detected && !star.otherLight && await isStar(id)) { const place = placeAt(star, 2000);
+    for (const paper of MEARTH_PAPERS) { const row = rowAt((await publishedRows(paper, keptTable(paper.id))).values(), place, SAME_STAR_ARCSEC); if (!row) continue;
+      const said = paper.judge(row, []).verdict, kept = said.detected ? keptAsPublished(paper, said, checked(said), star.cataloguedPeriodDays, await cataloguedOf(id)) : said; claimed ||= said.detected;
+      published = { id: paper.id, citation: paper.citation, url: paper.url, table: paper.table, twomass: row.twomass, row, verdict: said };
+      if (!kept.detected) { reasons.push(kept.reason!); rotation = { detected: false, reason: reasons.join(' ') }; continue; }
+      // Every light curve the release holds of the star, one a telescope; the paper's model is fitted to the longest.
+      const fetched = await Promise.all(filesOf(await southIndex(KEPT_MEARTH_INDEX), row.twomass).map(name => fetchMearth(name, files)));
+      const read = await newtonStar(row, await Promise.all(fetched.map(async one => ({ filename: one.filename, curve: parseLightCurve(await readFile(one.file, 'utf8')) }))), place), file = fetched.find(one => one.filename === read.filename);
+      published = { ...published, ...(read.note ? { note: read.note } : {}) };
+      for (const season of read.seasons) { const name = `${stem('MEarth', season.season)}.curve.json`;
+        await writeFile(resolve(run, name), `${JSON.stringify({ mission: 'MEarth', window: season.season, product: 'mearth', time: season.time, flux: season.flux })}\n`);
+        tried.push({ mission: 'MEarth', window: season.season, method: paper.id, lightCurveFile: { url: file?.url, bytes: file?.bytes, pipeline: MEARTH_RELEASE.name, ...read.file }, frames: season.nights, lightCurve: name,
+          analysis: { ...paper.measures(row), ...read.fitted, exposures: season.exposures, spanDays: season.spanDays, turns: season.turns }, says: paper.says(row), verdict: season.verdict }); }
+      if (!read.verdict.detected) { reasons.push(read.verdict.reason!); rotation = { detected: false, reason: reasons.join(' ') }; continue; }
+      rotation = kept; by = paper; mission = 'MEarth'; listed = file ? [{ filename: file.filename }] : [];
+      accepted = read.seasons.filter(season => season.verdict.detected).map(season => ({ window: season.season, time: season.time, flux: season.flux })); } }
+  // The caller's counts are within TESS's radius and K2's; a star read from the ground is counted within its own aperture's.
+  const own = light === undefined || mission === 'MEarth' ? (await lightOf([star], false, PIXELS[mission].radiusArcsec)).get(id) : (mission === 'TESS' ? light.wide : light.near) ?? undefined;
   await rm(files, { recursive: true, force: true });
   // What was tried before and refused, oldest first: an earlier mission's method and, when a paper's verdict decides, the method run on the same light.
   const before = [...refused, ...(last && by !== last.method ? [last] : [])].map(one => ({ mission: one.mission, method: described(one.method), lightCurves: one.listed.map(file => ({ window: file.window, file: file.filename })),
     ...(one.judged.whole ? { whole: { analysis: one.judged.whole.measures, says: one.judged.whole.says, verdict: one.judged.whole.verdict } } : {}), rotation: one.judged.verdict }));
   const whole = last && by === last.method ? last.judged.whole : undefined;
+  // The codes that read and prepared the light: MEarth's are its own toolchain's.
+  const codes = mission === 'MEarth' ? await mearthPins() : pins;
   const receipt: Record<string, unknown> = { schema: ROTATION_SCHEMA, star, ...(own ? { light: own } : {}), mission, lightCurves: listed.map(one => ({ window: one.window, file: one.filename })), ...(catalogue ? { inputCatalogue: catalogue } : {}), ...(elsewhere ? { elsewhere } : {}), ...(blending ? { blending } : {}), tried,
-    ...(whole ? { whole: { analysis: whole.measures, says: whole.says, verdict: whole.verdict } } : {}), ...(before.length ? { refused: before } : {}), ...(published ? { published } : {}), ...(papers.length > 1 ? { papers } : {}), ...(by ? { method: described(by) } : {}), rotation, toolchain: { id: pins.id, requirements: pins.entry.requirements } };
+    ...(whole ? { whole: { analysis: whole.measures, says: whole.says, verdict: whole.verdict } } : {}), ...(before.length ? { refused: before } : {}), ...(published ? { published } : {}), ...(papers.length > 1 ? { papers } : {}), ...(by ? { method: described(by) } : {}), rotation, toolchain: { id: codes.id, requirements: codes.entry.requirements } };
   // One map for each window whose light was accepted, all at the star's one period.
   const maps: Record<string, unknown>[] = [];
-  const made = accepted.length ? await brightnessMaps(accepted, rotation.periodDays!, Math.min(star.tiltDegrees ?? ASSUMED_TILT_DEGREES, 90)) : [];
+  const made = accepted.length ? await brightnessMaps(accepted, rotation.periodDays!, Math.min(star.tiltDegrees ?? ASSUMED_TILT_DEGREES, 90), mission === 'MEarth' ? MEARTH_MAP_DEGREE : undefined) : [];
   for (const [index, read] of accepted.entries()) { const map = made[index]!, table = `${stem(mission, read.window)}.dat`, flat = map.values.flat();
     await writeFile(resolve(run, table), brightnessTable(`Brightness map of ${star.name} from its light in ${mission} ${WINDOW[mission]} ${read.window} (period ${rotation.periodDays} d)`, map));
     maps.push({ mission, window: read.window, table, degree: map.degree, inclinationDegrees: map.inclinationDegrees, inclinationFrom: star.tiltFrom, inclinationSource: star.tiltSource ?? `assumed: no tilt of the star is known, and ${ASSUMED_TILT_DEGREES} degrees is the middle tilt of axes that point at random`,

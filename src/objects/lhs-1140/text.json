@@ -46,6 +46,31 @@
       "title": "Photosphere color",
       "detail": "From its Gaia spectrum",
       "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "brightness-season-2014": {
+      "title": "Brightness map, Season 2014",
+      "detail": "Season 2014, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-season-2015": {
+      "title": "Brightness map, Season 2015",
+      "detail": "Season 2015, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-season-2016": {
+      "title": "Brightness map, Season 2016",
+      "detail": "Season 2016, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-season-2017": {
+      "title": "Brightness map, Season 2017",
+      "detail": "Season 2017, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, May 2017 to Feb 2018",
+      "detail": "MEarth season 2017",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

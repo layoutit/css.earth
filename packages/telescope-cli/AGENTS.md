@@ -132,6 +132,21 @@ is fitted to the measured points only. What this path reads into the papers and 
 in the two modules' comments: the filter of a row, the flagged rows left out, the file's unlabelled marks, the rule at a
 star's first and last quarter, the one-turn limit, and the light's swing, which is measured here.
 
+A star MEarth-South watched from the ground, and that nothing above gives a rotation, is read the same way
+(`src/archives/mearth/`): its rotation is its row in the table of Newton et al. (2018), one more entry of the
+published-verdict kind (`mearth/newton.mts`: grade A and B rows are rotators; a candidate, a non-detection and a row the
+paper flags as contaminated are not), and its light is the MEarth light curve they judged, from the project's public
+Data Release 11 (`mearth/light-curves.mts` reads the release's index and a star's text files, by the columns its notes
+list). A MEarth magnitude keeps an offset for each segment and the common mode, which the release notes say must be
+fitted with the star's variability: the paper's sinusoid model takes them off, through its authors' own code, sfit,
+pinned to a commit in a toolchain of its own (`mearth/toolchain.json`, installed under `output/toolchains/mearth`;
+`mearth/tools.py` holds the call). Do not correct a MEarth light curve any other way, and do not use the release's own
+corrected column. What this path reads into the paper and the release is in the note's list and in the two modules'
+comments: the star's longest dataset as the one light curve read, a night's median as one point, a season cut where the
+star passes behind the Sun, the one-turn limit, and the light's swing, which is twice the table's semi-amplitude. The
+northern paper (Newton et al. 2016) is not wired: its one rotator among the stars with a page is flagged for a bright
+contaminant.
+
 `verdict.mts` holds the verdict's shape and four checks against what is already published of the star (its catalogued
 period, SIMBAD's type, the fastest its radius and mass let it turn, and the share of other stars' light in its TESS
 pixels); each can only withhold a map, a paper's own verdict included. The fourth is a published limit: a TESS target

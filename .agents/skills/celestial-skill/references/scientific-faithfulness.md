@@ -217,6 +217,19 @@ ellipsoid of assumed depth and orientation. Saturn's irregular moons follow this
 and Siarnaq have published light-curve shape models and keep their pages; twenty with
 only an elongation limit, and Anthe, are dots ([moon lists](../../../../docs/moon-catalogues.md)).
 
+### A light-curve shape alone is not a page
+
+A convex shape fitted only to how an asteroid's brightness changes as it spins is a
+published shape model, but a page that offers nothing else shows a gray blob and its
+own heights. Give such an asteroid a page only when there is more to visit: it is a
+spacecraft target, a resolved image or a measured surface is shown on it, or it lies
+outside the populations of the [asteroid dot bank](../../../../src/objects/catalogue-asteroids/README.md)
+and would otherwise leave the map. The rest are dots of that bank, which are not named
+and not clickable. On 2026-10-06 this retired 185 pages; Braille, Eurybates and Orus
+(spacecraft targets), Athamantis (a resolved image) and 18 asteroids outside the
+populations kept theirs. Models that add resolved images or occultations to the light
+curves, and shapes from radar or spacecraft, are not affected.
+
 A nebula's photograph follows the same rule. A page turns the camera around its subject, so
 the picture needs a depth someone measured: walls from spectra, a published surface or density
 grid, or measured points. A photograph standing as one flat picture at the nebula's distance
