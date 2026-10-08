@@ -85,13 +85,13 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = write, reuseImages = false, acceptChanged = [], addDatasets = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, reuseImages, acceptChanged, addDatasets });
   if (write || !result.definition) return result;
-  const { prepareSurfaceMinimaps } = await import('@cssearth/bake/surface-previews');
+  const { prepareSurfaceMinimaps, addPagedSurfaceMinimaps } = await import('@cssearth/bake/surface-previews');
   // Minimaps render from the raw imagery; a reuse-images stage already carries the published ones. An object with no
   // surface has no map to draw.
   const surfaced = result.descriptor.recipe.surfaces.length > 0;
   if (!reuseImages && surfaced) await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, solarGeometry: await solarGeometry() });
   // An add-datasets stage draws the new datasets' minimaps from their own imagery and drops those of datasets that left.
-  if (addDatasets && surfaced) await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, added: result.addedDatasets ?? [], solarGeometry: await solarGeometry() });
+  if (addDatasets && surfaced) await addPagedSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory }, result.addedDatasets ?? []);
   if (!reuseImages && surfaced) await assertMapsStartAtSurfaceMapEdge(objectDirectory, outputDirectory);
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
   await assertDefaultViewsFaceDatasets(objectDirectory, prepared.definition as Record<string, unknown>, prepared.frame);

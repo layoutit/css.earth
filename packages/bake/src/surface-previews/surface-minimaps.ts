@@ -57,7 +57,7 @@ const minimapResize = (nearest:boolean):ResizeOptions => ({ width: 640, withoutE
 
 /** A paged globe's reuse run that added datasets (`added`): draw their minimaps from their own imagery, keep the published
  * ones of the datasets that remain, in the order the datasets are declared, and delete those of datasets that left. */
-async function addPagedMinimaps(directories:SurfacePreviewDirectories, added:readonly string[]) {
+export async function addPagedSurfaceMinimaps(directories:SurfacePreviewDirectories, added:readonly string[]) {
   const { outputDirectory } = directories;
   const existing = await optionalJson(resolve(outputDirectory, 'minimaps.json'));
   const previous = new Map(requireArray(existing?.images ?? []).map(value => ({ ...requireRecord(value), ...shape({ id: text, path: text, width: number, height: number })(value) })).map(image => [image.id, image] as const));
@@ -86,8 +86,7 @@ async function addPagedMinimaps(directories:SurfacePreviewDirectories, added:rea
 
 // A dedicated sidebar asset: never transport a globe-resolution map for a minimap.
 /** `solarGeometry` is the generated scene geometry (`src/platform/solar-geometry.mts`) the host loads and passes in. */
-export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs, added, solarGeometry }:SurfacePreviewDirectories & { photographs?: readonly string[]; added?: readonly string[]; solarGeometry: SolarGeometry }) {
-  if (added) return addPagedMinimaps({ objectDirectory, publicDirectory, outputDirectory }, added);
+export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs, solarGeometry }:SurfacePreviewDirectories & { photographs?: readonly string[]; solarGeometry: SolarGeometry }) {
   const prepared = await optionalJson(resolve(outputDirectory, 'surfaces.json'));
   const rasterInput = await optionalJson(resolve(objectDirectory, 'source/preparation/raster.json'));
   const sourceSurfaces=requireArray(rasterInput?.surfaces ?? []).map(parsePreviewSurface);

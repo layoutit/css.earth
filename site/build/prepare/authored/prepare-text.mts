@@ -73,7 +73,14 @@ export async function prepareText({ ids = [] as readonly string[], check = false
   assert.ok(ids.every(id => SCENE_OBJECTS.some(object => object.id === id)), 'Unregistered text target');
   const sourceCatalog = await readSourceCatalog(projectRoot);
   const catalogue = new Set(sourceCatalog.records.map(record => record.id));
-  const bodies = await Promise.all(SCENE_OBJECTS.map(object => readBody(projectRoot, object, catalogue)));
+  // A run for named objects may sit in a checkout that holds only their prepared files (the ENSO daily refresh restores
+  // Earth alone): another object whose published controls are not installed is left out of the checks. The run without
+  // names, and the test of every object's text, still read them all.
+  const read = await Promise.all(SCENE_OBJECTS.map(object => readBody(projectRoot, object, catalogue).catch((error: unknown) => {
+    if (ids.length && !ids.includes(object.id) && hasErrorCode(error, 'ENOENT') && String((error as NodeJS.ErrnoException).path).endsWith('prepared/controls.json')) return null;
+    throw error;
+  })));
+  const bodies = read.filter(body => body !== null);
   const errors = bodies.flatMap(body => readerTextErrors(body.text, body.context));
   if (errors.length) throw new Error(`Reader text breaks the text contract:\n${describe(errors)}`);
   const warnings = [...bodies.flatMap(body => readerTextWarnings(body.text, body.context)),
@@ -98,7 +105,7 @@ export async function prepareText({ ids = [] as readonly string[], check = false
   // Nothing under prepared/ is tracked: a rewritten text.json is recorded by the body's inventory and still has to be published.
   for (const id of rewritten) await refreshPreparedInventory(id, projectRoot);
   if (stale.length) throw new Error(`Stale reader text; run pnpm prepare:text:\n  ${stale.join('\n  ')}`);
-  return { objects: selected.length, warnings, composition };
+  return { objects: selected.length, warnings, composition, unread: read.length - bodies.length };
 }
 
 /** The warnings a run shows its reviewer: each once, and in a run for named objects only theirs. A ten-asteroid run printed
@@ -111,8 +118,9 @@ export function reviewWarnings(warnings: readonly TextFinding[], ids: readonly s
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const check = process.argv.includes('--check');
   const ids = process.argv.slice(2).filter(argument => !['--', '--check'].includes(argument));
-  const { objects, warnings, composition } = await prepareText({ ids, check });
+  const { objects, warnings, composition, unread } = await prepareText({ ids, check });
   const review = reviewWarnings(warnings, ids);
   if (review.length) console.warn(`Review ${review.length} reader-text warnings${ids.length ? ` about ${ids.join(', ')}` : ''}:\n${describe(review)}`);
+  if (unread) console.warn(`${unread} other object(s) have no installed prepared controls; their text was not checked in this run.`);
   console.log(JSON.stringify({ check, objects, warnings: warnings.length, composition }));
 }
