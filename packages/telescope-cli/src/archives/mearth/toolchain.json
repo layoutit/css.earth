@@ -1,0 +1,15 @@
+{
+  "id": "mearth-photometry",
+  "python": "python3.14",
+  "requirements": [
+    "numpy==2.5.3",
+    "sfit @ git+https://github.com/mdwarfgeek/sfit@84c8bc2254387d6171758ba86eb1c37a8d246406"
+  ],
+  "licenses": {
+    "sfit": "MIT (Jonathan Irwin, 2014-2022; https://github.com/mdwarfgeek/sfit)"
+  },
+  "notes": [
+    "sfit is the MEarth Project's own least-squares periodogram with simultaneous linear decorrelation: the code of Irwin et al. (2011, ApJ 727, 56) that Newton et al. (2016, 2018) fit their null and sinusoid models with. It is pinned to a commit because its author publishes no release.",
+    "It is a C extension built at install: a C compiler is needed."
+  ]
+}

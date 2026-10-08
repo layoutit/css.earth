@@ -84,7 +84,9 @@ degree). `reduce.mts` writes a receipt, the map as a table and a picture under i
 The K2 and TESS missions publish light curves of the stars they were asked to watch. The tools of `src/archives/tess/` and
 `src/archives/kepler/` read those light curves as they are, have a published method for the star's kind decide whether its
 rotation is seen in them, and have starry fit the brightness map that reproduces the light curve. A Kepler star is read
-from its KEPSEISMIC light curve, on the rotation Santos et al. (2019, 2021) published for it.
+from its KEPSEISMIC light curve, on the rotation Santos et al. (2019, 2021) published for it, and a star MEarth-South
+watched from the ground (`src/archives/mearth/`) from its MEarth light curve, on the rotation Newton et al. (2018)
+published for it. That path has a toolchain of its own: `node packages/telescope-cli/src/archives/mearth/toolchain.mts install`.
 [A star's rotation and brightness map from the TESS, K2 and Kepler missions' light curves](../../docs/stellar-brightness-maps-from-tess.md)
 describes each step, each method with its paper, and what a light curve cannot fix.
 

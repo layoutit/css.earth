@@ -1,0 +1,31 @@
+{
+  "id": "mearth-light-curves",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MEarth Project photometric Data Release 11: light curves of the M dwarf targets, 2008 to 2022",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html",
+      "label": "MEarth Project photometric Data Release 11: light curves of the M dwarf targets, 2008 to 2022"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://lweb.cfa.harvard.edu/MEarth/DR11/README.txt",
+      "checkedOn": "2026-10-08",
+      "locator": "The release's notes (README.txt, prepared by Jonathan Irwin): every target's light curves as text files, one a star and a telescope, posted 1 August 2022. \"Light curve file contents\" describes each column; \"Known systematics and techniques for their mitigation\" says that the segment offsets and the common mode are left in the magnitudes and must be fitted again with the star's variability. The release page asks that Berta et al. (2012, AJ 144, 145) be cited and its acknowledgement included."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This paper makes use of data from the MEarth Project, which is a collaboration between Harvard University and the Smithsonian Astrophysical Observatory. The MEarth Project acknowledges funding from the David and Lucile Packard Fellowship for Science and Engineering, the National Science Foundation under grants AST-0807690, AST-1109468, AST-1616624 and AST-1004488 (Alan T. Waterman Award), the National Aeronautics and Space Administration under Grant No. 80NSSC18K0476 issued through the XRP Program, and the John Templeton Foundation.",
+      "scope": "citation",
+      "evidence": "https://lweb.cfa.harvard.edu/MEarth/DataDR11.html"
+    }
+  ],
+  "publisher": "The MEarth Project (Harvard University and the Smithsonian Astrophysical Observatory)"
+}
