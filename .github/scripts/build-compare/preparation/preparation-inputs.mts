@@ -47,7 +47,7 @@ export async function preparationUrls(root: string): Promise<string[]> {
   for (const entry of await readdir(join(root, 'src/objects'), {withFileTypes:true})) {
     if (!entry.isDirectory()) continue;
     const id = entry.name, prepared = join(root, 'src/objects', id, 'prepared');
-    const [features, places, controls, arrival] = await Promise.all([sceneIds.has(id) ? read(join(prepared, 'features.json')) : undefined, sceneIds.has(id) ? read(join(prepared, 'places.json')) : undefined, readPreparedControls(prepared).catch(missing), sceneIds.has(id) ? read(join(prepared, 'arrival-billboard.json')) : undefined]);
+    const [features, places, controls, arrival] = await Promise.all([sceneIds.has(id) ? read(join(prepared, 'features.json')) : undefined, sceneIds.has(id) ? read(join(prepared, 'geographic-places.json')) : undefined, readPreparedControls(prepared).catch(missing), sceneIds.has(id) ? read(join(prepared, 'arrival-billboard.json')) : undefined]);
     for (const url of publicPreparationUrls(features, places, controls, sidebar, id, arrival)) urls.add(url);
   }
   return [...urls].sort();

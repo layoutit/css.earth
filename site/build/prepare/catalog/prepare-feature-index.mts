@@ -30,9 +30,11 @@ function greatCircleKm(a: Settlement, b: Settlement, radiusKm: number) {
   return 2 * radiusKm * Math.asin(Math.min(1, Math.sqrt(h)));
 }
 
-/** A body's prepared places (Earth's GeoNames cities) are named features of that body too, selected as `city-<id>`. */
+/** A body's prepared places (Earth's GeoNames cities) are named features of that body too, selected as `city-<id>`. Their
+ * descriptor is `geographic-places.json`: `places.json` is the world's own file, where an object's children's systems are
+ * (site/build/prepare/world/prepare-spatial-context.ts writes it for holders and removes it from every other package). */
 async function preparedPlaces(root: string, objectId: string, settlements: readonly Settlement[], radiusM: number | null): Promise<PlacePin | null> {
-  const pin: unknown = await readFile(resolve(root, 'src/objects', objectId, 'prepared/places.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
+  const pin: unknown = await readFile(resolve(root, 'src/objects', objectId, 'prepared/geographic-places.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
   if (pin === null) return null;
   if (radiusM === null) throw new TypeError(`${objectId}: places need the body's radius.`);
   if (!isRecord(pin) || !Number.isSafeInteger(pin.count)) throw new TypeError(`${objectId}: prepared places descriptor is invalid.`);

@@ -29,6 +29,7 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   { name: 'minimaps.json', reader: 'site-build', read: 'site/components/PreparedObjectPanel.astro' },
   { name: 'arrival-billboard.json', reader: 'site-build', read: 'site/build/prepare/prepare-object-discovery.mts' },
   { name: 'features.json', reader: 'site-build', read: 'site/build/prepare/catalog/prepare-feature-index.mts' },
+  { name: 'geographic-places.json', reader: 'site-build', read: 'site/build/prepare/catalog/prepare-feature-index.mts: the pin of a body\'s city catalogue' },
   // Records a later bake or refresh tool reads and cannot rebuild from the runtime and the tracked sources.
   { name: 'authored-preparation.json', reader: 'later-bake', read: 'site/build/prepare/authored/prepare-authored.ts compares the next bake\'s sources with it' },
   { name: 'assets.json', reader: 'later-bake', read: 'site/build/content/prepare.ts and the content and photograph refreshes' },
