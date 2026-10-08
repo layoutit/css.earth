@@ -66,6 +66,19 @@
       "title": "Color + brightness, Jan to Feb 2025",
       "detail": "TESS sector 88",
       "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
+    },
+    "debris-disc": {
+      "title": "Debris disc, 1.3 mm",
+      "detail": "ALMA, 2016",
+      "summary": "The edge-on dust disc in its own glow at 1.3 mm. Its depth is reconstructed from the image.",
+      "sources": [
+        {
+          "catalogueId": "source-moth-disc-dust-b6-cont",
+          "url": "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S",
+          "label": "ALMA project 2015.1.00633.S, ARI-L continuum image",
+          "checked": "2026-10-08"
+        }
+      ]
     }
   }
 }

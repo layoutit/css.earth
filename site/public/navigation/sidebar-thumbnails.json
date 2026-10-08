@@ -467,6 +467,14 @@
       "bytes": 4326
     },
     {
+      "path": "src/objects/moth-disc/prepared/presentation.json",
+      "bytes": 3187
+    },
+    {
+      "path": "site/public/scenes/moth-disc/datasets/dust.webp",
+      "bytes": 1228
+    },
+    {
       "path": "src/objects/ngc-1275-volume/prepared/presentation.json",
       "bytes": 1390
     },
@@ -1736,6 +1744,24 @@
       "credit": "SDSS",
       "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
     },
+    "moth-disc/dust": {
+      "url2x": "/navigation/focus-moth-disc-dust@2x.webp",
+      "inputs": [
+        "src/objects/moth-disc/prepared/presentation.json",
+        "site/public/scenes/moth-disc/datasets/dust.webp"
+      ],
+      "credit": "ALMA (ESO/NAOJ/NRAO)",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S"
+    },
+    "moth-disc": {
+      "url2x": "/navigation/focus-object-moth-disc@2x.webp",
+      "inputs": [
+        "src/objects/moth-disc/prepared/presentation.json",
+        "site/public/scenes/moth-disc/datasets/dust.webp"
+      ],
+      "credit": "ALMA (ESO/NAOJ/NRAO)",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S"
+    },
     "ngc-1275-volume/sdss-optical": {
       "url2x": "/navigation/focus-ngc-1275-volume-sdss-optical@2x.webp",
       "inputs": [
@@ -2254,6 +2280,7 @@
     "m83-layers": "m83-layers",
     "m87-volume": "m87-volume",
     "m95-layers": "m95-layers",
+    "moth-disc": "moth-disc",
     "ngc-1275-volume": "ngc-1275-volume",
     "ngc-1365-layers": "ngc-1365-layers",
     "ngc-1637-layers": "ngc-1637-layers",
