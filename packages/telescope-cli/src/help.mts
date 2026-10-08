@@ -20,7 +20,7 @@ Human entry points:
   telescope leads TARGET | --class CLASS [--json] [--out DIRECTORY]
   telescope stars GALAXY [--json] [--out DIRECTORY]
   telescope new-object SPEC.json [--check] [--skip-existing] [--json]
-  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-benchmark HD... | --from-narrabri HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... | --from-table CLASS:GALAXY=TABLE[#ROW]... | --from-esa PAGE_ID=PICTURE_URL... | --from-magnetic HOST... | --from-spectra HOST... | --from-pixels all|HOST... --out SPEC.json
+  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-benchmark HD... | --from-narrabri HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... | --from-table CLASS:GALAXY=TABLE[#ROW]... | --from-esa PAGE_ID=PICTURE_URL... | --from-magnetic HOST... | --from-spectra HOST... | --from-pixels all|HOST... | --from-pulsation all|HOST|gaia:HOST... --out SPEC.json
   telescope ascl SOFTWARE [--json]
   telescope ascl --product PRODUCT.json|RUN/pick-N/result.json [--json]
   telescope wwt-fits EXPLORE.json --pick N --level N --x X --y Y --out DIRECTORY
@@ -59,7 +59,10 @@ dataset, and bakes with SPEC.json --bake. --from-spectra drafts a star's magneti
 reduced (packages/telescope-cli/src/archives/espadons); a spec of magneticMaps writes each map as a "Radial field" dataset of the star's page, and bakes with
 SPEC.json --bake. --from-pixels drafts the brightness map of each star this repository has reduced from the TESS, K2 and Kepler missions' light curves of it
 (packages/telescope-cli/src/archives/tess; all is every reduced star); a spec of brightnessMaps writes each map as a "Brightness map" dataset of the star's
-page and the measured period into its measurements record, and bakes with SPEC.json --bake. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
+page and the measured period into its measurements record, and bakes with SPEC.json --bake. --from-pulsation drafts a pulsating star's light through one cycle
+from the published light-curve model its package keeps (a Cepheid's row of Gaia DR3 vari_cepheid; all is every such star; gaia:HOST first looks a star placed by
+its paper's table up in that table at its place, and installs its row); a spec of pulsations writes the cycle as the ten steps of a "Pulsation" dataset of
+the star's page, and bakes with SPEC.json --bake (docs/pulsating-stars-light-through-a-cycle.md). The spec format is in packages/telescope-cli/src/new-object/spec.mts.
 Papers lists up to 20 OpenAlex works that name the target, by any spelling of its catalogue names, in their title or
 abstract, with the instrument and any one of the --about phrases (singular or plural); --fulltext asks for the works whose
 indexed full text names them. It uses arXiv's Atom API when OpenAlex is unavailable or its daily budget is spent, and the

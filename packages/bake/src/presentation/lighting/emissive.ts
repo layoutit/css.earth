@@ -57,6 +57,10 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   const veil = lightCurve ? b.element('div', `${ns}-light-veil`, `position:absolute;left:50%;top:50%;width:${diameter}px;height:${diameter}px;` +
     `margin:${-diameter / 2}px 0 0 ${-diameter / 2}px;border-radius:50%;background:#000;opacity:${lightCurve.keyframes[0]!.opacity}`, { 'aria-hidden': 'true' }) : null;
   if (veil) b.append(limb, veil);
+  // A dataset that draws the star at one moment of the light curve already holds that moment's light: the veil would dim
+  // it a second time, so its selection takes the veil out. A body with no such dataset writes nothing more.
+  const stills = new Set(veil ? lightCurve?.stills ?? [] : []);
+  for (const id of stills) if (!datasets.controls.some(dataset => dataset.id === id)) throw new TypeError(`${ns}: the light curve names the still ${id}, which is not a dataset of the body.`);
   const { tree, index } = b.finish({ camera, scene });
   const targets = [body, body, corona, limb];
   // Every dataset gets a variant. One that names a companion cloud draws the plates of the surface it borrows, so the
@@ -67,6 +71,7 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
       ...LAYERS.map((layer, i) => ({ kind: 'texture' as const, target: index(targets[i]!), name: `--${ns}-${layer}-image`,
         resource: keys.has(`${layer}:${surfaceId}`) ? `${layer}:${surfaceId}` : null, quoted: true })),
       { kind: 'attribute', target: -1, name: 'data-dataset', value: dataset.id }, { kind: 'attribute', target: -1, name: 'data-view', value: null },
+      ...(veil && stills.size ? [{ kind: 'style' as const, target: index(veil), name: 'display', value: stills.has(dataset.id) ? 'none' : 'block' }] : []),
     ], materials: [] };
   });
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun: null,

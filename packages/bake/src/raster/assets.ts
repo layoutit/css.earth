@@ -36,12 +36,15 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
     const emptyPlates = new Set<string>();
     if (config.emission)
         for (const surface of config.surfaces)
-            for (const template of [config.emission.offLimbOutput, config.emission.limbOutput]) {
+            for (const template of [config.emission.offLimbOutput, ...(limbLender(surface) === surface.id ? [config.emission.limbOutput] : [])]) {
                 const name = outputName(template, RASTER_DENSITY, surface.id), path = resolve(publicDirectory, name);
                 if (await fullyTransparent(path)) { emptyPlates.add(name); await rm(path); }
             }
+    const lenders = new Map(config.surfaces.map(surface => [surface.id, limbLender(surface)]));
+    // A lender that itself borrows as it is leads on to the surface whose file it is.
+    const lenderOf = (surfaceId: string) => { let id = surfaceId; for (let hops = 0; lenders.get(id) !== id && lenders.has(id) && hops < config.surfaces.length; hops++) id = lenders.get(id)!; return id; };
     const plate = (key: 'corona' | 'limb', template: string, surfaceId: string) => {
-        const name = outputName(template, RASTER_DENSITY, surfaceId);
+        const name = outputName(template, RASTER_DENSITY, key === 'limb' ? lenderOf(surfaceId) : surfaceId);
         return emptyPlates.has(name) ? {} : { [`${key}Url`]: config.publicBase + name, [`${key}Url2x`]: config.publicBase + name };
     };
     const surfaces = Object.fromEntries(config.surfaces.map(surface => [surface.id, { id: surface.id, falseColor: surface.falseColor, ...(constantSurfaces[surface.id] ? { constantRaster: constantSurfaces[surface.id] } : {}), ...(surface.resolutionScale ? { dimensions: { width: config.width * surface.resolutionScale, height: config.height * surface.resolutionScale } } : {}), url: config.publicBase + outputName(surface.output, RASTER_DENSITY, surface.id), url2x: config.publicBase + outputName(surface.output, RASTER_DENSITY, surface.id), ...(config.emission ? { ...plate('corona', config.emission.offLimbOutput, surface.id), ...plate('limb', config.emission.limbOutput, surface.id) } : {}), ...(metadata[surface.id] ? { coverageCompletion: metadata[surface.id] } : {}), ...(interpretations[surface.id] ? { interpretation: interpretations[surface.id] } : {}) }]));
@@ -62,6 +65,13 @@ export async function prepareLimb(block: LimbBlock, sourceDirectory: string, pub
     if (!surface) throw new TypeError(`${where} names no reference image and the recipe has no surface to take one from.`);
     const prepared = outputName(surface.output, RASTER_DENSITY, surface.id);
     return { law, reference: await meanObservedColor(resolve(publicDirectory, prepared)), referenceSource: `prepared surface ${surface.id} (${prepared})`, polarToEquatorial };
+}
+
+/** The surface whose limb plate file a surface draws: its own, or the one it borrows as it is (`science.limbOf` with no
+ * `limbStrength`, or a strength of 1), of which no second copy is written (surfaces.ts). */
+export function limbLender(surface: { readonly id: string; readonly science?: Readonly<Record<string, unknown>> }): string {
+    const science = surface.science, strength = science?.limbStrength;
+    return typeof science?.limbOf === 'string' && (typeof strength !== 'number' || strength === 1) ? science.limbOf : surface.id;
 }
 
 /** Whether an image has no pixel with any opacity. */
