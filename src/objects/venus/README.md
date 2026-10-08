@@ -1,12 +1,12 @@
 # Venus sources
 
-Venus shows a cloud map, one Akatsuki ultraviolet exposure, Magellan radar, elevation, microwave and gravity displays, and modeled atmosphere charts. The cloud illustration is the default view. Rotation is accelerated, and the camera is illustrative rather than an observer ephemeris. The [navigation marker](source/preparation/navigation.json) is a stylized identifier, not the scene's illumination.
+Venus shows a cloud map, one Akatsuki ultraviolet exposure, Magellan radar, elevation, microwave and gravity displays, and modeled atmosphere charts. The cloud map is the default view. Rotation is accelerated, and the camera is illustrative rather than an observer ephemeris. The [navigation marker](source/preparation/navigation.json) is a stylized identifier, not the scene's illumination.
 
 ## Sources
 
 | View or quantity | Source |
 | --- | --- |
-| Clouds | Venus cloud texture from the OpenSpace project, pinned at commit `56e29b54b8592084ff1fef47c2e08de0b22ce516` |
+| Clouds | [A map of Venus](https://bjj.mmedia.is/data/venus/venus.html) by Björn Jónsson, from 21 Galileo images of the February 1990 flyby; free to use with credit ([his terms](https://bjj.mmedia.is/data/planetary_maps.html)) |
 | Ultraviolet | Akatsuki UVI Level 3b, [vco_uvi_l3 v1.1](https://doi.org/10.17597/isas.darts/vco-00016), CC BY 4.0 under the [ISAS/JAXA data policy](https://www.isas.jaxa.jp/en/researchers/data-policy/) |
 | Cloud-top limb | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), Minnaert fit to MESSENGER MASCS spectra |
 | Radar | [USGS Magellan C3-MDIR synthetic color mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m), the 4,641 m GeoTIFF as published |
@@ -29,7 +29,7 @@ The Venera surface photographs from the [NASA PDS Geosciences Node](https://pds-
 
 ## Processing
 
-**Clouds.** The OpenSpace texture is an illustration with unresolved camera, wavelength and color processing. It stays the default because one Akatsuki exposure leaves most of the globe empty. It is projected without a color transform onto 448 prepared leaves and two polar leaves.
+**Clouds.** Björn Jónsson projected 21 Galileo images of the February 1990 flyby onto a cylindrical map, cleaned the mosaic and colorized it. The map is 1,800 × 900 pixels and shows features seen in ultraviolet light. It is the default because one Akatsuki exposure leaves most of the globe empty. It is projected without a color transform onto 448 prepared leaves and two polar leaves. Until 7 October 2026 this file was credited to the OpenSpace project, which distributes the same bytes, and was brightened with a per-channel curve (1.4, 2.2, 0.9) that moved its mean color from (221, 201, 159) to (237, 235, 183): tan to pale yellow.
 
 **Lighting.** The disc uses the Minnaert law Pérez-Hoyos et al. (2018) fitted to the equatorial cloud tops: k 1.35 at 657 nm, 1.36 at 547 nm and 1.32 at 467 nm, read from their published figure because the data file no longer resolves. Relative to the flood-lit disc centre, brightness falls to a third where the clouds are seen at 60° ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
 
@@ -69,6 +69,7 @@ The roughness label's 0.005 multiplier conflicts with the [PDS GSDR specificatio
 ## Known problems
 
 - The radar map's orange is synthetic: it follows radar brightness and is not surface color. The product states no brightness scale. A flat tone near the south pole stands in for ground the mosaic does not show.
+- The cloud map's color is added by its author, who says Venus in visible light is almost white with little contrast. The clouds move, so the map's longitudes mark no place on the planet. He replaces his maps with improved versions; `acquire venus --refresh` downloads the current file.
 - The ultraviolet image is one instant of clouds that move with a four-day super-rotation. It already carries the Sun, so illumination is counted twice near the limb.
 - The halo is a PSG single-scattering model ([handbook](https://psg.gsfc.nasa.gov/images/help/handbook.pdf), p. 96) with the Sun one degree above the horizon, so the real halo may be brighter. Its one color per pixel is approximate for the radar and elevation datasets.
 - The Minnaert coefficients were fitted at 90° phase; the shadowless view uses them at 0°.

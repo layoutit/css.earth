@@ -123,15 +123,15 @@
         "thumbnail": "venus-dataset-clouds.webp",
         "surface": "venus-clouds@2x.webp",
         "source": {
-          "id": "openspace-clouds",
-          "url": "https://github.com/OpenSpace/OpenSpace"
+          "id": "jonsson-venus-galileo-map",
+          "url": "https://bjj.mmedia.is/data/venus/venus.html"
         },
         "poles": "venus-poles-clouds@2x.webp",
         "material": "venus-material@2x.webp",
-        "shortLabel": "Illustration",
-        "qualification": "An illustration of Venus’s clouds from the OpenSpace project, not a photograph.",
+        "shortLabel": "Galileo",
+        "qualification": "Björn Jónsson’s map from 21 Galileo images of the February 1990 flyby. It shows the clouds in ultraviolet light; the color is added.",
         "falseColor": false,
-        "notes": "An illustration of Venus’s clouds from the OpenSpace project, not a photograph."
+        "notes": "Björn Jónsson’s map from 21 Galileo images of the February 1990 flyby. It shows the clouds in ultraviolet light; the color is added."
       },
       {
         "id": "radar",
@@ -927,10 +927,10 @@
       "href": "https://astrogeology.usgs.gov/search/map/venus-magellan-global-products"
     },
     {
-      "label": "OpenSpace",
-      "role": "atmosphere",
-      "description": "Atmosphere parameter values (adapted, MIT)",
-      "href": "https://github.com/OpenSpace/OpenSpace"
+      "label": "Björn Jónsson",
+      "role": "imagery",
+      "description": "Cloud map from Galileo images",
+      "href": "https://bjj.mmedia.is/data/venus/venus.html"
     },
     {
       "label": "PSG",

@@ -46,27 +46,31 @@
       }
     },
     {
-      "id": "openspace-venus-clouds",
+      "id": "jonsson-venus-galileo-map",
       "path": "surface/venus-clouds.jpg",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/venus/textures/2/venus_clouds.jpg",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "origin": "https://bjj.mmedia.is/data/venus/venus.jpg",
+      "credit": "Björn Jónsson, from Galileo spacecraft images",
+      "license": "Free to use with credit to Björn Jónsson, as his planetary maps page states",
       "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/clouds_magellan_combo_newyork.asset"
+        "https://bjj.mmedia.is/data/planetary_maps.html",
+        "https://bjj.mmedia.is/acknow.html"
       ],
-      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh",
-      "redistribution": "permitted with the OpenSpace MIT notice",
+      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh downloads the JPEG the author publishes: 1,800 × 900 pixels, simple cylindrical, 90° N to 90° S, 66,303 bytes, last modified 2016-01-13. The clouds move, so longitude 0 marks no place on the planet. The file is read as published; nothing is recolored. The OpenSpace project distributes the same bytes as venus_clouds.jpg, which is where this input came from until 2026-10-07.",
+      "redistribution": "The author asks for credit and asks sites to link to his maps, not to host a copy, because he replaces them with improved versions. cssEarth does not mirror the JPEG: it is an untracked input downloaded from its origin, so a refresh takes his current file. The prepared WebP pages are projected derivatives of it.",
       "consumers": [
         "scene",
         "datasets"
       ],
+      "title": "A map of Venus from Galileo images, February 1990",
+      "displayCredit": "Björn Jónsson · NASA/Galileo",
+      "sourceUrl": "https://bjj.mmedia.is/data/venus/venus.html",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-venus-openspace-venus-clouds",
+            "catalogueId": "jonsson-venus-galileo-map",
             "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
+            "evidence": "https://bjj.mmedia.is/data/venus/venus.html describes this JPEG and links it as the full-size map."
           }
         ]
       }
