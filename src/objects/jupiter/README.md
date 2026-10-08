@@ -37,7 +37,8 @@ Source selections, recorded trials and open questions are in the [investigation 
 ## Processing
 
 **Visible map.** The Hubble WFC3 map from 27 June 2019 is 3,600 by 1,800 pixels from the 395, 502 and 631 nm filters,
-and excludes latitudes beyond 80°. Bands are limited to eight degrees to reduce close-zoom faceting. Poleward of 64°
+and excludes latitudes beyond 80°. Its rows are planetographic, the same rows as the OPAL 2019 map, and are resampled to
+the mesh's latitude as the dated maps are; until 2026-10-07 they were read row for row. Bands are limited to eight degrees to reduce close-zoom faceting. Poleward of 64°
 the body is a dome of two rings and a flat cap at 80°.
 
 **Poles.** The map observed nothing beyond 80° north or south. The shared gray grid marks those caps; nothing is
@@ -106,8 +107,14 @@ with its gray polar cap and the rings at true opacity on the right.
   shift of −0.2° to +0.5° between 60° N and 30° S (r 0.61 to 0.83, in 0.1° steps); the 2019 Hubble map measures −0.1° to
   +0.5° the same way. A planetocentric map would sit up to 1.9° off. South of 30° S the 1979 belts do not match 2015
   (r 0.14 or less), so the check says nothing there.
+- Default map rows: the 2019 map and the OPAL dated map of 2019-06-26 show the same clouds; their source files' rows
+  match at 0.0° (r 1.00). Read row for row, the default map's belts sat 1.2° to 1.9° poleward of the dated map's between
+  15° and 60° in both hemispheres (zonal brightness profiles of the two prepared maps, r 0.93 to 1.00), the offset of
+  planetographic rows on this ellipsoid. With the rows resampled the two agree to 0.00° in six of seven bands and 0.09°,
+  one row, in the seventh.
 - [Observed-map checks](../../../packages/bake/src/objects/layers/observed-surfaces/observed-polar.test.mts) cover the
-  RGB intersection, the published mask, the date control, the valid zero field and the palette midpoint.
+  RGB intersection, the published mask, the planetographic rows of a measured-rows map, the date control, the valid zero
+  field and the palette midpoint.
 
 ## Known problems
 

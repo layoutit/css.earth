@@ -6,7 +6,7 @@
       "id": "hubble-2019-global-map",
       "subject": "NASA/ESA Hubble WFC3 global map of 27 June 2019",
       "status": "included",
-      "finding": "The visible body uses the 3,600 by 1,800 map combining the 395, 502 and 631 nm filters; its published page excludes latitudes beyond 80 degrees, so preparation verifies measured rows 101 through 1,698 and carries the retained body to 80 degrees south and north, with four prepared high-latitude rings a side and eight-degree interior bands.",
+      "finding": "The visible body uses the 3,600 by 1,800 map combining the 395, 502 and 631 nm filters; its published page excludes latitudes beyond 80 degrees, so preparation verifies measured rows 101 through 1,698 and carries the retained body to 80 degrees south and north, with four prepared high-latitude rings a side and eight-degree interior bands. Its rows are planetographic: they match the OPAL 2019 map's rows at 0.0 degrees (r 1.00), and since 2026-10-07 they are resampled to the mesh's latitude like the dated maps; read row for row before, the belts sat up to 1.9 degrees poleward of where the dated maps put them.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/jupiter/source/manifest.json",
         "https://science.nasa.gov/asset/hubble/jupiter-global-map-2019/"
