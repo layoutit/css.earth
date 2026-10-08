@@ -111,9 +111,10 @@ export function pictureFiles(entry: PictureEntry, inputs: PictureInputs): { read
   files.set(`${at}/source/recipe.json`, json(recipe));
   files.set(`${at}/object.json`, json({ schema: OBJECT_SCHEMA, id: bank, type: 'image-layer-bank', properties: { preparation: { source: 'source/recipe.json' }, host: entry.host }, prepared: { format: PREPARED_IMAGE_LAYER_BANK_SCHEMA, url: 'prepared/image-layers.json' } }));
 
-  // The manifest: the picture, then every other input the like bank reads, each beside this bank.
+  // The manifest: the picture, then every other input the like bank reads, each beside this bank. The like bank's
+  // picture and the published original it was made from (its `original` input) are that bank's own picture, not inputs to carry.
   const likePicture = `${likeAt}source/${requireString(likeSource.path, `${entry.like} recipe source.path`)}`, moved = (path: unknown) => requireString(path, `${entry.like} manifest path`).replace(likeAt, `${at}/`);
-  const others = requireArray(like.manifest.inputs, `${entry.like} manifest inputs`).map(input => requireRecord(input, `${entry.like} manifest input`)).filter(input => input.path !== likePicture);
+  const others = requireArray(like.manifest.inputs, `${entry.like} manifest inputs`).map(input => requireRecord(input, `${entry.like} manifest input`)).filter(input => input.path !== likePicture && input.id !== 'original');
   const manifest = { ...copy(like.manifest), inputs: [{ id: BANK_DATASET, path: `${at}/source/source.jpg`, origin: page.download, sourceUrl: page.page, title: page.title, credit: page.credit, displayCredit: publisher,
     acquisition: `The publisher's JPEG (${width} x ${height} px), downloaded unchanged; not tracked. Its scale and direction on the sky are the file's embedded tags; its place is ${entry.star ? 'set by the star' : 'the tags\' own'} (recipe observation). A display composite, not a calibrated scientific array.`,
     sourceBinding: { kind: 'catalogued', references: [{ catalogueId: record, role: 'material', evidence: `${at}/source/provenance.json` }] }, dependencies: [], datasetId: BANK_DATASET, license: `${LICENSE}; retain the complete recorded credit.`,

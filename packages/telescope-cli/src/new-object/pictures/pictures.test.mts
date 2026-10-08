@@ -135,7 +135,7 @@ async function checkout() {
   const like = 'src/objects/nebula-layers';
   await put(`${like}/source/recipe.json`, { schema: 'cssearth-image-layer-recipe@1', id: 'nebula-layers', source: { path: 'starless.jpg' }, observation: {}, target: { centerRaDeg: 10, centerDecDeg: 20, distancePc: 1000 },
     geometry: { kind: 'inclined-disk', inclinationDeg: 1, unit: 'pc', shape: { source: 'publication-a', basis: 'The Hubble basis.', ring: { semiMajorArcsec: 1, expansionKmS: [1, 2, 3] }, old: true } }, bake: { maxFacePixels: 1024, flat: true }, provenance: { path: 'provenance.json' } });
-  await put(`${like}/source/manifest.json`, { schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository', inputs: [{ id: 'optical', path: `${like}/source/starless.jpg`, generator: 'a script' }, { id: 'speeds', path: `${like}/source/speeds.dat`, origin: 'https://example.test/speeds.dat' }],
+  await put(`${like}/source/manifest.json`, { schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository', inputs: [{ id: 'optical', path: `${like}/source/starless.jpg`, generator: 'a script', dependencies: ['original'] }, { id: 'original', path: `${like}/source/source.jpg`, origin: 'https://example.test/original.jpg' }, { id: 'speeds', path: `${like}/source/speeds.dat`, origin: 'https://example.test/speeds.dat' }],
     documents: [{ id: 'recipe', path: `${like}/source/recipe.json` }], generatedIntermediates: [] });
   await put(`${like}/source/presentation.json`, { schema: 'cssearth-volume-presentation-source@2', objectId: 'nebula-layers', name: 'A Nebula', datasets: [{ id: 'optical' }] });
   await put(`${like}/source/provenance.json`, { displayModel: 'On the shell\'s two walls.' });
