@@ -3,13 +3,16 @@ import test from 'node:test';
 import { DELIVERED_PREPARED_RECORDS, WORKING_PREPARED_RECORDS, deliveredPreparedFiles, deliveredPreparedRecord, isWorkingPreparedFile, preparedDeliveryContext } from './prepared-delivery.ts';
 
 test('a working record is never delivered, and a delivered record names its reader', () => {
-  for (const name of ['scene.json', 'material.json', 'sky.json', 'sun.json', 'world-navigation.json', 'object.json', 'page.json', 'inventory.json', 'terrain.json', 'terrain-zimpol.json',
+  for (const name of ['scene.json', 'material.json', 'image-quality.json', 'title.json', 'runtime-assets.json', 'material-datasets.json', 'views.json', 'layouts.json', 'sky.json', 'sun.json', 'world-navigation.json', 'object.json', 'page.json', 'inventory.json', 'terrain.json', 'terrain-zimpol.json',
     'slope-source-index.json', 'provenance.json', 'lenses.json']) {
     assert.equal(isWorkingPreparedFile(name), true, name);
     assert.equal(deliveredPreparedRecord(name), undefined, name);
   }
   assert.equal(deliveredPreparedRecord('runtime.json')?.reader, 'page');
   assert.equal(deliveredPreparedRecord('source-lighting-dlr.json')?.reader, 'later-bake');
+  assert.equal(deliveredPreparedRecord('surface-raster-plan.json')?.reader, 'later-bake');
+  // Every delivered record names who reads it: none is listed on trust.
+  for (const record of DELIVERED_PREPARED_RECORDS) assert.ok(['page', 'site-build', 'later-bake'].includes(record.reader), String(record.name));
   for (const record of DELIVERED_PREPARED_RECORDS) assert.ok(record.read.length > 10, String(record.name));
   for (const record of WORKING_PREPARED_RECORDS) assert.ok(record.why.length > 10, String(record.name));
 });

@@ -124,6 +124,14 @@ test('executable values, symbols, nonfinite numbers and cycles are rejected with
   }
 });
 
+test('a runtime parsed as it is stored says how to read it', async () => {
+  // Mercury's runtime.json names the file its leaf boxes are in; the whole runtime comes from readPreparedRuntimeText.
+  const stored = JSON.parse(await storedRuntime('mercury'));
+  const binding = array(stored.viewBindings, 'view bindings').map(value => record(value, 'binding')).find(value => value.boxes !== undefined)!;
+  binding.boxes = { file: 'leaf-boxes.json' };
+  assert.throws(() => parsePreparedObjectRuntime(stored), /leaf boxes are in leaf-boxes\.json: this is a stored runtime, read it with readPreparedRuntimeText/u);
+});
+
 test('a body without datasets validates both fixed and toggle-selected presentations', async () => {
   const original = JSON.parse(await storedRuntime('haumea'));
   parsePreparedObjectRuntime(original);

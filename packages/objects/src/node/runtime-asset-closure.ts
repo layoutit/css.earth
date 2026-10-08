@@ -205,11 +205,12 @@ async function deliveryContext(objectDirectory: string) {
  * writes into many packages (the world's members, places and system views). */
 export async function inventoryPreparedSubset({ objectId, objectDirectory, owns }: { objectId: string; objectDirectory: string; owns(filename: string): boolean }) {
   const preparedRoot = resolve(objectDirectory, 'prepared');
-  const baked = await bakedPreparedFiles(preparedRoot, objectId, objectDirectory).catch((error: unknown) => {
+  const found = await runtimeFiles(preparedRoot, objectId, true).catch((error: unknown) => {
     if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') return [] as string[];
     throw error;
   });
-  const names = baked.filter(owns).sort((left, right) => left.localeCompare(right));
+  // Only the files this step owns pass the ledger: a leftover of another step in the same package is not this pin's to refuse.
+  const names = deliveredPreparedFiles(found.filter(owns), objectId, await deliveryContext(objectDirectory)).sort((left, right) => left.localeCompare(right));
   const kept = ((await readInventory(objectId, objectDirectory))?.assets ?? []).filter(asset => asset.location === 'prepared' && !owns(asset.filename));
   return updateInventory({ objectId, objectDirectory, location: 'prepared', assets: [...kept, ...await hashedAssets(preparedRoot, names, objectId)] });
 }

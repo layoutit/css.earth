@@ -2919,12 +2919,6 @@
     },
     {
       "location": "prepared",
-      "filename": "image-quality.json",
-      "bytes": 6746,
-      "sha256": "1b22c07f4cf64aac862afc3219b9ec4ee6255c278a074300128c15e97d32e597"
-    },
-    {
-      "location": "prepared",
       "filename": "leaf-boxes.json",
       "bytes": 151424,
       "sha256": "5f2042ac388e068c1d216ed6c262cb9c498c4bbca5683752064f77fd22479304"
@@ -3102,12 +3096,6 @@
       "filename": "text.json",
       "bytes": 5704,
       "sha256": "c8d156396e95a4ba52beaddba3b0fc06931e3ea6f2835b09613605f2e2a136d7"
-    },
-    {
-      "location": "prepared",
-      "filename": "title.json",
-      "bytes": 2824,
-      "sha256": "11d99b4a6cf12289e550c4371e59a893bb450755ab970339d5eef56afba371fd"
     }
   ]
 }
