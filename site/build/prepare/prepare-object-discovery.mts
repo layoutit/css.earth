@@ -1,8 +1,8 @@
-import { open, readFile } from 'node:fs/promises';
+import { readFile } from 'node:fs/promises';
 import { basename, resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { readPreparedControls } from '@cssearth/objects/node';
-import { readShapeModelDiscovery, readRasterDiscovery, readRuntimeCamera, readRuntimeCameraPrefix, parseObjectDescriptor, readObjectContentDatasets, requireCamera, parseArrivalView, parseArrivalBillboard, type CameraPlan, type ObjectDiscovery } from '@cssearth/objects';
+import { readPreparedControls, readPreparedRuntimeHead } from '@cssearth/objects/node';
+import { readShapeModelDiscovery, readRasterDiscovery, readRuntimeCamera, parseObjectDescriptor, readObjectContentDatasets, requireCamera, parseArrivalView, parseArrivalBillboard, type CameraPlan, type ObjectDiscovery } from '@cssearth/objects';
 import { preparedDefaultViewRotation } from '@cssearth/engine';
 import { resolveBuildSceneAddress } from '../../server-assets/asset-origin.mts';
 import { isNavigationalStar } from './world/navigational-stars.mts';
@@ -85,19 +85,15 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
     ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
 }
 
-/** A prepared runtime's `camera`, read from the start of the file. The bake writes `schema` then `camera` first, and
- * discovery needs nothing else: parsing all 3,595 runtimes (1.18 GB) to read this object cost the catalogue step
- * about 10 s. A runtime in any other shape is parsed whole. `null` when the body has no prepared runtime yet. */
-export async function preparedRuntimeCamera(path: string): Promise<unknown> {
-  let handle;
-  try { handle = await open(path); }
-  catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
-  try {
-    const { buffer, bytesRead } = await handle.read({ buffer: Buffer.alloc(65536), position: 0 });
-    const prefix = readRuntimeCameraPrefix(buffer.toString('utf8', 0, bytesRead));
-    if (prefix) return prefix.camera;
-    return readRuntimeCamera(JSON.parse(await readFile(path, 'utf8')));
-  } finally { await handle.close(); }
+/** A prepared runtime's `camera`, read from the head of the stored file: the bake writes `schema` then `camera` first, and
+ * discovery needs nothing else (parsing all 3,595 runtimes whole cost the catalogue step about 10 s). `null` when the
+ * body has no prepared runtime yet. */
+export async function preparedRuntimeCamera(preparedDirectory: string): Promise<unknown> {
+  const head = await readPreparedRuntimeHead(preparedDirectory, ['schema', 'camera']).catch((error: unknown) => {
+    if (hasErrorCode(error, 'ENOENT')) return null;
+    throw error;
+  });
+  return head === null ? null : readRuntimeCamera(head);
 }
 
 /** What a bank shows is its observations: images and volumes built from them are imagery; a bank of catalogue points is
@@ -127,7 +123,7 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     // image seen from the side (2026-10-02). A field of catalogue dots keeps the direction, as before.
     const photographed = controls.flatMap(control => isRecord(control) && typeof control.id === 'string' && isRecord(control.volume) && pictured.has(String(control.volume.objectId)) ? [control.id] : []);
     const defaultDataset = isRecord(content) && isRecord(content.datasets) ? content.datasets.defaultDataset : undefined;
-    const camera = photographed.length && typeof defaultDataset === 'string' ? await preparedRuntimeCamera(resolve(objectDirectory, 'prepared', 'runtime.json')) : null;
+    const camera = photographed.length && typeof defaultDataset === 'string' ? await preparedRuntimeCamera(resolve(objectDirectory, 'prepared')) : null;
     let plan: CameraPlan | null = null;
     if (camera) { requireCamera(camera); plan = camera; }
     const arrival = plan ? parseArrivalView({ defaultDataset, datasetIds: photographed, rotation: preparedDefaultViewRotation(plan) }) : undefined;
@@ -158,7 +154,7 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     if (hasErrorCode(error, 'ENOENT')) return { datasets: { controls: [] } };
     throw error;
   });
-  const camera = await preparedRuntimeCamera(resolve(objectDirectory, 'prepared', 'runtime.json'));
+  const camera = await preparedRuntimeCamera(resolve(objectDirectory, 'prepared'));
   const discovery = deriveObjectDiscovery(descriptor.properties.catalog, controls, inputs, camera ?? undefined, typeof descriptor.id === 'string' && isNavigationalStar({ id: descriptor.id }));
   const billboard = await preparedJson('arrival-billboard.json');
   if (billboard !== null) {

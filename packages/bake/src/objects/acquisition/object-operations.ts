@@ -3,6 +3,7 @@ import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets, pu
 import { containedPath, parseSourceManifest, verifySources, RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl, sourceFormatProblem } from '../sources/index.ts';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.ts';
 import { readFile, lstat } from 'node:fs/promises';
+import { readPreparedRuntimeText } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
 
 const object=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected an object.');return value as Record<string,unknown>;};
@@ -46,8 +47,7 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
  }
  const inventoryPath=resolve(objectRoot,'inventory.json');
  if(mode==='manifest'){
-  const entries=['runtime.json','content.json'];
-  const values=await Promise.all(entries.map(async file=>JSON.parse(await readFile(resolve(preparationRoot,file),'utf8')) as unknown));
+  const values=[JSON.parse(await readPreparedRuntimeText(preparationRoot)) as unknown,JSON.parse(await readFile(resolve(preparationRoot,'content.json'),'utf8')) as unknown];
   return prepareRuntimeManifest({id,publicRoot:resolve(root,'site/public/scenes',id),objectDirectory:objectRoot,values,allowPreparationArtifacts:true});
  }
  if(mode==='assemble'){

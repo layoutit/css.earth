@@ -6,7 +6,7 @@ import { readFile, writeFile, mkdir, copyFile, readdir } from 'node:fs/promises'
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
-import { createSourceManifest } from '@cssearth/objects/node';
+import { createSourceManifest, readPreparedRuntimeText } from '@cssearth/objects/node';
 import type { SolarGeometry } from '../objects/scene/index.ts';
 import { parseSolidPreparationSource, retainedPhotographicAtlas, loadRadialTerrain, prepareRadialMaterials, prepareSolidRasters, prepareSolidSurfacePoles } from '../objects/layers/terrestrial/index.ts';
 import { datasetBillboardColors } from '../objects/content/index.ts';
@@ -125,7 +125,8 @@ export async function refreshObservationControls(id: string, datasetIds: readonl
     return recolored ? { ...next, billboardColor: controlColors.get(datasetId) } : next;
   });
   for (const name of ['datasets.json', 'runtime.json']) {
-    const path = resolve(outputDirectory, name), document = await json(path);
+    // The runtime is read and written whole; the pin below stores it again (prepared-runtime-files.ts).
+    const path = resolve(outputDirectory, name), document = name === 'runtime.json' ? requireRecord(JSON.parse(await readPreparedRuntimeText(outputDirectory))) : await json(path);
     const target = name === 'datasets.json' ? document : requireRecord(requireRecord(document.controls).datasets);
     target.controls = update(target.controls, name === 'datasets.json');
     if (name === 'runtime.json') {

@@ -8,6 +8,7 @@ const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),exclude
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
+import { readPreparedControls } from '@cssearth/objects/node';
 import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '../objects/interpretation/index.ts';
 import type { SolarGeometry } from '../objects/scene/index.ts';
 // One interpreter per object so the sidebar map previews a science surface through the decoder that packed it.
@@ -52,7 +53,10 @@ async function minimapCoverage(pipeline:Sharp, leftEdgeLongitudeDeg:number, exac
   return roundedDirection(coverageDirection({ dataset: '', missing, width: info.width, height: info.height, leftEdgeLongitudeDeg }));
 }
 /** The runtime's controls: a bake draws its minimaps after it writes the runtime, and a refresh reads the published one. */
-const preparedControls = async (outputDirectory: string) => requireRecord((await optionalJson(resolve(outputDirectory, 'runtime.json')))?.controls ?? {});
+const preparedControls = (outputDirectory: string) => readPreparedControls(outputDirectory).catch((error: unknown): Record<string, unknown> => {
+  if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return {};
+  throw error;
+});
 const roundedDirection = (direction: readonly number[]) => direction.map(value => Math.round(value * 1e4) / 1e4);
 const minimapResize = (nearest:boolean):ResizeOptions => ({ width: 640, withoutEnlargement: true,
   ...(nearest ? { kernel: 'nearest' } : {}) });
