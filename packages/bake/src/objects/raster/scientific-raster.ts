@@ -204,8 +204,12 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
     if (grid.coordinates !== undefined && !['degrees', 'meters'].includes(grid.coordinates) || geographic && polar)
       throw new Error(`Unsupported scientific grid coordinates: ${dataset.path}`);
     const projectionMatches = geographic
+      // A sphere states both semi-axes. A file that states an ellipsoid by its inverse flattening has no semi-minor key, and
+      // is read only when the grid declares that same flattening.
       ? keys.GTModelTypeGeoKey === 2 && keys.GTRasterTypeGeoKey === 1 && keys.GeogAngularUnitsGeoKey === 9102 &&
-        keys.GeogSemiMinorAxisGeoKey === grid.referenceRadiusMeters && (keys.GeogPrimeMeridianLongGeoKey ?? 0) === 0 && grid.centerLongitude === 0
+        (grid.inverseFlattening === undefined ? keys.GeogSemiMinorAxisGeoKey === grid.referenceRadiusMeters
+          : keys.GeogSemiMinorAxisGeoKey === undefined && keys.GeogInvFlatteningGeoKey === grid.inverseFlattening) &&
+        (keys.GeogPrimeMeridianLongGeoKey ?? 0) === 0 && grid.centerLongitude === 0
       : polar
       ? keys.ProjCoordTransGeoKey === 15 && keys.ProjNatOriginLatGeoKey === grid.poleLatitude &&
         keys.ProjStraightVertPoleLongGeoKey === grid.centerLongitude && keys.ProjScaleAtNatOriginGeoKey === 1
