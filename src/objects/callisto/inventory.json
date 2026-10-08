@@ -399,12 +399,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 1396,
-      "sha256": "7aede687c1c76f5f1d8afc6f82dc6bd4063adb91eb0eed8e30934bca87ff6252"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 2378,
       "sha256": "e3adf602466e2d96783d5cd2986c6f2b7eaa2e40947fa862ae4f67f612528279"
@@ -414,6 +408,12 @@
       "filename": "features.json",
       "bytes": 594,
       "sha256": "33f91dd8368f6962914cf98f20aeb22e5bc9537f01af22f761e09bf0dc5ed9bc"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 151508,
+      "sha256": "5ebed48afb35f6694759c0acf41ddf2da2be269c25308525a736ea0a500ca660"
     },
     {
       "location": "prepared",
@@ -448,26 +448,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 262014,
-      "sha256": "cb247a20c9ff01128f27ae19fa71e44b3e686f1242c5291abf8821ba6987c3d6"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 374508,
-      "sha256": "f778606a410b680af94e21102264639a864708759a9a9cdd794ac7a65db7079d"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1177,
-      "sha256": "93962e9ec75ad3d2a38a21ebb18d2570c9ded4e7b68dc409e0d26d88ff0398e9"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 620,
-      "sha256": "f1f9db053dbbe6fd3a285c99eb9c16cb0c7c29e512c8d8c4ba1b16623971f0f8"
+      "bytes": 110533,
+      "sha256": "165e84cf378598d74367c4753b3f8cf765da660a677f6c80ee44e579c701de48"
     },
     {
       "location": "prepared",
@@ -480,12 +462,6 @@
       "filename": "text.json",
       "bytes": 1260,
       "sha256": "ff352e57331746b95d9ec642a22e3f1edd1ca2394c49886eba9c2ad18cafc731"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1225,
-      "sha256": "c7a9b9ded3e93d5d49548e1247fee7a0580c8d6cd6c439b4d4401c49cfa68a2f"
     }
   ]
 }

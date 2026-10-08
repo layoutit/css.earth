@@ -63,15 +63,15 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 376,
-      "sha256": "076c2a64db2b6dc55b0d006dadb563ede6ad58bae436490d55d497bf0105b623"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1056,
       "sha256": "3b041f23f19fdae7fa60ad4d4fe21953bdc88db6028e637aeee587e6cd91b27c"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 182576,
+      "sha256": "92a94c90f107f4fce4688235a7d605fef8c79fe0cdf228cb74966ca4bf5c1021"
     },
     {
       "location": "prepared",
@@ -88,38 +88,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 249596,
-      "sha256": "e60492d1d2a7edce444f7387cf955a2c671873dbf3c7ec8577be6d9ab9cacede"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 395639,
-      "sha256": "a2020015e3e865bb0e872b74a1ed0d8625d049d9fb355bf1430f925cb17d5f9c"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1209,
-      "sha256": "b520b724c71cfd19c46c7ca8a330f815fda72a2316bf27a009ab1ba95cef816c"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 5,
-      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+      "bytes": 67047,
+      "sha256": "0169ee94ff71c9a6d67e659dc7669a43f902702ea983d56cdb3a144a216eb0a0"
     },
     {
       "location": "prepared",
       "filename": "text.json",
       "bytes": 1025,
       "sha256": "976af7d1da7e53bcab72465640779b887122fa27191656fbc87756229bd5895e"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1175,
-      "sha256": "5068cf1403b7ea941f35b24682f49fd59f7cd6a41e45f3c46b4d1bbd070fa85f"
     }
   ]
 }

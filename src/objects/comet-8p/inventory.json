@@ -99,12 +99,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 845,
-      "sha256": "cc4cf73e0ef6476f1ae77d392aa67cad53eb02b5c52e9fb8f14b2bd4a44bb242"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1506,
       "sha256": "20e334d403440478ed1d62c1aefc191cb17d31e4bbe8f3355ab257ea2d949caa"
@@ -141,12 +135,6 @@
     },
     {
       "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1186,
-      "sha256": "00029f9dedf2731725ca904b47479053eb1227bc2618e71e0271b6ad93edd5ad"
-    },
-    {
-      "location": "prepared",
       "filename": "source-lighting-arecibo.json",
       "bytes": 402,
       "sha256": "4374591e49f8604f6cec626365a6375191ed0171715cbabd62b3cf7e1bd00383"
@@ -159,12 +147,6 @@
     },
     {
       "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 829,
-      "sha256": "abc0080a998003798ed2723c1e98d7fc92f2014f8e006dfe24341e633fe23e54"
-    },
-    {
-      "location": "prepared",
       "filename": "surfaces.json",
       "bytes": 2154,
       "sha256": "bae9d1618c4b64f8d80d6006486577cfd131bd30c2ee93d8553a4f6dd2d83164"
@@ -174,12 +156,6 @@
       "filename": "text.json",
       "bytes": 1734,
       "sha256": "2200b5410e5015c8f633da98798038a483cae9d8f8099cc2660dce3f79f40d75"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1203,
-      "sha256": "5516cfe1944de1ec99823cd685a5c072f7528824779aac6a7565c5cb17b35736"
     }
   ]
 }

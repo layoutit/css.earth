@@ -2907,12 +2907,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 53618,
-      "sha256": "c269442c2194fb107aa09a59fedd1da7ed432d51a9e270cd7eb45a69f771d5ad"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 72408,
       "sha256": "7aa661d424f8ca41a0f7c34ef93cf7b05c18c9f3dbecf3882c1e2e93ef10484c"
@@ -2928,6 +2922,12 @@
       "filename": "image-quality.json",
       "bytes": 6746,
       "sha256": "1b22c07f4cf64aac862afc3219b9ec4ee6255c278a074300128c15e97d32e597"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 151424,
+      "sha256": "5f2042ac388e068c1d216ed6c262cb9c498c4bbca5683752064f77fd22479304"
     },
     {
       "location": "prepared",
@@ -3094,26 +3094,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 466073,
-      "sha256": "ef85b21bd80363f2609652a76ee21d34f33a3e94488981140619a1e2a30b2c25"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 374096,
-      "sha256": "57feab47dae8f57547143173b40ac134b22bb70e05e552d098b11374cd6099b2"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1181,
-      "sha256": "9ff32a3538df2ddc02557f68f8b98d06cc81b62930075f33a63743110ad7d74f"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 620,
-      "sha256": "c3771b34efaa47d93cec8a42dbd859e3fe135f1b0e9ba3a698c9c95664e07f00"
+      "bytes": 314676,
+      "sha256": "d7238add13d92aefffc6a797fe0ac6e0049f4874dea0cad16eb1be1086a26201"
     },
     {
       "location": "prepared",
@@ -3126,12 +3108,6 @@
       "filename": "title.json",
       "bytes": 2824,
       "sha256": "11d99b4a6cf12289e550c4371e59a893bb450755ab970339d5eef56afba371fd"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1231,
-      "sha256": "6be4cf399fda49fce7657c92f91f3cf48cdeb407a1489eb5015b64d4f0d3c1f7"
     }
   ]
 }

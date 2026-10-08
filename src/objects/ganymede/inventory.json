@@ -627,12 +627,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 4945,
-      "sha256": "0e76be674ccb23f200b19491e8b41e72226f69bd582ee14a850641b21a5e521b"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 6692,
       "sha256": "d19c4a46c581adcf08c51d0ce97172fbf4410fbae6368c1357f51a0f5e0a32c8"
@@ -642,6 +636,12 @@
       "filename": "features.json",
       "bytes": 594,
       "sha256": "fa51760e69ca84b00d95abe08c30eb5f1337fa33275dcc0570c38ee8bad78062"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 151508,
+      "sha256": "5ebed48afb35f6694759c0acf41ddf2da2be269c25308525a736ea0a500ca660"
     },
     {
       "location": "prepared",
@@ -688,26 +688,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 278991,
-      "sha256": "83eaaf2084dc0084102b236b988577132e41085fcd65820df5d9ecf2036be38f"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 374695,
-      "sha256": "fac8bd48c3ce2bb991b0bcfc32e40b6b19b47c18601ec2ecc453fad04623505c"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1179,
-      "sha256": "68dd0551aed3282ef8f1aa11005c75748e12823ca659690b92835573d8d8c28a"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 619,
-      "sha256": "3769e68fa90f31df4f3b741367afe4956e1113c18b4d36c0ebb554b11b432bd2"
+      "bytes": 127510,
+      "sha256": "845ecc83eb72da1dc8d6aa96496704f54929fc48363d928a16af2594af1829ea"
     },
     {
       "location": "prepared",
@@ -720,12 +702,6 @@
       "filename": "text.json",
       "bytes": 1672,
       "sha256": "2b1ffa621d24b5fb0eeb3771f5896aa261b17ccaf23f6ea3d2967d72971c6edb"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1214,
-      "sha256": "dbe9af5ff29e49976efc8be6603ad8dd7d543eb20be993373690a4d49f2347fa"
     }
   ]
 }

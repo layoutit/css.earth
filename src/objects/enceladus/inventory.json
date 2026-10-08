@@ -195,12 +195,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 3011,
-      "sha256": "fdae968ecb7c02f08fc183296f05a64ba5397549e9fcefbfdb37b5e86953330a"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 5910,
       "sha256": "03ededb39523fdb64eea4dee6be89bf5405ed8b49cca3488beb4fcf97ebccf55"
@@ -210,6 +204,12 @@
       "filename": "features.json",
       "bytes": 598,
       "sha256": "c43722cb49cef7184c55af181ef60afa9b244430496b188aba901e57c08f7432"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 133437,
+      "sha256": "dbd9ac4b6a66289a34ef467d9946908fb1904ce538549ccb357361729699fd61"
     },
     {
       "location": "prepared",
@@ -268,26 +268,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 240469,
-      "sha256": "834b596e2f953a863b7e59310323bf175358034bbe5f2159f18f7605ff9f33a6"
+      "bytes": 107059,
+      "sha256": "5be276562daac260b4e9c3107938f7d2318f043ba22dc3fb5e7fdc81fa8d9e34"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 292171,
       "sha256": "dab722bc29fad46f25d4bdef6eaf4ffe601d8c0a35f3b76bafb53e3c0001fc46"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1183,
-      "sha256": "83f9fe5e509a076043f8dabcbe2a83c119c5f75dbf0a5b49d14b780dfd129a6e"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 634,
-      "sha256": "c2af88407f80191773b75f5811ef43ef6a231f0f2e77e5e8b33f5c6d3358aa67"
     },
     {
       "location": "prepared",
@@ -300,12 +288,6 @@
       "filename": "text.json",
       "bytes": 2005,
       "sha256": "fec3f6661a27e06fc098e08ae0550e2722829e69590cb0ffb0447c15f9d4653c"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1235,
-      "sha256": "7388eca86a5ee61e40166c4e2b8f2042a2ccceef7346d2f997613f69426d5912"
     }
   ]
 }

@@ -927,12 +927,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 4891,
-      "sha256": "fa6ab54610332f559f159aafa9567235c64315d8536fe9f33a5d291e0beec0aa"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 10926,
       "sha256": "6c7a77331933f09e0edc27ac652ef1df300e947bb6323c4b367f3c257396acc3"
@@ -948,6 +942,12 @@
       "filename": "layouts.json",
       "bytes": 309,
       "sha256": "08d4d9a03bae5aa86b105cc1c0975a752c16471f9221db0b5b76be507fc79da6"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 134856,
+      "sha256": "d4bdb2f0b8cd2bc2e3583989ab3b014f3c73da8e25acbdfa8519a420953ad60d"
     },
     {
       "location": "prepared",
@@ -1036,26 +1036,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 569277,
-      "sha256": "523c0855db40fae828b47c47e561b57d766d8cc0e2993536d61906293c287613"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 1468863,
-      "sha256": "c13dc933f496cdbd884cf784c8ea780b2aa7a633312e7f18387f375c431c6597"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1038,
-      "sha256": "d770889c2b377915a738bd907d28fb3b981a6b694add27deec83cb231ece6c9c"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 619,
-      "sha256": "4915c8dbbc9c7391d48cc8337520f0f17295256c4103c38fabe348fe3067ef67"
+      "bytes": 434448,
+      "sha256": "caa4015a6b553ead2ec6b6bc16b7a53cc1eb59484af572b8aef27e2939c61150"
     },
     {
       "location": "prepared",
@@ -1068,12 +1050,6 @@
       "filename": "views.json",
       "bytes": 8408,
       "sha256": "a323ba014e45e7199edccb58d7ec8f9a4639969625575ea694f55d4a578caac0"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1078,
-      "sha256": "cd48a683440eabcd4326d1a40f4714e3bc03bb1267db87f7a9f4eafe973ff99d"
     }
   ]
 }

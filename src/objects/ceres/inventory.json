@@ -645,12 +645,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 28598,
-      "sha256": "cf5d1d24cdd9db4990f03157adb639078e7b48a013f866108d76c4e5c1f33603"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 35526,
       "sha256": "d1ed9846e7ac6c47ec12cdbf186bbaf96b84d847bf81c7705ca735783d31997c"
@@ -660,6 +654,12 @@
       "filename": "features.json",
       "bytes": 579,
       "sha256": "529d95d4d31bcc61b17bd7373d1faf6126ae15c334aa3ad7bed20c4910338d68"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 175868,
+      "sha256": "5f5075d732eac75b78e927205b3c19d1955beab466cf516d6d7f849d54c80a9d"
     },
     {
       "location": "prepared",
@@ -760,26 +760,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 336795,
-      "sha256": "eb73d3fe43dbf3b0d59bb676c5cfd55b3b64b43de24d58b3fce1c5eba72533a9"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 390678,
-      "sha256": "a3087f03112f522944a382474355d8e369334c201017b75548e987754c8f78a6"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1179,
-      "sha256": "5dd1eda31a0173f84b1bedb9543bd8a59701ab4d3870c046ec3b348553831136"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 613,
-      "sha256": "a99f1feb8adb56ddcedfa2bb30325c5c7e839f23e5859eb37618501c4cd6ce7e"
+      "bytes": 160954,
+      "sha256": "253bd538597abe760b44ac9889088e60da60db6cc456d023f7892c579613c0fc"
     },
     {
       "location": "prepared",
@@ -792,12 +774,6 @@
       "filename": "text.json",
       "bytes": 3256,
       "sha256": "a91f8a7e34a6154c5f4e2388137b313ee897eb81bd0d8703aa5769fb7b86b62c"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1185,
-      "sha256": "2faa8975b654b901338dcd3e16b549e124c78abc5d98e859e32826e597a215fb"
     }
   ]
 }

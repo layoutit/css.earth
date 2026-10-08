@@ -183,12 +183,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 2005,
-      "sha256": "bb22ca9e515bcf2cc3710f68a43691adb8cfe579feb75da5c6f1be1c4d3adfe7"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 3028,
       "sha256": "5e877475aa9a391f30a3cbe41a4f1b97d5f0422d3b2cf71a579cf2b9f8521636"
@@ -198,6 +192,12 @@
       "filename": "features.json",
       "bytes": 577,
       "sha256": "61dcb910af3bfe6e0cdc6a1cd463ed26767695a7579929fe6c17947ae7ffddee"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 175072,
+      "sha256": "f3777811c0bfd06af1f1eb6eb7416d9eb0a52e328240af5bf2a09f867c382b50"
     },
     {
       "location": "prepared",
@@ -232,26 +232,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 275869,
-      "sha256": "460f7ec1bc9034a61c619ea5a26175f22281828ff4ce048d5c3053af0c0cfab9"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 389489,
-      "sha256": "7f2681646c70f692c6f393983bf5f3aa6e13f307d6cdd87dfac3fbe05ace617e"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1177,
-      "sha256": "138eca4b954dde3ef4d4e217ccb6d46a1bd4ea1bb4b9f9f51df0f6244196b81d"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 614,
-      "sha256": "ae8d2787e5a63c16c9f29e034931e9119b9840bff65beb484dbd45911447c0d6"
+      "bytes": 100824,
+      "sha256": "c16a9e86e0f913c17ed78abd3b9c10278ebbada94074085f3b2aa35dc97d7a10"
     },
     {
       "location": "prepared",
@@ -264,12 +246,6 @@
       "filename": "text.json",
       "bytes": 1230,
       "sha256": "0cf9886bac8f455463ceb2b86edaf4b2bf0b8ed6c8b144806de6132e12b83272"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1234,
-      "sha256": "cd8d3e0903d5a6cc00ed97a091c4b1eab7caaecfe6200002f0a5903378f86ac3"
     }
   ]
 }

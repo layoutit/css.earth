@@ -141,12 +141,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 569,
-      "sha256": "fbf57dd9bd6c5e8fb8a3e7cc4757debfc91e14e6c6cccdbf03cb34a01b3a4378"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1240,
       "sha256": "73fd7c7e176795fd25de52316b30dba425cc4735cf70b72a733bd602701da3a7"
@@ -156,6 +150,12 @@
       "filename": "features.json",
       "bytes": 587,
       "sha256": "b4b559ccf876127ede697cbd4fce682dde7ce9072752430526bc2578801a84e7"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 175072,
+      "sha256": "f3777811c0bfd06af1f1eb6eb7416d9eb0a52e328240af5bf2a09f867c382b50"
     },
     {
       "location": "prepared",
@@ -184,26 +184,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 270999,
-      "sha256": "cad80a5764fc3791c9765a5aa11389a686362c79257d04d1a708ed5ffac31363"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 390322,
-      "sha256": "08c2f7181fd43105dfa9b095df8a90dd4c93b0fd68a55d04f451a0c01049c4b0"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1182,
-      "sha256": "1198850b50d16bf5521be2875b5fb75edc336116d57b5572dab6da62bd155bdf"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 614,
-      "sha256": "c8a7d9f3935176e0ce3116aad35a17c8916ecb0d8641d28fd51ed81a663c1455"
+      "bytes": 95954,
+      "sha256": "390438cdbd7a888013be57166405c274af1982e5988172e36406c9d128c723fc"
     },
     {
       "location": "prepared",
@@ -216,12 +198,6 @@
       "filename": "text.json",
       "bytes": 1028,
       "sha256": "e9cddd4cca6a3a2a1e59fc39514689a78cc9d2cb413e6644b4fe832ca6e486e5"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1240,
-      "sha256": "d5802050b13becd8a15e6ff58145c7df743fb1b5d2841bd9890c387ece907833"
     }
   ]
 }
