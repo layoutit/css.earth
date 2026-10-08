@@ -10,7 +10,7 @@ import { createSourceMeshLighting } from '../source-mesh-lighting.ts';
 import { prepareNativePhotographicAtlas, samplePhotographicTexel } from '../native-photograph.ts';
 import { loadNativePhotograph } from '../native-photograph-source.ts';
 import { renderRadialSnapshot } from '../radial-snapshot.ts';
-import { neutralShapeAtlas, shapeFillIllumination, shapeMaterialColor } from '../shape-material.ts';
+import { shapeFaceColors, shapeMaterialRaster, shapeFillIllumination, shapeMaterialColor } from '../shape-material.ts';
 import { requireTerrainMesh, closestTrianglePoint } from '../../../geometry/index.ts';
 import { resolve, dirname } from 'node:path';
 import { gzipSync } from 'node:zlib';
@@ -53,6 +53,8 @@ async function replaceReviewedImage(sourceDirectory: string, path: string, bytes
   await writeFile(resolve(sourceDirectory, path), bytes);
 }
 
+/** The side, in pixels, of the swatch a shape view keeps in place of an atlas: its one mean color. */
+const FACE_COLOR_SWATCH = 4;
 /** Bake opaque triangle rasters, coordinates and fixed-epoch Sun illumination. The
  * renderer switches between these prepared banks through ordinary variants.
  */
@@ -82,14 +84,22 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     const shapeColor = shapeMaterialColor(surface.material), neutralShape = shapeColor !== null;
     if (neutralShape && !lighting && !surface.textureScale &&
         !config.geometry.radialTerrain.thumbnail && !radial.faces.some(face => face.estimated) && !radial.grid?.imageGrid) {
-      const { flood, shadow } = neutralShapeAtlas(radial, sunDirection, shapeColor);
-      const raw = { width: canonicalWidth, height: canonicalHeight, channels: 4 as const };
-      // No quality: the emitter writes it in the lossy lane (lossy-lane.ts).
-      const encoding = { alphaQuality: 100, effort: 4 };
-      surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`, sharp(flood, { raw }), encoding);
-      surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw }), encoding);
+      // One constant material needs no image: every face takes one color for Shadows off and one for Shadows on, and the
+      // page draws them as plain CSS triangles (solid-scene.ts). The dataset keeps a swatch of its mean color where an
+      // image address is read: its content record and the far billboard's color.
+      const colors = shapeFaceColors(radial.plans.map(plan => plan.face), sunDirection, shapeColor);
+      const areas = radial.plans.map(({ face: { vertices: [a, b, c] } }) => {
+        const ab = b!.map((value, axis) => value - a![axis]!), ac = c!.map((value, axis) => value - a![axis]!);
+        return Math.hypot(ab[1]! * ac[2]! - ab[2]! * ac[1]!, ab[2]! * ac[0]! - ab[0]! * ac[2]!, ab[0]! * ac[1]! - ab[1]! * ac[0]!);
+      });
+      const total = areas.reduce((sum, area) => sum + area, 0);
+      const mean = [1, 3, 5].map(offset => Math.round(colors.flood.reduce((sum, color, face) => sum + Number.parseInt(color.slice(offset, offset + 2), 16) * areas[face]!, 0) / total));
+      surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`,
+        sharp(shapeMaterialRaster(FACE_COLOR_SWATCH, FACE_COLOR_SWATCH, mean as [number, number, number]), { raw: { width: FACE_COLOR_SWATCH, height: FACE_COLOR_SWATCH, channels: 3 } }), { effort: 4 });
+      delete surface.shadowSurface;
       surface.polesUrl = surface.surface.url;
-      surface.layout = { kind: 'triangle-atlas', width: canonicalWidth, height: canonicalHeight, faceCount: radial.faces.length };
+      surface.faceColors = colors;
+      surface.layout = { kind: 'face-colors', faceCount: radial.faces.length };
       continue;
     }
     const photograph=config.raster.observations?.find(observation=>observation.id===surface.id);

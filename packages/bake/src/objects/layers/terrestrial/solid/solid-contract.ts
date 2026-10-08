@@ -7,11 +7,14 @@ export type RasterAsset = Awaited<ReturnType<ReturnType<typeof createRasterEmitt
 export interface SolidSurface extends Record<string, unknown> {
   id: string; textureScale?: number; displaySampling?: string; map: RasterAsset; surface: RasterAsset; thumbnail: RasterAsset;
   shadowSurface?: RasterAsset; polesUrl?: string; layout: unknown;
+  /** A shape view drawn without an image: one color a face, in the order of the mesh's faces (shape-material.ts). */
+  faceColors?: ShapeFaceColors;
 }
+export interface ShapeFaceColors { flood: readonly string[]; shadow: readonly string[] }
 /** Input map exists before radial preparation fills its output atlas fields. */
 export interface RadialMaterialSurface extends Record<string, unknown> {
   id:string;map:{url:string};textureScale?:number;displaySampling?:string;
-  surface?:RasterAsset;shadowSurface?:RasterAsset;thumbnail?:RasterAsset;polesUrl?:string;layout?:unknown;
+  surface?:RasterAsset;shadowSurface?:RasterAsset;thumbnail?:RasterAsset;polesUrl?:string;layout?:unknown;faceColors?:ShapeFaceColors;
 }
 export type ScientificDataset = SciencePalette & {id: string; format: string; displaySampling?: string; symbols?: unknown;
   surfaceSampling?: {maximumDistanceMeters: number}; underlay?: {surface: string; brightness: number; grayscale?: boolean; bits?: number}};
