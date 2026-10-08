@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "megrez",
+  "source": "Jones et al. (2015), The Ages of A-Stars. I. Interferometric Observations and Age Estimates for Stars in the Ursa Major Moving Group, ApJ 813, 58 (https://doi.org/10.1088/0004-637X/813/1/58; https://arxiv.org/abs/1508.05643), the table \"Model Results using the ELR gravity darkening law\", column Megrez (HD 106591), read from the authors' LaTeX source (arXiv version 2, where it is the sixth table)",
+  "caption": "Model Results using the ELR gravity darkening law. A Roche model fitted to CHARA Classic, CLIMB and PAVO visibilities and to broadband photometry; the equatorial radius, equatorial velocity, inclination, polar temperature and polar position angle are free, the mass (2.048 solar masses) comes from MESA evolution models and the distance from the Hipparcos parallax (24.7 pc).",
+  "model": {
+    "omega": {
+      "value": 0.972,
+      "uncertainty": 0.014,
+      "cell": "0.972^{+0.011}_{-0.014}"
+    },
+    "beta": {
+      "value": 0.17,
+      "uncertainty": 0.007,
+      "cell": "0.170^{+0.007}_{-0.007} (not fitted: the law of Espinosa Lara & Rieutord 2011 sets it from the rotation rate)"
+    },
+    "poleTemperatureK": {
+      "value": 9550,
+      "uncertainty": 143,
+      "cell": "9550^{+143}_{-126}"
+    },
+    "equatorTemperatureK": {
+      "value": 7244,
+      "uncertainty": 218,
+      "cell": "7244^{+199}_{-218}"
+    },
+    "polarRadiusSolar": {
+      "value": 1.893,
+      "uncertainty": 0.046,
+      "cell": "1.893^{+0.046}_{-0.045}"
+    },
+    "equatorialRadiusSolar": {
+      "value": 2.511,
+      "uncertainty": 0.074,
+      "cell": "2.511^{+0.074}_{-0.068}"
+    }
+  },
+  "view": {
+    "inclinationDegrees": {
+      "value": 50,
+      "uncertainty": 4.1,
+      "cell": "50.0^{+4.0}_{-4.1}"
+    },
+    "polePositionAngleDegrees": {
+      "value": 50.9,
+      "uncertainty": 44.4,
+      "cell": "50.9^{+44.4}_{-42.6}"
+    }
+  },
+  "note": "The pole's position angle is poorly constrained (+44.4, -42.6 degrees) and the paper gives it with a 180 degree ambiguity (section 4.1), so which pole faces us is not measured. The paper fits two gravity-darkening laws and favors neither (sections 5.4 and 6); this is the fit under the law of Espinosa Lara & Rieutord (2011), the only one the same authors keep in their next paper with the same model (Jones et al. 2016, ApJ 822, L3, section 3.1: 'this law is supported by previous interferometric observations'). Under von Zeipel's law (beta 0.25) the same data give omega 0.964, inclination 52.0 degrees, a 10030 K pole and a 6909 K equator. The table also gives an equatorial velocity of 318.9 km/s."
+}

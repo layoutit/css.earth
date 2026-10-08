@@ -5,12 +5,12 @@
  "physical": {
   "name": "Kaus Australis",
   "horizonsCode": null,
-  "meanRadiusKm": 4730760,
+  "meanRadiusKm": 5391675,
   "gravitationalParameterKm3PerS2": 0,
   "parent": null,
   "effectiveTemperatureK": 9460
  },
- "physicalNotes": "Radius 6.8 +/- 0.29 solar radii from Computed here, not printed by a paper: 6.8 +/- 0.29 solar radii, from the limb-darkened angular diameter 1.44 +/- 0.06 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 22.76 +/- 0.24 mas (van Leeuwen 2007, XHIP) (https://doi.org/10.1093/mnras/167.1.121): 4,730,760 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 9460 +/- 220 K from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 169022: effective temperature 9460 +/- 220 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "physicalNotes": "Radius 7.75 solar radii from Bailey et al. (2024), ApJ 972, 103, Table 5, the model the paper calls Best: equatorial radius 8.80 (2-sigma range 8.47 to 8.89) and polar radius 6.01 (5.90 to 6.08) solar radii, from a rotating Roche model fitted to the star's polarization, its spectral-energy distribution, its projected rotation speed and the Hipparcos parallax; the record holds the volume-equivalent sphere of the two, 7.75 solar radii, and the scene draws the flattening (https://doi.org/10.3847/1538-4357/ad630b): 5,391,675 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 9460 +/- 220 K from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 169022: effective temperature 9460 +/- 220 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093). The scene draws the measured flattening (Bailey et al. (2024), ApJ 972, 103), with the equatorial radius, 8.8 solar radii, on the outline. presentationUp: the display axis, the measured rotation pole, is up.",
  "star": {
   "rightAscensionDegrees": 276.04310945,
   "declinationDegrees": -34.38431461,

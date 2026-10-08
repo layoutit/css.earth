@@ -1,16 +1,16 @@
 {
   "schema": "cssearth-uniform-disc-star@1",
   "id": "mascara-1",
-  "angularDiameterMas": 0.11,
-  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,448,447 km at 182.19 pc = 0.11 mas. No interferometric diameter of this star is used.",
+  "angularDiameterMas": 0.1,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,426,934 km at 182.19 pc = 0.10 mas. The record's radius is the volume-equivalent sphere of the fit's two radii; no interferometric diameter of this star is used.",
   "distanceParsecs": 182.1864712090933,
   "distanceSource": "Gaia DR3 parallax 5.4889 +/- 0.0237 mas (same row, RUWE 0.93): 182.19 pc, no zero-point correction",
-  "radiusKm": 1448447.4,
-  "radiusSource": "Radius 2.082 +/- 0.022 solar radii from Hooton et al. 2022, the stellar radius of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract): 1,448,447 km at 695,700 km per solar radius. Mass 1.9 +/- 0.063 solar masses from Hooton et al. 2022, the stellar mass of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract); GM is that mass times the JPL solar GM. Temperature 7490 +/- 150 K from Hooton et al. 2022, the stellar temperature of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "radiusKm": 1426933.8,
+  "radiusSource": "Radius: MASCARA-1 is a rapid rotator. Hooton et al. (2022), A&A 658, A75 fit the CHEOPS and Spitzer transits of MASCARA-1 b with a gravity-darkened oblate star: equatorial radius 2.082 solar radii and a polar radius 4.39% smaller (Table 5), so a polar radius of 1.9906. The record's radius is the volume-equivalent sphere of those two, (2.082^2 x 1.9906)^(1/3) = 2.0511 solar radii at 695700 km per solar radius (https://doi.org/10.1051/0004-6361/202141645); the scene draws the flattening, with the equatorial radius on the outline. Mass 1.9 +/- 0.063 solar masses from Hooton et al. 2022, the stellar mass of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract); GM is that mass times the JPL solar GM. Temperature 7490 +/- 150 K from Hooton et al. 2022, the stellar temperature of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract). presentationUp: the display axis, the spin axis measured against MASCARA-1 b's orbit, is up.",
   "effectiveTemperatureK": 7490,
   "effectiveTemperatureSource": "Hooton et al. 2022, the stellar temperature of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract)",
   "surfaceGravityLogg": 4.08,
-  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/mascara-1.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.080, rounded to two decimals",
+  "surfaceGravitySource": "log g from the mass 1.9 and the radius 2.082 solar radii of Hooton et al. 2022, the sphere the limb law was read for, log10(GM/R^2) in cgs: 4.080, rounded to two decimals",
   "spectralType": "A8",
   "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of MASCARA-1 (pscomppars): spectral type A8, from Talens et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017A&A...606A..73T/abstract)",
   "objectType": "Star",
@@ -26,10 +26,8 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of MASCARA-1 (pscomppars): rotation period 0.853 d, from Hooton et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract)",
   "projectedRotationSpeedKmS": 101.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of MASCARA-1 (pscomppars): projected rotation speed 101.7 km/s, from Hooton et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract)",
-  "spinInclinationDegrees": 55.4,
-  "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (2.082 solar radii): sin i = v sin i × P / (2πR) = 0.824. Not a measurement of the axis: the three numbers come from different papers.",
   "shape": {
     "kind": "uniform-disc-sphere",
-    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+    "qualification": "A flattened sphere, the polar radius 4.39% smaller than the equatorial (Hooton et al. (2022), A&A 658, A75), colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json) and darkened by latitude from the same fit. No image of the photosphere exists."
   }
 }

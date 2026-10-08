@@ -2,7 +2,7 @@
   "id": "kaus-australis",
   "name": "Kaus Australis",
   "system": "Kaus Australis system",
-  "description": "A dwarf of type A0 V 43.9 parsecs away, 6.8 times the Sun's width: its disc was measured with the Narrabri intensity interferometer.",
+  "description": "A star 44 parsecs away spinning at 99.5% or more of its break-up rate: its equator is 1.46 times wider than its poles.",
   "aliases": [
     "HD 169022"
   ],
@@ -10,14 +10,13 @@
   "order": 5813,
   "target": "HD 169022",
   "paper": {
-    "url": "https://doi.org/10.1086/154093",
-    "credit": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417"
+    "url": "https://doi.org/10.3847/1538-4357/ad630b",
+    "credit": "Bailey et al. (2024), ApJ 972, 103"
   },
   "radius": {
-    "value": 6.8,
-    "source": "Computed here, not printed by a paper: 6.8 +/- 0.29 solar radii, from the limb-darkened angular diameter 1.44 +/- 0.06 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 22.76 +/- 0.24 mas (van Leeuwen 2007, XHIP)",
-    "url": "https://doi.org/10.1093/mnras/167.1.121",
-    "uncertainty": 0.29
+    "value": 7.75,
+    "source": "Bailey et al. (2024), ApJ 972, 103, Table 5, the model the paper calls Best: equatorial radius 8.80 (2-sigma range 8.47 to 8.89) and polar radius 6.01 (5.90 to 6.08) solar radii, from a rotating Roche model fitted to the star's polarization, its spectral-energy distribution, its projected rotation speed and the Hipparcos parallax; the record holds the volume-equivalent sphere of the two, 7.75 solar radii, and the scene draws the flattening",
+    "url": "https://doi.org/10.3847/1538-4357/ad630b"
   },
   "mass": "unmeasured",
   "temperature": {
@@ -51,12 +50,83 @@
       "dec": "pmDE"
     }
   },
+  "gravityDarkening": {
+    "record": {
+      "source": "Bailey et al. (2024), Epsilon Sagittarii: An Extreme Rapid Rotator with a Decretion Disk, ApJ 972, 103 (https://doi.org/10.3847/1538-4357/ad630b; https://arxiv.org/abs/2407.11352), Table 5 (Best-fitting Stellar Parameters), column Best, and Table 4 for the position angle, read from the authors' LaTeX source",
+      "caption": "Best-fitting Stellar Parameters. The parameters listed are those of the grid model giving the lowest chi-squared among all models (Best), and the best model at inclination of 90 degrees. Range is the full range of stellar parameters corresponding to the 2-sigma region of the fit. Each grid model fits the spectral-energy distribution and the projected rotation speed at the Hipparcos parallax of 22.76 mas; the polarization chooses among them.",
+      "model": {
+        "omega": {
+          "value": 0.999,
+          "uncertainty": 0.004,
+          "cell": "0.999 (Best); range (2 sigma) 0.995 -- 1.0. The value is the centre of the last bin of the grid, where no error can be determined (Table 4, notes)"
+        },
+        "law": {
+          "value": "espinosa-lara-rieutord-2011",
+          "cell": "Section 3.1: the rotating star is a Roche model whose gravity darkening follows Espinosa Lara & Rieutord (2011)"
+        },
+        "poleTemperatureK": {
+          "value": 11721,
+          "uncertainty": 173,
+          "cell": "T_p [K] 11721 (Best); range (2 sigma) 11548 -- 11813"
+        },
+        "equatorTemperatureK": {
+          "value": 7433,
+          "uncertainty": 109,
+          "cell": "T_e [K] 7433 (Best); range (2 sigma) 7324 -- 7492"
+        },
+        "polarRadiusSolar": {
+          "value": 6.01,
+          "uncertainty": 0.11,
+          "cell": "R_p [Rsun] 6.01 (Best); range (2 sigma) 5.90 -- 6.08"
+        },
+        "equatorialRadiusSolar": {
+          "value": 8.8,
+          "uncertainty": 0.33,
+          "cell": "R_e [Rsun] 8.80 (Best); range (2 sigma) 8.47 -- 8.89"
+        }
+      },
+      "view": {
+        "inclinationDegrees": {
+          "value": 80,
+          "uncertainty": 10,
+          "cell": "Inclination, i [deg] 80 (Best); range (2 sigma) 76 -- 90"
+        },
+        "polePositionAngleDegrees": {
+          "value": 39.9,
+          "cell": "theta_rot (deg) 39.9 (Table 4, the variant with a disk and up to 100 ppm of interstellar polarization, which holds the Best model; no error printed; the other variants give 39.9, 39.9 and 40.1)"
+        }
+      },
+      "reportedNotModelled": {
+        "edgeOnModel": {
+          "cell": "Table 5, column i=90: omega 0.997, T_p 11791 K, T_e 7884 K, R_p 5.98, R_e 8.59 solar radii, P_rot 1.63 days",
+          "note": "The paper lists this model beside Best and says the star's strong shell absorption 'might favour a higher-inclination model' like it (section 3.5). The record draws Best, the lowest chi-squared."
+        },
+        "disk": {
+          "cell": "p_disk 367 ppm (Table 4): a wavelength-independent polarization from a low-density edge-on gas disk (abstract)",
+          "note": "The decretion disk is not drawn."
+        },
+        "rotationPeriodDays": {
+          "value": 1.61,
+          "cell": "P_rot [days] 1.61 (Best); range (2 sigma) 1.57 -- 1.64"
+        }
+      },
+      "note": "A fit to polarization, not to an interferometric image: the paper calls the star 'an excellent candidate for observation by interferometry' (abstract). Polarization gives the axis's position angle, not which end of it leans toward us, and the star is seen nearly equator-on. The uncertainties are the larger side of the paper's 2-sigma ranges. The temperatures follow the law of Espinosa Lara & Rieutord (2011), which has no exponent; from the printed rotation rate and pole it gives a 7434 K equator against the printed 7433 K, and 7884 K against the printed 7884 K for the edge-on model (packages/bake/src/objects/stellar/gravity-darkening.test.mts). The same table gives a mean effective temperature of 9950 K, a mass of 3.80 solar masses and a rotation period of 1.61 days (38.6 hours)."
+    },
+    "credit": "Bailey et al. (2024), ApJ 972, 103",
+    "url": "https://doi.org/10.3847/1538-4357/ad630b",
+    "rotationPeriodHours": 38.6,
+    "measuredBy": "polarimetry"
+  },
   "planets": [],
   "companions": [],
   "text": {
-    "card": "A dwarf of type A0 V, 44 parsecs away: 6.8 times the Sun's width.",
-    "introduction": "Its disc spans 1.44 milliarcseconds, which at its distance is 6.8 solar radii, and its surface is at 9,460 K.",
-    "locator": "Tables 1 and 6, HD 169022: MK type, limb-darkened diameter, effective temperature"
+    "card": "A star spinning at 99.5% or more of its break-up rate, the highest yet measured in our galaxy.",
+    "introduction": "Its polarized light fits a star of equatorial radius 8.8 solar radii and polar radius 6.0, with poles near 11,700 K and an equator near 7,400 K.",
+    "locator": "Abstract (rotation rate); Table 5, column Best: R_e, R_p, T_p, T_e"
   },
-  "notes": []
+  "notes": [
+    "The edge-on model Bailey et al. (2024) list beside their best one (0.997 of the break-up rate, inclination 90 degrees, a 7,884 K equator), which they say the star's shell absorption might favor",
+    "The thin gas disk around the equator that the paper infers from the polarization and the spectrum",
+    "Which end of the axis leans toward us: polarization gives the axis's position angle, 39.9 degrees, not its sense, and no interferometric image of the star exists"
+  ]
 }

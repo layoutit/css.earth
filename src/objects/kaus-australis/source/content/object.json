@@ -8,14 +8,14 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "6.8 solar radii",
+        "value": "8.8 solar radii at the equator",
         "source": {
-          "catalogueId": "doi-10-1093-mnras-167-1-121",
-          "url": "https://doi.org/10.1093/mnras/167.1.121",
-          "label": "Brown et al. (1974), Monthly Notices of the Royal Astronomical Society 167 121-136",
-          "checked": "2026-10-07",
-          "path": "source/measurements.json",
-          "locator": "radiusKm; radiusSource"
+          "catalogueId": "doi-10-3847-1538-4357-ad630b",
+          "url": "https://doi.org/10.3847/1538-4357/ad630b",
+          "label": "Bailey et al. (2024), ApJ 972, 103",
+          "checked": "2026-10-08",
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "model.equatorialRadiusSolar"
         }
       },
       {
@@ -26,9 +26,22 @@
           "catalogueId": "doi-10-1134-s1063773712050015",
           "url": "https://doi.org/10.1134/S1063773712050015",
           "label": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 90185: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 22.76 +/- 0.24 mas, inverted",
-          "checked": "2026-10-07",
+          "checked": "2026-10-08",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "39 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ad630b",
+          "url": "https://doi.org/10.3847/1538-4357/ad630b",
+          "label": "Bailey et al. (2024), ApJ 972, 103",
+          "checked": "2026-10-08",
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "note"
         }
       }
     ],
@@ -64,18 +77,18 @@
     {
       "label": "Research",
       "role": "facts",
-      "description": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417",
-      "href": "https://doi.org/10.1086/154093"
+      "description": "Bailey et al. (2024), ApJ 972, 103",
+      "href": "https://doi.org/10.3847/1538-4357/ad630b"
     }
   ],
   "provenance": {
     "editorial": {
-      "url": "https://doi.org/10.1086/154093",
-      "credit": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417"
+      "url": "https://doi.org/10.3847/1538-4357/ad630b",
+      "credit": "Bailey et al. (2024), ApJ 972, 103"
     },
     "physical": {
       "path": "../../../../../packages/astronomy/data/bodies/kaus-australis.json",
-      "credit": "Computed here, not printed by a paper: 6.8 +/- 0.29 solar radii, radius; Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry position; cited distance; no measured rotation axis (display convention)"
+      "credit": "Bailey et al. radius; Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry position; cited distance; measured rotation pole and flattening (Bailey et al. (2024), ApJ 972, 103)"
     }
   }
 }

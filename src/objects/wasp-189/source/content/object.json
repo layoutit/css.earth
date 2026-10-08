@@ -8,14 +8,14 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "2.4 solar radii",
+        "value": "2.363 solar radii at the equator",
         "source": {
-          "catalogueId": "doi-10-1051-0004-6361-202038677",
-          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...643A..94L",
-          "label": "Lendl et al. (2020), Astronomy & Astrophysics 643 A94",
-          "checked": "2026-09-29",
-          "path": "source/measurements.json",
-          "locator": "radiusKm; radiusSource"
+          "catalogueId": "doi-10-1051-0004-6361-202142400",
+          "url": "https://doi.org/10.1051/0004-6361/202142400",
+          "label": "Deline et al. (2022), A&A 659, A74, Table 3",
+          "checked": "2026-10-08",
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "model.equatorialRadiusSolar"
         }
       },
       {
@@ -29,6 +29,32 @@
           "checked": "2026-09-29",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "flattening",
+        "label": "Flattening",
+        "value": "Polar radius 2.88% smaller than the equatorial",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202142400",
+          "url": "https://doi.org/10.1051/0004-6361/202142400",
+          "label": "Deline et al. (2022), A&A 659, A74, Table 3",
+          "checked": "2026-10-08",
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "model.equatorialToPolarRadius"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "29 hours",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202142400",
+          "url": "https://doi.org/10.1051/0004-6361/202142400",
+          "label": "Deline et al. (2022), A&A 659, A74, Table 3",
+          "checked": "2026-10-08",
+          "path": "source/preparation/rotation.json",
+          "locator": "equatorialRotationPeriod"
         }
       }
     ],
@@ -75,7 +101,7 @@
     },
     "physical": {
       "path": "../../../../../packages/astronomy/data/bodies/wasp-189.json",
-      "credit": "Lendl et al. 2020, the stellar radius of the default parameter set of WASP-189 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+      "credit": "Flattened radius and spin axis from Deline et al. (2022), A&A 659, A74; mass and temperature from Lendl et al. 2020; Gaia DR3 astrometry"
     }
   }
 }

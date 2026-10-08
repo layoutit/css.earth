@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1088-0004-637x-813-1-58",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Jones et al. (2015): THE AGES OF A-STARS. I. INTERFEROMETRIC OBSERVATIONS AND AGE ESTIMATES FOR STARS IN THE URSA MAJOR MOVING GROUP",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/813/1/58"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1088/0004-637X/813/1/58",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1088/0004-637X/813/1/58",
+      "checkedOn": "2026-10-08",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Jones et al. (2015), The Astrophysical Journal 813 58",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1088/0004-637X/813/1/58"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 813 58",
+  "creators": [
+    "Jeremy Jones",
+    "R. J. White",
+    "T. Boyajian",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}
