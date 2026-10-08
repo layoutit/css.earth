@@ -53,8 +53,8 @@ export function phaseTable(name: string, sourceId: string, shares: readonly numb
 const toLinear = (value: number) => { const unit = value / 255; return unit <= 0.04045 ? unit / 12.92 : ((unit + 0.055) / 1.055) ** 2.4; };
 const fromLinear = (unit: number) => 255 * (unit <= 0.0031308 ? 12.92 * unit : 1.055 * unit ** (1 / 2.4) - 0.055);
 /** How many colors the scale from no light to the light at maximum is written with. Between two of them a surface is
- * drawn by a straight line in display values: at 21 that line stays within a third of a display level of the true curve
- * for any share over a fifth, and no Cepheid here falls under it. The bake draws a nearest-sampled scale in 256 steps
+ * drawn by a straight line in display values: at 21 that line stays within six tenths of a display level of the true
+ * curve for any share over a tenth (a third of a level over a fifth). The bake draws a nearest-sampled scale in 256 steps
  * (scientific-raster.ts), so a step is drawn within a fifth of a percent of its share; with the rounding of each color
  * that is under two display levels in all (the pages test holds every baked step to it). */
 const STOPS = 21;

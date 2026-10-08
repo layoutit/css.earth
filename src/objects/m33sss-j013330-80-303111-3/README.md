@@ -25,6 +25,8 @@ Generated 2026-10-01 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists.
 - **Not shown.** Its radial velocity is its galaxy's; its own motion within M33 is not measured.
 
+- **Model beyond the measurements.** Gaia's model of this star swings 1.29 ± 0.22 mag in G. The 35 epochs Gaia released and did not reject span 1.12 mag, and none falls in the stretch of 0.23 of a cycle that holds the model's maximum, which is 0.25 mag brighter than the brightest of them. The Pulsation steps draw the model as published ([method note](../../../docs/pulsating-stars-light-through-a-cycle.md#where-the-model-leaves-gaias-measurements)).
+
 - **Pulsation.** The steps show the light alone. The star's color and its size change through the cycle and are not drawn: no published calibration found turns Gaia's two colors into a Cepheid's temperature, and nothing here measures this star's size through the cycle. 10 steps a tenth of a period apart are a display choice; the model between them is continuous.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

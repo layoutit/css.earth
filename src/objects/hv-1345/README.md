@@ -30,6 +30,8 @@ Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** Its distance is the Baade-Wesselink one its radius was measured at, so the Magellanic Cepheids spread a few kiloparsecs in depth.
 - **Brightness.** The model is Gaia's 2014-2017 fit carried 328 cycles to the scene date; with the period's error the phase shown is known to 0.01 of a cycle, and period changes after 2017 are not included. The G band stands for all colors: the star's temperature and color change through the cycle, and the page does not show that.
 
+- **Model beyond the measurements.** Gaia's model of this star swings 1.35 ± 0.93 mag in G. The 48 epochs Gaia released and did not reject span 0.68 mag, and none falls in the stretch of 0.26 of a cycle that holds the model's maximum, which is 0.67 mag brighter than the brightest of them. The Pulsation steps and the Light curves veil draw the model as published ([method note](../../../docs/pulsating-stars-light-through-a-cycle.md#where-the-model-leaves-gaias-measurements)).
+
 - **Pulsation.** The steps show the light alone. The star's color and its size change through the cycle and are not drawn: no published calibration found turns Gaia's two colors into a Cepheid's temperature, and nothing here measures this star's size through the cycle. 10 steps a tenth of a period apart are a display choice; the model between them is continuous.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

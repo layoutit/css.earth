@@ -28,6 +28,8 @@ Generated 2026-09-28 by [new-object-cli.mts](../../../packages/telescope-cli/src
 - **Not shown.** No dynamical mass is measured for this Cepheid; its mass is left unmeasured.
 - **Brightness.** The model is Gaia's 2014-2017 fit carried 328 cycles to the scene date; with the period's error the phase shown is known to 0.04 of a cycle, and period changes after 2017 are not included. The G band stands for all colors: the star's temperature and color change through the cycle, and the page does not show that.
 
+- **Model beyond the measurements.** Gaia's model of this star swings 1.00 ± 0.11 mag in G. The 35 epochs Gaia released and did not reject span 0.65 mag, and none falls in the stretch of 0.34 of a cycle that holds the model's minimum, which is 0.33 mag fainter than the faintest of them. The Pulsation steps and the Light curves veil draw the model as published ([method note](../../../docs/pulsating-stars-light-through-a-cycle.md#where-the-model-leaves-gaias-measurements)).
+
 - **Pulsation.** The steps show the light alone. The star's color and its size change through the cycle and are not drawn: no published calibration found turns Gaia's two colors into a Cepheid's temperature, and nothing here measures this star's size through the cycle. 10 steps a tenth of a period apart are a display choice; the model between them is continuous.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

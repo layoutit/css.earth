@@ -65,6 +65,31 @@ The 44 other pulsating star pages (28 long-period variables and candidates, 13 �
 γ Doradus star) have no steps. Gaia's Cepheid table does not hold them. Its long-period-variable table prints a
 frequency and an amplitude for 8 of them, with no phase and no harmonics: that is not a light curve to draw a cycle from.
 
+## Where the model leaves Gaia's measurements
+
+A Fourier series is held by the measurements only where there are measurements. Gaia DR3 also releases each star's G-band
+epochs (DataLink, `EPOCH_PHOTOMETRY`). Folded on the model's period, the epochs Gaia did not reject (18 to 122 a star)
+leave at least one of the ten tenths of the cycle empty for 78 of the 125 stars, and for some the model swings there
+beyond anything measured. The six largest, each with its extreme inside the widest stretch of the cycle without a
+measurement:
+
+| Star | Model's swing and its printed error (G mag) | Span of the measurements | Model beyond them | Empty stretch of the cycle |
+| --- | --- | --- | --- | --- |
+| X Pup | 2.49 ± 0.26 | 0.92 (56 epochs) | 1.54 brighter | 0.24 |
+| HV 1345 | 1.35 ± 0.93 | 0.68 (48) | 0.67 brighter | 0.26 |
+| VHK 25 | 1.44 ± 0.27 | 0.81 (43) | 0.57 fainter | 0.27 |
+| VHK 12 | 1.47 ± 0.41 | 0.90 (44) | 0.47 brighter | 0.28 |
+| V916 Aql | 1.00 ± 0.11 | 0.65 (35) | 0.33 fainter | 0.34 |
+| M33SSS J013330.80+303111.3 | 1.29 ± 0.22 | 1.12 (35) | 0.25 brighter | 0.23 |
+
+Over all 125: the model passes the brightest or the faintest measurement by more than 0.2 mag for these 6, by more than
+0.1 mag for 20, by more than 0.05 mag for 35, and by nothing for 31. X Pup's steps read 100, 32, 20, 18, 16, 14, 12,
+11, 10 and 25% of maximum, where Gaia's own measurements span a factor of 2.3.
+
+The steps draw the model as published for every star, these six included: no star is left out on this comparison.
+Ripepi et al. print a bootstrap error for each amplitude and no rule that says when a model is to be set aside, and a
+comparison made here is not such a rule. The Light curves veil plays the same model on X Pup, HV 1345 and V916 Aql.
+
 ## What here is not printed in a paper
 
 1. **Ten steps, a tenth of a period apart, the first at maximum light.** A display choice (`PHASES`). The model is
@@ -98,6 +123,7 @@ frequency and an amplitude for 8 of them, with no phase and no harmonics: that i
 ## Limits and leads
 
 - The model is Gaia's fit to 2014 to 2017. A step is a phase of the cycle, not a date.
+- Between two measurements a step is the model alone ([where it leaves them](#where-the-model-leaves-gaias-measurements)).
 - Gaia measures a star in a crowded field together with whatever shares its window. In M31 and M33 these Cepheids are
   at G magnitudes 18.4 to 20.7; the model is of what Gaia measured there, and nothing here corrects it.
 - A page of M31 from Li et al. (2021) takes its place from columns printed to a thousandth of a degree, 3.6
