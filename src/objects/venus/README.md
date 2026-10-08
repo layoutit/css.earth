@@ -29,7 +29,7 @@ The Venera surface photographs from the [NASA PDS Geosciences Node](https://pds-
 
 ## Processing
 
-**Clouds.** Björn Jónsson projected 21 Galileo images of the February 1990 flyby onto a cylindrical map, cleaned the mosaic and colorized it. The map is 1,800 × 900 pixels and shows features seen in ultraviolet light. It is the default because one Akatsuki exposure leaves most of the globe empty. It is projected without a color transform onto 448 prepared leaves and two polar leaves. Until 7 October 2026 this file was credited to the OpenSpace project, which distributes the same bytes, and was brightened with a per-channel curve (1.4, 2.2, 0.9) that moved its mean color from (221, 201, 159) to (237, 235, 183): tan to pale yellow.
+**Clouds.** Björn Jónsson projected 21 Galileo images of the February 1990 flyby onto a cylindrical map, cleaned the mosaic and colorized it. The map is 1,800 × 900 pixels and shows features seen in ultraviolet light. It is the default because one Akatsuki exposure leaves most of the globe empty. It is projected without a color transform onto 448 prepared leaves and two polar leaves. Until 7 October 2026 this file was credited to the OpenSpace project, which distributes the same bytes, and was brightened with a per-channel curve (1.4, 2.2, 0.9) that moved the prepared atlas's mean color from (221, 201, 159) to (237, 235, 182): tan to pale yellow.
 
 **Lighting.** The disc uses the Minnaert law Pérez-Hoyos et al. (2018) fitted to the equatorial cloud tops: k 1.35 at 657 nm, 1.36 at 547 nm and 1.32 at 467 nm, read from their published figure because the data file no longer resolves. Relative to the flood-lit disc centre, brightness falls to a third where the clouds are seen at 60° ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)).
 
@@ -62,6 +62,11 @@ The roughness label's 0.005 multiplier conflicts with the [PDS GSDR specificatio
 
 ## Evidence
 
+![Venus on css.earth before (left) and with the cloud map as published (right), 2026-10-07](evidence/2026-10-07/clouds-before-after.webp)
+
+Headless Chrome captures of the default view, each after the page reported ready.
+
+- Cloud map identity: the file OpenSpace distributes as `venus_clouds.jpg` and Björn Jónsson's `venus.jpg` are the same 66,303 bytes (compared on 2026-10-07). The prepared atlas's mean color is (221, 201, 159), the map's own (221, 201, 159); with the removed curve it was (237, 235, 182).
 - The Sun direction fitted from the ultraviolet file's incidence grid puts the sub-solar point at 206.1913° E, 2.4897° N; JPL Horizons gives 206.179102° E, 2.490460° N.
 - Radar: the published map has no empty cell. Its most common color (183, 78, 39) covers 0.38% of the globe and 31% of the band south of 80° S, a flat tone where the mosaic holds no radar image.
 - Gravity: a sum of the model's coefficients reproduces the free-air grid to 0.004 mGal with this cell placement (ledger entry `magellan-gravity-maps`).
