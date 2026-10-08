@@ -44,9 +44,9 @@ async function fixture(attached = false) {
   await banks.focusBank('fixture')!.load();
   const targets = [root.firstElementChild!, frontRoot.firstElementChild!] as HTMLElement[];
   if (attached) banks.setEnabled('fixture', true);
-  const publish = (bodyContextOpacity = 1, detailedObjectId?: string) => banks.publish({ referenceFrame: 'fixture', epochJdTt: 1,
-    pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
-    { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 1, detailedObjectId, bodyContextOpacity);
+  const publish = (bodyContextOpacity = 1, detailedObjectId?: string, flight?: { toM: readonly number[]; closeUp: number }, distance = 10) => banks.publish({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 1, detailedObjectId, bodyContextOpacity, undefined, flight);
   return { banks, targets, publish, lifetime };
 }
 
@@ -119,6 +119,16 @@ test('close-ups suppress distant banks while attached shells and the selected ne
   for (const node of distant.targets) assert.equal(node.style.opacity, '0.5');
   distant.publish(0, 'fixture');
   for (const node of distant.targets) assert.equal(node.style.opacity, '0.999');
+  // On a flight to a body inside the selected bank, the bank gives way as it comes to fill the view. A flight to a body
+  // outside it leaves it whole until that body's close-up, where its page draws no distant cloud.
+  distant.publish(0, 'fixture', { toM: [0, 0, 0], closeUp: 1 });
+  for (const node of distant.targets) assert.equal(node.style.opacity, '0.999');
+  distant.publish(0, 'fixture', { toM: [0, 0, 0], closeUp: 1 }, 1.2);
+  for (const node of distant.targets) assert.equal(node.style.display === 'none' || node.style.opacity === '0', true);
+  distant.publish(0, 'fixture', { toM: [0, 0, 50], closeUp: 1 }, 1.2);
+  for (const node of distant.targets) assert.equal(node.style.opacity, '0.999');
+  distant.publish(0, 'fixture', { toM: [0, 0, 50], closeUp: .5 }, 1.2);
+  for (const node of distant.targets) assert.equal(node.style.opacity, '0.5');
   distant.lifetime.destroy();
   const attached = await fixture(true);
   attached.publish(0);
