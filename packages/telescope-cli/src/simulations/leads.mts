@@ -12,13 +12,21 @@
  *
  * `searchLeads` asks for one object. `surveyLeads` asks for every object of a class, ten a request, and ranks them with
  * what each page opens on today, so the gray ones with a measured map come first. Nothing is downloaded and no lead
- * becomes a dataset here: a lead is read, and its numbers transcribed, by a person. */
+ * becomes a dataset here: a lead is read, and its numbers transcribed, by a person.
+ *
+ * Three more things are set beside the papers, each from one bulk answer. A lead the page's investigation ledger already
+ * settles is marked and leaves the worklist (read.mts). JWST's time series of a planet's star are set on the planet's orbit:
+ * a whole orbit watched is a phase curve in the archive, with the day it is public (observed.mts). And a survey of the
+ * exoplanets names the planets with no page that a paper's title says have a phase curve or a map (unpaged.mts). */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { displayName } from '../papers.mts';
 import { loadTargetCatalogue } from '../observation-query/query.mts';
 import { nameForms, namesObject } from './simulations.mts';
+import { HOSTED_PLANET_IDS } from '@cssearth/astronomy';
+import { isPublic, planetsWatched, visitLine, type TimeSeriesRow, type Visit } from './observed.mts';
+import { markOf, readMarks, type ReadMark } from './read.mts';
 
 export const LEADS_SCHEMA = 'cssearth-telescope-leads@1';
 export const DATACITE_DOIS = 'https://api.datacite.org/dois';
@@ -50,8 +58,20 @@ export interface Lead {
   readonly license: string | null;
   /** The best class the title speaks of, else the best the description speaks of; `inTitle` says which. */
   readonly class: LeadClass; readonly inTitle: boolean;
+  /** The entry of the page's investigation ledger that settles this lead, when one names it. */
+  readonly read?: ReadMark;
 }
-export interface LeadSearch { readonly schema: typeof LEADS_SCHEMA; readonly target: { readonly id: string; readonly name: string }; readonly names: readonly string[]; readonly leads: readonly Lead[] }
+export interface LeadSearch { readonly schema: typeof LEADS_SCHEMA; readonly target: { readonly id: string; readonly name: string }; readonly names: readonly string[]; readonly leads: readonly Lead[];
+  /** JWST's time series of the planet's star, set on its orbit; absent when the archive was not asked or the object has no recorded transit. */ readonly watched?: readonly Visit[] }
+export interface TitledPaper { readonly year: number | null; readonly title: string; readonly url: string }
+/** A planet of the NASA Exoplanet Archive with no page, and the papers whose titles say it has a phase curve or a map. */
+export interface UnpagedPlanet { readonly name: string; readonly host: string; /** Whether the catalogue has the planet's star. */ readonly hostPaged: boolean; readonly papers: readonly TitledPaper[] }
+/** The archive's time series, asked once: `jwstTimeSeries` of observed.mts for the command, a fixture for a test. */
+export type TimeSeries = () => Promise<readonly TimeSeriesRow[]>;
+const today = () => new Date().toISOString().slice(0, 10);
+/** The visits a page could be drawn from: a whole orbit, or an eclipse. A transit gives a spectrum, which no page draws. */
+const drawable = (visit: Visit) => visit.part !== 'transit' && visit.part !== 'neither';
+const marked = (leads: readonly Lead[], marks: ReadonlyMap<string, ReadMark>): Lead[] => leads.map(lead => { const read = markOf(lead.doi, marks); return read ? { ...lead, read } : lead; });
 
 const phrase = (name: string) => `"${name.replace(/["\\]/gu, ' ')}"`;
 const speaks = (text: string): LeadClass | undefined => LEAD_CLASSES.find(candidate => SPEAKS[candidate].test(text));
@@ -115,7 +135,7 @@ async function pages(names: readonly string[], kind: Lead['kind'], fetcher: type
   return records;
 }
 
-export interface LeadSearchOptions { readonly target: string; readonly directory?: string; readonly progress?: (line: string) => void; readonly fetcher?: typeof fetch; readonly wait?: Wait }
+export interface LeadSearchOptions { readonly target: string; readonly directory?: string; readonly progress?: (line: string) => void; readonly fetcher?: typeof fetch; readonly wait?: Wait; readonly timeSeries?: TimeSeries }
 
 export async function searchLeads(root: string, options: LeadSearchOptions): Promise<LeadSearch> {
   const fetcher = options.fetcher ?? fetch, progress = options.progress ?? (() => undefined), asked = { count: 0 };
@@ -123,13 +143,21 @@ export async function searchLeads(root: string, options: LeadSearchOptions): Pro
   const names = [target.name, ...catalogue.find(entry => entry.id === target.id)?.aliases ?? []];
   progress(`Searching DataCite for data releases and arXiv papers that name ${target.name}…`);
   const records = [...await pages(names, 'data', fetcher, options.wait ?? pause, asked), ...await pages(names, 'paper', fetcher, options.wait ?? pause, asked)];
-  const result: LeadSearch = { schema: LEADS_SCHEMA, target, names: nameForms(names), leads: rankLeads(records.flatMap(record => leadFor(record, names) ?? [])) };
+  const planet = HOSTED_PLANET_IDS.filter(id => id === target.id), watched = options.timeSeries && planet.length ? planetsWatched(await options.timeSeries(), planet).get(target.id) ?? [] : undefined;
+  const result: LeadSearch = { schema: LEADS_SCHEMA, target, names: nameForms(names), leads: marked(rankLeads(records.flatMap(record => leadFor(record, names) ?? [])), await readMarks(root, target.id)), ...(watched ? { watched } : {}) };
   if (options.directory) { await mkdir(options.directory, { recursive: true }); await writeFile(resolve(options.directory, 'leads.json'), `${JSON.stringify(result, null, 2)}\n`); }
   return result;
 }
 
 const HEADINGS: Readonly<Record<LeadClass, string>> = { map: 'Measured phase curve or map', eclipse: 'Measured eclipse or dayside emission', simulation: 'Published simulation' };
-const line = (lead: Lead) => `   ${lead.year ?? 'year unknown'} · ${lead.publisher}${lead.kind === 'data' ? ` · license ${lead.license ?? 'not stated to DataCite'}` : ''} · ${lead.title}\n     ${lead.url}`;
+const line = (lead: Lead) => `   ${lead.year ?? 'year unknown'} · ${lead.publisher}${lead.kind === 'data' ? ` · license ${lead.license ?? 'not stated to DataCite'}` : ''} · ${lead.title}\n     ${lead.url}${lead.read ? `\n     already read: ${lead.read.status} in the page's ledger (${lead.read.entry})` : ''}`;
+/** The archive's visits of one planet's star: the ones a page could be drawn from, each on a line, and the rest counted. */
+function watchedLines(visits: readonly Visit[]): string[] {
+  const kept = visits.filter(drawable), rest = visits.length - kept.length, day = today();
+  return [`Watched by JWST (${visits.length} visit${visits.length === 1 ? '' : 's'} of its star in MAST)`, ...kept.map(visit => `   ${visitLine(visit, day)}`),
+    ...(rest ? [`   ${kept.length ? 'and ' : ''}${rest} visit${rest === 1 ? '' : 's'} of a transit or of neither transit nor eclipse`] : []),
+    '   An eclipse is set half an orbit after transit, as on a circular orbit. A visit is of the star: it may have been made for another of its planets.', ''];
+}
 
 export function formatLeads(result: LeadSearch, directory?: string): string {
   const lines = [`${result.target.name} · ${result.leads.length} lead${result.leads.length === 1 ? '' : 's'} in DataCite: data releases in every DOI repository, and arXiv papers`, ''];
@@ -140,6 +168,7 @@ export function formatLeads(result: LeadSearch, directory?: string): string {
   }
   if (!result.leads.length) lines.push('No record names this object and speaks of a phase curve, an eclipse or a model.', '');
   else lines.push('A lead is read before anything is shown: new-object --phase-curve takes a paper\'s fitted table, new-object --simulation a released field.', '');
+  if (result.watched?.length) lines.push(...watchedLines(result.watched));
   if (directory) lines.push(`Saved: ${resolve(directory, 'leads.json')}`, '');
   return lines.join('\n');
 }
@@ -161,15 +190,23 @@ export async function opensOn(root: string, id: string): Promise<string | undefi
 /** Kinds that draw no map: the neutral shape, or one color over the whole body. These are the pages a lead can improve. */
 const UNIFORM = new Set(['neutral-shape', 'equilibrium-thermal-color', 'dayside-thermal-color', 'disc-integrated-band-color']);
 
-export interface SurveyRow { readonly id: string; readonly name: string; readonly opensOn: string | undefined; readonly leads: readonly Lead[] }
-export interface LeadSurvey { readonly schema: typeof LEADS_SCHEMA; readonly archiveClass: string; readonly objects: number; readonly requests: number; readonly failures: readonly string[]; readonly rows: readonly SurveyRow[] }
-export interface LeadSurveyOptions { readonly archiveClass: string; readonly directory?: string; readonly progress?: (line: string) => void; readonly fetcher?: typeof fetch; readonly wait?: Wait }
+export interface SurveyRow { readonly id: string; readonly name: string; readonly opensOn: string | undefined; readonly leads: readonly Lead[];
+  /** JWST's visits of the planet's star that a page could be drawn from: a whole orbit, or an eclipse. */ readonly watched?: readonly Visit[] }
+export interface LeadSurvey { readonly schema: typeof LEADS_SCHEMA; readonly archiveClass: string; readonly objects: number; readonly requests: number; readonly failures: readonly string[]; readonly rows: readonly SurveyRow[];
+  readonly unpaged?: readonly UnpagedPlanet[] }
+export interface LeadSurveyOptions { readonly archiveClass: string; readonly directory?: string; readonly progress?: (line: string) => void; readonly fetcher?: typeof fetch; readonly wait?: Wait; readonly timeSeries?: TimeSeries;
+  /** `searchUnpaged` of unpaged.mts, given the names the catalogue pages. */ readonly unpaged?: (paged: readonly string[]) => Promise<{ readonly planets: readonly UnpagedPlanet[]; readonly requests: number }> }
+
+const isOpen = (row: SurveyRow) => row.opensOn === undefined || UNIFORM.has(row.opensOn);
+/** The leads of a row its page's ledger has not settled, the best first. */
+const unread = (row: SurveyRow) => row.leads.filter(lead => !lead.read);
 
 /** Every object of one class, ten a request. A record is matched against every object, not only the ten it was asked for:
- * one release often names several. Rows are the objects with a lead, the pages without a map first, then by their best lead. */
+ * one release often names several. Rows are the objects with a lead or a visit to draw from, the pages without a map first,
+ * then by their best unread lead. */
 export async function surveyLeads(root: string, options: LeadSurveyOptions): Promise<LeadSurvey> {
   const fetcher = options.fetcher ?? fetch, progress = options.progress ?? (() => undefined), wait = options.wait ?? pause, asked = { count: 0 }, failures: string[] = [];
-  const objects = (await loadTargetCatalogue(root)).filter(entry => entry.archiveClass === options.archiveClass), records = new Map<string, Omit<Lead, 'class' | 'inTitle'>>();
+  const catalogue = await loadTargetCatalogue(root), objects = catalogue.filter(entry => entry.archiveClass === options.archiveClass), records = new Map<string, Omit<Lead, 'class' | 'inTitle'>>();
   for (let start = 0; start < objects.length; start += PLANETS_AT_ONCE) {
     const group = objects.slice(start, start + PLANETS_AT_ONCE), names = group.flatMap(entry => [entry.name, ...entry.aliases]);
     for (const kind of ['data', 'paper'] as const) {
@@ -178,29 +215,42 @@ export async function surveyLeads(root: string, options: LeadSurveyOptions): Pro
     }
     if (start % (10 * PLANETS_AT_ONCE) === 0) progress(`${Math.min(start + PLANETS_AT_ONCE, objects.length)} of ${objects.length} objects asked, ${records.size} records`);
   }
+  let extra = 0, watched = new Map<string, Visit[]>(), unpaged: readonly UnpagedPlanet[] | undefined;
+  if (options.timeSeries) try { extra++; watched = planetsWatched(await options.timeSeries()); } catch (error) { failures.push(`JWST time series: ${(error as Error).message.split('\n')[0]}`); }
+  if (options.unpaged) try { const found = await options.unpaged(catalogue.flatMap(entry => [entry.name, ...entry.aliases])); extra += found.requests; unpaged = found.planets; } catch (error) { failures.push(`planets without a page: ${(error as Error).message.split('\n')[0]}`); }
   const rows: SurveyRow[] = [];
   for (const entry of objects) {
-    const names = [entry.name, ...entry.aliases], leads = rankLeads([...records.values()].flatMap(record => leadFor(record, names) ?? []));
-    if (leads.length) rows.push({ id: entry.id, name: entry.name, opensOn: await opensOn(root, entry.id), leads });
+    const names = [entry.name, ...entry.aliases], leads = rankLeads([...records.values()].flatMap(record => leadFor(record, names) ?? [])), visits = (watched.get(entry.id) ?? []).filter(drawable);
+    if (leads.length || visits.length) rows.push({ id: entry.id, name: entry.name, opensOn: await opensOn(root, entry.id), leads: marked(leads, await readMarks(root, entry.id)), ...(visits.length ? { watched: visits } : {}) });
   }
-  const open = (row: SurveyRow) => row.opensOn === undefined || UNIFORM.has(row.opensOn) ? 0 : 1;
-  rows.sort((a, b) => open(a) - open(b) || rank(a.leads[0]!) - rank(b.leads[0]!) || a.id.localeCompare(b.id));
-  const result: LeadSurvey = { schema: LEADS_SCHEMA, archiveClass: options.archiveClass, objects: objects.length, requests: asked.count, failures, rows };
+  const order = (row: SurveyRow) => { const [best] = unread(row); return best ? rank(best) : LEAD_CLASSES.length * 2; };
+  rows.sort((a, b) => Number(!isOpen(a)) - Number(!isOpen(b)) || order(a) - order(b) || a.id.localeCompare(b.id));
+  const result: LeadSurvey = { schema: LEADS_SCHEMA, archiveClass: options.archiveClass, objects: objects.length, requests: asked.count + extra, failures, rows, ...(unpaged ? { unpaged } : {}) };
   if (options.directory) { await mkdir(options.directory, { recursive: true }); await writeFile(resolve(options.directory, 'leads-survey.json'), `${JSON.stringify(result, null, 2)}\n`); }
   return result;
 }
 
 export function formatSurvey(result: LeadSurvey, directory?: string): string {
-  const open = result.rows.filter(row => row.opensOn === undefined || UNIFORM.has(row.opensOn)), titled = (row: SurveyRow, leadClass: LeadClass) => row.leads[0]!.inTitle && row.leads[0]!.class === leadClass;
-  const lines = [`${result.objects} ${result.archiveClass} objects asked in ${result.requests} requests: ${result.rows.length} have a lead, ${open.length} of them on a page that opens on no map`, ''];
+  const led = result.rows.filter(row => row.leads.length), open = led.filter(isOpen), best = (row: SurveyRow) => unread(row)[0], day = today();
+  const lines = [`${result.objects} ${result.archiveClass} objects asked in ${result.requests} requests: ${led.length} have a lead, ${open.length} of them on a page that opens on no map`, ''];
   for (const leadClass of LEAD_CLASSES) {
-    const found = open.filter(row => titled(row, leadClass));
+    const found = open.filter(row => best(row)?.inTitle && best(row)!.class === leadClass);
     if (!found.length) continue;
     lines.push(`${HEADINGS[leadClass]}, named in a title, page without a map (${found.length})`,
-      ...found.map(row => `   ${row.name} (${row.opensOn ?? 'no package'}): ${row.leads[0]!.year ?? 'year unknown'} ${row.leads[0]!.title.slice(0, 96)} ${row.leads[0]!.url}`), '');
+      ...found.map(row => `   ${row.name} (${row.opensOn ?? 'no package'}): ${best(row)!.year ?? 'year unknown'} ${best(row)!.title.slice(0, 96)} ${best(row)!.url}`), '');
   }
-  const rest = open.filter(row => !row.leads[0]!.inTitle);
+  const rest = open.filter(row => best(row) && !best(row)!.inTitle), settled = open.filter(row => !best(row));
   if (rest.length) lines.push(`Named in a description only (${rest.length}): ${rest.map(row => row.name).join(', ')}`, '');
+  if (settled.length) lines.push(`Every lead already read in the page's ledger (${settled.length}): ${settled.map(row => row.name).join(', ')}`, '');
+  const unmapped = result.rows.filter(row => isOpen(row) && row.watched), whole = unmapped.filter(row => row.watched!.some(visit => visit.part === 'whole-orbit'));
+  const programs = (visits: readonly Visit[]) => [...new Set(visits.map(visit => `${visit.instrument} ${visit.programme} ${isPublic(visit, day) ? 'public' : visit.publicOn ? `private until ${visit.publicOn}` : 'no public date'}`))].join(', ');
+  if (whole.length) lines.push(`A whole orbit watched by JWST, page without a map (${whole.length})`,
+    ...whole.map(row => `   ${row.name} (${row.opensOn ?? 'no package'}): ${programs(row.watched!.filter(visit => visit.part === 'whole-orbit'))} · ${best(row) ? `unread: ${best(row)!.year ?? 'year unknown'} ${best(row)!.title.slice(0, 72)}` : 'no unread paper'}`), '');
+  const eclipsed = unmapped.filter(row => !whole.includes(row) && (row.opensOn === undefined || row.opensOn === 'neutral-shape'));
+  if (eclipsed.length) lines.push(`An eclipse watched by JWST, page that opens on the gray shape (${eclipsed.length})`, ...eclipsed.map(row => `   ${row.name}: ${programs(row.watched!)}`), '');
+  if (whole.length || eclipsed.length) lines.push('A visit is of the star and is set on each of its planets\' orbits; an eclipse is set half an orbit after transit, as on a circular orbit.', '');
+  if (result.unpaged?.length) lines.push(`No page yet, a phase curve or map named in a paper's title (${result.unpaged.length})`,
+    ...result.unpaged.map(planet => `   ${planet.name} (${planet.hostPaged ? 'its star has a page' : `star ${planet.host}, no page`}): ${planet.papers[0]!.year ?? 'year unknown'} ${planet.papers[0]!.title.slice(0, 96)} ${planet.papers[0]!.url}${planet.papers.length > 1 ? ` and ${planet.papers.length - 1} more` : ''}`), '');
   for (const failure of result.failures) lines.push(`Not asked: ${failure}`);
   if (directory) lines.push(`Saved: ${resolve(directory, 'leads-survey.json')}`, '');
   return lines.join('\n');
