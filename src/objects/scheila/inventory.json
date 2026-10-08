@@ -3,27 +3,27 @@
   "assets": [
     {
       "location": "public",
-      "filename": "scheila-color-shadow-alpha@2x.webp",
-      "bytes": 74386,
-      "sha256": "2c19f8d5ce48145860060fb502865cd01a53dd8a87f41414e236eab69122c534"
+      "filename": "scheila-arrival.webp",
+      "bytes": 32332,
+      "sha256": "04cc80eebc36e7d8fcc7f7982070d47b08ac7ad5043f7afcee4674e4676ab0c5"
     },
     {
       "location": "public",
-      "filename": "scheila-color-shadow@2x.webp",
-      "bytes": 9096,
-      "sha256": "5ec553bcd94d97009452e694a046d9a997556e2b81dbdca25ec82f2fbe76f923"
+      "filename": "scheila-billboard.webp",
+      "bytes": 4284,
+      "sha256": "273c87825894b9c0261cd597d5d2d1b23247a9a48c0fb54fd726e52751003aea"
     },
     {
       "location": "public",
       "filename": "scheila-color-surface-alpha@2x.webp",
-      "bytes": 72346,
-      "sha256": "da2c310acd518af0742653b2491676ee59340db0c232d2f4c86411195de54524"
+      "bytes": 92,
+      "sha256": "3827f13b87fb56876b3955dd8ef0482a13dd94b7927a41c9ee619307a22b1bce"
     },
     {
       "location": "public",
       "filename": "scheila-color-surface@2x.webp",
-      "bytes": 7560,
-      "sha256": "54875c066c3deb6960cc7477d2aa5b23023b7717450091a82b1e2fff836a7886"
+      "bytes": 48,
+      "sha256": "69bcf6254127ce25105e31271fbed472d7db41fa10c5eddb2feb5927a03aa2d1"
     },
     {
       "location": "public",
@@ -36,18 +36,6 @@
       "filename": "scheila-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "scheila-elevation-shadow-alpha@2x.webp",
-      "bytes": 96686,
-      "sha256": "62713048ff7b9f0b815c0b93c0af4738bd5030478636cec22bc767fd447cab9b"
-    },
-    {
-      "location": "public",
-      "filename": "scheila-elevation-shadow@2x.webp",
-      "bytes": 31576,
-      "sha256": "934b590d7733039dfe17eb11df6683bff98e51714f94d3d97e9f95187f978d9a"
     },
     {
       "location": "public",
@@ -69,6 +57,12 @@
     },
     {
       "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 302,
+      "sha256": "c2058491585575b801d430532e457a304ddb74d41465779a87717359b4fc7125"
+    },
+    {
+      "location": "prepared",
       "filename": "assets.json",
       "bytes": 515,
       "sha256": "6e790fd7cd4c8a6b61e7179c784b6e735c1e57f1d77a72378003ae9a4a3de906"
@@ -81,21 +75,9 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 806,
-      "sha256": "9c8b73905073afbc0594e04751b38d772afaee7797fc257029b112ee1a489834"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1570,
-      "sha256": "c95531eddc2bf4231547c05d5967e0c1a8fb9479626f2c555aa416655622985b"
-    },
-    {
-      "location": "prepared",
-      "filename": "material.json",
-      "bytes": 3131,
-      "sha256": "87ff75103be5db5786413d673ec5469608aa8980c21b507655d37eec14cd258e"
+      "sha256": "2f51723f5df8a2a78327c9ba03787922827e61e61c12e2c3b89b831d73195524"
     },
     {
       "location": "prepared",
@@ -118,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 264413,
-      "sha256": "b97a009b23ad3e3c135638c97a4ffa1c49b43b82abad3f5ff92fd4198fb2f6b3"
+      "bytes": 351955,
+      "sha256": "553d189be8060bdc759fa99d2573282d966edf7aa74d866d223fdae891cc9ba1"
     },
     {
       "location": "prepared",
@@ -129,33 +111,15 @@
     },
     {
       "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1181,
-      "sha256": "ac4399eda6679e0b6589fc507e1f2f1960ded67606d0e440cb969085376d927a"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 664,
-      "sha256": "8ec6460281f31e0b85259521026b4f2ac8efaeb3e9f5f4c8faaaf36febd9e1ba"
-    },
-    {
-      "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3136,
-      "sha256": "6576b0df93f65db18520002a13a0e65dd01be153bc9f7db5bd18cc492179b326"
+      "bytes": 14941,
+      "sha256": "ea81286e0c6b407613e4f07373bc97cd5914ce4309f3a283715a0e71fb52ee70"
     },
     {
       "location": "prepared",
       "filename": "text.json",
       "bytes": 1720,
       "sha256": "b6055bed7fcdf56b16f578f9644faccb04164261d11ed650279d2c370c6c0186"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1230,
-      "sha256": "77b369c02faaf0b0918fe9cad16faf1d9275ab4a946f2cbbd0dac798a17deea8"
     }
   ]
 }
