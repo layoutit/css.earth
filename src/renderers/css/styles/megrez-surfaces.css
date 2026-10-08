@@ -1,5 +1,5 @@
 /* Megrez: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
-   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+   body-surfaces.css base rules. The rotation pole is measured; no spin is propagated. Both plates are transparent: no observation is cast. */
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="megrez"] > :is(.megrez-corona-layer, .megrez-limb-layer) {
   position: absolute;

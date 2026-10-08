@@ -431,7 +431,11 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   // A pulsating star plays its published light curve from the scene epoch: Gaia's model, checked against its own row.
   const lightCurve = presentation.lightCurve ? await (async (path: string) => {
     const where = `${descriptor.id}: ${path}`, model = parseGaiaCepheidRow(await readFile(resolve(sourceDirectory, path), 'utf8'), where);
-    return pulsationTrack(model, checkGaiaCepheidModel(model, where), Number((scene.worldFrame as { epochJdTt?: unknown } | null)?.epochJdTt), path, where);
+    const track = pulsationTrack(model, checkGaiaCepheidModel(model, where), Number((scene.worldFrame as { epochJdTt?: unknown } | null)?.epochJdTt), path, where);
+    // The datasets of the step group the profile names are stills of the same light curve: the veil is not drawn over them.
+    const group = presentation.lightCurve!.stills, stills = group === undefined ? [] : content.datasets.controls.filter(control => (control.step as { group?: unknown } | undefined)?.group === group).map(control => control.id);
+    if (group !== undefined && !stills.length) throw new TypeError(`${where}: the presentation names the step group ${group} as the light curve's stills, and no dataset is a step of it.`);
+    return stills.length ? { ...track, stills } : track;
   })(presentation.lightCurve.model) : undefined;
   const definition = await prepareCssPresentation({ namespace: presentation.namespace, mode: presentation.mode, ...(presentation.datasetFocus ? { datasetFocus: presentation.datasetFocus } : {}), ...(lightCurve ? { lightCurve } : {}), scene: scene as unknown as PresentationInputs['scene'], assets: raster as unknown as PresentationInputs['assets'], datasets: content.datasets as unknown as PresentationInputs['datasets'], sun: celestial.sun as unknown as PresentationInputs['sun'], solarSource: solarSource as unknown as PresentationInputs['solarSource'], controls: content.controls as unknown as PresentationInputs['controls'] }, presentationHostAdapters(await solarGeometry()));
   const attached = (publishedFeatures && carryPublishedFeatures(definition as unknown as Record<string, unknown>, publishedFeatures))

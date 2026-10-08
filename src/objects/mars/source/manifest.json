@@ -2745,6 +2745,110 @@
           }
         ]
       }
+    },
+    {
+      "id": "upwards-heat-flow-now",
+      "path": "heat-flow/UPWARDS2017_SHF_0.0Ga_2deg.tif",
+      "origin": "https://zenodo.org/records/10479138/files/UPWARDS2017_SHF_0.0Ga_2deg.tif?download=1",
+      "credit": "Parro, Jiménez-Díaz, Mansilla and Ruiz (2017), UPWARDS project, Universidad Complutense de Madrid",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseEvidence": [
+        "https://zenodo.org/records/10479138"
+      ],
+      "acquisition": "Unmodified deposited GeoTIFF: 180 × 90 cells of 2°, 32-bit float, 65,354 bytes, longitudes −180° to 180°, no missing cell. Surface heat flow in mW/m², 14 to 25 (mean 19).",
+      "redistribution": "CC BY 4.0: prepared derivatives keep the authors’ credit and cite the paper.",
+      "consumers": [
+        "heat-flow-now"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "parro-2017-mars-heat-flow",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/10479138",
+            "locator": "UPWARDS2017_SHF_0.0Ga_2deg.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "upwards-heat-flow-1-5-ga",
+      "path": "heat-flow/UPWARDS2017_SHF_1.5Ga_2deg.tif",
+      "origin": "https://zenodo.org/records/10479138/files/UPWARDS2017_SHF_1.5Ga_2deg.tif?download=1",
+      "credit": "Parro, Jiménez-Díaz, Mansilla and Ruiz (2017), UPWARDS project, Universidad Complutense de Madrid",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseEvidence": [
+        "https://zenodo.org/records/10479138"
+      ],
+      "acquisition": "Unmodified deposited GeoTIFF: 180 × 90 cells of 2°, 32-bit float, 65,354 bytes, longitudes −180° to 180°, no missing cell. Surface heat flow in mW/m², 14 to 31 (mean 22).",
+      "redistribution": "CC BY 4.0: prepared derivatives keep the authors’ credit and cite the paper.",
+      "consumers": [
+        "heat-flow-1-5-ga"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "parro-2017-mars-heat-flow",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/10479138",
+            "locator": "UPWARDS2017_SHF_1.5Ga_2deg.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "upwards-heat-flow-3-0-ga",
+      "path": "heat-flow/UPWARDS2017_SHF_3.0Ga_2deg.tif",
+      "origin": "https://zenodo.org/records/10479138/files/UPWARDS2017_SHF_3.0Ga_2deg.tif?download=1",
+      "credit": "Parro, Jiménez-Díaz, Mansilla and Ruiz (2017), UPWARDS project, Universidad Complutense de Madrid",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseEvidence": [
+        "https://zenodo.org/records/10479138"
+      ],
+      "acquisition": "Unmodified deposited GeoTIFF: 180 × 90 cells of 2°, 32-bit float, 65,354 bytes, longitudes −180° to 180°, no missing cell. Surface heat flow in mW/m², 25 to 54 (mean 38).",
+      "redistribution": "CC BY 4.0: prepared derivatives keep the authors’ credit and cite the paper.",
+      "consumers": [
+        "heat-flow-3-0-ga"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "parro-2017-mars-heat-flow",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/10479138",
+            "locator": "UPWARDS2017_SHF_3.0Ga_2deg.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "upwards-heat-flow-3-5-ga",
+      "path": "heat-flow/UPWARDS2017_SHF_3.5Ga_2deg.tif",
+      "origin": "https://zenodo.org/records/10479138/files/UPWARDS2017_SHF_3.5Ga_2deg.tif?download=1",
+      "credit": "Parro, Jiménez-Díaz, Mansilla and Ruiz (2017), UPWARDS project, Universidad Complutense de Madrid",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseEvidence": [
+        "https://zenodo.org/records/10479138"
+      ],
+      "acquisition": "Unmodified deposited GeoTIFF: 180 × 90 cells of 2°, 32-bit float, 65,354 bytes, longitudes −180° to 180°, no missing cell. Surface heat flow in mW/m², 31 to 68 (mean 48).",
+      "redistribution": "CC BY 4.0: prepared derivatives keep the authors’ credit and cite the paper.",
+      "consumers": [
+        "heat-flow-3-5-ga"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "parro-2017-mars-heat-flow",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/10479138",
+            "locator": "UPWARDS2017_SHF_3.5Ga_2deg.tif"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

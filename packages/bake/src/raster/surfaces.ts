@@ -8,7 +8,7 @@ import { applyUnderlay, strongerLimb, withAlpha, type ObservationInterpretation,
 import { composeLimbPreview } from './emission-preview.ts';
 import { encodeLossyWebp, writeLossyWebp } from './lossy-lane.ts';
 import { missingCoverageColor } from './missing-coverage.ts';
-import { rasterPagePlan, rasterPageOutput, type RasterPagePlan } from './pages.ts';
+import { rasterPagePlan, rasterPageOutput, type RasterPagePlan, type RasterPageRecipe } from './pages.ts';
 type NativePoleSampler = { readonly sample: (longitudeDegrees: number, latitudeDegrees: number, color: number[]) => boolean; };
 
 /** Sample the original image in the exact normalized 2:1 domain used by the established `fit: 'fill'` resize.
@@ -69,8 +69,10 @@ async function writeRasterPages(image: Sharp, pages: RasterPagePlan, bands: numb
         }
     }
 }
-export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: string, publicDirectory: string, interpret?: ObservationInterpretation) {
-    const pages = rasterPagePlan(config, RASTER_DENSITY);
+/** `pageRecipe` is the body's whole recipe when `config` holds only some of its surfaces: every surface of a body shares
+ * one page plan, set by its largest surface, so a small surface baked alone still writes the pages its leaves read. */
+export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: string, publicDirectory: string, interpret?: ObservationInterpretation, pageRecipe: RasterPageRecipe = config) {
+    const pages = rasterPagePlan(pageRecipe, RASTER_DENSITY);
     const decoded = new Map<string, Uint8Array>();
     const constantSurfaces: Record<string, { packedWidth: number; packedHeight: number; rgba: number[] }> = {};
     const metadata: Record<string, unknown> = {};
@@ -134,7 +136,8 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                 if (!borrowed) throw new TypeError(`Surface ${surface.id}: limbOf names ${limbOf}, which is not prepared before it with a limb plate.`);
                 // A borrowed plate may be drawn stronger (`science.limbStrength`): the light it lets through, raised to that
                 // power. The plate stays black; only how much it darkens changes.
-                const limb = strongerLimb(borrowed, limbOf !== undefined && typeof surface.science.limbStrength === 'number' ? surface.science.limbStrength : 1);
+                const strength = limbOf !== undefined && typeof surface.science.limbStrength === 'number' ? surface.science.limbStrength : 1;
+                const limb = strongerLimb(borrowed, strength);
                 limbPlates.set(surface.id, limb);
                 if (surface.thumbnailFromLimbPlate) thumbnailLimb = limb;
                 // A lossless plate keeps its values; a lossy one is encoded in the lossy lane (lossy-lane.ts).
@@ -142,7 +145,8 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                     ? raster(plate.data, plate.size, plate.size).webp({ lossless: true, effort: 6 }).toFile(path)
                     : writeLossyWebp(raster(plate.data, plate.size, plate.size), path, { alphaQuality: 100, effort: 6 });
                 await write(plates.offLimb, assetPath(publicDirectory, config.emission.offLimbOutput, density, surface.id));
-                await write(limb, assetPath(publicDirectory, config.emission.limbOutput, density, surface.id));
+                // A plate borrowed as it is stays the lender's one file: the borrower draws that file (assets.ts `limbLender`).
+                if (limbOf === undefined || strength !== 1) await write(limb, assetPath(publicDirectory, config.emission.limbOutput, density, surface.id));
             }
         } else {
             pixels = source ?? await readRgba(resolve(sourceDirectory, surface.source), width, height, true, surface.sharpen);

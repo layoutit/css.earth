@@ -6,8 +6,10 @@ export interface PresentationProfile {
   mode: 'row-bank-cutaway' | 'composite' | 'emissive';
   /** Authored surface targets (positive-east degrees) selected with a dataset; composite only. */
   datasetFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;
-  /** A pulsating star's published light-curve model, source-relative; emissive only (photometry/light-curve.ts). */
-  lightCurve?: { model: string };
+  /** A pulsating star's published light-curve model, source-relative; emissive only (photometry/light-curve.ts). `stills`
+   * names the dataset step group whose members each draw the star at one moment of that light curve: the played light
+   * curve is not drawn over them. */
+  lightCurve?: { model: string; stills?: string };
 }
 export function parsePresentationProfile(value: unknown): PresentationProfile {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Presentation profile must be an object.');
@@ -26,8 +28,9 @@ export function parsePresentationProfile(value: unknown): PresentationProfile {
   if (input.lightCurve !== undefined) {
     const lightCurve = input.lightCurve as Record<string, unknown> | null;
     if (input.mode !== 'emissive' || !lightCurve || typeof lightCurve !== 'object' || Array.isArray(lightCurve) ||
-        Object.keys(lightCurve).join() !== 'model' || lightCurve.model !== 'photometry/gaia-dr3-vari-cepheid.csv')
-      throw new TypeError(`${input.namespace}: lightCurve needs the emissive presentation and { "model": "photometry/gaia-dr3-vari-cepheid.csv" }, got ${JSON.stringify(input.lightCurve)}.`);
+        !['model', 'model,stills'].includes(Object.keys(lightCurve).join()) || lightCurve.model !== 'photometry/gaia-dr3-vari-cepheid.csv' ||
+        (lightCurve.stills !== undefined && (typeof lightCurve.stills !== 'string' || !/^[a-z][a-z0-9-]*$/.test(lightCurve.stills))))
+      throw new TypeError(`${input.namespace}: lightCurve needs the emissive presentation and { "model": "photometry/gaia-dr3-vari-cepheid.csv" }, with the id of a dataset step group as "stills" or without, got ${JSON.stringify(input.lightCurve)}.`);
   }
   return input as unknown as PresentationProfile;
 }

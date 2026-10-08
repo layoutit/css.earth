@@ -732,6 +732,63 @@
           }
         ]
       }
+    },
+    {
+      "id": "cassini-iss-2014-enceladus-color",
+      "path": "observations/PIA18435.jpg",
+      "origin": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18435.jpg",
+      "catalog": "https://www.jpl.nasa.gov/images/pia18435-color-maps-of-enceladus-2014/",
+      "credit": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
+      "license": "NASA/JPL imagery with attribution",
+      "licenseEvidence": [
+        "https://www.jpl.nasa.gov/jpl-image-use-policy/"
+      ],
+      "acquisition": "Download the published JPEG using the enhanced-color acquisition group: 15,960 × 7,980 pixels, 18,915,876 bytes, released 2014-11-04. The file is read as published.",
+      "redistribution": "Prepared derivatives retain NASA/JPL/SSI and source-author credits.",
+      "consumers": [
+        "surfaces"
+      ],
+      "datasetId": "enhanced",
+      "label": "Enhanced color",
+      "falseColor": true,
+      "width": 15960,
+      "height": 7980,
+      "projection": {
+        "type": "equirectangular",
+        "referenceRadiusMeters": 252100,
+        "centerLongitude": 180,
+        "longitudeDirection": "east-positive",
+        "latitudeType": "planetocentric",
+        "longitudeDegrees": [
+          0,
+          360
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ]
+      },
+      "coverage": "Published full rectangular mosaic at 100 m per pixel; no separate validity mask or documented missing code. Preserve every supplied pixel. Native resolution and illumination vary, and the rows nearest the north pole are stretched from coarse images. The release states no longitude origin: local contrast correlates best with the Schenk and McKinnon (2024) mosaic at 0° shift (r 0.237 between 60° S and 60° N at 0.25° steps, 0.056 at 180°), so the map takes that mosaic's frame.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://www.jpl.nasa.gov/images/pia18435-color-maps-of-enceladus-2014/"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-enceladus-cassini-iss-2014-enceladus-color",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "kaus-australis",
+  "source": "Bailey et al. (2024), Epsilon Sagittarii: An Extreme Rapid Rotator with a Decretion Disk, ApJ 972, 103 (https://doi.org/10.3847/1538-4357/ad630b; https://arxiv.org/abs/2407.11352), Table 5 (Best-fitting Stellar Parameters), column Best, and Table 4 for the position angle, read from the authors' LaTeX source",
+  "caption": "Best-fitting Stellar Parameters. The parameters listed are those of the grid model giving the lowest chi-squared among all models (Best), and the best model at inclination of 90 degrees. Range is the full range of stellar parameters corresponding to the 2-sigma region of the fit. Each grid model fits the spectral-energy distribution and the projected rotation speed at the Hipparcos parallax of 22.76 mas; the polarization chooses among them.",
+  "model": {
+    "omega": {
+      "value": 0.999,
+      "uncertainty": 0.004,
+      "cell": "0.999 (Best); range (2 sigma) 0.995 -- 1.0. The value is the centre of the last bin of the grid, where no error can be determined (Table 4, notes)"
+    },
+    "law": {
+      "value": "espinosa-lara-rieutord-2011",
+      "cell": "Section 3.1: the rotating star is a Roche model whose gravity darkening follows Espinosa Lara & Rieutord (2011)"
+    },
+    "poleTemperatureK": {
+      "value": 11721,
+      "uncertainty": 173,
+      "cell": "T_p [K] 11721 (Best); range (2 sigma) 11548 -- 11813"
+    },
+    "equatorTemperatureK": {
+      "value": 7433,
+      "uncertainty": 109,
+      "cell": "T_e [K] 7433 (Best); range (2 sigma) 7324 -- 7492"
+    },
+    "polarRadiusSolar": {
+      "value": 6.01,
+      "uncertainty": 0.11,
+      "cell": "R_p [Rsun] 6.01 (Best); range (2 sigma) 5.90 -- 6.08"
+    },
+    "equatorialRadiusSolar": {
+      "value": 8.8,
+      "uncertainty": 0.33,
+      "cell": "R_e [Rsun] 8.80 (Best); range (2 sigma) 8.47 -- 8.89"
+    }
+  },
+  "view": {
+    "inclinationDegrees": {
+      "value": 80,
+      "uncertainty": 10,
+      "cell": "Inclination, i [deg] 80 (Best); range (2 sigma) 76 -- 90"
+    },
+    "polePositionAngleDegrees": {
+      "value": 39.9,
+      "cell": "theta_rot (deg) 39.9 (Table 4, the variant with a disk and up to 100 ppm of interstellar polarization, which holds the Best model; no error printed; the other variants give 39.9, 39.9 and 40.1)"
+    }
+  },
+  "reportedNotModelled": {
+    "edgeOnModel": {
+      "cell": "Table 5, column i=90: omega 0.997, T_p 11791 K, T_e 7884 K, R_p 5.98, R_e 8.59 solar radii, P_rot 1.63 days",
+      "note": "The paper lists this model beside Best and says the star's strong shell absorption 'might favour a higher-inclination model' like it (section 3.5). The record draws Best, the lowest chi-squared."
+    },
+    "disk": {
+      "cell": "p_disk 367 ppm (Table 4): a wavelength-independent polarization from a low-density edge-on gas disk (abstract)",
+      "note": "The decretion disk is not drawn."
+    },
+    "rotationPeriodDays": {
+      "value": 1.61,
+      "cell": "P_rot [days] 1.61 (Best); range (2 sigma) 1.57 -- 1.64"
+    }
+  },
+  "note": "A fit to polarization, not to an interferometric image: the paper calls the star 'an excellent candidate for observation by interferometry' (abstract). Polarization gives the axis's position angle, not which end of it leans toward us, and the star is seen nearly equator-on. The uncertainties are the larger side of the paper's 2-sigma ranges. The temperatures follow the law of Espinosa Lara & Rieutord (2011), which has no exponent; from the printed rotation rate and pole it gives a 7434 K equator against the printed 7433 K, and 7884 K against the printed 7884 K for the edge-on model (packages/bake/src/objects/stellar/gravity-darkening.test.mts). The same table gives a mean effective temperature of 9950 K, a mass of 3.80 solar masses and a rotation period of 1.61 days (38.6 hours)."
+}

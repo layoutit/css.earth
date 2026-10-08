@@ -668,6 +668,38 @@
       ],
       "path": "catalogues/chloride/Chloride_Salt-bearing_Material_THEMIS_clon0.layer.json",
       "url": "https://trek.nasa.gov/mars/trekarcgis/rest/services/Chloride_Salt_bearing_Material_THEMIS_clon0/MapServer/0?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "heat-flow/UPWARDS2017_SHF_0.0Ga_2deg.tif",
+      "url": "https://zenodo.org/records/10479138/files/UPWARDS2017_SHF_0.0Ga_2deg.tif?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "heat-flow/UPWARDS2017_SHF_1.5Ga_2deg.tif",
+      "url": "https://zenodo.org/records/10479138/files/UPWARDS2017_SHF_1.5Ga_2deg.tif?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "heat-flow/UPWARDS2017_SHF_3.0Ga_2deg.tif",
+      "url": "https://zenodo.org/records/10479138/files/UPWARDS2017_SHF_3.0Ga_2deg.tif?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "heat-flow/UPWARDS2017_SHF_3.5Ga_2deg.tif",
+      "url": "https://zenodo.org/records/10479138/files/UPWARDS2017_SHF_3.5Ga_2deg.tif?download=1"
     }
   ]
 }

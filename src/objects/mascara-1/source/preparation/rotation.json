@@ -1,10 +1,25 @@
 {
-  "schema": "cssearth-display-orientation@1",
-  "rightAscensionDegrees": 137.5515255375414,
-  "declinationDegrees": 79.26110262934765,
-  "displayMeridianDegrees": -90.00000000000001,
+  "schema": "cssearth-measured-obliquity-pole@1",
+  "planet": "mascara-1b",
+  "projectedObliquity": {
+    "degrees": -69.2,
+    "source": "Hooton et al. (2022), A&A 658, A75 (arXiv:2109.05031), Table 5: sky-projected spin-orbit angle lambda = -69.2 +3.1/-3.4 degrees from the CHEOPS and Spitzer transits, with a prior from the Doppler tomography of Talens et al. (2017). The paper measures the orbital plane anti-clockwise from the stellar equatorial plane (section 4.1), and its transits and tomography do not tell {b, i*, lambda} from {-b, -i*, -lambda}."
+  },
+  "stellarInclination": {
+    "degrees": 55.5,
+    "source": "Hooton et al. (2022), Table 5: i* = 55.5 +2.3/-2.9 degrees, the angle between the stellar rotation axis and the line of sight (section 4.1), which is this record's convention (90 equator-on)."
+  },
+  "trueObliquity": {
+    "degrees": 72.1,
+    "uncertaintyDegrees": 2.5,
+    "source": "Hooton et al. (2022), Table 5 and section 7.1: Psi = 72.1 +2.5/-2.4 degrees; the larger side is the tolerance."
+  },
+  "equatorialRotationPeriod": {
+    "days": 0.853,
+    "source": "Hooton et al. (2022), Table 5, derived parameters: stellar rotational period P_rot = 0.853 +0.017/-0.016 days."
+  },
   "phase": "arbitrary-display-phase",
-  "source": "No measured rotation axis or period is used. The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
-  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
-  "qualification": "Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of MASCARA-1 are unmeasured; the axis shown is where celestial north lies on the sky."
+  "source": "The star's spin axis measured against MASCARA-1 b's orbit (Hooton et al. (2022), A&A 658, A75): the pole is built in the planet's sky frame from lambda and i*, with the orbit from packages/astronomy/data/bodies/mascara-1b.json, and the star turns once every 0.853 days. The record's lambda, i* and the orbit's 88.45 degree inclination give psi 72.1 degrees, the published 72.1 +2.5/-2.4 degrees.",
+  "coordinateSystem": "ICRF/J2000. +Z is the measured spin axis; +X faces the Sun at the scene epoch, so grid longitude 0 faces Earth; east longitude. The whole surface turns at one rate.",
+  "qualification": "The orbit is tilted 72 degrees from the star's equator. The axis's position angle on the sky is not measured; it is placed relative to the planet's orbit, whose orientation on the sky is a display convention (ascending node at position angle 0). The mirrored solution the paper cannot tell from this one is not drawn. The gravity-darkened surface is symmetric about the axis, so the turning is not visible."
 }

@@ -38,4 +38,8 @@ test('a Cepheid package gains the row, its acquisition, the profile field and it
   const once = new Map(files);
   installLightCurve(files, { id: 's-vul', name: 'S Vul', sourceId: '2027971514401523456', csv }, epoch);
   for (const [path, value] of once) assert.equal(String(files.get(path)), String(value), `${path} is unchanged by a second install`);
+  // A page that names the stills of its light curve keeps the name through another install.
+  files.set(`${s}/preparation/presentation.json`, JSON.stringify({ schema: 'cssearth-css-presentation-profile@2', namespace: 's-vul', mode: 'emissive', lightCurve: { model: LIGHT_CURVE_MODEL, stills: 'pulsation' } }));
+  installLightCurve(files, { id: 's-vul', name: 'S Vul', sourceId: '2027971514401523456', csv }, epoch);
+  assert.deepEqual(parsePresentationProfile(JSON.parse(String(files.get(`${s}/preparation/presentation.json`)))).lightCurve, { model: LIGHT_CURVE_MODEL, stills: 'pulsation' });
 });

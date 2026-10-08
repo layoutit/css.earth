@@ -36,7 +36,8 @@ export async function refreshPhotographs(id: string, datasetIds: readonly string
   // One encoder worker and no libvips image cache: the previous surface need not remain resident.
   sharp.concurrency(1); sharp.cache(false);
   const start = Date.now();
-  const assets = await prepareRasterAssets({ sourceDirectory, publicDirectory: stage, outputDirectory: stage, config: selected, interpret });
+  // The body's whole recipe sets the page plan: a small dataset of a body paged for a larger one rewrites its pages too.
+  const assets = await prepareRasterAssets({ sourceDirectory, publicDirectory: stage, outputDirectory: stage, config: selected, interpret, pageRecipe: config });
   const manifest = parseRuntimeManifest(requireInventory(id, JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8'))), id);
   // The stage holds the refreshed images and their assets.json. Each image replaces one inventoried public file,
   // whose entry gets the new bytes' R2 content address.

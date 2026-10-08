@@ -2,40 +2,40 @@
   "schema": "cssearth-object-text@1",
   "objectId": "megrez",
   "card": {
-    "text": "A star 25 parsecs away, 2.1 times the Sun's width, measured from its light.",
+    "text": "A star 25 parsecs away that spins so fast its equator is a third wider than its poles.",
     "sources": [
       {
-        "catalogueId": "doi-10-1093-mnras-stx1433",
-        "url": "https://doi.org/10.1093/mnras/stx1433",
-        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
-        "checked": "2026-10-03",
-        "locator": "Table 2, HIP 59774: D, Teff, L, Rad, Q"
+        "catalogueId": "doi-10-1088-0004-637x-813-1-58",
+        "url": "https://doi.org/10.1088/0004-637X/813/1/58",
+        "label": "Jones et al. (2015), The Astrophysical Journal 813 58",
+        "checked": "2026-10-08",
+        "locator": "The sample table (distance) and the table of model results under the ELR gravity-darkening law, Megrez: Re, Rp, Tp, Te"
       },
       {
         "catalogueId": "wikipedia-megrez",
         "url": "https://en.wikipedia.org/wiki/Megrez",
         "label": "Wikipedia, \"Megrez\"",
-        "checked": "2026-10-03",
+        "checked": "2026-10-08",
         "locator": "Lead section, revision 1377341635",
         "quote": "Megrez, also called Delta Ursae Majoris, is a star in the northern constellation of Ursa Major."
       }
     ]
   },
   "introduction": {
-    "text": "Its brightness, measured band by band, gives 23 times the Sun's luminosity at 8,694 K, so 2.123 solar radii.",
+    "text": "Its equatorial radius is 2.51 solar radii and its polar radius 1.89; the poles are near 9,550 K and the equator near 7,240 K.",
     "sources": [
       {
-        "catalogueId": "doi-10-1093-mnras-stx1433",
-        "url": "https://doi.org/10.1093/mnras/stx1433",
-        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
-        "checked": "2026-10-03",
-        "locator": "Table 2, HIP 59774: D, Teff, L, Rad, Q"
+        "catalogueId": "doi-10-1088-0004-637x-813-1-58",
+        "url": "https://doi.org/10.1088/0004-637X/813/1/58",
+        "label": "Jones et al. (2015), The Astrophysical Journal 813 58",
+        "checked": "2026-10-08",
+        "locator": "The sample table (distance) and the table of model results under the ELR gravity-darkening law, Megrez: Re, Rp, Tp, Te"
       },
       {
         "catalogueId": "wikipedia-megrez",
         "url": "https://en.wikipedia.org/wiki/Megrez",
         "label": "Wikipedia, \"Megrez\"",
-        "checked": "2026-10-03",
+        "checked": "2026-10-08",
         "locator": "Lead section, revision 1377341635",
         "quote": "With an apparent magnitude of +3.3, it is the dimmest of the seven stars in the Big Dipper asterism."
       }
@@ -44,8 +44,8 @@
   "datasets": {
     "color": {
       "title": "Photosphere color",
-      "detail": "From its spectrum",
-      "summary": "The color of the star's light."
+      "detail": "Spectrum and spin",
+      "summary": "Measured color, with hot bright poles and a cool equator from the star's fast spin. The darker edge is a model."
     }
   }
 }

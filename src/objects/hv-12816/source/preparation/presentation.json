@@ -3,6 +3,7 @@
   "namespace": "hv-12816",
   "mode": "emissive",
   "lightCurve": {
-    "model": "photometry/gaia-dr3-vari-cepheid.csv"
+    "model": "photometry/gaia-dr3-vari-cepheid.csv",
+    "stills": "pulsation"
   }
 }

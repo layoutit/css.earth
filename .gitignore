@@ -108,6 +108,8 @@ src/objects/venus/source/akatsuki/*.nc
 !src/objects/*-corona/source/previews/*.png
 !src/objects/eps-eridani-disc/source/previews/dust.png
 !src/objects/fomalhaut-disc/source/previews/dust.png
+!src/objects/hd-95086-disc/source/previews/dust.png
+!src/objects/moth-disc/source/previews/dust.png
 !src/objects/hd-181327-disc/source/previews/reflectance.png
 !src/objects/sun-cor1-density/source/previews/cor1-density.png
 !src/objects/beta-pictoris-disc/source/previews/color.png
@@ -342,6 +344,8 @@ src/objects/*/source/**/*.bpc
 /src/objects/betelgeuse-shell/.prepared-*/
 /src/objects/eps-eridani-disc/.prepared-*/
 /src/objects/fomalhaut-disc/.prepared-*/
+/src/objects/hd-95086-disc/.prepared-*/
+/src/objects/moth-disc/.prepared-*/
 /src/objects/hd-181327-disc/.prepared-*/
 /src/objects/pds-70-disc/.prepared-*/
 /src/objects/m42-volume/.prepared-*/

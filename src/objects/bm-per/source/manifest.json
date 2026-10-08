@@ -200,6 +200,41 @@
         "kind": "local",
         "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
       }
+    },
+    {
+      "id": "bm-per-gaia-cepheid-phases",
+      "path": "science/pulsation/gaia-dr3-g-phases.dat",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "productId": "Light of BM Per at 10 phases of one pulsation, from Gaia DR3 vari_cepheid 258412862056729472",
+      "title": "Light of BM Per's whole disc at 10 phases of one pulsation, percent of its light at maximum: Gaia DR3's G-band Fourier model evaluated a tenth of a period apart",
+      "sourceUrl": "https://gea.esac.esa.int/archive/",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Ripepi et al. (2023), A&A 674, A17; the model's values at 10 phases computed in this project",
+      "displayCredit": "ESA/Gaia/DPAC",
+      "license": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Built by the generator from the star's archived Gaia DR3 vari_cepheid row (photometry/gaia-dr3-vari-cepheid.csv): the published harmonics evaluated at 10 phases from maximum light and turned from magnitudes into shares of the light at maximum. Tracked.",
+      "generator": "packages/telescope-cli/src/new-object/pulsation/pulsation.mts",
+      "redistribution": "Values computed from one public catalogue row, with its credit.",
+      "consumers": [
+        "gaia-cepheid-phases"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-vari-cepheid-bm-per",
+            "role": "material",
+            "evidence": "src/objects/bm-per/source/photometry/gaia-dr3-vari-cepheid.csv"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
     }
   ],
   "documents": [

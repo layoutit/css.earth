@@ -69,7 +69,8 @@
  * `gravityDarkening` is a fast rotator's published Roche-von Zeipel fit (roche-shape.mts): `record` is the Roche-von Zeipel
  * record of packages/bake's gravity-darkening.ts, each value with the table cell it was read from, with the pole's inclination and position angle; the star is then drawn
  * flattened, its measured pole up and its poles brighter than its equator. `radius` is then the volume-equivalent sphere of the fit's
- * two radii, and `spin` is not given: the fit holds the pole.
+ * two radii, and `spin` is not given: the fit holds the pole. `measuredBy` names what measured the pole when it is not interferometry
+ * ("polarimetry"); a record whose fit follows the law of Espinosa Lara & Rieutord (2011) names it as `model.law` and gives no beta.
  *
  * `whiteDwarf` ({ "atmosphere": "DA" | "DB" | "DBA", "source", "url" }), on a star or a companion, is a white dwarf's cited atmosphere
  * class: its limb law is then read from the white-dwarf grid of that class (limb.mts), which no other grid replaces.
@@ -91,7 +92,7 @@ import { WHITE_DWARF_ATMOSPHERES, type WhiteDwarfAtmosphere } from './darkening/
 import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '@cssearth/bake/objects/layers/observation';
 import { phaseCurveEntry } from './planets/phase-curve-dataset.mts';
 import type { CataloguePosition, Cited, ColorRoute, DraftQuotes, DraftText, HostedEpoch, HostedSpec, OrbitSpec, PhotometrySpec, StarSpec, ThermalSpec, WhiteDwarfSpec } from './spec-types.mts';
-import { HOSTED_EPOCHS } from './spec-types.mts';
+import { HOSTED_EPOCHS, ROCHE_FIT_TECHNIQUES, type RocheFitTechnique } from './spec-types.mts';
 
 export const COLOR_ROUTES: readonly ColorRoute[] = ['stis-ngsl', 'gaia-xp', 'pulkovo', 'kiehling', 'kharitonov', 'burnashev'];
 function photometrySpec(value: unknown, label: string): PhotometrySpec {
@@ -285,7 +286,10 @@ export function parseStarSpec(value: unknown): StarSpec {
     if (!URL_PATTERN.test(url)) throw new TypeError(`${at('gravityDarkening.url')} must be an https URL, not ${url}.`);
     const hours = g.rotationPeriodHours === undefined ? undefined : requireFiniteNumber(g.rotationPeriodHours, at('gravityDarkening.rotationPeriodHours'));
     if (hours !== undefined && !(hours > 0)) throw new RangeError(`${at('gravityDarkening.rotationPeriodHours')} must be positive.`);
-    return { record: requireRecord(g.record, at('gravityDarkening.record')), credit: requireString(g.credit, at('gravityDarkening.credit')), url, ...(hours === undefined ? {} : { rotationPeriodHours: hours }) };
+    const measuredBy = g.measuredBy === undefined ? undefined : requireString(g.measuredBy, at('gravityDarkening.measuredBy'));
+    if (measuredBy !== undefined && !(ROCHE_FIT_TECHNIQUES as readonly string[]).includes(measuredBy)) throw new TypeError(`${at('gravityDarkening.measuredBy')} is ${ROCHE_FIT_TECHNIQUES.join(' or ')}, not ${measuredBy}.`);
+    return { record: requireRecord(g.record, at('gravityDarkening.record')), credit: requireString(g.credit, at('gravityDarkening.credit')), url, ...(hours === undefined ? {} : { rotationPeriodHours: hours }),
+      ...(measuredBy === undefined ? {} : { measuredBy: measuredBy as RocheFitTechnique }) };
   })();
   const color = input.color === undefined ? undefined : (() => {
     const c = requireRecord(input.color, at('color')), skip = requireArray(c.skip ?? [], at('color.skip')).map(route => requireString(route, at('color.skip')));

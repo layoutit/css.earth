@@ -37,7 +37,7 @@
       ],
       "shape": {
         "kind": "sphere",
-        "radiusKm": 4730760
+        "radiusKm": 5391675
       },
       "materials": [
         {
@@ -99,7 +99,7 @@
       "classification": "star",
       "color": "#bacdff",
       "distanceAu": 9062544.7,
-      "description": "A dwarf of type A0 V, 44 parsecs away: 6.8 times the Sun's width.",
+      "description": "A star spinning at 99.5% or more of its break-up rate, the highest yet measured in our galaxy.",
       "systemName": "Kaus Australis system",
       "aliases": [
         "HD 169022"
@@ -113,28 +113,28 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        117777675549499100,
-        -1112614124735830400,
+        117777675549499060,
+        -1112614124735830700,
         -765664486399114500
       ],
       "presentationToReference": [
-        0.08687478519065023,
-        -0.059454086874412254,
-        -0.994443554583169,
-        -0.8206828036382869,
-        0.5616028125633139,
-        -0.1052711581268889,
-        -0.5647410977700132,
-        -0.8252681336843833,
-        0.000003822999944029341
+        0.20425570394714743,
+        -0.6580255181775141,
+        -0.7247634268037186,
+        -0.8712988207878888,
+        0.21528291651044543,
+        -0.44101205284254,
+        -0.446226368896651,
+        -0.7215647464267989,
+        0.5293640943767715
       ],
       "orbitUpReference": [
-        0.059454086874412254,
-        -0.5616028125633139,
-        0.8252681336843833
+        0.6580255181775141,
+        -0.21528291651044543,
+        0.7215647464267989
       ],
-      "metersPerUnit": 15260516.129032258,
-      "bodyRadiusM": 4730760000
+      "metersPerUnit": 17392500,
+      "bodyRadiusM": 5391675000
     }
   },
   "prepared": {

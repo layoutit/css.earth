@@ -113,6 +113,12 @@ node packages/telescope-cli/src/archives/interferometry/surface-star.mts package
 A spec's `resolvedMaps` (a host, and for each map the season's id, a dataset id and a label) then puts a cast map on the
 star's page with `telescope new-object SPEC.json --bake`.
 
+A pulsating star's light through one cycle is not reduced here: it is the model its source publishes. A Cepheid's package
+keeps its row of Gaia DR3's `vari_cepheid` table, and `telescope new-object --from-pulsation all --out SPEC.json` drafts
+ten steps of that model, a tenth of a period apart, as one dataset group of the star's page
+([method note](../../docs/pulsating-stars-light-through-a-cycle.md)). `gaia:HOST` first looks up a star whose package names
+no Gaia source: the one Cepheid of that table within an arcsecond of its place, with its catalogue row's period.
+
 ## Supported v1 boundary
 
 | Current artifact | Supported next operation | Additional input |

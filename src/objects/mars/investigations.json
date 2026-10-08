@@ -264,6 +264,16 @@
       ]
     },
     {
+      "id": "upwards-heat-flow",
+      "subject": "Parro et al. (2017) surface heat flow at four ages",
+      "status": "included",
+      "finding": "The four surface heat-flow GeoTIFFs of the UPWARDS deposit (today, 1.5, 3.0 and 3.5 billion years ago; 2-degree cells, mW/m2) are shown as one stepper on a shared 10 to 70 scale. The present-day grid measures 14.10 to 25.04 with a mean of 19.18, the paper's 14 to 25 and 19. The deposit's crustal heat-flow grids and its crustal-thickness grid were left out: surface heat flow is the quantity the paper reports, and Mars already shows a newer crust model. The deposit states no method for the earlier ages beyond citing the present-day paper.",
+      "evidence": [
+        "https://zenodo.org/records/10479138",
+        "https://doi.org/10.1038/srep45629"
+      ]
+    },
+    {
       "id": "swim-ice-consistency",
       "subject": "SWIM subsurface ice consistency",
       "status": "deferred",

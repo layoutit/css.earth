@@ -1,6 +1,9 @@
 /** The shape of a star spec and of the bodies it hosts: what spec.mts parses and the generator reads. */
 import type { WhiteDwarfAtmosphere } from './darkening/limb-choice.mts';
 
+/** The techniques a published Roche fit's pole is measured by (roche-shape.mts). */
+export const ROCHE_FIT_TECHNIQUES = ['interferometry', 'polarimetry'] as const;
+export type RocheFitTechnique = typeof ROCHE_FIT_TECHNIQUES[number];
 export interface Cited { readonly value: number; readonly source: string; readonly url: string; readonly uncertainty?: number }
 export type ColorRoute = 'stis-ngsl' | 'gaia-xp' | 'pulkovo' | 'kiehling' | 'kharitonov' | 'burnashev';
 export interface StarSpec {
@@ -29,7 +32,9 @@ export interface StarSpec {
   readonly position?: CataloguePosition;
   readonly spin?: { readonly inclinationDegrees: number; readonly periodDays?: number; readonly source: string; readonly url: string };
   /** A fast rotator's published Roche-von Zeipel fit: the record written beside the star, its paper, and the rotation period it prints (roche-shape.mts). */
-  readonly gravityDarkening?: { readonly record: Readonly<Record<string, unknown>>; readonly credit: string; readonly url: string; readonly rotationPeriodHours?: number };
+  readonly gravityDarkening?: { readonly record: Readonly<Record<string, unknown>>; readonly credit: string; readonly url: string; readonly rotationPeriodHours?: number;
+    /** What measured the pole, for the rotation record's words; interferometry when absent. */
+    readonly measuredBy?: RocheFitTechnique };
   readonly limb?: { readonly none: string };
   /** A white dwarf's cited atmosphere class, which picks the grid its limb law is read from (limb.mts). */
   readonly whiteDwarf?: WhiteDwarfSpec;

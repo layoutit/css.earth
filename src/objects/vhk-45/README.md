@@ -10,6 +10,8 @@ The Hubble Space Telescope measured its brightness in three colors; its pulsatio
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,670 K and log g 0.6 (u1 0.721, u2 0.066): a model, because no fit of this star's limb is used. Gravity: no gravity of this star is published (none in SIMBAD); Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra) gives the class's range, log g -1.33 to 2.86. Across log g 0 to 2.85, the part the grid covers, the limb laws differ by at most 1.4% of the centre brightness from the one drawn, at log g 0.6, the gravity closest to all of them; log g 0.6 is a display choice, not a measurement.
 
+**Pulsation.** The 10 steps of the Pulsation dataset are the model Gaia DR3 publishes of the star's G-band light (vari_cepheid, source 303365600387618688: 2 harmonics of a 74.44-day period; the same row as [the source record](../../sources/gaia-dr3-vari-cepheid-vhk-45.json)), evaluated in this project a tenth of a period apart, from maximum light ([method note](../../../docs/pulsating-stars-light-through-a-cycle.md)). Tied to the star by its place: the one Gaia DR3 Cepheid within 1 arcsecond of it (0.03 arcseconds away), whose period, 74.444 d, is within 1% of the 74.64 d the star's own catalogue row prints. Each step draws the star's color dimmed to that phase's share of its light at maximum: 100, 97, 91, 85, 76, 67, 63, 69, 82, 95%.
+
 ## Evidence
 
 Generated 2026-10-01 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from VizieR J/ApJ/951/118/table9 and the archives named above; each choice was read with the dataset's own reader.
@@ -31,5 +33,7 @@ A headless capture 5,660 light-years from the star, inside M33: the galaxy's cat
 - **Not shown.** Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists.
 - **Not shown.** Its period, 74.64 d, is longer than any in the relations' sample (68.464 d), so they are extrapolated.
 - **Not shown.** Its radial velocity is its galaxy's; its own motion within M33 is not measured.
+
+- **Pulsation.** The steps show the light alone. The star's color and its size change through the cycle and are not drawn: no published calibration found turns Gaia's two colors into a Cepheid's temperature, and nothing here measures this star's size through the cycle. 10 steps a tenth of a period apart are a display choice; the model between them is continuous.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

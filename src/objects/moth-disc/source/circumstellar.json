@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-circumstellar-volume@2",
+  "id": "moth-disc",
+  "host": "moth",
+  "name": "HD 61005 debris disc",
+  "description": "The debris disc of the Moth (HD 61005), seen 4.4° from edge-on, in its own glow at 1.3 millimetres, as ALMA imaged it on 18 June 2016 (project 2015.1.00633.S), one band shown in gray. One unit is one astronomical unit. The image has no third axis: the depth is reconstructed by taking the disc to be symmetric about its own axis, tilted as MacGregor et al. (2018) fitted, with its south side nearer, as Esposito et al. (2016) read its scattered light.",
+  "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S",
+  "credit": "ALMA (ESO/NAOJ/NRAO), project 2015.1.00633.S (PI A. Weinberger); ARI-L image, ALMA Science Archive (Massardi et al. 2021, PASP 133, 085001); MacGregor et al. (2018), ApJ 869, 75",
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "url": "https://almascience.eso.org/alma-data/data-policy",
+    "note": "ALMA data are released under CC BY 4.0; the observatory asks for its standard acknowledgement, which the host star's NOTICE.md carries."
+  },
+  "grid": {
+    "size": 128,
+    "halfUnits": 170,
+    "slabs": 64
+  },
+  "defaultDataset": "dust",
+  "datasets": [
+    {
+      "id": "dust",
+      "geometry": "edge-on",
+      "midplaneHalfHeightUnits": 20,
+      "label": "ALMA · debris disc, 1.3 mm",
+      "title": "The debris disc of the Moth (HD 61005) in its own glow at 1.3 millimetres, from ALMA",
+      "summary": "The edge-on disc of dust around the star in its own glow at 1.3 mm, as ALMA imaged it. Its two bright ends mark a belt 42 to 67 au out.",
+      "description": "ALMA observed the star on 18 June 2016 at 1.3 millimetres (project 2015.1.00633.S), 44 minutes on source with 36 antennas. What it sees is the dust's own faint heat, not starlight. This is the image the ARI-L project made from that observation for the public archive, shown at its own resolution, 0.52″ × 0.44″ (19 × 16 au), in gray: one band, brightness only. MacGregor et al. (2018) combined this observation with two earlier, more compact ones; their image has 13 µJy per beam of noise, this one 21. The disc is seen 4.4° from edge-on, so it is a line on the sky. Its two bright ends are where the line of sight runs along the belt of planetesimals that MacGregor et al. place 42 to 67 au from the star. Fainter light continues outward; they model it as a halo reaching 188 au, and this image is drawn in full to 130 au, where its north-east side sinks into the noise, and fades out by 170 au. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 4.4° from edge-on with its south side nearer, as Esposito et al. (2016) read the starlight the dust scatters, and the emission of each ring of radius and height is solved so that the volume reprojects to the image. The star itself is the sphere at the centre.",
+      "program": "",
+      "archive": {
+        "band": "ALMA-B6-CONT",
+        "path": ".local/moth-disc/observations/member.uid___A001_X2f7_X1e5.ari_l.HD_61005_sci.spw0_1_2_3_233023MHz.12m.cont.I.pbcor.fits",
+        "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X2f7_X1e5.ari_l.HD_61005_sci.spw0_1_2_3_233023MHz.12m.cont.I.pbcor.fits",
+        "landing": "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S",
+        "bytes": 1013760,
+        "unit": "Jy/beam",
+        "filter": "Band 6 continuum, 223 to 243 GHz (1.3 mm)",
+        "instrument": "ALMA 12-m array, one pointing with baselines to 650 m",
+        "observed": "18 June 2016",
+        "title": "ALMA project 2015.1.00633.S, member OUS uid://A001/X2f7/X1e5, ARI-L continuum image HD_61005_sci.spw0_1_2_3_233023MHz.12m.cont.I.pbcor",
+        "credit": "ALMA (ESO/NAOJ/NRAO), project 2015.1.00633.S (PI A. Weinberger); imaged by the ARI-L project (Massardi et al. 2021, PASP 133, 085001; CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2015.1.00633.S.",
+        "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+        "facility": {
+          "facilityId": "alma"
+        },
+        "license": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
+        "acquisition": "Downloaded unchanged from the ALMA Science Archive data portal on 2026-10-08 (the ARI-L product DataLink lists for member OUS uid://A001/X2f7/X1e5); restored from that origin or the R2 source cache when missing.",
+        "limitation": "The image is the ARI-L project’s, not the paper’s own: made from one of the three observations the paper combines (the extended one, 18 June 2016), and meant to show what the data hold, not as a final science image. Its noise is 21.3 µJy per beam at a 0.516″ × 0.439″ beam, against the paper’s 13 at 0.49″ × 0.43″, so of the halo the paper models out to 188 au the image is drawn in full only to 130 au, where its north-east side sinks into that noise (the south-west side does at 183 au), and fades out by 170 au. It holds the paper’s flux: 6.51 mJy in a box reaching 200 au along the midplane and 40 au across it each way, against 4.82 ± 0.29 for the belt plus 1.54 ± 0.48 for the halo. It is one band shown in gray, brightness only. Emission fainter than the drawn noise is not claimed."
+      },
+      "channels": {
+        "red": [
+          "ALMA-B6-CONT"
+        ],
+        "green": [
+          "ALMA-B6-CONT"
+        ],
+        "blue": [
+          "ALMA-B6-CONT"
+        ]
+      },
+      "stellarFluxJy": {},
+      "stellarFluxSource": "Not divided by the star: at 1.3 mm the disc is the dust's own thermal emission, not scattered starlight, and it is shown in its own brightness, Jy per beam, one band in gray.",
+      "stretch": {
+        "a": 10,
+        "top": 0.0006926,
+        "source": "Stated, not fitted: MacGregor et al. (2018) show this image in a color scale without a bar (Figure 2), so there is no published scale to follow. The top is the 99.5th percentile of the image within 20 au of the midplane inside 150 au (692.6 µJy per beam), and a = 10 is the display's log strength, the same as the Beta Pictoris datasets'."
+      },
+      "innerMaskArcsec": 0,
+      "innerMaskSource": "No mask: an interferometer image has no coronagraph. MacGregor et al. (2018) model no point source at the star, so nothing is removed at the centre; what the image holds there, including the peak they report 0.5″ north-east of the star in their residuals, is drawn as observed. The star is the host body's own sphere.",
+      "outerUnits": 150,
+      "backgroundAnnulusArcsec": [
+        6,
+        10
+      ],
+      "nearSidePositionAngleDeg": 160.3,
+      "nearSideSource": "The south side is drawn nearer: Esposito et al. (2016, AJ 152, 85, arXiv:1605.06161, section 3.2) find the ring's south edge brighter than its north edge in all their scattered-light images and, assuming grains that scatter mostly forward, take it as the front edge, closer to the observer. The south end of the minor axis is the disc's position angle, 70.3°, plus 90°.",
+      "topAlpha": 0.5,
+      "noiseFade": {
+        "fromNoise": 1.7321,
+        "toNoise": 5.1962,
+        "source": "Stated, a display choice, as for the Beta Pictoris datasets: a column fades in as its brightness rises from one to three times the image's per-pixel noise (21.3 µJy per beam, measured 6 to 10 arcseconds out). The author counts noise for the mean of the three channels, 1/√3 of the image's when one band feeds all three, so the multiples it is given are 1.7321 and 5.1962."
+      },
+      "published": {
+        "citation": "MacGregor et al. (2018), ApJ 869, 75, Table 2, arXiv:1812.05610",
+        "url": "https://arxiv.org/abs/1812.05610",
+        "inclinationDeg": 85.6,
+        "inclinationSource": "MacGregor et al.'s fit of a flat, axisymmetric belt and halo to the visibilities of this observation and two more compact ones: 85.6° ± 0.1°. They note that their uncertainties are likely underestimates, and that Schneider et al. (2014) find 85.1° and the same position angle in scattered light.",
+        "positionAngleDeg": 70.3,
+        "toleranceDeg": 2
+      },
+      "reconstruction": {
+        "tau": 0.001,
+        "iterations": 200,
+        "source": "The axially symmetric emission inference of Wenger, Lorenz & Magnor (2013) as the nebula lab implements it, run by labs/nebula/run.mts reconstruct-circumstellar: the symmetry axis is the disc normal, tau 0.001 on the displayed [0, 1] values (the lab's M2-9 setting) and 200 iterations."
+      }
+    }
+  ]
+}

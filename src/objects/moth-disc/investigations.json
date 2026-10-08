@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "moth-disc",
+  "entries": [
+    {
+      "id": "dataset-dust",
+      "subject": "ALMA band 6 continuum of project 2015.1.00633.S, 18 June 2016: the ARI-L image at its own beam, in gray",
+      "status": "included",
+      "finding": "MacGregor et al. (2018) deposited no image. The archive lists the ARI-L continuum image of member OUS uid://A001/X2f7/X1e5 (CASA 5.6.1-8, beam 0.516 x 0.439 arcsec at -71.2 degrees, 0.085 arcsec pixels, primary-beam corrected): the extended-configuration observation of the three the paper combines. Its beam is larger than the paper's 0.49 x 0.43 arcsec, so it cannot be smoothed to it and is shown at its own. Its noise is 21.3 microJy per beam in a 6 to 10 arcsec annulus, where the level is -1.6; the paper's image has 13. The two ends of the disc peak at 703 microJy per beam 56 au north-east of the star and 716 at 59 au south-west, 33 and 34 times the noise, and the two halves hold the same light to 2%. In a box reaching 200 au along the midplane and 40 au across it each way the image holds 6.51 mJy (a box of noise that size would scatter by 0.21); the paper fits 4.82 +/- 0.29 for the belt and 1.54 +/- 0.48 for the halo, 6.36 together.",
+      "evidence": [
+        "https://arxiv.org/abs/1812.05610",
+        "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S",
+        "https://almascience.org/alma-data/aril"
+      ]
+    },
+    {
+      "id": "midplane-and-depth",
+      "subject": "How the ALMA image is given depth",
+      "status": "included",
+      "finding": "The midplane is measured on the image: position angle 70.37 degrees, with a spread of 0.13 over the binnings, and the star 0.9 au off the line; MacGregor et al. fit 70.3 +/- 0.1. The inclination, 85.6 +/- 0.1 degrees, is their fit to the visibilities; the image, 19 au across its beam, does not resolve the disc's height, as they also say of theirs. The depth is the lab's reconstruction by axial symmetry about the disc's normal: the volume reprojects to the displayed image with a relative error of 4.25%, and a midplane column 65 au from the star in projection has 72% of its emission within 20 au of its tangent point, against 33% for the image pushed back evenly.",
+      "evidence": [
+        "https://arxiv.org/abs/1812.05610"
+      ]
+    },
+    {
+      "id": "display",
+      "subject": "How the brightness is shown",
+      "status": "included",
+      "finding": "MacGregor et al. show the image in a color scale without a bar, so no published scale exists to follow. It is shown in gray through log(1 + 10 u) / log 11, with u the brightness over 692.6 microJy per beam, the 99.5th percentile within 20 au of the midplane inside 150 au. A column fades in between one and three times the per-pixel noise. The disc tool counts noise for the mean of its three color channels, which is the image noise over the square root of three when one band feeds all three, so the recipe gives it 1.7321 and 5.1962.",
+      "evidence": [
+        "https://arxiv.org/abs/1812.05610"
+      ]
+    },
+    {
+      "id": "near-side",
+      "subject": "Which side of the disc is nearer",
+      "status": "included",
+      "finding": "South. Esposito et al. (2016) find the ring's south edge brighter than its north edge in all their scattered-light images and, assuming grains that scatter mostly forward, take it as the front edge. The ALMA image cannot tell: at 4.4 degrees from edge-on the two sides are less than a beam apart.",
+      "evidence": [
+        "https://arxiv.org/abs/1605.06161"
+      ]
+    },
+    {
+      "id": "halo-extent",
+      "subject": "The outer halo",
+      "status": "included",
+      "finding": "The paper models a halo from the belt's outer edge at 67 au to 188 +/- 8 au. In this image the median brightness within 20 au of the midplane falls to the level the tool counts as noise at 130 au on the north-east side and at 183 au on the south-west. The image is drawn in full to 130 au and fades to nothing at the grid's edge, 170 au.",
+      "evidence": [
+        "https://arxiv.org/abs/1812.05610"
+      ]
+    },
+    {
+      "id": "band-7",
+      "subject": "ALMA band 7 image at 0.15 x 0.10 arcsec (2022.1.00338.L, the ARKS programme)",
+      "status": "deferred",
+      "finding": "The archive's pipeline continuum image of member OUS uid://A001/X2d20/X2e53 (8,533,440 bytes, 36 microJy per beam) shows the disc at about four times the resolution, with its peak 8.6 times the noise. Not built.",
+      "revisitWhen": "A second dataset is wanted; read the ARKS papers for the geometry and vertical height they print first.",
+      "evidence": [
+        "https://almascience.eso.org/aq/?projectCode=2022.1.00338.L"
+      ]
+    },
+    {
+      "id": "compact-configuration",
+      "subject": "The two compact observations the paper also combines (2012.1.00437.S)",
+      "status": "deferred",
+      "finding": "The archive holds a combined continuum image of them (member OUS uid://A002/X5ce05d/X148, beam 1.06 x 0.69 arcsec). A stated way to combine archive images of different beams does not exist in the disc tool. Not built.",
+      "revisitWhen": "The tool gains a stated way to combine two archive images, or the authors deposit their image.",
+      "evidence": [
+        "https://almascience.eso.org/aq/?projectCode=2012.1.00437.S"
+      ]
+    }
+  ]
+}
