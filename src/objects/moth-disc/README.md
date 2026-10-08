@@ -22,6 +22,9 @@ One volume unit is one astronomical unit at the star's Gaia DR3 distance (36.45 
 ## Evidence
 
 - The page in the application on 2026-10-08 (image above, headless Chrome, no page errors), opened by a link that names the dataset (`/moth/?dataset=debris-disc`), which frames the whole disc: as it opens, then dragged 260 pixels up, then 300 pixels down from the opening view. Picked by hand from the page's opening view, the dataset leaves the camera at the star, 4.5 million km out, and the disc is outside the view until the reader zooms out.
+- The two pages of this change as they show their discs: [HD 95086](../hd-95086-disc/README.md), a plain star, opens on its ring; the Moth keeps its opening view and shows its disc when a link names the dataset.
+
+  ![HD 95086 as its page opens, and the Moth opened by a link to its disc](evidence/2026-10-08/opening-views.jpg)
 - The author's preview of the image as drawn, north up ([previews/dust.png](source/previews/dust.png)), to compare with MacGregor et al.'s [Figure 2](https://arxiv.org/abs/1812.05610).
 - **The image against the paper's numbers:**
 
