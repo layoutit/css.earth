@@ -96,7 +96,7 @@
       "noiseFade": {
         "fromNoise": 1,
         "toNoise": 2,
-        "source": "Stated, a display choice: a column fades in as its brightness rises from one to two times its per-pixel noise (16.4 µJy per beam, measured 4 to 12 arcseconds out), so empty sky is not drawn; the ring's median, 1.4 times the noise, is drawn at 40% and its brighter half in full. Every channel of a column is scaled alike, so no color changes."
+        "source": "Stated, a display choice: a column fades in as its brightness rises from one to two times its per-pixel noise (16.4 µJy per beam, measured 4 to 12 arcseconds out), so empty sky is not drawn. Within half its width of the ring's radius, the ring's median is 1.4 times the noise and is drawn at 40%; 27% of that sky is drawn in full, 40% faded and 33% not at all. Every channel of a column is scaled alike, so no color changes."
       },
       "channels": {
         "red": [

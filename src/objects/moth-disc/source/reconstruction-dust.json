@@ -12,8 +12,8 @@
     "implementation": "labs/nebula/packages/reconstruction/src/methods/symmetry/solver.ts",
     "command": "node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar moth-disc",
     "axis": [
-      0.3349361740340045,
-      0.9391123202507459,
+      0.335436563690577,
+      0.9389337050413803,
       0.07671902812681881
     ],
     "center": [
@@ -28,22 +28,22 @@
   },
   "ktx2": {
     "path": "density-dust.ktx2",
-    "bytes": 85167
+    "bytes": 84402
   },
-  "peak": 0.008094830827582054,
-  "filledVoxels": 87500,
-  "exposureGain": 0.005610909165248229,
+  "peak": 0.009651982342522226,
+  "filledVoxels": 88358,
+  "exposureGain": 0.006690244347533657,
   "opacity": {
     "drawnColumns": 1597,
-    "median": 0.2579344461110993,
-    "p90": 0.4405953617331063,
-    "max": 0.49907314215280973
+    "median": 0.2580700901439168,
+    "p90": 0.44072340549107014,
+    "max": 0.4984384836529321
   },
   "checks": {
     "relativeProjectionError": [
-      0.0425,
-      0.0425,
-      0.0425
+      0.042,
+      0.042,
+      0.042
     ],
     "voxelsFilledFromGroups": [
       0,
@@ -59,21 +59,21 @@
     "pixels": 16384,
     "tangentShare": [
       {
-        "projectedUnits": 39.046875,
+        "projectedUnits": 37.453125,
         "widthUnits": 20,
-        "reconstructed": 0.374520294352134,
-        "extrusion": 0.265625
+        "reconstructed": 0.33303809187838657,
+        "extrusion": 0.25
       },
       {
-        "projectedUnits": 65.078125,
+        "projectedUnits": 62.421875,
         "widthUnits": 20,
-        "reconstructed": 0.7177081561177736,
-        "extrusion": 0.328125
+        "reconstructed": 0.6675424260545513,
+        "extrusion": 0.3125
       },
       {
-        "projectedUnits": 91.109375,
+        "projectedUnits": 87.390625,
         "widthUnits": 20,
-        "reconstructed": 0.7873195343249726,
+        "reconstructed": 0.7571219325268438,
         "extrusion": 0.375
       }
     ]

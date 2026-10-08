@@ -11,9 +11,9 @@ This package draws the debris disc of [the Moth (HD 61005)](../moth/README.md) a
 - **Brightness:** one band in gray. MacGregor et al. show the image in a color scale without a bar, so there is no published scale to follow. The gray runs as log(1 + 10 u) / log 11, with u the brightness over 692.6 µJy per beam, the 99.5th percentile within 20 au of the midplane.
 - **Recipe:** [`source/circumstellar.json`](source/circumstellar.json) names the image, the stretch, the stated conventions and the published geometry. [`author.mts`](../../../packages/telescope-cli/authoring/circumstellar/author.mts) writes everything else in `source/` from it and from the depth reconstruction; `--check` reproduces it byte for byte.
 
-**The midplane is measured on this image.** It lies at position angle 70.37°, with a spread of 0.13° over the binnings tried, and the star is 0.9 au off the line. MacGregor et al. fit 70.3° ± 0.1° (Table 2). The disc is tilted 85.6° ± 0.1° in their fit to the visibilities, 4.4° from edge-on; they note that their uncertainties are likely underestimates. At that tilt the belt's near and far sides lie at most 5 au either side of the midline on the sky, a third of the beam, so the image does not measure the tilt.
+**The midplane is measured on this image.** It lies at position angle 70.34°, with a spread of 0.21° over the binnings tried, and the star is 0.9 au off the line. MacGregor et al. fit 70.3° ± 0.1° (Table 2). The disc is tilted 85.6° ± 0.1° in their fit to the visibilities, 4.4° from edge-on; they note that their uncertainties are likely underestimates. At that tilt the belt's near and far sides lie at most 5 au either side of the midline on the sky, a third of the beam, so the image does not measure the tilt.
 
-**Depth is reconstructed, not measured.** An edge-on image sums the light along the whole disc plane. The nebula lab's axial-symmetry method (Wenger, Lorenz & Magnor 2013; [`reconstruct-circumstellar`](../../../labs/nebula/packages/lab/src/cli/commands/circumstellar/reconstruct.ts)) takes the disc to be symmetric about its own axis and solves the emission of each ring of radius and height so that the volume reprojects to the image. It does so to 4.25% (relative error). A midplane column 65 au from the star in projection has 72% of its emission within 20 au of its tangent point; pushing the image back evenly would put 33% there.
+**Depth is reconstructed, not measured.** An edge-on image sums the light along the whole disc plane. The nebula lab's axial-symmetry method (Wenger, Lorenz & Magnor 2013; [`reconstruct-circumstellar`](../../../labs/nebula/packages/lab/src/cli/commands/circumstellar/reconstruct.ts)) takes the disc to be symmetric about its own axis and solves the emission of each ring of radius and height so that the volume reprojects to the image. It does so to 4.2% (relative error). A midplane column 62 au from the star in projection has 67% of its emission within 20 au of its tangent point; pushing the image back evenly would put 31% there.
 
 **Near side: south.** Esposito et al. (2016, AJ 152, 85; [arXiv:1605.06161](https://arxiv.org/abs/1605.06161), section 3.2) find the ring's south edge brighter than the north in all their scattered-light images and, assuming grains that scatter mostly forward, take it as the front edge. The ALMA image cannot tell.
 
@@ -30,10 +30,10 @@ One volume unit is one astronomical unit at the star's Gaia DR3 distance (36.45 
 
   | | This image | MacGregor et al. (2018) |
   | --- | --- | --- |
-  | Position angle of the midplane | 70.37° ± 0.13° | 70.3° ± 0.1° |
+  | Position angle of the midplane | 70.34° ± 0.21° | 70.3° ± 0.1° |
   | Flux | 6.51 mJy in a box 200 au along the midplane and 40 au across, each way | 4.82 ± 0.29 (belt) + 1.54 ± 0.48 (halo) = 6.36 mJy |
   | The two bright ends | 703 µJy per beam at 56 au (north-east), 716 at 59 au (south-west) | a belt from 41.9 to 67.0 au |
-  | Light along the midplane ends | 130 au (north-east), 183 au (south-west) | halo modelled to 188 ± 8 au |
+  | Light along the midplane ends | 125 au (north-east), 130 au (south-west) | halo modelled to 188 ± 8 au |
   | Noise | 21.3 µJy per beam at 0.516″ × 0.439″ | 13 at 0.49″ × 0.43″ |
 
   The two halves of the disc hold the same light to 2%.
@@ -42,12 +42,12 @@ One volume unit is one astronomical unit at the star's Gaia DR3 distance (36.45 
 ## What is this repository's, not a paper's
 
 - **The gray scale and its top,** since no published scale exists.
-- **The fade** between one and three times the noise. The disc tool counts noise for the mean of its three color channels, which is the image noise over √3 when one band feeds all three, so the recipe gives it 1.7321 and 5.1962.
+- **The fade** between one and three times the noise.
 - **The flux box** is a comparison, not the paper's method.
 
 ## Known problems
 
-- **One of the paper's three observations.** The archive holds no image of all three. This one is noisier than the paper's, so the faint halo is drawn in full only to 130 au and fades out by the cube's edge at 170 au; the paper models it to 188 au.
+- **One of the paper's three observations.** The archive holds no image of all three. This one is noisier than the paper's, so the faint halo is drawn in full only to 125 au and fades out by the cube's edge at 170 au; the paper models it to 188 au.
 - **An archive image, not the paper's own.** ARI-L images are meant to show what the data hold, not as final science images.
 - **The depth rests on symmetry.** Anything the disc does that is not symmetric about its axis is kept only where the fit allows.
 - **The swept-back wings seen in scattered light are not in this image.** MacGregor et al. report none at 1.3 mm either.
