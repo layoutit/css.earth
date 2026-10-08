@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-2107-06366",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Martinez et al. (2021): Dynamical Surface Imaging of λ Andromedae",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2107.06366"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ac06a5"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2107.06366",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/ac06a5",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2107.06366",
+      "checkedOn": "2026-10-08",
+      "locator": "arXiv listing and Crossref: title, authors, DOI. Table 4 gives the star's angular radius, limb-darkening coefficient, inclination, position angle and rotation period; section V describes the ROTIR reconstruction of the 2010 and 2011 nights."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Martinez et al. (2021)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2107.06366"
+    }
+  ],
+  "creators": [
+    "A. O. Martinez",
+    "F. R. Baron",
+    "J. D. Monnier",
+    "R. M. Roettenbacher",
+    "J. R. Parks"
+  ],
+  "publicationDate": "2021"
+}

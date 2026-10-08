@@ -39,6 +39,8 @@ export interface MapKind<M extends SurfaceMap> {
   report(maps: readonly M[], scale: MapScale): string;
   /** Whether a map's page draws the star at the map's tilt, so the latitude the star never shows may be outlined. Left out: it does. */
   outlines?(map: M): boolean;
+  /** A column of the map's own table whose change of sign is outlined: the edge of what the table says was never seen. */
+  readonly outlineZeroOf?: string;
   /** Where one map's table goes, the archive it is read from and the records it is bound to, when they differ from map to map
    * (a kind fed by several missions). Left out: the kind's own `directory`, `archiveUrl` and `references`. */
   directoryOf?(map: M): string; archiveOf?(map: M): string; referencesOf?(map: M): readonly { readonly catalogueId: string; readonly role: string; readonly evidence: string }[];
@@ -112,7 +114,7 @@ export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: S
       redistribution: words.redistribution, consumers: [consumerOf(map)],
       sourceBinding: { kind: 'catalogued', references: (kind.referencesOf?.(map) ?? kind.references).map(reference => ({ ...reference })) } });
     newSurfaces.push({ id: choice.id, output: first.output, thumbnail: first.thumbnail, source: path, falseColor: !look, science: { kind: 'terrestrial-scientific', id: choice.id, label: choice.label, format: 'tecplot-lonlat-map', path, variable: variableOf(map),
-      ...(outlined ? { outlineLatitudes: [-tilt] } : {}), consumer: consumerOf(map), sampling: 'bilinear', displaySampling: kind.displaySampling ?? 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: scale.minimum, maximum: scale.maximum, colors: look ?? [...kind.colors], labels,
+      ...(outlined ? { outlineLatitudes: [-tilt] } : {}), ...(kind.outlineZeroOf ? { outlineZeroOf: kind.outlineZeroOf } : {}), consumer: consumerOf(map), sampling: 'bilinear', displaySampling: kind.displaySampling ?? 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: scale.minimum, maximum: scale.maximum, colors: look ?? [...kind.colors], labels,
       ...(look ? { limbOf: first.id } : {}), description: words.description,
       title: words.surfaceTitle, sourceUrl: archive } });
     newControls.push({ id: choice.id, label: kind.controlLabel, qualification: words.qualification, thumbnail: `${star.id}-dataset-${choice.id}.webp`, surface: `${star.id}-surface-${choice.id}@2x.webp`, poles: `${star.id}-poles-${choice.id}@2x.webp`,

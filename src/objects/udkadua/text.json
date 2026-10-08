@@ -46,6 +46,16 @@
       "title": "Photosphere color",
       "detail": "From its spectrum",
       "summary": "The color of the star's light."
+    },
+    "surface-2011-09": {
+      "title": "Surface map, September 2011",
+      "detail": "September 2011, mapped here",
+      "summary": "Darker and brighter regions of the star, worked out in this project from interferometry of several nights."
+    },
+    "color-surface": {
+      "title": "Color + brightness, Sep 2011",
+      "detail": "CHARA/MIRC, September 2011",
+      "summary": "The star in its own color, darker where interferometry resolved darker regions on its surface."
     }
   }
 }
