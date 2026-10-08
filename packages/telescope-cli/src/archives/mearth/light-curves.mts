@@ -9,8 +9,10 @@
  * A file's magnitudes are differential, and the release notes say what is left in them on purpose: an offset between
  * the two sides of the meridian and at every change of the instrument (a "segment", column `S`), and the "common mode"
  * (column `CM`), the change all the M dwarfs observed in the same half hour share, which scales by a factor of the star's
- * own. Both "must be re-fit" with the star's variability, and the release's own corrected column is "strongly advised
- * against" for it. So nothing here corrects a light curve. The paper's model does, through its authors' own code: sfit
+ * own. The notes say "it is necessary to re-fit" the offsets "when modeling the long-term stellar behavior, e.g.
+ * variability", that the common mode's scale is fitted from the star's own light curve, and of the file's corrected
+ * column: "We strongly advise against using "Corr_mag" for scientific purposes. This is particularly true for studies of
+ * stellar variability." So nothing here corrects a light curve. The paper's model does, through its authors' own code: sfit
  * (tools.py; toolchain.json pins it) fits each segment's baseline, the common mode's scale and a sinusoid at one period
  * together (Newton et al. 2016, ApJ 821, 93, Sect. III.1), and the light curve mapped is "the data with the common mode
  * and varying baseline magnitudes removed", which is what the paper's authors inspect.
@@ -138,23 +140,26 @@ export function nightly(bjd: readonly number[], magnitude: readonly number[], lo
  * two degrees of the true one, which is two days of a season's limit. */
 export const SUN = { epochJd: 2451545.0, meanLongitudeDegrees: 280.460, degreesPerDay: 0.9856474, obliquityDegrees: 23.439 } as const;
 const YEAR_DAYS = 360 / SUN.degreesPerDay, RAD = Math.PI / 180;
-/** The first day after J2000.0, as a Julian date, on which the Sun passes the star's ecliptic longitude: the star is then
- * behind the Sun, or as near it as it gets, and cannot be watched from the ground. */
-export function conjunctionJd(raDegrees: number, decDegrees: number): number {
-  const longitude = Math.atan2(Math.sin(raDegrees * RAD) * Math.cos(SUN.obliquityDegrees * RAD) + Math.tan(decDegrees * RAD) * Math.sin(SUN.obliquityDegrees * RAD), Math.cos(raDegrees * RAD)) / RAD;
+/** The first day after J2000.0, as a Julian date, on which the Sun has the star's right ascension: the star then crosses
+ * the meridian at noon and is up by day, whatever its declination, and cannot be watched from the ground. The Sun's
+ * right ascension is the star's when the tangent of its longitude is the tangent of that right ascension over the
+ * cosine of the ecliptic's tilt. */
+export function conjunctionJd(raDegrees: number): number {
+  const longitude = Math.atan2(Math.sin(raDegrees * RAD), Math.cos(raDegrees * RAD) * Math.cos(SUN.obliquityDegrees * RAD)) / RAD;
   return SUN.epochJd + ((((longitude - SUN.meanLongitudeDegrees) % 360) + 360) % 360) / SUN.degreesPerDay;
 }
 /** One season of a star's light: the nights between two of the star's conjunctions with the Sun, named by the year its
- * middle falls in, when the star is opposite the Sun. Times are on the kept clock (MEARTH_TIME_ZERO); the light is a
- * share of the season's mean. */
+ * middle falls in, when the star crosses the meridian at midnight. Times are on the kept clock (MEARTH_TIME_ZERO); the
+ * light is a share of the season's mean. */
 export interface MearthSeason { readonly season: number; readonly nights: number; readonly exposures: number; /** From the first night to the last, days. */ readonly spanDays: number; readonly time: readonly number[]; readonly flux: readonly number[] }
 /** A star's light, one point a night, cut into its seasons, oldest first. A star's spots change within months, and a
  * light curve from the ground is years long with a gap each year where the star is near the Sun: a map is made of one
  * season, as it is made of one quarter of a Kepler star's four years. The papers fit a star's years as one sinusoid, an
- * assumption they make "for the purposes of period detection" (Newton et al. 2018, Sect. III.1), and show GJ 1132's
- * spots changing in the time it takes to turn once. Cutting at the conjunction is this module's. */
-export function seasonsOf(light: { readonly bjd: readonly number[]; readonly magnitude: readonly number[]; readonly exposures: readonly number[] }, raDegrees: number, decDegrees: number): MearthSeason[] {
-  const first = conjunctionJd(raDegrees, decDegrees), parts = new Map<number, number[]>();
+ * assumption they make for "the purposes of period detection" (Newton et al. 2018, Sect. III.1), and show GJ 1132's
+ * spots changing "on timescales similar to the rotation period" (Sect. IV.1). Cutting at the conjunction is this module's;
+ * it fell inside a gap of 46 to 186 days of the nights of each of the four stars first read, at every season. */
+export function seasonsOf(light: { readonly bjd: readonly number[]; readonly magnitude: readonly number[]; readonly exposures: readonly number[] }, raDegrees: number): MearthSeason[] {
+  const first = conjunctionJd(raDegrees), parts = new Map<number, number[]>();
   for (const [index, time] of light.bjd.entries()) { const turn = Math.floor((time - first) / YEAR_DAYS); parts.set(turn, [...parts.get(turn) ?? [], index]); }
   return [...parts].sort(([a], [b]) => a - b).map(([turn, at]) => { const flux = at.map(index => 10 ** (-0.4 * light.magnitude[index]!)), mean = flux.reduce((sum, one) => sum + one, 0) / flux.length;
     // The year of the season's middle, half a year after the conjunction that begins it.

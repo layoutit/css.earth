@@ -47,20 +47,21 @@ test('the longest dataset is the light curve with the most nights', () => {
   assert.equal(nightsOf(run), 1); assert.equal(longest([run, survey]), survey); assert.equal(longest([curve([])]), undefined);
 });
 
-test('a star is in conjunction when the Sun\'s mean longitude is its ecliptic longitude', () => {
-  // A star at the equinox point: the Sun's mean longitude is 0 some 80.7 days after J2000.0, on 2000 March 21.
-  assert.equal(Number(conjunctionJd(0, 0).toFixed(1)), 2451625.7);
-  // Proxima Centauri, at ecliptic longitude 239 degrees: 19 November.
-  assert.equal(new Date((conjunctionJd(217.4289, -62.6795) - 2440587.5) * 86400000).toISOString().slice(0, 10), '2000-11-19');
+test('a star is in conjunction when the Sun has its right ascension', () => {
+  // A star at right ascension 0: the Sun's mean longitude is 0 some 80.7 days after J2000.0, on 2000 March 21.
+  assert.equal(Number(conjunctionJd(0).toFixed(1)), 2451625.7);
+  // At 6 hours the Sun is at the solstice, a quarter of a year later; Proxima Centauri, at 14.5 hours, is behind it on 31 October.
+  assert.equal(Number((conjunctionJd(90) - conjunctionJd(0)).toFixed(1)), 91.3);
+  assert.equal(new Date((conjunctionJd(217.4289) - 2440587.5) * 86400000).toISOString().slice(0, 10), '2000-10-31');
 });
 
 test('a light curve is cut into the star\'s seasons, each named by the year of its middle', () => {
   // A star in conjunction on 21 March: one night every ten days from May 2016 to January 2018.
-  const first = 2457510.5, bjd = Array.from({ length: 62 }, (_, index) => first + 10 * index), seasons = seasonsOf({ bjd, magnitude: bjd.map((_, index) => 0.01 * Math.sin(index)), exposures: bjd.map(() => 3) }, 0, 0);
+  const first = 2457510.5, bjd = Array.from({ length: 62 }, (_, index) => first + 10 * index), seasons = seasonsOf({ bjd, magnitude: bjd.map((_, index) => 0.01 * Math.sin(index)), exposures: bjd.map(() => 3) }, 0);
   assert.deepEqual(seasons.map(one => one.season), [2016, 2017]);
   assert.equal(seasons[0]!.nights + seasons[1]!.nights, 62); assert.equal(seasons[0]!.exposures, 3 * seasons[0]!.nights); assert.equal(seasons[0]!.spanDays, 10 * (seasons[0]!.nights - 1));
   assert.equal(seasons[0]!.time[0], first - MEARTH_TIME_ZERO);
   for (const season of seasons) assert.ok(Math.abs(season.flux.reduce((sum, one) => sum + one, 0) / season.flux.length - 1) < 1e-6);
   // A brighter night is a smaller magnitude and a larger share of the light.
-  const two = seasonsOf({ bjd: [first, first + 1], magnitude: [0.01, -0.01], exposures: [1, 1] }, 0, 0)[0]!; assert.ok(two.flux[1]! > two.flux[0]!);
+  const two = seasonsOf({ bjd: [first, first + 1], magnitude: [0.01, -0.01], exposures: [1, 1] }, 0)[0]!; assert.ok(two.flux[1]! > two.flux[0]!);
 });

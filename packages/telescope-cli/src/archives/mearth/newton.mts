@@ -120,14 +120,14 @@ const listed = (items: readonly (string | number)[]) => items.join(', ').replace
  * star has no map: not every longitude faced the telescope in it. That limit is no paper's: it is what a map of a
  * whole surface needs, and the one a Kepler star's quarter is held to (kepler/santos.mts). `fit` is `modelled`; a test
  * hands another. */
-export async function newtonStar(row: NewtonRow, files: readonly { readonly filename: string; readonly curve: MearthLightCurve }[], place: { readonly raDegrees: number; readonly decDegrees: number },
+export async function newtonStar(row: NewtonRow, files: readonly { readonly filename: string; readonly curve: MearthLightCurve }[], place: { readonly raDegrees: number },
   fit: (curve: MearthLightCurve, periodDays: number) => Promise<MearthModel> = modelled): Promise<NewtonStar> {
   const period = row.rotationDays; if (period === undefined || row.contaminated) throw new TypeError(`2MASS ${row.twomass}: its row is no verdict of rotation, and no light is read under it.`);
   const analysed = files.map(one => ({ filename: one.filename, curve: clipped(before(one.curve, NEWTON_2018_LAST_BJD)) })), curve = longest(analysed.map(one => one.curve)), read = analysed.find(one => one.curve === curve);
   if (!curve || !read) throw new Error(`2MASS ${row.twomass}: the MEarth release holds no light of the star from before the paper's last day.`);
   if (curve.twomass !== row.twomass) throw new TypeError(`${read.filename} is the light curve of 2MASS ${curve.twomass}, not of ${row.twomass}.`);
   const model = await fit(curve, period), nights = nightsOf(curve);
-  const seasons = seasonsOf(nightly(curve.bjd, model.corrected), place.raDegrees, place.decDegrees).map((season): NewtonSeason => { const turns = Number((season.spanDays / period).toFixed(2));
+  const seasons = seasonsOf(nightly(curve.bjd, model.corrected), place.raDegrees).map((season): NewtonSeason => { const turns = Number((season.spanDays / period).toFixed(2));
     return { ...season, turns, verdict: turns < 1 ? { detected: false, reason: `The star's ${season.season} season holds ${season.spanDays} days of its MEarth light, less than one turn of ${period} d: not every longitude faced the telescope in it.` } : { detected: true, periodDays: period, amplitude: swingOf(row.semiAmplitudeMag!) } }; });
   const mapped = seasons.filter(season => season.verdict.detected), short = seasons.filter(season => !season.verdict.detected);
   const note = [`The light curve mapped is the star's longest dataset in the MEarth release, that of telescope ${curve.telescope.replace(/^tel/u, '')}: ${nights} nights before 2 March 2018, where the paper's table prints ${row.nights} for its longest.`,

@@ -56,14 +56,14 @@ const asItIs = async (curve: MearthLightCurve) => ({ baselines: [0], commonModeS
 
 test('a star is read on its longest dataset, cut at the paper\'s last day, one map a season that holds a turn', async () => {
   const row = parseNewtonRow(ROWS.lhs475), place = { raDegrees: 290.226, decDegrees: -82.5545 };
-  // LHS 475 is in conjunction on 26 December. One telescope watched it from October 2016 to past the paper's last day; another for four nights.
+  // LHS 475 is in conjunction on 9 January. One telescope watched it from October 2016 to past the paper's last day; another for four nights.
   const files = [{ filename: 'a.txt', curve: light('tel18', 2457687.6, 600) }, { filename: 'b.txt', curve: light('tel11', 2457800.6, 4) }], read = await newtonStar(row, files, place, asItIs);
   assert.equal(read.filename, 'a.txt'); assert.deepEqual(read.file, { telescope: 'tel18', filter: 'RG715' });
   // 492 nights lie before 2 March 2018.
   assert.deepEqual(read.fitted, { datasetNights: 492, fittedSemiAmplitudeMag: 0.0025, commonModeScale: 0.7234 }); assert.ok(read.seasons.every(season => season.time.at(-1)! + 2450000 < NEWTON_2018_LAST_BJD));
-  assert.deepEqual(read.seasons.map(season => [season.season, season.nights, season.turns, season.verdict.detected]), [[2016, 62, 0.77, false], [2017, 365, 4.59, true], [2018, 65, 0.81, false]]);
+  assert.deepEqual(read.seasons.map(season => [season.season, season.nights, season.turns, season.verdict.detected]), [[2016, 75, 0.93, false], [2017, 366, 4.6, true], [2018, 51, 0.63, false]]);
   assert.deepEqual(read.verdict, { detected: true, periodDays: 79.317, amplitude: swingOf(0.0025) });
-  assert.match(read.seasons[0]!.verdict.reason!, /2016 season holds 61 days of its MEarth light, less than one turn of 79\.317 d/u);
+  assert.match(read.seasons[0]!.verdict.reason!, /2016 season holds 74 days of its MEarth light, less than one turn of 79\.317 d/u);
   assert.equal(read.note, 'The light curve mapped is the star\'s longest dataset in the MEarth release, that of telescope 18: 492 nights before 2 March 2018, where the paper\'s table prints 235 for its longest. The paper\'s model, fitted to it here at 79.317 d by its authors\' code, gives the sinusoid a semi-amplitude of 0.0025 mag, where the table prints 0.0025. The star\'s 2016 and 2018 seasons hold less than one turn of it and have no map.');
 });
 

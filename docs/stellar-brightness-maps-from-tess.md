@@ -13,6 +13,11 @@ Kepler (2009 to 2013) watched one field for four years, with an image every 30 m
 read is KEPSEISMIC, which its authors make from the mission's pixels, and the star's rotation is the verdict Santos et al.
 (2019, 2021) published on that light curve.
 
+MEarth (2008 to 2022) watched nearby M dwarfs from the ground, one star a field, night after night for years. Such
+stars turn once in up to some 150 days, more than a sector or a campaign can show. For a star MEarth-South watched the
+light curve read is the MEarth Project's own, from its public data release, and the star's rotation is the verdict
+Newton et al. (2018) published on that light curve.
+
 Nothing here is measured from pixels, and no rule of this repository decides whether a star is seen turning. It is
 decided by a published method run on the light curves its paper uses, or by a paper's own published verdict on the
 star.
@@ -31,6 +36,10 @@ Each step of the science is run by the code its authors publish, pinned in
 | Light curve, Kepler | [KEPSEISMIC](https://archive.stsci.edu/hlsp/kepseismic) (Mathur, Santos & García; DOI 10.17909/t9-mrpw-gc07), from MAST | The star's four years as one light curve, made from the mission's pixels in its authors' own aperture, corrected with KADACS (García et al. 2011, MNRAS 414, L6) and high-pass filtered at 20, 55 and 80 days |
 | Reading a file | [lightkurve](https://lightkurve.github.io/lightkurve/) 2.6.0 | Reads the light curve's file with its quality flags, as it is |
 | Reading a file, Kepler | This repository's FITS reader | Reads a KEPSEISMIC file's table and its mark for each point |
+| Light curve, MEarth | The MEarth Project's own, from its [Data Release 11](https://lweb.cfa.harvard.edu/MEarth/DataDR11.html) (1 August 2022; Berta et al. 2012, AJ 144, 145) | A star's differential magnitudes from one telescope, every exposure, with the segment of each and the common mode at its time |
+| Reading a file, MEarth | This repository's reader | Reads a release file's header and the columns its release notes list |
+| Preparing a light curve, MEarth | [sfit](https://github.com/mdwarfgeek/sfit) (Jonathan Irwin; MIT), pinned to a commit in [its own toolchain](../packages/telescope-cli/src/archives/mearth/toolchain.json) | The model of Newton et al. (2016, 2018): a baseline for each segment, a scale of the common mode and a sinusoid at one period, by linear least squares |
+| Verdict, MEarth | The catalogue of [Newton et al. (2018, AJ 156, 217)](https://arxiv.org/abs/1807.09365), at [VizieR J/AJ/156/217](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/156/217) | The 574 MEarth-South stars the paper searched, each graded: a rotator (A or B), a candidate or a non-detection |
 | Period, K2 | [astropy](https://www.astropy.org/)'s generalized Lomb-Scargle, and [star-privateer](https://gitlab.com/sybreton/star_privateer) 1.3.1 (Breton et al. 2024, A&A 689, A229) for the wavelet and the autocorrelation | The three periods that Reinhold & Hekker (2020) compare |
 | Period, TESS | [SpinSpotter](https://github.com/rae-holcomb/SpinSpotter) 0.2.0 (Holcomb et al. 2022, ApJ 936, 138) | The period of the light's autocorrelation and the height, width and fit of its peaks |
 | Verdict, TESS, when that method refuses | The catalogue of [Colman et al. (2024, AJ 167, 189)](https://arxiv.org/abs/2402.14954), at [VizieR J/AJ/167/189](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/167/189) | The targets the paper found turning in sectors 1 to 26, each with its period. The paper's code has no licence and is not run |
@@ -77,6 +86,7 @@ given no verdict, and is not fetched.
 | A target in the paper's catalogue of rotators; the TESS mission's 2-minute light curve of a sector, sectors 1 to 26 | Colman et al. (2024, AJ 167, 189): the paper's own verdict, read from its table | Wired, for a star Holcomb et al.'s method refuses |
 | A TESS Object of Interest in the paper's table of unambiguous rotation periods; the TESS mission's 2-minute light curves of its sectors among 1 to 22 | Canto Martins et al. (2020, ApJS 250, 20): the paper's own verdict, read from its tables | Wired, for a star Holcomb et al.'s method refuses |
 | A star of the papers' samples (Kepler's main-sequence stars and subgiants); the KEPSEISMIC light curve of its four years | Santos et al. (2019, ApJS 244, 21; 2021, ApJS 255, 17): the papers' own verdict, read from their tables | Wired, for a star nothing above gives a rotation |
+| A star of the paper's sample (nearby M dwarfs MEarth-South watched); its MEarth light curve taken before 2 March 2018 | Newton et al. (2018, AJ 156, 217): the paper's own verdict, read from its table | Wired, for a star nothing above gives a rotation |
 | One Kepler quarter, the mission's PDC-MAP light curve | Reinhold, Reiners & Basri (2013, A&A 560, A4) | Read, not wired |
 | Giants and subgiants | None for rotation in one campaign or sector | Not wired |
 | A star with full-frame images only | None | Not wired |
@@ -470,6 +480,135 @@ and two within 16 arcseconds of Kepler-732, with 17%. Each star's datasets say s
 
 ![Six of the Kepler stars in the app (Kepler-22, Kepler-37, Kepler-138, Kepler-186, Kepler-411 and Kepler-732): Color + brightness above, Brightness map below](images/stellar-brightness-maps-kepler.webp)
 
+### MEarth: the verdict Newton et al. (2018) published
+
+Newton et al. (2018, Sects. II.1 and III) search the MEarth-South light curves of 574 nearby M dwarfs, taken before
+2 March 2018, by the method of their northern paper (Newton et al. 2016, ApJ 821, 93, Sect. III.1). A MEarth magnitude
+is differential, and two things are left in it on purpose: an offset at every change of the instrument and between the
+two sides of the meridian (a "segment"), and the "common mode", the change all the M dwarfs observed in one half hour
+share, which each star takes with a scale of its own. So the paper fits them with the star: to each light curve (one
+telescope's) a baseline magnitude for every segment, a scale of the common mode and a sinusoid, by least squares, at
+each period from 0.1 to 1500 days, after removing exposures more than five scaled median deviations from the median.
+The period with the highest F-test statistic is a candidate.
+
+Whether a candidate is a rotation is then decided by eye: "the criteria we use in deciding whether a period is detected
+are fundamentally qualitative". The authors ask whether the signal is seen in the binned, phase-folded light, whether
+two or more complete, near-consecutive cycles are seen, whether it is uncorrelated with the model's systematics, and
+whether light curves taken at the same time agree. An inspection cannot be run here, so nothing is judged here. The
+paper publishes its verdict on every star as its row in Table 1, and
+[`newton.mts`](../packages/telescope-cli/src/archives/mearth/newton.mts) reads it through VizieR's TAP service, for a
+star nothing above gives a rotation:
+
+| Column | What the table's description and the paper say | How it is read |
+| --- | --- | --- |
+| `Type` A or B | A rotator: a star with a "secure" detection of periodic modulation. Grade A answers each of the authors' questions yes; grade B fails one. The paper limits its own analysis "to grade A and B rotators" | The paper's verdict of rotation |
+| `Type` U or N | A "possible or uncertain detection"; a "non-detection or undetermined detection" | No rotation. A candidate's period is in the table and is not read |
+| `Per` | The photometric rotation period | The star's period |
+| `Amp` | The semi-amplitude of the sinusoid, magnitudes | The light's swing: twice it, as a share of the light |
+| `Flag` 1 | "Known contamination by a common proper motion companion or background source". Such stars "are flagged in the table but are not included in the analysis that follows" (Sect. III.2) | No rotation is taken from a flagged row |
+| `NDays`, `NPts` | The nights "in longest dataset", and its points with a successful fit | Set beside the light curve read (below) |
+
+A star is found in the table by its place: the row within 3 arcseconds of the star's place in 2000.
+
+The light is the release's own. [`light-curves.mts`](../packages/telescope-cli/src/archives/mearth/light-curves.mts)
+reads the release's index of MEarth-South targets and the star's files, one a telescope, by the columns the release
+notes list. The notes say that "it is necessary to re-fit" the segment offsets "when modeling the long-term stellar
+behavior, e.g. variability", that the common mode's scale is fitted from the star's own light curve, and that they
+"strongly advise against" the file's own corrected column "for studies of stellar variability". So the correction is the paper's model, fitted by the paper's
+authors' code: sfit, at the paper's period, with the common mode as its one external parameter. What is mapped is "the
+data with the common mode and varying baseline magnitudes removed", which is what the paper's authors inspect.
+
+Eleven things on this path are this repository's, and are printed in neither paper:
+
+1. MEarth's light is read last: for a star that no method gives a rotation on its K2 or TESS light, and no row of the
+   tables above does. Only the southern paper is wired (see the table of sources below for the northern one).
+2. A row the paper flags as contaminated is not taken, though the table prints its period.
+3. The paper's verdict is drawn at the paper's period or not at all, as Colman et al.'s and Canto Martins et al.'s are:
+   half the catalogued period, or a period more than 20% from another table's where the record adopts none, withholds it.
+4. The files read are of the release of 2022, cut at the paper's last day. The paper judged an earlier processing of
+   the same exposures.
+5. Of a star's light curves the longest is read: the telescope with the most nights. The paper fits them all together,
+   each with a sinusoid of its own, so one light curve is corrected the same alone. Some of the others are a few nights
+   of one long run of exposures, taken to follow a planet's transit; a baseline cannot be told from a sinusoid of a
+   hundred days in them.
+6. The model is fitted at the paper's period. No period is searched for here.
+7. A night's light is one point: the median of its exposures, as the paper's Figures 6 and 7 show the light of Proxima
+   Centauri and of GJ 1132 ("median combined into one day bins"). A night runs from one local noon at Cerro Tololo to
+   the next.
+8. A light curve is cut into the star's seasons, where the star passes behind the Sun: the day the Sun has the star's
+   right ascension, so that the star is up by day (from the Sun's mean longitude, The Astronomical Almanac's
+   low-precision formula, good to two days). That day fell inside a gap of 46 to 186 days in the nights of each of the
+   four stars, at every season. A season is named by the year of its middle. The paper fits a star's years as one sinusoid, an assumption it makes for "the
+   purposes of period detection" (Sect. III.1), and shows GJ 1132's spots changing "on timescales similar to the
+   rotation period" (Sect. IV.1).
+9. A season whose nights span less than one turn of the star has no map, as a Kepler star's quarter has none.
+10. A map is fitted to the first degree: one brighter and one darker side. The paper's model is one sinusoid, and a map
+    of the first degree holds what a sinusoid fixes. Measured on five seasons (Proxima Centauri's four and LHS 475's
+    one): fitted to degree 5 as a space telescope's light is, a map took 2 to 15 times the contrast of a map of degree
+    2, in a pattern of four lobes, for a scatter about the light 1 to 5% smaller. A map of degree 2 left a scatter 16
+    and 27% smaller than one of degree 1 in two of the seasons, and 1 to 3% in the other three: a second harmonic is in
+    some seasons' light and is not drawn. This is a comparison, not a setting.
+11. The Gaia sources near a star are counted within 8 arcseconds, about the radius of MEarth-South's widest aperture
+    (8.485 pixels of 0.84 arcseconds).
+
+Six of our stars are in the table. Two are non-detections (LHS 3844 and LP 791-18). Four are grade A rotators, none
+flagged, each with a catalogued period within 20% of the paper's; Holcomb et al.'s method had refused the TESS light of
+three, and the fourth, Proxima Centauri, has a TESS target over the contamination limit (0.86). What was read of the
+four:
+
+| Star | Period, days | Catalogued, days | Telescope | Nights before 2 March 2018; the table's | Semi-amplitude fitted here; the table's, mag | Seasons mapped | Without a map | Swing |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Proxima Centauri | 88.977 | 83.5 | 11 | 601; 600 | 0.0073; 0.0073 | 2014 to 2017 | 2018 (0.92 of a turn) | 1.3% |
+| GJ 1132 | 129.15 | 122.3 | 13 | 681; 681 | 0.0024; 0.0041 | 2014 to 2017 | none | 0.76% |
+| LHS 1140 | 130.878 | 131 | 11 | 540; 539 | 0.0058; 0.0057 | 2014 to 2017 | none | 1.1% |
+| LHS 475 | 79.317 | 79.32 | 18 | 236; 235 | 0.0025; 0.0025 | 2017 | 2016 and 2018 (0.45 and 0.16 of a turn) | 0.46% |
+
+So four stars have maps, 13 in all. A season holds 83 to 236 nights and 1.4 to 3.7 turns of its star; its map runs
+within 2% of the mean surface, and leaves a scatter of 0.17 to 0.88% about the nightly light, whose own noise is 0.11
+to 0.62%.
+
+The longest light curve's nights are the table's to one night for all four, and its fitted semi-amplitude is the
+table's for three. GJ 1132's is not: telescope 13, whose 681 nights are the table's number, gives 0.0024 mag, and
+telescope 16, with 533 nights, gives the table's 0.0041. The star's swing on its page is the table's. The code's own
+search of the longest light curve, from 0.1 to 1500 days, lands on 80.3 d for LHS 475, 131.5 d for GJ 1132 and 131.0 d
+for LHS 1140; for Proxima Centauri's it lands on 0.99 d, the one-day alias, where the paper prints 88.977 d. This is a
+comparison, not a setting: the period drawn is the paper's.
+
+Gaia DR3 lists 11 other stars within 8 arcseconds of Proxima Centauri, with 0.15% of their light and the star's
+together, and 3 within 8 arcseconds of GJ 1132, with 1.3%; the header of GJ 1132's file marks its detection as
+de-blended. The paper flags neither row.
+
+![The four stars in the app (Proxima Centauri, GJ 1132, LHS 1140 and LHS 475): Color + brightness above, Brightness map below](images/stellar-brightness-maps-mearth.webp)
+
+Limits of this path:
+
+- A map from MEarth light is one brighter and one darker side a season, and its scale is within 2% of the mean
+  surface. The light of a few hundred nights from the ground does not fix more.
+- A map is of a whole season, two to four turns of the star, and the paper itself shows a star's spots changing in the
+  time it takes to turn once.
+- A map is of 2014 to 2017 only, the seasons before the paper's last day, however long MEarth watched the star after.
+- Only the star's longest light curve is read. Where a second telescope watched the star as long, its light is not
+  mapped.
+
+Other sources of light longer than a TESS sector were looked up on 8 October 2026 for the 786 stars cooler than
+7,500 K that had no map and have a place on the sky. "Ours" counts those stars in the source's table.
+
+| Source | Light | What a row asserts | Why it is not wired | Ours |
+| --- | --- | --- | --- | --- |
+| Newton et al. (2016, ApJ 821, 93), VizieR J/ApJ/821/93 | MEarth-North, in the same release | A graded period, as in the southern paper | Its one rotator of ours, LSPM J2041+4938 (TOI-6008; grade A, 104.5 d), is flagged for a bright contaminant, and the paper leaves such stars out of its analysis. Its other 15 are 2 candidates and 13 non-detections | 16 |
+| Gaia DR3 `vari_rotation_modulation` (Distefano et al. 2023, A&A 674, A20), VizieR I/358/vrm | Gaia's epoch photometry | A rotation period, with the segments of the star's time series it was found in | Not read: it holds two of our stars (Qatar-6 and TIC 178172313), and Qatar-6's 9.49 d is not within 20% of its catalogued 12.75 d | 2 |
+| Oelkers et al. (2018, AJ 155, 39), VizieR J/AJ/155/39 table 6 | KELT, all of a star's years as one light curve | The highest periodogram peak between 0.5 and 50 days that a shuffle of the magnitudes does not beat | The paper calls its rows "possible rotation periods" and "candidate" periods, and marks none firm. Of the 22 with a period from another source, 5 are within 20% of it, 3 at half or twice it and 14 elsewhere; 8 of the 38 lie within 10% of one day | 38 |
+| Díez Alonso et al. (2019, A&A 621, A126), VizieR J/A+A/621/A126 | The public SuperWASP, ASAS and NSVS light curves, each survey's years as one | A period under a false-alarm probability of 2%, with the survey it is from | Read, not wired. Two of ours have a period on SuperWASP light: GJ 436 (44.6 d) and GJ 806 (19.9 d, half its catalogued 39 to 41 d). Two more are on ASAS light, some 60 points a year | 16 searched, 6 with a period |
+| Briegal et al. (2022, MNRAS 513, 420), VizieR J/MNRAS/513/420 | NGTS | A rotation period | Not read: three stars (TOI-712, TOI-4662, and a source 3.8 arcseconds from TOI-4559) | 3 |
+| Hartman et al. (2011, AJ 141, 166), VizieR J/AJ/141/166 | HATNet | A period with a quality flag | Not read: two stars (GJ 3929 and TOI-1411) | 2 |
+| Lu et al. (2022, AJ 164, 251) | ZTF | A rotation period | None of ours | 0 |
+| McQuillan et al. (2014, ApJS 211, 24) | Kepler PDC-MAP | A rotation period, or none | None of ours has a period there; one is in its table of stars without | 0 |
+
+The NASA Exoplanet Archive holds a public SuperWASP light curve (its first data release, 2004 to 2008) within 15
+arcseconds of 359 of the 786 stars, and a KELT one of 129. What is missing for them is a published verdict on that
+light, star by star: the rotation of a planet's host is mostly a sentence in the planet's own paper, on seasons the
+public release does not always hold. That is a lead, not followed here.
+
 ### A star K2's method refuses
 
 K2's light is judged first. A star K2 did not watch is judged on its TESS light, and so is a star whose K2 light
@@ -763,6 +902,7 @@ The dataset's text gives the month the sector was observed, because spots come a
 
 ```sh
 node packages/telescope-cli/src/archives/tess/toolchain.mts install
+node packages/telescope-cli/src/archives/mearth/toolchain.mts install     # sfit, for a star read from MEarth light
 node packages/telescope-cli/src/archives/tess/reduce.mts <star id>...     # or --all: every star not yet judged
 pnpm telescope new-object --from-pixels all --out output/tess/specs/all.json
 pnpm telescope new-object output/tess/specs/all.json --bake
