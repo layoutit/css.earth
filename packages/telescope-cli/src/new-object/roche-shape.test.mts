@@ -20,10 +20,12 @@ test('the spec takes a Roche fit with its pole, at the radius of the fit\'s volu
   assert.throws(() => parseStarSpec({ ...base, spin: { inclinationDegrees: 60, source: 'x', url: paper } }), /give gravityDarkening or spin, not both/u);
 });
 
-test('the fit rewrites a generated sphere: its record and manifest entry, flattened geometry, measured pole, latitude darkening and a Day fact', () => {
-  const spec = parseStarSpec(base), o = 'src/objects/achernar', s = `${o}/source`, json = (value: unknown) => JSON.stringify(value);
+const o = 'src/objects/achernar', s = `${o}/source`;
+/** The files of a generated sphere that a fit rewrites, as the generator leaves them. */
+function generatedSphere() {
+  const json = (value: unknown) => JSON.stringify(value);
   const note = " presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.";
-  const files = new Map<string, string | Buffer>([
+  return new Map<string, string | Buffer>([
     [`${s}/manifest.json`, json({ inputs: [] })],
     [`${s}/preparation/raster.json`, json({ surfaces: [{ science: { kind: 'stellar-photometric-color', qualification: 'Photosphere color.' } }] })],
     [`${s}/preparation/geometry.json`, json({ surface: { radius: 248, polarRadius: 248 } })],
@@ -34,6 +36,10 @@ test('the fit rewrites a generated sphere: its record and manifest entry, flatte
     ['packages/astronomy/data/bodies/achernar.json', json({ physicalNotes: `Radius.${note}` })],
     [`${o}/README.md`, "# Achernar\n\n**Limb.** A law.\n\n## Evidence\n\n## Known problems\n\n- **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.\n"],
     [`${o}/NOTICE.md`, '# Achernar credits\n'], [`${o}/investigations.json`, json({ entries: [] })]]);
+}
+
+test('the fit rewrites a generated sphere: its record and manifest entry, flattened geometry, measured pole, latitude darkening and a Day fact', () => {
+  const spec = parseStarSpec(base), files = generatedSphere();
   // Achernar's Hipparcos position.
   installRocheShape(files, spec, { ra: 24.42813208, dec: -57.23665985 }, 'doi-10-1051-0004-6361-201424144');
   const read = (path: string) => JSON.parse(String(files.get(path)));
@@ -50,4 +56,17 @@ test('the fit rewrites a generated sphere: its record and manifest entry, flatte
   assert.deepEqual(read(`${o}/text.json`).datasets.color, { title: 'Photosphere color', detail: 'Spectrum and spin', summary: "Measured color, with hot bright poles and a cool equator from the star's fast spin. The darker edge is a model." });
   assert.match(String(files.get(`${o}/README.md`)), /\*\*Shape\.\*\* A Roche surface flattened by rotation, 9\.16 solar radii at the equator and 6\.78 at the poles[\s\S]*The pole is measured; the rotation phase is a convention/u);
   assert.deepEqual(read(`${o}/investigations.json`).entries.map((entry: { id: string }) => entry.id), ['shape']);
+});
+
+test('a fit under the law of Espinosa Lara & Rieutord, measured by polarimetry, is worded as one', () => {
+  // The shape of Bailey et al. (2024), Table 5: the law named in place of an exponent.
+  const { beta: _exponent, ...model } = record.model, law = { ...record, model: { ...model, law: { value: 'espinosa-lara-rieutord-2011' } } };
+  const spec = parseStarSpec({ ...base, gravityDarkening: { ...base.gravityDarkening, record: law, measuredBy: 'polarimetry' } }), files = generatedSphere();
+  installRocheShape(files, spec, { ra: 24.42813208, dec: -57.23665985 }, 'doi-10-1051-0004-6361-201424144');
+  const read = (path: string) => JSON.parse(String(files.get(path)));
+  assert.match(read(`${s}/measurements.json`).shape.qualification, /gravity darkened by the law of Espinosa Lara & Rieutord \(2011\) from a 17,124 K pole/u);
+  assert.match(read(`${s}/preparation/raster.json`).surfaces[0].science.qualification, /from the published Roche fit of Domiciano/u);
+  assert.match(read(`${s}/preparation/rotation.json`).qualification, /pole direction is measured by polarimetry/u);
+  assert.throws(() => parseStarSpec({ ...base, gravityDarkening: { ...base.gravityDarkening, measuredBy: 'spectroscopy' } }), /gravityDarkening\.measuredBy is interferometry or polarimetry, not spectroscopy/u);
+  assert.throws(() => rocheRecord(parseStarSpec({ ...base, gravityDarkening: { ...base.gravityDarkening, record: { ...law, model: { ...law.model, beta: { value: 0.2 } } } } })), /gives β or names its law, not both/u);
 });

@@ -2,23 +2,23 @@
   "id": "megrez",
   "name": "Megrez",
   "system": "Megrez system",
-  "description": "A star 25 parsecs away, 2.1 times the Sun's width, measured from its light.",
+  "description": "A star 25 parsecs away that spins so fast it is flattened: its equator is a third wider than its poles.",
   "aliases": [
     "HD 106591",
     "HIP 59774",
     "HR 4660",
     "Delta Ursae Majoris"
   ],
-  "featured": true,
+  "order": 5613,
   "target": "HIP 59774",
   "paper": {
-    "url": "https://doi.org/10.1093/mnras/stx1433",
-    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+    "url": "https://doi.org/10.1088/0004-637X/813/1/58",
+    "credit": "Jones et al. (2015), ApJ 813, 58"
   },
   "radius": {
-    "value": 2.123,
-    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 59774: radius 2.123 solar radii, implied by the fitted luminosity 23.146 solar luminosities (fractional uncertainty 0.3) and temperature",
-    "url": "https://doi.org/10.1093/mnras/stx1433"
+    "value": 2.285,
+    "source": "Jones et al. (2015), ApJ 813, 58, the table of model results under the gravity-darkening law of Espinosa Lara & Rieutord (2011), Megrez: equatorial radius 2.511 (+0.074, -0.068) and polar radius 1.893 (+0.046, -0.045) solar radii, from the Roche model fitted to CHARA visibilities and broadband photometry; the record holds the volume-equivalent sphere of the two, 2.285 solar radii, and the scene draws the flattening",
+    "url": "https://doi.org/10.1088/0004-637X/813/1/58"
   },
   "mass": "unmeasured",
   "temperature": {
@@ -38,12 +38,65 @@
     "url": "https://doi.org/10.1093/mnras/stx1433",
     "uncertainty": 0.099
   },
+  "gravityDarkening": {
+    "record": {
+      "source": "Jones et al. (2015), The Ages of A-Stars. I. Interferometric Observations and Age Estimates for Stars in the Ursa Major Moving Group, ApJ 813, 58 (https://doi.org/10.1088/0004-637X/813/1/58; https://arxiv.org/abs/1508.05643), the table \"Model Results using the ELR gravity darkening law\", column Megrez (HD 106591), read from the authors' LaTeX source (arXiv version 2, where it is the sixth table)",
+      "caption": "Model Results using the ELR gravity darkening law. A Roche model fitted to CHARA Classic, CLIMB and PAVO visibilities and to broadband photometry; the equatorial radius, equatorial velocity, inclination, polar temperature and polar position angle are free, the mass (2.048 solar masses) comes from MESA evolution models and the distance from the Hipparcos parallax (24.7 pc).",
+      "model": {
+        "omega": {
+          "value": 0.972,
+          "uncertainty": 0.014,
+          "cell": "0.972^{+0.011}_{-0.014}"
+        },
+        "beta": {
+          "value": 0.17,
+          "uncertainty": 0.007,
+          "cell": "0.170^{+0.007}_{-0.007} (not fitted: the law of Espinosa Lara & Rieutord 2011 sets it from the rotation rate)"
+        },
+        "poleTemperatureK": {
+          "value": 9550,
+          "uncertainty": 143,
+          "cell": "9550^{+143}_{-126}"
+        },
+        "equatorTemperatureK": {
+          "value": 7244,
+          "uncertainty": 218,
+          "cell": "7244^{+199}_{-218}"
+        },
+        "polarRadiusSolar": {
+          "value": 1.893,
+          "uncertainty": 0.046,
+          "cell": "1.893^{+0.046}_{-0.045}"
+        },
+        "equatorialRadiusSolar": {
+          "value": 2.511,
+          "uncertainty": 0.074,
+          "cell": "2.511^{+0.074}_{-0.068}"
+        }
+      },
+      "view": {
+        "inclinationDegrees": {
+          "value": 50,
+          "uncertainty": 4.1,
+          "cell": "50.0^{+4.0}_{-4.1}"
+        },
+        "polePositionAngleDegrees": {
+          "value": 50.9,
+          "uncertainty": 44.4,
+          "cell": "50.9^{+44.4}_{-42.6}"
+        }
+      },
+      "note": "The pole's position angle is poorly constrained (+44.4, -42.6 degrees) and the paper gives it with a 180 degree ambiguity (section 4.1), so which pole faces us is not measured. The paper fits two gravity-darkening laws and favors neither (sections 5.4 and 6); this is the fit under the law of Espinosa Lara & Rieutord (2011), the only one the same authors keep in their next paper with the same model (Jones et al. 2016, ApJ 822, L3, section 3.1: 'this law is supported by previous interferometric observations'). Under von Zeipel's law (beta 0.25) the same data give omega 0.964, inclination 52.0 degrees, a 10030 K pole and a 6909 K equator. The table also gives an equatorial velocity of 318.9 km/s."
+    },
+    "credit": "Jones et al. (2015), ApJ 813, 58",
+    "url": "https://doi.org/10.1088/0004-637X/813/1/58"
+  },
   "planets": [],
   "companions": [],
   "text": {
-    "card": "A star 25 parsecs away, 2.1 times the Sun's width, measured from its light.",
-    "introduction": "Its brightness, measured band by band, gives 23 times the Sun's luminosity at 8,694 K, so 2.123 solar radii.",
-    "locator": "Table 2, HIP 59774: D, Teff, L, Rad, Q",
+    "card": "A star 25 parsecs away that spins so fast its equator is a third wider than its poles.",
+    "introduction": "Its equatorial radius is 2.51 solar radii and its polar radius 1.89; the poles are near 9,550 K and the equator near 7,240 K.",
+    "locator": "The sample table (distance) and the table of model results under the ELR gravity-darkening law, Megrez: Re, Rp, Tp, Te",
     "quotes": {
       "url": "https://en.wikipedia.org/wiki/Megrez",
       "title": "Megrez",
@@ -52,6 +105,8 @@
       "introduction": "With an apparent magnitude of +3.3, it is the dimmest of the seven stars in the Big Dipper asterism."
     }
   },
-  "notes": [],
-  "order": 5613
+  "notes": [
+    "How poorly the pole is placed on the sky: its position angle is 50.9 degrees with errors of +44.4 and -42.6 degrees and a 180 degree ambiguity, so the tilt drawn could be far off and which pole leans toward us is not measured",
+    "The fit under von Zeipel's law (beta 0.25), which Jones et al. (2015) give beside this one without favoring either: a 10,030 K pole and a 6,909 K equator, a stronger contrast than the one drawn"
+  ]
 }

@@ -1,8 +1,9 @@
 /** A fast rotator's measured shape (spec `gravityDarkening`): a published Roche-von Zeipel fit, the model interferometry fits to a star
  * that spins near break-up (Achernar: Domiciano de Souza et al. 2014; Altair, Regulus and Vega carry the same record, made by hand).
- * The fit gives the equatorial and polar radii, the gravity-darkening exponent, the pole's temperature, and where the pole lies on the
- * sky. The generated star is then drawn as that fit says: flattened, with its measured pole up, its poles brighter and bluer than its
- * equator (packages/bake/src/objects/stellar/gravity-darkening.ts reads the record at bake).
+ * The fit gives the equatorial and polar radii, the gravity-darkening exponent (or names the law of Espinosa Lara & Rieutord 2011,
+ * which has none: polarimetric fits), the pole's temperature, and where the pole lies on the sky. The generated star is then drawn
+ * as that fit says: flattened, with its measured pole up, its poles brighter and bluer than its equator
+ * (packages/bake/src/objects/stellar/gravity-darkening.ts reads the record at bake).
  *
  * The spec's record is the Roche-von Zeipel record itself (ROCHE_VON_ZEIPEL_SCHEMA), each value with the table cell it was read from; it is written
  * beside the star and declared in its manifest. The spec's radius must be the volume-equivalent sphere of the two fitted radii: the
@@ -40,7 +41,7 @@ export function installRocheShape(files: PackageFiles, spec: StarSpec, star: { r
     files.set(path, String(text).replace(from, to));
   };
   const eq = record.equatorialRadiusSolar, pol = record.polarRadiusSolar, fit = `${shape.credit} (${shape.url})`;
-  const sentence = `A Roche surface flattened by rotation, ${eq} solar radii at the equator and ${pol} at the poles, its pole ${record.inclinationDegrees} degrees from the line of sight at position angle ${record.polePositionAngleDegrees} degrees, and gravity darkened with exponent ${record.beta} from a ${record.poleTemperatureK.toLocaleString('en-US')} K pole: ${fit}`;
+  const sentence = `A Roche surface flattened by rotation, ${eq} solar radii at the equator and ${pol} at the poles, its pole ${record.inclinationDegrees} degrees from the line of sight at position angle ${record.polePositionAngleDegrees} degrees, and gravity darkened ${record.beta === undefined ? 'by the law of Espinosa Lara & Rieutord (2011)' : `with exponent ${record.beta}`} from a ${record.poleTemperatureK.toLocaleString('en-US')} K pole: ${fit}`;
 
   files.set(`${s}/${ROCHE_RECORD_PATH}`, json({ schema: ROCHE_VON_ZEIPEL_SCHEMA, objectId: id, ...shape.record }));
   const manifest = read(`${s}/manifest.json`);
@@ -51,7 +52,7 @@ export function installRocheShape(files: PackageFiles, spec: StarSpec, star: { r
 
   const raster = read(`${s}/preparation/raster.json`), science = raster.surfaces[0].science;
   science.gravityDarkening = ROCHE_RECORD_PATH;
-  science.qualification = `${science.qualification} The surface is darkened by latitude from the published Roche-von Zeipel fit of ${shape.credit}: the hot poles brighter and bluer, the cool equator dimmer and redder.`;
+  science.qualification = `${science.qualification} The surface is darkened by latitude from the published ${record.beta === undefined ? 'Roche' : 'Roche-von Zeipel'} fit of ${shape.credit}: the hot poles brighter and bluer, the cool equator dimmer and redder.`;
   files.set(`${s}/preparation/raster.json`, json(raster));
 
   const geometry = read(`${s}/preparation/geometry.json`);
@@ -62,7 +63,7 @@ export function installRocheShape(files: PackageFiles, spec: StarSpec, star: { r
   Object.assign(rotation, inclinedPoleOrientation({ rightAscensionDegrees: star.ra, declinationDegrees: star.dec }, record.inclinationDegrees, record.polePositionAngleDegrees), {
     source: `Measured axis: ${shape.credit}, inclination ${record.inclinationDegrees} degrees from the line of sight and pole position angle ${record.polePositionAngleDegrees} degrees east of north (source/${ROCHE_RECORD_PATH}), the pole tilted toward us; computed by inclinedPoleOrientation in packages/bake/src/objects/stellar/gravity-darkening.ts.`,
     coordinateSystem: 'ICRF/J2000. +Z is the measured rotation pole, the one tilted toward the Earth. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated: the surface has no longitude features to show it.',
-    qualification: `The pole direction is measured by interferometry (${shape.credit}). The spin phase and prime meridian are a display convention; the rotation is not animated.` });
+    qualification: `The pole direction is measured by ${shape.measuredBy ?? 'interferometry'} (${shape.credit}). The spin phase and prime meridian are a display convention; the rotation is not animated.` });
   files.set(`${s}/preparation/rotation.json`, json(rotation));
 
   const measurements = read(`${s}/measurements.json`);

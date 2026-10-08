@@ -318,6 +318,26 @@ fit (ω, β, the polar temperature, the radii and the pole's orientation), [grav
 rebuilds the surface from those numbers and writes a temperature for each latitude row. Its tests require the paper's
 equatorial radius and temperature to come back within their errors. The measured flattening is drawn as an ellipsoid.
 
+A fit may take its temperatures from the law of Espinosa Lara & Rieutord (2011, A&A 533, A43) instead, which has no
+exponent. Its record names the law in place of β, and the same module computes it from the paper's equations. Kaus
+Australis is the one such star: Bailey et al. (2024) fitted its polarization, and from their rotation rate and pole the
+law returns both equator temperatures they print, each within 1 K.
+
+Six things in this route are not printed in a paper:
+
+- The Roche shape equation. The fit papers do not print it; the one used reproduces their radii.
+- For Kaus Australis, the step between two measures of spin: the fit gives the rate as a fraction of break-up, the law
+  takes it as a fraction of the orbital rate at the equator. The Roche surface relates them, and the printed
+  equator temperatures come back with it.
+- Which fit is drawn when a paper gives several: the one the paper adopts or calls best. For Megrez the paper favors
+  neither of its two laws, and the record takes the law its authors keep in their next paper; the record says so.
+- The single uncertainty kept when a paper prints two sides: the larger.
+- Which pole leans toward us when the paper leaves that open: the one at the printed position angle.
+- The colors. Each latitude is the star's measured color scaled by a Planck spectrum at that latitude's temperature
+  against one at the surface mean.
+
+![Megrez and Kaus Australis as plain spheres and as their papers' fits](images/fast-rotator-fits.webp)
+
 ![The placed stars' color datasets, each from a measured spectrum](images/star-colors.png)
 
 **Pulsation.** A Cepheid's brightness follows Gaia DR3's published harmonic model through each period; [light-curve.ts](../packages/bake/src/photometry/light-curve.ts)
