@@ -20,7 +20,8 @@
  *    on it at all. A twin whose own reconstruction fails the fit limit is kept in the verdict and does not decide the spots:
  *    were the star that disc, the first check would have refused the star.
  * 5. Write the map as a table on the star's own longitudes and latitudes, longitude 0 on the meridian that faced the Earth on
- *    the season's reference night, with how squarely each node ever faced the observer; a node that never did holds the mean.
+ *    the season's reference night, with how squarely each node ever faced the observer (from where ROTIR put the observer
+ *    on each night); a node that never did holds the mean.
  *
  * The result is verdict.json and, whatever the verdict, <season>.dat in the work directory. */
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
@@ -87,16 +88,23 @@ export function parseSurfaceSeason(value: unknown): SurfaceSeason {
 export const TABLE_STEP_DEGREES = 5;
 export const BRIGHTNESS_VARIABLE = 'Brightness [%]', FACING_VARIABLE = 'Facing';
 
-/** The map as a Tecplot table the raster recipe reads (tecplot-lonlat-map.ts). `grid` and `facing` are surface.jl's, on ROTIR's
- * longitudes; `observerLongitude` is ROTIR's longitude of the meridian facing the observer on the reference night, which becomes
- * longitude 0. Brightness is in percent of the mean over the nodes that ever faced the observer, each weighted by its area;
- * a node that never did holds 100. */
-export function surfaceTable(grid: { readonly columns: number; readonly rows: number; readonly values: ArrayLike<number> }, facing: { readonly columns: number; readonly rows: number; readonly values: ArrayLike<number> }, observerLongitude: number, title: string) {
+/** How squarely a place on the star ever faced the observer: the largest cosine of its emission angle over the nights, from
+ * where ROTIR put the observer on each (its colatitude and longitude in the star's frame). Negative: never seen. */
+export function facingOf(observers: readonly { readonly colatitude: number; readonly longitude: number }[]) {
+  const radians = Math.PI / 180;
+  return (longitude: number, latitude: number) => Math.max(...observers.map(observer => Math.sin(latitude * radians) * Math.cos(observer.colatitude * radians) + Math.cos(latitude * radians) * Math.sin(observer.colatitude * radians) * Math.cos((longitude - observer.longitude) * radians)));
+}
+
+/** The map as a Tecplot table the raster recipe reads (tecplot-lonlat-map.ts). `grid` is surface.jl's, on ROTIR's longitudes,
+ * and `facing` says how squarely a place on them ever faced the observer; `observerLongitude` is ROTIR's longitude of the
+ * meridian facing the observer on the reference night, which becomes longitude 0. Brightness is in percent of the mean over
+ * the nodes that ever faced the observer, each weighted by its area; a node that never did holds 100. */
+export function surfaceTable(grid: { readonly columns: number; readonly rows: number; readonly values: ArrayLike<number> }, facing: (longitude: number, latitude: number) => number, observerLongitude: number, title: string) {
   const step = TABLE_STEP_DEGREES, columns = 360 / step + 1, rows = 180 / step + 1, nodes: { longitude: number; latitude: number; value: number; facing: number }[] = [];
   // A node on a pole or on the closing meridian reads the cell just inside the grid.
   const inside = (latitude: number) => Math.min(180 - 1e-6, Math.max(1e-6, 90 - latitude));
   for (let j = 0; j < rows; j++) for (let i = 0; i < columns; i++) { const longitude = i * step, latitude = -90 + j * step, rotir = longitude % 360 + observerLongitude;
-    nodes.push({ longitude, latitude, value: sampleSurfaceGrid(grid, inside(latitude), rotir), facing: sampleSurfaceGrid(facing, inside(latitude), rotir) }); }
+    nodes.push({ longitude, latitude, value: sampleSurfaceGrid(grid, inside(latitude), rotir), facing: facing(rotir, latitude) }); }
   let sum = 0, weight = 0;
   for (const node of nodes) if (node.facing > 0 && node.longitude < 360) { const area = Math.cos(node.latitude * Math.PI / 180); sum += node.value * area; weight += area; }
   if (!(weight > 0) || !(sum > 0)) throw new Error('No node of the map ever faced the observer.');
@@ -171,7 +179,8 @@ export async function surfaceStar(seasonDirectory: string, work: string, { threa
 
   // 5. The table, on the meridian that faced the Earth on the reference night.
   const reference = season.nights.findIndex(night => night.night === season.referenceNight) + 1, observerLongitude = fit[`observer_longitude_${reference}`]!;
-  const table = surfaceTable(readSurfaceGrid(await readFile(resolve(work, 'season/surface-grid.fits'))), readSurfaceGrid(await readFile(resolve(work, 'season/surface-coverage.fits'))), observerLongitude,
+  const observers = season.nights.map((_night, i) => ({ colatitude: fit[`observer_colatitude_${i + 1}`]!, longitude: fit[`observer_longitude_${i + 1}`]! }));
+  const table = surfaceTable(readSurfaceGrid(await readFile(resolve(work, 'season/surface-grid.fits'))), facingOf(observers), observerLongitude,
     `Surface brightness of ${season.title}, ROTIR on ${season.nights.length} nights (season ${season.id})`);
   await writeFile(resolve(work, `${season.id}.dat`), table.text);
   const { entry } = await toolchainDescriptor('rotir'), packages = requireRecord(entry.packages, 'rotir packages');

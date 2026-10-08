@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parseTecplotLonLat } from '@cssearth/bake/objects/raster';
 import { surfaceArguments } from './surface-reconstruction.mts';
-import { BRIGHTNESS_VARIABLE, decidingTwin, FACING_VARIABLE, parseSurfaceSeason, surfaceTable, TABLE_STEP_DEGREES } from './surface-star.mts';
+import { BRIGHTNESS_VARIABLE, decidingTwin, FACING_VARIABLE, facingOf, parseSurfaceSeason, surfaceTable, TABLE_STEP_DEGREES } from './surface-star.mts';
 const test = sourceTest();
 
 const SEASON = resolve(import.meta.dirname, 'seasons/udkadua-mirc-2011-09/season.json');
@@ -35,9 +35,9 @@ test('several nights are one run: every file, the power law, the period that tur
 test('the table puts longitude 0 on the meridian that faced the observer, and a node never seen holds the mean', () => {
   // ROTIR's grid, 36 x 18 cells: brightness 2 where its longitude is under 180 and 1 beyond; the observer stood at 270 on the
   // reference night, and nothing east of ROTIR longitude 90 to 180 was ever seen.
-  const columns = 36, rows = 18, values = new Float32Array(columns * rows), facing = new Float32Array(columns * rows);
-  for (let r = 0; r < rows; r++) for (let c = 0; c < columns; c++) { const longitude = (c + 0.5) * 10; values[r * columns + c] = longitude < 180 ? 2 : 1; facing[r * columns + c] = longitude > 90 && longitude < 180 ? -0.5 : 0.5; }
-  const table = surfaceTable({ columns, rows, values }, { columns, rows, values: facing }, 270, 'a "test" star');
+  const columns = 36, rows = 18, values = new Float32Array(columns * rows);
+  for (let r = 0; r < rows; r++) for (let c = 0; c < columns; c++) values[r * columns + c] = (c + 0.5) * 10 < 180 ? 2 : 1;
+  const table = surfaceTable({ columns, rows, values }, longitude => { const rotir = (longitude % 360 + 360) % 360; return rotir > 90 && rotir < 180 ? -0.5 : 0.5; }, 270, 'a "test" star');
   const parsed = parseTecplotLonLat(table.text, 'test.dat'), brightness = parsed.variables.indexOf(BRIGHTNESS_VARIABLE), seen = parsed.variables.indexOf(FACING_VARIABLE);
   assert.deepEqual([parsed.columns, parsed.rows, parsed.lonStep], [360 / TABLE_STEP_DEGREES + 1, 180 / TABLE_STEP_DEGREES + 1, TABLE_STEP_DEGREES]);
   const at = (longitude: number, latitude: number) => parsed.values[(latitude + 90) / TABLE_STEP_DEGREES * parsed.columns + longitude / TABLE_STEP_DEGREES]!;
@@ -47,6 +47,13 @@ test('the table puts longitude 0 on the meridian that faced the observer, and a 
   // The seen surface is two thirds at 1 and one third at 2: its mean is 4/3, so the two values are 75% and 150%.
   assert.ok(Math.abs(table.minimumPercent - 75) < 1.5 && Math.abs(table.maximumPercent - 150) < 3, `${table.minimumPercent} ${table.maximumPercent}`);
   assert.doesNotMatch(table.text.split('\n')[0]!, /"test"/u);
+});
+
+test('a place faced the observer as squarely as on its best night, and one behind the limb on every night never did', () => {
+  // The observer on the equator at longitude 270 on one night and at 180 on another.
+  const facing = facingOf([{ colatitude: 90, longitude: 270 }, { colatitude: 90, longitude: 180 }]);
+  assert.ok(Math.abs(facing(270, 0) - 1) < 1e-12 && Math.abs(facing(180, 0) - 1) < 1e-12);
+  assert.ok(Math.abs(facing(225, 0) - Math.SQRT1_2) < 1e-12); assert.ok(facing(30, 0) < 0); assert.ok(Math.abs(facing(0, 90)) < 1e-12);
 });
 
 test('the spots are taken against the spottiest spotless twin that fits on the sphere', () => {
