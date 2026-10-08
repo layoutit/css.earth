@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "phaethon-arrival.webp",
-      "bytes": 32872,
-      "sha256": "307e30ae7e89f068c5dd5eac7b535de3f72f84aef44ac60c19278820cea5162e"
+      "bytes": 33742,
+      "sha256": "559b0e4817d8f15a1d0c4af2f9ae9d8a5e21f5dad375e9310cede59c6f0e1907"
     },
     {
       "location": "public",
       "filename": "phaethon-billboard.webp",
-      "bytes": 4252,
-      "sha256": "046e72d487a055636e061d607806cda00ec86b68df6fa323bc87b025bbc64704"
+      "bytes": 4470,
+      "sha256": "2a29918e6782104fc05dae1c6c5925dc4b185649987aafeaa90b37f8ad0e3e5d"
     },
     {
       "location": "public",
       "filename": "phaethon-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "phaethon-elevation-shadow-alpha@2x.webp",
-      "bytes": 352922,
-      "sha256": "b6f9b0b918141f0fab5081028ca31a69b3648de0148c49df20ac83dd6083baf8"
-    },
-    {
-      "location": "public",
-      "filename": "phaethon-elevation-shadow@2x.webp",
-      "bytes": 106650,
-      "sha256": "265e3e856b945ca079c212d0cf9962de2316d2334b9b4308942540dfe95d1085"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "phaethon-shape-shadow-alpha@2x.webp",
-      "bytes": 285858,
-      "sha256": "cb60fa764b811615390e7704a983d4c83ee7c6eee359884727b4f2f30f83f165"
-    },
-    {
-      "location": "public",
-      "filename": "phaethon-shape-shadow@2x.webp",
-      "bytes": 47072,
-      "sha256": "b563d65882ef2f496ced1e6166fca77941683e8aceffd70cf3735336aca392a7"
-    },
-    {
-      "location": "public",
       "filename": "phaethon-shape-surface-alpha@2x.webp",
-      "bytes": 282714,
-      "sha256": "0a85a3fc58722f4207f40f058d4f3877d9bc9671bda2f4d68fc34deb90ac16b1"
+      "bytes": 88,
+      "sha256": "e3a5a7558cbeed0d1fbb44d358064657177088e66b42ff385c89284b2b2981c1"
     },
     {
       "location": "public",
       "filename": "phaethon-shape-surface@2x.webp",
-      "bytes": 43052,
-      "sha256": "26d45edb099f4a47585c800a65943298dd5aa0a24e29dd1b00a20a8642d552d7"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1407,
-      "sha256": "1930f9d2ed86296a38d3f9dfb79fc105c68f3084f42103ea573f65d37e10b312"
+      "sha256": "e24c5a691d7ed4cf5521de1292e0cb0a21c669426d8922402543ac24bb10643d"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 155678,
-      "sha256": "027006364a019ac2c7c16dd1a3358a95911af722c6a52cd4179cae23f613dc71"
+      "bytes": 205181,
+      "sha256": "05256370d2ee6eb8309419d90472bf3256ffaf5767bdb1ed1d17c579eae7b2dd"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2061,
-      "sha256": "b163b73dddda381e5ad21ed2df679d4ffab74b41bdada6340bde825ee336d5e7"
+      "bytes": 8631,
+      "sha256": "1435e57e04b365bf1a8460b83082c93d5cca501b0691641009c7f7e79e916488"
     },
     {
       "location": "prepared",

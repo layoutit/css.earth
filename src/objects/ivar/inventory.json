@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "ivar-arrival.webp",
-      "bytes": 29272,
-      "sha256": "4350e5b8edf4e1b3cac896a7bd3a70ddbf3983e8ba250a56a70dbf347407a1dd"
+      "bytes": 29562,
+      "sha256": "3503ed6c4b24b5352e06ecb061377a0b821c83855b62cf1175473d0a60964a06"
     },
     {
       "location": "public",
       "filename": "ivar-billboard.webp",
-      "bytes": 3516,
-      "sha256": "284ab0abfcd6f2182d2ded8062b195d3f5f9b4d7b1908dc8c5efe5454e4f804f"
+      "bytes": 3598,
+      "sha256": "884a581ce9891bdf2dd898ae1b1781c532cd2f946459f8c6900f1ec908ad5541"
     },
     {
       "location": "public",
       "filename": "ivar-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "ivar-elevation-shadow-alpha@2x.webp",
-      "bytes": 377062,
-      "sha256": "026bf8b748be0a61fc453d2672170194a20295e02c34e742cdc66572fad7dde8"
-    },
-    {
-      "location": "public",
-      "filename": "ivar-elevation-shadow@2x.webp",
-      "bytes": 107252,
-      "sha256": "43618a1ddc35e8de40609f32f7c7a231c06e69477626ce1483480cbc72b27ab9"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "ivar-shape-shadow-alpha@2x.webp",
-      "bytes": 311360,
-      "sha256": "4a0622ddc1f8d60afcc5197cb138e279d50cb7b3915c34f8d7432b6b1edf7c0b"
-    },
-    {
-      "location": "public",
-      "filename": "ivar-shape-shadow@2x.webp",
-      "bytes": 50602,
-      "sha256": "3c13005741496d518fc477ee69d8f4d265fe339350090f2700798295a30c958d"
-    },
-    {
-      "location": "public",
       "filename": "ivar-shape-surface-alpha@2x.webp",
-      "bytes": 305108,
-      "sha256": "80187432add63ff4b9d33fa6f233d79323cdd040a91b49130994ff4ff295d764"
+      "bytes": 88,
+      "sha256": "712d4abc35a2fb76041bd97912f5e23b8d7752d12b6ffd2289240a3bf6e531ec"
     },
     {
       "location": "public",
       "filename": "ivar-shape-surface@2x.webp",
-      "bytes": 45264,
-      "sha256": "a4f8639e42ff50d810fdeab673c496a8caed00a1f62452dfa436bc9ee5660602"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1298,
-      "sha256": "d2f63e72cd06033435661b2a48d7ecff0cd76fd0694c2231cecb3dd44e3fe274"
+      "sha256": "95ecc00b896ca7a7d8bb48d9cd282f7f34fd2862e2bf20c5d93909ea750981af"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 222473,
-      "sha256": "d0d84459175d00a8662cd5ac9663f28d499e5f32bc83e010f17f5f93a463bee1"
+      "bytes": 295511,
+      "sha256": "2961eca78c11b6f5f89dc56fa1adbe0f4e6f1356169299e42360c63639b2219e"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3032,
-      "sha256": "c16bf986fc38ab3c5b44304ac5365bd862b052578eafb53185a39b784b327b08"
+      "bytes": 12798,
+      "sha256": "e3d9f8c255a8da3bc65f37d248a2c90dcb8fb01e37174719b182f799dd248b2f"
     },
     {
       "location": "prepared",

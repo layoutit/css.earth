@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "hela-arrival.webp",
-      "bytes": 33412,
-      "sha256": "77b53f98f90cf109c239feda662a97cde8d6ef588db3950c6aa0f4b3dcddd61e"
+      "bytes": 33950,
+      "sha256": "3dd2005ed9c2a41fd46ea11e1cccc96ba70ea4dea5dc6fc597bcf6b19cc3c9ee"
     },
     {
       "location": "public",
       "filename": "hela-billboard.webp",
-      "bytes": 4120,
-      "sha256": "053308781880cd0b4d50a3b298fe5224639cde1060781dbb5a6701c5d231b5d4"
+      "bytes": 4218,
+      "sha256": "a6eef35b626ca3d06d1434c879582e52ade200c8f0d5547663fca87e32fab4f7"
     },
     {
       "location": "public",
       "filename": "hela-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "hela-elevation-shadow-alpha@2x.webp",
-      "bytes": 444282,
-      "sha256": "17b9993aad42bd8ccd131f95a5470dfc48124f670ff04967e6aed93fa2e94fec"
-    },
-    {
-      "location": "public",
-      "filename": "hela-elevation-shadow@2x.webp",
-      "bytes": 122214,
-      "sha256": "674ee71e80fd700a0b6812b356435d40111ca05c03fce0260868f3d7e8ded580"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "hela-shape-shadow-alpha@2x.webp",
-      "bytes": 361464,
-      "sha256": "8a68cab10b7d8faa520987072d26b48a9dd593a999b5d7a7ccc1fc715d08f57d"
-    },
-    {
-      "location": "public",
-      "filename": "hela-shape-shadow@2x.webp",
-      "bytes": 51092,
-      "sha256": "c4ad13c7fe9b7d4ad64b7f17eb7df77891f056f7b1ba1875d0b4d6c8071e6aa7"
-    },
-    {
-      "location": "public",
       "filename": "hela-shape-surface-alpha@2x.webp",
-      "bytes": 358908,
-      "sha256": "408ce32b80e027e30b18533bab48db49ddf97302bc14ce9d4944bd517d4f09b7"
+      "bytes": 88,
+      "sha256": "fdc9915e2527888afe1c9c9a24408ed9eff320ecb1d596d0874e3041e6280345"
     },
     {
       "location": "public",
       "filename": "hela-shape-surface@2x.webp",
-      "bytes": 46470,
-      "sha256": "0f4181ad01e70bc7f1b79f3a273e64ea41ee7372a6e004e8b2f65eae8a712d0e"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1300,
-      "sha256": "54cf732f9e07b5d95441f327eb815c97df5a865dfc5fb4ea9ab27b590c20b75e"
+      "sha256": "1010ea0d2eab32665deb476d208b140e8619b9f63c6111b7e8d2ac6e9b0c2f75"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 297098,
-      "sha256": "2582a0d8ea0f47b0b0f82d18a4d8c591914dda169970590b81729bcb80615cb7"
+      "bytes": 396237,
+      "sha256": "3750ee6384ee5e50bfed782e1ce089d10208ca0de40c290a0cc7537599ff2b7f"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3055,
-      "sha256": "66d0b2069a7dbef656b296157e257ab545a5ea0cd5284f8daca4af6d51fd1b35"
+      "bytes": 16361,
+      "sha256": "46523fce9d0c2ec5bba3673985a3c47c3b849b68df6bfbbfa48292ef1929d32e"
     },
     {
       "location": "prepared",

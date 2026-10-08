@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "bellona-arrival.webp",
-      "bytes": 32712,
-      "sha256": "0be2dba596c0ab4d9980a70f62270456b0bf173f3e558caeb22dbabaa7a9905f"
+      "bytes": 33562,
+      "sha256": "1ee3f388af4ca5574099adb0a7fa4a917846f57c3e0de82be1e32b1e6db7210e"
     },
     {
       "location": "public",
       "filename": "bellona-billboard.webp",
-      "bytes": 4514,
-      "sha256": "1890b98c23ba968844e608e1b4ee9d95062acd451b7de30c62a8adccfbca07ed"
+      "bytes": 4694,
+      "sha256": "fe7090ff75952979c56e63c10935c009b339e8c576a74e9ae09493b3fe8063d0"
     },
     {
       "location": "public",
       "filename": "bellona-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "bellona-elevation-shadow-alpha@2x.webp",
-      "bytes": 573350,
-      "sha256": "dcc5c739b3914070880338be971e47d4e788a25dadbc92d41b7dd74d01412955"
-    },
-    {
-      "location": "public",
-      "filename": "bellona-elevation-shadow@2x.webp",
-      "bytes": 138676,
-      "sha256": "d1e3a6014d82ef0ac7e36f761a1d49a5f2d4905ab6ce937b764f1d652db758d5"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "bellona-shape-shadow-alpha@2x.webp",
-      "bytes": 481000,
-      "sha256": "82dbf82927770084b1afdbde720379bb712d35e2bf0fdff9f18cda7dd2228ee3"
-    },
-    {
-      "location": "public",
-      "filename": "bellona-shape-shadow@2x.webp",
-      "bytes": 57780,
-      "sha256": "1ccdf1468787233ac427f72ef030d15cb22ccf76b5ea6694da97fe5ff54e08cb"
-    },
-    {
-      "location": "public",
       "filename": "bellona-shape-surface-alpha@2x.webp",
-      "bytes": 475528,
-      "sha256": "58b29521981ff14ebbbf31300e1bcd509329da6cc081e89b1724a8913e3d8f8f"
+      "bytes": 88,
+      "sha256": "60b2b6865a570cedb4d222d54ef663345b1c5c12d4fcc4429cb2b8942451fb15"
     },
     {
       "location": "public",
       "filename": "bellona-shape-surface@2x.webp",
-      "bytes": 50174,
-      "sha256": "600a5b13ba90ab90ee5caa7c9bb057b2e4acc47df0f85e2cc0369bba70787088"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1377,
-      "sha256": "9bfbe5253ce99a71933dd704f12daa2fc9d8b7612730517b435dc42aad976331"
+      "sha256": "2acb259d264bfe69f6335caa13bc71dba1926f5b0ee3034c634538358d353902"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 423138,
-      "sha256": "f2846fa3ac183b44e6953299b81a283b93ca809a2cc9b601f368f149caf0121e"
+      "bytes": 565834,
+      "sha256": "b8f20f4e5eec7bc163628fbe2cb6d9154836f2a6d0c12618165503886780eea8"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3148,
-      "sha256": "e2cccfdcb4452ac0d72ecdd62d67a9ffef84de2c29d83c673b5ccc37227a218a"
+      "bytes": 22322,
+      "sha256": "b020a8d41d3753fd8098134b4f442eb8813b5a2fbe05fff9d4157d019c5479e1"
     },
     {
       "location": "prepared",

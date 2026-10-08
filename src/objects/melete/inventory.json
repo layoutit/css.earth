@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "melete-arrival.webp",
-      "bytes": 30228,
-      "sha256": "2cdf553700176581318dd7bd959ec9cd24e6cb874658325e4ccbe208db0803bc"
+      "bytes": 30988,
+      "sha256": "cf649c85161ba44cf49b07893e295cd08c485b4c859e02a90178f5900d71f733"
     },
     {
       "location": "public",
       "filename": "melete-billboard.webp",
-      "bytes": 4170,
-      "sha256": "bd089acd52f9ce0952bfb1a9438798f94c302b5965ac2521e02990657e34cf9d"
+      "bytes": 4396,
+      "sha256": "4c48dbea521d8fee2e568e163218174d9129677c56881e8cc47e9bf90fd88ef9"
     },
     {
       "location": "public",
       "filename": "melete-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "melete-elevation-shadow-alpha@2x.webp",
-      "bytes": 568476,
-      "sha256": "11fcb5ccac8a375d715a4352e70430e5ab654acefed33f7669c9bdb93edd38e5"
-    },
-    {
-      "location": "public",
-      "filename": "melete-elevation-shadow@2x.webp",
-      "bytes": 128800,
-      "sha256": "103e4090160d81ddf5b5fcb2b39a794e754302d86413b86c6dd88f36d04f3880"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "melete-shape-shadow-alpha@2x.webp",
-      "bytes": 485236,
-      "sha256": "cf7763ffbaa57159e2a184aca24aee399a8667ef463ce30493f8f5ff4b2caa08"
-    },
-    {
-      "location": "public",
-      "filename": "melete-shape-shadow@2x.webp",
-      "bytes": 57732,
-      "sha256": "f843e05b75f0fc343f8db2082868fe96d1da160932acc163bc1c29581f751b6b"
-    },
-    {
-      "location": "public",
       "filename": "melete-shape-surface-alpha@2x.webp",
-      "bytes": 481950,
-      "sha256": "2f14d210b574bc0b98381992b16d91aefe1e3cbbd869b742597bbfddf178459e"
+      "bytes": 88,
+      "sha256": "157474466480d3fb5426bda7661448946f444729a0d299a6331effc198b3c573"
     },
     {
       "location": "public",
       "filename": "melete-shape-surface@2x.webp",
-      "bytes": 51646,
-      "sha256": "617aa7a22fb168674bf0dc21e6195c3509a975edf78020e8818bed73bfe11632"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1350,
-      "sha256": "52b0653ee42e97ffd2c3c8af19404643318d011ff6393cb3e790e6d3cc0f06a9"
+      "sha256": "b2c2a25a16da255408953090896f7d887e9d25dfa97701a27dd015d3039cec84"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 414330,
-      "sha256": "b6b32ddbac5ae508b8f6fd34edfbd50a9917b6148408329a1bccc0bbf4267e37"
+      "bytes": 555075,
+      "sha256": "85896c0aa1db8190455a0e214f23fa369151f83fb0c871ce9854e7ce0a94c308"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3075,
-      "sha256": "979f12b6f4bc6046a1e8726c5c700bc8a6d77466dce3ab7e41e34cd43c63597c"
+      "bytes": 22133,
+      "sha256": "bff67a6fa71f1679eb9b5365fcb1f60b48ce608b1bbec6285625650160c32a47"
     },
     {
       "location": "prepared",

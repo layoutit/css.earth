@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "astraea-arrival.webp",
-      "bytes": 33662,
-      "sha256": "6fc9d960117016da962001c055de1d8ae9e5459832133b4d3a8bf368ab1cefdf"
+      "bytes": 34446,
+      "sha256": "ad2842266a5c2dcec084c5b7ef0eaca7550cb778980a3230a94ec39c84f43d85"
     },
     {
       "location": "public",
       "filename": "astraea-billboard.webp",
-      "bytes": 4656,
-      "sha256": "f8ed551671fac1a8e19d8a00f9f5e3cdb797043b5a58b11d60c42623f94d4002"
+      "bytes": 4820,
+      "sha256": "11f4986f915fa3c6ef896b98f9147ca0ef9748abbfa362972eb77dc3753cccf9"
     },
     {
       "location": "public",
       "filename": "astraea-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "astraea-elevation-shadow-alpha@2x.webp",
-      "bytes": 636772,
-      "sha256": "93f28ad5dc9c13fcf29e753a412521643822001bced9499c328ff5c65df6ddeb"
-    },
-    {
-      "location": "public",
-      "filename": "astraea-elevation-shadow@2x.webp",
-      "bytes": 140558,
-      "sha256": "8b54eaa7458e70da14d574335e953db8d3e967fd3c38d9c23a6c33398a9daaa5"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "astraea-shape-shadow-alpha@2x.webp",
-      "bytes": 541054,
-      "sha256": "8dea084438c2b2a8867c013cd063fc419e324a56ec3601f9b01fe3cf322ea28a"
-    },
-    {
-      "location": "public",
-      "filename": "astraea-shape-shadow@2x.webp",
-      "bytes": 63638,
-      "sha256": "39f718b3ea6ef33998b8ab23a6e702c35ad7f1c66172882b3c3c9db0b8909f71"
-    },
-    {
-      "location": "public",
       "filename": "astraea-shape-surface-alpha@2x.webp",
-      "bytes": 534792,
-      "sha256": "8d4dfe8458fb4583ffa07101a0eae9054cd418ff73865006c8e88d0137244c0c"
+      "bytes": 88,
+      "sha256": "85ebd34935f2570b1fdbdebaffe2633544a427b2643ba959ea4b6252c0ae3bbb"
     },
     {
       "location": "public",
       "filename": "astraea-shape-surface@2x.webp",
-      "bytes": 53956,
-      "sha256": "5f227dad147b8dc2d19b8f01e91d4613722161c12be63300639ef933872e9911"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1375,
-      "sha256": "e280e4f683d058a7974f4eea13000d435239342a2eefa4f7341ed2d748fc5950"
+      "sha256": "0ca0fc4db089e57180d86639ae0bd023acdf36de673f49ac4cf2fc2b1a6751cf"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 4028,
-      "sha256": "f7c41196deb7d534749940f00c526c735aaacb6d00f9a414af9e8bce493339fc"
+      "bytes": 4024,
+      "sha256": "8c6f4e121b15509816bf04703d4ccdabfd545b300d9304f06f09c47e462745b0"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 507547,
-      "sha256": "e4beb99bf46fbae2cb5b03fc7108fd8f3e48f9b86efe12c3649e4ed84747536f"
+      "bytes": 682521,
+      "sha256": "b7139586760ebea68f2e5200bf2c35f0fbb482608e5e10e8efc9286d9998e7b1"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 592512,
-      "sha256": "3baafc02e356faebc56532cc977647115369ca084c67b905099b0008911d37a3"
+      "sha256": "ac69b4de6a9a3c25eafe46a684eda39c26085627c57c370bd503efa6aca7d6cb"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2040,
-      "sha256": "b0660b9d1b23d7b4ab8fc3e9df1e676cb7c7cd8b539ce4bee0eb97c268295247"
+      "bytes": 25834,
+      "sha256": "0dbd4aecbda3f15499bdc2d0be28b3e0f436fa1d95709556204e9bb03f00dd95"
     },
     {
       "location": "prepared",

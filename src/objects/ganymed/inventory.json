@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "ganymed-arrival.webp",
-      "bytes": 34342,
-      "sha256": "f40f815afb00a90a2c4efd32de9e0f00a159b6b9cec52f105fa1ede1beccb051"
+      "bytes": 35266,
+      "sha256": "dbb6987587be5ed019c4a4d8c48c081c0b761edac74d1a09b7efadbcdfd4c4c1"
     },
     {
       "location": "public",
       "filename": "ganymed-billboard.webp",
-      "bytes": 4536,
-      "sha256": "9a4c891c00a9b2a0f82d785a7f310b75f8ce188604ca5a70cf045fa85a1e8b95"
+      "bytes": 4762,
+      "sha256": "a65c732f0372861429db05c44383e94e51eb509097066b579a603287dbd3ad6c"
     },
     {
       "location": "public",
       "filename": "ganymed-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "ganymed-elevation-shadow-alpha@2x.webp",
-      "bytes": 616342,
-      "sha256": "36f8c18066e0bb81a66ea8c062a6ff100f0efd0729bd6960da587b9a49f2e7c8"
-    },
-    {
-      "location": "public",
-      "filename": "ganymed-elevation-shadow@2x.webp",
-      "bytes": 124318,
-      "sha256": "6051d9657d6845e6921931fac1d28366092a326fc344918ad3ee3cb53f519fe8"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "ganymed-shape-shadow-alpha@2x.webp",
-      "bytes": 535412,
-      "sha256": "c27959f88258fc2b857f1b14ed391f93a491327f55207df52c292d5269524bdc"
-    },
-    {
-      "location": "public",
-      "filename": "ganymed-shape-shadow@2x.webp",
-      "bytes": 59804,
-      "sha256": "c6f0d355861c797e3707c40be8f03d58e2aecb99a820e2e6581adaf95ab8b0b9"
-    },
-    {
-      "location": "public",
       "filename": "ganymed-shape-surface-alpha@2x.webp",
-      "bytes": 531398,
-      "sha256": "fc6874e620953f631cc5d002ab48d449c1a9c331ff8e6940cd37246d253bd5f3"
+      "bytes": 88,
+      "sha256": "442a0bbb49d25943fa5626bc54c80e6dea6dac17607ab94ab4d0105126b4b702"
     },
     {
       "location": "public",
       "filename": "ganymed-shape-surface@2x.webp",
-      "bytes": 52666,
-      "sha256": "7381a63d052b95691e52a007b20279584af34da757d79cac6ab1a4f84848c98a"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1377,
-      "sha256": "984990d665b375aba887472766f43b329cbac5b58cc093687c7a3f55dafbbaac"
+      "sha256": "e101601474e5559311ed9e7990c5a21474555d20f3facd06d4ba01b43d04d364"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3076,
-      "sha256": "ced83d2271e68d3378fa509b728a4ad154020f37528c45141f336322c17dff94"
+      "bytes": 3166,
+      "sha256": "0e1e4a61e9b1a24ef47db3853b6926dcc92ff58dc1e960dde0ef04902f14309e"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 516597,
-      "sha256": "ff425357f903ff5d8edbf6c408969f575970fb7167eb265ace814871e3af8fab"
+      "bytes": 692589,
+      "sha256": "d71640b9a18d05dca6988b6c70f1d69e56c48910f4e48999b6cacd90f81df115"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 594655,
-      "sha256": "c34567ca1fe87f1a49d3874da2daa51937da7961260fda622da6f38e88c63345"
+      "sha256": "bff169bf2beea7d10d7d83a298df05b295dc9542cc254f260988533b6602e763"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2040,
-      "sha256": "6b96a3ab871306b2881af792afa5a8be7d0bd24c03d2c96a2a2d11ed3e6aa6d9"
+      "bytes": 25834,
+      "sha256": "8d60e354316d512aa898c72d183530258542a158d993816da457494e74fe6a03"
     },
     {
       "location": "prepared",

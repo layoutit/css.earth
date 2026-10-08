@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "loreley-arrival.webp",
-      "bytes": 37558,
-      "sha256": "8408444958ef58ad6e07f3288d8b9fc8cfe37fc6a052bb46e5137356e23fd439"
+      "bytes": 38338,
+      "sha256": "e1c98d6226b6044808728f5d1fefc53d095552d68467c7b2c2ab62c2129c044c"
     },
     {
       "location": "public",
       "filename": "loreley-billboard.webp",
-      "bytes": 4684,
-      "sha256": "fe2d0cea368186577656fde424693b8a0e76afc51a214552a844b29131e32b7c"
+      "bytes": 4884,
+      "sha256": "67ca1df83c50115ae0d4881454a9427fad24504f8edc413ef4aad3e989b56014"
     },
     {
       "location": "public",
       "filename": "loreley-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "loreley-elevation-shadow-alpha@2x.webp",
-      "bytes": 575848,
-      "sha256": "36346b21601647a182cc8802974a60e4930dc161b91272de0eceb8e4e471e5d7"
-    },
-    {
-      "location": "public",
-      "filename": "loreley-elevation-shadow@2x.webp",
-      "bytes": 145248,
-      "sha256": "722def20d5d35cc33c5adcb0aee08d58850cf36111372e35f940acefc65897f1"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "loreley-shape-shadow-alpha@2x.webp",
-      "bytes": 476118,
-      "sha256": "4423d1992d7307a0a828f6bb6b263c597007c58c11808b921af28052c8614b2c"
-    },
-    {
-      "location": "public",
-      "filename": "loreley-shape-shadow@2x.webp",
-      "bytes": 58056,
-      "sha256": "f1e41d05bfbaaea00a3c4fb222f3017b7e7f24724e6ff2273e0add780a6b22da"
-    },
-    {
-      "location": "public",
       "filename": "loreley-shape-surface-alpha@2x.webp",
-      "bytes": 472520,
-      "sha256": "51c57a40ad36c3e1bf92d7a50aa27dbca5fa86ab10a0798cbbd011f9d6ffd6ac"
+      "bytes": 88,
+      "sha256": "2e182428e4d649f2a2234ca790b5bff1fb218fb172e4b717fd16d0904d69dd21"
     },
     {
       "location": "public",
       "filename": "loreley-shape-surface@2x.webp",
-      "bytes": 51470,
-      "sha256": "146f31707963ba6deda76e1b099a288ad35b570416f8c8da589a2742587dddd1"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1377,
-      "sha256": "e4ac69948c3025a77446fb23095e4c4bb0a534a652dffe25195537c0c79cf00d"
+      "sha256": "69e17d1cd1482cee1e541c3504d989b140bc29c35f7c367dfa42aea0f3ac3661"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 412053,
-      "sha256": "7c060e61440b976f27b8b7b98f6463640e7455e6072f58db09b6a508be190794"
+      "bytes": 551992,
+      "sha256": "ca3e530ba17d9a716f3bddc23985fd614378a3cd14b4cc19d3f152599ee6c7a3"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3549,
-      "sha256": "8debec7c566190b6036c1dd0c7d5e3eca0bb8ba410597e0b667e1bf4e6190f6c"
+      "bytes": 22483,
+      "sha256": "e1e02282d6e4e1d040ccf0b9c4f365bab921adb5d29d7ed17e588921ceadd376"
     },
     {
       "location": "prepared",

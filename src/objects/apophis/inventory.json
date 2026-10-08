@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "apophis-arrival.webp",
-      "bytes": 38998,
-      "sha256": "c8d4a75f28265e605cbcb32a8d49bd54db9d6feae500469103f76b3c8bab87c6"
+      "bytes": 39634,
+      "sha256": "468f7700af5a3d3e78120649cadaf1e3558513790a9249de14c661ac24b65b97"
     },
     {
       "location": "public",
       "filename": "apophis-billboard.webp",
-      "bytes": 4700,
-      "sha256": "743ce5919939457bc7e58594ee48525a822d810023c15f8ff0422156ef11ce5b"
+      "bytes": 4788,
+      "sha256": "ab1380f19080ea177bca636666aa2820c09cad5167d6e23a77934263ab3e4545"
     },
     {
       "location": "public",
       "filename": "apophis-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "apophis-elevation-shadow-alpha@2x.webp",
-      "bytes": 616904,
-      "sha256": "0e047a7561d43d937bf1c077e417bd7e3d823bc146010059328d3bcc8e89cd44"
-    },
-    {
-      "location": "public",
-      "filename": "apophis-elevation-shadow@2x.webp",
-      "bytes": 149656,
-      "sha256": "6677821ca6aa5f81d9e5256c5b5a9348b44512a1ccee094076f37a52aa943fb0"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "apophis-shape-shadow-alpha@2x.webp",
-      "bytes": 513924,
-      "sha256": "690e9b259c248ef193af9904f76ca61df2ec4a8307cf6847b2699e7ec8cedeec"
-    },
-    {
-      "location": "public",
-      "filename": "apophis-shape-shadow@2x.webp",
-      "bytes": 63544,
-      "sha256": "9effcde74a4484885fdfe78bd6ee79dec2e81a75a39c0c4f4d53d9638f3e2804"
-    },
-    {
-      "location": "public",
       "filename": "apophis-shape-surface-alpha@2x.webp",
-      "bytes": 507436,
-      "sha256": "57c84e4b8b1772922342f78e523d8876d6ced7bd6a012f298e88c9e8a23a39c4"
+      "bytes": 88,
+      "sha256": "c3068ac9c72eabfe601d281025f5f9dda030a86594b90d264faf6b8e05b8c211"
     },
     {
       "location": "public",
       "filename": "apophis-shape-surface@2x.webp",
-      "bytes": 55234,
-      "sha256": "cb1fda545c73864dfb5d14c24ba7214d868ef60fe1a52b83e423e294a0ceef8b"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1433,
-      "sha256": "91e0156d59b2a08db02da11666e9e713ad7117ff8bd5eeee5b7a96f17a72ad87"
+      "sha256": "c9611bebab3675aea646711389247537eaa900e64e19bd2ac258b11bd73cbf5b"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 458371,
-      "sha256": "17874e86dcab74af29f13a083eaabea46a8075c03d8d0a1efa374c3c8b6f92be"
+      "bytes": 618355,
+      "sha256": "245f413747eee1a5a7029696b17e5dade8832116277d9e067c2ecc75c0b2f157"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2247,
-      "sha256": "76747036d37c470b1789d938728943ad30751a6c365e9dc124e6e855fb431d5a"
+      "bytes": 24121,
+      "sha256": "3899f9a13125f3b677403cb58016b85030f5b0ebe85eacd56f1fefeb1e181fee"
     },
     {
       "location": "prepared",

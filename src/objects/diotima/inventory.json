@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "diotima-arrival.webp",
-      "bytes": 35406,
-      "sha256": "573cd7042998e522b820297a9a9e88536aaff9da2abab35ec648105c1f8714f2"
+      "bytes": 36094,
+      "sha256": "b3084fd3648d2c88f2f8ae8adbe2e53e4c2260b7e5f26fe8888dcc25e4e4b470"
     },
     {
       "location": "public",
       "filename": "diotima-billboard.webp",
-      "bytes": 4692,
-      "sha256": "fa779bf12bb0780ad818c719f4b19de5b2720b448c841663af48e9a190d0dd3b"
+      "bytes": 4916,
+      "sha256": "509d43fa0db1530503d269440cad7d10c1fa0700bddb320d71810b07cfd1b778"
     },
     {
       "location": "public",
       "filename": "diotima-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "diotima-elevation-shadow-alpha@2x.webp",
-      "bytes": 634930,
-      "sha256": "b6ce073a648647da9f616448d2b68623b6c8a803666763e7e7a9f34725ab08e6"
-    },
-    {
-      "location": "public",
-      "filename": "diotima-elevation-shadow@2x.webp",
-      "bytes": 138936,
-      "sha256": "391144970a3c1a08fe58168f760fe0b413ff460f47a3cde125ec2b718badbb7c"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "diotima-shape-shadow-alpha@2x.webp",
-      "bytes": 538344,
-      "sha256": "46b5701d99897e7dd9cc0fc9966234660b8362085e4cdfaa5a256299f2e1ce8c"
-    },
-    {
-      "location": "public",
-      "filename": "diotima-shape-shadow@2x.webp",
-      "bytes": 60710,
-      "sha256": "9ed8ed1c1364585145119b47ce5d7f410baf19a8d982a25b9e7626e7efdeb089"
-    },
-    {
-      "location": "public",
       "filename": "diotima-shape-surface-alpha@2x.webp",
-      "bytes": 532076,
-      "sha256": "0fceb44e9fa30fa2c31198d1bae8a678d776daf62b71dd648b6ad54628396d4a"
+      "bytes": 88,
+      "sha256": "7b361484ced2053196cbbd124b87bbb44015ee546ce349e8baaaa22fd1b09ae5"
     },
     {
       "location": "public",
       "filename": "diotima-shape-surface@2x.webp",
-      "bytes": 53496,
-      "sha256": "51393e05b2fbf7d294db6201d997d366b9c3999c98496735b3db4966f44994d7"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1378,
-      "sha256": "48570b037fbe0e74bbf34b497bfb04f665693383600100c7b2e188686ca0afbe"
+      "sha256": "415db6df11832057bfc10b1a3897fe3b26a37c278fbee14a10a733806fff2637"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 4038,
-      "sha256": "7d028a2c8a4d4d01f28d20e9cec3710f9b085700c5a5cd5a27945d009504964c"
+      "bytes": 3996,
+      "sha256": "591249529762f1c41ed362f92c6f2d6338029de8cf96d61012309cb7c220f3c1"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 511158,
-      "sha256": "695191251b03bceef027e7262278e3cb3bedeafc9ab138a4a3fb21ff66b4676e"
+      "bytes": 686422,
+      "sha256": "f87420e9514d4c7945ec1af576759030e7e5fe3a68a5e35f4b1b7f2f369fc99c"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 594726,
-      "sha256": "367988c60a10bcfd4e6f56e60e00740c55b5bdb5d16f2cc48c91513d13967ccf"
+      "bytes": 594724,
+      "sha256": "754ac79b71fe66526a006ff88298692170510f0fd4e751a10d22415f331976fb"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2041,
-      "sha256": "c6c0dbc3ee57020c09830bcf4edbd1f2caebd411f7b2eb7e1c97873973dc1d8d"
+      "bytes": 25835,
+      "sha256": "3b2a70f3ef7415aa9c5460387f46115f24a4688ff295defa44c45041a487b7fc"
     },
     {
       "location": "prepared",

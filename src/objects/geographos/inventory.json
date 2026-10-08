@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "geographos-arrival.webp",
-      "bytes": 28270,
-      "sha256": "ef8c0cd8b117a8e51870e810067e86332aed57e4e06a4fa01af0d2b10ea1ea57"
+      "bytes": 28628,
+      "sha256": "6e2b98979faa5d125711fc1a77e54045724883aeec0bb617f3867e0d7e25fec7"
     },
     {
       "location": "public",
       "filename": "geographos-billboard.webp",
-      "bytes": 2944,
-      "sha256": "8ee565cf2704f518f5a7badb5044f141b21e8f85e579f4a01ac0a618912a6532"
+      "bytes": 2980,
+      "sha256": "395a3a84a4e7aa49d0dafdc69a9c45424c17e27f7a88aa935280ae9c4dbe5f36"
     },
     {
       "location": "public",
       "filename": "geographos-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "geographos-elevation-shadow-alpha@2x.webp",
-      "bytes": 641418,
-      "sha256": "4d1dccc4ea3acd2d04ab5b49640be54ac6447393dd3da090b2cdf566f12ed8d4"
-    },
-    {
-      "location": "public",
-      "filename": "geographos-elevation-shadow@2x.webp",
-      "bytes": 169356,
-      "sha256": "a594ffb635262ba7a09cc60b1eae3ebcd0efc575f4ccf528a07b46ca953c4fca"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "geographos-shape-shadow-alpha@2x.webp",
-      "bytes": 524768,
-      "sha256": "bebbc4c06d1d57ff90b5b373a6452ff21c7d089332756969ffd0969106c796f5"
-    },
-    {
-      "location": "public",
-      "filename": "geographos-shape-shadow@2x.webp",
-      "bytes": 61466,
-      "sha256": "0f84066bc2826d1f73345934469bd88dabcaf774301cdbc1120a9e1961f81796"
-    },
-    {
-      "location": "public",
       "filename": "geographos-shape-surface-alpha@2x.webp",
-      "bytes": 518722,
-      "sha256": "272eed8ae222dafff77377b3887acf42f5554220764da29fa313f87f4f43d934"
+      "bytes": 88,
+      "sha256": "299ad55e8c7a87e2ea18cf8fb3417cafe5d2bd29cc01288e15c834aca53ccdd2"
     },
     {
       "location": "public",
       "filename": "geographos-shape-surface@2x.webp",
-      "bytes": 54046,
-      "sha256": "c9803c8a5e6a9072d4a37c6ab35ea5c0028150e4130b9cff23011616fdf0d233"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1458,
-      "sha256": "8d6a9cabb2bb44d9dbfb2fe20e4b5254ce698d35670aa2cf2ccd9caaae0edc5e"
+      "sha256": "887afb221f6b3b2c63c34136ee2f9f29d2b06e4eab8726ad95d3bb8d5f6daa9b"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3628,
-      "sha256": "a428ff1249e2a9e97e2973972ecb1831f8a97d3c44b853409c537d972f642570"
+      "bytes": 3700,
+      "sha256": "ebaf9c47b1b837e941e57c12fdebcbd9ee14bfaa2e976fd2bcd307680e4dd3f1"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 501539,
-      "sha256": "5c1db1bfc8476932afc19389cd8eff67bf58b4aa5917af706333987dce8629ba"
+      "bytes": 675177,
+      "sha256": "c3be9dfb9fcdf74cf1376fee6822fee2de3311b83caac8c5ca49c1c56369ac5b"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 595554,
-      "sha256": "0d37d190df87f1824b58337b8663c5b253e095a02eb9fcfcf749245729e78659"
+      "sha256": "763d91eafacd94029f0ed00113519ba011cff19d56d89db9850bbc62e85f1901"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2890,
-      "sha256": "9ccbf694cecb5ef57c40a18a36ff8c92837d7da9c926e7b7158caddcb2b24f8b"
+      "bytes": 26672,
+      "sha256": "5fc0efc864d0db3e1bd7eb1ffbf140c6f2129bccd402b2d389acda6eb8534f12"
     },
     {
       "location": "prepared",

@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "aspasia-arrival.webp",
-      "bytes": 37342,
-      "sha256": "0c2a1cd84af4dacedb26779156ec209dcf4379b34a13a1579d5fe26bea176ede"
+      "bytes": 38058,
+      "sha256": "c4ff9f3c3788b1a69764c4fada4cb0afb326dbbb72016e761a36582376123b8d"
     },
     {
       "location": "public",
       "filename": "aspasia-billboard.webp",
-      "bytes": 5176,
-      "sha256": "3c706f159e2a873a8370c858018ff6a1cac5e90af614d5ccb352fe238acabb35"
+      "bytes": 5366,
+      "sha256": "3da0f817e492eaceff2dbb3649a40b6a1963fcd666ce7439029b820b6bfdb745"
     },
     {
       "location": "public",
       "filename": "aspasia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "aspasia-elevation-shadow-alpha@2x.webp",
-      "bytes": 567910,
-      "sha256": "7dcbac0f2b548d91504a00a6781949780333db209bb4e475b08d9f401399c107"
-    },
-    {
-      "location": "public",
-      "filename": "aspasia-elevation-shadow@2x.webp",
-      "bytes": 131370,
-      "sha256": "20295e1365d8d488d2d68f6aef48efa1b0ff22322a1a3a35d14eb2f5c4a8d87c"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "aspasia-shape-shadow-alpha@2x.webp",
-      "bytes": 476340,
-      "sha256": "e18a5360d05645c7c43a260ea5f98d6eac851b35fb2ddb069bb5f862b1064eea"
-    },
-    {
-      "location": "public",
-      "filename": "aspasia-shape-shadow@2x.webp",
-      "bytes": 57560,
-      "sha256": "1db834fda8d92b90387ca882ebd3261bd74708f256b0780b4edf385ff8c4e423"
-    },
-    {
-      "location": "public",
       "filename": "aspasia-shape-surface-alpha@2x.webp",
-      "bytes": 473016,
-      "sha256": "0ca9245fada9112ba28d80df71c6d4b5e096b7836e3805fbd202ad81a744201e"
+      "bytes": 88,
+      "sha256": "ef4d6b2f7b875b8fb4d9288e0937b0adb4ee4dc58d4d1f3c18943dd1520016ee"
     },
     {
       "location": "public",
       "filename": "aspasia-shape-surface@2x.webp",
-      "bytes": 51340,
-      "sha256": "0c78f186fbed9af0a5c91dfb6db02ac883006ee98a6f406614d27929bd0761d0"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1374,
-      "sha256": "64e09af01d26a6d45ebe0006f191867c5c12a6713f619b3efa05d12e5c31c74c"
+      "sha256": "fa01e1410ff5f0f85a9db3a4233c2daeb62c6f1a261139e2dfc5143569dc2ee3"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 405099,
-      "sha256": "285d6a7ce6d2691591cf328d5d95bee5d4dc53b34e0addd35030eb79843f78f7"
+      "bytes": 542681,
+      "sha256": "d844b4dccb740e77489074debdc993776c54a96a90e3c33063dea73e9b801a05"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2874,
-      "sha256": "1d6467ab415cf1ae620380a6f0f6887b333d4ed6b721955ed204d507bc8453ed"
+      "bytes": 21568,
+      "sha256": "a49f88ef3af140ba24014e00180322482c5cac20c2a8a5053ceeaece21a2b8de"
     },
     {
       "location": "prepared",

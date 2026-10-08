@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "bacchus-arrival.webp",
-      "bytes": 30614,
-      "sha256": "9df4ac31922c1626d6b6b622bccb8ea83305c32d18133aa94a607d7dd5094b45"
+      "bytes": 31484,
+      "sha256": "d9cfbb975bc8efb4425c99b5349abed73e748f90559481cc3f35676ecea8e3c1"
     },
     {
       "location": "public",
       "filename": "bacchus-billboard.webp",
-      "bytes": 3772,
-      "sha256": "bfee18d88f0bba7dd5ddb8a7c4fcb59b136804c06b170d4ab3090d4a0978096f"
+      "bytes": 3976,
+      "sha256": "24c0af55d0aa1906428dc167ef6308cfa1efa3cfc6c589f52bed40193003cd18"
     },
     {
       "location": "public",
       "filename": "bacchus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "bacchus-elevation-shadow-alpha@2x.webp",
-      "bytes": 395552,
-      "sha256": "410d29fa5a0da623c9af9e562d516348b7827a512b4f39eb4fc8b50dcc8d6a12"
-    },
-    {
-      "location": "public",
-      "filename": "bacchus-elevation-shadow@2x.webp",
-      "bytes": 104784,
-      "sha256": "0afcca7f4eb2a91a6678ece6775245f2a977013ff8e7de13c22012e9d1d16f84"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "bacchus-shape-shadow-alpha@2x.webp",
-      "bytes": 325876,
-      "sha256": "d0c5c1fe873391a7447d9e0b6edcab7cb8b6f5e4f4776916087e7ffdeee07870"
-    },
-    {
-      "location": "public",
-      "filename": "bacchus-shape-shadow@2x.webp",
-      "bytes": 46054,
-      "sha256": "722b0058ec87027ef1cae28671d7d54e0736ec3c1423f6b480d44dcc67919b18"
-    },
-    {
-      "location": "public",
       "filename": "bacchus-shape-surface-alpha@2x.webp",
-      "bytes": 320724,
-      "sha256": "c0518b21868b69e6063e9c62d5a076a3ae3b93e7c2f173b772447c858838f36b"
+      "bytes": 88,
+      "sha256": "108f60613a30430f2b8ad841bb6127cb8cddaecf077fd5bc1182f7142ed665d3"
     },
     {
       "location": "public",
       "filename": "bacchus-shape-surface@2x.webp",
-      "bytes": 38984,
-      "sha256": "29a08614074af3bcbbab0bceafe000c89e32e57b3a50fd4b7376ae42a01f1480"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1377,
-      "sha256": "635e6962998e042a205277739591962eb0b4255de8bb6a3193ef18539efa56ec"
+      "sha256": "b9fcf459287bc470e7bb84296fd11d705b80c607e48de621651e5a463aeb8ac0"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3566,
-      "sha256": "9f3ea52bb882eed2016891d4d0fb5d0316125baf9b6c7d3755fd0d6e3587b0e0"
+      "bytes": 3556,
+      "sha256": "e7788f725369caea1b80bbd732f90f39530e0ae7d3ba54d665438c84c7f6ae8f"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 315754,
-      "sha256": "61ab4a3a3b7175f17451247b76991ff86acdf9e9e6848f317f948676585bff1b"
+      "bytes": 425754,
+      "sha256": "24bed68b4efa217d94825660dd1c6727ef55df299bf0da71e91eea3efb98759d"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 373312,
-      "sha256": "f9e4cc403dd1a946245c7479a58922fd2cf87d0a4bfe22657b4a7c95a4160585"
+      "sha256": "016a4fe18061e07350fa5340aa6f795d900c941f35d9bc966cb1c6b4e92f202b"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2782,
-      "sha256": "59fd2d3a30dcbea0121148180796ca7d7b3b8688f8cb663a297c3fd182cd8905"
+      "bytes": 17816,
+      "sha256": "20fa63aae09acc6df4acd1eb4f6abed43c340c13f22ebe0231114907cd4f2314"
     },
     {
       "location": "prepared",

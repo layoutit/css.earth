@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "golevka-arrival.webp",
-      "bytes": 35704,
-      "sha256": "ae48912d91712403621d9f8f954b84f89621ab2a822598cd7ba2a5b4c40c6622"
+      "bytes": 36628,
+      "sha256": "718c9e11b3e417892f1aa3466811395bf918e57dc12bf1ce2c86598a62aabd8c"
     },
     {
       "location": "public",
       "filename": "golevka-billboard.webp",
-      "bytes": 4388,
-      "sha256": "b7bb032d19501624ac81508432f9413f56c096edd5f5dbf1ffff746c54ab779c"
+      "bytes": 4550,
+      "sha256": "520a6cb6fc4e608f1d670295e0370a3775d57be857cb498802919c217fdbccc1"
     },
     {
       "location": "public",
       "filename": "golevka-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "golevka-elevation-shadow-alpha@2x.webp",
-      "bytes": 606760,
-      "sha256": "a6f87f9fa0c5e0e5635c59b8e43b74b4d8f845e3f92b852fb792cb3df398e3f9"
-    },
-    {
-      "location": "public",
-      "filename": "golevka-elevation-shadow@2x.webp",
-      "bytes": 203606,
-      "sha256": "2f6c4992f3dc8887c0cfc334835e325344bedcad2120eb781fc0a2bd94f1d2ba"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "golevka-shape-shadow-alpha@2x.webp",
-      "bytes": 473446,
-      "sha256": "8033d6be121453f7cff82203b0284e982d68b8d683a7646150ae3e01f8319a5f"
-    },
-    {
-      "location": "public",
-      "filename": "golevka-shape-shadow@2x.webp",
-      "bytes": 64458,
-      "sha256": "0b1231fd8a481528dc37f003c91d4d47f166c42bb82007904e40a7d159ae4d3a"
-    },
-    {
-      "location": "public",
       "filename": "golevka-shape-surface-alpha@2x.webp",
-      "bytes": 463310,
-      "sha256": "887757d77082199ed611d15d2fd5b05bd954088c26e9afa8e6455fee051e7d54"
+      "bytes": 88,
+      "sha256": "d864c2f51271fed010d2971acfd7e7e9c72e37d01bf8b7888d1e53e8f80582ee"
     },
     {
       "location": "public",
       "filename": "golevka-shape-surface@2x.webp",
-      "bytes": 55042,
-      "sha256": "0dfba42712df768a39752e0fd76e198d71789105c3186595d64063c1c176f6a9"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1378,
-      "sha256": "179d550bed9c5943ac144f6eecd65a3e37622a37a6cb0ca5b44c04b31e4053ae"
+      "sha256": "5b48d4d04c782a825bf5b30d4d2131f8b188974b2f36f0d3f5ea1658ff2eaa8d"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 382220,
-      "sha256": "153ece6b7e241db7e315d72ff49a7ff83b76ddb335dc3c7319fbbad632256da7"
+      "bytes": 514720,
+      "sha256": "56b25140aaa2a8d094ddaefd59c4af6bf98b092b90a8272d603a9b544e6d0e4a"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2721,
-      "sha256": "4eef34351c3e8e726e65ab8b4d5fded1b63da57b3fe854937aeb8e69289d0bf3"
+      "bytes": 20815,
+      "sha256": "36af24c3fc2d8d286a1dd6893b8b805c0a9610bf454e135399447e6ad744f983"
     },
     {
       "location": "prepared",

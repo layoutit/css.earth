@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "toro-arrival.webp",
-      "bytes": 36802,
-      "sha256": "e42ea11f0304e47afca158ce135ae90f41f92132ea397d3f23c31f6368b0d922"
+      "bytes": 37338,
+      "sha256": "a49a3e17cfa8c92ca2164a6f9a5921392f4ab4c4170a2e3b65a2b6b11fc59519"
     },
     {
       "location": "public",
       "filename": "toro-billboard.webp",
-      "bytes": 4706,
-      "sha256": "32d79fc3fac59d9981ca19c53cbe4d3300f210a3eeb22a922287fe4850ebeab0"
+      "bytes": 4832,
+      "sha256": "d045cf3334a230a608185ffd55b7d0bcd1e352b73767e093f793bf29fb18db33"
     },
     {
       "location": "public",
       "filename": "toro-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "toro-elevation-shadow-alpha@2x.webp",
-      "bytes": 463482,
-      "sha256": "cc2dd103d1cc7530cbeeb5d3e013736612cb0614b73997dda198636463237f94"
-    },
-    {
-      "location": "public",
-      "filename": "toro-elevation-shadow@2x.webp",
-      "bytes": 124290,
-      "sha256": "bc396481aedbc12c58a8b49d2642923648ba3c7290e8b8ab189b039611f7ca2f"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "toro-shape-shadow-alpha@2x.webp",
-      "bytes": 380258,
-      "sha256": "965372a145a59a24b6efbf7a40d93330c77a4ad16f14dfa4b9e23cf936fca09f"
-    },
-    {
-      "location": "public",
-      "filename": "toro-shape-shadow@2x.webp",
-      "bytes": 52652,
-      "sha256": "8f46ce163a931d2f4446814c531f41e5617d232c6cdd964211b6a986f61b7dc5"
-    },
-    {
-      "location": "public",
       "filename": "toro-shape-surface-alpha@2x.webp",
-      "bytes": 377860,
-      "sha256": "20a7f0fcf8bc15b4602e9ed1947414f4c2102344e646f119d9d80f1ffab71dea"
+      "bytes": 88,
+      "sha256": "549a388a44fe8f7f06032cfa9b3a771f4947804737266751bae459a7bd403d2e"
     },
     {
       "location": "public",
       "filename": "toro-shape-surface@2x.webp",
-      "bytes": 47876,
-      "sha256": "88b67d0addd5979ad98888ee3331cc228aef8729645f8017d155fb98848c504e"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1300,
-      "sha256": "47257907a11bb6ec4a3e42d285afdf78e67b7c5ae099fe66b15c27e320b3480f"
+      "sha256": "a3965790f12167b13635b2f5709409f3dfd90722f71337983747c12bf3573a6a"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 278881,
-      "sha256": "765d9d2de79f7289446d0d0f73687105ff5e94ad41cb419b74711cf096eb2d83"
+      "bytes": 372181,
+      "sha256": "c5bae6733d0902ea46ad45ee98f74c731edf54f471d82c2d3edb8deb23a92802"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3022,
-      "sha256": "70c12ed4057a2922ec12fde3f882208c6ec68ea078304d135ec89834a5321f60"
+      "bytes": 15548,
+      "sha256": "9cf97c650f6fbd6b538e921fed271c02df36668dc3da75fbab56e0e593c43844"
     },
     {
       "location": "prepared",

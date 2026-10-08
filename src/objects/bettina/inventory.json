@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "bettina-arrival.webp",
-      "bytes": 31336,
-      "sha256": "2972081d5f9b8c2ee50c852682e53d02e7b2e37d66bf5905460d27f430b1fbef"
+      "bytes": 31914,
+      "sha256": "d067d62b0ddd0dc30e85aa2c40e7f170b33850abea6c942dde4a41b5c1f549c9"
     },
     {
       "location": "public",
       "filename": "bettina-billboard.webp",
-      "bytes": 4396,
-      "sha256": "bbc2c7ed27bf15a689082798bc36b6f9d10a29c69e80932269398e06a54e7025"
+      "bytes": 4606,
+      "sha256": "5584118b1135faea9b023c9758640f5905b9dd85ea988df0b3149c8be8dfbf20"
     },
     {
       "location": "public",
       "filename": "bettina-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "bettina-elevation-shadow-alpha@2x.webp",
-      "bytes": 523306,
-      "sha256": "1daceb9e95c28c98d916f2f592a1e818accefe4705f4e05f150789d7d8f0a5cf"
-    },
-    {
-      "location": "public",
-      "filename": "bettina-elevation-shadow@2x.webp",
-      "bytes": 117222,
-      "sha256": "1ab2bdf8940a8cfa8cb649e05e2306f7960807225f4296bb0682527ff4f1c1c7"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "bettina-shape-shadow-alpha@2x.webp",
-      "bytes": 443530,
-      "sha256": "703b3c09061d0e8d3fc8fa6cc98b442d4ed39d03faf9e814306d9fc852ddc28f"
-    },
-    {
-      "location": "public",
-      "filename": "bettina-shape-shadow@2x.webp",
-      "bytes": 57632,
-      "sha256": "2e4856fea4c204539f62d105eda57ddbb4636d701fe5f5d759da8bd3d4bfed7e"
-    },
-    {
-      "location": "public",
       "filename": "bettina-shape-surface-alpha@2x.webp",
-      "bytes": 439266,
-      "sha256": "fb8e675be98ff50ee5e15655a1021cf52b7a0edd565acd7a039d806d7c1c4ac9"
+      "bytes": 88,
+      "sha256": "632ba8c81a2ad9856308803287bfa9a50b3c44130201338f6d6032bc0381e14e"
     },
     {
       "location": "public",
       "filename": "bettina-shape-surface@2x.webp",
-      "bytes": 50334,
-      "sha256": "8b9c06e61c401a1baa54e392883008c97ef84186693208f0bf9655101e2abb3b"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1375,
-      "sha256": "9970478d136460cdc96dac07d0bdfc1acfb7cd78fd466c9f743327fc3646b966"
+      "sha256": "7a93f5f89e35bc732203bac228b3e0419ec4ab1f807d1cfd1d92d91832a202d1"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 371738,
-      "sha256": "f634f2c0487289cf89135ac2994fff8afb56d77192edb3ad6fbcb86377a13936"
+      "bytes": 497059,
+      "sha256": "899ca2c63fa085142645ced32359882c3e0c2f21a2698b66ef3702c53c74892b"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3271,
-      "sha256": "0d2fb4642aa9571839808351022743089674af38f1f3c7449125a6b8cf2746ab"
+      "bytes": 20225,
+      "sha256": "773fc0c0c893243c904dacb886f86da168f072bfc953b47b04c39baf6d619ca3"
     },
     {
       "location": "prepared",

@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "tantalus-arrival.webp",
-      "bytes": 34786,
-      "sha256": "c9f7f06b1c3609df409efa69fe3c76d7974af57390989ead80f3ea5d5971eb52"
+      "bytes": 35206,
+      "sha256": "6d66b7438aadcfd855f68ab38fd69a7ee5d810eaadcfaba9e1e440c6e42f6ff0"
     },
     {
       "location": "public",
       "filename": "tantalus-billboard.webp",
-      "bytes": 4812,
-      "sha256": "de7335dd7163ee9514b55b52dc1d32451877dc07d0d64761290729968ce21f27"
+      "bytes": 4882,
+      "sha256": "66e9df760f516f82bf7c4e6fd045146554c9f441cc11be545324eed62db8e3fb"
     },
     {
       "location": "public",
       "filename": "tantalus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "tantalus-elevation-shadow-alpha@2x.webp",
-      "bytes": 639304,
-      "sha256": "bf0be48ebe18cd6663730048cafc5cddd32f239cc61faefef315472763cd36a4"
-    },
-    {
-      "location": "public",
-      "filename": "tantalus-elevation-shadow@2x.webp",
-      "bytes": 191974,
-      "sha256": "6d29d1f2213bd8bb2d89d8f3cb468191f7d18f827a40ee65ecb60ae79950413e"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "tantalus-shape-shadow-alpha@2x.webp",
-      "bytes": 503136,
-      "sha256": "105feb25817a78cbf63e44cb1c983ca5a726f98f569204aa7d21af159a5011e7"
-    },
-    {
-      "location": "public",
-      "filename": "tantalus-shape-shadow@2x.webp",
-      "bytes": 64096,
-      "sha256": "e64b179a6d1039aa3060d4b53c066a453d19c17fdebe6a9d7d91d970169b9150"
-    },
-    {
-      "location": "public",
       "filename": "tantalus-shape-surface-alpha@2x.webp",
-      "bytes": 497250,
-      "sha256": "e8f12c60688127c4103c1a42de916036ff1344d062966f1b7d965411bc4da88a"
+      "bytes": 88,
+      "sha256": "cf971332e94f9bd8a21108b564bb8f936221252589c0b47f008fc8d3fe346601"
     },
     {
       "location": "public",
       "filename": "tantalus-shape-surface@2x.webp",
-      "bytes": 54974,
-      "sha256": "975ecfdb85e6a76b6ce7f406e071ff6c07efb72cd2fce6673a4a512a91565fd7"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1407,
-      "sha256": "20c681f56961d839c903143cf35aea72ccc65618794e4f5f0575e094860ee016"
+      "sha256": "e141c510a3452439f34de75d33c584351454872b7d958cb1233f88faa85121c2"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 6882,
-      "sha256": "01a9a039bd12b72b37d7336304375b3f9434d2eb7c2ec90a68626270ddb6b446"
+      "bytes": 6796,
+      "sha256": "54ac3470dd975cef118c55a31ba72971c60e2e6af6fc1995ecefbd4b09145cbb"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 506376,
-      "sha256": "334a4341975f6e41b4334d5b2d1f184b8a635cd4e9cf7559672573f7da8d8d9f"
+      "bytes": 680279,
+      "sha256": "81a3a27d4111b63f53f3229f0d51a1c6a626c6a845dfd4dd7e6cc990290a0711"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 598807,
-      "sha256": "944b3deebb30912213de2f63791387974363f0d7a9d51b7519060eca43736d31"
+      "bytes": 598809,
+      "sha256": "ef223f6b5d876dc291f39ddad17207ba08c34f87f788289da7b0c433346e4ac0"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3201,
-      "sha256": "6855cc6f55ec67ae28aec32454cd782deec6977f55219e33c99a8b6c81006b89"
+      "bytes": 26991,
+      "sha256": "0501fcfd1394e6347fdf4a3edf592cb75f04f8739efdc48e23eeb65b442ab7ef"
     },
     {
       "location": "prepared",

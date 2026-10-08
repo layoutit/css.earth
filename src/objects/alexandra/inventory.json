@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "alexandra-arrival.webp",
-      "bytes": 31532,
-      "sha256": "110e3a5dcd0c1338fb675edc98e9c4046f2c4e741b36b6ee3f076df276bc6ed0"
+      "bytes": 32076,
+      "sha256": "86cfcc5fbb82400b15affd57952ed011cb0fee4b81b20606777bf4412cdc05f3"
     },
     {
       "location": "public",
       "filename": "alexandra-billboard.webp",
-      "bytes": 4472,
-      "sha256": "6d44c3870d3f1c722dd468a7301b0e68b71ef81c8300d7834c2002aa868f53f6"
+      "bytes": 4628,
+      "sha256": "cf029560d32c5d0ac099cebf68147568ac1ab9d3ff3ffe64e5054c487169d9a8"
     },
     {
       "location": "public",
       "filename": "alexandra-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "alexandra-elevation-shadow-alpha@2x.webp",
-      "bytes": 539120,
-      "sha256": "1cf63c59b35dae401b4fc194b00825e7f147b47889c66e5b7a7e33a5b41891c5"
-    },
-    {
-      "location": "public",
-      "filename": "alexandra-elevation-shadow@2x.webp",
-      "bytes": 116768,
-      "sha256": "a2f85dcf69984ba446d9c574185697b57147e15964edd2926cff09dc7ca9aeac"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "alexandra-shape-shadow-alpha@2x.webp",
-      "bytes": 461082,
-      "sha256": "842cbe0b399bab64b6e80531455220a4c1cc2608490fe082e9c7435b45a3400b"
-    },
-    {
-      "location": "public",
-      "filename": "alexandra-shape-shadow@2x.webp",
-      "bytes": 54650,
-      "sha256": "09cea979fbe3c1e46d53ddb16de3e39cb202b90baffa29a9399d5942139513c3"
-    },
-    {
-      "location": "public",
       "filename": "alexandra-shape-surface-alpha@2x.webp",
-      "bytes": 459850,
-      "sha256": "2ef5a9d1f59b78ad8408ca7d87b259657b713801b4cb50fadca45f5e221eb49e"
+      "bytes": 88,
+      "sha256": "c55e1bb4b805fbd692ce5c16d6a8320a4fac437dabee5916eed4c3b064118d2f"
     },
     {
       "location": "public",
       "filename": "alexandra-shape-surface@2x.webp",
-      "bytes": 49850,
-      "sha256": "c25620de436d57f04b1d17b6408bfb68a117b6d9aad1ca08834a00eb2705bce4"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1427,
-      "sha256": "81b4ebc5e5450029794b40b86b6dd52f622ebc154a71c22fd2ac2f492cdd5cf6"
+      "sha256": "f667c184804c955a18066eade8415714da38f669aed2650345913cf60da4665d"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 375846,
-      "sha256": "7a723fab866d4c9fb688cfdedc491a54a29e1a582f180e55eb23b144d5f0c5c3"
+      "bytes": 501679,
+      "sha256": "b6bef638fa268ec62a14fc841a59104e4e46d14612bcbddd9b78cf80503949cb"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3098,
-      "sha256": "86ed1a90ade5584ef8ebd31854caed2215304e4842691d11dd484ea07d8369e3"
+      "bytes": 20044,
+      "sha256": "7f235f192ae821b2338db9e842d02495e1d04b5de0251c24f6b6ba69fb92471d"
     },
     {
       "location": "prepared",

@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "aethra-arrival.webp",
-      "bytes": 38126,
-      "sha256": "14e7dcdbac6e1c12f69418eb515582c97054be18b9572afd5a145f24276d7fb9"
+      "bytes": 38634,
+      "sha256": "313391c49e97bae3884bbc5980e40aa47ed00f07fcaf4eefc9f5f24bda53247e"
     },
     {
       "location": "public",
       "filename": "aethra-billboard.webp",
-      "bytes": 4870,
-      "sha256": "24cea3fa0fbb242819d3e6cd3551392230c4d5ddb50221579e4ac60e061e25ab"
+      "bytes": 4928,
+      "sha256": "430b0fc634c0e0dd390edeca9d3f4250214be19cc11be560978aacd520a6c38c"
     },
     {
       "location": "public",
       "filename": "aethra-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "aethra-elevation-shadow-alpha@2x.webp",
-      "bytes": 364938,
-      "sha256": "d4fcab563c7233537cff06296cc42be21f5a5596d1774b7c2ff9d9b77a6da15a"
-    },
-    {
-      "location": "public",
-      "filename": "aethra-elevation-shadow@2x.webp",
-      "bytes": 103868,
-      "sha256": "a80d9bb530319f058c7d54eb715dc64bbb4b4011e846bc5bf809727165d561b3"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "aethra-shape-shadow-alpha@2x.webp",
-      "bytes": 302494,
-      "sha256": "e17a2fb64bff811baf64bfd638f096327d60acf4ee685172109c3a15f80de40a"
-    },
-    {
-      "location": "public",
-      "filename": "aethra-shape-shadow@2x.webp",
-      "bytes": 48224,
-      "sha256": "9fe4376de8e066b045ca30ccf520b624c3e6722dabb8eafd82a1f65fa8fd1d81"
-    },
-    {
-      "location": "public",
       "filename": "aethra-shape-surface-alpha@2x.webp",
-      "bytes": 298378,
-      "sha256": "8e062a07945ec004d2c853f8f7d7e67d43e2ea89f6c7300156ca7b89b904a9bc"
+      "bytes": 88,
+      "sha256": "2e0430f160d43db172f3fbc7692ede9d6065a2d8697295e6e1ee887d0fede64c"
     },
     {
       "location": "public",
       "filename": "aethra-shape-surface@2x.webp",
-      "bytes": 44974,
-      "sha256": "82f576319ccd6d3d4e8aeb62a1bfa05e946e1d19ea010fee717cbf3505f0a198"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1353,
-      "sha256": "6e48b4e8cc2576dc53796648031295133a20ef6aff62cad28d9743597d910111"
+      "sha256": "77fafbe1dfa8a665e3ab3082fb863c7e8cea41a51e18d68491a40f0bf193c0c3"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 218824,
-      "sha256": "85b00bbce439ee175495b0f00de2f2ab2128365d32e8d3ea342251c859fef356"
+      "bytes": 290536,
+      "sha256": "866603cbd3dfb953b773dcfd8f7106e5acdef8564662400955aeaea00e9fbc56"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3102,
-      "sha256": "d2cda8fa2d6a5cab080dde0cad23e58730e4bcc8bbd6b7d9b346e4997548964a"
+      "bytes": 12680,
+      "sha256": "41158437564d354466bd1d0203616bfaad32649ecf8bc1badab2234814766feb"
     },
     {
       "location": "prepared",

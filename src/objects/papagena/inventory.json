@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "papagena-arrival.webp",
-      "bytes": 33098,
-      "sha256": "8d9097117d1eb405db9d12e419f3bc644fed25f347948fb2ccba841c27fcc6d3"
+      "bytes": 33818,
+      "sha256": "214b762bec30df71addc02360c199d4692b87dbaef74698b17118f08bd35e4e2"
     },
     {
       "location": "public",
       "filename": "papagena-billboard.webp",
-      "bytes": 4010,
-      "sha256": "7e10539573e08aaabcbb2fa83e2826179c5d5479a0c0548758eff7aa0a53cfc1"
+      "bytes": 4182,
+      "sha256": "f5e73ef8c869fa6579d03bef3e6787c84255985582bb86a03f17db5ea86c3231"
     },
     {
       "location": "public",
       "filename": "papagena-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "papagena-elevation-shadow-alpha@2x.webp",
-      "bytes": 563700,
-      "sha256": "630bbaf896f398e2dfd3e554b454b2a4bcba5f023e9fad47d82b3b4b64d07855"
-    },
-    {
-      "location": "public",
-      "filename": "papagena-elevation-shadow@2x.webp",
-      "bytes": 121262,
-      "sha256": "1f177e0453894535b7d127ff8288e8f1cb8ea5b5914535ad33d684c0183af442"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "papagena-shape-shadow-alpha@2x.webp",
-      "bytes": 483162,
-      "sha256": "6d5b695c0996d643c447fc163799cfac4237826d4a1a1c71da10a0abaaaa39ff"
-    },
-    {
-      "location": "public",
-      "filename": "papagena-shape-shadow@2x.webp",
-      "bytes": 57376,
-      "sha256": "6149db8aceeb6f1546b778d3b9897f39d0e5a7bc745096e52f9c0155b5b9a49d"
-    },
-    {
-      "location": "public",
       "filename": "papagena-shape-surface-alpha@2x.webp",
-      "bytes": 474248,
-      "sha256": "a3e35a0f2ec7df3921f9a34b6622a2ab17ccfb630f6fbcaec74b731017d43d7b"
+      "bytes": 88,
+      "sha256": "0a2599725850f2541eeb758c54813dfcae6f0ad13779edaa169ade618ab04050"
     },
     {
       "location": "public",
       "filename": "papagena-shape-surface@2x.webp",
-      "bytes": 49936,
-      "sha256": "e0fa6fcfbb4fd5baef5a0dc262e8db9711f9e0e657223430033551b2d4e803b1"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1406,
-      "sha256": "b23fe6560c7cf62e049b540dea1ca086642a50ef7f3cfb129ff6aa00ee6c05bd"
+      "sha256": "2bb985a83a2abd3614a80fc8c8113b67aaaa8afd2d165eeea8d94f0ea0350b74"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 398934,
-      "sha256": "9eff054501526e17a9d23821bf10bf9ed820e48ad354aabc8c5017e3eeb226b8"
+      "bytes": 533298,
+      "sha256": "46b96cf65ee238ca5de2e96413a80b1f1194c863202859d38afce27114a260cf"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2900,
-      "sha256": "c6f3b05302a7ef5e882bb6eff9b4b5877570db5687cff033f7e4feae0159ac8a"
+      "bytes": 20990,
+      "sha256": "7e0891387bfe8ec094ba63f5da6a9e9c270eba5264dd7f78ed2b5f258dc8f593"
     },
     {
       "location": "prepared",

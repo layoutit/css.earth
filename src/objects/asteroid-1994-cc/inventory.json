@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "asteroid-1994-cc-arrival.webp",
-      "bytes": 34142,
-      "sha256": "bf28ea074ae5b666996043b78ab33db6c56740ed83eb4c76af3b49f5cc4c5fbc"
+      "bytes": 34644,
+      "sha256": "066a235f2e413971f048138a6638cf7ea89329ff1b04dddebaf63486101cd1d6"
     },
     {
       "location": "public",
       "filename": "asteroid-1994-cc-billboard.webp",
-      "bytes": 4682,
-      "sha256": "e19eab3568b733500a50f33aa94bf7149cfe5e54ee77173fcc6d30ffe862e132"
+      "bytes": 4770,
+      "sha256": "c479e2e4413791ee213023216433f19e20be2b5f3bdeb5b2d3ed339783124429"
     },
     {
       "location": "public",
       "filename": "asteroid-1994-cc-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "asteroid-1994-cc-elevation-shadow-alpha@2x.webp",
-      "bytes": 592050,
-      "sha256": "194c77f18592b92b3a59185981113059bd30d6ec76a65b48a469a70ec13a8296"
-    },
-    {
-      "location": "public",
-      "filename": "asteroid-1994-cc-elevation-shadow@2x.webp",
-      "bytes": 153940,
-      "sha256": "dc7ac914f3849b74ba917ec9d0d5a2349bd6bd7b24271cad4f788e7e505d23d7"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "asteroid-1994-cc-shape-shadow-alpha@2x.webp",
-      "bytes": 486404,
-      "sha256": "b896ffbb3801cd11cff67b032b79e34eee50ac76ca13a3df06437e2d7d1df247"
-    },
-    {
-      "location": "public",
-      "filename": "asteroid-1994-cc-shape-shadow@2x.webp",
-      "bytes": 59986,
-      "sha256": "4627a1af251eadf3236e8ff833eebbac4c459c212a63dd941b5c65c1dd5b9874"
-    },
-    {
-      "location": "public",
       "filename": "asteroid-1994-cc-shape-surface-alpha@2x.webp",
-      "bytes": 480010,
-      "sha256": "d4c7f841bd4e43c11c0c64bfff0e7b893ea639f2a0986c3ed38e5507caf24610"
+      "bytes": 88,
+      "sha256": "2776d067180a85d7fc2339c872c3279ae58fe62a62762b63139a1d26d2fd2bee"
     },
     {
       "location": "public",
       "filename": "asteroid-1994-cc-shape-surface@2x.webp",
-      "bytes": 53194,
-      "sha256": "05541db7db72ce47353e9fe240aacc79cf6ecddfd5b808375f929df88b5fe81a"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1612,
-      "sha256": "7c4b43f8582e25797ea5a9c51cc841a8f3992cf6a34ac5a04cdc647635bc9c97"
+      "sha256": "2a2b42387af92e76776d4f35719bec1df7891813e95253121b54f31bc0f1e14a"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 445941,
-      "sha256": "36ef21cc71f64d4ea0279db109a89ae4459e1942ed709f7476726b22f592faf7"
+      "bytes": 598812,
+      "sha256": "a4a3876f9635f5c3468fd0193691e31b3db7fa7d07a03bfec1e6e3e727e7a021"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2414,
-      "sha256": "80fb06d97538d01c06c91e904479ccbbbdd88390ff64fb8eb1a31e7865b3b3c1"
+      "bytes": 23232,
+      "sha256": "f8409456b3366b1cd9d1a2ae311b062627f1ae3c71aed06f0aa4c9ce6a358213"
     },
     {
       "location": "prepared",

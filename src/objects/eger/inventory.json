@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "eger-arrival.webp",
-      "bytes": 31858,
-      "sha256": "208a8fc5798f9d5b2376768e35affb98049e458db1b48893de5e1d9c61c6ab11"
+      "bytes": 32542,
+      "sha256": "a5c54c3847ba71d47e827dbaf58062029053df35cf7a9d8205f8982edbee5884"
     },
     {
       "location": "public",
       "filename": "eger-billboard.webp",
-      "bytes": 3744,
-      "sha256": "e30bdd10c4be44a57cb5d76ed3fcdf20f3a20d90eb744afdd55dcee40c906555"
+      "bytes": 3894,
+      "sha256": "b949017807881d508b3351bc16afebb70fd428621880f83f05d5b4cacf00dcfb"
     },
     {
       "location": "public",
       "filename": "eger-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "eger-elevation-shadow-alpha@2x.webp",
-      "bytes": 567864,
-      "sha256": "7ecc4f067ce6d8f4328b571fc1061d332c0798b61516d885618eb486efa5d5e0"
-    },
-    {
-      "location": "public",
-      "filename": "eger-elevation-shadow@2x.webp",
-      "bytes": 124818,
-      "sha256": "9d7720c0411b86449f819f1192d25e774bcd35a58afdde07e19f476abed8eedc"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "eger-shape-shadow-alpha@2x.webp",
-      "bytes": 482652,
-      "sha256": "92eea5e30df073ab88a26816fe682021a33e71780614fa076530639e8d88b676"
-    },
-    {
-      "location": "public",
-      "filename": "eger-shape-shadow@2x.webp",
-      "bytes": 57846,
-      "sha256": "5489afa4e52b14940e233b6b1c9f9b0fd4d696b31f3e029297df4ad71b6441ce"
-    },
-    {
-      "location": "public",
       "filename": "eger-shape-surface-alpha@2x.webp",
-      "bytes": 478864,
-      "sha256": "58202615a7f7f97d366b27a45b4f5e2265d9a43883ca2d0f571336c4b4c98e0e"
+      "bytes": 88,
+      "sha256": "16d6546e13d27db373bbf575ecdf927163f01d0b9c469c0343593c26f37d2662"
     },
     {
       "location": "public",
       "filename": "eger-shape-surface@2x.webp",
-      "bytes": 53578,
-      "sha256": "b2ff18ea5dd6542e04451b3db940fded8f75c5f02eeeabfff30d0512c481102e"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1305,
-      "sha256": "7e90088e94e869ef1298e48ab03e85d7be70c974af5c3092d1c5504c741d8357"
+      "sha256": "450b0021a42cdae747dcf9bce08d90a77f29ae93484f0060e4966d44ea8844f6"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 401676,
-      "sha256": "5a3ff1607f0f90ef6b9c0f1ada38a38af377b15ae58f08ae89bd1a8c6834a42b"
+      "bytes": 539977,
+      "sha256": "5cadfddb5790c3971c2d196aa86944cc5a40b071a25d4fdba0b5e52e2324131a"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2800,
-      "sha256": "3e5afc61b5791e71e714b627bc6a8210d124eaac82274964f0d60b494c3c4798"
+      "bytes": 21626,
+      "sha256": "febead3b6f660c88c7d25360966b5cce81435b2945910bbb03f8dd46f2376ee6"
     },
     {
       "location": "prepared",
