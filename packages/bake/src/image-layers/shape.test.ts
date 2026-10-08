@@ -7,6 +7,7 @@ import sharp from 'sharp';
 import { imageLayerBodyModel } from './body.ts';
 import { parseImageLayerRecipe } from './config.ts';
 import { prepareImageLayers } from './prepare.ts';
+import { imageLayerShapeModel, ringOutlineRadius } from './shape.ts';
 
 type Leaf = { id: string; texturePath: string; verticesUnits: number[][]; style: { width: string; height: string; transform: string } };
 type Texture = { data: Buffer; width: number; height: number; origin: number[]; right: number[]; down: number[]; depth: number };
@@ -220,4 +221,24 @@ test('an inner shell closes inside the main shell, and measured speeds say where
     await writeFile(join(source, 'speeds.txt'), '1.0 2.0 skipped fast\n');
     await assert.rejects(prepareImageLayers({ sourceDirectory: source, outputDirectory: join(root, 'broken'), recipe: parseImageLayerRecipe(shaped) }), /speeds\.txt has a row without its east, north and speed columns/u);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('a shell with a measured rim follows it: its radius differs by direction, on the sky and along the sight line', () => {
+  // A sphere of 20" (its speed under the law is 20" deep), its rim measured 10" to the north and south, 30" to the east and west.
+  const outline = { source: 'test', basis: 'test', positionAnglesDeg: [0, 90, 180, 270], radiiArcsec: [10, 30, 10, 30], scale: 1 };
+  const shape = { source: 'test', basis: 'test', expansionKmSPerArcsec: 1, smoothPixels: 4,
+    ring: { semiMajorArcsec: 20, semiMinorArcsec: 20, majorPaDeg: 0, polarTiltDeg: 0, polarLeansToPaDeg: 0, expansionKmS: [20, 20, 20] as [number, number, number], outline } };
+  const rim = ringOutlineRadius(outline);
+  assert.ok(Math.abs(rim(0, 1) - 10) < 1e-9 && Math.abs(rim(1, 0) - 30) < 1e-9 && Math.abs(rim(0, -1) - 10) < 1e-9 && Math.abs(rim(-1, 0) - 30) < 1e-9);
+  const model = imageLayerShapeModel(shape), mix = [1, 1, 1] as const;
+  // Half way out to the rim each way, the shell is sqrt(R^2 - s^2) in front of the star and as far behind it.
+  for (const [east, north, radius] of [[0, 5, 10], [15, 0, 30], [0, -5, 10], [-15, 0, 30]] as const) {
+    const ends = model.walls(east, north, mix), deep = Math.sqrt(radius * radius - (east * east + north * north));
+    assert.ok(ends, `a sight line ${east}" east, ${north}" north meets the shell`);
+    assert.ok(Math.abs(ends.near + deep) < 1e-6 && Math.abs(ends.far - deep) < 1e-6, `at ${east}" east, ${north}" north the walls are at ±${deep.toFixed(2)}"; got ${ends.near.toFixed(2)}, ${ends.far.toFixed(2)}`);
+  }
+  // 15" out the shell holds the light to the east and not to the north: one radius would do both or neither.
+  assert.ok(model.walls(15, 0, mix) && !model.walls(0, 15, mix));
+  assert.ok(Math.abs(model.ringScale(0, 1) - .5) < 1e-9 && Math.abs(model.ringScale(1, 0) - 1.5) < 1e-9);
+  assert.ok(model.reach >= 30, `the shell reaches 30" along the sight line where its rim is 30"; got ${model.reach}`);
 });

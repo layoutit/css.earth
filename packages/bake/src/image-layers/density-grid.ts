@@ -67,7 +67,7 @@ export function imageLayerDensityModel(density: Density, grid: Float32Array) {
   const between = density.starRadiusArcsec !== undefined;
   /** Where a sight line's fine detail lies, between its walls `near` and `far`: on the near wall, but for the star's own
    * light, which is on the picture's plane (all of it out to the star's radius, less and less out to twice that). */
-  const detail = (east: number, north: number, near: number, far: number): { near: number; far: number; mid: number; at: number; walls: number; lifted?: { near: number; far: number } } => {
+  const detail = (east: number, north: number, near: number, far: number): { near: number; far: number; mid: number; at: number; walls: number; lifted?: { near: number; far: number }; outer?: { near: number; far: number; lifted: { near: number; far: number } } } => {
     const from = density.starRadiusArcsec ? Math.hypot(east, north) / density.starRadiusArcsec : Infinity, t = Math.max(0, Math.min(1, 2 - from)), star = t * t * (3 - 2 * t);
     return { near: 1 - star, far: 0, mid: star, at: Math.max(near, Math.min(far, 0)), walls: 1 };
   };

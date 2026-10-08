@@ -1,5 +1,6 @@
 import { requireNonemptyString as text } from '@cssearth/core';
 import type { PreparedImageLayerBank } from '@cssearth/objects';
+import type { FadeOutline } from './fade-outline.ts';
 export type Vec3 = [number, number, number];
 export type LayerAxis = 'x' | 'y' | 'z';
 /** A body of a cluster collision: its picture and the two places on the sky its line runs between. Light of the picture
@@ -11,6 +12,10 @@ export interface CollisionBody { source: string; path: string; from: { raDeg: nu
  * the sky. `pointSourceArcsec` is a collision body's. */
 export interface EllipsoidBody { source: string; path: string; centre: { raDeg: number; decDeg: number }; axisRatio: number; majorAxisPaDeg: number; elongation: number; pointSourceArcsec?: number }
 
+/** A shell's measured rim (`geometry.shape.ring.outline`): its radius on the sky, in arcseconds, at position angles
+ * (degrees from north through east) about the star, read between them by a periodic cubic, every one times `scale`
+ * (the expansion from the rim's epoch to the picture's, given with its basis). */
+export interface RingOutline { source: string; basis: string; positionAnglesDeg: number[]; radiiArcsec: number[]; scale: number }
 export interface ImageLayerRecipe {
   schema: 'cssearth-image-layer-recipe@1';
   id: string;
@@ -28,6 +33,13 @@ export interface ImageLayerRecipe {
   observation: PreparedImageLayerBank['observation'];
   target: { centerRaDeg: number; centerDecDeg: number; distancePc: number };
   geometry: { kind: 'inclined-disk' | 'line-of-sight-envelope'; inclinationDeg: number; lineOfNodesPaDeg: number;
+    /** With "frame" the picture is not faded on the support circle (nor a shell's outline): it is drawn out to its own
+     * frame and fades only at the frame's border (`bake.edgeTaperFraction`). Light no shell holds stays on the picture's plane. */
+    fadeAt?: 'frame' | 'outline';
+    /** With `fadeAt: "outline"` (a shell with a measured rim, `shape.ring.outline`): the picture is drawn out to a rounded
+     * boundary about the star, the rim pushed outward or as far as the measured knots reach, inside the frame by a margin,
+     * and fades over the feather inside it (./fade-outline.ts). */
+    fadeOutline?: FadeOutline;
     thicknessKpc: number; supportRadiusKpc: number; supportTaperFraction: number; depthWeights: number[]; depthScales: number[];
     /** The bank's unit when it is not the kiloparsec: parsecs, for an object a few parsecs across (a nebula), whose leaves in
      * kiloparsecs would be smaller than one CSS pixel. The recipe's lengths stay in kiloparsecs. A flat bank without a bulge only. */
@@ -48,14 +60,25 @@ export interface ImageLayerRecipe {
      * lies on two surfaces, in front of the star's plane where the speeds approach and behind it where they recede.
      * The fine detail nothing measures stays on the picture's plane, and `ring` is then the shell the smooth light lies
      * on: its broad part half on each wall, the rest on the far wall. A place follows the measurements within about `reachArcsec`.
+     * With `beyondRing` (depth "speed" only) the measurements outside the ring's outline place the detail there too: in
+     * each direction the picture is drawn out to the farthest of them, past the support radius, its fine detail at their
+     * depths and its smooth light on the picture's plane, where no shell is. A row whose `columns.surface` is filled (with
+     * `beyondRing` only) is on one of the outer surfaces measured past the ring (knots, jets): those sparse rows are
+     * surfaces of their own, apart from the inner ones (./shape.ts, `OUTER_PRESENCE`). With `glow` "starlet" (depth "speed" only) the
+     * smooth light is the coarse scales of the picture's starlet decomposition, taken without the filaments where the
+     * measurements place ejecta (./shape.ts filamentGlow), instead of the picture blurred.
+     * With `ring.outline` the shell is not one radius: a measured rim gives its radius by position angle (`RingOutline`),
+     * and the whole shell is scaled about the star, in each direction on the sky, by that radius over `semiMajorArcsec`.
+     * `ring.lightJoinsFrom` (with `speeds.beyondRing`) is where, as a fraction of the outline, the shell's smooth light starts
+     * to be handed to the picture's plane; 0.9 without it.
      * Every value is one a paper prints. `starRadiusArcsec` is
      * how far the central star's own light reaches in the picture: that light stays at the star, on no wall.
      * `smoothPixels` is presentation: the radius, in face pixels, of the smooth light the far wall carries. */
     shape?: { source: string; basis: string; expansionKmSPerArcsec: number;
-      ring: { semiMajorArcsec: number; semiMinorArcsec: number; majorPaDeg: number; polarTiltDeg: number; polarLeansToPaDeg: number; expansionKmS: [number, number, number] };
+      ring: { semiMajorArcsec: number; semiMinorArcsec: number; majorPaDeg: number; polarTiltDeg: number; polarLeansToPaDeg: number; expansionKmS: [number, number, number]; outline?: RingOutline; lightJoinsFrom?: number };
       lobe?: { source: string; radiusArcsec: number; expansionKmS: [number, number, number] };
       inner?: { source: string; semiMajorArcsec: number; semiMinorArcsec: number; majorPaDeg: number; expansionKmSPerArcsec: number; expansionKmS: [number, number, number] };
-      speeds?: { source: string; basis: string; path: string; columns: { east: number; north: number; kmS: number }; reachArcsec: number } & ({ depth?: 'wall'; restKmS: number; wallKmS: number } | { depth: 'speed' }); starRadiusArcsec?: number; smoothPixels: number };
+      speeds?: { source: string; basis: string; path: string; columns: { east: number; north: number; kmS: number; surface?: number }; reachArcsec: number } & ({ depth?: 'wall'; restKmS: number; wallKmS: number } | { depth: 'speed'; beyondRing?: true; glow?: 'starlet' }); starRadiusArcsec?: number; smoothPixels: number };
     /** A nebula's published filled body (./body.ts): a spheroid of gas that emits evenly, `semiPolarArcsec` along its pole
      * and `semiEquatorialArcsec` across it, the pole tipped `polarTiltDeg` from the sight line with its near end leaning to
      * position angle `polarLeansToPaDeg`. `envelope` is a filled sphere around it, the nebula's outline. `cavities` are regions along the pole that emit `emission` of the body's emissivity, each about
@@ -183,6 +206,29 @@ const bulgeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['bulge']>
     extentKpc: { radius: positive(e.radius, 'geometry.bulge.extentKpc.radius'), height: positive(e.height, 'geometry.bulge.extentKpc.height'),
       ...(e.fadeFrom===undefined?{}:{fadeFrom:(()=>{const f=positive(e.fadeFrom,'geometry.bulge.extentKpc.fadeFrom');if(f>=Number(e.radius))throw new TypeError(`geometry.bulge.extentKpc.fadeFrom (${f}) must be inside radius (${String(e.radius)}).`);return f;})()}) } };
 };
+const ringOutlineOf = (v: unknown): RingOutline => {
+  const o = object(v, 'geometry.shape.ring.outline'), list = (value: unknown, name: string, check: (x: unknown, at: string) => number) => { if (!Array.isArray(value) || value.length < 4) throw new TypeError(`${name} holds at least four values, one per direction.`); return value.map((x, i) => check(x, `${name}[${i}]`)); };
+  const angles = list(o.positionAnglesDeg, 'geometry.shape.ring.outline.positionAnglesDeg', finite), radii = list(o.radiiArcsec, 'geometry.shape.ring.outline.radiiArcsec', positive);
+  if (angles.length !== radii.length) throw new TypeError(`geometry.shape.ring.outline has ${angles.length} position angles and ${radii.length} radii.`);
+  if (angles.some((angle, i) => angle < 0 || angle >= 360 || (i > 0 && !(angle > angles[i - 1]!)))) throw new TypeError('geometry.shape.ring.outline.positionAnglesDeg rise from 0 to under 360.');
+  return { source: text(o.source, 'geometry.shape.ring.outline.source'), basis: text(o.basis, 'geometry.shape.ring.outline.basis'), positionAnglesDeg: angles, radiiArcsec: radii, scale: positive(o.scale, 'geometry.shape.ring.outline.scale') };
+};
+const fadeOutlineOf = (v: unknown, shape: unknown): FadeOutline => {
+  if (!shape || typeof shape !== 'object' || !('ring' in shape) || !shape.ring || typeof shape.ring !== 'object' || !('outline' in shape.ring) || shape.ring.outline === undefined)
+    throw new TypeError('geometry.fadeAt "outline" fades on a measured rim: give geometry.shape.ring.outline.');
+  const f = object(v, 'geometry.fadeOutline'), outward = positive(f.outward, 'geometry.fadeOutline.outward'), smoothDeg = positive(f.smoothDeg, 'geometry.fadeOutline.smoothDeg');
+  if (outward < 1) throw new TypeError(`geometry.fadeOutline.outward pushes the rim outward: at least 1; got ${outward}.`);
+  if (smoothDeg > 45) throw new TypeError(`geometry.fadeOutline.smoothDeg is at most 45; got ${smoothDeg}.`);
+  const filled = f.filledCornersPixels === undefined ? undefined : (() => {
+    const corners = f.filledCornersPixels;
+    if (!Array.isArray(corners) || corners.length < 3) throw new TypeError('geometry.fadeOutline.filledCornersPixels is the filled part\'s corners, at least three [x, y] in pixels.');
+    const points = corners.map((corner: unknown, i) => { if (!Array.isArray(corner) || corner.length !== 2) throw new TypeError(`geometry.fadeOutline.filledCornersPixels[${i}] is [x, y] in pixels.`); return [finite(corner[0], `geometry.fadeOutline.filledCornersPixels[${i}][0]`), finite(corner[1], `geometry.fadeOutline.filledCornersPixels[${i}][1]`)] as [number, number]; });
+    // Convex and in one order round it: every turn the same way.
+    const turns = points.map((a, i) => { const b = points[(i + 1) % points.length]!, c = points[(i + 2) % points.length]!; return Math.sign((b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0])); });
+    if (!turns.every(turn => turn !== 0 && turn === turns[0])) throw new TypeError('geometry.fadeOutline.filledCornersPixels is a convex polygon, its corners in order round it.');
+    return points; })();
+  return { outward, featherArcsec: positive(f.featherArcsec, 'geometry.fadeOutline.featherArcsec'), frameMarginArcsec: positive(f.frameMarginArcsec, 'geometry.fadeOutline.frameMarginArcsec'), smoothDeg, ...(filled ? { filledCornersPixels: filled } : {}) };
+};
 const shapeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['shape']> => {
   const s = object(v, 'geometry.shape'), r = object(s.ring, 'geometry.shape.ring'), tilt = finite(r.polarTiltDeg, 'geometry.shape.ring.polarTiltDeg'), smooth = finite(s.smoothPixels, 'geometry.shape.smoothPixels');
   const speeds = (value: unknown, name: string): [number, number, number] => { if (!Array.isArray(value) || value.length !== 3) throw new TypeError(`${name} holds three speeds, for the red, green and blue channels.`); return [positive(value[0], `${name}[0]`), positive(value[1], `${name}[1]`), positive(value[2], `${name}[2]`)]; };
@@ -192,18 +238,21 @@ const shapeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['shape']>
   if (lobe && inner) throw new TypeError('geometry.shape takes a lobe through the shell\'s opening or a closed inner shell, not both.');
   const column = (value: unknown, name: string) => { const index = finite(value, name); if (!(Number.isInteger(index) && index >= 0)) throw new TypeError(`${name} is a column counted from 0; got ${index}.`); return index; };
   // Where a measured feature lies: on a wall, between the two speeds that say which, or at its own speed's depth.
-  const placed = (measured: Record<string, unknown>): { depth?: 'wall'; restKmS: number; wallKmS: number } | { depth: 'speed' } => {
+  const placed = (measured: Record<string, unknown>): { depth?: 'wall'; restKmS: number; wallKmS: number } | { depth: 'speed'; beyondRing?: true; glow?: 'starlet' } => {
+    if (measured.beyondRing !== undefined && (measured.beyondRing !== true || measured.depth !== 'speed')) throw new TypeError(`geometry.shape.speeds.beyondRing is true or left out, and only with depth "speed"; got ${JSON.stringify(measured.beyondRing)}.`);
     if (measured.depth !== undefined && measured.depth !== 'wall' && measured.depth !== 'speed') throw new TypeError(`geometry.shape.speeds.depth says where a measured feature lies: "wall" (on the shell's wall its speed points to) or "speed" (as deep as its own speed puts it under the shell's law), not ${JSON.stringify(measured.depth)}.`);
-    if (measured.depth === 'speed') { for (const key of ['restKmS', 'wallKmS']) if (measured[key] !== undefined) throw new TypeError(`geometry.shape.speeds.${key} says which wall a feature is on; with depth "speed" no feature is on a wall, so leave it out.`); return { depth: 'speed' }; }
+    if (measured.glow !== undefined && (measured.glow !== 'starlet' || measured.depth !== 'speed')) throw new TypeError(`geometry.shape.speeds.glow is "starlet" or left out, and only with depth "speed"; got ${JSON.stringify(measured.glow)}.`);
+    if (measured.depth === 'speed') { for (const key of ['restKmS', 'wallKmS']) if (measured[key] !== undefined) throw new TypeError(`geometry.shape.speeds.${key} says which wall a feature is on; with depth "speed" no feature is on a wall, so leave it out.`); return { depth: 'speed', ...(measured.beyondRing ? { beyondRing: true as const } : {}), ...(measured.glow ? { glow: 'starlet' as const } : {}) }; }
     return { ...(measured.depth === undefined ? {} : { depth: measured.depth }), restKmS: positive(measured.restKmS, 'geometry.shape.speeds.restKmS'), wallKmS: positive(measured.wallKmS, 'geometry.shape.speeds.wallKmS') }; };
   return { source: text(s.source, 'geometry.shape.source'), basis: text(s.basis, 'geometry.shape.basis'), expansionKmSPerArcsec: positive(s.expansionKmSPerArcsec, 'geometry.shape.expansionKmSPerArcsec'),
     ring: { semiMajorArcsec: positive(r.semiMajorArcsec, 'geometry.shape.ring.semiMajorArcsec'), semiMinorArcsec: positive(r.semiMinorArcsec, 'geometry.shape.ring.semiMinorArcsec'), majorPaDeg: finite(r.majorPaDeg, 'geometry.shape.ring.majorPaDeg'),
-      polarTiltDeg: tilt, polarLeansToPaDeg: finite(r.polarLeansToPaDeg, 'geometry.shape.ring.polarLeansToPaDeg'), expansionKmS: speeds(r.expansionKmS, 'geometry.shape.ring.expansionKmS') },
+      polarTiltDeg: tilt, polarLeansToPaDeg: finite(r.polarLeansToPaDeg, 'geometry.shape.ring.polarLeansToPaDeg'), expansionKmS: speeds(r.expansionKmS, 'geometry.shape.ring.expansionKmS'), ...(r.outline === undefined ? {} : { outline: ringOutlineOf(r.outline) }), ...(r.lightJoinsFrom === undefined ? {} : { lightJoinsFrom: (() => { const f = finite(r.lightJoinsFrom, 'geometry.shape.ring.lightJoinsFrom'); if (!(f >= 0.5 && f < 1)) throw new TypeError(`geometry.shape.ring.lightJoinsFrom is a fraction of the outline from 0.5 to under 1; got ${f}.`); return f; })() }) },
     ...(lobe === undefined ? {} : { lobe: { source: text(lobe.source, 'geometry.shape.lobe.source'), radiusArcsec: positive(lobe.radiusArcsec, 'geometry.shape.lobe.radiusArcsec'), expansionKmS: speeds(lobe.expansionKmS, 'geometry.shape.lobe.expansionKmS') } }),
     ...(inner === undefined ? {} : { inner: { source: text(inner.source, 'geometry.shape.inner.source'), semiMajorArcsec: positive(inner.semiMajorArcsec, 'geometry.shape.inner.semiMajorArcsec'), semiMinorArcsec: positive(inner.semiMinorArcsec, 'geometry.shape.inner.semiMinorArcsec'), majorPaDeg: finite(inner.majorPaDeg, 'geometry.shape.inner.majorPaDeg'),
       expansionKmSPerArcsec: positive(inner.expansionKmSPerArcsec, 'geometry.shape.inner.expansionKmSPerArcsec'), expansionKmS: speeds(inner.expansionKmS, 'geometry.shape.inner.expansionKmS') } }),
     ...(measured === undefined ? {} : { speeds: (() => { const columns = object(measured.columns, 'geometry.shape.speeds.columns'); return { source: text(measured.source, 'geometry.shape.speeds.source'), basis: text(measured.basis, 'geometry.shape.speeds.basis'), path: path(measured.path),
-      columns: { east: column(columns.east, 'geometry.shape.speeds.columns.east'), north: column(columns.north, 'geometry.shape.speeds.columns.north'), kmS: column(columns.kmS, 'geometry.shape.speeds.columns.kmS') }, reachArcsec: positive(measured.reachArcsec, 'geometry.shape.speeds.reachArcsec'), ...placed(measured) }; })() }),
+      columns: { east: column(columns.east, 'geometry.shape.speeds.columns.east'), north: column(columns.north, 'geometry.shape.speeds.columns.north'), kmS: column(columns.kmS, 'geometry.shape.speeds.columns.kmS'),
+        ...(columns.surface === undefined ? {} : { surface: (() => { if (measured.beyondRing !== true) throw new TypeError('geometry.shape.speeds.columns.surface names the outer surfaces measured past the ring: only with beyondRing.'); return column(columns.surface, 'geometry.shape.speeds.columns.surface'); })() }) }, reachArcsec: positive(measured.reachArcsec, 'geometry.shape.speeds.reachArcsec'), ...placed(measured) }; })() }),
     ...(s.starRadiusArcsec === undefined ? {} : { starRadiusArcsec: positive(s.starRadiusArcsec, 'geometry.shape.starRadiusArcsec') }),
     smoothPixels: smooth };
 };
@@ -355,6 +404,8 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       fieldOfViewDeg: pair(o.fieldOfViewDeg, 'fieldOfViewDeg'), northClockwiseDeg: finite(o.northClockwiseDeg, 'northClockwiseDeg') },
     target: { centerRaDeg: finite(t.centerRaDeg, 'target RA'), centerDecDeg: finite(t.centerDecDeg, 'target Dec'), distancePc: positive(t.distancePc, 'distancePc') },
     geometry: { kind, inclinationDeg, lineOfNodesPaDeg: finite(g.lineOfNodesPaDeg, 'lineOfNodesPaDeg'),
+      ...(g.fadeAt===undefined?{}:{fadeAt:(()=>{if(g.fadeAt!=='frame'&&g.fadeAt!=='outline')throw new TypeError(`geometry.fadeAt is "frame", "outline" or left out; got ${JSON.stringify(g.fadeAt)}.`);return g.fadeAt;})()}),
+      ...(g.fadeAt==='outline'?{fadeOutline:fadeOutlineOf(g.fadeOutline,g.shape)}:g.fadeOutline===undefined?{}:(()=>{throw new TypeError('geometry.fadeOutline goes with fadeAt "outline".');})()),
       thicknessKpc: positive(g.thicknessKpc, 'thicknessKpc'), supportRadiusKpc: positive(g.supportRadiusKpc, 'supportRadiusKpc'),
       supportTaperFraction, depthWeights: weights, depthScales: scales, ...(g.bulge===undefined?{}:{bulge:bulgeOf(g.bulge)}),
       ...(g.shape===undefined?{}:{shape:(()=>{if(g.bulge!==undefined||b.flat!==true)throw new TypeError('geometry.shape is for a flat bank without a bulge.');return shapeOf(g.shape);})()}),
