@@ -138,7 +138,7 @@ Catalogue fields and image-layer galaxies feed the shared Sources compiler from
 their source manifests and `source/presentation.json` without becoming
 independently mounted scenes.
 
-Their root `inventory.json` lists every baked file with its location. A
+Their root `inventory.json` lists every delivered baked file with its location. A
 `prepared` entry's filename may contain safe relative subdirectories and
 resolves below the object's `prepared/` directory; a `public` entry resolves
 below `site/public/scenes/<id>/`, for shared dataset previews. Absolute paths,

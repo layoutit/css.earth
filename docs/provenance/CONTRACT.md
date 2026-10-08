@@ -47,7 +47,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
 | Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `node site/build/prepare/authored/prepare-text.mts` publishes `prepared/text.json` |
 | `prepared/object.json`, `prepared/page.json` | Transport and page metadata built from the installed runtime when read; never files, inventoried or committed |
-| Other delivery files under `prepared/` | Baked output. Published to R2 through `inventory.json`, restored by `setup:assets`, never committed; audit-only terrain reports and source-index rasters are excluded |
+| Other delivery files under `prepared/` | Baked output. Published to R2 through `inventory.json`, restored by `setup:assets`, never committed. The inventory lists a record only if something reads it after its bake ([delivery ledger](../../packages/objects/src/node/prepared-delivery.ts)): a bake's working records, audit-only terrain reports and source-index rasters are excluded |
 | `inventory.json` at the body root | Generated inventory of every baked file (public textures and `prepared/*`) used by installation and publication |
 | `site/prepared/prepared-sources.json`, `site/prepared/prepared-source-credits.json` and `site/prepared/prepared-facilities.json` | Ignored source usage, page credit and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |

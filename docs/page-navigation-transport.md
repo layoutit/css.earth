@@ -10,7 +10,7 @@ consumes the same list. There is no page-source regex or second object registry.
 `prepared/object.json` and `prepared/page.json` are built from the installed
 `prepared/runtime.json` when read ([prepared transport](../packages/objects/src/node/prepared-transport.ts)):
 the object transport is the runtime in its `cssearth-prepared-object@1` envelope, and the page data is the runtime's
-asset table with its published `prepared/controls.json`. Neither is a file. The descriptor names the transport's format
+asset table and controls. Neither is a file. The descriptor names the transport's format
 and URL; neither it nor the page metadata carries a digest.
 The first-load build serializes the decoded prepared tree into
 `.object-stage`. Navigation fragments use page metadata without including another
