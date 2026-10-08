@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "beatrix",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 83",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 12 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.83412474,
+          "uncertainty": 0.0025264567
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.8842488,
+          "uncertainty": 0.0014003337
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9296981,
+          "uncertainty": 0.001278117
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.96582204,
+          "uncertainty": 0.0011821737
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0012334246
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.033676,
+          "uncertainty": 0.0013317117
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0548743,
+          "uncertainty": 0.0013561833
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.071672,
+          "uncertainty": 0.0012528611
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0996275,
+          "uncertainty": 0.0013048042
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.11959,
+          "uncertainty": 0.001362788
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.1367661,
+          "uncertainty": 0.0014038648
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.1455791,
+          "uncertainty": 0.0013839103
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.157982,
+          "uncertainty": 0.0014450205
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.1688286,
+          "uncertainty": 0.0015103495
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1902493,
+          "uncertainty": 0.00173126
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.2066673,
+          "uncertainty": 0.0023264452
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (83) Beatrix",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2012ApJ...759L...8M)",
+    "band": "V",
+    "value": 0.05,
+    "uncertainty": 0.006
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

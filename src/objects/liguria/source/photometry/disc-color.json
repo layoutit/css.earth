@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "liguria",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 356",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 26 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.80621374,
+          "uncertainty": 0.000993441
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.8707283,
+          "uncertainty": 0.0007636662
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.929835,
+          "uncertainty": 0.0007656942
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9739217,
+          "uncertainty": 0.0008145522
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.00084823
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0135276,
+          "uncertainty": 0.0009694911
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 0.978164,
+          "uncertainty": 0.000937263
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 0.9799902,
+          "uncertainty": 0.0007511867
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 0.9932364,
+          "uncertainty": 0.00077824225
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.003257,
+          "uncertainty": 0.00081565656
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0152721,
+          "uncertainty": 0.0008439861
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0291543,
+          "uncertainty": 0.00084963243
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0394367,
+          "uncertainty": 0.0008785557
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0561271,
+          "uncertainty": 0.0009254328
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.0805206,
+          "uncertainty": 0.0009862188
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.1115403,
+          "uncertainty": 0.0011351423
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (356) Liguria",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.065,
+    "uncertainty": 0.006
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

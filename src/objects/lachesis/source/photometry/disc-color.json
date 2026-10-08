@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "lachesis",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 120",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 22 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.80936235,
+          "uncertainty": 0.0016023844
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.87830216,
+          "uncertainty": 0.000922361
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.942233,
+          "uncertainty": 0.00086962146
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.983733,
+          "uncertainty": 0.00080130383
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0008673053
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0067685,
+          "uncertainty": 0.0008638544
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 0.9961045,
+          "uncertainty": 0.0009249284
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0050411,
+          "uncertainty": 0.0007918975
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.019415,
+          "uncertainty": 0.0008248675
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0262645,
+          "uncertainty": 0.00084586604
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0404824,
+          "uncertainty": 0.00084784185
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.037529,
+          "uncertainty": 0.00085235585
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0411568,
+          "uncertainty": 0.0008625384
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0451207,
+          "uncertainty": 0.00088894874
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.0629666,
+          "uncertainty": 0.0009657591
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.0945332,
+          "uncertainty": 0.0012716992
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (120) Lachesis",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.058,
+    "uncertainty": 0.003
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "liguria",
+  "card": {
+    "text": "Main-belt asteroid found in 1893.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=356",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "356 Liguria (A893 BE); Discovered 1893-Jan-21 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-65830",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/65830/shape.txt",
+        "label": "DAMIT shape 65830 · Liguria",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Charlois found Liguria at Nice on 21 January 1893.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=356",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "356 Liguria (A893 BE); Discovered 1893-Jan-21 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-65830",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/65830/shape.txt",
+        "label": "DAMIT shape 65830 · Liguria",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Liguria’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 72.75 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

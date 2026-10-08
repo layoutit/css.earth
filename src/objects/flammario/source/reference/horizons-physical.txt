@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271021%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              1021 Flammario (A924 EW)         2026-Oct-08 06:21:17
+Rec #:    1021 (+COV) Soln.date: 2026-Jun-05_04:22:16   # obs: 5912 (1925-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458018.5 ! 2017-Sep-22.00 (TDB)         Residual RMS= .18802
+   EC= .2855183128011748   QR= 1.955585683514046   TP= 2458150.7289751312
+   OM= 115.4408811608382   W=  286.9785266302523   IN= 15.86896637093754
+   A= 2.737069008977759    MA= 331.2192514748784   ADIST= 3.518552334441473
+   PER= 4.52832            N= .21765841            ANGMOM= .027274638
+   DAN= 2.32047            DDN= 2.74261            L= 43.0512486
+   B= -15.1602878          MOID= 1.03023005        TP= 2018-Feb-01.2289751312
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 50.3825            ROTPER= 12.155
+   H= 9.01                 G= .150                 B-V= .656
+                           ALBEDO= .045            STYP= B
+
+ASTEROID comments: 
+1: soln ref.= JPL#86, OCC=0
+2: source=ORB
+*******************************************************************************

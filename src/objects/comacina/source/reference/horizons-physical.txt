@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27489%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               489 Comacina (A902 RD)          2026-Oct-08 06:13:34
+Rec #:     489 (+COV) Soln.date: 2026-Jun-05_03:40:04   # obs: 9585 (1902-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457315.5 ! 2015-Oct-20.00 (TDB)         Residual RMS= .1917
+   EC= .04487201405473787  QR= 3.01020289164696    TP= 2458040.3375531938
+   OM= 166.8982175370836   W=  11.91800078289395   IN= 13.00013554416775
+   A= 3.1516225426772      MA= 232.3139470339296   ADIST= 3.29304219370744
+   PER= 5.59512            N= .176158165           ANGMOM= .030507799
+   DAN= 3.01299            DDN= 3.28971            L= 178.5191675
+   B= 2.6626611            MOID= 2.01606989        TP= 2017-Oct-13.8375531938
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 69.695             ROTPER= 9.02
+   H= 8.6                  G= .150                 B-V= .697
+                           ALBEDO= .0427           STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#151, OCC=0
+2: source=ORB
+*******************************************************************************

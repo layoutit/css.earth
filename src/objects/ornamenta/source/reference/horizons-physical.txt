@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27350%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               350 Ornamenta (A892 XC)         2026-Oct-08 06:16:06
+Rec #:     350 (+COV) Soln.date: 2026-Jun-05_03:29:20   # obs: 7893 (1892-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458075.5 ! 2017-Nov-18.00 (TDB)         Residual RMS= .19026
+   EC= .1592807235441632   QR= 2.614086868271643   TP= 2458617.1303438931
+   OM= 90.10445643569228   W=  338.2379583201597   IN= 24.89251094780371
+   A= 3.109345701328119    MA= 262.63484813705     ADIST= 3.604604534384596
+   PER= 5.48292            N= .179763104           ANGMOM= .029945789
+   DAN= 2.63994            DDN= 3.55658            L= 70.1982826
+   B= -8.9780563           MOID= 1.64045           TP= 2019-May-13.6303438931
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 64.3645            ROTPER= 9.178
+   H= 8.45                 G= .150                 B-V= .702
+                           ALBEDO= .048            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#80, OCC=0
+2: source=ORB
+*******************************************************************************

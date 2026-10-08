@@ -1,0 +1,111 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "adelinda",
+  "displayName": "Adelinda",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "105.912 × 105.912 × 105.912 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=229",
+          "label": "JPL Small-Body Database, physical parameters for 229 Adelinda: diameter 105.912 ± 1.779 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "6.6 h",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=229",
+          "label": "JPL Small-Body Database, physical parameters for 229 Adelinda: diameter 105.912 ± 1.779 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "/periodText"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "geometric-albedo",
+        "label": "Geometric albedo",
+        "value": "0.035 ± 0.007 (visible)",
+        "source": {
+          "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_mainbelt.csv",
+          "label": "Mainzer et al. (2019), NEOWISE Diameters and Albedos V2.0, Masiero et al. 2014 (Mas14)",
+          "checked": "2026-09-28",
+          "path": "source/reference/sbn-catalogues.json",
+          "catalogueId": "neowise-diameters-albedos-v2",
+          "locator": "/neowise/rows/0/fields/V_albedo; /neowise/rows/0/fields/V_albedo_err; /neowise/rows/0/fields/Fit_code; /neowise/rows/0/fields/Reference"
+        }
+      }
+    ]
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "labels": {
+      "color": "Color"
+    },
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc color from a published reflectance spectrum and V geometric albedo, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "/scenes/adelinda/adelinda-color-thumbnail.webp",
+        "surface": "adelinda-color-surface@2x.webp",
+        "poles": "adelinda-color-surface@2x.webp",
+        "source": {
+          "id": "adelinda-disc-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202243791"
+        },
+        "falseColor": false,
+        "notes": "A sphere at the measured diameter; no shape model is published. One mean color for the whole disc (Gaia DR3 reflectance spectrum), scaled to the 3.5% geometric albedo JPL lists; no terrain, albedo pattern or color variation is drawn."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Gaia Collaboration, Galluccio et al. (2023)",
+      "role": "surface",
+      "description": "Gaia DR3 reflectance spectrum",
+      "href": "https://doi.org/10.1051/0004-6361/202243791"
+    },
+    {
+      "label": "JPL Small-Body Database",
+      "role": "surface",
+      "description": "Geometric albedo",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=229"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=229",
+      "credit": "JPL Small-Body Database, physical parameters for 229 Adelinda: diameter 105.912 ± 1.779 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "JPL Small-Body Database, physical parameters for 229 Adelinda: diameter 105.912 ± 1.779 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mnemosyne",
+  "card": {
+    "text": "Main-belt asteroid found in 1859.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=57",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "57 Mnemosyne (A859 SA); Discovered 1859-Sep-22 by Luther, R. at Dusseldorf; orbit class: Main-belt Asteroid; diameter: 112.59 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "R. Luther found Mnemosyne at Dusseldorf on 22 September 1859.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=57",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "57 Mnemosyne (A859 SA); Discovered 1859-Sep-22 by Luther, R. at Dusseldorf; orbit class: Main-belt Asteroid; diameter: 112.59 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Mnemosyne’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

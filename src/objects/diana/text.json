@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "diana",
+  "card": {
+    "text": "Main-belt asteroid found in 1863.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=78",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "78 Diana (A863 EA); Discovered 1863-Mar-15 by Luther, R. at Dusseldorf; orbit class: Main-belt Asteroid; diameter: 120.6 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "R. Luther found Diana at Dusseldorf on 15 March 1863.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=78",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "78 Diana (A863 EA); Discovered 1863-Mar-15 by Luther, R. at Dusseldorf; orbit class: Main-belt Asteroid; diameter: 120.6 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Diana’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

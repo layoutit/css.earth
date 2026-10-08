@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27490%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                490 Veritas (A902 RE)          2026-Sep-08 10:25:29
+Rec #:     490 (+COV) Soln.date: 2026-Jun-05_03:40:11   # obs: 9786 (1902-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458024.5 ! 2017-Sep-28.00 (TDB)         Residual RMS= .22029
+   EC= .0943676777771212   QR= 2.871318330229745   TP= 2457421.2839973336
+   OM= 178.3325356833572   W=  194.1839422930498   IN= 9.281003784787018
+   A= 3.17051220431497     MA= 105.3131939691686   ADIST= 3.469706078400196
+   PER= 5.6455             N= .174586207           ANGMOM= .030493252
+   DAN= 3.45872            DDN= 2.87889            L= 12.3381535
+   B= -2.2648346           MOID= 1.87135994        TP= 2016-Feb-02.7839973336
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 59.4015            ROTPER= 7.93
+   H= 8.66                 G= .150                 B-V= .750
+                           ALBEDO= .059            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#75, OCC=0
+2: source=ORB
+*******************************************************************************

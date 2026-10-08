@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "huberta",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 260",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 25 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.839075,
+          "uncertainty": 0.005077586
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.8889812,
+          "uncertainty": 0.0023970183
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9375157,
+          "uncertainty": 0.0019616054
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9684578,
+          "uncertainty": 0.0019488845
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0018826801
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0271106,
+          "uncertainty": 0.0020257595
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0240113,
+          "uncertainty": 0.00205052
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0378423,
+          "uncertainty": 0.0018701687
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0543841,
+          "uncertainty": 0.0019519898
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0569849,
+          "uncertainty": 0.0020349347
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.073067,
+          "uncertainty": 0.002052045
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0861773,
+          "uncertainty": 0.0020579034
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.1024485,
+          "uncertainty": 0.0020643948
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.1134137,
+          "uncertainty": 0.0022383977
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1244587,
+          "uncertainty": 0.002566973
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.1536702,
+          "uncertainty": 0.0036542963
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (260) Huberta",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.044,
+    "uncertainty": 0.01
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

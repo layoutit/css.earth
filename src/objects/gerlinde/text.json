@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gerlinde",
+  "card": {
+    "text": "Main-belt asteroid found in 1908.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=663",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "663 Gerlinde (A908 MB); Discovered 1908-Jun-24 by Kopff, A. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-60916",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/60916/shape.txt",
+        "label": "DAMIT shape 60916 · Gerlinde",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Kopff found Gerlinde at Heidelberg on 24 June 1908.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=663",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "663 Gerlinde (A908 MB); Discovered 1908-Jun-24 by Kopff, A. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-60916",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/60916/shape.txt",
+        "label": "DAMIT shape 60916 · Gerlinde",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Gerlinde’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 53.9 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

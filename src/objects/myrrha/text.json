@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "myrrha",
+  "card": {
+    "text": "Outer main-belt asteroid found in 1894.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=381",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "381 Myrrha (A894 AC); Discovered 1894-Jan-10 by Charlois, A. at Nice; orbit class: Outer Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-4143",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4143/shape.txt",
+        "label": "DAMIT shape 4143 · Myrrha",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Charlois found Myrrha at Nice on 10 January 1894.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=381",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "381 Myrrha (A894 AC); Discovered 1894-Jan-10 by Charlois, A. at Nice; orbit class: Outer Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-4143",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4143/shape.txt",
+        "label": "DAMIT shape 4143 · Myrrha",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Myrrha’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 63.82 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27356%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                356 Liguria (A893 BE)          2026-Oct-08 06:12:54
+Rec #:     356 (+COV) Soln.date: 2026-Jun-05_03:29:54   # obs: 5108 (1893-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457343.5 ! 2015-Nov-17.00 (TDB)         Residual RMS= .22308
+   EC= .2373159614964205   QR= 2.103790295935018   TP= 2457465.7988874898
+   OM= 354.796586652662    W=  78.54240662286223   IN= 8.224281120694789
+   A= 2.758403466870435    MA= 333.6888460720162   ADIST= 3.413016637805852
+   PER= 4.58136            N= .21513813            ANGMOM= .027753833
+   DAN= 2.48587            DDN= 2.73183            L= 73.2231319
+   B= 8.059286699999999    MOID= 1.13625002        TP= 2016-Mar-18.2988874898
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 72.7515            ROTPER= 31.701
+   H= 8.37                 G= .150                 B-V= .733
+                           ALBEDO= .065            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#108, OCC=0
+2: source=ORB
+*******************************************************************************

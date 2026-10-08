@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27618%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               618 Elfriede (A906 UM)          2026-Oct-08 06:14:57
+Rec #:     618 (+COV) Soln.date: 2026-Jun-05_03:50:10  # obs: 13806 (1906-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457921.5 ! 2017-Jun-17.00 (TDB)         Residual RMS= .18028
+   EC= .07246718787726673  QR= 2.959814459719113   TP= 2458860.7580229356
+   OM= 111.0428489852137   W=  228.1339442022109   IN= 17.02967212338766
+   A= 3.19106172960646     MA= 197.5999423601919   ADIST= 3.422308999493807
+   PER= 5.70047            N= .172902497           ANGMOM= .030648251
+   DAN= 3.33563            DDN= 3.02786            L= 337.8972777
+   B= -12.5974648          MOID= 1.97271001        TP= 2020-Jan-12.2580229356
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 65.646             ROTPER= 14.791
+   H= 8.54                 G= .150                 B-V= .696
+                           ALBEDO= .050            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#153, OCC=0
+2: source=ORB
+*******************************************************************************

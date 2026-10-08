@@ -606,6 +606,2291 @@
       },
       "papers": {},
       "checked": "2026-09-25"
+    },
+    {
+      "id": "chicago",
+      "name": "Chicago",
+      "number": 334,
+      "model": {
+        "id": 4269,
+        "version": "2019-05-07",
+        "shapeFile": 13321,
+        "spinFile": 13319,
+        "lambda": 21,
+        "beta": 20,
+        "periodHours": 7.36014,
+        "references": [
+          {
+            "id": 182,
+            "label": "Ďurech et al. (2019), Astronomy and Astrophysics 631, A2",
+            "title": "Inversion of asteroid photometry from Gaia DR2 and the Lowell Observatory photometric database"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 4270,
+          "lambda": 200,
+          "beta": 32,
+          "periodHours": 7.36014
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 198.77,
+        "uncertaintyKm": 5.597,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (334) Chicago",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=334",
+        "notes": "JPL lists a diameter of 198.77 ± 5.597 km, from NEOWISE (Grav et al. 2012, ApJ 744, 197; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 198.77 ± 5.597 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Outer main-belt asteroid found in 1892.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "M. Wolf found Chicago at Heidelberg on 23 August 1892.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "winchester",
+      "name": "Winchester",
+      "number": 747,
+      "model": {
+        "id": 247,
+        "version": "2011-02-18",
+        "shapeFile": 812,
+        "spinFile": 808,
+        "lambda": 304,
+        "beta": -60,
+        "periodHours": 9.4148,
+        "references": [
+          {
+            "id": 129,
+            "label": "A. Marciniak et al. (2009), Astron. Astrophys. 498, 313",
+            "title": "Photometry and models of selected main belt asteroids VI. 160 Una, 747 Winchester, and 849 Ara"
+          },
+          {
+            "id": 139,
+            "label": "Ďurech et al. (2011), Icarus 214, 652",
+            "title": "Combining asteroid models derived by lightcurve inversion with asteroidal occultation silhouettes"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "published-volume-equivalent-size-transfer",
+        "diameterKm": 171,
+        "uncertaintyKm": 15,
+        "quantity": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+        "reference": "DAMIT model 247, version 2011-02-18",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/247",
+        "notes": "DAMIT marks the model as size-calibrated and lists an equivalent diameter of 171 ± 15 km with it; the model references describe the scaling.",
+        "visibleDescription": "Convex light-curve model at the 171 ± 15 km equivalent diameter DAMIT lists for it.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1913.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "J. H. Metcalf found Winchester at Winchester on 7 March 1913.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "stereoskopia",
+      "name": "Stereoskopia",
+      "number": 566,
+      "model": {
+        "id": 16291,
+        "version": "2023-10-03",
+        "shapeFile": 127149,
+        "spinFile": 127147,
+        "spinFileName": "IAUspin",
+        "lambda": 164,
+        "beta": -2,
+        "periodHours": 12.08466,
+        "comment": "preferred",
+        "references": [
+          {
+            "id": 667,
+            "label": "Marciniak et al. (2023), Astronomy and Astrophysics 679, A60",
+            "title": "Scaling slowly rotating asteroids with stellar occultations"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 16292,
+          "lambda": 338,
+          "beta": -13,
+          "periodHours": 12.08464,
+          "diameterKm": 148,
+          "uncertaintyKm": 11
+        }
+      ],
+      "calibration": {
+        "method": "published-volume-equivalent-size-transfer",
+        "diameterKm": 148,
+        "uncertaintyKm": 8,
+        "quantity": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+        "reference": "DAMIT model 16291, version 2023-10-03",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16291",
+        "notes": "DAMIT marks the model as size-calibrated and lists an equivalent diameter of 148 ± 8 km with it; the model references describe the scaling.",
+        "visibleDescription": "Convex light-curve model at the 148 ± 8 km equivalent diameter DAMIT lists for it.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Outer main-belt asteroid found in 1905.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "P. Gotz found Stereoskopia at Heidelberg on 28 May 1905.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "scheila",
+      "name": "Scheila",
+      "number": 596,
+      "model": {
+        "id": 848,
+        "version": "2016-01-04",
+        "shapeFile": 3263,
+        "spinFile": 3261,
+        "lambda": 264,
+        "beta": -18,
+        "periodHours": 15.8666,
+        "references": [
+          {
+            "id": 161,
+            "label": "Hanuš et al. (2016), Astronomy and Astrophysics 586, A108",
+            "title": "New and updated convex shape models of asteroids based on optical data from a large collaboration network"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 849,
+          "lambda": 89,
+          "beta": -9,
+          "periodHours": 15.8666
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 159.726,
+        "uncertaintyKm": 1.103,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (596) Scheila",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=596",
+        "notes": "JPL lists a diameter of 159.726 ± 1.103 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 159.726 ± 1.103 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1906.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Kopff found Scheila at Heidelberg on 21 February 1906.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "bononia",
+      "name": "Bononia",
+      "number": 361,
+      "model": {
+        "id": 1173,
+        "version": "2016-01-04",
+        "shapeFile": 4260,
+        "spinFile": 4258,
+        "lambda": 115,
+        "beta": 45,
+        "periodHours": 13.8063,
+        "references": [
+          {
+            "id": 161,
+            "label": "Hanuš et al. (2016), Astronomy and Astrophysics 586, A108",
+            "title": "New and updated convex shape models of asteroids based on optical data from a large collaboration network"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 1174,
+          "lambda": 294,
+          "beta": 13,
+          "periodHours": 13.80634
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 154.334,
+        "uncertaintyKm": 5.413,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (361) Bononia",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=361",
+        "notes": "JPL lists a diameter of 154.334 ± 5.413 km, from NEOWISE (Grav et al. 2012, ApJ 744, 197; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 154.334 ± 5.413 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Outer main-belt asteroid found in 1893.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Bononia at Nice on 11 March 1893.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "berbericia",
+      "name": "Berbericia",
+      "number": 776,
+      "model": {
+        "id": 251,
+        "version": "2007-02-27",
+        "shapeFile": 830,
+        "spinFile": 828,
+        "lambda": 347,
+        "beta": 12,
+        "periodHours": 7.66701,
+        "references": [
+          {
+            "id": 113,
+            "label": "J. Ďurech (2007), Astron. Astrophys. 465, 331",
+            "title": "Physical models of ten asteroids from an observers' collaboration network"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 151.711,
+        "uncertaintyKm": 0.878,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (776) Berbericia",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=776",
+        "notes": "JPL lists a diameter of 151.711 ± 0.878 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 151.711 ± 0.878 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1914.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Massinger found Berbericia at Heidelberg on 24 January 1914.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "pulcova",
+      "name": "Pulcova",
+      "number": 762,
+      "model": {
+        "id": 954,
+        "version": "2016-01-04",
+        "shapeFile": 3582,
+        "spinFile": 3580,
+        "lambda": 17,
+        "beta": -14,
+        "periodHours": 5.83977,
+        "references": [
+          {
+            "id": 161,
+            "label": "Hanuš et al. (2016), Astronomy and Astrophysics 586, A108",
+            "title": "New and updated convex shape models of asteroids based on optical data from a large collaboration network"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 955,
+          "lambda": 194,
+          "beta": -43,
+          "periodHours": 5.83977
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 147.343,
+        "uncertaintyKm": 0.818,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (762) Pulcova",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=762",
+        "notes": "JPL lists a diameter of 147.343 ± 0.818 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 147.343 ± 0.818 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1913.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "G. Neujmin found Pulcova at Simeis on 3 September 1913.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "merapi",
+      "name": "Merapi",
+      "number": 536,
+      "model": {
+        "id": 5525,
+        "version": "2019-10-23",
+        "shapeFile": 59880,
+        "spinFile": 59878,
+        "spinFileName": "IAUspin",
+        "lambda": 2,
+        "beta": 31,
+        "periodHours": 8.7905,
+        "references": [
+          {
+            "id": 658,
+            "label": "Ďurech et al. (2020), Astronomy and Astrophysics 643, A59",
+            "title": "Asteroid models reconstructed from ATLAS photometry"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 147.066,
+        "uncertaintyKm": 5.524,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (536) Merapi",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=536",
+        "notes": "JPL lists a diameter of 147.066 ± 5.524 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 147.066 ± 5.524 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Outer main-belt asteroid found in 1904.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "G. H. Peters found Merapi at Washington on 11 May 1904.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "liguria",
+      "name": "Liguria",
+      "number": 356,
+      "model": {
+        "id": 6079,
+        "version": "2022-02-14",
+        "shapeFile": 65830,
+        "spinFile": 65828,
+        "spinFileName": "IAUspin",
+        "lambda": 57,
+        "beta": -33,
+        "periodHours": 31.7046,
+        "references": [
+          {
+            "id": 662,
+            "label": "Hanuš et al. (2021), Astronomy and Astrophysics 654, A48",
+            "title": "V-band photometry of asteroids from ASAS-SN. Finding asteroids with slow spin"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 145.503,
+        "uncertaintyKm": 1.441,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (356) Liguria",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=356",
+        "notes": "JPL lists a diameter of 145.503 ± 1.441 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 145.503 ± 1.441 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1893.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Liguria at Nice on 21 January 1893.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "philomela",
+      "name": "Philomela",
+      "number": 196,
+      "model": {
+        "id": 178,
+        "version": "2007-02-27",
+        "shapeFile": 494,
+        "spinFile": 492,
+        "lambda": 111,
+        "beta": -41,
+        "periodHours": 8.332826,
+        "references": [
+          {
+            "id": 113,
+            "label": "J. Ďurech (2007), Astron. Astrophys. 465, 331",
+            "title": "Physical models of ten asteroids from an observers' collaboration network"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 179,
+          "lambda": 276,
+          "beta": -49,
+          "periodHours": 8.332827
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 144.626,
+        "uncertaintyKm": 4.085,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (196) Philomela",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=196",
+        "notes": "JPL lists a diameter of 144.626 ± 4.085 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 144.626 ± 4.085 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1879.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "C. H. F. Peters found Philomela at Clinton on 14 May 1879.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "dembowska",
+      "name": "Dembowska",
+      "number": 349,
+      "model": {
+        "id": 204,
+        "version": "2008-02-21",
+        "shapeFile": 606,
+        "spinFile": 604,
+        "lambda": 322,
+        "beta": 18,
+        "periodHours": 4.701204,
+        "references": [
+          {
+            "id": 106,
+            "label": "Torppa et al. (2003), Icarus 164, 346-383",
+            "title": "Shapes and rotational properties of thirty asteroids from photometric data"
+          },
+          {
+            "id": 149,
+            "label": "Hanuš et al. (2013), Icarus 226, 1045-1057",
+            "title": "Sizes of main-belt asteroids by combining shape models and Keck Adaptive Optics observations"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "published-volume-equivalent-size-transfer",
+        "diameterKm": 162,
+        "uncertaintyKm": 17,
+        "quantity": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+        "reference": "DAMIT model 204, version 2008-02-21",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/204",
+        "notes": "DAMIT marks the model as size-calibrated and lists an equivalent diameter of 162 ± 17 km with it; the model references describe the scaling.",
+        "visibleDescription": "Convex light-curve model at the 162 ± 17 km equivalent diameter DAMIT lists for it.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1892.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Dembowska at Nice on 9 December 1892.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "comacina",
+      "name": "Comacina",
+      "number": 489,
+      "model": {
+        "id": 809,
+        "version": "2016-01-04",
+        "shapeFile": 3142,
+        "spinFile": 3140,
+        "lambda": 88,
+        "beta": -43,
+        "periodHours": 9.02321,
+        "references": [
+          {
+            "id": 161,
+            "label": "Hanuš et al. (2016), Astronomy and Astrophysics 586, A108",
+            "title": "New and updated convex shape models of asteroids based on optical data from a large collaboration network"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 810,
+          "lambda": 265,
+          "beta": -16,
+          "periodHours": 9.02321
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 139.39,
+        "uncertaintyKm": 3,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (489) Comacina",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=489",
+        "notes": "JPL lists a diameter of 139.39 ± 3 km, from the IRAS Minor Planet Survey (PDS data set IRAS-A-FPA-3-RDR-IMPS-V6.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 139.39 ± 3 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1902.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "L. Carnera found Comacina at Heidelberg on 2 September 1902.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "hedwig",
+      "name": "Hedwig",
+      "number": 476,
+      "model": {
+        "id": 6114,
+        "version": "2023-10-03",
+        "shapeFile": 128156,
+        "spinFile": 128154,
+        "spinFileName": "IAUspin",
+        "lambda": 49,
+        "beta": 60,
+        "periodHours": 27.2404,
+        "comment": "preferred",
+        "references": [
+          {
+            "id": 667,
+            "label": "Marciniak et al. (2023), Astronomy and Astrophysics 679, A60",
+            "title": "Scaling slowly rotating asteroids with stellar occultations"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 6115,
+          "lambda": 218,
+          "beta": 36,
+          "periodHours": 27.2404,
+          "diameterKm": 122,
+          "uncertaintyKm": 10
+        }
+      ],
+      "calibration": {
+        "method": "published-volume-equivalent-size-transfer",
+        "diameterKm": 116,
+        "uncertaintyKm": 16,
+        "quantity": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+        "reference": "DAMIT model 6114, version 2023-10-03",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6114",
+        "notes": "DAMIT marks the model as size-calibrated and lists an equivalent diameter of 116 ± 16 km with it; the model references describe the scaling.",
+        "visibleDescription": "Convex light-curve model at the 116 ± 16 km equivalent diameter DAMIT lists for it.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1901.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "L. Carnera found Hedwig at Heidelberg on 17 August 1901.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "hispania",
+      "name": "Hispania",
+      "number": 804,
+      "model": {
+        "id": 5770,
+        "version": "2019-10-23",
+        "shapeFile": 61744,
+        "spinFile": 61742,
+        "spinFileName": "IAUspin",
+        "lambda": 90,
+        "beta": 2,
+        "periodHours": 14.8486,
+        "references": [
+          {
+            "id": 658,
+            "label": "Ďurech et al. (2020), Astronomy and Astrophysics 643, A59",
+            "title": "Asteroid models reconstructed from ATLAS photometry"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 5771,
+          "lambda": 268,
+          "beta": -35,
+          "periodHours": 14.848
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 137.952,
+        "uncertaintyKm": 1.964,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (804) Hispania",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=804",
+        "notes": "JPL lists a diameter of 137.952 ± 1.964 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 137.952 ± 1.964 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1915.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "J. Comas Sola found Hispania at Barcelona on 20 March 1915.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "hippo",
+      "name": "Hippo",
+      "number": 426,
+      "model": {
+        "id": 16298,
+        "version": "2023-10-03",
+        "shapeFile": 128022,
+        "spinFile": 128020,
+        "spinFileName": "IAUspin",
+        "lambda": 223,
+        "beta": -89,
+        "periodHours": 67.5041,
+        "comment": "preferred",
+        "references": [
+          {
+            "id": 667,
+            "label": "Marciniak et al. (2023), Astronomy and Astrophysics 679, A60",
+            "title": "Scaling slowly rotating asteroids with stellar occultations"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 16297,
+          "lambda": 62,
+          "beta": -49,
+          "periodHours": 67.5038,
+          "diameterKm": 129,
+          "uncertaintyKm": 19
+        }
+      ],
+      "calibration": {
+        "method": "published-volume-equivalent-size-transfer",
+        "diameterKm": 122,
+        "uncertaintyKm": 4,
+        "quantity": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+        "reference": "DAMIT model 16298, version 2023-10-03",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/16298",
+        "notes": "DAMIT marks the model as size-calibrated and lists an equivalent diameter of 122 ± 4 km with it; the model references describe the scaling.",
+        "visibleDescription": "Convex light-curve model at the 122 ± 4 km equivalent diameter DAMIT lists for it.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1897.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Hippo at Nice on 25 August 1897.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "wratislavia",
+      "name": "Wratislavia",
+      "number": 690,
+      "model": {
+        "id": 239,
+        "version": "2007-02-27",
+        "shapeFile": 781,
+        "spinFile": 779,
+        "lambda": 177,
+        "beta": 17,
+        "periodHours": 8.61798,
+        "comment": "this pole is preferred",
+        "references": [
+          {
+            "id": 111,
+            "label": "T. Michalowski (2006), Astron. Astrophys. 459, 663",
+            "title": "Photometry and models of selected main-belt asteroids (III): 283 Emma, 665 Sabine, and 690 Wratislavia"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 240,
+          "lambda": 359,
+          "beta": 45,
+          "periodHours": 8.61799
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 134.65,
+        "uncertaintyKm": 3.8,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (690) Wratislavia",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=690",
+        "notes": "JPL lists a diameter of 134.65 ± 3.8 km, from the IRAS Minor Planet Survey (PDS data set IRAS-A-FPA-3-RDR-IMPS-V6.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 134.65 ± 3.8 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1909.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "J. H. Metcalf found Wratislavia at Taunton on 16 October 1909.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "elfriede",
+      "name": "Elfriede",
+      "number": 618,
+      "model": {
+        "id": 5624,
+        "version": "2022-10-21",
+        "shapeFile": 68800,
+        "spinFile": 68798,
+        "spinFileName": "IAUspin",
+        "lambda": 341,
+        "beta": 49,
+        "periodHours": 14.79564,
+        "references": [
+          {
+            "id": 664,
+            "label": "Marciniak et al. (2021), Astronomy and Astrophysics 654, A87",
+            "title": "Properties of slowly rotating asteroids from the Convex Inversion Thermophysical Model"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 5625,
+          "lambda": 102,
+          "beta": 65,
+          "periodHours": 14.79565,
+          "diameterKm": 145,
+          "uncertaintyKm": 15
+        }
+      ],
+      "calibration": {
+        "method": "published-volume-equivalent-size-transfer",
+        "diameterKm": 146,
+        "uncertaintyKm": 16,
+        "quantity": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+        "reference": "DAMIT model 5624, version 2022-10-21",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5624",
+        "notes": "DAMIT marks the model as size-calibrated and lists an equivalent diameter of 146 ± 16 km with it; the model references describe the scaling.",
+        "visibleDescription": "Convex light-curve model at the 146 ± 16 km equivalent diameter DAMIT lists for it.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1906.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "K. Lohnert found Elfriede at Heidelberg on 17 October 1906.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "agamemnon",
+      "name": "Agamemnon",
+      "number": 911,
+      "model": {
+        "id": 3870,
+        "version": "2019-05-07",
+        "shapeFile": 12124,
+        "spinFile": 12122,
+        "lambda": 126,
+        "beta": 0,
+        "periodHours": 6.58179,
+        "references": [
+          {
+            "id": 182,
+            "label": "Ďurech et al. (2019), Astronomy and Astrophysics 631, A2",
+            "title": "Inversion of asteroid photometry from Gaia DR2 and the Lowell Observatory photometric database"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 131.038,
+        "uncertaintyKm": 1.195,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (911) Agamemnon",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=911",
+        "notes": "JPL lists a diameter of 131.038 ± 1.195 km, from NEOWISE (Grav et al. 2012, ApJ 759, 49; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 131.038 ± 1.195 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Jupiter trojan found in 1919.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "K. Reinmuth found Agamemnon at Heidelberg on 19 March 1919.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "ophelia-171",
+      "name": "Ophelia",
+      "number": 171,
+      "model": {
+        "id": 1169,
+        "version": "2016-01-04",
+        "shapeFile": 4248,
+        "spinFile": 4246,
+        "lambda": 144,
+        "beta": 29,
+        "periodHours": 6.664541,
+        "references": [
+          {
+            "id": 161,
+            "label": "Hanuš et al. (2016), Astronomy and Astrophysics 586, A108",
+            "title": "New and updated convex shape models of asteroids based on optical data from a large collaboration network"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 1170,
+          "lambda": 329,
+          "beta": 23,
+          "periodHours": 6.664541
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 130.808,
+        "uncertaintyKm": 1.483,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (171) Ophelia",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=171",
+        "notes": "JPL lists a diameter of 130.808 ± 1.483 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 130.808 ± 1.483 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1877.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Borrelly found Ophelia at Marseille on 13 January 1877.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "ornamenta",
+      "name": "Ornamenta",
+      "number": 350,
+      "model": {
+        "id": 205,
+        "version": "2009-11-05",
+        "shapeFile": 610,
+        "spinFile": 608,
+        "lambda": 184,
+        "beta": -29,
+        "periodHours": 9.18041,
+        "references": [
+          {
+            "id": 134,
+            "label": "A. Marciniak et al. (2009), Astron. Astrophys. 508, 1503",
+            "title": "Photometry and models of selected main belt asteroids. VII. 350 Ornamenta, 771 Libera, and 984 Gretia"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 128.729,
+        "uncertaintyKm": 1.197,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (350) Ornamenta",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=350",
+        "notes": "JPL lists a diameter of 128.729 ± 1.197 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 128.729 ± 1.197 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1892.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Ornamenta at Nice on 14 December 1892.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "myrrha",
+      "name": "Myrrha",
+      "number": 381,
+      "model": {
+        "id": 1132,
+        "version": "2016-01-04",
+        "shapeFile": 4143,
+        "spinFile": 4141,
+        "lambda": 31,
+        "beta": 44,
+        "periodHours": 6.571954,
+        "references": [
+          {
+            "id": 161,
+            "label": "Hanuš et al. (2016), Astronomy and Astrophysics 586, A108",
+            "title": "New and updated convex shape models of asteroids based on optical data from a large collaboration network"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 1133,
+          "lambda": 228,
+          "beta": 79,
+          "periodHours": 6.571955
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 127.639,
+        "uncertaintyKm": 1.686,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (381) Myrrha",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=381",
+        "notes": "JPL lists a diameter of 127.639 ± 1.686 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 127.639 ± 1.686 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Outer main-belt asteroid found in 1894.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Myrrha at Nice on 10 January 1894.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "tanete",
+      "name": "Tanete",
+      "number": 772,
+      "model": {
+        "id": 5741,
+        "version": "2019-10-23",
+        "shapeFile": 61523,
+        "spinFile": 61521,
+        "spinFileName": "IAUspin",
+        "lambda": 147,
+        "beta": 25,
+        "periodHours": 17.2595,
+        "references": [
+          {
+            "id": 658,
+            "label": "Ďurech et al. (2020), Astronomy and Astrophysics 643, A59",
+            "title": "Asteroid models reconstructed from ATLAS photometry"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 126.473,
+        "uncertaintyKm": 1.298,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (772) Tanete",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=772",
+        "notes": "JPL lists a diameter of 126.473 ± 1.298 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 126.473 ± 1.298 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1913.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Massinger found Tanete at Heidelberg on 19 December 1913.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "armenia",
+      "name": "Armenia",
+      "number": 780,
+      "model": {
+        "id": 6220,
+        "version": "2022-10-18",
+        "shapeFile": 67521,
+        "spinFile": 67519,
+        "spinFileName": "IAUspin",
+        "lambda": 144,
+        "beta": -44,
+        "periodHours": 19.8845,
+        "references": [
+          {
+            "id": 664,
+            "label": "Marciniak et al. (2021), Astronomy and Astrophysics 654, A87",
+            "title": "Properties of slowly rotating asteroids from the Convex Inversion Thermophysical Model"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 6221,
+          "lambda": 293,
+          "beta": -23,
+          "periodHours": 19.8846,
+          "diameterKm": 102,
+          "uncertaintyKm": 3
+        }
+      ],
+      "calibration": {
+        "method": "published-volume-equivalent-size-transfer",
+        "diameterKm": 98,
+        "uncertaintyKm": 3,
+        "quantity": "volume-equivalent diameter DAMIT lists for this size-calibrated model",
+        "reference": "DAMIT model 6220, version 2022-10-18",
+        "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6220",
+        "notes": "DAMIT marks the model as size-calibrated and lists an equivalent diameter of 98 ± 3 km with it; the model references describe the scaling.",
+        "visibleDescription": "Convex light-curve model at the 98 ± 3 km equivalent diameter DAMIT lists for it.",
+        "catalogueId": "damit-models"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1914.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "G. Neujmin found Armenia at Simeis on 25 January 1914.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "charybdis",
+      "name": "Charybdis",
+      "number": 388,
+      "model": {
+        "id": 3834,
+        "version": "2019-05-07",
+        "shapeFile": 12016,
+        "spinFile": 12014,
+        "lambda": 124,
+        "beta": 54,
+        "periodHours": 9.51122,
+        "references": [
+          {
+            "id": 182,
+            "label": "Ďurech et al. (2019), Astronomy and Astrophysics 631, A2",
+            "title": "Inversion of asteroid photometry from Gaia DR2 and the Lowell Observatory photometric database"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 125.754,
+        "uncertaintyKm": 1.887,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (388) Charybdis",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=388",
+        "notes": "JPL lists a diameter of 125.754 ± 1.887 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 125.754 ± 1.887 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1894.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Charybdis at Nice on 7 March 1894.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "josephina",
+      "name": "Josephina",
+      "number": 303,
+      "model": {
+        "id": 10373,
+        "version": "2022-11-29",
+        "shapeFile": 92690,
+        "spinFile": 92688,
+        "spinFileName": "IAUspin",
+        "lambda": 199,
+        "beta": -54,
+        "periodHours": 12.499,
+        "references": [
+          {
+            "id": 665,
+            "label": "Ďurech & Hanuš (2023), Astronomy and Astrophysics 675, A24",
+            "title": "Reconstruction of asteroid spin states from Gaia DR3 photometry"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 124.923,
+        "uncertaintyKm": 0.952,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (303) Josephina",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=303",
+        "notes": "JPL lists a diameter of 124.923 ± 0.952 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 124.923 ± 0.952 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1891.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "E. Millosevich found Josephina at Rome on 12 February 1891.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "boliviana",
+      "name": "Boliviana",
+      "number": 712,
+      "model": {
+        "id": 14541,
+        "version": "2022-11-29",
+        "shapeFile": 116546,
+        "spinFile": 116544,
+        "spinFileName": "IAUspin",
+        "lambda": 84,
+        "beta": 34,
+        "periodHours": 23.463,
+        "references": [
+          {
+            "id": 665,
+            "label": "Ďurech & Hanuš (2023), Astronomy and Astrophysics 675, A24",
+            "title": "Reconstruction of asteroid spin states from Gaia DR3 photometry"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 14542,
+          "lambda": 244,
+          "beta": 56,
+          "periodHours": 23.462
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 124.125,
+        "uncertaintyKm": 1.263,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (712) Boliviana",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=712",
+        "notes": "JPL lists a diameter of 124.125 ± 1.263 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 124.125 ± 1.263 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1911.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "M. Wolf found Boliviana at Heidelberg on 19 March 1911.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "ninina",
+      "name": "Ninina",
+      "number": 357,
+      "model": {
+        "id": 16304,
+        "version": "2024-04-08",
+        "shapeFile": 129174,
+        "spinFile": 129172,
+        "spinFileName": "IAUspin",
+        "lambda": 230,
+        "beta": 36,
+        "periodHours": 35.984,
+        "references": [
+          {
+            "id": 674,
+            "label": "Franco et al. (2024), Minor Planet Bulletin 51, 100",
+            "title": "Spin-Shape Model for 357 Ninnina"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 16305,
+          "lambda": 49,
+          "beta": 0,
+          "periodHours": 35.984
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 124.107,
+        "uncertaintyKm": 0.857,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (357) Ninina",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=357",
+        "notes": "JPL lists a diameter of 124.107 ± 0.857 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 124.107 ± 0.857 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1893.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Ninina at Nice on 11 February 1893.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "ekard",
+      "name": "Ekard",
+      "number": 694,
+      "model": {
+        "id": 241,
+        "version": "2008-01-30",
+        "shapeFile": 789,
+        "spinFile": 787,
+        "lambda": 266,
+        "beta": 51,
+        "periodHours": 5.92193,
+        "references": [
+          {
+            "id": 106,
+            "label": "Torppa et al. (2003), Icarus 164, 346-383",
+            "title": "Shapes and rotational properties of thirty asteroids from photometric data"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 121.891,
+        "uncertaintyKm": 0.721,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (694) Ekard",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=694",
+        "notes": "JPL lists a diameter of 121.891 ± 0.721 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 121.891 ± 0.721 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1909.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "J. H. Metcalf found Ekard at Taunton on 7 November 1909.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "armida",
+      "name": "Armida",
+      "number": 514,
+      "model": {
+        "id": 6127,
+        "version": "2022-02-14",
+        "shapeFile": 66099,
+        "spinFile": 66097,
+        "spinFileName": "IAUspin",
+        "lambda": 199,
+        "beta": 6,
+        "periodHours": 21.8756,
+        "references": [
+          {
+            "id": 662,
+            "label": "Hanuš et al. (2021), Astronomy and Astrophysics 654, A48",
+            "title": "V-band photometry of asteroids from ASAS-SN. Finding asteroids with slow spin"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 6128,
+          "lambda": 22,
+          "beta": 14,
+          "periodHours": 21.8756
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 120.093,
+        "uncertaintyKm": 0.79,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (514) Armida",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=514",
+        "notes": "JPL lists a diameter of 120.093 ± 0.79 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 120.093 ± 0.79 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1903.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "M. Wolf found Armida at Heidelberg on 24 August 1903.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "chloris",
+      "name": "Chloris",
+      "number": 410,
+      "model": {
+        "id": 4057,
+        "version": "2019-05-07",
+        "shapeFile": 12685,
+        "spinFile": 12683,
+        "lambda": 81,
+        "beta": 1,
+        "periodHours": 32.9961,
+        "references": [
+          {
+            "id": 182,
+            "label": "Ďurech et al. (2019), Astronomy and Astrophysics 631, A2",
+            "title": "Inversion of asteroid photometry from Gaia DR2 and the Lowell Observatory photometric database"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 4058,
+          "lambda": 261,
+          "beta": -1,
+          "periodHours": 32.9963
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 118.929,
+        "uncertaintyKm": 2.856,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (410) Chloris",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=410",
+        "notes": "JPL lists a diameter of 118.929 ± 2.856 km, from NEOWISE (Masiero et al. 2011, ApJ 741, 68; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 118.929 ± 2.856 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1896.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Chloris at Nice on 7 January 1896.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "princetonia",
+      "name": "Princetonia",
+      "number": 508,
+      "model": {
+        "id": 3760,
+        "version": "2019-05-07",
+        "shapeFile": 11794,
+        "spinFile": 11792,
+        "lambda": 119,
+        "beta": 26,
+        "periodHours": 52.6752,
+        "references": [
+          {
+            "id": 182,
+            "label": "Ďurech et al. (2019), Astronomy and Astrophysics 631, A2",
+            "title": "Inversion of asteroid photometry from Gaia DR2 and the Lowell Observatory photometric database"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 3761,
+          "lambda": 304,
+          "beta": 8,
+          "periodHours": 52.6755
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 117.241,
+        "uncertaintyKm": 0.925,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (508) Princetonia",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=508",
+        "notes": "JPL lists a diameter of 117.241 ± 0.925 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 117.241 ± 0.925 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1903.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "R. S. Dugan found Princetonia at Heidelberg on 20 April 1903.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "ani",
+      "name": "Ani",
+      "number": 791,
+      "model": {
+        "id": 2335,
+        "version": "2018-07-18",
+        "shapeFile": 7531,
+        "spinFile": 7529,
+        "lambda": 94,
+        "beta": -25,
+        "periodHours": 11.16954,
+        "references": [
+          {
+            "id": 175,
+            "label": "Ďurech et al. (2018), Astronomy & Astrophysics 617, A57",
+            "title": "Asteroid models reconstructed from the Lowell Photometric Database and WISE data"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 2336,
+          "lambda": 269,
+          "beta": 4,
+          "periodHours": 11.16954
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 116.865,
+        "uncertaintyKm": 1.024,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (791) Ani",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=791",
+        "notes": "JPL lists a diameter of 116.865 ± 1.024 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 116.865 ± 1.024 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1914.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "G. Neujmin found Ani at Simeis on 29 June 1914.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "faina",
+      "name": "Faina",
+      "number": 751,
+      "model": {
+        "id": 6183,
+        "version": "2022-02-14",
+        "shapeFile": 66411,
+        "spinFile": 66409,
+        "spinFileName": "IAUspin",
+        "lambda": 158,
+        "beta": 25,
+        "periodHours": 23.6727,
+        "references": [
+          {
+            "id": 662,
+            "label": "Hanuš et al. (2021), Astronomy and Astrophysics 654, A48",
+            "title": "V-band photometry of asteroids from ASAS-SN. Finding asteroids with slow spin"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 6184,
+          "lambda": 339,
+          "beta": -10,
+          "periodHours": 23.673
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 113.699,
+        "uncertaintyKm": 2.449,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (751) Faina",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=751",
+        "notes": "JPL lists a diameter of 113.699 ± 2.449 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 113.699 ± 2.449 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1913.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "G. Neujmin found Faina at Simeis on 28 April 1913.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "messalina",
+      "name": "Messalina",
+      "number": 545,
+      "model": {
+        "id": 5536,
+        "version": "2019-10-23",
+        "shapeFile": 59965,
+        "spinFile": 59963,
+        "spinFileName": "IAUspin",
+        "lambda": 312,
+        "beta": 47,
+        "periodHours": 7.4013,
+        "references": [
+          {
+            "id": 658,
+            "label": "Ďurech et al. (2020), Astronomy and Astrophysics 643, A59",
+            "title": "Asteroid models reconstructed from ATLAS photometry"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 5537,
+          "lambda": 156,
+          "beta": 46,
+          "periodHours": 7.4013
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 112.631,
+        "uncertaintyKm": 1.223,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (545) Messalina",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=545",
+        "notes": "JPL lists a diameter of 112.631 ± 1.223 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 112.631 ± 1.223 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Outer main-belt asteroid found in 1904.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "P. Gotz found Messalina at Heidelberg on 3 October 1904.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "nestor",
+      "name": "Nestor",
+      "number": 659,
+      "model": {
+        "id": 4328,
+        "version": "2019-05-07",
+        "shapeFile": 13498,
+        "spinFile": 13496,
+        "lambda": 293,
+        "beta": -48,
+        "periodHours": 15.97894,
+        "references": [
+          {
+            "id": 182,
+            "label": "Ďurech et al. (2019), Astronomy and Astrophysics 631, A2",
+            "title": "Inversion of asteroid photometry from Gaia DR2 and the Lowell Observatory photometric database"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 112.32,
+        "uncertaintyKm": 1.85,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (659) Nestor",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=659",
+        "notes": "JPL lists a diameter of 112.32 ± 1.85 km, from NEOWISE (Grav et al. 2012, ApJ 759, 49; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 112.32 ± 1.85 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Jupiter trojan found in 1908.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "M. Wolf found Nestor at Heidelberg on 23 March 1908.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "edith",
+      "name": "Edith",
+      "number": 517,
+      "model": {
+        "id": 5502,
+        "version": "2019-10-23",
+        "shapeFile": 59706,
+        "spinFile": 59704,
+        "spinFileName": "IAUspin",
+        "lambda": 97,
+        "beta": 1,
+        "periodHours": 9.2744,
+        "references": [
+          {
+            "id": 658,
+            "label": "Ďurech et al. (2020), Astronomy and Astrophysics 643, A59",
+            "title": "Asteroid models reconstructed from ATLAS photometry"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 5503,
+          "lambda": 277,
+          "beta": 0,
+          "periodHours": 9.2744
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 111.89,
+        "uncertaintyKm": 0.587,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (517) Edith",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=517",
+        "notes": "JPL lists a diameter of 111.89 ± 0.587 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 111.89 ± 0.587 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1903.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "R. S. Dugan found Edith at Heidelberg on 22 September 1903.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "thia",
+      "name": "Thia",
+      "number": 405,
+      "model": {
+        "id": 5322,
+        "version": "2019-10-23",
+        "shapeFile": 58342,
+        "spinFile": 58340,
+        "spinFileName": "IAUspin",
+        "lambda": 332,
+        "beta": 45,
+        "periodHours": 9.965,
+        "references": [
+          {
+            "id": 658,
+            "label": "Ďurech et al. (2020), Astronomy and Astrophysics 643, A59",
+            "title": "Asteroid models reconstructed from ATLAS photometry"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 5323,
+          "lambda": 157,
+          "beta": 1,
+          "periodHours": 9.9648
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 108.894,
+        "uncertaintyKm": 0.312,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (405) Thia",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=405",
+        "notes": "JPL lists a diameter of 108.894 ± 0.312 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 108.894 ± 0.312 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1895.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Thia at Nice on 23 July 1895.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "bredichina",
+      "name": "Bredichina",
+      "number": 786,
+      "model": {
+        "id": 6189,
+        "version": "2022-02-14",
+        "shapeFile": 66444,
+        "spinFile": 66442,
+        "spinFileName": "IAUspin",
+        "lambda": 54,
+        "beta": -11,
+        "periodHours": 29.8493,
+        "references": [
+          {
+            "id": 662,
+            "label": "Hanuš et al. (2021), Astronomy and Astrophysics 654, A48",
+            "title": "V-band photometry of asteroids from ASAS-SN. Finding asteroids with slow spin"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 6190,
+          "lambda": 236,
+          "beta": 18,
+          "periodHours": 29.8489
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 108.309,
+        "uncertaintyKm": 0.868,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (786) Bredichina",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=786",
+        "notes": "JPL lists a diameter of 108.309 ± 0.868 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 108.309 ± 0.868 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1914.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "F. Kaiser found Bredichina at Heidelberg on 20 April 1914.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "gerlinde",
+      "name": "Gerlinde",
+      "number": 663,
+      "model": {
+        "id": 5661,
+        "version": "2019-10-23",
+        "shapeFile": 60916,
+        "spinFile": 60914,
+        "spinFileName": "IAUspin",
+        "lambda": 229,
+        "beta": 31,
+        "periodHours": 10.2536,
+        "references": [
+          {
+            "id": 658,
+            "label": "Ďurech et al. (2020), Astronomy and Astrophysics 643, A59",
+            "title": "Asteroid models reconstructed from ATLAS photometry"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 107.795,
+        "uncertaintyKm": 1.571,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (663) Gerlinde",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=663",
+        "notes": "JPL lists a diameter of 107.795 ± 1.571 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 107.795 ± 1.571 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1908.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Kopff found Gerlinde at Heidelberg on 24 June 1908.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "brixia",
+      "name": "Brixia",
+      "number": 521,
+      "model": {
+        "id": 13007,
+        "version": "2022-11-29",
+        "shapeFile": 107754,
+        "spinFile": 107752,
+        "spinFileName": "IAUspin",
+        "lambda": 131,
+        "beta": -33,
+        "periodHours": 28.484,
+        "references": [
+          {
+            "id": 665,
+            "label": "Ďurech & Hanuš (2023), Astronomy and Astrophysics 675, A24",
+            "title": "Reconstruction of asteroid spin states from Gaia DR3 photometry"
+          }
+        ]
+      },
+      "alternatives": [],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 107.227,
+        "uncertaintyKm": 0.494,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (521) Brixia",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=521",
+        "notes": "JPL lists a diameter of 107.227 ± 0.494 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 107.227 ± 0.494 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1904.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "R. S. Dugan found Brixia at Heidelberg on 10 January 1904.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. The spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "iduna",
+      "name": "Iduna",
+      "number": 176,
+      "model": {
+        "id": 1338,
+        "version": "2017-05-11",
+        "shapeFile": 4765,
+        "spinFile": 4763,
+        "lambda": 85,
+        "beta": 29,
+        "periodHours": 11.28783,
+        "references": [
+          {
+            "id": 168,
+            "label": "Ďurech et al. (2018), Icarus 304, 101-109",
+            "title": "Shape models of asteroids based on lightcurve observations with BlueEye600 robotic observatory"
+          },
+          {
+            "id": 162,
+            "label": "Ďurech et al. (2016), Astronomy and Astrophysics 587, A48",
+            "title": "Asteroid models from the Lowell Photometric Database"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 1339,
+          "lambda": 156,
+          "beta": 79,
+          "periodHours": 11.28783
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 106.976,
+        "uncertaintyKm": 1.08,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (176) Iduna",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=176",
+        "notes": "JPL lists a diameter of 106.976 ± 1.08 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 106.976 ± 1.08 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1877.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "C. H. F. Peters found Iduna at Clinton on 14 October 1877.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "gratia",
+      "name": "Gratia",
+      "number": 424,
+      "model": {
+        "id": 5353,
+        "version": "2019-10-23",
+        "shapeFile": 58577,
+        "spinFile": 58575,
+        "spinFileName": "IAUspin",
+        "lambda": 351,
+        "beta": -24,
+        "periodHours": 20.0603,
+        "references": [
+          {
+            "id": 658,
+            "label": "Ďurech et al. (2020), Astronomy and Astrophysics 643, A59",
+            "title": "Asteroid models reconstructed from ATLAS photometry"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 5354,
+          "lambda": 172,
+          "beta": -6,
+          "periodHours": 20.06
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 102.565,
+        "uncertaintyKm": 0.644,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (424) Gratia",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=424",
+        "notes": "JPL lists a diameter of 102.565 ± 0.644 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 102.565 ± 0.644 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1896.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "A. Charlois found Gratia at Nice on 31 December 1896.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "emita",
+      "name": "Emita",
+      "number": 481,
+      "model": {
+        "id": 6118,
+        "version": "2021-11-12",
+        "shapeFile": 66049,
+        "spinFile": 66047,
+        "spinFileName": "IAUspin",
+        "lambda": 306,
+        "beta": 69,
+        "periodHours": 14.4494,
+        "references": [
+          {
+            "id": 662,
+            "label": "Hanuš et al. (2021), Astronomy and Astrophysics 654, A48",
+            "title": "V-band photometry of asteroids from ASAS-SN. Finding asteroids with slow spin"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 6119,
+          "lambda": 6,
+          "beta": 38,
+          "periodHours": 14.4495
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 101.829,
+        "uncertaintyKm": 26.738,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (481) Emita",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=481",
+        "notes": "JPL lists a diameter of 101.829 ± 26.738 km, from NEOWISE (Nugent et al. 2016, AJ 152, 63; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 101.829 ± 26.738 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1902.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "L. Carnera found Emita at Heidelberg on 12 February 1902.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
+    },
+    {
+      "id": "flammario",
+      "name": "Flammario",
+      "number": 1021,
+      "model": {
+        "id": 861,
+        "version": "2016-01-04",
+        "shapeFile": 3302,
+        "spinFile": 3300,
+        "lambda": 216,
+        "beta": 55,
+        "periodHours": 12.15184,
+        "references": [
+          {
+            "id": 161,
+            "label": "Hanuš et al. (2016), Astronomy and Astrophysics 586, A108",
+            "title": "New and updated convex shape models of asteroids based on optical data from a large collaboration network"
+          }
+        ]
+      },
+      "alternatives": [
+        {
+          "id": 862,
+          "lambda": 32,
+          "beta": 22,
+          "periodHours": 12.15186
+        }
+      ],
+      "calibration": {
+        "method": "radiometric-effective-diameter-transfer",
+        "diameterKm": 100.765,
+        "uncertaintyKm": 1.608,
+        "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+        "reference": "JPL Small-Body Database, physical parameters of (1021) Flammario",
+        "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1021",
+        "notes": "JPL lists a diameter of 100.765 ± 1.608 km, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+        "visibleDescription": "Convex light-curve model at the 100.765 ± 1.608 km thermal diameter JPL lists.",
+        "catalogueId": "jpl-small-body-database"
+      },
+      "text": {
+        "card": "Main-belt asteroid found in 1924.",
+        "cardSources": [
+          "sbdb"
+        ],
+        "introduction": "M. Wolf found Flammario at Heidelberg on 11 March 1924.",
+        "introductionSources": [
+          "sbdb"
+        ],
+        "shapeSummary": "Convex shape from brightness changes as it spins. Another pole also fits, and the spin angle shown is arbitrary."
+      },
+      "papers": {},
+      "checked": "2026-10-08"
     }
   ]
 }

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27776%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              776 Berbericia (A914 BE)         2026-Oct-08 06:12:22
+Rec #:     776 (+COV) Soln.date: 2026-Jun-05_04:02:19   # obs: 6662 (1914-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458089.5 ! 2017-Dec-02.00 (TDB)         Residual RMS= .18087
+   EC= .1648943406456009   QR= 2.447894120250727   TP= 2458232.8082478014
+   OM= 79.72468948793754   W=  307.0500166669734   IN= 18.23597379759488
+   A= 2.931238811317765    MA= 331.8551812363071   ADIST= 3.414583502384803
+   PER= 5.01863            N= .196393573           ANGMOM= .02904832
+   DAN= 2.59384            DDN= 3.16609            L= 28.2039134
+   B= -14.4629295          MOID= 1.49830997        TP= 2018-Apr-24.3082478014
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 75.8555            ROTPER= 7.668
+   H= 7.71                 G= .340                 B-V= .724
+                           ALBEDO= .065            STYP= Cgh
+
+ASTEROID comments: 
+1: soln ref.= JPL#149, OCC=0
+2: source=ORB
+*******************************************************************************

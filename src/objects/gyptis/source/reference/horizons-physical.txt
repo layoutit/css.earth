@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27444%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                444 Gyptis (A899 FA)           2026-Sep-08 10:25:25
+Rec #:     444 (+COV) Soln.date: 2026-Jun-05_03:36:28   # obs: 7813 (1899-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457411.5 ! 2016-Jan-24.00 (TDB)         Residual RMS= .20906
+   EC= .1756499546447957   QR= 2.283334337802633   TP= 2457545.0043251291
+   OM= 195.7175500261967   W=  155.012774354153    IN= 10.27718934702652
+   A= 2.769860146994675    MA= 331.4561436448773   ADIST= 3.256385956186716
+   PER= 4.60994            N= .213804731           ANGMOM= .028184167
+   DAN= 3.19271            DDN= 2.31572            L= 351.08329
+   B= 4.3221073            MOID= 1.28374004        TP= 2016-Jun-05.5043251291
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 79.6655            ROTPER= 6.214
+   H= 8.06                 G= .220                 B-V= .676
+                           ALBEDO= .051            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#152, OCC=0
+2: source=ORB
+*******************************************************************************

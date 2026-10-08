@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "adelheid",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 276",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 31 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.839849,
+          "uncertainty": 0.00339953
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.887752,
+          "uncertainty": 0.0016868393
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9492701,
+          "uncertainty": 0.0014891023
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9801653,
+          "uncertainty": 0.0014577159
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.001470643
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0178478,
+          "uncertainty": 0.0015723284
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0209571,
+          "uncertainty": 0.0016100621
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.025722,
+          "uncertainty": 0.0014380817
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0402708,
+          "uncertainty": 0.0014829678
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0503807,
+          "uncertainty": 0.0015259888
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0704741,
+          "uncertainty": 0.0015573696
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0802007,
+          "uncertainty": 0.0015799748
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0929992,
+          "uncertainty": 0.0016234705
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.1033841,
+          "uncertainty": 0.0016963293
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1291386,
+          "uncertainty": 0.0019823734
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.1495624,
+          "uncertainty": 0.0027304674
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (276) Adelheid",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.051,
+    "uncertainty": 0.006
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

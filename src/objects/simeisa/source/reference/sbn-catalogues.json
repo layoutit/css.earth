@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "simeisa",
+  "generator": "packages/bake/authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 748,
+    "by": "SBDB record des 748"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 153562,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "748",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00748",
+          "Absolute_mag": "9.01",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2456772.8057220",
+          "N_W1": "10",
+          "N_W2": "11",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "109.069",
+          "Diameter_err": "38.907",
+          "V_albedo": "0.045",
+          "V_albedo_err": "0.027",
+          "IR_albedo": "0.068",
+          "IR_albedo_err": "0.069",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 6,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_hildas_csv::2.0",
+          "Asteroid_Number": "748",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00748",
+          "Absolute_mag": "9.01",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455312.1288850",
+          "N_W1": "9",
+          "N_W2": "9",
+          "N_W3": "9",
+          "N_W4": "9",
+          "Fit_code": "DVBI",
+          "Diameter": "103.714",
+          "Diameter_err": "1.128",
+          "V_albedo": "0.041",
+          "V_albedo_err": "0.007",
+          "IR_albedo": "0.071",
+          "IR_albedo_err": "0.006",
+          "Beaming_param": "0.789",
+          "Beaming_param_err": "0.012",
+          "Stacked_flag": "-",
+          "Reference": "Gr12a",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Gr12a": "Grav, T., A.K. Mainzer, J. Bauer, J. Masiero, T. Spahr, and 12 others, WISE/NEOWISE Observations of the Hilda Population: Preliminary Results, Astroph. J. 744, 197, doi:10.1088/0004-637X/744/2/197, 2012."
+    },
+    "selected": {
+      "diameter": 1
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

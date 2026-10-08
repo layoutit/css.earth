@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "adorea",
+  "card": {
+    "text": "Main-belt asteroid found in 1887.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=268",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "268 Adorea (A887 LA); Discovered 1887-Jun-08 by Borrelly, A. at Marseille; orbit class: Main-belt Asteroid; diameter: 144.585 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Borrelly found Adorea at Marseille on 8 June 1887.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=268",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "268 Adorea (A887 LA); Discovered 1887-Jun-08 by Borrelly, A. at Marseille; orbit class: Main-belt Asteroid; diameter: 144.585 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Adorea’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27176%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 176 Iduna (A877 TB)           2026-Oct-08 06:20:42
+Rec #:     176 (+COV) Soln.date: 2026-Jun-05_03:14:37  # obs: 11469 (1877-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458698.5 ! 2019-Aug-03.00 (TDB)         Residual RMS= .17171
+   EC= .1706909230092405   QR= 2.638370998168103   TP= 2458725.0004480975
+   OM= 200.4977337346829   W=  188.5487464437828   IN= 22.67251804559372
+   A= 3.181408562102957    MA= 355.3971362118293   ADIST= 3.724446126037812
+   PER= 5.67463            N= .173690036           ANGMOM= .030232252
+   DAN= 3.71595            DDN= 2.64265            L= 28.3945351
+   B= -3.2848162           MOID= 1.64312005        TP= 2019-Aug-29.5004480975
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 53.488             ROTPER= 11.2877
+   H= 8.41                 G= .150                 B-V= n.a.
+                           ALBEDO= .065            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#92, OCC=0
+2: source=ORB
+*******************************************************************************

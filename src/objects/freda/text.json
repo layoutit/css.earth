@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "freda",
+  "card": {
+    "text": "Main-belt asteroid found in 1925.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1093",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "1093 Freda (1925 LA); Discovered 1925-Jun-15 by Jekhovsky, B. at Algiers; orbit class: Main-belt Asteroid; diameter: 116.73 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "B. Jekhovsky found Freda at Algiers on 15 June 1925.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1093",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "1093 Freda (1925 LA); Discovered 1925-Jun-15 by Jekhovsky, B. at Algiers; orbit class: Main-belt Asteroid; diameter: 116.73 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Freda’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

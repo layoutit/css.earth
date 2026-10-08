@@ -42,6 +42,16 @@ test('Haumea\'s rotation-corrected colors and occultation albedo give a light, n
   assert.ok(color.linear[2] > color.linear[0], 'the slightly negative solar-relative B-V reads faintly blue');
 });
 
+test('a flat reflectance spectrum is neutral at its albedo, and a red slope reads warm', () => {
+  const spectrum = (values: readonly number[]) => parseDiscColorRecord({ schema: makemake.schema, geometricAlbedo: { band: 'V', value: 0.05 },
+    object: { reflectance: { normalizedAtNm: 550, samples: values.map((value, index) => ({ wavelengthNm: 374 + 44 * index, value })) } } });
+  const flat = discIntegratedColor(spectrum(Array.from({ length: 16 }, () => 2)), colorMatching, illuminant);
+  for (const channel of flat.linear) assert.ok(Math.abs(channel - 0.05) < 1e-4, `D65 white scaled to the albedo, got ${flat.linear.join(', ')}`);
+  const red = discIntegratedColor(spectrum(Array.from({ length: 16 }, (_, index) => 0.8 + 0.05 * index)), colorMatching, illuminant);
+  assert.equal(red.reflectance[4]![1], 1);
+  assert.ok(red.linear[0] > red.linear[1] && red.linear[1] > red.linear[2]);
+});
+
 test('records and tables fail closed', () => {
   assert.throws(() => parseCieTable('380,1,2\n', 3), /Invalid CIE table row/);
   assert.throws(() => discIntegratedColor(parseDiscColorRecord(makemake), new Map([[380, [0, 0, 0]]]), illuminant), /cover 381 nm/);

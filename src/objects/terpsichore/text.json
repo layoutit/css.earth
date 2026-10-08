@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "terpsichore",
+  "card": {
+    "text": "Main-belt asteroid found in 1864.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=81",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "81 Terpsichore (A864 SA); Discovered 1864-Sep-30 by Tempel, E. W. at Marseille; orbit class: Main-belt Asteroid; diameter: 117.727 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "E. W. Tempel found Terpsichore at Marseille on 30 September 1864.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=81",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "81 Terpsichore (A864 SA); Discovered 1864-Sep-30 by Tempel, E. W. at Marseille; orbit class: Main-belt Asteroid; diameter: 117.727 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Terpsichore’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

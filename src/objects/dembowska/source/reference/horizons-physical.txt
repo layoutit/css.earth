@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27349%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               349 Dembowska (A892 XB)         2026-Oct-08 06:13:21
+Rec #:     349 (+COV) Soln.date: 2026-Mar-11_21:40:40   # obs: 4480 (1892-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457812.5 ! 2017-Feb-28.00 (TDB)         Residual RMS= .3423
+   EC= .09150484174758731  QR= 2.656513633101273   TP= 2457869.5302145751
+   OM= 32.34987096406542   W=  346.1485932465054   IN= 8.246259994799592
+   A= 2.924081222635639    MA= 348.7584827396061   ADIST= 3.191648812170005
+   PER= 5.00026            N= .197115114           ANGMOM= .029292086
+   DAN= 2.66301            DDN= 3.18233            L= 18.6362436
+   B= -1.9677715           MOID= 1.65753996        TP= 2017-Apr-26.0302145751
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 69.885             ROTPER= 4.701
+   H= 5.97                 G= .370                 B-V= .945
+                           ALBEDO= .384            STYP= R
+
+ASTEROID comments: 
+1: soln ref.= JPL#146, OCC=0
+2: source=ORB
+*******************************************************************************

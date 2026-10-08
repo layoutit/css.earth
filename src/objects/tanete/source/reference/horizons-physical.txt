@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27772%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                772 Tanete (A913 YD)           2026-Oct-08 06:16:28
+Rec #:     772 (+COV) Soln.date: 2026-Jun-05_04:02:05   # obs: 8960 (1902-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458555.5 ! 2019-Mar-13.00 (TDB)         Residual RMS= .19318
+   EC= .09236778734078396  QR= 2.722021258521395   TP= 2458637.3131275079
+   OM= 63.8302323077207    W=  146.4706886659653   IN= 28.86015998815731
+   A= 2.999035535050383    MA= 344.4741762634112   ADIST= 3.276049811579371
+   PER= 5.19374            N= .189771791           ANGMOM= .029662766
+   DAN= 3.2215             DDN= 2.76087            L= 213.7026035
+   B= 15.462715            MOID= 1.73573995        TP= 2019-Jun-02.8131275079
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 63.2365            ROTPER= 17.258
+   H= 8.45                 G= .150                 B-V= .671
+                           ALBEDO= .028            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#152, OCC=0
+2: source=ORB
+*******************************************************************************

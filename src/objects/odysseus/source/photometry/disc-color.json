@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "odysseus",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 1143",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 22 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.90277404,
+          "uncertainty": 0.01840417
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.8729842,
+          "uncertainty": 0.006621206
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9238156,
+          "uncertainty": 0.0051917215
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.96455705,
+          "uncertainty": 0.0048119426
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0048193983
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0602578,
+          "uncertainty": 0.0052207815
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.072575,
+          "uncertainty": 0.005339378
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.1105969,
+          "uncertainty": 0.004982301
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.1710219,
+          "uncertainty": 0.0053637517
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.2233253,
+          "uncertainty": 0.005704895
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.2802185,
+          "uncertainty": 0.0059337527
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.3152587,
+          "uncertainty": 0.0060669966
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.351772,
+          "uncertainty": 0.0065047364
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.4250975,
+          "uncertainty": 0.007267416
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.4778708,
+          "uncertainty": 0.008853423
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.5088627,
+          "uncertainty": 0.012780624
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (1143) Odysseus",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[jupiter_trojans] (http://adsabs.harvard.edu/abs/2012ApJ...759...49G)",
+    "band": "V",
+    "value": 0.05,
+    "uncertainty": 0.007
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

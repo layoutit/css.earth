@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "tanete",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 772",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 21 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.8298361,
+          "uncertainty": 0.002467913
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.9000172,
+          "uncertainty": 0.0014199959
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.95851314,
+          "uncertainty": 0.0012870987
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9806204,
+          "uncertainty": 0.0012864711
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0012879918
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.007392,
+          "uncertainty": 0.001407312
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0115219,
+          "uncertainty": 0.0013835467
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0044501,
+          "uncertainty": 0.0012261149
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0107095,
+          "uncertainty": 0.0012359719
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0177144,
+          "uncertainty": 0.0013032573
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.025004,
+          "uncertainty": 0.0013133093
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0317181,
+          "uncertainty": 0.0013273564
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.036261,
+          "uncertainty": 0.0013236732
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0457823,
+          "uncertainty": 0.0013976516
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.0578253,
+          "uncertainty": 0.0015293547
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.0896053,
+          "uncertainty": 0.0020228683
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (772) Tanete",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2012ApJ...759L...8M)",
+    "band": "V",
+    "value": 0.028,
+    "uncertainty": 0.002
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

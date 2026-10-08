@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "edith",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 5502: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 5502, version 2019-10-23, pole (97°, 1°), period 9.2744 h, taken unchanged from the archive. Mirror solution 5503 recorded as an alternative.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/5502",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "111.89 ± 0.587 km, effective diameter of a sphere fitted to thermal infrared measurements. JPL lists a diameter of 111.89 ± 0.587 km, from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=517"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/5502"
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown size Display reference radius \"55.95 km (size-calibrated model)\" (jpl-small-body-database) differs from the Small Bodies Occultations V4.0 record 277, DAMIT model 5502 diameter 88 ± 2 km (volume-equivalent; DAMIT model 5502 fitted to 3 occultations); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+        "packages/bake/authoring/sbn-catalogue-facts/author.mts"
+      ]
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Edith whole-disc color",
+      "status": "included",
+      "finding": "Gaia Collaboration, Galluccio et al. (2023) published the mean of 11 Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (0.949 at 462 nm, 1.011 at 638 nm). The shape is painted in that one color (#2e2d2b in sRGB) through the shared disc-integrated-color method, scaled to the 2.6% geometric albedo JPL lists (± 0.5%), from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). It is one mean, not a map. Tinaut-Ruano et al. (2023), A&A 669, L14, found Gaia DR3 reflectances slightly too red at wavelengths shorter than 550 nm; the bands are used as published, without that paper's correction.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243791",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=517",
+        "https://doi.org/10.1051/0004-6361/202245134",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/edith/source/photometry/disc-color.json"
+      ]
+    }
+  ]
+}

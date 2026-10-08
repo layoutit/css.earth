@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27303%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               303 Josephina (A891 CA)         2026-Oct-08 06:16:57
+Rec #:     303 (+COV) Soln.date: 2026-Mar-11_21:36:23  # obs: 12815 (1891-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457552.5 ! 2016-Jun-13.00 (TDB)         Residual RMS= .23593
+   EC= .06196834174904941  QR= 2.929669019159386   TP= 2457616.3727056067
+   OM= 344.0024530597659   W=  64.10895852466444   IN= 6.872762188208139
+   A= 3.123209108551873    MA= 348.5944090228936   ADIST= 3.316749197944359
+   PER= 5.51963            N= .178567525           ANGMOM= .030342161
+   DAN= 3.02925            DDN= 3.19774            L= 47.948734
+   B= 6.180076             MOID= 1.94689           TP= 2016-Aug-15.8727056067
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 62.4615            ROTPER= 12.497
+   H= 9.08                 G= .150                 B-V= n.a.
+                           ALBEDO= .034            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#73, OCC=0
+2: source=ORB
+*******************************************************************************

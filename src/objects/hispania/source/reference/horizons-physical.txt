@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27804%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               804 Hispania (A915 FK)          2026-Oct-08 06:13:57
+Rec #:     804 (+COV) Soln.date: 2026-Jun-05_04:04:50   # obs: 7641 (1907-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457994.5 ! 2017-Aug-29.00 (TDB)         Residual RMS= .20638
+   EC= .1398295919550002   QR= 2.441465070449409   TP= 2458000.5293187178
+   OM= 347.6099734290928   W=  344.6581309578559   IN= 15.394583449558
+   A= 2.838350456624501    MA= 358.7572799956449   ADIST= 3.235235842799594
+   PER= 4.78197            N= .20611284            ANGMOM= .02869635
+   DAN= 2.45219            DDN= 3.2166             L= 332.7939321
+   B= -4.0275508           MOID= 1.43465996        TP= 2017-Sep-04.0293187178
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 68.976             ROTPER= 14.845
+   H= 7.98                 G= .180                 B-V= .727
+                           ALBEDO= .054            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#121, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,182 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [
+    {
+      "id": "philosophia-shape",
+      "path": "shape/model-1873.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/6154/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2018); model 1873, version 2018-03-22.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore the original counted triangle table through the pinned acquisition recipe; physical scale is specified separately by the calibration.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "datasetId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "Original km coordinates according to DAMIT calibrated-size flag. The archive declares107 km; this package preserves those coordinates and uniformly rescales to the primary publication’s101 km volume-equivalent diameter.",
+        "metersPerUnit": 943.9252199183334,
+        "referenceRadiusMeters": 50500
+      },
+      "coverage": "Convex light-curve reconstruction; 101 km volume-equivalent diameter (±5 km). No surface imagery exists; rotational phase is illustrative. Marciniak2018 section5.2 and Table7 select the convex pole(95,+19) as the best thermal fit (chi-square1.2). Table7 reports101±5 km equivalent-volume diameter, with errors spanning the full3-sigma range. This primary publication scale supersedes DAMIT’s107±5 km field. The paper also presents SAGE nonconvex alternatives, but the selected convex solution gives the best thermal fit; no multichord occultation supports those concavities. Shape and thermal fit are explicitly the least constrained of the five studied targets; neither is a resolved terrain map.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-6154",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "philosophia-disc-color",
+      "path": "photometry/disc-color.json",
+      "origin": "https://doi.org/10.1051/0004-6361/202243791",
+      "credit": "Gaia Collaboration, Galluccio et al. (2023), A&A 674, A35; ESA/Gaia/DPAC; albedo JPL Small-Body Database, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Queried gaiadr3.sso_reflectance_spectrum at the Gaia archive (https://gea.esac.esa.int/tap-server/tap/sync) and the JPL Small-Body Database API for asteroid 227 with packages/bake/authoring/asteroid-colors/fetch.mts, checked 2026-10-08; written by packages/bake/authoring/asteroid-colors/author.mts",
+      "redistribution": "Factual catalogue values only; Gaia data are released under the ESA/Gaia/DPAC terms with attribution",
+      "consumers": [
+        "color"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-2023-dr3-asteroid-reflectance-spectra",
+            "role": "material",
+            "evidence": "src/objects/philosophia/source/photometry/disc-color.json#/object"
+          },
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "material",
+            "evidence": "src/objects/philosophia/source/photometry/disc-color.json#/geometricAlbedo"
+          },
+          {
+            "catalogueId": "neowise-diameters-albedos-v2",
+            "role": "material",
+            "evidence": "src/objects/philosophia/source/photometry/disc-color.json#/geometricAlbedo/locator"
+          }
+        ]
+      }
+    },
+    {
+      "id": "philosophia-cie-std-illuminant-d65",
+      "path": "reference/CIE_std_illum_D65.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
+      ],
+      "acquisition": "Downloaded unchanged; the bytes match the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "color"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-std-illuminant-d65",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json#/checksums"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/6154/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2018); model 1873, version 2018-03-22.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
+        "inputs": [
+          "philosophia-shape",
+          "philosophia-disc-color"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "datasetId": "color"
+      },
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/terrestrial.json"
+    },
+    {
+      "path": "reference/1873-IAUspin.txt"
+    },
+    {
+      "path": "reference/AcuA_V1.txt.gz"
+    },
+    {
+      "path": "reference/calibration.json"
+    },
+    {
+      "path": "reference/damit-model.json",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1873",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
+    },
+    {
+      "path": "reference/horizons-elements.txt"
+    },
+    {
+      "path": "reference/horizons-vectors.txt"
+    },
+    {
+      "path": "reference/model-properties.json"
+    },
+    {
+      "path": "reference/sbn-catalogues.json",
+      "purpose": "Rows of the PDS Small Bodies Node catalogues that the factsheet cites, as their PDS4 labels read them, with each selection rule.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "neowise-diameters-albedos-v2",
+            "role": "reference",
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+          }
+        ]
+      }
+    }
+  ]
+}

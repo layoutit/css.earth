@@ -1,0 +1,111 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "leonteus",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 3793",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 20 epoch spectra. Gaia flags the 418 nm band as not validated; it is left out and the neighbouring bands are joined.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.9265649,
+          "uncertainty": 0.026316963
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.938061,
+          "uncertainty": 0.0074389223
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.95327383,
+          "uncertainty": 0.0069107073
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0069845454
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.026329,
+          "uncertainty": 0.0071899723
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0336345,
+          "uncertainty": 0.007621472
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0501072,
+          "uncertainty": 0.007016693
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0714288,
+          "uncertainty": 0.0073540974
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.1098597,
+          "uncertainty": 0.0076008854
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.1264529,
+          "uncertainty": 0.007858187
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.146745,
+          "uncertainty": 0.007983357
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.1912712,
+          "uncertainty": 0.008181694
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.1805515,
+          "uncertainty": 0.008784036
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1922919,
+          "uncertainty": 0.010802779
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.3400469,
+          "uncertainty": 0.018095238
+        }
+      ],
+      "omitted": [
+        {
+          "wavelengthNm": 418,
+          "value": 0.85310036,
+          "uncertainty": 0.00979929,
+          "flag": 1
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (3793) Leonteus",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[jupiter_trojans] (http://adsabs.harvard.edu/abs/2012ApJ...759...49G)",
+    "band": "V",
+    "value": 0.042,
+    "uncertainty": 0.005
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

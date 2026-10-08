@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "bononia",
+  "card": {
+    "text": "Outer main-belt asteroid found in 1893.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=361",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "361 Bononia (A893 EF); Discovered 1893-Mar-11 by Charlois, A. at Nice; orbit class: Outer Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-4260",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4260/shape.txt",
+        "label": "DAMIT shape 4260 · Bononia",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Charlois found Bononia at Nice on 11 March 1893.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=361",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "361 Bononia (A893 EF); Discovered 1893-Mar-11 by Charlois, A. at Nice; orbit class: Outer Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-4260",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4260/shape.txt",
+        "label": "DAMIT shape 4260 · Bononia",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Bononia’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 77.17 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

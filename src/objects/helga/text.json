@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "helga",
+  "card": {
+    "text": "Outer main-belt asteroid found in 1904.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=522",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "522 Helga (A904 AF); Discovered 1904-Jan-10 by Wolf, M. at Heidelberg; orbit class: Outer Main-belt Asteroid; diameter: 101.22 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M. Wolf found Helga at Heidelberg on 10 January 1904.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=522",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "522 Helga (A904 AF); Discovered 1904-Jan-10 by Wolf, M. at Heidelberg; orbit class: Outer Main-belt Asteroid; diameter: 101.22 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Helga’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

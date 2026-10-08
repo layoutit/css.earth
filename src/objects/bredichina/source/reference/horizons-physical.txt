@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27786%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              786 Bredichina (A914 HD)         2026-Oct-08 06:20:10
+Rec #:     786 (+COV) Soln.date: 2026-Jun-05_04:03:16   # obs: 6585 (1914-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458189.5 ! 2018-Mar-12.00 (TDB)         Residual RMS= .18458
+   EC= .1604390049377447   QR= 2.666498706166469   TP= 2457462.372888275
+   OM= 89.77470760568001   W=  133.4460298259154   IN= 14.51730575244341
+   A= 3.176063111374942    MA= 126.6137076414074   ADIST= 3.685627516583415
+   PER= 5.66033            N= .174128712           ANGMOM= .030259607
+   DAN= 3.47804            DDN= 2.78684            L= 224.1496153
+   B= 10.4859146           MOID= 1.67885005        TP= 2016-Mar-14.8728882750
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 54.1545            ROTPER= 29.434
+   H= 8.87                 G= .150                 B-V= .692
+                           ALBEDO= .052            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#79, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "sibylla",
+  "entries": [
+    {
+      "id": "survey-selected-model",
+      "subject": "DAMIT 6009: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-6009.txt. Model 6009, version 2022-02-14, pole (108°, -62°), period 47.015 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/6009",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/65441/shape.txt",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/source/reference/damit-model.json"
+      ]
+    },
+    {
+      "id": "survey-damit-documentation",
+      "survey": "survey-damit-documentation",
+      "status": "included",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/README.md"
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2021-v-band-photometry-of-asteroids-from-asas-sn-findi",
+      "survey": "survey-hanu-et-al-2021-v-band-photometry-of-asteroids-from-asas-sn-findi",
+      "status": "included",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/README.md"
+      ]
+    },
+    {
+      "id": "survey-akari-acua",
+      "subject": "AKARI AcuA",
+      "status": "included",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 146.48 ± 1.74 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 168 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
+      "evidence": [
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/source/reference/damit-model.json"
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2021-asas-sn-photometry",
+      "survey": "survey-hanu-et-al-2021-asas-sn-photometry",
+      "status": "included",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/README.md"
+      ]
+    },
+    {
+      "id": "survey-urech-et-al-2020-atlas-photometry",
+      "survey": "survey-urech-et-al-2020-atlas-photometry",
+      "status": "included",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/README.md"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "survey": "surface-imagery",
+      "status": "unresolved",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/README.md"
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "survey": "shape-solution",
+      "status": "unresolved",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/README.md"
+      ]
+    },
+    {
+      "id": "versioned-view-evidence",
+      "survey": "versioned-view-evidence",
+      "status": "unresolved",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/README.md#evidence"
+      ]
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Sibylla whole-disc color",
+      "status": "included",
+      "finding": "Gaia Collaboration, Galluccio et al. (2023) published the mean of 13 Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (0.924 at 462 nm, 1.006 at 638 nm). The shape is painted in that one color (#43433f in sRGB) through the shared disc-integrated-color method, scaled to the 5.6% geometric albedo JPL lists (± 1.2%), from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). It is one mean, not a map. Tinaut-Ruano et al. (2023), A&A 669, L14, found Gaia DR3 reflectances slightly too red at wavelengths shorter than 550 nm; the bands are used as published, without that paper's correction.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243791",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=168",
+        "https://doi.org/10.1051/0004-6361/202245134",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/sibylla/source/photometry/disc-color.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27357%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                357 Ninina (A893 CB)           2026-Oct-08 06:17:14
+Rec #:     357 (+COV) Soln.date: 2026-Jun-05_03:30:01  # obs: 10708 (1893-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457584.5 ! 2016-Jul-15.00 (TDB)         Residual RMS= .19475
+   EC= .07393077857560985  QR= 2.922910567449645   TP= 2456779.1425832002
+   OM= 137.8144854244123   W=  254.2047862651635   IN= 15.06569555459712
+   A= 3.15625495354862     MA= 141.5580661077094   ADIST= 3.389599339647595
+   PER= 5.60746            N= .175770488           ANGMOM= .03047736
+   DAN= 3.20347            DDN= 3.07708            L= 31.4865171
+   B= -14.4841268          MOID= 1.96917999        TP= 2014-May-01.6425832002
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 62.0535            ROTPER= 35.983
+   H= 8.97                 G= .150                 B-V= .715
+                           ALBEDO= .037            STYP= CX
+
+ASTEROID comments: 
+1: soln ref.= JPL#96, OCC=0
+2: source=ORB
+*******************************************************************************

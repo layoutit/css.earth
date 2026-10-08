@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/809",
+  "modelId": 809,
+  "modelVersion": "2016-01-04",
+  "diameterKm": 139.39,
+  "diameterInterpretation": "Convex light-curve model at the 139.39 ± 3 km thermal diameter JPL lists.",
+  "calibration": {
+    "method": "radiometric-effective-diameter-transfer",
+    "diameterKm": 139.39,
+    "uncertaintyKm": 3,
+    "quantity": "effective diameter of a sphere fitted to thermal infrared measurements",
+    "reference": "JPL Small-Body Database, physical parameters of (489) Comacina",
+    "referenceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=489",
+    "notes": "JPL lists a diameter of 139.39 ± 3 km, from the IRAS Minor Planet Survey (PDS data set IRAS-A-FPA-3-RDR-IMPS-V6.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+    "scaleKmPerSourceUnit": 112.34778113322979,
+    "sourceUrl": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=489",
+    "sourceLabel": "JPL Small-Body Database, physical parameters of (489) Comacina",
+    "diameterSemantics": "effective diameter of a sphere fitted to thermal infrared measurements",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. JPL lists a diameter of 139.39 ± 3 km, from the IRAS Minor Planet Survey (PDS data set IRAS-A-FPA-3-RDR-IMPS-V6.0). The thermal sphere diameter is transferred to the mesh as its volume-equivalent diameter.",
+    "visibleDescription": "Convex light-curve model at the 139.39 ± 3 km thermal diameter JPL lists."
+  },
+  "periodHours": 9.02321,
+  "poleEclipticJ2000Degrees": [
+    88,
+    -43
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/3142/shape.txt",
+    "vertices": 1020,
+    "faces": 2036,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 112347.78113322979,
+    "firstVertexKm": [
+      -17.623322339682957,
+      -21.46685228003188,
+      71.63856263960398
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      166.44784400790638,
+      156.07129059466016,
+      137.99307208916875
+    ],
+    "volumeCubicKm": 1418056.309575446,
+    "volumeEquivalentRadiusKm": 69.695,
+    "radialRangeKm": [
+      57.63581571008691,
+      92.36086674786766
+    ]
+  },
+  "elevation": [
+    -20,
+    25
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2036,
+    "sourceVertices": 1020,
+    "weldedVertices": 1020,
+    "outputFaces": 408,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 1393.9,
+    "estimatedErrorMeters": 1010.6040649414062,
+    "sampledErrorMeters": 1097.3741369331428,
+    "topology": {
+      "vertices": 206,
+      "edges": 612,
+      "faces": 408,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 1409189031205747.5
+    }
+  }
+}

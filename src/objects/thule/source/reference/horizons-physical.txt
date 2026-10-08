@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27279%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 279 Thule (A888 UA)           2026-Sep-08 03:29:45
+Rec #:     279 (+COV) Soln.date: 2026-Jun-05_03:23:52   # obs: 9331 (1889-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457501.5 ! 2016-Apr-23.00 (TDB)         Residual RMS= .20622
+   EC= .02369000725576228  QR= 4.244840273131621   TP= 2457043.2353593637
+   OM= 72.75008569946984   W=  44.53689237417269   IN= 2.321319044578907
+   A= 4.347840649669182    MA= 49.82071943511013   ADIST= 4.450841026206743
+   PER= 9.06606            N= .108716045           ANGMOM= .035858849
+   DAN= 4.27324            DDN= 4.42004            L= 117.263463
+   B= 1.6278734            MOID= 3.26244998        TP= 2015-Jan-20.7353593637
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 63.295             ROTPER= 23.896
+   H= 8.58                 G= .150                 B-V= .746
+                           ALBEDO= .0412           STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#89, OCC=0
+2: source=ORB
+*******************************************************************************

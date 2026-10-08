@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1 https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1A00.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv</logical_identifier>
+    <version_id>2.0</version_id>
+    <title>NEOWISE Main Belt</title>
+    <information_model_version>1.10.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Citation_Information>
+      <author_list>Mainzer, A., Bauer, J., Cutri, R., Grav, T., Kramer, E., Masiero, J., Sonnett, S.,
+and Wright, E.</author_list>
+      <publication_year>2019</publication_year>
+      <description>NEOWISE Main Belt asteroid diameters and albedos</description>
+    </Citation_Information>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2010-01-14Z</start_date_time>
+      <stop_date_time>2016-12-13Z</stop_date_time>
+    </Time_Coordinates>
+    <Primary_Result_Summary>
+      <purpose>Science</purpose>
+      <processing_level>Derived</processing_level>
+      <Science_Facets>
+        <discipline_name>Small Bodies</discipline_name>
+        <facet1>Physical Properties</facet1>
+      </Science_Facets>
+    </Primary_Result_Summary>
+    <Investigation_Area>
+      <name>NEOWISE</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.neowise</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <Observing_System_Component>
+        <name>Wide-Field Infrared Survey Explorer</name>
+        <type>Spacecraft</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.wise</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>WISE Camera</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:wise.wise_camera</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>Multiple Asteroids</name>
+      <type>Asteroid</type>
+    </Target_Identification>
+  </Observation_Area>
+  <Reference_List>
+    <External_Reference>
+      <reference_text>Masiero, J.R., A.K. Mainzer, T. Grav, J.M. Bauer, R.M. Cutri, and 13 others, Main
+Belt Asteroids with WISE/NEOWISE. I. Preliminary Albedos and Diameters, Astroph. J.
+741, 68, doi:10.1088/0004-637X/741/2/68, 2011</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Masiero, J.R., A.K. Mainzer, T. Grav, J.M. Bauer, R.M. Cutri, and 2 others,
+Preliminary Analysis of WISE/NEOWISE 3-Band Cryogenic and Post-cryogenic Observations
+of Main Belt Asteroids, Astroph. J. 759, L8, doi:10.1088/2041-8205/759/1/L8, 2012</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Masiero, J.R., T. Grav, A.K. Mainzer, C.R. Nugent, J.M. Bauer, and 2 others,
+Main-belt Asteroids with WISE/NEOWISE: Near-infrared Albedos, Astroph. J. 791, 121,
+doi:10.1088/0004-637X/791/2/121, 2014</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Masiero, J.R., C. Nugent, A.K. Mainzer, E.L. Wright, J.M. Bauer, and 4 others,
+NEOWISE Reactivation Mission Year Three: Asteroid Diameters and Albedos, Astron. J.
+154, 168, doi:10.3847/1538-3881/aa89ec, 2017</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Nugent, C.R., A. Mainzer, J. Masiero, J. Bauer, R.M. Cutri, and 5 others, NEOWISE
+Reactivation Mission Year One: Preliminary Asteroid Diameters and Albedos, Astroph.
+J. 814, 117, doi:10.1088/0004-637X/814/2/117, 2015</reference_text>
+    </External_Reference>
+    <External_Reference>
+      <reference_text>Nugent, C.R., A. Mainzer, J. Bauer, R.M. Cutri, E.A. Kramer, and 4 others, NEOWISE
+Reactivation Mission Year Two: Asteroid Diameters and Albedos, Astron. J. 152, 63,
+doi:10.3847/0004-6256/152/3/63, 2016</reference_text>
+    </External_Reference>
+  </Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>neowise_mainbelt.csv</file_name>
+      <local_identifier>file</local_identifier>
+      <creation_date_time>2019-03-04</creation_date_time>
+    </File>
+    <Table_Delimited>
+      <local_identifier>TABLE</local_identifier>
+      <offset unit="byte">0</offset>
+      <parsing_standard_id>PDS DSV 1</parsing_standard_id>
+      <records>178883</records>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+      <field_delimiter>Comma</field_delimiter>
+      <Record_Delimited>
+        <fields>22</fields>
+        <groups>0</groups>
+        <Field_Delimited>
+          <name>Asteroid_Number</name>
+          <data_type>ASCII_Integer</data_type>
+          <description>Asteroid number</description>
+          <Special_Constants>
+            <missing_constant>0</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Prov_desig</name>
+          <data_type>UTF8_String</data_type>
+          <description>Provisional designation of object as assigned by the MPC</description>
+          <Special_Constants>
+            <missing_constant>'-'</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>MPC_packed_name</name>
+          <data_type>UTF8_String</data_type>
+          <description>Number or provisional designation of object in MPC-packed format. Included for
+locating objects in published tables</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Absolute_mag</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>magnitudes</unit>
+          <description>Absolute H_V magnitude used as input to fitting routine</description>
+          <Special_Constants>
+            <missing_constant>-9.99</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Slope_param</name>
+          <data_type>ASCII_Real</data_type>
+          <description>G slope parameter from H-G system used for calculating photometric phase effects</description>
+          <Special_Constants>
+            <missing_constant>-9.99</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Mean_JD</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>day</unit>
+          <description>Mean Julian date of observations used for fitting</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>N_W1</name>
+          <data_type>ASCII_Integer</data_type>
+          <description>Number of W1 band measurements used for thermal fitting</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>N_W2</name>
+          <data_type>ASCII_Integer</data_type>
+          <description>Number of W2 band measurements used for thermal fitting</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>N_W3</name>
+          <data_type>ASCII_Integer</data_type>
+          <description>Number of W3 band measurements used for thermal fitting</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>N_W4</name>
+          <data_type>ASCII_Integer</data_type>
+          <description>Number of W4 band measurements used for thermal fitting</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Fit_code</name>
+          <data_type>UTF8_String</data_type>
+          <description>Four-character code indicating parameters allowed to vary in the thermal fit.
+D=diameter, V=visible geometric albedo, B=NEATM beaming parameter (or F=Fast-rotating
+thermal model), I=infrared geometric albedo. -=parameter held fixed for fit.</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Diameter</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>kilometer</unit>
+          <description>Best-fit effective spherical diameter or assumed value if not fitted</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Diameter_err</name>
+          <data_type>ASCII_Real</data_type>
+          <unit>kilometer</unit>
+          <description>Error on diameter</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>V_albedo</name>
+          <data_type>ASCII_Real</data_type>
+          <description>Best-fit visible geometric albedo or assumed value if not fitted</description>
+          <Special_Constants>
+            <missing_constant>-.999</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>V_albedo_err</name>
+          <data_type>ASCII_Real</data_type>
+          <description>Error on visible albedo</description>
+          <Special_Constants>
+            <missing_constant>-.999</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>IR_albedo</name>
+          <data_type>ASCII_Real</data_type>
+          <description>Best-fit infrared geometric albedo or assumed value if not fitted</description>
+          <Special_Constants>
+            <missing_constant>-.999</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>IR_albedo_err</name>
+          <data_type>ASCII_Real</data_type>
+          <description>Error on infrared albedo</description>
+          <Special_Constants>
+            <missing_constant>-.999</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Beaming_param</name>
+          <data_type>ASCII_Real</data_type>
+          <description>Best-fit NEATM thermal beaming parameter or assumed value if not fitted</description>
+          <Special_Constants>
+            <missing_constant>0</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Beaming_param_err</name>
+          <data_type>ASCII_Real</data_type>
+          <description>Error on beaming parameter</description>
+          <Special_Constants>
+            <missing_constant>0</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Stacked_flag</name>
+          <data_type>UTF8_String</data_type>
+          <description>Flag indicating if fit is based on images co-added on the object's predicted position</description>
+          <Special_Constants>
+            <missing_constant>'-'</missing_constant>
+          </Special_Constants>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Reference</name>
+          <data_type>UTF8_String</data_type>
+          <description>Reference to the original publication of fitted parameters</description>
+        </Field_Delimited>
+        <Field_Delimited>
+          <name>Notes</name>
+          <data_type>UTF8_String</data_type>
+          <description>Notes: OrbChange indicates large differences between orbit used for fitting and
+current orbit; NoOrb indicates no orbit for object in the current MPC database;
+BrokenLink indicates an object that was originally associated with one designation by
+the MPC, but that link was broken and a new association was made with a different
+designation which is now used in the table</description>
+        </Field_Delimited>
+      </Record_Delimited>
+    </Table_Delimited>
+  </File_Area_Observational>
+</Product_Observational>
+

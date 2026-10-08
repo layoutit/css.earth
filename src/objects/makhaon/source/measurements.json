@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-10-08",
+  "id": "makhaon",
+  "name": "Makhaon",
+  "titleLabel": "Makhaon",
+  "horizons": "3063;",
+  "aliases": [
+    "3063 Makhaon"
+  ],
+  "classification": "asteroid",
+  "population": "Jupiter trojan",
+  "fullAxesKm": [
+    111.655,
+    111.655,
+    111.655
+  ],
+  "radiusKm": 55.8275,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 8.637,
+  "periodText": "8.637 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3063",
+  "periodReference": "LCDB (Rev. 2023-October); Warner et al., 2009",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3063",
+  "credit": "JPL Small-Body Database, physical parameters for 3063 Makhaon: diameter 111.655 ± 1.544 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[jupiter_trojans] (http://adsabs.harvard.edu/abs/2012ApJ...759...49G)",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3063"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 111.655 km diameter the JPL Small-Body Database lists for Makhaon. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "introduction": "L. G. Karachkina found Makhaon at Nauchnyj on 4 August 1983.",
+  "card": "Jupiter trojan found in 1983.",
+  "datasetSummary": "A sphere at the 111.655 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 5.227
+}

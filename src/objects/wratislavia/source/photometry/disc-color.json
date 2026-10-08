@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "wratislavia",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 690",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 16 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.8509679,
+          "uncertainty": 0.0015235214
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.9251902,
+          "uncertainty": 0.00096683786
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9656355,
+          "uncertainty": 0.0008797645
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9869383,
+          "uncertainty": 0.00088234583
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0008755986
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0050498,
+          "uncertainty": 0.0009644325
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 0.9885439,
+          "uncertainty": 0.0009765935
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 0.9863736,
+          "uncertainty": 0.0008339394
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 0.98888934,
+          "uncertainty": 0.0008621004
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 0.993163,
+          "uncertainty": 0.0008603014
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 0.99258757,
+          "uncertainty": 0.0008590999
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 0.98427236,
+          "uncertainty": 0.00084814883
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 0.9796549,
+          "uncertainty": 0.0008418589
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 0.9957885,
+          "uncertainty": 0.0009096151
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.0043527,
+          "uncertainty": 0.0009910534
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.0412478,
+          "uncertainty": 0.0012251283
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (690) Wratislavia",
+    "locator": "albedo; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+    "band": "V",
+    "value": 0.0604,
+    "uncertainty": 0.004
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

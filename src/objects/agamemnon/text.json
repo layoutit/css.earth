@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "agamemnon",
+  "card": {
+    "text": "Jupiter trojan found in 1919.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=911",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "911 Agamemnon (A919 FB); Discovered 1919-Mar-19 by Reinmuth, K. at Heidelberg; orbit class: Jupiter Trojan"
+      },
+      {
+        "catalogueId": "damit-shape-12124",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/12124/shape.txt",
+        "label": "DAMIT shape 12124 · Agamemnon",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "K. Reinmuth found Agamemnon at Heidelberg on 19 March 1919.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=911",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "911 Agamemnon (A919 FB); Discovered 1919-Mar-19 by Reinmuth, K. at Heidelberg; orbit class: Jupiter Trojan"
+      },
+      {
+        "catalogueId": "damit-shape-12124",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/12124/shape.txt",
+        "label": "DAMIT shape 12124 · Agamemnon",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Agamemnon’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 65.52 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [
+    {
+      "id": "adelheid-shape",
+      "path": "shape/model-189.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/540/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; A. Marciniak (2007), Ďurech et al. (2011), Hanuš et al. (2013); model 189, version 2011-03-28.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore the original counted triangle table and retain its source coordinates and connectivity through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "datasetId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "Original archive coordinates flagged as km, with mesh volume-equivalent diameter 125 km and archive-declared diameter 125 km. The unchanged coordinates are uniformly rescaled by 0.83200000185859968 km per source unit to the explicitly selected published volume-equivalent diameter 104 km (Hanuš et al. (2013), Icarus 226, 1045–1057); the original archive diameter is not the adopted physical scale.",
+        "metersPerUnit": 832.0000018585997,
+        "referenceRadiusMeters": 52000
+      },
+      "coverage": "Convex light-curve reconstruction, 104 ± 11 km volume-equivalent diameter. Both pole solutions remain possible. No surface imagery exists; rotational phase is illustrative. The selected convex pole(9,−4) remains one of two possible orientations. Ďurech2011 fits three occultation chords (two close together) at125±15 km and cannot distinguish the poles. Hanuš2013 Table3 obtains volume-equivalent104±11 km for this pole from one Keck AO observation, matching the later archive comment. This newer resolved-image scale is explicitly transferred to the original mesh, rather than treating the archived125 km coordinates as final physical kilometers. One-image size and local morphology remain uncertain.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-540",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "adelheid-disc-color",
+      "path": "photometry/disc-color.json",
+      "origin": "https://doi.org/10.1051/0004-6361/202243791",
+      "credit": "Gaia Collaboration, Galluccio et al. (2023), A&A 674, A35; ESA/Gaia/DPAC; albedo JPL Small-Body Database, from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Queried gaiadr3.sso_reflectance_spectrum at the Gaia archive (https://gea.esac.esa.int/tap-server/tap/sync) and the JPL Small-Body Database API for asteroid 276 with packages/bake/authoring/asteroid-colors/fetch.mts, checked 2026-10-08; written by packages/bake/authoring/asteroid-colors/author.mts",
+      "redistribution": "Factual catalogue values only; Gaia data are released under the ESA/Gaia/DPAC terms with attribution",
+      "consumers": [
+        "color"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-2023-dr3-asteroid-reflectance-spectra",
+            "role": "material",
+            "evidence": "src/objects/adelheid/source/photometry/disc-color.json#/object"
+          },
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "material",
+            "evidence": "src/objects/adelheid/source/photometry/disc-color.json#/geometricAlbedo"
+          },
+          {
+            "catalogueId": "neowise-diameters-albedos-v2",
+            "role": "material",
+            "evidence": "src/objects/adelheid/source/photometry/disc-color.json#/geometricAlbedo/locator"
+          }
+        ]
+      }
+    },
+    {
+      "id": "adelheid-cie-std-illuminant-d65",
+      "path": "reference/CIE_std_illum_D65.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
+      ],
+      "acquisition": "Downloaded unchanged; the bytes match the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "color"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-std-illuminant-d65",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json#/checksums"
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/540/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; A. Marciniak (2007), Ďurech et al. (2011), Hanuš et al. (2013); model 189, version 2011-03-28.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
+        "inputs": [
+          "adelheid-shape",
+          "adelheid-disc-color"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "datasetId": "color"
+      },
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/terrestrial.json"
+    },
+    {
+      "path": "reference/189-IAUspin.txt"
+    },
+    {
+      "path": "reference/AcuA_V1.txt.gz"
+    },
+    {
+      "path": "reference/calibration.json"
+    },
+    {
+      "path": "reference/damit-model.json",
+      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
+      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/189",
+      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
+    },
+    {
+      "path": "reference/horizons-elements.txt"
+    },
+    {
+      "path": "reference/horizons-vectors.txt"
+    },
+    {
+      "path": "reference/model-properties.json"
+    },
+    {
+      "path": "reference/sbn-catalogues.json",
+      "purpose": "Rows of the PDS Small Bodies Node catalogues that the factsheet cites, as their PDS4 labels read them, with each selection rule.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "neowise-diameters-albedos-v2",
+            "role": "reference",
+            "evidence": "packages/bake/authoring/sbn-catalogue-facts/author.mts extract; product LIDVIDs recorded in the file."
+          }
+        ]
+      }
+    }
+  ]
+}

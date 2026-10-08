@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "scheila",
+  "card": {
+    "text": "Main-belt asteroid found in 1906.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=596",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "596 Scheila (A906 DL); Discovered 1906-Feb-21 by Kopff, A. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-3263",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3263/shape.txt",
+        "label": "DAMIT shape 3263 · Scheila",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Kopff found Scheila at Heidelberg on 21 February 1906.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=596",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "596 Scheila (A906 DL); Discovered 1906-Feb-21 by Kopff, A. at Heidelberg; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-3263",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/3263/shape.txt",
+        "label": "DAMIT shape 3263 · Scheila",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Scheila’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 79.86 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

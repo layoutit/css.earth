@@ -1,0 +1,47 @@
+{
+  "modelId": 311,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/311",
+  "fields": {
+    "ID": "311",
+    "Asteroid ID": "(37) Fides",
+    "Lambda": "270",
+    "Beta": "19",
+    "Period": "7.332527",
+    "YORP": "",
+    "JD0": "2443161",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "0.42",
+    "LSM Parameter 3": "0.06",
+    "LSM Parameter 4": "-0.77",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "118",
+    "Equivalent Diameter Error": "10",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "",
+    "Nonconvex": "0 (No)",
+    "Version": "2011-04-21",
+    "Comment": "",
+    "Created": "",
+    "Modified": "2013-07-24 14:18:21"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1131/AO.eps",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1132/3D.pdf",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1133/IAUspin.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1134/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/1135/shape.txt"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/141",
+    "https://damit.cuni.cz/projects/damit/references/view/149"
+  ]
+}

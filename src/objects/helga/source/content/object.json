@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "helga",
+  "displayName": "Helga",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "101.22 × 101.22 × 101.22 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=522",
+          "label": "JPL Small-Body Database, physical parameters for 522 Helga: diameter 101.22 ± 3.5 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "8.129 h",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=522",
+          "label": "JPL Small-Body Database, physical parameters for 522 Helga: diameter 101.22 ± 3.5 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "/periodText"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "labels": {
+      "color": "Color"
+    },
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc color from a published reflectance spectrum and V geometric albedo, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "/scenes/helga/helga-color-thumbnail.webp",
+        "surface": "helga-color-surface@2x.webp",
+        "poles": "helga-color-surface@2x.webp",
+        "source": {
+          "id": "helga-disc-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202243791"
+        },
+        "falseColor": false,
+        "notes": "A sphere at the measured diameter; no shape model is published. One mean color for the whole disc (Gaia DR3 reflectance spectrum), scaled to the 3.9% geometric albedo JPL lists; no terrain, albedo pattern or color variation is drawn."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Gaia Collaboration, Galluccio et al. (2023)",
+      "role": "surface",
+      "description": "Gaia DR3 reflectance spectrum",
+      "href": "https://doi.org/10.1051/0004-6361/202243791"
+    },
+    {
+      "label": "JPL Small-Body Database",
+      "role": "surface",
+      "description": "Geometric albedo",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=522"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=522",
+      "credit": "JPL Small-Body Database, physical parameters for 522 Helga: diameter 101.22 ± 3.5 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "JPL Small-Body Database, physical parameters for 522 Helga: diameter 101.22 ± 3.5 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0"
+    }
+  }
+}

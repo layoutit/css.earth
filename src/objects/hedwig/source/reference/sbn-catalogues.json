@@ -1,0 +1,208 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "hedwig",
+  "generator": "packages/bake/authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 476,
+    "by": "SBDB record des 476"
+  },
+  "occultations": {
+    "catalogueId": "small-bodies-occultations-v4",
+    "product": "urn:nasa:pds:smallbodiesoccultations:data:asteroiddiameters_2024mar::4.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/smallbodiesoccultations_V4_0/data/AsteroidDiameters_2024Mar.psv",
+    "rows": [
+      {
+        "recordNumber": 262,
+        "fields": {
+          "Designation": "476",
+          "Name": "Hedwig",
+          "Diameter_Nominal": "121.5",
+          "Uncert": "6.9",
+          "Dia_1": "121",
+          "Uncert_1": "2",
+          "Events_1": "5",
+          "Invalid_1": "1",
+          "Model_Source_1": "DAMIT",
+          "Model_Number_1": "6114",
+          "Dia_2": "115",
+          "Uncert_2": "5",
+          "Events_2": "1",
+          "Invalid_2": "3",
+          "Model_Source_2": "DAMIT",
+          "Model_Number_2": "6115",
+          "Dia_3": "",
+          "Uncert_3": "",
+          "Events_3": "",
+          "Invalid_3": "",
+          "Model_Source_3": "",
+          "Model_Number_3": "",
+          "Dia_4": "",
+          "Uncert_4": "",
+          "Events_4": "",
+          "Invalid_4": "",
+          "Model_Source_4": "",
+          "Model_Number_4": ""
+        }
+      }
+    ],
+    "selected": {
+      "Dia_1": 0
+    },
+    "rule": "Volume-equivalent diameter from fitting a shape model to occultation chords: among fits at least three times their uncertainty, the smallest relative uncertainty, then the most events, then the model this body displays. Diameter_Nominal (a weighted mean of IRAS, AKARI and NEOWISE) is not used."
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 139732,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "476",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00476",
+          "Absolute_mag": "8.55",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455477.6253925",
+          "N_W1": "9",
+          "N_W2": "9",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV-I",
+          "Diameter": "138.493",
+          "Diameter_err": "0.975",
+          "V_albedo": "0.035",
+          "V_albedo_err": "0.005",
+          "IR_albedo": "0.049",
+          "IR_albedo_err": "0.006",
+          "Beaming_param": "1.000",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas12",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 153403,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "476",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00476",
+          "Absolute_mag": "8.55",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2456910.6051296",
+          "N_W1": "9",
+          "N_W2": "9",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "126.371",
+          "Diameter_err": "41.367",
+          "V_albedo": "0.042",
+          "V_albedo_err": "0.033",
+          "IR_albedo": "0.063",
+          "IR_albedo_err": "0.081",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug15",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 162224,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "476",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00476",
+          "Absolute_mag": "8.55",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2457070.1700531",
+          "N_W1": "10",
+          "N_W2": "12",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "114.901",
+          "Diameter_err": "35.054",
+          "V_albedo": "0.051",
+          "V_albedo_err": "0.037",
+          "IR_albedo": "0.077",
+          "IR_albedo_err": "0.090",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 162225,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "476",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00476",
+          "Absolute_mag": "8.55",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2457365.4705590",
+          "N_W1": "12",
+          "N_W2": "12",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "105.997",
+          "Diameter_err": "28.795",
+          "V_albedo": "0.052",
+          "V_albedo_err": "0.035",
+          "IR_albedo": "0.078",
+          "IR_albedo_err": "0.088",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Nug16",
+          "Notes": ""
+        }
+      },
+      {
+        "recordNumber": 172157,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_mainbelt_csv::2.0",
+          "Asteroid_Number": "476",
+          "Prov_desig": "-",
+          "MPC_packed_name": "00476",
+          "Absolute_mag": "8.55",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2457519.4707651",
+          "N_W1": "11",
+          "N_W2": "11",
+          "N_W3": "0",
+          "N_W4": "0",
+          "Fit_code": "DV--",
+          "Diameter": "108.814",
+          "Diameter_err": "26.698",
+          "V_albedo": "0.052",
+          "V_albedo_err": "0.032",
+          "IR_albedo": "0.078",
+          "IR_albedo_err": "0.048",
+          "Beaming_param": "0.950",
+          "Beaming_param_err": "0.200",
+          "Stacked_flag": "-",
+          "Reference": "Mas17",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Mas12": "Masiero, J.R., A.K. Mainzer, T. Grav, J.M. Bauer, R.M. Cutri, and 2 others, Preliminary Analysis of WISE/NEOWISE 3-Band Cryogenic and Post-cryogenic Observations of Main Belt Asteroids, Astroph. J. 759, L8, doi:10.1088/2041-8205/759/1/L8, 2012."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

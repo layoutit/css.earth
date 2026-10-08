@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "charybdis",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 388",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 21 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.843285,
+          "uncertainty": 0.0027853185
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.8800157,
+          "uncertainty": 0.0013826279
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9376456,
+          "uncertainty": 0.0011804036
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.97763634,
+          "uncertainty": 0.0011102316
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0011532721
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0056983,
+          "uncertainty": 0.0011885142
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0274783,
+          "uncertainty": 0.0012922349
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0302635,
+          "uncertainty": 0.0011281638
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0428907,
+          "uncertainty": 0.0011602907
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0562112,
+          "uncertainty": 0.0011685217
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0734262,
+          "uncertainty": 0.0011906539
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0805285,
+          "uncertainty": 0.0012022693
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0839218,
+          "uncertainty": 0.0011936936
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0941736,
+          "uncertainty": 0.0012694227
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.12791,
+          "uncertainty": 0.0015059272
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.1618041,
+          "uncertainty": 0.0020926984
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (388) Charybdis",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.042,
+    "uncertainty": 0.008
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

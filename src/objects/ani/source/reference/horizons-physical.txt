@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27791%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                  791 Ani (A914 MB)            2026-Oct-08 06:18:45
+Rec #:     791 (+COV) Soln.date: 2026-Jun-05_04:03:54   # obs: 9618 (1915-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457589.5 ! 2016-Jul-20.00 (TDB)         Residual RMS= .20089
+   EC= .1961963423639045   QR= 2.507130195966948   TP= 2456802.4795728917
+   OM= 130.0222700186681   W=  201.557553235667    IN= 16.38636743835056
+   A= 3.11908284087704     MA= 140.8152576904274   ADIST= 3.731035485787131
+   PER= 5.50869            N= .178921986           ANGMOM= .029790042
+   DAN= 3.6684             DDN= 2.53623            L= 330.7801776
+   B= -5.9498792           MOID= 1.50204003        TP= 2014-May-24.9795728917
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 58.4325            ROTPER= 11.174
+   H= 9.32                 G= .150                 B-V= .708
+                           ALBEDO= .026            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#94, OCC=0
+2: source=ORB
+*******************************************************************************

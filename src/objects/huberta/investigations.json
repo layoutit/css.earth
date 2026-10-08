@@ -1,0 +1,93 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "huberta",
+  "entries": [
+    {
+      "id": "survey-selected-model",
+      "subject": "DAMIT 578: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-578.txt. Model 578, version 2013-02-11, pole (206°, -19°), period 8.29055 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/578",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/2280/shape.txt",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huberta/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huberta/source/reference/damit-model.json"
+      ]
+    },
+    {
+      "id": "survey-damit-documentation",
+      "survey": "survey-damit-documentation",
+      "status": "included",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huberta/README.md"
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2013-asteroids-physical-models-from-combined-dense-and",
+      "survey": "survey-hanu-et-al-2013-asteroids-physical-models-from-combined-dense-and",
+      "status": "included",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huberta/README.md"
+      ]
+    },
+    {
+      "id": "survey-akari-acua",
+      "subject": "AKARI AcuA",
+      "status": "included",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 95.2 ± 1.36 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 260 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
+      "evidence": [
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huberta/source/reference/damit-model.json"
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2013-a-a-551-a67",
+      "survey": "survey-hanu-et-al-2013-a-a-551-a67",
+      "status": "included",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huberta/README.md"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "survey": "surface-imagery-3",
+      "status": "unresolved",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huberta/README.md"
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "An alternative pole remains possible; no unique orientation is claimed. AKARI thermal effective diameter provides only an explicit volume-scale approximation. Alternative archive solutions: model 579, pole ['23', '-28'], [Model 579](https://damit.cuni.cz/projects/damit/asteroid_models/view/579) The live DAMIT export lists these other models for this target: 579: pole (23°, -28°), 8.29055 h, version 2013-02-11. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/579",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ]
+    },
+    {
+      "id": "versioned-view-evidence",
+      "survey": "versioned-view-evidence",
+      "status": "unresolved",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huberta/README.md#evidence"
+      ]
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Huberta whole-disc color",
+      "status": "included",
+      "finding": "Gaia Collaboration, Galluccio et al. (2023) published the mean of 25 Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (0.938 at 462 nm, 1.024 at 638 nm). The shape is painted in that one color (#3c3b39 in sRGB) through the shared disc-integrated-color method, scaled to the 4.4% geometric albedo JPL lists (± 1%), from NEOWISE (Masiero et al. 2014, ApJ 791, 121; PDS bundle neowise_diameters_albedos 2.0). It is one mean, not a map. Tinaut-Ruano et al. (2023), A&A 669, L14, found Gaia DR3 reflectances slightly too red at wavelengths shorter than 550 nm; the bands are used as published, without that paper's correction.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243791",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=260",
+        "https://doi.org/10.1051/0004-6361/202245134",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/huberta/source/photometry/disc-color.json"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "desiderata",
+  "card": {
+    "text": "Main-belt asteroid found in 1892.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=344",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "344 Desiderata (A892 WA); Discovered 1892-Nov-15 by Charlois, A. at Nice; orbit class: Main-belt Asteroid; diameter: 124.181 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Charlois found Desiderata at Nice on 15 November 1892.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=344",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "344 Desiderata (A892 WA); Discovered 1892-Nov-15 by Charlois, A. at Nice; orbit class: Main-belt Asteroid; diameter: 124.181 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Desiderata’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

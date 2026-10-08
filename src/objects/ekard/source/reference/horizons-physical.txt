@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27694%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 694 Ekard (A909 VC)           2026-Oct-08 06:17:24
+Rec #:     694 (+COV) Soln.date: 2026-Jun-05_03:56:01   # obs: 8528 (1909-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458363.5 ! 2018-Sep-02.00 (TDB)         Residual RMS= .17972
+   EC= .3220970845733838   QR= 1.81115199067079    TP= 2458306.8139039865
+   OM= 230.0066550546155   W=  111.783725135026    IN= 15.8890221480481
+   A= 2.671698187831218    MA= 12.7937991404573    ADIST= 3.532244384991647
+   PER= 4.36706            N= .225695542           ANGMOM= .026618928
+   DAN= 2.7196             DDN= 2.13886            L= 342.5703877
+   B= 14.7276691           MOID= .87149799         TP= 2018-Jul-07.3139039865
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 60.9455            ROTPER= 5.925
+   H= 9.25                 G= .150                 B-V= .712
+                           ALBEDO= .026            STYP= CP:
+
+ASTEROID comments: 
+1: soln ref.= JPL#71, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gratia",
+  "card": {
+    "text": "Main-belt asteroid found in 1896.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=424",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "424 Gratia (A896 YD); Discovered 1896-Dec-31 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-58577",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/58577/shape.txt",
+        "label": "DAMIT shape 58577 · Gratia",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A. Charlois found Gratia at Nice on 31 December 1896.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=424",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "424 Gratia (A896 YD); Discovered 1896-Dec-31 by Charlois, A. at Nice; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-58577",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/58577/shape.txt",
+        "label": "DAMIT shape 58577 · Gratia",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Gratia’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 51.28 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

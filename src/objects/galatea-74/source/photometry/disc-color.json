@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "galatea-74",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 74",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 24 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.85671127,
+          "uncertainty": 0.0012449893
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.9122891,
+          "uncertainty": 0.00081270887
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.95810366,
+          "uncertainty": 0.00071667385
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9813784,
+          "uncertainty": 0.00071761996
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.00074581365
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.011822,
+          "uncertainty": 0.00082780875
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 0.9980954,
+          "uncertainty": 0.0008588128
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0057703,
+          "uncertainty": 0.0006995804
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0173875,
+          "uncertainty": 0.00071144494
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0218736,
+          "uncertainty": 0.0007339449
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0312917,
+          "uncertainty": 0.0007292131
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0343136,
+          "uncertainty": 0.00075530016
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0409745,
+          "uncertainty": 0.00074788945
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0602207,
+          "uncertainty": 0.00079140044
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.0819054,
+          "uncertainty": 0.00087199087
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.12404,
+          "uncertainty": 0.00107717
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (74) Galatea",
+    "locator": "albedo; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+    "band": "V",
+    "value": 0.0431,
+    "uncertainty": 0.002
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

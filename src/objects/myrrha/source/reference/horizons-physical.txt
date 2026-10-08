@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27381%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                381 Myrrha (A894 AC)           2026-Oct-08 06:16:17
+Rec #:     381 (+COV) Soln.date: 2026-Jun-05_03:31:56   # obs: 7485 (1894-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457498.5 ! 2016-Apr-20.00 (TDB)         Residual RMS= .19548
+   EC= .08978373017575368  QR= 2.933621670465748   TP= 2457654.7126152688
+   OM= 125.102689441829    W=  142.8964493195114   IN= 12.55801459846026
+   A= 3.2229941034038      MA= 333.3908555726226   ADIST= 3.512366536341851
+   PER= 5.78625            N= .17033928            ANGMOM= .030757686
+   DAN= 3.4436             DDN= 2.98338            L= 268.6643918
+   B= 7.5369231            MOID= 1.92867994        TP= 2016-Sep-23.2126152688
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 63.8195            ROTPER= 6.572
+   H= 8.38                 G= .150                 B-V= .683
+                           ALBEDO= .064            STYP= Cb
+
+ASTEROID comments: 
+1: soln ref.= JPL#87, OCC=0
+2: source=ORB
+*******************************************************************************

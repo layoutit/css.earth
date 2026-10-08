@@ -1,0 +1,75 @@
+{
+  "id": "aletheia",
+  "classification": "asteroid",
+  "physical": {
+    "name": "Aletheia",
+    "horizonsCode": "259;",
+    "meanRadiusKm": 87.159,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Sphere at the diameter the JPL Small-Body Database lists.",
+  "acquisition": {
+    "heliocentric": {
+      "target": "259;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27259%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 468733068.9316654,
+      "eccentricity": 0.1300575630271083,
+      "inclinationRad": 0.4578346374141436,
+      "ascendingNodeRad": 0.4373714544022442,
+      "argumentOfPeriapsisRad": 4.018248964312483,
+      "meanAnomalyAtEpochRad": 1.384094451902323,
+      "meanMotionRadPerDay": 0.0031015670105327305
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27259%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          428799153.8674104,
+          -97882243.1718456,
+          -133186865.9860981
+        ],
+        "velocity": [
+          629406.3459404922,
+          1269760.373564994,
+          435415.7037758509
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          445709100.1478606,
+          -59403104.12609993,
+          -119540257.1287606
+        ],
+        "velocity": [
+          497888.9705038341,
+          1293440.820628423,
+          473439.3011602593
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          458676672.7162984,
+          -20396735.57796831,
+          -104835367.1084322
+        ],
+        "velocity": [
+          366784.1764349199,
+          1305028.622434521,
+          505978.8235207036
+        ]
+      }
+    ]
+  }
+}

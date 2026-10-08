@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "marion",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 506",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 21 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.8262063,
+          "uncertainty": 0.0050474904
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.8941765,
+          "uncertainty": 0.002474934
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9400576,
+          "uncertainty": 0.0022024792
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.97953075,
+          "uncertainty": 0.002136015
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0021873678
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0194029,
+          "uncertainty": 0.0023251497
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0279034,
+          "uncertainty": 0.00241089
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0414804,
+          "uncertainty": 0.002159608
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0528234,
+          "uncertainty": 0.0022246558
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0666301,
+          "uncertainty": 0.0022340624
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0728829,
+          "uncertainty": 0.002222315
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0860171,
+          "uncertainty": 0.0022418536
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0983452,
+          "uncertainty": 0.0022235657
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.1223097,
+          "uncertainty": 0.0024330332
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1204412,
+          "uncertainty": 0.0027518286
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.1461688,
+          "uncertainty": 0.003807489
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (506) Marion",
+    "locator": "albedo; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+    "band": "V",
+    "value": 0.0454,
+    "uncertainty": 0.002
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

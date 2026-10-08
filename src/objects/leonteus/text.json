@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "leonteus",
+  "card": {
+    "text": "Jupiter trojan found in 1985.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3793",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "3793 Leonteus (1985 TE3); Discovered 1985-Oct-11 by Shoemaker, C. and Shoemaker, E. at Palomar; orbit class: Jupiter Trojan; diameter: 112.046 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Leonteus was found at Palomar on 11 October 1985.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3793",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "3793 Leonteus (1985 TE3); Discovered 1985-Oct-11 by Shoemaker, C. and Shoemaker, E. at Palomar; orbit class: Jupiter Trojan; diameter: 112.046 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Leonteus’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

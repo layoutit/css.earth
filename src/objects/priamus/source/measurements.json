@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-10-08",
+  "id": "priamus",
+  "name": "Priamus",
+  "titleLabel": "Priamus",
+  "horizons": "884;",
+  "aliases": [
+    "884 Priamus"
+  ],
+  "classification": "asteroid",
+  "population": "Jupiter trojan",
+  "fullAxesKm": [
+    101.093,
+    101.093,
+    101.093
+  ],
+  "radiusKm": 50.5465,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 6.8605,
+  "periodText": "6.8605 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=884",
+  "periodReference": "LCDB (Rev. 2023-October); Warner et al., 2009",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=884",
+  "credit": "JPL Small-Body Database, physical parameters for 884 Priamus: diameter 101.093 ± 0.539 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[jupiter_trojans] (http://adsabs.harvard.edu/abs/2012ApJ...759...49G)",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=884"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 101.093 km diameter the JPL Small-Body Database lists for Priamus. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "introduction": "M. Wolf found Priamus at Heidelberg on 22 September 1917.",
+  "card": "Jupiter trojan found in 1917.",
+  "datasetSummary": "A sphere at the 101.093 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 5.211
+}

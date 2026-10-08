@@ -1,0 +1,47 @@
+{
+  "modelId": 6171,
+  "url": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6171",
+  "fields": {
+    "ID": "6171",
+    "Asteroid ID": "(70) Panopaea",
+    "Lambda": "42",
+    "Beta": "27",
+    "Period": "15.8044",
+    "YORP": "",
+    "JD0": "2444471",
+    "Phi0": "0",
+    "Light Scattering Model": "LSL",
+    "LSM Parameter 1": "0.1",
+    "LSM Parameter 2": "",
+    "LSM Parameter 3": "",
+    "LSM Parameter 4": "",
+    "LSM Parameter 5": "",
+    "Calibrated Size": "1 (Yes)",
+    "Equivalent Diameter": "128",
+    "Equivalent Diameter Error": "7",
+    "Thermal Inertia": "",
+    "Thermal Inertia Min": "",
+    "Thermal Inertia Max": "",
+    "Visual Albedo": "",
+    "Visual Albedo Error": "",
+    "Craters Angle": "",
+    "Craters Surface Density": "",
+    "Quality Flag": "3.5",
+    "Nonconvex": "0 (No)",
+    "Version": "2023-10-03",
+    "Comment": "",
+    "Created": "2022-02-17 14:38:51",
+    "Modified": "2023-10-12 08:45:16"
+  },
+  "files": [
+    "https://damit.cuni.cz/projects/damit/stored_files/open/127402/IAUspin",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/127403/shape.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/127404/shape.txt",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/128662/occ_2006-12-14.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/128663/occ_2014-10-04.png",
+    "https://damit.cuni.cz/projects/damit/stored_files/open/128664/occ_2017-04-25.png"
+  ],
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/667"
+  ]
+}

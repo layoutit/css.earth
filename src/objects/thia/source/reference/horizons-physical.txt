@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27405%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 405 Thia (A895 OB)            2026-Oct-08 06:20:00
+Rec #:     405 (+COV) Soln.date: 2026-Jun-05_03:33:45   # obs: 8721 (1899-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457543.5 ! 2016-Jun-04.00 (TDB)         Residual RMS= .19502
+   EC= .2423992125720994   QR= 1.959196626560863   TP= 2457062.3094780883
+   OM= 255.2478740847829   W=  308.8217174570873   IN= 11.9379147987432
+   A= 2.586054105371843    MA= 114.0419744684447   ADIST= 3.212911584182822
+   PER= 4.15877            N= .236999628           ANGMOM= .026838055
+   DAN= 2.11301            DDN= 2.87027            L= 204.6828539
+   B= -9.274129200000001   MOID= .97779298         TP= 2015-Feb-08.8094780883
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 54.447             ROTPER= 9.95
+   H= 8.79                 G= .150                 B-V= .698
+                           ALBEDO= .018            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#157, OCC=0
+2: source=ORB
+*******************************************************************************

@@ -1,0 +1,75 @@
+{
+  "id": "hohensteina",
+  "classification": "asteroid",
+  "physical": {
+    "name": "Hohensteina",
+    "horizonsCode": "788;",
+    "meanRadiusKm": 55.6475,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Sphere at the diameter the JPL Small-Body Database lists.",
+  "acquisition": {
+    "heliocentric": {
+      "target": "788;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27788%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 467214076.0212134,
+      "eccentricity": 0.1365134225174055,
+      "inclinationRad": 0.15902142478638182,
+      "ascendingNodeRad": 0.06388825953744044,
+      "argumentOfPeriapsisRad": 3.8655636138775082,
+      "meanAnomalyAtEpochRad": 1.949953979688322,
+      "meanMotionRadPerDay": 0.003116704885481067
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27788%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          477260383.1201534,
+          -119923376.9883578,
+          -24080354.58585745
+        ],
+        "velocity": [
+          506739.1602192473,
+          1267033.857250842,
+          197603.0909287837
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          490684411.7378326,
+          -81516879.10172705,
+          -18070832.88757104
+        ],
+        "velocity": [
+          388252.8551931319,
+          1291706.580486795,
+          202760.1503114185
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          500562435.8857998,
+          -42520219.93491784,
+          -11930697.97959694
+        ],
+        "velocity": [
+          270452.134449787,
+          1306455.21774367,
+          206321.7501442345
+        ]
+      }
+    ]
+  }
+}

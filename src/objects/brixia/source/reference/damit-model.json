@@ -1,0 +1,31 @@
+{
+  "modelId": 13007,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/13007",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/107754/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/107752/IAUspin",
+  "modelVersion": "2022-11-29",
+  "lambda": 131,
+  "beta": -33,
+  "periodHours": 28.484,
+  "nonconvex": false,
+  "mesh": {
+    "vertices": 574,
+    "faces": 1144,
+    "signedVolumeSourceUnitsCubed": 1.000000041351854,
+    "volumeEquivalentDiameterSourceUnits": 1.2407009989005617,
+    "closedManifold": true,
+    "extentsSourceUnits": [
+      1.3759000000000001,
+      1.463292,
+      1.131006
+    ],
+    "eulerCharacteristic": 2,
+    "scaledVolumeCubicKm": 645522.0604292079,
+    "physicalRadiusKm": 53.6135
+  },
+  "alternativeModels": [],
+  "selectionReason": "The only archived model for this asteroid.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/665"
+  ]
+}

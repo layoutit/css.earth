@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "princetonia",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 508",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 24 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.8066034,
+          "uncertainty": 0.002394708
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.87274545,
+          "uncertainty": 0.0013674032
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9347738,
+          "uncertainty": 0.0012274054
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.97283244,
+          "uncertainty": 0.0012533704
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0012714813
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0094111,
+          "uncertainty": 0.00136458
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 0.99281806,
+          "uncertainty": 0.0013508619
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0024267,
+          "uncertainty": 0.0012243584
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0148358,
+          "uncertainty": 0.0012570644
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0285643,
+          "uncertainty": 0.0013095195
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.049322,
+          "uncertainty": 0.0013301376
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0711304,
+          "uncertainty": 0.0013040047
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0978595,
+          "uncertainty": 0.0013982009
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.1107874,
+          "uncertainty": 0.0014119754
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1549622,
+          "uncertainty": 0.0015694462
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.2039075,
+          "uncertainty": 0.0019996823
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (508) Princetonia",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.065,
+    "uncertainty": 0.012
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

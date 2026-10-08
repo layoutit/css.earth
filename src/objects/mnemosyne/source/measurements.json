@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-10-08",
+  "id": "mnemosyne",
+  "name": "Mnemosyne",
+  "titleLabel": "Mnemosyne",
+  "horizons": "57;",
+  "aliases": [
+    "57 Mnemosyne"
+  ],
+  "classification": "asteroid",
+  "population": "Main-belt asteroid",
+  "fullAxesKm": [
+    112.59,
+    112.59,
+    112.59
+  ],
+  "radiusKm": 56.295,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 25.324,
+  "periodText": "25.324 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=57",
+  "periodReference": "LCDB (Rev. 2023-October); Warner et al., 2009",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=57",
+  "credit": "JPL Small-Body Database, physical parameters for 57 Mnemosyne: diameter 112.59 ± 2.8 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=57"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 112.59 km diameter the JPL Small-Body Database lists for Mnemosyne. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "introduction": "R. Luther found Mnemosyne at Dusseldorf on 22 September 1859.",
+  "card": "Main-belt asteroid found in 1859.",
+  "datasetSummary": "A sphere at the 112.59 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 3.156
+}

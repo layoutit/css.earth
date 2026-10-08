@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "erato",
+  "entries": [
+    {
+      "id": "survey-selected-model",
+      "subject": "DAMIT 317: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-317.txt. Model 317, version 2011-04-21, pole (87°, 22°), period 9.21819 h match the retained metadata. The archive supplies no diameter for this model; a separate scale constraint is required. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/317",
+        "https://damit.cuni.cz/projects/damit/stored_files/open/1160/shape.txt",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/erato/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/erato/source/reference/damit-model.json"
+      ]
+    },
+    {
+      "id": "survey-damit-documentation",
+      "survey": "survey-damit-documentation-2",
+      "status": "included",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/erato/README.md"
+      ]
+    },
+    {
+      "id": "survey-hanu-2011-a-study-of-asteroid-pole-latitude-distribution-based-on",
+      "survey": "survey-hanu-2011-a-study-of-asteroid-pole-latitude-distribution-based-on",
+      "status": "included",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/erato/README.md"
+      ]
+    },
+    {
+      "id": "survey-akari-acua",
+      "subject": "AKARI AcuA",
+      "status": "included",
+      "finding": "[AKARI AcuA](https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/) — included as an explicitly approximate thermal size transfer. Its fitted nonrotating-sphere diameter is 78.62 ± 0.9 km. Formal catalog error omits additional shape, spin and thermal-model effects; no total confidence interval is invented. The original catalogue row for asteroid 62 was retrieved again and matched field-for-field with the retained row, including diameter, reported error and detection count.",
+      "evidence": [
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/",
+        "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/erato/source/reference/damit-model.json"
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2017",
+      "subject": "Resolved-model surveys: body-specific candidate not established",
+      "status": "unresolved",
+      "finding": "The imported survey cites Hanuš 2017, Viikinkoski 2017 and Vernazza 2021 without identifying a selected product for this body. The current DAMIT reference join does not bind selected model 317 to those surveys. This does not prove that no resolved model exists elsewhere; a body-specific candidate and its release must be identified before the entry can count as included.",
+      "revisitWhen": "A target row, supplementary model or release URL from one of these surveys establishes a concrete candidate and permits comparison with the selected shape.",
+      "evidence": [
+        "https://arxiv.org/abs/1702.01996",
+        "https://arxiv.org/abs/1708.05191",
+        "https://damit.cuni.cz/projects/damit/references/view/660",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models_references"
+      ]
+    },
+    {
+      "id": "survey-hanu-et-al-2018",
+      "survey": "survey-hanu-et-al-2018",
+      "status": "included",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/erato/README.md"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "survey": "surface-imagery",
+      "status": "unresolved",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/318"
+      ]
+    },
+    {
+      "id": "shape-solution",
+      "subject": "Shape and spin alternatives",
+      "status": "unresolved",
+      "finding": "Alternative archive solutions: model 318, pole ['269', '23'], [Model 318](https://damit.cuni.cz/projects/damit/asteroid_models/view/318) The live DAMIT export lists these other models for this target: 318: pole (269°, 23°), 9.2182 h, version 2011-04-21. These are archive alternatives, not necessarily newly released models or preferred replacements. Comparing their source methods and any pole-specific calibration remains necessary before changing the selected mesh.",
+      "revisitWhen": "A released numerical replacement or independent pole/size constraints that distinguish the recorded alternatives, followed by comparison against the currently selected model.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/318",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ]
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Erato whole-disc color",
+      "status": "included",
+      "finding": "Gaia Collaboration, Galluccio et al. (2023) published the mean of 16 Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (0.971 at 462 nm, 0.990 at 638 nm). The shape is painted in that one color (#3e3e3c in sRGB) through the shared disc-integrated-color method, scaled to the 4.8% geometric albedo JPL lists (± 0.8%), from NEOWISE (Masiero et al. 2012, ApJ 759, L8; PDS bundle neowise_diameters_albedos 2.0). It is one mean, not a map. Tinaut-Ruano et al. (2023), A&A 669, L14, found Gaia DR3 reflectances slightly too red at wavelengths shorter than 550 nm; the bands are used as published, without that paper's correction.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243791",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=62",
+        "https://doi.org/10.1051/0004-6361/202245134",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/erato/source/photometry/disc-color.json"
+      ]
+    }
+  ]
+}

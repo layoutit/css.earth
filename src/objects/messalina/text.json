@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "messalina",
+  "card": {
+    "text": "Outer main-belt asteroid found in 1904.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=545",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "545 Messalina (A904 TC); Discovered 1904-Oct-03 by Gotz, P. at Heidelberg; orbit class: Outer Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-59965",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/59965/shape.txt",
+        "label": "DAMIT shape 59965 · Messalina",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "P. Gotz found Messalina at Heidelberg on 3 October 1904.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=545",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "545 Messalina (A904 TC); Discovered 1904-Oct-03 by Gotz, P. at Heidelberg; orbit class: Outer Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-59965",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/59965/shape.txt",
+        "label": "DAMIT shape 59965 · Messalina",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Messalina’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 56.32 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

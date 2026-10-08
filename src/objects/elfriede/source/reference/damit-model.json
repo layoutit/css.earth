@@ -1,0 +1,41 @@
+{
+  "modelId": 5624,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5624",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/68800/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/68798/IAUspin",
+  "modelVersion": "2022-10-21",
+  "lambda": 341,
+  "beta": 49,
+  "periodHours": 14.79564,
+  "nonconvex": false,
+  "mesh": {
+    "vertices": 574,
+    "faces": 1144,
+    "signedVolumeSourceUnitsCubed": 1629510.5686209637,
+    "volumeEquivalentDiameterSourceUnits": 145.9999990898564,
+    "closedManifold": true,
+    "extentsSourceUnits": [
+      157.02337,
+      167.51506999999998,
+      124.19416000000001
+    ],
+    "eulerCharacteristic": 2,
+    "scaledVolumeCubicKm": 1629510.5990953878,
+    "physicalRadiusKm": 73
+  },
+  "alternativeModels": [
+    {
+      "id": 5625,
+      "lambda": 102,
+      "beta": 65,
+      "periodHours": 14.79565,
+      "diameterKm": 145,
+      "uncertaintyKm": 15,
+      "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5625"
+    }
+  ],
+  "selectionReason": "Selected model 5624; the listed alternative pole fits the light curves as well. No unique-pole claim.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/664"
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "achilles",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 588",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 14 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.86288035,
+          "uncertainty": 0.026980694
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.831363,
+          "uncertainty": 0.010276539
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9105544,
+          "uncertainty": 0.008172306
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9387156,
+          "uncertainty": 0.007420461
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.007948638
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0105387,
+          "uncertainty": 0.0077601494
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0258505,
+          "uncertainty": 0.008599193
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0945355,
+          "uncertainty": 0.008059071
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.1292633,
+          "uncertainty": 0.00851891
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.1574491,
+          "uncertainty": 0.008732826
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.2212727,
+          "uncertainty": 0.0092771435
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.2550826,
+          "uncertainty": 0.009609589
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.3142809,
+          "uncertainty": 0.010457055
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.3859133,
+          "uncertainty": 0.011002329
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.4069734,
+          "uncertainty": 0.013404839
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.4672962,
+          "uncertainty": 0.020890478
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (588) Achilles",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[jupiter_trojans] (http://adsabs.harvard.edu/abs/2012ApJ...759...49G)",
+    "band": "V",
+    "value": 0.043,
+    "uncertainty": 0.006
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

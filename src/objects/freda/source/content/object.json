@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "freda",
+  "displayName": "Freda",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "116.73 × 116.73 × 116.73 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1093",
+          "label": "JPL Small-Body Database, physical parameters for 1093 Freda: diameter 116.73 ± 2.9 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Rotation",
+        "value": "19.67 h",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1093",
+          "label": "JPL Small-Body Database, physical parameters for 1093 Freda: diameter 116.73 ± 2.9 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-small-body-database",
+          "locator": "/periodText"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "labels": {
+      "color": "Color"
+    },
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc color from a published reflectance spectrum and V geometric albedo, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "/scenes/freda/freda-color-thumbnail.webp",
+        "surface": "freda-color-surface@2x.webp",
+        "poles": "freda-color-surface@2x.webp",
+        "source": {
+          "id": "freda-disc-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202243791"
+        },
+        "falseColor": false,
+        "notes": "A sphere at the measured diameter; no shape model is published. One mean color for the whole disc (Gaia DR3 reflectance spectrum), scaled to the 3.8% geometric albedo JPL lists; no terrain, albedo pattern or color variation is drawn."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Gaia Collaboration, Galluccio et al. (2023)",
+      "role": "surface",
+      "description": "Gaia DR3 reflectance spectrum",
+      "href": "https://doi.org/10.1051/0004-6361/202243791"
+    },
+    {
+      "label": "JPL Small-Body Database",
+      "role": "surface",
+      "description": "Geometric albedo",
+      "href": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1093"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1093",
+      "credit": "JPL Small-Body Database, physical parameters for 1093 Freda: diameter 116.73 ± 2.9 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "JPL Small-Body Database, physical parameters for 1093 Freda: diameter 116.73 ± 2.9 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0"
+    }
+  }
+}

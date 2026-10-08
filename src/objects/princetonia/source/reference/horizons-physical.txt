@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27508%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS              508 Princetonia (A903 HC)        2026-Oct-08 06:18:05
+Rec #:     508 (+COV) Soln.date: 2026-Jun-05_03:41:27   # obs: 7313 (1908-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457575.5 ! 2016-Jul-06.00 (TDB)         Residual RMS= .17714
+   EC= .008147546948937571 QR= 3.135294394192401   TP= 2457456.0170338508
+   OM= 44.22330143901017   W=  194.9060981802248   IN= 13.33688655055577
+   A= 3.161049190883022    MA= 20.95381899219838   ADIST= 3.186803987573642
+   PER= 5.62024            N= .175370763           ANGMOM= .030583181
+   DAN= 3.18592            DDN= 3.13615            L= 238.7446053
+   B= -3.4018236           MOID= 2.12528992        TP= 2016-Mar-08.5170338508
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 58.6205            ROTPER= 52.8
+   H= 8.37                 G= .150                 B-V= .732
+                           ALBEDO= .065            STYP= C
+
+ASTEROID comments: 
+1: soln ref.= JPL#130, OCC=0
+2: source=ORB
+*******************************************************************************

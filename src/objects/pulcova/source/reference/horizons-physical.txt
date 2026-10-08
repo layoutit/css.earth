@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27762%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                762 Pulcova (A913 RD)          2026-Oct-08 06:12:36
+Rec #:     762 (+COV) Soln.date: 2026-Jun-05_04:01:40  # obs: 11528 (1916-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457773.5 ! 2017-Jan-20.00 (TDB)         Residual RMS= .18711
+   EC= .1035302253606854   QR= 2.829099258909125   TP= 2457665.3818440684
+   OM= 305.7539503763862   W=  189.5859518126035   IN= 13.08614963343443
+   A= 3.155822247378484    MA= 19.0078897125648    ADIST= 3.482545235847843
+   PER= 5.60631            N= .17580664            ANGMOM= .030394685
+   DAN= 3.47694            DDN= 2.83281            L= 135.0954069
+   B= -2.1608124           MOID= 1.84423995        TP= 2016-Oct-03.8818440684
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 73.6715            ROTPER= 5.839
+   H= 8.43                 G= .150                 B-V= .658
+                           ALBEDO= .040            STYP= F
+
+ASTEROID comments: 
+1: soln ref.= JPL#148, OCC=0
+2: source=ORB
+*******************************************************************************

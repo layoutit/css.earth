@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-terrestrial-preparation@2",
+  "kind": "solid-observation-body",
+  "namespace": "makhaon",
+  "displayName": "Makhaon",
+  "publicBase": "/scenes/makhaon/",
+  "raster": {
+    "width": 512,
+    "height": 256,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 128,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [],
+    "observedColors": [],
+    "mosaics": [],
+    "shapeViews": [
+      {
+        "id": "color",
+        "label": "Color",
+        "consumer": "shape",
+        "science": {
+          "kind": "disc-integrated-color",
+          "source": "photometry/disc-color.json",
+          "illuminant": "reference/CIE_std_illum_D65.csv",
+          "qualification": "Whole-disc color from a published reflectance spectrum and V geometric albedo, painted uniformly; the surface itself is unresolved."
+        }
+      }
+    ]
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 55.8275,
+    "camera": {
+      "framingScale": 1
+    },
+    "mapUrl": "/scenes/makhaon/makhaon-color-surface@2x.webp",
+    "polesUrl": "/scenes/makhaon/makhaon-color-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/ellipsoid.tab",
+      "format": "pds-radius-table",
+      "grid": {
+        "metersPerUnit": 1000,
+        "expectedVertices": 2522,
+        "expectedFaces": 5040,
+        "stepDegrees": 5,
+        "longitudeDirection": "east-positive"
+      },
+      "faceBudget": 2000,
+      "texelsPerFace": 4096,
+      "simplification": {
+        "targetFaces": 480,
+        "maximumErrorMeters": 1395.6875,
+        "method": "source-meshoptimizer"
+      },
+      "primitive": "u"
+    }
+  },
+  "celestial": {
+    "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published."
+  },
+  "presentation": {
+    "defaultDataset": "color"
+  }
+}

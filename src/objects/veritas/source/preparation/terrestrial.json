@@ -1,0 +1,110 @@
+{
+  "schema": "cssearth-terrestrial-preparation@2",
+  "kind": "solid-observation-body",
+  "namespace": "veritas",
+  "displayName": "Veritas",
+  "publicBase": "/scenes/veritas/",
+  "raster": {
+    "width": 4096,
+    "height": 2048,
+    "bandCount": 16,
+    "gutter": 64,
+    "poleSize": 512,
+    "reportMissingPixels": true,
+    "observations": [],
+    "scientific": [
+      {
+        "id": "elevation",
+        "label": "Elevation",
+        "consumer": "elevation",
+        "path": "shape/model-833.txt",
+        "format": "pds-plate-model",
+        "grid": {
+          "metersPerUnit": 95754.73414056693,
+          "expectedVertices": 1019,
+          "expectedFaces": 2034,
+          "indexBase": 1
+        },
+        "valueTransform": {
+          "scale": 0.001,
+          "offset": -59.4015
+        },
+        "minimum": -11,
+        "maximum": 19,
+        "colors": [
+          "#35306b",
+          "#2c7db7",
+          "#51b5ab",
+          "#c5d879",
+          "#f3c56b",
+          "#c76138",
+          "#f8eee1"
+        ],
+        "relief": {
+          "referenceRadiusMeters": 59401.5,
+          "heightToMeters": 1000,
+          "lightDirection": [
+            -0.5,
+            0.5,
+            0.7071067811865476
+          ],
+          "ambient": 0.55
+        },
+        "sampleGrid": {
+          "width": 721,
+          "height": 361
+        },
+        "surfaceSampling": {
+          "method": "closest-source-point",
+          "maximumDistanceMeters": 1188.03
+        }
+      }
+    ],
+    "observedColors": [],
+    "shapeViews": [
+      {
+        "id": "color",
+        "label": "Color",
+        "consumer": "shape",
+        "science": {
+          "kind": "disc-integrated-color",
+          "source": "photometry/disc-color.json",
+          "illuminant": "reference/CIE_std_illum_D65.csv",
+          "qualification": "Whole-disc color from a published reflectance spectrum and V geometric albedo, painted uniformly; the surface itself is unresolved."
+        }
+      }
+    ]
+  },
+  "geometry": {
+    "radius": 230,
+    "radiusKm": 59.4015,
+    "mapUrl": "/scenes/veritas/veritas-color-surface@2x.webp",
+    "polesUrl": "/scenes/veritas/veritas-color-surface@2x.webp",
+    "radialTerrain": {
+      "path": "shape/model-833.txt",
+      "format": "pds-plate-model",
+      "grid": {
+        "metersPerUnit": 95754.73414056693,
+        "expectedVertices": 1019,
+        "expectedFaces": 2034,
+        "indexBase": 1
+      },
+      "latitudeSegments": 90,
+      "longitudeSegments": 180,
+      "faceBudget": 800,
+      "atlasTexels": 13107200,
+      "primitive": "u",
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "maximumErrorMeters": 1188.03,
+        "regularize": true
+      }
+    }
+  },
+  "celestial": {
+    "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
+  },
+  "presentation": {
+    "defaultDataset": "color"
+  }
+}

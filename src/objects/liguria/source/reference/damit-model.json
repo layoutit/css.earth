@@ -1,0 +1,31 @@
+{
+  "modelId": 6079,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/6079",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/65830/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/65828/IAUspin",
+  "modelVersion": "2022-02-14",
+  "lambda": 57,
+  "beta": -33,
+  "periodHours": 31.7046,
+  "nonconvex": false,
+  "mesh": {
+    "vertices": 1022,
+    "faces": 2040,
+    "signedVolumeSourceUnitsCubed": 1.000000015873449,
+    "volumeEquivalentDiameterSourceUnits": 1.2407009883635345,
+    "closedManifold": true,
+    "extentsSourceUnits": [
+      1.460734,
+      1.4436559999999998,
+      1.051675
+    ],
+    "eulerCharacteristic": 2,
+    "scaledVolumeCubicKm": 1612926.0849702721,
+    "physicalRadiusKm": 72.7515
+  },
+  "alternativeModels": [],
+  "selectionReason": "The only archived model for this asteroid.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/662"
+  ]
+}

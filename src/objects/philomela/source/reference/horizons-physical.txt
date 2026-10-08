@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27196%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               196 Philomela (A879 JA)         2026-Oct-08 06:13:06
+Rec #:     196 (+COV) Soln.date: 2026-Jun-05_03:16:10  # obs: 11757 (1879-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457909.5 ! 2017-Jun-05.00 (TDB)         Residual RMS= .26952
+   EC= .01642564683122488  QR= 3.063091041904379   TP= 2458079.3041888676
+   OM= 72.32291114733717   W=  197.9984521372361   IN= 7.261978725822831
+   A= 3.114244522578327    MA= 329.5474679068557   ADIST= 3.165398003252275
+   PER= 5.49588            N= .17933911            ANGMOM= .030352831
+   DAN= 3.16281            DDN= 3.06552            L= 270.1861983
+   B= -2.2384547           MOID= 2.04801989        TP= 2017-Nov-21.8041888676
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 72.313             ROTPER= 8.334
+   H= 6.72                 G= .150                 B-V= .852
+                           ALBEDO= .342            STYP= S
+
+ASTEROID comments: 
+1: soln ref.= JPL#150, OCC=0
+2: source=ORB
+*******************************************************************************

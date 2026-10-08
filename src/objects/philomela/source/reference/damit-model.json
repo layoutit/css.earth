@@ -1,0 +1,39 @@
+{
+  "modelId": 178,
+  "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/178",
+  "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/494/shape.txt",
+  "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/492/IAUspin.txt",
+  "modelVersion": "2007-02-27",
+  "lambda": 111,
+  "beta": -41,
+  "periodHours": 8.332826,
+  "nonconvex": false,
+  "mesh": {
+    "vertices": 1598,
+    "faces": 3192,
+    "signedVolumeSourceUnitsCubed": 1.0000000133677502,
+    "volumeEquivalentDiameterSourceUnits": 1.2407009873272603,
+    "closedManifold": true,
+    "extentsSourceUnits": [
+      1.494402,
+      1.285819,
+      1.101249
+    ],
+    "eulerCharacteristic": 2,
+    "scaledVolumeCubicKm": 1583936.427493228,
+    "physicalRadiusKm": 72.313
+  },
+  "alternativeModels": [
+    {
+      "id": 179,
+      "lambda": 276,
+      "beta": -49,
+      "periodHours": 8.332827,
+      "modelUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/179"
+    }
+  ],
+  "selectionReason": "Selected model 178; the listed alternative pole fits the light curves as well. No unique-pole claim.",
+  "references": [
+    "https://damit.cuni.cz/projects/damit/references/view/113"
+  ]
+}

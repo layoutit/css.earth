@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27514%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                514 Armida (A903 QC)           2026-Oct-08 06:17:41
+Rec #:     514 (+COV) Soln.date: 2026-Jun-05_03:41:53   # obs: 7080 (1903-2025)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457043.5 ! 2015-Jan-21.00 (TDB)         Residual RMS= .22085
+   EC= .04184114730348813  QR= 2.919721935999104   TP= 2457321.2794165383
+   OM= 268.6531411556553   W=  108.0158155415736   IN= 3.876146465817762
+   A= 3.047221165657694    MA= 308.5307107626713   ADIST= 3.174720395316284
+   PER= 5.31942            N= .185288348           ANGMOM= .030002189
+   DAN= 3.08177            DDN= 3.00303            L= 16.7075845
+   B= 3.6858342            MOID= 1.92182004        TP= 2015-Oct-25.7794165383
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 60.0465            ROTPER= 21.851
+   H= 9.2                  G= .150                 B-V= .675
+                           ALBEDO= .030            STYP= XC
+
+ASTEROID comments: 
+1: soln ref.= JPL#130, OCC=0
+2: source=ORB
+*******************************************************************************

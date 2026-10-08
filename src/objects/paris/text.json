@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "paris",
+  "card": {
+    "text": "Jupiter trojan found in 1984.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3317",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "3317 Paris (1984 KF); Discovered 1984-May-26 by Shoemaker, C. and Shoemaker, E. at Palomar; orbit class: Jupiter Trojan; diameter: 118.79 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Paris was found at Palomar on 26 May 1984.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3317",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "3317 Paris (1984 KF); Discovered 1984-May-26 by Shoemaker, C. and Shoemaker, E. at Palomar; orbit class: Jupiter Trojan; diameter: 118.79 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Paris’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

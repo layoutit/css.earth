@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "germania",
+  "card": {
+    "text": "Main-belt asteroid found in 1884.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=241",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "241 Germania (A884 RA); Discovered 1884-Sep-12 by Luther, R. at Dusseldorf; orbit class: Main-belt Asteroid; diameter: 168.9 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "R. Luther found Germania at Dusseldorf on 12 September 1884.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=241",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "241 Germania (A884 RA); Discovered 1884-Sep-12 by Luther, R. at Dusseldorf; orbit class: Main-belt Asteroid; diameter: 168.9 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Germania’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

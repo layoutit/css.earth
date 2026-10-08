@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27712%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               712 Boliviana (A911 FF)         2026-Oct-08 06:17:06
+Rec #:     712 (+COV) Soln.date: 2026-Jun-05_03:57:30   # obs: 6339 (1911-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458131.5 ! 2018-Jan-13.00 (TDB)         Residual RMS= .21059
+   EC= .1871378359848114   QR= 2.093266797801267   TP= 2458191.4489407227
+   OM= 230.8214044921836   W=  181.5701014311074   IN= 12.76488195348227
+   A= 2.575180504725957    MA= 345.7020401320789   ADIST= 3.057094211650647
+   PER= 4.13257            N= .238502294           ANGMOM= .027117166
+   DAN= 3.05683            DDN= 2.09339            L= 52.3527195
+   B= -.3468738            MOID= 1.10367           TP= 2018-Mar-13.9489407227
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 62.0625            ROTPER= 11.7426
+   H= 8.58                 G= .030                 B-V= .743
+                           ALBEDO= .039            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#163, OCC=0
+2: source=ORB
+*******************************************************************************

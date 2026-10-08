@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27361%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                361 Bononia (A893 EF)          2026-Oct-08 06:12:11
+Rec #:     361 (+COV) Soln.date: 2026-Jun-05_03:30:19   # obs: 5479 (1893-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458018.5 ! 2017-Sep-22.00 (TDB)         Residual RMS= .19975
+   EC= .2135039937678502   QR= 3.112814014913304   TP= 2457846.8646851219
+   OM= 18.87241281827894   W=  68.37734714949018   IN= 12.62640645831994
+   A= 3.957825583661637    MA= 21.48452457627344   ADIST= 4.802837152409969
+   PER= 7.87396            N= .125175431           ANGMOM= .033433253
+   DAN= 3.5019             DDN= 4.09998            L= 86.7649741
+   B= 11.7247809           MOID= 2.15726995        TP= 2017-Apr-03.3646851219
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 77.167             ROTPER= 13.835
+   H= 8.36                 G= .150                 B-V= .743
+                           ALBEDO= .038            STYP= DP
+
+ASTEROID comments: 
+1: soln ref.= JPL#132, OCC=0
+2: source=ORB
+*******************************************************************************

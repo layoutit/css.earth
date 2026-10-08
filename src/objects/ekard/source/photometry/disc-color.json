@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "ekard",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 694",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 19 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.83722967,
+          "uncertainty": 0.00483736
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.9053051,
+          "uncertainty": 0.0022521417
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9595833,
+          "uncertainty": 0.001880809
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.99311084,
+          "uncertainty": 0.0018499034
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0018088878
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0022779,
+          "uncertainty": 0.0018323859
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 0.98179513,
+          "uncertainty": 0.0019050898
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 0.9836567,
+          "uncertainty": 0.0017722171
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0011259,
+          "uncertainty": 0.0018074688
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0130156,
+          "uncertainty": 0.0018312675
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0299562,
+          "uncertainty": 0.0018223971
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.039271,
+          "uncertainty": 0.0018334402
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0496633,
+          "uncertainty": 0.0018714389
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0764706,
+          "uncertainty": 0.001999174
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1008449,
+          "uncertainty": 0.002280585
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.1906372,
+          "uncertainty": 0.0034020136
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (694) Ekard",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2012ApJ...759L...8M)",
+    "band": "V",
+    "value": 0.026,
+    "uncertainty": 0.003
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

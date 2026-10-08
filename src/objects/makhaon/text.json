@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "makhaon",
+  "card": {
+    "text": "Jupiter trojan found in 1983.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3063",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "3063 Makhaon (1983 PV); Discovered 1983-Aug-04 by Karachkina, L. G. at Nauchnyj; orbit class: Jupiter Trojan; diameter: 111.655 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "L. G. Karachkina found Makhaon at Nauchnyj on 4 August 1983.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=3063",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "3063 Makhaon (1983 PV); Discovered 1983-Aug-04 by Karachkina, L. G. at Nauchnyj; orbit class: Jupiter Trojan; diameter: 111.655 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Makhaon’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

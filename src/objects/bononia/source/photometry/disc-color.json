@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "bononia",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 361",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 17 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.8503912,
+          "uncertainty": 0.0056661204
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.8792179,
+          "uncertainty": 0.0028631862
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9199186,
+          "uncertainty": 0.0024425727
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.95191795,
+          "uncertainty": 0.0024657308
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.002511724
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0188276,
+          "uncertainty": 0.0027374495
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0426856,
+          "uncertainty": 0.0029483845
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0559497,
+          "uncertainty": 0.0025141658
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0859305,
+          "uncertainty": 0.0026103256
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.1219808,
+          "uncertainty": 0.0027508836
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.1538583,
+          "uncertainty": 0.002804065
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.1862328,
+          "uncertainty": 0.0029111262
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.2313957,
+          "uncertainty": 0.0029325641
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.27293,
+          "uncertainty": 0.0032300495
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.3133895,
+          "uncertainty": 0.0036447921
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.3753543,
+          "uncertainty": 0.004995501
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (361) Bononia",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[hildas] (http://adsabs.harvard.edu/abs/2012ApJ...744..197G)",
+    "band": "V",
+    "value": 0.038,
+    "uncertainty": 0.005
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

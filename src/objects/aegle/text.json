@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "aegle",
+  "card": {
+    "text": "Main-belt asteroid found in 1868.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=96",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "96 Aegle (A868 DA); Discovered 1868-Feb-17 by Coggia, J. at Marseille; orbit class: Main-belt Asteroid; diameter: 177.774 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "J. Coggia found Aegle at Marseille on 17 February 1868.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=96",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "96 Aegle (A868 DA); Discovered 1868-Feb-17 by Coggia, J. at Marseille; orbit class: Main-belt Asteroid; diameter: 177.774 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Aegle’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "id": "mnemosyne",
+  "classification": "asteroid",
+  "physical": {
+    "name": "Mnemosyne",
+    "horizonsCode": "57;",
+    "meanRadiusKm": 56.295,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "physicalNotes": "Sphere at the diameter the JPL Small-Body Database lists.",
+  "acquisition": {
+    "heliocentric": {
+      "target": "57;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2757%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 472179239.8843231,
+      "eccentricity": 0.1078151439345365,
+      "inclinationRad": 0.17839087369171955,
+      "ascendingNodeRad": 5.783607833095533,
+      "argumentOfPeriapsisRad": 1.3523245768957501,
+      "meanAnomalyAtEpochRad": 4.458455317643659,
+      "meanMotionRadPerDay": 0.003067674148279379
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2757%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          155166023.3103302,
+          -465135554.3051332,
+          -60214916.45381725
+        ],
+        "velocity": [
+          1259124.713145079,
+          538150.0229578845,
+          193940.3690908063
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          192314651.7299783,
+          -447278142.8711904,
+          -54179700.372695
+        ],
+        "velocity": [
+          1215721.880979373,
+          652080.5583620669,
+          208216.3089076401
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          228004512.7898692,
+          -426030914.0871823,
+          -47734184.84936662
+        ],
+        "velocity": [
+          1161839.09537802,
+          763988.6398564914,
+          221267.0157677202
+        ]
+      }
+    ]
+  }
+}

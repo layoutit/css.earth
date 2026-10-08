@@ -75,7 +75,13 @@ describe('asteroid positions against JPL Horizons', () => {
       // Notable DAMIT asteroids added 2026-09-21: ceil(independent endpoint maximum * 1.15).
       apollo: 631, koronis: 2059, karin: 276, datura: 183, hungaria: 505,
       // Nonconvex DAMIT asteroids added 2026-09-25: ceil(independent endpoint maximum * 1.15).
-      aspasia: 233, papagena: 2527, ara: 244, aquitania: 243, carlova: 297, siegena: 2807, aurelia: 327, 'asteroid-1999-jv6': 210, nyx: 1152, eger: 592 }
+      aspasia: 233, papagena: 2527, ara: 244, aquitania: 243, carlova: 297, siegena: 2807, aurelia: 327, 'asteroid-1999-jv6': 210, nyx: 1152, eger: 592,
+      // Asteroids of 100 km or more added 2026-10-08 in their measured color: ceil(independent endpoint maximum * 1.15).
+      mnemosyne: 308, concordia: 302, diana: 296, terpsichore: 308, undina: 285, aegle: 397, ate: 986, lumen: 943, hilda: 683, eucharis: 470, eunike: 791, prokne: 3388, dynamene: 1719, pompeja: 824, isolda: 316, adelinda: 298, germania: 310, aletheia: 306, aline: 2157, adorea: 674, polyxo: 1150,
+      desiderata: 423, ursula: 337, lampetia: 2233, bertholda: 523, nephele: 5529, patientia: 300, argentina: 286, kreusa: 316, virtus: 355, marion: 305, helga: 344, marianna: 469, zelinda: 882, alauda: 1024, erminia: 1332, mandeville: 727, simeisa: 367, hohensteina: 326, pretoria: 309,
+      tauris: 296, priamus: 1037, helio: 316, ulla: 968, freda: 304, odysseus: 742, troilus: 875, rollandia: 6604, antilochus: 454, deiphobus: 1000, alcathous: 608, makhaon: 484, paris: 915, leonteus: 488, chicago: 9326, winchester: 1805, stereoskopia: 744, scheila: 885, bononia: 898,
+      berbericia: 292, pulcova: 394, merapi: 3957, liguria: 439, philomela: 3931, dembowska: 262, comacina: 363, hedwig: 234, hispania: 250, hippo: 701, wratislavia: 262, elfriede: 420, agamemnon: 648, 'ophelia-171': 1392, ornamenta: 412, myrrha: 2396, tanete: 337, armenia: 288, charybdis: 266,
+      josephina: 297, boliviana: 714, ninina: 3179, ekard: 228, armida: 350, chloris: 3388, princetonia: 618, ani: 833, faina: 1452, messalina: 3241, nestor: 1057, edith: 300, thia: 1409, bredichina: 2137, gerlinde: 294, brixia: 1089, iduna: 2654, gratia: 2256, emita: 288, flammario: 208 }
     for (const id of SMALL_BODY_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       assert.ok(Math.hypot(...actual.map((v, i) => v - row.position[i]!)) < maximumErrorKm[id])

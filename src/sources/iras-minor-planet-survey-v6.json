@@ -1,0 +1,30 @@
+{
+  "id": "iras-minor-planet-survey-v6",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "IRAS Minor Planet Survey V6.0",
+  "identifiers": [
+    {
+      "type": "PDS3 data set",
+      "value": "IRAS-A-FPA-3-RDR-IMPS-V6.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbn.psi.edu/pds/resource/imps.html",
+      "label": "IRAS Minor Planet Survey at the PDS Small Bodies Node"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbn.psi.edu/pds/resource/imps.html",
+      "checkedOn": "2026-10-08",
+      "locator": "Data set identifier and citation"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "NASA Planetary Data System, Small Bodies Node",
+  "version": "6.0"
+}

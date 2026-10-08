@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-10-08",
+  "id": "adorea",
+  "name": "Adorea",
+  "titleLabel": "Adorea",
+  "horizons": "268;",
+  "aliases": [
+    "268 Adorea"
+  ],
+  "classification": "asteroid",
+  "population": "Main-belt asteroid",
+  "fullAxesKm": [
+    144.585,
+    144.585,
+    144.585
+  ],
+  "radiusKm": 72.2925,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 7.8,
+  "periodText": "7.8 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=268",
+  "periodReference": "LCDB (Rev. 2023-October); Warner et al., 2009",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=268",
+  "credit": "JPL Small-Body Database, physical parameters for 268 Adorea: diameter 144.585 ± 0.892 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2012ApJ...759L...8M)",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=268"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 144.585 km diameter the JPL Small-Body Database lists for Adorea. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "introduction": "A. Borrelly found Adorea at Marseille on 8 June 1887.",
+  "card": "Main-belt asteroid found in 1887.",
+  "datasetSummary": "A sphere at the 144.585 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 3.091
+}

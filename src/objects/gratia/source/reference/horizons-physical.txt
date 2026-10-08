@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27424%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                424 Gratia (A896 YD)           2026-Oct-08 06:20:54
+Rec #:     424 (+COV) Soln.date: 2026-Jun-05_03:35:00  # obs: 17814 (1898-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458601.5 ! 2019-Apr-28.00 (TDB)         Residual RMS= .20325
+   EC= .1076782764291724   QR= 2.477592584675097   TP= 2459341.7690434782
+   OM= 99.14867843576992   W=  333.1283865435236   IN= 8.220087900847226
+   A= 2.776568718690887    MA= 202.3002435564768   ADIST= 3.075544852706678
+   PER= 4.62669            N= .213030327           ANGMOM= .028497267
+   DAN= 2.50387            DDN= 3.03599            L= 72.514898
+   B= -3.7052702           MOID= 1.49530995        TP= 2021-May-07.2690434782
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 51.2825            ROTPER= 20.063
+   H= 9.73                 G= .150                 B-V= n.a.
+                           ALBEDO= .027            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#102, OCC=0
+2: source=ORB
+*******************************************************************************

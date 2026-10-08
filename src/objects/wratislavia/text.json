@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wratislavia",
+  "card": {
+    "text": "Main-belt asteroid found in 1909.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=690",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "690 Wratislavia (A909 UE); Discovered 1909-Oct-16 by Metcalf, J. H. at Taunton; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-781",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/781/shape.txt",
+        "label": "DAMIT shape 781 · Wratislavia",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "J. H. Metcalf found Wratislavia at Taunton on 16 October 1909.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=690",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "690 Wratislavia (A909 UE); Discovered 1909-Oct-16 by Metcalf, J. H. at Taunton; orbit class: Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-781",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/781/shape.txt",
+        "label": "DAMIT shape 781 · Wratislavia",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Wratislavia’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 67.33 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

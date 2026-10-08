@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-10-08",
+  "id": "eunike",
+  "name": "Eunike",
+  "titleLabel": "Eunike",
+  "horizons": "185;",
+  "aliases": [
+    "185 Eunike"
+  ],
+  "classification": "asteroid",
+  "population": "Main-belt asteroid",
+  "fullAxesKm": [
+    160.464,
+    160.464,
+    160.464
+  ],
+  "radiusKm": 80.232,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 21.797,
+  "periodText": "21.797 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=185",
+  "periodReference": "LCDB (Rev. 2023-October); Warner et al., 2009",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=185",
+  "credit": "JPL Small-Body Database, physical parameters for 185 Eunike: diameter 160.464 ± 2.016 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=185"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 160.464 km diameter the JPL Small-Body Database lists for Eunike. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "introduction": "C. H. F. Peters found Eunike at Clinton on 1 March 1878.",
+  "card": "Main-belt asteroid found in 1878.",
+  "datasetSummary": "A sphere at the 160.464 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 2.738
+}

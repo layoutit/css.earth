@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27663%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS               663 Gerlinde (A908 MB)          2026-Oct-08 06:20:23
+Rec #:     663 (+COV) Soln.date: 2026-Jun-05_03:53:50   # obs: 6684 (1908-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457491.5 ! 2016-Apr-13.00 (TDB)         Residual RMS= .18501
+   EC= .1460748189958114   QR= 2.620600990285011   TP= 2456858.582486304
+   OM= 232.8739378642839   W=  310.9170042108073   IN= 17.81996815821948
+   A= 3.068888292067073    MA= 116.0324778855406   ADIST= 3.517175593849136
+   PER= 5.37625            N= .183329542           ANGMOM= .029811812
+   DAN= 2.74115            DDN= 3.32115            L= 185.1894963
+   B= -13.370804           MOID= 1.65391004        TP= 2014-Jul-20.0824863040
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 53.8975            ROTPER= 10.251
+   H= 9.15                 G= .150                 B-V= .677
+                           ALBEDO= .031            STYP= X
+
+ASTEROID comments: 
+1: soln ref.= JPL#117, OCC=0
+2: source=ORB
+*******************************************************************************

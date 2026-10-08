@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27521%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                521 Brixia (A904 AE)           2026-Oct-08 06:20:34
+Rec #:     521 (+COV) Soln.date: 2026-Jun-05_03:42:27   # obs: 7384 (1904-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2457726.5 ! 2016-Dec-04.00 (TDB)         Residual RMS= .17642
+   EC= .2825457949642515   QR= 1.965797849527715   TP= 2457835.6502404748
+   OM= 89.66270154418125   W=  315.9986731769146   IN= 10.59613003845216
+   A= 2.739962823731398    MA= 336.2801594466592   ADIST= 3.514127797935082
+   PER= 4.5355             N= .217313681           ANGMOM= .027314126
+   DAN= 2.09536            DDN= 3.16436            L= 46.153627
+   B= -7.3390317           MOID= .99067599         TP= 2017-Mar-23.1502404748
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 53.6135            ROTPER= 28.479
+   H= 8.57                 G= -.060                B-V= .712
+                           ALBEDO= .073            STYP= Ch
+
+ASTEROID comments: 
+1: soln ref.= JPL#128, OCC=0
+2: source=ORB
+*******************************************************************************

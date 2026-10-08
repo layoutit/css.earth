@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "concordia",
+  "card": {
+    "text": "Main-belt asteroid found in 1860.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=58",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "58 Concordia (A860 FA); Discovered 1860-Mar-24 by Luther, R. at Dusseldorf; orbit class: Main-belt Asteroid; diameter: 106.517 km"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "R. Luther found Concordia at Dusseldorf on 24 March 1860.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=58",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances, orbit and physical parameters",
+        "quote": "58 Concordia (A860 FA); Discovered 1860-Mar-24 by Luther, R. at Dusseldorf; orbit class: Main-belt Asteroid; diameter: 106.517 km"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Concordia’s measured average color and brightness on a sphere of its measured size. No surface detail has been seen."
+    }
+  }
+}

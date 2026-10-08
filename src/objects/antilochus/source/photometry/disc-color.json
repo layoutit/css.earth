@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "antilochus",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 1583",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 35 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.8476907,
+          "uncertainty": 0.013758625
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.84057343,
+          "uncertainty": 0.005351271
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.8938512,
+          "uncertainty": 0.0041978788
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.94827396,
+          "uncertainty": 0.0039158165
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0038950627
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0491314,
+          "uncertainty": 0.004268973
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0744077,
+          "uncertainty": 0.004327061
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.1238139,
+          "uncertainty": 0.004148718
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.1740892,
+          "uncertainty": 0.0044086743
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.2235328,
+          "uncertainty": 0.0046522194
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.2709504,
+          "uncertainty": 0.0047851847
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.3166567,
+          "uncertainty": 0.0048199636
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.3771442,
+          "uncertainty": 0.005082108
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.4194093,
+          "uncertainty": 0.005499757
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.4870309,
+          "uncertainty": 0.006673079
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.578615,
+          "uncertainty": 0.010091683
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (1583) Antilochus",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[jupiter_trojans] (http://adsabs.harvard.edu/abs/2012ApJ...759...49G)",
+    "band": "V",
+    "value": 0.054,
+    "uncertainty": 0.004
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "germania",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 241",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 24 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.85389376,
+          "uncertainty": 0.0016744437
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.9132492,
+          "uncertainty": 0.0009601178
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9594766,
+          "uncertainty": 0.00085543556
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9839489,
+          "uncertainty": 0.0008473886
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.00087776355
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0131208,
+          "uncertainty": 0.00089908217
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0015093,
+          "uncertainty": 0.0009198652
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.0123755,
+          "uncertainty": 0.0008225476
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0208421,
+          "uncertainty": 0.0008383993
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0282048,
+          "uncertainty": 0.0008727009
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0373542,
+          "uncertainty": 0.0008679113
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0449224,
+          "uncertainty": 0.0008573449
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.049441,
+          "uncertainty": 0.0008618962
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0669131,
+          "uncertainty": 0.0009003195
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.0854582,
+          "uncertainty": 0.0010096683
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.1157957,
+          "uncertainty": 0.0013167548
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (241) Germania",
+    "locator": "albedo; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+    "band": "V",
+    "value": 0.0575,
+    "uncertainty": 0.002
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

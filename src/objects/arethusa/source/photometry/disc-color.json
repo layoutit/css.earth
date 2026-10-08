@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "arethusa",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 95",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 25 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.83167696,
+          "uncertainty": 0.002490984
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.88487256,
+          "uncertainty": 0.0012016022
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9410603,
+          "uncertainty": 0.0010344285
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.98154753,
+          "uncertainty": 0.00097287924
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.0009771906
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0097173,
+          "uncertainty": 0.0010671341
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 0.97734165,
+          "uncertainty": 0.0010517798
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 0.9678146,
+          "uncertainty": 0.0009371646
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 0.98018384,
+          "uncertainty": 0.0009919255
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 0.9861881,
+          "uncertainty": 0.0010003949
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0027987,
+          "uncertainty": 0.0010072173
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.0141524,
+          "uncertainty": 0.0009758025
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.0215527,
+          "uncertainty": 0.0010155267
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.0449642,
+          "uncertainty": 0.0010701225
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.072772,
+          "uncertainty": 0.0012247221
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.12072,
+          "uncertainty": 0.0017949129
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (95) Arethusa",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.058,
+    "uncertainty": 0.007
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

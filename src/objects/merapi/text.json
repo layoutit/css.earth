@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "merapi",
+  "card": {
+    "text": "Outer main-belt asteroid found in 1904.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=536",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "536 Merapi (A904 JF); Discovered 1904-May-11 by Peters, G. H. at Washington; orbit class: Outer Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-59880",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/59880/shape.txt",
+        "label": "DAMIT shape 59880 · Merapi",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "G. H. Peters found Merapi at Washington on 11 May 1904.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=536",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-10-08",
+        "locator": "Object, discovery circumstances and orbit",
+        "quote": "536 Merapi (A904 JF); Discovered 1904-May-11 by Peters, G. H. at Washington; orbit class: Outer Main-belt Asteroid"
+      },
+      {
+        "catalogueId": "damit-shape-59880",
+        "url": "https://damit.cuni.cz/projects/damit/stored_files/open/59880/shape.txt",
+        "label": "DAMIT shape 59880 · Merapi",
+        "checked": "2026-10-08",
+        "locator": "Dataset source"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Merapi’s measured average color and brightness on its light-curve shape. No surface detail has been seen."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 73.53 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
+    }
+  }
+}

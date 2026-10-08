@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-10-08",
+  "id": "diana",
+  "name": "Diana",
+  "titleLabel": "Diana",
+  "horizons": "78;",
+  "aliases": [
+    "78 Diana"
+  ],
+  "classification": "asteroid",
+  "population": "Main-belt asteroid",
+  "fullAxesKm": [
+    120.6,
+    120.6,
+    120.6
+  ],
+  "radiusKm": 60.3,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 7.2991,
+  "periodText": "7.2991 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=78",
+  "periodReference": "LCDB (Rev. 2023-October); Warner et al., 2009",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=78",
+  "credit": "JPL Small-Body Database, physical parameters for 78 Diana: diameter 120.6 ± 2.7 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=78"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 120.6 km diameter the JPL Small-Body Database lists for Diana. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "introduction": "R. Luther found Diana at Dusseldorf on 15 March 1863.",
+  "card": "Main-belt asteroid found in 1863.",
+  "datasetSummary": "A sphere at the 120.6 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 2.623
+}

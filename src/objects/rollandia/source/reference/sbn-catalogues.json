@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-sbn-catalogue-rows@1",
+  "objectId": "rollandia",
+  "generator": "packages/bake/authoring/sbn-catalogue-facts/author.mts",
+  "checked": "2026-09-28",
+  "match": {
+    "number": 1269,
+    "by": "SBDB record des 1269"
+  },
+  "neowise": {
+    "catalogueId": "neowise-diameters-albedos-v2",
+    "product": "urn:nasa:pds:neowise_diameters_albedos::2.0",
+    "url": "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/bundle_neowise_diameters_albedos.xml",
+    "rows": [
+      {
+        "recordNumber": 15,
+        "fields": {
+          "table": "urn:nasa:pds:neowise_diameters_albedos:data:neowise_hildas_csv::2.0",
+          "Asteroid_Number": "1269",
+          "Prov_desig": "-",
+          "MPC_packed_name": "01269",
+          "Absolute_mag": "8.82",
+          "Slope_param": "+0.15",
+          "Mean_JD": "2455232.5693650",
+          "N_W1": "13",
+          "N_W2": "13",
+          "N_W3": "12",
+          "N_W4": "13",
+          "Fit_code": "DVBI",
+          "Diameter": "104.893",
+          "Diameter_err": "1.042",
+          "V_albedo": "0.048",
+          "V_albedo_err": "0.009",
+          "IR_albedo": "0.125",
+          "IR_albedo_err": "0.012",
+          "Beaming_param": "0.866",
+          "Beaming_param_err": "0.010",
+          "Stacked_flag": "-",
+          "Reference": "Gr12a",
+          "Notes": ""
+        }
+      }
+    ],
+    "references": {
+      "Gr12a": "Grav, T., A.K. Mainzer, J. Bauer, J. Masiero, T. Spahr, and 12 others, WISE/NEOWISE Observations of the Hilda Population: Preliminary Results, Astroph. J. 744, 197, doi:10.1088/0004-637X/744/2/197, 2012."
+    },
+    "selected": {
+      "diameter": 0
+    },
+    "rule": "Rows whose diameter was fitted (Fit_code begins with D): the row the body already uses for its display scale, else a fitted beaming parameter, the most W3+W4 detections, the smallest relative diameter error, the earliest epoch."
+  }
+}

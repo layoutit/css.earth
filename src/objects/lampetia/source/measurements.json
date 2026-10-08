@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-10-08",
+  "id": "lampetia",
+  "name": "Lampetia",
+  "titleLabel": "Lampetia",
+  "horizons": "393;",
+  "aliases": [
+    "393 Lampetia"
+  ],
+  "classification": "asteroid",
+  "population": "Main-belt asteroid",
+  "fullAxesKm": [
+    116.191,
+    116.191,
+    116.191
+  ],
+  "radiusKm": 58.0955,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 38.455,
+  "periodText": "38.455 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=393",
+  "periodReference": "LCDB (Rev. 2023-October); Warner et al., 2009",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=393",
+  "credit": "JPL Small-Body Database, physical parameters for 393 Lampetia: diameter 116.191 ± 27.77 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2016AJ....152...63N)",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=393"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 116.191 km diameter the JPL Small-Body Database lists for Lampetia. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "introduction": "M. Wolf found Lampetia at Heidelberg on 4 November 1894.",
+  "card": "Main-belt asteroid found in 1894.",
+  "datasetSummary": "A sphere at the 116.191 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 2.777
+}

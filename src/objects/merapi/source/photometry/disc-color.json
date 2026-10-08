@@ -1,0 +1,108 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "merapi",
+  "object": {
+    "source": "Gaia Collaboration, Galluccio et al. (2023), Gaia Data Release 3: Reflectance spectra of Solar System small bodies, A&A 674, A35, doi:10.1051/0004-6361/202243791, arXiv:2206.12174",
+    "locator": "Gaia archive table gaiadr3.sso_reflectance_spectrum, number_mp = 536",
+    "system": "Mean reflectance against the Sun in 16 bands from 374 to 1034 nm, normalized to 1 at 550 nm",
+    "note": "Mean of 14 epoch spectra.",
+    "reflectance": {
+      "normalizedAtNm": 550,
+      "samples": [
+        {
+          "wavelengthNm": 374,
+          "value": 0.8462677,
+          "uncertainty": 0.004403501
+        },
+        {
+          "wavelengthNm": 418,
+          "value": 0.89718086,
+          "uncertainty": 0.0022252493
+        },
+        {
+          "wavelengthNm": 462,
+          "value": 0.9463305,
+          "uncertainty": 0.0019990925
+        },
+        {
+          "wavelengthNm": 506,
+          "value": 0.9687771,
+          "uncertainty": 0.0019723526
+        },
+        {
+          "wavelengthNm": 550,
+          "value": 1,
+          "uncertainty": 0.001985119
+        },
+        {
+          "wavelengthNm": 594,
+          "value": 1.0245721,
+          "uncertainty": 0.0021712277
+        },
+        {
+          "wavelengthNm": 638,
+          "value": 1.0343704,
+          "uncertainty": 0.002333401
+        },
+        {
+          "wavelengthNm": 682,
+          "value": 1.036038,
+          "uncertainty": 0.002006811
+        },
+        {
+          "wavelengthNm": 726,
+          "value": 1.0561467,
+          "uncertainty": 0.0021136166
+        },
+        {
+          "wavelengthNm": 770,
+          "value": 1.0678284,
+          "uncertainty": 0.002174928
+        },
+        {
+          "wavelengthNm": 814,
+          "value": 1.0849586,
+          "uncertainty": 0.0022000785
+        },
+        {
+          "wavelengthNm": 858,
+          "value": 1.1009915,
+          "uncertainty": 0.002292996
+        },
+        {
+          "wavelengthNm": 902,
+          "value": 1.106955,
+          "uncertainty": 0.0022584184
+        },
+        {
+          "wavelengthNm": 946,
+          "value": 1.1165752,
+          "uncertainty": 0.0022938903
+        },
+        {
+          "wavelengthNm": 990,
+          "value": 1.1258159,
+          "uncertainty": 0.0025383658
+        },
+        {
+          "wavelengthNm": 1034,
+          "value": 1.173624,
+          "uncertainty": 0.0034972974
+        }
+      ]
+    }
+  },
+  "geometricAlbedo": {
+    "source": "JPL Small-Body Database, physical parameters of (536) Merapi",
+    "locator": "albedo; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[mainbelt] (http://adsabs.harvard.edu/abs/2014ApJ...791..121M)",
+    "band": "V",
+    "value": 0.048,
+    "uncertainty": 0.005
+  },
+  "effectiveWavelengths": {
+    "source": "The wavelength Gaia normalizes its reflectance spectra at, where the V albedo is applied",
+    "nanometres": {
+      "V": 550
+    }
+  }
+}

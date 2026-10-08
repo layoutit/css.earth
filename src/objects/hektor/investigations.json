@@ -1,0 +1,38 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hektor",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 232: selected shape and spin",
+      "status": "included",
+      "finding": "The official DAMIT metadata export was joined by model and asteroid identity and compared with the selected local recipe shape/model-232.txt. Model 232, version 2016-06-27, pole (333°, -31°), period 6.920509 h match the retained metadata. The archive diameter field is 175 ±21 km; its applicability to our scale is a separate calibration decision. This comparison checks source identity and metadata, not fresh mesh bytes, registration or the completeness of other archives.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/232",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/hektor/source/preparation/terrestrial.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/hektor/source/reference/damit-model.json"
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "survey": "surface-imagery-2",
+      "status": "unresolved",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/hektor/README.md"
+      ]
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Hektor whole-disc color",
+      "status": "included",
+      "finding": "Gaia Collaboration, Galluccio et al. (2023) published the mean of 28 Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (0.907 at 462 nm, 1.075 at 638 nm). The shape is painted in that one color (#2e2c29 in sRGB) through the shared disc-integrated-color method, scaled to the 2.5% geometric albedo JPL lists, from the reference JPL states as \"EAR-A-5-DDR-ALBEDOS-V1.0:TRIAD\". It is one mean, not a map. Tinaut-Ruano et al. (2023), A&A 669, L14, found Gaia DR3 reflectances slightly too red at wavelengths shorter than 550 nm; the bands are used as published, without that paper's correction.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243791",
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=624",
+        "https://doi.org/10.1051/0004-6361/202245134",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/hektor/source/photometry/disc-color.json"
+      ]
+    }
+  ]
+}

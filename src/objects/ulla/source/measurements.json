@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-10-08",
+  "id": "ulla",
+  "name": "Ulla",
+  "titleLabel": "Ulla",
+  "horizons": "909;",
+  "aliases": [
+    "909 Ulla"
+  ],
+  "classification": "asteroid",
+  "population": "Outer main-belt asteroid",
+  "fullAxesKm": [
+    116.44,
+    116.44,
+    116.44
+  ],
+  "radiusKm": 58.22,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 8.7155,
+  "periodText": "8.7155 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=909",
+  "periodReference": "LCDB (Rev. 2023-October); Warner et al., 2009",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=909",
+  "credit": "JPL Small-Body Database, physical parameters for 909 Ulla: diameter 116.44 ± 2.4 km; JPL's stated reference: IRAS-A-FPA-3-RDR-IMPS-V6.0",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=909"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 116.44 km diameter the JPL Small-Body Database lists for Ulla. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed color or terrain.",
+  "introduction": "K. Reinmuth found Ulla at Heidelberg on 7 February 1919.",
+  "card": "Outer main-belt asteroid found in 1919.",
+  "datasetSummary": "A sphere at the 116.44 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 3.541
+}
