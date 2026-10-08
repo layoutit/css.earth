@@ -26,6 +26,7 @@ One volume unit is one astronomical unit at the star's distance (7.70 pc). The c
 ## Evidence
 
 - The page in the application on 2026-10-06 (image above, headless Chrome, no page errors): as it opens, turned until the ring is face-on, where the star sits off its centre, and turned near edge-on, where the ring's plane passes through the star.
+- That picture predates 2026-10-08, when the image's noise began to be counted once: the fade and the light's end had counted it as 0.58 of its value. The ring before and after is the lower row of [this picture](../eps-eridani-disc/evidence/2026-10-08/noise-fix.jpg); the light now ends at 174 au in the ring's plane, not 178.
 - The author's preview of the image as drawn, north up ([previews/dust.png](source/previews/dust.png)), to compare with MacGregor et al.'s [Figure 1](https://arxiv.org/abs/1705.05867).
 - **Brightness against the paper.** At the paper's beam the ring peaks at 483 µJy per beam to the north-west, 381 to the south-east, and 226 and 222 on the short axis. The cuts in the paper's Figure 5, read from its PDF and multiplied by the beam's 2.033 square arcseconds, peak at 456, 414, 238 and 232. The ring's total is 25.6 mJy with the level inside the ring taken off (21.5 without); the paper fits 24.7.
 - [`disc-envelope.test.mts`](../../../packages/telescope-cli/authoring/circumstellar/disc-envelope.test.mts) checks point-source removal, beam smoothing and the centre depth that puts the star in the ring's plane.

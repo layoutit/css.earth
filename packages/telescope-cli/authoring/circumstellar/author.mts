@@ -31,6 +31,7 @@ import { readFitsFileHdus } from '@cssearth/fits/node';
 import { readFitsImage } from '@cssearth/fits';
 import { gunzipSync } from 'node:zlib';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { meanChannelNoise } from './channel-noise.mts';
 import { CHANNELS, reflectanceChannels, stretchOf } from './fit-figure-stretch.mts';
 import { mastDownloadUrl, mastFile } from '@cssearth/telescope/node';
 import { readImagingProgram } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
@@ -421,7 +422,7 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
   }
   // The ring is measured on the mean reflectance of the three channels; its noise is the bands' combined, in reflectance.
   const mean = Float32Array.from({ length: count }, (_, p) => (read.channels[0]![p]! + read.channels[1]![p]! + read.channels[2]![p]!) / 3);
-  const noise = Math.sqrt(CHANNELS.reduce((total, channel) => total + dataset.channels[channel].reduce((sum, band) => sum + (read.planes.get(band)!.noise / dataset.stellarFluxJy[band]!) ** 2, 0) / dataset.channels[channel].length ** 2, 0)) / 3;
+  const noise = meanChannelNoise(CHANNELS.map(channel => dataset.channels[channel]), band => read.planes.get(band)!.noise / dataset.stellarFluxJy[band]!);
   const sky: SkyPlane = { ...bands[0]!.sky, plane: mean, background: 0, noise, unit: dataset.deposit ? dataset.deposit.unit : dataset.archive ? dataset.archive.unit : 'reflectance (MJy/sr per Jy of starlight)' };
   if (dataset.geometry === 'edge-on') return buildEdgeOnDataset(recipe, dataset, sky, read.channels, bands, innerMaskUnits, registrations, inputsOnly);
   const { published } = dataset;

@@ -19,12 +19,15 @@ One volume unit is one astronomical unit at the star's Gaia DR3 distance (3.22 p
 
 ## Evidence
 
+- The ring in the application before and after the image's noise was counted once (2026-10-08, headless Chrome, no page errors; ε Eridani above, [Fomalhaut](../fomalhaut-disc/README.md) below). Until then the fade and the light's end counted the noise as 0.58 of its value, so sky down to 0.58 times the noise was drawn.
+
+  ![ε Eridani's and Fomalhaut's rings before and after the noise was counted once](evidence/2026-10-08/noise-fix.jpg)
 - The author's preview of the image as drawn, north up, at Booth et al.'s resolution and in their color scale ([previews/dust.png](source/previews/dust.png)), to compare with their [Figure 1](https://arxiv.org/abs/2303.13584).
 - [`disc-envelope.test.mts`](../../../packages/telescope-cli/authoring/circumstellar/disc-envelope.test.mts) checks point-source removal, beam smoothing and the published ring width.
 
 ## Known problems
 
-- **Fainter and noisier than the published figure.** At the same resolution and color scale, the ring's median is 24 µJy per beam and its brightest spots reach about 60. The noise is 16, so the fade leaves the ring patchy. Booth et al.'s own image is cleaner. Their clumps are not claimed here.
+- **Fainter and noisier than the published figure.** At the same resolution and color scale, the ring's median is 24 µJy per beam and its brightest spots reach about 60. The noise is 16, so the fade draws the ring's median brightness at 40%, a quarter of the ring in full and a third of it not at all, and leaves the ring patchy. Booth et al.'s own image is cleaner. Their clumps are not claimed here.
 - **The ring's geometry and width are the paper's,** not measured on this image.
 - **The thickness is a model's setting** (Wolff et al. 2025), not a measurement, and the near side rests on their coplanarity assumption.
 - **The inner warm dust is not shown.** JWST's MIRI images of it (programme 1193; Wolff et al. 2025) are a separate dataset.
