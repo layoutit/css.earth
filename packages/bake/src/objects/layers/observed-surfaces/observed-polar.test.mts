@@ -115,7 +115,7 @@ test('a measured-rows map with an ellipsoid ratio is resampled from planetograph
   assert.ok(Math.abs(asPublished.degreesNorth-45.5)<=.5,`as published the belt is at ${asPublished.degreesNorth}`);
   assert.ok(Math.abs(onMesh.degreesNorth-43.58)<=.5,`on the mesh the belt is at ${onMesh.degreesNorth}`);
   assert.deepEqual([asPublished.coverage.firstMeasuredRow,asPublished.coverage.lastMeasuredRow],[10,169]);
-  assert.ok(onMesh.coverage.firstMeasuredRow>10&&onMesh.coverage.lastMeasuredRow<169);
+  assert.ok(Number(onMesh.coverage.firstMeasuredRow)>10&&Number(onMesh.coverage.lastMeasuredRow)<169);
   assert.throws(()=>parseObservedPolarRecipe({...config,datasets:[{...dataset,planetographicAxisRatio:.9}]}),/at least 1/);
  }finally{await rm(root,{recursive:true,force:true});}
 });
