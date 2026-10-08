@@ -100,9 +100,10 @@ Earth's ENSO dataset steps through NASA's newest MUR analysis and the thirteen d
 5. It pushes `chore/enso-<date>` and opens a pull request with auto-merge on. The merge moves
    `src/objects/earth/source/science/mur/`, and that push starts the Deploy workflow.
 
-It needs one secret besides the R2 pair: `ENSO_BOT_TOKEN`, a fine-grained token for this repository with read and write
+It needs one secret besides the R2 pair: `BOT_TOKEN`, a GitHub fine-grained token for this repository with read and write
 access to contents and pull requests. A pull request opened by the workflow's own token starts no workflow, so the
-required checks would never report and it could not merge.
+required checks would never report and it could not merge. The name is general on purpose: any job that opens a pull
+request can use the same token.
 
 When a run fails, nothing is merged and the steps stay where they were; the next day's run starts from main again and
 acquires every day it is missing. A day already on the source mirror is taken from there, so a rerun downloads nothing
