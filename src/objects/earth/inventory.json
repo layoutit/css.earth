@@ -37611,6 +37611,12 @@
     },
     {
       "location": "prepared",
+      "filename": "geographic-places.json",
+      "bytes": 171,
+      "sha256": "9865590d8e8667bfa827a0b4e683ec273c079c8bc848e281e0550db6799b54e5"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps.json",
       "bytes": 1905,
       "sha256": "8205a9c494e567d52a9db3fe6219ea5b3e8d8575eb51123731c0c834c0e172c0"
@@ -37728,12 +37734,6 @@
       "filename": "minimaps/topography.webp",
       "bytes": 18160,
       "sha256": "1e44d6d70c55ef7a600e87468bf3d29a84c3d17aa229c98339901a63725a3663"
-    },
-    {
-      "location": "prepared",
-      "filename": "places.json",
-      "bytes": 171,
-      "sha256": "9865590d8e8667bfa827a0b4e683ec273c079c8bc848e281e0550db6799b54e5"
     },
     {
       "location": "prepared",
