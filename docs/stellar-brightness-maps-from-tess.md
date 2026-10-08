@@ -506,7 +506,7 @@ star nothing above gives a rotation:
 
 | Column | What the table's description and the paper say | How it is read |
 | --- | --- | --- |
-| `Type` A or B | A rotator: a star with a "secure" detection of periodic modulation. Grade A answers each of the authors' questions yes; grade B fails one. The paper limits its own analysis "to grade A and B rotators" | The paper's verdict of rotation |
+| `Type` A or B | A rotator: a star with a "secure" detection of periodic modulation. Grade A answers each of the authors' questions yes; grade B does not pass them all ("most grade B rotators fail only one criterion"). The paper limits its own analysis "to grade A and B rotators" | The paper's verdict of rotation |
 | `Type` U or N | A "possible or uncertain detection"; a "non-detection or undetermined detection" | No rotation. A candidate's period is in the table and is not read |
 | `Per` | The photometric rotation period | The star's period |
 | `Amp` | The semi-amplitude of the sinusoid, magnitudes | The light's swing: twice it, as a share of the light |
@@ -519,9 +519,10 @@ The light is the release's own. [`light-curves.mts`](../packages/telescope-cli/s
 reads the release's index of MEarth-South targets and the star's files, one a telescope, by the columns the release
 notes list. The notes say that "it is necessary to re-fit" the segment offsets "when modeling the long-term stellar
 behavior, e.g. variability", that the common mode's scale is fitted from the star's own light curve, and that they
-"strongly advise against" the file's own corrected column "for studies of stellar variability". So the correction is the paper's model, fitted by the paper's
-authors' code: sfit, at the paper's period, with the common mode as its one external parameter. What is mapped is "the
-data with the common mode and varying baseline magnitudes removed", which is what the paper's authors inspect.
+"strongly advise against" the file's own corrected column "for studies of stellar variability". So the correction is
+the paper's model, fitted by the paper's authors' code: sfit, at the paper's period, with the common mode as its one
+external parameter. What is mapped is "the data with the common mode and varying baseline magnitudes removed", which is
+what the paper's authors inspect.
 
 Eleven things on this path are this repository's, and are printed in neither paper:
 
@@ -543,9 +544,9 @@ Eleven things on this path are this repository's, and are printed in neither pap
 8. A light curve is cut into the star's seasons, where the star passes behind the Sun: the day the Sun has the star's
    right ascension, so that the star is up by day (from the Sun's mean longitude, The Astronomical Almanac's
    low-precision formula, good to two days). That day fell inside a gap of 46 to 186 days in the nights of each of the
-   four stars, at every season. A season is named by the year of its middle. The paper fits a star's years as one sinusoid, an assumption it makes for "the
-   purposes of period detection" (Sect. III.1), and shows GJ 1132's spots changing "on timescales similar to the
-   rotation period" (Sect. IV.1).
+   four stars, at every season. A season is named by the year of its middle. The paper fits a star's years as one
+   sinusoid, an assumption it makes for "the purposes of period detection" (Sect. III.1), and shows GJ 1132's spots
+   changing "on timescales similar to the rotation period" (Sect. IV.1).
 9. A season whose nights span less than one turn of the star has no map, as a Kepler star's quarter has none.
 10. A map is fitted to the first degree: one brighter and one darker side. The paper's model is one sinusoid, and a map
     of the first degree holds what a sinusoid fixes. Measured on five seasons (Proxima Centauri's four and LHS 475's
@@ -603,7 +604,7 @@ Other sources of light longer than a TESS sector were looked up on 8 October 202
 | Newton et al. (2016, ApJ 821, 93), VizieR J/ApJ/821/93 | MEarth-North, in the same release | A graded period, as in the southern paper | Its one rotator of ours, LSPM J2041+4938 (TOI-6008; grade A, 104.5 d), is flagged for a bright contaminant, and the paper leaves such stars out of its analysis. Its other 15 are 2 candidates and 13 non-detections | 16 |
 | Gaia DR3 `vari_rotation_modulation` (Distefano et al. 2023, A&A 674, A20), VizieR I/358/vrm | Gaia's epoch photometry | A rotation period, with the segments of the star's time series it was found in | Not read: it holds two of our stars (Qatar-6 and TIC 178172313), and Qatar-6's 9.49 d is not within 20% of its catalogued 12.75 d | 2 |
 | Oelkers et al. (2018, AJ 155, 39), VizieR J/AJ/155/39 table 6 | KELT, all of a star's years as one light curve | The highest periodogram peak between 0.5 and 50 days that a shuffle of the magnitudes does not beat | The paper calls its rows "possible rotation periods" and "candidate" periods, and marks none firm. Of the 22 with a period from another source, 5 are within 20% of it, 3 at half or twice it and 14 elsewhere; 8 of the 38 lie within 10% of one day | 38 |
-| Díez Alonso et al. (2019, A&A 621, A126), VizieR J/A+A/621/A126 | The public SuperWASP, ASAS and NSVS light curves, each survey's years as one | A period under a false-alarm probability of 2%, with the survey it is from | Read, not wired. Two of ours have a period on SuperWASP light: GJ 436 (44.6 d) and GJ 806 (19.9 d, half its catalogued 39 to 41 d). Two more are on ASAS light, some 60 points a year | 16 searched, 6 with a period |
+| Díez Alonso et al. (2019, A&A 621, A126), VizieR J/A+A/621/A126 | The public SuperWASP, ASAS and NSVS light curves, each survey's years as one | A period under a false-alarm probability of 2%, with the survey it is from | The paper takes each survey's years as one periodogram and names no season in which the rotation is seen, so no window of its light is one the paper stands behind. Two of ours have a period on SuperWASP light: GJ 436 (44.6 d) and GJ 806 (19.9 d, half its catalogued 39 to 41 d). Two more are on ASAS light, some 60 points a year | 16 searched, 6 with a period |
 | Briegal et al. (2022, MNRAS 513, 420), VizieR J/MNRAS/513/420 | NGTS | A rotation period | Not read: three stars (TOI-712, TOI-4662, and a source 3.8 arcseconds from TOI-4559) | 3 |
 | Hartman et al. (2011, AJ 141, 166), VizieR J/AJ/141/166 | HATNet | A period with a quality flag | Not read: two stars (GJ 3929 and TOI-1411) | 2 |
 | Lu et al. (2022, AJ 164, 251) | ZTF | A rotation period | None of ours | 0 |

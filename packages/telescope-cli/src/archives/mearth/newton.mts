@@ -14,8 +14,8 @@
  *   modulation that we assume to be attributable to stellar rotation". For grade A the authors answer yes to each of
  *   their questions: the signal is seen by eye in the binned, phase-folded light; two or more complete, near-consecutive
  *   cycles are seen; it is uncorrelated with the model's systematics and with the images' width; and light curves taken
- *   at the same time agree. A grade B rotator fails one of them, most often the first two. Both are taken: the paper
- *   limits its own analysis "to grade A and B rotators".
+ *   at the same time agree. A grade B rotator "does not pass all of our tests", and "most grade B rotators fail only
+ *   one criterion". Both are taken: the paper limits its own analysis "to grade A and B rotators".
  * - `Type` U is a "possible or uncertain detection" and N a "non-detection or undetermined detection": no rotation.
  * - `Per` is the star's rotation period and `Amp` the semi-amplitude of the fitted sinusoid, magnitudes.
  * - `Flag` 1 marks "known contamination by a common proper motion companion or background source". Such stars "are
@@ -83,7 +83,7 @@ const says = (row: NewtonRow) => `a grade ${row.grade} rotation period of ${row.
 export const NEWTON_2018: PublishedVerdict<NewtonRow, string> = { id: 'newton-2018', citation: CITATION, url: 'https://arxiv.org/abs/1807.09365', where: 'Sects. II.1 and III, and Sect. III.1 of Newton et al. (2016, ApJ 821, 93); Table 1', catalogue: 'J/AJ/156/217', table: `VizieR ${TABLE}`,
   service: VIZIER_TAP, query: `SELECT Type, "2MASS" AS twomass, RAJ2000, DEJ2000, Per, Amp, e_Amp, Flag, NPts, NDays, "F-test" AS ftest FROM "${TABLE}"`, missions: ['MEarth'],
   lightCurve: 'the star\'s MEarth-South light curves taken before 2 March 2018, with the segment baselines and the common mode of the paper\'s model fitted beside a sinusoid',
-  asks: 'to see the sinusoid of their fit by eye in the star\'s light, over two or more complete cycles and uncorrelated with the systematics of their model (grade A when each of their questions is answered yes, grade B when one is not)',
+  asks: 'to see the sinusoid of their fit by eye in the star\'s light, over two or more complete cycles and uncorrelated with the systematics of their model (grade A when each of their questions is answered yes, grade B when not all are)',
   reliability: 'The paper estimates the errors of its rotation periods at about 10%.', swing: 'twice the semi-amplitude of the sinusoid the table prints',
   parse(answered) { const rows = new Map<string, NewtonRow>();
     for (const cells of answered) { const row = parseNewtonRow(cells); if (rows.has(row.twomass)) throw new TypeError(`${TABLE}: 2MASS ${row.twomass} is listed twice.`); rows.set(row.twomass, row); }
