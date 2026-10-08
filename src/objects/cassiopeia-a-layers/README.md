@@ -29,17 +29,9 @@ ESA/Webb's NIRCam picture of the supernova remnant Cassiopeia A, drawn as the sh
 
 ## Evidence
 
-![Cassiopeia A turned: obliquely, farther round, and from above](evidence/2026-10-04/views.jpg)
+![Cassiopeia A's page as it opens, before and after the rebake of 2026-10-09: near infrared above, mid infrared below](evidence/2026-10-09/before-after.webp)
 
-The page in headless Chromium at 1440 × 900, device pixel ratio 2, on 2026-10-04, with the camera turned. No page errors.
-
-![Cassiopeia A as its page opens and at the nearest view](evidence/2026-10-04/front.jpg)
-
-The same page as it opens, and from the nearest the camera comes.
-
-![Before and after the rebake of 2026-10-09: this bank in the Earth view, and the light the MIRI bank draws inside its boundary](evidence/2026-10-09/before-after.webp)
-
-Top: this bank in the Earth view before the rebake (its stars and their spikes kept) and after it (the rounded boundary, the stars removed with their spikes). Bottom: the MIRI bank's picture, its light above the sky drawn in white and left out in green, on the old 142.8″ circle (69.9% drawn) and on the boundary (87.1%), as [its README](../cassiopeia-a-miri-layers/README.md) reports. Lab captures, headless Chromium at 1440 × 900, device pixel ratio 2.
+The page as it opens, in each Webb dataset: left, `main`'s banks (a circle, the stars and their spikes kept); right, this rebake (the rounded boundary, the outer knots beyond the shock, the stars removed with their spikes). The same Earth view and crop for all four, the site in headless Chromium at 1440 × 900, device pixel ratio 2, on 2026-10-09. No page errors. Refreshed turned and nearest views of this version follow.
 
 The bake's tests ([shape-speed.test.ts](../../../packages/bake/src/image-layers/shape-speed.test.ts), [shape-patches.test.ts](../../../packages/bake/src/image-layers/shape-patches.test.ts)) put a knot measured approaching at 12 km/s 6″ in front of the plane and one receding at 16 km/s 8″ behind it under a law of 2 km/s per arcsecond, keep an unmeasured knot on the plane, find the glow on two walls as far in front of the plane as behind it, the far one holding no less than the near one, composite the leaves in the order the stack paints them against the flat bake of the same picture, and check that two patches that share a pixel stand at the same depth there. The Ring Nebula's and NGC 2392's banks, baked again with this code, are the same as published, file for file.
 

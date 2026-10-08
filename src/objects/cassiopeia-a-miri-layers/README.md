@@ -32,15 +32,7 @@ ESA/Webb's mid-infrared picture of the supernova remnant Cassiopeia A, as a shel
 
 ## Evidence
 
-![Cassiopeia A in Webb's mid-infrared picture, turned: obliquely, farther round, and from above](evidence/2026-10-05/views.jpg)
-
-The page with this dataset selected, in headless Chromium at 1440 × 900, device pixel ratio 2, on 2026-10-05, with the camera turned. No page errors.
-
-![The same dataset as the page opens on it, at the nearest view, and there turned](evidence/2026-10-05/front.jpg)
-
-The same dataset as the page opens on it, from the nearest the camera comes, and from there turned.
-
-Both pictures are of the bank before 2026-10-09, drawn to the 142.8″ circle with its stars. The rebake of 2026-10-09 was checked in the lab (Earth view, turned 60°, and the Original beside them, headless Chromium at 1440 × 900, device pixel ratio 2, no page errors) and by the scans below; its pictures stay in ignored `output/cas-a-miri/`.
+The page as it opens in this dataset, before and after the rebake of 2026-10-09, is the lower row of [the near-infrared bank's evidence](../cassiopeia-a-layers/README.md#evidence). The rebake was also checked in the lab (Earth view, turned 60°, and the Original beside them, headless Chromium at 1440 × 900, device pixel ratio 2, no page errors) and by the scans below. Refreshed turned and nearest views of this version follow.
 
 The bake code this rebake added: the filled part standing for the frame (`fadeOutline.filledCornersPixels`; [shape-speed.test.ts](../../../packages/bake/src/image-layers/shape-speed.test.ts) draws a picture lit everywhere inside a diamond's corners, and nothing past them where the frame alone would), the generator's `--bank` (the NIRCam table it writes is the same, byte for byte), and the star pass's green and size limits ([star-color.test.ts](../../../labs/nebula/packages/reconstruction/src/star-removal/star-color.test.ts) gives a blue-green knot back that red alone would take).
 
