@@ -93,9 +93,10 @@ Earth's ENSO dataset steps through NASA's newest MUR analysis and the thirteen d
 
 1. `refresh-earth-enso.mts` reads the days GIBS has published. With no new day the run ends there.
 2. It downloads the new day's 3,200 tiles, drops the day that left and rewrites Earth's declarations.
-3. `prepare-object.mts earth --add-datasets` bakes the new day alone. Every other Earth file keeps its content address;
-   the run fails if one would change.
-4. It publishes the new day's files and its tile archive to R2 from the `r2-publish` environment.
+3. It mirrors the new day's tile archive and receipt to R2 from the `r2-publish` environment, one
+   `publish-source-cache.mts --file=… --key=earth/science/mur/<date>/…` call each.
+4. `prepare-object.mts earth --add-datasets` bakes the new day alone, and `publish-runtime-assets.mts` publishes its
+   files. Every other Earth file keeps its content address; the run fails if one would change.
 5. It pushes `chore/enso-<date>` and opens a pull request with auto-merge on. The merge moves
    `src/objects/earth/source/science/mur/`, and that push starts the Deploy workflow.
 
@@ -105,8 +106,10 @@ required checks would never report and it could not merge.
 
 When a run fails, nothing is merged and the steps stay where they were; the next day's run starts from main again and
 acquires every day it is missing. A day already on the source mirror is taken from there, so a rerun downloads nothing
-from NASA twice. To move the steps by hand, run the commands the job runs: the refresh, the `--add-datasets` bake, then
-`publish-source-cache.mts --object=earth` and `publish-runtime-assets.mts --object=earth --since=origin/main`.
+from NASA twice. To move the steps by hand, run the commands the job runs: the refresh, the two mirror calls for each
+new day, the `--add-datasets` bake, then `publish-runtime-assets.mts --object=earth --since=origin/main`.
+`publish-source-cache.mts --object=earth` mirrors Earth's downloaded inputs but not the tile archives, which the
+manifest lists as generated intermediates.
 
 ## Keep the PR path lean without dropping proof
 

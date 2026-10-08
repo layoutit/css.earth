@@ -2,8 +2,9 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/earth/refresh-earth-enso.mts. Moves Earth's ENSO sequence to the newest NASA MUR
 // anomaly analysis GIBS has published and the thirteen days before it: it acquires each date it does not hold yet, drops the
 // dates that left it, re-reads the NOAA advisory and rewrites every declaration the datasets are made from. Preparation then
-// bakes the declared dates offline (pnpm prepare:objects --object=earth), and the new tile archives go to the source mirror
-// (packages/bake/cli/publish-source-cache.mts --object=earth).
+// bakes the new dates alone (node packages/bake/cli/prepare-object.mts earth --add-datasets), and each new date's tile
+// archive and receipt go to the source mirror, one call each (packages/bake/cli/publish-source-cache.mts
+// --file=<path> --key=earth/science/mur/<date>/<name>); --object=earth does not mirror the archives.
 import { readJsonSource } from '@cssearth/bake/objects/sources';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseEnsoAdvisory, parseMurReceipt } from '@cssearth/bake/objects/layers/paged-ellipsoid';
