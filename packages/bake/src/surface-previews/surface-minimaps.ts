@@ -5,7 +5,7 @@ import { coverageDirection } from '../objects/default-view/index.ts';
 import type {SurfacePreviewDirectories} from './surface-preview-source.ts';
 import {optionalPreviewJson as optionalJson,parsePreviewControls,parsePreviewSurface} from './surface-preview-source.ts';
 const parseMinimapFraming=shape({centerLongitudeDegrees:optional(number),excludeDatasets:optional(array(text))});
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { createSurfaceInterpreter, parseInterpreterRecipe, selectSurfaceDependencies, type InterpreterRecipe } from '../objects/interpretation/index.ts';
@@ -54,6 +54,35 @@ async function minimapCoverage(pipeline:Sharp, leftEdgeLongitudeDeg:number, exac
 const roundedDirection = (direction: readonly number[]) => direction.map(value => Math.round(value * 1e4) / 1e4);
 const minimapResize = (nearest:boolean):ResizeOptions => ({ width: 640, withoutEnlargement: true,
   ...(nearest ? { kernel: 'nearest' } : {}) });
+
+/** A paged globe's reuse run that added datasets (`added`): draw their minimaps from their own imagery, keep the published
+ * ones of the datasets that remain, in the order the datasets are declared, and delete those of datasets that left. */
+export async function addPagedSurfaceMinimaps(directories:SurfacePreviewDirectories, added:readonly string[]) {
+  const { outputDirectory } = directories;
+  const existing = await optionalJson(resolve(outputDirectory, 'minimaps.json'));
+  const previous = new Map(requireArray(existing?.images ?? []).map(value => ({ ...requireRecord(value), ...shape({ id: text, path: text, width: number, height: number })(value) })).map(image => [image.id, image] as const));
+  const drawn = new Map<string, { id:string; path:string; width:number; height:number; coverage?:number[] }>();
+  await mkdir(resolve(outputDirectory, 'minimaps'), { recursive: true });
+  if (added.length) for await (const preview of recipeSurfacePreviews({ ...directories, only: new Set(added) })) {
+    const path = `minimaps/${preview.id}.webp`;
+    const pipeline = sharp(preview.raster.data, { raw: preview.raster.info }).resize({ width: 640, withoutEnlargement: true });
+    const coverage = await minimapCoverage(pipeline, 0);
+    const result = await writeMinimap(pipeline, false, resolve(outputDirectory, path));
+    drawn.set(preview.id, { id: preview.id, path, width: result.width, height: result.height, ...(coverage ? { coverage } : {}) });
+  }
+  if (drawn.size !== new Set(added).size) throw new TypeError(`Added datasets without a paged surface map: ${added.filter(id => !drawn.has(id)).join(', ')}.`);
+  const [controls, datasets, bindings] = await Promise.all([
+    optionalJson(resolve(outputDirectory, 'controls.json')),
+    optionalJson(resolve(outputDirectory, 'datasets.json')),
+    optionalJson(resolve(directories.objectDirectory, 'source/content/dataset-bindings.json')),
+  ]);
+  const declared = datasets ? parsePreviewControls(datasets).controls : [];
+  const images = declared.flatMap(dataset => { const image = drawn.get(dataset.id) ?? previous.get(dataset.id); return image ? [image] : []; });
+  assertSurfacePreviewCoverage(controls?.datasets ? parsePreviewControls(controls.datasets).controls : [], images, [...declared, ...(bindings ? parsePreviewControls(bindings).controls : [])]);
+  for (const image of previous.values()) if (!images.some(kept => kept.path === image.path)) await rm(resolve(outputDirectory, image.path), { force: true });
+  await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images }) + '\n');
+  return images;
+}
 
 // A dedicated sidebar asset: never transport a globe-resolution map for a minimap.
 /** `solarGeometry` is the generated scene geometry (`src/platform/solar-geometry.mts`) the host loads and passes in. */

@@ -1,7 +1,7 @@
 import { requirePreparedData } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { mkdtemp, writeFile } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
@@ -79,6 +79,28 @@ test('a bank prepared at lower density places its pages on the same CSS offsets 
   // Earth's cutaway shell: its pages are a quarter of the surface's width, but tile the same CSS pages.
   assert.deepEqual(coarse!.tiles?.['page:outer:1'], { ...coarse!.tiles?.['page:normal:1'], scale: coarse!.tiles?.['page:outer:1']?.scale });
   assert.equal(coarse!.tiles?.['page:outer:1']?.x, coarse!.tiles?.['page:normal:1']?.x);
+});
+
+test('a carried page is read, not encoded again: the record is the full run\'s and only the new bank\'s files are written', async () => {
+  const config = { textureLevels: { widths: [16, 32, 64], hysteresis: 0.2, texelsPerCssPixel: 2 }, atlas: { pageSize: 64, density: 16 },
+    camera: { logicalBodyDiameter: 460 }, publicBase: '/scenes/test/' };
+  const banks = [{ id: 'normal', urls: ['/scenes/test/test-surface.webp', '/scenes/test/test-surface-page-1.webp'] }, { id: 'monday', urls: ['/scenes/test/test-monday.webp', '/scenes/test/test-monday-page-1.webp'] }];
+  const page = (background: string) => sharp({ create: { width: 64, height: 64, channels: 4, background } }).webp({ lossless: true }).toBuffer();
+  const fill = async (directory: string, names: readonly string[]) => { for (const [at, name] of names.entries()) await writeFile(join(directory, name), await page(at % 2 ? '#406080' : '#808080')); };
+  const pages = banks.flatMap(bank => bank.urls.map(url => url.slice(config.publicBase.length)));
+  const full = await mkdtemp(join(tmpdir(), 'texture-levels-full-')), added = await mkdtemp(join(tmpdir(), 'texture-levels-added-'));
+  await fill(full, pages);
+  const whole = await prepareTextureLevels({ publicDirectory: full, config, banks });
+  // The adding run starts from the published files of the first bank and the new bank's pages alone.
+  const published = (await readdir(full)).filter(name => name.startsWith('test-surface'));
+  for (const name of published) await writeFile(join(added, name), await readFile(join(full, name)));
+  await fill(added, pages.slice(2));
+  const before = new Map(await Promise.all(published.map(async name => [name, (await stat(join(added, name))).mtimeMs] as const)));
+  const carried = await prepareTextureLevels({ publicDirectory: added, config, banks, carried: url => url.includes('test-surface') });
+  assert.deepEqual(carried, whole);
+  assert.deepEqual((await readdir(added)).sort(), (await readdir(full)).sort());
+  for (const name of await readdir(full)) assert.ok((await readFile(join(added, name))).equals(await readFile(join(full, name))), name);
+  for (const [name, time] of before) assert.equal((await stat(join(added, name))).mtimeMs, time, `${name} was written again`);
 });
 
 test('a reuse run keeps the published levels of the banks it still declares and drops a removed dataset\'s', () => {

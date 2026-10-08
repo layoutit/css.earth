@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { requireRecord } from '@cssearth/core';
 import { projectRoot } from '@cssearth/core/node';
 const scripts = requireRecord(requireRecord(JSON.parse(await readFile(resolve(projectRoot(import.meta.url), 'package.json'), 'utf8'))).scripts);
-import { PREPARATION_STEPS } from '@cssearth/bake/prepare-object';
+import { ADD_DATASETS_STEPS, PREPARATION_STEPS } from '@cssearth/bake/prepare-object';
 
 test('deploy generation and object authoring place the object with the same world-context command', async () => {
   assert.ok(scripts['prepare:world-context']);
@@ -21,6 +21,10 @@ test('reuse-images preparation reaches the authored preparation only when asked'
   assert.deepEqual(await prepare.commands(['earth']), [['node', 'site/build/prepare/authored/prepare-authored.ts', 'earth', '--write']]);
   assert.deepEqual(await prepare.commands(['earth'], { reuseImages: true }),
     [['node', 'site/build/prepare/authored/prepare-authored.ts', 'earth', '--write', '--reuse-images']]);
+  assert.deepEqual(await prepare.commands(['earth'], { addDatasets: true }),
+    [['node', 'site/build/prepare/authored/prepare-authored.ts', 'earth', '--write', '--reuse-images', '--add-datasets']]);
+  // An add-datasets run keeps the chain's order and stops at the reader text: no world file, no billboard, no pin.
+  assert.deepEqual(PREPARATION_STEPS.map(step => step.name).filter(name => ADD_DATASETS_STEPS.includes(name)), [...ADD_DATASETS_STEPS]);
 });
 
 test('several objects run each tool once: the id-list tools take every id, the authored preparation runs per object, the Sun and the world files are re-pinned last', async () => {

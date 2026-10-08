@@ -18,10 +18,9 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { RUNTIME_ASSET_ORIGIN, sourceCacheKey, sourceFormatProblem } from '@cssearth/bake/objects/sources';
-import { verifyPublished, reportVerification, type PublishAsset } from '@cssearth/bake/delivery';
+import { expectedContentType, verifyPublished, reportVerification, type PublishAsset } from '@cssearth/bake/delivery';
 
 const BUCKET = 'cssearth-assets';
-const CONTENT_TYPE = 'application/octet-stream';
 const CACHE_CONTROL = 'public,max-age=31536000,immutable';
 const projectRoot = resolve(import.meta.dirname, '../../..');
 
@@ -35,7 +34,8 @@ function run(command: string, args: readonly string[]): Promise<void> {
 
 async function uploadOne(asset: PublishAsset): Promise<void> {
   await run('npx', ['--yes', 'wrangler@4.129.0', 'r2', 'object', 'put', `${BUCKET}/${asset.key}`,
-    '--file', asset.file, '--remote', '--content-type', CONTENT_TYPE, '--cache-control', CACHE_CONTROL]);
+    // The type the verification expects of the key: a JSON record sent as octet-stream was reported missing on every run.
+    '--file', asset.file, '--remote', '--content-type', expectedContentType(asset.key), '--cache-control', CACHE_CONTROL]);
 }
 
 /** A local file and the mirror key a restorer asks for it by. */

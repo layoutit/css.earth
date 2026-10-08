@@ -93,7 +93,10 @@ export function keepTextureLevelWidths(levels: PreparedTextureLevels, widths: re
       sheets: levels.provenance.sheets.filter(sheet => urls.has(sheet.url)) } };
 }
 
-export async function prepareTextureLevels({ config, plan, datasets, publicDirectory, banks: selectedBanks }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string;surface?:{maps:readonly {name:string;maximumTextureWidth?:number}[]}};plan?:SurfaceBankPlan;datasets?:SurfaceBankDatasets;publicDirectory:string;banks?:readonly TextureLevelBank[]}) {
+/** `carried` names a page or pole atlas whose levels and sheets are already published in `publicDirectory` (a reuse run that
+ * adds datasets, object.ts): only its dimensions are read, and nothing of it is encoded or written again. The returned
+ * record is the one a run that encodes everything returns. */
+export async function prepareTextureLevels({ config, plan, datasets, publicDirectory, banks: selectedBanks, carried }: {config: {textureLevels?:TextureLevelConfiguration;atlas:{pageSize:number;density:number};camera:{logicalBodyDiameter:number};publicBase:string;surface?:{maps:readonly {name:string;maximumTextureWidth?:number}[]}};plan?:SurfaceBankPlan;datasets?:SurfaceBankDatasets;publicDirectory:string;banks?:readonly TextureLevelBank[];carried?:(url:string)=>boolean}) {
   if (!config.textureLevels) return null;
   const { widths, fixedWidth, maximumWidth, hysteresis, texelsPerCssPixel } = config.textureLevels;
   const canonicalWidth = config.atlas.pageSize;
@@ -131,11 +134,11 @@ export async function prepareTextureLevels({ config, plan, datasets, publicDirec
         if (!Number.isInteger(targetWidth)) throw new TypeError(`Atlas level dimensions differ: ${url}`);
         const divisor = width / targetWidth, padding = (divisor - height % divisor) % divisor;
         const targetUrl = targetWidth === width ? url : `${config.publicBase}${basename(url, '.webp')}-level-${targetWidth}.webp`;
-        let output: Buffer = source, outputHeight = height;
-        if (targetWidth !== width) {
+        let output: Buffer = source;
+        const outputHeight = targetWidth === width ? height : (height + padding) / divisor;
+        if (targetWidth !== width && !carried?.(url)) {
           // Raw intermediate forces extension to happen before resize in sharp.
           const padded = await sharp(source).ensureAlpha().extend({ bottom: padding, background: '#00000000' }).raw().toBuffer({ resolveWithObject: true });
-          outputHeight = (height + padding) / divisor;
           // A level is encoded the way its page is: a lossless page's levels stay lossless, a lossy page's go through
           // the lossy lane (lossy-lane.ts), so a smaller level never costs more per texel than the full page.
           const reduced = sharp(padded.data, { raw: padded.info }).resize(targetWidth, outputHeight, { kernel: 'lanczos3' });
@@ -174,17 +177,19 @@ export async function prepareTextureLevels({ config, plan, datasets, publicDirec
       let sheet = sheetUrls.get(cacheKey);
       if (!sheet) {
         const url = `${config.publicBase}${basename(bank.urls[0]!, '.webp')}-sheet-${levelWidth}.webp`, scale = levelWidth / canonicalWidth;
-        const parts = await Promise.all(bank.urls.map(async (page, p) => {
-          replaced.add(urls.get(page)![i]!.url);
-          // From the full page, reduced once and kept lossless until the sheet is encoded: its own lossy level would be
-          // encoded twice.
-          const full = await readFile(resolve(publicDirectory, page.slice(config.publicBase.length)));
-          const input = await sharp(full).ensureAlpha().resize(dimensions[p]!.width * scale, dimensions[p]!.height * scale, { kernel: 'lanczos3' }).png().toBuffer();
-          return { input, left: packed.positions[p]!.x * scale, top: packed.positions[p]!.y * scale };
-        }));
-        const canvas = sharp({ create: { width: side, height: side, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).composite(parts);
-        const output = dimensions[0]!.lossless ? await canvas.webp({ lossless: true, effort: 4 }).toBuffer() : await encodeLossyWebp(sharp(await canvas.png().toBuffer()), { alphaQuality: 100, effort: 4 });
-        await writeFile(resolve(publicDirectory, url.slice(config.publicBase.length)), output);
+        for (const page of bank.urls) replaced.add(urls.get(page)![i]!.url);
+        if (!bank.urls.every(page => carried?.(page))) {
+          const parts = await Promise.all(bank.urls.map(async (page, p) => {
+            // From the full page, reduced once and kept lossless until the sheet is encoded: its own lossy level would be
+            // encoded twice.
+            const full = await readFile(resolve(publicDirectory, page.slice(config.publicBase.length)));
+            const input = await sharp(full).ensureAlpha().resize(dimensions[p]!.width * scale, dimensions[p]!.height * scale, { kernel: 'lanczos3' }).png().toBuffer();
+            return { input, left: packed.positions[p]!.x * scale, top: packed.positions[p]!.y * scale };
+          }));
+          const canvas = sharp({ create: { width: side, height: side, channels: 4, background: { r: 0, g: 0, b: 0, alpha: 0 } } }).composite(parts);
+          const output = dimensions[0]!.lossless ? await canvas.webp({ lossless: true, effort: 4 }).toBuffer() : await encodeLossyWebp(sharp(await canvas.png().toBuffer()), { alphaQuality: 100, effort: 4 });
+          await writeFile(resolve(publicDirectory, url.slice(config.publicBase.length)), output);
+        }
         sheets.push({ url, side, pages: bank.urls.map((source, p) => ({ source, ...packed.positions[p]! })) });
         const key = `sheet:${bank.id}:level:${levelWidth}`;
         entries.push({ key, url, decodedBytes: side * side * 4, pool: 'pages' });

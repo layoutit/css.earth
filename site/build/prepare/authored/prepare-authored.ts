@@ -20,7 +20,7 @@ import { loadGeometryAdapters, presentationHostAdapters } from '@cssearth/bake/o
 import { prepareRuntimeManifest } from '@cssearth/bake/delivery';
 import { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } from './prepare-world-navigation.ts';
 import { worldFile } from '../world/world-files.mts';
-import { attachSurfaceFeatures, longitudeDistanceDeg, measureAtlasLeftEdge, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
+import { attachSurfaceFeatures, longitudeDistanceDeg, measureAtlasLeftEdge, parseSurfaceFeaturesConfig, writeFeatureContent } from '@cssearth/bake/objects/surface-features';
 import { loadNativePhotograph } from '@cssearth/bake/objects/layers/terrestrial';
 
 export interface AuthoredPreparationContext { readonly objectDirectory: string; readonly publicDirectory: string; readonly outputDirectory: string; readonly write?: boolean;
@@ -29,10 +29,15 @@ export interface AuthoredPreparationContext { readonly objectDirectory: string; 
   /** Reuse the published heavy outputs and prepare only the presentation; supported by the paged-ellipsoid lane. */
   readonly reuseImages?: boolean;
   /** Recipe sources the author states changed without feeding the reused outputs (reuse-images runs). */
-  readonly acceptChanged?: readonly string[]; }
+  readonly acceptChanged?: readonly string[];
+  /** A reuse-images run that also prepares the surface datasets the published preparation does not hold, and carries the
+   * published material banks; supported by the paged-ellipsoid lane. */
+  readonly addDatasets?: boolean; }
 export interface AuthoredPreparationResult { readonly descriptor: AuthoredObjectDescriptor; readonly sources: ReadonlyMap<string, VerifiedSource>; readonly raster?: unknown; readonly celestial?: unknown; readonly scene?: unknown; readonly definition?: unknown;
   /** Public images a reuse-images run redrew from the recipe (the paged-ellipsoid material banks); they may change. */
-  readonly recomputedImages?: readonly string[]; }
+  readonly recomputedImages?: readonly string[];
+  /** The datasets an add-datasets run prepared, and every public image they brought. */
+  readonly addedDatasets?: readonly string[]; readonly addedImages?: readonly string[]; }
 type Input = Record<string, unknown>;
 
 function record(value: unknown, at: string): Input { return readNonArrayRecord(value, at, () => { throw new TypeError(`${at} must be an object.`); }); }
@@ -77,14 +82,16 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 }
 
 /** Verify authored source pins, then prepare each available generic capability lane. */
-export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = write, reuseImages = false, acceptChanged = [] }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
-  const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, reuseImages, acceptChanged });
+export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = write, reuseImages = false, acceptChanged = [], addDatasets = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
+  const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, reuseImages, acceptChanged, addDatasets });
   if (write || !result.definition) return result;
-  const { prepareSurfaceMinimaps } = await import('@cssearth/bake/surface-previews');
+  const { prepareSurfaceMinimaps, addPagedSurfaceMinimaps } = await import('@cssearth/bake/surface-previews');
   // Minimaps render from the raw imagery; a reuse-images stage already carries the published ones. An object with no
   // surface has no map to draw.
   const surfaced = result.descriptor.recipe.surfaces.length > 0;
   if (!reuseImages && surfaced) await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, solarGeometry: await solarGeometry() });
+  // An add-datasets stage draws the new datasets' minimaps from their own imagery and drops those of datasets that left.
+  if (addDatasets && surfaced) await addPagedSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory }, result.addedDatasets ?? []);
   if (!reuseImages && surfaced) await assertMapsStartAtSurfaceMapEdge(objectDirectory, outputDirectory);
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
   await assertDefaultViewsFaceDatasets(objectDirectory, prepared.definition as Record<string, unknown>, prepared.frame);
@@ -162,7 +169,7 @@ async function assertDefaultViewsFaceDatasets(objectDirectory: string, definitio
 /** Feature anchors address scene-tree nodes, so they carry over only while the tree keeps the published node topology. A node's
  * style and the shared declaration table may change (a leaf's raster size, say) without moving any node. When nodes move
  * (a removed dataset's cutaway), `null` asks the caller to anchor them afresh: that reads only tracked JSON and the scene. */
-function carryPublishedFeatures(definition: Record<string, unknown>, published: { runtime: Record<string, unknown>; content: Record<string, unknown> }) {
+function carryPublishedFeatures(definition: Record<string, unknown>, published: { runtime: Record<string, unknown>; content: Record<string, unknown> }, datasetIds?: readonly string[]) {
   if (published.runtime.features === undefined) return { definition, features: null };
   // Finalization appends nodes and activation groups to the lane's tree; the lane's own tree must be the published prefix.
   const tree = record(definition.tree, 'prepared tree'), previous = record(published.runtime.tree, 'published tree');
@@ -175,11 +182,13 @@ function carryPublishedFeatures(definition: Record<string, unknown>, published: 
     : key === 'nodes' ? topology(previousNodes.slice(0, nodes.length)) !== topology(nodes)
       : JSON.stringify(previous[key]) !== JSON.stringify(value);
   if (Object.entries(tree).some(differs)) return null;
-  return { definition: { ...definition, features: published.runtime.features },
+  // The anchors sit on the body, not on a dataset: a run that added or dropped datasets carries them and names the datasets
+  // the feature recipe lists now.
+  return { definition: { ...definition, features: datasetIds ? { ...record(published.runtime.features, 'published features'), datasetIds } : published.runtime.features },
     features: record(published.content.features, 'published feature content') as unknown as Parameters<typeof writeFeatureContent>[1] };
 }
 
-async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = false, reuseImages = false, acceptChanged = [] }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
+async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = false, reuseImages = false, acceptChanged = [], addDatasets = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   if (write) {
     const id = record(parseObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8'))), 'descriptor').id;
     if (typeof id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid preparation identity.');
@@ -223,14 +232,14 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
           await Promise.all([cp(resolve(outputDirectory, 'arrival-billboard.json'), resolve(stagedData, 'arrival-billboard.json')), cp(resolve(publicDirectory, image), resolve(stagedPublic, image))]);
         }
       }
-      const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, replaceReviewedImages, reuseImages, acceptChanged });
+      const result = await prepareAuthoredObject({ objectDirectory, publicDirectory: stagedPublic, outputDirectory: stagedData, replaceReviewedImages, reuseImages, acceptChanged, addDatasets });
       if (!result.definition) throw new TypeError('Preparation produced no runtime payload.');
       // Palette legend labels are derived from the stretch this run just measured: refresh them, repin, and prepare again.
       const legend = await stagedLegendLabelChanges(objectDirectory, stagedData);
       if (legend.changes.length) {
         await writeFile(legend.contentPath, `${JSON.stringify(legend.refreshed, null, 2)}\n`);
         console.log(`refreshed legend labels ${legend.summary}`);
-        return await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, reuseImages, acceptChanged });
+        return await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, reuseImages, acceptChanged, addDatasets });
       }
       const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'site/build/prepare/authored/prepare-object-json.mts')).href) as typeof import('./prepare-object-json.mts');
       const finalized = await finalizeObjectJson(id, result.definition, { projectRoot, objectDirectory, preparedDirectory: stagedData,
@@ -258,9 +267,11 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
           const recomputed = [...(result.recomputedImages ?? []), ...Object.entries(rasterRecipe?.atmosphere ?? {})
             .filter(([key, value]) => key.endsWith('Output') && typeof value === 'string').map(([, value]) => outputName(value as string, RASTER_DENSITY))].map(pattern);
           const redrawn = (filename: string) => recomputed.some(output => output.test(filename));
-          // A removed dataset drops its images: the run may leave published images out, never add or change others.
+          // A removed dataset drops its images: the run may leave published images out, never add or change others. An
+          // add-datasets run brings the images of the datasets it prepared, and only those.
           const removed = (filename: string) => existing.has(filename) && !staged.has(filename);
-          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !removed(filename) && !lighting.has(filename) && !(redrawn(filename) && existing.has(filename) && staged.has(filename)));
+          const brought = new Set(result.addedImages ?? []), added = (filename: string) => brought.has(filename) && !existing.has(filename) && staged.has(filename);
+          const unexpected = changed.filter(filename => !chartOutputs.has(filename) && !removed(filename) && !added(filename) && !lighting.has(filename) && !(redrawn(filename) && existing.has(filename) && staged.has(filename)));
           if (unexpected.length || !changed.length)
             throw new Error(`${id}: the presentation changed the published image set (${unexpected.join(', ') || 'order only'}); run the full preparation.`);
         }
@@ -281,6 +292,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     !['terrestrial', 'shape-model'].some(id => source(sources, id)) &&
     ![LAYERED_OBLATE_SCHEMA, BANDED_ELLIPSOID_SCHEMA].includes(String((source(sources, 'geometry')?.value as Record<string, unknown> | undefined)?.schema));
   if (reuseImages && !source(sources, 'paged-ellipsoid') && !genericRasterLane) throw new TypeError(`${descriptor.id}: --reuse-images supports the paged-ellipsoid and raster lanes only.`);
+  if (addDatasets && !(reuseImages && source(sources, 'paged-ellipsoid'))) throw new TypeError(`${descriptor.id}: --add-datasets is a reuse-images run of the paged-ellipsoid lane.`);
   const genericLaneOnly = () => { if (descriptor.recipe.features) throw new TypeError('Surface features are prepared by the generic authored lane only.'); };
   await mkdir(outputDirectory, { recursive: true });
   const sourceDirectory = resolve(objectDirectory, 'source');
@@ -309,9 +321,10 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
       runtime: record(parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true }), 'published runtime'),
       content: readPreparedPanelContentRecord(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8'))) } : null;
     const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets,
-      solarGeometry: await solarGeometry(), assetWorker: pathToFileURL(resolve(process.cwd(), 'packages/bake/cli/paged-ellipsoid-asset-worker.mts')), reuseImages, acceptChanged });
+      solarGeometry: await solarGeometry(), assetWorker: pathToFileURL(resolve(process.cwd(), 'packages/bake/cli/paged-ellipsoid-asset-worker.mts')), reuseImages, acceptChanged, addDatasets });
     // Named features anchor on the rendered ellipsoid (attach.ts casts map directions through the lane's own surface sampler).
-    const attached = (publishedFeatures && carryPublishedFeatures(prepared.definition as unknown as Record<string, unknown>, publishedFeatures))
+    const featureDatasets = addDatasets && descriptor.recipe.features ? parseSurfaceFeaturesConfig(required(sources, descriptor.recipe.features.source).value).datasetIds : undefined;
+    const attached = (publishedFeatures && carryPublishedFeatures(prepared.definition as unknown as Record<string, unknown>, publishedFeatures, featureDatasets))
       ?? await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition: prepared.definition as unknown as Record<string, unknown> });
     if (attached.features) { await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(attached.definition)}\n`); await writeFeatureContent(outputDirectory, attached.features); }
     const definition = attached.definition as typeof prepared.definition;
@@ -527,9 +540,10 @@ const [id, ...flags] = process.argv.slice(2);
 const direct = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (direct) {
   const accepting = flags.find(flag => flag.startsWith('--accept-changed='));
-  if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || flags.some(flag => flag !== '--write' && flag !== '--reuse-images' && flag !== '--full' && flag !== accepting) || new Set(flags).size !== flags.length ||
-      ((flags.includes('--reuse-images') || flags.includes('--full')) && !flags.includes('--write')) || (flags.includes('--reuse-images') && flags.includes('--full')) || (accepting && !flags.includes('--reuse-images')))
-    throw new TypeError('Usage: prepare-authored <object-id> [--write [--full | --reuse-images [--accept-changed=<source-id,...>]]].');
+  if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || flags.some(flag => flag !== '--write' && flag !== '--reuse-images' && flag !== '--add-datasets' && flag !== '--full' && flag !== accepting) || new Set(flags).size !== flags.length ||
+      ((flags.includes('--reuse-images') || flags.includes('--full')) && !flags.includes('--write')) || (flags.includes('--reuse-images') && flags.includes('--full')) || (accepting && !flags.includes('--reuse-images')) ||
+      (flags.includes('--add-datasets') && !flags.includes('--reuse-images')))
+    throw new TypeError('Usage: prepare-authored <object-id> [--write [--full | --reuse-images [--add-datasets] [--accept-changed=<source-id,...>]]].');
   let acceptChanged = accepting ? accepting.slice('--accept-changed='.length).split(',').filter(Boolean) : [];
   if (acceptChanged.some(source => !/^[a-z][a-z0-9-]*$/u.test(source))) throw new TypeError('--accept-changed takes recipe source ids.');
   const root = process.cwd(), write = flags.includes('--write');
@@ -540,7 +554,7 @@ if (direct) {
     if (decision.redraw) { reuseImages = true; acceptChanged = decision.acceptChanged; }
     console.log(decision.redraw ? `${id}: redrawing only the lighting and atmosphere banks (${decision.reason}); --full bakes everything.` : `${id}: full preparation (${decision.reason}).`);
   }
-  const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'site/public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write, reuseImages, acceptChanged });
+  const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'site/public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write, reuseImages, acceptChanged, addDatasets: flags.includes('--add-datasets') });
   if (!write) {
     // A check run refuses labels its own report contradicts; write mode rewrites them.
     const legend = await stagedLegendLabelChanges(resolve(root, 'src/objects', id), resolve(root, '.local/full-json-migration/staged', id));

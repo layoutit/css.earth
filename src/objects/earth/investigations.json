@@ -125,9 +125,9 @@
     },
     {
       "id": "mur-enso-imagery",
-      "subject": "NASA GIBS MUR v4.1 sea-surface temperature anomaly images: the newest analysis and the same weekday one and two weeks before",
+      "subject": "NASA GIBS MUR v4.1 sea-surface temperature anomaly images: the newest analysis and the thirteen days before it",
       "status": "included",
-      "finding": "The ENSO view steps through the newest daily analysis and the same weekday one and two weeks before it on the 1 km GIBS imagery grid of 40,960 by 20,480 pixels: 3,200 tiles per date that must attest the requested layer and date unless decoded alpha shows no observations, with the pinned NASA color table supplying 0.1 degree bins and saturation below -3 and at +3 degrees. RGB is not inverted into continuous measurements; transparent land, ice and unavailable observations stay gray. The maps and the dated NOAA advisory are as current as the last refresh, not a live feed.",
+      "finding": "The ENSO view steps through the newest daily analysis and the thirteen days before it on the 1 km GIBS imagery grid of 40,960 by 20,480 pixels: 3,200 tiles per date that must attest the requested layer and date unless decoded alpha shows no observations, with the pinned NASA color table supplying 0.1 degree bins and saturation below -3 and at +3 degrees. RGB is not inverted into continuous measurements; transparent land, ice and unavailable observations stay gray. The maps and the dated NOAA advisory are as current as the last refresh, not a live feed.",
       "evidence": [
         "https://doi.org/10.5067/GHGMR-4FJ04"
       ]

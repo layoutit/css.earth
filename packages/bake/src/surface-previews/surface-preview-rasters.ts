@@ -36,7 +36,7 @@ export function assertSurfacePreviewCoverage(controls:readonly {id:string;volume
 }
 
 /** Small previews for preparation recipes that do not publish surfaces.json. */
-export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory, outputDirectory }:SurfacePreviewDirectories) {
+export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory, outputDirectory, only }:SurfacePreviewDirectories & { only?: ReadonlySet<string> }) {
   const config = (name:string) => optionalJson(resolve(objectDirectory, 'source/preparation', `${name}.json`));
   const [rawObservations, rawPaged, rawSpectral, rawGeometry, rawDatasets] = await Promise.all([
     ...['observations', 'paged-ellipsoid', 'surface', 'geometry'].map(config),
@@ -72,6 +72,8 @@ export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory,
     for (const map of paged.surface.maps) {
       const dataset = datasets.controls.find(l => l.thumbnailUrl === `${paged.publicBase}${map.thumbnail}`);
       if (!dataset) throw new Error(`Surface preview has no dataset: ${map.name}`);
+      // `only` names the paged datasets to draw: the ones a reuse run added, whose imagery is the only imagery it holds.
+      if (only && !only.has(dataset.id)) continue;
       // A small preview wants the canonical adjusted map, the one the README
       // says every Earth view shares, not the untouched source grid the page
       // bake samples per output coordinate.
