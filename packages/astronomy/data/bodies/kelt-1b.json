@@ -1,0 +1,31 @@
+{
+ "id": "kelt-1b",
+ "classification": "exoplanet",
+ "order": 5822,
+ "physical": {
+  "name": "KELT-1 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 79356.1,
+  "gravitationalParameterKm3PerS2": 3449674263.64,
+  "parent": "kelt-1"
+ },
+ "physicalNotes": "Radius 1.11 Jupiter radii from Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract): 79,356.1 km at 71,492 km per Jupiter radius. GM from the mass 27.23 Jupiter masses (Siverd et al. 2012, the mass the NASA Exoplanet Archive's composite table adopts (2012ApJ...761..123S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.2174936,
+  "semiMajorAxisStellarRadii": 3.6048,
+  "inclinationDegrees": 87.8,
+  "eccentricity": 0.0099,
+  "argumentOfPeriapsisDegrees": 61,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 60609.536941,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.2174936 d",
+   "shape": "Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive ps table (pl_refname SIVERD_ET_AL__2012): a/R* derived from its semi-major axis 0.02466 au and stellar radius 1.471 solar radii; Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive ps table (pl_refname SIVERD_ET_AL__2012): inclination 87.8 degrees",
+   "eccentricity": "Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive ps table (pl_refname SIVERD_ET_AL__2012): e 0.0099",
+   "argumentOfPeriapsis": "Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive ps table (pl_refname SIVERD_ET_AL__2012): omega 61 degrees",
+   "phase": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460610.036941 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

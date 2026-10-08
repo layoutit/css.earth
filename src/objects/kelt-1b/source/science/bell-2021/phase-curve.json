@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Bell et al. (2021), MNRAS 504, 3316, 'A comprehensive reanalysis of Spitzer's 4.5 um phase curves, and the phase variations of the ultra-hot Jupiters MASCARA-1b and KELT-16b' (doi:10.1093/mnras/stab1027; arXiv:2010.00687). Spitzer IRAC 4.5 um phase curve of KELT-1b, program 11095, first published by Beatty et al. (2019) and reanalysed here. Values read from the authors' LaTeX source: the table of preferred SPCA model parameters (tab:preferred), row KELT-1b, detector model BLISS. The preferred fit is first order (the caption of its figure names the mode BLISS_v1 with PSF centroiding), so the printed semi-amplitude and offset are the whole phase variation (section 4.1: semi-amplitude sqrt(C1^2 + D1^2), offset east -arctan2(D1, C1)). The figure's file name carries no PSFX suffix and section 6.2 says the comparison keeps the FWM-centroiding fits, so the text does not settle which centroiding the table row used; either way the fit is BLISS, first order.",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.0742,
+    "cell": "0.0742 +/- 0.0014",
+    "where": "tab:preferred, KELT-1b, R_p/R_*"
+  },
+  "eclipseDepth": {
+    "value": 0.0024,
+    "cell": "2400 +/- 120 ppm",
+    "where": "tab:preferred, KELT-1b, F_p/F_*"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "F_p = F_day [1 + C1 (cos psi - 1) + D1 sin psi], psi counted from mid-eclipse (section 4.1), printed as its semi-amplitude and the offset east of its maximum.",
+    "semiAmplitude": {
+      "value": 0.00102,
+      "cell": "1020 +/- 110 ppm",
+      "where": "tab:preferred, KELT-1b, Semi-Amplitude"
+    },
+    "offsetDegreesEast": {
+      "value": 3.8,
+      "cell": "3.8 +6.8/-6.1 degrees east",
+      "where": "tab:preferred, KELT-1b, Max Flux Offset"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 3240,
+      "cell": "3240 +/- 140 K",
+      "where": "tab:preferred, KELT-1b, T_day"
+    },
+    "nightsideK": {
+      "value": 1350,
+      "cell": "1350 +230/-260 K",
+      "where": "tab:preferred, KELT-1b, T_night"
+    },
+    "offsetDegrees": {
+      "value": 3.8,
+      "cell": "3.8 +6.8/-6.1 degrees east",
+      "where": "tab:preferred, KELT-1b, Max Flux Offset"
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "host": "kelt-1",
+  "planets": [
+    {
+      "id": "kelt-1b",
+      "name": "KELT-1 b",
+      "description": "Transiting planet of KELT-1 with a 1.22-day year, found in 2012.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract",
+        "credit": "Siverd et al. 2012"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SIVERD_ET_AL__2012"
+      },
+      "text": {
+        "card": "KELT-1 b was found in 2012 by KELT as it crossed its star.",
+        "introduction": "It is the only planet known around KELT-1. Its orbit and size follow Siverd et al. 2012's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SIVERD_ET_AL__2012): disc_year 2012, disc_facility KELT, sy_pnum 1; pl_orbper 1.2174936, pl_radj 1.11, pl_bmassj 27.23"
+      },
+      "thermal": {
+        "temperatureK": 2943,
+        "uncertaintyK": 118,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer IRAC",
+        "source": "Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "phaseCurves": [
+        {
+          "dataset": "temperature",
+          "label": "Spitzer",
+          "path": "science/bell-2021/phase-curve.json",
+          "url": "https://arxiv.org/abs/2010.00687",
+          "credit": "Bell et al. (2021)",
+          "observed": "a Spitzer IRAC 4.5 µm phase curve (program 11095, first published by Beatty et al. (2019))",
+          "record": {
+            "schema": "cssearth-published-phase-curve@1",
+            "source": "Bell et al. (2021), MNRAS 504, 3316, 'A comprehensive reanalysis of Spitzer's 4.5 um phase curves, and the phase variations of the ultra-hot Jupiters MASCARA-1b and KELT-16b' (doi:10.1093/mnras/stab1027; arXiv:2010.00687). Spitzer IRAC 4.5 um phase curve of KELT-1b, program 11095, first published by Beatty et al. (2019) and reanalysed here. Values read from the authors' LaTeX source: the table of preferred SPCA model parameters (tab:preferred), row KELT-1b, detector model BLISS. The preferred fit is first order (the caption of its figure names the mode BLISS_v1 with PSF centroiding), so the printed semi-amplitude and offset are the whole phase variation (section 4.1: semi-amplitude sqrt(C1^2 + D1^2), offset east -arctan2(D1, C1)). The figure's file name carries no PSFX suffix and section 6.2 says the comparison keeps the FWM-centroiding fits, so the text does not settle which centroiding the table row used; either way the fit is BLISS, first order.",
+            "wavelengthMicrons": 4.5,
+            "radiusRatio": {
+              "value": 0.0742,
+              "cell": "0.0742 +/- 0.0014",
+              "where": "tab:preferred, KELT-1b, R_p/R_*"
+            },
+            "eclipseDepth": {
+              "value": 0.0024,
+              "cell": "2400 +/- 120 ppm",
+              "where": "tab:preferred, KELT-1b, F_p/F_*"
+            },
+            "model": {
+              "kind": "amplitude-offset",
+              "equation": "F_p = F_day [1 + C1 (cos psi - 1) + D1 sin psi], psi counted from mid-eclipse (section 4.1), printed as its semi-amplitude and the offset east of its maximum.",
+              "semiAmplitude": {
+                "value": 0.00102,
+                "cell": "1020 +/- 110 ppm",
+                "where": "tab:preferred, KELT-1b, Semi-Amplitude"
+              },
+              "offsetDegreesEast": {
+                "value": 3.8,
+                "cell": "3.8 +6.8/-6.1 degrees east",
+                "where": "tab:preferred, KELT-1b, Max Flux Offset"
+              }
+            },
+            "reported": {
+              "daysideK": {
+                "value": 3240,
+                "cell": "3240 +/- 140 K",
+                "where": "tab:preferred, KELT-1b, T_day"
+              },
+              "nightsideK": {
+                "value": 1350,
+                "cell": "1350 +230/-260 K",
+                "where": "tab:preferred, KELT-1b, T_night"
+              },
+              "offsetDegrees": {
+                "value": 3.8,
+                "cell": "3.8 +6.8/-6.1 degrees east",
+                "where": "tab:preferred, KELT-1b, Max Flux Offset"
+              }
+            }
+          }
+        }
+      ],
+      "order": 5822
+    }
+  ]
+}

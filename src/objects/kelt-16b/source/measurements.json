@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kelt-16b",
+  "radiusKm": 101161.2,
+  "radiusSource": "Radius 1.415 Jupiter radii from Oberst et al. 2017 (2017AJ....153...97O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract): 101,161.2 km at 71,492 km per Jupiter radius. GM from the mass 2.75 Jupiter masses (Oberst et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153...97O), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 0.968992962,
+  "orbitalPeriodSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 0.968992962 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of KELT-16 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "2.75 Jupiter masses: Oberst et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153...97O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract)."
+}

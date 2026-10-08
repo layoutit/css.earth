@@ -46,6 +46,11 @@
       "title": "Dayside heat",
       "detail": "From its dayside temperature",
       "summary": "The color of a black body at the 1,360 K day side measured in eclipse."
+    },
+    "temperature": {
+      "title": "JWST heat map",
+      "detail": "Published fit",
+      "summary": "Heat across 3.8–5.2 µm from the paper's phase-curve fit. It varies only with longitude: the data hold no north-south detail."
     }
   }
 }

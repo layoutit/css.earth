@@ -1,0 +1,47 @@
+{
+  "id": "kelt-1",
+  "name": "KELT-1",
+  "system": "KELT-1 system",
+  "description": "Star of 6,516 K, 268 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "KELT-1",
+  "gaia": "2881784280929695360",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract",
+    "credit": "Siverd et al. 2012"
+  },
+  "radius": {
+    "value": 1.471,
+    "source": "Siverd et al. 2012, the stellar radius of the default parameter set of KELT-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract",
+    "uncertainty": 0.045
+  },
+  "mass": {
+    "value": 1.335,
+    "source": "Siverd et al. 2012, the stellar mass of the default parameter set of KELT-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract",
+    "uncertainty": 0.063
+  },
+  "temperature": {
+    "value": 6516,
+    "source": "Siverd et al. 2012, the stellar temperature of the default parameter set of KELT-1 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract",
+    "uncertainty": 49
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "KELT-1 b crosses KELT-1 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Siverd et al. 2012.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SIVERD_ET_AL__2012): st_teff 6516, st_rad 1.471, st_mass 1.335",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/KELT-1",
+      "title": "KELT-1",
+      "revision": "1374864236",
+      "card": "KELT-1 is a F-type main-sequence star.",
+      "introduction": "Its surface temperature is 6518±50 K. It is similar to the Sun in its concentration of heavy elements, with a metallicity Fe/H index of 0.008±0.073, but is much younger at an age of 1.75±0.25 billion years."
+    }
+  },
+  "notes": [],
+  "order": 5821
+}

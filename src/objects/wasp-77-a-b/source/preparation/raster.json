@@ -28,6 +28,42 @@
         "kind": "dayside-thermal-color",
         "qualification": "Color of a black body at the dayside brightness temperature 1,815 K measured in secondary eclipse at 3.6 µm (Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included. Its black-body color lies outside the sRGB gamut and is shown mixed with 1% white, the least that brings it inside, hue kept."
       }
+    },
+    {
+      "id": "temperature",
+      "output": "wasp-77-a-b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-77-a-b-dataset-{id}.webp",
+      "source": "science/davenport-2025/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Spitzer",
+        "format": "published-phase-curve-map",
+        "path": "science/davenport-2025/phase-curve.json",
+        "consumer": "temperature-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1100,
+        "maximum": 1900,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "1100",
+          "1500",
+          "1900"
+        ],
+        "description": "Brightness temperature at 4.5 µm from the paper's phase-curve fit, turned into a map of longitude. It has no north-south information.",
+        "title": "Spitzer · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/2503.12521"
+      }
     }
   ],
   "lighting": {

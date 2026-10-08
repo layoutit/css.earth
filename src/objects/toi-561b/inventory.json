@@ -16,14 +16,26 @@
     {
       "location": "public",
       "filename": "toi-561b-arrival.webp",
-      "bytes": 35454,
-      "sha256": "2efebfb330f5a0215ca9be5758801b425ed8d916578d02559f18810161f87ba9"
+      "bytes": 35652,
+      "sha256": "adf3c2a2e4037e7c7ffaff4992614f46d9f5a0885f7d2cf64ffbb26a61e44a78"
     },
     {
       "location": "public",
       "filename": "toi-561b-billboard.webp",
-      "bytes": 6122,
-      "sha256": "bb6402fea463b8a8169e38da749b7dd08faaa1c70acf1797d65b0281279a331b"
+      "bytes": 6048,
+      "sha256": "7c83e8e14caf61912b18b226a19c9df68864e6c67d792b64938e603c249c6e4b"
+    },
+    {
+      "location": "public",
+      "filename": "toi-561b-dataset-temperature-nrs1.webp",
+      "bytes": 142,
+      "sha256": "cfaf467042c66ef5d31d731eb11a8e5f2dd55bd2d8cbdf56b5fe4e0e81ebd1ef"
+    },
+    {
+      "location": "public",
+      "filename": "toi-561b-dataset-temperature-nrs2.webp",
+      "bytes": 178,
+      "sha256": "43c7f7b1b3d09820e597e184d9f71a1f66ecab289756e79dc648a888c8b7ae6b"
     },
     {
       "location": "public",
@@ -33,9 +45,33 @@
     },
     {
       "location": "public",
+      "filename": "toi-561b-poles-temperature-nrs1@2x.webp",
+      "bytes": 46158,
+      "sha256": "4b0479f0d4146a95a024cd5cda25543718e9fbc87c3f700f9895101a5f3aa237"
+    },
+    {
+      "location": "public",
+      "filename": "toi-561b-poles-temperature-nrs2@2x.webp",
+      "bytes": 42960,
+      "sha256": "dd44637a4f27b6092e6de9e6c8aa7c9c43931edea04ee96140a0756b5f9090a3"
+    },
+    {
+      "location": "public",
       "filename": "toi-561b-poles-thermal@2x.webp",
       "bytes": 1340,
       "sha256": "dd2957d3b9abd3d475df7990df051a382273673c0d820e1442c0aa270c7d4c0e"
+    },
+    {
+      "location": "public",
+      "filename": "toi-561b-surface-temperature-nrs1@2x.webp",
+      "bytes": 17302,
+      "sha256": "70e350bb7648f9e79672e40ff3eb1519be6ea2da6df588699bef9ca9f6c5b1d5"
+    },
+    {
+      "location": "public",
+      "filename": "toi-561b-surface-temperature-nrs2@2x.webp",
+      "bytes": 15034,
+      "sha256": "d7b4cfab736d2eaad9053a03765f235735b06010176e35e4a304ea7a275f575d"
     },
     {
       "location": "public",
@@ -58,14 +94,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 308,
-      "sha256": "b2a8c1f1e8f19c27e1583fc815f6087923049dac4affd4fba0e32abfff8b4b9a"
+      "bytes": 317,
+      "sha256": "d21076cea5d23170148e26b23d8f817c1994f34e655bfc1f341afc07f74242dd"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 18482,
-      "sha256": "c82e446457ae98af24467a8b44d1b4a123b9b3c5dffc6c0384f64e30e37defea"
+      "bytes": 18880,
+      "sha256": "f51326e2105983b1468e44eeb45edfb1f132e97f9041a62a58fa17ef2c9aecea"
     },
     {
       "location": "prepared",
@@ -82,26 +118,38 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 447,
-      "sha256": "a58f7c93c0a265aed9fa4cc52d0c0add1d3a4a4ae7b211376ca7448717cbb010"
+      "bytes": 3261,
+      "sha256": "26a2c1263b52dd2f9b3e3d10b6576010da74c8957bce443aa20cce38a9efd4dd"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 834,
-      "sha256": "a099bb9d5bd9e7b6bfe2d3e0db84b2967a6ceb4605bfe98756714b0306f17117"
+      "bytes": 4918,
+      "sha256": "9ae63843e1a62b65e728382818da1c02e27f619190adbf903272fdf6c71d0d7e"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 105,
-      "sha256": "0329ce05b6c076dedc8654dde581417112c5b6e48b98dd4c45917eab12308ad6"
+      "bytes": 335,
+      "sha256": "13dbce12aa9a499505b6b704417e656a61126c140279ed6968113a0bd4a10ca1"
     },
     {
       "location": "prepared",
       "filename": "minimaps/shape.webp",
       "bytes": 450,
       "sha256": "5b4ee042a51597fabce45c7a2e53e930139467db62f147f50cdd8f4ae117d5f8"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature-nrs1.webp",
+      "bytes": 1514,
+      "sha256": "7a5f210089cbb9b8092b2475182ef3a8c22b80534a87d47d8591e963e0814d5a"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature-nrs2.webp",
+      "bytes": 1298,
+      "sha256": "25bfcfddc118e593460d4503db2cf191225c1c94ea136383c7608d342b65b6eb"
     },
     {
       "location": "prepared",
@@ -112,8 +160,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 272819,
-      "sha256": "371a0a5b488486bf877e013c03a08e3faf749aaa25ed649301ebe9efc5a5cec3"
+      "bytes": 280671,
+      "sha256": "8af63bf2935992bc900a5b67b9bfcb082a573a5ff91bb126474431d7aca70a98"
     },
     {
       "location": "prepared",
@@ -136,8 +184,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1927,
-      "sha256": "5478933147480a4fdeb663aefaa2e569bac67724f0df367f4fbc3b5f2fdf2558"
+      "bytes": 2363,
+      "sha256": "4567ceccd5d34ae5667b9bf03beaa6d1355744ca6dc58b964d5f589417cc7904"
     },
     {
       "location": "prepared",

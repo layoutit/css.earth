@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "corot-2b",
+  "parent": "corot-2-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CoRoT-2 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 104807.3
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "CoRoT-2 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 43984180.8,
+      "description": "CoRoT-2 b was found in 2008 by CoRoT as it crossed its star.",
+      "systemName": "CoRoT-2 system",
+      "order": 5817,
+      "context": {
+        "order": 5817
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2440417337159245000,
+        -6108578156259330000,
+        158882728669415500
+      ],
+      "presentationToReference": [
+        0.40179244430444716,
+        -0.9156869451683028,
+        -0.00895824470526941,
+        -0.9154127108577523,
+        -0.40189148277304165,
+        0.022423310963085936,
+        0.024132975363991546,
+        0.0008090258510792278,
+        0.999708429982089
+      ],
+      "orbitUpReference": [
+        0.9156869451683028,
+        0.40189148277304165,
+        -0.0008090258510792278
+      ],
+      "metersPerUnit": 338088.06451612903,
+      "bodyRadiusM": 104807300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

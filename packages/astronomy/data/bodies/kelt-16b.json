@@ -1,0 +1,28 @@
+{
+ "id": "kelt-16b",
+ "classification": "exoplanet",
+ "order": 5824,
+ "physical": {
+  "name": "KELT-16 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 101161.2,
+  "gravitationalParameterKm3PerS2": 348387962.73,
+  "parent": "kelt-16"
+ },
+ "physicalNotes": "Radius 1.415 Jupiter radii from Oberst et al. 2017 (2017AJ....153...97O), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract): 101,161.2 km at 71,492 km per Jupiter radius. GM from the mass 2.75 Jupiter masses (Oberst et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153...97O), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 0.968992962,
+  "semiMajorAxisStellarRadii": 3.23,
+  "inclinationDegrees": 84.4,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 58392.097691,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 0.968992962 d",
+   "shape": "Oberst et al. 2017 (2017AJ....153...97O), via the NASA Exoplanet Archive ps table (pl_refname OBERST_ET_AL__2017): a/R* 3.23; Oberst et al. 2017 (2017AJ....153...97O), via the NASA Exoplanet Archive ps table (pl_refname OBERST_ET_AL__2017): inclination 84.4 degrees",
+   "eccentricity": "Oberst et al. 2017 (2017AJ....153...97O), via the NASA Exoplanet Archive ps table (pl_refname OBERST_ET_AL__2017): e 0",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458392.597691 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

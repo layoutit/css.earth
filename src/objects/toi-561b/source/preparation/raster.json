@@ -28,6 +28,78 @@
         "kind": "dayside-thermal-color",
         "qualification": "Color of a black body at the dayside brightness temperature 2,048 K measured in secondary eclipse at 4 µm (Boucher et al. 2026, dayside temperature of the combined NIRSpec G395H phase-curve fit, 2048 +193 -206 K), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
       }
+    },
+    {
+      "id": "temperature-nrs2",
+      "output": "toi-561b-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-561b-dataset-{id}.webp",
+      "source": "science/boucher-2026/phase-curve-nrs2.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-nrs2",
+        "label": "JWST 4.5 µm",
+        "format": "published-phase-curve-map",
+        "path": "science/boucher-2026/phase-curve-nrs2.json",
+        "consumer": "temperature-nrs2-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 1600,
+        "maximum": 2250,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "1600",
+          "1925",
+          "2250"
+        ],
+        "description": "Brightness temperature across 3.8–5.1 µm from the paper's phase-curve fit, turned into a map of longitude. It has no north-south information.",
+        "title": "JWST 4.5 µm · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/2608.21519"
+      }
+    },
+    {
+      "id": "temperature-nrs1",
+      "output": "toi-561b-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-561b-dataset-{id}.webp",
+      "source": "science/boucher-2026/phase-curve-nrs1.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature-nrs1",
+        "label": "JWST 3.2 µm",
+        "format": "published-phase-curve-map",
+        "path": "science/boucher-2026/phase-curve-nrs1.json",
+        "consumer": "temperature-nrs1-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 450,
+        "maximum": 2100,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "450",
+          "1275",
+          "2100"
+        ],
+        "description": "Brightness temperature across 2.7–3.7 µm from the paper's phase-curve fit, turned into a map of longitude. It has no north-south information.",
+        "title": "JWST 3.2 µm · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/2608.21519"
+      }
     }
   ],
   "lighting": {

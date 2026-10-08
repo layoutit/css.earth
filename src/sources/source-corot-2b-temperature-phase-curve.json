@@ -1,0 +1,35 @@
+{
+  "id": "source-corot-2b-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "CoRoT-2 b · corot 2b temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2010.00687",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/corot-2b/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bell et al. (2021); a Spitzer IRAC 4.5 µm phase curve (program 11073, first published by Dang et al. (2018))",
+      "scope": "The corot 2b temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

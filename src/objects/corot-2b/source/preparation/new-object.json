@@ -1,0 +1,96 @@
+{
+  "host": "corot-2",
+  "planets": [
+    {
+      "id": "corot-2b",
+      "name": "CoRoT-2 b",
+      "description": "Transiting planet of CoRoT-2 with a 1.74-day year, found in 2008.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G/abstract",
+        "credit": "Gillon et al. 2010"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "GILLON_ET_AL__2010"
+      },
+      "text": {
+        "card": "CoRoT-2 b was found in 2008 by CoRoT as it crossed its star.",
+        "introduction": "It is the only planet known around CoRoT-2. Its orbit and size follow Gillon et al. 2010's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILLON_ET_AL__2010): disc_year 2008, disc_facility CoRoT, sy_pnum 1; pl_orbper 1.74299845482, pl_radj 1.466, pl_bmassj 3.47",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/CoRoT-2b",
+          "title": "CoRoT-2b",
+          "revision": "1374889179",
+          "card": "CoRoT-2b is the second extrasolar planet to be detected by the French-led CoRoT mission, and orbits the star CoRoT-2 at a distance of 700 light-years from Earth towards the constellation Aquila.",
+          "introduction": "Its discovery was announced on 20 December 2007."
+        }
+      },
+      "thermal": {
+        "temperatureK": 1890,
+        "uncertaintyK": 350,
+        "wavelengthMicrometres": 2.15,
+        "facility": "Isaac Newton Group (ING) 4.2m William Herschel Telescope (WHT) at Observatorio del Roque de los Muchachos LIRIS",
+        "source": "Alonso et al. 2010, dayside brightness temperature at 2.15 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010AJ....139.1481A/abstract",
+        "chosen": "1 measured of 6 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "phaseCurves": [
+        {
+          "dataset": "temperature",
+          "label": "Spitzer",
+          "path": "science/bell-2021/phase-curve.json",
+          "url": "https://arxiv.org/abs/2010.00687",
+          "credit": "Bell et al. (2021)",
+          "observed": "a Spitzer IRAC 4.5 µm phase curve (program 11073, first published by Dang et al. (2018))",
+          "record": {
+            "schema": "cssearth-published-phase-curve@1",
+            "source": "Bell et al. (2021), MNRAS 504, 3316, 'A comprehensive reanalysis of Spitzer's 4.5 um phase curves, and the phase variations of the ultra-hot Jupiters MASCARA-1b and KELT-16b' (doi:10.1093/mnras/stab1027; arXiv:2010.00687). Spitzer IRAC 4.5 um phase curve of CoRoT-2b, program 11073, first published by Dang et al. (2018) and reanalysed here. Values read from the authors' LaTeX source: the table of preferred SPCA model parameters (tab:preferred), row CoRoT-2b, detector model Poly4. The preferred fit is first order (the caption of its figure names the mode Poly4_v1), so the printed semi-amplitude and offset are the whole phase variation (section 4.1: semi-amplitude sqrt(C1^2 + D1^2), offset east -arctan2(D1, C1)). CoRoT-2 is one of the three systems the paper corrects for a nearby star's light (section 4.1, Dilution Correction; tab:dilution gives C_corr = 1.2046 for CoRoT-2, applied to the radius ratio as sqrt(C_corr) and to the dayside flux as C_corr); tab:preferred does not say in its caption that its cells carry the correction.",
+            "wavelengthMicrons": 4.5,
+            "radiusRatio": {
+              "value": 0.1704,
+              "cell": "0.1704 +0.0014/-0.0017",
+              "where": "tab:preferred, CoRoT-2b, R_p/R_*"
+            },
+            "eclipseDepth": {
+              "value": 0.00488,
+              "cell": "4880 +200/-190 ppm",
+              "where": "tab:preferred, CoRoT-2b, F_p/F_*"
+            },
+            "model": {
+              "kind": "amplitude-offset",
+              "equation": "F_p = F_day [1 + C1 (cos psi - 1) + D1 sin psi], psi counted from mid-eclipse (section 4.1), printed as its semi-amplitude and the offset east of its maximum.",
+              "semiAmplitude": {
+                "value": 0.00268,
+                "cell": "2680 +160/-130 ppm",
+                "where": "tab:preferred, CoRoT-2b, Semi-Amplitude"
+              },
+              "offsetDegreesEast": {
+                "value": -38.7,
+                "cell": "-38.7 +/- 3.2 degrees east",
+                "where": "tab:preferred, CoRoT-2b, Max Flux Offset"
+              }
+            },
+            "reported": {
+              "daysideK": {
+                "value": 1756,
+                "cell": "1756 +44/-43 K",
+                "where": "tab:preferred, CoRoT-2b, T_day"
+              },
+              "nightsideK": {
+                "value": 873,
+                "cell": "873 +51/-41 K",
+                "where": "tab:preferred, CoRoT-2b, T_night"
+              },
+              "offsetDegrees": {
+                "value": -38.7,
+                "cell": "-38.7 +/- 3.2 degrees east",
+                "where": "tab:preferred, CoRoT-2b, Max Flux Offset"
+              }
+            }
+          }
+        }
+      ],
+      "order": 5817
+    }
+  ]
+}

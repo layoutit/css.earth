@@ -1,0 +1,35 @@
+{
+  "id": "source-toi-561b-temperature-nrs1-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TOI-561 b · toi 561b temperature nrs1 phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2608.21519",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/toi-561b/source/manifest.json",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Boucher et al. (2026); a JWST NIRSpec G395H phase curve of 1-3 May 2024 (program 3860), the NRS1 detector's white light",
+      "scope": "The toi 561b temperature nrs1 phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

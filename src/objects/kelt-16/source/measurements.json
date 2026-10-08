@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "kelt-16",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 946,152 km at 445.01 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 445.0072390331426,
+  "distanceSource": "Gaia DR3 parallax 2.2472 +/- 0.0133 mas (same row, RUWE 1.04): 445.01 pc, no zero-point correction",
+  "radiusKm": 946152,
+  "radiusSource": "Radius 1.36 +/- 0.064 solar radii from Oberst et al. 2017, the stellar radius of the default parameter set of KELT-16 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract): 946,152 km at 695,700 km per solar radius. Mass 1.211 +/- 0.043 solar masses from Oberst et al. 2017, the stellar mass of the default parameter set of KELT-16 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract); GM is that mass times the JPL solar GM. Temperature 6236 +/- 54 K from Oberst et al. 2017, the stellar temperature of the default parameter set of KELT-16 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6236,
+  "effectiveTemperatureSource": "Oberst et al. 2017, the stellar temperature of the default parameter set of KELT-16 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract)",
+  "surfaceGravityLogg": 4.25,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/kelt-16.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.254, rounded to two decimals",
+  "spectralType": "F7 V",
+  "spectralTypeSource": "NASA Exoplanet Archive, composite parameters of KELT-16 (pscomppars): spectral type F7 V, from Oberst et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract)",
+  "objectType": "Star",
+  "objectTypePath": "*",
+  "objectTypeSource": "SIMBAD, KELT-16: main object type *, Star",
+  "metallicityDex": -0.002,
+  "metallicitySource": "NASA Exoplanet Archive, composite parameters of KELT-16 (pscomppars): [Fe/H] -0.002 dex, from Oberst et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract)",
+  "luminosityLogSolar": 0.401,
+  "luminositySource": "NASA Exoplanet Archive, composite parameters of KELT-16 (pscomppars): log10 of the luminosity in solar units 0.4014, from Oberst et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract)",
+  "ageGyr": 3.1,
+  "ageSource": "NASA Exoplanet Archive, composite parameters of KELT-16 (pscomppars): age 3.1 Gyr, from Oberst et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract)",
+  "projectedRotationSpeedKmS": 7.6,
+  "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of KELT-16 (pscomppars): projected rotation speed 7.6 km/s, from Oberst et al. 2017 (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hat-p-7b",
+  "displayName": "HAT-P-7 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.5 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "2.2 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.8 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 3,100 K. The disc itself is unresolved.",
+        "thumbnail": "hat-p-7b-dataset-thermal.webp",
+        "surface": "hat-p-7b-surface-thermal@2x.webp",
+        "poles": "hat-p-7b-poles-thermal@2x.webp",
+        "source": {
+          "id": "hat-p-7b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...710...97C/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of HAT-P-7 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 8 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · Bell et al. (2021) · a Spitzer IRAC 4.5 µm phase curve (program 60021, first published by Wong et al. (2016)) · longitude only",
+        "thumbnail": "hat-p-7b-dataset-temperature.webp",
+        "surface": "hat-p-7b-surface-temperature@2x.webp",
+        "poles": "hat-p-7b-poles-temperature@2x.webp",
+        "source": {
+          "id": "hat-p-7b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2010.00687"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "2200",
+            "2725",
+            "3250"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "2200",
+              "2725",
+              "3250"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2010.00687"
+        },
+        "notes": "Brightness temperature at 4.5 µm of HAT-P-7 b from Bell et al. (2021)'s published fit to a Spitzer IRAC 4.5 µm phase curve (program 60021, first published by Wong et al. (2016)). Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 57° west of noon. The false color runs from 2,200 to 3,250 K. With shadows on, the star's light darkens the night half."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hat-p-7b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hat-p-7b/hat-p-7b-system-orbits.svg",
+      "alt": "The orbits of HAT-P-7's planets in this map from above, to scale, with HAT-P-7 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hat-p-7b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S"
+      }
+    },
+    {
+      "id": "hat-p-7b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/hat-p-7b/hat-p-7b-transit.svg",
+      "alt": "HAT-P-7 b crossing its star, as TESS recorded it: 3 sectors (75, 81, 82) of the SPOC pipeline's 2-minute light curves of TIC 424865156, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 16-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "hat-p-7b-tess-sector-75",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024030031500-s0075-0000000424865156-0270-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Stassun et al. 2017",
+      "href": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+      "credit": "Stassun et al. 2017"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hat-p-7b.json",
+      "credit": "Radius from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive; mass from Stassun et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153..136S), via the NASA Exoplanet Archive; orbit from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hat-p-7b",
+  "radiusKm": 107952.9,
+  "radiusSource": "Radius 1.51 Jupiter radii from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 107,952.9 km at 71,492 km per Jupiter radius. GM from the mass 1.84 Jupiter masses (Stassun et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153..136S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 2.2047354,
+  "orbitalPeriodSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 2.2047354 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of HAT-P-7 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "1.84 Jupiter masses: Stassun et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153..136S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)."
+}

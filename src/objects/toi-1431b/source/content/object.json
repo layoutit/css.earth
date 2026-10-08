@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "thermal",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "thermal",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "Nobody has measured TOI-1431 b's heat. This is the color of a black body at 2,370 K, the equilibrium temperature its paper computes from its star's light (Addison et al. 2021, equilibrium temperature (NASA Exoplanet Archive planetary systems table)). On 120 hot Jupiters whose day side Spitzer measured, the measured temperature is within 20% of this kind of estimate for 83% (Deming et al. 2023). Its star lights the day side. Reflected starlight is not included."
+      },
+      {
+        "id": "temperature",
+        "label": "TESS",
+        "qualification": "Published fit · Addison et al. (2021) · a TESS red-optical (0.60-0.95 µm) phase curve from Sectors 15 and 16, 15 August to 7 October 2019 · longitude only",
+        "thumbnail": "toi-1431b-dataset-temperature.webp",
+        "surface": "toi-1431b-surface-temperature@2x.webp",
+        "poles": "toi-1431b-poles-temperature@2x.webp",
+        "source": {
+          "id": "toi-1431b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2104.12078"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "2500",
+            "2775",
+            "3050"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "2500",
+              "2775",
+              "3050"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2104.12078"
+        },
+        "notes": "Brightness temperature across 0.6–1 µm of TOI-1431 b from Addison et al. (2021)'s published fit to a TESS red-optical (0.60-0.95 µm) phase curve from Sectors 15 and 16, 15 August to 7 October 2019. Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The model holds the hottest longitude at noon: the paper fitted no shift. TESS sees visible light, and the paper turns it into temperature assuming the planet reflects none of its star's light; for an albedo up to 0.2 it prints day sides from 2,700 to 3,100 K. The false color runs from 2,500 to 3,050 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },

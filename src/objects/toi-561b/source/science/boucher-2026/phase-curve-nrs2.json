@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Boucher, Dang, McGinty, Teske et al. (2026), 'A Highly Reflective Atmosphere on the Lava World TOI-561b Revealed by JWST/NIRSpec Phase Curve' (arXiv:2608.21519v2, accepted for publication in AJ; no DOI on arXiv yet). JWST NIRSpec G395H, GO program 3860, one continuous 37-hour visit from 2024 May 1 11:16 UT to May 3 00:37 UT covering four eclipses and three transits; the same data and reductions as the eclipse-only paper of Teske et al. (2025, ApJL 995, L39, doi:10.3847/2041-8213/ae0a4c, arXiv:2509.17231). Values read from the authors' LaTeX source, Eureka! reduction, which is the one the paper presents: the phase-variation equation of section 4.1 (equation:phasevariation), the table of white-light-curve fit results in appendix B (tab:bestfit_eureka_vs_jedi, column Eureka! NRS2) for R_P/R_*, A and B, and the table of day-to-night results (tab:phasecurveresults, row NRS2) for F_day/F_*, T_day, T_night and the phase offset. This record is the NRS2 detector's white-light fit. The paper fits the two detectors separately and prints no preferred one; they disagree: NRS1 gives a day side of 1970 +273/-320 K, a night side below 1388 K at 2 sigma and a peak 17.0 degrees before eclipse, NRS2 the values below. The paper's combined day side (2048 +193/-206 K), night side (1089 +175/-379 K), Bond albedo (0.74 +0.08/-0.10) and heat redistribution (0.18 +0.14/-0.15) are a joint temperature inference over both detectors with no phase-curve fit of its own (the row NRS1 U NRS2 prints dashes for the fit). The model is first order, Phi_P = 1 + A (cos xi - 1) + B sin xi from mid-eclipse, so A and B are the reader's C1 and D1 as fractions of the day-side flux. Both NRS2 coefficients are within about one sigma of zero.",
+  "bandMicrons": [
+    3.82,
+    5.14
+  ],
+  "radiusRatio": {
+    "value": 0.01454,
+    "cell": "0.01454 +0.00042/-0.00042",
+    "where": "tab:bestfit_eureka_vs_jedi (appendix B, results and priors for the WLC fits), Eureka!, NRS2, R_P/R_*; tab:phasecurveresults prints 0.0145 +0.0004/-0.0004"
+  },
+  "eclipseDepth": {
+    "value": 0.0000473,
+    "cell": "47.3 +11.7/-12.4 ppm",
+    "where": "tab:phasecurveresults (day-to-night contrast results, Eureka!), row NRS2, F_day/F_*; tab:bestfit_eureka_vs_jedi prints 47 +12/-12 ppm"
+  },
+  "model": {
+    "kind": "eclipse-normalized-fourier",
+    "equation": "F_P(xi) = F_P(0) Phi_P(xi), Phi_P(xi) = 1 + A (cos xi - 1) + B sin xi, with xi = 2 pi (t - t_e)/P counted from mid-eclipse (section 4.1, equation:phasevariation and equation:fourier). First order only; A and B are fractions of the day-side flux.",
+    "c1": {
+      "value": 0.15,
+      "cell": "0.15 +0.12/-0.15",
+      "where": "tab:bestfit_eureka_vs_jedi, Eureka!, NRS2, A"
+    },
+    "d1": {
+      "value": 0.15,
+      "cell": "0.15 +0.14/-0.11",
+      "where": "tab:bestfit_eureka_vs_jedi, Eureka!, NRS2, B"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 2095,
+      "cell": "2095 +275/-291 K",
+      "where": "tab:phasecurveresults, row NRS2, T_day"
+    },
+    "nightsideK": {
+      "value": 1742,
+      "cell": "1742 +302/-359 K",
+      "where": "tab:phasecurveresults, row NRS2, T_night"
+    },
+    "offsetDegrees": {
+      "value": -32.7,
+      "cell": "32.7 +32.1/-58.2 degrees: the orbital phase of the brightness peak, positive after mid-eclipse, so a hot spot 32.7 degrees west of noon",
+      "where": "tab:phasecurveresults, row NRS2, Phase offset; section 4.2 fixes the sign"
+    },
+    "nightsideFlux": {
+      "value": 0.000033,
+      "cell": "33.0 +12.3/-12.3 ppm",
+      "where": "tab:phasecurveresults, row NRS2, F_night/F_*"
+    },
+    "peakToPeakAmplitude": {
+      "value": 0.000024,
+      "cell": "24.0 +11.0/-10.1 ppm, defined in the caption as F_day/F_* (max Phi_P - min Phi_P)",
+      "where": "tab:phasecurveresults, row NRS2, Amplitude"
+    },
+    "bondAlbedo": {
+      "value": 0.52,
+      "cell": "0.52 +0.18/-0.22 for NRS2 alone; 0.74 +0.08/-0.10 for both detectors together",
+      "where": "tab:phasecurveresults, rows NRS2 and NRS1 U NRS2, A_B"
+    }
+  },
+  "notStated": [
+    "The wavelengths the white light curves sum. The paper gives the grating's coverage as 2.67 to 5.14 um with a gap between 3.72 and 3.82 um, calls the NRS1 band 2.67-3.72 um, and integrates its temperature conversion between 'the minimum and maximum wavelength of each bin/detector'; 3.82-5.14 um for NRS2 follows from those. Its NRS2 spectroscopic bins span 3.820-5.082 um, and Teske et al. (2025) give 3.8199180-5.0627574 um for the NRS2 white light curve of the same reductions.",
+    "A reflected-light share of the 3-5 um day-side flux. The paper converts the whole eclipse depth to a black-body brightness temperature through the G395H throughput and infers the Bond albedo from the day and night temperatures by energy balance (Cowan & Agol 2011), not from reflected light in this band.",
+    "The printed phase offset and amplitude are posterior medians. The medians of A and B give a peak 45 degrees after eclipse and a peak-to-peak amplitude of 20.1 ppm."
+  ]
+}
