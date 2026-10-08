@@ -5,7 +5,10 @@
  *
  *   new-object --phase-curve entries.json      a list of { id, dataset, label, path, url, credit, observed, record }
  *
- * or `phaseCurves` on a planet in a spec (spec.mts), the same entries without `id`. */
+ * or `phaseCurves` on a planet in a spec (spec.mts), the same entries without `id`. Two more fields are for what a paper says of
+ * its own fit: `fixedOffset: true` when the model held the brightest longitude at noon and fitted no shift, so the page does not
+ * report noon as a finding, and `caveat`, one sentence a person wrote from the paper (its doubt about the fit, or what it assumed to
+ * turn light into temperature), which the dataset's notes carry as written. */
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parsePublishedPhaseCurve, publishedPhaseCurveMap } from '@cssearth/bake/objects/raster';
 import { bindInputs, json, openOnMap, type PackageFiles } from '../dataset.mts';
@@ -16,7 +19,7 @@ const PLASMA = ['#0d0887', '#7e03a8', '#cc4778', '#f89540', '#f0f921'];
 
 export function phaseCurveEntry(value: unknown, label: string): PhaseCurveEntry {
   const input = requireRecord(value, label), text = (key: string) => requireString(input[key], `${label}.${key}`);
-  const known = new Set(['id', 'dataset', 'label', 'path', 'url', 'credit', 'observed', 'record']), unknown = Object.keys(input).filter(key => !known.has(key));
+  const known = new Set(['id', 'dataset', 'label', 'path', 'url', 'credit', 'observed', 'record', 'fixedOffset', 'caveat']), unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${label}: unknown fields ${unknown.join(', ')}.`);
   const dataset = text('dataset'), path = text('path');
   if (!/^[a-z][a-z0-9-]*$/u.test(dataset)) throw new TypeError(`${label}.dataset ${dataset}: a dataset id is lowercase letters, digits and hyphens.`);
@@ -24,7 +27,11 @@ export function phaseCurveEntry(value: unknown, label: string): PhaseCurveEntry 
   const record = requireRecord(input.record, `${label}.record`);
   if (requireRecord(record.model, `${label}.record.model`).kind === 'starry') throw new TypeError(`${label}: a starry fit converts through the authors' deposited spectra; author it by hand.`);
   parsePublishedPhaseCurve(record);
-  return { dataset, label: text('label'), path, url: text('url'), credit: text('credit'), observed: text('observed'), record };
+  if (input.fixedOffset !== undefined && input.fixedOffset !== true) throw new TypeError(`${label}.fixedOffset is true or absent.`);
+  const caveat = input.caveat === undefined ? undefined : text('caveat');
+  if (caveat !== undefined && !/^\p{Lu}.*\.$/u.test(caveat)) throw new TypeError(`${label}.caveat is one sentence: a capital first, a full stop last.`);
+  return { dataset, label: text('label'), path, url: text('url'), credit: text('credit'), observed: text('observed'), record,
+    ...(input.fixedOffset === true ? { fixedOffset: true as const } : {}), ...(caveat === undefined ? {} : { caveat }) };
 }
 
 /** `--phase-curve entries.json`: the entries for planets already in the tree, by planet id. */
@@ -51,8 +58,12 @@ export async function installPhaseCurveDataset(files: PackageFiles, id: string, 
   }
   // The observed range rounded out to 50 K, as the hand-made maps draw theirs.
   const minimum = Math.floor(low / 50) * 50, maximum = Math.ceil(high / 50) * 50, labels = [minimum, (minimum + maximum) / 2, maximum].map(String);
-  const band = record.bandMicrons ? `across ${record.bandMicrons[0]}–${record.bandMicrons[1]} µm` : `at ${record.wavelengthMicrons} µm`;
+  // The record keeps a band's edges as its paper states them and the map is computed from those; a reader's sentence gives them to
+  // a tenth of a micron, which is what the summary's 125 characters hold.
+  const edge = (microns: number) => String(Math.round(microns * 10) / 10);
+  const band = record.bandMicrons ? `across ${edge(record.bandMicrons[0])}–${edge(record.bandMicrons[1])} µm` : `at ${record.wavelengthMicrons} µm`;
   const where = hottest === 0 ? 'at noon' : `${Math.abs(hottest)}° ${hottest > 0 ? 'east' : 'west'} of noon`;
+  const peak = entry.fixedOffset ? 'The model holds the hottest longitude at noon: the paper fitted no shift' : `The hottest longitude is ${where}`;
   const method = record.model.kind === 'spiderman-spherical' ? 'Their spherical-harmonic fit is evaluated by SPIDERMAN on the equator and drawn the same at every latitude'
     : 'Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike';
   files.set(`${s}/${entry.path}`, json(entry.record));
@@ -73,7 +84,7 @@ export async function installPhaseCurveDataset(files: PackageFiles, id: string, 
     thumbnail: `${id}-dataset-${entry.dataset}.webp`, surface: `${id}-surface-${entry.dataset}@2x.webp`, poles: `${id}-poles-${entry.dataset}@2x.webp`,
     source: { id: `${id}-${entry.dataset}-phase-curve`, path: '../manifest.json', url: entry.url }, falseColor: true,
     legend: { kind: 'scale', title: 'Brightness temperature', labels, recipe: { palette, labels }, meta: 'K', sourceUrl: entry.url },
-    notes: `Brightness temperature ${band} of ${name} from ${entry.credit}'s published fit to ${entry.observed}. ${method}. The hottest longitude is ${where}.${blank ? ' Longitudes where the fit gives no emission are left blank.' : ''} The false color runs from ${minimum.toLocaleString('en-US')} to ${maximum.toLocaleString('en-US')} K.${lit ? " With shadows on, the star's light darkens the night half." : ''}` };
+    notes: `Brightness temperature ${band} of ${name} from ${entry.credit}'s published fit to ${entry.observed}. ${method}. ${peak}.${entry.caveat ? ` ${entry.caveat}` : ''}${blank ? ' Longitudes where the fit gives no emission are left blank.' : ''} The false color runs from ${minimum.toLocaleString('en-US')} to ${maximum.toLocaleString('en-US')} K.${lit ? " With shadows on, the star's light darkens the night half." : ''}` };
   content.datasets.controls = [...content.datasets.controls.filter((existing: { id: string }) => existing.id !== entry.dataset), control];
   files.set(`${s}/content/object.json`, json(content));
   const text = read(`${o}/text.json`);

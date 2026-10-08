@@ -39,3 +39,22 @@ test('the phase-curve route rebuilds HD 209458 b\'s hand-made Zellem heat map: t
   assert.throws(() => parsePhaseCurveEntries([{ id, dataset: 'map', label: 'x', path: 'phase.json', url: 'u', credit: 'c', observed: 'o', record }]), /science\/<paper>/u);
   assert.throws(() => parsePhaseCurveEntries([{ id, dataset: 'map', label: 'x', path: 'science/a/b.json', url: 'u', credit: 'c', observed: 'o', record: { ...record, model: { kind: 'starry' } } }]), /deposited spectra/u);
 });
+
+test('what a paper says of its own fit reaches the notes: a shift it did not fit, a sentence a person wrote from it, and a band to a tenth of a micron', async () => {
+  const id = 'gj-1214b', o = `src/objects/${id}`, root = new URL('../../../../../', import.meta.url);
+  const paths = ['object.json', 'text.json', 'source/preparation/raster.json', 'source/content/object.json', 'source/manifest.json'];
+  const files = new Map<string, string | Buffer>(await Promise.all(paths.map(async path => [`${o}/${path}`, await readFile(new URL(`${o}/${path}`, root), 'utf8')] as const)));
+  const record = { ...JSON.parse(await readFile(new URL(`${o}/source/science/kempton-2023/phase-curve.json`, root), 'utf8')), bandMicrons: [5.012, 11.957] };
+  const entry = { id, dataset: 'temperature', label: 'JWST', path: 'science/kempton-2023/phase-curve.json', url: 'https://arxiv.org/abs/2305.06240', credit: 'Kempton et al. (2023)', observed: 'a JWST MIRI phase curve', record };
+  const caveat = 'The paper finds this detector the less reliable of its two.';
+  const [parsed] = parsePhaseCurveEntries([{ ...entry, fixedOffset: true, caveat }]).get(id)!;
+  await installPhaseCurveDataset(files, id, 'GJ 1214 b', parsed!);
+  const control = JSON.parse(String(files.get(`${o}/source/content/object.json`))).datasets.controls.find((c: { id: string }) => c.id === 'temperature');
+  assert.match(control.notes, /Brightness temperature across 5–12 µm of GJ 1214 b/u, 'the record keeps 5.012 and 11.957; the sentence rounds them');
+  assert.match(control.notes, /The model holds the hottest longitude at noon: the paper fitted no shift\. The paper finds this detector the less reliable of its two\. /u);
+  assert.doesNotMatch(control.notes, /The hottest longitude is/u);
+  assert.equal(JSON.parse(String(files.get(`${o}/source/science/kempton-2023/phase-curve.json`))).bandMicrons[0], 5.012);
+  assert.equal(JSON.parse(String(files.get(`${o}/text.json`))).datasets.temperature.summary.includes('across 5–12 µm'), true);
+  assert.throws(() => parsePhaseCurveEntries([{ ...entry, caveat: 'no capital, no stop' }]), /one sentence/u);
+  assert.throws(() => parsePhaseCurveEntries([{ ...entry, fixedOffset: false }]), /true or absent/u);
+});

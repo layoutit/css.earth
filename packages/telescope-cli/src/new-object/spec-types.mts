@@ -103,4 +103,8 @@ export interface PhaseCurveEntry {
   /** Who fitted it ("Knutson et al. (2012)") and what they fitted ("a Spitzer IRAC phase curve of 2009"). */
   readonly credit: string; readonly observed: string;
   readonly record: Readonly<Record<string, unknown>>;
+  /** The model held the brightest longitude at noon and fitted no shift: the notes say so and report no hottest longitude. */
+  readonly fixedOffset?: true;
+  /** One sentence a person wrote from the paper, carried in the dataset's notes as written. */
+  readonly caveat?: string;
 }
