@@ -14,7 +14,7 @@ test('prepared surface provenance does not replace its map image path', async ()
     await mkdir(resolve(root, 'prepared'));
     await mkdir(resolve(root, 'source/preparation'), { recursive: true });
     await sharp({ create: { width: 8, height: 4, channels: 3, background: '#123456' } }).png().toFile(resolve(root, 'albedo.png'));
-    await writeFile(resolve(root, 'prepared/controls.json'), JSON.stringify({ datasets: { controls: [{ id: 'albedo' }] } }));
+    await writeFile(resolve(root, 'prepared/runtime.json'), JSON.stringify({ controls: { datasets: { controls: [{ id: 'albedo' }] } } }));
     const surface = { id: 'albedo', map: { url: '/scenes/example/albedo.png' }, source: { id: 'released-albedo', width: 8, height: 4 } };
     await writeFile(resolve(root, 'prepared/surfaces.json'), JSON.stringify({ surfaces: [surface] }));
     const options = { objectDirectory: root, publicDirectory: root, outputDirectory: resolve(root, 'prepared') };
@@ -35,7 +35,7 @@ test('a model-only dataset can omit a misleading flat map without opening its im
     await mkdir(resolve(root, 'prepared'));
     await mkdir(resolve(root, 'source/preparation'));
     await writeFile(resolve(root, 'source/preparation/terrestrial.json'), JSON.stringify({ schema: 'cssearth-terrestrial-preparation@2', kind: 'solid-observation-body' }));
-    await writeFile(resolve(root, 'prepared/controls.json'), JSON.stringify({ datasets: { controls: [{ id: 'model' }] } }));
+    await writeFile(resolve(root, 'prepared/runtime.json'), JSON.stringify({ controls: { datasets: { controls: [{ id: 'model' }] } } }));
     await writeFile(resolve(root, 'prepared/surfaces.json'), JSON.stringify({ surfaces: [{ id: 'model', map: { url: '/not-a-geographic-map.png' }, source: { id: 'stooke-halley' } }] }));
     await writeFile(resolve(root, 'source/presentation/minimap.json'), JSON.stringify({ excludeDatasets: ['model'] }));
     const options = { objectDirectory: root, publicDirectory: root, outputDirectory: resolve(root, 'prepared') };

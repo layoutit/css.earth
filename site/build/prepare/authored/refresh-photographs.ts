@@ -3,6 +3,7 @@ import { requireInventory, updateInventory, readPreparedRuntimeText } from '@css
 // Reprepare selected photographs and their small previews, preserving the existing scene,
 // lighting banks and scientific maps. Full preparation uses these same raster/interpreter owners.
 import { readAuthoredSources } from '@cssearth/bake/objects/sources';
+import { existsSync } from 'node:fs';
 import { readFile, readdir, writeFile, mkdir, mkdtemp, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -104,7 +105,8 @@ export async function refreshSurfaceContent(id: string, datasetIds: readonly str
   const { prepareWorldNavigationDefinition, writeWorldNavigationArtifacts } = await import('./prepare-world-navigation.ts');
   const navigation = await prepareWorldNavigationDefinition({ objectDirectory, projectRoot: process.cwd(),
     definition: { ...runtime, controls: { ...controls, datasets: { ...datasets, controls: selection } } } });
-  const scene = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8')));
+  // A restored sphere holds no scene (a working record, packages/objects/src/node/prepared-delivery.ts): its frame goes to the runtime alone.
+  const scene = existsSync(resolve(outputDirectory, 'scene.json')) ? requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8'))) : undefined;
   await writeWorldNavigationArtifacts(outputDirectory, navigation, scene);
   // Captions do not require recompiling texture matrices, seam treatment or body geometry.
   await repinObjectJson(id);

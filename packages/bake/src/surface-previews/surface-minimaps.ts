@@ -51,9 +51,8 @@ async function minimapCoverage(pipeline:Sharp, leftEdgeLongitudeDeg:number, exac
   const missing = detectMissingCoverage(data, info, { longitudeOffsetDegrees: leftEdgeLongitudeDeg });
   return roundedDirection(coverageDirection({ dataset: '', missing, width: info.width, height: info.height, leftEdgeLongitudeDeg }));
 }
-/** The content step's controls during a bake. A restored checkout holds no copy of them: a refresh reads the runtime's. */
-const preparedControls = async (outputDirectory: string) => await optionalJson(resolve(outputDirectory, 'controls.json'))
-  ?? requireRecord((await optionalJson(resolve(outputDirectory, 'runtime.json')))?.controls ?? {});
+/** The runtime's controls: a bake draws its minimaps after it writes the runtime, and a refresh reads the published one. */
+const preparedControls = async (outputDirectory: string) => requireRecord((await optionalJson(resolve(outputDirectory, 'runtime.json')))?.controls ?? {});
 const roundedDirection = (direction: readonly number[]) => direction.map(value => Math.round(value * 1e4) / 1e4);
 const minimapResize = (nearest:boolean):ResizeOptions => ({ width: 640, withoutEnlargement: true,
   ...(nearest ? { kernel: 'nearest' } : {}) });

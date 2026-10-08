@@ -384,7 +384,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   // With --reuse-images the published image metadata, sky and Sun stand in for the stages that read raw downloads; the
   // published features are read here, before the lane rewrites this directory.
   const publishedJson = async (name: string) => JSON.parse(await readFile(resolve(outputDirectory, `${name}.json`), 'utf8')) as unknown;
-  const publishedFeatures = reuseImages ? { runtime: record(parsePreparedObjectRuntime(await publishedJson('runtime')), 'published runtime'),
+  const publishedFeatures = reuseImages ? { runtime: record(parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(outputDirectory))), 'published runtime'),
     content: readPreparedPanelContentRecord(await publishedJson('content')) } : null;
   const reused = reuseImages ? record(await publishedJson('assets'), 'published raster assets') as unknown as Awaited<ReturnType<typeof prepareRasterAssets>> : null;
   // Lighting and atmosphere frames come from the recipe and the body's photometry, never from raw downloads, so a reuse run

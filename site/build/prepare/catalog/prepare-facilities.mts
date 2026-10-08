@@ -40,7 +40,7 @@ export const explorationCompilerClosure = [
 interface Options { root?: string; publish?: boolean | 'catalogues'; sourceTransport?: FactsheetSourceTransport;
   /** Catalogue consumers validate published package records; authoring explicitly reproduces them. */
   packageMode?: 'author' | 'published';
-  /** Skip bodies whose `prepared/controls.json` this checkout has not restored. */
+  /** Skip bodies whose `prepared/runtime.json` this checkout has not restored. */
   restoredOnly?: boolean;
   /** Opt-in (default null/off) content-addressed mirror for volume previews; a production caller names
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */

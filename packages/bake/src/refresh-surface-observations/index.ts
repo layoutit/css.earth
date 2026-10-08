@@ -3,7 +3,6 @@
  * command. The generated solar geometry is written after the packages build, so the host passes it in (`SolarGeometry`). */
 import { projectRoot, sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile, readdir } from 'node:fs/promises';
-import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
@@ -127,12 +126,9 @@ export async function refreshObservationControls(id: string, datasetIds: readonl
     }
     return recolored ? { ...next, billboardColor: controlColors.get(datasetId) } : next;
   });
-  for (const name of ['datasets.json', 'controls.json', 'runtime.json']) {
-    const path = resolve(outputDirectory, name);
-    // The content step's working copy of the runtime's controls: a restored checkout holds none.
-    if (name === 'controls.json' && !existsSync(path)) continue;
-    const document = await json(path);
-    const target = name === 'datasets.json' ? document : requireRecord(name === 'controls.json' ? document.datasets : requireRecord(document.controls).datasets);
+  for (const name of ['datasets.json', 'runtime.json']) {
+    const path = resolve(outputDirectory, name), document = await json(path);
+    const target = name === 'datasets.json' ? document : requireRecord(requireRecord(document.controls).datasets);
     target.controls = update(target.controls, name === 'datasets.json');
     if (name === 'runtime.json') {
       // The far billboard's color is a write of its own background (solid-scene.ts).
