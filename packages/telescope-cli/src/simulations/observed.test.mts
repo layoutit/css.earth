@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { hostedOrbit, starAstrometry } from '@cssearth/astronomy';
-import { isPublic, jwstTimeSeries, MATCH_ARCSEC, parseTimeSeries, planetsWatched, visitLine, visitsOf, type TimeSeriesRow } from './observed.mts';
+import { eclipsePhase, isPublic, jwstTimeSeries, MATCH_ARCSEC, parseTimeSeries, planetsWatched, visitLine, visitsOf, type TimeSeriesRow } from './observed.mts';
 
 const MJD_J2000 = 51_544.5;
 /** A star at 10, 20 degrees in 2000 that moves one arcsecond north a year, and a planet of one day with a transit at MJD 60000. */
@@ -37,7 +37,7 @@ test('a visit is set on the orbit: what it holds, how many orbits it spans, and 
   ], star, orbit);
   assert.deepEqual(visits.map(visit => [visit.programme, visit.part, visit.orbits, visit.hours, visit.publicOn]),
     [['1', 'eclipse', 0.2, 4.8, '2024-07-09'], ['2', 'transit', 0.2, 4.8, '2024-07-09'], ['3', 'whole-orbit', 1.3, 31.2, '2026-03-01'], ['4', 'neither', 0.1, 2.4, null], ['5', 'transit-and-eclipse', 0.7, 16.8, '2024-07-09']]);
-  assert.equal(visitLine(visits[2]!, '2026-01-01'), '2023-03-17 · MIRI · program 3 (Dang) · 31.2 h, 1.3 orbits · a whole orbit · private until 2026-03-01');
+  assert.equal(visitLine(visits[2]!, '2026-01-01'), '2023-03-17 · MIRI · program 3 (Dang) · 31.2 h, 1.3 orbits from phase 0 · a whole orbit · private until 2026-03-01');
   assert.equal(visitLine(visits[2]!, '2026-03-01').endsWith('· public'), true);
   assert.equal(isPublic(visits[3]!, '2030-01-01'), false, 'no stated date is not public');
   assert.match(visitLine(visits[3]!, '2030-01-01'), /neither transit nor eclipse · no public date stated$/u);
@@ -56,4 +56,19 @@ test('every planet with a recorded transit is asked of its own star: GJ 1214 b\'
   const watched = planetsWatched([{ programme: '1803', instrument: 'MIRI', investigator: 'Bean', title: 'GJ 1214b', raDegrees: place.rightAscensionDegrees, decDegrees: place.declinationDegrees, startMjd: when, endMjd: when + period * 1.09, releaseMjd: 59_900 }]);
   assert.deepEqual([...watched.keys()], ['gj-1214b']);
   assert.deepEqual(watched.get('gj-1214b')!.map(visit => [visit.part, visit.orbits]), [['whole-orbit', 1.09]]);
+});
+
+test('the eclipse is also looked for where the recorded orbit puts it: GJ 436 b\'s, 0.587 of an orbit after transit', () => {
+  const eccentric = { eccentricity: 0.13827, argumentOfPeriapsisDegrees: 351 };
+  // To first order the eclipse comes (2 / pi) e cos(omega) of an orbit after the half: 0.5 + 0.0869.
+  assert.ok(Math.abs(eclipsePhase(eccentric) - 0.587) < 0.002, String(eclipsePhase(eccentric)));
+  assert.equal(eclipsePhase({ eccentricity: 0 }), 0.5);
+  assert.equal(eclipsePhase({ eccentricity: 0.3 }), 0.5, 'an eccentricity without its periastron places nothing');
+  assert.ok(Math.abs(eclipsePhase({ eccentricity: 0.4, argumentOfPeriapsisDegrees: 90 }) - 0.5) < 1e-12, 'a transit at periastron has its eclipse half an orbit later');
+  // A visit from phase 0.56 to 0.62 misses the half-orbit place and holds the recorded one.
+  const held = visitsOf([row(60_000.56, 60_000.62)], star, { ...orbit, ...eccentric }), circular = visitsOf([row(60_000.56, 60_000.62)], star, orbit);
+  assert.deepEqual([held[0]!.part, held[0]!.fromPhase, held[0]!.eclipsePhase, circular[0]!.part, circular[0]!.eclipsePhase], ['eclipse', 0.56, 0.587, 'neither', undefined]);
+  assert.match(visitLine(held[0]!, '2030-01-01'), /0\.06 orbits from phase 0\.56 · eclipse \(the recorded orbit puts the eclipse at phase 0\.587\) · public$/u);
+  // A weak recorded eccentricity does not lose a visit at the half-orbit place.
+  assert.equal(visitsOf([row(60_000.45, 60_000.55)], star, { ...orbit, ...eccentric })[0]!.part, 'eclipse');
 });

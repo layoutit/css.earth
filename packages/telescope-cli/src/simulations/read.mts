@@ -2,9 +2,10 @@
  *
  * A body's `investigations.json` records what was examined for it and what was decided: a paper whose fit became a dataset is
  * `included`, one that prints too little to draw is `excluded` with the reason, one waiting on something is `deferred`. A lead
- * is read when an entry's evidence or finding names its DOI or its arXiv number. A paper the package only cites for a radius
- * or an orbit is not thereby read for its phase curve, so the README and the manifest are not searched: to settle a lead,
- * write its entry. */
+ * is marked when an entry's evidence or finding names its DOI, its arXiv number, or the journal DOI DataCite says its preprint
+ * is a version of. The leads take a mark as settling a lead only when its entry is not `included` (leads.mts): a paper a
+ * ledger cites for a radius or an orbit is not thereby read for its phase curve. For the same reason the README and the
+ * manifest are not searched: to settle a lead, write its entry. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseInvestigationLedger, type InvestigationStatus } from '@cssearth/objects';

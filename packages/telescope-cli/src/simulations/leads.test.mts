@@ -69,7 +69,7 @@ test('telescope leads OBJECT asks twice, keeps the records that are leads and sa
       [['map', 'STScI/MAST', 2024], ['map', 'arXiv', 2023], ['map', 'Zenodo', 2023], ['simulation', 'arXiv', 2022], ['simulation', 'Harvard Dataverse', 2022], ['simulation', 'arXiv', 2014]]);
     assert.ok(!result.leads.some(lead => lead.publisher === 'European Space Agency'));
     const text = formatLeads(result, directory);
-    assert.match(text, /^GJ 1214 b · \d+ leads in DataCite: data releases in every DOI repository, and arXiv papers\n\nMeasured phase curve or map \(\d+\)\n {3}2024 · STScI\/MAST · license not stated to DataCite · JWST MIRI\/LRS phase curve of GJ 1214 b\n {5}https:\/\/doi\.org\/10\.17909\/qe3z-qj40\n/u);
+    assert.match(text, /^GJ 1214 b · \d+ leads in DataCite: data releases in every DOI repository, and arXiv papers\n\nPhase curve or map \(\d+\)\n {3}2024 · STScI\/MAST · license not stated to DataCite · JWST MIRI\/LRS phase curve of GJ 1214 b\n {5}https:\/\/doi\.org\/10\.17909\/qe3z-qj40\n/u);
     assert.match(text, /Published simulation \(\d+\)\n/u);
     assert.match(text, /A lead is read before anything is shown/u);
     assert.deepEqual((JSON.parse(await readFile(resolve(directory, 'leads.json'), 'utf8')) as { leads: unknown[] }).leads.length, result.leads.length);
@@ -124,13 +124,14 @@ test('a lead the page\'s ledger settles says so, and the archive\'s visits of th
   assert.deepEqual(result.watched?.map(visit => [visit.part, visit.orbits]), [['eclipse', 0.2]]);
   const text = formatLeads(result);
   assert.match(text, /https:\/\/doi\.org\/10\.48550\/arXiv\.2512\.05175\n {5}already read: excluded in the page's ledger \(published-phase-curves\)\n/u);
-  assert.match(text, /Watched by JWST \(1 visit of its star in MAST\)\n {3}\d{4}-\d\d-\d\d · MIRI · program 9999 \(Someone\) · [\d.]+ h, 0\.2 orbits · eclipse · public\n {3}An eclipse is set half an orbit after transit/u);
+  assert.match(text, /Watched by JWST \(1 visit of its star in MAST\)\n {3}\d{4}-\d\d-\d\d · MIRI · program 9999 \(Someone\) · [\d.]+ h, 0\.2 orbits from phase 0\.4 · eclipse(?: \(the recorded orbit[^)]*\))? · public\n {3}An eclipse is looked for half an orbit after transit/u);
   // Without the archive nothing is said of it, and an object that is not a planet with a transit has no visits to set.
   assert.equal((await searchLeads(WORKSPACE, { target: 'wasp-189b', fetcher, wait: async () => {} })).watched, undefined);
 });
 
 test('a survey leaves a settled lead out of the worklist and lists whole orbits watched and planets with no page', async () => {
-  const unpaged = async (paged: readonly string[]) => { assert.ok(paged.includes('GJ 1214 b')); return { planets: [{ name: 'KELT-1 b', host: 'KELT-1', hostPaged: false, papers: [{ year: 2019, title: 'Spitzer Phase Curves of KELT-1b', url: 'https://doi.org/10.0/k' }] }], requests: 4 }; };
+  const unpaged = async (paged: readonly string[]) => { assert.ok(paged.includes('GJ 1214 b')); return { planets: [{ name: 'KELT-1 b', host: 'KELT-1', hostPaged: false, papers: [{ year: 2019, title: 'Spitzer Phase Curves of KELT-1b', url: 'https://doi.org/10.0/k' }], archiveEclipse: false },
+    { name: 'TrES-2 b', host: 'TrES-2', hostPaged: false, papers: [], archiveEclipse: true }], requests: 4 }; };
   let asked = 0;
   const paper = onePaper('10.48550/arXiv.2512.05175', 'TESS phase curve of ultra-hot Jupiter WASP-189 b'), fetcher = (async (url: unknown) => { asked++; return paper(url as string); }) as typeof fetch;
   const survey = await surveyLeads(WORKSPACE, { archiveClass: 'exoplanet', fetcher, wait: async () => {}, timeSeries: async () => [series('trappist-1', 'trappist-1f', 1.2)], unpaged });
@@ -139,10 +140,22 @@ test('a survey leaves a settled lead out of the worklist and lists whole orbits 
   assert.equal(survey.rows.find(row => row.id === 'trappist-1f')?.leads.length, 0, 'a row needs no paper');
   const text = formatSurvey(survey);
   assert.match(text, /Every lead already read in the page's ledger \(1\): WASP-189 b\n/u);
-  assert.doesNotMatch(text, /Measured phase curve or map, named in a title/u, 'the one titled lead is settled');
-  assert.match(text, /A whole orbit watched by JWST, page without a map \(\d+\)\n(?:.*\n)*? {3}TRAPPIST-1f \(neutral-shape\): MIRI 9999 public · no unread paper\n/u);
+  assert.doesNotMatch(text, /Phase curve or map, named in a title/u, 'the one titled lead is settled');
+  assert.match(text, /A whole orbit watched by JWST, page without a measured map \(\d+\)\n(?:.*\n)*? {3}TRAPPIST-1f \(neutral-shape\): MIRI 9999 public · no unread lead\n/u);
   assert.match(text, /No page yet, a phase curve or map named in a paper's title \(1\)\n {3}KELT-1 b \(star KELT-1, no page\): 2019 Spitzer Phase Curves of KELT-1b https:\/\/doi\.org\/10\.0\/k\n/u);
+  assert.match(text, /No page yet, an eclipse in the NASA Exoplanet Archive's own tables \(1\): TrES-2 b\n/u);
   // A source that fails is named and the rest is still reported.
   const failed = await surveyLeads(WORKSPACE, { archiveClass: 'exoplanet', fetcher, wait: async () => {}, timeSeries: async () => { throw new Error('MAST is down'); } });
   assert.match(formatSurvey(failed), /Not asked: JWST time series: MAST is down/u);
+});
+
+test('a preprint is the journal article it is a version of: a ledger that cites either settles it, and a ledger that only includes it does not', async () => {
+  const parsed = parseDatacite({ data: [{ attributes: { doi: '10.48550/arXiv.2201.04518', publicationYear: 2022, titles: [{ title: 'CHEOPS phase curve of WASP-189 b' }], descriptions: [],
+    relatedIdentifiers: [{ relationType: 'IsVersionOf', relatedIdentifierType: 'DOI', relatedIdentifier: '10.1051/0004-6361/202142400' }, { relationType: 'Cites', relatedIdentifierType: 'DOI', relatedIdentifier: '10.0/other' }] } },
+  { attributes: { doi: '10.26093/cds/vizier.36590074', publicationYear: 2022, titles: [{ title: 'CHEOPS phase curve of WASP-189 b' }], descriptions: [],
+    relatedIdentifiers: [{ relationType: 'IsSupplementTo', relatedIdentifierType: 'DOI', relatedIdentifier: '10.1051/0004-6361/202142400' }] } }] }, 'paper');
+  assert.deepEqual(parsed.records.map(found => found.sameAs), [['10.1051/0004-6361/202142400'], undefined], 'a data table that supplements a paper is another thing to read');
+  // Papers come before the data released the same year.
+  const names = ['WASP-189 b'], paper = { ...leadFor(parsed.records[0]!, names)!, kind: 'paper' as const }, data = { ...leadFor(parsed.records[1]!, names)!, kind: 'data' as const };
+  assert.deepEqual(rankLeads([data, paper]).map(lead => lead.kind), ['paper', 'data']);
 });
