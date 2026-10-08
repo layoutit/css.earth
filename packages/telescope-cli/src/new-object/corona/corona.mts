@@ -37,7 +37,8 @@ export async function readStar(root: string, host: string) {
   const at = `src/objects/${host}`, content = await readJson(root, `${at}/source/content/object.json`, `${host}: no such page`), text = await readJson(root, `${at}/text.json`, host);
   const descriptor = await readJson(root, `${at}/object.json`, host), manifest = await readJson(root, `${at}/source/manifest.json`, host), raster = await readJson(root, `${at}/source/preparation/raster.json`, `${host}: the page draws no surface map`);
   const physical = requireRecord((await readJson(root, `packages/astronomy/data/bodies/${host}.json`, `${host}: no astronomy record`)).physical, `${host} physical record`);
-  const scene = await readJson(root, `${at}/prepared/scene.json`, `${host}: its prepared scene is not restored (pnpm setup:prepared)`), frame = requireRecord(scene.worldFrame, `${host} world frame`);
+  // The tracked descriptor carries the world frame the star's prepared scene had.
+  const frame = requireRecord(requireRecord(descriptor.properties, `${host} properties`).worldFrame, `${host} world frame`);
   const origin = requireArray(frame.originM, `${host} scene origin`).map(value => requireFiniteNumber(value, `${host} scene origin`)) as [number, number, number], distance = Math.hypot(...origin), away = origin.map(value => value / distance);
   const rotationRecord = `${at}/source/preparation/rotation.json`;
   if (!await exists(resolve(root, rotationRecord))) throw new Error(`${host}: no ${rotationRecord}; a corona needs the frame the star's maps are drawn in.`);

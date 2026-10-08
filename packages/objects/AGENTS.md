@@ -11,8 +11,9 @@ Own the shared object JSON parser, validation, reusable object types, and prepar
 Own the source catalogue (`src/sources/`, browser-safe), the provenance, exploration and source-usage records the
 application reads and preparation writes (`src/provenance/`, the browser-safe `@cssearth/objects/provenance` entry; the
 canonical dataset destinations live here; compilers accept `DatasetRoutes` for host-supplied routing), the
-source-manifest format, preparation's read of the registry and the runtime asset closure that owns each object's
-inventory (`src/node/`, the Node-only `@cssearth/objects/node` entry); the main, `sources` and `provenance` entries never
+source-manifest format, preparation's read of the registry, the runtime asset closure that owns each object's
+inventory, the delivery ledger that decides which prepared records an inventory lists (`prepared-delivery.ts`) and the
+stored form of a runtime (`prepared-runtime-files.ts`) (`src/node/`, the Node-only `@cssearth/objects/node` entry); the main, `sources` and `provenance` entries never
 import `node/`.
 `src/node/contract/` is the Node-only `@cssearth/objects/node/contract` entry: the helpers tests use to check an object
 against its contract (its final prepared definition, and fixture values required before a test inspects them).

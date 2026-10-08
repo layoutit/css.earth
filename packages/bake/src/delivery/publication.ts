@@ -44,7 +44,7 @@ export async function unownedPreparedFiles(id: string, objectDirectory: string, 
   const current = await readInventory(id, objectDirectory);
   if (current === null) return [];
   const known = new Set(current.assets.filter(asset => asset.location === 'prepared').map(asset => asset.filename));
-  const baked = await bakedPreparedFiles(preparedDirectory, id).catch(error => { if (hasErrorCode(error, 'ENOENT')) return [] as string[]; throw error; });
+  const baked = await bakedPreparedFiles(preparedDirectory, id, objectDirectory).catch(error => { if (hasErrorCode(error, 'ENOENT')) return [] as string[]; throw error; });
   return baked.filter(filename => !known.has(filename) && !shared(filename)).sort();
 }
 

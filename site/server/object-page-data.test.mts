@@ -16,7 +16,6 @@ test('page data and the object transport are read from the restored runtime, wit
  const descriptor={schema:'cssearth-object@2',id:'body',type:'layered-body',properties:{page:{metadata:{url:'prepared/page.json'}}},prepared:{format:'cssearth-css-object@5',url:'prepared/object.json'}};
  await writeFile(resolve(directory,'object.json'),JSON.stringify(descriptor));
  await writeFile(resolve(directory,'prepared/runtime.json'),JSON.stringify(data)+'\n');
- await writeFile(resolve(directory,'prepared/controls.json'),JSON.stringify(data.controls));
  assert.deepEqual(await loadObjectPageData('body',root),{descriptor,assets:data.assets,controls:data.controls,motion:{spin:false,lightCurve:false}});
  // What the runtime's motion plays tells the shell which switches the page gets: a transform track is a spin, an opacity track a light curve.
  const spin={target:1,id:'body-spin',keyframes:[{offset:0,transform:'rotateZ(0deg)'},{offset:1,transform:'rotateZ(360deg)'}],duration:1000,timings:[]};

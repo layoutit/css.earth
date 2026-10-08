@@ -1083,12 +1083,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 6231,
-      "sha256": "0ed8e5b13371d17535e88ca1800cfda9b0309596c4f99e6c8462510a7270fab9"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 9303,
       "sha256": "8e3cfe0db5bc807f91e07ae6492b2b1c005f6fb8a009564e9f9b2b4d3bc0c8d6"
@@ -1098,6 +1092,12 @@
       "filename": "features.json",
       "bytes": 723,
       "sha256": "0a770d142e5f0760d9478a4128644b8225de6777ce8aeef4a388cd14c94d93e4"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 151508,
+      "sha256": "5ebed48afb35f6694759c0acf41ddf2da2be269c25308525a736ea0a500ca660"
     },
     {
       "location": "prepared",
@@ -1168,26 +1168,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 306010,
-      "sha256": "f504bd300764dafef33854a20e1199d972bfbf371bcf2b72df2974294898f337"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 373698,
-      "sha256": "c656be1b2457521ea405259ac83cce82b4d47a8c73528773149747d5bf3bffc1"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1180,
-      "sha256": "719e27f9db4fabc1ab8ceaa32b19a9cf93556b68500161893914badfa4ed2088"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 613,
-      "sha256": "67eee75decb4276c33c13ab161dd612dfb4b233d8f2aa2857ed397703ee79dd6"
+      "bytes": 154529,
+      "sha256": "1ba170d8f87f7166da930b20b86ba6c02e0e809e291a55568701dc8416ecdb73"
     },
     {
       "location": "prepared",
@@ -1200,12 +1182,6 @@
       "filename": "text.json",
       "bytes": 2278,
       "sha256": "76f5e6787170f53f2afcf4cb4e557e63a665fe2e1ec2f6fbea4af367be659c5b"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1223,
-      "sha256": "28ebe838364132825cdd9ce0aff389df34c364f788fb788521ab5f1530b1ea70"
     }
   ]
 }

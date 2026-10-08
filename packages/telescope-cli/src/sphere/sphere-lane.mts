@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { clearInactiveImageBindings } from './sphere-assets.mts';
 import { inventoryAssets } from '@cssearth/bake/delivery';
+import { LEAF_BOXES_FILE, joinPreparedRuntimeText } from '@cssearth/objects/node';
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
@@ -31,7 +32,8 @@ export async function inspectMeasurementSphere(root:string,target:string){
   if (geometry.namespace !== id) throw new Error('Standard sphere geometry belongs to another body');
   const recipe = readRasterRecipe(await json(resolve(object, 'source/preparation/raster.json')));
   await pinned(resolve(object, 'inventory.json'));
-  const original = parsePreparedObjectRuntime(await json(resolve(object, 'prepared/runtime.json')));
+  const original = parsePreparedObjectRuntime(JSON.parse(await joinPreparedRuntimeText((await pinned(resolve(object, 'prepared/runtime.json'))).toString(),
+    async () => (await pinned(resolve(object, 'prepared', LEAF_BOXES_FILE))).toString())));
   if (original.id !== id || original.destinations)
     throw new Error('This sphere requires application capabilities that cannot be exported');
   const datasetId = original.controls.datasets?.defaultDataset;
@@ -58,7 +60,7 @@ export async function measurementSphere(root: string, target: string, texture: s
   const id=target.toLowerCase();
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Sphere output needs an existing body identity');
   const assetsToInstall = await inventoryAssets(root, [id], { location: 'prepared' });
-  await installRuntimeAssets(assetsToInstall.filter(asset => asset.filename === 'runtime.json'));
+  await installRuntimeAssets(assetsToInstall.filter(asset => asset.filename === 'runtime.json' || asset.filename === LEAF_BOXES_FILE));
   const {inputs,pinned,recipe,original,datasetId,surface,variant,required,styles,worldFrame,context}=await inspectMeasurementSphere(root,target);
   // Keep the original packing, gutters, pole atlas and density. The standard raster lane
   // receives already projected colors and uses nearest/lossless handling for measurements.

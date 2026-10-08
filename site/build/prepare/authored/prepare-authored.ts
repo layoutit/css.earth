@@ -1,5 +1,5 @@
 import { readFeatureMapLongitude, readPreparedPanelContentRecord, readComparableSource, readObjectDescriptorRecord, validatePreparedCubicSky, validateDirectionalSunPlan, parsePreparedObjectRuntime, readObjectContentDatasets, parseObjectDescriptor, RASTER_RECIPE_SCHEMA, parsePresentationProfile, AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readAuthoredPreparationSources, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type AuthoredObjectDescriptor } from '@cssearth/objects';
-import { requireInventory } from '@cssearth/objects/node';
+import { requireInventory, readPreparedRuntimeText } from '@cssearth/objects/node';
 import { BANDED_ELLIPSOID_SCHEMA, LAYERED_OBLATE_SCHEMA } from '@cssearth/bake/objects/scene';
 import { readNonArrayRecord, isRecord } from '@cssearth/core';
 import '@cssearth/bake/thread-pool';
@@ -318,7 +318,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const { preparePagedEllipsoidObject } = await import('@cssearth/bake/objects/layers/paged-ellipsoid');
     // A reuse-images run carries the published feature anchors; read them before the lane rewrites this directory.
     const publishedFeatures = reuseImages ? {
-      runtime: record(parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true }), 'published runtime'),
+      runtime: record(parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(outputDirectory)), { parsedJson: true }), 'published runtime'),
       content: readPreparedPanelContentRecord(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8'))) } : null;
     const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets,
       solarGeometry: await solarGeometry(), assetWorker: pathToFileURL(resolve(process.cwd(), 'packages/bake/cli/paged-ellipsoid-asset-worker.mts')), reuseImages, acceptChanged, addDatasets });
@@ -384,7 +384,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   // With --reuse-images the published image metadata, sky and Sun stand in for the stages that read raw downloads; the
   // published features are read here, before the lane rewrites this directory.
   const publishedJson = async (name: string) => JSON.parse(await readFile(resolve(outputDirectory, `${name}.json`), 'utf8')) as unknown;
-  const publishedFeatures = reuseImages ? { runtime: record(parsePreparedObjectRuntime(await publishedJson('runtime')), 'published runtime'),
+  const publishedFeatures = reuseImages ? { runtime: record(parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(outputDirectory))), 'published runtime'),
     content: readPreparedPanelContentRecord(await publishedJson('content')) } : null;
   const reused = reuseImages ? record(await publishedJson('assets'), 'published raster assets') as unknown as Awaited<ReturnType<typeof prepareRasterAssets>> : null;
   // Lighting and atmosphere frames come from the recipe and the body's photometry, never from raw downloads, so a reuse run
@@ -420,7 +420,9 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         .prepareGiantLayers({ sourceDirectory, publicDirectory, config: ringsSource.value, write: true })
     : null;
   const celestial = reuseImages
-    ? { sky: validatePreparedCubicSky(await publishedJson('sky')), sun: readPublishedSun(await publishedJson('sun')) } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
+    // The published runtime carries the sky and the Sun; sky.json and sun.json are this bake's working copies of them
+    // (packages/objects/src/node/prepared-delivery.ts) and a restored checkout has neither.
+    ? { sky: validatePreparedCubicSky(publishedFeatures!.runtime.sky), sun: readPublishedSun(publishedFeatures!.runtime.sun) } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
     : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, directionalSun: litBySun(descriptor, required(sources, 'presentation').value),
       solarGeometry: await solarGeometry() });
   const geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);

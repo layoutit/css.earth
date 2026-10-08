@@ -9,7 +9,7 @@ import {parseScientificCamera} from '@cssearth/bake/objects/raster';
 import {requireRecord} from '@cssearth/core';
 import * as solarGeometry from '../../platform/solar-geometry.mts';
 test('False color focus puts its body-fixed direction at the camera centre',async()=>{
-  const camera=parseScientificCamera(requireRecord(JSON.parse(await readFile(new URL('../../../src/objects/europa/prepared/scene.json',import.meta.url), 'utf8')), 'Europa scene').camera);
+  const camera=parseScientificCamera(requireRecord(JSON.parse(await readFile(new URL('../../../src/objects/europa/prepared/runtime.json',import.meta.url), 'utf8')), 'Europa runtime').camera);
   const focus={longitudeDegrees:143.5,latitudeDegrees:2.3,zoom:1.1};
   const result=prepareScientificFocus(solarGeometry,'europa',focus,camera),r=Math.PI/180;
   const [x,y,z]=prepareEclipticPresentationFrame(solarGeometry, 'europa').toPresentation([

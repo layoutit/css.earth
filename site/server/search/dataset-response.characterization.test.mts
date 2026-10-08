@@ -39,7 +39,6 @@ test('native settings reject malformed selections and publish checkbox and numer
   const descriptor = { schema: 'cssearth-object@2', id: 'saturn', type: 'layered-body', properties: {}, prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } };
   await writeFile(join(directory, '../object.json'), JSON.stringify(descriptor));
   await writeFile(join(directory, 'runtime.json'), JSON.stringify(data));
-  await writeFile(join(directory, 'controls.json'), JSON.stringify(data.controls));
   const scene = { descriptor, html: '' };
   const prepared = await readPreparedObjectBytes('saturn', root);
   const timeouts: number[] = [];
@@ -99,7 +98,6 @@ test('a surface feature without a dataset request checks the information sheet h
   const descriptor = { schema: 'cssearth-object@2', id: 'body', type: 'layered-body', properties: {}, prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } };
   await writeFile(join(directory, '../object.json'), JSON.stringify(descriptor));
   await writeFile(join(directory, 'runtime.json'), JSON.stringify(data));
-  await writeFile(join(directory, 'controls.json'), JSON.stringify(data.controls));
   const prepared = await readPreparedObjectBytes('body', root);
   const requests: string[] = [];
   const read: typeof fetch = async input => {

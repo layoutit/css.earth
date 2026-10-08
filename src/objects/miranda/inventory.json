@@ -273,12 +273,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 4042,
-      "sha256": "f587e216c95d67086e3ef8580c7a280c809442be760866740555462645746044"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 5508,
       "sha256": "18e16b2cc25ce1aa28b0905b0c5e4b62ffd4f29b5f0e7ce9667fa294261dfa34"
@@ -288,6 +282,12 @@
       "filename": "features.json",
       "bytes": 587,
       "sha256": "dd8fc6999113a96cdcb302d7b9cd8554f68bc4017dd0cd15120abc479fa54c96"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 181904,
+      "sha256": "620a231dcb4e8738694af940e2308d5192f58e458f090b6e21d974962b6769ca"
     },
     {
       "location": "prepared",
@@ -328,26 +328,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 291332,
-      "sha256": "ff18cabb530fc1681157def33b30af8397c9a54929c9aa673aab7a3edd588f29"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 398773,
-      "sha256": "365a9501267c0357e3c8cef3628a871bb101eec28fd456422317e0974ac15d60"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1182,
-      "sha256": "0082627b5ad3a73fcc84ff4a1f1d8064230455bfac9d07d41b22a48f36fc688e"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 613,
-      "sha256": "5302562e3341609a4dd9411297f6296816abf73f464759525c359969b45a056b"
+      "bytes": 109455,
+      "sha256": "48c68d80fa6b348db564e5af582cbc65080509c2ed9742d0067259d39cbb6807"
     },
     {
       "location": "prepared",
@@ -360,12 +342,6 @@
       "filename": "text.json",
       "bytes": 1433,
       "sha256": "0a11320a685df5fdc0a6f109f2acb8a1a22011d64896876bdc26db80c0da2c5d"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1244,
-      "sha256": "6f82278443363a119433afb98fe489ca84c8f2790ce94b7125ae2fd705b3a311"
     }
   ]
 }

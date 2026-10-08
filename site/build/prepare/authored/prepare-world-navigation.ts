@@ -4,6 +4,7 @@ import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
 import { buildPolyCameraSceneTransform } from '@layoutit/polycss';
 import { preparedControlPitch } from '@cssearth/engine';
 import { requireRecord } from '@cssearth/core';
+import { readPreparedRuntimeText } from '@cssearth/objects/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -263,8 +264,9 @@ if (invoked) {
   const [directory] = process.argv.slice(2);
   if (!directory || process.argv.length !== 3) throw new TypeError('Usage: prepare-world-navigation <object-directory>');
   const objectDirectory = resolve(directory), outputDirectory = resolve(objectDirectory, 'prepared');
-  const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true });
-  const scene = JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8'));
+  const definition = parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(outputDirectory)), { parsedJson: true });
+  // A restored sphere holds no scene (a working record, packages/objects/src/node/prepared-delivery.ts): its frame goes to the runtime alone.
+  const scene = await readFile(resolve(outputDirectory, 'scene.json'), 'utf8').then(text => JSON.parse(text), () => undefined);
   const result = await prepareWorldNavigationDefinition({ objectDirectory, definition });
   await writeWorldNavigationArtifacts(outputDirectory, result, scene);
   const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = readObjectDescriptorRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));

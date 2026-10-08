@@ -7,11 +7,12 @@ import { loadLimbProfile } from '../photometry/index.ts';
 import { prepareGeometryScene, parseGeometryProfile, leafImageCandidates, widestLeafImages } from './geometry-scene.ts';
 import type { GeometryProfile, GeometrySceneAssets, LeafImagePixels, SolarSceneSource } from './geometry-scene.ts';
 import { prepareLeafSeamOutset, prepareSeamOutsetSteps } from './seam-outset.ts';
-import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
+import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, parsePresentationProfile } from '@cssearth/objects';
 import { readRasterRecipe, outputName, packedRasterSize, rasterPageName, rasterPagePlan, LIGHTING_SHEET } from '../raster/index.ts';
 import type { RasterRecipe } from '@cssearth/objects';
 import { TEXELS_PER_CSS_PIXEL } from './projective-surface-raster.ts';
 import { prepareComposite } from '../presentation/lighting/composite.ts';
+import { prepareCssPresentation } from '../presentation/css-presentation.ts';
 import { presentationAdapters } from '../presentation/adapters.ts';
 import { createPreparedNodeTree } from '../presentation/layout/prepared-node-tree.ts';
 import { LEAF_BOX_FACTOR, LEAF_BOX_UNSCALE } from '../presentation/layout/leaf-box.ts';
@@ -206,9 +207,11 @@ test('every dataset reaches the leaves: a leaf binds its dataset texture and eac
  const bands=result.body.leaves.filter(leaf=>!leaf.polarCap),caps=result.body.leaves.filter(leaf=>leaf.polarCap);
  assert.ok(bands.length>0&&bands.every(leaf=>styleOf(leaf.style).get('background-image')==='var(--uranus-surface-image)'));
  assert.ok(caps.length===2&&caps.every(leaf=>styleOf(leaf.style).get('background-image')==='var(--uranus-poles-image)'));
- const base='src/objects/uranus/prepared',[published,assets,datasets,sun,controls,solarSource]=await Promise.all([
-  ...['scene','assets','datasets','sun','controls'].map(file=>readJson(`${base}/${file}.json`)),readJson('src/objects/uranus/source/presentation/solar-system.json')]);
- const scene={...published as {body:object},body:{...(published as {body:object}).body,leaves:result.body.leaves}};
+ // The scene is the one prepared above with the runtime's camera: a restored checkout holds no copy of a sphere's scene,
+ // sun or controls (prepared-delivery.ts), and the runtime carries the three.
+ const base='src/objects/uranus/prepared',[runtime,assets,datasets,solarSource]=await Promise.all([
+  ...['runtime','assets','datasets'].map(file=>readJson(`${base}/${file}.json`)),readJson('src/objects/uranus/source/presentation/solar-system.json')]);
+ const {camera,sun,controls}=runtime as {camera:unknown;sun:unknown;controls:unknown},scene={...result,camera};
  // No browser here: the CSSOM reads only rescale leaf addresses, which this test does not read.
  const adapters={...presentationAdapters(presentationHostAdapters(solarGeometry)),prepareCssomDeclarationReads:async()=>new Map()};
  const draft=await prepareComposite({namespace:'uranus',mode:'composite',scene,assets,datasets,sun,controls,solarSource} as unknown as PresentationInputs,adapters);
@@ -226,6 +229,22 @@ test('every dataset reaches the leaves: a leaf binds its dataset texture and eac
  const surface=methane.writes.find(write=>write.kind==='texture'&&write.name==='--uranus-surface-image');
  assert.ok(surface?.kind==='texture');
  assert.equal(draft.assets.entries.find(entry=>entry.key===surface.resource)?.url,'/scenes/uranus/uranus-surface-methane@2x.webp');
+});
+test('neptune Rings controls the prepared ring mesh',{timeout:30_000},async()=>{
+ // As above: the scene is prepared here from the tracked profile and the published image metadata, and the runtime carries the rest.
+ const base='src/objects/neptune/prepared',[runtime,assets,datasets,solarSource]=await Promise.all([
+  ...['runtime','assets','datasets'].map(file=>readJson(`${base}/${file}.json`)),readJson('src/objects/neptune/source/presentation/solar-system.json')]);
+ const result=await prepareAuthored('neptune',[1,0,0],profile=>profile,assets as Partial<GeometrySceneAssets>,profileWidths);
+ const {camera,sky,sun,controls}=runtime as {camera:unknown;sky:unknown;sun:unknown;controls:unknown},scene={...result,camera,starfield:sky};
+ const profile=parsePresentationProfile(await readJson('src/objects/neptune/source/preparation/presentation.json'));
+ const prepared=await prepareCssPresentation({...profile,scene,assets,datasets,sun,controls,solarSource} as unknown as PresentationInputs,presentationHostAdapters(solarGeometry));
+ const variants=[false,true].map(rings=>prepared.variants.find(variant=>
+  variant.when.datasetId===prepared.controls.datasets?.defaultDataset&&variant.when.shadows===false&&variant.when.rings===rings));
+ for(const [index,variant] of variants.entries()){
+  assert.notEqual(variant,undefined);
+  const display=variant!.writes.find(write=>write.kind==='style'&&write.name==='display'&&prepared.tree.nodes[write.target]?.className?.includes('rings'));
+  assert.partialDeepStrictEqual(display,{value:index?'block':'none'});
+ }
 });
 test('a paged body reads each band from its page and samples its own cell there',async()=>{
  // Triton's atlas is past the decode limit, so it comes as pages of one band each (preparation/raster/pages.ts).

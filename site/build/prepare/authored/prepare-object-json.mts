@@ -27,7 +27,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { authoredObject } from '@cssearth/bake/sources';
 import { preparePresentationBindings, withImageSizes, withKeptPoolBudgets } from '@cssearth/bake/prepared-presentation';
 import { objectPageStyles } from '../../../contracts/object-page-contract.mts';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { readPreparedObjects, readPreparedRuntimeText } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../../..')).sceneObjects;
 
@@ -73,7 +73,7 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
     // 180°, Venus and Mercury 118° (2026-10-02). Solve again with the spins the binding found, and bind to that solve.
     if (spinStarts(definition) !== solvedSpins) {
       // The second solve replaces the first one's transform, so the scene on disk takes the first before it runs.
-      await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, requireRecord(JSON.parse(await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8'))));
+      await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, await workingScene(preparedDirectory));
       preparedNavigation = await prepareWorldNavigationDefinition({ objectDirectory, definition, projectRoot });
       definition = await preparePresentationBindings(requireObjectRuntimeDefinition(preparedNavigation.definition), projectRoot, { ...options, pageStyles: objectPageStyles });
     }
@@ -81,11 +81,17 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
   // Every image states its size, from the file the bake published (a staged scene directory holds them flat), and a pool
   // that keeps its images states its byte budget from those sizes.
   definition = requireObjectRuntimeDefinition(withKeptPoolBudgets(await withImageSizes(definition, url => options?.publicDirectory ? resolve(options.publicDirectory, basename(url)) : resolve(projectRoot, 'site/public', url.replace(/^\//u, '')))));
-  const scene:unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8'));
-  await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, requireRecord(scene));
+  await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, await workingScene(preparedDirectory));
   descriptor = parseObjectDescriptor({ ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } });
   const pin = await pinPreparedObject(id, originalDescriptor, { worldFrame: preparedNavigation.frame }, projectRoot, target);
   return { id, ...pin, definition };
+}
+
+/** The scene this checkout holds beside the runtime: the bake's working record, or the copy a scene-retaining lane delivers
+ * (packages/objects/src/node/prepared-delivery.ts). A restored sphere has none, and its frame is written to the runtime alone. */
+async function workingScene(preparedDirectory: string) {
+  const text = await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8').catch(error => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+  return text === null ? undefined : requireRecord(JSON.parse(text) as unknown);
 }
 
 /** Existing descriptors opt into JSON baking; planned objects get no fallback. */
@@ -106,7 +112,7 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
     try { await access(resolve(root, 'src/objects', object.id, 'object.json')); }
     catch (error) { if (hasErrorCode(error,'ENOENT') && !ids) continue; throw error; }
     const runtimeDefinition:unknown = await authoredObject(object.id, root)
-      ? parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8')), { parsedJson: true })
+      ? parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(resolve(root, 'src/objects', object.id, 'prepared'))), { parsedJson: true })
       : requireRecord(await import(pathToFileURL(resolve(root, `src/objects/${object.id}/runtime/definition.mjs`)).href)).runtimeDefinition;
     results.push(await writeObjectJson(object.id, runtimeDefinition, options));
   }

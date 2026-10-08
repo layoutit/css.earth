@@ -141,12 +141,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 565,
-      "sha256": "dfaa2413bc5f1ae3048c256d169c3fea1f1e72d055ed07d4f6c3b3be54be3cd1"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1218,
       "sha256": "0f77b65cd1edcb9cd4aac9341a8d4bd7634ef206c8cb60cdce58f2700bdb9085"
@@ -156,6 +150,12 @@
       "filename": "features.json",
       "bytes": 582,
       "sha256": "ac3b7b542c00a5cc8873dcc0d2cf4488022f07366fae9f6dacfef65ca7f39b7b"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 175072,
+      "sha256": "f3777811c0bfd06af1f1eb6eb7416d9eb0a52e328240af5bf2a09f867c382b50"
     },
     {
       "location": "prepared",
@@ -184,26 +184,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 270931,
-      "sha256": "5fc2d031e62d563d2e039c389008c0934ec33c0298cca5de352a3bd5dd516eb8"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 389844,
-      "sha256": "79774b5b9c3722ce6c00c26ad24ef0ec1b9117f7c232fc10b8d78b4c36b6e08a"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1180,
-      "sha256": "072d2b416392445f03e6e9683ee979db6927751524c3c76f3698e37ef6ecb7d9"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 591,
-      "sha256": "af259201dbd4fe729dc929e46a60be8ca54586b91d5aa132ba5c2c520e9da065"
+      "bytes": 95886,
+      "sha256": "089b2314f9e8b865cbe69d4ca5f902f262607847f54009f3e1e6d1d7355aeee5"
     },
     {
       "location": "prepared",
@@ -216,12 +198,6 @@
       "filename": "text.json",
       "bytes": 1041,
       "sha256": "abc9cecb150cfec5ecd5a2e3db39745caa583362efa042adcbcf18c252e19bcc"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1240,
-      "sha256": "9c24635a72c212eaf3a7f9c05d3ec840a3357c038a12656433891731185e049e"
     }
   ]
 }

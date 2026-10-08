@@ -122,7 +122,7 @@ export async function applyStagedTerrainPhotographs(id:string,ids:readonly strin
   const inventory=await json(resolve(context.objectDirectory,'inventory.json')),assets=records(inventory.assets);
   if([...newAssets.keys()].some(filename=>!assets.some(asset=>asset.location==='public'&&asset.filename===filename)))throw new Error('Photographic inventory cannot add resources.');
   const documents=new Map<string,Record<string,unknown>>();
-  for(const name of ['surfaces.json','material.json']) {
+  for(const name of ['surfaces.json']) {
     const path=resolve(context.outputDirectory,name),document=await json(path);
     document.surfaces=records(document.surfaces).map(surface=>({...surface,...results.get(requireString(surface.id))}));
     documents.set(path,document);

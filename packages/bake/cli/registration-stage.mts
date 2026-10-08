@@ -44,8 +44,8 @@ const source = await createSourceManifest({ objectId: objectId, objectName: requ
 await source.verify();
 const models = await loadRadialModels({ config: config as unknown as Parameters<typeof loadRadialModels>[0]['config'], sourceDirectory, source });
 
-// Preparation writes the observation report into two intermediates; both are rewritten so neither disagrees with the other.
-const documents = await Promise.all(['prepared/surfaces.json', 'prepared/material.json'].map(async path => {
+// Preparation writes the observation report into the body's surface record.
+const documents = await Promise.all(['prepared/surfaces.json'].map(async path => {
   const file = resolve(objectDirectory, path), document = requireRecord(JSON.parse(await readFile(file, 'utf8')));
   return { file, document, datasets: requireArray(document.surfaces).map(value => requireRecord(value)) };
 }));

@@ -1,13 +1,17 @@
-import {readFile} from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parsePreparedObjectRuntime } from './index.js';
 import { record, array } from './guards.js';
+import { readPreparedRuntimeText } from '../../node/prepared-runtime-files.js';
+
+/** A real body's whole runtime: its leaf boxes are stored beside it (prepared-runtime-files.ts). */
+const storedRuntime = (id: string) => readPreparedRuntimeText(fileURLToPath(new URL(`../../../../../src/objects/${id}/prepared`, import.meta.url)));
 
 // These are the real preparation outputs, loaded only by this browser-boundary test.
 const originals: unknown[] = [];
 for (const id of ['mercury', 'venus']) {
-  const source = await readFile(new URL(`../../../../../src/objects/${id}/prepared/runtime.json`, import.meta.url), "utf8");
+  const source = await storedRuntime(id);
   originals.push(JSON.parse(source));
 }
 const copy = (index = 1): Record<string, unknown> => record(structuredClone(originals[index]), 'test document');
@@ -21,7 +25,7 @@ test('external transport cannot silently omit prepared activation ownership', ()
 });
 
 test('Tuttle transport preserves selection ranges and rejects incomplete or invalid picking banks', async () => {
-  const original = JSON.parse(await readFile(new URL('../../../../../src/objects/comet-8p/prepared/runtime.json', import.meta.url), 'utf8'));
+  const original = JSON.parse(await storedRuntime('comet-8p'));
   const parsed = parsePreparedObjectRuntime(original);
   assert.deepEqual(parsed.surfaceHit?.datasetRanges, [
     {datasetId: 'model', start: 0, count: 1000}, {datasetId: 'arecibo', start: 1000, count: 1000},
@@ -121,7 +125,7 @@ test('executable values, symbols, nonfinite numbers and cycles are rejected with
 });
 
 test('a body without datasets validates both fixed and toggle-selected presentations', async () => {
-  const original = JSON.parse(await readFile(new URL('../../../../../src/objects/haumea/prepared/runtime.json', import.meta.url), 'utf8'));
+  const original = JSON.parse(await storedRuntime('haumea'));
   parsePreparedObjectRuntime(original);
   const input = structuredClone(original);
   // Exercise an absent capability independently of the body's current datasets.
@@ -172,7 +176,7 @@ test('prepared dataset transitions require bounded duration and an explicit zoom
 });
 
 test("WZ Car's prepared light curve is an opacity motion track; a transform frame or an out-of-range opacity is refused", async () => {
-  const original = JSON.parse(await readFile(new URL('../../../../../src/objects/wz-car/prepared/runtime.json', import.meta.url), 'utf8'));
+  const original = JSON.parse(await storedRuntime('wz-car'));
   const parsed = parsePreparedObjectRuntime(original);
   const track = parsed.motion?.find(entry => entry.id === 'wz-car-light-curve');
   assert.ok(track && track.keyframes.every(frame => 'opacity' in frame));

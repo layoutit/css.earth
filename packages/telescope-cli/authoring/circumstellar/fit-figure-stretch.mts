@@ -104,7 +104,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const dataset = requireArray(recipe.datasets).map(value => requireRecord(value)).find(value => value.id === datasetId);
   if (!dataset) throw new Error(`${id} has no dataset ${datasetId}.`);
   const fitRecord = requireRecord(requireRecord(dataset.stretch).fit), box = requireRecord(fitRecord.panel);
-  const scene = requireRecord(requireRecord(JSON.parse(await readFile(resolve(repository, 'src/objects', String(recipe.host), 'prepared/scene.json'), 'utf8')) as unknown).worldFrame);
+  // The host's tracked descriptor carries the world frame its prepared scene had.
+  const scene = requireRecord(requireRecord(requireRecord(JSON.parse(await readFile(resolve(repository, 'src/objects', String(recipe.host), 'object.json'), 'utf8')) as unknown).properties).worldFrame);
   const distancePc = Math.hypot(...requireArray(scene.originM).map(v => requireFiniteNumber(v))) / 3.085677581491367e16;
   const panel = { x0: requireFiniteNumber(box.x0), y0: requireFiniteNumber(box.y0), width: requireFiniteNumber(box.width), height: requireFiniteNumber(box.height), pixelsPerArcsec: requireFiniteNumber(fitRecord.pixelsPerArcsec) };
   const annulus = requireArray(dataset.backgroundAnnulusArcsec).map(v => requireFiniteNumber(v)) as [number, number];

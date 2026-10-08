@@ -136,16 +136,21 @@ test('invalid staged metadata or missing previews fail without changing canonica
   } finally { await rm(fixture.root, { recursive: true, force: true }); }
 });
 
-test('a bake names the prepared files its inventory does not list, apart from regenerated, retired and shared ones', async t => {
+test('a bake names the prepared files its inventory does not list, apart from working, retired and shared ones', async t => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-leftovers-')), objectDirectory = join(root, 'object'), prepared = join(objectDirectory, 'prepared');
   t.after(() => rm(root, { recursive: true, force: true }));
   // A first bake has published nothing to compare with.
   await put(join(prepared, 'runtime.json'), '{}');
   assert.deepEqual(await unownedPreparedFiles('fixture', objectDirectory, prepared), []);
   await inventoryPreparedAssets({ objectId: 'fixture', objectDirectory, gitTrackedPaths: async () => new Set() });
-  // What an old checkout holds beside the published set: a moved dataset's folder, the transport and page a checkout regenerates,
-  // the two files no preparation writes now, and the world's member list, which the world step pins itself.
-  for (const name of ['layers/a/atlas.webp', 'old-report.json', 'object.json', 'page.json', 'provenance.json', 'lenses.json', 'members.json']) await put(join(prepared, name), 'x');
-  assert.deepEqual(await unownedPreparedFiles('fixture', objectDirectory, prepared, name => name === 'members.json'), ['layers/a/atlas.webp', 'old-report.json']);
+  // What an old checkout holds beside the published set: a moved dataset's folder and bank, the transport and page a checkout
+  // regenerates, the bake's working records, the two files no preparation writes now, and the world's member list, which the
+  // world step pins itself.
+  for (const name of ['layers/a/atlas.webp', 'old-bank.bin', 'object.json', 'page.json', 'scene.json', 'sky.json', 'provenance.json', 'lenses.json', 'members.json']) await put(join(prepared, name), 'x');
+  assert.deepEqual(await unownedPreparedFiles('fixture', objectDirectory, prepared, name => name === 'members.json'), ['layers/a/atlas.webp', 'old-bank.bin']);
+  // A top-level record the delivery ledger does not declare stops the run by name.
+  await put(join(prepared, 'old-report.json'), 'x');
+  await assert.rejects(unownedPreparedFiles('fixture', objectDirectory, prepared), /delivery ledger does not declare: old-report\.json/u);
+  await rm(join(prepared, 'old-report.json'));
   assert.deepEqual(await unownedPreparedFiles('fixture', objectDirectory, join(root, 'absent')), []);
 });

@@ -1,6 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import scene from '../../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
+import runtime from '../../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
+/** Mercury's prepared camera, as its page reads it. */
+const scene = { camera: runtime.camera };
 import { createPreparedCamera } from './prepared-camera.js';
 
 test('a scene with a wider one to hand the camera to lets the zoom go past its own far limit', () => {

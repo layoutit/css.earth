@@ -969,12 +969,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 6048,
-      "sha256": "e5923e49641161c9e030ad38c1e188bce3ef1c523794a28ce9d7700da79a96ae"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 9234,
       "sha256": "f33ec5a002154ecf68bfd0e04f09f67c956c70cfb081b5e68d06e95bcb1f647b"
@@ -990,6 +984,12 @@
       "filename": "image-quality.json",
       "bytes": 7122,
       "sha256": "b20d7fbce42d685cfe055d9f3b34c46668aaae200d1d8ff88cd249263277cafa"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 151424,
+      "sha256": "5f2042ac388e068c1d216ed6c262cb9c498c4bbca5683752064f77fd22479304"
     },
     {
       "location": "prepared",
@@ -1060,26 +1060,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 301362,
-      "sha256": "f30f7b5884207e4175fb843037bfbc7b1c7e0d6af4ceb087211a41a6f13b3511"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 373362,
-      "sha256": "c020bf574b9c65de054123dec8ab3262944badef0b78ce8686e97d4c6de773fd"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1177,
-      "sha256": "63233896093714ae2578b57e4ca53e400b759d71fb2f1467ae332b29fd6b7602"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 616,
-      "sha256": "70829da2a8b5ea8ac93e8de449b06a8efd4c71c86b4905afedc435322cc94403"
+      "bytes": 149965,
+      "sha256": "995c33d45fa3ef08a5dd6badace4472a054d6e20b8c63fc8df3673759806ee02"
     },
     {
       "location": "prepared",
@@ -1092,12 +1074,6 @@
       "filename": "text.json",
       "bytes": 2550,
       "sha256": "3610581de369fa8039cd3931739aebe1b0883c872ed1aaf0fb870f3df61cffbd"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1219,
-      "sha256": "82397d48d5e97cb528655c5dc03718f355c46607305c658f610e797d43ed09f1"
     }
   ]
 }

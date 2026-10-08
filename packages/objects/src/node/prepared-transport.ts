@@ -6,6 +6,7 @@ import { OBJECT_PAGE_SCHEMA } from '../prepared-data/content/object-page-schema.
 import { open, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireRecord } from '@cssearth/core';
+import { readPreparedRuntimeText } from './prepared-runtime-files.js';
 
 const HEAD_BYTES = 65536;
 
@@ -84,7 +85,7 @@ interface SceneDescriptor { readonly id: string; readonly type: string; readonly
  * `JSON.stringify({ schema, id, type, format, data })` gives for its runtime. */
 export async function preparedObjectText(objectDirectory: string, descriptor: SceneDescriptor) {
   if (!descriptor.prepared) throw new TypeError(`${descriptor.id}: no prepared reference.`);
-  return preparedObjectTransport(descriptor, (await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8')).trimEnd());
+  return preparedObjectTransport(descriptor, (await readPreparedRuntimeText(resolve(objectDirectory, 'prepared'))).trimEnd());
 }
 
 /** The `cssearth-prepared-object@1` transport that carries `data`, the JSON text of a runtime. */
@@ -106,12 +107,17 @@ function preparedMotionKinds(motion: unknown, id: string): { spin: boolean; ligh
   return { spin: lightCurves.includes(false), lightCurve: lightCurves.includes(true) };
 }
 
-/** A scene body's page data: the runtime's asset table, what its motion plays, and its published
- * `prepared/controls.json`, which is the runtime's controls. The motion list closes the runtime, so the file is read
- * to its end: 4 s over 4,574 bodies, against 1 s for the asset table alone (2026-10-07). */
+/** A scene body's controls: its runtime's. No copy of them is delivered beside it. A body without a runtime has none
+ * (the read fails with `ENOENT`). */
+export async function readPreparedControls(preparedDirectory: string): Promise<Record<string, unknown>> {
+  const runtime: unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8'));
+  return requireRecord(isRecord(runtime) ? runtime.controls : undefined, `${preparedDirectory} runtime controls`);
+}
+
+/** A scene body's page data: the runtime's asset table, its controls and what its motion plays. The motion list closes
+ * the runtime, so the file is read to its end: 4 s over 4,574 bodies, against 1 s for the asset table alone (2026-10-07). */
 export async function preparedPageData(objectDirectory: string, id: string) {
-  const { assets, motion } = await readJsonHead(resolve(objectDirectory, 'prepared/runtime.json'), ['assets', 'motion']);
-  const controls: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/controls.json'), 'utf8'));
+  const { assets, motion, controls } = await readJsonHead(resolve(objectDirectory, 'prepared/runtime.json'), ['assets', 'motion', 'controls']);
   if (!isRecord(assets)) throw new TypeError(`${id}: prepared/runtime.json has no asset table.`);
   return { schema: OBJECT_PAGE_SCHEMA, id, assets, controls: requireRecord(controls, `${id} prepared controls`), motion: preparedMotionKinds(motion, id) };
 }

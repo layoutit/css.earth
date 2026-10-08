@@ -177,12 +177,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 1763,
-      "sha256": "67815aceeba7e471d0b9b4dc1ed2e32be47d5f233a01a99d4228777da214106e"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 3744,
       "sha256": "3a806cb62ccd42d2b9110b1f5735eafee90444279b2a54a87e75d26ac4b2dbe9"
@@ -192,6 +186,12 @@
       "filename": "features.json",
       "bytes": 583,
       "sha256": "1cac6f220b4d5d27a555cdbd8a9589a1e3e0b1a62de7c0e2214b641350b27ef9"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 127573,
+      "sha256": "9c16c7db14682a1172ce2f7d8f95868484d818aab3a24365f831e0149204d398"
     },
     {
       "location": "prepared",
@@ -244,26 +244,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 230505,
-      "sha256": "a2889ccb308686df2b799861502f8095585cf4ad1558575659e6b0d19cfc6e95"
+      "bytes": 102959,
+      "sha256": "0e13c01542d5fa1de789abd31d10986356683b69f75466cf7d5ca3974b828dc8"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 291855,
       "sha256": "70cf6fc6fc6a844e9e3e57ca9cbfe66bc844b7a444f58b0fc110d30a289e474e"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1180,
-      "sha256": "15daa377752257233ad98d25e3c405208c4588be2a27a4bf7b49b4b39167a214"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 620,
-      "sha256": "6608e41dedd6684351f1cb9eca76400baaa6da3a1a56594315a45236c28030f0"
     },
     {
       "location": "prepared",
@@ -276,12 +264,6 @@
       "filename": "text.json",
       "bytes": 2360,
       "sha256": "99911685d87a1a39fbe4fed4d2118e784e81ee31b0e609a66e56b6586eb1b1a8"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1178,
-      "sha256": "aa2f58961cc276bc2ceefc80450c699b9aa26b4c3ca40b24a9a49663a6f0236a"
     }
   ]
 }

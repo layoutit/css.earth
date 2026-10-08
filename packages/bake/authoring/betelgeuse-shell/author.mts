@@ -46,7 +46,8 @@ export const PREVIEWS = Object.freeze({
     credit: 'ESO/M. Montarg\u00e8s et al.', crop: { left: 320, top: 40, width: 318, height: 520 },
     license: 'CC-BY-4.0. ESO images are released under the Creative Commons Attribution 4.0 International licence; retain the credit.' },
 });
-const starScene = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/betelgeuse/prepared/scene.json');
+/** The star's tracked descriptor: it carries the world frame its prepared scene had. */
+const starObject = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/betelgeuse/object.json');
 
 /** The two V-band products as ESO serves them: the pipeline intensity and its ancillary degree of linear polarisation. */
 export const PRODUCTS = Object.freeze({
@@ -297,7 +298,7 @@ function volumeRecipe(grid: string, material: Record<string, unknown>) {
 }
 
 export async function author(defaultDataset = 'zimpol-v') {
-  const scene = JSON.parse(await readFile(starScene, 'utf8')) as { worldFrame: { originM: [number, number, number]; bodyRadiusM: number; referenceFrame: string; epochJdTt: number } };
+  const scene = (JSON.parse(await readFile(starObject, 'utf8')) as { properties: { worldFrame: { originM: [number, number, number]; bodyRadiusM: number; referenceFrame: string; epochJdTt: number } } }).properties;
   const origin = scene.worldFrame.originM, radiusM = scene.worldFrame.bodyRadiusM, distanceM = Math.hypot(...origin);
   const raDeg = (Math.atan2(origin[1], origin[0]) * 180 / Math.PI + 360) % 360, decDeg = Math.asin(origin[2] / distanceM) * 180 / Math.PI;
   const radiusArcsec = radiusM / distanceM * ARCSEC_PER_RADIAN, pixelsPerUnit = radiusArcsec * 1000 / PIXEL_SCALE_MAS;

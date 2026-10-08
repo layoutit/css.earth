@@ -13,7 +13,7 @@ import { readSourceCatalog } from '@cssearth/bake/sources';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { refreshPreparedInventory } from '@cssearth/bake/contract';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { readPreparedControls, readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../../..')).sceneObjects;
 
@@ -26,8 +26,7 @@ interface BodyText { readonly id: string; readonly directory: string; readonly t
 async function readBody(projectRoot: string, object: { id: string; name: string }, catalogue: ReadonlySet<string>): Promise<BodyText> {
   const directory = resolve(projectRoot, 'src/objects', object.id);
   const bytes = await readFile(resolve(directory, 'text.json'));
-  // The runtime's controls, as published beside it.
-  const datasets = requireRecord(await readJson(resolve(directory, 'prepared/controls.json'))).datasets;
+  const datasets = (await readPreparedControls(resolve(directory, 'prepared'))).datasets;
   const lineage = await bodyLineage(directory);
   return {
     id: object.id, directory,
@@ -74,10 +73,10 @@ export async function prepareText({ ids = [] as readonly string[], check = false
   const sourceCatalog = await readSourceCatalog(projectRoot);
   const catalogue = new Set(sourceCatalog.records.map(record => record.id));
   // A run for named objects may sit in a checkout that holds only their prepared files (the ENSO daily refresh restores
-  // Earth alone): another object whose published controls are not installed is left out of the checks. The run without
+  // Earth alone): another object whose runtime is not installed is left out of the checks. The run without
   // names, and the test of every object's text, still read them all.
   const read = await Promise.all(SCENE_OBJECTS.map(object => readBody(projectRoot, object, catalogue).catch((error: unknown) => {
-    if (ids.length && !ids.includes(object.id) && hasErrorCode(error, 'ENOENT') && String((error as NodeJS.ErrnoException).path).endsWith('prepared/controls.json')) return null;
+    if (ids.length && !ids.includes(object.id) && hasErrorCode(error, 'ENOENT') && String((error as NodeJS.ErrnoException).path).endsWith('prepared/runtime.json')) return null;
     throw error;
   })));
   const bodies = read.filter(body => body !== null);

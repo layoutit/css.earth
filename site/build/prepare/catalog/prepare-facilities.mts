@@ -15,7 +15,7 @@ import { writePreparedSet } from '@cssearth/bake/delivery';
 import { restoreFactsheetEvidence } from '@cssearth/bake/objects/acquisition';
 import type { FactsheetSourceTransport } from '@cssearth/bake/objects/acquisition';
 import { prepareVolumePresentations, readPreparedVolumes, volumePresentationCompilerClosure } from './prepare-volume-presentation.mts';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { readPreparedControls, readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../../..')).sceneObjects;
 
@@ -40,7 +40,7 @@ export const explorationCompilerClosure = [
 interface Options { root?: string; publish?: boolean | 'catalogues'; sourceTransport?: FactsheetSourceTransport;
   /** Catalogue consumers validate published package records; authoring explicitly reproduces them. */
   packageMode?: 'author' | 'published';
-  /** Skip bodies whose `prepared/controls.json` this checkout has not restored. */
+  /** Skip bodies whose `prepared/runtime.json` this checkout has not restored. */
   restoredOnly?: boolean;
   /** Opt-in (default null/off) content-addressed mirror for volume previews; a production caller names
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
@@ -140,11 +140,12 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     part.metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
     part.facts += panel.facts.length + panel.moreFacts.length;
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
-    // The runtime's controls, published beside it. A checkout that deliberately restores no body banks (the typecheck
-    // job) lacks them; skipping there yields a partial catalogue, which is all a compiler program needs.
-    const controlsPath = `${base}/prepared/controls.json`;
-    if (restoredOnly && !existsSync(resolve(root, controlsPath))) return part;
-    const controls = explorationRecord(await json(controlsPath));
+    // The runtime's controls. A checkout that deliberately restores no body banks (the typecheck job) lacks the
+    // runtime; skipping there yields a partial catalogue, which is all a compiler program needs.
+    const runtimePath = `${base}/prepared/runtime.json`;
+    if (restoredOnly && !existsSync(resolve(root, runtimePath))) return part;
+    closure.add(runtimePath);
+    const controls = await readPreparedControls(resolve(root, base, 'prepared'));
     const datasets = controls.datasets === null ? [] : explorationArray(explorationRecord(controls.datasets).controls, raw => {
       const control = explorationRecord(raw); return { id: explorationText(control.id), label: explorationText(control.label) };
     });

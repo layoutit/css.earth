@@ -225,12 +225,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 3387,
-      "sha256": "7f5a5052a79bfe8a9b24d0b418ad6c18060c75b9486282bcb2bed9d68e61b141"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 4853,
       "sha256": "8c8ca80d4cc97379e8fbb350e1a499cad2c35fd77dabe5f9596066fc7371e2b7"
@@ -240,6 +234,12 @@
       "filename": "features.json",
       "bytes": 587,
       "sha256": "4646093b2ed643f7e5448279bc0a91eced2be556c45aad81dc15a3056d478a7e"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 175072,
+      "sha256": "f3777811c0bfd06af1f1eb6eb7416d9eb0a52e328240af5bf2a09f867c382b50"
     },
     {
       "location": "prepared",
@@ -280,26 +280,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 280823,
-      "sha256": "45b6419dc13553a6e73007bfdf789c1f0cdb21fe38309cc8f01186028799c31e"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 390469,
-      "sha256": "e7c20e530989dccdf4c01c7c579fcf3168ca07cb0739df8d85e558b0c756a0e2"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1181,
-      "sha256": "c71ecc4a892714c3c9325619db741fc3b2cff7a1d5b4b1d6dfc1c33bd6ddebbe"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 592,
-      "sha256": "45ac48ef1f77cf248779d6d3fe290846511fb5a12911f8de3745e588a6d0bea2"
+      "bytes": 105778,
+      "sha256": "36bad12f646b155673bdf8036bf41948b50a3edda45218c7f3ef31184cbda82e"
     },
     {
       "location": "prepared",
@@ -312,12 +294,6 @@
       "filename": "text.json",
       "bytes": 1344,
       "sha256": "11a72cf4c135fc4804c84faa0e0281634d4b29216929b038418f2294ee0aac68"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1223,
-      "sha256": "1dd0c7236fd4ac3a44f5e7d2c5a12d8f439b13765ad9a115772e090a2625e2d1"
     }
   ]
 }

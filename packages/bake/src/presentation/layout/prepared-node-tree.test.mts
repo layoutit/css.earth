@@ -2,12 +2,13 @@ import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createPreparedNodeTree, preparedDeclarations, LEAF_BOX_UNSCALE, leafBoxLengths } from "@cssearth/bake/presentation";
-import PREPARED_MOON_SCENE from "../../../../../src/objects/moon/prepared/scene.json" with { type: "json" };
-test("preparation expands every actual Moon leaf into a stable ordered tree", () => {
+// Mimas keeps its scene delivered (packages/objects/src/node/prepared-delivery.ts); a sphere's is a working record.
+import PREPARED_MIMAS_SCENE from "../../../../../src/objects/mimas/prepared/scene.json" with { type: "json" };
+test("preparation expands every actual Mimas leaf into a stable ordered tree", () => {
   const tree = createPreparedNodeTree(), camera = tree.element("div", "polycss-camera"), scene = tree.element("div", "polycss-scene");
   tree.append(null, camera); tree.append(camera, scene);
   const body = tree.mesh("body"), material = tree.element("s"); tree.append(scene, body, material);
-  const leaves = PREPARED_MOON_SCENE.body.leaves;
+  const leaves = PREPARED_MIMAS_SCENE.bodyLeaves;
   for (const leaf of leaves) tree.append(body, tree.leaf(leaf));
   const result = tree.finish({ camera, scene });
   assert.equal(result.tree.nodes.length, 4 + leaves.length);

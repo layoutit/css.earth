@@ -55,11 +55,17 @@ test("one inventory per object: each location is written by its own stage and ke
   await writeFile(resolve(preparedRoot, "page.json"), "generated");
   // Left by a preparation that no longer writes them (an old checkout still holds both), so never inventoried either.
   await writeFile(resolve(preparedRoot, "provenance.json"), "retired"); await writeFile(resolve(preparedRoot, "lenses.json"), "retired");
+  // The bake's own working records and copies of the runtime's parts: never inventoried (prepared-delivery.ts).
+  for (const name of ["scene.json", "sky.json", "sun.json", "world-navigation.json", "terrain.json", "elevation-source-index.json"]) await writeFile(resolve(preparedRoot, name), "working");
   const first = await inventoryPublicAssets({ objectId: "fixture", objectDirectory, urls: ["/scenes/fixture/a.webp"], publicRoot });
   assert.deepEqual(first?.assets, [{ location: "public", filename: "a.webp", bytes: 7, sha256: digest("asset-a") }]);
   const second = await inventoryPreparedAssets({ objectId: "fixture", objectDirectory, gitTrackedPaths: async () => new Set() });
   assert.deepEqual(second?.assets.map(asset => `${asset.location}/${asset.filename}`), ["public/a.webp", "prepared/atlases/x.webp", "prepared/runtime.json"]);
   assert.deepEqual(await readInventory("fixture", objectDirectory), second);
+  // A top-level record the ledger does not declare is refused, not listed; a file in a record's own folder is delivered.
+  await writeFile(resolve(preparedRoot, "notes.json"), "{}");
+  await assert.rejects(inventoryPreparedAssets({ objectId: "fixture", objectDirectory, gitTrackedPaths: async () => new Set() }), /delivery ledger does not declare: notes\.json/u);
+  await rm(resolve(preparedRoot, "notes.json"));
   // Re-inventorying the public textures leaves the prepared entries alone, and vice versa.
   await writeFile(resolve(publicRoot, "a.webp"), "asset-a2");
   const third = await inventoryPublicAssets({ objectId: "fixture", objectDirectory, urls: ["/scenes/fixture/a.webp"], publicRoot });
@@ -76,7 +82,9 @@ test("verification catches drift and closure gaps per location; the validator re
   context.after(() => rm(root, { force: true, recursive: true }));
   const objectDirectory = resolve(root, "src/objects/fixture"), publicRoot = resolve(root, "site/public/scenes/fixture"), preparedRoot = resolve(objectDirectory, "prepared");
   await mkdir(publicRoot, { recursive: true }); await mkdir(preparedRoot, { recursive: true });
-  await writeFile(resolve(publicRoot, "a.webp"), "asset-a"); await writeFile(resolve(preparedRoot, "scene.json"), "scene");
+  await writeFile(resolve(publicRoot, "a.webp"), "asset-a"); await writeFile(resolve(preparedRoot, "runtime.json"), "runtime");
+  // A working record in the directory is not a closure gap.
+  await writeFile(resolve(preparedRoot, "scene.json"), "scene");
   await inventoryPublicAssets({ objectId: "fixture", objectDirectory, urls: ["/scenes/fixture/a.webp"], publicRoot });
   const inventory = (await inventoryPreparedAssets({ objectId: "fixture", objectDirectory, gitTrackedPaths: async () => new Set() }))!;
   assert.equal(await verifyInventory({ objectId: "fixture", inventory, publicRoot, preparedRoot }), true);
@@ -86,8 +94,8 @@ test("verification catches drift and closure gaps per location; the validator re
   await writeFile(resolve(preparedRoot, "undeclared.json"), "surprise");
   await assert.rejects(verifyInventory({ objectId: "fixture", inventory, publicRoot, preparedRoot }), /Undeclared: undeclared\.json/);
   assert.equal(await verifyInventory({ objectId: "fixture", inventory, publicRoot, preparedRoot, closure: false }), true);
-  await rm(resolve(preparedRoot, "scene.json"));
-  await assert.rejects(verifyInventory({ objectId: "fixture", inventory, publicRoot, preparedRoot, closure: false }), /Missing: scene\.json/);
+  await rm(resolve(preparedRoot, "runtime.json"));
+  await assert.rejects(verifyInventory({ objectId: "fixture", inventory, publicRoot, preparedRoot, closure: false }), /Missing: runtime\.json/);
   const entry = { location: "prepared", filename: "levels/catalogue.json", bytes: 3, sha256: digest("abc") };
   assert.equal(validateInventory("fixture", { schema: "cssearth-inventory@1", assets: [entry] }), true);
   assert.throws(() => validateInventory("fixture", { schema: "cssfixture-runtime-assets@1", assets: [entry] }), /incompatible/);

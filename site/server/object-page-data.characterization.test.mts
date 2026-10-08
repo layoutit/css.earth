@@ -21,14 +21,14 @@ test('page identities are rejected before reading and missing default banks are 
   await assert.rejects(preparedDatasetIds('absent', root), /ENOENT/);
   const directory = join(root, 'src/objects/body/prepared');
   await mkdir(directory, { recursive: true });
-  await writeFile(join(directory, 'controls.json'), JSON.stringify({ settings: { controls: [] }, datasets: { defaultDataset: 'shape', controls: [{ id: 'shape', label: 'Shape' }] } }));
+  await writeFile(join(directory, 'runtime.json'), JSON.stringify({ controls: { settings: { controls: [] }, datasets: { defaultDataset: 'shape', controls: [{ id: 'shape', label: 'Shape' }] } } }));
   assert.equal(await defaultDatasetBank('body', root), null);
-  await writeFile(join(directory, 'controls.json'), JSON.stringify({ settings: { controls: [] }, datasets: { defaultDataset: 'image', controls: [
+  await writeFile(join(directory, 'runtime.json'), JSON.stringify({ controls: { settings: { controls: [] }, datasets: { defaultDataset: 'image', controls: [
     { id: 'shape', label: 'Shape' },
     { id: 'image', label: 'Image', volume: { objectId: 'cloud', datasetId: 'observation', surface: 'surface' } },
-  ] } }));
+  ] } } }));
   assert.equal(await defaultDatasetBank('body', root), 'cloud');
-  await writeFile(join(directory, 'controls.json'), '{');
+  await writeFile(join(directory, 'runtime.json'), '{');
   await assert.rejects(defaultDatasetBank('body', root), SyntaxError);
 });
 
@@ -39,7 +39,6 @@ async function writeBody(root: string, id: string) {
   const descriptor = { schema: 'cssearth-object@2', id, type: 'layered-body', properties: { page: { metadata: { url: 'prepared/page.json' } } }, prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } };
   await writeFile(join(directory, '../object.json'), JSON.stringify(descriptor));
   await writeFile(join(directory, 'runtime.json'), JSON.stringify(data));
-  await writeFile(join(directory, 'controls.json'), JSON.stringify(data.controls));
   return { directory, data, descriptor };
 }
 

@@ -627,12 +627,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 3501,
-      "sha256": "55080ab136ccc1b89b5c64cc551a08af4e1d96ea9b23b62336c2d98799101865"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 5311,
       "sha256": "bcb8e52df126d997f82457e3c4d893c643f500791f4aac6ff0fb15fbb04de4f8"
@@ -642,6 +636,12 @@
       "filename": "features.json",
       "bytes": 595,
       "sha256": "7b33d790db6fa0a8015fc142e77681972552870c97687c5b38b5255a52ca88a7"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 151346,
+      "sha256": "28355aa0e76f7437aa95188da4571b6f2dad09ae7b2c791237fb3217f7396dcf"
     },
     {
       "location": "prepared",
@@ -688,26 +688,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 277822,
-      "sha256": "ca1a7b0f83857a5424740ae372f848fe916675cb41247785e28611c740964e88"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 374162,
-      "sha256": "7278b6176771c11fb67c55f7cb268c5e1796e4701a5db6382d0280e7f06781ca"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1182,
-      "sha256": "79b53d3253684de8ddb438d1a695886e1b0f64e0349c2927cf9fe1429b0db4b3"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 615,
-      "sha256": "ed397b6426b9bb9735370157de2873e303b493bbd6021b68dedcc3d4bd0a7614"
+      "bytes": 126503,
+      "sha256": "c3f679da51cff420b4420d2d44807b95f45aad91ee3de390862b3e9d8e3e2cbb"
     },
     {
       "location": "prepared",
@@ -720,12 +702,6 @@
       "filename": "text.json",
       "bytes": 1628,
       "sha256": "285189eded8babb917ab8ffffb14712c1122a3843a02a48fdcb91ebd6cee27e6"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1224,
-      "sha256": "b90360c69c5c4767d22050cddbbe3f424415dd56f113341b852182dfeee50523"
     }
   ]
 }

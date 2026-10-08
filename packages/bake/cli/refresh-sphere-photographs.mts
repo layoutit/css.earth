@@ -155,7 +155,7 @@ export async function refreshSpherePhotographs(id:string,datasetId:string) {
   // The receipt names what the stage read by path and byte count; the inventory names the applied files.
   const selected=sourceContributors(dataset[0]!,config,sourceManifest), selectedFiles=await Promise.all(selected.map(source=>requireSourceFile(sourceDirectory,source)));
   const inputs:Record<string,number>={};
-  for(const path of [resolve(sourceDirectory,'manifest.json'),recipePath,resolve(objectDirectory,'prepared/scene.json')]) inputs[repositoryPath(path)]=(await stat(path)).size;
+  for(const path of [resolve(sourceDirectory,'manifest.json'),recipePath]) inputs[repositoryPath(path)]=(await stat(path)).size;
   for(const selectedFile of selectedFiles) inputs[repositoryPath(selectedFile.path)]=selectedFile.bytes;
   if(dataset[0]!.coverage) for(const path of [dataset[0]!.coverage!.normal,dataset[0]!.coverage!.topography]) { const source=sourceRecord(sourceManifest,path),file=await requireSourceFile(sourceDirectory,source); inputs[repositoryPath(file.path)]=file.bytes; }
   const receipt={schema:'cssearth-sphere-photograph-stage@2',id,inputs,assets};

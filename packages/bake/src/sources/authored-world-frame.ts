@@ -1,6 +1,6 @@
 import { requireWorldNavigationReceiptIdentity, samePreparedWorldFrame } from '@cssearth/objects';
 import { resolve } from 'node:path';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
+import { requireRecord, requireArray, requireString, requireFiniteNumber, hasErrorCode } from '@cssearth/core';
 import type { RuntimeSourceReader } from '../runtime-source/index.ts';
 
 export interface AuthoredWorldFrameReceiptInput {
@@ -17,6 +17,11 @@ export interface AuthoredWorldFrameInput extends AuthoredWorldFrameReceiptInput 
 
 const fail = (detail: string): never => { throw new TypeError(`Authored physical frame ${detail}.`); };
 
+/** A file's text, or null when this checkout does not hold it. */
+export async function optionalText(readText: RuntimeSourceReader, path: string): Promise<string | null> {
+  try { return await readText(path); } catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
+}
+
 /**
  * The part of the physical frame check that reads tracked files only: the receipt
  * (`prepared/world-navigation.json`) must repeat the descriptor's frame, each recipe source must be
@@ -27,9 +32,12 @@ const fail = (detail: string): never => { throw new TypeError(`Authored physical
 export async function requireAuthoredWorldFrameReceipt({ descriptor: descriptorInput, directory, readText, closure }: AuthoredWorldFrameReceiptInput) {
   const descriptor = requireRecord(descriptorInput, 'Authored descriptor');
   const properties = requireRecord(descriptor.properties, 'Authored properties');
+  // The receipt is the bake's working record (packages/objects/src/node/prepared-delivery.ts): a restored checkout has none,
+  // and the checks that read it are the bake's own.
   const path = resolve(directory, 'prepared/world-navigation.json');
-  const receipt = requireRecord(JSON.parse(await readText(path)), 'Authored physical frame receipt');
-  closure?.add(path);
+  const text = await optionalText(readText, path);
+  const receipt = text === null ? null : requireRecord(JSON.parse(text), 'Authored physical frame receipt');
+  if (receipt) closure?.add(path);
   const frame = requireRecord(properties.worldFrame, 'Authored physical frame');
   const recipe = requireRecord(properties.recipe, 'Authored recipe');
   const sources = requireArray(recipe.sources, 'Authored recipe sources').map(value => requireRecord(value, 'Authored source'));
@@ -40,7 +48,7 @@ export async function requireAuthoredWorldFrameReceipt({ descriptor: descriptorI
     const path = requireString(source.path, 'Authored source path');
     if (!records.some(entry => `source/${String(entry.path)}` === path)) throw new TypeError(`Authored physical frame source ${path} is not declared in the manifest.`);
   }
-  requireWorldNavigationReceiptIdentity(receipt, descriptor.id, frame);
+  if (receipt) requireWorldNavigationReceiptIdentity(receipt, descriptor.id, frame);
   return { receipt, frame, recipe };
 }
 
@@ -52,6 +60,10 @@ export async function requireAuthoredWorldFrame({ scene: sceneInput, runtime: ru
   if (scene.worldFrame !== undefined && !samePreparedWorldFrame(scene.worldFrame, frame)) fail('differs from the source scene frame');
   const camera = requireRecord(runtime.camera, 'Authored runtime camera');
   const shape = requireRecord(recipe.shape, 'Authored shape');
+  if (!receipt) {
+    if (frame.bodyRadiusM !== requireFiniteNumber(shape.radiusKm, 'Shape radius') * 1000) fail('does not reproduce its authored shape');
+    return;
+  }
   // A scene with no surface stands in the ecliptic presentation frame at the radius its solar-system source authors
   // (site/build/prepare/authored/prepare-world-navigation.ts): its receipt records that rendered radius, with no surface tiles to scale.
   const surfaceless = receipt.model === 'ecliptic-presentation-frame';

@@ -11,9 +11,12 @@ export { PREPARED_CATALOGUE, preparedCatalogueModule, readPreparedObjects } from
 export type { PreparedNavigableObject, PreparedObjectRegistry, PreparedSceneObject } from './prepared-registry.js';
 export { readCatalog, readContextObjects, readObjectDescriptors, type ObjectDescriptors } from './catalog-directory.js';
 export { ASSET_LOCATIONS, INVENTORY_FILE, INVENTORY_SCHEMA, assembleRuntimeAssetClosure, bakedPreparedFiles, inventoryPreparedAssets, inventoryPreparedSubset,
-  inventoryPublicAssets, inventoryText, isRegeneratedPreparedFile, isRetiredPreparedFile, mergeInventory, normalizeRuntimeAssetUrls, readInventory,
+  inventoryPublicAssets, inventoryText, mergeInventory, normalizeRuntimeAssetUrls, readInventory,
   requireInventory, updateInventory, validateInventory, verifyInventory } from './runtime-asset-closure.js';
 export type { AssetLocation, Inventory, InventoryAsset } from './runtime-asset-closure.js';
-export { preparedObjectText, preparedObjectTransport, preparedPageData, readJsonHead } from './prepared-transport.js';
+export { DELIVERED_PREPARED_RECORDS, SCENE_RETAINING_SOURCES, WORKING_PREPARED_RECORDS, deliveredPreparedFiles, deliveredPreparedRecord, isWorkingPreparedFile, preparedDeliveryContext } from './prepared-delivery.js';
+export type { DeliveredPreparedRecord, PreparedDeliveryContext, PreparedReader, WorkingPreparedRecord } from './prepared-delivery.js';
+export { preparedObjectText, preparedObjectTransport, preparedPageData, readJsonHead, readPreparedControls } from './prepared-transport.js';
+export { LEAF_BOXES_FILE, joinPreparedRuntimeText, readPreparedRuntimeText, splitPreparedRuntimeText, storePreparedRuntime } from './prepared-runtime-files.js';
 export { packPreparedBinary, unpackPreparedBinary, packPreparedBank, unpackPreparedBank } from './prepared-binary-file.js';
 export { volumeDatasetBankFiles, writeVolumeDatasetBank, readVolumeDatasetBank } from './volume-dataset-bank.js';

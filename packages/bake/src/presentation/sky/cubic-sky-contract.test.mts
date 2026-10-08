@@ -4,15 +4,15 @@ import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import PREPARED_MERCURY_SKY from "../../../../../src/objects/mercury/prepared/sky.json" with {type: "json"};
-import PREPARED_VENUS_SKY from "../../../../../src/objects/venus/prepared/sky.json" with {type: "json"};
+import PREPARED_MERCURY from "../../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};
+import PREPARED_VENUS from "../../../../../src/objects/venus/prepared/runtime.json" with {type: "json"};
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, CUBIC_SKY_STANDARD } from '@cssearth/bake/presentation';
 
 const runtimeSky = async (id: string) => requireRecord(await loadObjectTestDefinition(id)).sky;
 const OBJECT_SKIES = Object.freeze({
   sun: await runtimeSky('sun'),
-  mercury: PREPARED_MERCURY_SKY,
-  venus: PREPARED_VENUS_SKY,
+  mercury: PREPARED_MERCURY.sky,
+  venus: PREPARED_VENUS.sky,
   earth: await runtimeSky('earth'),
   mars: await runtimeSky('mars'),
   jupiter: await runtimeSky('jupiter'),

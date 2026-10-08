@@ -1905,12 +1905,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 21725,
-      "sha256": "fdd3b406a8c0e249c882ce1cc7c66b55058ed59408617c10bc307ca3d93d7926"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 32672,
       "sha256": "d50633e43e0b101fcb18fddf73055bbad87fb2ee68903d597213f7251e76e79d"
@@ -1920,6 +1914,12 @@
       "filename": "features.json",
       "bytes": 649,
       "sha256": "d6607d97f095980f4cddfe97210811f9d34dcb93aee7fda68a364c9c9da2b9ae"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 151374,
+      "sha256": "7e9aa2ced1dc4cebc5b9834cc90fe219a7f50a59df6dda3c08be0405c18c4d13"
     },
     {
       "location": "prepared",
@@ -2026,38 +2026,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 398258,
-      "sha256": "ffb2b835aed0c8327a1bfeabcf3f41c867bf98306f68a83307fc58eb0cc1f6c0"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 378299,
-      "sha256": "fa68576bc256108289a21f63a60acd699f77234c031aa47e54bc344f312c1902"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1179,
-      "sha256": "c990968d11c627dd2bf7cf15944d18977f6ec14e592993fd1cf26275b33c01c1"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 612,
-      "sha256": "623c769d8ca9beb6e73329c9af6ba1f62313332972681f27a036542863bc2e74"
+      "bytes": 246911,
+      "sha256": "fd3aa9cb488ea4561c93ba088d570e5b5d1f352a6286058d57abdbf3ec22c391"
     },
     {
       "location": "prepared",
       "filename": "text.json",
       "bytes": 3787,
       "sha256": "79146497e7623b611ec327abc243a52dd739e7c8343b8480d63f4271ff25dde4"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1227,
-      "sha256": "d99a3f3b368316665f18eb2a1f5ae55d24e6f6fa737a9e100f2e9a9df6e278ef"
     }
   ]
 }

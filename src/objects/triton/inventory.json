@@ -1665,12 +1665,6 @@
     },
     {
       "location": "prepared",
-      "filename": "controls.json",
-      "bytes": 768,
-      "sha256": "3021fa2078f86e4301b2721b05eef6c037bdf80ff721606c004893a6d9652f08"
-    },
-    {
-      "location": "prepared",
       "filename": "datasets.json",
       "bytes": 2225,
       "sha256": "4222de0720b7706b56e62e934639d418e8abf20051650eb5f7975db2a951f8ae"
@@ -1680,6 +1674,12 @@
       "filename": "features.json",
       "bytes": 668,
       "sha256": "f7b3bcd745c3d9575d9575e6381bf8371826d4aa82e10dcba5473ae022b44a8e"
+    },
+    {
+      "location": "prepared",
+      "filename": "leaf-boxes.json",
+      "bytes": 155136,
+      "sha256": "f33122a1cfa866e466734ab6d70a182d655bee942dd39ad7f7296ea2f636b487"
     },
     {
       "location": "prepared",
@@ -1720,26 +1720,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 329626,
-      "sha256": "bdb8ed10d5bf89735c4a705d3ea1192eb6c6c0bf7355c2768aa9d1cbdedca7e7"
-    },
-    {
-      "location": "prepared",
-      "filename": "scene.json",
-      "bytes": 376223,
-      "sha256": "db131f7c2ff52276fd392dfe4a9ad50ba4b195a8de547e8aabd791979968d649"
-    },
-    {
-      "location": "prepared",
-      "filename": "sky.json",
-      "bytes": 1184,
-      "sha256": "97b20288abcbd6581e2c1af0a949d3135a8524ef8963d875ba7ef148386d934b"
-    },
-    {
-      "location": "prepared",
-      "filename": "sun.json",
-      "bytes": 614,
-      "sha256": "77dad618f648d563d87be6c0d47ca05fa1300d2ed1e530f61b0dda4add0f04d5"
+      "bytes": 174517,
+      "sha256": "d59020edf9a645a9352fa83688ab9f85fc7ef783833040de2571e29aaa07acb4"
     },
     {
       "location": "prepared",
@@ -1752,12 +1734,6 @@
       "filename": "text.json",
       "bytes": 1414,
       "sha256": "c45e3b7472087a626e01da24a3af6b6c79c632d5c5c4f5a512fa29f9e2c0bfeb"
-    },
-    {
-      "location": "prepared",
-      "filename": "world-navigation.json",
-      "bytes": 1242,
-      "sha256": "790024ae930b6e8fc1e89cb5ad20a9f87d4d23d6e9ce087aceafb70361359fc9"
     }
   ]
 }
