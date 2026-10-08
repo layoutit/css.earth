@@ -46,27 +46,31 @@
       }
     },
     {
-      "id": "openspace-venus-clouds",
+      "id": "jonsson-venus-galileo-map",
       "path": "surface/venus-clouds.jpg",
-      "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/venus/textures/2/venus_clouds.jpg",
-      "credit": "OpenSpace Team",
-      "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
+      "origin": "https://bjj.mmedia.is/data/venus/venus.jpg",
+      "credit": "Björn Jónsson, from Galileo spacecraft images",
+      "license": "Free to use with credit to Björn Jónsson, as his planetary maps page states",
       "licenseEvidence": [
-        "https://raw.githubusercontent.com/OpenSpace/OpenSpace/56e29b54b8592084ff1fef47c2e08de0b22ce516/data/assets/scene/solarsystem/planets/venus/layers/colorlayers/clouds_magellan_combo_newyork.asset"
+        "https://bjj.mmedia.is/data/planetary_maps.html",
+        "https://bjj.mmedia.is/acknow.html"
       ],
-      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh",
-      "redistribution": "permitted with the OpenSpace MIT notice",
+      "acquisition": "node packages/bake/cli/object-operations.mts acquire venus --refresh downloads the JPEG the author publishes: 1,800 × 900 pixels, simple cylindrical, 90° N to 90° S, 66,303 bytes, last modified 2016-01-13. The clouds move, so longitude 0 marks no place on the planet. The file is read as published; nothing is recolored. The OpenSpace project distributes the same bytes as venus_clouds.jpg, which is where this input came from until 2026-10-07.",
+      "redistribution": "The author asks for credit and asks sites to link to his maps, not to host a copy, because he replaces them with improved versions. cssEarth does not mirror the JPEG: it is an untracked input downloaded from its origin, so a refresh takes his current file. The prepared WebP pages are projected derivatives of it.",
       "consumers": [
         "scene",
         "datasets"
       ],
+      "title": "A map of Venus from Galileo images, February 1990",
+      "displayCredit": "Björn Jónsson · NASA/Galileo",
+      "sourceUrl": "https://bjj.mmedia.is/data/venus/venus.html",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-venus-openspace-venus-clouds",
+            "catalogueId": "jonsson-venus-galileo-map",
             "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
+            "evidence": "https://bjj.mmedia.is/data/venus/venus.html describes this JPEG and links it as the full-size map."
           }
         ]
       }
@@ -726,6 +730,156 @@
             "facilityId": "magellan",
             "missionId": "magellan",
             "evidence": "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/geoid.dat — NASA/JPL Magellan Gravity Science Team (W. L. Sjogren); PDS Geosciences Node"
+          }
+        ]
+      }
+    },
+    {
+      "id": "austin-2026-radar-1967",
+      "path": "radar-history/Venus_Haystack_1967_Image_Global_23000m_v1.tif",
+      "origin": "https://zenodo.org/records/18176179/files/Venus_Haystack_1967_Image_Global_23000m_v1.tif?download=1",
+      "credit": "T. Austin et al. (2026), Venus Geospatial Raster Datasets; observations: Ingalls et al. (1968)",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseEvidence": [
+        "https://zenodo.org/records/18176179"
+      ],
+      "acquisition": "Unmodified deposited GeoTIFF: 431 × 414 pixels, 8-bit, 264,743 bytes, equirectangular on a 6,051 km sphere, longitudes -91° to 3°, latitudes -40° to 50°; 0 is no data. Scanned from a printed figure and fitted to Magellan’s map; the depositor removed the figure’s grid lines, which left straight streaks.",
+      "redistribution": "CC BY 4.0: prepared derivatives keep the depositor’s credit and cite the original observers.",
+      "consumers": [
+        "radar-1967"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "austin-2026-venus-radar-rasters",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/18176179",
+            "locator": "Venus_Haystack_1967_Image_Global_23000m_v1.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "austin-2026-radar-1972",
+      "path": "radar-history/Venus_Goldstone_1972_Global_13329m_v1.tif",
+      "origin": "https://zenodo.org/records/18176179/files/Venus_Goldstone_1972_Global_13329m_v1.tif?download=1",
+      "credit": "T. Austin et al. (2026), Venus Geospatial Raster Datasets; observations: Saunders and Malin (1977)",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseEvidence": [
+        "https://zenodo.org/records/18176179"
+      ],
+      "acquisition": "Unmodified deposited GeoTIFF: 1,302 × 682 pixels, 8-bit, 1,084,711 bytes, equirectangular on a 6,051 km sphere, longitudes -115° to 49°, latitudes -45° to 41°; 0 is no data. Digitized from a printed mosaic of the 1969, 1970 and 1972 observations and fitted to Magellan’s map; the dashed box and letters are the original authors’.",
+      "redistribution": "CC BY 4.0: prepared derivatives keep the depositor’s credit and cite the original observers.",
+      "consumers": [
+        "radar-1972"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "austin-2026-venus-radar-rasters",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/18176179",
+            "locator": "Venus_Goldstone_1972_Global_13329m_v1.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "austin-2026-radar-1977",
+      "path": "radar-history/Venus_Arecibo_1977_Global_5000m_v1.tif",
+      "origin": "https://zenodo.org/records/18176179/files/Venus_Arecibo_1977_Global_5000m_v1.tif?download=1",
+      "credit": "T. Austin et al. (2026), Venus Geospatial Raster Datasets; observations: Campbell and Burns (1980)",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseEvidence": [
+        "https://zenodo.org/records/18176179"
+      ],
+      "acquisition": "Unmodified deposited GeoTIFF: 3,309 × 3,028 pixels, 8-bit, 10,263,607 bytes, equirectangular on a 6,051 km sphere, longitudes -115° to 42°, latitudes -62° to 81°; 0 is no data. Scanned from a printed mosaic of the 1975 and 1977 observations and fitted to Magellan’s map; the original grid lines remain, and the depositor blurred the scan to remove printer texture.",
+      "redistribution": "CC BY 4.0: prepared derivatives keep the depositor’s credit and cite the original observers.",
+      "consumers": [
+        "radar-1977"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "https://zenodo.org/records/18176179/files/Venus_Arecibo_1977_Global_5000m_v1.tif.xml?download=1"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "austin-2026-venus-radar-rasters",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/18176179",
+            "locator": "Venus_Arecibo_1977_Global_5000m_v1.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "austin-2026-radar-1980",
+      "path": "radar-history/Venus_Pioneer_Backscatter_9278m_v1.tif",
+      "origin": "https://zenodo.org/records/18176179/files/Venus_Pioneer_Backscatter_9278m_v1.tif?download=1",
+      "credit": "T. Austin et al. (2026), Venus Geospatial Raster Datasets; observations: Pettengill et al. (1980)",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseEvidence": [
+        "https://zenodo.org/records/18176179"
+      ],
+      "acquisition": "Unmodified deposited GeoTIFF: 4,098 × 802 pixels, 8-bit, 3,806,658 bytes, equirectangular on a 6,051 km sphere, longitudes -180° to 180°, latitudes -20° to 51°; 0 is no data. Reformatted from the mosaic in NASA’s Planetary Data System, acquired between 5 December 1978 and 23 March 1981.",
+      "redistribution": "CC BY 4.0: prepared derivatives keep the depositor’s credit and cite the original observers.",
+      "consumers": [
+        "radar-1980"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "austin-2026-venus-radar-rasters",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/18176179",
+            "locator": "Venus_Pioneer_Backscatter_9278m_v1.tif"
+          }
+        ]
+      }
+    },
+    {
+      "id": "austin-2026-radar-1983",
+      "path": "radar-history/Venus_Arecibo_1983_North_2116m_v1.tif",
+      "origin": "https://zenodo.org/records/18176179/files/Venus_Arecibo_1983_North_2116m_v1.tif?download=1",
+      "credit": "T. Austin et al. (2026), Venus Geospatial Raster Datasets; observations: Campbell et al. (1984)",
+      "license": "Creative Commons Attribution 4.0 International",
+      "licenseEvidence": [
+        "https://zenodo.org/records/18176179"
+      ],
+      "acquisition": "Unmodified deposited GeoTIFF: 7,322 × 5,523 pixels, 8-bit, 41,945,330 bytes, equirectangular on a 6,051 km sphere, longitudes -109° to 38°, latitudes 22° to 82°; 0 is no data. Compiled from three mosaic tiles in NASA’s Planetary Data System, observed in August and September 1983, and fitted to Magellan’s map.",
+      "redistribution": "CC BY 4.0: prepared derivatives keep the depositor’s credit and cite the original observers.",
+      "consumers": [
+        "radar-1983"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "arecibo-305m",
+            "missionId": "arecibo-planetary-radar",
+            "evidence": "https://zenodo.org/records/18176179/files/Venus_Arecibo_1983_North_2116m_v1.tif.xml?download=1"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "austin-2026-venus-radar-rasters",
+            "role": "material",
+            "evidence": "https://zenodo.org/records/18176179",
+            "locator": "Venus_Arecibo_1983_North_2116m_v1.tif"
           }
         ]
       }

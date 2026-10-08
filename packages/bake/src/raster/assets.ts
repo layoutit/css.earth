@@ -11,9 +11,10 @@ import { outputName } from './io.ts';
 import { loadLimbLaw, meanObservedColor } from '../photometry/index.ts';
 import type { PreparedLimb } from './lighting.ts';
 import type { ObservationInterpretation } from './science.ts';
+import type { RasterPageRecipe } from './pages.ts';
 export type { ObservationInterpretation, InterpretedSurface } from './science.ts';
 export { readRasterRecipe } from './validation.ts';
-export async function prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config, interpret, shape }: {
+export async function prepareRasterAssets({ sourceDirectory, publicDirectory, outputDirectory, config, interpret, shape, pageRecipe }: {
     sourceDirectory: string;
     publicDirectory: string;
     outputDirectory: string;
@@ -22,10 +23,12 @@ export async function prepareRasterAssets({ sourceDirectory, publicDirectory, ou
     shape?: { polarToEquatorial: number };
     /** Required when any surface declares `science`; supplied by the preparation tools, never by src. */
     interpret?: ObservationInterpretation;
+    /** The body's whole recipe when `config` holds only some of its surfaces, so they keep the body's page plan. */
+    pageRecipe?: RasterPageRecipe;
 }) {
     await mkdir(publicDirectory, { recursive: true });
     await mkdir(outputDirectory, { recursive: true });
-    const { metadata, interpretations, constantSurfaces } = await prepareSurfaces(config, sourceDirectory, publicDirectory, interpret);
+    const { metadata, interpretations, constantSurfaces } = await prepareSurfaces(config, sourceDirectory, publicDirectory, interpret, pageRecipe);
     const limbFor = (block: LimbBlock | undefined, where: string) => block ? prepareLimb(block, sourceDirectory, publicDirectory, config, where, shape?.polarToEquatorial ?? NaN) : Promise.resolve(undefined);
     const lighting = config.lighting ? await prepareLighting(config, config.lighting, publicDirectory, await limbFor(config.lighting.limb, 'lighting.limb')) : undefined;
     const atmosphere = config.atmosphere ? await prepareAtmosphere(config.atmosphere, sourceDirectory, publicDirectory, (await limbFor(config.atmosphere.limb, 'atmosphere.limb'))!) : undefined;

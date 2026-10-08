@@ -461,6 +461,48 @@
         }
       },
       {
+        "id": "voyager1-1979",
+        "label": "Voyager dates",
+        "shortLabel": "Voyager",
+        "step": {
+          "group": "voyager-visible",
+          "label": "1979-02-27"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-voyager1-1979.webp",
+        "surface": "/scenes/jupiter/jupiter-voyager1-1979@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-voyager1-1979-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Voyager 1 · 1979-02-27",
+        "notes": "Björn Jónsson’s map from 270 Voyager 1 narrow-angle frames (135 orange, 135 violet) taken on 1979-02-27 between 03:55:47 and 12:52:35. Green is synthetic, fitted to lower-resolution green frames, and red, green and blue are computed from a spectrum estimated at each pixel. He removed limb darkening and seams. His mask marks dummy fill and useless data near the poles; those pixels are not drawn. Compare cloud shapes with the Hubble dates, not color.",
+        "source": {
+          "id": "jonsson-jupiter-voyager1-map",
+          "path": "../spacecraft/jupiter_vgr1_2025.jpg",
+          "url": "https://bjj.mmedia.is/data/jupiter_vgr1/index.html"
+        }
+      },
+      {
+        "id": "voyager2-1979",
+        "label": "Voyager dates",
+        "shortLabel": "Voyager",
+        "step": {
+          "group": "voyager-visible",
+          "label": "1979-06-28"
+        },
+        "thumbnail": "/scenes/jupiter/jupiter-dataset-voyager2-1979.webp",
+        "surface": "/scenes/jupiter/jupiter-voyager2-1979@2x.webp",
+        "poles": "/scenes/jupiter/jupiter-voyager2-1979-poles@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Voyager 2 · 1979-06-28",
+        "notes": "Björn Jónsson’s map from 135 Voyager 2 narrow-angle frames (45 orange, 45 green, 45 violet) taken on 1979-06-28 between 12:04:47 and 20:42:23 UTC. Red, green and blue are computed from a spectrum estimated at each pixel from the three filters, and blue is multiplied by 1.024. He removed limb darkening and seams. His mask marks dummy fill and useless data near the poles; those pixels are not drawn. Compare cloud shapes with the Hubble dates, not color.",
+        "source": {
+          "id": "jonsson-jupiter-voyager2-map",
+          "path": "../spacecraft/jupiter_vgr2.jpg",
+          "url": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html"
+        }
+      },
+      {
         "id": "magnetic",
         "label": "Magnetic field",
         "shortLabel": "Br",

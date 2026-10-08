@@ -166,6 +166,14 @@
       ],
       "path": "geology/Cassini_ISS_GeologicMapUnits_Global.layer.json",
       "url": "https://trek.nasa.gov/enceladus/trekarcgis/rest/services/enceladus/Cassini_ISS_GeologicMapUnits_Global/MapServer/0?f=json"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "enhanced-color"
+      ],
+      "path": "observations/PIA18435.jpg",
+      "url": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18435.jpg"
     }
   ]
 }

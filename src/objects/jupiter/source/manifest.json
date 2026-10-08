@@ -2047,6 +2047,164 @@
           }
         ]
       }
+    },
+    {
+      "id": "jonsson-jupiter-voyager1-map",
+      "path": "spacecraft/jupiter_vgr1_2025.jpg",
+      "origin": "https://bjj.mmedia.is/data/jupiter_vgr1/jupiter_vgr1_2025.jpg",
+      "credit": "Björn Jónsson, from Voyager images",
+      "license": "Free to use with credit to Björn Jónsson, as his planetary maps page states",
+      "licenseEvidence": [
+        "https://bjj.mmedia.is/data/planetary_maps.html",
+        "https://bjj.mmedia.is/acknow.html"
+      ],
+      "redistribution": "The author asks for credit and asks sites to link to his maps, not to host a copy, because he replaces them with improved versions. cssEarth does not mirror the file: it is an untracked input downloaded from its origin, so a refresh takes his current file. The prepared WebP images are projected derivatives of it.",
+      "consumers": [
+        "voyager1-1979"
+      ],
+      "sourceUrl": "https://bjj.mmedia.is/data/jupiter_vgr1/index.html",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "voyager-1",
+            "missionId": "voyager-1",
+            "evidence": "https://bjj.mmedia.is/data/jupiter_vgr1/index.html"
+          }
+        ]
+      },
+      "acquisition": "Unmodified published JPEG: 7,200 × 3,600 pixels, 7,970,155 bytes, last modified 2025-09-13 (his 2025 version). Simple cylindrical, planetographic latitude at a uniform interval, System III longitude with 0 at the left and right edges and 180 at the centre, for an ellipsoid of 71,516 × 66,871 km. His page does not say which way longitude grows; the map is taken with east to the right, as the Hubble maps are, which puts the Great Red Spot's turbulent wake west of the spot in both.",
+      "title": "A Voyager 1 map of Jupiter, 1979-02-27",
+      "displayCredit": "Björn Jónsson · NASA/Voyager 1",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jonsson-jupiter-voyager1-map",
+            "role": "material",
+            "evidence": "https://bjj.mmedia.is/data/jupiter_vgr1/index.html describes this JPEG and links it as the full-size map.",
+            "locator": "jupiter_vgr1_2025.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jonsson-jupiter-voyager1-mask",
+      "path": "spacecraft/jupiter_vgr1_bad_data_mask.png",
+      "origin": "https://bjj.mmedia.is/data/jupiter_vgr1/jupiter_vgr1_bad_data_mask.png",
+      "credit": "Björn Jónsson, from Voyager images",
+      "license": "Free to use with credit to Björn Jónsson, as his planetary maps page states",
+      "licenseEvidence": [
+        "https://bjj.mmedia.is/data/planetary_maps.html",
+        "https://bjj.mmedia.is/acknow.html"
+      ],
+      "redistribution": "The author asks for credit and asks sites to link to his maps, not to host a copy, because he replaces them with improved versions. cssEarth does not mirror the file: it is an untracked input downloaded from its origin, so a refresh takes his current file. The prepared WebP images are projected derivatives of it.",
+      "consumers": [
+        "voyager1-1979"
+      ],
+      "sourceUrl": "https://bjj.mmedia.is/data/jupiter_vgr1/index.html",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "voyager-1",
+            "missionId": "voyager-1",
+            "evidence": "https://bjj.mmedia.is/data/jupiter_vgr1/index.html"
+          }
+        ]
+      },
+      "acquisition": "Unmodified published PNG: 7,200 × 3,600 pixels, 40,275 bytes, two values. Black (0) marks dummy fill, real data the author judged useless and small manual seam repairs; gray (192) marks the rest. Used only to decide which pixels are drawn.",
+      "title": "Bad-data mask of the Voyager 1 map of Jupiter, 1979-02-27",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jonsson-jupiter-voyager1-map",
+            "role": "material",
+            "evidence": "https://bjj.mmedia.is/data/jupiter_vgr1/index.html links this mask and states what its black marks.",
+            "locator": "jupiter_vgr1_bad_data_mask.png"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jonsson-jupiter-voyager2-map",
+      "path": "spacecraft/jupiter_vgr2.jpg",
+      "origin": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/jupiter_vgr2.jpg",
+      "credit": "Björn Jónsson, from Voyager images",
+      "license": "Free to use with credit to Björn Jónsson, as his planetary maps page states",
+      "licenseEvidence": [
+        "https://bjj.mmedia.is/data/planetary_maps.html",
+        "https://bjj.mmedia.is/acknow.html"
+      ],
+      "redistribution": "The author asks for credit and asks sites to link to his maps, not to host a copy, because he replaces them with improved versions. cssEarth does not mirror the file: it is an untracked input downloaded from its origin, so a refresh takes his current file. The prepared WebP images are projected derivatives of it.",
+      "consumers": [
+        "voyager2-1979"
+      ],
+      "sourceUrl": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "voyager-2",
+            "missionId": "voyager-2",
+            "evidence": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html"
+          }
+        ]
+      },
+      "acquisition": "Unmodified published JPEG: 5,760 × 2,880 pixels, 4,555,083 bytes, last modified 2025-08-08. Simple cylindrical, planetographic latitude at a uniform interval, System III longitude with 0 at the left and right edges and 180 at the centre, for an ellipsoid of 71,516 × 66,871 km. His page does not say which way longitude grows; the map is taken with east to the right, as the Hubble maps are, which puts the Great Red Spot's turbulent wake west of the spot in both.",
+      "title": "A Voyager 2 map of Jupiter, 1979-06-28",
+      "displayCredit": "Björn Jónsson · NASA/Voyager 2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jonsson-jupiter-voyager2-map",
+            "role": "material",
+            "evidence": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html describes this JPEG and links it as the full-size map.",
+            "locator": "jupiter_vgr2.jpg"
+          }
+        ]
+      }
+    },
+    {
+      "id": "jonsson-jupiter-voyager2-mask",
+      "path": "spacecraft/jupiter_vgr2_bad_data_mask.png",
+      "origin": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/jupiter_vgr2_bad_data_mask.png",
+      "credit": "Björn Jónsson, from Voyager images",
+      "license": "Free to use with credit to Björn Jónsson, as his planetary maps page states",
+      "licenseEvidence": [
+        "https://bjj.mmedia.is/data/planetary_maps.html",
+        "https://bjj.mmedia.is/acknow.html"
+      ],
+      "redistribution": "The author asks for credit and asks sites to link to his maps, not to host a copy, because he replaces them with improved versions. cssEarth does not mirror the file: it is an untracked input downloaded from its origin, so a refresh takes his current file. The prepared WebP images are projected derivatives of it.",
+      "consumers": [
+        "voyager2-1979"
+      ],
+      "sourceUrl": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "voyager-2",
+            "missionId": "voyager-2",
+            "evidence": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html"
+          }
+        ]
+      },
+      "acquisition": "Unmodified published PNG: 5,760 × 2,880 pixels, 25,475 bytes, two values. Black (0) marks dummy fill, real data the author judged useless and small manual seam repairs; gray (192) marks the rest. Used only to decide which pixels are drawn.",
+      "title": "Bad-data mask of the Voyager 2 map of Jupiter, 1979-06-28",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jonsson-jupiter-voyager2-map",
+            "role": "material",
+            "evidence": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html links this mask and states what its black marks.",
+            "locator": "jupiter_vgr2_bad_data_mask.png"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],

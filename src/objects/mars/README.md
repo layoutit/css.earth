@@ -16,6 +16,7 @@ Mars shows Viking visible imagery, MOLA relief and THEMIS infrared observations 
 | Water equivalent, chlorine, iron, silicon, potassium, thorium | [Odyssey GRS ELEMTS v1](https://pds-geosciences.wustl.edu/missions/odyssey/grs_elements.html), observations 4 June 2002–3 April 2005 |
 | Magnetic field | [Langlais et al. (2019)](https://doi.org/10.1029/2018JE005854), degree/order 134 |
 | Crust thickness | [Wieczorek et al. (2022) Figure 2 example](https://doi.org/10.1029/2022JE007298) from [Zenodo 6477509](https://zenodo.org/records/6477509) |
+| Heat flow | [Parro et al. (2017)](https://doi.org/10.1038/srep45629) surface heat-flow grids of the UPWARDS project, [Zenodo 10479138](https://zenodo.org/records/10479138), CC BY 4.0 |
 | Surface limb | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), mean phase function from OMEGA and CRISM |
 | Limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) single-scattering limb model, run locally ([profile](source/atmosphere/psg-limb.json)) |
 | Landform and mineral catalogues | Eleven published surveys through their [NASA Trek](https://trek.nasa.gov/mars/) GIS layers, listed [below](#landform-and-mineral-catalogues-27-september-2026) |
@@ -37,6 +38,7 @@ Photographic datasets are resampled with Lanczos3 to 4,096 by 2,048 texels, pack
 - Geology uses the published legend fills in [the color table](source/geology/sim3292-colors.json).
 - GRS maps keep their unsmoothed 5° bins, negative estimates and missing cells. Water equivalent is hydrogen expressed as H₂O, not a map of exposed ice. Thorium is shown in ppm.
 - The magnetic field is evaluated by pyshtools on the 3,393.5 km sphere through the [magnetic recipe](source/preparation/magnetic.json) and [the preparation command](../../../packages/bake/cli/prepare-magnetic-map.mts). It shows radial field, blue inward and red outward.
+- Heat flow is a model, shown at four ages as one stepper: today and 1.5, 3.0 and 3.5 billion years ago. Each deposited GeoTIFF is 180 × 90 cells of 2°, in mW/m², and is read as published with no interpolation between cells. All four share one scale, 10 to 70 mW/m², so the steps can be compared. The present-day grid adds the radioactive heat of crust and mantle, varies it with crustal thickness and topography, and is tied to the heat flow inferred from the north polar lithosphere.
 - Crust thickness assumes 39 km beneath InSight and a crust density of 2,900 kg/m³. [The converter](../../../packages/bake/cli/prepare-mars-crust.mts) only reverses rows and adds coordinates. This example is not a unique consensus model.
 - Named features are placed through `presentation/surface-map.json`. Craters trace a rim circle; other types their published extent box. Fourteen landing, touchdown or impact sites and 2 traverse paths quote their source page in `source/features/sites.json`.
 
@@ -69,10 +71,13 @@ A colored cell holds at least one catalogued feature; no size is drawn. A white 
 - Dust cover reproduces the paper: Arabia 0.922, Syrtis Major 0.973, Mare Erythraeum 0.968 against its 0.970 regional average.
 - The magnetic grid spans −8,365 to 11,206 nT, consistent with Figure 6b's −8,520 to 11,260 nT.
 - Crust thickness spans 5.579–116.811 km, consistent with the paper's rounded 6–117 km.
+- Heat flow today spans 14.10–25.04 mW/m² with a mean of 19.18, the paper's 14 to 25 and 19. The earlier grids span 14.00–30.52 (mean 21.68), 24.70–53.77 (38.21) and 31.05–67.56 (48.03).
+- [A reader test](../../../packages/bake/src/objects/raster/geographic-science.test.mts) covers the grids' georeference, an ellipsoid stated by its inverse flattening.
 - Every catalogue point lands in a cell of its own class or the shared class.
 
 ## Known problems
 
+- Heat flow has never been measured on Mars; every value is modeled. The deposit publishes no method note for the three earlier ages beyond citing the present-day paper, and the paper calls its model first-order. The files state an ellipsoid, the globe uses a sphere: the latitude difference, at most 0.34°, is far inside a 2° cell.
 - THEMIS shows qualitative infrared response, not calibrated temperature or one observation date. Rows north of about 87.5° N and south of about 88.8° S are black: missing coverage, not dark terrain. The dataset is a USGS WMS snapshot (2026-09-16).
 - Albedo cells poleward of about 87° hold a constant fill of 0.06 and show as missing. Each cell blends several seasons.
 - MOLA's interpolated regions are inherited from the USGS product.

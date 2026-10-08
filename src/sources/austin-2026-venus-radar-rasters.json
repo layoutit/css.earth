@@ -1,0 +1,54 @@
+{
+  "id": "austin-2026-venus-radar-rasters",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Austin et al. (2026), Venus Geospatial Raster Datasets",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.16416846"
+    },
+    {
+      "type": "Archive resource",
+      "value": "https://zenodo.org/records/18176179"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/18176179",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/venus/source/manifest.json",
+      "locator": "/inputs"
+    }
+  ],
+  "publisher": "Trevor Austin",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Prepared by T. Austin et al. (2026). Observations: Ingalls et al. (1968); Saunders and Malin (1977); Campbell and Burns (1980); Pettengill et al. (1980); Campbell et al. (1984).",
+      "scope": "Five radar maps of Venus from 1967 to 1983, rescued from printed figures and archive mosaics and georeferenced to Magellan.",
+      "evidence": "https://zenodo.org/records/18176179"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://zenodo.org/records/18176179"
+    },
+    {
+      "kind": "limitation",
+      "text": "Scans of printed figures keep their grid lines or annotations; positions can be 40 to 300 km from Magellan’s; brightness is the scan’s, not a calibrated echo strength.",
+      "scope": "All five maps.",
+      "evidence": "https://zenodo.org/records/18176179/files/DatasetInventory.csv?download=1"
+    }
+  ],
+  "creators": [
+    "Trevor Austin"
+  ]
+}

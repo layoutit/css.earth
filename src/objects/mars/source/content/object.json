@@ -1031,6 +1031,262 @@
         }
       },
       {
+        "id": "heat-flow-now",
+        "label": "Heat flow",
+        "shortLabel": "Heat flow",
+        "thumbnail": "mars-dataset-heat-flow-now.webp",
+        "surface": "mars-surface-heat-flow-now@2x.webp",
+        "poles": "mars-poles-heat-flow-now@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "noData": false,
+        "qualification": "Parro et al. (2017) model · today · 2° cells",
+        "notes": "Modeled surface heat flow today, from the UPWARDS project grids of Parro et al. (2017): 14 to 25 mW/m², mean 19. The model adds the radioactive heat of the crust and mantle, varies it with crustal thickness and topography, and is tied to the heat flow inferred from how the north polar cap bends the lithosphere. It is a first-order model on 2° cells, not a measurement.",
+        "source": {
+          "id": "parro-2017-mars-heat-flow",
+          "path": "../heat-flow/UPWARDS2017_SHF_0.0Ga_2deg.tif",
+          "url": "https://doi.org/10.1038/srep45629"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface heat flow (mW/m²)",
+          "meta": "mW/m²",
+          "sourceUrl": "https://doi.org/10.1038/srep45629",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "10",
+              "25",
+              "40",
+              "55",
+              "70"
+            ]
+          }
+        },
+        "step": {
+          "group": "heat-flow",
+          "label": "Today"
+        }
+      },
+      {
+        "id": "heat-flow-1-5-ga",
+        "label": "Heat flow",
+        "shortLabel": "Heat flow",
+        "thumbnail": "mars-dataset-heat-flow-1-5-ga.webp",
+        "surface": "mars-surface-heat-flow-1-5-ga@2x.webp",
+        "poles": "mars-poles-heat-flow-1-5-ga@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "noData": false,
+        "qualification": "Parro et al. (2017) model · 1.5 billion years ago · 2° cells",
+        "notes": "Modeled surface heat flow 1.5 billion years ago, from the UPWARDS project grids of Parro et al. (2017): 14 to 31 mW/m², mean 22. The deposit gives this earlier age beside the present-day grid and cites the present-day paper for the method; it publishes no separate method note for it. One color scale serves all four ages, so the steps can be compared.",
+        "source": {
+          "id": "parro-2017-mars-heat-flow",
+          "path": "../heat-flow/UPWARDS2017_SHF_1.5Ga_2deg.tif",
+          "url": "https://doi.org/10.1038/srep45629"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface heat flow (mW/m²)",
+          "meta": "mW/m²",
+          "sourceUrl": "https://doi.org/10.1038/srep45629",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "10",
+              "25",
+              "40",
+              "55",
+              "70"
+            ]
+          }
+        },
+        "step": {
+          "group": "heat-flow",
+          "label": "1.5 billion years ago"
+        }
+      },
+      {
+        "id": "heat-flow-3-0-ga",
+        "label": "Heat flow",
+        "shortLabel": "Heat flow",
+        "thumbnail": "mars-dataset-heat-flow-3-0-ga.webp",
+        "surface": "mars-surface-heat-flow-3-0-ga@2x.webp",
+        "poles": "mars-poles-heat-flow-3-0-ga@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "noData": false,
+        "qualification": "Parro et al. (2017) model · 3.0 billion years ago · 2° cells",
+        "notes": "Modeled surface heat flow 3.0 billion years ago, from the UPWARDS project grids of Parro et al. (2017): 25 to 54 mW/m², mean 38. The deposit gives this earlier age beside the present-day grid and cites the present-day paper for the method; it publishes no separate method note for it. One color scale serves all four ages, so the steps can be compared.",
+        "source": {
+          "id": "parro-2017-mars-heat-flow",
+          "path": "../heat-flow/UPWARDS2017_SHF_3.0Ga_2deg.tif",
+          "url": "https://doi.org/10.1038/srep45629"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface heat flow (mW/m²)",
+          "meta": "mW/m²",
+          "sourceUrl": "https://doi.org/10.1038/srep45629",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "10",
+              "25",
+              "40",
+              "55",
+              "70"
+            ]
+          }
+        },
+        "step": {
+          "group": "heat-flow",
+          "label": "3.0 billion years ago"
+        }
+      },
+      {
+        "id": "heat-flow-3-5-ga",
+        "label": "Heat flow",
+        "shortLabel": "Heat flow",
+        "thumbnail": "mars-dataset-heat-flow-3-5-ga.webp",
+        "surface": "mars-surface-heat-flow-3-5-ga@2x.webp",
+        "poles": "mars-poles-heat-flow-3-5-ga@2x.webp",
+        "material": "mars-observation-material@2x.webp",
+        "falseColor": true,
+        "noData": false,
+        "qualification": "Parro et al. (2017) model · 3.5 billion years ago · 2° cells",
+        "notes": "Modeled surface heat flow 3.5 billion years ago, from the UPWARDS project grids of Parro et al. (2017): 31 to 68 mW/m², mean 48. The deposit gives this earlier age beside the present-day grid and cites the present-day paper for the method; it publishes no separate method note for it. One color scale serves all four ages, so the steps can be compared.",
+        "source": {
+          "id": "parro-2017-mars-heat-flow",
+          "path": "../heat-flow/UPWARDS2017_SHF_3.5Ga_2deg.tif",
+          "url": "https://doi.org/10.1038/srep45629"
+        },
+        "legend": {
+          "kind": "scale",
+          "title": "Surface heat flow (mW/m²)",
+          "meta": "mW/m²",
+          "sourceUrl": "https://doi.org/10.1038/srep45629",
+          "recipe": {
+            "palette": [
+              [
+                68,
+                1,
+                84
+              ],
+              [
+                59,
+                82,
+                139
+              ],
+              [
+                33,
+                145,
+                140
+              ],
+              [
+                94,
+                201,
+                98
+              ],
+              [
+                253,
+                231,
+                37
+              ]
+            ],
+            "labels": [
+              "10",
+              "25",
+              "40",
+              "55",
+              "70"
+            ]
+          }
+        },
+        "step": {
+          "group": "heat-flow",
+          "label": "3.5 billion years ago"
+        }
+      },
+      {
         "id": "albedo",
         "label": "Albedo",
         "shortLabel": "Albedo",

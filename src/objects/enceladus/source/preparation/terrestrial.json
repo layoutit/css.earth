@@ -35,6 +35,18 @@
         "textureScale": 0.25
       },
       {
+        "id": "enhanced",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": null,
+          "centerLongitude": 180
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2
+        },
+        "textureScale": 0.25
+      },
+      {
         "id": "infrared",
         "validity": {
           "kind": "image-rgb-no-data",
