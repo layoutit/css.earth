@@ -1,8 +1,9 @@
 import { availableParallelism } from 'node:os';
 import { Worker } from 'node:worker_threads';
 
-/** One share of the asset preparation: a surface map, the extras (interior, legends, thumbnails) or a material slice. */
-export interface PagedAssetJob { mode: 'maps' | 'extras' | 'materials'; surfaceMapNames?: readonly string[]; materialSlice?: { index: number; count: number }; }
+/** One share of the asset preparation: a surface map, the extras (interior, legends, thumbnails), the thumbnails of named
+ * maps alone, or a material slice. */
+export interface PagedAssetJob { mode: 'maps' | 'extras' | 'thumbnails' | 'materials'; surfaceMapNames?: readonly string[]; materialSlice?: { index: number; count: number }; }
 
 // Each surface map holds a full-resolution raster (a few GB), so the pool stays well inside a laptop's memory.
 const MAXIMUM_WORKERS = 6;
@@ -11,13 +12,15 @@ const MAXIMUM_WORKERS = 6;
  * run at once. Every job writes a disjoint set of files with the same code as a single run, so the outputs are the same.
  * `worker` is the host's module that runs one job with `workerData` `{ objectDirectory, publicDirectory, job }` and posts
  * back the files it wrote; it reads the body's files, so it stays with the host.
- * `materialsOnly` runs the atmosphere material slices alone; they read no surface imagery. */
-export async function preparePagedEllipsoidAssetsInParallel({ worker: workerModule, objectDirectory, publicDirectory, mapNames, materialsOnly = false }: { worker: URL; objectDirectory: string; publicDirectory: string; mapNames: readonly string[]; materialsOnly?: boolean }) {
+ * `materialsOnly` runs the atmosphere material slices alone; they read no surface imagery. `mapsOnly` runs the named
+ * surface maps and their thumbnails alone: the datasets a reuse run adds to a published preparation. */
+export async function preparePagedEllipsoidAssetsInParallel({ worker: workerModule, objectDirectory, publicDirectory, mapNames, materialsOnly = false, mapsOnly = false }: { worker: URL; objectDirectory: string; publicDirectory: string; mapNames: readonly string[]; materialsOnly?: boolean; mapsOnly?: boolean }) {
   const workers = Math.max(1, Math.min(MAXIMUM_WORKERS, availableParallelism() - 2));
   const slices = workers;
   // Longest first (Earth, 2026-09-24): the extras take about 115 s, a surface map 80 s, a sixth of the materials 55 s.
-  const jobs: PagedAssetJob[] = [...(materialsOnly ? [] : [{ mode: 'extras' as const }, ...mapNames.map(name => ({ mode: 'maps' as const, surfaceMapNames: [name] }))]),
-    ...Array.from({ length: slices }, (_, index) => ({ mode: 'materials' as const, materialSlice: { index, count: slices } }))];
+  const jobs: PagedAssetJob[] = mapsOnly ? [...mapNames.map(name => ({ mode: 'maps' as const, surfaceMapNames: [name] })), { mode: 'thumbnails', surfaceMapNames: mapNames }]
+    : [...(materialsOnly ? [] : [{ mode: 'extras' as const }, ...mapNames.map(name => ({ mode: 'maps' as const, surfaceMapNames: [name] }))]),
+      ...Array.from({ length: slices }, (_, index) => ({ mode: 'materials' as const, materialSlice: { index, count: slices } }))];
   const assets = new Set<string>();
   let next = 0;
   const run = (job: PagedAssetJob) => new Promise<void>((done, fail) => {

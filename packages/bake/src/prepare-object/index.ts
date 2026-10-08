@@ -1,12 +1,15 @@
 /** `@cssearth/bake/prepare-object` (Node only): prepare authored objects end to end, in the only order that works, and
  * name the step that failed. `packages/bake/cli/prepare-object.mts <object-id>... [--from <step>] [--to <step>]
- * [--reuse-images]` is its command.
+ * [--reuse-images | --add-datasets]` is its command.
  *
  * The prepare step already redraws only the lighting and atmosphere banks when nothing else changed (prepare-authored.ts,
  * redrawOnlyDecision). --reuse-images forces that: it keeps the object's published images (and, for Earth, its pages, places
  * and texture levels) and rebuilds
  * the scene, presentation and content from the tracked recipes, stopping after the prepare step. It needs no raw downloads;
  * the paged-ellipsoid and raster lanes support it, and it refuses when the published image set would change.
+ * --add-datasets is that run for a paged globe that gained surface datasets (Earth's ENSO days, refresh-earth-enso.mts): it
+ * prepares only the new datasets' images from their own imagery, keeps every other published image, the material banks
+ * included, then audits the presentation and prepares the reader text.
  *
  * Each step is an existing tool. Nothing here decides science: it orders the tools, rebuilds what a step would read stale, and
  * rebuilds the shared sources catalogue from the installed packages, never from other objects' authoring inputs. Resume after a
@@ -21,7 +24,7 @@ import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { projectRoot } from '@cssearth/core/node';
 
-export interface PreparationOptions { readonly reuseImages?: boolean; readonly root?: string }
+export interface PreparationOptions { readonly reuseImages?: boolean; readonly addDatasets?: boolean; readonly root?: string }
 /** `once`: the command does not name an object. `ids`: the tool takes every id in one call. `each`: one command per object,
  * run PREPARATIONS_AT_ONCE at a time when `parallel`. */
 export interface PreparationStep {
@@ -49,8 +52,8 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('site/build/prepare/catalog/prepare-catalog.mts')] },
   { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', scope: 'once', commands: async (ids, { root = projectRoot(import.meta.url) } = {}) =>
     (await Promise.all(ids.map(id => exists(resolve(root, 'packages/astronomy/data/bodies', `${id}.json`))))).some(Boolean) ? [node('packages/bake/cli/prepare-solar-geometry.mts')] : [] },
-  { name: 'prepare', purpose: 'prepare datasets, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { reuseImages = false } = {}) =>
-    [node('site/build/prepare/authored/prepare-authored.ts', id!, '--write', ...(reuseImages ? ['--reuse-images'] : []))] },
+  { name: 'prepare', purpose: 'prepare datasets, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { reuseImages = false, addDatasets = false } = {}) =>
+    [node('site/build/prepare/authored/prepare-authored.ts', id!, '--write', ...(reuseImages || addDatasets ? ['--reuse-images'] : []), ...(addDatasets ? ['--add-datasets'] : []))] },
   { name: 'discovery', purpose: 'recompute discovery now that prepared datasets exist', scope: 'once', commands: async () => [node('site/build/prepare/catalog/prepare-catalog.mts')] },
   { name: 'sources', purpose: 'write the catalogued source records the manifest cites', scope: 'each', commands: async ([id]) => [node('site/build/prepare/catalog/author-source-records.mts', id!)] },
   { name: 'page', purpose: 'pin the prepared page data into the descriptor', scope: 'ids', commands: async ids => [node('site/build/prepare/authored/prepare-object-json.mts', ...ids)] },
@@ -179,17 +182,19 @@ async function runPreparationCommand(command: string, args: readonly string[], r
 
 /** Prepare `ids` through the chain from `from` to `to` (inclusive; the whole chain by default). Returns false after naming
  * the failed step and the command that resumes. */
-export async function prepareObjects(ids: readonly string[], { from, to, reuseImages = false, root = projectRoot(import.meta.url), atOnce = PREPARATIONS_AT_ONCE, signal, progress = line => console.log(line) }:
-  { from?: string; to?: string; reuseImages?: boolean; root?: string; atOnce?: number; signal?: AbortSignal; progress?: Progress } = {}) {
+export async function prepareObjects(ids: readonly string[], { from, to, reuseImages = false, addDatasets = false, root = projectRoot(import.meta.url), atOnce = PREPARATIONS_AT_ONCE, signal, progress = line => console.log(line) }:
+  { from?: string; to?: string; reuseImages?: boolean; addDatasets?: boolean; root?: string; atOnce?: number; signal?: AbortSignal; progress?: Progress } = {}) {
   root = resolve(root);
   if (!ids.length || new Set(ids).size !== ids.length) throw new TypeError('prepare-object: name each object once.');
   for (const id of ids) if (!/^[a-z][a-z0-9-]*$/u.test(id) || !await exists(resolve(root, 'src/objects', id, 'object.json'))) throw new TypeError(`No object package: src/objects/${id}/object.json.`);
   const index = (name: string | undefined, fallback: number) => { if (name === undefined) return fallback; const at = PREPARATION_STEPS.findIndex(step => step.name === name); if (at < 0) throw new TypeError(`Unknown step ${name}; steps are ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`); return at; };
   // A reuse-images run changes nothing the later steps read, and they read raw imagery a checkout may not have;
   // its prepare step already pins the page data and publishes the set.
-  const start = index(from, 0), end = reuseImages ? index('prepare', 0) : index(to, PREPARATION_STEPS.length - 1);
-  const steps = PREPARATION_STEPS.slice(start, end + 1), started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
-  const resume = (step: PreparationStep) => `node packages/bake/cli/prepare-object.mts ${ids.join(' ')} --from ${step.name}${to ? ` --to ${to}` : ''}`;
+  const start = index(from, 0), end = reuseImages || addDatasets ? index('prepare', 0) : index(to, PREPARATION_STEPS.length - 1);
+  // An add-datasets run brings datasets the reader text and the presentation audit have not seen; nothing else reads them.
+  const chain = [...PREPARATION_STEPS.slice(0, end + 1), ...(addDatasets ? PREPARATION_STEPS.filter(step => step.name === 'audit' || step.name === 'text') : [])];
+  const steps = chain.filter(step => PREPARATION_STEPS.indexOf(step) >= start), started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
+  const resume = (step: PreparationStep) => `node packages/bake/cli/prepare-object.mts ${ids.join(' ')} --from ${step.name}${to ? ` --to ${to}` : ''}${addDatasets ? ' --add-datasets' : ''}`;
   for (const step of steps) {
     if (signal?.aborted) return false;
     if (step.scope === 'each') {
@@ -199,7 +204,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
         for (let next = queue.shift(); next && !failures.length; next = queue.shift()) {
           const [id, at] = next;
           progress(`  [${at + 1}/${ids.length}] ${id} (${elapsed()})`);
-          for (const [command, ...args] of await step.commands([id], { reuseImages, root })) {
+          for (const [command, ...args] of await step.commands([id], { reuseImages, addDatasets, root })) {
             const failure = await runPreparationCommand(command!, args, root, signal, true);
             if (failure) { failures.push(failure); break; }
           }
@@ -209,7 +214,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
       continue;
     }
     // A step may refuse while it plans, before running anything (the billboard step with no site answering).
-    const commands = await step.commands(ids, { reuseImages, root }).catch((error: unknown) => error instanceof Error ? error : new Error(String(error)));
+    const commands = await step.commands(ids, { reuseImages, addDatasets, root }).catch((error: unknown) => error instanceof Error ? error : new Error(String(error)));
     if (commands instanceof Error) { console.error(`\nStep "${step.name}" refused: ${commands.message}\nFix it, then resume: ${resume(step)}`); return false; }
     progress(`\n[${step.name}] ${step.purpose}${commands.length ? '' : ' (nothing to do)'} (${elapsed()})`);
     for (const [command, ...args] of commands) {
@@ -222,4 +227,4 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
 }
 
 /** One object, as before. */
-export const prepareObject = (id: string, options: { from?: string; reuseImages?: boolean; root?: string; signal?: AbortSignal } = {}) => prepareObjects([id], options);
+export const prepareObject = (id: string, options: { from?: string; reuseImages?: boolean; addDatasets?: boolean; root?: string; signal?: AbortSignal } = {}) => prepareObjects([id], options);

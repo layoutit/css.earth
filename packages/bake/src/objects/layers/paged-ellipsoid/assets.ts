@@ -27,7 +27,8 @@ import { readMantleTomography, tomographyLegend } from "./tomography.ts";
 import { applyDisplayGamma } from "./display-tone.ts";
 
 
-/** `mode` 'extras' prepares the interior, legends and thumbnails without surface maps or materials. `materialSlice` runs
+/** `mode` 'extras' prepares the interior, legends and thumbnails without surface maps or materials; 'thumbnails' with
+ * `surfaceMapNames` prepares those maps' thumbnails and legends alone. `materialSlice` runs
  * every `count`th material image from `index`, so parallel workers each write a disjoint share (preparePagedEllipsoidAssetsInParallel). */
 export async function preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, mode = 'all', surfaceMapNames, attitude, materialSlice = { index: 0, count: 1 }, cutaway }: {cutaway: boolean; attitude?: EllipsoidAttitude; config: PagedAssetConfiguration; sourceDirectory: string; publicDirectory: string; surfaceRasterPlan: PagedSurfaceRasterPlan; atmosphere?: AtmospherePreparation; atmosphereModel?: AtmosphereModel; raster: ReturnType<typeof createPagedSurfaceRaster>; mode?: string; surfaceMapNames?: readonly string[]; materialSlice?: {index: number; count: number}}) {
 const { bakeSurfaceRaster, surfacePageUrls } = raster;
@@ -75,7 +76,8 @@ if (mode !== 'materials') {
     if (mode !== 'thumbnails' && mode !== 'extras') await prepareMap(input,map.name,{compositeClouds:map.compositeClouds,displayGamma:map.displayGamma,nativePhotographicSampling:map.nativePhotographicSampling,deepOceanFill:map.deepOceanFill,kernel:map.scientific?"nearest":undefined,webp:map.webp});
   }
   // A body without a cutaway (the recipe's `cutaway`) prepares no interior.
-  if (cutaway && mode === 'thumbnails') await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true });
+  // Named maps' thumbnails alone (a reuse run's added datasets) leave the published interior thumbnail as it is.
+  if (mode === 'thumbnails') { if (cutaway && !surfaceMapNames) await prepareInteriorAssets({ exterior: false, thumbnailsOnly: true }); }
   else if (cutaway && mode !== 'maps') await prepareInteriorAssets();
   if (mode !== 'maps') for (const map of surfaceMaps) {
     let input = inputs.get(map.name);

@@ -21,6 +21,8 @@ test('reuse-images preparation reaches the authored preparation only when asked'
   assert.deepEqual(await prepare.commands(['earth']), [['node', 'site/build/prepare/authored/prepare-authored.ts', 'earth', '--write']]);
   assert.deepEqual(await prepare.commands(['earth'], { reuseImages: true }),
     [['node', 'site/build/prepare/authored/prepare-authored.ts', 'earth', '--write', '--reuse-images']]);
+  assert.deepEqual(await prepare.commands(['earth'], { addDatasets: true }),
+    [['node', 'site/build/prepare/authored/prepare-authored.ts', 'earth', '--write', '--reuse-images', '--add-datasets']]);
 });
 
 test('several objects run each tool once: the id-list tools take every id, the authored preparation runs per object, the Sun and the world files are re-pinned last', async () => {

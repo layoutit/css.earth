@@ -160,17 +160,17 @@
         "notes": "NASA Black Marble 2016 · Suomi NPP VIIRS night lights from the best cloud-free nights of each month. Land, ice and ocean are NASA's MODIS Blue Marble imagery, added for context. This is an annual composite, not live lighting."
       },
       {
-        "id": "enso-2026-09-14",
+        "id": "enso-2026-09-24",
         "label": "ENSO",
         "step": {
           "group": "enso",
-          "label": "14 Sept",
+          "label": "24 Sept",
           "opens": "last"
         },
-        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-09-14.webp",
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-09-24.webp",
         "falseColor": true,
         "source": {
-          "id": "nasa-mur-gibs-tiles-2026-09-14",
+          "id": "nasa-mur-gibs-tiles-2026-09-24",
           "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
         },
         "facts": [
@@ -204,20 +204,20 @@
           ]
         },
         "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
-        "notes": "NASA MUR · 1 km source imagery · 14 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+        "notes": "NASA MUR · 1 km source imagery · 24 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
       },
       {
-        "id": "enso-2026-09-21",
+        "id": "enso-2026-09-25",
         "label": "ENSO",
         "step": {
           "group": "enso",
-          "label": "21 Sept",
+          "label": "25 Sept",
           "opens": "last"
         },
-        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-09-21.webp",
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-09-25.webp",
         "falseColor": true,
         "source": {
-          "id": "nasa-mur-gibs-tiles-2026-09-21",
+          "id": "nasa-mur-gibs-tiles-2026-09-25",
           "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
         },
         "facts": [
@@ -251,7 +251,101 @@
           ]
         },
         "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
-        "notes": "NASA MUR · 1 km source imagery · 21 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+        "notes": "NASA MUR · 1 km source imagery · 25 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-09-26",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "26 Sept",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-09-26.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-09-26",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-09-30"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 26 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-09-27",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "27 Sept",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-09-27.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-09-27",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-09-30"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 27 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
       },
       {
         "id": "enso-2026-09-28",
@@ -299,6 +393,429 @@
         },
         "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
         "notes": "NASA MUR · 1 km source imagery · 28 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-09-29",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "29 Sept",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-09-29.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-09-29",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-10-08"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 29 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-09-30",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "30 Sept",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-09-30.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-09-30",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-10-08"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 30 Sept 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-10-01",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "1 Oct",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-10-01.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-10-01",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-10-08"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 1 Oct 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-10-02",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "2 Oct",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-10-02.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-10-02",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-10-08"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 2 Oct 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-10-03",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "3 Oct",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-10-03.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-10-03",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-10-08"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 3 Oct 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-10-04",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "4 Oct",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-10-04.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-10-04",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-10-08"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 4 Oct 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-10-05",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "5 Oct",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-10-05.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-10-05",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-10-08"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 5 Oct 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-10-06",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "6 Oct",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-10-06.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-10-06",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-10-08"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 6 Oct 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
+      },
+      {
+        "id": "enso-2026-10-07",
+        "label": "ENSO",
+        "step": {
+          "group": "enso",
+          "label": "7 Oct",
+          "opens": "last"
+        },
+        "thumbnail": "/scenes/earth/earth-dataset-enso-2026-10-07.webp",
+        "falseColor": true,
+        "source": {
+          "id": "nasa-mur-gibs-tiles-2026-10-07",
+          "url": "https://podaac.jpl.nasa.gov/dataset/MUR-JPL-L4-GLOB-v4.1"
+        },
+        "facts": [
+          {
+            "id": "enso-status",
+            "label": "NOAA status",
+            "value": "El Niño Advisory"
+          },
+          {
+            "id": "enso-advisory-date",
+            "label": "Advisory issued",
+            "value": "10 September 2026"
+          },
+          {
+            "id": "enso-checked",
+            "label": "Source checked",
+            "value": "2026-10-08"
+          }
+        ],
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature anomaly · °C",
+          "sourceUrl": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
+          "image": "earth-enso-legend.png",
+          "width": 620,
+          "height": 16,
+          "labels": [
+            "< −3",
+            "0",
+            "≥ +3"
+          ]
+        },
+        "legendNote": "NASA imagery uses 0.1 °C color bins; the NOAA advisory describes the coupled ocean–atmosphere state.",
+        "notes": "NASA MUR · 1 km source imagery · 7 Oct 2026. Sea-surface temperature departure from the 2003–2014 average. NASA colors saturate below −3 and at +3 °C. Gray: land, ice, or unavailable imagery."
       }
     ]
   },

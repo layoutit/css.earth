@@ -1,7 +1,6 @@
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/earth/refresh-earth-enso.mts. Moves Earth's ENSO sequence to the newest NASA MUR
-// anomaly analysis GIBS has published and the same weekday one and two weeks before it: it acquires each date it does not
-// hold yet, drops the
+// anomaly analysis GIBS has published and the thirteen days before it: it acquires each date it does not hold yet, drops the
 // dates that left it, re-reads the NOAA advisory and rewrites every declaration the datasets are made from. Preparation then
 // bakes the declared dates offline (pnpm prepare:objects --object=earth), and the new tile archives go to the source mirror
 // (packages/bake/cli/publish-source-cache.mts --object=earth).
@@ -14,8 +13,8 @@ import { pathToFileURL } from 'node:url';
 import { acquireMurDate, acquireMurShared, restoreMurDate, murCapabilitiesUrl, murDatasetId, murDateDirectory, murEnsoContent, murEnsoText,
   murTileUrl, murWindow, parseMurCapabilities } from './mur-imagery.mts';
 
-/** The newest analysis and the same weekday one and two weeks before it. */
-export const ENSO_WINDOW = { count: 3, spacingDays: 7 };
+/** The newest analysis and the thirteen days before it: two weeks, one step a day. */
+export const ENSO_WINDOW = { count: 14, spacingDays: 1 };
 const advisoryUrl = 'https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml';
 const credit = 'NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS';
 const license = 'NASA open Earth science imagery with attribution';
