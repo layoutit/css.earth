@@ -24,10 +24,10 @@ test('runtime camera prefix and full projection validate the same envelope', () 
   assert.throws(() => readRuntimeCamera({ schema: OBJECT_RUNTIME_SCHEMA, camera: {} }));
   assert.throws(() => readRuntimeCameraPrefix(JSON.stringify({ schema: 'wrong', camera: {} })));
   assert.equal(readRuntimeCameraPrefix('{"schema":'), null);
-  // The consumer delegates both transport paths; it cannot return an unchecked camera.
+  // The consumer takes the stored runtime's head through its reader and delegates the check; it cannot return an unchecked camera.
   const source = readFileSync(new URL('../../../../../site/build/prepare/prepare-object-discovery.mts', import.meta.url), 'utf8');
-  assert.match(source, /readRuntimeCameraPrefix\(buffer\.toString/u);
-  assert.match(source, /readRuntimeCamera\(JSON\.parse/u);
+  assert.match(source, /readPreparedRuntimeHead\(preparedDirectory, \['schema', 'camera'\]\)/u);
+  assert.match(source, /readRuntimeCamera\(head\)/u);
 });
 
 test('full and truncated transports admit the same valid camera and reject a wrong envelope', () => {
