@@ -107,6 +107,14 @@ function preparedMotionKinds(motion: unknown, id: string): { spin: boolean; ligh
   return { spin: lightCurves.includes(false), lightCurve: lightCurves.includes(true) };
 }
 
+/** The top-level fields of a stored runtime that never hold a shared part (prepared-runtime-files.ts): the ones a reader
+ * may take from the file as it is stored, without the whole runtime. */
+export type PreparedRuntimeHeadKey = 'schema' | 'id' | 'camera' | 'controls' | 'assets' | 'motion' | 'features';
+/** Those fields of the body whose `prepared/` directory this is, read from the head of its stored runtime. */
+export function readPreparedRuntimeHead(preparedDirectory: string, keys: readonly PreparedRuntimeHeadKey[]): Promise<Record<string, unknown>> {
+  return readJsonHead(resolve(preparedDirectory, 'runtime.json'), keys);
+}
+
 /** A scene body's controls: its runtime's. No copy of them is delivered beside it. A body without a runtime has none
  * (the read fails with `ENOENT`). */
 export async function readPreparedControls(preparedDirectory: string): Promise<Record<string, unknown>> {
@@ -117,7 +125,7 @@ export async function readPreparedControls(preparedDirectory: string): Promise<R
 /** A scene body's page data: the runtime's asset table, its controls and what its motion plays. The motion list closes
  * the runtime, so the file is read to its end: 4 s over 4,574 bodies, against 1 s for the asset table alone (2026-10-07). */
 export async function preparedPageData(objectDirectory: string, id: string) {
-  const { assets, motion, controls } = await readJsonHead(resolve(objectDirectory, 'prepared/runtime.json'), ['assets', 'motion', 'controls']);
+  const { assets, motion, controls } = await readPreparedRuntimeHead(resolve(objectDirectory, 'prepared'), ['assets', 'motion', 'controls']);
   if (!isRecord(assets)) throw new TypeError(`${id}: prepared/runtime.json has no asset table.`);
   return { schema: OBJECT_PAGE_SCHEMA, id, assets, controls: requireRecord(controls, `${id} prepared controls`), motion: preparedMotionKinds(motion, id) };
 }

@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
 import { normalizeDestinationQuery, readDestinationSettlements, readFeatureSearchCatalog, readRuntimeFeatureDatasets, readPreparedFeaturePins } from '@cssearth/objects';
 import { resolveBuildSceneAddress } from '../../../server-assets/asset-origin.mts';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { readPreparedObjects, readPreparedRuntimeHead } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../../..')).sceneObjects;
 
@@ -86,7 +86,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     // dataset selection so search never moves to a point on an incompatible model.
     let datasetIds: string[] | undefined;
     if (catalog.landmarks !== undefined) {
-      datasetIds = readRuntimeFeatureDatasets(JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8')));
+      datasetIds = readRuntimeFeatureDatasets(await readPreparedRuntimeHead(resolve(root, 'src/objects', object.id, 'prepared'), ['schema', 'features']));
     }
     // Named features that are settlements: search leaves the same places out.
     const settlements = values.filter((value): value is Record<string, unknown> => isRecord(value) && (value.type === 'Capital' || value.type === 'City'))

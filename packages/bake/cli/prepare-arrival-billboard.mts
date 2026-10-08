@@ -11,7 +11,7 @@ import { arrivalLook, writeWorldBillboard } from '@cssearth/bake/site-assets';
 import { anyChangedAfter } from '@cssearth/bake/preparation';
 import { requireCamera, parseArrivalBillboard } from '@cssearth/objects';
 import { preparedDefaultViewRotation, worldCameraFromCenteredPresentation } from '@cssearth/engine';
-import { readInventory, readPreparedObjects, updateInventory } from '@cssearth/objects/node';
+import { readInventory, readPreparedObjects, readPreparedRuntimeHead, updateInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../../..'), args = process.argv.slice(2);
 const SCENE_OBJECTS = readPreparedObjects(root).sceneObjects;
@@ -51,8 +51,7 @@ let shared = 0;
 try {
   for (const [index, object] of objects.entries()) {
     const objectDirectory = resolve(root, 'src/objects', object.id), prepared = resolve(objectDirectory, 'prepared');
-    const runtimeBytes = await readFile(resolve(prepared, 'runtime.json'));
-    const runtime = requireRecord(JSON.parse(runtimeBytes.toString('utf8')));
+    const runtime = await readPreparedRuntimeHead(prepared, ['camera', 'controls']);
     requireCamera(runtime.camera);
     const rotation = preparedDefaultViewRotation(runtime.camera);
     const controls = requireRecord(requireRecord(runtime.controls).datasets);

@@ -6,6 +6,7 @@ import assert from 'node:assert/strict';
 import { requireRecord, requireArray } from '@cssearth/core';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { LEAF_BOXES_FILE, joinPreparedRuntimeText } from '@cssearth/objects/node';
 import { pathToFileURL } from 'node:url';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { verifiedProduct } from '../products/verified-product.mts';
@@ -78,7 +79,7 @@ export async function sphereOracle(mapRecord:string,sphereRecord:string,measurem
  const originalPin=sphere.record.inputs.find(input=>input.identity.endsWith('/prepared/runtime.json'));
  if(!originalPin)throw new Error('Sphere does not pin its existing standard runtime');
  const originalBytes=await readFile(originalPin.identity);assert.equal(originalBytes.length,originalPin.bytes);
- const original=requireRecord(JSON.parse(originalBytes.toString()));
+ const original=requireRecord(JSON.parse(await joinPreparedRuntimeText(originalBytes.toString(),()=>readFile(resolve(originalPin.identity,'..',LEAF_BOXES_FILE),'utf8'))));
  const expectedTree=structuredClone(requireRecord(original.tree));
  const kept=new Set(assets.entries.map(input=>requireRecord(input).key));
  const excluded=requireArray(requireRecord(original.assets).entries).map(input=>requireRecord(input)).filter(entry=>!kept.has(entry.key)).map(entry=>String(entry.url));

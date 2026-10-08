@@ -2,7 +2,7 @@ import { type PreparedAssetOrigin, type ObjectDescriptor } from '@cssearth/objec
 
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireInventory } from '@cssearth/objects/node';
+import { readPreparedRuntimeText, requireInventory } from '@cssearth/objects/node';
 import { preparedAssetGroup, preparedAssetGroupFile, resolvePreparedAssetUrl } from '@cssearth/renderer';
 
 import { isRecord } from '@cssearth/core';
@@ -60,7 +60,7 @@ export function assetHashSplit(id: string, root = process.cwd()): Promise<AssetH
     cached = (async () => {
       const map = await assetShaMap(id, root);
       // The runtime is the transport's `data` (`prepared/object.json` is built from it when served).
-      const text = await readFile(resolve(root, 'src/objects', id, 'prepared/runtime.json'), 'utf8').catch((error: unknown) => {
+      const text = await readPreparedRuntimeText(resolve(root, 'src/objects', id, 'prepared')).catch((error: unknown) => {
         // An object without a prepared scene has no resource demands: every hash stays embedded.
         if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null;
         throw error;
