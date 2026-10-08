@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-95086-disc",
+  "entries": [
+    {
+      "id": "dataset-dust",
+      "subject": "ALMA band 6 continuum of project 2013.1.00612.S, April and May 2015: the ARI-L image at the beam and in the color scale of Su et al. (2017) Figure 3",
+      "status": "included",
+      "finding": "Su et al. (2017) deposited no image. The archive lists an ARI-L continuum image for each of the two projects the paper combines: its data set A (2013.1.00773.S, member OUS uid://A001/X145/X34a, beam 1.212 x 1.015 arcsec) and its data set B (2013.1.00612.S, uid://A001/X145/X232, beam 1.152 x 0.991 arcsec, 0.19 arcsec pixels, primary-beam corrected, CASA 5.6.1-8). Read the same way, 7 to 11 arcseconds out, A's noise is 20.6 microJy per beam and B's 14.5, so B is drawn. With the two point sources of the paper's Table 3 removed and the image smoothed to the paper's 1.22 x 1.03 arcsec beam, its noise is 12.8 microJy per beam in a 5.5 to 8.5 arcsec annulus (the paper: 7.5 for both sets, 11.0 for B alone at 1.20 x 1.04), and the level there is -8.1. Inside 4.8 arcsec in the ring's plane it holds 2.73 mJy (3.64 before the points are removed); the paper fits 2.79 +/- 0.1 for the disc. In elliptical rings 0.4 arcsec wide about the star, at the paper's tilt and position angle, the mean brightness peaks at 2.03 arcsec with 124 microJy per beam; the paper's profile, made the same way, is centred at about 2.3 arcsec, and it finds the ring at 15 times its 7.5 microJy noise or more. Between 1.4 and 2.6 arcsec the mean is 106 to 123 microJy per beam at every position angle except toward the bright source, where it is 139 and 157.",
+      "evidence": [
+        "https://arxiv.org/abs/1709.10129",
+        "https://almascience.eso.org/aq/?projectCode=2013.1.00612.S",
+        "https://almascience.org/alma-data/aril"
+      ]
+    },
+    {
+      "id": "point-sources",
+      "subject": "The two sources behind the ring",
+      "status": "included",
+      "finding": "In the image as archived the bright source peaks at 911 microJy per beam, 3.07 arcsec west and 0.75 north of the pointing centre; the paper's Table 3 gives 0.81 +/- 0.03 mJy at 3.08 west and 0.83 north, and 0.10 +/- 0.02 mJy at 2.80 west and 1.61 south for the faint one. Both are removed as points with those values, as the paper does for its map of the disc alone. Up to 189 microJy per beam is left within 1.5 arcsec of the bright one, 25 times the paper's noise; the paper reports 25 times or more left near its east side and says the source may be extended. It is drawn as it is in the paper's Figure 3 and is not known to be dust. The paper finds the source consistent with a star-forming galaxy at high redshift.",
+      "evidence": [
+        "https://arxiv.org/abs/1709.10129",
+        "https://arxiv.org/abs/1802.05301"
+      ]
+    },
+    {
+      "id": "color-scale",
+      "subject": "The color bar of Su et al. (2017) Figure 3, right panel",
+      "status": "included",
+      "finding": "The panel is a 1200 x 1064 image in the figure's PDF with its color bar drawn in it. The bar's three inner labelled ticks are 225 rows apart and its labels read -7, 3, 14, 24 and 35, so it is linear in signal-to-noise ratio from -7 to 35. The paper gives 7.5 microJy per beam as the noise of the map made from both data sets, which makes the bar -52 to 262 microJy per beam. Taking the bar's unit to be that noise is a reading made here; the caption of Figure 3 does not state it. The map's lowest colors are black and then a saturated blue.",
+      "evidence": [
+        "https://arxiv.org/abs/1709.10129"
+      ]
+    },
+    {
+      "id": "ring-geometry-and-depth",
+      "subject": "How the ALMA image is given depth",
+      "status": "included",
+      "finding": "The ring is the paper's fit, not measured here. Traced on this image the ridge stands 8.5 to 14.6 times above the noise in every direction and gives 189 au, 38 degrees and position angle 93 degrees, but what is left of the bright source lies on the ring's west side and pulls it; the single binnings scatter by 14 au and 8 degrees. Su et al. fit both data sets with that source masked or modelled: a gaussian ring peaking at 200 +/- 6 au and 168 +/- 7 au wide at half maximum at the 83.8 pc they adopt (2.39 and 2.00 arcsec), inclined 30 +/- 3 degrees at position angle 97 +/- 3 degrees. At Gaia DR3's 86.46 pc those angles are 206.4 and 173.3 au. A disc of that geometry following the image's deprojected radial profile leaves a residual of 2.51e-5 Jy per beam, against 2.82e-5 for the gaussian ring itself, 2.93e-5 for a spherical shell and 4.79e-5 for constant depth.",
+      "evidence": [
+        "https://arxiv.org/abs/1709.10129"
+      ]
+    },
+    {
+      "id": "near-side-and-thickness",
+      "subject": "Which side of the ring is nearer, and how thick it is",
+      "status": "included",
+      "finding": "Neither is measured. The paper models the ring as geometrically thin, with no scale height, and no scattered-light image was found that tells the near side. The north end of the minor axis is drawn nearer and the height is 0.1 of the radius, the conventions of the PDS 70 and HD 181327 rings. The projection changes by 1.7% across heights from 0.02 to 0.2 of the radius.",
+      "evidence": [
+        "https://arxiv.org/abs/1709.10129"
+      ]
+    },
+    {
+      "id": "data-set-a",
+      "subject": "The paper's data set A (2013.1.00773.S) and the map of both sets",
+      "status": "deferred",
+      "finding": "The paper's own map combines both data sets and reaches 7.5 microJy per beam. The archive holds one image per project and no combined one; averaging two archive images of different beams and frequencies is a step the disc tool does not have. Not built.",
+      "revisitWhen": "The tool gains a stated way to combine two archive images, or the authors deposit their map.",
+      "evidence": [
+        "https://arxiv.org/abs/1709.10129",
+        "https://almascience.eso.org/aq/?projectCode=2013.1.00773.S"
+      ]
+    },
+    {
+      "id": "band-7",
+      "subject": "ALMA band 7 image at 0.35 arcsec (2022.1.00338.L, the ARKS programme)",
+      "status": "deferred",
+      "finding": "The archive's pipeline continuum image of member OUS uid://A001/X2d20/X2e37 (0.377 x 0.306 arcsec beam, 29 microJy per beam) shows the ring faintly and both background sources. It would be a second dataset at three times the resolution. Not built.",
+      "revisitWhen": "A second dataset is wanted; read the ARKS papers for the geometry they print first.",
+      "evidence": [
+        "https://almascience.eso.org/aq/?projectCode=2022.1.00338.L"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "hd-95086-disc",
+  "name": "HD 95086 dust ring",
+  "defaultDataset": "dust",
+  "bank": {
+    "path": "src/objects/hd-95086-disc/prepared/datasets.json"
+  },
+  "recipes": [
+    {
+      "id": "dust",
+      "path": "src/objects/hd-95086-disc/source/volume-dust.json"
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "datasets": [
+    {
+      "id": "dust",
+      "label": "ALMA · dust ring, 1.3 mm",
+      "title": "The dust ring around Aiolos (HD 95086) in its own glow at 1.3 millimetres, from ALMA",
+      "description": "ALMA observed the star six times between 10 April and 2 May 2015 at 1.3 millimetres (project 2013.1.00612.S). What it sees is the dust's own faint heat, not starlight. This is the image the ARI-L project made from those observations for the public archive, brought to the resolution of the map Su et al. (2017) made from them together with a second set of observations, and shown in the color scale of their map of the disc alone (Figure 3, right). It holds half the data of theirs and is noisier: 12.8 µJy per beam against their 7.5. Two sources behind the ring are removed as the points Su et al. subtract; they find the bright one consistent with a distant galaxy. What is left of it, the brightest spot on the ring's west side, is in their map too and is not known to be dust. The ring's size and tilt are Su et al.'s fit: brightest 200 au from the star at the distance they adopt (206 au at Gaia's distance), 168 au wide and tilted 30°. The image has no third axis, so the depth is inferred: each line of sight is placed on that tilted ring, which projects to the image better than a spherical shell or a constant depth. Its thickness and which side is nearer are conventions; no observation gives them. Su et al. do not detect the star at this wavelength. The star itself is the sphere at the centre, and planet b orbits inside the ring.",
+      "summary": "The broad belt of dust around the star, brightest about 200 au out, in its own glow at 1.3 mm, as ALMA imaged it. Planet b orbits inside it.",
+      "detail": "2015-04-14T00:25:23.520000, 190.0 mas pixels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "ALMA 12-m array, one pointing in a compact configuration, between 10 April and 2 May 2015: b6-cont"
+        },
+        {
+          "id": "color",
+          "label": "Color",
+          "value": "Brightness in µJy/beam, from -52.33 to 261.98, in the publisher's color map"
+        },
+        {
+          "id": "ring",
+          "label": "Ring",
+          "value": "206.4 au, tilted 30°, nodes at position angle 97°: the published fit to these observations, not measured on this image"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "0 to 540 au; the light reaches the noise at 409 au"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; the inclined ring that best projects to the images, with its north side nearer by convention"
+        }
+      ],
+      "input": "dust-b6-cont",
+      "preview": {
+        "path": "src/objects/hd-95086-disc/source/previews/dust.png",
+        "authoredFrom": "dust-b6-cont"
+      }
+    }
+  ]
+}

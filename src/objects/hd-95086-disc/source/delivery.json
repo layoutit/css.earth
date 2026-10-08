@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "hd-95086-disc",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/hd-95086-disc/source/volume-dust.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/hd-95086-disc/source/provenance.json"
+    },
+    {
+      "path": "src/objects/hd-95086-disc/source/density-dust.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      164.26175229219893,
+      -68.66725172305777
+    ],
+    "distancePc": 86.46152888667437,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.011565837579748396
+  },
+  "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2013.1.00612.S",
+  "description": "The broad belt of dust around Aiolos (HD 95086), brightest about 200 au from the star, in its own glow at 1.3 millimetres, as ALMA imaged it in April and May 2015 (project 2013.1.00612.S), in the color scale Su et al. (2017) show it in. The giant planet b orbits inside it. One unit is one astronomical unit; the ring's size and tilt are the ones Su et al. fitted, its depth is that tilted ring, and its thickness and which side is nearer are conventions, not measurements.",
+  "defaultDataset": "dust",
+  "framingRadiusUnits": 540,
+  "attachedTo": "hd-95086",
+  "acceptedLabResult": "hd-95086-disc-density-grids",
+  "compactInputs": {
+    "path": "src/objects/hd-95086-disc/source/volume-dust.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "dust",
+      "label": "ALMA · dust ring, 1.3 mm",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2013.1.00612.S",
+      "recipe": {
+        "path": "src/objects/hd-95086-disc/source/volume-dust.json"
+      }
+    }
+  ]
+}
