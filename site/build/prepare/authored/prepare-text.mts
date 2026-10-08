@@ -73,10 +73,10 @@ export async function prepareText({ ids = [] as readonly string[], check = false
   const sourceCatalog = await readSourceCatalog(projectRoot);
   const catalogue = new Set(sourceCatalog.records.map(record => record.id));
   // A run for named objects may sit in a checkout that holds only their prepared files (the ENSO daily refresh restores
-  // Earth alone): another object whose published controls are not installed is left out of the checks. The run without
+  // Earth alone): another object whose runtime is not installed is left out of the checks. The run without
   // names, and the test of every object's text, still read them all.
   const read = await Promise.all(SCENE_OBJECTS.map(object => readBody(projectRoot, object, catalogue).catch((error: unknown) => {
-    if (ids.length && !ids.includes(object.id) && hasErrorCode(error, 'ENOENT') && String((error as NodeJS.ErrnoException).path).endsWith('prepared/controls.json')) return null;
+    if (ids.length && !ids.includes(object.id) && hasErrorCode(error, 'ENOENT') && String((error as NodeJS.ErrnoException).path).endsWith('prepared/runtime.json')) return null;
     throw error;
   })));
   const bodies = read.filter(body => body !== null);

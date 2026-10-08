@@ -51,6 +51,9 @@ async function minimapCoverage(pipeline:Sharp, leftEdgeLongitudeDeg:number, exac
   const missing = detectMissingCoverage(data, info, { longitudeOffsetDegrees: leftEdgeLongitudeDeg });
   return roundedDirection(coverageDirection({ dataset: '', missing, width: info.width, height: info.height, leftEdgeLongitudeDeg }));
 }
+/** The content step's controls during a bake. A restored checkout holds no copy of them: a refresh reads the runtime's. */
+const preparedControls = async (outputDirectory: string) => await optionalJson(resolve(outputDirectory, 'controls.json'))
+  ?? requireRecord((await optionalJson(resolve(outputDirectory, 'runtime.json')))?.controls ?? {});
 const roundedDirection = (direction: readonly number[]) => direction.map(value => Math.round(value * 1e4) / 1e4);
 const minimapResize = (nearest:boolean):ResizeOptions => ({ width: 640, withoutEnlargement: true,
   ...(nearest ? { kernel: 'nearest' } : {}) });
@@ -72,13 +75,13 @@ export async function addPagedSurfaceMinimaps(directories:SurfacePreviewDirector
   }
   if (drawn.size !== new Set(added).size) throw new TypeError(`Added datasets without a paged surface map: ${added.filter(id => !drawn.has(id)).join(', ')}.`);
   const [controls, datasets, bindings] = await Promise.all([
-    optionalJson(resolve(outputDirectory, 'controls.json')),
+    preparedControls(outputDirectory),
     optionalJson(resolve(outputDirectory, 'datasets.json')),
     optionalJson(resolve(directories.objectDirectory, 'source/content/dataset-bindings.json')),
   ]);
   const declared = datasets ? parsePreviewControls(datasets).controls : [];
   const images = declared.flatMap(dataset => { const image = drawn.get(dataset.id) ?? previous.get(dataset.id); return image ? [image] : []; });
-  assertSurfacePreviewCoverage(controls?.datasets ? parsePreviewControls(controls.datasets).controls : [], images, [...declared, ...(bindings ? parsePreviewControls(bindings).controls : [])]);
+  assertSurfacePreviewCoverage(controls.datasets ? parsePreviewControls(controls.datasets).controls : [], images, [...declared, ...(bindings ? parsePreviewControls(bindings).controls : [])]);
   for (const image of previous.values()) if (!images.some(kept => kept.path === image.path)) await rm(resolve(outputDirectory, image.path), { force: true });
   await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images }) + '\n');
   return images;
@@ -183,10 +186,8 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
     const result = await writeMinimap(previewPipeline, false, resolve(outputDirectory, path));
     images.push({ id: preview.id, path, width: result.width, height: result.height, ...(coverage ? { coverage } : {}) });
   }
-  // The content step's controls during a bake. A restored checkout holds no copy of them: a refresh reads the runtime's.
   const [controls, datasets, bindings] = await Promise.all([
-    optionalJson(resolve(outputDirectory, 'controls.json')).then(async working =>
-      working ?? requireRecord((await optionalJson(resolve(outputDirectory, 'runtime.json')))?.controls ?? {})),
+    preparedControls(outputDirectory),
     optionalJson(resolve(outputDirectory, 'datasets.json')),
     optionalJson(resolve(objectDirectory, 'source/content/dataset-bindings.json')),
   ]);
