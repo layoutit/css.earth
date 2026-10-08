@@ -50,6 +50,7 @@ The cube (±540 au) is anchored on the star's scene origin. The star is placed a
 - **The ring's geometry and width are the paper's,** not measured on this image, and the profile's peak on this image lies 0.3″ inside the paper's.
 - **The thickness and the near side are conventions.**
 - **The inner belt is not shown.** It is not in this image.
+- **Every drawn line of sight is equally opaque.** Each of the map's colors that is drawn has one channel at full strength, and the volume's opacity follows the strongest channel. So the faint outskirts block as much as the ridge: about one half seen face-on (median 0.4999, 90th percentile 0.5003). Only the color tells the brightness.
 - The colors are a color map for brightness at one wavelength, not colors an eye would see.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Recipe](source/circumstellar.json) · [Provenance](source/provenance.json)
