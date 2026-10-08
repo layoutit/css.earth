@@ -1,6 +1,7 @@
 /** Read prepared geometry and atlas addresses without loading source preparation or refresh commands. */
 import { BASE_TILE } from '@layoutit/polycss';
 import { requireRecord, requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
+import { TEXELS_PER_CSS_PIXEL } from '@cssearth/objects';
 import { shadeRadialFaces } from '../../geometry/index.ts';
 import type { PhotographicAtlas } from './native-photograph.ts';
 const records=(value:unknown)=>requireArray(value).map(value=>requireRecord(value));
@@ -37,9 +38,13 @@ export function retainedPhotographicAtlas(scene:Record<string,unknown>):Photogra
   const plans=leaves.map((leaf,index)=>{
     const style=requireString(leaf.style);
     const numbers=(pattern:RegExp)=>{const match=style.match(pattern);if(!match)throw new Error('Missing retained atlas property.');return match[1].split(/[ ,]+/).map(value=>parseFloat(value));};
-    const matrix=numbers(/transform:matrix3d\(([^)]+)\)/),[x,y]=numbers(/background-position:([^;]+)/),[w,h]=numbers(/background-size:([^;]+)/);
+    // The inverse of rasterLeafStyle (radial/radial-terrain.ts): the leaf's box is written at TEXELS_PER_CSS_PIXEL, with its
+    // matrix scaling the box back, and a plan counts atlas texels.
+    const texels=(pattern:RegExp)=>numbers(pattern).map(value=>value*TEXELS_PER_CSS_PIXEL);
+    const matrix=numbers(/transform:matrix3d\(([^)]+)\)/).map((value,i)=>i<8?value/TEXELS_PER_CSS_PIXEL:value);
+    const [x,y]=texels(/background-position:([^;]+)/),[w,h]=texels(/background-size:([^;]+)/);
     // A face's size: the bake's custom properties, or the box the runtime draws the same face with.
-    const [tw]=numbers(/(?:--polycss-atlas-|;)width:([^;]+)/),[th]=numbers(/(?:--polycss-atlas-|;)height:([^;]+)/);
+    const [tw]=texels(/(?:--polycss-atlas-|;)width:([^;]+)/),[th]=texels(/(?:--polycss-atlas-|;)height:([^;]+)/);
     if(leaf.tag!=='u' || matrix.length!==16 || ![...matrix,x,y,w,h,tw,th].every(Number.isFinite) ||
       (index>0 && (w!==width || h!==height)))throw new Error('Unsupported retained atlas layout.');
     // Faces and triangles pair by position. A face's matrix carries its triangle's normal (largest difference 5e-10 over
@@ -47,7 +52,7 @@ export function retainedPhotographicAtlas(scene:Record<string,unknown>):Photogra
     const normal=triangles[index].normal;
     if(Math.max(Math.abs(matrix[8]-normal[1]),Math.abs(matrix[9]-normal[0]),Math.abs(matrix[10]-normal[2]))>1e-6)throw new Error('A retained face does not lie on its triangle.');
     width=w;height=h;
-    return {face:faces[index],matrix,rect:{x:-x,y:-y,width:tw,height:th},geometry:{leafWidth:tw,leafHeight:th}};
+    return {face:faces[index],matrix,rect:{x:0-x,y:0-y,width:tw,height:th},geometry:{leafWidth:tw,leafHeight:th}};
   });
   return {width,height,plans};
 }
