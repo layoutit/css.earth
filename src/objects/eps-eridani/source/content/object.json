@@ -66,25 +66,54 @@
         "notes": "The star in the color of its spectrum, with the belt of dust 70 au out in its own glow at 1.3 millimetres, as ALMA imaged it in December 2019 (project 2019.1.00696.S). It is the ALMA pipeline's image from the public archive, brought to the resolution of the image Booth et al. (2023) made from the same observations and shown in the color map and scale of their Figure 1. It is noisier than theirs, and its ring is fainter. The star's own glow and two sources behind the disc are removed as Booth et al. model them, and sky fainter than twice the image noise fades out. The ring's size and tilt (69.6 au, 33.7°) are Booth et al.'s fit to these observations. The image has no third axis, so the depth is inferred: a tilted ring projects to it better than a spherical shell or a constant depth. Its thickness is the one Wolff et al. (2025) use in their model of this belt, and its east side is drawn nearer on their assumption that it shares planet b's orbital plane. Planet b orbits at 3.5 au, far inside it.",
         "falseColor": true,
         "legend": {
-          "kind": "categories",
+          "kind": "scale",
           "title": "Brightness of the dust at 1.3 mm",
-          "items": [
-            {
-              "label": "Orange",
-              "description": "About 60 µJy per beam, the ring's brightest spots",
-              "color": "#fc9f07"
-            },
-            {
-              "label": "Red",
-              "description": "About 25 µJy per beam, the ring's typical brightness",
-              "color": "#c83f4b"
-            },
-            {
-              "label": "Purple",
-              "description": "About 0, empty sky; the image noise is 16 µJy per beam",
-              "color": "#84206b"
-            }
-          ]
+          "labels": [
+            "−51",
+            "20",
+            "90"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                66,
+                10,
+                104
+              ],
+              [
+                147,
+                38,
+                103
+              ],
+              [
+                221,
+                81,
+                58
+              ],
+              [
+                252,
+                165,
+                10
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "−51",
+              "20",
+              "90"
+            ]
+          },
+          "meta": "µJy per beam · the paper's own color scale",
+          "sourceUrl": "https://arxiv.org/abs/2303.13584"
         }
       },
       {
