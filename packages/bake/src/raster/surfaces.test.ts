@@ -6,7 +6,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { loadNativeSourcePoleSampler, prepareSurfaces } from './surfaces.ts';
-import { readRasterRecipe, prepareRasterAssets, surfaceCoordinateWidth } from './assets.ts';
+import { limbLender, readRasterRecipe, prepareRasterAssets, surfaceCoordinateWidth } from './assets.ts';
 import { loadNativeObservationPoleSampler, parseObservationDataset } from '../objects/layers/observation/index.ts';
 import { strongerLimb } from './science.ts';
 
@@ -16,6 +16,13 @@ describe('a borrowed limb plate drawn stronger', () => {
     const plate = { data: new Uint8Array([0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 191, 0, 0, 0, 255]), size: 2, lossless: true };
     assert.deepEqual([...strongerLimb(plate, 1.5).data], [0, 0, 0, 0, 0, 0, 0, 165, 0, 0, 0, 223, 0, 0, 0, 255]);
     assert.equal(strongerLimb(plate, 1), plate); assert.throws(() => strongerLimb(plate, 0), /over 0/);
+  });
+  it('a plate borrowed as it is stays the lender\'s one file; one drawn stronger is a file of its own', () => {
+    assert.equal(limbLender({ id: 'color', science: { kind: 'stellar-photometric-color' } }), 'color');
+    assert.equal(limbLender({ id: 'phase-3', science: { limbOf: 'color' } }), 'color');
+    assert.equal(limbLender({ id: 'phase-3', science: { limbOf: 'color', limbStrength: 1 } }), 'color');
+    assert.equal(limbLender({ id: 'color-brightness', science: { limbOf: 'color', limbStrength: 1.5 } }), 'color-brightness');
+    assert.equal(limbLender({ id: 'photograph' }), 'photograph');
   });
 });
 

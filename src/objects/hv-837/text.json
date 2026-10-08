@@ -30,6 +30,56 @@
       "title": "Photosphere color",
       "detail": "From its temperature",
       "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "pulsation-phase-0": {
+      "title": "Light at maximum",
+      "detail": "Gaia DR3",
+      "summary": "The star at its brightest in Gaia's G band, the start of one 42.6-day pulsation."
+    },
+    "pulsation-phase-1": {
+      "title": "Light 4.26 days after maximum",
+      "detail": "Gaia DR3",
+      "summary": "85% of its brightest light in Gaia's G band, 4.26 days into one 42.6-day pulsation."
+    },
+    "pulsation-phase-2": {
+      "title": "Light 8.53 days after maximum",
+      "detail": "Gaia DR3",
+      "summary": "75% of its brightest light in Gaia's G band, 8.53 days into one 42.6-day pulsation."
+    },
+    "pulsation-phase-3": {
+      "title": "Light 12.8 days after maximum",
+      "detail": "Gaia DR3",
+      "summary": "72% of its brightest light in Gaia's G band, 12.8 days into one 42.6-day pulsation."
+    },
+    "pulsation-phase-4": {
+      "title": "Light 17.1 days after maximum",
+      "detail": "Gaia DR3",
+      "summary": "64% of its brightest light in Gaia's G band, 17.1 days into one 42.6-day pulsation."
+    },
+    "pulsation-phase-5": {
+      "title": "Light 21.3 days after maximum",
+      "detail": "Gaia DR3",
+      "summary": "58% of its brightest light in Gaia's G band, 21.3 days into one 42.6-day pulsation."
+    },
+    "pulsation-phase-6": {
+      "title": "Light 25.6 days after maximum",
+      "detail": "Gaia DR3",
+      "summary": "52% of its brightest light in Gaia's G band, 25.6 days into one 42.6-day pulsation."
+    },
+    "pulsation-phase-7": {
+      "title": "Light 29.9 days after maximum",
+      "detail": "Gaia DR3",
+      "summary": "43% of its brightest light in Gaia's G band, 29.9 days into one 42.6-day pulsation."
+    },
+    "pulsation-phase-8": {
+      "title": "Light 34.1 days after maximum",
+      "detail": "Gaia DR3",
+      "summary": "47% of its brightest light in Gaia's G band, 34.1 days into one 42.6-day pulsation."
+    },
+    "pulsation-phase-9": {
+      "title": "Light 38.4 days after maximum",
+      "detail": "Gaia DR3",
+      "summary": "77% of its brightest light in Gaia's G band, 38.4 days into one 42.6-day pulsation."
     }
   }
 }

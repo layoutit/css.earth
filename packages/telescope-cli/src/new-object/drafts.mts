@@ -5,7 +5,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import type { Archive } from './archives/archives.mts';
 
-export interface Drafts { readonly stars: readonly unknown[]; readonly pictures?: readonly unknown[]; readonly coronae?: readonly unknown[]; readonly magneticMaps?: readonly unknown[]; readonly brightnessMaps?: readonly unknown[]; readonly report: readonly string[] }
+export interface Drafts { readonly stars: readonly unknown[]; readonly pictures?: readonly unknown[]; readonly coronae?: readonly unknown[]; readonly magneticMaps?: readonly unknown[]; readonly brightnessMaps?: readonly unknown[]; readonly pulsations?: readonly unknown[]; readonly report: readonly string[] }
 interface Context { readonly root: string; readonly progress: (line: string) => void; readonly archive: Archive }
 export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; readonly draft: (names: readonly string[], context: Context) => Promise<Drafts> }>> = {
   // Transiting planet hosts from the NASA Exoplanet Archive's default parameter sets (from-archive.mts).
@@ -50,6 +50,8 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   spectra: { names: 'HOST', draft: async (names, context) => (await import('./magnetic/maps.mts')).draftsFromReducedPrograms(names, context) },
   // A star's brightness map, made by this repository from a mission's light curves of it, as a dataset of its page (brightness/brightness.mts).
   pixels: { names: 'all | HOST', draft: async (names, context) => (await import('./brightness/brightness.mts')).draftsFromReducedPixels(names, context) },
+  // A pulsating star's light through one cycle, from the published light-curve model its package keeps, as the steps of one dataset group (pulsation/pulsation.mts).
+  pulsation: { names: 'all | HOST | gaia:HOST', draft: async (names, context) => (await import('./pulsation/pulsation.mts')).draftsFromPulsation(names, context) },
 };
 
 /** Draft `names` through `route` and write the spec file at `out`. */
@@ -57,7 +59,7 @@ export async function writeDrafts(route: string, names: readonly string[], out: 
   const source = DRAFT_ROUTES[route];
   if (!source) throw new TypeError(`No draft route ${route}; the routes are ${Object.keys(DRAFT_ROUTES).map(key => `--from-${key}`).join(', ')}.`);
   if (!names.length) throw new TypeError(`Usage: new-object --from-${route} ${source.names}... --out spec.json`);
-  const { stars, pictures, coronae, magneticMaps, brightnessMaps, report } = await source.draft(names, context), path = resolve(context.root, out);
-  await mkdir(dirname(path), { recursive: true }); await writeFile(path, `${JSON.stringify(brightnessMaps ? { brightnessMaps } : magneticMaps ? { magneticMaps } : coronae ? { coronae } : pictures ? { pictures } : { stars }, null, 2)}\n`);
-  return { path, entries: (brightnessMaps ?? magneticMaps ?? coronae ?? pictures ?? stars).length, report };
+  const { stars, pictures, coronae, magneticMaps, brightnessMaps, pulsations, report } = await source.draft(names, context), path = resolve(context.root, out);
+  await mkdir(dirname(path), { recursive: true }); await writeFile(path, `${JSON.stringify(pulsations ? { pulsations } : brightnessMaps ? { brightnessMaps } : magneticMaps ? { magneticMaps } : coronae ? { coronae } : pictures ? { pictures } : { stars }, null, 2)}\n`);
+  return { path, entries: (pulsations ?? brightnessMaps ?? magneticMaps ?? coronae ?? pictures ?? stars).length, report };
 }

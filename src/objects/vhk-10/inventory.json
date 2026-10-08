@@ -21,6 +21,66 @@
     },
     {
       "location": "public",
+      "filename": "vhk-10-dataset-pulsation-phase-0.webp",
+      "bytes": 44,
+      "sha256": "78799a035d76becab2c4b48e9cd7b50e1ffdc1274e20c883d322e7ec5434b102"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-dataset-pulsation-phase-1.webp",
+      "bytes": 44,
+      "sha256": "f4f3673dcfd2af68a8125490fa515e7c2851d3983f3c6c1edccd723091686dc0"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-dataset-pulsation-phase-2.webp",
+      "bytes": 44,
+      "sha256": "d072997463815757003f21850a5d65fb132e0582802a51a9c28d0da74b890e7b"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-dataset-pulsation-phase-3.webp",
+      "bytes": 44,
+      "sha256": "37d91dc6dcfe79b9b341bd5273e0ab4950fe802e2e549f3a84c51299de6c025f"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-dataset-pulsation-phase-4.webp",
+      "bytes": 44,
+      "sha256": "f15ad5bab99526d4a1207211dc126f283bd41c6513cc5070ef9244593830ce34"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-dataset-pulsation-phase-5.webp",
+      "bytes": 44,
+      "sha256": "e2d4213cbc62ad6742e604a03836841342cdd460476c5f3a0979ccc3fe1503d0"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-dataset-pulsation-phase-6.webp",
+      "bytes": 44,
+      "sha256": "253ee36b7b70754e02018e48ebadbbdb7252158129c8afca1a85d21d0e131130"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-dataset-pulsation-phase-7.webp",
+      "bytes": 44,
+      "sha256": "6f402c0eccd37a5df900e093d8402994b2c0b1e02394266c7108070b3ee3cea4"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-dataset-pulsation-phase-8.webp",
+      "bytes": 44,
+      "sha256": "913922acedad4c5fe742da87e14e03e7b60d74c5564dcf2332d89bfb1e2f4e27"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-dataset-pulsation-phase-9.webp",
+      "bytes": 44,
+      "sha256": "d9ae464fdc776604090e0ad5bc1821bd732f6aaf9857c71c0afcb75207e3c85c"
+    },
+    {
+      "location": "public",
       "filename": "vhk-10-limb-color@2x.webp",
       "bytes": 101232,
       "sha256": "cffe48e4e60f3a29c174aea5fb57805efaeaebba3fa2252a8d820328878c37f5"
@@ -33,9 +93,129 @@
     },
     {
       "location": "public",
+      "filename": "vhk-10-poles-pulsation-phase-0@2x.webp",
+      "bytes": 1340,
+      "sha256": "17ce7a06e0f69332b0627a0ef87d5889ff93c67340cdf30ad2fba7ab91bf7612"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-poles-pulsation-phase-1@2x.webp",
+      "bytes": 1340,
+      "sha256": "666cc424350532d5e7696a74869597627da316698685ab366182296b3e4bc921"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-poles-pulsation-phase-2@2x.webp",
+      "bytes": 1340,
+      "sha256": "9fc45bf785688c7a302a51db4b42ba81191a8215c95e0641379e5f0a99c48afb"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-poles-pulsation-phase-3@2x.webp",
+      "bytes": 1340,
+      "sha256": "43493ca37508f8300bd5556eeca885844f500d2d82d3c99cf54ff141defe2a16"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-poles-pulsation-phase-4@2x.webp",
+      "bytes": 1340,
+      "sha256": "73cb4be513a0c558c8413ace2423d7b246aec274dc1893eeae1bc79245936f22"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-poles-pulsation-phase-5@2x.webp",
+      "bytes": 1340,
+      "sha256": "4aa65807a8323b90cbdd2e5f413dd8a7ef9b2cf95deacdb5f2f744498159aa94"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-poles-pulsation-phase-6@2x.webp",
+      "bytes": 1340,
+      "sha256": "5023daaebbf5c8b31e6a53fd710a01dc4d233f2f46bdc559e3f10b7bb934c563"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-poles-pulsation-phase-7@2x.webp",
+      "bytes": 1340,
+      "sha256": "e874b82c37b57173ceffc67ef1086928e58d0bb67399eaa3ced9969ce55d212c"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-poles-pulsation-phase-8@2x.webp",
+      "bytes": 1340,
+      "sha256": "05d74359008e6bcae4afefa4f1a646372f65a7e8a14758b1cc6a663330ad5860"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-poles-pulsation-phase-9@2x.webp",
+      "bytes": 1340,
+      "sha256": "541438b28a430b293a77c685f8de6d00410afbe469658881aedee87a9e8cb648"
+    },
+    {
+      "location": "public",
       "filename": "vhk-10-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "34178b88c96e15f5537b7e391966333508a4350b9f7e5a9e6fe18bbea29dc6dc"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-surface-pulsation-phase-0@2x.webp",
+      "bytes": 38,
+      "sha256": "34178b88c96e15f5537b7e391966333508a4350b9f7e5a9e6fe18bbea29dc6dc"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-surface-pulsation-phase-1@2x.webp",
+      "bytes": 38,
+      "sha256": "480d28b25399cb5e3227d7889a5a36dfb77f091d0e1cc24e87a90c5827d73bda"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-surface-pulsation-phase-2@2x.webp",
+      "bytes": 38,
+      "sha256": "5ef90df3f3d255c5ccb84c16c11beafd2e5eea1fc1c7fb92e832d28c96fcd4fe"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-surface-pulsation-phase-3@2x.webp",
+      "bytes": 38,
+      "sha256": "ad78b1e7da121d59b1cb59d8ad74d957caf7667ae4e225ebb9d6f56658d6027b"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-surface-pulsation-phase-4@2x.webp",
+      "bytes": 38,
+      "sha256": "a6608201ca4061017d39d10d09ca37ca48ce939fffdda721861e21273db42755"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-surface-pulsation-phase-5@2x.webp",
+      "bytes": 38,
+      "sha256": "b4201d6e813d287b7715c10c471bf491a57d1ac9e35ec48be618bd8bae727ecb"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-surface-pulsation-phase-6@2x.webp",
+      "bytes": 38,
+      "sha256": "ac4be789e89c3e75af9b5850e32a61af184f424be7f371d61ea488ba156c05d8"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-surface-pulsation-phase-7@2x.webp",
+      "bytes": 38,
+      "sha256": "c11ab9aafd53f9408f127234ee0ec82c53af145abbc29f103a346ba942338abe"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-surface-pulsation-phase-8@2x.webp",
+      "bytes": 38,
+      "sha256": "a482cac679db8ba5762b5eeef1daa23806c47a1fcfa0da7548074a6f0e57ea1f"
+    },
+    {
+      "location": "public",
+      "filename": "vhk-10-surface-pulsation-phase-9@2x.webp",
+      "bytes": 38,
+      "sha256": "b4afa2a5b55aa4d4522a4116742e53a437c4065fc9af72910bee6d77e66cc696"
     },
     {
       "location": "prepared",
@@ -46,8 +226,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2382,
-      "sha256": "97d3939dd3c15c40cefb2bff8d1d922c6307c8415a8388c63e2664a063f2a4c2"
+      "bytes": 6252,
+      "sha256": "b7217227448d8dc6e43e874b3fc2c30fd97203086938ed91bebe62acd9d37111"
     },
     {
       "location": "prepared",
@@ -64,20 +244,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 362,
-      "sha256": "f301b4825c088016e5d04a84dc0c97e2c79db06ba8feeffe4b345b7ec4debc1f"
+      "bytes": 2022,
+      "sha256": "0477e035a52d971e5bc4d74410c51fcda6e730dd9e9910dd32afacdb30e4fb30"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 933,
-      "sha256": "584eaf2df63703174074e02d59b999a93573819d46eaead059d78d147b297a9f"
+      "bytes": 8783,
+      "sha256": "0db054d8c22c77fabe019523f862a843649000c92edc6d63707210fbc3b14359"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+      "bytes": 1221,
+      "sha256": "cd9225c10c98761d3a0677fe61e12b295ce53482b37c584a7a945dfa894f982d"
     },
     {
       "location": "prepared",
@@ -87,9 +267,69 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/pulsation-phase-0.webp",
+      "bytes": 52,
+      "sha256": "30ed744e3f427b06ec336dd603feadca8d292811687a62b20dbe0da32bb48f81"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-1.webp",
+      "bytes": 52,
+      "sha256": "73086a9de48726c46c1b71f843d611039fee6bbfb62126ef01f3981791fb093f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-2.webp",
+      "bytes": 52,
+      "sha256": "75ae3ae7029263fbc683da7f2c0178b9397bc692f9dc96a0bc1c5e3bd966f662"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-3.webp",
+      "bytes": 52,
+      "sha256": "2633561f814df82ccd80d847e59d08b5e6b7c315bc106231d0c2462382656dea"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-4.webp",
+      "bytes": 52,
+      "sha256": "a45cdb3e3ab1596b9de9b12d6dc2a4626d4fef8f6a60471f76f542c527f0113e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-5.webp",
+      "bytes": 52,
+      "sha256": "e1a92ab315de97a1d9bd98cc50564687d7b35c8105bac6bfa3acfb6bc8cdd1dc"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-6.webp",
+      "bytes": 52,
+      "sha256": "024d6a1d15e535d99578c954af6d3012cf246b1a93e1c537726aa0969abcab80"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-7.webp",
+      "bytes": 52,
+      "sha256": "5a20c66f226ec3afe13af648b6592cc7b94b555e97ceeb887f40778c3a21aa10"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-8.webp",
+      "bytes": 52,
+      "sha256": "1648b00e10b7dfd8236d4e4cf6a3e8275fdbd3fdf8d3b4c24821ce102a5f897f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-9.webp",
+      "bytes": 52,
+      "sha256": "ebf7d1708b5006fd8771c5be38294e06838c559178f8c74676eb162b561296b7"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 249292,
-      "sha256": "97e23488a7bcb06588367c25c65f4996f9ee5d9894b5a7308b8fda2c557479c0"
+      "bytes": 263782,
+      "sha256": "8f113c5405b1acd49a3679b676c8ab12073dd079c5d00f6356302e8a59c56c95"
     },
     {
       "location": "prepared",
@@ -112,8 +352,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1046,
-      "sha256": "e8682ae92a711bee543d0e59839c779c298667614edba48b0438b784848d82ce"
+      "bytes": 2810,
+      "sha256": "a4125051c877ccc054480ff21884976cd6543e5181a6370aa8a28c48f57f8918"
     },
     {
       "location": "prepared",

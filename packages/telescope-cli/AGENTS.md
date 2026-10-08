@@ -163,6 +163,18 @@ A table written with seven decimals is filed under `fine/` in its mission's dire
 A kind's steps take its `stepGroup` id, or that id with `-maps` after it on a page whose other datasets already hold it as a dataset's id or a group's (a published map filed as `brightness`).
 `--bake` takes 40 stars a command, and removes a star's stale arrival picture just before its own group is baked. A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
 
+`pulsation/` is the kind for a pulsating star's light through one cycle (`--from-pulsation`, a spec's `pulsations`). It measures
+and fits nothing: the light is the Fourier model the star's source publishes, the Gaia DR3 `vari_cepheid` row the package keeps
+(`photometry/gaia-dr3-vari-cepheid.csv`, light-curve.mts), read and checked by `@cssearth/bake/photometry`, and a step is that
+model's value at one phase as a share of the light at maximum. A step is how the star looks, so the kind supplies `look` (the
+star's color dimmed in linear light, the first dataset's limb as it is, no legend) and one table for all its steps (`tableOf`,
+`variableOf`). Ten steps a tenth of a period apart is a display choice (`PHASES`). No color or size change is drawn: add one
+only with a published calibration, or a paper's own measurement, that covers the star, never a relation chosen here. A page
+that plays the same model over its disc names the step group in its profile (`lightCurve.stills`), and the bake takes the veil
+off those datasets. A star whose package names no Gaia source is tied to its row by its place and its catalogue row's period
+(`installPublishedModel`; both limits are stated in the note as this repository's). The page keeps its default dataset
+([method note](../../docs/pulsating-stars-light-through-a-cycle.md)).
+
 The papers API behind `telescope papers` is `src/papers.mts` and `src/papers/`. There is one search path: `findWorks`
 (`papers/works.mts`) asks OpenAlex, then arXiv when OpenAlex refuses, and the command and the star survey both call it; a
 second query builder is not added beside it. `papers/names.mts` owns how a target and a subject are written (every spelling,

@@ -35,7 +35,7 @@ export interface MapKind<M extends SurfaceMap> {
   readonly archiveUrl: string; readonly references: readonly { readonly catalogueId: string; readonly role: string; readonly evidence: string }[];
   readonly colors: readonly string[]; readonly palette: readonly (readonly number[])[];
   scale(maps: readonly M[]): MapScale;
-  words(map: M, context: { readonly star: { readonly id: string; readonly name: string }; readonly count: number; readonly epochs: string; /** The tilt in whole degrees, and whether the latitude the star never shows is outlined. */ readonly tilt: number; readonly outlined: boolean }): MapWords;
+  words(map: M, context: { readonly star: { readonly id: string; readonly name: string; readonly colorHex?: string }; readonly count: number; readonly epochs: string; /** The tilt in whole degrees, and whether the latitude the star never shows is outlined. */ readonly tilt: number; readonly outlined: boolean }): MapWords;
   report(maps: readonly M[], scale: MapScale): string;
   /** Whether a map's page draws the star at the map's tilt, so the latitude the star never shows may be outlined. Left out: it does. */
   outlines?(map: M): boolean;
@@ -46,6 +46,16 @@ export interface MapKind<M extends SurfaceMap> {
   consumerOf?(map: M): string; inputTagOf?(map: M): string; readonly consumers?: readonly string[];
   /** The newest map in the star's own color, when the kind's maps are how the star looks: the page then opens on it. */
   natural?(map: M, star: { readonly id: string; readonly name: string; readonly colorHex: string }): NaturalView;
+  /** The colors of a map that is itself how the star looks (the whole disc at one moment of its light), from the least value of
+   * the kind's scale to the greatest: its surface is then no false color, takes the limb of the star's first dataset as it is,
+   * and has no legend. Left out: the kind's `colors`, in false color with a legend. */
+  look?(map: M, star: { readonly id: string; readonly name: string; readonly colorHex: string }): readonly string[];
+  /** One table for all of a star's maps, each a column of it: the table's file name without `.dat`, and the column a map is
+   * drawn from. Left out: a table a map, named by its `program`, and the kind's `variable`. */
+  tableOf?(map: M): string; variableOf?(map: M): string;
+  /** `nearest` for a kind whose every map is one value over the whole disc: the bake then stores its surface as the one
+   * texel it is (a full raster of one color is 8 MB on a page, decoded). Left out: bilinear, between a map's nodes. */
+  readonly displaySampling?: 'nearest';
 }
 
 /** True for a rotation record that draws a star's axis by convention alone, with no measured tilt. */
@@ -82,40 +92,43 @@ export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: S
   const text = structuredClone(host.text), texts = requireRecord(text.datasets, `${star.id} text datasets`), count = maps.length, epochs = `${count} ${count === 1 ? 'epoch' : 'epochs'}`;
   const newSurfaces: Json[] = [], newInputs: Json[] = [], newControls: Json[] = [];
   const directoryOf = (map: M) => kind.directoryOf?.(map) ?? kind.directory, archiveOf = (map: M) => kind.archiveOf?.(map) ?? kind.archiveUrl, mine = (consumer: unknown) => consumer === kind.consumer || (typeof consumer === 'string' && (kind.consumers ?? []).includes(consumer));
-  const consumerOf = (map: M) => kind.consumerOf?.(map) ?? kind.consumer, inputIdOf = (map: M) => `${star.id}-${kind.inputTagOf?.(map) ?? kind.inputTag}-${map.choice.id}`;
+  // A table that holds several maps is one manifest input, named without a map's id.
+  const consumerOf = (map: M) => kind.consumerOf?.(map) ?? kind.consumer, inputIdOf = (map: M) => `${star.id}-${kind.inputTagOf?.(map) ?? kind.inputTag}${kind.tableOf ? '' : `-${map.choice.id}`}`;
+  const pathOf = (map: M) => `${directoryOf(map)}/${kind.tableOf?.(map) ?? map.choice.program}.dat`, variableOf = (map: M) => kind.variableOf?.(map) ?? kind.variable;
+  const lookOf = (map: M) => { if (!kind.look) return undefined; if (!star.colorHex) throw new Error(`${star.id}: its page names no color to draw the star in.`); return [...kind.look(map, { id: star.id, name: star.name, colorHex: star.colorHex })]; };
   // A step group's id is one of the page's names, which a dataset's id or another group may hold already (a published map
   // filed as `brightness`): on such a page the kind's steps take the id with `-maps` after it, and on any other its own.
   const formerIds = new Set(surfaces.filter(surface => isRecord(surface.science) && mine(surface.science.consumer)).map(surface => surface.id));
   const held = new Set(controls.filter(control => !ids.has(requireString(control.id, 'control id')) && !formerIds.has(control.id)).flatMap(control => [control.id, isRecord(control.step) ? control.step.group : undefined]));
   let stepGroup = kind.stepGroup; while (held.has(stepGroup)) stepGroup = `${stepGroup}-maps`;
-  for (const map of maps) { const { choice } = map, path = `${directoryOf(map)}/${choice.program}.dat`, archive = archiveOf(map), inputId = inputIdOf(map), tilt = Math.round(map.inclinationDegrees), outlined = tilt <= 85 && (kind.outlines?.(map) ?? true);
+  for (const map of maps) { const { choice } = map, path = pathOf(map), archive = archiveOf(map), inputId = inputIdOf(map), tilt = Math.round(map.inclinationDegrees), outlined = tilt <= 85 && (kind.outlines?.(map) ?? true), look = lookOf(map);
     const words = kind.words(map, { star, count, epochs, tilt, outlined });
     files.set(`${at}/source/${path}`, map.table);
-    newInputs.push({ id: inputId, path, origin: archive, productId: words.productId,
+    if (!newInputs.some(input => input.id === inputId)) newInputs.push({ id: inputId, path, origin: archive, productId: words.productId,
       title: words.inputTitle, sourceUrl: archive,
       credit: words.credit, displayCredit: words.displayCredit,
       license: words.license, licenseEvidence: [...words.licenseEvidence],
       acquisition: words.acquisition, ...(kind.generator ? { generator: kind.generator } : {}),
       redistribution: words.redistribution, consumers: [consumerOf(map)],
       sourceBinding: { kind: 'catalogued', references: (kind.referencesOf?.(map) ?? kind.references).map(reference => ({ ...reference })) } });
-    newSurfaces.push({ id: choice.id, output: first.output, thumbnail: first.thumbnail, source: path, falseColor: true, science: { kind: 'terrestrial-scientific', id: choice.id, label: choice.label, format: 'tecplot-lonlat-map', path, variable: kind.variable,
-      ...(outlined ? { outlineLatitudes: [-tilt] } : {}), consumer: consumerOf(map), sampling: 'bilinear', displaySampling: 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: scale.minimum, maximum: scale.maximum, colors: [...kind.colors], labels,
-      description: words.description,
+    newSurfaces.push({ id: choice.id, output: first.output, thumbnail: first.thumbnail, source: path, falseColor: !look, science: { kind: 'terrestrial-scientific', id: choice.id, label: choice.label, format: 'tecplot-lonlat-map', path, variable: variableOf(map),
+      ...(outlined ? { outlineLatitudes: [-tilt] } : {}), consumer: consumerOf(map), sampling: 'bilinear', displaySampling: kind.displaySampling ?? 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: scale.minimum, maximum: scale.maximum, colors: look ?? [...kind.colors], labels,
+      ...(look ? { limbOf: first.id } : {}), description: words.description,
       title: words.surfaceTitle, sourceUrl: archive } });
     newControls.push({ id: choice.id, label: kind.controlLabel, qualification: words.qualification, thumbnail: `${star.id}-dataset-${choice.id}.webp`, surface: `${star.id}-surface-${choice.id}@2x.webp`, poles: `${star.id}-poles-${choice.id}@2x.webp`,
-      source: { id: inputId, path: '../manifest.json', url: archive }, falseColor: true, ...(count > 1 ? { step: { group: stepGroup, label: choice.label } } : {}),
-      legend: { kind: 'scale', title: kind.legendTitle, labels, recipe: { palette: kind.palette.map(color => [...color]), labels }, meta: kind.units, sourceUrl: archive },
+      source: { id: inputId, path: '../manifest.json', url: archive }, falseColor: !look, ...(count > 1 ? { step: { group: stepGroup, label: choice.label } } : {}),
+      ...(look ? {} : { legend: { kind: 'scale', title: kind.legendTitle, labels, recipe: { palette: kind.palette.map(color => [...color]), labels }, meta: kind.units, sourceUrl: archive } }),
       notes: words.notes,
-      legendNote: words.legendNote });
+      ...(look ? {} : { legendNote: words.legendNote }) });
     texts[choice.id] = { ...words.text };
   }
   // The newest map again, in the star's color: one more surface of the same table, first in the list and the page's default.
   const newest = maps.at(-1), natural = newest && kind.natural && star.colorHex ? kind.natural(newest, { id: star.id, name: star.name, colorHex: star.colorHex }) : undefined;
-  if (natural && newest) { const path = `${directoryOf(newest)}/${newest.choice.program}.dat`, archive = archiveOf(newest), inputId = inputIdOf(newest);
+  if (natural && newest) { const path = pathOf(newest), archive = archiveOf(newest), inputId = inputIdOf(newest);
     if (ids.has(natural.id)) throw new Error(`${star.id}: a map is listed under the id ${natural.id}, which is the id of the star drawn in its own color.`);
     if (surfaces.some(surface => surface.id === natural.id && !(isRecord(surface.science) && mine(surface.science.consumer)))) throw new Error(`${star.id}: dataset ${natural.id} already exists and is not one of these maps.`);
     ids.add(natural.id);
-    newSurfaces.push({ id: natural.id, output: first.output, thumbnail: first.thumbnail, source: path, falseColor: false, science: { kind: 'terrestrial-scientific', id: natural.id, label: natural.label, format: 'tecplot-lonlat-map', path, variable: kind.variable,
+    newSurfaces.push({ id: natural.id, output: first.output, thumbnail: first.thumbnail, source: path, falseColor: false, science: { kind: 'terrestrial-scientific', id: natural.id, label: natural.label, format: 'tecplot-lonlat-map', path, variable: variableOf(newest),
       consumer: consumerOf(newest), sampling: 'bilinear', displaySampling: 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: natural.minimum, maximum: natural.maximum, colors: [...natural.colors], labels: [`${natural.minimum}${kind.units}`, `${natural.maximum}${kind.units}`],
       limbOf: first.id, ...(natural.limbStrength === undefined ? {} : { limbStrength: natural.limbStrength }), description: natural.description, title: natural.surfaceTitle, sourceUrl: archive } });
     newControls.unshift({ id: natural.id, label: natural.label, qualification: natural.qualification, thumbnail: `${star.id}-dataset-${natural.id}.webp`, surface: `${star.id}-surface-${natural.id}@2x.webp`, poles: `${star.id}-poles-${natural.id}@2x.webp`,

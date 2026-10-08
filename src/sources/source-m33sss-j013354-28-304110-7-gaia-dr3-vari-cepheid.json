@@ -1,0 +1,35 @@
+{
+  "id": "source-m33sss-j013354-28-304110-7-gaia-dr3-vari-cepheid",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "M33SSS J013354.28+304110.7 · m33sss j013354 28 304110 7 gaia dr3 vari cepheid",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/m33sss-j013354-28-304110-7/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Ripepi et al. (2023), A&A 674, A17",
+      "scope": "The m33sss j013354 28 304110 7 gaia dr3 vari cepheid input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

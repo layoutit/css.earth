@@ -88,6 +88,19 @@ test('a tree whose slots hold no first image keeps its property table, entry for
   assert.deepEqual(withTextureImageRecords({ ...expanded, tree: { ...expanded.tree, textureBindings: [{ target: 2, name: '--surface', leaves: [3, 4] }] } }, [{ target: 5, name: 'backgroundImage', node: 5 }]), records);
 });
 
+test('a plate that draws its image itself keeps no read of the variable, as a property or inline', () => {
+  // A star's limb plate with a veil on it: the emissive builder gives the plate its read of the limb variable.
+  for (const read of ['property', 'inline'] as const) {
+    const plate = variable(), at = plate.tree.properties.length;
+    plate.tree.properties.push({ name: 'backgroundImage', value: 'var(--limb)', custom: false });
+    plate.tree.nodes[5] = read === 'property' ? { parent: 0, style: '', properties: [2, at] } : { parent: 0, style: 'background-image:var(--limb);opacity:1;', properties: [2] };
+    const records = withTextureImageRecords(plate, containers), node = records.tree.nodes[5]!;
+    assert.equal(JSON.stringify(records).includes('--'), false, read);
+    assert.deepEqual([node.style, node.properties.map(id => records.tree.properties[id]!)], [read === 'property' ? '' : 'opacity:1;', [{ name: 'width', value: '32px', custom: false }]], read);
+    assert.deepEqual(records.variants[0]!.writes[3], texture(5, 'backgroundImage', 'limb:a'));
+  }
+});
+
 test('an element that reads a selected image outside every slot is refused by node', () => {
   const stray = variable();
   stray.tree.textureBindings = [{ target: 2, name: '--surface', leaves: [3] }];

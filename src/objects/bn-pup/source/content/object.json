@@ -52,6 +52,196 @@
         },
         "falseColor": false,
         "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,250 K and log g 0.21 (u1 0.572, u2 0.151): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "pulsation-phase-0",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · maximum light",
+        "thumbnail": "bn-pup-dataset-pulsation-phase-0.webp",
+        "surface": "bn-pup-surface-pulsation-phase-0@2x.webp",
+        "poles": "bn-pup-poles-pulsation-phase-0@2x.webp",
+        "source": {
+          "id": "bn-pup-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.0"
+        },
+        "notes": "BN Pup at maximum light, phase 0.0 of one 13.7-day pulsation: its color dimmed to 100% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-1",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 1.37 days after maximum",
+        "thumbnail": "bn-pup-dataset-pulsation-phase-1.webp",
+        "surface": "bn-pup-surface-pulsation-phase-1@2x.webp",
+        "poles": "bn-pup-poles-pulsation-phase-1@2x.webp",
+        "source": {
+          "id": "bn-pup-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.1"
+        },
+        "notes": "BN Pup 1.37 days after maximum light, phase 0.1 of one 13.7-day pulsation: its color dimmed to 93% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-2",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 2.73 days after maximum",
+        "thumbnail": "bn-pup-dataset-pulsation-phase-2.webp",
+        "surface": "bn-pup-surface-pulsation-phase-2@2x.webp",
+        "poles": "bn-pup-poles-pulsation-phase-2@2x.webp",
+        "source": {
+          "id": "bn-pup-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.2"
+        },
+        "notes": "BN Pup 2.73 days after maximum light, phase 0.2 of one 13.7-day pulsation: its color dimmed to 81% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-3",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 4.10 days after maximum",
+        "thumbnail": "bn-pup-dataset-pulsation-phase-3.webp",
+        "surface": "bn-pup-surface-pulsation-phase-3@2x.webp",
+        "poles": "bn-pup-poles-pulsation-phase-3@2x.webp",
+        "source": {
+          "id": "bn-pup-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.3"
+        },
+        "notes": "BN Pup 4.10 days after maximum light, phase 0.3 of one 13.7-day pulsation: its color dimmed to 73% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-4",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 5.47 days after maximum",
+        "thumbnail": "bn-pup-dataset-pulsation-phase-4.webp",
+        "surface": "bn-pup-surface-pulsation-phase-4@2x.webp",
+        "poles": "bn-pup-poles-pulsation-phase-4@2x.webp",
+        "source": {
+          "id": "bn-pup-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.4"
+        },
+        "notes": "BN Pup 5.47 days after maximum light, phase 0.4 of one 13.7-day pulsation: its color dimmed to 64% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-5",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 6.84 days after maximum",
+        "thumbnail": "bn-pup-dataset-pulsation-phase-5.webp",
+        "surface": "bn-pup-surface-pulsation-phase-5@2x.webp",
+        "poles": "bn-pup-poles-pulsation-phase-5@2x.webp",
+        "source": {
+          "id": "bn-pup-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.5"
+        },
+        "notes": "BN Pup 6.84 days after maximum light, phase 0.5 of one 13.7-day pulsation: its color dimmed to 54% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-6",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 8.20 days after maximum",
+        "thumbnail": "bn-pup-dataset-pulsation-phase-6.webp",
+        "surface": "bn-pup-surface-pulsation-phase-6@2x.webp",
+        "poles": "bn-pup-poles-pulsation-phase-6@2x.webp",
+        "source": {
+          "id": "bn-pup-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.6"
+        },
+        "notes": "BN Pup 8.20 days after maximum light, phase 0.6 of one 13.7-day pulsation: its color dimmed to 49% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-7",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 9.57 days after maximum",
+        "thumbnail": "bn-pup-dataset-pulsation-phase-7.webp",
+        "surface": "bn-pup-surface-pulsation-phase-7@2x.webp",
+        "poles": "bn-pup-poles-pulsation-phase-7@2x.webp",
+        "source": {
+          "id": "bn-pup-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.7"
+        },
+        "notes": "BN Pup 9.57 days after maximum light, phase 0.7 of one 13.7-day pulsation: its color dimmed to 53% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-8",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 10.9 days after maximum",
+        "thumbnail": "bn-pup-dataset-pulsation-phase-8.webp",
+        "surface": "bn-pup-surface-pulsation-phase-8@2x.webp",
+        "poles": "bn-pup-poles-pulsation-phase-8@2x.webp",
+        "source": {
+          "id": "bn-pup-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.8"
+        },
+        "notes": "BN Pup 10.9 days after maximum light, phase 0.8 of one 13.7-day pulsation: its color dimmed to 69% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-9",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 12.3 days after maximum",
+        "thumbnail": "bn-pup-dataset-pulsation-phase-9.webp",
+        "surface": "bn-pup-surface-pulsation-phase-9@2x.webp",
+        "poles": "bn-pup-poles-pulsation-phase-9@2x.webp",
+        "source": {
+          "id": "bn-pup-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.9"
+        },
+        "notes": "BN Pup 12.3 days after maximum light, phase 0.9 of one 13.7-day pulsation: its color dimmed to 90% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
       }
     ]
   },

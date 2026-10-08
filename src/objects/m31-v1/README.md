@@ -10,6 +10,8 @@ Edwin Hubble's M31-V1 is the first Cepheid found in the Andromeda Galaxy. Its ga
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,940 K and log g 0.91 (u1 0.638, u2 0.128): a model, because no fit of this star's limb is used. Gravity: log g 0.91 from 2023ApJ...944....1D; the 1 published value span log g 0.91 to 0.91, across which the limb law changes by at most 0.0% of the centre brightness.
 
+**Pulsation.** The 10 steps of the Pulsation dataset are the model Gaia DR3 publishes of the star's G-band light (vari_cepheid, source 381169658804170880: 3 harmonics of a 31.41-day period; the same row as [the source record](../../sources/gaia-dr3-vari-cepheid-m31-v1.json)), evaluated in this project a tenth of a period apart, from maximum light ([method note](../../../docs/pulsating-stars-light-through-a-cycle.md)). Tied to the star by its place: the one Gaia DR3 Cepheid within 1 arcsecond of it (0.26 arcseconds away), whose period, 31.409 d, is within 1% of the 31.38 d the star's own catalogue row prints. Each step draws the star's color dimmed to that phase's share of its light at maximum: 100, 87, 76, 69, 59, 54, 48, 41, 48, 78%.
+
 ## Evidence
 
 Generated 2026-10-01 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from VizieR J/AJ/156/130/main and the archives named above; each choice was read with the dataset's own reader.
@@ -26,5 +28,7 @@ A headless capture of the M 31 page after orbiting the view: M31-V1 stays on the
 - **Not shown.** The star pulsates; it is drawn at its mean radius.
 - **Not shown.** Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists.
 - **Not shown.** Its radial velocity is its galaxy's; its own motion within M31 is not measured.
+
+- **Pulsation.** The steps show the light alone. The star's color and its size change through the cycle and are not drawn: no published calibration found turns Gaia's two colors into a Cepheid's temperature, and nothing here measures this star's size through the cycle. 10 steps a tenth of a period apart are a display choice; the model between them is continuous.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
