@@ -3,7 +3,7 @@ name: ENSO daily refresh
 # Once a day, moves Earth's ENSO steps to NASA's newest MUR analysis: acquires the new day from GIBS, bakes that day
 # alone (prepare-object earth --add-datasets), publishes its files and its tile archive to R2, and opens a pull request
 # that merges itself when the required checks pass. A day NASA has not published yet ends the run with nothing to do.
-# The merge moves source/science/mur on main, which starts the Deploy workflow. The bot token and failure recovery:
+# The merge moves source/science/mur on main, which starts the Deploy workflow. The GitHub token and failure recovery:
 # docs/ci-cd.md#enso-daily-refresh.
 
 on:
@@ -23,7 +23,7 @@ concurrency:
 jobs:
   refresh:
     name: Move the ENSO steps to NASA's newest day
-    # A fork has neither the publish credentials nor the bot token.
+    # A fork has neither the publish credentials nor the GitHub token.
     if: github.repository == 'layoutit/css.earth'
     runs-on: ubuntu-latest
     # Not measured on a runner yet. On a 14-core Mac (2026-10-08): 8 minutes to acquire thirteen days, 2 to restore the
@@ -37,16 +37,16 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GH_API_TOKEN: ${{ secrets.GH_API_TOKEN }}
         run: |
           missing() { echo "::error::The secret $1 is not set; the ENSO refresh needs it ($2)."; exit 1; }
           [ -n "$CLOUDFLARE_API_TOKEN" ] || missing CLOUDFLARE_API_TOKEN "R2 write, on the r2-publish environment"
           [ -n "$CLOUDFLARE_ACCOUNT_ID" ] || missing CLOUDFLARE_ACCOUNT_ID "the Cloudflare account id"
-          [ -n "$BOT_TOKEN" ] || missing BOT_TOKEN "a token that can push a branch and open a pull request; the built-in token's pull requests run no checks"
+          [ -n "$GH_API_TOKEN" ] || missing GH_API_TOKEN "a token that can push a branch and open a pull request; the built-in token's pull requests run no checks"
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: main
-          token: ${{ secrets.BOT_TOKEN }}
+          token: ${{ secrets.GH_API_TOKEN }}
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -102,7 +102,7 @@ jobs:
       - name: Open the pull request and let it merge itself
         if: steps.refresh.outputs.moved == 'true'
         env:
-          GH_TOKEN: ${{ secrets.BOT_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_API_TOKEN }}
           NEWEST: ${{ steps.refresh.outputs.newest }}
         run: |
           set -euo pipefail

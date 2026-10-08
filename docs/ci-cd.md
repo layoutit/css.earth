@@ -100,7 +100,7 @@ Earth's ENSO dataset steps through NASA's newest MUR analysis and the thirteen d
 5. It pushes `chore/enso-<date>` and opens a pull request with auto-merge on. The merge moves
    `src/objects/earth/source/science/mur/`, and that push starts the Deploy workflow.
 
-It needs one secret besides the R2 pair: `BOT_TOKEN`, a GitHub fine-grained token for this repository with read and write
+It needs one secret besides the R2 pair: `GH_API_TOKEN`, a GitHub fine-grained token for this repository with read and write
 access to contents and pull requests. A pull request opened by the workflow's own token starts no workflow, so the
 required checks would never report and it could not merge. The name is general on purpose: any job that opens a pull
 request can use the same token.
