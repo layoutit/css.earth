@@ -7,7 +7,7 @@ import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { createPreparedVolumeDatasets, type PreparedVolumeDatasetSource } from '../volume/prepared-volume-datasets.js';
 import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
-import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
+import { enteredVolumeOpacity, projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits, volumeHolds } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './far-backing-planes.js';
@@ -294,9 +294,14 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     /** Whether the bank's slices are on screen (its last publication drew them). */
     drawing(id: string): boolean { return byId.get(id)?.drawn === true; },
     /** `standIn`: the bank drawn in the detailed one's place until that one draws (detailed-focus-context.ts), of either
-     * kind: it is drawn as the detailed bank is, and while one stands in the detailed bank's billboard stays out. */
+     * kind: it is drawn as the detailed bank is, and while one stands in the detailed bank's billboard stays out.
+     * `flight`: the destination of a flight while the page it leaves is the selected one: its place, and the share of a
+     * distant cloud that its own page will draw at this camera (`closeUp`, selectedBodyContextOpacity). The detailed bank
+     * is drawn with that share, as it will be when the flight hands over (HV 2827 is 9.3 kpc from the Large Magellanic
+     * Cloud's centre, and the cloud stood beside it until the hand-over at 4.8 s, 2026-10-07); when it holds the
+     * destination's place it gives way as it comes to fill the view too (`enteredVolumeOpacity`). */
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailContextOpacity: number, detailedObjectId?: string, bodyContextOpacity = 1,
-      standIn?: string) {
+      standIn?: string, flight?: { readonly toM: readonly number[]; readonly closeUp: number }) {
       if (lifetime.disposed) return;
       let residencyChanged = false, drawingChanged = false;
       for (const bank of banks) {
@@ -306,7 +311,9 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
           : detailContextOpacity * (bank.facts.attached ? 1 : bodyContextOpacity);
         const contextOpacity = bank.facts.contextVisibility === 'independent' ? 1 : volumeOpacity;
         // An attached volume shows with its host's dataset, and always as the page's own focus (M87 on /m87/).
-        const shown = bank.enabled || detailed ? presentationOpacity * contextOpacity : 0;
+        const whole = bank.enabled || detailed ? presentationOpacity * contextOpacity : 0;
+        const shown = whole > 0 && detailed && flight
+          ? whole * flight.closeUp * (volumeHolds(frame, radiusUnits, flight.toM) ? enteredVolumeOpacity(world, frame, radiusUnits) : 1) : whole;
         const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
         const incoming = bank.id === detailedObjectId;
         const ready = texturesReady(bank, { world, viewport }, shown > 0 && (requestedOpacity > 0 || incoming), incoming, requestedOpacity > 0);
