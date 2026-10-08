@@ -31,6 +31,7 @@ export function parseObservedPolarRecipe(input: unknown) {
     ids.add(dataset.id);source(dataset.source);
     for(const filename of Object.values(dataset.files)){validateRelativePath(filename);if(outputs.has(filename))throw new TypeError('Observed polar outputs must be unique.');outputs.add(filename);}
     if(dataset.operation==='rgb-measured-rows'&&(!Number.isInteger(dataset.coverage.columnStride)||dataset.coverage.columnStride<1))throw new TypeError('Invalid observed RGB coverage stride.');
+    if(dataset.operation==='rgb-measured-rows'&&dataset.planetographicAxisRatio!==undefined&&!(dataset.planetographicAxisRatio>=POLAR_RECIPE_POLICY.minimumEllipsoidRatio))throw new TypeError('An ellipsoid ratio must be at least 1.');
     if(dataset.operation==='rgb-observed-gaps'){
       if(dataset.coverageSources.length!==POLAR_RECIPE_POLICY.rgbComponents||!(dataset.planetographicAxisRatio>=POLAR_RECIPE_POLICY.minimumEllipsoidRatio))throw new TypeError('RGB maps require three component coverage maps and an ellipsoid ratio.');
       dataset.coverageSources.forEach(source);
@@ -102,9 +103,18 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
         const i=row*image.info.width+column;
         data.set(image.data.subarray(i*image.info.channels,i*image.info.channels+3),i*4);data[i*4+3]=255;missing[i]=0;
       }
-      const original={data,info:{width:image.info.width,height:image.info.height,channels:4},missing};
+      let mapData: Buffer=data,mapMissing: Uint8Array=missing;
+      if(dataset.planetographicAxisRatio!==undefined) {
+        // The pins above are the source's own rows; from here the map is in the mesh's latitude, and a row that mixes a
+        // measured row with a missing one is missing.
+        mapData=planetographicRowsToMeshLatitude(data,image.info.width,image.info.height,4,dataset.planetographicAxisRatio);
+        const meshData=mapData;
+        mapMissing=Uint8Array.from({length:pixels},(_,i)=>meshData[i*4+3]===255?0:1);
+        measured={firstMeasuredRow:Math.floor(mapMissing.indexOf(0)/image.info.width),lastMeasuredRow:Math.floor(mapMissing.lastIndexOf(0)/image.info.width)};
+      }
+      const original={data:mapData,info:{width:image.info.width,height:image.info.height,channels:4},missing:mapMissing};
       source1x=resizeObservedRgb(original,width,height);source2x=resizeObservedRgb(original,width*2,height*2);
-      measured={...measured,sourceMissingPixels:missing.reduce((sum,n)=>sum+n,0)};
+      measured={...measured,sourceMissingPixels:original.missing.reduce((sum,n)=>sum+n,0)};
       polar=prepareMeasuredPolarAtlas(original,polarTileSize*2,{projection:'latitude-linear',...dataset.projection});
     } else if(dataset.operation==='rgb-observed-gaps'||dataset.operation==='rgb-published-mask') {
       const image=await sharp(bytes).removeAlpha().raw().toBuffer({resolveWithObject:true});
