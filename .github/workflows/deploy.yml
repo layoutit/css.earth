@@ -1,10 +1,15 @@
 name: Deploy
 
-# Deployment is manual. Merging to main validates the gate; it does not ship.
+# Deployment is manual, with one exception: a merge that moves Earth's ENSO days ships the site, so the daily refresh
+# (enso-daily.yml) reaches css.earth without a dispatch. Any other merge to main validates the gate; it does not ship.
 # PR timing and publication/metadata rules: docs/ci-cd.md.
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/objects/earth/source/science/mur/**'
 
 permissions:
   contents: read
@@ -15,8 +20,9 @@ concurrency:
 
 jobs:
   deploy:
-    # A dispatch always deploys; an automatic run only when main's checks passed.
-    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    # A dispatch always deploys, and so does the push of a merged ENSO move, whose pull request passed the required
+    # checks on the tree it merged; an automatic run only when main's checks passed.
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:

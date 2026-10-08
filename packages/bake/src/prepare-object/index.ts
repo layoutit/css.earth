@@ -88,6 +88,11 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'pins', purpose: "pin the regenerated world files into the Sun's inventory and into each object's that holds them", scope: 'once', commands: async () => [node('site/build/prepare/authored/prepare-object-json.mts', 'sun'), node('site/build/prepare/world/pin-world-files.mts'), node('site/build/prepare/catalog/prepare-catalog.mts')] },
 ]);
 
+/** The steps of an add-datasets run. It changes one object's datasets, which the reader text and the presentation audit
+ * have not seen and no world file reads: it skips the inputs step, whose check wants every other object's prepared files
+ * installed for the catalogue and world files the full chain rebuilds, and everything after the text. */
+export const ADD_DATASETS_STEPS: readonly string[] = Object.freeze(['builds', 'catalogue', 'geometry', 'prepare', 'audit', 'text']);
+
 export type Progress = (line: string) => void;
 
 const terminationSignals = ['SIGINT', 'SIGTERM', 'SIGHUP', 'SIGQUIT'] as const;
@@ -191,8 +196,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
   // A reuse-images run changes nothing the later steps read, and they read raw imagery a checkout may not have;
   // its prepare step already pins the page data and publishes the set.
   const start = index(from, 0), end = reuseImages || addDatasets ? index('prepare', 0) : index(to, PREPARATION_STEPS.length - 1);
-  // An add-datasets run brings datasets the reader text and the presentation audit have not seen; nothing else reads them.
-  const chain = [...PREPARATION_STEPS.slice(0, end + 1), ...(addDatasets ? PREPARATION_STEPS.filter(step => step.name === 'audit' || step.name === 'text') : [])];
+  const chain = addDatasets ? PREPARATION_STEPS.filter(step => ADD_DATASETS_STEPS.includes(step.name)) : PREPARATION_STEPS.slice(0, end + 1);
   const steps = chain.filter(step => PREPARATION_STEPS.indexOf(step) >= start), started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
   const resume = (step: PreparationStep) => `node packages/bake/cli/prepare-object.mts ${ids.join(' ')} --from ${step.name}${to ? ` --to ${to}` : ''}${addDatasets ? ' --add-datasets' : ''}`;
   for (const step of steps) {
