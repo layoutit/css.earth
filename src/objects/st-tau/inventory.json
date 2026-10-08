@@ -21,6 +21,66 @@
     },
     {
       "location": "public",
+      "filename": "st-tau-dataset-pulsation-phase-0.webp",
+      "bytes": 44,
+      "sha256": "ede0703448aa35be18b6092a480a2c6735c78412fc4d82364b352d1b667e58d7"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-dataset-pulsation-phase-1.webp",
+      "bytes": 44,
+      "sha256": "26e3cf2abbeeecc7060a2459c0eedf3bb6ff23a6617fc1cbfd5c25dcdb510e5f"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-dataset-pulsation-phase-2.webp",
+      "bytes": 44,
+      "sha256": "f71a561192097e44a57a3ff592171e50dbc142192f2aabc5507aa9b5d5c06442"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-dataset-pulsation-phase-3.webp",
+      "bytes": 44,
+      "sha256": "043d39b8c030d8f796ffd80f6a580030e883d52ea7ab58a16f37ec1299dac0b7"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-dataset-pulsation-phase-4.webp",
+      "bytes": 44,
+      "sha256": "ba34e1304c53738e3d6035e751e226114027a5ffdb1ca1e51288ac33931e2006"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-dataset-pulsation-phase-5.webp",
+      "bytes": 44,
+      "sha256": "0ac50af00315b9fa6428d1f8ffab89626e2fce0bb442bf408ec5a9c151dfa444"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-dataset-pulsation-phase-6.webp",
+      "bytes": 44,
+      "sha256": "e7407ad33567e57c489d2a376e4808d814794d6ccaebd2ec3cfc46b6a5cbb230"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-dataset-pulsation-phase-7.webp",
+      "bytes": 44,
+      "sha256": "d4640769d95fe99119fd255c371dec3c2d55222c0134e3c55e4cfa0cbbbe65c1"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-dataset-pulsation-phase-8.webp",
+      "bytes": 44,
+      "sha256": "d23450c6da945aa57b5e4c47f39bc0d7d5e281ca8f95a7ae4c8645133baf6b8b"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-dataset-pulsation-phase-9.webp",
+      "bytes": 44,
+      "sha256": "d46536a0a2bd716f73dc925fb39f54d3f0769ea8389c88f7a5b2d4eea36e1205"
+    },
+    {
+      "location": "public",
       "filename": "st-tau-limb-color@2x.webp",
       "bytes": 97848,
       "sha256": "fb6713d0c9b5f079b4d46f68c1e7cf21b0744edab5dfb25d0c25b66f645f1558"
@@ -33,9 +93,129 @@
     },
     {
       "location": "public",
+      "filename": "st-tau-poles-pulsation-phase-0@2x.webp",
+      "bytes": 1340,
+      "sha256": "eb9c60543c248ffb51068dabbc19da61e9cdf8689d0e27ce783e50a13111df58"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-poles-pulsation-phase-1@2x.webp",
+      "bytes": 1340,
+      "sha256": "fe38c8aeb929fc3b3523dff22bb0099a6fae5c3d121455760a4c6d0a342155dc"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-poles-pulsation-phase-2@2x.webp",
+      "bytes": 1340,
+      "sha256": "e819b54eaa121882f86269a952f84362e1fbc01aaed64ede6a0c45b50883031a"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-poles-pulsation-phase-3@2x.webp",
+      "bytes": 1340,
+      "sha256": "40ea52fe85ac7e3537e55a4eea56ede23c19f670f09a53fc1ce181366ed06397"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-poles-pulsation-phase-4@2x.webp",
+      "bytes": 1340,
+      "sha256": "019ce7bdb9750cd8d2df8b4bc6a7c2141148c69b81173410018eefd5ee4fa1a0"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-poles-pulsation-phase-5@2x.webp",
+      "bytes": 1340,
+      "sha256": "03c0a97acea978e8684e635136f5549cb8db52e10ca77f0ba5f3f9467e08a6ab"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-poles-pulsation-phase-6@2x.webp",
+      "bytes": 1340,
+      "sha256": "a2777bb2fd26a66de0f0b0362a73c70de4a0fde4e12fb44055cbd90134106de2"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-poles-pulsation-phase-7@2x.webp",
+      "bytes": 1340,
+      "sha256": "23b21cc3abfc46faeedd99dcbc7c2247fb095d1d63d23c436e1520f5875f232d"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-poles-pulsation-phase-8@2x.webp",
+      "bytes": 1340,
+      "sha256": "940f3d7ee836b4abb3a26fc2800e357434ab80425039d3b8b06e837da107ecba"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-poles-pulsation-phase-9@2x.webp",
+      "bytes": 1340,
+      "sha256": "7ca3c2cbea474346e592277dff9ab6e050bb709ffe1079e51b6363201e6e30a0"
+    },
+    {
+      "location": "public",
       "filename": "st-tau-surface-color@2x.webp",
       "bytes": 38,
       "sha256": "b45087b8faec309df033e2ac643f7d394da01d632d33132e707d43274cbf7872"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-surface-pulsation-phase-0@2x.webp",
+      "bytes": 38,
+      "sha256": "b45087b8faec309df033e2ac643f7d394da01d632d33132e707d43274cbf7872"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-surface-pulsation-phase-1@2x.webp",
+      "bytes": 38,
+      "sha256": "99237460560adcf119007596228c09207a8159a441970fd209446ce370ae442c"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-surface-pulsation-phase-2@2x.webp",
+      "bytes": 38,
+      "sha256": "2f0f5e6aca714bf4c4b07e8dd796a634bfafec87c7459f78723fc826f6d80d15"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-surface-pulsation-phase-3@2x.webp",
+      "bytes": 38,
+      "sha256": "8fdc6b04e5cb20d08a694ebfc573f8d223d71a0f82b6b10fc15ac27b028f01e2"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-surface-pulsation-phase-4@2x.webp",
+      "bytes": 38,
+      "sha256": "aa7bb53b673024a02c8aae45eb90026258dd619371227db84778b03ea9d01a36"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-surface-pulsation-phase-5@2x.webp",
+      "bytes": 38,
+      "sha256": "0967122cf62115d25aa8fbdef880f834b162690d4de874249ff0a18ea1ba1466"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-surface-pulsation-phase-6@2x.webp",
+      "bytes": 38,
+      "sha256": "63792e1d55f823cbce82487b17cc72bc1b433b3db13da4f70290d71c5eb45007"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-surface-pulsation-phase-7@2x.webp",
+      "bytes": 38,
+      "sha256": "3d0b9e490b97391bbac3960d8f2235952f846fb9b7c02719d365dafdb5b2b451"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-surface-pulsation-phase-8@2x.webp",
+      "bytes": 38,
+      "sha256": "02eddbf71b951d39687fbcb4f89002aa265f4f5505103b602a41d0c00cb854fa"
+    },
+    {
+      "location": "public",
+      "filename": "st-tau-surface-pulsation-phase-9@2x.webp",
+      "bytes": 38,
+      "sha256": "e922a18c2e0f2718e5395ecdc2cb3675ff1aa7292163103ba1b52eae616c29df"
     },
     {
       "location": "prepared",
@@ -46,14 +226,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2170,
-      "sha256": "3fa8c1e702048f3c3f70b194b7265d26633e13ec6be5183be840599d2e5be63e"
+      "bytes": 5856,
+      "sha256": "c9251d15ae6749fb52688eadef0f9cf93a0a1fa675900a2dfbfba07e8aec5e8e"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 721,
-      "sha256": "7e218f85a038b5f422c6d35a7bd0bc6de24525248b72efb54083b95768d5de3c"
+      "bytes": 659,
+      "sha256": "20c7276e4a95a8c530d4d8b2d2a7e3ece293cf27974da77f66c3ff81ca592993"
     },
     {
       "location": "prepared",
@@ -64,20 +244,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 362,
-      "sha256": "80937b0401270f5bfb9004d4f8422c1efe4faf4712d5c6fdde1a99da64c7a3cd"
+      "bytes": 2022,
+      "sha256": "f6b2a12a0e3108bccf5c101e93eed485913ab2ba553a70a43a475d342011732f"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 933,
-      "sha256": "f613873e472ffb08434efb5cb98c625343f2a9e994022443fd95fff433ad9072"
+      "bytes": 8784,
+      "sha256": "166f997adde76d24c839eb1f3ef719e83ff6b6b6b25c82a4ec5103480bd6c860"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+      "bytes": 1221,
+      "sha256": "cd9225c10c98761d3a0677fe61e12b295ce53482b37c584a7a945dfa894f982d"
     },
     {
       "location": "prepared",
@@ -87,9 +267,69 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/pulsation-phase-0.webp",
+      "bytes": 52,
+      "sha256": "c8b571c896306610754e8be34b609c515c8fec72fe0076c32eb474276883fe44"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-1.webp",
+      "bytes": 52,
+      "sha256": "c61038f54855635982a6363ceb104698c968c973f7b4bb50bc5e1a2704361d8b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-2.webp",
+      "bytes": 52,
+      "sha256": "5c7af2fc786b9443637ea9d0830bc20f9601f5f6ba937361c36cd243ac51ccc7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-3.webp",
+      "bytes": 52,
+      "sha256": "ad521064dec951b287a5a9f369c3b3ed6cdee79ae8a789ca837b66125f17561d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-4.webp",
+      "bytes": 52,
+      "sha256": "6516353c70b9734761cb8790ee9500ddbad9e5135545fffee663fc8cd8f7e34a"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-5.webp",
+      "bytes": 52,
+      "sha256": "38e448b3f6e79aa83913eff102ed5daa348546369ff62ddfe5319216b433de78"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-6.webp",
+      "bytes": 52,
+      "sha256": "748583500483f6cf6b59d98cd4c70db2e82736edb4a189222bb1e85b0cc98339"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-7.webp",
+      "bytes": 52,
+      "sha256": "95cfeb77050062303cf2417167ffe65f68b81de037ad83c440333bc1e9d07e81"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-8.webp",
+      "bytes": 52,
+      "sha256": "43dd98aee2a98ad644e30df1e209226ca40708e57f2f460731aa7e2ec58e6228"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pulsation-phase-9.webp",
+      "bytes": 52,
+      "sha256": "3809a91d87223c5a201267731c0b2e33e77f564c1875894d084b1d73f5970e9f"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 252135,
-      "sha256": "d30f4bdea1a5421e8bf74e57af77710234cef8be1ea3b35b7393a81512bb6885"
+      "bytes": 267284,
+      "sha256": "42ba7ff136b32b0f30e4812589477a9433d5a8ad82470f864ce026315b764e07"
     },
     {
       "location": "prepared",
@@ -112,8 +352,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 860,
-      "sha256": "e399032a9af6a2c413feb8917e13f7206a9c2f276a762e3046b320032d0ef8f3"
+      "bytes": 2626,
+      "sha256": "aedb826fdd6d33b9c61d7acc5591d3f79c096150b00c116c31a6f2ef844df67a"
     },
     {
       "location": "prepared",

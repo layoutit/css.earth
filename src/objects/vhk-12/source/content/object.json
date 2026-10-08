@@ -52,6 +52,196 @@
         },
         "falseColor": false,
         "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,060 K and log g 0.8 (u1 0.608, u2 0.145): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "pulsation-phase-0",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · maximum light",
+        "thumbnail": "vhk-12-dataset-pulsation-phase-0.webp",
+        "surface": "vhk-12-surface-pulsation-phase-0@2x.webp",
+        "poles": "vhk-12-poles-pulsation-phase-0@2x.webp",
+        "source": {
+          "id": "vhk-12-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.0"
+        },
+        "notes": "VHK 12 at maximum light, phase 0.0 of one 21.7-day pulsation: its color dimmed to 100% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-1",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 2.17 days after maximum",
+        "thumbnail": "vhk-12-dataset-pulsation-phase-1.webp",
+        "surface": "vhk-12-surface-pulsation-phase-1@2x.webp",
+        "poles": "vhk-12-poles-pulsation-phase-1@2x.webp",
+        "source": {
+          "id": "vhk-12-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.1"
+        },
+        "notes": "VHK 12 2.17 days after maximum light, phase 0.1 of one 21.7-day pulsation: its color dimmed to 61% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-2",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 4.33 days after maximum",
+        "thumbnail": "vhk-12-dataset-pulsation-phase-2.webp",
+        "surface": "vhk-12-surface-pulsation-phase-2@2x.webp",
+        "poles": "vhk-12-poles-pulsation-phase-2@2x.webp",
+        "source": {
+          "id": "vhk-12-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.2"
+        },
+        "notes": "VHK 12 4.33 days after maximum light, phase 0.2 of one 21.7-day pulsation: its color dimmed to 38% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-3",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 6.50 days after maximum",
+        "thumbnail": "vhk-12-dataset-pulsation-phase-3.webp",
+        "surface": "vhk-12-surface-pulsation-phase-3@2x.webp",
+        "poles": "vhk-12-poles-pulsation-phase-3@2x.webp",
+        "source": {
+          "id": "vhk-12-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.3"
+        },
+        "notes": "VHK 12 6.50 days after maximum light, phase 0.3 of one 21.7-day pulsation: its color dimmed to 34% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-4",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 8.67 days after maximum",
+        "thumbnail": "vhk-12-dataset-pulsation-phase-4.webp",
+        "surface": "vhk-12-surface-pulsation-phase-4@2x.webp",
+        "poles": "vhk-12-poles-pulsation-phase-4@2x.webp",
+        "source": {
+          "id": "vhk-12-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.4"
+        },
+        "notes": "VHK 12 8.67 days after maximum light, phase 0.4 of one 21.7-day pulsation: its color dimmed to 30% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-5",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 10.8 days after maximum",
+        "thumbnail": "vhk-12-dataset-pulsation-phase-5.webp",
+        "surface": "vhk-12-surface-pulsation-phase-5@2x.webp",
+        "poles": "vhk-12-poles-pulsation-phase-5@2x.webp",
+        "source": {
+          "id": "vhk-12-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.5"
+        },
+        "notes": "VHK 12 10.8 days after maximum light, phase 0.5 of one 21.7-day pulsation: its color dimmed to 30% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-6",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 13.0 days after maximum",
+        "thumbnail": "vhk-12-dataset-pulsation-phase-6.webp",
+        "surface": "vhk-12-surface-pulsation-phase-6@2x.webp",
+        "poles": "vhk-12-poles-pulsation-phase-6@2x.webp",
+        "source": {
+          "id": "vhk-12-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.6"
+        },
+        "notes": "VHK 12 13.0 days after maximum light, phase 0.6 of one 21.7-day pulsation: its color dimmed to 26% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-7",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 15.2 days after maximum",
+        "thumbnail": "vhk-12-dataset-pulsation-phase-7.webp",
+        "surface": "vhk-12-surface-pulsation-phase-7@2x.webp",
+        "poles": "vhk-12-poles-pulsation-phase-7@2x.webp",
+        "source": {
+          "id": "vhk-12-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.7"
+        },
+        "notes": "VHK 12 15.2 days after maximum light, phase 0.7 of one 21.7-day pulsation: its color dimmed to 42% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-8",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 17.3 days after maximum",
+        "thumbnail": "vhk-12-dataset-pulsation-phase-8.webp",
+        "surface": "vhk-12-surface-pulsation-phase-8@2x.webp",
+        "poles": "vhk-12-poles-pulsation-phase-8@2x.webp",
+        "source": {
+          "id": "vhk-12-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.8"
+        },
+        "notes": "VHK 12 17.3 days after maximum light, phase 0.8 of one 21.7-day pulsation: its color dimmed to 62% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-9",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 19.5 days after maximum",
+        "thumbnail": "vhk-12-dataset-pulsation-phase-9.webp",
+        "surface": "vhk-12-surface-pulsation-phase-9@2x.webp",
+        "poles": "vhk-12-poles-pulsation-phase-9@2x.webp",
+        "source": {
+          "id": "vhk-12-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.9"
+        },
+        "notes": "VHK 12 19.5 days after maximum light, phase 0.9 of one 21.7-day pulsation: its color dimmed to 71% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
       }
     ]
   },
