@@ -10,7 +10,7 @@ import { createSourceMeshLighting } from '../source-mesh-lighting.ts';
 import { prepareNativePhotographicAtlas, samplePhotographicTexel } from '../native-photograph.ts';
 import { loadNativePhotograph } from '../native-photograph-source.ts';
 import { renderRadialSnapshot } from '../radial-snapshot.ts';
-import { shapeFaceColors, shapeMaterialRaster, shapeFillIllumination, shapeMaterialColor } from '../shape-material.ts';
+import { shapeFaceColors, shapeMaterialRaster, shapeFillIllumination, shapeMaterialColor, triangleMeanColor } from '../shape-material.ts';
 import { requireTerrainMesh, closestTrianglePoint } from '../../../geometry/index.ts';
 import { resolve, dirname } from 'node:path';
 import { gzipSync } from 'node:zlib';
@@ -79,6 +79,10 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   const lightingByScale = new Map();
   let reusedLightingSamples = 0;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
+  // A body without imagery draws its shadows in CSS: with Shadows on every face of a dataset takes one color, the mean of
+  // the lit texels this bake paints for it, and no lit copy of the atlas is published. A photographed body keeps its lit
+  // atlases, and so does one whose shadows are ray-traced on its source mesh, where they cross faces.
+  const cssShadows = !lighting && !(['observations', 'surfaceObservations', 'observedColors'] as const).some(kind => config.raster[kind]?.length);
   for (const surface of surfaces) {
     // A shape view's constant material: the neutral gray, or the body's measured whole-disc color.
     const shapeColor = shapeMaterialColor(surface.material), neutralShape = shapeColor !== null;
@@ -121,7 +125,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     if (![1,.5,.25,.125].includes(scale) || ![width,height].every(n=>Number.isSafeInteger(n) && n>0)) {
       throw new TypeError('Scaled radial atlas dimensions must remain integral.');
     }
-    const flood = Buffer.alloc(width * height * 4), shadow = Buffer.alloc(width * height * 4);
+    const flood = Buffer.alloc(width * height * 4), shadow = Buffer.alloc(width * height * 4), litColors: string[] = [];
     let cachedLighting = lightingByScale.get(scale);
     if (lighting && !cachedLighting) {
       cachedLighting = new Float64Array(width * height * 2).fill(NaN);
@@ -313,6 +317,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
         if (scalarSources) scalarSources.copyWithin(target, source, source + 4);
         if (sampleSources) sampleSources[row + to] = sampleSources[row + from];
       });
+      if (cssShadows) litColors.push(triangleMeanColor(shadow, width, { x: rect.x * scale, y: rect.y * scale, width: rectWidth, height: rectHeight }));
     }
     // Scientific colors retain exact palette values; the numeric source index is preparation-only.
     // Photographs keep full chroma detail through sharp's smart subsampling.
@@ -321,6 +326,7 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
     surface.surface = await emit(`${config.namespace}-${surface.id}-surface@2x.webp`, sharp(flood, { raw: { width, height, channels: 4 } }), encoding);
     // A photograph that keeps its acquisition lighting has no second, epoch-lit atlas: Shadows shows it as photographed.
     if (observation?.retainsIllumination) delete surface.shadowSurface;
+    else if (cssShadows) { delete surface.shadowSurface; surface.faceColors = { shadow: litColors }; }
     else surface.shadowSurface = await emit(`${config.namespace}-${surface.id}-shadow@2x.webp`, sharp(shadow, { raw: { width, height, channels: 4 } }), encoding);
     surface.polesUrl = surface.surface.url;
     surface.layout = { kind: 'triangle-atlas', width, height, faceCount: radial.faces.length };

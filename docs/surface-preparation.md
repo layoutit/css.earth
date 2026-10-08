@@ -637,6 +637,34 @@ once per page when `CSS.supports` reports the capability missing
 and `triangle-faces.css` then drops the leaf's rounded corners. A browser with
 `corner-shape` never requests the copies.
 
+### Faces drawn in one color, without an image
+
+A shape view has one constant material, so its atlas held nothing but shading. It is drawn without an image: the bake
+writes one color a face for Shadows off and one for Shadows on
+([shape-material.ts](../packages/bake/src/objects/layers/terrestrial/shape-material.ts)), the selection writes each
+color on its face and the class `color-faces` on the body, and
+[triangle-faces.css](../packages/renderer/src/styles/triangle-faces.css) draws the face as its box in that color, or as
+a border triangle where `corner-shape` is missing. The dataset keeps a 4 by 4 swatch of its mean color where an image
+address is read.
+
+A body without photographs draws every dataset's shadows the same way: with Shadows on a face takes the mean of the lit
+texels the bake paints for it, and no lit copy of the atlas is published. A photographed body keeps its lit atlases, and
+so does a body whose shadows are ray-traced on its source mesh, where they cross faces.
+
+![Apollo's Shape and Elevation with Shadows off and on: the deployed page above, face colors below](images/shape-color-faces-apollo.webp)
+
+Apollo, deployed page above and face colors below (2026-10-08, 480 by 480 px at 2x, Pixelmatch 0.1, pixels that differ of
+921,600):
+
+| Selection | Chrome | WebKit | Firefox |
+| --- | --- | --- | --- |
+| Shape, Shadows off | 0 | 54 | 364 |
+| Shape, Shadows on | 95 | 136 | 187 |
+| Elevation, Shadows off (image, unchanged) | 0 | 0 | 0 |
+| Elevation, Shadows on | 1,478 | 3,009 | 1,784 |
+
+Apollo hosted 29 files and 2.60 MB; it hosts 20 files and 1.39 MB.
+
 ![Main's fixed squares, the raster atlas and their pixelmatch difference for Enceladus, Hyperion and Alphonsina](images/raster-atlas-pixelmatch.webp)
 
 Same pose before and after the change (main, raster atlas, pixelmatch at threshold 0.1). Every face gets

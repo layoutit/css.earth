@@ -218,7 +218,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
         kind: 'style' as const, target: index(body), name: `--${id}-${model}-display`,
         value: surfaceModel(s.id) === model ? 'block' : 'none',
       })),
-      ...(colored.length ? [{ kind: 'class' as const, target: index(body), name: COLOR_FACES_CLASS, value: s.faceColors !== undefined }] : []),
+      ...(colored.length ? [{ kind: 'class' as const, target: index(body), name: COLOR_FACES_CLASS, value: s.faceColors?.[shadows ? 'shadow' : 'flood'] !== undefined }] : []),
       ...faceColorWrites(s, shadows),
       { kind: 'style', target: index(billboard), name: 'backgroundColor', value: requireString(s.billboardColor) },
       { kind: 'attribute', target: -1, name: 'data-dataset', value: s.id },
@@ -227,8 +227,9 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   })));
   /** Each face's one color for this selection, written on the face itself. */
   function faceColorWrites(s: typeof surfaces[number], shadows: boolean) {
-    if (s.faceColors === undefined) return [];
-    const { start, count } = faceRange(s.id), colors = s.faceColors[shadows ? 'shadow' : 'flood'];
+    const colors = s.faceColors?.[shadows ? 'shadow' : 'flood'];
+    if (colors === undefined) return [];
+    const { start, count } = faceRange(s.id);
     if (colors.length !== count) throw new TypeError(`${id}: ${s.id} has ${colors.length} face colors for ${count} faces.`);
     return colors.map((value, face) => ({ kind: 'style' as const, target: index(faceNodes[start + face]!), name: 'color', value }));
   }

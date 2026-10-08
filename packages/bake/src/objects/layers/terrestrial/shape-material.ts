@@ -66,6 +66,21 @@ export function shapeFaceColors(faces: readonly { vertexNormals: readonly (reado
   return { flood, shadow };
 }
 
+/** The one color of a face from its painted texels: the mean, as `#rrggbb`, of the RGBA texels of `rect` that lie inside
+ * the triangle the leaf draws, base along the bottom and apex at the top centre. A dataset of a body without imagery
+ * takes its Shadows-on colors from here, so it publishes no lit copy of its atlas. */
+export function triangleMeanColor(texels: Uint8Array, atlasWidth: number, rect: { x: number; y: number; width: number; height: number }): string {
+  const sum = [0, 0, 0]; let inside = 0;
+  for (let py = 0; py < rect.height; py++) for (let px = 0; px < rect.width; px++) {
+    // In units of the rectangle: the left edge runs (0, 1) to (.5, 0), the right edge (.5, 0) to (1, 1).
+    if (Math.abs((px + .5) / rect.width - .5) > (py + .5) / rect.height / 2) continue;
+    const offset = ((rect.y + py) * atlasWidth + rect.x + px) * 4;
+    sum[0]! += texels[offset]!; sum[1]! += texels[offset + 1]!; sum[2]! += texels[offset + 2]!; inside++;
+  }
+  if (!inside) throw new TypeError(`A face of ${rect.width} by ${rect.height} texels has none inside its triangle.`);
+  return `#${sum.map(channel => Math.round(channel / inside).toString(16).padStart(2, '0')).join('')}`;
+}
+
 export function shapeMaterialRaster(width: number, height: number, color: Rgb = NEUTRAL): Buffer {
   if (![width, height].every(value => Number.isSafeInteger(value) && value > 0))
     throw new TypeError('Shape material requires positive integer dimensions.');

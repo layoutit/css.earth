@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { MEASURED_SHAPE_MATERIAL, SHAPE_MATERIAL, neutralShapeViews, shapeFaceColors, shapeFillIllumination, shapeLitIllumination, shapeMaterialColor, shapeMaterialRaster } from '@cssearth/bake/objects/layers/terrestrial';
+import { MEASURED_SHAPE_MATERIAL, SHAPE_MATERIAL, neutralShapeViews, shapeFaceColors, shapeFillIllumination, shapeLitIllumination, shapeMaterialColor, shapeMaterialRaster, triangleMeanColor } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 
 test('a shape material is the neutral gray or one measured color, and nothing else', () => {
@@ -39,6 +39,21 @@ test('a face takes one color for Shadows off and one for Shadows on, from the la
   assert.ok(curved.shadow[0]! > '#0f0f0f' && curved.shadow[0]! < '#808080' && curved.flood[0]! > '#636363');
   assert.throws(() => shapeFaceColors(faces, [0, 0]), /Sun direction/u);
   assert.throws(() => shapeFaceColors([{ vertexNormals: [toward, toward] }], [0, 0, 1]), /three vertex normals/u);
+});
+
+test('a face of a painted atlas takes the mean color of the texels inside its triangle', () => {
+  // A 4 by 4 rectangle at (2, 1) of an 8-wide atlas: red inside the triangle (apex at the top centre), blue outside it.
+  const atlas = new Uint8Array(8 * 6 * 4), rect = { x: 2, y: 1, width: 4, height: 4 };
+  for (let py = 0; py < 4; py++) for (let px = 0; px < 4; px++) {
+    const inside = Math.abs((px + .5) / 4 - .5) <= (py + .5) / 4 / 2;
+    atlas.set(inside ? [200, 100, 50, 255] : [0, 0, 255, 255], ((rect.y + py) * 8 + rect.x + px) * 4);
+  }
+  assert.equal(triangleMeanColor(atlas, 8, rect), '#c86432');
+  // Texels weigh alike, so the wide base counts for more than the apex: 2 black texels near the top and 6 gray ones below.
+  const banded = new Uint8Array(4 * 4 * 4);
+  for (let py = 0; py < 4; py++) for (let px = 0; px < 4; px++) banded.set(py < 2 ? [0, 0, 0, 255] : [90, 90, 90, 255], (py * 4 + px) * 4);
+  assert.equal(triangleMeanColor(banded, 4, { x: 0, y: 0, width: 4, height: 4 }), '#444444');
+  assert.throws(() => triangleMeanColor(new Uint8Array(4), 1, { x: 0, y: 0, width: 1, height: 0 }), /none inside/u);
 });
 
 test('the neutral refresh tools leave a view that names its measured color alone', () => {
