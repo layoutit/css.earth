@@ -230,6 +230,29 @@
         "https://pds-atmospheres.nmsu.edu/data_and_services/atmospheres_data/JUNO/juno.html"
       ],
       "revisitWhen": "A dated polar grid with units, geometry and an appropriate rendering interpretation is qualified."
+    },
+    {
+      "id": "jonsson-voyager-maps",
+      "subject": "Björn Jónsson’s Voyager 1 and Voyager 2 maps of 1979 as dated datasets",
+      "status": "included",
+      "finding": "Two finished global maps from the Voyager approach mosaics of 1979-02-27 (7,200 x 3,600) and 1979-06-28 (5,760 x 2,880), each with a mask of dummy fill and useless data, which the bake leaves undrawn (9.40 and 8.61 per cent of the pixels, all poleward of 69 N and 75 S). Their zonal brightness profiles sit within 0.5 degrees of the OPAL 2015 map between 60 N and 30 S, so the rows are planetographic as stated. His third Voyager 2 map, of 1979-06-30 (orange and violet only), is two days from the one used and was left out. His terms allow use with credit and ask sites to link, not host a copy: the files are downloaded from his address and not mirrored, and the page shows prepared derivatives.",
+      "evidence": [
+        "https://bjj.mmedia.is/data/jupiter_vgr1/index.html",
+        "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html",
+        "https://bjj.mmedia.is/data/planetary_maps.html"
+      ]
+    },
+    {
+      "id": "jonsson-cassini-map",
+      "subject": "Björn Jónsson’s Cassini map of 2000-12-31",
+      "status": "excluded",
+      "finding": "A 3,600 x 1,800 map from about 100 Cassini frames (BL1 and CB2 filters, synthetic green and red). Its author says he adjusted the north polar region and added cloned or fictional data near the south pole, and publishes no mask for it. Fine detail does not separate that data: it stays above a third of the mid-latitude level down to 85 S. Without a mask the invented part cannot be left undrawn, so the map is not shipped. The 14,400 x 7,200 Cassini and Juno version at the Planetary Society states no reuse terms.",
+      "revisitWhen": "The author publishes a mask for it, or a 2000 color map is built from the PDS bundle Cassini ISS Global Maps of Jupiter and Saturn (doi:10.17189/rkkb-6y30), whose single-filter maps carry their own coverage.",
+      "evidence": [
+        "https://bjj.mmedia.is/data/jupiter_css/index.html",
+        "https://www.planetary.org/articles/0514-juno-meets-cassini-a-new",
+        "https://doi.org/10.17189/rkkb-6y30"
+      ]
     }
   ]
 }

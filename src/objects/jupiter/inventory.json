@@ -153,6 +153,18 @@
     },
     {
       "location": "public",
+      "filename": "jupiter-dataset-voyager1-1979.webp",
+      "bytes": 1318,
+      "sha256": "47f6bd3682b8b6c212940ab67822ab9dea4d1f1f1b5ae1881dfb2c5a4c97eab4"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-dataset-voyager2-1979.webp",
+      "bytes": 1174,
+      "sha256": "64dd688060159aec56c57b95f8608e274b85f2f2d456ceea9d8b72363125ba2b"
+    },
+    {
+      "location": "public",
       "filename": "jupiter-magnetic-poles.webp",
       "bytes": 103718,
       "sha256": "a74ba54f48627fc3064a774741c61f33f0f1c109a987ca6b4673a4699f2d10b1"
@@ -776,6 +788,54 @@
       "sha256": "9c9151ef91b3ba3987516c4136b1a1ef7348b14e028ac2ab3e2dcb4bf89251fe"
     },
     {
+      "location": "public",
+      "filename": "jupiter-voyager1-1979-poles.webp",
+      "bytes": 31716,
+      "sha256": "752de35c850b359428fc1a0330ff4ce2c4cc24d88ff107042deef2cf99e53e13"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-voyager1-1979-poles@2x.webp",
+      "bytes": 51698,
+      "sha256": "5307c26125b7ccb4cf9ffd2a5b8ca452dccb529c09500f8866b9a0319a6e0b92"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-voyager1-1979.webp",
+      "bytes": 660272,
+      "sha256": "da8f29b2bd290c92d5b9b9348a4a9016b852c0180e736939f9dae666b771cefc"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-voyager1-1979@2x.webp",
+      "bytes": 1821016,
+      "sha256": "7a755a311b8005ffd38b7c3b72d43f689cfa58a8791ecae6c9b17816507aea9c"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-voyager2-1979-poles.webp",
+      "bytes": 31372,
+      "sha256": "a030a1cb87e651de6932ef8b23b8898ce3d3566f167b546784dfe08951fd0bed"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-voyager2-1979-poles@2x.webp",
+      "bytes": 53444,
+      "sha256": "e30e726f2a3340f6858cfdb17cf3013c44a503d75eff2f93687ab6439eb186d2"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-voyager2-1979.webp",
+      "bytes": 513630,
+      "sha256": "2403b8084aa9bb0c2e442db102a54d610d3efdab4ac83c29699abe1490f03878"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-voyager2-1979@2x.webp",
+      "bytes": 1421042,
+      "sha256": "426cfce0ece395a95cb6a63a259ebc3d4e6a76fb2c1af94479d71edcb6c59f96"
+    },
+    {
       "location": "prepared",
       "filename": "arrival-billboard.json",
       "bytes": 306,
@@ -784,8 +844,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 18719,
-      "sha256": "82613f0f05f8a579b7c62969008e13cdadc910f330ee74fa11b20fc7c8f562cb"
+      "bytes": 20155,
+      "sha256": "beb4b278fd03fbd3228047ee411065d066959613968247f655601cbae741b65d"
     },
     {
       "location": "prepared",
@@ -802,20 +862,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 6873,
-      "sha256": "65e3cdac1a60c37768987b73cb65989806190ccc49f075d95cac01153b65642d"
+      "bytes": 7243,
+      "sha256": "5c8ee3dc6e9631e13c62b51f095051f0e2984aa3e964fb2e44b7e9769a01e084"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 14370,
-      "sha256": "ec5ada9d525ba8023009f12b9e80efe716902bb22ef56ffc6da7ba45a306fca2"
+      "bytes": 15775,
+      "sha256": "71ab79cc67e9533715d098e9d8513f351e2288e22279d41df5798d75600611b8"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 1545,
-      "sha256": "18f4f8ef4d5d6565f716e3f6ef956863bc33b79ffba0baf6bbc859eaa9a86058"
+      "bytes": 1753,
+      "sha256": "7491e4bf6413f68322c6baddce3b189d9a271ab1ad240dbaf5b124bae4414893"
     },
     {
       "location": "prepared",
@@ -909,9 +969,21 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/voyager1-1979.webp",
+      "bytes": 8950,
+      "sha256": "0f439ac1f59a0270ef4d2e0e3eda21501db6539b6c39d8acb2e107a92e5bfd55"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/voyager2-1979.webp",
+      "bytes": 8632,
+      "sha256": "28e954b4f6bc80269b96c6da0deec5f1f78c638b8beb924a01864b05e7119c19"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 475694,
-      "sha256": "8f52dc5321d1066dd944ec7079404befd4024ee6f39f6592d35e48587452dfb4"
+      "bytes": 483786,
+      "sha256": "32780d076d4b1b3da97d407bbff30f647a2aaaa1da6f8ce69a191fbb8bd7bd8d"
     },
     {
       "location": "prepared",
@@ -934,8 +1006,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3147,
-      "sha256": "e430ef3b84d79219a250795f9e805fe89b42d55e2e0f09f66f1742745035e242"
+      "bytes": 3550,
+      "sha256": "155048a41e304bc688ea22987f042a0d1146040e9fd4d1efce65bfa562fef482"
     },
     {
       "location": "prepared",

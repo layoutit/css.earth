@@ -2,6 +2,10 @@
 
 - NASA/ESA Hubble WFC3 2019 global map: NASA, ESA, A. Simon (NASA GSFC), and M. H. Wong (UC Berkeley).
 - Hubble OPAL Cycle 32 products: NASA, ESA, A. A. Simon, and M. H. Wong; CC BY 4.0 as recorded in the FITS headers and MAST product page.
+- Voyager 1 and Voyager 2 maps of 1979 and their bad-data masks: created by Björn Jónsson from NASA/JPL Voyager images
+  archived at the PDS Ring-Moon Systems Node (<https://bjj.mmedia.is/data/planetary_maps.html>). He publishes his maps for
+  free use with credit and asks sites to link to them, not to host a copy; this repository holds no copy of the files
+  and downloads them from his address.
 - Galileo PIA01299 Galilean satellites: NASA/JPL/DLR.
 - Jupiter ring statistics and Galileo PIA00701/PIA01623 observations: NASA
   Planetary Data System Ring-Moon Systems Node and NASA/JPL Galileo.

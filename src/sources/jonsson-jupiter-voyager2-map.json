@@ -1,0 +1,50 @@
+{
+  "id": "jonsson-jupiter-voyager2-map",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "A Voyager 2 map of Jupiter, 28 June 1979",
+  "identifiers": [
+    {
+      "type": "Author resource",
+      "value": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/jupiter_vgr2.jpg"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/jupiter/source/manifest.json",
+      "locator": "/inputs/73"
+    }
+  ],
+  "publisher": "Björn Jónsson",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Björn Jónsson, from NASA/JPL Voyager images archived at the PDS Ring-Moon Systems Node",
+      "scope": "The map: 135 Voyager 2 narrow-angle frames (45 orange, 45 green, 45 violet) taken on 1979-06-28 between 12:04:47 and 20:42:23 UTC, reprojected, illumination-adjusted and mosaicked by the author.",
+      "evidence": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html"
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly available; no permission needed; credit \"created by Björn Jónsson\". The author asks sites to link to his maps, not to host a copy.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://bjj.mmedia.is/data/planetary_maps.html"
+    },
+    {
+      "kind": "limitation",
+      "text": "Red and blue are corrected from the orange and violet frames. Smooth dummy data fills gaps near the poles, mostly the south; the author's mask marks it, with real data he judged useless and small manual seam repairs.",
+      "scope": "Color and polar coverage of the map.",
+      "evidence": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/index.html"
+    }
+  ],
+  "creators": [
+    "Björn Jónsson"
+  ]
+}

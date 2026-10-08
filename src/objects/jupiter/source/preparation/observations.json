@@ -668,6 +668,80 @@
       }
     },
     {
+      "id": "voyager1-1979",
+      "operation": "rgb-published-mask",
+      "source": "spacecraft/jupiter_vgr1_2025.jpg",
+      "files": {
+        "surface": "jupiter-voyager1-1979.webp",
+        "surface2x": "jupiter-voyager1-1979@2x.webp",
+        "poles": "jupiter-voyager1-1979-poles.webp",
+        "poles2x": "jupiter-voyager1-1979-poles@2x.webp",
+        "thumbnail": "jupiter-dataset-voyager1-1979.webp"
+      },
+      "coverageMask": "spacecraft/jupiter_vgr1_bad_data_mask.png",
+      "planetographicAxisRatio": 1.0694620986675838,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "voyager1-1979",
+        "label": "Voyager dates",
+        "shortLabel": "Voyager",
+        "step": {
+          "group": "voyager-visible",
+          "label": "1979-02-27"
+        },
+        "measurement": "Published color map from spacecraft frames",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-voyager1-1979.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-voyager1-1979.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-voyager1-1979@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-voyager1-1979-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-voyager1-1979-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Björn Jónsson’s map from 270 Voyager 1 narrow-angle frames (135 orange, 135 violet) taken on 1979-02-27 between 03:55:47 and 12:52:35. Green is synthetic, fitted to lower-resolution green frames, and red, green and blue are computed from a spectrum estimated at each pixel. He removed limb darkening and seams. His mask marks dummy fill and useless data near the poles; those pixels are not drawn. Compare cloud shapes with the Hubble dates, not color."
+      }
+    },
+    {
+      "id": "voyager2-1979",
+      "operation": "rgb-published-mask",
+      "source": "spacecraft/jupiter_vgr2.jpg",
+      "files": {
+        "surface": "jupiter-voyager2-1979.webp",
+        "surface2x": "jupiter-voyager2-1979@2x.webp",
+        "poles": "jupiter-voyager2-1979-poles.webp",
+        "poles2x": "jupiter-voyager2-1979-poles@2x.webp",
+        "thumbnail": "jupiter-dataset-voyager2-1979.webp"
+      },
+      "coverageMask": "spacecraft/jupiter_vgr2_bad_data_mask.png",
+      "planetographicAxisRatio": 1.0694620986675838,
+      "projection": {
+        "overlap": 1.035,
+        "alphaOpaqueRadius": 0.43,
+        "alphaTransparentRadius": 0.96,
+        "boundaryLatitudeDegrees": 64
+      },
+      "control": {
+        "id": "voyager2-1979",
+        "label": "Voyager dates",
+        "shortLabel": "Voyager",
+        "step": {
+          "group": "voyager-visible",
+          "label": "1979-06-28"
+        },
+        "measurement": "Published color map from spacecraft frames",
+        "thumbnailUrl": "/scenes/jupiter/jupiter-dataset-voyager2-1979.webp",
+        "surfaceUrl": "/scenes/jupiter/jupiter-voyager2-1979.webp",
+        "surface2xUrl": "/scenes/jupiter/jupiter-voyager2-1979@2x.webp",
+        "polesUrl": "/scenes/jupiter/jupiter-voyager2-1979-poles.webp",
+        "poles2xUrl": "/scenes/jupiter/jupiter-voyager2-1979-poles@2x.webp",
+        "falseColor": false,
+        "qualification": "Björn Jónsson’s map from 135 Voyager 2 narrow-angle frames (45 orange, 45 green, 45 violet) taken on 1979-06-28 between 12:04:47 and 20:42:23 UTC. Red, green and blue are computed from a spectrum estimated at each pixel from the three filters, and blue is multiplied by 1.024. He removed limb darkening and seams. His mask marks dummy fill and useless data near the poles; those pixels are not drawn. Compare cloud shapes with the Hubble dates, not color."
+      }
+    },
+    {
       "id": "magnetic",
       "operation": "scalar-observed-gaps",
       "source": "magnetic/radial-field.fits",
