@@ -1,5 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
 import { readFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -199,7 +200,8 @@ test('the widest candidate answers for a leaf, and a leaf naming an unmeasured i
  assert.throws(()=>pixels('/scenes/a/two.webp'),/a: a leaf names \/scenes\/a\/two\.webp, which is none of the measured leaf textures/);
  await assert.rejects(widestLeafImages('a',new Map([['/scenes/a/one.webp',['/scenes/a/one.webp']]]),async()=>0),/a: leaf image \/scenes\/a\/one\.webp measures 0 px wide/);
 });
-test('every dataset reaches the leaves: a leaf binds its dataset texture and each composite variant writes its own dataset',async()=>{
+// Replays the presentation step from Uranus's scene, sun and controls: working records, held only by a checkout that baked it.
+test('every dataset reaches the leaves: a leaf binds its dataset texture and each composite variant writes its own dataset',{skip:!existsSync(join(fixtureRoot,'src/objects/uranus/prepared/scene.json'))&&'no baked scene of Uranus in this checkout'},async()=>{
  // Uranus's leaves once inlined the profile's 1x normal map, and its variants wrote no surface: every dataset drew that map.
  const result=await prepareAuthored('uranus',[1,0,0],profile=>profile,{},profileWidths);
  assert.ok(!('bodyLeaves' in result));

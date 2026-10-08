@@ -1,6 +1,7 @@
 import { parseObjectDescriptor, parsePreparedObjectRuntime, type ObjectRuntimeDefinition, deferredDatasetIds, preparedDatasetReference, splitPreparedDatasetTables } from '@cssearth/objects';
 
 import { readFile } from 'node:fs/promises';
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 
@@ -15,7 +16,7 @@ import { adoptPreparedDatasetTables } from './dataset-tables.js';
 
 const root = new URL('../../../../', import.meta.url);
 async function runtime(id: string) {
-  return parsePreparedObjectRuntime(JSON.parse(await readFile(new URL(`src/objects/${id}/prepared/runtime.json`, root), 'utf8')), { parsedJson: true });
+  return parsePreparedObjectRuntime(await loadObjectTestDefinition(id), { parsedJson: true });
 }
 /** Key order is not part of a table: compare levels as sorted entries and the asset list as a set. */
 const tablesOf = (definition: ObjectRuntimeDefinition) => ({

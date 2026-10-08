@@ -1,4 +1,5 @@
 import { parsePresentationProfile } from '@cssearth/objects';
+import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { it } from 'node:test';
@@ -12,7 +13,8 @@ import type { PresentationInputs } from './types.ts';
 const root = resolve(import.meta.dirname, '../../../..');
 const read = async (file: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, file), 'utf8'));
 
-for (const id of ['neptune']) it(`${id} Rings controls the prepared ring mesh`, { timeout: 30_000 }, async () => {
+// Replays the presentation step from the body's scene, sun and controls: working records, held only by a checkout that baked it.
+for (const id of ['neptune']) it(`${id} Rings controls the prepared ring mesh`, { timeout: 30_000, skip: !existsSync(resolve(root, `src/objects/${id}/prepared/scene.json`)) && `no baked scene of ${id} in this checkout` }, async () => {
   const base = `src/objects/${id}/prepared`;
   const profile = parsePresentationProfile(await read(`src/objects/${id}/source/preparation/presentation.json`));
   const [scene, assets, datasets, sun, controls, solarSource] = await Promise.all([

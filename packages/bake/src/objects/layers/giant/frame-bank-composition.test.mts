@@ -2,7 +2,7 @@ import { pathToFileURL } from 'node:url';
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
 import {shape,array,text,number,optional} from '@cssearth/core';
-import {required} from '@cssearth/objects/node/contract';
+import {loadObjectTestDefinition,required} from '@cssearth/objects/node/contract';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
@@ -17,7 +17,7 @@ const input=async (id: string)=>{
     material:await readJson(`${root}source/preparation/materials.json`),
     // Row resource pools are optional since the focused heliocentric views (#123); the tool checks them only when declared.
     presentation:shape({resources:optional(shape({rowPool:text,pools:array(shape({id:text,options:shape({capacity:optional(number)})}))}))})(await readJson(`${root}source/preparation/presentation.json`)),
-    runtime:requireObjectRuntimeDefinition(await readJson(`${root}prepared/runtime.json`))};
+    runtime:requireObjectRuntimeDefinition(await loadObjectTestDefinition(id))};
 };
 
 test('authored frame banks describe the accepted source and runtime residency',async()=>{

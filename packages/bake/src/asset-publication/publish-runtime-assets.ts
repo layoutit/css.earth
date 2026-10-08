@@ -128,7 +128,9 @@ export async function publishRuntimeAssets(objectIds: readonly string[], { since
   if (added.length) await publishAssets(added);
 }
 
-export async function publishAssets(assets: readonly PublishAsset[], options: PublishOptions = {}): Promise<void> {
+export async function publishAssets(listed: readonly PublishAsset[], options: PublishOptions = {}): Promise<void> {
+  // Many bodies list the same bytes (a sphere profile's leaf boxes, a shared lighting bank): a key is checked and uploaded once.
+  const assets = [...new Map(listed.map(asset => [asset.key, asset])).values()];
   const fetcher = options.fetcher ?? fetch;
   const runCommand = options.runCommand ?? run;
   const totalBytes = assets.reduce((sum, a) => sum + a.bytes, 0);

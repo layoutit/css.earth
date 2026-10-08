@@ -6,6 +6,7 @@ import { runInNewContext } from 'node:vm';
 import { requireRecord } from '@cssearth/core';
 import { readObjectDescriptorRecord, parsePreparedObjectRuntime } from '@cssearth/objects';
 import { sourceTest } from '@cssearth/objects/node/source-test';
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import { prepareWorldNavigationDefinition } from './prepare-world-navigation.ts';
 const test = sourceTest();
 const root = process.cwd();
@@ -71,7 +72,7 @@ test('world navigation changes only its intended frame and preserves real descri
     const objectDirectory = resolve(root, 'src/objects', id);
     const bytes = await readFile(resolve(objectDirectory, 'object.json'), 'utf8');
     const descriptor = readObjectDescriptorRecord(JSON.parse(bytes));
-    const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8')));
+    const definition = parsePreparedObjectRuntime(await loadObjectTestDefinition(id, root));
     const result = await prepareWorldNavigationDefinition({ objectDirectory, definition });
     const properties = readObjectDescriptorRecord(JSON.parse(bytes)).properties;
     assert.ok(properties && typeof properties === 'object' && !Array.isArray(properties));

@@ -2,8 +2,8 @@ import { parsePreparedObjectRuntime } from '@cssearth/objects';
 import { readSystemViewFile } from '../world/systems/system-view-file.test-support.mts';
 
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
 import { sourceTest } from '@cssearth/objects/node/source-test';
+import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 
 import { selectPreparedResponsiveZoom } from '@cssearth/renderer/navigation/camera/camera-layout.ts';
 import type { CameraViewport } from '@cssearth/renderer/navigation/camera/camera-viewport.ts';
@@ -17,7 +17,6 @@ import { navigationFixture, required, unusedSharedView } from './navigation-test
 
 const test = sourceTest();
 const source = required(SCENE_OBJECTS.find(object => object.id === 'earth'));
-const read = async (path: string) => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 
 for (const [width, height, mobile] of [[390, 844, true], [820, 1080, true], [1440, 900, false]] as const) {
   test(`satellite arrivals retain their selection with destination framing at ${width}x${height}`, async () => {
@@ -39,8 +38,7 @@ for (const [width, height, mobile] of [[390, 844, true], [820, 1080, true], [144
     for (const { hostId } of allSatelliteSystems()) {
       const object = required(SCENE_OBJECTS.find(object => object.id === hostId));
       await loadSystemView(hostId, readSystemViewFile);
-      const data = await read(`../../src/objects/${hostId}/prepared/runtime.json`);
-      const definition = parsePreparedObjectRuntime(data), { camera } = definition;
+      const definition = parsePreparedObjectRuntime(await loadObjectTestDefinition(hostId)), { camera } = definition;
       const fit = selectPreparedResponsiveZoom({ plan: camera, viewport: cameraViewport, mobile });
       const framingRadiusPixels = fit.zoom / camera.defaultZoom * camera.logicalBodyDiameter / 2;
       const factory = Object.assign((() => { throw new Error('Only preparation is exercised here.'); }) as SceneFactory, {
