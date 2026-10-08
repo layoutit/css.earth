@@ -654,6 +654,202 @@
       "resolutionScale": 0.5
     },
     {
+      "id": "heat-flow-now",
+      "source": "heat-flow/UPWARDS2017_SHF_0.0Ga_2deg.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
+      "resolutionScale": 0.25,
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "UPWARDS2017_SHF_0.0Ga_2deg.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 10,
+          "maximum": 70,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "mW/m²",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 180,
+            "height": 90,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              2,
+              -2
+            ],
+            "referenceRadiusMeters": 3396190,
+            "inverseFlattening": 169.8944472236118,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": null
+          }
+        }
+      }
+    },
+    {
+      "id": "heat-flow-1-5-ga",
+      "source": "heat-flow/UPWARDS2017_SHF_1.5Ga_2deg.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
+      "resolutionScale": 0.25,
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "UPWARDS2017_SHF_1.5Ga_2deg.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 10,
+          "maximum": 70,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "mW/m²",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 180,
+            "height": 90,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              2,
+              -2
+            ],
+            "referenceRadiusMeters": 3396190,
+            "inverseFlattening": 169.8944472236118,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": null
+          }
+        }
+      }
+    },
+    {
+      "id": "heat-flow-3-0-ga",
+      "source": "heat-flow/UPWARDS2017_SHF_3.0Ga_2deg.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
+      "resolutionScale": 0.25,
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "UPWARDS2017_SHF_3.0Ga_2deg.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 10,
+          "maximum": 70,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "mW/m²",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 180,
+            "height": 90,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              2,
+              -2
+            ],
+            "referenceRadiusMeters": 3396190,
+            "inverseFlattening": 169.8944472236118,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": null
+          }
+        }
+      }
+    },
+    {
+      "id": "heat-flow-3-5-ga",
+      "source": "heat-flow/UPWARDS2017_SHF_3.5Ga_2deg.tif",
+      "falseColor": true,
+      "output": "mars-surface-{id}{suffix}.webp",
+      "thumbnail": "mars-dataset-{id}.webp",
+      "resolutionScale": 0.25,
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "UPWARDS2017_SHF_3.5Ga_2deg.tif",
+          "sampling": "nearest",
+          "displaySampling": "nearest",
+          "minimum": 10,
+          "maximum": 70,
+          "colors": [
+            "#440154",
+            "#3b528b",
+            "#21918c",
+            "#5ec962",
+            "#fde725"
+          ],
+          "units": "mW/m²",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 180,
+            "height": 90,
+            "coordinates": "degrees",
+            "origin": [
+              -180,
+              90
+            ],
+            "resolution": [
+              2,
+              -2
+            ],
+            "referenceRadiusMeters": 3396190,
+            "inverseFlattening": 169.8944472236118,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": null
+          }
+        }
+      }
+    },
+    {
       "id": "albedo",
       "source": "science/usgs/tes-albedo.tif",
       "falseColor": true,

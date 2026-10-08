@@ -1,0 +1,62 @@
+{
+  "id": "parro-2017-mars-heat-flow",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Parro et al. (2017), Heat flow at present-day Mars and evolutionary frame of the Martian heat flows",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1038/srep45629"
+    },
+    {
+      "type": "Archive resource",
+      "value": "https://zenodo.org/records/10479138"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1038/srep45629",
+      "label": "Parro et al. (2017), Present-day heat flow model of Mars"
+    },
+    {
+      "role": "archive",
+      "url": "https://zenodo.org/records/10479138",
+      "label": "Zenodo deposit"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mars/source/manifest.json",
+      "locator": "/inputs"
+    }
+  ],
+  "publisher": "Laura M. Parro, Alberto Jiménez-Díaz, Federico Mansilla, Javier Ruiz",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Parro, L. M., Jiménez-Díaz, A., Mansilla, F. and Ruiz, J. (2017), UPWARDS project, Universidad Complutense de Madrid",
+      "scope": "Surface heat-flow grids at the present day and 1.5, 3.0 and 3.5 billion years ago.",
+      "evidence": "https://zenodo.org/records/10479138"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://zenodo.org/records/10479138"
+    },
+    {
+      "kind": "limitation",
+      "text": "A first-order model, not a measurement: radiogenic heat of crust and mantle, scaled with crustal thickness and topography and tied to the north polar lithosphere. The deposit publishes no separate method note for the earlier ages.",
+      "scope": "All four grids.",
+      "evidence": "https://doi.org/10.1038/srep45629"
+    }
+  ],
+  "creators": [
+    "Laura M. Parro",
+    "Alberto Jiménez-Díaz",
+    "Federico Mansilla",
+    "Javier Ruiz"
+  ]
+}
