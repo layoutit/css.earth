@@ -6,14 +6,14 @@ import { webAnalyticsBootstrap } from "../startup/web-analytics.mts";
 import { errorReportBootstrap } from "../startup/error-report.mts";
 import { initialShellContextBootstrap } from '../startup/initial-shell-context.mts';
 import { startupRequestsBootstrap } from '../directory/startup-requests.mts';
-import { defaultDatasetBank } from '../server/object-page-data.mts';
+import { defaultDatasetBank, defaultDatasetId } from '../server/object-page-data.mts';
 import contextBankAssets from '../prepared/prepared-context-bank-assets.json';
 import { SYSTEM_VIEW_HOSTS } from '../world/systems/system-framing.mts';
 import { inlineSceneImage, resolveBuildSceneAddress } from '../server-assets/asset-origin.mts';
 import { SCENE_OBJECTS, requireObject } from "../directory/objects.mts";
 import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../content/seo.mts";
 import { pageTrail } from "../content/seo-trail.mts";
-import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../server/social-images.mts";
+import { availableSocialImages, committedSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../server/social-images.mts";
 import "./cubic-sky.css";
 import "@cssearth/renderer/styles/volume.css";
 import "@cssearth/renderer/styles/world-context.css";
@@ -66,6 +66,14 @@ const sheetWithoutScript = '.object-ui-layer:has(.object-settings-panel:popover-
   + '.object-sidebar:has(.object-sheet-handle:checked) { overflow-y: auto; touch-action: pan-y; } }';
 
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
+// A galaxy, cluster or nebula has no arrival photograph, and its stage holds one empty mesh: script draws its picture
+// from a bank. Without script the scene was black, 0 lit pixels of 400,200 on Cassiopeia A and M87 against 39,935 and
+// 9,264 with script (Chrome 154, 2026-10-08). Such a page shows its committed share picture, a capture of that scene with
+// its default dataset; 65 of the 138 have one (site/public/social). Another dataset's response hides it.
+const stillWithoutScript = !navigation && scene && !startup && pageId === objectId && committedSocialImages().has(objectRecord.id)
+  ? { source: `/social/${objectRecord.id}.jpg`, dataset: await defaultDatasetId(objectRecord.id) } : undefined;
+const stillRuleWithoutScript = stillWithoutScript?.dataset
+  ? ` .object-stage[data-prepared-dataset]:not([data-prepared-dataset="${stillWithoutScript.dataset}"]) ~ noscript > .native-scene-still { display: none; }` : '';
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
 // Only the empty stage of the default view shows the photograph: a native dataset, settings or saved-view response draws
 // its scene into the stage and marks it (dataset-response.mts). The photograph shows the body at the share of the viewport
@@ -197,7 +205,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     <slot name="object-head" />
     {tabStyles.map(({ key, css }) => <style is:inline data-object-style={key} set:html={css} />)}
     {!navigation && <style is:inline set:html={rulesWithoutScript} />}
-    <noscript><style is:inline set:html={sheetWithoutScript} /></noscript>
+    <noscript><style is:inline set:html={sheetWithoutScript + stillRuleWithoutScript} /></noscript>
     {/* Drag and wheel without script: one stylesheet for every page, never requested by a page with script (native-input.mts). */}
     <noscript><link rel="stylesheet" href="/native-input.css" /></noscript>
     <title>{seo.title}</title>
@@ -228,6 +236,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
           set:html={startup ? '' : scene?.html ?? ''}
         />
         <!--prepared-scene:end-->
+        {stillWithoutScript && <noscript><img class="native-scene-still" src={stillWithoutScript.source} alt={seo.imageAlt} /></noscript>}
         {startup && <>
           <script is:inline type="application/json" data-startup-discovery set:html={JSON.stringify(startup).replace(/</g, '\u003c')} />
           <img data-startup-billboard fetchpriority="high" src={startupImageSource} alt="" aria-hidden="true" draggable="false" style="position:absolute;opacity:0;pointer-events:none" />

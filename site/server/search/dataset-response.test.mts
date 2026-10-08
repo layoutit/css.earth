@@ -96,6 +96,44 @@ test('the drag rule of a page without script finds the spinning meshes a native 
   assert.deepEqual(turning, ['polycss-mesh saturn-body saturn-body-polar', 'polycss-mesh saturn-body']);
   assert.equal(result.includes('data-native'), false);
 });
+test('the drag rule finds the body meshes of a body with no spin plan, and none inside another', async () => {
+  // Bennu has no motion plan, so its native view writes no animation, and a drag turned nothing (2026-10-08). Its scene
+  // repeats the body once a material layer: each copy turns, and none holds another, which would turn it twice.
+  const bennuScene = await loadPreparedSceneMarkup('bennu');
+  const bennuPrepared = await readPreparedObjectBytes('bennu');
+  const transport: typeof fetch = async input => {
+    const url = new URL(String(input));
+    if (url.pathname === '/objects/bennu/object.json') return new Response(bennuPrepared.bytes);
+    return new Response(null, { status: 404 });
+  };
+  const bennuHtml = `<!doctype html><html><body><!--search-shell:start-->
+    <input class="object-sheet-handle" type="checkbox"><section class="object-information-panel"></section>
+    <!--search-shell:end--><!--prepared-descriptor:start--><script data-prepared-descriptor type="application/json">${JSON.stringify(bennuScene.descriptor)}</script><!--prepared-descriptor:end-->
+    <!--prepared-scene:start--><main class="object-stage ${bennuScene.classes.join(' ')}" data-object-id="bennu" data-prepared-object="bennu" aria-label="Bennu">${bennuScene.html}</main><!--prepared-scene:end--></body></html>`;
+  const result = await renderDatasetResponse(bennuHtml, new URL('/bennu/?settings=1', origin), 'bennu', transport);
+  assert.equal(result.includes(' infinite both paused'), false, 'the fixture must be a body with no spin');
+  const turning = [...parseHTML(result).document.querySelectorAll(NATIVE_TURNING_MESH)];
+  assert.ok(turning.length > 1, 'each copy of the body turns');
+  for (const mesh of turning) {
+    assert.equal(mesh.getAttribute('class'), 'polycss-mesh bennu-body');
+    assert.equal(mesh.parentElement?.closest(NATIVE_TURNING_MESH), null);
+  }
+});
+test('a page that shows its photograph offers the drawn view on the press a drag ends in, and scales the photograph', async () => {
+  const layer = parseHTML(`<main>${nativeInputMarkup}</main>`).document;
+  // The button submits the settings form as it stands (ObjectShell.astro), which answers with the default view drawn.
+  const open = layer.querySelector('.native-scene-input > button.native-scene-open');
+  assert.equal(open?.getAttribute('form'), 'object-settings-form');
+  assert.equal(open?.getAttribute('type'), 'submit');
+  const shell = await readFile(new URL('../../components/ObjectShell.astro', import.meta.url), 'utf8');
+  assert.ok(shell.includes('<form id="object-settings-form" '), 'the form the button names');
+  // Shown only while the stage is not drawn: the photograph follows such a stage (ObjectLayout.astro).
+  const photograph = '.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard]';
+  assert.ok(nativeInputStylesheet.includes(`.object-viewport:has(> .object-world-stage > ${photograph}) .native-scene-open { position: sticky;`));
+  assert.ok(nativeInputStylesheet.includes(`.object-stage[data-prepared-object], ${photograph}, .native-scene-still { animation: native-zoom linear both;`));
+  const layout = await readFile(new URL('../../layouts/ObjectLayout.astro', import.meta.url), 'utf8');
+  assert.ok(layout.includes('.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard] {'), 'the rule that shows the photograph names the same element');
+});
 test('the page without script lays its strips, frame and world stage in the order their anchors need', async () => {
   const layer = parseHTML(`<main>${nativeInputMarkup}</main>`).document;
   assert.equal(layer.querySelectorAll('.native-drag-layer > i').length, NATIVE_INPUT_STRIPS);
