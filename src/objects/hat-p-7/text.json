@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-7",
+  "card": {
+    "text": "HAT-P-7 b crosses HAT-P-7 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-08",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6389, st_rad 2, st_mass 1.56"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-7",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-7",
+        "label": "Wikipedia, \"HAT-P-7\"",
+        "checked": "2026-10-08",
+        "locator": "Lead section, revision 1374739568",
+        "quote": "HAT-P-7 is a triple star system located about 1,088 light-years away in the constellation Cygnus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-08",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6389, st_rad 2, st_mass 1.56"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-7",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-7",
+        "label": "Wikipedia, \"HAT-P-7\"",
+        "checked": "2026-10-08",
+        "locator": "Lead section, revision 1374739568",
+        "quote": "The apparent magnitude of this star is 10.5, which means it is not visible to the naked eye but can be seen with a small telescope on a clear dark night."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

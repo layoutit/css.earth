@@ -1,0 +1,35 @@
+{
+  "id": "source-toi-1685b-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TOI-1685 b · toi 1685b temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2412.03411",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/toi-1685b/source/manifest.json",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Luque et al. (2025); a JWST NIRSpec G395H phase curve of 14-15 February 2024 (program GO-3263), white light of detector NRS2, 3.823-5.172 µm",
+      "scope": "The toi 1685b temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

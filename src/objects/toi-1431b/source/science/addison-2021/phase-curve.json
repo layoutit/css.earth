@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Addison et al. (2021), AJ 162, 292, 'TOI-1431b/MASCARA-5b: A Highly Irradiated Ultra-Hot Jupiter Orbiting One of the Hottest & Brightest Known Exoplanet Host Stars' (doi:10.3847/1538-3881/ac224e; arXiv:2104.12078). TESS 2-minute photometry of Sectors 15 and 16, 15 August to 7 October 2019, the single-scale MAP corrected PDC light curve, fitted with Allesfitter jointly with ground-based transits and radial velocities. Values read from the authors' LaTeX source (arXiv v2): the table of the joint Nested Sampling fit (tab:joint_fit_results), which the paper adopts over the multi-scale MAP PDC and SAP versions and over three other detrendings (the hybrid cubic spline is favoured with ln R = 119). The fit has three phase-curve terms, each a full (peak-to-peak) amplitude counted from mid-transit: the planet's atmospheric modulation (cosine of the fundamental), the star's ellipsoidal distortion (cosine of the first harmonic, 0.0291 +/- 0.0064 ppt) and the star's Doppler beaming (sine of the fundamental, 0.0010 +0.0012/-0.0007 ppt). Only the atmospheric term is the planet's and only it is recorded here. The paper fitted no phase shift, so the atmospheric term peaks at mid-eclipse: a first-order sinusoid whose semi-amplitude is half the printed full amplitude and whose offset is zero by the model, read as amplitude-offset. The table's occultation depth less its nightside flux, 0.127 - 0.049 = 0.078 ppt, is that full amplitude. The brightness temperatures are the paper's own (section 4.2, eq. 3: a blackbody planet against a PHOENIX stellar spectrum through the TESS transmission function), the day side with zero geometric albedo assumed. The band edges are the ones the paper states for this phase curve, 6000-9500 Angstrom.",
+  "bandMicrons": [
+    0.6,
+    0.95
+  ],
+  "radiusRatio": {
+    "value": 0.07955,
+    "cell": "0.07955 +0.00063/-0.00053",
+    "where": "tab:joint_fit_results, fitted parameters, R_b/R_star"
+  },
+  "eclipseDepth": {
+    "value": 0.000127,
+    "cell": "0.127 +0.004/-0.005 ppt",
+    "where": "tab:joint_fit_results, derived parameters, delta_TESS_occ; undil, Occultation depth (undil.); the diluted row prints the same value"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "With the zero-point of orbital phase at mid-transit, the atmospheric brightness modulation is the cosine of the fundamental frequency with full amplitude A_atmospheric and no phase shift (section 4.1), so the planet's flux falls from the occultation depth at mid-eclipse by A_atmospheric to the nightside flux at mid-transit: F_p = delta_occ + (A_atmospheric / 2) (cos psi - 1), psi counted from mid-eclipse.",
+    "semiAmplitude": {
+      "value": 0.00003925,
+      "cell": "0.0785 +0.0073/-0.0077 ppt, printed as the full amplitude; the semi-amplitude is half of it",
+      "where": "tab:joint_fit_results, fitted parameters, A_atmospheric"
+    },
+    "offsetDegreesEast": {
+      "value": 0,
+      "cell": "not fitted: \"Our phase-curve analysis did not consider a possible phase shift in the time of maximum brightness\"",
+      "where": "section 4.1.2 (Single-scale MAP PDC Photometry), last paragraph"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 3004,
+      "cell": "3004 +/- 64 K, assuming zero geometric albedo",
+      "where": "section 4.2 (The Atmosphere), dayside brightness temperature"
+    },
+    "nightsideK": {
+      "value": 2583,
+      "cell": "2583 +/- 63 K",
+      "where": "section 4.2 (The Atmosphere), nightside brightness temperature"
+    },
+    "offsetDegrees": {
+      "value": 0,
+      "cell": "not fitted: \"we conclude that there is no evidence for a significant phase offset in the planet's atmospheric brightness modulation\"",
+      "where": "section 4.1.2 (Single-scale MAP PDC Photometry), last paragraph"
+    }
+  },
+  "notStated": [
+    "The paper prints no hot-spot offset: its model has none. The zero here is the model's, not a measurement.",
+    "The paper's day side assumes zero geometric albedo; it prints that an albedo of 0 to 0.2 gives day-side brightness temperatures of 2700 to 3100 K. The map draws the zero-albedo case, so any reflected starlight is drawn as heat.",
+    "The table's nightside flux, 0.049 +0.004/-0.005 ppt, is not an input; the map's night side comes from the occultation depth less the full atmospheric amplitude, 0.0485 ppt."
+  ]
+}

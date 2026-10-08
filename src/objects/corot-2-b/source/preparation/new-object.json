@@ -1,0 +1,44 @@
+{
+  "id": "corot-2-b",
+  "name": "CoRoT-2B",
+  "system": "CoRoT-2 system",
+  "description": "Star bound to CoRoT-2, 870 AU away.",
+  "boundTo": {
+    "host": "corot-2",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list CoRoT-2 and CoRoT-2B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 4287820848378092672 and 4287820852697823872), 870 AU apart on the sky, with a chance-alignment probability of 2.7e-5: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
+  "gaia": "4287820852697823872",
+  "paper": {
+    "url": "https://arxiv.org/abs/2101.05282",
+    "credit": "El-Badry, Rix & Heintz (2021), MNRAS 506, 2269"
+  },
+  "radius": {
+    "value": 0.525,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the radius of TIC 391957996 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.017
+  },
+  "mass": {
+    "value": 0.522,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the mass of TIC 391957996 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 0.021
+  },
+  "temperature": {
+    "value": 3703,
+    "source": "Stassun et al. (2019), AJ 158, 138 (TIC v8.2), the effective temperature of TIC 391957996 (VizieR IV/39/tic82)",
+    "url": "https://doi.org/10.3847/1538-3881/ab3467",
+    "uncertainty": 157
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "CoRoT-2B is a star of 3,703 K, bound to CoRoT-2 870 AU away.",
+    "introduction": "CoRoT-2B shares its motion through space with CoRoT-2, 870 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "locator": "J/MNRAS/506/2269 catalog: source_id 4287820848378092672 and 4287820852697823872, sep_AU 870.120119257764486, R_chance_align 2.687954818440417890e-05"
+  },
+  "notes": [
+    "CoRoT-2B's orbit around CoRoT-2 is not measured; both stars are placed at their Gaia DR3 positions, which is where they are"
+  ],
+  "order": 5818
+}

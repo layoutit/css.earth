@@ -186,6 +186,50 @@
         "kind": "local",
         "reason": "Project-authored color recipe naming the cited brightness temperature; repinned when edited."
       }
+    },
+    {
+      "id": "toi-561b-temperature-nrs2-phase-curve",
+      "path": "science/boucher-2026/phase-curve-nrs2.json",
+      "origin": "https://arxiv.org/abs/2608.21519",
+      "credit": "Boucher et al. (2026); a JWST NIRSpec G395H phase curve of 1-3 May 2024 (program 3860), the NRS2 detector's white light",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "temperature-nrs2-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-toi-561b-temperature-nrs2-phase-curve",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "toi-561b-temperature-nrs1-phase-curve",
+      "path": "science/boucher-2026/phase-curve-nrs1.json",
+      "origin": "https://arxiv.org/abs/2608.21519",
+      "credit": "Boucher et al. (2026); a JWST NIRSpec G395H phase curve of 1-3 May 2024 (program 3860), the NRS1 detector's white light",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "temperature-nrs1-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-toi-561b-temperature-nrs1-phase-curve",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -203,7 +247,8 @@
         "inputs": [
           "toi-561b-observational-measurements",
           "toi-561b-preparation-raster",
-          "toi-561b-thermal-color"
+          "toi-561b-thermal-color",
+          "toi-561b-temperature-nrs2-phase-curve"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

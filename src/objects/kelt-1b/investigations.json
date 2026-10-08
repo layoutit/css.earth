@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "kelt-1b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.11 Jupiter radii from Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "27.23 Jupiter masses: Siverd et al. 2012, the mass the NASA Exoplanet Archive's composite table adopts (2012ApJ...761..123S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.2174936 d; Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive ps table (pl_refname SIVERD_ET_AL__2012): a/R* derived from its semi-major axis 0.02466 au and stellar radius 1.471 solar radii; Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive ps table (pl_refname SIVERD_ET_AL__2012): inclination 87.8 degrees; Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive ps table (pl_refname SIVERD_ET_AL__2012): e 0.0099; Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive ps table (pl_refname SIVERD_ET_AL__2012): omega 61 degrees; ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460610.036941 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 2,943 K dayside brightness temperature measured in secondary eclipse at 3.6 µm (Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)): #ffb66a. Chosen from the archive's emission rows by rule: 2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+      ]
+    },
+    {
+      "id": "temperature",
+      "subject": "Spitzer heat map",
+      "status": "included",
+      "finding": "Bell et al. (2021)'s published fit to a Spitzer IRAC 4.5 µm phase curve (program 11095, first published by Beatty et al. (2019)) ([record](source/science/bell-2021/phase-curve.json)), drawn as a map of longitude without refitting: 800 to 3,500 K, hottest 4° east of noon. It has no north-south information.",
+      "evidence": [
+        "https://arxiv.org/abs/2010.00687"
+      ]
+    }
+  ]
+}

@@ -33,6 +33,16 @@
               "id": "thermal",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "temperature-nrs2",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "temperature-nrs1",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }

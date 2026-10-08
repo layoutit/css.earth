@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Bell et al. (2021), MNRAS 504, 3316, 'A comprehensive reanalysis of Spitzer's 4.5 um phase curves, and the phase variations of the ultra-hot Jupiters MASCARA-1b and KELT-16b' (doi:10.1093/mnras/stab1027; arXiv:2010.00687). Spitzer IRAC 4.5 um phase curve of KELT-16b, program 14059, new in this paper. Values read from the authors' LaTeX source: the table of preferred SPCA model parameters (tab:preferred), row KELT-16b, detector model BLISS. The preferred fit is first order (the caption of its figure names the mode BLISS_v1 using FWM centroiding), so the printed semi-amplitude and offset are the whole phase variation (section 4.1: semi-amplitude sqrt(C1^2 + D1^2), offset east -arctan2(D1, C1)).",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.1074,
+    "cell": "0.1074 +0.0019/-0.0022",
+    "where": "tab:preferred, KELT-16b, R_p/R_*"
+  },
+  "eclipseDepth": {
+    "value": 0.00481,
+    "cell": "4810 +330/-310 ppm",
+    "where": "tab:preferred, KELT-16b, F_p/F_*"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "F_p = F_day [1 + C1 (cos psi - 1) + D1 sin psi], psi counted from mid-eclipse (section 4.1), printed as its semi-amplitude and the offset east of its maximum.",
+    "semiAmplitude": {
+      "value": 0.00174,
+      "cell": "1740 +480/-460 ppm",
+      "where": "tab:preferred, KELT-16b, Semi-Amplitude"
+    },
+    "offsetDegreesEast": {
+      "value": -38,
+      "cell": "-38 +16/-15 degrees east",
+      "where": "tab:preferred, KELT-16b, Max Flux Offset"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 3070,
+      "cell": "3070 +160/-150 K",
+      "where": "tab:preferred, KELT-16b, T_day"
+    },
+    "nightsideK": {
+      "value": 1900,
+      "cell": "1900 +430/-440 K",
+      "where": "tab:preferred, KELT-16b, T_night"
+    },
+    "offsetDegrees": {
+      "value": -38,
+      "cell": "-38 +16/-15 degrees east",
+      "where": "tab:preferred, KELT-16b, Max Flux Offset"
+    }
+  }
+}

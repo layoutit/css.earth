@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "corot-2b",
+  "card": {
+    "text": "CoRoT-2 b was found in 2008 by CoRoT as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-200913507",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G/abstract",
+        "label": "Gillon et al. 2010",
+        "checked": "2026-10-08",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILLON_ET_AL__2010): disc_year 2008, disc_facility CoRoT, sy_pnum 1; pl_orbper 1.74299845482, pl_radj 1.466, pl_bmassj 3.47"
+      },
+      {
+        "catalogueId": "wikipedia-corot-2b",
+        "url": "https://en.wikipedia.org/wiki/CoRoT-2b",
+        "label": "Wikipedia, \"CoRoT-2b\"",
+        "checked": "2026-10-08",
+        "locator": "Lead section, revision 1374889179",
+        "quote": "CoRoT-2b is the second extrasolar planet to be detected by the French-led CoRoT mission, and orbits the star CoRoT-2 at a distance of 700 light-years from Earth towards the constellation Aquila."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around CoRoT-2. Its orbit and size follow Gillon et al. 2010's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-200913507",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G/abstract",
+        "label": "Gillon et al. 2010",
+        "checked": "2026-10-08",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILLON_ET_AL__2010): disc_year 2008, disc_facility CoRoT, sy_pnum 1; pl_orbper 1.74299845482, pl_radj 1.466, pl_bmassj 3.47"
+      },
+      {
+        "catalogueId": "wikipedia-corot-2b",
+        "url": "https://en.wikipedia.org/wiki/CoRoT-2b",
+        "label": "Wikipedia, \"CoRoT-2b\"",
+        "checked": "2026-10-08",
+        "locator": "Lead section, revision 1374889179",
+        "quote": "Its discovery was announced on 20 December 2007."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,890 K day side measured in eclipse."
+    },
+    "temperature": {
+      "title": "Spitzer heat map",
+      "detail": "Published fit",
+      "summary": "Heat at 4.5 µm from the paper's phase-curve fit. It varies only with longitude: the data hold no north-south detail."
+    }
+  }
+}

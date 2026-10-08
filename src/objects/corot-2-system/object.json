@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "corot-2-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "corot-2"
+    },
+    "catalog": {
+      "name": "CoRoT-2 system",
+      "systemName": "CoRoT-2 system",
+      "classification": "planetary-system",
+      "color": "#ffefe5",
+      "distanceAu": 43984180.8,
+      "description": "CoRoT-2 b crosses CoRoT-2 as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2440417338030085600,
+        -6108578158250595000,
+        158882725139866720
+      ],
+      "presentationToReference": [
+        0.37088748265792454,
+        0.008958475369439233,
+        -0.9286346003282039,
+        -0.9283638254928797,
+        -0.022423836490421886,
+        -0.3709956591030104,
+        0.024147105911351115,
+        -0.9997084161274756,
+        -4.197090860113577e-9
+      ],
+      "orbitUpReference": [
+        -0.008958475369439233,
+        0.022423836490421886,
+        0.9997084161274756
+      ],
+      "metersPerUnit": 2033239.3548387096,
+      "bodyRadiusM": 630304200
+    }
+  }
+}

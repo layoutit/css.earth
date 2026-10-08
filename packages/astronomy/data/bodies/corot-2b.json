@@ -1,0 +1,31 @@
+{
+ "id": "corot-2b",
+ "classification": "exoplanet",
+ "order": 5817,
+ "physical": {
+  "name": "CoRoT-2 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 104807.3,
+  "gravitationalParameterKm3PerS2": 439602265.69,
+  "parent": "corot-2"
+ },
+ "physicalNotes": "Radius 1.466 Jupiter radii from Gillon et al. 2010 (2010A&A...511A...3G), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G/abstract): 104,807.3 km at 71,492 km per Jupiter radius. GM from the mass 3.47 Jupiter masses (Gillon et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010A&A...511A...3G), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.74299845482,
+  "semiMajorAxisStellarRadii": 6.6408,
+  "inclinationDegrees": 88.08,
+  "eccentricity": 0.0143,
+  "argumentOfPeriapsisDegrees": 102,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 54237.032376,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 1.74299845482 d",
+   "shape": "Gillon et al. 2010 (2010A&A...511A...3G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2010): a/R* derived from its semi-major axis 0.02798 au and stellar radius 0.906 solar radii; Gillon et al. 2010 (2010A&A...511A...3G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2010): inclination 88.08 degrees",
+   "eccentricity": "Gillon et al. 2010 (2010A&A...511A...3G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2010): e 0.0143",
+   "argumentOfPeriapsis": "Gillon et al. 2010 (2010A&A...511A...3G), via the NASA Exoplanet Archive ps table (pl_refname GILLON_ET_AL__2010): omega 102 degrees",
+   "phase": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): transit mid-time 2454237.53237614 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

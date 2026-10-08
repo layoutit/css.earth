@@ -1,0 +1,30 @@
+{
+ "id": "kelt-16",
+ "classification": "star",
+ "order": 5823,
+ "physical": {
+  "name": "KELT-16",
+  "horizonsCode": null,
+  "meanRadiusKm": 946152,
+  "gravitationalParameterKm3PerS2": 160714764890.7886,
+  "parent": null,
+  "effectiveTemperatureK": 6236
+ },
+ "physicalNotes": "Radius 1.36 +/- 0.064 solar radii from Oberst et al. 2017, the stellar radius of the default parameter set of KELT-16 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract): 946,152 km at 695,700 km per solar radius. Mass 1.211 +/- 0.043 solar masses from Oberst et al. 2017, the stellar mass of the default parameter set of KELT-16 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract); GM is that mass times the JPL solar GM. Temperature 6236 +/- 54 K from Oberst et al. 2017, the stellar temperature of the default parameter set of KELT-16 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 314.2685235688607,
+  "declinationDegrees": 31.661018862270623,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 445.0072390331426,
+  "properMotionRaMasPerYear": 5.629043534673601,
+  "properMotionDecMasPerYear": 2.281510619933144,
+  "radialVelocityKmPerS": -29.781105,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1864885215233116032 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/kelt-16/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 2.2472 +/- 0.0133 mas (same row, RUWE 1.04): 445.01 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 5.629, 2.282 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -29.78 +/- 0.55 km/s"
+  }
+ }
+}

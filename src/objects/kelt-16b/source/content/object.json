@@ -1,0 +1,184 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "kelt-16b",
+  "displayName": "KELT-16 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.4 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-153-3-97",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O",
+          "label": "Oberst et al. 2017",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "23 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-153-3-97",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O",
+          "label": "Oberst et al. 2017",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.8 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-153-3-97",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O",
+          "label": "Oberst et al. 2017",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 3,273 K. The disc itself is unresolved.",
+        "thumbnail": "kelt-16b-dataset-thermal.webp",
+        "surface": "kelt-16b-surface-thermal@2x.webp",
+        "poles": "kelt-16b-poles-thermal@2x.webp",
+        "source": {
+          "id": "kelt-16b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of KELT-16 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · Bell et al. (2021) · a Spitzer IRAC 4.5 µm phase curve (program 14059) · longitude only",
+        "thumbnail": "kelt-16b-dataset-temperature.webp",
+        "surface": "kelt-16b-surface-temperature@2x.webp",
+        "poles": "kelt-16b-poles-temperature@2x.webp",
+        "source": {
+          "id": "kelt-16b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2010.00687"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1500",
+            "2475",
+            "3450"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "1500",
+              "2475",
+              "3450"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2010.00687"
+        },
+        "notes": "Brightness temperature at 4.5 µm of KELT-16 b from Bell et al. (2021)'s published fit to a Spitzer IRAC 4.5 µm phase curve (program 14059). Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 38° west of noon. The false color runs from 1,500 to 3,450 K. With shadows on, the star's light darkens the night half."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kelt-16b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kelt-16b/kelt-16b-system-orbits.svg",
+      "alt": "The orbits of KELT-16's planets in this map from above, to scale, with KELT-16 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kelt-16b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O"
+      }
+    },
+    {
+      "id": "kelt-16b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/kelt-16b/kelt-16b-transit.svg",
+      "alt": "KELT-16 b crossing its star, as TESS recorded it: 3 sectors (15, 41, 55) of the SPOC pipeline's 2-minute light curves of TIC 236445129, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "kelt-16b-tess-sector-15",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2019226182529-s0015-0000000236445129-0151-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Oberst et al. 2017",
+      "href": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract",
+      "credit": "Oberst et al. 2017"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kelt-16b.json",
+      "credit": "Radius from Oberst et al. 2017 (2017AJ....153...97O), via the NASA Exoplanet Archive; mass from Oberst et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153...97O), via the NASA Exoplanet Archive; orbit from Oberst et al. 2017 (2017AJ....153...97O), via the NASA Exoplanet Archive"
+    }
+  }
+}

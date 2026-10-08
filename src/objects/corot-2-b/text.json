@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "corot-2-b",
+  "card": {
+    "text": "CoRoT-2B is a star of 3,703 K, bound to CoRoT-2 870 AU away.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-10-08",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 4287820848378092672 and 4287820852697823872, sep_AU 870.120119257764486, R_chance_align 2.687954818440417890e-05"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "CoRoT-2B shares its motion through space with CoRoT-2, 870 AU away, so the two are a bound pair. Both are placed where Gaia measures them.",
+    "sources": [
+      {
+        "catalogueId": "vizier-j-mnras-506-2269",
+        "url": "https://arxiv.org/abs/2101.05282",
+        "label": "El-Badry et al. (2021)",
+        "checked": "2026-10-08",
+        "locator": "J/MNRAS/506/2269 catalog: source_id 4287820848378092672 and 4287820852697823872, sep_AU 870.120119257764486, R_chance_align 2.687954818440417890e-05"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

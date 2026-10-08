@@ -1,0 +1,195 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "kelt-1b",
+  "displayName": "KELT-1 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.1 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-761-2-123",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S",
+          "label": "Siverd et al. 2012",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "29 hours",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-761-2-123",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S",
+          "label": "Siverd et al. 2012",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "27 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-761-2-123",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S",
+          "label": "Siverd et al. 2012",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 2,943 K. The disc itself is unresolved.",
+        "thumbnail": "kelt-1b-dataset-thermal.webp",
+        "surface": "kelt-1b-surface-thermal@2x.webp",
+        "poles": "kelt-1b-poles-thermal@2x.webp",
+        "source": {
+          "id": "kelt-1b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of KELT-1 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · Bell et al. (2021) · a Spitzer IRAC 4.5 µm phase curve (program 11095, first published by Beatty et al. (2019)) · longitude only",
+        "thumbnail": "kelt-1b-dataset-temperature.webp",
+        "surface": "kelt-1b-surface-temperature@2x.webp",
+        "poles": "kelt-1b-poles-temperature@2x.webp",
+        "source": {
+          "id": "kelt-1b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2010.00687"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "800",
+            "2150",
+            "3500"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "800",
+              "2150",
+              "3500"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2010.00687"
+        },
+        "notes": "Brightness temperature at 4.5 µm of KELT-1 b from Bell et al. (2021)'s published fit to a Spitzer IRAC 4.5 µm phase curve (program 11095, first published by Beatty et al. (2019)). Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 4° east of noon. The false color runs from 800 to 3,500 K. With shadows on, the star's light darkens the night half."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kelt-1b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kelt-1b/kelt-1b-system-orbits.svg",
+      "alt": "The orbits of KELT-1's planets in this map from above, to scale, with KELT-1 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kelt-1b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S"
+      }
+    },
+    {
+      "id": "kelt-1b-emission",
+      "titleKey": "emissionSpectrum",
+      "src": "/scenes/kelt-1b/kelt-1b-emission.svg",
+      "alt": "KELT-1 b's dayside emission: the light lost as the planet passes behind its star: its day side's own glow and reflected light. 5 measured bins from Beatty et al. 2017 (LBT Consortium Large Binocular Telescope (LBT) at Mount Graham International Observatory, LUCI1), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "kelt-1b-archive-emission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..242B/abstract"
+      }
+    },
+    {
+      "id": "kelt-1b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/kelt-1b/kelt-1b-transit.svg",
+      "alt": "KELT-1 b crossing its star, as TESS recorded it: 3 sectors (17, 57, 84) of the SPOC pipeline's 2-minute light curves of TIC 432549364, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "kelt-1b-tess-sector-17",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2019279210107-s0017-0000000432549364-0161-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Siverd et al. 2012",
+      "href": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract",
+      "credit": "Siverd et al. 2012"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kelt-1b.json",
+      "credit": "Radius from Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive; mass from Siverd et al. 2012, the mass the NASA Exoplanet Archive's composite table adopts (2012ApJ...761..123S), via the NASA Exoplanet Archive; orbit from Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive"
+    }
+  }
+}

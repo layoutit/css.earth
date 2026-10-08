@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-7b",
+  "parent": "hat-p-7-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-7 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 107952.9
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HAT-P-7 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 68776342.8,
+      "description": "HAT-P-7 b was found in 2008 by HATNet as it crossed its star.",
+      "systemName": "HAT-P-7 system",
+      "order": 5820,
+      "context": {
+        "order": 5820
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2608039413290453000,
+        -6375816672545655000,
+        7642406900433696000
+      ],
+      "presentationToReference": [
+        0.36268713762377847,
+        -0.8884660798866024,
+        -0.2812224477050216,
+        -0.5697913612477742,
+        -0.4502086808408468,
+        0.6874954169614172,
+        0.7374251452518275,
+        0.08910762361592728,
+        0.669525194868605
+      ],
+      "orbitUpReference": [
+        0.8884660798866024,
+        0.4502086808408468,
+        -0.08910762361592728
+      ],
+      "metersPerUnit": 348235.1612903226,
+      "bodyRadiusM": 107952900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

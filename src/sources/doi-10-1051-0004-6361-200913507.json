@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-200913507",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gillon et al. (2010): The thermal emission of the young and massive planet CoRoT-2b at 4.5 and 8 <i>μ</i> m",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0911.5087"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/200913507"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2010A&A...511A...3G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/200913507",
+      "label": "Astronomy and Astrophysics 511 A3"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G",
+      "checkedOn": "2026-10-08",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gillon et al. (2010), Astronomy and Astrophysics 511 A3",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G"
+    }
+  ],
+  "publisher": "Astronomy and Astrophysics 511 A3",
+  "creators": [
+    "M. Gillon",
+    "A. A. Lanotte",
+    "T. Barman",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

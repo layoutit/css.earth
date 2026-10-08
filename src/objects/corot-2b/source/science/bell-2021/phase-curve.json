@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Bell et al. (2021), MNRAS 504, 3316, 'A comprehensive reanalysis of Spitzer's 4.5 um phase curves, and the phase variations of the ultra-hot Jupiters MASCARA-1b and KELT-16b' (doi:10.1093/mnras/stab1027; arXiv:2010.00687). Spitzer IRAC 4.5 um phase curve of CoRoT-2b, program 11073, first published by Dang et al. (2018) and reanalysed here. Values read from the authors' LaTeX source: the table of preferred SPCA model parameters (tab:preferred), row CoRoT-2b, detector model Poly4. The preferred fit is first order (the caption of its figure names the mode Poly4_v1), so the printed semi-amplitude and offset are the whole phase variation (section 4.1: semi-amplitude sqrt(C1^2 + D1^2), offset east -arctan2(D1, C1)). CoRoT-2 is one of the three systems the paper corrects for a nearby star's light (section 4.1, Dilution Correction; tab:dilution gives C_corr = 1.2046 for CoRoT-2, applied to the radius ratio as sqrt(C_corr) and to the dayside flux as C_corr); tab:preferred does not say in its caption that its cells carry the correction.",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.1704,
+    "cell": "0.1704 +0.0014/-0.0017",
+    "where": "tab:preferred, CoRoT-2b, R_p/R_*"
+  },
+  "eclipseDepth": {
+    "value": 0.00488,
+    "cell": "4880 +200/-190 ppm",
+    "where": "tab:preferred, CoRoT-2b, F_p/F_*"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "F_p = F_day [1 + C1 (cos psi - 1) + D1 sin psi], psi counted from mid-eclipse (section 4.1), printed as its semi-amplitude and the offset east of its maximum.",
+    "semiAmplitude": {
+      "value": 0.00268,
+      "cell": "2680 +160/-130 ppm",
+      "where": "tab:preferred, CoRoT-2b, Semi-Amplitude"
+    },
+    "offsetDegreesEast": {
+      "value": -38.7,
+      "cell": "-38.7 +/- 3.2 degrees east",
+      "where": "tab:preferred, CoRoT-2b, Max Flux Offset"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 1756,
+      "cell": "1756 +44/-43 K",
+      "where": "tab:preferred, CoRoT-2b, T_day"
+    },
+    "nightsideK": {
+      "value": 873,
+      "cell": "873 +51/-41 K",
+      "where": "tab:preferred, CoRoT-2b, T_night"
+    },
+    "offsetDegrees": {
+      "value": -38.7,
+      "cell": "-38.7 +/- 3.2 degrees east",
+      "where": "tab:preferred, CoRoT-2b, Max Flux Offset"
+    }
+  }
+}

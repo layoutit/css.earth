@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "kelt-1b",
+  "radiusKm": 79356.1,
+  "radiusSource": "Radius 1.11 Jupiter radii from Siverd et al. 2012 (2012ApJ...761..123S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract): 79,356.1 km at 71,492 km per Jupiter radius. GM from the mass 27.23 Jupiter masses (Siverd et al. 2012, the mass the NASA Exoplanet Archive's composite table adopts (2012ApJ...761..123S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1.2174936,
+  "orbitalPeriodSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.2174936 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of KELT-1 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "27.23 Jupiter masses: Siverd et al. 2012, the mass the NASA Exoplanet Archive's composite table adopts (2012ApJ...761..123S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract)."
+}

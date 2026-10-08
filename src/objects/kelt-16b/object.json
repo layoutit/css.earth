@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kelt-16b",
+  "parent": "kelt-16-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "KELT-16 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "temperature",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 101161.2
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "KELT-16 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 91789264.9,
+      "description": "KELT-16 b was found in 2017 by KELT as it crossed its star.",
+      "systemName": "KELT-16 system",
+      "order": 5824,
+      "context": {
+        "order": 5824
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        8158344441591440000,
+        -8369353956485748000,
+        7207553986043619000
+      ],
+      "presentationToReference": [
+        0.661175476385352,
+        -0.6546814203297555,
+        -0.36638671823855307,
+        -0.5384775782610755,
+        -0.7541675497839496,
+        0.37586327908291495,
+        0.522387678967154,
+        0.051220549859287715,
+        0.8511683547544645
+      ],
+      "orbitUpReference": [
+        0.6546814203297555,
+        0.7541675497839496,
+        -0.051220549859287715
+      ],
+      "metersPerUnit": 326326.4516129032,
+      "bodyRadiusM": 101161200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

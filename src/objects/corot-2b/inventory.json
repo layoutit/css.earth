@@ -1,0 +1,167 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "corot-2b-arrival.webp",
+      "bytes": 35630,
+      "sha256": "e7adaab581c0fe5b8e3e62df8ecc58f7fa37c465e02e2c19e76ca891c4d3095a"
+    },
+    {
+      "location": "public",
+      "filename": "corot-2b-billboard.webp",
+      "bytes": 6128,
+      "sha256": "85cbf4376ee42652edba3c6d0370762214e3417c33a86afc858dee009b18d9c4"
+    },
+    {
+      "location": "public",
+      "filename": "corot-2b-dataset-temperature.webp",
+      "bytes": 166,
+      "sha256": "7d9c4d27a8cd251a728ff0736f9cfcc1dc9a91ff0cfd9a2d453dd048fe80cf82"
+    },
+    {
+      "location": "public",
+      "filename": "corot-2b-dataset-thermal.webp",
+      "bytes": 42,
+      "sha256": "58487b72160c8cc67374b9fabbf333d89d2b867b5a9cee632621431548890c96"
+    },
+    {
+      "location": "public",
+      "filename": "corot-2b-poles-temperature@2x.webp",
+      "bytes": 46096,
+      "sha256": "4bb05fa36ba1eab150abf813ee9dbb6446bcb466cee7c2c34522aa466d8a0e78"
+    },
+    {
+      "location": "public",
+      "filename": "corot-2b-poles-thermal@2x.webp",
+      "bytes": 1340,
+      "sha256": "e7114ef046f93d6cf13bd48c212f088ac6c41e66b4773eb081b19bb63b6254df"
+    },
+    {
+      "location": "public",
+      "filename": "corot-2b-surface-temperature@2x.webp",
+      "bytes": 16556,
+      "sha256": "47cef056a0482787a9e2ad3254b55c0f0b14983dcb203724a34dbd2809a8b322"
+    },
+    {
+      "location": "public",
+      "filename": "corot-2b-surface-thermal@2x.webp",
+      "bytes": 36,
+      "sha256": "20c776aa99e6f9bce4bdc47925a862b9282a7d8a6b744bb4652d454814d666dc"
+    },
+    {
+      "location": "public",
+      "filename": "corot-2b-system-orbits.svg",
+      "bytes": 4625,
+      "sha256": "f122e8203b1de24fbfc456be6e5aa1a93756259fc6844983f28294465a61c34e"
+    },
+    {
+      "location": "public",
+      "filename": "corot-2b-transit.svg",
+      "bytes": 12278,
+      "sha256": "6beb51a2c695d7c8e27342927ef6bc4968379a4e6c2986f0d5dd17eaaed59445"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-2x-shadowless.webp",
+      "bytes": 56158,
+      "sha256": "88d20de295f141c506e6de64cf4cc10a9eefb6e58852d5c977d4ef8a6af88f9f"
+    },
+    {
+      "location": "public",
+      "filename": "lighting-sheet.webp",
+      "bytes": 573858,
+      "sha256": "f245cafd3cef183c26bb6b249125aeb163bcdf61e91b12dd109ea85190db3c52"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 317,
+      "sha256": "77f7552ce1ba3abc9608d9182936e06fdab4c88f2827cec8b8b42c60d8caf2a8"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 18687,
+      "sha256": "ccf508c64c6b620ba16bf27381aa84dcc9b3421a2690d6cd3e44cecccce9cd87"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 661,
+      "sha256": "62293ebdc62d94e47d48bd7450de9c379315c0742c0dc2a1b3ad18ed4496148b"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 3000,
+      "sha256": "d290deeddb78a26552163a52da1ca3f7ff0e70f741d9fc1d3cf4c14dd90355f6"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 1838,
+      "sha256": "04b0fdfeeee687a928489b1ec5473541b452234862fc45bde907fe02ca0b53ec"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 2855,
+      "sha256": "ae5dc7c9f05dfe76416fa6ad3d1889749297b75c5418be00a1265c3adf63bd28"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 216,
+      "sha256": "5203ef435460c10f7312a43f7ee1c9325482ec3c1e9358e1d73b6d0f8dbc9509"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature.webp",
+      "bytes": 1520,
+      "sha256": "b721b4340a4a17e4cefdfc303a0cde1ab597057cafda82106f15f00c432e9d3b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/thermal.webp",
+      "bytes": 460,
+      "sha256": "ba605c51ca96a54a65117e4f8cdf2f277173520a672dfe83a37a2c819032e0ee"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 276649,
+      "sha256": "6168d8e32f36b3206d9d853f0641908feedcdcc9a2b3ac468619cced99b9bb9c"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 392726,
+      "sha256": "1cf2c5aed6755d95d831c0d6f814e053228cd66b0d90f21eca4c682d469bccaf"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1206,
+      "sha256": "aea7525eef433f5c89c94e39df641c5e7e06c27962a0b28cbd7ebcee59527749"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 675,
+      "sha256": "9147564eccccaa1da394608ff220c678e47d1663b662caca9a14af8690bf29cd"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 2067,
+      "sha256": "4f37de7d346ed5ce2cb9e610effeb96ae700ddc7ec58926a7729a202e82a9039"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1157,
+      "sha256": "cc3883352aa65b4320a76b46023eca398fcc5cea0058cf3a179e2b17c159dc39"
+    }
+  ]
+}

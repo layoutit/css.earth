@@ -1,0 +1,184 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "corot-2b",
+  "displayName": "CoRoT-2 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.5 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-200913507",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G",
+          "label": "Gillon et al. 2010",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "42 hours",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-200913507",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G",
+          "label": "Gillon et al. 2010",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "3.5 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-200913507",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G",
+          "label": "Gillon et al. 2010",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "temperature",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,890 K. The disc itself is unresolved.",
+        "thumbnail": "corot-2b-dataset-thermal.webp",
+        "surface": "corot-2b-surface-thermal@2x.webp",
+        "poles": "corot-2b-poles-thermal@2x.webp",
+        "source": {
+          "id": "corot-2b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010AJ....139.1481A/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of CoRoT-2 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 2.15 µm (Isaac Newton Group (ING) 4.2m William Herschel Telescope (WHT) at Observatorio del Roque de los Muchachos LIRIS). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · Bell et al. (2021) · a Spitzer IRAC 4.5 µm phase curve (program 11073, first published by Dang et al. (2018)) · longitude only",
+        "thumbnail": "corot-2b-dataset-temperature.webp",
+        "surface": "corot-2b-surface-temperature@2x.webp",
+        "poles": "corot-2b-poles-temperature@2x.webp",
+        "source": {
+          "id": "corot-2b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2010.00687"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "350",
+            "1175",
+            "2000"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "350",
+              "1175",
+              "2000"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2010.00687"
+        },
+        "notes": "Brightness temperature at 4.5 µm of CoRoT-2 b from Bell et al. (2021)'s published fit to a Spitzer IRAC 4.5 µm phase curve (program 11073, first published by Dang et al. (2018)). Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 39° west of noon. Longitudes where the fit gives no emission are left blank. The false color runs from 350 to 2,000 K. With shadows on, the star's light darkens the night half."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "corot-2b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/corot-2b/corot-2b-system-orbits.svg",
+      "alt": "The orbits of CoRoT-2's planets in this map from above, to scale, with CoRoT-2 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "corot-2b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G"
+      }
+    },
+    {
+      "id": "corot-2b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/corot-2b/corot-2b-transit.svg",
+      "alt": "CoRoT-2 b crossing its star, as TESS recorded it: 2 sectors (54, 81) of the SPOC pipeline's 2-minute light curves of TIC 391958006, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 9-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "corot-2b-tess-sector-54",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022190063128-s0054-0000000391958006-0227-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gillon et al. 2010",
+      "href": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2010A&A...511A...3G/abstract",
+      "credit": "Gillon et al. 2010"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/corot-2b.json",
+      "credit": "Radius from Gillon et al. 2010 (2010A&A...511A...3G), via the NASA Exoplanet Archive; mass from Gillon et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010A&A...511A...3G), via the NASA Exoplanet Archive; orbit from Gillon et al. 2010 (2010A&A...511A...3G), via the NASA Exoplanet Archive"
+    }
+  }
+}

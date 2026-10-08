@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kelt-1b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kelt-1b-orbits",
+      "title": "KELT-1 b: orbits around KELT-1",
+      "output": "kelt-1b-system-orbits.svg",
+      "system": "kelt-1",
+      "highlight": "kelt-1b",
+      "description": "The orbits of KELT-1's planets in this map from above, to scale, with KELT-1 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 1.2174936 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "kelt-1b-emission",
+      "title": "KELT-1 b: dayside emission",
+      "description": "KELT-1 b's dayside emission: the light lost as the planet passes behind its star: its day side's own glow and reflected light. 5 measured bins from Beatty et al. 2017 (LBT Consortium Large Binocular Telescope (LBT) at Mount Graham International Observatory, LUCI1), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "kelt-1b-emission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2017AJ....154..242B/abstract",
+        "table": "emissionspec",
+        "bins": 5
+      },
+      "source": {
+        "path": "science/archive-spectra/emission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 5
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 1.5,
+        "maximum": 1.8,
+        "ticks": [
+          1.5,
+          1.6,
+          1.7,
+          1.8
+        ]
+      },
+      "y": {
+        "label": "Eclipse depth (%)",
+        "minimum": 0.1,
+        "maximum": 0.2,
+        "ticks": [
+          0.1,
+          0.125,
+          0.15,
+          0.175,
+          0.2
+        ]
+      },
+      "notes": [
+        "Beatty et al. 2017",
+        "LBT Consortium Large Binocular Telescope (LBT) at M…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "kelt-1b-transit",
+      "title": "KELT-1 b: its transit",
+      "description": "KELT-1 b crossing its star, as TESS recorded it: 3 sectors (17, 57, 84) of the SPOC pipeline's 2-minute light curves of TIC 432549364, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 11-minute bins. Error bars are each bin's standard error.",
+      "output": "kelt-1b-transit.svg",
+      "metadata": {
+        "tic": "TIC 432549364",
+        "sectors": [
+          17,
+          57,
+          84
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "kelt-1b",
+      "sources": [
+        "photometry/tess/tess2019279210107-s0017-0000000432549364-0161-s_lc.fits",
+        "photometry/tess/tess2022273165103-s0057-0000000432549364-0245-s_lc.fits",
+        "photometry/tess/tess2024274222008-s0084-0000000432549364-0281-s_lc.fits"
+      ],
+      "durationHours": 2.76456,
+      "binMinutes": 11,
+      "notes": [
+        "TESS 2-min SPOC · sectors 17, 57, 84",
+        "Folded on the app's orbit; 11-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

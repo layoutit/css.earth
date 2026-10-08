@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-77-a-b-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-77 A b · wasp 77 a b temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2503.12521",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-77-a-b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Davenport et al. (2025); a Spitzer IRAC 4.5 µm phase curve of 29 November to 1 December 2016",
+      "scope": "The wasp 77 a b temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
