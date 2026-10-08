@@ -140,11 +140,11 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     part.metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
     part.facts += panel.facts.length + panel.moreFacts.length;
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
-    // The runtime's controls, published beside it. A checkout that deliberately restores no body banks (the typecheck
-    // job) lacks them; skipping there yields a partial catalogue, which is all a compiler program needs.
-    const controlsPath = `${base}/prepared/controls.json`;
-    if (restoredOnly && !existsSync(resolve(root, controlsPath))) return part;
-    const controls = explorationRecord(await json(controlsPath));
+    // The runtime's controls. A checkout that deliberately restores no body banks (the typecheck job) lacks the
+    // runtime; skipping there yields a partial catalogue, which is all a compiler program needs.
+    const runtimePath = `${base}/prepared/runtime.json`;
+    if (restoredOnly && !existsSync(resolve(root, runtimePath))) return part;
+    const controls = explorationRecord(explorationRecord(await json(runtimePath)).controls);
     const datasets = controls.datasets === null ? [] : explorationArray(explorationRecord(controls.datasets).controls, raw => {
       const control = explorationRecord(raw); return { id: explorationText(control.id), label: explorationText(control.label) };
     });

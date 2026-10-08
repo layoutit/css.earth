@@ -16,7 +16,7 @@ export { ASSET_LOCATIONS, INVENTORY_FILE, INVENTORY_SCHEMA, assembleRuntimeAsset
 export type { AssetLocation, Inventory, InventoryAsset } from './runtime-asset-closure.js';
 export { DELIVERED_PREPARED_RECORDS, SCENE_RETAINING_SOURCES, WORKING_PREPARED_RECORDS, deliveredPreparedFiles, deliveredPreparedRecord, isWorkingPreparedFile, retainsPreparedScene } from './prepared-delivery.js';
 export type { DeliveredPreparedRecord, PreparedDeliveryContext, PreparedReader, WorkingPreparedRecord } from './prepared-delivery.js';
-export { preparedObjectText, preparedObjectTransport, preparedPageData, readJsonHead } from './prepared-transport.js';
+export { preparedObjectText, preparedObjectTransport, preparedPageData, readJsonHead, readPreparedControls } from './prepared-transport.js';
 export { LEAF_BOXES_FILE, joinPreparedRuntimeText, readPreparedRuntimeText, splitPreparedRuntimeText, storePreparedRuntime } from './prepared-runtime-files.js';
 export { packPreparedBinary, unpackPreparedBinary, packPreparedBank, unpackPreparedBank } from './prepared-binary-file.js';
 export { volumeDatasetBankFiles, writeVolumeDatasetBank, readVolumeDatasetBank } from './volume-dataset-bank.js';

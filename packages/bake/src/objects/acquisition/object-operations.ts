@@ -46,7 +46,7 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
  }
  const inventoryPath=resolve(objectRoot,'inventory.json');
  if(mode==='manifest'){
-  const entries=['runtime.json','content.json','controls.json'];
+  const entries=['runtime.json','content.json'];
   const values=await Promise.all(entries.map(async file=>JSON.parse(await readFile(resolve(preparationRoot,file),'utf8')) as unknown));
   return prepareRuntimeManifest({id,publicRoot:resolve(root,'site/public/scenes',id),objectDirectory:objectRoot,values,allowPreparationArtifacts:true});
  }

@@ -90,8 +90,7 @@ async function addBody(root: string, id: string, classification: string, parent 
     id, classification, physical: { name: id, horizonsCode: null, meanRadiusKm: 1,
       gravitationalParameterKm3PerS2: 0, parent: id === 'sun' ? null : parent },
   });
-  await write(resolve(root, `src/objects/${id}/prepared/runtime.json`), { schema: 'cssearth-object-runtime@5', id, camera: JSON.parse(await readFile(new URL('../../../../src/objects/mercury/prepared/runtime.json', import.meta.url), 'utf8')).camera });
-  await write(resolve(root, `src/objects/${id}/prepared/controls.json`), { datasets: { controls: [] } });
+  await write(resolve(root, `src/objects/${id}/prepared/runtime.json`), { schema: 'cssearth-object-runtime@5', id, camera: JSON.parse(await readFile(new URL('../../../../src/objects/mercury/prepared/runtime.json', import.meta.url), 'utf8')).camera, controls: { datasets: { controls: [] } } });
 }
 
 test('independent asteroid, moon and comet branches merge without changing existing packages', async t => {

@@ -3,7 +3,7 @@ import { OBJECT_PAGE_SCHEMA, parseObjectDescriptor, type ObjectDescriptor, defer
 import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-import { preparedObjectText, preparedObjectTransport, preparedPageData, readPreparedRuntimeText } from '@cssearth/objects/node';
+import { preparedObjectText, preparedObjectTransport, preparedPageData, readPreparedControls, readPreparedRuntimeText } from '@cssearth/objects/node';
 
 import { isRecord } from '@cssearth/core';
 import { resolveSceneAddressesDeep } from '../server-assets/asset-origin.mts';
@@ -42,9 +42,9 @@ async function preparedTransports(id: string, root: string): Promise<PreparedTra
   return transports;
 }
 
-/** A scene body's published controls, which are its runtime's (prepared-transport.ts). */
+/** A scene body's controls, which are its runtime's (prepared-transport.ts). */
 async function preparedControls(directory: string) {
-  const controls: unknown = JSON.parse(await readFile(resolve(directory, 'prepared/controls.json'), 'utf8'));
+  const controls: unknown = await readPreparedControls(resolve(directory, 'prepared'));
   requireControls(controls);
   return controls;
 }

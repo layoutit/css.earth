@@ -7,20 +7,19 @@ import sharp from 'sharp';
 import type { Vector3 } from '@cssearth/engine';
 import { detectMissingCoverage } from '../../raster/index.ts';
 import { isRecord } from '@cssearth/core';
+import { readPreparedControls } from '@cssearth/objects/node';
 
 const DEGREE = Math.PI / 180;
 export interface DatasetCoverage { readonly dataset: string; readonly missing: Uint8Array; readonly width: number; readonly height: number;
   /** Body east longitude of the minimap's left edge, in degrees. */
   readonly leftEdgeLongitudeDeg: number }
 
-const optionalJson = async (path: string): Promise<unknown> => {
-  try { return JSON.parse(await readFile(path, 'utf8')); }
-  catch (error) { if (isRecord(error) && error.code === 'ENOENT') return undefined; throw error; }
-};
+const absent = (error: unknown): undefined => { if (isRecord(error) && error.code === 'ENOENT') return undefined; throw error; };
+const optionalJson = (path: string): Promise<unknown> => readFile(path, 'utf8').then(text => JSON.parse(text) as unknown, absent);
 
 /** The default dataset's coverage, or none for a body without prepared datasets or a minimap of its default dataset. */
 export async function readDefaultDatasetCoverage(objectDirectory: string, mapLeftEdgeLongitudeDeg: number): Promise<DatasetCoverage | undefined> {
-  const [controls, minimaps, framing] = await Promise.all([optionalJson(resolve(objectDirectory, 'prepared/controls.json')),
+  const [controls, minimaps, framing] = await Promise.all([readPreparedControls(resolve(objectDirectory, 'prepared')).catch(absent),
     optionalJson(resolve(objectDirectory, 'prepared/minimaps.json')), optionalJson(resolve(objectDirectory, 'source/presentation/minimap.json'))]);
   const dataset = isRecord(controls) && isRecord(controls.datasets) && typeof controls.datasets.defaultDataset === 'string' ? controls.datasets.defaultDataset : undefined;
   const image = dataset && isRecord(minimaps) && Array.isArray(minimaps.images) ? minimaps.images.find(entry => isRecord(entry) && entry.id === dataset) : undefined;

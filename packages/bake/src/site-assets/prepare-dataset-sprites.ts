@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { DECORATIVE_WEBP } from '../raster/index.ts';
 import { sourceArray, sourceId, sourceObject, sourceText } from '@cssearth/objects/sources';
+import { readPreparedControls } from '@cssearth/objects/node';
 
 // Dataset icons occupy 14 CSS pixels. A 42-pixel tile stays sharp through 3x DPR.
 const tile = 42;
@@ -23,9 +24,9 @@ export async function prepareDatasetSprites(root = checkoutProjectRoot(import.me
   let next = 0, count = 0;
   const drawBody = async (name: string) => {
     const id = sourceId(name);
-    // The runtime's controls, as published beside it; a folder without them has no datasets to draw.
+    // The runtime's controls; a folder without a runtime has no datasets to draw.
     let controls: unknown;
-    try { controls = JSON.parse(await readFile(resolve(root, 'src/objects', id, 'prepared/controls.json'), 'utf8')); }
+    try { controls = await readPreparedControls(resolve(root, 'src/objects', id, 'prepared')); }
     catch (error) {
       if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') return;
       throw error;

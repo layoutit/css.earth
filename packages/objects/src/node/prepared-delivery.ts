@@ -20,7 +20,6 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   // A layered body's page and its build.
   { name: 'runtime.json', reader: 'page', read: 'packages/objects/src/node/prepared-transport.ts builds the object, dataset and page transports from it' },
   { name: 'leaf-boxes.json', reader: 'page', read: 'packages/objects/src/node/prepared-runtime-files.ts puts a sphere\'s leaf boxes back into its runtime' },
-  { name: 'controls.json', reader: 'page', read: 'site/server/object-page-data.mts, prepared-transport.ts and the catalogue steps of the site build' },
   { name: 'content.json', reader: 'site-build', read: 'site/components/ObjectPage.astro; packages/bake/src/contract/prepare-factsheets.ts' },
   { name: 'text.json', reader: 'site-build', read: 'site/components/PreparedObjectPanel.astro' },
   { name: 'datasets.json', reader: 'site-build', read: 'site/components/PreparedObjectPanel.astro; a bank package\'s browser-fetched dataset index' },
@@ -86,6 +85,7 @@ export const WORKING_PREPARED_RECORDS: readonly WorkingPreparedRecord[] = [
   { name: /^terrain(-[a-z0-9-]+)?\.json$/u, why: 'a radial-terrain report only the audits read' },
   { name: /-source-index\.json$/u, why: 'a source-index raster only the audits read' },
   { name: 'scene.json', why: 'the scene a bake builds before its presentation: the runtime carries what the page draws', unless: 'retains-scene' },
+  { name: 'controls.json', why: 'the content step\'s controls, which the runtime carries: readers take them from it (prepared-transport.ts)' },
   { name: 'sky.json', why: 'a copy of the runtime\'s sky' },
   { name: 'sun.json', why: 'a copy of the runtime\'s sun' },
   { name: 'world-navigation.json', why: 'the receipt of the world-navigation step, which every page step rewrites' },

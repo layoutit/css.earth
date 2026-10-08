@@ -1,6 +1,7 @@
 import { open, readFile } from 'node:fs/promises';
 import { basename, resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
+import { readPreparedControls } from '@cssearth/objects/node';
 import { readShapeModelDiscovery, readRasterDiscovery, readRuntimeCamera, readRuntimeCameraPrefix, parseObjectDescriptor, readObjectContentDatasets, requireCamera, parseArrivalView, parseArrivalBillboard, type CameraPlan, type ObjectDiscovery } from '@cssearth/objects';
 import { preparedDefaultViewRotation } from '@cssearth/engine';
 import { resolveBuildSceneAddress } from '../../server-assets/asset-origin.mts';
@@ -153,7 +154,10 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     try { return JSON.parse(await readFile(resolve(objectDirectory, 'prepared', name), 'utf8')); }
     catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
   };
-  const controls: unknown = await preparedJson('controls.json') ?? { datasets: { controls: [] } };
+  const controls: unknown = await readPreparedControls(resolve(objectDirectory, 'prepared')).catch((error: unknown) => {
+    if (hasErrorCode(error, 'ENOENT')) return { datasets: { controls: [] } };
+    throw error;
+  });
   const camera = await preparedRuntimeCamera(resolve(objectDirectory, 'prepared', 'runtime.json'));
   const discovery = deriveObjectDiscovery(descriptor.properties.catalog, controls, inputs, camera ?? undefined, typeof descriptor.id === 'string' && isNavigationalStar({ id: descriptor.id }));
   const billboard = await preparedJson('arrival-billboard.json');

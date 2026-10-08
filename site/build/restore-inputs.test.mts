@@ -272,8 +272,7 @@ test('manifest refresh keeps runtime and shell images but excludes preparation m
   for (const name of ['surface', 'thumbnail', 'chart', 'source-map']) {
     await writeFile(resolve(root, `site/public/scenes/titan/${name}.webp`), name);
   }
-  await json(resolve(prepared, 'runtime.json'), { scene: { image: url('surface') } });
-  await json(resolve(prepared, 'controls.json'), { datasets: [{ thumbnailUrl: url('thumbnail') }] });
+  await json(resolve(prepared, 'runtime.json'), { scene: { image: url('surface') }, controls: { datasets: [{ thumbnailUrl: url('thumbnail') }] } });
   await json(resolve(prepared, 'content.json'), { charts: [{ src: url('chart') }] });
   await json(resolve(prepared, 'surfaces.json'), { intermediateMap: url('source-map') });
   await run(root, ['packages/bake/cli/object-operations.mts', 'manifest', 'titan']);

@@ -13,8 +13,9 @@ test('a shape-only body gets a prepared arrival without becoming photographic', 
     const prepared = join(directory, 'prepared');
     await mkdir(prepared);
     const runtime = JSON.parse(await readFile(new URL('../../../src/objects/mercury/prepared/runtime.json', import.meta.url), 'utf8'));
-    await writeFile(join(prepared, 'runtime.json'), JSON.stringify({ schema: OBJECT_RUNTIME_SCHEMA, camera: runtime.camera }));
-    await writeFile(join(prepared, 'controls.json'), JSON.stringify({ datasets: { defaultDataset: 'shape', controls: [{ id: 'shape' }] } }));
+    const stored = (controls: unknown[]) => writeFile(join(prepared, 'runtime.json'), JSON.stringify({ schema: OBJECT_RUNTIME_SCHEMA, camera: runtime.camera,
+      controls: { datasets: { defaultDataset: 'shape', controls } } }));
+    await stored([{ id: 'shape' }]);
     const billboard = { url: '/scenes/body/body-arrival.webp', dataset: 'shape', size: 1024,
       distanceM: 8000, focalPixels: 1000, rotation: preparedDefaultViewRotation(runtime.camera) };
     await writeFile(join(prepared, 'arrival-billboard.json'), JSON.stringify(billboard));
@@ -26,7 +27,7 @@ test('a shape-only body gets a prepared arrival without becoming photographic', 
     assert.equal(discovery.arrival?.billboard?.distanceM, 8000);
     assert.deepEqual(discovery.arrival?.datasetIds, ['shape']);
     assert.equal(parseObjectDiscovery(discovery).imagery, false);
-    await writeFile(join(prepared, 'controls.json'), JSON.stringify({ datasets: { defaultDataset: 'shape', controls: [{ id: 'shape' }, { id: 'photo' }] } }));
+    await stored([{ id: 'shape' }, { id: 'photo' }]);
     await writeFile(join(directory, 'raster.json'), JSON.stringify({ schema: RASTER_RECIPE_SCHEMA, observations: [{ id: 'photo' }] }));
     const photographed = await prepareObjectDiscovery({ properties: { catalog: {}, recipe: { sources: [{ id: 'raster', path: 'raster.json' }] } } }, directory);
     assert.deepEqual(photographed.arrival?.datasetIds, ['shape', 'photo'], 'a photographic alternative cannot exclude the default billboard');

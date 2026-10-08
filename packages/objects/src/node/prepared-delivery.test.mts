@@ -15,7 +15,7 @@ test('a working record is never delivered, and a delivered record names its read
 });
 
 test('no name is both delivered and working', () => {
-  const samples = ['runtime.json', 'controls.json', 'content.json', 'text.json', 'datasets.json', 'minimaps.json', 'arrival-billboard.json', 'authored-preparation.json',
+  const samples = ['runtime.json', 'leaf-boxes.json', 'content.json', 'text.json', 'datasets.json', 'minimaps.json', 'arrival-billboard.json', 'authored-preparation.json',
     'assets.json', 'surfaces.json', 'material.json', 'members.json', 'world-context.json', 'volume.json', 'source-lighting.json'];
   for (const name of samples) { assert.ok(deliveredPreparedRecord(name), name); assert.equal(isWorkingPreparedFile(name), false, name); }
 });

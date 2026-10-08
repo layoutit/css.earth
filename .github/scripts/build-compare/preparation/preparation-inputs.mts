@@ -3,7 +3,7 @@ import {existsSync} from 'node:fs';
 import {readFile} from 'node:fs/promises';
 import {join} from 'node:path';
 import {readPreparedFeaturePins,parseArrivalBillboard} from '@cssearth/objects';
-import {readCatalog,readObjectDescriptors} from '@cssearth/objects/node';
+import {readCatalog,readObjectDescriptors,readPreparedControls} from '@cssearth/objects/node';
 import {prepareSceneDistance} from '@cssearth/bake/navigation';
 import {array,record,string} from '../records.mts';
 export function publicPreparationUrls(features: unknown, places: unknown, controls: unknown, sidebar: unknown, id: string, arrival?: unknown): string[] {
@@ -31,10 +31,11 @@ export function publicPreparationUrls(features: unknown, places: unknown, contro
   return [...urls].sort();
 }
 export async function preparationUrls(root: string): Promise<string[]> {
-  const read = async (path: string): Promise<unknown> => readFile(path, 'utf8').then(JSON.parse, (error: unknown) => {
+  const missing = (error: unknown): undefined => {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined;
     throw error;
-  });
+  };
+  const read = async (path: string): Promise<unknown> => readFile(path, 'utf8').then(JSON.parse, missing);
   const sidebar = await read(join(root, existsSync(join(root, 'site/public')) ? 'site/public' : 'public', 'navigation/sidebar-thumbnails.json'));
   if (sidebar === undefined) throw new Error('Missing tracked sidebar thumbnail manifest');
   const urls = new Set<string>();
@@ -46,7 +47,7 @@ export async function preparationUrls(root: string): Promise<string[]> {
   for (const entry of await readdir(join(root, 'src/objects'), {withFileTypes:true})) {
     if (!entry.isDirectory()) continue;
     const id = entry.name, prepared = join(root, 'src/objects', id, 'prepared');
-    const [features, places, controls, arrival] = await Promise.all([sceneIds.has(id) ? read(join(prepared, 'features.json')) : undefined, sceneIds.has(id) ? read(join(prepared, 'places.json')) : undefined, read(join(prepared, 'controls.json')), sceneIds.has(id) ? read(join(prepared, 'arrival-billboard.json')) : undefined]);
+    const [features, places, controls, arrival] = await Promise.all([sceneIds.has(id) ? read(join(prepared, 'features.json')) : undefined, sceneIds.has(id) ? read(join(prepared, 'places.json')) : undefined, readPreparedControls(prepared).catch(missing), sceneIds.has(id) ? read(join(prepared, 'arrival-billboard.json')) : undefined]);
     for (const url of publicPreparationUrls(features, places, controls, sidebar, id, arrival)) urls.add(url);
   }
   return [...urls].sort();
