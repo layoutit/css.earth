@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "arcturus",
+  "law": "power",
+  "source": "Lacour et al. (2008), A&A 485, 561, Table 3, power-law limb darkening fitted to the IOTA/IONIC visibilities and closure phases of May 2006 (https://doi.org/10.1051/0004-6361:200809611)",
+  "band": "IOTA/IONIC H band, 1.5-1.8 um, seven channels fitted with one law; not a visible band",
+  "alpha": {
+    "value": 0.258,
+    "uncertainty": 0.003,
+    "cell": "α = 0.258 ± 0.003"
+  },
+  "note": "I(mu)/I(1) = mu^alpha, the paper's equation 3 (Hestroffer 1997). Fitted with the limb-darkened diameter 20.900 ± 0.007 mas at a reduced chi-squared of 1.962; the paper recommends the power law over its two-parameter fit, which does no better (1.959). The record's radius keeps the diameter of that two-parameter fit, 20.922 mas, 0.1% larger. The visible limb is not measured."
+}

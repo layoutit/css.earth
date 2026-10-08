@@ -8,7 +8,9 @@ Its brightness, measured band by band, gives 24 times the Sun's luminosity at 4,
 
 **Color.** Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1125: HR 8961; VizieR III/202, cross-checked against Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 520 (BS 8961) (1 levels apart at most, the threshold is 12), through the CIE 1931 2° observer: #ffddbb. Routes tried in order: stis-ngsl: HD 222107 is not in the library; pulkovo: HR 8961 is not in the catalogue; kiehling: HR 8961 is not among its 60 stars; gaia-xp: found, not needed after the color and its cross-check; kharitonov: used.
 
-**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,667 K and log g 2.76 (u1 0.730, u2 0.071): a model, because no fit of this star's limb is used. Gravity: log g 2.76 from 2025A&A...703A.128B, the median of its 2 spectra; the 17 published values span log g 2.3 to 3.22, across which the limb law changes by at most 0.2% of the centre brightness.
+**Limb.** The disc is dimmed toward the limb by the power law I(mu) = mu^0.231 that Martinez et al. (2021), ApJ 916, 60 fit to the star's resolved disc (CHARA/MIRC H band, 1.5-1.7 um; not a visible band).
+
+**Surface from interferometry.** The datasets Color + brightness and Surface map are one fit of the star's surface to the 2,984 squared visibilities and 3,704 closure phases CHARA/MIRC measured on 6 nights, 2 to 24 September 2011 (infrared H band (1.49-1.73 um, eight channels)). The calibrated files are the authors', shipped with their code (https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data); the fit is ROTIR at the pinned commit (HEALPix level 3, sobel2 at weight 10, 1000 iterations, the settings of the authors' own script for these files), on a sphere of 2.742 mas with a power-law limb of 0.231, tilted 85.63° with its pole 26.09° east of north and turning in 54.2 d (Martinez et al. (2021), ApJ 916, 60, Table 4 (https://arxiv.org/abs/2107.06366)). The fit leaves a reduced chi-squared of 1.72 on the squared visibilities and 2.30 on the closure phases (limit 3), where a spotless star leaves 3.13 and 28.29; its spots are 2.14 times those the same fit draws on a spotless star of 2.77 mas (limit 2); and two independent halves of the data give the same spots (correlation 0.83, limit 0.5). Spotless twins 2% smaller and 2% larger do not fit on the sphere at all (closure phases 7.42 and 9.40), so they do not decide the spots: a reading of this repository, stated in surface-star.mts. The page's axis is that measured one, and longitude 0 is the meridian that faced the Earth on 14 September 2011. Run again with `node packages/telescope-cli/src/archives/interferometry/surface-star.mts packages/telescope-cli/src/archives/interferometry/seasons/udkadua-mirc-2011-09 output/interferometry/udkadua-mirc-2011-09`. Martinez et al. (2021), ApJ 916, 60; Parks et al. (2021), ApJ 913, 54 imaged the same nights; their maps are not redistributed here.
 
 ## Evidence
 
@@ -18,8 +20,9 @@ Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src
 
 ## Known problems
 
-- **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Surface map.** It is infrared brightness, drawn over the star's visible color as a darker tone: how dark the spots are in visible light is not measured. Nothing smaller than about 21° of the surface is resolved, and 34° of longitude never faced the Earth on these nights. The map is of 2 to 24 September 2011; spots change within months.
+- **Assumptions of the frame.** The rotation phase is a convention: the star is drawn as it faced the Earth on one night and does not turn.
 - **Quoted text.** The introduction quotes sentences of the Wikipedia article "Lambda Andromedae" (revision 1374783321) verbatim, CC BY-SA 4.0.
-- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
+- **Measured limb, other band.** The law was measured or fixed outside the visible band the color is drawn in; the visible limb is not measured.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -14,6 +14,7 @@ Rotation: no rotation axis or period is adopted here; see Known problems for wha
 
 Color dataset: The color of Arcturus's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ffd8a5**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The disc is darkened toward its edge by the quadratic V-band law that Claret & Bloemen (2011, A&A 529, A75) compute from ATLAS model atmospheres, read at 4295 K and log g 1.66: the edge is 18% as bright as the centre. That law is a model, not a measurement of this star. Gravity: log g 1.66 +/- 0.05 measured by Ramirez & Allende Prieto 2011 (ApJ 743, 135; https://arxiv.org/abs/1109.4425), abstract. The catalogue swatch, the minimap and the navigation marker use the same color. [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the colors from these inputs, and `--check` recomputes them. Cross-check: Kiehling (1987), HR 5340: an independent ground-based scan gives #ffdab0, 11 levels from the dataset color in its most different channel (the threshold for agreement is 12).
 
+**Limb.** The disc is dimmed toward the limb by the power law I(mu) = mu^0.258 that Lacour et al. (2008), A&A 485, 561 fit to the star's resolved disc (IOTA/IONIC H band, 1.5-1.8 um, seven channels fitted with one law; not a visible band).
 
 ## Evidence
 
@@ -23,6 +24,7 @@ Run of 2026-09-21 (this version):
 
 ## Known problems
 
-The cited paper images Arcturus’s limb darkening; this package shows a neutral sphere and does not cast that image. No mass is adopted.
+The cited paper's images of Arcturus are a limb-darkened disc without features; this package draws the limb law that paper fitted and casts no image. No mass is adopted.
+- **Measured limb, other band.** The law was measured or fixed outside the visible band the color is drawn in; the visible limb is not measured.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

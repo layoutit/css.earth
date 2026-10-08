@@ -1,0 +1,54 @@
+{
+  "id": "arxiv-1508-04755",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Parks et al. (2021): Interferometric Imaging of λ Andromedae: Evidence of Starspots and Rotation",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1508.04755"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/abb670"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1508.04755",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4357/abb670",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1508.04755",
+      "checkedOn": "2026-10-08",
+      "locator": "arXiv listing and Crossref: title, authors, DOI. Table 1 lists the six nights of September 2011 and their numbers of points; section III.2 describes the SQUEEZE images."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Parks et al. (2021)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1508.04755"
+    }
+  ],
+  "creators": [
+    "J. R. Parks",
+    "R. J. White",
+    "F. Baron",
+    "J. D. Monnier",
+    "B. Kloppenborg",
+    "G. W. Henry",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

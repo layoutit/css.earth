@@ -11,6 +11,15 @@
         "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Boo",
         "https://arxiv.org/abs/0804.0192"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the power law I(mu) = mu^0.258 that Lacour et al. (2008), A&A 485, 561 fit to the star's resolved disc (IOTA/IONIC H band, 1.5-1.8 um, seven channels fitted with one law; not a visible band).",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361:200809611"
+      ]
     }
   ]
 }

@@ -18,6 +18,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { convolveGaussian, readReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { binaryTable, numbers, readFitsHdus, tableColumn, writeCell, writeComplexCell, type BinaryTable, type TableColumn } from '@cssearth/bake/objects/raster';
+import { limbDarkenedDiscVisibility } from './alma-disc-selfcal.mts';
 
 const MAS_RAD = Math.PI / 180 / 3.6e6;
 
@@ -46,15 +47,16 @@ export function normalStream(seed: number) {
   return () => Math.sqrt(-2 * Math.log(uniform())) * Math.cos(2 * Math.PI * uniform());
 }
 
-export interface SpotlessOptions { readonly diameterMas: number; readonly limbDarkening?: number; readonly seed?: number }
+export interface SpotlessOptions { readonly diameterMas: number; readonly limbDarkening?: number; readonly seed?: number;
+  /** The exponent of a power-law limb, I(mu) = mu^alpha (Hestroffer 1997), in place of the linear law. */ readonly powerLaw?: number }
 
 /** The OIFITS bytes with every squared visibility, closure phase and OI_VIS amplitude and phase replaced by the spotless
  * disc's, noise included. Flags, errors, (u, v) and every other table are kept, so the reconstruction sees the same sampling and
  * weights. OI_VIS follows its table's declared types: an absolute amplitude is the disc's |V|, a differential or unstated one is
  * |V| over the row's mean, and a correlated flux is left as measured; the phase is the disc's own 0 or 180 degrees, which a
  * differential phase's offset and slope do not change. Complex VISDATA and GRAVITY's RVIS and IVIS follow the same values. */
-export function simulateSpotlessDisc(input: Buffer, { diameterMas, limbDarkening = 0, seed = 1 }: SpotlessOptions) {
-  if (!(diameterMas > 0) || !(limbDarkening >= 0 && limbDarkening <= 1)) throw new TypeError('A spotless disc needs a positive diameter and a limb-darkening coefficient between 0 and 1.');
+export function simulateSpotlessDisc(input: Buffer, { diameterMas, limbDarkening = 0, seed = 1, powerLaw }: SpotlessOptions) {
+  if (!(diameterMas > 0) || !(limbDarkening >= 0 && limbDarkening <= 1) || (powerLaw !== undefined && !(powerLaw >= 0))) throw new TypeError('A spotless disc needs a positive diameter and a limb-darkening coefficient between 0 and 1, or a power-law exponent that is not negative.');
   const bytes = Buffer.from(input), hdus = readFitsHdus(bytes), noise = normalStream(seed);
   const wavelengths = new Map<string, number[]>();
   for (const hdu of hdus.filter(hdu => hdu.extname === 'OI_WAVELENGTH')) {
@@ -62,7 +64,8 @@ export function simulateSpotlessDisc(input: Buffer, { diameterMas, limbDarkening
     wavelengths.set(String(hdu.header.INSNAME), Array.from({ length: table.rows }, (_, row) => numbers(bytes, table, row, column)[0]!));
   }
   const channels = (table: BinaryTable) => { const list = wavelengths.get(String(table.hdu.header.INSNAME)); if (!list) throw new Error(`No OI_WAVELENGTH for ${String(table.hdu.header.INSNAME)}.`); return list; };
-  const visibility = (u: number, v: number, wavelength: number) => limbDarkenedVisibility(Math.hypot(u, v), wavelength, diameterMas, limbDarkening);
+  const visibility = (u: number, v: number, wavelength: number) => powerLaw === undefined ? limbDarkenedVisibility(Math.hypot(u, v), wavelength, diameterMas, limbDarkening)
+    : limbDarkenedDiscVisibility(Math.hypot(u, v) / wavelength, diameterMas * MAS_RAD, powerLaw, 200);
   let vis2 = 0, t3 = 0;
   for (const hdu of hdus.filter(hdu => hdu.extname === 'OI_VIS2')) {
     const table = binaryTable(hdu), list = channels(table);

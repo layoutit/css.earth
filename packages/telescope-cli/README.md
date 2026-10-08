@@ -101,6 +101,20 @@ target whose pixels the TESS Input Catalog gives too much of other stars' light 
 not read.
 `telescope new-object --from-pixels all --out SPEC.json` then drafts every reduced star's maps as datasets of its page.
 
+A star an interferometer resolved on several nights while it turned gets one surface fitted to all of them with ROTIR
+(`src/archives/interferometry/surface-star.mts`), from a season record that pins the calibrated files, the star's published
+size, limb, axis and period, and the settings.
+[Interferometric imaging](../../docs/interferometric-imaging.md#a-star-that-turns-between-its-nights) gives the checks that
+decide whether the map is cast and what in them is this repository's reading.
+
+```sh
+node packages/telescope-cli/src/archives/interferometry/toolchain.mts install rotir
+node packages/telescope-cli/src/archives/interferometry/surface-star.mts packages/telescope-cli/src/archives/interferometry/seasons/udkadua-mirc-2011-09 output/interferometry/udkadua-mirc-2011-09
+```
+
+A spec's `resolvedMaps` (a host, and for each map the season's id, a dataset id and a label) then puts a cast map on the
+star's page with `telescope new-object SPEC.json --bake`.
+
 A pulsating star's light through one cycle is not reduced here: it is the model its source publishes. A Cepheid's package
 keeps its row of Gaia DR3's `vari_cepheid` table, and `telescope new-object --from-pulsation all --out SPEC.json` drafts
 ten steps of that model, a tenth of a period apart, as one dataset group of the star's page
