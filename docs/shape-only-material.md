@@ -31,6 +31,8 @@ from 374 to 1034 nm) and the geometric albedo the JPL Small-Body Database lists,
 [asteroid-colors](../packages/bake/authoring/asteroid-colors/author.mts). Most of them reflect
 2% to 9% of sunlight, so they are drawn as dark as they are.
 
+![The 98 asteroids of 100 km or more at their default views, each in its measured color](images/shape-only-material/large-asteroids.webp)
+
 ![Ymir and Siarnaq in the app at their default views, each in its measured color](images/shape-only-material/measured-color-ymir-siarnaq.webp)
 All three also carry NASA's illustrative model texture as a second, non-default
 dataset (`glb-base-color`); it is listed in the package's illustration datasets and is
