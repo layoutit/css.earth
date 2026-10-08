@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-1135",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1135 · Fides",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1135"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1135/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/fides/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

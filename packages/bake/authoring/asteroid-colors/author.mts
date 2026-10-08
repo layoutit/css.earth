@@ -7,10 +7,10 @@
  * Gaia DR3 published a mean reflectance spectrum (16 bands, 374 to 1034 nm, against the Sun) for 60,518 asteroids, and
  * the JPL Small-Body Database lists a geometric albedo with its reference. `inputs.json` holds both for each body as
  * `fetch.mts` read them. For each body this script writes `source/photometry/disc-color.json` and turns the gray `shape`
- * view, or the no-data `model` grid of a sphere, into a `color` shape view that names the record
- * (docs/shape-only-material.md). `--check` refuses when a package differs from what this script writes.
+ * view into a `color` shape view that names the record (docs/shape-only-material.md). `--check` refuses when a package
+ * differs from what this script writes.
  */
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -35,6 +35,11 @@ const illuminantEntry = records(referenceManifest.inputs).find(input => input.pa
 if (!illuminantEntry) throw new Error('Eris no longer pins the CIE D65 illuminant.');
 const colorMatching = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3), illuminant = parseCieTable(illuminantBytes.toString('utf8'), 1);
 const NORMALIZED_AT_NM = 550;
+// A shape in one flat color carries only smooth shading, so its face images need few texels. Measured on Lomia (2026-10-08,
+// GPU Chrome at 2x, Pixelmatch 0.1): 32 x 32 texels a budgeted face draws the color view as 128 x 128 does, at the default
+// view and zoomed in to 74 km (0 of 921,600 pixels differ), and the Elevation dataset within 0.13%. The page weighs 1.0 MB
+// in place of 2.5 MB and bakes in 27 s in place of 69 s.
+const FLAT_COLOR_TEXELS_PER_FACE = 32 * 32;
 
 /** The measured hue at the lightness the catalogue uses for a dark body's dot and label (the gray these asteroids had). */
 const CATALOGUE_GRAY = 0x9a / 255;
@@ -107,36 +112,37 @@ for (const body of records(inputs.bodies)) {
   const qualification = 'Whole-disc color from a published reflectance spectrum and V geometric albedo, painted uniformly; the surface itself is unresolved.';
   const brightness = `scaled to the ${percent(albedoValue)} geometric albedo JPL lists`;
 
-  // 2. The recipe: the gray shape view, or a sphere's no-data grid, becomes a shape view that names the record.
+  // 2. The recipe: the gray shape view becomes a shape view that names the record.
   const recipePath = resolve(source, 'preparation/terrestrial.json'), recipe = await json(recipePath);
   const raster = requireRecord(recipe.raster), geometry = requireRecord(recipe.geometry);
-  const sphere = requireRecord(geometry.radialTerrain).format === 'pds-radius-table';
   const manifestPath = resolve(source, 'manifest.json'), manifest = await json(manifestPath);
   const shapeInput = records(manifest.inputs).find(input => input.path === requireRecord(geometry.radialTerrain).path);
   if (!shapeInput) throw new Error(`${id}: the manifest does not pin the rendered shape.`);
   const shapeId = requireString(shapeInput.id);
-  if (sphere) raster.observations = [];
   raster.shapeViews = [{ id: 'color', label: 'Color', consumer: 'shape',
     science: { kind: 'disc-integrated-color', source: RECORD, illuminant: ILLUMINANT, qualification } }];
   geometry.mapUrl = geometry.polesUrl = `/scenes/${id}/${id}-color-surface@2x.webp`;
+  const radial = requireRecord(geometry.radialTerrain);
+  delete radial.texelsPerFace;
+  radial.atlasTexels = requireFiniteNumber(radial.faceBudget) * FLAT_COLOR_TEXELS_PER_FACE;
   requireRecord(recipe.presentation).defaultDataset = 'color';
   await putJson(recipePath, recipe);
 
   // 3. The dataset the page offers, in place of the gray one; any other dataset stays.
-  const tidy = (text: unknown) => ungray(swap(requireString(text), [[' and standard missing-data grid', ''], [' and standard grid', ''], [' The grid marks unmapped terrain.', '']]));
+  const tidy = (text: unknown) => ungray(requireString(text));
   const contentPath = resolve(source, 'content/object.json'), content = await json(contentPath), datasets = requireRecord(content.datasets);
   // The shape's own qualification stays on the dataset: the old control's notes without the gray convention, else the shape's coverage.
   const GRAY_NOTE = 'Neutral gray (#808080 sRGB) is a shared display convention, not measured surface color or albedo.';
-  const previous = records(datasets.controls).find(control => ['shape', 'model', 'color'].includes(requireString(control.id)));
+  const previous = records(datasets.controls).find(control => ['shape', 'color'].includes(requireString(control.id)));
   const previousNotes = typeof previous?.notes === 'string' ? ungray(previous.notes.split(' One mean color for the whole disc')[0]!.replace(GRAY_NOTE, '')).trim() : '';
-  const shapeWords = sphere ? 'A sphere at the measured diameter; no shape model is published.' : previousNotes || tidy(shapeInput.coverage);
+  const shapeWords = previousNotes || tidy(shapeInput.coverage);
   datasets.defaultDataset = 'color';
   if (datasets.labels !== undefined) datasets.labels = { color: 'Color' };
   datasets.controls = [{ id: 'color', label: 'Color', qualification,
     thumbnail: `/scenes/${id}/${id}-color-thumbnail.webp`, surface: `${id}-color-surface@2x.webp`, poles: `${id}-color-surface@2x.webp`,
     source: { id: `${id}-disc-color`, path: '../manifest.json', url: requireString(spectra.url) }, falseColor: false,
     notes: `${shapeWords} One mean color for the whole disc (Gaia DR3 reflectance spectrum), ${brightness}; no terrain, albedo pattern or color variation is drawn.` },
-  ...records(datasets.controls).filter(control => !['shape', 'model', 'color'].includes(requireString(control.id)))
+  ...records(datasets.controls).filter(control => !['shape', 'color'].includes(requireString(control.id)))
     .map(control => typeof control.notes === 'string' ? { ...control, notes: ungray(control.notes) } : control)];
   const resources = records(content.resources).filter(resource => ![spectra.url, sbdb].includes(resource.href));
   resources.push({ label: requireString(spectra.short), role: 'surface', description: 'Gaia DR3 reflectance spectrum', href: requireString(spectra.url) },
@@ -144,17 +150,16 @@ for (const body of records(inputs.bodies)) {
   content.resources = resources;
   await putJson(contentPath, content);
 
-  // 4. The descriptor: the color dataset, no longer an illustration, and a catalogue color with the measured hue.
+  // 4. The descriptor: the color dataset and a catalogue color with the measured hue.
   const descriptorPath = resolve(directory, 'object.json'), descriptor = await json(descriptorPath), properties = requireRecord(descriptor.properties);
   const catalog = requireRecord(properties.catalog), surface = records(requireRecord(properties.recipe).surfaces)[0]!;
-  surface.datasets = [{ id: 'color', source: 'content', material: 'lighting' }, ...records(surface.datasets).filter(dataset => !['shape', 'model', 'color'].includes(requireString(dataset.id)))];
-  delete catalog.illustrationDatasets;
+  surface.datasets = [{ id: 'color', source: 'content', material: 'lighting' }, ...records(surface.datasets).filter(dataset => !['shape', 'color'].includes(requireString(dataset.id)))];
   catalog.color = catalogueColor(color.linear);
   await putJson(descriptorPath, descriptor);
 
-  // 5. The manifest: the record and the illuminant enter; a sphere's neutral image leaves.
+  // 5. The manifest: the record and the illuminant enter.
   const evidence = (pointer: string) => `src/objects/${id}/source/${RECORD}#/${pointer}`;
-  manifest.inputs = [...records(manifest.inputs).filter(input => !['model-surface', `${id}-disc-color`, `${id}-cie-std-illuminant-d65`].includes(requireString(input.id)))
+  manifest.inputs = [...records(manifest.inputs).filter(input => ![`${id}-disc-color`, `${id}-cie-std-illuminant-d65`].includes(requireString(input.id)))
     .map(input => ({ ...input, credit: tidy(input.credit), ...(input.coverage === undefined ? {} : { coverage: tidy(input.coverage) }) })),
   { id: `${id}-disc-color`, path: RECORD, origin: requireString(spectra.url),
     credit: `${requireString(spectra.short)}, A&A 674, A35; ESA/Gaia/DPAC; albedo JPL Small-Body Database, from ${origin.short}`,
@@ -166,19 +171,19 @@ for (const body of records(inputs.bodies)) {
       { catalogueId: requireString(albedoSource.catalogueId), role: 'material', evidence: evidence('geometricAlbedo') },
       ...(origin.catalogueId ? [{ catalogueId: origin.catalogueId, role: 'material', evidence: evidence('geometricAlbedo/locator') }] : [])] } },
   { ...illuminantEntry, id: `${id}-cie-std-illuminant-d65`, consumers: ['color'] }];
+  // The record and the illuminant are inputs now: a document entry for either would declare the file twice.
+  manifest.documents = records(manifest.documents).filter(document => ![RECORD, ILLUMINANT].includes(requireString(document.path)));
   manifest.generatedIntermediates = records(manifest.generatedIntermediates).map(entry => {
     const plan = requireRecord(entry.recipe);
     return { ...entry, credit: tidy(entry.credit), recipe: { ...plan, inputs: [shapeId, `${id}-disc-color`], datasetId: 'color' } };
   });
   await putJson(manifestPath, manifest);
-  const neutral = resolve(source, 'material/neutral.png');
-  if (await readFile(neutral).then(() => true, () => false)) { changed.push(`src/objects/${id}/source/material/neutral.png`); if (!check) await rm(neutral); }
 
   // 6. Reader text. A summary has 125 characters and a detail 28 (site/build/prepare/check-preparation-inputs.mts).
   const textPath = resolve(directory, 'text.json'), text = await json(textPath);
-  const kept = Object.fromEntries(Object.entries(requireRecord(text.datasets)).filter(([key]) => !['shape', 'model', 'color'].includes(key)));
+  const kept = Object.fromEntries(Object.entries(requireRecord(text.datasets)).filter(([key]) => !['shape', 'color'].includes(key)));
   const colorText = { title: 'Whole-disc color and albedo', detail: 'Measured color',
-    summary: `${name}’s measured average color and brightness on ${sphere ? 'a sphere of its measured size' : 'its light-curve shape'}. No surface detail has been seen.` };
+    summary: `${name}’s measured average color and brightness on its light-curve shape. No surface detail has been seen.` };
   if (colorText.summary.length > 125) throw new Error(`${id}: dataset text is over its budget (${colorText.summary.length}).`);
   text.datasets = { color: colorText, ...kept };
   await putJson(textPath, text);
@@ -187,7 +192,7 @@ for (const body of records(inputs.bodies)) {
   const ledgerPath = resolve(directory, 'investigations.json'), ledger = await json(ledgerPath);
   const entries: Json[] = records(ledger.entries).filter(entry => entry.id !== 'whole-disc-color');
   entries.push({ id: 'whole-disc-color', subject: `${name} whole-disc color`, status: 'included',
-    finding: `${requireString(spectra.short)} published the mean of ${epochs} Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (${used.find(band => band[0] === 462)![1].toFixed(3)} at 462 nm, ${used.find(band => band[0] === 638)![1].toFixed(3)} at 638 nm). The ${sphere ? 'sphere' : 'shape'} is painted in that one color (${hex} in sRGB) through the shared disc-integrated-color method, ${brightness}${albedoError === null ? '' : ` (± ${percent(albedoError)})`}, from ${origin.short}. It is one mean, not a map. ${requireString(bias.finding)}`,
+    finding: `${requireString(spectra.short)} published the mean of ${epochs} Gaia epoch spectra of the unresolved disc: reflectance against the Sun in 16 bands from 374 to 1034 nm, 1 at 550 nm (${used.find(band => band[0] === 462)![1].toFixed(3)} at 462 nm, ${used.find(band => band[0] === 638)![1].toFixed(3)} at 638 nm). The shape is painted in that one color (${hex} in sRGB) through the shared disc-integrated-color method, ${brightness}${albedoError === null ? '' : ` (± ${percent(albedoError)})`}, from ${origin.short}. It is one mean, not a map. ${requireString(bias.finding)}`,
     evidence: [requireString(spectra.url), sbdb, requireString(bias.url), `https://github.com/layoutit/css.earth/blob/main/src/objects/${id}/source/${RECORD}`] });
   ledger.entries = entries;
   await putJson(ledgerPath, ledger);
@@ -202,8 +207,6 @@ for (const body of records(inputs.bodies)) {
       'The shape is painted in one measured whole-disc color at the measured brightness; no surface detail is mapped.'],
     ['neutral gray marks that gap.', 'the color is one whole-disc mean.'],
     ['the shape shows the shared neutral gray.', 'the shape shows one whole-disc color.'],
-    ['The body is drawn as a sphere with the shared grid that marks unmapped terrain. Its true shape, pole, color and albedo pattern are not published, and none is shown.',
-      'The body is drawn as a sphere in one whole-disc color. Its true shape, pole and albedo pattern are not published, and none is shown.'],
   ]);
   const withoutOurs = (part: string) => part.split('\n').filter(line => !/^- \*\*(?:Color|Brightness):/u.test(line) && !line.startsWith('- The color is one mean')).join('\n');
   // A section's bullets end before the package's link line ("[Inputs](...) · ..."), which stays last.
@@ -219,8 +222,7 @@ for (const body of records(inputs.bodies)) {
   await put(readmePath, readme);
 
   const noticePath = resolve(directory, 'NOTICE.md');
-  const notice = swap(ungray(await readFile(noticePath, 'utf8')), [['Authored approximation and missing-data grid:', 'Authored approximation:'], ['Authored approximation and standard grid:', 'Authored approximation:']])
-    .split('\n').filter(line => !line.startsWith('Whole-disc color:')).join('\n').replace(/\n+$/u, '');
+  const notice = ungray(await readFile(noticePath, 'utf8')).split('\n').filter(line => !line.startsWith('Whole-disc color:')).join('\n').replace(/\n+$/u, '');
   await put(noticePath, `${notice}\n\nWhole-disc color: ${requireString(spectra.short)}, A&A 674, A35. ${requireString(spectra.credit)} Albedo: JPL Small-Body Database, from ${origin.short}. CIE standard illuminant D65: International Commission on Illumination, CC BY-SA 4.0.\n`);
 
   console.log(`${id.padEnd(16)} ${String(number).padStart(5)}  462 nm ${used.find(band => band[0] === 462)![1].toFixed(3)}  638 nm ${used.find(band => band[0] === 638)![1].toFixed(3)}  albedo ${albedoValue}  ${hex}  catalogue ${String(catalog.color)}`);

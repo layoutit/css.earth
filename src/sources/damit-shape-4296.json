@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-4296",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 4296 · Nuwa",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "4296"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/4296/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/nuwa/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

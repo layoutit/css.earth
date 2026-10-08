@@ -88,14 +88,14 @@
       "latitudeSegments": 90,
       "longitudeSegments": 180,
       "faceBudget": 800,
-      "texelsPerFace": 16384,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",
         "targetFaces": 800,
         "maximumErrorMeters": 700,
         "regularize": true
-      }
+      },
+      "atlasTexels": 819200
     }
   },
   "celestial": {

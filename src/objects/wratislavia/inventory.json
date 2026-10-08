@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "wratislavia-color-shadow-alpha@2x.webp",
+      "bytes": 80196,
+      "sha256": "b2ab66be3816042ec5955c8df45607ded6d7ab050226fcec15f901860a8fb2f6"
+    },
+    {
+      "location": "public",
+      "filename": "wratislavia-color-shadow@2x.webp",
+      "bytes": 9912,
+      "sha256": "8c6b19ec0d0014180ef92bac64729cefa6f6f180223b1f06db51bfcea115c394"
+    },
+    {
+      "location": "public",
+      "filename": "wratislavia-color-surface-alpha@2x.webp",
+      "bytes": 77790,
+      "sha256": "18afc90dea71d91529289f3f0efdb37967a9714f12b168340fa2d4a1b27d306e"
+    },
+    {
+      "location": "public",
+      "filename": "wratislavia-color-surface@2x.webp",
+      "bytes": 8140,
+      "sha256": "0fa87b16ac22f05c73cc4b74fb96e672f66a9ab0a89768122c9ae941c9996ce6"
+    },
+    {
+      "location": "public",
+      "filename": "wratislavia-color-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "b68af2b5268c1f177a9d092feeb561a35fb63e6f8ee173be344cd34583e1601d"
+    },
+    {
+      "location": "public",
+      "filename": "wratislavia-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "location": "public",
+      "filename": "wratislavia-elevation-shadow-alpha@2x.webp",
+      "bytes": 104380,
+      "sha256": "7ed352380752da205eb2229620207295824b86b421c7283f7c94c0d9d5351668"
+    },
+    {
+      "location": "public",
+      "filename": "wratislavia-elevation-shadow@2x.webp",
+      "bytes": 33926,
+      "sha256": "11baf826580cd7886ff03d693369c7b4de4652567e0b3e096c86e657c59dd9db"
+    },
+    {
+      "location": "public",
+      "filename": "wratislavia-elevation-surface-alpha@2x.webp",
+      "bytes": 113310,
+      "sha256": "08f8187680ae12d47060d20c6a1627d4cc70217ca657604b5966bd02efe0a0bb"
+    },
+    {
+      "location": "public",
+      "filename": "wratislavia-elevation-surface@2x.webp",
+      "bytes": 44996,
+      "sha256": "1bbfe0eeced6ca56ff70dd493b780f831056a959ceabb469e252ae37e95b3309"
+    },
+    {
+      "location": "public",
+      "filename": "wratislavia-elevation-thumbnail.webp",
+      "bytes": 5366,
+      "sha256": "af9b9e3a1ad738071b6a30f49047bf4b84c4b91feba222ba1bf425dc496be26a"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 579,
+      "sha256": "e3ed9a689fd2f1d2fbd4bc7300396d6a14832a4a6dff4a231c73446cb5e77b54"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 3103,
+      "sha256": "4e291e0cff4eb243e17f18aa4d0b85acfa2f150769494c4cdd246f37fde28707"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 830,
+      "sha256": "632105d5a716a8f606171d7a4a38c2a6f7f297a351fe6e5c59e800740c8935b6"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 1670,
+      "sha256": "a057e16942f300ee64a75339a856ee372aee1e0cb5b353bde3be5c7fdb060725"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 3225,
+      "sha256": "a311a2b164b2edcf9e76c7e3a473e17ab0b0f98f8051e64939ef915b1a62ad57"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 197,
+      "sha256": "e59fa149c7436a747634c9c123b38a9a14c9891a2299d55115da9e5708a92144"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 458,
+      "sha256": "6910e1d4a713158a1ea9b8a05f9c00ea1017f0fbad51738b81defc0669d37f38"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 4028,
+      "sha256": "0705eb60ec33e067965bf1603a7ad569327069c6b1bba65dd0fa82a3c3908967"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 284348,
+      "sha256": "68f68ed07b86e1e3d83f636f7e22bb0a73f2cec942a393eb99f2b8fa181795ee"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 321831,
+      "sha256": "a17ff4bf3193083ccf8744de76209d8250f54c007d21c1d984edabad53566742"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1186,
+      "sha256": "a1914f15a2892fce056d060e2f24a20b50cdc59115ea464f34fb078e0783878d"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 690,
+      "sha256": "bc705ae28a0abfbaba36ac4350f1a30af3d1427c8770c5c6875270efb5e81339"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 3234,
+      "sha256": "a492750781f25792637ab1d1d32a4f7e786060b42612a22f4c16e3efd4ee4406"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1747,
+      "sha256": "c76b84fb711f3116187ecf287049bebbec02c7f634a50e49e3c073b917d58ebc"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1186,
+      "sha256": "baa888c494eb380e45f622aac425c60c625e5fdcda5e1b5dac05cf654cc9519a"
+    }
+  ]
+}

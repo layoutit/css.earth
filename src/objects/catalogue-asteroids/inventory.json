@@ -4,14 +4,14 @@
     {
       "location": "prepared",
       "filename": "dots.bin",
-      "bytes": 149217,
-      "sha256": "1f2e7a164b5fed29731a77488d13a96050b897552b94adcfb188614bb5fa5bfd"
+      "bytes": 149239,
+      "sha256": "113797bbfdf08db5205ed0b0031ec559f57003aa7b33b7c7ee964cb1a7217f80"
     },
     {
       "location": "prepared",
       "filename": "members.json",
-      "bytes": 39320,
-      "sha256": "daa7e03c409a27700a9d7c18e2407cde236833a564f6c691d11d94a35e3c7cef"
+      "bytes": 40198,
+      "sha256": "eb10c5491feaca62616aa1231df385b4889ed6e6fdc13ea0b20d7e7b7f94e1d9"
     },
     {
       "location": "prepared",
@@ -408,6 +408,12 @@
       "filename": "orbits/laetitia.bin",
       "bytes": 2264,
       "sha256": "66f58e7a6fd11a125bfcecc995b48bf33e69140fcccc7b543f844e61f707f4ce"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/lomia.bin",
+      "bytes": 2260,
+      "sha256": "d0e7f1340f550fc899f5dec5713482aa2e84c615f8d57924c296a0f7b295fe6e"
     },
     {
       "location": "prepared",

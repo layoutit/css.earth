@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-1014",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 1014 · Arethusa",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "1014"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/1014/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/arethusa/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

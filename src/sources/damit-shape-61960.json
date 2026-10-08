@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-61960",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 61960 · Semele",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "61960"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/61960/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/semele/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

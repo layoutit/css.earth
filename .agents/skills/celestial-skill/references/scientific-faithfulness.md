@@ -231,12 +231,11 @@ populations kept theirs. Models that add resolved images or occultations to the 
 curves, and shapes from radar or spacecraft, are not affected.
 
 A measured color is something more to visit. An asteroid at least 100 km across in the JPL
-Small-Body Database, with a Gaia DR3 reflectance spectrum, a measured albedo and a measured
-rotation period, has a page that shows it in that color at that brightness: on its light-curve
-shape when DAMIT holds one, on a sphere at its measured diameter when no shape is published.
-On 2026-10-08 this brought back 54 of the retired pages in color and added 98 asteroids
-([asteroid colors](../../../../packages/bake/authoring/asteroid-colors/author.mts),
-[asteroid spheres](../../../../packages/bake/authoring/asteroid-spheres/author.mts)).
+Small-Body Database, with a light-curve shape in DAMIT, a Gaia DR3 reflectance spectrum and a
+measured albedo, has a page that shows the shape in that color at that brightness. On 2026-10-08
+this brought back 54 of the retired pages in color and added 44 asteroids
+([asteroid colors](../../../../packages/bake/authoring/asteroid-colors/author.mts)). An asteroid
+with no published shape gets no page: it is never drawn as a sphere.
 
 A nebula's photograph follows the same rule. A page turns the camera around its subject, so
 the picture needs a depth someone measured: walls from spectra, a published surface or density

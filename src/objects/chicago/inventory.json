@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "chicago-color-shadow-alpha@2x.webp",
+      "bytes": 69432,
+      "sha256": "03e62fd9594d28d798d0a9f97d3898a8b1917fdf4358fd3684a70730ba929353"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-color-shadow@2x.webp",
+      "bytes": 8194,
+      "sha256": "cd0bcf8805c911caca9076f799e3bad9eb34e0930c3f03799ead717ff4bff935"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-color-surface-alpha@2x.webp",
+      "bytes": 68558,
+      "sha256": "41a9e90c59547cfb7bbf4d3755dda1d13bdb728a09c49b3d70792217c98af594"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-color-surface@2x.webp",
+      "bytes": 7628,
+      "sha256": "5ce78a7bf2dfb966a7d6ab18fc5ce1991b870521e2826b6acffc99d6a7132cd5"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-color-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "1e9676c743d874bce4d0a9866c988dbb832879e8534e3b8b4389f7e965418bc2"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-elevation-shadow-alpha@2x.webp",
+      "bytes": 90108,
+      "sha256": "edaa1566fcb27a1a4f1df66bd5c0196308d09d41b4b3731d9701f72fc52a65c8"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-elevation-shadow@2x.webp",
+      "bytes": 29482,
+      "sha256": "447a9220609dcb0e3840766c020722eb87bc1a791788e70e14fb26602984c747"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-elevation-surface-alpha@2x.webp",
+      "bytes": 102414,
+      "sha256": "c4899d46724034cdb35907f44bff8b67aa2a37e43a3bc0216e8776f0b58172de"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-elevation-surface@2x.webp",
+      "bytes": 43344,
+      "sha256": "de830c21cd806532eb362d978f2c995058e2eedff3c38c1e4dbe12c53fb5d56c"
+    },
+    {
+      "location": "public",
+      "filename": "chicago-elevation-thumbnail.webp",
+      "bytes": 5448,
+      "sha256": "4121d7427f9c2a59a71efe67b6eb4bdb88fa6c1966fb775b3c34c38e7e1408d7"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 515,
+      "sha256": "3d5c97432602b48cbd9d15fff236aa62ae045e08384bc4facff5b022fe7a363d"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 3652,
+      "sha256": "7cc9037172647e131940c3d04db3171a1c7c14b0857cd4d29dd333f453f00573"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 808,
+      "sha256": "5b283a2a1c2b3a6c8c8f5d7a64686a068034fa05a4f86ab1de640e288912db8d"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 1572,
+      "sha256": "3ec71bf738da5e2d736aa4e0d2a4fe17872060f2cf71b59308aef4167b77ba14"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 3124,
+      "sha256": "18f896cf7c67ed5e0645094614046a0d60763aecd212f85faa156b4d14175622"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 197,
+      "sha256": "e59fa149c7436a747634c9c123b38a9a14c9891a2299d55115da9e5708a92144"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 482,
+      "sha256": "aa2e5b38cf425a229df4f05ac897756f84fa3b37ff784d4a1d503b1728837bb7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 3870,
+      "sha256": "48dffe822431241b0981faeb825825729f9930b28e46aa6e1688e0614c082e32"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 222103,
+      "sha256": "ef1525377c4082822a0fe8dac642d4c1010e004bf9b45aa8af7383a593d7ad81"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 249302,
+      "sha256": "050eedbec4967af809aa1235459cb516cc0ea919fe33e1d8364f12708c0cc2bd"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1178,
+      "sha256": "6c9d3c5e96af5ea4e4177146e0d3a836e0e1365d2f765fc036843000ec946e88"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 688,
+      "sha256": "b47d77c3f59c5419936020c68a0ddc779d8f829c2163a682043a7b750743587e"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 3129,
+      "sha256": "11f0d53568db92a3ef26fce5b6119ee9f3ef2de2873c9b1c39d4f387411747eb"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1739,
+      "sha256": "230493d95c3259f80d6ba1c2b80848c9d1119fb7a08647f3384afe93e6a32515"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1215,
+      "sha256": "5a825e78dae6de4871e80b1ecbc1b9e368917728f5bbb3aa8c2e165879f4c3f0"
+    }
+  ]
+}

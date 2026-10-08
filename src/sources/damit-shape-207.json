@@ -1,0 +1,27 @@
+{
+  "id": "damit-shape-207",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "DAMIT shape 207 · Circe",
+  "identifiers": [
+    {
+      "type": "DAMIT stored file",
+      "value": "207"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/207/shape.txt",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/circe/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

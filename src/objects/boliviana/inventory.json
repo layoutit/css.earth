@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "boliviana-color-shadow-alpha@2x.webp",
+      "bytes": 70118,
+      "sha256": "39190c88b969ae00741140867f9f513b2e077f8b339c7b4ee479f14994fa33f8"
+    },
+    {
+      "location": "public",
+      "filename": "boliviana-color-shadow@2x.webp",
+      "bytes": 7688,
+      "sha256": "7f7bffa037c8ed88ec1f70a55bc6bd748ceab585cb8e298fc2e486bc3d97beb3"
+    },
+    {
+      "location": "public",
+      "filename": "boliviana-color-surface-alpha@2x.webp",
+      "bytes": 68278,
+      "sha256": "6f8b578df84fa4f1e4d1ab16e9ac45b78dfc54db55ff14d0856dc1fa5c8e1171"
+    },
+    {
+      "location": "public",
+      "filename": "boliviana-color-surface@2x.webp",
+      "bytes": 6158,
+      "sha256": "31d0b1a956cd59caccd5fad13e67557d64258249de247e2832e70b3c0e5a78ff"
+    },
+    {
+      "location": "public",
+      "filename": "boliviana-color-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "b079ba4e13c213b80c90b12156bba493689a321a064b868d3786d48eca28fe83"
+    },
+    {
+      "location": "public",
+      "filename": "boliviana-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "location": "public",
+      "filename": "boliviana-elevation-shadow-alpha@2x.webp",
+      "bytes": 89220,
+      "sha256": "dbafa1cd49113b7ffdb8bf5cb8f6f6bbc0edaa42d2c0001de3b4069c45fb6656"
+    },
+    {
+      "location": "public",
+      "filename": "boliviana-elevation-shadow@2x.webp",
+      "bytes": 26164,
+      "sha256": "46fda1035d5c1a91877faa4e80ce872e7f741dfd909a34e5edd1832d5cadd07c"
+    },
+    {
+      "location": "public",
+      "filename": "boliviana-elevation-surface-alpha@2x.webp",
+      "bytes": 98352,
+      "sha256": "f7e72e5a8540f23e309dd6206f4518ddb8253248ea9a03f8bd114fa2b6996053"
+    },
+    {
+      "location": "public",
+      "filename": "boliviana-elevation-surface@2x.webp",
+      "bytes": 38368,
+      "sha256": "f95100809393365aceb9ae89b028dc6b85ac5feafda2e8ea92ecd1bce88a7d98"
+    },
+    {
+      "location": "public",
+      "filename": "boliviana-elevation-thumbnail.webp",
+      "bytes": 5558,
+      "sha256": "cbd429c621665ac3edf1b55700b90bd2f6ece8b73bea82c867f52fba33debffd"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 547,
+      "sha256": "32f8cd73790b6580f874650eafe61c4a3194647808464077221b3eae821b466d"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 3674,
+      "sha256": "5259f246b4a47edf97076eb112bacd9a96cb3cac8aad84e47c5f20920ffe98f2"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 820,
+      "sha256": "659e3c1ab335f9f7247be520d8737062d592fd7a141bd1f04a836021c7f30ea5"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 1622,
+      "sha256": "9301c2a86102d6a724e750cc9431dcdf6bcd231dbb475ab6ac9df8c3e05b3214"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 3182,
+      "sha256": "eb0850ff3dbf972396c70b9402d7cc23671ecd75c5063a76ec3a76d15a026e8b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 197,
+      "sha256": "e59fa149c7436a747634c9c123b38a9a14c9891a2299d55115da9e5708a92144"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 458,
+      "sha256": "eec85989ffa2d94c1884e63d603265ff840c4c6b62825d9d9000fb821b2895a5"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 4130,
+      "sha256": "8a96d4a2e56894318f33ee0c3c5ca41cecedbed19b4d220d966468278da83633"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 220129,
+      "sha256": "24b3f1132d6b016213f0890d0f09a92c8d24102bb08af19fa4ab8506d2d1a98a"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 246572,
+      "sha256": "29ef8c919485fa3293ab8732c8ac5d344159dff9a32677d5913eb1324513d194"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1182,
+      "sha256": "73cb48453dd2030ac0ba12d083d654bc7937a8df56829a3e55ed4e91031c7a74"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 689,
+      "sha256": "28dd2e5604c34f8095d60bf69d85961a29b6ebf050ec9ef4bdb78a9b4d208f6e"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 3189,
+      "sha256": "6398a4d20fef063671282679bd96507634f96cb2376fe7f34b22db6d70dfc175"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1740,
+      "sha256": "cd84df9443ac4502008aa1f90061296394c37757d9f0da7d8080f1ff5a7766ba"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1223,
+      "sha256": "40d4d95d47143ff4e7b232615f04a51a7297a2ca11a7dfa146a73433cde5b4d3"
+    }
+  ]
+}
