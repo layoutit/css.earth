@@ -10,11 +10,10 @@ import { focusedCameraProjection } from '@cssearth/bake/objects/scene';
 const prepared = (path: string): unknown => JSON.parse(readFileSync(new URL(`src/objects/${path}`, pathToFileURL(findProjectRoot(import.meta.url) + '/')), 'utf8'));
 
 test("an object camera without its own projection shares the sky's focal length", () => {
-  const sky = prepared('earth/prepared/sky.json') as PreparedCubicSkyPlan;
+  const runtime = prepared('earth/prepared/runtime.json') as { sky: PreparedCubicSkyPlan; camera: { projection: unknown } }, sky = runtime.sky;
   const projection = focusedCameraProjection(sky);
   assert.equal(projection.cssPerspective, sky.projection?.cssPerspective);
   assert.equal(projection.focalLengthOverViewportWidth, sky.projection?.focalLengthOverViewportWidth);
-  const runtime = prepared('earth/prepared/runtime.json') as { camera: { projection: unknown } };
   assert.deepEqual(runtime.camera.projection, projection, "Earth's prepared camera is this tool's output");
 });
 

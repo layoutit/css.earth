@@ -174,9 +174,10 @@ test('epoch refresh restores a compiled surface before updating its physical fra
   assert.deepEqual(actual.definition.assets, definition.assets);
 });
 
-test('published scene and standalone sky/light documents follow the runtime after a position refresh', async () => {
+test('a delivered scene\'s sky and light follow the runtime after a position refresh', async () => {
   let embeddedSkyCopies = 0, embeddedSunCopies = 0;
-  for (const id of ['jupiter', 'saturn', 'moon', 'pluto', 'triton', 'mimas', 'phobos']) {
+  // The bodies whose scene stays delivered (packages/objects/src/node/prepared-delivery.ts); nothing else repeats the runtime's sky or Sun.
+  for (const id of ['mimas', 'phobos', 'eros', 'vesta']) {
     const base = new URL(`../../../src/objects/${id}/prepared/`, import.meta.url);
     const read = async (name: string) => requireRecord(JSON.parse(await readFile(new URL(name, base), 'utf8')));
     const runtime = await read('runtime.json'), scene = await read('scene.json');
@@ -185,14 +186,12 @@ test('published scene and standalone sky/light documents follow the runtime afte
       embeddedSkyCopies++;
       assert.deepEqual(requireRecord(scene.sky).sceneRegistration, sky.sceneRegistration, `${id}: scene sky`);
     }
-    assert.deepEqual((await read('sky.json')).sceneRegistration, sky.sceneRegistration, `${id}: standalone sky`);
     for (const key of ['localDirection', 'referenceViewDirection']) {
       if (scene.sun !== undefined) {
         embeddedSunCopies++;
         assert.deepEqual(requireRecord(scene.sun)[key], sun[key], `${id}: scene ${key}`);
       }
-      assert.deepEqual((await read('sun.json'))[key], sun[key], `${id}: standalone ${key}`);
     }
   }
-  assert.ok(embeddedSkyCopies >= 2 && embeddedSunCopies >= 4, 'exercise both embedded documents and standalone-only lanes');
+  assert.ok(embeddedSkyCopies >= 2 && embeddedSunCopies >= 4, 'exercise the embedded documents');
 });

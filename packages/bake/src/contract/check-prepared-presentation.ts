@@ -11,7 +11,7 @@ import type { Node } from 'estree';
 import { requirePreparedPresentation} from "../presentation/index.ts";
 
 import { requireObjectRuntimeDefinition } from "./object-runtime-contract.ts";
-import { requireAuthoredWorldFrame } from '../sources/index.ts';
+import { optionalText, requireAuthoredWorldFrame } from '../sources/index.ts';
 
 import { nodeName, staticObjectProperties } from '../runtime-source/index.ts';
 import type { RuntimeSourceReader } from '../runtime-source/index.ts';
@@ -145,7 +145,8 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
   if (reference.url !== 'prepared/object.json') throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
   const runtimePath = resolve(preparedDirectory, 'runtime.json'), payloadPath = runtimePath;
   const runtime = requireObjectRuntimeDefinition(JSON.parse(await readText(runtimePath)), { objectId });
-  const scene: unknown = JSON.parse(await readText(resolve(preparedDirectory, 'scene.json')));
+  // A restored sphere holds no scene (a working record, packages/objects/src/node/prepared-delivery.ts): its frame is the descriptor's.
+  const sceneText = await optionalText(readText, resolve(preparedDirectory, 'scene.json')), scene: unknown = sceneText === null ? {} : JSON.parse(sceneText);
   await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText });
   requireObjectRuntimeDefinition(runtime, { objectId });
   return { runtime, payloadPath, runtimePath };

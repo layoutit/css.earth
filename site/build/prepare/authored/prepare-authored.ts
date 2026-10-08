@@ -407,7 +407,9 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         .prepareGiantLayers({ sourceDirectory, publicDirectory, config: ringsSource.value, write: true })
     : null;
   const celestial = reuseImages
-    ? { sky: validatePreparedCubicSky(await publishedJson('sky')), sun: readPublishedSun(await publishedJson('sun')) } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
+    // The published runtime carries the sky and the Sun; sky.json and sun.json are this bake's working copies of them
+    // (packages/objects/src/node/prepared-delivery.ts) and a restored checkout has neither.
+    ? { sky: validatePreparedCubicSky(publishedFeatures!.runtime.sky), sun: readPublishedSun(publishedFeatures!.runtime.sun) } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
     : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, directionalSun: litBySun(descriptor, required(sources, 'presentation').value),
       solarGeometry: await solarGeometry() });
   const geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);

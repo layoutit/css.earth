@@ -13,9 +13,11 @@ import {requireRecord,requireString} from '@cssearth/core';
 
 // This small prepared carrier is independent of the focus helper's frame math.
 // No body raster preparation, browser, or complete runtime document is needed.
-const raw = requireRecord(JSON.parse(await readFile(new URL('../../../../../../src/objects/europa/prepared/scene.json', import.meta.url), 'utf8')), 'Europa scene');
+const raw = requireRecord(JSON.parse(await readFile(new URL('../../../../../../src/objects/europa/prepared/runtime.json', import.meta.url), 'utf8')), 'Europa runtime');
 const camera = raw.camera; requireCamera(camera);
-const scene = {camera, systemTransform:requireString(raw.systemTransform, 'Europa transform')};
+// The runtime's system carrier holds the transform the scene stated.
+const carrier = (requireRecord(raw.tree, 'Europa tree').nodes as {className?:string;style?:string}[]).find(node => node.className?.split(' ').includes('europa-system'));
+const scene = {camera, systemTransform:requireString(carrier?.style, 'Europa transform').replace(/^transform:/u, '')};
 const focus = {longitudeDegrees:142, latitudeDegrees:-43.7, zoom:4};
 const tree:PreparedTree = {nodes:[
   {parent:-1,tag:'div',className:'polycss-camera',style:'',properties:[],attributes:{}},

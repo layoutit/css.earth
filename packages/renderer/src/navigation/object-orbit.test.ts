@@ -3,7 +3,9 @@ import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { getEventListeners } from 'node:events';
-import scene from '../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
+import runtime from '../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
+/** Mercury's prepared camera, as its page reads it. */
+const scene = { camera: runtime.camera };
 import { createRetainedCubicSkyOrbit } from './object-orbit.js';
 import { createPerspectiveDolly } from './camera/perspective-dolly.js';
 import { presentWorldCamera } from './camera/world-camera.js';

@@ -264,7 +264,8 @@ if (invoked) {
   if (!directory || process.argv.length !== 3) throw new TypeError('Usage: prepare-world-navigation <object-directory>');
   const objectDirectory = resolve(directory), outputDirectory = resolve(objectDirectory, 'prepared');
   const definition = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true });
-  const scene = JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8'));
+  // A restored sphere holds no scene (a working record, packages/objects/src/node/prepared-delivery.ts): its frame goes to the runtime alone.
+  const scene = await readFile(resolve(outputDirectory, 'scene.json'), 'utf8').then(text => JSON.parse(text), () => undefined);
   const result = await prepareWorldNavigationDefinition({ objectDirectory, definition });
   await writeWorldNavigationArtifacts(outputDirectory, result, scene);
   const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = readObjectDescriptorRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));

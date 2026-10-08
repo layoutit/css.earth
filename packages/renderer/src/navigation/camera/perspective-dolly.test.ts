@@ -6,7 +6,9 @@ import type { PerspectiveDolly } from './perspective-dolly.js';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { PositionM } from '@cssearth/engine';
 import { createPerspectiveDolly, levelOfDetailFor } from './perspective-dolly.js';
-import scene from '../../../../../src/objects/mercury/prepared/scene.json' with { type: 'json' };
+import runtime from '../../../../../src/objects/mercury/prepared/runtime.json' with { type: 'json' };
+/** Mercury's prepared camera, as its page reads it. */
+const scene = { camera: runtime.camera };
 
 // Restore through the public camera boundary; the presenter cannot mutate a body centre.
 function place(dolly: PerspectiveDolly, bodyCenterUnits: PositionM) {

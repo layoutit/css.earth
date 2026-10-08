@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { readFile, readdir, rename, rm, lstat, unlink, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { promisify } from "node:util";
-import { deliveredPreparedFiles, isWorkingPreparedFile } from './prepared-delivery.js';
+import { deliveredPreparedFiles, isWorkingPreparedFile, retainsPreparedScene } from './prepared-delivery.js';
 
 /**
  * One inventory per object, `src/objects/<id>/inventory.json`: every baked file the object ships that git does not
@@ -189,8 +189,14 @@ export async function inventoryPublicAssets({ objectId, objectDirectory, prepare
 
 /** Every delivered file under an object's `prepared/`: what the inventory publishes and `setup:assets` restores. The
  * delivery ledger decides it (prepared-delivery.ts): working records are left out, and an undeclared record is refused. */
-export async function bakedPreparedFiles(preparedRoot: string, objectId: string): Promise<string[]> {
-  return deliveredPreparedFiles(await runtimeFiles(preparedRoot, objectId, true), objectId);
+export async function bakedPreparedFiles(preparedRoot: string, objectId: string, objectDirectory = resolve(preparedRoot, '..')): Promise<string[]> {
+  return deliveredPreparedFiles(await runtimeFiles(preparedRoot, objectId, true), objectId, await deliveryContext(objectDirectory));
+}
+
+/** What the object's own descriptor says about its delivery; a directory without one (a fixture, a stage) retains nothing. */
+async function deliveryContext(objectDirectory: string) {
+  const descriptor: unknown = await readFile(resolve(objectDirectory, 'object.json'), 'utf8').then(text => JSON.parse(text) as unknown, () => null);
+  return { retainsScene: retainsPreparedScene(descriptor) };
 }
 
 /** Re-inventory part of an object's `prepared/`: the rows `owns` selects are replaced by the baked files it selects, and
@@ -198,7 +204,7 @@ export async function bakedPreparedFiles(preparedRoot: string, objectId: string)
  * writes into many packages (the world's members, places and system views). */
 export async function inventoryPreparedSubset({ objectId, objectDirectory, owns }: { objectId: string; objectDirectory: string; owns(filename: string): boolean }) {
   const preparedRoot = resolve(objectDirectory, 'prepared');
-  const baked = await bakedPreparedFiles(preparedRoot, objectId).catch((error: unknown) => {
+  const baked = await bakedPreparedFiles(preparedRoot, objectId, objectDirectory).catch((error: unknown) => {
     if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') return [] as string[];
     throw error;
   });
@@ -214,7 +220,7 @@ export async function inventoryPreparedAssets({ objectId, objectDirectory, prepa
   gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>>;
 }) {
   const excluded = new Set(exclude);
-  const names = [...(filenames ?? (await bakedPreparedFiles(preparedRoot, objectId)).filter(name => !excluded.has(name)))]
+  const names = [...(filenames ?? (await bakedPreparedFiles(preparedRoot, objectId, objectDirectory)).filter(name => !excluded.has(name)))]
     .sort((left, right) => left.localeCompare(right));
   for (const name of names) if (!safeAssetPath('prepared', name)) throw new TypeError(`Object ${objectId} has an unsafe prepared asset path: ${name}.`);
   if (new Set(names).size !== names.length) throw new TypeError(`Object ${objectId} repeats a prepared asset path.`);

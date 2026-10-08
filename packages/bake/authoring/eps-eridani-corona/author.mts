@@ -32,7 +32,8 @@ import { NATIVE, resample } from './simulation.mts';
 const OBJECT_ID = 'eps-eridani-corona', HOST_ID = 'eps-eridani';
 const packageBase = `src/objects/${OBJECT_ID}/source`;
 const repository = checkoutProjectRoot(import.meta.url), root = resolve(repository, packageBase);
-const starScene = resolve(repository, `src/objects/${HOST_ID}/prepared/scene.json`);
+/** The host's tracked descriptor: it carries the world frame its prepared scene had. */
+const starObject = resolve(repository, `src/objects/${HOST_ID}/object.json`);
 /** The deposit's files stay out of git as every volume's downloads do; the manifest names them by path and origin. */
 export const DOWNLOADS_BASE = '.local/eps-eridani-corona';
 
@@ -146,7 +147,7 @@ const sci = (value: number) => { const exponent = Math.floor(Math.log10(value));
 const percent = (share: number) => `${(100 * share).toFixed(0)}%`;
 
 export async function author() {
-  const scene = JSON.parse(await readFile(starScene, 'utf8')) as { worldFrame: { originM: [number, number, number]; bodyRadiusM: number } };
+  const scene = (JSON.parse(await readFile(starObject, 'utf8')) as { properties: { worldFrame: { originM: [number, number, number]; bodyRadiusM: number } } }).properties;
   const origin = scene.worldFrame.originM, radiusM = scene.worldFrame.bodyRadiusM, distanceM = Math.hypot(...origin), distancePc = distanceM / 3.085677581491367e16;
   const raDeg = (Math.atan2(origin[1], origin[0]) * 180 / Math.PI + 360) % 360, decDeg = Math.asin(origin[2] / distanceM) * 180 / Math.PI;
   const radiusArcsec = radiusM / distanceM * 206264.80624709636;
