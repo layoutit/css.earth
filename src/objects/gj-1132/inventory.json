@@ -4,14 +4,44 @@
     {
       "location": "public",
       "filename": "gj-1132-arrival.webp",
-      "bytes": 30274,
-      "sha256": "66a27757b0aa9182b121e6e8ba309c20a63df964095b38e290198fae2c356522"
+      "bytes": 29848,
+      "sha256": "d75414951d8b28b22116583e4945219307176c60b42cc40c6c4cd6672adecced"
     },
     {
       "location": "public",
       "filename": "gj-1132-billboard.webp",
-      "bytes": 5480,
-      "sha256": "80515964c1fa61fa15f620c76ecb3626571e56e17fe745e06b373e995c29a95e"
+      "bytes": 5244,
+      "sha256": "c7665d73748d6480fd39128773e2e86f9dcb4620b87a0dd4b9c35c8d5057b251"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-dataset-brightness-season-2014.webp",
+      "bytes": 164,
+      "sha256": "e23df2d3779239949e38f6fd76478cff09507fbfdc4c63f1a0cd3c7d18d0aa41"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-dataset-brightness-season-2015.webp",
+      "bytes": 114,
+      "sha256": "7135051a989482227ac2de7aba0786f1454dd9ec7a06a4ed40f932866f844f87"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-dataset-brightness-season-2016.webp",
+      "bytes": 152,
+      "sha256": "68bcd05956d4ed07bd31fe16df8755c64bae55a363d3577eac6113e89c5ca4ee"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-dataset-brightness-season-2017.webp",
+      "bytes": 96,
+      "sha256": "51cba5151a1d612b9739c173219e027f67091318fc7995081e2ee2fcd7de2e5f"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-dataset-color-brightness.webp",
+      "bytes": 156,
+      "sha256": "77cb5eddd33526d7ae698d5e687044079829f1eb7b530fa43ece7408b12da298"
     },
     {
       "location": "public",
@@ -21,15 +51,81 @@
     },
     {
       "location": "public",
+      "filename": "gj-1132-limb-color-brightness@2x.webp",
+      "bytes": 112586,
+      "sha256": "431ea1a2fe9afd44958b3ae1316dc5e2077fa95b823a2a630962295b1cbd83f4"
+    },
+    {
+      "location": "public",
       "filename": "gj-1132-limb-color@2x.webp",
       "bytes": 92686,
       "sha256": "c98cd0e298bb3fdd02b1e961be1593449f9ad3e1921268a7d696264c94a4d0c2"
     },
     {
       "location": "public",
+      "filename": "gj-1132-poles-brightness-season-2014@2x.webp",
+      "bytes": 19376,
+      "sha256": "17425f040323eeec03ad5fdd27bfbef72ebbb5541f7e08c55a26d5f076926707"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-poles-brightness-season-2015@2x.webp",
+      "bytes": 10802,
+      "sha256": "17aab8b92d6b3714b043fffff8a9e7f7dfad9eb061f4b77ed2559becb5fdf2cb"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-poles-brightness-season-2016@2x.webp",
+      "bytes": 21128,
+      "sha256": "b4305ac69afb7b043a3c5de6672406c100cf493845df6376b95fefd7db4af118"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-poles-brightness-season-2017@2x.webp",
+      "bytes": 9466,
+      "sha256": "d7223d3fbb198f9ac7c327a0b54bee9bd43e75dcedde2f5ec39e2b236d7944d2"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-poles-color-brightness@2x.webp",
+      "bytes": 22572,
+      "sha256": "9a878ffca6911e6ec4c8d1a3b2da0da3b1a1d492916b2a5c61c9d90705ba7475"
+    },
+    {
+      "location": "public",
       "filename": "gj-1132-poles-color@2x.webp",
       "bytes": 1340,
       "sha256": "172ab11ca06db37b0f8d69374b780d405b0f08cb623f0903bb797855e28e7fda"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-surface-brightness-season-2014@2x.webp",
+      "bytes": 14566,
+      "sha256": "3a09b1b9d2c667e43c4466185e1e91ee335c7d733b6f7b48eee47e7d9dd3c30e"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-surface-brightness-season-2015@2x.webp",
+      "bytes": 11164,
+      "sha256": "345b81834905ce9287c27cbed27a7a310f8996eea2bc14012f514323b7792839"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-surface-brightness-season-2016@2x.webp",
+      "bytes": 13808,
+      "sha256": "f96230fcf3ace2230fc4b1aae28fe270440722036caa4a27ae1ff7d7be85a073"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-surface-brightness-season-2017@2x.webp",
+      "bytes": 9492,
+      "sha256": "a53de54e233241c9461b4a666866f9c5b747ed0061829b06b28e789f77085e05"
+    },
+    {
+      "location": "public",
+      "filename": "gj-1132-surface-color-brightness@2x.webp",
+      "bytes": 14716,
+      "sha256": "120a62e19a617a678e3567da9c84cbe8e7a9cd61c9ff4054efb06b8462cfd784"
     },
     {
       "location": "public",
@@ -40,20 +136,20 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 378,
-      "sha256": "e5736528d0e05f459fc1e0a91d403ec935843a249fdf17f4de6763aef048083b"
+      "bytes": 389,
+      "sha256": "fade5d1468fa5bab70f3e63a609a13b0784f9f0767bc5a64cb4ddaa6e903727d"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1854,
-      "sha256": "7c1250eaa996ed657a35e10f627396a1199be737310ba68cdc78adaf4e68346b"
+      "bytes": 2872,
+      "sha256": "a212e1625e713102818cb10e5a2b5499537445b7325b905db05768ce1fec73b3"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 722,
-      "sha256": "55c2f5c3d7e12ec2f22edfa0f9ade7501e82dbedd05d080cada862e38c9b4fb6"
+      "bytes": 660,
+      "sha256": "02cf68d0c07989e407ef9e9941e69c7438058765dbb3b341b627b78edead2ba6"
     },
     {
       "location": "prepared",
@@ -64,20 +160,50 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 364,
-      "sha256": "792de7f38ed330ea3a432e1fb8ba6aa33b470e9505b932778a0864e09ce31f16"
+      "bytes": 6905,
+      "sha256": "02cb0b1d52c94856c3998f8e46c145c0d5b118782a783498c2ec33ee9e38545a"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1046,
-      "sha256": "4e510b25e39b741d87e8fe47fc059a44778642dee5c7ba0c7fbbe196c8099e17"
+      "bytes": 10670,
+      "sha256": "cd7dd42438378716f7a7e49263899829e694b08982baed4ee02fadac4e38212f"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+      "bytes": 699,
+      "sha256": "6eb64aa58adeb51ad4043027c010ab06b65bc50e2096308abe0449f487d0ee4d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2014.webp",
+      "bytes": 1152,
+      "sha256": "725f46b5c580485c482ca918b6d587c76253f13a1f935647364e80f3f1dd1023"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2015.webp",
+      "bytes": 764,
+      "sha256": "45ae23c6c18b6b6f05224388debe2e4cc660f9cacf41eb78faaeabd64e1aeb10"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2016.webp",
+      "bytes": 1154,
+      "sha256": "2d93c67212929f6bc7f43baa78e88744deefba281aa95a7c1a5782b51910947c"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2017.webp",
+      "bytes": 676,
+      "sha256": "f7da1cad46940f2c288b4718415a9e5a04001a817265fae99009a5922b579a63"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 988,
+      "sha256": "69896bc9be7e6b365b80a53fc4d480ead127bbb5793d4eab80f32e88f8176fac"
     },
     {
       "location": "prepared",
@@ -88,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 249469,
-      "sha256": "e296da482d49c2b2bfa0e40e34c59e77e25f3083232c6e6a7a1614e66eb8df7e"
+      "bytes": 262039,
+      "sha256": "acaee869bdc5efee60178113b2797c2d992f11746650598af572efcc93fdd192"
     },
     {
       "location": "prepared",
@@ -112,8 +238,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1655,
-      "sha256": "2c1b90f4f2869a64b67b0db403f81cfb98850d6f7a9be8a65efbb500d71e420e"
+      "bytes": 2775,
+      "sha256": "af659b840756ee2d253e537fd59dd4163cefc83d33fdf35d4e52f72fb56c57a5"
     },
     {
       "location": "prepared",

@@ -4,14 +4,44 @@
     {
       "location": "public",
       "filename": "proxima-centauri-arrival.webp",
-      "bytes": 31112,
-      "sha256": "e3c24ef21cce5c98138c5e7ee509f802f9efc14b4b6ecd12fbbee0c8595bc643"
+      "bytes": 28236,
+      "sha256": "f366e05aa422da5b4a4057e8c4466fbd3f0e70924588e41e7e86a5096200bf95"
     },
     {
       "location": "public",
       "filename": "proxima-centauri-billboard.webp",
-      "bytes": 5556,
-      "sha256": "77c58d6c4a39cb91dfac1293fb53467e21e12ab58e2fd9ac7bc95549cc0b23d0"
+      "bytes": 4896,
+      "sha256": "192bb737965dba12c41fff1f8c36b17b0e786677c85d62124c6fb0c3629988ac"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-dataset-brightness-season-2014.webp",
+      "bytes": 138,
+      "sha256": "8a6f29d6cc1bea220f5fd2dedb71b00269ca56e8dabdb9d3201fa2c60933101e"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-dataset-brightness-season-2015.webp",
+      "bytes": 122,
+      "sha256": "76b3fe23df61990fe52271a1a83a8f270f972299f36d3eb4f2f720a162457baa"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-dataset-brightness-season-2016.webp",
+      "bytes": 144,
+      "sha256": "00194c38d7ec6ad1a21d1b4262de7399806f782daa11f4356fb24d438340b73d"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-dataset-brightness-season-2017.webp",
+      "bytes": 84,
+      "sha256": "c4b1c2032beec8ee12afccd8e2ff84c4828aa554b5a4c3f3f65bed7e3e8a1984"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-dataset-color-brightness.webp",
+      "bytes": 138,
+      "sha256": "dfb1cc3e78dad9dc64d50c170a9f207e95a5aaefd13dc77531dda9497ff4c1da"
     },
     {
       "location": "public",
@@ -21,15 +51,81 @@
     },
     {
       "location": "public",
+      "filename": "proxima-centauri-limb-color-brightness@2x.webp",
+      "bytes": 115282,
+      "sha256": "eca4ea20d92fc9611b5c92244a33888edda53f23a3e68c1bb79bd61df3bbb60c"
+    },
+    {
+      "location": "public",
       "filename": "proxima-centauri-limb-color@2x.webp",
       "bytes": 94854,
       "sha256": "3f196cfc2e91c4c3f990d9a459857a03f5ff42de739f520b9067a52208acd2f9"
     },
     {
       "location": "public",
+      "filename": "proxima-centauri-poles-brightness-season-2014@2x.webp",
+      "bytes": 11796,
+      "sha256": "e528654dacc9e8a3a5829369d3d1d4f57616d1befb6c46dd20b8c8dee1ba9515"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-poles-brightness-season-2015@2x.webp",
+      "bytes": 18076,
+      "sha256": "4568c688575d2b86f0297fa517a7c4a31cbcee800ac12df0c14b0588283d0591"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-poles-brightness-season-2016@2x.webp",
+      "bytes": 20458,
+      "sha256": "816bbcb6385001f2210e5db1847f002c32ba6a9beacf71d6c823e06930fcd29f"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-poles-brightness-season-2017@2x.webp",
+      "bytes": 7932,
+      "sha256": "bae0183cfe77e72b546c27ba1af2d8ab1ca8ab5691c624b3b96614845057bf24"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-poles-color-brightness@2x.webp",
+      "bytes": 31630,
+      "sha256": "02c3978f65b5c0cb42241e8fee77f0c6c0faffb4cae29cb7c436701751e9cf3d"
+    },
+    {
+      "location": "public",
       "filename": "proxima-centauri-poles-color@2x.webp",
       "bytes": 1340,
       "sha256": "89c85496d94ad2e87485414b9677b1fff797839ce21a9ac5855474df1040fdfa"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-surface-brightness-season-2014@2x.webp",
+      "bytes": 12260,
+      "sha256": "b62510d37c1b82246964af3903578332195e154836ffc4c9f2d7144d9bfa6660"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-surface-brightness-season-2015@2x.webp",
+      "bytes": 13146,
+      "sha256": "af72bd5c74fc56852510d555933f3cfb426ac21a69b090e03ffe877d66f74b97"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-surface-brightness-season-2016@2x.webp",
+      "bytes": 13594,
+      "sha256": "8167b6b4dbdaa946096bf16f629798c6e76b2f83e4205a0a3d37cbd2dd1201bf"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-surface-brightness-season-2017@2x.webp",
+      "bytes": 8690,
+      "sha256": "9bc5bf0e022f05d94373d35a28eaecfb36427948afa4da0c60d43ab9c5750411"
+    },
+    {
+      "location": "public",
+      "filename": "proxima-centauri-surface-color-brightness@2x.webp",
+      "bytes": 15008,
+      "sha256": "c5b7d57b9f04bc73557a4cdd45423e98bc6cd01efb7c7e297dbdf0eb69e4e3bc"
     },
     {
       "location": "public",
@@ -40,14 +136,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 392,
-      "sha256": "79b5d14dfc08e8de39b238a05e35ec8dba99fc0803f323369ae1b2bdcab7b4e2"
+      "bytes": 403,
+      "sha256": "12ec8d203009f580d1236316c00a5aac35958309750713323f4427ededb91f38"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1824,
-      "sha256": "c40053803f0c796bde8a572e381936a8bb567f51e5644fc39459c5cb9a1a39d5"
+      "bytes": 3246,
+      "sha256": "5f9ff1d2379b2112ca171653cf6d1d6ed4e0de1aabfa511be1b9f71e1c5b2d51"
     },
     {
       "location": "prepared",
@@ -64,20 +160,50 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 382,
-      "sha256": "9bec3fd0b1c92e611766920cc4fe8962b70d50ea8e03c7cd9e9871ded2d2770d"
+      "bytes": 6997,
+      "sha256": "2062445a0feb650dbbabd1d142aa02b31105d43f8352354c711fa9d75d9a11ba"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1128,
-      "sha256": "a61f5d1fd3cc80ccf74472d83b221e0820ca2582c1e4a6755155afc02e7dbf0a"
+      "bytes": 11269,
+      "sha256": "007de2812b8762b54600d80aed3b875a6c21977322146671ffd1cf42f659123c"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+      "bytes": 699,
+      "sha256": "6eb64aa58adeb51ad4043027c010ab06b65bc50e2096308abe0449f487d0ee4d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2014.webp",
+      "bytes": 934,
+      "sha256": "08d2b2adb4a2ae53536cb50debe2fc68793abba4c935d2a9c13bfdb6c4634510"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2015.webp",
+      "bytes": 1042,
+      "sha256": "2a68924bd4d9aa0d496df3bf3afcc3d848080de5df34323ec11c3003368a2de4"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2016.webp",
+      "bytes": 1104,
+      "sha256": "6b76d590329dfd4531f9105c188a5541fcb04db412f0ab4c8dd029a1a6134aa0"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-season-2017.webp",
+      "bytes": 590,
+      "sha256": "adaadc13743a8b0fe8978b59e3f273435f802100c99981dc93c52e69c46ee2f9"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1098,
+      "sha256": "5d764c8b29344a0e2af6b33e8e162404aa4ddd9fa74a20e2e0227d000468034e"
     },
     {
       "location": "prepared",
@@ -88,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 249692,
-      "sha256": "71ee69904551b6cfd21d1b2afb49f1f0eb4c03f1ffc0b2673eb738a2a44f83ea"
+      "bytes": 262714,
+      "sha256": "642dbb35bf1ed44b694244a0b185f5e8c35486b8ec0c8412a6f3d1cf0a128cdb"
     },
     {
       "location": "prepared",
@@ -112,8 +238,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 979,
-      "sha256": "7a07b70d9e7edf8efe69318cd3d85d696676702d04ca790cd0bd98d68a8c1826"
+      "bytes": 2099,
+      "sha256": "fe7599f6985e603ea537ed7ce4a28f7fbfde7ceba260b55d95217f4479be73e6"
     },
     {
       "location": "prepared",

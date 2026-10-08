@@ -36,10 +36,30 @@
       "id": "limb-darkening",
       "subject": "Limb darkening",
       "status": "included",
-      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,667 K and log g 2.76 (u1 0.730, u2 0.071): a model, because no fit of this star's limb is used. Gravity: log g 2.76 from 2025A&A...703A.128B, the median of its 2 spectra; the 17 published values span log g 2.3 to 3.22, across which the limb law changes by at most 0.2% of the centre brightness.",
+      "finding": "The disc is dimmed toward the limb by the power law I(mu) = mu^0.231 that Martinez et al. (2021), ApJ 916, 60 fit to the star's resolved disc (CHARA/MIRC H band, 1.5-1.7 um; not a visible band).",
       "evidence": [
-        "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
-        "https://ui.adsabs.harvard.edu/abs/2025A%26A...703A.128B"
+        "https://doi.org/10.3847/1538-4357/ac06a5"
+      ]
+    },
+    {
+      "id": "surface-udkadua-mirc-2011-09",
+      "subject": "CHARA/MIRC visibilities of 2 to 24 September 2011 as a surface map",
+      "status": "included",
+      "finding": "The authors' calibrated files of 6 nights (2 September 2011: 360 squared visibilities; 6 September 2011: 392 squared visibilities; 10 September 2011: 360 squared visibilities; 14 September 2011: 864 squared visibilities; 19 September 2011: 808 squared visibilities; 24 September 2011: 200 squared visibilities) are public with their code. ROTIR at the pinned commit (HEALPix level 3, sobel2 at weight 10, 1000 iterations) fits one turning surface to all of them. The fit leaves a reduced chi-squared of 1.72 on the squared visibilities and 2.30 on the closure phases (limit 3), where a spotless star leaves 3.13 and 28.29; its spots are 2.14 times those the same fit draws on a spotless star of 2.77 mas (limit 2); and two independent halves of the data give the same spots (correlation 0.83, limit 0.5). Spotless twins of 2.69 mas and 2.80 mas do not fit on the 2.742 mas sphere (closure-phase chi-squared 7.42 and 9.40) and so do not decide the spot check. The published maps themselves are not redistributed.",
+      "evidence": [
+        "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data",
+        "https://doi.org/10.3847/1538-4357/ac06a5",
+        "https://doi.org/10.3847/1538-4357/abb670"
+      ]
+    },
+    {
+      "id": "rotation-axis",
+      "subject": "Rotation axis, period and prime meridian",
+      "status": "included",
+      "finding": "The page draws the axis the surface map is fitted with: inclination 85.63° and pole position angle 26.09° east of north, with a period of 54.2 d (Martinez et al. (2021), ApJ 916, 60, Table 4 (https://arxiv.org/abs/2107.06366)). No prime meridian is defined for the star: longitude 0 is the meridian that faced the Earth on 14 September 2011, and the star is not turned.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-4357/ac06a5",
+        "https://doi.org/10.3847/1538-4357/abb670"
       ]
     }
   ]

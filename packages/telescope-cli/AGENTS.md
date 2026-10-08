@@ -16,7 +16,7 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   `moving-targets.json`, `horizons-bodies.json`) beside that code, still read through `WORKSPACE`; JWST keeps one `jwst/programs/` root: time-series directories and imaging, cube and KLIP JSON files.
   Receipts retain their original bytes and are matched by program id, band and pinned product, never the previous directory. The
   interferometry reduction (`src/archives/interferometry/`: ALMA restores, VLTI calibration, star imaging) keeps its
-  toolchain pins (`toolchains.json`), the ROTIR Julia project (`rotir/`), star seasons (`seasons/`) and test fixtures beside
+  toolchain pins (`toolchains.json`), the ROTIR Julia project (`rotir/`), star seasons (`seasons/`: a sky-plane image of one epoch with SQUEEZE, `cssearth-star-season@1`, or one surface fitted to several nights of a turning star with ROTIR, `cssearth-star-surface-season@1`) and test fixtures beside
   it. Per-body authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps, the circumstellar
   discs) is `authoring/<archive>/` (exported by no subpath: it imports this package through its own name, never the
   other way), a leaf the architecture check enforces; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. Receipts and ledgers record program paths
@@ -132,6 +132,21 @@ is fitted to the measured points only. What this path reads into the papers and 
 in the two modules' comments: the filter of a row, the flagged rows left out, the file's unlabelled marks, the rule at a
 star's first and last quarter, the one-turn limit, and the light's swing, which is measured here.
 
+A star MEarth-South watched from the ground, and that nothing above gives a rotation, is read the same way
+(`src/archives/mearth/`): its rotation is its row in the table of Newton et al. (2018), one more entry of the
+published-verdict kind (`mearth/newton.mts`: grade A and B rows are rotators; a candidate, a non-detection and a row the
+paper flags as contaminated are not), and its light is the MEarth light curve they judged, from the project's public
+Data Release 11 (`mearth/light-curves.mts` reads the release's index and a star's text files, by the columns its notes
+list). A MEarth magnitude keeps an offset for each segment and the common mode, which the release notes say must be
+fitted with the star's variability: the paper's sinusoid model takes them off, through its authors' own code, sfit,
+pinned to a commit in a toolchain of its own (`mearth/toolchain.json`, installed under `output/toolchains/mearth`;
+`mearth/tools.py` holds the call). Do not correct a MEarth light curve any other way, and do not use the release's own
+corrected column. What this path reads into the paper and the release is in the note's list and in the two modules'
+comments: the star's longest dataset as the one light curve read, a night's median as one point, a season cut where the
+star passes behind the Sun, the one-turn limit, and the light's swing, which is twice the table's semi-amplitude. The
+northern paper (Newton et al. 2016) is not wired: its one rotator among the stars with a page is flagged for a bright
+contaminant.
+
 `verdict.mts` holds the verdict's shape and four checks against what is already published of the star (its catalogued
 period, SIMBAD's type, the fastest its radius and mass let it turn, and the share of other stars' light in its TESS
 pixels); each can only withhold a map, a paper's own verdict included. The fourth is a published limit: a TESS target
@@ -153,6 +168,7 @@ writes the records any map needs (table, manifest input, raster surface, dataset
 `route.mts` reads a spec, writes each star and bakes from a `MapRoute`; `routes.mts` lists the kinds (`MAP_ROUTES`). A kind supplies only what is its own: its column,
 units, colors, sentences, how its reduction is read and the catalogue records it is bound to. `magnetic/` is the kind for
 maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a convention page takes the maps' tilt) and
+`resolved/` the kind for a surface fitted to a star's interferometry of several nights (a spec's `resolvedMaps`; `archives/interferometry/surface-star.mts` reduces a season with ROTIR and decides whether its map is cast; a convention page takes the measured tilt and pole direction the map is fitted with, and the table's own coverage column outlines what never faced the Earth), and
 `brightness/` the kind for maps from a star's TESS, K2 or Kepler light curves (`--from-pixels`, a spec's `brightnessMaps`; what differs by
 mission is one table, `MISSIONS`, which also says whose light curve is read: the mission's own, or KEPSEISMIC; a map's records name the published method that judged it, in the method's own words, and the paper's own light curve; a map drawn on a paper's own verdict says the rotation and its period are that paper's, names the method that refused the same light, and brings no measured period; the page's axis is never
 changed, and a period measured here goes into the star's measurements record; `new-object-cli.mts --pixel-light` writes the

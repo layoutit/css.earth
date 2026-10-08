@@ -1,0 +1,31 @@
+{
+  "id": "rotir-demos-lambda-andromedae-mirc-2011",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "λ Andromedae, CHARA/MIRC calibrated visibilities of six nights of September 2011, as shipped with ROTIR.jl",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data",
+      "label": "Files at the pinned commit"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data",
+      "checkedOn": "2026-10-08",
+      "locator": "Six files 2011Sep02 to 2011Sep24 .lam_And_prepped.oifits under demos/data at the pinned commit, read by demos/lam_and_reconstruction.jl there; their numbers of squared visibilities match Parks et al. (2021), Table 1."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CHARA Array/MIRC, September 2011, as calibrated by the authors of Parks et al. (2021) and Martinez et al. (2021) and shipped with ROTIR.jl (F. Baron)",
+      "scope": "citation",
+      "evidence": "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data"
+    }
+  ],
+  "publisher": "F. Baron, ROTIR.jl (GitHub)"
+}

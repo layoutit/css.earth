@@ -2,9 +2,12 @@
 /** Reconstruct a star's surface on a sphere with the pinned ROTIR toolchain, and write the star as ROTIR projects it on the sky
  * so the result can be checked with the same tools as a sky-plane image (spotless-disc.mts).
  *
- *   node packages/telescope-cli/src/archives/interferometry/surface-reconstruction.mts <oifits> <output-directory> --diameter-mas <d>
- *     [--limb-darkening <u>] [--inclination <deg>] [--position-angle <deg>] [--regularizer tv|sobel2|none] [--weight <w>]
- *     [--level <healpix>] [--iterations <n>] [--sky-pixel-mas <p>] [--sky-pixels <n>]
+ *   node packages/telescope-cli/src/archives/interferometry/surface-reconstruction.mts <oifits>[,<oifits>...] <output-directory> --diameter-mas <d>
+ *     [--limb-darkening <u>] [--limb-law linear|power] [--inclination <deg>] [--position-angle <deg>] [--rotation-period-days <P>]
+ *     [--regularizer tv|sobel2|none] [--weight <w>] [--level <healpix>] [--iterations <n>] [--sky-pixel-mas <p>] [--sky-pixels <n>]
+ *
+ * Several files are several nights of one turning star: ROTIR places each at its own mean time and turns the star between
+ * them with the rotation period, so one surface is fitted to all of them (the way Martinez et al. 2021 mapped λ Andromedae).
  *
  * Why a sphere: a flat reconstruction may put light anywhere in its field, so a star a few beams across (Polaris, 3.1 mas at
  * 0.55 mas) has too many unknowns for its data. On a sphere of known size and limb darkening only the surface brightness of the
@@ -23,24 +26,34 @@ import { requireString } from '@cssearth/core';
 
 export interface SurfaceOptions {
   readonly diameterMas: number; readonly limbDarkening?: number; readonly inclinationDegrees?: number; readonly positionAngleDegrees?: number;
+  /** The law `limbDarkening` is the coefficient of: linear, I = 1 - u (1 - mu), or the power law I = mu^u (Hestroffer 1997). */
+  readonly limbLaw?: 'linear' | 'power';
+  /** The rotation period that turns the star between several files' nights, and whether to write how squarely each cell ever
+   * faced the observer (surface-coverage.fits). */
+  readonly rotationPeriodDays?: number; readonly coverage?: boolean; readonly threads?: number;
   readonly regularizer?: 'tv' | 'sobel2' | 'none'; readonly weight?: number; readonly level?: number; readonly iterations?: number;
   readonly skyPixelMas?: number; readonly skyPixels?: number; readonly gridColumns?: number; readonly gridRows?: number;
 }
 
 /** The key=value arguments surface.jl reads, in a fixed order so a run is reproducible from its record. */
-export function surfaceArguments(oifits: string, directory: string, options: SurfaceOptions) {
+export function surfaceArguments(oifits: string | readonly string[], directory: string, options: SurfaceOptions) {
   const { diameterMas, limbDarkening = 0, inclinationDegrees = 90, positionAngleDegrees = 0, regularizer = 'tv', weight = 0.05, level = 4, iterations = 500 } = options;
+  const files = typeof oifits === 'string' ? [oifits] : oifits;
+  if (!files.length || files.some(file => file.includes(','))) throw new TypeError('A surface reconstruction reads one or more files, none with a comma in its path.');
+  if (files.length > 1 && !(options.rotationPeriodDays! > 0)) throw new RangeError('Several nights of one star need its rotation period.');
   if (!(diameterMas > 0) || !(limbDarkening >= 0 && limbDarkening <= 1) || !Number.isInteger(level) || level < 2 || level > 7 || !Number.isInteger(iterations) || iterations < 1) {
     throw new RangeError('A surface reconstruction needs a positive diameter, a linear limb darkening between 0 and 1, a HEALPix level 2-7 and whole iterations.');
   }
   // The sky render spans twice the disc by default, at a tenth of the diameter per pixel or finer.
   const skyPixelMas = options.skyPixelMas ?? diameterMas / 64, skyPixels = options.skyPixels ?? 128;
   return [
-    `oifits=${resolve(oifits)}`, `radius_mas=${diameterMas / 2}`, 'ld_law=1', `ld1=${limbDarkening}`, `inclination=${inclinationDegrees}`, `position_angle=${positionAngleDegrees}`,
+    `oifits=${files.map(file => resolve(file)).join(',')}`, `radius_mas=${diameterMas / 2}`, `ld_law=${options.limbLaw === 'power' ? 3 : 1}`, `ld1=${limbDarkening}`, `inclination=${inclinationDegrees}`, `position_angle=${positionAngleDegrees}`,
+    ...(options.rotationPeriodDays === undefined ? [] : [`rotation_period_days=${options.rotationPeriodDays}`]),
     `regularizer=${regularizer}`, `weight=${weight}`, `level=${level}`, `maxiter=${iterations}`,
     `map=${resolve(directory, 'surface-map.fits')}`, `grid=${resolve(directory, 'surface-grid.fits')}`, `grid_columns=${options.gridColumns ?? 360}`, `grid_rows=${options.gridRows ?? 180}`,
     `sky=${resolve(directory, 'surface-sky.fits')}`, `sky_pixel_mas=${skyPixelMas}`, `sky_pixels=${skyPixels}`,
     `summary=${resolve(directory, 'surface-summary.txt')}`,
+    ...(options.coverage ? [`coverage=${resolve(directory, 'surface-coverage.fits')}`] : []),
   ];
 }
 
@@ -56,11 +69,11 @@ export function parseSurfaceSummary(text: string) {
   return values;
 }
 
-export async function reconstructSurface(oifits: string, directory: string, options: SurfaceOptions) {
+export async function reconstructSurface(oifits: string | readonly string[], directory: string, options: SurfaceOptions) {
   const root = await toolchainPath('rotir'), { entry } = await toolchainDescriptor('rotir');
   await mkdir(directory, { recursive: true });
   const script = resolve(import.meta.dirname, 'rotir/surface.jl');
-  const run = spawnSync(resolve(root, requireString(entry.executable)), ['--threads=8', `--project=${toolchainEnvironment(entry)}`, script, ...surfaceArguments(oifits, directory, options)],
+  const run = spawnSync(resolve(root, requireString(entry.executable)), [`--threads=${options.threads ?? 8}`, `--project=${toolchainEnvironment(entry)}`, script, ...surfaceArguments(oifits, directory, options)],
     { env: { ...process.env, JULIA_DEPOT_PATH: resolve(root, 'depot') }, stdio: ['ignore', 'inherit', 'pipe'], encoding: 'utf8' });
   // ROTIR prints five warnings about OITOOLS bindings at load; they are known and harmless on the pinned commits.
   const errors = String(run.stderr).split('\n').filter(line => line.trim() && !/Imported binding OITOOLS\.visibility_|^\s*[└│┌]\s*$/u.test(line));
@@ -75,7 +88,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const diameterMas = number('--diameter-mas');
   if (!oifits || !directory || diameterMas === undefined) throw new TypeError('Usage: surface-reconstruction <oifits> <output-directory> --diameter-mas <d> [options]');
   const pick = <T,>(key: string, value: T | undefined) => value === undefined ? {} : { [key]: value };
-  const result = await reconstructSurface(oifits, directory, { diameterMas, ...pick('limbDarkening', number('--limb-darkening')), ...pick('inclinationDegrees', number('--inclination')),
+  const result = await reconstructSurface(oifits.split(','), directory, { diameterMas, ...pick('limbDarkening', number('--limb-darkening')), ...pick('limbLaw', option('--limb-law') as SurfaceOptions['limbLaw']), ...pick('rotationPeriodDays', number('--rotation-period-days')), ...pick('inclinationDegrees', number('--inclination')),
     ...pick('positionAngleDegrees', number('--position-angle')), ...pick('regularizer', option('--regularizer') as SurfaceOptions['regularizer']), ...pick('weight', number('--weight')),
     ...pick('level', number('--level')), ...pick('iterations', number('--iterations')), ...pick('skyPixelMas', number('--sky-pixel-mas')), ...pick('skyPixels', number('--sky-pixels')) });
   console.log(`${result.directory}: reduced chi-squared ${result.summary.chi2r_vis2!.toFixed(2)} on squared visibilities and ${result.summary.chi2r_t3phi!.toFixed(2)} on closure phases; surface contrast ${(result.summary.contrast! * 100).toFixed(2)}%.`);

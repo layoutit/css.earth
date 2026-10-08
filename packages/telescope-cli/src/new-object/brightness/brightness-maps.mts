@@ -1,9 +1,10 @@
 /** A star's brightness map, made by this repository from its light, as a dataset of the star's page.
  *
  * `archives/tess/reduce.mts` takes a star's light from one window of a mission (a K2 campaign's or a TESS sector's own
- * light curve, or a quarter of a Kepler star's KEPSEISMIC light curve), has the period it turns in judged by a published
+ * light curve, a quarter of a Kepler star's KEPSEISMIC light curve, or a season of its MEarth light curve from the
+ * ground), has the period it turns in judged by a published
  * method (archives/tess/methods.mts) or reads it from a paper's own published verdict (archives/tess/published.mts,
- * archives/kepler/santos.mts), and has starry fit the map that reproduces the light curve; it writes the map as a table
+ * archives/kepler/santos.mts, archives/mearth/newton.mts), and has starry fit the map that reproduces the light curve; it writes the map as a table
  * and a receipt. This module
  * is that kind of map for surface-maps.mts: where its table goes, its scale and colors, the archive and papers it is
  * bound to, and its sentences. It is pure: brightness.mts reads and writes.
@@ -14,32 +15,45 @@ import { isRecord, requireFiniteNumber, requireRecord, requireString } from '@cs
 import { scaleEnd, type MapKind, type SurfaceMap, type SurfaceMapChoice } from '../maps/surface-maps.mts';
 
 export const BRIGHTNESS_GENERATOR = 'packages/telescope-cli/src/archives/tess/reduce.mts', BRIGHTNESS_CONSUMER = 'tess-starry';
-const DATA_USE = 'https://archive.stsci.edu/publishing/data-use';
-export type LightMission = 'TESS' | 'K2' | 'Kepler';
+const DATA_USE = 'https://archive.stsci.edu/publishing/data-use', MAST = { host: 'from MAST', license: 'Public NASA mission data (MAST); reduction by this project', use: DATA_USE, publisher: 'Mikulski Archive for Space Telescopes (STScI)' } as const;
+const MEARTH_PAGE = 'https://lweb.cfa.harvard.edu/MEarth/DataDR11.html';
+export type LightMission = 'TESS' | 'K2' | 'Kepler' | 'MEarth';
 /** What differs from mission to mission: what its windows and its light curves are called, where they are kept, the zero of its clock (a barycentric Julian date), how far a neighbour is counted, and
  * the sentence the mission asks to be credited with. `product` is whose light curve is read: the mission's own pipeline's
- * (PDC-MAP), or KEPSEISMIC, which its authors make from the Kepler mission's pixels; `whose`, `credited`, `kind` and
- * `fitted` word it, and `reader` says whether lightkurve reads the file. */
+ * (PDC-MAP), KEPSEISMIC, which its authors make from the Kepler mission's pixels, or the MEarth Project's, taken from the
+ * ground; `whose`, `credited`, `kind` and `fitted` word it, and `reader` says whether lightkurve reads the file. `shown`
+ * heads the credit a page shows, `host`, `license`, `use` and `publisher` say where the light curve is kept and on what
+ * terms, `evidence` is the page that describes it, and `fitter` names a pinned code that prepares it for the map. */
 export const MISSIONS = {
   TESS: { name: 'TESS', consumer: 'tess-starry', inputTag: 'tess-map', window: 'sector', pixels: 'light curves', cadence: '2-minute ', directory: 'science/tess/pdcsap', stem: 's', record: 'mast-tess-light-curves', timeZero: 2457000, radiusArcsec: 63,
     product: 'PDC-MAP', reader: true, whose: 'the mission\'s own', credited: 'NASA TESS mission light curve (PDC-MAP)', kind: 'TESS mission light curve', fitted: (window: number) => `the TESS mission's own 2-minute light curve of sector ${window} (its PDC-MAP flux)`,
     archive: 'https://archive.stsci.edu/missions-and-data/tess', landing: 'https://doi.org/10.17909/t9-nmc8-f686', doi: '10.17909/t9-nmc8-f686', mission: 'https://archive.stsci.edu/missions-and-data/tess', served: 'published by the mission and kept at MAST',
-    title: 'TESS light curves (all sectors) at MAST', locator: 'DataCite record of the DOI: TESS Light Curves - All Sectors, STScI/MAST, 2021. A file holds one target\'s 2-minute light curve of a sector, with the flux the mission\'s pipeline corrected (PDC-MAP).',
+    shown: 'NASA TESS', ...MAST, evidence: 'https://api.datacite.org/dois/10.17909/t9-nmc8-f686', fitter: undefined, title: 'TESS light curves (all sectors) at MAST', locator: 'DataCite record of the DOI: TESS Light Curves - All Sectors, STScI/MAST, 2021. A file holds one target\'s 2-minute light curve of a sector, with the flux the mission\'s pipeline corrected (PDC-MAP).',
     acknowledgment: 'This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).' },
   K2: { name: 'K2', consumer: 'k2-starry', inputTag: 'k2-map', window: 'campaign', pixels: 'light curves', cadence: '', directory: 'science/k2/pdcsap', stem: 'c', record: 'mast-k2-light-curves', timeZero: 2454833, radiusArcsec: 16,
     product: 'PDC-MAP', reader: true, whose: 'the mission\'s own', credited: 'NASA K2 mission light curve (PDC-MAP)', kind: 'K2 mission light curve', fitted: (window: number) => `the K2 mission's own light curve of campaign ${window} (its PDC-MAP flux)`,
     archive: 'https://archive.stsci.edu/missions-and-data/k2', landing: 'https://doi.org/10.17909/T9WS3R', doi: '10.17909/T9WS3R', mission: 'https://archive.stsci.edu/missions-and-data/k2', served: 'published by the mission and kept at MAST',
-    title: 'K2 light curves (all campaigns) at MAST', locator: 'DataCite record of the DOI: K2 Light Curves (all), STScI/MAST, 2016. A file holds one target\'s long-cadence light curve of a campaign, with the flux the mission\'s pipeline corrected (PDC-MAP).',
+    shown: 'NASA K2', ...MAST, evidence: 'https://api.datacite.org/dois/10.17909/T9WS3R', fitter: undefined, title: 'K2 light curves (all campaigns) at MAST', locator: 'DataCite record of the DOI: K2 Light Curves (all), STScI/MAST, 2016. A file holds one target\'s long-cadence light curve of a campaign, with the flux the mission\'s pipeline corrected (PDC-MAP).',
     acknowledgment: 'This work includes data collected by the K2 mission, funded by the NASA Science Mission Directorate, obtained from the Mikulski Archive for Space Telescopes (MAST).' },
   Kepler: { name: 'Kepler', consumer: 'kepler-starry', inputTag: 'kepler-map', window: 'quarter', pixels: 'KEPSEISMIC light curve', cadence: '', directory: 'science/kepler/kepseismic', stem: 'q', record: 'mast-kepseismic-light-curves', timeZero: 2454833, radiusArcsec: 16,
     product: 'KEPSEISMIC', reader: false, whose: 'KEPSEISMIC\'s', credited: 'KEPSEISMIC light curve of the NASA Kepler mission\'s pixels (Mathur, Santos & García)', kind: 'KEPSEISMIC light curve of Kepler',
     fitted: (window: number) => `the measured points of quarter ${window} of the star's KEPSEISMIC light curve, which its authors make from the Kepler mission's pixels`,
     archive: 'https://archive.stsci.edu/hlsp/kepseismic', landing: 'https://doi.org/10.17909/t9-mrpw-gc07', doi: '10.17909/t9-mrpw-gc07', mission: 'https://archive.stsci.edu/missions-and-data/kepler', served: 'published by its authors as a high-level science product and kept at MAST',
-    title: 'KEPSEISMIC: Kepler light curves optimized for asteroseismology, at MAST', locator: 'DataCite record of the DOI: Kepler Light Curves Optimized For Asteroseismology ("KEPSEISMIC"), S. Mathur, Â. Santos and R. A. García, STScI/MAST, 2019. A file holds one target\'s light curve of all its quarters, made from the mission\'s pixels, corrected with KADACS (García et al. 2011, MNRAS 414, L6), its gaps under 20 days filled in (García et al. 2014, A&A 568, A10; Pires et al. 2015, A&A 574, A18) and high-pass filtered at 20, 55 or 80 days.',
+    shown: 'NASA Kepler', ...MAST, evidence: 'https://api.datacite.org/dois/10.17909/t9-mrpw-gc07', fitter: undefined, title: 'KEPSEISMIC: Kepler light curves optimized for asteroseismology, at MAST', locator: 'DataCite record of the DOI: Kepler Light Curves Optimized For Asteroseismology ("KEPSEISMIC"), S. Mathur, Â. Santos and R. A. García, STScI/MAST, 2019. A file holds one target\'s light curve of all its quarters, made from the mission\'s pixels, corrected with KADACS (García et al. 2011, MNRAS 414, L6), its gaps under 20 days filled in (García et al. 2014, A&A 568, A10; Pires et al. 2015, A&A 574, A18) and high-pass filtered at 20, 55 or 80 days.',
     acknowledgment: 'This work includes data collected by the Kepler mission, funded by the NASA Science Mission Directorate, obtained from the Mikulski Archive for Space Telescopes (MAST).' },
+  // MEarth is a survey from the ground, not a mission: its window is a season of the star, named by its year, and its
+  // release asks for Berta et al. (2012) to be cited and for the acknowledgement below, word for word.
+  MEarth: { name: 'MEarth', consumer: 'mearth-starry', inputTag: 'mearth-map', window: 'season', pixels: 'light curve', cadence: '', directory: 'science/mearth', stem: 'y', record: 'mearth-light-curves', timeZero: 2450000, radiusArcsec: 8,
+    product: 'MEarth', reader: false, whose: 'the MEarth Project\'s', credited: 'MEarth Project light curve (Data Release 11; Berta et al. 2012, AJ 144, 145)', kind: 'MEarth Project light curve',
+    fitted: (window: number) => `the star's MEarth light curve of its ${window} season, one point a night (each night's median), after the segment baselines and the common mode of the model of Newton et al. (2016, 2018) are taken off it by that model's own code, sfit; the map is of the first degree, one brighter and one darker side, which is what the sinusoid of that model fixes`,
+    archive: MEARTH_PAGE, landing: MEARTH_PAGE, doi: undefined, mission: MEARTH_PAGE, served: 'published by the MEarth Project in its Data Release 11',
+    shown: 'MEarth Project', host: 'from the project\'s public data release', license: 'Public MEarth Project data, used with the citation and the acknowledgement its release asks for; reduction by this project', use: MEARTH_PAGE, publisher: 'The MEarth Project (Harvard University and the Smithsonian Astrophysical Observatory)',
+    evidence: 'https://lweb.cfa.harvard.edu/MEarth/DR11/README.txt', fitter: 'sfit', title: 'MEarth Project photometric Data Release 11: light curves of the M dwarf targets, 2008 to 2022',
+    locator: 'The release\'s notes (README.txt, prepared by Jonathan Irwin): every target\'s light curves as text files, one a star and a telescope, posted 1 August 2022. "Light curve file contents" describes each column; "Known systematics and techniques for their mitigation" says that the segment offsets and the common mode are left in the magnitudes and must be fitted again with the star\'s variability. The release page asks that Berta et al. (2012, AJ 144, 145) be cited and its acknowledgement included.',
+    acknowledgment: 'This paper makes use of data from the MEarth Project, which is a collaboration between Harvard University and the Smithsonian Astrophysical Observatory. The MEarth Project acknowledges funding from the David and Lucile Packard Fellowship for Science and Engineering, the National Science Foundation under grants AST-0807690, AST-1109468, AST-1616624 and AST-1004488 (Alan T. Waterman Award), the National Aeronautics and Space Administration under Grant No. 80NSSC18K0476 issued through the XRP Program, and the John Templeton Foundation.' },
 } as const;
 /** The mission a receipt names; one from before K2 was read names none, and is of TESS. */
-export const missionOf = (named: unknown): LightMission => named === 'K2' || named === 'Kepler' ? named : 'TESS';
+export const missionOf = (named: unknown): LightMission => named === 'K2' || named === 'Kepler' || named === 'MEarth' ? named : 'TESS';
 const METHOD_RECORD = 'arxiv-1810-06559', METHOD_URL = 'https://arxiv.org/abs/1810.06559';
 /** The papers of the published methods that judge a light curve a rotation (archives/tess/methods.mts), by the method's id. */
 const PERIOD_METHODS: Readonly<Record<string, { readonly record: string; readonly title: string; readonly arxiv: string; readonly doi: string; readonly creators: readonly string[]; readonly year: string; readonly locator: string }>> = {
@@ -55,7 +69,9 @@ const PERIOD_METHODS: Readonly<Record<string, { readonly record: string; readonl
   'santos-2019': { record: 'arxiv-1908-05222', title: 'Santos et al. (2019): Surface Rotation and Photometric Activity for Kepler Targets. I. M and K Main-sequence Stars', arxiv: '1908.05222', doi: '10.3847/1538-4365/ab3b56',
     creators: ['A. R. G. Santos', 'R. A. García', 'S. Mathur', 'L. Bugnet', 'J. L. van Saders', 'T. S. Metcalfe', 'G. V. A. Simonian', 'M. H. Pinsonneault'], year: '2019', locator: 'arXiv listing: title, authors, DOI (ApJS 244, 21). Sects. II and III print the light curves, the sample and how a rotation period is selected; the catalogue is VizieR J/ApJS/244/21, whose ReadMe describes each column of Tables 3 (15,640 stars with a period), 4 and 5.' },
   'santos-2021': { record: 'arxiv-2107-02217', title: 'Santos et al. (2021): Surface Rotation and Photometric Activity for Kepler Targets. II. G and F Main-sequence Stars and Cool Subgiant Stars', arxiv: '2107.02217', doi: '10.3847/1538-4365/ac033f',
-    creators: ['A. R. G. Santos', 'S. N. Breton', 'S. Mathur', 'R. A. García'], year: '2021', locator: 'arXiv listing: title, authors, DOI (ApJS 255, 17). Sects. II and III print the light curves, the sample and how a rotation period is selected; the catalogue is VizieR J/ApJS/255/17, whose ReadMe describes each column of Tables 1 (39,591 stars with a period) and 2.' } };
+    creators: ['A. R. G. Santos', 'S. N. Breton', 'S. Mathur', 'R. A. García'], year: '2021', locator: 'arXiv listing: title, authors, DOI (ApJS 255, 17). Sects. II and III print the light curves, the sample and how a rotation period is selected; the catalogue is VizieR J/ApJS/255/17, whose ReadMe describes each column of Tables 1 (39,591 stars with a period) and 2.' },
+  'newton-2018': { record: 'arxiv-1807-09365', title: 'Newton et al. (2018): New Rotation Period Measurements for M Dwarfs in the Southern Hemisphere: An Abundance of Slowly Rotating, Fully Convective Stars', arxiv: '1807.09365', doi: '10.3847/1538-3881/aad73b',
+    creators: ['E. R. Newton', 'N. Mondrik', 'J. Irwin', 'J. G. Winters', 'D. Charbonneau'], year: '2018', locator: 'arXiv listing: title, authors, DOI (AJ 156, 217). Sect. II.1 prints the last day of the MEarth-South light analysed; Sect. III the model fitted to a light curve and how a rotator is graded, after Sect. III.1 of Newton et al. (2016, ApJ 821, 93); the catalogue is VizieR J/AJ/156/217, whose ReadMe describes each column of Table 1 (574 stars, 234 of them grade A or B rotators).' } };
 /** Gaia DR3, which says whose light the star's pixels hold: a record the source catalogue already has. */
 const GAIA_RECORD = 'gaia-2023-dr3', GAIA_URL = 'https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355';
 /** Dark where the surface is dim, white where it is bright. */
@@ -71,9 +87,10 @@ export function brightnessSourceRecords(checkedOn: string, maps: readonly { read
       links: [{ role: 'archive', url, label: 'arXiv preprint' }, { role: 'landing', url: `https://doi.org/${paper.doi}`, label: 'Journal version' }], evidence: [{ url, checkedOn, locator: paper.locator }], relations: [],
       statements: [{ kind: 'credit', text: paper.title.split(':')[0]!, scope: 'citation', evidence: url }], creators: paper.creators, publicationDate: paper.year })); }
   for (const mission of new Set(maps.map(map => map.mission))) { const from = MISSIONS[mission];
-    records.set(`src/sources/${from.record}.json`, json({ id: from.record, kind: 'data-product', identityLevel: 'work', title: from.title, identifiers: [{ type: 'DOI', value: from.doi }],
-      links: [{ role: 'archive', url: from.archive, label: `${from.name} at MAST` }, { role: 'landing', url: from.landing, label: from.title }], evidence: [{ url: `https://api.datacite.org/dois/${from.doi}`, checkedOn, locator: from.locator }],
-      relations: [], statements: [{ kind: 'credit', text: from.acknowledgment, scope: 'citation', evidence: from.mission }], publisher: 'Mikulski Archive for Space Telescopes (STScI)' })); }
+    // A light curve kept at MAST has a DOI, and its archive page and its landing page are two; a release without one has its own page.
+    records.set(`src/sources/${from.record}.json`, json({ id: from.record, kind: 'data-product', identityLevel: 'work', title: from.title, identifiers: from.doi === undefined ? [] : [{ type: 'DOI', value: from.doi }],
+      links: from.doi === undefined ? [{ role: 'landing', url: from.landing, label: from.title }] : [{ role: 'archive', url: from.archive, label: `${from.name} at MAST` }, { role: 'landing', url: from.landing, label: from.title }], evidence: [{ url: from.evidence, checkedOn, locator: from.locator }],
+      relations: [], statements: [{ kind: 'credit', text: from.acknowledgment, scope: 'citation', evidence: from.mission }], publisher: from.publisher })); }
   records.set(`src/sources/${METHOD_RECORD}.json`, json({ id: METHOD_RECORD, kind: 'publication', identityLevel: 'work', title: 'Luger et al. (2019): starry: Analytic Occultation Light Curves',
     identifiers: [{ type: 'arXiv', value: '1810.06559' }, { type: 'DOI', value: '10.3847/1538-3881/aae8e5' }], links: [{ role: 'archive', url: METHOD_URL, label: 'arXiv preprint' }, { role: 'landing', url: 'https://doi.org/10.3847/1538-3881/aae8e5', label: 'Journal version' }],
     evidence: [{ url: METHOD_URL, checkedOn, locator: 'arXiv listing: title, authors, DOI. The paper describes starry, the code that fits a map to a light curve.' }], relations: [], statements: [{ kind: 'credit', text: 'Luger et al. (2019)', scope: 'citation', evidence: METHOD_URL }],
@@ -186,6 +203,9 @@ export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, ta
     ...(three.every(days => typeof days === 'number') && typeof measured.peakHeight === 'number' ? { peakHeight: measured.peakHeight, periodsDays: three as [number, number, number] } : {}), ...(typeof by.published === 'string' ? { published: by.published } : {}), ...(typeof by.swing === 'string' ? { swing: by.swing } : {}),
     ...(typeof by.published === 'string' && isRecord(record.published) && typeof record.published.note === 'string' ? { note: record.published.note } : {}), ...(refused.length ? { refused } : {}) };
   const privateer = toolchain.find(pin => pin.startsWith('star-privateer')), spinspotter = toolchain.find(pin => pin.startsWith('spinspotter'));
+  // A code pinned to a commit, which its author publishes no release of, is named with the commit's first seven characters.
+  const fitter = MISSIONS[mission].fitter, pinned = fitter === undefined ? undefined : toolchain.find(pin => pin.startsWith(`${fitter} @ `)), commit = pinned === undefined ? undefined : /@([0-9a-f]{7})[0-9a-f]*$/u.exec(pinned)?.[1];
+  if (fitter !== undefined && commit === undefined) throw new TypeError(`${choice.program}: its receipt does not name the pinned ${fitter}; reduce the star again.`);
   const tiltFrom = map.inclinationFrom; if (tiltFrom !== 'page' && tiltFrom !== 'record' && tiltFrom !== 'assumed') throw new TypeError(`${choice.program}: its receipt does not say where the map's tilt comes from; reduce the star again.`);
   if (map.table !== `${choice.program}.dat` || !table.includes('ZONE I=')) throw new TypeError(`${choice.program}: the receipt and the table do not describe one map.`);
   const [darkestPercent, brightestPercent] = mapRange(requireFiniteNumber(map.darkestPercent, 'darkestPercent'), requireFiniteNumber(map.brightestPercent, 'brightestPercent'), table);
@@ -193,7 +213,7 @@ export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, ta
     periodSource: method.published ? `published by ${method.citation} (${method.published})` : `measured here from the star's light in ${windowName(mission, window)} (${BRIGHTNESS_GENERATOR})`, mission, window, fromUtc: missionDay(times[0] as number, mission), toUtc: missionDay(times.at(-1) as number, mission), amplitude: requireFiniteNumber(rotation.amplitude, 'rotation amplitude'), darkestPercent,
     brightestPercent, residual: requireFiniteNumber(map.residual, 'residual'), noise: requireFiniteNumber(map.noise, 'noise'), ...(typeof rotation.lightPeriodDays === 'number' ? { lightPeriodDays: rotation.lightPeriodDays } : {}), ...(light ? { neighbourShare: requireFiniteNumber(light.neighbourShare, 'neighbourShare'), neighbours: requireFiniteNumber(light.neighbours, 'neighbours') } : {}), tiltFrom,
     // The codes that read and prepared the light: none for a light curve its authors prepared and this repository's own reader reads.
-    codes: [...(MISSIONS[mission].reader ? [lightkurve.replace('==', ' '), ...(method.periodsDays && privateer ? [privateer.replace('==', ' ')] : []), ...(method.periodsDays || !spinspotter ? [] : [spinspotter.replace('==', ' ').replace('spinspotter', 'SpinSpotter')])] : []), `starry ${requireString(map.starry, 'starry version')}`], method,
+    codes: [...(MISSIONS[mission].reader ? [lightkurve.replace('==', ' '), ...(method.periodsDays && privateer ? [privateer.replace('==', ' ')] : []), ...(method.periodsDays || !spinspotter ? [] : [spinspotter.replace('==', ' ').replace('spinspotter', 'SpinSpotter')])] : []), ...(fitter === undefined ? [] : [`${fitter} (commit ${commit})`]), `starry ${requireString(map.starry, 'starry version')}`], method,
     ...(catalogue ? { kindFrom: `The star's record holds no ${lacking}: ${requireString(catalogue.says, 'what the input catalogue gives').replace(/^The /u, 'the ').replace(/\.$/u, '')}, and that is what decides whether the method is for this kind of star.` } : {}) };
 }
 
@@ -226,8 +246,8 @@ export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
       : ` The period is the mean of three methods' periods (${three}), accepted by the criteria of ${method.citation}.`;
     return { productId: `Brightness map of ${map.targetName} from its light in ${where}`,
       inputTitle: `Brightness map of ${map.targetName} from its light curve in ${where}, ${from.whose}: brightness on a longitude-latitude grid`,
-      credit: `${from.credited}, ${from.window} ${map.window}, from MAST; its rotation ${method.published ? 'and period as published by' : 'judged by the criteria of'} ${method.citation}; map made in this project with ${map.codes.join(', ').replace(/, ([^,]*)$/u, ' and $1')}. ${from.acknowledgment}`, displayCredit: `NASA ${from.name} · mapped here`,
-      license: 'Public NASA mission data (MAST); reduction by this project', licenseEvidence: [DATA_USE],
+      credit: `${from.credited}, ${from.window} ${map.window}, ${from.host}; its rotation ${method.published ? 'and period as published by' : 'judged by the criteria of'} ${method.citation}; map made in this project with ${map.codes.join(', ').replace(/, ([^,]*)$/u, ' and $1')}. ${from.acknowledgment}`, displayCredit: `${from.shown} · mapped here`,
+      license: from.license, licenseEvidence: [from.use],
       acquisition: `Built by the generator for this star, from the light curve of the ${from.window} ${from.served}. Restored from the source cache; not tracked. The receipt (the ${from.window}'s request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.`,
       redistribution: `Public ${from.name} data, reduced here.`,
       description: `Brightness of the star's surface that reproduces its light as it turns once in ${turn}, fitted with starry to ${curve} (the light varies by ${swing}; the map's curve leaves a scatter of ${percent(map.residual)}%, the light's own noise being ${percent(map.noise)}%). A light curve fixes how bright each longitude is, not the latitude of what darkens it.${judged}${halved} ${tilted}${others} A reduction made in this project, not a published map.`,

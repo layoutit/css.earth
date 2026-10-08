@@ -26,25 +26,11 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Uniform photosphere color from the star's ground-based spectrophotometry (Pulkovo catalogue). The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting.",
+        "qualification": "Photosphere color from the star's ground-based spectrophotometry (Pulkovo catalogue). The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the power law I(mu) = mu^0.258 that Lacour et al. (2008), A&A 485, 561 fit to the star's resolved disc (IOTA/IONIC H band, 1.5-1.8 um, seven channels fitted with one law; not a visible band).",
         "limbDarkening": {
-          "law": "quadratic",
-          "path": "photometry/claret-2011-v-quadratic.tsv",
-          "grid": {
-            "teffK": 4295,
-            "logg": 1.66,
-            "models": {
-              "Filt": "V",
-              "Met": "L",
-              "Mod": "A"
-            }
-          },
-          "columns": {
-            "teff": "Teff",
-            "logg": "logg",
-            "u1": "a",
-            "u2": "b"
-          }
+          "law": "power",
+          "published": true,
+          "path": "photometry/lacour-2008-limb-darkening.json"
         }
       }
     }
@@ -67,7 +53,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },
