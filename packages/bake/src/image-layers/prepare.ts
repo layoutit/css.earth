@@ -11,7 +11,8 @@ import { resizeRgbaLanczos3 } from './resize-rgba.ts';
 import { imageLayerDisc, imageLayerView, norm, rad } from './disc.ts';
 import { removeCompanionGalaxies, removeForegroundStars, type CompanionEllipse, type ForegroundRemoval } from './foreground.ts';
 import { imageLayerBulgeModel } from './bulge.ts';
-import { imageLayerShapeModel, lowerEnvelope, smoothed, broadLight } from './shape.ts';
+import { imageLayerShapeModel, lowerEnvelope, smoothed, broadLight, filamentGlow, measuredPixels, parseMeasuredSpeeds, ringOutlineRadius } from './shape.ts';
+import { pictureFade } from './fade-outline.ts';
 import { imageLayerShapeWalls, type ShapeWalls } from './shape-walls.ts';
 import { densityGrid, imageLayerDensityModel } from './density-grid.ts';
 import { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles } from './surface.ts';
@@ -169,11 +170,15 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   const intersect=(u:number,v:number,offset:number):Vec3=>{const ray=rayLocal(u,v),t=(dot(diskNormal,[0,0,distanceKpc])+offset)/dot(diskNormal,ray);return [t*ray[0],t*ray[1],t*ray[2]-distanceKpc];};
   // A place on a sight line at a depth from the star.
   const placed=(u:number,v:number,depth:number):Vec3=>{const ray=rayLocal(u,v),t=(distanceKpc+depth)/ray[2];return [t*ray[0],t*ray[1],depth];};
+  const shapeSpeeds=recipe.geometry.shape?.speeds,measuredSpeeds=shapeSpeeds?parseMeasuredSpeeds(await readFile(resolve(options.sourceDirectory,shapeSpeeds.path),'utf8'),shapeSpeeds.columns,`${recipe.id}: ${shapeSpeeds.path}`):[];
+  const density=recipe.geometry.densityGrid,shapeModel=recipe.geometry.shape?imageLayerShapeModel(recipe.geometry.shape,measuredSpeeds):density?imageLayerDensityModel(density,densityGrid(await readFile(resolve(options.sourceDirectory,density.path),'utf8'),density.cells,`${recipe.id}: ${density.path}`)):null;
   const thickness=recipe.geometry.thicknessKpc;
   const lineNodes:Vec3=[Math.sin(pa),Math.cos(pa),0],diskMinor=norm(cross(diskNormal,lineNodes)),support=recipe.geometry.supportRadiusKpc,taper=support*recipe.geometry.supportTaperFraction;
-  // The picture fades out on a circle of its plane; where a published surface holds it, on a circle of the sky, which the surface is placed on.
-  for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++){const p=(recipe.geometry.surface?placed:intersect)(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height,0),radius=recipe.geometry.surface?Math.hypot(p[0],p[1]):Math.hypot(dot(p,lineNodes),dot(p,diskMinor));let factor=1;
-    if(radius>=support)factor=0;else if(radius>taper){const t=(support-radius)/(support-taper);factor=t*t*(3-2*t);}
+  // The picture fades out on a circle of its plane; where a published surface holds it, on a circle of the sky; where measured
+  // depths reach past it (`speeds.beyondRing`), out to the farthest of them; on a shell's measured rim (`ring.outline`), scaled as the shell is;
+  // with `fadeAt: "outline"`, inside a rounded boundary within the frame, or the part of it the light fills (./fade-outline.ts).
+  const outline=shapeModel&&'outline' in shapeModel?shapeModel.outline:null,ringScale=shapeModel&&'ringScale' in shapeModel&&recipe.geometry.shape?.ring.outline?shapeModel.ringScale:null,arcsecUnits=distanceKpc*Math.PI/648000,fadeOutline=recipe.geometry.fadeAt==='outline'?recipe.geometry.fadeOutline!:null,frame=fadeOutline?(fadeOutline.filledCornersPixels?fadeOutline.filledCornersPixels.map(([x,y])=>[2*x/recipe.source.dimensions[0]-1,1-2*y/recipe.source.dimensions[1]] as const):([[-1,1],[1,1],[1,-1],[-1,-1]] as const)).map(([u,v])=>{const p=(recipe.geometry.surface?placed:intersect)(u,v,0);return [p[0]/arcsecUnits,p[1]/arcsecUnits] as const;}):null,fadeFactor=pictureFade({fadeAt:recipe.geometry.fadeAt,fade:fadeOutline,rim:fadeOutline?ringOutlineRadius(recipe.geometry.shape!.ring.outline!):null,reach:outline,ringScale,frame,support,taper,arcsecUnits});
+  for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++){const p=(recipe.geometry.surface?placed:intersect)(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height,0),radius=recipe.geometry.surface?Math.hypot(p[0],p[1]):Math.hypot(dot(p,lineNodes),dot(p,diskMinor)),factor=fadeFactor(p[0]/arcsecUnits,p[1]/arcsecUnits,radius);
     const edge=Math.min(px/Math.max(1,info.width-1),(info.width-1-px)/Math.max(1,info.width-1),py/Math.max(1,info.height-1),(info.height-1-py)/Math.max(1,info.height-1)),et=Math.min(1,edge/recipe.bake.edgeTaperFraction),edgeFactor=et*et*(3-2*et);
     base[4*(py*info.width+px)+3]=Math.round(base[4*(py*info.width+px)+3]*factor*edgeFactor);}
   // A bulge fit splits each pixel's light (as optical depth) between the disc, which keeps its share here, and the bulge.
@@ -204,9 +209,6 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   // A nebula's published walls take the picture's light inside their outline (./shape-walls.ts): each pixel's light
   // leaves the flat picture for the walls, at the depths the spectra give (./shape.ts). Where the recipe has measured
   // speeds they say which wall a feature is on.
-  const shapeSpeeds=recipe.geometry.shape?.speeds,measuredSpeeds=shapeSpeeds?(await readFile(resolve(options.sourceDirectory,shapeSpeeds.path),'utf8')).split(/\r?\n/).filter(line=>line.trim()).map(line=>{const cells=line.trim().split(/\s+/).map(Number),row=[cells[shapeSpeeds.columns.east],cells[shapeSpeeds.columns.north],cells[shapeSpeeds.columns.kmS]] as [number,number,number];
-    if(!row.every(Number.isFinite))throw new TypeError(`${recipe.id}: ${shapeSpeeds.path} has a row without its east, north and speed columns (geometry.shape.speeds.columns): ${JSON.stringify(line)}.`);return row;}):[];
-  const density=recipe.geometry.densityGrid,shapeModel=recipe.geometry.shape?imageLayerShapeModel(recipe.geometry.shape,measuredSpeeds):density?imageLayerDensityModel(density,densityGrid(await readFile(resolve(options.sourceDirectory,density.path),'utf8'),density.cells,`${recipe.id}: ${density.path}`)):null;
   // Surfaces at measured depths and a published surface are drawn as a mesh (./shape-patches.ts); a shell's walls as slices.
   const surface=recipe.geometry.surface,meshed=recipe.geometry.shape?.speeds?.depth==='speed'||Boolean(surface);
   let shapeWalls:ShapeWalls|null=null;
@@ -220,8 +222,13 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     // The smooth light: the lower envelope of the picture's, so the walls' halves never take fine bright detail. Where
     // a measured speed is its own depth (speeds.depth "speed") it is the picture blurred instead: only what stands
     // above the blur is fine enough to lie at a depth measured over arcseconds.
-    const speedIsDepth=shapeModel.shape.speeds?.depth==='speed',smoothPixels=shapeModel.shape.smoothPixels,floors=lights.map(light=>speedIsDepth?smoothed(light,info.width,info.height,smoothPixels):lowerEnvelope(light,info.width,info.height,smoothPixels));
-    const found=imageLayerShapeWalls(base,info.width,info.height,lights,floors,shapeModel,(px,py)=>{const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height);return [ray[0]/ray[2]*distanceKpc/arcsec,ray[1]/ray[2]*distanceKpc/arcsec];},arcsec,speedIsDepth?floors.map(floor=>broadLight(floor,info.width,info.height,smoothPixels)):undefined);
+    const speedIsDepth=shapeModel.shape.speeds?.depth==='speed',smoothPixels=shapeModel.shape.smoothPixels,skyOf=(px:number,py:number):[number,number]=>{const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height);return [ray[0]/ray[2]*distanceKpc/arcsec,ray[1]/ray[2]*distanceKpc/arcsec];};
+    // With `speeds.glow` "starlet" the smooth light is the coarse scales of the picture's starlet decomposition, taken
+    // without the filaments where the measurements place ejecta (./shape.ts filamentGlow); otherwise a Gaussian blur.
+    const starlet=speedIsDepth&&shapeModel.shape.speeds&&'glow' in shapeModel.shape.speeds&&shapeModel.shape.speeds.glow==='starlet';
+    const measuredMask=starlet?measuredPixels(shapeModel.detail,info.width,info.height,skyOf):null;
+    const floors=lights.map(light=>measuredMask?filamentGlow(light,info.width,info.height,smoothPixels,measuredMask):speedIsDepth?smoothed(light,info.width,info.height,smoothPixels):lowerEnvelope(light,info.width,info.height,smoothPixels));
+    const found=imageLayerShapeWalls(base,info.width,info.height,lights,floors,shapeModel,skyOf,arcsec,speedIsDepth?floors.map(floor=>broadLight(floor,info.width,info.height,smoothPixels)):undefined);
     if(!found.pixels)throw new TypeError(`${recipe.id}: the walls (${(recipe.geometry.shape??density!).source}) hold no light of the picture.`);
     // Under the walls the flat picture is clear; it keeps one color there, the mean of what it still shows, so the lossy
     // encoding spends nothing on it and has no dark edge to bleed into the picture around the outline.

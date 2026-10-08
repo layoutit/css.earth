@@ -18,7 +18,7 @@ The earlier VISTA, Horálek and WISE recipes retain their existing source/alignm
 
 ## A picture for the application: `remove-stars`
 
-`node labs/nebula/run.mts remove-stars <object-directory> [--from=<file>] [--coarse=<factor>] [--star-red-over-blue=<ratio>]` makes the star-free copy
+`node labs/nebula/run.mts remove-stars <object-directory> [--from=<file>] [--coarse=<factor>] [--star-red-over-blue=<ratio>] [--star-green-over-blue=<ratio>] [--star-most-pixels=<count>] [--spike-lines=<count>]` makes the star-free copy
 of an image-layer bank's picture
 ([remove-stars.ts](../packages/lab/src/cli/commands/remove-stars.ts)). It reads the bank's `source/recipe.json`, takes the
 download the recipe names into the ignored cache (`.local/nebula-lab/starless/<id>/`), runs NOX over it and writes the
@@ -51,6 +51,20 @@ where the light lost within 2 px of it is that color. In Cassiopeia A's picture 
 red) a star is blue and the ejecta red: the lost light, by its patches' red over blue, peaks between 0.25 and 0.5, is lowest
 near 0.8 and tails off above 1, so that bank passes 0.8. The constants are presentation choices made on that picture. The
 small pass there replaced 8% of the picture with soft light and left the bright stars' spikes, so the bank runs one pass.
+
+At mid infrared a star is bluest and the remnant's knots run from red through white to green, so red alone takes the
+green ones. `--star-green-over-blue=<ratio>` also asks a star's lost light to be no greener than that ratio of its blue,
+and `--star-most-pixels=<count>` reads a patch larger than that pixel by pixel instead of as one star: over the bright
+ring NOX's patches join knots over thousands of pixels. Cassiopeia A's MIRI bank passes 0.35, 0.8 and 5,000
+([its README](../../../src/objects/cassiopeia-a-miri-layers/README.md) has the measurements).
+
+NOX leaves a saturated star in a Webb picture with its diffraction spikes, which run hundreds of pixels across it. With
+`--spike-lines=<count>` (and `--star-red-over-blue`) [spikes.ts](../packages/reconstruction/src/star-removal/spikes.ts)
+takes those stars out: a star is a saturated place of the picture before NOX whose light runs out along the spikes'
+lines, which are measured on the picture's brightest stars. Each spike loses, across its band, no more than the running
+median of its own height above its flanks, so a filament it crosses keeps its light; the core and its glow lose the
+light that stands round the star alike in every direction, and NOX's hollowed core is given back. Cassiopeia A passes 4
+(six bright spikes on three lines and two faint ones on a fourth).
 
 Tests: `node labs/nebula/run.mts test haloes`, `node labs/nebula/run.mts test coarse` and `node labs/nebula/run.mts test star-color`.
 

@@ -43,3 +43,21 @@ test('light NOX only redrew by a few levels is not a patch, and a malformed call
   assert.throws(() => giveBackGas(starless, original.subarray(3), size, size, 0.8), /not 120 x 120 packed RGB/u);
   assert.throws(() => giveBackGas(starless, original, size, size, 0), /positive ratio/u);
 });
+
+test('with a green limit a blue-green knot is given back with the red one, and with a size limit a wide blue patch is read pixel by pixel', () => {
+  // A mid-infrared picture: the star is bluest; a knot of gas as blue in red but greener.
+  const greenKnot: Blob = { x: 60, y: 90, radius: 4, rgb: [30, 160, 120] }, original = picture([star, knot, greenKnot]);
+  const red = picture([]); giveBackGas(red, original, size, size, 0.8);
+  assert.deepEqual(at(red, 60, 90), [sky, sky, sky], 'by red alone the green knot is a star');
+  const green = picture([]), result = giveBackGas(green, original, size, size, 0.8, { greenOverBlue: 0.9 });
+  assert.deepEqual(at(green, 60, 90), at(original, 60, 90));
+  assert.deepEqual(at(green, 30, 30), [sky, sky, sky]);
+  assert.equal(result.starPatches, 1);
+  // A blue patch wider than the limit is not one star: its pixels whose light around them is a star's stay taken.
+  const wide: Blob = { x: 60, y: 60, radius: 10, rgb: [40, 90, 200] }, wideOriginal = picture([wide]), sized = picture([]);
+  const read = giveBackGas(sized, wideOriginal, size, size, 0.8, { mostPixels: 100 });
+  assert.equal(read.starPatches, 0);
+  assert.deepEqual(at(sized, 60, 60), [sky, sky, sky]);
+  assert.throws(() => giveBackGas(picture([]), original, size, size, 0.8, { greenOverBlue: 0 }), /green over blue/u);
+  assert.throws(() => giveBackGas(picture([]), original, size, size, 0.8, { mostPixels: 2.5 }), /whole count/u);
+});
