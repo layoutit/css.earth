@@ -1,5 +1,5 @@
 import { readPreparedPanelContentRecord, parsePreparedObjectRuntime } from '@cssearth/objects';
-import { requireInventory, updateInventory } from '@cssearth/objects/node';
+import { requireInventory, updateInventory, readPreparedRuntimeText } from '@cssearth/objects/node';
 // Reprepare selected photographs and their small previews, preserving the existing scene,
 // lighting banks and scientific maps. Full preparation uses these same raster/interpreter owners.
 import { readAuthoredSources } from '@cssearth/bake/objects/sources';
@@ -91,7 +91,7 @@ export async function refreshSurfaceContent(id: string, datasetIds: readonly str
     await writeFile(path, JSON.stringify({ ...content, features: { searchLabel: requireString(features.searchLabel), description: requireString(features.description) } }) + '\n');
   }
   // Asset URLs and the scene are retained. The writer updates the descriptor/page transport from the new content.
-  const runtime = requireRecord(parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true }));
+  const runtime = requireRecord(parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(outputDirectory)), { parsedJson: true }));
   const { repinObjectJson } = await import('@cssearth/bake/contract');
   const updatedControls = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'controls.json'), 'utf8')));
   const labels = new Map(requireArray(requireRecord(updatedControls.datasets).controls).map(value => { const dataset = requireRecord(value); return [requireString(dataset.id), dataset] as const; }));

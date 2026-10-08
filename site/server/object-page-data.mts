@@ -3,7 +3,7 @@ import { OBJECT_PAGE_SCHEMA, parseObjectDescriptor, type ObjectDescriptor, defer
 import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-import { preparedObjectText, preparedObjectTransport, preparedPageData } from '@cssearth/objects/node';
+import { preparedObjectText, preparedObjectTransport, preparedPageData, readPreparedRuntimeText } from '@cssearth/objects/node';
 
 import { isRecord } from '@cssearth/core';
 import { resolveSceneAddressesDeep } from '../server-assets/asset-origin.mts';
@@ -30,7 +30,7 @@ async function preparedTransports(id: string, root: string): Promise<PreparedTra
       if (!deferredDatasetIds(await preparedControls(directory)).length) {
         return { descriptor, object: Buffer.from(await preparedObjectText(directory, descriptor)), datasets: new Map() };
       }
-      const runtime = parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(directory, 'prepared/runtime.json'), 'utf8')), { parsedJson: true });
+      const runtime = parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(resolve(directory, 'prepared'))), { parsedJson: true });
       const { definition, tables } = splitPreparedDatasetTables(runtime);
       return { descriptor, object: Buffer.from(preparedObjectTransport(descriptor, JSON.stringify(definition))),
         datasets: new Map(tables.map(table => [table.datasetId, Buffer.from(JSON.stringify(table))])) };

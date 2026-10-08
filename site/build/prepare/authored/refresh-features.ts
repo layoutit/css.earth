@@ -1,4 +1,4 @@
-import { requireInventory, updateInventory } from '@cssearth/objects/node';
+import { requireInventory, updateInventory, readPreparedRuntimeText } from '@cssearth/objects/node';
 import { parsePreparedObjectRuntime } from '@cssearth/objects';
 // Refresh the named-feature catalogue of an already prepared object without re-preparing its surfaces: verify the
 // authored source pins, re-run the shared feature attachment against the prepared runtime definition, and rewrite the
@@ -19,7 +19,7 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source'), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('site/public/scenes', id);
   const { descriptor, sources } = await readAuthoredSources(objectDirectory);
   if (!descriptor.recipe.features) return { count: null };
-  const definition = record(parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true }), 'prepared runtime');
+  const definition = record(parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(outputDirectory)), { parsedJson: true }), 'prepared runtime');
   const attached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition });
   if (!attached.features) throw new TypeError(`${id} declares features but attached none.`);
   await writeFeatureContent(outputDirectory, attached.features);

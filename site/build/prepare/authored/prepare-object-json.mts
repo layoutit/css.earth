@@ -27,7 +27,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { authoredObject } from '@cssearth/bake/sources';
 import { preparePresentationBindings, withImageSizes, withKeptPoolBudgets } from '@cssearth/bake/prepared-presentation';
 import { objectPageStyles } from '../../../contracts/object-page-contract.mts';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { readPreparedObjects, readPreparedRuntimeText } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../../..')).sceneObjects;
 
@@ -112,7 +112,7 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
     try { await access(resolve(root, 'src/objects', object.id, 'object.json')); }
     catch (error) { if (hasErrorCode(error,'ENOENT') && !ids) continue; throw error; }
     const runtimeDefinition:unknown = await authoredObject(object.id, root)
-      ? parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8')), { parsedJson: true })
+      ? parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(resolve(root, 'src/objects', object.id, 'prepared'))), { parsedJson: true })
       : requireRecord(await import(pathToFileURL(resolve(root, `src/objects/${object.id}/runtime/definition.mjs`)).href)).runtimeDefinition;
     results.push(await writeObjectJson(object.id, runtimeDefinition, options));
   }

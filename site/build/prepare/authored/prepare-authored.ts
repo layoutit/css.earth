@@ -1,5 +1,5 @@
 import { readFeatureMapLongitude, readPreparedPanelContentRecord, readComparableSource, readObjectDescriptorRecord, validatePreparedCubicSky, validateDirectionalSunPlan, parsePreparedObjectRuntime, readObjectContentDatasets, parseObjectDescriptor, RASTER_RECIPE_SCHEMA, parsePresentationProfile, AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readAuthoredPreparationSources, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type AuthoredObjectDescriptor } from '@cssearth/objects';
-import { requireInventory } from '@cssearth/objects/node';
+import { requireInventory, readPreparedRuntimeText } from '@cssearth/objects/node';
 import { BANDED_ELLIPSOID_SCHEMA, LAYERED_OBLATE_SCHEMA } from '@cssearth/bake/objects/scene';
 import { readNonArrayRecord, isRecord } from '@cssearth/core';
 import '@cssearth/bake/thread-pool';
@@ -306,7 +306,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const { preparePagedEllipsoidObject } = await import('@cssearth/bake/objects/layers/paged-ellipsoid');
     // A reuse-images run carries the published feature anchors; read them before the lane rewrites this directory.
     const publishedFeatures = reuseImages ? {
-      runtime: record(parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true }), 'published runtime'),
+      runtime: record(parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(outputDirectory)), { parsedJson: true }), 'published runtime'),
       content: readPreparedPanelContentRecord(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8'))) } : null;
     const prepared = await preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets,
       solarGeometry: await solarGeometry(), assetWorker: pathToFileURL(resolve(process.cwd(), 'packages/bake/cli/paged-ellipsoid-asset-worker.mts')), reuseImages, acceptChanged });

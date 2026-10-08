@@ -6,6 +6,7 @@ import { OBJECT_PAGE_SCHEMA } from '../prepared-data/content/object-page-schema.
 import { open, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord, requireRecord } from '@cssearth/core';
+import { readPreparedRuntimeText } from './prepared-runtime-files.js';
 
 const HEAD_BYTES = 65536;
 
@@ -84,7 +85,7 @@ interface SceneDescriptor { readonly id: string; readonly type: string; readonly
  * `JSON.stringify({ schema, id, type, format, data })` gives for its runtime. */
 export async function preparedObjectText(objectDirectory: string, descriptor: SceneDescriptor) {
   if (!descriptor.prepared) throw new TypeError(`${descriptor.id}: no prepared reference.`);
-  return preparedObjectTransport(descriptor, (await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8')).trimEnd());
+  return preparedObjectTransport(descriptor, (await readPreparedRuntimeText(resolve(objectDirectory, 'prepared'))).trimEnd());
 }
 
 /** The `cssearth-prepared-object@1` transport that carries `data`, the JSON text of a runtime. */

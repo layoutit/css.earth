@@ -9,7 +9,7 @@ import { mkdir, readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { requireRecord } from '@cssearth/core';
 
-import { inventoryPreparedAssets, readInventory } from '@cssearth/objects/node';
+import { inventoryPreparedAssets, readInventory, readPreparedRuntimeText } from '@cssearth/objects/node';
 
 import { preparePageMetadata, writePreparedText } from '../delivery/index.ts';
 import { requireObjectRuntimeDefinition } from './object-runtime-contract.ts';
@@ -33,10 +33,11 @@ export async function pinPreparedObject(id: string, originalDescriptor: Record<s
   target = { preparedDirectory: resolve(root, 'src/objects', id, 'prepared'), descriptorPath: resolve(root, 'src/objects', id, 'object.json') }) {
   const { preparedDirectory, descriptorPath } = target;
   await mkdir(preparedDirectory, { recursive: true });
-  const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8')));
+  const runtimeText = await readPreparedRuntimeText(preparedDirectory);
+  const definition = requireObjectRuntimeDefinition(JSON.parse(runtimeText));
   // What is pinned ships: records, with no custom property left from the bindings' working form.
   requireShippedRuntime(definition);
-  const runtime: unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8'));
+  const runtime: unknown = JSON.parse(runtimeText);
   const originalProperties = requireRecord(originalDescriptor.properties);
   const descriptor = parseObjectDescriptor({ ...originalDescriptor, properties: { ...originalProperties, ...properties } });
   const payload = serializeObjectJson(descriptor, runtime);

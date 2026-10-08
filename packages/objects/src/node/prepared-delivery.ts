@@ -19,6 +19,7 @@ export interface DeliveredPreparedRecord { readonly name: string | RegExp; reado
 export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   // A layered body's page and its build.
   { name: 'runtime.json', reader: 'page', read: 'packages/objects/src/node/prepared-transport.ts builds the object, dataset and page transports from it' },
+  { name: 'leaf-boxes.json', reader: 'page', read: 'packages/objects/src/node/prepared-runtime-files.ts puts a sphere\'s leaf boxes back into its runtime' },
   { name: 'controls.json', reader: 'page', read: 'site/server/object-page-data.mts, prepared-transport.ts and the catalogue steps of the site build' },
   { name: 'content.json', reader: 'site-build', read: 'site/components/ObjectPage.astro; packages/bake/src/contract/prepare-factsheets.ts' },
   { name: 'text.json', reader: 'site-build', read: 'site/components/PreparedObjectPanel.astro' },

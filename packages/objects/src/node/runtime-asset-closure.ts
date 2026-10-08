@@ -6,6 +6,7 @@ import { readFile, readdir, rename, rm, lstat, unlink, writeFile } from "node:fs
 import { basename, resolve } from "node:path";
 import { promisify } from "node:util";
 import { deliveredPreparedFiles, isWorkingPreparedFile, retainsPreparedScene } from './prepared-delivery.js';
+import { storePreparedRuntime } from './prepared-runtime-files.js';
 
 /**
  * One inventory per object, `src/objects/<id>/inventory.json`: every baked file the object ships that git does not
@@ -220,6 +221,8 @@ export async function inventoryPreparedAssets({ objectId, objectDirectory, prepa
   gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>>;
 }) {
   const excluded = new Set(exclude);
+  // A baked runtime is listed in its stored form: its leaf boxes in their own file (prepared-runtime-files.ts).
+  if (!filenames) await storePreparedRuntime(preparedRoot);
   const names = [...(filenames ?? (await bakedPreparedFiles(preparedRoot, objectId, objectDirectory)).filter(name => !excluded.has(name)))]
     .sort((left, right) => left.localeCompare(right));
   for (const name of names) if (!safeAssetPath('prepared', name)) throw new TypeError(`Object ${objectId} has an unsafe prepared asset path: ${name}.`);

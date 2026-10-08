@@ -9,7 +9,7 @@ import { chromium } from 'playwright';
 import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
 import { objectPageStyles } from '../../../contracts/object-page-contract.mts';
 import { repinObjectJson } from '@cssearth/bake/contract';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { readPreparedObjects, readPreparedRuntimeText } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../../..')).sceneObjects;
 
@@ -28,7 +28,7 @@ export async function prepareInteriorFills(ids: readonly string[], root = proces
   try {
     for (const id of selected) {
       const path = resolve(root, 'src/objects', id, 'prepared/runtime.json');
-      const original = parsePreparedObjectRuntime(JSON.parse(await readFile(path, 'utf8')));
+      const original = parsePreparedObjectRuntime(JSON.parse(await readPreparedRuntimeText(resolve(root, 'src/objects', id, 'prepared'))));
       const prepared = await preparePresentationBindings(original, root, { pageStyles: objectPageStyles, interiorOnly: true, browser });
       parsePreparedObjectRuntime(prepared);
       const fill = prepared.viewBindings.find(binding => binding.kind === 'interior-disc');

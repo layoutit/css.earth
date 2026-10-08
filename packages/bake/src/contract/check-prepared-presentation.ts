@@ -15,7 +15,7 @@ import { optionalText, requireAuthoredWorldFrame } from '../sources/index.ts';
 
 import { nodeName, staticObjectProperties } from '../runtime-source/index.ts';
 import type { RuntimeSourceReader } from '../runtime-source/index.ts';
-import { readPreparedObjects } from "@cssearth/objects/node";
+import { LEAF_BOXES_FILE, joinPreparedRuntimeText, readPreparedObjects } from "@cssearth/objects/node";
 
 /** The scene objects, read from the registry of this checkout (found through this package's own name) on first use rather than
  * when the entry is imported. */
@@ -144,7 +144,7 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
   // The transport is the runtime in its envelope, built when served (prepared-transport.ts): the runtime is what is checked.
   if (reference.url !== 'prepared/object.json') throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
   const runtimePath = resolve(preparedDirectory, 'runtime.json'), payloadPath = runtimePath;
-  const runtime = requireObjectRuntimeDefinition(JSON.parse(await readText(runtimePath)), { objectId });
+  const runtime = requireObjectRuntimeDefinition(JSON.parse(await joinPreparedRuntimeText(await readText(runtimePath), () => readText(resolve(preparedDirectory, LEAF_BOXES_FILE)))), { objectId });
   // A restored sphere holds no scene (a working record, packages/objects/src/node/prepared-delivery.ts): its frame is the descriptor's.
   const sceneText = await optionalText(readText, resolve(preparedDirectory, 'scene.json')), scene: unknown = sceneText === null ? {} : JSON.parse(sceneText);
   await requireAuthoredWorldFrame({ descriptor, scene, runtime, directory, readText });
