@@ -10,7 +10,42 @@
       "title": "Cas A (NIRCam image)",
       "credit": "NASA, ESA, CSA, STScI, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (University of Gent)",
       "displayCredit": "ESA/Webb",
-      "acquisition": "The publisher's publication JPEG (3493 x 4000 px of the 11694 x 13392 px original) with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/cassiopeia-a-layers --star-red-over-blue=0.8` (NOX over the whole picture; where the light it took is redder than a star's, the remnant's own knots, the picture keeps its pixels). Restored from the source cache; not tracked. Its place on the sky is the file's embedded tags (recipe observation). A display composite, not a calibrated scientific array.",
+      "acquisition": "The publisher's publication JPEG (3493 x 4000 px of the 11694 x 13392 px original) with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/cassiopeia-a-layers --star-red-over-blue=0.8 --spike-lines=4` (NOX over the whole picture; where the light it took is redder than a star's, the remnant's own knots, the picture keeps its pixels; then the bright stars NOX leaves, with their diffraction spikes on four lines, are taken out). Restored from the source cache; not tracked. Its place on the sky is the file's embedded tags (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esawebb-weic2330a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "original"
+      ],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://esawebb.org/images/weic2330a/"
+          }
+        ]
+      },
+      "generator": "labs/nebula/run.mts remove-stars"
+    },
+    {
+      "id": "original",
+      "path": "src/objects/cassiopeia-a-layers/source/source.jpg",
+      "origin": "https://cdn.esawebb.org/archives/images/publicationjpg/weic2330a.jpg",
+      "sourceUrl": "https://esawebb.org/images/weic2330a/",
+      "title": "Cas A (NIRCam image) (as published, with its stars)",
+      "credit": "NASA, ESA, CSA, STScI, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (University of Gent)",
+      "displayCredit": "ESA/Webb",
+      "acquisition": "The publisher’s JPEG (3493 x 4000 px) as published, before its stars were removed; the picture remove-stars reads. Restored from the source cache; not tracked.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -32,18 +67,17 @@
             "evidence": "https://esawebb.org/images/weic2330a/"
           }
         ]
-      },
-      "generator": "labs/nebula/run.mts remove-stars"
+      }
     },
     {
       "id": "measured-depths",
       "path": "src/objects/cassiopeia-a-layers/source/ejecta-speeds.dat",
       "origin": "https://chandra.harvard.edu/graphics/resources/illustrations/3d_files/CasA_supernova_remnant-ascii_vtks.zip",
       "sourceUrl": "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
-      "title": "The [Ar II] ejecta of Cassiopeia A, 10632 cells of the model of DeLaney et al. (2010) as places and speeds",
+      "title": "The [Ar II] ejecta of Cassiopeia A, 10632 cells of the model of DeLaney et al. (2010) as places and speeds, with its outer optical knots (2036 cells) and jets (955 cells) beyond the forward shock",
       "credit": "NASA/CXC/SAO; DeLaney et al. (2010)",
       "displayCredit": "DeLaney et al. (2010)",
-      "acquisition": "Built from the Chandra X-ray Center's zip of the model's ASCII VTK files by the generator, which downloads the zip, reads newar-ascii.vtk and writes each cell of one model unit as a row. Restored from the source cache; not tracked.",
+      "acquisition": "Built from the Chandra X-ray Center's zip of the model's ASCII VTK files by the generator, which downloads the zip, reads newar-ascii.vtk, and newopt-ascii.vtk and newjets-ascii.vtk beyond the forward shock grown by free expansion to the Webb picture's epoch, and writes each cell of one model unit as a row. Restored from the source cache; not tracked.",
       "generator": "packages/bake/authoring/cassiopeia-a/ejecta-speeds.mts",
       "sourceBinding": {
         "kind": "catalogued",

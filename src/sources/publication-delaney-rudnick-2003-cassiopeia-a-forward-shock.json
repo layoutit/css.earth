@@ -1,0 +1,42 @@
+{
+  "id": "publication-delaney-rudnick-2003-cassiopeia-a-forward-shock",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The First Measurement of Cassiopeia A's Forward Shock Expansion Rate",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0303399"
+    },
+    {
+      "type": "doi",
+      "value": "10.1086/374813"
+    },
+    {
+      "type": "bibcode",
+      "value": "2003ApJ...589..818D"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0303399",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0303399",
+      "checkedOn": "2026-10-09",
+      "locator": "Abstract: two 50 ks Chandra ACIS-S3 epochs two years apart; the thin X-ray continuum filaments around the remnant's edge are identified with the forward shock and expand at 0.02 to 0.33 % a year, median 0.21 % a year. Table 2, as the Cassiopeia A banks' recipes read it (geometry.shape.ring.outline): 29 forward-shock filament regions, each with its azimuth (degrees from north through east) and radius (arcsec) from the Thorstensen et al. (2001) expansion centre and its expansion rate, drawn on the 2002.10 image."
+    }
+  ],
+  "creators": [
+    "DeLaney, T.",
+    "Rudnick, L."
+  ],
+  "publisher": "ApJ 589, 818",
+  "publicationDate": "2003",
+  "relations": [],
+  "statements": []
+}

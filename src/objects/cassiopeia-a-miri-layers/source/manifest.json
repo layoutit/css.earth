@@ -4,13 +4,48 @@
   "inputs": [
     {
       "id": "optical",
-      "path": "src/objects/cassiopeia-a-miri-layers/source/source.jpg",
+      "path": "src/objects/cassiopeia-a-miri-layers/source/starless.jpg",
       "origin": "https://cdn.esawebb.org/archives/images/large/weic2311a.jpg",
       "sourceUrl": "https://esawebb.org/images/weic2311a/",
       "title": "Cassiopeia A (MIRI Image)",
       "credit": "NASA, ESA, CSA, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (UGent), J. DePasquale (STScI)",
       "displayCredit": "ESA/Webb",
-      "acquisition": "The publisher's JPEG (4008 x 4009 px), downloaded unchanged; not tracked. Its scale and direction on the sky are the file's embedded tags; its place is the tags' own (recipe observation). A display composite, not a calibrated scientific array.",
+      "acquisition": "The publisher's JPEG (4008 x 4009 px) with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/cassiopeia-a-miri-layers --star-red-over-blue=0.35 --star-green-over-blue=0.8 --star-most-pixels=5000 --spike-lines=4` (NOX over the whole picture; where the light it took is redder or greener than a star's, or joins more than 5000 px, the remnant's own knots and dust, the picture keeps its pixels; then the bright stars NOX leaves, with their diffraction spikes on four lines, are taken out). Restored from the source cache; not tracked. Its scale and direction on the sky are the file's embedded tags; its place is the tags' own (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esawebb-weic2311a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-miri-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "original"
+      ],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://esawebb.org/images/weic2311a/"
+          }
+        ]
+      },
+      "generator": "labs/nebula/run.mts remove-stars"
+    },
+    {
+      "id": "original",
+      "path": "src/objects/cassiopeia-a-miri-layers/source/source.jpg",
+      "origin": "https://cdn.esawebb.org/archives/images/large/weic2311a.jpg",
+      "sourceUrl": "https://esawebb.org/images/weic2311a/",
+      "title": "Cassiopeia A (MIRI Image) (as published, with its stars)",
+      "credit": "NASA, ESA, CSA, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (UGent), J. DePasquale (STScI)",
+      "displayCredit": "ESA/Webb",
+      "acquisition": "The publisher's JPEG (4008 x 4009 px) as published, before its stars were removed; the picture remove-stars reads. Restored from its origin; not tracked.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -39,10 +74,10 @@
       "path": "src/objects/cassiopeia-a-miri-layers/source/ejecta-speeds.dat",
       "origin": "https://chandra.harvard.edu/graphics/resources/illustrations/3d_files/CasA_supernova_remnant-ascii_vtks.zip",
       "sourceUrl": "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
-      "title": "The [Ar II] ejecta of Cassiopeia A, 10632 cells of the model of DeLaney et al. (2010) as places and speeds",
+      "title": "The [Ar II] ejecta of Cassiopeia A, 10632 cells of the model of DeLaney et al. (2010) as places and speeds, with its outer optical knots (2036 cells) and jets (955 cells) beyond the forward shock",
       "credit": "NASA/CXC/SAO; DeLaney et al. (2010)",
       "displayCredit": "DeLaney et al. (2010)",
-      "acquisition": "Built from the Chandra X-ray Center's zip of the model's ASCII VTK files by the generator, which downloads the zip, reads newar-ascii.vtk and writes each cell of one model unit as a row. Restored from the source cache; not tracked.",
+      "acquisition": "Built from the Chandra X-ray Center's zip of the model's ASCII VTK files by the generator (`--bank=cassiopeia-a-miri-layers`), which downloads the zip, reads newar-ascii.vtk, and newopt-ascii.vtk and newjets-ascii.vtk beyond the forward shock, grows each by free expansion to the epoch of this MIRI mosaic, 2022 August 5, and writes each cell of one model unit as a row. Restored from the source cache; not tracked.",
       "generator": "packages/bake/authoring/cassiopeia-a/ejecta-speeds.mts",
       "sourceBinding": {
         "kind": "catalogued",

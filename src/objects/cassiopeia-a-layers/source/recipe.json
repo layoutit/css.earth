@@ -31,6 +31,13 @@
     "distancePc": 3400
   },
   "geometry": {
+    "fadeAt": "outline",
+    "fadeOutline": {
+      "outward": 1.25,
+      "featherArcsec": 20,
+      "frameMarginArcsec": 12,
+      "smoothDeg": 10
+    },
     "kind": "inclined-disk",
     "inclinationDeg": 0.008361,
     "lineOfNodesPaDeg": 9.165,
@@ -62,19 +69,52 @@
           6954.5,
           6954.5,
           6954.5
-        ]
+        ],
+        "lightJoinsFrom": 0.7,
+        "outline": {
+          "source": "publication-delaney-rudnick-2003-cassiopeia-a-forward-shock",
+          "basis": "DeLaney & Rudnick (2003, ApJ 589, 818, Table 2, arXiv:astro-ph/0303399): 29 X-ray continuum filaments of the forward shock on the Chandra ACIS-S images of 2000.08 and 2002.10, each with its azimuth (degrees from north through east) and radius (arcsec) from the Thorstensen et al. (2001) expansion centre; the regions are drawn on the 2002 image, so the radii are taken as of 2002.10. The paper warns of some contamination by filaments that are not the forward shock, so the rim is the table's outer envelope: a filament is kept where no other within 10 degrees of azimuth lies farther out (a choice made here). Region 16 (208.2 degrees, 134.96 arcsec) is left out: the paper measures it expanding at 0.021 ± 0.016 % a year, a tenth of the others, so it is not moving as the shock does. 10 of 29 are kept. No filament is measured from 234.3 to 341.2 degrees (the paper leaves out 270 to 315); there the rim is the cubic between those two. The radii are grown by free expansion from 1671.3 (Thorstensen et al. 2001) to the Webb picture of 2022 November 5: (2022.846 - 1671.3) / (2002.10 - 1671.3) = 1.0627. The rim's depth along the sight line is assumed to be its radius on the sky in that direction.",
+          "positionAnglesDeg": [
+            12.2,
+            38.8,
+            51.8,
+            108.5,
+            122.8,
+            136.9,
+            154.2,
+            192.3,
+            234.3,
+            341.2
+          ],
+          "radiiArcsec": [
+            158.8,
+            147.59,
+            167.83,
+            162.07,
+            165.01,
+            154.85,
+            150.29,
+            157.12,
+            160.77,
+            157.45
+          ],
+          "scale": 1.0627
+        }
       },
       "speeds": {
         "source": "chandra-cassiopeia-a-3d-model",
-        "basis": "The Chandra X-ray Center's files of the model of DeLaney et al. (2010): the [Ar II] 6.99 µm surface (newar-ascii.vtk), 10632 cells of one model unit, each as its place from the expansion centre (arcsec east and north) and its speed along the sight line relative to the shell's centre (km/s, positive away from the Sun); 6078 approach and 4554 recede, from -5,836 to 5,738 km/s. The files' units are not published: measured here, a unit is 3.6 arcsec, x east, z north, y toward the Sun (packages/bake/authoring/cassiopeia-a/ejecta-speeds.mts). A speed is its own depth under the law. A place follows the cells within about 9 arcsec, a presentation value: the paper's [Ar II] map resolves 3.7 arcsec and its model is smoothed to about 6.",
+        "basis": "The Chandra X-ray Center's files of the model of DeLaney et al. (2010): the [Ar II] 6.99 µm surface (newar-ascii.vtk), 10632 cells of one model unit, each as its place from the expansion centre (arcsec east and north) and its speed along the sight line relative to the shell's centre (km/s, positive away from the Sun); 6078 approach and 4554 recede, from -5,836 to 5,738 km/s. The files' units are not published: measured here, a unit is 3.6 arcsec, x east, z north, y toward the Sun (packages/bake/authoring/cassiopeia-a/ejecta-speeds.mts). A speed is its own depth under the law. A place follows the cells within about 9 arcsec, a presentation value: the paper's [Ar II] map resolves 3.7 arcsec and its model is smoothed to about 6. Beyond the forward shock's 153 arcsec the table also holds the same files' outer optical knots (newopt-ascii.vtk, 2036 cells, places of 1988 or 1996) and jets (newjets-ascii.vtk, 955 cells, taken as of 2004), in the same frame, each grown by free expansion from the knots' convergent date, 1671.3 (Thorstensen et al. 2001), to sit with the [Ar II] surface on the Webb picture of 2022 November 5: by 1.041 and 1.002. There the picture is drawn out to the farthest of them in each direction (beyondRing), its fine detail at their depths, its smooth light on the picture's plane. Every row beyond the forward shock names its surface (columns.surface), the 22 [Ar II] cells there too: those sparse rows are surfaces of their own, apart from the [Ar II] shell inside, which lies tens of arcseconds from them in depth where the two meet on the sky. Their share of a place needs one of them within about 9 arcsec, and their depth is the mean of theirs within about 13.5 arcsec (packages/bake/src/image-layers/shape.ts, OUTER_PRESENCE and OUTER_DEPTH_REACHES).",
         "path": "ejecta-speeds.dat",
         "columns": {
           "east": 0,
           "north": 1,
-          "kmS": 2
+          "kmS": 2,
+          "surface": 3
         },
         "reachArcsec": 9,
-        "depth": "speed"
+        "depth": "speed",
+        "beyondRing": true,
+        "glow": "starlet"
       },
       "smoothPixels": 30
     }
@@ -83,7 +123,7 @@
     "maxFacePixels": 2750,
     "crossAxisSlices": 32,
     "crossAxisDepthPixels": 97,
-    "backgroundFloor": 0.03,
+    "backgroundFloor": 0.063,
     "encoding": {
       "format": "webp",
       "quality": 70,

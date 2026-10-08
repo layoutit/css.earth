@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "datasets/optical.webp",
-      "bytes": 19832,
-      "sha256": "bb41a73851848f0a804749979f0dd3b92fd260d95c51e12412c5022242c319b3"
+      "bytes": 18306,
+      "sha256": "31616b66e0d25a806ba61fe0ac561f50fbf0e16223cdebf560cf51c276d43f1c"
     },
     {
       "location": "prepared",
@@ -22,38 +22,44 @@
     {
       "location": "prepared",
       "filename": "image-layers.json",
-      "bytes": 2430422,
-      "sha256": "d23326471b232582c4463133302571a1d67d4917916890ec185201ac18ea5f7f"
+      "bytes": 3136564,
+      "sha256": "916f9b0737c7bff239ab3caf9d662393424cf4c844d11ba3f9c145b3141662e2"
     },
     {
       "location": "prepared",
       "filename": "layers/shape-0.webp",
-      "bytes": 1598802,
-      "sha256": "e05afb83ff65161a1cba7b9cb4450540af292874a04522113cec57e16b68388b"
+      "bytes": 1554732,
+      "sha256": "578696bd19747f1e69f6fb1b98dfe215a89783e2aa1176e6455e284552c05162"
     },
     {
       "location": "prepared",
       "filename": "layers/shape-1.webp",
-      "bytes": 1619914,
-      "sha256": "676f72ccf8749ad8a0905992364074fba936de547e83258ee9f3c3b7054a2683"
+      "bytes": 1756978,
+      "sha256": "2e01b549e399176c9a45b360d116d21671f7988a34106f8e4d1ecbbacc6f56bc"
     },
     {
       "location": "prepared",
       "filename": "layers/shape-2.webp",
-      "bytes": 1353872,
-      "sha256": "62bd172d1b9fcd0b7af026ab9d4b40d5b4f365e8cd794d61d1894092ef528ab8"
+      "bytes": 1534776,
+      "sha256": "dba24726c6b59c4dc27abab5a31043da9491f08df2f4b475a72cc1270e0bbafd"
     },
     {
       "location": "prepared",
       "filename": "layers/shape-3.webp",
-      "bytes": 54878,
-      "sha256": "2cb07779d956912686b9c54a291a0c83184ca271fa4a24a2a3db94aadf7b116b"
+      "bytes": 1221230,
+      "sha256": "9c3925620b85828ac5d5aa377ef5ec1f88a6e8c3a706fcaeb979c99c071ed38d"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/shape-4.webp",
+      "bytes": 444734,
+      "sha256": "4d4c8a41b17de3c93c325a83a2af8a45f805dcbd4049c1582f3dbe110ce8cb02"
     },
     {
       "location": "prepared",
       "filename": "layers/z-detail.webp",
-      "bytes": 256436,
-      "sha256": "b87edb3d7f19f76000ec48e6e92de4db8e5d133a76d39b4e2ce58a4b51b38059"
+      "bytes": 830344,
+      "sha256": "ece61f9d3f1995694cd20a0e4ed025c7d56784d1ef9a9217e9fae785652ee09a"
     },
     {
       "location": "prepared",

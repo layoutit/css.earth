@@ -7,7 +7,6 @@
       "source": "source/recipe.json"
     },
     "host": "cassiopeia-a",
-    "surrounds": true,
     "frame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
@@ -25,17 +24,18 @@
       "metersPerUnit": 30856775814913670,
       "boundsUnits": {
         "min": [
-          -2.342754885206299,
-          -2.336364865175078,
-          -2.521816021718223
+          -3.432553838724891,
+          -2.9723205276897304,
+          -3.291995465116088
         ],
         "max": [
-          2.3516768530234,
-          2.3515287576309536,
-          2.5218128146798335
+          3.0376257411158334,
+          3.3782370606850023,
+          3.2919331842090287
         ]
       }
-    }
+    },
+    "surrounds": true
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",
