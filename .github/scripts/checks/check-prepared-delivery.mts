@@ -8,13 +8,13 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 // The ledger imports nothing, so this check runs before any package is built.
-import { deliveredPreparedRecord, isWorkingPreparedFile, retainsPreparedScene } from '../../../packages/objects/src/node/prepared-delivery.ts';
+import { deliveredPreparedRecord, isWorkingPreparedFile, preparedDeliveryContext } from '../../../packages/objects/src/node/prepared-delivery.ts';
 
 const record = (value: unknown): Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value) ? value as Record<string, unknown> : {};
 
 /** The prepared rows of one object's inventory that must not be listed, each as `<id>/prepared/<filename>: <reason>`. */
 export function refusedPreparedRows(id: string, inventory: unknown, descriptor: unknown): string[] {
-  const context = { retainsScene: retainsPreparedScene(descriptor) }, assets = record(inventory).assets;
+  const context = preparedDeliveryContext(descriptor), assets = record(inventory).assets;
   return (Array.isArray(assets) ? assets : []).flatMap(asset => {
     const { location, filename } = record(asset);
     if (location !== 'prepared' || typeof filename !== 'string' || filename.includes('/') || !filename.endsWith('.json')) return [];

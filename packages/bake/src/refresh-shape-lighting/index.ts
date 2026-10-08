@@ -20,7 +20,6 @@ export async function stageShapeLighting(id: string, solarGeometry: SolarGeometr
   const config = parseSolidPreparationSource(await json(resolve(directory, 'source/preparation/terrestrial.json')));
   const scene = await json(resolve(directory, 'prepared/scene.json'));
   const surfaces = await json(resolve(directory, 'prepared/surfaces.json'));
-  const material = await json(resolve(directory, 'prepared/material.json'));
   const inventory = await json(resolve(directory, 'inventory.json'));
   const views = neutralShapeViews(config.raster.shapeViews);
   const replacements = new Map<string, Record<string, unknown>>();
@@ -49,10 +48,8 @@ export async function stageShapeLighting(id: string, solarGeometry: SolarGeometr
     const bytes = await readFile(shapeLightingPath('site/public/scenes', id, requireString(asset.filename)));
     if (sha256(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`${id}: stale asset ${asset.filename}.`);
   }
-  for (const document of [surfaces, material])
-    document.surfaces = records(document.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
+  surfaces.surfaces = records(surfaces.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
   await save(resolve(stage, 'surfaces.json'), surfaces);
-  await save(resolve(stage, 'material.json'), material);
   await save(resolve(stage, 'inventory.json'), { ...inventory,
     assets: records(inventory.assets).map(asset => asset.location === 'public' && changed.has(requireString(asset.filename)) ? { ...asset, ...changed.get(requireString(asset.filename)) } : asset) });
   await save(resolve(stage, 'receipt.json'), { id, baselineAssets: inventory.assets,
@@ -76,7 +73,7 @@ export async function publishShapeLighting(id: string) {
     await copyFile(resolve(stage, filename), temporary);
     await rename(temporary, destination);
   }
-  for (const file of ['surfaces.json', 'material.json', 'inventory.json']) {
+  for (const file of ['surfaces.json', 'inventory.json']) {
     const value = await json(resolve(stage, file));
     if (file === 'inventory.json') await save(resolve(directory, file), value);
     else await writeFile(resolve(directory, 'prepared', file), JSON.stringify(value) + '\n');

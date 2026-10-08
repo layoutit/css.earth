@@ -33,7 +33,7 @@ export async function refreshSurfaceObservations(id: string, datasetIds: readonl
   const selected = config.raster.surfaceObservations?.filter(recipe => datasetIds.includes(recipe.id)) ?? [];
   if (selected.length !== datasetIds.length) throw new Error('Unknown surface-observation dataset.');
   const originals = new Map<string, Buffer>();
-  for (const name of ['scene.json', 'surfaces.json', 'material.json', 'minimaps.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  for (const name of ['scene.json', 'surfaces.json', 'minimaps.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
   originals.set('inventory.json', await readFile(resolve(objectDirectory, 'inventory.json')));
   const previousSurfaces = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8')));
   if (datasetIds.some(id => !records(previousSurfaces.surfaces).some(surface => surface.id === id))) throw new Error('Refresh cannot add a dataset.');
@@ -72,11 +72,9 @@ export async function refreshSurfaceObservations(id: string, datasetIds: readonl
   // Confirm the package has not changed while preparing, before applying any replacements.
   for (const [name, bytes] of originals) if (!(await readFile(resolve(outputDirectory, name))).equals(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
   if (!(await readFile(recipePath)).equals(recipeBytes)) throw new Error('Recipe changed during refresh.');
-  for (const name of ['surfaces.json', 'material.json']) {
-    const document = requireRecord(JSON.parse(originals.get(name)!.toString('utf8')));
-    document.surfaces = records(document.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
-    await save(resolve(outputDirectory, name), document);
-  }
+  const refreshed = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8')));
+  refreshed.surfaces = records(refreshed.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
+  await save(resolve(outputDirectory, 'surfaces.json'), refreshed);
   await mkdir(publicDirectory, { recursive: true });
   for (const surface of surfaces) for (const key of ['surface', 'shadowSurface', 'thumbnail', 'map']) {
     const filename = requireString(requireRecord(surface[key]).url).split('/').at(-1)!;

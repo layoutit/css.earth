@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { DELIVERED_PREPARED_RECORDS, WORKING_PREPARED_RECORDS, deliveredPreparedFiles, deliveredPreparedRecord, isWorkingPreparedFile, retainsPreparedScene } from './prepared-delivery.ts';
+import { DELIVERED_PREPARED_RECORDS, WORKING_PREPARED_RECORDS, deliveredPreparedFiles, deliveredPreparedRecord, isWorkingPreparedFile, preparedDeliveryContext } from './prepared-delivery.ts';
 
 test('a working record is never delivered, and a delivered record names its reader', () => {
-  for (const name of ['scene.json', 'sky.json', 'sun.json', 'world-navigation.json', 'object.json', 'page.json', 'inventory.json', 'terrain.json', 'terrain-zimpol.json',
+  for (const name of ['scene.json', 'material.json', 'sky.json', 'sun.json', 'world-navigation.json', 'object.json', 'page.json', 'inventory.json', 'terrain.json', 'terrain-zimpol.json',
     'slope-source-index.json', 'provenance.json', 'lenses.json']) {
     assert.equal(isWorkingPreparedFile(name), true, name);
     assert.equal(deliveredPreparedRecord(name), undefined, name);
@@ -16,7 +16,7 @@ test('a working record is never delivered, and a delivered record names its read
 
 test('no name is both delivered and working', () => {
   const samples = ['runtime.json', 'leaf-boxes.json', 'content.json', 'text.json', 'datasets.json', 'minimaps.json', 'arrival-billboard.json', 'authored-preparation.json',
-    'assets.json', 'surfaces.json', 'material.json', 'members.json', 'world-context.json', 'volume.json', 'source-lighting.json'];
+    'assets.json', 'surfaces.json', 'members.json', 'world-context.json', 'volume.json', 'source-lighting.json'];
   for (const name of samples) { assert.ok(deliveredPreparedRecord(name), name); assert.equal(isWorkingPreparedFile(name), false, name); }
 });
 
@@ -30,13 +30,24 @@ test('the delivered files of a directory: working records out, nested files in, 
 
 test('a lane whose refreshes repaint from its scene keeps the scene delivered; a sphere does not', () => {
   const descriptor = (...ids: string[]) => ({ properties: { recipe: { sources: ids.map(id => ({ id, path: `source/preparation/${id}.json` })) } } });
-  assert.equal(retainsPreparedScene(descriptor('terrestrial', 'content')), true);
-  assert.equal(retainsPreparedScene(descriptor('shape-model')), true);
-  assert.equal(retainsPreparedScene(descriptor('paged-ellipsoid')), true);
-  assert.equal(retainsPreparedScene(descriptor('geometry', 'presentation', 'raster')), false);
-  for (const value of [null, undefined, 'object', {}, { properties: { recipe: {} } }]) assert.equal(retainsPreparedScene(value), false);
+  const retains = (value: unknown) => preparedDeliveryContext(value).retainsScene;
+  assert.equal(retains(descriptor('terrestrial', 'content')), true);
+  assert.equal(retains(descriptor('shape-model')), true);
+  assert.equal(retains(descriptor('paged-ellipsoid')), true);
+  assert.equal(retains(descriptor('geometry', 'presentation', 'raster')), false);
+  for (const value of [null, undefined, 'object', {}, { properties: { recipe: {} } }]) assert.deepEqual(preparedDeliveryContext(value), { retainsScene: false, keepsMaterial: false });
   assert.equal(isWorkingPreparedFile('scene.json', { retainsScene: true }), false);
   assert.equal(deliveredPreparedRecord('scene.json', { retainsScene: true })?.reader, 'later-bake');
   assert.deepEqual(deliveredPreparedFiles(['runtime.json', 'scene.json', 'sky.json'], 'fixture', { retainsScene: true }), ['runtime.json', 'scene.json']);
   assert.deepEqual(deliveredPreparedFiles(['runtime.json', 'scene.json', 'sky.json'], 'fixture'), ['runtime.json']);
+});
+
+test('a solid sphere keeps its material; a shape body, whose material would be its surface list again, has none', () => {
+  const shaped = (kind: string) => ({ properties: { recipe: { shape: { kind }, sources: [{ id: 'terrestrial' }] } } });
+  assert.equal(preparedDeliveryContext(shaped('sphere')).keepsMaterial, true);
+  assert.equal(preparedDeliveryContext(shaped('ellipsoid')).keepsMaterial, true);
+  assert.equal(preparedDeliveryContext(shaped('radial-terrain')).keepsMaterial, false);
+  const found = ['runtime.json', 'scene.json', 'surfaces.json', 'material.json'];
+  assert.deepEqual(deliveredPreparedFiles(found, 'io', preparedDeliveryContext(shaped('sphere'))), found);
+  assert.deepEqual(deliveredPreparedFiles(found, 'eros', preparedDeliveryContext(shaped('radial-terrain'))), ['runtime.json', 'scene.json', 'surfaces.json']);
 });

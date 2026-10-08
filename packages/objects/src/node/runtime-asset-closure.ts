@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { readFile, readdir, rename, rm, lstat, unlink, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { promisify } from "node:util";
-import { deliveredPreparedFiles, isWorkingPreparedFile, retainsPreparedScene } from './prepared-delivery.js';
+import { deliveredPreparedFiles, isWorkingPreparedFile, preparedDeliveryContext } from './prepared-delivery.js';
 import { storePreparedRuntime } from './prepared-runtime-files.js';
 
 /**
@@ -197,7 +197,7 @@ export async function bakedPreparedFiles(preparedRoot: string, objectId: string,
 /** What the object's own descriptor says about its delivery; a directory without one (a fixture, a stage) retains nothing. */
 async function deliveryContext(objectDirectory: string) {
   const descriptor: unknown = await readFile(resolve(objectDirectory, 'object.json'), 'utf8').then(text => JSON.parse(text) as unknown, () => null);
-  return { retainsScene: retainsPreparedScene(descriptor) };
+  return preparedDeliveryContext(descriptor);
 }
 
 /** Re-inventory part of an object's `prepared/`: the rows `owns` selects are replaced by the baked files it selects, and

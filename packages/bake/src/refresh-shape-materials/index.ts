@@ -75,7 +75,7 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
   if (!views.length) throw new Error(`${id} has no shape-only dataset.`);
   await readAuthoredSources(objectDirectory);
   const originals = new Map<string, Buffer>();
-  for (const name of ['scene.json', 'surfaces.json', 'material.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  for (const name of ['scene.json', 'surfaces.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
   originals.set('inventory.json', await readFile(resolve(objectDirectory, 'inventory.json')));
   const scene = requireRecord(JSON.parse(originals.get('scene.json')!.toString('utf8')));
   const document = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8'))), oldSurfaces = records(document.surfaces);
@@ -128,11 +128,9 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
     if (assets.some(asset => asset.location === 'public' && asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: sha256(bytes) });
   }
   const replacements = new Map(surfaces.map(surface => [surface.id, surface]));
-  for (const name of ['surfaces.json', 'material.json']) {
-    const document = requireRecord(JSON.parse(originals.get(name)!.toString('utf8')));
-    document.surfaces = records(document.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
-    await save(resolve(outputDirectory, name), document);
-  }
+  const refreshed = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8')));
+  refreshed.surfaces = records(refreshed.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
+  await save(resolve(outputDirectory, 'surfaces.json'), refreshed);
   const nextInventory = { ...inventory, assets: assets.map(asset => asset.location === 'public' && changed.has(requireString(asset.filename)) ? { ...asset, ...changed.get(requireString(asset.filename)) } : asset) };
   await writeFile(resolve(objectDirectory, 'inventory.json'), JSON.stringify(nextInventory, null, 2) + '\n');
   const datasetIds = views.map(view => view.id);

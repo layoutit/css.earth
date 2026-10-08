@@ -290,7 +290,6 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
     const unpainted = surfaces.filter(surface => requireRecord(surface.layout).kind !== 'triangle-atlas').map(surface => surface.id);
     if (unpainted.length) throw new Error(`Radial surfaces without a triangle atlas: ${unpainted.join(', ')}.`);
     await writeFile(resolve(outputDirectory, 'surfaces.json'), JSON.stringify({ objectId: config.namespace, surfaces }) + '\n');
-    await writeFile(resolve(outputDirectory, 'material.json'), JSON.stringify(raster) + '\n');
   }
   const assets = { surfaces: Object.fromEntries(raster.surfaces.map(surface => [surface.id, {
     url: surface.surface.url, url2x: surface.surface.url,

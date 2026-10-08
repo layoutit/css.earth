@@ -14,7 +14,10 @@
 
 /** Who reads a delivered record after its bake. `unaudited`: listed before this ledger existed, no reader traced yet. */
 export type PreparedReader = 'page' | 'site-build' | 'later-bake' | 'unaudited';
-export interface DeliveredPreparedRecord { readonly name: string | RegExp; readonly reader: PreparedReader; readonly read: string }
+/** What a body's descriptor says about its delivery. A directory without a descriptor (a fixture, a stage) has neither. */
+export interface PreparedDeliveryContext { readonly retainsScene?: boolean; readonly keepsMaterial?: boolean }
+/** `when`: delivered only for a body the named context is true of, and a working record for every other body. */
+export interface DeliveredPreparedRecord { readonly name: string | RegExp; readonly reader: PreparedReader; readonly read: string; readonly when?: keyof PreparedDeliveryContext }
 
 export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   // A layered body's page and its build.
@@ -30,7 +33,15 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   { name: 'authored-preparation.json', reader: 'later-bake', read: 'site/build/prepare/authored/prepare-authored.ts compares the next bake\'s sources with it' },
   { name: 'assets.json', reader: 'later-bake', read: 'site/build/content/prepare.ts and the content and photograph refreshes' },
   { name: 'surfaces.json', reader: 'later-bake', read: 'the surface, lighting and minimap refreshes (packages/bake/src/refresh-*)' },
-  { name: 'material.json', reader: 'later-bake', read: 'the shape and sphere lighting refreshes (packages/bake/src/refresh-*)' },
+  // A solid sphere's material holds its lighting bank and pole images. A shape body bakes its light into its mesh atlases:
+  // its material would be its surface list again, so it has none.
+  { name: 'material.json', reader: 'later-bake', read: 'packages/bake/cli/refresh-sphere-lighting.mts', when: 'keepsMaterial' },
+  // A scene is delivered by the lanes whose later refresh repaints from it and cannot rebuild it without the body's
+  // downloads: the terrestrial and shape-model lanes read its atlas layout and faces
+  // (packages/bake/src/objects/layers/terrestrial/retained-atlas.ts), the paged-ellipsoid lane its surface asset banks on
+  // a reuse-images run (packages/bake/src/objects/layers/paged-ellipsoid/object.ts). A sphere's scene is rebuilt from its
+  // tracked profile (packages/bake/src/scene/geometry-scene.ts): the runtime carries what the page draws.
+  { name: 'scene.json', reader: 'later-bake', read: 'the shape refreshes (retained-atlas.ts) and the paged-ellipsoid reuse-images run', when: 'retainsScene' },
   { name: /^source-lighting(-[a-z0-9-]+)?\.json$/u, reader: 'later-bake', read: 'packages/bake/src/objects/layers/terrestrial/radial/radial-materials.ts' },
   { name: 'panel.json', reader: 'later-bake', read: 'the content preparation of the bodies that author a panel' },
   { name: 'record.json', reader: 'later-bake', read: 'the volume bank preparation' },
@@ -60,22 +71,16 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
     .map(name => ({ name, reader: 'unaudited' as const, read: 'no reader found by name' })),
 ];
 
-export interface WorkingPreparedRecord { readonly name: string | RegExp; readonly why: string; readonly unless?: 'retains-scene' }
+export interface WorkingPreparedRecord { readonly name: string | RegExp; readonly why: string }
 
-/**
- * The lanes that keep their scene delivered: a later refresh repaints from it and cannot rebuild it without the body's
- * downloads. The terrestrial and shape-model lanes read its atlas layout and faces
- * (packages/bake/src/objects/layers/terrestrial/retained-atlas.ts); the paged-ellipsoid lane reads its surface asset banks
- * on a reuse-images run (packages/bake/src/objects/layers/paged-ellipsoid/object.ts). A sphere's scene is rebuilt from its
- * tracked profile (packages/bake/src/scene/geometry-scene.ts), so it is a working record.
- */
+/** The recipe sources of the lanes that keep their scene delivered. */
 export const SCENE_RETAINING_SOURCES: readonly string[] = ['terrestrial', 'shape-model', 'paged-ellipsoid'];
-export interface PreparedDeliveryContext { readonly retainsScene?: boolean }
-/** Whether an object descriptor's recipe names a lane that keeps its scene delivered. */
-export function retainsPreparedScene(descriptor: unknown): boolean {
+/** The delivery context of the body an object descriptor describes. */
+export function preparedDeliveryContext(descriptor: unknown): Required<PreparedDeliveryContext> {
   const record = (value: unknown): Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value) ? value as Record<string, unknown> : {};
-  const sources = record(record(record(descriptor).properties).recipe).sources;
-  return Array.isArray(sources) && sources.some(source => SCENE_RETAINING_SOURCES.includes(String(record(source).id)));
+  const recipe = record(record(record(descriptor).properties).recipe), sources = recipe.sources, shape = record(recipe.shape).kind;
+  return { retainsScene: Array.isArray(sources) && sources.some(source => SCENE_RETAINING_SOURCES.includes(String(record(source).id))),
+    keepsMaterial: shape !== undefined && shape !== 'radial-terrain' };
 }
 /** Records a checkout writes for itself. Never inventoried, published or restored. */
 export const WORKING_PREPARED_RECORDS: readonly WorkingPreparedRecord[] = [
@@ -84,7 +89,6 @@ export const WORKING_PREPARED_RECORDS: readonly WorkingPreparedRecord[] = [
   { name: 'page.json', why: 'the page transport, built from the runtime when read' },
   { name: /^terrain(-[a-z0-9-]+)?\.json$/u, why: 'a radial-terrain report only the audits read' },
   { name: /-source-index\.json$/u, why: 'a source-index raster only the audits read' },
-  { name: 'scene.json', why: 'the scene a bake builds before its presentation: the runtime carries what the page draws', unless: 'retains-scene' },
   { name: 'controls.json', why: 'the content step\'s controls, which the runtime carries: readers take them from it (prepared-transport.ts)' },
   { name: 'sky.json', why: 'a copy of the runtime\'s sky' },
   { name: 'sun.json', why: 'a copy of the runtime\'s sun' },
@@ -97,18 +101,16 @@ export const WORKING_PREPARED_RECORDS: readonly WorkingPreparedRecord[] = [
 const names = (entry: { readonly name: string | RegExp }, filename: string) => typeof entry.name === 'string' ? entry.name === filename : entry.name.test(filename);
 const topLevelRecord = (filename: string) => !filename.includes('/') && filename.endsWith('.json');
 
-/** The record a scene-retaining lane delivers in place of treating its scene as a working record. */
-const RETAINED_SCENE: DeliveredPreparedRecord = { name: 'scene.json', reader: 'later-bake', read: 'the shape refreshes (retained-atlas.ts) and the paged-ellipsoid reuse-images run' };
-
-/** A file the checkout keeps to itself. */
-export function isWorkingPreparedFile(filename: string, { retainsScene = false }: PreparedDeliveryContext = {}): boolean {
-  return topLevelRecord(filename) && WORKING_PREPARED_RECORDS.some(entry => names(entry, filename) && !(entry.unless === 'retains-scene' && retainsScene));
+/** The ledger's entry for a top-level record, when this body delivers it. */
+export function deliveredPreparedRecord(filename: string, context: PreparedDeliveryContext = {}): DeliveredPreparedRecord | undefined {
+  if (!topLevelRecord(filename)) return undefined;
+  return DELIVERED_PREPARED_RECORDS.find(entry => names(entry, filename) && (!entry.when || context[entry.when] === true));
 }
 
-/** The ledger's entry for a top-level record, when it is delivered. */
-export function deliveredPreparedRecord(filename: string, { retainsScene = false }: PreparedDeliveryContext = {}): DeliveredPreparedRecord | undefined {
-  if (!topLevelRecord(filename)) return undefined;
-  return retainsScene && filename === RETAINED_SCENE.name ? RETAINED_SCENE : DELIVERED_PREPARED_RECORDS.find(entry => names(entry, filename));
+/** A file the checkout keeps to itself: a working record, or a record only other lanes deliver. */
+export function isWorkingPreparedFile(filename: string, context: PreparedDeliveryContext = {}): boolean {
+  return topLevelRecord(filename) && !deliveredPreparedRecord(filename, context) &&
+    [...WORKING_PREPARED_RECORDS, ...DELIVERED_PREPARED_RECORDS].some(entry => names(entry, filename));
 }
 
 /**
