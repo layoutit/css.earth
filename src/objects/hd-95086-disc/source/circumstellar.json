@@ -1,0 +1,127 @@
+{
+  "schema": "cssearth-circumstellar-volume@2",
+  "id": "hd-95086-disc",
+  "host": "hd-95086",
+  "name": "HD 95086 dust ring",
+  "description": "The broad belt of dust around Aiolos (HD 95086), brightest about 200 au from the star, in its own glow at 1.3 millimetres, as ALMA imaged it in April and May 2015 (project 2013.1.00612.S), in the color scale Su et al. (2017) show it in. The giant planet b orbits inside it. One unit is one astronomical unit; the ring's size and tilt are the ones Su et al. fitted, its depth is that tilted ring, and its thickness and which side is nearer are conventions, not measurements.",
+  "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2013.1.00612.S",
+  "credit": "ALMA (ESO/NAOJ/NRAO), project 2013.1.00612.S (PI M. Booth); ARI-L image, ALMA Science Archive (Massardi et al. 2021, PASP 133, 085001); Su et al. (2017), AJ 154, 225",
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "url": "https://almascience.eso.org/alma-data/data-policy",
+    "note": "ALMA data are released under CC BY 4.0; the observatory asks for its standard acknowledgement, which the host star's NOTICE.md carries."
+  },
+  "grid": {
+    "size": 230,
+    "halfUnits": 540,
+    "slabs": 115
+  },
+  "defaultDataset": "dust",
+  "datasets": [
+    {
+      "id": "dust",
+      "label": "ALMA · dust ring, 1.3 mm",
+      "title": "The dust ring around Aiolos (HD 95086) in its own glow at 1.3 millimetres, from ALMA",
+      "summary": "The broad belt of dust around the star, brightest about 200 au out, in its own glow at 1.3 mm, as ALMA imaged it. Planet b orbits inside it.",
+      "description": "ALMA observed the star six times between 10 April and 2 May 2015 at 1.3 millimetres (project 2013.1.00612.S). What it sees is the dust's own faint heat, not starlight. This is the image the ARI-L project made from those observations for the public archive, brought to the resolution of the map Su et al. (2017) made from them together with a second set of observations, and shown in the color scale of their map of the disc alone (Figure 3, right). It holds half the data of theirs and is noisier: 12.8 µJy per beam against their 7.5. Two sources behind the ring are removed as the points Su et al. subtract; they find the bright one consistent with a distant galaxy. What is left of it, the brightest spot on the ring's west side, is in their map too and is not known to be dust. The ring's size and tilt are Su et al.'s fit: brightest 200 au from the star at the distance they adopt (206 au at Gaia's distance), 168 au wide and tilted 30°. The image has no third axis, so the depth is inferred: each line of sight is placed on that tilted ring, which projects to the image better than a spherical shell or a constant depth. Its thickness and which side is nearer are conventions; no observation gives them. Su et al. do not detect the star at this wavelength. The star itself is the sphere at the centre, and planet b orbits inside the ring.",
+      "program": "",
+      "archive": {
+        "band": "ALMA-B6-CONT",
+        "path": ".local/hd-95086-disc/observations/member.uid___A001_X145_X232.ari_l.hd_95086_sci.spw0_1_2_3_238443MHz.12m.cont.I.pbcor.fits",
+        "url": "https://almascience.eso.org/dataPortal/member.uid___A001_X145_X232.ari_l.hd_95086_sci.spw0_1_2_3_238443MHz.12m.cont.I.pbcor.fits",
+        "landing": "https://almascience.eso.org/aq/?projectCode=2013.1.00612.S",
+        "bytes": 213120,
+        "unit": "Jy/beam",
+        "filter": "Band 6 continuum, 231 to 248 GHz (1.3 mm)",
+        "instrument": "ALMA 12-m array, one pointing in a compact configuration",
+        "observed": "between 10 April and 2 May 2015",
+        "title": "ALMA project 2013.1.00612.S, member OUS uid://A001/X145/X232, ARI-L continuum image hd_95086_sci.spw0_1_2_3_238443MHz.12m.cont.I.pbcor",
+        "credit": "ALMA (ESO/NAOJ/NRAO), project 2013.1.00612.S (PI M. Booth); imaged by the ARI-L project (Massardi et al. 2021, PASP 133, 085001; CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2013.1.00612.S.",
+        "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+        "facility": {
+          "facilityId": "alma"
+        },
+        "license": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
+        "acquisition": "Downloaded unchanged from the ALMA Science Archive data portal on 2026-10-08 (the ARI-L product DataLink lists for member OUS uid://A001/X145/X232); restored from that origin or the R2 source cache when missing.",
+        "limitation": "The image is the ARI-L project’s, not the paper’s own: made from one of the two data sets the paper combines (its data set B), with other weighting and cleaning, and meant to show what the data hold, not as a final science image. At the paper’s resolution its noise is 12.8 µJy per beam against the paper’s 7.5 for both sets. It holds the paper’s flux: 2.73 mJy inside 4.8″ in the ring’s plane with the two points removed, against 2.79 ± 0.1. What is left of the bright background source after its point is removed, up to 189 µJy per beam on the ring’s west side, is in the paper’s own map of the disc too and is drawn; it is not known to be dust. Emission fainter than the drawn noise is not claimed."
+      },
+      "pointSources": {
+        "sources": [
+          {
+            "id": "bright",
+            "raDeg": 164.2597407,
+            "decDeg": -68.6670687,
+            "peak": 0.00081
+          },
+          {
+            "id": "faint",
+            "raDeg": 164.2599545,
+            "decDeg": -68.6677465,
+            "peak": 0.0001
+          }
+        ],
+        "source": "Su et al. (2017), AJ 154, 225, arXiv:1709.10129, Table 3: the two point sources they subtract to make their map of the disc alone (Figure 3, right), from a fit to the long baselines of both data sets: 0.81 ± 0.03 mJy at 3.08″ west and 0.83″ north of the star, and 0.10 ± 0.02 mJy at 2.80″ west and 1.61″ south. They take the star at the pointing centre, which is this image's reference position, and the offsets are counted from it. They find the bright one consistent with a star-forming galaxy far behind the star. A point source's peak per beam is its flux, whatever the beam"
+      },
+      "smoothTo": {
+        "beamArcsec": [
+          1.22,
+          1.03
+        ],
+        "positionAngleDeg": 77.4,
+        "source": "the beam of the map Su et al. (2017, section 3.1) made from both data sets, 1.22″ × 1.03″ at 77.4°, with natural weighting; their map of the disc alone (Figure 3, right) is of that data. This image's ARI-L weighting gave 1.152″ × 0.991″ at 75.5°"
+      },
+      "colorMap": {
+        "path": "su-2017-figure-3-colormap.json",
+        "range": [
+          -52.33,
+          261.98
+        ],
+        "unitScale": 1000000,
+        "unit": "µJy/beam",
+        "source": "the color bar of Su et al. (2017), Figure 3, right panel, decoded from the figure in the paper's arXiv source: linear in signal-to-noise ratio, labelled from −7 to 35. The paper gives the noise of the map made from both data sets as 7.5 µJy per beam (section 3.1); times that, the listed colors run from −52.33 to 261.98 µJy per beam. Reading the bar's unit as that noise is this recipe's, not a statement of the paper's caption"
+      },
+      "geometry": "ring",
+      "noiseFade": {
+        "fromNoise": 3.4641,
+        "toNoise": 5.1962,
+        "source": "Stated, a display choice: a column fades in as its brightness rises from two to three times its per-pixel noise (12.8 µJy per beam, measured 5.5 to 8.5 arcseconds out), so empty sky is not drawn; three times the noise is the lowest contour Su et al. (2017) draw. The low end of this color scale is a saturated blue, not a dark color, so sky left in would be drawn as bright as the ring. The author counts noise for the mean of the three channels, 1/√3 of the image’s when one band feeds all three, so the multiples it is given are 3.4641 and 5.1962. Every channel of a column is scaled alike, so no color changes."
+      },
+      "channels": {
+        "red": [
+          "ALMA-B6-CONT"
+        ],
+        "green": [
+          "ALMA-B6-CONT"
+        ],
+        "blue": [
+          "ALMA-B6-CONT"
+        ]
+      },
+      "stellarFluxJy": {},
+      "stellarFluxSource": "Not divided by the star: at 1.3 mm the ring is the dust's own thermal emission, not scattered starlight, and it is shown in its own brightness, Jy per beam.",
+      "innerMaskArcsec": 0,
+      "innerMaskSource": "No mask: an interferometer image has no coronagraph, and Su et al. (2017, section 3.4) do not detect the star at 1.3 mm, so nothing is removed at the centre. The star is the host body's own sphere.",
+      "outerUnits": 400,
+      "backgroundAnnulusArcsec": [
+        5.5,
+        8.5
+      ],
+      "nearSidePositionAngleDeg": 7,
+      "nearSideSource": "the north end of the minor axis is drawn nearer, a convention; this image does not say which end is. The minor axis is the ring's position angle, 97°, less 90°",
+      "heightOfRadius": 0.1,
+      "heightSource": "a convention, the height the PDS 70 and HD 181327 rings are drawn with. Su et al. (2017, section 3.1) model the ring as geometrically thin, with no scale height, and at 30° from face-on the image cannot resolve a thickness",
+      "adoptPublishedRing": "what is left of the bright source after its point is removed lies on the ring's west side and pulls the ridge traced on this image (189 au, 38°, position angle 93°); Su et al. (2017) fit a gaussian ring to these observations and their data set A together, with that source masked or modelled (section 3.4, Table 4). They print 200 ± 6 au and 168 ± 7 au at the 83.8 pc they adopt, 2.39″ and 2.00″ on the sky, which are 206.4 and 173.3 au at Gaia DR3's 86.46 pc",
+      "topAlpha": 0.5,
+      "published": {
+        "citation": "Su et al. (2017), AJ 154, 225, section 3.4, arXiv:1709.10129",
+        "url": "https://arxiv.org/abs/1709.10129",
+        "radiusUnits": 206.4,
+        "widthFwhmUnits": 173.3,
+        "inclinationDeg": 30,
+        "positionAngleDeg": 97,
+        "toleranceDeg": 5,
+        "radiusTolerance": 0.1
+      }
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "moth-disc",
+  "type": "volume-dataset-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -386301268236462200,
+        869799977334507300,
+        -599411018062485400
+      ],
+      "localToReferenceXyzw": [
+        -0.18162823395876193,
+        0.856431004852998,
+        0.4727426402380818,
+        -0.10025724241287036
+      ],
+      "metersPerUnit": 149597870700,
+      "boundsUnits": {
+        "min": [
+          -170,
+          -170,
+          -170
+        ],
+        "max": [
+          170,
+          170,
+          170
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json"
+    },
+    "host": "moth"
+  },
+  "prepared": {
+    "format": "cssearth-volume-dataset-index@1",
+    "url": "prepared/datasets.json"
+  }
+}

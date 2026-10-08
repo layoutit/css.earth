@@ -215,6 +215,14 @@
       "bytes": 3904
     },
     {
+      "path": "src/objects/hd-95086-disc/prepared/presentation.json",
+      "bytes": 3227
+    },
+    {
+      "path": "site/public/scenes/hd-95086-disc/datasets/dust.webp",
+      "bytes": 4370
+    },
+    {
       "path": "src/objects/iota-horologii-corona/prepared/presentation.json",
       "bytes": 74066
     },
@@ -457,6 +465,14 @@
     {
       "path": "site/public/scenes/m95-layers/datasets/optical.webp",
       "bytes": 4326
+    },
+    {
+      "path": "src/objects/moth-disc/prepared/presentation.json",
+      "bytes": 3187
+    },
+    {
+      "path": "site/public/scenes/moth-disc/datasets/dust.webp",
+      "bytes": 1228
     },
     {
       "path": "src/objects/ngc-1275-volume/prepared/presentation.json",
@@ -1161,6 +1177,24 @@
       "credit": "CFHT ESPaDOnS · mapped here",
       "sourceUrl": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/cfht/"
     },
+    "hd-95086-disc/dust": {
+      "url2x": "/navigation/focus-hd-95086-disc-dust@2x.webp",
+      "inputs": [
+        "src/objects/hd-95086-disc/prepared/presentation.json",
+        "site/public/scenes/hd-95086-disc/datasets/dust.webp"
+      ],
+      "credit": "ALMA (ESO/NAOJ/NRAO)",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2013.1.00612.S"
+    },
+    "hd-95086-disc": {
+      "url2x": "/navigation/focus-object-hd-95086-disc@2x.webp",
+      "inputs": [
+        "src/objects/hd-95086-disc/prepared/presentation.json",
+        "site/public/scenes/hd-95086-disc/datasets/dust.webp"
+      ],
+      "credit": "ALMA (ESO/NAOJ/NRAO)",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2013.1.00612.S"
+    },
     "iota-horologii-corona/oct-2015": {
       "url2x": "/navigation/focus-iota-horologii-corona-oct-2015@2x.webp",
       "inputs": [
@@ -1710,6 +1744,24 @@
       "credit": "SDSS",
       "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
     },
+    "moth-disc/dust": {
+      "url2x": "/navigation/focus-moth-disc-dust@2x.webp",
+      "inputs": [
+        "src/objects/moth-disc/prepared/presentation.json",
+        "site/public/scenes/moth-disc/datasets/dust.webp"
+      ],
+      "credit": "ALMA (ESO/NAOJ/NRAO)",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S"
+    },
+    "moth-disc": {
+      "url2x": "/navigation/focus-object-moth-disc@2x.webp",
+      "inputs": [
+        "src/objects/moth-disc/prepared/presentation.json",
+        "site/public/scenes/moth-disc/datasets/dust.webp"
+      ],
+      "credit": "ALMA (ESO/NAOJ/NRAO)",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S"
+    },
     "ngc-1275-volume/sdss-optical": {
       "url2x": "/navigation/focus-ngc-1275-volume-sdss-optical@2x.webp",
       "inputs": [
@@ -2212,6 +2264,7 @@
     "hd-189733-corona": "hd-189733-corona",
     "hd-35296-corona": "hd-35296-corona",
     "hd-6569-corona": "hd-6569-corona",
+    "hd-95086-disc": "hd-95086-disc",
     "iota-horologii-corona": "iota-horologii-corona",
     "lmc-volume": "lmc-volume",
     "m1-volume": "m1-volume",
@@ -2227,6 +2280,7 @@
     "m83-layers": "m83-layers",
     "m87-volume": "m87-volume",
     "m95-layers": "m95-layers",
+    "moth-disc": "moth-disc",
     "ngc-1275-volume": "ngc-1275-volume",
     "ngc-1365-layers": "ngc-1365-layers",
     "ngc-1637-layers": "ngc-1637-layers",
