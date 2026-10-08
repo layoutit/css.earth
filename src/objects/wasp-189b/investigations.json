@@ -29,6 +29,17 @@
         "https://ui.adsabs.harvard.edu/abs/2020A&A...643A..94L/abstract",
         "https://ui.adsabs.harvard.edu/abs/2022ApJS..259...62I/abstract"
       ]
+    },
+    {
+      "id": "published-phase-curves",
+      "subject": "Published phase curves as a map of longitude (TESS, Patel et al. 2025; CHEOPS, Deline et al. 2022)",
+      "status": "excluded",
+      "finding": "Read on 2026-10-08. Patel et al. (2025, arXiv:2512.05175) fit the TESS curve with a first-order Fourier series (E 203.4 ppm, C1 137.8, D1 -23.6), but its night-side flux is negative (-71.8 +36.4/-36.0 ppm), so the map has no night side to check, and the printed day and night temperatures (2746 and 1529 K) are hemisphere means of the paper's own two-dimensional map, not brightness temperatures of the fitted depth. Deline et al. (2022, arXiv:2201.04518) fit CHEOPS with a reflecting sphere plus a thermal sinusoid whose split the paper calls degenerate, with the night flux fixed at zero. Neither prints what the published phase-curve reader needs.",
+      "revisitWhen": "A paper prints a day-side and a night-side brightness temperature of one band from a first-order fit, or releases its map as a file.",
+      "evidence": [
+        "https://arxiv.org/abs/2512.05175",
+        "https://arxiv.org/abs/2201.04518"
+      ]
     }
   ]
 }
