@@ -45,7 +45,8 @@
             "u2": "b"
           }
         },
-        "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 8,000 K and log g 4 (u1 0.313, u2 0.327): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 8,000 K and log g 4 (u1 0.313, u2 0.327): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The surface is darkened by latitude from the gravity-darkened fit of Deline et al. (2022), A&A 659, A74 to CHEOPS transits of WASP-189 b: the hot poles brighter and bluer, the cooler equator dimmer and redder, on the flattened outline the same fit gives.",
+        "gravityDarkening": "photometry/gravity-darkening.json"
       }
     }
   ],

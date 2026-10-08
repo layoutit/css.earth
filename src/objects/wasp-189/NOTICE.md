@@ -7,3 +7,5 @@ Color: Gaia DR3 XP spectrum, source 6339097679918871168, through the CIE 1931 2Â
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 
 Placement: Gaia DR3 source 6339097679918871168: position, parallax, proper motion and radial velocity. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+
+Shape, gravity darkening and spin axis: Deline, A., et al. (2022), "The atmosphere and architecture of WASP-189 b probed by its CHEOPS phase curve", A&A 659, A74, doi:10.1051/0004-6361/202142400.

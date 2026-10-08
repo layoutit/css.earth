@@ -323,7 +323,12 @@ exponent. Its record names the law in place of β, and the same module computes 
 Australis is the one such star: Bailey et al. (2024) fitted its polarization, and from their rotation rate and pole the
 law returns both equator temperatures they print, each within 1 K.
 
-Six things in this route are not printed in a paper:
+A planet that crosses such a star dims it unevenly, and a fit to that transit gives the same model: the flattening, the
+exponent, the pole's temperature, and the spin axis measured against the planet's orbit, which the star's rotation record
+places (`cssearth-measured-obliquity-pole@1`). KELT-9, WASP-189 and MASCARA-1 are drawn from such fits, each package
+written or edited by hand.
+
+Eight things in this route are not printed in a paper:
 
 - The Roche shape equation. The fit papers do not print it; the one used reproduces their radii.
 - For Kaus Australis, the step between two measures of spin: the fit gives the rate as a fraction of break-up, the law
@@ -335,6 +340,22 @@ Six things in this route are not printed in a paper:
 - Which pole leans toward us when the paper leaves that open: the one at the printed position angle.
 - The colors. Each latitude is the star's measured color scaled by a Planck spectrum at that latitude's temperature
   against one at the surface mean.
+- For a transit fit, the star's rate of spin as a fraction of break-up. The paper prints the flattening; the rate is that
+  of the Roche surface with that flattening, and the record's radius ratio is 1 / (1 - flattening).
+- The one radius a star's record keeps: the sphere with the volume of the fitted spheroid. A planet's orbit kept in
+  stellar radii is drawn against it, so WASP-189 b's is 0.8% smaller and MASCARA-1 b's 1.5% smaller than before.
+
+Stars with a published fit that is not drawn, and what its paper leaves the record without:
+
+| Star | Paper | What is missing |
+| --- | --- | --- |
+| MASCARA-4 | Ahlers et al. (2020), ApJ 888, 63, Table 2 | The equatorial radius (the polar one is printed) and a pole temperature |
+| WASP-33 | Dholakia et al. (2022), ApJ 925, 185, fit table | A rotation period, which the spin-axis record needs |
+| HAT-P-70 | Zhou et al. (2019), AJ 158, 141 | A pole temperature, a rotation period and a true obliquity |
+| KELT-20 | Singh et al. (2024), A&A 683, A1 | A flattening, an exponent and a pole temperature; its two fits put the inclination at 88.9 and 55 degrees |
+| KELT-7 | Garai et al. (2025), A&A 700, A5 | A fit: the paper finds no uneven transit |
+| Alkaid | Lazzarotto et al. (2026), A&A 709, A251 | The pole's position angle and a darkening law (a model fitted to the spectrum) |
+| Zosma, Denebola, Heze, Seginus, Cursa, Biham | Jones (2016), thesis, Table 7.3 | A measured spin: the equatorial speed and the inclination are assumed |
 
 ![Megrez and Kaus Australis as plain spheres and as their papers' fits](images/fast-rotator-fits.webp)
 

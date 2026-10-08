@@ -22,14 +22,14 @@
     ]
   },
   "introduction": {
-    "text": "Its radius and temperature follow Lendl et al. 2020.",
+    "text": "It turns once in 1.2 days, which flattens it by 2.88%, and its planet's orbit passes over its poles.",
     "sources": [
       {
-        "catalogueId": "doi-10-1051-0004-6361-202038677",
-        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...643A..94L/abstract",
-        "label": "Lendl et al. (2020), Astronomy & Astrophysics 643 A94",
-        "checked": "2026-09-29",
-        "locator": "NASA Exoplanet Archive ps table (st_refname LENDL_ET_AL__2020): st_teff 8000, st_rad 2.36, st_mass 2.03"
+        "catalogueId": "doi-10-1051-0004-6361-202142400",
+        "url": "https://doi.org/10.1051/0004-6361/202142400",
+        "label": "Deline et al. (2022), Astronomy & Astrophysics 659 A74",
+        "checked": "2026-10-08",
+        "locator": "Table 3: P*, f*, Psi_p"
       },
       {
         "catalogueId": "wikipedia-wasp-189-b",
@@ -44,8 +44,8 @@
   "datasets": {
     "color": {
       "title": "Photosphere color",
-      "detail": "From its Gaia spectrum",
-      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+      "detail": "Spectrum and spin",
+      "summary": "Gaia's color of the star, brighter and bluer at the poles where its fast spin makes it hotter. The darker edge is a model."
     }
   }
 }

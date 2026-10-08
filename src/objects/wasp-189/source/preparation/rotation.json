@@ -1,10 +1,25 @@
 {
-  "schema": "cssearth-display-orientation@1",
-  "rightAscensionDegrees": 225.6867249077036,
-  "declinationDegrees": 86.96850926488213,
-  "displayMeridianDegrees": 90,
+  "schema": "cssearth-measured-obliquity-pole@1",
+  "planet": "wasp-189b",
+  "projectedObliquity": {
+    "degrees": 91.7,
+    "source": "Deline et al. (2022), A&A 659, A74 (arXiv:2201.04518), Table 3: projected orbital obliquity lambda_p = 91.7 +/- 1.2 degrees from the gravity-darkened CHEOPS transits, with a prior of 89.3 +/- 1.4 degrees from the Doppler tomography of Anderson et al. (2018) (section 4.6.3)."
+  },
+  "stellarInclination": {
+    "degrees": 68.2,
+    "source": "Deline et al. (2022), Table 3: i* = 68.2 +/- 1.6 degrees, the angle between the line of sight and the spin axis (Appendix B), which is this record's convention (90 equator-on). The paper draws two possible orientations of the system that the transits do not tell apart (section 5.1); the record uses the one its table prints."
+  },
+  "trueObliquity": {
+    "degrees": 89.6,
+    "uncertaintyDegrees": 1.2,
+    "source": "Deline et al. (2022), Table 3 and section 5.1: Psi_p = 89.6 +/- 1.2 degrees."
+  },
+  "equatorialRotationPeriod": {
+    "days": 1.198,
+    "source": "Deline et al. (2022), Table 3, derived parameters: stellar rotation period P* = 1.198 +0.026/-0.025 days."
+  },
   "phase": "arbitrary-display-phase",
-  "source": "No measured rotation axis or period is used. The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
-  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
-  "qualification": "Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of WASP-189 are unmeasured; the axis shown is where celestial north lies on the sky."
+  "source": "The star's spin axis measured against WASP-189 b's orbit (Deline et al. (2022), A&A 659, A74): the pole is built in the planet's sky frame from lambda and i*, with the orbit from packages/astronomy/data/bodies/wasp-189b.json, and the star turns once every 1.198 days. The record's lambda, i* and the orbit's 84.03 degree inclination give psi 89.4 degrees, inside the published 89.6 +/- 1.2 degrees.",
+  "coordinateSystem": "ICRF/J2000. +Z is the measured spin axis; +X faces the Sun at the scene epoch, so grid longitude 0 faces Earth; east longitude. The whole surface turns at one rate.",
+  "qualification": "The orbit is polar: WASP-189 b passes over the star's poles. The axis's position angle on the sky is not measured; it is placed relative to the planet's orbit, whose orientation on the sky is a display convention (ascending node at position angle 0). Which of the two orientations the paper draws is the true one is not measured. The gravity-darkened surface is symmetric about the axis, so the turning is not visible."
 }

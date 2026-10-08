@@ -20,10 +20,10 @@ const record = async (id: string) => {
 test('the Roche-von Zeipel model reproduces each paper\'s equatorial radius and temperature from its polar values', async () => {
   const ids = (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name)
     .filter(id => existsSync(new URL(`${id}/source/photometry/gravity-darkening.json`, objects))).sort();
-  assert.deepEqual(ids, ['achernar', 'alderamin', 'altair', 'caph', 'kaus-australis', 'kelt-9', 'megrez', 'rasalhague', 'regulus', 'vega']);
+  assert.deepEqual(ids, ['achernar', 'alderamin', 'altair', 'caph', 'kaus-australis', 'kelt-9', 'mascara-1', 'megrez', 'rasalhague', 'regulus', 'vega', 'wasp-189']);
   for (const id of ids) {
     const { raw, record: model } = await record(id);
-    // A transit fit publishes the radius ratio and no equatorial temperature (KELT-9, next test).
+    // A transit fit publishes the radius ratio or the flattening and no equatorial temperature (KELT-9, WASP-189 and MASCARA-1, below).
     if (raw.model.equatorialToPolarRadius) continue;
     const ratio = model.equatorialRadiusSolar / model.polarRadiusSolar;
     // The published radii each carry about half a percent; the model ratio must fall inside their combined error.
@@ -79,6 +79,24 @@ test('KELT-9: the Roche surface of the TESS fit\'s flattening, and how its equat
   assert.match(raw.reportedNotModelled.equatorPoleContrast.cell, /38%/);
   // The mean surface temperature stays within the paper's 450 K uncertainty on the adopted 10,170 K.
   assert.ok(Math.abs(meanSurfaceTemperature(model) - 9855) < 1);
+});
+
+test('WASP-189 and MASCARA-1: each transit fit\'s flattening, and the equator its Roche surface gives', async () => {
+  // Deline et al. (2022), Table 3: the polar radius 2.88% smaller than the equatorial 2.363 solar radii; beta 0.22, fixed; pole 7967 K.
+  // Hooton et al. (2022), Table 5: oblateness 0.0439; equatorial radius 2.082 solar radii; beta 0.199 and pole 7490 K, both fixed.
+  const fits = [{ id: 'wasp-189', oblateness: 0.0288, equatorialSolar: 2.363, omega: 0.42821, equatorK: 7760.1 }, { id: 'mascara-1', oblateness: 0.0439, equatorialSolar: 2.082, omega: 0.52046, equatorK: 7217.7 }];
+  for (const fit of fits) {
+    const { record: model } = await record(fit.id);
+    assert.equal(model.equatorialRadiusSolar, fit.equatorialSolar, fit.id);
+    assert.ok(Math.abs(1 - model.polarRadiusSolar / model.equatorialRadiusSolar - fit.oblateness) < 1e-6, `${fit.id}: the record's ratio is the printed flattening`);
+    assert.ok(Math.abs(rocheRadius(model.omega, Math.PI / 2) - 1 / (1 - fit.oblateness)) < 1e-6 && Math.abs(model.omega - fit.omega) < 1e-5, `${fit.id}: omega ${model.omega}`);
+    assert.equal(model.equatorTemperatureK, undefined, `${fit.id}: the paper gives no equatorial temperature`);
+    assert.equal(model.inclinationDegrees, undefined, `${fit.id}: the pole is placed by the obliquity record, not a sky view`);
+    assert.ok(Math.abs(surfaceTemperature(model, Math.PI / 2) - fit.equatorK) < 0.1, `${fit.id}: equator ${surfaceTemperature(model, Math.PI / 2)}`);
+  }
+  // Deline et al. say about 200 K lie between WASP-189's poles and equator (section 5.1): this surface gives 207 K.
+  const { record: wasp } = await record('wasp-189');
+  assert.ok(Math.abs(wasp.poleTemperatureK - surfaceTemperature(wasp, Math.PI / 2) - 207) < 1);
 });
 
 test('the law of Espinosa Lara & Rieutord gives their closed form at the equator and von Zeipel\'s law at slow rotation', () => {
