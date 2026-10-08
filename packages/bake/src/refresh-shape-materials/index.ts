@@ -2,7 +2,7 @@
  * shared material preparer. `packages/bake/cli/refresh-shape-materials.mts <object-id>... | --all [--resume]
  * [--descriptions-only] [--source-root=<path>] [--shard=<index>/<count>]` is its command. The generated solar geometry is
  * written after the packages build, so the host passes it in (`SolarGeometry`). */
-import { retainedShapeAtlas, alternativeForDataset, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, neutralShapeViews, renderRadialSnapshot, parseSolidPreparationSource, loadRadialTerrain, prepareRadialMaterials } from '../objects/layers/terrestrial/index.ts';
+import { retainedScene, retainedShapeAtlas, alternativeForDataset, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, neutralShapeViews, renderRadialSnapshot, parseSolidPreparationSource, loadRadialTerrain, prepareRadialMaterials } from '../objects/layers/terrestrial/index.ts';
 import type { RadialMaterialSurface } from '../objects/layers/terrestrial/index.ts';
 import { shapeMaterialPath } from './paths.ts';
 import { sha256 } from '@cssearth/core/node';
@@ -11,7 +11,7 @@ import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'n
 import { resolve, basename, dirname } from 'node:path';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
-import { createSourceManifest } from '@cssearth/objects/node';
+import { createSourceManifest, readPreparedRuntimeText } from '@cssearth/objects/node';
 import type { SolarGeometry } from '../objects/scene/index.ts';
 import { refreshObservationControls } from '../refresh-surface-observations/index.ts';
 import { prepareSurfaceMinimaps } from '../surface-previews/index.ts';
@@ -75,9 +75,9 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
   if (!views.length) throw new Error(`${id} has no shape-only dataset.`);
   await readAuthoredSources(objectDirectory);
   const originals = new Map<string, Buffer>();
-  for (const name of ['scene.json', 'surfaces.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  for (const name of ['runtime.json', 'surfaces.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
   originals.set('inventory.json', await readFile(resolve(objectDirectory, 'inventory.json')));
-  const scene = requireRecord(JSON.parse(originals.get('scene.json')!.toString('utf8')));
+  const scene = retainedScene(requireRecord(JSON.parse(await readPreparedRuntimeText(outputDirectory))));
   const document = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8'))), oldSurfaces = records(document.surfaces);
   const sourceDirectory = resolve(objectDirectory, 'source');
   const source = await createSourceManifest({ objectId: id, objectName: id, sourceRoot: sourceDirectory });

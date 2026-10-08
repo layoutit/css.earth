@@ -2,7 +2,8 @@
  * staged then applied. `packages/bake/cli/refresh-terrain-photographs.mts <object-id> <datasetId>... [--apply-staged]` is
  * its command. The generated solar geometry is written after the packages build, so the host passes it in
  * (`SolarGeometry`). */
-import { retainedPhotographicAtlas, parseNativePhotographicSampling, prepareNativePhotographicAtlas } from '../objects/layers/terrestrial/index.ts';
+import { retainedScene, retainedPhotographicAtlas, parseNativePhotographicSampling, prepareNativePhotographicAtlas } from '../objects/layers/terrestrial/index.ts';
+import { readPreparedRuntimeText } from '@cssearth/objects/node';
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -21,8 +22,8 @@ async function refreshContext(id:string,ids:readonly string[]) {
   const objectDirectory=resolve('src/objects',id),sourceDirectory=resolve(objectDirectory,'source'),outputDirectory=resolve(objectDirectory,'prepared');
   const stage=resolve('output/terrain-photographs',id),publicDirectory=resolve('site/public/scenes',id);
   const descriptor=await json(resolve(objectDirectory,'object.json')),recipe=await json(resolve(sourceDirectory,'preparation/terrestrial.json'));
-  const source=await json(resolve(sourceDirectory,'manifest.json')),sceneBytes=await readFile(resolve(outputDirectory,'scene.json'));
-  const scene=requireRecord(JSON.parse(sceneBytes.toString('utf8'))),radial=retainedPhotographicAtlas(scene);
+  const source=await json(resolve(sourceDirectory,'manifest.json')),runtimeBytes=await readFile(resolve(outputDirectory,'runtime.json'));
+  const radial=retainedPhotographicAtlas(retainedScene(requireRecord(JSON.parse(await readPreparedRuntimeText(outputDirectory)))));
   const raster=requireRecord(recipe.raster),geometry=requireRecord(recipe.geometry),terrain=requireRecord(geometry.radialTerrain);
   if(terrain.sourceLighting || geometry.radialModels || geometry.radialTerrainAlternatives)throw new Error('This refresh requires the existing single-model cylindrical photographic lane.');
   const nativeRecipes=records(raster.observations),surfacesDocument=await json(resolve(outputDirectory,'surfaces.json')),
@@ -33,7 +34,7 @@ async function refreshContext(id:string,ids:readonly string[]) {
     if(!observation || !surface || !input || observation.textureScale || observation.monochromeBase)throw new Error(`Unsupported photographic selection ${id}/${datasetId}.`);
     return {datasetId,observation,surface,input};
   });
-  return {id,ids,objectDirectory,sourceDirectory,outputDirectory,stage,publicDirectory,descriptor,recipe,source,sceneBytes,radial,raster,surfacesDocument,surfaces,assetsDocument,selected};
+  return {id,ids,objectDirectory,sourceDirectory,outputDirectory,stage,publicDirectory,descriptor,recipe,source,runtimeBytes,radial,raster,surfacesDocument,surfaces,assetsDocument,selected};
 }
 
 /** Whether any file changed (its contents or its entry) after `time`, or is missing. */
@@ -44,7 +45,7 @@ async function anyChangedAfter(paths:readonly string[],time:number) {
 
 /** What a staged receipt was prepared from. It holds while none of these files changed after the receipt was written. */
 function bindings(context:Awaited<ReturnType<typeof refreshContext>>) {
-  return {files:[resolve(context.outputDirectory,'scene.json'),resolve(context.sourceDirectory,'preparation/terrestrial.json'),
+  return {files:[resolve(context.outputDirectory,'runtime.json'),resolve(context.sourceDirectory,'preparation/terrestrial.json'),
     resolve(context.sourceDirectory,'manifest.json'),resolve(context.objectDirectory,'object.json')],
     inputs:context.selected.map(({datasetId,input})=>({datasetId,path:requireString(input.path)}))};
 }
@@ -83,7 +84,7 @@ async function loadReceipt(context:Awaited<ReturnType<typeof refreshContext>>) {
   const receiptPath=resolve(context.stage,receiptName),receipt=await json(receiptPath),current=bindings(context);
   if(receipt.schema!=='cssEarth-native-photograph-stage@2' || receipt.id!==context.id || JSON.stringify(receipt.datasetIds)!==JSON.stringify(context.ids) ||
       JSON.stringify(receipt.inputs)!==JSON.stringify(current.inputs) || await anyChangedAfter(current.files,(await stat(receiptPath)).mtimeMs))
-    throw new Error(`${context.id}: staged photographic receipt ${receiptPath} is older than the current scene, recipe, source or descriptor.`);
+    throw new Error(`${context.id}: staged photographic receipt ${receiptPath} is older than the current runtime, recipe, source or descriptor.`);
   const entries=records(receipt.entries),results=new Map<string,Record<string,unknown>>();
   if(entries.length!==context.ids.length)throw new Error('Staged photographic receipt has an unexpected dataset count.');
   for(const entry of entries) {
@@ -133,6 +134,6 @@ export async function applyStagedTerrainPhotographs(id:string,ids:readonly strin
   for(const [path,document] of documents)await save(path,document);
   inventory.assets=assets.map(asset=>asset.location==='public'&&newAssets.has(requireString(asset.filename))?{...asset,...newAssets.get(requireString(asset.filename))}:asset);
   await save(resolve(context.objectDirectory,'inventory.json'),inventory);
-  if(!(await readFile(resolve(context.outputDirectory,'scene.json'))).equals(context.sceneBytes))throw new Error('Photographic refresh changed the retained scene.');
+  if(!(await readFile(resolve(context.outputDirectory,'runtime.json'))).equals(context.runtimeBytes))throw new Error('Photographic refresh changed the runtime.');
   return results;
 }

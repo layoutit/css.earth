@@ -9,7 +9,7 @@ import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../../astron
 import { loadAstronomyPackage } from '@cssearth/bake/astronomy';
 import * as geometry from '../../../src/platform/solar-geometry.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { parseSolidPreparationSource, parseSolidReplayScene } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseSolidPreparationSource, parseSolidReplayScene, retainedScene } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
@@ -133,7 +133,8 @@ test('epoch refresh updates the rendered carrier while preserving source geometr
   const { prepareEclipticPresentationFrame } = await import('@cssearth/bake/objects/scene');
   const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json'));
-  const scene = parseSolidReplayScene(await read('prepared/scene.json')),
+  // No scene is delivered for a shape body: it is read back from the runtime (retained-atlas.ts).
+  const scene = parseSolidReplayScene(retainedScene(requireRecord(await read('prepared/runtime.json')))),
     definition = restoreDepthSource(requireObjectRuntimeDefinition(await read('prepared/runtime.json')));
   // An old surface carrier must actually change; a new descriptor alone cannot fix it.
   const oldTransform = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)';
@@ -161,7 +162,7 @@ test('epoch refresh restores a compiled surface before updating its physical fra
   const { restoreDepthSource } = await import('@cssearth/bake/prepared-presentation');
   const read = async (name: string): Promise<unknown> => JSON.parse(await readFile(new URL(`../../../src/objects/mimas/${name}`, import.meta.url), 'utf8'));
   const config = parseSolidPreparationSource(await read('source/preparation/terrestrial.json')),
-    scene = parseSolidReplayScene(await read('prepared/scene.json'));
+    scene = parseSolidReplayScene(retainedScene(requireRecord(await read('prepared/runtime.json'))));
   const definition = requireObjectRuntimeDefinition(await read('prepared/runtime.json'));
   assert.ok(requireSnapshot(definition.depthPartitions?.groups, 'compiled depth groups').length > 1, 'exercise actual compiled source carriers');
   const original = structuredClone(definition);
@@ -172,26 +173,4 @@ test('epoch refresh restores a compiled surface before updating its physical fra
   assert.deepEqual(definition, original, 'refresh does not mutate the retained prepared bank');
   assert.deepEqual(requireSnapshot(actual.definition.surfaceHit, 'refreshed surface hit').triangles, requireSnapshot(definition.surfaceHit, 'prepared surface hit').triangles);
   assert.deepEqual(actual.definition.assets, definition.assets);
-});
-
-test('a delivered scene\'s sky and light follow the runtime after a position refresh', async () => {
-  let embeddedSkyCopies = 0, embeddedSunCopies = 0;
-  // The bodies whose scene stays delivered (packages/objects/src/node/prepared-delivery.ts); nothing else repeats the runtime's sky or Sun.
-  for (const id of ['mimas', 'phobos', 'eros', 'vesta']) {
-    const base = new URL(`../../../src/objects/${id}/prepared/`, import.meta.url);
-    const read = async (name: string) => requireRecord(JSON.parse(await readFile(new URL(name, base), 'utf8')));
-    const runtime = await read('runtime.json'), scene = await read('scene.json');
-    const sky = requireRecord(runtime.sky), sun = requireRecord(runtime.sun);
-    if (scene.sky !== undefined) {
-      embeddedSkyCopies++;
-      assert.deepEqual(requireRecord(scene.sky).sceneRegistration, sky.sceneRegistration, `${id}: scene sky`);
-    }
-    for (const key of ['localDirection', 'referenceViewDirection']) {
-      if (scene.sun !== undefined) {
-        embeddedSunCopies++;
-        assert.deepEqual(requireRecord(scene.sun)[key], sun[key], `${id}: scene ${key}`);
-      }
-    }
-  }
-  assert.ok(embeddedSkyCopies >= 2 && embeddedSunCopies >= 4, 'exercise the embedded documents');
 });

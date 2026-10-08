@@ -7,6 +7,20 @@ const records=(value:unknown)=>requireArray(value).map(value=>requireRecord(valu
 
 const vector=(value:unknown)=>{const result=requireArray(value).map(value=>requireFiniteNumber(value));if(result.length!==3)throw new Error('Expected a 3D point.');return result;};
 
+/** The scene a shape body's bake wrote beside its runtime, read back from the runtime. The runtime holds the same camera,
+ * sky, Sun and system transform, the same triangles and dataset ranges (its hit surface), and one face node a triangle
+ * in the same order with the same matrix and atlas address: 406 of 406 bodies, 2026-10-08. So no scene is delivered for
+ * these bodies (packages/objects/src/node/prepared-delivery.ts), and a refresh reads this. */
+export function retainedScene(runtime:Record<string,unknown>) {
+  const id=requireString(runtime.id),hit=requireRecord(runtime.surfaceHit),nodes=records(requireRecord(runtime.tree).nodes);
+  const classes=(node:Record<string,unknown>)=>typeof node.className==='string'?node.className.split(' '):[];
+  const carrier=nodes.find(node=>classes(node).includes(`${id}-system`)),transform=carrier&&requireString(carrier.style);
+  if(!transform?.startsWith('transform:'))throw new Error(`${id}: the runtime holds no system carrier.`);
+  return {camera:runtime.camera,sky:runtime.sky,sun:runtime.sun,systemTransform:transform.slice('transform:'.length),
+    surfaceTriangles:requireArray(hit.triangles),...(hit.datasetRanges===undefined?{}:{surfaceDatasetRanges:hit.datasetRanges}),
+    bodyLeaves:nodes.filter(node=>node.tag==='u'&&classes(node).includes(`${id}-terrain-face`)).map(node=>({tag:'u',className:node.className,style:requireString(node.style)}))};
+}
+
 /** Recover the exact retained triangles and texture layout; never simplify or replan. */
 export function retainedPhotographicAtlas(scene:Record<string,unknown>):PhotographicAtlas {
   const triangles=requireArray(scene.surfaceTriangles).map(value=>{
@@ -24,9 +38,14 @@ export function retainedPhotographicAtlas(scene:Record<string,unknown>):Photogra
     const style=requireString(leaf.style);
     const numbers=(pattern:RegExp)=>{const match=style.match(pattern);if(!match)throw new Error('Missing retained atlas property.');return match[1].split(/[ ,]+/).map(value=>parseFloat(value));};
     const matrix=numbers(/transform:matrix3d\(([^)]+)\)/),[x,y]=numbers(/background-position:([^;]+)/),[w,h]=numbers(/background-size:([^;]+)/);
-    const [tw]=numbers(/--polycss-atlas-width:([^;]+)/),[th]=numbers(/--polycss-atlas-height:([^;]+)/);
+    // A face's size: the bake's custom properties, or the box the runtime draws the same face with.
+    const [tw]=numbers(/(?:--polycss-atlas-|;)width:([^;]+)/),[th]=numbers(/(?:--polycss-atlas-|;)height:([^;]+)/);
     if(leaf.tag!=='u' || matrix.length!==16 || ![...matrix,x,y,w,h,tw,th].every(Number.isFinite) ||
       (index>0 && (w!==width || h!==height)))throw new Error('Unsupported retained atlas layout.');
+    // Faces and triangles pair by position. A face's matrix carries its triangle's normal (largest difference 5e-10 over
+    // 280,378 faces, 2026-10-08), so a record whose order changed is refused here.
+    const normal=triangles[index].normal;
+    if(Math.max(Math.abs(matrix[8]-normal[1]),Math.abs(matrix[9]-normal[0]),Math.abs(matrix[10]-normal[2]))>1e-6)throw new Error('A retained face does not lie on its triangle.');
     width=w;height=h;
     return {face:faces[index],matrix,rect:{x:-x,y:-y,width:tw,height:th},geometry:{leafWidth:tw,leafHeight:th}};
   });
