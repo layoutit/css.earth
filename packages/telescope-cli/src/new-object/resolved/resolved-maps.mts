@@ -139,6 +139,13 @@ export function withSurfaceReadme(readme: string, map: ResolvedSurfaceMap): stri
   return lines.join('\n').replace(/\n{3,}/gu, '\n\n');
 }
 
+const NOTICE_LEAD = 'Surface map: ';
+/** The star's credits with one line for its surface map: whose nights, whose values and whose code. */
+export function withSurfaceNotice(notice: string, map: ResolvedSurfaceMap): string {
+  const line = `${NOTICE_LEAD}${map.data.credit}; the star's size, limb, axis and period from ${map.papers[0]!.citation}; fitted in this project with ${map.codes.join(' and ')} (GPL-3.0 and LGPL-3.0, run as tools, not redistributed). ${map.data.url}`;
+  return `${notice.split('\n').filter(one => !one.startsWith(NOTICE_LEAD)).join('\n').trimEnd()}\n\n${line}\n`.replace(/\n{3,}/gu, '\n\n');
+}
+
 /** The star's investigation ledger with the surface map's entry and the measured axis in place of the convention's. */
 export function withSurfaceLedger(ledger: unknown, map: ResolvedSurfaceMap): Json {
   const record = requireRecord(ledger, 'investigation ledger'); if (record.schema !== INVESTIGATION_LEDGER_SCHEMA) throw new TypeError('Not an investigation ledger.');

@@ -24,7 +24,7 @@ Run of 2026-09-21 (this version):
 
 ## Known problems
 
-The cited paper images Arcturus’s limb darkening; this package shows a neutral sphere and does not cast that image. No mass is adopted.
+The cited paper's images of Arcturus are a limb-darkened disc without features; this package draws the limb law that paper fitted and casts no image. No mass is adopted.
 - **Measured limb, other band.** The law was measured or fixed outside the visible band the color is drawn in; the visible limb is not measured.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

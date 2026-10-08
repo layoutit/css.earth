@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { isConventionOnly, surfaceMapFiles } from '../maps/surface-maps.mts';
-import { measuredAxisRotation, reducedSurface, RESOLVED_CONSUMER, RESOLVED_MAPS, resolvedSourceRecords, span, unseenDegrees, withSurfaceLedger, withSurfaceReadme } from './resolved-maps.mts';
+import { measuredAxisRotation, reducedSurface, RESOLVED_CONSUMER, RESOLVED_MAPS, resolvedSourceRecords, span, unseenDegrees, withSurfaceLedger, withSurfaceNotice, withSurfaceReadme } from './resolved-maps.mts';
 
 const TABLE = 'TITLE     = "test"\nVARIABLES = "Longitude [Deg]" "Latitude [Deg]" "Brightness [%]" "Facing"\nZONE I=73, J=37, K=1, ZONETYPE=Ordered\n';
 const CHOICE = { program: 'star-mirc-2011-09', id: 'surface-2011-09', label: 'September 2011' };
@@ -66,4 +66,7 @@ test('a convention page takes the measured tilt and pole direction, and the reco
   assert.deepEqual(ledger.entries.map(entry => entry.id), ['placement', 'surface-star-mirc-2011-09', 'rotation-axis']);
   assert.match(ledger.entries[1]!.finding, /Spotless twins of 2\.80 mas do not fit on the 2\.742 mas sphere/u);
   assert.deepEqual(withSurfaceLedger(ledger, map), ledger);
+  const notice = withSurfaceNotice('# HD 1 credits\n\nColor: x.\n', map);
+  assert.match(notice, /^# HD 1 credits\n\nColor: x\.\n\nSurface map: CHARA Array\/MIRC, as calibrated by the authors; .*Author et al\. \(2021\), ApJ 1, 1; fitted in this project with ROTIR\.jl ad308759 and OITOOLS\.jl f42d2bea/u);
+  assert.equal(withSurfaceNotice(notice, map), notice);
 });
