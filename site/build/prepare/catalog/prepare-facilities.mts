@@ -15,7 +15,7 @@ import { writePreparedSet } from '@cssearth/bake/delivery';
 import { restoreFactsheetEvidence } from '@cssearth/bake/objects/acquisition';
 import type { FactsheetSourceTransport } from '@cssearth/bake/objects/acquisition';
 import { prepareVolumePresentations, readPreparedVolumes, volumePresentationCompilerClosure } from './prepare-volume-presentation.mts';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { readPreparedControls, readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../../..')).sceneObjects;
 
@@ -144,7 +144,8 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     // runtime; skipping there yields a partial catalogue, which is all a compiler program needs.
     const runtimePath = `${base}/prepared/runtime.json`;
     if (restoredOnly && !existsSync(resolve(root, runtimePath))) return part;
-    const controls = explorationRecord(explorationRecord(await json(runtimePath)).controls);
+    closure.add(runtimePath);
+    const controls = await readPreparedControls(resolve(root, base, 'prepared'));
     const datasets = controls.datasets === null ? [] : explorationArray(explorationRecord(controls.datasets).controls, raw => {
       const control = explorationRecord(raw); return { id: explorationText(control.id), label: explorationText(control.label) };
     });
