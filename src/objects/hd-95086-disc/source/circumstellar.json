@@ -82,9 +82,9 @@
       },
       "geometry": "ring",
       "noiseFade": {
-        "fromNoise": 2,
-        "toNoise": 3,
-        "source": "Stated, a display choice: a column fades in as its brightness rises from two to three times its per-pixel noise (12.8 µJy per beam, measured 5.5 to 8.5 arcseconds out), so empty sky is not drawn; three times the noise is the lowest contour Su et al. (2017) draw. The low end of this color scale is a saturated blue, not a dark color, so sky left in would be drawn as bright as the ring. Every channel of a column is scaled alike, so no color changes."
+        "fromNoise": 3.4641,
+        "toNoise": 5.1962,
+        "source": "Stated, a display choice: a column fades in as its brightness rises from two to three times its per-pixel noise (12.8 µJy per beam, measured 5.5 to 8.5 arcseconds out), so empty sky is not drawn; three times the noise is the lowest contour Su et al. (2017) draw. The low end of this color scale is a saturated blue, not a dark color, so sky left in would be drawn as bright as the ring. The author counts noise for the mean of the three channels, 1/√3 of the image’s when one band feeds all three, so the multiples it is given are 3.4641 and 5.1962. Every channel of a column is scaled alike, so no color changes."
       },
       "channels": {
         "red": [

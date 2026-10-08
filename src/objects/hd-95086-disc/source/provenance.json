@@ -466,20 +466,20 @@
             ]
           }
         },
-        "exposureGain": 0.012527589870684657,
+        "exposureGain": 0.011915061378699155,
         "topAlpha": 0.5,
         "faceOnOpacity": {
-          "drawnColumns": 19325,
-          "median": 0.49993694068331174,
-          "p90": 0.5002643599323191,
-          "max": 0.5010088465883057
+          "drawnColumns": 15289,
+          "median": 0.4999431361838893,
+          "p90": 0.5002708870466275,
+          "max": 0.5007041172296482
         },
         "droppedShare": [
           0,
           0,
           0
         ],
-        "filledVoxels": 964922
+        "filledVoxels": 766420
       }
     }
   },
