@@ -204,6 +204,32 @@
         "kind": "local",
         "reason": "Published limb-darkening law transcribed with its cells; repinned when edited."
       }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "limb-darkened-disc-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+        "inputs": [
+          "udkadua-stellar-color",
+          "udkadua-kharitonov",
+          "udkadua-preparation-raster",
+          "udkadua-martinez-2021-limb-darkening"
+        ]
+      },
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The color dataset rendered as a disc; `context-markers.mts --check` recomputes it."
+      }
     },
     {
       "id": "udkadua-interferometry-map-surface-2011-09",
@@ -218,7 +244,8 @@
       "licenseEvidence": [
         "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data"
       ],
-      "acquisition": "Built by packages/telescope-cli/src/archives/interferometry/surface-star.mts from the season udkadua-mirc-2011-09: the 6 calibrated files at https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data, fitted with the pinned ROTIR (HEALPix level 3, sobel2 at weight 10, 1000 iterations). The receipt with the fit and its checks is written again by that command under output/interferometry and is not kept in git.",
+      "acquisition": "Built by packages/telescope-cli/src/archives/interferometry/surface-star.mts from the season udkadua-mirc-2011-09: the 6 calibrated files at https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data, fitted with the pinned ROTIR (HEALPix level 3, sobel2 at weight 10, 1000 iterations). Restored from the source cache; not tracked. The receipt with the fit and its checks is written again by that command under output/interferometry and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/interferometry/surface-star.mts",
       "redistribution": "A table of fitted values made in this project; the calibrated files themselves are not redistributed.",
       "consumers": [
         "rotir-surface"
@@ -247,32 +274,6 @@
             "evidence": "https://github.com/fabienbaron/ROTIR.jl"
           }
         ]
-      }
-    }
-  ],
-  "generatedIntermediates": [
-    {
-      "id": "limb-darkened-disc-context-marker",
-      "path": "presentation/context.png",
-      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
-      "credit": "The color dataset as a disc, dimmed toward the limb by its law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
-      "license": "Project-authored display derivative.",
-      "consumers": [
-        "navigation"
-      ],
-      "recipe": {
-        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
-        "inputs": [
-          "udkadua-stellar-color",
-          "udkadua-kharitonov",
-          "udkadua-preparation-raster",
-          "udkadua-martinez-2021-limb-darkening"
-        ]
-      },
-      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "The color dataset rendered as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],

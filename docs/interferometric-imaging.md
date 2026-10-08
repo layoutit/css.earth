@@ -184,7 +184,7 @@ What in this is not printed in a paper:
 4. **The regularizer.** The paper printed a total-variation weight of 0.01 for its 2021 code. The pinned code states that its weights do not carry over between regularizers, and its authors' script for these files uses `sobel2` at 10 on HEALPix level 3: those settings are used.
 5. **Longitude 0** is the meridian that faced the Earth on 14 September 2011, the night with the most data. The star has no defined prime meridian, and the page does not turn it.
 6. **What was never seen.** 34° of longitude faced the Earth on none of the nights. ROTIR fills them from its regularizer; the table holds the mean there, and the dataset draws a black line along the edge (`outlineZeroOf` in `tecplot-lonlat-map.ts`). The authors' plots gray the same tiles.
-7. **The table** samples ROTIR's 768 tiles at nodes 5° apart, in percent of the mean of the surface seen.
+7. **The table** samples ROTIR's 768 tiles at nodes 5° apart, in percent of the mean of the surface seen. It is built by `surface-star.mts`, kept out of git and restored from the source cache, as the brightness maps' tables are.
 8. **Color + brightness** draws the star's visible color darker where the infrared map is darker, with the look chosen for the brightness maps (`tinted`, `LIMB_STRENGTH`). The map is of the H band; how dark the spots are in visible light is not measured.
 
 ## Sphere maps on a dataset

@@ -34,14 +34,15 @@ test('the page gains the star in its color over the map, the map with its scale,
   const map = reducedSurface(CHOICE, receipt(), TABLE), { files, opensOn } = surfaceMapFiles(RESOLVED_MAPS, { host: 'hd-1', maps: [CHOICE] }, { id: 'hd-1', name: 'HD 1', colorHex: '#ffddbb' }, [map], HOST());
   const raster = JSON.parse(files.get('src/objects/hd-1/source/preparation/raster.json')!) as { surfaces: { id: string; science: Record<string, unknown> }[] };
   const content = JSON.parse(files.get('src/objects/hd-1/source/content/object.json')!) as { datasets: { defaultDataset: string; controls: { id: string; notes?: string; step?: unknown }[] } };
-  const manifest = JSON.parse(files.get('src/objects/hd-1/source/manifest.json')!) as { inputs: { id: string; path: string; sourceBinding?: { references: { catalogueId: string }[] } }[] };
+  const manifest = JSON.parse(files.get('src/objects/hd-1/source/manifest.json')!) as { inputs: { path: string }[]; generatedIntermediates: { id: string; path: string; generator?: string; sourceBinding?: { references: { catalogueId: string }[] } }[] };
   assert.equal(opensOn, 'color-surface'); assert.deepEqual(content.datasets.controls.map(control => control.id), ['color-surface', 'surface-2011-09', 'color']);
   const drawn = raster.surfaces.find(surface => surface.id === 'surface-2011-09')!.science, natural = raster.surfaces.find(surface => surface.id === 'color-surface')!.science;
   assert.deepEqual([drawn.format, drawn.variable, drawn.outlineZeroOf, drawn.consumer, drawn.minimum, drawn.maximum], ['tecplot-lonlat-map', 'Brightness [%]', 'Facing', RESOLVED_CONSUMER, 70, 130]);
   assert.equal(drawn.outlineLatitudes, undefined); assert.equal(natural.outlineZeroOf, undefined); assert.equal(natural.limbOf, 'color');
-  // One map has no steps; its table is tracked beside the star and bound to the nights, the paper and the code.
+  // One map has no steps; its table is built here, kept out of git and restored from the source cache, and is bound to the nights, the paper and the code.
   assert.equal(content.datasets.controls[1]!.step, undefined);
-  const input = manifest.inputs.find(one => one.path === 'science/interferometry/star-mirc-2011-09.dat')!;
+  const input = manifest.generatedIntermediates.find(one => one.path === 'science/interferometry/star-mirc-2011-09.dat')!;
+  assert.equal(input.generator, 'packages/telescope-cli/src/archives/interferometry/surface-star.mts'); assert.ok(!manifest.inputs.some(one => one.path === input.path));
   assert.deepEqual(input.sourceBinding!.references.map(reference => reference.catalogueId), ['code-demos-hd-1', 'arxiv-2107-00001', 'rotir-jl']);
   assert.equal(files.get('src/objects/hd-1/source/science/interferometry/star-mirc-2011-09.dat'), TABLE);
   for (const control of content.datasets.controls.slice(0, 2)) assert.match(control.notes!, /not (?:a|their) published map|made in this project/u);
