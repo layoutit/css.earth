@@ -4,8 +4,8 @@
     {
       "location": "public",
       "filename": "venus-arrival.webp",
-      "bytes": 29242,
-      "sha256": "e546ed5753bd6ba949269ebfa3da119c42002aa09680bc48f0b898473c80b217"
+      "bytes": 28418,
+      "sha256": "d62121bfd0956efa41db3597d529373f269190367a82b99b3ba79140bd1b5e27"
     },
     {
       "location": "public",
@@ -16,8 +16,8 @@
     {
       "location": "public",
       "filename": "venus-billboard.webp",
-      "bytes": 4964,
-      "sha256": "c852607b811285b72cc3fbc0da73aee60e9d46bb2f583d690c99428223d3c87a"
+      "bytes": 4976,
+      "sha256": "e15b4e724ab6bbad5dbb5c153b095a38ee40048440f9d4784d0974c641e0fcb0"
     },
     {
       "location": "public",
@@ -264,6 +264,36 @@
       "filename": "venus-dataset-gravity.webp",
       "bytes": 3114,
       "sha256": "2416567208df41cd8802a4faf142b1c0e840e26e33c6956e4d1a3197c52c2ecb"
+    },
+    {
+      "location": "public",
+      "filename": "venus-dataset-radar-1967.webp",
+      "bytes": 414,
+      "sha256": "6fa08f7f1965d67b29881fcc45d3ee8d715ee4b8268525e9b7659bf360a27c4d"
+    },
+    {
+      "location": "public",
+      "filename": "venus-dataset-radar-1972.webp",
+      "bytes": 532,
+      "sha256": "d2087ea7db78de6769da7d1de23194f7bb4a2080438967e68056876124ef6822"
+    },
+    {
+      "location": "public",
+      "filename": "venus-dataset-radar-1977.webp",
+      "bytes": 802,
+      "sha256": "1a080137d2d49c3fb607ed0670651f4a155b014c147c66221f0cdaa8d05f0299"
+    },
+    {
+      "location": "public",
+      "filename": "venus-dataset-radar-1980.webp",
+      "bytes": 418,
+      "sha256": "6333bcb2defc45ca296f8d83101b6f1dd3db162413d9d4c4408e4e695dc8fc7f"
+    },
+    {
+      "location": "public",
+      "filename": "venus-dataset-radar-1983.webp",
+      "bytes": 182,
+      "sha256": "e2d501fba5c6da426d26598d77a9b5817478040b0fef1046d2dfd2b91f03beac"
     },
     {
       "location": "public",
@@ -808,20 +838,20 @@
     {
       "location": "public",
       "filename": "venus-lighting@2x.webp",
-      "bytes": 264138,
-      "sha256": "6ccf80526117613f7c707822ec5a59dc69d42c909c5a6e12acbe4da3174febc7"
+      "bytes": 265798,
+      "sha256": "267d62b217a2f5286f659c576967ca7776b967b1e2a54f4b0eb04731e6beffae"
     },
     {
       "location": "public",
       "filename": "venus-material@2x.webp",
-      "bytes": 646156,
-      "sha256": "9633bbc98fee3a2dbb965e123a6348b60680e6dd6f5912e60617fad6787b468e"
+      "bytes": 634058,
+      "sha256": "21b93560ba145a173d9bf94723675d61dd83fdbad81ad4af7e060000c488b829"
     },
     {
       "location": "public",
       "filename": "venus-observation-material@2x.webp",
-      "bytes": 646156,
-      "sha256": "9633bbc98fee3a2dbb965e123a6348b60680e6dd6f5912e60617fad6787b468e"
+      "bytes": 634058,
+      "sha256": "21b93560ba145a173d9bf94723675d61dd83fdbad81ad4af7e060000c488b829"
     },
     {
       "location": "public",
@@ -873,6 +903,36 @@
     },
     {
       "location": "public",
+      "filename": "venus-poles-radar-1967@2x.webp",
+      "bytes": 16222,
+      "sha256": "aabe3adeb8dab8924ff54630a0b51c93874a097a932592bdf473fa323773b25f"
+    },
+    {
+      "location": "public",
+      "filename": "venus-poles-radar-1972@2x.webp",
+      "bytes": 13804,
+      "sha256": "12909f503aba537620bc847a6402a284fc808e193ca3a378af244f3ba7e4c90b"
+    },
+    {
+      "location": "public",
+      "filename": "venus-poles-radar-1977@2x.webp",
+      "bytes": 12102,
+      "sha256": "ce3aaf8e507130b2f9d2c9a603d10a4eb16e2fa2014476c37c5181e21d50bcd6"
+    },
+    {
+      "location": "public",
+      "filename": "venus-poles-radar-1980@2x.webp",
+      "bytes": 13804,
+      "sha256": "12909f503aba537620bc847a6402a284fc808e193ca3a378af244f3ba7e4c90b"
+    },
+    {
+      "location": "public",
+      "filename": "venus-poles-radar-1983@2x.webp",
+      "bytes": 13494,
+      "sha256": "f1b94a9c89ed9e83d133b1e3b2f6d8df908ffee883776a995a1e788ebe609bad"
+    },
+    {
+      "location": "public",
       "filename": "venus-poles-radar@2x.webp",
       "bytes": 508684,
       "sha256": "3b5e9e3d93e39ed2e543fcd0daabfa29b67b1a4917ea9a60047b62a635f583cb"
@@ -894,6 +954,516 @@
       "filename": "venus-poles-ultraviolet@2x.webp",
       "bytes": 39368,
       "sha256": "edf28273da7a2594adcfd36c8955d6a7590af1cdd340e3add8a194f772bfe2c4"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-0-level-1040.webp",
+      "bytes": 2374,
+      "sha256": "30915506a2df666062019094b8189a18c282dbf3f020efb4e0fe8b1b964d4ba6"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-0-level-260.webp",
+      "bytes": 466,
+      "sha256": "9a0b83e3488632aa8aae202486c9afc04b9b3c6200debd859b80db0459d4e9d7"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-0-level-520.webp",
+      "bytes": 1024,
+      "sha256": "ac6a9b7578b48e641311dffc3737d6be6cf6788983f99a676575a26e37404571"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-0.webp",
+      "bytes": 5246,
+      "sha256": "2d20be4300748b43445be8246404668d40e1677e184e0014d3cd25c38359dd1f"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-1-level-1040.webp",
+      "bytes": 4692,
+      "sha256": "54e98d6723e7c85bd0fe69db8f9d39800761dddb966897246c199f7f2d728a28"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-1-level-260.webp",
+      "bytes": 770,
+      "sha256": "2d07bc235a2a927a6fbe883eb6aa9afff0cf1a048cd3f8f8bb44c1cebc531158"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-1-level-520.webp",
+      "bytes": 1866,
+      "sha256": "0a19ecfaa6fb07107abc033c01bf7faf31e09856f6732b7be5a0de222c19dc52"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-1.webp",
+      "bytes": 12398,
+      "sha256": "460d74a53b748ac35c8f853f56c8f8a8e175047d3a08c97f664fba525b24432c"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-2-level-1040.webp",
+      "bytes": 4152,
+      "sha256": "9dc14e161ac68aed754ae501c7f42a31ff3d65b1b78788063d575ec38ca9a72f"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-2-level-260.webp",
+      "bytes": 726,
+      "sha256": "719695939aa80ca6407015fc44baead3eff644b0783c6496ca1584c5f14e5401"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-2-level-520.webp",
+      "bytes": 1650,
+      "sha256": "765e687aefc7a735ea8bb988a30772db5d8c1a6e851f602e85066c1c85afebae"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-2.webp",
+      "bytes": 10708,
+      "sha256": "6a470cd106d11cb455aa9b803292155a10f5615941b04602ae31bf4a08776956"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-3-level-1040.webp",
+      "bytes": 2104,
+      "sha256": "e807e5f42458980be30ce35256df1cc073b6dace4a1622a501d54e1495381802"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-3-level-260.webp",
+      "bytes": 390,
+      "sha256": "9aac66a460f5f024da211f91e8ace112993702b0b4a296ead54c5d7c9c775253"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-3-level-520.webp",
+      "bytes": 944,
+      "sha256": "53779612bd8e88c63133d6f50b62c6709a80a2ea6005b4a31e8bf2165f0bb831"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967-page-3.webp",
+      "bytes": 4518,
+      "sha256": "200d48f9448144f1ed07b5b6756752d14444a604bf2a97443e736858def37446"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1967@2x.webp",
+      "bytes": 32124,
+      "sha256": "66279ed3b95ff977d983b517fe0be6509bfd1c42ae5b80c26cc34d2f184918e6"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-0-level-1040.webp",
+      "bytes": 2116,
+      "sha256": "2fa18bc5b5543e4bd532c3adeed0d941bb209185e66148f7a4816547372536dd"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-0-level-2080.webp",
+      "bytes": 4692,
+      "sha256": "df804f3ec8525c04a9cd18a7c919d2746fe4595428eb812ccb0769308cc718b7"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-0-level-520.webp",
+      "bytes": 918,
+      "sha256": "e8e9379ebc413df27e0f8ddcd381ac805f25fb9377e67405a3de3d1e8909a880"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-0.webp",
+      "bytes": 12446,
+      "sha256": "77c25ac8955abe7c1dda351d8f878567d962ef62e1409e97edc66727d79acc52"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-1-level-1040.webp",
+      "bytes": 6212,
+      "sha256": "a8db85d2819a5d1cb5516a870d8831b92e8c3dbce14daa522f6f03ea9d360466"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-1-level-2080.webp",
+      "bytes": 16640,
+      "sha256": "5955aeaffd2306a6e9f1c8df11ccd4919abd1ff1a17458fb5942c11b89f60249"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-1-level-520.webp",
+      "bytes": 2442,
+      "sha256": "93e139bb7d092428ce8c02705ac5580587846e50b15a773f1e8a663ebaf6d459"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-1.webp",
+      "bytes": 40492,
+      "sha256": "306add2b879c3d7c6e989eb68803e89a4c2f623ef8ca22a593492095fb2211e9"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-2-level-1040.webp",
+      "bytes": 6950,
+      "sha256": "2d90ede8c6b98008871f3abac7e55eee354047e919571bee12d337b0c88270b4"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-2-level-2080.webp",
+      "bytes": 18490,
+      "sha256": "f61ca9539420d280bd15851141939674c3609df666f350b74920a9897467ab07"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-2-level-520.webp",
+      "bytes": 2658,
+      "sha256": "1432097e871e9011483f201650bd0b450ba398d1bc8feb655a45c065a5496e9e"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-2.webp",
+      "bytes": 47180,
+      "sha256": "4475d0338c944482e1b20c46a3a41fba3c0ac9c4250670a3a216599903f0a569"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-3-level-1040.webp",
+      "bytes": 2048,
+      "sha256": "eabfad0445130a6ffc2e3fce3e08162010b97297e6032c1cf9868a7c149a82e3"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-3-level-2080.webp",
+      "bytes": 5092,
+      "sha256": "91ef8a898999ee40e053b1eb939d9e61b299aa291abd5ab50d27905615bb3b7e"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-3-level-520.webp",
+      "bytes": 976,
+      "sha256": "57f29435fc162242c5224ca315759dd69f3b62d2d9a1ee6538dd127724006c64"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972-page-3.webp",
+      "bytes": 12214,
+      "sha256": "0480f3e1e06fe2648b5ae336ad2bdc4bec6e2372491607c3afc3ddaf21c277d8"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1972@2x.webp",
+      "bytes": 110622,
+      "sha256": "c2e6a3605e7ec7f0fcd521462d6659937a7cf9be1f9966744b0d96589fbf95a1"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-0-level-1040.webp",
+      "bytes": 8838,
+      "sha256": "67f239502d7275a9d4912f0192fbffdb44014e8294ade1e693bdb3db424b9391"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-0-level-2080.webp",
+      "bytes": 22918,
+      "sha256": "e023fdf9afd3b330bee6f1bbb0203a796a9b6000d4b58267cb2c9b813b9442c0"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-0-level-4160.webp",
+      "bytes": 55130,
+      "sha256": "d09f353476a90a3632a93de7931db790823862da82eb0f109c1ea454deba37d8"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-0.webp",
+      "bytes": 134080,
+      "sha256": "cc65e02de56bd4855663c239e30a35f1c5c12facc1ad2ab09d076a2341bab882"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-1-level-1040.webp",
+      "bytes": 10066,
+      "sha256": "feeb3df025311a0dfef3e8119df075b4c00c4aa43de01c365fd331c125161d93"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-1-level-2080.webp",
+      "bytes": 26700,
+      "sha256": "6fca90ff312c749f2e62dd71fc769de71953fe8764e4cce206f1ceec836fb4a3"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-1-level-4160.webp",
+      "bytes": 64504,
+      "sha256": "9aa6ffa419bd5ae8699c1d18bdbcbd724f4adba2afbe0c741bfb711d6576f7b8"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-1.webp",
+      "bytes": 159942,
+      "sha256": "652ae5654d744fa85d3bcf41331c4d2920758296141a2d370e4dc95d301219ae"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-2-level-1040.webp",
+      "bytes": 10136,
+      "sha256": "856a0fa3e3a93021584b29025ddf693494228244997cbe70a7201b3b78043bdd"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-2-level-2080.webp",
+      "bytes": 26246,
+      "sha256": "a47dc082317fe75f7eb487c82feef21a9a57a1e23f32c8e068f07b9788b401c3"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-2-level-4160.webp",
+      "bytes": 62618,
+      "sha256": "09c2c1e84b7e9ee2de586be7b221c81aea9263af59a04e406535e0f7bf527830"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-2.webp",
+      "bytes": 154742,
+      "sha256": "c457d67cf2b565535132f62b425f554facc5438e2a85b7863fb60f232ba13612"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-3-level-1040.webp",
+      "bytes": 3928,
+      "sha256": "633a18e0c2d5d3a9f78b7c281f4e549664564a9f1896b312c50587468b830fa5"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-3-level-2080.webp",
+      "bytes": 9428,
+      "sha256": "87929bc21fc0d211baa9983f9d6c84a57d7da5fc9d4a0eb8253cce546ce7ab8a"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-3-level-4160.webp",
+      "bytes": 22388,
+      "sha256": "08adcacfab1b2a437a9fac05bc7a3491125ae8cab70659636048fba8fe643019"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977-page-3.webp",
+      "bytes": 58378,
+      "sha256": "5ad1ed1bf5b7afd01ed6ee9aa5a368d831d22de97e8c4c3dedae70d83ed1f8de"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1977@2x.webp",
+      "bytes": 506770,
+      "sha256": "73096087c28cf1e7a1b3431b5c48ee20074295d4690a63ec70618ecd2c4ac676"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-0-level-1040.webp",
+      "bytes": 4826,
+      "sha256": "8705b9aa2c7b464303c2a3e49f0df157cc3497bb4bc34ab148bcba3b44b29a2f"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-0-level-2080.webp",
+      "bytes": 13160,
+      "sha256": "e33c2818517167a1b606a3f08dc9dc6a9554649da721c7a8a0f5901004be793c"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-0-level-520.webp",
+      "bytes": 1818,
+      "sha256": "58980ee70119645e6465b5f75d3155bd33aaf3ec36fbb9071621dade35fce5f7"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-0.webp",
+      "bytes": 32620,
+      "sha256": "70a0815fad2919bc14cd4709bfb1034088f4da6d250599e1aeca2bdb948f216d"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-1-level-1040.webp",
+      "bytes": 24438,
+      "sha256": "38066fd232b3c74852169eeb6663963faf618ea1fad95c2e910d55d50d674a1a"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-1-level-2080.webp",
+      "bytes": 84510,
+      "sha256": "df3dbd534a134bc0faa49f9066d92aeb62a558f0cce66d5fec6fc72580bd86ec"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-1-level-520.webp",
+      "bytes": 6624,
+      "sha256": "421e62b56d45a9db123c56b393321b690c7721f2f1adcc9a559aa28e288052ac"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-1.webp",
+      "bytes": 220340,
+      "sha256": "ff9e10744b260334032bab64eabd364ce47c94208f42e4bb283937adba4c0200"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-2-level-1040.webp",
+      "bytes": 10496,
+      "sha256": "d07918ebd1e424292e5486d60066663617268ef201966f103d234cdd43a1d533"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-2-level-2080.webp",
+      "bytes": 33694,
+      "sha256": "6231acf5810f516eef188ba111b67aa90dba31afadd84f6a58ae748f5ffcaa19"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-2-level-520.webp",
+      "bytes": 3408,
+      "sha256": "43dcfe19ff4e6a765a55cf057ccf354e8702fa1673f7d620c4327ff5207823aa"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-2.webp",
+      "bytes": 89954,
+      "sha256": "2cd4f42e58fdb835d4f245e8cafa3b6177dc58d92be9f9c630ca3d891236f99a"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-3-level-1040.webp",
+      "bytes": 2040,
+      "sha256": "9a38a1fd243c174f6fffd268702b0dd79b5bcfc2247cdd7ded5f8fd86f42cb90"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-3-level-2080.webp",
+      "bytes": 4782,
+      "sha256": "1bde211bf972a685fc2075b0802919a5eea48b82287ffeffadf0dc1e464061f3"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-3-level-520.webp",
+      "bytes": 908,
+      "sha256": "1ac0023426172142690db073667951783808d072e78e532262db5c999f1a0e7f"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980-page-3.webp",
+      "bytes": 11874,
+      "sha256": "02da167cb4c5ed9b8bb28e55d567cfd84beb6864d5092f29c092b9a8e844c27f"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1980@2x.webp",
+      "bytes": 328928,
+      "sha256": "3f7ff304a585466591ae36964cdeb3b2f4d1f3f25c6b06ba69ac1c74d4c7b2d1"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-0-level-1040.webp",
+      "bytes": 10086,
+      "sha256": "cd23b0499ff063ffc2e9b45e67be07c362d20971331fc02b74838242a4a665de"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-0-level-2080.webp",
+      "bytes": 40418,
+      "sha256": "471ed95e4255e4abf085cd8a2de70fcc939d383faf9cb55cfce8783d05541484"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-0-level-4160.webp",
+      "bytes": 194904,
+      "sha256": "223c482387a539c9987885fdede240a9f569b21199da4ebcd77ea055e568b6a6"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-0.webp",
+      "bytes": 1031654,
+      "sha256": "48ba8b5c0fe789c99af6495472423937d7a12c47d195ab3b092e48219da1e4f7"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-1-level-1040.webp",
+      "bytes": 3240,
+      "sha256": "0e5d972397fae3d01b121c8ca6e98d744be92e4fbdc86a927a518fdd71fa61e3"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-1-level-2080.webp",
+      "bytes": 11654,
+      "sha256": "49179c1ee7d0ee17911528fb473eb1a5d929729afac5b4717acff95fbc50e118"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-1-level-4160.webp",
+      "bytes": 55876,
+      "sha256": "cfe455b4e0d75bf67e17f4d5d1a01a357dde2688adb4999d35e0a789215241d2"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-1.webp",
+      "bytes": 333266,
+      "sha256": "0998f9f26fa0582a51d4afe9d21b36be15443ec52e865fb6ec3fd6a5120e1f5a"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-2-level-1040.webp",
+      "bytes": 1148,
+      "sha256": "43224e87d559d77a568ad8f09b9326d17369dca431c23da4465746ac3e043753"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-2-level-2080.webp",
+      "bytes": 3554,
+      "sha256": "88dfe4a0ae205a0a121bedc9aefde300ed73fa548f99aca3c46c979d04346a16"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-2-level-4160.webp",
+      "bytes": 9798,
+      "sha256": "fac698ac8042e3b587c21a62725ccce64d711a5cbd6d4c4414544808a890cfdd"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-2.webp",
+      "bytes": 31728,
+      "sha256": "a889e19f0547e826fb43ddeb6dda5e36de88e00c4537777158856b99300d5ee8"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-3-level-1040.webp",
+      "bytes": 2020,
+      "sha256": "2648575e8b9bfe1295a4c279fcd32eaf2c185a6b8910fe1ea2ee5683a7318859"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-3-level-2080.webp",
+      "bytes": 4914,
+      "sha256": "ec3d608b7ac92cb69b2b007ce6803b058e1af87cfd67adc467ed06da12fff8ba"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-3-level-4160.webp",
+      "bytes": 11812,
+      "sha256": "c134b6dd0e49a0c45a5f5b2b9663e2718e1f03e33a9e71b88e91f3e7788d639f"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983-page-3.webp",
+      "bytes": 34864,
+      "sha256": "840dd8393b264db18e8ce1d4e01d49d5d887d4e0efd9954df9862e7bb64d2d42"
+    },
+    {
+      "location": "public",
+      "filename": "venus-radar-1983@2x.webp",
+      "bytes": 1427652,
+      "sha256": "ee5a1991b9353d4eb733c3a1eacb069e81174f77fd4a820e64d6cfedb94c4fe4"
     },
     {
       "location": "public",
@@ -1318,8 +1888,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 3484,
-      "sha256": "45ffc8e891a10493e9318d418f92166d2210e257bc9541782967a8119212cef1"
+      "bytes": 4392,
+      "sha256": "8a117db8f37667c2cd2ccb36456b7528ac0adc1bce52f8d51e2b0e86aaa4487c"
     },
     {
       "location": "prepared",
@@ -1336,14 +1906,14 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 20879,
-      "sha256": "9053f83631aef139b8e99622ff279d66d8efca61dfc99818436eccd26410bef4"
+      "bytes": 21725,
+      "sha256": "fdd3b406a8c0e249c882ce1cc7c66b55058ed59408617c10bc307ca3d93d7926"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 28858,
-      "sha256": "75fc10c36604554b8e97c13e68699b0b20a92586b63b79bb226165003d32af4c"
+      "bytes": 32672,
+      "sha256": "d50633e43e0b101fcb18fddf73055bbad87fb2ee68903d597213f7251e76e79d"
     },
     {
       "location": "prepared",
@@ -1354,8 +1924,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 1147,
-      "sha256": "fe50fa1dc1d4317b46c965aa75ea7f258ee3ead4208cc086e99f56711261d708"
+      "bytes": 1719,
+      "sha256": "5300940833e2587651849a9abffe1a59513e418d87784091510f082c415dbd43"
     },
     {
       "location": "prepared",
@@ -1401,6 +1971,36 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/radar-1967.webp",
+      "bytes": 2630,
+      "sha256": "358fb68fecac9510e22d63cf9761ca6091bf7cb169f895d58aa1a623fe8c4977"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/radar-1972.webp",
+      "bytes": 3322,
+      "sha256": "e0b809b0f4270e106297d68a36fb72b6a8d625a3e513a2ab04d8f1b11347833e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/radar-1977.webp",
+      "bytes": 5456,
+      "sha256": "70d0cc8b1f5dc0c6471a48e256b94038c9245d30e9a2d927aa7072589b06b3af"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/radar-1980.webp",
+      "bytes": 5658,
+      "sha256": "15933979fe71a0c26010e55edfb3d4d2bf40ae391713b9bcc4e2471ababe9495"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/radar-1983.webp",
+      "bytes": 3910,
+      "sha256": "ccd0907b6910aba8d360450899597ba04ef2edf632d5e90956c3caf04b4f9cd7"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/radar.webp",
       "bytes": 29170,
       "sha256": "adf6f856707301b6a21f389eea942432ded6fc8ce2bc165fbae9eb902e8cdd5d"
@@ -1426,14 +2026,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 346992,
-      "sha256": "bbf533ddc251dae92c5172ebbb7494d586e7d27dc2201bdbf23a892b2312ad10"
+      "bytes": 398258,
+      "sha256": "ffb2b835aed0c8327a1bfeabcf3f41c867bf98306f68a83307fc58eb0cc1f6c0"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 377857,
-      "sha256": "c10e9f2f112b7ce7fe4e95e1f56133a2974f142f393b70ba77fc1091ca2402bf"
+      "bytes": 378299,
+      "sha256": "fa68576bc256108289a21f63a60acd699f77234c031aa47e54bc344f312c1902"
     },
     {
       "location": "prepared",
@@ -1450,8 +2050,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2686,
-      "sha256": "0a7adf5c31dcd631ec43739340319013a78145a54c7fb4d6ef2e7c554cd81a8f"
+      "bytes": 3787,
+      "sha256": "79146497e7623b611ec327abc243a52dd739e7c8343b8480d63f4271ff25dde4"
     },
     {
       "location": "prepared",

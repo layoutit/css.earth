@@ -8,6 +8,12 @@ downloads it from his address. The cloud-top limb law is transcribed from
 Pérez-Hoyos et al. (2018), doi:10.1002/2017JE005406, cited in
 `source/manifest.json`.
 
+The five early radar maps (1967 to 1983) are from Venus Geospatial Raster
+Datasets, prepared by T. Austin et al. (2026), doi:10.5281/zenodo.16416846,
+CC BY 4.0. The observations are those of Ingalls et al. (1968), Saunders and
+Malin (1977), Campbell and Burns (1980), Pettengill et al. (1980) and Campbell
+et al. (1984).
+
 The Magellan C3-MDIR synthetic color mosaic (radar) is credited to the USGS
 Astrogeology Science Center and NASA/JPL's Magellan mission, and is read from
 the GeoTIFF USGS publishes. The colorized topographic C3-MDIR mosaic is

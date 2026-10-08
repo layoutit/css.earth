@@ -160,6 +160,17 @@
         "https://doi.org/10.1006/icar.1999.6086",
         "https://ntrs.nasa.gov/citations/19970037571"
       ]
+    },
+    {
+      "id": "early-radar-maps",
+      "subject": "Radar maps of Venus from before Magellan (Austin et al. 2026 rescued-data collection)",
+      "status": "included",
+      "finding": "Five of the collection's 41 GeoTIFFs are shown as a stepper: Haystack 1967, Goldstone 1969-1972, Arecibo 1975-1977, Pioneer Venus 1978-1981 and Arecibo 1983 (57 MB in all, 8-bit, equirectangular on a 6,051 km sphere). Left out: Arecibo 1988 (965 MB) and Venera 15/16 backscatter (384 MB), which this lane would have to read whole to draw at 8,192 pixels; Arecibo 1969 (the collection's largest position error, 400 km); the Goldstone 500 m strips of 1974 to 1988, small patches; the Pioneer Venus and Venera numeric grids at 37 km, coarser than the Magellan maps already shown; and the 81 GB basemap.",
+      "revisitWhen": "A reader that takes a reduced overview of a large GeoTIFF makes Arecibo 1988 and Venera 15/16 cheap to add as two more steps.",
+      "evidence": [
+        "https://zenodo.org/records/18176179",
+        "https://zenodo.org/records/18176179/files/DatasetInventory.csv?download=1"
+      ]
     }
   ]
 }

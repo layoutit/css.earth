@@ -1,6 +1,6 @@
 # Venus sources
 
-Venus shows a cloud map, one Akatsuki ultraviolet exposure, Magellan radar, elevation, microwave and gravity displays, and modeled atmosphere charts. The cloud map is the default view. Rotation is accelerated, and the camera is illustrative rather than an observer ephemeris. The [navigation marker](source/preparation/navigation.json) is a stylized identifier, not the scene's illumination.
+Venus shows a cloud map, one Akatsuki ultraviolet exposure, Magellan radar, five radar maps from before Magellan, elevation, microwave and gravity displays, and modeled atmosphere charts. The cloud map is the default view. Rotation is accelerated, and the camera is illustrative rather than an observer ephemeris. The [navigation marker](source/preparation/navigation.json) is a stylized identifier, not the scene's illumination.
 
 ## Sources
 
@@ -10,6 +10,7 @@ Venus shows a cloud map, one Akatsuki ultraviolet exposure, Magellan radar, elev
 | Ultraviolet | Akatsuki UVI Level 3b, [vco_uvi_l3 v1.1](https://doi.org/10.17597/isas.darts/vco-00016), CC BY 4.0 under the [ISAS/JAXA data policy](https://www.isas.jaxa.jp/en/researchers/data-policy/) |
 | Cloud-top limb | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), Minnaert fit to MESSENGER MASCS spectra |
 | Radar | [USGS Magellan C3-MDIR synthetic color mosaic](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m), the 4,641 m GeoTIFF as published |
+| Early radar | Five maps from [Venus Geospatial Raster Datasets](https://zenodo.org/records/18176179), T. Austin et al. (2026), CC BY 4.0: Haystack 1967, Goldstone 1969–1972, Arecibo 1975–1977, Pioneer Venus 1978–1981, Arecibo 1983 |
 | Elevation, emissivity, reflectivity, roughness | [USGS numeric Magellan products](source/science/usgs/), at about 4.64 km grid spacing |
 | Gravity, Bouguer anomaly, geoid | PDS Geosciences volume [MGN-V-RSS-5-GRAVITY-L2-V1.0](https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/gravity/) |
 | Atmosphere charts and limb halo | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/) model, the halo run locally ([profile](source/atmosphere/psg-limb.json)) |
@@ -36,6 +37,8 @@ The Venera surface photographs from the [NASA PDS Geosciences Node](https://pds-
 **Limb halo.** [acquire-psg-limb-table.mts](../../../packages/bake/cli/acquire-psg-limb-table.mts) runs PSG's Venus template (VIRA-45 with Vandaele et al. 2020, Bierson et al. 2019 and Ehrenreich et al. 2012, and its sulfuric acid haze). Each value is the radiance along a line of sight grazing the planet, divided by the disc-centre radiance, in red, green and blue bands. The halo starts at the 75 km cloud top, where it is 0.039, 0.068 and 0.110 of the disc centre, and falls below one ten-thousandth above 100 km.
 
 **Ultraviolet.** Product `uvi_20230830_100446_365_l3b_v21` is one 365 nm exposure from orbit 257 at 2023-08-30T10:04:46.033 UTC. JAXA's Level 3b fits the limb to correct pointing and projects radiance onto a longitude-latitude grid for a 70 km cloud top ([Ogohara et al. 2017](https://doi.org/10.1186/s40623-017-0749-5)). Of 34 exposures measured it lights the most of the globe: 48.54 %, at 3.65° phase, where one look can show at most 49.18 %. `packages/bake/src/objects/interpretation/akatsuki-uvi-l3b.ts` reads it with h5wasm and box-integrates it to 2048 × 1024. Brightness is `(radiance × 5 × 10⁻⁹) ^ (1 / 2.2)`, with nothing clipped and no contrast enhancement or sharpening. 48.62 % of cells carry an observation; the rest use the shared gray graticule, and nothing is filled.
+
+**Early radar.** Five rescued maps show what radar saw before Magellan, as one stepper in date order. Three are scans of printed figures (Haystack 1967, [Ingalls et al. 1968](https://doi.org/10.21236/AD0681467); Goldstone 1969–1972, [Saunders and Malin 1977](https://doi.org/10.1029/GL004i011p00547); Arecibo 1975–1977, [Campbell and Burns 1980](https://doi.org/10.1029/JA085iA13p08271)) and two are archive mosaics (Pioneer Venus 1978–1981, [Pettengill et al. 1980](https://doi.org/10.1029/JA085iA13p08261); Arecibo 1983, [Campbell et al. 1984](https://doi.org/10.1126/science.226.4671.167)). The depositor fitted each to Magellan's map on a 6,051 km sphere. Each 8-bit GeoTIFF is read as deposited and drawn in gray, brightness 0 to 255, with bilinear sampling; its zero cells and everything outside its frame are missing and show the shared gray grid. Nothing is cleaned: the Goldstone figure keeps its authors' dashed box and letters, and the Arecibo 1975–1977 map its grid lines.
 
 **Radar.** USGS's C3-MDIR synthetic color mosaic is read from its published GeoTIFF ([label](source/radar/c3-mdir-colorized-4641m-pds3.lbl)): 8,192 × 4,096 pixels at 4,641 m, three 8-bit bands, from pole to pole. It is packed as published, with no exposure curve, sharpening or resampling. USGS made the color to simulate the surface; it follows radar brightness and is not a measurement, so the panel shows no scale. The gray FMAP left-look mosaic held this dataset from 27 September to 6 October 2026; the [ledger](investigations.json) keeps its route and measurements.
 
@@ -73,6 +76,7 @@ Headless Chrome captures of the default view, each after the page reported ready
 
 ## Known problems
 
+- Early radar: the scans' brightness is the printed figure's, not a calibrated echo strength, and their places can sit 40 to 300 km from Magellan's (the depositor's estimates: 300 km for 1967, 100 km for 1969–1981, 40 km for 1983). No map covers the whole planet: they span 94° to 360° of longitude.
 - The radar map's orange is synthetic: it follows radar brightness and is not surface color. The product states no brightness scale. A flat tone near the south pole stands in for ground the mosaic does not show.
 - The cloud map's color is added by its author, who says Venus in visible light is almost white with little contrast. The clouds move, so the map's longitudes mark no place on the planet. He replaces his maps with improved versions; `acquire venus --refresh` downloads the current file.
 - The ultraviolet image is one instant of clouds that move with a four-day super-rotation. It already carries the Sun, so illumination is counted twice near the limb.

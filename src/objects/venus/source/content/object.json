@@ -172,6 +172,111 @@
         ]
       },
       {
+        "id": "radar-1967",
+        "label": "Early radar",
+        "thumbnail": "venus-dataset-radar-1967.webp",
+        "surface": "venus-radar-1967@2x.webp",
+        "source": {
+          "id": "austin-2026-venus-radar-rasters",
+          "url": "https://zenodo.org/records/18176179"
+        },
+        "poles": "venus-poles-radar-1967@2x.webp",
+        "material": "venus-observation-material@2x.webp",
+        "shortLabel": "Radar",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Ingalls et al. (1968) · 3.8 cm · up to 300 km off",
+        "notes": "Radar echoes from Venus received by Haystack Observatory at 3.8 cm wavelength; bright ground returned more of the signal. Scanned from a printed figure and fitted to Magellan’s map; the depositor removed the figure’s grid lines, which left straight streaks. Places can sit up to about 300 km from where Magellan later put them. Gray marks ground the map does not cover (longitudes -91° to 3°, latitudes -40° to 50°). From the rescued-data collection of T. Austin et al. (2026); the observations are those of Ingalls et al. (1968).",
+        "step": {
+          "group": "radar-history",
+          "label": "1967"
+        }
+      },
+      {
+        "id": "radar-1972",
+        "label": "Early radar",
+        "thumbnail": "venus-dataset-radar-1972.webp",
+        "surface": "venus-radar-1972@2x.webp",
+        "source": {
+          "id": "austin-2026-venus-radar-rasters",
+          "url": "https://zenodo.org/records/18176179"
+        },
+        "poles": "venus-poles-radar-1972@2x.webp",
+        "material": "venus-observation-material@2x.webp",
+        "shortLabel": "Radar",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Saunders and Malin (1977) · 12.6 cm · up to 100 km off",
+        "notes": "Radar echoes from Venus received by Goldstone at 12.6 cm wavelength; bright ground returned more of the signal. Digitized from a printed mosaic of the 1969, 1970 and 1972 observations and fitted to Magellan’s map; the dashed box and letters are the original authors’. Places can sit up to about 100 km from where Magellan later put them. Gray marks ground the map does not cover (longitudes -115° to 49°, latitudes -45° to 41°). From the rescued-data collection of T. Austin et al. (2026); the observations are those of Saunders and Malin (1977).",
+        "step": {
+          "group": "radar-history",
+          "label": "1969–1972"
+        }
+      },
+      {
+        "id": "radar-1977",
+        "label": "Early radar",
+        "thumbnail": "venus-dataset-radar-1977.webp",
+        "surface": "venus-radar-1977@2x.webp",
+        "source": {
+          "id": "austin-2026-venus-radar-rasters",
+          "url": "https://zenodo.org/records/18176179"
+        },
+        "poles": "venus-poles-radar-1977@2x.webp",
+        "material": "venus-observation-material@2x.webp",
+        "shortLabel": "Radar",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Campbell and Burns (1980) · 12.6 cm · up to 100 km off",
+        "notes": "Radar echoes from Venus received by Arecibo Observatory at 12.6 cm wavelength; bright ground returned more of the signal. Scanned from a printed mosaic of the 1975 and 1977 observations and fitted to Magellan’s map; the original grid lines remain, and the depositor blurred the scan to remove printer texture. Places can sit up to about 100 km from where Magellan later put them. Gray marks ground the map does not cover (longitudes -115° to 42°, latitudes -62° to 81°). From the rescued-data collection of T. Austin et al. (2026); the observations are those of Campbell and Burns (1980).",
+        "step": {
+          "group": "radar-history",
+          "label": "1975–1977"
+        }
+      },
+      {
+        "id": "radar-1980",
+        "label": "Early radar",
+        "thumbnail": "venus-dataset-radar-1980.webp",
+        "surface": "venus-radar-1980@2x.webp",
+        "source": {
+          "id": "austin-2026-venus-radar-rasters",
+          "url": "https://zenodo.org/records/18176179"
+        },
+        "poles": "venus-poles-radar-1980@2x.webp",
+        "material": "venus-observation-material@2x.webp",
+        "shortLabel": "Radar",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Pettengill et al. (1980) · 17 cm · up to 100 km off",
+        "notes": "Radar echoes from Venus received by the Pioneer Venus orbiter at 17 cm wavelength; bright ground returned more of the signal. Reformatted from the mosaic in NASA’s Planetary Data System, acquired between 5 December 1978 and 23 March 1981. Places can sit up to about 100 km from where Magellan later put them. Gray marks ground the map does not cover (longitudes -180° to 180°, latitudes -20° to 51°). From the rescued-data collection of T. Austin et al. (2026); the observations are those of Pettengill et al. (1980).",
+        "step": {
+          "group": "radar-history",
+          "label": "1978–1981"
+        }
+      },
+      {
+        "id": "radar-1983",
+        "label": "Early radar",
+        "thumbnail": "venus-dataset-radar-1983.webp",
+        "surface": "venus-radar-1983@2x.webp",
+        "source": {
+          "id": "austin-2026-venus-radar-rasters",
+          "url": "https://zenodo.org/records/18176179"
+        },
+        "poles": "venus-poles-radar-1983@2x.webp",
+        "material": "venus-observation-material@2x.webp",
+        "shortLabel": "Radar",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Campbell et al. (1984) · 12.6 cm · up to 40 km off",
+        "notes": "Radar echoes from Venus received by Arecibo Observatory at 12.6 cm wavelength; bright ground returned more of the signal. Compiled from three mosaic tiles in NASA’s Planetary Data System, observed in August and September 1983, and fitted to Magellan’s map. Places can sit up to about 40 km from where Magellan later put them. Gray marks ground the map does not cover (longitudes -109° to 38°, latitudes 22° to 82°). From the rescued-data collection of T. Austin et al. (2026); the observations are those of Campbell et al. (1984).",
+        "step": {
+          "group": "radar-history",
+          "label": "1983"
+        }
+      },
+      {
         "id": "elevation",
         "label": "Elevation",
         "thumbnail": "venus-dataset-elevation.webp",

@@ -34,6 +34,220 @@
       "resolutionScale": 4
     },
     {
+      "id": "radar-1967",
+      "source": "radar-history/Venus_Haystack_1967_Image_Global_23000m_v1.tif",
+      "falseColor": false,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "Venus_Haystack_1967_Image_Global_23000m_v1.tif",
+          "sampling": "bilinear",
+          "minimum": 0,
+          "maximum": 255,
+          "colors": [
+            "#000000",
+            "#ffffff"
+          ],
+          "units": "scan brightness",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 431,
+            "height": 414,
+            "origin": [
+              -9635844.266163966,
+              5259094.407283275
+            ],
+            "resolution": [
+              23000,
+              -23000
+            ],
+            "referenceRadiusMeters": 6051000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "radar-1972",
+      "source": "radar-history/Venus_Goldstone_1972_Global_13329m_v1.tif",
+      "falseColor": false,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
+      "resolutionScale": 2,
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "Venus_Goldstone_1972_Global_13329m_v1.tif",
+          "sampling": "bilinear",
+          "minimum": 0,
+          "maximum": 255,
+          "colors": [
+            "#000000",
+            "#ffffff"
+          ],
+          "units": "scan brightness",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 1302,
+            "height": 682,
+            "origin": [
+              -12194060.86926516,
+              4319736.482425293
+            ],
+            "resolution": [
+              13329.066837955505,
+              -13329.0668379555
+            ],
+            "referenceRadiusMeters": 6051000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "radar-1977",
+      "source": "radar-history/Venus_Arecibo_1977_Global_5000m_v1.tif",
+      "falseColor": false,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
+      "resolutionScale": 4,
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "Venus_Arecibo_1977_Global_5000m_v1.tif",
+          "sampling": "bilinear",
+          "minimum": 0,
+          "maximum": 255,
+          "colors": [
+            "#000000",
+            "#ffffff"
+          ],
+          "units": "scan brightness",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 3309,
+            "height": 3028,
+            "origin": [
+              -12111827.77819341,
+              8586870.826203836
+            ],
+            "resolution": [
+              5000,
+              -5000
+            ],
+            "referenceRadiusMeters": 6051000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "radar-1980",
+      "source": "radar-history/Venus_Pioneer_Backscatter_9278m_v1.tif",
+      "falseColor": false,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
+      "resolutionScale": 2,
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "Venus_Pioneer_Backscatter_9278m_v1.tif",
+          "sampling": "bilinear",
+          "minimum": 0,
+          "maximum": 255,
+          "colors": [
+            "#000000",
+            "#ffffff"
+          ],
+          "units": "scan brightness",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 4098,
+            "height": 802,
+            "origin": [
+              -19009766.61385089,
+              5334614.589757276
+            ],
+            "resolution": [
+              9277.572262730122,
+              -9277.572262730122
+            ],
+            "referenceRadiusMeters": 6051000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": 0
+          }
+        }
+      }
+    },
+    {
+      "id": "radar-1983",
+      "source": "radar-history/Venus_Arecibo_1983_North_2116m_v1.tif",
+      "falseColor": false,
+      "output": "venus-{id}{suffix}.webp",
+      "thumbnail": "venus-dataset-{id}.webp",
+      "resolutionScale": 4,
+      "science": {
+        "scientific": {
+          "format": "geotiff",
+          "path": "Venus_Arecibo_1983_North_2116m_v1.tif",
+          "sampling": "bilinear",
+          "minimum": 0,
+          "maximum": 255,
+          "colors": [
+            "#000000",
+            "#ffffff"
+          ],
+          "units": "scan brightness",
+          "valueTransform": {
+            "scale": 1,
+            "offset": 0
+          },
+          "outputLongitudeOrigin": -180,
+          "grid": {
+            "width": 7322,
+            "height": 5523,
+            "origin": [
+              -11514735.389587004,
+              8668260.157909188
+            ],
+            "resolution": [
+              2116.075441714724,
+              -1143.0250001317563
+            ],
+            "referenceRadiusMeters": 6051000,
+            "centerLongitude": 0,
+            "wrapLongitude": true,
+            "noData": 0
+          }
+        }
+      }
+    },
+    {
       "id": "elevation",
       "source": "science/usgs/elevation.tif",
       "falseColor": true,
