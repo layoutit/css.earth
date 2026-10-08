@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { refusedPreparedRows } from './check-prepared-delivery.mts';
+
+const inventory = (...filenames: string[]) => ({ assets: [{ location: 'public', filename: 'scene.json' }, ...filenames.map(filename => ({ location: 'prepared', filename }))] });
+const sphere = { properties: { recipe: { sources: [{ id: 'geometry' }, { id: 'raster' }] } } };
+const shape = { properties: { recipe: { sources: [{ id: 'terrestrial' }] } } };
+
+test('delivered records, nested files and public files pass', () => {
+  assert.deepEqual(refusedPreparedRows('vega', inventory('runtime.json', 'leaf-boxes.json', 'content.json', 'minimaps/color.webp', 'views/scene.json'), sphere), []);
+});
+
+test('a working record or an unnamed record is refused, with its body and file', () => {
+  assert.deepEqual(refusedPreparedRows('vega', inventory('runtime.json', 'scene.json', 'controls.json', 'sky.json', 'notes.json'), sphere), [
+    'vega/prepared/scene.json: a working record', 'vega/prepared/controls.json: a working record', 'vega/prepared/sky.json: a working record',
+    'vega/prepared/notes.json: not named in the delivery ledger']);
+});
+
+test('a lane that repaints from its scene keeps it listed', () => {
+  assert.deepEqual(refusedPreparedRows('eros', inventory('runtime.json', 'scene.json', 'surfaces.json'), shape), []);
+});
