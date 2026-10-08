@@ -172,6 +172,10 @@ A surface season (`cssearth-star-surface-season@1`) names the calibrated files a
 
 Verdict: cast. The map of the second row correlates 0.83 with the season's over the surface seen.
 
+The page in the app, headless Chrome, on its three datasets, beside Arcturus with the limb Lacour et al. (2008) fitted. The app's Surface map correlates 0.83 with ROTIR's own sky image of 14 September 2011 once turned by the pole's 26° (the page draws the pole up); the mirrored picture and the other nights fit worse.
+
+![λ Andromedae on Color + brightness, Surface map and Color, and Arcturus on Color](images/stellar-surface-map-lambda-andromedae.webp)
+
 What in this is not printed in a paper:
 
 1. **The three conditions and their limits** are this repository's, as for every star above.
