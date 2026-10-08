@@ -4,14 +4,44 @@
     {
       "location": "public",
       "filename": "hip-67522-arrival.webp",
-      "bytes": 27924,
-      "sha256": "a4aaeb9734aab7a1a62a4b1550cdc9e87501a7aaabcf8ec0686a9d3a0300620d"
+      "bytes": 28988,
+      "sha256": "e208bfba637b42aa84bcc77242ad8ef28b6efe77ad749afda54fb86ab3b4ec95"
     },
     {
       "location": "public",
       "filename": "hip-67522-billboard.webp",
-      "bytes": 4920,
-      "sha256": "a287c72a933913b57297c7d0b871b0a66a5243b5aafcc373bf880a6e77923a98"
+      "bytes": 5056,
+      "sha256": "acea413970d1a093140d887420662c1f98cfd77dc8a91c0a373d8ffff2806737"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-dataset-brightness-sector-101.webp",
+      "bytes": 182,
+      "sha256": "52b66efa8c873cd88dbba4d27df8e9f7425f3e79b90481c577ff4b8cad4e5cfc"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-dataset-brightness-sector-102.webp",
+      "bytes": 142,
+      "sha256": "676a894cd99ff52abd7e7f1627a2b2ba47c9db0d01032e59c3e95fcfdf64e01f"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-dataset-brightness-sector-38.webp",
+      "bytes": 128,
+      "sha256": "c262b54b520674eb8e1776e1bd33251aec8676202e868db23da18c3ad70378b3"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-dataset-brightness-sector-64.webp",
+      "bytes": 156,
+      "sha256": "de4cef4cc067fa12e93c9f4416a88f20787fcf8d8c6da4c72cfcbe3fcd1516e2"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-dataset-color-brightness.webp",
+      "bytes": 172,
+      "sha256": "0f914f8e62e301e95faf17602993d1f0dd6a6ab31f30c6f2dda3353df4d3064d"
     },
     {
       "location": "public",
@@ -21,15 +51,81 @@
     },
     {
       "location": "public",
+      "filename": "hip-67522-limb-color-brightness@2x.webp",
+      "bytes": 121012,
+      "sha256": "880e6308613d982343aa8c319a6d7195d916697f2d9c4065af46ea14397f61ac"
+    },
+    {
+      "location": "public",
       "filename": "hip-67522-limb-color@2x.webp",
       "bytes": 98766,
       "sha256": "78263e9bf2150a440dca75b79ae8452bfbac6f60657d3d13504be36382556b0c"
     },
     {
       "location": "public",
+      "filename": "hip-67522-poles-brightness-sector-101@2x.webp",
+      "bytes": 13754,
+      "sha256": "f2a3d62941814cc9b41cff338f53516abdd941356f58f78ee744de90c9a20b1c"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-poles-brightness-sector-102@2x.webp",
+      "bytes": 12674,
+      "sha256": "7a74b1e339bc79d48b0ea93a72a3617e3024f334c177f8ee0afdea8c89b010a8"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-poles-brightness-sector-38@2x.webp",
+      "bytes": 11384,
+      "sha256": "933c71fc30dcc72908d0cf04572a2a2b36506e86636af7e488525583862666d0"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-poles-brightness-sector-64@2x.webp",
+      "bytes": 10118,
+      "sha256": "faabd85ba7db5bb49be33b1e71427b47b30798d3376d261810d6cc9dea25c6ae"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-poles-color-brightness@2x.webp",
+      "bytes": 23932,
+      "sha256": "98f880487cfbd6a43dfea93491f647f9e94f024a87f1861475ad37cf21e0aaac"
+    },
+    {
+      "location": "public",
       "filename": "hip-67522-poles-color@2x.webp",
       "bytes": 1340,
       "sha256": "095c5eb0e8aa372db7f08fe8764c58c42a4eeabb2f11a909612d8c00eb2585e5"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-surface-brightness-sector-101@2x.webp",
+      "bytes": 13884,
+      "sha256": "2eebb890d454dfd8b4c414652f12e28b92e6fe37d8476a878c0272d28a3bfc35"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-surface-brightness-sector-102@2x.webp",
+      "bytes": 12342,
+      "sha256": "b43425e1f0077fd2c445eb2412119bad77848ea0e9dcd6daa2aad2f7f7c97be8"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-surface-brightness-sector-38@2x.webp",
+      "bytes": 11990,
+      "sha256": "3521263353849a31a181ac7c9ef661a2f8ef0ec72d7a6d51cc247e3200beec65"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-surface-brightness-sector-64@2x.webp",
+      "bytes": 12768,
+      "sha256": "89bd80d13f75731c61f1c648848b7a410819720356c4707a3fe76f401a29a93e"
+    },
+    {
+      "location": "public",
+      "filename": "hip-67522-surface-color-brightness@2x.webp",
+      "bytes": 17356,
+      "sha256": "4ad9a1e525e28881e783e398151d10f8a49ede208257b95342237ce4d91df28e"
     },
     {
       "location": "public",
@@ -40,20 +136,20 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 384,
-      "sha256": "1898d3f152b136ceafc69d7e1005766e52d0f56e83a89eb94e08e6021bc64c48"
+      "bytes": 395,
+      "sha256": "d79de0a0b67c8b0440337524d5193f6a89f1397d890effd953e2c9c2f0f30235"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2146,
-      "sha256": "84f1a4aa81dfdc4df7b5d24d5cf90895240cbe371aa8cdfdd095ee2c832982ba"
+      "bytes": 3180,
+      "sha256": "809034a972333e1590388b569e9ec9a05058e82f5e22112ff01d2ae9e0640055"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 724,
-      "sha256": "53140deee0c7f57579540656236b48af70f5a6c305055adc94d80d06c66126e9"
+      "bytes": 662,
+      "sha256": "96c4ea8bfac90fd8f067803780124fc62f55f76aa937673e64009d3cdc307e58"
     },
     {
       "location": "prepared",
@@ -64,20 +160,50 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 368,
-      "sha256": "de38e4964f608af16ffcbc328c0061a98c155b5444b960a9c013490ec2c2a312"
+      "bytes": 6891,
+      "sha256": "a0e7f731fff2a9cc4d4ca45aa67822c98efaf9a2ec982368fcd3c3cc72e0b576"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1011,
-      "sha256": "c28bc8e0a59c537bc0522eef6554952e023f5ff7a6c8c64f8abe6ef55b251a47"
+      "bytes": 10646,
+      "sha256": "bbfc22c4069824555289bb29926111c124535504099819c68e80ac29bfda674a"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+      "bytes": 687,
+      "sha256": "3884f77456bbecf7c2116566ac491a1f1b4a332ef23f48879c686eb637e44f41"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-101.webp",
+      "bytes": 1212,
+      "sha256": "845ae301cda60249203af4119437dc56b995947601e4b69fad007574eee343f4"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-102.webp",
+      "bytes": 1008,
+      "sha256": "3dc5a7ac192311a974597fa6b4c2962598cbf40293ed430563d4e6151174e311"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-38.webp",
+      "bytes": 926,
+      "sha256": "f98e4587605382e7f6986bb5b8bec6fa61c122d5f6b2a66cec9b857d4e2d1245"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-64.webp",
+      "bytes": 1054,
+      "sha256": "35444232666468fba747011f8da626f26ced8b98040c8bd77811cde82a0d19b1"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1166,
+      "sha256": "3de3270a3f44519544840adcb4943825b94314408ec8fafdae6528f4bb33aa1b"
     },
     {
       "location": "prepared",
@@ -88,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 249494,
-      "sha256": "f60727e85d2e57198f004685ec9d023c45a4e5f20aebf419ed1319f5d7e52d15"
+      "bytes": 262071,
+      "sha256": "9a3bf7c345186f950cbdd7c721b176e0bd130760d887da0bfe8c8ed121bc5d74"
     },
     {
       "location": "prepared",
@@ -112,8 +238,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1676,
-      "sha256": "512832a0a7047c003638539fd910967820c6f2ae4125f76bc169cf0420628525"
+      "bytes": 2770,
+      "sha256": "818ca734abc2bd7f8d3b6cfe78b6988b066f335f0fd5fce347074cf5cf37a111"
     },
     {
       "location": "prepared",

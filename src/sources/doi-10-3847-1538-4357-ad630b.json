@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-3847-1538-4357-ad630b",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bailey et al. (2024): ϵ Sagittarii: An Extreme Rapid Rotator with a Decretion Disk",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ad630b"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.3847/1538-4357/ad630b",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.3847/1538-4357/ad630b",
+      "checkedOn": "2026-10-08",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bailey et al. (2024), The Astrophysical Journal 972 103",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3847/1538-4357/ad630b"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 972 103",
+  "creators": [
+    "Jeremy Bailey",
+    "Fiona Lewis",
+    "Ian D. Howarth",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

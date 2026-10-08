@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { deriveObjectDiscovery } from './prepare-object-discovery.mts';
+import { NAVIGATIONAL_STAR_NAMES, NAVIGATIONAL_STAR_OBJECT_IDS, UNBOUND_NAVIGATIONAL_STARS } from './world/navigational-stars.mts';
+import { WORLD_OBJECTS } from '../../world/systems/world-objects.mts';
 
 const color = { id: 'color', science: { kind: 'stellar-photometric-color' } };
 const map = (id: string) => ({ id, science: { kind: 'terrestrial-scientific', consumer: 'espadons-zdi' } });
@@ -24,4 +26,21 @@ test('a picture of the star, or its package\'s mark, features it whatever else i
 test('a body that is not a star is featured by any observed dataset, as before', () => {
   const planet = deriveObjectDiscovery({}, controls(['map']), [{ surfaces: [{ id: 'map', science: { kind: 'terrestrial-scientific' } }] }]);
   assert.deepEqual([planet.imagery, planet.featured], [true, true]);
+});
+
+test('a navigational star of the almanacs is featured whatever its page shows', () => {
+  const listed = deriveObjectDiscovery({}, controls(['color']), [{ surfaces: [color] }], undefined, true);
+  assert.deepEqual([listed.imagery, listed.featured], [false, true]);
+  assert.equal(deriveObjectDiscovery({}, controls(['color']), [{ surfaces: [color] }]).featured, false);
+});
+
+test('the list is the source\'s 57 numbered stars and Polaris, and each bound one is a featured star of the map', () => {
+  assert.equal(NAVIGATIONAL_STAR_NAMES.length, 58);
+  assert.equal(NAVIGATIONAL_STAR_OBJECT_IDS.length + UNBOUND_NAVIGATIONAL_STARS.length, 58);
+  assert.equal(new Set(NAVIGATIONAL_STAR_OBJECT_IDS).size, NAVIGATIONAL_STAR_OBJECT_IDS.length);
+  for (const id of NAVIGATIONAL_STAR_OBJECT_IDS) {
+    const object = WORLD_OBJECTS.find(candidate => candidate.id === id);
+    assert.ok(object, `${id} is bound to the list and is not on the map`);
+    assert.deepEqual([object.classification, object.discovery.featured], ['star', true], id);
+  }
 });

@@ -46,6 +46,39 @@
       "title": "Photosphere color",
       "detail": "From its temperature",
       "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    },
+    "brightness-sector-34": {
+      "title": "Brightness map, Sector 34",
+      "detail": "Sector 34, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-61": {
+      "title": "Brightness map, Sector 61",
+      "detail": "Sector 61, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-88": {
+      "title": "Brightness map, Sector 88",
+      "detail": "Sector 88, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, Jan to Feb 2025",
+      "detail": "TESS sector 88",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
+    },
+    "debris-disc": {
+      "title": "Debris disc, 1.3 mm",
+      "detail": "ALMA, 2016",
+      "summary": "The edge-on dust disc in its own glow at 1.3 mm. Its depth is reconstructed from the image.",
+      "sources": [
+        {
+          "catalogueId": "source-moth-disc-dust-b6-cont",
+          "url": "https://almascience.eso.org/aq/?projectCode=2015.1.00633.S",
+          "label": "ALMA project 2015.1.00633.S, ARI-L continuum image",
+          "checked": "2026-10-08"
+        }
+      ]
     }
   }
 }

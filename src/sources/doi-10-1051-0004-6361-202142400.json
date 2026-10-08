@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202142400",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Deline et al. (2022): The atmosphere and architecture of WASP-189 b probed by its CHEOPS phase curve",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2201.04518"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202142400"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022A&A...659A..74D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2201.04518",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202142400",
+      "label": "Astronomy & Astrophysics 659 A74"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361/202142400",
+      "checkedOn": "2026-10-08",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Deline et al. (2022), Astronomy & Astrophysics 659 A74",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361/202142400"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 659 A74",
+  "creators": [
+    "A. Deline",
+    "M. J. Hooton",
+    "M. Lendl",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

@@ -1,0 +1,30 @@
+{
+ "id": "menkar",
+ "classification": "star",
+ "order": 5807,
+ "physical": {
+  "name": "Menkar",
+  "horizonsCode": null,
+  "meanRadiusKm": 69713314.2,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 3738
+ },
+ "physicalNotes": "Radius 100.206 +/- 3.384 solar radii from Soubiran et al. (2024), A&A 682, A145, HD 18884: radius 100.206 +/- 3.384 solar radii, from the limb-darkened angular diameter 12.2 +/- 0.04 mas (measured in 2006A&A...460..855W, as the table lists it) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.1051/0004-6361/202347136): 69,713,314 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 3738 +/- 170 K from Soubiran et al. (2024), A&A 682, A145, HD 18884: effective temperature 3738 +/- 170 K, from the angular diameter and the bolometric flux of the paper's SED fit (https://doi.org/10.1051/0004-6361/202347136). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 45.56991317,
+  "declinationDegrees": 4.08992556,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 76.394,
+  "properMotionRaMasPerYear": -11.7,
+  "properMotionDecMasPerYear": -77.7,
+  "radialVelocityKmPerS": -26.08,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 14135: RAJ2000 45.56991317, DEJ2000 4.08992556 (ICRS at epoch J1991.25), from the archived row src/objects/menkar/source/photometry/catalogue-row.tsv; SIMBAD names it HD 18884",
+   "distance": "Soubiran et al. (2024), A&A 682, A145, HD 18884: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with, 13.09 +/- 0.44 mas, inverted (https://doi.org/10.1051/0004-6361/202347136): 76.394 +/- 2.568 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 14135 (same row): -11.7, -77.7 mas/yr",
+   "radialVelocity": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 14135: RV -26.08 +/- 0.02 km/s (quality A) (https://doi.org/10.1134/S1063773712050015)"
+  }
+ }
+}

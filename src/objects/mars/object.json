@@ -163,6 +163,26 @@
               "material": "lighting"
             },
             {
+              "id": "heat-flow-now",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "heat-flow-1-5-ga",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "heat-flow-3-0-ga",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "heat-flow-3-5-ga",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
               "id": "albedo",
               "source": "content",
               "material": "lighting"

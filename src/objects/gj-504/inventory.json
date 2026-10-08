@@ -4,14 +4,32 @@
     {
       "location": "public",
       "filename": "gj-504-arrival.webp",
-      "bytes": 27442,
-      "sha256": "8b40512d65d06e256cc440a5f0a0c9dcd28f2b9ba92e2e2a88009625a9212a57"
+      "bytes": 28994,
+      "sha256": "1c86e474b7b3068ff75ecda400d35e718b7cfffcf6056486f94be1d6c416b13f"
     },
     {
       "location": "public",
       "filename": "gj-504-billboard.webp",
-      "bytes": 4934,
-      "sha256": "6f18dc528088fc90912d9a5d87786a35971c3bfcef068a61381457cdc51f1c84"
+      "bytes": 5024,
+      "sha256": "26e75b5fa67a3b1064de6503967e8856fa96565cd2443b55440404e99134d6dc"
+    },
+    {
+      "location": "public",
+      "filename": "gj-504-dataset-brightness-sector-23.webp",
+      "bytes": 110,
+      "sha256": "8d86f10fe6ab4c4247389b99833026103d103eed85ccd4bbc90b01c22f04e329"
+    },
+    {
+      "location": "public",
+      "filename": "gj-504-dataset-brightness-sector-50.webp",
+      "bytes": 240,
+      "sha256": "89613a50e5292852d1899a580e43c90ffddd4c2e86f99e118a70f36b645a3d89"
+    },
+    {
+      "location": "public",
+      "filename": "gj-504-dataset-color-brightness.webp",
+      "bytes": 254,
+      "sha256": "eb1025fa31ea2b28859dc4f46cd8f04bfdddfa01b2fe6f3dddc746a5a3349428"
     },
     {
       "location": "public",
@@ -27,9 +45,33 @@
     },
     {
       "location": "public",
+      "filename": "gj-504-limb-color-brightness@2x.webp",
+      "bytes": 118750,
+      "sha256": "9d756fa58269c39268fb6c3ea40502dd54b7f9142a3689ff0e31fcd15a3583c0"
+    },
+    {
+      "location": "public",
       "filename": "gj-504-limb-color@2x.webp",
       "bytes": 97332,
       "sha256": "6cd1c4d9ac9714541e86dbda7d18e73ca698f3e600c8386826fe692defbbd5b3"
+    },
+    {
+      "location": "public",
+      "filename": "gj-504-poles-brightness-sector-23@2x.webp",
+      "bytes": 3088,
+      "sha256": "e7e514217452f8f411d87646ba362f94929e5a56b24b29da495f22ac849d28f0"
+    },
+    {
+      "location": "public",
+      "filename": "gj-504-poles-brightness-sector-50@2x.webp",
+      "bytes": 4934,
+      "sha256": "2ea1753d3f2ca63216f4fc93fd0f9c778e7599e0c453fc010f1fff194cb7fdcd"
+    },
+    {
+      "location": "public",
+      "filename": "gj-504-poles-color-brightness@2x.webp",
+      "bytes": 4332,
+      "sha256": "fe5fea3d2361012515a142e0625cd2445f7ce0f3535fa6fdb850eb240f87aca3"
     },
     {
       "location": "public",
@@ -42,6 +84,24 @@
       "filename": "gj-504-poles-radial-field-2025-04@2x.webp",
       "bytes": 44906,
       "sha256": "a26d00e1f92ce237b281e66be595eff180982a000e370b616c8ac4786297727d"
+    },
+    {
+      "location": "public",
+      "filename": "gj-504-surface-brightness-sector-23@2x.webp",
+      "bytes": 8844,
+      "sha256": "64e88c64c66736ab3d82ec5d935452dda4073fc1d15a93fb9055a4aa1cee6d6c"
+    },
+    {
+      "location": "public",
+      "filename": "gj-504-surface-brightness-sector-50@2x.webp",
+      "bytes": 17140,
+      "sha256": "ce2a5011e9f5f2e5aeb92a7eefc9d4b26b765351540d58833bd6b358cb00cd6f"
+    },
+    {
+      "location": "public",
+      "filename": "gj-504-surface-color-brightness@2x.webp",
+      "bytes": 17968,
+      "sha256": "a6a32929901113987209f1e43785a4b9bf909708de6c5e18225ae4f5cdfbf7d1"
     },
     {
       "location": "public",
@@ -58,14 +118,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 367,
-      "sha256": "b9e296046649630d80af4f6dea3fc0ffe6a225a5e0061d46be7eb6117d9a3b81"
+      "bytes": 378,
+      "sha256": "f971c5edcebd7b48cac469230f5ab00ca0ce0d68f476d2bf4055ed9351e43346"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2216,
-      "sha256": "071b7279b0f25215cd9cc1ee6c08b1325baa6b979fb5a89091720209a2fe91d7"
+      "bytes": 2952,
+      "sha256": "67c7aeda23733ec6828e0bd9517a98a6440cbe6314158d6eb71a504f8a487114"
     },
     {
       "location": "prepared",
@@ -82,20 +142,38 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 2096,
-      "sha256": "6943fadbad92927c58132e7226d9387b15865e8f39b84c64b76864892ffd3f53"
+      "bytes": 5535,
+      "sha256": "7c08cdb198df22d7e50a3379f92aad15a31a6194fdd7f7d949a4ca7c8c43f3f2"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 3186,
-      "sha256": "d88abe7181f6a883820bc42c4536c7272909d2f759f91b0fbbd0160405b4642e"
+      "bytes": 8467,
+      "sha256": "5a11727c16f97c2241ef4007c967a84f8da4a9edbdbdf1de0cc37b7de867dfda"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 219,
-      "sha256": "29bef6e8833f8507c82959268db0ebbfb5a15bbe0d220dbd6c5b4db967cb4a06"
+      "bytes": 565,
+      "sha256": "731d7107e868f0ac0ebf4ffcef0afb6b1384744544800c2d01fc0adcb02747b2"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-23.webp",
+      "bytes": 690,
+      "sha256": "e813c8028674a50449d84ca689982359b463e9d197150722c1144b5477e1ba4e"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-50.webp",
+      "bytes": 1570,
+      "sha256": "ab36aee42000e4a77319fcbc437d3f6fcff982e8fdd6c1451b543d9624737f88"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1508,
+      "sha256": "1508520017f23cafbddd8f17e7e815775b054ba7cfb124b14ad2c3c2cc3ea9ba"
     },
     {
       "location": "prepared",
@@ -112,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 252976,
-      "sha256": "cb161ab34d259867b3baf8abd29c0da01705e7a5400fe0d9f8d5f91f3569cbc0"
+      "bytes": 260029,
+      "sha256": "f1105e814f3564d73b80a3ab95be8df8bbcf4a9192ea6230d5967f9cabb9cf45"
     },
     {
       "location": "prepared",
@@ -136,8 +214,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2290,
-      "sha256": "b16a7e3258d27ed3e277aa3af88647eca7b4c5cb4f6b185d6e39223ad6f1b430"
+      "bytes": 2941,
+      "sha256": "93234bec785a0f2cbf7c335ec2a649c78ff982916ce7c84a2e9bea04c8b8e190"
     },
     {
       "location": "prepared",

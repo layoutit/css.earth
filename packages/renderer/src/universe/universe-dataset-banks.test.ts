@@ -44,9 +44,9 @@ async function fixture(attached = false) {
   await banks.focusBank('fixture')!.load();
   const targets = [root.firstElementChild!, frontRoot.firstElementChild!] as HTMLElement[];
   if (attached) banks.setEnabled('fixture', true);
-  const publish = (bodyContextOpacity = 1, detailedObjectId?: string) => banks.publish({ referenceFrame: 'fixture', epochJdTt: 1,
-    pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
-    { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 1, detailedObjectId, bodyContextOpacity);
+  const publish = (bodyContextOpacity = 1, detailedObjectId?: string, flight?: { toM: readonly number[]; closeUp: number }, distance = 10) => banks.publish({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 1, detailedObjectId, bodyContextOpacity, undefined, flight);
   return { banks, targets, publish, lifetime };
 }
 
@@ -119,6 +119,16 @@ test('close-ups suppress distant banks while attached shells and the selected ne
   for (const node of distant.targets) assert.equal(node.style.opacity, '0.5');
   distant.publish(0, 'fixture');
   for (const node of distant.targets) assert.equal(node.style.opacity, '0.999');
+  // On a flight to a body inside the selected bank, the bank gives way as it comes to fill the view. A flight to a body
+  // outside it leaves it whole until that body's close-up, where its page draws no distant cloud.
+  distant.publish(0, 'fixture', { toM: [0, 0, 0], closeUp: 1 });
+  for (const node of distant.targets) assert.equal(node.style.opacity, '0.999');
+  distant.publish(0, 'fixture', { toM: [0, 0, 0], closeUp: 1 }, 1.2);
+  for (const node of distant.targets) assert.equal(node.style.display === 'none' || node.style.opacity === '0', true);
+  distant.publish(0, 'fixture', { toM: [0, 0, 50], closeUp: 1 }, 1.2);
+  for (const node of distant.targets) assert.equal(node.style.opacity, '0.999');
+  distant.publish(0, 'fixture', { toM: [0, 0, 50], closeUp: .5 }, 1.2);
+  for (const node of distant.targets) assert.equal(node.style.opacity, '0.5');
   distant.lifetime.destroy();
   const attached = await fixture(true);
   attached.publish(0);
@@ -191,4 +201,52 @@ test('a bank that stands in for the detailed one is drawn as the detailed one is
   decode.ready = false; publish('fixture');
   assert.equal(f.banks.drawing('fixture'), false, 'its own images gone, it draws nothing');
   f.lifetime.destroy();
+});
+
+test('a bank with a backing is drawn from afar on that one fixed plane, picturing the selected dataset, never on a billboard', async () => {
+  const { document } = parseHTML('<div id="back"><span></span></div><div id="front"><span></span></div>');
+  const root = document.getElementById('back')!, frontRoot = document.getElementById('front')!, lifetime = createSceneLifetime();
+  const style = { width: '128px', height: '128px', transform: 'matrix3d(0,-1,0,0,-1,0,0,0,0,0,1,0,64,64,0,1)', backgroundSize: '128px 128px', backgroundPosition: '0px 0px' };
+  const backing = { id: 'backing', frame, leaf: { texturePath: 'optical/impostors/view-00n.png', style },
+    datasets: new Map([['optical', 'optical/impostors/view-00n.png'], ['dust', 'dust/impostors/view-00n.png']]) };
+  const loads: string[] = [];
+  const banks = createUniverseDatasetBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
+    lifetime, declarations: [{ id: 'cloud', frame }], frame, visibility: { hiddenBelowRadiusPixels: 30, fullAboveRadiusPixels: 60 }, warmDomNodeBudget: 10000,
+    facts: [{ id: 'cloud', contextVisibility: 'independent', attached: false, backing: true }],
+    billboards: { plan: { imagePx: 256, banks: new Map() }, imageUrl: id => `/billboards/${id}.webp` },
+    load: async () => ({ payload: { ...payload, id: 'cloud', datasets: [...payload.datasets, { ...payload.datasets[0]!, id: 'dust' }] }, resolveResource: path => path }),
+    loadBacking: async id => { loads.push(id); return { payload: backing, resolveResource: path => `/${path}` }; } });
+  const viewport = { focalPixels: 100, principalOffsetPixels: [0, 0] as [number, number], widthPixels: 400, heightPixels: 300 };
+  // The bounding sphere projects to 17 px from 10 units: far under the volume's threshold, so the plane stands for it.
+  const at = (positionM: [number, number, number], orientationXyzw: [number, number, number, number]) =>
+    banks.publish({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM, orientationXyzw } }, viewport, 1, 1);
+  const front = () => at([0, 0, 10], [0, 0, 0, 1]), side = () => at([10, 0, 0], [0, Math.SQRT1_2, 0, Math.SQRT1_2]);
+  front();
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.deepEqual(loads, ['cloud'], 'read the first time it shows from afar');
+  front();
+  assert.equal(root.querySelector('[data-dataset-billboard]'), null, 'no camera-facing billboard');
+  const plane = root.querySelector<HTMLElement>('.prepared-galaxy-backing > [data-galaxy-backing="cloud"]')!;
+  const image = plane.querySelector('img')!, scene = plane.querySelector<HTMLElement>('.css-volume-scene')!;
+  assert.equal(plane.querySelectorAll('*').length + 1, 5, 'projection, camera, scene, mesh and one image');
+  assert.equal(plane.style.display, '');
+  assert.equal(image.getAttribute('src'), '/optical/impostors/view-00n.png');
+  // Orbiting turns the scene, the plane's one transform for the camera; the image stays where the bake laid it.
+  const facing = scene.style.transform;
+  side();
+  assert.equal(image.style.transform, style.transform, 'the plane is fixed in the bank\'s frame');
+  assert.notEqual(scene.style.transform, facing, 'the camera moved around it');
+  // Another dataset: the same plane takes its image at rest, never while the camera coasts.
+  banks.select('cloud', 'dust');
+  banks.setCoasting(true); front();
+  assert.equal(image.getAttribute('src'), '/optical/impostors/view-00n.png');
+  banks.setCoasting(false); front();
+  assert.equal(image.getAttribute('src'), '/dust/impostors/view-00n.png');
+  assert.equal(root.querySelectorAll('img').length, 1, 'one image, whichever dataset');
+  // Close enough for the volume in full, the plane gives way.
+  await banks.focusBank('cloud')!.load();
+  banks.publish({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 1.2], orientationXyzw: [0, 0, 0, 1] } }, viewport, 1, 1);
+  assert.equal(plane.style.display, 'none');
+  lifetime.destroy();
+  assert.equal(root.querySelector('.prepared-galaxy-backing'), null, 'the scene takes its plane with it');
 });

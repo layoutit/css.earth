@@ -22,22 +22,22 @@
     ]
   },
   "introduction": {
-    "text": "Its radius and temperature follow Hooton et al. 2022.",
+    "text": "It turns once in 0.85 days, which flattens it by 4.39%, and its planet's orbit is tilted 72 degrees from its equator.",
     "sources": [
       {
         "catalogueId": "doi-10-1051-0004-6361-202141645",
-        "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H/abstract",
+        "url": "https://doi.org/10.1051/0004-6361/202141645",
         "label": "Hooton et al. (2022), Astronomy & Astrophysics 658 A75",
-        "checked": "2026-09-29",
-        "locator": "NASA Exoplanet Archive ps table (st_refname HOOTON_ET_AL__2022): st_teff 7490, st_rad 2.082, st_mass 1.9"
+        "checked": "2026-10-08",
+        "locator": "Table 5: P_rot, f_obl, Psi"
       }
     ]
   },
   "datasets": {
     "color": {
       "title": "Photosphere color",
-      "detail": "From its Gaia spectrum",
-      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+      "detail": "Spectrum and spin",
+      "summary": "Gaia's color of the star, brighter and bluer at the poles where its fast spin makes it hotter. The darker edge is a model."
     }
   }
 }

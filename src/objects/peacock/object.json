@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "peacock",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Peacock",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3283704
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/peacock-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Peacock",
+      "classification": "star",
+      "color": "#a8c1ff",
+      "distanceAu": 11308482.9,
+      "description": "A dwarf of type B2.5 V, 55 parsecs away: 4.7 times the Sun's width.",
+      "systemName": "Peacock system",
+      "aliases": [
+        "HD 193924"
+      ],
+      "order": 5814,
+      "context": {
+        "order": 5811
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        550797926109309800,
+        -746756704229711700,
+        -1414535062421522000
+      ],
+      "presentationToReference": [
+        0.325590943524923,
+        -0.4963215841355304,
+        -0.8047704160912901,
+        -0.441427261093608,
+        0.6729022185876082,
+        -0.5935862004656699,
+        -0.8361414417776135,
+        -0.5485138916573329,
+        -9.907433654889834e-7
+      ],
+      "orbitUpReference": [
+        0.4963215841355304,
+        -0.6729022185876082,
+        0.5485138916573329
+      ],
+      "metersPerUnit": 10592593.548387097,
+      "bodyRadiusM": 3283704000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

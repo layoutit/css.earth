@@ -66,6 +66,7 @@ export interface PresentationInputs {
   solarSource: SolarSource; controls: ObjectControls;
   /** Authored surface targets (positive-east degrees) a dataset selects; composite only. */
   datasetFocus?: Record<string, { longitudeDegrees: number; latitudeDegrees: number; zoom: number }>;
-  /** A pulsating star's published light curve as veil opacity over one period (the photometry topic prepares it); emissive only. */
-  lightCurve?: { readonly durationMs: number; readonly keyframes: readonly { readonly offset: number; readonly opacity: string }[] };
+  /** A pulsating star's published light curve as veil opacity over one period (the photometry topic prepares it); emissive only.
+   * `stills` are the datasets that each draw the star at one moment of that light curve: the veil is not drawn over them. */
+  lightCurve?: { readonly durationMs: number; readonly keyframes: readonly { readonly offset: number; readonly opacity: string }[]; readonly stills?: readonly string[] };
 }

@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "helix-vista-layers",
+  "entries": [
+    {
+      "id": "eso-eso1205a",
+      "subject": "ESO eso1205a",
+      "status": "included",
+      "finding": "\"VISTA's look at the Helix Nebula\", released 19 January 2012: VISTA's VIRCAM camera in Y, J and K; 6592 x 6592 px over 37.5 arcmin, 0.341 arcsec per pixel. Its sky tags miss 326 Gaia DR3 stars by 1.87 arcsec rms; a cubic fitted to those stars leaves 0.13 arcsec. It covers the whole Hubble frame.",
+      "evidence": [
+        "https://www.eso.org/public/images/eso1205a/",
+        "https://www.eso.org/public/outreach/copyright/"
+      ]
+    },
+    {
+      "id": "registration",
+      "subject": "Placing the photograph on the Hubble photograph's frame",
+      "status": "included",
+      "finding": "The rings bank's photograph is placed by what its publisher prints; matched against the same Gaia DR3 stars, it misses them by about 4 arcsec rms, up to 7 arcsec at its edge. This photograph is placed on the sky by Gaia instead, so between the two datasets a feature near the frame's edge can move by a few arcsec.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243940"
+      ]
+    },
+    {
+      "id": "rings",
+      "subject": "The shape of the Helix Nebula",
+      "status": "included",
+      "finding": "O'Dell, McCullough & Meixner (2004): the main ring is two rings. The inner ring is an ellipse of 499 by 459 arcsec, a circle of radius 250 arcsec tilted 23 degrees out of the plane of the sky, the edge of an inner disc; the outer ring is an ellipse of 742 by 446 arcsec, a circle of radius 371 arcsec tilted 53 degrees (Sect. III.1). The more distant side of each symmetry axis: the inner disc's at position angle 288 degrees by its ring's orientation and radial-velocity pattern (303 by its plumes), the outer ring's at about 168 degrees (Sect. IV). The outer features share the outer ring's orientation. The disc's value here is the kinematic one, 288 degrees. Most of the main ring's emission comes from a disc about 100 arcsec in line-of-sight thickness (Sect. IV.3.1, citing O'Dell 1998). Meaburn et al. (2005) read the bright structure as bipolar lobes (490 by 285 arcsec, axis 37 degrees from the sight line) about a toroidal waist instead of two rings; that reading is not drawn. O'Dell (2005) finds the two readings predict alike along east-west and north-south slits.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0407556",
+        "https://arxiv.org/abs/astro-ph/0504295",
+        "https://arxiv.org/abs/astro-ph/0505539"
+      ]
+    },
+    {
+      "id": "hco-velocities",
+      "subject": "HCO+ velocities of the molecular gas (Zeigler et al. 2013)",
+      "status": "included",
+      "finding": "279 velocity components at 170 pointings over the main ring (70 arcsec beam), published nine years after the two-ring model and not used in it. Two sine waves in position angle fitted to them by least squares, each component against the nearer wave: 12 km/s most negative at position angle 280 degrees and 22 km/s at 160 degrees, 6.0 km/s root mean square. O'Dell et al.'s own two waves, 15.5 km/s at 288 degrees and 25.5 km/s at 168 degrees, leave 6.3 km/s; one sphere with two walls, 8.4 km/s at best. Of the four ways to choose each ring's near side, the one drawn fits best. Median line width 5.5 km/s.",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/778/1/16",
+        "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/778/16/table1.dat"
+      ]
+    },
+    {
+      "id": "thickness",
+      "subject": "How deep the rings are",
+      "status": "included",
+      "finding": "O'Dell et al. (2004, Sect. IV.3.1, from O'Dell 1998): most of the main ring's emission comes from a disc about 100 arcsec in line-of-sight thickness. Drawn for both rings as a glow that is 100 arcsec deep at half its strength. The paper calls the outer ring a torus without a size for its section.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0407556"
+      ]
+    },
+    {
+      "id": "core-sphere",
+      "subject": "The sphere of gas about the star",
+      "status": "deferred",
+      "finding": "Meaburn, Lopez & Richer (2008, Table 1) list a He II volume within 1.6 arcmin of the star and an inner [O III] shell of radius 2.2 arcmin expanding at 12.5 km/s, in one Hubble-type flow of 11,000 years: a ball in the middle of the disc. Not drawn: the disc's light is on its plane and in its glow there too.",
+      "evidence": [
+        "https://arxiv.org/abs/0711.3667"
+      ],
+      "revisitWhen": "The bake can draw a sphere of glow about the star with the rings."
+    }
+  ]
+}

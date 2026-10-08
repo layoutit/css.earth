@@ -36,6 +36,16 @@
               "id": "radial-field-2015-04",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "brightness-sector-22",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "color-brightness",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }

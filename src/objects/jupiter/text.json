@@ -96,6 +96,16 @@
       "detail": "F395N / F502N / F631N",
       "summary": "Dated OPAL cloud map. Compare shapes; color processing varies between releases."
     },
+    "voyager1-1979": {
+      "title": "Voyager 1 1979-02-27",
+      "detail": "Björn Jónsson · 1979",
+      "summary": "Jupiter in 1979, mapped from 270 Voyager 1 frames. Green is computed; the gray grid marks what it saw poorly."
+    },
+    "voyager2-1979": {
+      "title": "Voyager 2 1979-06-28",
+      "detail": "Björn Jónsson · 1979",
+      "summary": "Jupiter four months later, mapped from 135 Voyager 2 frames. The gray grid marks what it saw poorly."
+    },
     "magnetic": {
       "title": "JRM33 radial magnetic field",
       "detail": "JRM33 · degree 13",

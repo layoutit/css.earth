@@ -91,7 +91,9 @@ For example, the Moon's **Mineral composition** group switches between
 plagioclase, olivine and the two pyroxenes. Mars groups five chemical elements;
 Pluto groups three modeled ice fractions; Ceres groups two mineral absorption
 features. Betelgeuse, CE Tauri and WASP-12b group observations by date. BE Ceti,
-χ¹ Orionis, HD 29615 and HD 35296 group three magnetic-field directions.
+χ¹ Orionis, HD 29615 and HD 35296 group three magnetic-field directions. A Cepheid
+such as RY CMa groups ten phases of one pulsation
+([method note](pulsating-stars-light-through-a-cycle.md)).
 
 Keep units and limits beside each map. Mars's thorium scale uses parts per
 million while its other element scales use weight percent. Ceres's band depths

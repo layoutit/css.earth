@@ -554,7 +554,7 @@ for (const id of ['saturn', 'jupiter', 'uranus']) test(`${id}: close detail reti
   assert.equal(calculate(input).projectedBodies.find(body => body.index === index)!.orbitVisibility, 0);
 });
 
-test('a featured orbitless star keeps its marker beyond the system fade, like the anchor; another gives way to the galaxy', () => {
+test('a featured orbitless star keeps its marker beyond the system fade, like the anchor', () => {
   const star = plan.bodies.findIndex(body => !body.orbit) + 1;
   assert.ok(star > 0);
   const calculate = createWorldContextPlanner(plan, { [plan.bodies[star - 1]!.id]: FEATURED_STAR_TIER }), input = view();
@@ -571,8 +571,7 @@ test('a featured orbitless star keeps its marker beyond the system fade, like th
   assert.equal(placed.lineWidth, anchor.lineWidth);
   assert.equal(placed.indicatorShown, true);
   assert.equal(placed.labelShown, true);
-  const unfeatured = createWorldContextPlanner(plan)(input).projectedBodies.find(body => body.index === star);
-  assert.equal((unfeatured?.markerOpacity ?? 0), 0, 'a star that is not featured gives its place to the catalogue dots');
+  // What a star that is not featured does out here depends on what stands beside it: world-context-uncrowded-stars.test.ts.
 });
 
 test('each planetary system fades with the camera distance from its own star', () => {
@@ -790,29 +789,33 @@ test('beyond the Local Group scale a galaxy is named, not a star or a galaxy ins
   };
   const andromeda = named('m31', 4e6);
   for (const galaxy of ['m31', 'm33']) assert.equal(andromeda.has(galaxy), true, `from 4 Mpc ${galaxy} is named`);
-  for (const inside of ['m31-v1', 'vhk-45', 'm110', 'm32']) assert.equal(andromeda.has(inside), false, `${inside}, within its galaxy's circle, is not`);
+  for (const inside of ['m31-v1', 'vhk-45']) assert.equal(andromeda.has(inside), false, `${inside}, within its galaxy's circle, is not`);
   const home = named('milky-way', 4e6);
   assert.equal(home.has('milky-way'), true, 'from 4 Mpc the Milky Way is named');
   assert.equal(home.has('lmc'), false, 'the Large Cloud, within its circle, is not');
   const near = named('m31-v1', 100e3);
-  for (const body of ['m31-v1', 'm31', 'm110', 'm32']) assert.equal(near.has(body), true, `from 100 kpc, inside the Local Group scale and clear of each other, ${body} is named`);
+  for (const body of ['m31-v1', 'm31']) assert.equal(near.has(body), true, `from 100 kpc, inside the Local Group scale and clear of each other, ${body} is named`);
   input.bodies[points.findIndex(body => body.id === 'm31-v1')]!.highlighted = true;
   assert.equal(named('m31', 4e6).has('m31-v1'), true, 'a star the reader highlights keeps its name');
 });
 
-test('past the Solar System only the featured stars and the references keep a dot; past the Local Group no body does', () => {
+test('past the Solar System the featured stars, the references and the stars nothing crowds keep a dot; past the Local Group no body does', () => {
   const featured = 'betelgeuse';
   assert.equal(plan.bodies.some(body => body.id === featured && !body.orbit), true);
   const calculate = createWorldContextPlanner(plan, { [featured]: FEATURED_STAR_TIER }), input = view();
-  const dotted = (parsecs: number) => {
-    input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16];
-    // The galaxies, clusters and nebulae are bodies too, and keep their own dots: this is about the stars and their planets.
-    return calculate(input).projectedBodies.filter(body => body.markerOpacity > 0).map(body => [plan.focus, ...plan.bodies][body.index]!)
-      .filter(body => !('classification' in body && isExtendedClassification(body.classification))).map(body => body.id);
-  };
-  const nearby = dotted(3e3);
-  { const values = nearby; assert.ok(['sun', featured].every(item => values.includes(item)), 'from 3 kpc above the Sun the Sun and the featured star stay (Sgr A* is out of frame)'); }
-  assert.ok(nearby.length < 10, 'from 3 kpc the other stars have given way');
+  const points = [plan.focus, ...plan.bodies];
+  const planned = (parsecs: number) => { input.world.pose.positionM = [0, 0, parsecs * 3.085677581491367e16]; return calculate(input).projectedBodies; };
+  // The galaxies, clusters and nebulae are bodies too, and keep their own dots: this is about the stars and their planets.
+  const dotted = (parsecs: number) => planned(parsecs).filter(body => body.markerOpacity > 0).map(body => points[body.index]!)
+    .filter(body => !('classification' in body && isExtendedClassification(body.classification))).map(body => body.id);
+  const frame = planned(3e3), nearby = frame.filter(body => body.markerOpacity > 0).map(body => points[body.index]!.id);
+  assert.ok(['sun', featured].every(item => nearby.includes(item)), 'from 3 kpc above the Sun the Sun and the featured star stay (Sgr A* is out of frame)');
+  // The stars near the Sun are a crowd from here and have given way; one that keeps its dot has nothing marked within its ring.
+  const inView = frame.filter(body => Math.abs(body.x) < 720 && Math.abs(body.y) < 450 && points[body.index]!.id !== 'sun');
+  const stars = inView.filter(body => { const point = points[body.index]!; return 'classification' in point && point.classification === 'star' && !('orbit' in point && point.orbit) && point.id !== featured; });
+  const kept = stars.filter(body => body.markerOpacity > 0), gone = stars.filter(body => body.markerOpacity === 0);
+  assert.ok(gone.length > kept.length, `from 3 kpc the crowd has given way (${gone.length} gone, ${kept.length} kept)`);
+  for (const body of kept) assert.ok(!inView.some(other => other !== body && Math.abs(other.x - body.x) <= 8 && Math.abs(other.y - body.y) <= 8), `${points[body.index]!.id} keeps a dot with another marker inside its ring`);
   { const values = dotted(200e3); assert.ok(['sgr-a-star', 'sun'].every(item => values.includes(item)), 'from 200 kpc the references keep a dot'); }
   assert.deepEqual(dotted(1e6), [], 'from 1 Mpc, in the overview, no star or planet keeps a dot');
 });

@@ -40,6 +40,9 @@
   ],
   "projectedRotationSpeedKmS": 18.2,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-6109 (pscomppars): projected rotation speed 18.2 km/s, from Dattilo et al. 2025 (https://ui.adsabs.harvard.edu/abs/2025AJ....170..318D/abstract)",
+  "rotationPeriodMeasuredDays": 2.95,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 18, 58 and 85 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 2.95 d, the light swinging by 6.6% as the star turns",
+  "rotationLightSwingPercent": 6.55,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

@@ -1,0 +1,30 @@
+{
+ "id": "kaus-australis",
+ "classification": "star",
+ "order": 5813,
+ "physical": {
+  "name": "Kaus Australis",
+  "horizonsCode": null,
+  "meanRadiusKm": 5391675,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 9460
+ },
+ "physicalNotes": "Radius 7.75 solar radii from Bailey et al. (2024), ApJ 972, 103, Table 5, the model the paper calls Best: equatorial radius 8.80 (2-sigma range 8.47 to 8.89) and polar radius 6.01 (5.90 to 6.08) solar radii, from a rotating Roche model fitted to the star's polarization, its spectral-energy distribution, its projected rotation speed and the Hipparcos parallax; the record holds the volume-equivalent sphere of the two, 7.75 solar radii, and the scene draws the flattening (https://doi.org/10.3847/1538-4357/ad630b): 5,391,675 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 9460 +/- 220 K from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 169022: effective temperature 9460 +/- 220 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093). The scene draws the measured flattening (Bailey et al. (2024), ApJ 972, 103), with the equatorial radius, 8.8 solar radii, on the outline. presentationUp: the display axis, the measured rotation pole, is up.",
+ "star": {
+  "rightAscensionDegrees": 276.04310945,
+  "declinationDegrees": -34.38431461,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 43.937,
+  "properMotionRaMasPerYear": -39.42,
+  "properMotionDecMasPerYear": -124.2,
+  "radialVelocityKmPerS": -15,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 90185: RAJ2000 276.04310945, DEJ2000 -34.38431461 (ICRS at epoch J1991.25), from the archived row src/objects/kaus-australis/source/photometry/catalogue-row.tsv; SIMBAD names it HD 169022",
+   "distance": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 90185: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 22.76 +/- 0.24 mas, inverted (https://doi.org/10.1134/S1063773712050015): 43.937 +/- 0.463 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 90185 (same row): -39.42, -124.2 mas/yr",
+   "radialVelocity": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 90185: RV -15 +/- 3.7 km/s (quality B) (https://doi.org/10.1134/S1063773712050015)"
+  }
+ }
+}

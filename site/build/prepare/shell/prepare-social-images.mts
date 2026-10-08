@@ -21,6 +21,9 @@ const { values } = parseArgs({ options: {
 const ids = inventoriedObjectIds((values.object ?? []).map(id => `--object=${id}`), resolve(import.meta.dirname, "../../../.."));
 const outputDirectory = values.card ? "site/public/overview" : "site/public/social";
 export const PORTRAIT_WIDTH = 600, PORTRAIT_HEIGHT = 315;
+// A nebula's page is built in depth, which its default view, straight down the line of sight, does not show. Its share
+// image is taken turned by these degrees, and close enough for its silhouette to span this share of the frame's height.
+const NEBULA_VIEW = { yawDegrees: 25, pitchDegrees: -12, silhouetteShare: 0.62 } as const;
 await mkdir(outputDirectory, { recursive: true });
 const server = values["base-url"] ? null : await previewSite({ port: 4266 });
 const baseUrl = values["base-url"] ?? "http://127.0.0.1:4266";
@@ -33,6 +36,10 @@ try {
       reducedMotion: "reduce",
     });
     const problems: string[] = [];
+    let requestsInFlight = 0;
+    page.on("request", () => { requestsInFlight++; });
+    page.on("requestfinished", () => { requestsInFlight--; });
+    page.on("requestfailed", () => { requestsInFlight--; });
     page.on("pageerror", (error) => problems.push(error.message));
     page.on("response", (response) => {
       if (response.status() >= 400) problems.push(`${response.status()} ${response.url()}`);
@@ -60,6 +67,36 @@ try {
       requestAnimationFrame(() => requestAnimationFrame(() => resolve()));
     }));
     assert.deepEqual(problems, [], `${object.id} must load without errors`);
+    if (!values.card && object.classification === "nebula") {
+      // Turns the camera by `turn`, or zooms it towards a silhouette `diameter` pixels across; answers the silhouette's
+      // diameter before the change. The camera publishes a new silhouette with its next frame, so each zoom step waits.
+      const adjustCamera = (change: { turn?: { pitch: number; yaw: number }; diameter?: number }) => page.evaluate(async ({ id, change }) => {
+        const debug: unknown = Reflect.get(window, `__${id}`);
+        const camera: unknown = debug && typeof debug === "object" && "camera" in debug ? debug.camera : null;
+        if (!camera || typeof camera !== "object" || !("state" in camera) || typeof camera.state !== "function" || !("setState" in camera) || typeof camera.setState !== "function") throw new Error("A nebula's turned view requires a development or performance server.");
+        const state: unknown = camera.state();
+        if (!state || typeof state !== "object" || !("zoom" in state) || typeof state.zoom !== "number" || !("pitch" in state) || typeof state.pitch !== "number"
+          || !("controlYaw" in state) || typeof state.controlYaw !== "number" || !("silhouetteRadius" in state) || typeof state.silhouetteRadius !== "number") throw new Error("The camera did not publish its pitch, yaw, zoom and silhouette radius.");
+        if (change.turn) camera.setState({ pitch: state.pitch + change.turn.pitch, controlYaw: state.controlYaw + change.turn.yaw });
+        if (change.diameter) camera.setState({ zoom: state.zoom * change.diameter / (state.silhouetteRadius * 2) });
+        await new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve())));
+        return state.silhouetteRadius * 2;
+      }, { id: object.id, change });
+      await adjustCamera({ turn: { pitch: NEBULA_VIEW.pitchDegrees, yaw: NEBULA_VIEW.yawDegrees } });
+      const wanted = NEBULA_VIEW.silhouetteShare * 630;
+      let diameter = await adjustCamera({});
+      for (let pass = 0; pass < 8 && Math.abs(diameter / wanted - 1) > 0.02; pass++) { await adjustCamera({ diameter: wanted }); diameter = await adjustCamera({}); }
+      assert.ok(Math.abs(diameter / wanted - 1) <= 0.02, `${object.id}: silhouette ${diameter.toFixed(0)} px did not reach ${wanted.toFixed(0)} px`);
+    }
+    // A page's picture layers show after its ready mark: Cassiopeia A, the Homunculus and M76 changed once more 0.47 s
+    // after it and then held for 6 s (2026-10-07). Capture once the picture has held for a second with nothing loading.
+    for (let previous: Buffer = Buffer.alloc(0), held = 0, deadline = Date.now() + 30000; held < 2;) {
+      const current = await page.screenshot({ type: "png", animations: "disabled" });
+      held = current.equals(previous) && requestsInFlight === 0 ? held + 1 : 0;
+      previous = current;
+      assert.ok(Date.now() < deadline, `${object.id}: the picture never held still`);
+      if (held < 2) await page.waitForTimeout(500);
+    }
     if (values.card) {
       // The card displays this capture at 1/4 scale, shifted 40px right and
       // cropped to 134px high. Fit overflow from the actual rendered silhouette

@@ -7,3 +7,5 @@ Color: Gaia DR3 XP spectrum, source 1744911763437512064, through the CIE 1931 2Â
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 
 Placement: Gaia DR3 source 1744911763437512064: position, parallax, proper motion and radial velocity. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+
+Shape, gravity darkening and spin axis: Hooton, M. J., et al. (2022), "Spi-OPS: Spitzer and CHEOPS confirm the near-polar orbit of MASCARA-1 b and reveal a hint of dayside reflection", A&A 658, A75, doi:10.1051/0004-6361/202141645.

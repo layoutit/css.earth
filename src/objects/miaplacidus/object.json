@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "miaplacidus",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Miaplacidus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 4125501
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/miaplacidus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Miaplacidus",
+      "classification": "star",
+      "color": "#bcd0ff",
+      "distanceAu": 7156938.1,
+      "description": "A subgiant of type A1 IV, 35 parsecs away: 5.9 times the Sun's width.",
+      "systemName": "Miaplacidus system",
+      "aliases": [
+        "HD 80007"
+      ],
+      "order": 5811,
+      "context": {
+        "order": 5808
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -277110112770461630,
+        246925931495110820,
+        -1004268988875733800
+      ],
+      "presentationToReference": [
+        -0.25880800910395313,
+        0.7003535748549123,
+        0.6652242363380882,
+        0.23061738379860897,
+        -0.6239702777670674,
+        0.7466436330359845,
+        -0.9379946890646733,
+        -0.34664962519990317,
+        0.000025203838107772855
+      ],
+      "orbitUpReference": [
+        -0.7003535748549123,
+        0.6239702777670674,
+        0.34664962519990317
+      ],
+      "metersPerUnit": 13308067.741935484,
+      "bodyRadiusM": 4125501000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

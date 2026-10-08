@@ -31,6 +31,51 @@
               "id": "color",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "brightness-sector-20",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness-sector-25",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness-sector-26",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness-sector-40",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness-sector-52",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness-sector-53",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness-sector-59",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "brightness-sector-60",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "color-brightness",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }

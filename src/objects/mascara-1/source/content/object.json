@@ -8,14 +8,14 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "2.1 solar radii",
+        "value": "2.082 solar radii at the equator",
         "source": {
           "catalogueId": "doi-10-1051-0004-6361-202141645",
-          "url": "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..75H",
-          "label": "Hooton et al. (2022), Astronomy & Astrophysics 658 A75",
-          "checked": "2026-09-29",
-          "path": "source/measurements.json",
-          "locator": "radiusKm; radiusSource"
+          "url": "https://doi.org/10.1051/0004-6361/202141645",
+          "label": "Hooton et al. (2022), A&A 658, A75, Table 5",
+          "checked": "2026-10-08",
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "model.equatorialRadiusSolar"
         }
       },
       {
@@ -29,6 +29,32 @@
           "checked": "2026-09-29",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "flattening",
+        "label": "Flattening",
+        "value": "Polar radius 4.39% smaller than the equatorial",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202141645",
+          "url": "https://doi.org/10.1051/0004-6361/202141645",
+          "label": "Hooton et al. (2022), A&A 658, A75, Table 5",
+          "checked": "2026-10-08",
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "model.equatorialToPolarRadius"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "20 hours",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202141645",
+          "url": "https://doi.org/10.1051/0004-6361/202141645",
+          "label": "Hooton et al. (2022), A&A 658, A75, Table 5",
+          "checked": "2026-10-08",
+          "path": "source/preparation/rotation.json",
+          "locator": "equatorialRotationPeriod"
         }
       }
     ],
@@ -75,7 +101,7 @@
     },
     "physical": {
       "path": "../../../../../packages/astronomy/data/bodies/mascara-1.json",
-      "credit": "Hooton et al. 2022, the stellar radius of the default parameter set of MASCARA-1 b in the NASA Exoplanet Archive radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+      "credit": "Flattened radius and spin axis from Hooton et al. (2022), A&A 658, A75; mass and temperature from Hooton et al. 2022; Gaia DR3 astrometry"
     }
   }
 }

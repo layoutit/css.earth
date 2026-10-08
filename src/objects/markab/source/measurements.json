@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "markab",
+  "angularDiameterMas": 1.22,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 3,721,995 km at 40.88 pc = 1.22 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 40.883,
+  "distanceSource": "Baines et al. (2025), AJ 169, 293, HD 218045: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 2), 24.46 +/- 0.19 mas, inverted (https://doi.org/10.3847/1538-3881/adc930): 40.883 +/- 0.318 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 3721995,
+  "radiusSource": "Radius 5.35 +/- 0.1 solar radii from Baines et al. (2025), AJ 169, 293, HD 218045: radius 5.35 +/- 0.1 solar radii (Table 7), from the limb-darkened angular diameter 1.218 +/- 0.02 mas (NPOI, Table 6) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/adc930): 3,721,995 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 8935 +/- 77 K from Baines et al. (2025), AJ 169, 293, HD 218045: effective temperature 8935 +/- 77 K (Table 7), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/adc930). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 8935,
+  "effectiveTemperatureSource": "Baines et al. (2025), AJ 169, 293, HD 218045: effective temperature 8935 +/- 77 K (Table 7), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/adc930)",
+  "surfaceGravityLogg": 3.51,
+  "surfaceGravitySource": "Baines et al. (2025), AJ 169, 293, HD 218045: log g 3.51, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 6) (https://doi.org/10.3847/1538-3881/adc930)",
+  "spectralType": "A0IV",
+  "spectralTypeSource": "SIMBAD, * alf Peg: spectral type A0IV (1995ApJS...99..135A)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * alf Peg: main object type PM*, High Proper Motion Star",
+  "projectedRotationSpeedKmS": 125,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Peg: projected rotation speed 125 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

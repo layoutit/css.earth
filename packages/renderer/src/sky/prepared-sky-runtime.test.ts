@@ -36,7 +36,7 @@ const foregroundRects = [{ left: 100, top: 100, right: 150, bottom: 114 }];
 mock.module('../universe/world-context/world-context-point-source.js', { namedExports: { mountWorldContextPointSource: () => null } });
 mock.module('../universe/prepared-galaxy-catalog.js', { namedExports: { mountPreparedGalaxyCatalog: catalogMount } });
 mock.module('../universe/prepared-world-context.js', { namedExports: { ...await import('../universe/prepared-world-context.js'),
-  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, plainStarPlaces: () => [], setOverview() {}, setSystemRetired() {}, setBodyVisibility() {}, setOutsideGalaxy() {}, backgroundExclusionRects: () => foregroundRects, bodyLabelRects: () => [], destroy() {} }) } });
+  mountPreparedWorldContext: () => ({ publish: spatialPublish, inspect: () => [], opacityStats: () => ({}), publicationStats: () => ({}), selectObject() {}, previewSelection() {}, plainStarPlaces: () => [], setOverview() {}, setSystemRetired() {}, setBodyVisibility() {}, setOutsideGalaxy() {}, backgroundExclusionRects: () => foregroundRects, bodyLabelRects: () => [], destroy() {} }) } });
 // The modules under test import the mocked ones, so they load after the mocks.
 const { mountPreparedCssSky, preparedSkyCameraTransform } = await import('./prepared-sky-runtime.js');
 const { validatePreparedCssVolume } = await import('@cssearth/objects');
@@ -647,6 +647,9 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   const imageFrame = { ...frame, originM: [frame.originM[0] + 100 * frame.metersPerUnit, frame.originM[1], frame.originM[2]] as [number, number, number] };
   for (const id of ['focus-bank', 'image-bank', 'no-bank']) context.bodies.push({ ...nebula, id, name: id,
     positionM: id === 'image-bank' ? imageFrame.originM : frame.originM, radiusM: frame.metersPerUnit });
+  // A star inside the galaxy's framing sphere.
+  context.bodies.push({ ...nebula, id: 'galaxy-star', name: 'galaxy-star', radiusM: frame.metersPerUnit / 1000,
+    positionM: [imageFrame.originM[0], imageFrame.originM[1] + .5 * frame.metersPerUnit, imageFrame.originM[2]] });
   const image: PreparedCssImageLayers = { ...small, frame: imageFrame, id: 'image-bank', bankViews: small.stacks.map(stack => ({ axis: stack.axis,
     normalUnits: stack.axis === 'x' ? [1, 0, 0] : stack.axis === 'y' ? [0, 1, 0] : [0, 0, 1], samplingStepUnits: 1 })) };
   const loadVolumeDataset = mock.fn(async (id: string) => ({ payload: banks.find(bank => bank.id === id)!, resolveResource: (path: string) => `/bank/${id}/${path}` }));
@@ -727,5 +730,51 @@ test('authoritative detailed close-up gates background fetch, painting and publi
     });
     select('no-bank'); mounted.publish(near, viewport, spatialFrame);
     assert.equal(mw.style.display, '');
+    // A flight selects a body before it commits its scene's dataset. Until the world is told which bank that dataset
+    // shows, the bank is context, which gives way in the body's close-up (the body a quarter of a sized viewport's
+    // short side); told, it is the body's subject at once.
+    const sized = { ...viewport, widthPixels: 1280, heightPixels: 800 }, close = camera(5);
+    const subject = context.bodies.find((body: { id: string }) => body.id === 'focus-bank') as { positionM: [number, number, number]; radiusM: number };
+    mounted.selectObject('focus-bank', { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt, originM: subject.positionM,
+      presentationToReference: [0, 1, 0, 1, 0, 0, 0, 0, 1], metersPerUnit: subject.radiusM, bodyRadiusM: subject.radiusM });
+    mounted.publish(close, sized, spatialFrame);
+    assert.equal(findBank('focus-bank').style.display, 'none');
+    mounted.expectVolumeDataset('focus-bank', 'optical');
+    await waitFor(() => {
+      mounted.publish(close, sized, spatialFrame);
+      assert.equal(findBank('focus-bank').style.display, 'block');
+    });
+    assert.equal(mw.style.display, 'none');
+    // The committed dataset takes over from the expectation, and ends with its scene as before.
+    mounted.setVolumeDatasetEnabled('focus-bank', true); mounted.publish(close, sized, spatialFrame);
+    assert.equal(findBank('focus-bank').style.display, 'block');
+    mounted.setVolumeDatasetEnabled('focus-bank', false); mounted.publish(close, sized, spatialFrame);
+    assert.equal(findBank('focus-bank').style.display, 'none');
+    // A flight from a galaxy's page to a star inside the galaxy previews the star while the galaxy stays selected. With
+    // the camera inside the galaxy the photograph is gone before the hand-over; it is back if the flight ends there.
+    select('image-bank');
+    const within = { ...near, pose: { ...near.pose, positionM: [imageFrame.originM[0], imageFrame.originM[1], imageFrame.originM[2] + frame.metersPerUnit] as [number, number, number] } };
+    const photograph = () => imageRoot.style.display === 'none' ? 0 : Number(imageRoot.style.opacity);
+    mounted.publish(within, viewport, spatialFrame);
+    assert.equal(photograph(), .999);
+    mounted.previewSelection('galaxy-star'); mounted.publish(within, viewport, spatialFrame);
+    assert.equal(photograph(), 0);
+    mounted.previewSelection(); mounted.publish(within, viewport, spatialFrame);
+    assert.equal(photograph(), .999);
+    // A galaxy drawn as a cloud gives way the same way.
+    select('focus-bank');
+    await waitFor(() => {
+      mounted.publish(near, viewport, spatialFrame);
+      assert.equal(findBank('focus-bank').style.display, 'block');
+    });
+    mounted.previewSelection('no-bank'); mounted.publish(near, viewport, spatialFrame);
+    assert.equal(findBank('focus-bank').style.display, 'block');
+    mounted.publish(camera(1), viewport, spatialFrame);
+    assert.equal(findBank('focus-bank').style.display, 'none');
+    mounted.previewSelection();
+    await waitFor(() => {
+      mounted.publish(camera(1), viewport, spatialFrame);
+      assert.equal(findBank('focus-bank').style.display, 'block');
+    });
   } finally { mounted.destroy(); }
 });

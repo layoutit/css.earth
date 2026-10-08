@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { framedMembers, notableBodies, prepareCategoryFrame, CATEGORY_FRAMED_SHARE } from './prepare-world-presentation.mts';
+import { NAVIGATIONAL_STAR_OBJECT_IDS } from './navigational-stars.mts';
 import { WORLD_OBJECTS } from '../../../world/systems/world-objects.mts';
 import { PREPARED_WORLD_PRESENTATION } from '../../../world/prepared-world-presentation.mts';
 import { CATEGORY_FRAMES, categoryZoomTarget } from '../../../world/systems/system-framing.mts';
@@ -35,21 +36,33 @@ test('a category frames its members inside the smallest region that holds most o
   assert.deepEqual(framedMembers([], regionsOf), []);
 });
 
+test('a category framed by its listed landmarks holds every one of them, however far', () => {
+  // Nine members within 10 m and one at 1 km: by the share the far tenth is left out; as a list all ten are framed.
+  const near = Array.from({ length: 9 }, (_, index) => [index + 1, 0, 0]), far = [1000, 0, 0];
+  assert.equal(prepareCategoryFrame([...near, far])!.maximumM[0]! * 2, 8);
+  assert.equal(prepareCategoryFrame([...near, far], 1)!.maximumM[0]! * 2, 999);
+});
+
 test('the Stars box holds the Milky Way\'s stars and the Galaxies box the Nearby Universe\'s galaxies', () => {
   const PARSEC_M = 3.085677581491367e16;
   const place = (id: string) => WORLD_OBJECTS.find(object => object.id === id)!.worldFrame!.originM;
   const holds = (classification: string, id: string) => {
     const frame = PREPARED_WORLD_PRESENTATION.categoryFrames.get(classification)!;
-    return place(id).every((value, axis) => value >= frame.centreM[axis]! + frame.minimumM[axis]! && value <= frame.centreM[axis]! + frame.maximumM[axis]!);
+    // A star at the edge of the box is inside it: the box is stored as a centre and two half-widths, which round.
+    const slack = 1e-9 * Math.max(...frame.maximumM.map((value, axis) => value - frame.minimumM[axis]!));
+    return place(id).every((value, axis) => value >= frame.centreM[axis]! + frame.minimumM[axis]! - slack && value <= frame.centreM[axis]! + frame.maximumM[axis]! + slack);
   };
   const side = (classification: string) => { const frame = PREPARED_WORLD_PRESENTATION.categoryFrames.get(classification)!; return Math.max(...frame.maximumM.map((value, axis) => value - frame.minimumM[axis]!)); };
   // Fitted around every notable star, the box was 8.6 Mpc wide: the camera landed among galaxies, where no star is drawn.
-  for (const star of ['sirius', 'betelgeuse', 'deneb']) assert.ok(holds('star', star), `${star} lies outside the star frame`);
+  for (const star of NAVIGATIONAL_STAR_OBJECT_IDS) assert.ok(holds('star', star), `${star} lies outside the star frame`);
+  // The box is the listed stars' own: no wider than twice the distance of the farthest of them (Alnilam, 606 parsecs).
+  const farthestM = Math.max(...NAVIGATIONAL_STAR_OBJECT_IDS.map(id => Math.hypot(...place(id))));
+  assert.ok(side('star') <= 2 * farthestM && farthestM < 1000 * PARSEC_M, 'the star frame is the navigational stars\' box');
   assert.ok(!holds('star', 'm31-v1'), 'a star of Andromeda is marked, not framed');
   assert.ok(side('star') < 30e3 * PARSEC_M, 'the star frame is smaller than the Milky Way');
-  // The galaxies' box reached the quasar 3C 273, 670 Mpc out, where the markers are clusters.
+  // The galaxies' box reached the quasar 3C 273, 670 Mpc out, where the markers are clusters. GN-z11 is farther still.
   for (const galaxy of ['m81', 'm87', 'ngc-1365']) assert.ok(holds('galaxy', galaxy), `${galaxy} lies outside the galaxy frame`);
-  assert.ok(!holds('galaxy', 'quasar-3c-273'), 'a quasar past the Nearby Universe is marked, not framed');
+  assert.ok(!holds('galaxy', 'gn-z11'), 'a galaxy past the Nearby Universe is marked, not framed');
   assert.ok(side('galaxy') < 100e6 * PARSEC_M, 'the galaxy frame is smaller than the Nearby Universe');
 });
 

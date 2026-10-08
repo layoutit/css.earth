@@ -1,6 +1,9 @@
 import { isRecord } from '@cssearth/core';
 import { knownAncestors, knownObject, loadAncestors, loadObject } from '../../directory/object-directory.mts';
-import { SOLAR_SYSTEM_ID } from './object-systems.mts';
+import { eyeDistanceM, type WorldCameraPose } from '@cssearth/engine';
+import { SOLAR_SYSTEM_ID, allPlanetarySystems } from './object-systems.mts';
+import { WORLD_OBJECTS } from './world-objects.mts';
+import { SCENE_OBJECTS } from '../../directory/objects.mts';
 import { starSystem, subjectHost, subjectView, type SceneSubject } from './scene-subject.mts';
 import { systemHostId } from '../../model/system-address.mts';
 import type { ZoomStep } from './zoom-scope.mts';
@@ -20,6 +23,32 @@ const seenFromInside = (id: string | null | undefined) => id !== null && id !== 
 export function setZoomCentre(id: string) {
   centreId = id;
   void loadAncestors(id).catch(error => console.error(`The objects ${id} is inside could not be read; zooming out stops at its system.`, error));
+}
+
+/** How many of its own radii a body's page reaches: a camera restored nearer than this stands at that body. */
+const RESTORED_BODY_RADII = 100;
+
+/** Where a camera restored from a view address stands inside an object seen from inside, far from the star the page
+ * opened around: at the body it is next to, whose page it belongs to (NGC 7662, from a view beside it on /milky-way/),
+ * or else among the stars, where the zoom is centred on the star whose system is nearest so zooming in does not head
+ * back to the Sun behind it. */
+export function restoredViewBody(world: WorldCameraPose): string | null {
+  let body: { readonly id: string; readonly distanceM: number; readonly radiusM: number } | null = null;
+  for (const object of SCENE_OBJECTS) {
+    // An object seen from inside, or one the camera is inside, is around the camera, not a body it stands next to.
+    if (seenFromInside(object.id)) continue;
+    const distanceM = eyeDistanceM(world.pose, object.worldFrame.originM);
+    if (distanceM < object.worldFrame.bodyRadiusM) continue;
+    if (!body || distanceM < body.distanceM) body = { id: object.id, distanceM, radiusM: object.worldFrame.bodyRadiusM };
+  }
+  if (body && body.distanceM < RESTORED_BODY_RADII * body.radiusM) return body.id;
+  let star: { readonly id: string; readonly distanceM: number } | null = null;
+  for (const system of allPlanetarySystems(WORLD_OBJECTS)) {
+    const distanceM = eyeDistanceM(world.pose, system.originM);
+    if (!star || distanceM < star.distanceM) star = { id: system.id, distanceM };
+  }
+  if (star && star.id !== centreId) setZoomCentre(star.id);
+  return null;
 }
 
 /**

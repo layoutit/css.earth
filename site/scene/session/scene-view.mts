@@ -49,7 +49,7 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
   /** Writes a flight's entry at its hand-over, before its scene mounts (navigation-history.mts). */
   function commitAhead(request: NavigationRequest) {
     const history = getHistory();
-    if (!history || request.history.history !== 'push' || ahead.has(request)) return;
+    if (!history || request.history.history === 'pop' || ahead.has(request)) return;
     ahead.add(request);
     history.commit(request.url, request.history, true);
   }

@@ -3,7 +3,8 @@ import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { astroquery, mastService, type MastServiceRequest, type MastServiceResult, recordKey, type TransferLimits } from '@cssearth/telescope/node';
 import type { ProductKind } from '../requests/recipe-request.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { recall } from '../archives/memory.mts';
 import { mapIvoaProductType, type ProductTypeMapping } from '../products/product-type.mts';
 import type { FamilyId } from '../products/product-descriptor.mts';
 import { productTypeFamilyEvidence, type ObservationFamilyEvidence } from '../products/observation-families.mts';
@@ -247,6 +248,13 @@ export interface InstrumentFacets { readonly names: readonly string[]; readonly 
 /** Enumerate archive modes before sampling rows, so a high-volume mode cannot hide every later one. */
 export async function discoverInstrumentFacets(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits): Promise<InstrumentFacets> {
   const directory = resolve(root, 'output/telescopes/vo/metadata'), query = instrumentFacetQuery(profile, names, request);
+  // The same question asked within the last day is answered from its saved file (archives/memory.mts).
+  const kept = await recall(directory, '.facets.json', value => {
+    const result = isRecord(value) && value.query === query && isRecord(value.result) ? value.result : undefined;
+    return result && Array.isArray(result.names) && result.names.every(name => typeof name === 'string') && typeof result.complete === 'boolean' && typeof result.evidence === 'string' &&
+      Array.isArray(result.issues) && result.issues.every(issue => typeof issue === 'string') ? { names: result.names as string[], complete: result.complete, evidence: result.evidence, issues: result.issues as string[] } : undefined;
+  });
+  if (kept) return kept;
   await mkdir(directory, { recursive: true });
   const response = (await astroquery({ operation: 'vo-tap', service: profile.service, query, maxrec: INSTRUMENT_FACET_LIMIT + 1,
     directory, byteLimit: limits.metadataBytes, timeFormat: 'mjd', ...(profile.timeScale ? { timeScale: profile.timeScale } : {}) })).vo!;
@@ -259,9 +267,19 @@ export async function discoverInstrumentFacets(root: string, profile: ServicePro
   return result;
 }
 export async function discover(root: string, profile: ServiceProfile, request: DiscoveryRequest, names: readonly string[], limits: TransferLimits, sampleLimit = 50): Promise<DiscoverySnapshot> {
-  const circle = searchCircle(request);
+  const circle = searchCircle(request), directory = resolve(root, 'output/telescopes/vo/metadata');
+  // The same question asked within the last day is answered from its saved snapshot, while the response it was read from is
+  // still on disk. A search MAST's positional service has to select first is always asked: its question is not known before.
+  if (!(circle && profile.spatialMatch === 'mast-api-cone')) {
+    const question = targetQuery(profile, names, sampleLimit, request);
+    const kept = await recall(directory, '.discovery.json', value => {
+      try { const saved = parseSnapshot(value); return saved.service === profile.service && saved.table === profile.table && saved.query === question && saved.sampleLimit === sampleLimit && saved.completeness !== 'failed' ? saved : undefined; }
+      catch { return undefined; }
+    });
+    if (kept && await verifySnapshot(kept)) return kept;
+  }
   const spatialSelection = circle && profile.spatialMatch === 'mast-api-cone' ? await mastConeSelection(profile, circle, sampleLimit, request.instrument) : undefined;
-  const directory = resolve(root, 'output/telescopes/vo/metadata'), query = targetQuery(profile, names, sampleLimit, request, spatialSelection?.ids);
+  const query = targetQuery(profile, names, sampleLimit, request, spatialSelection?.ids);
   await mkdir(directory, { recursive: true });
   const response = (await astroquery({ operation: 'vo-tap', service: profile.service, query, maxrec: sampleLimit, directory, byteLimit: limits.metadataBytes,
     timeFormat: profile.model === 'obscore-1.1' ? 'mjd' : 'jd', ...(profile.timeScale ? { timeScale: profile.timeScale } : {}),

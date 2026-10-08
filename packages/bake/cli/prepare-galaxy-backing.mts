@@ -11,9 +11,18 @@
  * galaxy's centre (whole within `radiusKpc[0]`, gone by `radiusKpc[1]`), drawn over it in order with its own fade, so
  * the centre can stay while the blurred outer disc steps back.
  *
+ * A volume dataset bank (the Magellanic Clouds) has no separate picture: its recipe's `view` is `sun-facing-impostor`, and
+ * the plane is the bank's own impostor view of itself from the Sun, laid through the frame's origin across the line of
+ * sight, where that orthographic view was drawn. Each dataset's view is the image when that dataset is selected
+ * (`datasets`); nothing is re-encoded, the plane draws the impostor files the bank already publishes. From the Sun the
+ * plane shows exactly the view the bank's volume was drawn as; from elsewhere it turns and foreshortens as a fixed
+ * object does, where a camera-facing billboard of the same view spun as the camera orbited.
+ *
  * Usage: node packages/bake/cli/prepare-galaxy-backing.mts <object-directory> <id>
  */
-import { GALAXY_BACKING_SCHEMA, parseDensityVolumeFrame, type VolumeSliceQuad } from '@cssearth/objects';
+import { GALAXY_BACKING_SCHEMA, parseDensityVolumeFrame, type DensityVolumeFrame, type VolumeSliceQuad } from '@cssearth/objects';
+import { readVolumeDatasetBank } from '@cssearth/objects/node';
+import { imageLayerBillboard, sunFacingImpostorView } from '@cssearth/bake/site-assets';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
@@ -30,7 +39,87 @@ const [objectArgument, id] = process.argv.slice(2);
 if (!objectArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: prepare-galaxy-backing.mts <object-directory> <id>');
 const objectDirectory = resolve(objectArgument), prepared = resolve(objectDirectory, 'prepared'), sourceDirectory = resolve(objectDirectory, 'source', id);
 const recipePath = resolve(sourceDirectory, 'recipe.json');
-const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as {
+const recipeValue = JSON.parse(await readFile(recipePath, 'utf8')) as Record<string, unknown>;
+
+/** Compile one quad in `frame` with the same PolyCSS volume compiler as a galaxy's other planes: the leaf's box and matrix. */
+const compileLeaf = (frame: DensityVolumeFrame, quad: VolumeSliceQuad) => {
+  // The compiler wants a normal for every axis; empty quads carry the other two and compile to no leaf.
+  const empty = (axis: 'x' | 'y', normal: Vector3): VolumeSliceQuad => ({ id: `${axis}-empty`, axis, sliceIndex: 0, texturePath: `${id}/${axis}-empty`, widthPx: 1, heightPx: 1,
+    vertices: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, 0], normal, bytes: 0, alphaCoverage: 0 });
+  const compiled = compileCssVolume({ id, frame, recipe: { anchors: [] }, slices: { quads: [quad, empty('x', [-1, 0, 0]), empty('y', [0, 1, 0])],
+    boundsUnits: { min: [...frame.boundsUnits.min] as Vector3, max: [...frame.boundsUnits.max] as Vector3 }, provenance: null, approximation: { method: '', radialEmission: 'None.', limitations: [], samplesPerSlab: 1, opticalWeight: 1,
+      exposureGain: 1, sliceCounts: { x: 0, y: 0, z: 1 }, slabPitchUnits: { x: 0, y: 0, z: 0 } } } });
+  return compiled.stacks.find(stack => stack.axis === 'z')!.leaves[0]!;
+};
+
+if (recipeValue.view === 'sun-facing-impostor') {
+  if (recipeValue.schema !== 'cssearth-galaxy-backing-source@1' || recipeValue.id !== id || typeof recipeValue.source !== 'string' || typeof recipeValue.meaning !== 'string') {
+    throw new TypeError(`${recipePath}: needs schema cssearth-galaxy-backing-source@1, id ${id}, a source and a meaning.`);
+  }
+  const descriptor = JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')) as { type?: unknown; properties?: { frame?: unknown } };
+  if (descriptor.type !== 'volume-dataset-bank') throw new TypeError(`${recipePath}: a sun-facing-impostor backing belongs to a volume dataset bank.`);
+  const frame = parseDensityVolumeFrame(descriptor.properties?.frame);
+  const bank = await readVolumeDatasetBank(prepared);
+  // Every dataset's Sun-facing view: one geometry for all, so one leaf draws whichever image is selected.
+  const views = await Promise.all(bank.datasets.map(async dataset => {
+    const label = `${basename(objectDirectory)} ${dataset.id}`, impostors = dataset.volume.impostors;
+    if (JSON.stringify(dataset.volume.frame) !== JSON.stringify(frame)) throw new TypeError(`${label}: dataset frame differs from the descriptor frame.`);
+    if (!impostors) throw new TypeError(`${label}: a sun-facing-impostor backing needs every dataset's impostor views.`);
+    const view = sunFacingImpostorView(label, frame, impostors.views) as unknown as (typeof impostors.views)[number];
+    const { width, height } = await sharp(await readFile(resolve(prepared, view.texturePath))).metadata();
+    return { id: dataset.id, view, radiusUnits: impostors.radiusUnits, widthPx: width, heightPx: height };
+  }));
+  const [first] = views, standard = views.find(entry => entry.id === bank.defaultDataset);
+  if (!first || !standard) throw new TypeError(`${recipePath}: the bank's default dataset ${bank.defaultDataset} has no view.`);
+  for (const entry of views) if (entry.view.id !== first.view.id || entry.radiusUnits !== first.radiusUnits || entry.widthPx !== first.widthPx || entry.heightPx !== first.heightPx ||
+      JSON.stringify([entry.view.right, entry.view.down]) !== JSON.stringify([first.view.right, first.view.down])) {
+    throw new TypeError(`${recipePath}: dataset ${entry.id}'s Sun-facing view differs from ${first.id}'s; one plane draws them all.`);
+  }
+  // The impostor's pixel (u, v) of its square is the point (2u - 1) R right + (2v - 1) R down: its orthographic view of
+  // the volume's bounding sphere, centred on the frame's origin (packages/bake/src/volume-leaves/volume-impostors.ts).
+  const { view, radiusUnits: r } = first;
+  const corner = (u: number, v: number): Vector3 => [0, 1, 2].map(axis => (2 * u - 1) * r * view.right[axis]! + (2 * v - 1) * r * view.down[axis]!) as Vector3;
+  const quad: VolumeSliceQuad = { id, axis: 'z', sliceIndex: 0, texturePath: standard.view.texturePath, widthPx: first.widthPx!, heightPx: first.heightPx!,
+    vertices: [corner(0, 0), corner(1, 0), corner(1, 1), corner(0, 1)], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, 0],
+    normal: view.back.map(value => -value) as Vector3, bytes: 0, alphaCoverage: 1 };
+  const leaf = compileLeaf(frame, quad);
+  await writeFile(resolve(prepared, `${id}.json`), JSON.stringify({ schema: GALAXY_BACKING_SCHEMA, id, source: recipeValue.source, meaning: recipeValue.meaning,
+    frame, leaf: { texturePath: leaf.texturePath, style: leaf.style }, datasets: Object.fromEntries(views.map(entry => [entry.id, entry.view.texturePath])) }) + '\n');
+  const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
+  await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
+  console.log(`Prepared a ${2 * r} unit plane across the line of sight from ${view.id}, picturing ${views.length} datasets.`);
+  process.exit(0);
+}
+if (recipeValue.view === 'sun-facing-layers') {
+  if (recipeValue.schema !== 'cssearth-galaxy-backing-source@1' || recipeValue.id !== id || typeof recipeValue.source !== 'string' || typeof recipeValue.meaning !== 'string') {
+    throw new TypeError(`${recipePath}: needs schema cssearth-galaxy-backing-source@1, id ${id}, a source and a meaning.`);
+  }
+  const descriptor = JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')) as Record<string, unknown> & { type?: unknown; properties?: { frame?: unknown } };
+  if (descriptor.type !== 'image-layer-bank') throw new TypeError(`${recipePath}: a sun-facing-layers backing belongs to an image-layer bank.`);
+  const frame = parseDensityVolumeFrame(descriptor.properties?.frame);
+  // The bank's source-facing slices seen from the Sun and composited as the page composites them: the picture its
+  // billboard drew, laid in the slices' own plane through the frame's origin, so it lies where the layered model does.
+  const { view, radiusUnits: r, image } = await imageLayerBillboard(basename(objectDirectory), descriptor, resolve(objectDirectory, '..'));
+  const webp = await encodeLossyWebp(sharp(image), { alphaQuality: 100, effort: 4 });
+  const { width, height } = await sharp(image).metadata();
+  const texturePath = `${id}/${id}.webp`;
+  await rm(resolve(prepared, id), { recursive: true, force: true });
+  await mkdir(resolve(prepared, id), { recursive: true });
+  await writeFile(resolve(prepared, texturePath), webp);
+  // The picture's pixel (u, v) is the point (2u - 1) R right + (2v - 1) R down (prepare-dataset-billboards.ts).
+  const corner = (u: number, v: number): Vector3 => [0, 1, 2].map(axis => (2 * u - 1) * r * view.right[axis]! + (2 * v - 1) * r * view.down[axis]!) as Vector3;
+  const quad: VolumeSliceQuad = { id, axis: 'z', sliceIndex: 0, texturePath, widthPx: width!, heightPx: height!,
+    vertices: [corner(0, 0), corner(1, 0), corner(1, 1), corner(0, 1)], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, 0],
+    normal: view.back.map(value => -value) as Vector3, bytes: webp.length, alphaCoverage: 1 };
+  const leaf = compileLeaf(frame, quad);
+  await writeFile(resolve(prepared, `${id}.json`), JSON.stringify({ schema: GALAXY_BACKING_SCHEMA, id, source: recipeValue.source, meaning: recipeValue.meaning,
+    frame, leaf: { texturePath: leaf.texturePath, style: leaf.style } }) + '\n');
+  const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
+  await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });
+  console.log(`Prepared a ${2 * r} unit plane in the slices' plane, ${width} x ${height} (${webp.length} bytes).`);
+  process.exit(0);
+}
+const recipe = recipeValue as {
   schema?: unknown; id?: unknown; source?: unknown; meaning?: unknown; outputPx?: unknown;
   image?: { path?: unknown; bytes?: unknown; widthPx?: unknown; heightPx?: unknown };
   anchors?: { galacticCentrePx?: unknown; sunPx?: unknown; view?: unknown; galacticCentre?: unknown; longitude90?: unknown; basis?: unknown };
@@ -117,13 +206,7 @@ const vertices = [toLocal(left, top), toLocal(right + 1, top), toLocal(right + 1
 const north = rotateToLocal(toIcrs([0, 0, 1]));
 const quad: VolumeSliceQuad = { id, axis: 'z', sliceIndex: 0, texturePath, widthPx, heightPx, vertices, uvs: [[0, 0], [1, 0], [1, 1], [0, 1]],
   center: toLocal((left + right + 1) / 2, (top + bottom + 1) / 2), normal: north.map(value => -value) as Vector3, bytes: webp.length, alphaCoverage: 1 };
-// The compiler wants a normal for every axis; empty quads carry the other two and compile to no leaf.
-const empty = (axis: 'x' | 'y', normal: Vector3): VolumeSliceQuad => ({ id: `${axis}-empty`, axis, sliceIndex: 0, texturePath: `${id}/${axis}-empty`, widthPx: 1, heightPx: 1,
-  vertices: [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], uvs: [[0, 0], [1, 0], [1, 1], [0, 1]], center: [0, 0, 0], normal, bytes: 0, alphaCoverage: 0 });
-const compiled = compileCssVolume({ id, frame, recipe: { anchors: [] }, slices: { quads: [quad, empty('x', [-1, 0, 0]), empty('y', [0, 1, 0])],
-  boundsUnits: { min: [...frame.boundsUnits.min] as Vector3, max: [...frame.boundsUnits.max] as Vector3 }, provenance: null, approximation: { method: '', radialEmission: 'None.', limitations: [], samplesPerSlab: 1, opticalWeight: 1,
-    exposureGain: 1, sliceCounts: { x: 0, y: 0, z: 1 }, slabPitchUnits: { x: 0, y: 0, z: 0 } } } });
-const leaf = compiled.stacks.find(stack => stack.axis === 'z')!.leaves[0]!;
+const leaf = compileLeaf(frame, quad);
 // Each section: the graded, resized image with a smooth radial alpha about the galaxy's centre, as the plane's own texels.
 const rgb = await sharp(graded, { raw: { width: info.width, height: info.height, channels: 3 } })
   .extract({ left, top, width: cropWidth, height: cropHeight }).resize(widthPx, heightPx).raw().toBuffer();

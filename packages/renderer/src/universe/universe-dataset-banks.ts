@@ -7,9 +7,10 @@ import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import { createPreparedVolumeDatasets, type PreparedVolumeDatasetSource } from '../volume/prepared-volume-datasets.js';
 import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
-import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
+import { enteredVolumeOpacity, projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits, volumeHolds } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
+import { createFarBackingPlanes, drawsFromAfar, type FarBackingPlane } from './far-backing-planes.js';
 import { mountCataloguePoints } from './catalogue-points.js';
 import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
@@ -19,6 +20,7 @@ interface DatasetBank {
   readonly id: string;
   readonly facts: DatasetBankBillboard;
   readonly billboardIndex: number;
+  readonly far: FarBackingPlane | null;
   mounted: DatasetMount | null;
   /** The cause of the bank's last failed load, already reported. */
   failure?: string;
@@ -43,7 +45,7 @@ interface DatasetBank {
 
 /** One stable record owns each declared bank through load, publication and eviction. */
 export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lifetime, declarations, facts, frame, visibility,
-  billboards: preparedBillboards, load, warmDomNodeBudget, requestPublication, prepareBillboardImage }: {
+  billboards: preparedBillboards, load, loadBacking, warmDomNodeBudget, requestPublication, prepareBillboardImage }: {
   root: HTMLElement; end: Element; frontRoot: HTMLElement; frontEnd: Element; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
   facts: readonly DatasetBankBillboard[];
@@ -51,14 +53,17 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   visibility: PreparedPointVisibility;
   billboards?: { plan: DatasetBillboards; imageUrl: (id: string, dataset?: string) => string };
   load: PreparedUniverseOptions['loadVolumeDataset'];
+  loadBacking?: PreparedUniverseOptions['loadBacking'];
   warmDomNodeBudget: number;
   requestPublication?: () => boolean;
   prepareBillboardImage: (url: string) => boolean;
 }) {
   let billboardCount = 0, useClock = 0, coasting = false;
   const pictured = (bankFacts: DatasetBankBillboard) => bankFacts.billboard !== undefined || (bankFacts.datasets?.size ?? 0) > 0;
+  // A bank with a backing is drawn from afar on that fixed plane, where the billboards' layer goes (far-backing-planes.ts).
+  const farPlanes = createFarBackingPlanes({ root, before: end, lifetime, load: loadBacking, requestPublication });
   const record = (declared: { id: string; frame: DensityVolumeFrame }, bankFacts: DatasetBankBillboard): DatasetBank => ({
-    id: declared.id, facts: bankFacts, billboardIndex: pictured(bankFacts) ? billboardCount++ : -1,
+    id: declared.id, facts: bankFacts, billboardIndex: pictured(bankFacts) ? billboardCount++ : -1, far: bankFacts.backing ? farPlanes.add(declared.id, declared.frame) : null,
     mounted: null, points: [], textures: null, loading: null, generation: 0, explicitEnabled: undefined,
     // A bank's own star points stay hidden unless a caller shows them.
     pendingSelection: undefined, pendingStarsVisible: false,
@@ -289,9 +294,14 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     /** Whether the bank's slices are on screen (its last publication drew them). */
     drawing(id: string): boolean { return byId.get(id)?.drawn === true; },
     /** `standIn`: the bank drawn in the detailed one's place until that one draws (detailed-focus-context.ts), of either
-     * kind: it is drawn as the detailed bank is, and while one stands in the detailed bank's billboard stays out. */
+     * kind: it is drawn as the detailed bank is, and while one stands in the detailed bank's billboard stays out.
+     * `flight`: the destination of a flight while the page it leaves is the selected one: its place, and the share of a
+     * distant cloud that its own page will draw at this camera (`closeUp`, selectedBodyContextOpacity). The detailed bank
+     * is drawn with that share, as it will be when the flight hands over (HV 2827 is 9.3 kpc from the Large Magellanic
+     * Cloud's centre, and the cloud stood beside it until the hand-over at 4.8 s, 2026-10-07); when it holds the
+     * destination's place it gives way as it comes to fill the view too (`enteredVolumeOpacity`). */
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailContextOpacity: number, detailedObjectId?: string, bodyContextOpacity = 1,
-      standIn?: string) {
+      standIn?: string, flight?: { readonly toM: readonly number[]; readonly closeUp: number }) {
       if (lifetime.disposed) return;
       let residencyChanged = false, drawingChanged = false;
       for (const bank of banks) {
@@ -301,11 +311,19 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
           : detailContextOpacity * (bank.facts.attached ? 1 : bodyContextOpacity);
         const contextOpacity = bank.facts.contextVisibility === 'independent' ? 1 : volumeOpacity;
         // An attached volume shows with its host's dataset, and always as the page's own focus (M87 on /m87/).
-        const shown = bank.enabled || detailed ? presentationOpacity * contextOpacity : 0;
+        const whole = bank.enabled || detailed ? presentationOpacity * contextOpacity : 0;
+        const shown = whole > 0 && detailed && flight
+          ? whole * flight.closeUp * (volumeHolds(frame, radiusUnits, flight.toM) ? enteredVolumeOpacity(world, frame, radiusUnits) : 1) : whole;
         const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
         const incoming = bank.id === detailedObjectId;
         const ready = texturesReady(bank, { world, viewport }, shown > 0 && (requestedOpacity > 0 || incoming), incoming, requestedOpacity > 0);
         const opacity = ready ? requestedOpacity : 0;
+        if (bank.far) {
+          // The backing gives way to the volume as a billboard does, by the same screen size of the same sphere.
+          const covered = standIn !== undefined && bank.id === detailedObjectId && !ready || !drawsFromAfar(preparedBillboards?.plan, bank.id, detailedObjectId);
+          farPlanes.publish(bank.far, covered ? 0 : shown * projectedVolumeOpacity(world, viewport, frame, bank.far.radiusUnits) *
+            (ready ? 1 - opacity / Math.max(shown, Number.MIN_VALUE) : 1), world, viewport, coasting, bank.pendingSelection);
+        }
         if (billboards && bank.billboardIndex >= 0) {
           // The billboard pictures the selected dataset; a dataset with no view of its own draws none.
           const billboardRadiusUnits = billboards.radiusUnits(bank.billboardIndex, bank.pendingSelection);

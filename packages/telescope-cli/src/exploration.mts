@@ -15,8 +15,9 @@ import { nativeQualificationRoute } from './vo/access.mts';
 import { FAMILY_IDS, type FamilyId } from './products/product-descriptor.mts';
 import type { ObservationFamilyEvidence } from './products/observation-families.mts';
 import { searchOpus, type OpusService } from './archive-adapters/opus.mts';
-import { searchGeminiLeads, searchKeckLeads, type ArchiveLeadFilter, type ArchiveLeadService } from './archive-adapters/archive-leads.mts';
-import { searchChandraLeads, searchSpitzerLeads } from './archive-adapters/other-leads.mts';
+import type { ArchiveLeadFilter, ArchiveLeadService, LeadPosition } from './archive-adapters/archive-leads.mts';
+import { ARCHIVES } from './archives/archives.mts';
+import { namedShippedObject, readJsonOrNull } from './archives/targets.mts';
 import { loadWwtImagery, type WwtImageryResult } from './wwt/wwt-catalog.mts';
 import { loadWwtFitsLeads, type WwtFitsLeads } from './wwt/wwt-fits-leads.mts';
 
@@ -249,10 +250,14 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
   const target = named.find(entry => entry.id === resolution.canonical.id) ?? { ...resolution.canonical, aliases: [] };
   const filter: ArchiveLeadFilter = { ...(request.instrument ? { instrument: request.instrument } : {}),
     ...(request.time && 'fromIso' in request.time ? { time: request.time } : {}) };
+  // Where the target is, when it does not move: the circle the reader gave, SIMBAD's place for a sky target, else the body's own record.
+  const position: LeadPosition | undefined = request.region ? { raDeg: request.region.raDegrees, decDeg: request.region.decDegrees, radiusDeg: request.region.radiusDegrees }
+    : request.skyTarget ? { raDeg: request.skyTarget.raDegrees, decDeg: request.skyTarget.decDegrees, radiusDeg: 0.5 / 60 }
+    : selectedObservation ? undefined : (await namedShippedObject(resolution.canonical.id, readJsonOrNull, root)).position;
   // Every archive is asked at once: each search talks to its own service, and the leads used to wait for the others to finish.
   const [inputs, opus, curatedImagery, wwtFits, archiveLeads] = await Promise.all([loadQueryInputs(root, request, selectedObservation, progress), searchOpus(target), loadWwtImagery(root, target),loadWwtFitsLeads(root,target),
-    selectedObservation ? [] : Promise.all([searchKeckLeads(root, target, undefined, filter), searchGeminiLeads(root, target, undefined, filter),
-      searchChandraLeads(root, target, request.region, undefined, filter), searchSpitzerLeads(root, target, request.region, undefined, filter)])]);
+    selectedObservation ? [] : Promise.all(ARCHIVES.flatMap(archive => archive.search
+      ? [archive.search(root, target, { ...(request.region ? { region: request.region } : {}), ...(position ? { position } : {}), filter })] : []))]);
   return { ...inputs, opus, archiveLeads, curatedImagery, wwtFits };
 }
 

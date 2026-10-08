@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alioth",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alioth",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2984553
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alioth-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alioth",
+      "classification": "star",
+      "color": "#b5caff",
+      "distanceAu": 5003889.3,
+      "description": "A giant of type A1 III-IV, 24 parsecs away: 4.3 times the Sun's width and 104 times its light.",
+      "systemName": "Alioth system",
+      "aliases": [
+        "HD 112185"
+      ],
+      "order": 5804,
+      "context": {
+        "order": 5801
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -407438575080351040,
+        -97883317639129730,
+        620299510963550600
+      ],
+      "presentationToReference": [
+        -0.5442872094809097,
+        -0.8057269289665943,
+        -0.23357129432690385,
+        -0.13075992576033668,
+        -0.19353912163255585,
+        0.972339678411228,
+        0.8286454461412528,
+        -0.559773815335944,
+        0.00001592497600573798
+      ],
+      "orbitUpReference": [
+        0.8057269289665943,
+        0.19353912163255585,
+        0.559773815335944
+      ],
+      "metersPerUnit": 9627590.322580645,
+      "bodyRadiusM": 2984553000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

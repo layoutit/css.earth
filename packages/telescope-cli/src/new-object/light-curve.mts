@@ -18,16 +18,14 @@ export function gaiaCepheidForm(sourceId: string): Record<string, string> {
   return { REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', QUERY: gaiaCepheidQuery(sourceId) };
 }
 
-/** Install the light curve read from `csv` (the archive's answer to gaiaCepheidForm) into a package's files. */
-export function installLightCurve(files: PackageFiles, { id, name, sourceId, csv }: { id: string; name: string; sourceId: string; csv: string }, { SOLAR_GEOMETRY_EPOCH_JD_TT, SOLAR_GEOMETRY_EPOCH_LABEL }: SolarEpoch) {
+/** Install the row read from `csv` (the archive's answer to gaiaCepheidForm) into a package's files as a source input: the
+ * row itself, its acquisition step, its manifest entry, its catalogue record and its credit. `consumers` names what reads
+ * it: the presentation that plays it, or the datasets made from it on a page that does not play it. */
+export function installLightCurveRow(files: PackageFiles, { id, name, sourceId, csv, consumers = ['presentation'], tied }: { id: string; name: string; sourceId: string; csv: string; consumers?: readonly string[]; /** How the row was tied to the star, when its package names no Gaia source. */ tied?: string }) {
   const o = `src/objects/${id}`, s = `${o}/source`, where = `${id}: Gaia DR3 vari_cepheid ${sourceId}`;
   const read = (path: string) => { const value = files.get(path); if (value === undefined) throw new Error(`${id}: ${path} is not in the package.`); return String(value); };
   const model = parseGaiaCepheidRow(csv, where), check = checkGaiaCepheidModel(model, where);
   if (model.sourceId !== sourceId) throw new TypeError(`${where}: the archive answered for source ${model.sourceId}.`);
-  const cycles = (SOLAR_GEOMETRY_EPOCH_JD_TT - GAIA_TIME_OFFSET_JD - check.maximumTime) / model.periodDays;
-  const phase = cycles - Math.floor(cycles), phaseError = Math.abs(cycles) * model.periodErrorDays / model.periodDays;
-  const harmonics = model.amplitudesMag.length === 1 ? 'one harmonic' : `${model.amplitudesMag.length} harmonics`;
-  const fraction = 10 ** (-0.4 * check.peakToPeakMag), days = model.periodDays.toFixed(model.periodDays < 10 ? 3 : 2);
   const locator = `gaiadr3.vari_cepheid: pf ${model.periodDays} +/- ${model.periodErrorDays} d, ${model.amplitudesMag.length} G-band harmonics, peak_to_peak_g ${model.peakToPeakMag} mag, epoch_g ${model.epochMaximum} +/- ${model.epochMaximumError} (BJD TCB - 2455197.5)`;
 
   const plan = JSON.parse(read(`${s}/preparation/acquisition.json`)) as { operations: Record<string, unknown>[] };
@@ -39,21 +37,35 @@ export function installLightCurve(files: PackageFiles, { id, name, sourceId, csv
   const manifest = JSON.parse(read(`${s}/manifest.json`)) as { inputs: Record<string, unknown>[] };
   manifest.inputs = [...manifest.inputs.filter(input => input.path !== LIGHT_CURVE_MODEL), { id: `${id}-gaia-dr3-vari-cepheid`, path: LIGHT_CURVE_MODEL, origin: GAIA_TAP,
     credit: `ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; ${PAPER}`, ...GAIA_LICENSE,
-    acquisition: `Gaia Archive TAP query in source/preparation/acquisition.json: the vari_cepheid row of source_id ${sourceId} (period, G-band harmonic amplitudes and phases, epoch of maximum, peak-to-peak amplitude, R21 and phi21).`,
-    redistribution: 'One catalogue row, retained unchanged with its credit.', consumers: ['presentation'] }];
+    acquisition: `Gaia Archive TAP query in source/preparation/acquisition.json: the vari_cepheid row of source_id ${sourceId} (period, G-band harmonic amplitudes and phases, epoch of maximum, peak-to-peak amplitude, R21 and phi21).${tied ? ` ${tied}` : ''}`,
+    redistribution: 'One catalogue row, retained unchanged with its credit.', consumers: [...consumers] }];
   files.set(`${s}/manifest.json`, json(manifest));
   bindInputs(files, id);
-  const presentation = JSON.parse(read(`${s}/preparation/presentation.json`)) as Record<string, unknown>;
-  files.set(`${s}/preparation/presentation.json`, json({ ...presentation, lightCurve: { model: LIGHT_CURVE_MODEL } }));
   files.set(`src/sources/gaia-dr3-vari-cepheid-${id}.json`, json({ id: `gaia-dr3-vari-cepheid-${id}`, kind: 'data-product', identityLevel: 'work',
     title: `Gaia DR3 vari_cepheid row for ${name} (source_id ${sourceId})`, identifiers: [{ type: 'Gaia DR3 vari_cepheid source_id', value: sourceId }],
     links: [{ role: 'archive', url: 'https://gea.esac.esa.int/archive/', label: 'Gaia Archive' }, { role: 'landing', url: PAPER_URL, label: `${PAPER}, the Cepheid sample` }],
     evidence: [{ url: `${GAIA_TAP}?${new URLSearchParams(gaiaCepheidForm(sourceId))}`, checkedOn: CHECKED, locator }],
     relations: [], statements: [{ kind: 'credit', text: `ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; ${PAPER}`, scope: 'citation', evidence: 'https://www.cosmos.esa.int/web/gaia-users/credits' }] }));
-
   const credit = `Light curve: Gaia DR3 vari_cepheid, source ${sourceId}; ${PAPER}.`;
   const notice = read(`${o}/NOTICE.md`).replace(/\n\nLight curve: Gaia DR3 vari_cepheid[^\n]*/u, '').trimEnd();
   files.set(`${o}/NOTICE.md`, `${notice}\n\n${credit}\n`);
+  return { model, check };
+}
+
+/** Install the light curve read from `csv` (the archive's answer to gaiaCepheidForm) into a package's files: the row
+ * (installLightCurveRow), the presentation field that plays it, and its account in the README and the ledger. */
+export function installLightCurve(files: PackageFiles, { id, name, sourceId, csv }: { id: string; name: string; sourceId: string; csv: string }, { SOLAR_GEOMETRY_EPOCH_JD_TT, SOLAR_GEOMETRY_EPOCH_LABEL }: SolarEpoch) {
+  const o = `src/objects/${id}`, s = `${o}/source`;
+  const read = (path: string) => { const value = files.get(path); if (value === undefined) throw new Error(`${id}: ${path} is not in the package.`); return String(value); };
+  const { model, check } = installLightCurveRow(files, { id, name, sourceId, csv });
+  const cycles = (SOLAR_GEOMETRY_EPOCH_JD_TT - GAIA_TIME_OFFSET_JD - check.maximumTime) / model.periodDays;
+  const phase = cycles - Math.floor(cycles), phaseError = Math.abs(cycles) * model.periodErrorDays / model.periodDays;
+  const harmonics = model.amplitudesMag.length === 1 ? 'one harmonic' : `${model.amplitudesMag.length} harmonics`;
+  const fraction = 10 ** (-0.4 * check.peakToPeakMag), days = model.periodDays.toFixed(model.periodDays < 10 ? 3 : 2);
+  // A page whose datasets include stills of this light curve names their step group (pulsation/pulsation.mts): it is kept.
+  const presentation = JSON.parse(read(`${s}/preparation/presentation.json`)) as Record<string, unknown>, played = presentation.lightCurve as { stills?: unknown } | undefined;
+  files.set(`${s}/preparation/presentation.json`, json({ ...presentation, lightCurve: { model: LIGHT_CURVE_MODEL, ...(typeof played?.stills === 'string' ? { stills: played.stills } : {}) } }));
+
   const paragraph = `**Brightness.** Gaia DR3 fits the star's G-band light with ${harmonics} of a ${days}-day period (vari_cepheid, source ${sourceId}; the fit is described by ${PAPER}). ` +
     `It swings ${check.peakToPeakMag.toFixed(3)} mag, so at minimum the star gives ${(fraction * 100).toFixed(0)}% of its peak light. The page plays that model: a black veil over the disc ` +
     `passes the flux ratio through the sRGB encoding (IEC 61966-2-1), so a white pixel gives that fraction of its light, ${1 / PULSATION_SECONDS_PER_DAY === 1 ? 'one day' : `${1 / PULSATION_SECONDS_PER_DAY} days`} of the cycle each second (a display rate). ` +

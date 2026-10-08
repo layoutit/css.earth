@@ -48,7 +48,7 @@ const stale = (text: unknown) => String(text ?? '').replace(NO_GRID, '').replace
 interface StarGravity { readonly logg: number; readonly kind: 'measured' | GravityChoice['kind']; readonly sentence: string; readonly url?: string; readonly published?: GravityChoice }
 // The last sentence of a generated README's Star paragraph when the star has no mass: none published, or the one an earlier run named.
 const STAR_GRAVITY = /^(\*\*Star\.\*\* .*?) (?:No surface gravity of this star is published\.|log g -?[\d.]+ from \d{4}[^\n]*)$/mu;
-const SIMBAD_CITED = /^SIMBAD's compilation of spectroscopic measurements/u;
+const SIMBAD_CITED = /^(?:SIMBAD's compilation of spectroscopic measurements|A gravity measured from the star's Stroemgren photometry)/u;
 
 /** A star's stored spec citing the published gravity its law is read at, in place of the decline or of the gravity an earlier run
  * cited. A spec that cites a gravity of its own, or is a hosted body's, is left as it is (null). */

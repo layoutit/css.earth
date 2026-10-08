@@ -35,7 +35,7 @@ export function draftFromChara(row: ReturnType<typeof parseCharaRow>, identifier
   return {
     // An id starts with a letter: a star named by its Flamsteed number (18 Scorpii) takes its HD number as its id.
     id: (/^\d/u.test(name) ? hd : name).normalize('NFKD').toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, ''), name, system: `${name} system`, parent: 'milky-way', target: hd,
-    ...(name === hd ? {} : { aliases: [hd] }), ...(preferred?.step === 'proper' ? { featured: true } : {}),
+    ...(name === hd ? {} : { aliases: [hd] }),
     description: `A naked-eye star ${parsecs.toFixed(1)} parsecs away, ${wider}: its disc was measured with the CHARA Array.`,
     paper: { url: CHARA.paper, credit: CHARA.credit },
     // The star sits at the parallax its radius was computed with, and a star too bright for a Gaia parallax still has a place.

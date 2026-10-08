@@ -72,6 +72,26 @@
       "title": "Brightness, Dec 2017",
       "detail": "2 epochs",
       "summary": "Starspots: darker, cooler patches mapped from how they distort the spectrum as the star turns."
+    },
+    "brightness-sector-6": {
+      "title": "Brightness map, Sector 6",
+      "detail": "Sector 6, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-33": {
+      "title": "Brightness map, Sector 33",
+      "detail": "Sector 33, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "brightness-sector-87": {
+      "title": "Brightness map, Sector 87",
+      "detail": "Sector 87, mapped here",
+      "summary": "Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns."
+    },
+    "color-brightness": {
+      "title": "Color + brightness, Dec 2024 to Jan 2025",
+      "detail": "TESS sector 87",
+      "summary": "The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen."
     }
   }
 }

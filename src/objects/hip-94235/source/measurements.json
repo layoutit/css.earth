@@ -40,6 +40,9 @@
   ],
   "projectedRotationSpeedKmS": 24.4,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HIP 94235 (pscomppars): projected rotation speed 24.4 km/s, from Zhou et al. 2022 (https://ui.adsabs.harvard.edu/abs/2022AJ....163..289Z/abstract)",
+  "rotationPeriodMeasuredDays": 2.28,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 27, 67, 93, 94, 101, 103 and 104 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 2.28 d, the light swinging by 3.3% as the star turns",
+  "rotationLightSwingPercent": 3.35,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

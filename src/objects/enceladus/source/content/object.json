@@ -87,6 +87,20 @@
         "noData": true
       },
       {
+        "id": "enhanced",
+        "label": "Enhanced color",
+        "thumbnail": "/scenes/enceladus/enceladus-enhanced-thumbnail.webp",
+        "surface": "enceladus-enhanced-surface@2x.webp",
+        "poles": "enceladus-enhanced-poles@2x.webp",
+        "source": {
+          "id": "cassini-iss-2014-enceladus-color",
+          "path": "../manifest.json",
+          "url": "https://www.jpl.nasa.gov/images/pia18435-color-maps-of-enceladus-2014/"
+        },
+        "falseColor": true,
+        "notes": "Published 2014 infrared–green–ultraviolet composite from Cassini's first ten years, photometrically corrected by Paul Schenk. Enhanced colors exceed human vision; recent fractures, including the tiger stripes, appear bluish. Original 100 m grid; source resolution varies, and seams and residual photographed shading remain."
+      },
+      {
         "id": "infrared",
         "label": "Infrared color",
         "thumbnail": "/scenes/enceladus/enceladus-infrared-thumbnail.webp",

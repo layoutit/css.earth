@@ -66,13 +66,13 @@
         "label": "ESO VISTA \u00b7 infrared",
         "thumbnail": "helix-dataset-eso-vista.webp",
         "volume": {
-          "objectId": "helix-volume",
-          "datasetId": "eso-vista",
+          "objectId": "helix-vista-layers",
+          "datasetId": "optical",
           "surface": "eso-vista"
         },
         "source": {
-          "id": "helix-volume-eso-vista",
-          "path": "../../helix-volume/source/manifest.json",
+          "id": "helix-vista-layers-optical",
+          "path": "../../helix-vista-layers/source/manifest.json",
           "url": "https://www.eso.org/public/images/eso1205a/"
         },
         "falseColor": false
@@ -82,13 +82,13 @@
         "label": "ESO WFI \u00b7 optical detail",
         "thumbnail": "helix-dataset-eso-wfi.webp",
         "volume": {
-          "objectId": "helix-volume",
-          "datasetId": "eso-wfi",
+          "objectId": "helix-wfi-layers",
+          "datasetId": "optical",
           "surface": "eso-wfi"
         },
         "source": {
-          "id": "helix-volume-eso-wfi",
-          "path": "../../helix-volume/source/manifest.json",
+          "id": "helix-wfi-layers-optical",
+          "path": "../../helix-wfi-layers/source/manifest.json",
           "url": "https://www.eso.org/public/images/eso0907a/"
         },
         "falseColor": false
@@ -98,13 +98,13 @@
         "label": "ESO \u00b7 wider field",
         "thumbnail": "helix-dataset-eso-wide.webp",
         "volume": {
-          "objectId": "helix-volume",
-          "datasetId": "eso-wide",
+          "objectId": "helix-wide-layers",
+          "datasetId": "optical",
           "surface": "eso-wide"
         },
         "source": {
-          "id": "helix-volume-eso-wide",
-          "path": "../../helix-volume/source/manifest.json",
+          "id": "helix-wide-layers-optical",
+          "path": "../../helix-wide-layers/source/manifest.json",
           "url": "https://www.eso.org/public/images/helix/"
         },
         "falseColor": false

@@ -1,0 +1,30 @@
+{
+ "id": "alioth",
+ "classification": "star",
+ "order": 5804,
+ "physical": {
+  "name": "Alioth",
+  "horizonsCode": null,
+  "meanRadiusKm": 2984553,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 8908
+ },
+ "physicalNotes": "Radius 4.29 +/- 0.21 solar radii from Baines et al. (2023), AJ 166, 268, HD 112185: radius 4.29 +0.19/-0.21 solar radii (Table 7), from the limb-darkened angular diameter 1.644 +/- 0.02 mas (NPOI, Table 5) and the Gaia DR2 (Gaia Collaboration 2018) parallax (https://doi.org/10.3847/1538-3881/ad08be): 2,984,553 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 8908 +/- 54 K from Baines et al. (2023), AJ 166, 268, HD 112185: effective temperature 8908 +/- 54 K (Table 7), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ad08be). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 193.50680405,
+  "declinationDegrees": 55.95984299,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 24.26,
+  "properMotionRaMasPerYear": 111.91,
+  "properMotionDecMasPerYear": -8.24,
+  "radialVelocityKmPerS": -12.7,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 62956: RAJ2000 193.50680405, DEJ2000 55.95984299 (ICRS at epoch J1991.25), from the archived row src/objects/alioth/source/photometry/catalogue-row.tsv; SIMBAD names it HD 112185",
+   "distance": "Baines et al. (2023), AJ 166, 268, HD 112185: the Gaia DR2 (Gaia Collaboration 2018) parallax the radius was computed with (Table 2), 41.22 +/- 1.84 mas, inverted (https://doi.org/10.3847/1538-3881/ad08be): 24.26 +/- 1.083 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 62956 (same row): 111.91, -8.24 mas/yr",
+   "radialVelocity": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 62956: RV -12.7 +/- 0.2 km/s (quality A) (https://doi.org/10.1134/S1063773712050015)"
+  }
+ }
+}

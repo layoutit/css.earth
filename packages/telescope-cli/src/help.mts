@@ -13,14 +13,14 @@ Guide: https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/RE
 export const HELP = `Telescope — explore observations or continue from an existing artifact.
 
 Human entry points:
-  telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
+  telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY] [--fresh]
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
   telescope papers TARGET... [--about PHRASE,PHRASE] [--fulltext] [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope simulations TARGET [--json] [--out DIRECTORY]
   telescope leads TARGET | --class CLASS [--json] [--out DIRECTORY]
   telescope stars GALAXY [--json] [--out DIRECTORY]
   telescope new-object SPEC.json [--check] [--skip-existing] [--json]
-  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... | --from-table CLASS:GALAXY=TABLE[#ROW]... | --from-esa PAGE_ID=PICTURE_URL... | --from-magnetic HOST... | --from-spectra HOST... | --from-pixels all|HOST... --out SPEC.json
+  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-benchmark HD... | --from-narrabri HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... | --from-table CLASS:GALAXY=TABLE[#ROW]... | --from-esa PAGE_ID=PICTURE_URL... | --from-magnetic HOST... | --from-spectra HOST... | --from-pixels all|HOST... | --from-pulsation all|HOST|gaia:HOST... --out SPEC.json
   telescope ascl SOFTWARE [--json]
   telescope ascl --product PRODUCT.json|RUN/pick-N/result.json [--json]
   telescope wwt-fits EXPLORE.json --pick N --level N --x X --y Y --out DIRECTORY
@@ -49,7 +49,7 @@ cross-checked against the next; a model limb law from Claret's grids; manifest, 
 Only prose is left marked TODO(new-object), unless the spec carries drafted text. --from-archive writes a spec for planet hosts from the
 NASA Exoplanet Archive's default parameter sets (their transiting planets, with drafted text); --from-debcat drafts both stars of
 an eclipsing binary from DEBCat, --from-apokasc a Kepler-field giant from APOKASC-3, --from-cepheids a Cepheid from Groenewegen
-(2013), --from-k2 a K2-field giant and --from-tess a TESS giant from Khan et al. (2023), --from-gaia any star from Gaia DR3 FLAME, --from-hipparcos a Hipparcos star from the model-atmosphere fit to its light (McDonald et al. 2017), --from-iau the stars the IAU has named that the universe lacks, each by the first of those routes that measures it, --from-chara a nearby star whose disc CHARA measured (Boyajian et al. 2012), --from-npoi a bright star whose disc the NPOI measured (Baines et al. 2018, 2021), --from-sh0es the Cepheids Hubble found in a SN Ia host galaxy (Hoffmann et al. 2016), --from-m31cepheids Hubble's V1 and the Cepheids Hubble measured in Andromeda (Li et al. 2021), --from-m33cepheids those it measured in Triangulum (Breuval et al. 2023), --from-table a star of another galaxy from any VizieR table that lists it with a period (cepheid:m81=J/ApJ/743/176/table1), placed in its galaxy by the table's position, by SIMBAD's, or by the table's detector pixel on the exposure the request names (#exposure=mast:HST/product/FILE.fits,firstPixel=N), each naming what the spec still needs from the paper; --check runs the bake's first steps on
+(2013), --from-k2 a K2-field giant and --from-tess a TESS giant from Khan et al. (2023), --from-gaia any star from Gaia DR3 FLAME, --from-hipparcos a Hipparcos star from the model-atmosphere fit to its light (McDonald et al. 2017), --from-iau the stars the IAU has named that the universe lacks, each by the first of those routes that measures it, --from-chara a nearby star whose disc CHARA measured (Boyajian et al. 2012), --from-npoi a bright star whose disc the NPOI measured (Baines et al. 2018, 2021, 2023, 2025), --from-benchmark a Gaia benchmark star (Soubiran et al. 2024), --from-narrabri a star whose disc the Narrabri interferometer measured (Hanbury Brown et al. 1974; Code et al. 1976), --from-sh0es the Cepheids Hubble found in a SN Ia host galaxy (Hoffmann et al. 2016), --from-m31cepheids Hubble's V1 and the Cepheids Hubble measured in Andromeda (Li et al. 2021), --from-m33cepheids those it measured in Triangulum (Breuval et al. 2023), --from-table a star of another galaxy from any VizieR table that lists it with a period (cepheid:m81=J/ApJ/743/176/table1), placed in its galaxy by the table's position, by SIMBAD's, or by the table's detector pixel on the exposure the request names (#exposure=mast:HST/product/FILE.fits,firstPixel=N), each naming what the spec still needs from the paper; --check runs the bake's first steps on
 what was generated; --skip-existing leaves objects already in the universe alone. --from-esa drafts a picture ESA publishes for Hubble or Webb as one more
 dataset of a page that shows a shaped layer bank (m57=https://esawebb.org/images/weic2320c/): it reads the picture's page and the sky tags in its JPEG, finds the
 star the picture shows at the page's place, and leaves the sentences and what each color takes on the bank's walls to write; a spec of pictures writes each
@@ -57,9 +57,12 @@ picture's bank and its page's dataset, may be run again, and bakes with SPEC.jso
 page already shows and its ROSAT X-ray flux (docs/stellar-corona-from-magnetic-maps.md); a spec of coronae writes each star's volume bank and its "Derived corona"
 dataset, and bakes with SPEC.json --bake. --from-spectra drafts a star's magnetic maps from the programs of archived polarised spectra this repository has
 reduced (packages/telescope-cli/src/archives/espadons); a spec of magneticMaps writes each map as a "Radial field" dataset of the star's page, and bakes with
-SPEC.json --bake. --from-pixels drafts the brightness map of each star this repository has reduced from the TESS and K2 missions' light curves of it
+SPEC.json --bake. --from-pixels drafts the brightness map of each star this repository has reduced from the TESS, K2 and Kepler missions' light curves of it
 (packages/telescope-cli/src/archives/tess; all is every reduced star); a spec of brightnessMaps writes each map as a "Brightness map" dataset of the star's
-page and the measured period into its measurements record, and bakes with SPEC.json --bake. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
+page and the measured period into its measurements record, and bakes with SPEC.json --bake. --from-pulsation drafts a pulsating star's light through one cycle
+from the published light-curve model its package keeps (a Cepheid's row of Gaia DR3 vari_cepheid; all is every such star; gaia:HOST first looks a star placed by
+its paper's table up in that table at its place, and installs its row); a spec of pulsations writes the cycle as the ten steps of a "Pulsation" dataset of
+the star's page, and bakes with SPEC.json --bake (docs/pulsating-stars-light-through-a-cycle.md). The spec format is in packages/telescope-cli/src/new-object/spec.mts.
 Papers lists up to 20 OpenAlex works that name the target, by any spelling of its catalogue names, in their title or
 abstract, with the instrument and any one of the --about phrases (singular or plural); --fulltext asks for the works whose
 indexed full text names them. It uses arXiv's Atom API when OpenAlex is unavailable or its daily budget is spent, and the
@@ -161,6 +164,7 @@ Explore filters and query options use micrometres, arcseconds and kilometres:
   --icrs-circle RA,DEC,RADIUS          Explicit ICRS cutout, in degrees. Explore also lists archive records
                                       whose footprint intersects it as in the field, never as the target
   --instrument NAME                   Archive instrument name, e.g. ERIS (explore)
+  --fresh                             Ask every archive again; without it an answer saved in the last day stands (explore)
   --spectral-frame barycentric        Permit advertised SODA BAND subsetting
   --max-science-bytes N               Science transfer bound (default 1 GiB)
   --max-metadata-bytes N              Metadata response bound (default 32 MiB)

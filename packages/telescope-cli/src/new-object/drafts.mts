@@ -5,7 +5,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import type { Archive } from './archives/archives.mts';
 
-export interface Drafts { readonly stars: readonly unknown[]; readonly pictures?: readonly unknown[]; readonly coronae?: readonly unknown[]; readonly magneticMaps?: readonly unknown[]; readonly brightnessMaps?: readonly unknown[]; readonly report: readonly string[] }
+export interface Drafts { readonly stars: readonly unknown[]; readonly pictures?: readonly unknown[]; readonly coronae?: readonly unknown[]; readonly magneticMaps?: readonly unknown[]; readonly brightnessMaps?: readonly unknown[]; readonly pulsations?: readonly unknown[]; readonly report: readonly string[] }
 interface Context { readonly root: string; readonly progress: (line: string) => void; readonly archive: Archive }
 export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; readonly draft: (names: readonly string[], context: Context) => Promise<Drafts> }>> = {
   // Transiting planet hosts from the NASA Exoplanet Archive's default parameter sets (from-archive.mts).
@@ -28,8 +28,12 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   iau: { names: 'all | NAME', draft: async (names, context) => (await import('./archives/iau.mts')).draftsFromIau(names, context) },
   // A nearby A, F or G star whose disc the CHARA Array measured (Boyajian et al. 2012) (chara.mts).
   chara: { names: 'HD', draft: async (names, { archive }) => (await import('./archives/chara.mts')).draftsFromChara(names, archive) },
-  // A bright star whose disc the Navy Precision Optical Interferometer measured (Baines et al. 2018, 2021) (npoi.mts).
+  // A bright star whose disc the Navy Precision Optical Interferometer measured (Baines et al. 2018, 2021, 2023, 2025) (npoi.mts).
   npoi: { names: 'HD', draft: async (names, { archive }) => (await import('./archives/npoi.mts')).draftsFromNpoi(names, archive) },
+  // One of the Gaia FGK benchmark stars, with a measured diameter and the paper's fundamental temperature and gravity (Soubiran et al. 2024) (benchmark.mts).
+  benchmark: { names: 'HD', draft: async (names, { archive }) => (await import('./archives/benchmark.mts')).draftsFromBenchmark(names, archive) },
+  // A hot star whose disc the Narrabri intensity interferometer measured (Hanbury Brown et al. 1974), with the temperature Code et al. (1976) derived from it (narrabri.mts).
+  narrabri: { names: 'HD', draft: async (names, { archive }) => (await import('./archives/narrabri.mts')).draftsFromNarrabri(names, archive) },
   // A Cepheid Hubble found in another galaxy (Hoffmann et al. 2016), placed by its catalogue row: HOST (N4536) or HOST/ID (sh0es.mts).
   sh0es: { names: 'HOST[/ID]', draft: async (names, { archive }) => (await import('./archives/sh0es.mts')).draftsFromSh0es(names, archive) },
   // A Cepheid in the Andromeda Galaxy: Hubble's V1, or those Hubble measured for its distance (Li et al. 2021) (m31-cepheids.mts).
@@ -46,6 +50,8 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   spectra: { names: 'HOST', draft: async (names, context) => (await import('./magnetic/maps.mts')).draftsFromReducedPrograms(names, context) },
   // A star's brightness map, made by this repository from a mission's light curves of it, as a dataset of its page (brightness/brightness.mts).
   pixels: { names: 'all | HOST', draft: async (names, context) => (await import('./brightness/brightness.mts')).draftsFromReducedPixels(names, context) },
+  // A pulsating star's light through one cycle, from the published light-curve model its package keeps, as the steps of one dataset group (pulsation/pulsation.mts).
+  pulsation: { names: 'all | HOST | gaia:HOST', draft: async (names, context) => (await import('./pulsation/pulsation.mts')).draftsFromPulsation(names, context) },
 };
 
 /** Draft `names` through `route` and write the spec file at `out`. */
@@ -53,7 +59,7 @@ export async function writeDrafts(route: string, names: readonly string[], out: 
   const source = DRAFT_ROUTES[route];
   if (!source) throw new TypeError(`No draft route ${route}; the routes are ${Object.keys(DRAFT_ROUTES).map(key => `--from-${key}`).join(', ')}.`);
   if (!names.length) throw new TypeError(`Usage: new-object --from-${route} ${source.names}... --out spec.json`);
-  const { stars, pictures, coronae, magneticMaps, brightnessMaps, report } = await source.draft(names, context), path = resolve(context.root, out);
-  await mkdir(dirname(path), { recursive: true }); await writeFile(path, `${JSON.stringify(brightnessMaps ? { brightnessMaps } : magneticMaps ? { magneticMaps } : coronae ? { coronae } : pictures ? { pictures } : { stars }, null, 2)}\n`);
-  return { path, entries: (brightnessMaps ?? magneticMaps ?? coronae ?? pictures ?? stars).length, report };
+  const { stars, pictures, coronae, magneticMaps, brightnessMaps, pulsations, report } = await source.draft(names, context), path = resolve(context.root, out);
+  await mkdir(dirname(path), { recursive: true }); await writeFile(path, `${JSON.stringify(pulsations ? { pulsations } : brightnessMaps ? { brightnessMaps } : magneticMaps ? { magneticMaps } : coronae ? { coronae } : pictures ? { pictures } : { stars }, null, 2)}\n`);
+  return { path, entries: (pulsations ?? brightnessMaps ?? magneticMaps ?? coronae ?? pictures ?? stars).length, report };
 }

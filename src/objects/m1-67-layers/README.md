@@ -40,6 +40,7 @@ ESA/Webb's picture of M1-67, the nebula around the Wolf-Rayet star WR 124, laid 
 - **Drawing:** from the front, 56 terraces parallel to the picture; from the side, 56 and 56 curtains through its columns and rows, as the Ring Nebula's bank is drawn. The face is 1,500 px across the picture.
 - **Size:** 2.21 × 2.18 arcmin, 4.11 pc wide at 6,400 pc.
 - **Rim:** the picture fades out between 57.9″ and 64.3″ from the star, the largest circle the frame holds.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m1-67-layers backing` again.
 
 ## Evidence
 
@@ -53,6 +54,7 @@ The same page as it opens, from the nearest the camera comes, and from there tur
 
 ## Known problems
 
+- The far picture holds only the flat slices' light, and this bank's light is almost all on its walls, which are left out, as they were from the billboard it replaced: from afar the plane draws almost nothing. Edge-on it vanishes.
 - **No clump is placed by a measurement.** The model says where gas is, not which clump is in front. The paper's spectra hold a speed for each clump a slit crosses, but they are shared on request only.
 - **The model is of kinematics, not of density.** The paper says so; the even density used here decides the two depths wherever several bodies lie on one sight line.
 - The lobes' outline is read from a drawing, not from a printed formula, and the inner structure's is borrowed from the middle one.

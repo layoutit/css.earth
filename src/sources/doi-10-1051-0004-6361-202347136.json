@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1051-0004-6361-202347136",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Soubiran et al. (2024): <i>Gaia</i> FGK benchmark stars: Fundamental <i>T</i> <sub>eff</sub> and log <i>g</i> of the third version",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202347136"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361/202347136",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361/202347136",
+      "checkedOn": "2026-10-07",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Soubiran et al. (2024), Astronomy & Astrophysics 682 A145",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361/202347136"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 682 A145",
+  "creators": [
+    "C. Soubiran",
+    "O. L. Creevey",
+    "N. Lagarde",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

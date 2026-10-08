@@ -31,6 +31,19 @@ test('information tab rules belong to the prepared scene head, never the replace
   }
 });
 
+test('the settings panel carries the shell switches that act on the page\'s body', async () => {
+  // Rotation where the body spins, light curves on a pulsating star, surface labels on a body with named features; the
+  // heliosphere and the illustration models are on the map of every page (ObjectShell.astro).
+  const pages: Record<string, string[]> = { earth: ['motion', 'surfaceLabels'], 'navigation/earth': ['motion', 'surfaceLabels'], titan: ['motion', 'surfaceLabels'],
+    dione: ['surfaceLabels'], 'cv-mon': ['lightCurves'], m87: [] };
+  for (const [route, expected] of Object.entries(pages)) {
+    const document = await page(route);
+    assert.ok(document, `${route} has no dist build`);
+    const names = [...document.querySelectorAll('.object-settings-panel input[class$="-setting"][type="checkbox"]')].map(input => input.getAttribute('name'));
+    assert.deepEqual(names.sort(), [...expected, 'heliosphere', 'illustrationModels'].sort(), route);
+  }
+});
+
 test('Enter in the search field submits the typed query, never a browse pill', async () => {
   for (const route of ['earth', 'saturn', 'navigation/earth']) {
     const document = await page(route);
@@ -49,18 +62,24 @@ test('without JavaScript the phone sheet shows, and the arrival photograph only 
   for (const route of ['earth', 'saturn']) {
     const html = await readFile(resolve(DIST, route, 'index.html'), 'utf8').catch(() => null);
     assert.ok(html, `${route} has no dist build`);
-    const noscript = [...html.matchAll(/<noscript><style>([^<]*)<\/style><\/noscript>/gu)].map(match => match[1]!.trim());
+    // Plain rules, one a line, gated on marks only the page's scripts write: they also hold where a blocker refuses
+    // scripts and leaves `<noscript>` unread (ObjectLayout.astro).
+    const gate = 'html:not([data-body-pending]) body:not([data-sheet])';
+    const noscript = (html.match(/<style>(html:not\(\[data-body-pending\]\)[^<]*)<\/style>/u)?.[1] ?? '').split('\n');
+    assert.ok(noscript.includes(`${gate} > .startup-loading { display: none; }`), `${route}: the loading mark hides without JavaScript`);
     // The phone sheet is hidden until its controller publishes a snap state (shell-layout.css); no script ever does.
-    assert.ok(noscript.some(rule => rule.startsWith('body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible')),
+    assert.ok(noscript.some(rule => rule.startsWith('html:not([data-body-pending]):not([data-scene-presented="false"]) body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible')),
       `${route}: the phone sheet shows without JavaScript`);
+    // A gate does not stop the engine reading a `:has()`, so the handle's and the gear's rules keep their `<noscript>`.
+    assert.match(html, /<noscript><style>\.object-ui-layer:has\(/u, `${route}: the rules that read with :has() stay in a noscript`);
     const rules = noscript.filter(rule => rule.includes('data-startup-billboard'));
     assert.equal(rules.length, 1, `${route}: one noscript billboard rule`);
     // A native dataset, settings or saved-view response marks the stage it draws (dataset-response.mts).
-    assert.ok(rules[0]!.startsWith('.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard]'), `${route}: ${rules[0]!.slice(0, 80)}`);
+    assert.ok(rules[0]!.startsWith(`${gate} .object-stage:not([data-prepared-object]) ~ img[data-startup-billboard]`), `${route}: ${rules[0]!.slice(0, 140)}`);
     // Sized by the share of the viewport width a native response frames the body at, and kept within the share of the
     // height the live camera allows (default-width-share.mts); the drawn body takes the same limit.
     assert.match(rules[0]!, /width: min\([0-9.]+vw, [0-9.]+cqh\);/u, `${route}: ${rules[0]!.slice(0, 160)}`);
-    assert.ok(noscript.some(rule => /^\.object-stage\[data-prepared-object\]:not\(\[data-prepared-view\]\) \{ --native-stage-height: 100cqh; --native-stage-width: 100vw; --native-fit: min\(1, calc\([0-9.]+ \* tan\(atan2\(var\(--native-stage-height\), var\(--native-stage-width\)\)\)\)\); scale: var\(--native-fit\); overflow: visible; \}$/u.test(rule)),
+    assert.ok(noscript.some(rule => rule.startsWith(`${gate} `) && /^\.object-stage\[data-prepared-object\]:not\(\[data-prepared-view\]\) \{ --native-stage-height: 100cqh; --native-stage-width: 100vw; --native-fit: min\(1, calc\([0-9.]+ \* tan\(atan2\(var\(--native-stage-height\), var\(--native-stage-width\)\)\)\)\); scale: var\(--native-fit\); overflow: visible; \}$/u.test(rule.slice(gate.length + 1))),
       `${route}: the drawn body keeps within the viewport's height without JavaScript`);
     const { document } = parseHTML(html);
     const stage = document.querySelector('.object-stage');

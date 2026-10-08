@@ -236,6 +236,17 @@ grid, or measured points. A photograph standing as one flat picture at the nebul
 is a line from the side, not a scene. Six Messier nebulae had only that and have no page
 ([Messier guide](../../../../docs/messier/README.md#left-out)).
 
+A galaxy's, a cluster's or a far object's photograph follows it too. A picture standing flat at
+the object's distance, facing the Sun, is where a picture of the sky lies, not a shape. A disc
+galaxy's picture lies on its measured disc; an elliptical's light fills a published profile; a
+cluster keeps its page where papers give its gas and mass a shape (the Bullet Cluster,
+MACS J0025, El Gordo, Abell 1689). Twenty-six pages had only the picture facing the Sun and
+were retired on 2026-10-06: eleven Messier galaxies (same guide); the clusters Abell 370,
+Abell 2744, Abell S1063, MACS J0416, MACS J0717, MACS J1149 and SMACS 0723, whose member dots
+had an assumed depth; and the Cartwheel Galaxy, Stephan's Quintet, Earendel, the Einstein
+Cross, JADES-GS-z14-0, MoM-z14, 3C 273 and TON 618. A bulge volume or dots of assumed depth
+around such a picture do not make it a scene.
+
 ## Estimates
 
 An estimate is a number nobody measured for this object: an equilibrium temperature

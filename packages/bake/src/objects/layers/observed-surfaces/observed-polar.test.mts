@@ -70,3 +70,52 @@ test('dated RGB maps intersect all component footprints and preserve the shared 
   assert.equal(result.assets.length,5);
  }finally{await rm(root,{recursive:true,force:true});}
 });
+
+test('a published mask decides what an RGB map shows, and the map keeps its date control',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'observed-masked-'));
+ try{
+  await sharp(Buffer.alloc(2*16*3,120),{raw:{width:2,height:16,channels:3}}).jpeg().toFile(join(root,'map.jpg'));
+  // The publisher's black marks bad data: the top two rows, one pixel of the third and the bottom row.
+  const mask=Buffer.alloc(2*16*3,192);mask.fill(0,0,2*2*3);mask.fill(0,4*3,5*3);mask.fill(0,30*3);
+  await sharp(mask,{raw:{width:2,height:16,channels:3}}).png().toFile(join(root,'mask.png'));
+  const config=structuredClone(recipe), dated=config.datasets.find((entry:{operation:string})=>entry.operation==='rgb-observed-gaps');
+  const dataset={id:dated.id,operation:'rgb-published-mask',source:'map.jpg',coverageMask:'mask.png',planetographicAxisRatio:1,files:dated.files,control:dated.control,projection:dated.projection};
+  config.datasets=[dataset];config.dimensions={width:32,height:16,polarTileSize:16};
+  config.packing={latitudeBoundsDegrees:[-80,-40,0,40,80],gutter:2};
+  const result=await prepareObservedPolarSurfaces({sourceDirectory:root,publicDirectory:root,config});
+  assert.equal(result.coverage[dataset.id].sourceMissingPixels,7);
+  assert.equal(result.coverage[dataset.id].firstMeasuredRow,2);assert.equal(result.coverage[dataset.id].lastMeasuredRow,14);
+  assert.deepEqual(result.datasets.controls[0].step,dataset.control.step);
+  assert.equal(result.assets.length,5);
+  await sharp(Buffer.alloc(4*16*3,192),{raw:{width:4,height:16,channels:3}}).png().toFile(join(root,'mask.png'));
+  await assert.rejects(prepareObservedPolarSurfaces({sourceDirectory:root,publicDirectory:root,config}),/differ in size/);
+  assert.throws(()=>parseObservedPolarRecipe({...config,datasets:[{...dataset,planetographicAxisRatio:.9}]}),/ellipsoid ratio/);
+ }finally{await rm(root,{recursive:true,force:true});}
+});
+
+test('a measured-rows map with an ellipsoid ratio is resampled from planetographic rows to the mesh latitude',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'observed-rows-'));
+ try{
+  // One degree per row: rows 10 to 169 are measured, and row 44 (45.5 degrees north, planetographic) is a bright belt.
+  const width=4,height=180,pixels=Buffer.alloc(width*height*3);
+  for(let row=10;row<170;row++)pixels.fill(row===44?250:100,row*width*3,(row+1)*width*3);
+  await sharp(pixels,{raw:{width,height,channels:3}}).png().toFile(join(root,'map.png'));
+  const config=structuredClone(recipe), measured=config.datasets.find((entry:{operation:string})=>entry.operation==='rgb-measured-rows');
+  const dataset={...measured,source:'map.png',coverage:{columnStride:1,minimumMean:3,firstMeasuredRow:10,lastMeasuredRow:169}};
+  delete dataset.planetographicAxisRatio;
+  config.dimensions={width:32,height:180,polarTileSize:16};config.packing={latitudeBoundsDegrees:[-80,-40,0,40,80],gutter:2};
+  const belt=async(entry:Record<string,unknown>)=>{
+   const result=await prepareObservedPolarSurfaces({sourceDirectory:root,publicDirectory:root,config:{...config,datasets:[entry]}});
+   const map=result.maps.get(dataset.id)!;let brightest=0;
+   for(let row=0;row<map.height;row++)if(map.data[row*map.width*map.channels]!>map.data[brightest*map.width*map.channels]!)brightest=row;
+   return {row:brightest,degreesNorth:90-(brightest+.5)*180/map.height,coverage:result.coverage[dataset.id]};
+  };
+  const asPublished=await belt(dataset), onMesh=await belt({...dataset,planetographicAxisRatio:1.0693750560923805});
+  // tan(mesh latitude) = tan(planetographic latitude) / (a / b): 45.5 degrees becomes 43.58.
+  assert.ok(Math.abs(asPublished.degreesNorth-45.5)<=.5,`as published the belt is at ${asPublished.degreesNorth}`);
+  assert.ok(Math.abs(onMesh.degreesNorth-43.58)<=.5,`on the mesh the belt is at ${onMesh.degreesNorth}`);
+  assert.deepEqual([asPublished.coverage.firstMeasuredRow,asPublished.coverage.lastMeasuredRow],[10,169]);
+  assert.ok(Number(onMesh.coverage.firstMeasuredRow)>10&&Number(onMesh.coverage.lastMeasuredRow)<169);
+  assert.throws(()=>parseObservedPolarRecipe({...config,datasets:[{...dataset,planetographicAxisRatio:.9}]}),/at least 1/);
+ }finally{await rm(root,{recursive:true,force:true});}
+});

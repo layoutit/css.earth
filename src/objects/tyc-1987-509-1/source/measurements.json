@@ -28,6 +28,9 @@
   ],
   "projectedRotationSpeedKmS": 4.88,
   "projectedRotationSpeedSource": "SIMBAD, BD+29 2215: projected rotation speed 4.88 km/s, the measurement SIMBAD prefers (2018MNRAS.474.4956F)",
+  "rotationPeriodMeasuredDays": 9.04,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curve of sector 22 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 9.04 d, the light swinging by 0.83% as the star turns (the light repeats every 4.52 d, half the catalogued rotation period, and the star is taken to turn once in two of them)",
+  "rotationLightSwingPercent": 0.83,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

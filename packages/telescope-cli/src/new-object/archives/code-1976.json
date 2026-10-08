@@ -1,0 +1,340 @@
+{
+  "schema": "cssearth-code-1976-program-stars@1",
+  "source": {
+    "credit": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417",
+    "url": "https://doi.org/10.1086/154093",
+    "locator": "Table 1 (page 418): HR, HD, name, MK type and the limb-darkened angular diameter with its error. Table 6 (page 429): effective temperature with its error; an asterisk there marks the primary component of a multiple star.",
+    "read": "Typed on 2026-10-06 from the page images the NASA Astrophysics Data System serves of the journal (articles.adsabs.harvard.edu); no machine-readable copy of the tables exists. Each diameter is checked against the JMDC row of Hanbury Brown, Davis & Allen (1974) when a star is drafted.",
+    "diameters": {
+      "credit": "Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121",
+      "url": "https://doi.org/10.1093/mnras/167.1.121"
+    }
+  },
+  "stars": [
+    {
+      "hr": 472,
+      "hd": 10144,
+      "name": "alf Eri",
+      "mk": "B3 Vp",
+      "diameterMas": 1.92,
+      "diameterErrorMas": 0.07,
+      "teffK": 14510,
+      "teffErrorK": 390
+    },
+    {
+      "hr": 1713,
+      "hd": 34085,
+      "name": "bet Ori",
+      "mk": "B8 Ia",
+      "diameterMas": 2.55,
+      "diameterErrorMas": 0.05,
+      "teffK": 11550,
+      "teffErrorK": 170
+    },
+    {
+      "hr": 1790,
+      "hd": 35468,
+      "name": "gam Ori",
+      "mk": "B2 III",
+      "diameterMas": 0.72,
+      "diameterErrorMas": 0.04,
+      "teffK": 21580,
+      "teffErrorK": 790
+    },
+    {
+      "hr": 1903,
+      "hd": 37128,
+      "name": "eps Ori",
+      "mk": "B0 Ia",
+      "diameterMas": 0.69,
+      "diameterErrorMas": 0.04,
+      "teffK": 24820,
+      "teffErrorK": 920
+    },
+    {
+      "hr": 1948,
+      "hd": 37742,
+      "name": "zet Ori",
+      "mk": "O9.5 Ib",
+      "diameterMas": 0.48,
+      "diameterErrorMas": 0.04,
+      "teffK": 29910,
+      "teffErrorK": 2110,
+      "primaryComponent": true
+    },
+    {
+      "hr": 2004,
+      "hd": 38771,
+      "name": "kap Ori",
+      "mk": "B0.5 Ia",
+      "diameterMas": 0.45,
+      "diameterErrorMas": 0.03,
+      "teffK": 26390,
+      "teffErrorK": 1270
+    },
+    {
+      "hr": 2294,
+      "hd": 44743,
+      "name": "bet CMa",
+      "mk": "B1 II-III",
+      "diameterMas": 0.52,
+      "diameterErrorMas": 0.03,
+      "teffK": 25180,
+      "teffErrorK": 1130
+    },
+    {
+      "hr": 2326,
+      "hd": 45348,
+      "name": "alf Car",
+      "mk": "F0 Ib-II",
+      "diameterMas": 6.6,
+      "diameterErrorMas": 0.8,
+      "teffK": 7460,
+      "teffErrorK": 460
+    },
+    {
+      "hr": 2421,
+      "hd": 47105,
+      "name": "gam Gem",
+      "mk": "A0 IV",
+      "diameterMas": 1.39,
+      "diameterErrorMas": 0.09,
+      "teffK": 9260,
+      "teffErrorK": 310
+    },
+    {
+      "hr": 2491,
+      "hd": 48915,
+      "name": "alf CMa",
+      "mk": "A1 V",
+      "diameterMas": 5.89,
+      "diameterErrorMas": 0.16,
+      "teffK": 9970,
+      "teffErrorK": 160
+    },
+    {
+      "hr": 2618,
+      "hd": 52089,
+      "name": "eps CMa",
+      "mk": "B2 II",
+      "diameterMas": 0.8,
+      "diameterErrorMas": 0.05,
+      "teffK": 20990,
+      "teffErrorK": 760
+    },
+    {
+      "hr": 2693,
+      "hd": 54605,
+      "name": "del CMa",
+      "mk": "F8 Ia",
+      "diameterMas": 3.6,
+      "diameterErrorMas": 0.5,
+      "teffK": 6110,
+      "teffErrorK": 430
+    },
+    {
+      "hr": 2827,
+      "hd": 58350,
+      "name": "eta CMa",
+      "mk": "B5 Ia",
+      "diameterMas": 0.75,
+      "diameterErrorMas": 0.06,
+      "teffK": 13310,
+      "teffErrorK": 560
+    },
+    {
+      "hr": 2943,
+      "hd": 61421,
+      "name": "alf CMi",
+      "mk": "F5 IV-V",
+      "diameterMas": 5.5,
+      "diameterErrorMas": 0.17,
+      "teffK": 6510,
+      "teffErrorK": 130
+    },
+    {
+      "hr": 3165,
+      "hd": 66811,
+      "name": "zet Pup",
+      "mk": "O5f",
+      "diameterMas": 0.42,
+      "diameterErrorMas": 0.03,
+      "teffK": 32510,
+      "teffErrorK": 1930
+    },
+    {
+      "hr": 3207,
+      "hd": 68273,
+      "name": "gam02 Vel",
+      "mk": "WC8 + O9I",
+      "diameterMas": 0.44,
+      "diameterErrorMas": 0.05,
+      "teffK": 32510,
+      "teffErrorK": 2520,
+      "primaryComponent": true
+    },
+    {
+      "hr": 3685,
+      "hd": 80007,
+      "name": "bet Car",
+      "mk": "A1 IV",
+      "diameterMas": 1.59,
+      "diameterErrorMas": 0.07,
+      "teffK": 9240,
+      "teffErrorK": 220
+    },
+    {
+      "hr": 3982,
+      "hd": 87901,
+      "name": "alf Leo",
+      "mk": "B7 V",
+      "diameterMas": 1.37,
+      "diameterErrorMas": 0.06,
+      "teffK": 12210,
+      "teffErrorK": 310
+    },
+    {
+      "hr": 4534,
+      "hd": 102647,
+      "name": "bet Leo",
+      "mk": "A3 V",
+      "diameterMas": 1.33,
+      "diameterErrorMas": 0.1,
+      "teffK": 8850,
+      "teffErrorK": 340
+    },
+    {
+      "hr": 4662,
+      "hd": 106625,
+      "name": "gam Crv",
+      "mk": "B8 III",
+      "diameterMas": 0.75,
+      "diameterErrorMas": 0.06,
+      "teffK": 12450,
+      "teffErrorK": 530
+    },
+    {
+      "hr": 4853,
+      "hd": 111123,
+      "name": "bet Cru",
+      "mk": "B0.5 III",
+      "diameterMas": 0.722,
+      "diameterErrorMas": 0.023,
+      "teffK": 27600,
+      "teffErrorK": 1110,
+      "primaryComponent": true
+    },
+    {
+      "hr": 5056,
+      "hd": 116658,
+      "name": "alf Vir",
+      "mk": "B1 IV",
+      "diameterMas": 0.87,
+      "diameterErrorMas": 0.04,
+      "teffK": 23930,
+      "teffErrorK": 840,
+      "primaryComponent": true
+    },
+    {
+      "hr": 5132,
+      "hd": 118716,
+      "name": "eps Cen",
+      "mk": "B1 III",
+      "diameterMas": 0.48,
+      "diameterErrorMas": 0.03,
+      "teffK": 25740,
+      "teffErrorK": 1190
+    },
+    {
+      "hr": 5953,
+      "hd": 143275,
+      "name": "del Sco",
+      "mk": "B0.5 IV",
+      "diameterMas": 0.46,
+      "diameterErrorMas": 0.04,
+      "teffK": 31460,
+      "teffErrorK": 1970,
+      "primaryComponent": true
+    },
+    {
+      "hr": 6175,
+      "hd": 149757,
+      "name": "zet Oph",
+      "mk": "O9.5 V",
+      "diameterMas": 0.51,
+      "diameterErrorMas": 0.05,
+      "teffK": 31910,
+      "teffErrorK": 2040
+    },
+    {
+      "hr": 6556,
+      "hd": 159561,
+      "name": "alf Oph",
+      "mk": "A5 III",
+      "diameterMas": 1.63,
+      "diameterErrorMas": 0.13,
+      "teffK": 8020,
+      "teffErrorK": 330
+    },
+    {
+      "hr": 6879,
+      "hd": 169022,
+      "name": "eps Sgr",
+      "mk": "A0 V",
+      "diameterMas": 1.44,
+      "diameterErrorMas": 0.06,
+      "teffK": 9460,
+      "teffErrorK": 220
+    },
+    {
+      "hr": 7001,
+      "hd": 172167,
+      "name": "alf Lyr",
+      "mk": "A0 V",
+      "diameterMas": 3.24,
+      "diameterErrorMas": 0.07,
+      "teffK": 9660,
+      "teffErrorK": 140
+    },
+    {
+      "hr": 7557,
+      "hd": 187642,
+      "name": "alf Aql",
+      "mk": "A7 IV,V",
+      "diameterMas": 2.98,
+      "diameterErrorMas": 0.14,
+      "teffK": 8010,
+      "teffErrorK": 210
+    },
+    {
+      "hr": 7790,
+      "hd": 193924,
+      "name": "alf Pav",
+      "mk": "B2.5 V",
+      "diameterMas": 0.8,
+      "diameterErrorMas": 0.05,
+      "teffK": 17880,
+      "teffErrorK": 680
+    },
+    {
+      "hr": 8425,
+      "hd": 209952,
+      "name": "alf Gru",
+      "mk": "B7 IV",
+      "diameterMas": 1.02,
+      "diameterErrorMas": 0.07,
+      "teffK": 14050,
+      "teffErrorK": 540
+    },
+    {
+      "hr": 8728,
+      "hd": 216956,
+      "name": "alf PsA",
+      "mk": "A3 V",
+      "diameterMas": 2.1,
+      "diameterErrorMas": 0.14,
+      "teffK": 8800,
+      "teffErrorK": 300
+    }
+  ]
+}

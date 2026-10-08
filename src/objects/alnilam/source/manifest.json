@@ -1,0 +1,350 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [
+    {
+      "id": "alnilam-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://doi.org/10.1086/154093",
+      "credit": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "alnilam-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "datasets"
+      ]
+    },
+    {
+      "id": "alnilam-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "alnilam-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "alnilam-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "alnilam-kharitonov",
+      "path": "photometry/kharitonov-catalog.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+      "credit": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars, Alma-Ata; VizieR III/202 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Raw catalogue file catalog.dat downloaded unchanged from the CDS archive; restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, unchanged, with citation",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-202-kharitonov-381",
+            "role": "material",
+            "evidence": "src/objects/alnilam/source/photometry/kharitonov-catalog.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alnilam-crosscheck-spectrum",
+      "path": "photometry/crosscheck-III_126_part2.dat.gz",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+      "credit": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file part2.dat.gz downloaded unchanged from the CDS archive; restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, unchanged, with citation",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-126-burnashev-66",
+            "role": "material",
+            "evidence": "src/objects/alnilam/source/photometry/crosscheck-III_126_part2.dat.gz"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alnilam-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+      "credit": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars, Alma-Ata; VizieR III/202 (CDS); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the color computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-202-kharitonov-381",
+            "role": "material",
+            "evidence": "src/objects/alnilam/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alnilam-howarth-2011-t24000g28",
+      "path": "photometry/howarth-2011/t24000g28.ucE",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/413/1515/A10/P00v02r/t24000g28.ucE",
+      "credit": "Howarth (2011), MNRAS 413, 1515 (VizieR J/MNRAS/413/1515)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Download of the A10/P00v02r model's energy-integrating (ucE) coefficient file from the CDS archive, retained unchanged.",
+      "redistribution": "Catalogue file retained unchanged with its citation.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-alnilam-howarth-2011-t24000g28",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "alnilam-howarth-2011-t24000g30",
+      "path": "photometry/howarth-2011/t24000g30.ucE",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/413/1515/A10/P00v02r/t24000g30.ucE",
+      "credit": "Howarth (2011), MNRAS 413, 1515 (VizieR J/MNRAS/413/1515)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Download of the A10/P00v02r model's energy-integrating (ucE) coefficient file from the CDS archive, retained unchanged.",
+      "redistribution": "Catalogue file retained unchanged with its citation.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-alnilam-howarth-2011-t24000g30",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "alnilam-howarth-2011-t25000g28",
+      "path": "photometry/howarth-2011/t25000g28.ucE",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/413/1515/A10/P00v02r/t25000g28.ucE",
+      "credit": "Howarth (2011), MNRAS 413, 1515 (VizieR J/MNRAS/413/1515)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Download of the A10/P00v02r model's energy-integrating (ucE) coefficient file from the CDS archive, retained unchanged.",
+      "redistribution": "Catalogue file retained unchanged with its citation.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-alnilam-howarth-2011-t25000g28",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "alnilam-howarth-2011-t25000g30",
+      "path": "photometry/howarth-2011/t25000g30.ucE",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/413/1515/A10/P00v02r/t25000g30.ucE",
+      "credit": "Howarth (2011), MNRAS 413, 1515 (VizieR J/MNRAS/413/1515)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Download of the A10/P00v02r model's energy-integrating (ucE) coefficient file from the CDS archive, retained unchanged.",
+      "redistribution": "Catalogue file retained unchanged with its citation.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-alnilam-howarth-2011-t25000g30",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "alnilam-catalogue-row",
+      "path": "photometry/catalogue-row.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry; VizieR V/137D/XHIP (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV query in source/preparation/acquisition.json: V/137D/XHIP row HIP = 26311, every column, with the response's dated comment lines and blank lines removed so the bytes are stable.",
+      "redistribution": "One catalogue row, retained unchanged with its credit.",
+      "consumers": [
+        "placement"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-alnilam-catalogue-row",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "limb-darkened-disc-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its model law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+        "inputs": [
+          "alnilam-stellar-color",
+          "alnilam-kharitonov",
+          "alnilam-howarth-2011-t24000g28",
+          "alnilam-howarth-2011-t24000g30",
+          "alnilam-howarth-2011-t25000g28",
+          "alnilam-howarth-2011-t25000g30",
+          "alnilam-preparation-raster"
+        ]
+      },
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The color dataset rendered as a disc with its limb darkening; `context-markers.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/new-object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
+      }
+    }
+  ]
+}

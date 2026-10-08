@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "alnilam",
+  "angularDiameterMas": 0.69,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 31,306,500 km at 606.06 pc = 0.69 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 606.061,
+  "distanceSource": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 26311: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 1.65 +/- 0.45 mas, inverted (https://doi.org/10.1134/S1063773712050015): 606.061 +/- 165.289 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 31306500,
+  "radiusSource": "Radius 45 +/- 13 solar radii from Computed here, not printed by a paper: 45 +/- 13 solar radii, from the limb-darkened angular diameter 0.69 +/- 0.04 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 1.65 +/- 0.45 mas (van Leeuwen 2007, XHIP) (https://doi.org/10.1093/mnras/167.1.121): 31,306,500 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 24820 +/- 920 K from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 37128: effective temperature 24820 +/- 920 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 24820,
+  "effectiveTemperatureSource": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 37128: effective temperature 24820 +/- 920 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093)",
+  "surfaceGravityLogg": 2.89,
+  "surfaceGravitySource": "log g 2.89 from 2024A&A...687A.228D; the 3 published values span log g 2.85 to 3, across which the limb law changes by at most 2.3% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2024A%26A...687A.228D)",
+  "spectralType": "B0Ia",
+  "spectralTypeSource": "SIMBAD, * eps Ori: spectral type B0Ia (2024A&A...690A.176N)",
+  "objectType": "Blue Supergiant",
+  "objectTypePath": "* > Ma* > sg* > s*b",
+  "objectTypeSource": "SIMBAD, * eps Ori: main object type s*b, Blue Supergiant",
+  "projectedRotationSpeedKmS": 52,
+  "projectedRotationSpeedSource": "SIMBAD, * eps Ori: projected rotation speed 52 km/s, the measurement SIMBAD prefers (2024A&A...687A.228D)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 381) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

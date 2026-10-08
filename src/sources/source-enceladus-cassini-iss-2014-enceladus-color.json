@@ -1,0 +1,35 @@
+{
+  "id": "source-enceladus-cassini-iss-2014-enceladus-color",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Enceladus · cassini iss 2014 enceladus color",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://d2pn8kiwq2w21t.cloudfront.net/original_images/jpegPIA18435.jpg",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/enceladus/source/manifest.json",
+      "locator": "/inputs/23"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; Paul Schenk",
+      "scope": "The cassini iss 2014 enceladus color input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA/JPL imagery with attribution",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -22,6 +22,7 @@ ESA/Hubble's photograph of the Helix Nebula, laid on the two tilted rings the ne
 - **Stars:** the bake removes the stars Gaia lists in the field where they show: 55 of the 1,027 in the picture. Another 58 stand in extended light and stay, and the rest are too faint for it to find. The central star stays. [NOX](../../../labs/nebula/docs/star-removal.md), which the other nebula photographs use, took the cometary knots with the stars on a 1,500 px crop of the inner ring, so it is not used here.
 - **Opacity:** a bank's opacity follows the picture's brightness, so the picture's grain is in the opacity, which WebP stores exactly. On these sheets the opacity is a smooth cover over the brightness and the color darkens to make up the difference: over black the picture is the same, and its detail is in the color. Points of light, stars and the heads of knots, keep their own opacity, so no sky is darkened around them.
 - **Size:** the picture inside a circle of 770″ about the star, 1.6 pc across at 216 pc, fading out over its last 7%; drawn 4,096 px on its long side, 0.43″ per pixel. The page frames the nebula at that radius ([solar-system.json](../helix/source/presentation/solar-system.json)).
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/helix-layers backing` again. From afar the Helix is drawn by one of its banks at a time: the bank of its selected dataset, or this bank while none is selected. The others draw nothing there, so two far images of the same nebula never overlap.
 
 ## Evidence
 
@@ -39,6 +40,7 @@ The rings' directions were checked against velocities the paper did not have: [Z
 
 ## Known problems
 
+- The far picture holds only the flat slices' light: the walls' patches are left out, as they were from the billboard it replaced, so from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - The depth is one printed figure for the whole main ring, used for both rings and for the outer arcs. The paper calls the outer ring a torus and gives no size for its section; the bell is this bake's.
 - Where in a ring's depth a knot sits is not measured. All detail is on the plane through the middle of the glow.
 - Which ring holds the light between the two radii is not measured. The share is a convention, and a patch drawn on the disc may belong to the ring.

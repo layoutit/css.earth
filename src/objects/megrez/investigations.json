@@ -40,6 +40,15 @@
         "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
         "https://ui.adsabs.harvard.edu/abs/2024A%26A...681A.107R"
       ]
+    },
+    {
+      "id": "shape",
+      "subject": "Shape and pole",
+      "status": "included",
+      "finding": "A Roche surface flattened by rotation, 2.511 solar radii at the equator and 1.893 at the poles, its pole 50 degrees from the line of sight at position angle 50.9 degrees, and gravity darkened with exponent 0.17 from a 9,550 K pole: Jones et al. (2015), ApJ 813, 58 (https://doi.org/10.1088/0004-637X/813/1/58).",
+      "evidence": [
+        "https://doi.org/10.1088/0004-637X/813/1/58"
+      ]
     }
   ]
 }

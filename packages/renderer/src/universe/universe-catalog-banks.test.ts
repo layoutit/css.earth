@@ -50,6 +50,38 @@ test('a galaxy drawn from image layers shows its billboard from afar and hands i
   assert.equal((billboard.style.display === 'none' || Number(billboard.style.opacity) === 0), true, 'its loaded slices replace the billboard');
 });
 
+test('on a flight to a body inside it a galaxy gives way as it comes to fill the view, and a bank on walls stays', async () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime(), page = {};
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+    declarations: [{ id: 'galaxy', frame }, { id: 'walls', frame, surrounds: true, host: 'nebula' }],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async id => ({ payload: { id, frame } }) as never, billboards: { plan, imageUrl: id => `/billboards/${id}.webp` } });
+  const billboard = root.querySelector<HTMLElement>('[data-dataset-billboard="galaxy"]')!;
+  const look = (id: string) => { const node = root.querySelector<HTMLElement>(`[data-image-layer-object="${id}"]`)!; return node.style.display === 'none' ? 0 : Number(node.style.opacity); };
+  // `flight`: a flight's destination is inside the detailed bank, whose dots then draw around it.
+  const publish = (detailed: string, distance: number, flight = false) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 },
+  1, detailed, flight ? { objectId: detailed, opacity: 1 } : undefined, [], undefined, undefined, page);
+  assert.deepEqual([banks.imageBankHolds('galaxy', [0, 1, 1]), banks.imageBankHolds('galaxy', [0, 0, 2])], [true, false], 'the framing sphere of these bounds has a radius of √3');
+  publish('galaxy', 10);
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
+  publish('galaxy', 1);
+  assert.equal(look('galaxy'), .999, 'on its own page the galaxy is drawn from inside too');
+  publish('galaxy', 10, true);
+  assert.equal(look('galaxy'), .999, 'the flight starts far out: nothing changes');
+  publish('galaxy', 1.5 * Math.sqrt(3) * 1.25 ** .25, true);
+  assert.ok(Math.abs(look('galaxy') - .25) < 1e-9, `a quarter of the way out of where it is gone it has a quarter of its strength, not ${look('galaxy')}`);
+  assert.equal(billboard.style.display === 'none' || Number(billboard.style.opacity) === 0, true, 'and its billboard does not take its place');
+  publish('galaxy', 1.5 * Math.sqrt(3), true);
+  assert.equal(look('galaxy'), 0, 'it is gone at one and a half of its radius, before the camera is inside it');
+  publish('walls', 10);
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '2'));
+  publish('walls', 1, true);
+  assert.equal(look('walls'), .999, 'walls stand around the body flown to');
+  lifetime.destroy();
+});
+
 test("a host's other bank gives its billboard way to the bank selected for that host, and another host's billboard stays", async () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime(), billboard = { radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] };
@@ -253,4 +285,42 @@ test('a package of catalogue dots declared after mount draws while its host is s
   assert.equal(root.querySelectorAll('[data-catalogue-points]').length, 1, 'mounted once, drawn for a body of its host');
   lifetime.destroy();
   assert.equal(root.querySelector('[data-catalogue-points]'), null);
+});
+
+test('a nebula with a backing is drawn from afar on that one fixed plane, never on a billboard, and hands it to its slices', async () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const style = { width: '256px', height: '256px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,-128,-128,0,1)', backgroundSize: '256px 256px', backgroundPosition: '0px 0px' };
+  const backed = parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@2', imagePx: 256, banks: [{ id: 'nebula', contextVisibility: 'galactic', attached: false, backing: true }] });
+  const loads: string[] = [];
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [{ id: 'nebula', frame }],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async () => ({ payload: { id: 'nebula', frame } }) as never, billboards: { plan: backed, imageUrl: id => `/billboards/${id}.webp` },
+    loadBacking: async id => { loads.push(id); return { payload: { id: 'backing', frame, leaf: { texturePath: 'backing/backing.webp', style } }, resolveResource: path => `/${path}` }; } });
+  const viewport = { focalPixels: 1000, principalOffsetPixels: [0, 0] as [number, number], widthPixels: 400, heightPixels: 300 };
+  const publish = (positionM: [number, number, number], orientationXyzw: [number, number, number, number], detailed?: string) =>
+    banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM, orientationXyzw } }, viewport, 1, detailed);
+  const front = (detailed?: string) => publish([0, 0, 10], [0, 0, 0, 1], detailed), side = () => publish([10, 0, 0], [0, Math.SQRT1_2, 0, Math.SQRT1_2]);
+  front();
+  await waitFor(() => assert.deepEqual(loads, ['nebula'], 'read the first time it shows from afar'));
+  front();
+  assert.equal(root.querySelector('[data-dataset-billboard]'), null, 'no camera-facing billboard');
+  const plane = root.querySelector<HTMLElement>('.prepared-galaxy-backing > [data-galaxy-backing="nebula"]')!;
+  const image = plane.querySelector('img')!, scene = plane.querySelector<HTMLElement>('.css-volume-scene')!;
+  assert.equal(plane.querySelectorAll('*').length + 1, 5, 'projection, camera, scene, mesh and one image');
+  const shown = () => plane.style.display !== 'none' && Number(plane.style.opacity) > 0;
+  assert.equal(shown(), true);
+  assert.equal(image.getAttribute('src'), '/backing/backing.webp');
+  // Orbiting turns the scene, the plane's one transform for the camera; the image stays where the bake laid it.
+  const facing = scene.style.transform;
+  side();
+  assert.equal(image.style.transform, style.transform, 'the plane is fixed in the bank\'s frame');
+  assert.notEqual(scene.style.transform, facing, 'the camera moved around it');
+  // Selected and loaded, its slices replace the plane.
+  front('nebula');
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
+  front('nebula');
+  assert.equal(shown(), false, 'its loaded slices replace the plane');
+  lifetime.destroy();
+  assert.equal(root.querySelector('.prepared-galaxy-backing'), null, 'the scene takes its plane with it');
 });

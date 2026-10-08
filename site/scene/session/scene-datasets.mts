@@ -69,6 +69,17 @@ export function createDatasetEffects(session: SceneSession, getWorld: () => Comp
   };
 }
 
+/** The bank shown by the dataset `selectSceneDataset` will select for a session on arrival, if it shows one: its link's
+ * dataset, or its default one, which a link naming no dataset of the scene falls back to. */
+export function sceneDatasetVolume(session: Pick<SceneSession, 'objectId' | 'mount' | 'url'>): DatasetVolume | null {
+  const datasets = session.mount?.datasets;
+  if (!datasets) return null;
+  let asked: string | null = null;
+  // A malformed link is reported when the dataset is selected.
+  try { if (session.url) asked = readSceneDatasetUrl(new URL(session.url), session.objectId).id; } catch { asked = null; }
+  return datasets.volumeOf(asked !== null && datasets.ids.includes(asked) ? asked : datasets.defaultId);
+}
+
 export function selectSceneDataset(session: Pick<SceneSession, 'objectId' | 'mount' | 'shell'>, href: string, signal: AbortSignal, { initial = false } = {}): boolean | Promise<boolean> {
   const { id, requested } = readSceneDatasetUrl(new URL(href), session.objectId);
   const datasets = session.mount?.datasets;

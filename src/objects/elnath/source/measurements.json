@@ -18,6 +18,9 @@
   "objectTypeSource": "SIMBAD, * bet Tau: main object type PM*, High Proper Motion Star",
   "projectedRotationSpeedKmS": 60,
   "projectedRotationSpeedSource": "SIMBAD, * bet Tau: projected rotation speed 60 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "rotationPeriodMeasuredDays": 2.76,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 43, 44, 45 and 71 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 2.76 d, the light swinging by 0.09% as the star turns",
+  "rotationLightSwingPercent": 0.09,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."

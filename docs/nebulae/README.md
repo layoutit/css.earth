@@ -1,18 +1,17 @@
 # Prepared nebulae in the shared world
 
-M42, Helix, M2–9, Pleiades, Crab and Lagoon use the retained `volume-dataset-bank` capability, shared camera, focus card and source controls. Each has its page, `/m45/`, `/m1/`, `/m8/`, `/m42/`, `/helix/` and `/m2-9/`: the shared world with the nebula selected and its card open. Search by common name or catalogue alias (Orion/M42/NGC 1976, Helix/NGC 7293, Twin Jet/M2–9, Pleiades/M45/Seven Sisters, Crab/M1/NGC 1952, Lagoon/M8/NGC 6523), or browse the Nebulae category.
+M42, M2–9, Pleiades, Crab and Lagoon use the retained `volume-dataset-bank` capability, shared camera, focus card and source controls. Each has its page, `/m45/`, `/m1/`, `/m8/`, `/m42/` and `/m2-9/`: the shared world with the nebula selected and its card open. Search by common name or catalogue alias (Orion/M42/NGC 1976, Twin Jet/M2–9, Pleiades/M45/Seven Sisters, Crab/M1/NGC 1952, Lagoon/M8/NGC 6523), or browse the Nebulae category.
 
 | Object | Method | Datasets | Adopted distance |
 | --- | --- | --- | --- |
 | [M42](../../src/objects/m42-volume/README.md) | Image emission with an evidence-guided coherent depth surface | ESO optical and VISTA infrared | 414 ± 7 pc |
-| [Helix](../../src/objects/helix-volume/README.md) | Multi-image emission with a molecular velocity scaffold | ESO WFI optical, VISTA infrared, wide optical | 216 −12/+14 pc |
 | [M2–9](../../src/objects/m2-9-volume/README.md) | Axially symmetric image-conditioned emission | Hubble optical | 650 pc, uncertain |
 | [Pleiades · M45](../../src/objects/m45-volume/README.md) | Authored finite dust-display surface and observed stellar catalogue | NOIRLab + Niittee optical composite, NOIRLab optical, two Spitzer composites, WISE | 136.2 ± 1.2 pc |
 | [Crab · M1](../../src/objects/m1-volume/README.md) | Released SITELLE ejecta samples with conditional expansion depth and separate pulsar-wind components | Hubble, two Webb views, Spitzer, VLA, Chandra | 2,000 pc adopted model scale |
 | [Lagoon · M8](../../src/objects/m8-volume/README.md) | Authored coherent front with local published structure constraints | ESO optical, VISTA infrared, Spitzer infrared | 1,326 −69/+77 pc |
 | [LMC](../../src/objects/lmc-volume/README.md) | Registered image colors on a simulated stellar-density prior | VISTA infrared, Horálek visible light, WISE infrared | The Local Group catalogue owns its distance |
 
-These are relative display emission models, not measured 3D gas density. The six Galactic nebulae use [surrounding Gaia/Bailer-Jones stellar fields](stellar-fields.md), independent of source-image boundaries. Each body README distinguishes its model limits from app integration.
+These are relative display emission models, not measured 3D gas density. The five Galactic nebulae use [surrounding Gaia/Bailer-Jones stellar fields](stellar-fields.md), independent of source-image boundaries. Each body README distinguishes its model limits from app integration. The Helix Nebula left this route on 2026-10-07: its four photographs lie on the nebula's two published rings as [image layers](../../src/objects/helix-layers/README.md).
 
 ## Reproduce from a clean checkout
 
@@ -25,18 +24,18 @@ pnpm prepare:nebulae
 pnpm dev
 ```
 
-`pnpm prepare:nebulae` enters through `packages/bake/cli/prepare-nebulae.mts` and the nebula delivery bake in [`@cssearth/bake/nebula`](../../packages/bake/README.md), with the volume bake in `@cssearth/bake/volume/node`. It handles all 23 configured datasets and regenerates their dataset cards and the shared source/telescope graphs. A successful replay is not an independent visual or scientific acceptance.
+`pnpm prepare:nebulae` enters through `packages/bake/cli/prepare-nebulae.mts` and the nebula delivery bake in [`@cssearth/bake/nebula`](../../packages/bake/README.md), with the volume bake in `@cssearth/bake/volume/node`. It handles all 20 configured datasets and regenerates their dataset cards and the shared source/telescope graphs. A successful replay is not an independent visual or scientific acceptance.
 
 Source recipes, provenance, requests, compact bake inputs and small object descriptors are committed. Everything under each object's `prepared/`, native caches and intermediate results are ignored. Runtime consumes prepared geometry and pixels only.
 
 `pnpm dev` does not run the full nebula preparation. Startup checks each volume's bank, textures, previews and presentation; missing or invalid packages show an unavailable 3D view with their catalogue facts. Production builds require all configured packages, including when invoking `astro build` directly.
 
-To restore one of the six Galactic nebulae:
+To restore one of the five Galactic nebulae:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:preparation
-node packages/bake/cli/prepare-nebulae.mts --object=helix --if-missing
+node packages/bake/cli/prepare-nebulae.mts --object=m42-volume --if-missing
 node site/build/prepare/catalog/prepare-facilities.mts --catalog-only
 ```
 
@@ -47,7 +46,6 @@ Restart the development server after restoration; available banks are selected o
 | Object | Every dataset rebuilt by the command |
 | --- | --- |
 | M42 | `eso-optical`, `eso-vista` |
-| Helix | `eso-vista`, `eso-wfi`, `eso-wide` |
 | M2–9 | `hst-optical` |
 | M45 | `optical-composite`, `noirlab-optical`, `spitzer-irac`, `spitzer-irac-mips`, `wise-four-band` |
 | M1 | `hubble-optical`, `webb-infrared`, `webb-components`, `spitzer-infrared`, `vla-radio`, `chandra-xray` |
@@ -96,7 +94,7 @@ Each slab is cropped to its emission, so decoded atlas size follows how much of 
 
 The ordinary bake begins after scientific fitting and material assignment:
 
-- Orion, Helix, Pleiades and Lagoon retain analytic emission components, per-component colors, stars and integration settings.
+- Orion, Pleiades and Lagoon retain analytic emission components, per-component colors, stars and integration settings.
 - Crab retains its sampled/model material inputs.
 - M2–9 retains three compressed RGB emission grids.
 - LMC retains the small density grid and three registered starless RGB material planes.

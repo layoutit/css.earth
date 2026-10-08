@@ -872,7 +872,7 @@ test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one r
   const { physicalValues } = await import('./generate.mts'), values = physicalValues(measured, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false });
   assert.deepEqual([values.gm, values.logg], [0, 1.2]);
   assert.match(values.massText, /No mass is measured, so GM is 0/u);
-  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'hipparcos', 'iau', 'chara', 'npoi', 'sh0es', 'm31cepheids', 'm33cepheids', 'table', 'esa', 'magnetic', 'spectra', 'pixels']);
+  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'hipparcos', 'iau', 'chara', 'npoi', 'benchmark', 'narrabri', 'sh0es', 'm31cepheids', 'm33cepheids', 'table', 'esa', 'magnetic', 'spectra', 'pixels', 'pulsation']);
   await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids, --from-k2, --from-tess, --from-gaia/u);
 });
 
@@ -891,12 +891,12 @@ test('a CHARA row drafts a named star with its measured radius and temperature, 
     '102870\tF8.5IV-V  \t 91.50\t 0.22\t 1.431\t 0.006\t 1.681\t 0.008\t6132\t 26\t 1.324\t 0.005',
     '185144\tG9V       \t173.77\t 0.18\t 1.254\t 0.012\t 0.776\t 0.008\t5255\t 31\t      \t      '].join('\n');
   const named = draftFromChara(parseCharaRow(rows, '102870'), ['HD 102870', 'NAME Zavijava', '* bet Vir']);
-  assert.deepEqual([named.id, named.name, named.target, named.featured, named.aliases, named.radius.value, named.temperature.value], ['zavijava', 'Zavijava', 'HD 102870', true, ['HD 102870'], 1.681, 6132]);
+  assert.deepEqual([named.id, named.name, named.target, 'featured' in named, named.aliases, named.radius.value, named.temperature.value], ['zavijava', 'Zavijava', 'HD 102870', false, ['HD 102870'], 1.681, 6132]);
   assert.deepEqual([named.distance.value, named.distance.uncertainty], [10.929, 0.026], 'placed at the parallax the radius was computed with');
   assert.match(typeof named.mass === 'string' ? '' : named.mass.source, /Yonsei-Yale isochrones.*a model value/u, 'the mass is cited as the model value it is');
   assert.doesNotThrow(() => parseStarSpec(named), 'a CHARA draft is a whole spec');
   const bare = draftFromChara(parseCharaRow(rows, '185144'), ['HD 185144', '*  61 Dra', '* sig Dra']);
-  assert.deepEqual([bare.id, bare.name, bare.mass, bare.featured], ['sigma-draconis', 'Sigma Draconis', 'unmeasured', undefined]);
+  assert.deepEqual([bare.id, bare.name, bare.mass], ['sigma-draconis', 'Sigma Draconis', 'unmeasured']);
   assert.match(bare.description, /^A naked-eye star 5\.8 parsecs away, 78% of the Sun's width/u);
   assert.throws(() => parseCharaRow(rows, '1'), /has 0 rows for HD 1, not one/u);
 });

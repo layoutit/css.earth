@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kaus-australis",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kaus Australis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5391675
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kaus-australis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kaus Australis",
+      "classification": "star",
+      "color": "#bacdff",
+      "distanceAu": 9062544.7,
+      "description": "A star spinning at 99.5% or more of its break-up rate, the highest yet measured in our galaxy.",
+      "systemName": "Kaus Australis system",
+      "aliases": [
+        "HD 169022"
+      ],
+      "order": 5813,
+      "context": {
+        "order": 5810
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        117777675549499060,
+        -1112614124735830700,
+        -765664486399114500
+      ],
+      "presentationToReference": [
+        0.20425570394714743,
+        -0.6580255181775141,
+        -0.7247634268037186,
+        -0.8712988207878888,
+        0.21528291651044543,
+        -0.44101205284254,
+        -0.446226368896651,
+        -0.7215647464267989,
+        0.5293640943767715
+      ],
+      "orbitUpReference": [
+        0.6580255181775141,
+        -0.21528291651044543,
+        0.7215647464267989
+      ],
+      "metersPerUnit": 17392500,
+      "bodyRadiusM": 5391675000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

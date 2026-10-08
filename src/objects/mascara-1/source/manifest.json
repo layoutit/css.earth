@@ -176,6 +176,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "mascara-1-gravity-darkening",
+      "path": "photometry/gravity-darkening.json",
+      "origin": "https://doi.org/10.1051/0004-6361/202141645",
+      "credit": "Hooton et al. (2022), A&A 658, A75",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the authors' LaTeX source (arXiv:2109.05031): Table 5, each cell quoted",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "assets",
+        "datasets",
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Gravity-darkening parameters transcribed in this package with their table cells; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -220,13 +238,6 @@
     },
     {
       "path": "preparation/rotation.json"
-    },
-    {
-      "path": "preparation/new-object.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
-      }
     }
   ]
 }

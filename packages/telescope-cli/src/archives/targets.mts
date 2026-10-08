@@ -42,16 +42,18 @@ export interface NamedShippedObject { readonly id: string; readonly names: reado
  * so). */
 export async function namedShippedObjects(read: (path: string) => Promise<unknown>, repository = REPOSITORY): Promise<NamedShippedObject[]> {
   const ids = await shippedObjectIds(repository);
-  return Promise.all(ids.map(async id => {
-    const body = await read(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`));
-    const names = [id], physical = isRecord(body) && isRecord(body.physical) ? body.physical : undefined;
-    if (physical && typeof physical.name === 'string') names.push(physical.name);
-    // A body with a Horizons code moves on the sky, so it has no place there: the Sun's star record stands for no direction.
-    if (isRecord(body) && isRecord(body.star) && !(typeof physical?.horizonsCode === 'string' && physical.horizonsCode.trim()))
-      return { id, names, position: { raDeg: requireFiniteNumber(body.star.rightAscensionDegrees), decDeg: requireFiniteNumber(body.star.declinationDegrees), radiusDeg: 0.5 / 60 } };
-    const nebula = firstSkyPosition(await read(resolve(repository, 'src/objects', id, 'source/nebula.json')));
-    return nebula ? { id, names, position: { ...nebula, radiusDeg: 1 / 6 } } : { id, names };
-  }));
+  return Promise.all(ids.map(id => namedShippedObject(id, read, repository)));
+}
+/** One object package, read the same way: what a search of a single target needs without reading every body. */
+export async function namedShippedObject(id: string, read: (path: string) => Promise<unknown> = readJsonOrNull, repository = REPOSITORY): Promise<NamedShippedObject> {
+  const body = await read(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`));
+  const names = [id], physical = isRecord(body) && isRecord(body.physical) ? body.physical : undefined;
+  if (physical && typeof physical.name === 'string') names.push(physical.name);
+  // A body with a Horizons code moves on the sky, so it has no place there: the Sun's star record stands for no direction.
+  if (isRecord(body) && isRecord(body.star) && !(typeof physical?.horizonsCode === 'string' && physical.horizonsCode.trim()))
+    return { id, names, position: { raDeg: requireFiniteNumber(body.star.rightAscensionDegrees), decDeg: requireFiniteNumber(body.star.declinationDegrees), radiusDeg: 0.5 / 60 } };
+  const nebula = firstSkyPosition(await read(resolve(repository, 'src/objects', id, 'source/nebula.json')));
+  return nebula ? { id, names, position: { ...nebula, radiusDeg: 1 / 6 } } : { id, names };
 }
 
 /** A JSON file, or null when it does not exist; any other failure is an error. */

@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "kaus-australis",
+  "displayName": "Kaus Australis",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "8.8 solar radii at the equator",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ad630b",
+          "url": "https://doi.org/10.3847/1538-4357/ad630b",
+          "label": "Bailey et al. (2024), ApJ 972, 103",
+          "checked": "2026-10-08",
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "model.equatorialRadiusSolar"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "43.9 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1134-s1063773712050015",
+          "url": "https://doi.org/10.1134/S1063773712050015",
+          "label": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 90185: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 22.76 +/- 0.24 mas, inverted",
+          "checked": "2026-10-08",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "39 hours",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ad630b",
+          "url": "https://doi.org/10.3847/1538-4357/ad630b",
+          "label": "Bailey et al. (2024), ApJ 972, 103",
+          "checked": "2026-10-08",
+          "path": "source/photometry/gravity-darkening.json",
+          "locator": "note"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color from its measured spectrum; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "kaus-australis-dataset-color.webp",
+        "surface": "kaus-australis-surface-color@2x.webp",
+        "poles": "kaus-australis-poles-color@2x.webp",
+        "source": {
+          "id": "kaus-australis-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
+        },
+        "falseColor": false,
+        "notes": "The color of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 9,460 K and log g 3.57 (u1 0.250, u2 0.325): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bailey et al. (2024), ApJ 972, 103",
+      "href": "https://doi.org/10.3847/1538-4357/ad630b"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.3847/1538-4357/ad630b",
+      "credit": "Bailey et al. (2024), ApJ 972, 103"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kaus-australis.json",
+      "credit": "Bailey et al. radius; Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry position; cited distance; measured rotation pole and flattening (Bailey et al. (2024), ApJ 972, 103)"
+    }
+  }
+}

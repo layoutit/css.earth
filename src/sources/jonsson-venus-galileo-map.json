@@ -1,0 +1,50 @@
+{
+  "id": "jonsson-venus-galileo-map",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "A map of Venus from Galileo images, February 1990",
+  "identifiers": [
+    {
+      "type": "Author resource",
+      "value": "https://bjj.mmedia.is/data/venus/venus.jpg"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://bjj.mmedia.is/data/venus/venus.html",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/venus/source/manifest.json",
+      "locator": "/inputs/2"
+    }
+  ],
+  "publisher": "Björn Jónsson",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Björn Jónsson, from NASA/JPL Galileo images",
+      "scope": "The cloud map: 21 Galileo images from the February 1990 Venus flyby, mosaicked, cleaned and colorized by the author.",
+      "evidence": "https://bjj.mmedia.is/data/venus/venus.html"
+    },
+    {
+      "kind": "rights",
+      "text": "Publicly available; no permission needed; credit \"created by Björn Jónsson\". The author asks sites to link to his maps, not to host a copy.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "https://bjj.mmedia.is/data/planetary_maps.html"
+    },
+    {
+      "kind": "limitation",
+      "text": "The map shows features seen in ultraviolet light; the color is added. In visible light Venus is almost white with little contrast.",
+      "scope": "Color and contrast of the cloud map.",
+      "evidence": "https://bjj.mmedia.is/data/venus/venus.html"
+    }
+  ],
+  "creators": [
+    "Björn Jónsson"
+  ]
+}

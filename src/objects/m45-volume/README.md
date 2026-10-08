@@ -18,6 +18,8 @@ The [stellar field](source/stellar-field.json) contains 414 Gaia candidates with
 
 Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
 
+**Far view.** From afar the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and lays each dataset's own Sun-facing impostor view through the frame's centre, across the line of sight from Earth; no image is re-encoded. From Earth the plane shows the view the volume was drawn as, and the hand-over keeps its position, size and orientation. It replaced a camera-facing billboard of the same view, which turned with the camera. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m45-volume backing` again.
+
 ## Evidence
 
 - Recorded app checks cover the delivered composite and catalogue field; report context limits their claims.
@@ -26,6 +28,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 ## Known problems
 
+- From well off the Earth line of sight the far plane is foreshortened, and edge-on it vanishes, while the volume keeps its depth. The hand-over there is a cross-fade between two different shapes.
 - Fine filaments soften, bright-star halos remain, and oblique views can form thin ribbons or show slice/color traces. Prior finite-material trials failed the visual gate.
 - One warped surface cannot represent overlapping foreground/background dust layers. All thicknesses and offsets are authored; the published 0.7 pc scattering-layer hypothesis is not fitted geometry.
 - Each image ends at its own footprint. Wider coverage and exact pixel accounting do not establish complete cloud coverage or calibrated photometry.

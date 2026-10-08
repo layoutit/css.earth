@@ -28,6 +28,9 @@
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of HIP 113103 (pscomppars): projected rotation speed 3 km/s, from Lowson et al. 2024 (https://ui.adsabs.harvard.edu/abs/2024MNRAS.527.1146L/abstract)",
   "spinInclinationDegrees": 52.4,
   "spinInclinationSource": "Computed here from this record's rotation period, projected rotation speed and radius (0.742 solar radii): sin i = v sin i × P / (2πR) = 0.793. Not a measurement of the axis: the three numbers come from different papers.",
+  "rotationPeriodMeasuredDays": 9.54,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 28 and 106 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 9.54 d, the light swinging by 2.2% as the star turns",
+  "rotationLightSwingPercent": 2.18,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

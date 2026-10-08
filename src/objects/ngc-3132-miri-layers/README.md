@@ -21,6 +21,7 @@ ESA/Webb's mid-infrared picture of the Southern Ring Nebula (NGC 3132), at the d
 - **Drawing:** from the front, 56 terraces parallel to the picture; from the side, 56 and 56 curtains through its columns and rows. The face is the picture's own 1,306 px.
 - **Size:** 2.39 × 2.07 arcmin, 0.52 pc wide at 754 pc.
 - **Rim:** the picture fades out between 54.7″ and 60.8″ from the star, the largest circle the frame holds.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/ngc-3132-miri-layers backing` again. From afar NGC 3132 is drawn by one of its banks at a time: the bank of its selected dataset, or its default bank, [`ngc-3132-layers`](../ngc-3132-layers/README.md), while none is selected. The others draw nothing there, so two far images of the same nebula never overlap.
 
 ## Evidence
 
@@ -36,6 +37,7 @@ The terraces of this bank, composited along the Sun's sight line, differ from th
 
 ## Known problems
 
+- The far picture holds only the flat slices' light: the walls' patches are left out, as they were from the billboard it replaced, so from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - Everything the [near-infrared dataset](../ngc-3132-layers/README.md#known-problems) lists about the walls holds here: they are far coarser than the picture, two surfaces and not a volume, and rest on the paper's expansion law.
 - The grid is the ionised gas. Dust and molecular light in this picture are drawn at the ionised gas's depths.
 - The picture is nearly four times coarser than the near-infrared one, 0.11″ a pixel.

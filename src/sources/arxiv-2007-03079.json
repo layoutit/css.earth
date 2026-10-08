@@ -1,0 +1,58 @@
+{
+  "id": "arxiv-2007-03079",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Canto Martins et al. (2020): A Search for Rotation Periods in 1000 TESS Objects of Interest",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2007.03079"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/aba73f"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2007.03079",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4365/aba73f",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2007.03079",
+      "checkedOn": "2026-10-07",
+      "locator": "arXiv listing: title, authors, DOI (ApJS 250, 20). Sects. II and III print the sample, the light curves, the three periodicity analyses and the visual inspection; the catalogue is VizieR J/ApJS/250/20, whose ReadMe describes each column of Table 1 (131 stars with an unambiguous rotation period) and Tables 2 to 5."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Canto Martins et al. (2020)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2007.03079"
+    }
+  ],
+  "creators": [
+    "B. L. Canto Martins",
+    "R. L. Gomes",
+    "Y. S. Messias",
+    "S. R. de Lira",
+    "I. C. Leão",
+    "L. A. Almeida",
+    "M. A. Teixeira",
+    "M. L. das Chagas",
+    "J. P. Bravo",
+    "A. Bewketu Belete",
+    "J. R. De Medeiros"
+  ],
+  "publicationDate": "2020"
+}

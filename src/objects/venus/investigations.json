@@ -4,11 +4,12 @@
   "entries": [
     {
       "id": "cloud-imagery",
-      "subject": "Source-backed global ultraviolet cloud map to replace the illustrative cloud texture",
+      "subject": "Source-backed global ultraviolet cloud map to replace the colorized Galileo cloud map",
       "status": "unresolved",
-      "finding": "Akatsuki UVI Level 3b now backs an Ultraviolet dataset, so the route the earlier finding called missing exists: packages/bake/src/objects/interpretation/akatsuki-uvi-l3b.ts reads the NetCDF-4 grid and the raster lane draws the unobserved side as a declared data gap. What has not been resolved is the subject of this entry. One exposure covers 48.54 per cent of the globe at best, measured over 34 candidates, so the default dataset is still the OpenSpace texture, an illustration whose camera, wavelength and color processing are unresolved. No archive publishes a source-backed global cylindrical UV cloud mosaic: DARTS ships vco_uvi_l3 only as per-exposure 0.125-degree grids, and ESA's VMC mosaic is a northern-hemisphere press strip. Compositing several exposures across one four-day cloud rotation would mix scenes that have moved, which is why this repository has not built it.",
-      "revisitWhen": "A published global UV cloud mosaic with grid metadata and a permissive licence, or a stated method for compositing Akatsuki L3b exposures that names what it does with cloud motion between them, would let the default cloud dataset stop being an illustration.",
+      "finding": "Akatsuki UVI Level 3b now backs an Ultraviolet dataset, so the route the earlier finding called missing exists: packages/bake/src/objects/interpretation/akatsuki-uvi-l3b.ts reads the NetCDF-4 grid and the raster lane draws the unobserved side as a declared data gap. What has not been resolved is the subject of this entry. One exposure covers 48.54 per cent of the globe at best, measured over 34 candidates, so the default dataset is still a colorized map: Björn Jónsson’s mosaic of 21 Galileo images from the February 1990 flyby, which shows features seen in ultraviolet light. Until 2026-10-07 this ledger called it an OpenSpace illustration of unresolved origin; the OpenSpace file is his venus.jpg byte for byte (66,303 bytes). No archive publishes a source-backed global cylindrical UV cloud mosaic: DARTS ships vco_uvi_l3 only as per-exposure 0.125-degree grids, and ESA's VMC mosaic is a northern-hemisphere press strip. Compositing several exposures across one four-day cloud rotation would mix scenes that have moved, which is why this repository has not built it.",
+      "revisitWhen": "A published global UV cloud mosaic with grid metadata and a permissive licence, or a stated method for compositing Akatsuki L3b exposures that names what it does with cloud motion between them, would let the default cloud dataset show measured brightness instead of a colorized map.",
       "evidence": [
+        "https://bjj.mmedia.is/data/venus/venus.html",
         "https://doi.org/10.17597/isas.darts/vco-00016",
         "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/00readme.txt",
         "https://www.isas.jaxa.jp/en/researchers/data-policy/",
@@ -158,6 +159,17 @@
         "https://pds-geosciences.wustl.edu/mgn/mgn-v-rss-5-gravity-l2-v1/mg_5201/catalog/gravds.cat",
         "https://doi.org/10.1006/icar.1999.6086",
         "https://ntrs.nasa.gov/citations/19970037571"
+      ]
+    },
+    {
+      "id": "early-radar-maps",
+      "subject": "Radar maps of Venus from before Magellan (Austin et al. 2026 rescued-data collection)",
+      "status": "included",
+      "finding": "Five of the collection's 41 GeoTIFFs are shown as a stepper: Haystack 1967, Goldstone 1969-1972, Arecibo 1975-1977, Pioneer Venus 1978-1981 and Arecibo 1983 (57 MB in all, 8-bit, equirectangular on a 6,051 km sphere). Left out: Arecibo 1988 (965 MB) and Venera 15/16 backscatter (384 MB), which this lane would have to read whole to draw at 8,192 pixels; Arecibo 1969 (the collection's largest position error, 400 km); the Goldstone 500 m strips of 1974 to 1988, small patches; the Pioneer Venus and Venera numeric grids at 37 km, coarser than the Magellan maps already shown; and the 81 GB basemap.",
+      "revisitWhen": "A reader that takes a reduced overview of a large GeoTIFF makes Arecibo 1988 and Venera 15/16 cheap to add as two more steps.",
+      "evidence": [
+        "https://zenodo.org/records/18176179",
+        "https://zenodo.org/records/18176179/files/DatasetInventory.csv?download=1"
       ]
     }
   ]

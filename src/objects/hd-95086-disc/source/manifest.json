@@ -1,0 +1,106 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "dust-b6-cont",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-95086-disc-dust-b6-cont",
+            "role": "material",
+            "evidence": "src/objects/hd-95086-disc/source/manifest.json#/inputs/0"
+          }
+        ]
+      },
+      "path": ".local/hd-95086-disc/observations/member.uid___A001_X145_X232.ari_l.hd_95086_sci.spw0_1_2_3_238443MHz.12m.cont.I.pbcor.fits",
+      "origin": "https://almascience.eso.org/dataPortal/member.uid___A001_X145_X232.ari_l.hd_95086_sci.spw0_1_2_3_238443MHz.12m.cont.I.pbcor.fits",
+      "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2013.1.00612.S",
+      "title": "ALMA project 2013.1.00612.S, member OUS uid://A001/X145/X232, ARI-L continuum image hd_95086_sci.spw0_1_2_3_238443MHz.12m.cont.I.pbcor",
+      "credit": "ALMA (ESO/NAOJ/NRAO), project 2013.1.00612.S (PI M. Booth); imaged by the ARI-L project (Massardi et al. 2021, PASP 133, 085001; CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2013.1.00612.S.",
+      "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+      "acquisition": "Downloaded unchanged from the ALMA Science Archive data portal on 2026-10-08 (the ARI-L product DataLink lists for member OUS uid://A001/X145/X232); restored from that origin or the R2 source cache when missing.",
+      "license": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
+      "datasetId": "dust",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "alma",
+            "evidence": "https://almascience.eso.org/dataPortal/member.uid___A001_X145_X232.ari_l.hd_95086_sci.spw0_1_2_3_238443MHz.12m.cont.I.pbcor.fits — ALMA (ESO/NAOJ/NRAO), project 2013.1.00612.S (PI M. Booth); imaged by the ARI-L project (Massardi et al. 2021, PASP 133, 085001; CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2013.1.00612.S."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "circumstellar-json",
+      "path": "src/objects/hd-95086-disc/source/circumstellar.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe: the datasets, their pinned program and bands, the stated conventions and the published geometry each is checked against."
+      }
+    },
+    {
+      "id": "su-2017-figure-3-colormap-json",
+      "path": "src/objects/hd-95086-disc/source/su-2017-figure-3-colormap.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The publisher's color map the dust dataset is shown in, read from the published figure as the file itself records (the color bar of Su et al. (2017), Figure 3, right panel, decoded from the figure in the paper's arXiv source: linear in signal-to-noise ratio, labelled from −7 to 35. The paper gives the noise of the map made from both data sets as 7.5 µJy per beam (section 3.1); times that, the listed colors run from −52.33 to 261.98 µJy per beam. Reading the bar's unit as that noise is this recipe's, not a statement of the paper's caption)."
+      }
+    },
+    {
+      "id": "delivery-json",
+      "path": "src/objects/hd-95086-disc/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/hd-95086-disc/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/hd-95086-disc/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-dust-ktx2",
+      "path": "src/objects/hd-95086-disc/source/density-dust.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "volume-dust-json",
+      "path": "src/objects/hd-95086-disc/source/volume-dust.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "previews-dust-png",
+      "path": "src/objects/hd-95086-disc/source/previews/dust.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    }
+  ]
+}

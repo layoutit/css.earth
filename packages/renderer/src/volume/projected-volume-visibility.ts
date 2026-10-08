@@ -30,6 +30,27 @@ export function outsideVolumeOpacity(world: WorldCameraPose, frame: DensityVolum
   return Math.max(0, Math.min(1, Math.log(distanceUnits / framingRadiusUnits) / Math.log(1.25)));
 }
 
+/** How far out a picture is gone on a flight into it, in its framing radii: it fills the view there. The flights measured
+ * come an eighth nearer on each frame at that point (M33's quarter of a radius took two frames), so three frames or more
+ * are left before the page's body, where its scene keeps its last frame. */
+const ENTERED_AT_RADII = 1.5;
+
+/** Whether a volume's framing sphere holds a place, in reference metres. */
+export function volumeHolds(frame: DensityVolumeFrame, framingRadiusUnits: number, positionM: readonly number[]): boolean {
+  const reachM = framingRadiusUnits * frame.metersPerUnit;
+  return Math.hypot(positionM[0]! - frame.originM[0], positionM[1]! - frame.originM[1], positionM[2]! - frame.originM[2]) <= reachM;
+}
+
+/** How much of a page's own picture draws on a flight from that page to a body inside the picture: all of it until it
+ * comes to fill the view, none from there in. The page stays the selected one until the flight's hand-over, and its scene
+ * keeps its last frame once the camera is inside its body (object-orbit.ts `adoptWorldCamera`): flying from M33 to its
+ * star VHK 45, the galaxy's photograph as it last drew filled the screen from 0.4 s to the hand-over at 5.1 s, behind a
+ * camera that ended 9 au from the star, and went in one frame; so did the picture of each of the 24 galaxies that hold a
+ * star (2026-10-07). The body's own page draws none of it in its close-up. */
+export function enteredVolumeOpacity(world: WorldCameraPose, frame: DensityVolumeFrame, framingRadiusUnits: number): number {
+  return outsideVolumeOpacity(world, frame, ENTERED_AT_RADII * framingRadiusUnits);
+}
+
 export function projectedVolumeRadiusPixels(world: WorldCameraPose, viewport: WorldCameraViewport, frame: DensityVolumeFrame,
   framingRadiusUnits: number): number {
   const distanceUnits = eyeDistanceM(world.pose, frame.originM) / frame.metersPerUnit;

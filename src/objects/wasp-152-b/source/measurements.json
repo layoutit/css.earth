@@ -22,6 +22,9 @@
       "source": "VizieR J/ApJS/276/44/table1 (TIC star magnetic activity with LAMOST DR10 MRS sp.), column Prot: 6.06317 d, the row 3.0 arcsec from the star's J2000 place"
     }
   ],
+  "rotationPeriodMeasuredDays": 5.34,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 4 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 5.34 d, the light swinging by 1.5% as the star turns",
+  "rotationLightSwingPercent": 1.53,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

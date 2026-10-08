@@ -234,6 +234,28 @@ test('a distinct topology is allocated only on first selection and then retained
   runtime.destroy();
 });
 
+test('a cloud has its strength from the publication that turns to a stack, before the paced join displays it', () => {
+  // With animation frames a stack's root is displayed on a later frame, with its first slices. The camera is still, so
+  // no publication follows that frame: the one that weighed the stack must already give the cloud its strength.
+  const frames: ((time: number) => void)[] = [];
+  stubGlobal('requestAnimationFrame', (callback: (time: number) => void) => frames.push(callback));
+  stubGlobal('cancelAnimationFrame', () => {});
+  const f = dom(), data = payload(), runtime = createPreparedVolumeDatasets({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
+  const root = runtime.root as unknown as FakeElement;
+  const surface = root.children.find(node => node.dataset.volumeDataset === 'first')!;
+  runtime.publish(publication(4));
+  const facing = surface.children.filter(node => node.className === 'css-volume-projection')[2]!;
+  assert.equal(facing.style.visibility, 'hidden'); assert.equal(facing.style.display, 'none');
+  const strength = data.datasets[0].brightness.overall * data.datasets[0].brightness.z * Number(facing.style.opacity);
+  assert.ok(strength > 0);
+  assert.ok(Math.abs(Number(surface.style.opacity) - strength) < 1e-12, `${surface.style.opacity} is not ${strength}`);
+  assert.equal(root.dataset.cloudOpacity, String(Math.round(strength * 1000) / 1000));
+  for (let time = 16; frames.length && time < 4000; time += 16) frames.shift()!(time);
+  assert.equal(facing.style.visibility, 'visible'); assert.equal(facing.style.display, 'block');
+  assert.ok(Math.abs(Number(surface.style.opacity) - strength) < 1e-12);
+  runtime.destroy();
+});
+
 test('axis brightness matches the lab completed-image oracle through handoffs and stays outside cloud geometry', () => {
   const f = dom(), data = payload(), runtime = createPreparedVolumeDatasets({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
   const root = runtime.root as unknown as FakeElement;

@@ -28,7 +28,7 @@ A name the catalogue does not ship is resolved by SIMBAD, and records are select
 
 In a terminal, `explore` shows the observations, unknown metadata, unsupported records and provider limits, then asks which observation to retrieve. Press Enter to keep the exploration without retrieving. With `--json` or redirected input or output it never prompts. Without `--out` it creates a run under `./telescope-runs/`. The saved `outcome` has a `selection` (`available` or `none`) and a `coverage` (`target-unresolved`, `incomplete` or `bounded`). Even `bounded` describes only the configured searches, not every observatory. An empty search is not proof that no observations exist.
 
-`explore` asks every archive at once and reports the ledgers that index the target, the ESPaDOnS polarised spectra at CADC among them; an archive that drops the connection is asked again, twice.
+`explore` asks every archive at once and reports the ledgers that index the target, the ESPaDOnS polarised spectra at CADC among them; an archive that drops the connection is asked again, twice. Keck and Gemini are asked by the target's place on the sky as well as by name. A question asked in the last day is answered from its saved answer; `--fresh` asks every archive again.
 
 `telescope fetch RUN/explore.json --archive ARCHIVE --pick N --out NEW_DIRECTORY` retrieves one raw source from `keck`, `gemini`, `chandra`, `spitzer` or `opus`. When a Chandra ObsID or Spitzer AOR has several science files, pass `--file NAME`. A failed Gemini, OPUS, Chandra or Spitzer fetch keeps completed files in `NEW_DIRECTORY.partial`; repeat the same command with `--resume`. A fetched raw file is not qualified for detection, calibration or scientific use.
 
@@ -79,12 +79,13 @@ program needs three blocks a person fills from catalogues and papers, each value
 degree). `reduce.mts` writes a receipt, the map as a table and a picture under ignored `output/espadons/`; git holds the program, not the result.
 `telescope new-object --from-spectra STAR --out SPEC.json` then drafts the star's reduced maps as datasets of its page.
 
-### A star's rotation and brightness map from the TESS and K2 missions' light curves
+### A star's rotation and brightness map from the TESS, K2 and Kepler missions' light curves
 
 The K2 and TESS missions publish light curves of the stars they were asked to watch. The tools of `src/archives/tess/` and
 `src/archives/kepler/` read those light curves as they are, have a published method for the star's kind decide whether its
-rotation is seen in them, and have starry fit the brightness map that reproduces the light curve.
-[A star's rotation and brightness map from the TESS and K2 missions' light curves](../../docs/stellar-brightness-maps-from-tess.md)
+rotation is seen in them, and have starry fit the brightness map that reproduces the light curve. A Kepler star is read
+from its KEPSEISMIC light curve, on the rotation Santos et al. (2019, 2021) published for it.
+[A star's rotation and brightness map from the TESS, K2 and Kepler missions' light curves](../../docs/stellar-brightness-maps-from-tess.md)
 describes each step, each method with its paper, and what a light curve cannot fix.
 
 ```sh
@@ -93,8 +94,16 @@ node packages/telescope-cli/src/archives/tess/reduce.mts au-mic      # or --all:
 ```
 
 `reduce.mts` asks MAST for the star's light curves, has the method judge them, and writes a receipt, each light curve and,
-when the rotation is accepted, one map a sector or campaign as a table under ignored `output/tess/`.
+when the rotation is accepted, one map a sector, campaign or quarter as a table under ignored `output/tess/`. A TESS
+target whose pixels the TESS Input Catalog gives too much of other stars' light (a contamination ratio of 0.2 or more) is
+not read.
 `telescope new-object --from-pixels all --out SPEC.json` then drafts every reduced star's maps as datasets of its page.
+
+A pulsating star's light through one cycle is not reduced here: it is the model its source publishes. A Cepheid's package
+keeps its row of Gaia DR3's `vari_cepheid` table, and `telescope new-object --from-pulsation all --out SPEC.json` drafts
+ten steps of that model, a tenth of a period apart, as one dataset group of the star's page
+([method note](../../docs/pulsating-stars-light-through-a-cycle.md)). `gaia:HOST` first looks up a star whose package names
+no Gaia source: the one Cepheid of that table within an arcsecond of its place, with its catalogue row's period.
 
 ## Supported v1 boundary
 

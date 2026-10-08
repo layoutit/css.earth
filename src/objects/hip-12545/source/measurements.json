@@ -46,6 +46,9 @@
   ],
   "projectedRotationSpeedKmS": 40,
   "projectedRotationSpeedSource": "SIMBAD, BD+05 378: projected rotation speed 40 km/s, the measurement SIMBAD prefers (2006A&A...460..695T)",
+  "rotationPeriodMeasuredDays": 4.71,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 4, 31, 42, 70 and 71 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 4.71 d, the light swinging by 11% as the star turns",
+  "rotationLightSwingPercent": 11.27,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

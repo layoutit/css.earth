@@ -1,0 +1,24 @@
+# Markab
+
+## Sources
+
+Its disc spans 1.218 milliarcseconds, which gives 5.35 solar radii and 8,935 K at its surface. It is also HD 218045, HR 8781, HIP 113963. The introduction is generated from Baines et al. (2025), AJ 169, 293's published values; the sections below are the data's own.
+
+**Star.** Placement: Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 113963 (SIMBAD HD 218045); placed by that row, not by a Gaia source, distance 40.88 pc from Baines et al. (2025), AJ 169, 293, HD 218045: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 2), 24.46 +/- 0.19 mas, inverted. Radius 5.35 +/- 0.1 solar radii from Baines et al. (2025), AJ 169, 293, HD 218045: radius 5.35 +/- 0.1 solar radii (Table 7), from the limb-darkened angular diameter 1.218 +/- 0.02 mas (NPOI, Table 6) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/adc930). No mass is measured, so GM is 0, the records' unpublished value. Temperature 8,935 K from Baines et al. (2025), AJ 169, 293, HD 218045: effective temperature 8935 +/- 77 K (Table 7), from the angular diameter and the bolometric flux of the SED fit. log g 3.51 from Baines et al. (2025), AJ 169, 293, HD 218045: log g 3.51, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 6).
+
+**Color.** Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Markab is HR 8781., cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1098: HR 8781; VizieR III/202 (6 levels apart at most, the threshold is 12), through the CIE 1931 2° observer: #b7ccff. Routes tried in order: stis-ngsl: HD 218045 is not in the library; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; kiehling: HR 8781 is not among its 60 stars; burnashev: found, not needed after the color and its cross-check; pulkovo: used.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 8,935 K and log g 3.51 (u1 0.278, u2 0.319): a model, because no fit of this star's limb is used.
+
+## Evidence
+
+Generated 2026-10-07 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from VizieR V/137D/XHIP and the archives named above; each choice was read with the dataset's own reader.
+
+- The color's cross-check differs by 6 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) recomputes it after preparation.
+
+## Known problems
+
+- **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
+- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
+
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

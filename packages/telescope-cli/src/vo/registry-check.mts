@@ -8,15 +8,13 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { tapRows } from '@cssearth/telescope/node';
-import { TAP as CHANDRA_TAP } from '../archives/chandra/archive.mts';
-import { CADC_TAP } from '../archives/gemini/cadc.mts';
-import { INSTRUMENT_TABLES, TAP_SYNC as KOA_TAP } from '../archives/keck/koa.mts';
-import { SERVICES } from './discovery.mts';
+import { ARCHIVES } from '../archives/archives.mts';
+import { INSTRUMENT_TABLES } from '../archives/keck/koa.mts';
 
 export const REGISTRY = 'https://dc.g-vo.org/tap';
-const KOA = 'ivo://koa.ipac/tap';
-export const PINNED: ReadonlyMap<string, string> = new Map([...SERVICES.map(profile => [profile.authority, profile.service] as const),
-  [KOA, KOA_TAP], ['ivo://cadc.nrc.ca/argus', CADC_TAP], ['ivo://cxc.harvard.edu/cda', CHANDRA_TAP]]);
+/** Every registry identifier the archive list names, with the address pinned for it (archives/archives.mts). */
+export const PINNED: ReadonlyMap<string, string> = new Map(ARCHIVES.flatMap(archive => archive.registry ? [[archive.registry.ivoid, archive.registry.address] as const] : []));
+const KOA = ARCHIVES.find(archive => archive.id === 'keck')!.registry!.ivoid;
 const address = (url: string | undefined) => url?.replace(/\/$/u, '');
 
 /** What disagrees: a pinned address the registry does not give its identifier, and a pinned table its server does not list. */

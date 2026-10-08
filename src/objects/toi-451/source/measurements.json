@@ -48,6 +48,9 @@
   ],
   "projectedRotationSpeedKmS": 8.7,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of TOI-451 (pscomppars): projected rotation speed 8.7 km/s, from Barragán et al. 2026 (https://ui.adsabs.harvard.edu/abs/2026MNRAS.546ag087B/abstract)",
+  "rotationPeriodMeasuredDays": 5.21,
+  "rotationPeriodMeasuredSource": "Measured in this project from the TESS mission's own 2-minute light curves of sectors 4, 31, 106 and 107 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Holcomb et al. (2022, ApJ 936, 138): 5.21 d, the light swinging by 3.6% as the star turns",
+  "rotationLightSwingPercent": 3.64,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

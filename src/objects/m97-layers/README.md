@@ -22,6 +22,7 @@ A survey image of the Owl Nebula, its light spread through the nebula's publishe
 - **Drawing:** from the front, 32 slabs parallel to the picture, each holding the light between its two faces; from the side, 40 and 40 curtains through the picture's columns and rows. All are 256 pixels across, half the picture's resolution: the survey image is no sharper. The slabs' colors are solved so that the Sun, looking through the nearer slabs, sees the picture's own color at every pixel.
 - **Outside the body:** the flat picture ends where the envelope ends, fading out between 109″ and 121″ from the star. Beyond that the survey image holds only sky noise; the nebula's faint halo is not in it.
 - **Size:** 7.20 × 7.20 arcmin, 1.70 pc wide at 811 pc; the body is 0.86 pc across.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m97-layers backing` again.
 
 ## Evidence
 
@@ -37,6 +38,7 @@ The bake's test ([shape.test.ts](../../../packages/bake/src/image-layers/shape.t
 
 ## Known problems
 
+- The far picture holds only the flat slices' light, and this bank's light is almost all on its walls, which are left out, as they were from the billboard it replaced: from afar the plane draws almost nothing. Edge-on it vanishes.
 - No depth is measured at any pixel. A cavity's length comes from how dim the picture is, and the picture is a display composite, not calibrated flux: where it is near full brightness, small differences in the picture become large differences in gas.
 - The gas is the same all around the star at one distance, apart from the cavities and the denser gas. A knot at the rim is therefore spread along its whole sight line.
 - The papers disagree on which end of the pole is nearer. Guerrero et al. find the north-west lobe red-shifted and the south-east one blue-shifted; García-Díaz et al., with more slits, put the north-west half toward Earth. This bake follows the later paper.

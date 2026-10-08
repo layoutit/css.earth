@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "wasp-189",
+  "source": "Deline et al. (2022), The atmosphere and architecture of WASP-189 b probed by its CHEOPS phase curve, A&A 659, A74 (https://doi.org/10.1051/0004-6361/202142400; https://arxiv.org/abs/2201.04518), Table 3, the gravity-darkened fit to the CHEOPS transits, read from the authors' LaTeX source",
+  "caption": "Planetary parameters obtained with the model assuming a Lambertian reflector and approximating the thermal emission as a sinusoidal function of the phase angle (Table 3: fitted parameters with their priors, then derived parameters).",
+  "model": {
+    "equatorialToPolarRadius": {
+      "value": 1.029654,
+      "uncertainty": 0.0016,
+      "cell": "Stellar oblateness f* 2.88 (+0.15, -0.12) % (Table 3, derived parameters), defined as f* = 1 - R_pole/R* with R* the radius at the equator (section 4.4.1). The ratio is 1 / (1 - 0.0288)."
+    },
+    "equatorialRadiusSolar": {
+      "value": 2.363,
+      "uncertainty": 0.025,
+      "cell": "Stellar radius R* 2.363 (+0.025, -0.024) solar radii, prior N(2.365, 0.025) (Table 3); the stellar equatorial radius (sections 4.4.1 and 4.6.3)"
+    },
+    "beta": {
+      "value": 0.22,
+      "cell": "Gravity-darkening exponent 0.22, fixed (Table 3): the value of Table 2 of Claret (2016) at the star's effective temperature (section 4.6.3)"
+    },
+    "poleTemperatureK": {
+      "value": 7967,
+      "uncertainty": 69,
+      "cell": "Temperature of the stellar poles 7967 (+69, -67) K, prior N(8000, 80) (Table 3); the prior is the effective temperature (section 4.6.3)"
+    }
+  },
+  "reportedNotModelled": {
+    "equatorPoleContrast": {
+      "cell": "Section 5.1: a difference of about 200 K between the poles (8000 K by construction) and the equator (about 7800 K)",
+      "note": "The Roche-von Zeipel surface of this record puts the equator at 7,760 K, 207 K under its 7,967 K pole."
+    },
+    "rotationPeriodDays": {
+      "value": 1.198,
+      "cell": "Stellar rotation period P* 1.198 (+0.026, -0.025) days (Table 3, derived parameters)"
+    },
+    "projectedRotationSpeedKmS": {
+      "value": 92.5,
+      "cell": "Projected rotation speed 92.5 (+1.8, -1.7) km/s, prior N(93.1, 1.7) (Table 3)"
+    }
+  },
+  "note": "The paper fits PyTransit's gravity-darkened transit model, in which the flattening follows from the stellar density and rotation period (section 4.4.1), and publishes no fraction of break-up and no equatorial temperature. Here the Roche-von Zeipel model of the other rapid rotators takes the paper's flattening and its exponent, as for KELT-9: its rotation rate is that of the Roche surface with that flattening, 0.428 of break-up. The exponent is not fitted: the paper fixes it, and says it runs to unphysical values when left free (section 4.6.3)."
+}

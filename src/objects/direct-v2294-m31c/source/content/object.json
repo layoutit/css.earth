@@ -52,6 +52,196 @@
         },
         "falseColor": false,
         "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,050 K and log g 0.8 (u1 0.611, u2 0.144): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "pulsation-phase-0",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · maximum light",
+        "thumbnail": "direct-v2294-m31c-dataset-pulsation-phase-0.webp",
+        "surface": "direct-v2294-m31c-surface-pulsation-phase-0@2x.webp",
+        "poles": "direct-v2294-m31c-poles-pulsation-phase-0@2x.webp",
+        "source": {
+          "id": "direct-v2294-m31c-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.0"
+        },
+        "notes": "DIRECT V2294 M31C at maximum light, phase 0.0 of one 22.2-day pulsation: its color dimmed to 100% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-1",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 2.22 days after maximum",
+        "thumbnail": "direct-v2294-m31c-dataset-pulsation-phase-1.webp",
+        "surface": "direct-v2294-m31c-surface-pulsation-phase-1@2x.webp",
+        "poles": "direct-v2294-m31c-poles-pulsation-phase-1@2x.webp",
+        "source": {
+          "id": "direct-v2294-m31c-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.1"
+        },
+        "notes": "DIRECT V2294 M31C 2.22 days after maximum light, phase 0.1 of one 22.2-day pulsation: its color dimmed to 91% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-2",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 4.44 days after maximum",
+        "thumbnail": "direct-v2294-m31c-dataset-pulsation-phase-2.webp",
+        "surface": "direct-v2294-m31c-surface-pulsation-phase-2@2x.webp",
+        "poles": "direct-v2294-m31c-poles-pulsation-phase-2@2x.webp",
+        "source": {
+          "id": "direct-v2294-m31c-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.2"
+        },
+        "notes": "DIRECT V2294 M31C 4.44 days after maximum light, phase 0.2 of one 22.2-day pulsation: its color dimmed to 76% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-3",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 6.66 days after maximum",
+        "thumbnail": "direct-v2294-m31c-dataset-pulsation-phase-3.webp",
+        "surface": "direct-v2294-m31c-surface-pulsation-phase-3@2x.webp",
+        "poles": "direct-v2294-m31c-poles-pulsation-phase-3@2x.webp",
+        "source": {
+          "id": "direct-v2294-m31c-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.3"
+        },
+        "notes": "DIRECT V2294 M31C 6.66 days after maximum light, phase 0.3 of one 22.2-day pulsation: its color dimmed to 68% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-4",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 8.89 days after maximum",
+        "thumbnail": "direct-v2294-m31c-dataset-pulsation-phase-4.webp",
+        "surface": "direct-v2294-m31c-surface-pulsation-phase-4@2x.webp",
+        "poles": "direct-v2294-m31c-poles-pulsation-phase-4@2x.webp",
+        "source": {
+          "id": "direct-v2294-m31c-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.4"
+        },
+        "notes": "DIRECT V2294 M31C 8.89 days after maximum light, phase 0.4 of one 22.2-day pulsation: its color dimmed to 61% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-5",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 11.1 days after maximum",
+        "thumbnail": "direct-v2294-m31c-dataset-pulsation-phase-5.webp",
+        "surface": "direct-v2294-m31c-surface-pulsation-phase-5@2x.webp",
+        "poles": "direct-v2294-m31c-poles-pulsation-phase-5@2x.webp",
+        "source": {
+          "id": "direct-v2294-m31c-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.5"
+        },
+        "notes": "DIRECT V2294 M31C 11.1 days after maximum light, phase 0.5 of one 22.2-day pulsation: its color dimmed to 52% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-6",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 13.3 days after maximum",
+        "thumbnail": "direct-v2294-m31c-dataset-pulsation-phase-6.webp",
+        "surface": "direct-v2294-m31c-surface-pulsation-phase-6@2x.webp",
+        "poles": "direct-v2294-m31c-poles-pulsation-phase-6@2x.webp",
+        "source": {
+          "id": "direct-v2294-m31c-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.6"
+        },
+        "notes": "DIRECT V2294 M31C 13.3 days after maximum light, phase 0.6 of one 22.2-day pulsation: its color dimmed to 45% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-7",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 15.5 days after maximum",
+        "thumbnail": "direct-v2294-m31c-dataset-pulsation-phase-7.webp",
+        "surface": "direct-v2294-m31c-surface-pulsation-phase-7@2x.webp",
+        "poles": "direct-v2294-m31c-poles-pulsation-phase-7@2x.webp",
+        "source": {
+          "id": "direct-v2294-m31c-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.7"
+        },
+        "notes": "DIRECT V2294 M31C 15.5 days after maximum light, phase 0.7 of one 22.2-day pulsation: its color dimmed to 48% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-8",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 17.8 days after maximum",
+        "thumbnail": "direct-v2294-m31c-dataset-pulsation-phase-8.webp",
+        "surface": "direct-v2294-m31c-surface-pulsation-phase-8@2x.webp",
+        "poles": "direct-v2294-m31c-poles-pulsation-phase-8@2x.webp",
+        "source": {
+          "id": "direct-v2294-m31c-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.8"
+        },
+        "notes": "DIRECT V2294 M31C 17.8 days after maximum light, phase 0.8 of one 22.2-day pulsation: its color dimmed to 64% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
+      },
+      {
+        "id": "pulsation-phase-9",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 20.0 days after maximum",
+        "thumbnail": "direct-v2294-m31c-dataset-pulsation-phase-9.webp",
+        "surface": "direct-v2294-m31c-surface-pulsation-phase-9@2x.webp",
+        "poles": "direct-v2294-m31c-poles-pulsation-phase-9@2x.webp",
+        "source": {
+          "id": "direct-v2294-m31c-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.9"
+        },
+        "notes": "DIRECT V2294 M31C 20.0 days after maximum light, phase 0.9 of one 22.2-day pulsation: its color dimmed to 88% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them."
       }
     ]
   },

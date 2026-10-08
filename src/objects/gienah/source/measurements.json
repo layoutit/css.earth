@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gienah",
+  "angularDiameterMas": 0.75,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 2,643,660 km at 47.10 pc = 0.75 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 47.103,
+  "distanceSource": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 59803: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 21.23 +/- 0.2 mas, inverted (https://doi.org/10.1134/S1063773712050015): 47.103 +/- 0.444 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 2643660,
+  "radiusSource": "Radius 3.8 +/- 0.31 solar radii from Computed here, not printed by a paper: 3.8 +/- 0.31 solar radii, from the limb-darkened angular diameter 0.75 +/- 0.06 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 21.23 +/- 0.2 mas (van Leeuwen 2007, XHIP) (https://doi.org/10.1093/mnras/167.1.121): 2,643,660 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 12450 +/- 530 K from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 106625: effective temperature 12450 +/- 530 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 12450,
+  "effectiveTemperatureSource": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 106625: effective temperature 12450 +/- 530 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093)",
+  "surfaceGravityLogg": 3.44,
+  "surfaceGravitySource": "log g 3.44 +/- 0.14 from 2015ApJ...804..146D, measured from the star's Stroemgren photometry: SIMBAD's compilation holds no spectroscopic gravity of this star (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..146D)",
+  "spectralType": "B8III",
+  "spectralTypeSource": "SIMBAD, * gam Crv: spectral type B8III (1988MSS...C04....0H)",
+  "objectType": "High Proper Motion Star",
+  "objectTypePath": "* > PM*",
+  "objectTypeSource": "SIMBAD, * gam Crv: main object type PM*, High Proper Motion Star",
+  "projectedRotationSpeedKmS": 30,
+  "projectedRotationSpeedSource": "SIMBAD, * gam Crv: projected rotation speed 30 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

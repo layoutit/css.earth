@@ -28,6 +28,7 @@ The Crab's page shows this bank as its dataset "Hubble · measured depths". Its 
 - **Drawing:** the surfaces are meshes of flat patches ([shape-patches.ts](../../../packages/bake/src/image-layers/shape-patches.ts)), as Cassiopeia A's are.
 - **Size:** the nebula is drawn 718 px across, in the picture's circle: 185.2″ in radius, 3.59 pc across at 2,000 pc.
 - **Rim:** the picture fades out between 177.8″ and 185.2″, the largest circle the frame holds about the page's place, so no straight edge shows.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m1-layers backing` again. From afar the Crab is drawn by one of its banks at a time: the bank of its selected dataset, or its default bank, [`m1-volume`](../m1-volume/README.md), while none is selected. The others draw nothing there, so two far images of the same nebula never overlap.
 
 ## Evidence
 
@@ -43,6 +44,7 @@ The bake's tests of the measured-speeds mesh ([shape-speed.test.ts](../../../pac
 
 ## Known problems
 
+- The far picture holds only the flat slices' light: the walls' patches are left out, as they were from the billboard it replaced, so from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - The points come under the GNU General Public License 3.0, the licence of the authors' repository; the paper itself says its data are shared on reasonable request. The table built from them is a derived copy under the same licence, kept in the source cache and not tracked here.
 - The smooth light's depth is not measured, and the paper finds the nebula's outline is not an ellipsoid but heart-shaped (Sect. 4.1.1). The ellipsoid, and drawing its long axis in the sky's plane, are presentation choices.
 - The paper says the expansion is faster near the centre, where the pulsar's wind has pushed the gas (Sect. 3.4): a depth there is too large by as much as the gas was sped up.

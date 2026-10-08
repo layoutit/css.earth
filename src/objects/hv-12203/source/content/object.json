@@ -52,6 +52,196 @@
         },
         "falseColor": false,
         "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 5,750 K and log g 0.6 (u1 0.547, u2 0.152): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      },
+      {
+        "id": "pulsation-phase-0",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · maximum light",
+        "thumbnail": "hv-12203-dataset-pulsation-phase-0.webp",
+        "surface": "hv-12203-surface-pulsation-phase-0@2x.webp",
+        "poles": "hv-12203-poles-pulsation-phase-0@2x.webp",
+        "source": {
+          "id": "hv-12203-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.0"
+        },
+        "notes": "HV 12203 at maximum light, phase 0.0 of one 2.95-day pulsation: its color dimmed to 100% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-1",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 7.1 hours after maximum",
+        "thumbnail": "hv-12203-dataset-pulsation-phase-1.webp",
+        "surface": "hv-12203-surface-pulsation-phase-1@2x.webp",
+        "poles": "hv-12203-poles-pulsation-phase-1@2x.webp",
+        "source": {
+          "id": "hv-12203-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.1"
+        },
+        "notes": "HV 12203 7.1 hours after maximum light, phase 0.1 of one 2.95-day pulsation: its color dimmed to 91% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-2",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 14.2 hours after maximum",
+        "thumbnail": "hv-12203-dataset-pulsation-phase-2.webp",
+        "surface": "hv-12203-surface-pulsation-phase-2@2x.webp",
+        "poles": "hv-12203-poles-pulsation-phase-2@2x.webp",
+        "source": {
+          "id": "hv-12203-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.2"
+        },
+        "notes": "HV 12203 14.2 hours after maximum light, phase 0.2 of one 2.95-day pulsation: its color dimmed to 83% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-3",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 21.3 hours after maximum",
+        "thumbnail": "hv-12203-dataset-pulsation-phase-3.webp",
+        "surface": "hv-12203-surface-pulsation-phase-3@2x.webp",
+        "poles": "hv-12203-poles-pulsation-phase-3@2x.webp",
+        "source": {
+          "id": "hv-12203-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.3"
+        },
+        "notes": "HV 12203 21.3 hours after maximum light, phase 0.3 of one 2.95-day pulsation: its color dimmed to 76% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-4",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 1.18 days after maximum",
+        "thumbnail": "hv-12203-dataset-pulsation-phase-4.webp",
+        "surface": "hv-12203-surface-pulsation-phase-4@2x.webp",
+        "poles": "hv-12203-poles-pulsation-phase-4@2x.webp",
+        "source": {
+          "id": "hv-12203-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.4"
+        },
+        "notes": "HV 12203 1.18 days after maximum light, phase 0.4 of one 2.95-day pulsation: its color dimmed to 72% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-5",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 1.48 days after maximum",
+        "thumbnail": "hv-12203-dataset-pulsation-phase-5.webp",
+        "surface": "hv-12203-surface-pulsation-phase-5@2x.webp",
+        "poles": "hv-12203-poles-pulsation-phase-5@2x.webp",
+        "source": {
+          "id": "hv-12203-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.5"
+        },
+        "notes": "HV 12203 1.48 days after maximum light, phase 0.5 of one 2.95-day pulsation: its color dimmed to 68% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-6",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 1.77 days after maximum",
+        "thumbnail": "hv-12203-dataset-pulsation-phase-6.webp",
+        "surface": "hv-12203-surface-pulsation-phase-6@2x.webp",
+        "poles": "hv-12203-poles-pulsation-phase-6@2x.webp",
+        "source": {
+          "id": "hv-12203-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.6"
+        },
+        "notes": "HV 12203 1.77 days after maximum light, phase 0.6 of one 2.95-day pulsation: its color dimmed to 65% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-7",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 2.07 days after maximum",
+        "thumbnail": "hv-12203-dataset-pulsation-phase-7.webp",
+        "surface": "hv-12203-surface-pulsation-phase-7@2x.webp",
+        "poles": "hv-12203-poles-pulsation-phase-7@2x.webp",
+        "source": {
+          "id": "hv-12203-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.7"
+        },
+        "notes": "HV 12203 2.07 days after maximum light, phase 0.7 of one 2.95-day pulsation: its color dimmed to 63% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-8",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 2.36 days after maximum",
+        "thumbnail": "hv-12203-dataset-pulsation-phase-8.webp",
+        "surface": "hv-12203-surface-pulsation-phase-8@2x.webp",
+        "poles": "hv-12203-poles-pulsation-phase-8@2x.webp",
+        "source": {
+          "id": "hv-12203-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.8"
+        },
+        "notes": "HV 12203 2.36 days after maximum light, phase 0.8 of one 2.95-day pulsation: its color dimmed to 63% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
+      },
+      {
+        "id": "pulsation-phase-9",
+        "label": "Pulsation",
+        "qualification": "Gaia DR3 fitted light curve · 2.66 days after maximum",
+        "thumbnail": "hv-12203-dataset-pulsation-phase-9.webp",
+        "surface": "hv-12203-surface-pulsation-phase-9@2x.webp",
+        "poles": "hv-12203-poles-pulsation-phase-9@2x.webp",
+        "source": {
+          "id": "hv-12203-gaia-cepheid-phases",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "step": {
+          "group": "pulsation",
+          "label": "Phase 0.9"
+        },
+        "notes": "HV 12203 2.66 days after maximum light, phase 0.9 of one 2.95-day pulsation: its color dimmed to 82% of its light at maximum, as Gaia DR3's published G-band model of the star gives it. The 10 steps are a tenth of a period apart (a display choice); the model between them is continuous. The star's color and size also change through the cycle and are not drawn: nothing here measures them. The played light curve (the Light curves switch) is not drawn over these steps: each already holds its own light."
       }
     ]
   },

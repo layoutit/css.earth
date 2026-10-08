@@ -32,10 +32,14 @@ src/objects/m31-layers/source/lggs-stars/table4.dat.gz
 src/objects/cassiopeia-a-layers/source/ejecta-speeds.dat
 # The same file beside the cassiopeia-a-miri-layers bank; restored from the same origin (src/objects/cassiopeia-a-miri-layers/source/manifest.json).
 src/objects/cassiopeia-a-miri-layers/source/ejecta-speeds.dat
-# A star's brightness map from the TESS or K2 mission's own light curves (108 KB a map, hundreds of stars); built by packages/telescope-cli/src/archives/tess/reduce.mts, restored from the source mirror.
+# A star's brightness map from the TESS or K2 mission's own light curves, or from a Kepler star's KEPSEISMIC light curve (108 KB a map, hundreds of stars); built by packages/telescope-cli/src/archives/tess/reduce.mts, restored from the source mirror.
 src/objects/*/source/science/tess/*.dat
 src/objects/*/source/science/k2/pdcsap/*.dat
+src/objects/*/source/science/kepler/kepseismic/*.dat
 src/objects/*/source/science/tess/pdcsap/*.dat
+src/objects/*/source/science/k2/pdcsap/fine/*.dat
+src/objects/*/source/science/tess/pdcsap/fine/*.dat
+src/objects/*/source/science/kepler/kepseismic/fine/*.dat
 # M1-67's model grid (17 MB); built by packages/bake/authoring/m1-67/shell-grid.mts, restored from the source mirror.
 src/objects/m1-67-layers/source/shell-grid.dat
 # The Crab's measured filaments (416,573 rows, 11.5 MB); built by packages/bake/authoring/m1/filament-speeds.mts, restored from the source mirror.
@@ -102,6 +106,8 @@ src/objects/venus/source/akatsuki/*.nc
 !src/objects/*-corona/source/previews/*.png
 !src/objects/eps-eridani-disc/source/previews/dust.png
 !src/objects/fomalhaut-disc/source/previews/dust.png
+!src/objects/hd-95086-disc/source/previews/dust.png
+!src/objects/moth-disc/source/previews/dust.png
 !src/objects/hd-181327-disc/source/previews/reflectance.png
 !src/objects/sun-cor1-density/source/previews/cor1-density.png
 !src/objects/beta-pictoris-disc/source/previews/color.png
@@ -334,10 +340,11 @@ src/objects/*/source/**/*.bpc
 /src/objects/betelgeuse-shell/.prepared-*/
 /src/objects/eps-eridani-disc/.prepared-*/
 /src/objects/fomalhaut-disc/.prepared-*/
+/src/objects/hd-95086-disc/.prepared-*/
+/src/objects/moth-disc/.prepared-*/
 /src/objects/hd-181327-disc/.prepared-*/
 /src/objects/pds-70-disc/.prepared-*/
 /src/objects/m42-volume/.prepared-*/
-/src/objects/helix-volume/.prepared-*/
 /src/objects/m2-9-volume/.prepared-*/
 /src/objects/m1-volume/.prepared-*/
 /src/objects/smc-volume/.prepared-*/
@@ -505,8 +512,6 @@ src/objects/*/source/ford-pne/table3
 src/objects/*/source/hartke-pne/kinema.dat
 src/objects/*/source/yuan-*/table*.dat
 src/objects/*/source/gonzalez-gc/table6.dat
-src/objects/m32-layers/source/merrett-pne/table3.dat
-src/objects/m110-layers/source/merrett-pne/table3.dat
 src/objects/*/source/whitlock-gc/tablea1.dat
 src/objects/*/source/cantiello-gc/table1.dat
 src/objects/*/source/lomeli-gc/table6.dat

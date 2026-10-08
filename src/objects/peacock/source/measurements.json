@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "peacock",
+  "angularDiameterMas": 0.8,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 3,283,704 km at 54.83 pc = 0.8 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 54.825,
+  "distanceSource": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 100751: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 18.24 +/- 0.52 mas, inverted (https://doi.org/10.1134/S1063773712050015): 54.825 +/- 1.563 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 3283704,
+  "radiusSource": "Radius 4.72 +/- 0.32 solar radii from Computed here, not printed by a paper: 4.72 +/- 0.32 solar radii, from the limb-darkened angular diameter 0.8 +/- 0.05 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 18.24 +/- 0.52 mas (van Leeuwen 2007, XHIP) (https://doi.org/10.1093/mnras/167.1.121): 3,283,704 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 17880 +/- 680 K from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 193924: effective temperature 17880 +/- 680 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 17880,
+  "effectiveTemperatureSource": "Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 193924: effective temperature 17880 +/- 680 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093)",
+  "surfaceGravityLogg": 3.94,
+  "surfaceGravitySource": "log g 3.94 +/- 0.14 from 2015ApJ...804..146D, measured from the star's Stroemgren photometry: SIMBAD's compilation holds no spectroscopic gravity of this star (https://ui.adsabs.harvard.edu/abs/2015ApJ...804..146D)",
+  "spectralType": "B2IV",
+  "spectralTypeSource": "SIMBAD, * alf Pav: spectral type B2IV",
+  "objectType": "Spectroscopic Binary",
+  "objectTypePath": "* > ** > SB*",
+  "objectTypeSource": "SIMBAD, * alf Pav: main object type SB*, Spectroscopic Binary",
+  "projectedRotationSpeedKmS": 15,
+  "projectedRotationSpeedSource": "SIMBAD, * alf Pav: projected rotation speed 15 km/s, the measurement SIMBAD prefers (2005yCat.3244....0G)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

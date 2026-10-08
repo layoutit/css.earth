@@ -1,0 +1,53 @@
+{
+  "id": "arxiv-2402-14954",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Colman et al. (2024): Methods for the detection of stellar rotation periods in individual TESS sectors and results from the Prime mission",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2402.14954"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad2c86"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2402.14954",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad2c86",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2402.14954",
+      "checkedOn": "2026-10-07",
+      "locator": "arXiv listing: title, authors, DOI (AJ 167, 189). Sects. II.4 and III print the sample, the light curves and what a detection is; the consolidated catalogue of 10,909 targets is VizieR J/AJ/167/189, table fig12, whose ReadMe describes each column."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Colman et al. (2024)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2402.14954"
+    }
+  ],
+  "creators": [
+    "I. L. Colman",
+    "R. Angus",
+    "T. David",
+    "J. Curtis",
+    "S. Hattori",
+    "Y. L. Lu"
+  ],
+  "publicationDate": "2024"
+}

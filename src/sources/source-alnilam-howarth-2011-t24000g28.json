@@ -1,0 +1,35 @@
+{
+  "id": "source-alnilam-howarth-2011-t24000g28",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Alnilam · alnilam howarth 2011 t24000g28",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/413/1515/A10/P00v02r/t24000g28.ucE",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/alnilam/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Howarth (2011), MNRAS 413, 1515 (VizieR J/MNRAS/413/1515)",
+      "scope": "The alnilam howarth 2011 t24000g28 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "VizieR catalogue data, public with citation of the paper and CDS",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

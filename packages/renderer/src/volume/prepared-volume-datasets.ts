@@ -109,6 +109,15 @@ export function volumeDatasetCompositeOpacity(banks: readonly { axis: VolumeAxis
   return brightness.overall * gain;
 }
 
+/** Each axis stack's share of the completed image, as its camera last weighed it: the opacity written on its root, and no
+ * share for a stack that carries no weight. Whether the root is displayed yet is not read. A stack the camera turns to is
+ * displayed by a paced join on a later frame (prepared-volume-runtime.ts), and with the camera still nothing weighed the
+ * cloud again: the Pleiades, opened on a dataset link, stayed at opacity 0 in 5 of 12 loads (2026-10-07). */
+const stackShares = (roots: readonly HTMLElement[]) => roots.map((axisRoot, index) => {
+  const opacity = Number(axisRoot.style.opacity);
+  return { axis: (['x', 'y', 'z'] as const)[index], opacity, visible: opacity > 0 };
+});
+
 /** A dataset as the mount holds it: its index entry, with its files read through the source. */
 type MountedDataset = Omit<PreparedVolumeDatasetEntry, 'volume' | 'stars'> & { readonly volume: PreparedCssVolume; readonly stars: PreparedCataloguePoints };
 
@@ -210,9 +219,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         const marker = create('span'); marker.hidden = true; surface.append(marker); root.insertBefore(surface, end);
         const active = { dataset };
         const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: dataset.volume, resolveResource: resolvePrepared, createElement: create, nativeFocalCss, lazyDetail: lazy },
-          detail => volumeDatasetCompositeOpacity(detail.roots.map((axisRoot, index) => ({
-            axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
-          })), active.dataset.brightness));
+          detail => volumeDatasetCompositeOpacity(stackShares(detail.roots), active.dataset.brightness));
         for (const axisRoot of runtime.roots) axisRoot.style.background = 'transparent';
         const family = { datasets: Object.freeze(datasets), active, surface, runtime };
         families.push(family);
@@ -249,9 +256,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
           for (const axisRoot of bank.runtime.roots.slice(builtRoots)) axisRoot.style.background = 'transparent';
           updateResidencyMetadata();
         }
-        const opacity = volumeDatasetCompositeOpacity(bank.runtime.roots.map((axisRoot, index) => ({
-          axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
-        })), dataset.brightness);
+        const opacity = volumeDatasetCompositeOpacity(stackShares(bank.runtime.roots), dataset.brightness);
         // Impostors contain the saved exposure; their detail wrapper owns the matching full-volume exposure.
         writeStyle(bank.surface, 'opacity', dataset.volume.impostors ? '1' : String(opacity));
         const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, dataset.volume.frame,

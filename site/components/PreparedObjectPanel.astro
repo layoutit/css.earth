@@ -4,7 +4,7 @@ import ObjectShell from "./ObjectShell.astro";
 
 import { parsePanelControls, uniformDatasetColors, withDatasetText } from '../content/prepared-panel-content.mts';
 
-interface Props { navigation?: boolean; preparedContent: unknown; preparedControls: unknown; }
+interface Props { navigation?: boolean; preparedContent: unknown; preparedControls: unknown; preparedMotion: { spin: boolean; lightCurve: boolean }; }
 const { preparedContent, preparedControls } = Astro.props;
 const content = parsePreparedPanelContent(preparedContent);
 const controls = parsePanelControls(preparedControls);
@@ -62,6 +62,7 @@ const datasets = titled && { ...titled, controls: titled.controls.map(dataset =>
   galleries={content.galleries}
   datasets={datasets}
   settings={controls.settings}
+  motion={Astro.props.preparedMotion}
   destinations={content.destinations}
   features={content.features}
 />

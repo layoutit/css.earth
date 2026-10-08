@@ -18,6 +18,8 @@ The adopted **1326 −69/+77 pc** cluster distance follows [Wright et al. (2019)
 
 Exact input identities, credits, reuse terms and processing pins are in the [source manifest](source/manifest.json). The [investigation ledger](investigations.json) records selected and rejected routes; “included” means used by this delivery, not scientifically validated.
 
+**Far view.** From afar the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and lays each dataset's own Sun-facing impostor view through the frame's centre, across the line of sight from Earth; no image is re-encoded. From Earth the plane shows the view the volume was drawn as, and the hand-over keeps its position, size and orientation. It replaced a camera-facing billboard of the same view, which turned with the camera. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/m8-volume backing` again.
+
 ## Evidence
 
 - Final Helix/Lagoon app inspection records front/oblique views of all three Lagoon datasets after the edge correction. The earlier field report predates that correction; report context states reproduction gaps.
@@ -26,6 +28,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 ## Known problems
 
+- From well off the Earth line of sight the far plane is foreshortened, and edge-on it vanishes, while the volume keeps its depth. The hand-over there is a cross-fade between two different shapes.
 - Fine filaments soften; residual stellar halos, thin layers and oblique grid traces remain. The wider optical taper and 240″ infrared edge fade soften boundaries without creating missing observations.
 - Neutral transitions remain where infrared coverage ends. Foreground absorption, distinct molecular layers and local diagnostic data are not fitted.
 - Hubble central images failed registration qualification; Herschel’s central zero/nonfinite coverage cannot constrain the Lagoon. Neither is a delivered dataset.

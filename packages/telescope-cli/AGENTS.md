@@ -32,6 +32,8 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts <toolchain> install|verify`), which the
   `@cssearth/telescope/node` errors name when a toolchain is missing.
 
+`src/archives/archives.mts` describes every archive once (registry identifier and pinned address, the search `explore` runs, the ledger command); `explore`, the registry check and `src/archives/ledgers.mts`, which runs every ledger command, read that list, and a new archive is added there, not in each of them. `src/archives/memory.mts` is the memory between explorations: a question asked in the last day is answered from the evidence file it saved, never from anything else, and `--fresh` turns it off.
+
 The object generator behind `telescope new-object` is `src/new-object/`: `cli.mts` is the entry the telescope runs as a process of its
 own through `workspace-commands/new-object.mts`, `new-object-cli.mts` is the standalone entry for the modes the telescope does not expose
 (`--star-limb`, `--imaged-limb`, `--star-lit`, `--thermal`, `--thermal-entries`, `--expected-glow`, `--host-light`, `--phase-curve`, `--simulation`, `--rock-eclipse`, `--published-map`, `--charts`, `--retext`, `--retime`, `--rename`, `--draft-photometry`, `--photometry`, the shape-only scaffold), and
@@ -100,9 +102,48 @@ that paper uses; do not widen an entry beyond its paper, do not add a limit no p
 our own stars: a comparison with the catalogues is evidence for the note, not a setting. Where an entry reads something
 into its paper, its comment says so.
 
-`verdict.mts` holds the verdict's shape and three checks against what is already published of the star (its catalogued
-period, SIMBAD's type, the fastest its radius and mass let it turn); each can only withhold a map. `neighbours.mts` counts
-the Gaia sources around a star for its page to say. `map.mts` has starry fit the map of each accepted light curve.
+Three things around the two methods are stated in the note as this repository's. K2's light is judged first, and a star
+K2's method refuses is judged on its TESS light too (`reduceStar`); a rotation K2's method accepts stays K2's. A star
+whose record holds no temperature or no surface gravity takes the missing value from the TESS Input Catalog, the
+catalogue Holcomb et al. select from, as the primary header of the star's own 2-minute light curve carries it (an entry's
+`catalogue`; `tools.py input-catalogue` is lightkurve reading the header): only to fill, never to replace, and only when
+the light curve's target lies within 3 arcseconds of the star. And `tess/published.mts` holds the third kind of entry, a
+paper's own verdict: a paper whose code cannot be run here (Colman et al. 2024: no licence) still lists in its published
+table the stars it found turning. An entry there reads the table through the telescope's TAP reader and says what a row
+asserts and which columns decide, after the paper's sections on its sample, its light curves and its table and the
+table's own description have been read; it is looked up only for a star the wired method refuses, it is a verdict only
+on the light the paper judged, and it measures nothing. A column that does not hold what its description says is not
+read, and the entry's comment gives the count. `tess/canto-martins.mts` is a second such entry, for a TESS Object of
+Interest (Canto Martins et al. 2020: its periods were chosen by its authors' inspection), and `tess/papers.mts` lists
+the entries in the order they are asked. A paper is wired only when it measured on the mission's 2-minute PDC-MAP light
+curves, marks its firm detections of rotation and says which of a star's light a row is of; the note lists the papers
+read that do not, each with the reason. A paper's verdict is drawn at the paper's own period or not at all
+(`keptAsPublished`): half the catalogued period, or a period apart from another table's where the star's record adopts
+none, withholds it, and two papers that print one star periods more than 20% apart give it none (`publishedApart`).
+
+A Kepler star has no method wired. Its rotation is its row in the tables of Santos et al. (2019, 2021): two more entries
+of the published-verdict kind (`kepler/santos.mts`), asked of a star no method and no paper above gives a rotation. Its
+light is the KEPSEISMIC light curve those papers judged (`kepler/kepseismic.mts` finds the three files at MAST, and this
+repository's FITS reader reads one: its table, and its mark for each point), of the filter the papers read a period of
+that length in. That light curve is the star's four years in one series, so it is cut at the mission's own quarters
+(`kepler/quarters.json`, from the Kepler Data Release 25 Notes; `kepler/quarters.mts`), and a quarter has a map when the
+papers' rule on a quarter's variance keeps it (García et al. 2014) and its measured light spans a turn of the star. A map
+is fitted to the measured points only. What this path reads into the papers and into the file is in the note's list and
+in the two modules' comments: the filter of a row, the flagged rows left out, the file's unlabelled marks, the rule at a
+star's first and last quarter, the one-turn limit, and the light's swing, which is measured here.
+
+`verdict.mts` holds the verdict's shape and four checks against what is already published of the star (its catalogued
+period, SIMBAD's type, the fastest its radius and mass let it turn, and the share of other stars' light in its TESS
+pixels); each can only withhold a map, a paper's own verdict included. The fourth is a published limit: a TESS target
+the TESS Input Catalog gives a contamination ratio of 0.2 or more is not read as its star's (`blended`; Fetherolf et al.
+2023 and García Soto et al. 2023 print that limit for their own searches of the same light curves, and
+`light-curves.mts` asks MAST for the ratio). Do not replace it with a number of ours, and do not decide anything on the
+aperture shares a receipt keeps from a light curve's header (`CROWDSAP`, `FLFRCSAP`): no paper found prints a limit on
+them for rotation. The ratio is of TESS's pixels: do not set it beside K2's or Kepler's light, for which no published
+limit is wired; a star it leaves unread on TESS is still asked for among Kepler's light curves. `neighbours.mts` counts
+the Gaia sources around a star for its page to say. `map.mts` has starry fit the map of each accepted light curve, and
+writes its values to five decimals of the mean, or to seven for a map whose whole range would hold under 256 steps at
+five (`written`): that is how a number is written, and no star gains or loses a map by it.
 `reduce.mts` runs a star, or every star with `--all`, and writes its receipt and light curves under ignored
 `output/tess/<star id>/`. The science is the pinned codes' (`toolchain.json`, and the telescope's starry toolchain);
 `tools.py` holds calls and nothing else ([method note](../../docs/stellar-brightness-maps-from-tess.md)).
@@ -112,14 +153,29 @@ writes the records any map needs (table, manifest input, raster surface, dataset
 `route.mts` reads a spec, writes each star and bakes from a `MapRoute`; `routes.mts` lists the kinds (`MAP_ROUTES`). A kind supplies only what is its own: its column,
 units, colors, sentences, how its reduction is read and the catalogue records it is bound to. `magnetic/` is the kind for
 maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a convention page takes the maps' tilt) and
-`brightness/` the kind for maps from a star's TESS or K2 mission light curves (`--from-pixels`, a spec's `brightnessMaps`; what differs by
-mission is one table, `MISSIONS`; a map's records name the published method that judged it, in the method's own words, and the paper's own light curve; the page's axis is never
-changed, and the measured period goes into the star's measurements record; `new-object-cli.mts --pixel-light` writes the
+`brightness/` the kind for maps from a star's TESS, K2 or Kepler light curves (`--from-pixels`, a spec's `brightnessMaps`; what differs by
+mission is one table, `MISSIONS`, which also says whose light curve is read: the mission's own, or KEPSEISMIC; a map's records name the published method that judged it, in the method's own words, and the paper's own light curve; a map drawn on a paper's own verdict says the rotation and its period are that paper's, names the method that refused the same light, and brings no measured period; the page's axis is never
+changed, and a period measured here goes into the star's measurements record; `new-object-cli.mts --pixel-light` writes the
 reduction's verdict, mission, window and light scatter into the record of every star it looked at, mapped or not). A kind whose maps are how the star looks
 supplies `natural`: the newest map in the star's own color, which becomes the dataset the page opens on
 (`Color + brightness`). It is the Brightness map's scale drawn from a darker, richer step of the star's own hue up to its color (`tinted`, `DARK_STEP`; never toward black), far stronger than the
 real contrast, which cannot be seen; its sentences say so with the star's number, and say what is measured (longitudes) and
-what is not (latitudes, shapes, any color change). A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
+what is not (latitudes, shapes, any color change). A map's scale is drawn from its range, never a reason to leave a star out: a receipt gives the range to a tenth of a percent, and a map that reads 100 to 100 there takes it from its table (`mapRange`).
+A table written with seven decimals is filed under `fine/` in its mission's directory (`tableDirectory`): the source mirror keeps the first bytes published at a path, so a table written again takes a new one.
+A kind's steps take its `stepGroup` id, or that id with `-maps` after it on a page whose other datasets already hold it as a dataset's id or a group's (a published map filed as `brightness`).
+`--bake` takes 40 stars a command, and removes a star's stale arrival picture just before its own group is baked. A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
+
+`pulsation/` is the kind for a pulsating star's light through one cycle (`--from-pulsation`, a spec's `pulsations`). It measures
+and fits nothing: the light is the Fourier model the star's source publishes, the Gaia DR3 `vari_cepheid` row the package keeps
+(`photometry/gaia-dr3-vari-cepheid.csv`, light-curve.mts), read and checked by `@cssearth/bake/photometry`, and a step is that
+model's value at one phase as a share of the light at maximum. A step is how the star looks, so the kind supplies `look` (the
+star's color dimmed in linear light, the first dataset's limb as it is, no legend) and one table for all its steps (`tableOf`,
+`variableOf`). Ten steps a tenth of a period apart is a display choice (`PHASES`). No color or size change is drawn: add one
+only with a published calibration, or a paper's own measurement, that covers the star, never a relation chosen here. A page
+that plays the same model over its disc names the step group in its profile (`lightCurve.stills`), and the bake takes the veil
+off those datasets. A star whose package names no Gaia source is tied to its row by its place and its catalogue row's period
+(`installPublishedModel`; both limits are stated in the note as this repository's). The page keeps its default dataset
+([method note](../../docs/pulsating-stars-light-through-a-cycle.md)).
 
 The papers API behind `telescope papers` is `src/papers.mts` and `src/papers/`. There is one search path: `findWorks`
 (`papers/works.mts`) asks OpenAlex, then arXiv when OpenAlex refuses, and the command and the star survey both call it; a

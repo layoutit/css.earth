@@ -513,6 +513,38 @@
       ],
       "path": "magnetic/radial-field.fits",
       "url": "https://earth-assets.lowpoly.cc/source-cache/jupiter/magnetic/radial-field.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "spacecraft/jupiter_vgr1_2025.jpg",
+      "url": "https://bjj.mmedia.is/data/jupiter_vgr1/jupiter_vgr1_2025.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "spacecraft/jupiter_vgr1_bad_data_mask.png",
+      "url": "https://bjj.mmedia.is/data/jupiter_vgr1/jupiter_vgr1_bad_data_mask.png"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "spacecraft/jupiter_vgr2.jpg",
+      "url": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/jupiter_vgr2.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "spacecraft/jupiter_vgr2_bad_data_mask.png",
+      "url": "https://bjj.mmedia.is/data/jupiter_vgr2_ogv/jupiter_vgr2_bad_data_mask.png"
     }
   ]
 }

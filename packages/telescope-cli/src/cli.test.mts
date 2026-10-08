@@ -139,6 +139,9 @@ test('family-run parses explicit params, rejects disagreement and has determinis
 
 test('explore parses optional filters without inventing strict scientific criteria',()=>{
   const parsed=parseCli(['explore','eris','--kind','cube','--wavelength','2.2,2.4','--out','runs/eris','--json']);
+  assert.equal(parsed.command==='explore'&&parsed.fresh,false);
+  const fresh=parseCli(['explore','eris','--fresh']);assert.equal(fresh.command==='explore'&&fresh.fresh,true);
+  assert.throws(()=>parseCli(['explore','eris','--fresh','--fresh']),/Repeated option --fresh/u);
   assert.equal(parsed.command,'explore');if(parsed.command!=='explore')return;
   assert.deepEqual(parsed.request,{target:'eris',kind:'cube',wavelengthMicrometres:[2.2,2.4]});
   assert.equal(parsed.directory,resolve('runs/eris'));assert.equal(parsed.json,true);

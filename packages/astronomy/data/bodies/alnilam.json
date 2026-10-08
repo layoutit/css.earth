@@ -1,0 +1,30 @@
+{
+ "id": "alnilam",
+ "classification": "star",
+ "order": 5809,
+ "physical": {
+  "name": "Alnilam",
+  "horizonsCode": null,
+  "meanRadiusKm": 31306500,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 24820
+ },
+ "physicalNotes": "Radius 45 +/- 13 solar radii from Computed here, not printed by a paper: 45 +/- 13 solar radii, from the limb-darkened angular diameter 0.69 +/- 0.04 mas of Hanbury Brown, Davis & Allen (1974), MNRAS 167, 121 (the Narrabri intensity interferometer; Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, Table 1, and the JMDC) and the Hipparcos parallax 1.65 +/- 0.45 mas (van Leeuwen 2007, XHIP) (https://doi.org/10.1093/mnras/167.1.121): 31,306,500 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 24820 +/- 920 K from Code, Davis, Bless & Hanbury Brown (1976), ApJ 203, 417, HD 37128: effective temperature 24820 +/- 920 K (Table 6), from the measured angular diameter and the star's flux from the ultraviolet to the infrared (https://doi.org/10.1086/154093). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 84.05338544,
+  "declinationDegrees": -1.20191724,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 606.061,
+  "properMotionRaMasPerYear": 1.44,
+  "properMotionDecMasPerYear": -0.78,
+  "radialVelocityKmPerS": 27.3,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 26311: RAJ2000 84.05338544, DEJ2000 -1.20191724 (ICRS at epoch J1991.25), from the archived row src/objects/alnilam/source/photometry/catalogue-row.tsv; SIMBAD names it HD 37128",
+   "distance": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 26311: the Hipparcos parallax (van Leeuwen 2007) the radius is computed with, 1.65 +/- 0.45 mas, inverted (https://doi.org/10.1134/S1063773712050015): 606.061 +/- 165.289 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 26311 (same row): 1.44, -0.78 mas/yr",
+   "radialVelocity": "Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 26311: RV 27.3 +/- 0.8 km/s (quality A) (https://doi.org/10.1134/S1063773712050015)"
+  }
+ }
+}

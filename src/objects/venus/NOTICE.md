@@ -1,11 +1,18 @@
 # Venus source notice
 
-The Venus cloud texture is pinned from the OpenSpace project at commit
-`56e29b54b8592084ff1fef47c2e08de0b22ce516` under the OpenSpace MIT License
-included in `LICENSE.OPENSPACE-MIT`; no source-backed global ultraviolet cloud
-mosaic has been qualified yet (the investigation ledger records the Akatsuki
-route). The cloud-top limb law is transcribed from Pérez-Hoyos et al. (2018),
-doi:10.1002/2017JE005406, cited in `source/manifest.json`.
+The Venus cloud map was created by Björn Jónsson from NASA/JPL Galileo images
+of the February 1990 flyby (<https://bjj.mmedia.is/data/venus/venus.html>). He
+publishes his planetary maps for free use with credit and asks sites to link
+to them, not to host a copy; this repository holds no copy of the file and
+downloads it from his address. The cloud-top limb law is transcribed from
+Pérez-Hoyos et al. (2018), doi:10.1002/2017JE005406, cited in
+`source/manifest.json`.
+
+The five early radar maps (1967 to 1983) are from Venus Geospatial Raster
+Datasets, prepared by T. Austin et al. (2026), doi:10.5281/zenodo.16416846,
+CC BY 4.0. The observations are those of Ingalls et al. (1968), Saunders and
+Malin (1977), Campbell and Burns (1980), Pettengill et al. (1980) and Campbell
+et al. (1984).
 
 The Magellan C3-MDIR synthetic color mosaic (radar) is credited to the USGS
 Astrogeology Science Center and NASA/JPL's Magellan mission, and is read from

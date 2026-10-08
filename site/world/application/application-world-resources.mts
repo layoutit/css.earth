@@ -1,4 +1,4 @@
-import { IMAGE_MESH_SCHEMA, bankCataloguePoints, parseDatasetBillboards, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
+import { IMAGE_MESH_SCHEMA, bankCataloguePoints, parseDatasetBillboards, parseGalaxyBacking, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { DATASET_VISIBILITY } from '../../browser/runtime-policy.mts';
 import { isRecord } from '@cssearth/core';
 // Generated after the prepared dataset payloads are restored: text now, validated below.
@@ -160,6 +160,14 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         // Published catalogues drawn through the bank, with its opacity (its descriptor's `cataloguePoints`).
         cataloguePointUrls: bankCataloguePoints(parseObjectDescriptor(set.descriptor)).map(bank => set.resolve(`prepared/${bank}.bin`)) };
     });
+    // A bank drawn from afar by its backing plane (its billboard facts say so), a volume dataset bank or an image-layer
+    // bank, reads it from its own file list.
+    const loadBacking = createInFlightLoader(async (id: string) => {
+      if (!volumeDatasetIds.has(id) && !imageLayerIds.has(id)) throw new TypeError(`Unknown prepared bank with a backing: ${id}.`);
+      const set = await bankSet(id), path = 'prepared/backing.json';
+      return { payload: parseGalaxyBacking(JSON.parse(new TextDecoder().decode(await set.transport.read(path))), `${id}/${path}`),
+        resolveResource: (resource: string) => set.resolve(`prepared/${resource}`) };
+    });
     // The worker receives the validated summary and reads orbit paths on demand.
     // The bounded spatial-star sample is already inside pointAppearance;
     // the complete binary catalogue stays out of the app.
@@ -170,8 +178,9 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // The plan as it stands now: systems read later reach the universe through onWorldSystems below.
     const plan = applicationContext, sprites = billboards([plan.focus, ...plan.bodies]);
     const universe = createPreparedUniverse({
-      // The world's volume is the Milky Way's bank: clicking it opens its host's page.
+      // The world's volume is the Milky Way's bank: its caption carries its host's name, and clicking it opens its host's page.
       environmentLinks: (host => host ? { [applicationContext.volume.objectId]: `/${host.id}/` } : {})(insideHost(applicationContext.volume.objectId)),
+      environmentNames: (name => name ? { [applicationContext.volume.objectId]: name } : {})(hostName(applicationContext.volume.objectId)),
       contextBanks,
       stellarExtents: STELLAR_EXTENTS,
       // Published catalogues inside the galaxy, drawn as dust with it: the young disc and its warp (Skowron et al. 2019
@@ -180,7 +189,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       galaxyCataloguePoints: ['globular-clusters', 'old-star-dots', 'dots'].map(id => volumeSet.resolve(`prepared/${id}.bin`)),
       galaxyBacking: volumeSet.resolve('prepared/backing.json'),
       context: plan, volume, pointAppearance, sprites,
-      imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset,
+      imageLayerBanks, loadImageLayer, pointBanks, volumeDatasetBanks, loadVolumeDataset, loadBacking,
       backgroundCataloguePoints,
       // Every context object prepared as an image mesh (the cosmic microwave background of the Observable Universe), cut
       // open unless its page's dataset shows it whole or hides it. Hidden, its caption names the object it bounds.

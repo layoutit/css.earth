@@ -29,6 +29,7 @@ ESA/Webb's picture of the Southern Ring Nebula (NGC 3132), laid at the depths it
 - **Drawing:** from the front, 56 terraces parallel to the picture; from the side, 56 and 56 curtains through its columns and rows, as the Ring Nebula's bank is drawn. The face is 1,500 px across the picture.
 - **Size:** 2.42 × 2.25 arcmin, 0.53 pc wide at 754 pc.
 - **Rim:** the picture fades out between 57.0″ and 63.3″ from the star, the largest circle the frame holds.
+- **Far view:** from afar, while another body is selected, the bank is one image on a plane fixed in its frame, drawn as the Milky Way's backing is. [`prepare-galaxy-backing.mts`](../../../packages/bake/cli/prepare-galaxy-backing.mts) reads the [backing recipe](source/backing/recipe.json) and composites the bank's flat source-facing slices as seen from the Sun, the picture its camera-facing billboard drew, onto the slices' own plane through the frame's centre. The plane therefore lies where the layered model's picture plane does, and turns and foreshortens as the model does. After a rebake of the bank, run `node packages/bake/cli/prepare-galaxy-backing.mts src/objects/ngc-3132-layers backing` again. From afar NGC 3132 is drawn by one of its banks at a time: the bank of its selected dataset, or this bank while none is selected. The others draw nothing there, so two far images of the same nebula never overlap.
 
 ## Evidence
 
@@ -44,6 +45,7 @@ The bake's tests ([density-grid.test.ts](../../../packages/bake/src/image-layers
 
 ## Known problems
 
+- The far picture holds only the flat slices' light: the walls' patches are left out, as they were from the billboard it replaced, so from afar the bank looks fainter than its layers do once selected. Edge-on the plane vanishes.
 - The depths are far coarser than the picture. A grid cell is thirty picture pixels, and the instrument's 26.8 km/s line width is some 15″ of depth at the age the paper fits (2,061 years), before its deconvolution. The walls are smooth surfaces; a filament's own depth is not known.
 - The gas is drawn as two surfaces, not as a volume: a thick ring shows as two sheets with nothing between them.
 - The grid rests on the paper's assumption that speed grows in proportion to distance from the star. The paper notes it fits less well in the faint outer parts.
