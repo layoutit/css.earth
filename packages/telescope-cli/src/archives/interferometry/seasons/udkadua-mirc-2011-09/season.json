@@ -1,0 +1,134 @@
+{
+  "schema": "cssearth-star-surface-season@1",
+  "id": "udkadua-mirc-2011-09",
+  "object": "udkadua",
+  "title": "λ Andromedae, CHARA/MIRC, six nights from 2 to 24 September 2011 (Parks et al. 2021; Martinez et al. 2021)",
+  "target": "λ Andromedae",
+  "instrument": "mirc",
+  "band": "CHARA/MIRC H band (1.49-1.73 um), eight channels",
+  "papers": [
+    {
+      "record": "arxiv-2107-06366",
+      "citation": "Martinez et al. (2021), ApJ 916, 60",
+      "title": "Martinez et al. (2021): Dynamical Surface Imaging of λ Andromedae",
+      "arxiv": "2107.06366",
+      "doi": "10.3847/1538-4357/ac06a5",
+      "creators": [
+        "A. O. Martinez",
+        "F. R. Baron",
+        "J. D. Monnier",
+        "R. M. Roettenbacher",
+        "J. R. Parks"
+      ],
+      "year": "2021",
+      "locator": "arXiv listing and Crossref: title, authors, DOI. Table 4 gives the star's angular radius, limb-darkening coefficient, inclination, position angle and rotation period; section V describes the ROTIR reconstruction of the 2010 and 2011 nights."
+    },
+    {
+      "record": "arxiv-1508-04755",
+      "citation": "Parks et al. (2021), ApJ 913, 54",
+      "title": "Parks et al. (2021): Interferometric Imaging of λ Andromedae: Evidence of Starspots and Rotation",
+      "arxiv": "1508.04755",
+      "doi": "10.3847/1538-4357/abb670",
+      "creators": [
+        "J. R. Parks",
+        "R. J. White",
+        "F. Baron",
+        "J. D. Monnier",
+        "B. Kloppenborg",
+        "G. W. Henry",
+        "et al."
+      ],
+      "year": "2021",
+      "locator": "arXiv listing and Crossref: title, authors, DOI. Table 1 lists the six nights of September 2011 and their numbers of points; section III.2 describes the SQUEEZE images."
+    }
+  ],
+  "data": {
+    "record": "rotir-demos-lambda-andromedae-mirc-2011",
+    "title": "λ Andromedae, CHARA/MIRC calibrated visibilities of six nights of September 2011, as shipped with ROTIR.jl",
+    "url": "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data",
+    "publisher": "F. Baron, ROTIR.jl (GitHub)",
+    "license": "Shipped in the public ROTIR.jl repository (GPL-3.0); CHARA Array data, acknowledge the array and the papers",
+    "locator": "Six files 2011Sep02 to 2011Sep24 .lam_And_prepped.oifits under demos/data at the pinned commit, read by demos/lam_and_reconstruction.jl there; their numbers of squared visibilities match Parks et al. (2021), Table 1.",
+    "credit": "CHARA Array/MIRC, September 2011, as calibrated by the authors of Parks et al. (2021) and Martinez et al. (2021) and shipped with ROTIR.jl (F. Baron)"
+  },
+  "filesSource": "The calibrated files the authors ship with ROTIR.jl at the commit this repository pins (demos/data), the six nights of 2011 both papers image.",
+  "nights": [
+    {
+      "night": "2011-09-02",
+      "file": "2011Sep02.lam_And_prepped.oifits",
+      "origin": "https://raw.githubusercontent.com/fabienbaron/ROTIR.jl/ad308759b741b861b6c19fedd001c323a3a64479/demos/data/2011Sep02.lam_And_prepped.oifits",
+      "bytes": 141120
+    },
+    {
+      "night": "2011-09-06",
+      "file": "2011Sep06.lam_And_prepped.oifits",
+      "origin": "https://raw.githubusercontent.com/fabienbaron/ROTIR.jl/ad308759b741b861b6c19fedd001c323a3a64479/demos/data/2011Sep06.lam_And_prepped.oifits",
+      "bytes": 167040
+    },
+    {
+      "night": "2011-09-10",
+      "file": "2011Sep10.lam_And_prepped.oifits",
+      "origin": "https://raw.githubusercontent.com/fabienbaron/ROTIR.jl/ad308759b741b861b6c19fedd001c323a3a64479/demos/data/2011Sep10.lam_And_prepped.oifits",
+      "bytes": 112320
+    },
+    {
+      "night": "2011-09-14",
+      "file": "2011Sep14.lam_And_prepped.oifits",
+      "origin": "https://raw.githubusercontent.com/fabienbaron/ROTIR.jl/ad308759b741b861b6c19fedd001c323a3a64479/demos/data/2011Sep14.lam_And_prepped.oifits",
+      "bytes": 279360
+    },
+    {
+      "night": "2011-09-19",
+      "file": "2011Sep19.lam_And_prepped.oifits",
+      "origin": "https://raw.githubusercontent.com/fabienbaron/ROTIR.jl/ad308759b741b861b6c19fedd001c323a3a64479/demos/data/2011Sep19.lam_And_prepped.oifits",
+      "bytes": 282240
+    },
+    {
+      "night": "2011-09-24",
+      "file": "2011Sep24.lam_And_prepped.oifits",
+      "origin": "https://raw.githubusercontent.com/fabienbaron/ROTIR.jl/ad308759b741b861b6c19fedd001c323a3a64479/demos/data/2011Sep24.lam_And_prepped.oifits",
+      "bytes": 77760
+    }
+  ],
+  "star": {
+    "diameterMas": {
+      "value": 2.742,
+      "source": "Martinez et al. (2021), ApJ 916, 60, Table 4 (https://arxiv.org/abs/2107.06366): angular radius 1.371 +/- 0.005 mas"
+    },
+    "limbPowerLaw": {
+      "value": 0.231,
+      "source": "Martinez et al. (2021), ApJ 916, 60, Table 4 (https://arxiv.org/abs/2107.06366): limb-darkening coefficient 0.231 +/- 0.024, power law"
+    },
+    "inclinationDegrees": {
+      "value": 85.63,
+      "source": "Martinez et al. (2021), ApJ 916, 60, Table 4 (https://arxiv.org/abs/2107.06366): inclination 85.63 +/- 2.32 degrees"
+    },
+    "positionAngleDegrees": {
+      "value": 26.09,
+      "source": "Martinez et al. (2021), ApJ 916, 60, Table 4 (https://arxiv.org/abs/2107.06366): position angle 26.09 +/- 0.82 degrees"
+    },
+    "rotationPeriodDays": {
+      "value": 54.2,
+      "source": "Martinez et al. (2021), ApJ 916, 60, Table 4 (https://arxiv.org/abs/2107.06366): rotation period 54.2 d, held fixed in the fit"
+    }
+  },
+  "reconstruction": {
+    "code": "rotir",
+    "level": 3,
+    "regularizer": "sobel2",
+    "weight": 10,
+    "iterations": 1000,
+    "source": "demos/lam_and_reconstruction.jl in ROTIR.jl at the pinned commit, the authors script for these six files: HEALPix level 3, sobel2 at weight 10, 1000 iterations. The paper printed a total-variation weight of 0.01 for its 2021 code; the pinned code states that its regularizer weights do not carry over."
+  },
+  "referenceNight": "2011-09-14",
+  "referenceNightSource": "A display choice of this repository: the night with the most squared visibilities (864).",
+  "check": {
+    "twinScales": [
+      0.98,
+      0.99,
+      1,
+      1.01,
+      1.02
+    ]
+  }
+}

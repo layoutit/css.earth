@@ -57,3 +57,19 @@ iota('ι Horologii: every deposited epoch reproduces the field energy of the pap
   // The strongest radial or azimuthal field in the 18 maps is 16.4 G; the paper's color bar runs to +/-12 G and saturates beyond.
   assert.ok(largest > 12 && largest < 17, `${largest}`);
 });
+
+test('a map outlines where a column of its own changes sign: the edge of what was never seen', async () => {
+  const work = await mkdtemp(resolve(tmpdir(), 'tecplot-'));
+  try {
+    // The second column is positive east of longitude 135 and negative before it: it crosses zero between the nodes at 90 and 180.
+    const rows = []; for (let j = 0; j < 3; j++) for (let i = 0; i < 5; i++) rows.push(`${i * 90} ${-90 + j * 90} 1 ${i * 90 - 135}`);
+    await writeFile(resolve(work, 'map.dat'), `TITLE = "test"\nVARIABLES = "Longitude [Deg]" "Latitude [Deg]" "B [G]" "Facing"\nZONE I=5, J=3, K=1, ZONETYPE=Ordered\nDATAPACKING=POINT\nDT=(SINGLE SINGLE SINGLE SINGLE)\n${rows.join('\n')}\n`);
+    const map = await loadTecplotLonLatMap(work, { path: 'map.dat', variable: 'B [G]', outlineZeroOf: 'Facing' });
+    assert.equal(map.outline!(135, 0, 1), true); assert.equal(map.outline!(133, 0, 1), false); assert.equal(map.outline!(137, 0, 1), false);
+    // Toward a pole a pixel spans more longitude, so the line keeps its width on the sphere.
+    assert.equal(map.outline!(137, 60, 1), true);
+    assert.equal(map.report.outlineZeroOf, 'Facing');
+    assert.equal((await loadTecplotLonLatMap(work, { path: 'map.dat', variable: 'B [G]' })).outline, undefined);
+    await assert.rejects(loadTecplotLonLatMap(work, { path: 'map.dat', variable: 'B [G]', outlineZeroOf: 'Seen' }), /no column "Seen"/u);
+  } finally { await rm(work, { recursive: true, force: true }); }
+});

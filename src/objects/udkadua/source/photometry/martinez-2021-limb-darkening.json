@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "udkadua",
+  "law": "power",
+  "source": "Martinez et al. (2021), ApJ 916, 60, Table 4, power-law limb darkening of the star from the ROTIR fit to the CHARA/MIRC nights of 2010 and 2011 (https://doi.org/10.3847/1538-4357/ac06a5)",
+  "band": "CHARA/MIRC H band, 1.5-1.7 um; not a visible band",
+  "alpha": {
+    "value": 0.231,
+    "uncertainty": 0.024,
+    "cell": "Limb-darkening coefficient 0.231 ±0.024"
+  },
+  "note": "I(mu)/I(1) = mu^alpha, the Hestroffer (1997) power law the paper fits. Its uncertainty is the paper's bootstrap. Parks et al. (2021), ApJ 913, 54, give 0.229 ± 0.111 from the same nights. The visible limb is not measured."
+}

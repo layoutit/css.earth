@@ -1,0 +1,34 @@
+{
+  "id": "rotir-jl",
+  "kind": "software",
+  "identityLevel": "work",
+  "title": "ROTIR.jl: interferometric imaging and light curve inversion on rotating spheroids (F. Baron, A. O. Martinez)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://github.com/fabienbaron/ROTIR.jl",
+      "label": "Source repository"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://github.com/fabienbaron/ROTIR.jl",
+      "checkedOn": "2026-10-08",
+      "locator": "Repository page: name, description and GPL-3.0 licence. The commit run is pinned in packages/telescope-cli/src/archives/interferometry/toolchains.json."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ROTIR.jl (F. Baron and A. O. Martinez), GPL-3.0",
+      "scope": "citation",
+      "evidence": "https://github.com/fabienbaron/ROTIR.jl"
+    }
+  ],
+  "creators": [
+    "F. Baron",
+    "A. O. Martinez"
+  ]
+}

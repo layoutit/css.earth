@@ -31,6 +31,16 @@
               "id": "color",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "surface-2011-09",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "color-surface",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }

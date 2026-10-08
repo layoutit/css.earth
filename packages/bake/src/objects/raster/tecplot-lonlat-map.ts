@@ -6,7 +6,9 @@
  *
  * The nodes are checked to form a regular grid from longitude 0 to 360 and latitude -90 to 90, both ends included; the map is
  * bilinear between nodes, so every node keeps its deposited value. `outlineLatitudes` (optional) are drawn as thin black lines, for
- * a limit the paper draws on its maps, such as the latitude the star never turns toward us. */
+ * a limit the paper draws on its maps, such as the latitude the star never turns toward us. `outlineZeroOf` (optional) names
+ * another column of the table, and the same thin line is drawn where that column changes sign: the edge of what a map's own
+ * coverage column says was never seen. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -40,6 +42,12 @@ export async function loadTecplotLonLatMap(root: string, value: unknown) {
   const column = table.variables.indexOf(variable);
   if (column < 2) throw new TypeError(`${path}: no map variable "${variable}"; it has ${table.variables.slice(2).map(v => `"${v}"`).join(', ')}.`);
   const node = (i: number, j: number) => table.values[j * table.columns + i]![column]!;
+  const edgeColumn = dataset.outlineZeroOf === undefined ? -1 : table.variables.indexOf(requireString(dataset.outlineZeroOf, 'outlineZeroOf'));
+  if (dataset.outlineZeroOf !== undefined && edgeColumn < 2) throw new TypeError(`${path}: no column "${String(dataset.outlineZeroOf)}" to outline the zero of.`);
+  // The edge column at a place, bilinear between nodes as the map is.
+  const edge = (longitude: number, latitude: number) => { const x = (((longitude % 360) + 360) % 360) / table.lonStep, y = (Math.max(-90, Math.min(90, latitude)) + 90) / table.latStep;
+    const i = Math.min(table.columns - 2, Math.floor(x)), j = Math.min(table.rows - 2, Math.floor(y)), dx = x - i, dy = y - j, at = (a: number, b: number) => table.values[b * table.columns + a]![edgeColumn]!;
+    return at(i, j) * (1 - dx) * (1 - dy) + at(i + 1, j) * dx * (1 - dy) + at(i, j + 1) * (1 - dx) * dy + at(i + 1, j + 1) * dx * dy; };
   let minimum = Infinity, maximum = -Infinity;
   for (const row of table.values) { minimum = Math.min(minimum, row[column]!); maximum = Math.max(maximum, row[column]!); }
   return {
@@ -49,9 +57,13 @@ export async function loadTecplotLonLatMap(root: string, value: unknown) {
       const i = Math.min(table.columns - 2, Math.floor(x)), j = Math.min(table.rows - 2, Math.floor(y)), dx = x - i, dy = y - j;
       return node(i, j) * (1 - dx) * (1 - dy) + node(i + 1, j) * dx * (1 - dy) + node(i, j + 1) * (1 - dx) * dy + node(i + 1, j + 1) * dx * dy;
     },
-    ...(outlines.length ? { outline(_longitude: number, latitude: number, pixelDegrees: number) {
-      return outlines.some(limit => Math.abs(latitude - limit) <= pixelDegrees / 2);
+    ...(outlines.length || edgeColumn >= 2 ? { outline(longitude: number, latitude: number, pixelDegrees: number) {
+      if (outlines.some(limit => Math.abs(latitude - limit) <= pixelDegrees / 2)) return true;
+      if (edgeColumn < 2 || !Number.isFinite(longitude) || !Number.isFinite(latitude)) return false;
+      // A pixel is on the edge when the column's sign differs between its sides, east to west or north to south.
+      const half = pixelDegrees / 2, across = half / Math.max(0.05, Math.cos(latitude * Math.PI / 180));
+      return edge(longitude - across, latitude) > 0 !== edge(longitude + across, latitude) > 0 || edge(longitude, latitude - half) > 0 !== edge(longitude, latitude + half) > 0;
     } } : {}),
-    report: { format: 'tecplot-lonlat-map', variable, grid: { columns: table.columns, rows: table.rows, stepDegrees: [table.lonStep, table.latStep] }, minimum, maximum, outlineLatitudes: outlines },
+    report: { format: 'tecplot-lonlat-map', variable, grid: { columns: table.columns, rows: table.rows, stepDegrees: [table.lonStep, table.latStep] }, minimum, maximum, outlineLatitudes: outlines, ...(edgeColumn >= 2 ? { outlineZeroOf: table.variables[edgeColumn] } : {}) },
   };
 }

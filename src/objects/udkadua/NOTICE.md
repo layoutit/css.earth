@@ -6,4 +6,4 @@ Color: Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue 
 
 Placement: Gaia DR3 source 1939115478598580352: position, proper motion; distance: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 116584: distance 26.406 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.006), at which the luminosity and radius hold. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
 
-Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
+Limb darkening: Martinez et al. (2021), ApJ 916, 60.

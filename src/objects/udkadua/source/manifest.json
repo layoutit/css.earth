@@ -189,27 +189,62 @@
       }
     },
     {
-      "id": "udkadua-claret-2011-limb-darkening",
-      "path": "photometry/claret-2011-v-quadratic.tsv",
-      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
-      "credit": "Claret & Bloemen (2011), A&A 529, A75 (VizieR J/A+A/529/A75)",
-      "license": "VizieR catalogue data, public with citation of the paper and CDS",
-      "licenseEvidence": [
-        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
-      ],
-      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 4500..4750 K, log g 2.5..3, solar metallicity.",
-      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "id": "udkadua-martinez-2021-limb-darkening",
+      "path": "photometry/martinez-2021-limb-darkening.json",
+      "origin": "https://doi.org/10.3847/1538-4357/ac06a5",
+      "credit": "Martinez et al. (2021), ApJ 916, 60",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, each value with its quoted cell",
+      "redistribution": "Factual parameter transcription only; no paper figures",
       "consumers": [
         "assets",
         "datasets"
       ],
       "sourceBinding": {
+        "kind": "local",
+        "reason": "Published limb-darkening law transcribed with its cells; repinned when edited."
+      }
+    },
+    {
+      "id": "udkadua-interferometry-map-surface-2011-09",
+      "path": "science/interferometry/udkadua-mirc-2011-09.dat",
+      "origin": "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data",
+      "productId": "Surface map of λ Andromedae from mirc, 2 to 24 September 2011",
+      "title": "Surface map of λ Andromedae from its mirc visibilities of 2 to 24 September 2011: infrared brightness on a longitude-latitude grid",
+      "sourceUrl": "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data",
+      "credit": "CHARA Array/MIRC, September 2011, as calibrated by the authors of Parks et al. (2021) and Martinez et al. (2021) and shipped with ROTIR.jl (F. Baron); the star's size, limb, axis and period from Martinez et al. (2021), ApJ 916, 60; map made in this project with ROTIR.jl ad308759 and OITOOLS.jl f42d2bea",
+      "displayCredit": "mirc · mapped here",
+      "license": "Shipped in the public ROTIR.jl repository (GPL-3.0); CHARA Array data, acknowledge the array and the papers",
+      "licenseEvidence": [
+        "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data"
+      ],
+      "acquisition": "Built by packages/telescope-cli/src/archives/interferometry/surface-star.mts from the season udkadua-mirc-2011-09: the 6 calibrated files at https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data, fitted with the pinned ROTIR (HEALPix level 3, sobel2 at weight 10, 1000 iterations). The receipt with the fit and its checks is written again by that command under output/interferometry and is not kept in git.",
+      "redistribution": "A table of fitted values made in this project; the calibrated files themselves are not redistributed.",
+      "consumers": [
+        "rotir-surface"
+      ],
+      "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-udkadua-claret-2011-limb-darkening",
+            "catalogueId": "rotir-demos-lambda-andromedae-mirc-2011",
             "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
+            "evidence": "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data"
+          },
+          {
+            "catalogueId": "arxiv-2107-06366",
+            "role": "method",
+            "evidence": "https://doi.org/10.3847/1538-4357/ac06a5"
+          },
+          {
+            "catalogueId": "arxiv-1508-04755",
+            "role": "method",
+            "evidence": "https://doi.org/10.3847/1538-4357/abb670"
+          },
+          {
+            "catalogueId": "rotir-jl",
+            "role": "method",
+            "evidence": "https://github.com/fabienbaron/ROTIR.jl"
           }
         ]
       }
@@ -231,7 +266,7 @@
           "udkadua-stellar-color",
           "udkadua-kharitonov",
           "udkadua-preparation-raster",
-          "udkadua-claret-2011-limb-darkening"
+          "udkadua-martinez-2021-limb-darkening"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
