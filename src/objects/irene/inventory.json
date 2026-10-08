@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "irene-arrival.webp",
-      "bytes": 33336,
-      "sha256": "d72021af1f469e5d1bec115cede4226ce3656118e60a742eb0ab477f8dfee3ba"
+      "bytes": 34158,
+      "sha256": "4efea193dbbb2030b802ec0f726e64195c3ae4d361b147c65c32dfdf1d8d2797"
     },
     {
       "location": "public",
       "filename": "irene-billboard.webp",
-      "bytes": 4378,
-      "sha256": "d8227c3df74963b9fecc8ab5bf435c7f59f33e31c1ebfe21340226f424178727"
+      "bytes": 4554,
+      "sha256": "ef456a80d29786995c751c96d6b758c5917c48384da50afbb385878f18526101"
     },
     {
       "location": "public",
       "filename": "irene-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "irene-elevation-shadow-alpha@2x.webp",
-      "bytes": 618430,
-      "sha256": "b289f2eff20956724e2895c97b6685164d27e506b7212301d548ff1a6c08bed2"
-    },
-    {
-      "location": "public",
-      "filename": "irene-elevation-shadow@2x.webp",
-      "bytes": 138296,
-      "sha256": "29b408f789478b3c2cb8ee25a98d4106971f2e812ca5e993f33dac944650c528"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "irene-shape-shadow-alpha@2x.webp",
-      "bytes": 523244,
-      "sha256": "4664347e4a1e02fa4306c4c6fa6f6a0171d0245ac6d4589238ac3d95131d1f81"
-    },
-    {
-      "location": "public",
-      "filename": "irene-shape-shadow@2x.webp",
-      "bytes": 59308,
-      "sha256": "1e363118fad4f8fc78f765bab160cd9eff46364febe663f84bc58c6f3049742e"
-    },
-    {
-      "location": "public",
       "filename": "irene-shape-surface-alpha@2x.webp",
-      "bytes": 518968,
-      "sha256": "40e58da78ae5c06913310c0e58a780db4e80e009e7b4a20a03843fd275fda4dd"
+      "bytes": 88,
+      "sha256": "3426bc7f3a22c0de2b4692779a5af0c44329489994fbf7413a65b0967f7386ad"
     },
     {
       "location": "public",
       "filename": "irene-shape-surface@2x.webp",
-      "bytes": 52440,
-      "sha256": "fe4b8d36600fc8fe5fe3d18ab2f67d4d2100713dbc33bf518d4287477284c133"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1327,
-      "sha256": "579ac9e02a41e782552310f4361c057b41fe58cd478fb9d1baee03fd6230f6d8"
+      "sha256": "39924a6a5922edadf113955c05f39cd2c88eaccce7ee251a9276c8f062b28e96"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 4190,
-      "sha256": "d75e7e70664351d60d087ab1a5283d416eac39ef0cb0ca440070893efe7b771c"
+      "bytes": 4178,
+      "sha256": "8856500c6ce513637ef662c4175007f138e95aaab15ae4c8105dad61ea2a93fb"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 508460,
-      "sha256": "e5fdd5ca865e19946388bbd7cbf45abbd8234fba82d402258fbb5a5502e46d01"
+      "bytes": 683441,
+      "sha256": "4519eadd85faa3cf60946fea7e829e9c2334a45e519496e035dbe7039fc11d95"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 594095,
-      "sha256": "1fb43738b7318341b2ba4a03b66f0b75f09ab022ecfc6dc32ab573ce5da334aa"
+      "sha256": "f5e0744f4e954cff5f07eecc5006fc78e16f06ef1599c0aaa4cda883a6671a9c"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 1990,
-      "sha256": "67484f1061271ecf63e46b7a3ca6202e9d3b6da3b9372e15839d01ad3065ac75"
+      "bytes": 25792,
+      "sha256": "7edc18bcd8edc2f823c0b7fd06be5c1fe677b0f449948e9880a6c6c01b5fa75a"
     },
     {
       "location": "prepared",

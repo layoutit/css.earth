@@ -37,6 +37,50 @@ export function shapeFillIllumination(incidence: number): number {
   return .775 + .225 * Math.max(-1, Math.min(1, incidence));
 }
 
+/** The shading of a shape view with Shadows on: a floor and the Lambert term, as the lit atlases were painted. */
+export function shapeLitIllumination(incidence: number): number {
+  return .12 + .88 * Math.max(0, incidence);
+}
+
+/** Barycentric rows a face is sampled on for its one color: 21 points, the centres of the small triangles that tile it. */
+const FACE_COLOR_ROWS = 6;
+
+/** A shape view drawn without an image: one color a face for Shadows off and one for Shadows on. Each is the material
+ * times the mean, over the face, of the law the atlases painted a texel at a time, from the same interpolated normals;
+ * within a face the shading is flat. */
+export function shapeFaceColors(faces: readonly { vertexNormals: readonly (readonly number[])[] }[], sun: readonly number[], material: Rgb = NEUTRAL) {
+  if (sun.length !== 3 || !sun.every(Number.isFinite)) throw new TypeError('Shape face colors require a Sun direction.');
+  const hex = (factor: number) => `#${material.map(channel => Math.round(channel * factor).toString(16).padStart(2, '0')).join('')}`;
+  const flood: string[] = [], shadow: string[] = [];
+  for (const { vertexNormals: [n0, n1, n2] } of faces) {
+    if (!n0 || !n1 || !n2) throw new TypeError('A shape face needs its three vertex normals.');
+    let fill = 0, lit = 0, samples = 0;
+    for (let row = 0; row < FACE_COLOR_ROWS; row++) for (let column = 0; column < FACE_COLOR_ROWS - row; column++) {
+      const u = (row + 1 / 3) / FACE_COLOR_ROWS, v = (column + 1 / 3) / FACE_COLOR_ROWS;
+      const normal = n0.map((n, axis) => n + (n1[axis]! - n) * u + (n2[axis]! - n) * v);
+      const incidence = (normal[0]! * sun[0]! + normal[1]! * sun[1]! + normal[2]! * sun[2]!) / Math.hypot(normal[0]!, normal[1]!, normal[2]!);
+      fill += shapeFillIllumination(incidence); lit += shapeLitIllumination(incidence); samples++;
+    }
+    flood.push(hex(fill / samples)); shadow.push(hex(lit / samples));
+  }
+  return { flood, shadow };
+}
+
+/** The one color of a face from its painted texels: the mean, as `#rrggbb`, of the RGBA texels of `rect` that lie inside
+ * the triangle the leaf draws, base along the bottom and apex at the top centre. A dataset of a body without imagery
+ * takes its Shadows-on colors from here, so it publishes no lit copy of its atlas. */
+export function triangleMeanColor(texels: Uint8Array, atlasWidth: number, rect: { x: number; y: number; width: number; height: number }): string {
+  const sum = [0, 0, 0]; let inside = 0;
+  for (let py = 0; py < rect.height; py++) for (let px = 0; px < rect.width; px++) {
+    // In units of the rectangle: the left edge runs (0, 1) to (.5, 0), the right edge (.5, 0) to (1, 1).
+    if (Math.abs((px + .5) / rect.width - .5) > (py + .5) / rect.height / 2) continue;
+    const offset = ((rect.y + py) * atlasWidth + rect.x + px) * 4;
+    sum[0]! += texels[offset]!; sum[1]! += texels[offset + 1]!; sum[2]! += texels[offset + 2]!; inside++;
+  }
+  if (!inside) throw new TypeError(`A face of ${rect.width} by ${rect.height} texels has none inside its triangle.`);
+  return `#${sum.map(channel => Math.round(channel / inside).toString(16).padStart(2, '0')).join('')}`;
+}
+
 export function shapeMaterialRaster(width: number, height: number, color: Rgb = NEUTRAL): Buffer {
   if (![width, height].every(value => Number.isSafeInteger(value) && value > 0))
     throw new TypeError('Shape material requires positive integer dimensions.');
@@ -87,7 +131,7 @@ export function neutralShapeAtlas(atlas: ShapeAtlas, sun: readonly number[], mat
       for (let px = 0; px < rect.width; px++) {
         const x = base[0] + dx[0] * px + dy[0] * py, y = base[1] + dx[1] * px + dy[1] * py, z = base[2] + dx[2] * px + dy[2] * py;
         const incidence = (x * sun[0] + y * sun[1] + z * sun[2]) / Math.hypot(x, y, z);
-        const lit = .12 + .88 * Math.max(0, incidence), fill = shapeFillIllumination(incidence), offset = row + px * 4;
+        const lit = shapeLitIllumination(incidence), fill = shapeFillIllumination(incidence), offset = row + px * 4;
         for (let channel = 0; channel < 3; channel++) {
           flood[offset + channel] = Math.round(material[channel]! * fill);
           shadow[offset + channel] = Math.round(material[channel]! * lit);

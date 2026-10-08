@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "cerberus-arrival.webp",
-      "bytes": 21380,
-      "sha256": "e4b8bcc17ef7dcdaeb3f421759e9c9fecb5acf49bacd5284006d6b030d64376d"
+      "bytes": 21594,
+      "sha256": "20d6e9901468294a82ca1a09a52913805c024d1005d6c46441bd4e43318f3979"
     },
     {
       "location": "public",
       "filename": "cerberus-billboard.webp",
-      "bytes": 2606,
-      "sha256": "b43b43100b2364f191421c120e1e4d4feaaa67b8e9cf64237ad94515d3299b03"
+      "bytes": 2642,
+      "sha256": "d8301bc53a422e00c233ebb4fb35fae98cde7c268e1a80ea90cd8e3edb12b7a9"
     },
     {
       "location": "public",
       "filename": "cerberus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "cerberus-elevation-shadow-alpha@2x.webp",
-      "bytes": 353024,
-      "sha256": "64e39ff1848e7ce2c6b29b7032872eeafccb20a6c2a86914cd12946649e3ee9b"
-    },
-    {
-      "location": "public",
-      "filename": "cerberus-elevation-shadow@2x.webp",
-      "bytes": 94578,
-      "sha256": "e310b83c5a308a243c3cae6a4783b4f4fd4e40cd18920cb6a65ac9eb0655de4e"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "cerberus-shape-shadow-alpha@2x.webp",
-      "bytes": 296774,
-      "sha256": "930256506ce6286758c6c5864138a0873043b764109ffec4d4464a64e1c37728"
-    },
-    {
-      "location": "public",
-      "filename": "cerberus-shape-shadow@2x.webp",
-      "bytes": 45684,
-      "sha256": "7734468e36d473bc72034ffe48b05c2a598b4aec9d20ffddaa8593168699e6ef"
-    },
-    {
-      "location": "public",
       "filename": "cerberus-shape-surface-alpha@2x.webp",
-      "bytes": 292704,
-      "sha256": "00c4d474e7c6da7479ba8bd75e792bee1183deff377b2f256225ac20dd74da87"
+      "bytes": 88,
+      "sha256": "7d1ba4d8f093c99dd994050826e9bf7a88d62c41c59b6111dde06ff729af32cb"
     },
     {
       "location": "public",
       "filename": "cerberus-shape-surface@2x.webp",
-      "bytes": 41606,
-      "sha256": "a448cc1a6feeb41596fe767c8ddad5d6f84a1350084304219722242f34d167dc"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1402,
-      "sha256": "95a3a7e2e02c7de3a544132e12795c5b830f8a1e8faed8e7db3be15f7b0b7b8f"
+      "sha256": "968c7279054fbdf023e2e0e9c6bde2b0621cd7abc50fef43926a504c9ab31f8c"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 222518,
-      "sha256": "4c97ea07833e96c061ecab49b910b194a53f9a5faba4f93d2cc7bad9fdafce1d"
+      "bytes": 295088,
+      "sha256": "196b83cf73b70c383b99ede2db41d05c94dc4f5da68c47a08effb3f2d40ce244"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3171,
-      "sha256": "a7072d1a4b901d921605fe1d63e41613282f66a54cad0bbf1abaa47fe3439fa3"
+      "bytes": 12862,
+      "sha256": "db8dedb460d79649d1a49ce9ace7dd97327629cf669b5be4505d3bfaa0af1f7a"
     },
     {
       "location": "prepared",

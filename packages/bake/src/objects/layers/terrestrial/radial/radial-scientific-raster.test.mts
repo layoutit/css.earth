@@ -30,7 +30,8 @@ test('native radial fallback preserves numeric/missing cells through actual loss
   for(const nearest of [true,false]){
    const id=nearest?'numeric':'photographic';
    const surface: RadialMaterialSurface={id,map:{url:'/scenes/fixture/source.webp'},...(nearest?{displaySampling:'nearest'}:{})};
-   const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{}},raster:{width:4,scientific:[]}};
+   // A photographed body: its datasets keep a lit copy of their atlas (a body without imagery draws its shadows in CSS).
+   const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{}},raster:{width:4,scientific:[],observations:[{id,validity:null}]}};
    await prepareRadialMaterials({radial:radialFixture(),surfaces:[surface],config,source:await fixtureSource(root,[{path:'source.webp',consumers:['texture']}]),publicDirectory:root,outputDirectory:root,sunDirection:[1,0,0]});
    outputs[id]=[];
    for(const asset of [surface.surface,surface.shadowSurface]){
@@ -59,7 +60,7 @@ test('a smaller baked atlas preserves original face plans and normalized CSS add
     {raw:{width:4,height:2,channels:3}}).webp({lossless:true}).toFile(join(root,'source.webp'));
   const radial=radialFixture(),before=structuredClone(radial);
   const surface: RadialMaterialSurface={id:'scaled',textureScale:.5,displaySampling:'nearest',map:{url:'/scenes/fixture/source.webp'}};
-  const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{}},raster:{width:4,scientific:[]}};
+  const config={namespace:'fixture',publicBase:'/scenes/fixture/',geometry:{radius:1,radiusKm:.001,radialTerrain:{}},raster:{width:4,scientific:[],observations:[{id:'scaled',validity:null}]}};
   await prepareRadialMaterials({radial,surfaces:[surface],config,source:await fixtureSource(root,[{path:'source.webp',consumers:['texture']}]),publicDirectory:root,outputDirectory:root,sunDirection:[1,0,0]});
   assert.deepEqual(radial,before,'Existing geometry and CSS atlas addresses must not change');
   for(const asset of [surface.surface,surface.shadowSurface]){

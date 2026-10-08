@@ -44,6 +44,16 @@ export function solidEllipsoidRadii(geometry:{radius:number}, shape:SolidShape|n
 }
 type SolidScene=ReturnType<typeof import('./solid/prepared-replay-source.ts').parseSolidReplayScene>;
 
+/** The class a selection writes on the body while its dataset is drawn in face colors: the page's styles then draw every
+ * face as a plain triangle in its own `color` and without an image (packages/renderer/src/styles/triangle-faces.css). */
+export const COLOR_FACES_CLASS = 'color-faces';
+/** The border widths that draw a face's triangle where `corner-shape` is missing: half the box's width left and right, its
+ * height below. They do nothing while the face shows an image, whose styles give it no border. */
+export function colorFaceBorder(style: string) {
+  const size = (name: string) => { const match = new RegExp(`--polycss-atlas-${name}:([\\d.]+)px`, 'u').exec(style); if (!match) throw new TypeError(`A face has no ${name}: ${style.slice(0, 120)}.`); return Number(match[1]); };
+  return `border-width:0 ${size('width') / 2}px ${size('height')}px`;
+}
+
 /** The terrestrial lane's default camera: the shared rule over the default dataset's photograph frames. */
 export function solidCameraAngles(solarGeometry: SolarGeometry, config: Pick<SolidSceneConfig, 'namespace' | 'raster' | 'presentation'>, surfacesReport: unknown) {
   return prepareDefaultCameraAngles(solarGeometry, config.namespace, { observation: photographDirections(config.namespace, config, surfacesReport) });
@@ -162,18 +172,24 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
       ...(s.shadowSurface ? [{ key: `shadow:${s.id}`, url: s.shadowSurface.url, pool: 'datasets' }] : []),
     ]),
   ];
-  const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...plan.bodyLeaves, ...(plan.rings?.leaves ?? [])].map(leaf => leaf.style)) });
+  // A dataset with face colors reads no image: its selection writes each face's color and the class that draws faces as
+  // plain triangles. The same faces show the other datasets' images, so nothing is mounted twice.
+  const colored = surfaces.filter(s => s.faceColors !== undefined);
+  const faceRange = (datasetId: string) => plan.surfaceDatasetRanges?.find(candidate => candidate.datasetId === datasetId) ?? { start: 0, count: plan.bodyLeaves.length };
+  const bodyLeaves = colored.length ? plan.bodyLeaves.map(leaf => leaf.tag === 'u' ? { ...leaf, style: `${leaf.style};${colorFaceBorder(leaf.style)}` } : leaf) : plan.bodyLeaves;
+  const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...bodyLeaves, ...(plan.rings?.leaves ?? [])].map(leaf => leaf.style)) });
   const camera = b.mesh(`polycss-camera ${id}-camera object-render-root`);
   const scene = b.mesh(`polycss-scene ${id}-scene`), system = b.mesh(`${id}-system`, `transform:${plan.systemTransform}`);
   const body = b.mesh(`${id}-body`);
   b.append(null, camera); b.append(camera, scene); b.append(scene, system); b.append(system, body);
-  for (const leaf of plan.bodyLeaves) {
+  const faceNodes = bodyLeaves.map(leaf => {
     // A face draws the surface write and a cap the pole write, both on the body.
     const cap = (leaf.className ?? '').split(/\s+/u).includes(`${id}-polar`);
     const node = readsTexture(b.leaf(leaf), `--${id}-${cap ? 'poles' : 'surface'}-image`);
     Object.assign(node.attributes, leaf.attributes ?? {});
     b.append(body, node);
-  }
+    return node;
+  });
   const rings = plan.rings ? b.mesh(`${id}-rings`) : null;
   if (rings && plan.rings) {
     b.append(system, rings);
@@ -202,11 +218,21 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
         kind: 'style' as const, target: index(body), name: `--${id}-${model}-display`,
         value: surfaceModel(s.id) === model ? 'block' : 'none',
       })),
+      ...(colored.length ? [{ kind: 'class' as const, target: index(body), name: COLOR_FACES_CLASS, value: s.faceColors?.[shadows ? 'shadow' : 'flood'] !== undefined }] : []),
+      ...faceColorWrites(s, shadows),
       { kind: 'style', target: index(billboard), name: 'backgroundColor', value: requireString(s.billboardColor) },
       { kind: 'attribute', target: -1, name: 'data-dataset', value: s.id },
     ],
     materials: sheet ? [sheet.selection(shadows)] : [],
   })));
+  /** Each face's one color for this selection, written on the face itself. */
+  function faceColorWrites(s: typeof surfaces[number], shadows: boolean) {
+    const colors = s.faceColors?.[shadows ? 'shadow' : 'flood'];
+    if (colors === undefined) return [];
+    const { start, count } = faceRange(s.id);
+    if (colors.length !== count) throw new TypeError(`${id}: ${s.id} has ${colors.length} face colors for ${count} faces.`);
+    return colors.map((value, face) => ({ kind: 'style' as const, target: index(faceNodes[start + face]!), name: 'color', value }));
+  }
   function surfaceModel(datasetId:string) {
     const range=plan.surfaceDatasetRanges?.find(range=>range.datasetId===datasetId);
     if(!range)throw new TypeError('Prepared surface model lacks its dataset range.');

@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "apollo-arrival.webp",
-      "bytes": 33594,
-      "sha256": "82ca92ee3ed3b4e010c18d0911aceca06bec435dd43302aad25a2e8d3fa8c25d"
+      "bytes": 33902,
+      "sha256": "69a77dd1b7913266b9ae6e66ff39288f322f0ead49ffd7e793077589e33952de"
     },
     {
       "location": "public",
       "filename": "apollo-billboard.webp",
-      "bytes": 4174,
-      "sha256": "b83ee9c4552e77ffb8b0607a69d1231f2b8b2acfd96400999c7338af0f050e1d"
+      "bytes": 4224,
+      "sha256": "db8cefe09e5fe7e6b11d8a4ce106266d9466c4cb07cf3e8471bcfde3aaa12f36"
     },
     {
       "location": "public",
       "filename": "apollo-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "apollo-elevation-shadow-alpha@2x.webp",
-      "bytes": 414130,
-      "sha256": "ddaedef5456d2f6459a2ce0a5ed26238004b77502112360b10f079f3080a3cbd"
-    },
-    {
-      "location": "public",
-      "filename": "apollo-elevation-shadow@2x.webp",
-      "bytes": 114978,
-      "sha256": "c456ad6739c8eadc7d34d6b758a9b72b35750ce8dd48f158f921394dd45a3f99"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "apollo-shape-shadow-alpha@2x.webp",
-      "bytes": 341762,
-      "sha256": "a9f1fcf998b260ecc6011943076b23300540bd64ab93db42720e6f3be67e1e5f"
-    },
-    {
-      "location": "public",
-      "filename": "apollo-shape-shadow@2x.webp",
-      "bytes": 52744,
-      "sha256": "26e29802d6320bcd4e8a0db8451a056868149316578af2980d84c213759628c4"
-    },
-    {
-      "location": "public",
       "filename": "apollo-shape-surface-alpha@2x.webp",
-      "bytes": 338698,
-      "sha256": "cadc99f92af52bb37b27c201c52fb40df3a491ca816e0dbf9597796d43ea580a"
+      "bytes": 88,
+      "sha256": "46db3e44b2f0d0067ddfd9e4bf5923468c050f03576b1dedc65972295e2b5d74"
     },
     {
       "location": "public",
       "filename": "apollo-shape-surface@2x.webp",
-      "bytes": 47068,
-      "sha256": "9679976bbe7341a238f0f7f65d22df4f200d2dc8d68e03e3d28a53fb81ab81b4"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1354,
-      "sha256": "a477103e7c13b93ea67e9bcf4bed2bb53714fadeaf3037d4c236a60f99054a61"
+      "sha256": "373c40fd6e8401f6541f9882972351604cfeb1cf899de0954ab03cf1dd1a4cac"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 290827,
-      "sha256": "6cff8fda4abd3643c4b742a93449e91f0f4161c1a9970d345a0d5a8fb621407f"
+      "bytes": 386989,
+      "sha256": "553c105401440a60df850a1784339aa6c94247be208b5be216c4048af7c97e8f"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2704,
-      "sha256": "f6d3f58c4bf3c18cf424b93e0e1b47ae8725403a3a612ad88fe5eea1406829bf"
+      "bytes": 15582,
+      "sha256": "799607a5e94812a7bfe10e9b5e92866686ddf1829430a4f211d9da62027bab3c"
     },
     {
       "location": "prepared",

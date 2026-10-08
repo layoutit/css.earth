@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "camilla-arrival.webp",
-      "bytes": 37582,
-      "sha256": "2befe66abb785dbf2f59e0ab420b78e339851453cbedfdc39439c5e1c8f87cb3"
+      "bytes": 37968,
+      "sha256": "429814b620cc451b91c7a6a2a85eeff5558789ac03fe3de8049b918a52d625fa"
     },
     {
       "location": "public",
       "filename": "camilla-billboard.webp",
-      "bytes": 4184,
-      "sha256": "d0209c447692ccf4a3eb8f0c2dd2b501eb36e8bcbf772f01800dd0a4aad1cfdf"
+      "bytes": 4260,
+      "sha256": "69120400e7b392618918e1b412dbcd2269c3937a1007601e4c535693231e9d49"
     },
     {
       "location": "public",
       "filename": "camilla-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "camilla-elevation-shadow-alpha@2x.webp",
-      "bytes": 600778,
-      "sha256": "355658577ce6f54eb9a7989e952874cf9c65ba56c56abc5ce81da803a6d28a30"
-    },
-    {
-      "location": "public",
-      "filename": "camilla-elevation-shadow@2x.webp",
-      "bytes": 124062,
-      "sha256": "face252374ab01e1cd28aa3424131061ccc12511bd5771e161ef5998e233b20d"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "camilla-shape-shadow-alpha@2x.webp",
-      "bytes": 520064,
-      "sha256": "999289103a9df45a2b40078849effa6a143452d972b5a0ec8a7274432d70b4f5"
-    },
-    {
-      "location": "public",
-      "filename": "camilla-shape-shadow@2x.webp",
-      "bytes": 57104,
-      "sha256": "1561bb41a05d0a9b25f06a46d048af44bec401c1adcdeddd0a7f84017c5017ba"
-    },
-    {
-      "location": "public",
       "filename": "camilla-shape-surface-alpha@2x.webp",
-      "bytes": 515550,
-      "sha256": "67cc64888ed04be21a9f5babf287d09b63af7d4d84dd4bb499e46cdc97927b9e"
+      "bytes": 88,
+      "sha256": "967660f65e6cfe0f0960745d30a38f8d2d079c0390e1485a71d9287642c844d6"
     },
     {
       "location": "public",
       "filename": "camilla-shape-surface@2x.webp",
-      "bytes": 50148,
-      "sha256": "567caa203904c108a76b6dfd17df7241d6a1f4486733da4229821253f2a09660"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1377,
-      "sha256": "657ba9e8da84a7d1daa712ff00814ca1fd8a04abf8c7d71eb4f8541a1c3e3089"
+      "sha256": "198b19c579541c0abf382a710c9308a8cf23b052e71f9e07cc85254f64cd46b4"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3230,
-      "sha256": "a4c49105a3f9a2efa34eaaace57c843281fb7af72b1893650b90a4de91357f57"
+      "bytes": 3240,
+      "sha256": "9731bb0f6fd0bca9311c390fd386233682dadcf4a09b6ac856d444e8418933d9"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 514882,
-      "sha256": "0908fe5b86e7ca133052a9d7ae9c546ab57078c0282a02cf70f13ae14d835067"
+      "bytes": 690694,
+      "sha256": "94e39ec647767fc7dda935bf508849dc74d73a92a3f35e0e683a458574ed02c6"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 594694,
-      "sha256": "e1827bcccec0e4d721f86d16e051e19a1f31ec71bbc4c02a2079cde6a8121641"
+      "bytes": 594693,
+      "sha256": "6f7110f4d109d7fb6df180cd79daaa371f6365330da99292fc66a8ffa5bb99b0"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2041,
-      "sha256": "7780584ed547a035dbadd128511ff4ab7bb1ec527143f14277a5fec893630e21"
+      "bytes": 25835,
+      "sha256": "ebb798fb0b6d5201c385cad95844d47c4b6c9f0c8ad6745635a45d45189adcd9"
     },
     {
       "location": "prepared",

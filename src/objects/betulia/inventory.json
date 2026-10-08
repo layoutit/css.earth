@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "betulia-arrival.webp",
-      "bytes": 35312,
-      "sha256": "e5b1cfbc8b20a1850d4b904d01a1e157911864d20a94337e200e5b1643e3c15b"
+      "bytes": 35834,
+      "sha256": "67aa9adf4e669bb6a6d7c1f247735883dc9267ad5b07c0a2048dc5763b4609e5"
     },
     {
       "location": "public",
       "filename": "betulia-billboard.webp",
-      "bytes": 4084,
-      "sha256": "b7ca2d4add79913ebc97f254cab12aac3c1807f46306853533669690b685fb91"
+      "bytes": 4182,
+      "sha256": "0ae3a0db7d28903ff3a3a28baa6db9d55e63a05c755c81ee9a1826999d89622d"
     },
     {
       "location": "public",
       "filename": "betulia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "betulia-elevation-shadow-alpha@2x.webp",
-      "bytes": 623038,
-      "sha256": "130374e4fc3bb0e435cc353ceecc8d6697a3fb9b7bdd41ecd789f97f17be01d9"
-    },
-    {
-      "location": "public",
-      "filename": "betulia-elevation-shadow@2x.webp",
-      "bytes": 143336,
-      "sha256": "426dcc32d546d6e838fe6fd6a6270cd22826c17298cec03bea51d5602e18e08b"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "betulia-shape-shadow-alpha@2x.webp",
-      "bytes": 525628,
-      "sha256": "899935c3f3e2dc6e6e318c195c2d0ce31f8ba467e9ec109757a73014b8491f69"
-    },
-    {
-      "location": "public",
-      "filename": "betulia-shape-shadow@2x.webp",
-      "bytes": 60334,
-      "sha256": "15377cccfd4ac66ba2d431fe364760c9914a93a78a4017aef7479ac8fd151c8f"
-    },
-    {
-      "location": "public",
       "filename": "betulia-shape-surface-alpha@2x.webp",
-      "bytes": 521162,
-      "sha256": "331b86afa4d864472cfe66568d15dade0fa2b256af672930f885ef0030d5d94c"
+      "bytes": 88,
+      "sha256": "39a02a1d6371fcf792f8d5f7f5ea0594ea611e00586a8534f504d76da55031a6"
     },
     {
       "location": "public",
       "filename": "betulia-shape-surface@2x.webp",
-      "bytes": 53410,
-      "sha256": "0977dd7bff84a80add4528e95c52b9a3863cbd7177c15dbba2c738c72363017a"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1377,
-      "sha256": "4b86b83022cc8cae47943e7bfaf2c418cb819615f4dcb5ca196b69709623e7cc"
+      "sha256": "5746fb1c4f72baf353a0a7296a305e4b446117f3b652dbea0ddbd1f338f510c0"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 4046,
-      "sha256": "df8b2cd14f5036ea3e7bbd838d2d72ea4623e15d41dff8f19ab3708ff44f469e"
+      "bytes": 4038,
+      "sha256": "e44624f48bee1bfc78998f300d5c03fd3405635497417704952131ccbc83e029"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 504597,
-      "sha256": "7b1ba1cb25c0465cae0c3031a17adc81e650f4d2dd3f9d881e620a79707ffd82"
+      "bytes": 679642,
+      "sha256": "81d6f1fe26577e4cced76ae2fc83c561be6b3cfde068149bfb2227b3ef1f3f05"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 589551,
-      "sha256": "9beeaee4b54910dd15f505f9a927448befe91444e4cc5748cc3c4db04308a9b1"
+      "sha256": "850227b97d2ba4c9178d31850813056bd71e8b888cd64dc5a3e07df4b39341be"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2057,
-      "sha256": "ad5e2fa05e45f09772db6933c38e944b14487cb138d3032d6d44f53ea56d8dfc"
+      "bytes": 25851,
+      "sha256": "041bd471a718355124ad9b2451d6a92a062cbb0e7fedb3165b49311557576a23"
     },
     {
       "location": "prepared",

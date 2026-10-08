@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "hermione-arrival.webp",
-      "bytes": 38342,
-      "sha256": "378e5e0aa7fc88caebb36ca5a28083d836912f84f790d851c50512049a18cdfc"
+      "bytes": 39038,
+      "sha256": "0f661dec8698079943e448875dfee31079017db3fef1fae13c23790b627e63c9"
     },
     {
       "location": "public",
       "filename": "hermione-billboard.webp",
-      "bytes": 4430,
-      "sha256": "889d426a669d1fb99e73cab7c9a43cd9aaeb3eb8e6f127e26088ed558c2ed9d6"
+      "bytes": 4616,
+      "sha256": "ce4116bb22d20a0b8ec14c28e92493a4a1247415c1557d0e4ae7cf7fc81d98b2"
     },
     {
       "location": "public",
       "filename": "hermione-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "hermione-elevation-shadow-alpha@2x.webp",
-      "bytes": 639226,
-      "sha256": "b3593d3b5944f1c470bfca5ee923cf513476950eb6c04a53721a07f78a007171"
-    },
-    {
-      "location": "public",
-      "filename": "hermione-elevation-shadow@2x.webp",
-      "bytes": 127016,
-      "sha256": "90409d8aad3d771b6a7accf43116dc624e9848d380fb7a7d69de70cf9955ad4c"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "hermione-shape-shadow-alpha@2x.webp",
-      "bytes": 555122,
-      "sha256": "19ef5552554f9067ca9f87d104898b7e5c5bbea56c2b1b26c387205d833b0824"
-    },
-    {
-      "location": "public",
-      "filename": "hermione-shape-shadow@2x.webp",
-      "bytes": 60016,
-      "sha256": "7ffaea974e7ab39eb1614b1453eab11cf93f00071eeb21e50ca8c7d59a1e6ff4"
-    },
-    {
-      "location": "public",
       "filename": "hermione-shape-surface-alpha@2x.webp",
-      "bytes": 548914,
-      "sha256": "48668513d6b705aea092a4595a3f45eef5914b2b41ba4f6691803ac6b4f6bc6a"
+      "bytes": 88,
+      "sha256": "77d453db0b9330298c06b7290da651b964e0f0762807ff933ca8f712fccdcdc9"
     },
     {
       "location": "public",
       "filename": "hermione-shape-surface@2x.webp",
-      "bytes": 51844,
-      "sha256": "95e5e717ad8f7456d8700e08e3a19da7ff19f3014559047b162d773e92ad9b3c"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1401,
-      "sha256": "3e0af1e1e521ed6ee91177898117ade9ce124818b32df73b2da0f574fa94c57b"
+      "sha256": "461bdc03a2bd8f981a4441c5400bf06ba5f9a14d99e18b1ea6da190674478ee7"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3212,
-      "sha256": "9aef45442220717cf79f0f74d008b1fde561c7cdd4a1882ee9da6cb225fefbe6"
+      "bytes": 3238,
+      "sha256": "4665e2aefbc74d56364f68a1957e5c0c07005cad821aa71169393e6764bc6758"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 485317,
-      "sha256": "70561713b13f0aa4be9a463c88ef4fd1e42e894eca12a8a7b06f34750d38a5b1"
+      "bytes": 661111,
+      "sha256": "1b5f666f6ccbde6c31cbd4f29b7d8509bd04751e0601c4a34de11599b7b6de0a"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 564930,
-      "sha256": "e3d790398d5ac5618a99ce0cedfd4f80e4d1cb278fcec9d0284ba7fba1f30d4f"
+      "sha256": "11158dcdbb160a4a683a3418e0133ad9a4367691df3303c3817e8dcc11769ce9"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2066,
-      "sha256": "f075ce42e5d061bb52f70c061e7a35585ec5e1fbd9eb9b227b3dd8554c6dda50"
+      "bytes": 25856,
+      "sha256": "509f75b80b1dd6e0f46ac6aad37acbf5b8daa9c4517b627b8a14ede93179085e"
     },
     {
       "location": "prepared",

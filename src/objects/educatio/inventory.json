@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "educatio-arrival.webp",
-      "bytes": 26198,
-      "sha256": "1e4ee334ce495dd4b97d1ccb5883e1b20ebcab4f6580819801111fcfb3233d67"
+      "bytes": 26356,
+      "sha256": "ba84141ca1b232057eb4c2ef24c496e7dc938dcefc9feedc091141f430408494"
     },
     {
       "location": "public",
       "filename": "educatio-billboard.webp",
-      "bytes": 3148,
-      "sha256": "e7c536eec1d9fe174e0abf5c1c15bd38870d82e1b23746326720169e1fc399c6"
+      "bytes": 3166,
+      "sha256": "07d0d45473f5667bdfba2b79a9df28b16a12648819aee43d03fa3d8ca5f02d8c"
     },
     {
       "location": "public",
       "filename": "educatio-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "educatio-elevation-shadow-alpha@2x.webp",
-      "bytes": 338836,
-      "sha256": "f761613ca4726d1562b2d44d29159e05f71aef4384d70b1b3be1e804cd56710f"
-    },
-    {
-      "location": "public",
-      "filename": "educatio-elevation-shadow@2x.webp",
-      "bytes": 103894,
-      "sha256": "3d9d703306b0053a60d2263510feb3f72fedd424bc9ab675b26ae90036043c7d"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "educatio-shape-shadow-alpha@2x.webp",
-      "bytes": 271822,
-      "sha256": "7152cf98b100dd15e6b8f72ab4207eb343dd375ee709a3c32e3431c571c839af"
-    },
-    {
-      "location": "public",
-      "filename": "educatio-shape-shadow@2x.webp",
-      "bytes": 44896,
-      "sha256": "16b3f53cd8133313b1a0bd14a3ffd5523e6ecd44ab3f45064a6d09caf592034a"
-    },
-    {
-      "location": "public",
       "filename": "educatio-shape-surface-alpha@2x.webp",
-      "bytes": 272298,
-      "sha256": "bed9a02da8555a2016b1f0085f040fcd5a2f3ebb963a70f343b322d116ea67ce"
+      "bytes": 88,
+      "sha256": "bb6a004a4778f2e284fa9ab2203915a08155aa545253f1bf995f069bdf713cf2"
     },
     {
       "location": "public",
       "filename": "educatio-shape-surface@2x.webp",
-      "bytes": 43070,
-      "sha256": "dec6a5da52022364ed37493a96f61ce930e3b06328010ce3f46ccf7c7880d446"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1403,
-      "sha256": "7636fea692ae80d202b1991d3045d58d0cbacef66c0281c672ab8dc8ffae7399"
+      "sha256": "62ecd0b85bc93aecb4a48cd566fe5e0a8ed64568e82fc705d30e788435c76bfa"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 189134,
-      "sha256": "0b0ba2c6985bbc4559f3299a5d7ead5d8e0dfae1e0a4809b8837a4f7edf7615d"
+      "bytes": 250771,
+      "sha256": "425433b4e471817a9e18497efa3750f0390226f0406bb0bdfbb2e3a60d611a3d"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2896,
-      "sha256": "f27adde8c64a42edf4ea9df058be8d9b38b494f6b669d5787c3c202a26da3bad"
+      "bytes": 11146,
+      "sha256": "26e42141a3595b1b47bea0d2393c80a2bafa0f0cb065bec90fbc826f0174fd45"
     },
     {
       "location": "prepared",

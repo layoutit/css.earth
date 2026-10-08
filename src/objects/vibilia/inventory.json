@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "vibilia-arrival.webp",
-      "bytes": 34558,
-      "sha256": "d7addee206d9df111dc69ce0fd584439b346cd338a3e396218b476885d623c76"
+      "bytes": 35246,
+      "sha256": "af9db31ef7e2b448a2db0df7881098ea4b5b86106a2bf7e0b8417e1db935c6d8"
     },
     {
       "location": "public",
       "filename": "vibilia-billboard.webp",
-      "bytes": 4294,
-      "sha256": "d1010c06464dc482290d0fa8a94f6faede26508231e4308e2c11c3b3d3dbf47d"
+      "bytes": 4470,
+      "sha256": "c51e51ed34ae71ef2fbf16ba3aa8f05f65926e4e0ecacc3591116990a4e9eeb7"
     },
     {
       "location": "public",
       "filename": "vibilia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "vibilia-elevation-shadow-alpha@2x.webp",
-      "bytes": 575386,
-      "sha256": "03871b0370dbd0eda24c2056729df924a11e6cd31f8727ca88c329e48f8dc27e"
-    },
-    {
-      "location": "public",
-      "filename": "vibilia-elevation-shadow@2x.webp",
-      "bytes": 129200,
-      "sha256": "f305c7f5f1d4cb067b43511918049ea700e0391caecbc07318509aff5e873192"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "vibilia-shape-shadow-alpha@2x.webp",
-      "bytes": 488636,
-      "sha256": "45d8d257f51ad96ec5c45e6d4a8b1da717a72f5a6cb877cb6cd229e7c60d8287"
-    },
-    {
-      "location": "public",
-      "filename": "vibilia-shape-shadow@2x.webp",
-      "bytes": 57840,
-      "sha256": "18e74d0503123fef5beffbd96a3c9860b9b07e5f930c1bbdac4dcd11abc272b9"
-    },
-    {
-      "location": "public",
       "filename": "vibilia-shape-surface-alpha@2x.webp",
-      "bytes": 484734,
-      "sha256": "1409f5b25829d1cd924f831b3fea22392b0ec2999bd6e0092893f59e8a7342a6"
+      "bytes": 88,
+      "sha256": "0590f0833683e6f23ea65530b739d48d9f5a24595a56044722ee52b66d381e97"
     },
     {
       "location": "public",
       "filename": "vibilia-shape-surface@2x.webp",
-      "bytes": 51108,
-      "sha256": "2b79da3f08050aeebb3102f6486dd12c66bace89076a2035804daffc6b334631"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1377,
-      "sha256": "c6716e03e3b046cbb7cdb6ba070f17a8195de5704775f5c8ca8330914440e3ea"
+      "sha256": "1a99ff83c56ef7eaa6f31234f70a4a3e6214fd2b72c83c196e1b60405067b64b"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 416044,
-      "sha256": "b4fc58e7a54a7e1d34ac9d8d11e2e3bd0782a200c27143ae0c1418ba07cc5f74"
+      "bytes": 556422,
+      "sha256": "4a5a649f426c146510965ba261e837356bf52e53f8f670ad1ff7ff467b7750a4"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3114,
-      "sha256": "0e4be238dc32b9fafba1d48e72db655bde554f46a6abe1597d1b19ae119394be"
+      "bytes": 22048,
+      "sha256": "3dfc1547c1b4d9bef359eb383fdfe1e47041312f3b1d87096b77eae14c2e3bd0"
     },
     {
       "location": "prepared",

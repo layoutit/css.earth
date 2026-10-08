@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "carlova-arrival.webp",
-      "bytes": 37330,
-      "sha256": "4789d166299415a50be3dba44ed0fe328bc9c0fc9bfd8500d85be153658831ae"
+      "bytes": 37924,
+      "sha256": "95333a4fe10d3395e67ebe15bb9ffe70aee5bd85667ef33408aa590386fa205f"
     },
     {
       "location": "public",
       "filename": "carlova-billboard.webp",
-      "bytes": 4428,
-      "sha256": "199542e37cafef8c362d60adf051d04901f2e8158bfcec70fc4ca51bd9fdab5b"
+      "bytes": 4592,
+      "sha256": "fbc8b5256c25ffe744bdd8275558687a2ea0e5fea2396f64c93ede8647392b58"
     },
     {
       "location": "public",
       "filename": "carlova-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "carlova-elevation-shadow-alpha@2x.webp",
-      "bytes": 553420,
-      "sha256": "4181a5f29d700d02421631ce82106964b4dd4c6537dff979560e0ecba4c1ea84"
-    },
-    {
-      "location": "public",
-      "filename": "carlova-elevation-shadow@2x.webp",
-      "bytes": 116914,
-      "sha256": "91d855c411c0d25d0ca461f1d9a539b1a57c827e92408b3aa6b3de3494abcf99"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "carlova-shape-shadow-alpha@2x.webp",
-      "bytes": 476602,
-      "sha256": "d52150602e1b1db51d1610afb7dce07dd3b84afa7d4123cd249ea50fb45b9b7c"
-    },
-    {
-      "location": "public",
-      "filename": "carlova-shape-shadow@2x.webp",
-      "bytes": 58116,
-      "sha256": "45736ba0fb32f66d3e593c5a5f67e109a533abfdf78cc6b8116434cbb6e3b576"
-    },
-    {
-      "location": "public",
       "filename": "carlova-shape-surface-alpha@2x.webp",
-      "bytes": 472400,
-      "sha256": "8b255e75afe84870d2aab75cccd4bf4bbc8fd9f551d8da095b5c5f47c775d738"
+      "bytes": 88,
+      "sha256": "833943a2e563f1dc61644a8ceeba04776f30b9ea0a4c4d806989b930f6e8a819"
     },
     {
       "location": "public",
       "filename": "carlova-shape-surface@2x.webp",
-      "bytes": 51254,
-      "sha256": "8276d8e9b5a9b154a8131ffeb9e64b15253f65c1f57765e89a0fe4a19589eb9f"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1380,
-      "sha256": "d12faf957882a51a5b2974810cc3b12698165c0a9b808f8187aabe528467bf9e"
+      "sha256": "d6e734883c0a2846b2da082e159ac6abc09a3d99f933672f094b13798ca9defd"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 415290,
-      "sha256": "35322f5c360420a38f230d254059a96bb7b294b469606306811c8c86734cc3e3"
+      "bytes": 556016,
+      "sha256": "278cde1ac80c459a6fc0e0776e9b5f2947f09365f4bcdee88a782855288d1c41"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2876,
-      "sha256": "f2225ce8c214f91d7ddac39dfbb6adb57da853a243dc8fc38ebe50dbc49060c4"
+      "bytes": 21930,
+      "sha256": "a9e028267e19caa9e65e4ee6a89606906d6f620fc7587c97eeb8b2f052c5f4b3"
     },
     {
       "location": "prepared",

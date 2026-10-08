@@ -4,38 +4,26 @@
     {
       "location": "public",
       "filename": "ymir-arrival.webp",
-      "bytes": 22420,
-      "sha256": "ded5bcdf3055f7fdd0620a598dec92d3b62ede3ddf533236b2b1add688b27996"
+      "bytes": 22550,
+      "sha256": "292395851b4427cc56c98c5ac8858e3c4238b131f020fc9ff9d9108bde05adf0"
     },
     {
       "location": "public",
       "filename": "ymir-billboard.webp",
-      "bytes": 2914,
-      "sha256": "58422854aab662fd5b0b2211bf30b41990d6453011854eb1a3db6a875675a0c4"
-    },
-    {
-      "location": "public",
-      "filename": "ymir-color-shadow-alpha@2x.webp",
-      "bytes": 56288,
-      "sha256": "bd0afee727c07992901a05f7863f3eece2824d08dcff909c4bc09abd65ff01de"
-    },
-    {
-      "location": "public",
-      "filename": "ymir-color-shadow@2x.webp",
-      "bytes": 9548,
-      "sha256": "4f2b6303925af385b5b7423131d333d4e45aeaaf99e02ba3afea7086d440d507"
+      "bytes": 2950,
+      "sha256": "2c100dbec40c052c64dc2b93d033274e3cde6a31a1ab6d4c4a2bc54c037b9bb4"
     },
     {
       "location": "public",
       "filename": "ymir-color-surface-alpha@2x.webp",
-      "bytes": 56374,
-      "sha256": "1158504d90f207f4ee1b038be6d61c22aa8b546eadd9c2766b19e12c7b344f8e"
+      "bytes": 92,
+      "sha256": "369acde5e1e606cdffa62812381ba7a0c1f0e1208adcc419d5794b873de95996"
     },
     {
       "location": "public",
       "filename": "ymir-color-surface@2x.webp",
-      "bytes": 9618,
-      "sha256": "8fffe20e5c489002060c38765f6cdb70bcf940ec71417103b10b628d72ac1c37"
+      "bytes": 48,
+      "sha256": "223d2997d155f59436255ed72397e09e6f204df7b4c2c51b3377e6e3a6f7d6b5"
     },
     {
       "location": "public",
@@ -65,7 +53,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 891,
-      "sha256": "05e29da0032770164954b847287d6d17b5bec1aea54f882cd997da443a884c84"
+      "sha256": "eba8e5f758f5954ebf068511fd13004d8d211796a1ce5ddc12e20a98ea452f49"
     },
     {
       "location": "prepared",
@@ -82,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 84564,
-      "sha256": "606c33e581715216cf5a44821fac484456232d582be89578aab75244b31e3a15"
+      "bytes": 103408,
+      "sha256": "8408d2bc85c13eaa500b29960bdfd0eb342d92b4e6f5fad797762d82d0e99ad4"
     },
     {
       "location": "prepared",
@@ -94,8 +82,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 1099,
-      "sha256": "07e71c81d94ad9aae8bf8f5a99ec248138751ca862ab8249069e12d65922d6dd"
+      "bytes": 3472,
+      "sha256": "f8a1bb559405ace0a21d22e5a82b70928a1d47d370d35e47461c11b9e48d0475"
     },
     {
       "location": "prepared",

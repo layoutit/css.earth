@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "antigone-arrival.webp",
-      "bytes": 37378,
-      "sha256": "713eb88d7aef9784155ea5e02dfa18b01a5f6e93d2eed83f76d29cadbad1f249"
+      "bytes": 38118,
+      "sha256": "110dd883bacad1a23499046941166fe18ed48b2bf1d3fd64411cb3909131953f"
     },
     {
       "location": "public",
       "filename": "antigone-billboard.webp",
-      "bytes": 4584,
-      "sha256": "cb5201e7a20773a2fce378586485bc67e72d103c8fabc40f7c8ff9df3afd1b16"
+      "bytes": 4812,
+      "sha256": "850e2a91b02c197f15d386a898848ba545b9b7d3a13481ee1ad053acd938837a"
     },
     {
       "location": "public",
       "filename": "antigone-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "antigone-elevation-shadow-alpha@2x.webp",
-      "bytes": 564726,
-      "sha256": "863a9ad2727dfc2d05f7ef6562ed84b3ed17044043b54812debe95d44b50e0bc"
-    },
-    {
-      "location": "public",
-      "filename": "antigone-elevation-shadow@2x.webp",
-      "bytes": 133318,
-      "sha256": "aa3cfdf4cd19c1e475da788f3638e85c8d9dbcdd8caea76372bc0fffdbab1c3c"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "antigone-shape-shadow-alpha@2x.webp",
-      "bytes": 473870,
-      "sha256": "785f7157a2ebca6b6012c8415f6868d2e849d384e156196397035e1bbaa9835b"
-    },
-    {
-      "location": "public",
-      "filename": "antigone-shape-shadow@2x.webp",
-      "bytes": 57976,
-      "sha256": "3825a86e1b76c018db845fb656901af9a7b297b539345676f888d060f363a944"
-    },
-    {
-      "location": "public",
       "filename": "antigone-shape-surface-alpha@2x.webp",
-      "bytes": 468880,
-      "sha256": "312602e0e47d57380220de8c016f274c65ec08d13ab45f85191af8170c011f1f"
+      "bytes": 88,
+      "sha256": "77c22d628392f01a662bb43510f388a1b21877cd8f9b9dbb6a9ab93629996e9b"
     },
     {
       "location": "public",
       "filename": "antigone-shape-surface@2x.webp",
-      "bytes": 50350,
-      "sha256": "9fd618d081155690e6789744ec6e9b0e6999f11ac5c5adef3eea9785c1255bab"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1400,
-      "sha256": "637abc8829ad6a8c30aa4323e649345d251cf4f8096693afff3b910022c3d20a"
+      "sha256": "7e0fcc479ada16f6505f65f62d29114862a440c8436520c594663268c171ee56"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 389533,
-      "sha256": "8df242ac18cc6d217c15de4ec603058156e21bc5a59828b4dbdf54f25af77a89"
+      "bytes": 520851,
+      "sha256": "066889426b3fcf2f987fa48c24c51e3c1d9872d30416d0e9d335260000ea9eed"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3158,
-      "sha256": "1ae65a2ffe6443cf8ebaa7d68416cb4b0e576688f5551d3d7bdac5163a1561c8"
+      "bytes": 20828,
+      "sha256": "d7b1ad5397b1bd46c3b2054208814c992c5b45ef3ffd85c9fdb2d3d197bc6048"
     },
     {
       "location": "prepared",

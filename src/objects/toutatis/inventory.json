@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "toutatis-arrival.webp",
-      "bytes": 27360,
-      "sha256": "d5938a026bb667b7556aa20d7287f41f9e3812b913ff762e2363dc74d889cefd"
+      "bytes": 27982,
+      "sha256": "e9c1cb26d2858c10a7fa70eabb7a04a4fb9fa11e98721e99f329ad24716c983f"
     },
     {
       "location": "public",
       "filename": "toutatis-billboard.webp",
-      "bytes": 3270,
-      "sha256": "486685805187d71d7f181fd5c79b3ca63f61a95a1d19dd3e81e0d9cabb25f1ed"
+      "bytes": 3360,
+      "sha256": "47f537857c3e1a48a2a2a1ad278f551f51efa1bf6ea3bf374e51bbca81d10a8a"
     },
     {
       "location": "public",
       "filename": "toutatis-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "toutatis-elevation-shadow-alpha@2x.webp",
-      "bytes": 617148,
-      "sha256": "73f53b0655b6ba604cda3724a6ad1deb8cb16429626ced3938aa021e9b7d34e3"
-    },
-    {
-      "location": "public",
-      "filename": "toutatis-elevation-shadow@2x.webp",
-      "bytes": 206152,
-      "sha256": "a1b3eb959cb8eb9e0467f7e89561405cee2df0cff2befaac14cd9ae38f5b0c48"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "toutatis-shape-shadow-alpha@2x.webp",
-      "bytes": 483432,
-      "sha256": "946fd0b66e39780d4ffc11bc789bb79130ec423371426ec9e24ec220a6bd8c7b"
-    },
-    {
-      "location": "public",
-      "filename": "toutatis-shape-shadow@2x.webp",
-      "bytes": 62902,
-      "sha256": "b448a182a132fc454983601db2bee44578abf5d444bd114da3d4eb484c0cb5a5"
-    },
-    {
-      "location": "public",
       "filename": "toutatis-shape-surface-alpha@2x.webp",
-      "bytes": 477716,
-      "sha256": "87a39e1d5ff26988b35d4d94a366ac9f41363770bf6779f38e7e80bda157e6b8"
+      "bytes": 88,
+      "sha256": "ea855ed8a47d684dde0d046288b2c749a488e000559b3728caf3970d42b06008"
     },
     {
       "location": "public",
       "filename": "toutatis-shape-surface@2x.webp",
-      "bytes": 55576,
-      "sha256": "d5577b01bd02cdacb961db5e2c7d75e4606166dd80d655fe93419dfc3af62f1c"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1458,
-      "sha256": "266eb6898ec1b45989027adf5addb3193a48806c25277d498b20464f3909467d"
+      "sha256": "b7594fe9d5d3869b3fb2c53a025b0284fdc4e28f77df5c34d427f0b93fc5ccee"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 410555,
-      "sha256": "fb1ee5c97705334641f4d4f2b7c24603506fcdf5b905c0f6a42b4274fd6bfda6"
+      "bytes": 551765,
+      "sha256": "88bdf7ac333b08c977eb4bbbe7a7fa3a6c2bf047de7153b058d8d3789fdf1db4"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2678,
-      "sha256": "707d38370f1ef292a3e6921229acab92d3156e1092e69916d71247bec4525119"
+      "bytes": 21968,
+      "sha256": "374687059357736632d4664f796db5d5eff40354656a5352433160a7789b0dff"
     },
     {
       "location": "prepared",

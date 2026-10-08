@@ -7,11 +7,15 @@ export type RasterAsset = Awaited<ReturnType<ReturnType<typeof createRasterEmitt
 export interface SolidSurface extends Record<string, unknown> {
   id: string; textureScale?: number; displaySampling?: string; map: RasterAsset; surface: RasterAsset; thumbnail: RasterAsset;
   shadowSurface?: RasterAsset; polesUrl?: string; layout: unknown;
+  /** A selection drawn without an image: one color a face, in the order of the mesh's faces (shape-material.ts). A shape
+   * view has them for Shadows off and on; another dataset of a body without imagery for Shadows on alone. */
+  faceColors?: ShapeFaceColors;
 }
+export interface ShapeFaceColors { flood?: readonly string[]; shadow: readonly string[] }
 /** Input map exists before radial preparation fills its output atlas fields. */
 export interface RadialMaterialSurface extends Record<string, unknown> {
   id:string;map:{url:string};textureScale?:number;displaySampling?:string;
-  surface?:RasterAsset;shadowSurface?:RasterAsset;thumbnail?:RasterAsset;polesUrl?:string;layout?:unknown;
+  surface?:RasterAsset;shadowSurface?:RasterAsset;thumbnail?:RasterAsset;polesUrl?:string;layout?:unknown;faceColors?:ShapeFaceColors;
 }
 export type ScientificDataset = SciencePalette & {id: string; format: string; displaySampling?: string; symbols?: unknown;
   surfaceSampling?: {maximumDistanceMeters: number}; underlay?: {surface: string; brightness: number; grayscale?: boolean; bits?: number}};
@@ -23,5 +27,7 @@ export interface RadialMaterialConfig {
   namespace: string; publicBase: string;
   geometry: {radius: number; radiusKm: number; radialTerrain: {sourceLighting?: unknown; thumbnail?: unknown}};
   raster: {width: number; scientific?: ScientificDataset[];
-    observations?: readonly {id:string;validity:unknown;nativePhotographicSampling?:import('../native-photograph.ts').NativePhotographicSampling}[]};
+    observations?: readonly {id:string;validity:unknown;nativePhotographicSampling?:import('../native-photograph.ts').NativePhotographicSampling}[];
+    /** The other recipes of photographed surfaces: with `observations`, any of them makes the body a photographed one. */
+    surfaceObservations?: readonly unknown[]; observedColors?: readonly unknown[]};
 }

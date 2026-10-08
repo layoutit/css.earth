@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "herculina-arrival.webp",
-      "bytes": 37614,
-      "sha256": "416483af1f993a80ebc456abe4833cafea5fa5c27af2bdb68c12e3d88c074b85"
+      "bytes": 38014,
+      "sha256": "4a0133557abc3a318a967b3290ca3e8ab18b1facb78a46e3dcee6b9798fe614d"
     },
     {
       "location": "public",
       "filename": "herculina-billboard.webp",
-      "bytes": 4216,
-      "sha256": "cddff3f56cda145851a84faea0a0b104dc6b5237e859d75980fb69d8efd058a0"
+      "bytes": 4340,
+      "sha256": "8f1010e12c175a45919a6ffdd9d2702692fa688dda4b24fecbc50579df07630b"
     },
     {
       "location": "public",
       "filename": "herculina-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "herculina-elevation-shadow-alpha@2x.webp",
-      "bytes": 629414,
-      "sha256": "7eecb49d129f3b2973be251afb217c974adda7183aa151c2322840e9b06faa27"
-    },
-    {
-      "location": "public",
-      "filename": "herculina-elevation-shadow@2x.webp",
-      "bytes": 124516,
-      "sha256": "9b020464cf8f3115138cd7f2d39bb8b39823e2d99481fc8d987e7eb72d4fb71d"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "herculina-shape-shadow-alpha@2x.webp",
-      "bytes": 547094,
-      "sha256": "4b8ad8a2c4b2c259c31d2c79d024f6993921e83566e2487206b3ed0243ec0ca5"
-    },
-    {
-      "location": "public",
-      "filename": "herculina-shape-shadow@2x.webp",
-      "bytes": 58412,
-      "sha256": "2b0b73402c28441b7cfec9702090277d82d9e9eae35c6918c5608acf9f1e243f"
-    },
-    {
-      "location": "public",
       "filename": "herculina-shape-surface-alpha@2x.webp",
-      "bytes": 542394,
-      "sha256": "9b2751b780f46793058f6720f884b9db41f945314393a3c1dbebd625163034ad"
+      "bytes": 88,
+      "sha256": "7128582bf12773651146076bf3b8760a9ac2139e82d50f11b6accea43570d736"
     },
     {
       "location": "public",
       "filename": "herculina-shape-surface@2x.webp",
-      "bytes": 51952,
-      "sha256": "225354e1d46767eb157f3ecad6e4777bd39a610b5b050b5ac1011632f33be471"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1427,
-      "sha256": "657959f54e871f99e34349ddcb89f674ccb64aaf49dd9ec3fcc82c59bf099f2d"
+      "sha256": "1cd072aa49bc0e26d8201ce2182c3707924fc2f860d03301c9e6959f2af206b3"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3538,
-      "sha256": "ac7944036da32261e6f902f5565c8983763a45ae1d96ce8ae829260ed1c66956"
+      "bytes": 3520,
+      "sha256": "a40d36d877506f5f150b09b30d3b2cc1f14ec0f10357ef445a791311aa845840"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 516181,
-      "sha256": "f9bd955a0f8a6a7c0c5ac9234604651d7fa35220d5c69ae5f56786d27051da57"
+      "bytes": 691643,
+      "sha256": "e5025a4a48ee9c08a2948a664ca8847234fea4ac56ce086346379a0c6f784de7"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 597351,
-      "sha256": "83e1c1ebf5d6a4657c13f403aaae95e60adf1260b7b81ae8ce7c209f019d36a7"
+      "sha256": "33cf53b78de4151d5c175fecab184d48353df865b7543396fd0606d8170787eb"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2090,
-      "sha256": "e588c3d4d4df3876831cdde9f59913b7f405f24e0db03464e37cd01d2ffc0836"
+      "bytes": 25876,
+      "sha256": "04c5eb49a975ceccbbf1991cd6f43a361f7d520e7b1257e04231dbc86db2601a"
     },
     {
       "location": "prepared",

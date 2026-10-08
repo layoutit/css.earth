@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "lyyli-arrival.webp",
-      "bytes": 30790,
-      "sha256": "caa65c611a4215426751724b1b8e8383084245ef9754993fcf84f4835900d880"
+      "bytes": 31096,
+      "sha256": "5ef3bf11e91a1235e5d5b86a2df40aaa13cd5424a86ddb82247f052eccb07c1c"
     },
     {
       "location": "public",
       "filename": "lyyli-billboard.webp",
-      "bytes": 3936,
-      "sha256": "ac4c5ffa6663131a441eda78ef1a07b4cada424f5d80d2fc1337b262344f9488"
+      "bytes": 3994,
+      "sha256": "b44b9e255c3507afc3c71183f23561c521843e5b085ab3abcf8145359234639d"
     },
     {
       "location": "public",
       "filename": "lyyli-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "lyyli-elevation-shadow-alpha@2x.webp",
-      "bytes": 339896,
-      "sha256": "e1e65c172a18704da77ac7790c7f45aae5b5778397b9fda5655e64d73815f446"
-    },
-    {
-      "location": "public",
-      "filename": "lyyli-elevation-shadow@2x.webp",
-      "bytes": 106038,
-      "sha256": "0dbb0b4f040a7b55114a5ff0b000e90686c838ce06a538663e7ed1476cac46eb"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "lyyli-shape-shadow-alpha@2x.webp",
-      "bytes": 275060,
-      "sha256": "59a4eb0b17e18b2be2b0d6903b41cb96ac61620edea4c1d4d2d8f7f50cc5a413"
-    },
-    {
-      "location": "public",
-      "filename": "lyyli-shape-shadow@2x.webp",
-      "bytes": 47260,
-      "sha256": "6fa4b64138c9c2004bf3950b3bd7063b14fd5d9e788fd8fba83bc6f80c4d86e4"
-    },
-    {
-      "location": "public",
       "filename": "lyyli-shape-surface-alpha@2x.webp",
-      "bytes": 272000,
-      "sha256": "b467d5960c534f53f9b307dea208f120aacdbd5d5a35daaf8c9048466d97f16c"
+      "bytes": 88,
+      "sha256": "2bc6e5e75abd408f629bcbf603d513feada6d59fd75605fafc4628f6f90ca28b"
     },
     {
       "location": "public",
       "filename": "lyyli-shape-surface@2x.webp",
-      "bytes": 43788,
-      "sha256": "e4933523f0b5107ff72f6cd7a1255f9934a8617ffc022965ccfcc8fe5c097447"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1326,
-      "sha256": "2e313d9ef5b89f8bb3bf27d506d113113a1e5163e7018054f12170022cb5a520"
+      "sha256": "e23f66a1ab8f68f38672724b52df1b15fb73f0f634c1a976720c1cbd038c1f78"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 176243,
-      "sha256": "7079d763e9afbfd2fa83f7695b520873f3d8d960e190422e623aee7232094abf"
+      "bytes": 232927,
+      "sha256": "8799bb6ad6fa53a918dd176bb581424e169c41e93f72267fa7afc6f10df2ce67"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3080,
-      "sha256": "83fb760b7801babb50b7302931d488e2a1351e5d6f0c5a83d09df7c846190c4e"
+      "bytes": 10622,
+      "sha256": "a90addfac9da3e40ea1fd76bf15248e61cf98bf6b668923f5f2910641e79b78c"
     },
     {
       "location": "prepared",

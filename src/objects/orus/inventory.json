@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "orus-arrival.webp",
-      "bytes": 26254,
-      "sha256": "ce057bcd5c3d165d5587aa453b9c9bcb9a58016b7c580dd626eba3869de074f2"
+      "bytes": 26830,
+      "sha256": "41f449164b0ac0388bdb25d389ad16eaf0f217a532e7a29bb9cce2afa708a308"
     },
     {
       "location": "public",
       "filename": "orus-billboard.webp",
-      "bytes": 4230,
-      "sha256": "aaccaebded2353c333a92b8bc02c390d846542a7c0455f69c1690714ae49413b"
+      "bytes": 4326,
+      "sha256": "7df9285c0c46e5ba19b74d680759d7082849b447c9fbcf7155ad58c65f091953"
     },
     {
       "location": "public",
       "filename": "orus-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "orus-elevation-shadow-alpha@2x.webp",
-      "bytes": 370346,
-      "sha256": "aa729cb43dd66b6c7937bc984b867f4f4209c9b95e09abab05f1b596aac52596"
-    },
-    {
-      "location": "public",
-      "filename": "orus-elevation-shadow@2x.webp",
-      "bytes": 115022,
-      "sha256": "7e3fd82d4d6ff718e01582ed30de17a14e7455942d601f039cad0faa22caa040"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "orus-shape-shadow-alpha@2x.webp",
-      "bytes": 297196,
-      "sha256": "c91b7603b8f5b8fd4667163db3da79b5e6953d9e7d345c808c68e38849dbf942"
-    },
-    {
-      "location": "public",
-      "filename": "orus-shape-shadow@2x.webp",
-      "bytes": 48196,
-      "sha256": "1302599bc4ae2b51e031703ed8784e51554bf457437783957e08f98fd19951f5"
-    },
-    {
-      "location": "public",
       "filename": "orus-shape-surface-alpha@2x.webp",
-      "bytes": 295926,
-      "sha256": "738bb3c508e154586ef7b6596eed842bab9bedf3be94221e2e6afba0502d122a"
+      "bytes": 88,
+      "sha256": "dd5f034bea8761d839143900e0fa55b0fdf65789466899f313043baccdd138e2"
     },
     {
       "location": "public",
       "filename": "orus-shape-surface@2x.webp",
-      "bytes": 44460,
-      "sha256": "01ac1032a0caf3dfd73e79060ea864580a0b098ca98b3fd7a1af2a0f143241cb"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1278,
-      "sha256": "90df20d06d66f4b6d54008ba18242557f32b5e28f83914382e27a7325386b5f1"
+      "sha256": "d3a6bd1c4a9eaa8fef53270b5a6ba8a43744ac8af27b794ca9a7d65ab3882e72"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 190348,
-      "sha256": "fca191c17fe0a70cc4f16de441368324566ee62c75d75900b87daf9bbf1275fc"
+      "bytes": 252310,
+      "sha256": "74ca7f9c834969cfccf8f826f4ae14451b64c2bc03d1aef0ab363b27969c83ba"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2713,
-      "sha256": "9c1e4b7d6a93995c19df1b7198004adf1971df998a7ea87b964c5f8a9e0dcc7a"
+      "bytes": 10979,
+      "sha256": "18306774be7979489c2953ab39eb2d0f9840edd6a6da0b34065648c69175cff7"
     },
     {
       "location": "prepared",

@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "nysa-arrival.webp",
-      "bytes": 30098,
-      "sha256": "271ff4d5755bb016982e2491fac343c9e1a72c40277456058f65e9c603ef6e2f"
+      "bytes": 30678,
+      "sha256": "5b752918bdc2ea65b5527c337b7b9a6b151f9cb23abb192e050a006bdf7c8b98"
     },
     {
       "location": "public",
       "filename": "nysa-billboard.webp",
-      "bytes": 3226,
-      "sha256": "346bdeb5d81d9ddb15d1ead453ef948ce2d5190cb1ad2c0cb7072ce55ee7cc0c"
+      "bytes": 3322,
+      "sha256": "2ad87eda8c66ad49bac9549ab74761f4320bf612fd94b1815883ac55630e1221"
     },
     {
       "location": "public",
       "filename": "nysa-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "nysa-elevation-shadow-alpha@2x.webp",
-      "bytes": 630418,
-      "sha256": "6b5688d46a75dd76e69f4f06d05c5a65701628d37c9b36a312bff8d8b84b4d65"
-    },
-    {
-      "location": "public",
-      "filename": "nysa-elevation-shadow@2x.webp",
-      "bytes": 136486,
-      "sha256": "e683472c475b108101f5b3d8e564e7269626aa403627af3cccdf9ad0a9d4d024"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "nysa-shape-shadow-alpha@2x.webp",
-      "bytes": 542518,
-      "sha256": "9b920de3c75d2ffe259056558d27be502c31197de7cee2441cdad5d31086c692"
-    },
-    {
-      "location": "public",
-      "filename": "nysa-shape-shadow@2x.webp",
-      "bytes": 65958,
-      "sha256": "2bd7326fbb217b618c40c3e90905a25cbd172467e1df084f7be53d0a2f006fbb"
-    },
-    {
-      "location": "public",
       "filename": "nysa-shape-surface-alpha@2x.webp",
-      "bytes": 535536,
-      "sha256": "0a0a48cb441cbb46a74aebf141b491b1e7ceab02dc1b913906fa88f3c0c53dd0"
+      "bytes": 88,
+      "sha256": "f407c9f3690159613b6f7f6f28bb314dec9d5944fd13209a56a2a27113212f4d"
     },
     {
       "location": "public",
       "filename": "nysa-shape-surface@2x.webp",
-      "bytes": 57212,
-      "sha256": "b4679e115fb5cd9c280dcb5259fbf67273e4bb71f88823ced62a41e6eb0cdf95"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1303,
-      "sha256": "12aef4f2f71f575a276df3c1766973886d777fcab9dcb932ffce5424b115cbc4"
+      "sha256": "4d7d9c3c0bb190e55478df18871918573089fd00bb43ef7581242210efdfc7bc"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3206,
-      "sha256": "6073b943543d3105b718d6c67ad4120e1fb405cbedb31e2bd4d8ded2fcb28338"
+      "bytes": 3258,
+      "sha256": "2be1cf2cf68c4c45155e2578d3fad19de4b2ab64cf975032c8bd838a456ac331"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 496232,
-      "sha256": "edd73318fbf7c6c8a88332df8cf799a84872df61f6c6d3050f8e4b4ccedbe9f4"
+      "bytes": 670742,
+      "sha256": "793345b5290af5667a6cccd8fa5aecab69b41199f39a98e6cdcbe2e6b5102e17"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 585571,
-      "sha256": "a7001b4335b60c192e2e259be734cb85c75e07698aef159e4600c4f91b2678f1"
+      "sha256": "692b8ddffd47061d913dde8ecd65fa03fbd7abeb5787eb88fa20d42580c57349"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 1965,
-      "sha256": "60a986fb8171a3a8675b6f9c247aaaeed11b7c776b9c3e1ab9ce8877223c0798"
+      "bytes": 25771,
+      "sha256": "a1dda30d6b5087a918171067fd0a9a1f515a8188160d6966de14972f33f6e573"
     },
     {
       "location": "prepared",

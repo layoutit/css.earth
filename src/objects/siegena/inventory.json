@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "siegena-arrival.webp",
-      "bytes": 38476,
-      "sha256": "40c498392870375131617c9e90086513db43d1dca687dd0945037a61cfe1f99a"
+      "bytes": 39274,
+      "sha256": "258bec51c9cef5cba6fecd16d2d720d495e30e29a83993eadfab8356ee75dd84"
     },
     {
       "location": "public",
       "filename": "siegena-billboard.webp",
-      "bytes": 4716,
-      "sha256": "95f1a7d30b01a3956032a09d34d3f982135196d96ba09b4c5ca6a1c8fe3d19b5"
+      "bytes": 4910,
+      "sha256": "393a620048d718fbdadd968393eb2d3c5db643053bb589c740d066e3f2df4580"
     },
     {
       "location": "public",
       "filename": "siegena-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "siegena-elevation-shadow-alpha@2x.webp",
-      "bytes": 575348,
-      "sha256": "8a8497f1839e0950ceb710379fc916184b6c1507343fad7ddc41f5050ca50d12"
-    },
-    {
-      "location": "public",
-      "filename": "siegena-elevation-shadow@2x.webp",
-      "bytes": 137160,
-      "sha256": "1c4e7e08739eee0af63ec7f4f515156895b86b325c464d2678afa2b7638dec30"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "siegena-shape-shadow-alpha@2x.webp",
-      "bytes": 480920,
-      "sha256": "3949e1f2e689b035dfd2691376b80375314b800e3a2fa1acb61aa24dcdedcd6b"
-    },
-    {
-      "location": "public",
-      "filename": "siegena-shape-shadow@2x.webp",
-      "bytes": 56948,
-      "sha256": "13367482af6b96f9a0e390d1a3ad877d4d055c3213dfb929c560b8cd4cf6365e"
-    },
-    {
-      "location": "public",
       "filename": "siegena-shape-surface-alpha@2x.webp",
-      "bytes": 476932,
-      "sha256": "1ea7821ccd01a9178aa9a5e5b98e8bdeb7d6f9aaf97590464652552a9641cb66"
+      "bytes": 88,
+      "sha256": "ce2cb9cf84891ff08a57769563a934d0af0cd272d2ea8051eafa4b2f9ce41908"
     },
     {
       "location": "public",
       "filename": "siegena-shape-surface@2x.webp",
-      "bytes": 50490,
-      "sha256": "033501431053ac4efbbacd282296d4cdc8dbf0968ece9f8a7859930a7631d578"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1375,
-      "sha256": "d4844fa8f6f17e59933a1062c4a57796a805eacc3bfc9b64319a339d24f1b52d"
+      "sha256": "c298ff9e0d6a006903eae744cb0b7fde1178afddf4a4a5676ef16179108f64ea"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 410015,
-      "sha256": "88cd40b6670f31e2a8267e32d24120816df659adaebee70e9f888eebe9f89722"
+      "bytes": 549126,
+      "sha256": "8bc915587156ada69455552ac968957cee626a5535f9ff34b1aa59cc9310702a"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2874,
-      "sha256": "7f9b7ba1888e2f9e6cacf71c0f7de5457ef7028e4c8ffb58455cb6babc67ca8a"
+      "bytes": 21688,
+      "sha256": "f8b434945364b15f1974e3234779ff71b9ffb099891c504e445e960ba49bbf17"
     },
     {
       "location": "prepared",

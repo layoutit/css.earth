@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "eurybates-arrival.webp",
-      "bytes": 28784,
-      "sha256": "c43d0e6a203d09d5bcf447a30ebe5194e369eb9eabdd18ed84c523ebf681a191"
+      "bytes": 29460,
+      "sha256": "dd9d9b2e9382cd731c316bd6e7f1b73daaf258c5091b6fece98966e2d34047c3"
     },
     {
       "location": "public",
       "filename": "eurybates-billboard.webp",
-      "bytes": 4358,
-      "sha256": "41a99e53af5baa7e6b49ef78c8fbf5918a8478313e1934a0ca61c06189a04eb2"
+      "bytes": 4498,
+      "sha256": "6cf5a5a3843da57a966215f69d5243b4dd1d3e587b49a8bf362ffdc433f5cbd7"
     },
     {
       "location": "public",
       "filename": "eurybates-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "eurybates-elevation-shadow-alpha@2x.webp",
-      "bytes": 411838,
-      "sha256": "a336522bc58b73fed5ac14c3850ac21fb670e0a6eefc37895ebd321426e79a8b"
-    },
-    {
-      "location": "public",
-      "filename": "eurybates-elevation-shadow@2x.webp",
-      "bytes": 118886,
-      "sha256": "0fb19d933ac5d812224ed03243d6b54a1adafae6c0c40e42216bac9f95af8eae"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "eurybates-shape-shadow-alpha@2x.webp",
-      "bytes": 332728,
-      "sha256": "09f19d296d37474613888d3041d1a1086dac9c627d55a09859359589527d5a11"
-    },
-    {
-      "location": "public",
-      "filename": "eurybates-shape-shadow@2x.webp",
-      "bytes": 50952,
-      "sha256": "5eae0cc31a50a2735736d2ff71d46dd597f2d78e516193b655baf42371400236"
-    },
-    {
-      "location": "public",
       "filename": "eurybates-shape-surface-alpha@2x.webp",
-      "bytes": 329446,
-      "sha256": "1b603c12308bac6b4347052e7f5a1397f69c86ba92e73b3f574bd1a364b4a2f3"
+      "bytes": 88,
+      "sha256": "e635222d43d72f24181a56814910361904a20a832089cf03a0afe7aefd29995a"
     },
     {
       "location": "public",
       "filename": "eurybates-shape-surface@2x.webp",
-      "bytes": 46184,
-      "sha256": "3638f5511e437962ab4b5ffcb36bc3998b8a09cbdb49bbef5b524dbb7b2da9e5"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1405,
-      "sha256": "f865f54eb9756841a1ea9468c740c447ad5c6586911f9ead90248495e1a1be66"
+      "sha256": "52ee48bd5e32cf96f51f4a3afd462461d1009f2327ac13619be1644997c8384f"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 232854,
-      "sha256": "3a6f028ca5a2353a40be7e690a1180724db27ccfc0c3df119500864e41ffcde9"
+      "bytes": 309108,
+      "sha256": "1c9eae073f3063cf9a5b618c856e427ddfff1de581f1e23f4f3249570edbc857"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2840,
-      "sha256": "0a9ff64277072fc3b774d3e1fc333caf32d0fe3f42a1e58ae2a93d1dd5e7e502"
+      "bytes": 13066,
+      "sha256": "e869620146c752e64c400afc4ae62e520c05f1b64215442bd7f6aeb25a24a2f6"
     },
     {
       "location": "prepared",

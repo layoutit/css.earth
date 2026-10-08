@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "aquitania-arrival.webp",
-      "bytes": 37564,
-      "sha256": "40ad0d187123f98c7b3c70ba2c2ed9a613a06a2b9f483f579678cd0ad80c3cc8"
+      "bytes": 38180,
+      "sha256": "76c2975824f99fc01085d46bb966e5126418581d754617f17f90639397422fd8"
     },
     {
       "location": "public",
       "filename": "aquitania-billboard.webp",
-      "bytes": 4286,
-      "sha256": "4cb14d96a826bcfb1d556f714dbcf00aa4a606ce7003ae60b1622f58d1b06595"
+      "bytes": 4400,
+      "sha256": "0f987f4b3c3dd778519254c0a3367bdd122e64f07741a42dfda57aa66d99502d"
     },
     {
       "location": "public",
       "filename": "aquitania-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "aquitania-elevation-shadow-alpha@2x.webp",
-      "bytes": 570934,
-      "sha256": "aadeb60837453a45b98cb822d1ae6ae9419a04faa2b8e84c8c1c0341173f475b"
-    },
-    {
-      "location": "public",
-      "filename": "aquitania-elevation-shadow@2x.webp",
-      "bytes": 121938,
-      "sha256": "d51625c98140558a87e10217ed8b47c618efaab0dfcda0d14b239b98b98cec36"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "aquitania-shape-shadow-alpha@2x.webp",
-      "bytes": 487688,
-      "sha256": "cf7e42ca4d3c11bedb0075431b96b85ef9b718788f3c605de544211a037877ed"
-    },
-    {
-      "location": "public",
-      "filename": "aquitania-shape-shadow@2x.webp",
-      "bytes": 56660,
-      "sha256": "e6d03347221db71d417dfba9d84af137fd7945a47c9363adde4fe99481eebbe2"
-    },
-    {
-      "location": "public",
       "filename": "aquitania-shape-surface-alpha@2x.webp",
-      "bytes": 484924,
-      "sha256": "2b883ff97edd980c40193ccf60c6772cea278a3d47d9965b303be42287e19679"
+      "bytes": 88,
+      "sha256": "66e7545845f56b7c04af4b0891d7e34e2c79ad248a2e03aa43250b2a4c62665b"
     },
     {
       "location": "public",
       "filename": "aquitania-shape-surface@2x.webp",
-      "bytes": 51328,
-      "sha256": "398a27cef81ed76978a191902977faa25742bc13df305d3b70858017ce5532ca"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1425,
-      "sha256": "6d758765187f39027eba4cfb29fa1f9084afc7616093fff1b5e4924de9e60c32"
+      "sha256": "17bc05fc7e02aded04e0d838fa841fbdf8ad40b95f1645821d3c2ee654e17bc4"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 421043,
-      "sha256": "4368572be68c6148f30164400af99131278247cf74dde583bd3d2880c16c7baf"
+      "bytes": 563177,
+      "sha256": "562e63fe1aa752afc881dcd94941f17837ae8a6022789185083c2b6bedadabf6"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2924,
-      "sha256": "207ae522d2d6a60731c3daee22c5cda19a94115eb68b99f8bb9da4b69479d06d"
+      "bytes": 22210,
+      "sha256": "95bab5c9b6091dcf78c41a1e0451fdc5735aeb04a69d62478a02fcc05142da9f"
     },
     {
       "location": "prepared",

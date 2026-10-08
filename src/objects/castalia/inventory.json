@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "castalia-arrival.webp",
-      "bytes": 37780,
-      "sha256": "5cca8a82e0541c30af00c24b7bd32b90063fbe1d0da0c42e76192343122bdab6"
+      "bytes": 38390,
+      "sha256": "698e57b96c16960b9accea12ba953b89a612d3fede395d497b815cbbf10198ce"
     },
     {
       "location": "public",
       "filename": "castalia-billboard.webp",
-      "bytes": 4530,
-      "sha256": "d9218718698c91a0ed019a113c6083d347321ec19e41dbe561e8f3939fc00fe5"
+      "bytes": 4678,
+      "sha256": "10599d97f9696edaa2b260e50bab1fb41f5f9c8efd0eef9cd2bc7fb0ffd14de4"
     },
     {
       "location": "public",
       "filename": "castalia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "castalia-elevation-shadow-alpha@2x.webp",
-      "bytes": 633034,
-      "sha256": "e36fc5c60922fe18583af5db0a0bd5c16adf2e5cb216b76e9ea8d170894cc69e"
-    },
-    {
-      "location": "public",
-      "filename": "castalia-elevation-shadow@2x.webp",
-      "bytes": 145444,
-      "sha256": "b79ccd4c7a0c65a2988a450c373c083bdd7a13515343b02ddce1dabae744c2bb"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "castalia-shape-shadow-alpha@2x.webp",
-      "bytes": 536294,
-      "sha256": "35ff969f3c9bab7345a24741bff97b0ff310269daffb1aece4c5fe8f77ab3bf1"
-    },
-    {
-      "location": "public",
-      "filename": "castalia-shape-shadow@2x.webp",
-      "bytes": 63612,
-      "sha256": "005a05e30f328d9ba1bcef1b62e792699dd77604436e925c24f02284845e70d6"
-    },
-    {
-      "location": "public",
       "filename": "castalia-shape-surface-alpha@2x.webp",
-      "bytes": 531426,
-      "sha256": "27f3020c754b026689fc4f6120efe14e49a06e1702635e4da5c7369f43910336"
+      "bytes": 88,
+      "sha256": "7914da85e25c7da8f95f2cfbfa989944b46b697401d1bd3074825f017ecd35e2"
     },
     {
       "location": "public",
       "filename": "castalia-shape-surface@2x.webp",
-      "bytes": 56972,
-      "sha256": "d9bdf18fa2836fd7fd72a1b123793cf6db165b876e0e4208b1cf8b4010aba8bb"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1407,
-      "sha256": "d31867ac665c7d2c14c0bca57e90f8bdcfbe59c64c490798314ad6ab8533affa"
+      "sha256": "691ac5e433d6e03a968fd37302c1098e0cbf3183ec2e1bde382cc9c7d46b54c4"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3758,
-      "sha256": "2d9f68595061a3aec44e3e6ec038112e4068029d188a2877a03b65e73c3da08f"
+      "bytes": 3898,
+      "sha256": "f2b6280b5769558c49255b5551da9c400751e9ffd5414d1215ae5cff786fa029"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 506229,
-      "sha256": "1d670a759468b92a00723c05e938ea57556adbbc1d7b291cd6f46e2ae0a7a3bf"
+      "bytes": 680748,
+      "sha256": "87fecd5b077e875ff86ac91ef3d4d0e2b84842596c5ba48a73ff0d62ddc02963"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 595005,
-      "sha256": "f053d68a7a4c64e5ff29471f61628b238b9f171da1d02abbe4f6abbccf71a802"
+      "bytes": 595007,
+      "sha256": "d7331f1e3f4f5074df27f1bdc5120e3a20707f09e8857d83eb37bbd8035394f7"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2232,
-      "sha256": "1914c3a592567e18ccbf010d4b942cc0f5e884460ca2e74fbccec9c47f40c7cf"
+      "bytes": 26022,
+      "sha256": "e4fc86022e1d15d2337abf2e563c26651bfc98b6bbd0f16ae549d26c63fd5573"
     },
     {
       "location": "prepared",

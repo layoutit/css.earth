@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "harmonia-arrival.webp",
-      "bytes": 37210,
-      "sha256": "7cb748616f5cbbecefbc84759a31222deae622c95cfe8c5e74c5051ddc979092"
+      "bytes": 37864,
+      "sha256": "9754bc2806e05c7a7fdac24a7022b19667e6c35a6a78a5b8145f99737bd3cd32"
     },
     {
       "location": "public",
       "filename": "harmonia-billboard.webp",
-      "bytes": 4462,
-      "sha256": "9d8272b36ef43377dc3fd004a70eb9f63afaa96b1c970d47cadd3ad98a3589b9"
+      "bytes": 4624,
+      "sha256": "fa9fa6f77bf2ef657d9c918eb505c588d118e416491d78f59a4d609ca8267ae8"
     },
     {
       "location": "public",
       "filename": "harmonia-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "harmonia-elevation-shadow-alpha@2x.webp",
-      "bytes": 638930,
-      "sha256": "fbcb19455aaaae915243724f1ae64948362171f242215641b6eab279db92bfd3"
-    },
-    {
-      "location": "public",
-      "filename": "harmonia-elevation-shadow@2x.webp",
-      "bytes": 131736,
-      "sha256": "3edde17de5e95eca2c547f4a2dcd1474225f583a0aab12f73e6e4a0bd0d2f995"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "harmonia-shape-shadow-alpha@2x.webp",
-      "bytes": 549284,
-      "sha256": "ef7c0d8060639d38dddfae0db582a8274f3b352d895ed6f92ea261420bf1dbee"
-    },
-    {
-      "location": "public",
-      "filename": "harmonia-shape-shadow@2x.webp",
-      "bytes": 58424,
-      "sha256": "abece94818259193495b990b0fbb87ca2f7cebec677ce49a5278d69908e0943a"
-    },
-    {
-      "location": "public",
       "filename": "harmonia-shape-surface-alpha@2x.webp",
-      "bytes": 545380,
-      "sha256": "6008d0117027c65628288aabea8af99115cfaa11d01e303c38de97daffebc1f5"
+      "bytes": 88,
+      "sha256": "97c01a67562a19bd537a3e718f95568ebf653e21b9429ccf8bda9483d50ea3c9"
     },
     {
       "location": "public",
       "filename": "harmonia-shape-surface@2x.webp",
-      "bytes": 52860,
-      "sha256": "36cb675f737cd6109f53a16104b5975ce9693c134d38088e50e1209e06dbe6c9"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,19 +77,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1402,
-      "sha256": "db644e3e1dd0a92098e035a19d7bc8e942c394f91099ae07273044b510805523"
+      "sha256": "fff9bf0d00297e326fa20e141ec2d75ebd1912eaa7a9ec26bade925638846ad6"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 159,
-      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+      "bytes": 197,
+      "sha256": "d5768b466a02a6ddbbac5ed5ef550fc44488964a027e3b5ad2dffdda660df605"
     },
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 3784,
-      "sha256": "66535f3628b35bc082c2310e6971f4f3d73b8f924aefe445b296a50fd55849db"
+      "bytes": 3728,
+      "sha256": "02caee6e731d3230f32f6919cdefbb01026b1ff9ce71db06d5b3b5ff1bd654d0"
     },
     {
       "location": "prepared",
@@ -124,20 +100,20 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 514704,
-      "sha256": "7f8b309b2dc914604c848734084b2013483045962d58da965e1f5cb6df2a6be9"
+      "bytes": 689944,
+      "sha256": "d8beac95d71a824f0f5395fa47adcb4fab4c15ee8a30575ee27c6d2a2ade59fb"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 598136,
-      "sha256": "363b559a9bf302b5253b8a5305e1cb234e9135f34023ca7c1d13ad8ea3d32d0c"
+      "sha256": "5d367b99e07891f752881ef6ee023869268f8d98614aba4c57496d3fe6947ab4"
     },
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 2065,
-      "sha256": "95ef9d8624e657a64e5776fad0ae9464e94262ced489c5b76bfc25f4a2507b6d"
+      "bytes": 25855,
+      "sha256": "0a03614a1424025fd4ecf52d7cff82606958fcf4d05c03b6488dfab32251214f"
     },
     {
       "location": "prepared",

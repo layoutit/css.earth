@@ -5,6 +5,20 @@
   .object-stage .polycss-mesh > u { border-radius: 0; }
 }
 
+/* While a shape-only dataset shows, its selection writes `color-faces` on the body and each face's own `color` (the
+   bake's solid-scene.ts): a face is then one color and no image. With corner-shape it is its box in that color. Without,
+   it is the classic border triangle: an empty box whose bottom border is the face, apex at the top centre, from the
+   border widths the bake wrote inline. Measured on Apollo (2026-10-08, against the page drawn from atlases, 921,600
+   pixels, Pixelmatch 0.1): Chrome 0 with the box and 1,324 with borders (hairline cracks), WebKit 54 and Firefox 363
+   with borders. */
+.object-stage .polycss-mesh.color-faces > u { background-image: none !important; background-color: currentColor; }
+@supports not ((corner-top-left-shape: bevel) and (corner-top-right-shape: bevel)) {
+  .object-stage .polycss-mesh.color-faces > u {
+    width: 0 !important; height: 0 !important; background-color: transparent;
+    border-style: solid; border-color: transparent transparent currentColor;
+  }
+}
+
 /* A prepared face waiting for its activation batch draws no image, and a withheld one no box, whatever image and display
    its selection has already written inline (prepared-texture-activation.ts). Activation removes the attribute. */
 [data-texture-pending] { background-image: none !important; }

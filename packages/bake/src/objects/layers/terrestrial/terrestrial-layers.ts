@@ -287,8 +287,8 @@ export async function prepareTerrestrialLayers({ sourceDirectory, publicDirector
         : source.manifest.generatedIntermediates.filter(entry => model.datasetIds.includes(requireString(requireRecord(requireRecord(entry).recipe).datasetId))),
       sunDirection: solarGeometry.requireBodyFixedSunDirection(config.namespace), replaceReviewedImages });
     }
-    const unpainted = surfaces.filter(surface => requireRecord(surface.layout).kind !== 'triangle-atlas').map(surface => surface.id);
-    if (unpainted.length) throw new Error(`Radial surfaces without a triangle atlas: ${unpainted.join(', ')}.`);
+    const unpainted = surfaces.filter(surface => !['triangle-atlas', 'face-colors'].includes(String(requireRecord(surface.layout).kind))).map(surface => surface.id);
+    if (unpainted.length) throw new Error(`Radial surfaces without a triangle atlas or face colors: ${unpainted.join(', ')}.`);
     await writeFile(resolve(outputDirectory, 'surfaces.json'), JSON.stringify({ objectId: config.namespace, surfaces }) + '\n');
   }
   const assets = { surfaces: Object.fromEntries(raster.surfaces.map(surface => [surface.id, {

@@ -4,32 +4,20 @@
     {
       "location": "public",
       "filename": "minerva-arrival.webp",
-      "bytes": 34800,
-      "sha256": "fb3742dc034ef5089e8c3ffdafc0934ecf9823b272439e925e14d5be9d12acbe"
+      "bytes": 35604,
+      "sha256": "65a2838cc65e47b2c3d3cda2143faadc9775f7001a56fc91c6cd22ed50911ff3"
     },
     {
       "location": "public",
       "filename": "minerva-billboard.webp",
-      "bytes": 4860,
-      "sha256": "514191718edf24f8b37429c0fbe67622add78d34511dd639d388abc56490ecdd"
+      "bytes": 5112,
+      "sha256": "e44a109cd02f54cdaacfbc02d408c1564a5c6e6761577f8b0097e9855a0deb04"
     },
     {
       "location": "public",
       "filename": "minerva-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
-    },
-    {
-      "location": "public",
-      "filename": "minerva-elevation-shadow-alpha@2x.webp",
-      "bytes": 591652,
-      "sha256": "0dd07a76587c8dc858e5cdf44b376c8af70a746a822661b9d2624031742583f3"
-    },
-    {
-      "location": "public",
-      "filename": "minerva-elevation-shadow@2x.webp",
-      "bytes": 136264,
-      "sha256": "dbcef186c824213910b4231529d0a454a665fc2c7002b54a1db8f16f49d6cb6f"
     },
     {
       "location": "public",
@@ -51,27 +39,15 @@
     },
     {
       "location": "public",
-      "filename": "minerva-shape-shadow-alpha@2x.webp",
-      "bytes": 498480,
-      "sha256": "bb780c4f1c75b33fbb9f1706d9242419ca27235dc4be533ae3f519bc05d953c2"
-    },
-    {
-      "location": "public",
-      "filename": "minerva-shape-shadow@2x.webp",
-      "bytes": 58224,
-      "sha256": "0496c79daacb537c1443eb402cde580f81b615007bc81515e8fc2008a5d900d1"
-    },
-    {
-      "location": "public",
       "filename": "minerva-shape-surface-alpha@2x.webp",
-      "bytes": 495126,
-      "sha256": "69131180d87edd25a46c4f0a9f208bf8c7760e7413a98405ab2be175abfd747f"
+      "bytes": 88,
+      "sha256": "91cf9b921ee1d7beedd4663399e0c5ac892c4839ab0ad43c20fd3aaef3635737"
     },
     {
       "location": "public",
       "filename": "minerva-shape-surface@2x.webp",
-      "bytes": 51894,
-      "sha256": "9fb68d0b0813d3b6909959f8c8907b8d0e79c91b15e4d6e69a1784f099a439a5"
+      "bytes": 44,
+      "sha256": "a490f2d9bb5592a16a01d7250552425a1227a31191e3cded4a9c91b0368d4574"
     },
     {
       "location": "public",
@@ -101,7 +77,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1375,
-      "sha256": "a4fded3ae33a8fc9c51efd9862f145e1184ba94397fec38d5ca2b692f5060cd8"
+      "sha256": "762dfb4e6d831a30cf9f48f752d65546bbf219e637eeeb29a8c64d73f161fe8c"
     },
     {
       "location": "prepared",
@@ -124,8 +100,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 433751,
-      "sha256": "d9d70f386a7270c69e65986fbc76a754f5943c07a7507085078bfed61c2d30bb"
+      "bytes": 580043,
+      "sha256": "674b5c4c35365484d0815bdf9cc6ff0447515547b97209b554226de2a92708eb"
     },
     {
       "location": "prepared",
@@ -136,8 +112,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 3149,
-      "sha256": "70e75f45ad5b932be7cffa0b71188bb4582266c59e921e7b84f77ccefb231c1c"
+      "bytes": 22863,
+      "sha256": "a835daa32f462ba903309a370230eb84cdb10b840b65582f6c2187070646ab2a"
     },
     {
       "location": "prepared",
