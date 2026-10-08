@@ -29,6 +29,16 @@
         "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
         "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract"
       ]
+    },
+    {
+      "id": "published-phase-curves",
+      "subject": "Published TESS phase curve as a map of longitude (Wong et al. 2020)",
+      "status": "excluded",
+      "finding": "Read on 2026-10-08. Wong et al. (2020, arXiv:2003.06407) fit TESS sectors 3 and 4 (A_atm 70 +15/-16 ppm, D_d 113 +39/-31 ppm, D_n -28 +38/-31 ppm) and print no temperature for this planet: it has no Spitzer eclipse and is absent from the paper's temperature table.",
+      "revisitWhen": "A paper prints day-side and night-side brightness temperatures from a sinusoid fit of one band.",
+      "evidence": [
+        "https://arxiv.org/abs/2003.06407"
+      ]
     }
   ]
 }

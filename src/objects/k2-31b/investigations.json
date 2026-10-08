@@ -29,6 +29,16 @@
         "https://ui.adsabs.harvard.edu/abs/2016AJ....152..132G/abstract",
         "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract"
       ]
+    },
+    {
+      "id": "published-phase-curves",
+      "subject": "Published K2 phase curve as a map of longitude (Niraula et al. 2018)",
+      "status": "excluded",
+      "finding": "Read on 2026-10-08. Niraula et al. (2018, arXiv:1812.09227) print a phase amplitude from K2 (12.27 +0.85/-0.83 ppm) and no eclipse depth for this planet. The printed day-side temperature is computed from the star and the orbit, not measured, and no night side is printed. The transit is grazing.",
+      "revisitWhen": "A paper prints an eclipse depth with day-side and night-side brightness temperatures from a sinusoid fit of one band.",
+      "evidence": [
+        "https://arxiv.org/abs/1812.09227"
+      ]
     }
   ]
 }

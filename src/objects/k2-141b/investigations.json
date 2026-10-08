@@ -28,6 +28,17 @@
       "evidence": [
         "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
       ]
+    },
+    {
+      "id": "published-phase-curves",
+      "subject": "Published phase curves as a map of longitude (Spitzer, Zieba et al. 2022; JWST programs 2347 and 2159)",
+      "status": "deferred",
+      "finding": "Read on 2026-10-08. Zieba et al. (2022, arXiv:2203.00370) fit the Spitzer 4.5 micron curve with a sinusoid (depth 142.9 ppm, peak-to-trough amplitude 120.6 ppm, no shift preferred) and print no temperature converted from it: the printed 4.5 micron temperatures (day 2233 +330/-335 K, night 909 +497/-560 K) belong to a separate two-temperature model of the same data, so the sinusoid has no printed day side to anchor on. Meier et al. (2026, arXiv:2603.02408) model the mantle and report no measured phase curve. JWST watched a whole orbit twice (MIRI, program 2347; NIRSpec, program 2159; both public in MAST), and no paper reporting either was found on arXiv on that day.",
+      "revisitWhen": "A paper reports the JWST MIRI or NIRSpec phase curve.",
+      "evidence": [
+        "https://arxiv.org/abs/2203.00370",
+        "https://arxiv.org/abs/2603.02408"
+      ]
     }
   ]
 }

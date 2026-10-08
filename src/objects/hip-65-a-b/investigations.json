@@ -29,6 +29,17 @@
         "https://ui.adsabs.harvard.edu/abs/2020A&A...639A..76N/abstract",
         "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract"
       ]
+    },
+    {
+      "id": "published-phase-curves",
+      "subject": "Published TESS phase curves as a map of longitude (Wong et al. 2020; Nielsen et al. 2020)",
+      "status": "excluded",
+      "finding": "Read on 2026-10-08. Wong et al. (2020, arXiv:2003.06407) detect the atmospheric term (29.6 +8.3/-9.1 ppm) but no eclipse depth: the transit is grazing. Nielsen et al. (2020, arXiv:2003.05932) fit a 57.5 +/- 4.7 ppm cosine read as reflected light only. Neither prints an eclipse depth or a temperature, and the two amplitudes differ by 2.7 sigma, as Wong et al. state.",
+      "revisitWhen": "A paper prints an eclipse depth with day-side and night-side brightness temperatures from a sinusoid fit of one band.",
+      "evidence": [
+        "https://arxiv.org/abs/2003.06407",
+        "https://arxiv.org/abs/2003.05932"
+      ]
     }
   ]
 }

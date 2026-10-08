@@ -29,6 +29,16 @@
         "https://ui.adsabs.harvard.edu/abs/2022A&A...666A..47Z/abstract",
         "https://ui.adsabs.harvard.edu/abs/2020A&A...635A..60D/abstract"
       ]
+    },
+    {
+      "id": "published-phase-curves",
+      "subject": "A published phase curve to draw a map of longitude from",
+      "status": "deferred",
+      "finding": "No published phase-curve fit was found on arXiv on 2026-10-08. Ahlers et al. (2020, arXiv:1911.05025) measure a TESS eclipse only, 130 +/- 20 ppm.",
+      "revisitWhen": "A paper fits a phase curve of this planet.",
+      "evidence": [
+        "https://arxiv.org/abs/1911.05025"
+      ]
     }
   ]
 }
