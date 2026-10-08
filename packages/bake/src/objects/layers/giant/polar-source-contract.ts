@@ -10,6 +10,10 @@ const forbiddenPolarDetailOverride = (value: unknown): value is undefined => val
 const dataset = union(
   object({id:string, operation:literal('rgb-observed-gaps'), source:string, files, control,
     polarDetails:forbiddenPolarDetailOverride, coverageSources:array(string), planetographicAxisRatio:number, projection}),
+  // A color map whose publisher marks its bad data in a mask image of the map's size: a pixel the mask shows darker than
+  // half brightness is missing. Its rows are planetographic, as an `rgb-observed-gaps` map's are.
+  object({id: string, operation: literal('rgb-published-mask'), source: string, files, control, polarDetails: forbiddenPolarDetailOverride,
+    coverageMask: string, planetographicAxisRatio: number, projection}),
   // A color map with no per-band coverage maps: its measured rows are pinned, and every row outside them is missing.
   object({id: string, operation: literal('rgb-measured-rows'), source: string, files, control, polarDetails: forbiddenPolarDetailOverride,
     coverage: object({columnStride: number, minimumMean: number, firstMeasuredRow: number, lastMeasuredRow: number}), projection}),

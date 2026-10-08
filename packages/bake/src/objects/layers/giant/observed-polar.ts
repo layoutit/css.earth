@@ -35,6 +35,10 @@ export function parseObservedPolarRecipe(input: unknown) {
       if(dataset.coverageSources.length!==POLAR_RECIPE_POLICY.rgbComponents||!(dataset.planetographicAxisRatio>=POLAR_RECIPE_POLICY.minimumEllipsoidRatio))throw new TypeError('RGB maps require three component coverage maps and an ellipsoid ratio.');
       dataset.coverageSources.forEach(source);
     }
+    if(dataset.operation==='rgb-published-mask'){
+      if(!(dataset.planetographicAxisRatio>=POLAR_RECIPE_POLICY.minimumEllipsoidRatio))throw new TypeError('A masked RGB map requires an ellipsoid ratio.');
+      source(dataset.coverageMask);
+    }
     if(dataset.operation==='scalar-observed-gaps'&&(!Array.isArray(dataset.palette)||dataset.palette.length<POLAR_RECIPE_POLICY.minimumPaletteColors||dataset.scalar.range&&!(dataset.scalar.range[1]>dataset.scalar.range[0])))throw new TypeError('Invalid measured scalar parameters.');
   }
   return {...config,sourcePins:[...sourcePaths].map(path=>({path}))};
@@ -102,19 +106,29 @@ export async function prepareObservedPolarSurfaces({sourceDirectory,publicDirect
       source1x=resizeObservedRgb(original,width,height);source2x=resizeObservedRgb(original,width*2,height*2);
       measured={...measured,sourceMissingPixels:missing.reduce((sum,n)=>sum+n,0)};
       polar=prepareMeasuredPolarAtlas(original,polarTileSize*2,{projection:'latitude-linear',...dataset.projection});
-    } else if(dataset.operation==='rgb-observed-gaps') {
+    } else if(dataset.operation==='rgb-observed-gaps'||dataset.operation==='rgb-published-mask') {
       const image=await sharp(bytes).removeAlpha().raw().toBuffer({resolveWithObject:true});
-      const masks=dataset.coverageSources.map(path=>{
-        const scalar=readFitsPrimary(requireSource(sources,path));
-        if(scalar.width!==image.info.width||scalar.height!==image.info.height)throw new Error('RGB component coverage dimensions differ.');
-        return measureScalarCoverage(scalar,{noData:0,coverage:'polar-connected-zero'}).missing;
-      });
-      const rgba=Buffer.alloc(image.info.width*image.info.height*4);
-      for(let i=0;i<masks[0].length;i++)if(masks.every(mask=>!mask[i])){
+      const pixels=image.info.width*image.info.height;
+      let observed: (index: number)=>boolean;
+      if(dataset.operation==='rgb-observed-gaps') {
+        const masks=dataset.coverageSources.map(path=>{
+          const scalar=readFitsPrimary(requireSource(sources,path));
+          if(scalar.width!==image.info.width||scalar.height!==image.info.height)throw new Error('RGB component coverage dimensions differ.');
+          return measureScalarCoverage(scalar,{noData:0,coverage:'polar-connected-zero'}).missing;
+        });
+        observed=index=>masks.every(mask=>!mask[index]);
+      } else {
+        // The publisher's mask decides what is shown: a pixel it marks bad is missing, and nothing is drawn into it.
+        const mask=await sharp(requireSource(sources,dataset.coverageMask)).extractChannel(0).raw().toBuffer({resolveWithObject:true});
+        if(mask.info.width!==image.info.width||mask.info.height!==image.info.height)throw new Error('The coverage mask and its map differ in size.');
+        observed=index=>mask.data[index]>=128;
+      }
+      const rgba=Buffer.alloc(pixels*4);
+      for(let i=0;i<pixels;i++)if(observed(i)){
         rgba.set(image.data.subarray(i*image.info.channels,i*image.info.channels+3),i*4);rgba[i*4+3]=255;
       }
       const data=planetographicRowsToMeshLatitude(rgba,image.info.width,image.info.height,4,dataset.planetographicAxisRatio);
-      const missing=Uint8Array.from({length:masks[0].length},(_,i)=>data[i*4+3]===255?0:1);
+      const missing=Uint8Array.from({length:pixels},(_,i)=>data[i*4+3]===255?0:1);
       if(!missing.includes(0))throw new Error('RGB map has no common observed coverage.');
       const original={data,info:{width:image.info.width,height:image.info.height,channels:4},missing};
       source1x=resizeObservedRgb(original,width,height);source2x=resizeObservedRgb(original,width*2,height*2);

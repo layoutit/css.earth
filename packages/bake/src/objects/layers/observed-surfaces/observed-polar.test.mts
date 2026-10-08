@@ -70,3 +70,25 @@ test('dated RGB maps intersect all component footprints and preserve the shared 
   assert.equal(result.assets.length,5);
  }finally{await rm(root,{recursive:true,force:true});}
 });
+
+test('a published mask decides what an RGB map shows, and the map keeps its date control',async()=>{
+ const root=await mkdtemp(join(tmpdir(),'observed-masked-'));
+ try{
+  await sharp(Buffer.alloc(2*16*3,120),{raw:{width:2,height:16,channels:3}}).jpeg().toFile(join(root,'map.jpg'));
+  // The publisher's black marks bad data: the top two rows, one pixel of the third and the bottom row.
+  const mask=Buffer.alloc(2*16*3,192);mask.fill(0,0,2*2*3);mask.fill(0,4*3,5*3);mask.fill(0,30*3);
+  await sharp(mask,{raw:{width:2,height:16,channels:3}}).png().toFile(join(root,'mask.png'));
+  const config=structuredClone(recipe), dated=config.datasets.find((entry:{operation:string})=>entry.operation==='rgb-observed-gaps');
+  const dataset={id:dated.id,operation:'rgb-published-mask',source:'map.jpg',coverageMask:'mask.png',planetographicAxisRatio:1,files:dated.files,control:dated.control,projection:dated.projection};
+  config.datasets=[dataset];config.dimensions={width:32,height:16,polarTileSize:16};
+  config.packing={latitudeBoundsDegrees:[-80,-40,0,40,80],gutter:2};
+  const result=await prepareObservedPolarSurfaces({sourceDirectory:root,publicDirectory:root,config});
+  assert.equal(result.coverage[dataset.id].sourceMissingPixels,7);
+  assert.equal(result.coverage[dataset.id].firstMeasuredRow,2);assert.equal(result.coverage[dataset.id].lastMeasuredRow,14);
+  assert.deepEqual(result.datasets.controls[0].step,dataset.control.step);
+  assert.equal(result.assets.length,5);
+  await sharp(Buffer.alloc(4*16*3,192),{raw:{width:4,height:16,channels:3}}).png().toFile(join(root,'mask.png'));
+  await assert.rejects(prepareObservedPolarSurfaces({sourceDirectory:root,publicDirectory:root,config}),/differ in size/);
+  assert.throws(()=>parseObservedPolarRecipe({...config,datasets:[{...dataset,planetographicAxisRatio:.9}]}),/ellipsoid ratio/);
+ }finally{await rm(root,{recursive:true,force:true});}
+});
