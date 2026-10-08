@@ -41,7 +41,7 @@
       {
         "id": "color-surface",
         "label": "Color + brightness",
-        "qualification": "The star's color, darker where mirc saw its surface dimmer in the infrared · 2 to 24 September 2011, mapped in this project",
+        "qualification": "The star's color, darker where CHARA/MIRC saw its surface dimmer in the infrared · 2 to 24 September 2011, mapped in this project",
         "thumbnail": "udkadua-dataset-color-surface.webp",
         "surface": "udkadua-surface-color-surface@2x.webp",
         "poles": "udkadua-poles-color-surface@2x.webp",
@@ -56,7 +56,7 @@
       {
         "id": "surface-2011-09",
         "label": "Surface map",
-        "qualification": "Mapped in this project · mirc, september 2011",
+        "qualification": "Mapped in this project · CHARA/MIRC, september 2011",
         "thumbnail": "udkadua-dataset-surface-2011-09.webp",
         "surface": "udkadua-surface-surface-2011-09@2x.webp",
         "poles": "udkadua-poles-surface-2011-09@2x.webp",
@@ -111,7 +111,7 @@
           "meta": "%",
           "sourceUrl": "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data"
         },
-        "notes": "Where λ Andromedae's surface was darker and brighter in infrared light on 6 nights, 2 to 24 September 2011, worked out in this project from what the mirc interferometer measured. The star turned by 146° between the first night and the last, so one surface is fitted to all of them, with the size, tilt, pole direction and period Martinez et al. (2021), ApJ 916, 60 measured. Both the longitudes and the latitudes of the dark regions are fixed by the data, down to about 21° of the surface; nothing finer is. The 34° of longitude that faced the Earth on none of the nights hold the mean, inside the black line. The colors are a scale of brightness in one infrared band, not the star's color or temperature. A reduction made in this project with the authors' code and calibrated nights, not their published map.",
+        "notes": "Where λ Andromedae's surface was darker and brighter in infrared light on 6 nights, 2 to 24 September 2011, worked out in this project from what the CHARA/MIRC interferometer measured. The star turned by 146° between the first night and the last, so one surface is fitted to all of them, with the size, tilt, pole direction and period Martinez et al. (2021), ApJ 916, 60 measured. Both the longitudes and the latitudes of the dark regions are fixed by the data, down to about 21° of the surface; nothing finer is. The 34° of longitude that faced the Earth on none of the nights hold the mean, inside the black line. The colors are a scale of brightness in one infrared band, not the star's color or temperature. A reduction made in this project with the authors' code and calibrated nights, not their published map.",
         "legendNote": "Darker: dimmer than the mean of the surface seen; white: brighter. Black line: the edge of what never faced the Earth on these nights."
       },
       {

@@ -43,9 +43,9 @@
     },
     {
       "id": "surface-udkadua-mirc-2011-09",
-      "subject": "mirc visibilities of 2 to 24 September 2011 as a surface map",
+      "subject": "CHARA/MIRC visibilities of 2 to 24 September 2011 as a surface map",
       "status": "included",
-      "finding": "The authors' calibrated files of 6 nights (2 September 2011: 360 squared visibilities; 6 September 2011: 392 squared visibilities; 10 September 2011: 360 squared visibilities; 14 September 2011: 864 squared visibilities; 19 September 2011: 808 squared visibilities; 24 September 2011: 200 squared visibilities) are public with their code. ROTIR at the pinned commit (HEALPix level 3, sobel2 at weight 10, 1000 iterations) fits one turning surface to all of them. The fit leaves a reduced chi-squared of 1.72 on the squared visibilities and 2.30 on the closure phases, where a spotless star leaves 3.13 and 28.29 (limit 3); its spots are 2.14 times those the same fit draws on a spotless star of 2.77 mas (limit 2); and two independent halves of the data give the same spots (correlation 0.83, limit 0.5). Spotless twins of 2.69 mas and 2.80 mas do not fit on the 2.742 mas sphere (closure-phase chi-squared 7.42 and 9.40) and so do not decide the spot check. The published maps themselves are not redistributed.",
+      "finding": "The authors' calibrated files of 6 nights (2 September 2011: 360 squared visibilities; 6 September 2011: 392 squared visibilities; 10 September 2011: 360 squared visibilities; 14 September 2011: 864 squared visibilities; 19 September 2011: 808 squared visibilities; 24 September 2011: 200 squared visibilities) are public with their code. ROTIR at the pinned commit (HEALPix level 3, sobel2 at weight 10, 1000 iterations) fits one turning surface to all of them. The fit leaves a reduced chi-squared of 1.72 on the squared visibilities and 2.30 on the closure phases (limit 3), where a spotless star leaves 3.13 and 28.29; its spots are 2.14 times those the same fit draws on a spotless star of 2.77 mas (limit 2); and two independent halves of the data give the same spots (correlation 0.83, limit 0.5). Spotless twins of 2.69 mas and 2.80 mas do not fit on the 2.742 mas sphere (closure-phase chi-squared 7.42 and 9.40) and so do not decide the spot check. The published maps themselves are not redistributed.",
       "evidence": [
         "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data",
         "https://doi.org/10.3847/1538-4357/ac06a5",
@@ -56,7 +56,7 @@
       "id": "rotation-axis",
       "subject": "Rotation axis, period and prime meridian",
       "status": "included",
-      "finding": "The page draws the axis the surface map is fitted with: inclination 85.63° and pole position angle 26.09° east of north, with a period of 54.2 d (Martinez et al. (2021), ApJ 916, 60, Table 4 (https). No prime meridian is defined for the star: longitude 0 is the meridian that faced the Earth on 14 September 2011, and the star is not turned.",
+      "finding": "The page draws the axis the surface map is fitted with: inclination 85.63° and pole position angle 26.09° east of north, with a period of 54.2 d (Martinez et al. (2021), ApJ 916, 60, Table 4 (https://arxiv.org/abs/2107.06366)). No prime meridian is defined for the star: longitude 0 is the meridian that faced the Earth on 14 September 2011, and the star is not turned.",
       "evidence": [
         "https://doi.org/10.3847/1538-4357/ac06a5",
         "https://doi.org/10.3847/1538-4357/abb670"

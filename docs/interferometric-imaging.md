@@ -6,7 +6,7 @@ A star's surface reaches this project as interferometric data, not as a picture.
 
 1. **Calibrate.** Most public data are raw exposures in the ESO archive. The calibration tools plan a night from the archive's raw table, download the public frames and reduce them with ESO's own pipelines: `calibrate-pionier.mts` for VLTI/PIONIER, `calibrate-amber.mts` for VLTI/AMBER, `calibrate-gravity.mts` for VLTI/GRAVITY and `calibrate-matisse.mts` for VLTI/MATISSE. PIONIER and AMBER nights are planned from the raw table. GRAVITY and MATISSE need deeper calibration chains, so their tools follow the calibration tree the archive's calselector service gives for the science frame (`eso-associations.mts`). A table per instrument names the recipe for each kind of association, which children it reads, and which header keywords pick between alternatives, such as the dark with the science frame's integration time or the sky in the same beam-commutation state. An author's calibrated file, when one is public, can be used instead.
 2. **Select.** `oifits-select.mts` flags channels outside chosen wavelength windows, data outside an MJD range, or every other exposure (`--half even|odd`), applies a published wavelength-scale correction, and can raise errors to a floor (`--error-floor`). The measured values themselves are never changed.
-3. **Reconstruct.** SQUEEZE builds a flat sky-plane image. `surface-reconstruction.mts` runs ROTIR, which fits brightness directly on a sphere of known size and limb darkening.
+3. **Reconstruct.** SQUEEZE builds a flat sky-plane image. `surface-reconstruction.mts` runs ROTIR, which fits brightness directly on a sphere of known size and limb darkening. Given several nights and a rotation period, it fits one turning surface to all of them.
 4. **Check.** `spotless-disc.mts` simulates a spotless limb-darkened disc on the same sampling and errors, and the same recipe reconstructs it. A reconstruction may be cast only if it passes three conditions:
    - it fits its own data to a reduced chi-squared of 3 or better, on squared visibilities and on closure phases;
    - its spots are at least twice as strong as those of every spotless twin within 2 percent of the fitted size;
@@ -87,6 +87,7 @@ Measured on 2026-09-16 with the pinned recipes and the spotless simulations the 
 | R Dor, SQUEEZE, AMBER continuum | 1.74 and 2.99 | 1.31 | 0.36 | not cast |
 | R Aqr, SQUEEZE, PIONIER 2019 from raw, 16 nights, 5% and 2° error floors | 58 and 63 | 15.6 | 0.27 (without floors) | not cast |
 | R Aqr, `image-star.mts` on `seasons/r-aqr-pionier-2019`: lost fringes removed, 5%, 5e-6 and 2° floors | 71.8 and 71.9 | 5.76 (10.2 against the full-size twin) | 0.48 | not cast |
+| λ Andromedae, ROTIR sphere on six nights, `surface-star.mts` on `seasons/udkadua-mirc-2011-09` (2026-10-08) | 1.72 and 2.30 | 2.14 (2.94 against the twin of the same size; 1.40 against one 2% larger, which does not fit the sphere) | 0.83 | cast: see below |
 
 The spot ratio depends on the twin's size. On one half of Betelgeuse's February 2020 data, a spotless disc leaves patches with rms 0.03 at 42.0 mas, 0.12 at 42.8 mas and 0.05 at 43.8 mas, against 0.13 in that half's image. More iterations (10 000), four chains and half-size pixels (0.39 mas) did not make a spotty twin clean. π¹ Gruis's twins stay at 0.012 to 0.019 over ±2 percent. The rows above measured with one twin are kept as measured. Since the check judges by the spottiest twin within 2 percent, Betelgeuse's image does not pass it. The Betelgeuse dataset is kept by decision and says on the page that its patches are not confirmed.
 
@@ -151,6 +152,36 @@ Two choices were settled by measurement rather than taste. Without a CLEAN box, 
 The final image, after the 0.907 flux-scale correction applied to the visibilities and measured back at 0.90700: beam 48.2 by 21.4 mas at −80.2 degrees, peak 4.288 mJy per beam, residual rms 9.53e-5, dynamic range 45.0, half-power disc 746.8 mas. The fitted disc is 1.5435 Jy at limb darkening 0.258 before the correction and 1.400 Jy after. Brightness temperature over the disc, Planck at 231.618 GHz: 60.9 to 100.3 kelvin, median 87.3.
 
 Two things do not match the paper and are not explained here. Its Table 1 gives 77 by 52 mas for this date where robust 0 in CASA gives 48.2 by 21.4; AIPS and CASA scale the Briggs robust parameter differently, which is a candidate and is not verified. And its text describes the array as reaching about 5 km, where the delivered data hold projected baselines from 14 to 8040 kilo-wavelengths — 18 m to 10.4 km at this frequency — after the delivery's own flag on spacings beyond 10 km. The paper states no brightness temperatures in its text, and the scale of its Figure 1 was not read.
+
+## A star that turns between its nights
+
+A star that rotates during an observing run has no single sky image. `surface-star.mts` fits one surface to all the nights with ROTIR, which turns the sphere between them with the star's rotation period, and ends with a verdict:
+
+```bash
+node packages/telescope-cli/src/archives/interferometry/surface-star.mts packages/telescope-cli/src/archives/interferometry/seasons/udkadua-mirc-2011-09 output/interferometry/udkadua-mirc-2011-09
+```
+
+A surface season (`cssearth-star-surface-season@1`) names the calibrated files and where they are published, the star's size, limb, tilt, pole direction and period, each with the paper cell it is read from, the ROTIR settings with their source, and the night whose Earth-facing meridian becomes longitude 0. The command fetches the files, makes the spotless twins and the halves night by night, runs ROTIR ten times, applies the three conditions above to the star as ROTIR projects it on the sky on every night, the nights taken together, and writes the map as a table of brightness on the star's own longitudes and latitudes. `telescope new-object` with a spec's `resolvedMaps` puts a cast map on the star's page (`packages/telescope-cli/src/new-object/resolved/`), and gives a page that draws its axis by convention the measured tilt and pole direction.
+
+**λ Andromedae (page `udkadua`), six nights of CHARA/MIRC, 2 to 24 September 2011.** The calibrated files are the authors', shipped with ROTIR.jl at the commit this repository pins; Parks et al. (2021, ApJ 913, 54) imaged the same nights with SQUEEZE and Martinez et al. (2021, ApJ 916, 60) with ROTIR. Measured on 2026-10-08: 2,984 squared visibilities and 3,704 closure phases; a spotless star leaves reduced chi-squared 3.13 and 28.3.
+
+| Run | Reduced chi-squared, V² and closure phase | Spot ratio | Halves correlation |
+| --- | --- | --- | --- |
+| The season: Martinez et al.'s Table 4 values, the authors' script's settings | 1.72 and 2.30 | 2.94 against the twin of the same size; 2.57 and 2.14 against twins 1% smaller and larger | 0.83 |
+| The same with the star values of the authors' script (tilt 78.1°, pole 24.0°, period 54.8 d) | 1.71 and 2.43 | not run | not run |
+
+Verdict: cast. The map of the second row correlates 0.83 with the season's over the surface seen.
+
+What in this is not printed in a paper:
+
+1. **The three conditions and their limits** are this repository's, as for every star above.
+2. **Which spotless twins count.** SQUEEZE is free to draw a disc of any size; ROTIR's sphere has the size it is given. A spotless twin 2% smaller or larger does not fit on the 2.742 mas sphere at all (reduced chi-squared 2.49 and 7.42, 3.70 and 9.40), and nor does the star on a sphere 2% off (3.47 and 4.69, 2.65 and 3.46). Against those two twins the spot ratio is 1.51 and 1.40, under the limit. `surface-star.mts` keeps them in the verdict and lets the spottiest twin that fits decide (2.14): were the star such a disc, the first condition would have refused it. Read as the second condition is written above, with every twin within 2%, this map would not be cast.
+3. **The star's values against the script's.** The size, limb, tilt, pole direction and period are Table 4 of Martinez et al. (2021). The script the authors ship for these files holds slightly different ones; the table's are used because they are the published ones.
+4. **The regularizer.** The paper printed a total-variation weight of 0.01 for its 2021 code. The pinned code states that its weights do not carry over between regularizers, and its authors' script for these files uses `sobel2` at 10 on HEALPix level 3: those settings are used.
+5. **Longitude 0** is the meridian that faced the Earth on 14 September 2011, the night with the most data. The star has no defined prime meridian, and the page does not turn it.
+6. **What was never seen.** 34° of longitude faced the Earth on none of the nights. ROTIR fills them from its regularizer; the table holds the mean there, and the dataset draws a black line along the edge (`outlineZeroOf` in `tecplot-lonlat-map.ts`). The authors' plots gray the same tiles.
+7. **The table** samples ROTIR's 768 tiles at nodes 5° apart, in percent of the mean of the surface seen.
+8. **Color + brightness** draws the star's visible color darker where the infrared map is darker, with the look chosen for the brightness maps (`tinted`, `LIMB_STRENGTH`). The map is of the H band; how dark the spots are in visible light is not measured.
 
 ## Sphere maps on a dataset
 

@@ -16,7 +16,7 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   `moving-targets.json`, `horizons-bodies.json`) beside that code, still read through `WORKSPACE`; JWST keeps one `jwst/programs/` root: time-series directories and imaging, cube and KLIP JSON files.
   Receipts retain their original bytes and are matched by program id, band and pinned product, never the previous directory. The
   interferometry reduction (`src/archives/interferometry/`: ALMA restores, VLTI calibration, star imaging) keeps its
-  toolchain pins (`toolchains.json`), the ROTIR Julia project (`rotir/`), star seasons (`seasons/`) and test fixtures beside
+  toolchain pins (`toolchains.json`), the ROTIR Julia project (`rotir/`), star seasons (`seasons/`: a sky-plane image of one epoch with SQUEEZE, `cssearth-star-season@1`, or one surface fitted to several nights of a turning star with ROTIR, `cssearth-star-surface-season@1`) and test fixtures beside
   it. Per-body authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps, the circumstellar
   discs) is `authoring/<archive>/` (exported by no subpath: it imports this package through its own name, never the
   other way), a leaf the architecture check enforces; the Io JIRAM maps moved to `packages/bake/authoring/juno/`. Receipts and ledgers record program paths
@@ -151,6 +151,7 @@ writes the records any map needs (table, manifest input, raster surface, dataset
 `route.mts` reads a spec, writes each star and bakes from a `MapRoute`; `routes.mts` lists the kinds (`MAP_ROUTES`). A kind supplies only what is its own: its column,
 units, colors, sentences, how its reduction is read and the catalogue records it is bound to. `magnetic/` is the kind for
 maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a convention page takes the maps' tilt) and
+`resolved/` the kind for a surface fitted to a star's interferometry of several nights (a spec's `resolvedMaps`; `archives/interferometry/surface-star.mts` reduces a season with ROTIR and decides whether its map is cast; a convention page takes the measured tilt and pole direction the map is fitted with, and the table's own coverage column outlines what never faced the Earth), and
 `brightness/` the kind for maps from a star's TESS, K2 or Kepler light curves (`--from-pixels`, a spec's `brightnessMaps`; what differs by
 mission is one table, `MISSIONS`, which also says whose light curve is read: the mission's own, or KEPSEISMIC; a map's records name the published method that judged it, in the method's own words, and the paper's own light curve; a map drawn on a paper's own verdict says the rotation and its period are that paper's, names the method that refused the same light, and brings no measured period; the page's axis is never
 changed, and a period measured here goes into the star's measurements record; `new-object-cli.mts --pixel-light` writes the

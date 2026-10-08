@@ -209,11 +209,11 @@
       "id": "udkadua-interferometry-map-surface-2011-09",
       "path": "science/interferometry/udkadua-mirc-2011-09.dat",
       "origin": "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data",
-      "productId": "Surface map of λ Andromedae from mirc, 2 to 24 September 2011",
-      "title": "Surface map of λ Andromedae from its mirc visibilities of 2 to 24 September 2011: infrared brightness on a longitude-latitude grid",
+      "productId": "Surface map of λ Andromedae from CHARA/MIRC, 2 to 24 September 2011",
+      "title": "Surface map of λ Andromedae from its CHARA/MIRC visibilities of 2 to 24 September 2011: infrared brightness on a longitude-latitude grid",
       "sourceUrl": "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data",
       "credit": "CHARA Array/MIRC, September 2011, as calibrated by the authors of Parks et al. (2021) and Martinez et al. (2021) and shipped with ROTIR.jl (F. Baron); the star's size, limb, axis and period from Martinez et al. (2021), ApJ 916, 60; map made in this project with ROTIR.jl ad308759 and OITOOLS.jl f42d2bea",
-      "displayCredit": "mirc · mapped here",
+      "displayCredit": "CHARA/MIRC · mapped here",
       "license": "Shipped in the public ROTIR.jl repository (GPL-3.0); CHARA Array data, acknowledge the array and the papers",
       "licenseEvidence": [
         "https://github.com/fabienbaron/ROTIR.jl/tree/ad308759b741b861b6c19fedd001c323a3a64479/demos/data"

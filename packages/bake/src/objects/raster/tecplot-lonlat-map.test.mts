@@ -66,8 +66,8 @@ test('a map outlines where a column of its own changes sign: the edge of what wa
     await writeFile(resolve(work, 'map.dat'), `TITLE = "test"\nVARIABLES = "Longitude [Deg]" "Latitude [Deg]" "B [G]" "Facing"\nZONE I=5, J=3, K=1, ZONETYPE=Ordered\nDATAPACKING=POINT\nDT=(SINGLE SINGLE SINGLE SINGLE)\n${rows.join('\n')}\n`);
     const map = await loadTecplotLonLatMap(work, { path: 'map.dat', variable: 'B [G]', outlineZeroOf: 'Facing' });
     assert.equal(map.outline!(135, 0, 1), true); assert.equal(map.outline!(133, 0, 1), false); assert.equal(map.outline!(137, 0, 1), false);
-    // Toward a pole a pixel spans more longitude, so the line keeps its width on the sphere.
-    assert.equal(map.outline!(137, 60, 1), true);
+    // Toward a pole a degree of longitude is shorter, so the line takes more of them and keeps its width on the sphere.
+    assert.equal(map.outline!(135.8, 0, 1), false); assert.equal(map.outline!(135.8, 60, 1), true);
     assert.equal(map.report.outlineZeroOf, 'Facing');
     assert.equal((await loadTecplotLonLatMap(work, { path: 'map.dat', variable: 'B [G]' })).outline, undefined);
     await assert.rejects(loadTecplotLonLatMap(work, { path: 'map.dat', variable: 'B [G]', outlineZeroOf: 'Seen' }), /no column "Seen"/u);
