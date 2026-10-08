@@ -20,6 +20,8 @@ Feature names, centres, diameters, extents and name origins are from the Gazette
 
 Feature caption notes: 43 lead summaries from the English Wikipedia (Wikipedia contributors, CC BY-SA 4.0), joined to the Gazetteer through Wikidata (CC0); each note links its article in `source/features/notes.json`.
 
+PIA18435 enhanced-color map (2014): NASA/JPL-Caltech/Space Science Institute/Lunar and Planetary Institute; image processing by Paul Schenk. Used under the [JPL image use policy](https://www.jpl.nasa.gov/jpl-image-use-policy/).
+
 PIA24027 global infrared composite (2020): NASA/JPL-Caltech/University of Arizona/LPG/CNRS/University of Nantes/Space Science Institute.
 Infrared maps: Robidel et al. (2020), doi:10.1016/j.icarus.2020.113848.
 ISS detail: Bland et al. (2018), doi:10.1029/2018EA000399.
