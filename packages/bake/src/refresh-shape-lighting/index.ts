@@ -2,6 +2,7 @@
  * asset. `packages/bake/cli/refresh-shape-lighting.mts stage|publish <object-id>... | --all` is its command. The generated
  * solar geometry is written after the packages build, so the host passes it in (`SolarGeometry`). */
 import { shapeLightingPath } from './paths.ts';
+import { assetRoot } from '../delivery/index.ts';
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile, rename } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
@@ -14,6 +15,13 @@ import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, neutral
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
 const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
+/** Where this checkout holds an inventoried file: a public image, or a record in the object's prepared directory. */
+function shapeLightingAssetPath(id: string, asset: Record<string, unknown>) {
+  if (asset.location !== 'public' && asset.location !== 'prepared') throw new TypeError(`${id}: not an inventory row.`);
+  return resolve(assetRoot(shapeLightingPath(), id, asset.location), requireString(asset.filename));
+}
+/** The inventory row of the surface list this refresh rewrites beside the atlas. */
+const isSurfaceList = (asset: Record<string, unknown>) => asset.location === 'prepared' && asset.filename === 'surfaces.json';
 
 export async function stageShapeLighting(id: string, solarGeometry: SolarGeometry) {
   const directory = shapeLightingPath('src/objects', id), stage = shapeLightingPath('output/shape-default-lighting', id);
@@ -46,13 +54,16 @@ export async function stageShapeLighting(id: string, solarGeometry: SolarGeometr
   // Verify the entire existing asset bank against its inventory before publication; the inventory rows become the
   // baseline showing that Shadows-on and all other datasets stay untouched.
   for (const asset of records(inventory.assets)) {
-    const bytes = await readFile(shapeLightingPath('site/public/scenes', id, requireString(asset.filename)));
+    const bytes = await readFile(shapeLightingAssetPath(id, asset));
     if (sha256(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`${id}: stale asset ${asset.filename}.`);
   }
   surfaces.surfaces = records(surfaces.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
   await save(resolve(stage, 'surfaces.json'), surfaces);
+  // Publication writes the surface list compact, and its inventory row names those bytes.
+  const surfaceList = Buffer.from(JSON.stringify(surfaces) + '\n');
   await save(resolve(stage, 'inventory.json'), { ...inventory,
-    assets: records(inventory.assets).map(asset => asset.location === 'public' && changed.has(requireString(asset.filename)) ? { ...asset, ...changed.get(requireString(asset.filename)) } : asset) });
+    assets: records(inventory.assets).map(asset => asset.location === 'public' && changed.has(requireString(asset.filename)) ? { ...asset, ...changed.get(requireString(asset.filename)) }
+      : isSurfaceList(asset) ? { ...asset, bytes: surfaceList.length, sha256: sha256(surfaceList) } : asset) });
   await save(resolve(stage, 'receipt.json'), { id, baselineAssets: inventory.assets,
     datasetIds: views.map(view => view.id), changedAssets: [...changed.values()] });
 }
@@ -80,7 +91,7 @@ export async function publishShapeLighting(id: string) {
     else await writeFile(resolve(directory, 'prepared', file), JSON.stringify(value) + '\n');
   }
   const changed = new Set(records(receipt.changedAssets).map(asset => requireString(asset.filename)));
-  for (const asset of records(receipt.baselineAssets)) if (!changed.has(requireString(asset.filename)))
-    if (sha256(await readFile(shapeLightingPath('site/public/scenes', id, requireString(asset.filename)))) !== asset.sha256)
+  for (const asset of records(receipt.baselineAssets)) if (!(asset.location === 'public' && changed.has(requireString(asset.filename))) && !isSurfaceList(asset))
+    if (sha256(await readFile(shapeLightingAssetPath(id, asset))) !== asset.sha256)
       throw new Error(`${id}: unrelated asset changed during publication.`);
 }
