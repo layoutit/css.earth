@@ -186,6 +186,28 @@
         "kind": "local",
         "reason": "Project-authored color recipe naming the cited equilibrium temperature; repinned when edited."
       }
+    },
+    {
+      "id": "toi-1431b-temperature-phase-curve",
+      "path": "science/addison-2021/phase-curve.json",
+      "origin": "https://arxiv.org/abs/2104.12078",
+      "credit": "Addison et al. (2021); a TESS red-optical (0.60-0.95 µm) phase curve from Sectors 15 and 16, 15 August to 7 October 2019",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "temperature-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-toi-1431b-temperature-phase-curve",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -203,7 +225,8 @@
         "inputs": [
           "toi-1431b-observational-measurements",
           "toi-1431b-preparation-raster",
-          "toi-1431b-thermal-color"
+          "toi-1431b-thermal-color",
+          "toi-1431b-temperature-phase-curve"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

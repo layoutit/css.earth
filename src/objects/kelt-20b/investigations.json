@@ -29,6 +29,17 @@
         "https://ui.adsabs.harvard.edu/abs/2017AJ....154..194L/abstract",
         "https://ui.adsabs.harvard.edu/abs/2018A&A...612A..57T/abstract"
       ]
+    },
+    {
+      "id": "published-phase-curves",
+      "subject": "Published TESS phase curves as a map of longitude (Wong et al. 2021; Singh et al. 2024)",
+      "status": "excluded",
+      "finding": "Read on 2026-10-08. Wong et al. (2021, arXiv:2106.02610) fit the TESS sector 14 curve (A_atm 43 +13/-11 ppm, D_d 111 +35/-36 ppm, D_n 18 +36/-33 ppm) and print no brightness temperature for this planet. Singh et al. (2024, arXiv:2311.03264) fit TESS with a Lambertian reflected-light phase function, which is not a sinusoid the reader takes, and give the night side only as an upper limit (2280 K).",
+      "revisitWhen": "A paper prints day-side and night-side brightness temperatures from a sinusoid fit of one band.",
+      "evidence": [
+        "https://arxiv.org/abs/2106.02610",
+        "https://arxiv.org/abs/2311.03264"
+      ]
     }
   ]
 }

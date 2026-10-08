@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kelt-1",
+  "card": {
+    "text": "KELT-1 b crosses KELT-1 as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-761-2-123",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract",
+        "label": "Siverd et al. (2012), The Astrophysical Journal 761 123",
+        "checked": "2026-10-08",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SIVERD_ET_AL__2012): st_teff 6516, st_rad 1.471, st_mass 1.335"
+      },
+      {
+        "catalogueId": "wikipedia-kelt-1",
+        "url": "https://en.wikipedia.org/wiki/KELT-1",
+        "label": "Wikipedia, \"KELT-1\"",
+        "checked": "2026-10-08",
+        "locator": "Lead section, revision 1374864236",
+        "quote": "KELT-1 is a F-type main-sequence star."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Siverd et al. 2012.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-761-2-123",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S/abstract",
+        "label": "Siverd et al. (2012), The Astrophysical Journal 761 123",
+        "checked": "2026-10-08",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SIVERD_ET_AL__2012): st_teff 6516, st_rad 1.471, st_mass 1.335"
+      },
+      {
+        "catalogueId": "wikipedia-kelt-1",
+        "url": "https://en.wikipedia.org/wiki/KELT-1",
+        "label": "Wikipedia, \"KELT-1\"",
+        "checked": "2026-10-08",
+        "locator": "Lead section, revision 1374864236",
+        "quote": "Its surface temperature is 6518±50 K. It is similar to the Sun in its concentration of heavy elements, with a metallicity Fe/H index of 0.008±0.073, but is much younger at an age of 1.75±0.25 billion years."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

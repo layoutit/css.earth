@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-153-3-97",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Oberst et al. (2017): KELT-16b: A Highly Irradiated, Ultra-short Period Hot Jupiter Nearing Tidal Disruption",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1608.00618"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/153/3/97"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2017AJ....153...97O"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/153/3/97",
+      "label": "The Astronomical Journal 153 97"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O",
+      "checkedOn": "2026-10-08",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Oberst et al. (2017), The Astronomical Journal 153 97",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O"
+    }
+  ],
+  "publisher": "The Astronomical Journal 153 97",
+  "creators": [
+    "Thomas E. Oberst",
+    "Joseph E. Rodriguez",
+    "Knicole D. Colón",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

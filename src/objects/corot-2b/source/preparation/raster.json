@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/corot-2b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "corot-2b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csscorot-2b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "thermal",
+      "output": "corot-2b-surface-{id}{suffix}.webp",
+      "thumbnail": "corot-2b-dataset-{id}.webp",
+      "source": "photometry/thermal-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "dayside-thermal-color",
+        "qualification": "Color of a black body at the dayside brightness temperature 1,890 K measured in secondary eclipse at 2.15 µm (Alonso et al. 2010, dayside brightness temperature at 2.15 µm (NASA Exoplanet Archive emission table)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included. Its black-body color lies outside the sRGB gamut and is shown mixed with 0% white, the least that brings it inside, hue kept."
+      }
+    },
+    {
+      "id": "temperature",
+      "output": "corot-2b-surface-{id}{suffix}.webp",
+      "thumbnail": "corot-2b-dataset-{id}.webp",
+      "source": "science/bell-2021/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Spitzer",
+        "format": "published-phase-curve-map",
+        "path": "science/bell-2021/phase-curve.json",
+        "consumer": "temperature-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 350,
+        "maximum": 2000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "350",
+          "1175",
+          "2000"
+        ],
+        "description": "Brightness temperature at 4.5 µm from the paper's phase-curve fit, turned into a map of longitude. It has no north-south information.",
+        "title": "Spitzer · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/2010.00687"
+      }
+    }
+  ],
+  "lighting": {
+    "bank": "sphere",
+    "presentationSize": 460,
+    "metadata": {
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred."
+    }
+  }
+}

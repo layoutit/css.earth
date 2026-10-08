@@ -1,0 +1,47 @@
+{
+  "id": "hat-p-7",
+  "name": "HAT-P-7",
+  "system": "HAT-P-7 system",
+  "description": "Star of 6,389 K, 341 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "HAT-P-7",
+  "gaia": "2129256395211984000",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 2,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.28
+  },
+  "mass": {
+    "value": 1.56,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.68
+  },
+  "temperature": {
+    "value": 6389,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-7 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 17
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-7 b crosses HAT-P-7 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6389, st_rad 2, st_mass 1.56",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-7",
+      "title": "HAT-P-7",
+      "revision": "1374739568",
+      "card": "HAT-P-7 is a triple star system located about 1,088 light-years away in the constellation Cygnus.",
+      "introduction": "The apparent magnitude of this star is 10.5, which means it is not visible to the naked eye but can be seen with a small telescope on a clear dark night."
+    }
+  },
+  "notes": [],
+  "order": 5819
+}

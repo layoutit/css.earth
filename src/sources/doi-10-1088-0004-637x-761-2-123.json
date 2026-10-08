@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-761-2-123",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Siverd et al. (2012): KELT-1b: A STRONGLY IRRADIATED, HIGHLY INFLATED, SHORT PERIOD, 27 JUPITER-MASS COMPANION TRANSITING A MID-F STAR",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1206.1635"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/761/2/123"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012ApJ...761..123S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/761/2/123",
+      "label": "The Astrophysical Journal 761 123"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S",
+      "checkedOn": "2026-10-08",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Siverd et al. (2012), The Astrophysical Journal 761 123",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012ApJ...761..123S"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 761 123",
+  "creators": [
+    "Robert J. Siverd",
+    "Thomas G. Beatty",
+    "Joshua Pepper",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}

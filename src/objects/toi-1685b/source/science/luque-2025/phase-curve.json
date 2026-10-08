@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Luque et al. (2025), AJ 170, 49, 'A dark, bare rock for TOI-1685 b from a JWST NIRSpec G395H phase curve' (doi:10.3847/1538-3881/addb40; arXiv:2412.03411). JWST NIRSpec G395H (BOTS) phase curve of 14-15 February 2024, program GO-3263: one full orbit, two eclipses and one transit; white light of detector NRS2, summed over 3.823-5.172 um, Eureka! reduction. Values read from the authors' LaTeX source (arXiv v1): Table 2 (tab:lc_best), block 'Prayer bead - White light phase curve', row NRS2, and the brightness temperatures of section 4.2.1. The paper fits one model twice: by nested sampling (Table 1, tab:params_nocorr) and by a prayer-bead analysis that keeps the correlated noise in the errors (Table 2). It states that it uses the prayer-bead results for the rest of the paper and it computes its brightness temperatures from the prayer-bead samples, so this record reads Table 2. The model is Eureka!'s single sinusoid, with C1 and D1 fractions of the eclipse depth and the angle counted from mid-eclipse. The paper prints no equation: it names a single sinusoid whose parameters C1 and D1 take the nomenclature of Cowan & Agol (2008), gives the night side as F_p,day (1 - 2 C) (section 4.2.1), and its Table 1 amplitude and offset equal 2 F_day sqrt(C1^2 + D1^2) and -atan2(D1, C1). The paper calls the parameters derived from NRS2 the more reliable of the two detectors. The band is the one the abstract, section 3.1 and Figure 1 state; section 2.1 prints 3.823-5.712 um and Table 2's wavelength cell prints 3.850 - 5.172.",
+  "bandMicrons": [
+    3.823,
+    5.172
+  ],
+  "radiusRatio": {
+    "value": 0.027494,
+    "cell": "755.9 +30.1/-29.2 ppm: (R_p/R_*)^2, whose square root is the radius ratio, 0.027494",
+    "where": "Table 2 (tab:lc_best), Prayer bead - White light phase curve, NRS2, (R_p/R_*)^2 (ppm)"
+  },
+  "eclipseDepth": {
+    "value": 0.000119,
+    "cell": "119 +23/-18 ppm",
+    "where": "Table 2 (tab:lc_best), Prayer bead - White light phase curve, NRS2, F_p/F_* (ppm)"
+  },
+  "model": {
+    "kind": "eclipse-normalized-fourier",
+    "equation": "F_p(t)/F_* = (F_p/F_*) [1 + C1 (cos psi - 1) + D1 sin psi], psi = 2 pi (t - t_eclipse)/P counted from mid-eclipse: the single sinusoid of Eureka!'s phase-curve model, first order only. The paper prints the night side as F_p,day (1 - 2 C), which is this form at psi = pi.",
+    "c1": {
+      "value": 0.49,
+      "cell": "0.49 +0.13/-0.10",
+      "where": "Table 2 (tab:lc_best), Prayer bead - White light phase curve, NRS2, C_1"
+    },
+    "d1": {
+      "value": -0.05,
+      "cell": "-0.05 +0.11/-0.10",
+      "where": "Table 2 (tab:lc_best), Prayer bead - White light phase curve, NRS2, D_1"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 1360,
+      "cell": "1360 +100/-100 K",
+      "where": "section 4.2.1 (Albedo and heat recirculation efficiency), T_p,day for NRS2, from the prayer-bead samples and a PHOENIX stellar spectrum"
+    },
+    "nightsideK": {
+      "value": 550,
+      "cell": "550 +300/-550 K",
+      "where": "section 4.2.1, T_p,night for NRS2, from F_p,day (1 - 2 C) of the prayer-bead samples"
+    },
+    "offsetDegrees": {
+      "value": 5.5,
+      "cell": "5.5 +/- 3.2 degrees E",
+      "where": "Table 1 (tab:params_nocorr), derived parameters, phi_PC (degrees E), NRS2: the nested-sampling fit; Table 2 prints no offset"
+    }
+  },
+  "notStated": [
+    "The equation of the phase-curve model: the paper names Eureka! and a single sinusoid and prints no formula. The form here is Eureka!'s, confirmed by the paper's own night-side relation and by the derived rows of its Table 1.",
+    "An offset for the prayer-bead fit. The printed offset is Table 1's, from C1 = 0.4918 +0.0039/-0.0075 and D1 = -0.048 +/- 0.027; its error does not include the correlated noise.",
+    "The radius ratio of the prayer-bead fit as a ratio: Table 2 prints (R_p/R_*)^2. Table 1 prints R_p/R_* = 0.02746 +/- 0.00021 for NRS2."
+  ]
+}

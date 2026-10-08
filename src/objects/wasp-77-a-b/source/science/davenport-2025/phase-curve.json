@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Davenport, Kennedy, May, Rauscher, Kempton, Malsky, Stevenson, Bean & Mansfield (2025), AJ 169, 260, 'An Analysis of Spitzer Phase Curves for WASP-121b and WASP-77Ab' (doi:10.3847/1538-3881/adc0a4; arXiv:2503.12521). Spitzer IRAC channel 2 (4.5 um) phase curve of WASP-77Ab, program 13038 (PI Kevin Stevenson), 29 November to 1 December 2016, 39.0 hours, label wa77abo21 (table:observations). Values read from the authors' LaTeX source (arXiv v1, the only version; the journal's Table 5 prints the same cells): the table of fit results (table:Results, 'Fit Results'), column wa77abo21, the values adjusted for the light of the companion star WASP-77B (the table's upright numbers; its italic ones are before that correction). The best fit for this channel (table:bestfits, bold row, Delta BIC 0.0) has no temporal ramp and the symmetric phase function, 'full period sinusoids', so the fit is first order and its printed amplitude and phase offset are the whole phase variation; the printed amplitude is the semi-amplitude, since the same column's F_p/F_S Max and Min differ by twice it (2990 - 1152 = 2 x 919). The paper prints no equation for the phase function; it is read as the amplitude-offset form because that is what the table gives for a single sinusoid. The paper's 3.6 um phase curve of this planet (wa77abo11) is not recorded: its best fit is the asymmetric phase function (a full-period plus a half-period sinusoid) and the table prints only one amplitude and one offset for it, which do not determine a second-order curve.",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.113,
+    "cell": "0.1130 ± 0.00071",
+    "where": "table:Results (Fit Results), column wa77abo21, row Transit Depth [R_p/R_S]"
+  },
+  "eclipseDepth": {
+    "value": 0.002944,
+    "cell": "2944 ± 76 ppm, F_p/F_S at mid-eclipse (\"Day\"), adjusted for dilution; the fitted eclipse depth row prints 2947 ± 144 ppm",
+    "where": "table:Results (Fit Results), column wa77abo21, row F_p/F_S [ppm] Day, upright (dilution-corrected) value"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "A symmetric phase function, a sinusoid of the orbital period (\"full period sinusoids\"), printed as its amplitude (max - min)/2 and its phase offset, positive eastward.",
+    "semiAmplitude": {
+      "value": 0.000919,
+      "cell": "919 ± 40",
+      "where": "table:Results (Fit Results), column wa77abo21, row Amplitude [ppm]"
+    },
+    "offsetDegreesEast": {
+      "value": 16.28,
+      "cell": "16.28 ± 2.52",
+      "where": "table:Results (Fit Results), column wa77abo21, row Phase Offset [deg]"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 1780,
+      "cell": "1780 ± 25",
+      "where": "table:Results (Fit Results), column wa77abo21, row Temperature [K] Day"
+    },
+    "nightsideK": {
+      "value": 1234,
+      "cell": "1234 ± 20",
+      "where": "table:Results (Fit Results), column wa77abo21, row Temperature [K] Night"
+    },
+    "hottestHemisphereK": {
+      "value": 1793,
+      "cell": "1793 ± 22",
+      "where": "table:Results (Fit Results), column wa77abo21, row Temperature [K] Max"
+    },
+    "coldestHemisphereK": {
+      "value": 1221,
+      "cell": "1221 ± 22",
+      "where": "table:Results (Fit Results), column wa77abo21, row Temperature [K] Min"
+    },
+    "offsetDegrees": {
+      "value": 16.28,
+      "cell": "16.28 ± 2.52",
+      "where": "table:Results (Fit Results), column wa77abo21, row Phase Offset [deg]"
+    },
+    "semiAmplitude": {
+      "value": 0.000919,
+      "cell": "919 ± 40",
+      "where": "table:Results (Fit Results), column wa77abo21, row Amplitude [ppm]"
+    }
+  },
+  "notStated": [
+    "The paper prints no equation for its phase function and no sentence defining the sign of the phase offset. The sign is fixed by its sentence on WASP-121b, 'we measured a phase offset of -0.78 ± 1.87 deg ... Though this does indicate a westward offset', so a positive offset is eastward; its figure of the WASP-77Ab fits (fig:WASP-77Ab PC) draws the offset bar before the first eclipse.",
+    "The body text (section on phase curve constraints, WASP-77Ab) gives other temperatures for this channel than the table and the abstract: 'a corrected eclipse depth of 2947 ± 144 ppm, resulting in a dayside brightness temperature of 1334 ± 15 K. On the nightside, we found a brightness temperature of 987 ± 15 K'. The table and the abstract both print 1780 ± 25 K and 1234 ± 20 K, and the table is read here. The published journal text keeps the same disagreement.",
+    "The table's F_p/F_S Day (2944 ± 76 ppm) and its Eclipse Depth row (2947 ± 144 ppm) are both printed; Day is the flux of the fitted curve at mid-eclipse and is the one paired with Temperature Day."
+  ]
+}

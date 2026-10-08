@@ -28,6 +28,42 @@
         "kind": "dayside-thermal-color",
         "qualification": "Color of a black body at the dayside brightness temperature 1,360 K measured in secondary eclipse at 4.5 µm (Luque et al. 2024, dayside brightness temperature from the NIRSpec G395H white light of detector NRS2, 1360 +/- 100 K), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included. Its black-body color lies outside the sRGB gamut and is shown mixed with 2% white, the least that brings it inside, hue kept."
       }
+    },
+    {
+      "id": "temperature",
+      "output": "toi-1685b-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-1685b-dataset-{id}.webp",
+      "source": "science/luque-2025/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "JWST",
+        "format": "published-phase-curve-map",
+        "path": "science/luque-2025/phase-curve.json",
+        "consumer": "temperature-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 350,
+        "maximum": 1450,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "350",
+          "900",
+          "1450"
+        ],
+        "description": "Brightness temperature across 3.8–5.2 µm from the paper's phase-curve fit, turned into a map of longitude. It has no north-south information.",
+        "title": "JWST · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/2412.03411"
+      }
     }
   ],
   "lighting": {

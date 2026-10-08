@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Boucher, Dang, McGinty, Teske et al. (2026), 'A Highly Reflective Atmosphere on the Lava World TOI-561b Revealed by JWST/NIRSpec Phase Curve' (arXiv:2608.21519v2, accepted for publication in AJ; no DOI on arXiv yet). JWST NIRSpec G395H, GO program 3860, one continuous 37-hour visit from 2024 May 1 11:16 UT to May 3 00:37 UT covering four eclipses and three transits; the same data and reductions as the eclipse-only paper of Teske et al. (2025, ApJL 995, L39, doi:10.3847/2041-8213/ae0a4c, arXiv:2509.17231). Values read from the authors' LaTeX source, Eureka! reduction, which is the one the paper presents: the phase-variation equation of section 4.1 (equation:phasevariation), the table of white-light-curve fit results in appendix B (tab:bestfit_eureka_vs_jedi, column Eureka! NRS1) for R_P/R_*, A and B, and the table of day-to-night results (tab:phasecurveresults, row NRS1) for F_day/F_*, T_day and the phase offset. This record is the NRS1 detector's white-light fit. The paper fits the two detectors separately and prints no preferred one; they disagree: NRS2 gives a day side of 2095 +275/-291 K, a night side of 1742 +302/-359 K and a peak 32.7 degrees after eclipse. For NRS1 the paper prints the night side only as a 2 sigma upper limit, because its prior that the planet's flux stays positive truncates the posterior of A near 0.5. The model is first order, Phi_P = 1 + A (cos xi - 1) + B sin xi from mid-eclipse, so A and B are the reader's C1 and D1 as fractions of the day-side flux.",
+  "bandMicrons": [
+    2.67,
+    3.72
+  ],
+  "radiusRatio": {
+    "value": 0.01474,
+    "cell": "0.01474 +0.00038/-0.00039",
+    "where": "tab:bestfit_eureka_vs_jedi (appendix B, results and priors for the WLC fits), Eureka!, NRS1, R_P/R_*; tab:phasecurveresults prints 0.0147 +0.0004/-0.0004"
+  },
+  "eclipseDepth": {
+    "value": 0.0000348,
+    "cell": "34.8 +10.4/-11.6 ppm",
+    "where": "tab:phasecurveresults (day-to-night contrast results, Eureka!), row NRS1, F_day/F_*; tab:bestfit_eureka_vs_jedi prints 35 +10/-12 ppm"
+  },
+  "model": {
+    "kind": "eclipse-normalized-fourier",
+    "equation": "F_P(xi) = F_P(0) Phi_P(xi), Phi_P(xi) = 1 + A (cos xi - 1) + B sin xi, with xi = 2 pi (t - t_e)/P counted from mid-eclipse (section 4.1, equation:phasevariation and equation:fourier). First order only; A and B are fractions of the day-side flux.",
+    "c1": {
+      "value": 0.439,
+      "cell": "0.439 +0.039/-0.078",
+      "where": "tab:bestfit_eureka_vs_jedi, Eureka!, NRS1, A"
+    },
+    "d1": {
+      "value": -0.14,
+      "cell": "-0.14 +0.12/-0.14",
+      "where": "tab:bestfit_eureka_vs_jedi, Eureka!, NRS1, B"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 1970,
+      "cell": "1970 +273/-320 K",
+      "where": "tab:phasecurveresults, row NRS1, T_day"
+    },
+    "offsetDegrees": {
+      "value": 17,
+      "cell": "-17.0 +15.5/-16.3 degrees: the orbital phase of the brightness peak, negative before mid-eclipse, so a hot spot 17.0 degrees east of noon",
+      "where": "tab:phasecurveresults, row NRS1, Phase offset; section 4.2 fixes the sign"
+    },
+    "peakToPeakAmplitude": {
+      "value": 0.0000325,
+      "cell": "32.5 +10.4/-11.5 ppm, defined in the caption as F_day/F_* (max Phi_P - min Phi_P)",
+      "where": "tab:phasecurveresults, row NRS1, Amplitude"
+    },
+    "bondAlbedo": {
+      "value": 0.79,
+      "cell": "0.79 +0.10/-0.13 for NRS1 alone; 0.74 +0.08/-0.10 for both detectors together",
+      "where": "tab:phasecurveresults, rows NRS1 and NRS1 U NRS2, A_B"
+    }
+  },
+  "notStated": [
+    "A night-side temperature. The paper prints only upper limits for NRS1: F_night/F_* <= 12.1 ppm and T_night <= 1388 K at 2 sigma.",
+    "The wavelengths the white light curves sum. The paper calls the NRS1 band 2.67-3.72 um; its NRS1 spectroscopic bins span 2.863-3.714 um, and Teske et al. (2025) give 2.8627040-3.7143560 um for the NRS1 white light curve of the same reductions.",
+    "A reflected-light share of the 3-5 um day-side flux. The paper converts the whole eclipse depth to a black-body brightness temperature through the G395H throughput and infers the Bond albedo from the day and night temperatures by energy balance (Cowan & Agol 2011), not from reflected light in this band."
+  ]
+}

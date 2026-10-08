@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "thermal",
+    "defaultDataset": "temperature-nrs2",
     "controls": [
       {
         "id": "thermal",
@@ -65,6 +65,126 @@
         },
         "falseColor": false,
         "notes": "The color of TOI-561 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4 µm (JWST NIRSpec). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "temperature-nrs2",
+        "label": "JWST 4.5 µm",
+        "qualification": "Published fit · Boucher et al. (2026) · a JWST NIRSpec G395H phase curve of 1-3 May 2024 (program 3860), the NRS2 detector's white light · longitude only",
+        "thumbnail": "toi-561b-dataset-temperature-nrs2.webp",
+        "surface": "toi-561b-surface-temperature-nrs2@2x.webp",
+        "poles": "toi-561b-poles-temperature-nrs2@2x.webp",
+        "source": {
+          "id": "toi-561b-temperature-nrs2-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2608.21519"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1600",
+            "1925",
+            "2250"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "1600",
+              "1925",
+              "2250"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2608.21519"
+        },
+        "notes": "Brightness temperature across 3.8–5.1 µm of TOI-561 b from Boucher et al. (2026)'s published fit to a JWST NIRSpec G395H phase curve of 1-3 May 2024 (program 3860), the NRS2 detector's white light. Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 45° west of noon. The paper fits JWST's two detectors apart and they disagree: it says its climate models cannot explain this one's westward hot spot, which may come from unmodelled granulation of the star. The false color runs from 1,600 to 2,250 K. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "temperature-nrs1",
+        "label": "JWST 3.2 µm",
+        "qualification": "Published fit · Boucher et al. (2026) · a JWST NIRSpec G395H phase curve of 1-3 May 2024 (program 3860), the NRS1 detector's white light · longitude only",
+        "thumbnail": "toi-561b-dataset-temperature-nrs1.webp",
+        "surface": "toi-561b-surface-temperature-nrs1@2x.webp",
+        "poles": "toi-561b-poles-temperature-nrs1@2x.webp",
+        "source": {
+          "id": "toi-561b-temperature-nrs1-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2608.21519"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "450",
+            "1275",
+            "2100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "450",
+              "1275",
+              "2100"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2608.21519"
+        },
+        "notes": "Brightness temperature across 2.7–3.7 µm of TOI-561 b from Boucher et al. (2026)'s published fit to a JWST NIRSpec G395H phase curve of 1-3 May 2024 (program 3860), the NRS1 detector's white light. Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 18° east of noon. The paper fits JWST's two detectors apart and they disagree: it says it cannot rule out that leftover detector effects cause part or all of this one's faint night side. Longitudes where the fit gives no emission are left blank. The false color runs from 450 to 2,100 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },

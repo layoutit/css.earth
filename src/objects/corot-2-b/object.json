@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "corot-2-b",
+  "parent": "corot-2-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CoRoT-2B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 365242.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/corot-2-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "CoRoT-2B",
+      "classification": "star",
+      "color": "#ffcc96",
+      "distanceAu": 43408506.5,
+      "description": "CoRoT-2B is a star of 3,703 K, bound to CoRoT-2 870 AU away.",
+      "systemName": "CoRoT-2 system",
+      "order": 5818,
+      "context": {
+        "order": 5815
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2408420796116817400,
+        -6028653032526971000,
+        156690555734245120
+      ],
+      "presentationToReference": [
+        0.37087888353560755,
+        0.00895181535328816,
+        -0.9286380989111216,
+        -0.9283677127901373,
+        -0.022407779855914738,
+        -0.37098690172395316,
+        0.024129724328936876,
+        -0.999708835813613,
+        -3.969378428506841e-9
+      ],
+      "orbitUpReference": [
+        -0.00895181535328816,
+        0.022407779855914738,
+        0.999708835813613
+      ],
+      "metersPerUnit": 1178201.6129032257,
+      "bodyRadiusM": 365242500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

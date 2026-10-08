@@ -1,0 +1,40 @@
+{
+  "id": "kelt-16",
+  "name": "KELT-16",
+  "system": "KELT-16 system",
+  "description": "Star of 6,236 K, 445 parsecs away, with 1 transiting planet.",
+  "parent": "milky-way",
+  "target": "KELT-16",
+  "gaia": "1864885215233116032",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract",
+    "credit": "Oberst et al. 2017"
+  },
+  "radius": {
+    "value": 1.36,
+    "source": "Oberst et al. 2017, the stellar radius of the default parameter set of KELT-16 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract",
+    "uncertainty": 0.064
+  },
+  "mass": {
+    "value": 1.211,
+    "source": "Oberst et al. 2017, the stellar mass of the default parameter set of KELT-16 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract",
+    "uncertainty": 0.043
+  },
+  "temperature": {
+    "value": 6236,
+    "source": "Oberst et al. 2017, the stellar temperature of the default parameter set of KELT-16 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract",
+    "uncertainty": 54
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "KELT-16 b crosses KELT-16 as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Oberst et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname OBERST_ET_AL__2017): st_teff 6236, st_rad 1.36, st_mass 1.211"
+  },
+  "notes": [],
+  "order": 5823
+}

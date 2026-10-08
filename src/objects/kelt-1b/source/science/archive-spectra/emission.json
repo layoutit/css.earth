@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-measured-spectrum@1",
+  "source": "NASA Exoplanet Archive emissionspec, Beatty et al. 2017",
+  "units": {
+    "x": "um",
+    "y": "%"
+  },
+  "uncertainty": "published 1-sigma, asymmetric (err1, err2)",
+  "observation": "LBT Consortium Large Binocular Telescope (LBT) at Mount Graham International Observatory, LUCI1",
+  "measurements": [
+    {
+      "x": 1.57,
+      "xLow": 1.55,
+      "xHigh": 1.59,
+      "y": 0.1285,
+      "minus": 0.0131,
+      "plus": 0.0131
+    },
+    {
+      "x": 1.61,
+      "xLow": 1.59,
+      "xHigh": 1.63,
+      "y": 0.1461,
+      "minus": 0.0128,
+      "plus": 0.0128
+    },
+    {
+      "x": 1.65,
+      "xLow": 1.63,
+      "xHigh": 1.67,
+      "y": 0.1587,
+      "minus": 0.013,
+      "plus": 0.013
+    },
+    {
+      "x": 1.69,
+      "xLow": 1.67,
+      "xHigh": 1.71,
+      "y": 0.1532,
+      "minus": 0.0137,
+      "plus": 0.0137
+    },
+    {
+      "x": 1.73,
+      "xLow": 1.71,
+      "xHigh": 1.75,
+      "y": 0.1623,
+      "minus": 0.0158,
+      "plus": 0.0158
+    }
+  ]
+}

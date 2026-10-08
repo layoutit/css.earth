@@ -1,0 +1,89 @@
+{
+  "host": "kelt-16",
+  "planets": [
+    {
+      "id": "kelt-16b",
+      "name": "KELT-16 b",
+      "description": "Transiting planet of KELT-16 with a 0.969-day year, found in 2017.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153...97O/abstract",
+        "credit": "Oberst et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "OBERST_ET_AL__2017"
+      },
+      "text": {
+        "card": "KELT-16 b was found in 2017 by KELT as it crossed its star.",
+        "introduction": "It is the only planet known around KELT-16. Its orbit and size follow Oberst et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname OBERST_ET_AL__2017): disc_year 2017, disc_facility KELT, sy_pnum 1; pl_orbper 0.968992962, pl_radj 1.415, pl_bmassj 2.75"
+      },
+      "thermal": {
+        "temperatureK": 3273,
+        "uncertaintyK": 144,
+        "wavelengthMicrometres": 4.5,
+        "facility": "Spitzer IRAC",
+        "source": "Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract",
+        "chosen": "1 measured of 1 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "phaseCurves": [
+        {
+          "dataset": "temperature",
+          "label": "Spitzer",
+          "path": "science/bell-2021/phase-curve.json",
+          "url": "https://arxiv.org/abs/2010.00687",
+          "credit": "Bell et al. (2021)",
+          "observed": "a Spitzer IRAC 4.5 µm phase curve (program 14059)",
+          "record": {
+            "schema": "cssearth-published-phase-curve@1",
+            "source": "Bell et al. (2021), MNRAS 504, 3316, 'A comprehensive reanalysis of Spitzer's 4.5 um phase curves, and the phase variations of the ultra-hot Jupiters MASCARA-1b and KELT-16b' (doi:10.1093/mnras/stab1027; arXiv:2010.00687). Spitzer IRAC 4.5 um phase curve of KELT-16b, program 14059, new in this paper. Values read from the authors' LaTeX source: the table of preferred SPCA model parameters (tab:preferred), row KELT-16b, detector model BLISS. The preferred fit is first order (the caption of its figure names the mode BLISS_v1 using FWM centroiding), so the printed semi-amplitude and offset are the whole phase variation (section 4.1: semi-amplitude sqrt(C1^2 + D1^2), offset east -arctan2(D1, C1)).",
+            "wavelengthMicrons": 4.5,
+            "radiusRatio": {
+              "value": 0.1074,
+              "cell": "0.1074 +0.0019/-0.0022",
+              "where": "tab:preferred, KELT-16b, R_p/R_*"
+            },
+            "eclipseDepth": {
+              "value": 0.00481,
+              "cell": "4810 +330/-310 ppm",
+              "where": "tab:preferred, KELT-16b, F_p/F_*"
+            },
+            "model": {
+              "kind": "amplitude-offset",
+              "equation": "F_p = F_day [1 + C1 (cos psi - 1) + D1 sin psi], psi counted from mid-eclipse (section 4.1), printed as its semi-amplitude and the offset east of its maximum.",
+              "semiAmplitude": {
+                "value": 0.00174,
+                "cell": "1740 +480/-460 ppm",
+                "where": "tab:preferred, KELT-16b, Semi-Amplitude"
+              },
+              "offsetDegreesEast": {
+                "value": -38,
+                "cell": "-38 +16/-15 degrees east",
+                "where": "tab:preferred, KELT-16b, Max Flux Offset"
+              }
+            },
+            "reported": {
+              "daysideK": {
+                "value": 3070,
+                "cell": "3070 +160/-150 K",
+                "where": "tab:preferred, KELT-16b, T_day"
+              },
+              "nightsideK": {
+                "value": 1900,
+                "cell": "1900 +430/-440 K",
+                "where": "tab:preferred, KELT-16b, T_night"
+              },
+              "offsetDegrees": {
+                "value": -38,
+                "cell": "-38 +16/-15 degrees east",
+                "where": "tab:preferred, KELT-16b, Max Flux Offset"
+              }
+            }
+          }
+        }
+      ],
+      "order": 5824
+    }
+  ]
+}
