@@ -37,12 +37,12 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
   // A solid sphere's material holds its lighting bank and pole images. A shape body bakes its light into its mesh atlases:
   // its material would be its surface list again, so it has none.
   { name: 'material.json', reader: 'later-bake', read: 'packages/bake/cli/refresh-sphere-lighting.mts', when: 'keepsMaterial' },
-  // A scene is delivered by the lanes whose later refresh repaints from it and cannot rebuild it without the body's
-  // downloads: the terrestrial and shape-model lanes read its atlas layout and faces
-  // (packages/bake/src/objects/layers/terrestrial/retained-atlas.ts), the paged-ellipsoid lane its surface asset banks on
-  // a reuse-images run (packages/bake/src/objects/layers/paged-ellipsoid/object.ts). A sphere's scene is rebuilt from its
-  // tracked profile (packages/bake/src/scene/geometry-scene.ts): the runtime carries what the page draws.
-  { name: 'scene.json', reader: 'later-bake', read: 'the shape refreshes (retained-atlas.ts) and the paged-ellipsoid reuse-images run', when: 'retainsScene' },
+  // A scene is delivered by the one lane whose later run reads what the runtime does not hold: the paged-ellipsoid lane's
+  // surface asset banks, on a reuse-images run (packages/bake/src/objects/layers/paged-ellipsoid/object.ts). A shape body's
+  // refresh reads its triangles and face layout back from the runtime, which holds the same values
+  // (packages/bake/src/objects/layers/terrestrial/retained-atlas.ts retainedScene). A sphere's scene is rebuilt from its
+  // tracked profile (packages/bake/src/scene/geometry-scene.ts).
+  { name: 'scene.json', reader: 'later-bake', read: 'the paged-ellipsoid reuse-images run (packages/bake/src/objects/layers/paged-ellipsoid/object.ts)', when: 'retainsScene' },
   { name: /^source-lighting(-[a-z0-9-]+)?\.json$/u, reader: 'later-bake', read: 'packages/bake/src/objects/layers/terrestrial/radial/radial-materials.ts' },
   { name: 'panel.json', reader: 'later-bake', read: 'the content preparation of the bodies that author a panel' },
   { name: 'record.json', reader: 'later-bake', read: 'the volume bank preparation' },
@@ -73,7 +73,7 @@ export const DELIVERED_PREPARED_RECORDS: readonly DeliveredPreparedRecord[] = [
 export interface WorkingPreparedRecord { readonly name: string | RegExp; readonly why: string }
 
 /** The recipe sources of the lanes that keep their scene delivered. */
-export const SCENE_RETAINING_SOURCES: readonly string[] = ['terrestrial', 'shape-model', 'paged-ellipsoid'];
+export const SCENE_RETAINING_SOURCES: readonly string[] = ['paged-ellipsoid'];
 /** The delivery context of the body an object descriptor describes. */
 export function preparedDeliveryContext(descriptor: unknown): Required<PreparedDeliveryContext> {
   const record = (value: unknown): Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value) ? value as Record<string, unknown> : {};

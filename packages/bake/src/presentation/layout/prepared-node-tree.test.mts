@@ -2,13 +2,16 @@ import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createPreparedNodeTree, preparedDeclarations, LEAF_BOX_UNSCALE, leafBoxLengths } from "@cssearth/bake/presentation";
-// Mimas keeps its scene delivered (packages/objects/src/node/prepared-delivery.ts); a sphere's is a working record.
-import PREPARED_MIMAS_SCENE from "../../../../../src/objects/mimas/prepared/scene.json" with { type: "json" };
+import { resolve } from "node:path";
+import { readPreparedRuntimeText } from "@cssearth/objects/node";
+// Mimas's faces, as its runtime holds them: no scene is delivered for a shape body (packages/objects/src/node/prepared-delivery.ts).
+const MIMAS_FACES: { tag: string; className: string; style: string }[] = JSON.parse(await readPreparedRuntimeText(resolve(import.meta.dirname, "../../../../../src/objects/mimas/prepared")))
+  .tree.nodes.filter((node: { tag?: string }) => node.tag === "u").map(({ tag, className, style }: { tag: string; className: string; style: string }) => ({ tag, className, style }));
 test("preparation expands every actual Mimas leaf into a stable ordered tree", () => {
   const tree = createPreparedNodeTree(), camera = tree.element("div", "polycss-camera"), scene = tree.element("div", "polycss-scene");
   tree.append(null, camera); tree.append(camera, scene);
   const body = tree.mesh("body"), material = tree.element("s"); tree.append(scene, body, material);
-  const leaves = PREPARED_MIMAS_SCENE.bodyLeaves;
+  const leaves = MIMAS_FACES;
   for (const leaf of leaves) tree.append(body, tree.leaf(leaf));
   const result = tree.finish({ camera, scene });
   assert.equal(result.tree.nodes.length, 4 + leaves.length);

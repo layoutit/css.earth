@@ -8,7 +8,7 @@ import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import { createSourceManifest, readPreparedRuntimeText } from '@cssearth/objects/node';
 import type { SolarGeometry } from '../objects/scene/index.ts';
-import { parseSolidPreparationSource, retainedPhotographicAtlas, loadRadialTerrain, prepareRadialMaterials, prepareSolidRasters, prepareSolidSurfacePoles } from '../objects/layers/terrestrial/index.ts';
+import { parseSolidPreparationSource, retainedScene, retainedPhotographicAtlas, loadRadialTerrain, prepareRadialMaterials, prepareSolidRasters, prepareSolidSurfacePoles } from '../objects/layers/terrestrial/index.ts';
 import { datasetBillboardColors } from '../objects/content/index.ts';
 import { prepareSurfaceMinimaps } from '../surface-previews/index.ts';
 import { repinObjectJson } from '../contract/index.ts';
@@ -33,7 +33,8 @@ export async function refreshSurfaceObservations(id: string, datasetIds: readonl
   const selected = config.raster.surfaceObservations?.filter(recipe => datasetIds.includes(recipe.id)) ?? [];
   if (selected.length !== datasetIds.length) throw new Error('Unknown surface-observation dataset.');
   const originals = new Map<string, Buffer>();
-  for (const name of ['scene.json', 'surfaces.json', 'minimaps.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  for (const name of ['runtime.json', 'surfaces.json', 'minimaps.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  const readScene = async () => retainedScene(requireRecord(JSON.parse(await readPreparedRuntimeText(outputDirectory)))), scene = await readScene();
   originals.set('inventory.json', await readFile(resolve(objectDirectory, 'inventory.json')));
   const previousSurfaces = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8')));
   if (datasetIds.some(id => !records(previousSurfaces.surfaces).some(surface => surface.id === id))) throw new Error('Refresh cannot add a dataset.');
@@ -41,7 +42,7 @@ export async function refreshSurfaceObservations(id: string, datasetIds: readonl
   const source = await createSourceManifest({ objectId: id, objectName: id, sourceRoot: sourceDirectory });
   const radial = await loadRadialTerrain({ config, sourceDirectory, source });
   if (!radial) throw new Error('Observation refresh requires source terrain.');
-  const retained = retainedPhotographicAtlas(requireRecord(JSON.parse(originals.get('scene.json')!.toString('utf8'))));
+  const retained = retainedPhotographicAtlas(scene);
   // Reuse the full preparer's source mesh and exact plans. A geometry change needs a full preparation.
   if (retained.width !== radial.width || retained.height !== radial.height ||
       retained.plans.length !== radial.plans.length || retained.plans.some((plan, i) =>
@@ -85,7 +86,8 @@ export async function refreshSurfaceObservations(id: string, datasetIds: readonl
   await writeFile(resolve(objectDirectory, 'inventory.json'), JSON.stringify(nextInventory, null, 2) + '\n');
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: datasetIds, solarGeometry });
   await refreshObservationControls(id, datasetIds, new Map(surfaces.map(surface => [surface.id, requireString(surface.billboardColor)])));
-  if (!(await readFile(resolve(outputDirectory, 'scene.json'))).equals(originals.get('scene.json')!)) throw new Error('Observation refresh changed the scene.');
+  // The controls refresh rewrote the runtime: its camera, sky, Sun, triangles and faces must be the ones this run started from.
+  if (JSON.stringify(await readScene()) !== JSON.stringify(scene)) throw new Error('Observation refresh changed the scene.');
   const report = { id, datasetIds, seconds: (performance.now() - started) / 1000, maxRssMiB: process.resourceUsage().maxRSS / 1024,
     refreshedRuntimeAssets: [...changed.values()].map(({ filename, bytes }) => ({ filename, bytes })),
     retainedRuntimeAssetCount: assets.length - changed.size, observations: surfaces.map(surface => surface.observation) };

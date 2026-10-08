@@ -41,10 +41,10 @@ for (const id of ids) {
     let receipt;
     try { receipt = await json(resolve(projectRoot, 'output/shape-material-refresh', id, 'refresh.json')); }
     catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
-    // A finished refresh holds while its recipe and retained scene have not changed since its report was written.
+    // A finished refresh holds while its recipe and its runtime, which holds the retained scene, have not changed since its report was written.
     const written = await stat(resolve(projectRoot, 'output/shape-material-refresh', id, 'refresh.json')).then(info => info.mtimeMs, () => -Infinity);
     if (receipt && !await anyChangedAfter([resolve(projectRoot, 'src/objects', id, 'source/preparation/terrestrial.json'),
-      resolve(projectRoot, 'src/objects', id, 'prepared/scene.json')], written)) {
+      resolve(projectRoot, 'src/objects', id, 'prepared/runtime.json')], written)) {
       // The installed refreshed files still match their inventory rows.
       const inventory = await readInventory(id, resolve(projectRoot, 'src/objects', id));
       for (const asset of records(receipt.changedAssets)) {

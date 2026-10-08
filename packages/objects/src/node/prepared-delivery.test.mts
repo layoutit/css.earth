@@ -31,11 +31,11 @@ test('the delivered files of a directory: working records out, nested files in, 
   assert.throws(() => deliveredPreparedFiles(['runtime.json', 'notes.json'], 'fixture'), /Object fixture wrote prepared record\(s\) the delivery ledger does not declare: notes\.json/u);
 });
 
-test('a lane whose refreshes repaint from its scene keeps the scene delivered; a sphere does not', () => {
+test('the paged lane, whose reuse-images run reads its scene, keeps it delivered; a shape body and a sphere do not', () => {
   const descriptor = (...ids: string[]) => ({ properties: { recipe: { sources: ids.map(id => ({ id, path: `source/preparation/${id}.json` })) } } });
   const retains = (value: unknown) => preparedDeliveryContext(value).retainsScene;
-  assert.equal(retains(descriptor('terrestrial', 'content')), true);
-  assert.equal(retains(descriptor('shape-model')), true);
+  assert.equal(retains(descriptor('terrestrial', 'content')), false);
+  assert.equal(retains(descriptor('shape-model')), false);
   assert.equal(retains(descriptor('paged-ellipsoid')), true);
   assert.equal(retains(descriptor('geometry', 'presentation', 'raster')), false);
   for (const value of [null, undefined, 'object', {}, { properties: { recipe: {} } }]) assert.deepEqual(preparedDeliveryContext(value), { retainsScene: false, keepsMaterial: false });
@@ -51,6 +51,6 @@ test('a solid sphere keeps its material; a shape body, whose material would be i
   assert.equal(preparedDeliveryContext(shaped('ellipsoid')).keepsMaterial, true);
   assert.equal(preparedDeliveryContext(shaped('radial-terrain')).keepsMaterial, false);
   const found = ['runtime.json', 'scene.json', 'surfaces.json', 'material.json'];
-  assert.deepEqual(deliveredPreparedFiles(found, 'io', preparedDeliveryContext(shaped('sphere'))), found);
-  assert.deepEqual(deliveredPreparedFiles(found, 'eros', preparedDeliveryContext(shaped('radial-terrain'))), ['runtime.json', 'scene.json', 'surfaces.json']);
+  assert.deepEqual(deliveredPreparedFiles(found, 'io', preparedDeliveryContext(shaped('sphere'))), ['runtime.json', 'surfaces.json', 'material.json']);
+  assert.deepEqual(deliveredPreparedFiles(found, 'eros', preparedDeliveryContext(shaped('radial-terrain'))), ['runtime.json', 'surfaces.json']);
 });

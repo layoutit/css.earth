@@ -8,7 +8,8 @@ import { resolve, basename } from 'node:path';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import type { SolarGeometry } from '../objects/scene/index.ts';
-import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, neutralShapeViews, createRasterEmitter, retainedShapeAtlas } from '../objects/layers/terrestrial/index.ts';
+import { readPreparedRuntimeText } from '@cssearth/objects/node';
+import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, neutralShapeViews, createRasterEmitter, retainedScene, retainedShapeAtlas } from '../objects/layers/terrestrial/index.ts';
 
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
@@ -18,7 +19,7 @@ export async function stageShapeLighting(id: string, solarGeometry: SolarGeometr
   const directory = shapeLightingPath('src/objects', id), stage = shapeLightingPath('output/shape-default-lighting', id);
   await mkdir(stage, { recursive: true });
   const config = parseSolidPreparationSource(await json(resolve(directory, 'source/preparation/terrestrial.json')));
-  const scene = await json(resolve(directory, 'prepared/scene.json'));
+  const scene = retainedScene(requireRecord(JSON.parse(await readPreparedRuntimeText(resolve(directory, 'prepared')))));
   const surfaces = await json(resolve(directory, 'prepared/surfaces.json'));
   const inventory = await json(resolve(directory, 'inventory.json'));
   const views = neutralShapeViews(config.raster.shapeViews);

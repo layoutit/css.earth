@@ -16,8 +16,9 @@ test('a working record or an unnamed record is refused, with its body and file',
     'vega/prepared/notes.json: not named in the delivery ledger']);
 });
 
-test('a lane that repaints from its scene keeps it listed', () => {
-  assert.deepEqual(refusedPreparedRows('eros', inventory('runtime.json', 'scene.json', 'surfaces.json'), shape), []);
+test('the paged lane keeps its scene listed; a shape body, whose runtime holds it, does not', () => {
+  assert.deepEqual(refusedPreparedRows('earth', inventory('runtime.json', 'scene.json'), { properties: { recipe: { sources: [{ id: 'paged-ellipsoid' }] } } }), []);
+  assert.deepEqual(refusedPreparedRows('eros', inventory('runtime.json', 'scene.json', 'surfaces.json'), shape), ['eros/prepared/scene.json: a working record']);
 });
 
 test('a shape body lists no material, and a solid sphere keeps its own', () => {
