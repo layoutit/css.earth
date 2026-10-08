@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { murColormapUrl, murLayer, murWindow, parseMurCapabilities } from './mur-imagery.mts';
+import { ENSO_WINDOW } from './refresh-earth-enso.mts';
 
 // The parts of the GIBS capabilities the reader checks: the layer with its time ranges and default, and the 1 km grid.
 const capabilities = (values: readonly string[], latest: string) => `<Capabilities>
@@ -10,12 +11,15 @@ const capabilities = (values: readonly string[], latest: string) => `<Capabiliti
 <TileWidth>512</TileWidth><TileHeight>512</TileHeight><MatrixWidth>80</MatrixWidth><MatrixHeight>40</MatrixHeight></TileMatrix></TileMatrixSet>
 </Capabilities>`;
 
-test('the steps are the newest analysis and the same weekday one and two weeks back; a day NASA never processed is left out', () => {
+test('the steps are the newest analysis and the days before it at the window\'s spacing; a day NASA never processed is left out', () => {
   const { date, dates } = parseMurCapabilities(capabilities(['2026-09-01/2026-09-28/P1D'], '2026-09-28'), '2026-09-30');
   assert.equal(date, '2026-09-28');
   assert.deepEqual(murWindow(dates, { count: 3, spacingDays: 7 }), ['2026-09-14', '2026-09-21', '2026-09-28']);
   const gap = parseMurCapabilities(capabilities(['2026-09-01/2026-09-20/P1D', '2026-09-22/2026-09-28/P1D'], '2026-09-28'), '2026-09-30').dates;
   assert.deepEqual(murWindow(gap, { count: 3, spacingDays: 7 }), ['2026-09-14', '2026-09-28'], 'the missing 21 September is skipped, not filled');
+  const fortnight = murWindow(dates, ENSO_WINDOW);
+  assert.deepEqual([fortnight.length, fortnight[0], fortnight.at(-1)], [14, '2026-09-15', '2026-09-28'], 'two weeks, one step a day, ending on the newest');
+  assert.deepEqual(murWindow(gap, ENSO_WINDOW).length, 13, 'a day NASA skipped leaves thirteen steps');
 });
 
 test('the capabilities must end their published range on the default date, and never in the future', () => {

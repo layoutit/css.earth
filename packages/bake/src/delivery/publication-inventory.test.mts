@@ -13,9 +13,11 @@ test('publication updates prepared inventory pins with the staged runtime', asyn
     const id = 'fixture', stage = resolve(root, 'stage'), objectDirectory = resolve(root, 'object');
     const outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve(root, 'public');
     const stagedData = resolve(stage, 'prepared'), stagedPublic = resolve(stage, 'public');
-    await Promise.all([stagedData, stagedPublic, outputDirectory, publicDirectory].map(path => mkdir(path, { recursive: true })));
+    await Promise.all([stagedData, stagedPublic, outputDirectory, publicDirectory, resolve(stagedData, 'minimaps'), resolve(outputDirectory, 'minimaps')].map(path => mkdir(path, { recursive: true })));
     const oldRuntime = Buffer.from('{"version":1}\n'), newRuntime = Buffer.from('{"version":2}\n');
     const texture = Buffer.from('prepared texture'), text = Buffer.from('{"facts":[]}\n'), gone = Buffer.from('{"old":true}\n');
+    const leftMap = Buffer.from('minimap of a dataset that left'), keptMap = Buffer.from('minimap of a dataset that stays');
+    const minimapList = (...names: string[]) => Buffer.from(JSON.stringify({ images: names.map(name => ({ path: `minimaps/${name}.webp` })) }));
     const pin = (filename: string, bytes: Buffer) => ({ filename, bytes: bytes.length, sha256: sha256(bytes) });
     const oldInventory = { schema: 'cssearth-inventory@1' as const, assets: [
       { location: 'public' as const, ...pin('surface.webp', texture) },
@@ -24,6 +26,10 @@ test('publication updates prepared inventory pins with the staged runtime', asyn
       { location: 'prepared' as const, ...pin('text.json', text) },
       // Recorded but no longer on disk: dropped.
       { location: 'prepared' as const, ...pin('stale.json', gone) },
+      // A minimap the staged set no longer lists: still on disk, removed by this publication, and dropped with it.
+      { location: 'prepared' as const, ...pin('minimaps.json', minimapList('left', 'kept')) },
+      { location: 'prepared' as const, ...pin('minimaps/left.webp', leftMap) },
+      { location: 'prepared' as const, ...pin('minimaps/kept.webp', keptMap) },
     ] };
     const publicManifest = { schema: 'cssearth-inventory@1' as const, assets: [
       { location: 'public' as const, ...pin('surface.webp', texture) },
@@ -37,14 +43,20 @@ test('publication updates prepared inventory pins with the staged runtime', asyn
       writeFile(resolve(stagedData, 'inventory.json'), inventoryText(publicManifest)),
       writeFile(resolve(stagedData, 'runtime.json'), newRuntime),
       writeFile(resolve(stagedPublic, 'surface.webp'), texture),
+      writeFile(resolve(outputDirectory, 'minimaps.json'), minimapList('left', 'kept')),
+      writeFile(resolve(outputDirectory, 'minimaps/left.webp'), leftMap),
+      writeFile(resolve(outputDirectory, 'minimaps/kept.webp'), keptMap),
+      writeFile(resolve(stagedData, 'minimaps.json'), minimapList('kept')),
+      writeFile(resolve(stagedData, 'minimaps/kept.webp'), keptMap),
     ]);
     const prepared = await inventoryPreparedAssets({ objectId: id, objectDirectory: stage, preparedRoot: stagedData });
-    assert.deepEqual(prepared?.assets.map(asset => asset.filename), ['runtime.json']);
+    assert.deepEqual(prepared?.assets.map(asset => asset.filename), ['minimaps.json', 'minimaps/kept.webp', 'runtime.json']);
     await publishPreparedObject({ id, stage, objectDirectory, publicDirectory, outputDirectory, projectRoot: root });
     const inventory = await readInventory(id, objectDirectory);
     assert.ok(inventory);
     assert.equal(inventory.assets.find(asset => asset.location === 'prepared' && asset.filename === 'runtime.json')?.sha256, sha256(newRuntime));
-    assert.deepEqual(inventory.assets.filter(asset => asset.location === 'prepared').map(asset => asset.filename), ['runtime.json', 'text.json']);
+    assert.deepEqual(inventory.assets.filter(asset => asset.location === 'prepared').map(asset => asset.filename), ['minimaps.json', 'minimaps/kept.webp', 'runtime.json', 'text.json']);
+    await assert.rejects(readFile(resolve(outputDirectory, 'minimaps/left.webp')), /ENOENT/u);
     assert.equal((await readFile(resolve(outputDirectory, 'runtime.json'))).toString(), newRuntime.toString());
     await verifyInventory({ objectId: id, inventory, preparedRoot: outputDirectory, publicRoot: publicDirectory });
   } finally {

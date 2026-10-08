@@ -1,0 +1,119 @@
+name: ENSO daily refresh
+
+# Once a day, moves Earth's ENSO steps to NASA's newest MUR analysis: acquires the new day from GIBS, bakes that day
+# alone (prepare-object earth --add-datasets), publishes its files and its tile archive to R2, and opens a pull request
+# that merges itself when the required checks pass. A day NASA has not published yet ends the run with nothing to do.
+# The merge moves source/science/mur on main, which starts the Deploy workflow. The GitHub token and failure recovery:
+# docs/ci-cd.md#enso-daily-refresh.
+
+on:
+  schedule:
+    # NASA publishes an analysis one to two days after its date: at 12:30 UTC on 8 October 2026 the newest was 7 October.
+    - cron: '17 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # One refresh at a time; never cancel a run mid-upload.
+  group: enso-daily
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    name: Move the ENSO steps to NASA's newest day
+    # A fork has neither the publish credentials nor the GitHub token.
+    if: github.repository == 'layoutit/css.earth'
+    runs-on: ubuntu-latest
+    # Not measured on a runner yet. On a 14-core Mac (2026-10-08): 8 minutes to acquire thirteen days, 2 to restore the
+    # source inputs and 7 to bake one day.
+    timeout-minutes: 90
+    environment: r2-publish
+    env:
+      NODE_OPTIONS: --max-old-space-size=6144
+    steps:
+      - name: Check the credentials are configured
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          GH_API_TOKEN: ${{ secrets.GH_API_TOKEN }}
+        run: |
+          missing() { echo "::error::The secret $1 is not set; the ENSO refresh needs it ($2)."; exit 1; }
+          [ -n "$CLOUDFLARE_API_TOKEN" ] || missing CLOUDFLARE_API_TOKEN "R2 write, on the r2-publish environment"
+          [ -n "$CLOUDFLARE_ACCOUNT_ID" ] || missing CLOUDFLARE_ACCOUNT_ID "the Cloudflare account id"
+          [ -n "$GH_API_TOKEN" ] || missing GH_API_TOKEN "a token that can push a branch and open a pull request; the built-in token's pull requests run no checks"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: main
+          token: ${{ secrets.GH_API_TOKEN }}
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+          cache: pnpm
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Move the steps and acquire the new day
+        id: refresh
+        run: |
+          set -euo pipefail
+          node packages/bake/authoring/earth/refresh-earth-enso.mts
+          # The reader text names each day, so it changes exactly when the steps move.
+          if git diff --quiet -- src/objects/earth/text.json; then
+            echo "moved=false" >> "$GITHUB_OUTPUT"
+            echo "NASA has published no new day; nothing to do." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "moved=true" >> "$GITHUB_OUTPUT"
+            newest=$(node -e 'const ids=Object.keys(JSON.parse(require("node:fs").readFileSync("src/objects/earth/text.json","utf8")).datasets).filter(id=>id.startsWith("enso-")).sort();process.stdout.write(ids.at(-1).slice(5))')
+            echo "newest=$newest" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Mirror the new day's tile archive and receipt
+        if: steps.refresh.outputs.moved == 'true'
+        # Before the restore below: only a day this run fetched has its archive here now. A later failure then leaves the
+        # day on the source mirror, and the next run takes it from there instead of from NASA.
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          for archive in src/objects/earth/source/science/mur/*/tiles.tar.gz; do
+            day=$(basename "$(dirname "$archive")")
+            node packages/bake/cli/publish-source-cache.mts "--file=$archive" "--key=earth/science/mur/$day/tiles.tar.gz"
+            node packages/bake/cli/publish-source-cache.mts "--file=$(dirname "$archive")/receipt.json" "--key=earth/science/mur/$day/receipt.json"
+          done
+      - name: Restore Earth's published files and its source inputs
+        if: steps.refresh.outputs.moved == 'true'
+        # The source restore checks the whole manifest, so it also rebuilds the mosaics of the thirteen days already held
+        # from their archives on the source mirror; the bake itself reads only the new day's.
+        run: |
+          set -euo pipefail
+          node packages/bake/cli/setup-assets.mts --object=earth
+          node packages/bake/cli/restore-source-inputs.mts --object=earth
+      - name: Bake the new day alone
+        if: steps.refresh.outputs.moved == 'true'
+        run: node packages/bake/cli/prepare-object.mts earth --add-datasets
+      - name: Publish the new day's files
+        if: steps.refresh.outputs.moved == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node packages/bake/cli/publish-runtime-assets.mts --object=earth --since=HEAD
+      - name: Open the pull request and let it merge itself
+        if: steps.refresh.outputs.moved == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GH_API_TOKEN }}
+          NEWEST: ${{ steps.refresh.outputs.newest }}
+        run: |
+          set -euo pipefail
+          branch="chore/enso-$NEWEST"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add src/objects/earth
+          git commit -m "chore(earth): move the ENSO steps to $NEWEST"
+          git push --force origin "$branch"
+          gh pr create --base main --head "$branch" --title "chore(earth): move the ENSO steps to $NEWEST" \
+            --body "The daily ENSO refresh moved Earth's steps to NASA's newest MUR analysis, $NEWEST. It baked that day alone and published its files and tile archive; every other Earth file keeps its content address. Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          gh pr merge "$branch" --auto --squash
+          echo "Opened the pull request for $NEWEST." >> "$GITHUB_STEP_SUMMARY"

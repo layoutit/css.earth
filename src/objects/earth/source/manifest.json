@@ -375,18 +375,18 @@
       }
     },
     {
-      "id": "nasa-mur-gibs-receipt-2026-09-14",
-      "path": "science/mur/2026-09-14/receipt.json",
+      "id": "nasa-mur-gibs-receipt-2026-09-24",
+      "path": "science/mur/2026-09-24/receipt.json",
       "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
       "license": "NASA open Earth science imagery with attribution",
       "licenseEvidence": [
         "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
       ],
-      "acquisition": "Anonymous imagery acquisition 2026-09-30T06:47:54.611Z; every tile with observations attested 2026-09-14 and the v4.1 analysis.",
+      "acquisition": "Anonymous imagery acquisition 2026-09-30T05:28:21.462Z; every tile with observations attested 2026-09-24 and the v4.1 analysis.",
       "redistribution": "Project acquisition record",
       "consumers": [
-        "enso-2026-09-14"
+        "enso-2026-09-24"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -394,18 +394,56 @@
       }
     },
     {
-      "id": "nasa-mur-gibs-receipt-2026-09-21",
-      "path": "science/mur/2026-09-21/receipt.json",
+      "id": "nasa-mur-gibs-receipt-2026-09-25",
+      "path": "science/mur/2026-09-25/receipt.json",
       "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
       "license": "NASA open Earth science imagery with attribution",
       "licenseEvidence": [
         "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
       ],
-      "acquisition": "Anonymous imagery acquisition 2026-09-30T06:47:54.633Z; every tile with observations attested 2026-09-21 and the v4.1 analysis.",
+      "acquisition": "Anonymous imagery acquisition 2026-09-30T05:30:30.734Z; every tile with observations attested 2026-09-25 and the v4.1 analysis.",
       "redistribution": "Project acquisition record",
       "consumers": [
-        "enso-2026-09-21"
+        "enso-2026-09-25"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-receipt-2026-09-26",
+      "path": "science/mur/2026-09-26/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-09-30T05:30:31.753Z; every tile with observations attested 2026-09-26 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-09-26"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-receipt-2026-09-27",
+      "path": "science/mur/2026-09-27/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-09-30T05:30:31.424Z; every tile with observations attested 2026-09-27 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-09-27"
       ],
       "sourceBinding": {
         "kind": "local",
@@ -432,6 +470,177 @@
       }
     },
     {
+      "id": "nasa-mur-gibs-receipt-2026-09-29",
+      "path": "science/mur/2026-09-29/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-10-08T12:38:46.929Z; every tile with observations attested 2026-09-29 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-09-29"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-receipt-2026-09-30",
+      "path": "science/mur/2026-09-30/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-10-08T12:38:46.920Z; every tile with observations attested 2026-09-30 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-09-30"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-receipt-2026-10-01",
+      "path": "science/mur/2026-10-01/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-10-08T12:39:00.720Z; every tile with observations attested 2026-10-01 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-10-01"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-receipt-2026-10-02",
+      "path": "science/mur/2026-10-02/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-10-08T12:41:03.125Z; every tile with observations attested 2026-10-02 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-10-02"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-receipt-2026-10-03",
+      "path": "science/mur/2026-10-03/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-10-08T12:41:03.024Z; every tile with observations attested 2026-10-03 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-10-03"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-receipt-2026-10-04",
+      "path": "science/mur/2026-10-04/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-10-08T12:41:13.373Z; every tile with observations attested 2026-10-04 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-10-04"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-receipt-2026-10-05",
+      "path": "science/mur/2026-10-05/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-10-08T12:43:22.264Z; every tile with observations attested 2026-10-05 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-10-05"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-receipt-2026-10-06",
+      "path": "science/mur/2026-10-06/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-10-08T12:43:22.437Z; every tile with observations attested 2026-10-06 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-10-06"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-receipt-2026-10-07",
+      "path": "science/mur/2026-10-07/receipt.json",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "license": "NASA open Earth science imagery with attribution",
+      "licenseEvidence": [
+        "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
+      ],
+      "acquisition": "Anonymous imagery acquisition 2026-10-08T12:43:27.869Z; every tile with observations attested 2026-10-07 and the v4.1 analysis.",
+      "redistribution": "Project acquisition record",
+      "consumers": [
+        "enso-2026-10-07"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project acquisition record: the GIBS layer, requested date, grid and each tile's bytes."
+      }
+    },
+    {
       "id": "nasa-mur-gibs-layer",
       "path": "science/mur-gibs-layer.xml",
       "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
@@ -440,12 +649,23 @@
       "licenseEvidence": [
         "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
       ],
-      "acquisition": "Checked 2026-09-30T06:45:43.860Z with the dated tiles it describes.",
+      "acquisition": "Checked 2026-10-08T13:04:31.830Z with the dated tiles it describes.",
       "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
       "consumers": [
-        "enso-2026-09-14",
-        "enso-2026-09-21",
-        "enso-2026-09-28"
+        "enso-2026-09-24",
+        "enso-2026-09-25",
+        "enso-2026-09-26",
+        "enso-2026-09-27",
+        "enso-2026-09-28",
+        "enso-2026-09-29",
+        "enso-2026-09-30",
+        "enso-2026-10-01",
+        "enso-2026-10-02",
+        "enso-2026-10-03",
+        "enso-2026-10-04",
+        "enso-2026-10-05",
+        "enso-2026-10-06",
+        "enso-2026-10-07"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -467,12 +687,23 @@
       "licenseEvidence": [
         "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
       ],
-      "acquisition": "Checked 2026-09-30T06:45:43.860Z with the dated tiles it describes.",
+      "acquisition": "Checked 2026-10-08T13:04:31.830Z with the dated tiles it describes.",
       "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
       "consumers": [
-        "enso-2026-09-14",
-        "enso-2026-09-21",
-        "enso-2026-09-28"
+        "enso-2026-09-24",
+        "enso-2026-09-25",
+        "enso-2026-09-26",
+        "enso-2026-09-27",
+        "enso-2026-09-28",
+        "enso-2026-09-29",
+        "enso-2026-09-30",
+        "enso-2026-10-01",
+        "enso-2026-10-02",
+        "enso-2026-10-03",
+        "enso-2026-10-04",
+        "enso-2026-10-05",
+        "enso-2026-10-06",
+        "enso-2026-10-07"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -494,12 +725,23 @@
       "licenseEvidence": [
         "https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs"
       ],
-      "acquisition": "Checked 2026-09-30T06:45:43.860Z with the dated tiles it describes.",
+      "acquisition": "Checked 2026-10-08T13:04:31.830Z with the dated tiles it describes.",
       "redistribution": "Original NASA PNG tiles retained in a local archive with attribution",
       "consumers": [
-        "enso-2026-09-14",
-        "enso-2026-09-21",
-        "enso-2026-09-28"
+        "enso-2026-09-24",
+        "enso-2026-09-25",
+        "enso-2026-09-26",
+        "enso-2026-09-27",
+        "enso-2026-09-28",
+        "enso-2026-09-29",
+        "enso-2026-09-30",
+        "enso-2026-10-01",
+        "enso-2026-10-02",
+        "enso-2026-10-03",
+        "enso-2026-10-04",
+        "enso-2026-10-05",
+        "enso-2026-10-06",
+        "enso-2026-10-07"
       ],
       "sourceBinding": {
         "kind": "catalogued",
@@ -1221,13 +1463,13 @@
       "generator": "packages/bake/src/objects/acquisition/operations-acquisition.ts"
     },
     {
-      "id": "nasa-mur-gibs-tiles-2026-09-14",
-      "path": "science/mur/2026-09-14/tiles.tar.gz",
-      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-09-14/1km/6/{row}/{col}.png",
+      "id": "nasa-mur-gibs-tiles-2026-09-24",
+      "path": "science/mur/2026-09-24/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-09-24/1km/6/{row}/{col}.png",
       "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
-      "description": "The 3,200 original NASA PNG tiles of 2026-09-14, archived as downloaded; the source mirror holds it.",
+      "description": "The 3,200 original NASA PNG tiles of 2026-09-24, archived as downloaded; the source mirror holds it.",
       "consumers": [
-        "enso-2026-09-14"
+        "enso-2026-09-24"
       ],
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
       "sourceBinding": {
@@ -1236,19 +1478,19 @@
           {
             "catalogueId": "gibs-mur-sst-anomalies",
             "role": "material",
-            "evidence": "GIBS imagery for 2026-09-14; science/mur/2026-09-14/receipt.json records the layer, grid and each tile's bytes."
+            "evidence": "GIBS imagery for 2026-09-24; science/mur/2026-09-24/receipt.json records the layer, grid and each tile's bytes."
           }
         ]
       }
     },
     {
-      "id": "nasa-mur-gibs-mosaic-2026-09-14",
-      "path": "science/mur/2026-09-14/mosaic.png",
+      "id": "nasa-mur-gibs-mosaic-2026-09-24",
+      "path": "science/mur/2026-09-24/mosaic.png",
       "origin": "packages/bake/authoring/earth/mur-imagery.mts",
       "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
       "consumers": [
-        "enso-2026-09-14"
+        "enso-2026-09-24"
       ],
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
       "sourceBinding": {
@@ -1257,19 +1499,19 @@
           {
             "catalogueId": "gibs-mur-sst-anomalies",
             "role": "material",
-            "evidence": "GIBS imagery for 2026-09-14; science/mur/2026-09-14/receipt.json records the layer, grid and each tile's bytes."
+            "evidence": "GIBS imagery for 2026-09-24; science/mur/2026-09-24/receipt.json records the layer, grid and each tile's bytes."
           }
         ]
       }
     },
     {
-      "id": "nasa-mur-gibs-tiles-2026-09-21",
-      "path": "science/mur/2026-09-21/tiles.tar.gz",
-      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-09-21/1km/6/{row}/{col}.png",
+      "id": "nasa-mur-gibs-tiles-2026-09-25",
+      "path": "science/mur/2026-09-25/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-09-25/1km/6/{row}/{col}.png",
       "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
-      "description": "The 3,200 original NASA PNG tiles of 2026-09-21, archived as downloaded; the source mirror holds it.",
+      "description": "The 3,200 original NASA PNG tiles of 2026-09-25, archived as downloaded; the source mirror holds it.",
       "consumers": [
-        "enso-2026-09-21"
+        "enso-2026-09-25"
       ],
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
       "sourceBinding": {
@@ -1278,19 +1520,19 @@
           {
             "catalogueId": "gibs-mur-sst-anomalies",
             "role": "material",
-            "evidence": "GIBS imagery for 2026-09-21; science/mur/2026-09-21/receipt.json records the layer, grid and each tile's bytes."
+            "evidence": "GIBS imagery for 2026-09-25; science/mur/2026-09-25/receipt.json records the layer, grid and each tile's bytes."
           }
         ]
       }
     },
     {
-      "id": "nasa-mur-gibs-mosaic-2026-09-21",
-      "path": "science/mur/2026-09-21/mosaic.png",
+      "id": "nasa-mur-gibs-mosaic-2026-09-25",
+      "path": "science/mur/2026-09-25/mosaic.png",
       "origin": "packages/bake/authoring/earth/mur-imagery.mts",
       "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
       "consumers": [
-        "enso-2026-09-21"
+        "enso-2026-09-25"
       ],
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
       "sourceBinding": {
@@ -1299,7 +1541,91 @@
           {
             "catalogueId": "gibs-mur-sst-anomalies",
             "role": "material",
-            "evidence": "GIBS imagery for 2026-09-21; science/mur/2026-09-21/receipt.json records the layer, grid and each tile's bytes."
+            "evidence": "GIBS imagery for 2026-09-25; science/mur/2026-09-25/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-09-26",
+      "path": "science/mur/2026-09-26/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-09-26/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-09-26, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-09-26"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-26; science/mur/2026-09-26/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-09-26",
+      "path": "science/mur/2026-09-26/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-09-26"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-26; science/mur/2026-09-26/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-09-27",
+      "path": "science/mur/2026-09-27/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-09-27/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-09-27, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-09-27"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-27; science/mur/2026-09-27/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-09-27",
+      "path": "science/mur/2026-09-27/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-09-27"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-27; science/mur/2026-09-27/receipt.json records the layer, grid and each tile's bytes."
           }
         ]
       }
@@ -1342,6 +1668,384 @@
             "catalogueId": "gibs-mur-sst-anomalies",
             "role": "material",
             "evidence": "GIBS imagery for 2026-09-28; science/mur/2026-09-28/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-09-29",
+      "path": "science/mur/2026-09-29/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-09-29/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-09-29, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-09-29"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-29; science/mur/2026-09-29/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-09-29",
+      "path": "science/mur/2026-09-29/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-09-29"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-29; science/mur/2026-09-29/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-09-30",
+      "path": "science/mur/2026-09-30/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-09-30/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-09-30, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-09-30"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-30; science/mur/2026-09-30/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-09-30",
+      "path": "science/mur/2026-09-30/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-09-30"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-09-30; science/mur/2026-09-30/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-10-01",
+      "path": "science/mur/2026-10-01/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-10-01/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-10-01, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-10-01"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-01; science/mur/2026-10-01/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-10-01",
+      "path": "science/mur/2026-10-01/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-10-01"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-01; science/mur/2026-10-01/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-10-02",
+      "path": "science/mur/2026-10-02/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-10-02/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-10-02, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-10-02"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-02; science/mur/2026-10-02/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-10-02",
+      "path": "science/mur/2026-10-02/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-10-02"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-02; science/mur/2026-10-02/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-10-03",
+      "path": "science/mur/2026-10-03/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-10-03/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-10-03, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-10-03"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-03; science/mur/2026-10-03/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-10-03",
+      "path": "science/mur/2026-10-03/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-10-03"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-03; science/mur/2026-10-03/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-10-04",
+      "path": "science/mur/2026-10-04/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-10-04/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-10-04, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-10-04"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-04; science/mur/2026-10-04/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-10-04",
+      "path": "science/mur/2026-10-04/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-10-04"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-04; science/mur/2026-10-04/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-10-05",
+      "path": "science/mur/2026-10-05/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-10-05/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-10-05, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-10-05"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-05; science/mur/2026-10-05/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-10-05",
+      "path": "science/mur/2026-10-05/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-10-05"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-05; science/mur/2026-10-05/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-10-06",
+      "path": "science/mur/2026-10-06/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-10-06/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-10-06, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-10-06"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-06; science/mur/2026-10-06/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-10-06",
+      "path": "science/mur/2026-10-06/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-10-06"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-06; science/mur/2026-10-06/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-tiles-2026-10-07",
+      "path": "science/mur/2026-10-07/tiles.tar.gz",
+      "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-10-07/1km/6/{row}/{col}.png",
+      "generator": "packages/bake/authoring/earth/refresh-earth-enso.mts",
+      "description": "The 3,200 original NASA PNG tiles of 2026-10-07, archived as downloaded; the source mirror holds it.",
+      "consumers": [
+        "enso-2026-10-07"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-07; science/mur/2026-10-07/receipt.json records the layer, grid and each tile's bytes."
+          }
+        ]
+      }
+    },
+    {
+      "id": "nasa-mur-gibs-mosaic-2026-10-07",
+      "path": "science/mur/2026-10-07/mosaic.png",
+      "origin": "packages/bake/authoring/earth/mur-imagery.mts",
+      "generator": "packages/bake/authoring/earth/mur-imagery.mts restore src/objects/earth/source/science",
+      "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
+      "consumers": [
+        "enso-2026-10-07"
+      ],
+      "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS; mosaic preparation by cssEarth contributors",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gibs-mur-sst-anomalies",
+            "role": "material",
+            "evidence": "GIBS imagery for 2026-10-07; science/mur/2026-10-07/receipt.json records the layer, grid and each tile's bytes."
           }
         ]
       }

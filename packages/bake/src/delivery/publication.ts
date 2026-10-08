@@ -112,13 +112,16 @@ export async function publishPreparedObject({ id, stage, objectDirectory, public
   // rebake replaced the prepared entries with its own and dropped theirs, and #763's deploy failed on the missing text.json.
   // An entry the stage does not produce stays while the file on disk still has the bytes it records.
   const staged = stagedPrepared.assets.filter(asset => asset.location === 'prepared'), stagedNames = new Set(staged.map(asset => asset.filename));
+  const minimaps = minimapPaths(await optionalJson(resolve(data, 'minimaps.json')));
+  const oldMinimaps = minimapPaths(await optionalJson(resolve(outputDirectory, 'minimaps.json')));
+  // A minimap the new set no longer lists is removed below, so its entry leaves the inventory with it: it is still on disk
+  // here, and kept as another step's file it stayed pinned after every dataset removal.
+  const retiredMinimaps = new Set(oldMinimaps.filter(path => !minimaps.includes(path)));
   const unowned = [];
-  for (const asset of current?.assets ?? []) if (asset.location === 'prepared' && !stagedNames.has(asset.filename)) {
+  for (const asset of current?.assets ?? []) if (asset.location === 'prepared' && !stagedNames.has(asset.filename) && !retiredMinimaps.has(asset.filename)) {
     const bytes = await readFile(resolve(outputDirectory, asset.filename)).catch(() => null);
     if (bytes && sha256(bytes) === asset.sha256) unowned.push(asset);
   }
-  const minimaps = minimapPaths(await optionalJson(resolve(data, 'minimaps.json')));
-  const oldMinimaps = minimapPaths(await optionalJson(resolve(outputDirectory, 'minimaps.json')));
   writes.push(...minimaps.map(path => ({ path: resolve(outputDirectory, path), source: resolve(data, path) })),
     ...oldMinimaps.filter(path => !minimaps.includes(path)).map(path => ({ path: resolve(outputDirectory, path), remove: true as const })),
     // The staged inventory is published once, at the body root; prepared/ never carries a copy.

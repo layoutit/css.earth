@@ -301,7 +301,8 @@ preparation three objects at a time), which is minutes for a batch where one cal
 lane (the Moon, Mercury, stars…) a write redraws only the lighting and atmosphere banks by default and keeps every other
 published image, when no recipe changed since the published preparation except in those banks' keys; it prints which mode
 it chose and why. `--full` bakes everything, and is needed when a source image was replaced under the same name.
-`--reuse-images` forces the redraw-only run. A placed star, with its planets and
+`--reuse-images` forces the redraw-only run. `--add-datasets` bakes only the surface datasets a paged globe gained since its
+published preparation (Earth's ENSO days) and keeps every other published image. A placed star, with its planets and
 companion stars, starts with `node packages/bake/cli/star-candidates.mts "<SIMBAD identifier>"` and then `pnpm telescope new-object
 <spec.json>` (the spec format is in `packages/telescope-cli/src/new-object/spec.mts`): it writes the whole system from the archives and leaves
 only the prose marked `TODO(new-object)`; `--check` runs the chain through the page data on what it wrote, `--bake` the whole chain,

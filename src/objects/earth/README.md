@@ -16,7 +16,7 @@ The [navigation marker recipe](source/preparation/navigation.json) supplies the 
 | Limb | [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames, Minnaert law fitted here | Measured: Earth's brightness toward the edge in 680, 551 and 443 nm |
 | Atmosphere and charts | Authored atmosphere parameter record; NASA Planetary Spectrum Generator (PSG) | Simulated atmosphere, spectrum and temperature/pressure charts. Atmosphere brightness is adjusted for display. |
 | Interior | NASA schematic layers; [GLAD-M35 r0.1](https://doi.org/10.1093/gji/ggae270) | Modeled seismic wave speeds above or below the mean at each depth, not temperature. Crust and core are schematic. |
-| ENSO | [NASA MUR v4.1](https://doi.org/10.5067/GHGMR-4FJ04) via GIBS: the newest daily analysis and the same weekday one and two weeks before it | Sea-surface temperature anomaly imagery relative to 2003–2014; published color bins, not a raw numerical field. |
+| ENSO | [NASA MUR v4.1](https://doi.org/10.5067/GHGMR-4FJ04) via GIBS: the newest daily analysis and the thirteen days before it | Sea-surface temperature anomaly imagery relative to 2003–2014; published color bins, not a raw numerical field. |
 
 City search runs on the GeoNames places catalogue in [source/places](source/places/) (see
 [City coordinates](#city-coordinates)). Map names come from Natural Earth 1:10m vectors (public domain) under
@@ -91,9 +91,12 @@ Night lights are NASA's 2016 color map at 3 km, 13,500 × 6,750 pixels, resample
 with no color change. NASA composited the best cloud-free nights of each month over each land mass from the Suomi NPP
 VIIRS day/night band, over its MODIS Blue Marble land, ice and ocean.
 
-ENSO steps through two weeks in three days: NASA's newest MUR analysis and the same weekday one and two weeks before
-it. NASA publishes each day about two days late. The dataset opens on the newest day.
-`node packages/bake/authoring/earth/refresh-earth-enso.mts` moves the steps and rewrites the declarations; the
+ENSO steps through two weeks, one day a step: NASA's newest MUR analysis and the thirteen days before it. NASA
+publishes each day one to two days late. The dataset opens on the newest day.
+`node packages/bake/authoring/earth/refresh-earth-enso.mts` moves the steps and rewrites the declarations, and
+`node packages/bake/cli/prepare-object.mts earth --add-datasets` then bakes only the days that are new: every other
+Earth file keeps its content address. The [ENSO daily refresh](../../../docs/ci-cd.md#enso-daily-refresh) workflow runs
+both once a day, so the maps are as current as its last run, not a live feed. The
 [source manifest](source/manifest.json) lists the days in this version. A day NASA never processed is left out. Each day is 3,200 GIBS tiles whose headers must attest that day, recorded in
 `source/science/mur/<date>/receipt.json` and archived on the source mirror, sampled to 16,384 × 8,192. The
 [NASA color table](source/science/mur-gibs-colormap.xml) has 0.1 °C bins and saturates at ±3 °C.

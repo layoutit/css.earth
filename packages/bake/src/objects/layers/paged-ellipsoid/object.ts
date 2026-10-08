@@ -30,6 +30,10 @@ export interface PagedEllipsoidContext {
   reuseImages?: boolean;
   /** Recipe sources the author states changed without feeding the reused outputs; each is named in the run's output. */
   acceptChanged?: readonly string[];
+  /** With reuseImages: also prepare the surface datasets the published preparation does not hold (their pages, pole
+   * atlases, thumbnails and texture levels), and carry the published material banks instead of redrawing them. Every
+   * published file a remaining dataset reads stays as it is. Earth's ENSO days move this way (refresh-earth-enso.mts). */
+  addDatasets?: boolean;
 }
 
 import { keepTextureLevelBanks, keepTextureLevelWidths, prepareTextureLevels } from './texture-levels.ts';
@@ -43,9 +47,10 @@ const canonical = (value: unknown): string => JSON.stringify(value, (_key, item:
 const write = (directory: string, name: string, value: unknown) => writeFile(resolve(directory, `${name}.json`), `${JSON.stringify(value)}\n`);
 
 /** Source-derived projective globe, atmosphere, cutaway, map hierarchy and places. */
-export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, solarGeometry, assetWorker, reuseImages = false, acceptChanged = [], packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(checkoutProjectRoot(import.meta.url), '.local/wmts-global') }: PagedEllipsoidContext) {
+export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, solarGeometry, assetWorker, reuseImages = false, acceptChanged = [], addDatasets = false, packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(checkoutProjectRoot(import.meta.url), '.local/wmts-global') }: PagedEllipsoidContext) {
   const { descriptor, entries, sources, config, bindingSource, sourceDirectory, sourceManifest, sun, raster, scene, surfaceRasterPlan } = await readPagedEllipsoid(solarGeometry, objectDirectory);
   // The raw imagery is read only by the stages a reuse-images run reuses; it may be absent from this checkout.
+  if (addDatasets && !reuseImages) throw new TypeError(`${descriptor.id}: datasets are added to a published preparation; pass reuseImages with addDatasets.`);
   if (!reuseImages) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, objectName: config.displayName });
   await Promise.all([mkdir(publicDirectory, { recursive: true }), mkdir(outputDirectory, { recursive: true })]);
   const published = async (name: string) => requireRecord(await json(resolve(outputDirectory, `${name}.json`)), `published ${name}`);
@@ -75,11 +80,27 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
     if (canonical(publishedPlan['surface-raster-plan']) !== canonical(surfaceRasterPlan))
       throw new Error(`${descriptor.id}: surface-raster-plan differs from the published preparation; run the full preparation.`);
   }
-  // The atmosphere bank reads only the recipe and the body's photometry, so a reuse run redraws it.
-  const recomputedImages = reuseImages ? (await preparePagedEllipsoidAssetsInParallel({ worker: assetWorker, objectDirectory, publicDirectory, mapNames: [], materialsOnly: true })).assets
-    .map(asset => { if (!asset.startsWith(config.publicBase)) throw new Error(`${descriptor.id}: material asset ${asset} is outside ${config.publicBase}.`); return asset.slice(config.publicBase.length); }) : [];
-  const rasterAssets = reuseImages ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>>
-    : await preparePagedEllipsoidAssetsInParallel({ worker: assetWorker, objectDirectory, publicDirectory, mapNames: config.surface.maps.map(map => map.name) });
+  const filename = (asset: string) => { if (!asset.startsWith(config.publicBase)) throw new Error(`${descriptor.id}: asset ${asset} is outside ${config.publicBase}.`); return asset.slice(config.publicBase.length); };
+  // The atmosphere bank reads only the recipe and the body's photometry, so a reuse run redraws it. A run that adds
+  // datasets states that nothing else changed, and carries the published bank.
+  const recomputedImages = reuseImages && !addDatasets ? (await preparePagedEllipsoidAssetsInParallel({ worker: assetWorker, objectDirectory, publicDirectory, mapNames: [], materialsOnly: true })).assets.map(filename) : [];
+  // The datasets an adding run prepares, each with the surface map it reads, and the published ones it no longer declares.
+  const publishedControls = publishedPlan && addDatasets ? requireArray(publishedPlan.datasets.controls, 'published dataset controls').map(control => requireRecord(control, 'published dataset')) : [];
+  const publishedIds = new Set(publishedControls.map(control => requireString(control.id, 'published dataset id')));
+  const added = addDatasets ? bindingSource.controls.filter(control => !publishedIds.has(control.id)) : [];
+  const addedMaps = added.map(control => {
+    const map = config.surface.maps.find(candidate => candidate.name === control.surfacePagePrefix);
+    if (!map) throw new Error(`${descriptor.id}: added dataset ${control.id} reads no surface map of its own; run the full preparation.`);
+    return map.name;
+  });
+  const publishedRaster = reuseImages ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>> : null;
+  const addedRaster = added.length ? await preparePagedEllipsoidAssetsInParallel({ worker: assetWorker, objectDirectory, publicDirectory, mapNames: addedMaps, mapsOnly: true }) : { assets: [] };
+  // A dataset that left takes its thumbnail, pages and pole atlas out of the published list.
+  const left = new Set(publishedControls.filter(control => !bindingSource.controls.some(current => current.id === control.id))
+    .flatMap(control => [control.thumbnailUrl, control.polesUrl, ...(Array.isArray(control.surfaceUrls) ? control.surfaceUrls : [])]));
+  const rasterAssets = !publishedRaster ? await preparePagedEllipsoidAssetsInParallel({ worker: assetWorker, objectDirectory, publicDirectory, mapNames: config.surface.maps.map(map => map.name) })
+    : addDatasets ? { ...publishedRaster, assets: [...new Set([...requireArray(publishedRaster.assets, 'published raster assets').map(asset => requireString(asset, 'published raster asset')).filter(asset => !left.has(asset)), ...addedRaster.assets])].sort() }
+    : publishedRaster;
   const context = { sourceDirectory, publicDirectory, config, scene };
   // The city catalogue is an authored capability (a search over GeoNames places on the globe), not a requirement of a globe.
   // It reads only the scene geometry, so a reuse-images run rebuilds it as well.
@@ -96,26 +117,33 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
       error => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error; }) : null;
   // A reuse run may drop datasets and texture level widths: their banks, pole atlases and levels leave the published levels,
   // the rest stay as published.
-  const textureLevels = reuseImages ? publishedLevels && keepTextureLevelWidths(keepTextureLevelBanks(publishedLevels,
+  // An adding run prepares the new datasets' levels and sheets and reads only the dimensions of every carried page, so the
+  // record is the one a full preparation writes.
+  const addedIds = new Set(added.map(control => control.id));
+  const addedPages = new Set(datasets.controls.filter(dataset => addedIds.has(dataset.id)).flatMap(dataset => [dataset.polesUrl, ...(dataset.surfaceUrls ?? [])]));
+  const textureLevels = added.length ? await prepareTextureLevels({ config, plan: scene, datasets, publicDirectory, carried: url => !addedPages.has(url) })
+    : reuseImages ? publishedLevels && keepTextureLevelWidths(keepTextureLevelBanks(publishedLevels,
       new Set(surfaceBankInventory(scene, datasets, config.publicBase).map(bank => bank.id)), new Set(datasets.controls.map(dataset => dataset.id))),
       config.textureLevels?.widths ?? [], config.atlas.pageSize)
     : await prepareTextureLevels({ config, plan: scene, datasets, publicDirectory });
   if (textureLevels) await write(outputDirectory, 'texture-levels', textureLevels);
-  if (publishedPlan && !publishedSubset(publishedPlan.datasets, datasets)) throw new Error(`${descriptor.id}: datasets differ from the published preparation beyond removed datasets; run the full preparation.`);
+  if (publishedPlan && !publishedSubset(publishedPlan.datasets, datasets, addedIds)) throw new Error(`${descriptor.id}: datasets differ from the published preparation beyond ${addDatasets ? 'added and ' : ''}removed datasets; run the full preparation.`);
+  // Every image the added datasets brought: their maps' pages, pole atlases and thumbnails, and those pages' levels and sheets.
+  const addedImages = added.length ? [...new Set([...addedRaster.assets, ...(textureLevels?.entries ?? []).filter(entry => addedIds.has(/^(?:page|sheet|poles):([^:]+)/u.exec(entry.key)?.[1] ?? '')).map(entry => entry.url)].map(filename))].sort() : [];
   const controls = requireObjectControls(preparedContent.controls, descriptor.id);
   const rawDefinition = await preparePagedEllipsoidPresentation({ config, plan: scene, datasets, sky, sun, catalog, textureLevels, controls });
   const definition = withFocusedCamera(rawDefinition, sky);
   for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(catalog ? { places: catalog } : {}), datasets, content, runtime: definition })) await write(outputDirectory, name, value);
   await write(outputDirectory, 'authored-preparation', { schema: AUTHORED_PREPARATION_SCHEMA, id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true} } satisfies AuthoredPreparationReceipt);
-  return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content, recomputedImages };
+  return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content, recomputedImages, addedDatasets: [...addedIds], addedImages };
 }
 
-/** Whether `current` is the published datasets less some of them: every remaining control and provenance line is
- * unchanged, and nothing else differs. */
-function publishedSubset(published: Record<string, unknown>, current: {controls: readonly {id: string}[]; provenance?: Record<string, unknown>}) {
+/** Whether `current` is the published datasets less some of them, plus the `added` ones: every remaining control and
+ * provenance line is unchanged, and nothing else differs. */
+function publishedSubset(published: Record<string, unknown>, current: {controls: readonly {id: string}[]; provenance?: Record<string, unknown>}, added: ReadonlySet<string> = new Set()) {
   const controls = new Map(requireArray(published.controls, 'published dataset controls').map(control => [requireString(requireRecord(control, 'published dataset').id, 'published dataset id'), canonical(control)]));
   const provenance = requireRecord(published.provenance ?? {}, 'published dataset provenance');
   const { controls: _published, provenance: _provenance, ...rest } = published, { controls: currentControls, provenance: currentProvenance = {}, ...currentRest } = current;
-  return canonical(rest) === canonical(currentRest) && currentControls.every(control => controls.get(control.id) === canonical(control))
+  return canonical(rest) === canonical(currentRest) && currentControls.every(control => added.has(control.id) || controls.get(control.id) === canonical(control))
     && Object.entries(currentProvenance).every(([key, value]) => canonical(provenance[key]) === canonical(value));
 }

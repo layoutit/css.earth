@@ -21,7 +21,8 @@ The planned browser lane and its current implementation limits are documented in
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check published keys, test types and a production build/browser probe. They do not publish the site or run on PRs. |
 | [Site safety net](../.github/workflows/site-safety-net.yml) | PR declaration gate for refactor labels and renames or moves under `site/`; require this gate in branch protection. Application inputs (tests excluded), `tool-change` or dispatch select the full comparison. Docs/tools-only changes run universe tests without builds. Main pushes produce one commit-addressed base archive. Semantic outputs require declared globs within the computed closure. [Modes, settings and cost](build-comparison.md). |
-| [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping, then publishes to Cloudflare. Merging validates the gate; it does not deploy. |
+| [ENSO daily refresh](../.github/workflows/enso-daily.yml) | Scheduled once a day and manual dispatch: moves Earth's ENSO steps to NASA's newest day, publishes that day's files and opens a pull request that merges itself. See [ENSO daily refresh](#enso-daily-refresh). |
+| [Deploy](../.github/workflows/deploy.yml) | Manual dispatch, and the push of a merge that moves Earth's ENSO days. The default R2 deployment checks build asset references and requires verified published keys before shipping, then publishes to Cloudflare. Merging validates the gate; it does not deploy. |
 
 The astroquery filter covers the owning workspaces of its discovered test files and their transitive runtime dependencies, toolchain pins and lane configuration. Its pip and toolchain caches are keyed on the pinned requirements and toolchain record. A skipped test or an incomplete derived file run fails the lane.
 
@@ -84,6 +85,32 @@ How the Worker behaves:
   `page-handler-fallback` with the reason. The page's scripts read a view, dataset or feature from the address; a
   submitted search (`q`) and everything a reader without scripts would get are not rendered.
 - The Worker answers every find request itself; the browser keeps an answer for five minutes.
+
+## ENSO daily refresh
+
+Earth's ENSO dataset steps through NASA's newest MUR analysis and the thirteen days before it. The
+[ENSO daily refresh](../.github/workflows/enso-daily.yml) moves those steps once a day, at 14:17 UTC:
+
+1. `refresh-earth-enso.mts` reads the days GIBS has published. With no new day the run ends there.
+2. It downloads the new day's 3,200 tiles, drops the day that left and rewrites Earth's declarations.
+3. It mirrors the new day's tile archive and receipt to R2 from the `r2-publish` environment, one
+   `publish-source-cache.mts --file=… --key=earth/science/mur/<date>/…` call each.
+4. `prepare-object.mts earth --add-datasets` bakes the new day alone, and `publish-runtime-assets.mts` publishes its
+   files. Every other Earth file keeps its content address; the run fails if one would change.
+5. It pushes `chore/enso-<date>` and opens a pull request with auto-merge on. The merge moves
+   `src/objects/earth/source/science/mur/`, and that push starts the Deploy workflow.
+
+It needs one secret besides the R2 pair: `GH_API_TOKEN`, a GitHub fine-grained token for this repository with read and write
+access to contents and pull requests. A pull request opened by the workflow's own token starts no workflow, so the
+required checks would never report and it could not merge. The name is general on purpose: any job that opens a pull
+request can use the same token.
+
+When a run fails, nothing is merged and the steps stay where they were; the next day's run starts from main again and
+acquires every day it is missing. A day already on the source mirror is taken from there, so a rerun downloads nothing
+from NASA twice. To move the steps by hand, run the commands the job runs: the refresh, the two mirror calls for each
+new day, the `--add-datasets` bake, then `publish-runtime-assets.mts --object=earth --since=origin/main`.
+`publish-source-cache.mts --object=earth` mirrors Earth's downloaded inputs but not the tile archives, which the
+manifest lists as generated intermediates.
 
 ## Keep the PR path lean without dropping proof
 
@@ -361,7 +388,9 @@ Before merging a CI change:
 - Verify repository-required status names still match the workflows after any
   rename. Adding a required check needs an explicit budget review.
 - Merging triggers main validation. Deploying is a separate manual dispatch;
-  record the intended revision when requesting a deployment.
+  record the intended revision when requesting a deployment. The one automatic
+  deploy follows a merge that moves Earth's ENSO days, and it ships everything
+  main holds at that commit.
 
 Update this guide and the workflow budget comments in the same PR whenever the
 selection, cache, publication or deployment contract changes.

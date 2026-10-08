@@ -13,7 +13,7 @@ import type { PagedAssetJob } from '@cssearth/bake/objects/layers/paged-ellipsoi
 const solarGeometry: SolarGeometry = await import(pathToFileURL(resolve(checkoutProjectRoot(import.meta.url), 'src/platform/solar-geometry.mts')).href);
 const data = requireRecord(workerData, 'paged asset worker data'), input = requireRecord(data.job, 'paged asset job');
 const mode = requireString(input.mode, 'paged asset job mode');
-if (mode !== 'maps' && mode !== 'extras' && mode !== 'materials') throw new TypeError(`Unknown paged asset job mode: ${mode}.`);
+if (mode !== 'maps' && mode !== 'extras' && mode !== 'thumbnails' && mode !== 'materials') throw new TypeError(`Unknown paged asset job mode: ${mode}.`);
 const slice = input.materialSlice === undefined ? undefined : requireRecord(input.materialSlice, 'material slice');
 const job: PagedAssetJob = { mode,
   ...(Array.isArray(input.surfaceMapNames) ? { surfaceMapNames: input.surfaceMapNames.map(name => requireString(name, 'surface map name')) } : {}),

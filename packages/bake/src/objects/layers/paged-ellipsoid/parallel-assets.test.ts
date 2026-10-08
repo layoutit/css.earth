@@ -10,7 +10,8 @@ import { preparePagedEllipsoidAssetsInParallel } from '@cssearth/bake/objects/la
 const WORKER = `import { parentPort, workerData } from 'node:worker_threads';
 const { objectDirectory, publicDirectory, job } = workerData;
 if (job.mode === 'maps' && job.surfaceMapNames[0] === 'broken') throw new Error('broken map');
-const name = job.mode === 'maps' ? job.surfaceMapNames[0] : job.mode === 'materials' ? \`material-\${job.materialSlice.index}-of-\${job.materialSlice.count}\` : 'extras';
+const name = job.mode === 'maps' ? job.surfaceMapNames[0] : job.mode === 'materials' ? \`material-\${job.materialSlice.index}-of-\${job.materialSlice.count}\`
+  : job.mode === 'thumbnails' ? \`thumbnails-\${job.surfaceMapNames.join('+')}\` : 'extras';
 parentPort.postMessage([\`\${publicDirectory}/\${name}\`, \`\${objectDirectory}/\${name}\`]);
 `;
 
@@ -37,6 +38,13 @@ test('materials only runs the material slices alone', async t => {
   const worker = await fixtureWorker(t);
   const { assets } = await preparePagedEllipsoidAssetsInParallel({ worker, objectDirectory: 'object', publicDirectory: 'public', mapNames: ['day'], materialsOnly: true });
   assert.ok(assets.length > 0 && assets.every(asset => /\/material-\d+-of-\d+$/u.test(asset)));
+});
+
+test('maps only runs the named maps and their thumbnails: no extras, no material slice', async t => {
+  const worker = await fixtureWorker(t);
+  const { assets } = await preparePagedEllipsoidAssetsInParallel({ worker, objectDirectory: 'object', publicDirectory: 'public', mapNames: ['monday', 'tuesday'], mapsOnly: true });
+  assert.deepEqual(assets.filter(asset => asset.startsWith('public/')), ['public/monday', 'public/thumbnails-monday+tuesday', 'public/tuesday']);
+  assert.equal(assets.length, 6);
 });
 
 test('a failed job fails the preparation with its job named', async t => {
