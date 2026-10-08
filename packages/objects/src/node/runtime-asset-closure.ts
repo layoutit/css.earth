@@ -5,6 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { readFile, readdir, rename, rm, lstat, unlink, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { promisify } from "node:util";
+import { deliveredPreparedFiles, isWorkingPreparedFile } from './prepared-delivery.js';
 
 /**
  * One inventory per object, `src/objects/<id>/inventory.json`: every baked file the object ships that git does not
@@ -186,29 +187,10 @@ export async function inventoryPublicAssets({ objectId, objectDirectory, prepare
   return updateInventory({ objectId, objectDirectory, location: 'public', assets: await hashedAssets(publicRoot, filenames, objectId) });
 }
 
-/**
- * Files under a body's `prepared/` that a checkout regenerates itself, so they are never inventoried or published:
- * the staging-only inventory, JSON transport and page written from the restored runtime, and the radial-terrain reports
- * and source-index rasters that only the audits read.
- */
-export function isRegeneratedPreparedFile(filename: string): boolean {
-  return ['inventory.json', 'object.json', 'page.json'].includes(filename) ||
-    /^terrain(-[a-z0-9-]+)?\.json$/u.test(filename) || /-source-index\.json$/u.test(filename);
-}
-
-/**
- * Files an earlier preparation wrote at the top of `prepared/` and none writes now. A checkout baked before the retirement
- * still holds them, so a rebake there would list and publish them: the generated lineage record (lineage is read from the
- * source records since 2026-09-29) and the lens list (`datasets.json` since the same day). Add a name here when a
- * preparation stops writing it.
- */
-export function isRetiredPreparedFile(filename: string): boolean {
-  return ['provenance.json', 'lenses.json'].includes(filename);
-}
-
-/** Every baked file under an object's `prepared/`: what the inventory publishes and `setup:assets` restores. */
+/** Every delivered file under an object's `prepared/`: what the inventory publishes and `setup:assets` restores. The
+ * delivery ledger decides it (prepared-delivery.ts): working records are left out, and an undeclared record is refused. */
 export async function bakedPreparedFiles(preparedRoot: string, objectId: string): Promise<string[]> {
-  return (await runtimeFiles(preparedRoot, objectId, true)).filter(name => !isRegeneratedPreparedFile(name) && !isRetiredPreparedFile(name));
+  return deliveredPreparedFiles(await runtimeFiles(preparedRoot, objectId, true), objectId);
 }
 
 /** Re-inventory part of an object's `prepared/`: the rows `owns` selects are replaced by the baked files it selects, and
@@ -290,7 +272,8 @@ async function runtimeFiles(root: string, objectId: string, nested: boolean, pre
 
 async function assertDirectoryClosure(root: string, filenames: readonly string[], objectId: string, nested = false, exclude: readonly string[] = []) {
   const excluded = new Set(exclude);
-  const actual = (await runtimeFiles(root, objectId, nested)).filter(filename => !excluded.has(filename) || filenames.includes(filename));
+  // A working record beside the delivered files is the checkout's own (prepared-delivery.ts), not a gap in the inventory.
+  const actual = (await runtimeFiles(root, objectId, nested)).filter(filename => filenames.includes(filename) || !excluded.has(filename) && !(nested && isWorkingPreparedFile(filename)));
   const expected = [...filenames].sort((left, right) => left.localeCompare(right));
   actual.sort((left, right) => left.localeCompare(right));
   if (expected.join("\0") !== actual.join("\0")) {
