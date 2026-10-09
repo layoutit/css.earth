@@ -82,3 +82,23 @@ test('changes are numbers only; the CLI\'s --set reads path=value', () => {
   assert.deepEqual(readSetArgument('geometry.rings.plates.0.tiltDeg=31.5'), { path: 'geometry.rings.plates.0.tiltDeg', value: 31.5 });
   assert.throws(() => readSetArgument('geometry.tilt=abc'), /--set/);
 });
+
+test('changes made at once each land: none overwrites another', async () => {
+  const { root, tracked, done } = await fixture();
+  try {
+    const states = await Promise.all([
+      editWorkingCopy(root, 'demo', [{ path: 'geometry.rings.plates.0.tiltDeg', value: 30 }]),
+      editWorkingCopy(root, 'demo', [{ path: 'geometry.rings.plates.0.radiusArcsec', value: 260 }]),
+      editWorkingCopy(root, 'demo', [{ path: 'bake.maxFacePixels', value: 1024 }]),
+    ]);
+    assert.equal(states.at(-1)!.changes.length, 3);
+    assert.deepEqual((await readRecipeState(root, 'demo')).changes.map(change => change.path).sort(),
+      ['bake.maxFacePixels', 'geometry.rings.plates.0.radiusArcsec', 'geometry.rings.plates.0.tiltDeg']);
+    // An edit and a Save at once: the Save takes what came before it, and an edit after it starts a new copy.
+    const [saved] = await Promise.all([saveWorkingCopy(root, 'demo'), editWorkingCopy(root, 'demo', [{ path: 'geometry.rings.plates.0.tiltDeg', value: 31 }])]);
+    assert.equal(saved.length, 3);
+    assert.ok(tracked().includes('"tiltDeg": 30') && tracked().includes('"maxFacePixels": 1024'));
+    assert.deepEqual((await readRecipeState(root, 'demo')).changes, [{ path: 'geometry.rings.plates.0.tiltDeg', from: 30, to: 31 }]);
+    assert.ok(!existsSync(resolve(root, 'src/objects/demo/.local/lab/.lock')), 'the lock is let go');
+  } finally { await done(); }
+});
