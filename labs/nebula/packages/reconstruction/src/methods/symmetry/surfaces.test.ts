@@ -60,3 +60,17 @@ test('the outline is the silhouette about the axis, and the pole’s position an
   assert.equal(surfacePole({ ...prior, axis: [0, -1, 0] }, 90).paDeg, 90);
   assert.equal(surfacePole({ ...prior, axis: [0, 0, 1] }, 0).receding, '-z');
 });
+
+test('an axial position with no light breaks the surface: no part bridges it', () => {
+  // Light at axial positions 0, 2, 3, 5 and 6 (one bin each, 1 is dark and 4 is dark): parts 2–3 and 5–6; 0 alone is no part.
+  const radii = 4, lit = [1, 0, 1, 1, 0, 1, 1], values = new Float32Array(lit.length * radii), coverage = new Float32Array(lit.length * radii).fill(1);
+  lit.forEach((on, row) => { values[row * radii + 2] = on; });
+  const surface = revolvedSurface({ values, coverage, radii, axialMin: 0, axialMax: lit.length - 1, binWidth: 1 }, .5);
+  assert.deepEqual(surface.samples.map(sample => sample.axialCells), [0, 2, 3, 5, 6]);
+  const segments = 8, triangles = stlTriangles(surfaceStl(surface, segments), 'surface.stl');
+  // Two parts of two rings each: one band and two end fans apiece.
+  assert.equal(triangles.length / 9, 2 * (2 * segments + 2 * segments));
+  const axial = new Set<number>();
+  for (let index = 2; index < triangles.length; index += 3) axial.add(triangles[index]!);
+  assert.deepEqual([...axial].sort((a, b) => a - b), [2, 3, 5, 6]);
+});

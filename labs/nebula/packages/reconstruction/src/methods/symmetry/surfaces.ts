@@ -19,7 +19,8 @@ export interface EmissionProfile {
   coverage: Float32Array;
 }
 export interface ProfileSample { axialCells: number; envelopeCells: number; wallCells: number; peak: number }
-export interface RevolvedSurface { samples: ProfileSample[]; envelopeFraction: number; peak: number }
+/** `binWidthCells` is the axial step between neighbouring positions: a larger gap is a break in the surface. */
+export interface RevolvedSurface { samples: ProfileSample[]; envelopeFraction: number; peak: number; binWidthCells: number }
 
 const unitAxis = (prior: SymmetryPrior): [number, number, number] => {
   const norm = Math.hypot(...prior.axis);
@@ -88,7 +89,7 @@ export function revolvedSurface(profile: EmissionProfile, envelopeFraction = .15
     const near = samples.slice(Math.max(0, index - 1), index + 2).filter(other => Math.abs(other.axialCells - sample.axialCells) <= step);
     return { ...sample, envelopeCells: median(near.map(other => other.envelopeCells)), wallCells: median(near.map(other => other.wallCells)) };
   });
-  return { samples: smoothed, envelopeFraction, peak };
+  return { samples: smoothed, envelopeFraction, peak, binWidthCells: profile.binWidth };
 }
 
 /** Runs of consecutive axial samples: each is one closed part of the surface. */
@@ -96,7 +97,7 @@ function parts(surface: RevolvedSurface): ProfileSample[][] {
   const runs: ProfileSample[][] = [];
   for (const sample of surface.samples) {
     const run = runs.at(-1), last = run?.at(-1);
-    if (run && last && sample.axialCells - last.axialCells <= surface.samples[1]!.axialCells - surface.samples[0]!.axialCells + 1e-9) run.push(sample);
+    if (run && last && sample.axialCells - last.axialCells <= surface.binWidthCells + 1e-9) run.push(sample);
     else runs.push([sample]);
   }
   return runs.filter(run => run.length >= 2);
