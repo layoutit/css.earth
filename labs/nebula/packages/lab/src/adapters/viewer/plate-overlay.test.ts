@@ -10,7 +10,8 @@ const read = (path: string): unknown => JSON.parse(readFileSync(resolve(process.
 test('a plate photograph lies on its bank frame\'s sky plane, centred on the target and as wide as its field at the distance', () => {
   for (const id of ['cassiopeia-a-layers', 'cassiopeia-a-miri-layers', 'helix-wfi-layers', 'm57-miri-layers']) {
     const recipe = parseImageLayerRecipe(read(`src/objects/${id}/source/recipe.json`));
-    const { frame } = read(`src/objects/${id}/prepared/image-layers.json`) as { frame: Parameters<typeof skyPlanePoint>[1] & { originM: number[] } };
+    // The bank's frame as its tracked descriptor states it: the prepared copy is restored from R2 and absent on a fresh checkout.
+    const { frame } = (read(`src/objects/${id}/object.json`) as { properties: { frame: Parameters<typeof skyPlanePoint>[1] & { originM: number[] } } }).properties;
     const distanceUnits = Math.hypot(...frame.originM) / frame.metersPerUnit, view = imageLayerView(recipe);
     // The target's own sight line meets the plane at the frame's origin.
     const target = [Math.cos(recipe.target.centerDecDeg * Math.PI / 180) * Math.cos(recipe.target.centerRaDeg * Math.PI / 180),
