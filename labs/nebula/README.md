@@ -82,6 +82,6 @@ Start with [next steps](NEXTSTEPS.md), [research and papers](RESEARCH.md), [the 
 
 One header: the four steps (**Research · Model · Edit · Bake & publish**, `?step=`) and a centered, searchable object picker. Routes retain `?subject=<id>`. The camera buttons are on the left on every step; Edit adds Annotate and the circle tools (Levels, Radial, Difference) under them. The right panel shows the step. The Messier archive stays at `/catalogue`, linked from Research. Changing step does not cancel jobs.
 
-Each step's command runs on one `src/objects/<id>`: `research <id>`, `model <id> --method paper-surfaces|symmetry|kinematic`, `stars <id>`, then `edit`, `save`, `discard`, `bake` and `verify` (`node labs/nebula/run.mts <command> <id>`). The tabs' buttons run the same commands, and the progress strip follows each run.
+Each step's command runs on one `src/objects/<id>`: `research <id>`, `model <id> --method paper-surfaces|symmetry|kinematic`, `stars <id>`, then `edit`, `save`, `discard`, `bake`, `verify` and `publish [--check]` (`node labs/nebula/run.mts <command> <id>`). The tabs' buttons run the same commands, and the progress strip follows each run.
 
 The saved-output navigation check is `node labs/nebula/run.mts browser-workspace-navigation http://127.0.0.1:4331`. It uses isolated browser storage, checks capability/dock consistency, blocks processing operations and verifies durable job receipts remain unchanged.

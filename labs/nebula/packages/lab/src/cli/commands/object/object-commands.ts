@@ -1,7 +1,7 @@
-/** The object commands an agent runs through `labs/nebula/run.mts`: `edit`, `diff`, `save`, `discard`, `bake` and
- * `verify`, each on one `src/objects/<id>`. They call the same shared functions as the lab's buttons, and write their
+/** The object commands an agent runs through `labs/nebula/run.mts`: `edit`, `diff`, `save`, `discard`, `bake`,
+ * `verify` and `publish`, each on one `src/objects/<id>`. They call the same shared functions as the lab's buttons, and write their
  * progress to the object's `.local/lab/progress.jsonl`, which the open lab shows live. */
-import { configuredPlateObjects } from '../../../server/workflows/plates/bake.ts';
+import { configuredPlateObjects, platePublished } from '../../../server/workflows/plates/bake.ts';
 import { bakeObject, objectPath } from '../../../server/workflows/plates/object-bake.ts';
 import { withProgress } from '../../../server/workflows/plates/progress.ts';
 import { verifyObject } from '../../../server/workflows/plates/verify.ts';
@@ -65,4 +65,21 @@ export async function verify(args: string[]) {
   for (const check of report.checks) console.log(`${check.ok ? '✓' : '✗'} ${check.name.padEnd(12)} ${check.message}`);
   console.log(`${id}: ${report.ok ? 'verified' : 'FAILED'}`);
   if (!report.ok) process.exitCode = 1;
+}
+/** `publish <id> --check` asks whether R2 holds the object's inventory (the **Check R2** button); `publish <id>` uploads
+ * it (the **Publish…** button), through the same job the button starts. */
+export async function publish(args: string[]) {
+  const usage = 'publish <id> [--check]';
+  const id = objectArgument(usage, args), extra = args.slice(1);
+  if (extra.some(arg => arg !== '--check')) throw new TypeError(`Usage: ${usage}`);
+  if (extra.includes('--check')) {
+    const answer = await platePublished(root, objectPath(id));
+    console.log(`${answer.ok ? '✓' : '✗'} ${id}: ${answer.message}`);
+    if (!answer.ok) process.exitCode = 1;
+    return;
+  }
+  const controller = new AbortController();
+  process.once('SIGINT', () => controller.abort());
+  const receipt = await bakeObject(root, id, 'publish', controller.signal, (message, fraction) => console.log(`${String(Math.round(fraction * 100)).padStart(3)}% ${message}`));
+  console.log(`${id}: published in ${receipt.seconds} s · ${receipt.resources} files`);
 }

@@ -6,6 +6,7 @@ export const labCommands: Record<string, string> = {
   "discard": "labs/nebula/packages/lab/src/cli/commands/object/discard.ts",
   "bake": "labs/nebula/packages/lab/src/cli/commands/object/bake.ts",
   "verify": "labs/nebula/packages/lab/src/cli/commands/object/verify.ts",
+  "publish": "labs/nebula/packages/lab/src/cli/commands/object/publish.ts",
   "research": "labs/nebula/packages/lab/src/cli/commands/object/research.ts",
   "model": "labs/nebula/packages/lab/src/cli/commands/object/model.ts",
   "stars": "labs/nebula/packages/lab/src/cli/commands/object/stars.ts",
