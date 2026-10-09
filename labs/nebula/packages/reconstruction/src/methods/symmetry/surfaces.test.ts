@@ -73,4 +73,7 @@ test('an axial position with no light breaks the surface: no part bridges it', (
   const axial = new Set<number>();
   for (let index = 2; index < triangles.length; index += 3) axial.add(triangles[index]!);
   assert.deepEqual([...axial].sort((a, b) => a - b), [2, 3, 5, 6]);
+  // Light only at positions with darkness between them is no surface at all.
+  const apart = new Float32Array(3 * radii); apart[2] = 1; apart[2 * radii + 2] = 1;
+  assert.throws(() => revolvedSurface({ values: apart, coverage: new Float32Array(3 * radii).fill(1), radii, axialMin: 0, axialMax: 2, binWidth: 1 }, .5), /no surface/);
 });

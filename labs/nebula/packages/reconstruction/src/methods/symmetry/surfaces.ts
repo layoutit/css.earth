@@ -89,7 +89,9 @@ export function revolvedSurface(profile: EmissionProfile, envelopeFraction = .15
     const near = samples.slice(Math.max(0, index - 1), index + 2).filter(other => Math.abs(other.axialCells - sample.axialCells) <= step);
     return { ...sample, envelopeCells: median(near.map(other => other.envelopeCells)), wallCells: median(near.map(other => other.wallCells)) };
   });
-  return { samples: smoothed, envelopeFraction, peak, binWidthCells: profile.binWidth };
+  const surface = { samples: smoothed, envelopeFraction, peak, binWidthCells: profile.binWidth };
+  if (!parts(surface).length) throw new TypeError('The fit is brighter than the envelope threshold at no two neighbouring axial positions: it holds no surface.');
+  return surface;
 }
 
 /** Runs of consecutive axial samples: each is one closed part of the surface. */
