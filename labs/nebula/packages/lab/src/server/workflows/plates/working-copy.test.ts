@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, rm, utimes, writeFile } from 'node:fs/promises';
+import { spawn } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import test from 'node:test';
-import { discardWorkingCopy, editWorkingCopy, readRecipeState, readSetArgument, recipeChanges, saveWorkingCopy, trackedRecipePath, workingRecipePath, workingRecipeText } from './working-copy.ts';
+import { discardWorkingCopy, editWorkingCopy, holdLock, readRecipeState, readSetArgument, recipeChanges, saveWorkingCopy, trackedRecipePath, workingRecipePath, workingRecipeText } from './working-copy.ts';
 
 /** A recipe spelled the way tracked recipes are, including a number JSON.stringify would respell. */
 const RECIPE = '{\n  "geometry": {\n    "rings": { "plates": [ { "id": "disc", "radiusArcsec": 250, "tiltDeg": 23 } ] },\n    "floor": 1e-06\n  },\n  "bake": { "maxFacePixels": 2048 }\n}\n';
@@ -101,4 +102,23 @@ test('changes made at once each land: none overwrites another', async () => {
     assert.deepEqual((await readRecipeState(root, 'demo')).changes, [{ path: 'geometry.rings.plates.0.tiltDeg', from: 30, to: 31 }]);
     assert.ok(!existsSync(resolve(root, 'src/objects/demo/.local/lab/.lock')), 'the lock is let go');
   } finally { await done(); }
+});
+
+test('the lock waits for a live holder however long it takes, takes over a dead one, and lets go of its own only', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'lab-lock-')), lock = resolve(directory, '.lock');
+  const holder = spawn(process.execPath, ['-e', 'setTimeout(() => {}, 60000)'], { stdio: 'ignore' });
+  try {
+    // A lock file older than any timeout, of a process that still runs: never taken.
+    await writeFile(lock, JSON.stringify({ pid: holder.pid, token: 'live' }));
+    await utimes(lock, new Date(0), new Date(0));
+    await assert.rejects(holdLock(directory, async () => 'ran', 200), /is changing the working copy/);
+    assert.equal(JSON.parse(readFileSync(lock, 'utf8')).token, 'live');
+    // Its process ends: the lock is taken over.
+    holder.kill(); await new Promise(accept => holder.once('exit', accept));
+    assert.equal(await holdLock(directory, async () => 'ran', 2000), 'ran');
+    assert.ok(!existsSync(lock));
+    // A holder whose lock was replaced meanwhile leaves the replacement in place.
+    await holdLock(directory, async () => { await writeFile(lock, JSON.stringify({ pid: process.pid, token: 'other' })); });
+    assert.equal(JSON.parse(readFileSync(lock, 'utf8')).token, 'other');
+  } finally { holder.kill(); await rm(directory, { recursive: true, force: true }); }
 });

@@ -4,7 +4,7 @@
  * tracked text it started from (`base.json`): its changes are the numbers that differ from that base, so a change the
  * tracked recipe takes meanwhile is kept, never reverted by a Save. The CLI and the lab server both call these. */
 import { isRecord } from '@cssearth/core';
-import { mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
+import { link, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 import { resolve } from 'node:path';
 import { setRecipeNumber } from './recipe-text.ts';
@@ -74,30 +74,56 @@ async function write(root: string, id: string, base: string, working: string) {
 
 /** One change to an object's working copy at a time. Each change reads the copy, changes it and writes it back, so two
  * at once (a slider's requests, or the lab and the CLI) would drop one. A queue orders this process's changes; a lock
- * directory beside the copy orders them across processes, and is taken over when a crashed holder left it (30 s). */
+ * file beside the copy orders them across processes on this machine. */
 const queues = new Map<string, Promise<unknown>>();
-const LOCK_STALE_MS = 30000, LOCK_WAIT_MS = 15000;
+const LOCK_WAIT_MS = 15000;
 function serialized<T>(root: string, id: string, work: () => Promise<T>): Promise<T> {
   const key = labDirectory(root, id), previous = queues.get(key) ?? Promise.resolve();
-  const run = previous.catch(() => undefined).then(() => locked(key, work));
+  const run = previous.catch(() => undefined).then(() => holdLock(key, work));
   const settled = run.catch(() => undefined);
   queues.set(key, settled);
   void settled.then(() => { if (queues.get(key) === settled) queues.delete(key); });
   return run;
 }
-async function locked<T>(directory: string, work: () => Promise<T>): Promise<T> {
+interface LockOwner { pid: number; token: string }
+/** The lock's holder; `pid` 0 while the file is being written, or when a holder died writing it (then its age decides). */
+const readOwner = (path: string): Promise<LockOwner & { ageMs: number } | null> => Promise.all([readFile(path, 'utf8'), stat(path)]).then(([text, found]) => {
+  let value: unknown = null;
+  try { value = JSON.parse(text); } catch { /* Not yet written whole. */ }
+  const ageMs = Date.now() - found.mtimeMs;
+  return isRecord(value) && Number.isSafeInteger(value.pid) && typeof value.token === 'string' ? { pid: value.pid as number, token: value.token, ageMs } : { pid: 0, token: '', ageMs };
+}, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
+/** A holder is alive while its process is: a lock is never taken from a live holder, however long it takes. A lock
+ * that names no process is being written for a second, and was left by a holder that died writing it after that. */
+const alive = (owner: LockOwner & { ageMs: number }) => {
+  if (owner.pid === 0) return owner.ageMs < 1000;
+  try { process.kill(owner.pid, 0); return true; } catch (error) { return (error as NodeJS.ErrnoException).code === 'EPERM'; }
+};
+/** Runs `work` holding `<directory>/.lock`, a file naming this process and a token of its own. A lock whose process has
+ * died is taken over: moved aside under a name of its own, and deleted only if it is still the dead holder's (a lock a
+ * live process took meanwhile is put back). Release deletes the lock only while it is this holder's. */
+export async function holdLock<T>(directory: string, work: () => Promise<T>, waitMs = LOCK_WAIT_MS): Promise<T> {
   await mkdir(directory, { recursive: true });
-  const lock = resolve(directory, '.lock'), started = Date.now();
+  const lock = resolve(directory, '.lock'), token = randomUUID(), started = Date.now();
   for (;;) {
-    try { await mkdir(lock); break; } catch (error) {
+    try { await writeFile(lock, JSON.stringify({ pid: process.pid, token }), { flag: 'wx' }); break; } catch (error) {
       if ((error as NodeJS.ErrnoException).code !== 'EEXIST') throw error;
-      const held = await stat(lock).then(found => Date.now() - found.mtimeMs, () => 0);
-      if (held > LOCK_STALE_MS) { await rm(lock, { recursive: true, force: true }); continue; }
-      if (Date.now() - started > LOCK_WAIT_MS) throw new Error(`${directory}: another change to the working copy has held it for ${Math.round(held / 1000)} s.`);
-      await new Promise(accept => setTimeout(accept, 20));
     }
+    const owner = await readOwner(lock);
+    if (owner && !alive(owner)) {
+      const aside = `${lock}.${randomUUID()}`;
+      try { await rename(lock, aside); } catch (error) { if ((error as NodeJS.ErrnoException).code === 'ENOENT') continue; throw error; }
+      const moved = await readOwner(aside);
+      if (moved && moved.token !== owner.token) await link(aside, lock).catch(() => undefined);
+      await rm(aside, { force: true });
+      continue;
+    }
+    if (Date.now() - started > waitMs) throw new Error(`${directory}: process ${owner?.pid ?? '?'} is changing the working copy; try again when it is done.`);
+    await new Promise(accept => setTimeout(accept, 20));
   }
-  try { return await work(); } finally { await rm(lock, { recursive: true, force: true }); }
+  try { return await work(); } finally {
+    if ((await readOwner(lock))?.token === token) await rm(lock, { force: true });
+  }
 }
 async function clear(root: string, id: string) {
   await rm(workingRecipePath(root, id), { force: true });
