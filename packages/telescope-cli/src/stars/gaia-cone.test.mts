@@ -14,7 +14,8 @@ test('the cone query bounds the circle and the G limit before the brightest rows
   const query = gaiaConeQuery(readGaiaConeRequest({ raDeg: 350.85, decDeg: 58.815, radiusDeg: 0.25, magnitudeLimit: 15, limit: 300 }));
   assert.match(query, /CIRCLE\('ICRS',350\.85,58\.815,0\.25\)/);
   assert.match(query, /phot_g_mean_mag<15\)/);
-  assert.match(query, /SELECT TOP 300 /);
+  // One row past the limit: its presence is how a cut answer is told from a whole one.
+  assert.match(query, /SELECT TOP 301 /);
   assert.match(query, /LEFT OUTER JOIN gedr3dist\.main AS d ON c\.source_id=d\.source_id ORDER BY c\.phot_g_mean_mag,c\.source_id$/);
   assert.throws(() => readGaiaConeRequest({ raDeg: 360, decDeg: 0, radiusDeg: 1 }), RangeError);
   assert.throws(() => readGaiaConeRequest({ raDeg: 1, decDeg: 0, radiusDeg: 0 }), RangeError);
@@ -37,10 +38,17 @@ test('a row parses to a star: color from BP and RP, absent values null, a distan
 test('the cone asks one row past its limit, says when it was cut, and keeps the answer at --out', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'gaia-cone-'));
   const asked: { query: string; maxrec?: number; mode?: string }[] = [];
-  const rows = async (_service: string, query: string, maxrec?: number, mode?: 'async') => { asked.push({ query, maxrec, mode }); return [row(), row({ source_id: '4157149651519003393' })]; };
+  // The archive answers as ADQL does: never more rows than the query's TOP, whatever maxrec allows.
+  const held = [row(), row({ source_id: '4157149651519003393' })];
+  const rows = async (_service: string, query: string, maxrec?: number, mode?: 'async') => {
+    asked.push({ query, maxrec, mode }); return held.slice(0, Math.min(Number(/SELECT TOP (\d+) /.exec(query)![1]), maxrec ?? Infinity));
+  };
   const cone = await gaiaCone(readGaiaConeRequest({ raDeg: 256.4, decDeg: -10.1, radiusDeg: 0.1, limit: 1 }), { out: join(directory, 'cone.json'), rows });
   assert.deepEqual(asked.map(call => ({ maxrec: call.maxrec, mode: call.mode })), [{ maxrec: 2, mode: 'async' }]);
   assert.equal(cone.truncated, true); assert.equal(cone.stars.length, 1);
+  // A field that holds no more than the limit is whole.
+  const whole = await gaiaCone(readGaiaConeRequest({ raDeg: 256.4, decDeg: -10.1, radiusDeg: 0.1, limit: 2 }), { rows });
+  assert.equal(whole.truncated, false); assert.equal(whole.stars.length, 2);
   const saved = JSON.parse(await readFile(join(directory, 'cone.json'), 'utf8'));
   assert.equal(saved.schema, GAIA_CONE_SCHEMA); assert.equal(saved.stars[0].sourceId, '4157149651519003392');
 });

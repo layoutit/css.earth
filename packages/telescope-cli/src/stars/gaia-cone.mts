@@ -45,12 +45,12 @@ export function readGaiaConeRequest(value: { raDeg: number; decDeg: number; radi
 }
 
 /** The ADQL: the cone and the G limit inside a planner fence (GAVO's documented `SELECT ALL` CTE), then the brightest
- * `limit` of those, each joined to its Bailer-Jones distance where one exists. */
+ * `limit` of those and one more, which tells a cut answer from a complete one, each joined to its Bailer-Jones distance where one exists. */
 export function gaiaConeQuery(request: GaiaConeRequest): string {
   const { raDeg, decDeg, radiusDeg, magnitudeLimit, limit } = request;
   return `WITH c AS (SELECT ALL ${GAIA_COLUMNS.join(',')} FROM gaia.dr3lite WHERE `
     + `1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',${raDeg},${decDeg},${radiusDeg})) AND phot_g_mean_mag<${magnitudeLimit}) `
-    + `SELECT TOP ${limit} ${GAIA_COLUMNS.map(name => `c.${name}`).join(',')},${DISTANCE_COLUMNS.map(name => `d.${name}`).join(',')} `
+    + `SELECT TOP ${limit + 1} ${GAIA_COLUMNS.map(name => `c.${name}`).join(',')},${DISTANCE_COLUMNS.map(name => `d.${name}`).join(',')} `
     + 'FROM c LEFT OUTER JOIN gedr3dist.main AS d ON c.source_id=d.source_id ORDER BY c.phot_g_mean_mag,c.source_id';
 }
 
