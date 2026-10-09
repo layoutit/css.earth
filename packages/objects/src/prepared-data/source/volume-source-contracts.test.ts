@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFileSync } from 'node:fs';
-import { parseVolumeSourcePreview } from './volume-presentation-source.js';
+import { isScratchSourcePath, parseVolumeSourcePreview, scratchSourceCachePath } from './volume-presentation-source.js';
 import { VOLUME_SOURCE_MANIFEST_SCHEMA, parseVolumeSourceManifest, parseVolumeContextProducts } from './volume-source-manifest.js';
 
 const manifest = { schema: VOLUME_SOURCE_MANIFEST_SCHEMA, pathBase: 'repository', inputs: 'owner-read' };
@@ -14,6 +14,17 @@ test('volume preview contract preserves all historically admitted kinds and cach
     { path: '.local/image.png', skyBands: { path: 'source/bands.json' } },
   ]) assert.deepEqual(parseVolumeSourcePreview(preview), preview);
   assert.deepEqual(parseVolumeSourcePreview({ path: '.local/image.png', authoredFrom: 123 }), { path: '.local/image.png' });
+});
+
+test('an object\'s own .local/ is scratch like the shared one, and is mirrored under objects/<id>/', () => {
+  const preview = { path: 'src/objects/lmc-volume/.local/new-references/iotw2547a.jpg', url: 'https://example.test/image.jpg' };
+  assert.deepEqual(parseVolumeSourcePreview(preview), preview);
+  assert.deepEqual(parseVolumeSourcePreview({ path: 'src/objects/m2-9-volume/.local/bands.png', skyBands: { path: 'source/bands.json' } }), { path: 'src/objects/m2-9-volume/.local/bands.png', skyBands: { path: 'source/bands.json' } });
+  for (const path of ['.local/nebula-lab/a.jpg', 'src/objects/lmc-volume/.local/a.jpg']) assert.equal(isScratchSourcePath(path), true);
+  for (const path of ['src/objects/lmc-volume/source/a.jpg', 'src/objects/.local/a.jpg', 'labs/.local/a.jpg']) assert.equal(isScratchSourcePath(path), false);
+  assert.equal(scratchSourceCachePath('.local/nebula-lab/a.jpg'), 'nebula-lab/a.jpg');
+  assert.equal(scratchSourceCachePath('src/objects/lmc-volume/.local/new-references/a.jpg'), 'objects/lmc-volume/new-references/a.jpg');
+  assert.throws(() => scratchSourceCachePath('src/objects/lmc-volume/source/a.jpg'), { message: 'Not a scratch path: src/objects/lmc-volume/source/a.jpg' });
 });
 
 test('volume preview rejection diagnostics retain discriminator and crop ordering', () => {
