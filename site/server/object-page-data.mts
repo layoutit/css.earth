@@ -49,17 +49,25 @@ async function preparedControls(directory: string) {
   return controls;
 }
 
-/** The bank a scene body's default dataset shows (a galaxy's image layers, a nebula's volume), or null: the page's head
- * asks for that bank's file list with the page (`startup-requests.mts`), so the first image does not wait a round trip. */
-export async function defaultDatasetBank(id: string, root = process.cwd()): Promise<string | null> {
+async function defaultDatasetControl(id: string, root: string) {
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object page identity.');
   const controls = await preparedControls(resolve(root, 'src/objects', id)).catch(error => {
     if (error && typeof error === 'object' && 'code' in error && error.code === 'ENOENT') return null;
     throw error;
   });
   const datasets = controls?.datasets;
-  const volume = datasets?.controls.find(dataset => dataset.id === datasets.defaultDataset)?.volume;
-  return volume?.objectId ?? null;
+  return datasets?.controls.find(dataset => dataset.id === datasets.defaultDataset) ?? null;
+}
+
+/** The bank a scene body's default dataset shows (a galaxy's image layers, a nebula's volume), or null: the page's head
+ * asks for that bank's file list with the page (`startup-requests.mts`), so the first image does not wait a round trip. */
+export async function defaultDatasetBank(id: string, root = process.cwd()): Promise<string | null> {
+  return (await defaultDatasetControl(id, root))?.volume?.objectId ?? null;
+}
+
+/** A scene body's default dataset, or null: the one its page shows before any is chosen. */
+export async function defaultDatasetId(id: string, root = process.cwd()): Promise<string | null> {
+  return (await defaultDatasetControl(id, root))?.id ?? null;
 }
 
 /** The ids of the datasets whose tables a scene body serves apart (`/objects/<id>/datasets/<dataset>.json`). */

@@ -26,7 +26,15 @@
  * for places it in WebKit. Firefox ships no scroll timelines and nothing else there reads a scroll position, so it
  * drags and does not zoom. The wheel rule also asks for `::-webkit-resizer`, which only the two engines it was measured
  * in have: Firefox with its scroll-timeline preference switched on accepts the rule and leaves the stage on the
- * animation's last frame, a tenth of its size. Measured without script in Chromium 148, WebKit 26.4 and Firefox 150 (2026-10-03). */
+ * animation's last frame, a tenth of its size. Measured without script in Chromium 148, WebKit 26.4 and Firefox 150 (2026-10-03).
+ *
+ * A page's own address ships a photograph and an empty stage: the drawn body comes with a dataset, settings or
+ * saved-view response (dataset-response.mts). On that page the wheel scales the photograph, and a button covers the scene
+ * and submits the settings form as it stands, which answers with the same view drawn. A drag that ends on the button is
+ * a press of it, so the first try to turn the photograph loads the body the next one turns. On live css.earth the plain
+ * pages of twenty bodies answered neither a 120 pixel drag nor a 300 pixel wheel (Chrome 154, 2026-10-08). A picture is
+ * centred by a translate of half its size, which a scale about its own centre would carry aside (Earth's photograph
+ * landed low and to the right at 0.63), so it scales about the corner the translate starts from. */
 
 /** Width of a strip. Firefox's handle answers within six pixels of its corner; the frame keeps a pixel of slack on
  * each side, because Firefox starts the handle a pixel inside the box and Chromium rounds a pointer on a strip's far
@@ -48,20 +56,27 @@ const DEGREES_PER_PIXEL = 0.3;
  * body the layout keeps within the viewport's height zooms from there. */
 const ZOOM_STEPS = [[0, 5], [10, 3.381], [20, 2.287], [30, 1.546], [40, 1.046], [40.984, 1], [50, 0.7071], [60, 0.4782], [70, 0.3234], [80, 0.2187], [90, 0.1479], [100, 0.1]] as const;
 
-/** The meshes a native view leaves turning, found by the paused, looping animation it writes on them
- * (`prepared-native-view.ts`); a variable star's light curve loops on a veil, not a mesh, and is left alone. */
-export const NATIVE_TURNING_MESH = '.object-stage .polycss-mesh[style*=" infinite both paused"]';
+/** The meshes a drag turns. A native view leaves a spinning body's meshes on a paused, looping animation
+ * (`prepared-native-view.ts`); a variable star's light curve loops on a veil, not a mesh, and is left alone. A body
+ * with no spin plan has no such animation, so its body mesh is found by its class, the last it carries. Of the 4,600
+ * prepared trees, 26 spin and 4,436 have a body mesh and no spin; in none does one of these meshes hold another, which
+ * would turn it twice (2026-10-08). Before the class was read a drag turned the 26 and nothing else. */
+export const NATIVE_TURNING_MESH = '.object-stage .polycss-mesh:is([style*=" infinite both paused"], [class$="-body"])';
+/** The photograph of a page that has not drawn its stage: the arrival image ObjectLayout.astro places after the stage. */
+const NATIVE_PHOTOGRAPH = '.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard]';
 
 export const nativeInputStylesheet = `@property --native-stage-height { syntax: '<length>'; inherits: false; initial-value: 1px; }
 @property --native-stage-width { syntax: '<length>'; inherits: false; initial-value: 1px; }
 @property --native-fit { syntax: '<number>'; inherits: false; initial-value: 1; }
 @property --native-turn { syntax: '<length>'; inherits: true; initial-value: ${SENSOR_START_PIXELS}px; }
 @keyframes native-zoom { ${ZOOM_STEPS.map(([offset, scale]) => `${offset}% { scale: calc(${scale} * var(--native-fit, 1)); }`).join(' ')} }
-.native-scene-input { display: none; }
+.native-scene-input, .native-scene-open { display: none; }
+.native-scene-still { position: absolute; left: 50vw; top: 50%; width: min(100vw, 1200px); height: auto; transform: translate(-50%, -50%); pointer-events: none; }
 @supports (anchor-name: --native-drag) and (width: anchor-size(--native-drag width)) and (transition-behavior: allow-discrete) {
   .native-scene-input { position: absolute; inset: 0 0 var(--native-input-footer, 24px); z-index: 40; display: block; overflow: hidden; container-type: size; anchor-name: --native-input; }
   .native-drag-layer { position: sticky; top: 0; display: flex; height: 100cqh; margin-bottom: -100cqh; overflow: hidden; cursor: grab; }
   .native-drag-layer:active { cursor: grabbing; }
+  .object-viewport:has(> .object-world-stage > ${NATIVE_PHOTOGRAPH}) .native-scene-open { position: sticky; top: 0; z-index: 1; display: block; width: 100%; height: 100cqh; margin: 0 0 -100cqh; padding: 0; border: 0; background: none; cursor: grab; }
   .native-drag-layer > i { flex: none; width: ${STRIP_PIXELS}px; transition: anchor-name 0s 1000000s allow-discrete; }
   .native-drag-layer > i:hover { anchor-name: --native-strip; transition-delay: 0s; }
   .native-drag-layer > i:hover ~ i { transition: none; }
@@ -77,11 +92,12 @@ export const nativeInputStylesheet = `@property --native-stage-height { syntax: 
     .object-viewport { timeline-scope: --native-zoom; }
     .native-scene-input { overflow: hidden scroll; scrollbar-width: none; overscroll-behavior: contain; scroll-timeline: --native-zoom y; }
     .native-zoom-start { display: block; height: 100cqh; margin: 1000px 0 1440px; outline: none; scroll-initial-target: nearest; }
-    .object-stage[data-prepared-object] { animation: native-zoom linear both; animation-timeline: --native-zoom; }
+    .object-stage[data-prepared-object], ${NATIVE_PHOTOGRAPH}, .native-scene-still { animation: native-zoom linear both; animation-timeline: --native-zoom; }
+    ${NATIVE_PHOTOGRAPH}, .native-scene-still { transform-origin: 0 0; }
   }
 }
 `;
 
 /** The input layer, for a `<noscript>` that comes before the world stage in the viewport: an anchor has to precede the
- * box that reads it. */
-export const nativeInputMarkup = `<div class="native-scene-input" role="group" aria-label="Drag to turn, scroll to zoom"><div class="native-drag-layer" aria-hidden="true">${'<i></i>'.repeat(NATIVE_INPUT_STRIPS)}<div class="native-drag-frame"><div class="native-drag-sensor"></div></div></div><span class="native-zoom-start" aria-hidden="true" tabindex="-1" autofocus></span></div>`;
+ * box that reads it. Its button belongs to the settings form every page carries (ObjectShell.astro). */
+export const nativeInputMarkup = `<div class="native-scene-input" role="group" aria-label="Drag to turn, scroll to zoom"><button class="native-scene-open" type="submit" form="object-settings-form" aria-label="Turn and zoom"></button><div class="native-drag-layer" aria-hidden="true">${'<i></i>'.repeat(NATIVE_INPUT_STRIPS)}<div class="native-drag-frame"><div class="native-drag-sensor"></div></div></div><span class="native-zoom-start" aria-hidden="true" tabindex="-1" autofocus></span></div>`;

@@ -301,7 +301,8 @@ and after.
 A drawn body also takes a drag and the wheel without script (`site/browser/native-input.mts`, which those pages link as
 `/native-input.css`; a page with script never requests it). Dragging turns the body's prepared rotation: the browser's
 resize handle holds the drag, a row of hover strips keeps that handle under the pointer, and anchor positioning carries
-the stored width to the body. A body without a prepared rotation, such as a star, only zooms. The wheel scales the whole
+the stored width to the body. A body without a prepared rotation, such as a star or an asteroid, turns about its body
+mesh's own axis. The wheel scales the whole
 stage from a tenth of its size to five times it, so a star's limb or a material composite zooms with the body. Dragging
 needs anchor positioning and a pointer that hovers; the wheel needs scroll timelines, which Firefox does not ship, so
 Firefox drags and does not zoom. Both were measured without script in Chromium 148, WebKit 26.4 and Firefox 150; a
@@ -309,6 +310,25 @@ browser without anchor positioning keeps the still view. The frames are Jupiter 
 opening view, after a drag, zoomed out and zoomed in.
 
 ![Jupiter without script: the opening view, turned by a drag, zoomed out and zoomed in](images/native-drag-zoom.png)
+
+On 2026-10-08 twenty pages of the live site were walked without script in Chrome 154, and each step was judged by the
+pixels of the scene it changed. Three things did not answer:
+
+- A page's own address shows a photograph and draws no body, so neither a drag nor the wheel changed a pixel on any of
+  the twenty. The wheel now scales the photograph, and a button over it submits the settings form as it stands, which
+  answers with the same view drawn. A drag that starts and ends on the photograph is a press of that button, so the
+  first try to turn it loads the body the next one turns.
+- Only a body with a prepared rotation turned: 26 of the 4,600 prepared trees. The 4,436 with a body mesh and no
+  rotation, among them every star, exoplanet, asteroid and comet, zoomed and did not turn. They turn now.
+- A galaxy, cluster or nebula page was black: script draws its picture from a bank, and its stage holds one empty mesh.
+  The 65 of those 138 pages that have a committed share picture now show it, and the wheel scales it. Another dataset's
+  response hides it, and the 73 cluster pages without one stay black.
+
+Firefox still does not zoom. The frames are Bennu at 1320×800 in Chrome 154, from a build of the page: as it opens,
+after a 300 px wheel, after a drag on the photograph, after a second drag of 120 px, and after the wheel again. That
+second drag changed 46,385 px of the scene's 400,200; before, it changed none.
+
+![Bennu without script: the photograph, zoomed by the wheel, the drawn body a drag loads, turned and zoomed](images/native-first-drag.png)
 
 The earlier continuous Saturn capture
 was recorded, before native dataset submits were added.
