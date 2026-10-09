@@ -1,8 +1,8 @@
 {
   "action": "apply",
   "imageId": "compiler",
-  "recipePath": "labs/nebula/models/omega-centauri/compiler.json",
-  "cataloguePath": ".local/nebula-lab/observations/omega-centauri/structures/catalogue.json",
+  "recipePath": "src/objects/omega-centauri-volume/source/compiler.json",
+  "cataloguePath": "src/objects/omega-centauri-volume/.local/observations/omega-centauri/structures/catalogue.json",
   "controls": {
     "detail": 1,
     "faint": 0.35,

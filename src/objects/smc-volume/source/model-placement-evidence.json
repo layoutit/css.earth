@@ -1,0 +1,85 @@
+{
+  "schema": "cssearth-density-placement-evidence@1",
+  "placement": {
+    "path": "src/objects/smc-volume/source/model-placement.json"
+  },
+  "reproduce": "node labs/nebula/run.mts fit-density-placement src/objects/smc-volume/source/placement-fit.json",
+  "settings": {
+    "path": "src/objects/smc-volume/source/placement-fit.json"
+  },
+  "implementation": {
+    "path": "labs/nebula/packages/lab/src/cli/commands/fit-density-placement.ts",
+    "algorithm": {
+      "path": "labs/nebula/packages/reconstruction/src/registration/density-similarity.ts"
+    }
+  },
+  "independentBandCheck": {
+    "image": {
+      "path": "src/objects/smc-volume/.local/intake/eso1714a.jpg",
+      "registration": {
+        "referenceWcs": {
+          "referenceDimension": [
+            3827,
+            3190
+          ],
+          "referencePixel": [
+            1913.5,
+            1595
+          ],
+          "referenceValueDeg": [
+            13.6618118598,
+            -72.8687942632
+          ],
+          "scaleDeg": [
+            -0.00138788065837,
+            0.00138788065837
+          ],
+          "rotationDeg": 30.12000000000002,
+          "projection": "TAN",
+          "coordinateFrame": "ICRS"
+        },
+        "referenceWidthPx": 3827,
+        "referenceHeightPx": 3190,
+        "imageToReferenceMatrix": [
+          0.9340508810415881,
+          0.5225164892249311,
+          -849.5400484239321,
+          -0.5057859582721508,
+          0.9350580472165388,
+          1035.016905606283,
+          0.000004410272152398216,
+          -6.593072039439585e-7,
+          1
+        ]
+      }
+    },
+    "refitted": false,
+    "beforeCorrelation": -0.24242890658088348,
+    "centeredOnlyCorrelation": 0.7967850124888535,
+    "afterCorrelation": 0.886575875338699,
+    "observedCells": 3621,
+    "scaleSweepAtFixedOtherParameters": {
+      "1": 0.8656728946789627,
+      "2": 0.8217915082730177,
+      "3": 0.6525924506731472,
+      "1.2": 0.8881580573051007,
+      "1.4": 0.8879470671303064,
+      "1.427": 0.886575875338699,
+      "1.5": 0.8815139150876039,
+      "1.7": 0.8617859914549671
+    }
+  },
+  "images": [
+    {
+      "path": "src/objects/smc-volume/.local/placement/before-observation-after.png"
+    },
+    {
+      "path": "src/objects/smc-volume/.local/placement/vista-fixed-before-observation-after.png"
+    }
+  ],
+  "limits": [
+    "Mass projection validates broad stellar morphology only, not the displayed composited baked alpha.",
+    "The retained full stellar tails remain much wider than either image footprint.",
+    "Actual neutral-cloud appearance must be checked separately after placement; no full-envelope or physical-depth agreement is claimed."
+  ]
+}

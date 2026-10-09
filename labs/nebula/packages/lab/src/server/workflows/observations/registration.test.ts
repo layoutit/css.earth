@@ -19,7 +19,7 @@ test('native AVM reference pixel, not raster centre, anchors the sky coordinates
 });
 
 test('Omega Centauri native stars reject the former centred AVM reference pixels', async () => {
-  const recipe = readObservationRecipe(JSON.parse(await readFile('labs/nebula/models/omega-centauri/observations.json', 'utf8')));
+  const recipe = readObservationRecipe(JSON.parse(await readFile('src/objects/omega-centauri-volume/source/observations.json', 'utf8')));
   const value: unknown = JSON.parse(await readFile('labs/nebula/packages/lab/src/server/workflows/observations/fixtures/omega-centauri-native-stars.json', 'utf8'));
   assert.ok(value && typeof value === 'object' && 'stars' in value && Array.isArray(value.stars));
   const reference = recipe.images.find(image => image.id === 'eso1119b')!, source = recipe.images.find(image => image.id === 'eso0844a')!;
@@ -80,7 +80,7 @@ test('spatially held-out stars pass a correct affine and retain an incorrect hel
 });
 
 test('observation recipe rejects unpinned and malformed sky inputs', async () => {
-  const value = JSON.parse(await readFile('labs/nebula/models/helix/observations.json', 'utf8'));
+  const value = JSON.parse(await readFile('src/objects/helix-layers/source/observations.json', 'utf8'));
   assert.equal(readObservationRecipe(value).images.length, 3);
   assert.throws(() => readObservationRecipe({ ...value, frame: { ...value.frame, northUp: false } }));
 });

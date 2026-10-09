@@ -1,8 +1,8 @@
 {
   "action": "apply",
   "imageId": "compiler",
-  "recipePath": "labs/nebula/models/m8/compiler.json",
-  "cataloguePath": ".local/nebula-lab/observations/m8-processed/structures/catalogue.json",
+  "recipePath": "src/objects/m8-volume/source/compiler.json",
+  "cataloguePath": "src/objects/m8-volume/.local/observations/m8-processed/structures/catalogue.json",
   "controls": {
     "detail": 0.9,
     "faint": 0.15,

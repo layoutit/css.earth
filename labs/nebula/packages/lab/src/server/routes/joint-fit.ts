@@ -20,6 +20,6 @@ export function jointFitPlugin(root: string): Plugin {
         queue = task.then(() => {}, () => {}); return task; }, validateResult: async value => { await validateJointResult(root, value); } });
     const handler = starRemovalJobsHandler(jobs, '/__nebula/joint-fit-jobs');
     server.middlewares.use('/__nebula/joint-fit-jobs', (request, response) => { void handler(request, response); });
-    server.httpServer?.once('close', () => { void jobs.shutdown(); });
+    server.httpServer?.once('close', () => { void jobs.shutdown().catch(() => {}); });
   } };
 }

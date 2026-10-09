@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "m57-layers",
+  "name": "Ring Nebula",
+  "type": "Planetary nebula",
+  "papers": [
+    {
+      "label": "O'Dell et al. (2013)",
+      "url": "https://arxiv.org/abs/1301.6636",
+      "record": "src/sources/publication-odell-2013-ring-nebula-structure.json"
+    },
+    {
+      "label": "Kastner et al. (2025)",
+      "url": "https://arxiv.org/abs/2501.12223",
+      "record": "src/sources/publication-kastner-2025-ring-nebula-molecular-envelope.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "ESA/Hubble heic1310a",
+      "url": "https://esahubble.org/images/heic1310a/",
+      "record": "src/sources/esahubble-heic1310a.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: shape"
+  },
+  "velocity": {
+    "available": true,
+    "items": [
+      {
+        "label": "Long-slit spectra (README)",
+        "kind": "mentioned",
+        "url": "src/objects/m57-layers/README.md"
+      }
+    ]
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": [
+      "shape"
+    ]
+  }
+}

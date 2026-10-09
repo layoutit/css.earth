@@ -8,7 +8,7 @@ import { overlayVariantsPath } from '../../features/legacy-viewer/overlay-varian
 test('delivery rejects failed proof, changed registration and changed prepared geometry before writing variants', async () => {
   const directory = await mkdtemp('.local/nebula-lab/variant-proof-test-');
   const before = await readFile(overlayVariantsPath);
-  const plan = JSON.parse(await readFile('labs/nebula/models/lmc/star-separation/plan.json', 'utf8'));
+  const plan = JSON.parse(await readFile('src/objects/lmc-volume/source/star-separation/plan.json', 'utf8'));
   const catalogue = JSON.parse(await readFile(plan.catalogue, 'utf8'));
   const writeJson = async (path: string, value: unknown) => { await writeFile(path, JSON.stringify(value)); };
   const planPath = join(directory, 'plan.json'), cataloguePath = join(directory, 'catalogue.json');

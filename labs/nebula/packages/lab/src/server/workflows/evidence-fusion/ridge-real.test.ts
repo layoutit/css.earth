@@ -9,7 +9,7 @@ import { combineEvidence } from '@cssearth/nebula-reconstruction/evidence/combin
 import { buildRidgeGraph } from '@cssearth/nebula-reconstruction/evidence/ridge-graph';
 
 test('real three-source ridge graph preserves every sampled footprint and projects onto the registered source', { skip: process.env.NEBULA_RIDGE_REAL !== '1' }, async () => {
-  const inputs = await prepareEvidenceInputs(process.cwd(), '.local/nebula-lab/observations/helix/structures/catalogue.json');
+  const inputs = await prepareEvidenceInputs(process.cwd(), 'src/objects/helix-layers/.local/observations/helix/structures/catalogue.json');
   const combined = combineEvidence(inputs, { channel: 'ridges', weights: [1, 1, 1], sensitivity: 1 });
   const start = performance.now(), graph = buildRidgeGraph(inputs, combined), graphMs = performance.now() - start;
   assert.ok(graph.polylines.length > 0); assert.ok(graph.nodes.length > 0);

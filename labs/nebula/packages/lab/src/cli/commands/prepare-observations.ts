@@ -13,12 +13,13 @@ import { loadMatchedStarCatalogue, calibratedInitialTransform } from '../../serv
 import { loadNativeSeparationCache, nativeSeparationCacheDirectory } from '../../server/workflows/observations/native-separation-cache.ts';
 import { composeSkyBandSource } from '../../server/workflows/observations/sky-band-source.ts';
 import { verifySkyBandRecipe } from '../../adapters/sources/sky-bands.ts';
+import { objectScratch } from '../../resources/model-paths.ts';
 
 const [recipePath, mode, extra] = process.argv.slice(2);
 if (!recipePath || extra || (mode && mode !== '--alignment-only')) throw new TypeError('Usage: prepare-observations <recipe.json> [--alignment-only]');
 const recipeText = await readFile(recipePath, 'utf8'), recipe = readObservationRecipe(JSON.parse(recipeText));
 const nativeSeparationCache = await loadNativeSeparationCache(recipe);
-const directory = resolve('.local/nebula-lab/observations', recipe.id);
+const directory = resolve(objectScratch(recipe.id, 'observations', recipe.id));
 const json = async (file: string, data: unknown) => { await writeFile(`${file}.pending`, JSON.stringify(data, null, 2) + '\n'); await rename(`${file}.pending`, file); };
 await mkdir(resolve(directory, 'sources'), { recursive: true });
 const sources: Array<{ source: typeof recipe.images[number]; bytes: Buffer; stars: Awaited<ReturnType<typeof detectStars>>;

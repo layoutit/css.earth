@@ -20,7 +20,7 @@ profile. Its compact objects, globular clusters and ultra-compact dwarfs, are dr
 
 ## Method
 
-The Nebula Lab recipe is [labs/nebula/models/ngc-4696/experiment.json](../../../labs/nebula/models/ngc-4696/experiment.json);
+The Nebula Lab recipe is [src/objects/ngc-4696-volume/source/experiment.json](../../../src/objects/ngc-4696-volume/source/experiment.json);
 `node labs/nebula/run.mts prepare-emission` runs it, and [delivery.json](source/delivery.json) places the result. It is
 [M49's route](../m49-volume/README.md#method) with NGC 4696's measurements.
 

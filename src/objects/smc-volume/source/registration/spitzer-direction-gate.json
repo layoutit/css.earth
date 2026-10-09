@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-image-direction-gate@1",
+  "status": "fail",
+  "pass": false,
+  "cloudProcessingPerformed": false,
+  "source": {
+    "path": "src/objects/smc-volume/.local/intake/ssc2010-02c.jpg",
+    "nativeDimensions": [
+      11200,
+      6600
+    ],
+    "workingDimensions": [
+      5000,
+      2946
+    ],
+    "wcs": {
+      "referenceDimension": [
+        11200,
+        6600
+      ],
+      "referencePixel": [
+        5600,
+        3300
+      ],
+      "referenceValueDeg": [
+        21.79583333333333,
+        -73.95883333333333
+      ],
+      "scaleDeg": [
+        -0.0008303571428571429,
+        0.0008333333333333334
+      ],
+      "rotationDeg": -148.4
+    }
+  },
+  "reference": {
+    "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
+    "nativeDimensions": [
+      3827,
+      3190
+    ],
+    "workingDimensions": [
+      3827,
+      3190
+    ],
+    "wcs": {
+      "referenceDimension": [
+        3827,
+        3190
+      ],
+      "referencePixel": [
+        1913.5,
+        1595
+      ],
+      "referenceValueDeg": [
+        13.6618118598,
+        -72.8687942632
+      ],
+      "scaleDeg": [
+        -0.00138788065837,
+        0.00138788065837
+      ],
+      "rotationDeg": 30.12000000000002
+    }
+  },
+  "failureReason": "No coherent star-field descriptor seed"
+}

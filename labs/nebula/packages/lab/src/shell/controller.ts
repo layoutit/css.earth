@@ -11,6 +11,7 @@ import { createCloudControls } from '../features/cloud-controls/cloud-controls';
 import { createCloudDensityControls } from '../features/cloud-controls/cloud-density-controls';
 import { createCloudStarControls } from '../features/cloud-controls/cloud-star-controls';
 import type { ImageLayer } from '../features/legacy-viewer/overlay-variants';
+import type { OriginalPicture } from '../features/legacy-viewer/controller';
 import { createRemovalStrengthStore, validateRemovalStrength } from '../features/star-removal/removal-strength.ts';
 import { createStarRemovalControls } from '../features/star-removal/star-removal-controls';
 import { supportsLabAlignment, densityReconstructionOwner } from '../state/lab-workflows.ts';
@@ -52,7 +53,7 @@ let currentTab = 0;
 let emissionInspection: 'sources' | 'structure' | 'volume' = 'structure';
 let currentMode: 'photo' | 'density' = 'density';
 let activePose = 'front', alignmentState: AlignmentState | undefined;
-let originalOverlayState: LabShellState['originalOverlay'];
+let originalOverlayState: LabShellState['originalOverlay'], differenceOverlayState: LabShellState['differenceOverlay'];
 let materialState: LabShellState['material'];
 let statusState: LabPresentation['status'] = { message: 'Loading…', hidden: false, error: false };
 let layerNote = '', overlayStatusDetail = '';
@@ -133,12 +134,12 @@ function publishShell() {
   const item = subjects.find(value => value.id === sourceSubject);
   const density = currentMode === 'density' && currentTab === 0 ? item?.density : null;
   const cloud = currentTab === 1 && currentMode === 'photo' && !busy && !modePending ? viewer?.getCloudParts() : null;
-  options.onShellState({ objectId: objectId(sourceSubject), view: tabNames[currentTab]!, busy,
+  options.onShellState({ objectId: objectId(sourceSubject), subjectId: sourceSubject ?? undefined, view: tabNames[currentTab]!, busy,
     alignmentAvailable: !sourceSubject || supportsLabAlignment(item), pose: activePose, alignment: alignmentState,
-    originalOverlay: originalOverlayState, material: materialState,
+    originalOverlay: originalOverlayState, differenceOverlay: differenceOverlayState, material: materialState,
     presentation: labPresentation({ busy, alignment: currentTab === 0, densityMode: currentMode === 'density',
       densityAvailable: Boolean(item?.density), overlaysAvailable: Boolean(item?.density?.overlays),
-      referenceAvailable: Boolean(item?.referenceDistanceUnits), observationInspection: observationInspectionActive(),
+      referenceAvailable: Boolean(item?.referenceDistanceUnits) || item?.workflow === 'plates', observationInspection: observationInspectionActive(),
       cloudAvailable: Boolean(cloud), reconstructionImages: currentTab === 1 && Boolean(densityReconstructionOwner(subjects, pendingSubject ?? sourceSubject)),
       sourceUrl: density?.sourcePageUrl ?? item?.sourcePageUrl, sourceCredit: density?.credit ?? item?.credit ?? '', status: statusState }) });
 }
@@ -194,7 +195,7 @@ function refreshReconstructionImages() {
 function updateCredit() { publishShell(); }
 let overlayRequest = 0;
 function overlaySelectionKey(catalogue: string) {
-  const stable = catalogue.replace('labs/nebula/models/lmc/', 'labs/nebula/models/lmc-').replace('labs/nebula/models/smc/', 'labs/nebula/models/smc-');
+  const stable = catalogue.replace('src/objects/lmc-volume/source/', 'labs/nebula/models/lmc-').replace('src/objects/smc-volume/source/', 'labs/nebula/models/smc-');
   return `cssearth-nebula-selected-overlay:${stable}`;
 }
 function storedOverlayId(catalogue: string) {
@@ -451,7 +452,7 @@ async function mountViewer(id: string, mode: 'density' | 'photo') {
         (!pendingSubject && observationInspectionActive() && state.subjectId !== sourceSubject)) return;
     currentMode = state.mode;
     originalOverlayState = state.originalOverlay; materialState = state.material;
-    reconstruction.setDifference(state.differenceOverlay);
+    reconstruction.setDifference(state.differenceOverlay); differenceOverlayState = state.differenceOverlay;
     updateSubject(state.subjectId);
     activePose = state.pose;
     setStatus(state.status ?? '', element('viewer').dataset.ready === 'true' && !state.error);
@@ -517,7 +518,12 @@ return { destroy, selectView: (view: 'alignment' | 'reconstruction') => selectTa
   showImage: changeOverlayVisibility, setImageOpacity: changeOverlayOpacity,
   setMaterial: (mode: 'neutral' | 'textured') => run(() => viewer!.setMaterial(mode)),
   showOriginal: (enabled: boolean) => run(() => viewer!.setOriginalOverlay(enabled)),
+  showOriginalPicture: (enabled: boolean, picture: OriginalPicture) => run(() => viewer!.setOriginalOverlay(enabled, originalOverlayState?.opacity ?? .5, picture)),
+  setCandidateModels: (state: Parameters<Viewer['setCandidateModels']>[0]) => run(() => viewer!.setCandidateModels(state)),
+  setFieldStars: (points: Parameters<Viewer['setFieldStars']>[0]) => run(() => viewer!.setFieldStars(points)),
   setOriginalOpacity: (opacity: number) => run(() => viewer!.setOriginalOverlay(originalOverlayState?.enabled ?? false, opacity)),
   setPose: (pose: Parameters<Viewer['setPose']>[0]) => run(() => viewer!.setPose(pose)),
+  annotationContext: () => viewer?.annotationContext() ?? null,
+  setDifference: (enabled: boolean, opacity: number) => run(() => viewer!.setDifferenceOverlay(enabled, opacity)),
   resetCamera: () => run(() => viewer!.reset()), referenceView: () => run(() => viewer!.referenceView()), fitCloud: () => run(() => viewer!.fitCloud()) };
 }

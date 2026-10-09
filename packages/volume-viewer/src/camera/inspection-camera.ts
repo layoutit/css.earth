@@ -29,6 +29,37 @@ export interface RetainedInspectionCamera {
   cameraScale: number; projectionScale: number;
 }
 
+/** A reference-frame vector in the frame's local axes: the inverse of `localToReferenceXyzw`. */
+function referenceToLocal([x, y, z, w]: readonly number[], v: readonly [number, number, number]): [number, number, number] {
+  const [qx, qy, qz, qw] = [-x!, -y!, -z!, w!];
+  const tx = 2 * (qy * v[2] - qz * v[1]), ty = 2 * (qz * v[0] - qx * v[2]), tz = 2 * (qx * v[1] - qy * v[0]);
+  return [v[0] + qw * tx + (qy * tz - qz * ty), v[1] + qw * ty + (qz * tx - qx * tz), v[2] + qw * tz + (qx * ty - qy * tx)];
+}
+const unit = (v: readonly number[]) => { const length = Math.hypot(...v); return v.map(value => value / length) as [number, number, number]; };
+const crossOf = (a: readonly number[], b: readonly number[]): [number, number, number] =>
+  [a[1]! * b[2]! - a[2]! * b[1]!, a[2]! * b[0]! - a[0]! * b[2]!, a[0]! * b[1]! - a[1]! * b[0]!];
+
+/**
+ * The scene rotation that shows the object from Earth: the eye on the frame's line toward the Sun-centred origin (Earth's
+ * offset from the Sun is below a nanoradian at nebula distances), with `upUnits` (local axes; the photograph's up) or else
+ * celestial north pointing up on screen. Rotation only: the distance stays the caller's.
+ * The scene is the frame's CSS presentation, its local axes with y negated, and the rotation maps it to CSS camera space
+ * (+x right, +y down, +z toward the eye).
+ */
+export function earthViewRotation(frame: Pick<DensityVolumeFrame, 'originM' | 'localToReferenceXyzw'>, upUnits?: readonly number[]): DOMMatrix {
+  if (!(Math.hypot(...frame.originM) > 0)) throw new Error('Earth view requires a prepared frame placed away from the Sun.');
+  const toEarth = unit(referenceToLocal(frame.localToReferenceXyzw, [-frame.originM[0], -frame.originM[1], -frame.originM[2]]));
+  const onSky = (local: readonly number[]) => { const along = local.reduce((sum, value, i) => sum + value * toEarth[i]!, 0);
+    return local.map((value, i) => value - along * toEarth[i]!); };
+  const candidates = [upUnits, referenceToLocal(frame.localToReferenceXyzw, [0, 0, 1]), referenceToLocal(frame.localToReferenceXyzw, [0, 1, 0])];
+  // A candidate along the line of sight has no up on screen; the next one takes over.
+  const up = candidates.map(value => value?.length === 3 && value.every(Number.isFinite) ? unit(value) : null)
+    .map(value => value && onSky(value)).find(value => value !== null && Math.hypot(...value) > 1e-6)!;
+  const toward = [toEarth[0], -toEarth[1], toEarth[2]], screenUp = unit([up[0]!, -up[1]!, up[2]!]);
+  const down = screenUp.map(value => -value), right = crossOf(down, toward);
+  return new DOMMatrix([right[0], down[0], toward[0]!, 0, right[1], down[1], toward[1]!, 0, right[2], down[2], toward[2]!, 0, 0, 0, 0, 1]);
+}
+
 /** Retained numeric camera; the host owns scene selection, storage, status and input policy. */
 export function createInspectionCamera<Publication>(options: {
   host: HTMLElement; backend: InspectionCameraBackend<Publication>;
@@ -98,6 +129,14 @@ export function createInspectionCamera<Publication>(options: {
     values.distance = referenceDistance; values.zoom = fitDistance / values.distance; values.rotX = values.rotY = 0; revision++;
     host.dataset.earthFramingRadius = String(referenceRadius); schedule();
   }
+  /** Turn to face the object from Earth, the photograph's up (or north) up, at the normal framing distance: rotation only. */
+  function earthView(upUnits?: readonly number[]) {
+    const frame = options.configuration().frame; if (!frame) throw new Error('The prepared object is still loading.');
+    const earth = earthViewRotation(frame, upUnits);
+    controls.stop(); cameraScale = 1; pose = 'front'; rotation = earth; measure();
+    fitDistance = Math.max(radius * 2, focal * radius / (Math.min(width, height) * .32));
+    values.distance = fitDistance; values.zoom = 1; values.rotX = values.rotY = 0; revision++; schedule();
+  }
   function fitCloud() {
     const frame = options.configuration().frame; if (!frame) throw new Error('The prepared object is still loading.');
     const bounds = frame.boundsUnits;
@@ -123,7 +162,7 @@ export function createInspectionCamera<Publication>(options: {
     fitDistance = Math.max(radius * 2, focal * radius / (Math.min(width, height) * .32));
     values.rotX = saved.rotX; values.rotY = saved.rotY; values.distance = saved.distance; values.zoom = fitDistance / values.distance; revision++; schedule();
   }
-  return { get pose() { return pose; }, get values() { return values; }, schedule, publish, measure, reset, referenceView, fitCloud,
+  return { get pose() { return pose; }, get values() { return values; }, schedule, publish, measure, reset, referenceView, earthView, fitCloud,
     applyPose, retain, restore, stop: () => controls.stop(), setRadius(value: number) { radius = value; },
     destroy() { if (disposed) return; disposed = true; cancelAnimationFrame(frameRequest); observer.disconnect(); controls.destroy(); } };
 }

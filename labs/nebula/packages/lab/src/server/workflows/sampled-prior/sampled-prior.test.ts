@@ -8,7 +8,7 @@ import { readSampledRecipe } from '../../../features/sampled-prior/model.ts';
 
 const fixture = {
   schema: 'cssearth-sampled-nebula@2', id: 'qualified-example', centerIcrsDegrees: [80, 22],
-  evidence: { path: 'labs/nebula/models/example/physical-evidence.json' },
+  evidence: { path: 'src/objects/example-volume/source/physical-evidence.json' },
   source: { path: '.local/nebula-lab/physical/example/points.fits', url: 'https://example.org/points.fits', width: 4, height: 2, columns: [0, 1, 2, 3] },
   rawToArcsec: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],
   grid: { longestAxis: 32, blurSigmaCells: .5, weightExponent: .5, peakOpticalDepth: 1.5 },
@@ -30,7 +30,7 @@ test('qualified affine transform retains parity, anisotropic scales, offsets and
 });
 
 test('source and evidence byte pins, dimensions and physical term identities are mandatory', () => {
-  for (const evidence of [undefined, null, { ...fixture.evidence, path: 'labs/nebula/models/../secret.json' }])
+  for (const evidence of [undefined, null, { ...fixture.evidence, path: 'src/objects/x-volume/source/../secret.json' }])
     assert.throws(() => readSampledRecipe({ ...fixture, evidence }));
   for (const source of [{ ...fixture.source, width: -1 },
     { ...fixture.source, height: -1 }, { ...fixture.source, columns: [0, 1, 1, 3] }, { ...fixture.source, url: 'http://example.org/points.fits' }])

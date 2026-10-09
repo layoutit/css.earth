@@ -2,27 +2,27 @@
   "schema": "cssearth-provenance-references@1",
   "references": [
     {
-      "originalPath": "labs/nebula/models/m8/physical-evidence.json",
+      "originalPath": "src/objects/m8-volume/source/physical-evidence.json",
       "path": "src/objects/m8-volume/source/bake-inputs/references/03-physical-evidence.json",
       "bytes": 14198
     },
     {
-      "originalPath": "labs/nebula/models/m8/compiler.json",
+      "originalPath": "src/objects/m8-volume/source/compiler.json",
       "path": "src/objects/m8-volume/source/bake-inputs/references/01-compiler.json",
       "bytes": 1511
     },
     {
-      "originalPath": "labs/nebula/models/m8/depth-model.json",
+      "originalPath": "src/objects/m8-volume/source/depth-model.json",
       "path": "src/objects/m8-volume/source/bake-inputs/references/02-depth-model.json",
       "bytes": 3297
     },
     {
-      "originalPath": "labs/nebula/models/m8/processing-observations.json",
+      "originalPath": "src/objects/m8-volume/source/processing-observations.json",
       "path": "src/objects/m8-volume/source/bake-inputs/references/04-processing-observations.json",
       "bytes": 5778
     },
     {
-      "originalPath": "labs/nebula/models/m8/processing-structures.json",
+      "originalPath": "src/objects/m8-volume/source/processing-structures.json",
       "path": "src/objects/m8-volume/source/bake-inputs/references/05-processing-structures.json",
       "bytes": 420
     }

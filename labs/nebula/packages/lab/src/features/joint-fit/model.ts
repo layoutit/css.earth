@@ -9,8 +9,8 @@ export interface JointRequest {
   imageToFrame: Record<string, Matrix>; evidence: { sensitivity: number; weights: number[] }; controls: JointControls;
 }
 export function readJointRequest(v: unknown): JointRequest {
-  if (!jointRecord(v) || v.action !== 'apply' || v.imageId !== 'joint-fit' || !jointPath(v.cataloguePath) || !v.cataloguePath.startsWith('.local/nebula-lab/') ||
-      !jointPath(v.recipePath) || !v.recipePath.startsWith('labs/nebula/models/') || !jointRecord(v.imageToFrame) || !jointRecord(v.evidence) ||
+  if (!jointRecord(v) || v.action !== 'apply' || v.imageId !== 'joint-fit' || !jointPath(v.cataloguePath) || !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(v.cataloguePath) ||
+      !jointPath(v.recipePath) || !/^src\/objects\/[a-z0-9-]+\/source\//.test(v.recipePath) || !jointRecord(v.imageToFrame) || !jointRecord(v.evidence) ||
       !range(v.evidence.sensitivity, .25, 4) || !Array.isArray(v.evidence.weights) || v.evidence.weights.length < 2 || v.evidence.weights.length > 8 || !v.evidence.weights.every(n => range(n, 0, 1))) throw new TypeError('Invalid joint fit request.');
   const imageToFrame: Record<string, Matrix> = {};
   for (const [id, m] of Object.entries(v.imageToFrame)) {

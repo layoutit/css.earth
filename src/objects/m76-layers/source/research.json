@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "m76-layers",
+  "name": "Little Dumbbell Nebula",
+  "type": "Planetary nebula",
+  "papers": [
+    {
+      "label": "Bryce et al. (1996)",
+      "url": "https://ui.adsabs.harvard.edu/abs/1996A%26A...307..253B/abstract",
+      "record": "src/sources/publication-bryce-1996-ngc-650-kinematics.json"
+    },
+    {
+      "label": "Ramos-Larios et al. (2018)",
+      "url": "https://arxiv.org/abs/1801.01215",
+      "record": "src/sources/publication-ramos-larios-2018-ngc-650-halo.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "ESA/Hubble heic2408a",
+      "url": "https://esahubble.org/images/heic2408a/",
+      "record": "src/sources/esahubble-heic2408a.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: surface"
+  },
+  "velocity": {
+    "available": true,
+    "items": [
+      {
+        "label": "Echelle spectra (README)",
+        "kind": "mentioned",
+        "url": "src/objects/m76-layers/README.md"
+      }
+    ]
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": [
+      "surface"
+    ]
+  }
+}

@@ -4,7 +4,7 @@ Updated 2026-09-11. Start with [NEXTSTEPS.md](NEXTSTEPS.md) to continue the work
 
 The [Nebula Compiler Process Guidelines](docs/nebula-compiler-guidelines.md) define how to combine methods for new objects and turn literature/data into source-pinned constraints. Keep the existing [paper and method assessment](docs/novelty-assessment.md) as the literature inventory; an evidence-assisted workflow does not itself establish a new reconstruction algorithm.
 
-The [12 September Orion structure/velocity intake](models/m42/physical-structure.md) records why the new image-only M42 depth fails, the published front/shell/flow models and public spectroscopic maps to constrain its replacement. Those measurements have not yet been integrated.
+The [12 September Orion structure/velocity intake](../../src/objects/m42-volume/source/physical-structure.md) records why the new image-only M42 depth fails, the published front/shell/flow models and public spectroscopic maps to constrain its replacement. Those measurements have not yet been integrated.
 
 ## What exists today
 
@@ -15,7 +15,7 @@ The [12 September Orion structure/velocity intake](models/m42/physical-structure
 - The 943 Bonanos catalogue stars retain measured sky coordinates and photometry. One common model supplies their unmeasured depths. Candidate images cannot reposition/select stars.
 - XYZ slice banks are prepared offline and rendered as retained PolyCSS/CSS elements. Runtime consumes prepared assets.
 
-**A small independent implementation of Wenger's 2013 image-to-volume method now runs on M2–9 in the lab.** It infers relative emission using axial symmetry; it does not change the LMC/SMC pipeline or recover measured gas density. See [the method and limitations](docs/planetary-nebulae.md) and [the reproducible experiment](models/m2-9/README.md). Earlier starlet/getsf and photo-conditioned depth experiments remain in [research history](docs/research/README.md).
+**A small independent implementation of Wenger's 2013 image-to-volume method now runs on M2–9 in the lab.** It infers relative emission using axial symmetry; it does not change the LMC/SMC pipeline or recover measured gas density. See [the method and limitations](docs/planetary-nebulae.md) and [the reproducible experiment](../../src/objects/m2-9-volume/source/README.md). Earlier starlet/getsf and photo-conditioned depth experiments remain in [research history](docs/research/README.md).
 
 ## Name and novelty
 

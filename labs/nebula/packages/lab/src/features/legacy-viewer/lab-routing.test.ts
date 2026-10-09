@@ -31,3 +31,14 @@ test('all pages share object context while old catalogue bookmarks remain readab
   assert.equal(catalogue.searchParams.get('view'), 'papers');
   assert.equal(labObjectId(new URL('http://localhost/?subject=lmc-clouds&object=m42')), 'lmc-clouds');
 });
+
+test('the four steps live in one query parameter on the object workspace', async () => {
+  const { labStep, labStepUrl } = await import('./lab-routing.js');
+  assert.equal(labStep(new URL('http://localhost:4331/reconstruction?subject=helix')), 'edit');
+  assert.equal(labStep(new URL('http://localhost:4331/reconstruction?step=bake')), 'bake');
+  assert.equal(labStep(new URL('http://localhost:4331/reconstruction?step=nonsense')), 'edit');
+  const next = labStepUrl(new URL('http://localhost:4331/catalogue?object=m42&view=papers'), 'research', 'm42');
+  assert.equal(next.pathname, '/reconstruction');
+  assert.equal(next.searchParams.get('step'), 'research');
+  assert.equal(next.searchParams.get('subject'), 'm42');
+});

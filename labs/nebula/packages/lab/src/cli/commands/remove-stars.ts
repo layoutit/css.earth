@@ -22,6 +22,7 @@ import { giveBackGas } from '@cssearth/nebula-reconstruction/star-removal/star-c
 import { removeSpikedStars } from '@cssearth/nebula-reconstruction/star-removal/spikes';
 import { removeStarHaloes } from '@cssearth/nebula-reconstruction/star-removal/haloes';
 import { nativeStarless } from '../../server/workflows/emission-inference/native-source.ts';
+import { objectScratch } from '../../resources/model-paths.ts';
 
 /** Stars brighter than this Gaia G keep a glow after NOX on the Sloan pictures (M66's: G 9.5 to 13.6); fainter ones do not. */
 const HALO_G = 14;
@@ -46,7 +47,7 @@ if (recipe.source.parentPixelWindow) throw new TypeError(`${recipe.id}: a window
 if (!/^https:\/\//.test(recipe.source.downloadUrl)) throw new TypeError(`${recipe.id}: source.downloadUrl is not an https address.`);
 const [width, height] = recipe.source.dimensions;
 
-const cache = resolve('.local/nebula-lab/starless', recipe.id), originalPath = resolve(cache, 'original.jpg');
+const cache = resolve(objectScratch(recipe.id, 'starless')), originalPath = resolve(cache, 'original.jpg');
 await mkdir(cache, { recursive: true });
 let original: Buffer;
 if (from !== undefined) {
@@ -67,7 +68,7 @@ if (native.info.width !== width || native.info.height !== height || native.info.
   throw new Error(`${recipe.id}: the download is ${native.info.width} x ${native.info.height}; the recipe says ${width} x ${height}.`);
 
 const model = { path: '.local/open-star-removal/noxGeneratorColor.pb' };
-const removed = await nativeStarless(original, [width, height], { directory: `.local/nebula-lab/starless/${recipe.id}/nox`, model });
+const removed = await nativeStarless(original, [width, height], { directory: objectScratch(recipe.id, 'starless', 'nox'), model });
 const starless = Uint8Array.from(removed.pixels);
 
 let colorPass = '';
@@ -87,7 +88,7 @@ if (coarse !== undefined) {
   const smallWidth = Math.round(width / coarse), smallHeight = Math.round(height / coarse);
   const small = sharp(Buffer.from(starless), { raw: { width, height, channels: 3 } }).resize(smallWidth, smallHeight, { kernel: 'lanczos3', fit: 'fill' });
   const before = Uint8Array.from(await small.clone().raw().toBuffer());
-  const again = await nativeStarless(await small.clone().png().toBuffer(), [smallWidth, smallHeight], { directory: `.local/nebula-lab/starless/${recipe.id}/nox-coarse${coarse}`, model });
+  const again = await nativeStarless(await small.clone().png().toBuffer(), [smallWidth, smallHeight], { directory: objectScratch(recipe.id, 'starless', `nox-coarse${coarse}`), model });
   const { replacedPixels } = takeCoarsePass(starless, width, height, before, Uint8Array.from(again.pixels), smallWidth, smallHeight);
   coarsePass = `; NOX again over a ${smallWidth} x ${smallHeight} px copy replaced ${(replacedPixels / (width * height) * 100).toFixed(2)}% of the picture`;
 }

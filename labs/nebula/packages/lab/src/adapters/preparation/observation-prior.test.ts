@@ -13,7 +13,7 @@ const rotate = ([x, y, z, w]: readonly number[], p: readonly number[]) => {
 test('tangent photo mapping matches independent Astropy rays and holds those rays across physical depths', async () => {
   const oracle = JSON.parse(await readFile('labs/nebula/packages/lab/src/features/alignment/fixtures/astropy-wcs.json', 'utf8'));
   const fixture = oracle.fixtures.find((item: { id: string }) => item.id === 'lmc-overlays-smash-original');
-  const frame = JSON.parse(await readFile('labs/nebula/models/lmc/full-density/object.json', 'utf8')).properties.volume as OverlayFrame;
+  const frame = JSON.parse(await readFile('src/objects/lmc-volume/source/full-density/object.json', 'utf8')).properties.volume as OverlayFrame;
   const mapping = createObservationMapping(fixture.wcs, frame), [width, height] = fixture.wcs.referenceDimension;
   for (let i = 0; i < fixture.pixels.length; i++) {
     const [fx, fy] = fixture.pixels[i], uv = [(fx - .5) / width, (height + .5 - fy) / height];

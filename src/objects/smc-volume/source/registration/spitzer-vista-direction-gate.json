@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-image-direction-gate@1",
+  "status": "fail",
+  "pass": false,
+  "cloudProcessingPerformed": false,
+  "source": {
+    "path": "src/objects/smc-volume/.local/intake/ssc2010-02c.jpg",
+    "nativeDimensions": [
+      11200,
+      6600
+    ],
+    "workingDimensions": [
+      5000,
+      2946
+    ],
+    "wcs": {
+      "referenceDimension": [
+        11200,
+        6600
+      ],
+      "referencePixel": [
+        5600,
+        3300
+      ],
+      "referenceValueDeg": [
+        21.79583333333333,
+        -73.95883333333333
+      ],
+      "scaleDeg": [
+        -0.0008303571428571429,
+        0.0008333333333333334
+      ],
+      "rotationDeg": -148.4
+    }
+  },
+  "reference": {
+    "path": "src/objects/smc-volume/.local/intake/eso1714a.jpg",
+    "nativeDimensions": [
+      4000,
+      3540
+    ],
+    "workingDimensions": [
+      4000,
+      3540
+    ],
+    "wcs": {
+      "referenceDimension": [
+        43223,
+        38236
+      ],
+      "referencePixel": [
+        21611.5,
+        19118
+      ],
+      "referenceValueDeg": [
+        13.7631652021,
+        -72.9640481752
+      ],
+      "scaleDeg": [
+        -0.000136644159443,
+        0.000136644159443
+      ],
+      "rotationDeg": 1.2000000000000006
+    }
+  },
+  "failureReason": "No coherent star-field descriptor seed"
+}

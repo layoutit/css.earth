@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "m42-volume",
+  "name": "Orion Nebula",
+  "type": "H II region",
+  "papers": [
+    {
+      "label": "Menten et al. (2007), abstract",
+      "url": "https://arxiv.org/abs/0709.0485",
+      "record": "src/sources/menten-2007.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "ESO optical, eso1723a",
+      "url": "https://www.eso.org/public/images/eso1723a/",
+      "record": "src/sources/eso-eso1723a.json"
+    },
+    {
+      "label": "ESO VISTA, eso1006a",
+      "url": "https://www.eso.org/public/images/eso1006a/",
+      "record": "src/sources/eso-eso1006a.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "none",
+    "label": "None assumed"
+  },
+  "velocity": {
+    "available": false,
+    "items": []
+  },
+  "method": {
+    "chosen": "inference",
+    "status": "experiment",
+    "available": [],
+    "geometry": []
+  }
+}

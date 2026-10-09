@@ -41,7 +41,7 @@
       ],
       "input": "niittee-widefield",
       "preview": {
-        "path": ".local/nebula-lab/observations/m45-optical-composite/sources/niittee-widefield.tif",
+        "path": "src/objects/m45-volume/.local/observations/m45-optical-composite/sources/niittee-widefield.tif",
         "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Plejades.jpg"
       }
     },
@@ -71,7 +71,7 @@
       ],
       "input": "noirlab-optical",
       "preview": {
-        "path": ".local/nebula-lab/observations/m45-processing/sources/noirlab-optical.tif",
+        "path": "src/objects/m45-volume/.local/observations/m45-processing/sources/noirlab-optical.tif",
         "url": "https://storage.noirlab.edu/media/archives/images/publicationtiff/noao-m45.tif"
       }
     },
@@ -101,7 +101,7 @@
       ],
       "input": "spitzer-irac",
       "preview": {
-        "path": ".local/nebula-lab/observations/m45-processing/sources/spitzer-irac.tif",
+        "path": "src/objects/m45-volume/.local/observations/m45-processing/sources/spitzer-irac.tif",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09262/PIA09262.tif"
       }
     },
@@ -131,7 +131,7 @@
       ],
       "input": "spitzer-irac-mips",
       "preview": {
-        "path": ".local/nebula-lab/observations/m45-processing/sources/spitzer-irac-mips.tif",
+        "path": "src/objects/m45-volume/.local/observations/m45-processing/sources/spitzer-irac-mips.tif",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09263/PIA09263.tif"
       }
     },
@@ -161,7 +161,7 @@
       ],
       "input": "wise-four-band",
       "preview": {
-        "path": ".local/nebula-lab/observations/m45-processing/sources/wise-four-band.tif",
+        "path": "src/objects/m45-volume/.local/observations/m45-processing/sources/wise-four-band.tif",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia13/pia13121/PIA13121.tif"
       }
     }

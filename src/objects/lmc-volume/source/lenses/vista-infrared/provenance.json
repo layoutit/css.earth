@@ -20,7 +20,7 @@
       "height": 10000
     },
     "original": {
-      "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
+      "path": "src/objects/lmc-volume/.local/image-candidates/vista/eso1914a-10k.tif",
       "removalResultId": "vista-infrared"
     },
     "overlay": {
@@ -71,20 +71,20 @@
       }
     },
     "stellarPrior": {
-      "path": "labs/nebula/models/lmc/full-density/source/volume.json"
+      "path": "src/objects/lmc-volume/source/full-density/source/volume.json"
     },
     "stars": {
-      "path": "labs/nebula/models/lmc/stars/prepared/stars.json"
+      "path": "src/objects/lmc-volume/source/stars/prepared/stars.json"
     },
     "cloud": {
       "descriptor": {
-        "path": "labs/nebula/models/lmc/full-density/object.json"
+        "path": "src/objects/lmc-volume/source/full-density/object.json"
       },
       "slices": {
-        "path": "labs/nebula/models/lmc/full-density/prepared/volume-slices.json"
+        "path": "src/objects/lmc-volume/source/full-density/prepared/volume-slices.json"
       },
       "provenance": {
-        "path": "labs/nebula/models/lmc/full-density/source/volume.json"
+        "path": "src/objects/lmc-volume/source/full-density/source/volume.json"
       },
       "starAlignment": {
         "wcs": {
@@ -132,7 +132,7 @@
           }
         },
         "provenancePin": {
-          "path": "labs/nebula/models/lmc/stars/source/alignment.json"
+          "path": "src/objects/lmc-volume/source/stars/source/alignment.json"
         }
       }
     },
@@ -146,13 +146,13 @@
   },
   "canonicalCloud": {
     "descriptor": {
-      "path": "labs/nebula/models/lmc/full-density/object.json"
+      "path": "src/objects/lmc-volume/source/full-density/object.json"
     },
     "slices": {
-      "path": "labs/nebula/models/lmc/full-density/prepared/volume-slices.json"
+      "path": "src/objects/lmc-volume/source/full-density/prepared/volume-slices.json"
     },
     "provenance": {
-      "path": "labs/nebula/models/lmc/full-density/source/volume.json"
+      "path": "src/objects/lmc-volume/source/full-density/source/volume.json"
     },
     "starAlignment": {
       "wcs": {
@@ -200,7 +200,7 @@
         }
       },
       "provenancePin": {
-        "path": "labs/nebula/models/lmc/stars/source/alignment.json"
+        "path": "src/objects/lmc-volume/source/stars/source/alignment.json"
       }
     }
   },
@@ -210,7 +210,7 @@
     "height": 4388
   },
   "original": {
-    "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
+    "path": "src/objects/lmc-volume/.local/new-references/iotw2547a.jpg",
     "removalResultId": "horalek-widefield"
   },
   "material": {

@@ -3,7 +3,7 @@
   "id": "m49-volume",
   "method": "axial-symmetry",
   "request": {
-    "path": "labs/nebula/models/m49/experiment.json"
+    "path": "src/objects/m49-volume/source/experiment.json"
   },
   "inputPins": [],
   "sky": {

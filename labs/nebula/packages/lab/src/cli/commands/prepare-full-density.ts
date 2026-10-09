@@ -1,6 +1,6 @@
 import {deriveCenteredToLocal,transformParticleBytes,planFullDensityGrid,boundaryDiagnostics,close,type Matrix3,type TransformRecipe} from '@cssearth/nebula-reconstruction/stars/full-density';
 export {transformParticleBytes,planFullDensityGrid,type GridPlan} from '@cssearth/nebula-reconstruction/stars/full-density';
-import { parseLabModelJson } from '../../resources/model-paths.ts';
+import { parseLabModelJson, objectScratch } from '../../resources/model-paths.ts';
 /** Full-particle neutral density preparation with one pinned source-to-local affine. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
@@ -62,8 +62,8 @@ export async function prepareFullParticleDensity(configPath: string): Promise<vo
     }
     const plan = planFullDensityGrid(transformed.boundsKpc, config.grid);
     const objectDirectory = resolve(target.outputDirectory), sourceDirectory = resolve(objectDirectory, 'source');
-    const transformedPath = resolve(root, '.local/nebula-lab/full-density', `${target.id}.f32`);
-    await mkdir(resolve(root, '.local/nebula-lab/full-density'), { recursive: true });
+    const transformedPath = resolve(root, objectScratch(target.id, 'full-density'), `${target.id}.f32`);
+    await mkdir(resolve(root, objectScratch(target.id, 'full-density')), { recursive: true });
     await mkdir(sourceDirectory, { recursive: true });
     await writeFile(transformedPath, transformed.bytes);
     console.log(`FULL_DENSITY_GRID ${target.id}: ${plan.dimensions.join('x')} at ${plan.cellWidthKpc.toFixed(6)} kpc`);
@@ -86,7 +86,7 @@ export async function prepareFullParticleDensity(configPath: string): Promise<vo
     const provenance = { schema: 'cssearth-full-particle-density-provenance@1',
       config: { path: relative(root, resolve(configPath)).split('\\').join('/') },
       source: { centeredParticles: target.centeredParticles, importReceipt: target.importReceipt,
-        regeneration: `pnpm lab:nebula:particles labs/nebula/models/magellanic-particles.json <pinned-archive.zip> ${imported.selection ? target.id.replace(/-full-density$/, '-particles') : target.id}`,
+        regeneration: `pnpm lab:nebula:particles src/objects/lmc-volume/source/magellanic-particles.json <pinned-archive.zip> ${imported.selection ? target.id.replace(/-full-density$/, '-particles') : target.id}`,
         particleSelection: imported.selection, sourceSnapshot: imported.source,
         interpretation: imported.interpretation },
       transform: { ...config.transform, centeringOffsetKpc: target.centeringOffsetKpc,

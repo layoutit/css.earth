@@ -182,7 +182,7 @@ src/objects/*/source/**/*.bpc
 /src/objects/comet-19p/source/micas/*.cub
 
 # Nebula density textures are rebuilt from the checked-in scalar grids.
-/labs/nebula/models/*/full-density/prepared/slices/
+/src/objects/*-volume/source/full-density/prepared/slices/
 # Authored models and reviewed source images required before preparation.
 !src/objects/*/source/presentation/context.png
 !src/objects/*/source/material/*.png
@@ -265,13 +265,13 @@ src/objects/*/source/**/*.bpc
 /src/objects/quaoar/source/reference/quaoar-2026.html
 
 # Replayed by the nebula bake recipe; keep source/settings and expected hashes.
-/labs/nebula/models/*/star-separation/prepared/
+/src/objects/*-volume/source/star-separation/prepared/
 
 # Prepared environment rasters under src/objects are committed: lossy WebP
 # encoding is not byte-identical across platforms, so a fresh checkout verifies
 # the accepted bytes instead of replaying them (`--verify-replay` still can).
-/labs/nebula/models/*/candidates/prepared/*.webp
-/labs/nebula/models/*/clouds-observation/source/target.png
+/src/objects/*-volume/source/candidates/prepared/*.webp
+/src/objects/*-volume/source/clouds-observation/source/target.png
 # Reference derivatives rebuilt by `acquire-images` from the hash-pinned publisher TIFF in the ignored cache.
 # Their `.webp.json` sidecars stay tracked: the pins and the interpretation are the record, the pixels are not.
 /labs/nebula/sources/*.webp
@@ -534,3 +534,7 @@ deploy/cloudflare/bundled/
 src/objects/ngc-3132-layers/source/ngc3132_density_structure_101.dat
 # The same grid beside the Southern Ring's mid-infrared bank; restored from the same origin (src/objects/ngc-3132-miri-layers/source/manifest.json).
 src/objects/ngc-3132-miri-layers/source/ngc3132_density_structure_101.dat
+
+# CDS ReadMe files of the Magellanic star catalogues: cited by their pinned URLs and restored on read.
+/src/objects/lmc-volume/source/stars/source/Bonanos2009-ReadMe.txt
+/src/objects/smc-volume/source/stars/source/Bonanos2010-ReadMe.txt

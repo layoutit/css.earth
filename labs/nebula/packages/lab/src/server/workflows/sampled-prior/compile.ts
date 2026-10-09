@@ -41,7 +41,7 @@ export async function prepareSampledSceneStars(root: string, outputDirectory: st
 }
 
 export async function readSourcePin(root: string, pin: CompilerPin): Promise<Buffer> {
-  if (!( /^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || isSampledFitsOwner(pin.path)) || /[\\?#\s]/.test(pin.path) ||
+  if (!( /^((src\/objects\/[a-z0-9-]+\/(?:source|\.local)|labs\/nebula\/src)\/|\.local\/nebula-lab\/)/.test(pin.path) || isSampledFitsOwner(pin.path)) || /[\\?#\s]/.test(pin.path) ||
       pin.path.split('/').some(p => !p || p === '..')) throw new TypeError('Invalid sampled source path.');
   const path = await realpath(resolve(root, pin.path)), offset = relative(await realpath(root), path);
   if (offset === '..' || offset.startsWith('../') || isAbsolute(offset)) throw new TypeError('Sampled source leaves the repository.');

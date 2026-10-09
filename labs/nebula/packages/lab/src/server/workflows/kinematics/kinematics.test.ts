@@ -7,7 +7,7 @@ import { readKinematicParameters, readPreparedKinematics, readSlitEvidence } fro
 import { createKinematicsHandler, loadKinematicEvidence } from '../../routes/kinematics.ts';
 import { extractJpegFromEps } from '@cssearth/nebula-reconstruction/methods/kinematics/source-figure';
 
-const sourcePath = 'labs/nebula/models/helix/kinematics-oiii.json';
+const sourcePath = 'src/objects/helix-layers/source/kinematics-oiii.json';
 const bytes = await readFile(sourcePath), raw: unknown = JSON.parse(bytes.toString());
 const evidence = readSlitEvidence(raw), identity = sourcePath;
 const near = (actual: number, expected: number) => assert.ok(Math.abs(actual - expected) < 1e-8, `${actual} != ${expected}`);

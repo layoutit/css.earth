@@ -3,7 +3,7 @@
   "objectId": "m1-volume",
   "source": {
     "id": "sitelle-deep",
-    "path": ".local/nebula-lab/intake/m1/physical/m1.deep_frame.fits",
+    "path": "src/objects/m1-volume/.local/intake/physical/m1.deep_frame.fits",
     "bytes": 16917120,
     "width": 2048,
     "height": 2064

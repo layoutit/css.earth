@@ -13,7 +13,7 @@ function recipe(features = false): DepthRecipe {
     centerArcsec: [2, -3], radiusArcsec: [100, 100], angleDegrees: 0, depthArcsec: 10, gradient: [.3, -.2],
     curvaturePerArcsec: [.002, .001, -.001], thicknessArcsec: 200, strength: 1, rationale: 'Authored smooth reference surface.' };
   return readDepthRecipe({ schema: 'cssearth-nebula-depth-model@1', id: 'synthetic-cloud', centerIcrsDegrees: [30, -20],
-    evidence: { path: 'labs/nebula/models/synthetic-cloud/evidence.json' }, background,
+    evidence: { path: 'src/objects/synthetic-cloud-volume/source/evidence.json' }, background,
     features: features ? [{ ...background, id: 'feature', evidenceIds: ['structure'], support: 'paper-guided',
       centerArcsec: [20, 10], radiusArcsec: [8, 5], angleDegrees: 30, depthArcsec: 40, gradient: [-.1, .2], curvaturePerArcsec: [0, 0, 0], thicknessArcsec: 8 }] : [],
     detailThicknessRatio: .4, minimumThicknessArcsec: .01, interpretation: 'Synthetic conditional display geometry, not measured density.' });
@@ -114,8 +114,8 @@ test('invalid depth frames, surfaces, pin paths and conditioning scales are reje
 test('source-owned depth inputs load with a content pin and reject changes or escaping symlinks', async () => {
   const root = await mkdtemp(join(tmpdir(), 'nebula-depth-')), outside = await mkdtemp(join(tmpdir(), 'nebula-depth-outside-'));
   try {
-    const data = recipe(), bytes = JSON.stringify(ledger()), recipePath = 'labs/nebula/models/synthetic-cloud/depth.json';
-    await mkdir(join(root, 'labs/nebula/models/synthetic-cloud'), { recursive: true });
+    const data = recipe(), bytes = JSON.stringify(ledger()), recipePath = 'src/objects/synthetic-cloud-volume/source/depth.json';
+    await mkdir(join(root, 'src/objects/synthetic-cloud-volume/source'), { recursive: true });
     await writeFile(join(root, data.evidence.path), bytes); await writeFile(join(root, recipePath), JSON.stringify(data));
     const loaded = await loadDepthModel(root, recipePath, 'synthetic-cloud');
     assert.deepEqual(loaded.methods, ['coherent-irregular-front']);

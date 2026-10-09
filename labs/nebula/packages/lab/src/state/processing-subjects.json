@@ -1,0 +1,388 @@
+[
+  {
+    "id": "lmc-clouds",
+    "name": "LMC",
+    "directory": "src/objects/lmc-volume/source/full-density",
+    "stars": "src/objects/lmc-volume/source/stars/prepared/stars.json",
+    "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
+    "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "comparisonGroup": "lmc-clouds-observation",
+    "referenceDistanceUnits": 49.59067275049,
+    "referenceEastLeft": true,
+    "density": {
+      "directory": "src/objects/lmc-volume/source/full-density",
+      "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
+      "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
+      "overlays": "src/objects/lmc-volume/source/candidates/overlays.json",
+      "candidateImageIds": [
+        "vista-infrared",
+        "horalek-widefield",
+        "wise-wide-infrared"
+      ],
+      "referenceFramingRadiusUnits": 5,
+      "starAlignmentReference": {
+        "path": "src/objects/lmc-volume/source/stars/source/alignment.json"
+      },
+      "processingPlan": "src/objects/lmc-volume/source/star-separation/plan.json"
+    },
+    "imagePath": "src/objects/lmc-volume/source/candidates/prepared/vista-infrared.webp",
+    "menuLabel": "LMC",
+    "workflow": "density"
+  },
+  {
+    "id": "smc-particles",
+    "name": "SMC · fitted simulation",
+    "directory": "src/objects/smc-volume/.local/aligned-density",
+    "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+    "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
+    "modelNote": "Historical visual-fit comparison, rejected as a physical size calibration. Full simulated stellar density with authored translation, rotation and scale; not observed SMC geometry. All original tails are retained and the images remain fixed.",
+    "framingRadiusUnits": 7,
+    "hasDetail": false,
+    "sourceSubjectId": "smc",
+    "density": {
+      "directory": "src/objects/smc-volume/.local/aligned-density",
+      "modelNote": "Historical visual-fit comparison, rejected as a physical size calibration. Full simulated stellar density with authored translation, rotation and scale; not observed SMC geometry. All original tails are retained and the images remain fixed.",
+      "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
+      "overlays": "src/objects/smc-volume/source/candidates/overlays.json",
+      "candidateImageIds": [
+        "smc-vista",
+        "smc-smash",
+        "smc-dss2",
+        "smc-wise",
+        "smc-allwise-wide",
+        "smc-herschel-spitzer",
+        "smc-herschel-gas",
+        "smc-horalek-wide",
+        "smc-irida-optical",
+        "smc-dss2-fits",
+        "smc-wise-stellar",
+        "smc-wise-starforming",
+        "smc-herschel-dust"
+      ],
+      "processingPlan": "src/objects/smc-volume/source/processing-plan.json",
+      "referenceFramingRadiusUnits": 7,
+      "modelPlacement": {
+        "path": "src/objects/smc-volume/source/model-placement.json"
+      }
+    },
+    "menuLabel": "SMC · fitted simulation",
+    "workflow": "density",
+    "referenceDistanceUnits": 62.440000000000005,
+    "referenceEastLeft": true,
+    "imagePath": "src/objects/smc-volume/source/candidates/prepared/smc-smash.webp",
+    "comparisonGroup": "smc-particles-observation"
+  },
+  {
+    "id": "smc-vmc",
+    "name": "SMC · VMC observed",
+    "directory": "src/objects/smc-volume/.local/vmc-density",
+    "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
+    "credit": "VMC red-clump stars: Tatton et al. (2021), CDS and ESO VMC DR5.1 PSF photometry.",
+    "modelNote": "489,760 unique observed red-clump tracers. Sky position and angular scale are catalogue-based; photometric distance estimates include population, reddening and measurement scatter. This is a stellar tracer distribution, not gas or dust density. No image-fitting transform.",
+    "framingRadiusUnits": 7,
+    "hasDetail": false,
+    "sourceSubjectId": "smc",
+    "density": {
+      "directory": "src/objects/smc-volume/.local/vmc-density",
+      "modelNote": "489,760 unique observed red-clump tracers. Sky position and angular scale are catalogue-based; photometric distance estimates include population, reddening and measurement scatter. This is a stellar tracer distribution, not gas or dust density. No image-fitting transform.",
+      "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
+      "credit": "VMC red-clump stars: Tatton et al. (2021), CDS and ESO VMC DR5.1 PSF photometry.",
+      "overlays": "src/objects/smc-volume/source/candidates/overlays.json",
+      "candidateImageIds": [
+        "smc-vista",
+        "smc-smash",
+        "smc-dss2",
+        "smc-wise",
+        "smc-allwise-wide",
+        "smc-herschel-spitzer",
+        "smc-herschel-gas",
+        "smc-horalek-wide",
+        "smc-irida-optical",
+        "smc-dss2-fits",
+        "smc-wise-stellar",
+        "smc-wise-starforming",
+        "smc-herschel-dust"
+      ],
+      "processingPlan": "src/objects/smc-volume/source/processing-plan.json",
+      "referenceFramingRadiusUnits": 7
+    },
+    "menuLabel": "SMC · VMC observed",
+    "workflow": "density",
+    "referenceDistanceUnits": 62.440000000000005,
+    "referenceEastLeft": true,
+    "imagePath": "src/objects/smc-volume/source/candidates/prepared/smc-smash.webp",
+    "comparisonGroup": "smc-vmc-observation"
+  },
+  {
+    "id": "smc-ellipsoid",
+    "name": "SMC · ellipsoid comparison",
+    "directory": "src/objects/smc-volume/.local/constrained/ellipsoid-volume",
+    "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
+    "credit": "Authored ellipsoid hypothesis constrained by Tatton et al. (2021) / ESO VMC red-clump observations.",
+    "modelNote": "Conditional model fitted to VMC sky positions and brightness-distance distributions with an approximate survey selection and magnitude-error kernel. Outside the survey this is model-dependent. This neutral comparison is not measured gas/dust or an accepted physical reconstruction.",
+    "framingRadiusUnits": 7,
+    "hasDetail": false,
+    "sourceSubjectId": "smc",
+    "density": {
+      "directory": "src/objects/smc-volume/.local/constrained/ellipsoid-volume",
+      "modelNote": "Conditional model fitted to VMC sky positions and brightness-distance distributions with an approximate survey selection and magnitude-error kernel. Outside the survey this is model-dependent. This neutral comparison is not measured gas/dust or an accepted physical reconstruction.",
+      "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
+      "credit": "Authored ellipsoid hypothesis constrained by Tatton et al. (2021) / ESO VMC red-clump observations.",
+      "overlays": "src/objects/smc-volume/source/candidates/overlays.json",
+      "candidateImageIds": [
+        "smc-vista",
+        "smc-smash",
+        "smc-dss2",
+        "smc-wise",
+        "smc-allwise-wide",
+        "smc-herschel-spitzer",
+        "smc-herschel-gas",
+        "smc-horalek-wide",
+        "smc-irida-optical",
+        "smc-dss2-fits",
+        "smc-wise-stellar",
+        "smc-wise-starforming",
+        "smc-herschel-dust"
+      ],
+      "processingPlan": "src/objects/smc-volume/source/processing-plan.json",
+      "referenceFramingRadiusUnits": 7
+    },
+    "menuLabel": "SMC · ellipsoid comparison",
+    "workflow": "density",
+    "referenceDistanceUnits": 62.440000000000005,
+    "referenceEastLeft": true,
+    "imagePath": "src/objects/smc-volume/source/candidates/prepared/smc-smash.webp",
+    "comparisonGroup": "smc-ellipsoid-observation"
+  },
+  {
+    "id": "smc-constrained",
+    "name": "SMC · constrained simulation",
+    "directory": "src/objects/smc-volume/.local/constrained/simulation-volume",
+    "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
+    "credit": "Garver et al. (2026) simulation prior; Tatton et al. (2021) / ESO VMC red-clump constraints.",
+    "modelNote": "Conditional model fitted to VMC sky positions and brightness-distance distributions with an approximate survey selection and magnitude-error kernel. Outside the survey this is model-dependent. This neutral comparison is not measured gas/dust or an accepted physical reconstruction.",
+    "framingRadiusUnits": 7,
+    "hasDetail": false,
+    "sourceSubjectId": "smc",
+    "density": {
+      "directory": "src/objects/smc-volume/.local/constrained/simulation-volume",
+      "modelNote": "Conditional model fitted to VMC sky positions and brightness-distance distributions with an approximate survey selection and magnitude-error kernel. Outside the survey this is model-dependent. This neutral comparison is not measured gas/dust or an accepted physical reconstruction.",
+      "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
+      "credit": "Garver et al. (2026) simulation prior; Tatton et al. (2021) / ESO VMC red-clump constraints.",
+      "overlays": "src/objects/smc-volume/source/candidates/overlays.json",
+      "candidateImageIds": [
+        "smc-vista",
+        "smc-smash",
+        "smc-dss2",
+        "smc-wise",
+        "smc-allwise-wide",
+        "smc-herschel-spitzer",
+        "smc-herschel-gas",
+        "smc-horalek-wide",
+        "smc-irida-optical",
+        "smc-dss2-fits",
+        "smc-wise-stellar",
+        "smc-wise-starforming",
+        "smc-herschel-dust"
+      ],
+      "processingPlan": "src/objects/smc-volume/source/processing-plan.json",
+      "referenceFramingRadiusUnits": 7
+    },
+    "menuLabel": "SMC · constrained simulation",
+    "workflow": "density",
+    "referenceDistanceUnits": 62.440000000000005,
+    "referenceEastLeft": true,
+    "imagePath": "src/objects/smc-volume/source/candidates/prepared/smc-smash.webp",
+    "comparisonGroup": "smc-constrained-observation"
+  },
+  {
+    "id": "m2-9-inferred",
+    "emissionExperiment": {
+      "directory": "src/objects/m2-9-volume/.local/planetary/m2-9-inferred"
+    },
+    "name": "M2–9 · inferred emission",
+    "directory": "src/objects/m2-9-volume/.local/planetary/m2-9-inferred",
+    "imagePath": "src/objects/m2-9-volume/.local/planetary/m2-9-inferred/input.png",
+    "sourcePageUrl": "https://apod.nasa.gov/apod/ap040201.html",
+    "credit": "Hubble: Balick, Icke, Mellema & NASA. Independent implementation of Wenger, Lorenz & Magnor (2013).",
+    "modelNote": "Experimental emission inferred from one image and approximate axial symmetry. Unmeasured depth and scale; four point sources masked. Not gas mass density.",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "menuLabel": "M2–9",
+    "workflow": "symmetry"
+  },
+  {
+    "id": "helix-single-axis",
+    "name": "Helix · one-axis fit",
+    "directory": "src/objects/helix-layers/.local/planetary/helix-single-axis",
+    "imagePath": "src/objects/helix-layers/.local/planetary/helix-single-axis/input.png",
+    "emissionExperiment": {
+      "directory": "src/objects/helix-layers/.local/planetary/helix-single-axis",
+      "structureDirectory": "src/objects/helix-layers/.local/planetary/helix-structures",
+      "modeled": false,
+      "methodUrl": "https://doi.org/10.1111/cgf.12216",
+      "statusNote": "Control: front fits; side geometry fails.",
+      "sourceCatalogue": "src/objects/helix-layers/source/source-candidates.json"
+    },
+    "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
+    "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",
+    "modelNote": "Experimental relative emission: geometry and depths remain assumptions. Hubble/CTIO native image, NOX separation.",
+    "comparisonGroup": "helix-emission-comparison",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "menuLabel": "Helix · symmetry baseline",
+    "workflow": "symmetry",
+    "observationAlignment": {
+      "manifest": "src/objects/helix-layers/.local/observations/helix/observations.json",
+      "recipe": "src/objects/helix-layers/source/observations.json"
+    }
+  },
+  {
+    "id": "helix-model-prior",
+    "name": "Helix · disk/ring prior",
+    "directory": "src/objects/helix-layers/.local/planetary/helix-model-prior",
+    "imagePath": "src/objects/helix-layers/.local/planetary/helix-model-prior/input.png",
+    "emissionExperiment": {
+      "directory": "src/objects/helix-layers/.local/planetary/helix-model-prior",
+      "structureDirectory": "src/objects/helix-layers/.local/planetary/helix-structures",
+      "observationStructures": "src/objects/helix-layers/.local/observations/helix/structures/catalogue.json",
+      "modeled": true,
+      "methodUrl": "https://doi.org/10.1086/424621",
+      "statusNote": "Previous Hubble baseline: outer emission omitted; side detail unresolved. Not fitted from the ESO structure candidates.",
+      "kinematicsSource": "src/objects/helix-layers/source/kinematics-oiii.json",
+      "jointFitSource": "src/objects/helix-layers/source/joint-fit.json",
+      "compilerSource": "src/objects/helix-layers/source/compiler.json"
+    },
+    "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
+    "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",
+    "modelNote": "Experimental relative emission: geometry and depths remain assumptions. Hubble/CTIO native image, NOX separation.",
+    "comparisonGroup": "helix-emission-comparison",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "menuLabel": "Helix",
+    "workflow": "inference",
+    "observationAlignment": {
+      "manifest": "src/objects/helix-layers/.local/observations/helix/observations.json",
+      "recipe": "src/objects/helix-layers/source/observations.json"
+    }
+  },
+  {
+    "id": "m42",
+    "name": "M42 · Orion",
+    "menuLabel": "M42 · Orion",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/m42",
+    "hasDetail": false,
+    "modelNote": "Star-forming emission and reflection cloud. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
+    "observationAlignment": {
+      "manifest": "src/objects/m42-volume/.local/observations/m42/observations.json",
+      "recipe": "src/objects/m42-volume/source/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": "src/objects/m42-volume/.local/observations/m42/structures/catalogue.json",
+      "compilerSource": "src/objects/m42-volume/source/compiler.json",
+      "compilerPublished": "src/objects/m42-volume/.local/compiler-published.json",
+      "statusNote": "Image-only conditional depth; not measured density."
+    }
+  },
+  {
+    "id": "m8",
+    "name": "M8 · Lagoon",
+    "menuLabel": "M8 · Lagoon",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/m8",
+    "hasDetail": false,
+    "modelNote": "Evidence-guided display model; physical observations and authored depth assumptions are recorded separately.",
+    "observationAlignment": {
+      "manifest": "src/objects/m8-volume/.local/observations/m8-processed/observations.json",
+      "recipe": "src/objects/m8-volume/source/processing-observations.json",
+      "dossier": "src/objects/m8-volume/source/source-dossier.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": "src/objects/m8-volume/.local/observations/m8-processed/structures/catalogue.json",
+      "compilerSource": "src/objects/m8-volume/source/compiler.json",
+      "compilerPublished": "src/objects/m8-volume/.local/compiler-published.json",
+      "statusNote": "Published constraints guide authored depth; this is not measured gas density."
+    }
+  },
+  {
+    "id": "m45",
+    "name": "M45 · Pleiades",
+    "menuLabel": "M45 · Pleiades",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/m45",
+    "hasDetail": false,
+    "modelNote": "Evidence-guided display model; physical observations and authored depth assumptions are recorded separately.",
+    "observationAlignment": {
+      "manifest": "src/objects/m45-volume/.local/observations/m45/observations.json",
+      "recipe": "src/objects/m45-volume/source/observations.json",
+      "dossier": "src/objects/m45-volume/source/source-dossier.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": "src/objects/m45-volume/.local/observations/m45-processing/structures/catalogue.json",
+      "compilerSource": "src/objects/m45-volume/source/compiler.json",
+      "compilerPublished": "src/objects/m45-volume/.local/compiler-published.json",
+      "statusNote": "Published constraints guide authored depth; this is not measured gas density."
+    }
+  },
+  {
+    "id": "omega-centauri",
+    "name": "Omega Centauri",
+    "menuLabel": "Omega Centauri",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/omega-centauri",
+    "hasDetail": false,
+    "modelNote": "Published oblate starlight prior; finite feature depths remain conditional, not measured star positions.",
+    "observationAlignment": {
+      "manifest": "src/objects/omega-centauri-volume/.local/observations/omega-centauri/observations.json",
+      "recipe": "src/objects/omega-centauri-volume/source/observations.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": "src/objects/omega-centauri-volume/.local/observations/omega-centauri/structures/catalogue.json",
+      "compilerSource": "src/objects/omega-centauri-volume/source/compiler.json",
+      "compilerPublished": ".local/nebula-lab/compiler-published/omega-centauri.json",
+      "statusNote": "Published oblate prior with conditional finite feature depths; integrated stellar light is preserved."
+    }
+  },
+  {
+    "id": "m1",
+    "name": "M1 · Crab",
+    "menuLabel": "M1 · Crab",
+    "workflow": "inference",
+    "directory": ".local/nebula-lab/compiler-published/m1",
+    "hasDetail": false,
+    "modelNote": "Qualified line-emission samples and separate model wind geometry; depth is conditional on the published expansion law.",
+    "observationAlignment": {
+      "manifest": "src/objects/m1-volume/.local/observations/m1/observations.json",
+      "recipe": "src/objects/m1-volume/source/observations.json",
+      "dossier": "src/objects/m1-volume/source/source-dossier.json"
+    },
+    "emissionExperiment": {
+      "observationStructures": "src/objects/m1-volume/.local/observations/m1/structures/catalogue.json",
+      "compilerSource": "src/objects/m1-volume/source/compiler.json",
+      "compilerPublished": "src/objects/m1-volume/.local/compiler-published.json",
+      "statusNote": "Released ejecta samples, separate pulsar wind and compact pulsar; spectral component strengths remain authored."
+    }
+  },
+  {
+    "id": "m87-inferred",
+    "emissionExperiment": {
+      "directory": ".local/nebula-lab/planetary/m87-inferred"
+    },
+    "name": "M87 · inferred light",
+    "directory": ".local/nebula-lab/planetary/m87-inferred",
+    "imagePath": ".local/nebula-lab/planetary/m87-inferred/input.png",
+    "sourcePageUrl": "https://www.eso.org/public/images/eso1525a/",
+    "credit": "Chris Mihos (Case Western Reserve University)/ESO. Independent implementation of Wenger, Lorenz & Magnor (2013).",
+    "modelNote": "Experimental starlight distribution inferred from one image and axial symmetry about M87's minor axis in the sky plane. NOX star removal; catalogued neighbouring galaxies masked. Unmeasured depth.",
+    "framingRadiusUnits": 5,
+    "hasDetail": false,
+    "menuLabel": "M87",
+    "workflow": "symmetry"
+  }
+]

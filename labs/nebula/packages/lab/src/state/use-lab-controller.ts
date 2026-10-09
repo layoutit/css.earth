@@ -9,7 +9,7 @@ export interface LabControlsProps { shell: LabShellState; controller: RefObject<
 
 /** The application owns controller lifetime and renders every control in its own tree. */
 export function useLabController() {
-  const [shell, setShell] = useState<LabShellState>({ objectId: 'lmc-clouds', view: labView(new URL(location.href)), busy: true, alignmentAvailable: true, pose: 'front' });
+  const [shell, setShell] = useState<LabShellState>({ objectId: '', view: labView(new URL(location.href)), busy: true, alignmentAvailable: true, pose: 'front' });
   const [controls] = useState(createControlPortals);
   const controller = useRef<LabController | null>(null);
   useEffect(() => {

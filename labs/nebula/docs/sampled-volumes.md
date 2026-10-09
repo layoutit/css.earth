@@ -23,7 +23,7 @@ filaments. Separate receipts record each stage and its unresolved ambiguities.
 Unit tests reject the old XY-only path and its repeated-depth counterfactual.
 They do not prove visual quality: front, oblique, both side axes and continuous
 rotation remain mandatory before acceptance or promotion. Crab's
-[material trials](../models/m1/material-trial.json) currently **fail**: averaging
+[material trials](../../../src/objects/m1-volume/source/material-trial.json) currently **fail**: averaging
 removes front detail; isolated fine emitters produce beads. Connected structures
 are the next required model work. The historical fixed-density/symmetry painters
 also require requalification; their existing pinned assets were not replaced.
@@ -124,6 +124,6 @@ images. It is not a calibrated line-flux residual or evidence that inferred dept
 correct. Spectral epochs, velocity frame, expansion-law assumptions, unobserved
 tracers, missing uncertainties and front/back ambiguity remain in the object ledger.
 
-See [Crab's source and evidence record](../models/m1/README.md). Its fitted diffuse
+See [Crab's source and evidence record](../../../src/objects/m1-volume/source/README.md). Its fitted diffuse
 interior is a bounded continuum proxy, not the complete extended PWN. Missing
 outer coverage, scattering, absorption and Doppler boosting remain unresolved.

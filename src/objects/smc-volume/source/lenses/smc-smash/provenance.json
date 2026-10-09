@@ -71,17 +71,17 @@
       }
     },
     "stellarPrior": {
-      "path": ".local/nebula-lab/smc-constrained/simulation-volume/source/volume.json"
+      "path": "src/objects/smc-volume/.local/constrained/simulation-volume/source/volume.json"
     },
     "cloud": {
       "descriptor": {
-        "path": ".local/nebula-lab/smc-constrained/simulation-volume/object.json"
+        "path": "src/objects/smc-volume/.local/constrained/simulation-volume/object.json"
       },
       "slices": {
-        "path": ".local/nebula-lab/smc-constrained/simulation-volume/prepared/volume-slices.json"
+        "path": "src/objects/smc-volume/.local/constrained/simulation-volume/prepared/volume-slices.json"
       },
       "provenance": {
-        "path": ".local/nebula-lab/smc-constrained/simulation-volume/source/volume.json"
+        "path": "src/objects/smc-volume/.local/constrained/simulation-volume/source/volume.json"
       }
     },
     "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030b/",
@@ -94,13 +94,13 @@
   },
   "canonicalCloud": {
     "descriptor": {
-      "path": ".local/nebula-lab/smc-constrained/simulation-volume/object.json"
+      "path": "src/objects/smc-volume/.local/constrained/simulation-volume/object.json"
     },
     "slices": {
-      "path": ".local/nebula-lab/smc-constrained/simulation-volume/prepared/volume-slices.json"
+      "path": "src/objects/smc-volume/.local/constrained/simulation-volume/prepared/volume-slices.json"
     },
     "provenance": {
-      "path": ".local/nebula-lab/smc-constrained/simulation-volume/source/volume.json"
+      "path": "src/objects/smc-volume/.local/constrained/simulation-volume/source/volume.json"
     }
   },
   "source": {
@@ -109,7 +109,7 @@
     "height": 4045
   },
   "original": {
-    "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
+    "path": "src/objects/smc-volume/.local/intake/iotw2615a.jpg",
     "removalResultId": "smc-horalek-wide"
   },
   "material": {
@@ -5569,7 +5569,7 @@
       "floorPixels": 36272
     },
     "priorCloud": {
-      "path": ".local/nebula-lab/smc-constrained/ellipsoid-volume/source/volume.json"
+      "path": "src/objects/smc-volume/.local/constrained/ellipsoid-volume/source/volume.json"
     },
     "source": null,
     "meaning": "Smoothed image light carried along the pinned simulation density: gain(x,y) x simulation(x,y,z). Depth shape is the simulation, not recovered gas depth."

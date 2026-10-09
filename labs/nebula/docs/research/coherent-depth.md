@@ -57,9 +57,9 @@ The crops and small stellar-prior window are checked in. Restricted getsf softwa
 ```sh
 pnpm install --frozen-lockfile
 pnpm build:packages
-node --experimental-strip-types labs/nebula/src/run.ts prepare-structures labs/nebula/models/lmc/research/tarantula-core-benchmark.json
+node --experimental-strip-types labs/nebula/src/run.ts prepare-structures src/objects/lmc-volume/source/research/tarantula-core-benchmark.json
 node --experimental-strip-types labs/nebula/src/run.ts prepare-structures labs/nebula/models/orion-structure-benchmark.json
-pnpm lab:nebula:coherent labs/nebula/models/lmc/research/tarantula-coherent.json
+pnpm lab:nebula:coherent src/objects/lmc-volume/source/research/tarantula-coherent.json
 pnpm lab:nebula:coherent labs/nebula/models/orion-coherent.json
 pnpm lab:nebula
 ```

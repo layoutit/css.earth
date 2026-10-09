@@ -14,16 +14,16 @@ import { prepareRetainedMaterialBank } from './retained-material-bank.ts';
 import { restoreOpticalCompositeSources } from './optical-composite-inputs.ts';
 
 function sourcePin(v: unknown): CompilerPin {
-  if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/')) throw new TypeError('Invalid composite source path.');
+  if (!jointRecord(v) || !jointPath(v.path) || !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(v.path)) throw new TypeError('Invalid composite source path.');
   return { path: v.path };
 }
 function modelPath(v: unknown): string {
-  if (!jointPath(v) || !v.startsWith('labs/nebula/models/')) throw new TypeError('Invalid composite recipe path.'); return v;
+  if (!jointPath(v) || !/^src\/objects\/[a-z0-9-]+\/source\//.test(v)) throw new TypeError('Invalid composite recipe path.'); return v;
 }
 export function readOpticalCompositeRecipe(v: unknown) {
   if (!jointRecord(v) || v.schema !== 'cssearth-optical-composite-recipe@1' ||
       typeof v.id !== 'string' || !/^[a-z0-9][a-z0-9-]{0,95}$/.test(v.id) || typeof v.label !== 'string' || !v.label.trim() ||
-      !jointPath(v.observationCatalogue) || !v.observationCatalogue.startsWith('.local/nebula-lab/observations/') ||
+      !jointPath(v.observationCatalogue) || !/^src\/objects\/[a-z0-9-]+\/\.local\/observations\//.test(v.observationCatalogue) ||
       typeof v.detailSourceId !== 'string' || typeof v.wideSourceId !== 'string' || v.detailSourceId === v.wideSourceId ||
       typeof v.featherArcsec !== 'number' || !Number.isFinite(v.featherArcsec) || v.featherArcsec < 1 || v.featherArcsec > 3600 ||
       typeof v.lowFrequencyArcsec !== 'number' || !Number.isFinite(v.lowFrequencyArcsec) || v.lowFrequencyArcsec < 1 || v.lowFrequencyArcsec > 300 ||

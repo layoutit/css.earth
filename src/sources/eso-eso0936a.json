@@ -23,7 +23,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m8/processing-observations.json",
+      "path": "src/objects/m8-volume/source/processing-observations.json",
       "locator": "/images/0"
     }
   ],
@@ -34,7 +34,7 @@
       "kind": "credit",
       "text": "ESO",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json#/images/0"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/processing-observations.json#/images/0"
     }
   ]
 }

@@ -5,7 +5,7 @@ import { verifyPhotometricEvidence, fitPhotometricEmission } from './photometric
 import { readPhotometricMgeRecipe, readRetainedEmissionField, type EmissionFieldModel } from '@cssearth/objects';
 
 test('photometric evidence validation rejects cross-subject or repinned source snapshots', async () => {
-  const recipe = readPhotometricMgeRecipe(JSON.parse(await readFile('labs/nebula/models/omega-centauri/photometric-mge.json', 'utf8')));
+  const recipe = readPhotometricMgeRecipe(JSON.parse(await readFile('src/objects/omega-centauri-volume/source/photometric-mge.json', 'utf8')));
   const evidence: unknown = JSON.parse(await readFile(recipe.evidence.path, 'utf8'));
   verifyPhotometricEvidence(recipe, evidence, recipe.id);
   assert.throws(() => verifyPhotometricEvidence(recipe, evidence, 'other'), /another subject/);
@@ -16,7 +16,7 @@ import { createPhotometricMgePrior } from '@cssearth/nebula-reconstruction/metho
 import { createPhotometricEmission } from '@cssearth/bake/volume';
 
 test('two-scale fit retains smooth light and finite residuals, including after JSON replay', async () => {
-  const published = readPhotometricMgeRecipe(JSON.parse(await readFile('labs/nebula/models/omega-centauri/photometric-mge.json', 'utf8')));
+  const published = readPhotometricMgeRecipe(JSON.parse(await readFile('src/objects/omega-centauri-volume/source/photometric-mge.json', 'utf8')));
   const recipe = readPhotometricMgeRecipe({ ...published, residualMaximumComponents: undefined, gaussians: [{ centralAmplitude: 1, sigmaArcsec: 100, projectedAxisRatio: 1 }],
     envelope: { scalePixels: 3, fraction: .95, floor: 0, depthSamples: 128, depthTrim: .001 } });
   const width = 32, bounds = { min: [-300, -300] as [number, number], max: [300, 300] as [number, number] };
@@ -25,7 +25,7 @@ test('two-scale fit retains smooth light and finite residuals, including after J
     return Math.exp(-.5 * (x * x + y * y) / 10000) + .5 * Math.exp(-.5 * ((x - 40) ** 2 + (y - 30) ** 2) / 150);
   });
   const fit = fitPhotometricEmission({ target, coverage: new Uint8Array(target.length).fill(1), width, height: width, bounds },
-    { detail: 1, faint: .35, depth: 1 }, { recipe, prior: createPhotometricMgePrior(recipe), recipeBytes: Buffer.from(''), evidenceBytes: Buffer.from(''), recipePath: 'labs/nebula/models/omega-centauri/photometric-mge.json' },
+    { detail: 1, faint: .35, depth: 1 }, { recipe, prior: createPhotometricMgePrior(recipe), recipeBytes: Buffer.from(''), evidenceBytes: Buffer.from(''), recipePath: 'src/objects/omega-centauri-volume/source/photometric-mge.json' },
     new AbortController().signal, () => {});
   assert.ok(fit.field.photometricEnvelope);
   assert.ok(fit.field.components.length > 0);
@@ -58,7 +58,7 @@ test('authored residual budget bounds the fit and omitted budgets preserve histo
   const bounded = fitEmissionField(input, controls, { externalDepthAssignment: true, maximumComponents: 16 });
   assert.ok(bounded.field.components.length <= 16 && bounded.field.components.length > 0);
   assert.equal(bounded.metrics.iterations, 16);
-  const recipe = JSON.parse(await readFile('labs/nebula/models/omega-centauri/photometric-mge.json', 'utf8'));
+  const recipe = JSON.parse(await readFile('src/objects/omega-centauri-volume/source/photometric-mge.json', 'utf8'));
   assert.equal(readPhotometricMgeRecipe({ ...recipe, residualMaximumComponents: 4096 }).residualMaximumComponents, 4096);
   delete recipe.residualMaximumComponents;
   assert.equal(readPhotometricMgeRecipe(recipe).residualMaximumComponents, undefined);
@@ -72,7 +72,7 @@ test('validated envelope chroma bounds the exact round2 green-channel roundoff w
   // this single Gaussian reproduces that exact envelope weight without a multi-megabyte fixture.
   const light = 0.0000020943697978687045, sigmaArcsec = 1 / (Math.sqrt(2 * Math.PI) * light);
   assert.equal(light * 255 / light, 255.00000000000003);
-  const published = JSON.parse(await readFile('labs/nebula/models/omega-centauri/photometric-mge.json', 'utf8'));
+  const published = JSON.parse(await readFile('src/objects/omega-centauri-volume/source/photometric-mge.json', 'utf8'));
   const recipe = readPhotometricMgeRecipe({ ...published, inclinationDegrees: 90,
     gaussians: [{ centralAmplitude: 1, sigmaArcsec, projectedAxisRatio: 1 }] });
   const skyBounds = { min: [-1, -1] as [number, number], max: [1, 1] as [number, number] };

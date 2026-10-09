@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "lmc-volume",
+  "name": "Large Magellanic Cloud",
+  "type": "galaxy",
+  "papers": [
+    {
+      "label": "Bonanos et al. (2009)",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003",
+      "record": "src/sources/bonanos-2009-lmc.json"
+    },
+    {
+      "label": "Nidever et al. (2019)",
+      "url": "https://arxiv.org/abs/1805.02671",
+      "record": "src/sources/nidever-2019-lmc-smash.json"
+    }
+  ],
+  "models": [
+    {
+      "label": "Garver, Nidever, Debattista & Deg simulation",
+      "url": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "record": "src/sources/garver-magellanic-simulation.json"
+    }
+  ],
+  "images": [
+    {
+      "label": "Horálek optical, iotw2547a",
+      "url": "https://noirlab.edu/public/images/iotw2547a/",
+      "record": "src/sources/noirlab-iotw2547a.json"
+    },
+    {
+      "label": "ESO VISTA, eso1914a",
+      "url": "https://www.eso.org/public/images/eso1914a/",
+      "record": "src/sources/eso-eso1914a.json"
+    },
+    {
+      "label": "NASA/IPAC AllWISE through CDS",
+      "url": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
+      "record": "src/sources/cds-allwise-color.json"
+    },
+    {
+      "label": "SMASH, noirlab2030a",
+      "url": "https://noirlab.edu/public/images/noirlab2030a/",
+      "record": "src/sources/noirlab-noirlab2030a.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "none",
+    "label": "None (density model)"
+  },
+  "velocity": {
+    "available": false,
+    "items": []
+  },
+  "method": {
+    "chosen": "density",
+    "status": "experiment",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": []
+  }
+}

@@ -4,12 +4,12 @@ Six official-image pairs test the compiler beyond planetary nebulae. They began 
 
 | Target | Sources and coverage | What it tests |
 | --- | --- | --- |
-| [Orion · M42](../m42/README.md) | ESO optical + VISTA, main M42 complex | Bright core, asymmetric cavity, large contrast |
-| [Lagoon · M8](../m8/README.md) | ESO optical + VISTA, differing wide footprints | Filaments and partial spectral overlap |
-| [Carina](../carina/README.md) | Central optical field + much wider VISTA | Partial optical coverage and complex dust lanes |
-| [NGC 6357](../ngc6357/README.md) | Wide DSS2 context + VISTA | Separating target emission from surrounding sky |
-| [M78](../m78/README.md) | ESO optical + VISTA | Reflection/scattering that an emission-only model approximates |
-| [Horsehead + Flame](../horsehead/README.md) | Wide DSS2 context + VISTA | An absorption failure case: the dark Horsehead is not positive emission |
+| [Orion · M42](../../../../src/objects/m42-volume/source/README.md) | ESO optical + VISTA, main M42 complex | Bright core, asymmetric cavity, large contrast |
+| [Lagoon · M8](../../../../src/objects/m8-volume/source/README.md) | ESO optical + VISTA, differing wide footprints | Filaments and partial spectral overlap |
+| Carina | Central optical field + much wider VISTA | Partial optical coverage and complex dust lanes |
+| NGC 6357 | Wide DSS2 context + VISTA | Separating target emission from surrounding sky |
+| M78 | ESO optical + VISTA | Reflection/scattering that an emission-only model approximates |
+| Horsehead + Flame | Wide DSS2 context + VISTA | An absorption failure case: the dark Horsehead is not positive emission |
 
 The [catalogue](catalogue.json) binds these recipes to a downloaded six-object [CDS SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-tap) subset, with its original response retained. SIMBAD's M8 and NGC 6357 entries identify open clusters; the source pictures show their surrounding nebular complexes. Catalogue centres identify objects; each image's AVM WCS supplies its own registration.
 
@@ -50,7 +50,7 @@ Browser inspection shows real deficiencies:
 
 Next: isolate target emission and stellar halos **without cropping original inputs**, improve continuous-field color integration, and test extinction and scattering separately from positive emission. Revisit M78 with stronger star descriptors or catalogue registration, rather than trimming failed holdout points.
 
-The [Orion](../m42/README.md) and [Carina](../carina/README.md) records replace global deep columns with locally tilted finite supports. Downloaded spectroscopy is not yet fitted, and residual chromatic banding keeps visual acceptance open. See [Nebula Compiler Process Guidelines](../../docs/nebula-compiler-guidelines.md) for the reusable intake and next physical constraints.
+The [Orion](../../../../src/objects/m42-volume/source/README.md) and Carina records replace global deep columns with locally tilted finite supports. Downloaded spectroscopy is not yet fitted, and residual chromatic banding keeps visual acceptance open. See [Nebula Compiler Process Guidelines](../../docs/nebula-compiler-guidelines.md) for the reusable intake and next physical constraints.
 
 ## Reproduce the batch
 

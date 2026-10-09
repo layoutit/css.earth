@@ -2,42 +2,42 @@
   "schema": "cssearth-provenance-references@1",
   "references": [
     {
-      "originalPath": "labs/nebula/models/m45/physical-evidence.json",
+      "originalPath": "src/objects/m45-volume/source/physical-evidence.json",
       "path": "src/objects/m45-volume/source/bake-inputs/references/04-physical-evidence.json",
       "bytes": 15400
     },
     {
-      "originalPath": "labs/nebula/models/m45/stellar-catalogue.json",
+      "originalPath": "src/objects/m45-volume/source/stellar-catalogue.json",
       "path": "src/objects/m45-volume/source/bake-inputs/references/06-stellar-catalogue.json",
       "bytes": 1654998
     },
     {
-      "originalPath": "labs/nebula/models/m45/compiler.json",
+      "originalPath": "src/objects/m45-volume/source/compiler.json",
       "path": "src/objects/m45-volume/source/bake-inputs/references/01-compiler.json",
       "bytes": 1147
     },
     {
-      "originalPath": "labs/nebula/models/m45/depth-model.json",
+      "originalPath": "src/objects/m45-volume/source/depth-model.json",
       "path": "src/objects/m45-volume/source/bake-inputs/references/02-depth-model.json",
       "bytes": 3319
     },
     {
-      "originalPath": "labs/nebula/models/m45/observation-structures.json",
+      "originalPath": "src/objects/m45-volume/source/observation-structures.json",
       "path": "src/objects/m45-volume/source/bake-inputs/references/03-observation-structures.json",
       "bytes": 423
     },
     {
-      "originalPath": "labs/nebula/models/m45/processing-observations.json",
+      "originalPath": "src/objects/m45-volume/source/processing-observations.json",
       "path": "src/objects/m45-volume/source/bake-inputs/references/05-processing-observations.json",
       "bytes": 8832
     },
     {
-      "originalPath": "labs/nebula/models/m45/optical-composite-observations.json",
+      "originalPath": "src/objects/m45-volume/source/optical-composite-observations.json",
       "path": "src/objects/m45-volume/source/bake-inputs/references/07-optical-composite-observations.json",
       "bytes": 5257
     },
     {
-      "originalPath": "labs/nebula/models/m45/optical-composite.json",
+      "originalPath": "src/objects/m45-volume/source/optical-composite.json",
       "path": "src/objects/m45-volume/source/bake-inputs/references/08-optical-composite.json",
       "bytes": 1320
     }

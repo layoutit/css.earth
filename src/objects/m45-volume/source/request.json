@@ -1,8 +1,8 @@
 {
   "action": "apply",
   "imageId": "compiler",
-  "recipePath": "labs/nebula/models/m45/compiler.json",
-  "cataloguePath": ".local/nebula-lab/observations/m45-processing/structures/catalogue.json",
+  "recipePath": "src/objects/m45-volume/source/compiler.json",
+  "cataloguePath": "src/objects/m45-volume/.local/observations/m45-processing/structures/catalogue.json",
   "controls": {
     "detail": 1,
     "faint": 0.35,

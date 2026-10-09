@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "homunculus-nebula-layers",
+  "name": "Homunculus Nebula",
+  "type": "The two-lobed cloud",
+  "papers": [
+    {
+      "label": "Steffen et al. (2014)",
+      "url": "https://arxiv.org/abs/1407.4096",
+      "record": "src/sources/publication-steffen-2014-homunculus-3d.json"
+    },
+    {
+      "label": "Smith (2006)",
+      "url": "https://arxiv.org/abs/astro-ph/0602464",
+      "record": "src/sources/publication-smith-2006-homunculus-shape.json"
+    }
+  ],
+  "models": [
+    {
+      "label": "NASA 3D Resources, Eta Carinae Homunculus Nebula",
+      "url": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula",
+      "record": "src/sources/nasa-3d-homunculus-nebula.json"
+    }
+  ],
+  "images": [
+    {
+      "label": "ESA/Hubble potw1208a",
+      "url": "https://esahubble.org/images/potw1208a/",
+      "record": "src/sources/esahubble-potw1208a.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: surface"
+  },
+  "velocity": {
+    "available": false,
+    "items": []
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": [
+      "surface"
+    ]
+  }
+}

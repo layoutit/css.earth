@@ -11,7 +11,7 @@ import { placeCatalogueStarsInFiniteModel, preparedStarsLayerPath, readFiniteDat
   FINITE_STAR_COLOR, MAGNITUDE_LIMIT, type CatalogueStarRow, type FiniteStarSelection,
 } from '../../server/workflows/stars/finite-model-star-layer.ts';
 
-export const smcStarDirectory = 'labs/nebula/models/smc/stars';
+export const smcStarDirectory = 'src/objects/smc-volume/source/stars';
 export const STAR_ID_PREFIX = 'Bonanos2010:';
 export const COMMAND = 'labs/nebula/packages/lab/src/cli/commands/prepare-smc-stars.ts';
 export { finiteModelStarsIndex, MAGNITUDE_LIMIT };
@@ -51,7 +51,7 @@ export async function prepareSmcStars(root = process.cwd(), recipePath?: string)
   const manifest = await readSmcStarManifest(root);
   // The recipe names the model; the manifest holds the default, and a second recipe is passed explicitly. No result id is hard-coded.
   const finiteDatasetRecipe = recipePath ?? manifest.finiteDatasetRecipe;
-  if (finiteDatasetRecipe !== manifest.finiteDatasetRecipe && (!/^labs\/nebula\/models\/smc\/constrained\/[A-Za-z0-9._-]+\.json$/.test(finiteDatasetRecipe)))
+  if (finiteDatasetRecipe !== manifest.finiteDatasetRecipe && (!/^src\/objects\/smc-volume\/source\/constrained\/[A-Za-z0-9._-]+\.json$/.test(finiteDatasetRecipe)))
     throw new TypeError('A star layer recipe must be a checked-in SMC dataset recipe.');
   const sources = await readPinnedCatalogueFiles(root, `${smcStarDirectory}/source`, manifest.files);
   const recipe = await readFiniteDatasetRecipe(root, finiteDatasetRecipe);

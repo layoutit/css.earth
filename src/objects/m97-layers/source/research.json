@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "m97-layers",
+  "name": "Owl Nebula",
+  "type": "Planetary nebula",
+  "papers": [
+    {
+      "label": "García-Díaz et al. (2018)",
+      "url": "https://arxiv.org/abs/1806.04676",
+      "record": "src/sources/publication-garcia-diaz-2018-owl-nebula-cavities.json"
+    },
+    {
+      "label": "Guerrero et al. (2003)",
+      "url": "https://arxiv.org/abs/astro-ph/0303056",
+      "record": "src/sources/publication-guerrero-2003-owl-nebula.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "Sloan Digital Sky Survey",
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "record": "src/sources/sdss-dr9-color-hips.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: body"
+  },
+  "velocity": {
+    "available": true,
+    "items": [
+      {
+        "label": "Echelle spectra (README)",
+        "kind": "mentioned",
+        "url": "src/objects/m97-layers/README.md"
+      }
+    ]
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": [
+      "body"
+    ]
+  }
+}

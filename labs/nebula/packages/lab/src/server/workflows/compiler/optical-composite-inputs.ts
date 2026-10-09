@@ -6,6 +6,7 @@ import { readObservations, observationsFromRecipe } from '../../../features/obse
 import { jointPath, jointRecord } from '../../../features/joint-fit/model.ts';
 import { compilerLayersReady, runCompilerSourceCommand, type CompilerProgress } from './prerequisites.ts';
 import type { CompilerPin } from '@cssearth/objects';
+import { objectScratch } from '../../../resources/model-paths.ts';
 
 const missing = (error: unknown) => error instanceof Error && 'code' in error && error.code === 'ENOENT';
 function pin(path: unknown): CompilerPin {
@@ -18,7 +19,7 @@ export interface CompositeSourceRecipe { observationRecipe: string; observationC
 export async function opticalCompositeSourcePins(root: string, recipe: CompositeSourceRecipe): Promise<CompilerPin[] | undefined> {
   const recipeText = await readFile(resolve(root, recipe.observationRecipe), 'utf8'), observationsRecipe = readObservationRecipe(JSON.parse(recipeText));
   const planned = scienceObservationSources(observationsRecipe);
-  if (recipe.observationCatalogue !== `.local/nebula-lab/observations/${observationsRecipe.id}/observations.json` ||
+  if (recipe.observationCatalogue !== objectScratch(observationsRecipe.id, 'observations', observationsRecipe.id, 'observations.json') ||
       planned.length !== 2 || !planned.some(source => source.id === recipe.detailSourceId) || !planned.some(source => source.id === recipe.wideSourceId))
     throw new TypeError('Composite observation recipe must own its two source identities and catalogue.');
   try {
@@ -34,7 +35,7 @@ export async function opticalCompositeSourcePins(root: string, recipe: Composite
     for (const value of raw.images) {
       if (!jointRecord(value) || !jointRecord(value.source) || !jointRecord(value.removal) || !jointRecord(value.removal.settings)) return undefined;
       const { source, removal } = value, settings = removal.settings;
-      if (!jointRecord(settings) || !jointPath(settings.directory) || !settings.directory.startsWith('.local/nebula-lab/'))
+      if (!jointRecord(settings) || !jointPath(settings.directory) || !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(settings.directory))
         throw new TypeError('Missing composite native separation owner.');
       if (!jointRecord(settings.model) || settings.model.path !== observationsRecipe.nativeRemoval.model.path)
         throw new TypeError('Composite native separation differs from its configured NOX model or code.');

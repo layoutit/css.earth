@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-smc-registration-runs@1",
+  "routine": {
+    "path": "labs/nebula/packages/reconstruction/src/registration/validate-image-registration.py"
+  },
+  "maximumWorkingDimension": 5000,
+  "reports": [
+    {
+      "name": "vista",
+      "receipt": "src/objects/smc-volume/source/registration/vista-direction-gate.json",
+      "matchedStarsPath": "src/objects/smc-volume/.local/registration/vista/matched-stars.json",
+      "heldOutArcseconds": {
+        "median": 1.150366251426652,
+        "p90": 2.8527160135888474,
+        "max": 9.627076719093882
+      }
+    },
+    {
+      "name": "smash",
+      "receipt": "src/objects/smc-volume/source/registration/smash-direction-gate.json",
+      "matchedStarsPath": "src/objects/smc-volume/.local/registration/smash/matched-stars.json",
+      "heldOutArcseconds": {
+        "median": 1.155680276912043,
+        "p90": 2.8942385393387204,
+        "max": 8.552357913366107
+      }
+    },
+    {
+      "name": "dss2",
+      "receipt": "src/objects/smc-volume/source/registration/dss2-direction-gate.json",
+      "matchedStarsPath": "src/objects/smc-volume/.local/registration/dss2/matched-stars.json",
+      "heldOutArcseconds": {
+        "median": 1.875597548613727,
+        "p90": 3.763715005388882,
+        "max": 7.779075240012784
+      }
+    }
+  ],
+  "limitations": [
+    "Relative field-star registration; SMASH publisher AVM remains the absolute sky anchor.",
+    "No absolute catalogue solution or verified direction outside the matched stellar hull.",
+    "Reciprocal SMASH and VISTA fits use the same image pair, not independent absolute evidence."
+  ]
+}

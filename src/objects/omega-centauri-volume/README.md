@@ -30,7 +30,7 @@ King-Abel experiment are in the [physical evidence](source/bake-inputs/reference
 A smooth oblate MGE envelope carries broad integrated starlight. Finite positive
 image residuals receive conditional depths and dataset-specific materials. Both
 optical datasets use the same geometry, and no separate star layer counts the
-light twice. The [method account](../../../labs/nebula/models/omega-centauri/README.md)
+light twice. The [method account](../../../src/objects/omega-centauri-volume/source/README.md)
 explains the numerical choices.
 
 The compiler reserves renderer copies and overhead before allocating slabs. It

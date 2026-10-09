@@ -12,7 +12,7 @@
       "id": "vista-infrared",
       "status": "passed",
       "pass": true,
-      "sourcePath": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
+      "sourcePath": "src/objects/lmc-volume/.local/image-candidates/vista/eso1914a-10k.tif",
       "sourceDimensions": [
         8954,
         10000
@@ -61,7 +61,7 @@
       },
       "verification": {
         "id": "vista-infrared",
-        "sourcePath": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
+        "sourcePath": "src/objects/lmc-volume/.local/image-candidates/vista/eso1914a-10k.tif",
         "sourceHashMatchesRecipe": true,
         "matrixMatchesEvidence": true,
         "sourceNativeDimensions": [
@@ -77,7 +77,7 @@
         },
         "matchedSourceHullFraction": 0.8309633790146702,
         "preparedCssGeometryClosureMaxPixels": 4.0419827920822775e-13,
-        "evidencePath": ".local/nebula-lab/image-candidates/vista-registration/10k/direction-gate.json",
+        "evidencePath": "src/objects/lmc-volume/.local/image-candidates/vista-registration/10k/direction-gate.json",
         "pass": true
       },
       "limitations": [
@@ -89,7 +89,7 @@
       "id": "horalek-widefield",
       "status": "passed",
       "pass": true,
-      "sourcePath": ".local/nebula-lab/new-references/iotw2547a.jpg",
+      "sourcePath": "src/objects/lmc-volume/.local/new-references/iotw2547a.jpg",
       "sourceDimensions": [
         6582,
         4388
@@ -138,7 +138,7 @@
       },
       "verification": {
         "id": "horalek-widefield",
-        "sourcePath": ".local/nebula-lab/new-references/iotw2547a.jpg",
+        "sourcePath": "src/objects/lmc-volume/.local/new-references/iotw2547a.jpg",
         "sourceHashMatchesRecipe": true,
         "matrixMatchesEvidence": true,
         "sourceNativeDimensions": [
@@ -154,7 +154,7 @@
         },
         "matchedSourceHullFraction": 0.6022772060465406,
         "preparedCssGeometryClosureMaxPixels": 2.0495186137532011e-13,
-        "evidencePath": ".local/nebula-lab/new-references/registration-receipts.json",
+        "evidencePath": "src/objects/lmc-volume/.local/new-references/registration-receipts.json",
         "pass": true
       },
       "limitations": [
@@ -166,7 +166,7 @@
       "id": "wise-wide-infrared",
       "status": "passed",
       "pass": true,
-      "sourcePath": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+      "sourcePath": "src/objects/lmc-volume/.local/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
       "sourceDimensions": [
         6000,
         6000

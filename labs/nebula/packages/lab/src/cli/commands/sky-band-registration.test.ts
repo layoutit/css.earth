@@ -4,7 +4,7 @@ import { gridTransferDecision, parseSkyBandRegistration, skyBandCandidate } from
 
 const wcs = { projection: 'TAN', coordinateFrame: 'ICRS', referenceDimension: [4000, 4000], referencePixel: [2000, 2000], referenceValueDeg: [13.19, -72.83],
   scaleDeg: [-0.0025063655876377947, 0.0025063655876377947], rotationDeg: 0 };
-const pin = { path: 'labs/nebula/models/x/recipe.json' };
+const pin = { path: 'src/objects/x-volume/source/recipe.json' };
 const candidate = (id: string, extra: Record<string, unknown> = {}) => skyBandCandidate({ id, path: `.local/x/${id}.png`, wcs, skyBands: pin, ...extra });
 const stars = { query: pin, path: '.local/x/stars.csv' };
 
@@ -18,11 +18,11 @@ test('a grid transfer needs a passing catalogue gate on the reference and an ide
 });
 
 test('recipes and candidates are validated at runtime', () => {
-  const recipe = { schema: 'cssearth-sky-band-registration@1', catalogue: 'labs/nebula/models/x/image-candidates.json', stars,
-    catalogueChecks: [{ imageId: 'ref', blueChannel: 'W1', receipt: 'labs/nebula/models/x/ref.json' }],
-    gridTransfers: [{ imageId: 'dust', referenceId: 'ref', blueChannel: 'SPIRE', receipt: 'labs/nebula/models/x/dust.json', diagnostic: 'labs/nebula/models/x/dust-diag.json' }],
-    fixedWcsChecks: [{ imageId: 'publisher', blueChannel: 'W1', receipt: 'labs/nebula/models/x/publisher.json' }],
-    negativeControls: [{ label: 'shifted-40px', imageId: 'publisher', blueChannel: 'W1', wcs: { ...wcs, referencePixel: [2040, 2000] }, receipt: 'labs/nebula/models/x/publisher-negative.json' }] };
+  const recipe = { schema: 'cssearth-sky-band-registration@1', catalogue: 'src/objects/x-volume/source/image-candidates.json', stars,
+    catalogueChecks: [{ imageId: 'ref', blueChannel: 'W1', receipt: 'src/objects/x-volume/source/ref.json' }],
+    gridTransfers: [{ imageId: 'dust', referenceId: 'ref', blueChannel: 'SPIRE', receipt: 'src/objects/x-volume/source/dust.json', diagnostic: 'src/objects/x-volume/source/dust-diag.json' }],
+    fixedWcsChecks: [{ imageId: 'publisher', blueChannel: 'W1', receipt: 'src/objects/x-volume/source/publisher.json' }],
+    negativeControls: [{ label: 'shifted-40px', imageId: 'publisher', blueChannel: 'W1', wcs: { ...wcs, referencePixel: [2040, 2000] }, receipt: 'src/objects/x-volume/source/publisher-negative.json' }] };
   assert.equal(parseSkyBandRegistration(recipe).gridTransfers[0]!.referenceId, 'ref');
   assert.throws(() => parseSkyBandRegistration({ ...recipe, gridTransfers: [{ ...recipe.gridTransfers[0]!, referenceId: 'other' }] }), /catalogue-checked/);
   assert.throws(() => parseSkyBandRegistration({ ...recipe, gridTransfers: [{ ...recipe.gridTransfers[0]!, imageId: 'ref' }] }), /exactly once/);

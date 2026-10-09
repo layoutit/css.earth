@@ -13,7 +13,7 @@ const fit: SampledEmissionFit = {
 };
 const fixture = {
   schema: 'cssearth-sampled-nebula@2', id: 'emission-example', centerIcrsDegrees: [80, 22],
-  evidence: { path: 'labs/nebula/models/example/physical-evidence.json' },
+  evidence: { path: 'src/objects/example-volume/source/physical-evidence.json' },
   source: { path: '.local/nebula-lab/physical/example/points.fits',
     url: 'https://example.org/points.fits', width: 4, height: 3, columns: [0, 1, 2, 3] },
   rawToArcsec: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],

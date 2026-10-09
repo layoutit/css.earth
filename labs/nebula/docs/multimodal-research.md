@@ -66,7 +66,7 @@ from the **deprojected** 21.2 km/s expansion derived using an assumed 37° tilt.
 - Actual delivered header: float32, 630×630×100×1, 0.09″ sky pixels, 0.519″×0.411″ beam, Jy/beam. Frequency starts at 230,553,432,516 Hz with 121,985.1999817 Hz channel step; rest frequency 230,538,000,000 Hz. Frame `LSRK`, radio convention (`VELREF=257`). This gives approximately **0.1586 km/s per channel**.
 - The paper’s separately reduced approximately 0.05 km/s sampling and 0.39″ resolution do **not** describe these delivered bytes. The 56.7″ raster extent also does not equal uniform sensitivity: the primary beam is roughly 28″.
 - [Archive README](https://almascience.eso.org/dataPortal/member.uid___A002_X609170_X14.README.txt) records pipeline calibration/manual imaging, noisy high-resolution bandpass solutions and a single channel mask; only selected spectral portions were imaged. Matching uncorrected `.image.fits` and `.flux.fits.gz` primary-beam products are listed in the archive manifest.
-- Header identity, full length and finite nonzero signal were checked. This verifies the input, not scientific fitting quality. Local original and detailed receipts remain under ignored `.local/nebula-lab/research/alma-helix-c1-*`.
+- Header identity, full length and finite nonzero signal were checked. This verifies the input, not scientific fitting quality. Local original and detailed receipts remain under ignored `src/objects/helix-layers/.local/research/alma-helix-c1-*`.
 
 ### Broad-field LVM follow-up
 
@@ -121,7 +121,7 @@ enabled the successful isolated-profile run on `:99`. Existing profiles and
 cookies were preserved.
 
 The complete raw text is in ignored
-`.local/nebula-lab/research/helix-multimodal-2026-09-12.md`.
+`src/objects/helix-layers/.local/research/helix-multimodal-2026-09-12.md`.
 **Interactive citation anchors were not captured**: the HTML sidecar is empty
 and numbered citations in the raw text are unresolved. Only independently
 checked sources appear in this maintained note. Final checks promoted the

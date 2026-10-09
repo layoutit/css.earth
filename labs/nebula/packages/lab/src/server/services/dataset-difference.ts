@@ -12,7 +12,7 @@
 import sharp from 'sharp';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { PreparedReconstruction } from '../../features/reconstruction/reconstruction-types.ts';
-import { datasetLevelPairs, loadDatasetLevelGrid, type Bounds, type DatasetLevelGrid, type DatasetLevelMaterial } from './dataset-levels.ts';
+import { datasetLevelPairs, loadDatasetLevelGrid, type Bounds, type DatasetLevelGrid, type DatasetLevelMaterial, type DatasetLevelPairs } from './dataset-levels.ts';
 import { isResultName } from '../../features/result-name.ts';
 
 /**
@@ -53,9 +53,10 @@ export interface DatasetDifference {
  * Signed luminance difference per grid pixel; NaN outside the footprint. `deliveryFactor` 1 compares the raw
  * analytic projection.
  */
-export function differenceField(grid: DatasetLevelGrid, material: DatasetLevelMaterial, deliveryFactor = DELIVERY_FACTOR): Float64Array {
+export function differenceField(grid: DatasetLevelGrid, material: DatasetLevelMaterial, deliveryFactor = DELIVERY_FACTOR,
+  pairs: DatasetLevelPairs = datasetLevelPairs(grid, material)): Float64Array {
   if (!(deliveryFactor > 0)) throw new TypeError('Delivery factor must be positive.');
-  const pairs = datasetLevelPairs(grid, material), field = new Float64Array(grid.width * grid.height).fill(NaN);
+  const field = new Float64Array(grid.width * grid.height).fill(NaN);
   pairs.covered.forEach((p, k) => {
     let render = 0, source = 0;
     for (let c = 0; c < 3; c++) { render += LUMA[c] * pairs.render[k * 3 + c]!; source += LUMA[c] * pairs.source[k * 3 + c]!; }
@@ -88,29 +89,37 @@ export function fieldInDatasetFrame(field: Float64Array, width: number, height: 
   return { field: out, width: outWidth, height: outHeight };
 }
 
-/** The map and its legend numbers for one saved finite dataset. Read-only. */
-export async function datasetDifference(root: string, prepared: PreparedReconstruction, options: { deliveryFactor?: number } = {}) {
-  const { grid, material, bounds } = await loadDatasetLevelGrid(root, prepared);
-  const deliveryFactor = options.deliveryFactor ?? DELIVERY_FACTOR;
-  const onGrid = differenceField(grid, material, deliveryFactor);
+/** The colored map and its legend numbers for a signed field (`onGrid`), written in the frame `framed` covers. */
+export async function differenceMap(onGrid: Float64Array, framed: { field: Float64Array; width: number; height: number },
+  identity: { resultId: string; imageId: string }, deliveryFactor: number, deliveryNote: string, note: string) {
   let footprint = 0, dark = 0, bright = 0, sum = 0;
   for (const delta of onGrid) if (Number.isFinite(delta)) {
     footprint++; sum += delta;
     if (delta < -AGREEMENT_TOLERANCE) dark++; else if (delta > AGREEMENT_TOLERANCE) bright++;
   }
   if (!footprint) throw new TypeError('This dataset image covers none of the model projection.');
-  const framed = fieldInDatasetFrame(onGrid, grid.width, grid.height, bounds.projection, bounds.dataset);
   const rgba = Buffer.alloc(framed.width * framed.height * 4);
   framed.field.forEach((delta, p) => rgba.set(differenceColor(delta), p * 4));
   const png = await sharp(rgba, { raw: { width: framed.width, height: framed.height, channels: 4 } }).png().toBuffer();
   const percent = (value: number) => +(value / footprint * 100).toFixed(2);
-  const summary: DatasetDifference = { schema: 'cssearth-nebula-dataset-difference@1', resultId: prepared.resultId, imageId: prepared.imageId,
+  const summary: DatasetDifference = { schema: 'cssearth-nebula-dataset-difference@1', ...identity,
     width: framed.width, height: framed.height, rangeLevels: DIFFERENCE_RANGE, toleranceLevels: AGREEMENT_TOLERANCE,
-    deliveryFactor, deliveryNote: `Render divided by ${deliveryFactor.toFixed(3)}; the default 1.140 = 61.0/53.5 is the analytic projection over a delivered-bank capture per footprint pixel (horalek-widefield).`,
+    deliveryFactor, deliveryNote,
     footprintPixels: footprint, agreePercent: percent(footprint - dark - bright), tooDarkPercent: percent(dark), tooBrightPercent: percent(bright),
-    meanSignedDelta: +(sum / footprint).toFixed(2), swatches: SWATCH_LEVELS.map(levels => ({ levels, rgba: rgbaCss(differenceColor(levels)) })),
-    note: 'Luminance of the render, corrected for delivery loss, minus this dataset’s own sky-removed image. Blue: render too dark. ' +
-      'Red: render too bright. Clear: within the tolerance, or outside the image footprint. Only meaningful from the Earth view.' };
+    meanSignedDelta: +(sum / footprint).toFixed(2), swatches: SWATCH_LEVELS.map(levels => ({ levels, rgba: rgbaCss(differenceColor(levels)) })), note };
+  return { png, summary };
+}
+
+/** The map and its legend numbers for one saved finite dataset. Read-only. */
+export async function datasetDifference(root: string, prepared: PreparedReconstruction, options: { deliveryFactor?: number } = {}) {
+  const { grid, material, bounds } = await loadDatasetLevelGrid(root, prepared);
+  const deliveryFactor = options.deliveryFactor ?? DELIVERY_FACTOR;
+  const onGrid = differenceField(grid, material, deliveryFactor);
+  const framed = fieldInDatasetFrame(onGrid, grid.width, grid.height, bounds.projection, bounds.dataset);
+  const { png, summary } = await differenceMap(onGrid, framed, { resultId: prepared.resultId, imageId: prepared.imageId }, deliveryFactor,
+    `Render divided by ${deliveryFactor.toFixed(3)}; the default 1.140 = 61.0/53.5 is the analytic projection over a delivered-bank capture per footprint pixel (horalek-widefield).`,
+    'Luminance of the render, corrected for delivery loss, minus this dataset’s own sky-removed image. Blue: render too dark. ' +
+      'Red: render too bright. Clear: within the tolerance, or outside the image footprint. Only meaningful from the Earth view.');
   return { png, summary, field: onGrid, grid: { width: grid.width, height: grid.height } };
 }
 

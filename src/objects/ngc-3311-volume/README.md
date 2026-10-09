@@ -19,7 +19,7 @@ clusters and ultra-compact dwarfs are drawn as dots through the same volume.
 
 ## Method
 
-The Nebula Lab recipe is [labs/nebula/models/ngc-3311/experiment.json](../../../labs/nebula/models/ngc-3311/experiment.json);
+The Nebula Lab recipe is [src/objects/ngc-3311-volume/source/experiment.json](../../../src/objects/ngc-3311-volume/source/experiment.json);
 `node labs/nebula/run.mts prepare-emission` runs it, and [delivery.json](source/delivery.json) places the result. It is
 [M49's route](../m49-volume/README.md#method) with NGC 3311's measurements.
 

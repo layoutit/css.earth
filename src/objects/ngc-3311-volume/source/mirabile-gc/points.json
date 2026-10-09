@@ -29,7 +29,7 @@
       "axisPositionAngleDeg": 122,
       "cutoffHalfLightRadii": 1.409,
       "source": "arnaboldi-2012-hydra-core",
-      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/ngc-3311/experiment.json shapePrior): Arnaboldi et al.'s (2012) Table 2 Sérsic fit to NGC 3311 (n = 4.8, half-light radius 198.8 arcsec, 52.3 kpc at 54.3 Mpc, axis ratio 0.93), axis along NGC 3311's minor axis in the plane of the sky, ending at 1.409 half-light radii, where the fit's field ends. Each object's depth is drawn from it, not measured."
+      "basis": "The spheroid the volume's light is spread through (src/objects/ngc-3311-volume/source/experiment.json shapePrior): Arnaboldi et al.'s (2012) Table 2 Sérsic fit to NGC 3311 (n = 4.8, half-light radius 198.8 arcsec, 52.3 kpc at 54.3 Mpc, axis ratio 0.93), axis along NGC 3311's minor axis in the plane of the sky, ending at 1.409 half-light radii, where the fit's field ends. Each object's depth is drawn from it, not measured."
     }
   },
   "source": "mirabile-2026-hydra-globular-clusters",

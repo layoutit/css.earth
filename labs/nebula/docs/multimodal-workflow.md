@@ -9,7 +9,7 @@ The `joint-evidence@1` prototype keeps combined image evidence and the inner [O 
 - `/reconstruction?subject=helix-model-prior&inspection=joint`: image ridges plus broader molecular velocities, with prepared shell/lobe candidates and withheld residuals.
 - `/reconstruction?subject=helix-model-prior&fit=helix-tuned`: the earlier authored coarse 3D fit, retained separately.
 
-Use the existing [lab startup](../README.md) and [Helix preparation](../models/helix/README.md) to restore aligned, star-separated observations. Opening Combined reuses those pinned working rasters; it never downloads new imagery, removes stars again or bakes a volume.
+Use the existing [lab startup](../README.md) and [Helix preparation](../../../src/objects/helix-layers/source/README.md) to restore aligned, star-separated observations. Opening Combined reuses those pinned working rasters; it never downloads new imagery, removes stars again or bakes a volume.
 
 ## Combined
 
@@ -35,7 +35,7 @@ Generated input grids, image panels, contribution samples and receipts are ignor
 
 The source recipe retains 27 sparse centroid readings from **Meaburn et al. 2005, figure 9**, each in the exact published raster pixel coordinates with two-axis calibration anchors. Four core velocity components are retained, including those that the simple model cannot explain. These are digitized readings, not original FITS spectra. The assumed 1.5-pixel readout precision is distinct from statistical measurement errors and the shared systemic-velocity uncertainty. See the source recipe and original figure through the evidence disclosure in the app.
 
-The [Helix preparation sequence](../models/helix/README.md) includes the figure-restoration command. It downloads the pinned paper source archive, checks archive/member hashes, decodes its embedded JPEG and verifies the figure hash. A replay into an empty temporary cache reproduced the original figure bytes; no published figure or generated chart is committed.
+The [Helix preparation sequence](../../../src/objects/helix-layers/source/README.md) includes the figure-restoration command. It downloads the pinned paper source archive, checks archive/member hashes, decodes its embedded JPEG and verifies the figure hash. A replay into an empty temporary cache reproduced the original figure bytes; no published figure or generated chart is committed.
 
 The server predicts the two line-of-sight intersections of a thin, optically thin ellipsoid with outward homologous expansion. Polar/equatorial ratio and inclination alter the assumed 3D geometry; equatorial speed sets its velocity scale. The projected 120-arcsec E–W radius stays fixed. The default spherical inner-shell hypothesis has 12.5 km/s expansion; its orientation is unidentifiable until the shape departs from a sphere. Defaults, publication interpretations and measured centroids are labeled separately.
 

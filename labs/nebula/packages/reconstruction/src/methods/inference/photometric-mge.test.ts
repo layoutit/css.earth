@@ -9,7 +9,7 @@ const recipe: PhotometricMgeRecipe = {
   schema: 'cssearth-photometric-mge@1', id: 'fixture', centerIcrsDegrees: [201, -47], distancePc: 5426,
   positionAngleEastOfNorthDegrees: 0, inclinationDegrees: 60, lineOfSightTiltSign: 1, cutoffSigma: 6,
   gaussians: [{ centralAmplitude: 4, sigmaArcsec: 20, projectedAxisRatio: .8 }],
-  evidence: { path: 'labs/nebula/models/fixture/evidence.json' },
+  evidence: { path: 'src/objects/fixture-volume/source/evidence.json' },
   source: { url: 'https://example.org/observations', locator: 'test fixture' },
   interpretation: 'Oblate deprojection test, not an observed object.',
 };

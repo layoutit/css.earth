@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "m2-9-volume",
+  "name": "Twin Jet Nebula",
+  "type": "Bipolar nebula",
+  "papers": [
+    {
+      "label": "Wenger, Lorenz & Magnor (2013)",
+      "url": "https://doi.org/10.1111/cgf.12216"
+    },
+    {
+      "label": "Sánchez Contreras et al. (2024), §2",
+      "url": "https://arxiv.org/html/2411.03825v1#S2",
+      "record": "src/sources/sanchez-contreras-2024.json"
+    },
+    {
+      "label": "Corradi et al. (2011), abstract",
+      "url": "https://arxiv.org/abs/1102.5634",
+      "record": "src/sources/corradi-2011.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "Hubble/WFPC2, opo9738a",
+      "url": "https://esahubble.org/images/opo9738a/",
+      "record": "src/sources/hubble-opo9738a.json"
+    },
+    {
+      "label": "APOD 2004-02-01",
+      "url": "https://apod.nasa.gov/apod/ap040201.html"
+    }
+  ],
+  "symmetry": {
+    "kind": "axial",
+    "label": "Axial (assumed)"
+  },
+  "velocity": {
+    "available": false,
+    "items": []
+  },
+  "method": {
+    "chosen": "symmetry",
+    "status": "published",
+    "available": [
+      "symmetry"
+    ],
+    "geometry": []
+  }
+}

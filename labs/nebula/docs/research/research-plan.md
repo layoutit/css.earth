@@ -21,7 +21,7 @@ The first implemented comparison is documented in [automatic structure benchmark
 | 64 slabs per axis, two samples per slab | Model smearing, integration aliasing and visible layer spacing must be diagnosed separately. |
 | The imported simulation has no gas particles | Its stellar density guides placement, not the measured shape of Tarantula's gas or dust. |
 
-Recipes: [current master](../../models/lmc/highres.json), [particle model](../../models/magellanic-particles.json). Existing transfer budgets are 2.60 MB/42.9 MB decoded at 1024px and 0.69 MB/10.3 MB decoded at 512px.
+Recipes: [current master](../../../../src/objects/lmc-volume/source/highres.json), [particle model](../../../../src/objects/lmc-volume/source/magellanic-particles.json). Existing transfer budgets are 2.60 MB/42.9 MB decoded at 1024px and 0.69 MB/10.3 MB decoded at 512px.
 
 ## Working hypothesis
 

@@ -12,7 +12,7 @@ import { parseCloudCatalogue } from '@cssearth/objects';
 const close=(a:readonly number[],b:readonly number[])=>a.forEach((n,i)=>assert.ok(Math.abs(n-b[i])<1e-10,`${n} != ${b[i]}`));
 
 test('actual prepared candidate matrices preserve Alignment CSS axes, pivot, all rotations and observer depth',async()=>{
-  const catalogue=JSON.parse(await readFile('labs/nebula/models/lmc/candidates/overlays.json','utf8'));
+  const catalogue=JSON.parse(await readFile('src/objects/lmc-volume/source/candidates/overlays.json','utf8'));
   for(const id of ['vista-infrared','horalek-widefield','wise-wide-infrared']) {
     const overlay=catalogue.overlays.find((row:{id:string})=>row.id===id);assert.ok(overlay);
     const placement={...overlay.initialPlacement,x:1.3,y:-2.1,z:3.4,rotationX:13,rotationY:-7};
@@ -39,7 +39,7 @@ test('actual prepared candidate matrices preserve Alignment CSS axes, pivot, all
 });
 
 test('saved Alignment scale and orientation are preserved instead of stripping its fit',async()=>{
-  const catalogue=JSON.parse(await readFile('labs/nebula/models/lmc/candidates/overlays.json','utf8'));
+  const catalogue=JSON.parse(await readFile('src/objects/lmc-volume/source/candidates/overlays.json','utf8'));
   for(const id of ['vista-infrared','horalek-widefield','wise-wide-infrared']) {
     const overlay=catalogue.overlays.find((row:{id:string})=>row.id===id);
     const reference=createAlignedObservationMapping({...overlay,placement:defaultOverlayPlacement()},catalogue.frame);
@@ -60,14 +60,14 @@ test('tiny offline bake uses shared density support and writes pinned XYZ resour
     for(let y=0;y<32;y++)for(let x=0;x<32;x++){const v=40+Math.round(70*Math.exp(-((x-15)**2+(y-18)**2)/40));pixels.set([v,v-10,25],3*(y*32+x));}
     const photo=await sharp(pixels,{raw:{width:32,height:32,channels:3}}).png().toBuffer();
     const {writeFile}=await import('node:fs/promises');await writeFile(resolve(directory,'source.png'),photo);
-    const frame=JSON.parse(await readFile('labs/nebula/models/lmc/full-density/object.json','utf8')).properties.volume;
+    const frame=JSON.parse(await readFile('src/objects/lmc-volume/source/full-density/object.json','utf8')).properties.volume;
     const geometry=prepareOverlayGeometry([[-2,2,0],[2,2,0],[2,-2,0],[-2,-2,0]],32,32);
-    const priorPath='labs/nebula/models/lmc/full-density/source/volume.json',priorBytes=await readFile(priorPath);
-    const descriptorPath='labs/nebula/models/lmc/full-density/object.json',slicesPath='labs/nebula/models/lmc/full-density/prepared/volume-slices.json';
+    const priorPath='src/objects/lmc-volume/source/full-density/source/volume.json',priorBytes=await readFile(priorPath);
+    const descriptorPath='src/objects/lmc-volume/source/full-density/object.json',slicesPath='src/objects/lmc-volume/source/full-density/prepared/volume-slices.json';
     const descriptor=JSON.parse(await readFile(descriptorPath,'utf8'));
     const pin=async(path:string)=>{await readFile(path);return {path};};
     const cloud={descriptor:await pin(descriptorPath),slices:await pin(slicesPath),
-      provenance:await pin('labs/nebula/models/lmc/full-density/source/volume.json')};
+      provenance:await pin('src/objects/lmc-volume/source/full-density/source/volume.json')};
     const work={schema:'cssearth-nebula-reconstruction-work@1' as const,id:'reconstruction-synthetic-subject-synthetic',imageId:'synthetic',name:'Synthetic native test',
       outputDirectory:resolve(directory,'output'),source:{path:relative(root,resolve(directory,'source.png')),width:32,height:32},
       original:{path:relative(root,resolve(directory,'source.png')),removalResultId:'synthetic'},

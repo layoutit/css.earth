@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/helix/kinematics-hco.json",
+      "path": "src/objects/helix-layers/source/kinematics-hco.json",
       "locator": "/citation"
     }
   ],
@@ -29,7 +29,7 @@
       "kind": "credit",
       "text": "Zeigler, Zack, Woolf & Ziurys (2013)",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/helix/kinematics-hco.json#/citation"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/helix-layers/source/kinematics-hco.json#/citation"
     }
   ]
 }

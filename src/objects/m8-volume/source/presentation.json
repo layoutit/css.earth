@@ -38,7 +38,7 @@
       ],
       "input": "eso-optical",
       "preview": {
-        "path": ".local/nebula-lab/observations/m8-processed/sources/eso-optical.tif",
+        "path": "src/objects/m8-volume/.local/observations/m8-processed/sources/eso-optical.tif",
         "url": "https://cdn.eso.org/images/publicationtiff/eso0936a.tif"
       }
     },
@@ -68,7 +68,7 @@
       ],
       "input": "eso-vista",
       "preview": {
-        "path": ".local/nebula-lab/observations/m8-processed/sources/eso-vista.tif",
+        "path": "src/objects/m8-volume/.local/observations/m8-processed/sources/eso-vista.tif",
         "url": "https://cdn.eso.org/images/publicationtiff/eso1101d.tif"
       }
     },
@@ -98,7 +98,7 @@
       ],
       "input": "spitzer-mid-infrared",
       "preview": {
-        "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.skybands.png",
+        "path": "src/objects/m8-volume/.local/observations/m8-processed/sources/spitzer-mid-infrared.skybands.png",
         "skyBands": {
           "path": "src/objects/m8-volume/source/sky-bands/spitzer-irac.json"
         }

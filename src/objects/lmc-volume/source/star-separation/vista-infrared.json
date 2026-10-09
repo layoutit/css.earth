@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-star-separation@1",
+  "source": {
+    "path": "src/objects/lmc-volume/.local/image-candidates/vista/eso1914a-10k.tif",
+    "nativeDimensions": [
+      8954,
+      10000
+    ]
+  },
+  "outputDirectory": "src/objects/lmc-volume/.local/star-separation/vista-infrared",
+  "parameters": {
+    "maximumDetections": 2000000,
+    "minimumSigma": 0.25
+  },
+  "preview": {
+    "maxDimension": 1200,
+    "exposure": 1,
+    "gamma": 1
+  }
+}

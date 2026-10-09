@@ -5,7 +5,7 @@ import { readObservationRecipe, scienceObservationSources } from '../../../featu
 import { publisherRegistration } from '@cssearth/nebula-reconstruction/registration/stellar';
 import { transferRegistration, validateTransferEvidence, type RegistrationEvidence } from './registration-transfer.js';
 test('real common-grid transfer pins both originals and cannot impersonate stellar verification', async () => {
-  const recipe = readObservationRecipe(JSON.parse(await readFile('labs/nebula/models/m1/observations.json', 'utf8')));
+  const recipe = readObservationRecipe(JSON.parse(await readFile('src/objects/m1-volume/source/observations.json', 'utf8')));
   assert.equal(scienceObservationSources(recipe).length, 6);
   const source = recipe.images.find(image => image.id === 'chandra-xray')!, bridge = recipe.images.find(image => image.id === source.registrationTransfer!.referenceId)!;
   const proof: unknown = JSON.parse(await readFile(source.registrationTransfer!.evidence.path, 'utf8'));
@@ -21,7 +21,7 @@ test('real common-grid transfer pins both originals and cannot impersonate stell
   assert.equal(transferred.evidence.matchedStars, 0); assert.equal(transferred.evidence.bridgeMatchedStars, 45); assert.deepEqual(transferred.evidence.matches, []);
 });
 test('transfer graph rejects cycles, missing references, and singular transforms', async () => {
-  const raw = JSON.parse(await readFile('labs/nebula/models/m1/observations.json', 'utf8'));
+  const raw = JSON.parse(await readFile('src/objects/m1-volume/source/observations.json', 'utf8'));
   raw.images[3].registrationTransfer.referenceId = 'missing'; assert.throws(() => readObservationRecipe(raw), /distinct directly registered/);
   raw.images[3].registrationTransfer.referenceId = raw.images[4].id; assert.throws(() => readObservationRecipe(raw), /distinct directly registered/);
   raw.images[3].registrationTransfer.pixelToReference = [1, 1, 1, 1, 0, 0]; assert.throws(() => readObservationRecipe(raw), /Singular/);

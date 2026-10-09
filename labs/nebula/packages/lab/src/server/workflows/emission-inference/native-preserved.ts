@@ -1,7 +1,8 @@
 /** Native identity treatment for maps whose compact emission is scientifically meaningful. */
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
-import { resolve, relative } from 'node:path';
+import { isAbsolute, resolve, relative, sep } from 'node:path';
 import {prepareNativePreservation} from '@cssearth/nebula-reconstruction/star-removal/native';
+import { isLabScratchPath } from '../../../resources/model-paths.ts';
 
 const object = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Invalid native preservation receipt.');
@@ -9,8 +10,8 @@ const object = (value: unknown): Record<string, unknown> => {
 };
 export async function nativePreserved(source: Buffer, dimensions: [number, number], outputDirectory: string,
   options: { allowProcessing?: boolean } = {}) {
-  const directory = resolve(outputDirectory), within = relative(resolve('.local/nebula-lab'), directory);
-  if (!within || within.startsWith('..') || within.startsWith('/')) throw new TypeError('Native preservation requires the ignored lab cache.');
+  const directory = resolve(outputDirectory), within = relative(resolve('.'), directory);
+  if (!isLabScratchPath(within.split(sep).join('/')) || within.split(sep).includes('..') || isAbsolute(within)) throw new TypeError('Native preservation requires the ignored lab cache.');
   const {decoded,expectedDiffuse,expectedStars} = await prepareNativePreservation(source,dimensions);
   const accounting = { maximumReconstructionErrorCodeValues: 0, coverageComplete: true, residualNonzeroValues: 0 };
   const receiptPath = resolve(directory, 'result.json');

@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "ngc-7662-layers",
+  "name": "Blue Snowball Nebula",
+  "type": "Planetary nebula",
+  "papers": [
+    {
+      "label": "Guerrero, Jaxon & Chu (2004)",
+      "url": "https://arxiv.org/abs/astro-ph/0407029",
+      "record": "src/sources/publication-guerrero-2004-ngc-7662-structure.json"
+    },
+    {
+      "label": "Chornay & Walton (2021)",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+      "record": "src/sources/chornay-walton-2021-pn-central-stars.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "ESA/Hubble opo9738c20",
+      "url": "https://esahubble.org/images/opo9738c20/",
+      "record": "src/sources/esahubble-opo9738c20.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: shape"
+  },
+  "velocity": {
+    "available": true,
+    "items": [
+      {
+        "label": "Echelle spectra (README)",
+        "kind": "mentioned",
+        "url": "src/objects/ngc-7662-layers/README.md"
+      }
+    ]
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": [
+      "shape"
+    ]
+  }
+}

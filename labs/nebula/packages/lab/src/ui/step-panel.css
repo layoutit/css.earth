@@ -1,0 +1,59 @@
+/* Step panels: titled sections, one-line rows, big labelled buttons. Spacing is one scale: 6 · 12 · 18. */
+.step-panel { display: flex; flex-direction: column; gap: 18px; }
+.workspace-content .step-panel-wide { width: min(460px, calc(100% - var(--workspace-left-width))); }
+.step-section { display: flex; flex-direction: column; gap: 6px; padding-bottom: 18px; border-bottom: 1px solid var(--divider); }
+.step-section:last-child { border-bottom: 0; padding-bottom: 0; }
+.step-section-title { display: flex; align-items: center; gap: 6px; margin: 0 0 6px; font-size: 15px; font-weight: 500; }
+.step-info { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; color: var(--text-muted); font-size: 13px; text-decoration: none; }
+.step-info:hover { color: #fff; background: #2a2c30; }
+.step-row { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: baseline; gap: 12px; min-height: 24px; font-size: 13px; }
+.step-row-label { color: var(--text-muted); font-size: 12px; }
+.step-row-value { min-width: 0; overflow-wrap: anywhere; }
+.step-row[data-state="ok"] .step-row-value::before { content: "✓ "; color: #8fd19e; }
+.step-row[data-state="fail"] .step-row-value { color: #e3a09a; }
+.step-row[data-state="fail"] .step-row-value::before { content: "✗ "; }
+.step-row code { font-size: 11px; }
+.step-links { display: inline-flex; flex-wrap: wrap; gap: 4px 10px; vertical-align: top; }
+.step-links a { font-size: 12px; }
+.step-muted { color: var(--text-muted); }
+.step-buttons { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 6px; }
+.step-buttons > .info-tip { min-width: 0; }
+.step-button { display: grid; place-items: center; gap: 3px; width: 100%; min-height: 58px; padding: 8px 4px; border: 1px solid #34373c; border-radius: 6px;
+  background: #1b1c1f; color: #dfe2e6; font-size: 12px; }
+.step-button > span:first-child { font-size: 19px; line-height: 1.1; }
+.step-button[aria-pressed="true"] { background: #34383d; border-color: #788792; color: #fff; }
+.step-button-primary { background: #26323a; border-color: #4f6876; }
+.step-button-primary:not(:disabled):hover { background: #30404a; }
+.step-field { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: 12px; font-size: 13px; }
+.step-field > label { color: var(--text-muted); font-size: 12px; }
+.step-field select { margin: 0; }
+.step-field input[type="range"] { margin: 0; }
+.step-field output { color: var(--text-muted); font-size: 12px; }
+.step-field-range { grid-template-columns: 96px minmax(0, 1fr) 40px; }
+.step-status { font-size: 12px; color: var(--text-secondary); overflow-wrap: anywhere; }
+.step-status[data-error="true"] { color: #e3a09a; }
+.step-files { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 3px; }
+.step-files code { font-size: 11px; color: var(--text-secondary); }
+.step-confirm { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+/* The working copy: N changes · Save · Discard on one row. */
+.step-working-copy { display: grid; grid-template-columns: minmax(0, 1.2fr) 1fr 1fr; align-items: center; gap: 6px; }
+.step-working-copy > span { font-size: 13px; font-variant-numeric: tabular-nums; }
+.step-working-copy[data-working-changes]:not([data-working-changes="0"]) > span { color: #f0c27a; }
+.step-working-copy button { min-height: 40px; }
+/* Left-docked canvas tools (Levels, Radial, Difference) take the camera buttons' place and style. */
+.workspace-content .workspace-tools-left .workspace-tool-panel { left: calc(var(--workspace-left-width) + 12px); right: auto; top: 12px; bottom: 40px; }
+.workspace-content .workspace-tools-left .workspace-tool-aside-left { position: absolute; left: calc(var(--workspace-left-width) + 12px); bottom: 40px; right: auto;
+  width: max-content; max-width: 260px; pointer-events: auto; }
+/* Status chips: one word or two, big enough to read at a glance. */
+.step-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.step-chip { display: inline-flex; align-items: center; gap: 6px; min-height: 30px; padding: 4px 12px; border: 1px solid #34373c; border-radius: 15px;
+  background: #1b1c1f; color: #dfe2e6; font-size: 13px; font-weight: 500; }
+.step-chip > small { color: var(--text-muted); font-size: 11px; font-weight: 400; }
+.step-chip[data-tone="ok"] { border-color: #3f6a4b; background: #1d2a21; color: #b9e6c4; }
+.step-chip[data-tone="warn"] { border-color: #6d5a33; background: #2a2418; color: #f0d29a; }
+.step-chip[data-tone="none"] { color: var(--text-muted); }
+/* A model result over its picture, in the viewport's place: one SVG in the picture's pixels, so outlines and points follow it exactly. */
+.model-result { position: absolute; top: 0; bottom: 0; left: var(--workspace-left-width); right: var(--workspace-right-width); display: grid; place-items: center; padding: 24px 24px 56px; background: #0b0c0e; }
+.model-result > svg { width: 100%; height: 100%; }
+.model-result-legend { position: absolute; left: 24px; bottom: 16px; display: flex; gap: 14px; font-size: 12px; color: var(--text-secondary); }
+.model-result-legend i { display: inline-block; width: 18px; height: 3px; margin-right: 6px; vertical-align: middle; border-radius: 2px; }

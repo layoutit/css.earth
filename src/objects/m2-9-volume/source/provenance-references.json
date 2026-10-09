@@ -2,7 +2,7 @@
   "schema": "cssearth-provenance-references@1",
   "references": [
     {
-      "originalPath": "labs/nebula/models/m2-9/experiment.json",
+      "originalPath": "src/objects/m2-9-volume/source/experiment.json",
       "path": "src/objects/m2-9-volume/source/bake-inputs/references/00-experiment.json",
       "bytes": 2015
     }

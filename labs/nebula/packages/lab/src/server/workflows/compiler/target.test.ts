@@ -50,7 +50,7 @@ test('angular footprint reliability suppresses a source edge while retaining int
   assert.deepEqual(after.bounds, before.bounds);
 });
 test('the saved Lagoon recipe fades every source boundary and the common outer window while retaining interior light', async () => {
-  const recipe = readCompilerRecipe(JSON.parse(await readFile('labs/nebula/models/m8/compiler.json', 'utf8')));
+  const recipe = readCompilerRecipe(JSON.parse(await readFile('src/objects/m8-volume/source/compiler.json', 'utf8')));
   const ids = Object.keys(recipe.sourceWeights ?? {}), input = inputs(128, 128);
   assert.ok(ids.length > 0);
   input.grid.arcsecondsPerPixel = 60; input.grid.fieldArcminutes = [128, 128];

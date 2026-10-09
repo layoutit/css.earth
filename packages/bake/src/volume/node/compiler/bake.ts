@@ -1,5 +1,5 @@
 /** Offline transport for one fitted neutral field and source-dependent RGB datasets. */
-import { COMPILER_BAKE_SCHEMA, readVolumeLayerPlan, readLayerOptimizationReport, createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, readCompilerBakeResult, validCompilerName, validCompilerImageWidth, COMPILER_IMAGE_WIDTH, validCompilerStarSize, validCompilerStarMaterials, type DensityVolumeFrame, type Vector3, type RenderElementProfile, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites, type EmissionBounds, type EmissionVector3, type SkyBounds, type VolumeSlices, type CompilerStarInput } from '@cssearth/objects';
+import { COMPILER_BAKE_SCHEMA, COMPILER_VOLUME_PROVENANCE_SCHEMA, readVolumeLayerPlan, readLayerOptimizationReport, createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount, readCompilerBakeResult, validCompilerName, validCompilerImageWidth, COMPILER_IMAGE_WIDTH, validCompilerStarSize, validCompilerStarMaterials, type DensityVolumeFrame, type Vector3, type RenderElementProfile, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites, type EmissionBounds, type EmissionVector3, type SkyBounds, type VolumeSlices, type CompilerStarInput } from '@cssearth/objects';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { isAbsolute, relative } from 'node:path';
 import sharp from 'sharp';
@@ -162,7 +162,7 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   const output = containedPath(root, outputDirectory), masterDirectory = containedPath(output, 'masters');
   const neutralDirectory = containedPath(output, 'neutral');
   await mkdir(output, { recursive: true }); cancel(signal);
-  const provenance = { schema: 'cssearth-compiler-volume-provenance@2', fieldIdentity: options.fieldIdentity,
+  const provenance = { schema: COMPILER_VOLUME_PROVENANCE_SCHEMA, fieldIdentity: options.fieldIdentity,
     coordinates: { axes: ['west', 'north', 'away'], units: 'arcsec', localOriginArcsec: origin,
       ...(preparedPhysical ? { mapping: 'sourceArcsec = [preparedWest, preparedNorth, -preparedToward] + localOriginArcsec',
         preparedAxes: ['west', 'north', 'toward'], earthView: 'source-observer-at-negative-z; prepared-observer-at-positive-z' }

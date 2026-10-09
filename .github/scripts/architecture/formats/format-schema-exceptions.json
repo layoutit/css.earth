@@ -24,18 +24,18 @@
   {
     "schema": "cssearth-fixed-wcs-catalogue-direction-gate@1",
     "owners": [
-      "labs/nebula",
-      "labs/nebula/packages/reconstruction"
+      "labs/nebula/packages/reconstruction",
+      "src"
     ],
-    "reason": "Reconstruction fixed-catalogue.ts and preserved WISE check-wise-catalogue.py write independent catalogue audit receipts; Python cannot import TypeScript. schema-protocols.test.ts pins both writers and retained receipt; matching stays reconstruction."
+    "reason": "Reconstruction fixed-catalogue.ts and preserved WISE check-wise-catalogue.py (src/objects/lmc-volume/source) write independent catalogue audit receipts; Python cannot import TypeScript. schema-protocols.test.ts pins both writers and retained receipt; matching stays reconstruction."
   },
   {
     "schema": "cssearth-image-direction-gate@1",
     "owners": [
-      "labs/nebula",
-      "labs/nebula/packages/reconstruction"
+      "labs/nebula/packages/reconstruction",
+      "src"
     ],
-    "reason": "Reconstruction validate-image-registration.py and its preserved LMC pinned copy write registration gate/failure receipts; neither can import TypeScript. schema-protocols.test.ts pins all eight declarations and retained receipt; scientific registration stays Python."
+    "reason": "Reconstruction validate-image-registration.py and its preserved LMC pinned copy (src/objects/lmc-volume/source) write registration gate/failure receipts; neither can import TypeScript. schema-protocols.test.ts pins all eight declarations and retained receipt; scientific registration stays Python."
   },
   {
     "schema": "cssearth-nox-output@1",

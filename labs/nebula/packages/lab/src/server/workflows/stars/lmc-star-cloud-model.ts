@@ -25,7 +25,7 @@ async function pinned(pin: Pin) {
   return bytes;
 }
 export async function loadStarCloudModel(frame: DensityVolumeFrame) {
-  const manifest = parseLabModelJson(await readFile('labs/nebula/models/lmc/stars/source/catalogue.json', 'utf8'));
+  const manifest = parseLabModelJson(await readFile('src/objects/lmc-volume/source/stars/source/catalogue.json', 'utf8'));
   const refs = manifest.depthModel;
   const buffers = Object.fromEntries(await Promise.all(Object.entries(refs).map(async ([key, value]) => [key, await pinned(value as Pin)])));
   const recipe = parseLabModelJson(buffers.cloudRecipe.toString()), evidence = parseLabModelJson(buffers.cloudProvenance.toString());
@@ -39,7 +39,7 @@ export async function loadStarCloudModel(frame: DensityVolumeFrame) {
     ['observation prior density', analysis.prior?.source?.path, refs.recipe.path],
     ['cloud recipe stellar prior', recipe.stellarPrior?.path, refs.recipe.path],
   ].filter(([, actual, expected]) => actual !== expected);
-  if (disagreements.length) throw new Error(`labs/nebula/models/lmc/stars catalogue depth model disagrees: ${JSON.stringify(disagreements)}`);
+  if (disagreements.length) throw new Error(`src/objects/lmc-volume/source/stars catalogue depth model disagrees: ${JSON.stringify(disagreements)}`);
   const stellarObject = parseLabModelJson(buffers.object.toString());
   if (beside(refs.object.path, stellarObject.properties?.preparation?.source) !== refs.recipe.path)
     throw new Error(`${refs.object.path} does not name ${refs.recipe.path} as its density source.`);

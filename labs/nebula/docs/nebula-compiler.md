@@ -18,7 +18,7 @@ The compiler should preserve an intermediate evidence model, then compare hypoth
 
 ## Inspect the evidence
 
-The current observations are ESO VISTA infrared, ESO WFI optical detail and the wider ESO field. Reuse their completed native NOX diffuse images and the star-verified registration from [the observation step](../models/helix/README.md#aligned-observations-and-native-star-removal). Do not rerun star removal, analyze the smaller alignment previews, crop to a ring or use the Hubble baseline accidentally.
+The current observations are ESO VISTA infrared, ESO WFI optical detail and the wider ESO field. Reuse their completed native NOX diffuse images and the star-verified registration from [the observation step](../../../src/objects/helix-layers/source/README.md#aligned-observations-and-native-star-removal). Do not rerun star removal, analyze the smaller alignment previews, crop to a ring or use the Hubble baseline accidentally.
 
 The inspector lets the operator:
 
@@ -58,7 +58,7 @@ In the inspector, **solid arcs** denote image support and **dashed continuations
 
 The 2026-09-12 automatic-geometry checkpoint produced 12 VISTA, 12 WFI and 9 wider-field hypotheses in 3.94 seconds total on the local machine. Actual browser overlays were inspected for all three sources: candidates follow parts of the main rim and inner brightness boundaries; some remain competing fits to the same rim, and the faint outer arcs are incomplete. No new 3D model is claimed. The first global-ridge experiment produced crossing false ellipses and was replaced by fitting each connected contour separately; a stars-only synthetic failure additionally motivated the contrast floor. Tests recover an offset, rotated, interrupted ellipse amid stars, reject that stars-only case, and recover/group nested ellipses from pixels. All 194 lab tests, strict lab TypeScript, the lab build and the three-source structure browser flow passed. The browser checks actual geometry registration, score/show-all/navigation controls, retained elements, pan over strokes and the existing region-review workflow without old volume requests or processing. Geometry JSON implementation hashes identify the tested detector; screenshots and browser evidence stay in the ignored local cache.
 
-The [geometry recipe](../models/helix/observation-geometry.json) controls the deterministic sampling seed, proposal budget, minimum relative radius and maximum candidate count. The detector requires each sampled luminance level to be at least 0.012 above its background estimate on the display-RGB [0,1] scale, avoiding large contours caused by quantization or weak background fluctuations. This is an algorithmic contrast floor, not calibrated flux or a nebular boundary measurement. The score slider filters completed hypotheses; the separate live Detector sliders prepare new geometry. Detection reads the existing structure map's **source.png**, which already comes from native NOX separation resized once; it does not use boosted false-color panels, run NOX again or change the source/structure pixels. Every map and source panel hash, source identity, registration and working raster dimension is verified before detection.
+The [geometry recipe](../../../src/objects/helix-layers/source/observation-geometry.json) controls the deterministic sampling seed, proposal budget, minimum relative radius and maximum candidate count. The detector requires each sampled luminance level to be at least 0.012 above its background estimate on the display-RGB [0,1] scale, avoiding large contours caused by quantization or weak background fluctuations. This is an algorithmic contrast floor, not calibrated flux or a nebular boundary measurement. The score slider filters completed hypotheses; the separate live Detector sliders prepare new geometry. Detection reads the existing structure map's **source.png**, which already comes from native NOX separation resized once; it does not use boosted false-color panels, run NOX again or change the source/structure pixels. Every map and source panel hash, source identity, registration and working raster dimension is verified before detection.
 
 Each image's prepared output is `geometry.json` in its structure analysis run, beside its exact source map; browser detection proposals are saved as `geometry-<uuid>.json` with the request they were made from. Wall-clock timings appear only in the command log. Geometry attachments are excluded from the canonical input catalogue so a replay can reproduce identical bytes. The catalogue gains references only after every source completes; previous map/image bytes and browser region-review identities remain unchanged. Generated outputs stay ignored. The stage performs no new volume inference or bake.
 
@@ -105,7 +105,7 @@ The lab comparator uses true orthographic CSS3D projection. Shared volume policy
 
 Focused core checks exercise duplicate merging, control validation, asymmetric placement and raster handedness, meaningful weight/thickness/softness/depth changes, actual XYZ baking, equal neutral/textured geometry and alpha, exposure, empty states and cancellation. Removing the raster-to-world rotation sign fails the placement test. These checks validate the implementation, not Helix's physical geometry or the quality of its automatic contours.
 
-Ring sectors add a clockwise image-local center angle and sweep, tapering their 3D emission smoothly at both ends. A 360° sweep retains a complete ring. Guides show the same projected arc. The saved [Helix fit](../models/helix/README.md) uses sectors for the uneven rim and outer arc; its six authored components remain distinct from automatic detection. **Fit** switches between source-validated model recipes and independent automatic drafts. Reset restores the selected recipe.
+Ring sectors add a clockwise image-local center angle and sweep, tapering their 3D emission smoothly at both ends. A 360° sweep retains a complete ring. Guides show the same projected arc. The saved [Helix fit](../../../src/objects/helix-layers/source/README.md) uses sectors for the uneven rim and outer arc; its six authored components remain distinct from automatic detection. **Fit** switches between source-validated model recipes and independent automatic drafts. Reset restores the selected recipe.
 
 Current limits: the initial presets are soft shells, rings and filled ellipsoids with additive/subtractive emission. This is not a fitted barrel/lobe family, hydrodynamic model or measured gas-density recovery. It does not automatically explain faint outer emission, infer front/back, or optimize the 3D hypotheses jointly against images. The Structure residual now exposes these mismatches without texture; it does not solve them. Preserve the original image evidence while investigating mismatches.
 
@@ -163,16 +163,16 @@ pnpm build:packages
 python3 -m venv .local/open-star-removal/venv
 .local/open-star-removal/venv/bin/python -m pip install tensorflow==2.16.2 numpy==1.26.4 opencv-python-headless==4.11.0.86 scipy==1.13.1
 curl -fL https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb -o .local/open-star-removal/noxGeneratorColor.pb
-node --experimental-strip-types labs/nebula/run.mts prepare-observations labs/nebula/models/helix/observations.json
-node --experimental-strip-types labs/nebula/run.mts prepare-observation-structures labs/nebula/models/helix/observation-structures.json
-node --experimental-strip-types labs/nebula/run.mts prepare-observation-geometry labs/nebula/models/helix/observation-geometry.json
+node --experimental-strip-types labs/nebula/run.mts prepare-observations src/objects/helix-layers/source/observations.json
+node --experimental-strip-types labs/nebula/run.mts prepare-observation-structures src/objects/helix-layers/source/observation-structures.json
+node --experimental-strip-types labs/nebula/run.mts prepare-observation-geometry src/objects/helix-layers/source/observation-geometry.json
 node --experimental-strip-types labs/nebula/run.mts test observation-structure-source structure-inspection detect-shapes geometry-model
 pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort
 ```
 
 Open `/reconstruction?subject=helix-model-prior` and select **Structure map** to inspect prepared regions and geometric candidates. Keep an existing server alive; omit the final command when it is already running. This path does not need the old Hubble volume. The observation command downloads/verifies pinned originals and reuses completed matching NOX caches; the structure and geometry commands refuse missing or changed inputs instead of running NOX. A new structure extraction replaces the catalogue and therefore requires the geometry stage again; geometry by itself never regenerates those structures. Inspect Alignment before authorizing the structure command for any new object or source. The current three Helix sources have that authorization.
 
-Prepared outputs and sources remain ignored under `.local/nebula-lab/observations/helix/`. Track the compact recipes, implementation and source records. A source/recipe/algorithm change creates a separate extraction identity; prior review decisions must not silently apply to changed evidence.
+Prepared outputs and sources remain ignored under `src/objects/helix-layers/.local/observations/helix/`. Track the compact recipes, implementation and source records. A source/recipe/algorithm change creates a separate extraction identity; prior review decisions must not silently apply to changed evidence.
 
 Two completed replays produced identical catalogue/map bytes and unchanged native-removal receipts. Runtime timing remains outside the stable map identity. Before geometry attachments were introduced, the verified catalogue's entries named the corresponding unchanged maps. Adding geometry references changes catalogue bytes, not those maps. Targeted tests also fail when actual support, native-to-working registration scaling or the cache-only NOX guard is removed. These checks establish artifact/coordinate behavior, not scientifically correct segmentation.
 
@@ -182,7 +182,7 @@ The 2026-09-12 UI checkpoint passed all **184 lab tests**, strict lab TypeScript
 
 The algorithm below is the reusable first-pass detector. The numerical results in the following historical section belong **only to the earlier cropped Hubble photograph**, not the new ESO observations.
 
-- The full 4731 × 3129 HST/CTIO original and native NOX separation are the exact pinned inputs of the [Helix experiment](../models/helix/README.md). No second star removal, crop, black-level subtraction or ring mask is applied.
+- The full 4731 × 3129 HST/CTIO original and native NOX separation are the exact pinned inputs of the [Helix experiment](../../../src/objects/helix-layers/source/README.md). No second star removal, crop, black-level subtraction or ring mask is applied.
 - Analysis resizes the full frame once to **768 × 508**. This is a quick working map, not a native-resolution scientific catalogue. Original RGB and the native separated image remain unchanged.
 - Reuse the lab's undecimated B3-starlet decomposition at six spatial scales. The luminance proxy is weighted display RGB; it is not calibrated luminosity, column density or a measured emission line.
 - Add local Hessian eigenvalue anisotropy for directional ridges. A thin curved ridge has one strongly negative curvature and a weaker transverse eigenvalue; a round peak has similar curvatures. Tangents and soft detection evidence are saved. This is **not a curvelet, Frangi, GETSF or DAWIS implementation**.
@@ -213,8 +213,8 @@ pnpm build:packages
 python3 -m venv .local/open-star-removal/venv
 .local/open-star-removal/venv/bin/python -m pip install tensorflow==2.16.2 numpy==1.26.4 opencv-python-headless==4.11.0.86 scipy==1.13.1
 curl -fL https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb -o .local/open-star-removal/noxGeneratorColor.pb
-node --experimental-strip-types labs/nebula/run.mts prepare-emission labs/nebula/models/helix/model-prior.json
-node --experimental-strip-types labs/nebula/run.mts prepare-nebula-structures labs/nebula/models/helix/structure-map.json
+node --experimental-strip-types labs/nebula/run.mts prepare-emission src/objects/helix-layers/source/model-prior.json
+node --experimental-strip-types labs/nebula/run.mts prepare-nebula-structures src/objects/helix-layers/source/structure-map.json
 node --experimental-strip-types labs/nebula/run.mts test structure-map structure-wavelets
 pnpm exec vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort
 ```
@@ -223,7 +223,7 @@ The first prepare command restores the historical comparison volume; it does not
 
 ## Earlier shape-cloud research plan
 
-The user authorized structure inspection of the [aligned wider observations](../models/helix/README.md#aligned-observations-and-native-star-removal) on 2026-09-11, then the editable shape-cloud comparison. The plan below records that experiment's questions. Current work assesses the [emission compiler](emission-compiler.md); this historical plan adds no approval stages to it. The complete downloaded Hubble frame is not the complete nebula; its numerical benchmark above remains historical.
+The user authorized structure inspection of the [aligned wider observations](../../../src/objects/helix-layers/source/README.md#aligned-observations-and-native-star-removal) on 2026-09-11, then the editable shape-cloud comparison. The plan below records that experiment's questions. Current work assesses the [emission compiler](emission-compiler.md); this historical plan adds no approval stages to it. The complete downloaded Hubble frame is not the complete nebula; its numerical benchmark above remains historical.
 
 1. Inspect automatically fitted arcs/ellipses and their neutral cloud contribution, especially faint outer regions and possible NOX damage. Use scope controls and Solo to distinguish duplicate contours from missing components. Assess supported intervals rather than accepting full extrapolated ellipses. If relationships remain unreliable after the bounded prototype adjustments, identify the detector limitation instead of hiding it with texture.
 2. Compare three coarse interpretations: a deformed shell, a barrel-like shell, and a bipolar structure, each with a separately represented outer component. Derive projected landmarks from accepted image evidence. Bound depth and orientation using published alternatives. Do not silently inflate rings or extrude the full rectangular image.

@@ -7,7 +7,7 @@ import { isVariantName } from '../variant-name.ts';
 import { geometryFile } from '../geometry/jobs-model.ts';
 const record = coreIsRecord;
 export function readShapeCloudPin(value: unknown): ShapeCloudPin {
-  if (!record(value) || typeof value.path !== 'string' || !value.path.startsWith('.local/nebula-lab/') || /[\\?#\u0000]/.test(value.path) ||
+  if (!record(value) || typeof value.path !== 'string' || !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(value.path) || /[\\?#\u0000]/.test(value.path) ||
       value.path.split('/').some(part => part === '..' || part === '.' || !part) || Object.keys(value).join() !== 'path')
     throw new TypeError(`Invalid shape-cloud resource reference: ${JSON.stringify(value)}`);
   return { path: value.path };

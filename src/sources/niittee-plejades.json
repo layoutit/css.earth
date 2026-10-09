@@ -23,7 +23,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m45/optical-composite-observations.json",
+      "path": "src/objects/m45-volume/source/optical-composite-observations.json",
       "locator": "/images/1"
     }
   ],
@@ -34,7 +34,7 @@
       "kind": "credit",
       "text": "Taavi Niittee / Tõrva Astronomy Club",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/optical-composite-observations.json#/images/1"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/optical-composite-observations.json#/images/1"
     }
   ]
 }
