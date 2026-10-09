@@ -300,3 +300,19 @@ Deviations:
 - Docs that cite deleted local receipts (cloud-appearance-check, helix-fit-session) still name them as history.
 - `orion-reference.json` stays, because a path test reads it.
 
+
+## 8. Evidence, 2026-10-09
+
+The lab from a clean worktree of this branch, in headless Chromium at 1440 × 900. Cassiopeia A, the Helix, M42 and M2-9 each opened on all four tabs with no page error, console error or failed request.
+
+![Research tab, Cassiopeia A](evidence/2026-10-09/research-cassiopeia-a.webp)
+
+Research: the status chips and the checklist gathered from the README and `src/sources`.
+
+![Edit tab with Stars on, Cassiopeia A](evidence/2026-10-09/edit-stars-cassiopeia-a.webp)
+
+Edit with **Stars** on: 222 Gaia DR3 stars (G < 17) on the picture's field, 95 of them on screen at this camera.
+
+![Edit tab after an edit, the Helix](evidence/2026-10-09/edit-draft-progress-helix.webp)
+
+An edit to the Helix's disc radius starts a draft bake; the progress strip shows it, and the earlier draft it replaced as cancelled. **Discard** returned the count to 0 and left `source/recipe.json` untouched; **Save** wrote only the changed number.
