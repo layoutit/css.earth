@@ -144,7 +144,8 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command.
 - `src/prepare-object/` is published as `@cssearth/bake/prepare-object` (Node only): the ordered preparation chain for one
   or more authored objects end to end (builds, catalogue, geometry, the authored preparation, page data, text, markers,
-  billboard, world context, system packages, provenance), naming the step that failed and how to resume. It imports no topic; its steps
+  the world placement of a body the world context does not hold yet, billboard, world context, system packages,
+  provenance), naming the step that failed and how to resume. It imports no topic; its steps
   shell out to the other bake and site-owned preparation commands by path. `packages/bake/cli/prepare-object.mts` is its
   command; its tests are in `src/prepare-object/`.
 - `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
