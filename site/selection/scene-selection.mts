@@ -25,10 +25,10 @@ export function selectionTargetFromUrl(url: URL, objectId: string): SelectionTar
 }
 
 /** One committed subject. Mounted scene ownership and temporary browsing/flight previews remain independent. */
-export function createSceneSelection({ initial, objectId, systems = [], onChange }: {
+export function createSceneSelection({ initial, objectId, systems = () => [], onChange }: {
   initial: SelectionTarget; objectId: string;
-  /** The world's bodies, for a system overview's star: its overview is left by the distance from that star. */
-  systems?: SystemObjects;
+  /** The world's bodies now, for a system overview's star: its overview is left by the distance from that star. */
+  systems?: () => SystemObjects;
   onChange(): void;
 }) {
   // The mounted scene.
@@ -36,7 +36,7 @@ export function createSceneSelection({ initial, objectId, systems = [], onChange
   let subject: SceneSubject = initial;
   /** The scope a camera frames, on the zoom out of a step's centre (zoom-scope.mts). */
   const scopeAt = (world: WorldCameraPose, step: { readonly scope: string; readonly centreId: string }) => {
-    const star = systemById(systems, step.centreId);
+    const star = systemById(systems(), step.centreId);
     const systemId = systemObjectId(step.centreId);
     return zoomScopeAtCamera(world, step.scope, undefined, star ? { originM: star.originM, orbitsWithinM: SYSTEM_RANGES.get(star.id), systemId } : { systemId },
       zoomChain(step.centreId));

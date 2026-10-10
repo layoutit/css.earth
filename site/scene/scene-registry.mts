@@ -1,7 +1,7 @@
 // What the router reads from the object directory and the world summary. A cold page starts loading it at boot
 // (`startup-boot.mts`); the router waits for it only once its first body has mounted (`scene-router.mts`).
 export { SCENE_OBJECTS, knownObject, loadObject } from '../directory/object-directory.mts';
-export { WORLD_OBJECTS } from '../world/systems/world-objects.mts';
+export { WORLD_OBJECTS, worldHolds } from '../world/systems/world-objects.mts';
 export { createPreparedWorldNavigation } from '../navigation/prepared-world-navigation.mts';
 export { mountObjectShell } from '../shell/object-shell-client.mts';
 export { createSceneActivation } from './session/scene-activation.mts';

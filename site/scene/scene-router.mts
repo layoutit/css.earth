@@ -52,9 +52,8 @@ import { preparedObjectUrl } from '../prepared/prepared-object-path.mts';
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 type Registry = typeof import('./scene-registry.mts');
 interface RouterContext {
+  /** Its `WORLD_OBJECTS` is read where it is used: a flight reads its destination's bodies after this context is built. */
   registry: Registry;
-  /** Every body of the world, with its system and frame origin, from the world summary. */
-  objects: Registry['WORLD_OBJECTS'];
   navigation: Navigation;
   selection: ReturnType<typeof createSceneSelection>;
   activation: ReturnType<typeof createSceneActivation>;
@@ -370,9 +369,8 @@ export function createSceneRouter({
     const task = importSceneRegistry().then(async registry => {
       // The page's own object enters the live directory the navigation reads; other objects join as the page navigates.
       if (!await registry.loadObject(objectId)) throw new Error(`Object ${objectId} has no prepared entry.`);
-      const objects = registry.WORLD_OBJECTS, worldIds = new Set(objects.map(object => object.id));
       const navigation = registry.createPreparedWorldNavigation({ objects: registry.SCENE_OBJECTS, motion: cameraMotion, windowTarget, documentTarget });
-      const selection = registry.createSceneSelection({ objectId, systems: objects,
+      const selection = registry.createSceneSelection({ objectId, systems: () => registry.WORLD_OBJECTS,
         initial: registry.selectionTargetFromUrl(new URL(windowTarget.location?.href ?? 'https://example.test'), objectId), onChange: publishSelection });
       const activation = registry.createSceneActivation({ windowTarget, navigation, view, isCurrent: scenes.isCurrent, getReducedMotion: () => reducedMotionActive });
       if (windowTarget.location?.href && !destroyed) {
@@ -390,9 +388,9 @@ export function createSceneRouter({
           } });
       }
       // Any body the world draws, and any object the page already knows (a scale of the universe is no body of the world).
-      navigable = id => (worldIds.has(id) || registry.knownObject(id) !== undefined) && (!registry.knownObject(id) || navigation.supports(objectId, id));
+      navigable = id => (registry.worldHolds(id) || registry.knownObject(id) !== undefined) && (!registry.knownObject(id) || navigation.supports(objectId, id));
       if (destroyed) navigation.destroy();
-      return context = { registry, objects, navigation, selection, activation };
+      return context = { registry, navigation, selection, activation };
     });
     contextTask = task;
     void task.catch(() => { if (contextTask === task) contextTask = null; });
@@ -449,11 +447,11 @@ export function createSceneRouter({
     if (id !== objectId) {
       // The page of an object seen from inside (a link or history entry) opens on the world's host, as zooming out reaches it
       // (navigation-scope.mts).
-      const { registry, objects } = await ensureContext();
+      const { registry } = await ensureContext();
       if (destroyed) return false;
       // A flight to another body reads its entry, system view, card and object transport. All four start now, together:
       // otherwise the system view waits for the entry, and the transport for the card (scene-transition.mts).
-      if (objects.some(object => object.id === id)) {
+      if (registry.worldHolds(id)) {
         navigationFragments(windowTarget).prefetch(id);
         startFlightRequest(preparedObjectUrl(id, 'prepared/object.json'));
         if (intent.kind !== 'feature') void registry.loadSystemView(id).catch(() => {});
@@ -464,12 +462,12 @@ export function createSceneRouter({
     // Entry and system-view reads may finish in any order. Only the latest selection can start a flight.
     const ready = await readiness.prepare(id, intent.kind !== 'feature');
     if (!ready || destroyed) return false;
-    const { registry: { resolveNavigation }, navigation: routes, selection: current, objects } = ready;
+    const { registry: { resolveNavigation }, navigation: routes, selection: current } = ready;
     if (!routes.supports(objectId, id)) return false;
     const object = ready.registry.SCENE_OBJECTS.find(object => object.id === id);
     if (!object) return false;
     const source = scenes.current;
-    const resolved = resolveNavigation(intent, { object, objects, navigation: routes, current: {
+    const resolved = resolveNavigation(intent, { object, objects: ready.registry.WORLD_OBJECTS, navigation: routes, current: {
       objectId, href: navigationHref(windowTarget), subject: current.current,
       centeredObjectId, hasPresented, reuseScene: !!source && objectId === id && scenes.state.kind === 'ready',
       mount: source?.mount ?? null, pending: requests.current,
@@ -691,7 +689,7 @@ export function createSceneRouter({
     // star is a disc, and its scene was mounted mid-zoom on the way out once the page knew the star (2026-10-03).
     const host = handover.subject ? subjectHost(handover.subject) : null, focal = session.mount?.navigation?.optics().focalPixels;
     const around = host !== null && (insideBody(objectId)?.id === host || insideBody(subjectOf(objectId, 'system').objectId)?.id === host
-      || systemOfObject(context?.objects ?? [], objectId)?.id === host || satelliteSystemOfMember(objectId)?.hostId === host);
+      || systemOfObject(context?.registry.WORLD_OBJECTS ?? [], objectId)?.id === host || satelliteSystemOfMember(objectId)?.hostId === host);
     // The mounted scene draws its own body already: its selections wait for rest like any other.
     const body = host !== null && host !== objectId && !around && zoomStepOf({ objectId: host }) === null ? context?.registry.SCENE_OBJECTS.find(object => object.id === host)?.worldFrame : undefined;
     if (body && focal && bodyInView(frame, body, focal)) handover.due();
@@ -779,13 +777,13 @@ export function createSceneRouter({
   function connectCameraSelection(ready: RouterContext, session: Session) {
     const owner = session.mount?.navigation;
     if (!owner) return;
-    const { selection: current, objects, registry } = ready;
+    const { selection: current, registry } = ready;
     // The object the mounted body is inside is read now, when the page has not read it (another galaxy): it takes the view
     // as the camera backs out of the body.
     void loadHolder(objectId).catch(error => console.error(`The object ${objectId} is inside could not be read; zooming out of it skips it.`, error));
     // The body its walls surround is read too, when its entry names one: it takes the view as the camera zooms in on it.
     void loadInner(objectId).catch(error => console.error(`The body inside ${objectId} could not be read; zooming in on it stops at its nearest view.`, error));
-    const watch = registry.watchCameraSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: objects, objectId,
+    const watch = registry.watchCameraSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: registry.WORLD_OBJECTS, objectId,
       inside: () => { const frame = insideBody(objectId)?.worldFrame, id = insideBody(objectId)?.id; return frame && id !== undefined ? { id, originM: frame.originM, radiusM: frame.bodyRadiusM } : null; },
       inner: () => knownInner(objectId)?.id ?? null,
       getSelection: () => current.context,

@@ -16,4 +16,7 @@ export type WorldObject = ReturnType<typeof worldObjects>[number];
 /** The application's world objects: the bodies its plan holds now. It follows the plan, so a holder read later brings
  * its bodies; read it when it is used, never keep a copy. */
 export let WORLD_OBJECTS = worldObjects(context);
-onWorldSystems(plan => { WORLD_OBJECTS = worldObjects(plan); });
+let worldIds = new Set(WORLD_OBJECTS.map(object => object.id));
+onWorldSystems(plan => { WORLD_OBJECTS = worldObjects(plan); worldIds = new Set(WORLD_OBJECTS.map(object => object.id)); });
+/** Whether the plan holds body `id` now. It follows the plan as the list does: ask it when the answer is used. */
+export const worldHolds = (id: string): boolean => worldIds.has(id);
