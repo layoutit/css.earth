@@ -91,6 +91,231 @@
         "title": "Climate model · Generic PCM simulation",
         "sourceUrl": "https://arxiv.org/abs/2308.15110"
       }
+    },
+    {
+      "id": "ocean-model",
+      "output": "trappist-1d-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1d-dataset-{id}.webp",
+      "source": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "ocean-model",
+        "label": "Ocean model",
+        "format": "netcdf-lonlat-field",
+        "path": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+        "variable": "tsurf",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {},
+        "sourceUnits": "C",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "ocean-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "°C",
+        "minimum": -10,
+        "maximum": 50,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "-10",
+          "20",
+          "50"
+        ],
+        "description": "Simulated surface air temperature from the ROCKE-3D model, a published simulation and not a measurement.",
+        "title": "Ocean model · ROCKE-3D simulation",
+        "sourceUrl": "https://arxiv.org/abs/2502.00132"
+      }
+    },
+    {
+      "id": "ocean-cloud-model",
+      "output": "trappist-1d-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1d-dataset-{id}.webp",
+      "source": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "ocean-cloud-model",
+        "label": "Ocean model clouds",
+        "format": "netcdf-lonlat-field",
+        "path": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+        "variable": "pcldt",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {},
+        "sourceUnits": "%",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "ocean-cloud-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 50,
+        "maximum": 100,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "50",
+          "75",
+          "100"
+        ],
+        "description": "Simulated cloud cover from the ROCKE-3D model, a published simulation and not a measurement.",
+        "title": "Ocean model clouds · ROCKE-3D simulation",
+        "sourceUrl": "https://arxiv.org/abs/2502.00132"
+      }
+    },
+    {
+      "id": "ocean-rain-model",
+      "output": "trappist-1d-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1d-dataset-{id}.webp",
+      "source": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "ocean-rain-model",
+        "label": "Ocean model rain",
+        "format": "netcdf-lonlat-field",
+        "path": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+        "variable": "prec",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {},
+        "sourceUnits": "mm/day",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "ocean-rain-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "mm/day",
+        "minimum": 0,
+        "maximum": 6,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "3",
+          "6"
+        ],
+        "description": "Simulated precipitation from the ROCKE-3D model, a published simulation and not a measurement.",
+        "title": "Ocean model rain · ROCKE-3D simulation",
+        "sourceUrl": "https://arxiv.org/abs/2502.00132"
+      }
+    },
+    {
+      "id": "ocean-vapor-model",
+      "output": "trappist-1d-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1d-dataset-{id}.webp",
+      "source": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "ocean-vapor-model",
+        "label": "Ocean model vapor",
+        "format": "netcdf-lonlat-field",
+        "path": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+        "variable": "qatm",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {},
+        "sourceUnits": "kg/m^2",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "ocean-vapor-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "kg/m²",
+        "minimum": 0,
+        "maximum": 300,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "0",
+          "150",
+          "300"
+        ],
+        "description": "Simulated water vapor column from the ROCKE-3D model, a published simulation and not a measurement.",
+        "title": "Ocean model vapor · ROCKE-3D simulation",
+        "sourceUrl": "https://arxiv.org/abs/2502.00132"
+      }
+    },
+    {
+      "id": "ocean-wind-model",
+      "output": "trappist-1d-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1d-dataset-{id}.webp",
+      "source": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "ocean-wind-model",
+        "label": "Ocean model wind",
+        "format": "netcdf-lonlat-field",
+        "path": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+        "variable": "wsurf",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {},
+        "sourceUnits": "m/s",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "ocean-wind-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "m/s",
+        "minimum": 2,
+        "maximum": 7,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "2",
+          "4.5",
+          "7"
+        ],
+        "description": "Simulated surface wind speed from the ROCKE-3D model, a published simulation and not a measurement.",
+        "title": "Ocean model wind · ROCKE-3D simulation",
+        "sourceUrl": "https://arxiv.org/abs/2502.00132"
+      }
     }
   ],
   "lighting": {

@@ -27,6 +27,16 @@
       ],
       "path": "science/turbet-2023/diagfi_T1d_1barN2_10barH2O.head.dat",
       "url": "https://zenodo.org/records/5627945/files/diagfi_T1d_1barN2_10barH2O.nc?download=1"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/way-2025/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc",
+      "url": "https://zenodo.org/records/14740675/files/Trappist1d.zip?download=1",
+      "member": "Trappist1d/FIGURES/DATA/06_ANN29001-30000.aijTrappist1d_1bar_N2_W1_AP.nc"
     }
   ]
 }
