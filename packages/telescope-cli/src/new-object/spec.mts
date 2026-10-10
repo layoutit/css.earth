@@ -25,7 +25,8 @@
  * "measurements": CSV path, "measurementsSource", "source", "url" } for an imaged orbit from the paper's posterior;
  * { "archive": "nasa-ps", "reference"? } for one paper's transit fit in the NASA Exoplanet Archive ("measured": true for a planet
  * found without a transit whose paper measures its whole orbit, inclination included, orbit.mts assembleMeasuredOrbit); { "elements": { … },
- * "source", "url" }; or { "record": true, "source", "url" } for a body whose astronomy record another owner already writes (the
+ * "source", "url" } ("assumedPlane": a sentence, when no source measures this body's tilt and node and the elements take another's:
+ * the orbit is then an approximate placement, drawn dashed and named "(approx)"); or { "record": true, "source", "url" } for a body whose astronomy record another owner already writes (the
  * S-stars of packages/astronomy/cli/generate-s-stars.mts): the record is kept as it is and only the package is written, and the spec's
  * cited radius and mass must reproduce the record's. A planet's radius and mass are in Jupiter units and default to the archive row's;
  * a planet with a cited `temperature` glows with its own heat (a young giant imaged directly). A companion is a star: solar units,
@@ -165,7 +166,10 @@ function orbitSpec(value: unknown, label: string): OrbitSpec {
     const epoch = o.epoch === undefined ? undefined : requireString(o.epoch, `${label}.epoch`);
     if (epoch !== undefined && !(HOSTED_EPOCHS as readonly string[]).includes(epoch)) throw new TypeError(`${label}.epoch is ${HOSTED_EPOCHS.join(', ')}, not ${epoch}.`);
     if (Number(elements.eccentricity) > 0 && (epoch === undefined || elements.argumentOfPeriapsisDegrees === undefined)) throw new TypeError(`${label}: an eccentric orbit needs argumentOfPeriapsisDegrees and epoch (${HOSTED_EPOCHS.join(', ')}).`);
-    return { elements: Object.fromEntries(Object.entries(elements).map(([key, v]) => [key, requireFiniteNumber(v, `${label}.elements.${key}`)])), ...(epoch ? { epoch: epoch as HostedEpoch } : {}), source: requireString(o.source, `${label}.source`), url: requireString(o.url, `${label}.url`) };
+    // `assumedPlane` is the sentence that says the orbit's tilt and node are not this body's own measurement and whose they are:
+    // the record is then an approximate placement, drawn dashed and named "(approx)" (packages/astronomy HostedOrbit.placement).
+    return { elements: Object.fromEntries(Object.entries(elements).map(([key, v]) => [key, requireFiniteNumber(v, `${label}.elements.${key}`)])), ...(epoch ? { epoch: epoch as HostedEpoch } : {}), source: requireString(o.source, `${label}.source`), url: requireString(o.url, `${label}.url`),
+      ...(o.assumedPlane === undefined ? {} : { assumedPlane: requireString(o.assumedPlane, `${label}.assumedPlane`) }) };
   }
   throw new TypeError(`${label} needs whereistheplanet, archive, elements or record.`);
 }

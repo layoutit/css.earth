@@ -66,6 +66,12 @@ export interface HostedOrbit {
    */
   readonly weaklyConstrained?: true
   /**
+   * Set when no source measures the orbit's plane and the record takes one on a stated assumption (a sibling planet's measured
+   * plane, say). The page draws the path dashed and names the body "(approx)", as it does a moon whose published orbit is not
+   * unique (`placement` of a published mutual orbit). `sources.placement` states the assumption and what is measured.
+   */
+  readonly placement?: 'approximate'
+  /**
    * A circumbinary orbit: the elements are Jacobi elements about the centre of mass of the parent and this companion, itself
    * on a hosted orbit around the same parent (Kepler-16 (AB) b about Kepler-16 A and B). States stay parent-centred, as a
    * satellite's `barycentreCompanion` does. `sources.barycentre` cites the masses that weight the centre.
@@ -79,6 +85,7 @@ export interface HostedOrbit {
     readonly eccentricity?: string
     readonly argumentOfPeriapsis?: string
     readonly constraint?: string
+    readonly placement?: string
     readonly barycentre?: string
   }
 }

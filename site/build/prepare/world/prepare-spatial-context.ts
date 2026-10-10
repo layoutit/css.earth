@@ -3,7 +3,7 @@ import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { gunzipSync } from 'node:zlib';
-import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
+import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, hostedOrbit, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
@@ -55,13 +55,16 @@ async function planckHex(kelvin: number): Promise<string> {
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
   const input = readWorldContextSourceSelection(JSON.parse(await readFile(options.sourcePath, 'utf8')));
   if (input.bodies === 'catalog') {
+    const approximateHosted = new Set<string>(HOSTED_PLANET_IDS.filter(id => hostedOrbit(id).placement === 'approximate'));
     const objects = await readCatalog(options.objectsDirectory ?? resolve(process.cwd(), 'src/objects'), prepareSceneDistance);
     input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
       .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))
       .map(body => ({ id: body.id, name: body.context!.name ?? mapLabel(body.name), color: body.context!.color ?? body.color,
         ...(body.context!.orbitsWithinAu === undefined ? {} : { orbitsWithinM: body.context!.orbitsWithinAu * M_PER_AU }),
         ...(body.context!.labelPlacement === undefined ? {} : { labelPlacement: body.context!.labelPlacement }),
-        ...(isSceneSatellite(body.id) && sceneSatelliteStateKm(body.id, input.frame.epochJdTt).provenance.placement === 'approximate'
+        // A moon whose published orbit is not unique, or a planet whose orbit record takes its plane on an assumption.
+        ...((isSceneSatellite(body.id) && sceneSatelliteStateKm(body.id, input.frame.epochJdTt).provenance.placement === 'approximate')
+          || approximateHosted.has(body.id)
           ? { placement: 'approximate' as const } : {}) }));
     // A star on a hosted orbit around a packaged host is drawn from its astronomy record without a page. Its color is the Planck
     // color at its measured effective temperature, through the CIE 1931 2° observer its host package keeps, as a star package

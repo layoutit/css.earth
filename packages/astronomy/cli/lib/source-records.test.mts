@@ -32,6 +32,17 @@ describe('astronomy source decoding', () => {
     assert.throws(() => readHostedOrbitRecord({ ...eccentric, semiMajorAxisStellarRadii: 1.1 }), /Invalid hosted orbit: periastron 1\.1 x \(1 - [0-9.]+\) stellar radii is inside the star/);
     assert.throws(() => readHostedOrbitRecord({ ...eccentric, semiMajorAxisStellarRadii: 0.838 }), /semiMajorAxisStellarRadii 0\.838 puts the orbit inside the star/);
   });
+  it('keeps an approximate placement only with the assumption it rests on', () => {
+    const measured = { periodDays: 14.65, semiMajorAxisStellarRadii: 26.9, inclinationDegrees: 93.9, eccentricity: 0,
+      transitTimeBmjdTdb: 55495, ascendingNodePositionAngleDegrees: 124,
+      sources: { period: 'fixture', shape: 'fixture', phase: 'fixture BMJD_TDB', orientation: 'fixture' } };
+    const approximate = { ...measured, placement: 'approximate', sources: { ...measured.sources, placement: 'The plane is a sibling planet\'s; this planet\'s own tilt is not measured.' } };
+    assert.deepEqual(readHostedOrbitRecord(approximate), approximate);
+    assert.equal(readHostedOrbitRecord(measured).placement, undefined);
+    assert.throws(() => readHostedOrbitRecord({ ...measured, placement: 'approximate' }), /states its assumption in sources\.placement/);
+    assert.throws(() => readHostedOrbitRecord(Object.assign({}, measured, { sources: approximate.sources })), /states its assumption in sources\.placement/);
+    assert.throws(() => readHostedOrbitRecord({ ...approximate, placement: 'illustrative' }), /placement is approximate or absent/);
+  });
   it('retains float64 Horizons components and rejects malformed numeric CSV cells', () => {
     const text = '$$SOE\n2461286.5, date,1.234567890123456,-2,3,4,5,6\n$$EOE';
     assert.deepEqual(parseVectors(text)[0].position, [1.234567890123456, -2, 3]);

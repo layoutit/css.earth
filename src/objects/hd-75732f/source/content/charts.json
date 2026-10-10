@@ -11,7 +11,7 @@
       "highlight": "hd-75732f",
       "description": "The orbits of 55 Cnc's planets in this map from above, to scale, with 55 Cnc f highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
-        "orbitSource": "Moutou et al. (2026), A&A 705, A190, Table 3, a fit of the star's radial velocities, for the period, eccentricity, argument, time of conjunction and semi-major axis (a/R* is its 0.802 au over the star's recorded 656,045 km). The tilt and node are NOT measured for this planet: they are assumed equal to those Xiao et al. (2026, arXiv:2609.01377) measure for 55 Cnc d (https://arxiv.org/abs/2510.11523): P 260.58 d"
+        "orbitSource": "Moutou et al. (2026), A&A 705, A190, Table 3, a fit of the star's radial velocities (a/R* is its 0.802 au over the star's recorded 656,045 km); the orbit's plane is assumed, from Xiao et al. (2026, arXiv:2609.01377) (https://arxiv.org/abs/2510.11523): P 260.58 d"
       }
     }
   ]
