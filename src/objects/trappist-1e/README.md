@@ -49,6 +49,16 @@ In this run the sea is free of ice at the point under the star and fully iced ov
 
 Under carbon dioxide the run is 38.6 K warmer on average than under nitrogen (282.6 against 244.0 K), and sea ice covers 29 % of the ocean instead of 77 %: the point opposite the star is free of ice. Four models ran this case too, and their global mean surface temperatures differ by 24 K (Sergeev et al. 2022). The two temperature maps do not share a color range: 200 to 300 K for nitrogen, 250 to 320 K for carbon dioxide.
 
+**A second model of the same air.** ROCKE-3D, from Way (2025, ApJL, [arXiv:2502.00132](https://arxiv.org/abs/2502.00132)), released under CC0 1.0 as [Zenodo record 14740675](https://zenodo.org/records/14740675). The paper is about TRAPPIST-1d and runs TRAPPIST-1e for comparison; its simulation 21 is this planet under one bar of nitrogen with 400 ppm of carbon dioxide, the air of the first ExoCAM run, over a global ocean 900 m deep that carries heat. The file is `21_ANN4500-4999.aijTrappist1e_04.nc`, the mean of the run's orbits 4,500 to 4,999 on a 72 × 46 grid; its incident starlight is centered on the grid's longitude 180.000° and latitude 0.000°. The paper's table gives the run a mean surface temperature of 252 K, from 213 to 276 K, and 88 % cloud; the file read here gives 252.2 K, 213.6 to 276.4 K and 88.4 %. The record names only planet d in its title, and the file names this planet: [`fileNamesObject`](../../../packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts) is the check that accepts it.
+
+| Dataset | Variable | In the file | Mean | Day half | Night half | Drawn |
+|---|---|---|---|---|---|---|
+| ROCKE-3D model | `tsurf`, surface air temperature | -59.5 to 3.2 °C | -20.9 | -12.3 | -29.6 | -60 to 10 °C |
+| ROCKE-3D sea ice | `oicefr`, sea ice cover | 0 to 100 % | 70.4 | 60.9 | 79.9 | 0 to 100 % |
+| ROCKE-3D clouds | `pcldt`, cloud cover | 38.7 to 99.2 % | 88.4 | 86.0 | 90.9 | 30 to 100 % |
+
+The two models disagree on where the open water is. ExoCAM's sea is open only around the point under the star and fully iced at the opposite point. ROCKE-3D's is free of ice at both (0.00 and 0.06 %), in a belt along the equator, and the air there is as warm on the night side as under the star (-1.8 and 1.8 °C). The paper notes that an ocean with currents does not give the round patch of open water an ocean without them gives. The release is one 1.4 GB ZIP archive that stores this 6.7 MB file compressed: the file is kept whole, outside git, and the source restore takes it out of the archive. The copy read here was fetched from the archive by byte range and matches the checksum (CRC-32) the archive records for it.
+
 The 53 MB file is not kept whole. [`new-object --simulation`](../../../packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts) fetched byte ranges of it, which the [manifest](source/manifest.json) declares and the source restore brings back: its first 460,604 bytes (the header and the coordinate variables), kept once for all six datasets, and the 13,248 bytes of each field, where the header places them. The second file is kept the same way: its first 460,604 bytes and three fields.
 
 This is one scenario. Nobody has detected an atmosphere on TRAPPIST-1e: JWST's first four transit spectra give no strong evidence for or against one, and both a nitrogen-rich atmosphere and bare rock fit them (Glidden et al. 2025, [arXiv:2509.05407](https://arxiv.org/abs/2509.05407)). Four models ran this case for the THAI comparison and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022, [arXiv:2109.11459](https://arxiv.org/abs/2109.11459)). The official THAI runs used an older radiative transfer in ExoCAM than this control run, so its map differs from that paper's figure by a few kelvin.
@@ -63,6 +73,9 @@ This is one scenario. Nobody has detected an atmosphere on TRAPPIST-1e: JWST's f
 
 ![TRAPPIST-1e under nitrogen (top) and under carbon dioxide (bottom) in the same model: surface temperature, sea ice cover and cloud cover as their prepared sidebar maps; longitude 0, the point under the star, is at the left edge, 10 October 2026](evidence/2026-10-10/co2-scenario.webp)
 
+![TRAPPIST-1e in ExoCAM (top) and in ROCKE-3D (bottom), given the same air: temperature, sea ice cover and cloud cover as their prepared sidebar maps; longitude 0, the point under the star, is at the left edge, 10 October 2026](evidence/2026-10-10/rocke3d.webp)
+
+- Third run of 2026-10-10: the three ROCKE-3D datasets were added. The picture shows prepared maps, not the page. The file reproduces the paper's table for simulation 21 (252 K, 213 to 276 K, 88 % cloud).
 - Second run of 2026-10-10: the three carbon-dioxide datasets were added. The picture shows prepared maps, not the page. The file's surface pressure (`PS`, read by one range request) averages 100,492 Pa, against 100,190 Pa in the nitrogen run.
 - Run of 2026-10-10: five fields of the same run were added as datasets. The picture shows the maps preparation wrote, not the page: the page was not yet driven in a browser for this change. The 20 files the package already delivered are byte-identical to main's, and the surface temperature read through the same route still averages 244.0 K. [`simulation-dataset.test.mts`](../../../packages/telescope-cli/src/new-object/simulation/simulation-dataset.test.mts) checks that a second field of a file shares the file's one header record.
 - Run of 2026-10-04: the two kept byte ranges equal the same bytes of the whole 53 MB file, downloaded once for the comparison. The reader gives the values the reference library (libnetcdf 4.9.3) reads from that file on 12 of 12 sampled cells and on the minimum and maximum. [`netcdf-lonlat-field.test.mts`](../../../packages/bake/src/objects/raster/netcdf/netcdf-lonlat-field.test.mts) checks that a release kept as two ranges reads as the whole file does, and that a range which is not the selection is refused.
@@ -82,6 +95,8 @@ This is one scenario. Nobody has detected an atmosphere on TRAPPIST-1e: JWST's f
 **The climate model is a scenario, not a finding.** It assumes an atmosphere and an ocean nobody has detected. A different atmosphere, or none, would give a different map, and the four models of this very case disagree by 14 K on its mean.
 
 **The carbon-dioxide scenario is no more detected than the nitrogen one.** It is a second answer to the same open question, and ExoCAM is the warmest of the four models that ran it. Its temperature map uses a color range of its own, so the same color is not the same temperature on the two maps.
+
+**The two models are not on one scale.** ExoCAM's temperature is the surface's, in kelvin; ROCKE-3D's is the air's at the surface, in degrees Celsius, and its ice and cloud are in percent where ExoCAM's are fractions. Each is shown as its release gives it.
 
 **The five other model fields share one color ramp.** Clouds, sea ice, water vapor, heat and wind are all drawn from black through red to pale yellow, a display convention: the legend names each quantity and its range. Model wind is a speed, with no direction.
 

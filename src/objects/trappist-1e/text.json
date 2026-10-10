@@ -90,6 +90,21 @@
       "title": "ExoCAM simulation",
       "detail": "Published simulation",
       "summary": "Cloud cover in a published model, in false color. It shows one scenario, not a measurement."
+    },
+    "rocke3d-model": {
+      "title": "ROCKE-3D simulation",
+      "detail": "Published simulation",
+      "summary": "Surface air temperature in a published model, in false color. It shows one scenario, not a measurement."
+    },
+    "rocke3d-ice-model": {
+      "title": "ROCKE-3D simulation",
+      "detail": "Published simulation",
+      "summary": "Sea ice cover in a published model, in false color. It shows one scenario, not a measurement."
+    },
+    "rocke3d-cloud-model": {
+      "title": "ROCKE-3D simulation",
+      "detail": "Published simulation",
+      "summary": "Cloud cover in a published model, in false color. It shows one scenario, not a measurement."
     }
   }
 }

@@ -83,6 +83,21 @@
               "id": "co2-cloud-model",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "rocke3d-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "rocke3d-ice-model",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "rocke3d-cloud-model",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
