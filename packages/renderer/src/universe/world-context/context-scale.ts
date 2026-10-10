@@ -154,13 +154,13 @@ export function starFieldFade(distanceM: number, system: { readonly fadeOutStart
   return logarithmicFade(distanceM, system.fadeOutStartDistanceM / STAR_FIELD_BEFORE_SYSTEM_FADE, system.fadeOutStartDistanceM);
 }
 
-/** The share of the galaxy's dots drawn inside the Solar System; a presentation choice, by eye on 2026-09-30. */
-const SOLAR_SYSTEM_DOTS = .3;
+/** The share of the galaxy's dots drawn inside a star's system; a presentation choice, by eye on 2026-09-30. */
+const SYSTEM_DOTS = .3;
 /**
- * How strongly the galaxy's catalogue dots draw around the selected body. Inside the Solar System a faint share stays,
- * behind the system's own dots, and rises to full with the star field. Another star's system has no dots of its own:
- * at that share TRAPPIST-1's 320 dots and WASP-33's 58 read as an empty sky on an iPad (2026-10-06), so there they are whole.
+ * How strongly the galaxy's catalogue dots draw around the selected body. Inside a star's system a faint share stays and
+ * rises to full with the star field, as the other stars' markers do. The Sun's system and another star's are the same:
+ * whole dots beside dimmed markers read as stars that did not dim (TRAPPIST-1, 2,138 dots in view, 2026-10-10).
  */
-export function catalogueDotsOpacity(starField: number, inSolarSystem: boolean): number {
-  return inSolarSystem ? SOLAR_SYSTEM_DOTS + (1 - SOLAR_SYSTEM_DOTS) * starField : 1;
+export function catalogueDotsOpacity(starField: number): number {
+  return SYSTEM_DOTS + (1 - SYSTEM_DOTS) * starField;
 }

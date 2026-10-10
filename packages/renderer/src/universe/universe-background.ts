@@ -140,9 +140,7 @@ export function createUniverseBackground({ root, end, lifetime, plan, payload, s
       // them past the system (world-context-planner.ts); measured like them from the selected body. A detailed focus (a
       // nebula's or a galaxy's picture) keeps them, as it keeps the stars' markers: they are the sky around it.
       const starField = starFieldFade(volumeDistanceM, plan.system);
-      // The selected body is in the Solar System while it is nearer the Sun than where that system is fully retired.
-      const inSolarSystem = Math.hypot(...selectedPositionM.map((value, axis) => value - plan.focus.positionM[axis]!)) < plan.system.hiddenDistanceM;
-      const shownDots = catalogueDotsOpacity(starField, inSolarSystem);
+      const shownDots = catalogueDotsOpacity(starField);
       // A star the world draws as a body is its marker's to draw: its own dot in the galaxy's bank is left out.
       for (const points of cataloguePoints) points.publish({ world, viewport }, shownDots, withoutM);
       // The backing shows with the dots, and gives way to a detailed focus as the galaxy's volume does.

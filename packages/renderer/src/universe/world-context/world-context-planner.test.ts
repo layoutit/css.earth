@@ -874,8 +874,7 @@ test('the moons of a framed planet keep their names before stars beyond the Sola
   for (const moon of ['io', 'europa', 'ganymede', 'callisto']) assert.equal(named.has(moon), true, `${moon} is named`);
 });
 
-test('the galaxy dots are faint only inside the Solar System', () => {
-  assert.equal(catalogueDotsOpacity(0, true), .3);
-  assert.equal(catalogueDotsOpacity(1, true), 1, 'past the planets they rise to full with the star field');
-  assert.equal(catalogueDotsOpacity(0, false), 1, "another star's system has no dots of its own, so the galaxy's are whole");
+test("the galaxy dots are faint inside a star's system, the Sun's or another's, and whole past it", () => {
+  assert.equal(catalogueDotsOpacity(0), .3);
+  assert.equal(catalogueDotsOpacity(1), 1, 'past the system they rise to full with the star field');
 });
