@@ -367,6 +367,148 @@
           }
         ]
       }
+    },
+    {
+      "id": "trappist-1e-co2-model-simulation",
+      "path": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.TS-time0.dat",
+      "range": {
+        "offset": 42498680,
+        "length": 13248
+      },
+      "origin": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc?download=1",
+      "productId": "ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc",
+      "version": "10.5281/zenodo.5532765",
+      "sourceUrl": "https://zenodo.org/records/5532765",
+      "credit": "Wolf et al. (2022); ExoCAM simulation",
+      "displayCredit": "Wolf et al. (2022) · ExoCAM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5532765",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Surface temperature (TS) of TRAPPIST-1e in the ExoCAM simulation: ExoCAM: A 3D Climate Model for Exoplanet Atmospheres :: Model data and supplementary figures and analysis",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5532765: the bytes of TS at time index 0 in ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc, where the file's header puts them. The 53.4 MB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "co2-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-co2-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-co2-ice-model-simulation",
+      "path": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.ICEFRAC-time0.dat",
+      "range": {
+        "offset": 29157944,
+        "length": 13248
+      },
+      "origin": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc?download=1",
+      "productId": "ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc",
+      "version": "10.5281/zenodo.5532765",
+      "sourceUrl": "https://zenodo.org/records/5532765",
+      "credit": "Wolf et al. (2022); ExoCAM simulation",
+      "displayCredit": "Wolf et al. (2022) · ExoCAM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5532765",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Sea ice cover (ICEFRAC) of TRAPPIST-1e in the ExoCAM simulation: ExoCAM: A 3D Climate Model for Exoplanet Atmospheres :: Model data and supplementary figures and analysis",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5532765: the bytes of ICEFRAC at time index 0 in ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc, where the file's header puts them. The 53.4 MB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "co2-ice-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-co2-ice-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-co2-cloud-model-simulation",
+      "path": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.CLDTOT-time0.dat",
+      "range": {
+        "offset": 1959800,
+        "length": 13248
+      },
+      "origin": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc?download=1",
+      "productId": "ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc",
+      "version": "10.5281/zenodo.5532765",
+      "sourceUrl": "https://zenodo.org/records/5532765",
+      "credit": "Wolf et al. (2022); ExoCAM simulation",
+      "displayCredit": "Wolf et al. (2022) · ExoCAM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5532765",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Cloud cover (CLDTOT) of TRAPPIST-1e in the ExoCAM simulation: ExoCAM: A 3D Climate Model for Exoplanet Atmospheres :: Model data and supplementary figures and analysis",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5532765: the bytes of CLDTOT at time index 0 in ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc, where the file's header puts them. The 53.4 MB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "co2-cloud-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-co2-cloud-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1e-co2-model-simulation-grid",
+      "path": "science/wolf-2022/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.head.dat",
+      "range": {
+        "offset": 0,
+        "length": 460604
+      },
+      "origin": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc?download=1",
+      "productId": "ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc",
+      "version": "10.5281/zenodo.5532765",
+      "sourceUrl": "https://zenodo.org/records/5532765",
+      "credit": "Wolf et al. (2022); ExoCAM simulation",
+      "displayCredit": "Wolf et al. (2022) · ExoCAM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5532765",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Header and coordinate variables of ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc, the ExoCAM simulation of TRAPPIST-1e",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5532765: the first 460,604 bytes of ExoCAM_thai_hab2_L51_n68equiv.cam.h0.avg.nc, its header and its coordinate variables.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "co2-model-simulation",
+        "co2-ice-model-simulation",
+        "co2-cloud-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1e-co2-model-simulation-grid",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

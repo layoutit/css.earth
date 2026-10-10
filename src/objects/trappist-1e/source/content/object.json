@@ -493,6 +493,186 @@
           "sourceUrl": "https://arxiv.org/abs/2201.09797"
         },
         "notes": "Wind speed at 10 m of TRAPPIST-1e in the ExoCAM simulation of Wolf et al. (2022): a model, not a measurement. The run assumes one bar of nitrogen with 400 ppm of carbon dioxide over a global ocean, the THAI \"Hab 1\" case, on a planet that keeps one face to its star. The map is the mean state the release holds. Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first transit spectra give no strong evidence for or against one: a nitrogen-rich atmosphere fits them, and so does bare rock (Glidden et al. 2025). Four models ran this case for the THAI comparison, and their global mean surface temperatures differ by 14 K (Sergeev et al. 2022). The false color runs from 0 to 20 m/s; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "co2-model",
+        "label": "CO₂ model",
+        "qualification": "Simulation · ExoCAM · Wolf et al. (2022) · False color",
+        "thumbnail": "trappist-1e-dataset-co2-model.webp",
+        "surface": "trappist-1e-surface-co2-model@2x.webp",
+        "poles": "trappist-1e-poles-co2-model@2x.webp",
+        "source": {
+          "id": "trappist-1e-co2-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2201.09797"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Surface temperature",
+          "labels": [
+            "250",
+            "285",
+            "320"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "250",
+              "285",
+              "320"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2201.09797"
+        },
+        "notes": "Surface temperature of TRAPPIST-1e in the ExoCAM simulation of Wolf et al. (2022): a model, not a measurement. The run assumes one bar of carbon dioxide over a global ocean, the THAI \"Hab 2\" case, on a planet that keeps one face to its star. The map is the mean state the release holds. Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first transit spectra give no strong evidence for or against one: a nitrogen-rich atmosphere fits them, and so does bare rock (Glidden et al. 2025). Four models ran this case for the THAI comparison, and their global mean surface temperatures differ by 24 K (Sergeev et al. 2022). The false color runs from 250 to 320 K; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "co2-ice-model",
+        "label": "CO₂ model sea ice",
+        "qualification": "Simulation · ExoCAM · Wolf et al. (2022) · False color",
+        "thumbnail": "trappist-1e-dataset-co2-ice-model.webp",
+        "surface": "trappist-1e-surface-co2-ice-model@2x.webp",
+        "poles": "trappist-1e-poles-co2-ice-model@2x.webp",
+        "source": {
+          "id": "trappist-1e-co2-ice-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2201.09797"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Sea ice cover",
+          "labels": [
+            "0",
+            "0.5",
+            "1"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0",
+              "0.5",
+              "1"
+            ]
+          },
+          "meta": "fraction",
+          "sourceUrl": "https://arxiv.org/abs/2201.09797"
+        },
+        "notes": "Sea ice cover of TRAPPIST-1e in the ExoCAM simulation of Wolf et al. (2022): a model, not a measurement. The run assumes one bar of carbon dioxide over a global ocean, the THAI \"Hab 2\" case, on a planet that keeps one face to its star. The map is the mean state the release holds. Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first transit spectra give no strong evidence for or against one: a nitrogen-rich atmosphere fits them, and so does bare rock (Glidden et al. 2025). Four models ran this case for the THAI comparison, and their global mean surface temperatures differ by 24 K (Sergeev et al. 2022). The false color runs from 0 to 1 fraction; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      },
+      {
+        "id": "co2-cloud-model",
+        "label": "CO₂ model clouds",
+        "qualification": "Simulation · ExoCAM · Wolf et al. (2022) · False color",
+        "thumbnail": "trappist-1e-dataset-co2-cloud-model.webp",
+        "surface": "trappist-1e-surface-co2-cloud-model@2x.webp",
+        "poles": "trappist-1e-poles-co2-cloud-model@2x.webp",
+        "source": {
+          "id": "trappist-1e-co2-cloud-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2201.09797"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Cloud cover",
+          "labels": [
+            "0.1",
+            "0.55",
+            "1"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "0.1",
+              "0.55",
+              "1"
+            ]
+          },
+          "meta": "fraction",
+          "sourceUrl": "https://arxiv.org/abs/2201.09797"
+        },
+        "notes": "Cloud cover of TRAPPIST-1e in the ExoCAM simulation of Wolf et al. (2022): a model, not a measurement. The run assumes one bar of carbon dioxide over a global ocean, the THAI \"Hab 2\" case, on a planet that keeps one face to its star. The map is the mean state the release holds. Nobody has detected an atmosphere on TRAPPIST-1e. JWST's first transit spectra give no strong evidence for or against one: a nitrogen-rich atmosphere fits them, and so does bare rock (Glidden et al. 2025). Four models ran this case for the THAI comparison, and their global mean surface temperatures differ by 24 K (Sergeev et al. 2022). The false color runs from 0.1 to 1 fraction; it is not what an eye would see. With shadows on, the star's light darkens the night half."
       }
     ]
   },

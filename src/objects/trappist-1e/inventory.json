@@ -39,6 +39,24 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1e-dataset-co2-cloud-model.webp",
+      "bytes": 2454,
+      "sha256": "b7efd216232fee6b94ad54387571d2160a4e1f21625dac9a076ddd9062d79df9"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-dataset-co2-ice-model.webp",
+      "bytes": 46,
+      "sha256": "a7084f91d14b671d2a300acf812283861ec9047dc9ed8d903183cdd459d79b53"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-dataset-co2-model.webp",
+      "bytes": 1228,
+      "sha256": "6769ad15b3df8e35476aab5538c3e96b63445c5785f0a0a018d70f5d5f9fa9dd"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1e-dataset-heat-model.webp",
       "bytes": 2196,
       "sha256": "eff4c0967f556cc4a3a27b4a78714535d576a48c164ac6b7500c0f069f176bd6"
@@ -84,6 +102,24 @@
       "filename": "trappist-1e-poles-cloud-model@2x.webp",
       "bytes": 18668,
       "sha256": "1667c1a7e2922a89ab887d48cdcb64e9d4ba82336fb48492a33c0ae81e6a1c1b"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-poles-co2-cloud-model@2x.webp",
+      "bytes": 28732,
+      "sha256": "1a85f3d6ac0dda9cc615446c5e18cd4249807ef19523966327bc79f9df751cb2"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-poles-co2-ice-model@2x.webp",
+      "bytes": 56120,
+      "sha256": "927d9d29a8519117bbad75945b778168f52f4b5606cb13bf91166e4b0bec67f7"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-poles-co2-model@2x.webp",
+      "bytes": 18914,
+      "sha256": "1e05079529b466d54dd7e39c7b2036bbb310d3889b103f773fd2f8185249e3e7"
     },
     {
       "location": "public",
@@ -135,6 +171,24 @@
     },
     {
       "location": "public",
+      "filename": "trappist-1e-surface-co2-cloud-model@2x.webp",
+      "bytes": 156976,
+      "sha256": "856d82a7c696f1889969c52cb5c0413c254241da5e130fc08f1d0bdd6aa88888"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-surface-co2-ice-model@2x.webp",
+      "bytes": 79432,
+      "sha256": "eac2248eef82168229ff2782ae2c05721ed7ab8e480c67d5c316a8f9d08ddcf6"
+    },
+    {
+      "location": "public",
+      "filename": "trappist-1e-surface-co2-model@2x.webp",
+      "bytes": 93348,
+      "sha256": "6568663dd0fd8920adabdbb40a056cdce36737a6175b4cee7129e3d375afce04"
+    },
+    {
+      "location": "public",
       "filename": "trappist-1e-surface-heat-model@2x.webp",
       "bytes": 175066,
       "sha256": "d84116e89a24f164be9a166d4bc52af9e95786cbe2362db48ba20aa8be10cd73"
@@ -178,8 +232,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 19323,
-      "sha256": "cececf041b3f0c06a358a288034d5cb3de48053e4bffbaa4ec10db6827ce8a77"
+      "bytes": 19912,
+      "sha256": "5ca7de4174e3dc9f5ea78ddc1fde566443cdfd82fc183a468639d335c7825439"
     },
     {
       "location": "prepared",
@@ -196,8 +250,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 13029,
-      "sha256": "4b159589d000cdd2db93f05ae01c0b5b5e6cf27640adca5076106a61fefdab04"
+      "bytes": 18779,
+      "sha256": "1c4a4e58f489a28caaa4f0504d76c5cc542a78a96b14b4e84b8ba4b34770eaf2"
     },
     {
       "location": "prepared",
@@ -208,8 +262,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 807,
-      "sha256": "6cbea585e00c8c45de25c9d972c31e3fc64989266f05c963ada87241789b6dac"
+      "bytes": 1115,
+      "sha256": "3c6e1fd0a295b4b39412e6db853648b7d26cd0c7dbd359214ea876d59531a738"
     },
     {
       "location": "prepared",
@@ -222,6 +276,24 @@
       "filename": "minimaps/cloud-model.webp",
       "bytes": 2704,
       "sha256": "6bef3f09c68d5be4d4e2f0cab8ca7b9ac26c1eef32252251862897b3fc088baa"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/co2-cloud-model.webp",
+      "bytes": 3774,
+      "sha256": "57e2a6e2e78afba92043a5e689c28962991f5f57afa704e088da783dd2636c79"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/co2-ice-model.webp",
+      "bytes": 3154,
+      "sha256": "4d3c1018bb3814472bc3b11fda0fe04c5d117411d20a33c515f6b82430a12c9a"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/co2-model.webp",
+      "bytes": 2206,
+      "sha256": "42ddf78acd7ad8a1a404a2077ad88ec393f4aec753a58dc4d6884dfbf368950f"
     },
     {
       "location": "prepared",
@@ -262,14 +334,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 115919,
-      "sha256": "ba0ce155adbf50d6047fa23aff31a86b202b8d390d7e758606f6781d33010a2f"
+      "bytes": 127480,
+      "sha256": "2a66a49494e6b040808354bc8c967c2b47f2d7253ad2aa1916e4ba2b3fffbd83"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2425,
-      "sha256": "6a56ea695b2f57baea518db6307d49320e4910810b8fcb19392c91ee922d28c1"
+      "bytes": 2979,
+      "sha256": "d541d0fc7fdbb1707e8afd96bf9583bf28cb9368e5fcad5b39b23268f6ea6a1e"
     }
   ]
 }
