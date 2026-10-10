@@ -12,7 +12,7 @@ import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import type { Archive } from '../archives/archives.mts';
 import { rebuildExistingDatasets } from '../planets/planet-datasets.mts';
-import { installSimulationDataset, memberFormat, parseSimulationEntries, restoreSimulationField, restoreSimulationMember, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey, surveyQuestions } from './simulation-dataset.mts';
+import { fileNamesObject, installSimulationDataset, memberFormat, parseSimulationEntries, restoreSimulationField, restoreSimulationMember, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey, surveyQuestions } from './simulation-dataset.mts';
 
 const id = 'trappist-1f', o = `src/objects/${id}`;
 const fixture = resolve(WORKSPACE, 'packages/bake/src/objects/raster/netcdf/fixtures/field-cdf2.nc');
@@ -83,7 +83,12 @@ test('the release is checked on Zenodo: a license that allows reuse, a record th
   const refused = async (change: (record: Record<string, any>) => void, message: RegExp, who = names) => assert.rejects(async () => simulationRelease(archive(await record(change)), id, who, entry), message);
   await refused(exocam => { delete exocam.metadata.license; }, /trappist-1f, dataset climate-model: Zenodo record 10\.5281\/zenodo\.5532765 states no license; a simulation is shown only under a license known to allow reuse \(field record\)/u);
   await refused(exocam => { exocam.metadata.license = { id: 'cc-by-nc-nd-4.0' }; }, /states the license cc-by-nc-nd-4\.0/u);
-  await refused(() => {}, /does not name Kepler-186 f in its title or description; a model of a class of objects is not a model of this one \(field record\)/u, ['Kepler-186 f']);
+  await refused(() => {}, /does not name Kepler-186 f in its title or description, and field-cdf2\.nc is not named for it; a model of a class of objects is not a model of this one \(field record\)/u, ['Kepler-186 f']);
+  // A release of several planets' runs names each in its files: a file named for the object stands where its record names another.
+  assert.deepEqual([fileNamesObject('Trappist1d/FIGURES/DATA/21_ANN4500-4999.aijTrappist1e_04.nc', ['TRAPPIST-1e', 'TRAPPIST-1 e']), fileNamesObject('01_ANN34000-34999.aijTrappist1d_1bar_N2_C400_Arid.nc', ['TRAPPIST-1e']),
+    fileNamesObject('ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc', ['TRAPPIST-1e']), fileNamesObject('runs/Kepler-186f/ts.nc', ['Kepler-186 f']), fileNamesObject('be.nc', ['b']), fileNamesObject('trappist1ebb_flow.nc', ['TRAPPIST-1e']), fileNamesObject('hd1897334.nc', ['HD 189733'])], [true, false, false, true, false, false, false]);
+  const named = entryOf({ file: 'run_Kepler186f.nc', path: 'science/wolf-2022/run_Kepler186f.nc' });
+  assert.equal((await simulationRelease(archive(await record(exocam => { exocam.files = [{ key: 'run_Kepler186f.nc', size: 10 }, ...exocam.files]; })), id, ['Kepler-186 f'], named)).bytes, 10);
   await refused(exocam => { exocam.files = exocam.files.slice(1); }, /lists no file field-cdf2\.nc \(field file\); it lists ExoCAM_thai_hab1_L51_n68equiv\.cam\.h0\.avg\.nc, /u);
 });
 
