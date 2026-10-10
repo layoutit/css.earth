@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { parseImageLayerRecipe, type ImageLayerRecipe } from './config.ts';
-import { closedMesh, imageLayerSurfaceMesh, pushPull } from './surface-mesh.ts';
+import { closedMesh, imageLayerSurfaceMesh, MESH_OPACITY_FLOOR, pushPull } from './surface-mesh.ts';
 import { stlTriangles } from './surface.ts';
 
 type Surface = NonNullable<ImageLayerRecipe['geometry']['surface']>;
@@ -38,12 +38,15 @@ test('a hole in a field is filled from its whole rim, and the known values are k
     if (weight[y * width + x]) assert.equal(value, x); else assert.ok(value > 2 && value < 13, `the hole at ${x}, ${y} takes its rim's values: ${value}`); }
 });
 
-test('a closed ball is drawn as its own triangles: each opaque inside itself and clear past its long side', async () => {
-  const photo = Buffer.alloc(4 * SIZE * SIZE); for (let p = 0; p < SIZE * SIZE; p++) photo.set([200, 150, 120, 255], 4 * p);
+test('a closed ball is drawn as its own triangles: dark dust opaque, bright gas clear to the floor, nothing past the long side', async () => {
+  // The picture's left half is dark dust, its right half bright gas.
+  const photo = Buffer.alloc(4 * SIZE * SIZE); for (let p = 0; p < SIZE * SIZE; p++) photo.set(p % SIZE < SIZE / 2 ? [20, 15, 12, 255] : [200, 150, 120, 255], 4 * p);
   const made = await imageLayerSurfaceMesh(surface, stlTriangles(ball(2), 'ball.stl'), photo, SIZE, SIZE, sky);
   assert.ok(made.length > 100, `${made.length} triangles`);
+  const floor = Math.round(255 * MESH_OPACITY_FLOOR), inside = new Set<number>();
   for (const triangle of made) { const [columns, rows] = triangle.texture, alpha = (s: number, t: number) => triangle.rgba[4 * (Math.floor(t * rows) * columns + Math.floor(s * columns)) + 3]!;
-    assert.equal(alpha(.2, .2), 255, 'opaque inside the triangle'); if (columns > 4 && rows > 4) assert.equal(alpha(.95, .95), 0, 'clear past its long side'); }
+    const held = alpha(.2, .2); inside.add(held); assert.ok(held >= floor, `no face clearer than the floor: ${held}`); if (columns > 4 && rows > 4) assert.equal(alpha(.95, .95), 0, 'clear past its long side'); }
+  assert.ok(inside.has(255), 'the dark dust stays opaque'); assert.ok(inside.has(floor), 'the brightest gas clears to the floor');
 });
 
 test('a recipe draws its surface as a closed mesh with its filament and detail maps, and refuses what it cannot read', () => {
