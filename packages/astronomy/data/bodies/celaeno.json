@@ -15,14 +15,14 @@
   "rightAscensionDegrees": 56.20099235353907,
   "declinationDegrees": 24.28926774500748,
   "positionEpochJulianYear": 2016,
-  "distanceParsecs": 135.4050873017637,
+  "distanceParsecs": 134.84134308,
   "properMotionRaMasPerYear": 19.84914439143686,
   "properMotionDecMasPerYear": -44.96559622643841,
   "radialVelocityKmPerS": 16.494202,
   "presentationUp": "display-axis",
   "sources": {
    "position": "Gaia DR3 source 65287458566524928 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/celaeno/source/photometry/gaia-dr3-source.csv; cross-identification HD 23288, HR 1140, HIP 17489: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+65287458566524928",
-   "distance": "Gaia DR3 parallax 7.3852 +/- 0.0724 mas (same row, RUWE 0.96): 135.41 pc, no zero-point correction",
+   "distance": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50 134.84134308 pc, the distance of the Pleiades, of which Celaeno is a member, as its sisters are placed; its own Gaia DR3 parallax agrees to 0.6 pc, within the cluster's depth (half its members within 2.70 pc of the centre) (https://doi.org/10.1051/0004-6361/202346285): 134.84134308 +/- 2.7 pc; Gaia DR3 parallax 7.3852 +/- 0.0724 mas (same row, RUWE 0.96), 102.0 standard errors, is not used",
    "properMotion": "Gaia DR3 (same row): 19.849, -44.966 mas/yr",
    "radialVelocity": "Gaia DR3 (same row): 16.49 +/- 0.82 km/s"
   }

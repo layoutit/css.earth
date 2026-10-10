@@ -2,97 +2,41 @@
   "schema": "cssearth-object-text@1",
   "objectId": "m45",
   "card": {
-    "text": "The Pleiades is an open star cluster surrounded by reflection nebulosity.",
+    "text": "The Pleiades is an open star cluster in the Milky Way, about 135 parsecs away.",
     "sources": [
       {
-        "catalogueId": "melis-2014",
-        "url": "https://arxiv.org/pdf/1408.6544",
-        "label": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
-        "checked": "2026-10-01",
-        "locator": "distance: 136.2 pc (−1.2 / +1.2 pc)"
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50, the median of the maximum-likelihood distance, 134.84134308 pc (16th to 84th percentile 134.82 to 134.86)",
+        "checked": "2026-10-10",
+        "locator": "Melotte_22: dist50 134.8 pc"
       }
     ]
   },
   "introduction": {
-    "text": "The Pleiades is an open star cluster surrounded by reflection nebulosity. Its stars lie about 136 parsecs away; the dust may not.",
+    "text": "The Pleiades is drawn as 1,020 of its member stars, measured by Gaia and, for its nine named stars, by Hipparcos; each dot sits at its sky position, at the cluster's distance.",
     "sources": [
       {
-        "catalogueId": "melis-2014",
-        "url": "https://arxiv.org/pdf/1408.6544",
-        "label": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
-        "checked": "2026-10-01",
-        "locator": "distance: 136.2 pc (−1.2 / +1.2 pc)"
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, Melotte_22: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-10",
+        "locator": "Melotte_22: 1,014 members inside the tidal radius with a color"
       }
     ]
   },
   "datasets": {
-    "optical-composite": {
-      "title": "Pleiades optical cloud, wider field",
-      "detail": "8000 × 5199 px",
-      "summary": "Wide optical photograph with central detail from NOIRLab; cloud depth is inferred and fine filaments are softened.",
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "1,020 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
       "sources": [
         {
-          "catalogueId": "niittee-plejades",
-          "url": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
-          "label": "Pleiades · Tõrva / Niittee · wide optical; Taavi Niittee / Tõrva Astronomy Club",
-          "checked": "2026-10-01",
-          "locator": "Pleiades · Tõrva / Niittee · wide optical"
-        }
-      ]
-    },
-    "noirlab-optical": {
-      "title": "Pleiades filaments in visible light",
-      "detail": "4000 × 2920 px",
-      "summary": "Optical B/V/I display on an inferred reflection cloud; this image covers only the central region.",
-      "sources": [
-        {
-          "catalogueId": "noirlab-noao-m45",
-          "url": "https://noirlab.edu/public/images/noao-m45/",
-          "label": "Pleiades · NOIRLab · optical B / V / I; NOIRLab/NSF/AURA/T.A. Rector (University of Alaska Anchorage), R. Cool (University of Arizona) and WIYN",
-          "checked": "2026-10-01",
-          "locator": "Pleiades · NOIRLab · optical B / V / I"
-        }
-      ]
-    },
-    "spitzer-irac": {
-      "title": "Pleiades dust in the Spitzer IRAC bands",
-      "detail": "2855 × 2855 px",
-      "summary": "IRAC infrared false color on an inferred cloud; the image covers only its central region.",
-      "sources": [
-        {
-          "catalogueId": "nasa-pia09262",
-          "url": "https://science.nasa.gov/photojournal/pink-pleiades/",
-          "label": "Pleiades · Spitzer · IRAC 3.6–8 µm; NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
-          "checked": "2026-10-01",
-          "locator": "Pleiades · Spitzer · IRAC 3.6–8 µm"
-        }
-      ]
-    },
-    "spitzer-irac-mips": {
-      "title": "Pleiades warm dust to 24 micrometres",
-      "detail": "2855 × 2855 px",
-      "summary": "IRAC/MIPS infrared false color on an inferred cloud; the image covers only its central region.",
-      "sources": [
-        {
-          "catalogueId": "nasa-pia09263",
-          "url": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
-          "label": "Pleiades · Spitzer · IRAC + MIPS 4.5–24 µm; NASA/JPL-Caltech/J. Stauffer (SSC-Caltech)",
-          "checked": "2026-10-01",
-          "locator": "Pleiades · Spitzer · IRAC + MIPS 4.5–24 µm"
-        }
-      ]
-    },
-    "wise-four-band": {
-      "title": "The wider Pleiades infrared cloud",
-      "detail": "4007 × 3061 px",
-      "summary": "WISE infrared false color on an inferred reflection cloud; dust depth and scattering are not recovered.",
-      "sources": [
-        {
-          "catalogueId": "nasa-pia13121",
-          "url": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
-          "label": "Pleiades · WISE · 3.4–22 µm wide field; NASA/JPL-Caltech/UCLA",
-          "checked": "2026-10-01",
-          "locator": "Pleiades · WISE · 3.4–22 µm wide field"
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, Melotte_22: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-10",
+          "locator": "Melotte_22, inrt = True"
         }
       ]
     }

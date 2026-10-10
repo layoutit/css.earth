@@ -6,4 +6,4 @@ Color: a Planck spectrum at the temperature of Andrae et al. (2023), A&A 674, A2
 
 Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
 
-Placement: Gaia DR3 source 65287458566524928: position, parallax, proper motion and radial velocity. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+Placement: Gaia DR3 source 65287458566524928: position, proper motion and radial velocity; distance: Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50 134.84134308 pc, the distance of the Pleiades, of which Celaeno is a member, as its sisters are placed; its own Gaia DR3 parallax agrees to 0.6 pc, within the cluster's depth (half its members within 2.70 pc of the centre). This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.

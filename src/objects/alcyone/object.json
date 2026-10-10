@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "alcyone",
-  "parent": "milky-way",
+  "parent": "m45",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -37,7 +37,7 @@
       ],
       "shape": {
         "kind": "sphere",
-        "radiusKm": 9574223.4
+        "radiusKm": 10444544.1
       },
       "materials": [
         {
@@ -98,7 +98,7 @@
       "name": "Alcyone",
       "classification": "star",
       "color": "#aec4ff",
-      "distanceAu": 25496198.6,
+      "distanceAu": 27813035.7,
       "description": "A star 124 parsecs away, 14 times the Sun's width, measured from its light.",
       "systemName": "Alcyone system",
       "aliases": [
@@ -110,15 +110,16 @@
       "order": 5469,
       "context": {
         "order": 5466
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        1902759232154603300,
-        2915627838749265400,
-        1557744507676754700
+        2075662777243036700,
+        3180570654928602600,
+        1699296598539222500
       ],
       "presentationToReference": [
         0.4988649509752202,
@@ -136,8 +137,8 @@
         -0.34201997220057434,
         0.9127990072690584
       ],
-      "metersPerUnit": 30884591.612903226,
-      "bodyRadiusM": 9574223400
+      "metersPerUnit": 33692077.741935484,
+      "bodyRadiusM": 10444544100
     }
   },
   "prepared": {

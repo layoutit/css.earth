@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "merope",
-  "parent": "milky-way",
+  "parent": "m45",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -37,7 +37,7 @@
       ],
       "shape": {
         "kind": "sphere",
-        "radiusKm": 5389587.9
+        "radiusKm": 6235559.1
       },
       "materials": [
         {
@@ -98,7 +98,7 @@
       "name": "Merope",
       "classification": "star",
       "color": "#b1c6ff",
-      "distanceAu": 24040177.1,
+      "distanceAu": 27813037.5,
       "description": "A star 117 parsecs away, 7.7 times the Sun's width, measured from its light.",
       "systemName": "Merope system",
       "aliases": [
@@ -110,34 +110,35 @@
       "order": 5617,
       "context": {
         "order": 5614
-      }
+      },
+      "featured": true
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        1810175882207770000,
-        2743370249858526700,
-        1459788761251874000
+        2094264504041906400,
+        3173914199274794000,
+        1688887702093939500
       ],
       "presentationToReference": [
-        0.503335099031631,
+        0.5033350990315865,
         0.22355384294601485,
-        0.8346720657760669,
-        0.7628178841446711,
+        0.8346720657760938,
+        0.7628178841447005,
         0.3388013179077225,
-        -0.5507472583799558,
+        -0.5507472583799151,
         0.40590966200851364,
         -0.9139132050080352,
-        2.7456735856377904e-7
+        2.745673802175237e-7
       ],
       "orbitUpReference": [
         -0.22355384294601485,
         -0.3388013179077225,
         0.9139132050080352
       ],
-      "metersPerUnit": 17385767.419354837,
-      "bodyRadiusM": 5389587900
+      "metersPerUnit": 20114706.774193548,
+      "bodyRadiusM": 6235559100
     }
   },
   "prepared": {

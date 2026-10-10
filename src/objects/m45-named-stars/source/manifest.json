@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "named-stars",
+      "path": "src/objects/m45-named-stars/source/dots/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+HIP%2C+RArad%2C+DErad%2C+134.84134308+AS+distpc%2C+Hpmag%2C+%22B-V%22+FROM+%22I%2F311%2Fhip2%22+WHERE+HIP+IN+%2817702%2C17847%2C17499%2C17573%2C17608%2C17531%2C17851%2C17489%2C17579%29+ORDER+BY+Hpmag",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/311",
+      "title": "The nine named Pleiades stars, Hipparcos new reduction, table.csv",
+      "credit": "van Leeuwen (2007), A&A 474, 653, Hipparcos, the new reduction; CDS I/311",
+      "acquisition": "Query result downloaded unchanged from its CDS origin on 2026-10-10; not tracked. The query keeps the Hipparcos rows of the nine named stars and writes the cluster's distance into each row; read by packages/bake/cli/prepare-catalogue-points.mts through dots/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1051-0004-6361-20078357",
+            "role": "material",
+            "evidence": "src/objects/m45-named-stars/source/dots/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/m45-named-stars/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/m45-named-stars/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

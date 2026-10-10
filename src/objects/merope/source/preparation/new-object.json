@@ -2,22 +2,24 @@
   "id": "merope",
   "name": "Merope",
   "system": "Merope system",
-  "description": "A star 117 parsecs away, 7.7 times the Sun's width, measured from its light.",
+  "description": "A star 135 parsecs away, 9 times the Sun's width, measured from its light.",
   "aliases": [
     "HD 23480",
     "HIP 17608",
     "HR 1156",
     "23 Tauri"
   ],
+  "parent": "m45",
   "featured": true,
+  "order": 5617,
   "target": "HIP 17608",
   "paper": {
     "url": "https://doi.org/10.1093/mnras/stx1433",
     "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
   },
   "radius": {
-    "value": 7.747,
-    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17608: radius 7.747 solar radii, implied by the fitted luminosity 211.434 solar luminosities (fractional uncertainty 0.783) and temperature",
+    "value": 8.963,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17608: radius 7.747 solar radii, implied by the fitted luminosity 211.434 solar luminosities (fractional uncertainty 0.783) and temperature; scaled from the paper's distance, 116.55 pc, to the cluster's, 134.84 pc: at a fixed temperature the radius grows with the distance, so 7.747 x 134.84/116.55 = 8.963 solar radii (luminosity 283.0)",
     "url": "https://doi.org/10.1093/mnras/stx1433"
   },
   "mass": "unmeasured",
@@ -32,17 +34,23 @@
     "source": "SIMBAD's compilation of spectroscopic measurements (mesFe_h): log g 2.92 from 2001A&A...378..861C; the 2 published values span log g 2.92 to 4, across which the limb law changes by at most 2.6% of the centre brightness",
     "url": "https://ui.adsabs.harvard.edu/abs/2001A%26A...378..861C"
   },
+  "radialVelocity": {
+    "value": 6.2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 65205373152172032 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract",
+    "uncertainty": 2
+  },
   "distance": {
-    "value": 116.55,
-    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17608: distance 116.55 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.043), at which the luminosity and radius hold",
-    "url": "https://doi.org/10.1093/mnras/stx1433",
-    "uncertainty": 5.012
+    "value": 134.84134308,
+    "source": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50 134.84134308 pc, the distance of the Pleiades, of which Merope is a member; its own parallax (McDonald, Zijlstra & Watson 2017 adopt 116.55 pc from Gaia DR1 or the Hipparcos reduction of van Leeuwen 2007) is less certain than the cluster's depth (half its members within 2.70 pc of the centre), and the Hipparcos-era parallaxes of the bright Pleiades are the ones the cluster's distance controversy showed biased",
+    "url": "https://doi.org/10.1051/0004-6361/202346285",
+    "uncertainty": 2.7
   },
   "planets": [],
   "companions": [],
   "text": {
-    "card": "A star 117 parsecs away, 7.7 times the Sun's width, measured from its light.",
-    "introduction": "Its brightness, measured band by band, gives 211 times the Sun's luminosity at 7,913 K, so 7.747 solar radii.",
+    "card": "A star 135 parsecs away, 9 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 283 times the Sun's luminosity at 7,913 K, so 8.963 solar radii.",
     "locator": "Table 2, HIP 17608: D, Teff, L, Rad, Q",
     "quotes": {
       "url": "https://en.wikipedia.org/wiki/Merope_(star)",
@@ -52,12 +60,5 @@
       "introduction": "It is approximately 440 light-years (135 pc) away."
     }
   },
-  "notes": [],
-  "radialVelocity": {
-    "value": 6.2,
-    "uncertainty": 2,
-    "source": "SIMBAD's radial velocity for Gaia DR3 65205373152172032 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
-  },
-  "order": 5617
+  "notes": []
 }

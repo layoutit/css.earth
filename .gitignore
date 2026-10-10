@@ -355,7 +355,6 @@ src/objects/*/source/**/*.bpc
 /src/objects/m1-volume/.prepared-*/
 /src/objects/smc-volume/.prepared-*/
 /src/objects/lmc-volume/.prepared-*/
-/src/objects/m45-volume/.prepared-*/
 /src/objects/m8-volume/.prepared-*/
 /src/objects/omega-centauri-volume/.prepared-*/
 # SPICE kernels are restored from their origins, never committed: bank kernels by packages/bake/cli/kernel-bank.mts,

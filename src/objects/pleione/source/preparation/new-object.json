@@ -2,7 +2,7 @@
   "id": "pleione",
   "name": "Pleione",
   "system": "Pleione system",
-  "description": "A star 117 parsecs away, 5.7 times the Sun's width, measured from its light.",
+  "description": "A star 135 parsecs away, 6.6 times the Sun's width, measured from its light.",
   "aliases": [
     "HD 23862",
     "HIP 17851",
@@ -16,8 +16,8 @@
     "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
   },
   "radius": {
-    "value": 5.695,
-    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17851: radius 5.695 solar radii, implied by the fitted luminosity 94.567 solar luminosities (fractional uncertainty 0.602) and temperature",
+    "value": 6.558,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17851: radius 5.695 solar radii, implied by the fitted luminosity 94.567 solar luminosities (fractional uncertainty 0.602) and temperature; scaled from the paper's distance, 117.096 pc, to the cluster's, 134.84 pc: at a fixed temperature the radius grows with the distance, so 5.695 x 134.84/117.096 = 6.558 solar radii (luminosity 125.4)",
     "url": "https://doi.org/10.1093/mnras/stx1433"
   },
   "mass": "unmeasured",
@@ -33,16 +33,16 @@
     "url": "https://ui.adsabs.harvard.edu/abs/2001A%26A...378..861C"
   },
   "distance": {
-    "value": 117.096,
-    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17851: distance 117.096 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.036), at which the luminosity and radius hold",
-    "url": "https://doi.org/10.1093/mnras/stx1433",
-    "uncertainty": 4.215
+    "value": 134.84134308,
+    "source": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50 134.84134308 pc, the distance of the Pleiades, of which Pleione is a member; its own parallax (McDonald, Zijlstra & Watson 2017 adopt 117.096 pc from Gaia DR1 or the Hipparcos reduction of van Leeuwen 2007) is less certain than the cluster's depth (half its members within 2.70 pc of the centre), and the Hipparcos-era parallaxes of the bright Pleiades are the ones the cluster's distance controversy showed biased",
+    "url": "https://doi.org/10.1051/0004-6361/202346285",
+    "uncertainty": 2.7
   },
   "planets": [],
   "companions": [],
   "text": {
-    "card": "A star 117 parsecs away, 5.7 times the Sun's width, measured from its light.",
-    "introduction": "Its brightness, measured band by band, gives 95 times the Sun's luminosity at 7,548 K, so 5.695 solar radii.",
+    "card": "A star 135 parsecs away, 6.6 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 125 times the Sun's luminosity at 7,548 K, so 6.558 solar radii.",
     "locator": "Table 2, HIP 17851: D, Teff, L, Rad, Q",
     "quotes": {
       "url": "https://en.wikipedia.org/wiki/Pleione_(star)",
@@ -59,5 +59,6 @@
     "source": "SIMBAD's radial velocity for Gaia DR3 66529975427235712 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
     "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
   },
-  "order": 5668
+  "order": 5668,
+  "parent": "m45"
 }

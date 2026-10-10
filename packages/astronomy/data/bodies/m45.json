@@ -1,6 +1,6 @@
 {
   "id": "m45",
-  "classification": "nebula",
+  "classification": "open-cluster",
   "order": 5144,
   "physical": {
     "name": "Pleiades",
@@ -9,20 +9,20 @@
     "gravitationalParameterKm3PerS2": 0,
     "parent": null
   },
-  "physicalNotes": "No radius or mass of Pleiades is recorded: it is an extended nebula, and its package frames it at 3.539 pc (object.json worldFrame.bodyRadiusM), a presentation value.",
+  "physicalNotes": "No radius or mass of the Pleiades is recorded: it is an extended star cluster, and its package frames it at 11.1 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
   "star": {
-    "rightAscensionDegrees": 56.75,
-    "declinationDegrees": 24.1167,
+    "rightAscensionDegrees": 56.67978318,
+    "declinationDegrees": 24.10845447,
     "positionEpochJulianYear": 2000,
-    "distanceParsecs": 136.2,
+    "distanceParsecs": 134.84134308,
     "properMotionRaMasPerYear": 0,
     "properMotionDecMasPerYear": 0,
-    "radialVelocityKmPerS": 5.88,
+    "radialVelocityKmPerS": 5.34254864,
     "sources": {
-      "position": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid. (https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/processing-observations.json); catalogue reference m45-registered-frame",
-      "distance": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy (https://arxiv.org/pdf/1408.6544); catalogue reference melis-2014: 136.2 pc (-1.2/+1.2); Adopted VLBI stellar-cluster distance from Melis et al. (2014), main text and Table 1; not a measured distance to each dust filament.",
-      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
-      "radialVelocity": "SIMBAD M 45: 5.88 km/s +/- 0.03, from 2021A&A...647A..19T (https://ui.adsabs.harvard.edu/abs/2021A%26A...647A..19T/abstract)"
+      "position": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: RA_ICRS 56.67978318, DE_ICRS 24.10845447, the densest point of its members (epoch 2016.0) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "distance": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50, the median of the maximum-likelihood distance, 134.84134308 pc (16th to 84th percentile 134.82 to 134.86) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Hunt & Reffert (2023), Table 3, Melotte_22: mean Gaia DR3 radial velocity 5.34254864 km/s of 398 members (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)"
     }
   }
 }

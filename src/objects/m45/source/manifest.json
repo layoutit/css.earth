@@ -5,17 +5,17 @@
     {
       "id": "companion-context-marker",
       "path": "presentation/context.png",
-      "origin": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
-      "credit": "Taavi Niittee / T\u00f5rva Astronomy Club; the default dataset's picture as the Pleiades bank publishes it, saved by site/build/prepare/companion-context.mts",
-      "license": "Provider terms: https://creativecommons.org/licenses/by/4.0/. Retain the complete recorded credit.",
+      "credit": "The member dots of the Pleiades members bank as they lie on the sky; drawn by site/build/prepare/companion-context.mts",
+      "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "generator": "site/build/prepare/companion-context.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/m45-volume/source/manifest.json)."
-      }
+        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/m45-members/source/manifest.json)."
+      },
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
     }
   ],
   "documents": [
@@ -30,7 +30,7 @@
       "path": "presentation/solar-system.json",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Project-authored framing: the radius the page frames the object at, a presentation value."
+        "reason": "Project-authored framing: the radius the page frames the cluster at, a presentation value."
       }
     },
     {

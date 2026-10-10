@@ -8,12 +8,56 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "136.2 pc (\u22121.2 / +1.2 pc)",
+        "value": "135 pc (134.8 to 134.9)",
         "source": {
-          "catalogueId": "melis-2014",
-          "url": "https://arxiv.org/pdf/1408.6544",
-          "label": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
-          "checked": "2026-10-01"
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50, the median of the maximum-likelihood distance, 134.84134308 pc (16th to 84th percentile 134.82 to 134.86)",
+          "checked": "2026-10-10"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 56.680°, Dec 24.108°",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: RA_ICRS 56.67978318, DE_ICRS 24.10845447, the densest point of its members (epoch 2016.0)",
+          "checked": "2026-10-10"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age",
+        "value": "122 million years (55 million to 197 million)",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: logAge50 8.08 (16th to 84th percentile 7.74 to 8.29), log of the age in years",
+          "checked": "2026-10-10"
+        }
+      },
+      {
+        "id": "half-members",
+        "label": "Half its members within",
+        "value": "2.7 pc of the centre",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: r50pc 2.70, the radius holding half its members inside the tidal radius",
+          "checked": "2026-10-10"
+        }
+      },
+      {
+        "id": "members",
+        "label": "Member stars drawn",
+        "value": "1,020 stars: 1,011 from Gaia DR3, 9 named from Hipparcos",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, Melotte_22: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-10"
         }
       }
     ],
@@ -21,85 +65,21 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "optical-composite",
+    "defaultDataset": "members",
     "controls": [
       {
-        "id": "optical-composite",
-        "label": "Optical composite \u00b7 NOIRLab + Niittee",
-        "thumbnail": "m45-dataset-optical-composite.webp",
+        "id": "members",
+        "label": "Gaia DR3 members",
+        "thumbnail": "m45-dataset-members.webp",
         "volume": {
-          "objectId": "m45-volume",
-          "datasetId": "optical-composite",
-          "surface": "optical-composite"
+          "objectId": "m45-members",
+          "datasetId": "members",
+          "surface": "members"
         },
         "source": {
-          "id": "m45-volume-niittee-widefield",
-          "path": "../../m45-volume/source/manifest.json",
-          "url": "https://commons.wikimedia.org/wiki/File:Plejades.jpg"
-        },
-        "falseColor": false
-      },
-      {
-        "id": "noirlab-optical",
-        "label": "NOIRLab \u00b7 optical B / V / I",
-        "thumbnail": "m45-dataset-noirlab-optical.webp",
-        "volume": {
-          "objectId": "m45-volume",
-          "datasetId": "noirlab-optical",
-          "surface": "noirlab-optical"
-        },
-        "source": {
-          "id": "m45-volume-noirlab-optical",
-          "path": "../../m45-volume/source/manifest.json",
-          "url": "https://noirlab.edu/public/images/noao-m45/"
-        },
-        "falseColor": false
-      },
-      {
-        "id": "spitzer-irac",
-        "label": "Spitzer \u00b7 IRAC 3.6\u20138 \u00b5m",
-        "thumbnail": "m45-dataset-spitzer-irac.webp",
-        "volume": {
-          "objectId": "m45-volume",
-          "datasetId": "spitzer-irac",
-          "surface": "spitzer-irac"
-        },
-        "source": {
-          "id": "m45-volume-spitzer-irac",
-          "path": "../../m45-volume/source/manifest.json",
-          "url": "https://science.nasa.gov/photojournal/pink-pleiades/"
-        },
-        "falseColor": false
-      },
-      {
-        "id": "spitzer-irac-mips",
-        "label": "Spitzer \u00b7 IRAC + MIPS 4.5\u201324 \u00b5m",
-        "thumbnail": "m45-dataset-spitzer-irac-mips.webp",
-        "volume": {
-          "objectId": "m45-volume",
-          "datasetId": "spitzer-irac-mips",
-          "surface": "spitzer-irac-mips"
-        },
-        "source": {
-          "id": "m45-volume-spitzer-irac-mips",
-          "path": "../../m45-volume/source/manifest.json",
-          "url": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/"
-        },
-        "falseColor": false
-      },
-      {
-        "id": "wise-four-band",
-        "label": "WISE \u00b7 3.4\u201322 \u00b5m wide field",
-        "thumbnail": "m45-dataset-wise-four-band.webp",
-        "volume": {
-          "objectId": "m45-volume",
-          "datasetId": "wise-four-band",
-          "surface": "wise-four-band"
-        },
-        "source": {
-          "id": "m45-volume-wise-four-band",
-          "path": "../../m45-volume/source/manifest.json",
-          "url": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/"
+          "id": "m45-members",
+          "path": "../../m45-members/source/manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
         },
         "falseColor": false
       }
@@ -114,14 +94,38 @@
     {
       "label": "Research",
       "role": "facts",
-      "description": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
-      "href": "https://arxiv.org/pdf/1408.6544"
+      "description": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50, the median of the maximum-likelihood distance, 134.84134308 pc (16th to 84th percentile 134.82 to 134.86)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: RA_ICRS 56.67978318, DE_ICRS 24.10845447, the densest point of its members (epoch 2016.0)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: logAge50 8.08 (16th to 84th percentile 7.74 to 8.29), log of the age in years",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: r50pc 2.70, the radius holding half its members inside the tidal radius",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, Melotte_22: members inside the tidal radius (inrt) with a Gaia DR3 color",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
     }
   ],
   "provenance": {
     "editorial": {
-      "url": "https://arxiv.org/pdf/1408.6544",
-      "credit": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy"
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+      "credit": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50, the median of the maximum-likelihood distance, 134.84134308 pc (16th to 84th percentile 134.82 to 134.86)"
     }
   }
 }

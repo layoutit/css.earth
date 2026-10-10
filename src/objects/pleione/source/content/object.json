@@ -8,7 +8,7 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "5.7 solar radii",
+        "value": "6.6 solar radii",
         "source": {
           "catalogueId": "doi-10-1093-mnras-stx1433",
           "url": "https://doi.org/10.1093/mnras/stx1433",
@@ -21,11 +21,11 @@
       {
         "id": "distance",
         "label": "Distance from the Sun",
-        "value": "117 parsecs",
+        "value": "135 parsecs",
         "source": {
           "catalogueId": "doi-10-1093-mnras-stx1433",
           "url": "https://doi.org/10.1093/mnras/stx1433",
-          "label": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 17851: distance 117.096 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.036), at which the luminosity and radius hold",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Melotte_22: dist50 134.84134308 pc, the distance of the Pleiades, of which Pleione is a member; its own parallax (McDonald, Zijlstra & Watson 2017 adopt 117.096 pc from Gaia DR1 or the Hipparcos reduction of van Leeuwen 2007) is less certain than the cluster's depth (half its members within 2.70 pc of the centre), and the Hipparcos-era parallaxes of the bright Pleiades are the ones the cluster's distance controversy showed biased",
           "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"

@@ -1,0 +1,28 @@
+{
+  "provenance": {
+    "name": "Pleiades named stars",
+    "products": [
+      {
+        "id": "dots",
+        "label": "The nine named Pleiades stars, Hipparcos new reduction, CDS I/311",
+        "process": "Keep the nine Hipparcos rows of the stars the IAU names in the Pleiades; place each at its Hipparcos position, at the cluster's distance; color by B-V and tone by Hp magnitude.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "named-stars"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Each star's depth is the cluster's distance, chosen, not measured: its own parallax is less certain than the cluster's depth.",
+          "Positions are Hipparcos's (epoch 1991.25); the stars have moved about 1 arcsecond since."
+        ]
+      }
+    ]
+  }
+}

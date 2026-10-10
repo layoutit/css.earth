@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "dots",
+  "published": true,
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+HIP%2C+RArad%2C+DErad%2C+134.84134308+AS+distpc%2C+Hpmag%2C+%22B-V%22+FROM+%22I%2F311%2Fhip2%22+WHERE+HIP+IN+%2817702%2C17847%2C17499%2C17573%2C17608%2C17531%2C17851%2C17489%2C17579%29+ORDER+BY+Hpmag",
+    "bytes": 541,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 4
+    },
+    "distanceUnit": "pc"
+  },
+  "sample": "The nine stars of the Pleiades the IAU names (src/references/iau-star-names/iau-star-names.tsv), by their Hipparcos numbers: Alcyone (HIP 17702), Atlas (17847), Electra (17499), Maia (17573), Merope (17608), Taygeta (17531), Pleione (17851), Celaeno (17489) and Asterope (17579). Gaia DR3's member list leaves out the brightest of them, so the cluster's light is drawn without them unless they are drawn here.",
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "doi-10-1051-0004-6361-20078357",
+  "meaning": "The nine named stars of the Pleiades, one dot each at its Hipparcos position, at the cluster's distance, where the four that have star objects stand; drawn when the cluster is selected.",
+  "appearance": {
+    "colorCss": "#ffffff",
+    "radiusPx": 2.6,
+    "opacity": 1,
+    "colorByBv": {
+      "column": 6,
+      "range": [
+        -0.4,
+        2
+      ],
+      "steps": 32,
+      "basis": "Measured Hipparcos B-V, observed (not dereddened; the cluster's A_V is 0.10 mag), through the app's catalogue star color so these dots match its stars. All nine are blue-white B stars, B-V between -0.11 and -0.03."
+    },
+    "toneBy": {
+      "magnitudeColumn": 5,
+      "band": "Hipparcos Hp, as observed",
+      "brightMagnitude": -2,
+      "faintMagnitude": 12,
+      "faintTone": 0.15,
+      "steps": 8,
+      "basis": "The member bank's display scale (src/objects/m45-members/source/dots/points.json): each star's Hp magnitude minus the distance modulus of the cluster's distance darkens its color from full at -2 to 15% at +12, linear in magnitude. The dot size is the member bank's brightest tier, 2.6 px."
+    }
+  }
+}

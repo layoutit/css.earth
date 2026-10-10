@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "pleione",
-  "parent": "milky-way",
+  "parent": "m45",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -67,7 +67,7 @@
       ],
       "shape": {
         "kind": "sphere",
-        "radiusKm": 3962011.5
+        "radiusKm": 4562400.6
       },
       "materials": [
         {
@@ -129,7 +129,7 @@
       "classification": "star",
       "color": "#b7c4ff",
       "distanceAu": 24152795.2,
-      "description": "A star 117 parsecs away, 5.7 times the Sun's width, measured from its light.",
+      "description": "A star 135 parsecs away, 6.6 times the Sun's width, measured from its light.",
       "systemName": "Pleione system",
       "aliases": [
         "HD 23862",
@@ -146,28 +146,28 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        1781496557913995500,
-        2774635218426606600,
-        1477474992005112300
+        2051473778228112000,
+        3195117817918385700,
+        1701379208744829700
       ],
       "presentationToReference": [
-        0.49305083245765285,
+        0.4930508324575997,
         0.22092971233929706,
-        0.8414813954084138,
-        0.7679140316819391,
+        0.841481395408445,
+        0.7679140316819731,
         0.3440915267260316,
-        -0.5402860919747415,
+        -0.540286091974693,
         0.4089118689385352,
         -0.912573878346857,
-        4.124269060739442e-7
+        4.124269319055981e-7
       ],
       "orbitUpReference": [
         -0.22092971233929706,
         -0.3440915267260316,
         0.912573878346857
       ],
-      "metersPerUnit": 12780682.258064516,
-      "bodyRadiusM": 3962011500
+      "metersPerUnit": 14717421.290322581,
+      "bodyRadiusM": 4562400600
     }
   },
   "prepared": {

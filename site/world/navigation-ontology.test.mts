@@ -118,7 +118,7 @@ test('galaxy citations resolve across the full prepared catalogue, including the
 });
 
 
-test('physical hosts remain distinct from scene hosts and M45 retains its measured subject', async () => {
+test('physical hosts remain distinct from scene hosts', async () => {
   const raw: unknown = JSON.parse(await readFile('src/objects/local-group-galaxies/prepared/catalogue.json', 'utf8'));
   const catalogue = parsePreparedGalaxyCatalog(raw), satellite = catalogue.objects.find(o => o.id === 'andromeda_01')!;
   assert.equal(satellite.hostId, 'm31', 'a host its object package details takes the package id');
@@ -126,10 +126,6 @@ test('physical hosts remain distinct from scene hosts and M45 retains its measur
   // The Milky Way row is detailed by the milky-way package, so it carries that id; its LVDB key stays in its source reference.
   assert.equal(catalogue.unpositionedHosts?.find(o => o.id === 'milky-way')?.sourceRef, 'lvdb-v1.1.1:mw:name_discovery');
   assert.equal(requireObject('milky-way').classification, 'galaxy', 'the Milky Way row is detailed by its object');
-  const m45 = OBJECTS.find(o => o.id === 'm45')!;
-  assert.equal(m45.distance.subject?.id, 'm45-stellar-cluster');
-  assert.match(distanceDescription(m45.distance), /Pleiades stellar cluster/);
-  assert.match(distanceDescription(m45.distance), /dust-filament distances are not measured/);
 });
 
 
