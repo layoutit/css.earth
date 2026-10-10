@@ -18,6 +18,7 @@ import { densityGrid, imageLayerDensityModel } from './density-grid.ts';
 import { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles, surfaceEdgeStretch, SURFACE_MOST_CROSSINGS } from './surface.ts';
 import { imageLayerSurfaceMesh, type SurfaceTriangle } from './surface-mesh.ts';
 import { flattenProtrusions, imageLayerSurfaceSkirt, regionMask, type PictureRegions } from './surface-skirt.ts';
+import { imageLayerSurfaceStar } from './surface-star.ts';
 import { imageLayerShapePatches, packShapePatches } from './shape-patches.ts';
 import { imageLayerBodyModel } from './body.ts';
 import { COLOR_PEAK, paintTexel as paint } from './texel.ts';
@@ -232,6 +233,8 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       meshTriangles=await imageLayerSurfaceMesh(surface,triangles,Buffer.from(base),info.width,info.height,sky,edgeStretch,filaments,detail,cover);
       // The equatorial skirt outside the lobes, on its plane (./surface-skirt.ts), sorted with the lobes' triangles.
       if(surface.skirt)meshTriangles.push(...imageLayerSurfaceSkirt(surface,surface.skirt,Buffer.from(base),info.width,info.height,sky,crossings,cover));
+      // The central star, a glow inside the shell (./surface-star.ts).
+      if(surface.star)meshTriangles.push(...imageLayerSurfaceStar(surface,surface.star,info.width,info.height,sky));
       for(let p=0;p<count;p++)base[4*p+3]=0;
     }else{
       shapeWalls=imageLayerSurfaceWalls(base,info.width,info.height,crossings,arcsec,Math.hypot(...difference3(placed(-1,0,0),placed(1,0,0)))/info.width,(px,py)=>Math.hypot(...sky(px,py)),surface.starRadiusArcsec);

@@ -11,6 +11,9 @@ export const SURFACE_MESH_TRIANGLES = 1200;
 export const MESH_TEXELS_PER_PIXEL = 1, MESH_MOST_TEXELS = 160;
 /** How far the receding lobe's light may be raised to the approaching lobe's. */
 export const MESH_MOST_GAIN = 3;
+/** The shell's opacity: the least, for the brightest faces, and the share of the brightest light from which a face
+ * starts to clear. */
+export const MESH_OPACITY_FLOOR = 0.55, MESH_CLEAR_FROM = 0.4;
 /** The color ramp: the approaching lobe's pixels in this many steps of brightness. */
 export const MESH_RAMP_STEPS = 48;
 /** Where the picture is a face's own: the face is the nearest crossing of its pixel's sight line (within
@@ -91,8 +94,8 @@ export function pushPull(values: Float32Array[], weight: Float32Array, width: nu
 /**
  * A published closed surface drawn as itself (`geometry.surface.closedMesh`): its own triangles, simplified to
  * `SURFACE_MESH_TRIANGLES`, each a leaf with the picture painted on it. Neighbouring triangles share their corners, so
- * the shell is closed from every side. The dust is opaque, each point with the picture's brightness and the approaching
- * lobe's color for it. Holes in the published surface are closed
+ * the shell is closed from every side. The dark dust is solid and the glowing parts clear (`opacityOf`), each point with the
+ * picture's brightness and the approaching lobe's color for it. Holes in the published surface are closed
  * (`closedMesh`). The star's own light, to `starRadiusArcsec` and fading to twice that, is not the shell's: there the
  * shell's color and optical depth are carried in from the lobes around it (`pushPull`).
  */
@@ -143,6 +146,11 @@ export async function imageLayerSurfaceMesh(surface: Surface, triangles: Float32
   // from the star, at most MESH_MOST_GAIN), and its color is the approaching lobe's for its brightness (`ramp`).
   const medianWhere = (lobe: number) => { const values: number[] = []; for (let p = 0; p < count; p++) if (crossed[p] && lobes[most * p] === lobe && known[p] === 1) values.push(light[p]!); values.sort((a, b) => a - b); return values[values.length >> 1] ?? 0; };
   const recedingGain = (() => { const front = medianWhere(0), back = medianWhere(1); return back > 0 ? Math.max(1, Math.min(MESH_MOST_GAIN, front / back)) : 1; })();
+  // The shell's opacity: the dark dust is solid; a face grows clear as it brightens past MESH_CLEAR_FROM of the
+  // brightest light, down to MESH_OPACITY_FLOOR, so the glowing parts let the far wall and the star show through. A
+  // lane or patch that darkens a face (`deepened`, the share of its light taken) is dust in front, opaque as far as it
+  // darkens. A face keeps its own color; what shows through it adds its light.
+  const opacityOf = (value: number, deepened: number) => { const t = Math.max(0, Math.min(1, (value / ramp.top - MESH_CLEAR_FROM) / (1 - MESH_CLEAR_FROM))); return Math.min(1, Math.max(1 - (1 - MESH_OPACITY_FLOOR) * t * t * (3 - 2 * t), deepened)); };
   // The approaching lobe's color for a brightness (`ramp`), as channel shares.
   const toned = (value: number, out: number[]) => { const at = Math.min(MESH_RAMP_STEPS - 1, Math.max(0, value / ramp.top * MESH_RAMP_STEPS - .5)), low = Math.floor(at), high = Math.min(MESH_RAMP_STEPS - 1, low + 1), t = at - low;
     for (let c = 0; c < 3; c++) out[c] = (1 - t) * ramp.shares[low]![c]! + t * ramp.shares[high]![c]!; };
@@ -153,8 +161,9 @@ export async function imageLayerSurfaceMesh(surface: Surface, triangles: Float32
     // The pixel's own color where it is not deepened, sliding to the ramp's for its brightness as it is; the receding
     // lobe's is the ramp's.
     const total = filled[0]![p]! + filled[1]![p]! + filled[2]![p]!, kept = receding ? 0 : light[p]! > 0 ? (shaded[p]! / light[p]!) ** 2 : 1;
+    const alpha = opacityOf(value, light[p]! > 0 ? 1 - shaded[p]! / light[p]! : 0);
     for (let c = 0; c < 3; c++) { const own = total > 0 ? filled[c]![p]! / total : 1 / 3; out[c] = Math.min(255, Math.round(765 * value * (kept * own + (1 - kept) * tone[c]!))); }
-    out[3] = 255; };
+    out[3] = Math.round(255 * alpha); };
   // The surface's texture. Where the picture shows a face (`MESH_KNOWN_COS`), the face is the picture. The rest (flanks
   // seen edge-on, far sides, faces behind the other lobe, the star's glare) is synthesized on each lobe's chart from what
   // the picture shows of both lobes (`charted`), and takes the approaching lobe's color for its brightness (`ramp`).
@@ -259,7 +268,7 @@ export async function imageLayerSurfaceMesh(surface: Surface, triangles: Float32
     // Across the waist the two lobes' charts blend over MESH_WAIST_BLEND_ARCSEC either side of the plane between them,
     // so their fills meet without a line.
     const across = (point[2]! - oz) * recedes * surface.arcsecPerUnit / MESH_WAIST_BLEND_ARCSEC, w = Math.max(0, Math.min(1, (across + 1) / 2)), receding = w * w * (3 - 2 * w);
-    const value = receding <= 0 || receding >= 1 ? charted(point, lobe) : (1 - receding) * charted(point, 0) + receding * charted(point, 1); toned(value, tone); for (let c = 0; c < 3; c++) synth[c] = Math.min(255, 765 * value * tone[c]!); synth[3] = 255;
+    const value = receding <= 0 || receding >= 1 ? charted(point, lobe) : (1 - receding) * charted(point, 0) + receding * charted(point, 1); toned(value, tone); const alpha = opacityOf(value, 0); for (let c = 0; c < 3; c++) synth[c] = Math.min(255, 765 * value * tone[c]!); synth[3] = 255 * alpha;
     for (let c = 0; c < 4; c++) out[c] = own.share * out[c]! + (1 - own.share) * synth[c]!; };
   const made: SurfaceTriangle[] = [];
   for (let index = 0; index < simple.length; index += 9) {

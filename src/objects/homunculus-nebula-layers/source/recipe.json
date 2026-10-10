@@ -81,6 +81,11 @@
         "regionsPath": "regions.json",
         "layers": 5,
         "openingDeg": 6
+      },
+      "star": {
+        "coreArcsec": 0.15,
+        "haloArcsec": 0.6,
+        "glowArcsec": 2.5
       }
     }
   },
