@@ -23,8 +23,8 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 ## Evidence
 
 - Final Helix/Lagoon app inspection records front/oblique views of all three Lagoon datasets after the edge correction. The earlier field report predates that correction; report context states reproduction gaps.
-- The final app report identifies cloud result `7545a7a3af30…` and predates the FITS Spitzer dataset. The current result `37a8918fb195…` replays byte for byte from the compact inputs; its app inspection records front, oblique and side captures of all three datasets (views), not a comparison with the earlier bank; the [object descriptor](object.json) pins its installed bank. The [edge-taper evidence](../../../labs/nebula/models/m8/edge-taper-evidence.json) measures source-target preservation, not screen brightness: 99.917% of bright-core target retained with 3.819% of the previous outermost-strip signal.
-- [Historical processing evidence](../../../labs/nebula/models/m8/processing-evidence.json) covers relative registration and native separation. No fresh cold replay or scientific/material acceptance is asserted.
+- The final app report identifies cloud result `7545a7a3af30…` and predates the FITS Spitzer dataset. The current result `37a8918fb195…` replays byte for byte from the compact inputs; its app inspection records front, oblique and side captures of all three datasets (views), not a comparison with the earlier bank; the [object descriptor](object.json) pins its installed bank. The [edge-taper evidence](../../../src/objects/m8-volume/source/edge-taper-evidence.json) measures source-target preservation, not screen brightness: 99.917% of bright-core target retained with 3.819% of the previous outermost-strip signal.
+- [Historical processing evidence](../../../src/objects/m8-volume/source/processing-evidence.json) covers relative registration and native separation. No fresh cold replay or scientific/material acceptance is asserted.
 
 ## Known problems
 
@@ -36,7 +36,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 <details>
 <summary>Methods and historical comparisons</summary>
 
-The [fixed lab account](../../../labs/nebula/models/m8/README.md), [physical evidence](../../../labs/nebula/models/m8/physical-evidence.json) and [source dossier](../../../labs/nebula/models/m8/source-dossier.json) preserve the Arias/Tiwari local interpretations, historical result identities and Hubble attempts with 0 and 9 matches against a 45-match gate. The papers’ 1250 pc local footprint conversion stays distinct from the adopted application distance. Use the [shared nebula guide](../../../docs/nebulae/README.md) for preparation.
+The [fixed lab account](../../../src/objects/m8-volume/source/README.md), [physical evidence](../../../src/objects/m8-volume/source/physical-evidence.json) and [source dossier](../../../src/objects/m8-volume/source/source-dossier.json) preserve the Arias/Tiwari local interpretations, historical result identities and Hubble attempts with 0 and 9 matches against a 45-match gate. The papers’ 1250 pc local footprint conversion stays distinct from the adopted application distance. Use the [shared nebula guide](../../../docs/nebulae/README.md) for preparation.
 
 </details>
 

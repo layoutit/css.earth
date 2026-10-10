@@ -1,6 +1,34 @@
 # Nebula Lab
 
-Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; objects include **LMC/SMC**, [M2–9](models/m2-9/README.md), [Helix](models/helix/README.md) and [six irregular nebula candidates](models/inference-candidates/README.md). Image-to-volume experiments have explicit preparation commands and unmeasured-depth assumptions.
+## Purpose (owner's north, 2026-10-08)
+
+Take a nebula we have not processed yet and build a good 3D model of it.
+
+```text
+new nebula
+├─ 1 Research   paper or published 3D model? → use it (Cas A ← DeLaney 2010)
+│               else: registered images · nebula type · symmetry · velocity data (long-slit / IFU)
+├─ 2 Model      pick the method: paper surfaces │ symmetry revolve (M2-9) │ kinematic fit from public spectra
+│               build SURFACES, not volume clouds
+├─ 3 Edit       bake the registered photograph onto the surfaces (image-layer / plates)
+├─ 4 Verify     compare against the images
+└─ 5 Bake & publish
+```
+
+Rules:
+
+- **One folder.** Everything loads from `src/objects/<id>/`; no new top-level folders. Scratch and exploration go in the ignored `src/objects/<id>/.local/`. Only a bake writes committed files.
+- **CLI first.** Every operation can be run by an agent through `labs/nebula/run.mts`.
+- **One backend.** The CLI and the UI bake through the same shared packages (`@cssearth/bake` and the site's preparation commands). No lab-only bake logic.
+- **UI explores.** View, toggle, compare; very few edits. Edits are a working copy until **Save**; **Discard** drops them.
+- **Live progress.** A CLI run shows in the UI as a compact strip: object, step, progress, result.
+- **Plain UI.** Big buttons with unambiguous labels. No explanatory paragraphs; details live in the object README or behind an info link.
+
+The UI is one nebula with four tabs: **Research · Model · Edit · Bake & publish**. Camera controls sit on the left; the right panel has one **Show** switch (Model / Original / Starless) and one **Compare with** dropdown. Plan and audit: [lab plan](docs/lab-plan.md).
+
+The text below describes the lab as it is today.
+
+Local React tooling for aligning photographs, removing stars and comparing baked 3D clouds. The retained PolyCSS renderer stays in plain TypeScript. The lab is separate from the production website; objects include **LMC/SMC**, [M2–9](../../src/objects/m2-9-volume/source/README.md), [Helix](../../src/objects/helix-layers/source/README.md) and [six irregular nebula candidates](models/inference-candidates/README.md). Image-to-volume experiments have explicit preparation commands and unmeasured-depth assumptions.
 
 The [Helix compiler](docs/emission-compiler.md) turns three registered ESO observations into one conditional 3D emission cloud with three image datasets. **Reconstruction → Nebula → Compile nebula** restores the required inputs and runs the pipeline. Detail, faint-emission and depth controls update automatically after the first successful compile. The final cloud is the main view; alignment, structures and velocity comparisons remain diagnostics. Visual acceptance is still open.
 
@@ -12,7 +40,7 @@ pnpm -r --filter "./packages/**" build
 pnpm lab:nebula
 ```
 
-Open [Alignment](http://127.0.0.1:4331/alignment) or [Reconstruction](http://127.0.0.1:4331/reconstruction). Choose the object in the header; camera/density controls are on the left and image/cloud controls on the right.
+Open [the lab](http://127.0.0.1:4331/reconstruction). Choose the object and the step in the header.
 
 The separate [archive catalogue](docs/archive-catalogue.md) browses MAST, IRSA and ESO candidates for all 110 Messier objects. It retains wide views and local detail fields without starting image processing or changing the cloud workspace.
 
@@ -52,8 +80,8 @@ Start with [next steps](NEXTSTEPS.md), [research and papers](RESEARCH.md), [the 
 
 ## Workspace navigation
 
-Catalogue, Alignment and Reconstruction share one header and a centered, searchable object picker. Routes retain `?subject=<id>`; older catalogue `?object=<id>` links remain readable. Selecting a catalogue object without a configured workspace keeps Alignment/Reconstruction visible but unavailable.
+One header: the four steps (**Research · Model · Edit · Bake & publish**, `?step=`) and a centered, searchable object picker. Routes retain `?subject=<id>`. The camera buttons are on the left on every step; Edit adds Annotate and the circle tools (Levels, Radial, Difference) under them. The right panel shows the step. The Messier archive stays at `/catalogue`, linked from Research. Changing step does not cancel jobs.
 
-Camera and model controls use the left dock; image, appearance and processing controls use the right dock. Reconstruction inspection sections keep the same order for every method. Missing data disables a section with an explanation instead of removing it. Navigating pages does not cancel durable processing jobs.
+Each step's command runs on one `src/objects/<id>`: `research <id>`, `model <id> --method paper-surfaces|symmetry|kinematic`, `stars <id>`, then `edit`, `save`, `discard`, `bake`, `verify` and `publish [--check]` (`node labs/nebula/run.mts <command> <id>`). The tabs' buttons run the same commands, and the progress strip follows each run.
 
 The saved-output navigation check is `node labs/nebula/run.mts browser-workspace-navigation http://127.0.0.1:4331`. It uses isolated browser storage, checks capability/dock consistency, blocks processing operations and verifies durable job receipts remain unchanged.

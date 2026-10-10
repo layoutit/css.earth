@@ -1,0 +1,61 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "cassiopeia-a-layers",
+  "name": "Cassiopeia A",
+  "type": "Supernova remnant",
+  "papers": [
+    {
+      "label": "DeLaney et al. (2010)",
+      "url": "https://arxiv.org/abs/1011.3858",
+      "record": "src/sources/publication-delaney-2010-cassiopeia-a-3d.json"
+    },
+    {
+      "label": "Thorstensen, Fesen & van den Bergh (2001)",
+      "url": "https://arxiv.org/abs/astro-ph/0104188",
+      "record": "src/sources/publication-thorstensen-2001-cassiopeia-a-expansion-centre.json"
+    },
+    {
+      "label": "publication-delaney-rudnick-2003-cassiopeia-a-forward-shock",
+      "url": "src/objects/cassiopeia-a-layers/source/recipe.json"
+    }
+  ],
+  "models": [
+    {
+      "label": "Chandra X-ray Center, Cassiopeia A in 3D",
+      "url": "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
+      "record": "src/sources/chandra-cassiopeia-a-3d-model.json"
+    }
+  ],
+  "images": [
+    {
+      "label": "ESA/Webb weic2330a",
+      "url": "https://esawebb.org/images/weic2330a/",
+      "record": "src/sources/esawebb-weic2330a.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: shape"
+  },
+  "velocity": {
+    "available": true,
+    "items": [
+      {
+        "label": "Doppler table · ejecta-speeds.dat",
+        "kind": "doppler-table",
+        "path": "src/objects/cassiopeia-a-layers/source/ejecta-speeds.dat",
+        "record": "src/sources/chandra-cassiopeia-a-3d-model.json"
+      }
+    ]
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": [
+      "shape"
+    ]
+  }
+}

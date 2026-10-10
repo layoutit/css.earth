@@ -4,7 +4,7 @@
   "inputs": [
     {
       "id": "smc-horalek-wide",
-      "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
+      "path": "src/objects/smc-volume/.local/intake/iotw2615a.jpg",
       "origin": "https://noirlab.edu/public/images/iotw2615a/",
       "sourceUrl": "https://noirlab.edu/public/images/iotw2615a/",
       "title": "Small Magellanic Cloud · NOIRLab iotw2615a",
@@ -17,7 +17,7 @@
           {
             "catalogueId": "noirlab-iotw2615a",
             "role": "material",
-            "evidence": "labs/nebula/models/smc/image-candidates.json#/targets/0/images/8"
+            "evidence": "src/objects/smc-volume/source/image-candidates.json#/targets/0/images/8"
           }
         ]
       },
@@ -37,7 +37,7 @@
     },
     {
       "id": "smc-vista",
-      "path": ".local/nebula-lab/smc-intake/eso1714a.jpg",
+      "path": "src/objects/smc-volume/.local/intake/eso1714a.jpg",
       "origin": "https://www.eso.org/public/images/eso1714a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1714a/",
       "title": "Small Magellanic Cloud · ESO eso1714a",
@@ -50,7 +50,7 @@
           {
             "catalogueId": "eso-eso1714a",
             "role": "material",
-            "evidence": "labs/nebula/models/smc/image-candidates.json#/targets/0/images/0"
+            "evidence": "src/objects/smc-volume/source/image-candidates.json#/targets/0/images/0"
           }
         ]
       },
@@ -82,7 +82,7 @@
           {
             "catalogueId": "noirlab-noirlab2030b",
             "role": "material",
-            "evidence": "labs/nebula/models/smc/image-candidates.json#/targets/0/images/1"
+            "evidence": "src/objects/smc-volume/source/image-candidates.json#/targets/0/images/1"
           }
         ]
       },
@@ -101,7 +101,7 @@
     },
     {
       "id": "smc-dss2",
-      "path": ".local/nebula-lab/smc-intake/heic0514c.jpg",
+      "path": "src/objects/smc-volume/.local/intake/heic0514c.jpg",
       "origin": "https://esahubble.org/images/heic0514c/",
       "sourceUrl": "https://esahubble.org/images/heic0514c/",
       "title": "Small Magellanic Cloud · ESA/Hubble heic0514c",
@@ -114,7 +114,7 @@
           {
             "catalogueId": "esahubble-heic0514c",
             "role": "material",
-            "evidence": "labs/nebula/models/smc/image-candidates.json#/targets/0/images/2"
+            "evidence": "src/objects/smc-volume/source/image-candidates.json#/targets/0/images/2"
           }
         ]
       },
@@ -134,7 +134,7 @@
     },
     {
       "id": "smc-allwise-wide",
-      "path": ".local/nebula-lab/smc-intake/allwise-smc-10deg.jpg",
+      "path": "src/objects/smc-volume/.local/intake/allwise-smc-10deg.jpg",
       "origin": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
       "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
       "title": "Small Magellanic Cloud · AllWISE color HiPS, 10° TAN field",
@@ -147,7 +147,7 @@
           {
             "catalogueId": "cds-allwise-color",
             "role": "material",
-            "evidence": "labs/nebula/models/smc/image-candidates.json#/targets/0/images/4"
+            "evidence": "src/objects/smc-volume/source/image-candidates.json#/targets/0/images/4"
           }
         ]
       },

@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "m1-layers",
+  "name": "Crab Nebula",
+  "type": "nebula",
+  "papers": [
+    {
+      "label": "Martin, Milisavljevic & Drissen (2021)",
+      "url": "https://arxiv.org/abs/2101.02709",
+      "record": "src/sources/martin-2021.json"
+    },
+    {
+      "label": "Kaplan et al. (2008)",
+      "url": "https://arxiv.org/abs/0801.1142",
+      "record": "src/sources/kaplan-2008.json"
+    },
+    {
+      "label": "Gaia Data Release 3",
+      "url": "https://doi.org/10.1051/0004-6361/202243940",
+      "record": "src/sources/gaia-2023-dr3.json"
+    }
+  ],
+  "models": [
+    {
+      "label": "Martin, M1_paper",
+      "url": "https://github.com/thomasorb/M1_paper",
+      "record": "src/sources/github-thomasorb-m1-paper.json"
+    }
+  ],
+  "images": [
+    {
+      "label": "ESA/Hubble heic0515a",
+      "url": "https://esahubble.org/images/heic0515a/",
+      "record": "src/sources/esahubble-heic0515a.json"
+    },
+    {
+      "label": "ESA/Hubble release heic0515",
+      "url": "https://esahubble.org/news/heic0515/",
+      "record": "src/sources/esahubble-heic0515.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: shape"
+  },
+  "velocity": {
+    "available": true,
+    "items": [
+      {
+        "label": "Doppler table · filament-speeds.dat",
+        "kind": "doppler-table",
+        "path": "src/objects/m1-layers/source/filament-speeds.dat",
+        "record": "src/sources/github-thomasorb-m1-paper.json"
+      }
+    ]
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": [
+      "shape"
+    ]
+  }
+}

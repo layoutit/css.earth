@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/image-candidates.json",
+      "path": "src/objects/lmc-volume/source/image-candidates.json",
       "locator": "/targets/0/images/1"
     }
   ],
@@ -29,7 +29,7 @@
       "kind": "credit",
       "text": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/image-candidates.json#/targets/0/images/1"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/image-candidates.json#/targets/0/images/1"
     }
   ]
 }

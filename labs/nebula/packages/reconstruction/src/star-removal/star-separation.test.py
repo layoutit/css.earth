@@ -62,7 +62,7 @@ class StarSeparationTests(unittest.TestCase):
         point = .65 * np.exp(-((xx - 43.2) ** 2 + (yy - 33.15) ** 2) / (2 * .5 ** 2))
         source = np.rint((extended + point) * 255).astype(np.uint8)
         for image_id in ('vista-infrared', 'horalek-widefield', 'wise-wide-infrared'):
-            recipe = json.loads((Path(__file__).parents[4] / 'models/lmc/star-separation' / (image_id + '.json')).read_text())
+            recipe = json.loads((Path(__file__).parents[6] / 'src/objects/lmc-volume/source/star-separation' / (image_id + '.json')).read_text())
             settings = separation.parameters(recipe['parameters'])
             diffuse, stars, mask, accepted, _ = separation.separate(source, [[43, 33], [117, 49], [66, 95]], settings)
             self.assertEqual(len(accepted), 1, image_id)

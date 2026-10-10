@@ -12,7 +12,7 @@ if (args.length === 1 && args[0] === '--help') {
 } else {
   if (args.length > 1 || args.some(arg => !arg.startsWith('--python=') || !arg.slice('--python='.length)))
     throw new TypeError('Usage: prepare-processing-environment [--python=<existing-venv-executable>]');
-  const recipePath = 'labs/nebula/models/lmc/bake.json';
+  const recipePath = 'src/objects/lmc-volume/source/bake.json';
   const recipe = readProcessingEnvironmentRecipe(JSON.parse(await readFile(resolve(process.cwd(), recipePath), 'utf8')));
   const python = await prepareEnvironment(process.cwd(), recipe, args[0]?.slice('--python='.length));
   console.log(`NOX_MODEL_VERIFIED ${recipe.removal.model.path}`);

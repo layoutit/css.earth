@@ -15,7 +15,7 @@ async function temporary(t: { after(fn: () => Promise<void>): void }) {
 async function fixture() {
   // Read the accepted real geometry/metadata, then use small known pixels to
   // independently verify physical texel-centre mapping and all alpha extremes.
-  const accepted = JSON.parse(await readFile('labs/nebula/models/lmc/full-density/prepared/volume-slices.json', 'utf8')) as VolumeSlices;
+  const accepted = JSON.parse(await readFile('src/objects/lmc-volume/source/full-density/prepared/volume-slices.json', 'utf8')) as VolumeSlices;
   assert.equal(accepted.quads.length, 144);
   const pixels = Buffer.from([50, 100, 200, 0, 50, 100, 200, 1, 50, 100, 200, 63,
     50, 100, 200, 128, 50, 100, 200, 254, 50, 100, 200, 255]);

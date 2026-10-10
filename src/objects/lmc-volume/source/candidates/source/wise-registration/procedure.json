@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-wise-registration-procedure@1",
+  "workingDirectory": "repository root",
+  "pythonVersion": "3.9.6",
+  "dependencies": {
+    "opencv-python-headless": "4.11.0.86",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "astropy": "6.0.1"
+  },
+  "pinnedFiles": [
+    {
+      "path": "labs/nebula/src/validate-image-registration.py"
+    },
+    {
+      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/check-wise-catalogue.py"
+    },
+    {
+      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/recipe.json"
+    },
+    {
+      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/query.json"
+    },
+    {
+      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/protocol.json"
+    }
+  ],
+  "inputs": [
+    {
+      "path": "src/objects/lmc-volume/.local/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+      "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg"
+    },
+    {
+      "path": "src/objects/lmc-volume/.local/image-candidates/wise-registration/catalogue-check/allwise-bright.csv",
+      "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+TOP+200000+designation%2Cra%2Cdec%2Cw1mpro%2Cw1snr%2Ccc_flags%2Cext_flg+FROM+allwise_p3as_psd+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C78.76%2C-69.19%2C17%29%29+AND+w1mpro+BETWEEN+8+AND+11+AND+w1snr%3E30+AND+ext_flg%3D0+AND+cc_flags+LIKE+%270%25%27&MAXREC=200000"
+    }
+  ],
+  "command": [
+    "src/objects/lmc-volume/.local/registration/venv/bin/python",
+    "labs/nebula/models/lmc-candidates/source/wise-registration/check-wise-catalogue.py"
+  ],
+  "expectedEvidence": {
+    "pass": true,
+    "uniqueMatchedStars": 34811,
+    "reservedCheckCount": 11604,
+    "reservedMedianNativeWisePixels": 0.31571389137939676,
+    "reservedP90NativeWisePixels": 0.6322795262452354,
+    "matchedSourceHullFraction": 0.9929390230930758
+  },
+  "limits": [
+    "No WCS correction is fitted. All catalogue coordinates are excluded from any fitting; every third association is additionally labelled a reserved check.",
+    "Catalogue and raster share survey provenance; the fixed image-WCS association is checked against separately retrieved catalogue coordinates.",
+    "This validates blue W1 position geometry, not diffuse W4/W2 color seams or radiometric calibration."
+  ]
+}

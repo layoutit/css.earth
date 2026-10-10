@@ -26,7 +26,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 - Recorded app checks cover the catalogue field, projection and star toggle; evidence context states their version and limits.
 - The [object descriptor](object.json) pins the installed bank whose provenance identifies compiler result `3fac3e884fb5…`. The [delivery request](source/delivery.json) pins preparation inputs and retains the older accepted-lab reference separately. This documentation review did not perform a cold replay.
-- [Historical processing evidence](../../../labs/nebula/models/m1/processing-evidence.json) separates stellar registration, native pixel accounting and projected-signal checks. These establish their recorded processing behavior, not physical depth or current material acceptance.
+- [Historical processing evidence](../../../src/objects/m1-volume/source/processing-evidence.json) separates stellar registration, native pixel accounting and projected-signal checks. These establish their recorded processing behavior, not physical depth or current material acceptance.
 - **Far view (2026-10-07).** In headless Chromium at 1400 × 800, the camera placed 60 px of framing radius from the Crab and turned 0°, 30°, 60° and 90° about the bank's frame: the old billboard stayed face-on, while the fixed plane narrowed to 87%, 50% and 0% of its width, as a fixed plane does. From afar the bank is 5 DOM nodes. Zooming out of this page, the volume alone and the plane alone at the switch distance keep the same position, size and orientation.
 
 ![Top: the old billboard at 0°, 30°, 60° and 90°. Bottom: the fixed plane at the same cameras.](evidence/2026-10-07/far-plane-orbit.jpg)
@@ -43,7 +43,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 <details>
 <summary>Methods and historical comparisons</summary>
 
-The [fixed processing account](../../../labs/nebula/models/m1/README.md) preserves the earlier result identities and failed material trials. [Physical evidence](../../../labs/nebula/models/m1/physical-evidence.json) distinguishes SITELLE measurements, Ng–Romani torus parameters and authored terms; the [source dossier](../../../labs/nebula/models/m1/source-dossier.json) preserves registration, epochs and alternatives. General preparation belongs in the [nebula guide](../../../docs/nebulae/README.md).
+The [fixed processing account](../../../src/objects/m1-volume/source/README.md) preserves the earlier result identities and failed material trials. [Physical evidence](../../../src/objects/m1-volume/source/physical-evidence.json) distinguishes SITELLE measurements, Ng–Romani torus parameters and authored terms; the [source dossier](../../../src/objects/m1-volume/source/source-dossier.json) preserves registration, epochs and alternatives. General preparation belongs in the [nebula guide](../../../docs/nebulae/README.md).
 
 </details>
 

@@ -361,7 +361,7 @@
   "provenance": {
     "method": "Image-conditioned emission in an authored geometric prior; no image-only depth inference",
     "doi": "https://arxiv.org/abs/1910.10240",
-    "recipePath": "labs/nebula/models/ngc-4889/experiment.json",
+    "recipePath": "src/objects/ngc-4889-volume/source/experiment.json",
     "recipe": {
       "schema": "cssearth-emission-inference@1",
       "id": "ngc-4889-inferred",

@@ -38,7 +38,7 @@ export async function readRecipe(root: string, path: string): Promise<BakeRecipe
 export const stages = ['density', 'assets', 'removal', 'reconstruction', 'all'] as const;
 type BakeStage = typeof stages[number];
 export function parseBakeArgs(args: string[]): {recipe: string; stage: BakeStage; image?: string; python?: string; ifMissing: boolean; research: boolean} {
-  let recipe = 'labs/nebula/models/lmc/bake.json', stage: BakeStage = 'all', image: string | undefined, python: string | undefined;
+  let recipe = 'src/objects/lmc-volume/source/bake.json', stage: BakeStage = 'all', image: string | undefined, python: string | undefined;
   let ifMissing = false, research = false;
   for (const arg of args) {
     if (arg === '--research') { research = true; continue; }

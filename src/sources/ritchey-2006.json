@@ -13,7 +13,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m45/physical-sources.json",
+      "path": "src/objects/m45-volume/source/physical-sources.json",
       "locator": "/products/5"
     }
   ],
@@ -24,7 +24,7 @@
       "kind": "credit",
       "text": "A. M. Ritchey; M. Martinez; K. Pan; S. R. Federman; D. L. Lambert",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/physical-sources.json#/products/5"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/physical-sources.json#/products/5"
     }
   ],
   "creators": [

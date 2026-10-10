@@ -21,7 +21,9 @@
           }
         ]
       },
-      "dependencies": [],
+      "dependencies": [
+        "original"
+      ],
       "datasetId": "optical",
       "license": "SDSS images: CC-BY (https://www.sdss.org/collaboration/#image-use); the CDS HiPS distribution: ODbL-1.0. Retain the complete recorded credit.",
       "capture": {
@@ -34,6 +36,38 @@
         ]
       },
       "generator": "labs/nebula/run.mts remove-stars"
+    },
+    {
+      "id": "original",
+      "path": "src/objects/m97-layers/source/source.jpg",
+      "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=2000&height=2000&fov=0.12&projection=TAN&coordsys=icrs&ra=168.698802&dec=55.019028&format=jpg",
+      "sourceUrl": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "title": "SDSS9 color (as published, with its stars)",
+      "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+      "displayCredit": "SDSS",
+      "acquisition": "The publisher’s JPEG (2000 x 2000 px) as published, before its stars were removed; the picture remove-stars reads. Restored from the source cache; not tracked.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sdss-dr9-color-hips",
+            "role": "material",
+            "evidence": "src/objects/m97-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "SDSS images: CC-BY (https://www.sdss.org/collaboration/#image-use); the CDS HiPS distribution: ODbL-1.0. Retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "sloan-2-5m",
+            "evidence": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record — obs_description: the survey uses a dedicated 2.5-m wide-angle optical telescope at Apache Point Observatory in New Mexico"
+          }
+        ]
+      }
     }
   ],
   "documents": [

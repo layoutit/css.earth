@@ -40,9 +40,9 @@ test('acquisition rejects altered local sources without downloading or overwriti
 });
 
 test('the saved bake closes its inputs and preserves all three accepted material treatments', async () => {
-  const root = process.cwd(), recipe = await readRecipe(root, resolve(root, 'labs/nebula/models/lmc/bake.json'));
+  const root = process.cwd(), recipe = await readRecipe(root, resolve(root, 'src/objects/lmc-volume/source/bake.json'));
   assert.deepEqual(recipe.images.map(image => image.imageId), ['vista-infrared', 'horalek-widefield', 'wise-wide-infrared']);
-  const saved = JSON.parse(await readFile(resolve(root, 'labs/nebula/models/lmc/app-dataset-settings.json'), 'utf8'));
+  const saved = JSON.parse(await readFile(resolve(root, 'src/objects/lmc-volume/source/app-dataset-settings.json'), 'utf8'));
   for (const image of recipe.images) assert.deepEqual(image.appearance, saved.datasets.find((dataset: any) => dataset.imageId === image.imageId).appearance);
   const temporary = await mkdtemp(join(tmpdir(), 'nebula-bake-recipe-'));
   try {

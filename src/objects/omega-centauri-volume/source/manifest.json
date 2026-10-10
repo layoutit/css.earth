@@ -4,7 +4,7 @@
   "inputs": [
     {
       "id": "eso1119b",
-      "path": ".local/nebula-lab/observations/omega-centauri/sources/eso1119b.tif",
+      "path": "src/objects/omega-centauri-volume/.local/observations/omega-centauri/sources/eso1119b.tif",
       "origin": "https://www.eso.org/public/images/eso1119b/",
       "sourceUrl": "https://www.eso.org/public/images/eso1119b/",
       "title": "Omega Centauri · VST/OmegaCAM · optical",
@@ -44,7 +44,7 @@
     },
     {
       "id": "eso0844a",
-      "path": ".local/nebula-lab/observations/omega-centauri/sources/eso0844a.tif",
+      "path": "src/objects/omega-centauri-volume/.local/observations/omega-centauri/sources/eso0844a.tif",
       "origin": "https://www.eso.org/public/images/eso0844a/",
       "sourceUrl": "https://www.eso.org/public/images/eso0844a/",
       "title": "Omega Centauri · MPG/ESO 2.2-m WFI · optical",

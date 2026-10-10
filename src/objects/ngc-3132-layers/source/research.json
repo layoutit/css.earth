@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "ngc-3132-layers",
+  "name": "Southern Ring Nebula",
+  "type": "Planetary nebula",
+  "papers": [
+    {
+      "label": "Monteiro et al. (2025)",
+      "url": "https://arxiv.org/abs/2503.20640",
+      "record": "src/sources/publication-monteiro-2025-ngc-3132-model.json"
+    },
+    {
+      "label": "Kastner et al. (2024)",
+      "url": "https://arxiv.org/abs/2402.11850",
+      "record": "src/sources/publication-kastner-2024-ngc-3132-exoskeleton.json"
+    }
+  ],
+  "models": [
+    {
+      "label": "NGC3132_model",
+      "url": "https://github.com/hektor-monteiro/NGC3132_model",
+      "record": "src/sources/github-ngc3132-model.json"
+    }
+  ],
+  "images": [
+    {
+      "label": "ESA/Webb weic2207b",
+      "url": "https://esawebb.org/images/weic2207b/",
+      "record": "src/sources/esawebb-weic2207b.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: densityGrid"
+  },
+  "velocity": {
+    "available": true,
+    "items": [
+      {
+        "label": "Velocity cube / IFU (README)",
+        "kind": "mentioned",
+        "url": "src/objects/ngc-3132-layers/README.md"
+      }
+    ]
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": [
+      "densityGrid"
+    ]
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-star-separation-receipt@1",
+  "status": "inspectable-trial",
+  "source": {
+    "path": "src/objects/lmc-volume/.local/new-references/iotw2547a.jpg",
+    "nativeDimensions": [
+      6582,
+      4388
+    ],
+    "dtype": "uint8"
+  },
+  "parameters": {
+    "detectionSigma": 2,
+    "detectionThreshold": 0.025,
+    "minimumSeparation": 7,
+    "maximumDetections": 1000000,
+    "tileSize": 768,
+    "minimumPeak": 0.035,
+    "minimumSigma": 0.25,
+    "maximumSigma": 3.5,
+    "maximumElongation": 1.55,
+    "maximumMaskRadius": 12,
+    "maskSigma": 2.8,
+    "profileFraction": 0.2,
+    "minimumGaussianCorrelation": 0.75,
+    "annulusWidth": 5
+  },
+  "dependencies": {
+    "opencv": "4.11.0",
+    "numpy": "1.26.4"
+  },
+  "coordinateConvention": "Zero-based native raster pixel centres, top left; no orientation, crop, resize or registration transform applied.",
+  "detectionsWrittenBeforeSeparation": true,
+  "detectionsInput": null,
+  "detectedCount": 330036,
+  "acceptedCount": 66443,
+  "rejected": {
+    "non-psf-width-or-elongation": 76205,
+    "extended-or-connected-profile": 104718,
+    "edge-neighborhood": 5211,
+    "non-psf-profile": 3700,
+    "low-compact-contrast": 73759
+  },
+  "verification": {
+    "maximumReconstructionErrorCodeValues": 0,
+    "changedPixelsOutsideMask": 0,
+    "nativeDimensions": [
+      6582,
+      4388
+    ],
+    "maskPixels": 5749919,
+    "sourceChannelTotals": [
+      1967874217,
+      1849619728,
+      1975216714
+    ],
+    "diffuseChannelTotals": [
+      1912642618,
+      1787456834,
+      1912117391
+    ],
+    "diffusePercentileFractions": [
+      0,
+      0.1,
+      0.5,
+      0.9,
+      0.99,
+      0.999,
+      1
+    ],
+    "diffuseChannelPercentiles": [
+      [
+        0,
+        21,
+        51,
+        133,
+        201,
+        237,
+        255
+      ],
+      [
+        0,
+        19,
+        45,
+        131,
+        197,
+        224,
+        255
+      ],
+      [
+        0,
+        18,
+        44,
+        151,
+        221,
+        255,
+        255
+      ]
+    ],
+    "brightnessMeaning": "Unsigned display code values in native BGR channel order (or grayscale); full footprint including no-data code values. Not radiance, photometric flux or signal-to-noise.",
+    "encodedRoundTripExact": true
+  },
+  "preview": {
+    "maxDimension": 1200,
+    "exposure": 1,
+    "gamma": 1,
+    "meaning": "One identical global exposure and gamma on source/diffuse/stars; reduced preview only."
+  },
+  "method": "Compact-profile gates; bounded circular masks; local harmonic background interpolation; positive residual with exact integer subtraction. Overlap uses maximum residual, never summed subtraction.",
+  "alphaPolicy": "If present, source alpha is copied unchanged into both outputs; arithmetic reconstruction is checked on color channels.",
+  "limitations": [
+    "Automatic compact-source candidates, not physical foreground/LMC membership.",
+    "Compact nebular knots can resemble stars; ambiguous sources may be removed and rejected or undetected stars remain.",
+    "Diffuse structure inside accepted masks is an interpolation hypothesis; outside-mask pixels remain exact.",
+    "Saturated stars, broad wings, diffraction spikes, crowded blends and edge sources are deliberately incomplete.",
+    "No calibrated PSF or noise model exists for these display composites; brightness is not photometric SNR."
+  ],
+  "outputs": {
+    "star-detections.json": {
+      "bytes": 11737259
+    },
+    "star-detection-map.png": {
+      "bytes": 953271
+    },
+    "diffuse.png": {
+      "bytes": 42559764
+    },
+    "stars.png": {
+      "bytes": 12944185
+    },
+    "star-mask.png": {
+      "bytes": 1920731
+    },
+    "accepted-stars.json": {
+      "bytes": 14800097
+    },
+    "comparison.png": {
+      "bytes": 5396416
+    }
+  },
+  "elapsedSeconds": 73.33,
+  "delivery": {
+    "layers": [
+      {
+        "id": "diffuse",
+        "label": "Diffuse trial",
+        "texturePath": "labs/nebula/models/lmc-star-separation/prepared/horalek-widefield-diffuse.webp",
+        "widthPx": 4096,
+        "heightPx": 2731
+      },
+      {
+        "id": "stars",
+        "label": "Compact residual",
+        "texturePath": "labs/nebula/models/lmc-star-separation/prepared/horalek-widefield-stars.webp",
+        "widthPx": 4096,
+        "heightPx": 2731
+      }
+    ],
+    "note": "Full source extent, reduced delivery sampling only. Original sky geometry and placement reused. No crop, tone change or 3D reconstruction."
+  }
+}

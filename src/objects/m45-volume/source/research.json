@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "m45-volume",
+  "name": "Pleiades",
+  "type": "Open star cluster surrounded by reflection nebulosity",
+  "papers": [
+    {
+      "label": "Melis et al. (2014), main text and Table 1",
+      "url": "https://doi.org/10.1126/science.1256101",
+      "record": "src/sources/melis-2014.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "Niittee wide optical",
+      "url": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
+      "record": "src/sources/niittee-plejades.json"
+    },
+    {
+      "label": "NOIRLab",
+      "url": "https://noirlab.edu/public/images/noao-m45/",
+      "record": "src/sources/noirlab-noao-m45.json"
+    },
+    {
+      "label": "Spitzer IRAC",
+      "url": "https://science.nasa.gov/photojournal/pink-pleiades/",
+      "record": "src/sources/nasa-pia09262.json"
+    },
+    {
+      "label": "Spitzer IRAC + MIPS",
+      "url": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
+      "record": "src/sources/nasa-pia09263.json"
+    },
+    {
+      "label": "WISE",
+      "url": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
+      "record": "src/sources/nasa-pia13121.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "none",
+    "label": "None assumed"
+  },
+  "velocity": {
+    "available": false,
+    "items": []
+  },
+  "method": {
+    "chosen": "inference",
+    "status": "experiment",
+    "available": [],
+    "geometry": []
+  }
+}

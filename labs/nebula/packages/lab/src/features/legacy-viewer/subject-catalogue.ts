@@ -6,6 +6,7 @@ import { resolveLabModelPath } from '../../resources/model-paths.ts';
 declare const __NEBULA_SOURCE_CATALOGUE_URL__: string;
 import { relativePath } from './overlay-catalogue';
 import { isResultName } from '../result-name.ts';
+import { platesDirectory } from '../plates/plates-paths.ts';
 declare const __NEBULA_REPO_ROOT__: string;
 export interface LabSubjectRecord {
   id: string;
@@ -28,6 +29,14 @@ export interface LabSubjectRecord {
   hasDetail?: boolean;
   emissionExperiment?: { directory?: string; modeled?: boolean; methodUrl?: string; statusNote?: string; structureDirectory?: string; sourceCatalogue?: string; observationStructures?: string; kinematicsSource?: string; jointFitSource?: string; compilerSource?: string; compilerPublished?: string };
   comparisonGroup?: string;
+  /** A published-plates subject: the image-layer object whose recipe the site bakes, and the dataset group it belongs to. */
+  plates?: { group: string; object: string };
+  /** Model-step solvers configured for this nebula: a measured long-slit velocity comparison, the joint fit of image
+   * ridges (a registered structure catalogue) with molecular velocities, and a symmetry experiment (`prepare-emission`,
+   * run from the CLI). Absent solvers are not offered. */
+  solvers?: { kinematics?: string; jointFit?: { recipe: string; structures: string; observations: string }; symmetry?: string };
+  /** The site's prepared volume dataset bank of a nebula, shown as the site shows it. */
+  siteVolume?: { group: string; object: string };
   reconstructionImage?: { group: string; label: string; note: string };
   referenceProjectionScale?: number;
   /** Calibrated observer for prepared photographic-volume experiments. */
@@ -46,7 +55,7 @@ export interface LabSubjectRecord {
 const subjectRecords: readonly LabSubjectRecord[] = records;
 export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__.replace(/\/$/, '')}/${resolveLabModelPath(path)}`;
 const recipes = import.meta.glob('../../../../../../../src/objects/*/source/recipe.json', { eager: true, import: 'default' }) as
-  Record<string, { source: { publisherUrl: string; credit: string }; geometry: { supportRadiusKpc: number } }>;
+  Record<string, { source: { publisherUrl: string; credit: string }; geometry: { supportRadiusKpc: number; unit?: string } }>;
 function prepareSubjectRecord(record: LabSubjectRecord) {
   if (record.workflow !== undefined) readLabWorkflow(record.workflow);
   if (record.observationAlignment && (!relativePath(record.observationAlignment.manifest) || !relativePath(record.observationAlignment.recipe)))
@@ -101,9 +110,22 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
     throw new TypeError(`Lab subject ${record.id} has an invalid sky handedness.`);
   if (record.reconstructionOverlay !== undefined && !relativePath(record.reconstructionOverlay))
     throw new TypeError(`Lab subject ${record.id} has an invalid original overlay path.`);
-  const recipe = recipes[`../../../../../../../${record.directory}/source/recipe.json`];
+  if (record.plates !== undefined && (record.workflow !== 'plates' || typeof record.plates.group !== 'string' || !record.plates.group ||
+      typeof record.plates.object !== 'string' || record.directory !== record.plates.object || !platesDirectory(record.plates.object)))
+    throw new TypeError(`Lab subject ${record.id} has an invalid published-plates configuration.`);
+  if (record.workflow === 'plates' && !record.plates) throw new TypeError(`Lab subject ${record.id} names the plates method without its image-layer object.`);
+  if (record.siteVolume !== undefined && (typeof record.siteVolume.group !== 'string' || !record.siteVolume.group || !/^src\/objects\/[a-z0-9][a-z0-9-]*-volume$/.test(record.siteVolume.object) || record.directory !== record.siteVolume.object))
+    throw new TypeError(`Lab subject ${record.id} has an invalid site volume.`);
+  const solvers = record.solvers;
+  if (solvers && (solvers.kinematics !== undefined && !relativePath(solvers.kinematics) || solvers.symmetry !== undefined && !relativePath(solvers.symmetry) ||
+      solvers.jointFit !== undefined && ![solvers.jointFit.recipe, solvers.jointFit.structures, solvers.jointFit.observations].every(relativePath)))
+    throw new TypeError(`Lab subject ${record.id} has invalid solver paths.`);
+  const recipe = recipes[`../../../../../../../${record.plates?.object ?? record.directory}/source/recipe.json`];
+  if (record.plates && !recipe) throw new TypeError(`Lab subject ${record.id}: ${record.plates.object} has no image-layer recipe.`);
+  // A plate bank is in parsecs or kiloparsecs (`geometry.unit`): its framing radius is the recipe's support radius.
+  const plateUnitsPerKpc = record.plates && recipe ? (recipe.geometry.unit === 'pc' ? 1000 : 1) : 0;
   const imagePath = record.imagePath ?? (record.image ? `${record.directory}/${record.image}` : null);
-  if (!imagePath && !density && !record.observationAlignment) throw new TypeError(`Lab subject ${record.id} has no image, density or registered-observation workspace.`);
+  if (!imagePath && !density && !record.observationAlignment && !record.siteVolume) throw new TypeError(`Lab subject ${record.id} has no image, density or registered-observation workspace.`);
   const sourceUrl = imagePath ? localFile(imagePath) : '';
   const sourcePageUrl = record.sourcePageUrl ?? recipe?.source.publisherUrl;
   const credit = record.credit ?? recipe?.source.credit;
@@ -119,7 +141,8 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
       credit: `Offline extraction used by this volume. ${sourceImages[0]?.credit ?? ''}` });
   }
   return { ...record, density, sourceUrl, sourcePageUrl, credit, sourceImages, hasDetail: record.hasDetail ?? Boolean(recipe),
-    framingRadiusUnits: record.framingRadiusUnits ?? recipe?.geometry.supportRadiusKpc };
+    framingRadiusUnits: record.framingRadiusUnits ?? (plateUnitsPerKpc && recipe ? recipe.geometry.supportRadiusKpc * plateUnitsPerKpc : recipe?.geometry.supportRadiusKpc),
+    referenceDistanceUnits: record.referenceDistanceUnits };
 }
 export const subjects = subjectRecords.map(prepareSubjectRecord);
 
@@ -127,7 +150,7 @@ export const subjects = subjectRecords.map(prepareSubjectRecord);
 export function registerReconstructionSubject(record: LabSubjectRecord) {
   const base = subjects.find(item => item.id === record.sourceSubjectId);
   if (!/^reconstruction-[a-z0-9][a-z0-9-]*$/.test(record.id) || !base || !base.density ||
-      !relativePath(record.directory) || !record.directory.startsWith('.local/nebula-lab/') ||
+      !relativePath(record.directory) || !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(record.directory) ||
       !record.imagePath || !relativePath(record.imagePath) || !record.cloudParts ||
       !relativePath(record.cloudParts.descriptor) || !relativePath(record.cloudParts.catalogue) ||
       record.comparisonGroup !== base.comparisonGroup || record.referenceDistanceUnits !== base.referenceDistanceUnits ||

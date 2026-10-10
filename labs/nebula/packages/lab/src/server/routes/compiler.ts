@@ -21,6 +21,6 @@ export function compilerPlugin(root: string): Plugin {
         queue = task.then(() => {}, () => {}); return task; }, validateResult: async result => { await validateCompilerResult(root, result); } });
     const handler = starRemovalJobsHandler(jobs, '/__nebula/compiler-jobs');
     server.middlewares.use('/__nebula/compiler-jobs', (request, response) => { void handler(request, response); });
-    server.httpServer?.once('close', () => { void jobs.shutdown(); });
+    server.httpServer?.once('close', () => { void jobs.shutdown().catch(() => {}); });
   } };
 }

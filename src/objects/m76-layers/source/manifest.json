@@ -21,7 +21,9 @@
           }
         ]
       },
-      "dependencies": [],
+      "dependencies": [
+        "original"
+      ],
       "datasetId": "optical",
       "license": "CC-BY-4.0; retain the complete recorded credit.",
       "capture": {
@@ -34,6 +36,38 @@
         ]
       },
       "generator": "labs/nebula/run.mts remove-stars"
+    },
+    {
+      "id": "original",
+      "path": "src/objects/m76-layers/source/source.jpg",
+      "origin": "https://cdn.esahubble.org/archives/images/publicationjpg/heic2408a.jpg",
+      "sourceUrl": "https://esahubble.org/images/heic2408a/",
+      "title": "Little Dumbbell Nebula (M76) (as published, with its stars)",
+      "credit": "NASA, ESA, STScI, A. Pagan (STScI)",
+      "displayCredit": "ESA/Hubble",
+      "acquisition": "The publisher’s JPEG (4000 x 2524 px) as published, before its stars were removed; the picture remove-stars reads. Restored from the source cache; not tracked.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esahubble-heic2408a",
+            "role": "material",
+            "evidence": "src/objects/m76-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://esahubble.org/images/heic2408a/"
+          }
+        ]
+      }
     },
     {
       "id": "surface-model",

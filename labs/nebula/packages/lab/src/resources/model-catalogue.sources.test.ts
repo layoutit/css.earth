@@ -8,22 +8,22 @@ const read = async (path: string) => parseLabModelJson(await readFile(path, 'utf
 
 test('the curated lab retains the selected LMC images, SMC comparisons and verified density banks', async () => {
   const ids = ['vista-infrared', 'horalek-widefield', 'wise-wide-infrared'];
-  const subjects = await read('labs/nebula/packages/lab/src/state/subjects.json');
-  assert.deepEqual(subjects.map((subject: {id: string}) => subject.id), ['lmc-clouds', 'smc-particles', 'smc-vmc', 'smc-ellipsoid', 'smc-constrained', 'm2-9-inferred', 'helix-single-axis', 'helix-model-prior', 'm42', 'm8', 'carina', 'ngc6357', 'm78', 'horsehead', 'm45', 'omega-centauri', 'm1', 'm87-inferred']);
+  const subjects = await read('labs/nebula/packages/lab/src/state/processing-subjects.json');
+  assert.deepEqual(subjects.map((subject: {id: string}) => subject.id), ['lmc-clouds', 'smc-particles', 'smc-vmc', 'smc-ellipsoid', 'smc-constrained', 'm2-9-inferred', 'helix-single-axis', 'helix-model-prior', 'm42', 'm8', 'm45', 'omega-centauri', 'm1', 'm87-inferred']);
   const experiment = subjects.find((subject: {id: string}) => subject.id === 'm2-9-inferred');
   assert.equal(experiment.density, undefined, 'An inferred-emission experiment must not masquerade as an independent density prior.');
   assert.equal(experiment.directory, experiment.emissionExperiment.directory);
-  const experimentRecipe = await read('labs/nebula/models/m2-9/experiment.json');
+  const experimentRecipe = await read('src/objects/m2-9-volume/source/experiment.json');
   assert.equal(experimentRecipe.id, experiment.id);
-  const helixFit = await read('labs/nebula/models/helix/single-axis.json');
-  const helixModel = await read('labs/nebula/models/helix/model-prior.json');
+  const helixFit = await read('src/objects/helix-layers/source/single-axis.json');
+  const helixModel = await read('src/objects/helix-layers/source/model-prior.json');
   for (const key of ['source', 'nativeRemoval', 'grid', 'crop']) assert.deepEqual(helixFit[key], helixModel[key]);
   assert.deepEqual(helixFit.prior.center, helixModel.prior.center);
   assert.equal(helixFit.shapePrior, undefined);
   assert.ok(helixModel.shapePrior.components.length > 1);
   const lmc = subjects[0];
   assert.deepEqual(lmc.density.candidateImageIds, ids);
-  const recipe = await read('labs/nebula/models/image-candidates.json');
+  const recipe = await read('src/objects/lmc-volume/source/image-candidates.json');
   assert.deepEqual(recipe.targets.flatMap((target: any) => target.images.map((image: any) => image.id)), ids);
   const overlays = await read(lmc.density.overlays);
   assert.deepEqual(overlays.overlays.map((image: any) => image.id), ids);

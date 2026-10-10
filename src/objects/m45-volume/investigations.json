@@ -9,11 +9,11 @@
       "finding": "Default dataset fuses registered Niittee wide optical color with central NOIRLab luminance detail on the same authored cloud. The app recipe accepts the freshly supplied compiler result; the older standalone composite is historical and its failed oblique material assessment is not reclassified.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/presentation.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/compiler.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-observations.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/processing-observations.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/delivery.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/optical-composite.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/optical-composite-observations.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/optical-composite.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/optical-composite-observations.json"
       ]
     },
     {
@@ -23,8 +23,8 @@
       "finding": "Selected full-footprint 4000 by 2920 publication TIFF, B/V/I, 68.68 by 50.13 arcmin. Publisher AVM anchors the frame; saturated cores, halos and display stretch remain. The 9700 by 7080 master is a separately identified, initially unacquired source.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/presentation.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/compiler.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-observations.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/processing-observations.json"
       ]
     },
     {
@@ -34,8 +34,8 @@
       "finding": "IRAC 3.6/4.5/5.8/8 micrometre false-color display, 2855² pixels and 58.07 arcmin square. Original decoded RGB equality and native separation accounting are recorded; these are not calibrated band flux or depth measurements.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/presentation.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/compiler.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-observations.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/processing-observations.json"
       ]
     },
     {
@@ -45,8 +45,8 @@
       "finding": "IRAC 4.5/8 plus MIPS 24 micrometre false color on the same 2855² publisher field. Different beams and display mapping remain explicit; a 24 micrometre resampled pixel does not inherit IRAC resolution.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/presentation.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/compiler.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-observations.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/processing-observations.json"
       ]
     },
     {
@@ -56,8 +56,8 @@
       "finding": "Four-band 3.4/4.6/12/22 micrometre display, 4007 by 3061 pixels over 182.99 by 139.79 arcmin. The publisher SIN projection is retained; stellar artifacts and emission beyond the mosaic remain.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/presentation.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/compiler.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-observations.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/processing-observations.json"
       ]
     },
     {
@@ -79,8 +79,8 @@
       "status": "included",
       "finding": "The original published 8000 by 5199 processed JPEG has CC BY 4.0 attribution and a measured relative field of 264.79 by 172.08 arcmin. Ninety-nine held-out stars give 0.450 arcsec RMS only in the central overlap; sensor upsampling and outer distortion are unqualified. Earlier alignment-only notes predate the shipped composite.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/source-dossier.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/registration-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/registration-evidence.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/delivery.json",
         "https://commons.wikimedia.org/wiki/File:Plejades.jpg"
       ]
@@ -92,7 +92,7 @@
       "finding": "136.2 ± 1.2 pc is the VLBI cluster scale; the eight retained named Hipparcos stars come from the earlier observed-star preparation. Neither the common scale nor conditional named-star depths measure individual dust distance. The older 450-star catalogue remains a processing baseline, not the current surrounding field.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/nebula.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/stellar-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/stellar-evidence.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/stellar-field.json",
         "https://doi.org/10.1126/science.1256101"
       ]
@@ -103,8 +103,8 @@
       "status": "included",
       "finding": "Published scattering layers and the HD23512 absorption sightline guide qualitative ordering and one authored local deformation. No 0.7 pc separation, chemical density, gas velocity or grain constant is fitted; offsets, thickness and a single warped front are authored.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/physical-evidence.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/depth-model.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/physical-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/depth-model.json",
         "https://doi.org/10.1086/374590",
         "https://doi.org/10.1086/506585"
       ]
@@ -115,7 +115,7 @@
       "status": "excluded",
       "finding": "The acquired 3.6-degree J/H/Ks display has weak diffuse dust, seams and a modified green channel. It is not independent calibrated photometry and was not separated or baked.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/source-dossier.json",
         "https://irsa.ipac.caltech.edu/2MASS/"
       ],
       "revisitWhen": "Acquire native calibrated atlas bands, qualify background seams and registration, and establish a useful diffuse-signal role before processing."
@@ -126,7 +126,7 @@
       "status": "excluded",
       "finding": "The 4-degree display clips central colors and oversamples a roughly 4-arcmin beam. Its provisional service WCS and display normalization cannot supply temperature or density. Miville-Deschenes & Lagache characterize the original survey, not this PNG calibration.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/source-dossier.json",
         "https://doi.org/10.1086/427938"
       ],
       "revisitWhen": "Acquire separate calibrated IRIS bands, masks, zero levels and matched beams, then qualify an independent registration or physical comparison."
@@ -137,7 +137,7 @@
       "status": "deferred",
       "finding": "The CC BY 4.0 image has wider coverage but only a preliminary bright-star placement; independent faint-star and full-field distortion qualification has not passed. It remains a comparison, not a delivered dataset.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/source-dossier.json",
         "https://iauarchive.eso.org/public/images/detail/ann22042ab/"
       ],
       "revisitWhen": "Pass the unchanged independent registration gate over a useful spatial hull and inspect source/processing quality before adding a derivative."
@@ -148,7 +148,7 @@
       "status": "excluded",
       "finding": "The original is retained as a local morphology comparison with provisional astrometry. Its published CC BY-NC-ND 3.0 terms do not authorize this unrestricted derivative bake.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/source-dossier.json",
         "https://apod.nasa.gov/apod/ap091014.html"
       ],
       "revisitWhen": "Obtain derivative-compatible permission and independently qualify astrometry and the full-field image before processing."
@@ -159,8 +159,8 @@
       "status": "deferred",
       "finding": "Gibson–Nordsieck report real 165/220 nm diffuse observations, but native rasters with verified WCS and reuse terms were not acquired. No calibrated spectral cube, polarimetric map, absorption catalogue or full dust model is qualified.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/source-dossier.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/physical-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/physical-evidence.json",
         "https://doi.org/10.1086/374589"
       ],
       "revisitWhen": "Acquire the original numerical observations with masks, uncertainty and usable rights before implementing a physical scattering or layered-depth operator."
@@ -171,7 +171,7 @@
       "status": "deferred",
       "finding": "The approximate -2.8 projected optical/H I power-spectrum slope was reviewed but is not a configured 3D generator or filament trajectory constraint.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/source-dossier.json",
         "https://arxiv.org/abs/astro-ph/0703055v1"
       ],
       "revisitWhen": "Qualify matching spatial frequencies, beam/noise treatment and tracer association before a projected-statistic comparison."
@@ -182,7 +182,7 @@
       "status": "deferred",
       "finding": "The initial acquisition used the complete-footprint 4000-pixel publication TIFF. The 191 MB master metadata and publisher hash are distinct from locally verified working bytes; larger pixels alone would not fix depth or stellar halos.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/source-dossier.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/source-dossier.json"
       ],
       "revisitWhen": "Acquire and hash the master if a bounded native-detail comparison can address a specified source-resolution defect."
     },
@@ -192,8 +192,8 @@
       "status": "unresolved",
       "finding": "Old single-surface and wide-composite trials preserve more front coverage but soften filaments and show thin ribbons, color traces or stellar halos under rotation. Exact catalogue or texture replays prove repeatability of those versions, not physical or material acceptance.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/README.md",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/processing-evidence.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/processing-evidence.json"
       ],
       "revisitWhen": "A finite-material comparison must preserve the front target and improve the recorded oblique/side failures; coverage or byte equality alone is insufficient."
     }

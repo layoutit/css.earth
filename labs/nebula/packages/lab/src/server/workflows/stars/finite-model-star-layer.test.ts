@@ -160,12 +160,12 @@ test('one owner serves both bodies, and each body keeps its own catalogue column
   const crossed = placeCatalogueStarsInFiniteModel(table, context, { starIdPrefix: SMC_PREFIX, readRow: readBonanos2010Row });
   assert.ok(crossed.stars.length < shared.stars.length / 4, `Crossed columns placed ${crossed.stars.length} stars.`);
   // Layer paths: one file per dataset recipe per body, and the LMC finite layers never overwrite its historical one.
-  assert.equal(smcLayerPath('labs/nebula/models/smc/constrained/finite-datasets.json'), `${smcStarDirectory}/prepared/stars.json`);
-  assert.equal(smcLayerPath('labs/nebula/models/smc/constrained/finite-datasets-ellipsoid.json'), `${smcStarDirectory}/prepared/stars-ellipsoid.json`);
+  assert.equal(smcLayerPath('src/objects/smc-volume/source/constrained/finite-datasets.json'), `${smcStarDirectory}/prepared/stars.json`);
+  assert.equal(smcLayerPath('src/objects/smc-volume/source/constrained/finite-datasets-ellipsoid.json'), `${smcStarDirectory}/prepared/stars-ellipsoid.json`);
   assert.equal(lmcLayerPath(DEFAULT_DATASET_RECIPE), `${lmcStarDirectory}/prepared/stars-envelope.json`);
   assert.notEqual(lmcLayerPath(DEFAULT_DATASET_RECIPE), `${lmcStarDirectory}/prepared/stars.json`);
-  assert.equal(lmcLayerPath('labs/nebula/models/lmc/envelope/finite-datasets-halo.json'), `${lmcStarDirectory}/prepared/stars-envelope-halo.json`);
-  for (const bad of ['labs/nebula/models/lmc/envelope/emission-envelope.json', 'finite-datasets.txt', 'finite-datasets-Halo.json'])
+  assert.equal(lmcLayerPath('src/objects/lmc-volume/source/envelope/finite-datasets-halo.json'), `${lmcStarDirectory}/prepared/stars-envelope-halo.json`);
+  for (const bad of ['src/objects/lmc-volume/source/envelope/emission-envelope.json', 'finite-datasets.txt', 'finite-datasets-Halo.json'])
     assert.throws(() => preparedStarsLayerPath(lmcStarDirectory, bad), /does not identify a star layer/);
   assert.throws(() => preparedStarsLayerPath(lmcStarDirectory, DEFAULT_DATASET_RECIPE, 'Stars Envelope'), /Invalid prepared star layer name/);
   // The SMC layer is the same method on the same owner: it still replays its own checked-in file unchanged.

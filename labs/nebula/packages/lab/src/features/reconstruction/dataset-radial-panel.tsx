@@ -61,7 +61,8 @@ function RadialPlot({ profile }: { profile: DatasetRadialProfile }) {
 }
 
 /** Measures while mounted; the floating Radial profile tool mounts it only while its panel is open. */
-export function DatasetRadialPanel({ resultId }: { resultId?: string }) {
+/** `url` measures a site entry instead (`/__nebula/site-radial`), which answers with `resultId` as its identity. */
+export function DatasetRadialPanel({ resultId, url }: { resultId?: string; url?: string }) {
   const [state, setState] = useState<{ status: 'idle' | 'loading' | 'ready' | 'error'; profile?: DatasetRadialProfile; error?: string }>({ status: 'idle' });
   useEffect(() => {
     if (!resultId) { setState({ status: 'idle' }); return; }
@@ -69,7 +70,7 @@ export function DatasetRadialPanel({ resultId }: { resultId?: string }) {
     setState({ status: 'loading' });
     void (async () => {
       try {
-        const response = await fetch(`/__nebula/reconstruction-radial?resultId=${encodeURIComponent(resultId)}`, { signal: controller.signal });
+        const response = await fetch(url ?? `/__nebula/reconstruction-radial?resultId=${encodeURIComponent(resultId)}`, { signal: controller.signal });
         const value = await response.json();
         if (!response.ok) throw new Error(value.error ?? `Radial profile unavailable (HTTP ${response.status}).`);
         if (value.schema !== 'cssearth-nebula-dataset-radial@1' || value.resultId !== resultId || !Array.isArray(value.radialBins))
@@ -80,7 +81,7 @@ export function DatasetRadialPanel({ resultId }: { resultId?: string }) {
       }
     })();
     return () => controller.abort();
-  }, [resultId]);
+  }, [resultId, url]);
   const profile = state.profile;
   return <div className="dataset-radial-panel" data-dataset-radial-result={profile?.resultId} data-dataset-radial-state={state.status}>
     {state.status === 'error' && <p className="dataset-radial-status" data-error="true">{state.error}</p>}

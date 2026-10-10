@@ -48,7 +48,7 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
   if (recipe.schema !== 'cssearth-magellanic-particle-experiment@1') throw new TypeError('Unsupported experiment recipe.');
   const targets = targetId ? recipe.targets.filter(target => target.id === targetId) : recipe.targets;
   if (!targets.length) throw new TypeError(`Unknown experiment target: ${targetId}`);
-  const root = process.cwd(), cache = resolve(root, '.local/nebula-lab/particles');
+  const root = process.cwd(), cache = resolve(root, 'src/objects/lmc-volume/.local/particles');
   await mkdir(cache, { recursive: true });
   const input = await snapshot(recipe.source, resolve(archivePath), cache);
   for (const target of targets) {

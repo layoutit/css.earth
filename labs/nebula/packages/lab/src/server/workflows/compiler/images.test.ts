@@ -26,7 +26,7 @@ test('pinned image layers use native rotation, scale, translation and sky offset
       credit: 'Synthetic fixture', page: 'https://example.test/source' }, layers: { original, diffuse, stars },
       imageToFrame: [1, 0, 0, 1, 2, 3], registration: { status: 'verified', matchedStars: 10, rmsPixels: .1, maxResidualPixels: .2 } })) };
   await writeFile(join(root, 'observations.json'), JSON.stringify(catalogue));
-  const request: CompilerRequest = { action: 'apply', imageId: 'compiler', recipePath: 'labs/nebula/models/test/recipe.json', cataloguePath: '.local/nebula-lab/test/catalogue.json',
+  const request: CompilerRequest = { action: 'apply', imageId: 'compiler', recipePath: 'src/objects/test-volume/source/recipe.json', cataloguePath: '.local/nebula-lab/test/catalogue.json',
     imageToFrame: { first: [0, .5, -.5, 0, 20, 7] }, evidence: { sensitivity: 1, weights: [1, 1] }, controls: { detail: .65, faint: .35, depth: 1 } };
   const { images, inspectionBoundsArcsec } = await loadCompilerImages(root, 'observations.json', request, [10, .01]), first = images[0];
   assert.deepEqual(inspectionBoundsArcsec, { min: [-108, -36], max: [0, 36] });

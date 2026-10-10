@@ -169,7 +169,7 @@ test('runtime controls reject both objectives disabled and nonfinite values whil
   assert.throws(() => readJointControls({ ...controls, velocityWeight: Infinity }));
   assert.equal(readJointControls({ ...controls, imageWeight: 0 }).imageWeight, 0);
   assert.equal(readJointControls({ ...controls, velocityWeight: 0 }).velocityWeight, 0);
-  const request = { action: 'apply', imageId: 'joint-fit', cataloguePath: '.local/nebula-lab/test/catalogue.json', recipePath: 'labs/nebula/models/test/joint.json',
+  const request = { action: 'apply', imageId: 'joint-fit', cataloguePath: '.local/nebula-lab/test/catalogue.json', recipePath: 'src/objects/test-volume/source/joint.json',
     imageToFrame: {}, evidence: { sensitivity: 1, weights: [1, 1] }, controls: { ...controls, imageWeight: 0, velocityWeight: 0 } };
   assert.throws(() => readJointRequest(request));
   assert.throws(() => velocityPoint('bad', 'bad', NaN, 0, 10));

@@ -27,20 +27,20 @@ function parse(value: unknown, resultId: string): DatasetDifference {
   return summary as DatasetDifference;
 }
 
-function DifferenceLegend({ resultId, state, onOpacity }: { resultId: string; state: DifferenceOverlayState; onOpacity(value: number): void }) {
+function DifferenceLegend({ resultId, url, state, onOpacity }: { resultId: string; url?: string; state: DifferenceOverlayState; onOpacity(value: number): void }) {
   const [legend, setLegend] = useState<Legend>({ status: 'loading' });
   useEffect(() => {
     const controller = new AbortController(); setLegend({ status: 'loading' });
     void (async () => {
       try {
-        const response = await fetch(`/__nebula/reconstruction-difference?resultId=${encodeURIComponent(resultId)}`, { signal: controller.signal });
+        const response = await fetch(url ?? `/__nebula/reconstruction-difference?resultId=${encodeURIComponent(resultId)}`, { signal: controller.signal });
         const value = await response.json();
         if (!response.ok) throw new Error(value?.error ?? `Difference map unavailable (HTTP ${response.status}).`);
         setLegend({ status: 'ready', value: parse(value, resultId) });
       } catch (error) { if (!controller.signal.aborted) setLegend({ status: 'error', error: error instanceof Error ? error.message : String(error) }); }
     })();
     return () => controller.abort();
-  }, [resultId]);
+  }, [resultId, url]);
   if (!state.earthFacing) return <p className="difference-legend-note" data-difference-hidden="orbit">Hidden while orbited · return to the Earth view.</p>;
   if (legend.status !== 'ready') return <p className="difference-legend-note" data-error={legend.status === 'error'}>
     {legend.status === 'error' ? legend.error : 'Preparing the difference map…'}</p>;
@@ -57,7 +57,7 @@ function DifferenceLegend({ resultId, state, onOpacity }: { resultId: string; st
       <span className="difference-legend-key" data-side="dark">too dark {value.tooDarkPercent}%</span> ·{' '}
       <span className="difference-legend-key" data-side="bright">too bright {value.tooBrightPercent}%</span> · clear {value.agreePercent}%
     </p>
-    <p className="difference-legend-note">Render ÷ {value.deliveryFactor.toFixed(3)} for delivery loss.</p>
+    {value.deliveryFactor !== 1 && <p className="difference-legend-note">Render ÷ {value.deliveryFactor.toFixed(3)} for delivery loss.</p>}
     <label className="difference-legend-opacity">Opacity
       <input type="range" min="0.2" max="1" step="0.05" value={state.opacity} onChange={event => onOpacity(Number(event.target.value))} />
     </label>
@@ -66,13 +66,13 @@ function DifferenceLegend({ resultId, state, onOpacity }: { resultId: string; st
 
 /** The tool entry, or none when there is no baked dataset to compare (the unpainted density, or an unbaked image). */
 export function differenceTool(resultId: string | undefined, state: DifferenceOverlayState | undefined,
-  onChange: ((enabled: boolean, opacity: number) => void) | undefined): WorkspaceToggleTool[] {
+  onChange: ((enabled: boolean, opacity: number) => void) | undefined, summaryUrl?: string): WorkspaceToggleTool[] {
   if (!resultId || !state?.available || !onChange) return [];
   const hidden = state.enabled && !state.earthFacing;
   return [{ id: 'difference', label: 'Difference map', icon: <DifferenceIcon />,
     tooltip: !state.earthFacing ? HIDDEN_TOOLTIP : DIFFERENCE_TOOLTIP,
     pressed: state.enabled, onToggle: () => onChange(!state.enabled, state.opacity),
     aside: state.enabled ? <div className="difference-aside" data-difference-hidden={hidden}>
-      <DifferenceLegend resultId={resultId} state={state} onOpacity={value => onChange(true, value)} />
+      <DifferenceLegend resultId={resultId} url={summaryUrl} state={state} onOpacity={value => onChange(true, value)} />
     </div> : undefined }];
 }

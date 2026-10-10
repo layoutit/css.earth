@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "ngc-2392-layers",
+  "name": "NGC 2392",
+  "type": "Planetary nebula",
+  "papers": [
+    {
+      "label": "García-Díaz et al. (2012)",
+      "url": "https://arxiv.org/abs/1211.6717",
+      "record": "src/sources/publication-garcia-diaz-2012-ngc-2392-model.json"
+    },
+    {
+      "label": "García-Díaz et al. (2015)",
+      "url": "https://arxiv.org/abs/1411.0042",
+      "record": "src/sources/publication-garcia-diaz-2015-ngc-2392-proper-motions.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "ESA/Hubble heic9910a",
+      "url": "https://esahubble.org/images/heic9910a/",
+      "record": "src/sources/esahubble-heic9910a.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: shape"
+  },
+  "velocity": {
+    "available": true,
+    "items": [
+      {
+        "label": "Doppler table · proper-motions.dat",
+        "kind": "doppler-table",
+        "path": "src/objects/ngc-2392-layers/source/proper-motions.dat",
+        "record": "src/sources/publication-garcia-diaz-2015-ngc-2392-proper-motions.json"
+      },
+      {
+        "label": "Long-slit spectra (README)",
+        "kind": "mentioned",
+        "url": "src/objects/ngc-2392-layers/README.md"
+      }
+    ]
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": [
+      "shape"
+    ]
+  }
+}

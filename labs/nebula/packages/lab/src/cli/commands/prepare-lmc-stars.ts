@@ -11,7 +11,7 @@ import { sampleEncoded, channelDensity } from '@cssearth/bake/volume/node';
 import { loadStarCloudModel, type StarCloudModel } from '../../server/workflows/stars/lmc-star-cloud-model.ts';
 import type { PreparedLmcStar, PreparedLmcStars } from '../../adapters/viewer/catalogue-stars';
 
-const directory = 'labs/nebula/models/lmc/stars';
+const directory = 'src/objects/lmc-volume/source/stars';
 const number = (line: string, first: number, last: number) => {
   const text = line.slice(first - 1, last).trim(); return text ? Number(text) : NaN;
 };
@@ -50,7 +50,7 @@ export function prepareCatalogue(table: string, frame: DensityVolumeFrame, wcs: 
   return stars.sort((a, b) => a.magnitude - b.magnitude || a.id.localeCompare(b.id));
 }
 export async function prepareLmcStars() {
-  const recipe = parseLabModelJson(await readFile('labs/nebula/models/lmc/clouds.json', 'utf8'));
+  const recipe = parseLabModelJson(await readFile('src/objects/lmc-volume/source/clouds.json', 'utf8'));
   const frame = parseLabModelJson(await readFile(recipe.frame.path, 'utf8')).properties.volume as DensityVolumeFrame;
   const manifest = parseLabModelJson(await readFile(`${directory}/source/catalogue.json`, 'utf8'));
   const sources = await Promise.all(manifest.files.map(async (entry: {path:string;url:string}) =>
@@ -69,7 +69,7 @@ export async function prepareLmcStars() {
       limitation: 'Cloud-conditioned display placement, not measured distances. The reconstructed emission and population-agnostic, clipped/quantized simulation mass density are model assumptions. No bright-star selection function or physical cloud membership is inferred.' }, paperUrl: 'https://arxiv.org/abs/0905.1328', doi: '10.1088/0004-6256/138/4/1003',
       selection: 'Table 3 published massive LMC stars with finite Johnson V <= 16, inside the full native SMASH WCS footprint. No foreground catalogue added; this is an incomplete massive-star sample, not all LMC stars.',
       inputRows: table.trimEnd().split('\n').length, selectedRows: stars.length,
-      frame: recipe.frame, footprint: { recipe: 'labs/nebula/models/lmc/clouds.json', wcs: recipe.wcs },
+      frame: recipe.frame, footprint: { recipe: 'src/objects/lmc-volume/source/clouds.json', wcs: recipe.wcs },
       color: 'Published B-V mapped through the existing catalogue display-color approximation; white when B absent. No dereddening. Point area and opacity preserve magnitude-derived relative display light with color compensation. Finite display sizes are not measured stellar diameters; the screen is not a radiometric instrument.' } };
   await mkdir(`${directory}/prepared`, { recursive: true });
   await writeFile(`${directory}/prepared/stars.json`, JSON.stringify(payload, null, 2) + '\n');

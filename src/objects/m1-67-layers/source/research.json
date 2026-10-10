@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "m1-67-layers",
+  "name": "M1-67",
+  "type": "nebula",
+  "papers": [
+    {
+      "label": "Zavala et al. (2022)",
+      "url": "https://arxiv.org/abs/2204.07778",
+      "record": "src/sources/publication-zavala-2022-m1-67-shape-model.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "ESA/Webb weic2307a",
+      "url": "https://esawebb.org/images/weic2307a/",
+      "record": "src/sources/esawebb-weic2307a.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: densityGrid"
+  },
+  "velocity": {
+    "available": true,
+    "items": [
+      {
+        "label": "Long-slit spectra (README)",
+        "kind": "mentioned",
+        "url": "src/objects/m1-67-layers/README.md"
+      }
+    ]
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": [
+      "densityGrid"
+    ]
+  }
+}

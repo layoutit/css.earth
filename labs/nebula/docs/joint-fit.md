@@ -16,7 +16,7 @@ The view inherits the source weights, sensitivity and saved image transforms use
 
 Image inputs are the same three registered ESO working rasters described in the [multimodal workflow](multimodal-workflow.md). Their full footprints remain in the fused grid. The joint comparison displays a centered 1430″ square; this display window does not crop the source catalogue or density data. The initial wall fit uses ridges 120–650″ from the configured center. This annulus is an engineering selection, not measured separation of molecular and ionized material. The complete ridge graph remains in the receipt; excluded points are counted.
 
-The new velocity input is [Zeigler, Zack, Woolf & Ziurys (2013), ApJ 778, 16](https://doi.org/10.1088/0004-637X/778/1/16), Table 1 and §§2–3, restored from the [CDS catalogue](https://doi.org/10.26093/cds/vizier.17780016). The [source recipe](../models/helix/kinematics-hco.json) preserves column definitions, exact download identities, credits and interpretation.
+The new velocity input is [Zeigler, Zack, Woolf & Ziurys (2013), ApJ 778, 16](https://doi.org/10.1088/0004-637X/778/1/16), Table 1 and §§2–3, restored from the [CDS catalogue](https://doi.org/10.26093/cds/vizier.17780016). The [source recipe](../../../src/objects/helix-layers/source/kinematics-hco.json) preserves column definitions, exact download identities, credits and interpretation.
 
 | Pinned table | Meaning |
 | --- | --- |

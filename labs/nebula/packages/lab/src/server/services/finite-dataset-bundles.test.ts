@@ -80,9 +80,9 @@ test('a saved dataset cannot claim a shared model its pinned provenance does not
 
 test('the catalogue keeps every candidate, marks images without a dataset unavailable and reports rejected newer models', async () => {
   const { root, save, model, dataset, bundle } = await fixture();
-  const current = 'result-9', broken = 'result-0', overlay = 'labs/nebula/models/smc/candidates';
+  const current = 'result-9', broken = 'result-0', overlay = 'src/objects/smc-volume/source/candidates';
   try {
-    await save('labs/nebula/packages/lab/src/state/subjects.json', [{ id: 'smc-constrained', density: { overlays: `${overlay}/overlays.json`, processingPlan: 'plan.json' } }]);
+    await save('labs/nebula/packages/lab/src/state/processing-subjects.json', [{ id: 'smc-constrained', density: { overlays: `${overlay}/overlays.json`, processingPlan: 'plan.json' } }]);
     await save('catalogue.json', { targets: [{ directory: overlay, images: ['smc-vista', 'smc-wise'].map(id => ({ id, label: id })) }] });
     await save('alignment.json', { pass: false });
     await save('plan.json', { catalogue: 'catalogue.json', alignmentReport: { path: 'alignment.json' } });

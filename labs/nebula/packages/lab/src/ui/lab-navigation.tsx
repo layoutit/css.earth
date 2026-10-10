@@ -1,37 +1,32 @@
 import { ObjectPicker } from './object-picker';
 import type { MouseEvent } from 'react';
-import { labPageUrl, type LabPage } from '../features/legacy-viewer/lab-routing';
+import { labSteps, labStepUrl, type LabStep } from '../features/legacy-viewer/lab-routing';
 
 export interface NavigationObject { id: string; name: string }
 interface Props {
-  page: LabPage;
+  /** The shown step; none on a page outside the object workspace (the archive catalogue). */
+  step?: LabStep;
   objectId: string;
   objects: readonly NavigationObject[];
   onObjectChange(id: string): void;
-  onViewChange?(page: 'alignment' | 'reconstruction'): void;
+  onStepChange?(step: LabStep): void;
   busy?: boolean;
-  alignmentAvailable: boolean;
-  reconstructionAvailable: boolean;
   method?: string;
 }
-/** One navigation order and object context for every lab page. */
+/** One nebula, four steps in workflow order: Research · Model · Edit · Bake & publish. */
 export function LabNavigation(props: Props) {
-  function activate(event: MouseEvent<HTMLAnchorElement>, page: LabPage) {
-    if (page === 'catalogue' || !props.onViewChange || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    event.preventDefault(); props.onViewChange(page);
+  function activate(event: MouseEvent<HTMLAnchorElement>, step: LabStep) {
+    if (!props.onStepChange || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault(); props.onStepChange(step);
   }
   return <header className="lab-header">
     <h1>Nebula Lab</h1>
-    <nav className="lab-navigation" aria-label="Lab navigation">
-      {(['catalogue', 'alignment', 'reconstruction'] as const).map(page => {
-        const unavailable = page === 'alignment' ? !props.alignmentAvailable : page === 'reconstruction' ? !props.reconstructionAvailable : false;
-        const title = unavailable ? `No ${page} workspace is configured for this object.` : undefined;
-        const label = page[0]!.toUpperCase() + page.slice(1);
-        const href = labPageUrl(new URL(location.href), page, props.objectId);
-        return unavailable || props.busy && page !== props.page ? <span key={page} className="lab-navigation-disabled" aria-disabled="true" title={title ?? 'Loading the selected object…'}>{label}</span> :
-          <a key={page} id={page === 'alignment' ? 'density-tab' : page === 'reconstruction' ? 'render-tab' : 'catalogue-tab'}
-            href={href.pathname + href.search + href.hash}
-            aria-current={page === props.page ? 'page' : undefined} onClick={event => activate(event, page)}>{label}</a>;
+    <nav className="lab-navigation" aria-label="Workflow steps">
+      {labSteps.map(([step, label], index) => {
+        const href = labStepUrl(new URL(location.href), step, props.objectId);
+        return <a key={step} id={`step-${step}`} data-lab-step={step} href={href.pathname + href.search + href.hash}
+          aria-current={step === props.step ? 'page' : undefined} onClick={event => activate(event, step)}>
+          <span className="lab-step-number" aria-hidden="true">{index + 1}</span>{label}</a>;
       })}
     </nav>
     <div className="subject-field" title={props.method}>

@@ -101,7 +101,7 @@
   "provenance": {
     "method": "Image-conditioned emission in an authored geometric prior; no image-only depth inference",
     "doi": "https://arxiv.org/abs/2302.07234",
-    "recipePath": "labs/nebula/models/gn-z11/experiment.json",
+    "recipePath": "src/objects/gn-z11-volume/source/experiment.json",
     "recipe": {
       "schema": "cssearth-emission-inference@1",
       "id": "gn-z11-inferred",

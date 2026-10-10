@@ -29,6 +29,6 @@ export function geometryDetectionPlugin(root: string): Plugin {
   return { name: 'nebula-geometry-detection', configureServer(server) {
     const jobs = createDetectionJobs(root), handler = starRemovalJobsHandler(jobs, '/__nebula/geometry-jobs');
     server.middlewares.use('/__nebula/geometry-jobs', (request, response) => { void handler(request, response); });
-    server.httpServer?.once('close', () => { void jobs.shutdown(); });
+    server.httpServer?.once('close', () => { void jobs.shutdown().catch(() => {}); });
   } };
 }

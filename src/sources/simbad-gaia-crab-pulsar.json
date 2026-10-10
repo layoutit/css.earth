@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m1/physical-evidence.json",
+      "path": "src/objects/m1-volume/source/physical-evidence.json",
       "locator": "/evidence/8"
     }
   ],
@@ -29,7 +29,7 @@
       "kind": "credit",
       "text": "CDS/SIMBAD; ESA/Gaia/DPAC",
       "scope": "Catalogued pulsar sky position; in-cloud depth is authored",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m1/physical-evidence.json#pulsar-position"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m1-volume/source/physical-evidence.json#pulsar-position"
     }
   ]
 }

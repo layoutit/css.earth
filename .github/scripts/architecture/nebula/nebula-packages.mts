@@ -29,7 +29,7 @@ const inside = (parent: string, path: string) => {
 export function sourceFiles(directory: string): string[] {
   if (!existsSync(directory)) return [];
   return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
-    if (['node_modules', 'dist', '.cache'].includes(entry.name)) return [];
+    if (['node_modules', 'dist', '.cache', '.local'].includes(entry.name)) return [];
     const path = resolve(directory, entry.name);
     return entry.isDirectory() ? sourceFiles(path) : /\.(?:[cm]?ts|tsx|py)$/.test(path) ? [path] : [];
   });

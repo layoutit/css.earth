@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-nebula-overlay-variants@1",
+  "variants": [
+    {
+      "imageId": "vista-infrared",
+      "receiptPath": "src/objects/lmc-volume/source/star-separation/receipts/vista-infrared.json",
+      "layers": [
+        {
+          "id": "diffuse",
+          "label": "Diffuse trial",
+          "texturePath": "src/objects/lmc-volume/source/star-separation/prepared/vista-infrared-diffuse.webp",
+          "widthPx": 3668,
+          "heightPx": 4096
+        },
+        {
+          "id": "stars",
+          "label": "Compact residual",
+          "texturePath": "src/objects/lmc-volume/source/star-separation/prepared/vista-infrared-stars.webp",
+          "widthPx": 3668,
+          "heightPx": 4096
+        }
+      ]
+    },
+    {
+      "imageId": "horalek-widefield",
+      "receiptPath": "src/objects/lmc-volume/source/star-separation/receipts/horalek-widefield.json",
+      "layers": [
+        {
+          "id": "diffuse",
+          "label": "Diffuse trial",
+          "texturePath": "src/objects/lmc-volume/source/star-separation/prepared/horalek-widefield-diffuse.webp",
+          "widthPx": 4096,
+          "heightPx": 2731
+        },
+        {
+          "id": "stars",
+          "label": "Compact residual",
+          "texturePath": "src/objects/lmc-volume/source/star-separation/prepared/horalek-widefield-stars.webp",
+          "widthPx": 4096,
+          "heightPx": 2731
+        }
+      ]
+    },
+    {
+      "imageId": "wise-wide-infrared",
+      "receiptPath": "src/objects/lmc-volume/source/star-separation/receipts/wise-wide-infrared.json",
+      "layers": [
+        {
+          "id": "diffuse",
+          "label": "Diffuse trial",
+          "texturePath": "src/objects/lmc-volume/source/star-separation/prepared/wise-wide-infrared-diffuse.webp",
+          "widthPx": 4096,
+          "heightPx": 4096
+        },
+        {
+          "id": "stars",
+          "label": "Compact residual",
+          "texturePath": "src/objects/lmc-volume/source/star-separation/prepared/wise-wide-infrared-stars.webp",
+          "widthPx": 4096,
+          "heightPx": 4096
+        }
+      ]
+    }
+  ]
+}

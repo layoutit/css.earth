@@ -1,0 +1,69 @@
+{
+  "schema": "cssearth-image-direction-gate@1",
+  "status": "fail",
+  "pass": false,
+  "cloudProcessingPerformed": false,
+  "source": {
+    "path": "src/objects/smc-volume/.local/intake/iotw2615a.jpg",
+    "nativeDimensions": [
+      6069,
+      4045
+    ],
+    "workingDimensions": [
+      5000,
+      3333
+    ],
+    "wcs": {
+      "referenceDimension": [
+        6069,
+        4045
+      ],
+      "referencePixel": [
+        3035,
+        2023
+      ],
+      "referenceValueDeg": [
+        13.2954600823,
+        -72.7962247167
+      ],
+      "scaleDeg": [
+        -0.00152895324209255,
+        0.0015290753239204
+      ],
+      "rotationDeg": 133.5337627021,
+      "projection": "TAN",
+      "coordinateFrame": "ICRS"
+    }
+  },
+  "reference": {
+    "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
+    "nativeDimensions": [
+      3827,
+      3190
+    ],
+    "workingDimensions": [
+      3827,
+      3190
+    ],
+    "wcs": {
+      "referenceDimension": [
+        3827,
+        3190
+      ],
+      "referencePixel": [
+        1913.5,
+        1595
+      ],
+      "referenceValueDeg": [
+        13.6618118598,
+        -72.8687942632
+      ],
+      "scaleDeg": [
+        -0.00138788065837,
+        0.00138788065837
+      ],
+      "rotationDeg": 30.12000000000002
+    }
+  },
+  "failureReason": "arrays used as indices must be of integer (or boolean) type"
+}

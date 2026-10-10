@@ -1,12 +1,13 @@
 import { ImageAppearancePanel, ImageAppearanceCheckbox } from '../../ui/image-appearance-panel';
 import { subjects } from '../../features/legacy-viewer/controller';
-import { WorkspaceSections } from './workspace-sections';
 import '../../features/workspace/workspace-controls.css';
 import type { LabControlsProps } from '../../state/use-lab-controller';
 
 export function ReconstructionControlsPanel({ shell, controller }: LabControlsProps) {
   const emission = subjects.find(item => item.id === shell.objectId)?.emissionExperiment;
-  return <aside id="cloud-adjustment-panel" className="floating-panel cloud-adjustment-panel" aria-label="Reconstruction adjustments" hidden={shell.view !== 'reconstruction' || !shell.presentation?.cloudAdjustments && Boolean(emission)}>
+  // Published plates and site volumes bring their own step panels.
+  const shown = subjects.find(item => item.id === (shell.subjectId ?? shell.objectId)), plates = Boolean(shown?.plates || shown?.siteVolume);
+  return <aside id="cloud-adjustment-panel" className="floating-panel cloud-adjustment-panel" aria-label="Reconstruction adjustments" hidden={shell.view !== 'reconstruction' || plates || !shell.presentation?.cloudAdjustments && Boolean(emission)}>
             <ImageAppearancePanel
               image={shell.presentation?.reconstructionImages ? <div id="reconstruction-image-picker" /> : <><label className="visually-hidden" htmlFor="unavailable-reconstruction-image">Image</label><select id="unavailable-reconstruction-image" disabled><option>No image reconstruction configured</option></select><div id="reconstruction-image-picker" hidden /></>}
               material={shell.material?.available && !shell.material.loading && !shell.busy ? { mode: shell.material.mode, onChange: mode => void controller.current?.setMaterial(mode) } : { mode: shell.material?.mode, reason: shell.material?.loading ? 'Loading the prepared material bank.' : 'This saved reconstruction does not include a matching prepared neutral bank.' }}
@@ -14,8 +15,6 @@ export function ReconstructionControlsPanel({ shell, controller }: LabControlsPr
               original={<ImageAppearanceCheckbox id="reconstruction-original-enabled" label="Original" control={shell.busy || !shell.originalOverlay?.available || shell.originalOverlay.loading ?
                 { checked: shell.originalOverlay?.enabled, reason: 'Select a saved reconstruction prepared with an original-image reference.' } :
                 { checked: shell.originalOverlay.enabled, onChange: enabled => void controller.current?.showOriginal(enabled) }} />} />
-            <WorkspaceSections visible={shell.view === 'reconstruction' && !emission} active="compiler" capabilities={{ compiler: true }} onChange={() => {}} />
-            {!shell.presentation?.cloudAdjustments && <fieldset disabled title="This object has a prepared density model but no image reconstruction workflow."><legend>Image and processing</legend><p className="interaction-hint">No image reconstruction is configured.</p></fieldset>}
             <fieldset id="reconstruction-image-controls" hidden={!shell.presentation?.reconstructionImages}>
               <legend>Processing</legend>
               <div id="reconstruction-processing"></div>

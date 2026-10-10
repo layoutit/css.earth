@@ -19,7 +19,7 @@
     "properMotionDecMasPerYear": 0,
     "radialVelocityKmPerS": 0,
     "sources": {
-      "position": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid. (https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json); catalogue reference m8-registered-frame",
+      "position": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid. (https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/processing-observations.json); catalogue reference m8-registered-frame",
       "distance": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2 (https://arxiv.org/pdf/1903.12176v1); catalogue reference wright-2019-kinematics: 1326 pc (-69/+77); Adopted Gaia DR2 cluster distance from Wright et al. (2019), section 3.4: 1326 −69/+77 pc, including the stated parallax zero-point correction and systematic uncertainty. It is not an individual gas-cloud depth measurement.",
       "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
       "radialVelocity": "Zero: SIMBAD lists no radial velocity for M 8 (queried 2026-10-01); the nebula is held at its catalogued distance."

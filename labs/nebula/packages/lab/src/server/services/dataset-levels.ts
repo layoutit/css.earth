@@ -129,10 +129,12 @@ export function datasetLevelPairs(grid: DatasetLevelGrid, material: DatasetLevel
 }
 
 /** The whole measurement, over one prepared grid. Kept pure so its tests never need a bake. */
-export function datasetLevelStatistics(grid: DatasetLevelGrid, material: DatasetLevelMaterial = { channelGain: null, toneCurve: null }): Pick<DatasetLevels,
+/** `pairs` defaults to this dataset's analytic render (`datasetLevelPairs`); a site bank supplies its own drawn render. */
+export function datasetLevelStatistics(grid: DatasetLevelGrid, material: DatasetLevelMaterial = { channelGain: null, toneCurve: null },
+  pairs: DatasetLevelPairs = datasetLevelPairs(grid, material)): Pick<DatasetLevels,
   'footprintPixels' | 'gridPixels' | 'skyPedestal' | 'bins' | 'transferBins' | 'flux' | 'hueErrorDegrees' | 'channels'> {
   const pixels = grid.width * grid.height;
-  const { covered, sky, source: sourcePairs, render: renderPairs } = datasetLevelPairs(grid, material);
+  const { covered, sky, source: sourcePairs, render: renderPairs } = pairs;
   const sourceHistogram = CHANNELS.map(() => new Array<number>(LEVEL_BINS).fill(0));
   const renderHistogram = CHANNELS.map(() => new Array<number>(LEVEL_BINS).fill(0));
   const sourceValues = CHANNELS.map(() => [] as number[]), renderValues = CHANNELS.map(() => [] as number[]);

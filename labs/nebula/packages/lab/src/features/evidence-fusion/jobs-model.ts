@@ -19,7 +19,7 @@ export interface FusionResult {
 export const fusionRecord = coreIsRecord;
 /** Fusion results and their input sets are named local variants. */
 export const fusionName = isVariantName;
-export const fusionPath = (v: unknown): v is string => typeof v === 'string' && v.startsWith('.local/nebula-lab/') &&
+export const fusionPath = (v: unknown): v is string => typeof v === 'string' && /^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(v) &&
   !/[\\:?#]/.test(v) && v.split('/').every(part => part && part !== '..' && part !== '.');
 const finite = coreIsFiniteNumber;
 const matrix = (v: unknown): v is Matrix => Array.isArray(v) && v.length === 6 && v.every(finite) && Math.abs(v[0] * v[3] - v[1] * v[2]) > 1e-12;

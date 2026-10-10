@@ -2,14 +2,16 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { mkdir, mkdtemp, readFile, writeFile, stat, rm } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
+import { randomUUID } from 'node:crypto';
 import sharp from 'sharp';
 import { loadObservationDiffuse, readObservationStructureRecipe } from './observation-structure-source.ts';
 import type { ObservationRecipe } from '../../../features/observations/recipe.ts';
 import type { Observation } from '../../../features/observations/models/model.ts';
 
 test('structure input cannot silently rerun star removal when a native receipt is absent', async () => {
-  const base = resolve('.local/nebula-lab/observations'); await mkdir(base, { recursive: true });
-  const directory = await mkdtemp(resolve(base, 'structure-cache-test-'));
+  // An observation workspace lives in its object's ignored scratch: src/objects/<id>-volume/.local/observations/<id>.
+  const id = `structure-cache-test-${randomUUID().slice(0, 8)}`, owner = resolve(`src/objects/${id}-volume`);
+  const directory = resolve(owner, '.local/observations', id); await mkdir(directory, { recursive: true });
   try {
     await mkdir(resolve(directory, 'sources'));
     const bytes = await sharp({ create: { width: 8, height: 8, channels: 3, background: '#333333' } }).tiff().toBuffer();
@@ -25,7 +27,7 @@ test('structure input cannot silently rerun star removal when a native receipt i
       imageToFrame: [1, 0, 0, 1, 0, 0], registration: { status: 'verified', matchedStars: 50, rmsPixels: .1, maxResidualPixels: .3, matches: [] } };
     await assert.rejects(loadObservationDiffuse(recipe, image, 64), /cannot start NOX/);
     await assert.rejects(stat(resolve(directory, 'test/native-nox/request.json')), { code: 'ENOENT' });
-  } finally { await rm(directory, { recursive: true, force: true }); }
+  } finally { await rm(owner, { recursive: true, force: true }); }
 });
 
 test('structure recipe bounds the analysis without changing source footprint', () => {

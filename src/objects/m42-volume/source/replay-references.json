@@ -2,23 +2,23 @@
   "schema": "cssearth-replay-references@1",
   "references": [
     {
-      "originalPath": "labs/nebula/models/m42/compiler.json",
+      "originalPath": "src/objects/m42-volume/source/compiler.json",
       "path": "source/bake-inputs/references/01-compiler.json"
     },
     {
-      "originalPath": "labs/nebula/models/m42/observations.json",
+      "originalPath": "src/objects/m42-volume/source/observations.json",
       "path": "source/bake-inputs/references/02-observations.json"
     },
     {
-      "originalPath": "labs/nebula/models/m42/observation-structures.json",
+      "originalPath": "src/objects/m42-volume/source/observation-structures.json",
       "path": "source/bake-inputs/references/03-observation-structures.json"
     },
     {
-      "originalPath": "labs/nebula/models/m42/depth-model.json",
+      "originalPath": "src/objects/m42-volume/source/depth-model.json",
       "path": "source/bake-inputs/references/04-depth-model.json"
     },
     {
-      "originalPath": "labs/nebula/models/m42/physical-evidence.json",
+      "originalPath": "src/objects/m42-volume/source/physical-evidence.json",
       "path": "source/bake-inputs/references/05-physical-evidence.json"
     }
   ]

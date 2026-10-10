@@ -1,0 +1,751 @@
+{
+  "schema": "cssearth-nebula-native-evidence@1",
+  "subjectId": "m45",
+  "asOf": "2026-09-13",
+  "recipePath": "src/objects/m45-volume/source/processing-observations.json",
+  "interpretation": "Exact native accounting and pinned artifacts; no clean-stellar-removal or physical-depth acceptance.",
+  "images": [
+    {
+      "id": "noirlab-optical",
+      "registration": {
+        "status": "verified",
+        "referenceId": "spitzer-irac",
+        "heldOutStars": 988,
+        "residualArcseconds": 0.45842922095151567
+      },
+      "nativeDimensions": [
+        4000,
+        2920
+      ],
+      "verification": {
+        "maximumReconstructionErrorCodeValues": 0,
+        "changedPixelsOutsideMask": 0,
+        "baselineRestoredPixels": 0,
+        "encodedRoundTripExact": true,
+        "coverageComplete": true
+      },
+      "removedRelativeRgb": 0.03606624654717166,
+      "survivingWhiteCores": [
+        {
+          "centroidNativePixels": [
+            2031.9875613747954,
+            541.1309328968904
+          ],
+          "bboxNativePixels": [
+            1950,
+            458,
+            165,
+            205
+          ],
+          "areaPixels": 18330
+        },
+        {
+          "centroidNativePixels": [
+            2031.6009129282418,
+            2617.5004908216356
+          ],
+          "bboxNativePixels": [
+            1972,
+            2557,
+            123,
+            121
+          ],
+          "areaPixels": 10187
+        },
+        {
+          "centroidNativePixels": [
+            2928.9498772504094,
+            1868.4925327332242
+          ],
+          "bboxNativePixels": [
+            2871,
+            1810,
+            124,
+            116
+          ],
+          "areaPixels": 9776
+        },
+        {
+          "centroidNativePixels": [
+            1468.9522179627602,
+            1451.7917579408543
+          ],
+          "bboxNativePixels": [
+            1418,
+            1400,
+            101,
+            104
+          ],
+          "areaPixels": 7304
+        },
+        {
+          "centroidNativePixels": [
+            3273.0249902381884,
+            2365.9818430300666
+          ],
+          "bboxNativePixels": [
+            3221,
+            2321,
+            102,
+            88
+          ],
+          "areaPixels": 5122
+        },
+        {
+          "centroidNativePixels": [
+            2645.020511096167,
+            2679.8557498318764
+          ],
+          "bboxNativePixels": [
+            2621,
+            2658,
+            50,
+            47
+          ],
+          "areaPixels": 1487
+        },
+        {
+          "centroidNativePixels": [
+            3581.27339520495,
+            1811.6771075019335
+          ],
+          "bboxNativePixels": [
+            3556,
+            1793,
+            53,
+            40
+          ],
+          "areaPixels": 1293
+        }
+      ]
+    },
+    {
+      "id": "spitzer-irac",
+      "registration": {
+        "status": "verified",
+        "referenceId": "noirlab-optical",
+        "heldOutStars": 988,
+        "residualArcseconds": 0.45842922095151567
+      },
+      "nativeDimensions": [
+        2855,
+        2855
+      ],
+      "verification": {
+        "maximumReconstructionErrorCodeValues": 0,
+        "changedPixelsOutsideMask": 0,
+        "baselineRestoredPixels": 0,
+        "encodedRoundTripExact": true,
+        "coverageComplete": true
+      },
+      "removedRelativeRgb": 0.025858011566410547,
+      "survivingWhiteCores": [
+        {
+          "centroidNativePixels": [
+            1299.5759412890875,
+            22.873324824505424
+          ],
+          "bboxNativePixels": [
+            1278,
+            0,
+            45,
+            47
+          ],
+          "areaPixels": 1567
+        },
+        {
+          "centroidNativePixels": [
+            702.8621052631579,
+            803.3747368421052
+          ],
+          "bboxNativePixels": [
+            684,
+            783,
+            41,
+            41
+          ],
+          "areaPixels": 950
+        }
+      ]
+    },
+    {
+      "id": "spitzer-irac-mips",
+      "registration": {
+        "status": "verified",
+        "referenceId": "noirlab-optical",
+        "heldOutStars": 883,
+        "residualArcseconds": 0.5242060947153102
+      },
+      "nativeDimensions": [
+        2855,
+        2855
+      ],
+      "verification": {
+        "maximumReconstructionErrorCodeValues": 0,
+        "changedPixelsOutsideMask": 0,
+        "baselineRestoredPixels": 0,
+        "encodedRoundTripExact": true,
+        "coverageComplete": true
+      },
+      "removedRelativeRgb": 0.017530399167100516,
+      "survivingWhiteCores": [
+        {
+          "centroidNativePixels": [
+            1302.4881889763778,
+            20.921259842519685
+          ],
+          "bboxNativePixels": [
+            1293,
+            8,
+            17,
+            29
+          ],
+          "areaPixels": 254
+        },
+        {
+          "centroidNativePixels": [
+            704.8714285714286,
+            796.3857142857142
+          ],
+          "bboxNativePixels": [
+            697,
+            791,
+            15,
+            12
+          ],
+          "areaPixels": 105
+        },
+        {
+          "centroidNativePixels": [
+            1293.0454545454545,
+            24.636363636363637
+          ],
+          "bboxNativePixels": [
+            1289,
+            22,
+            8,
+            5
+          ],
+          "areaPixels": 22
+        }
+      ]
+    },
+    {
+      "id": "wise-four-band",
+      "registration": {
+        "status": "verified",
+        "referenceId": "noirlab-optical",
+        "heldOutStars": 111,
+        "residualArcseconds": 1.1510198194135686
+      },
+      "nativeDimensions": [
+        4007,
+        3061
+      ],
+      "verification": {
+        "maximumReconstructionErrorCodeValues": 0,
+        "changedPixelsOutsideMask": 0,
+        "baselineRestoredPixels": 0,
+        "encodedRoundTripExact": true,
+        "coverageComplete": true
+      },
+      "removedRelativeRgb": 0.09147642140553351,
+      "survivingWhiteCores": [
+        {
+          "centroidNativePixels": [
+            1696.294701986755,
+            1453.2549668874171
+          ],
+          "bboxNativePixels": [
+            1686,
+            1444,
+            18,
+            18
+          ],
+          "areaPixels": 151
+        }
+      ]
+    }
+  ],
+  "resultId": "m45",
+  "integrationReplay": {
+    "schema": "cssearth-compiler-integration-replay@1",
+    "status": "passed",
+    "subjectId": "m45",
+    "date": "2026-09-13",
+    "previous": {
+      "path": ".local/nebula-lab/compiler/m45-before-integration-replay/result.json"
+    },
+    "current": {
+      "path": ".local/nebula-lab/compiler/m45-integration-replay/result.json"
+    },
+    "previousResultId": "m45-before-integration-replay",
+    "currentResultId": "m45-integration-replay",
+    "reason": "Shared per-lens alpha validation changed the implementation identity. Object recipes, numerical fields and rendered materials were not refined.",
+    "checks": {
+      "strictResultsAndAllPins": true,
+      "identicalInputIdentity": true,
+      "identicalRecipeAndRequest": true,
+      "identicalFieldIdentity": true,
+      "identicalModelAndPanels": {
+        "model": true,
+        "target": true,
+        "projection": true,
+        "residual": true
+      },
+      "identicalGeometry": true,
+      "identicalStars": 450,
+      "identicalMetrics": {
+        "components": 472,
+        "unconstrainedComponents": 472,
+        "stars": 450,
+        "fitRmse": 0.024468976538652425,
+        "baselineRmse": 0.1796230343464722,
+        "missingSignalFraction": 0.09589171781806916,
+        "excessSignalFraction": 0.09181339092936369
+      },
+      "identicalBankResources": 4105,
+      "identicalBankResourceBytes": 12571204,
+      "banks": [
+        {
+          "id": "neutral",
+          "resources": 821
+        },
+        {
+          "id": "noirlab-optical",
+          "resources": 821
+        },
+        {
+          "id": "spitzer-irac",
+          "resources": 821
+        },
+        {
+          "id": "spitzer-irac-mips",
+          "resources": 821
+        },
+        {
+          "id": "wise-four-band",
+          "resources": 821
+        }
+      ],
+      "sourcePanels": [
+        {
+          "id": "noirlab-optical"
+        },
+        {
+          "id": "spitzer-irac"
+        },
+        {
+          "id": "spitzer-irac-mips"
+        },
+        {
+          "id": "wise-four-band"
+        }
+      ]
+    },
+    "visualEvidenceReuse": "Prior front/oblique/side screenshots remain applicable to the model/material assessment because all bank texture bytes, geometry, stars, controls and source panels are identical. Their original result IDs and receipts are retained; this comparison is not a fresh browser interaction run.",
+    "receipt": {
+      "path": "output/nebula-processing/m45-integration-replay.json"
+    },
+    "previousVisualEvidence": {
+      "receipt": {
+        "path": "output/nebula-processing/m45-inspected-prior-receipt.json"
+      },
+      "resultId": "m45-before-integration-replay",
+      "archiveNote": "Receipt copied from the complete pre-replay file read captured before the browser script replaced the original inspection directory. That directory now contains the fresh current-result screenshots; first-trial screenshots remain in output/m45-inspection-round1/."
+    },
+    "freshBrowser": {
+      "status": "passed",
+      "id": "m45-integration-replay",
+      "lenses": [
+        "noirlab-optical",
+        "spitzer-irac",
+        "spitzer-irac-mips",
+        "wise-four-band"
+      ],
+      "stars": 450,
+      "poses": [
+        {
+          "name": "oblique",
+          "pose": "59.49999999999999,35"
+        },
+        {
+          "name": "west-side",
+          "pose": "90.00000915527343,0"
+        },
+        {
+          "name": "north-side",
+          "pose": "0,88.99999694824218"
+        }
+      ],
+      "posts": [],
+      "errors": [],
+      "browser": "148.0.7778.96",
+      "interpretation": "Interaction/source/pose tests only; screenshots require visual assessment.",
+      "receipt": {
+        "path": "output/m45-inspection/receipt.json"
+      },
+      "screenshots": "output/m45-inspection/"
+    }
+  },
+  "starSelectionCorrection": {
+    "schema": "cssearth-compiler-star-selection-replay@1",
+    "status": "passed",
+    "subjectId": "m45",
+    "date": "2026-09-13",
+    "previous": {
+      "path": ".local/nebula-lab/compiler/m45-integration-replay/result.json"
+    },
+    "current": {
+      "path": ".local/nebula-lab/compiler/m45-star-selection-correction/result.json"
+    },
+    "previousResultId": "m45-integration-replay",
+    "currentResultId": "m45-star-selection-correction",
+    "reason": "The shared detector now retains every bounded residual maximum before measured aperture light applies the unchanged star budget. No object recipe or cloud/material fit changed.",
+    "checks": {
+      "strictResultsAndAllPins": true,
+      "identicalInputIdentity": true,
+      "identicalRecipeAndRequest": true,
+      "identicalFieldIdentity": true,
+      "identicalModelAndPanels": {
+        "model": true,
+        "target": true,
+        "projection": true,
+        "residual": true
+      },
+      "identicalGeometry": true,
+      "starCount": 450,
+      "identicalStars": false,
+      "newlySelectedStars": 99,
+      "identicalMetrics": {
+        "components": 472,
+        "unconstrainedComponents": 472,
+        "stars": 450,
+        "fitRmse": 0.024468976538652425,
+        "baselineRmse": 0.1796230343464722,
+        "missingSignalFraction": 0.09589171781806916,
+        "excessSignalFraction": 0.09181339092936369
+      },
+      "identicalBankResources": 4105,
+      "identicalBankResourceBytes": 12571204,
+      "banks": [
+        {
+          "id": "neutral",
+          "resources": 821
+        },
+        {
+          "id": "noirlab-optical",
+          "resources": 821
+        },
+        {
+          "id": "spitzer-irac",
+          "resources": 821
+        },
+        {
+          "id": "spitzer-irac-mips",
+          "resources": 821
+        },
+        {
+          "id": "wise-four-band",
+          "resources": 821
+        }
+      ],
+      "sourcePanels": [
+        {
+          "id": "noirlab-optical"
+        },
+        {
+          "id": "spitzer-irac"
+        },
+        {
+          "id": "spitzer-irac-mips"
+        },
+        {
+          "id": "wise-four-band"
+        }
+      ]
+    },
+    "visualEvidenceReuse": "The prior cloud/material assessment remains applicable because every bank texture byte, field and geometry matches. Star selection/photometry changed and requires the fresh browser receipt; historical captures remain tied to their original IDs.",
+    "receipt": {
+      "path": "output/nebula-processing/m45-star-selection-replay.json"
+    },
+    "freshBrowser": {
+      "status": "passed",
+      "id": "m45-star-selection-correction",
+      "lenses": [
+        "noirlab-optical",
+        "spitzer-irac",
+        "spitzer-irac-mips",
+        "wise-four-band"
+      ],
+      "stars": 450,
+      "poses": [
+        {
+          "name": "oblique",
+          "pose": "59.49999999999999,35"
+        },
+        {
+          "name": "west-side",
+          "pose": "90.00000915527343,0"
+        },
+        {
+          "name": "north-side",
+          "pose": "0,88.99999694824218"
+        }
+      ],
+      "posts": [],
+      "errors": [],
+      "browser": "148.0.7778.96",
+      "interpretation": "Interaction/source/pose tests only; screenshots require visual assessment.",
+      "receipt": {
+        "path": "output/nebula-processing/m45-stars-final-browser/receipt.json"
+      },
+      "screenshots": [
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-north-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-oblique.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-west-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-earth.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-north-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-oblique.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-west-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/original-overlay.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-earth.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-earth.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-north-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-oblique.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-west-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-north-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-oblique.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-west-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-earth.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-north-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-oblique.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-west-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-stars-earth.png"
+        }
+      ]
+    },
+    "interpretation": "First missing-star fix round removes the premature 6000 sharp-peak quota; full source maxima compete by aperture light. This historical result precedes the opt-in registered union."
+  },
+  "registeredStarUnionIntegration": {
+    "schema": "cssearth-compiler-star-union-replay@1",
+    "status": "passed",
+    "subjectId": "m45",
+    "date": "2026-09-13",
+    "previous": {
+      "path": ".local/nebula-lab/compiler/m45-star-selection-correction/result.json"
+    },
+    "current": {
+      "path": ".local/nebula-lab/compiler/m45/result.json"
+    },
+    "previousResultId": "m45-star-selection-correction",
+    "currentResultId": "m45",
+    "reason": "Shared opt-in star-union owner replay; this object retains its reference catalogue route.",
+    "checks": {
+      "strictResultsAndAllPins": true,
+      "identicalInputIdentity": true,
+      "identicalCloudRecipeAndRequest": true,
+      "identicalFieldIdentity": true,
+      "identicalModelAndPanels": {
+        "model": true,
+        "target": true,
+        "projection": true,
+        "residual": true
+      },
+      "identicalGeometry": true,
+      "starCount": 450,
+      "identicalStars": true,
+      "newlySelectedStars": 0,
+      "identicalMetrics": {
+        "components": 472,
+        "unconstrainedComponents": 472,
+        "stars": 450,
+        "fitRmse": 0.024468976538652425,
+        "baselineRmse": 0.1796230343464722,
+        "missingSignalFraction": 0.09589171781806916,
+        "excessSignalFraction": 0.09181339092936369
+      },
+      "identicalBankResources": 4105,
+      "identicalBankResourceBytes": 12571204,
+      "banks": [
+        {
+          "id": "neutral",
+          "resources": 821
+        },
+        {
+          "id": "noirlab-optical",
+          "resources": 821
+        },
+        {
+          "id": "spitzer-irac",
+          "resources": 821
+        },
+        {
+          "id": "spitzer-irac-mips",
+          "resources": 821
+        },
+        {
+          "id": "wise-four-band",
+          "resources": 821
+        }
+      ],
+      "sourcePanels": [
+        {
+          "id": "noirlab-optical"
+        },
+        {
+          "id": "spitzer-irac"
+        },
+        {
+          "id": "spitzer-irac-mips"
+        },
+        {
+          "id": "wise-four-band"
+        }
+      ]
+    },
+    "visualEvidenceReuse": "The prior cloud/material assessment remains applicable because every bank texture byte, field and geometry matches. Star selection/photometry changed and requires the fresh browser receipt; historical captures remain tied to their original IDs.",
+    "receipt": {
+      "path": "output/nebula-processing/m45-star-union-replay.json"
+    },
+    "previousFullBrowser": {
+      "status": "passed",
+      "id": "m45-star-selection-correction",
+      "lenses": [
+        "noirlab-optical",
+        "spitzer-irac",
+        "spitzer-irac-mips",
+        "wise-four-band"
+      ],
+      "stars": 450,
+      "poses": [
+        {
+          "name": "oblique",
+          "pose": "59.49999999999999,35"
+        },
+        {
+          "name": "west-side",
+          "pose": "90.00000915527343,0"
+        },
+        {
+          "name": "north-side",
+          "pose": "0,88.99999694824218"
+        }
+      ],
+      "posts": [],
+      "errors": [],
+      "browser": "148.0.7778.96",
+      "interpretation": "Interaction/source/pose tests only; screenshots require visual assessment.",
+      "receipt": {
+        "path": "output/nebula-processing/m45-stars-final-browser/receipt.json"
+      },
+      "screenshots": [
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-north-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-oblique.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-west-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-earth.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-north-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-oblique.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-west-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/original-overlay.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-earth.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-earth.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-north-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-oblique.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-west-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-north-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-oblique.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-west-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-earth.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-north-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-oblique.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-west-side.png"
+        },
+        {
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-stars-earth.png"
+        }
+      ]
+    },
+    "interpretation": "This object does not enable the union. Current owner replay has identical stars, controls, cloud/model/source panels and every bank resource, so the preserved 8f36 full browser assessment remains applicable."
+  }
+}

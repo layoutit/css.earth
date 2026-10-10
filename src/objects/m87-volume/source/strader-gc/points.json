@@ -29,7 +29,7 @@
       "axisPositionAngleDeg": 243.2,
       "cutoffHalfLightRadii": 2.8,
       "source": "kormendy-2009-virgo-ellipticals",
-      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/m87/experiment.json shapePrior): a Sérsic fit to Kormendy et al.'s (2009) Table 3 profile, axis along M87's minor axis in the plane of the sky, ending at 2.8 half-light radii. Each cluster's depth is drawn from it, not measured."
+      "basis": "The spheroid the volume's light is spread through (src/objects/m87-volume/source/experiment.json shapePrior): a Sérsic fit to Kormendy et al.'s (2009) Table 3 profile, axis along M87's minor axis in the plane of the sky, ending at 2.8 half-light radii. Each cluster's depth is drawn from it, not measured."
     }
   },
   "source": "strader-2011-m87-globular-clusters",

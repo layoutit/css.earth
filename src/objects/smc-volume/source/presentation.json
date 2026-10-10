@@ -66,7 +66,7 @@
       ],
       "input": "smc-horalek-wide",
       "preview": {
-        "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
+        "path": "src/objects/smc-volume/.local/intake/iotw2615a.jpg",
         "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2615a.jpg"
       }
     },
@@ -96,7 +96,7 @@
       ],
       "input": "smc-vista",
       "preview": {
-        "path": ".local/nebula-lab/smc-intake/eso1714a.jpg",
+        "path": "src/objects/smc-volume/.local/intake/eso1714a.jpg",
         "url": "https://cdn.eso.org/images/publicationjpg/eso1714a.jpg"
       }
     },
@@ -186,7 +186,7 @@
       ],
       "input": "smc-allwise-wide",
       "preview": {
-        "path": ".local/nebula-lab/smc-intake/allwise-smc-10deg.jpg",
+        "path": "src/objects/smc-volume/.local/intake/allwise-smc-10deg.jpg",
         "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=4000&height=4000&projection=TAN&fov=10&coordsys=icrs&ra=13.5&dec=-73&format=jpg"
       }
     }

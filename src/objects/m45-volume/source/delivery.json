@@ -7,25 +7,25 @@
   },
   "inputPins": [
     {
-      "path": "labs/nebula/models/m45/compiler.json"
+      "path": "src/objects/m45-volume/source/compiler.json"
     },
     {
-      "path": "labs/nebula/models/m45/depth-model.json"
+      "path": "src/objects/m45-volume/source/depth-model.json"
     },
     {
-      "path": "labs/nebula/models/m45/observation-structures.json"
+      "path": "src/objects/m45-volume/source/observation-structures.json"
     },
     {
-      "path": "labs/nebula/models/m45/physical-evidence.json"
+      "path": "src/objects/m45-volume/source/physical-evidence.json"
     },
     {
-      "path": "labs/nebula/models/m45/processing-observations.json"
+      "path": "src/objects/m45-volume/source/processing-observations.json"
     },
     {
-      "path": "labs/nebula/models/m45/stellar-catalogue.json"
+      "path": "src/objects/m45-volume/source/stellar-catalogue.json"
     },
     {
-      "path": "labs/nebula/models/m45/optical-composite-observations.json"
+      "path": "src/objects/m45-volume/source/optical-composite-observations.json"
     }
   ],
   "sky": {
@@ -43,7 +43,7 @@
   "framingRadiusUnits": 5359.621926,
   "acceptedLabResult": "m45-compiler",
   "compositeRecipe": {
-    "path": "labs/nebula/models/m45/optical-composite.json"
+    "path": "src/objects/m45-volume/source/optical-composite.json"
   },
   "fieldStars": {
     "path": "src/objects/m45-volume/source/stellar-field.json"

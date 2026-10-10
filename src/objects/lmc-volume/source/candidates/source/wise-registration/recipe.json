@@ -1,0 +1,33 @@
+{
+  "targets": [
+    {
+      "images": [
+        {
+          "id": "wise-wide-infrared",
+          "path": "src/objects/lmc-volume/.local/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+          "wcs": {
+            "projection": "TAN",
+            "coordinateFrame": "ICRS",
+            "referenceDimension": [
+              6000,
+              6000
+            ],
+            "referencePixel": [
+              3000,
+              3000
+            ],
+            "referenceValueDeg": [
+              78.76,
+              -69.19
+            ],
+            "scaleDeg": [
+              -0.0040595312971682,
+              0.0040595312971682
+            ],
+            "rotationDeg": 0
+          }
+        }
+      ]
+    }
+  ]
+}

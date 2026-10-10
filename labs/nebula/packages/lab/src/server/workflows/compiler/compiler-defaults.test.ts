@@ -3,8 +3,8 @@ import { test } from 'node:test';
 import { compilerControlsForRecipe, compilerSourceWeights, defaultCompilerControls, readCompilerRecipe } from '../../../features/compiler/model.ts';
 
 const source = { schema: 'cssearth-nebula-compiler@1', id: 'example', label: 'Example',
-  observationRecipe: 'labs/nebula/models/example/observations.json', observationCatalogue: '.local/nebula-lab/observations/example/observations.json',
-  structureRecipe: 'labs/nebula/models/example/structures.json', structureCatalogue: '.local/nebula-lab/observations/example/structures/catalogue.json',
+  observationRecipe: 'src/objects/example-volume/source/observations.json', observationCatalogue: '.local/nebula-lab/observations/example/observations.json',
+  structureRecipe: 'src/objects/example-volume/source/structures.json', structureCatalogue: '.local/nebula-lab/observations/example/structures/catalogue.json',
   defaultSourceId: 'optical', maximumStars: 20, interpretation: 'Authored visualization.' };
 
 test('recipe defaults reach unsaved controls while explicit user choices win', () => {
@@ -16,7 +16,7 @@ test('recipe defaults reach unsaved controls while explicit user choices win', (
 });
 
 test('photometric recipes cannot configure the hidden depth control away from their pinned prior', () => {
-  const photometricPriorRecipe = 'labs/nebula/models/example/photometric-mge.json';
+  const photometricPriorRecipe = 'src/objects/example-volume/source/photometric-mge.json';
   assert.equal(compilerControlsForRecipe(readCompilerRecipe({ ...source, photometricPriorRecipe })).depth, 1);
   assert.throws(() => readCompilerRecipe({ ...source, photometricPriorRecipe,
     defaultControls: { detail: .9, faint: .15, depth: 1.2 } }), /require depth=1/);
@@ -46,5 +46,5 @@ test('the saved emission window is explicit, validated and unavailable for sampl
   for (const invalid of [null, { sourceId: '../optical', featherArcsec: 90 }, { sourceId: 'optical', featherArcsec: -1 },
     { sourceId: 'optical', featherArcsec: NaN }, { ...emissionWindow, invented: true }])
     assert.throws(() => readCompilerRecipe({ ...source, emissionWindow: invalid }), /emission window/);
-  assert.throws(() => readCompilerRecipe({ ...source, emissionWindow, sampledRecipe: 'labs/nebula/models/example/sampled.json' }), /emission-field route/);
+  assert.throws(() => readCompilerRecipe({ ...source, emissionWindow, sampledRecipe: 'src/objects/example-volume/source/sampled.json' }), /emission-field route/);
 });

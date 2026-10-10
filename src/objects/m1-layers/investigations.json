@@ -84,7 +84,7 @@
       "id": "licence",
       "subject": "The points' licence",
       "status": "included",
-      "finding": "The authors' repository carries the GNU General Public License 3.0; the paper says its data are shared on reasonable request. The table built from the repository's files is a derived copy: it is kept in the source cache under the same licence, with the paper credited, and is not tracked here. The Crab volume's model reads the same files at the same commit (labs/nebula/models/m1/README.md).",
+      "finding": "The authors' repository carries the GNU General Public License 3.0; the paper says its data are shared on reasonable request. The table built from the repository's files is a derived copy: it is kept in the source cache under the same licence, with the paper credited, and is not tracked here. The Crab volume's model reads the same files at the same commit (src/objects/m1-volume/source/README.md).",
       "evidence": [
         "https://github.com/thomasorb/M1_paper",
         "https://arxiv.org/pdf/2101.02709v1"

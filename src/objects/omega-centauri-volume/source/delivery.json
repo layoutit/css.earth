@@ -7,19 +7,19 @@
   },
   "inputPins": [
     {
-      "path": "labs/nebula/models/omega-centauri/compiler.json"
+      "path": "src/objects/omega-centauri-volume/source/compiler.json"
     },
     {
-      "path": "labs/nebula/models/omega-centauri/photometric-mge.json"
+      "path": "src/objects/omega-centauri-volume/source/photometric-mge.json"
     },
     {
-      "path": "labs/nebula/models/omega-centauri/observation-structures.json"
+      "path": "src/objects/omega-centauri-volume/source/observation-structures.json"
     },
     {
-      "path": "labs/nebula/models/omega-centauri/physical-evidence.json"
+      "path": "src/objects/omega-centauri-volume/source/physical-evidence.json"
     },
     {
-      "path": "labs/nebula/models/omega-centauri/observations.json"
+      "path": "src/objects/omega-centauri-volume/source/observations.json"
     }
   ],
   "sky": {

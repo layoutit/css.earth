@@ -84,7 +84,7 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
   async function context(request: CloudDensityPreparationRequest): Promise<{
     resources: SourceResource[]; sampleSignal: (x: number, y: number, z: number) => number; maximum: number; directory: string;
   }> {
-    const subjects = await json('labs/nebula/packages/lab/src/state/subjects.json') as Subject[];
+    const subjects = await json('labs/nebula/packages/lab/src/state/processing-subjects.json') as Subject[];
     const subject = subjects.find(item => item.id === request.subjectId) ?? await resolveReconstructionSubject(root, request.subjectId);
     if (!subject?.cloudParts) throw new TypeError('Subject has no cloud-part density context.');
     // Cloud descriptors are relative to the subject's reconstructed-object directory, not the subjects catalogue.

@@ -13,7 +13,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m1/physical-sources.json",
+      "path": "src/objects/m1-volume/source/physical-sources.json",
       "locator": "/papers/4"
     }
   ],
@@ -24,7 +24,7 @@
       "kind": "credit",
       "text": "3D mapping of the Crab Nebula with SITELLE I",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m1/physical-sources.json#/papers/4"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m1-volume/source/physical-sources.json#/papers/4"
     }
   ]
 }

@@ -4,7 +4,7 @@
   "inputs": [
     {
       "id": "eso-optical",
-      "path": ".local/nebula-lab/observations/m42/sources/eso-optical.tif",
+      "path": "src/objects/m42-volume/.local/observations/m42/sources/eso-optical.tif",
       "origin": "https://www.eso.org/public/images/eso1723a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1723a/",
       "title": "Orion · eso1723a",
@@ -17,7 +17,7 @@
           {
             "catalogueId": "eso-eso1723a",
             "role": "material",
-            "evidence": "labs/nebula/models/m42/observations.json#/images/0"
+            "evidence": "src/objects/m42-volume/source/observations.json#/images/0"
           }
         ]
       },
@@ -36,7 +36,7 @@
     },
     {
       "id": "eso-vista",
-      "path": ".local/nebula-lab/observations/m42/sources/eso-vista.tif",
+      "path": "src/objects/m42-volume/.local/observations/m42/sources/eso-vista.tif",
       "origin": "https://www.eso.org/public/images/eso1006a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1006a/",
       "title": "Orion · eso1006a",
@@ -49,7 +49,7 @@
           {
             "catalogueId": "eso-eso1006a",
             "role": "material",
-            "evidence": "labs/nebula/models/m42/observations.json#/images/1"
+            "evidence": "src/objects/m42-volume/source/observations.json#/images/1"
           }
         ]
       },

@@ -5,7 +5,7 @@ import { presentPhysicalPoseInVolume, cssViewFromOrientation } from '@cssearth/e
 import { projectPreparedPoint } from '@cssearth/volume-viewer/camera/point-projection';
 import type { VolumeCameraPublication } from '@cssearth/renderer/volume/types.ts';
 import type { PreparedCssVolume } from '@cssearth/objects';
-import { assertCompilerBankIdentity, assertCompilerDatasetGeometry } from '../../server/workflows/compiler/bank-validation.ts';
+import { assertCompilerBankIdentity, assertCompilerDatasetGeometry } from '../../server/workflows/compiler/bank-identity.ts';
 
 export const compilerRenderer: CompilerViewerBackend<PreparedCssVolume, VolumeCameraPublication> = {
   ...volumeRenderer,

@@ -17,9 +17,12 @@ export function inspectionRenderer(isImage: boolean): InspectionMountBackend<Pre
       const instance = isImage ? mountPreparedCssImageLayers({ ...options, payload: imageBank(payload) }) : mountPreparedCssVolume(options);
       const roots = 'root' in instance ? [...instance.root.querySelectorAll<HTMLElement>('[data-image-layer-axis]')] : instance.roots;
       let materialIndex = 0;
+      // An image bank mounts no projection for a stack without leaves, so its projections are found by axis.
+      const rootOf = (stack: (typeof payload.stacks)[number], index: number) => isImage
+        ? roots.find(root => root.dataset.imageLayerAxis === stack.axis) ?? host.ownerDocument.createElement('div') : roots[index]!;
       const banks = payload.stacks.map((stack, index) => {
-        const nodes = [...roots[index]!.querySelectorAll<HTMLElement>('.css-volume-mesh s')], copies = isImage ? 1 : 3;
-        return { axis: stack.axis, root: roots[index]!, leaves: stack.leaves.map((leaf, leafIndex) => ({
+        const root = rootOf(stack, index), nodes = [...root.querySelectorAll<HTMLElement>('.css-volume-mesh s')], copies = isImage ? 1 : 3;
+        return { axis: stack.axis, root, leaves: stack.leaves.map((leaf, leafIndex) => ({
           setTexture: 'setTexture' in instance ? ((index: number) => (url: string) => instance.setTexture(index, url))(materialIndex++) : undefined,
           id: leaf.id, nodes: nodes.slice(leafIndex * copies, (leafIndex + 1) * copies), detail: leaf.id.endsWith('detail'),
         })) };
