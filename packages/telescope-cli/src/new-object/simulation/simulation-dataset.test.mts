@@ -205,6 +205,14 @@ test('a NetCDF-4 model file inside a ZIP release is kept whole, and its field ca
     assert.equal(input.acquisition, `Restored through source/preparation/acquisition.json from Zenodo record 10.5281/zenodo.5532765: the member run/field-nc4.nc of release.zip (${(zip.length / 1000).toFixed(1)} kB), unchanged and whole, because a NetCDF-4 file spreads its structure through itself. A model output, not an observation.`);
     assert.equal(input.redistribution, 'Not redistributed in git; restored from Zenodo. CC BY 4.0 with attribution.');
     assert.deepEqual(after('source/preparation/acquisition.json').operations.at(-1), { kind: 'zip-member', groups: ['restore', 'refresh'], path: 'science/wolf-2022/field-nc4.nc', url: release.fileUrl, member: 'run/field-nc4.nc' });
+    // A second dataset of the same member cites the member's one record, now titled as the file; a classic member says why it is whole.
+    installSimulationDataset(files, id, 'TRAPPIST-1f', entryOf({ ...member, dataset: 'cloud-model', label: 'Model clouds' }), release, field.report, undefined, 'classic');
+    const wholes = after('source/manifest.json').inputs.filter((existing: { path: string }) => existing.path === input.path);
+    assert.deepEqual(wholes.map((existing: { id: string; consumers: string[] }) => [existing.id, existing.consumers]), [[input.id, ['climate-model-simulation', 'cloud-model-simulation']]]);
+    assert.equal(wholes[0].title, `ExoCAM simulation of TRAPPIST-1f, run/field-nc4.nc: ${release.title}`);
+    assert.match(wholes[0].acquisition, /unchanged and whole, because a member is taken out of a ZIP archive whole\. A model output/u);
+    assert.deepEqual(after('source/content/object.json').datasets.controls.slice(-2).map((control: { source: { id: string } }) => control.source.id), [input.id, input.id]);
+    assert.equal(after('source/preparation/acquisition.json').operations.filter((step: { path: string }) => step.path === input.path).length, 1);
   } finally {
     for (const name of await cached()) if (!before.has(name)) await rm(resolve(archives, name), { force: true });
     await rm(scratch, { recursive: true, force: true });

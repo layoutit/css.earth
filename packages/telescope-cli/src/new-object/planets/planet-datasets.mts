@@ -370,7 +370,9 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
         const fetched = ranges ? ranges.fetched : await restoreSimulationMember(files, id, resolve(o, 'source'), entry, release, fetcher);
         if (fetched) progress(`${id}: ${fetched.toLocaleString('en-US')} bytes of ${entry.file} fetched from Zenodo record ${release.doi}`);
         const field = await loadNetcdfLonLatField(resolve(o, 'source'), simulationRecipe(entry), new Map(ranges ? [[paths.head, ranges.head], [paths.field, ranges.field]] : []));
-        const installed = installSimulationDataset(files, id, descriptor.displayName, entry, release, field.report, ranges);
+        // A member that opens with "CDF" is a classic file: kept whole because it came out of an archive, not for its format.
+        const classic = !ranges && (await readFile(resolve(o, 'source', entry.path))).subarray(0, 3).toString('latin1') === 'CDF';
+        const installed = installSimulationDataset(files, id, descriptor.displayName, entry, release, field.report, ranges, classic ? 'classic' : 'netcdf-4');
         promoted ||= installed.promoted;
         lines.push(`${id}: ${entry.dataset} dataset from the ${entry.model} simulation of ${entry.credit}, ${installed.minimum}-${installed.maximum} ${entry.displayUnits ?? entry.units}, ${release.license.name}${installed.promoted ? '; the page now opens on it' : ''}`); progress(lines.at(-1)!);
       }
