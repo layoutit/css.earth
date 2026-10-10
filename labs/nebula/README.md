@@ -64,7 +64,7 @@ labs/nebula/
 │   ├── lab/              # React shell, pages, state, server, CLI and host adapters
 │   └── reconstruction/   # Acquisition, registration, separation and scientific fitting
 ├── run.mts               # Research commands and test discovery
-├── models/               # Object recipes, evidence and compact research inputs
+├── models/               # Messier and candidate catalogues (objects live in src/objects/<id>/)
 ├── sources/              # Acquisition metadata and credits
 ├── docs/                 # Current workflow and archived research
 └── nebula_lab_refactor.md # Verified progress and remaining migration work

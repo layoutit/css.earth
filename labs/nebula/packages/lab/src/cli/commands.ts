@@ -4,6 +4,7 @@ export const labCommands: Record<string, string> = {
   "diff": "labs/nebula/packages/lab/src/cli/commands/object/diff.ts",
   "save": "labs/nebula/packages/lab/src/cli/commands/object/save.ts",
   "discard": "labs/nebula/packages/lab/src/cli/commands/object/discard.ts",
+  "regions": "labs/nebula/packages/lab/src/cli/commands/object/regions.ts",
   "bake": "labs/nebula/packages/lab/src/cli/commands/object/bake.ts",
   "verify": "labs/nebula/packages/lab/src/cli/commands/object/verify.ts",
   "publish": "labs/nebula/packages/lab/src/cli/commands/object/publish.ts",

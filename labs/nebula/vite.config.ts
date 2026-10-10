@@ -12,6 +12,7 @@ import { kinematicsPlugin } from './packages/lab/src/server/routes/kinematics.ts
 import { compilerPlugin } from './packages/lab/src/server/routes/compiler.ts';
 import { jointFitPlugin } from './packages/lab/src/server/routes/joint-fit.ts';
 import { platesPlugin } from './packages/lab/src/server/routes/plates.ts';
+import { regionsPlugin } from './packages/lab/src/server/routes/regions.ts';
 import { volumeOriginalPlugin } from './packages/lab/src/server/routes/volume-original.ts';
 import { labObjectPlugin } from './packages/lab/src/server/routes/lab-object.ts';
 
@@ -40,7 +41,7 @@ function workspaceSourcesPlugin(): Plugin {
 export default defineConfig({
   root: fileURLToPath(new URL('.', import.meta.url)),
   publicDir: false,
-  plugins: [workspaceSourcesPlugin(), tonePreparationPlugin(repositoryRoot), cloudDensityPreparationPlugin(repositoryRoot), starRemovalPlugin(repositoryRoot), reconstructionPlugin(repositoryRoot), shapeCloudPlugin(repositoryRoot), geometryDetectionPlugin(repositoryRoot), evidenceFusionPlugin(repositoryRoot), kinematicsPlugin(repositoryRoot), jointFitPlugin(repositoryRoot), compilerPlugin(repositoryRoot), platesPlugin(repositoryRoot), volumeOriginalPlugin(repositoryRoot), labObjectPlugin(repositoryRoot)],
+  plugins: [workspaceSourcesPlugin(), tonePreparationPlugin(repositoryRoot), cloudDensityPreparationPlugin(repositoryRoot), starRemovalPlugin(repositoryRoot), reconstructionPlugin(repositoryRoot), shapeCloudPlugin(repositoryRoot), geometryDetectionPlugin(repositoryRoot), evidenceFusionPlugin(repositoryRoot), kinematicsPlugin(repositoryRoot), jointFitPlugin(repositoryRoot), compilerPlugin(repositoryRoot), platesPlugin(repositoryRoot), regionsPlugin(repositoryRoot), volumeOriginalPlugin(repositoryRoot), labObjectPlugin(repositoryRoot)],
   define: { __NEBULA_REPO_ROOT__: JSON.stringify(repositoryRoot),
     __NEBULA_SOURCE_CATALOGUE_URL__: JSON.stringify(new URL('./packages/lab/sources/index.json', import.meta.url).href) },
   // Objects' recipes, descriptors and prepared files are data the lab edits and bakes, and a bake rebuilds the workspace

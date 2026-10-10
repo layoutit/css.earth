@@ -62,7 +62,7 @@ async function current(root: string, id: string): Promise<{ tracked: string; wor
   return { tracked, working, changes };
 }
 /** Writes a whole file or none of it: a reader never sees half a recipe. */
-async function replaceFile(path: string, text: string) {
+export async function replaceFile(path: string, text: string) {
   const pending = `${path}.${randomUUID()}.pending`;
   await writeFile(pending, text); await rename(pending, path);
 }

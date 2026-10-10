@@ -31,7 +31,7 @@ packages/
   lab/src/cli/                                 research commands and test discovery
   lab/browser/                                 real browser checks and helpers
   reconstruction/src/                         configured scientific methods
-models/                                      object recipes and source evidence
+models/                                      the Messier and candidate catalogues; each object's recipes and evidence are in src/objects/<id>/source/
 packages/lab/sources/                        acquisition metadata and credits
 run.mts                                      research CLI entrypoint
 ```
@@ -47,7 +47,7 @@ run.mts                                      research CLI entrypoint
 - Keep image/object choices in data. Shared algorithms must not gain per-image branches. Tests live beside their owning modules; application browser checks live in `packages/lab/browser/`.
 - Source originals and large native/intermediate outputs stay in the ignored local cache. Keep credits, source paths and origins, registration evidence and reproducible recipes with the model. No copies of large assets just to rearrange folders.
 - For LMC, keep only the selected VISTA, Horálek and WISE image candidates. Do not recommit retired cloud render banks or auto-discover old cache images. Preserve shared density/stars, coordinate-only calibration and research notes; new candidates require explicit scope.
-- Keep `models/lmc/bake.json` synchronized with deliberately accepted placements and material settings. Do not infer them from the newest cache or browser defaults. All derived images (including original-image previews, reference panels, separation previews and density/app slices) are ignored; compact grids, star inputs, recipes and registration metadata remain tracked. The full bake restores the configured app textures against immutable delivery hashes; `prepare:nebulae` verifies or rebuilds them before app startup/build.
+- Keep `src/objects/lmc-volume/source/bake.json` synchronized with deliberately accepted placements and material settings. Do not infer them from the newest cache or browser defaults. All derived images (including original-image previews, reference panels, separation previews and density/app slices) are ignored; compact grids, star inputs, recipes and registration metadata remain tracked. The full bake restores the configured app textures against immutable delivery hashes; `prepare:nebulae` verifies or rebuilds them before app startup/build.
 - Historical receipts keep their recorded paths and results. Resolve relocated historical paths at explicit loading boundaries; do not fabricate replacement provenance.
 
 ## Processing boundaries

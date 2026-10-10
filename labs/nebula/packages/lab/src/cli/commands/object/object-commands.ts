@@ -1,11 +1,13 @@
-/** The object commands an agent runs through `labs/nebula/run.mts`: `edit`, `diff`, `save`, `discard`, `bake`,
- * `verify` and `publish`, each on one `src/objects/<id>`. They call the same shared functions as the lab's buttons, and write their
+/** The object commands an agent runs through `labs/nebula/run.mts`: `edit`, `diff`, `save`, `discard`, `regions`,
+ * `bake`, `verify` and `publish`, each on one `src/objects/<id>`. They call the same shared functions as the lab's buttons, and write their
  * progress to the object's `.local/lab/progress.jsonl`, which the open lab shows live. */
 import { configuredPlateObjects, platePublished } from '../../../server/workflows/plates/bake.ts';
 import { bakeObject, objectPath } from '../../../server/workflows/plates/object-bake.ts';
 import { withProgress } from '../../../server/workflows/plates/progress.ts';
+import { readRegions, saveRegions } from '../../../server/workflows/plates/regions.ts';
 import { verifyObject } from '../../../server/workflows/plates/verify.ts';
 import { discardWorkingCopy, editWorkingCopy, readRecipeState, readSetArgument, saveWorkingCopy, type RecipeChange } from '../../../server/workflows/plates/working-copy.ts';
+import { readFileSync } from 'node:fs';
 
 const root = process.cwd();
 function objectArgument(usage: string, args: string[]): string {
@@ -44,6 +46,21 @@ export async function discard(args: string[]) {
   const id = objectArgument('discard <id>', args);
   const changes = await withProgress(root, id, 'discard', async stage => { stage('Removing the working copy', .5); return discardWorkingCopy(root, id); }, result('discarded'));
   console.log(changes.length ? `${id}: discarded ${changes.length} change${changes.length === 1 ? '' : 's'}` : `${id}: nothing to discard`);
+}
+export async function regions(args: string[]) {
+  const usage = 'regions <id> [--from <file.json>]';
+  const id = objectArgument(usage, args), extra = args.slice(1);
+  if (extra.length && (extra.length !== 2 || extra[0] !== '--from')) throw new TypeError(`Usage: ${usage}`);
+  if (extra.length) {
+    // The file holds the regions list, or { regions } as the lab's Copy gives it.
+    const value: unknown = JSON.parse(readFileSync(extra[1]!, 'utf8'));
+    const saved = await withProgress(root, id, 'regions', async stage => { stage('Writing source/regions.json', .5); return saveRegions(root, id, Array.isArray(value) ? value : (value as { regions?: unknown } | null)?.regions); },
+      list => ({ regions: list.length, summary: 'saved' }));
+    console.log(`${id}: saved ${saved.length} region${saved.length === 1 ? '' : 's'} to source/regions.json`);
+    return;
+  }
+  const found = await readRegions(root, id);
+  console.log(found.regions.length ? `${id}: ${found.regions.length} region${found.regions.length === 1 ? '' : 's'} on ${found.picture} (${found.width} × ${found.height})\n${found.regions.map(region => `  ${region.name}: ${region.points.length} points`).join('\n')}` : `${id}: no regions`);
 }
 export async function bake(args: string[]) {
   const usage = 'bake <id> [--draft]';

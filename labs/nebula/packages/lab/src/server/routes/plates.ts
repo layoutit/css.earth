@@ -46,32 +46,6 @@ export function platesPlugin(root: string): Plugin {
     server.middlewares.use('/__nebula/plate-status', (request, response) => {
       void (async () => { try { local(request); reply(response, 200, await plateStatus(root, objectOf(request.url))); } catch (error) { reply(response, 400, { error: String(error instanceof Error ? error.message : error) }); } })();
     });
-    // Regions drawn on the object's picture (`source/regions.json`, tracked: drawn by hand, read by the bake): GET the
-    // picture's address and size and the regions; POST { object, regions } to save them. A region is a name and a closed
-    // path of picture pixels.
-    server.middlewares.use('/__nebula/regions', (request, response) => {
-      void (async () => {
-        try {
-          local(request);
-          const { readFile, writeFile } = await import('node:fs/promises');
-          if (request.method === 'POST') {
-            let text = ''; for await (const chunk of request) { text += String(chunk); if (text.length > 1 << 22) throw new TypeError('Regions are too large.'); }
-            const body: unknown = JSON.parse(text);
-            if (!isRecord(body) || typeof body.object !== 'string' || !configured.includes(body.object) || !Array.isArray(body.regions)) throw new TypeError('POST { object, regions }.');
-            const regions = body.regions.map((region: unknown) => {
-              if (!isRecord(region) || typeof region.name !== 'string' || !/^[a-z0-9][a-z0-9-]*$/u.test(region.name) || !Array.isArray(region.points) || region.points.length < 3) throw new TypeError('A region is a lower-case name and at least three points.');
-              return { name: region.name, points: region.points.map((point: unknown) => { if (!Array.isArray(point) || point.length !== 2 || !point.every(v => typeof v === 'number' && Number.isFinite(v))) throw new TypeError('A point is [x, y] in picture pixels.'); return [Math.round(point[0] * 10) / 10, Math.round(point[1] * 10) / 10]; }) };
-            });
-            const recipe = JSON.parse(await readFile(resolve(root, body.object, 'source/recipe.json'), 'utf8')) as { source: { path: string; dimensions: [number, number] } };
-            await writeFile(resolve(root, body.object, 'source/regions.json'), `${JSON.stringify({ schema: 'cssearth-picture-regions@1', picture: recipe.source.path, dimensions: recipe.source.dimensions, regions }, null, 2)}\n`);
-            reply(response, 200, { saved: regions.length }); return;
-          }
-          const object = objectOf(request.url), recipe = JSON.parse(await readFile(resolve(root, object, 'source/recipe.json'), 'utf8')) as { source: { path: string; dimensions: [number, number] } };
-          const saved = await readFile(resolve(root, object, 'source/regions.json'), 'utf8').then(text => (JSON.parse(text) as { regions: unknown[] }).regions, () => []);
-          reply(response, 200, { image: `/@fs${resolve(root, object, 'source', recipe.source.path)}`, width: recipe.source.dimensions[0], height: recipe.source.dimensions[1], regions: saved });
-        } catch (error) { reply(response, 400, { error: String(error instanceof Error ? error.message : error) }); }
-      })();
-    });
     // `verify <id>`: the same checks the CLI runs (bank, inventory, git, working copy, draft).
     server.middlewares.use('/__nebula/plate-verify', (request, response) => {
       void (async () => { try { local(request); reply(response, 200, await verifyObject(root, objectIdOf(objectOf(request.url)))); } catch (error) { reply(response, 400, { error: String(error instanceof Error ? error.message : error) }); } })();
