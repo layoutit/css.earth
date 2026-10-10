@@ -10,7 +10,7 @@ Placement: the SIMBAD position, proper motion and radial velocity with the refer
 
 Radius: Radius 0.141 ± 0.007 solar radii measured with VLTI/AMBER by Demory et al. (2009), A&A 505, 205. Kervella, Thévenin and Lovis (2017) give 0.1542 ± 0.0045 from a radius to magnitude relation; the interferometric value is adopted.
 
-Rotation: no rotation axis or period is adopted here; see Known problems for what the cited paper measures The display axis is celestial north at the star, a convention.
+Rotation: the page draws no measured axis: the display axis is celestial north at the star, a convention. Klein et al. (2021), MNRAS 500, 1844 (https://arxiv.org/abs/2010.14311), Sect. 3.2, find an inclination of 47 ± 7° from the line of sight and a rotation period of 89.8 ± 4.0 d from the star's magnetic signatures in ten HARPS-Pol spectra; which way the axis points on the sky is not measured. The brightness maps are made at that inclination, and the pages of Proxima Centauri b and d place their orbits in the star's equatorial plane at it.
 
 Color dataset: The color of the Hubble Space Telescope's STIS spectrum of Proxima Centauri from 26 April 2015 (HST Low Resolution Stellar Library, programme 13776), the flux corrected for scattered light and an off-centre slit; Proxima flares, so this is one moment. It replaces the X-Shooter Spectral Library spectrum used before, whose color (#ffc073) disagreed with both this spectrum and Gaia. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.ts](../../../packages/bake/src/objects/stellar/stellar-photometric-color.ts)): **#ffd06e**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The catalogue swatch, the minimap and the navigation marker use the same color. [stellar-spectra/author.mts](../../../packages/telescope-cli/authoring/stellar-spectra/author.mts) writes the colors from these inputs, and `--check` recomputes them. Cross-check: Gaia DR3 XP spectrum, source 5853498713190525696 gives #ffcc6f, 4 levels from the dataset color in its most different channel (the threshold for agreement is 12).
 
@@ -20,7 +20,18 @@ Color dataset: The color of the Hubble Space Telescope's STIS spectrum of Proxim
 
 ## Evidence
 
-Run of 2026-09-21 (this version):
+Run of 2026-10-10: the four brightness maps were made again at 47°, the inclination Klein et al. (2021) publish, where they had been made at an assumed 60°. Nothing was fetched or judged again: [`reduce.mts --remap`](../../../packages/telescope-cli/src/archives/tess/reduce.mts) refits the light curves the reduction kept, and everything else its receipt holds (the period, Newton et al.'s verdict, each season's nights) is identical before and after. A star seen nearer its pole needs more contrast for the same light, so the maps are a little stronger, and the scatter the fit leaves is the same:
+
+| Season | Darkest and brightest at 60° | At 47° | Scatter left |
+|---|---|---|---|
+| 2014 | 98.8 and 101.2 % | 98.6 and 101.4 % | 0.57 % |
+| 2015 | 98.5 and 101.5 % | 98.2 and 101.8 % | 0.56 % |
+| 2016 | 98.2 and 101.8 % | 97.9 and 102.1 % | 0.79 % |
+| 2017 | 99.7 and 100.3 % | 99.6 and 100.4 % | 0.88 % |
+
+The shared scale of the four maps went from 98 to 102 % to 97.5 to 102.5 %. MEarth's server could not be asked again on this day (its certificate had expired on 9 October 2026), which is why the maps were made from the kept light curves.
+
+Run of 2026-09-21:
 
 - [`object-package-consistency.test.mts`](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) checks that the catalogue color #ffd06e is the color dataset's prepared color; `node packages/telescope-cli/authoring/stellar-spectra/author.mts --check` recomputes the color and marker from the pinned spectrum.
 
@@ -33,4 +44,4 @@ Proxima is a flare star; its flares are not drawn. Its two known planets, Proxim
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
-- **Brightness from MEarth.** Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. The map is of the first degree, one brighter and one darker side, which is what the sinusoid of the paper's model fixes: a finer pattern in the star's light, if there is one, is not drawn. No tilt of the axis is known, so the map is made at 60°, the middle tilt of axes that point at random. The map is of December 2016 to October 2017: spots come and go within weeks or months.
+- **Brightness from MEarth.** Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. The map is of the first degree, one brighter and one darker side, which is what the sinusoid of the paper's model fixes: a finer pattern in the star's light, if there is one, is not drawn. The map is made at a tilt of 47°, the inclination published for the star's axis: 47 ± 7 degrees from the line of sight, Klein et al. (2021), MNRAS 500, 1844, Sect. 3.2 (https://arxiv.org/abs/2010.14311): the inclination at which their magnetic maps best fit ten HARPS-Pol spectra of April to July 2017 (src/objects/proxima-centauri/source/measurements.json, spinInclinationPublishedDegrees). The page draws the axis by convention. The map is of December 2016 to October 2017: spots come and go within weeks or months.

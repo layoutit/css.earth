@@ -78,6 +78,8 @@
       "source": "VizieR J/ApJS/211/9/table1 (Variability in UV line emission of F-M stars), column Prot: 82.53 d, the row 0.4 arcsec from the star's J2000 place"
     }
   ],
+  "spinInclinationPublishedDegrees": 47,
+  "spinInclinationPublishedSource": "47 ± 7 degrees from the line of sight, Klein et al. (2021), MNRAS 500, 1844, Sect. 3.2 (https://arxiv.org/abs/2010.14311): the inclination at which their magnetic maps best fit ten HARPS-Pol spectra of April to July 2017",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

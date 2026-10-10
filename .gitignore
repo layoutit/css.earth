@@ -42,6 +42,8 @@ src/objects/*/source/science/tess/pdcsap/fine/*.dat
 src/objects/*/source/science/kepler/kepseismic/fine/*.dat
 src/objects/*/source/science/mearth/*.dat
 src/objects/*/source/science/mearth/fine/*.dat
+# The same tables for a map made at an inclination a paper publishes, filed under that tilt (tilt-47).
+src/objects/*/source/science/**/tilt-*/*.dat
 # A star's surface map fitted to its interferometry of several nights (70 KB a map); built by packages/telescope-cli/src/archives/interferometry/surface-star.mts, restored from the source mirror.
 src/objects/*/source/science/interferometry/*.dat
 # M1-67's model grid (17 MB); built by packages/bake/authoring/m1-67/shell-grid.mts, restored from the source mirror.
