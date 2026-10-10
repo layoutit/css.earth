@@ -20,8 +20,9 @@
  * only CPU-bound step, PREPARATIONS_AT_ONCE objects at a time. Measured on 57 objects (2026-09-24): one call per object and
  * per tool spent about 20 s of start-up on each, an hour in all; this order takes minutes. */
 import { spawn } from 'node:child_process';
-import { access } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { requireRecord, requireString } from '@cssearth/core';
 import { projectRoot } from '@cssearth/core/node';
 
 export interface PreparationOptions { readonly reuseImages?: boolean; readonly addDatasets?: boolean; readonly root?: string }
@@ -40,6 +41,19 @@ const node = (...args: string[]) => ['node', ...args];
 /** The running site the arrival billboards are photographed from: `pnpm dev` by default, another with CSSEARTH_BILLBOARD_ORIGIN. */
 export const billboardOrigin = () => process.env.CSSEARTH_BILLBOARD_ORIGIN ?? 'http://127.0.0.1:4210';
 const exists = (path: string) => access(path).then(() => true, () => false);
+
+/** What the prepared world context holds, from the root object's `prepared/world-index.json` and `world.json`: its `bodies`
+ * (the index's order, each with a row in a world file) and every id it `knows` (those, the objects with a file of bodies
+ * and the focus). Null while no world is prepared. `@cssearth/objects` is loaded here, after the builds step rebuilt it. */
+async function preparedWorld(root: string): Promise<{ readonly bodies: ReadonlySet<string>; readonly knows: ReadonlySet<string> } | null> {
+  const { OBJECT_TREE_ROOT, parsePreparedWorldIndex } = await import('@cssearth/objects');
+  const read = (name: string) => readFile(resolve(root, 'src/objects', OBJECT_TREE_ROOT, 'prepared', name), 'utf8').then((text): unknown => JSON.parse(text), () => null);
+  const [index, summary] = await Promise.all([read('world-index.json'), read('world.json')]);
+  if (index === null || summary === null) return null;
+  const { order, files } = parsePreparedWorldIndex(index);
+  const focus = requireString(requireRecord(requireRecord(summary, 'world summary').focus, 'world summary focus').id, 'world summary focus id');
+  return { bodies: new Set(order), knows: new Set([...order, ...files, focus]) };
+}
 
 /** The chain, in order. A step's purpose says what the next one needs from it. */
 export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<PreparationStep[]>([
@@ -60,10 +74,18 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'audit', purpose: 'check the prepared presentation against its descriptor', scope: 'each', commands: async ([id]) => [node('packages/bake/cli/check-prepared-presentation.mts', '--object', id!)] },
   { name: 'text', purpose: 'prepare the reader text within its budgets', scope: 'ids', commands: async ids => [node('site/build/prepare/authored/prepare-text.mts', ...ids)] },
   { name: 'markers', purpose: 'draw the navigation markers', scope: 'ids', commands: async ids => [node('packages/bake/cli/prepare-navigation.mts', ...ids)] },
+  // A page selects its body in the prepared world context and never becomes ready when the context does not hold it, so a new body
+  // cannot be photographed before the world is placed: 17 new bodies each waited out the renderer's 30 s (2026-10-10). The world is
+  // placed here for such a body, without the arrival view its photograph gives the catalogue; the world step places it again with it.
+  // A body the context holds keeps its one pass at the world step. A pass took 11 s for 4,501 bodies (2026-10-09).
+  { name: 'placement', purpose: 'place a body the world context does not hold yet, so its page loads for the photograph', scope: 'once', commands: async (ids, { root = projectRoot(import.meta.url) } = {}) => {
+    const world = await preparedWorld(root);
+    return world && ids.every(id => world.knows.has(id)) ? [] : [['pnpm', 'prepare:world-context']];
+  } },
   // Every body arrives through its billboard: without one the camera flies in onto a mesh still loading. The renderer photographs the
   // delivered body in the running site and skips a body whose prepared runtime has not changed; the catalogue then carries the arrival
   // view the world files read.
-  { name: 'billboard', purpose: 'photograph the arrival billboard from the running site, then refresh the catalogue with it', scope: 'ids', commands: async ids => {
+  { name: 'billboard', purpose: 'photograph the arrival billboard from the running site, then refresh the catalogue with it', scope: 'ids', commands: async (ids, { root = projectRoot(import.meta.url) } = {}) => {
     const origin = billboardOrigin();
     // A dev server's first request compiles the page: it took over 5 s right after a restart (2026-09-27), so wait up to a minute.
     if (!await fetch(origin, { signal: AbortSignal.timeout(60_000) }).then(response => response.ok, () => false)) throw new Error(`No site answers at ${origin}: start it with pnpm dev (or set CSSEARTH_BILLBOARD_ORIGIN), then resume from the billboard step.`);
@@ -74,9 +96,19 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
       const status = await fetch(new URL(`/${id}/`, origin), { signal: AbortSignal.timeout(120_000) }).then(response => response.status, () => 0);
       if (status === 404) throw new Error(`The site at ${origin} does not know ${id} (404 for /${id}/): it was started before the object existed. Restart it, then resume from the billboard step.`);
     }
+    // The site reads the world index once, when it starts (site/directory/world-context-plan.mts), and names a body's world files
+    // from it in the body's entry (`world`, site/pages/objects/[id]/entry.json.ts). A site started before the placement step placed
+    // a body names none for it, and never serves a world file the placement added: TrES-2 b's row went into its new system's file,
+    // which that site does not list (2026-10-09).
+    const bodies = (await preparedWorld(root))?.bodies;
+    for (const id of ids) {
+      if (!bodies?.has(id)) continue;
+      const entry: unknown = await fetch(new URL(`/objects/${id}/entry.json`, origin), { signal: AbortSignal.timeout(120_000) }).then(response => response.ok ? response.json() : null, () => null);
+      if (entry !== null && !Object.hasOwn(requireRecord(entry, `/objects/${id}/entry.json`), 'world')) throw new Error(`The site at ${origin} read the world context before ${id} was placed in it (/objects/${id}/entry.json names no world file), so it cannot serve the world files placed since. Restart it, then resume from the billboard step.`);
+    }
     return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('site/build/prepare/catalog/prepare-catalog.mts')];
   } },
-  { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
+  { name: 'world', purpose: 'place the object in the world context, with the arrival view the catalogue now carries', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
   // A star or planet that gains orbiting bodies hosts a system, an object of its own whose page its members link to; its package is read
   // from the world's orbit graph, so it follows the world step. Every system is rewritten: unchanged ones come out the same, in a second.
   // The systems step moves each host inside its system in the object tree, and the world files follow the tree, so the world is placed again.
