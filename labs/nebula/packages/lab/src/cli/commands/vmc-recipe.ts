@@ -4,7 +4,7 @@ function record(v: unknown): Record<string, unknown> {
     if (!v || typeof v !== 'object' || Array.isArray(v)) throw Error('Invalid recipe object');
     return Object.fromEntries(Object.entries(v));
 }
-export async function readVmcRecipe(path = 'labs/nebula/models/smc/vmc/recipe.json') {
+export async function readVmcRecipe(path = 'src/objects/smc-volume/source/vmc/recipe.json') {
     const root = record(JSON.parse(await readFile(path, 'utf8')));
     if (root.schema !== 'cssearth-red-clump-intake@1') throw Error('Unsupported intake recipe');
     const a = record(root.acquisition), c = record(root.calibration);

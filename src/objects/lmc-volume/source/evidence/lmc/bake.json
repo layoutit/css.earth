@@ -3,23 +3,23 @@
   "id": "lmc-volume",
   "subjectId": "lmc-clouds",
   "densityObjects": [
-    "labs/nebula/models/lmc/full-density",
-    "labs/nebula/models/smc/full-density"
+    "src/objects/lmc-volume/source/full-density",
+    "src/objects/smc-volume/source/full-density"
   ],
   "catalogue": {
-    "path": "labs/nebula/models/image-candidates.json"
+    "path": "src/objects/lmc-volume/source/image-candidates.json"
   },
   "separationPlan": {
-    "path": "labs/nebula/models/lmc/star-separation/plan.json"
+    "path": "src/objects/lmc-volume/source/star-separation/plan.json"
   },
   "stars": {
-    "path": "labs/nebula/models/lmc/stars/prepared/stars.json"
+    "path": "src/objects/lmc-volume/source/stars/prepared/stars.json"
   },
   "starAlignment": {
-    "path": "labs/nebula/models/lmc/stars/source/alignment.json"
+    "path": "src/objects/lmc-volume/source/stars/source/alignment.json"
   },
   "promotion": {
-    "path": "labs/nebula/models/lmc/app-lenses.json"
+    "path": "src/objects/lmc-volume/source/app-lenses.json"
   },
   "environment": {
     "pythonVersions": [
@@ -129,6 +129,6 @@
     }
   },
   "starCalibration": {
-    "path": "labs/nebula/models/lmc/stars/source/catalogue.json"
+    "path": "src/objects/lmc-volume/source/stars/source/catalogue.json"
   }
 }

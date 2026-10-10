@@ -3,12 +3,13 @@ import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { readObservationStructureRecipe, readStructureObservations, loadObservationDiffuse } from '../../server/workflows/emission-inference/observation-structure-source.ts';
 import { writeStructureInspection, workingRasterToFrame } from '../../server/workflows/emission-inference/structure-inspection.ts';
+import { objectScratch } from '../../resources/model-paths.ts';
 
 const [recipePath, extra] = process.argv.slice(2);
 if (!recipePath || extra) throw new TypeError('Usage: prepare-observation-structures <recipe.json>');
 const config = readObservationStructureRecipe(JSON.parse(await readFile(recipePath, 'utf8')));
 const inputs = await readStructureObservations(config.observationRecipe, config.observationCatalogue);
-const directory = resolve('.local/nebula-lab/observations', inputs.recipe.id, 'structures');
+const directory = resolve(objectScratch(inputs.recipe.id, 'observations', inputs.recipe.id, 'structures'));
 await mkdir(directory, { recursive: true });
 // One run directory per image and extraction; earlier runs stay readable by the viewers that opened them.
 const run = `analysis-${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z')}`;

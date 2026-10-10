@@ -20,7 +20,7 @@ The position, distance and velocity that place M85 are cited on [its own page's 
 
 ## Method
 
-The Nebula Lab recipe is [labs/nebula/models/m85/experiment.json](../../../labs/nebula/models/m85/experiment.json);
+The Nebula Lab recipe is [src/objects/m85-volume/source/experiment.json](../../../src/objects/m85-volume/source/experiment.json);
 `node labs/nebula/run.mts prepare-emission` runs it, and [delivery.json](source/delivery.json) places the result. It is
 [M49's route](../m49-volume/README.md#method) with M85's measurements.
 

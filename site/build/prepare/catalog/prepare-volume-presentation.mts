@@ -1,4 +1,4 @@
-import { readVolumeAttachment, readVolumePresentationPreviews, hasVolumePresentationSource, PREPARED_VOLUME_PRESENTATION_SCHEMA, validatePreparedImageLayerBank, parseVolumePresentationSource, parseVolumeSourceManifest, readObjectContentDatasets, isTrackedVolumeSourcePreview, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
+import { readVolumeAttachment, readVolumePresentationPreviews, hasVolumePresentationSource, PREPARED_VOLUME_PRESENTATION_SCHEMA, validatePreparedImageLayerBank, parseVolumePresentationSource, parseVolumeSourceManifest, readObjectContentDatasets, isTrackedVolumeSourcePreview, scratchSourceCachePath, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -144,7 +144,7 @@ export async function preparePreview(root: string, pin: Preview, input: (path: s
     // composes the sky bands from the survey archive or downloads the publisher image, which stays the provenance
     // origin either way.
     if (mirrorOrigin) {
-      const mirrorUrl = sourceCacheUrl(mirrorOrigin, 'local', pin.path.slice('.local/'.length));
+      const mirrorUrl = sourceCacheUrl(mirrorOrigin, 'local', scratchSourceCachePath(pin.path));
       bytes = await fetchWithRetry(fetcher, mirrorUrl, { idleMs: 5000, attempts: 1 }).catch(() => null);
     }
     // The survey bands download into the shared cache; only the recipe and tile lists are source closure.

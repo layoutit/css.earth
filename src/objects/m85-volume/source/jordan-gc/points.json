@@ -29,7 +29,7 @@
       "axisPositionAngleDeg": 97.63,
       "cutoffHalfLightRadii": 4.697,
       "source": "kormendy-2009-virgo-ellipticals",
-      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/m85/experiment.json shapePrior): Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4382 (n = 6.12, half-light radius 128.89 arcsec, 11.1 kpc at 17.7 Mpc), axis along M85's minor axis in the plane of the sky, ending at 4.697 half-light radii, where their Table 3 profile stops. Each cluster's depth is drawn from it, not measured."
+      "basis": "The spheroid the volume's light is spread through (src/objects/m85-volume/source/experiment.json shapePrior): Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4382 (n = 6.12, half-light radius 128.89 arcsec, 11.1 kpc at 17.7 Mpc), axis along M85's minor axis in the plane of the sky, ending at 4.697 half-light radii, where their Table 3 profile stops. Each cluster's depth is drawn from it, not measured."
     }
   },
   "source": "jordan-2009-acsvcs-globular-clusters",

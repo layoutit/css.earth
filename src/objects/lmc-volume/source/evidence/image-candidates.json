@@ -3,13 +3,13 @@
   "maxPixels": 4096,
   "targets": [
     {
-      "directory": "labs/nebula/models/lmc/candidates",
-      "referenceObject": "labs/nebula/models/lmc/full-density/object.json",
+      "directory": "src/objects/lmc-volume/source/candidates",
+      "referenceObject": "src/objects/lmc-volume/source/full-density/object.json",
       "images": [
         {
           "id": "vista-infrared",
           "label": "ESO VISTA · infrared, star-aligned",
-          "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
+          "path": "src/objects/lmc-volume/.local/image-candidates/vista/eso1914a-10k.tif",
           "url": "https://cdn.eso.org/images/publicationtiff10k/eso1914a.tif",
           "sourcePageUrl": "https://www.eso.org/public/images/eso1914a/",
           "credit": "ESO/VMC Survey",
@@ -82,7 +82,7 @@
         {
           "id": "horalek-widefield",
           "label": "Horálek · optical wide field",
-          "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
+          "path": "src/objects/lmc-volume/.local/new-references/iotw2547a.jpg",
           "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2547a.jpg",
           "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
           "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
@@ -154,7 +154,7 @@
         {
           "id": "wise-wide-infrared",
           "label": "NASA WISE · 24° infrared candidate",
-          "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+          "path": "src/objects/lmc-volume/.local/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
           "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
           "sourcePageUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
           "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
@@ -189,7 +189,7 @@
         }
       ],
       "alignment": {
-        "path": "labs/nebula/models/lmc/overlays/source/manual-placement.json"
+        "path": "src/objects/lmc-volume/source/overlays/source/manual-placement.json"
       }
     }
   ]

@@ -29,7 +29,7 @@
       "axisPositionAngleDeg": 196.0,
       "cutoffHalfLightRadii": 5.251,
       "source": "kormendy-2009-virgo-ellipticals",
-      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/m60/experiment.json shapePrior): Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4649 (n = 5.36, half-light radius 132.05 arcsec, 10.7 kpc at 16.7 Mpc), axis along M60's minor axis in the plane of the sky, ending at 5.251 half-light radii, where their Table 3 profile stops. Each cluster's depth is drawn from it, not measured."
+      "basis": "The spheroid the volume's light is spread through (src/objects/m60-volume/source/experiment.json shapePrior): Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4649 (n = 5.36, half-light radius 132.05 arcsec, 10.7 kpc at 16.7 Mpc), axis along M60's minor axis in the plane of the sky, ending at 5.251 half-light radii, where their Table 3 profile stops. Each cluster's depth is drawn from it, not measured."
     }
   },
   "source": "jordan-2009-acsvcs-globular-clusters",

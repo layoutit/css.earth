@@ -28,7 +28,7 @@ async function fixture(changeResult?: (result: any) => void) {
   await write(source.path, sourceBytes); await write(modelPath, 'synthetic model'); await write('labs/nebula/packages/reconstruction/src/star-removal/star-removal.py', script);
   await json('recipe.json', recipe); await write('proof/gate.json', gate); await json('proof/alignment.json', report);
   await json('catalogue.json', { targets: [{ directory: 'models/test', images: [{ id: request.imageId, ...source, wcs: geometry.wcs }] }] });
-  await json('labs/nebula/packages/lab/src/state/subjects.json', [{ id: 'test', density: { processingPlan: planPath } }]);
+  await json('labs/nebula/packages/lab/src/state/processing-subjects.json', [{ id: 'test', density: { processingPlan: planPath } }]);
   await json(planPath, { schema: 'cssearth-image-processing-plan@1', catalogue: 'catalogue.json',
     alignmentReport: { path: 'proof/alignment.json' }, selections: [{ id: request.imageId, recipe: 'recipe.json' }] });
   await write('.local/approved/diffuse.png', sourceBytes);
@@ -111,7 +111,7 @@ test('fresh NOX Apply works without legacy detections or separated files', async
 test('an imported candidate needs no trial selection, alignment gate, recipe or existing star layers', async () => {
   const f = await fixture();
   try {
-    await f.json('labs/nebula/models/image-candidates.json', JSON.parse(await readFile(join(f.root, 'catalogue.json'), 'utf8')));
+    await f.json('src/objects/lmc-volume/source/image-candidates.json', JSON.parse(await readFile(join(f.root, 'catalogue.json'), 'utf8')));
     for (const path of [planPath, 'recipe.json', 'proof', '.local/approved'])
       await rm(join(f.root, path), { recursive: true });
     const overview = await f.remove({ ...request, action: 'overview' }) as any;
@@ -161,7 +161,7 @@ test('16-bit imported images get a separate full-size RGB8 input while their ori
     const original = await sharp(f.sourceBytes).toColorspace('rgb16').tiff({ compression: 'none' }).toBuffer();
     assert.equal((await sharp(original).metadata()).depth, 'ushort');
     await f.write('.local/color16.tif', original);
-    await f.json('labs/nebula/models/image-candidates.json', { targets: [{ directory: 'models/test',
+    await f.json('src/objects/lmc-volume/source/image-candidates.json', { targets: [{ directory: 'models/test',
       images: [{ id: request.imageId, path: '.local/color16.tif' }] }] });
     await rm(join(f.root, planPath));
     const overview = await f.remove({ ...request, action: 'overview' }) as any;

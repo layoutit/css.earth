@@ -29,7 +29,7 @@
     "summary": {
       "schema": "cssearth-nebula-verification@1",
       "recipe": {
-        "path": "labs/nebula/models/lmc/bake.json"
+        "path": "src/objects/lmc-volume/source/bake.json"
       },
       "images": 3,
       "densitySlices": 288,
@@ -43,7 +43,7 @@
     "mutations": [
       {
         "case": "missing-density",
-        "path": "labs/nebula/models/lmc/full-density/prepared/slices/x/16.webp",
+        "path": "src/objects/lmc-volume/source/full-density/prepared/slices/x/16.webp",
         "rejected": true,
         "notRepaired": true
       },

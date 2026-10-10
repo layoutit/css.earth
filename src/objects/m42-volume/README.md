@@ -21,7 +21,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 ## Evidence
 
 - The [object descriptor](object.json) pins the installed bank; [delivery inputs](source/delivery.json) record saved controls and catalogue preparation. The source manifest distinguishes those inputs from generated delivery bytes.
-- The [fixed lab processing account](../../../labs/nebula/models/m42/README.md) records both-dataset browser checks, native stellar-light accounting and coherent-front projection comparisons. Its older result identities are historical, not a fresh acceptance of the current delivery.
+- The [fixed lab processing account](../../../src/objects/m42-volume/source/README.md) records both-dataset browser checks, native stellar-light accounting and coherent-front projection comparisons. Its older result identities are historical, not a fresh acceptance of the current delivery.
 - This documentation review checks provenance and interpretation; it does not establish a cold replay, independent gas-depth validation or material acceptance.
 
 ## Known problems
@@ -34,7 +34,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 <details>
 <summary>Methods and historical comparisons</summary>
 
-The [physical ledger](../../../labs/nebula/models/m42/physical-evidence.json) separates observed positions, published models and authored parameters; [depth-model.json](../../../labs/nebula/models/m42/depth-model.json) is the runnable hypothesis. The [fixed lab README](../../../labs/nebula/models/m42/README.md) preserves the earlier 355-support and saved-100%-detail comparisons, including their normalized-image error limits. General preparation is documented in the [nebula guide](../../../docs/nebulae/README.md).
+The [physical ledger](../../../src/objects/m42-volume/source/physical-evidence.json) separates observed positions, published models and authored parameters; [depth-model.json](../../../src/objects/m42-volume/source/depth-model.json) is the runnable hypothesis. The [fixed lab README](../../../src/objects/m42-volume/source/README.md) preserves the earlier 355-support and saved-100%-detail comparisons, including their normalized-image error limits. General preparation is documented in the [nebula guide](../../../docs/nebulae/README.md).
 
 </details>
 

@@ -50,7 +50,7 @@ Each tile is the object's own page in headless Chromium at 1440 × 900, device p
 
 - `remove-stars` in the Nebula Lab ([star removal](../../labs/nebula/docs/star-removal.md)): the star-free copy of a bank's picture. NOX removes the stars of the 15 flat galaxy pictures and the nebula photographs before the bake. On a galaxy the glow it leaves around a bright star is measured and filled from the ring around it. On M76 and M97 a second pass over a quarter-size copy takes the saturated stars the first pass leaves. Before, only stars Gaia certifies as Milky Way stars were removed, and the brightest stayed.
 
-The six volumes use the Nebula Lab route of [M49](../../src/objects/m49-volume/README.md#method) unchanged; their recipes are `labs/nebula/models/m59` to `m89`.
+The six volumes use the Nebula Lab route of [M49](../../src/objects/m49-volume/README.md#method) unchanged; their recipes are `src/objects/m59-volume/source` to `m89`.
 
 ## Reproduce
 
@@ -72,7 +72,7 @@ node packages/bake/cli/prepare-object.mts m51
 An elliptical's volume, from its lab recipe:
 
 ```sh
-node labs/nebula/run.mts prepare-emission labs/nebula/models/m60/experiment.json
+node labs/nebula/run.mts prepare-emission src/objects/m60-volume/source/experiment.json
 node labs/nebula/run.mts prepare-nebula-objects --research --object=m60-volume
 node packages/bake/cli/prepare-nebulae.mts --object=m60-volume
 node packages/bake/cli/prepare-catalogue-points.mts src/objects/m60-volume jordan-gc

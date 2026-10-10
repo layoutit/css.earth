@@ -10,7 +10,7 @@
       "title": "DESI Legacy Surveys color (g, r, i, z)",
       "credit": "DESI Legacy Imaging Surveys DR10; color HiPS by CDS (CNRS/Unistra)",
       "displayCredit": "Legacy Surveys / CDS",
-      "acquisition": "A 3000 x 3000 px tangent-plane cutout of the color HiPS CDS/P/DESI-Legacy-Surveys/DR10/color from the CDS hips2fits service, downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/m49/experiment.json) into its ignored cache.",
+      "acquisition": "A 3000 x 3000 px tangent-plane cutout of the color HiPS CDS/P/DESI-Legacy-Surveys/DR10/color from the CDS hips2fits service, downloaded unchanged by the Nebula Lab recipe (src/objects/m49-volume/source/experiment.json) into its ignored cache.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -1,0 +1,120 @@
+{
+  "schema": "cssearth-sky-band-grid-transfer@1",
+  "pass": true,
+  "checks": {
+    "referenceCatalogueGatePassed": true,
+    "identicalRecipeGrid": true,
+    "identicalWcs": true
+  },
+  "source": {
+    "id": "smc-herschel-dust",
+    "path": "src/objects/smc-volume/.local/intake/sky-bands/smc-herschel-dust.skybands.png",
+    "skyBands": {
+      "path": "src/objects/smc-volume/source/candidates/source/sky-bands/smc-herschel-dust.json"
+    },
+    "recipeFiles": [
+      {
+        "path": "src/objects/smc-volume/source/candidates/source/sky-bands/smc-herschel-dust.json",
+        "bytes": 501
+      }
+    ]
+  },
+  "reference": {
+    "id": "smc-wise-stellar",
+    "path": "src/objects/smc-volume/.local/intake/sky-bands/smc-wise-stellar.skybands.png",
+    "skyBands": {
+      "path": "src/objects/smc-volume/source/candidates/source/sky-bands/smc-wise-stellar.json"
+    },
+    "catalogueGate": {
+      "path": "src/objects/smc-volume/source/registration/smc-wise-stellar-catalogue-gate.json"
+    }
+  },
+  "grid": {
+    "width": 4000,
+    "height": 4000,
+    "fovDeg": 10,
+    "centerIcrsDegrees": [
+      13.19,
+      -72.83
+    ]
+  },
+  "wcs": {
+    "projection": "TAN",
+    "coordinateFrame": "ICRS",
+    "referenceDimension": [
+      4000,
+      4000
+    ],
+    "referencePixel": [
+      2000,
+      2000
+    ],
+    "referenceValueDeg": [
+      13.19,
+      -72.83
+    ],
+    "scaleDeg": [
+      -0.0025063655876377947,
+      0.0025063655876377947
+    ],
+    "rotationDeg": 0
+  },
+  "stars": {
+    "query": {
+      "path": "src/objects/smc-volume/source/registration/allwise-query.json"
+    },
+    "path": "src/objects/smc-volume/.local/registration/catalogue/allwise-bright.csv"
+  },
+  "diagnostic": {
+    "receipt": {
+      "path": "src/objects/smc-volume/source/registration/smc-herschel-dust-catalogue-diagnostic.json"
+    },
+    "pass": false,
+    "gates": {
+      "uniqueMatches": true,
+      "allFourQuadrants": true,
+      "halfImageHull": false,
+      "median": false,
+      "p90": false,
+      "chanceExcess": false
+    },
+    "uniqueMatchedStars": 329,
+    "reservedCheckResidualNativeWisePixels": {
+      "median": 1.660072431380296,
+      "p90": 2.266636916577721,
+      "max": 2.4988720275128884
+    },
+    "shiftedControls": [
+      {
+        "offsetNativePixels": [
+          40,
+          0
+        ],
+        "matchesWithin2_5Pixels": 332,
+        "matchesWithinChanceRadius": 32
+      },
+      {
+        "offsetNativePixels": [
+          0,
+          40
+        ],
+        "matchesWithin2_5Pixels": 360,
+        "matchesWithinChanceRadius": 22
+      },
+      {
+        "offsetNativePixels": [
+          100,
+          -70
+        ],
+        "matchesWithin2_5Pixels": 314,
+        "matchesWithinChanceRadius": 28
+      }
+    ],
+    "detectedStars": 35065
+  },
+  "interpretation": "The composite is pinned to bytes that only the sky band compositor produces after checking every hips2fits band header against this exact TAN grid (no rotation, distortion or unit cards). The grid itself is qualified by the reference composite, which passed the unchanged fixed-WCS catalogue gate on the identical grid.",
+  "limitations": [
+    "The transfer qualifies the request grid and its pixel convention. It does not independently measure this survey's own HiPS astrometry; the diagnostic receipt records what its own stars show.",
+    "Catalogue and reference image share the AllWISE mission."
+  ]
+}

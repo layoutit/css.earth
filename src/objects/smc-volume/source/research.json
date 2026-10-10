@@ -1,0 +1,73 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "smc-volume",
+  "name": "Small Magellanic Cloud",
+  "type": "galaxy",
+  "papers": [
+    {
+      "label": "Tatton et al. (2021) red clump",
+      "url": "https://doi.org/10.1093/mnras/staa3857",
+      "record": "src/sources/tatton-2021-smc-reddening.json"
+    },
+    {
+      "label": "Bonanos et al. (2010)",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/140/416",
+      "record": "src/sources/bonanos-2010-smc.json"
+    },
+    {
+      "label": "Nidever et al. (2011)",
+      "url": "https://arxiv.org/abs/1104.2594",
+      "record": "src/sources/nidever-2011-smc-periphery.json"
+    }
+  ],
+  "models": [
+    {
+      "label": "Garver, Nidever, Debattista & Deg simulation",
+      "url": "https://doi.org/10.5061/dryad.1vhhmgr82",
+      "record": "src/sources/garver-magellanic-simulation.json"
+    }
+  ],
+  "images": [
+    {
+      "label": "Horálek optical, iotw2615a",
+      "url": "https://noirlab.edu/public/images/iotw2615a/",
+      "record": "src/sources/noirlab-iotw2615a.json"
+    },
+    {
+      "label": "ESO VISTA, eso1714a",
+      "url": "https://www.eso.org/public/images/eso1714a/",
+      "record": "src/sources/eso-eso1714a.json"
+    },
+    {
+      "label": "SMASH, noirlab2030b",
+      "url": "https://noirlab.edu/public/images/noirlab2030b/",
+      "record": "src/sources/noirlab-noirlab2030b.json"
+    },
+    {
+      "label": "DSS2, heic0514c",
+      "url": "https://esahubble.org/images/heic0514c/",
+      "record": "src/sources/esahubble-heic0514c.json"
+    },
+    {
+      "label": "AllWISE color HiPS through CDS",
+      "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FallWISE%2Fcolor&get=record&fmt=json",
+      "record": "src/sources/cds-hips-spitzer-irac.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "none",
+    "label": "None (density model)"
+  },
+  "velocity": {
+    "available": false,
+    "items": []
+  },
+  "method": {
+    "chosen": "density",
+    "status": "experiment",
+    "available": [
+      "paper-surfaces"
+    ],
+    "geometry": []
+  }
+}

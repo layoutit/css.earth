@@ -8,7 +8,7 @@ import { readSampledRecipe } from '../../../features/sampled-prior/model.ts';
 const points = new Float32Array([-1.2, 0, -5, 1, 1.2, 0, 5, 1, -15, -15, -15, 1e-10, 15, 15, 15, 1e-10]);
 function recipe() {
   return readSampledRecipe({ schema: 'cssearth-sampled-nebula@2', id: 'material-example', centerIcrsDegrees: [80, 22],
-    evidence: { path: 'labs/nebula/models/example/physical-evidence.json' },
+    evidence: { path: 'src/objects/example-volume/source/physical-evidence.json' },
     source: { path: '.local/nebula-lab/physical/example/points.fits',
       url: 'https://example.org/points.fits', width: 4, height: 4, columns: [0, 1, 2, 3] },
     rawToArcsec: [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0],

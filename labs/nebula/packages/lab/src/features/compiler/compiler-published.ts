@@ -9,7 +9,7 @@ interface Pin { path: string }
 interface Published { recipePath: string; result: Pin; inputs: Pin[] }
 const record = coreIsRecord;
 function pin(value: unknown): Pin {
-  if (!record(value) || typeof value.path !== 'string' || !/^(?:labs\/nebula\/|\.local\/nebula-lab\/)/.test(value.path) || Object.keys(value).join() !== 'path' ||
+  if (!record(value) || typeof value.path !== 'string' || !/^(?:labs\/nebula\/|src\/objects\/[a-z0-9-]+\/(?:source|\.local)\/|\.local\/nebula-lab\/)/.test(value.path) || Object.keys(value).join() !== 'path' ||
       value.path.split('/').some(part => part === '..' || part === '.' || part === '') || /[\\?#\s]/.test(value.path))
     throw new TypeError(`Invalid prepared compiler input: ${JSON.stringify(value)}`);
   return { path: value.path };
@@ -47,7 +47,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     const depth: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.depthRecipe)![1]));
     const admitted = readPublishedDepthRecipe(depth, recipe.id);
     const evidence = pin(admitted.evidence);
-    if (!evidence.path.startsWith('labs/nebula/models/') || !publication.inputs.some(source => source.path === evidence.path))
+    if (!/^src\/objects\/[a-z0-9-]+\/source\//.test(evidence.path) || !publication.inputs.some(source => source.path === evidence.path))
       throw new Error('Prepared nebula receipt does not pin the declared depth evidence.');
     const ledger: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === evidence.path)![1]));
     if (!record(ledger) || ledger.schema !== NEBULA_PHYSICAL_EVIDENCE_SCHEMA || ledger.subjectId !== recipe.id ||
@@ -67,7 +67,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     if (!record(method.photometricPrior))
       throw new Error('Prepared nebula omits its configured photometric model.');
     const evidence = pin(admitted.evidence), snapshot = pin(method.photometricPrior.recipe), evidenceSnapshot = pin(method.photometricPrior.evidence);
-    if (!evidence.path.startsWith('labs/nebula/models/') ||
+    if (!/^src\/objects\/[a-z0-9-]+\/source\//.test(evidence.path) ||
         !publication.inputs.some(input => input.path === evidence.path))
       throw new Error('Prepared photometric model differs from its configured evidence.');
     await Promise.all([checkedBytes(snapshot, fetchLocal), checkedBytes(evidenceSnapshot, fetchLocal)]);
@@ -88,7 +88,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   if (depthInputs) {
     if (!record(method.physicalDepth)) throw new Error('Prepared nebula method omits the configured depth sources.');
     const recipeSnapshot = pin(method.physicalDepth.recipe), evidenceSnapshot = pin(method.physicalDepth.evidence);
-    if (!recipeSnapshot.path.startsWith('.local/nebula-lab/') || !evidenceSnapshot.path.startsWith('.local/nebula-lab/'))
+    if (!/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(recipeSnapshot.path) || !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(evidenceSnapshot.path))
       throw new Error('Prepared nebula method uses different depth sources. Compile again.');
     await Promise.all([checkedBytes(recipeSnapshot, fetchLocal), checkedBytes(evidenceSnapshot, fetchLocal)]);
   }

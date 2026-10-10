@@ -32,7 +32,7 @@ export async function bakeNebula(root: string, args: string[]) {
   const catalogue = JSON.parse((await pinned(root, recipe.catalogue)).toString());
   for (const image of selected) assert.equal(catalogue.targets.flatMap((target: any) => target.images).filter((input: any) => input.id === image.imageId).length, 1);
   const promotion = JSON.parse((await pinned(root, recipe.promotion)).toString()) as VolumeDatasetPromotion;
-  const subject = (await json(resolve(root, 'labs/nebula/packages/lab/src/state/subjects.json'))).find((value: any) => value.id === recipe.subjectId);
+  const subject = (await json(resolve(root, 'labs/nebula/packages/lab/src/state/processing-subjects.json'))).find((value: any) => value.id === recipe.subjectId);
   assert.equal(subject?.stars, recipe.stars.path);
   assert.deepEqual(subject.density.starAlignmentReference, recipe.starAlignment);
   assert.ok(recipe.densityObjects.includes(subject.density.directory));

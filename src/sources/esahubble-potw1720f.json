@@ -23,7 +23,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m1/observations.json",
+      "path": "src/objects/m1-volume/source/observations.json",
       "locator": "/images/5"
     }
   ],
@@ -34,7 +34,7 @@
       "kind": "credit",
       "text": "CXC",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m1/observations.json#/images/5"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m1-volume/source/observations.json#/images/5"
     }
   ]
 }

@@ -7,7 +7,7 @@ import { parseMolecularTable, readMolecularRecipe } from './molecular-data.ts';
 import { MOLECULAR_CATALOGUE_SCHEMA, acquireMolecularSources, loadMolecularCatalogue } from './molecular-source.ts';
 import type { MolecularRecipe } from '@cssearth/nebula-reconstruction/methods/kinematics/molecular-types';
 
-const recipePath = 'labs/nebula/models/helix/kinematics-hco.json';
+const recipePath = 'src/objects/helix-layers/source/kinematics-hco.json';
 const originalRecipe = readMolecularRecipe(JSON.parse(await readFile(recipePath, 'utf8')) as unknown);
 // Original Table 1's first ten rows, including two multicomponent pointings and three intensity limits.
 // The published paper prints this same excerpt. No synthetic observations are used for numerical assertions.

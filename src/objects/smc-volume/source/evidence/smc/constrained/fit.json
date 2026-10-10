@@ -1,21 +1,21 @@
 {
   "schema": "cssearth-tracer-forward-fit@1",
   "id": "smc-constrained",
-  "outputDirectory": ".local/nebula-lab/smc-constrained",
+  "outputDirectory": "src/objects/smc-volume/.local/constrained",
   "simulation": {
-    "path": ".local/nebula-lab/full-density/smc-full-density.f32"
+    "path": "src/objects/smc-volume/.local/full-density/smc-full-density.f32"
   },
   "catalogue": {
-    "path": ".local/nebula-lab/smc-vmc/density-rc.tsv"
+    "path": "src/objects/smc-volume/.local/vmc/density-rc.tsv"
   },
   "footprint": {
-    "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz"
+    "path": "src/objects/smc-volume/.local/vmc/rcsmcext.dat.gz"
   },
   "observedReceipt": {
-    "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json"
+    "path": "src/objects/smc-volume/source/vmc/crossmatch-receipt.json"
   },
   "frameObject": {
-    "path": "labs/nebula/models/smc/full-density/object.json"
+    "path": "src/objects/smc-volume/source/full-density/object.json"
   },
   "evidence": {
     "simulation": "https://doi.org/10.5061/dryad.1vhhmgr82",

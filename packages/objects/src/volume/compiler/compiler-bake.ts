@@ -7,6 +7,8 @@ import { readRenderElementBudget, type RenderElementBudget } from './render-elem
 
 export const COMPILER_STAR_SPRITES_SCHEMA = 'cssearth-compiler-star-sprites@1';
 export const COMPILER_BAKE_SCHEMA = 'cssearth-compiler-bake@2';
+/** The provenance record a compiler volume's bake writes beside its dataset (`prepared/record.json`). */
+export const COMPILER_VOLUME_PROVENANCE_SCHEMA = 'cssearth-compiler-volume-provenance@2';
 
 export const COMPILER_LONGEST_AXIS_SLICES = 512;
 

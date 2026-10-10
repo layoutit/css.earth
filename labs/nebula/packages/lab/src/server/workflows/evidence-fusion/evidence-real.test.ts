@@ -8,7 +8,7 @@ import { prepareEvidenceInputs } from './provider.ts';
 import { combineEvidence } from '@cssearth/nebula-reconstruction/evidence/combine';
 
 test('real Helix inputs produce finite reproducible registered evidence with cached reuse', { skip: process.env.NEBULA_EVIDENCE_REAL !== '1' }, async () => {
-  const start = performance.now(), catalogue = '.local/nebula-lab/observations/helix/structures/catalogue.json';
+  const start = performance.now(), catalogue = 'src/objects/helix-layers/.local/observations/helix/structures/catalogue.json';
   const inputs = await prepareEvidenceInputs(process.cwd(), catalogue), prepareMs = performance.now() - start;
   assert.equal(inputs.sources.length, 3);
   const output = resolve('.local/nebula-lab/evidence-fusion/verification', inputs.identity); await mkdir(output, { recursive: true });

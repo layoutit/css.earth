@@ -2,6 +2,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readObservationRecipe, scienceObservationSources, type ObservationRecipe, type ObservationSource } from '../../../features/observations/recipe.js';
+import { objectScratch } from '../../../resources/model-paths.ts';
 
 export async function loadNativeSeparationCache(recipe: ObservationRecipe): Promise<ObservationRecipe | undefined> {
   const pin = recipe.nativeSeparationCache?.recipe;
@@ -24,5 +25,5 @@ export function nativeSeparationCacheSource(recipe: ObservationRecipe, cached: O
 
 export function nativeSeparationCacheDirectory(recipe: ObservationRecipe, cached: ObservationRecipe, source: ObservationSource): string | undefined {
   const candidate = nativeSeparationCacheSource(recipe, cached, source);
-  return candidate && resolve('.local/nebula-lab/observations', cached.id, candidate.id, candidate.stellarTreatment === 'preserve' ? 'native-preserved' : 'native-nox');
+  return candidate && resolve(objectScratch(cached.id, 'observations', cached.id), candidate.id, candidate.stellarTreatment === 'preserve' ? 'native-preserved' : 'native-nox');
 }

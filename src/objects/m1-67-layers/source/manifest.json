@@ -21,7 +21,9 @@
           }
         ]
       },
-      "dependencies": [],
+      "dependencies": [
+        "original"
+      ],
       "datasetId": "optical",
       "license": "CC-BY-4.0; retain the complete recorded credit.",
       "capture": {
@@ -34,6 +36,38 @@
         ]
       },
       "generator": "labs/nebula/run.mts remove-stars"
+    },
+    {
+      "id": "original",
+      "path": "src/objects/m1-67-layers/source/source.jpg",
+      "origin": "https://cdn.esawebb.org/archives/images/large/weic2307a.jpg",
+      "sourceUrl": "https://esawebb.org/images/weic2307a/",
+      "title": "Wolf-Rayet 124 (NIRCam and MIRI composite image) (as published, with its stars)",
+      "credit": "NASA, ESA, CSA, STScI, Webb ERO Production Team",
+      "displayCredit": "ESA/Webb",
+      "acquisition": "The publisher’s JPEG (4416 x 4349 px) as published, before its stars were removed; the picture remove-stars reads. Restored from the source cache; not tracked.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esawebb-weic2307a",
+            "role": "material",
+            "evidence": "src/objects/m1-67-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://esawebb.org/images/weic2307a/"
+          }
+        ]
+      }
     },
     {
       "id": "shape-model",

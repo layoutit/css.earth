@@ -2,7 +2,6 @@ import { workspaceObjects } from '../../state/workspace-objects';
 import { LabNavigation } from '../../ui/lab-navigation';
 import { labObjectId } from '../../features/legacy-viewer/lab-routing';
 import { subjects } from '../../features/legacy-viewer/subject-catalogue';
-import { supportsLabAlignment } from '../../state/lab-workflows';
 import { useEffect, useMemo, useState } from 'react';
 import { archiveProviders, readArchiveQuery, readMessierCatalogue, readMessierInventory, type ArchiveImage, type ArchiveProvider,
   type ArchiveQuery, type MessierCatalogue, type MessierInventory, type MessierObject } from '../../features/catalogue/types';
@@ -193,11 +192,10 @@ export function CatalogueView() {
   }, [selectedQueries, band, imageRole, candidateObject, resolution, productSearch]);
   const selectionKey = `${selectedId}:${band}:${imageRole}:${resolution}:${productSearch}:${imageOrder}:${provider}`;
   return <>
-    <LabNavigation page="catalogue" objectId={selectedId}
+    <LabNavigation objectId={selectedId}
       objects={[...new Map([...workspaceObjects(subjects).map(object => [object.id, { id: object.id, name: object.menuLabel ?? object.name }] as const),
         ...(catalogue?.objects ?? []).map(object => [object.id, { id: object.id, name: `${object.id.toUpperCase()} · ${object.name}` }] as const)]).values()]}
-      onObjectChange={chooseObject} alignmentAvailable={supportsLabAlignment(subjects.find(object => object.id === selectedId))}
-      reconstructionAvailable={subjects.some(object => object.id === selectedId && !object.alignmentOnly)} />
+      onObjectChange={chooseObject} />
     <main className="catalogue-layout">
       <aside className="catalogue-objects" aria-label="Messier objects">
         <label className="catalogue-field">Find object<input type="search" value={objectSearch} onChange={event => setObjectSearch(event.target.value)} placeholder="M42, Orion, NGC…" /></label>

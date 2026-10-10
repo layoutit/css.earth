@@ -2,7 +2,7 @@
   "schema": "cssearth-replay-references@1",
   "references": [
     {
-      "originalPath": "labs/nebula/models/m49/experiment.json",
+      "originalPath": "src/objects/m49-volume/source/experiment.json",
       "path": "source/bake-inputs/references/00-experiment.json"
     }
   ]

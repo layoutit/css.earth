@@ -1,4 +1,4 @@
-import { VOLUME_PRESENTATION_SOURCE_SCHEMA } from '@cssearth/objects';
+import { VOLUME_PRESENTATION_SOURCE_SCHEMA, isScratchSourcePath, scratchSourceCachePath } from '@cssearth/objects';
 // Maintainer command: mirror an object's downloaded source inputs into R2 under source-cache/<object id>/<manifest path>,
 // addressed the way the manifest names them and additive. Two forms:
 //
@@ -58,8 +58,8 @@ export async function objectSourceCacheCandidates(id: string): Promise<readonly 
       // A sky-band composite has no publisher URL: it is composed here from survey tiles, so mirroring it is what
       // keeps a fresh checkout off the survey archive.
       const addressable = typeof preview?.url === 'string' || (typeof preview?.skyBands === 'object' && preview.skyBands !== null);
-      if (preview && addressable && typeof preview.path === 'string' && preview.path.startsWith('.local/')) {
-        candidates.push({ key: sourceCacheKey('local', preview.path.slice('.local/'.length)), path: preview.path });
+      if (preview && addressable && typeof preview.path === 'string' && isScratchSourcePath(preview.path)) {
+        candidates.push({ key: sourceCacheKey('local', scratchSourceCachePath(preview.path)), path: preview.path });
       }
     }
   }
@@ -69,7 +69,7 @@ export async function objectSourceCacheCandidates(id: string): Promise<readonly 
     const repositoryPaths = (manifest as Record<string, unknown>).pathBase === 'repository';
     for (const entry of (manifest as Record<string, unknown>).inputs as unknown[] ?? []) {
       const input = entry as Record<string, unknown>;
-      if (typeof input.path === 'string' && !input.path.startsWith('.local/') && typeof input.origin === 'string' && /^https?:\/\//u.test(input.origin)) {
+      if (typeof input.path === 'string' && !isScratchSourcePath(input.path) && typeof input.origin === 'string' && /^https?:\/\//u.test(input.origin)) {
         candidates.push({ key: sourceCacheKey(id, input.path), path: repositoryPaths ? input.path : `src/objects/${id}/source/${input.path}` });
       }
     }

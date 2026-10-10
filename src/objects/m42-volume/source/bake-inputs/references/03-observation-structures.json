@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-observation-structure-recipe@1",
-  "observationRecipe": "labs/nebula/models/m42/observations.json",
-  "observationCatalogue": ".local/nebula-lab/observations/m42/observations.json",
+  "observationRecipe": "src/objects/m42-volume/source/observations.json",
+  "observationCatalogue": "src/objects/m42-volume/.local/observations/m42/observations.json",
   "workingWidth": 768,
   "wavelets": {
     "scales": 6,

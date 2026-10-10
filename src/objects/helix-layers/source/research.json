@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "helix-layers",
+  "name": "Helix Nebula",
+  "type": "Planetary nebula",
+  "papers": [
+    {
+      "label": "Benedict et al. (2009)",
+      "url": "https://arxiv.org/abs/0909.4281",
+      "record": "src/sources/benedict-2009.json"
+    },
+    {
+      "label": "O'Dell, McCullough & Meixner (2004)",
+      "url": "https://arxiv.org/abs/astro-ph/0407556",
+      "record": "src/sources/publication-odell-2004-helix-structure.json"
+    },
+    {
+      "label": "Gaia DR3",
+      "url": "https://doi.org/10.1051/0004-6361/202243940",
+      "record": "src/sources/gaia-2023-dr3.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "ESA/Hubble opo0432d",
+      "url": "https://esahubble.org/images/opo0432d/",
+      "record": "src/sources/esahubble-opo0432d.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "published-surfaces",
+    "label": "Published surfaces: rings"
+  },
+  "velocity": {
+    "available": true,
+    "items": [
+      {
+        "label": "Long slit · Meaburn et al. (2005)",
+        "kind": "long-slit",
+        "path": "src/objects/helix-layers/source/kinematics-oiii.json",
+        "url": "https://arxiv.org/html/astro-ph/0504295"
+      },
+      {
+        "label": "Molecular velocities (joint fit)",
+        "kind": "molecular",
+        "path": "src/objects/helix-layers/source/joint-fit.json"
+      }
+    ]
+  },
+  "method": {
+    "chosen": "paper-surfaces",
+    "status": "published",
+    "available": [
+      "paper-surfaces",
+      "kinematic"
+    ],
+    "geometry": [
+      "rings"
+    ]
+  }
+}

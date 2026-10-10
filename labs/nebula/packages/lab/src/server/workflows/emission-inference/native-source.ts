@@ -1,7 +1,8 @@
 /** Reuse the lab's native NOX stage before any image-to-volume fit. */
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
-import { resolve, relative, dirname } from 'node:path';
+import { resolve, relative, dirname, sep } from 'node:path';
 import {prepareNativeRemovalSource,decodeNativeDiffuse,runNativeRemoval,type NativeRemovalRequest} from '@cssearth/nebula-reconstruction/star-removal/native';
+import { isLabScratchPath } from '../../../resources/model-paths.ts';
 export {nativeRemovalTimeoutMs} from '@cssearth/nebula-reconstruction/star-removal/native';
 
 export interface NativeRemoval {
@@ -11,7 +12,7 @@ export interface NativeRemoval {
 export async function nativeStarless(source: Buffer, dimensions: [number, number], settings: NativeRemoval,
   options: { allowProcessing?: boolean } = {}) {
   const root = process.cwd(), directory = resolve(root, settings.directory);
-  if (!relative(resolve(root, '.local/nebula-lab'), directory).match(/^(?!\.\.)(?!\/).+/))
+  if (!isLabScratchPath(relative(root, directory).split(sep).join('/')) || relative(root, directory).split(sep).includes('..'))
     throw new TypeError('Native removal output must be inside the ignored lab cache.');
   const script = resolve(root, 'labs/nebula/packages/reconstruction/src/star-removal/star-removal.py');
   await mkdir(directory, { recursive: true });

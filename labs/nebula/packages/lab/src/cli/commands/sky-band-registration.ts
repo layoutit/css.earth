@@ -35,7 +35,7 @@ const relativePath = (value: unknown, label: string) => {
 const pin = (value: unknown, label: string): Pin => ({ path: relativePath(record(value, label).path, `${label} path`) });
 const receiptPath = (value: unknown, label: string) => {
   const s = relativePath(value, label);
-  if (!s.startsWith('labs/nebula/models/') || !s.endsWith('.json')) throw new TypeError(`${label} must be a checked-in model JSON receipt.`);
+  if (!/^src\/objects\/[a-z0-9-]+\/source\//.test(s) || !s.endsWith('.json')) throw new TypeError(`${label} must be a checked-in model JSON receipt.`);
   return s;
 };
 
@@ -128,7 +128,7 @@ export async function registerSkyBands(root: string, recipePath: string) {
   const stars = { query: recipe.stars.query, path: recipe.stars.path };
   const gate = async (source: SkyBandCandidate, blueChannel: string, variant = '') => {
     const result = await verifyFixedCatalogue(resolve(root, source.path), source.wcs, resolve(root, recipe.stars.path));
-    const matchedPath = `.local/nebula-lab/smc-registration/sky-bands/${source.id}${variant}/matched-stars.json`, matched = Buffer.from(JSON.stringify(result.matches));
+    const matchedPath = `src/objects/smc-volume/.local/registration/sky-bands/${source.id}${variant}/matched-stars.json`, matched = Buffer.from(JSON.stringify(result.matches));
     await mkdir(dirname(resolve(root, matchedPath)), { recursive: true }); await writeFile(resolve(root, matchedPath), matched);
     // The operator names its detection channel after its first use; this composite's blue channel is recorded beside it.
     return { ...result.receipt, source: { ...result.receipt.source, path: source.path }, catalogue: { ...result.receipt.catalogue, path: recipe.stars.path, query: recipe.stars.query },

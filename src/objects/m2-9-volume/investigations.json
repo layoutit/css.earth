@@ -10,7 +10,7 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m2-9-volume/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m2-9-volume/source/image-frame.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m2-9/experiment.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m2-9-volume/source/experiment.json"
       ]
     },
     {
@@ -32,8 +32,8 @@
       "status": "included",
       "finding": "Strictly independent axial group-sparsity/FISTA implementation uses deterministic proximal evaluation and four manual point masks. Hollow-shell and zero-regularization controls test radial behavior; they do not measure the nebula inclination or gas depth. No author code or restricted volumes were imported.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m2-9/README.md",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m2-9/experiment.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m2-9-volume/source/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m2-9-volume/source/experiment.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/docs/planetary-nebulae.md",
         "https://doi.org/10.1111/cgf.12216"
       ]
@@ -66,7 +66,7 @@
       "status": "excluded",
       "finding": "The original trial identified an inconsistent NASA science-page coordinate. The app uses the pinned cross-edition image-frame evidence rather than that page value.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m2-9/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m2-9-volume/source/README.md",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m2-9-volume/source/image-frame.json"
       ],
       "revisitWhen": "Revisit only if corrected publisher astrometry is independently verified against the selected native photograph."
@@ -77,7 +77,7 @@
       "status": "unresolved",
       "finding": "Real front/oblique views keep connected lobes but retain background plane, rings and directional color/brightness artifacts. The original external review timed out; neither successful transport nor low image-fit residual is independent scientific acceptance.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m2-9/README.md"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m2-9-volume/source/README.md"
       ],
       "revisitWhen": "Improve the owning symmetry/material assumptions against fixed views without masking the defect through exposure or a fabricated depth field."
     }

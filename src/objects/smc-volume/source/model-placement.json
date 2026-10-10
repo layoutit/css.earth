@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-density-placement@1",
+  "sourceDirectory": "src/objects/smc-volume/source/full-density",
+  "scale": 1.4270000000000003,
+  "rotationZDegrees": 119.6,
+  "pivotUnits": [
+    -3.5839240550994873,
+    -8.495028495788574,
+    -9.775346755981445
+  ],
+  "translationUnits": [
+    2.484602681013528,
+    8.120696337337312,
+    9.775346755981445
+  ],
+  "originalDensity": {
+    "path": "src/objects/smc-volume/source/full-density/source/volume.json"
+  },
+  "fit": {
+    "method": "Bounded perspective model-only XY similarity against smoothed original SMASH stellar light; uniform XYZ scale",
+    "image": {
+      "path": ".local/nebula-lab/source-originals/noirlab2030b.tif"
+    },
+    "particles": {
+      "path": "src/objects/smc-volume/.local/full-density/smc-full-density.f32",
+      "count": 225000
+    },
+    "observerDistanceKpc": 62.44,
+    "targetProcessing": {
+      "resizeWidth": 1024,
+      "gaussianSigmaPixels": 8,
+      "backgroundQuantile": 0.15,
+      "clipQuantile": 0.995,
+      "frameExtentKpc": 16,
+      "gridSize": 160,
+      "observedCells": 2795
+    },
+    "score": "Pearson correlation on observed footprint only; outside image is unconstrained",
+    "beforeCorrelation": -0.2350712150834555,
+    "centeredOnlyCorrelation": 0.7698657057898112,
+    "afterCorrelation": 0.9055203617805438,
+    "evaluations": 180,
+    "limitations": [
+      "Authored image-to-simulation morphological placement, not astrometry or a recovered physical size/distance.",
+      "Original unresolved optical light approximates stellar morphology, with foreground sources/background and age/extinction biases.",
+      "All 225000 particles retained; outer tails outside observed footprint are unconstrained, not removed.",
+      "This placement changes model coordinates only and cannot prove physical depth or volumetric material quality."
+    ]
+  }
+}

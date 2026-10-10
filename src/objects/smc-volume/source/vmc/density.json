@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-catalogue-density@1",
+  "id": "smc-vmc-density",
+  "outputDirectory": "src/objects/smc-volume/.local/vmc-density",
+  "catalogue": {
+    "path": "src/objects/smc-volume/.local/vmc/density-rc.tsv"
+  },
+  "receipt": {
+    "path": "src/objects/smc-volume/source/vmc/crossmatch-receipt.json"
+  },
+  "frameObject": {
+    "path": "src/objects/smc-volume/source/full-density/object.json"
+  }
+}

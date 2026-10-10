@@ -88,7 +88,7 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
   }
   async function json(path: string) { return parseLabModelJson(await readFile(await safePath(path), 'utf8')); }
   async function resources(request: TonePreparationRequest): Promise<SourceResource[]> {
-    const subjects = await json('labs/nebula/packages/lab/src/state/subjects.json') as Subject[];
+    const subjects = await json('labs/nebula/packages/lab/src/state/processing-subjects.json') as Subject[];
     const subject = subjects.find(item => item.id === request.subjectId) ?? await resolveReconstructionSubject(root, request.subjectId);
     if (!subject?.density) throw new TypeError('Subject has no prepared neutral density.');
     if (request.target === 'image') {

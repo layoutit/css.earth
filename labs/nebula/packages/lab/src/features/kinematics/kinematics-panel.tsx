@@ -11,7 +11,6 @@ export function KinematicsPanel({ sourcePath, endpoint = '/__nebula/kinematics' 
   const [parameters, setParameters] = useState<KinematicParameters | null>(null);
   const [error, setError] = useState('');
   const [updating, setUpdating] = useState(false);
-  const [showFigure, setShowFigure] = useState(false);
   const generation = useRef(0), sourceIdentity = useRef(''), loadedSettings = useRef('');
   const query = `${endpoint}?source=${encodeURIComponent(sourcePath)}`;
   const storageKey = `nebula-kinematics:${sourcePath}`;
@@ -73,7 +72,7 @@ export function KinematicsPanel({ sourcePath, endpoint = '/__nebula/kinematics' 
   ];
   return <><section className="kinematics-panel" aria-label="Velocity comparison" data-source-id={evidence.id} data-evidence-source={result.evidenceSource}
     data-updating={updating} data-prediction-settings={JSON.stringify(result.parameters)}>
-    <header><div><h2>Independent shell</h2><p>Measured [O III] slit</p></div></header>
+    <header><div><h2>Velocity</h2></div></header>
     {error && <p className="kinematics-error" role="alert">{error}</p>}</section>
     {workspace && createPortal(<CameraModelPanel unavailableReason="The measured slit chart has fixed published axes." cameraHint="Fixed slit axes">
     <aside className="kinematics-controls">
@@ -88,7 +87,7 @@ export function KinematicsPanel({ sourcePath, endpoint = '/__nebula/kinematics' 
       <p className="kinematics-small" role="status">{updating ? 'Updating prediction…' : 'Hypothesis ready'}</p>
       {metrics.outsideProjectedShell > 0 && <p className="kinematics-small">{metrics.outsideProjectedShell} samples lie outside this shell’s projected extent.</p>}
     </aside>      </CameraModelPanel>, workspace)}
-    {workspace && createPortal(<section className="kinematics-workspace" aria-label="Measured slit workspace"><header><h2>{evidence.title}</h2></header><div className="kinematics-comparison">
+    {workspace && createPortal(<section className="kinematics-workspace" aria-label="Measured slit workspace"><header><h2>{evidence.title} <a className="step-info" href={evidence.citation.url} target="_blank" rel="noreferrer" title={evidence.citation.label} aria-label={evidence.citation.label}>ⓘ</a></h2></header><div className="kinematics-comparison">
       <div className="kinematics-legend"><span className="kinematics-observed-key">● Observed centroids ≈</span><span className="kinematics-model-key">— Predicted shell surfaces</span></div>
       <svg className="kinematics-chart" viewBox={`0 0 ${chart.width} ${chart.height}`} role="img" aria-label="Measured line velocity versus slit offset, with two predicted shell surfaces">
         <title>Published [O III] slit centroids and predicted expanding shell</title>
@@ -104,15 +103,5 @@ export function KinematicsPanel({ sourcePath, endpoint = '/__nebula/kinematics' 
       <p className="kinematics-small" title="Nearest-surface RMS is descriptive, not a statistical fit. The faster sampled branches are retained and remain unexplained by one inner shell.">{metrics.comparedPoints} measured samples · mismatch {metrics.nearestSurfaceRmsKmS?.toFixed(1) ?? '—'} km/s RMS · faster components remain unexplained.</p>
       <p className="kinematics-small" title="Shaded band: shared systemic-velocity uncertainty. Approximate readout precision is not a statistical uncertainty; published error bars have not been transcribed.">v systemic {evidence.systemic.valueKmS} ± {evidence.systemic.uncertaintyKmS} km/s · figure readout ≈ ±{metrics.velocityReadoutKmS.toFixed(1)} km/s</p>
     </div>
-    <details className="kinematics-evidence"><summary>Measurements, assumptions and original slit</summary>
-      <p><a href={evidence.citation.pdfUrl} target="_blank" rel="noreferrer">{evidence.citation.label}</a></p>
-      <p>The measured slit tests an independent literature-scale shell. It is not yet fitted to the combined ESO structures. Positive velocities recede. Readout precision: ±{metrics.offsetReadoutArcsec.toFixed(1)}″ and ±{metrics.velocityReadoutKmS.toFixed(1)} km/s.</p>
-      <p>{evidence.slit.direction}. {evidence.slit.lengthArcsec}″ long, {evidence.slit.widthArcsec}″ wide, {evidence.slit.instrumentalWidthKmS} km/s instrumental slit width.</p>
-      <button type="button" onClick={() => setShowFigure(!showFigure)}>{showFigure ? 'Hide published figure' : 'Show published figure'}</button>
-      {showFigure && <figure><img src={`${query}&figure=1`} alt="Original Meaburn2005 Figure9: registered [O III] image with E–W slit above measured centroid velocities." width={evidence.figure.width} height={evidence.figure.height} /><figcaption>Original figure raster, hash checked on the server. Digitized markers retain their original pixel coordinates in the source recipe.</figcaption></figure>}
-      <ul>{evidence.defaultEvidence.map(note => <li key={note}>{note}</li>)}</ul>
-      <p>{evidence.figure.readoutNote}</p><p>{evidence.slit.instrumentNote}</p>
-      <ul>{evidence.limitations.map(note => <li key={note}>{note}</li>)}</ul>
-    </details>
   </section>, workspace)}</>;
 }

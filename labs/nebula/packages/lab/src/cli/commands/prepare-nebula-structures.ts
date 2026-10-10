@@ -5,6 +5,7 @@ import sharp from 'sharp';
 import { nativeStarless } from '../../server/workflows/emission-inference/native-source.ts';
 import { analyzeStructureMap, colorStructureLayer, structureLayers } from '@cssearth/nebula-reconstruction/evidence/structure-map';
 import type { WaveletSettings } from '@cssearth/nebula-reconstruction/evidence/wavelets';
+import { objectScratch } from '../../resources/model-paths.ts';
 
 const record = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Recipe object required.');
@@ -24,7 +25,7 @@ const source = record(sourceRecipe.source);
 const removal = record(sourceRecipe.nativeRemoval), model = record(removal.model);
 const sourceUrl = text(source.url), nativeWidth = number(source.width), nativeHeight = number(source.height);
 if (!/^https:\/\//.test(sourceUrl)) throw new TypeError(`${sourceRecipePath}: source.url must be HTTPS, not ${sourceUrl}.`);
-const cache = resolve('.local/nebula-lab/planetary'), originalPath = resolve(cache, `${id}-original.jpg`);
+const cache = resolve(objectScratch(id, 'planetary')), originalPath = resolve(cache, `${id}-original.jpg`);
 await mkdir(cache, { recursive: true });
 let original: Buffer;
 try { original = await readFile(originalPath); }

@@ -333,7 +333,7 @@
       ],
       "quantity": "spherically symmetric 3D relative emissivity vs. radius, derived by Abel-inverting the fitted King projected profile",
       "value": {
-        "path": "labs/nebula/models/omega-centauri/king-abel-profile.json"
+        "path": "src/objects/omega-centauri-volume/source/king-abel-profile.json"
       },
       "unit": "relative (peak-normalized)",
       "scope": "0 to the solved tidal radius (46.4 pc)",
@@ -563,7 +563,7 @@
       ],
       "quantity": "eight-component projected Multi-Gaussian Expansion",
       "value": {
-        "recipePath": "labs/nebula/models/omega-centauri/photometric-mge.json",
+        "recipePath": "src/objects/omega-centauri-volume/source/photometric-mge.json",
         "gaussianCount": 8,
         "sourceSigmaUnit": "arcmin",
         "recipeSigmaUnit": "arcsec",
@@ -641,7 +641,7 @@
           201.696958,
           -47.479539
         ],
-        "observationRecipe": "labs/nebula/models/omega-centauri/observations.json",
+        "observationRecipe": "src/objects/omega-centauri-volume/source/observations.json",
         "paperKinematicCenterIcrsDegrees": [
           201.69065,
           -47.47855
@@ -660,7 +660,7 @@
       ],
       "quantity": "analytic oblate deprojection of the published projected Gaussians",
       "value": {
-        "methodPath": "labs/nebula/models/omega-centauri/mge-method.md",
+        "methodPath": "src/objects/omega-centauri-volume/source/mge-method.md",
         "intrinsicAxisRatio": "sqrt((qProjected^2-cos(i)^2)/sin(i)^2)",
         "centralRelativeDensity": "Sigma0*qProjected/(sqrt(2*pi)*sigma*qIntrinsic)",
         "density": "sum rho0*exp(-(R^2+zIntrinsic^2/qIntrinsic^2)/(2*sigma^2))",

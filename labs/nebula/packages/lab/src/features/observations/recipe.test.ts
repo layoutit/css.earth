@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { observationSourceFile, readObservationRecipe } from './recipe';
 
-const input = () => JSON.parse(readFileSync('labs/nebula/models/m45/observations.json', 'utf8'));
+const input = () => JSON.parse(readFileSync('src/objects/m45-volume/source/observations.json', 'utf8'));
 
 test('wide-source registration retains explicit native discovery settings without changing other sources', () => {
   const recipe = readObservationRecipe(input());

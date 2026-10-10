@@ -1,0 +1,39 @@
+.plates-panel { overflow-y: auto; }
+.plates-panel fieldset { min-width: 0; }
+.plates-panel select { width: 100%; margin-top: 5px; }
+.plates-geometry table { width: 100%; border-collapse: collapse; font-size: 11px; font-variant-numeric: tabular-nums; }
+.plates-geometry th, .plates-geometry td { padding: 4px 3px; text-align: right; border-bottom: 1px solid var(--divider); white-space: nowrap; }
+.plates-geometry th:first-child { text-align: left; font-weight: normal; }
+.plates-geometry thead th { color: var(--text-secondary); font-size: 10px; }
+.plates-swatch { display: inline-block; width: 10px; height: 2px; margin: 0 6px 3px 0; vertical-align: middle; }
+.plates-swatch[data-plate="disc"] { background: #9fd3e6; }
+.plates-swatch[data-plate="ring"] { background: #f0c27a; }
+.plates-paper { font-size: 11px; line-height: 1.5; margin: 8px 0; }
+.plates-error { color: #e3a09a; font-size: 11px; }
+.plates-banks { display: flex; gap: 6px; margin: 10px 0 4px; }
+.plates-banks > * { flex: 1; }
+.plates-banks button { width: 100%; }
+.plates-banks button[aria-pressed="true"] { background: #34383d; border-color: #788792; }
+.plates-banks button[aria-disabled="true"] { opacity: .45; }
+.plates-status { margin-bottom: 6px; }
+.plates-editor summary { cursor: pointer; font-size: 11px; margin: 8px 0; }
+.plates-editor-heading { font-size: 10px; color: var(--text-secondary); margin: 10px 0 2px; text-transform: none; }
+.plates-field { display: grid; grid-template-columns: minmax(0, 118px) minmax(0, 1fr) 64px; align-items: center; gap: 6px; margin: 3px 0; font-size: 10px; }
+.plates-field label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.plates-field input[type="range"] { min-width: 0; width: 100%; margin: 0; }
+.plates-field input[type="number"] { width: 100%; min-width: 0; font-size: 10px; padding: 2px 3px; }
+.plates-field[data-changed="true"] label { color: #f0c27a; }
+.site-volume-panel .plates-note { margin: 8px 0; }
+.plates-legend code { font-size: 10px; }
+.plates-original-controls .image-layer-buttons { margin-bottom: 8px; }
+.plates-original-controls .image-layer-buttons .info-tip { flex: 1; min-width: 0; }
+.plates-original-controls .image-layer-buttons button { width: 100%; }
+/* Lab-only published 3D models: the bank can step aside so a model is seen alone. */
+#viewer[data-candidate-bank="hidden"] > .prepared-image-layer-bank { opacity: 0 !important; }
+#viewer[data-candidate-bank="shown"] > .candidate-model-projection:not([data-candidate-model="shock-153"]) { opacity: .82; }
+.plates-models label.plates-model-toggle { display: flex; align-items: center; gap: 6px; font-size: 11px; margin: 3px 0; }
+.plates-models .plates-model-swatch { display: inline-block; width: 10px; height: 10px; border-radius: 2px; flex: none; }
+.plates-working-copy { display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 6px; margin: 8px 0; font-size: 13px; }
+.plates-working-copy span { font-variant-numeric: tabular-nums; }
+.plates-working-copy[data-working-changes]:not([data-working-changes="0"]) span { color: #f0c27a; }
+.plates-working-copy button { min-height: 32px; font-size: 13px; }

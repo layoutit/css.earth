@@ -58,7 +58,7 @@
       },
       "bytes": 25288332,
       "bitDepth": 8,
-      "localCache": ".local/nebula-lab/intake/m45/noirlab-optical.tif",
+      "localCache": "src/objects/m45-volume/.local/intake/noirlab-optical.tif",
       "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
       "master": {
         "url": "https://storage.noirlab.edu/media/archives/images/original/noao-m45.tif",
@@ -112,7 +112,7 @@
       },
       "registrationMode": "field-stars",
       "coordinateOrigin": "authored-bright-star-seed",
-      "localCache": ".local/nebula-lab/intake/m45/widefield/niittee-pleiades.jpg",
+      "localCache": "src/objects/m45-volume/.local/intake/widefield/niittee-pleiades.jpg",
       "license": "CC BY 4.0",
       "metadataNote": "Full published 8000 × 5199 processed RGB8 JPEG, not a claim of 8000-pixel detector resolution. Listed ASI071MC Pro sensor is 4944 × 3284; stacking/resampling details unreported. No publisher WCS; initial geometry seeded from bright-star correspondences then verified against native NOIRLab field stars.",
       "processingVariant": "Original downloaded JPEG preserved byte-for-byte; candidate for Alignment only, no new NOX or reconstruction.",
@@ -131,7 +131,7 @@
   "intakeStatus": "Authorized two-source optical composition. Qualified native NOX outputs are reused; source registration and removal receipts record the completed stages. This recipe does not fit a new cloud or establish physical dust density.",
   "nativeSeparationCache": {
     "recipe": {
-      "path": "labs/nebula/models/m45/processing-observations.json"
+      "path": "src/objects/m45-volume/source/processing-observations.json"
     }
   }
 }

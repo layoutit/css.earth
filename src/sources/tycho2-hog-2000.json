@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m45/stellar-sources.json",
+      "path": "src/objects/m45-volume/source/stellar-sources.json",
       "locator": "/sources/1"
     }
   ],
@@ -29,7 +29,7 @@
       "kind": "credit",
       "text": "Høg et al. 2000, A&A 355 L27, The Tycho-2 Catalogue",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/stellar-sources.json#/sources/1"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/stellar-sources.json#/sources/1"
     }
   ]
 }

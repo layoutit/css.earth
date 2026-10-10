@@ -14,7 +14,7 @@ export async function verifyArtifacts(root: string, directory: string, artifacts
   }
 }
 
-export async function verifyNebulaBake(root: string, recipePath = 'labs/nebula/models/lmc/bake.json') {
+export async function verifyNebulaBake(root: string, recipePath = 'src/objects/lmc-volume/source/bake.json') {
   const recipe = await readRecipe(root, localPath(root, recipePath));
   const receipt = await json(resolve(root, `.local/nebula-lab/bakes/${recipe.id}-all.json`));
   assert.equal(receipt.schema, 'cssearth-nebula-bake-receipt@1');

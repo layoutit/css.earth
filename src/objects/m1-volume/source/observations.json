@@ -1,0 +1,425 @@
+{
+  "schema": "cssearth-nebula-observation-recipe@1",
+  "id": "m1",
+  "referenceId": "hubble-optical",
+  "frame": {
+    "width": 1024,
+    "height": 1024,
+    "fieldArcminutes": [
+      9.1,
+      9.1
+    ],
+    "centerIcrsDegrees": [
+      83.6334511837,
+      22.0151236394
+    ],
+    "northUp": true
+  },
+  "images": [
+    {
+      "id": "hubble-optical",
+      "label": "Hubble · optical lines",
+      "localCache": "src/objects/m1-volume/.local/intake/hubble-optical.tif",
+      "url": "https://esahubble.org/media/archives/images/original/heic0515a.tif",
+      "page": "https://esahubble.org/images/heic0515a/",
+      "width": 3864,
+      "height": 3864,
+      "fieldArcminutes": [
+        6.411570603428592,
+        6.4076331653651515
+      ],
+      "centerIcrsDegrees": [
+        83.6355343,
+        22.0152411
+      ],
+      "northRightDegrees": 0,
+      "bands": "Optical · [O III] 502 nm / [O I] 631 nm / [S II] 673 nm",
+      "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
+      "termsUrl": "https://esahubble.org/copyright/",
+      "registrationMode": "compact-stars",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          3864,
+          3864
+        ],
+        "referencePixel": [
+          1933,
+          1933
+        ],
+        "referenceValueDeg": [
+          83.6355343,
+          22.0152411
+        ],
+        "scaleDeg": [
+          -0.0000276551527063,
+          0.0000276381692778
+        ],
+        "rotationDeg": 0
+      },
+      "metadataNote": "Unmodified publisher TIFF. Embedded AVM quality: Full. Native RGB presentation pixels are not calibrated measurements. Observation epochs and uncertainty are in source-dossier.json.",
+      "master": {
+        "url": "https://esahubble.org/media/archives/images/original/heic0515a.tif",
+        "width": 3864,
+        "height": 3864
+      },
+      "processingVariant": "Official original TIFF; no local crop or resize"
+    },
+    {
+      "id": "webb-infrared",
+      "label": "Webb · near/mid-infrared",
+      "localCache": "src/objects/m1-volume/.local/intake/webb-infrared.tif",
+      "url": "https://esawebb.org/media/archives/images/publicationtiff/weic2326a.tif",
+      "page": "https://esawebb.org/images/weic2326a/",
+      "width": 4000,
+      "height": 3483,
+      "fieldArcminutes": [
+        5.468003230840379,
+        4.761413794406728
+      ],
+      "centerIcrsDegrees": [
+        83.63572694617777,
+        22.016661852311525
+      ],
+      "northRightDegrees": 2.100000000000001,
+      "bands": "Near/mid-infrared · 1.62 / 4.8 / 5.6 / 11.3 / 18 / 21 µm",
+      "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
+      "termsUrl": "https://esawebb.org/copyright/",
+      "registrationMode": "compact-stars",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          10509,
+          9151
+        ],
+        "referencePixel": [
+          5254.5,
+          4575.5
+        ],
+        "referenceValueDeg": [
+          83.63572694617777,
+          22.016661852311525
+        ],
+        "scaleDeg": [
+          -0.000008671937118724234,
+          0.000008671937118724234
+        ],
+        "rotationDeg": -2.100000000000001
+      },
+      "metadataNote": "Unmodified publisher TIFF. Embedded AVM quality: Position. Native RGB presentation pixels are not calibrated measurements. Observation epochs and uncertainty are in source-dossier.json.",
+      "master": {
+        "url": "https://esawebb.org/media/archives/images/original/weic2326a.tif",
+        "width": 10509,
+        "height": 9151
+      },
+      "processingVariant": "Official Publication TIFF 4K; no local crop or resize"
+    },
+    {
+      "id": "webb-components",
+      "label": "Webb · dust, sulfur, synchrotron",
+      "localCache": "src/objects/m1-volume/.local/intake/webb-components.tif",
+      "url": "https://esawebb.org/media/archives/images/original/weic2417a.tif",
+      "page": "https://esawebb.org/images/weic2417a/",
+      "width": 2958,
+      "height": 2569,
+      "fieldArcminutes": [
+        5.325172132816618,
+        4.624870591347496
+      ],
+      "centerIcrsDegrees": [
+        83.63568254179599,
+        22.01633447322993
+      ],
+      "northRightDegrees": 1.9200000000000035,
+      "bands": "Derived infrared components · 4.8 / 18 / 21 µm",
+      "credit": "NASA, ESA, CSA, STScI, T. Temim (Princeton University)",
+      "termsUrl": "https://esawebb.org/copyright/",
+      "registrationMode": "compact-stars",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          2958,
+          2569
+        ],
+        "referencePixel": [
+          1479,
+          1284.5
+        ],
+        "referenceValueDeg": [
+          83.63568254179599,
+          22.01633447322993
+        ],
+        "scaleDeg": [
+          -0.000030004350534238327,
+          0.000030004350534238327
+        ],
+        "rotationDeg": -1.9200000000000035
+      },
+      "metadataNote": "Unmodified publisher TIFF. Embedded AVM quality: Full. Native RGB presentation pixels are not calibrated measurements. Observation epochs and uncertainty are in source-dossier.json.",
+      "master": {
+        "url": "https://esawebb.org/media/archives/images/original/weic2417a.tif",
+        "width": 2958,
+        "height": 2569
+      },
+      "processingVariant": "Official original TIFF; no local crop or resize",
+      "compactStarChannel": "maximum-rgb",
+      "stellarTreatment": "preserve",
+      "matchedStarCatalogue": {
+        "path": "src/objects/m1-volume/source/webb-components-matched-stars.json"
+      },
+      "astrometricCalibration": {
+        "path": "src/objects/m1-volume/source/webb-components-astrometric-calibration.json"
+      }
+    },
+    {
+      "id": "spitzer-infrared",
+      "label": "Spitzer · mid-infrared",
+      "localCache": "src/objects/m1-volume/.local/intake/spitzer-infrared-esahubble.tif",
+      "url": "https://esahubble.org/media/archives/images/original/potw1720c.tif",
+      "page": "https://esahubble.org/images/potw1720c/",
+      "width": 5290,
+      "height": 5290,
+      "fieldArcminutes": [
+        8.82990723058374,
+        8.82990723058374
+      ],
+      "centerIcrsDegrees": [
+        83.6334511837,
+        22.0151236394
+      ],
+      "northRightDegrees": -0.4999999999999996,
+      "bands": "Mid-infrared · 24 µm (companion CXC metadata)",
+      "credit": "JPL/Caltech",
+      "termsUrl": "https://esahubble.org/copyright/",
+      "registrationMode": "publisher-wcs",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          5290,
+          5290
+        ],
+        "referencePixel": [
+          2645,
+          2645
+        ],
+        "referenceValueDeg": [
+          83.6334511837,
+          22.0151236394
+        ],
+        "scaleDeg": [
+          -0.0000278194934801,
+          0.0000278194934801
+        ],
+        "rotationDeg": 0.4999999999999996
+      },
+      "metadataNote": "Unmodified publisher TIFF. Embedded AVM quality: Full. Native RGB presentation pixels are not calibrated measurements. Observation epochs and uncertainty are in source-dossier.json.",
+      "master": {
+        "url": "https://esahubble.org/media/archives/images/original/potw1720c.tif",
+        "width": 5290,
+        "height": 5290
+      },
+      "processingVariant": "Official original TIFF; no local crop or resize",
+      "stellarTreatment": "preserve",
+      "registrationTransfer": {
+        "referenceId": "hubble-2017-bridge",
+        "pixelToReference": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "evidence": {
+          "path": "src/objects/m1-volume/source/spitzer-infrared-grid-transfer.json"
+        }
+      }
+    },
+    {
+      "id": "vla-radio",
+      "label": "VLA · radio synchrotron",
+      "localCache": "src/objects/m1-volume/.local/intake/vla-radio-esahubble.tif",
+      "url": "https://esahubble.org/media/archives/images/original/potw1720b.tif",
+      "page": "https://esahubble.org/images/potw1720b/",
+      "width": 5290,
+      "height": 5290,
+      "fieldArcminutes": [
+        8.82990723058374,
+        8.82990723058374
+      ],
+      "centerIcrsDegrees": [
+        83.6334511837,
+        22.0151236394
+      ],
+      "northRightDegrees": -0.4999999999999996,
+      "bands": "Radio · S band, approximately 3 GHz / 10 cm",
+      "credit": "NRAO/AUI/NSF",
+      "termsUrl": "https://esahubble.org/copyright/",
+      "registrationMode": "publisher-wcs",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          5290,
+          5290
+        ],
+        "referencePixel": [
+          2645,
+          2645
+        ],
+        "referenceValueDeg": [
+          83.6334511837,
+          22.0151236394
+        ],
+        "scaleDeg": [
+          -0.0000278194934801,
+          0.0000278194934801
+        ],
+        "rotationDeg": 0.4999999999999996
+      },
+      "metadataNote": "Unmodified publisher TIFF. Embedded AVM quality: Full. Native RGB presentation pixels are not calibrated measurements. Observation epochs and uncertainty are in source-dossier.json.",
+      "master": {
+        "url": "https://esahubble.org/media/archives/images/original/potw1720b.tif",
+        "width": 5290,
+        "height": 5290
+      },
+      "processingVariant": "Official original TIFF; no local crop or resize",
+      "stellarTreatment": "preserve",
+      "registrationTransfer": {
+        "referenceId": "hubble-2017-bridge",
+        "pixelToReference": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "evidence": {
+          "path": "src/objects/m1-volume/source/vla-radio-grid-transfer.json"
+        }
+      }
+    },
+    {
+      "id": "chandra-xray",
+      "label": "Chandra · X-ray pulsar wind",
+      "localCache": "src/objects/m1-volume/.local/intake/chandra-xray-esahubble.tif",
+      "url": "https://esahubble.org/media/archives/images/original/potw1720f.tif",
+      "page": "https://esahubble.org/images/potw1720f/",
+      "width": 5290,
+      "height": 5290,
+      "fieldArcminutes": [
+        8.82990723058374,
+        8.82990723058374
+      ],
+      "centerIcrsDegrees": [
+        83.6334511837,
+        22.0151236394
+      ],
+      "northRightDegrees": -0.4999999999999996,
+      "bands": "X-ray · ACIS; exact selected display passband unspecified",
+      "credit": "CXC",
+      "termsUrl": "https://esahubble.org/copyright/",
+      "registrationMode": "publisher-wcs",
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          5290,
+          5290
+        ],
+        "referencePixel": [
+          2645,
+          2645
+        ],
+        "referenceValueDeg": [
+          83.6334511837,
+          22.0151236394
+        ],
+        "scaleDeg": [
+          -0.0000278194934801,
+          0.0000278194934801
+        ],
+        "rotationDeg": 0.4999999999999996
+      },
+      "metadataNote": "Unmodified publisher TIFF. Embedded AVM quality: Full. Native RGB presentation pixels are not calibrated measurements. Observation epochs and uncertainty are in source-dossier.json.",
+      "master": {
+        "url": "https://esahubble.org/media/archives/images/original/potw1720f.tif",
+        "width": 5290,
+        "height": 5290
+      },
+      "processingVariant": "Official original TIFF; no local crop or resize",
+      "stellarTreatment": "preserve",
+      "registrationTransfer": {
+        "referenceId": "hubble-2017-bridge",
+        "pixelToReference": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "evidence": {
+          "path": "src/objects/m1-volume/source/chandra-xray-grid-transfer.json"
+        }
+      }
+    },
+    {
+      "width": 5290,
+      "height": 5290,
+      "fieldArcminutes": [
+        8.82990723058374,
+        8.82990723058374
+      ],
+      "centerIcrsDegrees": [
+        83.6334511837,
+        22.0151236394
+      ],
+      "wcs": {
+        "projection": "TAN",
+        "coordinateFrame": "ICRS",
+        "referenceDimension": [
+          5290,
+          5290
+        ],
+        "referencePixel": [
+          2645,
+          2645
+        ],
+        "referenceValueDeg": [
+          83.6334511837,
+          22.0151236394
+        ],
+        "scaleDeg": [
+          -0.0000278194934801,
+          0.0000278194934801
+        ],
+        "rotationDeg": 0.4999999999999996
+      },
+      "id": "hubble-2017-bridge",
+      "label": "Hubble · 2017 common-grid astrometric bridge",
+      "url": "https://esahubble.org/media/archives/images/original/potw1720d.tif",
+      "page": "https://esahubble.org/images/potw1720d/",
+      "credit": "NASA, ESA, and J. Hester (Arizona State University)",
+      "bands": "Optical Hubble component of publisher five-band composite",
+      "termsUrl": "https://esahubble.org/copyright/",
+      "northRightDegrees": -0.4999999999999996,
+      "registrationMode": "compact-stars",
+      "compactStarChannel": "maximum-rgb",
+      "processingRole": "registration-reference",
+      "matchedStarCatalogue": {
+        "path": "src/objects/m1-volume/source/hubble-2017-bridge-matched-stars.json"
+      }
+    }
+  ],
+  "nativeRemoval": {
+    "model": {
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
+  }
+}

@@ -7,19 +7,19 @@
   },
   "inputPins": [
     {
-      "path": "labs/nebula/models/m42/compiler.json"
+      "path": "src/objects/m42-volume/source/compiler.json"
     },
     {
-      "path": "labs/nebula/models/m42/observations.json"
+      "path": "src/objects/m42-volume/source/observations.json"
     },
     {
-      "path": "labs/nebula/models/m42/observation-structures.json"
+      "path": "src/objects/m42-volume/source/observation-structures.json"
     },
     {
-      "path": "labs/nebula/models/m42/depth-model.json"
+      "path": "src/objects/m42-volume/source/depth-model.json"
     },
     {
-      "path": "labs/nebula/models/m42/physical-evidence.json"
+      "path": "src/objects/m42-volume/source/physical-evidence.json"
     }
   ],
   "sky": {

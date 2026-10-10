@@ -4,7 +4,7 @@
   "inputs": [
     {
       "id": "eso-optical",
-      "path": ".local/nebula-lab/observations/m8-processed/sources/eso-optical.tif",
+      "path": "src/objects/m8-volume/.local/observations/m8-processed/sources/eso-optical.tif",
       "origin": "https://www.eso.org/public/images/eso0936a/",
       "sourceUrl": "https://www.eso.org/public/images/eso0936a/",
       "title": "Lagoon Nebula · ESO · optical",
@@ -17,7 +17,7 @@
           {
             "catalogueId": "eso-eso0936a",
             "role": "material",
-            "evidence": "labs/nebula/models/m8/processing-observations.json#/images/0"
+            "evidence": "src/objects/m8-volume/source/processing-observations.json#/images/0"
           }
         ]
       },
@@ -36,7 +36,7 @@
     },
     {
       "id": "eso-vista",
-      "path": ".local/nebula-lab/observations/m8-processed/sources/eso-vista.tif",
+      "path": "src/objects/m8-volume/.local/observations/m8-processed/sources/eso-vista.tif",
       "origin": "https://www.eso.org/public/images/eso1101d/",
       "sourceUrl": "https://www.eso.org/public/images/eso1101d/",
       "title": "Lagoon Nebula · ESO VISTA · infrared",
@@ -49,7 +49,7 @@
           {
             "catalogueId": "eso-eso1101d",
             "role": "material",
-            "evidence": "labs/nebula/models/m8/processing-observations.json#/images/1"
+            "evidence": "src/objects/m8-volume/source/processing-observations.json#/images/1"
           }
         ]
       },
@@ -68,7 +68,7 @@
     },
     {
       "id": "spitzer-mid-infrared",
-      "path": ".local/nebula-lab/observations/m8-processed/sources/spitzer-mid-infrared.skybands.png",
+      "path": "src/objects/m8-volume/.local/observations/m8-processed/sources/spitzer-mid-infrared.skybands.png",
       "origin": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
       "sourceUrl": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/",
       "title": "Lagoon Nebula · Spitzer IRAC · calibrated mid-infrared maps",

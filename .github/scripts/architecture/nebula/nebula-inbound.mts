@@ -29,7 +29,8 @@ const sourcePattern = /\.(?:[cm]?[jt]sx?|astro)$/;
 function files(directory: string): string[] {
   if (!existsSync(directory)) return [];
   return readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
-    if (['node_modules', 'dist', '.astro'].includes(entry.name)) return [];
+    // `.local/` is ignored scratch (an object's lab workspace included): it can never be committed, so no rule reads it.
+    if (['node_modules', 'dist', '.astro', '.local'].includes(entry.name)) return [];
     const file = resolve(directory, entry.name);
     return entry.isDirectory() ? files(file) : sourcePattern.test(file) && isFile(file) ? [file] : [];
   });

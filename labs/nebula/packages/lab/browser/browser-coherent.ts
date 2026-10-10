@@ -20,7 +20,7 @@ interface Report {
 }
 
 const baseURL = process.argv[2] ?? 'http://127.0.0.1:4331';
-const subjectsPath = process.argv[3] ?? 'labs/nebula/packages/lab/src/state/subjects.json';
+const subjectsPath = process.argv[3] ?? 'labs/nebula/packages/lab/src/state/processing-subjects.json';
 const outputRoot = process.argv[4] ?? '.local/nebula-lab/coherent';
 const screenshots = `${outputRoot}/screenshots`;
 const expected = ['tarantula-broad', 'tarantula-localized', 'tarantula-coherent', 'orion-broad', 'orion-localized', 'orion-coherent'];

@@ -19,23 +19,23 @@
       ],
       "schema": "cssearth-constrained-tracer-fit@1",
       "recipe": {
-        "path": "labs/nebula/models/smc/constrained/fit.json"
+        "path": "src/objects/smc-volume/source/constrained/fit.json"
       },
       "inputs": {
         "simulation": {
-          "path": ".local/nebula-lab/full-density/smc-full-density.f32"
+          "path": "src/objects/smc-volume/.local/full-density/smc-full-density.f32"
         },
         "catalogue": {
-          "path": ".local/nebula-lab/smc-vmc/density-rc.tsv"
+          "path": "src/objects/smc-volume/.local/vmc/density-rc.tsv"
         },
         "footprint": {
-          "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz"
+          "path": "src/objects/smc-volume/.local/vmc/rcsmcext.dat.gz"
         },
         "observedReceipt": {
-          "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json"
+          "path": "src/objects/smc-volume/source/vmc/crossmatch-receipt.json"
         },
         "frameObject": {
-          "path": "labs/nebula/models/smc/full-density/object.json"
+          "path": "src/objects/smc-volume/source/full-density/object.json"
         }
       },
       "simulationCenter": {
@@ -475,7 +475,7 @@
           "yScale"
         ],
         "particles": {
-          "path": ".local/nebula-lab/smc-constrained/simulation.f32",
+          "path": "src/objects/smc-volume/.local/constrained/simulation.f32",
           "count": 225000
         }
       },
@@ -506,23 +506,23 @@
       ],
       "schema": "cssearth-constrained-tracer-fit@1",
       "recipe": {
-        "path": "labs/nebula/models/smc/constrained/fit.json"
+        "path": "src/objects/smc-volume/source/constrained/fit.json"
       },
       "inputs": {
         "simulation": {
-          "path": ".local/nebula-lab/full-density/smc-full-density.f32"
+          "path": "src/objects/smc-volume/.local/full-density/smc-full-density.f32"
         },
         "catalogue": {
-          "path": ".local/nebula-lab/smc-vmc/density-rc.tsv"
+          "path": "src/objects/smc-volume/.local/vmc/density-rc.tsv"
         },
         "footprint": {
-          "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz"
+          "path": "src/objects/smc-volume/.local/vmc/rcsmcext.dat.gz"
         },
         "observedReceipt": {
-          "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json"
+          "path": "src/objects/smc-volume/source/vmc/crossmatch-receipt.json"
         },
         "frameObject": {
-          "path": "labs/nebula/models/smc/full-density/object.json"
+          "path": "src/objects/smc-volume/source/full-density/object.json"
         }
       },
       "simulationCenter": {
@@ -850,7 +850,7 @@
         ],
         "activeBounds": [],
         "particles": {
-          "path": ".local/nebula-lab/smc-constrained/ellipsoid.f32",
+          "path": "src/objects/smc-volume/.local/constrained/ellipsoid.f32",
           "count": 65536
         }
       },

@@ -16,7 +16,7 @@ The [author download page](https://graphics.tu-bs.de/publications/wenger2013fast
 
 ## Active experiment
 
-[M2–9 recipe, reproduction and limits](../models/m2-9/README.md). Object parameters stay in the recipe; generic inference lives in `src/reconstruction/emission-inference/`. Acquisition, masks, inference, projection checks and baking run from `src/cli/prepare-emission.ts`. React adds only a small read-only comparison panel; the existing TypeScript viewer handles the cloud.
+[M2–9 recipe, reproduction and limits](../../../src/objects/m2-9-volume/source/README.md). Object parameters stay in the recipe; generic inference lives in `src/reconstruction/emission-inference/`. Acquisition, masks, inference, projection checks and baking run from `src/cli/prepare-emission.ts`. React adds only a small read-only comparison panel; the existing TypeScript viewer handles the cloud.
 
 The first run uses a small outreach image and explicit compact-source masks to test the volume method quickly. It does not supersede native NOX removal or provide a production-ready asset. There is no measured stellar catalogue or distance for this prototype.
 
@@ -24,7 +24,7 @@ The first run uses a small outreach image and explicit compact-source masks to t
 
 The active follow-up is the [emission compiler](emission-compiler.md): one final cloud from the registered wider Helix observations, with positive multiscale emission and conditional depth. The [structure inspector](nebula-compiler.md) remains a diagnostic. Visual acceptance is open; the failed Helix volumes below retain their historical verdicts. A second compiler nebula is deferred until the current machinery is assessed.
 
-Helix is now an additional stress test: [observation, registration, recipes and comparison results](../models/helix/README.md). The one-axis method fits its front but produces a box-like side volume. A separately authored disk/ring prior produces curved components but fails on detailed structure and outer-emission coverage. Both remain visible and unaccepted. This is a concrete example of why good reprojection alone cannot establish 3D quality.
+Helix is now an additional stress test: [observation, registration, recipes and comparison results](../../../src/objects/helix-layers/source/README.md). The one-axis method fits its front but produces a box-like side volume. A separately authored disk/ring prior produces curved components but fails on detailed structure and outer-emission coverage. Both remain visible and unaccepted. This is a concrete example of why good reprojection alone cannot establish 3D quality.
 
 1. Decide whether the reconstructed side structure is useful. Keep an initial baseline and at most two controlled adjustments; compare identical camera poses and fixed exposure.
 2. Acquire a larger, unannotated observation with documented band mapping. Reuse the existing native NOX pipeline; check that compact nebular knots and the central engine are not mistaken for foreground stars. Pin the selected diffuse image before inference.

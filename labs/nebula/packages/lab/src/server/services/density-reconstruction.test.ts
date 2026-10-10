@@ -17,8 +17,8 @@ test('the catalogue restores the newest completed placement, independent of name
     await mkdir(dirname(full), { recursive: true }); await writeFile(full, JSON.stringify(value));
   }
   try {
-    const overlay = 'labs/nebula/models/lmc/candidates';
-    await save('labs/nebula/packages/lab/src/state/subjects.json', [{ id: request.subjectId, density: { overlays: `${overlay}/overlays.json`, processingPlan: 'processing/plan.json' } }]);
+    const overlay = 'src/objects/lmc-volume/source/candidates';
+    await save('labs/nebula/packages/lab/src/state/processing-subjects.json', [{ id: request.subjectId, density: { overlays: `${overlay}/overlays.json`, processingPlan: 'processing/plan.json' } }]);
     await save('catalogue.json', { targets: [{ directory: overlay, images: [{ id: request.imageId, label: 'Test' }] }] });
     await save('alignment.json', { pass: false });
     await save('processing/plan.json', { catalogue: 'catalogue.json', alignmentReport: { path: 'alignment.json' } });
@@ -40,7 +40,7 @@ test('the catalogue restores the newest completed placement, independent of name
     const candidate = (await reconstructionCatalogue(root, request.subjectId)).candidates[0]!;
     assert.equal(candidate.prepared?.resultId, newest);
     assert.equal(candidate.prepared?.placement.scale, 2);
-    await save('labs/nebula/packages/lab/src/state/subjects.json', [{ id: request.subjectId, density: { overlays: `${overlay}/overlays.json` } }]);
+    await save('labs/nebula/packages/lab/src/state/processing-subjects.json', [{ id: request.subjectId, density: { overlays: `${overlay}/overlays.json` } }]);
     await assert.rejects(reconstructionCatalogue(root, request.subjectId), /no configured density processing plan/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

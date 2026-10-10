@@ -23,44 +23,14 @@
       "label": "Orion · M42",
       "catalogueId": "M  42",
       "imageContent": "H II region",
-      "compilerRecipe": "labs/nebula/models/m42/compiler.json"
+      "compilerRecipe": "src/objects/m42-volume/source/compiler.json"
     },
     {
       "id": "m8",
       "label": "Lagoon · M8",
       "catalogueId": "M   8",
       "imageContent": "H II complex surrounding an open cluster",
-      "compilerRecipe": "labs/nebula/models/m8/compiler.json"
-    },
-    {
-      "id": "carina",
-      "label": "Carina",
-      "catalogueId": "NGC  3372",
-      "imageContent": "H II and dust complex",
-      "compilerRecipe": "labs/nebula/models/carina/compiler.json"
-    },
-    {
-      "id": "ngc6357",
-      "label": "Lobster · NGC6357",
-      "catalogueId": "NGC  6357",
-      "imageContent": "H II complex surrounding open clusters",
-      "compilerRecipe": "labs/nebula/models/ngc6357/compiler.json"
-    },
-    {
-      "id": "m78",
-      "label": "M78",
-      "catalogueId": "M  78",
-      "imageContent": "Reflection nebula and obscuring dust",
-      "compilerRecipe": "labs/nebula/models/m78/compiler.json",
-      "limitation": "Positive display-emission approximation does not model illumination-dependent scattering."
-    },
-    {
-      "id": "horsehead",
-      "label": "Horsehead + Flame",
-      "catalogueId": "NAME Horsehead Nebula",
-      "imageContent": "Dark nebula against surrounding emission",
-      "compilerRecipe": "labs/nebula/models/horsehead/compiler.json",
-      "limitation": "Absorption stress test: a positive emission field cannot recover the obscuring Horsehead material from its silhouette."
+      "compilerRecipe": "src/objects/m8-volume/source/compiler.json"
     }
   ]
 }

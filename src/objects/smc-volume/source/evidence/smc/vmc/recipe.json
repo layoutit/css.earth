@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-red-clump-intake@1",
-  "localDirectory": ".local/nebula-lab/smc-vmc",
-  "receiptPath": "labs/nebula/models/smc/vmc/crossmatch-receipt.json",
+  "localDirectory": "src/objects/smc-volume/.local/vmc",
+  "receiptPath": "src/objects/smc-volume/source/vmc/crossmatch-receipt.json",
   "calibration": {
     "referenceDistanceKpc": 61,
     "referenceMagnitude": 17.304,

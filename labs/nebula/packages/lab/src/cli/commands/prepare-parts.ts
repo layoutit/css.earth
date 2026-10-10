@@ -45,7 +45,7 @@ async function pinned(pin: Pin, url?: string): Promise<Buffer> {
 const span = (bounds: Bounds3, axis: number) => bounds.max[axis]! - bounds.min[axis]!;
 const safe = (id: string) => id.replace(/[^a-z0-9_-]+/giu, '-').replace(/^-+|-+$/gu, '').toLowerCase();
 
-const [recipePath = 'labs/nebula/models/lmc/clouds.json', requestedVariant, extra] = process.argv.slice(2);
+const [recipePath = 'src/objects/lmc-volume/source/clouds.json', requestedVariant, extra] = process.argv.slice(2);
 if (extra) throw new Error('Usage: prepare-parts [recipe.json] [coherent-variant-id]');
 const recipe: Recipe = parseLabModelJson(await readFile(recipePath, 'utf8'));
 if (recipe.schema !== 'cssearth-filled-observation@1') throw new TypeError('Invalid filled observation recipe.');

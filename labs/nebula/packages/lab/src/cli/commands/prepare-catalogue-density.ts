@@ -1,6 +1,6 @@
 /** Bake an observed tracer catalogue in an existing physical frame, with no morphology fit. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { resolve, relative } from 'node:path';
+import { resolve, relative, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, type Vector3, type VolumeRecipe } from '@cssearth/objects';
 import { cataloguePosition, METERS_PER_KPC } from '@cssearth/bake/volume';
@@ -8,6 +8,7 @@ import { planFullDensityGrid } from '@cssearth/nebula-reconstruction/stars/full-
 import { sourceBytes, prepareVolumeSlices } from '@cssearth/bake/volume/node';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
+import { isLabScratchPath } from '../../resources/model-paths.ts';
 type Pin = {
     path: string;
 };
@@ -27,10 +28,10 @@ export async function prepareCatalogueDensity(configPath: string) {
     const root = process.cwd(), config = object(JSON.parse(await readFile(configPath, 'utf8')) as unknown);
     if (!['cssearth-catalogue-density@1', 'cssearth-tracer-density@1'].includes(String(config.schema)) || typeof config.id !== 'string' ||
         !/^[a-z0-9-]+$/.test(config.id) || typeof config.outputDirectory !== 'string' ||
-        !config.outputDirectory.startsWith('.local/nebula-lab/'))
+        !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(config.outputDirectory))
         throw new TypeError('Invalid catalogue density recipe.');
     const output = resolve(root, config.outputDirectory);
-    if (!relative(resolve(root, '.local/nebula-lab'), output) || relative(resolve(root, '.local/nebula-lab'), output).startsWith('..'))
+    if (!isLabScratchPath(relative(root, output).split(sep).join('/')) || relative(root, output).split(sep).includes('..'))
         throw new TypeError('Output must be a child of the local lab cache.');
     if ((config.catalogue === undefined) === (config.particles === undefined)) throw new TypeError('Specify one catalogue or local particle source.');
     const particleMode = config.particles !== undefined;

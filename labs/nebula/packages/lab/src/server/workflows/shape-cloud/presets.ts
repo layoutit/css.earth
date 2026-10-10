@@ -14,7 +14,7 @@ const text = (v: unknown): v is string => typeof v === 'string' && v.length > 0;
 export function readShapeCloudPreset(value: unknown): ShapeCloudPreset {
   if (!record(value) || value.schema !== 'cssearth-shape-cloud-fit@1' || !text(value.id) || !/^[a-z0-9-]+$/.test(value.id) ||
       !text(value.label) || !text(value.note) || !text(value.imageId) || !text(value.cataloguePath) ||
-      !value.cataloguePath.startsWith('.local/nebula-lab/') || /[\\?#]/.test(value.cataloguePath) || value.cataloguePath.split('/').some(p => p === '..' || p === '.') ||
+      !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(value.cataloguePath) || /[\\?#]/.test(value.cataloguePath) || value.cataloguePath.split('/').some(p => p === '..' || p === '.') ||
       typeof value.width !== 'number' || typeof value.height !== 'number') throw new TypeError('Invalid saved shape-cloud fit.');
   const keys = ['schema', 'id', 'label', 'note', 'cataloguePath', 'imageId', 'width', 'height', 'settings'];
   const unexpected = Object.keys(value).filter(key => !keys.includes(key));

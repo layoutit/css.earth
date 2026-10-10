@@ -9,7 +9,7 @@ import { loadFiniteModelStarContext, finiteModelDirectory, type FiniteModelStarC
 
 const root = process.cwd();
 /** Every prepared SMC star layer: one per finite model, each naming its own model, recipe and depth density. */
-const layers = ['labs/nebula/models/smc/stars/prepared/stars.json', 'labs/nebula/models/smc/stars/prepared/stars-ellipsoid.json'];
+const layers = ['src/objects/smc-volume/source/stars/prepared/stars.json', 'src/objects/smc-volume/source/stars/prepared/stars-ellipsoid.json'];
 const prepared = process.env.SMC_STAR_LAYER ?? layers[0]!;
 const load = async (path = prepared) => JSON.parse(await readFile(path, 'utf8')) as PreparedLmcStars;
 const modelOf = (payload: PreparedLmcStars) => (payload.provenance as { finiteModel: { modelResultId: string } }).finiteModel.modelResultId;
@@ -35,8 +35,8 @@ const tangentOf = (s: { raDeg: number; decDeg: number }, frame: PreparedLmcStars
 test('pinned Bonanos (2010) rows replay deterministically into the prepared SMC stars and the model frame', { skip }, async () => {
   const context = (await contextPromise)!, payload = await load();
   const { files } = await readSmcStarManifest(root);
-  for (const file of files) assert.ok((await readFile(`labs/nebula/models/smc/stars/source/${file.path}`)).length > 0, file.path);
-  const table = await readFile('labs/nebula/models/smc/stars/source/table3.dat', 'utf8');
+  for (const file of files) assert.ok((await readFile(`src/objects/smc-volume/source/stars/source/${file.path}`)).length > 0, file.path);
+  const table = await readFile('src/objects/smc-volume/source/stars/source/table3.dat', 'utf8');
   const first = prepareSmcCatalogue(table, context), second = prepareSmcCatalogue(table, context);
   assert.deepEqual(first, second, 'Two replays must place every star identically.');
   assert.deepEqual(first.stars, payload.stars);
@@ -62,7 +62,7 @@ test('pinned Bonanos (2010) rows replay deterministically into the prepared SMC 
 
 test('footprint selection is finite V <= 16 on covered fit pixels, with nothing silently dropped', { skip }, async () => {
   const context = (await contextPromise)!, payload = await load();
-  const table = await readFile('labs/nebula/models/smc/stars/source/table3.dat', 'utf8');
+  const table = await readFile('src/objects/smc-volume/source/stars/source/table3.dat', 'utf8');
   const ids = new Set(payload.stars.map(star => star.id));
   let expected = 0, outside = 0;
   for (const line of table.trimEnd().split('\n')) {
@@ -107,7 +107,7 @@ test('every prepared star has positive joint emission and density support and mo
 
 test('the joint CDF guards reject rays without emission or density and never bridge a zero-support gap', { skip }, async () => {
   const context = (await contextPromise)!, payload = await load();
-  const table = (await readFile('labs/nebula/models/smc/stars/source/table3.dat', 'utf8')).trimEnd().split('\n');
+  const table = (await readFile('src/objects/smc-volume/source/stars/source/table3.dat', 'utf8')).trimEnd().split('\n');
   const brightest = payload.stars[0]!, line = table.find(row => `Bonanos2010:${readBonanos2010Row(row).name}` === brightest.id)!;
   const noEmission: FiniteModelStarContext = { ...context, sampleEmission: (_x, _y, _z, out) => { out.fill(0); } };
   const dark = prepareSmcCatalogue(line, noEmission);

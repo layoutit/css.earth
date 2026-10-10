@@ -21,7 +21,7 @@ M87 is not in the Local Volume Database, so its catalogue row is written from it
 
 ## Method
 
-The Nebula Lab recipe is [labs/nebula/models/m87/experiment.json](../../../labs/nebula/models/m87/experiment.json);
+The Nebula Lab recipe is [src/objects/m87-volume/source/experiment.json](../../../src/objects/m87-volume/source/experiment.json);
 `node labs/nebula/run.mts prepare-emission` runs it, and [delivery.json](source/delivery.json) places the result.
 
 1. **Stars:** NOX removes the Milky Way stars from the full photograph.

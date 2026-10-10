@@ -4,7 +4,7 @@
   "inputs": [
     {
       "id": "hubble-optical",
-      "path": ".local/nebula-lab/observations/m1/sources/hubble-optical.tif",
+      "path": "src/objects/m1-volume/.local/observations/m1/sources/hubble-optical.tif",
       "origin": "https://esahubble.org/images/heic0515a/",
       "sourceUrl": "https://esahubble.org/images/heic0515a/",
       "title": "Crab Nebula · Hubble · optical lines",
@@ -17,7 +17,7 @@
           {
             "catalogueId": "esahubble-heic0515a",
             "role": "material",
-            "evidence": "labs/nebula/models/m1/observations.json#/images/0"
+            "evidence": "src/objects/m1-volume/source/observations.json#/images/0"
           }
         ]
       },
@@ -36,7 +36,7 @@
     },
     {
       "id": "webb-infrared",
-      "path": ".local/nebula-lab/observations/m1/sources/webb-infrared.tif",
+      "path": "src/objects/m1-volume/.local/observations/m1/sources/webb-infrared.tif",
       "origin": "https://esawebb.org/images/weic2326a/",
       "sourceUrl": "https://esawebb.org/images/weic2326a/",
       "title": "Crab Nebula · Webb · near/mid-infrared",
@@ -49,7 +49,7 @@
           {
             "catalogueId": "esawebb-weic2326a",
             "role": "material",
-            "evidence": "labs/nebula/models/m1/observations.json#/images/1"
+            "evidence": "src/objects/m1-volume/source/observations.json#/images/1"
           }
         ]
       },
@@ -68,7 +68,7 @@
     },
     {
       "id": "webb-components",
-      "path": ".local/nebula-lab/observations/m1/sources/webb-components.tif",
+      "path": "src/objects/m1-volume/.local/observations/m1/sources/webb-components.tif",
       "origin": "https://esawebb.org/images/weic2417a/",
       "sourceUrl": "https://esawebb.org/images/weic2417a/",
       "title": "Crab Nebula · Webb · dust, sulfur, synchrotron",
@@ -81,7 +81,7 @@
           {
             "catalogueId": "esawebb-weic2417a",
             "role": "material",
-            "evidence": "labs/nebula/models/m1/observations.json#/images/2"
+            "evidence": "src/objects/m1-volume/source/observations.json#/images/2"
           }
         ]
       },
@@ -100,7 +100,7 @@
     },
     {
       "id": "spitzer-infrared",
-      "path": ".local/nebula-lab/observations/m1/sources/spitzer-infrared.tif",
+      "path": "src/objects/m1-volume/.local/observations/m1/sources/spitzer-infrared.tif",
       "origin": "https://esahubble.org/images/potw1720c/",
       "sourceUrl": "https://esahubble.org/images/potw1720c/",
       "title": "Crab Nebula · Spitzer · mid-infrared",
@@ -113,7 +113,7 @@
           {
             "catalogueId": "esahubble-potw1720c",
             "role": "material",
-            "evidence": "labs/nebula/models/m1/observations.json#/images/3"
+            "evidence": "src/objects/m1-volume/source/observations.json#/images/3"
           }
         ]
       },
@@ -132,7 +132,7 @@
     },
     {
       "id": "vla-radio",
-      "path": ".local/nebula-lab/observations/m1/sources/vla-radio.tif",
+      "path": "src/objects/m1-volume/.local/observations/m1/sources/vla-radio.tif",
       "origin": "https://esahubble.org/images/potw1720b/",
       "sourceUrl": "https://esahubble.org/images/potw1720b/",
       "title": "Crab Nebula · VLA · radio synchrotron",
@@ -145,7 +145,7 @@
           {
             "catalogueId": "esahubble-potw1720b",
             "role": "material",
-            "evidence": "labs/nebula/models/m1/observations.json#/images/4"
+            "evidence": "src/objects/m1-volume/source/observations.json#/images/4"
           }
         ]
       },
@@ -164,7 +164,7 @@
     },
     {
       "id": "chandra-xray",
-      "path": ".local/nebula-lab/observations/m1/sources/chandra-xray.tif",
+      "path": "src/objects/m1-volume/.local/observations/m1/sources/chandra-xray.tif",
       "origin": "https://esahubble.org/images/potw1720f/",
       "sourceUrl": "https://esahubble.org/images/potw1720f/",
       "title": "Crab Nebula · Chandra · X-ray pulsar wind",
@@ -177,7 +177,7 @@
           {
             "catalogueId": "esahubble-potw1720f",
             "role": "material",
-            "evidence": "labs/nebula/models/m1/observations.json#/images/5"
+            "evidence": "src/objects/m1-volume/source/observations.json#/images/5"
           }
         ]
       },
@@ -196,7 +196,7 @@
     },
     {
       "id": "hubble-2017-bridge",
-      "path": ".local/nebula-lab/observations/m1/sources/hubble-2017-bridge.tif",
+      "path": "src/objects/m1-volume/.local/observations/m1/sources/hubble-2017-bridge.tif",
       "origin": "https://esahubble.org/images/potw1720d/",
       "sourceUrl": "https://esahubble.org/images/potw1720d/",
       "title": "Crab Nebula · Hubble · 2017 common-grid astrometric bridge",
@@ -209,7 +209,7 @@
           {
             "catalogueId": "esahubble-potw1720d",
             "role": "reference",
-            "evidence": "labs/nebula/models/m1/observations.json#/images/6"
+            "evidence": "src/objects/m1-volume/source/observations.json#/images/6"
           }
         ]
       },
@@ -267,7 +267,7 @@
     },
     {
       "id": "sitelle-1",
-      "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZflux.fits",
+      "path": "src/objects/m1-volume/.local/intake/physical/3dmap_XYZflux.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3dmap_XYZflux.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
       "title": "Crab SITELLE · 3dmap_XYZflux.fits",
@@ -279,7 +279,7 @@
           {
             "catalogueId": "sitelle-2016-released-points",
             "role": "material",
-            "evidence": "labs/nebula/models/m1/physical-sources.json#/dataset/products/0"
+            "evidence": "src/objects/m1-volume/source/physical-sources.json#/dataset/products/0"
           }
         ]
       },
@@ -290,14 +290,14 @@
           {
             "kind": "facility",
             "facilityId": "cfht",
-            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in src/objects/m1-volume/source/physical-sources.json"
           }
         ]
       }
     },
     {
       "id": "sitelle-2",
-      "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZvel.fits",
+      "path": "src/objects/m1-volume/.local/intake/physical/3dmap_XYZvel.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3dmap_XYZvel.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
       "title": "Crab SITELLE · 3dmap_XYZvel.fits",
@@ -309,7 +309,7 @@
           {
             "catalogueId": "sitelle-2016-released-points",
             "role": "material",
-            "evidence": "labs/nebula/models/m1/physical-sources.json#/dataset/products/1"
+            "evidence": "src/objects/m1-volume/source/physical-sources.json#/dataset/products/1"
           }
         ]
       },
@@ -320,14 +320,14 @@
           {
             "kind": "facility",
             "facilityId": "cfht",
-            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in src/objects/m1-volume/source/physical-sources.json"
           }
         ]
       }
     },
     {
       "id": "sitelle-4",
-      "path": ".local/nebula-lab/intake/m1/physical/m1.deep_frame.fits",
+      "path": "src/objects/m1-volume/.local/intake/physical/m1.deep_frame.fits",
       "origin": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/m1.deep_frame.fits",
       "sourceUrl": "https://github.com/thomasorb/M1_paper/tree/af491d4a13d408464ffb3ea75e6a424f6ef5d140",
       "title": "Crab SITELLE · m1.deep_frame.fits",
@@ -339,7 +339,7 @@
           {
             "catalogueId": "sitelle-2016-released-points",
             "role": "reference",
-            "evidence": "labs/nebula/models/m1/physical-sources.json#/dataset/products/3"
+            "evidence": "src/objects/m1-volume/source/physical-sources.json#/dataset/products/3"
           }
         ]
       },
@@ -350,7 +350,7 @@
           {
             "kind": "facility",
             "facilityId": "cfht",
-            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in labs/nebula/models/m1/physical-sources.json"
+            "evidence": "https://www.cfht.hawaii.edu/en/news/HeartofTheCrab/ — SITELLE at CFHT generated Martin, Milisavljevic and Drissen’s Crab mapping; released products are pinned in src/objects/m1-volume/source/physical-sources.json"
           }
         ]
       }

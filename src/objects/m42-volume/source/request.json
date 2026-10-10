@@ -1,8 +1,8 @@
 {
   "action": "apply",
   "imageId": "compiler",
-  "recipePath": "labs/nebula/models/m42/compiler.json",
-  "cataloguePath": ".local/nebula-lab/observations/m42/structures/catalogue.json",
+  "recipePath": "src/objects/m42-volume/source/compiler.json",
+  "cataloguePath": "src/objects/m42-volume/.local/observations/m42/structures/catalogue.json",
   "imageToFrame": {
     "eso-optical": [
       0.14757607964283156,

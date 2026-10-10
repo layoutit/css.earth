@@ -19,7 +19,7 @@
     {
       "id": "hubble-optical",
       "label": "Hubble · optical lines",
-      "localCache": ".local/nebula-lab/intake/m1/hubble-optical.tif",
+      "localCache": "src/objects/m1-volume/.local/intake/hubble-optical.tif",
       "url": "https://esahubble.org/media/archives/images/original/heic0515a.tif",
       "page": "https://esahubble.org/images/heic0515a/",
       "width": 3864,
@@ -69,7 +69,7 @@
     {
       "id": "webb-infrared",
       "label": "Webb · near/mid-infrared",
-      "localCache": ".local/nebula-lab/intake/m1/webb-infrared.tif",
+      "localCache": "src/objects/m1-volume/.local/intake/webb-infrared.tif",
       "url": "https://esawebb.org/media/archives/images/publicationtiff/weic2326a.tif",
       "page": "https://esawebb.org/images/weic2326a/",
       "width": 4000,
@@ -119,7 +119,7 @@
     {
       "id": "webb-components",
       "label": "Webb · dust, sulfur, synchrotron",
-      "localCache": ".local/nebula-lab/intake/m1/webb-components.tif",
+      "localCache": "src/objects/m1-volume/.local/intake/webb-components.tif",
       "url": "https://esawebb.org/media/archives/images/original/weic2417a.tif",
       "page": "https://esawebb.org/images/weic2417a/",
       "width": 2958,
@@ -168,16 +168,16 @@
       "compactStarChannel": "maximum-rgb",
       "stellarTreatment": "preserve",
       "matchedStarCatalogue": {
-        "path": "labs/nebula/models/m1/webb-components-matched-stars.json"
+        "path": "src/objects/m1-volume/source/webb-components-matched-stars.json"
       },
       "astrometricCalibration": {
-        "path": "labs/nebula/models/m1/webb-components-astrometric-calibration.json"
+        "path": "src/objects/m1-volume/source/webb-components-astrometric-calibration.json"
       }
     },
     {
       "id": "spitzer-infrared",
       "label": "Spitzer · mid-infrared",
-      "localCache": ".local/nebula-lab/intake/m1/spitzer-infrared-esahubble.tif",
+      "localCache": "src/objects/m1-volume/.local/intake/spitzer-infrared-esahubble.tif",
       "url": "https://esahubble.org/media/archives/images/original/potw1720c.tif",
       "page": "https://esahubble.org/images/potw1720c/",
       "width": 5290,
@@ -235,14 +235,14 @@
           0
         ],
         "evidence": {
-          "path": "labs/nebula/models/m1/spitzer-infrared-grid-transfer.json"
+          "path": "src/objects/m1-volume/source/spitzer-infrared-grid-transfer.json"
         }
       }
     },
     {
       "id": "vla-radio",
       "label": "VLA · radio synchrotron",
-      "localCache": ".local/nebula-lab/intake/m1/vla-radio-esahubble.tif",
+      "localCache": "src/objects/m1-volume/.local/intake/vla-radio-esahubble.tif",
       "url": "https://esahubble.org/media/archives/images/original/potw1720b.tif",
       "page": "https://esahubble.org/images/potw1720b/",
       "width": 5290,
@@ -300,14 +300,14 @@
           0
         ],
         "evidence": {
-          "path": "labs/nebula/models/m1/vla-radio-grid-transfer.json"
+          "path": "src/objects/m1-volume/source/vla-radio-grid-transfer.json"
         }
       }
     },
     {
       "id": "chandra-xray",
       "label": "Chandra · X-ray pulsar wind",
-      "localCache": ".local/nebula-lab/intake/m1/chandra-xray-esahubble.tif",
+      "localCache": "src/objects/m1-volume/.local/intake/chandra-xray-esahubble.tif",
       "url": "https://esahubble.org/media/archives/images/original/potw1720f.tif",
       "page": "https://esahubble.org/images/potw1720f/",
       "width": 5290,
@@ -365,7 +365,7 @@
           0
         ],
         "evidence": {
-          "path": "labs/nebula/models/m1/chandra-xray-grid-transfer.json"
+          "path": "src/objects/m1-volume/source/chandra-xray-grid-transfer.json"
         }
       }
     },
@@ -413,7 +413,7 @@
       "compactStarChannel": "maximum-rgb",
       "processingRole": "registration-reference",
       "matchedStarCatalogue": {
-        "path": "labs/nebula/models/m1/hubble-2017-bridge-matched-stars.json"
+        "path": "src/objects/m1-volume/source/hubble-2017-bridge-matched-stars.json"
       }
     }
   ],

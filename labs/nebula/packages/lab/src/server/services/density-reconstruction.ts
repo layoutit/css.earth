@@ -84,7 +84,7 @@ export async function resolveReconstructionSubject(root: string, id: string): Pr
 }
 
 async function context(root: string, subjectId: string) {
-  const subjects = await json(root, 'labs/nebula/packages/lab/src/state/subjects.json') as LabSubjectRecord[];
+  const subjects = await json(root, 'labs/nebula/packages/lab/src/state/processing-subjects.json') as LabSubjectRecord[];
   const subject = subjects.find(item => item.id === subjectId);
   if (!subject?.density?.overlays) throw new TypeError('This object has no aligned image catalogue.');
   if (!subject.density.processingPlan) throw new TypeError('This object has no configured density processing plan.');

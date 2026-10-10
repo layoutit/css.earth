@@ -10,7 +10,7 @@ import { pathToFileURL } from 'node:url';
 const root = pathToFileURL(projectRoot(import.meta.url) + '/');
 const lab = 'labs/nebula/packages/lab/src/';
 const reconstruction = 'labs/nebula/packages/reconstruction/src/';
-const models = 'labs/nebula/models/lmc/';
+const models = 'src/objects/lmc-volume/source/';
 function literalsInCode(source: string, path: string, name: string): string[] {
   if (path.endsWith('.py')) {
     const code = source.replace(/(['"])(?:\\.|(?!\1)[^\\\n])*?\1|#[^\n]*/gu,

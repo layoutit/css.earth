@@ -51,7 +51,7 @@ To rebuild the contribution bank from the pinned source recipe, from a clean che
 
 ```sh
 pnpm install --frozen-lockfile
-node --experimental-strip-types labs/nebula/src/run.ts prepare-parts labs/nebula/models/lmc/clouds.json
+node --experimental-strip-types labs/nebula/src/run.ts prepare-parts src/objects/lmc-volume/source/clouds.json
 pnpm lab:nebula
 ```
 

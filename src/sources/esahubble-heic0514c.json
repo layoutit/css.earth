@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/smc/image-candidates.json",
+      "path": "src/objects/smc-volume/source/image-candidates.json",
       "locator": "/targets/0/images/2"
     }
   ],
@@ -29,19 +29,19 @@
       "kind": "credit",
       "text": "ESA/Hubble and Digitized Sky Survey 2; acknowledgement Davide De Martin (ESA/Hubble)",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json#/targets/0/images/2"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/image-candidates.json#/targets/0/images/2"
     },
     {
       "kind": "rights",
       "text": "CC BY 4.0",
       "scope": "Redistributed display derivatives",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json#/targets/0/images/2"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/image-candidates.json#/targets/0/images/2"
     },
     {
       "kind": "limitation",
       "text": "Full-resolution publisher JPEG of a photographic plate composite; the 421.7 MB TIFF was deferred. Smaller footprint than VISTA and SMASH, and not outer tidal-tail coverage.",
       "scope": "Acquired representation and coverage",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/image-candidates.json#/targets/0/images/2/registrationNote"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/image-candidates.json#/targets/0/images/2/registrationNote"
     }
   ]
 }

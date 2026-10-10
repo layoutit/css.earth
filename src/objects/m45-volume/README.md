@@ -24,7 +24,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 
 - Recorded app checks cover the delivered composite and catalogue field; report context limits their claims.
 - [Delivery](source/delivery.json) pins the compiler and composite recipes. The app composite uses a freshly supplied compiler result; the historical standalone composite remains a separate comparison. This is not a new cold-replay or material acceptance claim.
-- [Historical registration evidence](../../../labs/nebula/models/m45/registration-evidence.json) records relative stellar alignment. Niittee’s 99 held-out stars give 0.450″ RMS only within the central NOIRLab overlap; absolute and outer-field distortion remain unqualified.
+- [Historical registration evidence](../../../src/objects/m45-volume/source/registration-evidence.json) records relative stellar alignment. Niittee’s 99 held-out stars give 0.450″ RMS only within the central NOIRLab overlap; absolute and outer-field distortion remain unqualified.
 
 ## Known problems
 
@@ -36,7 +36,7 @@ Exact input identities, credits, reuse terms and processing pins are in the [sou
 <details>
 <summary>Methods and historical comparisons</summary>
 
-The [fixed lab account](../../../labs/nebula/models/m45/README.md) retains historical replay hashes, native separation checks and failed material views. [Physical evidence](../../../labs/nebula/models/m45/physical-evidence.json) scopes the Gibson–Nordsieck and Ritchey interpretations. The [source dossier](../../../labs/nebula/models/m45/source-dossier.json) preserves excluded 2MASS/IRIS and preliminary Usama/Andreo candidates, plus unacquired WISP UV data. General preparation is in the [nebula guide](../../../docs/nebulae/README.md).
+The [fixed lab account](../../../src/objects/m45-volume/source/README.md) retains historical replay hashes, native separation checks and failed material views. [Physical evidence](../../../src/objects/m45-volume/source/physical-evidence.json) scopes the Gibson–Nordsieck and Ritchey interpretations. The [source dossier](../../../src/objects/m45-volume/source/source-dossier.json) preserves excluded 2MASS/IRIS and preliminary Usama/Andreo candidates, plus unacquired WISP UV data. General preparation is in the [nebula guide](../../../docs/nebulae/README.md).
 
 </details>
 

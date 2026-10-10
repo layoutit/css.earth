@@ -13,7 +13,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m45/physical-sources.json",
+      "path": "src/objects/m45-volume/source/physical-sources.json",
       "locator": "/products/3"
     }
   ],
@@ -24,7 +24,7 @@
       "kind": "credit",
       "text": "Carl Melis; Mark J. Reid; Amy J. Mioduszewski; John R. Stauffer; Geoffrey C. Bower",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/physical-sources.json#/products/3"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/physical-sources.json#/products/3"
     }
   ],
   "creators": [

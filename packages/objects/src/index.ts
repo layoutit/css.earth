@@ -247,7 +247,7 @@ export { CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type CircumstellarOpacity, type Ed
 // E2-rest: P4
 export { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsRequest, parsePyuvdataUvfitsAnswer, type PyuvdataUvfitsRequest, type PyuvdataUvfitsAnswer } from './prepared-data/source/pyuvdata-uvfits.js';
 export { VOLUME_SOURCE_MANIFEST_SCHEMA, PUBLISHED_MODEL_PARAMETERS_SCHEMA, parseVolumeSourceManifest, parseVolumeContextProducts, type VolumeManifestReader, type VolumeContextProduct } from './prepared-data/source/volume-source-manifest.js';
-export { VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourcePreview, isTrackedVolumeSourcePreview, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/source/volume-presentation-source.js';
+export { VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourcePreview, isTrackedVolumeSourcePreview, isScratchSourcePath, scratchSourceCachePath, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/source/volume-presentation-source.js';
 export { parseGeometryProfile, type GeometryProfile, type SeamOutsetProfile, type SurfaceGeometryProfile } from './prepared-data/presentation/css-geometry-profile.js';
 export { parseDepthRecipe, readPublishedDepthRecipe } from './volume/nebula/nebula-depth-model.js';
 export { parseAcquisitionPlan, type AcquisitionValidationPolicy } from './prepared-data/source/acquisition-plan.js';

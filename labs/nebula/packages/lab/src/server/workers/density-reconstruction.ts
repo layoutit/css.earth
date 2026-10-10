@@ -2,12 +2,12 @@
 import { parseDensityPlacement, OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices } from '@cssearth/objects';
 import { collectArtifacts } from '../workflows/density/io.ts';
 import { mkdir, readFile, writeFile, readdir } from 'node:fs/promises';
-import { dirname, resolve, relative, isAbsolute, basename } from 'node:path';
+import { dirname, resolve, relative, isAbsolute, basename, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
 import { densityPlacementTransform, createAlignedObservationMapping, parseCloudAppearance, prepareCloudDetail, CLOUD_DETAIL_METHOD } from '@cssearth/bake/volume';
 import type { ReconstructionWork } from '../../features/reconstruction/reconstruction-types.ts';
-import { parseLabModelJson } from '../../resources/model-paths.ts';
+import { isLabScratchPath, parseLabModelJson } from '../../resources/model-paths.ts';
 import { rectifyObservation, writeObservationPanel } from '@cssearth/nebula-reconstruction/methods/density-prior/filled-products';
 import { registeredImageSampler, registeredScalarSampler, writeOriginalOverlay } from '../workflows/density/registered-image.ts';
 import { recolorCloudSlices, containedPath, loadVolumeSource } from '@cssearth/bake/volume/node';
@@ -30,8 +30,8 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   const progress=(stage:string,current:number,total:number,message:string)=>options.onProgress?.({type:'progress',stage,current,total,message});
   if(work.schema!=='cssearth-nebula-reconstruction-work@1'||!/^reconstruction-[a-z0-9][a-z0-9-]*$/.test(work.id)||
     !work.imageId||!work.name||!isAbsolute(work.outputDirectory)||!work.cloud)throw new TypeError('A reconstruction requires its pinned canonical cloud.');
-  const output=resolve(work.outputDirectory),offset=relative(resolve(root,'.local/nebula-lab'),output);
-  if(!offset||offset==='..'||offset.startsWith('../')||isAbsolute(offset))throw new TypeError('Reconstruction outputs require their own ignored local directory.');
+  const output=resolve(work.outputDirectory),offset=relative(resolve(root),output);
+  if(!isLabScratchPath(offset.split(sep).join('/'))||offset.split(sep).includes('..')||isAbsolute(offset))throw new TypeError('Reconstruction outputs require their own ignored local directory.');
   const existing=await readdir(output).catch((error:NodeJS.ErrnoException)=>{if(error.code!=='ENOENT')throw error;return [];});
   if(existing.some(name=>name!=='request.json'))throw new TypeError('Reconstruction must not overwrite an existing output.');
   progress('validating',0,3,'Verifying original image, saved starless pixels and the Alignment density cloud');

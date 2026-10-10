@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 
 import { resolve } from "node:path";
 import { spawn } from "node:child_process";
-import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourceManifest, parseVolumeRecipe } from '@cssearth/objects';
+import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourceManifest, parseVolumeRecipe, isScratchSourcePath } from '@cssearth/objects';
 import { sourceBytes } from '../volume/node/index.ts';
 import { publishSourceBytes } from '../delivery/index.ts';
 import { sourceArray, sourceObject, sourcePath } from '@cssearth/objects/sources';
@@ -51,7 +51,7 @@ export async function restoreSourceInputs(argumentsList: readonly string[], { ro
       sourceArray(manifest[section] ?? [], sourceObject).map(raw => ({ raw, section })));
     for (const { raw, section } of entries) {
       const path = sourcePath(raw.path);
-      if (path.startsWith('.local/')) continue;
+      if (isScratchSourcePath(path)) continue;
       const entry = `${id}: ${path} (source/manifest.json ${section}, id ${JSON.stringify(raw.id ?? null)})`;
       // A tracked file arrives with the checkout; a download is fetched only while it is missing. A present file is never
       // replaced, but one whose bytes are not what its name says (a web page saved as an image) is refused before a bake reads it.

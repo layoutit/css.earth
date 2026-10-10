@@ -9,6 +9,7 @@ import { jointRecord, jointPath } from '../../features/joint-fit/model.ts';
 import { loadDepthModel } from '../../server/workflows/compiler/depth-model.ts';
 import { sampledOwnerPins } from '../../features/sampled-prior/ownership.ts';
 import { loadPhotometricPrior } from '../../server/workflows/compiler/photometric-prior.ts';
+import { objectScratch } from '../../resources/model-paths.ts';
 
 const [cataloguePath, ...args] = process.argv.slice(2);
 if (!cataloguePath || args.some(arg => arg !== '--alignment-only' && !/^--object=[a-z0-9-]+$/.test(arg))) {
@@ -20,7 +21,7 @@ const catalogue: unknown = JSON.parse(await readFile(cataloguePath, 'utf8'));
 if (!jointRecord(catalogue) || catalogue.schema !== 'cssearth-nebula-candidates@1' || !Array.isArray(catalogue.candidates)) throw new TypeError('Invalid candidate catalogue.');
 const candidates = catalogue.candidates.map((row: unknown) => {
   if (!jointRecord(row) || typeof row.id !== 'string' || !/^[a-z0-9-]+$/.test(row.id) || !jointPath(row.compilerRecipe) ||
-      !row.compilerRecipe.startsWith('labs/nebula/models/')) throw new TypeError('Invalid candidate recipe.');
+      !/^src\/objects\/[a-z0-9-]+\/source\//.test(row.compilerRecipe)) throw new TypeError('Invalid candidate recipe.');
   return { id: row.id, compilerRecipe: row.compilerRecipe };
 });
 if (new Set(candidates.map(row => row.id)).size !== candidates.length || requested.some(id => !candidates.some(row => row.id === id))) throw new TypeError('Duplicate or unknown candidate.');
@@ -32,8 +33,7 @@ const save = async (path: string, data: unknown) => {
   await writeFile(`${path}.pending`, JSON.stringify(data, null, 2) + '\n'); await rename(`${path}.pending`, path);
 };
 const output = resolve(root, '.local/nebula-lab/candidate-runs');
-const published = resolve(root, '.local/nebula-lab/compiler-published');
-await mkdir(output, { recursive: true }); await mkdir(published, { recursive: true });
+await mkdir(output, { recursive: true });
 const controller = new AbortController();
 process.once('SIGINT', () => controller.abort(new Error('Candidate batch cancelled.')));
 process.once('SIGTERM', () => controller.abort(new Error('Candidate batch cancelled.')));
@@ -84,7 +84,8 @@ for (const candidate of selected) {
           !jointPath(method.photometricPrior.recipe.path) || !jointPath(method.photometricPrior.evidence.path)))
         throw new TypeError(`Compiled photometric snapshots of ${candidate.id} are missing from ${result.method.path}.`);
       const inputs = await Promise.all(inputPaths.map(pin));
-      await save(resolve(published, `${candidate.id}.json`), { schema: 'cssearth-nebula-compiler-published@1', recipePath: candidate.compilerRecipe,
+      await mkdir(resolve(root, objectScratch(candidate.id)), { recursive: true });
+      await save(resolve(root, objectScratch(candidate.id, 'compiler-published.json')), { schema: 'cssearth-nebula-compiler-published@1', recipePath: candidate.compilerRecipe,
         result: resultPin, inputs });
       results.push({ id: candidate.id, status: 'complete', result: resultPin, metrics: result.metrics, seconds: (performance.now() - started) / 1000 });
     }

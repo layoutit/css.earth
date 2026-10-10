@@ -10,7 +10,7 @@
       "title": "SDSS9 color (g, r, i)",
       "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
       "displayCredit": "SDSS",
-      "acquisition": "A 1500 x 1500 px tangent-plane cutout of the color HiPS CDS/P/SDSS9/color from the CDS hips2fits service, downloaded unchanged by the Nebula Lab recipe (labs/nebula/models/ngc-1275/experiment.json) into its ignored cache.",
+      "acquisition": "A 1500 x 1500 px tangent-plane cutout of the color HiPS CDS/P/SDSS9/color from the CDS hips2fits service, downloaded unchanged by the Nebula Lab recipe (src/objects/ngc-1275-volume/source/experiment.json) into its ignored cache.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

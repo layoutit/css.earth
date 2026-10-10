@@ -45,7 +45,7 @@
       ],
       "input": "hubble-optical",
       "preview": {
-        "path": ".local/nebula-lab/observations/m1/sources/hubble-optical.tif",
+        "path": "src/objects/m1-volume/.local/observations/m1/sources/hubble-optical.tif",
         "url": "https://esahubble.org/media/archives/images/original/heic0515a.tif"
       }
     },
@@ -75,7 +75,7 @@
       ],
       "input": "webb-infrared",
       "preview": {
-        "path": ".local/nebula-lab/observations/m1/sources/webb-infrared.tif",
+        "path": "src/objects/m1-volume/.local/observations/m1/sources/webb-infrared.tif",
         "url": "https://esawebb.org/media/archives/images/publicationtiff/weic2326a.tif"
       }
     },
@@ -105,7 +105,7 @@
       ],
       "input": "webb-components",
       "preview": {
-        "path": ".local/nebula-lab/observations/m1/sources/webb-components.tif",
+        "path": "src/objects/m1-volume/.local/observations/m1/sources/webb-components.tif",
         "url": "https://esawebb.org/media/archives/images/original/weic2417a.tif"
       }
     },
@@ -135,7 +135,7 @@
       ],
       "input": "spitzer-infrared",
       "preview": {
-        "path": ".local/nebula-lab/observations/m1/sources/spitzer-infrared.tif",
+        "path": "src/objects/m1-volume/.local/observations/m1/sources/spitzer-infrared.tif",
         "url": "https://esahubble.org/media/archives/images/original/potw1720c.tif"
       }
     },
@@ -165,7 +165,7 @@
       ],
       "input": "vla-radio",
       "preview": {
-        "path": ".local/nebula-lab/observations/m1/sources/vla-radio.tif",
+        "path": "src/objects/m1-volume/.local/observations/m1/sources/vla-radio.tif",
         "url": "https://esahubble.org/media/archives/images/original/potw1720b.tif"
       }
     },
@@ -195,7 +195,7 @@
       ],
       "input": "chandra-xray",
       "preview": {
-        "path": ".local/nebula-lab/observations/m1/sources/chandra-xray.tif",
+        "path": "src/objects/m1-volume/.local/observations/m1/sources/chandra-xray.tif",
         "url": "https://esahubble.org/media/archives/images/original/potw1720f.tif"
       }
     }

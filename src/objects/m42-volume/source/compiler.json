@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-nebula-compiler@1",
+  "id": "m42",
+  "label": "Orion \u00b7 M42",
+  "observationRecipe": "src/objects/m42-volume/source/observations.json",
+  "observationCatalogue": "src/objects/m42-volume/.local/observations/m42/observations.json",
+  "structureRecipe": "src/objects/m42-volume/source/observation-structures.json",
+  "structureCatalogue": "src/objects/m42-volume/.local/observations/m42/structures/catalogue.json",
+  "defaultSourceId": "eso-optical",
+  "maximumStars": 650,
+  "interpretation": "Evidence-guided visualization using one smooth irregular emitting front and locally tilted finite emission supports. Only central reference scales are paper-guided; full-field curvature, depth ordering, thickness and interpolation are authored. Separate Orion-S/foreground structures, absorption and a measured velocity fit remain unimplemented. RGB brightness determines projected emission, never depth. All image datasets share geometry and alpha; star depths remain conditional, not measured.",
+  "depthRecipe": "src/objects/m42-volume/source/depth-model.json"
+}

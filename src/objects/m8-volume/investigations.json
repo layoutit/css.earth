@@ -9,8 +9,8 @@
       "finding": "Default H-alpha/R/V/B publication TIFF preserves the full 93.49 by 62.61 arcmin footprint at 4000 by 2679 pixels. Registration and native separation qualify processing; the 450 arcsec optical support taper is authored and does not infer a physical boundary.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/presentation.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/compiler.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/processing-observations.json"
       ]
     },
     {
@@ -20,8 +20,8 @@
       "finding": "J/H/Ks publication TIFF, 4000 by 2202 pixels, 71.81 by 39.54 arcmin. The caption identifies near-IR bands despite an H-alpha metadata mislabel. Its current 240 arcsec source-edge fade softens missing coverage without adding gas.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/presentation.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/compiler.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/processing-observations.json"
       ]
     },
     {
@@ -31,7 +31,7 @@
       "finding": "Calibrated IRAC 8.0/4.5/3.6 micrometre maps from CDS hips2fits, composed on the 1757 by 1417 pixel, 35.73 by 28.81 arcmin TAN grid with one measured background and range per band and one asinh display. Registered against ESO optical with 214 matched stars and 0.118 px held-out RMS. MIPS 24 micrometres is left out because its HiPS has no data over the Hourglass core; hue shows band-relative brightness, not physical ratios.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/sky-bands/spitzer-irac.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/processing-observations.json"
       ]
     },
     {
@@ -42,8 +42,8 @@
       "revisitWhen": "A calibrated MIPS 24 micrometre map with coverage over the Hourglass core, or evidence that the IRAC composite misplaces or loses structure the publisher image shows.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/presentation.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/compiler.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-observations.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/compiler.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/processing-observations.json"
       ]
     },
     {
@@ -66,7 +66,7 @@
       "finding": "The application adopts 1326 -69/+77 pc from the cluster analysis, including its systematic treatment. Anisotropic stellar expansion does not justify a spherical gas-expansion law or membership for every field star.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/nebula.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/physical-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/physical-evidence.json",
         "https://doi.org/10.1093/mnras/stz870"
       ]
     },
@@ -76,8 +76,8 @@
       "status": "included",
       "finding": "Local extinction and front/veil order guide two bounded authored windows. The 1250 pc paper conversion only defines local angular scope; it does not replace the application distance. All depth coefficients and thickness are authored; no numerical cube is fitted.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/physical-evidence.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/depth-model.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/physical-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/depth-model.json",
         "https://doi.org/10.1111/j.1365-2966.2005.09829.x",
         "https://doi.org/10.1051/0004-6361/201732437",
         "https://doi.org/10.1051/0004-6361/202038886"
@@ -89,7 +89,7 @@
       "status": "excluded",
       "finding": "The small heic1808a field remains provisional. Two bounded star-matching attempts found 0 matches against the 4K ESO source and 9 against a local full-resolution JPEG crop, below the unchanged 45-match gate. No new composite was promoted.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/source-dossier.json",
         "https://esahubble.org/images/heic1808a/"
       ],
       "revisitWhen": "Obtain a qualified catalogue or intermediate optical image that passes spatially held-out registration without weakening the gate."
@@ -100,7 +100,7 @@
       "status": "excluded",
       "finding": "The small central infrared sibling has its own preserved AVM but no qualified independent registration; it is not a full-Lagoon map and its background stars do not establish membership.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/source-dossier.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/source-dossier.json"
       ],
       "revisitWhen": "Pass independent registration on its own source grid with a qualified reference and retain its limited footprint."
     },
@@ -110,7 +110,7 @@
       "status": "excluded",
       "finding": "The inspected display has seams/clipping and extensive zero/nonfinite samples, including missing central Lagoon support. It is not calibrated surface brightness or a science-validity mask; the recorded terms page was unavailable during intake.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/source-dossier.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/source-dossier.json"
       ],
       "revisitWhen": "Acquire usable native calibrated coverage and masks with verified terms, then qualify source registration; zero-filled sky cannot constrain missing emission."
     },
@@ -120,8 +120,8 @@
       "status": "deferred",
       "finding": "These papers were inspected but their line maps, 37 clump pointings and LVM numerical arrays are not fitted. Beam offsets, incomplete Hi-GAL coverage, foreground contamination, masks and uncertainty must remain explicit; figures are not calibrated arrays.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/physical-evidence.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/source-dossier.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/physical-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/source-dossier.json",
         "https://doi.org/10.1051/0004-6361:20066081",
         "https://doi.org/10.1051/0004-6361/202349009",
         "https://doi.org/10.3847/1538-4357/ae563a"
@@ -134,7 +134,7 @@
       "status": "excluded",
       "finding": "The downloaded compressed full-size optical JPEG preserves the same field and showed a washed-out centre; it yielded only nine central Hubble matches. It is not the 697.9 MB lossless master and was not substituted into the delivered source.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/source-dossier.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/source-dossier.json"
       ],
       "revisitWhen": "Use only if a specified registration/detail comparison demonstrates an improvement with qualified photometry and an unchanged match gate."
     },
@@ -144,8 +144,8 @@
       "status": "included",
       "finding": "The current authored 450 arcsec optical window and 240 arcsec infrared source-edge fade replace sharper boundaries. Recorded target checks retain 99.917 percent of bright-core signal and 3.819 percent of the former outermost-strip signal; these are source-target metrics, not screen brightness or physical cloud edges.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/edge-taper-evidence.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/optical-window-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/edge-taper-evidence.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/optical-window-evidence.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/delivery.json"
       ]
     },
@@ -155,8 +155,8 @@
       "status": "unresolved",
       "finding": "The source-backed single front still softens fine filaments, retains stellar-halo blobs and shows thin-layer/grid traces. Earlier result counts and residuals describe separate processing versions, not fresh scientific or visual acceptance.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/README.md",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/processing-evidence.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/processing-evidence.json"
       ],
       "revisitWhen": "Improve the same front/oblique/side observations with an explicit supported material/depth change; more sampling or exposure must not conceal wrong geometry."
     }

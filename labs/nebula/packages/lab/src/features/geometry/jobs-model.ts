@@ -24,7 +24,7 @@ export const geometryRecord = coreIsRecord;
 /** `geometry.json` is the prepared attachment of an analysis run; `geometry-<variant>.json` one detector proposal. */
 export const geometryFile = (value: unknown): value is string => typeof value === 'string' &&
   (value === 'geometry.json' || (value.startsWith('geometry-') && value.endsWith('.json') && isVariantName(value.slice(9, -5))));
-export const geometryLocalPath = (value: unknown): value is string => typeof value === 'string' && value.startsWith('.local/nebula-lab/') &&
+export const geometryLocalPath = (value: unknown): value is string => typeof value === 'string' && /^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(value) &&
   !/[\\?#\u0000]/.test(value) && value.split('/').every(part => part !== '..' && part !== '.' && part.length > 0);
 export function readDetectionRequest(value: unknown): DetectionRequest {
   if (!geometryRecord(value) || Object.keys(value).some(key => !['action', 'cataloguePath', 'imageId', 'settings', 'quality'].includes(key)) ||

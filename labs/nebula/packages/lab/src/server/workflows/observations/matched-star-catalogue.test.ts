@@ -5,7 +5,7 @@ import { readObservationRecipe } from '../../../features/observations/recipe.js'
 import { publisherTransform, verifyRegistration, type Pair } from '@cssearth/nebula-reconstruction/registration/stellar';
 import { loadMatchedStarCatalogue, readMatchedStarCatalogue, calibratedInitialTransform } from './matched-star-catalogue.js';
 test('actual inspected native identities pass unchanged affine gates and reject shift, parity and scale corruption', async () => {
-  const recipe = readObservationRecipe(JSON.parse(await readFile('labs/nebula/models/m1/observations.json', 'utf8')));
+  const recipe = readObservationRecipe(JSON.parse(await readFile('src/objects/m1-volume/source/observations.json', 'utf8')));
   const reference = recipe.images.find(image => image.id === recipe.referenceId)!, referenceMatrix = publisherTransform(reference, recipe.frame);
   for (const id of ['hubble-2017-bridge', 'webb-components']) {
     const source = recipe.images.find(image => image.id === id)!, publisher = publisherTransform(source, recipe.frame);

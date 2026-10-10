@@ -18,7 +18,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m45/stellar-sources.json",
+      "path": "src/objects/m45-volume/source/stellar-sources.json",
       "locator": "/sources/0"
     }
   ],
@@ -29,7 +29,7 @@
       "kind": "credit",
       "text": "ESA 1997, The Hipparcos and Tycho Catalogues, ESA SP-1200",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m45/stellar-sources.json#/sources/0"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/stellar-sources.json#/sources/0"
     }
   ]
 }

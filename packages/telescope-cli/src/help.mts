@@ -19,6 +19,7 @@ Human entry points:
   telescope simulations TARGET [--json] [--out DIRECTORY]
   telescope leads TARGET | --class CLASS [--json] [--out DIRECTORY]
   telescope stars GALAXY [--json] [--out DIRECTORY]
+  telescope gaia-cone RA,DEC,RADIUS [--magnitude-limit G] [--limit N] [--json] [--out FILE]
   telescope new-object SPEC.json [--check] [--skip-existing] [--json]
   telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-benchmark HD... | --from-narrabri HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... | --from-table CLASS:GALAXY=TABLE[#ROW]... | --from-esa PAGE_ID=PICTURE_URL... | --from-magnetic HOST... | --from-spectra HOST... | --from-pixels all|HOST... | --from-pulsation all|HOST|gaia:HOST... --out SPEC.json
   telescope ascl SOFTWARE [--json]
@@ -86,6 +87,8 @@ VizieR's tables of those papers give each star a period and a place. It download
 for new-object --from-table, and so is one that lists detector pixels, once its paper has said which exposure they are of.
 It also names the single stars of no class that SIMBAD holds there with no parallax or proper motion, the most cited first,
 and the works the papers API finds that name the galaxy and a kind of star, which the archives may not hold yet.
+Gaia-cone asks GAVO's TAP service for the Gaia DR3 stars inside a circle on the sky (degrees), brighter than G (16 unless
+given), the brightest N (5000) first, each with its position, proper motion, parallax, BP-RP color and Bailer-Jones distance.
 ASCL searches its live software catalog by title or matches the exact software names in a verified
 product receipt. It reports citable code entries and preferred citations when provided by ASCL.
 Only the receipt establishes what this run recorded as used; an ASCL match is a citation lead, not

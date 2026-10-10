@@ -3,7 +3,7 @@
   "id": "m84-volume",
   "method": "axial-symmetry",
   "request": {
-    "path": "labs/nebula/models/m84/experiment.json"
+    "path": "src/objects/m84-volume/source/experiment.json"
   },
   "inputPins": [],
   "sky": {

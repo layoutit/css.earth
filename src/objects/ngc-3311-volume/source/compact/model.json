@@ -202,7 +202,7 @@
   "provenance": {
     "method": "Image-conditioned emission in an authored geometric prior; no image-only depth inference",
     "doi": "https://arxiv.org/abs/1205.5289",
-    "recipePath": "labs/nebula/models/ngc-3311/experiment.json",
+    "recipePath": "src/objects/ngc-3311-volume/source/experiment.json",
     "recipe": {
       "schema": "cssearth-emission-inference@1",
       "id": "ngc-3311-inferred",

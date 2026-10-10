@@ -103,10 +103,7 @@ function JointFitSession({ catalogue, cataloguePath, recipePath, observationMani
     </div>}
     {candidate?.fit.metrics.heldOutRmsKmS !== null && candidate?.fit.metrics.heldOutRmsKmS !== undefined &&
       <p className="joint-fit-withheld" data-mismatch={withheldMismatch} title="Descriptive held-out comparison only; this is not a calibrated uncertainty or significance test.">{withheldMismatch ? 'Withheld mismatch advisory' : 'Withheld check'} · {candidate.fit.metrics.heldOutRmsKmS.toFixed(1)} km/s vs {metric(candidate.fit.metrics.trainingRmsKmS)} training</p>}
-    <details><summary>Meaning and assumptions</summary><p>{result?.interpretation || 'The server compares projected image ridges with molecular velocities.'}</p>
-      <p>Angular depth and simple expansion belong to the candidate model. They are not measured gas density or a physical-distance reconstruction.</p></details>
-    <details><summary>Evidence accounting</summary><p>{result ? `${result.accounting.ridgePoints} ridge samples from ${result.sources.length} registered images; ${result.accounting.pointings} molecular pointings at ${result.accounting.beamFwhmArcsec.toFixed(0)}″ beam FWHM.` : 'Registered image accounting is prepared with the result.'}</p>
-      <p>Combine sensitivity {evidence.sensitivity.toFixed(2)}×; source weights {evidence.weights.map(weight => weight.toFixed(2)).join(', ')}. Held-out velocities do not select the candidate.</p></details>
+    <a className="step-info" href={localFile('labs/nebula/docs/joint-fit.md')} target="_blank" rel="noreferrer" aria-label="Joint fit method and assumptions" title={result?.interpretation || 'Joint fit method and assumptions'}>ⓘ</a>
     {host && createPortal(<CameraModelPanel camera={{
       earth: { pressed: view.locked, onActivate: () => setView(earthJointFitView) },
       orbit: { pressed: !view.locked, onActivate: () => setView({ ...view, locked: !view.locked }) },

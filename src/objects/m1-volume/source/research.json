@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-nebula-research@1",
+  "id": "m1-volume",
+  "name": "Crab Nebula",
+  "type": "nebula",
+  "papers": [
+    {
+      "label": "Lin et al. (2023)",
+      "url": "https://arxiv.org/abs/2306.01617",
+      "record": "src/sources/lin-2023.json"
+    }
+  ],
+  "models": [],
+  "images": [
+    {
+      "label": "Hubble optical",
+      "url": "https://esahubble.org/images/heic0515a/",
+      "record": "src/sources/esahubble-heic0515a.json"
+    },
+    {
+      "label": "Webb infrared",
+      "url": "https://esawebb.org/images/weic2326a/",
+      "record": "src/sources/esawebb-weic2326a.json"
+    },
+    {
+      "label": "Webb components",
+      "url": "https://esawebb.org/images/weic2417a/",
+      "record": "src/sources/esawebb-weic2417a.json"
+    },
+    {
+      "label": "Spitzer infrared",
+      "url": "https://esahubble.org/images/potw1720c/",
+      "record": "src/sources/esahubble-potw1720c.json"
+    },
+    {
+      "label": "VLA radio",
+      "url": "https://esahubble.org/images/potw1720b/",
+      "record": "src/sources/esahubble-potw1720b.json"
+    },
+    {
+      "label": "Chandra X-rays",
+      "url": "https://esahubble.org/images/potw1720f/",
+      "record": "src/sources/esahubble-potw1720f.json"
+    }
+  ],
+  "symmetry": {
+    "kind": "none",
+    "label": "None assumed"
+  },
+  "velocity": {
+    "available": false,
+    "items": []
+  },
+  "method": {
+    "chosen": "inference",
+    "status": "experiment",
+    "available": [],
+    "geometry": []
+  }
+}

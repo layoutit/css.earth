@@ -30,7 +30,7 @@
       "evidence": [
         "https://doi.org/10.1093/mnras/sts426",
         "https://arxiv.org/pdf/astro-ph/0509228",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/omega-centauri/physical-evidence.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/omega-centauri-volume/source/physical-evidence.json"
       ]
     },
     {
@@ -40,7 +40,7 @@
       "finding": "Baumgardt & Vasiliev (2021) Table 2 was downloaded in full and gives 5426 ± 47 pc for NGC 5139. That common scale does not locate individual stars.",
       "evidence": [
         "https://doi.org/10.1093/mnras/stab1474",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/omega-centauri/physical-evidence.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/omega-centauri-volume/source/physical-evidence.json"
       ]
     },
     {
@@ -50,7 +50,7 @@
       "finding": "Retained historical profile substituted a 3D dynamical core radius for a projected radius and converted half-mass to half-light by approximation. It is not the selected MGE prior.",
       "evidence": [
         "https://doi.org/10.1093/mnras/sts426",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/omega-centauri/physical-evidence.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/omega-centauri-volume/source/physical-evidence.json"
       ],
       "revisitWhen": "A distinct sourced comparison would need an appropriate photometric fit and explicit shape assumptions."
     },
@@ -61,7 +61,7 @@
       "finding": "Actual NGC 5139 CDS rows were retrieved: Wilson W0 = 4.70 and scale 196.810 arcsec fit those data better than King (1966). The current MGE already supplies radial flattening and analytic deprojection.",
       "evidence": [
         "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/161/304/table10.dat",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/omega-centauri/physical-evidence.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/omega-centauri-volume/source/physical-evidence.json"
       ],
       "revisitWhen": "A specified model comparison justifies implementing the correct Wilson distribution-function solution."
     },
@@ -73,7 +73,7 @@
       "evidence": [
         "https://zenodo.org/records/11104046",
         "https://arxiv.org/html/2404.03722v2",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/omega-centauri/physical-evidence.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/omega-centauri-volume/source/physical-evidence.json"
       ],
       "revisitWhen": "Independent absolute astrometry is required beyond the existing relative native-image registration."
     },
@@ -84,7 +84,7 @@
       "finding": "Accepted oMEGACat II v2 reports 43.9 ± 1.3 degrees and PA 104 ± 1 degree. Its inclination interval crosses the older MGE deprojection limit 43.603810 degrees, so it is retained as a competing constraint.",
       "evidence": [
         "https://arxiv.org/html/2404.03722v2",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/omega-centauri/physical-evidence.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/omega-centauri-volume/source/physical-evidence.json"
       ],
       "revisitWhen": "A coherent photometric/kinematic refit supports combining the newer inclination with a compatible projected profile."
     },

@@ -18,7 +18,7 @@ import type { ShapeCloudRequest, ShapeCloudPin, ShapeCloudResult } from '../../f
 import { variantFor } from '../services/saved-variants.ts';
 
 const object = coreIsRecord;
-const path = (value: unknown): value is string => typeof value === 'string' && value.startsWith('.local/nebula-lab/') &&
+const path = (value: unknown): value is string => typeof value === 'string' && /^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(value) &&
   !/[\\?#\u0000]/.test(value) && value.split('/').every(part => part !== '..' && part !== '.' && part.length > 0);
 const cache = '.local/nebula-lab/shape-clouds';
 export function parseShapeCloudRequest(value: unknown): ShapeCloudRequest {
@@ -102,6 +102,6 @@ export function shapeCloudPlugin(root: string): Plugin {
   return { name: 'nebula-shape-cloud', configureServer(server) {
     const jobs = createShapeCloudJobs(root), handler = starRemovalJobsHandler(jobs, '/__nebula/shape-cloud-jobs');
     server.middlewares.use('/__nebula/shape-cloud-jobs', (request, response) => { void handler(request, response); });
-    server.httpServer?.once('close', () => { void jobs.shutdown(); });
+    server.httpServer?.once('close', () => { void jobs.shutdown().catch(() => {}); });
   } };
 }

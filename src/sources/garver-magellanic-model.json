@@ -13,7 +13,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/lmc/particles/source/provenance.json",
+      "path": "src/objects/lmc-volume/source/particles/source/provenance.json",
       "locator": "/source/paper"
     }
   ],
@@ -24,7 +24,7 @@
       "kind": "credit",
       "text": "Garver et al. · Magellanic interaction model",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/particles/source/provenance.json#/source/paper"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/particles/source/provenance.json#/source/paper"
     }
   ]
 }

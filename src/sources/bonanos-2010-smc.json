@@ -22,7 +22,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/smc/stars/source/catalogue.json",
+      "path": "src/objects/smc-volume/source/stars/source/catalogue.json",
       "locator": "/catalogue"
     }
   ],
@@ -33,13 +33,13 @@
       "kind": "credit",
       "text": "Bonanos et al. (2010), AJ 140, 416; CDS/VizieR J/AJ/140/416",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/stars/source/catalogue.json#/catalogue"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/stars/source/catalogue.json#/catalogue"
     },
     {
       "kind": "limitation",
       "text": "An incomplete compilation of massive SMC stars with literature spectral types, not every SMC star. Published angular positions and Johnson V are measured; individual distances are not.",
       "scope": "Selected star sample",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/stars/README.md"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/stars/README.md"
     }
   ]
 }

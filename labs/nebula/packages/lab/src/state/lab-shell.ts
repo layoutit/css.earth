@@ -14,10 +14,14 @@ export interface LabPresentation {
   status: { message: string; hidden: boolean; error: boolean };
 }
 export interface LabShellState {
-  objectId: string; view: 'alignment' | 'reconstruction'; busy: boolean; alignmentAvailable: boolean;
+  objectId: string;
+  /** The subject actually shown; `objectId` is its entry in the object picker, which a derived dataset shares. */
+  subjectId?: string; view: 'alignment' | 'reconstruction'; busy: boolean; alignmentAvailable: boolean;
   pose: string; alignment?: AlignmentState; presentation?: LabPresentation;
   material?: { available: boolean; mode: 'neutral' | 'textured'; loading: boolean };
-  originalOverlay?: { available: boolean; enabled: boolean; opacity: number; loading: boolean };
+  originalOverlay?: { available: boolean; enabled: boolean; opacity: number; loading: boolean; picture?: 'original' | 'starless' | `candidate:${string}` };
+  /** The viewer's render-minus-photograph plane, for the panels that offer it. */
+  differenceOverlay?: { available: boolean; enabled: boolean; earthFacing: boolean; opacity: number; loading: boolean };
 }
 
 /** UI visibility/availability comes from workflow state, never from the current DOM. */

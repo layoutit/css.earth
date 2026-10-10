@@ -11,13 +11,13 @@ import { parseLabModelJson, resolveLabModelPath } from './model-paths.ts';
 
 test('catalogue-relative source URLs preserve candidate locations and survive a lab folder rename', async () => {
   const catalogueUrl = new URL('file:///repo/labs/nebula/packages/lab/sources/index.json');
-  assert.equal(catalogue.pathBase, '../../..');
+  assert.equal(catalogue.pathBase, '../../../../..');
   for (const subject of catalogue.subjects) for (const source of subject.sources) {
-    const expected = new URL(`file:///repo/labs/nebula/${source.path}`);
+    const expected = new URL(`file:///repo/${source.path}`);
     assert.equal(catalogueSourceUrl(catalogueUrl.href, catalogue.pathBase, source.path), `/@fs${decodeURIComponent(expected.pathname)}`);
   }
   assert.equal(catalogueSourceUrl('file:///repo/labs/renamed/packages/lab/sources/index.json', catalogue.pathBase,
-    'models/lmc/candidates/prepared/vista-infrared.webp'), '/@fs/repo/labs/renamed/models/lmc/candidates/prepared/vista-infrared.webp');
+    'src/objects/lmc-volume/source/candidates/prepared/vista-infrared.webp'), '/@fs/repo/src/objects/lmc-volume/source/candidates/prepared/vista-infrared.webp');
 });
 
 test('persisted acquisition-record paths load from the catalogue owner without rewriting historical receipts', async () => {

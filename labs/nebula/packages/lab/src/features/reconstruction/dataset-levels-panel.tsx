@@ -73,7 +73,8 @@ function ChannelRow({ channel, levels, logMax, deltaLog, last }: {
 }
 
 /** Measures while mounted; the floating Levels tool mounts it only while its panel is open. */
-export function DatasetLevelsPanel({ resultId }: { resultId?: string }) {
+/** `url` measures a site entry instead (`/__nebula/site-levels`), which answers with `resultId` as its identity. */
+export function DatasetLevelsPanel({ resultId, url }: { resultId?: string; url?: string }) {
   const [state, setState] = useState<{ status: 'idle' | 'loading' | 'ready' | 'error'; levels?: DatasetLevels; error?: string }>({ status: 'idle' });
   useEffect(() => {
     if (!resultId) { setState({ status: 'idle' }); return; }
@@ -81,7 +82,7 @@ export function DatasetLevelsPanel({ resultId }: { resultId?: string }) {
     setState({ status: 'loading' });
     void (async () => {
       try {
-        const response = await fetch(`/__nebula/reconstruction-levels?resultId=${encodeURIComponent(resultId)}`, { signal: controller.signal });
+        const response = await fetch(url ?? `/__nebula/reconstruction-levels?resultId=${encodeURIComponent(resultId)}`, { signal: controller.signal });
         const value = await response.json();
         if (!response.ok) throw new Error(value.error ?? `Levels unavailable (HTTP ${response.status}).`);
         if (value.schema !== 'cssearth-nebula-dataset-levels@1' || value.resultId !== resultId || !Array.isArray(value.channels) || value.channels.length !== 3)
@@ -92,7 +93,7 @@ export function DatasetLevelsPanel({ resultId }: { resultId?: string }) {
       }
     })();
     return () => controller.abort();
-  }, [resultId]);
+  }, [resultId, url]);
   const levels = state.levels;
   const peak = levels ? Math.max(1, ...levels.channels.flatMap(channel => [...channel.sourceHistogram, ...channel.renderHistogram])) : 1;
   const deltaPeak = levels ? Math.max(1, ...levels.channels.flatMap(channel =>

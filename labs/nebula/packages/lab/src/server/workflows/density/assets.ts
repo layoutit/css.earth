@@ -57,7 +57,7 @@ export async function bakeSeparationPreviews(root: string, planPath: string, ima
   const plan = await json(resolve(root, planPath)), selection = plan.selections.find((item: any) => item.id === imageId);
   const recipe = JSON.parse((await pinned(root, { path: selection.recipe })).toString());
   const receipt = await json(resolve(root, recipe.outputDirectory, 'receipt.json'));
-  const variants = await json(resolve(root, 'labs/nebula/models/lmc/star-separation/variants.json'));
+  const variants = await json(resolve(root, 'src/objects/lmc-volume/source/star-separation/variants.json'));
   const variant = variants.variants.find((item: any) => item.imageId === imageId);
   assert.ok(variant, `Missing accepted separation preview: ${imageId}`);
   for (const layer of variant.layers) {

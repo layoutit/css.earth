@@ -22,7 +22,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json",
+      "path": "src/objects/smc-volume/source/vmc/crossmatch-receipt.json",
       "locator": "/"
     }
   ],
@@ -33,13 +33,13 @@
       "kind": "credit",
       "text": "VMC red-clump stars: Tatton et al. (2021), MNRAS 504, 2983; CDS/VizieR J/MNRAS/504/2983",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/vmc/README.md"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/vmc/README.md"
     },
     {
       "kind": "limitation",
       "text": "Published individual reddenings paired with public photometry reproduce the paper’s standard-candle distance calculation, not its distance catalogue. Photometric distance estimates are not geometric distances.",
       "scope": "Derived tracer distances",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/smc/vmc/README.md"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/smc-volume/source/vmc/README.md"
     }
   ]
 }

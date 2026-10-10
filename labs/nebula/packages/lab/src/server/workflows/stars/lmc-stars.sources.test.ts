@@ -10,7 +10,7 @@ import { sampleEncoded } from '@cssearth/bake/volume/node';
 import { createObservationMapping } from '../../../adapters/preparation/observation-prior.ts';
 import { loadStarCloudModel } from './lmc-star-cloud-model.ts';
 import sharp from 'sharp';
-const load = async () => JSON.parse(await readFile('labs/nebula/models/lmc/stars/prepared/stars.json', 'utf8')) as PreparedLmcStars;
+const load = async () => JSON.parse(await readFile('src/objects/lmc-volume/source/stars/prepared/stars.json', 'utf8')) as PreparedLmcStars;
 const modelPromise = load().then(p => loadStarCloudModel(p.frame));
 const close = (a: number, b: number, tolerance = 1e-10) => assert.ok(Math.abs(a - b) < tolerance, `${a} != ${b}`);
 function referenceRay(p: readonly number[], f: PreparedLmcStars['frame']) {
@@ -20,20 +20,20 @@ function referenceRay(p: readonly number[], f: PreparedLmcStars['frame']) {
     .map((v, i) => v + f.originM[i] / f.metersPerUnit);
 }
 test('all 943 prepared stars come from pinned measured V rows and preserve independent sky rays and native footprint', async () => {
-  const payload = await load(), recipe = JSON.parse(await readFile('labs/nebula/models/lmc/clouds.json', 'utf8'));
-  const table = await readFile('labs/nebula/models/lmc/stars/source/table3.dat', 'utf8');
+  const payload = await load(), recipe = JSON.parse(await readFile('src/objects/lmc-volume/source/clouds.json', 'utf8'));
+  const table = await readFile('src/objects/lmc-volume/source/stars/source/table3.dat', 'utf8');
   assert.equal(table.trimEnd().split('\n').length, 1268);
   const model=await modelPromise, source=model.source;
   assert.deepEqual(prepareCatalogue(table, payload.frame, recipe.wcs, model), payload.stars);
   assert.equal(payload.stars.length, 943);
-  const frame = JSON.parse(await readFile('labs/nebula/models/lmc/clouds/object.json', 'utf8')).properties.volume;
+  const frame = JSON.parse(await readFile('src/objects/lmc-volume/source/clouds/object.json', 'utf8')).properties.volume;
   parsePreparedLmcStars(payload, frame);
   const radius = Math.hypot(...payload.frame.originM) / payload.frame.metersPerUnit;
   const w = recipe.wcs, rad = Math.PI / 180, [a0,d0] = w.referenceValueDeg.map((v: number) => v * rad);
-  const plane = JSON.parse(await readFile('labs/nebula/models/lmc/clouds/source/provenance.json', 'utf8')).volume.depthPlane;
+  const plane = JSON.parse(await readFile('src/objects/lmc-volume/source/clouds/source/provenance.json', 'utf8')).volume.depthPlane;
   const offsets: number[] = [], density: [number, number, number, number] = [0,0,0,0], emission:[number,number,number]=[0,0,0];
   // Independent target orientation oracle reads its DISPLAY-flopped PNG directly.
-  const target=await sharp(await readFile('labs/nebula/models/lmc/clouds-observation/source/target.png')).removeAlpha().raw().toBuffer({resolveWithObject:true});
+  const target=await sharp(await readFile('src/objects/lmc-volume/source/clouds-observation/source/target.png')).removeAlpha().raw().toBuffer({resolveWithObject:true});
   const signal=Float32Array.from({length:target.info.width*target.info.height},(_,i)=>(target.data[3*i]*.2126+target.data[3*i+1]*.7152+target.data[3*i+2]*.0722)/255);
   const maximum=signal.reduce((a,b)=>Math.max(a,b),0),bounds=model.mapping.boundsUnits;
   const signalAt=(x:number,y:number)=>{

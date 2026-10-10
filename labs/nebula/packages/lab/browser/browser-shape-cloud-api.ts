@@ -10,7 +10,7 @@ import type { ShapeCloudRequest, ShapeCloudResult } from '../src/features/shape-
 import { validateShapeCloudResult } from '../src/server/routes/shape-cloud.ts';
 
 const endpoint = 'http://127.0.0.1:4331/__nebula/shape-cloud-jobs';
-const cataloguePath = '.local/nebula-lab/observations/helix/structures/catalogue.json';
+const cataloguePath = 'src/objects/helix-layers/.local/observations/helix/structures/catalogue.json';
 const catalogue = readStructureCatalogue(JSON.parse(await readFile(cataloguePath, 'utf8')));
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 async function send(path: string, body?: unknown): Promise<Record<string, unknown>> {
@@ -56,6 +56,6 @@ assert.notEqual(draft.result.id, first.result.id, 'Draft must never reuse a deta
 assert.deepEqual(draft.result.settings, first.result.settings);
 assert.equal(draft.result.unitsPerPixel, first.result.unitsPerPixel);
 console.log(`SHAPE_CLOUD_DRAFT_READY seconds=${((performance.now() - draftStarted) / 1000).toFixed(2)}`);
-const output = '.local/nebula-lab/observations/helix/structures/browser'; await mkdir(output, { recursive: true });
+const output = 'src/objects/helix-layers/.local/observations/helix/structures/browser'; await mkdir(output, { recursive: true });
 await writeFile(`${output}/shape-cloud-api.json`, JSON.stringify({ passed: true, results, draft, sourcePixelsUnchanged: true, repeatedId: repeated.result.id }, null, 2));
 console.log('SHAPE_CLOUD_API_PASS');

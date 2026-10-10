@@ -3,7 +3,7 @@
   "id": "m2-9-volume",
   "method": "axial-symmetry",
   "request": {
-    "path": "labs/nebula/models/m2-9/experiment.json"
+    "path": "src/objects/m2-9-volume/source/experiment.json"
   },
   "inputPins": [
     {
@@ -24,7 +24,7 @@
   "defaultDataset": "hst-optical",
   "framingRadiusUnits": 5,
   "acceptedLabResult": "m2-9-inferred",
-  "symmetryDirectory": ".local/nebula-lab/planetary/m2-9-inferred",
+  "symmetryDirectory": "src/objects/m2-9-volume/.local/planetary/m2-9-inferred",
   "fieldStars": {
     "path": "src/objects/m2-9-volume/source/stellar-field.json"
   },

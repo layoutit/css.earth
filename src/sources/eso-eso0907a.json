@@ -23,7 +23,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/helix/observations.json",
+      "path": "src/objects/helix-layers/source/observations.json",
       "locator": "/images/1"
     },
     {
@@ -43,7 +43,7 @@
       "kind": "credit",
       "text": "ESO",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/helix/observations.json#/images/1"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/helix-layers/source/observations.json#/images/1"
     }
   ]
 }

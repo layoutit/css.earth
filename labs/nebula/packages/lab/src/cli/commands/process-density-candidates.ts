@@ -23,7 +23,7 @@ const subjectId = text(recipe.subjectId), imageIds = recipe.imageIds;
 assert.match(subjectId, /^[a-z0-9-]+$/);
 assert.ok(Array.isArray(imageIds) && imageIds.length && imageIds.every(id => typeof id === 'string' && /^[a-z0-9-]+$/.test(id)));
 assert.equal(new Set(imageIds).size, imageIds.length);
-const subject = rows(await json('labs/nebula/packages/lab/src/state/subjects.json')).find(item => item.id === subjectId);
+const subject = rows(await json('labs/nebula/packages/lab/src/state/processing-subjects.json')).find(item => item.id === subjectId);
 assert.ok(subject);
 const plan = record(await json(text(record(subject.density).processingPlan)));
 const proofPin = record(plan.alignmentReport);

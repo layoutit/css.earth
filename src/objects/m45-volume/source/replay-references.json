@@ -2,35 +2,35 @@
   "schema": "cssearth-replay-references@1",
   "references": [
     {
-      "originalPath": "labs/nebula/models/m45/compiler.json",
+      "originalPath": "src/objects/m45-volume/source/compiler.json",
       "path": "source/bake-inputs/references/01-compiler.json"
     },
     {
-      "originalPath": "labs/nebula/models/m45/depth-model.json",
+      "originalPath": "src/objects/m45-volume/source/depth-model.json",
       "path": "source/bake-inputs/references/02-depth-model.json"
     },
     {
-      "originalPath": "labs/nebula/models/m45/observation-structures.json",
+      "originalPath": "src/objects/m45-volume/source/observation-structures.json",
       "path": "source/bake-inputs/references/03-observation-structures.json"
     },
     {
-      "originalPath": "labs/nebula/models/m45/physical-evidence.json",
+      "originalPath": "src/objects/m45-volume/source/physical-evidence.json",
       "path": "source/bake-inputs/references/04-physical-evidence.json"
     },
     {
-      "originalPath": "labs/nebula/models/m45/processing-observations.json",
+      "originalPath": "src/objects/m45-volume/source/processing-observations.json",
       "path": "source/bake-inputs/references/05-processing-observations.json"
     },
     {
-      "originalPath": "labs/nebula/models/m45/stellar-catalogue.json",
+      "originalPath": "src/objects/m45-volume/source/stellar-catalogue.json",
       "path": "source/bake-inputs/references/06-stellar-catalogue.json"
     },
     {
-      "originalPath": "labs/nebula/models/m45/optical-composite-observations.json",
+      "originalPath": "src/objects/m45-volume/source/optical-composite-observations.json",
       "path": "source/bake-inputs/references/07-optical-composite-observations.json"
     },
     {
-      "originalPath": "labs/nebula/models/m45/optical-composite.json",
+      "originalPath": "src/objects/m45-volume/source/optical-composite.json",
       "path": "source/bake-inputs/references/08-optical-composite.json"
     }
   ]

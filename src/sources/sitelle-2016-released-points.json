@@ -23,7 +23,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m1/physical-sources.json",
+      "path": "src/objects/m1-volume/source/physical-sources.json",
       "locator": "/dataset"
     }
   ],
@@ -34,7 +34,7 @@
       "kind": "credit",
       "text": "Thomas Martin; Martin, Milisavljevic & Drissen (2021)",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m1/physical-sources.json#/dataset"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m1-volume/source/physical-sources.json#/dataset"
     }
   ]
 }

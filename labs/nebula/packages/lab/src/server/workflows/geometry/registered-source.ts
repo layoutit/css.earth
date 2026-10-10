@@ -14,7 +14,7 @@ export async function readGeometryPin(root: string, pin: { path: string }): Prom
   return readGeometryLocal(root, pin.path);
 }
 export async function readRegisteredGeometrySource(root: string, cataloguePath: string, imageId: string) {
-  const registry: unknown = JSON.parse(await readFile(resolve(root, 'labs/nebula/packages/lab/src/state/subjects.json'), 'utf8'));
+  const registry: unknown = JSON.parse(await readFile(resolve(root, 'labs/nebula/packages/lab/src/state/processing-subjects.json'), 'utf8'));
   if (!Array.isArray(registry) || !registry.some(row => record(row) && record(row.emissionExperiment) && row.emissionExperiment.observationStructures === cataloguePath))
     throw new TypeError('The structure catalogue is not configured for a lab object.');
   const catalogue = readStructureCatalogue(JSON.parse((await readGeometryLocal(root, cataloguePath)).toString()));

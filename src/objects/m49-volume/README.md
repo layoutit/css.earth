@@ -18,7 +18,7 @@ clusters are drawn as dots through the same volume. **Depth is modelled, not mea
 
 ## Method
 
-The Nebula Lab recipe is [labs/nebula/models/m49/experiment.json](../../../labs/nebula/models/m49/experiment.json);
+The Nebula Lab recipe is [src/objects/m49-volume/source/experiment.json](../../../src/objects/m49-volume/source/experiment.json);
 `node labs/nebula/run.mts prepare-emission` runs it, and [delivery.json](source/delivery.json) places the result. It is
 [M87's route](../m87-volume/README.md#method) with M49's measurements.
 

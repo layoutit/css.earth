@@ -1,0 +1,13 @@
+.lab-progress-strip { position: fixed; left: 12px; bottom: 12px; z-index: 40; display: flex; flex-direction: column-reverse; align-items: flex-start; gap: 6px; }
+.lab-progress-pill { display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px 5px 6px; border-radius: 16px; background: rgb(20 22 26 / .9);
+  border: 1px solid #3a3f45; color: #e6e8ea; font-size: 11px; font-variant-numeric: tabular-nums; cursor: default; }
+.lab-progress-ring { width: 16px; height: 16px; border-radius: 50%; flex: none;
+  background: radial-gradient(closest-side, rgb(20 22 26) 62%, transparent 64%), conic-gradient(#6ea8ff var(--progress, 0%), #3a3f45 0); }
+.lab-progress-pill[data-progress-state="running"] .lab-progress-ring { animation: lab-progress-pulse 1.4s ease-in-out infinite; }
+.lab-progress-step { color: #9aa4ad; }
+.lab-progress-pill[data-progress-state="done"] .lab-progress-ring { background: #8fd19e; }
+.lab-progress-pill[data-progress-state="done"] .lab-progress-result { color: #8fd19e; }
+.lab-progress-pill[data-progress-state="failed"] { border-color: #8a4a44; }
+.lab-progress-pill[data-progress-state="failed"] .lab-progress-ring { background: #e3a09a; }
+.lab-progress-pill[data-progress-state="failed"] .lab-progress-result { color: #e3a09a; }
+@keyframes lab-progress-pulse { 50% { opacity: .55; } }

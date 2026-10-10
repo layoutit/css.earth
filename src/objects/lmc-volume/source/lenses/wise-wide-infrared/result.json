@@ -22,7 +22,7 @@
     "id": "reconstruction-lmc-clouds-emission-envelope-wise-wide-infrared",
     "name": "NASA WISE · 24° infrared candidate · reconstruction · finite material",
     "directory": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-wise-wide-infrared",
-    "stars": "labs/nebula/models/lmc/stars/prepared/stars-envelope.json",
+    "stars": "src/objects/lmc-volume/source/stars/prepared/stars-envelope.json",
     "sourcePageUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
     "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
     "modelNote": "Image colors attached to one shared finite inferred field; stellar simulation depths remain conditional, not measured gas geometry.",
@@ -32,11 +32,11 @@
     "referenceDistanceUnits": 49.59067275049,
     "referenceEastLeft": true,
     "density": {
-      "directory": "labs/nebula/models/lmc/full-density",
+      "directory": "src/objects/lmc-volume/source/full-density",
       "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
       "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
       "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
+      "overlays": "src/objects/lmc-volume/source/candidates/overlays.json",
       "candidateImageIds": [
         "vista-infrared",
         "horalek-widefield",
@@ -44,9 +44,9 @@
       ],
       "referenceFramingRadiusUnits": 5,
       "starAlignmentReference": {
-        "path": "labs/nebula/models/lmc/stars/source/alignment.json"
+        "path": "src/objects/lmc-volume/source/stars/source/alignment.json"
       },
-      "processingPlan": "labs/nebula/models/lmc/star-separation/plan.json"
+      "processingPlan": "src/objects/lmc-volume/source/star-separation/plan.json"
     },
     "imagePath": ".local/nebula-lab/reconstructions/lmc-clouds-emission-envelope-wise-wide-infrared/source/target.png",
     "menuLabel": "LMC",

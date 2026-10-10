@@ -12,7 +12,7 @@
  */
 import type { IncomingMessage, ServerResponse } from 'node:http';
 import type { PreparedReconstruction } from '../../features/reconstruction/reconstruction-types.ts';
-import { datasetLevelPairs, loadDatasetLevelGrid, type DatasetLevelGrid, type DatasetLevelMaterial } from './dataset-levels.ts';
+import { datasetLevelPairs, loadDatasetLevelGrid, type DatasetLevelGrid, type DatasetLevelMaterial, type DatasetLevelPairs } from './dataset-levels.ts';
 import { isResultName } from '../../features/result-name.ts';
 
 /** Radial bins from the footprint centroid out to the farthest covered pixel. */
@@ -53,17 +53,19 @@ export interface DatasetRadialProfile {
 }
 
 /** The whole measurement, over one prepared grid. Kept pure so its tests never need a bake. */
+/** `options.pairs` replaces the analytic render pairs and `options.centre` the footprint centroid (grid pixels), for a
+ * site bank measured about its object's own centre. */
 export function radialProfileStatistics(grid: DatasetLevelGrid, material: DatasetLevelMaterial = { channelGain: null, toneCurve: null },
-  bins = RADIAL_BINS): Pick<DatasetRadialProfile, 'footprintPixels' | 'centroid' | 'maxRadius' | 'binWidth' | 'radialBins' |
+  bins = RADIAL_BINS, options: { pairs?: DatasetLevelPairs; centre?: { x: number; y: number } } = {}): Pick<DatasetRadialProfile, 'footprintPixels' | 'centroid' | 'maxRadius' | 'binWidth' | 'radialBins' |
     'halfLightRadiusSource' | 'halfLightRadiusRender' | 'halfLightRadiusRatio' | 'rmsLogRatio' | 'worstBin'> {
   if (!Number.isInteger(bins) || bins < 1) throw new TypeError('The radial profile needs at least one bin.');
   const { width } = grid;
-  const pairs = datasetLevelPairs(grid, material);
+  const pairs = options.pairs ?? datasetLevelPairs(grid, material);
   const footprint = pairs.covered.length;
   if (!footprint) throw new TypeError('This dataset image covers none of the model projection.');
   let sx = 0, sy = 0;
   for (const p of pairs.covered) { sx += p % width; sy += Math.floor(p / width); }
-  const centroid = { x: sx / footprint, y: sy / footprint };
+  const centroid = options.centre ?? { x: sx / footprint, y: sy / footprint };
   const radii = new Float64Array(footprint), sourceLum = new Float64Array(footprint), renderLum = new Float64Array(footprint);
   let maxRadius = 0;
   pairs.covered.forEach((p, k) => {

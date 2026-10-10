@@ -2,15 +2,15 @@
   "schema": "cssearth-optical-composite-recipe@1",
   "id": "optical-composite",
   "label": "Optical composite · NOIRLab + Niittee",
-  "compilerRecipe": "labs/nebula/models/m45/compiler.json",
+  "compilerRecipe": "src/objects/m45-volume/source/compiler.json",
   "baseResult": {
     "path": ".local/nebula-lab/compiler/m45-stars/result.json"
   },
   "neutralSlices": {
     "path": ".local/nebula-lab/compiler/m45/scene/neutral/volume-slices.json"
   },
-  "observationRecipe": "labs/nebula/models/m45/optical-composite-observations.json",
-  "observationCatalogue": ".local/nebula-lab/observations/m45-optical-composite/observations.json",
+  "observationRecipe": "src/objects/m45-volume/source/optical-composite-observations.json",
+  "observationCatalogue": "src/objects/m45-volume/.local/observations/m45-optical-composite/observations.json",
   "detailSourceId": "noirlab-optical",
   "wideSourceId": "niittee-widefield",
   "featherArcsec": 360,

@@ -26,12 +26,24 @@ const integer = (value: unknown): number => {
   return value;
 };
 
-export const isTrackedVolumeSourcePreview = (preview: VolumeSourcePreview): preview is TrackedVolumeSourcePreview => !preview.path.startsWith('.local/');
+/** Ignored scratch: the shared `.local/` at the repository root, or one object's own `src/objects/<id>/.local/`. A source
+ * record may name a file there (a download, a composite), which is never tracked and is fetched again when missing. */
+export const isScratchSourcePath = (path: string): boolean => /^(?:\.local\/|src\/objects\/[a-z0-9][a-z0-9-]*\/\.local\/)/u.test(path);
+/** The path a scratch file is mirrored by under `source-cache/local/`: the shared cache's own path, or `objects/<id>/…` for
+ * an object's scratch. */
+export function scratchSourceCachePath(path: string): string {
+  const object = /^src\/objects\/([a-z0-9][a-z0-9-]*)\/\.local\/(.+)$/u.exec(path);
+  if (object) return `objects/${object[1]}/${object[2]}`;
+  if (path.startsWith('.local/')) return path.slice('.local/'.length);
+  throw new TypeError(`Not a scratch path: ${path}`);
+}
+
+export const isTrackedVolumeSourcePreview = (preview: VolumeSourcePreview): preview is TrackedVolumeSourcePreview => !isScratchSourcePath(preview.path);
 
 export function parseVolumeSourcePreview(raw: unknown): VolumeSourcePreview {
   const value = sourceObject(raw, ['path', 'url', 'skyBands', 'authoredFrom', 'crop']);
   const path = sourcePath(value.path);
-  const result: VolumeSourcePreview = path.startsWith('.local/') ? { path }
+  const result: VolumeSourcePreview = isScratchSourcePath(path) ? { path }
     : { path, ...(value.authoredFrom === undefined ? {} : { authoredFrom: sourceId(value.authoredFrom) }) };
   const kinds = [value.url, value.skyBands, value.authoredFrom].filter(candidate => candidate !== undefined);
   if (kinds.length !== 1) throw new TypeError('A preview names exactly one of a URL, a sky band recipe or the input it is drawn from.');

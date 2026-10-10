@@ -37,7 +37,7 @@
       "axisPositionAngleDeg": 244.16,
       "cutoffHalfLightRadii": 3.906,
       "source": "kormendy-2009-virgo-ellipticals",
-      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/m49/experiment.json shapePrior): Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4472 (n = 5.99, half-light radius 269.29 arcsec, 21.8 kpc at 16.7 Mpc), axis along M49's minor axis in the plane of the sky, ending at 3.906 half-light radii, where their Table 3 profile stops. Each cluster's depth is drawn from it, not measured."
+      "basis": "The spheroid the volume's light is spread through (src/objects/m49-volume/source/experiment.json shapePrior): Kormendy et al.'s (2009) Table 1 major-axis Sérsic fit to NGC 4472 (n = 5.99, half-light radius 269.29 arcsec, 21.8 kpc at 16.7 Mpc), axis along M49's minor axis in the plane of the sky, ending at 3.906 half-light radii, where their Table 3 profile stops. Each cluster's depth is drawn from it, not measured."
     }
   },
   "source": "cote-2003-m49-globular-clusters",

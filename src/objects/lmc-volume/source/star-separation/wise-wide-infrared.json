@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-star-separation@1",
+  "source": {
+    "path": "src/objects/lmc-volume/.local/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+    "nativeDimensions": [
+      6000,
+      6000
+    ]
+  },
+  "outputDirectory": "src/objects/lmc-volume/.local/star-separation/wise-wide-infrared",
+  "parameters": {
+    "minimumSigma": 0.25
+  },
+  "preview": {
+    "maxDimension": 1200,
+    "exposure": 1,
+    "gamma": 1
+  }
+}

@@ -33,7 +33,7 @@ The limit is three fix/review rounds and two final cleanup rounds. A persistent 
 
 **The reusable pipeline is implemented; this SMASH candidate is rejected for production morphology.** The three-round experiment stops here. The photographed edge remains visible and some oblique views still resemble a thick sheet, with sampling streaks. Finer baking and a prior-derived inclination did not resolve those structural limitations.
 
-Inspect the frozen front, oblique, and edge captures. The [assessment](../../models/lmc/clouds/review/assessment.json) separates established registration/projection properties from unverified gas geometry.
+Inspect the frozen front, oblique, and edge captures. The [assessment](../../../../src/objects/lmc-volume/source/clouds/review/assessment.json) separates established registration/projection properties from unverified gas geometry.
 
 The extended target retains 68.0% of the decomposition's display signal, not a measured gas-light fraction. Its finite and broad-depth controls each use 416 prepared textures, totaling 2.41 MB and 2.01 MB. Maximum tested observer-ray channel error before texture encoding is below 0.00009 for both. These numerical checks do not override the failed visual gate.
 
@@ -50,7 +50,7 @@ The controls deliberately preserve these limitations for inspection. Their prepa
 ```sh
 pnpm install --frozen-lockfile
 pnpm build:packages
-node --experimental-strip-types labs/nebula/src/run.ts prepare-filled labs/nebula/models/lmc/clouds.json
+node --experimental-strip-types labs/nebula/src/run.ts prepare-filled src/objects/lmc-volume/source/clouds.json
 pnpm lab:nebula
 ```
 

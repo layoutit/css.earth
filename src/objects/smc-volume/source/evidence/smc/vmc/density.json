@@ -1,14 +1,14 @@
 {
   "schema": "cssearth-catalogue-density@1",
   "id": "smc-vmc-density",
-  "outputDirectory": ".local/nebula-lab/smc-vmc-density",
+  "outputDirectory": "src/objects/smc-volume/.local/vmc-density",
   "catalogue": {
-    "path": ".local/nebula-lab/smc-vmc/density-rc.tsv"
+    "path": "src/objects/smc-volume/.local/vmc/density-rc.tsv"
   },
   "receipt": {
-    "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json"
+    "path": "src/objects/smc-volume/source/vmc/crossmatch-receipt.json"
   },
   "frameObject": {
-    "path": "labs/nebula/models/smc/full-density/object.json"
+    "path": "src/objects/smc-volume/source/full-density/object.json"
   }
 }

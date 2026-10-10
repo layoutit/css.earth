@@ -1,464 +1,387 @@
 [
   {
-    "id": "lmc-clouds",
-    "name": "LMC",
-    "directory": "labs/nebula/models/lmc/full-density",
-    "stars": "labs/nebula/models/lmc/stars/prepared/stars.json",
-    "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
-    "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-    "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
-    "framingRadiusUnits": 5,
-    "hasDetail": false,
-    "comparisonGroup": "lmc-clouds-observation",
-    "referenceDistanceUnits": 49.59067275049,
-    "referenceEastLeft": true,
-    "density": {
-      "directory": "labs/nebula/models/lmc/full-density",
-      "modelNote": "All imported simulation stellar particles are included in this neutral overview. The observer placement is reconstructed from the paper; it is approximate and preserves model/observation offsets. Image overlays use publisher sky coordinates. No gas or dust depth is inferred.",
-      "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
-      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/lmc/candidates/overlays.json",
-      "candidateImageIds": [
-        "vista-infrared",
-        "horalek-widefield",
-        "wise-wide-infrared"
-      ],
-      "referenceFramingRadiusUnits": 5,
-      "starAlignmentReference": {
-        "path": "labs/nebula/models/lmc/stars/source/alignment.json"
-      },
-      "processingPlan": "labs/nebula/models/lmc/star-separation/plan.json"
-    },
-    "imagePath": "labs/nebula/models/lmc/candidates/prepared/vista-infrared.webp",
-    "menuLabel": "LMC",
-    "workflow": "density"
-  },
-  {
-    "id": "smc-particles",
-    "name": "SMC · fitted simulation",
-    "directory": ".local/nebula-lab/smc-aligned-density",
-    "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
-    "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-    "modelNote": "Historical visual-fit comparison, rejected as a physical size calibration. Full simulated stellar density with authored translation, rotation and scale; not observed SMC geometry. All original tails are retained and the images remain fixed.",
-    "framingRadiusUnits": 7,
-    "hasDetail": false,
-    "sourceSubjectId": "smc",
-    "density": {
-      "directory": ".local/nebula-lab/smc-aligned-density",
-      "modelNote": "Historical visual-fit comparison, rejected as a physical size calibration. Full simulated stellar density with authored translation, rotation and scale; not observed SMC geometry. All original tails are retained and the images remain fixed.",
-      "sourcePageUrl": "https://doi.org/10.5061/dryad.1vhhmgr82",
-      "credit": "Stellar simulation: Garver, Nidever, Debattista & Deg (2026), CC0. Smoothed, normalized relative density; authored display exposure.",
-      "overlays": "labs/nebula/models/smc/candidates/overlays.json",
-      "candidateImageIds": [
-        "smc-vista",
-        "smc-smash",
-        "smc-dss2",
-        "smc-wise",
-        "smc-allwise-wide",
-        "smc-herschel-spitzer",
-        "smc-herschel-gas",
-        "smc-horalek-wide",
-        "smc-irida-optical",
-        "smc-dss2-fits",
-        "smc-wise-stellar",
-        "smc-wise-starforming",
-        "smc-herschel-dust"
-      ],
-      "processingPlan": "labs/nebula/models/smc/processing-plan.json",
-      "referenceFramingRadiusUnits": 7,
-      "modelPlacement": {
-        "path": "labs/nebula/models/smc/model-placement.json"
-      }
-    },
-    "menuLabel": "SMC · fitted simulation",
-    "workflow": "density",
-    "referenceDistanceUnits": 62.440000000000005,
-    "referenceEastLeft": true,
-    "imagePath": "labs/nebula/models/smc/candidates/prepared/smc-smash.webp",
-    "comparisonGroup": "smc-particles-observation"
-  },
-  {
-    "id": "smc-vmc",
-    "name": "SMC · VMC observed",
-    "directory": ".local/nebula-lab/smc-vmc-density",
-    "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
-    "credit": "VMC red-clump stars: Tatton et al. (2021), CDS and ESO VMC DR5.1 PSF photometry.",
-    "modelNote": "489,760 unique observed red-clump tracers. Sky position and angular scale are catalogue-based; photometric distance estimates include population, reddening and measurement scatter. This is a stellar tracer distribution, not gas or dust density. No image-fitting transform.",
-    "framingRadiusUnits": 7,
-    "hasDetail": false,
-    "sourceSubjectId": "smc",
-    "density": {
-      "directory": ".local/nebula-lab/smc-vmc-density",
-      "modelNote": "489,760 unique observed red-clump tracers. Sky position and angular scale are catalogue-based; photometric distance estimates include population, reddening and measurement scatter. This is a stellar tracer distribution, not gas or dust density. No image-fitting transform.",
-      "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
-      "credit": "VMC red-clump stars: Tatton et al. (2021), CDS and ESO VMC DR5.1 PSF photometry.",
-      "overlays": "labs/nebula/models/smc/candidates/overlays.json",
-      "candidateImageIds": [
-        "smc-vista",
-        "smc-smash",
-        "smc-dss2",
-        "smc-wise",
-        "smc-allwise-wide",
-        "smc-herschel-spitzer",
-        "smc-herschel-gas",
-        "smc-horalek-wide",
-        "smc-irida-optical",
-        "smc-dss2-fits",
-        "smc-wise-stellar",
-        "smc-wise-starforming",
-        "smc-herschel-dust"
-      ],
-      "processingPlan": "labs/nebula/models/smc/processing-plan.json",
-      "referenceFramingRadiusUnits": 7
-    },
-    "menuLabel": "SMC · VMC observed",
-    "workflow": "density",
-    "referenceDistanceUnits": 62.440000000000005,
-    "referenceEastLeft": true,
-    "imagePath": "labs/nebula/models/smc/candidates/prepared/smc-smash.webp",
-    "comparisonGroup": "smc-vmc-observation"
-  },
-  {
-    "id": "smc-ellipsoid",
-    "name": "SMC · ellipsoid comparison",
-    "directory": ".local/nebula-lab/smc-constrained/ellipsoid-volume",
-    "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
-    "credit": "Authored ellipsoid hypothesis constrained by Tatton et al. (2021) / ESO VMC red-clump observations.",
-    "modelNote": "Conditional model fitted to VMC sky positions and brightness-distance distributions with an approximate survey selection and magnitude-error kernel. Outside the survey this is model-dependent. This neutral comparison is not measured gas/dust or an accepted physical reconstruction.",
-    "framingRadiusUnits": 7,
-    "hasDetail": false,
-    "sourceSubjectId": "smc",
-    "density": {
-      "directory": ".local/nebula-lab/smc-constrained/ellipsoid-volume",
-      "modelNote": "Conditional model fitted to VMC sky positions and brightness-distance distributions with an approximate survey selection and magnitude-error kernel. Outside the survey this is model-dependent. This neutral comparison is not measured gas/dust or an accepted physical reconstruction.",
-      "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
-      "credit": "Authored ellipsoid hypothesis constrained by Tatton et al. (2021) / ESO VMC red-clump observations.",
-      "overlays": "labs/nebula/models/smc/candidates/overlays.json",
-      "candidateImageIds": [
-        "smc-vista",
-        "smc-smash",
-        "smc-dss2",
-        "smc-wise",
-        "smc-allwise-wide",
-        "smc-herschel-spitzer",
-        "smc-herschel-gas",
-        "smc-horalek-wide",
-        "smc-irida-optical",
-        "smc-dss2-fits",
-        "smc-wise-stellar",
-        "smc-wise-starforming",
-        "smc-herschel-dust"
-      ],
-      "processingPlan": "labs/nebula/models/smc/processing-plan.json",
-      "referenceFramingRadiusUnits": 7
-    },
-    "menuLabel": "SMC · ellipsoid comparison",
-    "workflow": "density",
-    "referenceDistanceUnits": 62.440000000000005,
-    "referenceEastLeft": true,
-    "imagePath": "labs/nebula/models/smc/candidates/prepared/smc-smash.webp",
-    "comparisonGroup": "smc-ellipsoid-observation"
-  },
-  {
-    "id": "smc-constrained",
-    "name": "SMC · constrained simulation",
-    "directory": ".local/nebula-lab/smc-constrained/simulation-volume",
-    "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
-    "credit": "Garver et al. (2026) simulation prior; Tatton et al. (2021) / ESO VMC red-clump constraints.",
-    "modelNote": "Conditional model fitted to VMC sky positions and brightness-distance distributions with an approximate survey selection and magnitude-error kernel. Outside the survey this is model-dependent. This neutral comparison is not measured gas/dust or an accepted physical reconstruction.",
-    "framingRadiusUnits": 7,
-    "hasDetail": false,
-    "sourceSubjectId": "smc",
-    "density": {
-      "directory": ".local/nebula-lab/smc-constrained/simulation-volume",
-      "modelNote": "Conditional model fitted to VMC sky positions and brightness-distance distributions with an approximate survey selection and magnitude-error kernel. Outside the survey this is model-dependent. This neutral comparison is not measured gas/dust or an accepted physical reconstruction.",
-      "sourcePageUrl": "https://doi.org/10.1093/mnras/staa3857",
-      "credit": "Garver et al. (2026) simulation prior; Tatton et al. (2021) / ESO VMC red-clump constraints.",
-      "overlays": "labs/nebula/models/smc/candidates/overlays.json",
-      "candidateImageIds": [
-        "smc-vista",
-        "smc-smash",
-        "smc-dss2",
-        "smc-wise",
-        "smc-allwise-wide",
-        "smc-herschel-spitzer",
-        "smc-herschel-gas",
-        "smc-horalek-wide",
-        "smc-irida-optical",
-        "smc-dss2-fits",
-        "smc-wise-stellar",
-        "smc-wise-starforming",
-        "smc-herschel-dust"
-      ],
-      "processingPlan": "labs/nebula/models/smc/processing-plan.json",
-      "referenceFramingRadiusUnits": 7
-    },
-    "menuLabel": "SMC · constrained simulation",
-    "workflow": "density",
-    "referenceDistanceUnits": 62.440000000000005,
-    "referenceEastLeft": true,
-    "imagePath": "labs/nebula/models/smc/candidates/prepared/smc-smash.webp",
-    "comparisonGroup": "smc-constrained-observation"
-  },
-  {
-    "id": "m2-9-inferred",
-    "emissionExperiment": {
-      "directory": ".local/nebula-lab/planetary/m2-9-inferred"
-    },
-    "name": "M2–9 · inferred emission",
-    "directory": ".local/nebula-lab/planetary/m2-9-inferred",
-    "imagePath": ".local/nebula-lab/planetary/m2-9-inferred/input.png",
-    "sourcePageUrl": "https://apod.nasa.gov/apod/ap040201.html",
-    "credit": "Hubble: Balick, Icke, Mellema & NASA. Independent implementation of Wenger, Lorenz & Magnor (2013).",
-    "modelNote": "Experimental emission inferred from one image and approximate axial symmetry. Unmeasured depth and scale; four point sources masked. Not gas mass density.",
-    "framingRadiusUnits": 5,
-    "hasDetail": false,
-    "menuLabel": "M2–9",
-    "workflow": "symmetry"
-  },
-  {
-    "id": "helix-single-axis",
-    "name": "Helix · one-axis fit",
-    "directory": ".local/nebula-lab/planetary/helix-single-axis",
-    "imagePath": ".local/nebula-lab/planetary/helix-single-axis/input.png",
-    "emissionExperiment": {
-      "directory": ".local/nebula-lab/planetary/helix-single-axis",
-      "structureDirectory": ".local/nebula-lab/planetary/helix-structures",
-      "modeled": false,
-      "methodUrl": "https://doi.org/10.1111/cgf.12216",
-      "statusNote": "Control: front fits; side geometry fails.",
-      "sourceCatalogue": "labs/nebula/models/helix/source-candidates.json"
-    },
-    "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
-    "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",
-    "modelNote": "Experimental relative emission: geometry and depths remain assumptions. Hubble/CTIO native image, NOX separation.",
-    "comparisonGroup": "helix-emission-comparison",
-    "framingRadiusUnits": 5,
-    "hasDetail": false,
-    "menuLabel": "Helix · symmetry baseline",
-    "workflow": "symmetry",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/helix/observations.json",
-      "recipe": "labs/nebula/models/helix/observations.json"
-    }
-  },
-  {
-    "id": "helix-model-prior",
-    "name": "Helix · disk/ring prior",
-    "directory": ".local/nebula-lab/planetary/helix-model-prior",
-    "imagePath": ".local/nebula-lab/planetary/helix-model-prior/input.png",
-    "emissionExperiment": {
-      "directory": ".local/nebula-lab/planetary/helix-model-prior",
-      "structureDirectory": ".local/nebula-lab/planetary/helix-structures",
-      "observationStructures": ".local/nebula-lab/observations/helix/structures/catalogue.json",
-      "modeled": true,
-      "methodUrl": "https://doi.org/10.1086/424621",
-      "statusNote": "Previous Hubble baseline: outer emission omitted; side detail unresolved. Not fitted from the ESO structure candidates.",
-      "kinematicsSource": "labs/nebula/models/helix/kinematics-oiii.json",
-      "jointFitSource": "labs/nebula/models/helix/joint-fit.json",
-      "compilerSource": "labs/nebula/models/helix/compiler.json"
-    },
-    "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
-    "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",
-    "modelNote": "Experimental relative emission: geometry and depths remain assumptions. Hubble/CTIO native image, NOX separation.",
-    "comparisonGroup": "helix-emission-comparison",
-    "framingRadiusUnits": 5,
-    "hasDetail": false,
+    "id": "helix",
+    "name": "Helix Nebula",
     "menuLabel": "Helix",
-    "workflow": "inference",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/helix/observations.json",
-      "recipe": "labs/nebula/models/helix/observations.json"
+    "workflow": "plates",
+    "directory": "src/objects/helix-layers",
+    "imagePath": "src/objects/helix-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "helix",
+    "plates": {
+      "group": "helix",
+      "object": "src/objects/helix-layers"
+    },
+    "solvers": {
+      "kinematics": "src/objects/helix-layers/source/kinematics-oiii.json",
+      "jointFit": {
+        "recipe": "src/objects/helix-layers/source/joint-fit.json",
+        "structures": "src/objects/helix-layers/.local/observations/helix/structures/catalogue.json",
+        "observations": "src/objects/helix-layers/.local/observations/helix/observations.json"
+      }
     }
   },
   {
-    "id": "m42",
-    "name": "M42 · Orion",
-    "menuLabel": "M42 · Orion",
-    "workflow": "inference",
-    "directory": ".local/nebula-lab/compiler-published/m42",
+    "id": "helix-helix-wfi-layers",
+    "name": "Helix Nebula",
+    "menuLabel": "Helix",
+    "workflow": "plates",
+    "directory": "src/objects/helix-wfi-layers",
+    "imagePath": "src/objects/helix-wfi-layers/source/source.jpg",
     "hasDetail": false,
-    "modelNote": "Star-forming emission and reflection cloud. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/m42/observations.json",
-      "recipe": "labs/nebula/models/m42/observations.json"
+    "comparisonGroup": "helix",
+    "plates": {
+      "group": "helix",
+      "object": "src/objects/helix-wfi-layers"
     },
-    "emissionExperiment": {
-      "observationStructures": ".local/nebula-lab/observations/m42/structures/catalogue.json",
-      "compilerSource": "labs/nebula/models/m42/compiler.json",
-      "compilerPublished": ".local/nebula-lab/compiler-published/m42.json",
-      "statusNote": "Image-only conditional depth; not measured density."
+    "sourceSubjectId": "helix"
+  },
+  {
+    "id": "helix-helix-vista-layers",
+    "name": "Helix Nebula",
+    "menuLabel": "Helix",
+    "workflow": "plates",
+    "directory": "src/objects/helix-vista-layers",
+    "imagePath": "src/objects/helix-vista-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "helix",
+    "plates": {
+      "group": "helix",
+      "object": "src/objects/helix-vista-layers"
+    },
+    "sourceSubjectId": "helix"
+  },
+  {
+    "id": "helix-helix-wide-layers",
+    "name": "Helix Nebula",
+    "menuLabel": "Helix",
+    "workflow": "plates",
+    "directory": "src/objects/helix-wide-layers",
+    "imagePath": "src/objects/helix-wide-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "helix",
+    "plates": {
+      "group": "helix",
+      "object": "src/objects/helix-wide-layers"
+    },
+    "sourceSubjectId": "helix"
+  },
+  {
+    "id": "m1",
+    "name": "Crab Nebula",
+    "menuLabel": "M1 · Crab",
+    "workflow": "inference",
+    "directory": "src/objects/m1-volume",
+    "hasDetail": false,
+    "siteVolume": {
+      "group": "m1",
+      "object": "src/objects/m1-volume"
+    }
+  },
+  {
+    "id": "m1-m1-layers",
+    "name": "Crab Nebula",
+    "menuLabel": "M1 · Crab",
+    "workflow": "plates",
+    "directory": "src/objects/m1-layers",
+    "imagePath": "src/objects/m1-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "m1",
+    "plates": {
+      "group": "m1",
+      "object": "src/objects/m1-layers"
+    },
+    "sourceSubjectId": "m1"
+  },
+  {
+    "id": "m2-9",
+    "name": "Twin Jet Nebula",
+    "menuLabel": "M2–9 · Twin Jet",
+    "workflow": "symmetry",
+    "directory": "src/objects/m2-9-volume",
+    "hasDetail": false,
+    "siteVolume": {
+      "group": "m2-9",
+      "object": "src/objects/m2-9-volume"
+    },
+    "solvers": {
+      "symmetry": "src/objects/m2-9-volume/source/experiment.json"
     }
   },
   {
     "id": "m8",
-    "name": "M8 · Lagoon",
+    "name": "Lagoon Nebula",
     "menuLabel": "M8 · Lagoon",
     "workflow": "inference",
-    "directory": ".local/nebula-lab/compiler-published/m8",
+    "directory": "src/objects/m8-volume",
     "hasDetail": false,
-    "modelNote": "Evidence-guided display model; physical observations and authored depth assumptions are recorded separately.",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/m8-processed/observations.json",
-      "recipe": "labs/nebula/models/m8/processing-observations.json",
-      "dossier": "labs/nebula/models/m8/source-dossier.json"
-    },
-    "emissionExperiment": {
-      "observationStructures": ".local/nebula-lab/observations/m8-processed/structures/catalogue.json",
-      "compilerSource": "labs/nebula/models/m8/compiler.json",
-      "compilerPublished": ".local/nebula-lab/compiler-published/m8.json",
-      "statusNote": "Published constraints guide authored depth; this is not measured gas density."
+    "siteVolume": {
+      "group": "m8",
+      "object": "src/objects/m8-volume"
     }
   },
   {
-    "id": "carina",
-    "name": "Carina",
-    "menuLabel": "Carina",
+    "id": "m42",
+    "name": "Orion Nebula",
+    "menuLabel": "M42 · Orion",
     "workflow": "inference",
-    "directory": ".local/nebula-lab/compiler-published/carina",
+    "directory": "src/objects/m42-volume",
     "hasDetail": false,
-    "modelNote": "Extended star-forming emission and dust complex. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/carina/observations.json",
-      "recipe": "labs/nebula/models/carina/observations.json"
-    },
-    "emissionExperiment": {
-      "observationStructures": ".local/nebula-lab/observations/carina/structures/catalogue.json",
-      "compilerSource": "labs/nebula/models/carina/compiler.json",
-      "compilerPublished": ".local/nebula-lab/compiler-published/carina.json",
-      "statusNote": "Image-only conditional depth; not measured density."
-    }
-  },
-  {
-    "id": "ngc6357",
-    "name": "NGC 6357",
-    "menuLabel": "NGC 6357",
-    "workflow": "inference",
-    "directory": ".local/nebula-lab/compiler-published/ngc6357",
-    "hasDetail": false,
-    "modelNote": "Irregular star-forming emission complex. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/ngc6357/observations.json",
-      "recipe": "labs/nebula/models/ngc6357/observations.json"
-    },
-    "emissionExperiment": {
-      "observationStructures": ".local/nebula-lab/observations/ngc6357/structures/catalogue.json",
-      "compilerSource": "labs/nebula/models/ngc6357/compiler.json",
-      "compilerPublished": ".local/nebula-lab/compiler-published/ngc6357.json",
-      "statusNote": "Image-only conditional depth; not measured density."
-    }
-  },
-  {
-    "id": "m78",
-    "name": "M78",
-    "menuLabel": "M78",
-    "workflow": "inference",
-    "directory": ".local/nebula-lab/compiler-published/m78",
-    "hasDetail": false,
-    "modelNote": "Reflection nebula: scattered light does not directly measure gas density. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/m78/observations.json",
-      "recipe": "labs/nebula/models/m78/observations.json"
-    },
-    "emissionExperiment": {
-      "observationStructures": ".local/nebula-lab/observations/m78/structures/catalogue.json",
-      "compilerSource": "labs/nebula/models/m78/compiler.json",
-      "compilerPublished": ".local/nebula-lab/compiler-published/m78.json",
-      "statusNote": "Image-only conditional depth; not measured density."
-    }
-  },
-  {
-    "id": "horsehead",
-    "name": "Horsehead",
-    "menuLabel": "Horsehead",
-    "workflow": "inference",
-    "directory": ".local/nebula-lab/compiler-published/horsehead",
-    "hasDetail": false,
-    "modelNote": "Dark and reflection nebula: the silhouette traces absorption; positive emission fitting cannot recover the obscuring dust. Image-only relative emission with conditional, unmeasured depth; no velocity or independent density model.",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/horsehead/observations.json",
-      "recipe": "labs/nebula/models/horsehead/observations.json"
-    },
-    "emissionExperiment": {
-      "observationStructures": ".local/nebula-lab/observations/horsehead/structures/catalogue.json",
-      "compilerSource": "labs/nebula/models/horsehead/compiler.json",
-      "compilerPublished": ".local/nebula-lab/compiler-published/horsehead.json",
-      "statusNote": "Image-only conditional depth; not measured density."
+    "siteVolume": {
+      "group": "m42",
+      "object": "src/objects/m42-volume"
     }
   },
   {
     "id": "m45",
-    "name": "M45 · Pleiades",
+    "name": "Pleiades",
     "menuLabel": "M45 · Pleiades",
     "workflow": "inference",
-    "directory": ".local/nebula-lab/compiler-published/m45",
+    "directory": "src/objects/m45-volume",
     "hasDetail": false,
-    "modelNote": "Evidence-guided display model; physical observations and authored depth assumptions are recorded separately.",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/m45/observations.json",
-      "recipe": "labs/nebula/models/m45/observations.json",
-      "dossier": "labs/nebula/models/m45/source-dossier.json"
-    },
-    "emissionExperiment": {
-      "observationStructures": ".local/nebula-lab/observations/m45-processing/structures/catalogue.json",
-      "compilerSource": "labs/nebula/models/m45/compiler.json",
-      "compilerPublished": ".local/nebula-lab/compiler-published/m45.json",
-      "statusNote": "Published constraints guide authored depth; this is not measured gas density."
+    "siteVolume": {
+      "group": "m45",
+      "object": "src/objects/m45-volume"
     }
   },
   {
-    "id": "omega-centauri",
-    "name": "Omega Centauri",
-    "menuLabel": "Omega Centauri",
-    "workflow": "inference",
-    "directory": ".local/nebula-lab/compiler-published/omega-centauri",
+    "id": "m57",
+    "name": "Ring Nebula",
+    "menuLabel": "M57 · Ring",
+    "workflow": "plates",
+    "directory": "src/objects/m57-layers",
+    "imagePath": "src/objects/m57-layers/source/starless.jpg",
     "hasDetail": false,
-    "modelNote": "Published oblate starlight prior; finite feature depths remain conditional, not measured star positions.",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/omega-centauri/observations.json",
-      "recipe": "labs/nebula/models/omega-centauri/observations.json"
-    },
-    "emissionExperiment": {
-      "observationStructures": ".local/nebula-lab/observations/omega-centauri/structures/catalogue.json",
-      "compilerSource": "labs/nebula/models/omega-centauri/compiler.json",
-      "compilerPublished": ".local/nebula-lab/compiler-published/omega-centauri.json",
-      "statusNote": "Published oblate prior with conditional finite feature depths; integrated stellar light is preserved."
+    "comparisonGroup": "m57",
+    "plates": {
+      "group": "m57",
+      "object": "src/objects/m57-layers"
     }
   },
   {
-    "id": "m1",
-    "name": "M1 · Crab",
-    "menuLabel": "M1 · Crab",
-    "workflow": "inference",
-    "directory": ".local/nebula-lab/compiler-published/m1",
+    "id": "m57-m57-miri-layers",
+    "name": "Ring Nebula",
+    "menuLabel": "M57 · Ring",
+    "workflow": "plates",
+    "directory": "src/objects/m57-miri-layers",
+    "imagePath": "src/objects/m57-miri-layers/source/source.jpg",
     "hasDetail": false,
-    "modelNote": "Qualified line-emission samples and separate model wind geometry; depth is conditional on the published expansion law.",
-    "observationAlignment": {
-      "manifest": ".local/nebula-lab/observations/m1/observations.json",
-      "recipe": "labs/nebula/models/m1/observations.json",
-      "dossier": "labs/nebula/models/m1/source-dossier.json"
+    "comparisonGroup": "m57",
+    "plates": {
+      "group": "m57",
+      "object": "src/objects/m57-miri-layers"
     },
-    "emissionExperiment": {
-      "observationStructures": ".local/nebula-lab/observations/m1/structures/catalogue.json",
-      "compilerSource": "labs/nebula/models/m1/compiler.json",
-      "compilerPublished": ".local/nebula-lab/compiler-published/m1.json",
-      "statusNote": "Released ejecta samples, separate pulsar wind and compact pulsar; spectral component strengths remain authored."
+    "sourceSubjectId": "m57"
+  },
+  {
+    "id": "m57-m57-nircam-layers",
+    "name": "Ring Nebula",
+    "menuLabel": "M57 · Ring",
+    "workflow": "plates",
+    "directory": "src/objects/m57-nircam-layers",
+    "imagePath": "src/objects/m57-nircam-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "m57",
+    "plates": {
+      "group": "m57",
+      "object": "src/objects/m57-nircam-layers"
+    },
+    "sourceSubjectId": "m57"
+  },
+  {
+    "id": "m76",
+    "name": "Little Dumbbell Nebula",
+    "menuLabel": "M76 · Little Dumbbell",
+    "workflow": "plates",
+    "directory": "src/objects/m76-layers",
+    "imagePath": "src/objects/m76-layers/source/starless.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "m76",
+    "plates": {
+      "group": "m76",
+      "object": "src/objects/m76-layers"
     }
   },
   {
-    "id": "m87-inferred",
-    "emissionExperiment": {
-      "directory": ".local/nebula-lab/planetary/m87-inferred"
-    },
-    "name": "M87 · inferred light",
-    "directory": ".local/nebula-lab/planetary/m87-inferred",
-    "imagePath": ".local/nebula-lab/planetary/m87-inferred/input.png",
-    "sourcePageUrl": "https://www.eso.org/public/images/eso1525a/",
-    "credit": "Chris Mihos (Case Western Reserve University)/ESO. Independent implementation of Wenger, Lorenz & Magnor (2013).",
-    "modelNote": "Experimental starlight distribution inferred from one image and axial symmetry about M87's minor axis in the sky plane. NOX star removal; catalogued neighbouring galaxies masked. Unmeasured depth.",
-    "framingRadiusUnits": 5,
+    "id": "m97",
+    "name": "Owl Nebula",
+    "menuLabel": "M97 · Owl",
+    "workflow": "plates",
+    "directory": "src/objects/m97-layers",
+    "imagePath": "src/objects/m97-layers/source/starless.jpg",
     "hasDetail": false,
-    "menuLabel": "M87",
-    "workflow": "symmetry"
+    "comparisonGroup": "m97",
+    "plates": {
+      "group": "m97",
+      "object": "src/objects/m97-layers"
+    }
+  },
+  {
+    "id": "m1-67",
+    "name": "M1-67",
+    "menuLabel": "M1-67",
+    "workflow": "plates",
+    "directory": "src/objects/m1-67-layers",
+    "imagePath": "src/objects/m1-67-layers/source/starless.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "m1-67",
+    "plates": {
+      "group": "m1-67",
+      "object": "src/objects/m1-67-layers"
+    }
+  },
+  {
+    "id": "ngc-2392",
+    "name": "NGC 2392",
+    "menuLabel": "NGC 2392",
+    "workflow": "plates",
+    "directory": "src/objects/ngc-2392-layers",
+    "imagePath": "src/objects/ngc-2392-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "ngc-2392",
+    "plates": {
+      "group": "ngc-2392",
+      "object": "src/objects/ngc-2392-layers"
+    }
+  },
+  {
+    "id": "ngc-2392-ngc-2392-miri-layers",
+    "name": "NGC 2392",
+    "menuLabel": "NGC 2392",
+    "workflow": "plates",
+    "directory": "src/objects/ngc-2392-miri-layers",
+    "imagePath": "src/objects/ngc-2392-miri-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "ngc-2392",
+    "plates": {
+      "group": "ngc-2392",
+      "object": "src/objects/ngc-2392-miri-layers"
+    },
+    "sourceSubjectId": "ngc-2392"
+  },
+  {
+    "id": "ngc-2392-ngc-2392-webb-layers",
+    "name": "NGC 2392",
+    "menuLabel": "NGC 2392",
+    "workflow": "plates",
+    "directory": "src/objects/ngc-2392-webb-layers",
+    "imagePath": "src/objects/ngc-2392-webb-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "ngc-2392",
+    "plates": {
+      "group": "ngc-2392",
+      "object": "src/objects/ngc-2392-webb-layers"
+    },
+    "sourceSubjectId": "ngc-2392"
+  },
+  {
+    "id": "ngc-3132",
+    "name": "Southern Ring Nebula",
+    "menuLabel": "NGC 3132 · Southern Ring",
+    "workflow": "plates",
+    "directory": "src/objects/ngc-3132-layers",
+    "imagePath": "src/objects/ngc-3132-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "ngc-3132",
+    "plates": {
+      "group": "ngc-3132",
+      "object": "src/objects/ngc-3132-layers"
+    }
+  },
+  {
+    "id": "ngc-3132-ngc-3132-miri-layers",
+    "name": "Southern Ring Nebula",
+    "menuLabel": "NGC 3132 · Southern Ring",
+    "workflow": "plates",
+    "directory": "src/objects/ngc-3132-miri-layers",
+    "imagePath": "src/objects/ngc-3132-miri-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "ngc-3132",
+    "plates": {
+      "group": "ngc-3132",
+      "object": "src/objects/ngc-3132-miri-layers"
+    },
+    "sourceSubjectId": "ngc-3132"
+  },
+  {
+    "id": "ngc-7662",
+    "name": "Blue Snowball Nebula",
+    "menuLabel": "NGC 7662 · Blue Snowball",
+    "workflow": "plates",
+    "directory": "src/objects/ngc-7662-layers",
+    "imagePath": "src/objects/ngc-7662-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "ngc-7662",
+    "plates": {
+      "group": "ngc-7662",
+      "object": "src/objects/ngc-7662-layers"
+    }
+  },
+  {
+    "id": "cassiopeia-a",
+    "name": "Cassiopeia A",
+    "menuLabel": "Cassiopeia A",
+    "workflow": "plates",
+    "directory": "src/objects/cassiopeia-a-layers",
+    "imagePath": "src/objects/cassiopeia-a-layers/source/starless.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "cassiopeia-a",
+    "plates": {
+      "group": "cassiopeia-a",
+      "object": "src/objects/cassiopeia-a-layers"
+    }
+  },
+  {
+    "id": "cassiopeia-a-cassiopeia-a-miri-layers",
+    "name": "Cassiopeia A",
+    "menuLabel": "Cassiopeia A",
+    "workflow": "plates",
+    "directory": "src/objects/cassiopeia-a-miri-layers",
+    "imagePath": "src/objects/cassiopeia-a-miri-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "cassiopeia-a",
+    "plates": {
+      "group": "cassiopeia-a",
+      "object": "src/objects/cassiopeia-a-miri-layers"
+    },
+    "sourceSubjectId": "cassiopeia-a"
+  },
+  {
+    "id": "homunculus",
+    "name": "Homunculus Nebula",
+    "menuLabel": "Homunculus",
+    "workflow": "plates",
+    "directory": "src/objects/homunculus-nebula-layers",
+    "imagePath": "src/objects/homunculus-nebula-layers/source/source.jpg",
+    "hasDetail": false,
+    "comparisonGroup": "homunculus",
+    "plates": {
+      "group": "homunculus",
+      "object": "src/objects/homunculus-nebula-layers"
+    }
+  },
+  {
+    "id": "lmc",
+    "name": "Large Magellanic Cloud",
+    "menuLabel": "LMC",
+    "workflow": "density",
+    "directory": "src/objects/lmc-volume",
+    "hasDetail": false,
+    "siteVolume": {
+      "group": "lmc",
+      "object": "src/objects/lmc-volume"
+    }
+  },
+  {
+    "id": "smc",
+    "name": "Small Magellanic Cloud",
+    "menuLabel": "SMC",
+    "workflow": "density",
+    "directory": "src/objects/smc-volume",
+    "hasDetail": false,
+    "siteVolume": {
+      "group": "smc",
+      "object": "src/objects/smc-volume"
+    }
   }
 ]

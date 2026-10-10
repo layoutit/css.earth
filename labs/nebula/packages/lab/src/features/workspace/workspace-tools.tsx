@@ -20,10 +20,13 @@ const isPanel = (tool: WorkspaceTool): tool is WorkspacePanelTool => 'panel' in 
  * At most one panel is open; the button toggles it and Escape closes it. A tool that is briefly absent (a dataset
  * switching, or no source image) hides with its panel and reopens it when it returns, so the panel follows the dataset.
  */
-export function WorkspaceTools({ tools }: { tools: readonly WorkspaceTool[] }) {
+export function WorkspaceTools({ tools, dock }: { tools: readonly WorkspaceTool[];
+  /** `left`: big labelled buttons in the left panel's tool slot (`#workspace-left-tools`), panels beside it. */
+  dock?: 'left' }) {
   const [host, setHost] = useState<Element | null>(null), [openId, setOpenId] = useState<string | null>(null);
+  const [slot, setSlot] = useState<Element | null>(null);
   const buttons = useRef(new Map<string, HTMLButtonElement>()), panel = useRef<HTMLElement>(null);
-  useEffect(() => { setHost(document.querySelector('.workspace-content')); }, []);
+  useEffect(() => { setHost(document.querySelector('.workspace-content')); setSlot(dock === 'left' ? document.getElementById('workspace-left-tools') : null); }, [dock]);
   const open = tools.filter(isPanel).find(tool => tool.id === openId), openTool = open?.id;
   useEffect(() => {
     if (!openTool) return;
@@ -38,8 +41,7 @@ export function WorkspaceTools({ tools }: { tools: readonly WorkspaceTool[] }) {
     return () => window.removeEventListener('keydown', close, true);
   }, [openTool]);
   if (!host || tools.length === 0) return null;
-  return createPortal(<div className="workspace-tools" style={{ '--workspace-tools-count': tools.length } as CSSProperties}>
-    {open && <section ref={panel} id={`workspace-tool-panel-${open.id}`} className="workspace-tool-panel" role="dialog"
+  const openPanel = open && <section ref={panel} id={`workspace-tool-panel-${open.id}`} className="workspace-tool-panel" role="dialog"
       aria-label={open.label} data-workspace-tool-panel={open.id}>
       <header className="workspace-tool-panel-header">
         <h2>{open.tooltip ?? open.label}</h2>
@@ -47,7 +49,25 @@ export function WorkspaceTools({ tools }: { tools: readonly WorkspaceTool[] }) {
           onClick={() => { setOpenId(null); buttons.current.get(open.id)?.focus(); }}>×</button>
       </header>
       {open.panel}
-    </section>}
+    </section>;
+  if (dock === 'left') {
+    if (!slot) return null;
+    const asides = tools.filter((tool): tool is WorkspaceToggleTool => !isPanel(tool) && Boolean(tool.aside) && tool.pressed);
+    return <>
+      {createPortal(<div className="workspace-tools workspace-tools-left">{openPanel}
+        {asides.map(tool => <div key={tool.id} className="workspace-tool-aside workspace-tool-aside-left" data-workspace-tool-aside={tool.id}>{tool.aside}</div>)}</div>, host)}
+      {createPortal(tools.map(tool => <InfoTip key={tool.id} content={tool.tooltip ?? tool.label}>
+        <button type="button" data-workspace-tool={tool.id} aria-label={tool.label}
+          aria-pressed={isPanel(tool) ? tool.id === open?.id : tool.pressed}
+          aria-controls={tool.id === open?.id ? `workspace-tool-panel-${tool.id}` : undefined}
+          ref={node => { if (node) buttons.current.set(tool.id, node); else buttons.current.delete(tool.id); }}
+          onClick={() => isPanel(tool) ? setOpenId(current => current === tool.id ? null : tool.id) : tool.onToggle()}>
+          <span aria-hidden="true" className="workspace-tool-glyph">{tool.icon}</span><span>{tool.label}</span></button>
+      </InfoTip>), slot)}
+    </>;
+  }
+  return createPortal(<div className="workspace-tools" style={{ '--workspace-tools-count': tools.length } as CSSProperties}>
+    {openPanel}
     <ul className="workspace-tool-buttons" aria-label="Canvas tools">
       {tools.map(tool => <li key={tool.id}>
         {!isPanel(tool) && tool.aside && <div className="workspace-tool-aside" data-workspace-tool-aside={tool.id}>{tool.aside}</div>}

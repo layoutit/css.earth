@@ -13,7 +13,7 @@
   ],
   "evidence": [
     {
-      "path": "labs/nebula/models/m8/physical-sources.json",
+      "path": "src/objects/m8-volume/source/physical-sources.json",
       "locator": "/papers/6"
     }
   ],
@@ -24,7 +24,7 @@
       "kind": "credit",
       "text": "M. Tiwari et al.",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/m8/physical-sources.json#/papers/6"
+      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m8-volume/source/physical-sources.json#/papers/6"
     }
   ],
   "creators": [

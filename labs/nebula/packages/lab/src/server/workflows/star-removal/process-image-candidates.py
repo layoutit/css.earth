@@ -19,7 +19,7 @@ OUTPUTS = ('star-detections.json', 'star-detection-map.png', 'diffuse.png', 'sta
 
 
 def document(path):
-    relocated = str(path).replace('labs/nebula/models/lmc-candidates/', 'labs/nebula/models/lmc/candidates/')
+    relocated = str(path).replace('labs/nebula/models/lmc-candidates/', 'src/objects/lmc-volume/source/candidates/')
     return json.loads(Path(relocated).read_bytes())
 
 

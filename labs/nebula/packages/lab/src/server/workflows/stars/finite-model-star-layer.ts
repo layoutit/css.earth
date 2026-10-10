@@ -116,7 +116,17 @@ export async function finiteModelSubjectId(root: string, modelResultId: string) 
 /** A body's checked-in catalogue tables, by path; git records their bytes. */
 export async function readPinnedCatalogueFiles(root: string, sourceDirectory: string,
   files: readonly { path: string; url: string }[]) {
-  return Promise.all(files.map(async entry => ({ ...entry, bytes: (await readFile(resolve(root, sourceDirectory, entry.path))).length })));
+  // A CDS ReadMe is an archive document a body cites rather than keeps (check-body-references): restore any missing pin from its URL.
+  const read = async (entry: { path: string; url: string }) => {
+    const path = resolve(root, sourceDirectory, entry.path);
+    return readFile(path).catch(async (error: NodeJS.ErrnoException) => {
+      if (error.code !== 'ENOENT') throw error;
+      const response = await fetch(entry.url, { signal: AbortSignal.timeout(60000) });
+      if (!response.ok) throw new Error(`Pinned catalogue file ${entry.url}: HTTP ${response.status}`);
+      const bytes = Buffer.from(await response.arrayBuffer()); await writeFile(path, bytes); return bytes;
+    });
+  };
+  return Promise.all(files.map(async entry => ({ ...entry, bytes: (await read(entry)).length })));
 }
 
 /** The shared finite-model block of a layer's provenance: the model's own files plus the placement method. */

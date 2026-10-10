@@ -58,7 +58,7 @@
       },
       "bytes": 25288332,
       "bitDepth": 8,
-      "localCache": ".local/nebula-lab/intake/m45/noirlab-optical.tif",
+      "localCache": "src/objects/m45-volume/.local/intake/noirlab-optical.tif",
       "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
       "master": {
         "url": "https://storage.noirlab.edu/media/archives/images/original/noao-m45.tif",
@@ -110,7 +110,7 @@
       },
       "bytes": 24453299,
       "bitDepth": 8,
-      "localCache": ".local/nebula-lab/intake/m45/spitzer-irac.tif",
+      "localCache": "src/objects/m45-volume/.local/intake/spitzer-irac.tif",
       "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
       "master": {
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09262/PIA09262.tif",
@@ -162,7 +162,7 @@
       },
       "bytes": 24453299,
       "bitDepth": 8,
-      "localCache": ".local/nebula-lab/intake/m45/spitzer-irac-mips.tif",
+      "localCache": "src/objects/m45-volume/.local/intake/spitzer-irac-mips.tif",
       "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
       "master": {
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09263/PIA09263.tif",
@@ -214,7 +214,7 @@
       },
       "bytes": 36796505,
       "bitDepth": 8,
-      "localCache": ".local/nebula-lab/intake/m45/wise-four-band.tif",
+      "localCache": "src/objects/m45-volume/.local/intake/wise-four-band.tif",
       "metadataNote": "Initial publisher/service WCS; independent held-out catalogue residuals are not yet established. Full acquired raster preserved. RGB display product, not calibrated surface brightness.",
       "master": {
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia13/pia13121/PIA13121.tif",

@@ -68,6 +68,6 @@ test('historical catalogue locations keep saved alignment after model folders mo
       placement: defaultOverlayPlacement(), basis: 'saved-basis' }]],
   ] }));
   const sessions = readOverlaySessions(storage);
-  assert.equal(sessions.get('labs/nebula/models/lmc/candidates/overlays.json')?.[0]?.id, 'vista-infrared');
-  assert.equal(sessions.get('labs/nebula/models/lmc/candidates/overlays.json')?.[0]?.basis, 'saved-basis');
+  assert.equal(sessions.get('src/objects/lmc-volume/source/candidates/overlays.json')?.[0]?.id, 'vista-infrared');
+  assert.equal(sessions.get('src/objects/lmc-volume/source/candidates/overlays.json')?.[0]?.basis, 'saved-basis');
 });

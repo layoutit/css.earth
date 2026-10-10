@@ -15,7 +15,7 @@ const finite = coreIsFiniteNumber;
 /** A compiler result is named by its recipe id. */
 const resultName = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]*$/.test(v);
 function pin(v: unknown): CompilerPin {
-  if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/')) throw new TypeError('Invalid compiler resource.');
+  if (!jointRecord(v) || !jointPath(v.path) || !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(v.path)) throw new TypeError('Invalid compiler resource.');
   return { path: v.path };
 }
 function bounds(v: unknown): SkyBounds {

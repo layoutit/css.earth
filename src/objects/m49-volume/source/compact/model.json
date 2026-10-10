@@ -279,7 +279,7 @@
   "provenance": {
     "method": "Image-conditioned emission in an authored geometric prior; no image-only depth inference",
     "doi": "https://arxiv.org/abs/0810.1681",
-    "recipePath": "labs/nebula/models/m49/experiment.json",
+    "recipePath": "src/objects/m49-volume/source/experiment.json",
     "recipe": {
       "schema": "cssearth-emission-inference@1",
       "id": "m49-inferred",

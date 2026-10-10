@@ -22,7 +22,7 @@ export function shellVelocities(offsetArcsec: number, parameters: KinematicParam
 }
 /** Server/preparation only. Points remain observations; model has exactly two surfaces. */
 export function prepareKinematicsComparison(evidence: SlitEvidence, parameters: KinematicParameters, evidenceSource: string): PreparedKinematics {
-  if (!/^labs\/nebula\/models\/[^\\]+\.json$/.test(evidenceSource) || evidenceSource.split('/').includes('..'))
+  if (!/^src\/objects\/[a-z0-9-]+\/source\/[^\\]+\.json$/.test(evidenceSource) || evidenceSource.split('/').includes('..'))
     throw new TypeError(`Slit evidence ${evidence.id} needs its model recipe path, not ${evidenceSource}.`);
   const p = readKinematicParameters(parameters), f = evidence.figure;
   const observed = evidence.samples.map(sample => {

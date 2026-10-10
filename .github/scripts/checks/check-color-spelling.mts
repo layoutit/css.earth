@@ -19,7 +19,7 @@ const THIRD_PARTY = new Set([
   'src/sources/wwt/core-imagesets.jsonl',
   'packages/telescope-cli/src/fixtures/telescope-papers/article.html',
   'packages/telescope-cli/src/fixtures/telescope-stars/served-m51.json',
-  'labs/nebula/models/lmc/candidates/source/wise-registration/validate-image-registration.pinned.py',
+  'src/objects/lmc-volume/source/candidates/source/wise-registration/validate-image-registration.pinned.py',
   'labs/nebula/packages/reconstruction/src/registration/validate-image-registration.py',
 ]);
 

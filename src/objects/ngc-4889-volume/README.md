@@ -17,7 +17,7 @@ follows a published fit to NGC 4889's profile. **Depth is modelled, not measured
 
 ## Method
 
-The Nebula Lab recipe is [labs/nebula/models/ngc-4889/experiment.json](../../../labs/nebula/models/ngc-4889/experiment.json);
+The Nebula Lab recipe is [src/objects/ngc-4889-volume/source/experiment.json](../../../src/objects/ngc-4889-volume/source/experiment.json);
 `node labs/nebula/run.mts prepare-emission` runs it, and [delivery.json](source/delivery.json) places the result. It is
 [M49's route](../m49-volume/README.md#method) with NGC 4889's measurements.
 

@@ -36,6 +36,6 @@ export function evidenceFusionPlugin(root:string):Plugin {
         response.end(JSON.stringify({x,y,sources:result.sources.map((s,i)=>({id:s.id,value:bytes[offset+i*2]?bytes[offset+i*2+1]!/255:null}))}));
       }catch(error){response.statusCode=400;response.end(JSON.stringify({error:error instanceof Error?error.message:'Sample unavailable.'}));}
     })();});
-    server.httpServer?.once('close',()=>{void jobs.shutdown();});
+    server.httpServer?.once('close',()=>{void jobs.shutdown().catch(()=>{});});
   }};
 }

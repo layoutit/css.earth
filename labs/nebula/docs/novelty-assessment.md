@@ -75,7 +75,7 @@ Generic NeRF/3D Gaussian Splatting results are not interchangeable with this met
 
 ## What our present evidence supports
 
-The audited cached output is the [Helix checkpoint](../models/helix/README.md) with result identity `helix`.
+The audited cached output is the [Helix checkpoint](../../../src/objects/helix-layers/source/README.md) with result identity `helix`.
 
 | Evidence | Interpretation |
 | --- | --- |

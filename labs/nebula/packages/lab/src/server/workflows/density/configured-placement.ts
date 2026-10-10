@@ -5,7 +5,7 @@ import { preparePlacedDensity } from './placed-assets.ts';
 import { json, pinned } from './io.ts';
 
 export async function prepareConfiguredDensityPlacements(root: string, subjectId?: string): Promise<void> {
-  const subjects: unknown = await json(resolve(root, 'labs/nebula/packages/lab/src/state/subjects.json'));
+  const subjects: unknown = await json(resolve(root, 'labs/nebula/packages/lab/src/state/processing-subjects.json'));
   if (!Array.isArray(subjects)) throw new TypeError('Invalid subject catalogue.');
   for (const subject of subjects) {
     if (subjectId !== undefined && subject.id !== subjectId) continue;

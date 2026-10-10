@@ -6,16 +6,16 @@ import { mountPreparedLmcStars, type PreparedLmcStars } from '@cssearth/nebula-l
 import { loadVolumeSource, sampleEncoded } from '@cssearth/bake/volume/node';
 import { prepareDensityProjection } from './density-projection.ts';
 
-const path = 'labs/nebula/models/lmc/stars/prepared/stars.json';
-const cloudPath = 'labs/nebula/models/lmc/full-density/object.json';
-const referencePath = 'labs/nebula/models/lmc/stars/source/alignment.json';
+const path = 'src/objects/lmc-volume/source/stars/prepared/stars.json';
+const cloudPath = 'src/objects/lmc-volume/source/full-density/object.json';
+const referencePath = 'src/objects/lmc-volume/source/stars/source/alignment.json';
 const close = (a: number, b: number, tolerance = 1e-8) => assert.ok(Math.abs(a - b) < tolerance, `${a} != ${b}`);
 const fixturePromise = (async () => {
   const bytes = await readFile(path), catalogue = JSON.parse(bytes.toString()) as PreparedLmcStars;
   const referenceBytes = await readFile(referencePath), reference = JSON.parse(referenceBytes.toString());
   const overlay = reference.overlay;
-  const recipe = JSON.parse(await readFile('labs/nebula/models/lmc/full-density/source/volume.json', 'utf8'));
-  const densitySource = await loadVolumeSource('labs/nebula/models/lmc/full-density/source', recipe);
+  const recipe = JSON.parse(await readFile('src/objects/lmc-volume/source/full-density/source/volume.json', 'utf8'));
+  const densitySource = await loadVolumeSource('src/objects/lmc-volume/source/full-density/source', recipe);
   const projection = prepareDensityProjection(densitySource, Math.hypot(...catalogue.frame.originM) / catalogue.frame.metersPerUnit);
   const input: ReconstructionStarsInput = { frame: catalogue.frame, source: { path },
     canonicalCloud: { path: cloudPath }, densitySource,

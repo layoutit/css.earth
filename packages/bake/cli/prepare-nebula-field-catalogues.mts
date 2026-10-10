@@ -19,7 +19,6 @@ if (!ids.length) throw new Error('Supply nebula object ids.');
 
 const columns = ['source_id','ra','dec','pmra','pmdec','parallax','parallax_error','phot_g_mean_mag',
   'phot_bp_mean_mag','phot_rp_mean_mag','ruwe','r_med_geo','r_lo_geo','r_hi_geo'];
-await mkdir('.local/nebula-lab/stellar-fields',{recursive:true});
 const xyz = (ra:number,dec:number,d:number) => [d*Math.cos(dec*Math.PI/180)*Math.cos(ra*Math.PI/180),
   d*Math.cos(dec*Math.PI/180)*Math.sin(ra*Math.PI/180),d*Math.sin(dec*Math.PI/180)];
 function numeric(v:string|undefined, nullable=false): number|null {
@@ -30,8 +29,8 @@ const service='https://dc.g-vo.org/tap';
 const absent = (error:unknown) => error instanceof Error && 'code' in error && error.code==='ENOENT';
 /** One query's rows in column order, asked and decoded by PyVO (the telescope's `tap-query`). A kept answer is reused only for the
  * query saved with it; any other query asks again. A query GAVO's synchronous limit cuts off runs as a job (`async`). */
-async function acquire(id:string, query:string, limit:number, expectedColumns:readonly string[]=columns, mode?:'async') {
-  const cache=`.local/nebula-lab/stellar-fields/${id}.json`;
+async function acquire(object:string, id:string, query:string, limit:number, expectedColumns:readonly string[]=columns, mode?:'async') {
+  const cache=`src/objects/${object}/.local/stars/${id}.json`;await mkdir(`src/objects/${object}/.local/stars`,{recursive:true});
   const saved:unknown=await readFile(cache,'utf8').then(text=>JSON.parse(text),(error:unknown)=>{if(absent(error)) return null;throw error;});
   if(saved && typeof saved==='object' && 'query' in saved && saved.query===query && 'rows' in saved && Array.isArray(saved.rows))
     return {rows:saved.rows.map(row=>catalogueRow(row,expectedColumns)),cache,retrievedAt:(await stat(cache)).mtime.toISOString()};
@@ -46,7 +45,7 @@ function catalogueRow(cells:unknown, expectedColumns:readonly string[]) {
   return cells;
 }
 async function acquireInTwoStages(id:string, query:string, gaiaColumns:readonly string[]) {
-  const candidateLimit=50000,gaia=await acquire(`${id}-gaia`,query,candidateLimit,gaiaColumns,'async'),rows=gaia.rows;
+  const candidateLimit=50000,gaia=await acquire(id,`${id}-gaia`,query,candidateLimit,gaiaColumns,'async'),rows=gaia.rows;
   if(rows.length>=candidateLimit) throw new Error(`${id}: unordered Gaia candidate query reached its ${candidateLimit}-row cap; refusing an incomplete selection.`);
   const sourceIds=rows.map(row=>row[0]!);
   if(new Set(sourceIds).size!==sourceIds.length) throw new Error('Duplicate Gaia source ids.');
@@ -56,7 +55,7 @@ async function acquireInTwoStages(id:string, query:string, gaiaColumns:readonly 
   const batchSize=1000,distanceColumns=['source_id','r_med_geo','r_lo_geo','r_hi_geo'];
   for(let offset=0;offset<sourceIds.length;offset+=batchSize) {
     const batch=sourceIds.slice(offset,offset+batchSize),distanceQuery=`SELECT ${distanceColumns.join(',')} FROM gedr3dist.main WHERE source_id IN (${batch.join(',')})`;
-    const acquired=await acquire(`${id}-distance-${offset/batchSize+1}`,distanceQuery,batch.length,distanceColumns);
+    const acquired=await acquire(id,`${id}-distance-${offset/batchSize+1}`,distanceQuery,batch.length,distanceColumns);
     for(const record of acquired.rows){if(distances.has(record[0]!)) throw new Error('Duplicate Bailer-Jones source id.');distances.set(record[0]!,record.slice(1));}
     acquisitions.push({cache:acquired.cache,query:distanceQuery,queryUrl:service,retrievedAt:acquired.retrievedAt,rows:acquired.rows.length});
     console.log(`CATALOGUE_DISTANCE_BATCH ${id} ${Math.min(offset+batchSize,sourceIds.length)}/${sourceIds.length}`);
@@ -130,7 +129,7 @@ async function prepare(id:string,explicitMagnitudeLimit:number|null) {
     `AND POWER(r_med_geo,2)+${distance*distance}-2*r_med_geo*${distance}*COS(RADIANS(DISTANCE(POINT('ICRS',c.ra,c.dec),POINT('ICRS',${ra},${dec}))))<${radius*radius} `+
     'ORDER BY phot_g_mean_mag,c.source_id';
   const staged=twoStage?await acquireInTwoStages(id,query,gaiaColumns):null;
-  const {rows:lines,cache,retrievedAt}=staged??await acquire(id,query,limit,columns,'async');
+  const {rows:lines,cache,retrievedAt}=staged??await acquire(id,id,query,limit,columns,'async');
   const truncated=staged?staged.candidateTruncated:false;
   const stars=lines.map(cells=>{
     const values=cells.slice(1).map(v=>numeric(v,true));

@@ -72,8 +72,9 @@ republish only in a deliberate re-bake.
 
 - `/alignment?subject=<id>` — registration and overlays. `/reconstruction?subject=<id>` — model, datasets, stars, and the diagnostic tool column (levels, difference map).
 - A result opens directly as `?subject=reconstruction-<resultId>`.
-- Subjects: `labs/nebula/packages/lab/src/state/subjects.json`. Per-object recipes: `labs/nebula/models/<object>/`.
+- Subjects: `labs/nebula/packages/lab/src/state/subjects.json`. Per-object recipes: `src/objects/<object>/source/`; scratch in the ignored `src/objects/<object>/.local/`.
 - Research: `node labs/nebula/run.mts <command>`. Application replay: `node packages/bake/cli/prepare-nebulae.mts --if-missing` (run by `prebuild`).
+- Object steps, one `src/objects/<id>` each, progress in its `.local/lab/progress.jsonl`: `research <id>|--all` (writes `source/research.json`), `model <id> --method paper-surfaces|symmetry|kinematic` (writes `.local/lab/model/<method>.json`; symmetry also an STL and a `geometry.surface` block), `stars <id> [--radius-deg=] [--magnitude-limit=]` (Gaia DR3 on the picture's field via `telescope gaia-cone`, writes `.local/stars-cone.json`; drawn on the nebula's sky plane), then `edit`, `save`, `discard`, `bake`, `verify`, `publish [--check]`. The UI's Research, Model and Stars buttons run these same commands.
 - Star layers for a finite model: `prepare-smc-stars [recipe]` and `prepare-lmc-finite-stars [recipe]`, both thin wrappers over one shared placement owner (`server/workflows/stars/finite-model-star-layer.ts`).
 - Dataset discovery reads `.local/nebula-lab/finite-datasets-<modelResultId>.json`; a model's star layer comes from `finite-stars-<modelResultId>.json`. Newest valid model wins; an invalid bundle is skipped, never silently merged.
 
@@ -89,7 +90,7 @@ Pick by what the evidence supports, not by habit.
 | **Two-scale finite emission** `simulation-guided-finite-emission@1` | image + spatial prior | broad shape from the prior, detail fitted from the image | the current default for clouds and galaxies |
 | **Axial symmetry** | one image + a symmetry hypothesis | rotationally symmetric shells | planetary nebulae (`docs/planetary-nebulae.md`) |
 
-Two-scale in one line: broad light is `gain(x,y) × prior(x,y,z)` with `gain = fraction × blur(image) / blur(column)`; finite components fit the residual at prior-supported depths, so image brightness scales the envelope and never moves it in depth. Example recipe: `labs/nebula/models/smc/constrained/emission-envelope-ellipsoid.json`, with its method note beside it.
+Two-scale in one line: broad light is `gain(x,y) × prior(x,y,z)` with `gain = fraction × blur(image) / blur(column)`; finite components fit the residual at prior-supported depths, so image brightness scales the envelope and never moves it in depth. Example recipe: `src/objects/smc-volume/source/constrained/emission-envelope-ellipsoid.json`, with its method note beside it.
 
 **RGB-only datasets:** every image recolors one shared geometry, so switching dataset changes color, never shape. **The prior is a hypothesis, never a measurement** — prefer one that scores better against observations; for the SMC a VMC-constrained ellipsoid beat the tidal simulation (withheld deviance 0.457 vs 0.601).
 

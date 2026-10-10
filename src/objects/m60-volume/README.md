@@ -20,7 +20,7 @@ The position, distance and velocity that place M60 are cited on [its own page's 
 
 ## Method
 
-The Nebula Lab recipe is [labs/nebula/models/m60/experiment.json](../../../labs/nebula/models/m60/experiment.json);
+The Nebula Lab recipe is [src/objects/m60-volume/source/experiment.json](../../../src/objects/m60-volume/source/experiment.json);
 `node labs/nebula/run.mts prepare-emission` runs it, and [delivery.json](source/delivery.json) places the result. It is
 [M49's route](../m49-volume/README.md#method) with M60's measurements.
 

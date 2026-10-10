@@ -1,15 +1,15 @@
 /** Compact authored-placement replay. Reuses every canonical texture and grid byte. */
 import { readFile, mkdir, symlink, rename, rm, realpath, writeFile } from 'node:fs/promises';
-import { basename, dirname, resolve } from 'node:path';
+import { basename, dirname, relative, resolve, sep } from 'node:path';
 import { placeDensitySlices } from '@cssearth/bake/volume';
 import { parseDensityPlacement, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
 import { sourceBytes, containedPath } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
-import { parseLabModelJson } from '../../../resources/model-paths.ts';
+import { isLabScratchPath, parseLabModelJson } from '../../../resources/model-paths.ts';
 export interface PlacedDensityOptions { sourceDirectory: string; outputDirectory: string; placement: { path: string }; }
 export async function preparePlacedDensity(root: string, options: PlacedDensityOptions) {
   const source = containedPath(root, options.sourceDirectory), output = containedPath(root, options.outputDirectory);
-  if (!output.startsWith(resolve(root, '.local/nebula-lab') + '/'))
+  if (!isLabScratchPath(relative(resolve(root), output).split(sep).join('/')))
     throw new TypeError('Placed density must be prepared in its own ignored lab directory.');
   const placementRecord = parseLabModelJson((await sourceBytes(root, options.placement)).toString());
   const placement = parseDensityPlacement(placementRecord);

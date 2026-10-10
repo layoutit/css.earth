@@ -17,7 +17,7 @@ The LMC has three selectable image treatments on one density cloud. These app ca
 | Horálek `iotw2547a`, optical wide field | 6,582 × 4,388 JPEG | 592 matched stars; 198 held out, P90 1.12 SMASH pixels; 60.2% matched hull. Outer registration extrapolates beyond matched stars. |
 | AllWISE W4/W2/W1 RGB through CDS HiPS2FITS | 6,000 × 6,000 JPEG; 24° tangent-plane field | Fixed publisher WCS checked against 34,811 AllWISE positions; 11,604 reserved checks, P90 0.632 native WISE pixels; 99.3% matched hull. Display composite with visible survey seams. |
 
-The [source recipe](../../labs/nebula/models/image-candidates.json) retains the exact downloads, coordinate transforms and credit strings. ESO and Horálek sources carry CC BY 4.0; the CDS AllWISE HiPS distribution records ODbL 1.0 alongside IPAC/NASA and CNRS/Unistra credit. The renders apply star removal and authored display colors; they are not calibrated multiband photometry. The [alignment evidence](../../labs/nebula/models/lmc/candidates/source/alignment-report.json) checks image geometry.
+The [source recipe](../../src/objects/lmc-volume/source/image-candidates.json) retains the exact downloads, coordinate transforms and credit strings. ESO and Horálek sources carry CC BY 4.0; the CDS AllWISE HiPS distribution records ODbL 1.0 alongside IPAC/NASA and CNRS/Unistra credit. The renders apply star removal and authored display colors; they are not calibrated multiband photometry. The [alignment evidence](../../src/objects/lmc-volume/source/candidates/source/alignment-report.json) checks image geometry.
 
 | Component | Scientific input | What we prepare |
 | --- | --- | --- |
@@ -25,7 +25,7 @@ The [source recipe](../../labs/nebula/models/image-candidates.json) retains the 
 | Point stars | [Bonanos et al. (2009)](https://arxiv.org/abs/0905.1328), [CDS J/AJ/138/1003](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003) | 943 stars with measured sky positions and photometry. Depths are assigned from the density. All three datasets use identical positions. |
 | Surface color | The three registered observations above | Native star removal, then color sampling onto the fixed density. Uncovered density keeps neutral color. |
 
-The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image placement and color settings; the [app settings](../../src/objects/lmc-volume/README.md#evidence) retain cloud and star display. Switching datasets changes the material while retaining the cloud, stars and camera.
+The [accepted bake recipe](../../src/objects/lmc-volume/source/bake.json) pins image placement and color settings; the [app settings](../../src/objects/lmc-volume/README.md#evidence) retain cloud and star display. Switching datasets changes the material while retaining the cloud, stars and camera.
 
 ## Extragalactic datasets
 

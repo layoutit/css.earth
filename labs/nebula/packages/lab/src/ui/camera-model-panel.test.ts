@@ -6,7 +6,7 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { CameraModelPanel, type CameraModelPanelProps } from './camera-model-panel';
 
 const render = (props: CameraModelPanelProps) => renderToStaticMarkup(createElement(CameraModelPanel, props));
-test('all camera capabilities use the same ordered controls and Model owner without pose presets', () => {
+test('all camera capabilities use the same ordered controls and Model owner; Turn 60° only where supplied', () => {
   for (const camera of [{}, { reset: { onActivate() {} } }, { earth: { onActivate() {} }, orbit: { onActivate() {} } }, { fit: { onActivate() {} } }]) {
     const markup = render({ camera });
     assert.deepEqual([...markup.matchAll(/data-camera-action="([^"]+)"/g)].map(match => match[1]), ['earth', 'orbit', 'fit', 'reset']);
@@ -26,11 +26,16 @@ test('fixed models explain missing capabilities while preserving supplied model 
   assert.doesNotMatch(modeled, /no editable parameters/);
 });
 test('legacy and method-specific panels all use the shared camera and Model owner', async () => {
-  for (const path of ['ui/camera-panel', 'features/compiler/compiler-panel', 'features/shape-cloud/shape-cloud-workbench',
-    'features/joint-fit/joint-fit-panel', 'features/evidence/evidence-fusion', 'features/kinematics/kinematics-panel',
-    'features/observations/observation-alignment', 'features/observations/observation-structures', 'features/observations/emission-comparison']) {
+  for (const path of ['ui/camera-panel', 'features/joint-fit/joint-fit-panel', 'features/kinematics/kinematics-panel']) {
     const source = await readFile(`labs/nebula/packages/lab/src/${path}.tsx`, 'utf8');
     assert.match(source, /<CameraModelPanel\b/, path);
     assert.doesNotMatch(source, /<CameraActions\b|<legend>Model<\/legend>/, path);
   }
+});
+
+test('the Turn 60° preset and the tool group appear only where supplied, and the Model section can be dropped', () => {
+  const markup = render({ camera: { turn: { onActivate() {} } }, showModel: false, toolbox: createElement('button', { id: 'tool' }, 'Tool') });
+  assert.deepEqual([...markup.matchAll(/data-camera-action="([^"]+)"/g)].map(match => match[1]), ['earth', 'orbit', 'fit', 'reset', 'turn']);
+  assert.match(markup, /role="group" aria-label="Tools"[^>]*>.*id="tool"/s);
+  assert.doesNotMatch(markup, /<legend>Model<\/legend>/);
 });

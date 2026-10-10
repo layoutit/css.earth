@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-optical-composite-recipe@1",
+  "id": "optical-composite",
+  "label": "Optical composite · NOIRLab + Niittee",
+  "compilerRecipe": "src/objects/m45-volume/source/compiler.json",
+  "baseResult": {
+    "path": ".local/nebula-lab/compiler/m45-stars/result.json"
+  },
+  "neutralSlices": {
+    "path": ".local/nebula-lab/compiler/m45/scene/neutral/volume-slices.json"
+  },
+  "observationRecipe": "src/objects/m45-volume/source/optical-composite-observations.json",
+  "observationCatalogue": "src/objects/m45-volume/.local/observations/m45-optical-composite/observations.json",
+  "detailSourceId": "noirlab-optical",
+  "wideSourceId": "niittee-widefield",
+  "featherArcsec": 360,
+  "lowFrequencyArcsec": 45,
+  "interpretation": "Optical display composite: Taavi Niittee supplies wide-field RGB and broad illumination; registered NOIRLab supplies bounded central luminance detail after removal of broad image illumination. The display fusion is not common-filter calibrated photometry. Existing inferred cloud and catalogue stars stay unchanged."
+}

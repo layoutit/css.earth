@@ -18,7 +18,7 @@ import { placeCatalogueStarsInFiniteModel, preparedStarsLayerPath, readFiniteDat
   FINITE_STAR_COLOR, MAGNITUDE_LIMIT, type CatalogueStarRow, type FiniteStarSelection,
 } from '../../server/workflows/stars/finite-model-star-layer.ts';
 
-export const lmcStarDirectory = 'labs/nebula/models/lmc/stars';
+export const lmcStarDirectory = 'src/objects/lmc-volume/source/stars';
 export const STAR_ID_PREFIX = 'Bonanos2009:';
 export const COMMAND = 'labs/nebula/packages/lab/src/cli/commands/prepare-lmc-finite-stars.ts';
 /**
@@ -27,7 +27,7 @@ export const COMMAND = 'labs/nebula/packages/lab/src/cli/commands/prepare-lmc-fi
  * describes the repaint depth model; when the envelope model is promoted the default belongs there,
  * as the SMC's does.
  */
-export const DEFAULT_DATASET_RECIPE = 'labs/nebula/models/lmc/envelope/finite-datasets.json';
+export const DEFAULT_DATASET_RECIPE = 'src/objects/lmc-volume/source/envelope/finite-datasets.json';
 /** prepared/stars.json is the historical repaint layer, so the finite-model layers take their own base name. */
 export const LAYER_BASE_NAME = 'stars-envelope';
 /** Published rows in the pinned table3.dat. */
@@ -68,7 +68,7 @@ export async function prepareLmcFiniteStars(root = process.cwd(), recipePath?: s
   const manifest = await readLmcStarManifest(root);
   // The recipe names the model; a re-fit updates the recipe and this command follows. No result id is hard-coded.
   const finiteDatasetRecipe = recipePath ?? DEFAULT_DATASET_RECIPE;
-  if (!/^labs\/nebula\/models\/lmc\/[A-Za-z0-9._-]+\/[A-Za-z0-9._-]+\.json$/.test(finiteDatasetRecipe))
+  if (!/^src\/objects\/lmc-volume\/source\/[A-Za-z0-9._-]+\/[A-Za-z0-9._-]+\.json$/.test(finiteDatasetRecipe))
     throw new TypeError('A star layer recipe must be a checked-in LMC dataset recipe.');
   const sources = await readPinnedCatalogueFiles(root, `${lmcStarDirectory}/source`, manifest.files);
   const recipe = await readFiniteDatasetRecipe(root, finiteDatasetRecipe);

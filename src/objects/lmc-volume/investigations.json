@@ -10,7 +10,7 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/lenses/vista-infrared/provenance.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/candidates/source/alignment-report.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/evidence/lmc/envelope/finite-lenses.json"
       ]
     },
@@ -22,7 +22,7 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/lenses/horalek-widefield/provenance.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/candidates/source/alignment-report.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/evidence/lmc/envelope/finite-lenses.json"
       ]
     },
@@ -34,7 +34,7 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/presentation.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/lenses/wise-wide-infrared/provenance.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/candidates/source/alignment-report.json",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/evidence/lmc/envelope/finite-lenses.json"
       ]
     },
@@ -44,7 +44,7 @@
       "status": "included",
       "finding": "The same Garver et al. simulation is now the shape hypothesis of the finite-emission model: its depth distribution carries the envelope (80.75% of the Horálek light) and its strongest ray mode places each of the 470 fitted components. It is not observed gas or dust density, and no LMC depth tracer is in this repository to test it. Earlier finding (2026-09-14, repaint delivery): The existing full-density simulation supplies cloud support, not observed gas/dust density. Candidate images repaint its exact geometry and alpha; the common image-to-model placement is a display fit, not a particle-to-star identification.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/full-density/source/volume.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/full-density/source/volume.json",
         "https://github.com/layoutit/css.earth/blob/main/labs/nebula/docs/slice-stability.md",
         "https://doi.org/10.5061/dryad.1vhhmgr82",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/evidence/lmc/envelope/emission-envelope.json"
@@ -56,7 +56,7 @@
       "status": "included",
       "finding": "1,042 stars with finite V <= 16 on covered Horálek footprint pixels are placed by the finite-model star layer: each depth inverts the joint emission x simulation density x (1+z/D)^2 CDF at a fixed per-star quantile. 39 rows the former 3x placement swallowed fall outside the true footprint. Brightest-40 stars against the registered image: 17 within 1 px, median 1.19 px (22.9 arcsec), mirrored control 1 of 40. No individual distances are measured. Earlier finding (2026-09-14, repaint delivery, 943 stars): Measured J2000 sky positions and Johnson V <= 16 inside the SMASH footprint select 943 stars. A deterministic joint cloud-emission and stellar-density prior assigns depth along each ray; no individual distances or proper-motion propagation are measured by this preparation.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/stars/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/stars/README.md",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/lenses.json",
         "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/138/1003"
       ]
@@ -68,7 +68,7 @@
       "finding": "The original SMASH publisher frame remains the image-registration and stellar-selection reference. The former photo-colored dataset and parametric source recipe are historical; their retained source.jpg is a publisher AstroPix derivative, not a local observation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/provenance.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/alignment-report.json",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/candidates/source/alignment-report.json",
         "https://noirlab.edu/public/images/noirlab2030a/"
       ]
     },
@@ -78,7 +78,7 @@
       "status": "included",
       "finding": "Pinned native source removal and the earlier positive compact-residual union supply starless color inputs. Exact RGB recombination and unchanged pixels outside masks qualify accounting only; crowded blends and intrinsic knots remain ambiguous.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/star-separation/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/star-separation/README.md",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/lenses/vista-infrared/provenance.json"
       ]
     },
@@ -99,7 +99,7 @@
       "status": "deferred",
       "finding": "Survey-WCS display preview retains plate seams, foreground stars and uneven backgrounds; it was not processed as a cloud.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/provenance.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/candidates/source/provenance.json"
       ],
       "revisitWhen": "Qualify native photometry/background and independent registration with usable diffuse coverage before any processing."
     },
@@ -109,7 +109,7 @@
       "status": "deferred",
       "finding": "The 4111 by 5000 author mosaic has 6887 held-out star checks but only its central 30 percent is qualified. Black fields are missing observations, seams remain and image-specific rights are not declared.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/provenance.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/candidates/source/provenance.json"
       ],
       "revisitWhen": "Resolve reuse terms and outer-field registration/masks before adopting the wider source."
     },
@@ -119,7 +119,7 @@
       "status": "excluded",
       "finding": "The 14400 by 14200 author image has a 74.1 percent matched hull and detailed central structure but no open reuse licence was found; APOD credits author copyright. It remains a comparison.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/provenance.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/candidates/source/provenance.json"
       ],
       "revisitWhen": "Obtain derivative-compatible permission and qualify all intended footprint/processing before inclusion."
     },
@@ -129,7 +129,7 @@
       "status": "excluded",
       "finding": "The acquired 3074 by 3163 author preview is smaller than the unavailable advertised high-resolution version. RGB versus dual-narrowband labeling remains ambiguous; no open reuse licence was identified.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/candidates/source/provenance.json"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/candidates/source/provenance.json"
       ],
       "revisitWhen": "Acquire a usable original with explicit derivative permission, band/processing history and qualified astrometry."
     },
@@ -161,7 +161,7 @@
       "status": "excluded",
       "finding": "Stronger minimum-width settings improved compact-light removal, but broader shape/mask variants introduced dark patches and were rejected. Raising profile thresholds increased zero-covariance cores; exact accounting alone did not make the diffuse target star-free.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/star-separation/README.md"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/star-separation/README.md"
       ],
       "revisitWhen": "A revised removal method must preserve adjacent extended emission and original-source accounting while visibly reducing blends/halos without dark patches."
     },
@@ -204,7 +204,7 @@
       "finding": "Model lmc-clouds-emission-envelope (recipe emission-envelope.json, exposure 2.418, alpha chroma limit 11) fits the registered, star-removed Horálek image: 470 components, projection RMSE 0.10458 -> 0.03247, total relative squared error 0.013060, envelope 80.75% of the light with 3.29% excess, all components on prior support. Placement is the identity, which reproduces the registered corners to 0.000 arcsec; the envelope keeps the simulation shape. materialGatePassed is false: the depth structure is a hypothesis.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/evidence/lmc/envelope/emission-envelope.json",
-        "https://github.com/layoutit/css.earth/blob/main/labs/nebula/models/lmc/envelope/EMISSION-METHOD.md",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/lmc-volume/source/envelope/EMISSION-METHOD.md",
         "https://doi.org/10.5061/dryad.1vhhmgr82"
       ]
     },

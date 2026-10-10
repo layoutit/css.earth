@@ -4,11 +4,11 @@ import { loadPublishedCompiler, readPublishedCompiler } from './compiler-publish
 import type { CompilerResult } from './result.ts';
 import { readCompilerRequest } from './model.ts';
 
-const recipePath = 'labs/nebula/models/example/compiler.json';
+const recipePath = 'src/objects/example-volume/source/compiler.json';
 const recipe = { schema: 'cssearth-nebula-compiler@1', id: 'example', label: 'Example',
-  observationRecipe: 'labs/nebula/models/example/observations.json',
+  observationRecipe: 'src/objects/example-volume/source/observations.json',
   observationCatalogue: '.local/nebula-lab/observations/example/observations.json',
-  structureRecipe: 'labs/nebula/models/example/observation-structures.json',
+  structureRecipe: 'src/objects/example-volume/source/observation-structures.json',
   structureCatalogue: '.local/nebula-lab/observations/example/structures/catalogue.json',
   defaultSourceId: 'optical', maximumStars: 100, interpretation: 'Image-only depth.' };
 const files = new Map([[recipePath, JSON.stringify(recipe)], ...[recipe.observationRecipe, recipe.observationCatalogue,
@@ -20,10 +20,10 @@ const pointer = '.local/nebula-lab/compiler-published/example.json';
 
 test('published compiler receipt requires a unique complete configured input set named by path', async () => {
   assert.equal(readPublishedCompiler(publication, recipePath).inputs.length, 5);
-  assert.throws(() => readPublishedCompiler(publication, 'labs/nebula/models/other/compiler.json'), /publication/);
+  assert.throws(() => readPublishedCompiler(publication, 'src/objects/other-volume/source/compiler.json'), /publication/);
   assert.throws(() => readPublishedCompiler({ ...publication, inputs: [...publication.inputs, publication.inputs[0]] }, recipePath), /ownership/);
   assert.throws(() => readPublishedCompiler({ ...publication, inputs: [{ ...publication.inputs[0], bytes: 2 }, ...publication.inputs.slice(1)] }, recipePath), /compiler input/);
-  const missing = { ...publication, inputs: publication.inputs.map(item => item.path === recipe.structureRecipe ? { ...item, path: 'labs/nebula/models/example/unrelated.json' } : item) };
+  const missing = { ...publication, inputs: publication.inputs.map(item => item.path === recipe.structureRecipe ? { ...item, path: 'src/objects/example-volume/source/unrelated.json' } : item) };
   await assert.rejects(loadPublishedCompiler(pointer, recipePath, async path => new Response(path === pointer ? JSON.stringify(missing) : files.get(path) ?? '{}')), /every configured source/);
 });
 
@@ -43,7 +43,7 @@ test('a saved cloud stays inspectable while its method names the current recipe'
 /** Minimal valid metadata receipt; texture decoding belongs to the volume runtime tests. */
 function completedFixture(options: { depth?: boolean; photometric?: boolean; depthId?: string; ledgerId?: string; omitMethodDepth?: boolean } = {}) {
   const data = new Map(files), id = 'example', directory = `.local/nebula-lab/compiler/${id}`;
-  const depthPath = 'labs/nebula/models/example/depth.json', evidencePath = 'labs/nebula/models/example/evidence.json';
+  const depthPath = 'src/objects/example-volume/source/depth.json', evidencePath = 'src/objects/example-volume/source/evidence.json';
   const compiler = { ...recipe, ...(options.depth ? { depthRecipe: depthPath } : {}), ...(options.photometric ? { photometricPriorRecipe: depthPath } : {}) };
   data.set(recipePath, JSON.stringify(compiler));
   const inputPaths = [...data.keys()];

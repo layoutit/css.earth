@@ -104,7 +104,7 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
     return { source, directory, baseline: undefined, preserve: undefined, plan: cataloguePath };
   }
   async function sourceFor(request: RemovalRequest) {
-    const subjects = await json('labs/nebula/packages/lab/src/state/subjects.json').catch(error => { if (error.code === 'ENOENT') return []; throw error; });
+    const subjects = await json('labs/nebula/packages/lab/src/state/processing-subjects.json').catch(error => { if (error.code === 'ENOENT') return []; throw error; });
     if (!Array.isArray(subjects)) throw new TypeError('Invalid subject catalogue.');
     const planPaths = [...new Set<string>(subjects.flatMap(subject => {
       const path = subject?.density?.processingPlan;
@@ -130,7 +130,7 @@ export function createStarRemover(repositoryRoot: string, options: { runner?: Re
     }
     if (matchingPlans.length > 1) throw new TypeError('This image has ambiguous configured processing plans.');
     if (!matchingPlans.length) {
-      if (!catalogues.size) catalogues.add('labs/nebula/models/image-candidates.json');
+      if (!catalogues.size) catalogues.add('src/objects/lmc-volume/source/image-candidates.json');
       if (treatments.length > 1) throw new TypeError('This image has ambiguous configured stellar treatments.');
       const matches: string[] = [];
       for (const path of catalogues) {

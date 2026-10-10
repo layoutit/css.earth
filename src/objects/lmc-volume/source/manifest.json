@@ -4,7 +4,7 @@
   "inputs": [
     {
       "id": "vista-infrared",
-      "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
+      "path": "src/objects/lmc-volume/.local/image-candidates/vista/eso1914a-10k.tif",
       "origin": "https://www.eso.org/public/images/eso1914a/",
       "sourceUrl": "https://www.eso.org/public/images/eso1914a/",
       "title": "Large Magellanic Cloud · ESO eso1914a",
@@ -17,7 +17,7 @@
           {
             "catalogueId": "eso-eso1914a",
             "role": "material",
-            "evidence": "labs/nebula/models/image-candidates.json#/targets/0/images/0"
+            "evidence": "src/objects/lmc-volume/source/image-candidates.json#/targets/0/images/0"
           }
         ]
       },
@@ -36,7 +36,7 @@
     },
     {
       "id": "horalek-widefield",
-      "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
+      "path": "src/objects/lmc-volume/.local/new-references/iotw2547a.jpg",
       "origin": "https://noirlab.edu/public/images/iotw2547a/",
       "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/",
       "title": "Large Magellanic Cloud · NOIRLab iotw2547a",
@@ -49,7 +49,7 @@
           {
             "catalogueId": "noirlab-iotw2547a",
             "role": "material",
-            "evidence": "labs/nebula/models/image-candidates.json#/targets/0/images/1"
+            "evidence": "src/objects/lmc-volume/source/image-candidates.json#/targets/0/images/1"
           }
         ]
       },
@@ -69,7 +69,7 @@
     },
     {
       "id": "wise-wide-infrared",
-      "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
+      "path": "src/objects/lmc-volume/.local/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
       "origin": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
       "sourceUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
       "title": "Large Magellanic Cloud · AllWISE color mosaic",
@@ -82,7 +82,7 @@
           {
             "catalogueId": "cds-allwise-color",
             "role": "material",
-            "evidence": "labs/nebula/models/image-candidates.json#/targets/0/images/2"
+            "evidence": "src/objects/lmc-volume/source/image-candidates.json#/targets/0/images/2"
           }
         ]
       },
@@ -158,7 +158,7 @@
           {
             "kind": "unresolved",
             "label": "Bonanos literature astrometry and spectral classifications",
-            "evidence": "https://arxiv.org/abs/0905.1328 sections 2.1–2.3; labs/nebula/models/lmc/stars/source/refs.dat",
+            "evidence": "https://arxiv.org/abs/0905.1328 sections 2.1–2.3; src/objects/lmc-volume/source/stars/source/refs.dat",
             "reason": "Positions and classifications combine literature records; an individual observing telescope has not been established for every retained catalogue row. The Swope and Curtis Schmidt attributions apply to the consumed MCPS B/V photometry."
           }
         ]

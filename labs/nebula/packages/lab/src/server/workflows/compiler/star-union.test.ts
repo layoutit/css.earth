@@ -71,10 +71,10 @@ test('union configuration rejects missing sources, invalid tolerances and unsupp
     { ...configuration, mergeRadiusArcsec: 0 }, { ...configuration, mergeRadiusArcsec: NaN }])
     assert.throws(() => readCompilerStarCatalogue(bad), /star catalogue/);
   await assert.rejects(() => compilerUnionStars(optical(), model, 2, [optical()], configuration), /unavailable/);
-  const recipe = { schema: 'cssearth-nebula-compiler@1', id: 'fixture', label: 'fixture', observationRecipe: 'labs/nebula/models/fixture/observations.json',
-    observationCatalogue: '.local/nebula-lab/fixture/observations.json', structureRecipe: 'labs/nebula/models/fixture/structures.json',
+  const recipe = { schema: 'cssearth-nebula-compiler@1', id: 'fixture', label: 'fixture', observationRecipe: 'src/objects/fixture-volume/source/observations.json',
+    observationCatalogue: '.local/nebula-lab/fixture/observations.json', structureRecipe: 'src/objects/fixture-volume/source/structures.json',
     structureCatalogue: '.local/nebula-lab/fixture/structures.json', defaultSourceId: 'optical', maximumStars: 2, interpretation: 'fixture', starCatalogue: configuration };
   assert.deepEqual(readCompilerRecipe(recipe).starCatalogue, configuration);
   assert.throws(() => readCompilerRecipe({ ...recipe, defaultSourceId: 'infrared' }), /reference source/);
-  assert.throws(() => readCompilerRecipe({ ...recipe, sampledRecipe: 'labs/nebula/models/fixture/sampled.json' }), /emission-field route/);
+  assert.throws(() => readCompilerRecipe({ ...recipe, sampledRecipe: 'src/objects/fixture-volume/source/sampled.json' }), /emission-field route/);
 });

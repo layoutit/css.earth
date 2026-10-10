@@ -8,7 +8,7 @@ import { publisherRegistration, publisherTransform } from '@cssearth/nebula-reco
 
 test('every new candidate has a source dossier and primary-paper context', async () => {
   for (const id of ['m45', 'm1', 'm8']) {
-    const root = `labs/nebula/models/${id}`;
+    const root = `src/objects/${id}-volume/source`;
     const dossier = readSourceDossier(JSON.parse(await readFile(`${root}/source-dossier.json`, 'utf8')));
     const recipe = readObservationRecipe(JSON.parse(await readFile(`${root}/${id === 'm8' ? 'alignment-candidates' : 'observations'}.json`, 'utf8')));
     assert.equal(dossier.objectId, id);
@@ -28,14 +28,14 @@ test('curation preserves useful publisher-registered comparisons without upgradi
     m8: ['eso-optical', 'eso-vista', 'spitzer-mid-infrared'],
   };
   for (const [id, ids] of Object.entries(expected)) {
-    const dossier = readSourceDossier(JSON.parse(await readFile(`labs/nebula/models/${id}/source-dossier.json`, 'utf8')));
+    const dossier = readSourceDossier(JSON.parse(await readFile(`src/objects/${id}-volume/source/source-dossier.json`, 'utf8')));
     assert.deepEqual(dossier.selection?.imageIds, ids);
-    const recipe = readObservationRecipe(JSON.parse(await readFile(`labs/nebula/models/${id}/${id === 'm8' ? 'alignment-candidates' : 'observations'}.json`, 'utf8')));
+    const recipe = readObservationRecipe(JSON.parse(await readFile(`src/objects/${id}-volume/source/${id === 'm8' ? 'alignment-candidates' : 'observations'}.json`, 'utf8')));
     const data = readObservations({ schema: 'cssearth-nebula-observations@1', id, frame: recipe.frame,
       images: scienceObservationSources(recipe).map(image => ({ id: image.id, label: image.label, source: image,
         layers: { original: { path: `test/${image.id}.png`, width: image.width, height: image.height } },
         imageToFrame: [1, 0, 0, 1, 0, 0], registration: publisherRegistration('Test source') })) });
-    // Real astrometry is exercised by browser-source-candidates; this boundary check needs no ignored images.
+    // This boundary check needs no ignored images.
     data.images[0]!.registration.status = 'verified';
     const selected = selectObservationCandidates(data, dossier.selection);
     for (const image of selected.images) assert.equal(image.source.coordinateOrigin, recipe.images.find(source => source.id === image.id)!.coordinateOrigin);
@@ -52,7 +52,7 @@ test('publisher-only images carry no invented stellar measurements', async () =>
   const evidence = publisherRegistration('Nonstellar band.');
   assert.equal(evidence.status, 'publisher'); assert.equal(evidence.matchedStars, 0);
   assert.deepEqual(evidence.matches, []);
-  const raw = JSON.parse(await readFile('labs/nebula/models/m45/observations.json', 'utf8'));
+  const raw = JSON.parse(await readFile('src/objects/m45-volume/source/observations.json', 'utf8'));
   const recipe = readObservationRecipe(raw);
   assert.equal(recipe.images.find(i => i.id === 'iris-far-infrared')?.registrationMode, 'publisher-wcs');
   raw.images[0].registrationMode = 'assume-verified';
@@ -60,7 +60,7 @@ test('publisher-only images carry no invented stellar measurements', async () =>
 });
 
 test('wide optical intake accepts a ten-degree TAN footprint without relaxing registration', async () => {
-  const raw = JSON.parse(await readFile('labs/nebula/models/m45/observations.json', 'utf8'));
+  const raw = JSON.parse(await readFile('src/objects/m45-volume/source/observations.json', 'utf8'));
   const source = raw.images.find((image: { id: string }) => image.id === 'iau-usama-widefield');
   assert.ok(source.fieldArcminutes[0] > 360);
   source.fieldArcminutes[0] = 600;

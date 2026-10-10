@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-star-separation@1",
+  "source": {
+    "path": "src/objects/lmc-volume/.local/new-references/iotw2547a.jpg",
+    "nativeDimensions": [
+      6582,
+      4388
+    ]
+  },
+  "outputDirectory": "src/objects/lmc-volume/.local/star-separation/horalek-widefield",
+  "parameters": {
+    "maximumDetections": 1000000,
+    "minimumSigma": 0.25
+  },
+  "preview": {
+    "maxDimension": 1200,
+    "exposure": 1,
+    "gamma": 1
+  }
+}

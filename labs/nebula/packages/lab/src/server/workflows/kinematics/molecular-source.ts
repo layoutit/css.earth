@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, realpath, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, resolve, sep } from 'node:path';
-import { parseMolecularTable, readMolecularRecipe } from './molecular-data.ts';
+import { kinematicsCacheOf, parseMolecularTable, readMolecularRecipe } from './molecular-data.ts';
 import type { ParsedMolecularTable, MolecularRecipe, MolecularSourcePin } from '@cssearth/nebula-reconstruction/methods/kinematics/molecular-types';
 
 export const MOLECULAR_CATALOGUE_SCHEMA = 'cssearth-molecular-catalogue@1';
@@ -11,8 +11,9 @@ export interface MolecularCatalogue extends ParsedMolecularTable {
 
 async function readRecipe(root: string, recipePath: string) {
   if (isAbsolute(recipePath)) throw new TypeError('Use a repository-relative molecular recipe.');
-  const modelDirectory = await realpath(resolve(root, 'labs/nebula/models')), filename = await realpath(resolve(root, recipePath));
-  if (!filename.startsWith(modelDirectory + sep) || !filename.endsWith('.json')) throw new TypeError('Molecular recipe lies outside model sources.');
+  const objects = await realpath(resolve(root, 'src/objects')), filename = await realpath(resolve(root, recipePath));
+  if (!filename.startsWith(objects + sep) || filename.slice(objects.length + 1).split(sep)[1] !== 'source' || !filename.endsWith('.json'))
+    throw new TypeError('Molecular recipe lies outside object sources.');
   const bytes = await readFile(filename);
   if (bytes.length > 262144) throw new TypeError('Molecular recipe is too large.');
   return { recipe: readMolecularRecipe(JSON.parse(bytes.toString()) as unknown), recipePath };
@@ -21,7 +22,7 @@ function validateBytes(bytes: Uint8Array, pin: MolecularSourcePin): void {
   if (bytes.byteLength !== pin.bytes) throw new TypeError(`Molecular source identity changed: ${pin.cachePath}`);
 }
 async function readPinned(root: string, pin: MolecularSourcePin): Promise<Buffer> {
-  const directory = await realpath(resolve(root, '.local/nebula-lab/kinematics')), filename = await realpath(resolve(root, pin.cachePath));
+  const directory = await realpath(resolve(root, kinematicsCacheOf(pin.cachePath))), filename = await realpath(resolve(root, pin.cachePath));
   if (!filename.startsWith(directory + sep)) throw new TypeError('Molecular source escapes the cache.');
   const bytes = await readFile(filename); validateBytes(bytes, pin); return bytes;
 }
@@ -41,8 +42,8 @@ async function acquirePin(root: string, pin: MolecularSourcePin): Promise<'verif
     }
   } finally { reader.releaseLock(); }
   const bytes = Buffer.concat(chunks); validateBytes(bytes, pin);
-  const filename = resolve(root, pin.cachePath), directory = resolve(root, '.local/nebula-lab/kinematics');
-  await mkdir(dirname(filename), { recursive: true });
+  const filename = resolve(root, pin.cachePath), directory = resolve(root, kinematicsCacheOf(pin.cachePath));
+  await mkdir(directory, { recursive: true }); await mkdir(dirname(filename), { recursive: true });
   const actualParent = await realpath(dirname(filename)), actualDirectory = await realpath(directory);
   if (actualParent !== actualDirectory && !actualParent.startsWith(actualDirectory + sep)) throw new TypeError('Molecular cache directory escapes source storage.');
   const temporary = `${filename}.${randomUUID()}.tmp`;

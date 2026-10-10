@@ -1,5 +1,5 @@
 /** Prepared 2D inspection layers share their original image's sky geometry and controls. */
-export const overlayVariantsPath = 'labs/nebula/models/lmc/star-separation/variants.json';
+export const overlayVariantsPath = 'src/objects/lmc-volume/source/star-separation/variants.json';
 export type ImageLayer = 'original' | 'diffuse' | 'stars';
 export interface OverlayVariant {
   id: Exclude<ImageLayer, 'original'>; label: string; texturePath: string;

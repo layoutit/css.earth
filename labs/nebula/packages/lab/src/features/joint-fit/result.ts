@@ -14,7 +14,7 @@ export interface JointResult {
 }
 const finite = coreIsFiniteNumber;
 function pin(v: unknown): JointPin {
-  if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/') || Object.keys(v).join() !== 'path') throw new TypeError(`Invalid joint result asset: ${JSON.stringify(v)}`);
+  if (!jointRecord(v) || !jointPath(v.path) || !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(v.path) || Object.keys(v).join() !== 'path') throw new TypeError(`Invalid joint result asset: ${JSON.stringify(v)}`);
   return { path: v.path };
 }
 function readFit(v: unknown): JointFit {

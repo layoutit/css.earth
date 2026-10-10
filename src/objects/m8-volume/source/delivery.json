@@ -7,19 +7,19 @@
   },
   "inputPins": [
     {
-      "path": "labs/nebula/models/m8/compiler.json"
+      "path": "src/objects/m8-volume/source/compiler.json"
     },
     {
-      "path": "labs/nebula/models/m8/depth-model.json"
+      "path": "src/objects/m8-volume/source/depth-model.json"
     },
     {
-      "path": "labs/nebula/models/m8/physical-evidence.json"
+      "path": "src/objects/m8-volume/source/physical-evidence.json"
     },
     {
-      "path": "labs/nebula/models/m8/processing-observations.json"
+      "path": "src/objects/m8-volume/source/processing-observations.json"
     },
     {
-      "path": "labs/nebula/models/m8/processing-structures.json"
+      "path": "src/objects/m8-volume/source/processing-structures.json"
     }
   ],
   "sky": {

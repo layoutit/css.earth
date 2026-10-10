@@ -18,8 +18,8 @@ export interface CompilerRecipe { schema: 'cssearth-nebula-compiler@1'; id: stri
 const finite = coreIsFiniteNumber;
 const range = (v: unknown, low: number, high: number): v is number => finite(v) && v >= low && v <= high;
 export function readCompilerRequest(v: unknown): CompilerRequest {
-  if (!jointRecord(v) || v.action !== 'apply' || v.imageId !== 'compiler' || !jointPath(v.recipePath) || !v.recipePath.startsWith('labs/nebula/models/') ||
-      !jointPath(v.cataloguePath) || !v.cataloguePath.startsWith('.local/nebula-lab/') || !jointRecord(v.imageToFrame) || !jointRecord(v.evidence) ||
+  if (!jointRecord(v) || v.action !== 'apply' || v.imageId !== 'compiler' || !jointPath(v.recipePath) || !/^src\/objects\/[a-z0-9-]+\/source\//.test(v.recipePath) ||
+      !jointPath(v.cataloguePath) || !/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(v.cataloguePath) || !jointRecord(v.imageToFrame) || !jointRecord(v.evidence) ||
       !range(v.evidence.sensitivity, .25, 4) || !Array.isArray(v.evidence.weights) || v.evidence.weights.length > 8 || !v.evidence.weights.every(n => range(n, 0, 2))) throw new TypeError('Invalid compiler request.');
   const imageToFrame: Record<string, Matrix> = {};
   for (const [key, matrix] of Object.entries(v.imageToFrame)) {
@@ -32,9 +32,9 @@ export function readCompilerRequest(v: unknown): CompilerRequest {
 export function readCompilerRecipe(v: unknown): CompilerRecipe {
   if (!jointRecord(v) || v.schema !== 'cssearth-nebula-compiler@1' || typeof v.id !== 'string' || !/^[a-z0-9-]+$/.test(v.id) || typeof v.label !== 'string' ||
       !jointPath(v.observationRecipe) || !jointPath(v.observationCatalogue) || !jointPath(v.structureRecipe) || !jointPath(v.structureCatalogue) ||
-      (v.jointRecipe !== undefined && !jointPath(v.jointRecipe)) || (v.depthRecipe !== undefined && (!jointPath(v.depthRecipe) || !v.depthRecipe.startsWith('labs/nebula/models/'))) ||
-      (v.sampledRecipe !== undefined && (!jointPath(v.sampledRecipe) || !v.sampledRecipe.startsWith('labs/nebula/models/'))) ||
-      (v.photometricPriorRecipe !== undefined && (!jointPath(v.photometricPriorRecipe) || !v.photometricPriorRecipe.startsWith('labs/nebula/models/'))) ||
+      (v.jointRecipe !== undefined && !jointPath(v.jointRecipe)) || (v.depthRecipe !== undefined && (!jointPath(v.depthRecipe) || !/^src\/objects\/[a-z0-9-]+\/source\//.test(v.depthRecipe))) ||
+      (v.sampledRecipe !== undefined && (!jointPath(v.sampledRecipe) || !/^src\/objects\/[a-z0-9-]+\/source\//.test(v.sampledRecipe))) ||
+      (v.photometricPriorRecipe !== undefined && (!jointPath(v.photometricPriorRecipe) || !/^src\/objects\/[a-z0-9-]+\/source\//.test(v.photometricPriorRecipe))) ||
       [v.jointRecipe, v.depthRecipe, v.sampledRecipe, v.photometricPriorRecipe].filter(value => value !== undefined).length > 1 || typeof v.defaultSourceId !== 'string' || !range(v.maximumStars, 0, 2000) || !Number.isInteger(v.maximumStars) || typeof v.interpretation !== 'string') throw new TypeError('Invalid compiler recipe.');
   const targetControls = v.targetControls === undefined ? undefined : readCompilerTargetControls(v.targetControls);
   const emissionWindow = v.emissionWindow === undefined ? undefined : readCompilerEmissionWindow(v.emissionWindow);
@@ -67,7 +67,7 @@ export function readCompilerEmissionWindow(v: unknown): CompilerEmissionWindow {
   return { sourceId: v.sourceId, featherArcsec: v.featherArcsec };
 }
 export function readObservedStarCataloguePin(value: unknown): ObservedStarCataloguePin {
-  if (!jointRecord(value) || !jointPath(value.path) || !value.path.startsWith('labs/nebula/models/')) throw new TypeError('Invalid observed stellar catalogue pin.');
+  if (!jointRecord(value) || !jointPath(value.path) || !/^src\/objects\/[a-z0-9-]+\/source\//.test(value.path)) throw new TypeError('Invalid observed stellar catalogue pin.');
   return { path: value.path };
 }
 /** Callers omit controls only when they have no saved or explicit user choice. */

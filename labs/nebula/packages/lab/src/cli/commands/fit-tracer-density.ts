@@ -1,12 +1,13 @@
 /** Bounded observation-constrained shape comparison, independent of image materials. */
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
-import {resolve,relative} from 'node:path';
+import {resolve,relative,sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import { sourceBytes } from '@cssearth/bake/volume/node';
 import {fitForwardModel,evaluateForwardModel,transformForwardPoint,FORWARD_PARAMETER_KEYS,
  type ForwardParameters,type ParameterBounds,type FitOptions,type ForwardFit,type ForwardEvaluation} from '@cssearth/nebula-reconstruction/registration/forward-density-fit';
 import {fitRegionalWeights,applyRegionalWeights} from '@cssearth/nebula-reconstruction/registration/regional-density-weights';
 import {record,string,finite,pin,forwardFitData,samplePoints,ellipsoidPoints} from './forward-fit-data.ts';
+import { isLabScratchPath } from '../../resources/model-paths.ts';
 const json=async(path:string,value:unknown)=>writeFile(path,JSON.stringify(value,null,2)+'\n');
 function parameters(value:unknown):ForwardParameters{const p=record(value);const entries=FORWARD_PARAMETER_KEYS.map(k=>[k,finite(p[k])]);return Object.fromEntries(entries) as unknown as ForwardParameters;}
 function bounds(value:unknown):ParameterBounds{const p=record(value);const entries=FORWARD_PARAMETER_KEYS.map(k=>{const v=p[k];if(!Array.isArray(v)||v.length!==2)throw new TypeError('Missing parameter bounds');return [k,[finite(v[0]),finite(v[1])]];});return Object.fromEntries(entries) as unknown as ParameterBounds;}
@@ -15,7 +16,7 @@ export async function fitTracerDensity(recipePath:string){
  const root=process.cwd(),config=record(JSON.parse(await readFile(recipePath,'utf8')) as unknown);
  if(config.schema!=='cssearth-tracer-forward-fit@1')throw new TypeError('Unsupported fit recipe');
  const out=string(config.outputDirectory),output=resolve(root,out);
- if(!out.startsWith('.local/nebula-lab/')||relative(resolve(root,'.local/nebula-lab'),output).startsWith('..'))throw new TypeError('Output must stay in the local cache');
+ if(!/^(?:\.local\/nebula-lab\/|src\/objects\/[a-z0-9-]+\/\.local\/)/.test(out)||!isLabScratchPath(relative(root,output).split(sep).join('/'))||relative(root,output).split(sep).includes('..'))throw new TypeError('Output must stay in the local cache');
  await mkdir(output,{recursive:true});await sourceBytes(root,pin(config.observedReceipt));
  const data=await forwardFitData(root,config),range=bounds(config.bounds),search=record(config.search);
  const options:FitOptions={maxSweeps:finite(search.maxSweeps),refinements:finite(search.refinements),initialStepFraction:finite(search.initialStepFraction)};

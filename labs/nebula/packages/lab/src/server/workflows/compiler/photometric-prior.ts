@@ -8,7 +8,7 @@ import { fitSimulationEnvelope } from '@cssearth/nebula-reconstruction/methods/i
 import { createPhotometricEmission, envelopeChromaticity, envelopeChromaSettings, pixelCenter, type MaterialImage, type EmissionFitInput } from '@cssearth/bake/volume';
 export function readPhotometricMgeRecipe(value: unknown): PhotometricMgeRecipe {
   const recipe = readScientificRecipe(value);
-  if (!recipe.evidence.path.startsWith('labs/nebula/models/')) throw new TypeError('Photometric evidence must be object-owned.');
+  if (!/^src\/objects\/[a-z0-9-]+\/source\//.test(recipe.evidence.path)) throw new TypeError('Photometric evidence must be object-owned.');
   return recipe;
 }
 
@@ -22,7 +22,7 @@ export function verifyPhotometricEvidence(recipe: PhotometricMgeRecipe, evidence
 }
 
 export async function loadPhotometricPrior(root: string, path: string, subjectId: string) {
-  if (!jointPath(path) || !path.startsWith('labs/nebula/models/')) throw new TypeError('Photometric model must be object-owned.');
+  if (!jointPath(path) || !/^src\/objects\/[a-z0-9-]+\/source\//.test(path)) throw new TypeError('Photometric model must be object-owned.');
   const source = async (name: string) => {
     const actual = await realpath(resolve(root, name)), offset = relative(await realpath(root), actual);
     if (offset === '..' || offset.startsWith('../') || isAbsolute(offset)) throw new TypeError('Photometric source leaves the repository.');

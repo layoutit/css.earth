@@ -2,5 +2,5 @@
 import { readSampledRecipe as readRecipe, type SampledRecipe } from '@cssearth/objects';
 export * from '@cssearth/bake/volume';
 export function readSampledRecipe(value: unknown): SampledRecipe {
-  return readRecipe(value, path => /^(labs\/nebula\/models\/|\.local\/nebula-lab\/)/.test(path));
+  return readRecipe(value, path => /^(src\/objects\/[a-z0-9-]+\/(?:source|\.local)\/|\.local\/nebula-lab\/)/.test(path));
 }
