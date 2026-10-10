@@ -22,6 +22,11 @@ is a neutral gray schematic with a curvature cue, not measured limb darkening or
   ([tutorial](https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/)). NASA content is generally not subject
   to copyright in the United States and is credited to NASA
   ([NASA's terms](https://www.nasa.gov/nasa-brand-center/images-and-media/)).
+- **Color in the world.** The planet's orbit, marker and caption take the color of [`swatch.json`](swatch.json):
+  the light reflected by the airless model with a fresh ultramafic surface (60% olivine, 40% enstatite) that Ducrot et
+  al. (2024, [Nature Astronomy 9, 358](https://doi.org/10.1038/s41550-024-02428-z)) find favoured by the eclipse depths
+  at 12.8 and 15 µm. The file is `Fig2_trappist1b_bare_Ultramafic_post_TOA_flux_eclipse.dat` (1,957,134 bytes) of
+  [Zenodo record 13385020](https://doi.org/10.5281/zenodo.13385020), released under CC BY 4.0.
 
 ## Processing
 
@@ -55,6 +60,15 @@ side, which the data do not measure.
 
 **Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
 
+**World color.** [`swatches.mts`](../../../packages/bake/authoring/trappist-1/swatches.mts) divides the flux leaving
+the model planet by the starlight reaching it, at the even wavelengths from 380 to 780 nm, where a surface near 500 K
+emits nothing. That reflectance is 0.33 at 400 nm, 0.41 at 500 nm, 0.47 at 600 nm and 0.45 at 700 nm. It is lit with
+the star's own light, the Gaia XP spectrum the [star's color](../trappist-1/README.md) is made from, and converted as
+the Solar System swatches are: the CIE 1931 2° observer, Bradford adaptation from the star's white to the sRGB white,
+brightest channel 1 ([`reflected-light-swatch.ts`](../../../packages/bake/src/objects/color/reflected-light-swatch.ts)).
+The result is `#fffce2`, a pale yellow-white. The sphere keeps its datasets; the swatch colors only the line, marker and
+caption in the world.
+
 ## Evidence
 
 - **The result.** 575 K where the star is overhead, 565 to 586 K at one standard deviation, cooling to about 370 K 10°
@@ -76,6 +90,10 @@ side, which the data do not measure.
   longitudes but not latitudes. The shape across the disc, north-south included, is the bare-rock model's.
 - **The star's variability is modelled, not removed.** The Gaussian process carries about 580 ppm of slow variation,
   mostly the detector's settling over the first hours of the phase curve.
+- **The orbit's color is a model's, not the planet's.** No telescope has detected light this planet reflects. The
+  swatch is the color of the rock type that best fits two infrared measurements. The same paper fits a thick carbon
+  dioxide atmosphere with haze to them as well, and says space weathering, which it does not model, darkens a surface.
+  The color also tells little: the paper's seven rock types all come out between `#fff0d8` and `#fffcf9` here.
 - **The orbit is circular here.** The measured eccentricity is small but not zero, and the transit-timing variations
   of -1.2 to +0.1 minutes are not drawn.
 - **The Illustration dataset is art, not data.** Nobody has resolved this planet's disc. Its colors, clouds and terrain

@@ -1,0 +1,49 @@
+{
+  "hex": "#fffce2",
+  "rgb": [
+    255,
+    252,
+    226
+  ],
+  "colorSpace": "sRGB",
+  "basis": "Modeled, not observed. The color of the bare rock surface that best fits this planet's two measured infrared eclipse depths, in its own star's light. No telescope has detected light this planet reflects. Brightness-normalized for a swatch; not a representation of how bright the planet is.",
+  "generator": "packages/bake/authoring/trappist-1/swatches.mts",
+  "source": {
+    "title": "Ducrot et al. (2024), Combined analysis of the 12.8 and 15 μm JWST/MIRI eclipse observations of TRAPPIST-1 b, Nature Astronomy 9, 358",
+    "url": "https://doi.org/10.1038/s41550-024-02428-z",
+    "dataUrl": "https://zenodo.org/records/13385020/files/Fig2_trappist1b_bare_Ultramafic_post_TOA_flux_eclipse.dat",
+    "dataRecord": "https://doi.org/10.5281/zenodo.13385020",
+    "license": "CC BY 4.0",
+    "columns": "Column 2: central wavelength in micrometres. Columns 5 and 6: the star's flux reaching the top of the atmosphere and the flux leaving it. Their ratio between 380 and 780 nm, where a surface near 500 K emits nothing, is the reflectance.",
+    "basis": "The paper's airless model with a fresh ultramafic surface (60% olivine, 40% enstatite, a surface type of Hu, Ehlmann & Seager 2012, https://doi.org/10.1088/0004-637X/752/1/7), the surface it finds favoured by the eclipse depths at 12.8 and 15 µm. Only those two depths are measured: the visible reflectance is the rock type's. The paper also fits a thick carbon dioxide atmosphere with haze, and notes that space weathering, which it does not model, darkens a surface."
+  },
+  "conversion": {
+    "observer": {
+      "name": "CIE 1931 2 degree standard observer",
+      "path": "src/references/cie-1931-2deg/CIE_xyz_1931_2deg.csv"
+    },
+    "illuminant": {
+      "name": "The light of TRAPPIST-1: its Gaia DR3 XP sampled spectrum, as the star's color dataset reads it",
+      "path": "src/objects/trappist-1/source/photometry/gaia-dr3-xp-sampled.csv",
+      "source": "Gaia Collaboration (2023), Gaia Data Release 3, A&A 674, A1; BP/RP spectra: De Angeli et al. (2023), A&A 674, A2; external calibration: Montegriffo et al. (2023), A&A 674, A3",
+      "whitePointXy": [
+        0.4250570082,
+        0.4270996364
+      ]
+    },
+    "integration": "Reflectance times the star's flux times each CIE matching function, summed at the even wavelengths from 380 to 780 nm, normalized to Y = 1 for a perfect diffuser.",
+    "chromaticAdaptation": "Bradford adaptation from the star's white to the sRGB D65 white (x=0.3127, y=0.329): the surface as an eye adapted to that star's light sees it, the convention of the Solar System swatches. Unadapted, everything the star lights is orange.",
+    "brightnessNormalization": "Divide the three linear sRGB channels by their maximum, preserving channel ratios; apply the sRGB transfer function, multiply by 255, and round. No hue adjustment or gamut clipping.",
+    "implementation": "packages/bake/src/objects/color/reflected-light-swatch.ts",
+    "xyzStarWhiteY1": [
+      0.4585211663,
+      0.461867622,
+      0.1310209765
+    ],
+    "linearSrgbD65": [
+      0.473966727,
+      0.4633970171,
+      0.3603218922
+    ]
+  }
+}
