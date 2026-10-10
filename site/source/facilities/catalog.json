@@ -2932,9 +2932,9 @@
         "value": "Optical",
         "citations": [
           {
-            "catalogueId": "noirlab-noao-m45",
-            "checkedOn": "2026-09-14",
-            "locator": "https://www.astropix.org/image/noirlab/noao-m45 — NOIRLab-curated Color Mapping Details: WIYN-0.9m (Mosaic I), optical B/V/I"
+            "catalogueId": "reference-wiyn-0-9m",
+            "checkedOn": "2026-10-11",
+            "locator": "About the WIYN 0.9m: Kitt Peak optical telescope and its imaging cameras"
           }
         ]
       },
@@ -3296,50 +3296,6 @@
             "catalogueId": "massey-2002-ubvr",
             "checkedOn": "2026-09-14",
             "locator": "PDF page 3, section 2.1: standard UBVR system"
-          }
-        ]
-      }
-    },
-    {
-      "id": "niittee-sharpstar-61edph-iii",
-      "name": {
-        "value": "Niittee’s Sharpstar 61EDPH III",
-        "citations": [
-          {
-            "catalogueId": "niittee-plejades",
-            "checkedOn": "2026-09-14",
-            "locator": "Summary, Image Details / Equipment Used: author Taavi Niittee; Telescope: Sharpstar 61EDPH III"
-          }
-        ]
-      },
-      "aliases": [],
-      "description": {
-        "value": "Taavi Niittee’s telescope used with a ZWO ASI071MC Pro camera for the Pleiades photograph from Tõrva, Estonia.",
-        "citations": [
-          {
-            "catalogueId": "niittee-plejades",
-            "checkedOn": "2026-09-14",
-            "locator": "Summary, Image Details / Equipment Used: Tõrva, Estonia; Sharpstar 61EDPH III; ZWO ASI071MC Pro"
-          }
-        ]
-      },
-      "kind": {
-        "value": "optical-telescope",
-        "citations": [
-          {
-            "catalogueId": "niittee-plejades",
-            "checkedOn": "2026-09-14",
-            "locator": "Summary, Equipment Used: Telescope: Sharpstar 61EDPH III"
-          }
-        ]
-      },
-      "setting": {
-        "value": "ground",
-        "citations": [
-          {
-            "catalogueId": "niittee-plejades",
-            "checkedOn": "2026-09-14",
-            "locator": "Summary, Image Details: photograph taken from Tõrva, Estonia"
           }
         ]
       }

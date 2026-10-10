@@ -3,7 +3,8 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import { observationSourceFile, readObservationRecipe } from './recipe';
 
-const input = () => JSON.parse(readFileSync('src/objects/m45-volume/source/observations.json', 'utf8'));
+// The retired Pleiades intake, trimmed to the sources these reader checks name.
+const input = () => JSON.parse(readFileSync('labs/nebula/packages/lab/src/features/observations/fixtures/pleiades-observations.json', 'utf8'));
 
 test('wide-source registration retains explicit native discovery settings without changing other sources', () => {
   const recipe = readObservationRecipe(input());

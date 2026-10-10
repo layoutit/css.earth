@@ -311,26 +311,6 @@
     }
   },
   {
-    "id": "m45",
-    "name": "M45 · Pleiades",
-    "menuLabel": "M45 · Pleiades",
-    "workflow": "inference",
-    "directory": ".local/nebula-lab/compiler-published/m45",
-    "hasDetail": false,
-    "modelNote": "Evidence-guided display model; physical observations and authored depth assumptions are recorded separately.",
-    "observationAlignment": {
-      "manifest": "src/objects/m45-volume/.local/observations/m45/observations.json",
-      "recipe": "src/objects/m45-volume/source/observations.json",
-      "dossier": "src/objects/m45-volume/source/source-dossier.json"
-    },
-    "emissionExperiment": {
-      "observationStructures": "src/objects/m45-volume/.local/observations/m45-processing/structures/catalogue.json",
-      "compilerSource": "src/objects/m45-volume/source/compiler.json",
-      "compilerPublished": "src/objects/m45-volume/.local/compiler-published.json",
-      "statusNote": "Published constraints guide authored depth; this is not measured gas density."
-    }
-  },
-  {
     "id": "omega-centauri",
     "name": "Omega Centauri",
     "menuLabel": "Omega Centauri",

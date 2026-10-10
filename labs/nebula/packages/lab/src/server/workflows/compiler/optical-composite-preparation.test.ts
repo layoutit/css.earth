@@ -18,6 +18,9 @@ import { createEmissionField } from '@cssearth/bake/volume';
 import { opticalCompositeSourcePins, restoreOpticalCompositeSources } from './optical-composite-inputs.ts';
 import { prepareOpticalComposite, prepareOpticalCompositeForResult, readOpticalCompositeRecipe } from './optical-composite-preparation.ts';
 
+// The retired Pleiades composite was the lane's only recipe; its records are kept beside this test, trimmed to what it reads.
+const record = (name: string) => readFile(`labs/nebula/packages/lab/src/server/workflows/compiler/fixtures/optical-composite/${name}`);
+
 async function fixture(t: TestContext) {
   const root = await mkdtemp(join(tmpdir(), 'optical-composite-delivery-'));
   t.after(() => rm(root, { recursive: true, force: true }));
@@ -26,20 +29,23 @@ async function fixture(t: TestContext) {
     return { path };
   };
   const save = (path: string, value: unknown) => put(path, Buffer.from(JSON.stringify(value)));
-  const recipePath = 'src/objects/m45-volume/source/optical-composite.json';
-  const recipe = readOpticalCompositeRecipe(JSON.parse(await readFile(recipePath, 'utf8')));
-  const compilerBytes = await readFile(recipe.compilerRecipe), compiler = readCompilerRecipe(JSON.parse(compilerBytes.toString()));
+  const recipePath = 'src/objects/pleiades-volume/source/optical-composite.json';
+  const recipe = readOpticalCompositeRecipe(JSON.parse((await record('optical-composite.json')).toString()));
+  const compilerBytes = await record('compiler.json'), compiler = readCompilerRecipe(JSON.parse(compilerBytes.toString()));
   await put(recipe.compilerRecipe, compilerBytes);
   for (const path of [compiler.observationRecipe, compiler.observationCatalogue, compiler.structureRecipe, compiler.structureCatalogue, compiler.observedStars!.path])
     await save(path, {});
-  for (const path of [compiler.depthRecipe!, 'src/objects/m45-volume/source/physical-evidence.json']) await put(path, await readFile(path));
+  const depthBytes = await record('depth-model.json'), evidenceBytes = await record('physical-evidence.json');
+  const evidencePath: unknown = JSON.parse(depthBytes.toString()).evidence.path;
+  assert.ok(typeof evidencePath === 'string');
+  await put(compiler.depthRecipe!, depthBytes); await put(evidencePath, evidenceBytes);
   const native = Buffer.alloc(32 * 32 * 3);
   for (let y = 0; y < 32; y++) for (let x = 0; x < 32; x++) {
     const at = (y * 32 + x) * 3; native[at] = 50 + x * 3; native[at + 1] = 60 + y * 3; native[at + 2] = 70 + x + y;
   }
   const png = await sharp(native, { raw: { width: 32, height: 32, channels: 3 } }).png().toBuffer();
   const zero = await sharp(Buffer.alloc(native.length), { raw: { width: 32, height: 32, channels: 3 } }).png().toBuffer();
-  const originalRecipe = readObservationRecipe(JSON.parse(await readFile(recipe.observationRecipe, 'utf8')));
+  const originalRecipe = readObservationRecipe(JSON.parse((await record('optical-composite-observations.json')).toString()));
   const observationRecipe = { ...originalRecipe, nativeSeparationCache: undefined,
     frame: { ...originalRecipe.frame, width: 32, height: 32, fieldArcminutes: [1, 1] },
     images: originalRecipe.images.map(image => ({ ...image, width: 32, height: 32 })) };
@@ -81,8 +87,8 @@ async function fixture(t: TestContext) {
       fitRmse: .1, baselineRmse: .2, missingSignalFraction: .1, excessSignalFraction: .1 }, interpretation: 'Test finite emitter',
     model: await save(`${directory}/field.json`, model),
     method: await save(`${directory}/method.json`, { request, recipe: compiler, recipePath: recipe.compilerRecipe,
-      physicalDepth: { recipe: await put(`${directory}/depth-recipe.json`, await readFile(compiler.depthRecipe!)),
-        evidence: await put(`${directory}/physical-evidence.json`, await readFile('src/objects/m45-volume/source/physical-evidence.json')) } }),
+      physicalDepth: { recipe: await put(`${directory}/depth-recipe.json`, depthBytes),
+        evidence: await put(`${directory}/physical-evidence.json`, evidenceBytes) } }),
     target: source, projection: source, residual: source,
     sources: [{ id: image.id, label: image.label, credit: image.source.credit, page: image.source.page,
       original: source, starless: image.layers.diffuse, width: 32, height: 32, boundsArcsec: bounds }],
@@ -96,7 +102,7 @@ async function fixture(t: TestContext) {
 }
 
 test('delivery composites a supplied result with no historical caches and retains geometry, alpha and stars', async t => {
-  const f = await fixture(t), publicationPath = 'src/objects/m45-volume/.local/compiler-published.json';
+  const f = await fixture(t), publicationPath = 'src/objects/pleiades-volume/.local/compiler-published.json';
   const publication = await f.save(publicationPath, { retained: 'live user publication' });
   const before = JSON.stringify(f.result), output = await prepareOpticalCompositeForResult(f.root, f.recipePath, f.result);
   assert.equal(JSON.stringify(f.result), before);

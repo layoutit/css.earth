@@ -18,6 +18,12 @@ The Gaia distance agrees with the independent radio parallax of [Melis et al. (2
 2. `node packages/bake/cli/prepare-object.mts m45` prepares its scene through the standard authored lane. The [recipe](object.json) declares no surface, so the scene is the camera, sky and world frame; the page frames the cluster at its tidal radius estimate, 11.1 pc, a presentation value ([solar-system.json](source/presentation/solar-system.json)).
 3. `node site/build/prepare/companion-context.mts m45` draws the list marker from the member dots.
 
+## Evidence
+
+![The Pleiades in the app, about 18 pc from the cluster: the member dots, the nine named stars as the largest blue dots, and Alcyone, Merope and Celaeno named on theirs](evidence/2026-10-11/views.jpg)
+
+Captured 2026-10-11 at http://127.0.0.1:4215/m45/, five wheel steps closer than the opening view. Each named star's label stands on its dot. Pleione's label is held back by crowding beside Alcyone at this distance.
+
 ## Known problems
 
 - The framing radius is a presentation value: Hunt & Reffert give the tidal radius as an approximate estimate.

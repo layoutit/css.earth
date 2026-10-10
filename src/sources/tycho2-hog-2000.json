@@ -18,8 +18,9 @@
   ],
   "evidence": [
     {
-      "path": "src/objects/m45-volume/source/stellar-sources.json",
-      "locator": "/sources/1"
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/259",
+      "checkedOn": "2026-10-11",
+      "locator": "tyc2, the table the nebula lab reads field stars from (labs/nebula/packages/reconstruction/src/stars/field-catalogue.ts)"
     }
   ],
   "publisher": "Høg et al. 2000, A&A 355 L27, The Tycho-2 Catalogue",
@@ -29,7 +30,7 @@
       "kind": "credit",
       "text": "Høg et al. 2000, A&A 355 L27, The Tycho-2 Catalogue",
       "scope": "Published source",
-      "evidence": "https://github.com/layoutit/css.earth/blob/main/src/objects/m45-volume/source/stellar-sources.json#/sources/1"
+      "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/259"
     }
   ]
 }

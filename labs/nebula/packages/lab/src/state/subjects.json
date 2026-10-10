@@ -133,18 +133,6 @@
     }
   },
   {
-    "id": "m45",
-    "name": "Pleiades",
-    "menuLabel": "M45 · Pleiades",
-    "workflow": "inference",
-    "directory": "src/objects/m45-volume",
-    "hasDetail": false,
-    "siteVolume": {
-      "group": "m45",
-      "object": "src/objects/m45-volume"
-    }
-  },
-  {
     "id": "m57",
     "name": "Ring Nebula",
     "menuLabel": "M57 · Ring",

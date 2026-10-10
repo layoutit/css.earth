@@ -28,7 +28,7 @@ function objectSourcePath(tail: string): string | null {
 export function parseLabModelJson(text: string): any {
   return JSON.parse(text, (_key, value) => typeof value === 'string' ? resolveLabModelPath(value) : value);
 }
-/** The site object that keeps a lab subject's or recipe's scratch: helix → helix-layers, m45-processing → m45-volume. */
+/** The site object that keeps a lab subject's or recipe's scratch: helix → helix-layers, m8-processed → m8-volume. */
 export function labObjectFolder(id: string): string {
   if (!/^[a-z0-9][a-z0-9-]*$/.test(id)) throw new TypeError(`Invalid lab subject id: ${JSON.stringify(id)}`);
   if (/-(?:layers|volume)$/.test(id)) return id;
@@ -36,7 +36,7 @@ export function labObjectFolder(id: string): string {
   if (id === 'cassiopeia-a') return 'cassiopeia-a-layers';
   if (/^lmc(?:-|$)/.test(id)) return 'lmc-volume';
   if (/^smc(?:-|$)/.test(id)) return 'smc-volume';
-  return `${/^(m45|m8)-/.exec(id)?.[1] ?? id}-volume`;
+  return `${/^m8-/.test(id) ? 'm8' : id}-volume`;
 }
 /** Per-object scratch, ignored by git: `src/objects/<object>/.local/<parts…>`. */
 export const objectScratch = (id: string, ...parts: string[]) => ['src/objects', labObjectFolder(id), '.local', ...parts].join('/');

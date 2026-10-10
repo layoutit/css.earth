@@ -87,9 +87,9 @@ An optional `capture.observation` identifies a particular observation or publish
 image product, its target, date, instrument, bands and supporting evidence.
 Use `null` for unavailable date, instrument or band information; omit the whole
 record when no particular observation is identified. Attribution alone supplies
-none of these facts. For example, M45's `noao-m45` record retains the published
-B/V/I bands and leaves the exposure date and instrument unknown in that pinned
-record. Contribution edges preserve this metadata and the product's input roles.
+none of these facts. For example, a record of a published color composite
+retains the bands the provider names and leaves an unpublished exposure date and
+instrument unknown. Contribution edges preserve this metadata and the product's input roles.
 
 Source manifests use one of three explicit capture forms:
 

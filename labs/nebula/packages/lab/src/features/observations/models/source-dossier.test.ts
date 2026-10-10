@@ -7,7 +7,7 @@ import { readObservationRecipe, scienceObservationSources } from '../recipe';
 import { publisherRegistration, publisherTransform } from '@cssearth/nebula-reconstruction/registration/stellar';
 
 test('every new candidate has a source dossier and primary-paper context', async () => {
-  for (const id of ['m45', 'm1', 'm8']) {
+  for (const id of ['m1', 'm8']) {
     const root = `src/objects/${id}-volume/source`;
     const dossier = readSourceDossier(JSON.parse(await readFile(`${root}/source-dossier.json`, 'utf8')));
     const recipe = readObservationRecipe(JSON.parse(await readFile(`${root}/${id === 'm8' ? 'alignment-candidates' : 'observations'}.json`, 'utf8')));
@@ -23,7 +23,6 @@ test('every new candidate has a source dossier and primary-paper context', async
 
 test('curation preserves useful publisher-registered comparisons without upgrading their evidence', async () => {
   const expected: Record<string, string[]> = {
-    m45: ['noirlab-optical', 'spitzer-irac', 'spitzer-irac-mips', 'wise-four-band', 'iau-usama-widefield', 'andreo-widefield', 'niittee-widefield'],
     m1: ['hubble-optical', 'webb-infrared', 'webb-components', 'spitzer-infrared', 'vla-radio', 'chandra-xray'],
     m8: ['eso-optical', 'eso-vista', 'spitzer-mid-infrared'],
   };
@@ -52,15 +51,16 @@ test('publisher-only images carry no invented stellar measurements', async () =>
   const evidence = publisherRegistration('Nonstellar band.');
   assert.equal(evidence.status, 'publisher'); assert.equal(evidence.matchedStars, 0);
   assert.deepEqual(evidence.matches, []);
-  const raw = JSON.parse(await readFile('src/objects/m45-volume/source/observations.json', 'utf8'));
+  const raw = JSON.parse(await readFile('src/objects/m1-volume/source/observations.json', 'utf8'));
   const recipe = readObservationRecipe(raw);
-  assert.equal(recipe.images.find(i => i.id === 'iris-far-infrared')?.registrationMode, 'publisher-wcs');
+  assert.equal(recipe.images.find(i => i.id === 'spitzer-infrared')?.registrationMode, 'publisher-wcs');
   raw.images[0].registrationMode = 'assume-verified';
   assert.throws(() => readObservationRecipe(raw), /Unknown registration mode/);
 });
 
 test('wide optical intake accepts a ten-degree TAN footprint without relaxing registration', async () => {
-  const raw = JSON.parse(await readFile('src/objects/m45-volume/source/observations.json', 'utf8'));
+  // The retired Pleiades intake is the only recipe with a ten-degree bright-star-seeded footprint.
+  const raw = JSON.parse(await readFile('labs/nebula/packages/lab/src/features/observations/fixtures/pleiades-observations.json', 'utf8'));
   const source = raw.images.find((image: { id: string }) => image.id === 'iau-usama-widefield');
   assert.ok(source.fieldArcminutes[0] > 360);
   source.fieldArcminutes[0] = 600;
