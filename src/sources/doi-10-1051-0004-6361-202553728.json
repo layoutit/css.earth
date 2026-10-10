@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1051-0004-6361-202553728",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Mascareño et al. (2025): Diving into the planetary system of Proxima with NIRPS",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202553728"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361/202553728",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361/202553728",
+      "checkedOn": "2026-10-10",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mascareño et al. (2025), Astronomy & Astrophysics 700 A11",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361/202553728"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 700 A11",
+  "creators": [
+    "Alejandro Suárez Mascareño",
+    "Étienne Artigau",
+    "Lucile Mignon",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

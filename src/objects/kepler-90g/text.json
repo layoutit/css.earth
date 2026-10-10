@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-90g",
+  "card": {
+    "text": "Kepler-90 g was found in 2013 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ade67b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract",
+        "label": "Shaw et al. 2025",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SHAW_ET_AL__2025): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 210.73514, pl_radj 0.68855503, pl_bmassj 0.04719528"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-90g",
+        "url": "https://en.wikipedia.org/wiki/Kepler-90g",
+        "label": "Wikipedia, \"Kepler-90g\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1328173004",
+        "quote": "Kepler-90g is a super-puff exoplanet orbiting the early G-type main sequence star Kepler-90, one of eight planets around this star discovered using NASA's Kepler space telescope."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 8 planets known around Kepler-90. Its orbit and size follow Shaw et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ade67b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract",
+        "label": "Shaw et al. 2025",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SHAW_ET_AL__2025): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 210.73514, pl_radj 0.68855503, pl_bmassj 0.04719528"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-90g",
+        "url": "https://en.wikipedia.org/wiki/Kepler-90g",
+        "label": "Wikipedia, \"Kepler-90g\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1328173004",
+        "quote": "It is located about 2,840 light-years (870 pc) from Earth, in the constellation Draco."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

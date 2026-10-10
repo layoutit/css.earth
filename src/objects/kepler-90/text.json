@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-90",
+  "card": {
+    "text": "8 planets cross Kepler-90 as seen from Earth: b, c, d, e, f, g, h, i.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-781-1-18",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+        "label": "Cabrera et al. (2014), The Astrophysical Journal 781 18",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CABRERA_ET_AL__2014): st_teff 6080, st_rad 1.2, st_mass 1.2"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-90",
+        "url": "https://en.wikipedia.org/wiki/Kepler-90",
+        "label": "Wikipedia, \"Kepler-90\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1372465090",
+        "quote": "Kepler-90, also designated 2MASS J18574403+4918185, is an F-type star located about 2,790 light-years (855 pc) from Earth in the constellation of Draco."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Cabrera et al. 2014.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-781-1-18",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+        "label": "Cabrera et al. (2014), The Astrophysical Journal 781 18",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CABRERA_ET_AL__2014): st_teff 6080, st_rad 1.2, st_mass 1.2"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-90",
+        "url": "https://en.wikipedia.org/wiki/Kepler-90",
+        "label": "Wikipedia, \"Kepler-90\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1372465090",
+        "quote": "It is notable for being the only confirmed planetary system with the same number of observed planets as the Solar System."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

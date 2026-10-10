@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "proxima-centauri-system",
+  "parent": "alpha-centauri-a-system",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "proxima-centauri"
+    },
+    "catalog": {
+      "name": "Proxima Centauri system",
+      "systemName": "Proxima Centauri system",
+      "classification": "planetary-system",
+      "color": "#ffd06e",
+      "distanceAu": 268441,
+      "description": "Red dwarf 1.30 parsecs away, the nearest star to the Sun; its photosphere is not imaged here."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -14651209142921296,
+        -11188687658327098,
+        -35676840399400656
+      ],
+      "presentationToReference": [
+        -0.36476700748045887,
+        0.7055273749751941,
+        -0.6075986779234818,
+        -0.2785614714532566,
+        0.5399813412916016,
+        0.7942440794105547,
+        -0.8884528895082437,
+        -0.45896761783107826,
+        0.0004346342345782305
+      ],
+      "orbitUpReference": [
+        -0.7055273749751941,
+        -0.5399813412916016,
+        0.45896761783107826
+      ],
+      "metersPerUnit": 316432.2580645161,
+      "bodyRadiusM": 98094000
+    }
+  }
+}

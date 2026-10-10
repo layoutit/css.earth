@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-3881-ade67b",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Shaw et al. (2025): Updated Masses for the Gas Giants in the Eight-planet Kepler-90 System Via Transit-timing Variation and Radial Velocity Observations",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2507.13588"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ade67b"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2025AJ....170..146S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ade67b",
+      "label": "The Astronomical Journal 170 146"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S",
+      "checkedOn": "2026-10-10",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Shaw et al. (2025), The Astronomical Journal 170 146",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S"
+    }
+  ],
+  "publisher": "The Astronomical Journal 170 146",
+  "creators": [
+    "David E. Shaw",
+    "Lauren M. Weiss",
+    "Eric Agol",
+    "et al."
+  ],
+  "publicationDate": "2025"
+}

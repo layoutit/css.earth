@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 1137,
+      "sha256": "894a7c9697e8bb057504f4a7bfca7fb6f0439afd7b05c29687d89a419b86cf0c"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/proxima-centauri-b.bin",
+      "bytes": 1955,
+      "sha256": "27f96bb617a61d3b487f816d1518766485edb341888bf56c1ff6a27838814845"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/proxima-centauri-d.bin",
+      "bytes": 1952,
+      "sha256": "d64f500adfe838fd25a0fd601dca4eff38f64a6aacaeac8332f2f2ae1d786ecc"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/proxima-centauri.json",
+      "bytes": 34485,
+      "sha256": "13597d14ccbcf4dd380f178687c4cca458186d7ab5f9d1c49f185a1328c58c5f"
+    }
+  ]
+}

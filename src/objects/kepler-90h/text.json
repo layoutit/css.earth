@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-90h",
+  "card": {
+    "text": "Kepler-90 h was found in 2013 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ade67b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract",
+        "label": "Shaw et al. 2025",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SHAW_ET_AL__2025): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 331.5972732, pl_radj 1.00383793, pl_bmassj 0.63870943"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-90h",
+        "url": "https://en.wikipedia.org/wiki/Kepler-90h",
+        "label": "Wikipedia, \"Kepler-90h\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1370781363",
+        "quote": "Kepler-90h is an exoplanet orbiting within the habitable zone of the early G-type main sequence star Kepler-90, the outermost of eight such planets discovered by NASA's Kepler spacecraft."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 8 planets known around Kepler-90. Its orbit and size follow Shaw et al. 2025's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ade67b",
+        "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract",
+        "label": "Shaw et al. 2025",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SHAW_ET_AL__2025): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 331.5972732, pl_radj 1.00383793, pl_bmassj 0.63870943"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-90h",
+        "url": "https://en.wikipedia.org/wiki/Kepler-90h",
+        "label": "Wikipedia, \"Kepler-90h\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1370781363",
+        "quote": "It is located about 2,840 light-years, from Earth in the constellation Draco."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

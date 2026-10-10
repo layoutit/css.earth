@@ -1,0 +1,47 @@
+{
+  "id": "kepler-11",
+  "name": "Kepler-11",
+  "system": "Kepler-11 system",
+  "description": "Star of 5,663 K, 646 parsecs away, with 6 transiting planets.",
+  "parent": "milky-way",
+  "target": "Kepler-11",
+  "gaia": "2076960598545789824",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract",
+    "credit": "Lissauer et al. 2013"
+  },
+  "radius": {
+    "value": 1.065,
+    "source": "Lissauer et al. 2013, the stellar radius of the default parameter set of Kepler-11 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract",
+    "uncertainty": 0.017
+  },
+  "mass": {
+    "value": 0.961,
+    "source": "Lissauer et al. 2013, the stellar mass of the default parameter set of Kepler-11 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract",
+    "uncertainty": 0.025
+  },
+  "temperature": {
+    "value": 5663,
+    "source": "Lissauer et al. 2013, the stellar temperature of the default parameter set of Kepler-11 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...770..131L/abstract",
+    "uncertainty": 55
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "6 planets cross Kepler-11 as seen from Earth: b, c, d, e, f, g.",
+    "introduction": "Its radius and temperature follow Lissauer et al. 2013.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname LISSAUER_ET_AL__2013): st_teff 5663, st_rad 1.065, st_mass 0.961",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Kepler-11",
+      "title": "Kepler-11",
+      "revision": "1374405418",
+      "card": "Kepler-11, also designated as 2MASS J19482762+4154328, is a Sun-like star slightly larger than the Sun in the constellation Cygnus, located some 2,110 light years from Earth.",
+      "introduction": "It is located within the field of vision of the Kepler space telescope, the satellite that NASA's Kepler Mission uses to detect planets that may be transiting their stars."
+    }
+  },
+  "notes": [],
+  "order": 5834
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-75732f",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "0.677 Jupiter radii from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 55 Cnc f does not transit.",
+      "evidence": [
+        "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.1526 Jupiter masses: Moutou et al. (2026), A&A 705, A190, Table 3: minimum mass (m sin i) 48.5 +/- 2.8 Earth masses from the star's radial velocities; at the assumed tilt of 93.9 degrees the mass is 0.2% more (https://arxiv.org/abs/2510.11523).",
+      "evidence": [
+        "https://arxiv.org/abs/2510.11523"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Moutou et al. (2026), A&A 705, A190, Table 3, a fit of the star's radial velocities, for the period, eccentricity, argument, time of conjunction and semi-major axis (a/R* is its 0.802 au over the star's recorded 656,045 km). The tilt and node are NOT measured for this planet: they are assumed equal to those Xiao et al. (2026, arXiv:2609.01377) measure for 55 Cnc d (https://arxiv.org/abs/2510.11523): P 260.58 d; Moutou et al. (2026), A&A 705, A190, Table 3, a fit of the star's radial velocities, for the period, eccentricity, argument, time of conjunction and semi-major axis (a/R* is its 0.802 au over the star's recorded 656,045 km). The tilt and node are NOT measured for this planet: they are assumed equal to those Xiao et al. (2026, arXiv:2609.01377) measure for 55 Cnc d (https://arxiv.org/abs/2510.11523): a/R* 182.88, inclination 93.9 degrees; Moutou et al. (2026), A&A 705, A190, Table 3, a fit of the star's radial velocities, for the period, eccentricity, argument, time of conjunction and semi-major axis (a/R* is its 0.802 au over the star's recorded 656,045 km). The tilt and node are NOT measured for this planet: they are assumed equal to those Xiao et al. (2026, arXiv:2609.01377) measure for 55 Cnc d (https://arxiv.org/abs/2510.11523): e 0.063; Moutou et al. (2026), A&A 705, A190, Table 3, a fit of the star's radial velocities, for the period, eccentricity, argument, time of conjunction and semi-major axis (a/R* is its 0.802 au over the star's recorded 656,045 km). The tilt and node are NOT measured for this planet: they are assumed equal to those Xiao et al. (2026, arXiv:2609.01377) measure for 55 Cnc d (https://arxiv.org/abs/2510.11523): omega 100.3 degrees (the star's); Moutou et al. (2026), A&A 705, A190, Table 3, a fit of the star's radial velocities, for the period, eccentricity, argument, time of conjunction and semi-major axis (a/R* is its 0.802 au over the star's recorded 656,045 km). The tilt and node are NOT measured for this planet: they are assumed equal to those Xiao et al. (2026, arXiv:2609.01377) measure for 55 Cnc d (https://arxiv.org/abs/2510.11523): transit (inferior conjunction) at 55235.9 BMJD_TDB; Moutou et al. (2026), A&A 705, A190, Table 3, a fit of the star's radial velocities, for the period, eccentricity, argument, time of conjunction and semi-major axis (a/R* is its 0.802 au over the star's recorded 656,045 km). The tilt and node are NOT measured for this planet: they are assumed equal to those Xiao et al. (2026, arXiv:2609.01377) measure for 55 Cnc d (https://arxiv.org/abs/2510.11523): ascending node 124 degrees east of north.",
+      "evidence": [
+        "https://arxiv.org/abs/2510.11523"
+      ]
+    }
+  ]
+}

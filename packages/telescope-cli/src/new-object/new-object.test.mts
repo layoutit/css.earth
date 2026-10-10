@@ -78,6 +78,22 @@ test('the color comes from the first route that reads, the cross-check from the 
   assert.deepEqual(skipped.tried, ['stis-ngsl: skipped', 'gaia-xp: skipped', 'pulkovo: skipped', 'kiehling: skipped', 'kharitonov: skipped', 'burnashev: skipped']);
 });
 
+test('a planet on an assumed plane is an approximate placement that states its assumption', async () => {
+  const cited = { value: 0.87, source: 'A paper, Table 3', url: 'https://arxiv.org/abs/2510.11523' };
+  const elements = { periodDays: 14.65, semiMajorAxisStellarRadii: 26.9, inclinationDegrees: 93.9, eccentricity: 0, transitTimeBmjdTdb: 55495.1, ascendingNodePositionAngleDegrees: 124 };
+  const assumed = 'Approximate orbital placement. The tilt and node are a sibling planet\'s; this planet\'s own are not measured.';
+  const planet = { id: 'test-star-b', name: 'Test Star b', description: 'A planet.', paper: star.paper, radius: { ...cited, value: 1.2 }, mass: cited, orbit: { elements, source: 'A paper, Table 3', url: cited.url, assumedPlane: assumed } };
+  const { hostedRecord } = await import('./hosted.mts');
+  const host = { spec: { id: 'test-star', system: 'Test system' } as never, body: { physical: { meanRadiusKm: 656045 }, star: { distanceParsecs: 12.59 } } };
+  const record = await hostedRecord(parseStarSpec({ ...star, planets: [planet] }).planets[0]!, host, 1, {} as Archive, root);
+  assert.equal(record.orbit.placement, 'approximate');
+  assert.equal(record.orbit.sources.placement, assumed);
+  assert.match(record.orbit.sources.shape!, /Assumed: inclination 93\.9 degrees/u);
+  assert.match(record.orbit.sources.orientation!, /^Assumed: ascending node 124 degrees/u);
+  const measured = await hostedRecord(parseStarSpec({ ...star, planets: [{ ...planet, orbit: { elements, source: 'A paper, Table 3', url: cited.url } }] }).planets[0]!, host, 1, {} as Archive, root);
+  assert.deepEqual([measured.orbit.placement, measured.orbit.sources.placement], [undefined, undefined], 'a measured plane carries no qualification');
+});
+
 test('a black hole companion is a record only: a mass, no temperature, and no radius unless one is measured', async () => {
   const cited = { value: 21.2, source: 'Miller-Jones et al. (2021), Table 1', url: 'https://arxiv.org/abs/2102.09091' };
   const orbit = { elements: { periodDays: 5.599836, semiMajorAxisStellarRadii: 2.3528, inclinationDegrees: 152.49, eccentricity: 0.0189, argumentOfPeriapsisDegrees: 126.6, transitTimeBmjdTdb: 41160.8322, ascendingNodePositionAngleDegrees: 64.1 }, epoch: 'periastron', source: 's', url: cited.url };
@@ -407,6 +423,16 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   const c = (listed.spec.planets as { id: string; name: string; orbit: { planetName?: string } }[]).find(planet => planet.id === 'hd-1c')!;
   assert.deepEqual([c.name, c.orbit.planetName], ['HD 1 c', 'HD 1.01']);
   assert.match(listed.notes.join('; '), /HD 1 c: listed in the NASA Exoplanet Archive as HD 1\.01; named by its host and the archive's letter c/u);
+  // A Kepler star the archive lists by its KOI number takes the names of its table of Kepler names (Kepler-90 for KOI-351).
+  const koi = { ...archive, async text(url: string) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''), letter = /from keplernames where pl_name='KOI-1 ([a-z])'/u.exec(query)?.[1];
+    if (query.includes('from keplernames')) return `kepid,kepler_name\n${letter ? `"11442793","Kepler-9 ${letter}"\n` : ''}`;
+    const answer = await archive.text(url.replaceAll('KOI-1', 'HD+1')); return query.includes('from ps where hostname') ? answer.replaceAll('HD 1', 'KOI-1') : answer; } };
+  const kepler = await archiveSpec(koi, 'KOI-1', { ids: new Set(), names: new Map(), stars: [] }), keplerPlanets = kepler.spec.planets as { id: string; name: string; description: string; orbit: { planetName?: string } }[];
+  assert.deepEqual([kepler.spec.id, kepler.spec.name, kepler.spec.system, kepler.spec.target], ['kepler-9', 'Kepler-9', 'Kepler-9 system', 'KOI-1'], 'shown by its Kepler name, resolved by the archive\'s');
+  assert.deepEqual(keplerPlanets.map(planet => [planet.id, planet.name, planet.orbit.planetName]), [['kepler-9b', 'Kepler-9 b', 'KOI-1 b'], ['kepler-9c', 'Kepler-9 c', 'KOI-1 c']]);
+  assert.match(keplerPlanets[0]!.description, /^Transiting planet of Kepler-9 /u);
+  assert.equal((kepler.spec.text as { card: string }).card, '2 planets cross Kepler-9 as seen from Earth: b, c.');
+  assert.match(kepler.notes.join('; '), /Kepler-9 b: listed in the NASA Exoplanet Archive as KOI-1 b; named as its table of Kepler names does/u);
   // A host the universe names otherwise is found by the Gaia DR3 source its position cites.
   const byGaia = await archiveSpec(archive, 'HD 1', { ids: new Set(['hd-one']), names: new Map(), stars: [], gaia: new Map([['123456789', 'hd-one']]) });
   assert.equal(byGaia.spec.host, 'hd-one');

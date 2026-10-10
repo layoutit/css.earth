@@ -16,7 +16,7 @@ export const NASA_TAP = 'https://exoplanetarchive.ipac.caltech.edu/TAP/sync';
 export interface HostedOrbit {
   readonly periodDays: number; readonly semiMajorAxisStellarRadii: number; readonly inclinationDegrees: number; readonly eccentricity: number;
   readonly argumentOfPeriapsisDegrees?: number; readonly epochDefinition?: 'periastron' | 'inferior-conjunction' | 'superior-conjunction'; readonly transitTimeBmjdTdb: number;
-  readonly ascendingNodePositionAngleDegrees: number; readonly sources: Readonly<Record<string, string>>;
+  readonly ascendingNodePositionAngleDegrees: number; readonly placement?: 'approximate'; readonly sources: Readonly<Record<string, string>>;
 }
 const round = (value: number, digits: number) => Number(value.toFixed(digits));
 const mod360 = (value: number) => ((value % 360) + 360) % 360;

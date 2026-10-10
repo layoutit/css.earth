@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hd-75732f",
+  "parent": "hd-75732-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "55 Cnc f",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 48400.1
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "55 Cnc f",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 2596279.2,
+      "description": "55 Cnc f was found in 2007 by radial velocity; it does not cross its star.",
+      "systemName": "55 Cnc system",
+      "order": 5845,
+      "context": {
+        "order": 5845
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -233795603123509900,
+        249445213357889800,
+        184308384003122940
+      ],
+      "presentationToReference": [
+        -0.6100084495937215,
+        -0.09767975586273014,
+        -0.7863512934553243,
+        0.5952051544623432,
+        -0.7115837513247052,
+        -0.3733354911498746,
+        0.5230874836255617,
+        0.6957781472173853,
+        -0.492211595077788
+      ],
+      "orbitUpReference": [
+        0.09767975586273014,
+        0.7115837513247052,
+        -0.6957781472173853
+      ],
+      "metersPerUnit": 156129.35483870967,
+      "bodyRadiusM": 48400100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

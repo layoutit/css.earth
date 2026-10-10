@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-90f",
+  "card": {
+    "text": "Kepler-90 f was found in 2013 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-781-1-18",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+        "label": "Cabrera et al. 2014",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CABRERA_ET_AL__2014): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 124.91349729, pl_radj 0.257, pl_bmassj 0.0272"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-90f",
+        "url": "https://en.wikipedia.org/wiki/Kepler-90f",
+        "label": "Wikipedia, \"Kepler-90f\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1328194364",
+        "quote": "Kepler-90f is an exoplanet orbiting the star Kepler-90, located in the constellation Draco."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 8 planets known around Kepler-90. Its orbit and size follow Cabrera et al. 2014's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-781-1-18",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+        "label": "Cabrera et al. 2014",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CABRERA_ET_AL__2014): disc_year 2013, disc_facility Kepler, sy_pnum 8; pl_orbper 124.91349729, pl_radj 0.257, pl_bmassj 0.0272"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-90f",
+        "url": "https://en.wikipedia.org/wiki/Kepler-90f",
+        "label": "Wikipedia, \"Kepler-90f\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1328194364",
+        "quote": "It was discovered by the Kepler telescope in October 2013."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

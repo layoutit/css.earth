@@ -1,0 +1,31 @@
+{
+ "id": "kepler-90h",
+ "classification": "exoplanet",
+ "order": 5833,
+ "physical": {
+  "name": "Kepler-90 h",
+  "horizonsCode": null,
+  "meanRadiusKm": 71766.4,
+  "gravitationalParameterKm3PerS2": 80915882.58,
+  "parent": "kepler-90"
+ },
+ "physicalNotes": "Radius 1.00383793 Jupiter radii from Weiss et al. 2024 (2024ApJS..270....8W), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJS..270....8W/abstract): 71,766.4 km at 71,492 km per Jupiter radius. GM from the mass 0.63870943 Jupiter masses (Shaw et al. 2025, the mass the NASA Exoplanet Archive's composite table adopts (2025AJ....170..146S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2025AJ....170..146S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 331.5972732,
+  "semiMajorAxisStellarRadii": 178.5376,
+  "inclinationDegrees": 89.927,
+  "eccentricity": 0.0276,
+  "argumentOfPeriapsisDegrees": 119,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 54972.998929,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Q1-Q17 DR25 Supplemental KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR25_SUPPLEMENTAL_KOI_TABLE): P 331.5972732 d",
+   "shape": "Liang et al. 2021 (2021AJ....161..202L), via the NASA Exoplanet Archive ps table (pl_refname LIANG_ET_AL__2021): a/R* derived by Kepler's third law from its period 331.5972732 d, stellar mass 1.2 and radius 1.2 solar units; Liang et al. 2021 (2021AJ....161..202L), via the NASA Exoplanet Archive ps table (pl_refname LIANG_ET_AL__2021): inclination 89.927 degrees",
+   "eccentricity": "Shaw et al. 2025 (2025AJ....170..146S), via the NASA Exoplanet Archive ps table (pl_refname SHAW_ET_AL__2025): e 0.0276",
+   "argumentOfPeriapsis": "Shaw et al. 2025 (2025AJ....170..146S), via the NASA Exoplanet Archive ps table (pl_refname SHAW_ET_AL__2025): omega 119 degrees",
+   "phase": "Q1-Q17 DR25 Supplemental KOI Table, via the NASA Exoplanet Archive ps table (pl_refname Q1_Q17_DR25_SUPPLEMENTAL_KOI_TABLE): transit mid-time 2454973.498929 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 6 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

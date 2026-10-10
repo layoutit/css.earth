@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "kepler-90c",
+  "displayName": "Kepler-90 c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.2 Earth radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-781-1-18",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C",
+          "label": "Cabrera et al. 2014",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "8.72 days",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-781-1-18",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C",
+          "label": "Cabrera et al. 2014",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.8 Earth masses (model)",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Kepler-90; the neutral gray is a display convention, not a measured color.",
+        "thumbnail": "kepler-90c-dataset-shape.webp",
+        "surface": "kepler-90c-surface-shape@2x.webp",
+        "poles": "kepler-90c-poles-shape@2x.webp",
+        "source": {
+          "id": "kepler-90c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or color of Kepler-90 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of kepler-90's light, as its color dataset measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "kepler-90c-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/kepler-90c/kepler-90c-system-orbits.svg",
+      "alt": "The orbits of Kepler-90's planets in this map from above, to scale, with Kepler-90 c highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "kepler-90c-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C"
+      }
+    },
+    {
+      "id": "kepler-90c-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/kepler-90c/kepler-90c-transit.svg",
+      "alt": "Kepler-90 c crossing its star, as Kepler recorded it: 14 quarters (1 to 7, 9 to 11, 13 to 15, 17) of the Kepler pipeline's 30-minute light curves of KIC 11442793, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 12 minutes earlier to where Kepler measures the dip, inside the published ephemeris's 3-sigma uncertainty of 14 minutes at these dates, then averaged in 30-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "kepler-90c-kepler-quarter-1",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009166043257_llc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Cabrera et al. 2014",
+      "href": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...781...18C/abstract",
+      "credit": "Cabrera et al. 2014"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/kepler-90c.json",
+      "credit": "Radius from Cabrera et al. 2014 (2014ApJ...781...18C), via the NASA Exoplanet Archive; mass from the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive; orbit from Cabrera et al. 2014 (2014ApJ...781...18C), via the NASA Exoplanet Archive"
+    }
+  }
+}

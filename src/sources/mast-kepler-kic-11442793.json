@@ -1,0 +1,41 @@
+{
+  "id": "mast-kepler-kic-11442793",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Kepler long-cadence light curves of KIC 11442793, quarters 1 to 7, 9 to 11, 13 to 15, 17",
+  "identifiers": [
+    {
+      "type": "KIC",
+      "value": "11442793"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "label": "MAST"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/2041-8205/713/2/L87",
+      "label": "Jenkins et al. (2010), overview of the Kepler science processing pipeline"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:KEPLER/url/missions/kepler/lightcurves/0114/011442793/kplr011442793-2009166043257_llc.fits",
+      "checkedOn": "2026-10-10",
+      "locator": "Long-cadence light-curve files for quarters 1 to 7, 9 to 11, 13 to 15, 17: LIGHTCURVE table, PDCSAP_FLUX, SAP_QUALITY, TIME in BJD_TDB - 2454833"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This includes data collected by the Kepler mission and obtained from the MAST data archive at the Space Telescope Science Institute (STScI); Kepler pipeline, Jenkins et al. (2010)",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/publishing/mission-acknowledgements"
+    }
+  ],
+  "publisher": "Mikulski Archive for Space Telescopes (STScI)"
+}

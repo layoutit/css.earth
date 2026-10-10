@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 1091,
+      "sha256": "8cec9db4f1f4678bb5169cdbac311a0581d2a2d47e397ad3460d6a0d32aafe22"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/helvetios-b.bin",
+      "bytes": 1946,
+      "sha256": "6465a5d153d91f5f57076596103dda9c5799fa3a750afff8116d7e6632fff3ec"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/helvetios.json",
+      "bytes": 30232,
+      "sha256": "e0cefd6b179f32f4c4dc41265db826857d6189b7cfdc2a0d9f8a11f10ffb0142"
+    }
+  ]
+}

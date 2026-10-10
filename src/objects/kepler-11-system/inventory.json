@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 2992,
+      "sha256": "90e38697a2b562a242056447f04a06074e0d191f4f1828315814bb4948bdcdcd"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-11b.bin",
+      "bytes": 1946,
+      "sha256": "e191b81a4f5ba509fb15f89e0b008b09d1fcd8ccfaa7c1ff4a382390f277f2be"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-11c.bin",
+      "bytes": 1938,
+      "sha256": "897a45b7d40a43dae32eac9d30f62869f645a6cb9386f7230a0f3e8a184e2b39"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-11d.bin",
+      "bytes": 1951,
+      "sha256": "c5ede4e1f79637e223cad54fb78a02da0f8a0e63cf985e4e02bb1d55ea0ae489"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-11e.bin",
+      "bytes": 1936,
+      "sha256": "31ba9cb58ff98fb94ba96f37ab3ec74705c9690727328257e2b2b15cf0910d2b"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-11f.bin",
+      "bytes": 1943,
+      "sha256": "a02f8416c5468b9e04128bfab2e1054cd66e749692507f9a0bdccb8666d05b14"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-11g.bin",
+      "bytes": 1938,
+      "sha256": "14ed0355deacbdcc3e11cbb88549173277a7edb3fba4e80aec1632faf8d9b244"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/kepler-11.json",
+      "bytes": 51376,
+      "sha256": "e54ae3057303f8e7a7583d5bf1ee9a4759a39cb0828d9fc5c59601b354a8bd2a"
+    }
+  ]
+}

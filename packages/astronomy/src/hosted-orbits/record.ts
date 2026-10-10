@@ -5,9 +5,9 @@ const HOSTED_EPOCHS = ['inferior-conjunction', 'superior-conjunction', 'periastr
 const isHostedEpoch = (value: unknown): value is typeof HOSTED_EPOCHS[number] => (HOSTED_EPOCHS as readonly unknown[]).includes(value);
 export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRadii: number; inclinationDegrees: number; eccentricity: number;
   argumentOfPeriapsisDegrees?: number; epochDefinition?: 'inferior-conjunction' | 'superior-conjunction' | 'periastron';
-  transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number; prediction?: HostedOrbitPredictionRecord; weaklyConstrained?: true;
+  transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number; prediction?: HostedOrbitPredictionRecord; weaklyConstrained?: true; placement?: 'approximate';
   barycentreCompanion?: string;
-  sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string; constraint?: string; barycentre?: string } }
+  sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string; constraint?: string; placement?: string; barycentre?: string } }
 
 /** Preserve the selected published solution. Eccentric orbits need a sourced planet-centric periapsis and an explicit epoch convention. */
 /** The published orbit this planet is predicted from, named as the upstream prediction tool knows it. */
@@ -24,6 +24,10 @@ const trueValue = (value: unknown): true => {
   if (value !== true) throw new TypeError(`Expected true or absent, got ${JSON.stringify(value)}.`);
   return true;
 };
+const approximateValue = (value: unknown): 'approximate' => {
+  if (value !== 'approximate') throw new TypeError(`A hosted orbit's placement is approximate or absent, not ${JSON.stringify(value)}.`);
+  return 'approximate';
+};
 export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
   const record = objectValue(value), sources = objectValue(record.sources, 'hosted orbit sources');
   const eccentricity = numberValue(record.eccentricity, 'hosted eccentricity');
@@ -39,17 +43,22 @@ export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
     ascendingNodePositionAngleDegrees: numberValue(record.ascendingNodePositionAngleDegrees),
     ...(record.prediction === undefined ? {} : { prediction: readPredictionRecord(record.prediction) }),
     ...(record.weaklyConstrained === undefined ? {} : { weaklyConstrained: trueValue(record.weaklyConstrained) }),
+    ...(record.placement === undefined ? {} : { placement: approximateValue(record.placement) }),
     ...(record.barycentreCompanion === undefined ? {} : { barycentreCompanion: stringValue(record.barycentreCompanion, 'hosted barycentre companion') }),
     sources: { period: stringValue(sources.period), shape: stringValue(sources.shape), phase: stringValue(sources.phase), orientation: stringValue(sources.orientation),
       ...(sources.eccentricity === undefined ? {} : { eccentricity: stringValue(sources.eccentricity) }),
       ...(sources.argumentOfPeriapsis === undefined ? {} : { argumentOfPeriapsis: stringValue(sources.argumentOfPeriapsis) }),
       ...(sources.constraint === undefined ? {} : { constraint: stringValue(sources.constraint) }),
+      ...(sources.placement === undefined ? {} : { placement: stringValue(sources.placement) }),
       ...(sources.barycentre === undefined ? {} : { barycentre: stringValue(sources.barycentre) }) } };
   if ((orbit.barycentreCompanion === undefined) !== (orbit.sources.barycentre === undefined)) {
     throw new TypeError(`A hosted orbit about a binary barycentre cites that barycentre in sources.barycentre, and only then: barycentreCompanion ${String(orbit.barycentreCompanion)}.`);
   }
   if ((orbit.weaklyConstrained === undefined) !== (orbit.sources.constraint === undefined)) {
     throw new TypeError(`A weakly constrained hosted orbit quotes its criterion in sources.constraint, and only then: weaklyConstrained ${String(orbit.weaklyConstrained)}.`);
+  }
+  if ((orbit.placement === undefined) !== (orbit.sources.placement === undefined)) {
+    throw new TypeError(`An approximately placed hosted orbit states its assumption in sources.placement, and only then: placement ${String(orbit.placement)}.`);
   }
   // Each broken rule is named with its value, so a refused record says what to fix.
   const broken = [

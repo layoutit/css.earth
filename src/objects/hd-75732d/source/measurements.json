@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hd-75732d",
+  "radiusKm": 82930.7,
+  "radiusSource": "Radius 1.16 Jupiter radii from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 55 Cnc d does not transit (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html): 82,930.7 km at 71,492 km per Jupiter radius. GM from the mass 3.23 +/- 0.3 Jupiter masses (Xiao et al. (2026), Table 4: 3.23 (+0.29, -0.30) Jupiter masses, the true mass from radial velocities joined with Hipparcos and Gaia astrometry, https://arxiv.org/abs/2609.01377) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 5084,
+  "orbitalPeriodSource": "Xiao et al. (2026), Table 4, a joint fit of radial velocities with Hipparcos and Gaia astrometry (the time of conjunction alone is Moutou et al. 2026, A&A 705, A190, because Xiao et al. print no epoch; a/R* is their 5.58 au over the star's recorded 656,045 km) (https://arxiv.org/abs/2609.01377): P 5084 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of 55 Cnc d is measured; only its size, mass and orbit are."
+  },
+  "massSource": "3.23 Jupiter masses: Xiao et al. (2026), Table 4: 3.23 (+0.29, -0.30) Jupiter masses, the true mass from radial velocities joined with Hipparcos and Gaia astrometry (https://arxiv.org/abs/2609.01377)."
+}

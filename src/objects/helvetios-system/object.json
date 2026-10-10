@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "helvetios-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "helvetios"
+    },
+    "catalog": {
+      "name": "Helvetios system",
+      "systemName": "Helvetios system",
+      "classification": "planetary-system",
+      "color": "#ffefe6",
+      "distanceAu": 3202557.3,
+      "description": "A star about 16 parsecs away, 1.2 times the Sun's width, measured by Gaia."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        431393506075656000,
+        -120705137718933020,
+        169890124923606270
+      ],
+      "presentationToReference": [
+        0.900433827253341,
+        0.34148613814576234,
+        -0.2694552656605435,
+        -0.25194396206813896,
+        -0.09555302289341064,
+        -0.9630129073866766,
+        0.35460282389641085,
+        -0.9350170251231924,
+        0.0000038034737486520135
+      ],
+      "orbitUpReference": [
+        -0.34148613814576234,
+        0.09555302289341064,
+        0.9350170251231924
+      ],
+      "metersPerUnit": 2733126.129032258,
+      "bodyRadiusM": 847269100
+    }
+  }
+}

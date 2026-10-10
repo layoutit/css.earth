@@ -19,15 +19,15 @@ export async function prepareChartAssets({sourceDirectory,publicDirectory,config
   }else if(chart.kind==='folded-transit'){
    // The host's light curves, each transit divided by its baseline line and folded onto the planet's orbit (foldTransits), then
    // averaged in bins of fixed width; a bin's error is the standard error of its samples.
-   const {foldTransits,readTessLightCurve,transitWindow}=await import('@cssearth/bake/objects/raster');const {hostedOrbit}=await import('@cssearth/astronomy');
-   const curves=await Promise.all(chart.sources.map(async source=>readTessLightCurve(await readFile(path(sourceDirectory,source)))));
-   // A recipe aligned on the dip TESS measures moves the orbit's transit by alignMinutes, which the generator keeps inside the ephemeris's uncertainty.
-   const base=hostedOrbit(chart.planet as Parameters<typeof hostedOrbit>[0]),orbit={...base,transitTimeBmjdTdb:base.transitTimeBmjdTdb+(chart.alignMinutes??0)/1440},folded=foldTransits(curves,orbit,transitWindow(chart.durationHours));
+   const {foldTransits,readTransitLightCurve,transitWindow}=await import('@cssearth/bake/objects/raster');const {hostedOrbit}=await import('@cssearth/astronomy');
+   const curves=await Promise.all(chart.sources.map(async source=>readTransitLightCurve(await readFile(path(sourceDirectory,source)))));
+   // A recipe aligned on the dip the mission measures moves the orbit's transit by alignMinutes, which the generator keeps inside the ephemeris's uncertainty.
+   const base=hostedOrbit(chart.planet as Parameters<typeof hostedOrbit>[0]),orbit={...base,transitTimeBmjdTdb:base.transitTimeBmjdTdb+(chart.alignMinutes??0)/1440},folded=foldTransits(curves,orbit,transitWindow(chart.durationHours,curves[0]!.cadenceSeconds));
    if(!folded.transits)throw new TypeError(`${chart.id}: no transit of ${chart.planet} in ${chart.sources.join(', ')} has enough samples on both sides.`);
    const width=chart.binMinutes/60,groups=new Map<number,number[]>();
    folded.time.forEach((time,i)=>{const bin=Math.round((time-orbit.transitTimeBmjdTdb)*24/width);groups.set(bin,[...(groups.get(bin)??[]),folded.flux[i]!]);});
    const bins=[...groups].filter(([,values])=>values.length>=3).sort(([a],[b])=>a-b).map(([bin,values])=>{const mean=values.reduce((sum,value)=>sum+value,0)/values.length,spread=Math.sqrt(values.reduce((sum,value)=>sum+(value-mean)**2,0)/(values.length-1));return {hours:bin*width,ppm:(mean-1)*1e6,error:spread/Math.sqrt(values.length)*1e6,samples:values.length};});
-   identity.metadata={...identity.metadata,sectors:curves.map(curve=>curve.sector),binMinutes:chart.binMinutes,...(chart.alignMinutes?{alignMinutes:chart.alignMinutes}:{})};
+   identity.metadata={...identity.metadata,[curves[0]!.mission==='Kepler'?'quarters':'sectors']:curves.map(curve=>curve.window),binMinutes:chart.binMinutes,...(chart.alignMinutes?{alignMinutes:chart.alignMinutes}:{})};
    svg=renderFoldedTransit({...identity,bins,transits:folded.transits,notes:chart.notes});
   }else if(chart.kind==='system-orbits'){
    const orbits=parseSystemOrbits(chart);svg=renderSystemOrbits(orbits,readSystemOrbits(orbits));

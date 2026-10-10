@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-11-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-11"
+    },
+    "catalog": {
+      "name": "Kepler-11 system",
+      "systemName": "Kepler-11 system",
+      "classification": "planetary-system",
+      "color": "#ffefe8",
+      "distanceAu": 133283429.5,
+      "description": "6 planets cross Kepler-11 as seen from Earth: b, c, d, e, f, g."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6763153360980430000,
+        -13207778621628332000,
+        13318211644958490000
+      ],
+      "presentationToReference": [
+        0.33919350019224104,
+        0.30443826151592956,
+        -0.8900927560386585,
+        -0.662411810189218,
+        -0.5945382309610864,
+        -0.45577942652944015,
+        0.6679508688138519,
+        -0.7442053727640109,
+        3.6561683989024477e-9
+      ],
+      "orbitUpReference": [
+        -0.30443826151592956,
+        0.5945382309610864,
+        0.7442053727640109
+      ],
+      "metersPerUnit": 2390066.129032258,
+      "bodyRadiusM": 740920500
+    }
+  }
+}

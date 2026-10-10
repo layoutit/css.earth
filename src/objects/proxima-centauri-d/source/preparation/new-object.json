@@ -1,0 +1,51 @@
+{
+  "host": "proxima-centauri",
+  "planets": [
+    {
+      "id": "proxima-centauri-d",
+      "name": "Proxima Centauri d",
+      "description": "Planet of Proxima Centauri found by radial velocity, with a 5.12-day year, found in 2025.",
+      "paper": {
+        "url": "https://doi.org/10.1051/0004-6361/202553728",
+        "credit": "Suárez Mascareño et al. (2025)"
+      },
+      "radius": {
+        "value": 0.0618,
+        "source": "the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since Proxima Centauri d does not transit",
+        "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      },
+      "mass": {
+        "value": 0.000818,
+        "source": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3: minimum mass (m sin i) 0.26 +/- 0.038 Earth masses from the star's radial velocities; the same table gives 0.357 +/- 0.072 Earth masses for an orbit in the star's equatorial plane, tilted 47 degrees",
+        "url": "https://doi.org/10.1051/0004-6361/202553728",
+        "uncertainty": 0.00012
+      },
+      "orbit": {
+        "elements": {
+          "periodDays": 5.12338,
+          "semiMajorAxisStellarRadii": 43.94,
+          "inclinationDegrees": 47,
+          "eccentricity": 0,
+          "transitTimeBmjdTdb": 60557.05
+        },
+        "epoch": "inferior-conjunction",
+        "source": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3, a fit of the star's radial velocities with the eccentricity fixed to zero (a/R* is its 0.02881 au over the star's recorded 98,094 km); the orbit's plane is assumed, from the star's rotation axis in Klein et al. (2021, MNRAS 500, 1844)",
+        "url": "https://doi.org/10.1051/0004-6361/202553728",
+        "assumedPlane": "Approximate orbital placement. No source measures this planet's tilt or the direction of its orbit on the sky. The tilt is taken equal to that of the star's rotation axis, 47 +/- 7 degrees (Klein et al. 2021, MNRAS 500, 1844, from the star's magnetic field), on the assumption that the planet orbits in the star's equatorial plane; Suárez Mascareño et al. (2025) print the planet's mass under the same assumption. This record cites no test of that assumption. The direction of the orbit on the sky is a display convention. The period, time of conjunction, orbit size and minimum mass are measured."
+      },
+      "text": {
+        "card": "Proxima Centauri d was found in 2025 by radial velocity; it does not cross its star.",
+        "introduction": "It is one of 2 planets known around Proxima Centauri; its size is a model. Its tilt is not measured: it is drawn in the star's equatorial plane.",
+        "locator": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3: P_orb 5.12338 +/- 0.00035 d, T0 2460557.55 +/- 0.16 BJD (time of inferior conjunction), a 0.02881 au, m sin i 0.26 Earth masses, e 0 (fixed); Klein et al. (2021), Table 1: stellar inclination 47 +/- 7 degrees (assumed for the orbit); NASA Exoplanet Archive ps table: disc_year 2025, sy_pnum 2; pscomppars calculated pl_radj 0.0618",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/Proxima_Centauri_d",
+          "title": "Proxima Centauri d",
+          "revision": "1374087109",
+          "card": "Proxima Centauri d is a confirmed exoplanet orbiting the red dwarf star Proxima Centauri, the closest star to the Sun and part of the Alpha Centauri triple star system.",
+          "introduction": "Together with one or two other planets in the Proxima Centauri system, it is the closest known exoplanet to the Solar System, located approximately 4.2 light-years away in the constellation of Centaurus."
+        }
+      },
+      "order": 5847
+    }
+  ]
+}

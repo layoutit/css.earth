@@ -1,0 +1,77 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/kepler-11b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "kepler-11b-orbits",
+      "title": "Kepler-11 b: orbits around Kepler-11",
+      "output": "kepler-11b-system-orbits.svg",
+      "system": "kepler-11",
+      "highlight": "kepler-11b",
+      "description": "The orbits of Kepler-11's planets in this map from above, to scale, with Kepler-11 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Holczer et al. 2016 (2016ApJS..225....9H), via the NASA Exoplanet Archive ps table (pl_refname HOLCZER_ET_AL__2016): P 10.30402569 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "kepler-11b-transit",
+      "title": "Kepler-11 b: its transit",
+      "description": "Kepler-11 b crossing its star, as Kepler recorded it: 17 quarters (1 to 17) of the Kepler pipeline's 30-minute light curves of KIC 6541920, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, moved 6 minutes earlier to where Kepler measures the dip, inside the published ephemeris's 3-sigma uncertainty of 13 minutes at these dates, then averaged in 30-minute bins. Error bars are each bin's standard error.",
+      "output": "kepler-11b-transit.svg",
+      "metadata": {
+        "kic": "KIC 6541920",
+        "quarters": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ],
+        "pipeline": "Kepler pipeline, PDCSAP flux, quality 0"
+      },
+      "planet": "kepler-11b",
+      "sources": [
+        "photometry/kepler/kplr006541920-2009166043257_llc.fits",
+        "photometry/kepler/kplr006541920-2009259160929_llc.fits",
+        "photometry/kepler/kplr006541920-2009350155506_llc.fits",
+        "photometry/kepler/kplr006541920-2010078095331_llc.fits",
+        "photometry/kepler/kplr006541920-2010174085026_llc.fits",
+        "photometry/kepler/kplr006541920-2010265121752_llc.fits",
+        "photometry/kepler/kplr006541920-2010355172524_llc.fits",
+        "photometry/kepler/kplr006541920-2011073133259_llc.fits",
+        "photometry/kepler/kplr006541920-2011177032512_llc.fits",
+        "photometry/kepler/kplr006541920-2011271113734_llc.fits",
+        "photometry/kepler/kplr006541920-2012004120508_llc.fits",
+        "photometry/kepler/kplr006541920-2012088054726_llc.fits",
+        "photometry/kepler/kplr006541920-2012179063303_llc.fits",
+        "photometry/kepler/kplr006541920-2012277125453_llc.fits",
+        "photometry/kepler/kplr006541920-2013011073258_llc.fits",
+        "photometry/kepler/kplr006541920-2013098041711_llc.fits",
+        "photometry/kepler/kplr006541920-2013131215648_llc.fits"
+      ],
+      "durationHours": 4.116,
+      "binMinutes": 30,
+      "alignMinutes": -6,
+      "notes": [
+        "Kepler 30-min · quarters 1 to 17",
+        "Aligned on Kepler's dip, 6 min early; 30-min bins.",
+        "The ephemeris's own 1σ there is 4 min.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/helvetios-b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "helvetios-b-orbits",
+      "title": "51 Peg b: orbits around Helvetios",
+      "output": "helvetios-b-system-orbits.svg",
+      "system": "helvetios",
+      "highlight": "helvetios-b",
+      "description": "The orbits of Helvetios's planets in this map from above, to scale, with 51 Peg b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Cont et al. (2026), A&A 710, A345, Tables 1 and 2 (tilt 49.8 +5.8/-5.7 degrees from the planet's own Doppler shift; eccentricity fixed to zero, 2-sigma limit 0.0063; a/R* is its 0.052 au over the star's recorded 847,269 km) (https://arxiv.org/abs/2605.23582): P 4.2307966 d"
+      }
+    }
+  ]
+}

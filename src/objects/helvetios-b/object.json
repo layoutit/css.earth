@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "helvetios-b",
+  "parent": "helvetios-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "51 Peg b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 90079.9
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "51 Peg b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 3202557.3,
+      "description": "51 Peg b was found in 1995 by radial velocity; it does not cross its star.",
+      "systemName": "Helvetios system",
+      "order": 5841,
+      "context": {
+        "order": 5841
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        431393503583081100,
+        -120705136894606480,
+        169890132246324960
+      ],
+      "presentationToReference": [
+        0.8616723583526547,
+        0.37537383198040053,
+        -0.3414897262222166,
+        0.4291410509228329,
+        -0.8981692043973363,
+        0.09555123591614356,
+        0.2708481221345664,
+        0.22888111878572678,
+        0.9350158972977802
+      ],
+      "orbitUpReference": [
+        -0.37537383198040053,
+        0.8981692043973363,
+        -0.22888111878572678
+      ],
+      "metersPerUnit": 290580.32258064515,
+      "bodyRadiusM": 90079900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

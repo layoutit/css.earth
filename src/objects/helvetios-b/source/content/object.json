@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "helvetios-b",
+  "displayName": "51 Peg b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 Jupiter radii (model)",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 51 Peg b does not transit",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.23 days",
+        "source": {
+          "catalogueId": "arxiv-2605-23582",
+          "url": "https://arxiv.org/abs/2605.23582",
+          "label": "Cont et al. 2026",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.61 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2605-23582",
+          "url": "https://arxiv.org/abs/2605.23582",
+          "label": "Cont et al. 2026",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Helvetios; the neutral gray is a display convention, not a measured color.",
+        "thumbnail": "helvetios-b-dataset-shape.webp",
+        "surface": "helvetios-b-surface-shape@2x.webp",
+        "poles": "helvetios-b-poles-shape@2x.webp",
+        "source": {
+          "id": "helvetios-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2605.23582"
+        },
+        "falseColor": false,
+        "notes": "No image or color of 51 Peg b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of helvetios's light, as its color dataset measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "helvetios-b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/helvetios-b/helvetios-b-system-orbits.svg",
+      "alt": "The orbits of Helvetios's planets in this map from above, to scale, with 51 Peg b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "helvetios-b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://arxiv.org/abs/2605.23582"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Cont et al. (2026), A&A 710, A345",
+      "href": "https://arxiv.org/abs/2605.23582"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2605.23582",
+      "credit": "Cont et al. (2026), A&A 710, A345"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/helvetios-b.json",
+      "credit": "Radius from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 51 Peg b does not transit; mass from Cont et al. (2026), A&A 710, A345, Table 1: 0.61 (+0.06, -0.05) Jupiter masses, from the Doppler shift of the planet's own spectral lines; orbit from Cont et al. (2026), A&A 710, A345, Tables 1 and 2 (tilt 49.8 +5.8/-5.7 degrees from the planet's own Doppler shift; eccentricity fixed to zero, 2-sigma limit 0.0063; a/R* is its 0.052 au over the star's recorded 847,269 km)"
+    }
+  }
+}

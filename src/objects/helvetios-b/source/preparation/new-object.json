@@ -1,0 +1,50 @@
+{
+  "host": "helvetios",
+  "planets": [
+    {
+      "id": "helvetios-b",
+      "name": "51 Peg b",
+      "description": "Planet of 51 Peg found by radial velocity, with a 4.23-day year, found in 1995.",
+      "order": 5841,
+      "paper": {
+        "url": "https://arxiv.org/abs/2605.23582",
+        "credit": "Cont et al. (2026), A&A 710, A345"
+      },
+      "radius": {
+        "value": 1.26,
+        "source": "the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 51 Peg b does not transit",
+        "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html"
+      },
+      "mass": {
+        "value": 0.61,
+        "source": "Cont et al. (2026), A&A 710, A345, Table 1: 0.61 (+0.06, -0.05) Jupiter masses, from the Doppler shift of the planet's own spectral lines",
+        "url": "https://arxiv.org/abs/2605.23582",
+        "uncertainty": 0.06
+      },
+      "orbit": {
+        "elements": {
+          "periodDays": 4.2307966,
+          "semiMajorAxisStellarRadii": 9.1814,
+          "inclinationDegrees": 49.8,
+          "eccentricity": 0,
+          "transitTimeBmjdTdb": 56326.4323
+        },
+        "epoch": "inferior-conjunction",
+        "source": "Cont et al. (2026), A&A 710, A345, Tables 1 and 2 (tilt 49.8 +5.8/-5.7 degrees from the planet's own Doppler shift; eccentricity fixed to zero, 2-sigma limit 0.0063; a/R* is its 0.052 au over the star's recorded 847,269 km)",
+        "url": "https://arxiv.org/abs/2605.23582"
+      },
+      "text": {
+        "card": "51 Peg b was found in 1995 by radial velocity; it does not cross its star.",
+        "introduction": "It is the only planet known around 51 Peg. Its orbit, tilt included, follows Cont et al. 2026's fit, and its size is the archive's model from its mass.",
+        "locator": "Cont et al. (2026), A&A 710, A345, Tables 1 and 2: P_orb 4.2307966 d, T_C 2456326.9323 BJD_TDB, i 49.8 deg, M_p 0.61 M_Jup, a 0.052 au; NASA Exoplanet Archive ps table (pl_refname CONT_ET_AL_2026): disc_year 1995, disc_facility Haute-Provence Observatory, sy_pnum 1; pscomppars calculated pl_radj 1.26",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/51_Pegasi_b",
+          "title": "51 Pegasi b",
+          "revision": "1378907328",
+          "card": "51 Pegasi b, officially named Dimidium, is an extrasolar planet approximately 50 light-years away in the Pegasus constellation.",
+          "introduction": "Dimidium was the first exoplanet to be discovered orbiting a main-sequence star, the Sun-like 51 Pegasi — a major astronomical discovery."
+        }
+      }
+    }
+  ]
+}

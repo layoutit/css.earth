@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-90-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "kepler-90"
+    },
+    "catalog": {
+      "name": "Kepler-90 system",
+      "systemName": "Kepler-90 system",
+      "classification": "planetary-system",
+      "color": "#fff5f9",
+      "distanceAu": 176377260.9,
+      "description": "8 planets cross Kepler-90 as seen from Earth: b, c, d, e, f, g, h, i."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4288252143670370300,
+        -16661259281056760000,
+        20005412457942372000
+      ],
+      "presentationToReference": [
+        0.16252202403146546,
+        0.18898371768625621,
+        -0.9684377864138703,
+        -0.6314511112104251,
+        -0.7342623783807433,
+        -0.24925539882974193,
+        0.7581926442902458,
+        -0.6520306082877825,
+        -1.706290676120826e-7
+      ],
+      "orbitUpReference": [
+        -0.18898371768625621,
+        0.7342623783807433,
+        0.6520306082877825
+      ],
+      "metersPerUnit": 2693032.2580645164,
+      "bodyRadiusM": 834840000
+    }
+  }
+}

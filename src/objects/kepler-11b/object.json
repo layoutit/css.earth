@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kepler-11b",
+  "parent": "kepler-11-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kepler-11 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 11510.2
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kepler-11 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 133283429.4,
+      "description": "Kepler-11 b was found in 2010 by Kepler as it crossed its star.",
+      "systemName": "Kepler-11 system",
+      "order": 5835,
+      "context": {
+        "order": 5835
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6763153360893494000,
+        -13207778621585906000,
+        13318211631214750000
+      ],
+      "presentationToReference": [
+        0.3447794928929051,
+        -0.8879439866630275,
+        -0.30443813465050706,
+        -0.6595352282782122,
+        -0.4599324549915735,
+        0.5945379882778146,
+        0.667937410196882,
+        0.004196831470677586,
+        0.7442056185390494
+      ],
+      "orbitUpReference": [
+        0.8879439866630275,
+        0.4599324549915735,
+        -0.004196831470677586
+      ],
+      "metersPerUnit": 37129.67741935484,
+      "bodyRadiusM": 11510200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

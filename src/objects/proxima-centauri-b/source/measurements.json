@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "proxima-centauri-b",
+  "radiusKm": 6527.2,
+  "radiusSource": "Radius 0.0913 Jupiter radii from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since Proxima Centauri b does not transit (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html): 6,527.2 km at 71,492 km per Jupiter radius. GM from the mass 0.003319 +/- 0.000173 Jupiter masses (Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3: minimum mass (m sin i) 1.055 +/- 0.055 Earth masses from the star's radial velocities; the same table gives 1.44 +/- 0.21 Earth masses for an orbit in the star's equatorial plane, tilted 47 degrees, https://doi.org/10.1051/0004-6361/202553728) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 11.18465,
+  "orbitalPeriodSource": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3, a fit of the star's radial velocities with the eccentricity fixed to zero (a/R* is its 0.04848 au over the star's recorded 98,094 km); the orbit's plane is assumed, from the star's rotation axis in Klein et al. (2021, MNRAS 500, 1844) (https://doi.org/10.1051/0004-6361/202553728): P 11.18465 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of Proxima Centauri b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.003319 Jupiter masses: Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3: minimum mass (m sin i) 1.055 +/- 0.055 Earth masses from the star's radial velocities; the same table gives 1.44 +/- 0.21 Earth masses for an orbit in the star's equatorial plane, tilted 47 degrees (https://doi.org/10.1051/0004-6361/202553728)."
+}

@@ -55,17 +55,22 @@ const boundStarsDescription = (hostId: string, memberIds: readonly string[]) => 
 };
 const stellar = async (ids: readonly string[]) => (await Promise.all(ids.map(classificationOf))).every(classification => classification === 'star' || classification === 'black-hole');
 
+const planetary = allPlanetarySystems(bodies).filter(system => system.memberIds.length > 0);
 const systems = [
-  ...await Promise.all(allPlanetarySystems(bodies).filter(system => system.memberIds.length > 0).map(async system => {
+  ...await Promise.all(planetary.map(async system => {
     // A star with only stars inside its system (a companion that orbits it, or one bound to it with no orbit in the
     // record) is a star system; with a planet it is a planetary system.
     const bound = system.memberIds.filter(id => boundTo.get(id) === system.id);
+    // The bodies of a system inside this one are that system's, not this one's: Proxima Centauri's planets are inside
+    // Proxima's system, and Alpha Centauri stays three stars bound to each other.
+    const inside = new Set(planetary.filter(other => other.id !== system.id && system.memberIds.includes(other.id)).flatMap(other => other.memberIds));
+    const own = system.memberIds.filter(id => !inside.has(id));
     return { hostId: system.id, name: system.name, bound,
-      classification: await stellar(system.memberIds) ? 'star-system' : 'planetary-system',
+      classification: await stellar(own) ? 'star-system' : 'planetary-system',
       // What the system's card has always said: its star's own description; the Solar System's is its own sentence, and so
       // is a system of bound stars alone.
       description: system.id === SOLAR_SYSTEM_ID ? SOLAR_SYSTEM_DESCRIPTION
-        : bound.length === system.memberIds.length ? boundStarsDescription(system.id, bound) : hostOf(system.id).description };
+        : bound.length === own.length ? boundStarsDescription(system.id, bound) : hostOf(system.id).description };
   })),
   ...allSatelliteSystems().map(system => {
     return { hostId: system.hostId, name: system.name, bound: [] as string[], classification: 'satellite-system', description: introductions[system.hostId]! };

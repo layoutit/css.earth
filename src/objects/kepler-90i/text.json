@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kepler-90i",
+  "card": {
+    "text": "Kepler-90 i was found in 2017 by Kepler as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa9e09",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155...94S/abstract",
+        "label": "Shallue 2018",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SHALLUE__AMP__VANDERBURG_2018): disc_year 2017, disc_facility Kepler, sy_pnum 8; pl_orbper 14.44912, pl_radj 0.11776251, pl_bmassj 0.00724"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-90i",
+        "url": "https://en.wikipedia.org/wiki/Kepler-90i",
+        "label": "Wikipedia, \"Kepler-90i\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1328127392",
+        "quote": "Kepler-90i (also known by its Kepler Object of Interest designation KOI-351.08) is a super-Earth exoplanet with a radius 1.32 times that of Earth, orbiting the early G-type main sequence star Kepler-90 every 14.45 days, discovered by NASA's Kepler spacecraft."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is one of 8 planets known around Kepler-90. Its orbit and size follow Shallue & Vanderburg 2018's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa9e09",
+        "url": "https://ui.adsabs.harvard.edu/abs/2018AJ....155...94S/abstract",
+        "label": "Shallue 2018",
+        "checked": "2026-10-10",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SHALLUE__AMP__VANDERBURG_2018): disc_year 2017, disc_facility Kepler, sy_pnum 8; pl_orbper 14.44912, pl_radj 0.11776251, pl_bmassj 0.00724"
+      },
+      {
+        "catalogueId": "wikipedia-kepler-90i",
+        "url": "https://en.wikipedia.org/wiki/Kepler-90i",
+        "label": "Wikipedia, \"Kepler-90i\"",
+        "checked": "2026-10-10",
+        "locator": "Lead section, revision 1328127392",
+        "quote": "It is located about 2,840 light-years (870 parsecs, or nearly 2.4078×1016 km) from Earth in the constellation Draco."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

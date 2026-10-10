@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 3742,
+      "sha256": "cdc1ed0f8d9a7b1b2544ac762f84d945d036b5a0f34ac99f1e57706593a73dc4"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-90b.bin",
+      "bytes": 1953,
+      "sha256": "0acfb0178c763e1ab61156cf80b65007edb2099cf361fd25d3011c4b31658567"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-90c.bin",
+      "bytes": 1947,
+      "sha256": "b73d72837e45d780d97f2cba308cc3e32cddff666ebcbd439af3e47ed7e5e633"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-90d.bin",
+      "bytes": 1947,
+      "sha256": "c454e5e550daf3e50ad41bcc92b622d07d10f029512c91b38094b480a2ce8b08"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-90e.bin",
+      "bytes": 1942,
+      "sha256": "93c6f6894b360cb6e1d9691238385ec94cc4e5f89bf53e5010af71d2b91855e9"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-90f.bin",
+      "bytes": 1951,
+      "sha256": "5e5332fcb228b4ac34c05fe967fba5c488d6fbb4ffdeff81e9366c5b0370bbb9"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-90g.bin",
+      "bytes": 1938,
+      "sha256": "12f40e5aa582462c5a24edb22f48915383fde07c1251a4e4806fd7d9071a73bb"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-90h.bin",
+      "bytes": 1949,
+      "sha256": "d43c00bade52cef47943aaa41785f2ead62788a959049a3d52345c3c39894247"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/kepler-90i.bin",
+      "bytes": 1950,
+      "sha256": "d33dfb4a176e66e26e1f4f6691e523adc2a845ebdd932d8fe0abad7a9f1dfe1f"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/kepler-90.json",
+      "bytes": 59876,
+      "sha256": "685e2d1b1bd9f2236a1ac0b4889a8dab247476b8d27c08ce0860e1aaf8e0479c"
+    }
+  ]
+}

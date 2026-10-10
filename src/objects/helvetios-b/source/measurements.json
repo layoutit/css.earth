@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "helvetios-b",
+  "radiusKm": 90079.9,
+  "radiusSource": "Radius 1.26 Jupiter radii from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 51 Peg b does not transit (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html): 90,079.9 km at 71,492 km per Jupiter radius. GM from the mass 0.61 +/- 0.06 Jupiter masses (Cont et al. (2026), A&A 710, A345, Table 1: 0.61 (+0.06, -0.05) Jupiter masses, from the Doppler shift of the planet's own spectral lines, https://arxiv.org/abs/2605.23582) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.2307966,
+  "orbitalPeriodSource": "Cont et al. (2026), A&A 710, A345, Tables 1 and 2 (tilt 49.8 +5.8/-5.7 degrees from the planet's own Doppler shift; eccentricity fixed to zero, 2-sigma limit 0.0063; a/R* is its 0.052 au over the star's recorded 847,269 km) (https://arxiv.org/abs/2605.23582): P 4.2307966 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of 51 Peg b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.61 Jupiter masses: Cont et al. (2026), A&A 710, A345, Table 1: 0.61 (+0.06, -0.05) Jupiter masses, from the Doppler shift of the planet's own spectral lines (https://arxiv.org/abs/2605.23582)."
+}

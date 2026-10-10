@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hd-75732d",
+  "displayName": "55 Cnc d",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.2 Jupiter radii (model)",
+        "source": {
+          "catalogueId": "page-exoplanetarchive-ipac-caltech-edu-docs-pscp-calc",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html",
+          "label": "the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 55 Cnc d does not transit",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "14 years",
+        "source": {
+          "catalogueId": "arxiv-2609-01377",
+          "url": "https://arxiv.org/abs/2609.01377",
+          "label": "Xiao et al. 2026",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "3.2 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2609-01377",
+          "url": "https://arxiv.org/abs/2609.01377",
+          "label": "Xiao et al. 2026",
+          "checked": "2026-10-10",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by 55 Cnc; the neutral gray is a display convention, not a measured color.",
+        "thumbnail": "hd-75732d-dataset-shape.webp",
+        "surface": "hd-75732d-surface-shape@2x.webp",
+        "poles": "hd-75732d-poles-shape@2x.webp",
+        "source": {
+          "id": "hd-75732d-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2609.01377"
+        },
+        "falseColor": false,
+        "notes": "No image or color of 55 Cnc d is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of hd-75732's light, as its color dataset measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "hd-75732d-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/hd-75732d/hd-75732d-system-orbits.svg",
+      "alt": "The orbits of 55 Cnc's planets in this map from above, to scale, with 55 Cnc d highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "hd-75732d-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://arxiv.org/abs/2609.01377"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Xiao et al. (2026)",
+      "href": "https://arxiv.org/abs/2609.01377"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2609.01377",
+      "credit": "Xiao et al. (2026)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-75732d.json",
+      "credit": "Radius from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since 55 Cnc d does not transit; mass from Xiao et al. (2026), Table 4: 3.23 (+0.29, -0.30) Jupiter masses, the true mass from radial velocities joined with Hipparcos and Gaia astrometry; orbit from Xiao et al. (2026), Table 4, a joint fit of radial velocities with Hipparcos and Gaia astrometry (the time of conjunction alone is Moutou et al. 2026, A&A 705, A190, because Xiao et al. print no epoch; a/R* is their 5.58 au over the star's recorded 656,045 km)"
+    }
+  }
+}

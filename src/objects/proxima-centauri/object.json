@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "proxima-centauri",
-  "parent": "alpha-centauri-a-system",
+  "parent": "proxima-centauri-system",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -125,7 +125,7 @@
       "color": "#ffd06e",
       "distanceAu": 268441,
       "description": "Red dwarf 1.30 parsecs away, the nearest star to the Sun; its photosphere is not imaged here.",
-      "systemName": "Alpha Centauri system",
+      "systemName": "Proxima Centauri system",
       "order": 1100,
       "context": {
         "order": 1097

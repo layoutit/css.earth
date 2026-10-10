@@ -1,0 +1,31 @@
+{
+ "id": "proxima-centauri-b",
+ "classification": "exoplanet",
+ "order": 5846,
+ "physical": {
+  "name": "Proxima Centauri b",
+  "horizonsCode": null,
+  "meanRadiusKm": 6527.2,
+  "gravitationalParameterKm3PerS2": 420472.6,
+  "parent": "proxima-centauri"
+ },
+ "physicalNotes": "Radius 0.0913 Jupiter radii from the NASA Exoplanet Archive's calculated radius (its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, since Proxima Centauri b does not transit (https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html): 6,527.2 km at 71,492 km per Jupiter radius. GM from the mass 0.003319 +/- 0.000173 Jupiter masses (Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3: minimum mass (m sin i) 1.055 +/- 0.055 Earth masses from the star's radial velocities; the same table gives 1.44 +/- 0.21 Earth masses for an orbit in the star's equatorial plane, tilted 47 degrees, https://doi.org/10.1051/0004-6361/202553728) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 11.18465,
+  "semiMajorAxisStellarRadii": 73.93,
+  "inclinationDegrees": 47,
+  "eccentricity": 0,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 60548.09,
+  "ascendingNodePositionAngleDegrees": 0,
+  "placement": "approximate",
+  "sources": {
+   "period": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3, a fit of the star's radial velocities with the eccentricity fixed to zero (a/R* is its 0.04848 au over the star's recorded 98,094 km); the orbit's plane is assumed, from the star's rotation axis in Klein et al. (2021, MNRAS 500, 1844) (https://doi.org/10.1051/0004-6361/202553728): P 11.18465 d",
+   "shape": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3, a fit of the star's radial velocities with the eccentricity fixed to zero (a/R* is its 0.04848 au over the star's recorded 98,094 km); the orbit's plane is assumed, from the star's rotation axis in Klein et al. (2021, MNRAS 500, 1844) (https://doi.org/10.1051/0004-6361/202553728): a/R* 73.93. Assumed: inclination 47 degrees (see placement)",
+   "eccentricity": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3, a fit of the star's radial velocities with the eccentricity fixed to zero (a/R* is its 0.04848 au over the star's recorded 98,094 km); the orbit's plane is assumed, from the star's rotation axis in Klein et al. (2021, MNRAS 500, 1844) (https://doi.org/10.1051/0004-6361/202553728): e 0",
+   "phase": "Suárez Mascareño et al. (2025), A&A, doi:10.1051/0004-6361/202553728, Table 3, a fit of the star's radial velocities with the eccentricity fixed to zero (a/R* is its 0.04848 au over the star's recorded 98,094 km); the orbit's plane is assumed, from the star's rotation axis in Klein et al. (2021, MNRAS 500, 1844) (https://doi.org/10.1051/0004-6361/202553728): transit (inferior conjunction) at 60548.09 BMJD_TDB",
+   "orientation": "Display convention: the orbit's position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north).",
+   "placement": "Approximate orbital placement. No source measures this planet's tilt or the direction of its orbit on the sky. The tilt is taken equal to that of the star's rotation axis, 47 +/- 7 degrees (Klein et al. 2021, MNRAS 500, 1844, from the star's magnetic field), on the assumption that the planet orbits in the star's equatorial plane; Suárez Mascareño et al. (2025) print the planet's mass under the same assumption. This record cites no test of that assumption. The direction of the orbit on the sky is a display convention. The period, time of conjunction, orbit size and minimum mass are measured."
+  }
+ }
+}

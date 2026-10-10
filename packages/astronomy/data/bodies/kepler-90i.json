@@ -1,0 +1,28 @@
+{
+ "id": "kepler-90i",
+ "classification": "exoplanet",
+ "order": 5828,
+ "physical": {
+  "name": "Kepler-90 i",
+  "horizonsCode": null,
+  "meanRadiusKm": 8419.1,
+  "gravitationalParameterKm3PerS2": 917210.49,
+  "parent": "kepler-90"
+ },
+ "physicalNotes": "Radius 0.11776251 Jupiter radii from Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2018AJ....155...94S/abstract): 8,419.1 km at 71,492 km per Jupiter radius. GM from the mass 0.00724 Jupiter masses (the NASA Exoplanet Archive's calculated value (M-R relationship, its Chen & Kipping 2017 mass-radius relationship): a model, not a measurement, via the NASA Exoplanet Archive, https://exoplanetarchive.ipac.caltech.edu/docs/pscp_calc.html) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 14.44912,
+  "semiMajorAxisStellarRadii": 33.8,
+  "inclinationDegrees": 89.2,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 55643.8488,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive ps table (pl_refname SHALLUE__AMP__VANDERBURG_2018): P 14.44912 d",
+   "shape": "Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive ps table (pl_refname SHALLUE__AMP__VANDERBURG_2018): a/R* 33.8; Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive ps table (pl_refname SHALLUE__AMP__VANDERBURG_2018): inclination 89.2 degrees",
+   "eccentricity": "Weiss et al. 2024 (2024ApJS..270....8W), via the NASA Exoplanet Archive ps table (pl_refname WEISS_ET_AL__2024): e 0",
+   "phase": "Shallue & Vanderburg 2018 (2018AJ....155...94S), via the NASA Exoplanet Archive ps table (pl_refname SHALLUE__AMP__VANDERBURG_2018): transit mid-time 2455644.3488 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 108 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

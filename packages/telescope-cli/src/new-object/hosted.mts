@@ -93,10 +93,11 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
     const e = spec.orbit.elements, cite = `${spec.orbit.source} (${spec.orbit.url})`;
     orbit = { periodDays: e.periodDays!, semiMajorAxisStellarRadii: e.semiMajorAxisStellarRadii!, inclinationDegrees: e.inclinationDegrees!, eccentricity: e.eccentricity!,
       ...(e.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsisDegrees: e.argumentOfPeriapsisDegrees }), ...(spec.orbit.epoch ? { epochDefinition: spec.orbit.epoch } : {}), transitTimeBmjdTdb: e.transitTimeBmjdTdb!,
-      ascendingNodePositionAngleDegrees: e.ascendingNodePositionAngleDegrees ?? 0,
-      sources: { period: `${cite}: P ${e.periodDays} d`, shape: `${cite}: a/R* ${e.semiMajorAxisStellarRadii}, inclination ${e.inclinationDegrees} degrees`, eccentricity: `${cite}: e ${e.eccentricity}`,
+      ascendingNodePositionAngleDegrees: e.ascendingNodePositionAngleDegrees ?? 0, ...(spec.orbit.assumedPlane ? { placement: 'approximate' as const } : {}),
+      sources: { period: `${cite}: P ${e.periodDays} d`, shape: spec.orbit.assumedPlane ? `${cite}: a/R* ${e.semiMajorAxisStellarRadii}. Assumed: inclination ${e.inclinationDegrees} degrees (see placement)` : `${cite}: a/R* ${e.semiMajorAxisStellarRadii}, inclination ${e.inclinationDegrees} degrees`, eccentricity: `${cite}: e ${e.eccentricity}`,
         ...(e.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsis: `${cite}: omega ${e.argumentOfPeriapsisDegrees} degrees (the star's)` }), phase: `${cite}: ${spec.orbit.epoch === 'periastron' ? 'periastron passage' : spec.orbit.epoch === 'superior-conjunction' ? 'the body behind its host (superior conjunction)' : 'transit (inferior conjunction)'} at ${e.transitTimeBmjdTdb} BMJD_TDB`,
-        orientation: e.ascendingNodePositionAngleDegrees === undefined ? 'Display convention: the orbit\'s position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north).' : `${cite}: ascending node ${e.ascendingNodePositionAngleDegrees} degrees east of north` } };
+        orientation: e.ascendingNodePositionAngleDegrees === undefined ? 'Display convention: the orbit\'s position angle on the sky is not measured, so the ascending node is set at position angle 0 (celestial north).' : spec.orbit.assumedPlane ? `Assumed: ascending node ${e.ascendingNodePositionAngleDegrees} degrees east of north (see placement)` : `${cite}: ascending node ${e.ascendingNodePositionAngleDegrees} degrees east of north`,
+        ...(spec.orbit.assumedPlane ? { placement: spec.orbit.assumedPlane } : {}) } };
     citation = { text: spec.orbit.source, url: spec.orbit.url, label: spec.orbit.source };
   } else throw new Error(`${spec.id}: unreachable orbit route.`);
   const fromRow = (picked: AssembledOrbit['mass'] | undefined, label: string): Cited & { limit?: true; unmeasured?: true } => {
