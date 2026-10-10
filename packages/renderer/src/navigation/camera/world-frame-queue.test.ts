@@ -167,6 +167,31 @@ test('a new idle owner can refresh while a disposed owner still has worker work'
   assert.equal(f.queue.refresh(), false);
 });
 
+test('a refresh after a stopped flight replans the view on screen for its owner', async () => {
+  const f = fixture(), controller = new AbortController();
+  // The flight's first frame is drawn; its second is still planned when a press stops the flight.
+  const first = f.queue.presentAndWait(f.request(1), controller.signal);
+  await f.finish(); assert.equal(await first, true);
+  const second = f.queue.presentAndWait(f.request(2), controller.signal);
+  controller.abort(); assert.equal(await second, false);
+  await f.finish();
+  assert.deepEqual(f.events, ['plan:1', 'camera:1', 'drawing:1', 'plan:2']);
+  // The flight's end changes the annotations: frame 1, the view on screen, is planned and drawn again.
+  assert.equal(f.queue.refresh(), true);
+  await f.finish();
+  assert.deepEqual(f.events.slice(-3), ['plan:1', 'camera:1', 'drawing:1']);
+  assert.equal(f.queue.refresh(), true, 'and again for each later change');
+});
+
+test('a refresh after a stopped flight replans nothing once the owner of the view on screen is gone', async () => {
+  const f = fixture(), controller = new AbortController(); let owner = true;
+  const task = f.queue.presentAndWait(f.request(1, () => owner), controller.signal);
+  await f.finish(); assert.equal(await task, true);
+  controller.abort(); owner = false;
+  assert.equal(f.queue.refresh(), false);
+  assert.deepEqual(f.events, ['plan:1', 'camera:1', 'drawing:1']);
+});
+
 test('a warm-up is adopted by the first request for its view and committed without planning it again', async () => {
   const f = fixture();
   assert.equal(f.queue.warm(f.request(1)), true);
