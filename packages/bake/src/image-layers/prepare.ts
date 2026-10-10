@@ -17,6 +17,7 @@ import { imageLayerShapeWalls, type ShapeWalls } from './shape-walls.ts';
 import { densityGrid, imageLayerDensityModel } from './density-grid.ts';
 import { imageLayerSurfaceCrossings, imageLayerSurfaceWalls, stlTriangles, surfaceEdgeStretch, SURFACE_MOST_CROSSINGS } from './surface.ts';
 import { imageLayerSurfaceMesh, type SurfaceTriangle } from './surface-mesh.ts';
+import { flattenProtrusions, imageLayerSurfaceSkirt } from './surface-skirt.ts';
 import { imageLayerShapePatches, packShapePatches } from './shape-patches.ts';
 import { imageLayerBodyModel } from './body.ts';
 import { COLOR_PEAK, paintTexel as paint } from './texel.ts';
@@ -214,7 +215,8 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
   const surface=recipe.geometry.surface,meshed=recipe.geometry.shape?.speeds?.depth==='speed'||Boolean(surface);
   let shapeWalls:ShapeWalls|null=null,meshTriangles:SurfaceTriangle[]|null=null;
   if(surface){const arcsec=distanceKpc*Math.PI/648000,sky=(px:number,py:number):[number,number]=>{const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height);return [ray[0]/ray[2]*distanceKpc/arcsec,ray[1]/ray[2]*distanceKpc/arcsec];};
-    const triangles=stlTriangles(await readFile(resolve(options.sourceDirectory,surface.path)),`${recipe.id}: ${surface.path}`);let crossings=imageLayerSurfaceCrossings(surface,triangles,info.width,info.height,sky),edgeStretch:((east:number,north:number)=>number)|undefined;
+    // With a skirt, the surface's equatorial protrusions are brought in and the skirt takes their light (./surface-skirt.ts).
+    const read=stlTriangles(await readFile(resolve(options.sourceDirectory,surface.path)),`${recipe.id}: ${surface.path}`),triangles=surface.skirt?flattenProtrusions(surface,read):read;let crossings=imageLayerSurfaceCrossings(surface,triangles,info.width,info.height,sky),edgeStretch:((east:number,north:number)=>number)|undefined;
     // With `edgeFit` the surface is fitted here to the photograph's lobe edge, direction by direction about the star.
     if(surface.edgeFit){const inside=new Uint8Array(info.width*info.height);for(let p=0;p<inside.length;p++)inside[p]=Number.isNaN(crossings.depths[SURFACE_MOST_CROSSINGS*p]!)?0:1;
       crossings=imageLayerSurfaceCrossings(surface,triangles,info.width,info.height,sky,edgeStretch=surfaceEdgeStretch(base,info.width,info.height,inside,sky,surface.edgeFit,surface.starRadiusArcsec).stretch);}
@@ -226,6 +228,8 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       const detailRgb=surface.filaments?.detailPath?await sharp(resolve(options.sourceDirectory,surface.filaments.detailPath)).removeAlpha().resize(info.width,info.height,{fit:'fill'}).raw().toBuffer():null;
       const detail=detailRgb?{value:Float32Array.from({length:count},(_,p)=>(detailRgb[3*p]!-128)/40),weight:Float32Array.from({length:count},(_,p)=>detailRgb[3*p+1]!/255)}:undefined;
       meshTriangles=await imageLayerSurfaceMesh(surface,triangles,Buffer.from(base),info.width,info.height,sky,edgeStretch,filaments,detail);
+      // The equatorial skirt outside the lobes, on its plane (./surface-skirt.ts), sorted with the lobes' triangles.
+      if(surface.skirt)meshTriangles.push(...imageLayerSurfaceSkirt(surface,surface.skirt,Buffer.from(base),info.width,info.height,sky,crossings));
       for(let p=0;p<count;p++)base[4*p+3]=0;
     }else{
       shapeWalls=imageLayerSurfaceWalls(base,info.width,info.height,crossings,arcsec,Math.hypot(...difference3(placed(-1,0,0),placed(1,0,0)))/info.width,(px,py)=>Math.hypot(...sky(px,py)),surface.starRadiusArcsec);

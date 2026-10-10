@@ -75,6 +75,9 @@
         "path": "filaments.png",
         "darkness": 0.65,
         "detailPath": "detail.png"
+      },
+      "skirt": {
+        "reachArcsec": 9
       }
     }
   },
